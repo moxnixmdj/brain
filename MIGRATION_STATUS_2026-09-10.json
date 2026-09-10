@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_PRIVATE_MIGRATION_STATUS_V1",
+  "status": "STAGING_PRIVATE_SUBSTRATE_ESTABLISHED_MIGRATION_INCOMPLETE",
+  "source": "mosadek/project-brain-live-v1-durable",
+  "destination": "moxnixmdj/brain",
+  "destination_visibility_verified_by_authenticated_api": "private",
+  "destination_admin_verified": true,
+  "source_generation_at_staging": 6322,
+  "source_head_at_staging": "0abcbcb94b3a9bba121a1178a00f9e1ed973c07bde922e7827b4d8f7e8c96839",
+  "source_blob_inventory_observed_count": 1000,
+  "source_root_listing_observed_count": 101,
+  "public_search_for_private_receipt": "NO_RESULTS",
+  "anonymous_access_proof": "NOT_YET_POSITIVELY_VERIFIED",
+  "cutover_allowed": false,
+  "source_retirement_allowed": false,
+  "next_required_operation": "Bulk byte-preserving export of full Val code/history-relevant state, SQLite canonical state, and all blobs into the private repository or another enforceably private zero-cost substrate, followed by independent count/hash/chain verification and anonymous-access denial test.",
+  "connector_boundary": "Current GitHub connector can write private repository objects, but no direct Val-project bulk export/clone operation to GitHub is exposed in this execution. Per-object copying would be possible but is not yet proven complete or fastest-right for the 1000-file/1000-blob source.",
+  "additional_spend_usd": 0,
+  "direct_sprites_calls": 0,
+  "human_authority_approval": false,
+  "p_real_increment": 0
+}
