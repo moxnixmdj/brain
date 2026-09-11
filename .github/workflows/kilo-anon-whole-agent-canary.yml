@@ -19,23 +19,19 @@ permissions:
   contents: read
 
 jobs:
-  canary:
+  canary_a:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '22'
-
       - name: Install Kilo CLI
         run: |
           npm install -g @kilocode/cli
-          kilo --version | tee KILO_VERSION.txt
-
+          kilo --version | tee KILO_VERSION_A.txt
+          printf '%s\n' "$RUNNER_NAME" > RUNNER_A.txt
       - name: Configure anonymous free Kilo gateway
         run: |
           cat > kilo.json <<'JSON'
@@ -46,94 +42,154 @@ jobs:
             "provider": {
               "anon": {
                 "npm": "@ai-sdk/openai-compatible",
-                "models": {
-                  "kilo-auto/free": {
-                    "name": "Kilo Auto Free",
-                    "tool_call": true,
-                    "limit": {
-                      "context": 256000,
-                      "output": 10000
-                    }
-                  }
-                },
-                "options": {
-                  "apiKey": "none",
-                  "baseURL": "https://api.kilo.ai/api/openrouter"
-                }
+                "models": {"kilo-auto/free": {"name": "Kilo Auto Free", "tool_call": true, "limit": {"context": 256000, "output": 10000}}},
+                "options": {"apiKey": "none", "baseURL": "https://api.kilo.ai/api/openrouter"}
               }
             }
           }
           JSON
-
-      - name: Run autonomous whole-agent canary
-        id: kilo
+      - name: Run autonomous task A
+        id: kilo_a
         shell: bash
         run: |
           set +e
           set -o pipefail
-          timeout 360s kilo run --auto "Read canary/KILO_ANON_CANARY_INPUT.txt. Use your actual file and shell tools, not guesses. Compute (1) the arithmetic sum of the comma-separated numbers and (2) the SHA-256 of the entire input file as raw UTF-8 bytes. Create exactly one new result file at canary/KILO_ANON_CANARY_OUTPUT.json containing valid JSON with exactly these keys: nonce, sum, sha256, task_satisfied. nonce must equal the nonce in the input, sum must be an integer, sha256 must be lowercase hex, and task_satisfied must be true. Do not modify any tracked file and do not create any other result file. This is non-interactive; make autonomous decisions." 2>&1 | tee KILO_RUN.log
+          start=$(date +%s%3N)
+          timeout 360s kilo run --auto "Read canary/KILO_ANON_CANARY_INPUT.txt. Use actual file and shell tools, not guesses. Compute the arithmetic sum of the comma-separated numbers and the SHA-256 of the entire input file as raw UTF-8 bytes. Create exactly one result file at canary/KILO_ANON_CANARY_OUTPUT.json with exactly these JSON keys: nonce, sum, sha256, task_satisfied. Do not modify tracked files. This is non-interactive; make autonomous decisions." 2>&1 | tee KILO_RUN_A.log
           code=${PIPESTATUS[0]}
+          end=$(date +%s%3N)
           echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          echo "$((end-start))" > ELAPSED_A_MS.txt
           exit 0
-
-      - name: Deterministically verify canary
-        shell: bash
+      - name: Verify A
         env:
-          KILO_EXIT_CODE: ${{ steps.kilo.outputs.exit_code }}
+          KILO_EXIT_CODE: ${{ steps.kilo_a.outputs.exit_code }}
         run: |
           python - <<'PY'
-          import hashlib, json, os, pathlib, re, subprocess, sys
-
-          inp = pathlib.Path('canary/KILO_ANON_CANARY_INPUT.txt')
-          out = pathlib.Path('canary/KILO_ANON_CANARY_OUTPUT.json')
-          raw = inp.read_bytes()
-          text = raw.decode('utf-8')
-          nonce = re.search(r'^nonce=(.+)$', text, re.M).group(1)
-          nums = [int(x) for x in re.search(r'^numbers=(.+)$', text, re.M).group(1).split(',')]
-          expected = {
-              'nonce': nonce,
-              'sum': sum(nums),
-              'sha256': hashlib.sha256(raw).hexdigest(),
-              'task_satisfied': True,
-          }
-
-          result = {
-              'schema': 'KILO_ANON_GITHUB_ACTIONS_CANARY_V1',
-              'kilo_exit_code': int(os.environ.get('KILO_EXIT_CODE', '-999')),
-              'output_exists': out.exists(),
-              'expected': expected,
-              'observed': None,
-              'tracked_files_unchanged': False,
-              'pass': False,
-          }
-
-          try:
-              observed = json.loads(out.read_text()) if out.exists() else None
-              result['observed'] = observed
-              exact_keys = isinstance(observed, dict) and set(observed) == set(expected)
-              result['output_exact'] = exact_keys and observed == expected
-          except Exception as e:
-              result['parse_error'] = repr(e)
-              result['output_exact'] = False
-
-          diff = subprocess.run(['git','diff','--exit-code','--','.'], capture_output=True, text=True)
-          result['tracked_files_unchanged'] = diff.returncode == 0
-          result['git_diff'] = diff.stdout + diff.stderr
-          result['pass'] = bool(result.get('output_exact')) and result['tracked_files_unchanged'] and result['kilo_exit_code'] == 0
-          pathlib.Path('CANARY_VERDICT.json').write_text(json.dumps(result, indent=2, sort_keys=True) + '\n')
-          print(json.dumps(result, indent=2, sort_keys=True))
-          if not result['pass']:
-              sys.exit(1)
+          import hashlib,json,os,pathlib,re,subprocess,sys
+          raw=pathlib.Path('canary/KILO_ANON_CANARY_INPUT.txt').read_bytes(); text=raw.decode()
+          expected={'nonce':re.search(r'^nonce=(.+)$',text,re.M).group(1),'sum':sum(map(int,re.search(r'^numbers=(.+)$',text,re.M).group(1).split(','))),'sha256':hashlib.sha256(raw).hexdigest(),'task_satisfied':True}
+          p=pathlib.Path('canary/KILO_ANON_CANARY_OUTPUT.json'); observed=json.loads(p.read_text()) if p.exists() else None
+          clean=subprocess.run(['git','diff','--exit-code','--','.'],capture_output=True).returncode==0
+          result={'schema':'KILO_ANON_ACTIONS_A_V2','expected':expected,'observed':observed,'kilo_exit_code':int(os.environ['KILO_EXIT_CODE']),'tracked_files_unchanged':clean}
+          result['pass']=observed==expected and clean and result['kilo_exit_code']==0
+          pathlib.Path('VERDICT_A.json').write_text(json.dumps(result,indent=2,sort_keys=True)+'\n'); print(json.dumps(result,indent=2))
+          if not result['pass']: sys.exit(1)
           PY
+      - name: Upload A state
+        uses: actions/upload-artifact@v4
+        with:
+          name: kilo-state-a
+          path: |
+            KILO_VERSION_A.txt
+            RUNNER_A.txt
+            ELAPSED_A_MS.txt
+            KILO_RUN_A.log
+            VERDICT_A.json
+            canary/KILO_ANON_CANARY_OUTPUT.json
 
-      - name: Upload evidence
+  planned_failure:
+    needs: canary_a
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: kilo-state-a
+          path: prior
+      - name: Create durable recovery checkpoint
+        run: |
+          python - <<'PY'
+          import hashlib,json,pathlib,os
+          a=json.loads(pathlib.Path('prior/VERDICT_A.json').read_text())
+          assert a['pass'] is True
+          checkpoint={'schema':'KILO_RECOVERY_CHECKPOINT_V1','predecessor_nonce':a['observed']['nonce'],'predecessor_sha256':a['observed']['sha256'],'recovery_nonce':'KILO-ANON-RECOVERY-B-20260911-R4M8','attempt':1,'planned_failure':True}
+          pathlib.Path('RECOVERY_CHECKPOINT.json').write_text(json.dumps(checkpoint,sort_keys=True)+'\n')
+          pathlib.Path('RUNNER_FAILURE.txt').write_text(os.environ.get('RUNNER_NAME','')+'\n')
+          PY
+      - name: Upload checkpoint before termination
+        uses: actions/upload-artifact@v4
+        with:
+          name: kilo-recovery-checkpoint
+          path: |
+            RECOVERY_CHECKPOINT.json
+            RUNNER_FAILURE.txt
+      - name: Prospectively terminate this execution
+        run: exit 42
+
+  recovery_b:
+    if: ${{ always() && needs.canary_a.result == 'success' && needs.planned_failure.result == 'failure' }}
+    needs: [canary_a, planned_failure]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: kilo-recovery-checkpoint
+          path: recovery
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Kilo CLI
+        run: |
+          npm install -g @kilocode/cli
+          kilo --version | tee KILO_VERSION_B.txt
+          printf '%s\n' "$RUNNER_NAME" > RUNNER_B.txt
+      - name: Configure anonymous free Kilo gateway
+        run: |
+          cat > kilo.json <<'JSON'
+          {
+            "$schema": "https://app.kilo.ai/config.json",
+            "model": "anon/kilo-auto/free",
+            "permission": "allow",
+            "provider": {
+              "anon": {
+                "npm": "@ai-sdk/openai-compatible",
+                "models": {"kilo-auto/free": {"name": "Kilo Auto Free", "tool_call": true, "limit": {"context": 256000, "output": 10000}}},
+                "options": {"apiKey": "none", "baseURL": "https://api.kilo.ai/api/openrouter"}
+              }
+            }
+          }
+          JSON
+      - name: Run recovered autonomous task B
+        id: kilo_b
+        shell: bash
+        run: |
+          set +e
+          set -o pipefail
+          start=$(date +%s%3N)
+          timeout 360s kilo run --auto "A prior execution was deliberately terminated after durably writing recovery/RECOVERY_CHECKPOINT.json. Read that checkpoint with your tools. Compute its SHA-256 as raw bytes. Create exactly canary/KILO_ANON_RECOVERY_OUTPUT.json with exactly these JSON keys: recovery_nonce, recovered_from, checkpoint_sha256, attempt, task_satisfied. recovery_nonce must come from the checkpoint; recovered_from must equal predecessor_nonce; attempt must be 2; task_satisfied must be true. Do not modify tracked files. This is a fresh non-interactive recovery execution; make autonomous decisions." 2>&1 | tee KILO_RUN_B.log
+          code=${PIPESTATUS[0]}
+          end=$(date +%s%3N)
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          echo "$((end-start))" > ELAPSED_B_MS.txt
+          exit 0
+      - name: Deterministically verify recovery B
+        env:
+          KILO_EXIT_CODE: ${{ steps.kilo_b.outputs.exit_code }}
+        run: |
+          python - <<'PY'
+          import hashlib,json,os,pathlib,subprocess,sys
+          cp=pathlib.Path('recovery/RECOVERY_CHECKPOINT.json'); c=json.loads(cp.read_text())
+          expected={'recovery_nonce':c['recovery_nonce'],'recovered_from':c['predecessor_nonce'],'checkpoint_sha256':hashlib.sha256(cp.read_bytes()).hexdigest(),'attempt':2,'task_satisfied':True}
+          p=pathlib.Path('canary/KILO_ANON_RECOVERY_OUTPUT.json'); observed=json.loads(p.read_text()) if p.exists() else None
+          clean=subprocess.run(['git','diff','--exit-code','--','.'],capture_output=True).returncode==0
+          result={'schema':'KILO_ANON_ACTIONS_RECOVERY_B_V2','expected':expected,'observed':observed,'kilo_exit_code':int(os.environ['KILO_EXIT_CODE']),'tracked_files_unchanged':clean}
+          result['pass']=observed==expected and clean and result['kilo_exit_code']==0
+          pathlib.Path('VERDICT_B.json').write_text(json.dumps(result,indent=2,sort_keys=True)+'\n'); print(json.dumps(result,indent=2))
+          if not result['pass']: sys.exit(1)
+          PY
+      - name: Upload recovery evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: kilo-anon-actions-canary-evidence
+          name: kilo-recovery-b-evidence
           path: |
-            KILO_VERSION.txt
-            KILO_RUN.log
-            CANARY_VERDICT.json
-            canary/KILO_ANON_CANARY_OUTPUT.json
-          if-no-files-found: warn
+            KILO_VERSION_B.txt
+            RUNNER_B.txt
+            ELAPSED_B_MS.txt
+            KILO_RUN_B.log
+            VERDICT_B.json
+            recovery/RECOVERY_CHECKPOINT.json
+            canary/KILO_ANON_RECOVERY_OUTPUT.json
