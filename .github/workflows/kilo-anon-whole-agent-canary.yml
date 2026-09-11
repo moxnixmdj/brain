@@ -1,0 +1,133 @@
+name: Kilo Anonymous Whole-Agent Canary
+
+on:
+  push:
+    branches:
+      - kilo-anon-actions-canary-20260911
+    paths:
+      - '.github/workflows/kilo-anon-whole-agent-canary.yml'
+      - 'canary/KILO_ANON_CANARY_INPUT.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install Kilo CLI
+        run: |
+          npm install -g @kilocode/cli
+          kilo --version | tee KILO_VERSION.txt
+
+      - name: Configure anonymous free Kilo gateway
+        run: |
+          cat > kilo.json <<'JSON'
+          {
+            "$schema": "https://app.kilo.ai/config.json",
+            "model": "anon/kilo-auto/free",
+            "permission": "allow",
+            "provider": {
+              "anon": {
+                "npm": "@ai-sdk/openai-compatible",
+                "models": {
+                  "kilo-auto/free": {
+                    "name": "Kilo Auto Free",
+                    "tool_call": true,
+                    "limit": {
+                      "context": 256000,
+                      "output": 10000
+                    }
+                  }
+                },
+                "options": {
+                  "apiKey": "none",
+                  "baseURL": "https://api.kilo.ai/api/openrouter"
+                }
+              }
+            }
+          }
+          JSON
+
+      - name: Run autonomous whole-agent canary
+        id: kilo
+        shell: bash
+        run: |
+          set +e
+          set -o pipefail
+          timeout 360s kilo run --auto "Read canary/KILO_ANON_CANARY_INPUT.txt. Use your actual file and shell tools, not guesses. Compute (1) the arithmetic sum of the comma-separated numbers and (2) the SHA-256 of the entire input file as raw UTF-8 bytes. Create exactly one new result file at canary/KILO_ANON_CANARY_OUTPUT.json containing valid JSON with exactly these keys: nonce, sum, sha256, task_satisfied. nonce must equal the nonce in the input, sum must be an integer, sha256 must be lowercase hex, and task_satisfied must be true. Do not modify any tracked file and do not create any other result file. This is non-interactive; make autonomous decisions." 2>&1 | tee KILO_RUN.log
+          code=${PIPESTATUS[0]}
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Deterministically verify canary
+        shell: bash
+        env:
+          KILO_EXIT_CODE: ${{ steps.kilo.outputs.exit_code }}
+        run: |
+          python - <<'PY'
+          import hashlib, json, os, pathlib, re, subprocess, sys
+
+          inp = pathlib.Path('canary/KILO_ANON_CANARY_INPUT.txt')
+          out = pathlib.Path('canary/KILO_ANON_CANARY_OUTPUT.json')
+          raw = inp.read_bytes()
+          text = raw.decode('utf-8')
+          nonce = re.search(r'^nonce=(.+)$', text, re.M).group(1)
+          nums = [int(x) for x in re.search(r'^numbers=(.+)$', text, re.M).group(1).split(',')]
+          expected = {
+              'nonce': nonce,
+              'sum': sum(nums),
+              'sha256': hashlib.sha256(raw).hexdigest(),
+              'task_satisfied': True,
+          }
+
+          result = {
+              'schema': 'KILO_ANON_GITHUB_ACTIONS_CANARY_V1',
+              'kilo_exit_code': int(os.environ.get('KILO_EXIT_CODE', '-999')),
+              'output_exists': out.exists(),
+              'expected': expected,
+              'observed': None,
+              'tracked_files_unchanged': False,
+              'pass': False,
+          }
+
+          try:
+              observed = json.loads(out.read_text()) if out.exists() else None
+              result['observed'] = observed
+              exact_keys = isinstance(observed, dict) and set(observed) == set(expected)
+              result['output_exact'] = exact_keys and observed == expected
+          except Exception as e:
+              result['parse_error'] = repr(e)
+              result['output_exact'] = False
+
+          diff = subprocess.run(['git','diff','--exit-code','--','.'], capture_output=True, text=True)
+          result['tracked_files_unchanged'] = diff.returncode == 0
+          result['git_diff'] = diff.stdout + diff.stderr
+          result['pass'] = bool(result.get('output_exact')) and result['tracked_files_unchanged'] and result['kilo_exit_code'] == 0
+          pathlib.Path('CANARY_VERDICT.json').write_text(json.dumps(result, indent=2, sort_keys=True) + '\n')
+          print(json.dumps(result, indent=2, sort_keys=True))
+          if not result['pass']:
+              sys.exit(1)
+          PY
+
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kilo-anon-actions-canary-evidence
+          path: |
+            KILO_VERSION.txt
+            KILO_RUN.log
+            CANARY_VERDICT.json
+            canary/KILO_ANON_CANARY_OUTPUT.json
+          if-no-files-found: warn
