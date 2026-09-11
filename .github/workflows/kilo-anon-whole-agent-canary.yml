@@ -17,19 +17,21 @@ on:
 
 permissions:
   contents: read
+  id-token: write
 
 jobs:
   canary_a:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '22'
-      - name: Install Kilo CLI
+      - name: Install pinned Kilo CLI
         run: |
-          npm install -g @kilocode/cli
+          npm install -g @kilocode/cli@7.6.2
+          test "$(kilo --version)" = "7.6.2"
           kilo --version | tee KILO_VERSION_A.txt
           printf '%s\n' "$RUNNER_NAME" > RUNNER_A.txt
       - name: Configure anonymous free Kilo gateway
@@ -77,7 +79,7 @@ jobs:
           if not result['pass']: sys.exit(1)
           PY
       - name: Upload A state
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: kilo-state-a
           path: |
@@ -93,14 +95,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
           name: kilo-state-a
           path: prior
       - name: Create durable recovery checkpoint
         run: |
           python - <<'PY'
-          import hashlib,json,pathlib,os
+          import json,pathlib,os
           a=json.loads(pathlib.Path('prior/VERDICT_A.json').read_text())
           assert a['pass'] is True
           checkpoint={'schema':'KILO_RECOVERY_CHECKPOINT_V1','predecessor_nonce':a['observed']['nonce'],'predecessor_sha256':a['observed']['sha256'],'recovery_nonce':'KILO-ANON-RECOVERY-B-20260911-R4M8','attempt':1,'planned_failure':True}
@@ -108,7 +110,7 @@ jobs:
           pathlib.Path('RUNNER_FAILURE.txt').write_text(os.environ.get('RUNNER_NAME','')+'\n')
           PY
       - name: Upload checkpoint before termination
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: kilo-recovery-checkpoint
           path: |
@@ -123,17 +125,18 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
           name: kilo-recovery-checkpoint
           path: recovery
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '22'
-      - name: Install Kilo CLI
+      - name: Install pinned Kilo CLI
         run: |
-          npm install -g @kilocode/cli
+          npm install -g @kilocode/cli@7.6.2
+          test "$(kilo --version)" = "7.6.2"
           kilo --version | tee KILO_VERSION_B.txt
           printf '%s\n' "$RUNNER_NAME" > RUNNER_B.txt
       - name: Configure anonymous free Kilo gateway
@@ -182,7 +185,7 @@ jobs:
           PY
       - name: Upload recovery evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: kilo-recovery-b-evidence
           path: |
@@ -193,3 +196,32 @@ jobs:
             VERDICT_B.json
             recovery/RECOVERY_CHECKPOINT.json
             canary/KILO_ANON_RECOVERY_OUTPUT.json
+
+  oidc_receipt:
+    needs: recovery_b
+    if: ${{ needs.recovery_b.result == 'success' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: kilo-recovery-b-evidence
+          path: evidence
+      - name: Verify deterministic evidence and send GitHub OIDC receipt
+        env:
+          AUDIENCE: https://mosadek--39f2ef3cade311f193631607ee4eb77e.web.val.run
+          RECEIVER: https://mosadek--39f2ef3cade311f193631607ee4eb77e.web.val.run
+          CHALLENGE: a29a2c8e83c296d767ad1e0c7701ce91f43d83be756781071828bdbab2c1c9ba
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, pathlib
+          v=json.loads(pathlib.Path('evidence/VERDICT_B.json').read_text())
+          assert v['schema']=='KILO_ANON_ACTIONS_RECOVERY_B_V2' and v['pass'] is True and v['kilo_exit_code']==0 and v['tracked_files_unchanged'] is True
+          PY
+          EVIDENCE_SHA=$(sha256sum evidence/VERDICT_B.json | awk '{print $1}')
+          TOKEN_JSON=$(curl -fsS -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=${AUDIENCE}")
+          IDTOKEN=$(printf '%s' "$TOKEN_JSON" | python -c 'import json,sys; print(json.load(sys.stdin)["value"])')
+          BODY=$(python -c 'import json,os; print(json.dumps({"challenge":os.environ["CHALLENGE"],"evidence_sha256":os.environ["EVIDENCE_SHA"],"schema":"KILO_ANON_ACTIONS_RECOVERY_B_V2","verdict_pass":True},separators=(",",":"),sort_keys=True))' EVIDENCE_SHA="$EVIDENCE_SHA")
+          curl -fsS -H "Authorization: Bearer ${IDTOKEN}" -H "Content-Type: application/json" --data "$BODY" "$RECEIVER" | tee OIDC_RECEIVER_RESPONSE.json
