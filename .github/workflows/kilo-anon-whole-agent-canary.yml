@@ -223,5 +223,5 @@ jobs:
           EVIDENCE_SHA=$(sha256sum evidence/VERDICT_B.json | awk '{print $1}')
           TOKEN_JSON=$(curl -fsS -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=${AUDIENCE}")
           IDTOKEN=$(printf '%s' "$TOKEN_JSON" | python -c 'import json,sys; print(json.load(sys.stdin)["value"])')
-          BODY=$(python -c 'import json,os; print(json.dumps({"challenge":os.environ["CHALLENGE"],"evidence_sha256":os.environ["EVIDENCE_SHA"],"schema":"KILO_ANON_ACTIONS_RECOVERY_B_V2","verdict_pass":True},separators=(",",":"),sort_keys=True))' EVIDENCE_SHA="$EVIDENCE_SHA")
+          BODY=$(EVIDENCE_SHA="$EVIDENCE_SHA" python -c 'import json,os; print(json.dumps({"challenge":os.environ["CHALLENGE"],"evidence_sha256":os.environ["EVIDENCE_SHA"],"schema":"KILO_ANON_ACTIONS_RECOVERY_B_V2","verdict_pass":True},separators=(",",":"),sort_keys=True))')
           curl -fsS -H "Authorization: Bearer ${IDTOKEN}" -H "Content-Type: application/json" --data "$BODY" "$RECEIVER" | tee OIDC_RECEIVER_RESPONSE.json
