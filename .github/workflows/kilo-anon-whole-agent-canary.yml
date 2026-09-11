@@ -7,6 +7,12 @@ on:
     paths:
       - '.github/workflows/kilo-anon-whole-agent-canary.yml'
       - 'canary/KILO_ANON_CANARY_INPUT.txt'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/kilo-anon-whole-agent-canary.yml'
+      - 'canary/KILO_ANON_CANARY_INPUT.txt'
   workflow_dispatch:
 
 permissions:
