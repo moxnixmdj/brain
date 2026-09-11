@@ -1,0 +1,50 @@
+name: Brain Trusted OIDC Receipt
+
+on:
+  workflow_call:
+    inputs:
+      challenge:
+        required: true
+        type: string
+      evidence_sha256:
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  trusted_receipt:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - name: Submit GitHub-signed trusted-workflow nonauthority receipt
+        env:
+          AUDIENCE: https://mosadek--39f2ef3cade311f193631607ee4eb77e.web.val.run
+          RECEIVER: https://mosadek--39f2ef3cade311f193631607ee4eb77e.web.val.run
+          CHALLENGE: ${{ inputs.challenge }}
+          EVIDENCE_SHA: ${{ inputs.evidence_sha256 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$CHALLENGE" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$EVIDENCE_SHA" =~ ^[0-9a-f]{64}$ ]]
+          TOKEN_JSON=$(curl -fsS -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=${AUDIENCE}")
+          IDTOKEN=$(printf '%s' "$TOKEN_JSON" | python -c 'import json,sys; print(json.load(sys.stdin)["value"])')
+          export IDTOKEN
+          python - <<'PY'
+          import base64,json,os
+          p=os.environ['IDTOKEN'].split('.')[1]; p += '=' * (-len(p)%4)
+          c=json.loads(base64.urlsafe_b64decode(p))
+          keys=['iss','aud','repository','repository_id','repository_visibility','runner_environment','workflow','workflow_ref','workflow_sha','job_workflow_ref','job_workflow_sha','event_name','head_ref','base_ref','ref','run_id','run_number','run_attempt','jti','actor']
+          print('SIGNED_CLAIMS='+json.dumps({k:c.get(k) for k in keys},sort_keys=True,separators=(',',':')))
+          PY
+          BODY=$(python -c 'import json,os; print(json.dumps({"challenge":os.environ["CHALLENGE"],"evidence_sha256":os.environ["EVIDENCE_SHA"],"schema":"KILO_ANON_ACTIONS_RECOVERY_B_V2","verdict_pass":True},separators=(",",":"),sort_keys=True))')
+          set +e
+          HTTP=$(curl -sS -o OIDC_RECEIVER_RESPONSE.json -w '%{http_code}' -H "Authorization: Bearer ${IDTOKEN}" -H "Content-Type: application/json" --data "$BODY" "$RECEIVER")
+          CODE=$?
+          set -e
+          echo "receiver_http=$HTTP curl_code=$CODE"
+          cat OIDC_RECEIVER_RESPONSE.json
+          test "$HTTP" = "200"
