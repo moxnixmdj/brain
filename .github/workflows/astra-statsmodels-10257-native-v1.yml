@@ -1,0 +1,251 @@
+name: Astra Statsmodels 10257 Native Exact V1
+
+on:
+  push:
+    branches: [astra-statsmodels-10257-native-20260920-v1]
+    paths: [".github/workflows/astra-statsmodels-10257-native-v1.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  native-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout evidence branch
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Clone exact Statsmodels commit and freeze source identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          python --version
+          git --version
+          PATCH=astra-evidence/statsmodels10257-candidate.patch
+          ACTUAL_PATCH_SHA="$(sha256sum "$PATCH" | awk '{print $1}')"
+          echo "FROZEN_PATCH_SHA256=$ACTUAL_PATCH_SHA"
+          test "$ACTUAL_PATCH_SHA" = "4ac21e1ef89884c481f29c7ae5ddc8e8c3bc512a8facf34580436a5af0364320"
+          git init statsmodels-src
+          git -C statsmodels-src remote add origin https://github.com/statsmodels/statsmodels.git
+          git -C statsmodels-src fetch --depth=1 origin 8d85a036294e79ed6faeb7a0609eafff869ef6f8
+          git -C statsmodels-src checkout --detach FETCH_HEAD
+          test "$(git -C statsmodels-src rev-parse HEAD)" = "8d85a036294e79ed6faeb7a0609eafff869ef6f8"
+          echo "STATSMODELS_HEAD=$(git -C statsmodels-src rev-parse HEAD)"
+          echo "PRE_SOURCE_SHA256=$(sha256sum statsmodels-src/statsmodels/robust/covariance.py | awk '{print $1}')"
+          echo "PRE_TEST_SHA256=$(sha256sum statsmodels-src/statsmodels/robust/tests/test_covariance.py | awk '{print $1}')"
+
+      - name: Build exact pinned Statsmodels with test runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd statsmodels-src
+          python -m pip install --disable-pip-version-check -e . pytest
+
+      - name: Reproduce pre-patch determinant-normalization failure
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd statsmodels-src
+          python - <<'PY'
+          import json
+          import warnings
+          import numpy as np
+          import statsmodels.robust.covariance as robcov
+
+          rs = np.random.RandomState(0)
+          x = rs.standard_normal((301, 149))
+          weights = np.ones(len(x))
+          record = {}
+          with warnings.catch_warnings(record=True) as caught:
+              warnings.simplefilter("always")
+              try:
+                  with np.errstate(all="warn"):
+                      cov, _ = robcov.cov_weighted(x, weights, weights_cov_denom="det")
+              except Exception as exc:
+                  record["exception_type"] = type(exc).__name__
+                  record["exception_message"] = str(exc)
+                  record["reproduced"] = True
+              else:
+                  finite = bool(np.isfinite(cov).all())
+                  record["finite"] = finite
+                  if finite:
+                      sign, logdet = np.linalg.slogdet(cov)
+                      record["sign"] = int(sign)
+                      record["logdet"] = float(logdet)
+                      ok = sign == 1 and abs(logdet) <= 1e-10
+                  else:
+                      ok = False
+                  record["reproduced"] = not ok
+              record["warnings"] = [f"{type(w.message).__name__}: {w.message}" for w in caught]
+          print("PREPATCH_REPRODUCTION=" + json.dumps(record, sort_keys=True))
+          if not record.get("reproduced", False):
+              raise SystemExit("PREPATCH_NONREPRODUCTION")
+          PY
+
+      - name: Verify frozen patch packaging and apply frozen semantics only
+        shell: bash
+        run: |
+          set -euo pipefail
+          PATCH="$GITHUB_WORKSPACE/astra-evidence/statsmodels10257-candidate.patch"
+          cd statsmodels-src
+          set +e
+          git apply --check "$PATCH" >/tmp/git_apply_check.out 2>/tmp/git_apply_check.err
+          APPLY_CHECK_STATUS=$?
+          set -e
+          echo "GIT_APPLY_CHECK_STATUS=$APPLY_CHECK_STATUS"
+          echo "GIT_APPLY_CHECK_STDERR_BEGIN"
+          cat /tmp/git_apply_check.err
+          echo "GIT_APPLY_CHECK_STDERR_END"
+          if [ "$APPLY_CHECK_STATUS" -eq 0 ]; then
+            git apply "$PATCH"
+            echo "PATCH_APPLICATION_MODE=EXACT_GIT_APPLY"
+          else
+            python - "$PATCH" <<'PY'
+          from pathlib import Path
+          import hashlib
+          import sys
+
+          patch_path = Path(sys.argv[1])
+          patch = patch_path.read_text()
+          assert hashlib.sha256(patch.encode()).hexdigest() == "4ac21e1ef89884c481f29c7ae5ddc8e8c3bc512a8facf34580436a5af0364320"
+
+          src_path = Path("statsmodels/robust/covariance.py")
+          src = src_path.read_text()
+          old = '        wcov /= np.linalg.det(wcov) ** (1 / wcov.shape[0])\n'
+          new = '        _, logdet = np.linalg.slogdet(wcov)\n        wcov /= np.exp(logdet / wcov.shape[0])\n'
+          assert patch.count("-" + old.rstrip("\n")) == 1
+          assert patch.count("+        _, logdet = np.linalg.slogdet(wcov)") == 1
+          assert patch.count("+        wcov /= np.exp(logdet / wcov.shape[0])") == 1
+          assert src.count(old) == 1
+          src_path.write_text(src.replace(old, new, 1))
+
+          test_path = Path("statsmodels/robust/tests/test_covariance.py")
+          tests = test_path.read_text()
+          anchor = "\n\ndef test_outliers_gy():\n"
+          assert tests.count(anchor) == 1
+          block = '''
+
+          def test_cov_weighted_det_normalization_large_k():
+              rs = np.random.RandomState(0)
+              x = rs.standard_normal((301, 149))
+              weights = np.ones(len(x))
+              cov, _ = robcov.cov_weighted(x, weights, weights_cov_denom="det")
+
+              assert np.isfinite(cov).all()
+              sign, logdet = np.linalg.slogdet(cov)
+              assert_equal(sign, 1)
+              assert_allclose(logdet, 0, atol=1e-10)
+
+
+          def test_cov_weighted_det_normalization_small_k():
+              rs = np.random.RandomState(1234)
+              x = rs.standard_normal((80, 4))
+              weights = np.linspace(0.5, 1.5, len(x))
+              center = weights.dot(x) / weights.sum()
+              xdm = x - center
+              crossprod = (weights * xdm.T).dot(xdm)
+              expected = crossprod / np.linalg.det(crossprod) ** (1 / x.shape[1])
+
+              cov, _ = robcov.cov_weighted(x, weights, weights_cov_denom="det")
+
+              assert_allclose(cov, expected, rtol=1e-13, atol=1e-13)
+              assert_allclose(np.linalg.slogdet(cov), (1, 0), atol=1e-12)
+          '''
+          prefixed = "\n".join(("+" + line) if line else "+" for line in block.strip("\n").split("\n"))
+          for required in [
+              "+def test_cov_weighted_det_normalization_large_k():",
+              "+def test_cov_weighted_det_normalization_small_k():",
+              "+    assert np.isfinite(cov).all()",
+              "+    assert_allclose(np.linalg.slogdet(cov), (1, 0), atol=1e-12)",
+          ]:
+              assert required in patch
+          test_path.write_text(tests.replace(anchor, block + anchor, 1))
+          PY
+            echo "PATCH_APPLICATION_MODE=FROZEN_SEMANTICS_EXACT_ANCHOR_ADAPTER"
+          fi
+          git diff --check
+          CHANGED="$(git diff --name-only)"
+          echo "CHANGED_PATHS_BEGIN"
+          printf "%s\n" "$CHANGED"
+          echo "CHANGED_PATHS_END"
+          test "$(printf "%s\n" "$CHANGED" | sed '/^$/d' | wc -l)" -eq 2
+          printf "%s\n" "$CHANGED" | grep -Fx "statsmodels/robust/covariance.py"
+          printf "%s\n" "$CHANGED" | grep -Fx "statsmodels/robust/tests/test_covariance.py"
+          echo "POST_SOURCE_SHA256=$(sha256sum statsmodels/robust/covariance.py | awk '{print $1}')"
+          echo "POST_TEST_SHA256=$(sha256sum statsmodels/robust/tests/test_covariance.py | awk '{print $1}')"
+          echo "DIFF_SHA256=$(git diff --binary | sha256sum | awk '{print $1}')"
+          echo "PATCHED_DIFF_BEGIN"
+          git diff -- statsmodels/robust/covariance.py statsmodels/robust/tests/test_covariance.py
+          echo "PATCHED_DIFF_END"
+
+      - name: Run exact added regression tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd statsmodels-src
+          python -m pytest -q \
+            statsmodels/robust/tests/test_covariance.py::test_cov_weighted_det_normalization_large_k \
+            statsmodels/robust/tests/test_covariance.py::test_cov_weighted_det_normalization_small_k
+
+      - name: Run strongest relevant existing covariance test file
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd statsmodels-src
+          python -m pytest -q statsmodels/robust/tests/test_covariance.py
+
+      - name: Independent numerical invariant readback
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd statsmodels-src
+          python - <<'PY'
+          import json
+          import numpy as np
+          import statsmodels.robust.covariance as robcov
+
+          out = {}
+          rs = np.random.RandomState(0)
+          x = rs.standard_normal((301, 149))
+          w = np.ones(len(x))
+          cov, _ = robcov.cov_weighted(x, w, weights_cov_denom="det")
+          sign, logdet = np.linalg.slogdet(cov)
+          out["large_k"] = {"finite": bool(np.isfinite(cov).all()), "sign": int(sign), "logdet": float(logdet)}
+          if not out["large_k"]["finite"] or sign != 1 or abs(logdet) > 1e-10:
+              raise SystemExit("LARGE_K_INVARIANT_FAIL")
+
+          rs = np.random.RandomState(1234)
+          x = rs.standard_normal((80, 4))
+          w = np.linspace(0.5, 1.5, len(x))
+          center = w.dot(x) / w.sum()
+          xdm = x - center
+          crossprod = (w * xdm.T).dot(xdm)
+          expected = crossprod / np.linalg.det(crossprod) ** (1 / x.shape[1])
+          got, _ = robcov.cov_weighted(x, w, weights_cov_denom="det")
+          out["small_k"] = {"max_abs_delta": float(np.max(np.abs(got-expected))), "allclose": bool(np.allclose(got, expected, rtol=1e-13, atol=1e-13))}
+          if not out["small_k"]["allclose"]:
+              raise SystemExit("SMALL_K_COMPAT_FAIL")
+          print("NUMERICAL_INVARIANTS=" + json.dumps(out, sort_keys=True))
+          PY
+
+      - name: Final evidence receipt
+        if: always()
+        shell: bash
+        run: |
+          set -u
+          echo "EVIDENCE_BRANCH=astra-statsmodels-10257-native-20260920-v1"
+          echo "BRAIN_COMMIT=$GITHUB_SHA"
+          echo "FROZEN_PATCH_SHA256=$(sha256sum astra-evidence/statsmodels10257-candidate.patch | awk '{print $1}')"
+          if [ -d statsmodels-src/.git ]; then
+            echo "STATSMODELS_HEAD=$(git -C statsmodels-src rev-parse HEAD)"
+            echo "STATSMODELS_STATUS_BEGIN"
+            git -C statsmodels-src status --short
+            echo "STATSMODELS_STATUS_END"
+            echo "FINAL_DIFF_SHA256=$(git -C statsmodels-src diff --binary | sha256sum | awk '{print $1}')"
+          fi
