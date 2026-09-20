@@ -2,10 +2,8 @@ name: Astra Astropy SIP Native Exact V2
 
 on:
   push:
-    branches:
-      - astra-astropy-sip-native-20260920-v2
-    paths:
-      - ".github/workflows/astra-astropy-sip-native-v2.yml"
+    branches: [astra-astropy-sip-native-20260920-v2]
+    paths: [".github/workflows/astra-astropy-sip-native-v2.yml"]
 
 permissions:
   contents: read
@@ -27,10 +25,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          echo "RUNNER_OS=$RUNNER_OS"
           python --version
           git --version
-          sha256sum astra-evidence/astropy8992-candidate.patch
           test "$(sha256sum astra-evidence/astropy8992-candidate.patch | awk '{print $1}')" = "ab966e5a694ee8c2f6d64db813327535f68237e77be8ae6d15962199b0db0dd7"
           git init astropy-src
           git -C astropy-src remote add origin https://github.com/astropy/astropy.git
@@ -56,35 +52,21 @@ jobs:
           import numpy as np
           from astropy.utils.data import get_pkg_data_contents
           from astropy.wcs import wcs
-
-          header = get_pkg_data_contents(
-              "data/irac_sip.hdr", package="astropy.wcs.tests", encoding="binary"
-          )
+          header = get_pkg_data_contents("data/irac_sip.hdr", package="astropy.wcs.tests", encoding="binary")
           obj = wcs.WCS(header)
-          obj.sip = wcs.Sip(
-              obj.sip.a.copy(),
-              obj.sip.b.copy(),
-              None,
-              None,
-              obj.sip.crpix.copy(),
-          )
-          pixels = np.array(
-              [[200.0, 200.0], [0.0, 0.0], [255.0, 255.0], [10.0, 240.0]]
-          )
+          obj.sip = wcs.Sip(obj.sip.a.copy(), obj.sip.b.copy(), None, None, obj.sip.crpix.copy())
+          pixels = np.array([[200.0,200.0],[0.0,0.0],[255.0,255.0],[10.0,240.0]])
           evidence = {}
-          for origin in (0, 1):
+          for origin in (0,1):
               focal = obj.sip_pix2foc(pixels, origin)
               try:
                   obj.sip_foc2pix(focal, origin)
               except Exception as exc:
-                  evidence[str(origin)] = {
-                      "exception_type": type(exc).__name__,
-                      "message": str(exc),
-                  }
+                  evidence[str(origin)] = {"exception_type":type(exc).__name__,"message":str(exc)}
               else:
                   raise SystemExit(f"PREPATCH_NONREPRODUCTION origin={origin}")
-          print("PREPATCH_REPRODUCTION=" + json.dumps(evidence, sort_keys=True))
-          if any(x["exception_type"] != "ValueError" for x in evidence.values()):
+          print("PREPATCH_REPRODUCTION="+json.dumps(evidence,sort_keys=True))
+          if any(x["exception_type"]!="ValueError" for x in evidence.values()):
               raise SystemExit("PREPATCH_WRONG_EXCEPTION_TYPE")
           PY
 
@@ -95,77 +77,81 @@ jobs:
           cd astropy-src
           python - <<'PY'
           from pathlib import Path
-
-          wcs_path = Path("astropy/wcs/wcs.py")
-          src = wcs_path.read_text()
-          old = "        return self._array_converter(self.sip.foc2pix, None, *args)\n"
-          if src.count(old) != 1:
+          wcs_path=Path("astropy/wcs/wcs.py")
+          src=wcs_path.read_text()
+          old="        return self._array_converter(self.sip.foc2pix, None, *args)\n"
+          if src.count(old)!=1:
               raise SystemExit(f"WCS_ANCHOR_COUNT={src.count(old)}")
-          new = """        def _sip_foc2pix(foccrd, origin):
-              # Preserve the direct inverse-polynomial path when SIP AP/BP
-              # coefficients are available.
-              if self.sip.ap is not None and self.sip.bp is not None:
-                  return self.sip.foc2pix(foccrd, origin)
+          lines=[
+              "        def _sip_foc2pix(foccrd, origin):",
+              "            # Preserve the direct inverse-polynomial path when SIP AP/BP",
+              "            # coefficients are available.",
+              "            if self.sip.ap is not None and self.sip.bp is not None:",
+              "                return self.sip.foc2pix(foccrd, origin)",
+              "",
+              "            # Without AP/BP, invert the forward SIP map pointwise by the same",
+              "            # method of consecutive approximations used by all_world2pix.",
+              "            # sip.pix2foc returns focal-plane coordinates relative to CRPIX,",
+              "            # so foccrd + CRPIX is the undistorted zero-order pixel estimate.",
+              "            focal = np.asarray(foccrd, dtype=float)",
+              "            pix = focal + self.sip.crpix",
+              "            tolerance = 1.0e-4",
+              "            maxiter = 20",
+              "            tol2 = tolerance**2",
+              "",
+              "            for k in range(1, maxiter + 1):",
+              "                dpix = self.sip.pix2foc(pix, origin) - focal",
+              "                pix -= dpix",
+              "                dn = np.sum(dpix * dpix, axis=1)",
+              "                if np.all(dn < tol2):",
+              "                    return pix",
+              "",
+              "            (slow_conv,) = np.where(dn >= tol2)",
+              "            raise NoConvergence(",
+              "                \"'WCS.sip_foc2pix' failed to converge to the requested \"",
+              "                f\"accuracy after {maxiter:d} iterations.\",",
+              "                best_solution=pix,",
+              "                accuracy=np.abs(dpix),",
+              "                niter=maxiter,",
+              "                slow_conv=slow_conv,",
+              "                divergent=None,",
+              "            )",
+              "",
+              "        return self._array_converter(_sip_foc2pix, None, *args)",
+              "",
+          ]
+          wcs_path.write_text(src.replace(old,"\n".join(lines),1))
 
-              # Without AP/BP, invert the forward SIP map pointwise by the same
-              # method of consecutive approximations used by all_world2pix.
-              # sip.pix2foc returns focal-plane coordinates relative to CRPIX,
-              # so foccrd + CRPIX is the undistorted zero-order pixel estimate.
-              focal = np.asarray(foccrd, dtype=float)
-              pix = focal + self.sip.crpix
-              tolerance = 1.0e-4
-              maxiter = 20
-              tol2 = tolerance**2
-
-              for k in range(1, maxiter + 1):
-                  dpix = self.sip.pix2foc(pix, origin) - focal
-                  pix -= dpix
-                  dn = np.sum(dpix * dpix, axis=1)
-                  if np.all(dn < tol2):
-                      return pix
-
-              (slow_conv,) = np.where(dn >= tol2)
-              raise NoConvergence(
-                  "'WCS.sip_foc2pix' failed to converge to the requested "
-                  f"accuracy after {maxiter:d} iterations.",
-                  best_solution=pix,
-                  accuracy=np.abs(dpix),
-                  niter=maxiter,
-                  slow_conv=slow_conv,
-                  divergent=None,
-              )
-
-          return self._array_converter(_sip_foc2pix, None, *args)
-          """
-          wcs_path.write_text(src.replace(old, new, 1))
-
-          test_path = Path("astropy/wcs/tests/test_wcs.py")
-          tests = test_path.read_text()
-          anchor = "\n\ndef test_sub_3d_with_sip():\n"
-          if tests.count(anchor) != 1:
+          test_path=Path("astropy/wcs/tests/test_wcs.py")
+          tests=test_path.read_text()
+          anchor="\n\ndef test_sub_3d_with_sip():\n"
+          if tests.count(anchor)!=1:
               raise SystemExit(f"TEST_ANCHOR_COUNT={tests.count(anchor)}")
-          addition = """
-          def test_sip_foc2pix_without_inverse_coefficients():
-              # Regression test for #8992.
-              header = get_pkg_data_contents("data/irac_sip.hdr", encoding="binary")
-              w = wcs.WCS(header)
-              w.sip = wcs.Sip(
-                  w.sip.a.copy(),
-                  w.sip.b.copy(),
-                  None,
-                  None,
-                  w.sip.crpix.copy(),
-              )
-              pixels = np.array([[200.0, 200.0], [0.0, 0.0], [255.0, 255.0], [10.0, 240.0]])
-
-              for origin in (0, 1):
-                  focal = w.sip_pix2foc(pixels, origin)
-                  recovered = w.sip_foc2pix(focal, origin)
-                  assert_allclose(recovered, pixels, rtol=0.0, atol=1.0e-4)
-
-          """
-          test_path.write_text(tests.replace(anchor, "\n\n" + addition + "def test_sub_3d_with_sip():\n", 1))
+          tlines=[
+              "",
+              "",
+              "def test_sip_foc2pix_without_inverse_coefficients():",
+              "    # Regression test for #8992.",
+              "    header = get_pkg_data_contents(\"data/irac_sip.hdr\", encoding=\"binary\")",
+              "    w = wcs.WCS(header)",
+              "    w.sip = wcs.Sip(",
+              "        w.sip.a.copy(),",
+              "        w.sip.b.copy(),",
+              "        None,",
+              "        None,",
+              "        w.sip.crpix.copy(),",
+              "    )",
+              "    pixels = np.array([[200.0, 200.0], [0.0, 0.0], [255.0, 255.0], [10.0, 240.0]])",
+              "",
+              "    for origin in (0, 1):",
+              "        focal = w.sip_pix2foc(pixels, origin)",
+              "        recovered = w.sip_foc2pix(focal, origin)",
+              "        assert_allclose(recovered, pixels, rtol=0.0, atol=1.0e-4)",
+              "",
+          ]
+          test_path.write_text(tests.replace(anchor,"\n".join(tlines)+"\ndef test_sub_3d_with_sip():\n",1))
           PY
+          python -m py_compile astropy/wcs/wcs.py
           git diff --check
           echo "PATCHED_WCS_SHA256=$(sha256sum astropy/wcs/wcs.py | awk '{print $1}')"
           echo "PATCHED_TEST_SHA256=$(sha256sum astropy/wcs/tests/test_wcs.py | awk '{print $1}')"
@@ -176,7 +162,7 @@ jobs:
         run: |
           set -euo pipefail
           cd astropy-src
-          python -m pytest -q             astropy/wcs/tests/test_wcs.py::test_sip_foc2pix_without_inverse_coefficients             astropy/wcs/tests/test_wcs.py::test_sip
+          python -m pytest -q astropy/wcs/tests/test_wcs.py::test_sip_foc2pix_without_inverse_coefficients astropy/wcs/tests/test_wcs.py::test_sip
           python -m pytest -q astropy/wcs/tests/test_wcs.py -k "sip"
 
       - name: Final evidence receipt
