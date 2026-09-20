@@ -1,0 +1,82 @@
+diff --git a/astropy/wcs/wcs.py b/astropy/wcs/wcs.py
+--- a/astropy/wcs/wcs.py
++++ b/astropy/wcs/wcs.py
+@@
+     def sip_foc2pix(self, *args):
+         if self.sip is None:
+             if len(args) == 2:
+                 return args[0]
+             elif len(args) == 3:
+                 return args[:2]
+             else:
+                 raise TypeError("Wrong number of arguments")
+-        return self._array_converter(self.sip.foc2pix, None, *args)
++
++        def _sip_foc2pix(foccrd, origin):
++            # Preserve the direct inverse-polynomial path when SIP AP/BP
++            # coefficients are available.
++            if self.sip.ap is not None and self.sip.bp is not None:
++                return self.sip.foc2pix(foccrd, origin)
++
++            # Without AP/BP, invert the forward SIP map pointwise by the same
++            # method of consecutive approximations used by all_world2pix.
++            # sip.pix2foc returns focal-plane coordinates relative to CRPIX,
++            # so foccrd + CRPIX is the undistorted zero-order pixel estimate.
++            focal = np.asarray(foccrd, dtype=float)
++            pix = focal + self.sip.crpix
++            tolerance = 1.0e-4
++            maxiter = 20
++            tol2 = tolerance**2
++
++            for k in range(1, maxiter + 1):
++                dpix = self.sip.pix2foc(pix, origin) - focal
++                pix -= dpix
++                dn = np.sum(dpix * dpix, axis=1)
++                if np.all(dn < tol2):
++                    return pix
++
++            (slow_conv,) = np.where(dn >= tol2)
++            raise NoConvergence(
++                "'WCS.sip_foc2pix' failed to converge to the requested "
++                f"accuracy after {maxiter:d} iterations.",
++                best_solution=pix,
++                accuracy=np.abs(dpix),
++                niter=maxiter,
++                slow_conv=slow_conv,
++                divergent=None,
++            )
++
++        return self._array_converter(_sip_foc2pix, None, *args)
+diff --git a/astropy/wcs/tests/test_wcs.py b/astropy/wcs/tests/test_wcs.py
+--- a/astropy/wcs/tests/test_wcs.py
++++ b/astropy/wcs/tests/test_wcs.py
+@@
+ def test_sip():
+     # See #2107
+     header = get_pkg_data_contents("data/irac_sip.hdr", encoding="binary")
+     w = wcs.WCS(header)
+@@
+     assert_allclose(200, x1, 1e-3)
+     assert_allclose(200, y1, 1e-3)
+ 
++
++def test_sip_foc2pix_without_inverse_coefficients():
++    # Regression test for #8992.
++    header = get_pkg_data_contents("data/irac_sip.hdr", encoding="binary")
++    w = wcs.WCS(header)
++    w.sip = wcs.Sip(
++        w.sip.a.copy(),
++        w.sip.b.copy(),
++        None,
++        None,
++        w.sip.crpix.copy(),
++    )
++    pixels = np.array([[200.0, 200.0], [0.0, 0.0], [255.0, 255.0], [10.0, 240.0]])
++
++    for origin in (0, 1):
++        focal = w.sip_pix2foc(pixels, origin)
++        recovered = w.sip_foc2pix(focal, origin)
++        assert_allclose(recovered, pixels, rtol=0.0, atol=1.0e-4)
++
+ 
+ def test_sub_3d_with_sip():
