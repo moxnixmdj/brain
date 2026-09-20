@@ -1,0 +1,56 @@
+diff --git a/statsmodels/robust/covariance.py b/statsmodels/robust/covariance.py
+--- a/statsmodels/robust/covariance.py
++++ b/statsmodels/robust/covariance.py
+@@
+     if weights_cov_denom is None:
+         if wsum_cov is None:
+             wsum_cov = weights_cov.sum()
+         wcov /= wsum_cov - ddof  # * np.sum(weights_cov**2) / wsum_cov)
+     elif weights_cov_denom == "det":
+-        wcov /= np.linalg.det(wcov) ** (1 / wcov.shape[0])
++        _, logdet = np.linalg.slogdet(wcov)
++        wcov /= np.exp(logdet / wcov.shape[0])
+     elif weights_cov_denom == 1:
+         pass
+     else:
+         wcov /= weights_cov_denom - ddof
+diff --git a/statsmodels/robust/tests/test_covariance.py b/statsmodels/robust/tests/test_covariance.py
+--- a/statsmodels/robust/tests/test_covariance.py
++++ b/statsmodels/robust/tests/test_covariance.py
+@@
+ def test_mahalanobis():
+     rs = np.random.RandomState(987676453)
+     x = rs.randn(10, 3)
+@@
+     d4 = robcov.mahalanobis(x, cov_inv=2 * np.eye(3))
+     assert_allclose(d4, 2 * d1, rtol=1e-10)
+ 
+ 
++def test_cov_weighted_det_normalization_large_k():
++    rs = np.random.RandomState(0)
++    x = rs.standard_normal((301, 149))
++    weights = np.ones(len(x))
++    cov, _ = robcov.cov_weighted(x, weights, weights_cov_denom="det")
++
++    assert np.isfinite(cov).all()
++    sign, logdet = np.linalg.slogdet(cov)
++    assert_equal(sign, 1)
++    assert_allclose(logdet, 0, atol=1e-10)
++
++
++def test_cov_weighted_det_normalization_small_k():
++    rs = np.random.RandomState(1234)
++    x = rs.standard_normal((80, 4))
++    weights = np.linspace(0.5, 1.5, len(x))
++    center = weights.dot(x) / weights.sum()
++    xdm = x - center
++    crossprod = (weights * xdm.T).dot(xdm)
++    expected = crossprod / np.linalg.det(crossprod) ** (1 / x.shape[1])
++
++    cov, _ = robcov.cov_weighted(x, weights, weights_cov_denom="det")
++
++    assert_allclose(cov, expected, rtol=1e-13, atol=1e-13)
++    assert_allclose(np.linalg.slogdet(cov), (1, 0), atol=1e-12)
++
++
+ def test_outliers_gy():
