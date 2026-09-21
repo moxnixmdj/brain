@@ -2,7 +2,7 @@
   "schema": "PROJECT_BRAIN_DISTINCT_VERIFICATION_V1",
   "verifier_id": "DETERMINISTIC-VERIFIER-GITHUB-1",
   "worker_agent_id": "SUPERWORKER-GITHUB-1",
-  "mission_id": "SUPERWORKER-GITHUB-QUALIFICATION-1",
+  "mission_id": "SUPERWORKER-GITHUB-HOST-DECISION-1",
   "criteria_version": "github-host-v1-precommitted-2026-09-21",
   "checks": {
     "persistent_identity": true,
@@ -19,5 +19,5 @@
   "promotion_claim": false,
   "p_superworker_real_after_adjudication": 0,
   "reason": "QUALIFICATION_PROPERTIES_PASS__PROMOTION_REQUIRES_CANONICAL_ADJUDICATION",
-  "verified_at_utc": "2026-09-21T21:02:59.307Z"
+  "verified_at_utc": "2026-09-21T21:06:38.593Z"
 }
