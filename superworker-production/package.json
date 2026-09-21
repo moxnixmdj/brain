@@ -1,13 +1,1 @@
-{
-  "name": "project-brain-superworker-production",
-  "version": "2.3.0",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "deploy": "node deploy.mjs",
-    "dev": "wrangler dev"
-  },
-  "devDependencies": {
-    "wrangler": "^4.0.0"
-  }
-}
+{"name":"project-brain-superworker-permanent-1","version":"2.6.0","private":true,"type":"module","devDependencies":{"wrangler":"4.136.1"}}
