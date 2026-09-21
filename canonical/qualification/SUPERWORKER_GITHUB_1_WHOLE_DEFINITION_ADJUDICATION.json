@@ -1,6 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_SUPERWORKER_WHOLE_DEFINITION_ADJUDICATION_V1",
-  "adjudicated_at_utc": "2026-09-21T21:14:00Z",
+  "prior_adjudication_at_utc": "2026-09-21T21:14:00Z",
+  "correction_at_utc": "2026-09-21T21:57:00Z",
   "candidate": {
     "agent_id": "SUPERWORKER-GITHUB-1",
     "runtime": "SUPERHERO-RUNTIME-2.7-GITHUB-ACTIONS-PERSISTENT",
@@ -8,6 +9,7 @@
     "canonical_repository": "moxnixmdj/brain",
     "workflow": ".github/workflows/superworker-github-qualification.yml"
   },
+  "correction_reason": "PRIOR_PROMOTION_USED_A_BOUNDED_INFRASTRUCTURE_RUBRIC_INSTEAD_OF_THE_PROJECTS_ACTUAL_SUPERWORKER_DEFINITION. THE CANDIDATE PROVED PERSISTENT HTTP/REPOSITORY EXECUTION BUT DID NOT PROVE GENERAL TOOL ACQUISITION, GUI ACTION, HIDDEN-ENVIRONMENT GENERALIZATION, OR THE CAPABILITY BREADTH REQUIRED FOR A REAL SUPERWORKER.",
   "capability_scope": {
     "proven": [
       "canonical_task_acquisition_via_repository_push",
@@ -24,122 +26,16 @@
       "gui_interaction",
       "hidden_ui_generalization",
       "arbitrary_tool_discovery",
-      "astra_full_capability",
+      "fresh_novel_environment_generalization",
+      "astra_level_capability_breadth",
       "human_authority_approval"
     ]
   },
-  "whole_definition_checks": {
-    "real_independent_execution": {
-      "pass": true,
-      "evidence": [
-        "workflow run 35654776285",
-        "workflow run 35655135899",
-        "workflow run 35655541221"
-      ]
-    },
-    "unique_auditable_identity": {
-      "pass": true,
-      "evidence": [
-        "agent_id SUPERWORKER-GITHUB-1",
-        "runtime SUPERHERO-RUNTIME-2.7-GITHUB-ACTIONS-PERSISTENT"
-      ]
-    },
-    "reachable": {
-      "pass": true,
-      "evidence": [
-        "push-triggered canonical task workflow executed repeatedly"
-      ]
-    },
-    "capabilities_known": {
-      "pass": true,
-      "evidence": [
-        "capability_scope in this adjudication is explicit and bounded"
-      ]
-    },
-    "joined_canonical_brain": {
-      "pass": true,
-      "evidence": [
-        "state/evidence/leases/dedupe markers persisted under canonical/ in moxnixmdj/brain"
-      ]
-    },
-    "causally_ready_task_received": {
-      "pass": true,
-      "evidence": [
-        "SUPERWORKER-GITHUB-HOST-DECISION-1",
-        "SUPERWORKER-GITHUB-PRODUCTION-MISSION-1"
-      ]
-    },
-    "executes_independently": {
-      "pass": true,
-      "evidence": [
-        "acquire runner checkpointed; separate fresh runner continued to terminal state without human continuation"
-      ]
-    },
-    "consequential_evidence_returned": {
-      "pass": true,
-      "evidence": [
-        "host-decision mission established automatic trigger/schedule support",
-        "production authority mission established authenticated API/write authority"
-      ]
-    },
-    "durable_incorporation": {
-      "pass": true,
-      "evidence": [
-        "canonical state/evidence/consumed marker and adjudication committed to private canonical repository"
-      ]
-    },
-    "lease_ownership": {
-      "pass": true,
-      "evidence": [
-        "lease_id a972005f-27f4-4daa-a080-eeba098038a4 bound to production mission owner SUPERWORKER-GITHUB-1"
-      ]
-    },
-    "dedupe": {
-      "pass": true,
-      "evidence": [
-        "replay run 35655850188 logged DUPLICATE_REJECTED and skipped continuation"
-      ]
-    },
-    "provenance_authority": {
-      "pass": true,
-      "evidence": [
-        "GitHub Actions job logs recorded GITHUB_TOKEN Contents: write; tasks sourced from canonical private repository"
-      ]
-    },
-    "independent_verification": {
-      "pass": true,
-      "evidence": [
-        "DETERMINISTIC-VERIFIER-GITHUB-1 passed github-host-v2-dedupe-bound-2026-09-21"
-      ]
-    },
-    "alive_not_throttled": {
-      "pass": true,
-      "evidence": [
-        "multiple successful fresh hosted runs during adjudication interval"
-      ]
-    },
-    "no_self_certified_promotion": {
-      "pass": true,
-      "evidence": [
-        "worker/verifier artifacts kept promotion_claim false; this separate canonical adjudication performs promotion"
-      ]
-    }
-  },
-  "all_whole_definition_checks_pass": true,
-  "promotion_authorized": true,
-  "p_superworker_real_before": 0,
-  "p_superworker_real_after": 1,
-  "limitations": [
-    "Promotion is for the demonstrated bounded capability scope, not Astra equivalence.",
-    "The worker currently lacks a proven GUI/browser-action provider required for the remaining Astra hidden UI predicates.",
-    "Cloudflare Runtime 2.6 remains prepared but is not required for Superworker #1 promotion."
-  ],
-  "evidence_paths": [
-    "canonical/superworker_state/SUPERWORKER_GITHUB_1.json",
-    "canonical/superworker_evidence/SUPERWORKER_GITHUB_QUALIFICATION_1.json",
-    "canonical/superworker_consumed/SUPERWORKER-GITHUB-PRODUCTION-MISSION-1.json",
-    "canonical/qualification/SUPERWORKER_GITHUB_1_ADJUDICATION.json",
-    "canonical/qualification/archive/SUPERWORKER_GITHUB_1_RUN1_ADJUDICATION.json",
-    "canonical/qualification/archive/SUPERWORKER_GITHUB_1_RUN2_ADJUDICATION.json"
-  ]
+  "prior_whole_definition_claim_valid": false,
+  "promotion_authorized": false,
+  "promotion_revoked": true,
+  "p_superworker_real_before_correction": 1,
+  "p_superworker_real_after_correction": 0,
+  "preserved_value": "All execution, persistence, failover, dedupe, and provenance evidence remains valid as bounded-executor evidence. Only the Superworker promotion claim is revoked.",
+  "current_blocker": "NO_VERIFIED_ADMISSIBLE_RAW_VISUAL_GUI_IO_SUBSTRATE_FOR_FROZEN_ASTRA_HIDDEN_MBTA_ONE_SHOT"
 }
