@@ -1,35 +1,38 @@
 {
   "schema": "PROJECT_BRAIN_TASK_V1",
-  "task_id": "SUPERWORKER-GITHUB-HOST-DECISION-1",
+  "task_id": "SUPERWORKER-GITHUB-PRODUCTION-MISSION-1",
   "assigned_to": "SUPERWORKER-GITHUB-1",
   "state": "READY",
   "priority": 100,
-  "goal": "Produce authoritative evidence for the live causal decision whether already-authenticated GitHub Actions can serve as the permanent remote execution substrate for Superworker #1, eliminating the blocked Cloudflare account-authorization dependency.",
+  "goal": "Establish authoritative evidence that the permanent GitHub Actions substrate can authenticate and perform controlled canonical repository operations required by Project Brain, completing the live host-decision frontier without Cloudflare account authorization.",
   "frontier": [
     {
-      "id": "github-actions-autonomous-trigger",
+      "id": "github-actions-authenticated-authority",
       "kind": "retrieve_url",
-      "query": "https://raw.githubusercontent.com/github/docs/add0a52d76879dff93304a5aa96895f9d68d5dac/data/reusables/actions/workflows/section-triggering-a-workflow.md",
+      "query": "https://raw.githubusercontent.com/github/docs/add0a52d76879dff93304a5aa96895f9d68d5dac/content/actions/tutorials/authenticate-with-github_token.md",
       "priority": 100,
       "metadata": {
-        "url": "https://raw.githubusercontent.com/github/docs/add0a52d76879dff93304a5aa96895f9d68d5dac/data/reusables/actions/workflows/section-triggering-a-workflow.md",
+        "url": "https://raw.githubusercontent.com/github/docs/add0a52d76879dff93304a5aa96895f9d68d5dac/content/actions/tutorials/authenticate-with-github_token.md",
         "forcePrimaryFailure": true,
         "assertContains": [
-          "To automatically trigger a workflow, use `on` to define which events can cause the workflow to run.",
-          "You can define single or multiple events that can trigger a workflow, or set a time schedule."
+          "You can use the `GITHUB_TOKEN` to make authenticated API calls.",
+          "Use the `permissions` key in your workflow file to modify permissions for the `GITHUB_TOKEN`"
         ]
       }
     }
   ],
-  "decision_if_verified": "COMBINE_WITH_LIVE_PUSH_RUN_AND_CANONICAL_WRITE_EVIDENCE_TO_ADJUDICATE_GITHUB_ACTIONS_AS_PERMANENT_SUPERWORKER_EXECUTION_SUBSTRATE",
+  "decision_if_verified": "CANONICAL_AUTHORITY_MAY_ADJUDICATE_GITHUB_ACTIONS_AS_PERMANENT_AUTHENTICATED_SUPERWORKER_EXECUTION_SUBSTRATE_USING_LIVE_WRITE_EVIDENCE_AND_REPLAY_SAFETY",
   "required_properties": [
     "REAL_CAUSAL_FRONTIER_DECISION",
     "PERSISTENT_IDENTITY",
+    "AUTHENTICATED_CANONICAL_WRITE_AUTHORITY",
     "FRESH_RUN_CONTINUATION",
     "PROVIDER_FAILOVER",
     "MODEL_INDEPENDENCE",
+    "HARD_ZERO_INCREMENTAL_COST",
     "DURABLE_EVIDENCE",
     "TERMINAL_COMPLETION",
+    "DEDUPE",
     "DISTINCT_VERIFICATION"
   ],
   "promotion_claim": false
