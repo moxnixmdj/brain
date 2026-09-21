@@ -1,0 +1,27 @@
+{
+  "schema":"PROJECT_BRAIN_SUPERWORKER_Q9_STATUS_V1",
+  "agent_id":"SUPERWORKER-CANDIDATE-Q9",
+  "runtime":"SUPERHERO-RUNTIME-2.5-DO-ALARM-EXTBUS",
+  "worker_url":"https://project-brain-superworker-q9.picayune-mantis.workers.dev",
+  "kernel_source_sha256":"4e39f5728afc2c05a6b33d4e78b96da68f89fbca720efb3b859b77dc38d148da",
+  "worker_source_sha256":"23e2c1bd1cc40050efa5bc42bfbbe8edce158032d26148b2052126bb2b8a36ac",
+  "private_control_sha256":"5e46aac465c8025267c152699a31b671166c7864067e7a7b8e1c3c7421232d69",
+  "qualification":{
+    "mission_id":"SUPERWORKER-QUALIFICATION-Q9",
+    "status":"COMPLETE",
+    "cycle":3,
+    "owner":"SUPERWORKER-CANDIDATE-Q9",
+    "lease_id":"9cf3a6a2-e07c-44bd-b550-43ff84eff84c",
+    "models_used":false,
+    "evidence_count":3,
+    "primary_failure_injected":true,
+    "fallback_provider":"http-fallback",
+    "assertions_verified":true
+  },
+  "external_command_queue":true,
+  "task_signature_verification":"ECDSA_P256",
+  "external_receipts":"HMAC_SHA256",
+  "claim_expires_at":"2026-09-21T19:06:13.959Z",
+  "claim_status":"UNCLAIMED",
+  "promotion_claim":false
+}
