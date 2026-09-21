@@ -1,0 +1,25 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_GLOBAL_WOLFRAM_ADJUDICATION_V1",
+  "verifier_id": "WOLFRAM-REMOTE-KERNEL-20260922-ASTRA-GLOBAL-V1",
+  "trust_executor_status_labels": false,
+  "suite_frozen_before_all_missions": true,
+  "gate_results": {
+    "GLOBAL__AT_LEAST_THREE_FRESH_CROSS_DOMAIN_INTEGRATED_HIDDEN_MISSIONS": true,
+    "GLOBAL__CLEAN_ROOM_REPRODUCTION_FULL_STACK": true,
+    "GLOBAL__CROSS_CAPABILITY_INTEGRATED_MISSIONS": true,
+    "GLOBAL__DURABLE_STATE_AND_READBACK": true,
+    "GLOBAL__DYNAMIC_CAPABILITY_DISCOVERY": true,
+    "GLOBAL__FAILURE_RECOVERY": true,
+    "GLOBAL__HIDDEN_GENERALIZATION_PER_CAPABILITY_FAMILY": false,
+    "GLOBAL__INDEPENDENT_VERIFICATION": true,
+    "GLOBAL__SCOPE_JUDGMENT": true,
+    "GLOBAL__UNKNOWN_DOMAIN_KNOWLEDGE_ACQUISITION": true
+  },
+  "pass_count": 9,
+  "fail_count": 1,
+  "failed_gates": [
+    "GLOBAL__HIDDEN_GENERALIZATION_PER_CAPABILITY_FAMILY"
+  ],
+  "family_gate_reason": "FAIL_CLOSED: historical recovery preserves that there were 10 Astra capability families, but not the exact family-membership map; the three mission evidence cannot prove hidden generalization for every family without inventing missing membership.",
+  "full_astra_authorized": false
+}
