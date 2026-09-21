@@ -1,0 +1,114 @@
+{
+  "schema": "PROJECT_BRAIN_CRITICAL_PATH_PRE_ACTION_GATE_V2",
+  "status": "MANDATORY_FAIL_CLOSED",
+  "supersedes": "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V1.json",
+  "required_inputs": [
+    "live_canonical_pointer",
+    "current_relevant_task_state",
+    "current_relevant_predicate_state",
+    "canonical_generation_or_commit",
+    "prior_work_search_result",
+    "evidence_presence_classification"
+  ],
+  "checks": [
+    {
+      "id": "PRIMARY_STATE_REFRESH",
+      "question": "Was the live highest-authority canonical state refreshed immediately before planning/execution, rather than relying on summary, memory, or cached local state?",
+      "required": true
+    },
+    {
+      "id": "GENERATION_LOCK",
+      "question": "Is this action bound to the current canonical generation/commit, with abort-and-reconcile if that state changed?",
+      "required": true
+    },
+    {
+      "id": "MISSION_LOCK",
+      "question": "Is the terminal objective and current causal frontier explicitly known from current canonical state?",
+      "required": true
+    },
+    {
+      "id": "FRONTIER_CONTRADICTION_FREE",
+      "question": "Does the action avoid assuming work is unproven/READY when canonical state marks it PROVEN/COMPLETE/SUPERSEDED?",
+      "required": true
+    },
+    {
+      "id": "PRIOR_WORK_SEARCHED",
+      "question": "Were canonical task, predicate, evidence, artifact, archive, and verifier records checked for already-completed or equivalent work?",
+      "required": true
+    },
+    {
+      "id": "EVIDENCE_CLASSIFIED",
+      "question": "Was the situation explicitly classified as CAPABILITY_UNPROVEN, CAPABILITY_FAILED, CAPABILITY_PROVEN_EVIDENCE_PRESENT, CAPABILITY_PROVEN_EVIDENCE_MISSING, HISTORICAL_STATE_UNCERTAIN, or SUPERSEDED_BY_NEWER_CANONICAL_STATE?",
+      "required": true
+    },
+    {
+      "id": "NO_MISSING_PROOF_CAPABILITY_CONFUSION",
+      "question": "If capability is marked proven but an artifact is missing, is the action recovering/reconstructing evidence rather than rerunning the capability?",
+      "required": true
+    },
+    {
+      "id": "RECOVERY_LADDER_HIGHEST_STEP",
+      "question": "For missing/uncertain evidence, have all higher recovery steps been exhausted before selecting a lower step or rerun?",
+      "required": true
+    },
+    {
+      "id": "DIRECT_CAUSAL_VALUE",
+      "question": "Does this action directly advance the current frontier, falsify a blocker, or preserve evidence/state required for a selected frontier action?",
+      "required": true
+    },
+    {
+      "id": "NO_INFRASTRUCTURE_DRIFT",
+      "question": "Is any new infrastructure strictly required because the next real mission cannot execute correctly without it?",
+      "required": true
+    },
+    {
+      "id": "NO_REPEAT_FAILURE_CLASS",
+      "question": "Has this exact failure class occurred fewer than the allowed repeats without a root-cause change?",
+      "required": true
+    },
+    {
+      "id": "PROOF_NOT_CEREMONIAL",
+      "question": "Does this verification close a currently material uncertainty rather than reprove an already sufficient property?",
+      "required": true
+    },
+    {
+      "id": "ADEQUATE_ROUTE_ALREADY_EXISTS",
+      "question": "If an adequate route/result already exists, are we using/recovering it instead of continuing research, platform search, or duplicate execution?",
+      "required": true
+    },
+    {
+      "id": "USER_INTERVENTION_MINIMAL",
+      "question": "If user action is requested, is it a genuine external authority boundary and the smallest possible action?",
+      "required": true
+    }
+  ],
+  "evidence_presence_classes": [
+    "CAPABILITY_UNPROVEN",
+    "CAPABILITY_FAILED",
+    "CAPABILITY_PROVEN_EVIDENCE_PRESENT",
+    "CAPABILITY_PROVEN_EVIDENCE_MISSING",
+    "HISTORICAL_STATE_UNCERTAIN",
+    "SUPERSEDED_BY_NEWER_CANONICAL_STATE"
+  ],
+  "recovery_ladder": [
+    "RECOVER_EXACT_ORIGINAL_ARTIFACT",
+    "RECOVER_EXACT_MIRROR_OR_ARCHIVE",
+    "RECONSTRUCT_PROOF_FROM_PRESERVED_PRIMARY_EVIDENCE",
+    "READJUDICATE_PRESERVED_EVIDENCE_WITH_INDEPENDENT_VERIFIER",
+    "REPROVE_ONLY_SPECIFIC_MISSING_PREDICATE",
+    "RERUN_FULL_EXPERIMENT_LAST_RESORT"
+  ],
+  "automatic_abort_conditions": [
+    "CANONICAL_GENERATION_CHANGED_SINCE_PLAN",
+    "SUMMARY_OR_MEMORY_CONTRADICTS_LIVE_CANONICAL_STATE",
+    "PLANNED_ACTION_TARGET_ALREADY_PROVEN_OR_COMPLETE",
+    "MISSING_ARTIFACT_MISCLASSIFIED_AS_MISSING_CAPABILITY",
+    "LOWER_RECOVERY_STEP_SELECTED_BEFORE_HIGHER_STEP_FALSIFIED",
+    "DUPLICATE_EXPERIMENT_WITHOUT_DOCUMENTED_INVALIDATION",
+    "ACTION_HAS_NO_CURRENT_CANONICAL_NECESSITY_PROOF",
+    "SECOND_FAILURE_OF_SAME_CLASS_WITHOUT_ROOT_CAUSE_CHANGE",
+    "INFRASTRUCTURE_WORK_WHILE_NEXT_REAL_MISSION_IS_EXECUTABLE",
+    "ACTIVITY_METRIC_SUBSTITUTED_FOR_CAPABILITY_METRIC"
+  ],
+  "on_abort": "REFRESH_LIVE_CANONICAL_STATE__RECLASSIFY_EVIDENCE_PRESENCE__SEARCH_PRIOR_WORK__RECOMPUTE_SHORTEST_VERIFIED_PATH"
+}
