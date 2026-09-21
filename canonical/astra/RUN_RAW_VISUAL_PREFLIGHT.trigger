@@ -1,1 +1,1 @@
-run=3\nhidden_candidate_touched=false\nvalidate=pixel-ocr\n
+run=4\nhidden_candidate_touched=false\nvalidate=pixel-ocr-installed\n
