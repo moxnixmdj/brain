@@ -1,0 +1,18 @@
+{
+  "schema":"PROJECT_BRAIN_PERMANENT_SUPERWORKER_CANDIDATE_V1",
+  "agent_id":"SUPERWORKER-PERMANENT-1",
+  "runtime":"SUPERHERO-RUNTIME-2.6.0-DIRECT-SIGNED-PERMANENT",
+  "kernel":"MODEL_INDEPENDENT",
+  "kernel_sha256":"4e39f5728afc2c05a6b33d4e78b96da68f89fbca720efb3b859b77dc38d148da",
+  "worker_sha256":"86ea846e187bc36ca4272c6ea93d73d734d6ef1055c25eab89df46a37271a9be",
+  "bundle_sha256":"5c5e1d1e79862e71eca9217e3a34d2b1343cb3c7b03d4826fe0f4a56d3400072",
+  "bundle_drive_file_id":"1vDmgKevfXeEPsN58ZVaKdldyWaQ9LMGY",
+  "command_transport":"DIRECT_ECDSA_P256_SIGNED",
+  "command_private_key_drive_file_id":"1tZ_y1BHBXw3uJQ55g3zgEV5JaGfyZcF2",
+  "persistent_control_secret":false,
+  "temporary_accounts":false,
+  "claim_links":false,
+  "permanent_cloudflare_oauth_required_once":true,
+  "promotion_claim":false,
+  "next_gate":"PERMANENT_CLOUDFLARE_OAUTH_AND_DEPLOYMENT_THEN_REAL_MISSION"
+}
