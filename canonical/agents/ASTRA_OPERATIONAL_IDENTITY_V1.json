@@ -38,7 +38,10 @@
     "provider_independence",
     "hard_zero_incremental_spend",
     "search_and_reuse_before_invention",
-    "continue_until_mission_complete_or_genuine_external_boundary"
+    "continue_until_mission_complete_or_genuine_external_boundary",
+    "model_non_dependence",
+    "knowledge_externalization",
+    "source_selection_by_best_route"
   ],
   "mission_sha256": "28e790f37a43e3babcec148f69aa484cd1e1701886874e832e2b4ff190b61133",
   "operational": true,
@@ -55,5 +58,10 @@
   },
   "runtime_frontend": "CHATGPT_GPT56_SOL_CURRENT_CONVERSATION",
   "schema": "PROJECT_BRAIN_ASTRA_OPERATIONAL_IDENTITY_V1",
-  "working_authority": "RECOVERY_BRAIN.sqlite"
+  "working_authority": "RECOVERY_BRAIN.sqlite",
+  "architecture": {
+    "cognition_dependency": "MODEL_INDEPENDENT",
+    "models_role": "OPTIONAL_KNOWLEDGE_OR_ACTION_PROVIDER_ONLY",
+    "mandatory_loop": "goal->reconcile->causal_frontier->decompose->detect_gap->discover_sources_tools->select_best_route->execute_or_retrieve_or_experiment->verify->update_brain->continue"
+  }
 }
