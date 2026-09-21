@@ -17,21 +17,26 @@ jobs:
     if: github.event_name == 'push'
     runs-on: ubuntu-24.04
     timeout-minutes: 5
+    outputs:
+      should_continue: ${{ steps.acquire.outputs.should_continue }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: {node-version: '22'}
-      - run: node canonical/runtime/github_superworker_runner.mjs acquire
+      - id: acquire
+        run: node canonical/runtime/github_superworker_runner.mjs acquire
       - name: Persist checkpoint to canonical Brain
+        if: steps.acquire.outputs.should_continue == 'true'
         run: |
           git config user.name 'Project Brain Superworker'
           git config user.email 'project-brain-superworker@users.noreply.github.com'
-          git add canonical/superworker_state/
+          git add canonical/superworker_state/ canonical/superworker_consumed/
           git commit -m 'Superworker GitHub 1 checkpoint qualification mission'
           git push
 
   continue-on-fresh-runner:
     needs: acquire-and-checkpoint
+    if: needs.acquire-and-checkpoint.outputs.should_continue == 'true'
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
