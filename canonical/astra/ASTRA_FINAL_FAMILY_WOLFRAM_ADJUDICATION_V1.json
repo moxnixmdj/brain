@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_FINAL_FAMILY_WOLFRAM_ADJUDICATION_V1",
+  "verifier_id": "WOLFRAM-REMOTE-KERNEL-20260922-ASTRA-FAMILY-FINAL-V1",
+  "trust_executor_status_labels": false,
+  "family_taxonomy": [
+    "NOVEL_ADAPTATION_REASONING",
+    "GUI_COMPUTER_USE",
+    "WEB_RESEARCH",
+    "SOFTWARE_ENGINEERING",
+    "MATH_SCIENCE",
+    "PROFESSIONAL_WORK",
+    "TOOL_ORCHESTRATION",
+    "LONG_HORIZON_MEMORY_CONTEXT",
+    "SCOPE_JUDGMENT_ALIGNMENT",
+    "SPEED_COST_EFFICIENCY"
+  ],
+  "family_results": {
+    "NOVEL_ADAPTATION_REASONING": true,
+    "GUI_COMPUTER_USE": true,
+    "WEB_RESEARCH": true,
+    "SOFTWARE_ENGINEERING": true,
+    "MATH_SCIENCE": true,
+    "PROFESSIONAL_WORK": true,
+    "TOOL_ORCHESTRATION": true,
+    "LONG_HORIZON_MEMORY_CONTEXT": true,
+    "SCOPE_JUDGMENT_ALIGNMENT": true,
+    "SPEED_COST_EFFICIENCY": true
+  },
+  "pass_count": 10,
+  "fail_count": 0,
+  "failed_families": [],
+  "global_family_gate_pass": true,
+  "full_astra_61_of_61_authorized": true
+}
