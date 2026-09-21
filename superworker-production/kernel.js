@@ -35,7 +35,7 @@ export function normalizeNeed(n) {
 export function providerScore(provider, need) {
   if (!provider.enabled) return -Infinity;
   if (!provider.kinds.includes('*') && !provider.kinds.includes(need.kind)) return -Infinity;
-  if (Number(provider.incrementalCost || 0) > 0) return -Infinity;
+  if (Number(provider.incrementalCost || 0) > 0) return -Infinity; // hard $0 law
   const attempted = need.attempts.includes(provider.id);
   if (attempted && !provider.retryable) return -Infinity;
   let score = 1000;
@@ -43,8 +43,9 @@ export function providerScore(provider, need) {
   score -= Number(provider.latencyMs ?? 1000) / 20;
   score += Number(provider.evidenceQuality ?? 0.5) * 250;
   score += Number(provider.independence ?? 0.5) * 100;
+  // Search/reuse before invention for generic goals.
   if (need.kind === 'goal' && ['search','repository','database','documentation','api'].includes(provider.class)) score += 180;
-  if (provider.class === 'model') score -= 40;
+  if (provider.class === 'model') score -= 40; // never privileged just because it is a model
   if (provider.class === 'invention') score -= 300;
   if (attempted) score -= 250;
   return score;
