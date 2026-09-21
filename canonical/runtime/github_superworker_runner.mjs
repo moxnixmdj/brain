@@ -16,6 +16,14 @@ async function main(){
   const mode=process.argv[2];
   const task=read(TASK);
   if(mode==='acquire'){
+    const consumedPath=`canonical/superworker_consumed/${task.task_id}.json`;
+    if(fs.existsSync(consumedPath)){
+      const prior=read(consumedPath);
+      if(process.env.GITHUB_OUTPUT) fs.appendFileSync(process.env.GITHUB_OUTPUT,'should_continue=false\\n');
+      console.log(JSON.stringify({ok:true,mode,status:'DUPLICATE_REJECTED',task_id:task.task_id,prior}));
+      return;
+    }
+    if(process.env.GITHUB_OUTPUT) fs.appendFileSync(process.env.GITHUB_OUTPUT,'should_continue=true\\n');
     const s={
       schema:'PROJECT_BRAIN_SUPERWORKER_STATE_V1',
       agent_id:AGENT,runtime:RUNTIME,mission_id:task.task_id,status:'CHECKPOINTED_FOR_FRESH_RUN_CONTINUATION',
@@ -31,7 +39,15 @@ async function main(){
       checkpointed_at_utc:now()
     };
     write(STATE,s);
-    console.log(JSON.stringify({ok:true,mode,state:STATE,status:s.status}));
+    write(consumedPath,{
+      schema:'PROJECT_BRAIN_SUPERWORKER_DEDUPE_MARKER_V1',
+      task_id:task.task_id,
+      task_sha256:sha(task),
+      agent_id:AGENT,
+      lease_id:s.ownership.lease_id,
+      consumed_at_utc:now()
+    });
+    console.log(JSON.stringify({ok:true,mode,state:STATE,status:s.status,dedupe_marker:consumedPath}));
     return;
   }
   if(mode==='continue'){
