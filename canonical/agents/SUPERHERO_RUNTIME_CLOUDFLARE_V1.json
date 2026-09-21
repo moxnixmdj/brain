@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_SUPERHERO_RUNTIME_CANONICAL_V1",
+  "runtime_id": "SUPERHERO-RUNTIME-1",
+  "created_utc": "2026-09-21T05:59:00Z",
+  "substrate": "Cloudflare Workers Free + Workflows + SQLite Durable Objects + Workers AI + Browser Run",
+  "status": "IMPLEMENTED_AWAITING_CLOUDFLARE_ACCOUNT_CONNECTION",
+  "package": {
+    "name": "PROJECT_BRAIN_SUPERHERO_CLOUDFLARE_RUNTIME_V1.zip",
+    "sha256": "a00ff54bae39779c994211ac10570bd6120d21b9f52fb1c3906eb8480b4650a6",
+    "bytes": 7969,
+    "google_drive_file_id": "1gS4rh3CM9vomgQ9i2GldyVNDtB6Ttevu"
+  },
+  "properties": {
+    "persistent_across_model_calls": true,
+    "durable_mission_state": true,
+    "automatic_generation_rollover": true,
+    "free_tier_fail_closed": true,
+    "provider_replaceable": true,
+    "canonical_truth_external_to_runtime": true,
+    "full_astra_claim": false,
+    "superworker_real_claim": false
+  },
+  "free_bootstrap": {
+    "reasoning_model": "@cf/nvidia/nemotron-3-120b-a12b",
+    "vision_model": "@cf/google/gemma-4-26b-a4b-it",
+    "workers_ai_free_neurons_per_day": 10000,
+    "browser_run_free_minutes_per_day": 10
+  },
+  "deployment_boundary": "No Cloudflare connector/account authorization is available in the current ChatGPT tool surface. User account connection is required before deployment.",
+  "law": "The agent lifetime is not the model-call lifetime. Models are replaceable kernels; Project Brain identity and mission state persist."
+}
