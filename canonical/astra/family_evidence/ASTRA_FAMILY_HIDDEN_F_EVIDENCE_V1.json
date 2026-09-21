@@ -1,0 +1,36 @@
+{
+  "schema": "ASTRA_FAMILY_HIDDEN_F_EVIDENCE_V1",
+  "mission_id": "ASTRA-FAMILY-HIDDEN-F",
+  "candidate_id": "0048dccb0e9c0ac3c39b",
+  "term": "Heat Index",
+  "question": "What does the heat index represent, and which weather quantities does it combine?",
+  "fresh_resume_pid": 173276,
+  "checkpoint_sha256": "2ddd16c963bdc189c7081320e9957cab106f5709baceb53b21e9e50dc0ed20a4",
+  "durable_readback_success": true,
+  "injected_failure_observed": true,
+  "browser_launch_count_after_resume": 0,
+  "browser_revisit_after_resume": false,
+  "repeated_completed_work": false,
+  "source_url": "https://forecast.weather.gov/glossary.php?word=Heat%20Index",
+  "screenshot_sha256": "7607d5f0a4bafca28437c894514f9462fedc055b2488a39dc9c9483ad76bf2fb",
+  "dynamic_capability_discovery": {
+    "selected": "Windows.Media.Ocr",
+    "output": "WINDOWS_MEDIA_OCR_AVAILABLE"
+  },
+  "browser_actions": 1,
+  "action_budget": 8,
+  "concepts": {
+    "apparent_temperature": true,
+    "relative_humidity": true,
+    "air_temperature": true,
+    "feels_like_heat": true
+  },
+  "answer": "Heat index is the apparent temperature, a measure of how hot it really feels when relative humidity is combined with the actual air temperature.",
+  "scope": {
+    "allowed_host": "forecast.weather.gov",
+    "dom_used": false,
+    "accessibility_used": false,
+    "source_used": false
+  },
+  "status": "COMPLETE"
+}
