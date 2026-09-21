@@ -15,6 +15,7 @@ jobs:
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
       - run: python -m pip install --disable-pip-version-check websocket-client
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq tesseract-ocr
       - run: python canonical/runtime/raw_visual_cdp_preflight.py
       - name: Persist preflight evidence
         run: |
