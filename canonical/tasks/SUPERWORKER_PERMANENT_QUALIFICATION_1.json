@@ -1,0 +1,32 @@
+{
+  "schema":"PROJECT_BRAIN_TASK_V1",
+  "task_id":"SUPERWORKER-PERMANENT-QUALIFICATION-1",
+  "assigned_to":"SUPERWORKER-CANDIDATE-1",
+  "state":"READY_AFTER_PERMANENT_DEPLOY",
+  "goal":"Verify from current Cloudflare Workers Builds documentation that the permanent Git integration reuses its deployment authorization across subsequent builds, while deliberately failing the preferred HTTP provider first and preserving source evidence.",
+  "frontier":[
+    {
+      "id":"cf-workers-builds-auth",
+      "kind":"retrieve_url",
+      "query":"https://developers.cloudflare.com/workers/ci-cd/builds/configuration/",
+      "priority":100,
+      "metadata":{
+        "url":"https://developers.cloudflare.com/workers/ci-cd/builds/configuration/",
+        "forcePrimaryFailure":true,
+        "assertContains":[
+          "automatically generate an API token",
+          "continue to use this API token for all subsequent builds"
+        ]
+      }
+    }
+  ],
+  "required_properties":[
+    "PERMANENT_HOST",
+    "DURABLE_OBJECT_ALARM_CONTINUATION",
+    "PROVIDER_FAILOVER",
+    "MODEL_INDEPENDENCE",
+    "DURABLE_EVIDENCE",
+    "TERMINAL_COMPLETION"
+  ],
+  "promotion_claim":false
+}
