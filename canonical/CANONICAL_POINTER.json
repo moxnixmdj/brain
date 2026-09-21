@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_POINTER_V1",
-  "canonical_generation": "2026-09-21-provider-independent-7",
+  "canonical_generation": "2026-09-21-permanent-superworker-deploy-1",
   "control_plane": {
     "provider": "GitHub",
     "repository": "moxnixmdj/brain",
@@ -46,21 +46,14 @@
     "full_astra_claim": false
   },
   "active_runtime": {
-    "runtime_id": "SUPERHERO-RUNTIME-2",
-    "version": "0.2.1",
-    "status_path": "canonical/runtimes/runtime_v2_status.json",
-    "deploy_branch": "superhero-runtime-v2-deploy",
-    "deploy_root": "superhero-runtime-v2",
+    "runtime_id": "SUPERHERO-RUNTIME-2.3-DO-ALARM",
+    "agent_id": "SUPERWORKER-CANDIDATE-1",
+    "source_branch": "superworker-production",
+    "source_root": "superworker-production",
     "kernel": "MODEL_INDEPENDENT",
-    "local_proof": "PASS",
-    "control_auth": "FAIL_CLOSED",
+    "deployment_mode": "PERMANENT_CLOUDFLARE_WORKERS_BUILDS_PRIVATE_GITHUB",
     "hosted": false,
-    "promotion_authorized": false,
-    "sealed_package_sha256": "260dc8c5454646672b6cb456d619685792c005b1f2e856227e75a07ce2a316e1",
-    "remote_persistence_proof": "PASS",
-    "remote_proof_result": "REMOTE_PERSISTENCE_FAILOVER_AUTONOMOUS_CONTINUATION_PASS",
-    "remote_proof_worker": "https://project-brain-superhero-v2-proof-fast4.robust-origami.workers.dev",
-    "hosted_full_runtime": false
+    "promotion_authorized": false
   },
   "retired_runtime": {
     "runtime_id": "PROJECT_BRAIN_SUPERHERO_CLOUDFLARE_RUNTIME_V1",
@@ -72,16 +65,9 @@
       "unproven": 3,
       "total": 51
     },
-    "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
-    "hidden_execute_state": "READY",
     "superworker_real": 0,
-    "next_step": "ESTABLISH_ONE_PERMANENT_AUTHENTICATED_RUNTIME_CHANNEL__DEPLOY_ACTUAL_SUPERWORKER__RUN_CONSEQUENTIAL_MISSION__INDEPENDENTLY_VERIFY__THEN_ASTRA_HIDDEN_EXECUTION",
-    "prohibited_detours": [
-      "TEMPORARY_CLOUDFLARE_CLAIM_LINK_LOOPS",
-      "NEW_HOST_RESEARCH_WITHOUT_FALSIFICATION",
-      "REPEATED_PERSISTENCE_FAILOVER_PROOFS_WITHOUT_INVALIDATING_CHANGE",
-      "WEAK_CODE_RUNNER_OR_BROWSER_SURFACE_RETRIES"
-    ]
+    "next_step": "AUTHORIZE_CLOUDFLARE_GITHUB_ONCE__DEPLOY_PRODUCTION_RUNTIME__RUN_REAL_MISSION",
+    "temporary_cloudflare_accounts_forbidden": true
   },
   "provider_rules": {
     "val_town": "OPTIONAL_RECOVERY_OR_EXECUTOR_ONLY",
