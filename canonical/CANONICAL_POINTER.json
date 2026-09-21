@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_POINTER_V1",
-  "canonical_generation": "2026-09-21-provider-independent-4",
+  "canonical_generation": "2026-09-21-provider-independent-5",
   "control_plane": {
     "provider": "GitHub",
     "repository": "moxnixmdj/brain",
@@ -37,12 +37,16 @@
   },
   "active_runtime": {
     "runtime_id": "SUPERHERO-RUNTIME-2",
+    "version": "0.2.1",
     "status_path": "canonical/runtimes/runtime_v2_status.json",
+    "deploy_branch": "superhero-runtime-v2-deploy",
+    "deploy_root": "superhero-runtime-v2",
     "kernel": "MODEL_INDEPENDENT",
     "local_proof": "PASS",
+    "control_auth": "FAIL_CLOSED",
     "hosted": false,
     "promotion_authorized": false,
-    "package_sha256": "23ce2e44bc7417d05385c2d2bc78159ffd13dc597e3ec8de2a98df58903fc711"
+    "sealed_package_sha256": "260dc8c5454646672b6cb456d619685792c005b1f2e856227e75a07ce2a316e1"
   },
   "retired_runtime": {
     "runtime_id": "PROJECT_BRAIN_SUPERHERO_CLOUDFLARE_RUNTIME_V1",
@@ -57,12 +61,16 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "READY",
     "superworker_real": 0,
-    "next_step": "HOST_V2_THEN_REMOTE_PERSISTENCE_FAILOVER_PROOF"
+    "next_step": "USER_ACCEPT_CLOUDFLARE_TERMS_THEN_TEMPORARY_ACCOUNT_REMOTE_PERSISTENCE_PROOF"
   },
   "provider_rules": {
     "val_town": "OPTIONAL_RECOVERY_OR_EXECUTOR_ONLY",
     "provider_local_truth_authoritative": false,
     "provider_loss_failover_required": true,
     "hard_zero_incremental_spend": true
+  },
+  "runtime_compliance": {
+    "PROJECT_BRAIN_SUPERHERO_CLOUDFLARE_RUNTIME_V1": "RETIRED_DEFECTIVE_MODEL_IN_MANDATORY_LOOP",
+    "SUPERHERO-RUNTIME-2@0.2.1": "ACTIVE_CANDIDATE_MODEL_INDEPENDENT_FAIL_CLOSED"
   }
 }
