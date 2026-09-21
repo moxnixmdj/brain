@@ -1,9 +1,9 @@
 {
   "schema": "PROJECT_BRAIN_AGENT_REGISTRATION_V1",
   "agent_id": "SUPERWORKER-CANDIDATE-1",
-  "runtime": "SUPERHERO-RUNTIME-2.3-DO-ALARM",
+  "runtime": "SUPERHERO-RUNTIME-2.3.1-DO-ALARM",
   "kernel_source_sha256": "4e39f5728afc2c05a6b33d4e78b96da68f89fbca720efb3b859b77dc38d148da",
-  "worker_source_sha256": "7cb9871a4c5fd6ae84e942eecb34e88fa0518d1ef0b9aa2f271a99410775590c",
+  "worker_source_sha256": "b2a16c2e0fcba534aad3aa915c73f1d1998498393a6d7c64f15d63bc04ad2a0b",
   "capabilities": [
     "durable_alarm_continuation",
     "zero_cost_http_retrieval",
@@ -13,10 +13,11 @@
   ],
   "models_required": false,
   "human_authority_approval": false,
-  "status": "CLAIM_REPORTED__POST_CLAIM_READBACK_BLOCKED",
+  "status": "CANDIDATE_UNQUALIFIED_REPAIR_2_3_1",
   "promotion_claim": false,
-  "claim_reported_by_user": true,
-  "post_claim_liveness_evidence": "CLOUDFLARE_EDGE_RESPONDS_WITH_MANAGED_CHALLENGE",
-  "post_claim_state_readback": "BLOCKED_CONTROL_CREDENTIAL_NOT_DURABLY_PRESERVED",
-  "promotion_blocker": "RECOVER_OR_REISSUE_PRIVATE_CONTROL_AUTH_THEN_VERIFY_SAME_MISSION_LEASE_EVIDENCE_AND_TERMINAL_STATE"
+  "claim_reported_by_user": false,
+  "post_claim_liveness_evidence": null,
+  "post_claim_state_readback": "NOT_YET_RUN",
+  "promotion_blocker": "PASS_PRECLAIM_QUALIFICATION_THEN_CLAIM_THEN_SAME_INSTANCE_POSTCLAIM_READBACK",
+  "storage_adapter": "DURABLE_OBJECT_KV_API_ON_SQLITE_BACKEND"
 }
