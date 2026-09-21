@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_CANONICAL_EVENT_V1",
+  "event_type": "SUPERHERO_REMOTE_PERSISTENCE_PROOF_FRESH_PASS",
+  "runtime_id": "SUPERHERO-RUNTIME-2",
+  "worker_url": "https://project-brain-superhero-v2-proof-fast3.cosmic-asphalt.workers.dev",
+  "proof": {
+    "status": "COMPLETE",
+    "generation": 3,
+    "cycle": 3,
+    "result": "REMOTE_PERSISTENCE_FAILOVER_AUTONOMOUS_CONTINUATION_PASS",
+    "model_provider_used": false,
+    "primary_provider_failure": "HTTP_530",
+    "fallback_status": 200,
+    "evidence_bytes": 559,
+    "evidence_sha256": "ff67a9d764d6a2367a187734e697f6a53217db9a21c101d410a113ca871a299d",
+    "post_wake_hash_match": true,
+    "completed_at": "2026-09-21T15:56:37.756Z"
+  },
+  "claim": {
+    "claim_url_stored": false,
+    "expires_at": "2026-09-21T16:56:28.534Z",
+    "intended_user_only": true
+  },
+  "superworker_real_claim": false,
+  "recorded_at": "2026-09-21T15:57:00Z"
+}
