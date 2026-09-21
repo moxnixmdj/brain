@@ -1,0 +1,8 @@
+{
+  "schema": "PROJECT_BRAIN_SUPERWORKER_DEDUPE_MARKER_V1",
+  "task_id": "SUPERWORKER-GITHUB-PRODUCTION-MISSION-1",
+  "task_sha256": "2f2f4e67e38959ac7d21eeea9861a798d579280c1960c89350b06cae32876f6a",
+  "agent_id": "SUPERWORKER-GITHUB-1",
+  "lease_id": "a972005f-27f4-4daa-a080-eeba098038a4",
+  "consumed_at_utc": "2026-09-21T21:10:02.972Z"
+}
