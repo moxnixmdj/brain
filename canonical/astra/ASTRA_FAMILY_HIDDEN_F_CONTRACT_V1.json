@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_FAMILY_HIDDEN_F_CONTRACT_V1",
+  "frozen_before_selection": true,
+  "mission_id": "ASTRA-FAMILY-HIDDEN-F",
+  "exact_candidate_selected_after_freeze": true,
+  "executor_must_not_read_secret_verifier_file": true,
+  "candidate_pool_class": "AUTHORITATIVE_WEATHER_SCIENCE_GLOSSARY",
+  "requirements": {
+    "raw_rendered_browser_only": true,
+    "no_dom_accessibility_source_semantics": true,
+    "dynamic_pixel_ocr_discovery": true,
+    "allowed_host_only": true,
+    "durable_checkpoint_before_injected_process_exit": true,
+    "fresh_process_resume_from_readback_only": true,
+    "no_browser_revisit_after_resume": true,
+    "browser_action_budget": 8,
+    "hard_zero_incremental_spend": true
+  },
+  "family_coverage": [
+    "NOVEL_ADAPTATION_REASONING",
+    "WEB_RESEARCH",
+    "MATH_SCIENCE",
+    "TOOL_ORCHESTRATION",
+    "LONG_HORIZON_MEMORY_CONTEXT",
+    "SCOPE_JUDGMENT_ALIGNMENT",
+    "SPEED_COST_EFFICIENCY"
+  ],
+  "complementary_hidden_evidence": {
+    "GUI_COMPUTER_USE": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1 (MBTA006)",
+    "SOFTWARE_ENGINEERING": "ASTRA-FAMILY-HIDDEN-D",
+    "PROFESSIONAL_WORK": "ASTRA-FAMILY-HIDDEN-E"
+  },
+  "promotion_claim": false,
+  "full_astra_claim": false
+}
