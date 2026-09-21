@@ -1,0 +1,23 @@
+name: Project Brain Astra Visual Operator Canary
+on:
+  push:
+    branches: [main]
+    paths: ['canonical/astra/RUN_VISUAL_OPERATOR_CANARY.trigger']
+permissions: {contents: write}
+jobs:
+  canary:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install --disable-pip-version-check websocket-client
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq tesseract-ocr
+      - run: python canonical/runtime/astra_hidden_visual_executor.py canary
+      - run: |
+          git config user.name 'Project Brain Astra Canary'
+          git config user.email 'project-brain-astra@users.noreply.github.com'
+          git add canonical/astra/VISUAL_OPERATOR_CANARY.json canonical/astra/canary_frames/
+          git commit -m 'Record screenshot-only Astra visual operator canary'
+          git push
