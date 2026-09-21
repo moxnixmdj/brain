@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_POINTER_V1",
-  "canonical_generation": "2026-09-22-astra-61-of-61-verified",
+  "canonical_generation": "2026-09-22-truth-first-no-duplicate-enforcement",
   "control_plane": {
     "provider": "GitHub",
     "repository": "moxnixmdj/brain",
@@ -24,7 +24,8 @@
   "working_authority": "SQLite RECOVERY_BRAIN.sqlite",
   "mandatory_laws": [
     "canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md",
-    "canonical/laws/EXECUTION_LEVERAGE_AND_ANTI_DRIFT_LAW_V1.md"
+    "canonical/laws/EXECUTION_LEVERAGE_AND_ANTI_DRIFT_LAW_V1.md",
+    "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md"
   ],
   "boot_requirements": {
     "read_mandatory_laws_before_execution": true,
@@ -37,9 +38,18 @@
     "credential_handoff_two_phase_commit_required": true,
     "temporary_resources_forbidden_on_production_critical_path": true,
     "stop_research_when_adequate_route_exists": true,
-    "pre_action_gate_path": "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V1.json",
+    "pre_action_gate_path": "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V2.json",
     "anti_drift_law_path": "canonical/laws/EXECUTION_LEVERAGE_AND_ANTI_DRIFT_LAW_V1.md",
-    "abort_on_pre_action_gate_failure": true
+    "abort_on_pre_action_gate_failure": true,
+    "live_canonical_refresh_before_planning": true,
+    "canonical_generation_lock_required": true,
+    "prior_work_search_before_creation_or_rerun": true,
+    "evidence_presence_classification_required": true,
+    "missing_proof_is_not_missing_capability": true,
+    "recovery_ladder_required": true,
+    "summary_and_memory_non_authoritative": true,
+    "abort_on_frontier_contradiction": true,
+    "truth_first_law_path": "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md"
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
@@ -138,7 +148,26 @@
       "whole_definition_superworker_adjudication",
       "repair_only_observed_failed_property",
       "promote_p_real_only_after_independent_evidence"
-    ]
+    ],
+    "truth_first_law": "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
+    "live_canonical_refresh_before_consequential_action": true,
+    "canonical_generation_lock_required": true,
+    "duplicate_execution_forbidden": true,
+    "stale_summary_cannot_define_frontier": true,
+    "missing_evidence_defaults_to_evidence_recovery_not_capability_rerun": true,
+    "recovery_ladder": [
+      "recover_exact_original_artifact",
+      "recover_exact_mirror_or_archive",
+      "reconstruct_proof_from_preserved_primary_evidence",
+      "readjudicate_preserved_evidence_with_independent_verifier",
+      "reprove_only_specific_missing_predicate",
+      "rerun_full_experiment_last_resort"
+    ],
+    "fresh_experiment_requires_evidence_presence_class": [
+      "CAPABILITY_UNPROVEN",
+      "CAPABILITY_FAILED"
+    ],
+    "rerun_requires_documented_invalidation_of_prior_proof": true
   },
   "standby_runtime": {
     "runtime_id": "SUPERHERO-RUNTIME-2.6.0-DIRECT-SIGNED-PERMANENT",
