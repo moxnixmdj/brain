@@ -1,0 +1,28 @@
+{
+  "schema": "ASTRA_FAMILY_HIDDEN_D_EVIDENCE_V1",
+  "mission_id": "ASTRA-FAMILY-HIDDEN-D",
+  "family": "SOFTWARE_ENGINEERING",
+  "generated_after_freeze": true,
+  "candidate_id": "903998a13c261114",
+  "candidate_index": 1,
+  "initial_calc_sha256": "0ea860bdfc37d1c6c216f2db16adb43c30fd83194d1efc8e0953a8aea3c4e512",
+  "frozen_tests_sha256": "04f3175cac5b34fc04affd44417c888b321d4e5b4d20a31a7266817d4b241a65",
+  "initial_test_result": {
+    "passed": 1,
+    "failed": 2,
+    "failures": [
+      "test_short",
+      "test_tail"
+    ]
+  },
+  "diagnosis": "range stopped before the partial final chunk, dropping short/tail chunks",
+  "production_code_only_repaired": true,
+  "tests_modified": false,
+  "repaired_calc_sha256": "ace1e5f86eb0891d554e85a0a9ba36c64adcdbd4237fbaff7e0267d3fdf6ea05",
+  "final_test_result": {
+    "passed": 3,
+    "failed": 0,
+    "status": "OK"
+  },
+  "status": "COMPLETE"
+}
