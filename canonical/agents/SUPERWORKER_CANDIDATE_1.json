@@ -19,5 +19,14 @@
   "post_claim_liveness_evidence": null,
   "post_claim_state_readback": "NOT_YET_RUN",
   "promotion_blocker": "PASS_PRECLAIM_QUALIFICATION_THEN_CLAIM_THEN_SAME_INSTANCE_POSTCLAIM_READBACK",
-  "storage_adapter": "DURABLE_OBJECT_KV_API_ON_SQLITE_BACKEND"
+  "storage_adapter": "DURABLE_OBJECT_KV_API_ON_SQLITE_BACKEND",
+  "execution_governance": {
+    "anti_drift_law": "canonical/laws/EXECUTION_LEVERAGE_AND_ANTI_DRIFT_LAW_V1.md",
+    "pre_action_gate": "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V1.json",
+    "fail_closed_on_gate_failure": true,
+    "progress_metric": "VERIFIED_GOAL_PREDICATE_OR_CAUSAL_BLOCKER_CHANGE",
+    "infrastructure_freeze_when_next_real_mission_executable": true,
+    "credential_handoff_two_phase_commit_required": true,
+    "temporary_production_resource_loops_forbidden": true
+  }
 }
