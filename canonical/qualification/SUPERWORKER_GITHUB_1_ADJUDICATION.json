@@ -2,8 +2,8 @@
   "schema": "PROJECT_BRAIN_DISTINCT_VERIFICATION_V1",
   "verifier_id": "DETERMINISTIC-VERIFIER-GITHUB-1",
   "worker_agent_id": "SUPERWORKER-GITHUB-1",
-  "mission_id": "SUPERWORKER-GITHUB-HOST-DECISION-1",
-  "criteria_version": "github-host-v1-precommitted-2026-09-21",
+  "mission_id": "SUPERWORKER-GITHUB-PRODUCTION-MISSION-1",
+  "criteria_version": "github-host-v2-dedupe-bound-2026-09-21",
   "checks": {
     "persistent_identity": true,
     "canonical_durable_state": true,
@@ -13,11 +13,12 @@
     "hard_zero_incremental_cost": true,
     "durable_evidence": true,
     "terminal_completion": true,
-    "exact_assertions": true
+    "exact_assertions": true,
+    "dedupe_marker": true
   },
   "all_required_checks_pass": true,
   "promotion_claim": false,
   "p_superworker_real_after_adjudication": 0,
   "reason": "QUALIFICATION_PROPERTIES_PASS__PROMOTION_REQUIRES_CANONICAL_ADJUDICATION",
-  "verified_at_utc": "2026-09-21T21:06:38.593Z"
+  "verified_at_utc": "2026-09-21T21:13:22.840Z"
 }
