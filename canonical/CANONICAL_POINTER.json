@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_POINTER_V1",
-  "canonical_generation": "2026-09-21-superworker-github-1-promotion-revoked",
+  "canonical_generation": "2026-09-22-astra-nonglobal-51-of-51",
   "control_plane": {
     "provider": "GitHub",
     "repository": "moxnixmdj/brain",
@@ -82,18 +82,22 @@
   },
   "current_frontier": {
     "astra_non_global": {
-      "proven": 48,
-      "unproven": 3,
+      "proven": 51,
+      "unproven": 0,
       "total": 51
     },
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
-    "hidden_execute_state": "READY",
+    "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 0,
-    "next_step": "DO_NOT_BUILD_MORE_GENERIC_INFRASTRUCTURE__ACQUIRE_OR_REUSE_EXACT_ADMISSIBLE_SCREENSHOT_PLUS_COORDINATE_KEY_INPUT_SUBSTRATE__THEN_RUN_FROZEN_MBTA_ONE_SHOT",
+    "next_step": "EXECUTE_MINIMUM_INTEGRATED_CONSEQUENTIAL_MISSION_SET_TO_INDEPENDENTLY_ADJUDICATE_THE_10_GLOBAL_ASTRA_PREDICATES__NO_MORE_GENERIC_INFRASTRUCTURE",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "NO_VERIFIED_ADMISSIBLE_RAW_VISUAL_GUI_IO_SUBSTRATE_FOR_FROZEN_ASTRA_HIDDEN_MBTA_ONE_SHOT"
+    "critical_blocker": "TEN_GLOBAL_ASTRA_QUALIFICATION_PREDICATES_UNPROVEN",
+    "hidden_adjudication_state": "COMPLETE",
+    "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
+    "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
+    "hidden_verifier_receipt_sha256": "732faa8c5b231c2c3acfcbc1e50dee915b8c07604048dd8005d111d3ec6dcf72"
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
@@ -117,9 +121,10 @@
     "infrastructure_freeze_when_next_real_mission_executable": true,
     "forbid_relabeling_bounded_executor_as_superworker": true,
     "only_current_allowed_frontier_actions": [
-      "reuse_existing_admissible_visual_substrate",
-      "connect_one_admissible_zero_cost_visual_substrate",
-      "run_frozen_astra_hidden_one_shot",
+      "identify_exact_10_global_astra_predicates_from_canonical_evidence",
+      "design_minimum_integrated_consequential_mission_set_covering_them",
+      "execute_missions_on_already_available_substrates",
+      "independently_verify_each_global_predicate",
       "repair_only_observed_failed_property"
     ]
   },
