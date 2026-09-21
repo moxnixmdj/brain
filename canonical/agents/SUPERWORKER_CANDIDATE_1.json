@@ -1,0 +1,12 @@
+{
+  "schema":"PROJECT_BRAIN_AGENT_REGISTRATION_V1",
+  "agent_id":"SUPERWORKER-CANDIDATE-1",
+  "runtime":"SUPERHERO-RUNTIME-2.3-DO-ALARM",
+  "kernel_source_sha256":"4e39f5728afc2c05a6b33d4e78b96da68f89fbca720efb3b859b77dc38d148da",
+  "worker_source_sha256":"7cb9871a4c5fd6ae84e942eecb34e88fa0518d1ef0b9aa2f271a99410775590c",
+  "capabilities":["durable_alarm_continuation","zero_cost_http_retrieval","provider_failover","deterministic_text_assertion","durable_sqlite_state"],
+  "models_required":false,
+  "human_authority_approval":false,
+  "status":"CANDIDATE_UNQUALIFIED",
+  "promotion_claim":false
+}
