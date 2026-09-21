@@ -1,26 +1,26 @@
 {
   "schema": "PROJECT_BRAIN_SUPERWORKER_EVIDENCE_V1",
-  "mission_id": "SUPERWORKER-GITHUB-QUALIFICATION-1",
+  "mission_id": "SUPERWORKER-GITHUB-HOST-DECISION-1",
   "agent_id": "SUPERWORKER-GITHUB-1",
   "runtime": "SUPERHERO-RUNTIME-2.7-GITHUB-ACTIONS-PERSISTENT",
-  "source_url": "https://developers.cloudflare.com/workers/ci-cd/builds/configuration/",
+  "source_url": "https://raw.githubusercontent.com/github/docs/add0a52d76879dff93304a5aa96895f9d68d5dac/data/reusables/actions/workflows/section-triggering-a-workflow.md",
   "http_status": 200,
   "provider": "http-fallback",
   "provider_failover_observed": true,
   "models_used": false,
   "incremental_cost_usd": 0,
-  "source_body_sha256": "f94bff7a2e6f98e5f56e799a5953b2cc622b496a7c8183bd4c3979063c66df6d",
-  "source_bytes": 202966,
+  "source_body_sha256": "c38997788ada22de41a09d43a019cc9d1d218a084bd30b53e269260d6b72b03a",
+  "source_bytes": 531,
   "assertions": [
     {
-      "pattern": "automatically generate an API token",
+      "pattern": "To automatically trigger a workflow, use `on` to define which events can cause the workflow to run.",
       "matched": true
     },
     {
-      "pattern": "continue to use this API token for all subsequent builds",
+      "pattern": "You can define single or multiple events that can trigger a workflow, or set a time schedule.",
       "matched": true
     }
   ],
   "verified": true,
-  "fetched_at_utc": "2026-09-21T21:02:43.113Z"
+  "fetched_at_utc": "2026-09-21T21:06:25.879Z"
 }
