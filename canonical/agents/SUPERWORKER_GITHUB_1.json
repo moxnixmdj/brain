@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_AGENT_IDENTITY_V1",
+  "agent_id": "SUPERWORKER-GITHUB-1",
+  "class": "SUPERWORKER",
+  "status": "PROMOTED_REAL",
+  "runtime": "SUPERHERO-RUNTIME-2.7-GITHUB-ACTIONS-PERSISTENT",
+  "substrate": "GITHUB_ACTIONS",
+  "canonical_repository": "moxnixmdj/brain",
+  "workflow": ".github/workflows/superworker-github-qualification.yml",
+  "capabilities": [
+    "retrieve_url",
+    "assert_text",
+    "canonical_commit_state",
+    "persistent_fresh_runner_continuation",
+    "provider_failover",
+    "task_deduplication"
+  ],
+  "limitations": [
+    "NO_PROVEN_GUI_PROVIDER",
+    "NO_FULL_ASTRA_CLAIM",
+    "NO_HUMAN_AUTHORITY_APPROVAL"
+  ],
+  "promotion_adjudication": "canonical/qualification/SUPERWORKER_GITHUB_1_WHOLE_DEFINITION_ADJUDICATION.json"
+}
