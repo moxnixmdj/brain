@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_POINTER_V1",
-  "canonical_generation": "2026-09-21-provider-independent-1",
+  "canonical_generation": "2026-09-21-provider-independent-2",
   "control_plane": {
     "provider": "GitHub",
     "repository": "moxnixmdj/brain",
@@ -16,6 +16,15 @@
   },
   "canonical_state_sha256": "5da4d719127b0ddbb6c4d878c3a27eaa75a7e25fec7aae55600e2567549d1762",
   "working_authority": "SQLite RECOVERY_BRAIN.sqlite",
+  "active_agent": {
+    "agent_id": "ASTRA-OPERATIONAL-1",
+    "identity_path": "canonical/agents/ASTRA_OPERATIONAL_IDENTITY_V1.json",
+    "identity_sha256": "8d04f5f5c166a054d12b4b19368105658f19000d05ce329f8d45164ae3f5e158",
+    "dialogue_protocol_path": "canonical/agents/ASTRA_DIALOGUE_PROTOCOL_V1.md",
+    "operational": true,
+    "full_astra_claim": false,
+    "activation_event": "canonical/events/2026-09-21_ASTRA_OPERATIONAL_ACTIVATION.json"
+  },
   "current_frontier": {
     "astra_non_global": {
       "proven": 48,
