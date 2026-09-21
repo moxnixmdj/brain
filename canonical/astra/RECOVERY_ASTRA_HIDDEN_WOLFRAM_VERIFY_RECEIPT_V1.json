@@ -1,0 +1,25 @@
+{
+  "schema": "RECOVERY_ASTRA_HIDDEN_WOLFRAM_VERIFY_RECEIPT_V1",
+  "verifier_id": "WOLFRAM-REMOTE-KERNEL-20260922-HIDDEN-MBTA006-V1",
+  "trust_executor_success_label": false,
+  "inputs": {
+    "terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
+    "bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
+    "binding_sha256": "73af825a0c3a8ce9a46c40e23ec4522ffb00d8eea6c6a8b0b035064ac9df7d63",
+    "actions_total": 15,
+    "action_budget": 40
+  },
+  "derived": {
+    "semantic_weekend_schedule_found": true,
+    "semantic_weekend_pdf_located": true,
+    "budget_fraction": 0.375
+  },
+  "predicate_results": {
+    "ASTRA_COMPUTER_GUI_USE__HIDDEN_UI_GENERALIZATION": true,
+    "ASTRA_NOVEL_ADAPTATION_REASONING__FRESH_HIDDEN_NOVEL_ENVIRONMENTS": true,
+    "ASTRA_NOVEL_ADAPTATION_REASONING__ACTION_EFFICIENCY_MEASUREMENT": true
+  },
+  "all_three_pass": true,
+  "promotion_authorized": false,
+  "verified_by_distinct_external_kernel": true
+}
