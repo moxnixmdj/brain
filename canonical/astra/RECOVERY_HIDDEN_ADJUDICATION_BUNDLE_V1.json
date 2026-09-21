@@ -1,0 +1,568 @@
+[Reading 564 lines from start (total: 564 lines, 0 remaining)]
+
+{
+  "adjudication_contract": {
+    "evaluate_predicates": [
+      "ASTRA_COMPUTER_GUI_USE__HIDDEN_UI_GENERALIZATION",
+      "ASTRA_NOVEL_ADAPTATION_REASONING__FRESH_HIDDEN_NOVEL_ENVIRONMENTS",
+      "ASTRA_NOVEL_ADAPTATION_REASONING__ACTION_EFFICIENCY_MEASUREMENT"
+    ],
+    "no_self_promotion": true,
+    "verifier_must_differ_from_builder_executor": true
+  },
+  "attempt_id": "e17700516d96fd17fd7b9cdea939488a",
+  "binding_sha256": "73af825a0c3a8ce9a46c40e23ec4522ffb00d8eea6c6a8b0b035064ac9df7d63",
+  "bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
+  "evidence": [
+    {
+      "accepted_at": "2026-09-21 23:05:36",
+      "content_sha256": "8b9818c28714bbeedb3e05ed935b6bb6ea780dc7b00f8ceb017e07b2dd28496c",
+      "logical_name": "0000-runner_open",
+      "ordinal": 0,
+      "value": {
+        "action_budget": 40,
+        "manifest_sha256": "8b42a7d3fc0cfc1f56c7eb5c0f2f3bf1def257d80205ab77751e68fa4a093cc6",
+        "ts": "2026-09-21T23:05:36.372888Z",
+        "visual_only": true
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:05:52",
+      "content_sha256": "ce446e0ba6f3cc31e605e5e36743c78ad0d51dc0ec94745965cfd64a9351f312",
+      "logical_name": "0001-action",
+      "ordinal": 1,
+      "value": {
+        "action_index": 0,
+        "duration_ms": 809.005,
+        "kind": "navigate",
+        "payload": {
+          "url": "https://www.mbta.com"
+        },
+        "ts": "2026-09-21T23:05:52.143004Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:05:56",
+      "content_sha256": "3be9d02fad1ecc07a1e150ac65fd54db9142f4b64daa3ab1aba0c9817eb9a118",
+      "logical_name": "0002-frame",
+      "ordinal": 2,
+      "value": {
+        "bytes": 879040,
+        "dom_used": false,
+        "frame_index": 2,
+        "path": "frame000.png",
+        "sha256": "78aadfebb17d2b032266f40b01327d985698f4ca81aec0ca4bc72f3784803ddb",
+        "source": "Page.captureScreenshot",
+        "ts": "2026-09-21T23:05:56.655744Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:06:09",
+      "content_sha256": "d5a3cc051f023eb40cee83acc3d8f9f580853d2c65346bda4b19ac87ec8bcb84",
+      "logical_name": "0003-frame",
+      "ordinal": 3,
+      "value": {
+        "bytes": 879040,
+        "dom_used": false,
+        "frame_index": 3,
+        "path": "frame000.png",
+        "sha256": "78aadfebb17d2b032266f40b01327d985698f4ca81aec0ca4bc72f3784803ddb",
+        "source": "Page.captureScreenshot",
+        "ts": "2026-09-21T23:06:08.888081Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:07:20",
+      "content_sha256": "d54cfed063617332f17cd8fa3786629590de9327ce9d9ab58d845f467b85f3db",
+      "logical_name": "0004-action",
+      "ordinal": 4,
+      "value": {
+        "action_index": 1,
+        "duration_ms": 110.402,
+        "kind": "click",
+        "payload": {
+          "x": 330,
+          "y": 75
+        },
+        "ts": "2026-09-21T23:07:20.526352Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:07:23",
+      "content_sha256": "1cdd8484c8d22073f96bc760fa7da5d0381de9c4aecff9be3bec88353be798eb",
+      "logical_name": "0005-frame",
+      "ordinal": 5,
+      "value": {
+        "bytes": 878445,
+        "dom_used": false,
+        "frame_index": 5,
+        "path": "frame001.png",
+        "sha256": "a14fcddeedd8bb207db84821f3a95703aa0333a95c796cc9d73aa803f4194762",
+        "source": "Page.captureScreenshot",
+        "ts": "2026-09-21T23:07:23.135661Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:10:35",
+      "content_sha256": "d86a636fff3fae2494c0a9b26ca6a60b9ff4fac7fa03cc40c1dade7ab48d8379",
+      "logical_name": "0006-action",
+      "ordinal": 6,
+      "value": {
+        "action_index": 2,
+        "duration_ms": 86.837,
+        "kind": "click",
+        "payload": {
+          "x": 325,
+          "y": 420
+        },
+        "ts": "2026-09-21T23:10:35.738401Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:10:38",
+      "content_sha256": "9578ffecc9cf8ff0f382a0ff188282bbd09e7ffff39e87b829ff37f241b97d9f",
+      "logical_name": "0007-frame",
+      "ordinal": 7,
+      "value": {
+        "bytes": 879789,
+        "dom_used": false,
+        "frame_index": 7,
+        "path": "frame002.png",
+        "sha256": "4200d2fb0cf99e16e5c48e8ab690b3ae66f1b8c7a5d90f45a329fd25857dc12d",
+        "source": "Page.captureScreenshot",
+        "ts": "2026-09-21T23:10:38.217344Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:10:56",
+      "content_sha256": "56239e45a6b284390d57b8667fe6861432a0f956b1777cbaadc69b594dffb0ec",
+      "logical_name": "0008-action",
+      "ordinal": 8,
+      "value": {
+        "action_index": 3,
+        "duration_ms": 34.729,
+        "kind": "scroll",
+        "payload": {
+          "dx": 0,
+          "dy": 560,
+          "x": 600,
+          "y": 700
+        },
+        "ts": "2026-09-21T23:10:56.406098Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:10:57",
+      "content_sha256": "aacdebf7eaa2e1c39f1857ef39f51694c739ef4c9e7d007a8e60ff3d9443ee94",
+      "logical_name": "0009-frame",
+      "ordinal": 9,
+      "value": {
+        "bytes": 78880,
+        "dom_used": false,
+        "frame_index": 9,
+        "path": "frame003.png",
+        "sha256": "18bdc4ee2f4057a7a7420077ecddb62e7687cbdebbdc776dc9afe08b311a74d3",
+        "source": "Page.captureScreenshot",
+        "ts": "2026-09-21T23:10:57.546158Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:11:17",
+      "content_sha256": "1130b2b56616a1a7eb8e8c8b49e6fa56a44eaad997ebe4b6c5fdeb38bdc7a730",
+      "logical_name": "0010-action",
+      "ordinal": 10,
+      "value": {
+        "action_index": 4,
+        "duration_ms": 41.413,
+        "kind": "click",
+        "payload": {
+          "x": 280,
+          "y": 305
+        },
+        "ts": "2026-09-21T23:11:17.065805Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:11:19",
+      "content_sha256": "1ce6870881cf89be3bb3b2393a16ff33eff3d3a75c18543de518d3b647166dc6",
+      "logical_name": "0011-frame",
+      "ordinal": 11,
+      "value": {
+        "bytes": 108148,
+        "dom_used": false,
+        "frame_index": 11,
+        "path": "frame004.png",
+        "sha256": "b25f2e0caf22f3f279be925b9606ea5a7b42c619e0aa415117333f3fb0f2bbea",
+        "source": "Page.captureScreenshot",
+        "ts": "2026-09-21T23:11:19.210159Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:11:34",
+      "content_sha256": "3a1411afedb2f42a69f16367f7eac3cecddac8607d2fe7fc036e3ef1e7b4ba61",
+      "logical_name": "0012-action",
+      "ordinal": 12,
+      "value": {
+        "action_index": 5,
+        "duration_ms": 46.754,
+        "kind": "click",
+        "payload": {
+          "x": 225,
+          "y": 415
+        },
+        "ts": "2026-09-21T23:11:34.775492Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:11:36",
+      "content_sha256": "d0b701d6397bb6cf3180025ee4ecc8fa5546674c7eb26bc347599f5c58a2e10f",
+      "logical_name": "0013-frame",
+      "ordinal": 13,
+      "value": {
+        "bytes": 97558,
+        "dom_used": false,
+        "frame_index": 13,
+        "path": "frame005.png",
+        "sha256": "fb17d751ea2cf9fcfbd10ef4d9a9a7c15bf3bbd571ffa519a28516ca692ec334",
+        "source": "Page.captureScreenshot",
+        "ts": "2026-09-21T23:11:36.932871Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:11:59",
+      "content_sha256": "607a5c9910d6f2b71e46a8ee8ac600c67237182d4fa477b68948c495f9d1086c",
+      "logical_name": "0014-action",
+      "ordinal": 14,
+      "value": {
+        "action_index": 6,
+        "duration_ms": 79.739,
+        "kind": "click",
+        "payload": {
+          "x": 195,
+          "y": 388
+        },
+        "ts": "2026-09-21T23:11:59.921578Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:12:01",
+      "content_sha256": "93b12bdfe10e5f3538d8fb8cf7150bf92d68e329e05514c84f652ebf1f598300",
+      "logical_name": "0015-frame",
+      "ordinal": 15,
+      "value": {
+        "bytes": 71675,
+        "dom_used": false,
+        "frame_index": 15,
+        "path": "frame006.png",
+        "sha256": "7353fa60603aa49c4630efdb026f8164672d6aeba7666c3f4b926c31a96836be",
+        "source": "Page.captureScreenshot",
+        "ts": "2026-09-21T23:12:01.050080Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:12:18",
+      "content_sha256": "927b00b9727e5009aad4c5e65e31f39713173fb5b5b6b49295d3bfb8d3534419",
+      "logical_name": "0016-action",
+      "ordinal": 16,
+      "value": {
+        "action_index": 7,
+        "duration_ms": 42.037,
+        "kind": "click",
+        "payload": {
+          "x": 1052,
+          "y": 685
+        },
+        "ts": "2026-09-21T23:12:18.048052Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:12:20",
+      "content_sha256": "98720a87402ee61b858305d6beff5cb1fe9d0f380a02fa28b8f5fbe6f4f308fe",
+      "logical_name": "0017-frame",
+      "ordinal": 17,
+      "value": {
+        "bytes": 99803,
+        "dom_used": false,
+        "frame_index": 17,
+        "path": "frame007.png",
+        "sha256": "62e3cb39fb585ba781e5d30bcfb3a5f5a337a70035d8368b1892e86701b006a4",
+        "source": "Page.captureScreenshot",
+        "ts": "2026-09-21T23:12:20.186351Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:12:37",
+      "content_sha256": "1a77de0f30a368e0e1a006424345d791f7f8eb2bedb504812ee2a64dfdb9e939",
+      "logical_name": "0018-action",
+      "ordinal": 18,
+      "value": {
+        "action_index": 8,
+        "duration_ms": 23.841,
+        "kind": "scroll",
+        "payload": {
+          "dx": 0,
+          "dy": 620,
+          "x": 600,
+          "y": 700
+        },
+        "ts": "2026-09-21T23:12:37.701417Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:12:38",
+      "content_sha256": "5951352e1ee21115dba202afbf2f283027e97d1597be33451764b1c3b5cb4003",
+      "logical_name": "0019-frame",
+      "ordinal": 19,
+      "value": {
+        "bytes": 109297,
+        "dom_used": false,
+        "frame_index": 19,
+        "path": "frame008.png",
+        "sha256": "291143341410ca4c8b30a48fbe4e4613bb14d02aeb78b275a83f47421bd7ab99",
+        "source": "Page.captureScreenshot",
+        "ts": "2026-09-21T23:12:38.837934Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:13:08",
+      "content_sha256": "286b2238e6ffd072ba5fee589f3327fb154df3ec7be92f9d548a112f7272d47a",
+      "logical_name": "0020-action",
+      "ordinal": 20,
+      "value": {
+        "action_index": 9,
+        "duration_ms": 20.887,
+        "kind": "scroll",
+        "payload": {
+          "dx": 0,
+          "dy": -430,
+          "x": 600,
+          "y": 300
+        },
+        "ts": "2026-09-21T23:13:08.700422Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:13:09",
+      "content_sha256": "e70aae06bb0c66fdb89c335fd6c865357ab70cd5e3aa66fb7e87e185f9098c94",
+      "logical_name": "0021-frame",
+      "ordinal": 21,
+      "value": {
+        "bytes": 112370,
+        "dom_used": false,
+        "frame_index": 21,
+        "path": "frame009.png",
+        "sha256": "b56fb3866263bcde39db5c4ba673457caadee64da48e89b399602dd6438bca85",
+        "source": "Page.captureScreenshot",
+        "ts": "2026-09-21T23:13:09.852768Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:13:34",
+      "content_sha256": "90fe8781119aa579ccf31c5620ec343478f2c5ec8c0c43ffbc60a9ab589d473e",
+      "logical_name": "0022-action",
+      "ordinal": 22,
+      "value": {
+        "action_index": 10,
+        "duration_ms": 27.194,
+        "kind": "scroll",
+        "payload": {
+          "dx": 0,
+          "dy": -430,
+          "x": 600,
+          "y": 250
+        },
+        "ts": "2026-09-21T23:13:34.450142Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:13:35",
+      "content_sha256": "c8f16eff30bf830184c4888fedd8d77b7ef82279ddfbd88c59a732969a3e7f3c",
+      "logical_name": "0023-frame",
+      "ordinal": 23,
+      "value": {
+        "bytes": 100636,
+        "dom_used": false,
+        "frame_index": 23,
+        "path": "frame010.png",
+        "sha256": "a0f9bfda666cc82decc82f94799b4d6083e7e6fd464f8bf353788635c28ab0d5",
+        "source": "Page.captureScreenshot",
+        "ts": "2026-09-21T23:13:35.604788Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:13:54",
+      "content_sha256": "a4b875b0b03a9b3914e3b402c7b58c3ffae2173a513a0f1149a2f1063e3e6c0b",
+      "logical_name": "0024-action",
+      "ordinal": 24,
+      "value": {
+        "action_index": 11,
+        "duration_ms": 44.295,
+        "kind": "click",
+        "payload": {
+          "x": 460,
+          "y": 270
+        },
+        "ts": "2026-09-21T23:13:54.428562Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:13:55",
+      "content_sha256": "f2016c5d6ae6cf8bd703c9ff96644e3fbc898acc0acd99ec7ebe26b1cd003dde",
+      "logical_name": "0025-frame",
+      "ordinal": 25,
+      "value": {
+        "bytes": 92299,
+        "dom_used": false,
+        "frame_index": 25,
+        "path": "frame011.png",
+        "sha256": "7d943c0685c45e46530c38970076c248f7f8f8fb88874016d2f2fe6b4265bb2c",
+        "source": "Page.captureScreenshot",
+        "ts": "2026-09-21T23:13:55.618315Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:14:20",
+      "content_sha256": "81b05ec51e0d5371fa86d2153a405a928587e620f09203a8e4f636ad677ac527",
+      "logical_name": "0026-frame",
+      "ordinal": 26,
+      "value": {
+        "bytes": 198963,
+        "dom_used": false,
+        "frame_index": 26,
+        "path": "frame012.png",
+        "sha256": "92b05bfb4f90262de130704ba5593fa7ea5eacb252e765c5a9d232e9d0daa14b",
+        "source": "Page.captureScreenshot",
+        "ts": "2026-09-21T23:14:20.799217Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:14:41",
+      "content_sha256": "b20ce82c141a2dce2ed568d52e6752b6b2732c498180fdaae80fbbcecca98050",
+      "logical_name": "0027-action",
+      "ordinal": 27,
+      "value": {
+        "action_index": 12,
+        "duration_ms": 24.558,
+        "kind": "scroll",
+        "payload": {
+          "dx": 0,
+          "dy": 420,
+          "x": 600,
+          "y": 700
+        },
+        "ts": "2026-09-21T23:14:41.513899Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:14:42",
+      "content_sha256": "6035b5ca30ad87c73159b6895d2487d439082690a67e39470637a2b79d6af278",
+      "logical_name": "0028-frame",
+      "ordinal": 28,
+      "value": {
+        "bytes": 413209,
+        "dom_used": false,
+        "frame_index": 28,
+        "path": "frame013.png",
+        "sha256": "66bb6978c78715f3747effa4cf6eec4ced1fd1a7199f52c0889ed2e034b0d1d3",
+        "source": "Page.captureScreenshot",
+        "ts": "2026-09-21T23:14:42.828451Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:14:59",
+      "content_sha256": "dea806e162bdbdc9f4583608077274baff087fa09c7be3848ef59325d03bd808",
+      "logical_name": "0029-action",
+      "ordinal": 29,
+      "value": {
+        "action_index": 13,
+        "duration_ms": 23.277,
+        "kind": "scroll",
+        "payload": {
+          "dx": 0,
+          "dy": 220,
+          "x": 900,
+          "y": 720
+        },
+        "ts": "2026-09-21T23:14:59.446259Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:15:00",
+      "content_sha256": "9c96d4846d622427b12982a13f4e1a26bdf248f459b936ae9bde199e9fb62210",
+      "logical_name": "0030-frame",
+      "ordinal": 30,
+      "value": {
+        "bytes": 399161,
+        "dom_used": false,
+        "frame_index": 30,
+        "path": "frame014.png",
+        "sha256": "5ba84b11871eb776f05a433292ddd9f5f5decc781159047d9839b2c99a44af9a",
+        "source": "Page.captureScreenshot",
+        "ts": "2026-09-21T23:15:00.739762Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:15:22",
+      "content_sha256": "b7173002230e3e1cc8242e710bdf648dafeed929fdbf8e01ffb818818048a15c",
+      "logical_name": "0031-action",
+      "ordinal": 31,
+      "value": {
+        "action_index": 14,
+        "duration_ms": 95.031,
+        "kind": "click",
+        "payload": {
+          "x": 900,
+          "y": 640
+        },
+        "ts": "2026-09-21T23:15:22.510845Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:15:27",
+      "content_sha256": "2feb5270e00e01fc71a834b69f93bf8332057df8c6e3d8a10d8173362f326f11",
+      "logical_name": "0032-frame",
+      "ordinal": 32,
+      "value": {
+        "bytes": 399371,
+        "dom_used": false,
+        "frame_index": 32,
+        "path": "frame015.png",
+        "sha256": "612f6d5f4a7c27e127bc96f51c66b328402ba652c69e42a332dc8779ec5522ff",
+        "source": "Page.captureScreenshot",
+        "ts": "2026-09-21T23:15:27.267325Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:15:57",
+      "content_sha256": "56005f236115cd4afef0bee707791583e7e8206afa9d0f94cd3334becd328528",
+      "logical_name": "0033-efficiency",
+      "ordinal": 33,
+      "value": {
+        "action_budget": 40,
+        "actions_total": 15,
+        "budget_fraction": 0.375,
+        "summary": "SUCCESS: Rendered-only trajectory selected Saturday, September 26, 2026 on the Charlestown Ferry timetable, confirmed weekend boat times, navigated to Schedule & Maps, and visually located the exact Charlestown Ferry Weekend Schedule PDF link. Terminal evidence includes frame007 for the weekend timetable and frame014/frame015 for the PDF link.",
+        "ts": "2026-09-21T23:15:57.774970Z"
+      }
+    },
+    {
+      "accepted_at": "2026-09-21 23:15:57",
+      "content_sha256": "bbcc81599c062cdf36701a0f94e60ada5afb1fb32ee004834dcf4b403176f435",
+      "logical_name": "0034-result",
+      "ordinal": 34,
+      "value": {
+        "predicate_credit": [],
+        "promotion_authorized": false,
+        "success": true,
+        "summary": "SUCCESS: Rendered-only trajectory selected Saturday, September 26, 2026 on the Charlestown Ferry timetable, confirmed weekend boat times, navigated to Schedule & Maps, and visually located the exact Charlestown Ferry Weekend Schedule PDF link. Terminal evidence includes frame007 for the weekend timetable and frame014/frame015 for the PDF link.",
+        "ts": "2026-09-21T23:15:57.787980Z"
+      }
+    }
+  ],
+  "namespace": "recovery-astra-webone-mbta006-20260921-v1",
+  "schema": "RECOVERY_HIDDEN_ADJUDICATION_BUNDLE_V1",
+  "terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
+  "terminal_state": "TERMINAL_SUCCESS"
+}
+
+[executed on device: Mo (5919022d-ce41-4ed8-9fe2-c7496920724b)]
