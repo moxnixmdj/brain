@@ -1,0 +1,69 @@
+name: Project Brain Persistent Superworker Qualification
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'canonical/tasks/SUPERWORKER_GITHUB_QUALIFICATION_1.json'
+  schedule:
+    - cron: '17 * * * *'
+permissions:
+  contents: write
+concurrency:
+  group: project-brain-superworker-github-1
+  cancel-in-progress: false
+
+jobs:
+  acquire-and-checkpoint:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: node canonical/runtime/github_superworker_runner.mjs acquire
+      - name: Persist checkpoint to canonical Brain
+        run: |
+          git config user.name 'Project Brain Superworker'
+          git config user.email 'project-brain-superworker@users.noreply.github.com'
+          git add canonical/superworker_state/
+          git commit -m 'Superworker GitHub 1 checkpoint qualification mission'
+          git push
+
+  continue-on-fresh-runner:
+    needs: acquire-and-checkpoint
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - run: git pull --ff-only
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: node canonical/runtime/github_superworker_runner.mjs continue
+      - name: Persist terminal evidence
+        run: |
+          git config user.name 'Project Brain Superworker'
+          git config user.email 'project-brain-superworker@users.noreply.github.com'
+          git add canonical/superworker_state/ canonical/superworker_evidence/
+          git commit -m 'Superworker GitHub 1 complete qualification mission'
+          git push
+
+  distinct-verifier:
+    needs: continue-on-fresh-runner
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - run: git pull --ff-only
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: node canonical/runtime/github_superworker_verifier.mjs
+      - name: Persist independent adjudication
+        run: |
+          git config user.name 'Project Brain Deterministic Verifier'
+          git config user.email 'project-brain-verifier@users.noreply.github.com'
+          git add canonical/qualification/SUPERWORKER_GITHUB_1_ADJUDICATION.json
+          git commit -m 'Record distinct verification for Superworker GitHub 1'
+          git push
