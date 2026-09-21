@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_NON_GLOBAL_51_OF_51_CLOSURE_V1",
+  "state": "VERIFIED_COMPLETE",
+  "non_global": {
+    "proven": 51,
+    "unproven": 0,
+    "total": 51
+  },
+  "global": {
+    "proven": 0,
+    "blocked": 10,
+    "total": 10
+  },
+  "full_astra_claim": false,
+  "superworker_real": 0,
+  "task_id": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
+  "adjudication_task_id": "RECOVERY-ASTRA-HIDDEN-ADJUDICATE-V1",
+  "hidden_task": "taskOurExtend-mbta--006",
+  "task_text_sha256": "b04e81d8beec27ba757d966e7cf2b45fa74eda78981605ccd619252d9691ec9f",
+  "terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
+  "adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
+  "recovery_result_file_sha256": "0ea47ade50ac3f3eb6b1135186f4ace0fb3d1e5bc2de3d120e3094565ddcaea9",
+  "distinct_verifier": "WOLFRAM-REMOTE-KERNEL-20260922-HIDDEN-MBTA006-V1",
+  "distinct_verifier_receipt_sha256": "732faa8c5b231c2c3acfcbc1e50dee915b8c07604048dd8005d111d3ec6dcf72",
+  "predicate_results": {
+    "ASTRA_COMPUTER_GUI_USE__HIDDEN_UI_GENERALIZATION": true,
+    "ASTRA_NOVEL_ADAPTATION_REASONING__FRESH_HIDDEN_NOVEL_ENVIRONMENTS": true,
+    "ASTRA_NOVEL_ADAPTATION_REASONING__ACTION_EFFICIENCY_MEASUREMENT": true
+  },
+  "telemetry": {
+    "actions_total": 15,
+    "action_budget": 40,
+    "budget_fraction": 0.375,
+    "scored_attempts": 1,
+    "scored_retries": 0,
+    "dom_used": false
+  },
+  "decisive_evidence": [
+    {
+      "frame": "frame007.png",
+      "purpose": "Saturday weekend timetable",
+      "content_sha256": "62e3cb39fb585ba781e5d30bcfb3a5f5a337a70035d8368b1892e86701b006a4",
+      "github_blob_sha1": "c4cff9753a44a5f81fa2dbf30c6bab1da5975ed2"
+    },
+    {
+      "frame": "frame014.png",
+      "purpose": "Charlestown Ferry Weekend Schedule PDF visible",
+      "content_sha256": "5ba84b11871eb776f05a433292ddd9f5f5decc781159047d9839b2c99a44af9a",
+      "github_blob_sha1": "257442727b57a2ba905017d0c51b63ef24fe8c37"
+    },
+    {
+      "frame": "frame015.png",
+      "purpose": "post-click confirmation frame on source tab",
+      "content_sha256": "612f6d5f4a7c27e127bc96f51c66b328402ba652c69e42a332dc8779ec5522ff",
+      "github_blob_sha1": "36cd165ba3eccc4832923a284cf1c46f8f386ba1"
+    }
+  ],
+  "next_frontier": "TEN_GLOBAL_ASTRA_QUALIFICATION_PREDICATES",
+  "no_self_promotion": true
+}
