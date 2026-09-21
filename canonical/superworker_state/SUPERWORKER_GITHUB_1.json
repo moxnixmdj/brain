@@ -3,9 +3,9 @@
   "agent_id": "SUPERWORKER-GITHUB-1",
   "runtime": "SUPERHERO-RUNTIME-2.7-GITHUB-ACTIONS-PERSISTENT",
   "mission_id": "SUPERWORKER-GITHUB-QUALIFICATION-1",
-  "status": "CHECKPOINTED_FOR_FRESH_RUN_CONTINUATION",
-  "generation": 1,
-  "cycle": 1,
+  "status": "COMPLETE",
+  "generation": 2,
+  "cycle": 2,
   "models_used": false,
   "incremental_cost_usd": 0,
   "ownership": {
@@ -31,9 +31,30 @@
       "provider": "http-primary",
       "reason": "INJECTED_PRIMARY_PROVIDER_FAILURE",
       "at_utc": "2026-09-21T21:02:31.114Z"
+    },
+    {
+      "seq": 4,
+      "type": "FRESH_RUN_CONTINUED",
+      "provider": "http-fallback",
+      "at_utc": "2026-09-21T21:02:43.113Z"
+    },
+    {
+      "seq": 5,
+      "type": "SOURCE_FETCHED",
+      "source_url": "https://developers.cloudflare.com/workers/ci-cd/builds/configuration/",
+      "body_sha256": "f94bff7a2e6f98e5f56e799a5953b2cc622b496a7c8183bd4c3979063c66df6d",
+      "at_utc": "2026-09-21T21:02:43.113Z"
+    },
+    {
+      "seq": 6,
+      "type": "MISSION_TERMINAL_COMPLETE",
+      "at_utc": "2026-09-21T21:02:43.113Z"
     }
   ],
   "next_action": "FRESH_RUN_FETCH_WITH_HTTP_FALLBACK",
   "task_sha256": "4a3026875ba7b637d30faf65b3372354086af1be007eec9c3e76df71ca8703c3",
-  "checkpointed_at_utc": "2026-09-21T21:02:31.114Z"
+  "checkpointed_at_utc": "2026-09-21T21:02:31.114Z",
+  "evidence_path": "canonical/superworker_evidence/SUPERWORKER_GITHUB_QUALIFICATION_1.json",
+  "evidence_sha256": "85ec5395866fa0790887530ea5b13101ebd83b5b719fd2a393a8741313e1c360",
+  "completed_at_utc": "2026-09-21T21:02:43.113Z"
 }
