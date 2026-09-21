@@ -17,5 +17,10 @@
   "promotion_claim": false,
   "control_token_sha256": "39e08a23ae9ff14aca69786411d2809868fb83012b094ef02b282ea89d00a8b2",
   "control_token_plaintext_stored_in_git": false,
-  "control_token_issued": true
+  "control_token_issued": true,
+  "production_branch_head": "cd81599375145b774b3cfc41d341979a84758999",
+  "local_syntax_check": "PASS",
+  "deploy_command": "npm run deploy",
+  "build_secret_name": "CONTROL_TOKEN",
+  "permanent_auth_boundary": "CLOUDFLARE_GITHUB_APP_AUTHORIZATION_REQUIRED_ONCE"
 }
