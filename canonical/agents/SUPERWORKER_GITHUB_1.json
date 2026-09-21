@@ -1,8 +1,8 @@
 {
   "schema": "PROJECT_BRAIN_AGENT_IDENTITY_V1",
   "agent_id": "SUPERWORKER-GITHUB-1",
-  "class": "SUPERWORKER",
-  "status": "PROMOTED_REAL",
+  "class": "BOUNDED_PERSISTENT_EXECUTOR",
+  "status": "QUALIFIED_BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
   "runtime": "SUPERHERO-RUNTIME-2.7-GITHUB-ACTIONS-PERSISTENT",
   "substrate": "GITHUB_ACTIONS",
   "canonical_repository": "moxnixmdj/brain",
@@ -17,8 +17,11 @@
   ],
   "limitations": [
     "NO_PROVEN_GUI_PROVIDER",
+    "NO_PROVEN_ARBITRARY_TOOL_DISCOVERY",
+    "NO_FRESH_HIDDEN_ENVIRONMENT_GENERALIZATION",
     "NO_FULL_ASTRA_CLAIM",
     "NO_HUMAN_AUTHORITY_APPROVAL"
   ],
+  "counts_as_real_superworker": false,
   "promotion_adjudication": "canonical/qualification/SUPERWORKER_GITHUB_1_WHOLE_DEFINITION_ADJUDICATION.json"
 }
