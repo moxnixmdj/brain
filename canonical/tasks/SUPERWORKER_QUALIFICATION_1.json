@@ -1,0 +1,14 @@
+{
+  "schema":"PROJECT_BRAIN_TASK_V1",
+  "task_id":"SUPERWORKER-QUALIFICATION-1",
+  "assigned_to":"SUPERWORKER-CANDIDATE-1",
+  "state":"READY",
+  "goal":"Verify from current Cloudflare documentation whether claiming a temporary deployment grants permanent platform write access or whether future deployments require a separate authenticated flow. Preserve source evidence and fail over from a deliberately failed primary provider.",
+  "source_url":"https://developers.cloudflare.com/workers/platform/claim-deployments/",
+  "required_source_assertions":[
+    "Claiming does not grant the platform permanent access to the account",
+    "Future platform deployments require a separate OAuth flow"
+  ],
+  "qualification_properties":["causal_task_acquisition","durable_continuation","provider_failover","evidence_preservation","model_independence","single_owner_lease","terminal_result"],
+  "promotion_claim":false
+}
