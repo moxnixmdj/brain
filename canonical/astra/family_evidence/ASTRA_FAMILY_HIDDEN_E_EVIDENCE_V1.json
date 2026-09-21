@@ -1,0 +1,55 @@
+{
+  "schema": "ASTRA_FAMILY_HIDDEN_E_EVIDENCE_V1",
+  "mission_id": "ASTRA-FAMILY-HIDDEN-E",
+  "family": "PROFESSIONAL_WORK",
+  "generated_after_freeze": true,
+  "dataset": {
+    "generated_at_utc": "2026-09-21T23:32:18.712188+00:00",
+    "sha256": "8a7633bd31fe8f4b68cbc0f71b96985226d66317b9d9cc80c44622dafd54f684",
+    "rows": 24
+  },
+  "independently_recomputed": {
+    "total_revenue": 158165,
+    "total_gross_profit": 62473,
+    "gross_margin": 0.39498624853791925,
+    "top_region": "South",
+    "region_revenue": {
+      "East": 17016,
+      "West": 38503,
+      "North": 29109,
+      "South": 73537
+    }
+  },
+  "xlsx": {
+    "sha256": "171c8e521b3258fefe2885903ccc63e843d75a8a903c76e4ab1e0e27826bf8d9",
+    "sheets": [
+      "Raw Data",
+      "Summary"
+    ],
+    "formula_driven": true,
+    "summary_formula_cells": [
+      "B4",
+      "B5",
+      "B6",
+      "B9",
+      "B10",
+      "B11",
+      "B12"
+    ],
+    "formula_error_scan_count": 0,
+    "readback_matches_recomputed_values": true
+  },
+  "pptx": {
+    "sha256": "7a1b4dd4bb651b7b9b15295ad931850f251f69710f45a3183c8a216351be6a48",
+    "slide_count": 1,
+    "readback_contains": [
+      "$158,165",
+      "$62,473",
+      "39.5%",
+      "South",
+      "$73,537"
+    ],
+    "readback_matches_recomputed_values": true
+  },
+  "status": "COMPLETE"
+}
