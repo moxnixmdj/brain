@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_POINTER_V1",
-  "canonical_generation": "2026-09-22-astra-nonglobal-51-of-51",
+  "canonical_generation": "2026-09-22-astra-global-9-of-10",
   "control_plane": {
     "provider": "GitHub",
     "repository": "moxnixmdj/brain",
@@ -89,15 +89,25 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 0,
-    "next_step": "EXECUTE_MINIMUM_INTEGRATED_CONSEQUENTIAL_MISSION_SET_TO_INDEPENDENTLY_ADJUDICATE_THE_10_GLOBAL_ASTRA_PREDICATES__NO_MORE_GENERIC_INFRASTRUCTURE",
+    "next_step": "RECOVER_EXACT_TEN_ASTRA_CAPABILITY_FAMILY_MEMBERSHIP_MAP__THEN_RUN_ONLY_MISSING_FAMILY_HIDDEN_GENERALIZATION_EVIDENCE__DISTINCTLY_VERIFY__NO_REOPENING_OTHER_60_PREDICATES",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "TEN_GLOBAL_ASTRA_QUALIFICATION_PREDICATES_UNPROVEN",
+    "critical_blocker": "GLOBAL__HIDDEN_GENERALIZATION_PER_CAPABILITY_FAMILY",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
-    "hidden_verifier_receipt_sha256": "732faa8c5b231c2c3acfcbc1e50dee915b8c07604048dd8005d111d3ec6dcf72"
+    "hidden_verifier_receipt_sha256": "732faa8c5b231c2c3acfcbc1e50dee915b8c07604048dd8005d111d3ec6dcf72",
+    "astra_global": {
+      "proven": 9,
+      "unproven": 1,
+      "total": 10
+    },
+    "astra_total": {
+      "proven": 60,
+      "unproven": 1,
+      "total": 61
+    }
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
