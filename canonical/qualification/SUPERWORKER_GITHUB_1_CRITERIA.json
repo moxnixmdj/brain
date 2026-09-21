@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_SUPERWORKER_QUALIFICATION_CRITERIA_V1",
-  "criteria_version": "github-host-v1-precommitted-2026-09-21",
+  "criteria_version": "github-host-v2-dedupe-bound-2026-09-21",
   "worker_agent_id": "SUPERWORKER-GITHUB-1",
   "required_checks": [
     "persistent_identity",
@@ -11,7 +11,8 @@
     "hard_zero_incremental_cost",
     "durable_evidence",
     "terminal_completion",
-    "exact_assertions"
+    "exact_assertions",
+    "dedupe_marker"
   ],
   "promotion_policy": "PASS_DOES_NOT_SELF_PROMOTE__CANONICAL_ADJUDICATION_REQUIRED",
   "precommitted": true
