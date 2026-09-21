@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_POINTER_V1",
-  "canonical_generation": "2026-09-21-provider-independent-6",
+  "canonical_generation": "2026-09-21-provider-independent-7",
   "control_plane": {
     "provider": "GitHub",
     "repository": "moxnixmdj/brain",
@@ -20,13 +20,20 @@
   "canonical_state_sha256": "5da4d719127b0ddbb6c4d878c3a27eaa75a7e25fec7aae55600e2567549d1762",
   "working_authority": "SQLite RECOVERY_BRAIN.sqlite",
   "mandatory_laws": [
-    "canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md"
+    "canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md",
+    "canonical/laws/EXECUTION_LEVERAGE_AND_ANTI_DRIFT_LAW_V1.md"
   ],
   "boot_requirements": {
     "read_mandatory_laws_before_execution": true,
     "models_are_optional_sources_only": true,
     "knowledge_and_state_externalized": true,
-    "search_and_reuse_before_invention": true
+    "search_and_reuse_before_invention": true,
+    "causal_action_gate_required": true,
+    "mission_lock_required": true,
+    "anti_drift_reconciliation_required": true,
+    "credential_handoff_two_phase_commit_required": true,
+    "temporary_resources_forbidden_on_production_critical_path": true,
+    "stop_research_when_adequate_route_exists": true
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
@@ -65,7 +72,13 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "READY",
     "superworker_real": 0,
-    "next_step": "CLAIM_TEMP_CLOUDFLARE_ACCOUNT_THEN_DEPLOY_FULL_RUNTIME_V2_1"
+    "next_step": "ESTABLISH_ONE_PERMANENT_AUTHENTICATED_RUNTIME_CHANNEL__DEPLOY_ACTUAL_SUPERWORKER__RUN_CONSEQUENTIAL_MISSION__INDEPENDENTLY_VERIFY__THEN_ASTRA_HIDDEN_EXECUTION",
+    "prohibited_detours": [
+      "TEMPORARY_CLOUDFLARE_CLAIM_LINK_LOOPS",
+      "NEW_HOST_RESEARCH_WITHOUT_FALSIFICATION",
+      "REPEATED_PERSISTENCE_FAILOVER_PROOFS_WITHOUT_INVALIDATING_CHANGE",
+      "WEAK_CODE_RUNNER_OR_BROWSER_SURFACE_RETRIES"
+    ]
   },
   "provider_rules": {
     "val_town": "OPTIONAL_RECOVERY_OR_EXECUTOR_ONLY",
@@ -76,5 +89,13 @@
   "runtime_compliance": {
     "PROJECT_BRAIN_SUPERHERO_CLOUDFLARE_RUNTIME_V1": "RETIRED_DEFECTIVE_MODEL_IN_MANDATORY_LOOP",
     "SUPERHERO-RUNTIME-2@0.2.1": "ACTIVE_CANDIDATE_MODEL_INDEPENDENT_FAIL_CLOSED"
+  },
+  "execution_governance": {
+    "anti_drift_law": "canonical/laws/EXECUTION_LEVERAGE_AND_ANTI_DRIFT_LAW_V1.md",
+    "activity_is_not_progress": true,
+    "progress_metric": "VERIFIED_GOAL_PREDICATE_OR_CAUSAL_BLOCKER_CHANGE",
+    "no_progress_action_limit": 3,
+    "repeated_failure_class_limit": 2,
+    "infrastructure_freeze_when_next_real_mission_executable": true
   }
 }
