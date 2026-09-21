@@ -1,0 +1,19 @@
+{
+  "schema": "PROJECT_BRAIN_CANONICAL_EVENT_V1",
+  "event": "MIGRATE_CANONICAL_CONTROL_PLANE_OFF_VAL_TOWN",
+  "date": "2026-09-21",
+  "reason": [
+    "Val Town account access became unavailable.",
+    "Canonical truth must survive loss of any one provider."
+  ],
+  "actions": [
+    "Sealed latest recovery authority including verified historical store and latest SQLite state.",
+    "Mirrored canonical snapshot and consequential V6 artifacts to Google Drive.",
+    "Designated private GitHub repository as canonical human/auditable control plane.",
+    "Demoted all execution providers, including Val Town, to non-canonical replaceable executors."
+  ],
+  "snapshot_sha256": "000606bc93206eea18b3046c0f6536f1bc3c5b3272c47b410fdecc37c01b0162",
+  "canonical_state_sha256": "5da4d719127b0ddbb6c4d878c3a27eaa75a7e25fec7aae55600e2567549d1762",
+  "promotion_credit": [],
+  "note": "This migration changes transport/durability authority only; it grants no Astra or Super-Worker capability credit."
+}
