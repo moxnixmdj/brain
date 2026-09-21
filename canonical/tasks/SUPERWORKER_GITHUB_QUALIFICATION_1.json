@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_TASK_V1",
+  "task_id": "SUPERWORKER-GITHUB-QUALIFICATION-1",
+  "assigned_to": "SUPERWORKER-GITHUB-1",
+  "state": "READY",
+  "goal": "Verify from current official Cloudflare Workers Builds documentation that Git integration automatically generates an API token and continues using it for subsequent builds, while deliberately failing the preferred HTTP provider first and recovering through a fallback provider.",
+  "frontier": [
+    {
+      "id": "cf-workers-builds-auth",
+      "kind": "retrieve_url",
+      "query": "https://developers.cloudflare.com/workers/ci-cd/builds/configuration/",
+      "priority": 100,
+      "metadata": {
+        "url": "https://developers.cloudflare.com/workers/ci-cd/builds/configuration/",
+        "forcePrimaryFailure": true,
+        "assertContains": [
+          "automatically generate an API token",
+          "continue to use this API token for all subsequent builds"
+        ]
+      }
+    }
+  ],
+  "required_properties": [
+    "PERSISTENT_IDENTITY",
+    "CANONICAL_DURABLE_STATE",
+    "FRESH_RUN_CONTINUATION",
+    "PROVIDER_FAILOVER",
+    "MODEL_INDEPENDENCE",
+    "HARD_ZERO_INCREMENTAL_COST",
+    "DURABLE_EVIDENCE",
+    "TERMINAL_COMPLETION",
+    "DISTINCT_VERIFICATION"
+  ],
+  "promotion_claim": false
+}
