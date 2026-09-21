@@ -1,0 +1,157 @@
+name: Project Brain Superworker Signed Command Relay
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'canonical/outbound_commands/*.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: project-brain-superworker-command-relay
+  cancel-in-progress: false
+
+jobs:
+  relay:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Deliver signed command and preserve receipt
+        env:
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import datetime as dt
+          import hashlib
+          import json
+          import os
+          import pathlib
+          import re
+          import subprocess
+          import urllib.error
+          import urllib.parse
+          import urllib.request
+
+          root = pathlib.Path('.')
+          before = os.environ.get('BEFORE', '')
+          after = os.environ['AFTER']
+          zero = '0' * 40
+
+          if before and before != zero:
+              p = subprocess.run(
+                  ['git','diff','--name-only',before,after,'--','canonical/outbound_commands/*.json'],
+                  check=True, text=True, capture_output=True)
+              changed = [x.strip() for x in p.stdout.splitlines() if x.strip()]
+          else:
+              p = subprocess.run(
+                  ['git','show','--pretty=','--name-only',after,'--','canonical/outbound_commands/*.json'],
+                  check=True, text=True, capture_output=True)
+              changed = [x.strip() for x in p.stdout.splitlines() if x.strip()]
+
+          if not changed:
+              raise SystemExit('NO_OUTBOUND_COMMAND_FILE_FOUND')
+
+          receipts = root / 'canonical' / 'command_receipts'
+          receipts.mkdir(parents=True, exist_ok=True)
+          failed = False
+
+          for rel in changed:
+              pth = root / rel
+              raw = pth.read_bytes()
+              if len(raw) > 100_000:
+                  raise SystemExit(f'COMMAND_FILE_TOO_LARGE:{rel}')
+              doc = json.loads(raw)
+              if doc.get('schema') != 'PROJECT_BRAIN_SIGNED_COMMAND_ENVELOPE_V1':
+                  raise SystemExit(f'BAD_SCHEMA:{rel}')
+              target = str(doc.get('target_url','')).rstrip('/')
+              u = urllib.parse.urlparse(target)
+              host = (u.hostname or '').lower()
+              if u.scheme != 'https' or u.path not in ('','/') or u.query or u.fragment:
+                  raise SystemExit(f'BAD_TARGET_URL:{rel}')
+              if not (host.startswith('project-brain-superworker-permanent-1.') and host.endswith('.workers.dev')):
+                  raise SystemExit(f'BAD_TARGET_HOST:{rel}')
+
+              wrapper = doc.get('wrapper')
+              if not isinstance(wrapper, dict) or set(wrapper) != {'task','signature'}:
+                  raise SystemExit(f'BAD_WRAPPER:{rel}')
+              task = wrapper.get('task')
+              sig = str(wrapper.get('signature',''))
+              if not isinstance(task, dict) or task.get('agentId') != 'SUPERWORKER-PERMANENT-1':
+                  raise SystemExit(f'WRONG_AGENT:{rel}')
+              if not re.fullmatch(r'[A-Za-z0-9_-]{80,100}', sig):
+                  raise SystemExit(f'BAD_SIGNATURE_ENCODING:{rel}')
+
+              body = json.dumps(wrapper, separators=(',',':'), ensure_ascii=False).encode()
+              req = urllib.request.Request(
+                  target + '/commands', data=body, method='POST',
+                  headers={'content-type':'application/json','user-agent':'ProjectBrain-GitHub-Relay/1'})
+              status = None
+              response_bytes = b''
+              error = None
+              try:
+                  with urllib.request.urlopen(req, timeout=30) as r:
+                      status = int(r.status)
+                      response_bytes = r.read(100_000)
+              except urllib.error.HTTPError as e:
+                  status = int(e.code)
+                  response_bytes = e.read(100_000)
+                  error = f'HTTP_{e.code}'
+              except Exception as e:
+                  error = f'{type(e).__name__}:{str(e)[:500]}'
+
+              try:
+                  response = json.loads(response_bytes.decode('utf-8')) if response_bytes else None
+              except Exception:
+                  response = {'text': response_bytes.decode('utf-8','replace')[:20_000]}
+
+              ok = status in (200,201,202)
+              failed = failed or not ok
+              stem = pth.stem
+              receipt = {
+                  'schema':'PROJECT_BRAIN_SIGNED_COMMAND_DELIVERY_RECEIPT_V1',
+                  'command_file':rel,
+                  'command_file_sha256':hashlib.sha256(raw).hexdigest(),
+                  'mission_id':str(task.get('missionId','')),
+                  'target_url':target,
+                  'http_status':status,
+                  'delivery_ok':ok,
+                  'error':error,
+                  'response':response,
+                  'github_run_id':os.environ.get('GITHUB_RUN_ID'),
+                  'github_sha':after,
+                  'delivered_at_utc':dt.datetime.now(dt.timezone.utc).isoformat(),
+              }
+              (receipts / f'{stem}.receipt.json').write_text(
+                  json.dumps(receipt, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+
+          if failed:
+              pathlib.Path('.relay_failed').write_text('1')
+          PY
+
+      - name: Commit durable delivery receipt
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Project Brain Relay'
+          git config user.email 'project-brain-relay@users.noreply.github.com'
+          git add canonical/command_receipts || true
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record signed Superworker command delivery receipt'
+            git push
+          fi
+
+      - name: Enforce delivery success
+        if: always()
+        shell: bash
+        run: |
+          test ! -f .relay_failed
