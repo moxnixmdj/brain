@@ -1,0 +1,109 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_GLOBAL_MINIMUM_SUITE_V1",
+  "frozen_before_execution": true,
+  "design_basis": {
+    "exact_global_predicate_names_preserved": true,
+    "rich_historical_definitions_preserved": false,
+    "policy": "DO_NOT_INVENT_MISSING_DEFINITIONS__USE_STRICT_LITERAL_GATE_SEMANTICS"
+  },
+  "global_predicates": [
+    "GLOBAL__AT_LEAST_THREE_FRESH_CROSS_DOMAIN_INTEGRATED_HIDDEN_MISSIONS",
+    "GLOBAL__CLEAN_ROOM_REPRODUCTION_FULL_STACK",
+    "GLOBAL__CROSS_CAPABILITY_INTEGRATED_MISSIONS",
+    "GLOBAL__DURABLE_STATE_AND_READBACK",
+    "GLOBAL__DYNAMIC_CAPABILITY_DISCOVERY",
+    "GLOBAL__FAILURE_RECOVERY",
+    "GLOBAL__HIDDEN_GENERALIZATION_PER_CAPABILITY_FAMILY",
+    "GLOBAL__INDEPENDENT_VERIFICATION",
+    "GLOBAL__SCOPE_JUDGMENT",
+    "GLOBAL__UNKNOWN_DOMAIN_KNOWLEDGE_ACQUISITION"
+  ],
+  "missions": [
+    {
+      "id": "ASTRA-GLOBAL-HIDDEN-A",
+      "domain": "meteorology",
+      "task": "Using only a fresh browser session and rendered-page evidence, learn from an authoritative weather source what 'virga' is, determine whether it reaches the ground, and preserve the exact source evidence needed to support the answer. Discover and use an available pixel-reading capability if visual text cannot be reliably inspected directly. Do not use DOM, accessibility-tree, source-code, or JavaScript semantic extraction.",
+      "covers": [
+        "GLOBAL__AT_LEAST_THREE_FRESH_CROSS_DOMAIN_INTEGRATED_HIDDEN_MISSIONS",
+        "GLOBAL__CROSS_CAPABILITY_INTEGRATED_MISSIONS",
+        "GLOBAL__DYNAMIC_CAPABILITY_DISCOVERY",
+        "GLOBAL__HIDDEN_GENERALIZATION_PER_CAPABILITY_FAMILY",
+        "GLOBAL__SCOPE_JUDGMENT",
+        "GLOBAL__UNKNOWN_DOMAIN_KNOWLEDGE_ACQUISITION"
+      ],
+      "max_browser_actions": 30
+    },
+    {
+      "id": "ASTRA-GLOBAL-HIDDEN-B",
+      "domain": "software_reliability",
+      "task": "Resolve an unfamiliar software-documentation question from an authoritative source, but after source discovery checkpoint all durable state, intentionally terminate the executing controller, then continue from a fresh process using only durable readback. The resumed process must complete the evidence chain without repeating completed work. The injected failure and successful recovery must be auditable.",
+      "concrete_question": "From official Python documentation, determine what pathlib.Path.read_text returns and how its encoding argument is used.",
+      "covers": [
+        "GLOBAL__AT_LEAST_THREE_FRESH_CROSS_DOMAIN_INTEGRATED_HIDDEN_MISSIONS",
+        "GLOBAL__CROSS_CAPABILITY_INTEGRATED_MISSIONS",
+        "GLOBAL__DURABLE_STATE_AND_READBACK",
+        "GLOBAL__FAILURE_RECOVERY",
+        "GLOBAL__SCOPE_JUDGMENT",
+        "GLOBAL__UNKNOWN_DOMAIN_KNOWLEDGE_ACQUISITION"
+      ],
+      "max_browser_actions": 30
+    },
+    {
+      "id": "ASTRA-GLOBAL-HIDDEN-C",
+      "domain": "earth_science",
+      "task": "In a completely fresh execution directory and fresh browser profile, reconstruct the required screenshot-only visual execution stack from the frozen canonical protocol, with no reuse of runtime state from missions A or B. Then use it to learn from an authoritative earth-science source the difference between earthquake magnitude and intensity and preserve source evidence. The clean-room reconstruction and subsequent task completion must both be verified.",
+      "covers": [
+        "GLOBAL__AT_LEAST_THREE_FRESH_CROSS_DOMAIN_INTEGRATED_HIDDEN_MISSIONS",
+        "GLOBAL__CLEAN_ROOM_REPRODUCTION_FULL_STACK",
+        "GLOBAL__CROSS_CAPABILITY_INTEGRATED_MISSIONS",
+        "GLOBAL__HIDDEN_GENERALIZATION_PER_CAPABILITY_FAMILY",
+        "GLOBAL__SCOPE_JUDGMENT",
+        "GLOBAL__UNKNOWN_DOMAIN_KNOWLEDGE_ACQUISITION"
+      ],
+      "max_browser_actions": 30
+    }
+  ],
+  "suite_level_coverage": {
+    "GLOBAL__AT_LEAST_THREE_FRESH_CROSS_DOMAIN_INTEGRATED_HIDDEN_MISSIONS": [
+      "A",
+      "B",
+      "C"
+    ],
+    "GLOBAL__CLEAN_ROOM_REPRODUCTION_FULL_STACK": [
+      "C"
+    ],
+    "GLOBAL__CROSS_CAPABILITY_INTEGRATED_MISSIONS": [
+      "A",
+      "B",
+      "C"
+    ],
+    "GLOBAL__DURABLE_STATE_AND_READBACK": [
+      "B"
+    ],
+    "GLOBAL__DYNAMIC_CAPABILITY_DISCOVERY": [
+      "A"
+    ],
+    "GLOBAL__FAILURE_RECOVERY": [
+      "B"
+    ],
+    "GLOBAL__HIDDEN_GENERALIZATION_PER_CAPABILITY_FAMILY": [
+      "A",
+      "C"
+    ],
+    "GLOBAL__INDEPENDENT_VERIFICATION": [
+      "SUITE_LEVEL_DISTINCT_VERIFIER"
+    ],
+    "GLOBAL__SCOPE_JUDGMENT": [
+      "A",
+      "B",
+      "C"
+    ],
+    "GLOBAL__UNKNOWN_DOMAIN_KNOWLEDGE_ACQUISITION": [
+      "A",
+      "B",
+      "C"
+    ]
+  },
+  "promotion_claim": false,
+  "full_astra_claim": false
+}
