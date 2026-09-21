@@ -1,0 +1,18 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "project-brain-superworker",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-09-21",
+  "observability": {"enabled": true},
+  "durable_objects": {
+    "bindings": [
+      {"name": "STATE", "class_name": "SuperheroState"}
+    ]
+  },
+  "migrations": [
+    {"tag": "v1", "new_sqlite_classes": ["SuperheroState"]}
+  ],
+  "vars": {
+    "ALARM_DELAY_MS": "1200"
+  }
+}
