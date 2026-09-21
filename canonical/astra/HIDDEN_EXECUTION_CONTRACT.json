@@ -1,0 +1,58 @@
+{
+  "schema": "RECOVERY_ASTRA_HIDDEN_EXECUTION_CONTRACT_GITHUB_V1",
+  "task_id": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
+  "namespace": "recovery-astra-webone-mbta006-20260921-v1",
+  "worker_identity": "RECOVERY-WEBONE-H6-SUCCESSOR-MBTA006-V1",
+  "corpus": {
+    "repo": "TsinghuaC3I/webOne",
+    "commit": "8224653e058758201ab4f84012f3bf341f4448a9",
+    "path": "testset/alltest.json",
+    "index": 342
+  },
+  "candidate": {
+    "id": "taskOurExtend-mbta--006",
+    "new_id": "mbta-1E2K9j2Q",
+    "datasource": "OUR_EXTEND_2",
+    "website": "mbta",
+    "start_url": "https://www.mbta.com",
+    "instruction": "Find the weekend schedule for the Charlestown Ferry, and then locate the PDF version of the weekend schedule.",
+    "instruction_sha256": "b04e81d8beec27ba757d966e7cf2b45fa74eda78981605ccd619252d9691ec9f"
+  },
+  "required_visual_sequence": [
+    "Ferry",
+    "Charlestown Ferry",
+    "Today",
+    "Saturday|Sunday",
+    "PDF Schedules",
+    "Current Charlestown Ferry Weekend Schedule PDF"
+  ],
+  "execution_contract": {
+    "scored_attempts": 1,
+    "scored_retries": 0,
+    "action_budget": 40,
+    "initial_navigation_only_to_bound_start_url": true,
+    "rendered_ui_only_after_navigation": true,
+    "screenshot_grounded_actions_required": true,
+    "dom_source_search_fetch_forbidden": true,
+    "allowed_cdp_methods": [
+      "Page.enable",
+      "Page.navigate",
+      "Page.captureScreenshot",
+      "Page.getLayoutMetrics",
+      "Input.dispatchMouseEvent",
+      "Input.dispatchKeyEvent",
+      "Input.insertText",
+      "Emulation.setDeviceMetricsOverride"
+    ],
+    "efficiency_telemetry_required": true,
+    "full_frame_action_journal_required": true,
+    "terminal_seal_required": true,
+    "distinct_post_seal_verifier_required": true,
+    "hard_incremental_spend_usd": 0
+  },
+  "recovered_manifest_sha256": "8b42a7d3fc0cfc1f56c7eb5c0f2f3bf1def257d80205ab77751e68fa4a093cc6",
+  "recovered_successor_build_sha256": "bd89555ee9c3dc01cb477b734f4fe16a6a90b2c6235336f39493c19c45fa7a21",
+  "recovered_successor_verifier": "WOLFRAM-REMOTE-KERNEL-20260921-SUCCESSOR-V1",
+  "raw_visual_preflight_path": "canonical/astra/RAW_VISUAL_CDP_PREFLIGHT.json",
+  "promotion_claim": false
+}
