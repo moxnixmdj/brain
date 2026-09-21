@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_POINTER_V1",
-  "canonical_generation": "2026-09-22-astra-global-9-of-10",
+  "canonical_generation": "2026-09-22-astra-61-of-61-verified",
   "control_plane": {
     "provider": "GitHub",
     "repository": "moxnixmdj/brain",
@@ -46,7 +46,8 @@
     "identity_path": "canonical/agents/ASTRA_OPERATIONAL_IDENTITY_V1.json",
     "dialogue_protocol_path": "canonical/agents/ASTRA_DIALOGUE_PROTOCOL_V1.md",
     "operational": true,
-    "full_astra_claim": false
+    "full_astra_claim": true,
+    "astra_qualification_scope": "PROJECT_BRAIN_DECLARED_61_PREDICATE_SUITE"
   },
   "active_runtime": {
     "runtime_id": "SUPERHERO-RUNTIME-2.7-GITHUB-ACTIONS-PERSISTENT",
@@ -89,25 +90,26 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 0,
-    "next_step": "RECOVER_EXACT_TEN_ASTRA_CAPABILITY_FAMILY_MEMBERSHIP_MAP__THEN_RUN_ONLY_MISSING_FAMILY_HIDDEN_GENERALIZATION_EVIDENCE__DISTINCTLY_VERIFY__NO_REOPENING_OTHER_60_PREDICATES",
+    "next_step": "DISTINCTLY_VERIFY_EXISTING_RECOVERY_SUPERWORKER_V6_QUALIFICATION_PACKAGE__THEN_WHOLE_DEFINITION_ADJUDICATION__MOVE_P_REAL_ONLY_IF_ALL_GATES_PASS",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "GLOBAL__HIDDEN_GENERALIZATION_PER_CAPABILITY_FAMILY",
+    "critical_blocker": "REAL_SUPERWORKER_WHOLE_DEFINITION_QUALIFICATION",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
     "hidden_verifier_receipt_sha256": "732faa8c5b231c2c3acfcbc1e50dee915b8c07604048dd8005d111d3ec6dcf72",
     "astra_global": {
-      "proven": 9,
-      "unproven": 1,
+      "proven": 10,
+      "unproven": 0,
       "total": 10
     },
     "astra_total": {
-      "proven": 60,
-      "unproven": 1,
+      "proven": 61,
+      "unproven": 0,
       "total": 61
-    }
+    },
+    "astra_full_qualification": "VERIFIED_61_OF_61"
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
@@ -131,11 +133,11 @@
     "infrastructure_freeze_when_next_real_mission_executable": true,
     "forbid_relabeling_bounded_executor_as_superworker": true,
     "only_current_allowed_frontier_actions": [
-      "identify_exact_10_global_astra_predicates_from_canonical_evidence",
-      "design_minimum_integrated_consequential_mission_set_covering_them",
-      "execute_missions_on_already_available_substrates",
-      "independently_verify_each_global_predicate",
-      "repair_only_observed_failed_property"
+      "inspect_existing_submitted_superworker_recovery_qualification",
+      "distinctly_verify_exact_submitted_bytes",
+      "whole_definition_superworker_adjudication",
+      "repair_only_observed_failed_property",
+      "promote_p_real_only_after_independent_evidence"
     ]
   },
   "standby_runtime": {
