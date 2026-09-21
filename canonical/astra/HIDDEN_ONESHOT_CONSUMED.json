@@ -1,0 +1,16 @@
+{
+  "armed_at_utc": "2026-09-21T21:45:36.675217Z",
+  "attempt_id": "fdc7189c4b797381ec922f1eb38e5693",
+  "binding_sha256": "a025f06b2190789ed6dbf79f72e77c28268bd5e33145fc00bddcb5ebb83a4f1d",
+  "candidate_id": "taskOurExtend-mbta--006",
+  "candidate_index": 342,
+  "hidden_navigation_started": false,
+  "instruction_sha256": "b04e81d8beec27ba757d966e7cf2b45fa74eda78981605ccd619252d9691ec9f",
+  "namespace": "recovery-astra-webone-mbta006-20260921-v1",
+  "new_id": "mbta-1E2K9j2Q",
+  "schema": "PROJECT_BRAIN_ASTRA_HIDDEN_ONESHOT_MARKER_V1",
+  "scored_attempts_authorized": 1,
+  "scored_retries_authorized": 0,
+  "task_id": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
+  "worker_identity": "RECOVERY-WEBONE-H6-SUCCESSOR-MBTA006-V1"
+}
