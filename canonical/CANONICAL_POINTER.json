@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_POINTER_V1",
-  "canonical_generation": "2026-09-21-provider-independent-5",
+  "canonical_generation": "2026-09-21-provider-independent-6",
   "control_plane": {
     "provider": "GitHub",
     "repository": "moxnixmdj/brain",
@@ -46,7 +46,11 @@
     "control_auth": "FAIL_CLOSED",
     "hosted": false,
     "promotion_authorized": false,
-    "sealed_package_sha256": "260dc8c5454646672b6cb456d619685792c005b1f2e856227e75a07ce2a316e1"
+    "sealed_package_sha256": "260dc8c5454646672b6cb456d619685792c005b1f2e856227e75a07ce2a316e1",
+    "remote_persistence_proof": "PASS",
+    "remote_proof_result": "REMOTE_PERSISTENCE_FAILOVER_AUTONOMOUS_CONTINUATION_PASS",
+    "remote_proof_worker": "https://project-brain-superhero-v2-proof-fast4.robust-origami.workers.dev",
+    "hosted_full_runtime": false
   },
   "retired_runtime": {
     "runtime_id": "PROJECT_BRAIN_SUPERHERO_CLOUDFLARE_RUNTIME_V1",
@@ -61,7 +65,7 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "READY",
     "superworker_real": 0,
-    "next_step": "USER_ACCEPT_CLOUDFLARE_TERMS_THEN_TEMPORARY_ACCOUNT_REMOTE_PERSISTENCE_PROOF"
+    "next_step": "CLAIM_TEMP_CLOUDFLARE_ACCOUNT_THEN_DEPLOY_FULL_RUNTIME_V2_1"
   },
   "provider_rules": {
     "val_town": "OPTIONAL_RECOVERY_OR_EXECUTOR_ONLY",
