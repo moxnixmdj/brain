@@ -1,0 +1,16 @@
+{
+  "schema": "PROJECT_BRAIN_CANONICAL_EVENT_V1",
+  "event_type": "ANTI_DRIFT_LAW_PROMOTION",
+  "date": "2026-09-21",
+  "reason": "Convert observed execution drift and repeated infrastructure/credential failures into mandatory regression-prevention law.",
+  "law_path": "canonical/laws/EXECUTION_LEVERAGE_AND_ANTI_DRIFT_LAW_V1.md",
+  "historical_failure_classes": [
+    "TEMPORARY_CLAIM_LINK_LOOP",
+    "WEAK_EXECUTION_SURFACE_OVERRETRY",
+    "CREDENTIAL_HANDOFF_NOT_DURABLY_PRESERVED",
+    "REPEATED_ALREADY_SUFFICIENT_PROOFS",
+    "INFRASTRUCTURE_BECOMES_MISSION",
+    "ACTIVITY_MISTAKEN_FOR_CAPABILITY_PROGRESS"
+  ],
+  "promotion_claim": false
+}
