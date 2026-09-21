@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_CANONICAL_POINTER_V1",
+  "canonical_generation": "2026-09-21-provider-independent-1",
+  "control_plane": {
+    "provider": "GitHub",
+    "repository": "moxnixmdj/brain",
+    "path": "canonical/"
+  },
+  "evidence_mirror": {
+    "provider": "Google Drive",
+    "folder_id": "1kdecUMm_qDEcAT95a_MF7EVsF08GQ0kw",
+    "snapshot_file_id": "1Z3j5g21evQwIP8Eq0YpOd4FL33gvqS1x",
+    "snapshot_name": "PROJECT_BRAIN_CANONICAL_SNAPSHOT_2026-09-21.zip",
+    "snapshot_sha256": "000606bc93206eea18b3046c0f6536f1bc3c5b3272c47b410fdecc37c01b0162",
+    "snapshot_bytes": 42353579
+  },
+  "canonical_state_sha256": "5da4d719127b0ddbb6c4d878c3a27eaa75a7e25fec7aae55600e2567549d1762",
+  "working_authority": "SQLite RECOVERY_BRAIN.sqlite",
+  "current_frontier": {
+    "astra_non_global": {
+      "proven": 48,
+      "unproven": 3,
+      "total": 51
+    },
+    "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
+    "hidden_execute_state": "READY",
+    "superworker_real": 0
+  },
+  "provider_rules": {
+    "val_town": "OPTIONAL_RECOVERY_OR_EXECUTOR_ONLY",
+    "provider_local_truth_authoritative": false,
+    "provider_loss_failover_required": true,
+    "hard_zero_incremental_spend": true
+  }
+}
