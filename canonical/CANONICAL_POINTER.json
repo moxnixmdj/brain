@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_POINTER_V1",
-  "canonical_generation": "2026-09-21-permanent-superworker-2.6-preflight",
+  "canonical_generation": "2026-09-21-superworker-2.6-git-builds-ready",
   "control_plane": {
     "provider": "GitHub",
     "repository": "moxnixmdj/brain",
@@ -54,15 +54,18 @@
     "manifest_path": "canonical/runtimes/SUPERWORKER_PERMANENT_2_6.json",
     "preflight_path": "canonical/runtimes/SUPERWORKER_PERMANENT_2_6_PREFLIGHT.json",
     "kernel": "MODEL_INDEPENDENT",
-    "deployment_mode": "PERMANENT_CLOUDFLARE_ACCOUNT_OAUTH_DEVICE_KEYRING",
+    "deployment_mode": "PERMANENT_CLOUDFLARE_WORKERS_BUILDS_PRIVATE_GITHUB",
     "command_transport": "DIRECT_ECDSA_P256_SIGNED_VIA_GITHUB_RELAY",
     "command_relay_workflow": ".github/workflows/superworker-signed-command-relay.yml",
     "persistent_control_secret": false,
     "temporary_account": false,
     "claim_link": false,
-    "preflight": "PASS",
+    "preflight": "GIT_SOURCE_READY__PROVIDER_AUTH_REQUIRED",
     "hosted": false,
-    "promotion_authorized": false
+    "promotion_authorized": false,
+    "source_branch": "superworker-production",
+    "source_root": "superworker-production",
+    "git_builds_ready_path": "canonical/runtimes/SUPERWORKER_PERMANENT_2_6_GIT_BUILDS_READY.json"
   },
   "superseded_runtime": {
     "runtime_id": "SUPERHERO-RUNTIME-2.3-DO-ALARM",
@@ -81,7 +84,7 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "READY",
     "superworker_real": 0,
-    "next_step": "USER_AUTHORIZE_PERMANENT_CLOUDFLARE_DEVICE_OAUTH_ONCE__DEPLOY_2_6__CAPTURE_ENDPOINT__RUN_CONSEQUENTIAL_SIGNED_MISSION__INDEPENDENTLY_VERIFY__THEN_ASTRA_HIDDEN_EXECUTION",
+    "next_step": "AUTHORIZE_CLOUDFLARE_GITHUB_INTEGRATION_ONCE__CONNECT_MOXNIXMDJ_BRAIN_SUPERWORKER_PRODUCTION_ROOT__DEPLOY__CAPTURE_ENDPOINT__RUN_SIGNED_CONSEQUENTIAL_MISSION__INDEPENDENTLY_VERIFY__THEN_ASTRA_HIDDEN_EXECUTION",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true
   },
