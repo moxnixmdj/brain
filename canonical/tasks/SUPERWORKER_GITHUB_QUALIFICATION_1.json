@@ -1,32 +1,33 @@
 {
   "schema": "PROJECT_BRAIN_TASK_V1",
-  "task_id": "SUPERWORKER-GITHUB-QUALIFICATION-1",
+  "task_id": "SUPERWORKER-GITHUB-HOST-DECISION-1",
   "assigned_to": "SUPERWORKER-GITHUB-1",
   "state": "READY",
-  "goal": "Verify from current official Cloudflare Workers Builds documentation that Git integration automatically generates an API token and continues using it for subsequent builds, while deliberately failing the preferred HTTP provider first and recovering through a fallback provider.",
+  "priority": 100,
+  "goal": "Produce authoritative evidence for the live causal decision whether already-authenticated GitHub Actions can serve as the permanent remote execution substrate for Superworker #1, eliminating the blocked Cloudflare account-authorization dependency.",
   "frontier": [
     {
-      "id": "cf-workers-builds-auth",
+      "id": "github-actions-autonomous-trigger",
       "kind": "retrieve_url",
-      "query": "https://developers.cloudflare.com/workers/ci-cd/builds/configuration/",
+      "query": "https://raw.githubusercontent.com/github/docs/add0a52d76879dff93304a5aa96895f9d68d5dac/data/reusables/actions/workflows/section-triggering-a-workflow.md",
       "priority": 100,
       "metadata": {
-        "url": "https://developers.cloudflare.com/workers/ci-cd/builds/configuration/",
+        "url": "https://raw.githubusercontent.com/github/docs/add0a52d76879dff93304a5aa96895f9d68d5dac/data/reusables/actions/workflows/section-triggering-a-workflow.md",
         "forcePrimaryFailure": true,
         "assertContains": [
-          "automatically generate an API token",
-          "continue to use this API token for all subsequent builds"
+          "To automatically trigger a workflow, use `on` to define which events can cause the workflow to run.",
+          "You can define single or multiple events that can trigger a workflow, or set a time schedule."
         ]
       }
     }
   ],
+  "decision_if_verified": "COMBINE_WITH_LIVE_PUSH_RUN_AND_CANONICAL_WRITE_EVIDENCE_TO_ADJUDICATE_GITHUB_ACTIONS_AS_PERMANENT_SUPERWORKER_EXECUTION_SUBSTRATE",
   "required_properties": [
+    "REAL_CAUSAL_FRONTIER_DECISION",
     "PERSISTENT_IDENTITY",
-    "CANONICAL_DURABLE_STATE",
     "FRESH_RUN_CONTINUATION",
     "PROVIDER_FAILOVER",
     "MODEL_INDEPENDENCE",
-    "HARD_ZERO_INCREMENTAL_COST",
     "DURABLE_EVIDENCE",
     "TERMINAL_COMPLETION",
     "DISTINCT_VERIFICATION"
