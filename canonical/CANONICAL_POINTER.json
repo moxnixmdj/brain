@@ -33,7 +33,10 @@
     "anti_drift_reconciliation_required": true,
     "credential_handoff_two_phase_commit_required": true,
     "temporary_resources_forbidden_on_production_critical_path": true,
-    "stop_research_when_adequate_route_exists": true
+    "stop_research_when_adequate_route_exists": true,
+    "pre_action_gate_path": "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V1.json",
+    "anti_drift_law_path": "canonical/laws/EXECUTION_LEVERAGE_AND_ANTI_DRIFT_LAW_V1.md",
+    "abort_on_pre_action_gate_failure": true
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
