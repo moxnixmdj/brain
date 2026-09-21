@@ -55,7 +55,8 @@ jobs:
           git push
 
   distinct-verifier:
-    needs: continue-on-fresh-runner
+    needs: [acquire-and-checkpoint, continue-on-fresh-runner]
+    if: always() && needs.acquire-and-checkpoint.result == 'success' && (needs.continue-on-fresh-runner.result == 'success' || needs.continue-on-fresh-runner.result == 'skipped')
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
