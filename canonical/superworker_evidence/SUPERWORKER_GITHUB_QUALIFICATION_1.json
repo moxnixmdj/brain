@@ -1,26 +1,26 @@
 {
   "schema": "PROJECT_BRAIN_SUPERWORKER_EVIDENCE_V1",
-  "mission_id": "SUPERWORKER-GITHUB-HOST-DECISION-1",
+  "mission_id": "SUPERWORKER-GITHUB-PRODUCTION-MISSION-1",
   "agent_id": "SUPERWORKER-GITHUB-1",
   "runtime": "SUPERHERO-RUNTIME-2.7-GITHUB-ACTIONS-PERSISTENT",
-  "source_url": "https://raw.githubusercontent.com/github/docs/add0a52d76879dff93304a5aa96895f9d68d5dac/data/reusables/actions/workflows/section-triggering-a-workflow.md",
+  "source_url": "https://raw.githubusercontent.com/github/docs/add0a52d76879dff93304a5aa96895f9d68d5dac/content/actions/tutorials/authenticate-with-github_token.md",
   "http_status": 200,
   "provider": "http-fallback",
   "provider_failover_observed": true,
   "models_used": false,
   "incremental_cost_usd": 0,
-  "source_body_sha256": "c38997788ada22de41a09d43a019cc9d1d218a084bd30b53e269260d6b72b03a",
-  "source_bytes": 531,
+  "source_body_sha256": "f44e5f81e6c318243ff0a36378e0b4e556400c1c96254e2e9944e6504d7016ce",
+  "source_bytes": 5567,
   "assertions": [
     {
-      "pattern": "To automatically trigger a workflow, use `on` to define which events can cause the workflow to run.",
+      "pattern": "You can use the `GITHUB_TOKEN` to make authenticated API calls.",
       "matched": true
     },
     {
-      "pattern": "You can define single or multiple events that can trigger a workflow, or set a time schedule.",
+      "pattern": "Use the `permissions` key in your workflow file to modify permissions for the `GITHUB_TOKEN`",
       "matched": true
     }
   ],
   "verified": true,
-  "fetched_at_utc": "2026-09-21T21:06:25.879Z"
+  "fetched_at_utc": "2026-09-21T21:10:16.088Z"
 }

@@ -3,9 +3,9 @@
   "agent_id": "SUPERWORKER-GITHUB-1",
   "runtime": "SUPERHERO-RUNTIME-2.7-GITHUB-ACTIONS-PERSISTENT",
   "mission_id": "SUPERWORKER-GITHUB-PRODUCTION-MISSION-1",
-  "status": "CHECKPOINTED_FOR_FRESH_RUN_CONTINUATION",
-  "generation": 1,
-  "cycle": 1,
+  "status": "COMPLETE",
+  "generation": 2,
+  "cycle": 2,
   "models_used": false,
   "incremental_cost_usd": 0,
   "ownership": {
@@ -31,9 +31,30 @@
       "provider": "http-primary",
       "reason": "INJECTED_PRIMARY_PROVIDER_FAILURE",
       "at_utc": "2026-09-21T21:10:02.971Z"
+    },
+    {
+      "seq": 4,
+      "type": "FRESH_RUN_CONTINUED",
+      "provider": "http-fallback",
+      "at_utc": "2026-09-21T21:10:16.088Z"
+    },
+    {
+      "seq": 5,
+      "type": "SOURCE_FETCHED",
+      "source_url": "https://raw.githubusercontent.com/github/docs/add0a52d76879dff93304a5aa96895f9d68d5dac/content/actions/tutorials/authenticate-with-github_token.md",
+      "body_sha256": "f44e5f81e6c318243ff0a36378e0b4e556400c1c96254e2e9944e6504d7016ce",
+      "at_utc": "2026-09-21T21:10:16.088Z"
+    },
+    {
+      "seq": 6,
+      "type": "MISSION_TERMINAL_COMPLETE",
+      "at_utc": "2026-09-21T21:10:16.088Z"
     }
   ],
   "next_action": "FRESH_RUN_FETCH_WITH_HTTP_FALLBACK",
   "task_sha256": "2f2f4e67e38959ac7d21eeea9861a798d579280c1960c89350b06cae32876f6a",
-  "checkpointed_at_utc": "2026-09-21T21:10:02.972Z"
+  "checkpointed_at_utc": "2026-09-21T21:10:02.972Z",
+  "evidence_path": "canonical/superworker_evidence/SUPERWORKER_GITHUB_QUALIFICATION_1.json",
+  "evidence_sha256": "cf6751b8ca45e0cba8d065635d9b161898ced71a568a5c0f969956d614e4afef",
+  "completed_at_utc": "2026-09-21T21:10:16.088Z"
 }
