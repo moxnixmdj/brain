@@ -12,7 +12,7 @@ const j = (x, status=200) => Response.json(x,{status,headers:{'cache-control':'n
 const safe = (x,n=12000) => String(x??'').slice(0,n);
 const sha256hex = async s => [...new Uint8Array(await crypto.subtle.digest('SHA-256',typeof s==='string'?enc.encode(s):s))].map(b=>b.toString(16).padStart(2,'0')).join('');
 
-function auth(req, env){ return !env.CONTROL_TOKEN || req.headers.get('authorization')===`Bearer ${env.CONTROL_TOKEN}`; }
+function auth(req, env){ return !!env.CONTROL_TOKEN && req.headers.get('authorization')===`Bearer ${env.CONTROL_TOKEN}`; }
 function stub(env){ return env.STATE.getByName(STATE_OBJECT); }
 
 export class SuperheroState extends DurableObject {
