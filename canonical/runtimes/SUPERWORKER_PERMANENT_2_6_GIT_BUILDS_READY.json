@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_SUPERWORKER_2_6_GIT_BUILDS_READY_V1",
+  "recorded_at_utc": "2026-09-21T20:55:00Z",
+  "agent_id": "SUPERWORKER-PERMANENT-1",
+  "runtime": "SUPERHERO-RUNTIME-2.6.0-DIRECT-SIGNED-PERMANENT",
+  "source": {
+    "repository": "moxnixmdj/brain",
+    "branch": "superworker-production",
+    "root_directory": "superworker-production",
+    "worker_commit": "35abffeaf01e00b2c9d42a5f74c323c40537b641",
+    "kernel_commit": "f6cd8b2e8cd72cb49081b980a504696d910cde26",
+    "wrangler_commit": "2faab2e9084337086d92d6b4d98a06b175fc54ad",
+    "package_commit": "ffb42f38e41ea68caea2301b88c2915a505fc604",
+    "manifest_commit": "c0a4ec2a77be096fb30a7ce42867169b69b8af6a",
+    "obsolete_wrangler_removed_commit": "66f5e3743ec979adf4aacbce35bc4507597bc109",
+    "obsolete_control_token_deployer_removed_commit": "70cf3842095d543c7e9f87cbcdae000889d5589d",
+    "worker_sha256": "86ea846e187bc36ca4272c6ea93d73d734d6ef1055c25eab89df46a37271a9be",
+    "kernel_sha256": "4e39f5728afc2c05a6b33d4e78b96da68f89fbca720efb3b859b77dc38d148da",
+    "sealed_bundle_sha256": "5c5e1d1e79862e71eca9217e3a34d2b1343cb3c7b03d4826fe0f4a56d3400072"
+  },
+  "deployment": {
+    "selected_channel": "CLOUDFLARE_WORKERS_BUILDS_GITHUB_INTEGRATION",
+    "local_zip_required": false,
+    "local_shell_required": false,
+    "local_wrangler_login_required": false,
+    "temporary_account": false,
+    "claim_link": false,
+    "build_command": "",
+    "deploy_command": "npx wrangler deploy",
+    "cloudflare_generated_reusable_build_token": true,
+    "hosted": false
+  },
+  "observed_blocker": {
+    "type": "EXTERNAL_ACCOUNT_AUTHORIZATION",
+    "cloudflare_dashboard_browser_automation": "BLOCKED_BY_HUMAN_VERIFICATION_AND_NO_SAVED_CLOUDFLARE_SESSION",
+    "github_cloudflare_app_status": "NO_BUILD_STATUS_OBSERVED_ON_PRODUCTION_COMMITS",
+    "cloudflare_api_credential_recovered": false
+  },
+  "p_superworker_real": 0,
+  "promotion_claim": false,
+  "next_gate": "AUTHORIZE_CLOUDFLARE_GITHUB_INTEGRATION_ONCE__CONNECT_REPO_AND_DEPLOY__VERIFY_ENDPOINT__RUN_SIGNED_CONSEQUENTIAL_MISSION"
+}
