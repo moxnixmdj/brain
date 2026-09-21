@@ -246,13 +246,14 @@ def run_hidden():
 
 def canary():
  root=pathlib.Path('/tmp/astra-visual-canary');root.mkdir(exist_ok=True)
+ style='<style>body{font-family:Arial,sans-serif;font-size:44px;padding:50px}a{display:block;font-size:44px;margin:60px 0;color:#0645ad}h1,h2{font-size:52px}</style>'
  pages={
- 'index.html':'<html><body><h1>Visual Canary</h1><a href="/ferry.html">Ferry</a></body></html>',
- 'ferry.html':'<html><body><a href="/route.html">Charlestown Ferry</a></body></html>',
- 'route.html':'<html><body><a href="/days.html">Today</a></body></html>',
- 'days.html':'<html><body><a href="/pdf.html">Saturday</a></body></html>',
- 'pdf.html':'<html><body><h2>PDF Schedules</h2><a href="/done.html">Current Charlestown Ferry Weekend Schedule PDF</a></body></html>',
- 'done.html':'<html><body><h1>Charlestown Ferry Weekend Schedule PDF</h1></body></html>'}
+ 'index.html':f'<html>{style}<body><h1>Visual Canary</h1><a href="/ferry.html">Ferry</a></body></html>',
+ 'ferry.html':f'<html>{style}<body><a href="/route.html">Charlestown Ferry</a></body></html>',
+ 'route.html':f'<html>{style}<body><a href="/days.html">Today</a></body></html>',
+ 'days.html':f'<html>{style}<body><a href="/pdf.html">Saturday</a></body></html>',
+ 'pdf.html':f'<html>{style}<body><h2>PDF Schedules</h2><a href="/done.html">Current Charlestown Ferry Weekend Schedule PDF</a></body></html>',
+ 'done.html':f'<html>{style}<body><h1>Charlestown Ferry Weekend Schedule PDF</h1></body></html>'}
  for n,h in pages.items():(root/n).write_text(h)
  class Handler(http.server.SimpleHTTPRequestHandler):
   def log_message(self,*a):pass
