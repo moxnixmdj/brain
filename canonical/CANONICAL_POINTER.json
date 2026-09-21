@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_POINTER_V1",
-  "canonical_generation": "2026-09-21-permanent-superworker-deploy-1",
+  "canonical_generation": "2026-09-21-permanent-superworker-2.6-preflight",
   "control_plane": {
     "provider": "GitHub",
     "repository": "moxnixmdj/brain",
@@ -13,9 +13,12 @@
     "snapshot_name": "PROJECT_BRAIN_CANONICAL_SNAPSHOT_2026-09-21.zip",
     "snapshot_sha256": "000606bc93206eea18b3046c0f6536f1bc3c5b3272c47b410fdecc37c01b0162",
     "snapshot_bytes": 42353579,
-    "active_runtime_package_file_id": "1qtLLklyV4ik8rv30xpSNqd5Y1KPbn7JT",
-    "active_runtime_package_name": "PROJECT_BRAIN_SUPERHERO_RUNTIME_V2_MODEL_INDEPENDENT.zip",
-    "active_runtime_package_sha256": "23ce2e44bc7417d05385c2d2bc78159ffd13dc597e3ec8de2a98df58903fc711"
+    "active_runtime_package_file_id": "1vDmgKevfXeEPsN58ZVaKdldyWaQ9LMGY",
+    "active_runtime_package_name": "PROJECT_BRAIN_PERMANENT_SUPERWORKER_2_6.zip",
+    "active_runtime_package_sha256": "5c5e1d1e79862e71eca9217e3a34d2b1343cb3c7b03d4826fe0f4a56d3400072",
+    "prior_runtime_package_file_id": "1qtLLklyV4ik8rv30xpSNqd5Y1KPbn7JT",
+    "prior_runtime_package_name": "PROJECT_BRAIN_SUPERHERO_RUNTIME_V2_MODEL_INDEPENDENT.zip",
+    "prior_runtime_package_sha256": "23ce2e44bc7417d05385c2d2bc78159ffd13dc597e3ec8de2a98df58903fc711"
   },
   "canonical_state_sha256": "5da4d719127b0ddbb6c4d878c3a27eaa75a7e25fec7aae55600e2567549d1762",
   "working_authority": "SQLite RECOVERY_BRAIN.sqlite",
@@ -46,14 +49,24 @@
     "full_astra_claim": false
   },
   "active_runtime": {
-    "runtime_id": "SUPERHERO-RUNTIME-2.3-DO-ALARM",
-    "agent_id": "SUPERWORKER-CANDIDATE-1",
-    "source_branch": "superworker-production",
-    "source_root": "superworker-production",
+    "runtime_id": "SUPERHERO-RUNTIME-2.6.0-DIRECT-SIGNED-PERMANENT",
+    "agent_id": "SUPERWORKER-PERMANENT-1",
+    "manifest_path": "canonical/runtimes/SUPERWORKER_PERMANENT_2_6.json",
+    "preflight_path": "canonical/runtimes/SUPERWORKER_PERMANENT_2_6_PREFLIGHT.json",
     "kernel": "MODEL_INDEPENDENT",
-    "deployment_mode": "PERMANENT_CLOUDFLARE_WORKERS_BUILDS_PRIVATE_GITHUB",
+    "deployment_mode": "PERMANENT_CLOUDFLARE_ACCOUNT_OAUTH_DEVICE_KEYRING",
+    "command_transport": "DIRECT_ECDSA_P256_SIGNED_VIA_GITHUB_RELAY",
+    "command_relay_workflow": ".github/workflows/superworker-signed-command-relay.yml",
+    "persistent_control_secret": false,
+    "temporary_account": false,
+    "claim_link": false,
+    "preflight": "PASS",
     "hosted": false,
     "promotion_authorized": false
+  },
+  "superseded_runtime": {
+    "runtime_id": "SUPERHERO-RUNTIME-2.3-DO-ALARM",
+    "status": "SUPERSEDED_FOR_PERMANENT_DEPLOYMENT_BY_2_6_SIGNED_COMMAND_CANDIDATE"
   },
   "retired_runtime": {
     "runtime_id": "PROJECT_BRAIN_SUPERHERO_CLOUDFLARE_RUNTIME_V1",
@@ -65,19 +78,24 @@
       "unproven": 3,
       "total": 51
     },
+    "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
+    "hidden_execute_state": "READY",
     "superworker_real": 0,
-    "next_step": "AUTHORIZE_CLOUDFLARE_GITHUB_ONCE__DEPLOY_PRODUCTION_RUNTIME__RUN_REAL_MISSION",
-    "temporary_cloudflare_accounts_forbidden": true
+    "next_step": "USER_AUTHORIZE_PERMANENT_CLOUDFLARE_DEVICE_OAUTH_ONCE__DEPLOY_2_6__CAPTURE_ENDPOINT__RUN_CONSEQUENTIAL_SIGNED_MISSION__INDEPENDENTLY_VERIFY__THEN_ASTRA_HIDDEN_EXECUTION",
+    "temporary_cloudflare_accounts_forbidden": true,
+    "new_host_research_forbidden_without_falsification": true
   },
   "provider_rules": {
-    "val_town": "OPTIONAL_RECOVERY_OR_EXECUTOR_ONLY",
+    "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
     "provider_local_truth_authoritative": false,
     "provider_loss_failover_required": true,
     "hard_zero_incremental_spend": true
   },
   "runtime_compliance": {
     "PROJECT_BRAIN_SUPERHERO_CLOUDFLARE_RUNTIME_V1": "RETIRED_DEFECTIVE_MODEL_IN_MANDATORY_LOOP",
-    "SUPERHERO-RUNTIME-2@0.2.1": "ACTIVE_CANDIDATE_MODEL_INDEPENDENT_FAIL_CLOSED"
+    "SUPERHERO-RUNTIME-2@0.2.1": "PRIOR_MODEL_INDEPENDENT_PROOF_BASE",
+    "SUPERHERO-RUNTIME-2.3-DO-ALARM": "SUPERSEDED_FOR_PERMANENT_DEPLOYMENT",
+    "SUPERHERO-RUNTIME-2.6.0-DIRECT-SIGNED-PERMANENT": "ACTIVE_DEPLOYMENT_CANDIDATE_PREFLIGHT_PASS__NOT_HOSTED__NOT_PROMOTED"
   },
   "execution_governance": {
     "anti_drift_law": "canonical/laws/EXECUTION_LEVERAGE_AND_ANTI_DRIFT_LAW_V1.md",
