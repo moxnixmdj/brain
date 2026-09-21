@@ -1,0 +1,19 @@
+{
+  "schema":"PROJECT_BRAIN_SUPERWORKER_QUALIFICATION_EVENT_V1",
+  "agent_id":"SUPERWORKER-CANDIDATE-Q9",
+  "mission_id":"SUPERWORKER-QUALIFICATION-Q9",
+  "status":"COMPLETE",
+  "generation":0,
+  "cycle":3,
+  "owner":"SUPERWORKER-CANDIDATE-Q9",
+  "lease_id":"9cf3a6a2-e07c-44bd-b550-43ff84eff84c",
+  "models_used":false,
+  "evidence_count":3,
+  "state_readback_sha256":"00bc00bf8db97c459123fd11e71e95000fca1bf4282a783df1b9f1438afa8176",
+  "primary_provider_failure":"INJECTED_AND_OBSERVED",
+  "fallback_provider":"http-fallback",
+  "assertions_verified":true,
+  "claim_expires_at":"2026-09-21T19:06:13.959Z",
+  "promotion_claim":false,
+  "next_gate":"USER_CLAIM_THEN_SAME_WORKER_STATE_READBACK_AND_SIGNED_POST_CLAIM_COMMAND"
+}
