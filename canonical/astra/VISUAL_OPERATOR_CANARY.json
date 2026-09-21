@@ -1,0 +1,9 @@
+{
+  "actions_total": 7,
+  "final_frame_sha256": "b11d6576ee715b9341a001438f16b856f24f5a08503d0103c0f15903a1a293b3",
+  "frames_total": 7,
+  "hidden_candidate_touched": false,
+  "pass": true,
+  "schema": "PROJECT_BRAIN_ASTRA_VISUAL_OPERATOR_CANARY_V1",
+  "visual_only": true
+}
