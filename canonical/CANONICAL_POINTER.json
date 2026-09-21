@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_POINTER_V1",
-  "canonical_generation": "2026-09-21-superworker-github-1-promoted",
+  "canonical_generation": "2026-09-21-superworker-github-1-promotion-revoked",
   "control_plane": {
     "provider": "GitHub",
     "repository": "moxnixmdj/brain",
@@ -53,11 +53,11 @@
     "agent_id": "SUPERWORKER-GITHUB-1",
     "identity_path": "canonical/agents/SUPERWORKER_GITHUB_1.json",
     "promotion_adjudication_path": "canonical/qualification/SUPERWORKER_GITHUB_1_WHOLE_DEFINITION_ADJUDICATION.json",
-    "deployment_mode": "PERMANENT_GITHUB_ACTIONS_CANONICAL_EXECUTOR",
+    "deployment_mode": "PERMANENT_GITHUB_ACTIONS_BOUNDED_EXECUTOR",
     "workflow": ".github/workflows/superworker-github-qualification.yml",
     "kernel": "MODEL_INDEPENDENT",
     "hosted": true,
-    "promotion_authorized": true,
+    "promotion_authorized": false,
     "persistent_identity": true,
     "task_deduplication": true,
     "capability_scope": [
@@ -68,7 +68,9 @@
       "provider_failover"
     ],
     "gui_capability_proven": false,
-    "full_astra_claim": false
+    "arbitrary_tool_discovery_proven": false,
+    "full_astra_claim": false,
+    "counts_as_real_superworker": false
   },
   "superseded_runtime": {
     "runtime_id": "SUPERHERO-RUNTIME-2.3-DO-ALARM",
@@ -86,12 +88,12 @@
     },
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "READY",
-    "superworker_real": 1,
-    "next_step": "MATERIALIZE_RECOVERY_ASTRA_HIDDEN_EXECUTE_V1__VERIFY_FROZEN_ONE_SHOT_PROTOCOL__ROUTE_ONLY_TO_AN_EXECUTOR_MATCHING_REQUIRED_GUI_CAPABILITIES",
+    "superworker_real": 0,
+    "next_step": "DO_NOT_BUILD_MORE_GENERIC_INFRASTRUCTURE__ACQUIRE_OR_REUSE_EXACT_ADMISSIBLE_SCREENSHOT_PLUS_COORDINATE_KEY_INPUT_SUBSTRATE__THEN_RUN_FROZEN_MBTA_ONE_SHOT",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
-    "cloudflare_authorization_blocker_removed_from_superworker_1_path": true,
-    "github_superworker_1_status": "PROMOTED_REAL_BOUNDED_CAPABILITY"
+    "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
+    "critical_blocker": "NO_VERIFIED_ADMISSIBLE_RAW_VISUAL_GUI_IO_SUBSTRATE_FOR_FROZEN_ASTRA_HIDDEN_MBTA_ONE_SHOT"
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
@@ -103,20 +105,28 @@
     "PROJECT_BRAIN_SUPERHERO_CLOUDFLARE_RUNTIME_V1": "RETIRED_DEFECTIVE_MODEL_IN_MANDATORY_LOOP",
     "SUPERHERO-RUNTIME-2@0.2.1": "PRIOR_MODEL_INDEPENDENT_PROOF_BASE",
     "SUPERHERO-RUNTIME-2.3-DO-ALARM": "SUPERSEDED_FOR_PERMANENT_DEPLOYMENT",
-    "SUPERHERO-RUNTIME-2.6.0-DIRECT-SIGNED-PERMANENT": "ACTIVE_DEPLOYMENT_CANDIDATE_PREFLIGHT_PASS__NOT_HOSTED__NOT_PROMOTED"
+    "SUPERHERO-RUNTIME-2.6.0-DIRECT-SIGNED-PERMANENT": "ACTIVE_DEPLOYMENT_CANDIDATE_PREFLIGHT_PASS__NOT_HOSTED__NOT_PROMOTED",
+    "SUPERHERO-RUNTIME-2.7-GITHUB-ACTIONS-PERSISTENT": "BOUNDED_EXECUTOR__NOT_REAL_SUPERWORKER"
   },
   "execution_governance": {
     "anti_drift_law": "canonical/laws/EXECUTION_LEVERAGE_AND_ANTI_DRIFT_LAW_V1.md",
     "activity_is_not_progress": true,
     "progress_metric": "VERIFIED_GOAL_PREDICATE_OR_CAUSAL_BLOCKER_CHANGE",
-    "no_progress_action_limit": 3,
-    "repeated_failure_class_limit": 2,
-    "infrastructure_freeze_when_next_real_mission_executable": true
+    "no_progress_action_limit": 1,
+    "repeated_failure_class_limit": 1,
+    "infrastructure_freeze_when_next_real_mission_executable": true,
+    "forbid_relabeling_bounded_executor_as_superworker": true,
+    "only_current_allowed_frontier_actions": [
+      "reuse_existing_admissible_visual_substrate",
+      "connect_one_admissible_zero_cost_visual_substrate",
+      "run_frozen_astra_hidden_one_shot",
+      "repair_only_observed_failed_property"
+    ]
   },
   "standby_runtime": {
     "runtime_id": "SUPERHERO-RUNTIME-2.6.0-DIRECT-SIGNED-PERMANENT",
     "agent_id": "SUPERWORKER-PERMANENT-1",
-    "status": "PREPARED_NOT_REQUIRED_FOR_SUPERWORKER_1_PROMOTION",
+    "status": "PREPARED_NOT_REQUIRED_FOR_CURRENT_FRONTIER",
     "source_branch": "superworker-production",
     "source_root": "superworker-production",
     "cloudflare_authorization_required": true
