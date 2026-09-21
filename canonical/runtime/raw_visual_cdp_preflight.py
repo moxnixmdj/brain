@@ -49,7 +49,10 @@ def main():
   except Exception as e: forbidden_ok='FORBIDDEN:' in str(e)
   else: forbidden_ok=False
   c.close()
-  result={'schema':'PROJECT_BRAIN_RAW_VISUAL_CDP_PREFLIGHT_V1','pass':len(data)>1000 and forbidden_ok,'chrome':chrome,'screenshot_bytes':len(data),'screenshot_sha256':hashlib.sha256(data).hexdigest(),'network_url':'https://example.com','visual_only_allowlist_enforced':forbidden_ok,'hidden_candidate_touched':False}
+  t=subprocess.run(['tesseract',str(out),'stdout'],text=True,capture_output=True)
+  ocr=t.stdout
+  ocr_ok=t.returncode==0 and 'Example Domain' in ocr
+  result={'schema':'PROJECT_BRAIN_RAW_VISUAL_CDP_PREFLIGHT_V2','pass':len(data)>1000 and forbidden_ok and ocr_ok,'chrome':chrome,'screenshot_bytes':len(data),'screenshot_sha256':hashlib.sha256(data).hexdigest(),'network_url':'https://example.com','visual_only_allowlist_enforced':forbidden_ok,'pixel_ocr_available':ocr_ok,'ocr_excerpt':ocr[:300],'hidden_candidate_touched':False}
   pathlib.Path('canonical/astra/RAW_VISUAL_CDP_PREFLIGHT.json').parent.mkdir(parents=True,exist_ok=True)
   pathlib.Path('canonical/astra/RAW_VISUAL_CDP_PREFLIGHT.json').write_text(json.dumps(result,indent=2)+'\n')
   print(json.dumps(result))
