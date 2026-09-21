@@ -1,0 +1,14 @@
+{
+  "$schema":"./node_modules/wrangler/config-schema.json",
+  "name":"project-brain-superworker-permanent-1",
+  "main":"worker.mjs",
+  "compatibility_date":"2026-09-21",
+  "durable_objects":{"bindings":[{"name":"STATE","class_name":"SuperheroState"}]},
+  "migrations":[{"tag":"v1","new_sqlite_classes":["SuperheroState"]}],
+  "vars":{
+    "ALARM_DELAY_MS":"5000",
+    "TASK_VERIFY_JWK":"{\"kty\":\"EC\",\"crv\":\"P-256\",\"x\":\"XJpL8l1hOCuIzzY6tPxk4FJqbnSFzsE_mvIwCKIoXh8\",\"y\":\"He83Le9i7oiLIV3Np4UymUP3yeM5TkAo84gAcl5IOxY\",\"ext\":true,\"key_ops\":[\"verify\"]}"
+  },
+  "triggers":{"crons":["* * * * *"]},
+  "account_id":"095c60c45232d2cd3ea43cb7e45f3c8b"
+}
