@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_CRITICAL_PATH_PRE_ACTION_GATE_V1",
+  "status": "MANDATORY_FAIL_CLOSED",
+  "checks": [
+    {"id":"MISSION_LOCK","question":"Is the terminal objective and current causal frontier explicitly known?","required":true},
+    {"id":"DIRECT_CAUSAL_VALUE","question":"Does this action directly advance the frontier, falsify a blocker, or preserve required evidence/state for a selected frontier action?","required":true},
+    {"id":"NO_INFRASTRUCTURE_DRIFT","question":"Is new infrastructure strictly required because the next real mission cannot execute correctly without it?","required":true},
+    {"id":"NO_TEMPORARY_PRODUCTION_LOOP","question":"Is this action free of repeated temporary accounts, expiring claim links, or disposable preview infrastructure on the production/promotion path?","required":true},
+    {"id":"NO_REPEAT_FAILURE_CLASS","question":"Has this exact failure class occurred fewer than two times without a root-cause change?","required":true},
+    {"id":"CREDENTIAL_TWO_PHASE_COMMIT","question":"Are every required post-action handle/credential/URL/lease/expiry durably stored and read back before the external mutation?","required":true},
+    {"id":"PROOF_NOT_CEREMONIAL","question":"Does this verification close a currently material uncertainty rather than reproving an already sufficient property?","required":true},
+    {"id":"ADEQUATE_ROUTE_ALREADY_EXISTS","question":"If an adequate route already exists, are we executing it rather than continuing research or platform search?","required":true},
+    {"id":"USER_INTERVENTION_MINIMAL","question":"If user action is requested, is it a genuine external authority boundary and the smallest possible action?","required":true}
+  ],
+  "automatic_abort_conditions": [
+    "THREE_ACTIONS_WITHOUT_GOAL_PREDICATE_OR_CAUSAL_BLOCKER_CHANGE",
+    "SECOND_FAILURE_OF_SAME_CLASS_WITHOUT_ROOT_CAUSE_CHANGE",
+    "TEMPORARY_RESOURCE_REGENERATION_AFTER_PROPERTY_ALREADY_PROVEN",
+    "INFRASTRUCTURE_WORK_WHILE_NEXT_REAL_MISSION_IS_EXECUTABLE",
+    "MISSING_DURABLE_POST_ACTION_CREDENTIAL_OR_HANDLE",
+    "ACTIVITY_METRIC_SUBSTITUTED_FOR_CAPABILITY_METRIC"
+  ],
+  "on_abort": "RECONCILE_FROM_MISSION_LOCK_AND_SELECT_SHORTEST_VERIFIED_PATH_TO_TERMINAL_CAPABILITY"
+}
