@@ -49,7 +49,8 @@
     "recovery_ladder_required": true,
     "summary_and_memory_non_authoritative": true,
     "abort_on_frontier_contradiction": true,
-    "truth_first_law_path": "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md"
+    "truth_first_law_path": "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
+    "truth_first_regression_path": "canonical/regressions/2026-09-22_STALE_STATE_DUPLICATE_EXECUTION.json"
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
