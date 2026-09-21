@@ -1,1 +1,1 @@
-run=2\nhidden_candidate_touched=false\nrepair=localhost-cdp-origin\n
+run=3\nhidden_candidate_touched=false\nvalidate=pixel-ocr\n
