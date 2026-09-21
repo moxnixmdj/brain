@@ -1,0 +1,20 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "project-brain-superhero-v2",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-21",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {"enabled": true},
+  "ai": {"binding": "AI"},
+  "browser": {"binding": "BROWSER"},
+  "durable_objects": {"bindings":[{"name":"STATE","class_name":"SuperheroState"}]},
+  "migrations": [{"tag":"v1","new_sqlite_classes":["SuperheroState"]}],
+  "workflows": [{"name":"project-brain-superhero-loop-v2","binding":"SUPERHERO_LOOP","class_name":"SuperheroWorkflow"}],
+  "vars": {
+    "MAX_CYCLES_PER_GENERATION":"400",
+    "BRAIN_REPO":"moxnixmdj/brain",
+    "ENABLE_MODEL_PROVIDER":"false",
+    "TEXT_MODEL":"@cf/nvidia/nemotron-3-120b-a12b",
+    "VISION_MODEL":"@cf/google/gemma-4-26b-a4b-it"
+  }
+}
