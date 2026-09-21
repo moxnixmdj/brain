@@ -32,7 +32,7 @@ def main():
  chrome=os.environ.get('CHROME_BIN') or next((p for p in ['/usr/bin/google-chrome','/usr/bin/google-chrome-stable','/usr/bin/chromium','/usr/bin/chromium-browser'] if os.path.exists(p)),None)
  if not chrome: raise RuntimeError('NO_CHROME_BINARY')
  prof='/tmp/pb-cdp-canary';pathlib.Path(prof).mkdir(exist_ok=True)
- proc=subprocess.Popen([chrome,'--headless=new','--no-sandbox','--disable-gpu','--remote-debugging-address=127.0.0.1','--remote-debugging-port=9222',f'--user-data-dir={prof}','about:blank'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+ proc=subprocess.Popen([chrome,'--headless=new','--no-sandbox','--disable-gpu','--remote-debugging-address=127.0.0.1','--remote-debugging-port=9222','--remote-allow-origins=http://127.0.0.1:9222',f'--user-data-dir={prof}','about:blank'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
  try:
   tabs=wait_json('http://127.0.0.1:9222/json')
   page=next(x for x in tabs if x.get('type')=='page')
