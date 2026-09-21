@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_SUPERWORKER_2_6_PREFLIGHT_V1",
+  "recorded_at_utc": "2026-09-21T20:27:21Z",
+  "agent_id": "SUPERWORKER-PERMANENT-1",
+  "runtime": "SUPERHERO-RUNTIME-2.6.0-DIRECT-SIGNED-PERMANENT",
+  "status": "PREFLIGHT_PASS__PERMANENT_CLOUDFLARE_OAUTH_REQUIRED",
+  "bundle": {
+    "name": "PROJECT_BRAIN_PERMANENT_SUPERWORKER_2_6.zip",
+    "sha256": "5c5e1d1e79862e71eca9217e3a34d2b1343cb3c7b03d4826fe0f4a56d3400072",
+    "bytes": 11188,
+    "drive_file_id": "1vDmgKevfXeEPsN58ZVaKdldyWaQ9LMGY"
+  },
+  "source": {
+    "kernel_sha256": "4e39f5728afc2c05a6b33d4e78b96da68f89fbca720efb3b859b77dc38d148da",
+    "worker_sha256": "86ea846e187bc36ca4272c6ea93d73d734d6ef1055c25eab89df46a37271a9be",
+    "syntax_check": "PASS"
+  },
+  "command_authority": {
+    "scheme": "ECDSA_P256_SHA256_IEEE_P1363",
+    "private_key_drive_file_id": "1tZ_y1BHBXw3uJQ55g3zgEV5JaGfyZcF2",
+    "private_key_plaintext_in_git": false,
+    "private_key_recovery": "PASS",
+    "derived_public_key_matches_worker_jwk": true,
+    "local_webcrypto_signature_compatibility": "PASS"
+  },
+  "relay": {
+    "repository": "moxnixmdj/brain",
+    "workflow": ".github/workflows/superworker-signed-command-relay.yml",
+    "commit": "b7b5f02a555120ecd92fefc24e4076379a3b857a",
+    "secret_material_required": false,
+    "worker_signature_verification_authoritative": true
+  },
+  "cloudflare_contract": {
+    "wrangler_version": "4.136.1",
+    "device_oauth_supported": true,
+    "os_keyring_supported": true,
+    "permanent_account_id": "095c60c45232d2cd3ea43cb7e45f3c8b",
+    "temporary_account": false,
+    "claim_link": false
+  },
+  "promotion_claim": false,
+  "p_superworker_real": 0,
+  "next_gate": "USER_PERMANENT_CLOUDFLARE_DEVICE_OAUTH__DEPLOY__CAPTURE_WORKER_ENDPOINT__RUN_CONSEQUENTIAL_SIGNED_MISSION"
+}
