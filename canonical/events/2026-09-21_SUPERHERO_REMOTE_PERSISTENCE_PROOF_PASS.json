@@ -1,0 +1,23 @@
+{
+  "schema": "PROJECT_BRAIN_CANONICAL_EVENT_V1",
+  "event_type": "SUPERHERO_REMOTE_PERSISTENCE_PROOF_PASS",
+  "runtime_id": "SUPERHERO-RUNTIME-2",
+  "proof_runtime": "Cloudflare Worker + SQLite Durable Object alarm",
+  "worker_url": "https://project-brain-superhero-v2-proof-fast4.robust-origami.workers.dev",
+  "started_at": "2026-09-21T15:42:41.091Z",
+  "completed_at": "2026-09-21T15:42:45.610Z",
+  "generations": 3,
+  "cycles": 3,
+  "primary_provider_failure": "HTTP_530",
+  "failover_provider": "fallback-http",
+  "evidence": {
+    "status": 200,
+    "bytes": 559,
+    "sha256": "ff67a9d764d6a2367a187734e697f6a53217db9a21c101d410a113ca871a299d",
+    "post_wake_hash_match": true
+  },
+  "model_provider_used": false,
+  "result": "REMOTE_PERSISTENCE_FAILOVER_AUTONOMOUS_CONTINUATION_PASS",
+  "superworker_real_claim": false,
+  "note": "This proves remote durable continuation and provider failover only. Full consequential qualification remains required."
+}
