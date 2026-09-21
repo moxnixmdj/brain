@@ -1,0 +1,25 @@
+name: Project Brain Raw Visual CDP Preflight
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'canonical/astra/RUN_RAW_VISUAL_PREFLIGHT.trigger'
+permissions:
+  contents: write
+jobs:
+  preflight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install --disable-pip-version-check websocket-client
+      - run: python canonical/runtime/raw_visual_cdp_preflight.py
+      - name: Persist preflight evidence
+        run: |
+          git config user.name 'Project Brain Astra Preflight'
+          git config user.email 'project-brain-astra@users.noreply.github.com'
+          git add canonical/astra/RAW_VISUAL_CDP_PREFLIGHT.json
+          git commit -m 'Record raw visual CDP preflight'
+          git push
