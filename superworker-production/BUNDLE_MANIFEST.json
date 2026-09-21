@@ -1,0 +1,21 @@
+{
+  "agent_id": "SUPERWORKER-PERMANENT-1",
+  "claim_links": false,
+  "command_private_key_location": "PRIVATE_GOOGLE_DRIVE_PROJECT_BRAIN_CANONICAL_SECRETS",
+  "command_transport": "DIRECT_ECDSA_P256_SIGNED",
+  "files": {
+    "DEPLOY_PERMANENT.ps1": {"bytes": 5134,"sha256": "cb76a68f956e2a9a183a89e6c401abdc286831a99da438afc8316dca25665fcb"},
+    "README.md": {"bytes": 692,"sha256": "bee444b1ad33fa810c0f7b6af46cc1f4aef31e1593f744d6abd54e51ab212eb4"},
+    "START_SUPERWORKER.cmd": {"bytes": 282,"sha256": "ee80b97ea4979fa0f37e15bdfd26f275c4c33d6a4552e48adc4777f3b944df16"},
+    "kernel.js": {"bytes": 5603,"sha256": "4e39f5728afc2c05a6b33d4e78b96da68f89fbca720efb3b859b77dc38d148da"},
+    "package.json": {"bytes": 139,"sha256": "1ecc97a83c1531b86f3c4fd0305003e8af84456328e8663ca1507afa3b1443fe"},
+    "worker.mjs": {"bytes": 11382,"sha256": "86ea846e187bc36ca4272c6ea93d73d734d6ef1055c25eab89df46a37271a9be"},
+    "wrangler.json": {"bytes": 664,"sha256": "43229e2fe00491116c7abbb0db4746b7a421f869852d78b1c4cdf32baa59cba8"}
+  },
+  "kernel": "MODEL_INDEPENDENT",
+  "persistent_control_secret": false,
+  "promotion_claim": false,
+  "runtime": "SUPERHERO-RUNTIME-2.6.0-DIRECT-SIGNED-PERMANENT",
+  "schema": "PROJECT_BRAIN_PERMANENT_SUPERWORKER_BUNDLE_V1",
+  "temporary_accounts": false
+}
