@@ -1,0 +1,11 @@
+{
+  "schema": "PROJECT_BRAIN_CANONICAL_EVENT_V1",
+  "event_type": "SUPERHERO_PERSISTENT_RUNTIME_IMPLEMENTED",
+  "runtime_id": "SUPERHERO-RUNTIME-1",
+  "runtime_manifest_path": "canonical/agents/SUPERHERO_RUNTIME_CLOUDFLARE_V1.json",
+  "package_sha256": "a00ff54bae39779c994211ac10570bd6120d21b9f52fb1c3906eb8480b4650a6",
+  "status": "AWAITING_CLOUDFLARE_ACCOUNT_CONNECTION",
+  "full_astra_claim": false,
+  "superworker_real_claim": false,
+  "recorded_at": "2026-09-21T05:59:00Z"
+}
