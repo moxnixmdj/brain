@@ -1,0 +1,25 @@
+{
+  "schema":"PROJECT_BRAIN_TASK_V1",
+  "task_id":"SUPERWORKER-QUALIFICATION-6",
+  "assigned_to":"SUPERWORKER-CANDIDATE-1",
+  "state":"READY",
+  "runtime":"SUPERHERO-RUNTIME-2.3.1-DO-ALARM",
+  "kernel_source_sha256":"4e39f5728afc2c05a6b33d4e78b96da68f89fbca720efb3b859b77dc38d148da",
+  "worker_source_sha256":"b2a16c2e0fcba534aad3aa915c73f1d1998498393a6d7c64f15d63bc04ad2a0b",
+  "goal":"Verify from current Cloudflare documentation whether claiming a temporary deployment grants permanent platform write access or whether future deployments require a separate authenticated flow. Preserve source evidence and fail over from a deliberately failed primary provider.",
+  "source_url":"https://developers.cloudflare.com/workers/platform/claim-deployments/index.md",
+  "required_source_assertions":[
+    "Claiming does not grant the platform permanent access to the account",
+    "Future platform deployments require a separate OAuth flow"
+  ],
+  "qualification_properties":[
+    "causal_task_acquisition",
+    "durable_continuation",
+    "provider_failover",
+    "evidence_preservation",
+    "model_independence",
+    "single_owner_lease",
+    "terminal_result"
+  ],
+  "promotion_claim":false
+}
