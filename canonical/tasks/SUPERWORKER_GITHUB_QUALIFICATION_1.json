@@ -36,5 +36,6 @@
     "DISTINCT_VERIFICATION"
   ],
   "promotion_claim": false,
-  "execution_revision": 2
+  "execution_revision": 2,
+  "replay_probe": 1
 }
