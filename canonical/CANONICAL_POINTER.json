@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_POINTER_V1",
-  "canonical_generation": "2026-09-21-provider-independent-2",
+  "canonical_generation": "2026-09-21-provider-independent-3",
   "control_plane": {
     "provider": "GitHub",
     "repository": "moxnixmdj/brain",
@@ -16,6 +16,15 @@
   },
   "canonical_state_sha256": "5da4d719127b0ddbb6c4d878c3a27eaa75a7e25fec7aae55600e2567549d1762",
   "working_authority": "SQLite RECOVERY_BRAIN.sqlite",
+  "mandatory_laws": [
+    "canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md"
+  ],
+  "boot_requirements": {
+    "read_mandatory_laws_before_execution": true,
+    "models_are_optional_sources_only": true,
+    "knowledge_and_state_externalized": true,
+    "search_and_reuse_before_invention": true
+  },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
     "identity_path": "canonical/agents/ASTRA_OPERATIONAL_IDENTITY_V1.json",
@@ -24,6 +33,10 @@
     "operational": true,
     "full_astra_claim": false,
     "activation_event": "canonical/events/2026-09-21_ASTRA_OPERATIONAL_ACTIVATION.json"
+  },
+  "runtime_compliance": {
+    "PROJECT_BRAIN_SUPERHERO_CLOUDFLARE_RUNTIME_V1": "NON_COMPLIANT_MODEL_IN_MANDATORY_LOOP__REPAIR_REQUIRED",
+    "promotion_blocked_until_model_independent_kernel": true
   },
   "current_frontier": {
     "astra_non_global": {
