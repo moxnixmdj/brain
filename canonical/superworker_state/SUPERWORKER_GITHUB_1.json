@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_SUPERWORKER_STATE_V1",
+  "agent_id": "SUPERWORKER-GITHUB-1",
+  "runtime": "SUPERHERO-RUNTIME-2.7-GITHUB-ACTIONS-PERSISTENT",
+  "mission_id": "SUPERWORKER-GITHUB-QUALIFICATION-1",
+  "status": "CHECKPOINTED_FOR_FRESH_RUN_CONTINUATION",
+  "generation": 1,
+  "cycle": 1,
+  "models_used": false,
+  "incremental_cost_usd": 0,
+  "ownership": {
+    "owner": "SUPERWORKER-GITHUB-1",
+    "lease_id": "57e0bce8-7c82-4682-bf09-f6bdac76e08c",
+    "acquired_at_utc": "2026-09-21T21:02:31.113Z"
+  },
+  "provider_events": [
+    {
+      "seq": 1,
+      "type": "MISSION_ACQUIRED",
+      "at_utc": "2026-09-21T21:02:31.114Z"
+    },
+    {
+      "seq": 2,
+      "type": "PROVIDER_SELECTED",
+      "provider": "http-primary",
+      "at_utc": "2026-09-21T21:02:31.114Z"
+    },
+    {
+      "seq": 3,
+      "type": "PROVIDER_FAILOVER_REQUIRED",
+      "provider": "http-primary",
+      "reason": "INJECTED_PRIMARY_PROVIDER_FAILURE",
+      "at_utc": "2026-09-21T21:02:31.114Z"
+    }
+  ],
+  "next_action": "FRESH_RUN_FETCH_WITH_HTTP_FALLBACK",
+  "task_sha256": "4a3026875ba7b637d30faf65b3372354086af1be007eec9c3e76df71ca8703c3",
+  "checkpointed_at_utc": "2026-09-21T21:02:31.114Z"
+}
