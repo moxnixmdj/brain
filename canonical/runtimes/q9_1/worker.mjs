@@ -153,6 +153,7 @@ export class SuperheroState {
   }
   async fetch(req){
     const u=new URL(req.url);
+    if(u.pathname==='/wake'&&req.method==='POST'){await this.ctx.storage.setAlarm(now()+5000);return j({ok:true,wake:'SCHEDULED'},202);}
     if(u.pathname==='/create'&&req.method==='POST'){const spec=await req.json();try{return j(await this.create(spec),202)}catch(e){return j({error:String(e.message||e)},409)}}
     const mm=u.pathname.match(/^\/mission\/([^/]+)$/);if(mm){const x=await this.get(mm[1]);return x?j({mission:x,events:x.externalEvents||[]}):j({error:'NOT_FOUND'},404)}
     return j({error:'NOT_FOUND'},404);
@@ -161,8 +162,8 @@ export class SuperheroState {
 
 export default {async fetch(req,env){
   const u=new URL(req.url);
-  if(req.method==='GET'&&u.pathname==='/health')return j({ok:true,agentId:AGENT_ID,runtime:RUNTIME_ID,kernel:'MODEL_INDEPENDENT',modelsRequired:false,continuation:'DURABLE_OBJECT_ALARM',externalCommandQueue:true,externalReceiptQueue:true,idlePolling:'PERSISTENT_60S',promotionClaim:false});
   const stub=stateStub(env);
+  if(req.method==='GET'&&u.pathname==='/health'){await stub.fetch(new Request('https://state.internal/wake',{method:'POST'}));return j({ok:true,agentId:AGENT_ID,runtime:RUNTIME_ID,kernel:'MODEL_INDEPENDENT',modelsRequired:false,continuation:'DURABLE_OBJECT_ALARM',externalCommandQueue:true,externalReceiptQueue:true,idlePolling:'PERSISTENT_60S',wakeOnHealth:true,promotionClaim:false});}
   const am=u.pathname.match(/^\/attest\/([^/]+)$/);
   if(req.method==='GET'&&am){
     const rr=await stub.fetch(new Request(`https://state.internal/mission/${encodeURIComponent(am[1])}`));
