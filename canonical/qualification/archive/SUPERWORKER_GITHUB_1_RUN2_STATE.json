@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_SUPERWORKER_STATE_V1",
+  "agent_id": "SUPERWORKER-GITHUB-1",
+  "runtime": "SUPERHERO-RUNTIME-2.7-GITHUB-ACTIONS-PERSISTENT",
+  "mission_id": "SUPERWORKER-GITHUB-HOST-DECISION-1",
+  "status": "COMPLETE",
+  "generation": 2,
+  "cycle": 2,
+  "models_used": false,
+  "incremental_cost_usd": 0,
+  "ownership": {
+    "owner": "SUPERWORKER-GITHUB-1",
+    "lease_id": "f1aabe7d-2b3e-424c-9c7b-0e64829d7d03",
+    "acquired_at_utc": "2026-09-21T21:06:11.976Z"
+  },
+  "provider_events": [
+    {
+      "seq": 1,
+      "type": "MISSION_ACQUIRED",
+      "at_utc": "2026-09-21T21:06:11.977Z"
+    },
+    {
+      "seq": 2,
+      "type": "PROVIDER_SELECTED",
+      "provider": "http-primary",
+      "at_utc": "2026-09-21T21:06:11.977Z"
+    },
+    {
+      "seq": 3,
+      "type": "PROVIDER_FAILOVER_REQUIRED",
+      "provider": "http-primary",
+      "reason": "INJECTED_PRIMARY_PROVIDER_FAILURE",
+      "at_utc": "2026-09-21T21:06:11.977Z"
+    },
+    {
+      "seq": 4,
+      "type": "FRESH_RUN_CONTINUED",
+      "provider": "http-fallback",
+      "at_utc": "2026-09-21T21:06:25.881Z"
+    },
+    {
+      "seq": 5,
+      "type": "SOURCE_FETCHED",
+      "source_url": "https://raw.githubusercontent.com/github/docs/add0a52d76879dff93304a5aa96895f9d68d5dac/data/reusables/actions/workflows/section-triggering-a-workflow.md",
+      "body_sha256": "c38997788ada22de41a09d43a019cc9d1d218a084bd30b53e269260d6b72b03a",
+      "at_utc": "2026-09-21T21:06:25.881Z"
+    },
+    {
+      "seq": 6,
+      "type": "MISSION_TERMINAL_COMPLETE",
+      "at_utc": "2026-09-21T21:06:25.881Z"
+    }
+  ],
+  "next_action": "FRESH_RUN_FETCH_WITH_HTTP_FALLBACK",
+  "task_sha256": "b18d7cb08b413b045903332861434d559ed95be0120e1ae9040d2226e7a3d19c",
+  "checkpointed_at_utc": "2026-09-21T21:06:12.053Z",
+  "evidence_path": "canonical/superworker_evidence/SUPERWORKER_GITHUB_QUALIFICATION_1.json",
+  "evidence_sha256": "26cff50571565c5d0c4118858aff8a5f19636a9ffe67bb06548e20fb634cd05b",
+  "completed_at_utc": "2026-09-21T21:06:25.881Z"
+}
