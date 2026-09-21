@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_FAMILY_COMPLETION_SUITE_V1",
+  "frozen_before_generation": true,
+  "recovered_family_taxonomy": [
+    "NOVEL_ADAPTATION_REASONING",
+    "GUI_COMPUTER_USE",
+    "WEB_RESEARCH",
+    "SOFTWARE_ENGINEERING",
+    "MATH_SCIENCE",
+    "PROFESSIONAL_WORK",
+    "TOOL_ORCHESTRATION",
+    "LONG_HORIZON_MEMORY_CONTEXT",
+    "SCOPE_JUDGMENT_ALIGNMENT",
+    "SPEED_COST_EFFICIENCY"
+  ],
+  "already_covered_by_A_B_C": [
+    "NOVEL_ADAPTATION_REASONING",
+    "GUI_COMPUTER_USE",
+    "WEB_RESEARCH",
+    "MATH_SCIENCE",
+    "TOOL_ORCHESTRATION",
+    "LONG_HORIZON_MEMORY_CONTEXT",
+    "SCOPE_JUDGMENT_ALIGNMENT",
+    "SPEED_COST_EFFICIENCY"
+  ],
+  "missing_clean_hidden_family_evidence": [
+    "SOFTWARE_ENGINEERING",
+    "PROFESSIONAL_WORK"
+  ],
+  "missions": [
+    {
+      "id": "ASTRA-FAMILY-HIDDEN-D",
+      "family": "SOFTWARE_ENGINEERING",
+      "task": "A fresh isolated Python repository will be generated only after this mission is frozen. Inspect the repository, identify the defect causing its frozen tests to fail, repair production code only, run the tests to green, and preserve the exact diff plus test evidence. Do not alter tests or weaken assertions."
+    },
+    {
+      "id": "ASTRA-FAMILY-HIDDEN-E",
+      "family": "PROFESSIONAL_WORK",
+      "task": "A fresh business dataset will be generated only after this mission is frozen. Produce a professional XLSX workbook with raw data and a summary sheet containing total revenue, total gross profit, gross margin, and the top region by revenue; also produce a one-slide PPTX executive summary using the same verified numbers. Independently read both artifacts back and verify their values."
+    }
+  ],
+  "promotion_claim": false,
+  "full_astra_claim": false
+}
