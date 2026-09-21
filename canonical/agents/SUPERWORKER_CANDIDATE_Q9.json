@@ -1,0 +1,12 @@
+{
+  "schema":"PROJECT_BRAIN_AGENT_REGISTRATION_V1",
+  "agent_id":"SUPERWORKER-CANDIDATE-Q9",
+  "runtime":"SUPERHERO-RUNTIME-2.5-DO-ALARM-EXTBUS",
+  "kernel_source_sha256":"4e39f5728afc2c05a6b33d4e78b96da68f89fbca720efb3b859b77dc38d148da",
+  "worker_source_sha256":"23e2c1bd1cc40050efa5bc42bfbbe8edce158032d26148b2052126bb2b8a36ac",
+  "worker_url":"https://project-brain-superworker-q9.picayune-mantis.workers.dev",
+  "control_material_drive_file_id":"1z0JVe0fOR5dyYg0dV5hR9rNDa-gzRKopTV7Rci2quV0",
+  "models_required":false,
+  "status":"QUALIFICATION_COMPLETE__AWAITING_CLAIM_CONTINUITY_READBACK",
+  "promotion_claim":false
+}
