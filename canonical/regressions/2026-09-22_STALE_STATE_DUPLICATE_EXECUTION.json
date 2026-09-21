@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_REGRESSION_CASE_V1",
+  "id": "2026-09-22_STALE_STATE_DUPLICATE_EXECUTION",
+  "status": "PERMANENT_FAIL_CLOSED_REGRESSION",
+  "incident": [
+    "Agent planned new Astra global missions from stale chat/frontier context.",
+    "Recovered authoritative astra_predicates already marked all ten global predicates PROVEN.",
+    "Missing referenced adjudication files were initially mistaken for possible missing capability.",
+    "Live canonical pointer later showed Astra 61/61 verified and frontier already moved to real Superworker qualification."
+  ],
+  "prohibited_patterns": [
+    "PLAN_NEW_EXPERIMENT_BEFORE_REFRESHING_LIVE_CANONICAL_POINTER",
+    "TREAT_MISSING_EVIDENCE_FILE_AS_MISSING_CAPABILITY",
+    "RERUN_PROVEN_PREDICATE_WITHOUT_DOCUMENTED_INVALIDATION",
+    "USE_SUMMARY_OR_MEMORY_AS_FRONTIER_AUTHORITY",
+    "CONTINUE_PLAN_AFTER_CANONICAL_GENERATION_ADVANCES"
+  ],
+  "required_prevention": [
+    "REFRESH_LIVE_CANONICAL_STATE",
+    "LOCK_CANONICAL_GENERATION_OR_COMMIT",
+    "SEARCH_PRIOR_TASK_PREDICATE_EVIDENCE_AND_VERIFIER_RECORDS",
+    "CLASSIFY_EVIDENCE_PRESENCE",
+    "APPLY_RECOVERY_LADDER",
+    "ABORT_ON_FRONTIER_CONTRADICTION"
+  ],
+  "passing_condition": "A future agent confronted with the same state must stop duplicate Astra experimentation and immediately reconcile to the newer canonical frontier.",
+  "canonical_law": "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
+  "mandatory_gate": "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V2.json"
+}
