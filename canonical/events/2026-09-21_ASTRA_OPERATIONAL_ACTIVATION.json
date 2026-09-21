@@ -1,0 +1,10 @@
+{
+  "schema": "PROJECT_BRAIN_CANONICAL_EVENT_V1",
+  "event_type": "ASTRA_OPERATIONAL_ACTIVATION",
+  "agent_id": "ASTRA-OPERATIONAL-1",
+  "identity_sha256": "8d04f5f5c166a054d12b4b19368105658f19000d05ce329f8d45164ae3f5e158",
+  "operational": true,
+  "full_astra_claim": false,
+  "next_truth_gate": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
+  "recorded_at": "2026-09-21T05:51:15.816789+00:00"
+}
