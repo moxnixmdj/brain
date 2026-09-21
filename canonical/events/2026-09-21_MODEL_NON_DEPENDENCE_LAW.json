@@ -1,0 +1,15 @@
+{
+  "schema": "PROJECT_BRAIN_CANONICAL_EVENT_V1",
+  "event_type": "MODEL_NON_DEPENDENCE_LAW_CANONICALIZED",
+  "status": "MANDATORY",
+  "scope": [
+    "PROJECT_BRAIN",
+    "ASTRA",
+    "SUPERHERO",
+    "SUPER_WORKER"
+  ],
+  "law_path": "canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md",
+  "summary": "Models are optional sources/tools only. Persistent cognition and continuation must be model-independent.",
+  "consequence": "Any runtime with an LLM/model in the mandatory supervisor loop is non-compliant and must be repaired before promotion.",
+  "recorded_at": "2026-09-21T06:10:00Z"
+}
