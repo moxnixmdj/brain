@@ -1,0 +1,10 @@
+{
+  "schema": "PROJECT_BRAIN_RAW_VISUAL_CDP_PREFLIGHT_V1",
+  "pass": true,
+  "chrome": "/usr/bin/google-chrome",
+  "screenshot_bytes": 19913,
+  "screenshot_sha256": "fdf1fc498085161d037d158662cb2f0ea9bbdbe87efa46f4bec75ad453db3ddd",
+  "network_url": "https://example.com",
+  "visual_only_allowlist_enforced": true,
+  "hidden_candidate_touched": false
+}
