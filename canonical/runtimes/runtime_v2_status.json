@@ -1,1 +1,18 @@
-{"runtime":"v2","version":"0.2.1","kernel":"model-independent","local_proof":"pass","control_auth":"fail_closed","hosted":false,"sealed_package_sha256":"260dc8c5454646672b6cb456d619685792c005b1f2e856227e75a07ce2a316e1","remote_proof_adapter_sha256":"f961a6ffe029123bab050ed9ab8b66f13ca56fb4e0d2ab7c49b6531980d3332c","next":"cloudflare_temporary_account_after_explicit_terms_acceptance"}
+{
+  "runtime": "v2",
+  "version": "0.2.1",
+  "kernel": "model-independent",
+  "local_proof": "pass",
+  "control_auth": "fail_closed",
+  "hosted": false,
+  "sealed_package_sha256": "260dc8c5454646672b6cb456d619685792c005b1f2e856227e75a07ce2a316e1",
+  "remote_proof_adapter_sha256": "f961a6ffe029123bab050ed9ab8b66f13ca56fb4e0d2ab7c49b6531980d3332c",
+  "next": "cloudflare_temporary_account_after_explicit_terms_acceptance",
+  "remote_persistence_proof": "PASS",
+  "remote_proof_result": "REMOTE_PERSISTENCE_FAILOVER_AUTONOMOUS_CONTINUATION_PASS",
+  "remote_proof_worker": "https://project-brain-superhero-v2-proof-fast4.robust-origami.workers.dev",
+  "remote_proof_model_used": false,
+  "remote_proof_generations": 3,
+  "hosted_full_runtime": false,
+  "promotion": false
+}
