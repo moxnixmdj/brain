@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ANTI_DRIFT_ACTIVATION_RECEIPT_V1",
+  "activated_on": "2026-09-21",
+  "status": "ACTIVE_CANONICAL_MANDATORY_FAIL_CLOSED",
+  "law_commit": "0f3acea7ba8899e7798259e22a5b13f740fbf523",
+  "event_commit": "207a80b38a7d16f6c2abc1b9842ae6c634b7726b",
+  "pre_action_gate_commit": "2b9e7c879679e821e430c8412df3d624eb7591ba",
+  "astra_identity_binding_commit": "22f1b0b852e7311dbd30d76cf869ec9121cf1898",
+  "superworker_binding_commit": "3ecf618e9e4d8b00cfd21c79a34a41d2bee133f7",
+  "canonical_boot_binding_commit": "0e03a5aba479d854cb6a30ccb5ec3e7ec910b058",
+  "enforced_failure_classes": [
+    "TEMPORARY_CLAIM_LINK_LOOP",
+    "WEAK_EXECUTION_SURFACE_OVERRETRY",
+    "CREDENTIAL_HANDOFF_NOT_DURABLY_PRESERVED",
+    "REPEATED_ALREADY_SUFFICIENT_PROOFS",
+    "INFRASTRUCTURE_BECOMES_MISSION",
+    "ACTIVITY_MISTAKEN_FOR_CAPABILITY_PROGRESS"
+  ],
+  "progress_metric": "VERIFIED_GOAL_PREDICATE_OR_CAUSAL_BLOCKER_CHANGE",
+  "guarantee_note": "This is a fail-closed prevention system, not a mathematical guarantee that no future mistake can ever occur."
+}
