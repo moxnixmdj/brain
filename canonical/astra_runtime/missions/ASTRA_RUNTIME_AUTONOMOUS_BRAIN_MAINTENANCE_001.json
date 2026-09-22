@@ -74,5 +74,11 @@
     "repair_commit": "1d6ef3122cf63e877002567c82cc8066931d7bbd",
     "repair": "Second-pass intent normalizer converts free-form planner reasoning into one allowlisted typed action before execution",
     "replay_authorized": true
+  },
+  "replay_after_root_cause_change_7": {
+    "prior_failure": "HTTP_431_AFTER_AUTONOMOUS_EVIDENCE_GATHERING",
+    "repair_commit": "893a5519efdaa3f19805c9d1942f3120f9c6ce4c",
+    "repair": "Bound tree/read results and compact iterative observations before planner transport",
+    "replay_authorized": true
   }
 }
