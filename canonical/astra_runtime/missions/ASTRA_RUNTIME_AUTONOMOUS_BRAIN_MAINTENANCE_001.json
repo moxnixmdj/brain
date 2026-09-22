@@ -50,5 +50,11 @@
     "repair_commit": "ad35a4c7bc7c6417a46d229d68bf8b81ace482de",
     "repair": "Normalize action/actions/next_action/direct typed action envelopes while preserving strict allowlist",
     "replay_authorized": true
+  },
+  "replay_after_root_cause_change_4": {
+    "prior_failure": "PLANNER_ACTION_MISSING_KEYS:reasoning,role,tool_calls",
+    "repair_commit": "84c199f68e76b74c866e5e2accf48eb207b679e8",
+    "repair": "Normalize standard tool_calls into existing typed action schema; execution remains runtime-controlled and allowlisted",
+    "replay_authorized": true
   }
 }
