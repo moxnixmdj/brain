@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_TARGET_CAPABILITY_MAP_V1",
+  "status": "CANONICAL_TARGET_REFERENCE",
+  "purpose": "Describe the real capability target. This is not a benchmark suite and not a parity claim.",
+  "source_basis": [
+    {
+      "source": "OpenAI GPT-6 Astra launch",
+      "url": "https://openai.com/index/gpt-6-astra/",
+      "observed_capabilities": [
+        "computer use across websites and desktop applications",
+        "browsing and online research",
+        "software engineering and coding",
+        "professional work across documents spreadsheets presentations and business software",
+        "science and mathematical reasoning",
+        "speed accuracy and judgment in demanding end-to-end work"
+      ]
+    },
+    {
+      "source": "OpenAI model guidance",
+      "url": "https://developers.openai.com/api/docs/guides/latest-model",
+      "observed_capabilities": [
+        "multistep workflows across code browsers and professional software",
+        "tool use",
+        "multi-agent orchestration",
+        "persisted reasoning and context management",
+        "course correction under new instructions"
+      ]
+    }
+  ],
+  "user_goal": "Make these capabilities genuinely real in Project Brain's own system and architecture. Do not optimize for Astra naming, implementation similarity, predicates, or benchmark completion.",
+  "capability_targets": [
+    {
+      "id": "END_TO_END_COMPUTER_WORK",
+      "target": "Take an ambiguous consequential goal from start to finish across browser, code, files, and desktop/professional software; inspect outcomes; correct mistakes; finish usable work.",
+      "leverage": "HIGHEST",
+      "current_truth": "PARTIAL_COMPONENTS_EXIST__NO_SINGLE_PERSISTENT_COGNITIVE_WORKER_PROVEN"
+    },
+    {
+      "id": "RESEARCH_AND_KNOWLEDGE_ACQUISITION",
+      "target": "Discover missing knowledge from authoritative sources, judge relevance, synthesize only supported conclusions, and use it during execution.",
+      "current_truth": "DEMONSTRATED_IN_CHAT_SESSIONS__NOT_YET_BOUND_TO_ONE_PERSISTENT_WORKER"
+    },
+    {
+      "id": "SOFTWARE_ENGINEERING",
+      "target": "Understand unfamiliar code, diagnose defects, implement production changes, test in realistic environments, and iterate to working software.",
+      "current_truth": "PARTIAL_DEMONSTRATIONS__STRENGTH_AND_INTEGRATION_NOT_ESTABLISHED"
+    },
+    {
+      "id": "PROFESSIONAL_WORK",
+      "target": "Produce immediately usable documents, spreadsheets, presentations, analyses, and software outputs while following context and constraints.",
+      "current_truth": "PARTIAL_DEMONSTRATIONS__INTEGRATED_PERSISTENT_EXECUTION_NOT_ESTABLISHED"
+    },
+    {
+      "id": "SCIENCE_AND_REASONING",
+      "target": "Solve difficult technical and scientific problems using reasoning, tools, computation, and verification.",
+      "current_truth": "AVAILABLE_THROUGH_CURRENT_MODELS_AND_TOOLS__TARGET_STRENGTH_NOT_ESTABLISHED"
+    },
+    {
+      "id": "JUDGMENT_AND_SCOPE",
+      "target": "Respect task boundaries, avoid unsupported claims, resolve routine ambiguity, ask only when outcome-critical, and change course correctly.",
+      "current_truth": "PARTIAL__MUST_BE_PROVEN_INSIDE_REAL_END_TO_END_WORK"
+    },
+    {
+      "id": "LONG_HORIZON_CONTINUITY",
+      "target": "Preserve requirements, failed attempts, evidence, and state across long work, context loss, interruption, and restart.",
+      "current_truth": "BRAIN_AND_CHECKPOINT_COMPONENTS_EXIST__NOT_YET_PROVEN_WITH_SAME_COGNITIVE_IDENTITY"
+    },
+    {
+      "id": "DYNAMIC_TOOL_ORCHESTRATION",
+      "target": "Discover and select the right available tool or integration at runtime and combine tools without prewiring every path.",
+      "current_truth": "PARTIAL__NOT_YET_PROVEN_IN_ONE_PERSISTENT_COGNITIVE_WORKER"
+    }
+  ],
+  "highest_leverage_gap": "END_TO_END_COMPUTER_WORK",
+  "reason": "Closing this gap forces reasoning, research, tool discovery, GUI/software action, artifact creation, verification, correction, persistence, and judgment to work together in one real system.",
+  "predicates_role": "DIAGNOSTIC_ONLY",
+  "benchmarks_role": "DIAGNOSTIC_ONLY",
+  "promotion_claim": false
+}
