@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_POINTER_V1",
-  "canonical_generation": "2026-09-22-superworker-composition-error-corrected",
+  "canonical_generation": "2026-09-22-integrated-cognitive-worker-frontier",
   "control_plane": {
     "provider": "GitHub",
     "repository": "moxnixmdj/brain",
@@ -110,11 +110,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 0,
-    "next_step": "CREATE_ONE_INTEGRATED_COGNITIVE_WORKER_FROM_EXISTING_CHATGPT_COGNITION_CANONICAL_BRAIN_AND_AUTHORIZED_TOOLS__RUN_ONE_REAL_CROSS_CAPABILITY_MISSION__SAVE_STATE_MID_MISSION__RESUME_FROM_SAVED_STATE__VERIFY_END_TO_END_WITHOUT_COMBINING_DIFFERENT_EXECUTORS",
+    "next_step": "EXECUTE_ICW_REAL_END_TO_END_001_IN_CHATGPT_WORK_USING_EXISTING_PLAN_ALLOWANCE__SAME_IDENTITY_MUST_REASON_DISCOVER_RESEARCH_ACT_INSPECT_CORRECT_VERIFY_SAVE_STATE_RESUME_AND_FINISH__WRITE_EVIDENCE_BACK_TO_CANONICAL_BRAIN",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "NO_SINGLE_IDENTITY_HAS_PROVEN_THE_FULL_COGNITIVE_AND_PERSISTENT_WORK_LOOP_END_TO_END",
+    "critical_blocker": "CURRENT_CHAT_LACKS_DIRECT_ARBITRARY_DESKTOP_GUI_CONTROL_AND_CANNOT_PROVE_ONE_PERSISTENT_COGNITIVE_WORKER_END_TO_END",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -187,12 +187,16 @@
     "astra_external_parity": "NOT_THE_TERMINAL_OBJECTIVE__COMPARABILITY_OPTIONAL_DIAGNOSTIC",
     "astra_external_distance": "UNKNOWN_AND_NOT_A_SUCCESS_METRIC_BY_ITSELF",
     "astra_common_external_benchmarks_run": false,
-    "scaling_status": "PAUSED_UNTIL_ONE_INTEGRATED_COGNITIVE_WORKER_IS_REAL",
+    "scaling_status": "FROZEN_UNTIL_P_REAL_1_INTEGRATED_COGNITIVE_WORKER",
     "superworker_truth_scope": "NO_SINGLE_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "GENERAL_REASONING_AND_GENERIC_TOOL_USE_INSIDE_PERSISTENT_CONTROLLER",
-    "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json"
+    "highest_leverage_capability_gap": "END_TO_END_COMPUTER_WORK",
+    "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
+    "capability_target_map_path": "canonical/capabilities/ASTRA_TARGET_CAPABILITY_MAP_V1.json",
+    "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
+    "execution_surface": "CHATGPT_WORK_WITH_GPT_6_ASTRA_IF_AVAILABLE_IN_EXISTING_PLAN",
+    "user_boundary": "SWITCH_CURRENT_PROJECT_EXECUTION_TO_WORK_MODE"
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
@@ -216,13 +220,12 @@
     "infrastructure_freeze_when_next_real_mission_executable": true,
     "forbid_relabeling_bounded_executor_as_superworker": true,
     "only_current_allowed_frontier_actions": [
-      "use one cognitive executor identity end to end",
-      "bind that identity to durable canonical mission state before execution",
-      "run a real consequential cross capability mission",
-      "save and later resume the same mission from durable state",
-      "demonstrate knowledge and tool discovery inside the same worker identity",
-      "independently verify the exact integrated worker evidence",
-      "promote p_real only if one identity proves the whole loop"
+      "execute frozen ICW-REAL-END-TO-END-001 mission in ChatGPT Work",
+      "use one cognitive identity for the full loop",
+      "write checkpoints and consequential evidence to canonical Brain",
+      "resume the same mission from checkpoint after a session boundary",
+      "verify final result without borrowing proof from another executor",
+      "promote p_real only if the one identity proves the whole loop"
     ],
     "truth_first_law": "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
     "live_canonical_refresh_before_consequential_action": true,
