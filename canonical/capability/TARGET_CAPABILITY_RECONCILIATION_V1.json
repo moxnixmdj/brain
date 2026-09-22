@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_TARGET_CAPABILITY_RECONCILIATION_V1",
+  "status": "CANONICAL_CAPABILITY_REALITY_RECONCILIATION",
+  "terminal_objective": "MAKE_ACTUAL_TARGET_CAPABILITIES_DEMONSTRATED_BY_ASTRA_REAL_IN_OUR_OWN_SYSTEM",
+  "target_capability_families": [
+    {
+      "id": "GENERAL_REASONING_NOVEL_TASKS",
+      "target": true,
+      "current_independent_state": "NOT_PROVEN",
+      "gap": "No general reasoning kernel inside persistent controller; current reason_frontier is deterministic mission-specific logic."
+    },
+    {
+      "id": "WEB_RESEARCH_BROWSING",
+      "target": true,
+      "current_independent_state": "NOT_PROVEN",
+      "gap": "Web research has been performed by chat/tool sessions, not by independent persistent controller."
+    },
+    {
+      "id": "GENERIC_TERMINAL_CODING",
+      "target": true,
+      "current_independent_state": "NOT_PROVEN",
+      "gap": "Independent controller lacks generic terminal/code generation and environment feedback loop."
+    },
+    {
+      "id": "GUI_COMPUTER_USE",
+      "target": true,
+      "current_independent_state": "NOT_PROVEN",
+      "gap": "Raw visual GUI path was proven, but cognition/action selection was driven externally rather than by persistent controller."
+    },
+    {
+      "id": "DURABLE_AUTONOMY_RECOVERY",
+      "target": true,
+      "current_independent_state": "PROVEN_SUBSTRATE",
+      "evidence": "checkpoint/relaunch, durable state, provider fallback, scheduled wake"
+    },
+    {
+      "id": "LEASE_DEDUPE_PROVENANCE_VERIFICATION",
+      "target": true,
+      "current_independent_state": "PROVEN_SUBSTRATE",
+      "evidence": "recovery authority and persistent controller machinery"
+    },
+    {
+      "id": "PROFESSIONAL_DOCUMENT_DATA_WORK",
+      "target": true,
+      "current_independent_state": "PARTIAL_EXTERNAL_SESSION_ONLY",
+      "gap": "Artifact generation demonstrated through chat execution, not persistent independent cognition."
+    },
+    {
+      "id": "SCOPE_JUDGMENT_TOOL_DISCOVERY",
+      "target": true,
+      "current_independent_state": "PARTIAL",
+      "gap": "Static registry discovery proven; open-ended capability need recognition/acquisition not proven."
+    }
+  ],
+  "highest_leverage_gap": "GENERAL_REASONING_AND_GENERIC_TOOL_USE_INSIDE_PERSISTENT_CONTROLLER",
+  "reason": "Closing this gap unlocks browsing, terminal/coding, GUI and professional-work breadth through one cognition-to-tool interface, while existing persistence/recovery substrate can be reused.",
+  "existing_assets_to_reuse": [
+    "persistent controller checkpoint/relaunch",
+    "durable state and evidence",
+    "task acquisition/lease/dedupe authority",
+    "raw screenshot/coordinate GUI substrate",
+    "GitHub/Drive canonical stores",
+    "authorized local PC wake substrate"
+  ],
+  "p_real_correction": {
+    "before": 2,
+    "after": 0,
+    "preserved_systems": [
+      {
+        "agent_id": "SUPERWORKER-INTEGRATED-1",
+        "classification": "PERSISTENT_NARROW_CONTROLLER"
+      },
+      {
+        "agent_id": "SUPERWORKER-INTEGRATED-2",
+        "classification": "PERSISTENT_NARROW_CONTROLLER_CLEANROOM_REPRODUCTION"
+      }
+    ],
+    "reason": "Meaningful general capability breadth is mandatory and independently unproven; external breadth entry audit is 0/3."
+  },
+  "next_action": "FIND_OR_REUSE_STRICT_ZERO_COST_PROGRAMMABLE_GENERAL_REASONING_ROUTE_ALREADY_AUTHORIZED__INTEGRATE_AS_CONTROLLER_COGNITION_PROVIDER__THEN_EXECUTE_ONE_FRESH_NOVEL_TASK_REQUIRING_REASONING_AND_GENERIC_TOOL_SELECTION"
+}
