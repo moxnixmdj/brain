@@ -1,0 +1,115 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_REALIZATION_STRATEGY_V2",
+  "status": "CANONICAL",
+  "terminal_objective": "MAKE_THE_ACTUAL_TARGET_CAPABILITIES_DEMONSTRATED_BY_ASTRA_REAL_IN_PROJECT_BRAIN_OUR_WAY",
+  "key_correction": "A real capability may be implemented by a system of models, programs, tools, memory, and verification. It does not need to reside inside one model or one worker identity before it counts as useful capability.",
+  "laws": [
+    "capability before worker packaging",
+    "use strongest existing component for each subproblem",
+    "search and reuse before invention",
+    "real missions before synthetic qualification",
+    "verification follows execution and never substitutes for it",
+    "parallelize independent capability lanes",
+    "integrate only where integration itself is required by real work",
+    "scale only after capability strength is useful"
+  ],
+  "capability_lanes": [
+    {
+      "id": "COMPUTER_AND_WEB_ACTION",
+      "target": "Operate websites and software to complete real goals, including unfamiliar interfaces and correction.",
+      "existing_routes": [
+        "TinyFish live browser",
+        "authorized Windows terminal/files",
+        "Figma app actions",
+        "native web search"
+      ],
+      "current_gap": "arbitrary Windows GUI interaction remains incomplete; web interaction should not wait for it"
+    },
+    {
+      "id": "SOFTWARE_ENGINEERING",
+      "target": "Understand unfamiliar codebases, research dependencies, implement changes, run/test/debug/deploy.",
+      "existing_routes": [
+        "GitHub",
+        "Replit",
+        "authorized Windows terminal",
+        "web research"
+      ],
+      "current_gap": "strength must be grown through hard real repositories, not predicate tests"
+    },
+    {
+      "id": "RESEARCH_AND_KNOWLEDGE",
+      "target": "Acquire unknown knowledge, compare sources, reason over evidence, preserve provenance.",
+      "existing_routes": [
+        "web",
+        "TinyFish",
+        "Wolfram",
+        "connected files/apps"
+      ],
+      "current_gap": "bind research directly into execution loops"
+    },
+    {
+      "id": "PROFESSIONAL_WORK",
+      "target": "Produce and edit useful documents, spreadsheets, presentations, designs, and structured work products.",
+      "existing_routes": [
+        "Google Drive",
+        "Figma",
+        "Notion",
+        "Dropbox",
+        "local file tools"
+      ],
+      "current_gap": "exercise on real cross-app missions"
+    },
+    {
+      "id": "TECHNICAL_REASONING",
+      "target": "Solve difficult mathematical, scientific, technical, and analytical problems with tools and verification.",
+      "existing_routes": [
+        "GPT-5.6 Sol",
+        "Wolfram",
+        "Python/code execution",
+        "web"
+      ],
+      "current_gap": "measure only when a real problem exposes a weakness"
+    },
+    {
+      "id": "LONG_HORIZON_CONTINUITY",
+      "target": "Preserve mission, evidence, decisions, and unfinished work across chats, failures, and tool boundaries.",
+      "existing_routes": [
+        "canonical GitHub Brain",
+        "Drive evidence mirror",
+        "checkpoints"
+      ],
+      "current_gap": "make continuity routine, not a promotion gate"
+    },
+    {
+      "id": "AUTONOMY_AND_ORCHESTRATION",
+      "target": "Select tools/routes, decompose work, run independent lanes, verify, reconcile, and continue with minimal user intervention.",
+      "existing_routes": [
+        "ChatGPT tool orchestration",
+        "automations where useful",
+        "GitHub state",
+        "specialized plugins"
+      ],
+      "current_gap": "apply to capability missions rather than infrastructure chores"
+    }
+  ],
+  "execution_method": {
+    "step_1": "Choose the highest-value real mission that forces multiple target capabilities.",
+    "step_2": "Decompose only where parallelism reduces wall-clock time.",
+    "step_3": "For every subtask, search existing tools/services/code before building.",
+    "step_4": "Use the strongest existing route for that subtask, even if different routes use different models/programs.",
+    "step_5": "Integrate outputs through canonical Brain state and evidence.",
+    "step_6": "Inspect the actual result and repair observed weaknesses.",
+    "step_7": "When a repeated capability weakness appears, improve that capability component directly.",
+    "step_8": "Repeat on substantially different real missions until capability is robust.",
+    "step_9": "Only then package/replicate into autonomous workers and scale."
+  },
+  "forbidden_proxy_goals": [
+    "P_real as terminal objective",
+    "worker identity count",
+    "predicate completion",
+    "benchmark completion",
+    "architecture completeness",
+    "scheduler deployment",
+    "infrastructure activity"
+  ]
+}
