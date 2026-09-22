@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_ICW_MISSION_RECONCILIATION_V1",
+  "worker_identity": "ICW-CHATGPT-SOL-1",
+  "mission_id": "ICW-REAL-END-TO-END-001",
+  "adjudication_method": "evidence-chain reconciliation against the remaining-unproven frontier recorded before this autonomous wake; no property is credited from this reconciliation itself",
+  "evidence_chain": [
+    {
+      "path": "canonical/icw/ICW-CHATGPT-SOL-1/CHECKPOINT_V1.json",
+      "role": "mission implementation and durable checkpoint"
+    },
+    {
+      "path": "canonical/icw/ICW-CHATGPT-SOL-1/RESUME_RECEIPT_V1.json",
+      "role": "later-context same-identity resume without repeated completed work"
+    },
+    {
+      "path": "canonical/icw/ICW-CHATGPT-SOL-1/GUI_RECEIPT_V1.json",
+      "role": "same-identity authorized interactive Windows GUI actuation plus independent UIAutomation readback"
+    },
+    {
+      "path": "canonical/icw/ICW-CHATGPT-SOL-1/CHECKPOINT_V3.json",
+      "role": "pre-wake frozen frontier showing autonomous wake as the sole remaining unproven property"
+    },
+    {
+      "path": "canonical/icw/ICW-CHATGPT-SOL-1/AUTONOMOUS_WAKE_RECEIPT_V1.json",
+      "role": "platform-native autonomous wake and continuation from CHECKPOINT_V3 without a new user re-prompt"
+    },
+    {
+      "git_commit": "87e11db77c7ba5052b4fa073f676de19330e43e2",
+      "role": "independent durable GitHub readback confirming the autonomous-wake receipt was actually committed"
+    }
+  ],
+  "same_identity_binding": {
+    "required_identity": "ICW-CHATGPT-SOL-1",
+    "required_mission": "ICW-REAL-END-TO-END-001",
+    "all_receipts_bind_same_identity_and_mission": true
+  },
+  "property_adjudication": {
+    "mission_implementation_and_verified_artifacts": "PASS",
+    "durable_checkpoint": "PASS",
+    "later_context_resume_without_repeating_completed_work": "PASS",
+    "authorized_interactive_desktop_gui_actuation_by_same_identity": "PASS",
+    "independent_gui_readback": "PASS",
+    "platform_native_autonomous_wake_without_new_user_reprompt": "PASS",
+    "continued_from_exact_remaining_frontier_without_repeating_completed_work": "PASS",
+    "durable_autonomous_wake_receipt": "PASS",
+    "zero_incremental_spend": "PASS",
+    "val_town_or_sprites_dependency": "PASS_NONE_USED"
+  },
+  "pre_wake_remaining_unproven": [
+    "same persistent cognitive identity autonomously wakes and continues without user re-prompt"
+  ],
+  "post_wake_remaining_unproven": [],
+  "whole_same_identity_icw_definition_satisfied": true,
+  "promotion_decision": "PASS_ELIGIBLE_FOR_P_REAL_1",
+  "p_real_before": 0,
+  "p_real_after_reconciliation": 1,
+  "scope_note": "This promotes exactly ICW-CHATGPT-SOL-1 for ICW-REAL-END-TO-END-001. It does not imply that other candidate identities, Astra, or the million-worker target are qualified."
+}
