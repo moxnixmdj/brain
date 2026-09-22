@@ -11,6 +11,18 @@ def writej(p,x):
     p=pathlib.Path(p); p.parent.mkdir(parents=True,exist_ok=True)
     p.write_text(json.dumps(x,indent=2,sort_keys=True)+"\n",encoding="utf-8")
 def readj(p): return json.loads(pathlib.Path(p).read_text(encoding="utf-8"))
+
+def context_results(state):
+    latest={}
+    for rec in state.get("history",[]):
+        if rec.get("ok"):
+            latest[rec["step_index"]]=rec["result"]
+    for batch in state.get("rehydrations",[]):
+        for rec in batch.get("steps",[]):
+            if rec.get("ok"):
+                latest[rec["step_index"]]=rec["result"]
+    return [latest[i] for i in sorted(latest)]
+
 def sha_file(p):
     h=hashlib.sha256()
     with open(p,"rb") as f:
@@ -111,7 +123,7 @@ def main():
             if not prior.get("replay_on_resume", False):
                 continue
             try:
-                result=execute_step(prior, [x["result"] for x in state.get("history",[]) if x.get("ok")])
+                result=execute_step(prior, context_results(state))
                 ok=verify(prior,result)
             except Exception as e:
                 blocker={
@@ -151,7 +163,7 @@ def main():
         step=mission["steps"][i]
         adapter=step["adapter"]
         try:
-            result=execute_step(step, [x["result"] for x in state.get("history",[]) if x.get("ok")])
+            result=execute_step(step, context_results(state))
             ok=verify(step,result)
         except Exception as e:
             blocker={
