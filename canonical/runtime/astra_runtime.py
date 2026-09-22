@@ -129,11 +129,12 @@ def run_goal(step, mission):
     for cycle in range(max_cycles):
         obs=json.dumps(observations[-6:],sort_keys=True)[:12000]
         prompt=(
-          "You are an OPTIONAL planning source. You do not control execution. Return ONLY JSON. "
+          "You are an OPTIONAL planning source, not the controller. "
+          "DO NOT invoke tools or function calls. DO NOT return tool_calls. Emit JSON text only. "
           "Goal: "+goal+"\nAllowed action types: "+allowed+". "
-          "Choose exactly one next action. No writes, no shell, no secrets. "
-          "If evidence is sufficient, use finish. Schema: "
-          '{"action":{"type":"...","args":{...},"why":"..."}}. '
+          "Choose the smallest next evidence action only. No writes, no shell, no secrets. "
+          "If evidence is sufficient, use finish. Return exactly this schema: "
+          '{"actions":[{"type":"...","args":{},"why":"..."}],"stop_after_evidence":true}. '
           "Observations so far: "+obs
         )
         url="https://text.pollinations.ai/"+urllib.parse.quote(prompt,safe="")
