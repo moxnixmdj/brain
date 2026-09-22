@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_SUPERWORKER_EXTERNAL_BREADTH_WOLFRAM_ADJUDICATION_V1",
+  "verifier_id": "WOLFRAM-REMOTE-KERNEL-20260922-SUPERWORKER-BREADTH-V1",
+  "worker_bundle_sha256": "0dff5b7a00788bb8ee731a18ce68889434689da4ee68397b5a9689397cfbfecf",
+  "audit_sha256": "08f375a6499a457fbc82c02b45f308559952af56ce57921aa1373eb06df64bb1",
+  "actual_capabilities": [
+    "hash_file",
+    "observe_json",
+    "reason_frontier",
+    "verify_report",
+    "write_report"
+  ],
+  "benchmark_entry_results": {
+    "BrowseComp": false,
+    "Terminal-Bench_4.0": false,
+    "OSWorld_2.0": false
+  },
+  "entry_pass_count": 0,
+  "entry_total": 3,
+  "meaningful_general_capability_breadth_proven": false,
+  "promotion_under_definition_with_general_breadth_authorized": false,
+  "classification": "PERSISTENT_NARROW_CONTROLLER__NOT_GENERAL_SUPERWORKER",
+  "required_repair": "Integrate genuine general reasoning plus generic browsing, terminal, and GUI capability acquisition into the persistent controller, then run external common benchmarks."
+}
