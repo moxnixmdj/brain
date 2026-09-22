@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-22T04:27:35.046252+00:00",
+  "mission_id": "ASTRA-RUNTIME-SWE-INTEGRATION-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_SWE_INTEGRATION_001.json",
+  "mission_sha256": "6ca0b5ea0b5a0636c6e63f08f7ce34f30327d2aefa860296eef4bb6253b2c144",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "5c3d95eda7cba3869579632e6eb1a5c938734cbc79da5f14be6f534a8b010fe7",
+  "status": "COMPLETE",
+  "steps_completed": 8
+}
