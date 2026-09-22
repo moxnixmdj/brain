@@ -93,5 +93,11 @@
     "repair": "Replace flaky GET planner transport with proven legacy POST JSON mode and bounded model failover",
     "evidence_parent": "ASTRA-RUNTIME-POLLINATIONS-POST-FAILOVER-PROBE-001",
     "replay_authorized": true
+  },
+  "replay_after_root_cause_change_10": {
+    "prior_failure": "PLANNER_ACTION_REJECTED:commentary",
+    "repair_commit": "a76b41b3eb1f61ccbe117bf7c1de1eab7fa28c1b",
+    "repair": "Normalize commentary pseudo-actions through the existing bounded typed-action normalizer while preserving the strict runtime allowlist",
+    "replay_authorized": true
   }
 }
