@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_POINTER_V1",
-  "canonical_generation": "2026-09-22-scaling-bottleneck-activation-wake-measured",
+  "canonical_generation": "2026-09-22-astra-external-parity-claim-revoked",
   "control_plane": {
     "provider": "GitHub",
     "repository": "moxnixmdj/brain",
@@ -57,8 +57,11 @@
     "identity_path": "canonical/agents/ASTRA_OPERATIONAL_IDENTITY_V1.json",
     "dialogue_protocol_path": "canonical/agents/ASTRA_DIALOGUE_PROTOCOL_V1.md",
     "operational": true,
-    "full_astra_claim": true,
-    "astra_qualification_scope": "PROJECT_BRAIN_DECLARED_61_PREDICATE_SUITE"
+    "full_astra_claim": false,
+    "astra_qualification_scope": "PROJECT_BRAIN_DECLARED_61_PREDICATE_SUITE_ONLY",
+    "external_astra_parity": "UNVERIFIED",
+    "external_astra_distance": "UNKNOWN_UNTIL_COMMON_BENCHMARKS",
+    "correction_path": "canonical/astra/ASTRA_EXTERNAL_PARITY_CORRECTION_V1.json"
   },
   "active_runtime": {
     "runtime_id": "SUPERHERO-RUNTIME-2.7-GITHUB-ACTIONS-PERSISTENT",
@@ -101,11 +104,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 2,
-    "next_step": "BIND_SMALLEST_EXISTING_HARD_ZERO_COST_AUTONOMOUS_WAKE_MECHANISM_TO_THE_TWO_QUALIFIED_CONTROLLERS__THEN_MEASURE_2_TO_4_REAL_ACTIVE_CAPACITY__NO_NEW_PLATFORM_SEARCH_UNLESS_EXISTING_AUTHORIZED_SURFACES_ARE_FALSIFIED",
+    "next_step": "PAUSE_SCALING_FOR_ASTRA_EQUIVALENCE_CLAIMS__BUILD_AND_RUN_COMMON_EXTERNAL_COMPARABILITY_BATTERY__REPORT_RAW_RESULTS__THEN_REAUDIT_SUPERWORKER_CAPABILITY_BREADTH_WITHOUT_USING_INTERNAL_61_OF_61_AS_ASTRA_PARITY",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "CONTINUOUS_AUTONOMOUS_ACTIVATION_WAKE_CAPACITY",
+    "critical_blocker": "EXTERNAL_ASTRA_COMPARABILITY_NOT_ESTABLISHED",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -120,7 +123,7 @@
       "unproven": 0,
       "total": 61
     },
-    "astra_full_qualification": "VERIFIED_61_OF_61",
+    "astra_full_qualification": "REVOKED_AS_EXTERNAL_PARITY_CLAIM__INTERNAL_61_OF_61_PRESERVED",
     "superworker_v6_whole_definition": {
       "target_result_sha256": "e305ffe8c7537c469d039742d92adb20b89080869f4d26de30c94510689c5ddc",
       "verifier_receipt_path": "canonical/qualification/RECOVERY_SUPERWORKER_V6_WOLFRAM_WHOLE_DEFINITION_ADJUDICATION_V1.json",
@@ -168,7 +171,18 @@
       "all_relaunch_observed": true,
       "all_checkpointed": true,
       "terminal_success_all": true
-    }
+    },
+    "astra_internal_suite": {
+      "proven": 61,
+      "unproven": 0,
+      "total": 61,
+      "status": "VERIFIED_INTERNAL_SUITE_ONLY"
+    },
+    "astra_external_parity": "UNVERIFIED",
+    "astra_external_distance": "UNKNOWN_UNTIL_COMMON_BENCHMARKS",
+    "astra_common_external_benchmarks_run": false,
+    "scaling_status": "PAUSED_FOR_CAPABILITY_TRUTH_RECONCILIATION",
+    "superworker_truth_scope": "INTERNAL_WHOLE_DEFINITION_ONLY__DOES_NOT_IMPLY_EXTERNAL_ASTRA_LEVEL_INTELLIGENCE"
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
@@ -192,12 +206,11 @@
     "infrastructure_freeze_when_next_real_mission_executable": true,
     "forbid_relabeling_bounded_executor_as_superworker": true,
     "only_current_allowed_frontier_actions": [
-      "reuse_existing_authorized_zero_cost_wake_surface",
-      "bind_wake_to_existing_qualified_controller_without_changing_cognition",
-      "measure_activation_latency_active_duty_cycle_and_2_to_4_capacity",
-      "preserve_unique_identity_and_independent_execution_state",
-      "forbid_val_town_and_sprites",
-      "repair_only_observed_failed_property"
+      "identify_publicly_specified_external_astra_benchmarks_or_faithful_reproducible_analogues",
+      "run_common_benchmark_tasks_without_using_internal_suite_labels_as evidence",
+      "report_raw_scores_and confidence before any parity percentage",
+      "re_audit_superworker_capability_breadth_without_astra_shortcut",
+      "preserve_valid_internal_61_of_61 evidence without promoting external parity"
     ],
     "truth_first_law": "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
     "live_canonical_refresh_before_consequential_action": true,
@@ -217,7 +230,10 @@
       "CAPABILITY_UNPROVEN",
       "CAPABILITY_FAILED"
     ],
-    "rerun_requires_documented_invalidation_of_prior_proof": true
+    "rerun_requires_documented_invalidation_of_prior_proof": true,
+    "forbid_internal_suite_to_external_parity_inference": true,
+    "common_benchmark_required_before_external_parity_claim": true,
+    "superworker_external_capability_breadth_requires_independent_benchmarking": true
   },
   "standby_runtime": {
     "runtime_id": "SUPERHERO-RUNTIME-2.6.0-DIRECT-SIGNED-PERMANENT",
