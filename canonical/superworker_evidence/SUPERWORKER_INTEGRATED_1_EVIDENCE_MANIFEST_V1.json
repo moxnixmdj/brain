@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_SUPERWORKER_INTEGRATED_1_EVIDENCE_MANIFEST_V1",
+  "agent_id": "SUPERWORKER-INTEGRATED-1",
+  "mission_id": "SUPERWORKER-INTEGRATED-FOUR-GATE-PROOF-20260922-001",
+  "mission_sha256": "4decd34ede66f08f6caa6005da1cc648d5303eda5df5017927c2d493a4b2ae75",
+  "state_sha256": "b13a013392ac96a3a135c13a721ead8848bf215550ab96f943e2b603a7db10bc",
+  "report_sha256": "9c25d17361ec8afd4be2cb4b1fc109e427d30c010530fa237c9b47461dd76196",
+  "supervisor_sha256": "b5468a0e0c4d348b2f785ddeecebbb80cb03185e5b41ce1b0e747121871dbdaf",
+  "reverification_sha256": "21d242c20202202538917918afa819bd94808bacf246fb805b5edd7304b22a3f",
+  "proof_bundle": {
+    "drive_file_id": "1R98ftZbh0OOfAzpckjyx3-RpkL0M74u_",
+    "file_name": "SUPERWORKER_INTEGRATED_1_PROOF_2026-09-22.zip",
+    "sha256": "0dff5b7a00788bb8ee731a18ce68889434689da4ee68397b5a9689397cfbfecf",
+    "bytes": 21548
+  },
+  "observed_execution": {
+    "fresh_process_count": 2,
+    "automatic_relaunch_observed": true,
+    "checkpoint_count": 1,
+    "primary_provider_failure": "INJECTED_PRIMARY_PROVIDER_FAILURE",
+    "fallback_provider": "hash-fallback",
+    "runtime_tool_discovery_processes": 2,
+    "model_independent": true,
+    "incremental_spend_usd": 0
+  },
+  "v6_binding_sha256": "e305ffe8c7537c469d039742d92adb20b89080869f4d26de30c94510689c5ddc",
+  "promotion_claim": false
+}
