@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_REAL_MISSION_BLOCKER_EVIDENCE_V1",
+  "recorded_at_utc": "2026-09-22T15:40:00Z",
+  "mission": "END_TO_END_COMPUTER_WORK_GAMELOOP_CUSTOM_PUBG_APK",
+  "goal": "Run the user's existing GL_4.6_FIXCRASH.apk in GameLoop while preserving com.tencent.ig data/OBB, without redownloading resources or modifying/repacking/re-signing/substituting the requested APK.",
+  "live_host": {
+    "device": "Mo",
+    "gameloop_ui_file_version": "3.91.5372.81",
+    "vm": "100",
+    "rootfs": "C:\\Program Files\\TxGameAssistant\\AOW_Rootfs_100"
+  },
+  "requested_apk": {
+    "path": "C:\\Users\\muham\\Downloads\\Telegram Desktop\\GL_4.6_FIXCRASH.apk",
+    "bytes": 117463072,
+    "sha1": "1AC39AE8E73E5DEF8BEBEB881B1A46FE59AE0B3A",
+    "sha256": "FCA5FD669C240CC0482C741057B2B393DE46CDBABBE5C87846F6CFBB87093DED",
+    "abi": [
+      "arm64-v8a"
+    ],
+    "native_library_count": 29,
+    "signer_subject": "CN=Android,OU=Android,O=Android,L=Mountain View,ST=California,C=US",
+    "signer_sha1": "61ED377E85D386A8DFEE6B864BD85B0BFAA5AF81",
+    "signer_sha256": "A40DA80A59D170CAA950CF15C18C454D47A39B26989D8B640ECD745BA71BF5DC"
+  },
+  "official_gameloop_apk_comparison": {
+    "path": "C:\\Users\\muham\\Downloads\\PUBGMOBILE_Global_4.6.0_Gameloop_A631EF84.apk",
+    "bytes": 1274351207,
+    "sha1": "FA7F6202B0B330F5AA7B4FFAC15245826FC44A11",
+    "sha256": "F312E0F77F6532136EDA7DB6418F183AF14417BB0E5CF8621663F6C6BD30C39E",
+    "abi": [
+      "arm64-v8a",
+      "armeabi-v7a"
+    ],
+    "native_library_counts": {
+      "arm64_v8a": 40,
+      "armeabi_v7a": 41
+    },
+    "signer_subject": "CN=Hector Lu,OU=Tencent,O=Tencent,L=Shen Zhen,ST=Guang Dong,C=86",
+    "signer_sha1": "3EC8CD69D71B7922E2A17445840866B26D86E283"
+  },
+  "preserved_resources": {
+    "obb_windows_copy": "C:\\Temp\\TxGameDownload\\MobileGamePCShared\\main.21518.com.tencent.ig.obb",
+    "user_constraint": "Do not redownload/change resources; do not modify, repack, re-sign, replace, uninstall, or substitute the requested APK."
+  },
+  "observed_failure": {
+    "package": "com.tencent.ig",
+    "game_activity": "com.epicgames.ue4.GameActivity",
+    "earlier_crash": "CrashType=4002 / exception 0xc0000005 in translated native stack with repeated /system/lib64/libhotx612.so",
+    "current_log_behavior": "Repeated signal 4 (SIGILL) / kill cascades in aow_drv_0.log during translated execution",
+    "native_bridge_evidence": [
+      "houdini initialization",
+      "x64_static_patch",
+      "libhotx612.so",
+      "/system/lib64/libc.so"
+    ],
+    "interpretation": "The requested debug-signed arm64-only modified build is not behaving like GameLoop's Tencent-signed supported PUBG package. Safe compatibility work is exhausted without changing the requested artifact or defeating integrity/security behavior."
+  },
+  "adjacent_artifact": {
+    "path": "C:\\Users\\muham\\Downloads\\Telegram Desktop\\filterABUNOOR.json",
+    "observed_character": "Contains explicit rules denying PUBG anti-cheat/telemetry endpoints.",
+    "action_taken": "NOT_APPLIED"
+  },
+  "safety_boundary": {
+    "prohibited_routes": [
+      "Apply anti-cheat-blocking rules to make the modified build run",
+      "Downgrade/alter GameLoop security components for the purpose of bypassing integrity/anti-cheat enforcement",
+      "Patch or suppress PUBG/GameLoop integrity checks"
+    ],
+    "legitimate_routes_remaining": [
+      "Use a vendor-signed compatible PUBG build",
+      "Obtain a vendor-compatible build of the desired app without anti-cheat/integrity bypass",
+      "Continue unrelated end-to-end computer-work missions using authorized software"
+    ]
+  },
+  "evidence_class": "CAPABILITY_EXECUTION_BLOCKED_BY_ARTIFACT_SECURITY_COMPATIBILITY_AND_USER_CONSTRAINT",
+  "result": "BLOCKED_FAIL_CLOSED",
+  "incremental_spend_usd": 0,
+  "val_town_used": false,
+  "sprites_used": false
+}
