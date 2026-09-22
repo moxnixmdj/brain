@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_POINTER_V1",
-  "canonical_generation": "2026-09-22-astra-external-parity-claim-revoked",
+  "canonical_generation": "2026-09-22-capability-realization-mission-locked",
   "control_plane": {
     "provider": "GitHub",
     "repository": "moxnixmdj/brain",
@@ -25,7 +25,8 @@
   "mandatory_laws": [
     "canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md",
     "canonical/laws/EXECUTION_LEVERAGE_AND_ANTI_DRIFT_LAW_V1.md",
-    "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md"
+    "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
+    "canonical/laws/CAPABILITY_REALIZATION_MISSION_LOCK_V1.md"
   ],
   "boot_requirements": {
     "read_mandatory_laws_before_execution": true,
@@ -50,7 +51,12 @@
     "summary_and_memory_non_authoritative": true,
     "abort_on_frontier_contradiction": true,
     "truth_first_law_path": "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
-    "truth_first_regression_path": "canonical/regressions/2026-09-22_STALE_STATE_DUPLICATE_EXECUTION.json"
+    "truth_first_regression_path": "canonical/regressions/2026-09-22_STALE_STATE_DUPLICATE_EXECUTION.json",
+    "capability_realization_mission_lock_required": true,
+    "capability_realization_law_path": "canonical/laws/CAPABILITY_REALIZATION_MISSION_LOCK_V1.md",
+    "forbid_proxy_goal_substitution": true,
+    "predicates_must_be_subordinate_to_live_capability_question": true,
+    "benchmarks_must_be_subordinate_to_live_capability_question": true
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
@@ -104,11 +110,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 2,
-    "next_step": "PAUSE_SCALING_FOR_ASTRA_EQUIVALENCE_CLAIMS__BUILD_AND_RUN_COMMON_EXTERNAL_COMPARABILITY_BATTERY__REPORT_RAW_RESULTS__THEN_REAUDIT_SUPERWORKER_CAPABILITY_BREADTH_WITHOUT_USING_INTERNAL_61_OF_61_AS_ASTRA_PARITY",
+    "next_step": "RECONCILE_TARGET_ASTRA_CAPABILITY_SET_AGAINST_ACTUALLY_DEMONSTRATED_PROJECT_CAPABILITIES__SELECT_THE_SINGLE_HIGHEST_LEVERAGE_REAL_CAPABILITY_GAP__EXECUTE_DIRECTLY_TO_CLOSE_IT__USE_BENCHMARKS_ONLY_IF_NEEDED_TO_DISCRIMINATE_OR_VERIFY_REAL_CAPABILITY",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "EXTERNAL_ASTRA_COMPARABILITY_NOT_ESTABLISHED",
+    "critical_blocker": "TRUTHFUL_TARGET_CAPABILITY_GAP_NOT_YET_RECONCILED_AFTER_PROXY_GOAL_CORRECTION",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -178,10 +184,10 @@
       "total": 61,
       "status": "VERIFIED_INTERNAL_SUITE_ONLY"
     },
-    "astra_external_parity": "UNVERIFIED",
-    "astra_external_distance": "UNKNOWN_UNTIL_COMMON_BENCHMARKS",
+    "astra_external_parity": "NOT_THE_TERMINAL_OBJECTIVE__COMPARABILITY_OPTIONAL_DIAGNOSTIC",
+    "astra_external_distance": "UNKNOWN_AND_NOT_A_SUCCESS_METRIC_BY_ITSELF",
     "astra_common_external_benchmarks_run": false,
-    "scaling_status": "PAUSED_FOR_CAPABILITY_TRUTH_RECONCILIATION",
+    "scaling_status": "PAUSED_UNTIL_SCALING_DIRECTLY_SERVES_REAL_CAPABILITY_REALIZATION",
     "superworker_truth_scope": "INTERNAL_WHOLE_DEFINITION_ONLY__DOES_NOT_IMPLY_EXTERNAL_ASTRA_LEVEL_INTELLIGENCE"
   },
   "provider_rules": {
@@ -206,11 +212,12 @@
     "infrastructure_freeze_when_next_real_mission_executable": true,
     "forbid_relabeling_bounded_executor_as_superworker": true,
     "only_current_allowed_frontier_actions": [
-      "identify_publicly_specified_external_astra_benchmarks_or_faithful_reproducible_analogues",
-      "run_common_benchmark_tasks_without_using_internal_suite_labels_as evidence",
-      "report_raw_scores_and confidence before any parity percentage",
-      "re_audit_superworker_capability_breadth_without_astra_shortcut",
-      "preserve_valid_internal_61_of_61 evidence without promoting external parity"
+      "reconcile_actual_target_capability_set_from_verified_astra_demonstrations_and_project_goal",
+      "map_only_real_demonstrated_project_capabilities_without_inheriting_labels_or predicates",
+      "identify_single_highest_leverage_capability_gap",
+      "execute_directly_to_close_that capability gap",
+      "use benchmarks or predicates only if they materially discriminate capability reality or verify the selected capability",
+      "preserve evidence necessary to prevent false capability claims"
     ],
     "truth_first_law": "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
     "live_canonical_refresh_before_consequential_action": true,
@@ -233,7 +240,14 @@
     "rerun_requires_documented_invalidation_of_prior_proof": true,
     "forbid_internal_suite_to_external_parity_inference": true,
     "common_benchmark_required_before_external_parity_claim": true,
-    "superworker_external_capability_breadth_requires_independent_benchmarking": true
+    "superworker_external_capability_breadth_requires_independent_benchmarking": true,
+    "capability_realization_mission_lock": "canonical/laws/CAPABILITY_REALIZATION_MISSION_LOCK_V1.md",
+    "proxy_goal_substitution_forbidden": true,
+    "predicates_are_not_progress_unless_they_change_a_capability_decision": true,
+    "benchmarks_are_not_progress_unless_they_change_a_capability_decision": true,
+    "worker_count_is_not_progress_unless_it_increases_real_useful_capability_or_capacity": true,
+    "infrastructure_is_not_progress_unless_it_removes_a_current_capability_blocker": true,
+    "pre_action_capability_question": "Does this action directly make a target Astra capability more real, stronger, broader, more reliable, more autonomous, or remove the current blocker to doing so?"
   },
   "standby_runtime": {
     "runtime_id": "SUPERHERO-RUNTIME-2.6.0-DIRECT-SIGNED-PERMANENT",
@@ -263,5 +277,14 @@
       "counts_as_real_superworker": true,
       "cleanroom_reproduction": true
     }
-  ]
+  ],
+  "mission_lock": {
+    "terminal_objective": "MAKE_THE_ACTUAL_TARGET_CAPABILITIES_DEMONSTRATED_BY_ASTRA_REAL_IN_OUR_OWN_SYSTEM_USING_ONLY_THE_RIGHT_ROUTE",
+    "success_definition": "REAL_CAPABILITY_EXISTS_AND_WORKS_IN_REAL_USE__NOT_PREDICATE_OR_BENCHMARK_COMPLETION",
+    "astra_role": "CAPABILITY_REFERENCE_NOT_IMPLEMENTATION_BLUEPRINT_OR_LABEL_TARGET",
+    "predicates_role": "SUBORDINATE_EVIDENCE_ONLY",
+    "benchmarks_role": "SUBORDINATE_DIAGNOSTIC_ONLY",
+    "infrastructure_role": "ONLY_IF_CAUSALLY_REQUIRED_TO_REALIZE_OR_OPERATE_CAPABILITY",
+    "priority": "CORRECT_ROUTE_FIRST__THEN_MINIMUM_WALL_CLOCK_TIME_TO_REAL_VERIFIED_CAPABILITY"
+  }
 }
