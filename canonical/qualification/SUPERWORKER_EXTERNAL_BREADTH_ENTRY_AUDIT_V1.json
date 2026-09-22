@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_SUPERWORKER_EXTERNAL_BREADTH_ENTRY_AUDIT_V1",
+  "worker_id": "SUPERWORKER-INTEGRATED-1",
+  "worker_proof_bundle_sha256": "0dff5b7a00788bb8ee731a18ce68889434689da4ee68397b5a9689397cfbfecf",
+  "audit_sha256": "08f375a6499a457fbc82c02b45f308559952af56ce57921aa1373eb06df64bb1",
+  "actual_capabilities": [
+    "hash_file",
+    "observe_json",
+    "reason_frontier",
+    "verify_report",
+    "write_report"
+  ],
+  "general_reasoning_kernel_present": false,
+  "benchmark_entry_results": {
+    "BrowseComp": {
+      "eligible_to_run_faithfully": false,
+      "raw_entry_result": "ENTRY_FAIL",
+      "missing": [
+        "general_reasoning",
+        "web_browsing_or_search",
+        "multi_hop_research",
+        "answer_synthesis"
+      ],
+      "astra_published_score": 0.915
+    },
+    "Terminal-Bench_4.0": {
+      "eligible_to_run_faithfully": false,
+      "raw_entry_result": "ENTRY_FAIL",
+      "missing": [
+        "general_reasoning",
+        "generic_terminal_io",
+        "code_or_file_modification",
+        "environment_feedback_loop"
+      ],
+      "astra_published_score": 0.579
+    },
+    "OSWorld_2.0": {
+      "eligible_to_run_faithfully": false,
+      "raw_entry_result": "ENTRY_FAIL",
+      "missing": [
+        "general_reasoning",
+        "screenshot_perception",
+        "gui_action",
+        "long_horizon_computer_use"
+      ],
+      "astra_published_score": 0.726
+    }
+  },
+  "entry_pass_count": 0,
+  "entry_total": 3,
+  "meaningful_general_capability_breadth_proven": false,
+  "classification": "PERSISTENT_NARROW_CONTROLLER__NOT_YET_GENERAL_SUPERWORKER",
+  "note": "Entry failure is not a benchmark score. It establishes that the currently promoted independent controller cannot faithfully enter these public external benchmarks without adding a new general capability layer.",
+  "sources": {
+    "BrowseComp": "https://openai.com/index/browsecomp/",
+    "TerminalBench4": "https://github.com/harbor-framework/terminal-bench/releases/tag/v4.0.0",
+    "OSWorld2": "https://github.com/xlang-ai/OSWorld-V2",
+    "Astra": "https://openai.com/index/gpt-6-astra/"
+  }
+}
