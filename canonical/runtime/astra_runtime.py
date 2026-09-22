@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import argparse, gzip, hashlib, json, os, pathlib, shlex, subprocess, sys, time, urllib.request
+import argparse, gzip, hashlib, json, os, pathlib, shlex, subprocess, sys, time, urllib.parse, urllib.request
 from datetime import datetime, timezone
 
 ROOT=pathlib.Path(__file__).resolve().parents[2]
@@ -63,12 +63,111 @@ def run_http(step):
           "duration_s":round(time.monotonic()-t,3)
         }
 
-def execute_step(step, prior_results=None):
+def _safe_repo_path(raw):
+    p=(ROOT/str(raw or "")).resolve()
+    if p != ROOT.resolve() and ROOT.resolve() not in p.parents:
+        raise Blocker("PATH_OUTSIDE_REPOSITORY")
+    return p
+
+def _goal_action(action):
+    typ=action.get("type")
+    args=action.get("args") or {}
+    if typ=="list_tree":
+        base=_safe_repo_path(args.get("prefix",""))
+        if not base.exists(): return {"type":typ,"error":"PATH_NOT_FOUND","path":str(args.get("prefix",""))}
+        items=[]
+        if base.is_file():
+            items=[str(base.relative_to(ROOT))]
+        else:
+            for p in sorted(base.rglob("*")):
+                if p.is_file():
+                    items.append(str(p.relative_to(ROOT)))
+                    if len(items)>=250: break
+        return {"type":typ,"items":items,"truncated":len(items)>=250}
+    if typ=="read_file":
+        p=_safe_repo_path(args.get("path",""))
+        if not p.is_file(): return {"type":typ,"error":"FILE_NOT_FOUND","path":str(args.get("path",""))}
+        text=p.read_text(encoding="utf-8",errors="replace")
+        return {"type":typ,"path":str(p.relative_to(ROOT)),"content":text[:16000],"truncated":len(text)>16000}
+    if typ=="search_text":
+        q=str(args.get("query",""))
+        if not q: return {"type":typ,"error":"EMPTY_QUERY"}
+        hits=[]
+        for p in sorted((ROOT/"canonical").rglob("*")):
+            if not p.is_file() or p.suffix.lower() not in {".json",".md",".py",".txt",".yml",".yaml"}: continue
+            try: text=p.read_text(encoding="utf-8",errors="replace")
+            except Exception: continue
+            if q.lower() in text.lower():
+                hits.append(str(p.relative_to(ROOT)))
+                if len(hits)>=80: break
+        return {"type":typ,"query":q,"hits":hits,"truncated":len(hits)>=80}
+    if typ=="http_get":
+        url=str(args.get("url",""))
+        if not url.startswith(("https://","http://")): return {"type":typ,"error":"UNSUPPORTED_URL"}
+        return run_http({"url":url,"timeout_s":20,"max_bytes":60000})
+    if typ=="finish":
+        return {"type":typ,"summary":str(args.get("summary",""))[:12000]}
+    raise Blocker("GOAL_ACTION_NOT_ALLOWED:"+str(typ))
+
+def _extract_json_object(text):
+    text=str(text).strip()
+    try: return json.loads(text)
+    except Exception: pass
+    a=text.find("{"); b=text.rfind("}")
+    if a<0 or b<a: raise Blocker("PLANNER_NO_JSON")
+    return json.loads(text[a:b+1])
+
+def run_goal(step, mission):
+    goal=mission.get(step.get("goal_ref","goal"), mission.get("goal"))
+    if isinstance(goal,(dict,list)): goal=json.dumps(goal,sort_keys=True)
+    goal=str(goal or "").strip()
+    if not goal: raise Blocker("GOAL_REQUIRED")
+    observations=[]
+    trace=[]
+    max_cycles=max(1,min(int(step.get("max_cycles",6)),8))
+    allowed="read_file(path), list_tree(prefix), search_text(query), http_get(url), finish(summary)"
+    for cycle in range(max_cycles):
+        obs=json.dumps(observations[-6:],sort_keys=True)[:12000]
+        prompt=(
+          "You are an OPTIONAL planning source. You do not control execution. Return ONLY JSON. "
+          "Goal: "+goal+"\nAllowed action types: "+allowed+". "
+          "Choose exactly one next action. No writes, no shell, no secrets. "
+          "If evidence is sufficient, use finish. Schema: "
+          '{"action":{"type":"...","args":{...},"why":"..."}}. '
+          "Observations so far: "+obs
+        )
+        url="https://text.pollinations.ai/"+urllib.parse.quote(prompt,safe="")
+        planned=run_http({"url":url,"timeout_s":30,"max_bytes":30000})
+        obj=_extract_json_object(planned.get("body_excerpt",""))
+        action=obj.get("action")
+        if not isinstance(action,dict): raise Blocker("PLANNER_ACTION_MISSING")
+        typ=action.get("type")
+        if typ not in {"read_file","list_tree","search_text","http_get","finish"}:
+            raise Blocker("PLANNER_ACTION_REJECTED:"+str(typ))
+        if not isinstance(action.get("args"),dict): raise Blocker("PLANNER_ARGS_INVALID")
+        result=_goal_action(action)
+        trace.append({"cycle":cycle,"plan":action,"result":result})
+        if typ=="finish":
+            summary=result.get("summary","")
+            if not summary.strip(): raise Blocker("PLANNER_EMPTY_FINISH")
+            return {
+              "adapter":"goal","returncode":0,
+              "stdout":summary,
+              "planner_source":"https://text.pollinations.ai/",
+              "cycles":cycle+1,"trace":trace,
+              "final_summary":summary
+            }
+        observations.append({"action":action,"result":result})
+    raise Blocker("GOAL_MAX_CYCLES_WITHOUT_FINISH")
+
+def execute_step(step, prior_results=None, mission=None):
     adapter=step["adapter"]
     if adapter=="shell":
         return run_shell(step, prior_results)
     if adapter=="http":
         return run_http(step)
+    if adapter=="goal":
+        return run_goal(step, mission or {})
     raise Blocker("MISSING_ADAPTER:"+adapter)
 
 def verify(step,result):
@@ -123,7 +222,7 @@ def main():
             if not prior.get("replay_on_resume", False):
                 continue
             try:
-                result=execute_step(prior, context_results(state))
+                result=execute_step(prior, context_results(state), mission)
                 ok=verify(prior,result)
             except Exception as e:
                 blocker={
@@ -163,7 +262,7 @@ def main():
         step=mission["steps"][i]
         adapter=step["adapter"]
         try:
-            result=execute_step(step, context_results(state))
+            result=execute_step(step, context_results(state), mission)
             ok=verify(step,result)
         except Exception as e:
             blocker={
