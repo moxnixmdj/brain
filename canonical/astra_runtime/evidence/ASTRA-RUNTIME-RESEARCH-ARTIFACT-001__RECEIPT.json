@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-22T04:45:51.918446+00:00",
+  "mission_id": "ASTRA-RUNTIME-RESEARCH-ARTIFACT-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_RESEARCH_ARTIFACT_001.json",
+  "mission_sha256": "cb041eaf36b868ab671a963e9365e37833346fbc12aacd78bb85b5535073bf58",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "35e4d0280457e5b77c4bf72729f8b449c91a88b86f466f4b75179b17afbfbc2c",
+  "status": "COMPLETE",
+  "steps_completed": 4
+}
