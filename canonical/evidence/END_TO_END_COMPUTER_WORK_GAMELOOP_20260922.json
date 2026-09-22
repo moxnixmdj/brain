@@ -73,8 +73,45 @@
     ]
   },
   "evidence_class": "CAPABILITY_EXECUTION_BLOCKED_BY_ARTIFACT_SECURITY_COMPATIBILITY_AND_USER_CONSTRAINT",
-  "result": "BLOCKED_FAIL_CLOSED",
+  "result": "BLOCKED_FAIL_CLOSED_AFTER_SAFE_COMPATIBILITY_DIAGNOSIS",
   "incremental_spend_usd": 0,
   "val_town_used": false,
-  "sprites_used": false
+  "sprites_used": false,
+  "reusable_capability_gain": {
+    "id": "GAMELOOP_ADB_CONTROL_V1",
+    "status": "PROVEN_ON_DEVICE_MO",
+    "method": [
+      "Set HKCU\\\\SOFTWARE\\\\Tencent\\\\MobileGamePC\\\\AdbDisable DWORD to 0",
+      "Restart GameLoop VM 100",
+      "Verify local listener on TCP 5555",
+      "Start clean bundled adb daemon on 5037 if stale adb clients wedge it",
+      "Connect bundled adb.exe to 127.0.0.1, which resolves to 127.0.0.1:5555"
+    ],
+    "verified_effects": [
+      "adb devices sees GameLoop VM",
+      "root shell access",
+      "package/ABI inspection",
+      "logcat capture",
+      "activity/process inspection",
+      "screencap and pull"
+    ]
+  },
+  "direct_vm_evidence": {
+    "emulator_abi": "x86_64",
+    "emulator_abilist": "x86_64,arm64-v8a,x86,armeabi-v7a,armeabi",
+    "package_primary_cpu_abi": "arm64-v8a",
+    "package_secondary_cpu_abi": null,
+    "package_version_code": 21525,
+    "native_bridge": "libnb.so",
+    "translation_rule": "com.tencent.ig -> houdini",
+    "observed_houdini": "7.1.1c_z.50033 RELEASE via /system/lib64/libhotx711.so",
+    "native_bridge_loads": [
+      "libanogs.so",
+      "libanort.so"
+    ],
+    "fresh_run_result": "PUBG reaches SplashActivity, then process death/restart loop; host AOW records mass signal 4 (SIGILL) kills across translated threads.",
+    "screenshot_result": "Captured emulator frame is effectively blank while SplashActivity is resumed.",
+    "security_context": "Requested APK is debug-signed rather than Tencent-signed and an adjacent filterABUNOOR.json explicitly blocks PUBG anti-cheat/telemetry endpoints. That filter was not applied."
+  },
+  "safe_branch_terminal_reason": "The remaining obvious routes would require changing/substituting the requested APK, changing preserved resources, or weakening/bypassing integrity/anti-cheat behavior. Those violate user constraints or safety. Repeating the same crash without a root-cause change is forbidden."
 }
