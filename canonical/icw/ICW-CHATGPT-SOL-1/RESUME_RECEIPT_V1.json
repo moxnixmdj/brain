@@ -1,0 +1,23 @@
+{
+  "schema": "PROJECT_BRAIN_ICW_RESUME_RECEIPT_V1",
+  "worker_identity": "ICW-CHATGPT-SOL-1",
+  "mission_id": "ICW-REAL-END-TO-END-001",
+  "resume_event": "GENUINE_LATER_CHAT_CONTEXT_RESUME",
+  "parent_checkpoint_path": "canonical/icw/ICW-CHATGPT-SOL-1/CHECKPOINT_V1.json",
+  "parent_checkpoint_git_blob_sha": "90d6dfb9a421a17157fb0701c8039b817ad98c1a",
+  "completed_work_reused_without_reexecution": [
+    "capability_reality_auditor implementation",
+    "regression tests",
+    "live 12/12 audit",
+    "HTML renderer repair",
+    "HTML report rendering",
+    "visual inspection evidence"
+  ],
+  "resumed_remaining_frontier": [
+    "same persistent cognitive identity autonomously wakes and continues without user re-prompt",
+    "arbitrary interactive desktop GUI control by this exact identity"
+  ],
+  "promotion_claim": false,
+  "p_real_after_resume": 0,
+  "truth_note": "This receipt proves only checkpoint-based cognitive continuation into a later chat context. It does not prove autonomous wake or arbitrary desktop GUI."
+}
