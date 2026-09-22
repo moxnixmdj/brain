@@ -146,6 +146,18 @@ def run_goal(step, mission):
                 action=actions[0]
         if not isinstance(action,dict) and isinstance(obj.get("next_action"),dict):
             action=obj["next_action"]
+        if not isinstance(action,dict):
+            tc=obj.get("tool_calls")
+            if isinstance(tc,list) and tc and isinstance(tc[0],dict):
+                call=tc[0]
+                fn=call.get("function") if isinstance(call.get("function"),dict) else call
+                name=fn.get("name")
+                raw_args=fn.get("arguments",{})
+                if isinstance(raw_args,str):
+                    try: raw_args=json.loads(raw_args)
+                    except Exception: raw_args={}
+                if isinstance(name,str) and isinstance(raw_args,dict):
+                    action={"type":name,"args":raw_args,"why":str(obj.get("reasoning","tool_call"))}
         if not isinstance(action,dict) and isinstance(obj.get("type"),str):
             action=obj
         if not isinstance(action,dict):
