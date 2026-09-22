@@ -1,0 +1,12 @@
+{
+  "schema": "PROJECT_BRAIN_ICW_V2_GUI_ACTION_V1",
+  "worker_identity": "ICW-CHATGPT-SOL-1",
+  "mission_id": "ICW-PROMOTION-CLOSURE-V2-20260922",
+  "acted_at_utc": "2026-09-22T07:45:17.3633942Z",
+  "pid": 321196,
+  "top_window_handle": "15403506",
+  "document_handle": "5703960",
+  "window_title": "*icw_v2_gui_canary.txt - Notepad",
+  "actuation": "Win32 WM_SETTEXT against live RichEditD2DPT document control",
+  "exact_token": "ICW-CHATGPT-SOL-1|ICW-PROMOTION-CLOSURE-V2-20260922|GUI-EFFECT"
+}
