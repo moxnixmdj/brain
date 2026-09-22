@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_INTEGRATED_COGNITIVE_WORKER_MISSION_V1",
+  "status": "FROZEN_BEFORE_WORK_EXECUTION",
+  "mission_id": "ICW-REAL-END-TO-END-001",
+  "worker_identity": "ICW-WORK-ASTRA-1",
+  "cognition_substrate": "CHATGPT_WORK_WITH_GPT_6_ASTRA_IF_AVAILABLE_IN_EXISTING_PLAN",
+  "incremental_spend_usd": 0,
+  "canonical_brain": "moxnixmdj/brain",
+  "terminal_objective": "Prove one single cognitive identity can take a difficult real computer-work goal from ambiguous request to verified finished result while using durable Brain state and resuming after a session boundary.",
+  "mission_requirements": [
+    "interpret a real consequential goal rather than a synthetic predicate",
+    "inspect existing context and constraints from Project Brain",
+    "research unfamiliar information when needed",
+    "discover and use tools/apps appropriate to the task",
+    "perform meaningful computer actions in browser or professional software",
+    "create or modify a consequential artifact or software result",
+    "inspect the actual result and detect at least one real issue if present",
+    "correct the result rather than merely report the issue",
+    "persist mission state and evidence to Project Brain before a session boundary",
+    "resume from persisted state without repeating completed work",
+    "verify the final result independently from its own planning narrative",
+    "write durable evidence and lessons back to Project Brain"
+  ],
+  "anti_shortcuts": [
+    "do not borrow persistence proof from a deterministic worker",
+    "do not borrow cognition proof from another chat",
+    "do not compose booleans from different identities",
+    "do not count benchmark completion as mission completion",
+    "do not promote from one narrow HTTP or repository task"
+  ],
+  "success_definition": "The exact same worker identity demonstrably completes the full cognitive and persistent loop on the real mission.",
+  "promotion_claim": false
+}
