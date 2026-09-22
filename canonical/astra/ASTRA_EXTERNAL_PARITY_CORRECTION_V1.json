@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_EXTERNAL_PARITY_CORRECTION_V1",
+  "status": "CANONICAL_CORRECTION",
+  "reason": "The Project Brain 61-predicate suite is an internally defined surrogate qualification. Passing it does not establish equivalence to an external Astra system/model. The prior canonical field full_astra_claim conflated internal suite completion with external capability parity.",
+  "preserved_truth": {
+    "internal_suite_name": "PROJECT_BRAIN_DECLARED_61_PREDICATE_SUITE",
+    "internal_suite_passed": true,
+    "internal_suite_score": "61/61",
+    "underlying_evidence_preserved": true
+  },
+  "revoked_claims": [
+    "FULL_ASTRA_EXTERNAL_PARITY_VERIFIED",
+    "ASTRA_EQUIVALENT_CAPABILITY_ESTABLISHED",
+    "EXTERNAL_ASTRA_STRENGTH_BREADTH_RELIABILITY_PARITY"
+  ],
+  "current_truth": {
+    "external_astra_parity": "UNVERIFIED",
+    "distance_to_external_astra": "UNKNOWN_UNTIL_COMMON_BENCHMARKS",
+    "common_external_benchmark_evidence_present": false
+  },
+  "downstream_effect": {
+    "scaling_paused_for_astra_equivalence_claims": true,
+    "superworker_internal_definition_evidence_preserved": true,
+    "superworker_astra_level_intelligence_inference_forbidden": true,
+    "superworker_external_capability_breadth_requires_independent_benchmarking": true
+  },
+  "required_next_step": "Run a common external-comparability evaluation battery anchored to publicly specified Astra benchmarks or faithful reproducible analogues; report raw scores before any parity percentage.",
+  "no_self_certification": true
+}
