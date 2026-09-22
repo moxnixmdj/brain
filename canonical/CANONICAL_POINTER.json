@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_POINTER_V1",
-  "canonical_generation": "2026-09-22-two-real-superworkers-cleanroom-proven",
+  "canonical_generation": "2026-09-22-scaling-bottleneck-activation-wake-measured",
   "control_plane": {
     "provider": "GitHub",
     "repository": "moxnixmdj/brain",
@@ -101,11 +101,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 2,
-    "next_step": "MEASURE_REAL_BOTTLENECKS_FROM_TWO_INDEPENDENT_SUPERWORKERS__THEN_SELECT_MINIMUM_SAFE_SCALING_STEP__DO_NOT_CLONE_IDENTITIES_WITHOUT_REAL_CAPACITY",
+    "next_step": "BIND_SMALLEST_EXISTING_HARD_ZERO_COST_AUTONOMOUS_WAKE_MECHANISM_TO_THE_TWO_QUALIFIED_CONTROLLERS__THEN_MEASURE_2_TO_4_REAL_ACTIVE_CAPACITY__NO_NEW_PLATFORM_SEARCH_UNLESS_EXISTING_AUTHORIZED_SURFACES_ARE_FALSIFIED",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "SCALING_BOTTLENECKS_NOT_YET_MEASURED",
+    "critical_blocker": "CONTINUOUS_AUTONOMOUS_ACTIVATION_WAKE_CAPACITY",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -153,7 +153,22 @@
     "superworker_integrated_2_proof_bundle_drive_file_id": "14JYs_crgv2Q6Dd_OmgagA1V9LXzg5y9l",
     "superworker_integrated_2_proof_bundle_sha256": "442d3f376f57f0918718bcf04e64bd0fa19d7852b253d2ac0d23dd25f5541c72",
     "cleanroom_reproduction_verified": true,
-    "no_shared_execution_state_verified": true
+    "no_shared_execution_state_verified": true,
+    "scaling_measurement_path": "canonical/scaling/TWO_WORKER_SCALING_MEASUREMENT_V1.json",
+    "scaling_adjudication_path": "canonical/scaling/TWO_WORKER_SCALING_WOLFRAM_ADJUDICATION_V1.json",
+    "scaling_metrics": {
+      "serial_wall_s": 4.515242504000071,
+      "concurrent_wall_s": 2.6297518589999527,
+      "serial_tasks_per_s": 0.442944093972404,
+      "concurrent_tasks_per_s": 0.7605280297284642,
+      "speedup_vs_serial": 1.7169842426566955,
+      "parallel_efficiency_2_workers": 0.8584921213283477,
+      "state_hashes_unique": true,
+      "report_hashes_unique": true,
+      "all_relaunch_observed": true,
+      "all_checkpointed": true,
+      "terminal_success_all": true
+    }
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
@@ -177,11 +192,11 @@
     "infrastructure_freeze_when_next_real_mission_executable": true,
     "forbid_relabeling_bounded_executor_as_superworker": true,
     "only_current_allowed_frontier_actions": [
-      "measure_execution_throughput_latency_failure_rate_and_state_contention_from_two_real_workers",
-      "identify_the_single_binding_scaling_bottleneck",
-      "scale_only_the_bottlenecked_resource_or_worker_count_needed_for_next_verified_capacity_step",
+      "reuse_existing_authorized_zero_cost_wake_surface",
+      "bind_wake_to_existing_qualified_controller_without_changing_cognition",
+      "measure_activation_latency_active_duty_cycle_and_2_to_4_capacity",
       "preserve_unique_identity_and_independent_execution_state",
-      "distinguish_registered_identity_count_from_real_active_capacity",
+      "forbid_val_town_and_sprites",
       "repair_only_observed_failed_property"
     ],
     "truth_first_law": "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
