@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_REGRESSION_CASE_V1",
+  "id": "2026-09-22_NARROW_CONTROLLER_FALSE_SUPERWORKER_PROMOTION",
+  "status": "PERMANENT_FAIL_CLOSED_REGRESSION",
+  "incident": [
+    "Two persistent controllers were promoted to P_real based on persistence, relaunch, tool-registry discovery, and broad capability evidence produced by a separate ChatGPT execution session.",
+    "The independently running controller itself exposed only narrow deterministic tools and no general reasoning kernel.",
+    "The final adjudication omitted the mandatory meaningful-general-capability-breadth requirement already used to revoke the earlier GitHub bounded executor."
+  ],
+  "prohibited_patterns": [
+    "SEPARATE_CHAT_SESSION_BREADTH_INHERITED_BY_PERSISTENT_CONTROLLER",
+    "STATIC_TOOL_REGISTRY_SCAN_LABELED_DYNAMIC_GENERAL_CAPABILITY_ACQUISITION",
+    "PERSISTENCE_PLUS_NARROW_TOOLS_PROMOTED_AS_GENERAL_SUPERWORKER",
+    "WHOLE_DEFINITION_ADJUDICATION_OMITS_GENERAL_CAPABILITY_BREADTH"
+  ],
+  "required_prevention": [
+    "GENERAL_REASONING_MUST_EXIST_INSIDE_THE_INDEPENDENT_PERSISTENT_EXECUTION_PATH",
+    "GENERIC_TOOL_ACQUISITION_MUST_BE_DEMONSTRATED_ON_FRESH_EXTERNAL_TASKS",
+    "PUBLIC_EXTERNAL_BENCHMARK_ENTRY_REQUIRED_FOR_BREADTH",
+    "P_REAL_REMAINS_ZERO_UNTIL_INTEGRATED_BREADTH_IS_DISTINCTLY_VERIFIED"
+  ]
+}
