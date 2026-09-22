@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-22T04:54:10.883022+00:00",
+  "mission_id": "ASTRA-RUNTIME-OPTIONAL-PLANNER-PROBE-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_OPTIONAL_PLANNER_PROBE_001.json",
+  "mission_sha256": "6371c503eb43f59fe3839c3dab7b925defa5baa776a97afd9f64e8814963b44d",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "651789bc1cbb5919ddc511d7cbd98336c140e069efe02c231bb5b8f63b35f47c",
+  "status": "COMPLETE",
+  "steps_completed": 2
+}

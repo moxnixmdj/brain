@@ -8,6 +8,7 @@
     "step_id": "verify-structured-response",
     "step_index": 1
   },
+  "completed_at_utc": "2026-09-22T04:54:10.882547+00:00",
   "created_at_utc": "2026-09-22T04:52:57.765335+00:00",
   "history": [
     {
@@ -23,14 +24,51 @@
       },
       "step_id": "probe-anonymous-planning-source",
       "step_index": 0
+    },
+    {
+      "completed_at_utc": "2026-09-22T04:54:10.881993+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail; python - <<'PY'\nimport json, os, re\ns=os.environ['ASTRA_STEP_0_BODY'].strip()\nm=re.search(r'\\{[\\s\\S]*\\}',s)\nif not m: raise SystemExit('NO_JSON_OBJECT')\nx=json.loads(m.group(0))\nif x.get('ok') is not True: raise SystemExit('BAD_STRUCTURED_RESULT')\nprint('PLANNER_SOURCE_PROBE_PASS')\nPY",
+        "duration_s": 0.035,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "PLANNER_SOURCE_PROBE_PASS\n"
+      },
+      "step_id": "verify-structured-response",
+      "step_index": 1
     }
   ],
   "mission_id": "ASTRA-RUNTIME-OPTIONAL-PLANNER-PROBE-001",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_OPTIONAL_PLANNER_PROBE_001.json",
-  "mission_sha256": "8bd3a1faa905b5150e1deef525751f0fb4bbf9426b45eee4cbe4a11c69d61428",
-  "next_step": 1,
+  "mission_sha256": "6371c503eb43f59fe3839c3dab7b925defa5baa776a97afd9f64e8814963b44d",
+  "next_step": 2,
+  "rehydrations": [
+    {
+      "at_utc": "2026-09-22T04:54:10.846478+00:00",
+      "before_step": 1,
+      "steps": [
+        {
+          "completed_at_utc": "2026-09-22T04:54:10.846452+00:00",
+          "ok": true,
+          "rehydration": true,
+          "result": {
+            "adapter": "http",
+            "body_excerpt": "{\"ok\":true}",
+            "body_sha256": "4062edaf750fb8074e7e83e0c9028c94e32468a8b6f1614774328ef045150f93",
+            "duration_s": 0.544,
+            "status": 200,
+            "url": "https://text.pollinations.ai/Return%20only%20valid%20JSON%20with%20one%20field%20named%20ok%20set%20to%20true."
+          },
+          "step_id": "probe-anonymous-planning-source",
+          "step_index": 0
+        }
+      ]
+    }
+  ],
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
-  "status": "BLOCKED",
-  "updated_at_utc": "2026-09-22T04:53:00.455610+00:00"
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-22T04:54:10.882012+00:00"
 }
