@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_REAL_MISSION_V1",
+  "mission_id": "ASTRA-REAL-MIXED-PROFESSIONAL-CONTINUATION-001",
+  "canonical_generation_at_selection": "2026-09-22-astra-shared-runtime-portfolio-restored",
+  "evidence_presence_class": "CAPABILITY_UNPROVEN",
+  "state": "ACTIVE_CHECKPOINTED",
+  "selected_frontier": "durable long-horizon continuation plus cross-application GUI/browser delivery under ambiguous mixed professional work",
+  "necessity": "PORTFOLIO_STATE_V1 lists long-horizon consequential continuation, ambiguous interruption/restart work, and cross-application GUI/browser delivery as the remaining uncovered pressure dimensions.",
+  "prior_work_checked": [
+    "ASTRA-REAL-SWE-MYPY-21968-001 complete; not repeated",
+    "ASTRA-REAL-PROFESSIONAL-SYSTEM-STABILITY-001 complete; not repeated",
+    "ASTRA-REAL-COMPUTER-WORK-GAMELOOP-PUBG-001 blocked/removed; untouched",
+    "Project_Brain_One_Pager.pdf inspected as historical professional artifact; not treated as current operational truth"
+  ],
+  "consequential_work_this_invocation": [
+    "reconnected to live Windows host Mo and verified reachability",
+    "inspected an existing historical Project Brain professional brief and the latest exported Brain conversation state",
+    "created and read-back-verified C:\\Users\\muham\\Desktop\\PROJECT_BRAIN_CURRENT_CAPABILITY_BRIEF_2026-09-22.md with current operational truth and explicit truth boundaries"
+  ],
+  "checkpoint": {
+    "artifact_path": "C:\\Users\\muham\\Desktop\\PROJECT_BRAIN_CURRENT_CAPABILITY_BRIEF_2026-09-22.md",
+    "next_required_effect": "Deliver the current operational brief through a genuinely different application/browser surface if safely available, verify the delivered content/effect, and preserve a receipt. A wake receipt alone is not progress.",
+    "do_not_repeat": "Do not recreate or merely reread the brief on the next invocation; perform new consequential delivery work from this checkpoint."
+  },
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "sprites_used": false,
+    "val_town_used": false,
+    "gameloop_pubg_touched": false
+  }
+}
