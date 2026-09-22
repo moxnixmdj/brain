@@ -22,7 +22,7 @@ jobs:
         with: {python-version: '3.12'}
       - name: Execute shared runtime mission
         run: |
-          MISSION=$(git diff --name-only HEAD^ HEAD | grep '^canonical/astra_runtime/missions/.*\.json$' | head -n1)
+          MISSION=$(git show --pretty='' --name-only "$GITHUB_SHA" | grep '^canonical/astra_runtime/missions/.*\.json$' | head -n1)
           test -n "$MISSION"
           python canonical/runtime/astra_runtime.py "$MISSION"
       - name: Persist runtime state and evidence
@@ -30,7 +30,7 @@ jobs:
         run: |
           git config user.name 'Project Brain ASTRA Runtime'
           git config user.email 'project-brain-astra-runtime@users.noreply.github.com'
-          git add canonical/astra_runtime/state/ canonical/astra_runtime/evidence/
+          git add -A canonical/astra_runtime
           if ! git diff --cached --quiet; then
             git commit -m 'Record ASTRA shared runtime mission execution'
             git push
