@@ -13,7 +13,8 @@
       "verify": {
         "type": "http_status",
         "value": 200
-      }
+      },
+      "replay_on_resume": true
     },
     {
       "id": "verify-structured-response",
@@ -21,8 +22,13 @@
       "command": "set -euo pipefail; python - <<'PY'\nimport json, os, re\ns=os.environ['ASTRA_STEP_0_BODY'].strip()\nm=re.search(r'\\{[\\s\\S]*\\}',s)\nif not m: raise SystemExit('NO_JSON_OBJECT')\nx=json.loads(m.group(0))\nif x.get('ok') is not True: raise SystemExit('BAD_STRUCTURED_RESULT')\nprint('PLANNER_SOURCE_PROBE_PASS')\nPY",
       "verify": {
         "type": "stdout_contains",
-        "value": "PLANNER_SOURCE_PROBE_PASS"
+        "text": "PLANNER_SOURCE_PROBE_PASS"
       }
     }
-  ]
+  ],
+  "replay_after_verifier_fix": {
+    "prior_failure": "PROBE_VERIFIER_FIELD_MALFORMED_VALUE_INSTEAD_OF_TEXT",
+    "evidence": "provider returned HTTP 200 body {\"ok\":true} in 2.665 s",
+    "replay_authorized": true
+  }
 }
