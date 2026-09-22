@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import argparse, hashlib, json, os, pathlib, shlex, subprocess, sys, time, urllib.request
+import argparse, gzip, hashlib, json, os, pathlib, shlex, subprocess, sys, time, urllib.request
 from datetime import datetime, timezone
 
 ROOT=pathlib.Path(__file__).resolve().parents[2]
@@ -20,10 +20,18 @@ def sha_file(p):
 class Blocker(RuntimeError):
     pass
 
-def run_shell(step):
+def run_shell(step, prior_results=None):
     cmd=step["command"]
+    env=os.environ.copy()
+    for i, result in enumerate(prior_results or []):
+        prefix=f"ASTRA_STEP_{i}_"
+        env[prefix+"RESULT_JSON"]=json.dumps(result, sort_keys=True)
+        if "body_excerpt" in result:
+            env[prefix+"BODY"]=result["body_excerpt"]
+        if "stdout" in result:
+            env[prefix+"STDOUT"]=result["stdout"]
     t=time.monotonic()
-    p=subprocess.run(cmd,shell=True,executable="/bin/bash",cwd=ROOT,text=True,capture_output=True)
+    p=subprocess.run(cmd,shell=True,executable="/bin/bash",cwd=ROOT,text=True,capture_output=True,env=env)
     return {
       "adapter":"shell","command":cmd,"returncode":p.returncode,
       "stdout":p.stdout[-12000:],"stderr":p.stderr[-12000:],
@@ -34,7 +42,8 @@ def run_http(step):
     req=urllib.request.Request(step["url"],headers={"User-Agent":"ProjectBrain-ASTRA_RUNTIME/1"})
     t=time.monotonic()
     with urllib.request.urlopen(req,timeout=step.get("timeout_s",20)) as r:
-        body=r.read(step.get("max_bytes",200000))
+        raw=r.read(step.get("max_bytes",200000))
+        body=gzip.decompress(raw) if r.headers.get("Content-Encoding","").lower()=="gzip" else raw
         return {
           "adapter":"http","url":r.geturl(),"status":r.status,
           "body_sha256":hashlib.sha256(body).hexdigest(),
@@ -42,10 +51,10 @@ def run_http(step):
           "duration_s":round(time.monotonic()-t,3)
         }
 
-def execute_step(step):
+def execute_step(step, prior_results=None):
     adapter=step["adapter"]
     if adapter=="shell":
-        return run_shell(step)
+        return run_shell(step, prior_results)
     if adapter=="http":
         return run_http(step)
     raise Blocker("MISSING_ADAPTER:"+adapter)
@@ -102,7 +111,7 @@ def main():
             if not prior.get("replay_on_resume", False):
                 continue
             try:
-                result=execute_step(prior)
+                result=execute_step(prior, [x["result"] for x in state.get("history",[]) if x.get("ok")])
                 ok=verify(prior,result)
             except Exception as e:
                 blocker={
@@ -142,7 +151,7 @@ def main():
         step=mission["steps"][i]
         adapter=step["adapter"]
         try:
-            result=execute_step(step)
+            result=execute_step(step, [x["result"] for x in state.get("history",[]) if x.get("ok")])
             ok=verify(step,result)
         except Exception as e:
             blocker={
