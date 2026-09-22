@@ -1,11 +1,15 @@
 name: ASTRA Shared Runtime Mission
+
 on:
   push:
-    branches: [main]
+    branches:
+      - main
     paths:
-      - 'canonical/astra_runtime/missions/**.json'
+      - "canonical/astra_runtime/missions/**.json"
+
 permissions:
   contents: write
+
 concurrency:
   group: astra-shared-runtime
   cancel-in-progress: false
@@ -16,40 +20,54 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-        with: {ref: main}
-      - run: git pull --ff-only
+        with:
+          ref: main
+          fetch-depth: 2
+
       - uses: actions/setup-python@v5
-        with: {python-version: '3.12'}
-      - name: Execute shared runtime mission
+        with:
+          python-version: "3.12"
+
+      - name: Resolve exact changed mission
+        id: mission
+        shell: bash
         run: |
-          mapfile -t MISSIONS < <(git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | grep '^canonical/astra_runtime/missions/.*\.json      - name: Persist runtime state and evidence
-        if: always()
-        run: |
-          git config user.name 'Project Brain ASTRA Runtime'
-          git config user.email 'project-brain-astra-runtime@users.noreply.github.com'
-          git add -A canonical/astra_runtime
-          if ! git diff --cached --quiet; then
-            git commit -m 'Record ASTRA shared runtime mission execution'
-            git push
+          set -euo pipefail
+          mapfile -t MISSIONS < <(
+            git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" |
+            grep '^canonical/astra_runtime/missions/.*\.json$'
+          )
+          if [ "${#MISSIONS[@]}" -ne 1 ]; then
+            printf 'Expected exactly one changed mission, got %s\n' "${#MISSIONS[@]}" >&2
+            printf '%s\n' "${MISSIONS[@]:-}" >&2
+            exit 40
           fi
-)
-          test "${#MISSIONS[@]}" -eq 1
           MISSION="${MISSIONS[0]}"
+          echo "path=$MISSION" >> "$GITHUB_OUTPUT"
           echo "ASTRA_RUNTIME_MISSION_PATH=$MISSION"
           python - "$MISSION" <<'PY'
           import json, pathlib, sys
-          p=pathlib.Path(sys.argv[1])
-          x=json.loads(p.read_text())
-          print("ASTRA_RUNTIME_MISSION_ID="+x["mission_id"])
+          p = pathlib.Path(sys.argv[1])
+          x = json.loads(p.read_text(encoding="utf-8"))
+          print("ASTRA_RUNTIME_MISSION_ID=" + x["mission_id"])
           PY
-          python canonical/runtime/astra_runtime.py "$MISSION"
+
+      - name: Execute shared runtime mission
+        shell: bash
+        run: |
+          set -euo pipefail
+          python canonical/runtime/astra_runtime.py "${{ steps.mission.outputs.path }}"
+
       - name: Persist runtime state and evidence
         if: always()
+        shell: bash
         run: |
-          git config user.name 'Project Brain ASTRA Runtime'
-          git config user.email 'project-brain-astra-runtime@users.noreply.github.com'
+          set -euo pipefail
+          git config user.name "Project Brain ASTRA Runtime"
+          git config user.email "project-brain-astra-runtime@users.noreply.github.com"
           git add -A canonical/astra_runtime
           if ! git diff --cached --quiet; then
-            git commit -m 'Record ASTRA shared runtime mission execution'
-            git push
+            git commit -m "Record ASTRA shared runtime mission execution"
+            git pull --rebase origin main
+            git push origin HEAD:main
           fi
