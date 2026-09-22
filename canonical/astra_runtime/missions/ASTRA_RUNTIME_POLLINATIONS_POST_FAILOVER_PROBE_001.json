@@ -1,0 +1,17 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-POLLINATIONS-POST-FAILOVER-PROBE-001",
+  "purpose": "Observed-blocker probe: test legacy Pollinations POST JSON mode with bounded multi-model failover after the autonomous goal loop hit a transient read timeout. No credentials, no writes, no user data.",
+  "blocker_parent": "ASTRA-RUNTIME-AUTONOMOUS-BRAIN-MAINTENANCE-001",
+  "steps": [
+    {
+      "id": "probe-post-failover",
+      "adapter": "shell",
+      "command": "set -euo pipefail; python - <<'PY'\nimport json, urllib.request, urllib.error, time\nendpoint='https://text.pollinations.ai/'\nprompt='Return ONLY JSON: {\"actions\":[{\"type\":\"list_tree\",\"args\":{\"prefix\":\"\"},\"why\":\"inspect repository\"}]}'\nmodels=['openai-fast','openai','mistral']\nerrors=[]\nfor model in models:\n    body=json.dumps({\"messages\":[{\"role\":\"user\",\"content\":prompt}],\"model\":model,\"jsonMode\":True}).encode()\n    req=urllib.request.Request(endpoint,data=body,headers={'Content-Type':'application/json','User-Agent':'ProjectBrain/1.0'},method='POST')\n    t=time.monotonic()\n    try:\n        with urllib.request.urlopen(req,timeout=20) as r:\n            raw=r.read(30000).decode('utf-8','replace')\n        dt=round(time.monotonic()-t,3)\n        try:\n            obj=json.loads(raw)\n        except Exception:\n            a=raw.find('{'); b=raw.rfind('}')\n            if a<0 or b<a: raise ValueError('NO_JSON')\n            obj=json.loads(raw[a:b+1])\n        acts=obj.get('actions') if isinstance(obj,dict) else None\n        if isinstance(acts,list) and acts and acts[0].get('type')=='list_tree':\n            print(json.dumps({\"ok\":True,\"model\":model,\"duration_s\":dt,\"response\":obj},separators=(',',':')))\n            print('POST_FAILOVER_PROBE_PASS')\n            raise SystemExit(0)\n        errors.append({\"model\":model,\"error\":\"BAD_SCHEMA\",\"body\":raw[:500]})\n    except Exception as e:\n        errors.append({\"model\":model,\"error\":type(e).__name__+':'+str(e),\"duration_s\":round(time.monotonic()-t,3)})\nprint(json.dumps({\"ok\":False,\"errors\":errors},separators=(',',':')))\nraise SystemExit(41)\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "POST_FAILOVER_PROBE_PASS"
+      }
+    }
+  ]
+}
