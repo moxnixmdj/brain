@@ -1,0 +1,33 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>mypy #21968 Engineering Note</title>
+<style>
+body{font-family:Segoe UI,Arial,sans-serif;max-width:980px;margin:40px auto;padding:0 24px;color:#1f2937;line-height:1.55}
+h1{font-size:30px;margin-bottom:4px} h2{margin-top:28px} code,pre{font-family:Consolas,monospace}
+pre{background:#f3f4f6;padding:16px;border-radius:8px;overflow:auto}.ok{border-left:5px solid #15803d;padding:12px 16px;background:#f0fdf4}
+table{border-collapse:collapse;width:100%}td,th{border:1px solid #d1d5db;padding:8px;text-align:left}
+.small{color:#6b7280;font-size:14px}
+</style></head><body>
+<h1>mypy #21968: exhaustive matching for tuple[bool, bool]</h1>
+<p class="small">Project Brain real SWE mission ASTRA-REAL-SWE-MYPY-21968-001</p>
+<div class="ok"><strong>Status:</strong> locally fixed and regression-verified against mypy master b645e069c1e7f907205e6cc0eabea5d2b5beeefc.</div>
+<h2>Observed defect</h2>
+<p>A four-case structural match covering all combinations of two booleans was incorrectly reported as non-exhaustive, producing both <code>[exhaustive-match]</code> and <code>[return]</code>.</p>
+<h2>Root cause</h2>
+<p>For fixed-length tuple sequence patterns, mypy only applied negative narrowing when zero or one element could conditionally fail. A pattern such as <code>(True, True)</code> has two conditional subpatterns, so the unmatched type fell back to the original <code>tuple[bool, bool]</code>.</p>
+<h2>Repair</h2>
+<p>Partition the complement by the <em>first subpattern that fails</em>. For patterns P1..Pn, represent the unmatched space as <code>!P1 OR (P1 AND !P2) OR ...</code>. This is linear in tuple length and gives exact negative narrowing for fixed tuples.</p>
+<h2>Specification basis</h2>
+<p>Python's structural-pattern-matching specification states that fixed-length sequence subpatterns are matched left-to-right and matching stops on the first failing subpattern. This directly supports the complement partition used by the repair.</p>
+<p>Sources: https://peps.python.org/pep-0634/ and https://docs.python.org/3/reference/compound_stmts.html#the-match-statement</p>
+<h2>Verification</h2>
+<table><tr><th>Check</th><th>Result</th></tr>
+<tr><td>Exact issue reproduction after fix</td><td>Success: no issues found</td></tr>
+<tr><td>New targeted regression</td><td>1 passed</td></tr>
+<tr><td>Exhaustive-match subset</td><td>10 passed</td></tr>
+<tr><td>Match-pattern subset</td><td>261 passed, 1 skipped</td></tr>
+<tr><td>git diff --check</td><td>PASS</td></tr></table>
+<h2>Additional precision improvement</h2>
+<p>For <code>tuple[Literal[1,2], Literal["a","b"]]</code> after matching <code>(1,"a")</code>, mypy now preserves the exact remainder: <code>tuple[Literal[2], Literal["a"] | Literal["b"]] | tuple[Literal[1], Literal["b"]]</code>, instead of retaining a broader superset that still included the matched case.</p>
+<h2>Scope</h2>
+<p>No external pull request was created. The verified patch is preserved in Project Brain for review or later contribution.</p>
+</body></html>
