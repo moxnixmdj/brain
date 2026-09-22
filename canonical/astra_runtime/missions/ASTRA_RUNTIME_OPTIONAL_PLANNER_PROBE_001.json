@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-OPTIONAL-PLANNER-PROBE-001",
+  "purpose": "Causal blocker probe for MISSING_ADAPTER:goal. Test whether the legacy Pollinations anonymous text endpoint is actually reachable from the shared runtime as a zero-cost optional planning source. No credential, no user data, no promotion claim.",
+  "blocker_parent": "ASTRA-RUNTIME-AUTONOMOUS-BRAIN-MAINTENANCE-001",
+  "steps": [
+    {
+      "id": "probe-anonymous-planning-source",
+      "adapter": "http",
+      "url": "https://text.pollinations.ai/Return%20only%20valid%20JSON%20with%20one%20field%20named%20ok%20set%20to%20true.",
+      "timeout_s": 25,
+      "max_bytes": 20000,
+      "verify": {
+        "type": "http_status",
+        "value": 200
+      }
+    },
+    {
+      "id": "verify-structured-response",
+      "adapter": "shell",
+      "command": "set -euo pipefail; python - <<'PY'\nimport json, os, re\ns=os.environ['ASTRA_STEP_0_BODY'].strip()\nm=re.search(r'\\{[\\s\\S]*\\}',s)\nif not m: raise SystemExit('NO_JSON_OBJECT')\nx=json.loads(m.group(0))\nif x.get('ok') is not True: raise SystemExit('BAD_STRUCTURED_RESULT')\nprint('PLANNER_SOURCE_PROBE_PASS')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "value": "PLANNER_SOURCE_PROBE_PASS"
+      }
+    }
+  ]
+}
