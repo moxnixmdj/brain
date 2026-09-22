@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_INHERITANCE_V1",
+  "capability_id": "GAMELOOP_NATIVE_APK_INSTALL_CONTROL_V1",
+  "target": "Install and launch Android APKs in GameLoop from the Windows host without relying on visual drag-and-drop or Cx File Explorer.",
+  "discovered_contract": {
+    "windows_apk_class": "syzs.apk",
+    "installer": "C:\\Program Files\\TxGameAssistant\\AppMarket\\AppMarket.exe",
+    "install_invocation": "AppMarket.exe -localpkg <APK_PATH> -from localapk",
+    "launcher": "C:\\Program Files\\TxGameAssistant\\ui\\AndroidEmulatorEn.exe",
+    "launch_shape": "AndroidEmulatorEn.exe -cmd StartApk -param -startpkg <PACKAGE> -engine <ENGINE> -vm <VM_ID>"
+  },
+  "evidence": {
+    "file_association_observed": true,
+    "guest_package_inventory_observed_in": "C:\\Program Files\\TxGameAssistant\\ui\\AEngine100.log",
+    "successful_prior_native_installs": [
+      {
+        "package": "com.tencent.ig",
+        "result": "Success",
+        "observed_at_local": "2026-09-22 10:27:42"
+      },
+      {
+        "package": "com.cxinventor.file.explorer",
+        "result": "Success",
+        "observed_at_local": "2026-09-22 10:28:35"
+      }
+    ],
+    "current_packages_observed": [
+      "com.tencent.ig",
+      "com.cxinventor.file.explorer",
+      "com.termux",
+      "ru.zdevs.zarchiver"
+    ]
+  },
+  "failure_modes_observed": [
+    "raw adb server may exist without an exposed guest device",
+    "wrong-ABI APK can fail with INSTALL_FAILED_NO_MATCHING_ABIS",
+    "engine choice may differ by package"
+  ],
+  "rule": "Prefer the native AppMarket localpkg path over visual file-manager transfer for APK installation; verify through AEngine/AppMarket state rather than assuming process launch equals install success.",
+  "incremental_spend_usd": 0,
+  "val_town_used": false,
+  "sprites_used": false
+}
