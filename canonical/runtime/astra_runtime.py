@@ -42,6 +42,14 @@ def run_http(step):
           "duration_s":round(time.monotonic()-t,3)
         }
 
+def execute_step(step):
+    adapter=step["adapter"]
+    if adapter=="shell":
+        return run_shell(step)
+    if adapter=="http":
+        return run_http(step)
+    raise Blocker("MISSING_ADAPTER:"+adapter)
+
 def verify(step,result):
     v=step.get("verify",{})
     typ=v.get("type","returncode_zero")
@@ -85,13 +93,56 @@ def main():
         raise Blocker("STATE_MISSION_PATH_MISMATCH")
     state["mission_path"]=a.mission
     state["mission_sha256"]=mission_sha256
+    # A durable checkpoint can outlive its executor, while filesystem/process
+    # effects often cannot. Rehydrate explicitly marked prior steps before
+    # resuming the first unfinished causal step on a fresh invocation.
+    if state["next_step"] > 0:
+        rehydrated=[]
+        for j, prior in enumerate(mission["steps"][:state["next_step"]]):
+            if not prior.get("replay_on_resume", False):
+                continue
+            try:
+                result=execute_step(prior)
+                ok=verify(prior,result)
+            except Exception as e:
+                blocker={
+                  "schema":"PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+                  "mission_id":mid,"step_index":j,"step_id":prior["id"],
+                  "adapter":prior["adapter"],
+                  "phase":"REHYDRATION",
+                  "error":type(e).__name__+":"+str(e),
+                  "observed_at_utc":utc()
+                }
+                writej(EVID_DIR/f"{mid}__BLOCKER.json",blocker)
+                state["status"]="BLOCKED"; state["blocker"]=blocker; state["updated_at_utc"]=utc()
+                writej(state_path,state)
+                print(json.dumps(blocker)); return 3
+            rec={"step_index":j,"step_id":prior["id"],"ok":bool(ok),"result":result,
+                 "rehydration":True,"completed_at_utc":utc()}
+            rehydrated.append(rec)
+            if not ok:
+                blocker={
+                  "schema":"PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+                  "mission_id":mid,"step_index":j,"step_id":prior["id"],
+                  "adapter":prior["adapter"],"phase":"REHYDRATION",
+                  "error":"VERIFICATION_FAILED","result":result,"observed_at_utc":utc()
+                }
+                writej(EVID_DIR/f"{mid}__BLOCKER.json",blocker)
+                state["status"]="BLOCKED"; state["blocker"]=blocker; state["updated_at_utc"]=utc()
+                writej(state_path,state)
+                print(json.dumps(blocker)); return 4
+        if rehydrated:
+            state.setdefault("rehydrations",[]).append({
+              "at_utc":utc(),"before_step":state["next_step"],"steps":rehydrated
+            })
+            state["updated_at_utc"]=utc()
+            writej(state_path,state)
+
     for i in range(state["next_step"],len(mission["steps"])):
         step=mission["steps"][i]
         adapter=step["adapter"]
         try:
-            if adapter=="shell": result=run_shell(step)
-            elif adapter=="http": result=run_http(step)
-            else: raise Blocker("MISSING_ADAPTER:"+adapter)
+            result=execute_step(step)
             ok=verify(step,result)
         except Exception as e:
             blocker={
