@@ -86,5 +86,12 @@
     "repair_commit": "b0852baf70d56dda64ec4b9cb18defb2381c428d",
     "repair": "Normalize a namespaced action only when its exact final suffix is already in the runtime allowlist",
     "replay_authorized": true
+  },
+  "replay_after_root_cause_change_9": {
+    "prior_failure": "PLANNER_GET_TIMEOUT_AFTER_AUTONOMOUS_EVIDENCE_LOOP_BECAME_FUNCTIONAL",
+    "repair_commit": "7e97fa161a77540fbef6f5a0f2a77b70339344b2",
+    "repair": "Replace flaky GET planner transport with proven legacy POST JSON mode and bounded model failover",
+    "evidence_parent": "ASTRA-RUNTIME-POLLINATIONS-POST-FAILOVER-PROBE-001",
+    "replay_authorized": true
   }
 }
