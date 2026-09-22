@@ -82,13 +82,13 @@ def _goal_action(action):
             for p in sorted(base.rglob("*")):
                 if p.is_file():
                     items.append(str(p.relative_to(ROOT)))
-                    if len(items)>=250: break
-        return {"type":typ,"items":items,"truncated":len(items)>=250}
+                    if len(items)>=80: break
+        return {"type":typ,"items":items,"truncated":len(items)>=80}
     if typ=="read_file":
         p=_safe_repo_path(args.get("path",""))
         if not p.is_file(): return {"type":typ,"error":"FILE_NOT_FOUND","path":str(args.get("path",""))}
         text=p.read_text(encoding="utf-8",errors="replace")
-        return {"type":typ,"path":str(p.relative_to(ROOT)),"content":text[:16000],"truncated":len(text)>16000}
+        return {"type":typ,"path":str(p.relative_to(ROOT)),"content":text[:6000],"truncated":len(text)>6000}
     if typ=="search_text":
         q=str(args.get("query",""))
         if not q: return {"type":typ,"error":"EMPTY_QUERY"}
@@ -127,7 +127,21 @@ def run_goal(step, mission):
     max_cycles=max(1,min(int(step.get("max_cycles",6)),8))
     allowed="read_file(path), list_tree(prefix), search_text(query), http_get(url), finish(summary)"
     for cycle in range(max_cycles):
-        obs=json.dumps(observations[-6:],sort_keys=True)[:12000]
+        compact=[]
+        for item in observations[-6:]:
+            a=item.get("action",{})
+            r=item.get("result",{})
+            rr=dict(r) if isinstance(r,dict) else {"value":str(r)}
+            if isinstance(rr.get("items"),list):
+                rr["items"]=rr["items"][:40]
+            if isinstance(rr.get("hits"),list):
+                rr["hits"]=rr["hits"][:30]
+            if isinstance(rr.get("content"),str):
+                rr["content"]=rr["content"][:2500]
+            if isinstance(rr.get("body_excerpt"),str):
+                rr["body_excerpt"]=rr["body_excerpt"][:2500]
+            compact.append({"action":a,"result":rr})
+        obs=json.dumps(compact,sort_keys=True)[:5000]
         prompt=(
           "You are an OPTIONAL planning source, not the controller. "
           "DO NOT invoke tools or function calls. DO NOT return tool_calls. Emit JSON text only. "
