@@ -1,8 +1,8 @@
 {
   "adapter": "goal",
-  "error": "Blocker:PATH_OUTSIDE_REPOSITORY",
+  "error": "Blocker:PLANNER_ALL_ROUTES_FAILED:[{\"duration_s\": 20.028, \"error\": \"TimeoutError:The read operation timed out\", \"model\": \"openai-fast\"}, {\"duration_s\": 1.079, \"error\": \"HTTPError:HTTP Error 429: Too Many Requests\", \"model\": \"openai\"}, {\"duration_s\": 1.017, \"error\": \"HTTPError:HTTP Error 429: Too Many Requests\", \"model\": \"mistral\"}]",
   "mission_id": "ASTRA-RUNTIME-AUTONOMOUS-BRAIN-MAINTENANCE-001",
-  "observed_at_utc": "2026-09-22T05:33:31.000325+00:00",
+  "observed_at_utc": "2026-09-22T05:34:51.547014+00:00",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
   "step_id": "autonomously-resolve-maintenance-goal",
   "step_index": 0

@@ -1,9 +1,9 @@
 {
   "blocker": {
     "adapter": "goal",
-    "error": "Blocker:PATH_OUTSIDE_REPOSITORY",
+    "error": "Blocker:PLANNER_ALL_ROUTES_FAILED:[{\"duration_s\": 20.028, \"error\": \"TimeoutError:The read operation timed out\", \"model\": \"openai-fast\"}, {\"duration_s\": 1.079, \"error\": \"HTTPError:HTTP Error 429: Too Many Requests\", \"model\": \"openai\"}, {\"duration_s\": 1.017, \"error\": \"HTTPError:HTTP Error 429: Too Many Requests\", \"model\": \"mistral\"}]",
     "mission_id": "ASTRA-RUNTIME-AUTONOMOUS-BRAIN-MAINTENANCE-001",
-    "observed_at_utc": "2026-09-22T05:33:31.000325+00:00",
+    "observed_at_utc": "2026-09-22T05:34:51.547014+00:00",
     "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
     "step_id": "autonomously-resolve-maintenance-goal",
     "step_index": 0
@@ -12,10 +12,10 @@
   "history": [],
   "mission_id": "ASTRA-RUNTIME-AUTONOMOUS-BRAIN-MAINTENANCE-001",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_AUTONOMOUS_BRAIN_MAINTENANCE_001.json",
-  "mission_sha256": "bb3555804f9aafc2cadae39f1af528be0017b76a4f1c7b1b2b182153b3c1580a",
+  "mission_sha256": "6dcea28e7e4e710e7feae29b66dad6e3cb472c5db28708d7213b591f6053b9f7",
   "next_step": 0,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
   "status": "BLOCKED",
-  "updated_at_utc": "2026-09-22T05:33:31.000611+00:00"
+  "updated_at_utc": "2026-09-22T05:34:51.549539+00:00"
 }
