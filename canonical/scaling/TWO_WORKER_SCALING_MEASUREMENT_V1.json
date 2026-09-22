@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_TWO_WORKER_SCALING_MEASUREMENT_V1",
+  "measurement_sha256": "93ca9ea90f1095e035d5698ff5d88e814f4ecad6fe2aca9700515dde3493b511",
+  "proof_bundle": {
+    "drive_file_id": "1EaqJZUdRESBarx48Mp7PZouYTnq0G4ho",
+    "file_name": "SUPERWORKER_SCALING_2_MEASUREMENT_2026-09-22.zip",
+    "sha256": "8ee50fcb8f06d09658a9cf3590214e8ef70ecb9d503ec699bad24279cf290910",
+    "bytes": 132728
+  },
+  "metrics": {
+    "serial_wall_s": 4.515242504000071,
+    "concurrent_wall_s": 2.6297518589999527,
+    "serial_tasks_per_s": 0.442944093972404,
+    "concurrent_tasks_per_s": 0.7605280297284642,
+    "speedup_vs_serial": 1.7169842426566955,
+    "parallel_efficiency_2_workers": 0.8584921213283477,
+    "state_hashes_unique": true,
+    "report_hashes_unique": true,
+    "all_relaunch_observed": true,
+    "all_checkpointed": true,
+    "terminal_success_all": true
+  },
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "val_town_calls": 0,
+    "sprites_calls": 0
+  },
+  "conclusion": "CONTROLLER_AND_STATE_LAYER_NOT_BINDING_AT_TWO__CONTINUOUS_AUTONOMOUS_ACTIVATION_WAKE_CAPACITY_IS_BINDING",
+  "promotion_claim": false
+}
