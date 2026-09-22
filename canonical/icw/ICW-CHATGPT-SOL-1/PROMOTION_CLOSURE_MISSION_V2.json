@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_ICW_PROMOTION_CLOSURE_MISSION_V2",
+  "mission_id": "ICW-PROMOTION-CLOSURE-V2-20260922",
+  "worker_identity": "ICW-CHATGPT-SOL-1",
+  "frozen_purpose": "Prospectively close only the independently identified promotion defects without retroactively rewriting ICW-REAL-END-TO-END-001.",
+  "causal_parent": {
+    "adjudication_path": "canonical/icw/ICW-CHATGPT-SOL-1/INDEPENDENT_PROMOTION_ADJUDICATION_V1.json",
+    "rejection_commit": "01af190e65bd5f329e844c69b9fa19a34967e1f5",
+    "failing_gates": [
+      "FROZEN_MISSION_IDENTITY_AUTHORITY",
+      "SAME_IDENTITY_BINDING_TO_ICW_REAL_END_TO_END_001",
+      "INDEPENDENTLY_REPRODUCIBLE_GUI_ACTUATION_EVIDENCE",
+      "INDEPENDENTLY_REPRODUCIBLE_UIAUTOMATION_READBACK_EVIDENCE"
+    ]
+  },
+  "mission_goal": "As the prospectively named durable cognitive worker ICW-CHATGPT-SOL-1, resolve the independent promotion rejection by executing a fresh live Windows GUI action, preserving raw independently retrievable OS-level readback evidence, checkpointing after the real effect, autonomously resuming later without a new user prompt, and submitting the frozen evidence to a genuinely distinct verifier. Do not alter prior mission history or self-promote.",
+  "required_same_identity_loop": [
+    "reason from the frozen independent rejection",
+    "choose the smallest safe live GUI action",
+    "act on the authorized Windows desktop",
+    "inspect the actual effect through a separate OS readback mechanism",
+    "correct any execution/evidence defect if observed",
+    "preserve raw primary evidence canonically",
+    "checkpoint before the execution context ends",
+    "resume autonomously from that checkpoint without a new user prompt",
+    "finish with a distinct independent verifier"
+  ],
+  "gui_canary": {
+    "application": "Notepad",
+    "document_path": "C:\\Users\\muham\\AppData\\Local\\Temp\\icw_v2_gui_canary.txt",
+    "exact_token": "ICW-CHATGPT-SOL-1|ICW-PROMOTION-CLOSURE-V2-20260922|GUI-EFFECT",
+    "isolation_rule": "Target only a uniquely titled canary document and do not modify any pre-existing user document/window.",
+    "primary_evidence_required": [
+      "raw Windows UIAutomation readback transcript committed to canonical GitHub",
+      "process/window/title binding",
+      "exact token observed",
+      "screenshot SHA-256 if screenshot capture succeeds"
+    ],
+    "live_verifier_rule": "Leave the canary window open through independent verification so a fresh verifier can independently inspect the live GUI state."
+  },
+  "checkpoint_rule": "After GUI effect and canonical raw evidence preservation, write a durable checkpoint. Do not close the canary window until independent verifier completes or fails closed.",
+  "autonomous_resume_rule": "A platform-native scheduled run must resume this exact identity from the V2 checkpoint without a new user message and must not redo the GUI action.",
+  "independent_verification_rule": "A fresh verifier that is not the candidate must adjudicate chronology, exact identity binding, raw canonical GUI evidence, live GUI state if still available, autonomous wake, and no-self-certification.",
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "val_town_forbidden": true,
+    "sprites_forbidden": true,
+    "prior_history_rewrite_forbidden": true,
+    "self_promotion_forbidden": true,
+    "p_real_before_independent_verification": 0
+  },
+  "promotion_scope": "This V2 mission may repair the exact rejected identity/evidence gates. Promotion is allowed only if a fresh independent verifier finds that the whole integrated cognitive-worker definition is thereby satisfied using valid same-identity primary evidence. No external Astra parity claim."
+}
