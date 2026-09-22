@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_ICW_INDEPENDENT_PROMOTION_ADJUDICATION_V1",
+  "verifier_role": "FRESH_INDEPENDENT_VERIFIER",
+  "candidate_identity": "ICW-CHATGPT-SOL-1",
+  "mission_id": "ICW-REAL-END-TO-END-001",
+  "passed": false,
+  "promotion_authorized": false,
+  "p_real": 0,
+  "adjudication_scope": "same-identity end-to-end integrated cognitive worker promotion only",
+  "identity_authority": {
+    "result": "FAIL",
+    "frozen_mission_worker_identity": "ICW-WORK-ASTRA-1",
+    "later_candidate_identity": "ICW-CHATGPT-SOL-1",
+    "finding": "The frozen mission explicitly binds both worker_identity and success_definition to ICW-WORK-ASTRA-1. Commit 485ead64c25add617b55572e05cd0dbb7b462661 later prospectively names ICW-CHATGPT-SOL-1 as integrated_cognitive_worker_candidate, but it does not amend the frozen mission, provide an alias/continuity proof, or establish an authority rule permitting substitution of the mission's named worker identity. The substitution therefore cannot be silently treated as satisfying the frozen same-identity success definition.",
+    "commit_485ead64": "485ead64c25add617b55572e05cd0dbb7b462661",
+    "mission_blob_sha": "d39982a7a62f56bfa386cb77dde5bbc6ff6cf301"
+  },
+  "independent_gate_adjudication": {
+    "consequential_auditor_implementation_and_checkpoint": "PASS_AS_DURABLE_REPOSITORY_EVIDENCE",
+    "later_context_resume_receipt_durably_committed": "PASS_AS_DURABLE_RECEIPT_NOT_INDEPENDENT_OBSERVATION_OF_COGNITIVE_CONTINUITY",
+    "real_interactive_windows_gui_actuation": "FAIL_INDEPENDENT_EVIDENCE_INSUFFICIENT",
+    "independent_gui_readback": "FAIL_INDEPENDENT_EVIDENCE_INSUFFICIENT",
+    "platform_native_autonomous_scheduled_wake_receipt_durably_committed": "PASS_AS_DURABLE_RECEIPT_NOT_BY_ITSELF_WHOLE_IDENTITY_PROOF",
+    "zero_incremental_spend": "PASS_BY_RECEIPT_WITH_NO_CONTRARY_CANONICAL_EVIDENCE_FOUND",
+    "val_town_or_sprites_used": "PASS_NONE_CREDITED_OR_REQUIRED_IN_REVIEWED_CHAIN",
+    "no_boolean_composition_across_materially_different_worker_identities": "FAIL_BECAUSE_FROZEN_MISSION_IDENTITY_AND_EVIDENCE_IDENTITY_DIFFER_WITHOUT_AUTHORIZED_BINDING"
+  },
+  "failing_gates": [
+    "FROZEN_MISSION_IDENTITY_AUTHORITY",
+    "SAME_IDENTITY_BINDING_TO_ICW_REAL_END_TO_END_001",
+    "INDEPENDENTLY_REPRODUCIBLE_GUI_ACTUATION_EVIDENCE",
+    "INDEPENDENTLY_REPRODUCIBLE_UIAUTOMATION_READBACK_EVIDENCE"
+  ],
+  "gui_evidence_finding": "GUI_RECEIPT_V1 records a screenshot SHA-256 and asserts exact-token UIAutomation readback, but the reviewed canonical receipt provides no canonical screenshot artifact path, raw UIAutomation transcript artifact, or independently retrievable evidence object bound to that hash. Repository search for the stated screenshot SHA-256 returned no indexed artifact. A candidate-authored receipt assertion cannot, under no-self-certification, independently prove the GUI gates.",
+  "no_self_certification": {
+    "enforced": true,
+    "candidate_reconciliation_path": "canonical/icw/ICW-CHATGPT-SOL-1/ICW_MISSION_RECONCILIATION_V1.json",
+    "candidate_reconciliation_credited_as_independent_proof": false,
+    "finding": "ICW_MISSION_RECONCILIATION_V1 is treated only as candidate-side synthesis and supplies no promotion authority."
+  },
+  "durable_evidence_bindings": {
+    "canonical_pointer_reviewed_live": "canonical/CANONICAL_POINTER.json",
+    "frozen_mission": {
+      "path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
+      "blob_sha": "d39982a7a62f56bfa386cb77dde5bbc6ff6cf301"
+    },
+    "composition_correction": {
+      "path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
+      "blob_sha": "60c936af76418b92eee0a4997023ec84f72fa7d0"
+    },
+    "checkpoint_v1": {
+      "path": "canonical/icw/ICW-CHATGPT-SOL-1/CHECKPOINT_V1.json",
+      "blob_sha": "90d6dfb9a421a17157fb0701c8039b817ad98c1a"
+    },
+    "resume_receipt_v1": {
+      "path": "canonical/icw/ICW-CHATGPT-SOL-1/RESUME_RECEIPT_V1.json",
+      "blob_sha": "871b2ebc0c27d502fb3bf91582308eeb5a43784f",
+      "creation_commit": "b7910fa2ab2dd3ae1db435c7b557552154aa1b4c"
+    },
+    "checkpoint_v2": {
+      "path": "canonical/icw/ICW-CHATGPT-SOL-1/CHECKPOINT_V2.json",
+      "blob_sha": "9d2b3c49705f5070e09d17fee02d9e5ffcaf56de"
+    },
+    "gui_receipt_v1": {
+      "path": "canonical/icw/ICW-CHATGPT-SOL-1/GUI_RECEIPT_V1.json",
+      "blob_sha": "6bff4aaf1d0f24ffb1c8b1c17ae735b3de797d56",
+      "creation_commit": "5b72aa51a0b7c6e2267e22f098050928e1f9189c",
+      "claimed_screenshot_sha256": "e4ba010ec454a0573d8c4b2631c9c66b4a5a2e61eb054e76ea2afef44001c926"
+    },
+    "checkpoint_v3": {
+      "path": "canonical/icw/ICW-CHATGPT-SOL-1/CHECKPOINT_V3.json",
+      "blob_sha": "aa5d0ba79b4fae23e3e6b92ebae17d7f06aacec9"
+    },
+    "autonomous_wake_receipt_v1": {
+      "path": "canonical/icw/ICW-CHATGPT-SOL-1/AUTONOMOUS_WAKE_RECEIPT_V1.json",
+      "blob_sha": "6f3a1bf243486cdcc93c92125c75df4dcc750373",
+      "creation_commit": "87e11db77c7ba5052b4fa073f676de19330e43e2"
+    },
+    "candidate_reconciliation": {
+      "path": "canonical/icw/ICW-CHATGPT-SOL-1/ICW_MISSION_RECONCILIATION_V1.json",
+      "blob_sha": "9c3ce480d9fe752995e407abcf80c048f8eccaf1",
+      "authority": "CANDIDATE_SIDE_SYNTHESIS_ONLY"
+    }
+  },
+  "chronology_finding": "Commit 485ead64 (2026-09-22T01:39:31Z) named ICW-CHATGPT-SOL-1 prospectively before the later resume, GUI, and wake receipt commits reviewed here. That chronology prevents a post-hoc naming objection for those later receipts, but it does not override or amend the frozen mission's explicit ICW-WORK-ASTRA-1 identity binding.",
+  "pointer_action": "NO_POSITIVE_POPULATION_OR_ACTIVE_SUPERWORKER_UPDATE_AUTHORIZED",
+  "required_to_reconsider": [
+    "Provide canonical pre-execution authority that lawfully aliases or substitutes ICW-CHATGPT-SOL-1 for ICW-WORK-ASTRA-1 under the frozen mission, or run a newly frozen mission whose worker_identity is ICW-CHATGPT-SOL-1 before execution.",
+    "Provide independently retrievable primary GUI evidence bound to the claimed action and UIAutomation readback, rather than only a candidate-authored receipt assertion."
+  ],
+  "scope_note": "This rejection does not deny that the reviewed components occurred or that ICW-CHATGPT-SOL-1 may be capable. It denies promotion because the exact frozen same-identity and independent-evidence gates are not satisfied by the reviewed primary record. No external Astra parity or population-scale claim is made."
+}
