@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_SUPERWORKER_FOUR_GATE_WOLFRAM_ADJUDICATION_V1",
+  "verifier_id": "WOLFRAM-REMOTE-KERNEL-20260922-SUPERWORKER-FOUR-GATE-V1",
+  "trust_controller_claims": false,
+  "input_hashes": {
+    "mission_sha256": "4decd34ede66f08f6caa6005da1cc648d5303eda5df5017927c2d493a4b2ae75",
+    "state_sha256": "b13a013392ac96a3a135c13a721ead8848bf215550ab96f943e2b603a7db10bc",
+    "report_sha256": "9c25d17361ec8afd4be2cb4b1fc109e427d30c010530fa237c9b47461dd76196",
+    "supervisor_sha256": "b5468a0e0c4d348b2f785ddeecebbb80cb03185e5b41ce1b0e747121871dbdaf",
+    "reverification_sha256": "21d242c20202202538917918afa819bd94808bacf246fb805b5edd7304b22a3f"
+  },
+  "gate_results": {
+    "SURVIVES_CONTEXT_MODEL_PROVIDER_LOSS_VIA_CHECKPOINT_RELAUNCH": true,
+    "OBSERVE_REASON_RESEARCH_ACT_VERIFY_CHECKPOINT_CONTINUE": true,
+    "DYNAMIC_KNOWLEDGE_TOOL_CAPABILITY_DISCOVERY_ACQUISITION": true,
+    "INDEPENDENT_PERSISTENT_EXECUTION_SYSTEM": true
+  },
+  "all_four_pass": true,
+  "promotion_authorized": false,
+  "classification": "FOUR_REMAINING_INTEGRATED_GATES_PASS__REQUIRES_FINAL_WHOLE_DEFINITION_RECONCILIATION"
+}
