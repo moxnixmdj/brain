@@ -1,0 +1,78 @@
+diff --git a/mypy/checkpattern.py b/mypy/checkpattern.py
+index 9d02262..cfc503c 100644
+--- a/mypy/checkpattern.py
++++ b/mypy/checkpattern.py
+@@ -359,20 +359,24 @@ class PatternChecker(PatternVisitor[PatternType]):
+             else:
+                 new_type = TupleType(new_inner_types, current_type.partial_fallback)
+ 
+-            num_always_match = sum(is_uninhabited(typ) for typ in rest_inner_types)
+-            if num_always_match == len(rest_inner_types):
+-                # All subpatterns always match, so we can apply negative narrowing
+-                rest_type = UninhabitedType()
+-            elif num_always_match == len(rest_inner_types) - 1:
+-                # Exactly one subpattern may conditionally match, the rest always match.
+-                # We can apply negative narrowing to this one position.
+-                rest_type = TupleType(
+-                    [
+-                        curr if is_uninhabited(rest) else rest
+-                        for curr, rest in zip(inner_types, rest_inner_types)
+-                    ],
+-                    current_type.partial_fallback,
+-                )
++            # Partition the complement by the first subpattern that fails.
++            # This stays linear while preserving negative narrowing when
++            # multiple tuple elements are conditional.
++            rest_cases: list[Type] = []
++            prefix_can_match = True
++            for i, (matched, rest) in enumerate(zip(new_inner_types, rest_inner_types)):
++                if not prefix_can_match:
++                    break
++                if not is_uninhabited(rest):
++                    case_items = [*new_inner_types[:i], rest, *inner_types[i + 1 :]]
++                    if not any(is_uninhabited(item) for item in case_items):
++                        rest_cases.append(TupleType(case_items, current_type.partial_fallback))
++                if is_uninhabited(matched):
++                    prefix_can_match = False
++
++            rest_type = (
++                make_simplified_union(rest_cases) if rest_cases else UninhabitedType()
++            )
+         elif isinstance(current_type, TupleType):
+             # For variadic tuples it is too tricky to match individual items like for fixed
+             # tuples, so we instead try to narrow the entire type.
+diff --git a/test-data/unit/check-python310.test b/test-data/unit/check-python310.test
+index 33b952f..ac0f1a3 100644
+--- a/test-data/unit/check-python310.test
++++ b/test-data/unit/check-python310.test
+@@ -2097,7 +2097,7 @@ match m6:
+     case (1, "a"):
+         reveal_type(m6)  # N: Revealed type is "tuple[Literal[1], Literal['a']]"
+     case _:
+-        reveal_type(m6)  # N: Revealed type is "tuple[Literal[1] | Literal[2], Literal['a'] | Literal['b']]"
++        reveal_type(m6)  # N: Revealed type is "tuple[Literal[2], Literal['a'] | Literal['b']] | tuple[Literal[1], Literal['b']]"
+ 
+ [builtins fixtures/tuple.pyi]
+ 
+@@ -3665,6 +3665,22 @@ match b:
+     case _:
+         pass
+ 
++[case testExhaustiveTupleOfBools]
++# flags: --enable-error-code exhaustive-match
++
++def measure(a: bool, b: bool) -> float:
++    match a, b:
++        case True, True:
++            return 1
++        case True, False:
++            return 0.9
++        case False, True:
++            return 0.5
++        case False, False:
++            return 0
++
++[builtins fixtures/tuple.pyi]
++
+ [case testNonExhaustiveMatchWithFlag]
+ # flags: --enable-error-code exhaustive-match --strict-equality --warn-unreachable
