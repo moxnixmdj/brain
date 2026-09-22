@@ -48,5 +48,11 @@
         "type": "returncode_zero"
       }
     }
-  ]
+  ],
+  "replay": 1,
+  "invalidation": {
+    "prior_run_id": 35686321365,
+    "reason": "MISSION_HANDOFF_CONTAMINATION__RUN_EXECUTED_REALITY_AUDIT_INSTEAD_OF_SWE_MISSION",
+    "promotional_credit": false
+  }
 }
