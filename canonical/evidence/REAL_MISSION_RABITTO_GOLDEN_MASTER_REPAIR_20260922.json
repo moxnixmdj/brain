@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_REAL_MISSION_EVIDENCE_V1",
+  "mission_id": "REAL-MISSION-RABITTO-GOLDEN-MASTER-REPAIR-20260922",
+  "class": "UNFAMILIAR_SOFTWARE_ENVIRONMENT",
+  "target_repo": "moxnixmdj/rabitto",
+  "target_branch": "master",
+  "starting_head": "e2c2a8c41e08cc9f5af1183209243b0409ceb069",
+  "observed_failure": {
+    "command": "npm run gate",
+    "failure": "Golden Master hash mismatch",
+    "expected_sha256": "f5132b9581c1191cf3d392b63b274b2e00c13c7d100bbe7f023bd129ed42c4c1",
+    "observed_sha256": "deaeb62bc861e1b0b4626081173187e7e356bc92bad0e17f4bd2d95cea3b8102"
+  },
+  "root_cause": {
+    "finding": "Stored golden-master hash was stale. The protected reference file and ORIGINAL_BACKUP were byte-identical.",
+    "reference_path": "reference/original/index_original_untouched.html",
+    "backup_path": "ORIGINAL_BACKUP/index_original_untouched.html",
+    "both_sha256": "deaeb62bc861e1b0b4626081173187e7e356bc92bad0e17f4bd2d95cea3b8102"
+  },
+  "repair": {
+    "method": "repository-supported npm run gate:update after independent backup/reference hash comparison",
+    "changed_path": "scripts/gate/golden_master.json",
+    "pushed_commit": "b77fdf1"
+  },
+  "verification": {
+    "gate": "PASS",
+    "typecheck": "PASS",
+    "lint": "PASS_WITH_2_WARNINGS_0_ERRORS",
+    "production_build": "PASS",
+    "nextjs_static_routes_generated": 16
+  },
+  "capability_gain": [
+    "fresh private repository acquisition with native Git credentials",
+    "repository-native validation discovery",
+    "failure localization",
+    "authority-based root-cause adjudication",
+    "minimal repair",
+    "full verification",
+    "durable push to source repository"
+  ],
+  "incremental_spend_usd": 0,
+  "val_town_used": false,
+  "sprites_used": false
+}
