@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_SHARED_RUNTIME_PORTFOLIO_STATE_V1",
+  "canonical_generation": "2026-09-22-astra-shared-runtime-portfolio-restored",
+  "status": "RECONCILED_ACTIVE",
+  "optimization_target": "MINIMIZE_TIME_UNTIL_ALL_TARGET_CAPABILITIES_WORK_TOGETHER_IN_ONE_SHARED_RUNTIME",
+  "runtime_components_in_use": [
+    "GPT-5.6 Sol cognition",
+    "GitHub canonical Brain",
+    "GitHub connector",
+    "Remote Desktop Commander",
+    "web research",
+    "scheduled ChatGPT continuation"
+  ],
+  "lanes": [
+    {
+      "id": "UNFAMILIAR_SWE",
+      "mission_id": "ASTRA-REAL-SWE-MYPY-21968-001",
+      "state": "COMPLETE_VERIFIED_LOCAL",
+      "result": "Fresh open mypy issue #21968 reproduced, causally diagnosed, fixed generally, regression-covered, broader match suite green, packaged as local commit 89653d35c4d66fe1a67ae27360c2510e5678ac82.",
+      "evidence": [
+        "canonical/astra_runtime/missions/ASTRA-REAL-SWE-MYPY-21968-001.json",
+        "canonical/astra_runtime/evidence/ASTRA-REAL-SWE-MYPY-21968-001.patch",
+        "canonical/astra_runtime/artifacts/MYPY_21968_ENGINEERING_NOTE.html",
+        "canonical/astra_runtime/evidence/ASTRA-REAL-SWE-MYPY-21968-001__ARTIFACT_RECEIPT.json"
+      ]
+    },
+    {
+      "id": "END_TO_END_COMPUTER_WORK_GAMELOOP",
+      "mission_id": "ASTRA-REAL-COMPUTER-WORK-GAMELOOP-PUBG-001",
+      "state": "BLOCKED_REMOVED_FROM_CRITICAL_PATH",
+      "reason": "Concurrent controller ownership plus modified/debug-signed APK and anti-cheat/integrity boundary. Do not mutate this surface or pursue bypass/downgrade routes.",
+      "evidence": [
+        "canonical/astra_runtime/missions/ASTRA-REAL-COMPUTER-WORK-GAMELOOP-PUBG-001.json",
+        "canonical/evidence/END_TO_END_COMPUTER_WORK_GAMELOOP_20260922.json"
+      ]
+    }
+  ],
+  "uncovered_pressure_dimensions": [
+    "substantially different end-to-end computer/professional work",
+    "long-horizon continuation where a later scheduled invocation performs new consequential work",
+    "dynamic cross-tool orchestration outside the SWE domain"
+  ],
+  "next_action": "Select and immediately execute the single safest substantially-different real mission with maximum uncovered capability-and-interaction exposure per wall-clock time. It must not duplicate the mypy lane or touch the blocked GameLoop surface. If it crosses a scheduled boundary, the later invocation must perform new consequential work rather than emit a wake receipt.",
+  "anti_waste": [
+    "no qualification before operational portfolio closure",
+    "no provider hunt without an observed blocker",
+    "no speculative infrastructure",
+    "no duplicate proof or rerun",
+    "blocker-local search/reuse before invention"
+  ],
+  "incremental_spend_usd": 0,
+  "val_town_used": false,
+  "sprites_used": false
+}
