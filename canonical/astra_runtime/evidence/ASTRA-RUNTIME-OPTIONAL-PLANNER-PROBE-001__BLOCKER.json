@@ -1,0 +1,9 @@
+{
+  "adapter": "shell",
+  "error": "KeyError:'text'",
+  "mission_id": "ASTRA-RUNTIME-OPTIONAL-PLANNER-PROBE-001",
+  "observed_at_utc": "2026-09-22T04:53:00.455357+00:00",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "verify-structured-response",
+  "step_index": 1
+}

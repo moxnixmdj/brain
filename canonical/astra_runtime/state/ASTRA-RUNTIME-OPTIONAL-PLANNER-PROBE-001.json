@@ -1,0 +1,36 @@
+{
+  "blocker": {
+    "adapter": "shell",
+    "error": "KeyError:'text'",
+    "mission_id": "ASTRA-RUNTIME-OPTIONAL-PLANNER-PROBE-001",
+    "observed_at_utc": "2026-09-22T04:53:00.455357+00:00",
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "verify-structured-response",
+    "step_index": 1
+  },
+  "created_at_utc": "2026-09-22T04:52:57.765335+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-22T04:53:00.430923+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "http",
+        "body_excerpt": "{\"ok\":true}",
+        "body_sha256": "4062edaf750fb8074e7e83e0c9028c94e32468a8b6f1614774328ef045150f93",
+        "duration_s": 2.665,
+        "status": 200,
+        "url": "https://text.pollinations.ai/Return%20only%20valid%20JSON%20with%20one%20field%20named%20ok%20set%20to%20true."
+      },
+      "step_id": "probe-anonymous-planning-source",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-RUNTIME-OPTIONAL-PLANNER-PROBE-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_OPTIONAL_PLANNER_PROBE_001.json",
+  "mission_sha256": "8bd3a1faa905b5150e1deef525751f0fb4bbf9426b45eee4cbe4a11c69d61428",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-22T04:53:00.455610+00:00"
+}
