@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_ICW_AUTONOMOUS_WAKE_RECEIPT_V1",
+  "worker_identity": "ICW-CHATGPT-SOL-1",
+  "mission_id": "ICW-REAL-END-TO-END-001",
+  "wake_event": "PLATFORM_NATIVE_SCHEDULED_AUTONOMOUS_RESUME_WITHOUT_NEW_USER_REPROMPT",
+  "parent_checkpoint_path": "canonical/icw/ICW-CHATGPT-SOL-1/CHECKPOINT_V3.json",
+  "parent_checkpoint_git_blob_sha": "aa5d0ba79b4fae23e3e6b92ebae17d7f06aacec9",
+  "prior_receipts_reused": [
+    "canonical/icw/ICW-CHATGPT-SOL-1/RESUME_RECEIPT_V1.json",
+    "canonical/icw/ICW-CHATGPT-SOL-1/GUI_RECEIPT_V1.json"
+  ],
+  "completed_work_reused_without_reexecution": [
+    "capability_reality_auditor implementation and tests",
+    "live 12/12 capability audit",
+    "HTML renderer repair and visual inspection",
+    "later-context durable checkpoint resume",
+    "authorized Windows GUI action with independent UIAutomation readback"
+  ],
+  "autonomous_continuation_performed": [
+    "read CHECKPOINT_V3 before acting",
+    "read and reused RESUME_RECEIPT_V1",
+    "read and reused GUI_RECEIPT_V1",
+    "did not repeat already-completed implementation, audit, rendering, resume, or GUI work",
+    "persisted this autonomous-wake receipt to canonical GitHub"
+  ],
+  "truth_boundary": {
+    "proves": "the same durable ICW worker identity was invoked by a platform-native scheduled wake, recovered its exact remaining frontier from canonical checkpoint state, reused prior receipts, and continued the mission without a new user re-prompt",
+    "does_not_prove_by_itself": "that every other ICW mission property is satisfied; whole-mission promotion requires independent reconciliation across the complete same-identity evidence chain",
+    "promotion_claim": false
+  },
+  "incremental_spend_usd": 0,
+  "prohibited_surfaces_used": [],
+  "p_real_after_this_receipt_alone": 0
+}
