@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_ICW_V2_CANDIDATE_COMPLETION_RECEIPT_V1",
+  "worker_identity": "ICW-CHATGPT-SOL-1",
+  "mission_id": "ICW-PROMOTION-CLOSURE-V2-20260922",
+  "same_identity_sequence": [
+    "fresh-read frozen V2 mission and prior independent rejection",
+    "fresh live isolated GUI canary attempted under frozen V2 identity",
+    "literal-input defect observed and preserved",
+    "GUI actuation corrected on exact RichEditD2DPT document handle",
+    "separate-process UIAutomation TextPattern readback verified exact token",
+    "raw primary GUI action and readback evidence preserved canonically",
+    "durable V2 checkpoint written",
+    "platform-native scheduled autonomous wake resumed exact worker identity without repeating completed GUI work"
+  ],
+  "checkpoint_path": "canonical/icw/ICW-CHATGPT-SOL-1/PROMOTION_CLOSURE_CHECKPOINT_V2.json",
+  "autonomous_wake_receipt_path": "canonical/icw/ICW-CHATGPT-SOL-1/V2_AUTONOMOUS_WAKE_RECEIPT.json",
+  "autonomous_wake_receipt_commit": "a3cb9f87b3f3573dee57699448c09abaa90dcdf0",
+  "raw_action_path": "canonical/icw/ICW-CHATGPT-SOL-1/V2_GUI_ACTION_RAW.json",
+  "raw_uia_path": "canonical/icw/ICW-CHATGPT-SOL-1/V2_GUI_UIAUTOMATION_RAW.json",
+  "gui_correction_path": "canonical/icw/ICW-CHATGPT-SOL-1/V2_GUI_CORRECTION_RECEIPT.json",
+  "prior_independent_rejection_path": "canonical/icw/ICW-CHATGPT-SOL-1/INDEPENDENT_PROMOTION_ADJUDICATION_V1.json",
+  "candidate_side_status": "V2_SEQUENCE_COMPLETE_PENDING_DISTINCT_VERIFIER",
+  "remaining_requirement": "fresh independent verification of chronology, same-identity binding, canonical raw GUI evidence, live GUI state if available, autonomous wake, no-self-certification, and the whole integrated cognitive-worker definition",
+  "self_promotion_forbidden": true,
+  "promotion_claimed": false,
+  "p_real": 0,
+  "canonical_pointer_modified": false,
+  "incremental_spend_usd": 0,
+  "val_town_used": false,
+  "sprites_used": false
+}
