@@ -1,0 +1,20 @@
+{
+  "schema": "PROJECT_BRAIN_ICW_CHECKPOINT_V2",
+  "worker_identity": "ICW-CHATGPT-SOL-1",
+  "mission_id": "ICW-REAL-END-TO-END-001",
+  "checkpoint_state": "RESUME_PROVEN__AUTONOMOUS_WAKE_AND_ARBITRARY_GUI_REMAIN",
+  "parent_checkpoint_path": "canonical/icw/ICW-CHATGPT-SOL-1/CHECKPOINT_V1.json",
+  "resume_receipt_path": "canonical/icw/ICW-CHATGPT-SOL-1/RESUME_RECEIPT_V1.json",
+  "completed": [
+    "mission implementation complete",
+    "checkpoint persisted",
+    "same cognitive identity resumed from durable checkpoint in a later chat context without repeating completed analysis"
+  ],
+  "remaining_unproven": [
+    "same persistent cognitive identity autonomously wakes and continues without user re-prompt",
+    "arbitrary interactive desktop GUI control by this exact identity"
+  ],
+  "next_action": "Use a platform-native autonomous wake to resume ICW-CHATGPT-SOL-1 without user input; then bind or enter a ChatGPT Work/Computer-capable execution surface for arbitrary GUI by the same identity.",
+  "promotion_claim": false,
+  "p_real_after_checkpoint": 0
+}
