@@ -161,6 +161,23 @@ def run_goal(step, mission):
                     action={"type":name,"args":raw_args,"why":str(obj.get("reasoning","tool_call"))}
         if not isinstance(action,dict) and isinstance(obj.get("type"),str):
             action=obj
+        if not isinstance(action,dict) and isinstance(obj.get("reasoning"),str) and obj["reasoning"].strip():
+            normalize_prompt=(
+              "Convert this planner intent into ONE allowed action. Return JSON text only, no reasoning, no tool_calls. "
+              "Allowed action types: "+allowed+". Schema exactly: "
+              '{"actions":[{"type":"...","args":{},"why":"normalized planner intent"}]}. '
+              "Planner intent: "+obj["reasoning"][:5000]
+            )
+            normalize_url="https://text.pollinations.ai/"+urllib.parse.quote(normalize_prompt,safe="")
+            normalized=run_http({"url":normalize_url,"timeout_s":30,"max_bytes":12000})
+            nobj=_extract_json_object(normalized.get("body_excerpt",""))
+            na=nobj.get("action")
+            if not isinstance(na,dict):
+                nas=nobj.get("actions")
+                if isinstance(nas,list) and nas and isinstance(nas[0],dict):
+                    na=nas[0]
+            if isinstance(na,dict):
+                action=na
         if not isinstance(action,dict):
             diag=json.dumps(obj,sort_keys=True)[:2200].replace("\n"," ")
             raise Blocker("PLANNER_ACTION_MISSING_OBJECT:"+diag)
