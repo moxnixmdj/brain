@@ -13,7 +13,8 @@
       "verify": {
         "type": "http_status",
         "value": 200
-      }
+      },
+      "replay_on_resume": true
     },
     {
       "id": "consume-research-and-create-artifact",
@@ -29,6 +30,12 @@
     "prior_failure": "CROSS_STEP_EVIDENCE_NOT_EXPOSED",
     "repair_commit": "c9f33b6c521f396f76cab1fe24a768b383c490f2",
     "repair": "Expose prior step results to later shell steps and decode gzip HTTP bodies",
+    "replay_authorized": true
+  },
+  "replay_after_root_cause_change_2": {
+    "prior_failure": "STALE_PRE_REPAIR_HTTP_EVIDENCE_REUSED_ON_RESUME",
+    "repair_commit": "e937db624e95bbe66f5b85f2c539d15e854d695b",
+    "repair": "Prefer rehydrated step results over stale history; replay external research step on resume",
     "replay_authorized": true
   }
 }
