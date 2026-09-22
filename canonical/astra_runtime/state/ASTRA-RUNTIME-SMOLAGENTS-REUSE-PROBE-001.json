@@ -3,13 +3,13 @@
     "adapter": "shell",
     "error": "VERIFICATION_FAILED",
     "mission_id": "ASTRA-RUNTIME-SMOLAGENTS-REUSE-PROBE-001",
-    "observed_at_utc": "2026-09-22T06:03:35.501907+00:00",
+    "observed_at_utc": "2026-09-22T06:24:24.725351+00:00",
     "result": {
       "adapter": "shell",
-      "command": "set -euo pipefail; python - <<'PY'\nimport json, pathlib, urllib.request\nfrom types import SimpleNamespace\nfrom smolagents import Model, CodeAgent, tool\n\nclass PollinationsLegacyModel(Model):\n    def __init__(self):\n        super().__init__(model_id=\"pollinations-openai-fast\")\n    def generate(self, messages, stop_sequences=None, **kwargs):\n        flat=[]\n        for m in messages:\n            role=m.get(\"role\",\"user\")\n            c=m.get(\"content\",\"\")\n            if isinstance(c,list):\n                parts=[]\n                for x in c:\n                    if isinstance(x,dict):\n                        parts.append(str(x.get(\"text\") or x.get(\"content\") or x))\n                    else:\n                        parts.append(str(x))\n                c=\"\\n\".join(parts)\n            flat.append({\"role\":role,\"content\":str(c)})\n        body=json.dumps({\"messages\":flat,\"model\":\"openai-fast\"}).encode()\n        req=urllib.request.Request(\"https://text.pollinations.ai/\",data=body,headers={\"Content-Type\":\"application/json\",\"User-Agent\":\"ProjectBrain/1.0\"},method=\"POST\")\n        with urllib.request.urlopen(req,timeout=30) as r:\n            text=r.read(50000).decode(\"utf-8\",\"replace\")\n        return SimpleNamespace(content=text)\n\n@tool\ndef read_canonical_generation() -> str:\n    \"\"\"Read and return the canonical_generation value from Project Brain's canonical pointer.\"\"\"\n    x=json.loads(pathlib.Path(\"canonical/CANONICAL_POINTER.json\").read_text())\n    return x[\"canonical_generation\"]\n\nagent=CodeAgent(\n    tools=[read_canonical_generation],\n    model=PollinationsLegacyModel(),\n    max_steps=4,\n    verbosity_level=0,\n)\nresult=str(agent.run(\n    \"Use the read_canonical_generation tool. Return the exact canonical_generation value and nothing else. Do not guess it.\"\n))\nexpected=json.loads(pathlib.Path(\"canonical/CANONICAL_POINTER.json\").read_text())[\"canonical_generation\"]\nprint(\"AGENT_RESULT=\"+result)\nprint(\"EXPECTED=\"+expected)\nif expected not in result:\n    raise SystemExit(\"SMOLAGENTS_TOOL_LOOP_FAILED\")\nprint(\"SMOLAGENTS_TOOL_LOOP_PASS\")\nPY",
-      "duration_s": 0.609,
+      "command": "set -euo pipefail; cat > /tmp/project_brain_smolagents_probe.py <<'PY'\nimport json, pathlib, urllib.request\nfrom types import SimpleNamespace\nfrom smolagents import Model, CodeAgent, tool\n\nclass PollinationsLegacyModel(Model):\n    def __init__(self):\n        super().__init__(model_id=\"pollinations-openai-fast\")\n    def generate(self, messages, stop_sequences=None, **kwargs):\n        flat=[]\n        for m in messages:\n            role=m.get(\"role\",\"user\")\n            c=m.get(\"content\",\"\")\n            if isinstance(c,list):\n                parts=[]\n                for x in c:\n                    if isinstance(x,dict):\n                        parts.append(str(x.get(\"text\") or x.get(\"content\") or x))\n                    else:\n                        parts.append(str(x))\n                c=\"\\n\".join(parts)\n            flat.append({\"role\":role,\"content\":str(c)})\n        body=json.dumps({\"messages\":flat,\"model\":\"openai-fast\"}).encode()\n        req=urllib.request.Request(\"https://text.pollinations.ai/\",data=body,headers={\"Content-Type\":\"application/json\",\"User-Agent\":\"ProjectBrain/1.0\"},method=\"POST\")\n        with urllib.request.urlopen(req,timeout=30) as r:\n            text=r.read(50000).decode(\"utf-8\",\"replace\")\n        return SimpleNamespace(content=text)\n\n@tool\ndef read_canonical_generation() -> str:\n    \"\"\"Read and return the canonical_generation value from Project Brain's canonical pointer.\"\"\"\n    x=json.loads(pathlib.Path(\"canonical/CANONICAL_POINTER.json\").read_text())\n    return x[\"canonical_generation\"]\n\nagent=CodeAgent(\n    tools=[read_canonical_generation],\n    model=PollinationsLegacyModel(),\n    max_steps=4,\n    verbosity_level=0,\n)\nresult=str(agent.run(\n    \"Use the read_canonical_generation tool. Return the exact canonical_generation value and nothing else. Do not guess it.\"\n))\nexpected=json.loads(pathlib.Path(\"canonical/CANONICAL_POINTER.json\").read_text())[\"canonical_generation\"]\nprint(\"AGENT_RESULT=\"+result)\nprint(\"EXPECTED=\"+expected)\nif expected not in result:\n    raise SystemExit(\"SMOLAGENTS_TOOL_LOOP_FAILED\")\nprint(\"SMOLAGENTS_TOOL_LOOP_PASS\")\nPY\npython /tmp/project_brain_smolagents_probe.py",
+      "duration_s": 0.065,
       "returncode": 1,
-      "stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 28, in <module>\n  File \"/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/smolagents/tools.py\", line 1114, in tool\n    tool_source = textwrap.dedent(inspect.getsource(tool_function))\n                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/inspect.py\", line 1285, in getsource\n    lines, lnum = getsourcelines(object)\n                  ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/inspect.py\", line 1267, in getsourcelines\n    lines, lnum = findsource(object)\n                  ^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/inspect.py\", line 1096, in findsource\n    raise OSError('could not get source code')\nOSError: could not get source code\n",
+      "stderr": "Traceback (most recent call last):\n  File \"/tmp/project_brain_smolagents_probe.py\", line 3, in <module>\n    from smolagents import Model, CodeAgent, tool\nModuleNotFoundError: No module named 'smolagents'\n",
       "stdout": ""
     },
     "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
@@ -45,14 +45,28 @@
       },
       "step_id": "prove-multistep-model-tool-loop",
       "step_index": 1
+    },
+    {
+      "completed_at_utc": "2026-09-22T06:24:24.725335+00:00",
+      "ok": false,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail; cat > /tmp/project_brain_smolagents_probe.py <<'PY'\nimport json, pathlib, urllib.request\nfrom types import SimpleNamespace\nfrom smolagents import Model, CodeAgent, tool\n\nclass PollinationsLegacyModel(Model):\n    def __init__(self):\n        super().__init__(model_id=\"pollinations-openai-fast\")\n    def generate(self, messages, stop_sequences=None, **kwargs):\n        flat=[]\n        for m in messages:\n            role=m.get(\"role\",\"user\")\n            c=m.get(\"content\",\"\")\n            if isinstance(c,list):\n                parts=[]\n                for x in c:\n                    if isinstance(x,dict):\n                        parts.append(str(x.get(\"text\") or x.get(\"content\") or x))\n                    else:\n                        parts.append(str(x))\n                c=\"\\n\".join(parts)\n            flat.append({\"role\":role,\"content\":str(c)})\n        body=json.dumps({\"messages\":flat,\"model\":\"openai-fast\"}).encode()\n        req=urllib.request.Request(\"https://text.pollinations.ai/\",data=body,headers={\"Content-Type\":\"application/json\",\"User-Agent\":\"ProjectBrain/1.0\"},method=\"POST\")\n        with urllib.request.urlopen(req,timeout=30) as r:\n            text=r.read(50000).decode(\"utf-8\",\"replace\")\n        return SimpleNamespace(content=text)\n\n@tool\ndef read_canonical_generation() -> str:\n    \"\"\"Read and return the canonical_generation value from Project Brain's canonical pointer.\"\"\"\n    x=json.loads(pathlib.Path(\"canonical/CANONICAL_POINTER.json\").read_text())\n    return x[\"canonical_generation\"]\n\nagent=CodeAgent(\n    tools=[read_canonical_generation],\n    model=PollinationsLegacyModel(),\n    max_steps=4,\n    verbosity_level=0,\n)\nresult=str(agent.run(\n    \"Use the read_canonical_generation tool. Return the exact canonical_generation value and nothing else. Do not guess it.\"\n))\nexpected=json.loads(pathlib.Path(\"canonical/CANONICAL_POINTER.json\").read_text())[\"canonical_generation\"]\nprint(\"AGENT_RESULT=\"+result)\nprint(\"EXPECTED=\"+expected)\nif expected not in result:\n    raise SystemExit(\"SMOLAGENTS_TOOL_LOOP_FAILED\")\nprint(\"SMOLAGENTS_TOOL_LOOP_PASS\")\nPY\npython /tmp/project_brain_smolagents_probe.py",
+        "duration_s": 0.065,
+        "returncode": 1,
+        "stderr": "Traceback (most recent call last):\n  File \"/tmp/project_brain_smolagents_probe.py\", line 3, in <module>\n    from smolagents import Model, CodeAgent, tool\nModuleNotFoundError: No module named 'smolagents'\n",
+        "stdout": ""
+      },
+      "step_id": "prove-multistep-model-tool-loop",
+      "step_index": 1
     }
   ],
   "mission_id": "ASTRA-RUNTIME-SMOLAGENTS-REUSE-PROBE-001",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_SMOLAGENTS_REUSE_PROBE_001.json",
-  "mission_sha256": "3f5e682489c08ce8077816f760e372d314ec35b0fbc8162daaebcc6ea14b3223",
+  "mission_sha256": "f9c72da9b9bf77160a1258f3f3d972939ab5c3883cb6fb61b58239db760b92d6",
   "next_step": 1,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
   "status": "BLOCKED",
-  "updated_at_utc": "2026-09-22T06:03:35.502266+00:00"
+  "updated_at_utc": "2026-09-22T06:24:24.725681+00:00"
 }
