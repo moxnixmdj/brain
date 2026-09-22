@@ -117,6 +117,31 @@ def _extract_json_object(text):
     if a<0 or b<a: raise Blocker("PLANNER_NO_JSON")
     return json.loads(text[a:b+1])
 
+def _planner_post(prompt, timeout_s=20):
+    endpoint="https://text.pollinations.ai/"
+    models=("openai-fast","openai","mistral")
+    errors=[]
+    for model in models:
+        body=json.dumps({
+          "messages":[{"role":"user","content":prompt}],
+          "model":model,
+          "jsonMode":True
+        }).encode("utf-8")
+        req=urllib.request.Request(
+          endpoint,
+          data=body,
+          headers={"Content-Type":"application/json","User-Agent":"ProjectBrain/1.0"},
+          method="POST"
+        )
+        t=time.monotonic()
+        try:
+            with urllib.request.urlopen(req,timeout=timeout_s) as r:
+                raw=r.read(30000).decode("utf-8","replace")
+            return {"text":raw,"model":model,"duration_s":round(time.monotonic()-t,3),"errors":errors}
+        except Exception as e:
+            errors.append({"model":model,"error":type(e).__name__+":"+str(e),"duration_s":round(time.monotonic()-t,3)})
+    raise Blocker("PLANNER_ALL_ROUTES_FAILED:"+json.dumps(errors,sort_keys=True)[:1800])
+
 def run_goal(step, mission):
     goal=mission.get(step.get("goal_ref","goal"), mission.get("goal"))
     if isinstance(goal,(dict,list)): goal=json.dumps(goal,sort_keys=True)
@@ -151,9 +176,8 @@ def run_goal(step, mission):
           '{"actions":[{"type":"...","args":{},"why":"..."}],"stop_after_evidence":true}. '
           "Observations so far: "+obs
         )
-        url="https://text.pollinations.ai/"+urllib.parse.quote(prompt,safe="")
-        planned=run_http({"url":url,"timeout_s":30,"max_bytes":30000})
-        obj=_extract_json_object(planned.get("body_excerpt",""))
+        planned=_planner_post(prompt, timeout_s=20)
+        obj=_extract_json_object(planned.get("text",""))
         action=obj.get("action")
         if not isinstance(action,dict):
             actions=obj.get("actions")
@@ -182,9 +206,8 @@ def run_goal(step, mission):
               '{"actions":[{"type":"...","args":{},"why":"normalized planner intent"}]}. '
               "Planner intent: "+obj["reasoning"][:5000]
             )
-            normalize_url="https://text.pollinations.ai/"+urllib.parse.quote(normalize_prompt,safe="")
-            normalized=run_http({"url":normalize_url,"timeout_s":30,"max_bytes":12000})
-            nobj=_extract_json_object(normalized.get("body_excerpt",""))
+            normalized=_planner_post(normalize_prompt, timeout_s=20)
+            nobj=_extract_json_object(normalized.get("text",""))
             na=nobj.get("action")
             if not isinstance(na,dict):
                 nas=nobj.get("actions")
@@ -215,6 +238,8 @@ def run_goal(step, mission):
               "adapter":"goal","returncode":0,
               "stdout":summary,
               "planner_source":"https://text.pollinations.ai/",
+              "planner_transport":"POST_BOUNDED_FAILOVER",
+              "planner_model_last":planned.get("model"),
               "cycles":cycle+1,"trace":trace,
               "final_summary":summary
             }
