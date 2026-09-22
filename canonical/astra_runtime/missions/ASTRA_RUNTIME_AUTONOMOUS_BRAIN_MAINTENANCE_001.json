@@ -68,5 +68,11 @@
     "repair_commit": "5b4c373dc7c4e60d0a6ec4b4cf91ea24c904c9e4",
     "repair": "Force direct JSON text emission using previously proven constrained actions schema; explicitly forbid tool_calls mode",
     "replay_authorized": true
+  },
+  "replay_after_root_cause_change_6": {
+    "prior_failure": "PLANNER_INTENT_CORRECT_BUT_NO_ACTION_EMISSION",
+    "repair_commit": "1d6ef3122cf63e877002567c82cc8066931d7bbd",
+    "repair": "Second-pass intent normalizer converts free-form planner reasoning into one allowlisted typed action before execution",
+    "replay_authorized": true
   }
 }
