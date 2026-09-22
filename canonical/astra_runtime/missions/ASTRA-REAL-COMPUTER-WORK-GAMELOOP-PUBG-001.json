@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_REAL_COMPUTER_WORK_MISSION_V1",
+  "mission_id": "ASTRA-REAL-COMPUTER-WORK-GAMELOOP-PUBG-001",
+  "status": "BLOCKED_ON_EXACT_OBSERVED_NATIVE_CRASH",
+  "canonical_generation_at_start": "2026-09-22-astra-shared-runtime-portfolio-restored",
+  "terminal_user_goal": "Make the user's existing GameLoop PUBG Mobile installation actually render and run instead of presenting the persistent black screen, while preserving user data and avoiding speculative destructive changes.",
+  "why_selected": "Live canonical state names END_TO_END_COMPUTER_WORK as the highest-leverage capability gap and requires real cross-domain mission pressure rather than qualification theater. The user has an unresolved real GameLoop/PUBG black-screen problem on the authorized Windows machine, so this mission simultaneously advances a real user goal and exercises computer-work diagnosis/action/verification.",
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "prior_work_search": {
+    "canonical_search_query": "PUBG GameLoop black screen",
+    "canonical_matches": 0,
+    "duplicate_execution_found": false
+  },
+  "live_observations_2026_09_22": {
+    "machine": "Mo",
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "gpu_driver": "32.0.15.9571",
+    "gameloop_install": "C:\\Program Files\\TxGameAssistant",
+    "gameloop_ui": "Gameloop(64beta)",
+    "pubg_package": "com.tencent.ig",
+    "android_emulator_log": "C:\\Program Files\\TxGameAssistant\\ui\\AndroidEmulator100.log",
+    "aengine_log": "C:\\Program Files\\TxGameAssistant\\ui\\AEngine100.log",
+    "renderer_log": "C:\\Program Files\\TxGameAssistant\\ui\\libOpenglRender.log"
+  },
+  "falsifications_and_findings": [
+    {
+      "hypothesis": "The black screen is merely because the emulator never starts the PUBG package.",
+      "result": "FALSIFIED",
+      "evidence": "AndroidEmulator100.log reports StartPkgWithLogin for com.tencent.ig followed by OnAppRunning bRet=1 bRun=1 and OnGameStart."
+    },
+    {
+      "hypothesis": "The host GPU/OpenGL adapter is not detected.",
+      "result": "FALSIFIED",
+      "evidence": "AndroidEmulator100.log reports NVIDIA Corporation, RTX 4060 Laptop GPU, OpenGL 4.6.0 NVIDIA 595.71 and a matched render policy."
+    },
+    {
+      "hypothesis": "Switching the existing ForceDirectX registry flags from 0 to 1 is an adequate repair.",
+      "result": "FALSIFIED_AND_ROLLED_BACK",
+      "evidence": "Both HKCU\\Software\\Tencent\\MobileGamePC ForceDirectX flags were changed reversibly, PUBG relaunched, and a direct PrintWindow capture of the GameLoop main window remained fully black. The original values were restored to 0."
+    }
+  ],
+  "exact_observed_failure": {
+    "gameloop_crash_type": 4002,
+    "exception_code": "0xc0000005",
+    "exception_module": "/system/lib64/libc.so",
+    "exception_module_offset": "0xb6bd1",
+    "observed_stack_modules": [
+      "/system/lib64/libc.so",
+      "/system/lib64/libhotx612.so"
+    ],
+    "libhotx612_observed_offsets": [
+      "0x33305b",
+      "0x351b25",
+      "0x1ff94d",
+      "0x1d42bf"
+    ],
+    "repetition": "AEngine100.log records repeated crash_type=4002 events for com.tencent.ig across multiple relaunch attempts.",
+    "renderer_side_symptom": "libOpenglRender.log repeatedly reports OpenFileMapping Global\\AowShm-* Fail Error=2 while the main GameLoop render area remains black in direct window capture."
+  },
+  "current_causal_frontier": "Determine why com.tencent.ig repeatedly raises access violation 0xc0000005 in the Android/x86-64 execution path involving libc.so and libhotx612.so, and whether the trigger is the current PUBG native payload, GameLoop's ARM64 translation/runtime state, or a concrete dependency/loader mismatch. Do not perform more renderer toggles or reinstall/rename data until this crash boundary is resolved.",
+  "next_action": "Recover and compare the exact current PUBG native-library payload and GameLoop translation/runtime artifacts against a known-good or official package/runtime state, using preserved files and hashes first; identify the first divergent library/dependency that is causally upstream of the libhotx612/libc access violation, then change only that component and replay once.",
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "val_town_used": false,
+    "sprites_used": false,
+    "destructive_reinstall_forbidden_without_causal_evidence": true,
+    "preserve_user_data": true,
+    "no_repeat_renderer_toggle": true
+  }
+}
