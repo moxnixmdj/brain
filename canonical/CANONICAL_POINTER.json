@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_POINTER_V1",
-  "canonical_generation": "2026-09-22-capability-realization-mission-locked",
+  "canonical_generation": "2026-09-22-general-cognition-gap-reconciled",
   "control_plane": {
     "provider": "GitHub",
     "repository": "moxnixmdj/brain",
@@ -109,12 +109,12 @@
     },
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
-    "superworker_real": 2,
-    "next_step": "RECONCILE_TARGET_ASTRA_CAPABILITY_SET_AGAINST_ACTUALLY_DEMONSTRATED_PROJECT_CAPABILITIES__SELECT_THE_SINGLE_HIGHEST_LEVERAGE_REAL_CAPABILITY_GAP__EXECUTE_DIRECTLY_TO_CLOSE_IT__USE_BENCHMARKS_ONLY_IF_NEEDED_TO_DISCRIMINATE_OR_VERIFY_REAL_CAPABILITY",
+    "superworker_real": 0,
+    "next_step": "SEARCH_EXISTING_AUTHORIZED_STRICT_ZERO_COST_PROGRAMMABLE_REASONING_ROUTES__SELECT_ONE_ADEQUATE_ROUTE__INTEGRATE_ONLY_COGNITION_INTERFACE_INTO_EXISTING_PERSISTENT_CONTROLLER__EXECUTE_ONE_FRESH_NOVEL_REAL_TASK_WITH_GENERIC_TOOL_SELECTION__DISTINCTLY_VERIFY_CONTROLLER_ITSELF_DID_REASONING_AND_TOOL_CHOICE",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "TRUTHFUL_TARGET_CAPABILITY_GAP_NOT_YET_RECONCILED_AFTER_PROXY_GOAL_CORRECTION",
+    "critical_blocker": "GENERAL_REASONING_AND_GENERIC_TOOL_USE_NOT_INTEGRATED_INSIDE_PERSISTENT_CONTROLLER",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -149,13 +149,13 @@
       ]
     },
     "superworker_remaining_integrated_gates": [],
-    "superworker_integrated_1_status": "QUALIFIED_REAL",
+    "superworker_integrated_1_status": "PERSISTENT_NARROW_CONTROLLER__NOT_REAL_SUPERWORKER",
     "superworker_integrated_1_identity_path": "canonical/agents/SUPERWORKER_INTEGRATED_1.json",
     "superworker_integrated_1_final_adjudication_path": "canonical/qualification/SUPERWORKER_INTEGRATED_1_FINAL_WHOLE_DEFINITION_ADJUDICATION_V1.json",
     "superworker_integrated_1_evidence_manifest_path": "canonical/superworker_evidence/SUPERWORKER_INTEGRATED_1_EVIDENCE_MANIFEST_V1.json",
     "superworker_integrated_1_proof_bundle_drive_file_id": "1R98ftZbh0OOfAzpckjyx3-RpkL0M74u_",
     "superworker_integrated_1_proof_bundle_sha256": "0dff5b7a00788bb8ee731a18ce68889434689da4ee68397b5a9689397cfbfecf",
-    "superworker_integrated_2_status": "QUALIFIED_REAL_CLEANROOM_REPRODUCTION",
+    "superworker_integrated_2_status": "PERSISTENT_NARROW_CONTROLLER_CLEANROOM_REPRODUCTION__NOT_REAL_SUPERWORKER",
     "superworker_integrated_2_identity_path": "canonical/agents/SUPERWORKER_INTEGRATED_2.json",
     "superworker_integrated_2_adjudication_path": "canonical/qualification/SUPERWORKER_INTEGRATED_2_CLEANROOM_WOLFRAM_ADJUDICATION_V1.json",
     "superworker_integrated_2_evidence_manifest_path": "canonical/superworker_evidence/SUPERWORKER_INTEGRATED_2_EVIDENCE_MANIFEST_V1.json",
@@ -188,7 +188,10 @@
     "astra_external_distance": "UNKNOWN_AND_NOT_A_SUCCESS_METRIC_BY_ITSELF",
     "astra_common_external_benchmarks_run": false,
     "scaling_status": "PAUSED_UNTIL_SCALING_DIRECTLY_SERVES_REAL_CAPABILITY_REALIZATION",
-    "superworker_truth_scope": "INTERNAL_WHOLE_DEFINITION_ONLY__DOES_NOT_IMPLY_EXTERNAL_ASTRA_LEVEL_INTELLIGENCE"
+    "superworker_truth_scope": "INTERNAL_WHOLE_DEFINITION_ONLY__DOES_NOT_IMPLY_EXTERNAL_ASTRA_LEVEL_INTELLIGENCE",
+    "persistent_narrow_controllers": 2,
+    "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
+    "highest_leverage_capability_gap": "GENERAL_REASONING_AND_GENERIC_TOOL_USE_INSIDE_PERSISTENT_CONTROLLER"
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
@@ -212,12 +215,12 @@
     "infrastructure_freeze_when_next_real_mission_executable": true,
     "forbid_relabeling_bounded_executor_as_superworker": true,
     "only_current_allowed_frontier_actions": [
-      "reconcile_actual_target_capability_set_from_verified_astra_demonstrations_and_project_goal",
-      "map_only_real_demonstrated_project_capabilities_without_inheriting_labels_or predicates",
-      "identify_single_highest_leverage_capability_gap",
-      "execute_directly_to_close_that capability gap",
-      "use benchmarks or predicates only if they materially discriminate capability reality or verify the selected capability",
-      "preserve evidence necessary to prevent false capability claims"
+      "search_existing_private_authorized_zero_cost_programmable_reasoning_routes",
+      "verify_hard_zero_incremental_spend_and_no_auto_billing",
+      "integrate_one_adequate_cognition_provider_into_existing_persistent_controller",
+      "execute_one_fresh_novel_task_requiring_reasoning_and_generic_tool_selection",
+      "distinctly_verify_reasoning_and_tool_choice_occurred_inside_persistent_controller",
+      "repair_only_observed_failed_property"
     ],
     "truth_first_law": "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
     "live_canonical_refresh_before_consequential_action": true,
@@ -265,19 +268,7 @@
     "counts_as_real_superworker": true,
     "human_authority_approval": false
   },
-  "active_superworkers": [
-    {
-      "agent_id": "SUPERWORKER-INTEGRATED-1",
-      "identity_path": "canonical/agents/SUPERWORKER_INTEGRATED_1.json",
-      "counts_as_real_superworker": true
-    },
-    {
-      "agent_id": "SUPERWORKER-INTEGRATED-2",
-      "identity_path": "canonical/agents/SUPERWORKER_INTEGRATED_2.json",
-      "counts_as_real_superworker": true,
-      "cleanroom_reproduction": true
-    }
-  ],
+  "active_superworkers": [],
   "mission_lock": {
     "terminal_objective": "MAKE_THE_ACTUAL_TARGET_CAPABILITIES_DEMONSTRATED_BY_ASTRA_REAL_IN_OUR_OWN_SYSTEM_USING_ONLY_THE_RIGHT_ROUTE",
     "success_definition": "REAL_CAPABILITY_EXISTS_AND_WORKS_IN_REAL_USE__NOT_PREDICATE_OR_BENCHMARK_COMPLETION",
@@ -286,5 +277,15 @@
     "benchmarks_role": "SUBORDINATE_DIAGNOSTIC_ONLY",
     "infrastructure_role": "ONLY_IF_CAUSALLY_REQUIRED_TO_REALIZE_OR_OPERATE_CAPABILITY",
     "priority": "CORRECT_ROUTE_FIRST__THEN_MINIMUM_WALL_CLOCK_TIME_TO_REAL_VERIFIED_CAPABILITY"
-  }
+  },
+  "active_persistent_controllers": [
+    {
+      "agent_id": "SUPERWORKER-INTEGRATED-1",
+      "classification": "PERSISTENT_NARROW_CONTROLLER"
+    },
+    {
+      "agent_id": "SUPERWORKER-INTEGRATED-2",
+      "classification": "PERSISTENT_NARROW_CONTROLLER_CLEANROOM_REPRODUCTION"
+    }
+  ]
 }
