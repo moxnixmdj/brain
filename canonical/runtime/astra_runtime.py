@@ -64,7 +64,14 @@ def run_http(step):
         }
 
 def _safe_repo_path(raw):
-    p=(ROOT/str(raw or "")).resolve()
+    value=str(raw or "").strip()
+    # Planner sources sometimes express repository-root-relative paths as
+    # "/canonical/...". Interpret that single leading slash as repository
+    # root notation, but keep the resolve/parent check as the authority that
+    # rejects traversal or any actual escape outside the checkout.
+    if value.startswith("/"):
+        value=value.lstrip("/")
+    p=(ROOT/value).resolve()
     if p != ROOT.resolve() and ROOT.resolve() not in p.parents:
         raise Blocker("PATH_OUTSIDE_REPOSITORY")
     return p
