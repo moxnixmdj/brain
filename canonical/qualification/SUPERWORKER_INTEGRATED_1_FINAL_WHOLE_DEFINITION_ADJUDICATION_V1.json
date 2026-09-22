@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_SUPERWORKER_FINAL_WHOLE_DEFINITION_ADJUDICATION_V1",
+  "verifier_id": "WOLFRAM-REMOTE-KERNEL-20260922-SUPERWORKER-FINAL-V1",
+  "evidence_chain": {
+    "v6_result_sha256": "e305ffe8c7537c469d039742d92adb20b89080869f4d26de30c94510689c5ddc",
+    "v6_initial_whole_definition_receipt_path": "canonical/qualification/RECOVERY_SUPERWORKER_V6_WOLFRAM_WHOLE_DEFINITION_ADJUDICATION_V1.json",
+    "existing_asset_coverage_path": "canonical/qualification/SUPERWORKER_EXISTING_ASSET_COVERAGE_ADJUDICATION_V1.json",
+    "integrated_evidence_manifest_path": "canonical/superworker_evidence/SUPERWORKER_INTEGRATED_1_EVIDENCE_MANIFEST_V1.json",
+    "integrated_mission_sha256": "4decd34ede66f08f6caa6005da1cc648d5303eda5df5017927c2d493a4b2ae75",
+    "integrated_state_sha256": "b13a013392ac96a3a135c13a721ead8848bf215550ab96f943e2b603a7db10bc",
+    "integrated_report_sha256": "9c25d17361ec8afd4be2cb4b1fc109e427d30c010530fa237c9b47461dd76196",
+    "integrated_supervisor_sha256": "b5468a0e0c4d348b2f785ddeecebbb80cb03185e5b41ce1b0e747121871dbdaf",
+    "integrated_reverification_sha256": "21d242c20202202538917918afa819bd94808bacf246fb805b5edd7304b22a3f"
+  },
+  "gate_results": {
+    "CAUSALLY_READY_TASK_ACQUISITION": true,
+    "LEASES_OWNERSHIP_DEDUPE_PROVENANCE_VERIFICATION": true,
+    "DURABLE_IDENTITY_AND_MISSION_BEYOND_CHAT_MODEL_INVOCATION": true,
+    "CONSEQUENTIAL_MISSION_EXECUTION": true,
+    "DURABLE_EVIDENCE_INCORPORATION": true,
+    "NO_SELF_CERTIFIED_PROMOTION": true,
+    "SURVIVES_CONTEXT_MODEL_PROVIDER_LOSS_VIA_CHECKPOINT_RELAUNCH": true,
+    "OBSERVE_REASON_RESEARCH_ACT_VERIFY_CHECKPOINT_CONTINUE": true,
+    "DYNAMIC_KNOWLEDGE_TOOL_CAPABILITY_DISCOVERY_ACQUISITION": true,
+    "INDEPENDENT_PERSISTENT_EXECUTION_SYSTEM": true
+  },
+  "gate_count": 10,
+  "pass_count": 10,
+  "all_gates_pass": true,
+  "promotion_authorized": true,
+  "p_superworker_real_before": 0,
+  "p_superworker_real_after": 1,
+  "human_authority_approval_claimed": false,
+  "classification": "REAL_SUPERWORKER_WHOLE_DEFINITION_PASS"
+}
