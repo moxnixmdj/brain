@@ -1,8 +1,16 @@
 {
   "adapter": "shell",
-  "error": "ValueError:embedded null byte",
+  "error": "VERIFICATION_FAILED",
   "mission_id": "ASTRA-RUNTIME-RESEARCH-ARTIFACT-001",
-  "observed_at_utc": "2026-09-22T04:44:00.890133+00:00",
+  "observed_at_utc": "2026-09-22T04:44:59.948502+00:00",
+  "result": {
+    "adapter": "shell",
+    "command": "set -euo pipefail; : \"${ASTRA_STEP_0_BODY:?CROSS_STEP_EVIDENCE_NOT_EXPOSED}\"; mkdir -p canonical/astra_runtime/evidence; python - <<'PY'\nimport json, os, pathlib, re\nbody=os.environ['ASTRA_STEP_0_BODY']\nm=re.search(r'Latest Python 3 Release[^0-9]*Python ([0-9.]+)', body, re.I|re.S)\nif not m:\n    m=re.search(r'Python ([0-9]+\\.[0-9]+\\.[0-9]+)', body)\nif not m:\n    raise SystemExit('LATEST_VERSION_NOT_EXTRACTED')\nversion=m.group(1)\nout={'source':'https://www.python.org/downloads/','extracted_latest_version':version}\np=pathlib.Path('canonical/astra_runtime/evidence/research_artifact_001.json')\np.write_text(json.dumps(out,indent=2)+'\\n')\nhtml=pathlib.Path('canonical/astra_runtime/evidence/research_artifact_001.html')\nhtml.write_text(f'<html><body><h1>Python release research</h1><p>Latest observed Python version: {version}</p><p>Source: python.org/downloads</p></body></html>')\nPY",
+    "duration_s": 0.046,
+    "returncode": 1,
+    "stderr": "LATEST_VERSION_NOT_EXTRACTED\n",
+    "stdout": ""
+  },
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
   "step_id": "consume-research-and-create-artifact",
   "step_index": 1
