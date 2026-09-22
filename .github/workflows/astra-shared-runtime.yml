@@ -22,8 +22,26 @@ jobs:
         with: {python-version: '3.12'}
       - name: Execute shared runtime mission
         run: |
-          MISSION=$(git show --pretty='' --name-only "$GITHUB_SHA" | grep '^canonical/astra_runtime/missions/.*\.json$' | head -n1)
-          test -n "$MISSION"
+          mapfile -t MISSIONS < <(git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | grep '^canonical/astra_runtime/missions/.*\.json      - name: Persist runtime state and evidence
+        if: always()
+        run: |
+          git config user.name 'Project Brain ASTRA Runtime'
+          git config user.email 'project-brain-astra-runtime@users.noreply.github.com'
+          git add -A canonical/astra_runtime
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record ASTRA shared runtime mission execution'
+            git push
+          fi
+)
+          test "${#MISSIONS[@]}" -eq 1
+          MISSION="${MISSIONS[0]}"
+          echo "ASTRA_RUNTIME_MISSION_PATH=$MISSION"
+          python - "$MISSION" <<'PY'
+          import json, pathlib, sys
+          p=pathlib.Path(sys.argv[1])
+          x=json.loads(p.read_text())
+          print("ASTRA_RUNTIME_MISSION_ID="+x["mission_id"])
+          PY
           python canonical/runtime/astra_runtime.py "$MISSION"
       - name: Persist runtime state and evidence
         if: always()
