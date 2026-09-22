@@ -140,6 +140,10 @@ def run_goal(step, mission):
         planned=run_http({"url":url,"timeout_s":30,"max_bytes":30000})
         obj=_extract_json_object(planned.get("body_excerpt",""))
         action=obj.get("action")
+        if not isinstance(action,dict):
+            actions=obj.get("actions")
+            if isinstance(actions,list) and actions and isinstance(actions[0],dict):
+                action=actions[0]
         if not isinstance(action,dict): raise Blocker("PLANNER_ACTION_MISSING")
         typ=action.get("type")
         if typ not in {"read_file","list_tree","search_text","http_get","finish"}:
