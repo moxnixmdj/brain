@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_ICW_INDEPENDENT_PROMOTION_ADJUDICATION_V2",
+  "verifier_role": "FRESH_INDEPENDENT_VERIFIER_NOT_ICW_CHATGPT_SOL_1",
+  "candidate_identity": "ICW-CHATGPT-SOL-1",
+  "mission_id": "ICW-PROMOTION-CLOSURE-V2-20260922",
+  "passed": false,
+  "promotion_authorized": false,
+  "p_real": 0,
+  "gate_results": {
+    "V2_FROZEN_MISSION_PROSPECTIVE_IDENTITY": "PASS",
+    "V2_CHRONOLOGY_MISSION_BEFORE_EXECUTION_EVIDENCE": "PASS",
+    "EXACT_WORKER_IDENTITY_STABLE_IN_REVIEWED_V2_RECORD": "PASS",
+    "CANONICAL_RAW_GUI_ACTION_EVIDENCE": "PASS_AS_CANDIDATE_SIDE_PRIMARY_RECORD",
+    "CANONICAL_RAW_UIAUTOMATION_EVIDENCE": "PASS_AS_CANDIDATE_SIDE_PRIMARY_RECORD",
+    "FRESH_INDEPENDENT_LIVE_UIAUTOMATION_READBACK": "FAIL_NOT_OBTAINED",
+    "V2_AUTONOMOUS_WAKE_AFTER_CHECKPOINT": "PASS_AS_DURABLE_SCHEDULED_EVENT_RECEIPT",
+    "GUI_ACTION_NOT_REPEATED_ON_WAKE": "PASS_BY_DURABLE_RECEIPT",
+    "NO_SELF_CERTIFICATION": "PASS",
+    "WHOLE_SAME_IDENTITY_INTEGRATED_COGNITIVE_WORKER": "NOT_AUTHORIZED_WHILE_REQUIRED_FRESH_LIVE_GUI_GATE_FAILS"
+  },
+  "chronology": {
+    "frozen_v2_mission_commit": "7effcaa03a36a64e411da9979f0e06064aa14512",
+    "raw_gui_action_commit": "1fbb6d3941ffe4e08674b14bca0e3269b3558042",
+    "raw_uia_commit": "96c0ff12f3f2dc70559f838e800706061a8e9165",
+    "gui_correction_commit": "5f8cc79088d0cae141eb3f5bca0c26525e26678b",
+    "checkpoint_commit": "ccfb9b1520d0a57be0661933e28297b76341e600",
+    "autonomous_wake_commit": "a3cb9f87b3f3573dee57699448c09abaa90dcdf0",
+    "candidate_completion_commit": "65174a9adfa4faa7f9f6ba63c83498c190456fd4",
+    "finding": "Git compare confirms the frozen V2 mission is an ancestor of the reviewed V2 action/readback/correction/wake chain. The scheduled wake commit directly follows checkpoint commit ccfb9b1520d0a57be0661933e28297b76341e600."
+  },
+  "prior_rejection_reconsideration": {
+    "newly_frozen_mission_identity_route": "PASS",
+    "finding": "V1 explicitly allowed reconsideration by running a newly frozen mission whose worker_identity is ICW-CHATGPT-SOL-1 before execution. V2 does exactly that without rewriting V1.",
+    "independently_retrievable_primary_gui_evidence_route": "PARTIAL_PASS_BUT_LIVE_VERIFIER_REQUIREMENT_UNSATISFIED",
+    "finding_gui": "The repository now contains raw action and raw UIAutomation records bound to process/window/document handles and exact token, repairing the V1 repository-evidence defect. However V2 additionally requires this fresh verifier to independently inspect the still-live GUI state."
+  },
+  "live_gui_readback_binding": {
+    "device": "Mo",
+    "required_title_contains": "icw_v2_gui_canary",
+    "required_exact_text": "ICW-CHATGPT-SOL-1|ICW-PROMOTION-CLOSURE-V2-20260922|GUI-EFFECT",
+    "result": "FAIL_CLOSED",
+    "reason": "Remote Desktop Commander device Mo was online, but fresh non-mutating PowerShell/UIAutomation inspection was blocked by platform safety checks before process/window/document handles or observed text could be independently obtained. Candidate-authored V2_GUI_UIAUTOMATION_RAW.json is not substituted for the explicitly required fresh verifier observation.",
+    "independent_readback_artifact_written": false
+  },
+  "autonomous_wake_finding": {
+    "checkpoint_commit": "ccfb9b1520d0a57be0661933e28297b76341e600",
+    "checkpoint_time_utc": "2026-09-22T06:50:57Z",
+    "wake_commit": "a3cb9f87b3f3573dee57699448c09abaa90dcdf0",
+    "wake_time_utc": "2026-09-22T06:52:53Z",
+    "wake_parent_is_checkpoint_commit": true,
+    "receipt_states_platform_native_scheduled_wake": true,
+    "receipt_states_gui_action_repeated": false,
+    "candidate_completion_commit": "65174a9adfa4faa7f9f6ba63c83498c190456fd4",
+    "finding": "Durable chronology supports a scheduled continuation after the checkpoint and no repeated GUI action. The receipts are credited as evidence of the scheduled execution event, not as promotion authority."
+  },
+  "no_self_certification_finding": {
+    "candidate_claimed_promotion": false,
+    "candidate_receipts_keep_p_real_zero": true,
+    "canonical_pointer_positive_update_performed": false,
+    "finding": "Candidate-side receipts explicitly defer promotion to a distinct verifier."
+  },
+  "whole_identity_finding": "The reviewed durable chain supplies substantial same-name evidence for consequential cognitive work, later-context resume, GUI actuation/readback, checkpointing and scheduled continuation. Under fail-closed verification, whole-loop promotion cannot be authorized because the V2 mission explicitly requires fresh independent live GUI inspection and that observation was not obtained in this run. No boolean composition across a different worker identity is used to cure this failure.",
+  "evidence_paths": [
+    "canonical/icw/ICW-CHATGPT-SOL-1/PROMOTION_CLOSURE_MISSION_V2.json",
+    "canonical/icw/ICW-CHATGPT-SOL-1/PROMOTION_CLOSURE_CHECKPOINT_V2.json",
+    "canonical/icw/ICW-CHATGPT-SOL-1/V2_GUI_ACTION_RAW.json",
+    "canonical/icw/ICW-CHATGPT-SOL-1/V2_GUI_UIAUTOMATION_RAW.json",
+    "canonical/icw/ICW-CHATGPT-SOL-1/V2_GUI_CORRECTION_RECEIPT.json",
+    "canonical/icw/ICW-CHATGPT-SOL-1/V2_AUTONOMOUS_WAKE_RECEIPT.json",
+    "canonical/icw/ICW-CHATGPT-SOL-1/V2_CANDIDATE_COMPLETION_RECEIPT.json",
+    "canonical/icw/ICW-CHATGPT-SOL-1/INDEPENDENT_PROMOTION_ADJUDICATION_V1.json",
+    "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
+    "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
+    "canonical/icw/ICW-CHATGPT-SOL-1/CHECKPOINT_V1.json",
+    "canonical/icw/ICW-CHATGPT-SOL-1/RESUME_RECEIPT_V1.json",
+    "canonical/icw/ICW-CHATGPT-SOL-1/GUI_RECEIPT_V1.json",
+    "canonical/icw/ICW-CHATGPT-SOL-1/CHECKPOINT_V3.json",
+    "canonical/icw/ICW-CHATGPT-SOL-1/AUTONOMOUS_WAKE_RECEIPT_V1.json",
+    "canonical/CANONICAL_POINTER.json"
+  ],
+  "pointer_action": "LEAVE_NONPOSITIVE_UNCHANGED",
+  "smallest_exact_reconsideration_requirement": "Before the V2 canary is closed or mutated, a fresh independent verifier must successfully perform a non-mutating Windows UIAutomation read of the live Notepad window whose title contains icw_v2_gui_canary, obtain the Document control through TextPattern or ValuePattern, observe exactly ICW-CHATGPT-SOL-1|ICW-PROMOTION-CLOSURE-V2-20260922|GUI-EFFECT, and durably record its own reader process ID, window handle, document handle, title, control class, method, exact text and UTC time. Then rerun only the independent adjudication; do not redo candidate GUI action or rewrite prior evidence.",
+  "cleanup": "NOT_PERFORMED_BECAUSE_VERIFICATION_FAILED_BEFORE_INDEPENDENT_LIVE_READBACK; preserving canary state is required for reconsideration.",
+  "scope_note": "No external Astra parity or population-scale claim is made. Val Town and Sprites were not used by this verifier. Incremental spend was $0."
+}
