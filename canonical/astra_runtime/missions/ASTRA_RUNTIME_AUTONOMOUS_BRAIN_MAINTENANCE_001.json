@@ -62,5 +62,11 @@
     "diagnostic_commit": "1bb995a812ce3d9d918e2c31342d3c0b43b7544b",
     "purpose": "Preserve sanitized planner object once instead of guessing schema",
     "replay_authorized": true
+  },
+  "replay_after_root_cause_change_5": {
+    "prior_failure": "PLANNER_REASONED_CORRECTLY_BUT_EMITTED_EMPTY_TOOL_CALLS",
+    "repair_commit": "5b4c373dc7c4e60d0a6ec4b4cf91ea24c904c9e4",
+    "repair": "Force direct JSON text emission using previously proven constrained actions schema; explicitly forbid tool_calls mode",
+    "replay_authorized": true
   }
 }
