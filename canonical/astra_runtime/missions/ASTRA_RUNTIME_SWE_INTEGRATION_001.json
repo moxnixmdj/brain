@@ -14,7 +14,8 @@
       "command": "set -euo pipefail; git fetch --depth=1 origin astra-astropy-sip-native-20260920-v2; git show FETCH_HEAD:astra-evidence/astropy8992-candidate.patch > /tmp/astropy8992.patch; test \"$(sha256sum /tmp/astropy8992.patch | awk '{print $1}')\" = \"ab966e5a694ee8c2f6d64db813327535f68237e77be8ae6d15962199b0db0dd7\"",
       "verify": {
         "type": "returncode_zero"
-      }
+      },
+      "replay_on_resume": true
     },
     {
       "id": "materialize-fresh-upstream",
@@ -22,7 +23,8 @@
       "command": "set -euo pipefail; rm -rf /tmp/astra-runtime-astropy; git init /tmp/astra-runtime-astropy; git -C /tmp/astra-runtime-astropy remote add origin https://github.com/astropy/astropy.git; git -C /tmp/astra-runtime-astropy fetch --depth=1 origin 5d68e4fbce3b4dfe6f412b5b9b882166dee95761; git -C /tmp/astra-runtime-astropy checkout --detach FETCH_HEAD; test \"$(git -C /tmp/astra-runtime-astropy rev-parse HEAD)\" = \"5d68e4fbce3b4dfe6f412b5b9b882166dee95761\"",
       "verify": {
         "type": "returncode_zero"
-      }
+      },
+      "replay_on_resume": true
     },
     {
       "id": "install-upstream-test-runtime",
@@ -30,7 +32,8 @@
       "command": "set -euo pipefail; cd /tmp/astra-runtime-astropy; python -m pip install --disable-pip-version-check -e '.[test]'",
       "verify": {
         "type": "returncode_zero"
-      }
+      },
+      "replay_on_resume": true
     },
     {
       "id": "apply-preserved-repair",
@@ -49,7 +52,7 @@
       }
     }
   ],
-  "replay": 4,
+  "replay": 5,
   "invalidation": {
     "prior_run_id": 35686321365,
     "reason": "MISSION_HANDOFF_CONTAMINATION__RUN_EXECUTED_REALITY_AUDIT_INSTEAD_OF_SWE_MISSION",
@@ -64,6 +67,10 @@
     {
       "blocker": "PRESERVED_DIFF_IS_HUMAN_READABLE_BARE_HUNK_FORMAT_NOT_GIT_APPLY_INPUT",
       "repair": "REUSE_ORIGINAL_VERIFIED_SOURCE_ANCHOR_TRANSFORMATION"
+    },
+    {
+      "blocker": "DURABLE_CHECKPOINT_RESUMED_IN_FRESH_RUNNER_WITHOUT_EPHEMERAL_WORKSPACE",
+      "repair": "RUNTIME_REHYDRATES_EXPLICIT_EPHEMERAL_DEPENDENCY_STEPS_BEFORE_RESUME"
     }
   ]
 }
