@@ -1,8 +1,8 @@
 {
   "adapter": "goal",
-  "error": "Blocker:PLANNER_ACTION_MISSING",
+  "error": "Blocker:PLANNER_ACTION_MISSING_KEYS:reasoning,role,tool_calls",
   "mission_id": "ASTRA-RUNTIME-AUTONOMOUS-BRAIN-MAINTENANCE-001",
-  "observed_at_utc": "2026-09-22T04:57:01.096935+00:00",
+  "observed_at_utc": "2026-09-22T04:57:57.665299+00:00",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
   "step_id": "autonomously-resolve-maintenance-goal",
   "step_index": 0
