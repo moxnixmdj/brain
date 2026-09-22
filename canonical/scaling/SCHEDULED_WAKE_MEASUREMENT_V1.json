@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_SCHEDULED_WAKE_MEASUREMENT_V1",
+  "substrate": "WINDOWS_TASK_SCHEDULER_EXISTING_AUTHORIZED_PC",
+  "task_name": "ProjectBrainWakeV1",
+  "scheduler_period_seconds": 60,
+  "healthy_sample": {
+    "missions": [
+      "SW-WAKE-HEALTHY-A-20260922-001",
+      "SW-WAKE-HEALTHY-B-20260922-001"
+    ],
+    "activation_latency_s": [
+      33.92055535316467,
+      33.94642162322998
+    ],
+    "activation_latency_avg_s": 33.93348848819733,
+    "execution_wall_s": [
+      0.6156160831451416,
+      0.6139504909515381
+    ],
+    "execution_wall_avg_s": 0.6147832870483398,
+    "concurrent_launch": true,
+    "both_terminal_success": true,
+    "checkpoint_relaunch": true,
+    "dynamic_tool_rediscovery": true,
+    "unique_state": true
+  },
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "val_town_calls": 0,
+    "sprites_calls": 0,
+    "logon_mode": "INTERACTIVE_ONLY",
+    "battery_start_restricted": true
+  },
+  "conclusion": "WAKE_FUNCTIONAL__MINUTE_SCHEDULER_DOMINATES_LATENCY__LOCAL_PC_AVAILABILITY_REMAINS_LIMITATION",
+  "promotion_claim": false
+}
