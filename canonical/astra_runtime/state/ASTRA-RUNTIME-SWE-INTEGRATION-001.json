@@ -3,18 +3,18 @@
     "adapter": "shell",
     "error": "VERIFICATION_FAILED",
     "mission_id": "ASTRA-RUNTIME-SWE-INTEGRATION-001",
-    "observed_at_utc": "2026-09-22T04:20:09.635108+00:00",
+    "observed_at_utc": "2026-09-22T04:22:22.664929+00:00",
     "result": {
       "adapter": "shell",
-      "command": "set -euo pipefail; git fetch --depth=1 origin astra-astropy-sip-native-20260920-v2; git show FETCH_HEAD:astra-evidence/astropy8992-candidate.patch > /tmp/astropy8992.patch; test \"$(sha256sum /tmp/astropy8992.patch | awk '{print $1}')\" = \"ab966e5a694ee8c2f6d64db813327535f68237e77be8ae6d15962199b0db0dd7\"",
-      "duration_s": 0.001,
-      "returncode": 2,
-      "stderr": "/bin/sh: 1: set: Illegal option -o pipefail\n",
+      "command": "set -euo pipefail; cd /tmp/astra-runtime-astropy; git apply --check /tmp/astropy8992.patch; git apply /tmp/astropy8992.patch; git diff --check",
+      "duration_s": 0.003,
+      "returncode": 128,
+      "stderr": "error: patch with only garbage at /tmp/astropy8992.patch:4\n",
       "stdout": ""
     },
     "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
-    "step_id": "recover-preserved-capability",
-    "step_index": 0
+    "step_id": "apply-preserved-repair",
+    "step_index": 3
   },
   "created_at_utc": "2026-09-22T04:20:09.634162+00:00",
   "history": [
@@ -31,14 +31,70 @@
       },
       "step_id": "recover-preserved-capability",
       "step_index": 0
+    },
+    {
+      "completed_at_utc": "2026-09-22T04:20:59.419993+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail; git fetch --depth=1 origin astra-astropy-sip-native-20260920-v2; git show FETCH_HEAD:astra-evidence/astropy8992-candidate.patch > /tmp/astropy8992.patch; test \"$(sha256sum /tmp/astropy8992.patch | awk '{print $1}')\" = \"ab966e5a694ee8c2f6d64db813327535f68237e77be8ae6d15962199b0db0dd7\"",
+        "duration_s": 0.927,
+        "returncode": 0,
+        "stderr": "From https://github.com/moxnixmdj/brain\n * branch            astra-astropy-sip-native-20260920-v2 -> FETCH_HEAD\n * [new branch]      astra-astropy-sip-native-20260920-v2 -> origin/astra-astropy-sip-native-20260920-v2\n",
+        "stdout": ""
+      },
+      "step_id": "recover-preserved-capability",
+      "step_index": 0
+    },
+    {
+      "completed_at_utc": "2026-09-22T04:21:01.799287+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail; rm -rf /tmp/astra-runtime-astropy; git init /tmp/astra-runtime-astropy; git -C /tmp/astra-runtime-astropy remote add origin https://github.com/astropy/astropy.git; git -C /tmp/astra-runtime-astropy fetch --depth=1 origin 5d68e4fbce3b4dfe6f412b5b9b882166dee95761; git -C /tmp/astra-runtime-astropy checkout --detach FETCH_HEAD; test \"$(git -C /tmp/astra-runtime-astropy rev-parse HEAD)\" = \"5d68e4fbce3b4dfe6f412b5b9b882166dee95761\"",
+        "duration_s": 2.332,
+        "returncode": 0,
+        "stderr": "hint: Using 'master' as the name for the initial branch. This default branch name\nhint: will change to \"main\" in Git 3.0. To configure the initial branch name\nhint: to use in all of your new repositories, which will suppress this warning,\nhint: call:\nhint:\nhint: \tgit config --global init.defaultBranch <name>\nhint:\nhint: Names commonly chosen instead of 'master' are 'main', 'trunk' and\nhint: 'development'. The just-created branch can be renamed via this command:\nhint:\nhint: \tgit branch -m <name>\nhint:\nhint: Disable this message with \"git config set advice.defaultBranchName false\"\nFrom https://github.com/astropy/astropy\n * branch            5d68e4fbce3b4dfe6f412b5b9b882166dee95761 -> FETCH_HEAD\nHEAD is now at 5d68e4f Deprecate `find_api_page()` (#18448)\n",
+        "stdout": "Initialized empty Git repository in /tmp/astra-runtime-astropy/.git/\n"
+      },
+      "step_id": "materialize-fresh-upstream",
+      "step_index": 1
+    },
+    {
+      "completed_at_utc": "2026-09-22T04:22:22.661380+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail; cd /tmp/astra-runtime-astropy; python -m pip install --disable-pip-version-check -e '.[test]'",
+        "duration_s": 80.687,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "Obtaining file:///tmp/astra-runtime-astropy\n  Installing build dependencies: started\n  Installing build dependencies: finished with status 'done'\n  Checking if build backend supports build_editable: started\n  Checking if build backend supports build_editable: finished with status 'done'\n  Getting requirements to build editable: started\n  Getting requirements to build editable: finished with status 'done'\n  Preparing editable metadata (pyproject.toml): started\n  Preparing editable metadata (pyproject.toml): finished with status 'done'\nCollecting astropy-iers-data>=0.2026.7.27.0.56.29 (from astropy==0.1.dev1+g5d68e4fbc)\n  Downloading astropy_iers_data-0.2026.9.21.0.56.25-py3-none-any.whl.metadata (3.4 kB)\nCollecting numpy>=2.0 (from astropy==0.1.dev1+g5d68e4fbc)\n  Using cached numpy-2.5.3-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)\nCollecting packaging>=25.0 (from astropy==0.1.dev1+g5d68e4fbc)\n  Using cached packaging-26.3-py3-none-any.whl.metadata (3.5 kB)\nCollecting pyerfa>=2.0.1.3 (from astropy==0.1.dev1+g5d68e4fbc)\n  Using cached pyerfa-2.0.1.5-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.7 kB)\nCollecting PyYAML>=6.0.1 (from astropy==0.1.dev1+g5d68e4fbc)\n  Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)\nCollecting setuptools>=77.0.0 (from astropy==0.1.dev1+g5d68e4fbc)\n  Using cached setuptools-84.0.0-py3-none-any.whl.metadata (6.6 kB)\nCollecting coverage>=7.2.7 (from astropy==0.1.dev1+g5d68e4fbc)\n  Downloading coverage-7.16.1-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (8.2 kB)\nCollecting hypothesis>=6.84.0 (from astropy==0.1.dev1+g5d68e4fbc)\n  Downloading hypothesis-6.168.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.7 kB)\nCollecting pytest>=8.0.1 (from astropy==0.1.dev1+g5d68e4fbc)\n  Downloading pytest-9.1.1-py3-none-any.whl.metadata (7.6 kB)\nCollecting pytest-astropy-header>=0.2.2 (from astropy==0.1.dev1+g5d68e4fbc)\n  Downloading pytest_astropy_header-0.2.2-py3-none-any.whl.metadata (8.5 kB)\nCollecting pytest-cov>=2.3.1 (from astropy==0.1.dev1+g5d68e4fbc)\n  Downloading pytest_cov-7.1.0-py3-none-any.whl.metadata (32 kB)\nCollecting pytest-doctestplus>=1.4.0 (from astropy==0.1.dev1+g5d68e4fbc)\n  Downloading pytest_doctestplus-1.7.1-py3-none-any.whl.metadata (17 kB)\nCollecting pytest-filter-subpackage>=0.2.0 (from astropy==0.1.dev1+g5d68e4fbc)\n  Downloading pytest_filter_subpackage-0.2.0-py2.py3-none-any.whl.metadata (2.8 kB)\nCollecting pytest-remotedata>=0.4.1 (from astropy==0.1.dev1+g5d68e4fbc)\n  Downloading pytest_remotedata-0.4.2-py3-none-any.whl.metadata (5.6 kB)\nCollecting pytest-run-parallel>=0.10.0 (from astropy==0.1.dev1+g5d68e4fbc)\n  Downloading pytest_run_parallel-0.10.0-py3-none-any.whl.metadata (17 kB)\nCollecting pytest-skip-slow==1.1.0 (from astropy==0.1.dev1+g5d68e4fbc)\n  Downloading pytest_skip_slow-1.1.0-py3-none-any.whl.metadata (2.1 kB)\nCollecting pytest-xdist>=3.6.0 (from astropy==0.1.dev1+g5d68e4fbc)\n  Downloading pytest_xdist-3.8.0-py3-none-any.whl.metadata (3.0 kB)\nCollecting threadpoolctl>=3.0.0 (from astropy==0.1.dev1+g5d68e4fbc)\n  Downloading threadpoolctl-3.7.0-py3-none-any.whl.metadata (24 kB)\nCollecting sortedcontainers<3.0.0,>=2.1.0 (from hypothesis>=6.84.0->astropy==0.1.dev1+g5d68e4fbc)\n  Downloading sortedcontainers-2.4.0-py2.py3-none-any.whl.metadata (10 kB)\nCollecting iniconfig>=1.0.1 (from pytest>=8.0.1->astropy==0.1.dev1+g5d68e4fbc)\n  Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)\nCollecting pluggy<2,>=1.5 (from pytest>=8.0.1->astropy==0.1.dev1+g5d68e4fbc)\n  Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)\nCollecting pygments>=2.7.2 (from pytest>=8.0.1->astropy==0.1.dev1+g5d68e4fbc)\n  Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)\nCollecting execnet>=2.1 (from pytest-xdist>=3.6.0->astropy==0.1.dev1+g5d68e4fbc)\n  Downloading execnet-2.1.2-py3-none-any.whl.metadata (2.9 kB)\nDownloading pytest_skip_slow-1.1.0-py3-none-any.whl (3.1 kB)\nDownloading astropy_iers_data-0.2026.9.21.0.56.25-py3-none-any.whl (2.0 MB)\n   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 2.0/2.0 MB 6.4 MB/s  0:00:00\nDownloading coverage-7.16.1-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (258 kB)\nDownloading hypothesis-6.168.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.2 MB)\n   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 1.2/1.2 MB 4.6 MB/s  0:00:00\nDownloading sortedcontainers-2.4.0-py2.py3-none-any.whl (29 kB)\nUsing cached numpy-2.5.3-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.7 MB)\nUsing cached packaging-26.3-py3-none-any.whl (129 kB)\nUsing cached pyerfa-2.0.1.5-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (738 kB)\nDownloading pytest-9.1.1-py3-none-any.whl (386 kB)\nDownloading pluggy-1.6.0-py3-none-any.whl (20 kB)\nDownloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)\nDownloading pygments-2.21.0-py3-none-any.whl (1.3 MB)\n   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 1.3/1.3 MB 69.1 MB/s  0:00:00\nDownloading pytest_astropy_header-0.2.2-py3-none-any.whl (7.8 kB)\nDownloading pytest_cov-7.1.0-py3-none-any.whl (22 kB)\nDownloading pytest_doctestplus-1.7.1-py3-none-any.whl (25 kB)\nDownloading pytest_filter_subpackage-0.2.0-py2.py3-none-any.whl (5.5 kB)\nDownloading pytest_remotedata-0.4.2-py3-none-any.whl (8.7 kB)\nDownloading pytest_run_parallel-0.10.0-py3-none-any.whl (19 kB)\nDownloading pytest_xdist-3.8.0-py3-none-any.whl (46 kB)\nDownloading execnet-2.1.2-py3-none-any.whl (40 kB)\nDownloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)\n   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 807.9/807.9 kB 111.7 MB/s  0:00:00\nUsing cached setuptools-84.0.0-py3-none-any.whl (818 kB)\nDownloading threadpoolctl-3.7.0-py3-none-any.whl (26 kB)\nBuilding wheels for collected packages: astropy\n  Building editable for astropy (pyproject.toml): started\n  Building editable for astropy (pyproject.toml): still running...\n  Building editable for astropy (pyproject.toml): finished with status 'done'\n  Created wheel for astropy: filename=astropy-0.1.dev1+g5d68e4fbc-0.editable-cp312-cp312-linux_x86_64.whl size=27808 sha256=cc661271129174cc94b2609af6ebac00fc87d3dd4ebd4fe4b90822e87dde7393\n  Stored in directory: /tmp/pip-ephem-wheel-cache-2f4hhc7v/wheels/fd/4e/03/73b35f6b054e6f4e09fff037b6c96d26cfe036968b34811f3b\nSuccessfully built astropy\nInstalling collected packages: sortedcontainers, threadpoolctl, setuptools, PyYAML, pygments, pluggy, packaging, numpy, iniconfig, hypothesis, execnet, coverage, astropy-iers-data, pytest, pyerfa, pytest-xdist, pytest-skip-slow, pytest-run-parallel, pytest-remotedata, pytest-filter-subpackage, pytest-doctestplus, pytest-cov, pytest-astropy-header, astropy\n\nSuccessfully installed PyYAML-6.0.3 astropy-0.1.dev1+g5d68e4fbc astropy-iers-data-0.2026.9.21.0.56.25 coverage-7.16.1 execnet-2.1.2 hypothesis-6.168.0 iniconfig-2.3.0 numpy-2.5.3 packaging-26.3 pluggy-1.6.0 pyerfa-2.0.1.5 pygments-2.21.0 pytest-9.1.1 pytest-astropy-header-0.2.2 pytest-cov-7.1.0 pytest-doctestplus-1.7.1 pytest-filter-subpackage-0.2.0 pytest-remotedata-0.4.2 pytest-run-parallel-0.10.0 pytest-skip-slow-1.1.0 pytest-xdist-3.8.0 setuptools-84.0.0 sortedcontainers-2.4.0 threadpoolctl-3.7.0\n"
+      },
+      "step_id": "install-upstream-test-runtime",
+      "step_index": 2
+    },
+    {
+      "completed_at_utc": "2026-09-22T04:22:22.664921+00:00",
+      "ok": false,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail; cd /tmp/astra-runtime-astropy; git apply --check /tmp/astropy8992.patch; git apply /tmp/astropy8992.patch; git diff --check",
+        "duration_s": 0.003,
+        "returncode": 128,
+        "stderr": "error: patch with only garbage at /tmp/astropy8992.patch:4\n",
+        "stdout": ""
+      },
+      "step_id": "apply-preserved-repair",
+      "step_index": 3
     }
   ],
   "mission_id": "ASTRA-RUNTIME-SWE-INTEGRATION-001",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_SWE_INTEGRATION_001.json",
-  "mission_sha256": "a66828f616f8ab693380cfba8b00ea39da70fd0fc6dc0e10cbab4a8f51780bed",
-  "next_step": 0,
+  "mission_sha256": "ae33331443a7afe93d5cadc1596f09bfe82cbb89ed22a25333fe889f38ef1614",
+  "next_step": 3,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
   "status": "BLOCKED",
-  "updated_at_utc": "2026-09-22T04:20:09.635267+00:00"
+  "updated_at_utc": "2026-09-22T04:22:22.665153+00:00"
 }

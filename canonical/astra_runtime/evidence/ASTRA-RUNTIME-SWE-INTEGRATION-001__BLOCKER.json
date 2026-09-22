@@ -2,16 +2,16 @@
   "adapter": "shell",
   "error": "VERIFICATION_FAILED",
   "mission_id": "ASTRA-RUNTIME-SWE-INTEGRATION-001",
-  "observed_at_utc": "2026-09-22T04:20:09.635108+00:00",
+  "observed_at_utc": "2026-09-22T04:22:22.664929+00:00",
   "result": {
     "adapter": "shell",
-    "command": "set -euo pipefail; git fetch --depth=1 origin astra-astropy-sip-native-20260920-v2; git show FETCH_HEAD:astra-evidence/astropy8992-candidate.patch > /tmp/astropy8992.patch; test \"$(sha256sum /tmp/astropy8992.patch | awk '{print $1}')\" = \"ab966e5a694ee8c2f6d64db813327535f68237e77be8ae6d15962199b0db0dd7\"",
-    "duration_s": 0.001,
-    "returncode": 2,
-    "stderr": "/bin/sh: 1: set: Illegal option -o pipefail\n",
+    "command": "set -euo pipefail; cd /tmp/astra-runtime-astropy; git apply --check /tmp/astropy8992.patch; git apply /tmp/astropy8992.patch; git diff --check",
+    "duration_s": 0.003,
+    "returncode": 128,
+    "stderr": "error: patch with only garbage at /tmp/astropy8992.patch:4\n",
     "stdout": ""
   },
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
-  "step_id": "recover-preserved-capability",
-  "step_index": 0
+  "step_id": "apply-preserved-repair",
+  "step_index": 3
 }
