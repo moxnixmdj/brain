@@ -1,0 +1,16 @@
+{
+  "schema": "PROJECT_BRAIN_TWO_WORKER_SCALING_WOLFRAM_ADJUDICATION_V1",
+  "verifier_id": "WOLFRAM-REMOTE-KERNEL-20260922-SCALING-2-V1",
+  "trust_executor_summary": false,
+  "checks": {
+    "TWO_WORKER_CONCURRENCY_FUNCTIONAL": true,
+    "NO_STATE_CONTENTION_OBSERVED": true,
+    "USEFUL_PARALLEL_SPEEDUP_OBSERVED": true,
+    "CONTROLLER_LAYER_NOT_BINDING_AT_TWO": true,
+    "HARD_ZERO_INCREMENTAL_SPEND": true,
+    "ACTIVATION_WAKE_REMAINS_UNBOUND": true
+  },
+  "all_checks_pass": true,
+  "binding_bottleneck": "CONTINUOUS_AUTONOMOUS_ACTIVATION_WAKE_CAPACITY",
+  "next_action": "Bind the smallest hard-zero-cost autonomous wake mechanism to the existing qualified controller, then measure 2->4 real active capacity without changing cognition or state architecture."
+}
