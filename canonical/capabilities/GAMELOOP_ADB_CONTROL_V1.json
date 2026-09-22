@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_INHERITED_CAPABILITY_V1",
+  "capability_id": "GAMELOOP_ADB_CONTROL_V1",
+  "status": "PROVEN_REUSABLE",
+  "observed_on_utc_date": "2026-09-22",
+  "device": "Mo",
+  "target": "GameLoop VM 100",
+  "provider": "GameLoop bundled adb.exe",
+  "incremental_spend_usd": 0,
+  "prerequisites": [
+    "GameLoop installed under C:\\\\Program Files\\\\TxGameAssistant",
+    "Authorized Windows access",
+    "HKCU\\\\SOFTWARE\\\\Tencent\\\\MobileGamePC writable"
+  ],
+  "invocation_contract": {
+    "enable": "Set AdbDisable DWORD to 0, then restart VM 100.",
+    "verify_listener": "TCP 5555 must be listening locally.",
+    "recover_daemon": "If adb reports 'server didn't ACK', kill only stale adb.exe clients, start bundled adb server, then reconnect.",
+    "connect": "C:\\\\Program Files\\\\TxGameAssistant\\\\ui\\\\adb.exe connect 127.0.0.1",
+    "expected_device": "127.0.0.1:5555 and/or emulator-5554"
+  },
+  "proven_operations": [
+    "root shell",
+    "getprop",
+    "dumpsys package",
+    "logcat",
+    "am force-stop/start",
+    "pid/process inspection",
+    "screencap",
+    "pull files from guest"
+  ],
+  "known_failure_modes": [
+    "GameLoop ADB client may double-append :5555 if passed host:port in some states; host-only connect works when listener is present.",
+    "Stale adb.exe client can wedge daemon startup; terminate stale adb clients and restart server.",
+    "Listener can disappear when VM is restarted; verify before connecting."
+  ],
+  "evidence_path": "canonical/evidence/END_TO_END_COMPUTER_WORK_GAMELOOP_20260922.json",
+  "safety_scope": "General emulator administration/diagnostics only. Does not authorize bypassing app integrity, anti-cheat, DRM, or security controls."
+}
