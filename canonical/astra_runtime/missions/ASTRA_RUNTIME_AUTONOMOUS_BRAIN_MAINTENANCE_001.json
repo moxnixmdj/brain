@@ -56,5 +56,11 @@
     "repair_commit": "84c199f68e76b74c866e5e2accf48eb207b679e8",
     "repair": "Normalize standard tool_calls into existing typed action schema; execution remains runtime-controlled and allowlisted",
     "replay_authorized": true
+  },
+  "replay_for_planner_envelope_diagnosis": {
+    "prior_failure": "UNRECOGNIZED_TOOL_CALL_ENVELOPE",
+    "diagnostic_commit": "1bb995a812ce3d9d918e2c31342d3c0b43b7544b",
+    "purpose": "Preserve sanitized planner object once instead of guessing schema",
+    "replay_authorized": true
   }
 }
