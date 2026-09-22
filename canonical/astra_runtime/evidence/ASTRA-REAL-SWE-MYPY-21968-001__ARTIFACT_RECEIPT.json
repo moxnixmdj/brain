@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_PROFESSIONAL_ARTIFACT_RENDER_RECEIPT_V1",
+  "mission_id": "ASTRA-REAL-SWE-MYPY-21968-001",
+  "artifact_path": "canonical/astra_runtime/artifacts/MYPY_21968_ENGINEERING_NOTE.html",
+  "source_basis": [
+    "PEP 634 structural pattern matching specification",
+    "Python 3.14 language reference match statement"
+  ],
+  "reasoning_check": "The repair partitions the complement by the first failed fixed-sequence subpattern, matching Python's specified left-to-right, stop-on-first-failure sequence semantics.",
+  "renderer": "Google Chrome headless",
+  "local_render": {
+    "screenshot_path": "C:\\Temp\\brain-missions\\mypy-21968\\MYPY_21968_ENGINEERING_NOTE.png",
+    "screenshot_sha256": "429578C3769636549BCDEBD200D3A223EDCF86D02793BB8A88466639E00E4C5F",
+    "screenshot_bytes": 105457,
+    "dimensions": "1200x1600",
+    "rgb_stddev": [
+      32.84,
+      31.11,
+      29.18
+    ],
+    "rgb_extrema": [
+      [
+        21,
+        255
+      ],
+      [
+        41,
+        255
+      ],
+      [
+        55,
+        255
+      ]
+    ],
+    "nonblank_render_verified": true
+  },
+  "verification": {
+    "exact_issue_reproduction": "PASS",
+    "targeted_regression": "1 passed",
+    "exhaustive_match_subset": "10 passed",
+    "broad_match_subset": "261 passed, 1 skipped",
+    "git_diff_check": "PASS"
+  },
+  "external_publication": false,
+  "incremental_spend_usd": 0,
+  "val_town_used": false,
+  "sprites_used": false
+}
