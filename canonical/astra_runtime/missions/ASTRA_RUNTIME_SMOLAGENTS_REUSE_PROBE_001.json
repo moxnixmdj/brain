@@ -11,7 +11,8 @@
       "command": "set -euo pipefail; python -m pip install --disable-pip-version-check -q 'smolagents>=1.20,<3'",
       "verify": {
         "type": "returncode_zero"
-      }
+      },
+      "replay_on_resume": true
     },
     {
       "id": "prove-multistep-model-tool-loop",
@@ -26,6 +27,11 @@
   "replay_after_root_cause_change": {
     "prior_failure": "SMOLAGENTS_TOOL_DECORATOR_INSPECT_GETSOURCE_STDIN",
     "repair": "Run the exact probe from a real Python file so smolagents can inspect tool source; no agent logic changed",
+    "replay_authorized": true
+  },
+  "replay_after_root_cause_change_2": {
+    "prior_failure": "SMOLAGENTS_MODULE_LOST_ON_FRESH_RUNNER_RESUME",
+    "repair": "Rehydrate the ephemeral smolagents dependency before resuming the cognitive tool-loop step on a fresh runner",
     "replay_authorized": true
   }
 }
