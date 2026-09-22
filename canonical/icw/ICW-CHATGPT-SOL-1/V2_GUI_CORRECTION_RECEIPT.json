@@ -1,0 +1,23 @@
+{
+  "schema": "PROJECT_BRAIN_ICW_V2_GUI_CORRECTION_RECEIPT_V1",
+  "worker_identity": "ICW-CHATGPT-SOL-1",
+  "mission_id": "ICW-PROMOTION-CLOSURE-V2-20260922",
+  "first_attempt": {
+    "result": "FAIL",
+    "observed_text": "I-HG-OL",
+    "reason": "System.Windows.Forms.SendKeys interpreted token metacharacters instead of entering the literal token.",
+    "screenshot_sha256": "0398a1d4c7211bbfea0b01c37a0eecd0fd97e01b596ccfb9239586e61a6f2035"
+  },
+  "diagnosis": {
+    "document_control_class": "RichEditD2DPT",
+    "native_window_handle": "5703960",
+    "ui_automation_patterns": [
+      "TextPattern",
+      "ValuePattern"
+    ]
+  },
+  "repair": "Use Win32 WM_SETTEXT against the uniquely bound RichEditD2DPT document handle, then verify in a separate process using UIAutomation TextPattern.",
+  "repaired_result": "PASS",
+  "raw_action_path": "canonical/icw/ICW-CHATGPT-SOL-1/V2_GUI_ACTION_RAW.json",
+  "raw_readback_path": "canonical/icw/ICW-CHATGPT-SOL-1/V2_GUI_UIAUTOMATION_RAW.json"
+}
