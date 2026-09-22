@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_ICW_PROMOTION_CLOSURE_CHECKPOINT_V2",
+  "worker_identity": "ICW-CHATGPT-SOL-1",
+  "mission_id": "ICW-PROMOTION-CLOSURE-V2-20260922",
+  "frozen_mission_path": "canonical/icw/ICW-CHATGPT-SOL-1/PROMOTION_CLOSURE_MISSION_V2.json",
+  "frozen_mission_commit": "7effcaa03a36a64e411da9979f0e06064aa14512",
+  "state": "GUI_EFFECT_CORRECTED_AND_PRIMARY_EVIDENCE_CANONICAL__AUTONOMOUS_RESUME_PENDING",
+  "completed_after_mission_freeze": [
+    "fresh-read independent rejection",
+    "executed first isolated GUI canary attempt",
+    "observed and preserved genuine failed literal-input attempt",
+    "diagnosed RichEditD2DPT control and literal input defect",
+    "repaired actuation using Win32 WM_SETTEXT on exact document handle",
+    "verified exact live effect in a separate process via Windows UIAutomation TextPattern",
+    "preserved raw action and raw readback artifacts canonically"
+  ],
+  "evidence": {
+    "raw_action_path": "canonical/icw/ICW-CHATGPT-SOL-1/V2_GUI_ACTION_RAW.json",
+    "raw_action_commit": "1fbb6d3941ffe4e08674b14bca0e3269b3558042",
+    "raw_uia_path": "canonical/icw/ICW-CHATGPT-SOL-1/V2_GUI_UIAUTOMATION_RAW.json",
+    "raw_uia_commit": "96c0ff12f3f2dc70559f838e800706061a8e9165",
+    "correction_path": "canonical/icw/ICW-CHATGPT-SOL-1/V2_GUI_CORRECTION_RECEIPT.json",
+    "correction_commit": "5f8cc79088d0cae141eb3f5bca0c26525e26678b",
+    "live_window_title": "icw_v2_gui_canary.txt - Notepad",
+    "exact_token": "ICW-CHATGPT-SOL-1|ICW-PROMOTION-CLOSURE-V2-20260922|GUI-EFFECT",
+    "screenshot_sha256": "f8ce438ffe944a6834a4c2cd42f1888ac83b010b3131a26f0bb37c7d6423b6b8"
+  },
+  "live_state_rule": "Do not close or mutate the canary window before the fresh independent verifier has attempted live readback.",
+  "remaining": [
+    "platform-native autonomous resume without a new user prompt from this exact checkpoint",
+    "fresh independent verifier live-inspects the GUI state and adjudicates V2 plus the whole integrated worker definition"
+  ],
+  "self_promotion_forbidden": true,
+  "p_real": 0
+}
