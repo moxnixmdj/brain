@@ -24,5 +24,11 @@
         "path": "canonical/astra_runtime/evidence/research_artifact_001.html"
       }
     }
-  ]
+  ],
+  "replay_after_root_cause_change": {
+    "prior_failure": "CROSS_STEP_EVIDENCE_NOT_EXPOSED",
+    "repair_commit": "c9f33b6c521f396f76cab1fe24a768b383c490f2",
+    "repair": "Expose prior step results to later shell steps and decode gzip HTTP bodies",
+    "replay_authorized": true
+  }
 }
