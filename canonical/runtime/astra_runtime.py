@@ -23,7 +23,7 @@ class Blocker(RuntimeError):
 def run_shell(step):
     cmd=step["command"]
     t=time.monotonic()
-    p=subprocess.run(cmd,shell=True,cwd=ROOT,text=True,capture_output=True)
+    p=subprocess.run(cmd,shell=True,executable="/bin/bash",cwd=ROOT,text=True,capture_output=True)
     return {
       "adapter":"shell","command":cmd,"returncode":p.returncode,
       "stdout":p.stdout[-12000:],"stderr":p.stderr[-12000:],
