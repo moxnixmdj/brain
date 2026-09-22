@@ -1,9 +1,9 @@
 {
   "blocker": {
     "adapter": "goal",
-    "error": "TimeoutError:The read operation timed out",
+    "error": "Blocker:PLANNER_ACTION_REJECTED:commentary",
     "mission_id": "ASTRA-RUNTIME-AUTONOMOUS-BRAIN-MAINTENANCE-001",
-    "observed_at_utc": "2026-09-22T05:06:01.897870+00:00",
+    "observed_at_utc": "2026-09-22T05:11:56.931917+00:00",
     "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
     "step_id": "autonomously-resolve-maintenance-goal",
     "step_index": 0
@@ -12,10 +12,10 @@
   "history": [],
   "mission_id": "ASTRA-RUNTIME-AUTONOMOUS-BRAIN-MAINTENANCE-001",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_AUTONOMOUS_BRAIN_MAINTENANCE_001.json",
-  "mission_sha256": "c7fda91e2f6a9455c8beb9619d48316d8bc50011f0970d9e8a34f33f47053395",
+  "mission_sha256": "883c6a2c97f3aab95706351ef79be70d3518c1ac7dac1e0db7934bd7dd87789b",
   "next_step": 0,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
   "status": "BLOCKED",
-  "updated_at_utc": "2026-09-22T05:06:01.898225+00:00"
+  "updated_at_utc": "2026-09-22T05:11:56.932266+00:00"
 }
