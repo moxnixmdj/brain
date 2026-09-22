@@ -196,7 +196,14 @@ def run_goal(step, mission):
             diag=json.dumps(obj,sort_keys=True)[:2200].replace("\n"," ")
             raise Blocker("PLANNER_ACTION_MISSING_OBJECT:"+diag)
         typ=action.get("type")
-        if typ not in {"read_file","list_tree","search_text","http_get","finish"}:
+        allowed_types={"read_file","list_tree","search_text","http_get","finish"}
+        if isinstance(typ,str) and "." in typ:
+            suffix=typ.rsplit(".",1)[-1]
+            if suffix in allowed_types:
+                typ=suffix
+                action=dict(action)
+                action["type"]=suffix
+        if typ not in allowed_types:
             raise Blocker("PLANNER_ACTION_REJECTED:"+str(typ))
         if not isinstance(action.get("args"),dict): raise Blocker("PLANNER_ARGS_INVALID")
         result=_goal_action(action)
