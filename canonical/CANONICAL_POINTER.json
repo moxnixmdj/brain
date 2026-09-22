@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_POINTER_V1",
-  "canonical_generation": "2026-09-22-astra-closure-race-restored",
+  "canonical_generation": "2026-09-22-astra-shared-runtime-portfolio-restored",
   "control_plane": {
     "provider": "GitHub",
     "repository": "moxnixmdj/brain",
@@ -28,7 +28,8 @@
     "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
     "canonical/laws/CAPABILITY_REALIZATION_MISSION_LOCK_V1.md",
     "canonical/laws/CAPABILITY_ARBITRAGE_RUNTIME_STRATEGY_V1.md",
-    "canonical/laws/ASTRA_CLOSURE_RACE_STRATEGY_V1.md"
+    "canonical/laws/ASTRA_CLOSURE_RACE_STRATEGY_V1.md",
+    "canonical/laws/ASTRA_SHARED_RUNTIME_PORTFOLIO_V1.md"
   ],
   "boot_requirements": {
     "read_mandatory_laws_before_execution": true,
@@ -64,7 +65,9 @@
     "inherit_verified_capability_gains": true,
     "exhaust_existing_solution_space_before_invention": true,
     "astra_closure_race_strategy_required": true,
-    "astra_closure_race_strategy_path": "canonical/laws/ASTRA_CLOSURE_RACE_STRATEGY_V1.md"
+    "astra_closure_race_strategy_path": "canonical/laws/ASTRA_CLOSURE_RACE_STRATEGY_V1.md",
+    "astra_shared_runtime_portfolio_required": true,
+    "astra_shared_runtime_portfolio_path": "canonical/laws/ASTRA_SHARED_RUNTIME_PORTFOLIO_V1.md"
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
@@ -118,11 +121,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 0,
-    "next_step": "RECONSTRUCT_CLOSURE_RECORDS_FOR_ALL_REQUIRED_CAPABILITY_FAMILIES__ESTIMATE_CREDIBLE_T_I__IDENTIFY_MAX_T_BOTTLENECK__LAUNCH_PARALLEL_REUSE_COMPOSITION_ADAPTATION_RACES__INTEGRATE_WINNERS_IMMEDIATELY__RUN_REAL_MISSION_PRESSURE__EXPAND_REAL_ZERO_COST_WORKER_CAPACITY_IN_PARALLEL",
+    "next_step": "RECONSTRUCT_CURRENT_SHARED_ASTRA_RUNTIME__CHOOSE_SMALLEST_ORTHOGONAL_REAL_MISSION_PORTFOLIO_BY_CAPABILITY_EXPOSURE_PER_WALL_CLOCK_TIME__RUN_PORTFOLIO_CONCURRENTLY__FREEZE_EXACT_OBSERVED_BLOCKERS__LAUNCH_MAXIMUM_USEFUL_LOCAL_ACQUISITION_SWARMS__INTEGRATE_VERIFIED_WINNERS_GLOBALLY__REPLAY_AND_RESUME",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "CURRENT_CAPABILITY_FAMILY_CLOSURE_TIMES_AND_MAX_T_BOTTLENECK_NOT_RECONCILED_FROM_LIVE_EVIDENCE",
+    "critical_blocker": "CURRENT_MINIMAL_ORTHOGONAL_MISSION_PORTFOLIO_AND_SHARED_RUNTIME_STATE_NOT_RECONCILED_FROM_LIVE_EVIDENCE",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -217,10 +220,12 @@
       "INHERIT"
     ],
     "worker_packaging": "DEFERRED_UNTIL_SHARED_RUNTIME_CAPABILITY_IS_STRONG",
-    "program": "ASTRA_CLOSURE_RACE",
+    "program": "ASTRA_SHARED_RUNTIME_PORTFOLIO",
     "optimization_target": "MIN_MAX_T_I_AND_T_INTEGRATION",
-    "worker_role": "MASSIVE_PROCUREMENT_INTEGRATION_FALSIFICATION_WORKFORCE",
-    "capacity_expansion": "PARALLEL_NOT_PREREQUISITE"
+    "worker_role": "WIDTH_BENEATH_OBSERVED_BLOCKERS",
+    "capacity_expansion": "PARALLEL_NOT_PREREQUISITE",
+    "closure_race_role": "SUBORDINATE_LOCAL_BLOCKER_MECHANISM",
+    "qualification_status": "OFF_CRITICAL_PATH_UNTIL_OPERATIONAL_PORTFOLIO_CLOSURE"
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
@@ -244,15 +249,15 @@
     "infrastructure_freeze_when_next_real_mission_executable": true,
     "forbid_relabeling_bounded_executor_as_superworker": true,
     "only_current_allowed_frontier_actions": [
-      "reconstruct one live closure record per required Astra capability family",
-      "estimate credible wall clock closure time per family and integration",
-      "allocate useful workers to minimize the latest finishing family",
-      "race direct reuse composition adaptation and invention only if needed",
-      "integrate each verified winner immediately into ASTRA_RUNTIME",
-      "run consequential cross domain missions continuously to expose composition failures",
-      "launch JIT acquisition races for exact observed residual failures",
-      "expand legitimate zero cost worker and inference capacity in parallel",
-      "inherit every verified discovery population wide"
+      "reconstruct current shared ASTRA_RUNTIME from valid existing capability components",
+      "select the smallest orthogonal real mission portfolio maximizing capability and interaction exposure per wall clock time",
+      "run portfolio missions concurrently against the same runtime",
+      "freeze exact observed blockers and attack only those blockers with maximum useful parallelism",
+      "race reuse composition adaptation and invention only beneath a real blocker",
+      "integrate independently verified winning repairs globally into the shared runtime",
+      "replay failed actions and resume missions immediately",
+      "expand legitimate zero cost execution capacity only as a parallel multiplier",
+      "defer formal qualification until the operational portfolio closes"
     ],
     "truth_first_law": "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
     "live_canonical_refresh_before_consequential_action": true,
@@ -284,8 +289,9 @@
     "infrastructure_is_not_progress_unless_it_removes_a_current_capability_blocker": true,
     "pre_action_capability_question": "Does this action directly make a target Astra capability more real, stronger, broader, more reliable, more autonomous, or remove the current blocker to doing so?",
     "capability_arbitrage_strategy": "canonical/laws/CAPABILITY_ARBITRAGE_RUNTIME_STRATEGY_V1.md",
-    "optimization_target": "MINIMIZE_MAX_TIME_TO_ALL_REQUIRED_CAPABILITY_FAMILIES_AND_INTEGRATION",
-    "astra_closure_race_strategy": "canonical/laws/ASTRA_CLOSURE_RACE_STRATEGY_V1.md"
+    "optimization_target": "MINIMIZE_TIME_UNTIL_ALL_TARGET_CAPABILITIES_WORK_TOGETHER_IN_ONE_SHARED_RUNTIME",
+    "astra_closure_race_strategy": "canonical/laws/ASTRA_CLOSURE_RACE_STRATEGY_V1.md",
+    "astra_shared_runtime_portfolio": "canonical/laws/ASTRA_SHARED_RUNTIME_PORTFOLIO_V1.md"
   },
   "standby_runtime": {
     "runtime_id": "SUPERHERO-RUNTIME-2.6.0-DIRECT-SIGNED-PERMANENT",
@@ -305,8 +311,8 @@
     "benchmarks_role": "SUBORDINATE_DIAGNOSTIC_ONLY",
     "infrastructure_role": "ONLY_IF_CAUSALLY_REQUIRED_TO_REALIZE_OR_OPERATE_CAPABILITY",
     "priority": "CORRECT_ROUTE_FIRST__THEN_MINIMUM_WALL_CLOCK_TIME_TO_REAL_VERIFIED_CAPABILITY",
-    "method": "ASTRA_CLOSURE_RACE__PARALLEL_FAMILY_CLOSURE__CONTINUOUS_INTEGRATION__JIT_REPAIR",
-    "optimization_target": "MINIMIZE_MAX_TIME_TO_ALL_REQUIRED_CAPABILITIES_AND_INTEGRATION"
+    "method": "ONE_SHARED_ASTRA_RUNTIME__MINIMAL_ORTHOGONAL_MISSION_PORTFOLIO__BLOCKER_LOCAL_SWARMS__GLOBAL_INHERITANCE",
+    "optimization_target": "MINIMIZE_TIME_UNTIL_ALL_TARGET_CAPABILITIES_WORK_TOGETHER_IN_ONE_RUNTIME"
   },
   "active_persistent_controllers": [
     {
