@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_TARGET_CAPABILITY_RECONCILIATION_V1",
-  "status": "CANONICAL_CAPABILITY_REALITY_RECONCILIATION",
+  "status": "CANONICAL_COMPONENT_REALITY_RECONCILIATION__TOP_LEVEL_FRONTIER_SUPERSEDED",
   "terminal_objective": "MAKE_ACTUAL_TARGET_CAPABILITIES_DEMONSTRATED_BY_ASTRA_REAL_IN_OUR_OWN_SYSTEM",
   "target_capability_families": [
     {
@@ -77,5 +77,12 @@
     ],
     "reason": "Meaningful general capability breadth is mandatory and independently unproven; external breadth entry audit is 0/3."
   },
-  "next_action": "FIND_OR_REUSE_STRICT_ZERO_COST_PROGRAMMABLE_GENERAL_REASONING_ROUTE_ALREADY_AUTHORIZED__INTEGRATE_AS_CONTROLLER_COGNITION_PROVIDER__THEN_EXECUTE_ONE_FRESH_NOVEL_TASK_REQUIRING_REASONING_AND_GENERIC_TOOL_SELECTION"
+  "next_action": "FIND_OR_REUSE_STRICT_ZERO_COST_PROGRAMMABLE_GENERAL_REASONING_ROUTE_ALREADY_AUTHORIZED__INTEGRATE_AS_CONTROLLER_COGNITION_PROVIDER__THEN_EXECUTE_ONE_FRESH_NOVEL_TASK_REQUIRING_REASONING_AND_GENERIC_TOOL_SELECTION",
+  "top_level_frontier_superseded_by": {
+    "commit": "71a4c714a8528f839699a2d81c7b66c96096f6ab",
+    "law": "canonical/laws/ASTRA_SHARED_RUNTIME_PORTFOLIO_V1.md",
+    "note": "This file remains authoritative for the component capability observations recorded here, but its highest_leverage_gap and next_action no longer define the top-level execution frontier."
+  },
+  "highest_leverage_gap_scope": "HISTORICAL_COMPONENT_LEVEL_DIAGNOSIS_NOT_CURRENT_TOP_LEVEL_FRONTIER",
+  "next_action_scope": "HISTORICAL_COMPONENT_LEVEL_NEXT_ACTION_NOT_CURRENT_TOP_LEVEL_FRONTIER"
 }
