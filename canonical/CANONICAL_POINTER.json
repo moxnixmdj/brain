@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_POINTER_V1",
-  "canonical_generation": "2026-09-22-icw-auditor-mission-complete-checkpointed",
+  "canonical_generation": "2026-09-22-parallel-capability-realization",
   "control_plane": {
     "provider": "GitHub",
     "repository": "moxnixmdj/brain",
@@ -110,11 +110,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 0,
-    "next_step": "ON_NEXT_REAL_CONTEXT_OR_SESSION_BOUNDARY__ICW_CHATGPT_SOL_1_READ_CHECKPOINT_FIRST__RESUME_WITHOUT_REPEATING_COMPLETED_WORK__THEN_PROVE_ARBITRARY_INTERACTIVE_DESKTOP_CONTROL_IF_AVAILABLE__P_REAL_REMAINS_0_UNTIL_THAT_EXACT_IDENTITY_COMPLETES_THE_LOOP",
+    "next_step": "RUN_HIGH_VALUE_REAL_MISSIONS_THAT_FORCE_MULTIPLE_TARGET_CAPABILITIES__USE_STRONGEST_EXISTING_TOOL_PER_SUBTASK__PARALLELIZE_INDEPENDENT_LANES__REPAIR_ONLY_OBSERVED_CAPABILITY_WEAKNESSES__PACKAGE_INTO_WORKERS_ONLY_AFTER_CAPABILITY_IS_STRONG",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "SAME_COGNITIVE_IDENTITY_HAS_NOT_YET_PROVEN_AUTONOMOUS_RESUME_AFTER_REAL_SESSION_BOUNDARY_AND_ARBITRARY_INTERACTIVE_DESKTOP_CONTROL",
+    "critical_blocker": "TARGET_ASTRA_CAPABILITIES_ARE_ONLY_PARTIALLY_REALIZED_ACROSS_THE_SYSTEM__NO_SINGLE_WORKER_OR_PREDICATE_IS_THE_BLOCKER",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -187,7 +187,7 @@
     "astra_external_parity": "NOT_THE_TERMINAL_OBJECTIVE__COMPARABILITY_OPTIONAL_DIAGNOSTIC",
     "astra_external_distance": "UNKNOWN_AND_NOT_A_SUCCESS_METRIC_BY_ITSELF",
     "astra_common_external_benchmarks_run": false,
-    "scaling_status": "FROZEN_UNTIL_P_REAL_1_INTEGRATED_COGNITIVE_WORKER",
+    "scaling_status": "NOT_ON_CRITICAL_PATH_UNTIL_CAPABILITY_STRENGTH_IS_REAL",
     "superworker_truth_scope": "NO_SINGLE_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
@@ -196,10 +196,11 @@
     "capability_target_map_path": "canonical/capabilities/ASTRA_TARGET_CAPABILITY_MAP_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
     "execution_surface": "CHATGPT_WORK_WITH_GPT_6_ASTRA_IF_AVAILABLE_IN_EXISTING_PLAN",
-    "user_boundary": "NONE_FOR_CURRENT_MISSION_IMPLEMENTATION__FUTURE_RESUME_PROOF_REQUIRES_A_REAL_SESSION_OR_CONTEXT_BOUNDARY",
+    "user_boundary": "NONE_FOR_CAPABILITY_WORK_USING_CURRENT_CONNECTED_TOOLS",
     "integrated_cognitive_worker_candidate": "ICW-CHATGPT-SOL-1",
     "integrated_cognitive_worker_checkpoint_path": "canonical/icw/ICW-CHATGPT-SOL-1/CHECKPOINT_V1.json",
-    "integrated_cognitive_worker_mission_progress": "AUDITOR_REAL_MISSION_COMPLETE__RESUME_AND_AUTONOMOUS_WAKE_NOT_YET_PROVEN"
+    "integrated_cognitive_worker_mission_progress": "AUDITOR_REAL_MISSION_COMPLETE__RESUME_AND_AUTONOMOUS_WAKE_NOT_YET_PROVEN",
+    "capability_realization_strategy_path": "canonical/capabilities/CAPABILITY_REALIZATION_STRATEGY_V2.json"
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
@@ -223,12 +224,13 @@
     "infrastructure_freeze_when_next_real_mission_executable": true,
     "forbid_relabeling_bounded_executor_as_superworker": true,
     "only_current_allowed_frontier_actions": [
-      "preserve current ICW checkpoint and evidence",
-      "on the next genuine session or context boundary resume ICW-CHATGPT-SOL-1 from the checkpoint before doing new analysis",
-      "do not repeat the completed auditor mission",
-      "prove arbitrary interactive desktop control only if the exact current identity gains that capability",
-      "keep p_real at zero until one identity proves the remaining resume and interaction properties",
-      "use the Capability Reality Auditor before any future capability promotion"
+      "execute real missions that directly exercise target Astra capabilities",
+      "search and reuse existing tools before invention",
+      "parallelize independent capability lanes when it reduces wall clock time",
+      "repair observed capability weaknesses directly",
+      "integrate mission state and evidence through canonical Brain",
+      "use verification only to establish whether the capability actually worked",
+      "defer worker packaging scaling and identity accounting until capabilities are strong"
     ],
     "truth_first_law": "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
     "live_canonical_refresh_before_consequential_action": true,
