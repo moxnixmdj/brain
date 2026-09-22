@@ -29,7 +29,14 @@
       "goal_ref": "goal",
       "verify": {
         "type": "returncode_zero"
-      }
+      },
+      "max_cycles": 6
     }
-  ]
+  ],
+  "replay_after_root_cause_change": {
+    "prior_failure": "MISSING_ADAPTER:goal",
+    "repair_commit": "66a21bc4865151c56612b8c6137152e6f3dceeba",
+    "repair": "Constrained read-only goal loop with typed actions and optional zero-key planner source; runtime validates and executes all actions",
+    "replay_authorized": true
+  }
 }
