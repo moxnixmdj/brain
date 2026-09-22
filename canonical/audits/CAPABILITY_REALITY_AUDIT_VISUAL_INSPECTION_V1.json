@@ -1,0 +1,15 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_REALITY_AUDIT_VISUAL_INSPECTION_V1",
+  "renderer": "Google Chrome headless",
+  "screenshot_sha256": "119913bc615a9f662045e895442657b2227044ab2c8b0359047dc78108cb26dd",
+  "screenshot_bytes": 110912,
+  "visual_inspection": {
+    "report_rendered": true,
+    "page_not_blank": true,
+    "summary_visible": true,
+    "audit_table_visible": true,
+    "obvious_layout_failure": false
+  },
+  "linked_audit_path": "canonical/audits/CAPABILITY_REALITY_AUDIT_LIVE_V1.json",
+  "linked_html_path": "canonical/audits/CAPABILITY_REALITY_AUDIT_LIVE_V1.html"
+}
