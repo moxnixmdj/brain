@@ -5,30 +5,13 @@
   "optimization_target": "MINIMIZE_TIME_UNTIL_ALL_TARGET_CAPABILITIES_WORK_TOGETHER_IN_ONE_SHARED_RUNTIME",
   "runtime_components_in_use": ["GPT-5.6 Sol cognition", "GitHub canonical Brain", "GitHub connector", "Remote Desktop Commander", "web research", "scheduled ChatGPT continuation"],
   "lanes": [
-    {
-      "id": "UNFAMILIAR_SWE",
-      "mission_id": "ASTRA-REAL-SWE-MYPY-21968-001",
-      "state": "COMPLETE_VERIFIED_LOCAL",
-      "result": "Fresh open mypy issue #21968 reproduced, causally diagnosed, fixed generally, regression-covered, broader match suite green, packaged as local commit 89653d35c4d66fe1a67ae27360c2510e5678ac82.",
-      "evidence": ["canonical/astra_runtime/missions/ASTRA-REAL-SWE-MYPY-21968-001.json", "canonical/astra_runtime/evidence/ASTRA-REAL-SWE-MYPY-21968-001.patch", "canonical/astra_runtime/artifacts/MYPY_21968_ENGINEERING_NOTE.html", "canonical/astra_runtime/evidence/ASTRA-REAL-SWE-MYPY-21968-001__ARTIFACT_RECEIPT.json"]
-    },
-    {
-      "id": "END_TO_END_COMPUTER_WORK_GAMELOOP",
-      "mission_id": "ASTRA-REAL-COMPUTER-WORK-GAMELOOP-PUBG-001",
-      "state": "BLOCKED_REMOVED_FROM_CRITICAL_PATH",
-      "reason": "Concurrent controller ownership plus modified/debug-signed APK and anti-cheat/integrity boundary. Do not mutate this surface or pursue bypass/downgrade routes.",
-      "evidence": ["canonical/astra_runtime/missions/ASTRA-REAL-COMPUTER-WORK-GAMELOOP-PUBG-001.json", "canonical/evidence/END_TO_END_COMPUTER_WORK_GAMELOOP_20260922.json"]
-    },
-    {
-      "id": "END_TO_END_PROFESSIONAL_SYSTEM_STABILITY",
-      "mission_id": "ASTRA-REAL-PROFESSIONAL-SYSTEM-STABILITY-001",
-      "state": "COMPLETE_VERIFIED_LOCAL_WITH_RESIDUAL_EVIDENCE_BOUNDARY",
-      "result": "Live Windows telemetry + authoritative Microsoft/ASUS research identified a critical thermal hibernation, a 0x3B/0xC0000005 system crash, recurring virtualization/network-driver errors, BIOS-version delta, and produced a safety-bounded professional diagnosis artifact on the real host without destructive mutation.",
-      "evidence": ["canonical/astra_runtime/missions/ASTRA-REAL-PROFESSIONAL-SYSTEM-STABILITY-001.json"]
-    }
+    {"id":"UNFAMILIAR_SWE","mission_id":"ASTRA-REAL-SWE-MYPY-21968-001","state":"COMPLETE_VERIFIED_LOCAL","result":"Fresh open mypy issue #21968 reproduced, causally diagnosed, fixed generally, regression-covered, broader match suite green, packaged as local commit 89653d35c4d66fe1a67ae27360c2510e5678ac82.","evidence":["canonical/astra_runtime/missions/ASTRA-REAL-SWE-MYPY-21968-001.json","canonical/astra_runtime/evidence/ASTRA-REAL-SWE-MYPY-21968-001.patch","canonical/astra_runtime/artifacts/MYPY_21968_ENGINEERING_NOTE.html","canonical/astra_runtime/evidence/ASTRA-REAL-SWE-MYPY-21968-001__ARTIFACT_RECEIPT.json"]},
+    {"id":"END_TO_END_COMPUTER_WORK_GAMELOOP","mission_id":"ASTRA-REAL-COMPUTER-WORK-GAMELOOP-PUBG-001","state":"BLOCKED_REMOVED_FROM_CRITICAL_PATH","reason":"Concurrent controller ownership plus modified/debug-signed APK and anti-cheat/integrity boundary. Do not mutate this surface or pursue bypass/downgrade routes.","evidence":["canonical/astra_runtime/missions/ASTRA-REAL-COMPUTER-WORK-GAMELOOP-PUBG-001.json","canonical/evidence/END_TO_END_COMPUTER_WORK_GAMELOOP_20260922.json"]},
+    {"id":"END_TO_END_PROFESSIONAL_SYSTEM_STABILITY","mission_id":"ASTRA-REAL-PROFESSIONAL-SYSTEM-STABILITY-001","state":"COMPLETE_VERIFIED_LOCAL_WITH_RESIDUAL_EVIDENCE_BOUNDARY","result":"Live Windows telemetry + authoritative Microsoft/ASUS research identified a critical thermal hibernation, a 0x3B/0xC0000005 system crash, recurring virtualization/network-driver errors, BIOS-version delta, and produced a safety-bounded professional diagnosis artifact on the real host without destructive mutation.","evidence":["canonical/astra_runtime/missions/ASTRA-REAL-PROFESSIONAL-SYSTEM-STABILITY-001.json"]},
+    {"id":"AMBIGUOUS_MIXED_PROFESSIONAL_CONTINUATION","mission_id":"ASTRA-REAL-MIXED-PROFESSIONAL-CONTINUATION-001","state":"ACTIVE_CHECKPOINTED","result":"A current operational Project Brain capability brief was created and read-back verified on the live Windows host from reconciled canonical state plus historical artifact inspection. The next invocation must perform new consequential cross-application/browser delivery work from this exact checkpoint.","evidence":["canonical/astra_runtime/missions/ASTRA-REAL-MIXED-PROFESSIONAL-CONTINUATION-001.json"]}
   ],
-  "uncovered_pressure_dimensions": ["long-horizon continuation where a later scheduled invocation performs new consequential work", "ambiguous mixed professional work with changing requirements/interruption-restart", "cross-application GUI/browser delivery beyond filesystem/terminal execution"],
-  "next_action": "On the next invocation, select a fresh consequential mixed professional mission that naturally exercises durable continuation plus cross-application GUI/browser delivery if safely available. Do not manufacture an interruption; perform new consequential work. Do not repeat completed SWE/system-stability work or touch blocked GameLoop/PUBG.",
+  "uncovered_pressure_dimensions": ["later scheduled invocation performs new consequential work from the active checkpoint", "cross-application GUI/browser delivery beyond filesystem/terminal execution"],
+  "next_action": "Resume ASTRA-REAL-MIXED-PROFESSIONAL-CONTINUATION-001 from its durable checkpoint. Do not recreate/re-read the brief as the task. Perform NEW consequential delivery through a genuinely different application/browser surface if safely available, verify the effect/content, preserve receipt; otherwise freeze the exact surface failure and attack only that smallest causal deficit.",
   "anti_waste": ["no qualification before operational portfolio closure", "no provider hunt without an observed blocker", "no speculative infrastructure", "no duplicate proof or rerun", "blocker-local search/reuse before invention"],
   "incremental_spend_usd": 0,
   "val_town_used": false,
