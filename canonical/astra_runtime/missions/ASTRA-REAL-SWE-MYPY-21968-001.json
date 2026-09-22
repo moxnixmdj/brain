@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_REAL_SWE_MISSION_V1",
+  "mission_id": "ASTRA-REAL-SWE-MYPY-21968-001",
+  "status": "COMPLETE_VERIFIED_LOCAL",
+  "canonical_generation_at_start": "2026-09-22-astra-shared-runtime-portfolio-restored",
+  "external_target": {
+    "repository": "python/mypy",
+    "issue": 21968,
+    "title": "Exhaustiveness of type tuple[bool, bool]",
+    "source_head": "b645e069c1e7f907205e6cc0eabea5d2b5beeefc"
+  },
+  "goal": "Reproduce and repair a fresh unfamiliar open mypy bug without a pre-encoded Project Brain solution, then verify the fix against relevant regression coverage.",
+  "observed_failure": "A four-case match over tuple[bool, bool] was incorrectly reported as non-exhaustive and caused a missing-return error.",
+  "causal_diagnosis": "Fixed-tuple sequence negative narrowing only preserved complements when zero or one subpattern was conditional. Multi-conditional tuple patterns discarded the complement and left the original tuple type.",
+  "repair": "Represent the complement as a linear union partitioned by the first subpattern that fails. This produces exact negative narrowing without exponential expansion.",
+  "verification": {
+    "exact_issue_reproduction_after_fix": "Success: no issues found in 1 source file",
+    "new_regression": "1 passed, 8292 deselected",
+    "exhaustive_subset": "10 passed, 8283 deselected",
+    "match_subset": "261 passed, 1 skipped, 8031 deselected",
+    "git_diff_check": "PASS",
+    "existing_precision_change": "testMatchSequencePatternNegativeNarrowing now reveals the exact remainder tuple[Literal[2], Literal['a'] | Literal['b']] | tuple[Literal[1], Literal['b']] instead of a broader superset; expectation updated."
+  },
+  "evidence": {
+    "patch_path": "canonical/astra_runtime/evidence/ASTRA-REAL-SWE-MYPY-21968-001.patch",
+    "local_worktree": "C:\\Temp\\brain-missions\\mypy-21968"
+  },
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "val_town_used": false,
+    "sprites_used": false,
+    "external_pr_created": false
+  },
+  "capability_signal": {
+    "SOFTWARE_ENGINEERING": "FRESH_UNFAMILIAR_REPOSITORY_ISSUE_SOLVED_LOCALLY",
+    "RESEARCH_AND_KNOWLEDGE_ACQUISITION": "ISSUE_AND_CODEBASE_EVIDENCE_USED",
+    "JUDGMENT_AND_SCOPE": "GENERAL_FIX_CHOSEN_OVER_BOOL_SPECIAL_CASE",
+    "DYNAMIC_TOOL_ORCHESTRATION": "GITHUB_PLUS_REMOTE_TERMINAL_PLUS_TEST_HARNESS",
+    "LONG_HORIZON_CONTINUITY": "NOT_ESTABLISHED_BY_THIS_MISSION"
+  }
+}
