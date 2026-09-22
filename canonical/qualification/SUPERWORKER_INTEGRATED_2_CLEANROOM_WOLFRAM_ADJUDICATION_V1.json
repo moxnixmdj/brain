@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_SUPERWORKER_INTEGRATED_2_CLEANROOM_WOLFRAM_ADJUDICATION_V1",
+  "verifier_id": "WOLFRAM-REMOTE-KERNEL-20260922-SUPERWORKER-CLEANROOM-2-V1",
+  "trust_executor_claims": false,
+  "input_hashes": {
+    "source_worker1_proof_bundle_sha256": "0dff5b7a00788bb8ee731a18ce68889434689da4ee68397b5a9689397cfbfecf",
+    "worker2_mission_sha256": "bc90648b65f78e935b287186a6b5a1c253b3ee9f96284f7cd489c523ded1a7b4",
+    "worker2_state_sha256": "b78f93bf6ac440919769b93ab5a25abc1efa49b51a29e21d70371af30e59a445",
+    "worker2_report_sha256": "b7e41483843f424f13dbfa70649654b06dc1c63e204ea3cad2e442d1d3ff64cd",
+    "worker2_supervisor_sha256": "67b3b39174268948ce57e751db5410878d86457e755a30047806bb62462d7a55",
+    "cleanroom_provenance_sha256": "fb9b182b713a8cb4ceaee3818e7c828e86416c40d18d580d42ff24c926f39e0e"
+  },
+  "checks": {
+    "CLEAN_ROOM_REPRODUCTION": true,
+    "NO_SHARED_EXECUTION_STATE": true,
+    "INDEPENDENT_PERSISTENT_EXECUTION_SYSTEM": true,
+    "SURVIVES_CONTEXT_MODEL_PROVIDER_LOSS_VIA_CHECKPOINT_RELAUNCH": true,
+    "OBSERVE_REASON_RESEARCH_ACT_VERIFY_CHECKPOINT_CONTINUE": true,
+    "DYNAMIC_KNOWLEDGE_TOOL_CAPABILITY_DISCOVERY_ACQUISITION": true,
+    "HARD_ZERO_INCREMENTAL_SPEND": true
+  },
+  "all_checks_pass": true,
+  "promotion_authorized": true,
+  "classification": "CLEAN_ROOM_REAL_SUPERWORKER_2_PASS",
+  "human_authority_approval_claimed": false
+}
