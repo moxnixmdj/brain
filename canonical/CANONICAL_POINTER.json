@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_POINTER_V1",
-  "canonical_generation": "2026-09-22-superworker-v6-whole-definition-failed-seven-gates",
+  "canonical_generation": "2026-09-22-superworker-four-integrated-gates",
   "control_plane": {
     "provider": "GitHub",
     "repository": "moxnixmdj/brain",
@@ -101,11 +101,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 0,
-    "next_step": "DO_NOT_RERUN_V6_CROSS_DOMAIN_CAPABILITY__BUILD_OR_REUSE_MINIMUM_PERSISTENT_CONTROLLER_AROUND_ALREADY_PROVEN_ASTRA_CAPABILITY__PROVE_ONLY_THE_SEVEN_FAILED_GATES__THEN_DISTINCTLY_READJUDICATE_WHOLE_DEFINITION",
+    "next_step": "EXTEND_EXISTING_GITHUB_PERSISTENT_RUNNER_ONLY_ENOUGH_TO_DYNAMICALLY_DISCOVER_TOOLS_AND_EXECUTE_ONE_FRESH_CROSS_CAPABILITY_MISSION_ACROSS_FRESH_RUNNER_CHECKPOINT_RELAUNCH__THEN_DISTINCTLY_VERIFY_FOUR_GATES",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "SEVEN_REAL_SUPERWORKER_WHOLE_DEFINITION_GATES_UNPROVEN",
+    "critical_blocker": "FOUR_INTEGRATED_REAL_SUPERWORKER_GATES_UNPROVEN",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -138,7 +138,13 @@
         "DYNAMIC_KNOWLEDGE_TOOL_CAPABILITY_DISCOVERY_ACQUISITION",
         "LEASES_OWNERSHIP_DEDUPE_PROVENANCE_VERIFICATION"
       ]
-    }
+    },
+    "superworker_remaining_integrated_gates": [
+      "SURVIVES_CONTEXT_MODEL_PROVIDER_LOSS_VIA_CHECKPOINT_RELAUNCH",
+      "OBSERVE_REASON_RESEARCH_ACT_VERIFY_CHECKPOINT_CONTINUE",
+      "DYNAMIC_KNOWLEDGE_TOOL_CAPABILITY_DISCOVERY_ACQUISITION",
+      "INDEPENDENT_PERSISTENT_EXECUTION_SYSTEM"
+    ]
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
