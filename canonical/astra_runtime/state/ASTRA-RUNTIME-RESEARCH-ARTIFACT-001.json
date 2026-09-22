@@ -1,17 +1,9 @@
 {
   "blocker": {
     "adapter": "shell",
-    "error": "VERIFICATION_FAILED",
+    "error": "ValueError:embedded null byte",
     "mission_id": "ASTRA-RUNTIME-RESEARCH-ARTIFACT-001",
-    "observed_at_utc": "2026-09-22T04:42:46.075062+00:00",
-    "result": {
-      "adapter": "shell",
-      "command": "set -euo pipefail; : \"${ASTRA_STEP_0_BODY:?CROSS_STEP_EVIDENCE_NOT_EXPOSED}\"; mkdir -p canonical/astra_runtime/evidence; python - <<'PY'\nimport json, os, pathlib, re\nbody=os.environ['ASTRA_STEP_0_BODY']\nm=re.search(r'Latest Python 3 Release[^0-9]*Python ([0-9.]+)', body, re.I|re.S)\nif not m:\n    m=re.search(r'Python ([0-9]+\\.[0-9]+\\.[0-9]+)', body)\nif not m:\n    raise SystemExit('LATEST_VERSION_NOT_EXTRACTED')\nversion=m.group(1)\nout={'source':'https://www.python.org/downloads/','extracted_latest_version':version}\np=pathlib.Path('canonical/astra_runtime/evidence/research_artifact_001.json')\np.write_text(json.dumps(out,indent=2)+'\\n')\nhtml=pathlib.Path('canonical/astra_runtime/evidence/research_artifact_001.html')\nhtml.write_text(f'<html><body><h1>Python release research</h1><p>Latest observed Python version: {version}</p><p>Source: python.org/downloads</p></body></html>')\nPY",
-      "duration_s": 0.002,
-      "returncode": 1,
-      "stderr": "/bin/bash: line 1: ASTRA_STEP_0_BODY: CROSS_STEP_EVIDENCE_NOT_EXPOSED\n",
-      "stdout": ""
-    },
+    "observed_at_utc": "2026-09-22T04:44:00.890133+00:00",
     "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
     "step_id": "consume-research-and-create-artifact",
     "step_index": 1
@@ -49,10 +41,10 @@
   ],
   "mission_id": "ASTRA-RUNTIME-RESEARCH-ARTIFACT-001",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_RESEARCH_ARTIFACT_001.json",
-  "mission_sha256": "fa66f624aff3f4331991630514b23ce6fabc84f1946509d209712eb64fe29963",
+  "mission_sha256": "9a8f61f37571260c46ad6f463c3b4cdbfc5117d4bd537188cf864f7cf79f00ba",
   "next_step": 1,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
   "status": "BLOCKED",
-  "updated_at_utc": "2026-09-22T04:42:46.075222+00:00"
+  "updated_at_utc": "2026-09-22T04:44:00.890349+00:00"
 }
