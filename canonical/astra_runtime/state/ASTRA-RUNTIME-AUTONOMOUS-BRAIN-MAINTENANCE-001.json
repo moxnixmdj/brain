@@ -1,9 +1,9 @@
 {
   "blocker": {
     "adapter": "goal",
-    "error": "Blocker:PLANNER_ACTION_MISSING_OBJECT:{\"reasoning\": \"We need to inspect Project Brain canonical state to see if there is a material contradiction or stale frontier defect, following constraints. Must search prior canonical evidence before mutation. So retrieve current state. Likely we need read_file on some path. Not sure where state stored. Could be project root. Use search_text or list_tree. Let's list tree.\", \"role\": \"assistant\", \"tool_calls\": []}",
+    "error": "HTTPError:HTTP Error 431: Request Header Fields Too Large",
     "mission_id": "ASTRA-RUNTIME-AUTONOMOUS-BRAIN-MAINTENANCE-001",
-    "observed_at_utc": "2026-09-22T05:00:56.638749+00:00",
+    "observed_at_utc": "2026-09-22T05:02:34.207264+00:00",
     "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
     "step_id": "autonomously-resolve-maintenance-goal",
     "step_index": 0
@@ -12,10 +12,10 @@
   "history": [],
   "mission_id": "ASTRA-RUNTIME-AUTONOMOUS-BRAIN-MAINTENANCE-001",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_AUTONOMOUS_BRAIN_MAINTENANCE_001.json",
-  "mission_sha256": "8190a979b2a47364296f11bd3aba00f2cd5b6fc39305ad09c1faee7311e84e5a",
+  "mission_sha256": "0c990ea86cd2c29e4796a358a996aa9d822b45fd2f38d79b27253c1ebcb6fd82",
   "next_step": 0,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
   "status": "BLOCKED",
-  "updated_at_utc": "2026-09-22T05:00:56.639100+00:00"
+  "updated_at_utc": "2026-09-22T05:02:34.207634+00:00"
 }

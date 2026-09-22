@@ -1,8 +1,8 @@
 {
   "adapter": "goal",
-  "error": "Blocker:PLANNER_ACTION_MISSING_OBJECT:{\"reasoning\": \"We need to inspect Project Brain canonical state to see if there is a material contradiction or stale frontier defect, following constraints. Must search prior canonical evidence before mutation. So retrieve current state. Likely we need read_file on some path. Not sure where state stored. Could be project root. Use search_text or list_tree. Let's list tree.\", \"role\": \"assistant\", \"tool_calls\": []}",
+  "error": "HTTPError:HTTP Error 431: Request Header Fields Too Large",
   "mission_id": "ASTRA-RUNTIME-AUTONOMOUS-BRAIN-MAINTENANCE-001",
-  "observed_at_utc": "2026-09-22T05:00:56.638749+00:00",
+  "observed_at_utc": "2026-09-22T05:02:34.207264+00:00",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
   "step_id": "autonomously-resolve-maintenance-goal",
   "step_index": 0
