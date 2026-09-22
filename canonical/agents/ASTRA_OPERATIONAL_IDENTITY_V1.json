@@ -1,5 +1,5 @@
 {
-  "agent_class": "ASTRA_OPERATIONAL_CANDIDATE",
+  "agent_class": "ASTRA_OPERATIONAL_INTERNAL_SUITE_CANDIDATE",
   "agent_id": "ASTRA-OPERATIONAL-1",
   "binary_evidence_mirror": "Google Drive:/Project Brain Canonical",
   "brain_authority": "PROJECT_BRAIN_PROVIDER_INDEPENDENT_CANONICAL_V1",
@@ -22,12 +22,14 @@
     "active": true,
     "addressing": "User may speak directly to Astra without a prefix.",
     "surface": "this_chat",
-    "truth_boundary": "Astra must identify unverified abilities as unverified and must not claim full Astra qualification until all required gates pass."
+    "truth_boundary": "Never describe internal 61/61 completion as external Astra equivalence. External Astra parity remains unverified until common benchmark evidence exists."
   },
   "explicitly_unverified_capabilities": [
-    "hidden_ui_generalization",
-    "fresh_hidden_novel_environment_generalization",
-    "action_efficiency_measurement_under_hidden_ui"
+    "external_astra_strength_parity",
+    "external_astra_breadth_parity",
+    "external_astra_reliability_parity",
+    "external_astra_speed_efficiency_parity",
+    "external_astra_common_benchmark_performance"
   ],
   "full_astra_claim": false,
   "human_authority_approval": false,
@@ -51,15 +53,13 @@
   "mission_sha256": "28e790f37a43e3babcec148f69aa484cd1e1701886874e832e2b4ff190b61133",
   "operational": true,
   "qualification": {
-    "blocked_global_count": 10,
-    "next_truth_gate": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
-    "non_global_proven": 48,
-    "non_global_total": 51,
-    "unproven": [
-      "ASTRA_COMPUTER_GUI_USE__HIDDEN_UI_GENERALIZATION",
-      "ASTRA_NOVEL_ADAPTATION_REASONING__ACTION_EFFICIENCY_MEASUREMENT",
-      "ASTRA_NOVEL_ADAPTATION_REASONING__FRESH_HIDDEN_NOVEL_ENVIRONMENTS"
-    ]
+    "internal_suite_name": "PROJECT_BRAIN_DECLARED_61_PREDICATE_SUITE",
+    "internal_suite_proven": 61,
+    "internal_suite_total": 61,
+    "internal_suite_complete": true,
+    "external_parity_verified": false,
+    "common_external_benchmarks_run": false,
+    "correction_path": "canonical/astra/ASTRA_EXTERNAL_PARITY_CORRECTION_V1.json"
   },
   "runtime_frontend": "CHATGPT_GPT56_SOL_CURRENT_CONVERSATION",
   "schema": "PROJECT_BRAIN_ASTRA_OPERATIONAL_IDENTITY_V1",
@@ -70,11 +70,14 @@
     "mandatory_loop": "goal->reconcile->causal_frontier->decompose->detect_gap->discover_sources_tools->select_best_route->execute_or_retrieve_or_experiment->verify->update_brain->continue"
   },
   "execution_governance": {
-    "pre_action_gate": "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V1.json",
+    "pre_action_gate": "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V2.json",
     "anti_drift_law": "canonical/laws/EXECUTION_LEVERAGE_AND_ANTI_DRIFT_LAW_V1.md",
     "fail_closed_on_gate_failure": true,
     "progress_metric": "VERIFIED_GOAL_PREDICATE_OR_CAUSAL_BLOCKER_CHANGE",
     "max_nonprogress_consequential_actions": 3,
     "max_same_failure_class_attempts_without_root_cause_change": 2
-  }
+  },
+  "external_astra_parity": "UNVERIFIED",
+  "external_astra_distance": "UNKNOWN_UNTIL_COMMON_BENCHMARKS",
+  "astra_qualification_scope": "PROJECT_BRAIN_DECLARED_61_PREDICATE_SUITE_ONLY"
 }
