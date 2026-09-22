@@ -11,7 +11,10 @@ permissions:
   contents: write
 
 concurrency:
-  group: astra-shared-runtime
+  # Different portfolio missions must be able to run concurrently. A commit SHA
+  # identifies one exact mission-triggering push while still deduplicating
+  # accidental duplicate delivery of that same push.
+  group: astra-shared-runtime-${{ github.sha }}
   cancel-in-progress: false
 
 jobs:
@@ -68,6 +71,13 @@ jobs:
           git add -A canonical/astra_runtime
           if ! git diff --cached --quiet; then
             git commit -m "Record ASTRA shared runtime mission execution"
-            git pull --rebase origin main
-            git push origin HEAD:main
+            for attempt in 1 2 3 4 5; do
+              git pull --rebase origin main
+              if git push origin HEAD:main; then
+                exit 0
+              fi
+              sleep $((attempt * 2))
+            done
+            echo "Failed to persist ASTRA runtime evidence after 5 push attempts" >&2
+            exit 52
           fi
