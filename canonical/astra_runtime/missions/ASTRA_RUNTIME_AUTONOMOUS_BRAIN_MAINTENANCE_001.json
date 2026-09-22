@@ -44,5 +44,11 @@
     "repair_commit": "cc2b01fbcbaa34aa14a11d188197204660f91efe",
     "repair": "Accept singular action or validated plural actions schema from optional planner",
     "replay_authorized": true
+  },
+  "replay_after_root_cause_change_3": {
+    "prior_failure": "PLANNER_ACTION_MISSING",
+    "repair_commit": "ad35a4c7bc7c6417a46d229d68bf8b81ace482de",
+    "repair": "Normalize action/actions/next_action/direct typed action envelopes while preserving strict allowlist",
+    "replay_authorized": true
   }
 }
