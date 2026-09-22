@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-AUTONOMOUS-BRAIN-MAINTENANCE-001",
+  "purpose": "Orthogonal portfolio mission C: give the shared runtime a real consequential Project Brain maintenance goal without prescribing the solution path. The runtime must inspect live canonical state, decide what is materially inconsistent or stale, choose appropriate tools, make only evidence-supported repairs, and verify the result. This distinguishes an autonomous shared runtime from a static recipe executor.",
+  "portfolio_lane": "C_AMBIGUOUS_LONG_HORIZON_MIXED_MISSION",
+  "goal": {
+    "objective": "Inspect the live Project Brain canonical state and remove one currently material contradiction or stale frontier defect, if one exists, while preserving all valid evidence and laws.",
+    "constraints": [
+      "do not use Val Town",
+      "zero incremental spend",
+      "do not weaken truth gates",
+      "do not alter valid historical evidence",
+      "search prior canonical evidence before mutation",
+      "if no material contradiction exists, produce evidence for that conclusion rather than inventing work"
+    ],
+    "success_evidence": [
+      "chosen issue and causal justification",
+      "tool/source selection rationale",
+      "before evidence",
+      "repair or justified no-op",
+      "after verification",
+      "durable receipt"
+    ]
+  },
+  "steps": [
+    {
+      "id": "autonomously-resolve-maintenance-goal",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "verify": {
+        "type": "returncode_zero"
+      }
+    }
+  ]
+}
