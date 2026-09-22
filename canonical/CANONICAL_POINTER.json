@@ -202,7 +202,7 @@
     "superworker_truth_scope": "NO_SINGLE_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "END_TO_END_COMPUTER_WORK",
+    "highest_leverage_capability_gap": "CURRENT_MINIMAL_ORTHOGONAL_MISSION_PORTFOLIO_AND_SHARED_RUNTIME_STATE_NOT_RECONCILED_FROM_LIVE_EVIDENCE",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/ASTRA_TARGET_CAPABILITY_MAP_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -225,7 +225,13 @@
     "worker_role": "WIDTH_BENEATH_OBSERVED_BLOCKERS",
     "capacity_expansion": "PARALLEL_NOT_PREREQUISITE",
     "closure_race_role": "SUBORDINATE_LOCAL_BLOCKER_MECHANISM",
-    "qualification_status": "OFF_CRITICAL_PATH_UNTIL_OPERATIONAL_PORTFOLIO_CLOSURE"
+    "qualification_status": "OFF_CRITICAL_PATH_UNTIL_OPERATIONAL_PORTFOLIO_CLOSURE",
+    "legacy_capability_reconciliation_note": {
+      "source": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
+      "historical_gap": "GENERAL_REASONING_AND_GENERIC_TOOL_USE_INSIDE_PERSISTENT_CONTROLLER",
+      "top_level_frontier_superseded_by_commit": "71a4c714a8528f839699a2d81c7b66c96096f6ab",
+      "current_authority": "canonical/laws/ASTRA_SHARED_RUNTIME_PORTFOLIO_V1.md"
+    }
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
