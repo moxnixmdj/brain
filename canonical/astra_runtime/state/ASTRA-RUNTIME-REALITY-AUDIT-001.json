@@ -8,6 +8,7 @@
     "step_id": "run-live-capability-audit",
     "step_index": 1
   },
+  "completed_at_utc": "2026-09-22T04:15:35.800475+00:00",
   "created_at_utc": "2026-09-22T04:14:51.897433+00:00",
   "history": [
     {
@@ -23,12 +24,26 @@
       },
       "step_id": "run-auditor-tests",
       "step_index": 0
+    },
+    {
+      "completed_at_utc": "2026-09-22T04:15:35.800181+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "python canonical/runtime/capability_reality_auditor.py --root . --json-out canonical/astra_runtime/evidence/live_audit.json --html-out canonical/astra_runtime/evidence/live_audit.html",
+        "duration_s": 0.036,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"status\": \"PASS\", \"pass_count\": 12, \"fail_count\": 0}\n"
+      },
+      "step_id": "run-live-capability-audit",
+      "step_index": 1
     }
   ],
   "mission_id": "ASTRA-RUNTIME-REALITY-AUDIT-001",
-  "next_step": 1,
+  "next_step": 2,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
-  "status": "BLOCKED",
-  "updated_at_utc": "2026-09-22T04:14:52.054151+00:00"
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-22T04:15:35.800195+00:00"
 }

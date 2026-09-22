@@ -1,0 +1,132 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_REALITY_AUDIT_V1",
+  "audited_at_utc": "2026-09-22T04:15:35.795060+00:00",
+  "canonical_generation": "2026-09-22-astra-shared-runtime-portfolio-restored",
+  "status": "PASS",
+  "check_count": 12,
+  "pass_count": 12,
+  "fail_count": 0,
+  "checks": [
+    {
+      "id": "MISSION_LOCK_PRESENT",
+      "ok": true,
+      "severity": "critical",
+      "message": "Canonical mission lock must target real capability realization.",
+      "evidence": {
+        "terminal_objective": "MAKE_THE_ACTUAL_TARGET_CAPABILITIES_DEMONSTRATED_BY_ASTRA_REAL_IN_OUR_OWN_SYSTEM_USING_ONLY_THE_RIGHT_ROUTE"
+      }
+    },
+    {
+      "id": "PREDICATES_SUBORDINATE",
+      "ok": true,
+      "severity": "critical",
+      "message": "Predicates must be subordinate evidence, not the mission.",
+      "evidence": {
+        "predicates_role": "SUBORDINATE_EVIDENCE_ONLY"
+      }
+    },
+    {
+      "id": "BENCHMARKS_SUBORDINATE",
+      "ok": true,
+      "severity": "critical",
+      "message": "Benchmarks must be subordinate diagnostics, not the mission.",
+      "evidence": {
+        "benchmarks_role": "SUBORDINATE_DIAGNOSTIC_ONLY"
+      }
+    },
+    {
+      "id": "NO_INTERNAL_TO_EXTERNAL_ASTRA_PARITY",
+      "ok": true,
+      "severity": "critical",
+      "message": "Internal Astra-themed suite completion must not be represented as external Astra parity.",
+      "evidence": {
+        "full_astra_claim": false,
+        "external_astra_parity": "UNVERIFIED",
+        "scope": "PROJECT_BRAIN_DECLARED_61_PREDICATE_SUITE_ONLY"
+      }
+    },
+    {
+      "id": "P_REAL_MATCHES_ACTIVE_IDENTITIES",
+      "ok": true,
+      "severity": "critical",
+      "message": "P_real must equal the number of active identities explicitly counted as real.",
+      "evidence": {
+        "declared_p_real": 0,
+        "counted_active_identities": 0
+      }
+    },
+    {
+      "id": "NO_COMPOSITE_WORKER_PROMOTION",
+      "ok": true,
+      "severity": "critical",
+      "message": "Component evidence from different executors cannot be composed into one real worker.",
+      "evidence": {
+        "correction_exists": true,
+        "still_counted_as_real": []
+      }
+    },
+    {
+      "id": "VAL_TOWN_FORBIDDEN",
+      "ok": true,
+      "severity": "high",
+      "message": "Val Town must remain noncanonical/forbidden unless explicitly superseded by a newer authority decision.",
+      "evidence": {
+        "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE"
+      }
+    },
+    {
+      "id": "NO_FORBIDDEN_PROVIDER_IN_ALLOWED_ACTIONS",
+      "ok": true,
+      "severity": "high",
+      "message": "Current allowed frontier actions must not route through forbidden providers.",
+      "evidence": {
+        "allowed_actions": [
+          "reconstruct current shared ASTRA_RUNTIME from valid existing capability components",
+          "select the smallest orthogonal real mission portfolio maximizing capability and interaction exposure per wall clock time",
+          "run portfolio missions concurrently against the same runtime",
+          "freeze exact observed blockers and attack only those blockers with maximum useful parallelism",
+          "race reuse composition adaptation and invention only beneath a real blocker",
+          "integrate independently verified winning repairs globally into the shared runtime",
+          "replay failed actions and resume missions immediately",
+          "expand legitimate zero cost execution capacity only as a parallel multiplier",
+          "defer formal qualification until the operational portfolio closes"
+        ]
+      }
+    },
+    {
+      "id": "FRONTIER_NOT_PROXY_GOAL",
+      "ok": true,
+      "severity": "critical",
+      "message": "Next step must target a real capability gap, not a proxy metric.",
+      "evidence": {
+        "critical_blocker": "CURRENT_MINIMAL_ORTHOGONAL_MISSION_PORTFOLIO_AND_SHARED_RUNTIME_STATE_NOT_RECONCILED_FROM_LIVE_EVIDENCE",
+        "next_step": "RECONSTRUCT_CURRENT_SHARED_ASTRA_RUNTIME__CHOOSE_SMALLEST_ORTHOGONAL_REAL_MISSION_PORTFOLIO_BY_CAPABILITY_EXPOSURE_PER_WALL_CLOCK_TIME__RUN_PORTFOLIO_CONCURRENTLY__FREEZE_EXACT_OBSERVED_BLOCKERS__LAUNCH_MAXIMUM_USEFUL_LOCAL_ACQUISITION_SWARMS__INTEGRATE_VERIFIED_WINNERS_GLOBALLY__REPLAY_AND_RESUME",
+        "proxy_terms_found": []
+      }
+    },
+    {
+      "id": "COMPOSITION_CORRECTION_RECONCILED",
+      "ok": true,
+      "severity": "critical",
+      "message": "After the composition correction, P_real must remain zero until one identity proves the full loop.",
+      "evidence": {
+        "p_real": 0,
+        "superworker_truth_scope": "NO_SINGLE_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN"
+      }
+    },
+    {
+      "id": "TRUTH_FIRST_LAW_BOUND",
+      "ok": true,
+      "severity": "high",
+      "message": "Truth-first/no-duplicate law must be mandatory.",
+      "evidence": {}
+    },
+    {
+      "id": "CAPABILITY_REALIZATION_LAW_BOUND",
+      "ok": true,
+      "severity": "critical",
+      "message": "Capability-realization mission lock must be mandatory.",
+      "evidence": {}
+    }
+  ]
+}
