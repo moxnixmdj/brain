@@ -144,7 +144,12 @@ def run_goal(step, mission):
             actions=obj.get("actions")
             if isinstance(actions,list) and actions and isinstance(actions[0],dict):
                 action=actions[0]
-        if not isinstance(action,dict): raise Blocker("PLANNER_ACTION_MISSING")
+        if not isinstance(action,dict) and isinstance(obj.get("next_action"),dict):
+            action=obj["next_action"]
+        if not isinstance(action,dict) and isinstance(obj.get("type"),str):
+            action=obj
+        if not isinstance(action,dict):
+            raise Blocker("PLANNER_ACTION_MISSING_KEYS:"+",".join(sorted(map(str,obj.keys()))))
         typ=action.get("type")
         if typ not in {"read_file","list_tree","search_text","http_get","finish"}:
             raise Blocker("PLANNER_ACTION_REJECTED:"+str(typ))
