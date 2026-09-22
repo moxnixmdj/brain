@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-ARTIFACT-BROWSER-001",
+  "purpose": "Continue portfolio lane A by taking the real research artifact already produced by the shared runtime, render it in a browser-capable environment, preserve a screenshot, and verify the delivered artifact without redoing research.",
+  "portfolio_lane": "A_PROFESSIONAL_ARTIFACT_TO_BROWSER_DELIVERY",
+  "provenance": {
+    "upstream_mission": "ASTRA-RUNTIME-RESEARCH-ARTIFACT-001",
+    "upstream_receipt": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-RESEARCH-ARTIFACT-001__RECEIPT.json"
+  },
+  "steps": [
+    {
+      "id": "verify-upstream-artifact",
+      "adapter": "shell",
+      "command": "set -euo pipefail; test -s canonical/astra_runtime/evidence/research_artifact_001.html; test -s canonical/astra_runtime/evidence/research_artifact_001.json",
+      "verify": {
+        "type": "returncode_zero"
+      }
+    },
+    {
+      "id": "render-artifact-in-browser",
+      "adapter": "shell",
+      "command": "set -euo pipefail; BROWSER=\"$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)\"; test -n \"$BROWSER\" || { echo NO_BROWSER_BINARY >&2; exit 42; }; \"$BROWSER\" --headless --no-sandbox --disable-gpu --window-size=1200,800 --screenshot=canonical/astra_runtime/evidence/research_artifact_001.png \"file://$PWD/canonical/astra_runtime/evidence/research_artifact_001.html\"; test -s canonical/astra_runtime/evidence/research_artifact_001.png",
+      "verify": {
+        "type": "file_exists",
+        "path": "canonical/astra_runtime/evidence/research_artifact_001.png"
+      }
+    },
+    {
+      "id": "seal-browser-delivery-evidence",
+      "adapter": "shell",
+      "command": "set -euo pipefail; python - <<'PY'\nimport hashlib, json, pathlib\np=pathlib.Path('canonical/astra_runtime/evidence/research_artifact_001.png')\nout={'artifact':'canonical/astra_runtime/evidence/research_artifact_001.html','screenshot':str(p),'screenshot_sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'screenshot_bytes':p.stat().st_size}\npathlib.Path('canonical/astra_runtime/evidence/research_artifact_001_browser_receipt.json').write_text(json.dumps(out,indent=2)+'\\n')\nPY",
+      "verify": {
+        "type": "file_exists",
+        "path": "canonical/astra_runtime/evidence/research_artifact_001_browser_receipt.json"
+      }
+    }
+  ]
+}
