@@ -27,7 +27,18 @@
     "typecheck": "PASS",
     "lint": "PASS_WITH_2_WARNINGS_0_ERRORS",
     "production_build": "PASS",
-    "nextjs_static_routes_generated": 16
+    "nextjs_static_routes_generated": 16,
+    "visual_gate": "PASS",
+    "visual_gate_details": {
+      "server_reachable": true,
+      "home_iframe_present": true,
+      "iframe_src": "/old-prototype.html",
+      "full_viewport_styling": true,
+      "old_prototype_status": 200,
+      "old_prototype_kb": 393.4,
+      "react_mount_point_present": true,
+      "warning": "Missing static marker ReactDOM, gate still returns PASS"
+    }
   },
   "capability_gain": [
     "fresh private repository acquisition with native Git credentials",
@@ -36,7 +47,8 @@
     "authority-based root-cause adjudication",
     "minimal repair",
     "full verification",
-    "durable push to source repository"
+    "durable push to source repository",
+    "local dev-server lifecycle control and project-native browser/visual verification"
   ],
   "incremental_spend_usd": 0,
   "val_town_used": false,
