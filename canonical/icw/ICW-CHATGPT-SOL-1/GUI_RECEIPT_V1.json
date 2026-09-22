@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_ICW_GUI_RECEIPT_V1",
+  "worker_identity": "ICW-CHATGPT-SOL-1",
+  "mission_id": "ICW-REAL-END-TO-END-001",
+  "evidence_class": "LIVE_AUTHORIZED_WINDOWS_GUI_ACTION_WITH_INDEPENDENT_UIAUTOMATION_READBACK",
+  "execution_surface": "REMOTE_DESKTOP_COMMANDER_TERMINAL_TO_NATIVE_WINDOWS_GUI_APIS",
+  "device_name": "Mo",
+  "action": {
+    "target_application": "Notepad",
+    "target_document": "icw_gui_canary.txt",
+    "target_isolated_from_existing_user_document": true,
+    "input_method": "SetForegroundWindow + System.Windows.Forms.SendKeys",
+    "token": "ICW-CHATGPT-SOL-1 GUI CANARY 2026-09-22"
+  },
+  "verification": {
+    "method": "separate Windows UI Automation TextPattern/ValuePattern readback",
+    "verified": true,
+    "observed_exact_token": true,
+    "screenshot_sha256": "e4ba010ec454a0573d8c4b2631c9c66b4a5a2e61eb054e76ea2afef44001c926",
+    "screenshot_size": "1536x864"
+  },
+  "safety_cleanup": {
+    "canary_window_remaining": false,
+    "preexisting_deployment_window_preserved": true
+  },
+  "truth_boundary": {
+    "proves": "same ICW identity can cause and independently read back a real interactive desktop GUI effect on the authorized Windows machine",
+    "does_not_prove": "autonomous wake without user re-prompt",
+    "promotion_claim": false,
+    "p_real_after_gui_proof": 0
+  }
+}
