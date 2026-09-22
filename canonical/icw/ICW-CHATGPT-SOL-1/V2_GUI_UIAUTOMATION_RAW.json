@@ -1,0 +1,19 @@
+{
+  "schema": "PROJECT_BRAIN_ICW_V2_RAW_UIAUTOMATION_TRANSCRIPT_V2",
+  "worker_identity": "ICW-CHATGPT-SOL-1",
+  "mission_id": "ICW-PROMOTION-CLOSURE-V2-20260922",
+  "observed_at_utc": "2026-09-22T07:45:20.8028975Z",
+  "pid": 321196,
+  "top_window_handle": "15403506",
+  "document_handle": "5703960",
+  "window_title": "icw_v2_gui_canary.txt - Notepad",
+  "document_class": "RichEditD2DPT",
+  "readback_method": "TextPattern",
+  "exact_token": "ICW-CHATGPT-SOL-1|ICW-PROMOTION-CLOSURE-V2-20260922|GUI-EFFECT",
+  "verified": true,
+  "observed_text": "ICW-CHATGPT-SOL-1|ICW-PROMOTION-CLOSURE-V2-20260922|GUI-EFFECT",
+  "screenshot_path": "C:\\Users\\muham\\AppData\\Local\\Temp\\icw_v2_gui_canary_pass.png",
+  "screenshot_sha256": "f8ce438ffe944a6834a4c2cd42f1888ac83b010b3131a26f0bb37c7d6423b6b8",
+  "screen_width": 1920,
+  "screen_height": 1080
+}
