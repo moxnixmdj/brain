@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_POINTER_V1",
-  "canonical_generation": "2026-09-22-truth-first-no-duplicate-enforcement",
+  "canonical_generation": "2026-09-22-superworker-v6-whole-definition-failed-seven-gates",
   "control_plane": {
     "provider": "GitHub",
     "repository": "moxnixmdj/brain",
@@ -101,11 +101,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 0,
-    "next_step": "DISTINCTLY_VERIFY_EXISTING_RECOVERY_SUPERWORKER_V6_QUALIFICATION_PACKAGE__THEN_WHOLE_DEFINITION_ADJUDICATION__MOVE_P_REAL_ONLY_IF_ALL_GATES_PASS",
+    "next_step": "DO_NOT_RERUN_V6_CROSS_DOMAIN_CAPABILITY__BUILD_OR_REUSE_MINIMUM_PERSISTENT_CONTROLLER_AROUND_ALREADY_PROVEN_ASTRA_CAPABILITY__PROVE_ONLY_THE_SEVEN_FAILED_GATES__THEN_DISTINCTLY_READJUDICATE_WHOLE_DEFINITION",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "REAL_SUPERWORKER_WHOLE_DEFINITION_QUALIFICATION",
+    "critical_blocker": "SEVEN_REAL_SUPERWORKER_WHOLE_DEFINITION_GATES_UNPROVEN",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -120,7 +120,25 @@
       "unproven": 0,
       "total": 61
     },
-    "astra_full_qualification": "VERIFIED_61_OF_61"
+    "astra_full_qualification": "VERIFIED_61_OF_61",
+    "superworker_v6_whole_definition": {
+      "target_result_sha256": "e305ffe8c7537c469d039742d92adb20b89080869f4d26de30c94510689c5ddc",
+      "verifier_receipt_path": "canonical/qualification/RECOVERY_SUPERWORKER_V6_WOLFRAM_WHOLE_DEFINITION_ADJUDICATION_V1.json",
+      "verifier_id": "WOLFRAM-REMOTE-KERNEL-20260922-SUPERWORKER-V6-V1",
+      "pass_count": 3,
+      "fail_count": 7,
+      "promotion_authorized": false,
+      "classification": "CAPABLE_CROSS_DOMAIN_EXECUTION_SESSION_NOT_REAL_SUPERWORKER",
+      "failed_gates": [
+        "INDEPENDENT_PERSISTENT_EXECUTION_SYSTEM",
+        "DURABLE_IDENTITY_AND_MISSION_BEYOND_CHAT_MODEL_INVOCATION",
+        "OBSERVE_REASON_RESEARCH_ACT_VERIFY_CHECKPOINT_CONTINUE",
+        "SURVIVES_CONTEXT_MODEL_PROVIDER_LOSS_VIA_CHECKPOINT_RELAUNCH",
+        "CAUSALLY_READY_TASK_ACQUISITION",
+        "DYNAMIC_KNOWLEDGE_TOOL_CAPABILITY_DISCOVERY_ACQUISITION",
+        "LEASES_OWNERSHIP_DEDUPE_PROVENANCE_VERIFICATION"
+      ]
+    }
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
@@ -144,11 +162,13 @@
     "infrastructure_freeze_when_next_real_mission_executable": true,
     "forbid_relabeling_bounded_executor_as_superworker": true,
     "only_current_allowed_frontier_actions": [
-      "inspect_existing_submitted_superworker_recovery_qualification",
-      "distinctly_verify_exact_submitted_bytes",
-      "whole_definition_superworker_adjudication",
-      "repair_only_observed_failed_property",
-      "promote_p_real_only_after_independent_evidence"
+      "search_existing_persistent_controller_assets_for_the_seven_failed_superworker_gates",
+      "reuse_existing_astra_61_of_61_capability_as_worker_cognition",
+      "implement_only_missing_persistent_identity_checkpoint_relaunch_task_acquisition_dynamic_discovery_and_lease_dedupe_properties",
+      "run_one_consequential_mission_that_exercises_the_seven_failed_gates",
+      "distinctly_verify_only_the_failed_gates",
+      "whole_definition_readjudication",
+      "promote_p_real_only_if_all_gates_pass"
     ],
     "truth_first_law": "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
     "live_canonical_refresh_before_consequential_action": true,
