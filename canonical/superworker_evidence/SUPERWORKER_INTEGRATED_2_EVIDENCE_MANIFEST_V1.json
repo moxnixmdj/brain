@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_SUPERWORKER_INTEGRATED_2_EVIDENCE_MANIFEST_V1",
+  "agent_id": "SUPERWORKER-INTEGRATED-2",
+  "mission_id": "SUPERWORKER-INTEGRATED-CLEANROOM-2-20260922-001",
+  "mission_sha256": "bc90648b65f78e935b287186a6b5a1c253b3ee9f96284f7cd489c523ded1a7b4",
+  "state_sha256": "b78f93bf6ac440919769b93ab5a25abc1efa49b51a29e21d70371af30e59a445",
+  "report_sha256": "b7e41483843f424f13dbfa70649654b06dc1c63e204ea3cad2e442d1d3ff64cd",
+  "supervisor_sha256": "67b3b39174268948ce57e751db5410878d86457e755a30047806bb62462d7a55",
+  "cleanroom_provenance_sha256": "fb9b182b713a8cb4ceaee3818e7c828e86416c40d18d580d42ff24c926f39e0e",
+  "proof_bundle": {
+    "drive_file_id": "14JYs_crgv2Q6Dd_OmgagA1V9LXzg5y9l",
+    "file_name": "SUPERWORKER_INTEGRATED_2_PROOF_2026-09-22.zip",
+    "sha256": "442d3f376f57f0918718bcf04e64bd0fa19d7852b253d2ac0d23dd25f5541c72",
+    "bytes": 20114
+  },
+  "cleanroom_source": {
+    "worker1_proof_bundle_sha256": "0dff5b7a00788bb8ee731a18ce68889434689da4ee68397b5a9689397cfbfecf",
+    "worker1_drive_file_id": "1R98ftZbh0OOfAzpckjyx3-RpkL0M74u_",
+    "shared_execution_state": false
+  },
+  "observed_execution": {
+    "fresh_process_count": 2,
+    "automatic_relaunch_observed": true,
+    "checkpoint_count": 1,
+    "primary_provider_failure": "INJECTED_PRIMARY_PROVIDER_FAILURE",
+    "fallback_provider": "hash-fallback",
+    "runtime_tool_discovery_processes": 2,
+    "terminal_success": true,
+    "model_independent": true,
+    "incremental_spend_usd": 0
+  },
+  "promotion_claim": false
+}
