@@ -80,5 +80,11 @@
     "repair_commit": "893a5519efdaa3f19805c9d1942f3120f9c6ce4c",
     "repair": "Bound tree/read results and compact iterative observations before planner transport",
     "replay_authorized": true
+  },
+  "replay_after_root_cause_change_8": {
+    "prior_failure": "PLANNER_ACTION_REJECTED:repo_browser.read_file",
+    "repair_commit": "b0852baf70d56dda64ec4b9cb18defb2381c428d",
+    "repair": "Normalize a namespaced action only when its exact final suffix is already in the runtime allowlist",
+    "replay_authorized": true
   }
 }
