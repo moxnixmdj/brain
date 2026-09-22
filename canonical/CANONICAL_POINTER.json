@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_POINTER_V1",
-  "canonical_generation": "2026-09-22-integrated-cognitive-worker-frontier",
+  "canonical_generation": "2026-09-22-icw-auditor-mission-complete-checkpointed",
   "control_plane": {
     "provider": "GitHub",
     "repository": "moxnixmdj/brain",
@@ -110,11 +110,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 0,
-    "next_step": "EXECUTE_ICW_REAL_END_TO_END_001_IN_CHATGPT_WORK_USING_EXISTING_PLAN_ALLOWANCE__SAME_IDENTITY_MUST_REASON_DISCOVER_RESEARCH_ACT_INSPECT_CORRECT_VERIFY_SAVE_STATE_RESUME_AND_FINISH__WRITE_EVIDENCE_BACK_TO_CANONICAL_BRAIN",
+    "next_step": "ON_NEXT_REAL_CONTEXT_OR_SESSION_BOUNDARY__ICW_CHATGPT_SOL_1_READ_CHECKPOINT_FIRST__RESUME_WITHOUT_REPEATING_COMPLETED_WORK__THEN_PROVE_ARBITRARY_INTERACTIVE_DESKTOP_CONTROL_IF_AVAILABLE__P_REAL_REMAINS_0_UNTIL_THAT_EXACT_IDENTITY_COMPLETES_THE_LOOP",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "CURRENT_CHAT_LACKS_DIRECT_ARBITRARY_DESKTOP_GUI_CONTROL_AND_CANNOT_PROVE_ONE_PERSISTENT_COGNITIVE_WORKER_END_TO_END",
+    "critical_blocker": "SAME_COGNITIVE_IDENTITY_HAS_NOT_YET_PROVEN_AUTONOMOUS_RESUME_AFTER_REAL_SESSION_BOUNDARY_AND_ARBITRARY_INTERACTIVE_DESKTOP_CONTROL",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -196,7 +196,10 @@
     "capability_target_map_path": "canonical/capabilities/ASTRA_TARGET_CAPABILITY_MAP_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
     "execution_surface": "CHATGPT_WORK_WITH_GPT_6_ASTRA_IF_AVAILABLE_IN_EXISTING_PLAN",
-    "user_boundary": "SWITCH_CURRENT_PROJECT_EXECUTION_TO_WORK_MODE"
+    "user_boundary": "NONE_FOR_CURRENT_MISSION_IMPLEMENTATION__FUTURE_RESUME_PROOF_REQUIRES_A_REAL_SESSION_OR_CONTEXT_BOUNDARY",
+    "integrated_cognitive_worker_candidate": "ICW-CHATGPT-SOL-1",
+    "integrated_cognitive_worker_checkpoint_path": "canonical/icw/ICW-CHATGPT-SOL-1/CHECKPOINT_V1.json",
+    "integrated_cognitive_worker_mission_progress": "AUDITOR_REAL_MISSION_COMPLETE__RESUME_AND_AUTONOMOUS_WAKE_NOT_YET_PROVEN"
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
@@ -220,12 +223,12 @@
     "infrastructure_freeze_when_next_real_mission_executable": true,
     "forbid_relabeling_bounded_executor_as_superworker": true,
     "only_current_allowed_frontier_actions": [
-      "execute frozen ICW-REAL-END-TO-END-001 mission in ChatGPT Work",
-      "use one cognitive identity for the full loop",
-      "write checkpoints and consequential evidence to canonical Brain",
-      "resume the same mission from checkpoint after a session boundary",
-      "verify final result without borrowing proof from another executor",
-      "promote p_real only if the one identity proves the whole loop"
+      "preserve current ICW checkpoint and evidence",
+      "on the next genuine session or context boundary resume ICW-CHATGPT-SOL-1 from the checkpoint before doing new analysis",
+      "do not repeat the completed auditor mission",
+      "prove arbitrary interactive desktop control only if the exact current identity gains that capability",
+      "keep p_real at zero until one identity proves the remaining resume and interaction properties",
+      "use the Capability Reality Auditor before any future capability promotion"
     ],
     "truth_first_law": "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
     "live_canonical_refresh_before_consequential_action": true,
