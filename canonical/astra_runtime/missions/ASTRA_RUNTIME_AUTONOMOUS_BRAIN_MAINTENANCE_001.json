@@ -99,5 +99,11 @@
     "repair_commit": "a76b41b3eb1f61ccbe117bf7c1de1eab7fa28c1b",
     "repair": "Normalize commentary pseudo-actions through the existing bounded typed-action normalizer while preserving the strict runtime allowlist",
     "replay_authorized": true
+  },
+  "replay_after_root_cause_change_11": {
+    "prior_failure": "PATH_OUTSIDE_REPOSITORY_FROM_LEADING_SLASH_REPO_PATH",
+    "repair_commit": "1c42f89bfb103fd3538d531ef482567004f34c33",
+    "repair": "Interpret a single leading slash as repository-root notation while retaining resolved-parent traversal protection",
+    "replay_authorized": true
   }
 }
