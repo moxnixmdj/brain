@@ -219,6 +219,38 @@ def run_goal(step, mission):
             diag=json.dumps(obj,sort_keys=True)[:2200].replace("\n"," ")
             raise Blocker("PLANNER_ACTION_MISSING_OBJECT:"+diag)
         typ=action.get("type")
+        # Some optional planner providers return a free-form `commentary`
+        # pseudo-action even when instructed to emit one typed action. Treat
+        # that as untrusted intent and normalize it through the same bounded
+        # second-pass path already used for free-form reasoning. The runtime
+        # still executes only its existing allowlisted action types.
+        if typ=="commentary":
+            args=action.get("args") if isinstance(action.get("args"),dict) else {}
+            intent=""
+            for key in ("text","content","message","commentary","value"):
+                if isinstance(args.get(key),str) and args[key].strip():
+                    intent=args[key].strip(); break
+            if not intent and isinstance(action.get("why"),str):
+                intent=action["why"].strip()
+            if not intent:
+                intent=json.dumps(action,sort_keys=True)[:5000]
+            normalize_prompt=(
+              "Convert this planner commentary into ONE allowed action. Return JSON text only, no reasoning, no tool_calls. "
+              "Allowed action types: "+allowed+". Schema exactly: "
+              '{"actions":[{"type":"...","args":{},"why":"normalized planner commentary"}]}. '
+              "Planner commentary: "+intent[:5000]
+            )
+            normalized=_planner_post(normalize_prompt, timeout_s=20)
+            nobj=_extract_json_object(normalized.get("text",""))
+            na=nobj.get("action")
+            if not isinstance(na,dict):
+                nas=nobj.get("actions")
+                if isinstance(nas,list) and nas and isinstance(nas[0],dict):
+                    na=nas[0]
+            if not isinstance(na,dict):
+                raise Blocker("PLANNER_COMMENTARY_NORMALIZATION_FAILED")
+            action=na
+            typ=action.get("type")
         allowed_types={"read_file","list_tree","search_text","http_get","finish"}
         if isinstance(typ,str) and "." in typ:
             suffix=typ.rsplit(".",1)[-1]
