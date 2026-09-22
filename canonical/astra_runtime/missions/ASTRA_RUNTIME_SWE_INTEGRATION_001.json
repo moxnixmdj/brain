@@ -49,11 +49,17 @@
       }
     }
   ],
-  "replay": 2,
+  "replay": 3,
   "invalidation": {
     "prior_run_id": 35686321365,
     "reason": "MISSION_HANDOFF_CONTAMINATION__RUN_EXECUTED_REALITY_AUDIT_INSTEAD_OF_SWE_MISSION",
     "promotional_credit": false,
     "prior_workflow_yaml_corruption": true
-  }
+  },
+  "repairs": [
+    {
+      "blocker": "SHELL_ADAPTER_USED_POSIX_SH_WHILE_CAPABILITY_REQUIRED_BASH_PIPEFAIL",
+      "repair": "RUN_SHELL_EXECUTABLE_BIN_BASH"
+    }
+  ]
 }
