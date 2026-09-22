@@ -1,70 +1,55 @@
 {
   "schema": "PROJECT_BRAIN_ASTRA_REAL_COMPUTER_WORK_MISSION_V1",
   "mission_id": "ASTRA-REAL-COMPUTER-WORK-GAMELOOP-PUBG-001",
-  "status": "BLOCKED_ON_EXACT_OBSERVED_NATIVE_CRASH",
+  "status": "BLOCKED_ON_MODIFIED_NATIVE_PAYLOAD_VS_OFFICIAL_CAUSAL_REPLAY",
   "canonical_generation_at_start": "2026-09-22-astra-shared-runtime-portfolio-restored",
   "terminal_user_goal": "Make the user's existing GameLoop PUBG Mobile installation actually render and run instead of presenting the persistent black screen, while preserving user data and avoiding speculative destructive changes.",
-  "why_selected": "Live canonical state names END_TO_END_COMPUTER_WORK as the highest-leverage capability gap and requires real cross-domain mission pressure rather than qualification theater. The user has an unresolved real GameLoop/PUBG black-screen problem on the authorized Windows machine, so this mission simultaneously advances a real user goal and exercises computer-work diagnosis/action/verification.",
+  "selection_basis": "Live canonical state names END_TO_END_COMPUTER_WORK as the highest-leverage gap. This unresolved real user problem forces research, Windows inspection, emulator control, evidence recovery, diagnosis, reversible action, and effect verification.",
   "evidence_presence_classification": "CAPABILITY_FAILED",
   "prior_work_search": {
-    "canonical_search_query": "PUBG GameLoop black screen",
-    "canonical_matches": 0,
-    "duplicate_execution_found": false
+    "canonical_matches_for_pubg_gameloop_black_screen": 0,
+    "local_prior_experiments_discovered": true,
+    "local_evidence": [
+      "PUBG_ONE_SHOT_RECEIPT.txt",
+      "pubg_direct_launch.txt",
+      "translate.conf backups",
+      "translateex.conf backups",
+      "cmd.conf backups",
+      "logcatd"
+    ],
+    "consequence": "Do not repeat ABI/translator toggles already represented by preserved backups and receipts."
   },
-  "live_observations_2026_09_22": {
-    "machine": "Mo",
-    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
-    "gpu_driver": "32.0.15.9571",
-    "gameloop_install": "C:\\Program Files\\TxGameAssistant",
-    "gameloop_ui": "Gameloop(64beta)",
-    "pubg_package": "com.tencent.ig",
-    "android_emulator_log": "C:\\Program Files\\TxGameAssistant\\ui\\AndroidEmulator100.log",
-    "aengine_log": "C:\\Program Files\\TxGameAssistant\\ui\\AEngine100.log",
-    "renderer_log": "C:\\Program Files\\TxGameAssistant\\ui\\libOpenglRender.log"
-  },
-  "falsifications_and_findings": [
-    {
-      "hypothesis": "The black screen is merely because the emulator never starts the PUBG package.",
-      "result": "FALSIFIED",
-      "evidence": "AndroidEmulator100.log reports StartPkgWithLogin for com.tencent.ig followed by OnAppRunning bRet=1 bRun=1 and OnGameStart."
-    },
-    {
-      "hypothesis": "The host GPU/OpenGL adapter is not detected.",
-      "result": "FALSIFIED",
-      "evidence": "AndroidEmulator100.log reports NVIDIA Corporation, RTX 4060 Laptop GPU, OpenGL 4.6.0 NVIDIA 595.71 and a matched render policy."
-    },
-    {
-      "hypothesis": "Switching the existing ForceDirectX registry flags from 0 to 1 is an adequate repair.",
-      "result": "FALSIFIED_AND_ROLLED_BACK",
-      "evidence": "Both HKCU\\Software\\Tencent\\MobileGamePC ForceDirectX flags were changed reversibly, PUBG relaunched, and a direct PrintWindow capture of the GameLoop main window remained fully black. The original values were restored to 0."
-    }
+  "verified_findings": [
+    "GameLoop starts com.tencent.ig and reports OnAppRunning bRun=1; the black screen is not a simple failure to launch the package.",
+    "Host NVIDIA RTX 4060 and OpenGL 4.6 are detected and a render policy is selected.",
+    "A reversible ForceDirectX 0->1 probe did not repair the black main render area and was rolled back to 0.",
+    "AEngine100.log repeatedly records crash_type=4002 for com.tencent.ig with exception 0xc0000005 in /system/lib64/libc.so and stack frames in /system/lib64/libhotx612.so.",
+    "Preserved guest logcat records Fatal signal 11 SIGSEGV and repeated com.tencent.ig process death/restart while GameLoop initializes libhotx612.so Houdini 6.1.2d and loads ARM64 libanogs.so and libanort.so through NativeBridge.",
+    "The locally installed APK source is GL_4.6_FIXCRASH.apk, not a clean official package. Its lib/arm64-v8a/libalo.so is a 102-byte JSON marker naming profile NTHMOD and URL http://android.keyauth.click/uplib.php.",
+    "The official PUBG MOBILE site currently exposes PUBGMOBILE_Global_4.6.0_uawebsite_livik01_5678FCFA.apk (Content-Length 1274351207, Last-Modified 2026-08-26, byte ranges supported).",
+    "Without downloading the 1.27 GB APK, its ZIP central directory was read by HTTP range and compared with the local APK. Critical native libraries differ: official libanogs.so CRC a99b4e2e vs local eb7f6ea4; official libanort.so 7d3562a3 vs local 56408602; official libUE4.so 0b2fa301 vs local cfc972ca; official libkk-image.so d77c2a35 vs local 0c1ad151.",
+    "The local APK also contains non-official/additional native entries including libAkAudioVisiual.so, libalo.so and libpandora-core.so, while the official APK contains multiple libraries absent from the local package.",
+    "Official libanogs.so and libanort.so were extracted losslessly via HTTP byte ranges only, with CRC verification, into C:\\Temp\\TxGameDownload\\MobileGamePCShared\\official_probe; no full APK download was required."
   ],
-  "exact_observed_failure": {
-    "gameloop_crash_type": 4002,
-    "exception_code": "0xc0000005",
-    "exception_module": "/system/lib64/libc.so",
-    "exception_module_offset": "0xb6bd1",
-    "observed_stack_modules": [
-      "/system/lib64/libc.so",
-      "/system/lib64/libhotx612.so"
+  "exact_current_causal_frontier": "The strongest evidence-backed hypothesis is now that the black screen is downstream of the modified PUBG 4.6 native payload interacting with GameLoop's ARM64-to-x86_64 NativeBridge/Houdini path. The first loaded native libraries libanogs.so and libanort.so are byte-different from the official 4.6 APK, and the repeated crash occurs in the translation/runtime path. Causality is not yet proven until a surgical official-library substitution is replayed.",
+  "prepared_repair_probe": {
+    "official_libs_ready": [
+      "C:\\Temp\\TxGameDownload\\MobileGamePCShared\\official_probe\\libanogs.so",
+      "C:\\Temp\\TxGameDownload\\MobileGamePCShared\\official_probe\\libanort.so"
     ],
-    "libhotx612_observed_offsets": [
-      "0x33305b",
-      "0x351b25",
-      "0x1ff94d",
-      "0x1d42bf"
-    ],
-    "repetition": "AEngine100.log records repeated crash_type=4002 events for com.tencent.ig across multiple relaunch attempts.",
-    "renderer_side_symptom": "libOpenglRender.log repeatedly reports OpenFileMapping Global\\AowShm-* Fail Error=2 while the main GameLoop render area remains black in direct window capture."
+    "guest_script": "C:\\Temp\\TxGameDownload\\MobileGamePCShared\\inter\\restore_official_anticheat_probe.sh",
+    "probe_behavior": "Back up the installed guest libanogs/libanort to shared storage, replace only those two with official 4.6 bytes, relaunch once, and compare crash/render behavior.",
+    "not_executed_reason": "The normal GameLoop command injection path is cached by the already-running emulator. During preparation, cmd.conf also changed independently (a pre-existing rootcause_once route appeared), proving concurrent troubleshooting activity. The temporary command injection was removed and cmd.conf restored exactly rather than forcing a restart that could interfere with another active controller."
   },
-  "current_causal_frontier": "Determine why com.tencent.ig repeatedly raises access violation 0xc0000005 in the Android/x86-64 execution path involving libc.so and libhotx612.so, and whether the trigger is the current PUBG native payload, GameLoop's ARM64 translation/runtime state, or a concrete dependency/loader mismatch. Do not perform more renderer toggles or reinstall/rename data until this crash boundary is resolved.",
-  "next_action": "Recover and compare the exact current PUBG native-library payload and GameLoop translation/runtime artifacts against a known-good or official package/runtime state, using preserved files and hashes first; identify the first divergent library/dependency that is causally upstream of the libhotx612/libc access violation, then change only that component and replay once.",
+  "next_action": "At the next safe exclusive-control window, execute the already-prepared two-library official substitution probe exactly once, preserve before/after hashes and crash/render evidence, then either keep the repair if the black screen clears or restore the backed-up libraries immediately and move only to the next divergent library causally implicated by the new trace.",
   "constraints": {
     "incremental_spend_usd": 0,
     "val_town_used": false,
     "sprites_used": false,
-    "destructive_reinstall_forbidden_without_causal_evidence": true,
     "preserve_user_data": true,
-    "no_repeat_renderer_toggle": true
+    "no_destructive_reinstall_without_causal_evidence": true,
+    "no_repeat_renderer_toggle": true,
+    "no_duplicate_abi_or_translation_experiments": true,
+    "do_not_override_concurrent_controller_state": true
   }
 }
