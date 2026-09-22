@@ -150,7 +150,7 @@ def render_html(result):
             "</td><td><pre>"+html.escape(json.dumps(c.get("evidence",{}),ensure_ascii=False,indent=2))+"</pre></td></tr>"
         )
     return """<!doctype html><html><head><meta charset='utf-8'><title>Project Brain Capability Reality Audit</title>
-<style>body{font-family:system-ui,Segoe UI,Arial,sans-serif;max-width:1200px;margin:32px auto;padding:0 16px}table{border-collapse:collapse;width:100%}th,td{border:1px solid #bbb;padding:8px;vertical-align:top}pre{white-space:pre-wrap;margin:0}.summary{font-size:1.1rem;font-weight:600}</style></head>
+<style>body{font-family:system-ui,Segoe UI,Arial,sans-serif;max-width:1200px;margin:32px auto;padding:0 16px}table{border-collapse:collapse;width:100%%}th,td{border:1px solid #bbb;padding:8px;vertical-align:top}pre{white-space:pre-wrap;margin:0}.summary{font-size:1.1rem;font-weight:600}</style></head>
 <body><h1>Project Brain Capability Reality Audit</h1>
 <p class='summary'>Status: %s | Pass: %s | Fail: %s | Generation: %s</p>
 <table><thead><tr><th>Check</th><th>Result</th><th>Severity</th><th>Meaning</th><th>Evidence</th></tr></thead><tbody>%s</tbody></table></body></html>""" % (
