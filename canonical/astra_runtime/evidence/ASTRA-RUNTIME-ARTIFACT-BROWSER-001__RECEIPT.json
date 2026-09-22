@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-22T04:46:48.681947+00:00",
+  "mission_id": "ASTRA-RUNTIME-ARTIFACT-BROWSER-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_ARTIFACT_BROWSER_001.json",
+  "mission_sha256": "726c2f68cb308b7361a1b8d6e696633ae2e9e62d5c5b29b89778c75d452e6249",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "c1c2bac18b959750c63183d53fd1becbb7a601c1f9e0f6473e3111a422836d84",
+  "status": "COMPLETE",
+  "steps_completed": 3
+}
