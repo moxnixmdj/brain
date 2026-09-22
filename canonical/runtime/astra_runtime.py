@@ -61,6 +61,8 @@ def verify(step,result):
     raise Blocker("UNKNOWN_VERIFIER:"+typ)
 
 def main():
+    STATE_DIR.mkdir(parents=True,exist_ok=True)
+    EVID_DIR.mkdir(parents=True,exist_ok=True)
     ap=argparse.ArgumentParser()
     ap.add_argument("mission")
     a=ap.parse_args()
