@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_POINTER_V1",
-  "canonical_generation": "2026-09-22-parallel-capability-realization",
+  "canonical_generation": "2026-09-22-capability-arbitrage-runtime-locked",
   "control_plane": {
     "provider": "GitHub",
     "repository": "moxnixmdj/brain",
@@ -26,7 +26,8 @@
     "canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md",
     "canonical/laws/EXECUTION_LEVERAGE_AND_ANTI_DRIFT_LAW_V1.md",
     "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
-    "canonical/laws/CAPABILITY_REALIZATION_MISSION_LOCK_V1.md"
+    "canonical/laws/CAPABILITY_REALIZATION_MISSION_LOCK_V1.md",
+    "canonical/laws/CAPABILITY_ARBITRAGE_RUNTIME_STRATEGY_V1.md"
   ],
   "boot_requirements": {
     "read_mandatory_laws_before_execution": true,
@@ -56,7 +57,11 @@
     "capability_realization_law_path": "canonical/laws/CAPABILITY_REALIZATION_MISSION_LOCK_V1.md",
     "forbid_proxy_goal_substitution": true,
     "predicates_must_be_subordinate_to_live_capability_question": true,
-    "benchmarks_must_be_subordinate_to_live_capability_question": true
+    "benchmarks_must_be_subordinate_to_live_capability_question": true,
+    "capability_arbitrage_strategy_required": true,
+    "capability_arbitrage_strategy_path": "canonical/laws/CAPABILITY_ARBITRAGE_RUNTIME_STRATEGY_V1.md",
+    "inherit_verified_capability_gains": true,
+    "exhaust_existing_solution_space_before_invention": true
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
@@ -110,11 +115,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 0,
-    "next_step": "RUN_HIGH_VALUE_REAL_MISSIONS_THAT_FORCE_MULTIPLE_TARGET_CAPABILITIES__USE_STRONGEST_EXISTING_TOOL_PER_SUBTASK__PARALLELIZE_INDEPENDENT_LANES__REPAIR_ONLY_OBSERVED_CAPABILITY_WEAKNESSES__PACKAGE_INTO_WORKERS_ONLY_AFTER_CAPABILITY_IS_STRONG",
+    "next_step": "RECONCILE_TARGET_CAPABILITY_GRAPH__RANK_DEFICITS_BY_VERIFIED_CAPABILITY_GAIN_PER_WALL_CLOCK_TIME__DISCOVER_EXISTING_SUPPLY_FOR_TOP_DEFICIT__BIND_STRONGEST_ADEQUATE_ZERO_INCREMENTAL_COST_ROUTE__REPLAY_VERIFY_INHERIT__REPEAT",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "TARGET_ASTRA_CAPABILITIES_ARE_ONLY_PARTIALLY_REALIZED_ACROSS_THE_SYSTEM__NO_SINGLE_WORKER_OR_PREDICATE_IS_THE_BLOCKER",
+    "critical_blocker": "CAPABILITY_DEFICIT_GRAPH_NOT_YET_RECONCILED_WITH_WORLD_AND_BRAIN_CAPABILITY_SUPPLY",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -200,7 +205,15 @@
     "integrated_cognitive_worker_candidate": "ICW-CHATGPT-SOL-1",
     "integrated_cognitive_worker_checkpoint_path": "canonical/icw/ICW-CHATGPT-SOL-1/CHECKPOINT_V1.json",
     "integrated_cognitive_worker_mission_progress": "AUDITOR_REAL_MISSION_COMPLETE__RESUME_AND_AUTONOMOUS_WAKE_NOT_YET_PROVEN",
-    "capability_realization_strategy_path": "canonical/capabilities/CAPABILITY_REALIZATION_STRATEGY_V2.json"
+    "capability_realization_strategy_path": "canonical/capabilities/CAPABILITY_REALIZATION_STRATEGY_V2.json",
+    "capability_acquisition_loop": [
+      "DISCOVER",
+      "BIND",
+      "REPLAY",
+      "VERIFY",
+      "INHERIT"
+    ],
+    "worker_packaging": "DEFERRED_UNTIL_SHARED_RUNTIME_CAPABILITY_IS_STRONG"
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
@@ -224,13 +237,14 @@
     "infrastructure_freeze_when_next_real_mission_executable": true,
     "forbid_relabeling_bounded_executor_as_superworker": true,
     "only_current_allowed_frontier_actions": [
-      "execute real missions that directly exercise target Astra capabilities",
-      "search and reuse existing tools before invention",
-      "parallelize independent capability lanes when it reduces wall clock time",
-      "repair observed capability weaknesses directly",
-      "integrate mission state and evidence through canonical Brain",
-      "use verification only to establish whether the capability actually worked",
-      "defer worker packaging scaling and identity accounting until capabilities are strong"
+      "reconcile target capability deficits against already inherited Brain capabilities",
+      "rank deficits by verified capability gain per wall clock time",
+      "perform broad existing solution discovery for the highest leverage deficit",
+      "bind the strongest adequate zero incremental cost capability supplier with the thinnest adapter",
+      "replay real consequential work requiring that capability",
+      "independently verify the capability gain",
+      "inherit the verified route so future work does not rediscover it",
+      "invent only after relevant existing routes are falsified"
     ],
     "truth_first_law": "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
     "live_canonical_refresh_before_consequential_action": true,
@@ -260,7 +274,9 @@
     "benchmarks_are_not_progress_unless_they_change_a_capability_decision": true,
     "worker_count_is_not_progress_unless_it_increases_real_useful_capability_or_capacity": true,
     "infrastructure_is_not_progress_unless_it_removes_a_current_capability_blocker": true,
-    "pre_action_capability_question": "Does this action directly make a target Astra capability more real, stronger, broader, more reliable, more autonomous, or remove the current blocker to doing so?"
+    "pre_action_capability_question": "Does this action directly make a target Astra capability more real, stronger, broader, more reliable, more autonomous, or remove the current blocker to doing so?",
+    "capability_arbitrage_strategy": "canonical/laws/CAPABILITY_ARBITRAGE_RUNTIME_STRATEGY_V1.md",
+    "optimization_target": "VERIFIED_TARGET_CAPABILITY_GAIN_PER_WALL_CLOCK_TIME"
   },
   "standby_runtime": {
     "runtime_id": "SUPERHERO-RUNTIME-2.6.0-DIRECT-SIGNED-PERMANENT",
@@ -279,7 +295,9 @@
     "predicates_role": "SUBORDINATE_EVIDENCE_ONLY",
     "benchmarks_role": "SUBORDINATE_DIAGNOSTIC_ONLY",
     "infrastructure_role": "ONLY_IF_CAUSALLY_REQUIRED_TO_REALIZE_OR_OPERATE_CAPABILITY",
-    "priority": "CORRECT_ROUTE_FIRST__THEN_MINIMUM_WALL_CLOCK_TIME_TO_REAL_VERIFIED_CAPABILITY"
+    "priority": "CORRECT_ROUTE_FIRST__THEN_MINIMUM_WALL_CLOCK_TIME_TO_REAL_VERIFIED_CAPABILITY",
+    "method": "CAPABILITY_ARBITRAGE__DISCOVER_BIND_REPLAY_VERIFY_INHERIT",
+    "optimization_target": "MAXIMIZE_VERIFIED_TARGET_CAPABILITY_GAIN_PER_WALL_CLOCK_TIME"
   },
   "active_persistent_controllers": [
     {
