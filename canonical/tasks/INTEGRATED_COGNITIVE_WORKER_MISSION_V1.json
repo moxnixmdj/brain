@@ -28,6 +28,34 @@
     "do not count benchmark completion as mission completion",
     "do not promote from one narrow HTTP or repository task"
   ],
-  "success_definition": "The exact same worker identity demonstrably completes the full cognitive and persistent loop on the real mission.",
-  "promotion_claim": false
+  "success_definition": "ICW-WORK-ASTRA-1, as one cognitive identity, completes the concrete Capability Reality Auditor mission end to end, including research, reasoning, coding, browser inspection, correction, checkpoint, resume, and verification, with durable evidence in canonical Brain.",
+  "promotion_claim": false,
+  "concrete_real_mission": {
+    "title": "Build and validate the Project Brain Capability Reality Auditor",
+    "consequence": "This tool becomes the fail-closed guard against false capability promotion and directly protects the capability-realization mission.",
+    "task": [
+      "Read the live canonical pointer, mandatory laws, Astra target capability map, correction artifacts, and worker identities.",
+      "Use current official OpenAI Astra documentation only as an external target reference, never as a grading shortcut.",
+      "Implement a runnable auditor inside the Brain repository that checks canonical state for contradictions and invalid promotion patterns.",
+      "At minimum detect: internal-suite-to-external-parity inflation; component-evidence composition into one worker; P_real mismatch with worker identities; stale or contradictory mission/frontier state; forbidden Val Town/Sprites routes; missing capability-realization mission lock; benchmark/predicate proxy-goal substitution.",
+      "Create deterministic regression fixtures for the known 2026-09-22 failures and make the auditor fail closed on them.",
+      "Generate both a machine-readable JSON report and a human-readable HTML report from the live canonical state.",
+      "Run the auditor and its tests on the live repository.",
+      "Open the HTML report in a browser/computer environment and visually inspect it for correctness and usability.",
+      "If the auditor discovers a real live inconsistency, repair only the evidence-supported metadata defect, rerun the audit, and preserve before/after evidence.",
+      "Persist a durable checkpoint to canonical Brain after analysis and before implementation.",
+      "Resume the same worker identity from that checkpoint after a session/context boundary without repeating completed analysis.",
+      "Finish with tests green, live audit clean or explicitly blocked by a real unresolved issue, and durable evidence committed."
+    ],
+    "required_outputs": [
+      "auditor source code",
+      "regression tests",
+      "JSON audit report",
+      "HTML audit report",
+      "checkpoint receipt",
+      "resume receipt",
+      "browser visual-inspection evidence",
+      "final verification receipt"
+    ]
+  }
 }
