@@ -49,10 +49,11 @@
       }
     }
   ],
-  "replay": 1,
+  "replay": 2,
   "invalidation": {
     "prior_run_id": 35686321365,
     "reason": "MISSION_HANDOFF_CONTAMINATION__RUN_EXECUTED_REALITY_AUDIT_INSTEAD_OF_SWE_MISSION",
-    "promotional_credit": false
+    "promotional_credit": false,
+    "prior_workflow_yaml_corruption": true
   }
 }
