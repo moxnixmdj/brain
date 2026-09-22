@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_ICW_CHECKPOINT_V1",
+  "worker_identity": "ICW-CHATGPT-SOL-1",
+  "mission_id": "ICW-REAL-END-TO-END-001",
+  "checkpoint_state": "MISSION_IMPLEMENTATION_COMPLETE__PERSISTENCE_RESUME_NOT_YET_PROVEN",
+  "canonical_generation_at_checkpoint": "2026-09-22-integrated-cognitive-worker-frontier",
+  "completed": [
+    "refreshed live canonical state",
+    "identified missing Capability Reality Auditor",
+    "implemented dependency-free auditor",
+    "implemented regression tests",
+    "ran tests: 2/2 pass",
+    "ran live audit: 12/12 pass",
+    "found and repaired HTML renderer percent-format defect",
+    "rendered HTML through installed Chrome headless",
+    "visually inspected rendered report",
+    "preserved live JSON audit, HTML report, and visual-inspection receipt in canonical GitHub"
+  ],
+  "evidence": {
+    "auditor_source": "canonical/runtime/capability_reality_auditor.py",
+    "tests": "canonical/tests/test_capability_reality_auditor.py",
+    "live_json": "canonical/audits/CAPABILITY_REALITY_AUDIT_LIVE_V1.json",
+    "live_html": "canonical/audits/CAPABILITY_REALITY_AUDIT_LIVE_V1.html",
+    "visual_receipt": "canonical/audits/CAPABILITY_REALITY_AUDIT_VISUAL_INSPECTION_V1.json",
+    "source_commit": "215ad4c2c6c6c3e4ff19adf8eeb833ddc55d7f90",
+    "renderer_fix_commit": "b41736e18d1fdfdbffd9b2c725aabd28e72f976b",
+    "json_commit": "0a9fb19b26bcd238c89ce4708e48a76906d14ac7",
+    "html_commit": "9a4a046efa5acc9c45fab68bba8d52d2d2811815",
+    "visual_commit": "1f34c7a36cdd452957ad4a57e3d0925f568957d1"
+  },
+  "remaining_unproven": [
+    "same cognitive identity resumes mission after an actual chat/context/session boundary from durable checkpoint",
+    "same persistent cognitive identity autonomously wakes and continues without user re-prompt",
+    "arbitrary interactive desktop GUI control by this exact identity"
+  ],
+  "next_action": "On next genuine context/session boundary, ICW-CHATGPT-SOL-1 must read this checkpoint first, avoid repeating completed analysis, continue from the remaining unproven properties, and preserve a resume receipt.",
+  "promotion_claim": false,
+  "p_real_after_checkpoint": 0
+}
