@@ -7,7 +7,7 @@
     {
       "id": "fetch-current-python-download-page",
       "adapter": "http",
-      "url": "https://www.python.org/downloads/",
+      "url": "https://www.python.org/downloads/feed.rss",
       "timeout_s": 20,
       "max_bytes": 120000,
       "verify": {
@@ -19,7 +19,7 @@
     {
       "id": "consume-research-and-create-artifact",
       "adapter": "shell",
-      "command": "set -euo pipefail; : \"${ASTRA_STEP_0_BODY:?CROSS_STEP_EVIDENCE_NOT_EXPOSED}\"; mkdir -p canonical/astra_runtime/evidence; python - <<'PY'\nimport json, os, pathlib, re\nbody=os.environ['ASTRA_STEP_0_BODY']\nm=re.search(r'Latest Python 3 Release[^0-9]*Python ([0-9.]+)', body, re.I|re.S)\nif not m:\n    m=re.search(r'Python ([0-9]+\\.[0-9]+\\.[0-9]+)', body)\nif not m:\n    raise SystemExit('LATEST_VERSION_NOT_EXTRACTED')\nversion=m.group(1)\nout={'source':'https://www.python.org/downloads/','extracted_latest_version':version}\np=pathlib.Path('canonical/astra_runtime/evidence/research_artifact_001.json')\np.write_text(json.dumps(out,indent=2)+'\\n')\nhtml=pathlib.Path('canonical/astra_runtime/evidence/research_artifact_001.html')\nhtml.write_text(f'<html><body><h1>Python release research</h1><p>Latest observed Python version: {version}</p><p>Source: python.org/downloads</p></body></html>')\nPY",
+      "command": "set -euo pipefail; : \"${ASTRA_STEP_0_BODY:?CROSS_STEP_EVIDENCE_NOT_EXPOSED}\"; mkdir -p canonical/astra_runtime/evidence; python - <<'PY'\nimport json, os, pathlib, re\nbody=os.environ['ASTRA_STEP_0_BODY']\nm=re.search(r'<title>Python ([0-9]+\\.[0-9]+\\.[0-9]+)</title>', body)\nif not m:\n    m=re.search(r'Python ([0-9]+\\.[0-9]+\\.[0-9]+)', body)\nif not m:\n    raise SystemExit('LATEST_VERSION_NOT_EXTRACTED')\nversion=m.group(1)\nout={'source':'https://www.python.org/downloads/feed.rss','extracted_latest_version':version}\npathlib.Path('canonical/astra_runtime/evidence/research_artifact_001.json').write_text(json.dumps(out,indent=2)+'\\n')\npathlib.Path('canonical/astra_runtime/evidence/research_artifact_001.html').write_text(f'<html><body><h1>Python release research</h1><p>Latest observed Python version: {version}</p><p>Source: Python releases RSS</p></body></html>')\nPY",
       "verify": {
         "type": "file_exists",
         "path": "canonical/astra_runtime/evidence/research_artifact_001.html"
@@ -36,6 +36,11 @@
     "prior_failure": "STALE_PRE_REPAIR_HTTP_EVIDENCE_REUSED_ON_RESUME",
     "repair_commit": "e937db624e95bbe66f5b85f2c539d15e854d695b",
     "repair": "Prefer rehydrated step results over stale history; replay external research step on resume",
+    "replay_authorized": true
+  },
+  "replay_after_parser_repair": {
+    "prior_failure": "LATEST_VERSION_NOT_EXTRACTED_FROM_TRUNCATED_HTML",
+    "repair": "Use official machine-readable Python releases RSS feed",
     "replay_authorized": true
   }
 }
