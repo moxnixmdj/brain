@@ -38,5 +38,11 @@
     "repair_commit": "66a21bc4865151c56612b8c6137152e6f3dceeba",
     "repair": "Constrained read-only goal loop with typed actions and optional zero-key planner source; runtime validates and executes all actions",
     "replay_authorized": true
+  },
+  "replay_after_root_cause_change_2": {
+    "prior_failure": "PLANNER_ACTION_MISSING",
+    "repair_commit": "cc2b01fbcbaa34aa14a11d188197204660f91efe",
+    "repair": "Accept singular action or validated plural actions schema from optional planner",
+    "replay_authorized": true
   }
 }
