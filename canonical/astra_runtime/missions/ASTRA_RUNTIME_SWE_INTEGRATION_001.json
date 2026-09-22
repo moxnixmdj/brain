@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-SWE-INTEGRATION-001",
+  "purpose": "Integrate and exercise a previously verified real software-engineering repair through the same shared ASTRA runtime. This is an integration test, not a rerun of solution discovery.",
+  "provenance": {
+    "source_branch": "astra-astropy-sip-native-20260920-v2",
+    "preserved_patch_sha256": "ab966e5a694ee8c2f6d64db813327535f68237e77be8ae6d15962199b0db0dd7",
+    "upstream_commit": "5d68e4fbce3b4dfe6f412b5b9b882166dee95761"
+  },
+  "steps": [
+    {
+      "id": "recover-preserved-capability",
+      "adapter": "shell",
+      "command": "set -euo pipefail; git fetch --depth=1 origin astra-astropy-sip-native-20260920-v2; git show FETCH_HEAD:astra-evidence/astropy8992-candidate.patch > /tmp/astropy8992.patch; test \"$(sha256sum /tmp/astropy8992.patch | awk '{print $1}')\" = \"ab966e5a694ee8c2f6d64db813327535f68237e77be8ae6d15962199b0db0dd7\"",
+      "verify": {
+        "type": "returncode_zero"
+      }
+    },
+    {
+      "id": "materialize-fresh-upstream",
+      "adapter": "shell",
+      "command": "set -euo pipefail; rm -rf /tmp/astra-runtime-astropy; git init /tmp/astra-runtime-astropy; git -C /tmp/astra-runtime-astropy remote add origin https://github.com/astropy/astropy.git; git -C /tmp/astra-runtime-astropy fetch --depth=1 origin 5d68e4fbce3b4dfe6f412b5b9b882166dee95761; git -C /tmp/astra-runtime-astropy checkout --detach FETCH_HEAD; test \"$(git -C /tmp/astra-runtime-astropy rev-parse HEAD)\" = \"5d68e4fbce3b4dfe6f412b5b9b882166dee95761\"",
+      "verify": {
+        "type": "returncode_zero"
+      }
+    },
+    {
+      "id": "install-upstream-test-runtime",
+      "adapter": "shell",
+      "command": "set -euo pipefail; cd /tmp/astra-runtime-astropy; python -m pip install --disable-pip-version-check -e '.[test]'",
+      "verify": {
+        "type": "returncode_zero"
+      }
+    },
+    {
+      "id": "apply-preserved-repair",
+      "adapter": "shell",
+      "command": "set -euo pipefail; cd /tmp/astra-runtime-astropy; git apply --check /tmp/astropy8992.patch; git apply /tmp/astropy8992.patch; git diff --check",
+      "verify": {
+        "type": "returncode_zero"
+      }
+    },
+    {
+      "id": "execute-focused-regression",
+      "adapter": "shell",
+      "command": "set -euo pipefail; cd /tmp/astra-runtime-astropy; python -m pytest -q astropy/wcs/tests/test_wcs.py::test_sip_foc2pix_without_inverse_coefficients astropy/wcs/tests/test_wcs.py::test_sip",
+      "verify": {
+        "type": "returncode_zero"
+      }
+    }
+  ]
+}
