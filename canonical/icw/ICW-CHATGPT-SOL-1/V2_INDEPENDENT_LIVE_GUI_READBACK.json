@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_ICW_V2_INDEPENDENT_LIVE_GUI_READBACK_V1",
+  "candidate_identity": "ICW-CHATGPT-SOL-1",
+  "mission_id": "ICW-PROMOTION-CLOSURE-V2-20260922",
+  "verifier_role": "FRESH_INDEPENDENT_NONMUTATING_LIVE_GUI_OBSERVER",
+  "device": "Mo",
+  "device_id": "5919022d-ce41-4ed8-9fe2-c7496920724b",
+  "observation": {
+    "ok": true,
+    "reader_pid": 423336,
+    "window_handle": 15403506,
+    "window_title": "icw_v2_gui_canary.txt - Notepad",
+    "document_handle": 5703960,
+    "document_runtime_id": "42.5703960",
+    "control_class": "RichEditD2DPT",
+    "control_type": "ControlType.Document",
+    "method": "TextPattern",
+    "exact_text": "ICW-CHATGPT-SOL-1|ICW-PROMOTION-CLOSURE-V2-20260922|GUI-EFFECT",
+    "observed_at_utc": "2026-09-22T08:43:40.2001544Z"
+  },
+  "expected": {
+    "title_contains": "icw_v2_gui_canary",
+    "exact_text": "ICW-CHATGPT-SOL-1|ICW-PROMOTION-CLOSURE-V2-20260922|GUI-EFFECT"
+  },
+  "pass": true,
+  "mutation_performed": false,
+  "candidate_evidence_modified": false,
+  "purpose": "Close only the fresh independent live UIAutomation readback gate identified by INDEPENDENT_PROMOTION_ADJUDICATION_V2.json. This artifact is not self-promotion authority.",
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "val_town_used": false,
+    "sprites_used": false
+  }
+}
