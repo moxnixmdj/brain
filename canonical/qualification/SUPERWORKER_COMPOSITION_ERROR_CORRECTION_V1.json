@@ -1,0 +1,23 @@
+{
+  "schema": "PROJECT_BRAIN_SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1",
+  "status": "CANONICAL_CORRECTION",
+  "reason": "The prior REAL_SUPERWORKER promotions composed evidence from materially different execution systems. V6 broad cognition was produced by a ChatGPT controller session, while persistence/relaunch/task acquisition/dedupe evidence came from deterministic controllers and other runtimes. Joining those booleans did not prove that one integrated cognitive worker possessed the entire loop.",
+  "invalid_inference": "COMPONENT_A_CAPABILITY + COMPONENT_B_PERSISTENCE => ONE_REAL_SUPERWORKER",
+  "preserved_truth": [
+    "V6 demonstrated broad cross-domain research/code/artifact work in a ChatGPT controller session.",
+    "Deterministic controllers demonstrated durable state, checkpoint/relaunch, dedupe, provider failover, and task machinery.",
+    "Clean-room reproduction demonstrated reproducibility of the deterministic controller mechanism.",
+    "Two-worker scaling measurement remains valid only for the deterministic controller mechanism."
+  ],
+  "revoked_claims": [
+    "SUPERWORKER-INTEGRATED-1 counts as one real integrated cognitive Superworker",
+    "SUPERWORKER-INTEGRATED-2 counts as a second real integrated cognitive Superworker",
+    "P_real=2"
+  ],
+  "corrected_population": {
+    "p_real_integrated_cognitive_superworkers": 0,
+    "component_stacks_preserved": 2
+  },
+  "required_next_step": "Build one single integrated cognitive worker in which the same durable identity executes goal->reason->discover->research->act->inspect->correct->verify->checkpoint->resume->finish, then prove that exact system end-to-end without stitching capability evidence across different executors.",
+  "no_self_certification": true
+}
