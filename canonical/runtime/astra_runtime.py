@@ -161,7 +161,8 @@ def run_goal(step, mission):
         if not isinstance(action,dict) and isinstance(obj.get("type"),str):
             action=obj
         if not isinstance(action,dict):
-            raise Blocker("PLANNER_ACTION_MISSING_KEYS:"+",".join(sorted(map(str,obj.keys()))))
+            diag=json.dumps(obj,sort_keys=True)[:2200].replace("\n"," ")
+            raise Blocker("PLANNER_ACTION_MISSING_OBJECT:"+diag)
         typ=action.get("type")
         if typ not in {"read_file","list_tree","search_text","http_get","finish"}:
             raise Blocker("PLANNER_ACTION_REJECTED:"+str(typ))
