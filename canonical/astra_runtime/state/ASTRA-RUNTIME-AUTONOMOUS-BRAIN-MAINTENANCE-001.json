@@ -1,0 +1,21 @@
+{
+  "blocker": {
+    "adapter": "goal",
+    "error": "Blocker:MISSING_ADAPTER:goal",
+    "mission_id": "ASTRA-RUNTIME-AUTONOMOUS-BRAIN-MAINTENANCE-001",
+    "observed_at_utc": "2026-09-22T04:48:37.592297+00:00",
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "autonomously-resolve-maintenance-goal",
+    "step_index": 0
+  },
+  "created_at_utc": "2026-09-22T04:48:37.592275+00:00",
+  "history": [],
+  "mission_id": "ASTRA-RUNTIME-AUTONOMOUS-BRAIN-MAINTENANCE-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_AUTONOMOUS_BRAIN_MAINTENANCE_001.json",
+  "mission_sha256": "bf91b898784e6cc70e300b2489227c59dfa28caa4bde86a79d49e0a589c24125",
+  "next_step": 0,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-22T04:48:37.592453+00:00"
+}
