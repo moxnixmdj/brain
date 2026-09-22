@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-REALITY-AUDIT-001",
+  "purpose": "Exercise the shared runtime against live canonical Brain state using existing audited components; freeze the first real blocker instead of inventing more architecture.",
+  "steps": [
+    {
+      "id": "run-auditor-tests",
+      "adapter": "shell",
+      "command": "python -m unittest canonical.tests.test_capability_reality_auditor",
+      "verify": {
+        "type": "returncode_zero"
+      }
+    },
+    {
+      "id": "run-live-capability-audit",
+      "adapter": "shell",
+      "command": "python canonical/runtime/capability_reality_auditor.py --root . --json-out canonical/astra_runtime/evidence/live_audit.json --html-out canonical/astra_runtime/evidence/live_audit.html",
+      "verify": {
+        "type": "json_field_equals",
+        "path": "canonical/astra_runtime/evidence/live_audit.json",
+        "field": "status",
+        "value": "PASS"
+      }
+    }
+  ]
+}
