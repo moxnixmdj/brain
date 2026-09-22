@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_REGRESSION_CASE_V1",
+  "id": "2026-09-22_INTERNAL_SUITE_EXTERNAL_PARITY_INFLATION",
+  "status": "PERMANENT_FAIL_CLOSED_REGRESSION",
+  "incident": [
+    "Project Brain completed its own 61-predicate Astra-themed internal suite.",
+    "Canonical state then promoted internal completion into full Astra external parity.",
+    "The internal suite itself did not constitute common-benchmark evidence against the external target.",
+    "This created a circular self-certification failure."
+  ],
+  "prohibited_patterns": [
+    "INTERNAL_BENCHMARK_COMPLETION_IMPLIES_EXTERNAL_MODEL_PARITY",
+    "INTERNAL_CAPABILITY_LABEL_IMPLIES_EXTERNAL_STRENGTH",
+    "PROJECT_DEFINED_SUITE_USED_AS_SOLE_PROOF_OF_TARGET_EQUIVALENCE",
+    "PERCENT_PARITY_WITHOUT_COMMON_MEASUREMENT_BASIS"
+  ],
+  "required_prevention": [
+    "SEPARATE_INTERNAL_SUITE_STATUS_FROM_EXTERNAL_PARITY_STATUS",
+    "REQUIRE_COMMON_EXTERNAL_BENCHMARK_EVIDENCE",
+    "REPORT_RAW_SCORES_BEFORE_PARITY_PERCENTAGE",
+    "FAIL_CLOSED_WHEN_EXTERNAL_TARGET_DEFINITIONS_OR_BENCHMARKS_ARE_MISSING",
+    "NEVER_INHERIT_EXTERNAL_CAPABILITY_STRENGTH_FROM_INTERNAL_LABELS"
+  ],
+  "passing_condition": "Future agents must describe 61/61 only as internal-suite completion and external Astra parity as unverified until common benchmark evidence exists.",
+  "correction_path": "canonical/astra/ASTRA_EXTERNAL_PARITY_CORRECTION_V1.json"
+}
