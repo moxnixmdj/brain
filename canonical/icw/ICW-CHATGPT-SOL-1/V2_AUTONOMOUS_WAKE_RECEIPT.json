@@ -1,0 +1,19 @@
+{
+  "schema": "PROJECT_BRAIN_ICW_V2_AUTONOMOUS_WAKE_RECEIPT_V1",
+  "worker_identity": "ICW-CHATGPT-SOL-1",
+  "mission_id": "ICW-PROMOTION-CLOSURE-V2-20260922",
+  "checkpoint_path": "canonical/icw/ICW-CHATGPT-SOL-1/PROMOTION_CLOSURE_CHECKPOINT_V2.json",
+  "checkpoint_blob_sha": "642e5c6910218cad4986c73d84ff6756ce18f812",
+  "resume_kind": "PLATFORM_NATIVE_SCHEDULED_AUTONOMOUS_WAKE",
+  "same_identity_resumed": true,
+  "gui_action_repeated": false,
+  "completed_gui_work_reused": true,
+  "live_canary_mutated_or_closed": false,
+  "remaining_requirement": "FRESH_INDEPENDENT_VERIFICATION",
+  "self_promotion_forbidden": true,
+  "promotion_claimed": false,
+  "p_real": 0,
+  "incremental_spend_usd": 0,
+  "val_town_used": false,
+  "sprites_used": false
+}
