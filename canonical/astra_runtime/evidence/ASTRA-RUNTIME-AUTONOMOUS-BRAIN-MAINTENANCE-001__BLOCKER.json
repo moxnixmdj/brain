@@ -1,8 +1,8 @@
 {
   "adapter": "goal",
-  "error": "Blocker:PLANNER_ACTION_MISSING_OBJECT:{\"reasoning\": \"We must decide if there's measurable material contradiction or stale frontier defect. Need to inspect live Project Brain canonical state. Must read the docs or files. Let's list tree.\", \"role\": \"assistant\", \"tool_calls\": []}",
+  "error": "Blocker:PLANNER_ACTION_MISSING_OBJECT:{\"reasoning\": \"We need to inspect Project Brain canonical state to see if there is a material contradiction or stale frontier defect, following constraints. Must search prior canonical evidence before mutation. So retrieve current state. Likely we need read_file on some path. Not sure where state stored. Could be project root. Use search_text or list_tree. Let's list tree.\", \"role\": \"assistant\", \"tool_calls\": []}",
   "mission_id": "ASTRA-RUNTIME-AUTONOMOUS-BRAIN-MAINTENANCE-001",
-  "observed_at_utc": "2026-09-22T04:59:51.887127+00:00",
+  "observed_at_utc": "2026-09-22T05:00:56.638749+00:00",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
   "step_id": "autonomously-resolve-maintenance-goal",
   "step_index": 0
