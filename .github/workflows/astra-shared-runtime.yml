@@ -1,0 +1,37 @@
+name: ASTRA Shared Runtime Mission
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'canonical/astra_runtime/missions/**.json'
+permissions:
+  contents: write
+concurrency:
+  group: astra-shared-runtime
+  cancel-in-progress: false
+
+jobs:
+  run-mission:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - run: git pull --ff-only
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Execute shared runtime mission
+        run: |
+          MISSION=$(git diff --name-only HEAD^ HEAD | grep '^canonical/astra_runtime/missions/.*\.json$' | head -n1)
+          test -n "$MISSION"
+          python canonical/runtime/astra_runtime.py "$MISSION"
+      - name: Persist runtime state and evidence
+        if: always()
+        run: |
+          git config user.name 'Project Brain ASTRA Runtime'
+          git config user.email 'project-brain-astra-runtime@users.noreply.github.com'
+          git add canonical/astra_runtime/state/ canonical/astra_runtime/evidence/
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record ASTRA shared runtime mission execution'
+            git push
+          fi
