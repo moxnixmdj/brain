@@ -1,0 +1,9 @@
+{
+  "adapter": "shell",
+  "error": "FileNotFoundError:[Errno 2] No such file or directory: '/home/runner/work/brain/brain/canonical/astra_runtime/evidence/live_audit.json'",
+  "mission_id": "ASTRA-RUNTIME-REALITY-AUDIT-001",
+  "observed_at_utc": "2026-09-22T04:14:52.053958+00:00",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "run-live-capability-audit",
+  "step_index": 1
+}
