@@ -1,0 +1,19 @@
+{
+  "schema": "PROJECT_BRAIN_ICW_CHECKPOINT_V3",
+  "worker_identity": "ICW-CHATGPT-SOL-1",
+  "mission_id": "ICW-REAL-END-TO-END-001",
+  "checkpoint_state": "RESUME_AND_GUI_PROVEN__AUTONOMOUS_WAKE_ONLY_REMAINS",
+  "parent_checkpoint_path": "canonical/icw/ICW-CHATGPT-SOL-1/CHECKPOINT_V2.json",
+  "resume_receipt_path": "canonical/icw/ICW-CHATGPT-SOL-1/RESUME_RECEIPT_V1.json",
+  "gui_receipt_path": "canonical/icw/ICW-CHATGPT-SOL-1/GUI_RECEIPT_V1.json",
+  "newly_closed_properties": [
+    "same cognitive identity resumed mission from durable checkpoint in a later chat context without repeating completed work",
+    "same cognitive identity caused and independently verified a real interactive Windows GUI effect"
+  ],
+  "remaining_unproven": [
+    "same persistent cognitive identity autonomously wakes and continues without user re-prompt"
+  ],
+  "next_action": "Autonomous scheduled run resumes this exact identity from CHECKPOINT_V3, writes an autonomous-wake receipt, independently reconciles the full mission evidence, and promotes nothing unless the whole same-identity definition is satisfied.",
+  "promotion_claim": false,
+  "p_real_after_checkpoint": 0
+}
