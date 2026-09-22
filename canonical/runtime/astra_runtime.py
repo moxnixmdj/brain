@@ -66,14 +66,25 @@ def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("mission")
     a=ap.parse_args()
-    mission=readj(ROOT/a.mission)
+    mission_path=(ROOT/a.mission).resolve()
+    if ROOT.resolve() not in mission_path.parents:
+        raise Blocker("MISSION_PATH_OUTSIDE_ROOT")
+    mission=readj(mission_path)
     mid=mission["mission_id"]
+    mission_sha256=sha_file(mission_path)
     state_path=STATE_DIR/f"{mid}.json"
     state=readj(state_path) if state_path.exists() else {
       "schema":"PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
-      "mission_id":mid,"runtime_id":"ASTRA_RUNTIME_V1_SHARED",
+      "mission_id":mid,"mission_path":a.mission,"mission_sha256":mission_sha256,
+      "runtime_id":"ASTRA_RUNTIME_V1_SHARED",
       "status":"RUNNING","next_step":0,"history":[],"created_at_utc":utc()
     }
+    if state.get("mission_id") != mid:
+        raise Blocker("STATE_MISSION_ID_MISMATCH")
+    if state.get("mission_path", a.mission) != a.mission:
+        raise Blocker("STATE_MISSION_PATH_MISMATCH")
+    state["mission_path"]=a.mission
+    state["mission_sha256"]=mission_sha256
     for i in range(state["next_step"],len(mission["steps"])):
         step=mission["steps"][i]
         adapter=step["adapter"]
@@ -112,7 +123,8 @@ def main():
     writej(state_path,state)
     receipt={
       "schema":"PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
-      "mission_id":mid,"runtime_id":"ASTRA_RUNTIME_V1_SHARED",
+      "mission_id":mid,"mission_path":a.mission,"mission_sha256":mission_sha256,
+      "runtime_id":"ASTRA_RUNTIME_V1_SHARED",
       "status":"COMPLETE","steps_completed":len(state["history"]),
       "state_sha256":sha_file(state_path),"completed_at_utc":utc()
     }
