@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-22T05:10:55.359426+00:00",
+  "mission_id": "ASTRA-RUNTIME-POLLINATIONS-POST-FAILOVER-PROBE-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_POLLINATIONS_POST_FAILOVER_PROBE_001.json",
+  "mission_sha256": "724dc9ee7ce4cf37aa537e4d02b367b44ba4b65358e0499576a6606fac7abefe",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "3a327b728c483f3160a8a37337bd9365f1da27800463589366ca30eee7d78ee1",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
