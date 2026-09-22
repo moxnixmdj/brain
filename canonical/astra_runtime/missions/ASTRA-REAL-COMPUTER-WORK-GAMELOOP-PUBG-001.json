@@ -1,47 +1,34 @@
 {
   "schema": "PROJECT_BRAIN_ASTRA_REAL_COMPUTER_WORK_MISSION_V1",
   "mission_id": "ASTRA-REAL-COMPUTER-WORK-GAMELOOP-PUBG-001",
-  "status": "BLOCKED_ON_MODIFIED_NATIVE_PAYLOAD_VS_OFFICIAL_CAUSAL_REPLAY",
+  "status": "BLOCKED_ON_CONCURRENT_CONTROLLER_EXCLUSIVE_CONTROL",
   "canonical_generation_at_start": "2026-09-22-astra-shared-runtime-portfolio-restored",
   "terminal_user_goal": "Make the user's existing GameLoop PUBG Mobile installation actually render and run instead of presenting the persistent black screen, while preserving user data and avoiding speculative destructive changes.",
-  "selection_basis": "Live canonical state names END_TO_END_COMPUTER_WORK as the highest-leverage gap. This unresolved real user problem forces research, Windows inspection, emulator control, evidence recovery, diagnosis, reversible action, and effect verification.",
+  "selection_basis": "Real end-to-end computer work remains a live portfolio mission; continue only through causal, reversible, evidence-preserving actions.",
   "evidence_presence_classification": "CAPABILITY_FAILED",
-  "prior_work_search": {
-    "canonical_matches_for_pubg_gameloop_black_screen": 0,
-    "local_prior_experiments_discovered": true,
-    "local_evidence": [
-      "PUBG_ONE_SHOT_RECEIPT.txt",
-      "pubg_direct_launch.txt",
-      "translate.conf backups",
-      "translateex.conf backups",
-      "cmd.conf backups",
-      "logcatd"
-    ],
-    "consequence": "Do not repeat ABI/translator toggles already represented by preserved backups and receipts."
-  },
   "verified_findings": [
-    "GameLoop starts com.tencent.ig and reports OnAppRunning bRun=1; the black screen is not a simple failure to launch the package.",
-    "Host NVIDIA RTX 4060 and OpenGL 4.6 are detected and a render policy is selected.",
-    "A reversible ForceDirectX 0->1 probe did not repair the black main render area and was rolled back to 0.",
-    "AEngine100.log repeatedly records crash_type=4002 for com.tencent.ig with exception 0xc0000005 in /system/lib64/libc.so and stack frames in /system/lib64/libhotx612.so.",
-    "Preserved guest logcat records Fatal signal 11 SIGSEGV and repeated com.tencent.ig process death/restart while GameLoop initializes libhotx612.so Houdini 6.1.2d and loads ARM64 libanogs.so and libanort.so through NativeBridge.",
-    "The locally installed APK source is GL_4.6_FIXCRASH.apk, not a clean official package. Its lib/arm64-v8a/libalo.so is a 102-byte JSON marker naming profile NTHMOD and URL http://android.keyauth.click/uplib.php.",
-    "The official PUBG MOBILE site currently exposes PUBGMOBILE_Global_4.6.0_uawebsite_livik01_5678FCFA.apk (Content-Length 1274351207, Last-Modified 2026-08-26, byte ranges supported).",
-    "Without downloading the 1.27 GB APK, its ZIP central directory was read by HTTP range and compared with the local APK. Critical native libraries differ: official libanogs.so CRC a99b4e2e vs local eb7f6ea4; official libanort.so 7d3562a3 vs local 56408602; official libUE4.so 0b2fa301 vs local cfc972ca; official libkk-image.so d77c2a35 vs local 0c1ad151.",
-    "The local APK also contains non-official/additional native entries including libAkAudioVisiual.so, libalo.so and libpandora-core.so, while the official APK contains multiple libraries absent from the local package.",
-    "Official libanogs.so and libanort.so were extracted losslessly via HTTP byte ranges only, with CRC verification, into C:\\Temp\\TxGameDownload\\MobileGamePCShared\\official_probe; no full APK download was required."
+    "GameLoop starts com.tencent.ig; the black screen is not a simple failure to launch the package.",
+    "RTX 4060/OpenGL are detected; ForceDirectX probe failed and was rolled back.",
+    "Repeated com.tencent.ig crash is SIGSEGV / 0xc0000005 in the NativeBridge/Houdini path involving libc.so and libhotx612.so.",
+    "The installed 4.6 APK payload is modified relative to official PUBG 4.6. Critical ARM64 libraries libanogs.so and libanort.so differ from official bytes.",
+    "Official libanogs.so and libanort.so are already extracted and CRC-verified at C:\\Temp\\TxGameDownload\\MobileGamePCShared\\official_probe.",
+    "The prepared reversible official-library substitution probe exists at C:\\Temp\\TxGameDownload\\MobileGamePCShared\\inter\\restore_official_anticheat_probe.sh."
   ],
-  "exact_current_causal_frontier": "The strongest evidence-backed hypothesis is now that the black screen is downstream of the modified PUBG 4.6 native payload interacting with GameLoop's ARM64-to-x86_64 NativeBridge/Houdini path. The first loaded native libraries libanogs.so and libanort.so are byte-different from the official 4.6 APK, and the repeated crash occurs in the translation/runtime path. Causality is not yet proven until a surgical official-library substitution is replayed.",
-  "prepared_repair_probe": {
-    "official_libs_ready": [
-      "C:\\Temp\\TxGameDownload\\MobileGamePCShared\\official_probe\\libanogs.so",
-      "C:\\Temp\\TxGameDownload\\MobileGamePCShared\\official_probe\\libanort.so"
+  "live_reconciliation_2026_09_22": {
+    "exclusive_control_available": false,
+    "evidence": [
+      "cmd.conf changed after the prior canonical checkpoint, with LastWriteTime 2026-09-22T11:58:34+02:00.",
+      "The active com.tencent.ig command is now sh -x /data/share1/inter/hotx_test.sh, not the prepared official-library probe.",
+      "hotx_test.sh bind-mounts /system/lib64/libhotx711.so over /system/lib64/libhotx612.so, proving a different controller is actively testing the translator path.",
+      "GameLoop processes restarted at approximately 11:58-11:59 local time: AndroidEmulatorEn, many aow_exe processes, AppMarket and QMEmulatorService are live.",
+      "rootcause_once.sh was independently rewritten at 11:44:50 local time to restore exact_libUE4.so, exact_libanogs.so and exact_libanort.so, further confirming concurrent mutation of the same guest runtime.",
+      "The exact_* libanogs/libanort hashes differ from the already-extracted official library hashes, so the currently active controller is not simply executing the canonical prepared official substitution."
     ],
-    "guest_script": "C:\\Temp\\TxGameDownload\\MobileGamePCShared\\inter\\restore_official_anticheat_probe.sh",
-    "probe_behavior": "Back up the installed guest libanogs/libanort to shared storage, replace only those two with official 4.6 bytes, relaunch once, and compare crash/render behavior.",
-    "not_executed_reason": "The normal GameLoop command injection path is cached by the already-running emulator. During preparation, cmd.conf also changed independently (a pre-existing rootcause_once route appeared), proving concurrent troubleshooting activity. The temporary command injection was removed and cmd.conf restored exactly rather than forcing a restart that could interfere with another active controller."
+    "consequence": "Fail closed. Do not edit cmd.conf, restart/kill GameLoop, replace guest libraries, or otherwise mutate the emulator while another controller owns the same causal surface. Doing so would invalidate both experiments and violate truth-first/generation discipline.",
+    "safe_work_completed": "Refreshed canonical pointer and all mandatory laws, recovered the prior mission artifact, inspected only non-mutating host/process/script state, and preserved the exact external concurrency blocker canonically."
   },
-  "next_action": "At the next safe exclusive-control window, execute the already-prepared two-library official substitution probe exactly once, preserve before/after hashes and crash/render evidence, then either keep the repair if the black screen clears or restore the backed-up libraries immediately and move only to the next divergent library causally implicated by the new trace.",
+  "exact_current_causal_frontier": "The official libanogs/libanort substitution remains the highest-value prepared falsification of the modified-native-payload hypothesis, but it is not causally ready while another controller is actively mutating and replaying the same GameLoop/PUBG runtime.",
+  "next_action": "On the first observed exclusive-control window, refresh canonical state and local cmd.conf/process/script mtimes. If no concurrent controller is active and the probe has not already been executed elsewhere, run the prepared two-library official substitution exactly once, preserve before/after hashes plus crash/render evidence, then keep the repair only if verified or restore immediately on failure.",
   "constraints": {
     "incremental_spend_usd": 0,
     "val_town_used": false,
