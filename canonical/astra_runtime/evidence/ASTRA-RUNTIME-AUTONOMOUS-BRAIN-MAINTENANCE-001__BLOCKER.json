@@ -1,8 +1,8 @@
 {
   "adapter": "goal",
-  "error": "Blocker:PLANNER_ACTION_REJECTED:commentary",
+  "error": "Blocker:PATH_OUTSIDE_REPOSITORY",
   "mission_id": "ASTRA-RUNTIME-AUTONOMOUS-BRAIN-MAINTENANCE-001",
-  "observed_at_utc": "2026-09-22T05:11:56.931917+00:00",
+  "observed_at_utc": "2026-09-22T05:33:31.000325+00:00",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
   "step_id": "autonomously-resolve-maintenance-goal",
   "step_index": 0
