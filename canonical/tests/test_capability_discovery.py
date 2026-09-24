@@ -116,8 +116,6 @@ class CapabilityDiscoveryTests(unittest.TestCase):
             elif argv[:2]==["apt-cache","show"]:
                 r.stdout="Package: zbar-tools\nSHA256: "+"a"*64+"\n"
             return r
-        with mock.patch.object(discovery.sys.platform.__class__, "__str__", return_value="linux"):
-            pass
         with mock.patch.object(discovery.shutil, "which", return_value="/usr/bin/apt-cache"), \
              mock.patch.object(discovery.subprocess, "run", side_effect=fake_run), \
              mock.patch.object(discovery.sys, "platform", "linux"):
