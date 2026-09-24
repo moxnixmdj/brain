@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-24T22:14:29.531031+00:00",
+  "mission_id": "ASTRA-APT-CLI-GENERIC-PROBE-BARCODE-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_APT_CLI_GENERIC_PROBE_BARCODE_001.json",
+  "mission_sha256": "f928780b5f926d6ecbedd462a248c7138f65551addec7d19f369b423e42a523d",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "e5e5b069a80ea0bc4c0e6db9763be3e8aa25519d28790b5fd6ced7214e491e40",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
