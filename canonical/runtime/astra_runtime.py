@@ -577,7 +577,20 @@ def run_goal(step, mission):
     try:
         compiled=_compile_plain_goal(goal)
     except Blocker as e:
-        if "GOAL_COMPILATION_FAILED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH" in str(e):
+        error_text=str(e)
+        acquisition_goal=goal
+        unresolved_marker="GOAL_COMPILATION_FAILED:GOAL_COMPILATION_SUBGOAL_UNRESOLVED:"
+        is_no_match="GOAL_COMPILATION_FAILED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH" in error_text
+        is_unresolved_subgoal=unresolved_marker in error_text
+        if is_unresolved_subgoal:
+            raw=error_text.split(unresolved_marker,1)[1]
+            try:
+                acquisition_goal=str(json.loads(raw).get("subgoal") or "").strip()
+            except Exception:
+                acquisition_goal=""
+            if not acquisition_goal:
+                raise
+        if is_no_match or is_unresolved_subgoal:
             mid=str(mission.get("mission_id") or "UNKNOWN")
             ep=EVID_DIR/f"{mid}__PLAIN_GOAL_CAPABILITY_DISCOVERY.json"
             auto=_load_auto_apt_cli_acquisition()
@@ -587,7 +600,7 @@ def run_goal(step, mission):
             targeted_error=None
             try:
                 dispatch=auto.dispatch(
-                    goal,
+                    acquisition_goal,
                     mid,
                     str(mission.get("_runtime_mission_path") or ""),
                     ROOT,
@@ -599,7 +612,7 @@ def run_goal(step, mission):
                 evidence={
                   "schema":"PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
                   "mission_id":mid,
-                  "goal":goal,
+                  "goal":acquisition_goal,
                   "source":"TARGETED_AUTO_ACQUISITION",
                   "result":None,
                   "binding_performed":False,
@@ -612,7 +625,7 @@ def run_goal(step, mission):
 
             # Fallback only after the targeted route fails.
             discovery=_load_capability_discovery()
-            result=discovery.search_all(goal,limit_per_source=30)
+            result=discovery.search_all(acquisition_goal,limit_per_source=30)
             evidence={
               "schema":"PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
               "mission_id":mid,
@@ -627,7 +640,7 @@ def run_goal(step, mission):
             dispatch_error=None
             try:
                 dispatch=auto.dispatch(
-                    goal,
+                    acquisition_goal,
                     mid,
                     str(mission.get("_runtime_mission_path") or ""),
                     ROOT,
@@ -657,6 +670,24 @@ def run_goal(step, mission):
         if not step.get("allow_optional_model_planner",False):
             raise
     else:
+        if compiled.get("compiler_mode")=="DETERMINISTIC_COMPOUND_ACTION_PLAN":
+            derived=dict(step)
+            derived["controller_actions"]=compiled.get("controller_actions")
+            derived["max_controller_actions"]=max(
+                int(step.get("max_controller_actions",16)),
+                len(compiled.get("controller_actions") or [])
+            )
+            compound_result=_run_model_independent_goal(derived,mission,goal)
+            if compound_result is None:
+                raise Blocker("COMPOUND_GOAL_PLAN_EXECUTION_MISSING")
+            compound_result["planning_mode"]="DETERMINISTIC_COMPOUND_ACTION_PLAN"
+            compound_result["goal_compilation"]={
+              "compiler_mode":compiled.get("compiler_mode"),
+              "clauses":compiled.get("clauses"),
+              "compiled_parts":compiled.get("compiled_parts"),
+            }
+            return compound_result
+
         derived=dict(step)
         derived["capability_problem"]=compiled
         capability_result=_run_capability_planned_goal(derived, mission, goal)
