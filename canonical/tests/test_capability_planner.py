@@ -7,6 +7,8 @@ CANONICAL_ROOT = pathlib.Path(__file__).resolve().parents[1]
 PLANNER_PATH = CANONICAL_ROOT / "runtime" / "capability_planner.py"
 spec = importlib.util.spec_from_file_location("capability_planner_test_target", PLANNER_PATH)
 planner = importlib.util.module_from_spec(spec)
+import sys
+sys.modules[spec.name] = planner
 spec.loader.exec_module(planner)
 
 
