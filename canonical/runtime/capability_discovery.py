@@ -305,6 +305,7 @@ def search_apt_packages(effect, limit=12):
                 score+=8
             prior=seen.get(name)
             cand={
+                "discovery_source":"APT_CATALOG",
                 "name":name,
                 "description":description,
                 "query":query,
