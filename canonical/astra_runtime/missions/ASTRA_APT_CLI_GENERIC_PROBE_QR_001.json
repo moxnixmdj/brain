@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-APT-CLI-GENERIC-PROBE-QR-001",
+  "purpose": "Verify the generic APT CLI supplier probe can turn pinned package metadata into executable/help evidence without QR-specific probe code.",
+  "steps": [
+    {
+      "id": "generic-probe-qrencode",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/runtime/apt_cli_probe.py qrencode 4.1.1-1build2 613c5a22316489ec6a9ce5d59190293df15dd4612b55432dde04c62f7c1a0e25 canonical/astra_runtime/evidence/ASTRA-APT-CLI-GENERIC-PROBE-QR-001__RESULT.json\npython - <<'PY'\nimport json\nx=json.load(open('canonical/astra_runtime/evidence/ASTRA-APT-CLI-GENERIC-PROBE-QR-001__RESULT.json'))\nassert any(e['executable'].endswith('/qrencode') for e in x['executables'])\nassert any(any(a['text'] for a in e['help_attempts']) for e in x['executables'])\nprint('GENERIC_APT_CLI_PROBE_COMPLETE')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "GENERIC_APT_CLI_PROBE_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "task_specific_probe_code": false,
+    "package_version_hash_pinned": true,
+    "execution_of_task_specific_qr_command": false
+  }
+}
