@@ -101,9 +101,35 @@ def _viable_candidates(discovery, goal=""):
     return viable[:12]
 
 
+def _merge_role_conditioned_apt(discovery,goal):
+    merged=json.loads(json.dumps(discovery))
+    candidates=list(merged.get("candidates") or [])
+    goal_lower=str(goal or "").lower()
+    producer_intent=any(w in goal_lower for w in ("generate","create","make","render","encode","save"))
+    goal_terms=[
+        t for t in capability_discovery.effect_queries(goal)
+        if t not in GENERIC_KEYWORDS and not t.isdigit()
+    ]
+    role_result=None
+    if producer_intent and goal_terms:
+        role_query="encode "+" ".join(goal_terms[:2])
+        role_result=capability_discovery.search_apt_packages(role_query,limit=24)
+        by_key={}
+        for item in candidates+list(role_result.get("candidates") or []):
+            key=(str(item.get("discovery_source") or ""),str(item.get("name") or ""),str(item.get("version") or ""))
+            prior=by_key.get(key)
+            if prior is None or float(item.get("score",0))>float(prior.get("score",0)):
+                by_key[key]=item
+        candidates=list(by_key.values())
+    merged["candidates"]=candidates
+    merged["_role_conditioned_apt_discovery"]=role_result
+    return merged
+
+
 def dispatch(goal,mission_id,mission_path,root,discovery=None):
     root=pathlib.Path(root).resolve()
     discovery=discovery or capability_discovery.search_all(goal,limit_per_source=30)
+    discovery=_merge_role_conditioned_apt(discovery,goal)
     candidates=_viable_candidates(discovery,goal)
     diag_rel=f"canonical/astra_runtime/evidence/{mission_id}__AUTO_APT_CLI_ACQUISITION.json"
     diag_path=root/diag_rel
@@ -113,6 +139,7 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
       "mission_id":mission_id,
       "goal":goal,
       "status":"SUPPLIER_CONTRACT_RACE",
+      "role_conditioned_discovery":discovery.get("_role_conditioned_apt_discovery"),
       "attempts":[]
     }
     candidate=probe=contract=None
