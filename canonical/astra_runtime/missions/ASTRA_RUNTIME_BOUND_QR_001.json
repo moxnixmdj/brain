@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-BOUND-QR-001",
+  "purpose": "Verify the winning local QR capability through the shared runtime before promotion.",
+  "goal": "Generate a PNG QR code for PROJECT BRAIN.",
+  "steps": [
+    {
+      "id": "bind-qrencode-and-verify-png",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 8,
+      "capability_problem": {
+        "initial_facts": [],
+        "target_effects": [
+          "image.qr.generate"
+        ],
+        "finish_summary": "BOUND_QR_COMPLETE",
+        "capabilities": [
+          {
+            "id": "qrencode-generate",
+            "requires": [],
+            "provides": [
+              "image.qr.generate"
+            ],
+            "cost": 1,
+            "action": {
+              "type": "invoke_capability",
+              "args": {
+                "capability_id": "image.qr.generate.qrencode",
+                "text": "PROJECT BRAIN",
+                "output_path": "canonical/astra_runtime/tmp/BOUND_PROJECT_BRAIN_QR.png"
+              },
+              "expect": {
+                "type": "field_equals",
+                "field": "png_signature_valid",
+                "value": true
+              }
+            }
+          }
+        ]
+      },
+      "verify": {
+        "type": "stdout_contains",
+        "text": "BOUND_QR_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "provider_independent_local_execution": true,
+    "package_metadata_hash_checked": true
+  }
+}
