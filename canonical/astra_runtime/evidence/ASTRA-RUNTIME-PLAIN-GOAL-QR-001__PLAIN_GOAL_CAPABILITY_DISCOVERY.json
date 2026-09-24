@@ -1,0 +1,305 @@
+{
+  "binding_performed": false,
+  "goal": "Generate a QR code image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png.",
+  "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-QR-001",
+  "observed_at_utc": "2026-09-24T21:52:04.723773+00:00",
+  "result": {
+    "binding_performed": false,
+    "candidate_count": 39,
+    "candidates": [
+      {
+        "description": "Source-linked CodeGraph exploration, ranked search, and static navigation for coding agents.",
+        "is_latest": true,
+        "name": "ai.codenib/codenib",
+        "packages": [
+          {
+            "identifier": "codenib",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "uvx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.2.3"
+          }
+        ],
+        "query": "code",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/sysevol-ai/CodeNib"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.2.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Image processing for AI agents: resize, convert, compress, crop, and web-ready AI-generated images.",
+        "is_latest": true,
+        "name": "ai.pictomancer/image-processing",
+        "packages": [],
+        "query": "image",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.pictomancer.ai/mcp"
+          }
+        ],
+        "repository": {
+          "source": "gitlab",
+          "url": "https://gitlab.com/pictomancer.ai/pig-gateway"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.4.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Generate marketing images, videos and audios for campaigns, product content, and brand assets.",
+        "is_latest": true,
+        "name": "ai.saifs/media-generator-images-videos",
+        "packages": [],
+        "query": "image",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.saifs.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Analyze images and videos with Gemini to get fast, reliable visual insights. Handle content from U\u2026",
+        "is_latest": true,
+        "name": "ai.smithery/Artin0123-gemini-image-mcp-server",
+        "packages": [],
+        "query": "image",
+        "remotes": [
+          {
+            "required_headers": [
+              "Authorization"
+            ],
+            "type": "streamable-http",
+            "url": "https://server.smithery.ai/@Artin0123/gemini-image-mcp-server/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/Artin0123/gemini-vision-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.4.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Driven Intent Negotiation \u2014 Contract-Oriented Deterministic Executable Runtime DinCoder brings the\u2026",
+        "is_latest": true,
+        "name": "ai.smithery/flight505-mcp_dincoder",
+        "packages": [],
+        "query": "code",
+        "remotes": [
+          {
+            "required_headers": [
+              "Authorization"
+            ],
+            "type": "streamable-http",
+            "url": "https://server.smithery.ai/@flight505/mcp_dincoder/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/flight505/MCP_DinCoder"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1.15",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Verified discount & referral codes for crypto exchanges, cards and more \u2014 tested first-hand.",
+        "is_latest": true,
+        "name": "codes.find/verified-codes",
+        "packages": [],
+        "query": "code",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://find.codes/api/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Create QR codes, re-point printed dynamic codes, name links on your domain, read scan analytics.",
+        "is_latest": true,
+        "name": "codes.qrflow/qrflow",
+        "packages": [],
+        "query": "qr",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://qrflow.codes/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Generate 10 conversion-focused ad headlines for a Shopify/e-commerce product. Free, no signup.",
+        "is_latest": true,
+        "name": "com.adcreator-ai/generate-ad-headlines",
+        "packages": [],
+        "query": "generate",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://adcreator-ai.com/mcp-ads"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Diagrams, badges, charts and QR codes as plain image URLs you can paste into Markdown.",
+        "is_latest": true,
+        "name": "com.ainetcafe/netcafe-images",
+        "packages": [],
+        "query": "image",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://ainetcafe.com/mcp/img?s=registry"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/mario03690/ai-netcafe"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Automatic image/video face detection, blur/redaction, and de-identification by NoonAI DIS.",
+        "is_latest": true,
+        "name": "com.dyndns-server.noon-ai/image-video-anonymization-mcp",
+        "packages": [],
+        "query": "image",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://noon-ai.dyndns-server.com/image-video-anonymization-mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1.12",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Resize, compress, convert, watermark and SEO-tag e-commerce product images from a public URL.",
+        "is_latest": true,
+        "name": "com.ecommerceimageoptimizer/image-optimizer",
+        "packages": [],
+        "query": "image",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://ecommerceimageoptimizer.com/api/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/brkmehdi/ImageOptimizerforEcom"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Create dynamic QR codes and re-point ones already printed, with bot-filtered scan analytics.",
+        "is_latest": true,
+        "name": "com.getdynamicqr/qr-codes",
+        "packages": [],
+        "query": "qr",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.getdynamicqr.com"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      }
+    ],
+    "effect": "Generate a QR code image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png.",
+    "errors": [],
+    "queries": [
+      "generate",
+      "qr",
+      "code",
+      "image"
+    ],
+    "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+    "source": "OFFICIAL_MCP_REGISTRY",
+    "source_url": "https://registry.modelcontextprotocol.io"
+  },
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
+  "source": "OFFICIAL_MCP_REGISTRY"
+}

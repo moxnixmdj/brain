@@ -1,21 +1,36 @@
 {
   "blocker": {
     "adapter": "goal",
-    "error": "RuntimeError:PDF_NOT_FOUND",
+    "error": "Blocker:CAPABILITY_ACQUISITION_REQUIRED:{\"evidence_path\": \"canonical/astra_runtime/evidence/ASTRA-RUNTIME-PLAIN-GOAL-QR-001__PLAIN_GOAL_CAPABILITY_DISCOVERY.json\", \"top_candidates\": [{\"name\": \"ai.codenib/codenib\", \"required_secret_count\": 0, \"score\": 18, \"zero_cost_eligible\": true}, {\"name\": \"ai.pictomancer/image-processing\", \"required_secret_count\": 0, \"score\": 15, \"zero_cost_eligible\": true}, {\"name\": \"ai.saifs/media-generator-images-videos\", \"required_secret_count\": 0, \"score\": 15, \"zero_cost_eligible\": true}, {\"name\": \"ai.smithery/Artin0123-gemini-image-mcp-server\", \"required_secret_count\": 0, \"score\": 15, \"zero_cost_eligible\": true}, {\"name\": \"ai.smithery/flight505-mcp_dincoder\", \"required_secret_count\": 0, \"score\": 15, \"zero_cost_eligible\": true}, {\"name\": \"codes.find/verified-codes\", \"required_secret_count\": 0, \"score\": 15, \"zero_cost_eligible\": true}, {\"name\": \"codes.qrflow/qrflow\", \"required_secret_count\": 0, \"score\": 15, \"zero_cost_eligible\": true}, {\"name\": \"com.adcreator-ai/generate-ad-headlines\", \"required_secret_count\": 0, \"score\": 15, \"zero_cost_eligible\": true}]}",
     "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-QR-001",
-    "observed_at_utc": "2026-09-24T21:51:15.143793+00:00",
+    "observed_at_utc": "2026-09-24T21:52:04.724353+00:00",
     "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
     "step_id": "execute-unknown-plain-goal",
-    "step_index": 0
+    "step_index": 1
   },
   "created_at_utc": "2026-09-24T21:51:14.037205+00:00",
-  "history": [],
+  "history": [
+    {
+      "completed_at_utc": "2026-09-24T21:52:03.695136+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython canonical/tests/test_goal_compiler.py",
+        "duration_s": 0.082,
+        "returncode": 0,
+        "stderr": "test_plain_image_only_pdf_goal_selects_verified_ocr (__main__.GoalCompilerTests.test_plain_image_only_pdf_goal_selects_verified_ocr) ... ok\ntest_qr_goal_does_not_false_match_ocr (__main__.GoalCompilerTests.test_qr_goal_does_not_false_match_ocr) ... ok\ntest_unknown_goal_fails_closed (__main__.GoalCompilerTests.test_unknown_goal_fails_closed) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.001s\n\nOK\n",
+        "stdout": ""
+      },
+      "step_id": "run-goal-compiler-regressions",
+      "step_index": 0
+    }
+  ],
   "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-QR-001",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_PLAIN_GOAL_QR_001.json",
-  "mission_sha256": "d0cc2d5a35c12ef2e3754130b51d89c3655ec460d78dc6e6c724d56c7317237b",
-  "next_step": 0,
+  "mission_sha256": "c9e1f4738d3a145ae4765d2285f2be2dfd53085ca88ad291379b786c76c50640",
+  "next_step": 1,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
   "status": "BLOCKED",
-  "updated_at_utc": "2026-09-24T21:51:15.143962+00:00"
+  "updated_at_utc": "2026-09-24T21:52:04.724490+00:00"
 }
