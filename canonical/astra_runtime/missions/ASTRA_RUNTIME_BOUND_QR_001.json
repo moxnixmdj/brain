@@ -27,12 +27,19 @@
               "type": "invoke_capability",
               "args": {
                 "capability_id": "image.qr.generate.qrencode",
-                "text": "PROJECT BRAIN",
-                "output_path": "canonical/astra_runtime/tmp/BOUND_PROJECT_BRAIN_QR.png"
+                "argv": [
+                  "qrencode",
+                  "-o",
+                  "canonical/astra_runtime/tmp/BOUND_PROJECT_BRAIN_QR_GENERIC.png",
+                  "PROJECT BRAIN"
+                ],
+                "output_path": "canonical/astra_runtime/tmp/BOUND_PROJECT_BRAIN_QR_GENERIC.png",
+                "output_prefix_hex": "89504e470d0a1a0a",
+                "timeout_s": 60
               },
               "expect": {
                 "type": "field_equals",
-                "field": "png_signature_valid",
+                "field": "output_verified",
                 "value": true
               }
             }
@@ -49,6 +56,8 @@
     "incremental_spend_usd": 0,
     "model_controller_required": false,
     "provider_independent_local_execution": true,
-    "package_metadata_hash_checked": true
+    "package_metadata_hash_checked": true,
+    "replay_after_generic_cli_adapter_commit": "9b230e553f77e9ef8e8bbddfcda074d7d0afd09c",
+    "specialized_qr_adapter_used": false
   }
 }
