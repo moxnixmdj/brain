@@ -1,0 +1,9 @@
+{
+  "adapter": "goal",
+  "error": "Blocker:GOAL_COMPILATION_FAILED:GOAL_COMPILATION_AMBIGUOUS:{\"candidates\": [\"pdf.extract.ocr.tesseract\", \"pdf.extract.text.pypdf\"], \"score\": 10}",
+  "mission_id": "ASTRA-RUNTIME-CAPABILITY-AUDIT-001",
+  "observed_at_utc": "2026-09-24T23:39:41.531878+00:00",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "execute-integrated-capability-audit",
+  "step_index": 0
+}
