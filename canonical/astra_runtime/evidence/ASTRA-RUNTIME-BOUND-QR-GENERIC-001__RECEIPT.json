@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-24T22:01:50.174199+00:00",
+  "mission_id": "ASTRA-RUNTIME-BOUND-QR-GENERIC-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_BOUND_QR_GENERIC_001.json",
+  "mission_sha256": "b1757138fdddc44fab2474feba0c2be4292aee5d5a018bf4e5ca15937d8b8b45",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "feb082b7d337e9058ba2ee9211ce0aa0df92f21bc79217b6bb14ce0a0e9f82fd",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
