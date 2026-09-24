@@ -56,6 +56,21 @@ def _repo_paths(goal, root):
     return candidates
 
 
+def _extract_text_argument(goal):
+    quoted=re.findall(r'["\']([^"\']+)["\']',goal)
+    if len(quoted)==1 and quoted[0].strip():
+        return quoted[0].strip()
+    patterns=[
+        r"\b(?:for|from)\s+the\s+text\s+(.+?)(?=\s+and\s+(?:save|write|store)\b|\s+(?:save|write|store)\b|$)",
+        r"\btext\s+(.+?)(?=\s+and\s+(?:save|write|store)\b|\s+(?:save|write|store)\b|$)",
+    ]
+    for pattern in patterns:
+        m=re.search(pattern,goal,flags=re.IGNORECASE)
+        if m and m.group(1).strip():
+            return m.group(1).strip(" .,:;")
+    raise GoalCompilationFailure("GOAL_TEXT_INPUT_BINDING_REQUIRED")
+
+
 def _bind_inputs(goal, root, entry):
     template=entry.get("action_template") or {}
     keys=_placeholders(template)
@@ -64,16 +79,30 @@ def _bind_inputs(goal, root, entry):
     paths=_repo_paths(goal,root)
     result={}
     for key in keys:
+        if key=="text":
+            result[key]=_extract_text_argument(goal)
+            continue
         if key.endswith("_path"):
             stem=key[:-5].lower()
-            existing=[(raw,p) for raw,p in paths if p.is_file()]
-            matching=[raw for raw,p in existing if (not stem or stem in p.suffix.lower() or stem in raw.lower())]
-            if len(matching)==1:
-                result[key]=matching[0]
-                continue
-            if len(existing)==1:
-                result[key]=existing[0][0]
-                continue
+            if key.startswith("output_"):
+                # Output paths are expected not to exist yet. Bind only a
+                # repository-safe path explicitly present in the goal.
+                matching=[raw for raw,p in paths if (not stem or stem in raw.lower() or p.suffix.lower() in {".png",".jpg",".jpeg",".pdf",".txt",".json",".csv",".md"})]
+                if len(matching)==1:
+                    result[key]=matching[0]
+                    continue
+                if len(paths)==1:
+                    result[key]=paths[0][0]
+                    continue
+            else:
+                existing=[(raw,p) for raw,p in paths if p.is_file()]
+                matching=[raw for raw,p in existing if (not stem or stem in p.suffix.lower() or stem in raw.lower())]
+                if len(matching)==1:
+                    result[key]=matching[0]
+                    continue
+                if len(existing)==1:
+                    result[key]=existing[0][0]
+                    continue
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED",key)
     return result
 
