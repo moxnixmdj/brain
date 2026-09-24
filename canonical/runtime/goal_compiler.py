@@ -66,12 +66,13 @@ def _bind_inputs(goal, root, entry):
     for key in keys:
         if key.endswith("_path"):
             stem=key[:-5].lower()
-            matching=[raw for raw,p in paths if (not stem or stem in p.suffix.lower() or stem in raw.lower())]
+            existing=[(raw,p) for raw,p in paths if p.is_file()]
+            matching=[raw for raw,p in existing if (not stem or stem in p.suffix.lower() or stem in raw.lower())]
             if len(matching)==1:
                 result[key]=matching[0]
                 continue
-            if len(paths)==1:
-                result[key]=paths[0][0]
+            if len(existing)==1:
+                result[key]=existing[0][0]
                 continue
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED",key)
     return result
@@ -84,6 +85,17 @@ def _score(goal, cid, entry):
     identity=_tokens(cid)
     # Requirements are highly informative for environment qualifiers such as
     # image-only/scanned/local/etc. Provides represent the requested effect.
+    effect_matches=(gt & provides) | (gt & identity)
+    # Preconditions may refine a real effect match but may never create one.
+    # This prevents a word like "image" from turning an unrelated QR goal
+    # into a PDF/OCR invocation.
+    if not effect_matches:
+        return 0,0,{
+            "goal_tokens":sorted(gt),
+            "matched_provides":[],
+            "matched_requires":sorted(gt & requires),
+            "matched_identity":[],
+        }
     score=5*len(gt & provides)+3*len(gt & requires)+2*len(gt & identity)
     # Prefer more-specific matched preconditions when base scores tie.
     specificity=len(gt & requires)
