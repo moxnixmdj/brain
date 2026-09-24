@@ -8,6 +8,7 @@
     "step_id": "execute-plain-goal",
     "step_index": 1
   },
+  "completed_at_utc": "2026-09-24T21:48:55.130133+00:00",
   "created_at_utc": "2026-09-24T21:47:09.083677+00:00",
   "history": [
     {
@@ -23,14 +24,188 @@
       },
       "step_id": "prepare-image-only-pdf",
       "step_index": 0
+    },
+    {
+      "completed_at_utc": "2026-09-24T21:48:55.129524+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "goal",
+        "capability_plan": {
+          "expanded_states": 1,
+          "initial_facts": [
+            "pdf.file.image_only.available"
+          ],
+          "plan": [
+            "pdf.extract.ocr.tesseract"
+          ],
+          "status": "SOLVED",
+          "target_effects": [
+            "pdf.extract.ocr"
+          ],
+          "total_cost": 2.0
+        },
+        "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+        "cycles": 2,
+        "final_summary": "PLAIN_GOAL_COMPLETE",
+        "goal_compilation": {
+          "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+          "inputs": {
+            "pdf_path": "canonical/astra_runtime/tmp/IMAGE_ONLY_OCR_TEST.pdf"
+          },
+          "match_evidence": {
+            "goal_tokens": [
+              "astra",
+              "canonical",
+              "extract",
+              "image",
+              "ocr",
+              "only",
+              "pdf",
+              "runtime",
+              "test",
+              "text",
+              "tmp"
+            ],
+            "matched_identity": [
+              "extract",
+              "ocr",
+              "pdf"
+            ],
+            "matched_provides": [
+              "extract",
+              "ocr",
+              "pdf"
+            ],
+            "matched_requires": [
+              "image",
+              "only",
+              "pdf"
+            ]
+          },
+          "score": 30,
+          "selected_capability": "pdf.extract.ocr.tesseract",
+          "target_effects": [
+            "pdf.extract.ocr"
+          ]
+        },
+        "inherited_bound_capabilities": [
+          "pdf.extract.ocr.tesseract",
+          "pdf.extract.text.pypdf"
+        ],
+        "planner_model_last": null,
+        "planner_source": null,
+        "planner_transport": null,
+        "planning_mode": "DETERMINISTIC_CAPABILITY_GRAPH",
+        "returncode": 0,
+        "stdout": "PLAIN_GOAL_COMPLETE",
+        "trace": [
+          {
+            "cycle": 0,
+            "plan": {
+              "args": {
+                "capability_id": "pdf.extract.ocr.tesseract",
+                "dpi": 300,
+                "language": "eng",
+                "max_pages": 50,
+                "path": "canonical/astra_runtime/tmp/IMAGE_ONLY_OCR_TEST.pdf"
+              },
+              "capability_id": "pdf.extract.ocr.tesseract",
+              "expect": {
+                "field": "text",
+                "type": "field_nonempty"
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "bound_capability",
+              "attempts": [
+                {
+                  "candidates": [
+                    {
+                      "psm": "6",
+                      "returncode": 0,
+                      "stderr": "",
+                      "text": "TEST TES? TEST"
+                    },
+                    {
+                      "psm": "7",
+                      "returncode": 0,
+                      "stderr": "",
+                      "text": "TEST TES? TEST"
+                    },
+                    {
+                      "psm": "11",
+                      "returncode": 0,
+                      "stderr": "",
+                      "text": "TEST TES? TEST"
+                    },
+                    {
+                      "psm": "3",
+                      "returncode": 0,
+                      "stderr": "",
+                      "text": "TEST TES? TEST"
+                    }
+                  ],
+                  "image": "page-1.png",
+                  "selected_psm": "6"
+                }
+              ],
+              "capability_id": "pdf.extract.ocr.tesseract",
+              "dependency": {
+                "origin": "Ubuntu",
+                "packages": [
+                  {
+                    "archive_sha256": "2dfac382d77215aee0c3de4a2a2205505d5f2195e72e79b54ad32154fc08da77",
+                    "name": "tesseract-ocr",
+                    "version": "5.3.4-1build5"
+                  },
+                  {
+                    "archive_sha256": "fb936375b183a9d8ecb5b1fc5665a44110ca130c445946fb575c0b800b1dc0f4",
+                    "name": "poppler-utils",
+                    "version": "24.02.0-1ubuntu9.9"
+                  }
+                ],
+                "status": "INSTALLED_VERIFIED"
+              },
+              "dpi": 300,
+              "language": "eng",
+              "page_image_sha256": [
+                "ff5e9df83296ca668f704eb298b56b1a8b6786c332cf800fe31bab834b015d9b"
+              ],
+              "pages_processed": 1,
+              "source_path": "canonical/astra_runtime/tmp/IMAGE_ONLY_OCR_TEST.pdf",
+              "text": "TEST TES? TEST",
+              "text_bytes": 14,
+              "text_sha256": "1b262922d398fd0c5a0423d9935fccb079c2b62d36b10b91fb1c6f9a64ac3ec6",
+              "text_truncated": false
+            }
+          },
+          {
+            "cycle": 1,
+            "plan": {
+              "args": {
+                "summary": "PLAIN_GOAL_COMPLETE"
+              },
+              "type": "finish",
+              "why": "All target effects have an executable minimum-cost capability plan."
+            },
+            "result": {
+              "summary": "PLAIN_GOAL_COMPLETE",
+              "type": "finish"
+            }
+          }
+        ]
+      },
+      "step_id": "execute-plain-goal",
+      "step_index": 1
     }
   ],
   "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-PDF-OCR-001",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_PLAIN_GOAL_PDF_OCR_001.json",
-  "mission_sha256": "9502b791a09d95a0e389526157f5d73a11827dfad5193d82eb20b17ead3e4fdb",
-  "next_step": 1,
+  "mission_sha256": "fa1e0928ad27e09d8e15148fcd41c107f8497bc0cb9ff3ff62ac81b0c07d435a",
+  "next_step": 2,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
-  "status": "BLOCKED",
-  "updated_at_utc": "2026-09-24T21:47:09.121319+00:00"
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-24T21:48:55.129541+00:00"
 }

@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-24T21:48:55.130724+00:00",
+  "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-PDF-OCR-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_PLAIN_GOAL_PDF_OCR_001.json",
+  "mission_sha256": "fa1e0928ad27e09d8e15148fcd41c107f8497bc0cb9ff3ff62ac81b0c07d435a",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "26e15e58891288ffd34c10d2b41fd9e6844479f180c285f2ddb95f8c70ac187d",
+  "status": "COMPLETE",
+  "steps_completed": 2
+}
