@@ -1,0 +1,2619 @@
+{
+  "auto_acquisition": {
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED\", \"name\": \"iec16022\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"barcode\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"gir1.2-zbar-1.0\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-html5-qrcode\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"zbar-tools\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"zbarcam-gtk\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"zbarcam-qt\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"gir-rust-code-generator\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_TEXT_INPUT_UNRESOLVED\", \"name\": \"autodia\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"byacc-j\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"cbindgen\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"codfis\", \"status\": \"CONTRACT_REJECTED\"}]",
+    "status": "NOT_DISPATCHED"
+  },
+  "binding_performed": false,
+  "goal": "Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png.",
+  "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003",
+  "observed_at_utc": "2026-09-24T22:59:30.527889+00:00",
+  "result": {
+    "binding_performed": false,
+    "candidates": [
+      {
+        "archive_sha256": "cfda4a63c84333f24a72d43ceec5f0a29af27841d21e4a501a6382fb18a0f336",
+        "binding_kind": "apt",
+        "description": "Utility for barcode generation",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "barcode"
+        ],
+        "name": "barcode",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 40,
+        "version": "0.99-7",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "da50e7e76feb7b510e36ed8fdf228e741d887a5ad222d3ea5f52a84d66b93126",
+        "binding_kind": "apt",
+        "description": "QR code / bar code scanner and decoder (introspection data)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "barcode",
+          "code"
+        ],
+        "name": "gir1.2-zbar-1.0",
+        "packages": [],
+        "query": "code",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 40,
+        "version": "0.23.93-4build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "b3cba02f7d4400bf8c38daf37139f9ba9c12f0e70ef49f035305a6ef27ce0f79",
+        "binding_kind": "apt",
+        "description": "Generates 2d ISO/IEC 16022 barcodes (data matrix/semacode)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "barcode",
+          "generate"
+        ],
+        "name": "iec16022",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 40,
+        "version": "0.2.7-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "271506a0b70e9fd5bdccfc8a0eb856d8094e092934666f45737578d7737c7a57",
+        "binding_kind": "apt",
+        "description": "qr-code and bar-code scanning library for the web",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "barcode",
+          "code"
+        ],
+        "name": "node-html5-qrcode",
+        "packages": [],
+        "query": "code",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 40,
+        "version": "2.3.8+repack-5",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "9e718d34a9650263aca2dd85e56d9de42ca24ff82254f90f5e4270d1e5d00422",
+        "binding_kind": "apt",
+        "description": "QR code / bar code scanner and decoder (utilities)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "barcode",
+          "code"
+        ],
+        "name": "zbar-tools",
+        "packages": [],
+        "query": "code",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 40,
+        "version": "0.23.93-4build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "6563248be2191396961f4347522c8273b6e9975b20677e8b5dc7f38f4c1df5a1",
+        "binding_kind": "apt",
+        "description": "QR code / bar code scanner and decoder (Gtk camera tool)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "barcode",
+          "code"
+        ],
+        "name": "zbarcam-gtk",
+        "packages": [],
+        "query": "code",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 40,
+        "version": "0.23.93-4build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "1a6bc737f55ca4b1cfb1bd945d5b091c3cfaf37b715ec7d56f8046899d67fcef",
+        "binding_kind": "apt",
+        "description": "QR code / bar code scanner and decoder (Qt camera tool)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "barcode",
+          "code"
+        ],
+        "name": "zbarcam-qt",
+        "packages": [],
+        "query": "code",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 40,
+        "version": "0.23.93-4build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "84c8cc3438b6b8287f611adb5429375fddd2f7ee7d45f8137d7eff8c36b2326b",
+        "binding_kind": "apt",
+        "description": "Generate rust source code from gir files",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "gir-rust-code-generator",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 36,
+        "version": "0.19.0-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "0fe2930e58a69f9550dfa0a9b609d1684585d4fdf0d50841c3b8f59416be7510",
+        "binding_kind": "apt",
+        "description": "generates Dia UML diagrams from source code, XML or data",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "autodia",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.14-5",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "26b336ef5ccf07bb570bfe61d6edb314744877785a9fd375fc74f8c404cb19a3",
+        "binding_kind": "apt",
+        "description": "Berkeley YACC parser generator extended to generate Java code",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "byacc-j",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.15-1.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "af062a2868332e56d46ce6d1a2710d5d289256b3631e8f7b1aaccf55fa32a700",
+        "binding_kind": "apt",
+        "description": "Generates C bindings from Rust code",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "cbindgen",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.26.0-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "e6851734d45d3898340306d3048b2d269c4d42fdf706fe70c152dae7b0f5e4b6",
+        "binding_kind": "apt",
+        "description": "tool to generate Italian fiscal codes (codice fiscale)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "codfis",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.4.7-2build4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "6c9110a0d75b187e82722b3bce7a15a0d463b49729c245366e2367ccc2c6e234",
+        "binding_kind": "apt",
+        "description": "utilities to generate C function prototypes from C source code",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "cproto",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "4.7v-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "76a3a24a594d0cb6315eae5bfc78aa4b036b3ba981e3c8fadddcb4dea1792b7c",
+        "binding_kind": "apt",
+        "description": "Generate documentation from source code",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "doxygen",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.9.8+ds-2ubuntu0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "b840f6fbf618523d48325506f1e74deb4d9fa3b44a42fcb07ee4a55f3df442f1",
+        "binding_kind": "apt",
+        "description": "Generate LaTeX documentation from source code",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "doxygen-latex",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.9.8+ds-2ubuntu0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "1465d4d67cbd533a7c471a37110e3fd3e25e2e56d1c92f7d86402e80ca20e49a",
+        "binding_kind": "apt",
+        "description": "C compiler generating Intel code for 16bit/32bit CPUs",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "faucc",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "20180503-1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "271fdf93bab485d65795359ce0a4c0edac52295a87c9a0db56c32c8827259f0c",
+        "binding_kind": "apt",
+        "description": "GAP AutoDoc - Generate documentation from GAP source code",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "gap-autodoc",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2023.06.19-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "be484242d7bfa08a47a65fefb1330cc8bdb3cb957d9e14b551b21b4a5a8fff3d",
+        "binding_kind": "apt",
+        "description": "Generates LaTeX code from literate Haskell sources",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "lhs2tex",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.24-1build2.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ac650c7d980b70652920be84d9cda483a84a205be659f92b4f96a69b4a3c33f9",
+        "binding_kind": "apt",
+        "description": "Tool to generate documentation from Puppet code and extensions",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "puppet-strings",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.9.0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "8017aaaa8952103fd4487cb177165fe1bdd174886da4865a2b1fbe976c90bf4e",
+        "binding_kind": "apt",
+        "description": "generate tags for source code navigation for a cargo project",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "rusty-tags",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.10.0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "5925dc6e25348bdb350c44a9157da350ef608666b2a21f7057222e8b6aebd61d",
+        "binding_kind": "apt",
+        "description": "Generate scripting interfaces to C/C++ code",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "swig",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "4.2.0-2ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "a724fa1654bb1f94c0fa4515c94b9ae7949e1d5aa57d1eb73a40eea3662bd4ab",
+        "binding_kind": "apt",
+        "description": "Generate scripting interfaces to C/C++ code",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "swig3.0",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.0.12-2.2ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d865a84468f4b591d338153f23a72b0c01454b5b1b6b87b0ed344fee0c7a5877",
+        "binding_kind": "apt",
+        "description": "Generate scripting interfaces to C/C++ code",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "swig4.1",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "4.1.0-0.3ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "8b7341f8862aaca76c5b15a0f5ad301ab3909416570439e31a2fabe1daa5dcc8",
+        "binding_kind": "apt",
+        "description": "Generates perfect hash functions as native machine code",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "triehash",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.3-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "43d69296b5005a89ec249f9e9f9db06e285ce3f9d0d67cced684eaa0328a9638",
+        "binding_kind": "apt",
+        "description": "PHP library for generating two-dimensional barcodes",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 2,
+        "matched_terms": [
+          "barcode",
+          "generate"
+        ],
+        "name": "phpqrcode",
+        "packages": [],
+        "query": "code",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 22,
+        "version": "1.1.4-3.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "27759e57915a14019b2ce8f55ca3805c94b41a58d3ce39fc31bb800f432e2094",
+        "binding_kind": "apt",
+        "description": "QR code / bar code scanner and decoder (Python bindings)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 2,
+        "matched_terms": [
+          "barcode",
+          "code"
+        ],
+        "name": "python3-zbar",
+        "packages": [],
+        "query": "code",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 22,
+        "version": "0.23.93-4build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "367a81b059398314db666421f8ba4e55c726c052c5832a816af384db3bbf325e",
+        "binding_kind": "apt",
+        "description": "Perl library to generate CODE 128 bar codes",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 3,
+        "matched_terms": [
+          "128",
+          "barcode",
+          "code",
+          "generate"
+        ],
+        "name": "libbarcode-code128-perl",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 72,
+        "version": "2.21-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "67a8ad2659d5f7eae67784f7d1b9e499bbc8366979f4b40c357f9c7aed16d28d",
+        "binding_kind": "apt",
+        "description": "QR code / bar code scanner and decoder (Perl bindings)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 3,
+        "matched_terms": [
+          "barcode",
+          "code"
+        ],
+        "name": "libbarcode-zbar-perl",
+        "packages": [],
+        "query": "code",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 20,
+        "version": "0.23.93-4build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "0b511808736cd057cb317bc5b0ec99154169e7a849f7f5778d36c578bdb22b0d",
+        "binding_kind": "apt",
+        "description": "Library to generate 2d ISO/IEC 16022 barcodes (data matrix/semacode)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 3,
+        "matched_terms": [
+          "barcode",
+          "generate"
+        ],
+        "name": "libiec16022-0",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 20,
+        "version": "0.2.7-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "0129f77fab0834eacfb34eaf1bff47b505fbfa3f8365fd528fcdfc9c59d6dd60",
+        "binding_kind": "apt",
+        "description": "QR code / bar code scanner and decoder (library)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 3,
+        "matched_terms": [
+          "barcode",
+          "code"
+        ],
+        "name": "libzbar0t64",
+        "packages": [],
+        "query": "code",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 20,
+        "version": "0.23.93-4build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Source-linked CodeGraph exploration, ranked search, and static navigation for coding agents.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.codenib/codenib",
+        "packages": [
+          {
+            "identifier": "codenib",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "uvx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.2.3"
+          }
+        ],
+        "query": "code",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/sysevol-ai/CodeNib"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.2.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "An MCP server that provides CodeScene Code Health analysis tools.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.codescene/codescene-mcp-server",
+        "packages": [
+          {
+            "identifier": "@codescene/codehealth-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.3.1"
+          }
+        ],
+        "query": "code",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/codescene-oss/codescene-mcp-server"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Generate EAN-13 and Code-128 barcodes locally and return SVG data. No network and no key.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.mrfentmen/barcode-mcp",
+        "packages": [
+          {
+            "identifier": "barcode-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.1"
+          }
+        ],
+        "query": "barcode",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/mrfentmen/barcode-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Scan and generate barcodes and QR codes.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.domdomegg/barcode-scanner-mcp",
+        "packages": [
+          {
+            "identifier": "barcode-scanner-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": "npx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.2.0"
+          },
+          {
+            "identifier": "barcode-scanner-mcp",
+            "registry_type": "npm",
+            "required_environment": [
+              "MCP_TRANSPORT"
+            ],
+            "runtime_hint": "npx",
+            "secret_environment": [],
+            "transport": {
+              "type": "streamable-http",
+              "url": "http://localhost:3000/mcp"
+            },
+            "version": "1.2.0"
+          }
+        ],
+        "query": "barcode",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/domdomegg/barcode-scanner-mcp.git"
+        },
+        "required_environment_count": 1,
+        "required_secret_count": 0,
+        "score": 17,
+        "status": "active",
+        "version": "1.2.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Driven Intent Negotiation \u2014 Contract-Oriented Deterministic Executable Runtime DinCoder brings the\u2026",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.smithery/flight505-mcp_dincoder",
+        "packages": [],
+        "query": "code",
+        "remotes": [
+          {
+            "required_headers": [
+              "Authorization"
+            ],
+            "type": "streamable-http",
+            "url": "https://server.smithery.ai/@flight505/mcp_dincoder/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/flight505/MCP_DinCoder"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1.15",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Verified discount & referral codes for crypto exchanges, cards and more \u2014 tested first-hand.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "codes.find/verified-codes",
+        "packages": [],
+        "query": "code",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://find.codes/api/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Create QR codes, re-point printed dynamic codes, name links on your domain, read scan analytics.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "codes.qrflow/qrflow",
+        "packages": [],
+        "query": "code",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://qrflow.codes/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Generate 10 conversion-focused ad headlines for a Shopify/e-commerce product. Free, no signup.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.adcreator-ai/generate-ad-headlines",
+        "packages": [],
+        "query": "generate",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://adcreator-ai.com/mcp-ads"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Bank Code Lookup: the site's own MCP server \u2014 dataset, enquiry (enquiry = a human handoff, not a...",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.bankcodelookup/site",
+        "packages": [],
+        "query": "code",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://bankcodelookup.com/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/joeetdev/venture-estate"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Read-only catalog of gift cards, service top-ups and travel eSIMs sold by BlinkCodes.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.blinkcodes/catalog",
+        "packages": [],
+        "query": "code",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://blinkcodes.com/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/delneg/blinkcodes-agent-interfaces"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Decode an SSTV audio recording and anchor its fingerprint and image hash to the Knox event chain.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.bonissystems/sstv-decoder",
+        "packages": [],
+        "query": "code",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://bonissystems.com/api/knox/agents/sstv-decoder/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Codex run receipts your reviewer can trust.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.clauxel.codexrunledger/codexrunledger-mcp",
+        "packages": [],
+        "query": "code",
+        "remotes": [
+          {
+            "required_headers": [
+              "Authorization"
+            ],
+            "type": "streamable-http",
+            "url": "https://codexrunledger.clauxel.com/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/clauxel/codex-run-ledger-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "CODENIVERSE Thai dev agency: services, company profile, and articles on AI agents and automation.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.codeniverse/mcp",
+        "packages": [],
+        "query": "code",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.codeniverse.com/mcp"
+          },
+          {
+            "required_headers": [],
+            "type": "sse",
+            "url": "https://mcp.codeniverse.com/sse"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Source code plagiarism, peer similarity, and AI-generated-code detection for AI agents.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.codequiry/mcp",
+        "packages": [],
+        "query": "code",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://codequiry.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Search CodeStringers' Zoho & custom-software content and business details, live.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.codestringers/mcp",
+        "packages": [],
+        "query": "code",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://www.codestringers.com/_api/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Product Barcode API - camgoz.net: Provides information on products available in markets across.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.jojapi/product-barcode-api",
+        "packages": [],
+        "query": "barcode",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.jojapi.com/product-barcode-api"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Decode, render, validate barcodes: QR, DataMatrix, EAN, UPC, PDF417. All tools free, no auth.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.appvantagelabs2-a11y/barcode",
+        "packages": [],
+        "query": "barcode",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.casuyi.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "CityHash128 hex length, input discarded",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.sadri-dridi/city128",
+        "packages": [],
+        "query": "128",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/city128/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "FarmHash128 hex length, input discarded",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.sadri-dridi/farm128",
+        "packages": [],
+        "query": "128",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/farm128/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "FNV-1a 128 hex length, input discarded",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.sadri-dridi/fnv128-ok",
+        "packages": [],
+        "query": "128",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/fnv128-ok/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      }
+    ],
+    "effect": "Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png.",
+    "results": [
+      {
+        "binding_performed": false,
+        "candidate_count": 30,
+        "candidates": [
+          {
+            "archive_sha256": "367a81b059398314db666421f8ba4e55c726c052c5832a816af384db3bbf325e",
+            "binding_kind": "apt",
+            "description": "Perl library to generate CODE 128 bar codes",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 3,
+            "matched_terms": [
+              "128",
+              "barcode",
+              "code",
+              "generate"
+            ],
+            "name": "libbarcode-code128-perl",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 72,
+            "version": "2.21-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "cfda4a63c84333f24a72d43ceec5f0a29af27841d21e4a501a6382fb18a0f336",
+            "binding_kind": "apt",
+            "description": "Utility for barcode generation",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "barcode"
+            ],
+            "name": "barcode",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 40,
+            "version": "0.99-7",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "da50e7e76feb7b510e36ed8fdf228e741d887a5ad222d3ea5f52a84d66b93126",
+            "binding_kind": "apt",
+            "description": "QR code / bar code scanner and decoder (introspection data)",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "barcode",
+              "code"
+            ],
+            "name": "gir1.2-zbar-1.0",
+            "packages": [],
+            "query": "code",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 40,
+            "version": "0.23.93-4build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "b3cba02f7d4400bf8c38daf37139f9ba9c12f0e70ef49f035305a6ef27ce0f79",
+            "binding_kind": "apt",
+            "description": "Generates 2d ISO/IEC 16022 barcodes (data matrix/semacode)",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "barcode",
+              "generate"
+            ],
+            "name": "iec16022",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 40,
+            "version": "0.2.7-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "271506a0b70e9fd5bdccfc8a0eb856d8094e092934666f45737578d7737c7a57",
+            "binding_kind": "apt",
+            "description": "qr-code and bar-code scanning library for the web",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "barcode",
+              "code"
+            ],
+            "name": "node-html5-qrcode",
+            "packages": [],
+            "query": "code",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 40,
+            "version": "2.3.8+repack-5",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "9e718d34a9650263aca2dd85e56d9de42ca24ff82254f90f5e4270d1e5d00422",
+            "binding_kind": "apt",
+            "description": "QR code / bar code scanner and decoder (utilities)",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "barcode",
+              "code"
+            ],
+            "name": "zbar-tools",
+            "packages": [],
+            "query": "code",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 40,
+            "version": "0.23.93-4build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "6563248be2191396961f4347522c8273b6e9975b20677e8b5dc7f38f4c1df5a1",
+            "binding_kind": "apt",
+            "description": "QR code / bar code scanner and decoder (Gtk camera tool)",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "barcode",
+              "code"
+            ],
+            "name": "zbarcam-gtk",
+            "packages": [],
+            "query": "code",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 40,
+            "version": "0.23.93-4build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "1a6bc737f55ca4b1cfb1bd945d5b091c3cfaf37b715ec7d56f8046899d67fcef",
+            "binding_kind": "apt",
+            "description": "QR code / bar code scanner and decoder (Qt camera tool)",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "barcode",
+              "code"
+            ],
+            "name": "zbarcam-qt",
+            "packages": [],
+            "query": "code",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 40,
+            "version": "0.23.93-4build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "84c8cc3438b6b8287f611adb5429375fddd2f7ee7d45f8137d7eff8c36b2326b",
+            "binding_kind": "apt",
+            "description": "Generate rust source code from gir files",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "gir-rust-code-generator",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 36,
+            "version": "0.19.0-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "0fe2930e58a69f9550dfa0a9b609d1684585d4fdf0d50841c3b8f59416be7510",
+            "binding_kind": "apt",
+            "description": "generates Dia UML diagrams from source code, XML or data",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "autodia",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2.14-5",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "26b336ef5ccf07bb570bfe61d6edb314744877785a9fd375fc74f8c404cb19a3",
+            "binding_kind": "apt",
+            "description": "Berkeley YACC parser generator extended to generate Java code",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "byacc-j",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.15-1.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "af062a2868332e56d46ce6d1a2710d5d289256b3631e8f7b1aaccf55fa32a700",
+            "binding_kind": "apt",
+            "description": "Generates C bindings from Rust code",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "cbindgen",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.26.0-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "e6851734d45d3898340306d3048b2d269c4d42fdf706fe70c152dae7b0f5e4b6",
+            "binding_kind": "apt",
+            "description": "tool to generate Italian fiscal codes (codice fiscale)",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "codfis",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.4.7-2build4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "6c9110a0d75b187e82722b3bce7a15a0d463b49729c245366e2367ccc2c6e234",
+            "binding_kind": "apt",
+            "description": "utilities to generate C function prototypes from C source code",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "cproto",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "4.7v-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "76a3a24a594d0cb6315eae5bfc78aa4b036b3ba981e3c8fadddcb4dea1792b7c",
+            "binding_kind": "apt",
+            "description": "Generate documentation from source code",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "doxygen",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.9.8+ds-2ubuntu0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "b840f6fbf618523d48325506f1e74deb4d9fa3b44a42fcb07ee4a55f3df442f1",
+            "binding_kind": "apt",
+            "description": "Generate LaTeX documentation from source code",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "doxygen-latex",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.9.8+ds-2ubuntu0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "1465d4d67cbd533a7c471a37110e3fd3e25e2e56d1c92f7d86402e80ca20e49a",
+            "binding_kind": "apt",
+            "description": "C compiler generating Intel code for 16bit/32bit CPUs",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "faucc",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "20180503-1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "271fdf93bab485d65795359ce0a4c0edac52295a87c9a0db56c32c8827259f0c",
+            "binding_kind": "apt",
+            "description": "GAP AutoDoc - Generate documentation from GAP source code",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "gap-autodoc",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2023.06.19-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "be484242d7bfa08a47a65fefb1330cc8bdb3cb957d9e14b551b21b4a5a8fff3d",
+            "binding_kind": "apt",
+            "description": "Generates LaTeX code from literate Haskell sources",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "lhs2tex",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.24-1build2.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "ac650c7d980b70652920be84d9cda483a84a205be659f92b4f96a69b4a3c33f9",
+            "binding_kind": "apt",
+            "description": "Tool to generate documentation from Puppet code and extensions",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "puppet-strings",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2.9.0-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "8017aaaa8952103fd4487cb177165fe1bdd174886da4865a2b1fbe976c90bf4e",
+            "binding_kind": "apt",
+            "description": "generate tags for source code navigation for a cargo project",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "rusty-tags",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.10.0-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "5925dc6e25348bdb350c44a9157da350ef608666b2a21f7057222e8b6aebd61d",
+            "binding_kind": "apt",
+            "description": "Generate scripting interfaces to C/C++ code",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "swig",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "4.2.0-2ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "a724fa1654bb1f94c0fa4515c94b9ae7949e1d5aa57d1eb73a40eea3662bd4ab",
+            "binding_kind": "apt",
+            "description": "Generate scripting interfaces to C/C++ code",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "swig3.0",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.0.12-2.2ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d865a84468f4b591d338153f23a72b0c01454b5b1b6b87b0ed344fee0c7a5877",
+            "binding_kind": "apt",
+            "description": "Generate scripting interfaces to C/C++ code",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "swig4.1",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "4.1.0-0.3ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "8b7341f8862aaca76c5b15a0f5ad301ab3909416570439e31a2fabe1daa5dcc8",
+            "binding_kind": "apt",
+            "description": "Generates perfect hash functions as native machine code",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "triehash",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.3-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "43d69296b5005a89ec249f9e9f9db06e285ce3f9d0d67cced684eaa0328a9638",
+            "binding_kind": "apt",
+            "description": "PHP library for generating two-dimensional barcodes",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 2,
+            "matched_terms": [
+              "barcode",
+              "generate"
+            ],
+            "name": "phpqrcode",
+            "packages": [],
+            "query": "code",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 22,
+            "version": "1.1.4-3.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "27759e57915a14019b2ce8f55ca3805c94b41a58d3ce39fc31bb800f432e2094",
+            "binding_kind": "apt",
+            "description": "QR code / bar code scanner and decoder (Python bindings)",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 2,
+            "matched_terms": [
+              "barcode",
+              "code"
+            ],
+            "name": "python3-zbar",
+            "packages": [],
+            "query": "code",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 22,
+            "version": "0.23.93-4build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "67a8ad2659d5f7eae67784f7d1b9e499bbc8366979f4b40c357f9c7aed16d28d",
+            "binding_kind": "apt",
+            "description": "QR code / bar code scanner and decoder (Perl bindings)",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 3,
+            "matched_terms": [
+              "barcode",
+              "code"
+            ],
+            "name": "libbarcode-zbar-perl",
+            "packages": [],
+            "query": "code",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 20,
+            "version": "0.23.93-4build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "0b511808736cd057cb317bc5b0ec99154169e7a849f7f5778d36c578bdb22b0d",
+            "binding_kind": "apt",
+            "description": "Library to generate 2d ISO/IEC 16022 barcodes (data matrix/semacode)",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 3,
+            "matched_terms": [
+              "barcode",
+              "generate"
+            ],
+            "name": "libiec16022-0",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 20,
+            "version": "0.2.7-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "0129f77fab0834eacfb34eaf1bff47b505fbfa3f8365fd528fcdfc9c59d6dd60",
+            "binding_kind": "apt",
+            "description": "QR code / bar code scanner and decoder (library)",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 3,
+            "matched_terms": [
+              "barcode",
+              "code"
+            ],
+            "name": "libzbar0t64",
+            "packages": [],
+            "query": "code",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 20,
+            "version": "0.23.93-4build3",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png.",
+        "errors": [],
+        "queries": [
+          "generate",
+          "code",
+          "128",
+          "barcode"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "APT_CATALOG",
+        "source_url": null
+      },
+      {
+        "binding_performed": false,
+        "candidate_count": 56,
+        "candidates": [
+          {
+            "description": "Source-linked CodeGraph exploration, ranked search, and static navigation for coding agents.",
+            "is_latest": true,
+            "name": "ai.codenib/codenib",
+            "packages": [
+              {
+                "identifier": "codenib",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "uvx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.2.3"
+              }
+            ],
+            "query": "code",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/sysevol-ai/CodeNib"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.2.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "An MCP server that provides CodeScene Code Health analysis tools.",
+            "is_latest": true,
+            "name": "com.codescene/codescene-mcp-server",
+            "packages": [
+              {
+                "identifier": "@codescene/codehealth-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.3.1"
+              }
+            ],
+            "query": "code",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/codescene-oss/codescene-mcp-server"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Generate EAN-13 and Code-128 barcodes locally and return SVG data. No network and no key.",
+            "is_latest": true,
+            "name": "io.github.mrfentmen/barcode-mcp",
+            "packages": [
+              {
+                "identifier": "barcode-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.1"
+              }
+            ],
+            "query": "barcode",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/mrfentmen/barcode-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Scan and generate barcodes and QR codes.",
+            "is_latest": true,
+            "name": "io.github.domdomegg/barcode-scanner-mcp",
+            "packages": [
+              {
+                "identifier": "barcode-scanner-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": "npx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.2.0"
+              },
+              {
+                "identifier": "barcode-scanner-mcp",
+                "registry_type": "npm",
+                "required_environment": [
+                  "MCP_TRANSPORT"
+                ],
+                "runtime_hint": "npx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "streamable-http",
+                  "url": "http://localhost:3000/mcp"
+                },
+                "version": "1.2.0"
+              }
+            ],
+            "query": "barcode",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/domdomegg/barcode-scanner-mcp.git"
+            },
+            "required_environment_count": 1,
+            "required_secret_count": 0,
+            "score": 17,
+            "status": "active",
+            "version": "1.2.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Driven Intent Negotiation \u2014 Contract-Oriented Deterministic Executable Runtime DinCoder brings the\u2026",
+            "is_latest": true,
+            "name": "ai.smithery/flight505-mcp_dincoder",
+            "packages": [],
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@flight505/mcp_dincoder/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/flight505/MCP_DinCoder"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.15",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Verified discount & referral codes for crypto exchanges, cards and more \u2014 tested first-hand.",
+            "is_latest": true,
+            "name": "codes.find/verified-codes",
+            "packages": [],
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://find.codes/api/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Create QR codes, re-point printed dynamic codes, name links on your domain, read scan analytics.",
+            "is_latest": true,
+            "name": "codes.qrflow/qrflow",
+            "packages": [],
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://qrflow.codes/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Generate 10 conversion-focused ad headlines for a Shopify/e-commerce product. Free, no signup.",
+            "is_latest": true,
+            "name": "com.adcreator-ai/generate-ad-headlines",
+            "packages": [],
+            "query": "generate",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://adcreator-ai.com/mcp-ads"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Bank Code Lookup: the site's own MCP server \u2014 dataset, enquiry (enquiry = a human handoff, not a...",
+            "is_latest": true,
+            "name": "com.bankcodelookup/site",
+            "packages": [],
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://bankcodelookup.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/joeetdev/venture-estate"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Read-only catalog of gift cards, service top-ups and travel eSIMs sold by BlinkCodes.",
+            "is_latest": true,
+            "name": "com.blinkcodes/catalog",
+            "packages": [],
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://blinkcodes.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/delneg/blinkcodes-agent-interfaces"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Decode an SSTV audio recording and anchor its fingerprint and image hash to the Knox event chain.",
+            "is_latest": true,
+            "name": "com.bonissystems/sstv-decoder",
+            "packages": [],
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://bonissystems.com/api/knox/agents/sstv-decoder/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Codex run receipts your reviewer can trust.",
+            "is_latest": true,
+            "name": "com.clauxel.codexrunledger/codexrunledger-mcp",
+            "packages": [],
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://codexrunledger.clauxel.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/clauxel/codex-run-ledger-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "CODENIVERSE Thai dev agency: services, company profile, and articles on AI agents and automation.",
+            "is_latest": true,
+            "name": "com.codeniverse/mcp",
+            "packages": [],
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.codeniverse.com/mcp"
+              },
+              {
+                "required_headers": [],
+                "type": "sse",
+                "url": "https://mcp.codeniverse.com/sse"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Source code plagiarism, peer similarity, and AI-generated-code detection for AI agents.",
+            "is_latest": true,
+            "name": "com.codequiry/mcp",
+            "packages": [],
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://codequiry.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Search CodeStringers' Zoho & custom-software content and business details, live.",
+            "is_latest": true,
+            "name": "com.codestringers/mcp",
+            "packages": [],
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://www.codestringers.com/_api/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Product Barcode API - camgoz.net: Provides information on products available in markets across.",
+            "is_latest": true,
+            "name": "com.jojapi/product-barcode-api",
+            "packages": [],
+            "query": "barcode",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.jojapi.com/product-barcode-api"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Decode, render, validate barcodes: QR, DataMatrix, EAN, UPC, PDF417. All tools free, no auth.",
+            "is_latest": true,
+            "name": "io.github.appvantagelabs2-a11y/barcode",
+            "packages": [],
+            "query": "barcode",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.casuyi.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "CityHash128 hex length, input discarded",
+            "is_latest": true,
+            "name": "io.github.sadri-dridi/city128",
+            "packages": [],
+            "query": "128",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/city128/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "FarmHash128 hex length, input discarded",
+            "is_latest": true,
+            "name": "io.github.sadri-dridi/farm128",
+            "packages": [],
+            "query": "128",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/farm128/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "FNV-1a 128 hex length, input discarded",
+            "is_latest": true,
+            "name": "io.github.sadri-dridi/fnv128-ok",
+            "packages": [],
+            "query": "128",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/fnv128-ok/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MurmurHash3-128 hex length, input discarded",
+            "is_latest": true,
+            "name": "io.github.sadri-dridi/murmur128",
+            "packages": [],
+            "query": "128",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/murmur128/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "SHAKE128 hex length, input discarded",
+            "is_latest": true,
+            "name": "io.github.sadri-dridi/shake128",
+            "packages": [],
+            "query": "128",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/shake128/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "SHAKE128 hex length band, input discarded",
+            "is_latest": true,
+            "name": "io.github.sadri-dridi/shake128-ok",
+            "packages": [],
+            "query": "128",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/shake128-ok/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "XXH128 hex length, input discarded",
+            "is_latest": true,
+            "name": "io.github.sadri-dridi/xxh128-len",
+            "packages": [],
+            "query": "128",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/xxh128-len/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "XXH3-128 hex length, input discarded",
+            "is_latest": true,
+            "name": "io.github.sadri-dridi/xxh3-128",
+            "packages": [],
+            "query": "128",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/xxh3-128/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Team-aware memory: intent, decisions, real-time conflicts for AI coding assistants.",
+            "is_latest": true,
+            "name": "ai.kawacode/mcp",
+            "packages": [
+              {
+                "identifier": "@kawacode/mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "8.1.0"
+              }
+            ],
+            "query": "code",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/kawacode-ai/kawa.mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "8.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Local MCP gateway daemon: route, audit, and inspect MCP servers from one config.",
+            "is_latest": true,
+            "name": "com.aiinfradecoded/mcp-anvil",
+            "packages": [
+              {
+                "identifier": "mcp-anvil",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.2.0"
+              }
+            ],
+            "query": "code",
+            "remotes": [],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.2.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Visual tech-stack inventory of any codebase: languages, frameworks, databases, AI SDKs, infra.",
+            "is_latest": true,
+            "name": "io.github.askuma/generate-tech-stack",
+            "packages": [
+              {
+                "identifier": "generate-tech-stack-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.2.2"
+              }
+            ],
+            "query": "generate",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/askuma/generate-tech-stack"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.2.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP server for Generate-Data.com: dataset generation, AI schema design, Project management.",
+            "is_latest": true,
+            "name": "io.github.ns-3e/generate-data-mcp",
+            "packages": [
+              {
+                "identifier": "generate-data-mcp",
+                "registry_type": "pypi",
+                "required_environment": [
+                  "GENERATE_DATA_API_KEY"
+                ],
+                "runtime_hint": null,
+                "secret_environment": [
+                  "GENERATE_DATA_API_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "2.0.1"
+              }
+            ],
+            "query": "generate",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/ns-3e/generate-data-mcp"
+            },
+            "required_environment_count": 1,
+            "required_secret_count": 1,
+            "score": 14,
+            "status": "active",
+            "version": "2.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "CodeRide eliminates the context reset cycle once and for all. Through MCP integration, it seamless\u2026",
+            "is_latest": true,
+            "name": "ai.smithery/PixdataOrg-coderide",
+            "packages": [],
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@PixdataOrg/coderide/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/PixdataOrg/coderide-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "0.9.1",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png.",
+        "errors": [],
+        "queries": [
+          "generate",
+          "code",
+          "128",
+          "barcode"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "OFFICIAL_MCP_REGISTRY",
+        "source_url": "https://registry.modelcontextprotocol.io"
+      }
+    ],
+    "schema": "PROJECT_BRAIN_FEDERATED_CAPABILITY_DISCOVERY_V1",
+    "sources": [
+      "APT_CATALOG",
+      "OFFICIAL_MCP_REGISTRY"
+    ]
+  },
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
+  "source": "FEDERATED_CAPABILITY_DISCOVERY_FALLBACK",
+  "targeted_acquisition_error": "AutoAcquisitionFailure:NO_LOW_FRICTION_APT_CLI_CANDIDATE"
+}
