@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-CAPABILITY-DISCOVERY-MCP-REGISTRY-PROBE-001",
+  "purpose": "Probe the official public MCP Registry from the shared runtime as a zero-cost standardized external capability-discovery source.",
+  "steps": [
+    {
+      "id": "query-official-mcp-registry",
+      "adapter": "http",
+      "url": "https://registry.modelcontextprotocol.io/v0.1/servers?search=filesystem&version=latest&limit=3",
+      "timeout_s": 20,
+      "max_bytes": 60000,
+      "verify": {
+        "type": "http_status",
+        "value": 200
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "authentication_required": false,
+    "read_only": true,
+    "provider_role": "OPTIONAL_CAPABILITY_DISCOVERY_SOURCE_NOT_CANONICAL_AUTHORITY"
+  }
+}
