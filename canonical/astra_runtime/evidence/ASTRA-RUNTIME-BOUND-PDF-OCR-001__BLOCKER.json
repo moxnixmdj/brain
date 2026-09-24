@@ -1,8 +1,8 @@
 {
   "adapter": "goal",
-  "error": "Blocker:ACTION_EXPECTATION_FAILED:text",
+  "error": "Blocker:ACTION_EXPECTATION_FAILED:text:OBSERVED='TEST ULF TEST'",
   "mission_id": "ASTRA-RUNTIME-BOUND-PDF-OCR-001",
-  "observed_at_utc": "2026-09-24T21:27:05.584521+00:00",
+  "observed_at_utc": "2026-09-24T21:29:26.465422+00:00",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
   "step_id": "bind-ocr-and-verify-visible-text",
   "step_index": 1

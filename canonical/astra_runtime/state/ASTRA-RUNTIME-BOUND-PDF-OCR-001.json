@@ -1,9 +1,9 @@
 {
   "blocker": {
     "adapter": "goal",
-    "error": "Blocker:ACTION_EXPECTATION_FAILED:text",
+    "error": "Blocker:ACTION_EXPECTATION_FAILED:text:OBSERVED='TEST ULF TEST'",
     "mission_id": "ASTRA-RUNTIME-BOUND-PDF-OCR-001",
-    "observed_at_utc": "2026-09-24T21:27:05.584521+00:00",
+    "observed_at_utc": "2026-09-24T21:29:26.465422+00:00",
     "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
     "step_id": "bind-ocr-and-verify-visible-text",
     "step_index": 1
@@ -27,10 +27,10 @@
   ],
   "mission_id": "ASTRA-RUNTIME-BOUND-PDF-OCR-001",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_BOUND_PDF_OCR_001.json",
-  "mission_sha256": "7680cbc138c9f542e1c8bc6973e92f0c9c031f62ed191abdd2f6b181751e47f8",
+  "mission_sha256": "50152190507db56455d73b2b9375723f4bcb95b74811275cda64b2c335f313ba",
   "next_step": 1,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
   "status": "BLOCKED",
-  "updated_at_utc": "2026-09-24T21:27:05.584720+00:00"
+  "updated_at_utc": "2026-09-24T21:29:26.465656+00:00"
 }
