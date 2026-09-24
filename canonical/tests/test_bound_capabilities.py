@@ -39,6 +39,20 @@ class BoundCapabilityTests(unittest.TestCase):
         with self.assertRaisesRegex(runtime.Blocker,"ACTION_EXPECTATION_FAILED:text"):
             runtime._verify_action_expectation(action,{"text":"hay only"})
 
+    def test_verified_capability_is_inherited_from_brain(self):
+        problem={
+            "initial_facts":["pdf.file.available"],
+            "target_effects":["pdf.extract.text"],
+            "inputs":{"pdf_path":"canonical/example.pdf"},
+            "capabilities":[]
+        }
+        enriched=runtime._inherit_verified_capabilities(problem)
+        ids=[cap["id"] for cap in enriched["capabilities"]]
+        self.assertIn("pdf.extract.text.pypdf",ids)
+        inherited=[cap for cap in enriched["capabilities"] if cap["id"]=="pdf.extract.text.pypdf"][0]
+        self.assertEqual(inherited["action"]["args"]["path"],"canonical/example.pdf")
+        self.assertIn("pdf.extract.text.pypdf",enriched["_inherited_bound_capabilities"])
+
     def test_unknown_bound_capability_rejected(self):
         with self.assertRaisesRegex(runtime.Blocker,"BOUND_CAPABILITY_UNKNOWN"):
             runtime._invoke_bound_capability({"capability_id":"does.not.exist"})
