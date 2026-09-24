@@ -579,7 +579,7 @@ def run_goal(step, mission):
     except Blocker as e:
         if "GOAL_COMPILATION_FAILED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH" in str(e):
             discovery=_load_capability_discovery()
-            result=discovery.search_all(goal,limit_per_source=12)
+            result=discovery.search_all(goal,limit_per_source=30)
             evidence={
               "schema":"PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
               "mission_id":mission.get("mission_id"),
