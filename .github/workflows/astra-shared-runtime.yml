@@ -24,7 +24,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
+          # Execute the exact triggering revision. Checking out moving `main`
+          # caused a real 2026-09-24 race where diff-tree could no longer see
+          # the mission change after later commits advanced the branch.
+          ref: ${{ github.sha }}
           fetch-depth: 2
 
       - uses: actions/setup-python@v5
@@ -72,7 +75,8 @@ jobs:
           if ! git diff --cached --quiet; then
             git commit -m "Record ASTRA shared runtime mission execution"
             for attempt in 1 2 3 4 5; do
-              git pull --rebase origin main
+              git fetch origin main
+              git rebase origin/main
               if git push origin HEAD:main; then
                 exit 0
               fi
