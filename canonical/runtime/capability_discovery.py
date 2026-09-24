@@ -216,12 +216,27 @@ def search_apt_packages(effect, limit=12):
             name,description=line.split(" - ",1)
             name=name.strip(); description=description.strip()
             blob=(name+" "+description).lower()
-            blob_tokens=set(re.findall(r"[a-z0-9]+",blob))
-            matched={t for t in effect_tokens if t in blob_tokens}
+            ordered_blob_tokens=re.findall(r"[a-z0-9]+",blob)
+            blob_tokens=set(ordered_blob_tokens)
+            # Treat common lexical compounds equivalently across package
+            # metadata styles: "bar code" -> "barcode", "qr code" ->
+            # "qrcode", etc. This stays domain-independent and prevents a
+            # spacing convention from hiding the best supplier/verifier.
+            compound_tokens={
+                ordered_blob_tokens[i]+ordered_blob_tokens[i+1]
+                for i in range(len(ordered_blob_tokens)-1)
+                if len(ordered_blob_tokens[i])>=2 and len(ordered_blob_tokens[i+1])>=2
+            }
+            lexical_tokens=blob_tokens | compound_tokens
+            matched={t for t in effect_tokens if t in lexical_tokens}
             if not matched:
                 continue
             score=0
-            name_tokens=set(re.findall(r"[a-z0-9]+",name.lower()))
+            ordered_name_tokens=re.findall(r"[a-z0-9]+",name.lower())
+            name_tokens=set(ordered_name_tokens) | {
+                ordered_name_tokens[i]+ordered_name_tokens[i+1]
+                for i in range(len(ordered_name_tokens)-1)
+            }
             for t in matched:
                 distinctive=t not in GENERIC_DISCOVERY_TOKENS
                 if t in name_tokens:
