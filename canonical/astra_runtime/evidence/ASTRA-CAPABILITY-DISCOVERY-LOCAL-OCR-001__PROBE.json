@@ -1,0 +1,17 @@
+{
+  "candidates": [
+    {
+      "name": "tesseract",
+      "path": null
+    },
+    {
+      "name": "pdftoppm",
+      "path": null
+    },
+    {
+      "name": "pdftotext",
+      "path": null
+    }
+  ],
+  "schema": "PROJECT_BRAIN_LOCAL_CAPABILITY_PROBE_V1"
+}

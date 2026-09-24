@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-24T21:23:25.139218+00:00",
+  "created_at_utc": "2026-09-24T21:23:25.097705+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-24T21:23:25.138910+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport hashlib,json,pathlib,shutil,subprocess\nout={\"schema\":\"PROJECT_BRAIN_LOCAL_CAPABILITY_PROBE_V1\",\"candidates\":[]}\nfor name in (\"tesseract\",\"pdftoppm\",\"pdftotext\"):\n    path=shutil.which(name)\n    rec={\"name\":name,\"path\":path}\n    if path:\n        raw=pathlib.Path(path).read_bytes()\n        rec[\"sha256\"]=hashlib.sha256(raw).hexdigest()\n        p=subprocess.run([path,\"--version\"] if name==\"tesseract\" else [path,\"-v\"],text=True,capture_output=True)\n        rec[\"version_output\"]=(p.stdout+p.stderr)[:4000]\n        pkg=subprocess.run([\"dpkg-query\",\"-S\",path],text=True,capture_output=True)\n        rec[\"package_owner\"]=pkg.stdout.strip()[:1000]\n    out[\"candidates\"].append(rec)\npath=pathlib.Path(\"canonical/astra_runtime/evidence/ASTRA-CAPABILITY-DISCOVERY-LOCAL-OCR-001__PROBE.json\")\npath.parent.mkdir(parents=True,exist_ok=True)\npath.write_text(json.dumps(out,indent=2,sort_keys=True)+\"\\n\",encoding=\"utf-8\")\nprint(\"LOCAL_OCR_PROBE_COMPLETE\")\nprint(json.dumps(out,sort_keys=True))\nPY",
+        "duration_s": 0.041,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "LOCAL_OCR_PROBE_COMPLETE\n{\"candidates\": [{\"name\": \"tesseract\", \"path\": null}, {\"name\": \"pdftoppm\", \"path\": null}, {\"name\": \"pdftotext\", \"path\": null}], \"schema\": \"PROJECT_BRAIN_LOCAL_CAPABILITY_PROBE_V1\"}\n"
+      },
+      "step_id": "probe-existing-ocr-and-pdf-tools",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-CAPABILITY-DISCOVERY-LOCAL-OCR-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_CAPABILITY_DISCOVERY_LOCAL_OCR_001.json",
+  "mission_sha256": "7aacc5cf44e2fd74f64a0bb07779b28bb45ed1b7ca0ef1acac9e932a11d32edc",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-24T21:23:25.138923+00:00"
+}

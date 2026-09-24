@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-24T21:23:25.139508+00:00",
+  "mission_id": "ASTRA-CAPABILITY-DISCOVERY-LOCAL-OCR-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_CAPABILITY_DISCOVERY_LOCAL_OCR_001.json",
+  "mission_sha256": "7aacc5cf44e2fd74f64a0bb07779b28bb45ed1b7ca0ef1acac9e932a11d32edc",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "cc2a84684fca00db9975c33fceb0ecf574c9e1fc9224c347fa8c29a1231b32ff",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
