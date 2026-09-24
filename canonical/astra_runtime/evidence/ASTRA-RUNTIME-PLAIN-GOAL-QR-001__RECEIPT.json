@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-24T22:03:54.511461+00:00",
+  "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-QR-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_PLAIN_GOAL_QR_001.json",
+  "mission_sha256": "a4635885479f4dba94de003183527922196e785a7b71b0c7b7a71fef0e9b8b85",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "bcfef5f5f25eed1b4f0a79f3fbae4d465d824add1c50e3f4cbe9e94b32b31f1e",
+  "status": "COMPLETE",
+  "steps_completed": 3
+}
