@@ -62,6 +62,10 @@ def _viable_candidates(discovery, goal=""):
     producer_intent=any(w in goal_lower for w in ("generate","create","make","render","encode","save"))
     producer_words=("generate","generator","encode","encoder","create","render","write","output")
     consumer_words=("decode","decoder","scan","scanner","reader","inspect","viewer")
+    goal_terms=[
+        t for t in capability_discovery.effect_queries(goal)
+        if t not in GENERIC_KEYWORDS and not t.isdigit()
+    ]
     for c in discovery.get("candidates",[]):
         if c.get("discovery_source")!="APT_CATALOG":
             continue
@@ -78,12 +82,18 @@ def _viable_candidates(discovery, goal=""):
         x=dict(c)
         role_blob=(" "+str(c.get("name") or "")+" "+str(c.get("description") or "")+" ").lower()
         role_score=float(c.get("score",0))
+        object_matches=sum(1 for t in goal_terms if t in role_blob or t in (c.get("matched_terms") or []))
         if producer_intent:
             if any(w in role_blob for w in producer_words):
                 role_score+=24
+            if object_matches:
+                role_score+=32*object_matches
+            else:
+                role_score-=36
             if any(w in role_blob for w in consumer_words) and not any(w in role_blob for w in producer_words):
                 role_score-=28
         x["_acquisition_role_score"]=role_score
+        x["_acquisition_object_matches"]=object_matches
         viable.append(x)
     if not viable:
         raise AutoAcquisitionFailure("NO_LOW_FRICTION_APT_CLI_CANDIDATE")
