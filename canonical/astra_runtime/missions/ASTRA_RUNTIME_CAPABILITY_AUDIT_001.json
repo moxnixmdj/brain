@@ -24,6 +24,8 @@
     "manual_supplier": false,
     "manual_binding": false,
     "real_project_artifact": true,
-    "require_final_effect_verification": true
+    "require_final_effect_verification": true,
+    "replay_after_compound_goal_repair_commit": "1818f454285d0587f75726a240f4e67a331d661d",
+    "replay_after_compound_frontier_regression_commit": "563cc9c2c71d6a782dac9f83dca92bbf8fccef08"
   }
 }
