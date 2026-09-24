@@ -54,5 +54,11 @@
     "incremental_spend_usd": 0,
     "no_unreviewed_code_execution": true,
     "models_optional_sources_only": true
+  },
+  "replay_after_root_cause_change": {
+    "prior_failure": "PYTHON_FIXTURE_EMBEDDED_JSON_BOOLEAN",
+    "repair_commit": "ecf19fb6407a2e71e721ce06ba82d98a05e268ef",
+    "repair": "Parse the embedded registry fixture through json.loads instead of treating JSON literals as Python syntax.",
+    "replay_authorized": true
   }
 }
