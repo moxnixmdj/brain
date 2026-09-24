@@ -72,6 +72,17 @@ jobs:
           git config user.name "Project Brain ASTRA Runtime"
           git config user.email "project-brain-astra-runtime@users.noreply.github.com"
           git add -A canonical/astra_runtime
+          # Registry mutation is allowed only for missions that explicitly
+          # declare it. Runtime/source code remains unstaged and immutable.
+          MISSION="${{ steps.mission.outputs.path }}"
+          if python - "$MISSION" <<'PY'
+          import json,sys
+          x=json.load(open(sys.argv[1],encoding="utf-8"))
+          raise SystemExit(0 if (x.get("constraints") or {}).get("allow_registry_mutation") is True else 1)
+          PY
+          then
+            git add canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json
+          fi
           if ! git diff --cached --quiet; then
             git commit -m "Record ASTRA shared runtime mission execution"
             for attempt in 1 2 3 4 5; do
