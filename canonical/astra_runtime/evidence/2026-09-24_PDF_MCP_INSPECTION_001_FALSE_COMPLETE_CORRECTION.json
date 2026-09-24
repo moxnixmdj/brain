@@ -1,0 +1,14 @@
+{
+  "schema": "PROJECT_BRAIN_EVIDENCE_CORRECTION_V1",
+  "invalidated_claim": "ASTRA-CAPABILITY-BINDING-PDF-MCP-INSPECTION-001 completed successfully",
+  "affected_mission": "ASTRA-CAPABILITY-BINDING-PDF-MCP-INSPECTION-001",
+  "reason": "Runtime verifier previously allowed file_exists/stdout_contains to mask nonzero shell return codes. The mission's MCP inspector exited 2 and shortlist step exited 3, so its COMPLETE state is invalid as success evidence.",
+  "superseding_evidence": {
+    "verifier_fix_commit": "5547b4ead2d5f0b238359d6d3cd23f7819d658a0",
+    "regression_test_path": "canonical/tests/test_astra_runtime_verification.py",
+    "corrected_mission": "ASTRA-CAPABILITY-BINDING-PDF-MCP-INSPECTION-002",
+    "corrected_result": "FAIL_CLOSED"
+  },
+  "preserved_fact": "The generated inspection files are historical diagnostic artifacts only; they do not prove any MCP PDF tool was usable.",
+  "promotion_effect": "ZERO_CAPABILITY_CREDIT"
+}
