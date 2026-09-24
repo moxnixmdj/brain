@@ -1,0 +1,39 @@
+{
+  "adapter_result": {
+    "adapter": "bound_capability_cli",
+    "argv": [
+      "zint",
+      "-b",
+      "CODE128",
+      "-o",
+      "canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png",
+      "-d",
+      "PROJECT BRAIN"
+    ],
+    "output_bytes": 269,
+    "output_path": "canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png",
+    "output_sha256": "c5ab48e8f4b30a1f7946a6a24db16f19e5896b188f19b0cade5636e98dabe768",
+    "output_verified": true,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  "capability_id": "auto.apt.zint",
+  "dependency": {
+    "origin": "Ubuntu",
+    "packages": [
+      {
+        "archive_sha256": "cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769",
+        "name": "zint",
+        "version": "2.13.0-1build3"
+      }
+    ],
+    "status": "INSTALLED_VERIFIED"
+  },
+  "independent_output_bytes": 269,
+  "independent_output_sha256": "c5ab48e8f4b30a1f7946a6a24db16f19e5896b188f19b0cade5636e98dabe768",
+  "independent_verified": true,
+  "schema": "PROJECT_BRAIN_AUTO_BINDING_VERIFICATION_V1",
+  "status": "VERIFIED",
+  "verification_mission_id": "ASTRA-AUTO-VERIFY-ZINT-85BC9CD2C9A4"
+}

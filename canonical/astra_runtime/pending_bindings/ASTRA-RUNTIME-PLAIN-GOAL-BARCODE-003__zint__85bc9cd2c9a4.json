@@ -166,13 +166,124 @@
     "zero_cost_eligible": true
   },
   "semantic_verification": {
+    "evidence": {
+      "attempt_count": 2,
+      "attempts": [
+        {
+          "candidate": {
+            "archive_sha256": "da50e7e76feb7b510e36ed8fdf228e741d887a5ad222d3ea5f52a84d66b93126",
+            "binding_kind": "apt",
+            "description": "QR code / bar code scanner and decoder (introspection data)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "barcode",
+              "decode"
+            ],
+            "name": "gir1.2-zbar-1.0",
+            "packages": [],
+            "query": "decode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 48,
+            "version": "0.23.93-4build3",
+            "zero_cost_eligible": true
+          },
+          "probe": {
+            "archive_sha256": "da50e7e76feb7b510e36ed8fdf228e741d887a5ad222d3ea5f52a84d66b93126",
+            "executables": [],
+            "package": "gir1.2-zbar-1.0",
+            "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+            "version": "0.23.93-4build3"
+          },
+          "status": "VERIFIER_CONTRACT_REJECTED"
+        },
+        {
+          "candidate": {
+            "archive_sha256": "9e718d34a9650263aca2dd85e56d9de42ca24ff82254f90f5e4270d1e5d00422",
+            "binding_kind": "apt",
+            "description": "QR code / bar code scanner and decoder (utilities)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "barcode",
+              "decode"
+            ],
+            "name": "zbar-tools",
+            "packages": [],
+            "query": "decode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 48,
+            "version": "0.23.93-4build3",
+            "zero_cost_eligible": true
+          },
+          "contract": {
+            "argv": [
+              "/usr/bin/zbarimg",
+              "--quiet",
+              "--raw",
+              "__OUTPUT_PATH__"
+            ],
+            "executable": "/usr/bin/zbarimg",
+            "help_excerpt": "usage: zbarimg [options] <image>...\n\nscan and decode bar codes from one or more image files\n\noptions:\n    -h, --help      display this help text\n    --version       display version information and exit\n    --polygon       output points delimiting code zone with decoded symbol data\n    -q, --quiet     minimal output, only print decoded symbol data\n    -v, --verbose   increase debug output level\n    --verbose=N     set specific debug output level\n    -d, --display   enable display of following images to the screen\n    -D, --nodisplay disable display of following images (default)\n    --xml, --noxml  enable/disable XML output format\n    --raw           output decoded symbol data without converting charsets\n    -1, --oneshot   exit after scanning one bar code\n    -S<CONFIG>[=<VALUE>], --set <CONFIG>[=<VALUE>]\n                    set decoder/scanner <CONFIG> to <VALUE> (or 1)\n\n    --nodbus        disable dbus message"
+          },
+          "probe": {
+            "archive_sha256": "9e718d34a9650263aca2dd85e56d9de42ca24ff82254f90f5e4270d1e5d00422",
+            "executables": [
+              {
+                "executable": "/usr/bin/zbarcam",
+                "help_attempts": [
+                  {
+                    "flag": "--help",
+                    "returncode": 0,
+                    "text": "usage: zbarcam [options] [/dev/video?]\n\nscan and decode bar codes from a video stream\n\noptions:\n    -h, --help      display this help text\n    --version       display version information and exit\n    -q, --quiet     disable beep when symbol is decoded\n    -v, --verbose   increase debug output level\n    --verbose=N     set specific debug output level\n    --xml           use XML output format\n    --raw           output decoded symbol data without converting charsets\n    -1, --oneshot   exit after scanning one bar code\n    --nodisplay     disable video display window\n    --prescale=<W>x<H>\n                    request alternate video image size from driver\n    -S<CONFIG>[=<VALUE>], --set <CONFIG>[=<VALUE>]\n                    set decoder/scanner <CONFIG> to <VALUE> (or 1)\n\n    --nodbus        disable dbus message"
+                  }
+                ]
+              },
+              {
+                "executable": "/usr/bin/zbarimg",
+                "help_attempts": [
+                  {
+                    "flag": "--help",
+                    "returncode": 0,
+                    "text": "usage: zbarimg [options] <image>...\n\nscan and decode bar codes from one or more image files\n\noptions:\n    -h, --help      display this help text\n    --version       display version information and exit\n    --polygon       output points delimiting code zone with decoded symbol data\n    -q, --quiet     minimal output, only print decoded symbol data\n    -v, --verbose   increase debug output level\n    --verbose=N     set specific debug output level\n    -d, --display   enable display of following images to the screen\n    -D, --nodisplay disable display of following images (default)\n    --xml, --noxml  enable/disable XML output format\n    --raw           output decoded symbol data without converting charsets\n    -1, --oneshot   exit after scanning one bar code\n    -S<CONFIG>[=<VALUE>], --set <CONFIG>[=<VALUE>]\n                    set decoder/scanner <CONFIG> to <VALUE> (or 1)\n\n    --nodbus        disable dbus message"
+                  }
+                ]
+              }
+            ],
+            "package": "zbar-tools",
+            "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+            "version": "0.23.93-4build3"
+          },
+          "returncode": 0,
+          "status": "VERIFIED",
+          "stderr": "",
+          "stdout": "PROJECT BRAIN\n"
+        }
+      ],
+      "expected_text": "PROJECT BRAIN",
+      "observed_text": "PROJECT BRAIN",
+      "producer_independent": true,
+      "producer_package": "zint",
+      "query": "decode barcode image",
+      "verified": true,
+      "verifier_archive_sha256": "9e718d34a9650263aca2dd85e56d9de42ca24ff82254f90f5e4270d1e5d00422",
+      "verifier_executable": "/usr/bin/zbarimg",
+      "verifier_package": "zbar-tools",
+      "verifier_version": "0.23.93-4build3"
+    },
     "expected_text": "PROJECT BRAIN",
     "goal": "Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png.",
     "reason": "Auto-synthesized text-to-binary-file capability must prove semantic content independently of the producer.",
     "required": true,
-    "status": "PENDING_VERIFIER_ACQUISITION"
+    "status": "VERIFIED"
   },
-  "status": "PENDING_INDEPENDENT_VERIFICATION",
+  "status": "PROMOTED_VERIFIED",
   "verification_args": {
     "argv": [
       "zint",

@@ -1,0 +1,42 @@
+{
+  "completed_at_utc": "2026-09-24T23:03:57.796461+00:00",
+  "created_at_utc": "2026-09-24T23:03:40.049120+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-24T23:03:57.774697+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython canonical/runtime/verify_pending_cli_binding.py canonical/astra_runtime/pending_bindings/ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003__zint__85bc9cd2c9a4.json canonical/astra_runtime/evidence/ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003__zint__85bc9cd2c9a4__AUTO_VERIFY.json",
+        "duration_s": 17.725,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "PENDING_CLI_BINDING_EFFECT_VERIFIED {\"adapter_result\": {\"adapter\": \"bound_capability_cli\", \"argv\": [\"zint\", \"-b\", \"CODE128\", \"-o\", \"canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png\", \"-d\", \"PROJECT BRAIN\"], \"output_bytes\": 269, \"output_path\": \"canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png\", \"output_sha256\": \"c5ab48e8f4b30a1f7946a6a24db16f19e5896b188f19b0cade5636e98dabe768\", \"output_verified\": true, \"returncode\": 0, \"stderr\": \"\", \"stdout\": \"\"}, \"capability_id\": \"auto.apt.zint\", \"dependency\": {\"origin\": \"Ubuntu\", \"packages\": [{\"archive_sha256\": \"cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769\", \"name\": \"zint\", \"version\": \"2.13.0-1build3\"}], \"status\": \"INSTALLED_VERIFIED\"}, \"independent_output_bytes\": 269, \"independent_output_sha256\": \"c5ab48e8f4b30a1f7946a6a24db16f19e5896b188f19b0cade5636e98dabe768\", \"independent_verified\": true, \"schema\": \"PROJECT_BRAIN_AUTO_BINDING_VERIFICATION_V1\", \"status\": \"VERIFIED\", \"verification_mission_id\": \"ASTRA-AUTO-VERIFY-ZINT-85BC9CD2C9A4\"}\n"
+      },
+      "step_id": "verify-pending-cli-binding",
+      "step_index": 0
+    },
+    {
+      "completed_at_utc": "2026-09-24T23:03:57.796255+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython canonical/runtime/promote_pending_binding.py canonical/astra_runtime/pending_bindings/ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003__zint__85bc9cd2c9a4.json canonical/astra_runtime/evidence/ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003__zint__85bc9cd2c9a4__AUTO_VERIFY.json",
+        "duration_s": 0.021,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "PENDING_CAPABILITY_PROMOTED auto.apt.zint\n"
+      },
+      "step_id": "promote-and-replay",
+      "step_index": 1
+    }
+  ],
+  "mission_id": "ASTRA-AUTO-VERIFY-ZINT-85BC9CD2C9A4",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_AUTO_VERIFY_ZINT_85BC9CD2C9A4.json",
+  "mission_sha256": "845f0a6245f9803853b90d8507a11e3c1d4bc96b2236b7a822a4d052e2905c5b",
+  "next_step": 2,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-24T23:03:57.796264+00:00"
+}
