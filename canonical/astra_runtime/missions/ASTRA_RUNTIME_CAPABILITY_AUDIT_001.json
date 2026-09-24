@@ -28,6 +28,7 @@
     "replay_after_compound_goal_repair_commit": "1818f454285d0587f75726a240f4e67a331d661d",
     "replay_after_compound_frontier_regression_commit": "563cc9c2c71d6a782dac9f83dca92bbf8fccef08",
     "replay_after_path_neutral_discovery_commit": "b490fe180ce3a7d4a90b359c1c2bb3bcfd9fb889",
-    "replay_after_path_query_regression_commit": "f6989ece81e1a7b0d5c9e74afdfdf1f86ebf2d7a"
+    "replay_after_path_query_regression_commit": "f6989ece81e1a7b0d5c9e74afdfdf1f86ebf2d7a",
+    "replay_after_object_first_supplier_discovery_commit": "1ee1ac84502d1a4a26943cceb0d451ca75c65f16"
   }
 }
