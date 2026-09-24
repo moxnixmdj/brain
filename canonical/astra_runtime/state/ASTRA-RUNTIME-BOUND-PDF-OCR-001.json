@@ -1,0 +1,36 @@
+{
+  "blocker": {
+    "adapter": "goal",
+    "error": "Blocker:ACTION_EXPECTATION_FAILED:text",
+    "mission_id": "ASTRA-RUNTIME-BOUND-PDF-OCR-001",
+    "observed_at_utc": "2026-09-24T21:27:05.584521+00:00",
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "bind-ocr-and-verify-visible-text",
+    "step_index": 1
+  },
+  "created_at_utc": "2026-09-24T21:26:56.386557+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-24T21:26:56.663454+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython canonical/tests/test_bound_capabilities.py\nmkdir -p canonical/astra_runtime/tmp\npython - <<'PY'\nfrom pathlib import Path\n\nFONT={\n\"T\":[\"11111\",\"00100\",\"00100\",\"00100\",\"00100\",\"00100\",\"00100\"],\n\"E\":[\"11111\",\"10000\",\"10000\",\"11110\",\"10000\",\"10000\",\"11111\"],\n\"S\":[\"01111\",\"10000\",\"10000\",\"01110\",\"00001\",\"00001\",\"11110\"],\n\"O\":[\"01110\",\"10001\",\"10001\",\"10001\",\"10001\",\"10001\",\"01110\"],\n\"C\":[\"01111\",\"10000\",\"10000\",\"10000\",\"10000\",\"10000\",\"01111\"],\n\"R\":[\"11110\",\"10001\",\"10001\",\"11110\",\"10100\",\"10010\",\"10001\"],\n\" \":[\"00000\"]*7\n}\ntext=\"TEST OCR TEST\"\nscale=12\nmargin=40\nchar_w=6*scale\nw=margin*2+len(text)*char_w\nh=margin*2+7*scale\npixels=bytearray([255])*(w*h)\nfor ci,ch in enumerate(text):\n    glyph=FONT[ch]\n    ox=margin+ci*char_w\n    oy=margin\n    for gy,row in enumerate(glyph):\n        for gx,bit in enumerate(row):\n            if bit!=\"1\": continue\n            for dy in range(scale):\n                for dx in range(scale):\n                    x=ox+gx*scale+dx\n                    y=oy+gy*scale+dy\n                    pixels[y*w+x]=0\n\n# Embed raw grayscale pixels as the only page content. No PDF text operators exist.\ncontent=f\"q {w} 0 0 {h} 0 0 cm /Im0 Do Q\".encode()\nobjects=[\n b\"<< /Type /Catalog /Pages 2 0 R >>\",\n b\"<< /Type /Pages /Kids [3 0 R] /Count 1 >>\",\n f\"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 {w} {h}] /Resources << /XObject << /Im0 5 0 R >> >> /Contents 4 0 R >>\".encode(),\n b\"<< /Length \"+str(len(content)).encode()+b\" >>\\nstream\\n\"+content+b\"\\nendstream\",\n f\"<< /Type /XObject /Subtype /Image /Width {w} /Height {h} /ColorSpace /DeviceGray /BitsPerComponent 8 /Length {len(pixels)} >>\".encode()+b\"\\nstream\\n\"+bytes(pixels)+b\"\\nendstream\"\n]\npdf=bytearray(b\"%PDF-1.4\\n\")\noffsets=[0]\nfor i,obj in enumerate(objects,1):\n    offsets.append(len(pdf)); pdf.extend(f\"{i} 0 obj\\n\".encode()); pdf.extend(obj); pdf.extend(b\"\\nendobj\\n\")\nxref=len(pdf); pdf.extend(f\"xref\\n0 {len(objects)+1}\\n\".encode()); pdf.extend(b\"0000000000 65535 f \\n\")\nfor off in offsets[1:]: pdf.extend(f\"{off:010d} 00000 n \\n\".encode())\npdf.extend(f\"trailer\\n<< /Size {len(objects)+1} /Root 1 0 R >>\\nstartxref\\n{xref}\\n%%EOF\\n\".encode())\nout=Path(\"canonical/astra_runtime/tmp/IMAGE_ONLY_OCR_TEST.pdf\")\nout.write_bytes(pdf)\nprint(\"IMAGE_ONLY_PDF_READY\",w,h,len(pdf))\nPY",
+        "duration_s": 0.277,
+        "returncode": 0,
+        "stderr": "test_action_expectation_contains (__main__.BoundCapabilityTests.test_action_expectation_contains) ... ok\ntest_action_expectation_fails_closed (__main__.BoundCapabilityTests.test_action_expectation_fails_closed) ... ok\ntest_adapter_rejects_path_escape (__main__.BoundCapabilityTests.test_adapter_rejects_path_escape) ... ok\ntest_registry_is_zero_cost_and_hash_pinned (__main__.BoundCapabilityTests.test_registry_is_zero_cost_and_hash_pinned) ... ok\ntest_unknown_bound_capability_rejected (__main__.BoundCapabilityTests.test_unknown_bound_capability_rejected) ... ok\ntest_verified_capability_is_inherited_from_brain (__main__.BoundCapabilityTests.test_verified_capability_is_inherited_from_brain) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.002s\n\nOK\n",
+        "stdout": "IMAGE_ONLY_PDF_READY 1016 164 167290\n"
+      },
+      "step_id": "generate-image-only-pdf",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-RUNTIME-BOUND-PDF-OCR-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_BOUND_PDF_OCR_001.json",
+  "mission_sha256": "7680cbc138c9f542e1c8bc6973e92f0c9c031f62ed191abdd2f6b181751e47f8",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-24T21:27:05.584720+00:00"
+}
