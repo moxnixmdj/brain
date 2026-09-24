@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-24T21:02:02.148826+00:00",
+  "mission_id": "ASTRA-RUNTIME-MODEL-NONDEPENDENCE-REPAIR-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_MODEL_NONDEPENDENCE_REPAIR_001.json",
+  "mission_sha256": "08a574ce348f61805560e3796f67b4399685126fb0a2004cfa9f2c50f9ac4e24",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "1fd5ba5498c831510f6b56d0e3bd9d71b13ca2d312a57d99bf461e0e76dc8ef8",
+  "status": "COMPLETE",
+  "steps_completed": 3
+}
