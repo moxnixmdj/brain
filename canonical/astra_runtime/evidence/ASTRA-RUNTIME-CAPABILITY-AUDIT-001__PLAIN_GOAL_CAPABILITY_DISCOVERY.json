@@ -1,0 +1,2740 @@
+{
+  "auto_acquisition": {
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"aspnetcore-runtime-10.0\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"aspnetcore-runtime-8.0\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"aspnetcore-runtime-dbg-10.0\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"aspnetcore-runtime-dbg-8.0\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.md\", \"name\": \"charliecloud-runtime\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.md\", \"name\": \"cracklib-runtime\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"dotnet-runtime-10.0\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"dotnet-runtime-8.0\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"dotnet-runtime-dbg-10.0\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"dotnet-runtime-dbg-8.0\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"erlang-runtime-tools\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fwts-efi-runtime-dkms\", \"status\": \"CONTRACT_REJECTED\"}]",
+    "status": "NOT_DISPATCHED"
+  },
+  "binding_performed": false,
+  "goal": "Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json. Create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.md containing a table with every VERIFIED_BOUND_CAPABILITY, its provided effects, source dependency, and verification mission. Then create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.pdf from that report and verify that the final PDF contains every capability ID from the registry.",
+  "mission_id": "ASTRA-RUNTIME-CAPABILITY-AUDIT-001",
+  "observed_at_utc": "2026-09-24T23:43:22.422541+00:00",
+  "result": {
+    "binding_performed": false,
+    "candidates": [
+      {
+        "archive_sha256": "315a0aa88c5bae3061e5bb376cb744f52a91ae5230ed56a0f85a41ab3fce271c",
+        "binding_kind": "apt",
+        "description": "ASP.NET Core runtime",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "aspnetcore-runtime-10.0",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "10.0.12-0ubuntu1~24.04.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "eded079d030876ca9428f555b0b4b5c3a9f5ccab3c701907bb640b01de2e4961",
+        "binding_kind": "apt",
+        "description": "ASP.NET Core runtime",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "aspnetcore-runtime-8.0",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "8.0.31-0ubuntu1~24.04.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "3f86479547f42388360b7527b4682ab356d06f7f7dda7e9217aacb777dacae39",
+        "binding_kind": "apt",
+        "description": "ASP.NET Runtime debug symbols.",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "aspnetcore-runtime-dbg-10.0",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "10.0.12-0ubuntu1~24.04.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ffeef0e6d29f69eb3d300c73715b22e5872e902de01659b257e4303379460953",
+        "binding_kind": "apt",
+        "description": "ASP.NET Runtime debug symbols.",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "aspnetcore-runtime-dbg-8.0",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "8.0.31-0ubuntu1~24.04.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "dc7b74c21d606e26366ff3e7261a0d49672f340db64a59c0dcc013cea67e3814",
+        "binding_kind": "apt",
+        "description": "user-defined software stacks (UDSS) for HPC centers (runtime tools)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "charliecloud-runtime",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.37-1build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "f3f1051bf8cb77c632ea23796da8c9cf0007a5218bd698ad2ae78ebf292a6441",
+        "binding_kind": "apt",
+        "description": "runtime support for password checker library cracklib2",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "cracklib-runtime",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.9.6-5.1build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "4eb92415faafca5c4d72800c37c0d42eea2907058e10d23bdb4a2ce1cbc5fc77",
+        "binding_kind": "apt",
+        "description": ".NET runtime",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "dotnet-runtime-10.0",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "10.0.12-0ubuntu1~24.04.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "be69e4eb8206b98527164599a946d52f71bbe62aee3c0b9492a3027a69740319",
+        "binding_kind": "apt",
+        "description": ".NET runtime",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "dotnet-runtime-8.0",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "8.0.31-0ubuntu1~24.04.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "460601eca2d9e8b2b3eeee420be9587e6c3ef7c63d1563b9f95b632a66613a3b",
+        "binding_kind": "apt",
+        "description": ".NET Runtime debug symbols.",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "dotnet-runtime-dbg-10.0",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "10.0.12-0ubuntu1~24.04.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "41c2ca6fcd262e1b7a5ec2d7f4ba8176a5829aa53ac71d308b2608b6c10d80e6",
+        "binding_kind": "apt",
+        "description": ".NET Runtime debug symbols.",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "dotnet-runtime-dbg-8.0",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "8.0.31-0ubuntu1~24.04.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "831d39302722ccced7e9321b01f2607cb4222707574ece462c9a92a514610b8e",
+        "binding_kind": "apt",
+        "description": "Erlang/OTP runtime tracing/debugging tools",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "erlang-runtime-tools",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:25.3.2.8+dfsg-1ubuntu4.6",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c8ae17c7e8d2ff4066049e39f3ec7caf2e91e544479d35a3b094ef93d5690cfa",
+        "binding_kind": "apt",
+        "description": "Firmware Test Suite UEFI Runtime Service kernel driver",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "fwts-efi-runtime-dkms",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "24.01.00-0ubuntu4.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "4a3ffe8fe4b2be9400fb788ed71d27b29f2975e6fa7d5207f71aea68bbae674c",
+        "binding_kind": "apt",
+        "description": "Gambas runtime interpreter",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "gambas3-runtime",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.19.0-2ubuntu10",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "fcf40e17ab33ebf78ccf2c94a9ea65782afbfb4249fb457cd2483897dcef398e",
+        "binding_kind": "apt",
+        "description": "Launcher for proprietary games",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "game-data-packager-runtime",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "77ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "650bcd76e0c56c713428950aec8823fd517f911eaad80406907379a69d36ad0a",
+        "binding_kind": "apt",
+        "description": "GNU Compiler Collection for MinGW-w64, i686/POSIX",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "gcc-mingw-w64-i686-posix-runtime",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "13.2.0-6ubuntu1+26.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "34fe47512cb203ff0cfb52f1ca157c3b1d257b105913cf17875d6d72556de50e",
+        "binding_kind": "apt",
+        "description": "GNU Compiler Collection for MinGW-w64, i686/Win32",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "gcc-mingw-w64-i686-win32-runtime",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "13.2.0-6ubuntu1+26.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "aca6b438e0b55b11cedcf1170a1ee26e7979e34192e34f6e6389e560908a5bfc",
+        "binding_kind": "apt",
+        "description": "GNU Compiler Collection for MinGW-w64, x86-64/POSIX",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "gcc-mingw-w64-x86-64-posix-runtime",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "13.2.0-6ubuntu1+26.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "7ac09bc7f283f1148c8e1697373db069c1d4364a9f5fa58bb66c8a93760b8b65",
+        "binding_kind": "apt",
+        "description": "GNU Compiler Collection for MinGW-w64, x86-64/Win32",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "gcc-mingw-w64-x86-64-win32-runtime",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "13.2.0-6ubuntu1+26.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "0f1e3541ab9d3f0fe59c51308f70cac40a06a75b90e13f840ccfef636bd2d1cd",
+        "binding_kind": "apt",
+        "description": "GNUstep Base library - daemons and tools",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "gnustep-base-runtime",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.29.0-7ubuntu4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "a1947682192a5663d12873dd69e54b36095921665d55f5e15feff95694d689b5",
+        "binding_kind": "apt",
+        "description": "GNUstep GUI Library - runtime files",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "gnustep-gui-runtime",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.30.0-3build8",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "17942b90f8ab27a3236054bcda898a9c4e3bd2c8a03b93338392a486d73d8232",
+        "binding_kind": "apt",
+        "description": "Runtime hardening configuration files",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "hardening-runtime",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "f5046bc4c553349eeb9cea205551f508530136b8d43ebeb17c1c91b64ef725ea",
+        "binding_kind": "apt",
+        "description": "runtime components for Akonadi KDE",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "kdepim-runtime",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "4:23.08.5-0ubuntu3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "5c906fdcb41ab7197fa180bdf8d873c0a36e51b51ba79ba55792629fd7d30198",
+        "binding_kind": "apt",
+        "description": "LAM runtime environment for executing parallel programs",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "lam-runtime",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "7.1.4-7.1build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c29ce6f973bcbc729b22e51872b442e2df1a003ca658c3568a6e5d761b0f9146",
+        "binding_kind": "apt",
+        "description": "Modular compiler and toolchain technologies, IR interpreter",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "llvm-14-runtime",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:14.0.6-19build4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "b2caf977d98a3bd2586325d5b1ddccf4d40d6b29ab651f20ee2e18ae7b443d98",
+        "binding_kind": "apt",
+        "description": "Modular compiler and toolchain technologies, IR interpreter",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "llvm-15-runtime",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:15.0.7-14build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d0169f60fea6c3787a91494ad8ba1ce84391c5f59ad943c905238169155fa9d7",
+        "binding_kind": "apt",
+        "description": "Modular compiler and toolchain technologies, IR interpreter",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "llvm-16-runtime",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:16.0.6-23ubuntu4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "b29f2239a8487c701fd76c62dba78609c9ad611c674bff81c5059d9052b29d66",
+        "binding_kind": "apt",
+        "description": "Modular compiler and toolchain technologies, IR interpreter",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "llvm-17-runtime",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:17.0.6-9ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "1ad04ff658929491f8bf30fcf6454e07b1815a2b04164f1894156e92c91ef895",
+        "binding_kind": "apt",
+        "description": "Modular compiler and toolchain technologies, IR interpreter",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "llvm-18-runtime",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:18.1.3-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "2aa55713edfc8f0be44987075dbced8bf9971047af786b9246d1600419bda605",
+        "binding_kind": "apt",
+        "description": "Modular compiler and toolchain technologies, IR interpreter",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "llvm-19-runtime",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:19.1.1-1ubuntu1~24.04.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "85db2d2a062006f3780bc0e6bd610af4ed21f9664b5d3bca4b4f951e9fb6381f",
+        "binding_kind": "apt",
+        "description": "Modular compiler and toolchain technologies, IR interpreter",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "llvm-20-runtime",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:20.1.2-0ubuntu1~24.04.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Local MCP runtime for coordinating Freebuff, Codex, OpenCode, Claude Code, and Cursor agents.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.Praket7/agent-interop-runtime",
+        "packages": [
+          {
+            "identifier": "agent-interop-runtime",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.3.2"
+          }
+        ],
+        "query": "runtime",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/Praket7/agent-interop-runtime"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.3.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Verify whether a local Agent or MCP runtime matches an approved artifact.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.fantasyce/agent-runtime-proof",
+        "packages": [
+          {
+            "identifier": "https://github.com/fantasyce/agent-runtime-proof/releases/download/v1.1.0/agent-runtime-proof_1.1.0.mcpb",
+            "registry_type": "mcpb",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.1.0"
+          }
+        ],
+        "query": "runtime",
+        "remotes": [],
+        "repository": {
+          "id": "1345289397",
+          "source": "github",
+          "url": "https://github.com/fantasyce/agent-runtime-proof"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Finds the end-of-life runtimes an AI assistant still writes for you \u2014 node:20, python3.9, ubuntu-22",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.jmshinhwa/runtime-eol-deploy-block-audit",
+        "packages": [
+          {
+            "identifier": "@readystack/runtime-eol-deploy-block-audit",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": "npx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.3"
+          }
+        ],
+        "query": "runtime",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/jmshinhwa/readystack-themes"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.1.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Summarize runtime declarations across local manifests and CI files without returning versions,...",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.mrfentmen/runtime-support-mcp",
+        "packages": [
+          {
+            "identifier": "runtime-support-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.0"
+          }
+        ],
+        "query": "runtime",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/mrfentmen/runtime-support-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Self-hosted MCP runtime for ChatGPT to edit files, run commands, and test local projects.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.flytohub/flyto-runtime",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://{runtime_host}/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/flytohub/flyto-runtime"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.8",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Hosted Python sandbox for package runtime verification: pip install and usable-import evidence.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.ligafew/python-package-runtime-test",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://apcs-public-mcp-gateway.apcs-mcp.workers.dev/mcp/python-package-runtime-test"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "ECRVSP Documentos: Altera\u00e7\u00e3o de Dados Cadastrais, official-source lookup. Platform-hosted, pay per q",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.mcp-dir/ecrvsp_docs_dados_cadastrais-mcp",
+        "packages": [],
+        "query": "astra",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.mcp.ai/p_ecrvsp_docs_dados_cadastrais"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/mcp-dir/ecrvsp_docs_dados_cadastrais-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Canonical URL host only, URL discarded",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.sadri-dridi/canonical-host",
+        "packages": [],
+        "query": "canonical",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/canonical-host/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "HTML canonical link count, markup discarded",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.sadri-dridi/canonical-ok",
+        "packages": [],
+        "query": "canonical",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/canonical-ok/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Self-hosted MCP server: 26 deterministic dev, security, and EVM tools.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.formatho/runtime",
+        "packages": [
+          {
+            "identifier": "docker.io/formatho/formatho-runtime:0.3.0",
+            "registry_type": "oci",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": null
+          }
+        ],
+        "query": "runtime",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.formatho.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "0.3.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Engineering-grade MCP debugging SDK turning the PPSSPP PSP emulator into an AI-debuggable target.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.AstralVoidZ/ppsspp-dfx-mcp",
+        "packages": [
+          {
+            "identifier": "ppsspp-dfx-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.4"
+          }
+        ],
+        "query": "astra",
+        "remotes": [],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "0.1.4",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Zero-addon MCP server for Godot 4: agents edit, run, and play-test the game.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.Erodenn/godot-mcp-runtime",
+        "packages": [
+          {
+            "identifier": "godot-mcp-runtime",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": "npx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "3.8.0"
+          }
+        ],
+        "query": "runtime",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/Erodenn/godot-mcp-runtime"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "3.8.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "A lightweight Java IDE for AI agents: incremental builds, fast tests, HotSwap and live debugging.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.L1ch404/jolink-runtime",
+        "packages": [
+          {
+            "identifier": "jolink-runtime",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "uvx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.0a7"
+          }
+        ],
+        "query": "runtime",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/L1ch404/jolink-runtime"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "0.1.0a7",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Resumable API pagination, repeated-failure detection and tool-progress cache hints for AI agents",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.Warddamn/tiny-runtime",
+        "packages": [
+          {
+            "identifier": "https://github.com/Warddamn/tiny-tools/releases/download/runtime-v0.1.1/tiny-runtime-0.1.1.mcpb",
+            "registry_type": "mcpb",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": null
+          }
+        ],
+        "query": "runtime",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "subfolder": "packages/runtime",
+          "url": "https://github.com/Warddamn/tiny-tools"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "0.1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Precision-audited astrology MCP: natal charts, transits, synastry, moon phases. No API key.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.davidmosiah/astral-mcp",
+        "packages": [
+          {
+            "identifier": "astral-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.2.0"
+          }
+        ],
+        "query": "astra",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/davidmosiah/astral-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "0.2.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Control CesiumJS 3D globes via MCP: camera, layers, entities, animation, and interaction.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.gaopengbin/cesium-mcp-runtime",
+        "packages": [
+          {
+            "identifier": "cesium-mcp-runtime",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.145.3"
+          }
+        ],
+        "query": "runtime",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "subfolder": "packages/cesium-mcp-runtime",
+          "url": "https://github.com/gaopengbin/cesium-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "1.145.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Connect AI assistants to ITM Platform projects, tasks, budgets, risks, and team workload.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.itmplatform/mcp-server",
+        "packages": [
+          {
+            "identifier": "@itm-platform/mcp-server",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.3"
+          }
+        ],
+        "query": "tmp",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.itmplatform.com/v2/_/mcp/"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/itmplatform/mcp-server"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "1.0.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Finds the GitHub Actions steps that stop running on 2026-09-23, with the version to move to",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.jmshinhwa/action-runtime-sunset-lint",
+        "packages": [
+          {
+            "identifier": "@readystack/action-runtime-sunset-lint",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": "npx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.2"
+          }
+        ],
+        "query": "runtime",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/jmshinhwa/readystack-themes"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "1.0.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "This package is intended for demonstration only. Maintained by JFrog Security.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.mcp-protocol/node-runtime",
+        "packages": [
+          {
+            "identifier": "@mcp-protocol/node-runtime",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.2"
+          }
+        ],
+        "query": "runtime",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/mcp-protocol/node-runtime"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "1.0.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Cryptographic identity for AI agents: W3C DIDs, Verifiable Credentials, post-quantum crypto",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.san-techie21/astracipher",
+        "packages": [
+          {
+            "identifier": "@astracipher/core",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.1"
+          }
+        ],
+        "query": "astra",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/san-techie21/astracipher"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "0.1.1",
+        "zero_cost_eligible": true
+      }
+    ],
+    "effect": "Create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.md containing a table with every VERIFIED_BOUND_CAPABILITY, its provided effects, source dependency, and verification mission",
+    "results": [
+      {
+        "binding_performed": false,
+        "candidate_count": 30,
+        "candidates": [
+          {
+            "archive_sha256": "315a0aa88c5bae3061e5bb376cb744f52a91ae5230ed56a0f85a41ab3fce271c",
+            "binding_kind": "apt",
+            "description": "ASP.NET Core runtime",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "aspnetcore-runtime-10.0",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "10.0.12-0ubuntu1~24.04.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "eded079d030876ca9428f555b0b4b5c3a9f5ccab3c701907bb640b01de2e4961",
+            "binding_kind": "apt",
+            "description": "ASP.NET Core runtime",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "aspnetcore-runtime-8.0",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "8.0.31-0ubuntu1~24.04.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "3f86479547f42388360b7527b4682ab356d06f7f7dda7e9217aacb777dacae39",
+            "binding_kind": "apt",
+            "description": "ASP.NET Runtime debug symbols.",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "aspnetcore-runtime-dbg-10.0",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "10.0.12-0ubuntu1~24.04.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "ffeef0e6d29f69eb3d300c73715b22e5872e902de01659b257e4303379460953",
+            "binding_kind": "apt",
+            "description": "ASP.NET Runtime debug symbols.",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "aspnetcore-runtime-dbg-8.0",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "8.0.31-0ubuntu1~24.04.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "dc7b74c21d606e26366ff3e7261a0d49672f340db64a59c0dcc013cea67e3814",
+            "binding_kind": "apt",
+            "description": "user-defined software stacks (UDSS) for HPC centers (runtime tools)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "charliecloud-runtime",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.37-1build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "f3f1051bf8cb77c632ea23796da8c9cf0007a5218bd698ad2ae78ebf292a6441",
+            "binding_kind": "apt",
+            "description": "runtime support for password checker library cracklib2",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "cracklib-runtime",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2.9.6-5.1build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "4eb92415faafca5c4d72800c37c0d42eea2907058e10d23bdb4a2ce1cbc5fc77",
+            "binding_kind": "apt",
+            "description": ".NET runtime",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "dotnet-runtime-10.0",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "10.0.12-0ubuntu1~24.04.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "be69e4eb8206b98527164599a946d52f71bbe62aee3c0b9492a3027a69740319",
+            "binding_kind": "apt",
+            "description": ".NET runtime",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "dotnet-runtime-8.0",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "8.0.31-0ubuntu1~24.04.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "460601eca2d9e8b2b3eeee420be9587e6c3ef7c63d1563b9f95b632a66613a3b",
+            "binding_kind": "apt",
+            "description": ".NET Runtime debug symbols.",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "dotnet-runtime-dbg-10.0",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "10.0.12-0ubuntu1~24.04.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "41c2ca6fcd262e1b7a5ec2d7f4ba8176a5829aa53ac71d308b2608b6c10d80e6",
+            "binding_kind": "apt",
+            "description": ".NET Runtime debug symbols.",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "dotnet-runtime-dbg-8.0",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "8.0.31-0ubuntu1~24.04.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "831d39302722ccced7e9321b01f2607cb4222707574ece462c9a92a514610b8e",
+            "binding_kind": "apt",
+            "description": "Erlang/OTP runtime tracing/debugging tools",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "erlang-runtime-tools",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1:25.3.2.8+dfsg-1ubuntu4.6",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c8ae17c7e8d2ff4066049e39f3ec7caf2e91e544479d35a3b094ef93d5690cfa",
+            "binding_kind": "apt",
+            "description": "Firmware Test Suite UEFI Runtime Service kernel driver",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "fwts-efi-runtime-dkms",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "24.01.00-0ubuntu4.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "4a3ffe8fe4b2be9400fb788ed71d27b29f2975e6fa7d5207f71aea68bbae674c",
+            "binding_kind": "apt",
+            "description": "Gambas runtime interpreter",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "gambas3-runtime",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.19.0-2ubuntu10",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "fcf40e17ab33ebf78ccf2c94a9ea65782afbfb4249fb457cd2483897dcef398e",
+            "binding_kind": "apt",
+            "description": "Launcher for proprietary games",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "game-data-packager-runtime",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "77ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "650bcd76e0c56c713428950aec8823fd517f911eaad80406907379a69d36ad0a",
+            "binding_kind": "apt",
+            "description": "GNU Compiler Collection for MinGW-w64, i686/POSIX",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "gcc-mingw-w64-i686-posix-runtime",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "13.2.0-6ubuntu1+26.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "34fe47512cb203ff0cfb52f1ca157c3b1d257b105913cf17875d6d72556de50e",
+            "binding_kind": "apt",
+            "description": "GNU Compiler Collection for MinGW-w64, i686/Win32",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "gcc-mingw-w64-i686-win32-runtime",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "13.2.0-6ubuntu1+26.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "aca6b438e0b55b11cedcf1170a1ee26e7979e34192e34f6e6389e560908a5bfc",
+            "binding_kind": "apt",
+            "description": "GNU Compiler Collection for MinGW-w64, x86-64/POSIX",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "gcc-mingw-w64-x86-64-posix-runtime",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "13.2.0-6ubuntu1+26.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "7ac09bc7f283f1148c8e1697373db069c1d4364a9f5fa58bb66c8a93760b8b65",
+            "binding_kind": "apt",
+            "description": "GNU Compiler Collection for MinGW-w64, x86-64/Win32",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "gcc-mingw-w64-x86-64-win32-runtime",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "13.2.0-6ubuntu1+26.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "0f1e3541ab9d3f0fe59c51308f70cac40a06a75b90e13f840ccfef636bd2d1cd",
+            "binding_kind": "apt",
+            "description": "GNUstep Base library - daemons and tools",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "gnustep-base-runtime",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.29.0-7ubuntu4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "a1947682192a5663d12873dd69e54b36095921665d55f5e15feff95694d689b5",
+            "binding_kind": "apt",
+            "description": "GNUstep GUI Library - runtime files",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "gnustep-gui-runtime",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.30.0-3build8",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "17942b90f8ab27a3236054bcda898a9c4e3bd2c8a03b93338392a486d73d8232",
+            "binding_kind": "apt",
+            "description": "Runtime hardening configuration files",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "hardening-runtime",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "f5046bc4c553349eeb9cea205551f508530136b8d43ebeb17c1c91b64ef725ea",
+            "binding_kind": "apt",
+            "description": "runtime components for Akonadi KDE",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "kdepim-runtime",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "4:23.08.5-0ubuntu3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "5c906fdcb41ab7197fa180bdf8d873c0a36e51b51ba79ba55792629fd7d30198",
+            "binding_kind": "apt",
+            "description": "LAM runtime environment for executing parallel programs",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "lam-runtime",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "7.1.4-7.1build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c29ce6f973bcbc729b22e51872b442e2df1a003ca658c3568a6e5d761b0f9146",
+            "binding_kind": "apt",
+            "description": "Modular compiler and toolchain technologies, IR interpreter",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "llvm-14-runtime",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1:14.0.6-19build4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "b2caf977d98a3bd2586325d5b1ddccf4d40d6b29ab651f20ee2e18ae7b443d98",
+            "binding_kind": "apt",
+            "description": "Modular compiler and toolchain technologies, IR interpreter",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "llvm-15-runtime",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1:15.0.7-14build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d0169f60fea6c3787a91494ad8ba1ce84391c5f59ad943c905238169155fa9d7",
+            "binding_kind": "apt",
+            "description": "Modular compiler and toolchain technologies, IR interpreter",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "llvm-16-runtime",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1:16.0.6-23ubuntu4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "b29f2239a8487c701fd76c62dba78609c9ad611c674bff81c5059d9052b29d66",
+            "binding_kind": "apt",
+            "description": "Modular compiler and toolchain technologies, IR interpreter",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "llvm-17-runtime",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1:17.0.6-9ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "1ad04ff658929491f8bf30fcf6454e07b1815a2b04164f1894156e92c91ef895",
+            "binding_kind": "apt",
+            "description": "Modular compiler and toolchain technologies, IR interpreter",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "llvm-18-runtime",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1:18.1.3-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "2aa55713edfc8f0be44987075dbced8bf9971047af786b9246d1600419bda605",
+            "binding_kind": "apt",
+            "description": "Modular compiler and toolchain technologies, IR interpreter",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "llvm-19-runtime",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1:19.1.1-1ubuntu1~24.04.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "85db2d2a062006f3780bc0e6bd610af4ed21f9664b5d3bca4b4f951e9fb6381f",
+            "binding_kind": "apt",
+            "description": "Modular compiler and toolchain technologies, IR interpreter",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "llvm-20-runtime",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1:20.1.2-0ubuntu1~24.04.3",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.md containing a table with every VERIFIED_BOUND_CAPABILITY, its provided effects, source dependency, and verification mission",
+        "errors": [],
+        "queries": [
+          "canonical",
+          "astra",
+          "runtime",
+          "tmp"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "APT_CATALOG",
+        "source_url": null
+      },
+      {
+        "binding_performed": false,
+        "candidate_count": 41,
+        "candidates": [
+          {
+            "description": "Local MCP runtime for coordinating Freebuff, Codex, OpenCode, Claude Code, and Cursor agents.",
+            "is_latest": true,
+            "name": "io.github.Praket7/agent-interop-runtime",
+            "packages": [
+              {
+                "identifier": "agent-interop-runtime",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.3.2"
+              }
+            ],
+            "query": "runtime",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Praket7/agent-interop-runtime"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.3.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Verify whether a local Agent or MCP runtime matches an approved artifact.",
+            "is_latest": true,
+            "name": "io.github.fantasyce/agent-runtime-proof",
+            "packages": [
+              {
+                "identifier": "https://github.com/fantasyce/agent-runtime-proof/releases/download/v1.1.0/agent-runtime-proof_1.1.0.mcpb",
+                "registry_type": "mcpb",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.1.0"
+              }
+            ],
+            "query": "runtime",
+            "remotes": [],
+            "repository": {
+              "id": "1345289397",
+              "source": "github",
+              "url": "https://github.com/fantasyce/agent-runtime-proof"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Finds the end-of-life runtimes an AI assistant still writes for you \u2014 node:20, python3.9, ubuntu-22",
+            "is_latest": true,
+            "name": "io.github.jmshinhwa/runtime-eol-deploy-block-audit",
+            "packages": [
+              {
+                "identifier": "@readystack/runtime-eol-deploy-block-audit",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": "npx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.3"
+              }
+            ],
+            "query": "runtime",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/jmshinhwa/readystack-themes"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.1.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Summarize runtime declarations across local manifests and CI files without returning versions,...",
+            "is_latest": true,
+            "name": "io.github.mrfentmen/runtime-support-mcp",
+            "packages": [
+              {
+                "identifier": "runtime-support-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.0"
+              }
+            ],
+            "query": "runtime",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/mrfentmen/runtime-support-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Self-hosted MCP runtime for ChatGPT to edit files, run commands, and test local projects.",
+            "is_latest": true,
+            "name": "io.github.flytohub/flyto-runtime",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://{runtime_host}/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/flytohub/flyto-runtime"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.8",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Hosted Python sandbox for package runtime verification: pip install and usable-import evidence.",
+            "is_latest": true,
+            "name": "io.github.ligafew/python-package-runtime-test",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://apcs-public-mcp-gateway.apcs-mcp.workers.dev/mcp/python-package-runtime-test"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "ECRVSP Documentos: Altera\u00e7\u00e3o de Dados Cadastrais, official-source lookup. Platform-hosted, pay per q",
+            "is_latest": true,
+            "name": "io.github.mcp-dir/ecrvsp_docs_dados_cadastrais-mcp",
+            "packages": [],
+            "query": "astra",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.mcp.ai/p_ecrvsp_docs_dados_cadastrais"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/mcp-dir/ecrvsp_docs_dados_cadastrais-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Canonical URL host only, URL discarded",
+            "is_latest": true,
+            "name": "io.github.sadri-dridi/canonical-host",
+            "packages": [],
+            "query": "canonical",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/canonical-host/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "HTML canonical link count, markup discarded",
+            "is_latest": true,
+            "name": "io.github.sadri-dridi/canonical-ok",
+            "packages": [],
+            "query": "canonical",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/canonical-ok/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "SEAM: local-first memory runtime for AI agents, with retrieval and glassbox provenance over MCP.",
+            "is_latest": true,
+            "name": "io.github.BlackhatShiftey/seam-runtime",
+            "packages": [
+              {
+                "identifier": "seam-runtime",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "uvx",
+                "secret_environment": [
+                  "SEAM_PGVECTOR_DSN"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.3.1"
+              }
+            ],
+            "query": "runtime",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/BlackhatShiftey/Seam_Runtime"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 15,
+            "status": "active",
+            "version": "1.3.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Astra DB tools for agents: schema, find, vector search, guarded writes, and interactive views.",
+            "is_latest": true,
+            "name": "io.github.erichare/astra-mcp",
+            "packages": [
+              {
+                "identifier": "@erichare/astra-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": "npx",
+                "secret_environment": [
+                  "ASTRA_DB_APPLICATION_TOKEN"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "2.0.0"
+              }
+            ],
+            "query": "astra",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://astra-widgets-mcp.vercel.app/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "subfolder": "server",
+              "url": "https://github.com/erichare/astra-db-plugin"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 15,
+            "status": "active",
+            "version": "2.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Self-hosted MCP server: 26 deterministic dev, security, and EVM tools.",
+            "is_latest": true,
+            "name": "com.formatho/runtime",
+            "packages": [
+              {
+                "identifier": "docker.io/formatho/formatho-runtime:0.3.0",
+                "registry_type": "oci",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": null
+              }
+            ],
+            "query": "runtime",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.formatho.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.3.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Engineering-grade MCP debugging SDK turning the PPSSPP PSP emulator into an AI-debuggable target.",
+            "is_latest": true,
+            "name": "io.github.AstralVoidZ/ppsspp-dfx-mcp",
+            "packages": [
+              {
+                "identifier": "ppsspp-dfx-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.4"
+              }
+            ],
+            "query": "astra",
+            "remotes": [],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.1.4",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Zero-addon MCP server for Godot 4: agents edit, run, and play-test the game.",
+            "is_latest": true,
+            "name": "io.github.Erodenn/godot-mcp-runtime",
+            "packages": [
+              {
+                "identifier": "godot-mcp-runtime",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": "npx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "3.8.0"
+              }
+            ],
+            "query": "runtime",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Erodenn/godot-mcp-runtime"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "3.8.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "A lightweight Java IDE for AI agents: incremental builds, fast tests, HotSwap and live debugging.",
+            "is_latest": true,
+            "name": "io.github.L1ch404/jolink-runtime",
+            "packages": [
+              {
+                "identifier": "jolink-runtime",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "uvx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.0a7"
+              }
+            ],
+            "query": "runtime",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/L1ch404/jolink-runtime"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.1.0a7",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Resumable API pagination, repeated-failure detection and tool-progress cache hints for AI agents",
+            "is_latest": true,
+            "name": "io.github.Warddamn/tiny-runtime",
+            "packages": [
+              {
+                "identifier": "https://github.com/Warddamn/tiny-tools/releases/download/runtime-v0.1.1/tiny-runtime-0.1.1.mcpb",
+                "registry_type": "mcpb",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": null
+              }
+            ],
+            "query": "runtime",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "subfolder": "packages/runtime",
+              "url": "https://github.com/Warddamn/tiny-tools"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Precision-audited astrology MCP: natal charts, transits, synastry, moon phases. No API key.",
+            "is_latest": true,
+            "name": "io.github.davidmosiah/astral-mcp",
+            "packages": [
+              {
+                "identifier": "astral-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.2.0"
+              }
+            ],
+            "query": "astra",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/davidmosiah/astral-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.2.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Control CesiumJS 3D globes via MCP: camera, layers, entities, animation, and interaction.",
+            "is_latest": true,
+            "name": "io.github.gaopengbin/cesium-mcp-runtime",
+            "packages": [
+              {
+                "identifier": "cesium-mcp-runtime",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.145.3"
+              }
+            ],
+            "query": "runtime",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "subfolder": "packages/cesium-mcp-runtime",
+              "url": "https://github.com/gaopengbin/cesium-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "1.145.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Connect AI assistants to ITM Platform projects, tasks, budgets, risks, and team workload.",
+            "is_latest": true,
+            "name": "io.github.itmplatform/mcp-server",
+            "packages": [
+              {
+                "identifier": "@itm-platform/mcp-server",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.3"
+              }
+            ],
+            "query": "tmp",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.itmplatform.com/v2/_/mcp/"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/itmplatform/mcp-server"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "1.0.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Finds the GitHub Actions steps that stop running on 2026-09-23, with the version to move to",
+            "is_latest": true,
+            "name": "io.github.jmshinhwa/action-runtime-sunset-lint",
+            "packages": [
+              {
+                "identifier": "@readystack/action-runtime-sunset-lint",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": "npx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.2"
+              }
+            ],
+            "query": "runtime",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/jmshinhwa/readystack-themes"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "1.0.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "This package is intended for demonstration only. Maintained by JFrog Security.",
+            "is_latest": true,
+            "name": "io.github.mcp-protocol/node-runtime",
+            "packages": [
+              {
+                "identifier": "@mcp-protocol/node-runtime",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.2"
+              }
+            ],
+            "query": "runtime",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/mcp-protocol/node-runtime"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "1.0.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Cryptographic identity for AI agents: W3C DIDs, Verifiable Credentials, post-quantum crypto",
+            "is_latest": true,
+            "name": "io.github.san-techie21/astracipher",
+            "packages": [
+              {
+                "identifier": "@astracipher/core",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.1"
+              }
+            ],
+            "query": "astra",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/san-techie21/astracipher"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP server for IBM Quantum computing services through Qiskit IBM Runtime",
+            "is_latest": true,
+            "name": "io.github.Qiskit/qiskit-ibm-runtime-mcp-server",
+            "packages": [
+              {
+                "identifier": "qiskit-ibm-runtime-mcp-server",
+                "registry_type": "pypi",
+                "required_environment": [
+                  "QISKIT_IBM_TOKEN"
+                ],
+                "runtime_hint": "uvx",
+                "secret_environment": [
+                  "QISKIT_IBM_TOKEN"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.6.1"
+              }
+            ],
+            "query": "runtime",
+            "remotes": [],
+            "repository": {
+              "id": "1051018539",
+              "source": "github",
+              "subfolder": "qiskit-ibm-runtime-mcp-server",
+              "url": "https://github.com/Qiskit/mcp-servers"
+            },
+            "required_environment_count": 1,
+            "required_secret_count": 1,
+            "score": 14,
+            "status": "active",
+            "version": "0.6.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Verified, long-tail company search: describe what you want, get an LLM-verified company shortlist.",
+            "is_latest": true,
+            "name": "ai.trycanonical/company-search",
+            "packages": [],
+            "query": "canonical",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://trycanonical.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Verified local hands for AI agents: physical errands, funds held until agreed proof.",
+            "is_latest": true,
+            "name": "com.astranl/mcp",
+            "packages": [],
+            "query": "astra",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://astranl.com/mcp/streamable"
+              },
+              {
+                "required_headers": [],
+                "type": "sse",
+                "url": "https://astranl.com/mcp/sse"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.35.175",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Email security and AI discoverability scores for any domain, with the exact record or tag to fix.",
+            "is_latest": true,
+            "name": "com.astraverify/domain-trust",
+            "packages": [],
+            "query": "astra",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://astraverify.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Manage projects, tasks, time tracking, and team collaboration through natural language.",
+            "is_latest": true,
+            "name": "com.astravue/astravue-mcp",
+            "packages": [],
+            "query": "astra",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.astravue.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/AstravueOrg/astravue-mcp-server"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Zero-key temporary JSON database for agents: one tool call, no signup, no OAuth, no API keys.",
+            "is_latest": true,
+            "name": "dev.tmpstate/tmpstate",
+            "packages": [],
+            "query": "tmp",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://tmpstate.dev/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Governed MCP: agent audit, provenance, deterministic checks, and receipt-backed FragGate execution.",
+            "is_latest": true,
+            "name": "io.github.AzielEliab/aziel-runtime",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://aziel-runtime.vibelock.workers.dev/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/AzielEliab/aziel-runtime"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "2.0.0-rc1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Read-only search of your Sortio knowledge graph (files and entities) for Claude and ChatGPT.",
+            "is_latest": true,
+            "name": "io.github.canonicalmg/sortio",
+            "packages": [],
+            "query": "canonical",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.getsortio.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/canonicalmg/sortio_desktop_v2"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.md containing a table with every VERIFIED_BOUND_CAPABILITY, its provided effects, source dependency, and verification mission",
+        "errors": [],
+        "queries": [
+          "canonical",
+          "astra",
+          "runtime",
+          "tmp"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "OFFICIAL_MCP_REGISTRY",
+        "source_url": "https://registry.modelcontextprotocol.io"
+      }
+    ],
+    "schema": "PROJECT_BRAIN_FEDERATED_CAPABILITY_DISCOVERY_V1",
+    "sources": [
+      "APT_CATALOG",
+      "OFFICIAL_MCP_REGISTRY"
+    ]
+  },
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
+  "source": "FEDERATED_CAPABILITY_DISCOVERY_FALLBACK",
+  "targeted_acquisition_error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-unicode-canonical-property-names-ecmascript\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"octave-astra-toolbox\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-strict-uri-encode\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.md\", \"name\": \"tablet-encode\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.md\", \"name\": \"abcde\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.md\", \"name\": \"aften\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"asunder\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.md\", \"name\": \"base16384\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.md\", \"name\": \"base58\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.md\", \"name\": \"basez\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.md\", \"name\": \"catcodec\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"cl-base64\", \"status\": \"CONTRACT_REJECTED\"}]"
+}

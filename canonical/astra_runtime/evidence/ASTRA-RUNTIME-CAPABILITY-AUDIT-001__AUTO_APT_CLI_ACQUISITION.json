@@ -1,0 +1,1002 @@
+{
+  "attempts": [
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "315a0aa88c5bae3061e5bb376cb744f52a91ae5230ed56a0f85a41ab3fce271c",
+        "executables": [],
+        "package": "aspnetcore-runtime-10.0",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "10.0.12-0ubuntu1~24.04.1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "315a0aa88c5bae3061e5bb376cb744f52a91ae5230ed56a0f85a41ab3fce271c",
+        "binding_kind": "apt",
+        "description": "ASP.NET Core runtime",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "aspnetcore-runtime-10.0",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "10.0.12-0ubuntu1~24.04.1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "eded079d030876ca9428f555b0b4b5c3a9f5ccab3c701907bb640b01de2e4961",
+        "executables": [],
+        "package": "aspnetcore-runtime-8.0",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "8.0.31-0ubuntu1~24.04.1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "eded079d030876ca9428f555b0b4b5c3a9f5ccab3c701907bb640b01de2e4961",
+        "binding_kind": "apt",
+        "description": "ASP.NET Core runtime",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "aspnetcore-runtime-8.0",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "8.0.31-0ubuntu1~24.04.1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "3f86479547f42388360b7527b4682ab356d06f7f7dda7e9217aacb777dacae39",
+        "executables": [],
+        "package": "aspnetcore-runtime-dbg-10.0",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "10.0.12-0ubuntu1~24.04.1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "3f86479547f42388360b7527b4682ab356d06f7f7dda7e9217aacb777dacae39",
+        "binding_kind": "apt",
+        "description": "ASP.NET Runtime debug symbols.",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "aspnetcore-runtime-dbg-10.0",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "10.0.12-0ubuntu1~24.04.1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "ffeef0e6d29f69eb3d300c73715b22e5872e902de01659b257e4303379460953",
+        "executables": [],
+        "package": "aspnetcore-runtime-dbg-8.0",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "8.0.31-0ubuntu1~24.04.1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "ffeef0e6d29f69eb3d300c73715b22e5872e902de01659b257e4303379460953",
+        "binding_kind": "apt",
+        "description": "ASP.NET Runtime debug symbols.",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "aspnetcore-runtime-dbg-8.0",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "8.0.31-0ubuntu1~24.04.1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.md",
+      "probe": {
+        "archive_sha256": "dc7b74c21d606e26366ff3e7261a0d49672f340db64a59c0dcc013cea67e3814",
+        "executables": [
+          {
+            "executable": "/usr/bin/ch-checkns",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: ch-checkns\n\nCheck \"ch-run\" prerequisites, e.g., namespaces and \"pivot_root(2)\".\n\nExample:\n\n  $ ch-checkns\n  ok"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/ch-run",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: ch-run [OPTION...] IMAGE -- COMMAND [ARG...]\n\nRun a command in a Charliecloud container.\n\n  -b, --bind=SRC[:DST]     mount SRC at guest DST (default: same as SRC)\n  -c, --cd=DIR             initial working directory in container\n      --env-no-expand      don't expand $ in --set-env input\n      --feature=FEAT       exit successfully if FEAT is enabled\n  -g, --gid=GID            run as GID within container\n      --home               mount host $HOME at guest /home/$USER\n      --join-ct=N          number of join peers (implies --join)\n      --join-pid=PID       join a namespace using a PID\n      --join-tag=TAG       label for peer group (implies --join)\n  -j, --join               use same container as peer ch-run\n  -m, --mount=DIR          SquashFS mount point\n      --no-passwd          don't bind-mount /etc/{passwd,group}\n  -q, --quiet              print less output (can be repeated)\n      --seccomp            fake success for some syscalls with seccomp(2)\n      --set-env[=ARG]      set env. variables per ARG (newline-delimited)\n      --set-env0[=ARG]     set env. variables per ARG (null-delimited)\n  -s, --storage=DIR        set DIR as storage directory\n      --test=TEST          do test TEST\n  -t, --private-tmp        use container-private /tmp\n      --unsafe             do unsafe things (internal use only)\n      --unset-env=GLOB     unset environment variable(s)\n  -u, --uid=UID            run as UID within container\n  -v, --verbose            be more verbose (can be repeated)\n      --warnings=NUM       log NUM warnings and exit\n  -w, --write              mount image read-write (avoid)\n  -W, --write-fake[=SIZE]  overlay read-write tmpfs on top of image\n  -?, --help               Give this help list\n      --usage              Give a short usage message\n  -V, --version            print version and exit\n\nExample:\n\n  $ ch-run /data/foo -- echo hello\n  hello\n\nYou cannot use this program to actually change your UID."
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/ch-run-oci",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "Traceback (most recent call last):\n  File \"/usr/bin/ch-run-oci\", line 17, in <module>\n    import misc\n  File \"/usr/lib/charliecloud/misc.py\", line 11, in <module>\n    import build_cache as bu\n  File \"/usr/lib/charliecloud/build_cache.py\", line 43, in <module>\n    import image as im\n  File \"/usr/lib/charliecloud/image.py\", line 21, in <module>\n    import lark\nModuleNotFoundError: No module named 'lark'"
+              }
+            ]
+          }
+        ],
+        "package": "charliecloud-runtime",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.37-1build1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "dc7b74c21d606e26366ff3e7261a0d49672f340db64a59c0dcc013cea67e3814",
+        "binding_kind": "apt",
+        "description": "user-defined software stacks (UDSS) for HPC centers (runtime tools)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "charliecloud-runtime",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.37-1build1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.md",
+      "probe": {
+        "archive_sha256": "f3f1051bf8cb77c632ea23796da8c9cf0007a5218bd698ad2ae78ebf292a6441",
+        "executables": [
+          {
+            "executable": "/usr/sbin/cracklib-check",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": ""
+              },
+              {
+                "flag": "-h",
+                "returncode": 0,
+                "text": ""
+              }
+            ]
+          },
+          {
+            "executable": "/usr/sbin/cracklib-format",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "1fastcompressfaster\n9bestcompressbetter\ncompressoruncompressfilesbydefaultcompressfilesinplace\ncstdoutwriteonstandardoutputkeeporiginalfilesunchanged\nddecompressdecompress\nfforceforceoverwriteofoutputfileandcompresslinks\nhhelpgivethishelp\nkkeepkeepdontdeleteinputfiles\nllicensedisplaysoftwarelicense\nllistlistcompressedfilecontents\nmandatoryargumentstolongoptionsaremandatoryforshortoptionstoo\nnnamesaveorrestoretheoriginalnameandtimestamp\nnnonamedonotsaveorrestoretheoriginalnameandtimestamp\nqquietsuppressallwarnings\nreportbugstobuggzipgnuorg\nrrecursiveoperaterecursivelyondirectories\nrsyncablemakersyncfriendlyarchive\nssuffixsufusesuffixsufoncompressedfiles\nsynchronoussynchronousoutputsaferifsystemcrashesbutslower\nttesttestcompressedfileintegrity\nusagegzip[option][file]\nvverboseverbosemode\nvversiondisplayversionnumber\nwithnofileorwhenfileisreadstandardinput"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/sbin/cracklib-packer",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 255,
+                "text": "Usage:\t/usr/sbin/cracklib-packer dbname\n  if dbname is not specified, will use compiled in default of (/var/cache/cracklib/cracklib_dict)."
+              }
+            ]
+          },
+          {
+            "executable": "/usr/sbin/cracklib-unpacker",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 255,
+                "text": "--help.pwd: No such file or directory\nPWOpen: Invalid argument"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/sbin/create-cracklib-dict",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: create-cracklib-dict [options] wordlist ...\n\nThis script takes one or more word list files as arguments\nand converts them into cracklib dictionaries for use\nby password checking programs. The results are placed in\nthe default compiled-in dictionary location.\n\nIf you wish to store the dictionary in a different location,\nuse the cracklib-format and cracklib-packer commands directly.\n\nOptions:\n  -o, --output <file>   Alternative output file for cracklib-packer\n  -h, --help            This help output\n\nExample:\ncreate-cracklib-dict /usr/share/words"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/sbin/update-cracklib",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": ""
+              },
+              {
+                "flag": "-h",
+                "returncode": 0,
+                "text": ""
+              }
+            ]
+          }
+        ],
+        "package": "cracklib-runtime",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "2.9.6-5.1build2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "f3f1051bf8cb77c632ea23796da8c9cf0007a5218bd698ad2ae78ebf292a6441",
+        "binding_kind": "apt",
+        "description": "runtime support for password checker library cracklib2",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "cracklib-runtime",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.9.6-5.1build2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "4eb92415faafca5c4d72800c37c0d42eea2907058e10d23bdb4a2ce1cbc5fc77",
+        "executables": [],
+        "package": "dotnet-runtime-10.0",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "10.0.12-0ubuntu1~24.04.1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "4eb92415faafca5c4d72800c37c0d42eea2907058e10d23bdb4a2ce1cbc5fc77",
+        "binding_kind": "apt",
+        "description": ".NET runtime",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "dotnet-runtime-10.0",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "10.0.12-0ubuntu1~24.04.1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "be69e4eb8206b98527164599a946d52f71bbe62aee3c0b9492a3027a69740319",
+        "executables": [],
+        "package": "dotnet-runtime-8.0",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "8.0.31-0ubuntu1~24.04.1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "be69e4eb8206b98527164599a946d52f71bbe62aee3c0b9492a3027a69740319",
+        "binding_kind": "apt",
+        "description": ".NET runtime",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "dotnet-runtime-8.0",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "8.0.31-0ubuntu1~24.04.1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "460601eca2d9e8b2b3eeee420be9587e6c3ef7c63d1563b9f95b632a66613a3b",
+        "executables": [],
+        "package": "dotnet-runtime-dbg-10.0",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "10.0.12-0ubuntu1~24.04.1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "460601eca2d9e8b2b3eeee420be9587e6c3ef7c63d1563b9f95b632a66613a3b",
+        "binding_kind": "apt",
+        "description": ".NET Runtime debug symbols.",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "dotnet-runtime-dbg-10.0",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "10.0.12-0ubuntu1~24.04.1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "41c2ca6fcd262e1b7a5ec2d7f4ba8176a5829aa53ac71d308b2608b6c10d80e6",
+        "executables": [],
+        "package": "dotnet-runtime-dbg-8.0",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "8.0.31-0ubuntu1~24.04.1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "41c2ca6fcd262e1b7a5ec2d7f4ba8176a5829aa53ac71d308b2608b6c10d80e6",
+        "binding_kind": "apt",
+        "description": ".NET Runtime debug symbols.",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "dotnet-runtime-dbg-8.0",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "8.0.31-0ubuntu1~24.04.1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "831d39302722ccced7e9321b01f2607cb4222707574ece462c9a92a514610b8e",
+        "executables": [],
+        "package": "erlang-runtime-tools",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1:25.3.2.8+dfsg-1ubuntu4.6"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "831d39302722ccced7e9321b01f2607cb4222707574ece462c9a92a514610b8e",
+        "binding_kind": "apt",
+        "description": "Erlang/OTP runtime tracing/debugging tools",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "erlang-runtime-tools",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:25.3.2.8+dfsg-1ubuntu4.6",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "c8ae17c7e8d2ff4066049e39f3ec7caf2e91e544479d35a3b094ef93d5690cfa",
+        "executables": [],
+        "package": "fwts-efi-runtime-dkms",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "24.01.00-0ubuntu4.1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "c8ae17c7e8d2ff4066049e39f3ec7caf2e91e544479d35a3b094ef93d5690cfa",
+        "binding_kind": "apt",
+        "description": "Firmware Test Suite UEFI Runtime Service kernel driver",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "fwts-efi-runtime-dkms",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "24.01.00-0ubuntu4.1",
+        "zero_cost_eligible": true
+      }
+    }
+  ],
+  "goal": "Create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.md containing a table with every VERIFIED_BOUND_CAPABILITY, its provided effects, source dependency, and verification mission",
+  "mission_id": "ASTRA-RUNTIME-CAPABILITY-AUDIT-001",
+  "role_conditioned_discovery": {
+    "binding_performed": false,
+    "candidate_count": 24,
+    "candidates": [
+      {
+        "archive_sha256": "e1e4e607012985ceb365434dd8ec1c6df23e40b8023cc6bc2acddd878d6954c4",
+        "binding_kind": "apt",
+        "description": "stricter URI encode adhering to RFC 3986",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "node-strict-uri-encode",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.0.0+~2.0.0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "90927553209d80260afa5558ed58ac427284eea766d7385b874421bd81e9a966",
+        "binding_kind": "apt",
+        "description": "Unicode property names supported in ES RegExp in Node.js",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "canonical"
+        ],
+        "name": "node-unicode-canonical-property-names-ecmascript",
+        "packages": [],
+        "query": "canonical",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.0.0-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "bf8805696f92ce97b835933296e4a786fbd4af8ad20decc5c177d69de2ccc446",
+        "binding_kind": "apt",
+        "description": "toolbox of high-performance GPU primitives for 2D and 3D tomography (octave)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "astra"
+        ],
+        "name": "octave-astra-toolbox",
+        "packages": [],
+        "query": "astra",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.1.0-4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "dcb264b165247d13d4beffc166ecade3ca32ba823d2b2f8c717db64adea00b5e",
+        "binding_kind": "apt",
+        "description": "video converter for Nokia Internet Tablets",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "tablet-encode",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.30-0.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "b08728497d67f09c8554b1a52759e90421a573d7aee1b9d497badbc42e401d14",
+        "binding_kind": "apt",
+        "description": "A Better CD Encoder",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "abcde",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.9.3-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "b2f35b2bf364d0a01075094efd1299dee79ecd65787cddcb93b82ca796edfd5c",
+        "binding_kind": "apt",
+        "description": "audio AC3 encoder",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "aften",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.0.8+git20100105-0ubuntu4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "13650fd102318335c35d0464cb445ec105c74d27ba2684574e9c1c0282adbb24",
+        "binding_kind": "apt",
+        "description": "Graphical audio CD ripper and encoder",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "asunder",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "3.0.1+ds-1build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "720c6de3151b20729695991dc9977eab65565349f1710c8929a6202d1fa17c5f",
+        "binding_kind": "apt",
+        "description": "Encode binary files to printable utf16be",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "base16384",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.2.5-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "38e1e65759a10db447fa682c7726c26a134c490c11cf9313d9035eaf76869196",
+        "binding_kind": "apt",
+        "description": "Command line encoder and decoder for Base58 format",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "base58",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.0.3-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "db107d7652eb37680788a6567a58c9a6db10fcad8df05db4009464cb405122de",
+        "binding_kind": "apt",
+        "description": "base 16/32/64 encode/decode data to standard output",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "basez",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.6.2-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d7b31f464429add360d8f0cb938466d76abc3ca224306a78cf15ff37e7cba5ff",
+        "binding_kind": "apt",
+        "description": "tool to decode/encode the sample catalogue for OpenTTD",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "catcodec",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.0.5-4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "76dcb71604dfd21859aa8f6b94c8ff14c349340cc86cd3d87e95a63c53adf8d2",
+        "binding_kind": "apt",
+        "description": "Common Lisp package to encode and decode base64 with URI support",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "cl-base64",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "3.4.0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "3b9a68f5b2a497cf80c350e2e8b512e7b28a057a9ba6082d3f7faa7bc30a3495",
+        "binding_kind": "apt",
+        "description": "JSON encoder/decoder for Common Lisp",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "cl-yason",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.7.6-1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d889a996fbc3d02809fe473b64d1f13fa94bc0673fa2e3a25289e13b0d6f1040",
+        "binding_kind": "apt",
+        "description": "filename encoding conversion tool",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "convmv",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.05-1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "680f5fd1717566e03cc06af0da7ca20fa2829e40d4fe870a1b47189c0eb73f5e",
+        "binding_kind": "apt",
+        "description": "terminal-based ripper/encoder/tagger tool",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "crip",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "3.9-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "55d27feaaf8d5c2ea4f69f7ebfbcaaf0e29093a04d15ea3599196893c350b5db",
+        "binding_kind": "apt",
+        "description": "Encoder and decoder for 3D geometric meshes and point clouds",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "draco",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.5.6+dfsg-3build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "6eb22d07c81e86257cb9ee3a7a78d0246f8485554ae5984d871d32199290a375",
+        "binding_kind": "apt",
+        "description": "YAML parser and encoder for Elisp",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "elpa-yaml",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.5.5-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "8a9d329f1ccdd398ba84fe8393600b0747aa6dbae64237365b05b41702326553",
+        "binding_kind": "apt",
+        "description": "MIME mail encoding and decoding package for Go (program)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "enmime",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.9.3-5ubuntu0.24.04.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "3b011097b07e9e3de2b08bcd2babf28a82d8948f6b09549ef15196bfff73ec1a",
+        "binding_kind": "apt",
+        "description": "AAC audio encoder (frontend)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "faac",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.30-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d286ed21e510c3af09f1e895fc80368474748ae866e17064b1d56c91d73a5868",
+        "binding_kind": "apt",
+        "description": "command line encoder frontend for libfdk-aac",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "fdkaac",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.0.0-1build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "350f8ee4f504cf48aa0009bf0164caced35e1580a8ca9a4fdc64b3fd62a73b78",
+        "binding_kind": "apt",
+        "description": "Alternative encoder for the Free Lossless Audio Codec",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "flake",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.11-4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "e4e7a5c7faa1e635953d780aba492ddf6d40188fcecf7f2280f07f014a757838",
+        "binding_kind": "apt",
+        "description": "minimalist audio encoder for generating live streams",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "glasscoder",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.0.1-2build5",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "e4b834081f17a92e9933e961566f1077251326810d1e0c945f8a8155524d0a95",
+        "binding_kind": "apt",
+        "description": "minimalist audio encoder GUI for generating live streams",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "glassgui",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.0.1-2build5",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "10b8e63a940fc890582663aaab1413a97d7c0296e7611d9c39b746f3cc75ee4e",
+        "binding_kind": "apt",
+        "description": "QR Code encoder (Go program)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "go-qrcode",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.0~git20200617.da1b656-4ubuntu0.24.04.3",
+        "zero_cost_eligible": true
+      }
+    ],
+    "effect": "encode canonical astra",
+    "errors": [],
+    "queries": [
+      "encode",
+      "canonical",
+      "astra"
+    ],
+    "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+    "source": "APT_CATALOG",
+    "source_url": null
+  },
+  "schema": "PROJECT_BRAIN_AUTO_APT_CLI_ACQUISITION_EVIDENCE_V1",
+  "status": "NO_COMPATIBLE_CONTRACT"
+}
