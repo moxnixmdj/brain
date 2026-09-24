@@ -1,0 +1,23 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-QR-APT-SUPPLIER-PROBE-001",
+  "purpose": "Race a local Ubuntu QR supplier against remote MCP candidates using package metadata and real effect verification.",
+  "steps": [
+    {
+      "id": "probe-and-execute-qrencode",
+      "adapter": "shell",
+      "command": "set -euo pipefail\nmkdir -p canonical/astra_runtime/tmp canonical/astra_runtime/evidence\napt-cache policy qrencode\napt-cache show qrencode > /tmp/qrencode.show\ngrep '^SHA256:' /tmp/qrencode.show | head -n1\nsudo apt-get install -y --no-install-recommends qrencode >/tmp/qrencode.install.log\nqrencode -o canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png 'PROJECT BRAIN'\npython - <<'PY'\nimport hashlib,json,pathlib,subprocess\np=pathlib.Path(\"canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png\")\nraw=p.read_bytes()\nassert raw.startswith(b\"\\x89PNG\\r\\n\\x1a\\n\")\nv=subprocess.check_output([\"dpkg-query\",\"-W\",\"-f=${Version}\",\"qrencode\"],text=True).strip()\nshow=pathlib.Path(\"/tmp/qrencode.show\").read_text()\nsha=next(x.split(\":\",1)[1].strip() for x in show.splitlines() if x.startswith(\"SHA256:\"))\nout={\"schema\":\"PROJECT_BRAIN_APT_SUPPLIER_PROBE_V1\",\"package\":\"qrencode\",\"version\":v,\n     \"archive_sha256\":sha,\"output_path\":str(p),\"output_sha256\":hashlib.sha256(raw).hexdigest(),\n     \"output_bytes\":len(raw),\"effect_verified\":\"PNG_SIGNATURE_AND_NONEMPTY\"}\npathlib.Path(\"canonical/astra_runtime/evidence/ASTRA-QR-APT-SUPPLIER-PROBE-001__RESULT.json\").write_text(\n json.dumps(out,indent=2,sort_keys=True)+\"\\n\")\nprint(\"APT_QR_SUPPLIER_VERIFIED\",json.dumps(out,sort_keys=True))\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "APT_QR_SUPPLIER_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "authentication_required": false,
+    "probe_only": true,
+    "promotion_forbidden": true,
+    "platform": "linux"
+  }
+}
