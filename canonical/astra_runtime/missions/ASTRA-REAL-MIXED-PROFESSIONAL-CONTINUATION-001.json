@@ -2,8 +2,8 @@
   "schema": "PROJECT_BRAIN_REAL_MISSION_V1",
   "mission_id": "ASTRA-REAL-MIXED-PROFESSIONAL-CONTINUATION-001",
   "canonical_generation_at_selection": "2026-09-22-astra-shared-runtime-portfolio-restored",
-  "evidence_presence_class": "CAPABILITY_UNPROVEN",
-  "state": "ACTIVE_CHECKPOINTED",
+  "evidence_presence_class": "PARTIAL_REAL_CAPABILITY_EVIDENCE",
+  "state": "ACTIVE_WITH_VERIFIED_CLOUD_APPLICATION_DELIVERY_AND_OFFLINE_SOURCE_BOUNDARY",
   "selected_frontier": "durable long-horizon continuation plus cross-application GUI/browser delivery under ambiguous mixed professional work",
   "necessity": "PORTFOLIO_STATE_V1 lists long-horizon consequential continuation, ambiguous interruption/restart work, and cross-application GUI/browser delivery as the remaining uncovered pressure dimensions.",
   "prior_work_checked": [
@@ -13,15 +13,25 @@
     "Project_Brain_One_Pager.pdf inspected as historical professional artifact; not treated as current operational truth"
   ],
   "consequential_work_this_invocation": [
-    "reconnected to live Windows host Mo and verified reachability",
-    "inspected an existing historical Project Brain professional brief and the latest exported Brain conversation state",
-    "created and read-back-verified C:\\Users\\muham\\Desktop\\PROJECT_BRAIN_CURRENT_CAPABILITY_BRIEF_2026-09-22.md with current operational truth and explicit truth boundaries"
+    "re-read live GitHub canonical head, portfolio, and this durable checkpoint",
+    "checked Remote Desktop Commander device Mo; host was offline, so the exact desktop artifact could not be read or transferred",
+    "searched GitHub, Google Drive, and archived conversation evidence for an exact mirror of PROJECT_BRAIN_CURRENT_CAPABILITY_BRIEF_2026-09-22.md; no exact mirror was found",
+    "created a native Google Doc from live canonical Project Brain state as a genuinely different application surface",
+    "read-back verified the Google Doc content and paragraph structure, then moved it into the Drive ChatGPT folder",
+    "recorded a strict truth boundary: cloud application delivery is verified; byte-identical transfer of the offline desktop artifact and direct Windows GUI/browser delivery are not"
   ],
   "checkpoint": {
-    "artifact_path": "C:\\Users\\muham\\Desktop\\PROJECT_BRAIN_CURRENT_CAPABILITY_BRIEF_2026-09-22.md",
-    "next_required_effect": "Deliver the current operational brief through a genuinely different application/browser surface if safely available, verify the delivered content/effect, and preserve a receipt. A wake receipt alone is not progress.",
-    "do_not_repeat": "Do not recreate or merely reread the brief on the next invocation; perform new consequential delivery work from this checkpoint."
+    "source_artifact_path": "C:\\Users\\muham\\Desktop\\PROJECT_BRAIN_CURRENT_CAPABILITY_BRIEF_2026-09-22.md",
+    "verified_cloud_delivery_document_id": "1O66ccqOfVme_UYNpGDmy6_gtXm7ERoKXErIRJFdY0hw",
+    "verified_cloud_delivery_document_url": "https://docs.google.com/document/d/1O66ccqOfVme_UYNpGDmy6_gtXm7ERoKXErIRJFdY0hw",
+    "verified_cloud_delivery_readback_sha256": "07b227e6d769a08c893c1a6c01e27dc17f962151fdd8d180d19e9a6cdbcef289",
+    "residual_boundary": "The exact Windows checkpoint artifact remains unavailable while Mo is offline. Direct Windows GUI/browser delivery is not proven by the Google Docs connector delivery.",
+    "next_required_effect": "Recompute the critical path from live state. Do not wait idly on an offline host if an independent real mission has greater expected closure-time reduction. When Mo is online, replay exact Windows artifact delivery only if direct GUI/browser execution remains the live frontier.",
+    "durability_repair": "Future critical checkpoint artifacts must be mirrored off-host with content hash and canonical reference at checkpoint time."
   },
+  "evidence": [
+    "canonical/astra_runtime/evidence/ASTRA-REAL-MIXED-PROFESSIONAL-CONTINUATION-001__CROSS_APP_DELIVERY_20260924.json"
+  ],
   "constraints": {
     "incremental_spend_usd": 0,
     "sprites_used": false,
