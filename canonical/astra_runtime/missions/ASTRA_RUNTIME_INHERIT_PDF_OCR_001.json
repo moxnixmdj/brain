@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-INHERIT-PDF-OCR-001",
+  "purpose": "Prove a fresh goal inherits the verified Linux image-only PDF OCR capability from the shared Brain without embedding the capability in the mission.",
+  "goal": "Extract visible text from an image-only PDF using only automatically inherited verified capabilities.",
+  "steps": [
+    {
+      "id": "generate-image-only-pdf",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/tests/test_bound_capabilities.py\nmkdir -p canonical/astra_runtime/tmp\npython - <<'PY'\nfrom pathlib import Path\n\nFONT={\n\"T\":[\"11111\",\"00100\",\"00100\",\"00100\",\"00100\",\"00100\",\"00100\"],\n\"E\":[\"11111\",\"10000\",\"10000\",\"11110\",\"10000\",\"10000\",\"11111\"],\n\"S\":[\"01111\",\"10000\",\"10000\",\"01110\",\"00001\",\"00001\",\"11110\"],\n\"O\":[\"01110\",\"10001\",\"10001\",\"10001\",\"10001\",\"10001\",\"01110\"],\n\"C\":[\"01111\",\"10000\",\"10000\",\"10000\",\"10000\",\"10000\",\"01111\"],\n\"R\":[\"11110\",\"10001\",\"10001\",\"11110\",\"10100\",\"10010\",\"10001\"],\n\" \":[\"00000\"]*7\n}\ntext=\"TEST OCR TEST\"\nscale=12\nmargin=40\nchar_w=6*scale\nw=margin*2+len(text)*char_w\nh=margin*2+7*scale\npixels=bytearray([255])*(w*h)\nfor ci,ch in enumerate(text):\n    glyph=FONT[ch]\n    ox=margin+ci*char_w\n    oy=margin\n    for gy,row in enumerate(glyph):\n        for gx,bit in enumerate(row):\n            if bit!=\"1\": continue\n            for dy in range(scale):\n                for dx in range(scale):\n                    x=ox+gx*scale+dx\n                    y=oy+gy*scale+dy\n                    pixels[y*w+x]=0\n\n# Embed raw grayscale pixels as the only page content. No PDF text operators exist.\ncontent=f\"q {w} 0 0 {h} 0 0 cm /Im0 Do Q\".encode()\nobjects=[\n b\"<< /Type /Catalog /Pages 2 0 R >>\",\n b\"<< /Type /Pages /Kids [3 0 R] /Count 1 >>\",\n f\"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 {w} {h}] /Resources << /XObject << /Im0 5 0 R >> >> /Contents 4 0 R >>\".encode(),\n b\"<< /Length \"+str(len(content)).encode()+b\" >>\\nstream\\n\"+content+b\"\\nendstream\",\n f\"<< /Type /XObject /Subtype /Image /Width {w} /Height {h} /ColorSpace /DeviceGray /BitsPerComponent 8 /Length {len(pixels)} >>\".encode()+b\"\\nstream\\n\"+bytes(pixels)+b\"\\nendstream\"\n]\npdf=bytearray(b\"%PDF-1.4\\n\")\noffsets=[0]\nfor i,obj in enumerate(objects,1):\n    offsets.append(len(pdf)); pdf.extend(f\"{i} 0 obj\\n\".encode()); pdf.extend(obj); pdf.extend(b\"\\nendobj\\n\")\nxref=len(pdf); pdf.extend(f\"xref\\n0 {len(objects)+1}\\n\".encode()); pdf.extend(b\"0000000000 65535 f \\n\")\nfor off in offsets[1:]: pdf.extend(f\"{off:010d} 00000 n \\n\".encode())\npdf.extend(f\"trailer\\n<< /Size {len(objects)+1} /Root 1 0 R >>\\nstartxref\\n{xref}\\n%%EOF\\n\".encode())\nout=Path(\"canonical/astra_runtime/tmp/IMAGE_ONLY_OCR_TEST.pdf\")\nout.write_bytes(pdf)\nprint(\"IMAGE_ONLY_PDF_READY\",w,h,len(pdf))\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "IMAGE_ONLY_PDF_READY"
+      }
+    },
+    {
+      "id": "plan-and-use-inherited-ocr",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 8,
+      "capability_problem": {
+        "initial_facts": [
+          "pdf.file.image_only.available"
+        ],
+        "target_effects": [
+          "pdf.extract.ocr"
+        ],
+        "inputs": {
+          "pdf_path": "canonical/astra_runtime/tmp/IMAGE_ONLY_OCR_TEST.pdf"
+        },
+        "finish_summary": "INHERITED_PDF_OCR_COMPLETE"
+      },
+      "verify": {
+        "type": "stdout_contains",
+        "text": "INHERITED_PDF_OCR_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "capability_must_be_inherited_from_brain": true,
+    "embedded_ocr_capability_in_mission": false,
+    "platform": "linux"
+  }
+}
