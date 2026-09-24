@@ -1,0 +1,20 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-APT-ZBAR-FAST-DIAG-001",
+  "purpose": "Minimal read-only diagnosis of whether Ubuntu APT exposes zbar-tools through the verifier discovery query surface.",
+  "steps": [
+    {
+      "id": "raw-apt-zbar-probe",
+      "adapter": "shell",
+      "command": "set -euo pipefail\necho '=== ZBAR POLICY ==='\napt-cache policy zbar-tools || true\necho '=== ZBAR SHOW ==='\napt-cache show zbar-tools 2>/dev/null | sed -n '1,80p' || true\necho '=== SEARCH BAR CODE ==='\napt-cache search 'bar code' | grep -i -E 'zbar|bar code|barcode' | tail -n 60 || true\necho '=== SEARCH DECODE ==='\napt-cache search decode | grep -i -E 'zbar|bar code|barcode' | tail -n 60 || true",
+      "verify": {
+        "type": "returncode_zero"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "read_only_diagnostic": true
+  }
+}
