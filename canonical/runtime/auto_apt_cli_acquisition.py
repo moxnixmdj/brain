@@ -201,6 +201,13 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
       "contract":contract,
       "inputs":inputs,
       "verification_args":verification_args,
+      "semantic_verification":{
+        "required":True,
+        "reason":"Auto-synthesized text-to-binary-file capability must prove semantic content independently of the producer.",
+        "expected_text":inputs.get("text"),
+        "goal":goal,
+        "status":"PENDING_VERIFIER_ACQUISITION"
+      },
       "registry_entry":entry,
       "verification_mission_id":verify_mid,
       "verification_result_path":verify_rel,
