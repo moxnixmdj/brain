@@ -55,6 +55,58 @@
           "text_sha256": "97fa8642db783ccc4c477a1ab0dc72a144da2932106ae51b9818eb7fc4b8030c"
         }
       }
+    },
+    "pdf.extract.ocr.tesseract": {
+      "provides": [
+        "pdf.extract.ocr"
+      ],
+      "requires": [
+        "pdf.file.image_only.available"
+      ],
+      "cost": 2,
+      "platforms": [
+        "linux"
+      ],
+      "limitations": [
+        "Requires a Linux substrate with apt and sudo rights for first-time package installation.",
+        "Uses English OCR data in the verified configuration.",
+        "Accuracy depends on raster quality and source image quality."
+      ],
+      "adapter_module": "pdf_ocr_tesseract",
+      "entrypoint": "run",
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "pdf.extract.ocr.tesseract",
+          "path": "${input.pdf_path}",
+          "max_pages": 50,
+          "dpi": 300,
+          "language": "eng"
+        },
+        "expect": {
+          "type": "field_nonempty",
+          "field": "text"
+        }
+      },
+      "source": {
+        "type": "apt",
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "tesseract-ocr",
+            "version": "5.3.4-1build5",
+            "sha256": "2dfac382d77215aee0c3de4a2a2205505d5f2195e72e79b54ad32154fc08da77"
+          },
+          {
+            "name": "poppler-utils",
+            "version": "24.02.0-1ubuntu9.9",
+            "sha256": "fb936375b183a9d8ecb5b1fc5665a44110ca130c445946fb575c0b800b1dc0f4"
+          }
+        ]
+      },
+      "incremental_spend_usd": 0,
+      "status": "BOUND_PENDING_RUNTIME_VERIFICATION",
+      "discovery_evidence": "canonical/astra_runtime/evidence/ASTRA-CAPABILITY-DISCOVERY-APT-OCR-001__PACKAGES.json"
     }
   }
 }
