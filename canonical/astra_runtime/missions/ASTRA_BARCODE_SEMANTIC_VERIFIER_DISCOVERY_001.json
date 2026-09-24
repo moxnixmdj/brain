@@ -18,6 +18,7 @@
     "producer_independent_verifier_required": true,
     "read_only_discovery": true,
     "model_controller_required": false,
-    "replay_after_compound_matching_commit": "1a45f7a6e18c592a61b82e6b95b7421b78d3bdbe"
+    "replay_after_compound_matching_commit": "1a45f7a6e18c592a61b82e6b95b7421b78d3bdbe",
+    "replay_after_apt_query_expansion_commit": "aed7454b7f951976dc3381d340a5f780c866f795"
   }
 }
