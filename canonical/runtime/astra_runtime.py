@@ -138,6 +138,50 @@ def _ensure_pypi_dependency(source):
         raise Blocker("BOUND_PYPI_INSTALLED_VERSION_MISMATCH:"+installed)
     return {"status":"INSTALLED_VERIFIED","project":name,"version":version,"wheel_sha256":actual}
 
+def _ensure_apt_dependencies(source):
+    if not sys.platform.startswith("linux"):
+        raise Blocker("BOUND_APT_PLATFORM_UNSUPPORTED:"+sys.platform)
+    packages=source.get("packages")
+    if not isinstance(packages,list) or not packages:
+        raise Blocker("BOUND_APT_PACKAGES_REQUIRED")
+    requested=[]
+    expected={}
+    evidence=[]
+    for pkg in packages:
+        if not isinstance(pkg,dict):
+            raise Blocker("BOUND_APT_PACKAGE_INVALID")
+        name=str(pkg.get("name") or "").strip()
+        version=str(pkg.get("version") or "").strip()
+        sha=str(pkg.get("sha256") or "").strip().lower()
+        if not name or not version or len(sha)!=64:
+            raise Blocker("BOUND_APT_PACKAGE_METADATA_INCOMPLETE")
+        show=subprocess.run(["apt-cache","show",f"{name}={version}"],text=True,capture_output=True,timeout=30)
+        if show.returncode!=0:
+            raise Blocker("BOUND_APT_METADATA_NOT_FOUND:"+name)
+        found=None
+        for line in show.stdout.splitlines():
+            if line.startswith("SHA256:"):
+                found=line.split(":",1)[1].strip().lower()
+                break
+        if found!=sha:
+            raise Blocker("BOUND_APT_PACKAGE_HASH_MISMATCH:"+name)
+        requested.append(f"{name}={version}")
+        expected[name]=version
+        evidence.append({"name":name,"version":version,"archive_sha256":sha})
+    env=os.environ.copy()
+    env["DEBIAN_FRONTEND"]="noninteractive"
+    proc=subprocess.run(
+        ["sudo","apt-get","install","-y","--no-install-recommends",*requested],
+        cwd=ROOT,text=True,capture_output=True,timeout=240,env=env
+    )
+    if proc.returncode!=0:
+        raise Blocker("BOUND_APT_INSTALL_FAILED:"+proc.stderr[-1600:])
+    for name,version in expected.items():
+        q=subprocess.run(["dpkg-query","-W","-f=$"+"{Version}",name],text=True,capture_output=True,timeout=30)
+        if q.returncode!=0 or q.stdout.strip()!=version:
+            raise Blocker("BOUND_APT_INSTALLED_VERSION_MISMATCH:"+name+":"+q.stdout.strip())
+    return {"status":"INSTALLED_VERIFIED","origin":source.get("origin"),"packages":evidence}
+
 def _invoke_bound_capability(args):
     cid=str(args.get("capability_id") or "").strip()
     if not cid:
@@ -151,6 +195,10 @@ def _invoke_bound_capability(args):
     dependency=None
     if source.get("type")=="pypi":
         dependency=_ensure_pypi_dependency(source)
+    elif source.get("type")=="apt":
+        dependency=_ensure_apt_dependencies(source)
+    elif source.get("type"):
+        raise Blocker("BOUND_CAPABILITY_SOURCE_UNSUPPORTED:"+str(source.get("type")))
     module_name=str(entry.get("adapter_module") or "")
     if not module_name or any(ch not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_" for ch in module_name):
         raise Blocker("BOUND_CAPABILITY_ADAPTER_INVALID")
@@ -415,6 +463,11 @@ def _inherit_verified_capabilities(problem):
             continue
         if cid in existing:
             continue
+        platforms=entry.get("platforms")
+        if isinstance(platforms,list) and platforms:
+            current="linux" if sys.platform.startswith("linux") else ("windows" if sys.platform.startswith("win") else sys.platform)
+            if current not in platforms:
+                continue
         template=entry.get("action_template")
         if not isinstance(template,dict):
             continue
