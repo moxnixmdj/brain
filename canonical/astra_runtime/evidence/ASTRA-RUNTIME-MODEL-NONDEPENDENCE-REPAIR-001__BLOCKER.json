@@ -1,0 +1,17 @@
+{
+  "adapter": "shell",
+  "error": "VERIFICATION_FAILED",
+  "mission_id": "ASTRA-RUNTIME-MODEL-NONDEPENDENCE-REPAIR-001",
+  "observed_at_utc": "2026-09-24T21:01:19.056843+00:00",
+  "result": {
+    "adapter": "shell",
+    "command": "python canonical/tests/test_astra_runtime_model_independence.py",
+    "duration_s": 0.346,
+    "returncode": 1,
+    "stderr": "Traceback (most recent call last):\n  File \"/home/runner/work/brain/brain/canonical/tests/test_astra_runtime_model_independence.py\", line 11, in <module>\n    spec.loader.exec_module(runtime)\n  File \"<frozen importlib._bootstrap_external>\", line 995, in exec_module\n  File \"<frozen importlib._bootstrap_external>\", line 1132, in get_code\n  File \"<frozen importlib._bootstrap_external>\", line 1190, in get_data\nFileNotFoundError: [Errno 2] No such file or directory: '/home/runner/work/brain/brain/runtime/astra_runtime.py'\n",
+    "stdout": ""
+  },
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "run-model-independence-regression",
+  "step_index": 0
+}

@@ -1,0 +1,44 @@
+{
+  "blocker": {
+    "adapter": "shell",
+    "error": "VERIFICATION_FAILED",
+    "mission_id": "ASTRA-RUNTIME-MODEL-NONDEPENDENCE-REPAIR-001",
+    "observed_at_utc": "2026-09-24T21:01:19.056843+00:00",
+    "result": {
+      "adapter": "shell",
+      "command": "python canonical/tests/test_astra_runtime_model_independence.py",
+      "duration_s": 0.346,
+      "returncode": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/home/runner/work/brain/brain/canonical/tests/test_astra_runtime_model_independence.py\", line 11, in <module>\n    spec.loader.exec_module(runtime)\n  File \"<frozen importlib._bootstrap_external>\", line 995, in exec_module\n  File \"<frozen importlib._bootstrap_external>\", line 1132, in get_code\n  File \"<frozen importlib._bootstrap_external>\", line 1190, in get_data\nFileNotFoundError: [Errno 2] No such file or directory: '/home/runner/work/brain/brain/runtime/astra_runtime.py'\n",
+      "stdout": ""
+    },
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "run-model-independence-regression",
+    "step_index": 0
+  },
+  "created_at_utc": "2026-09-24T21:01:18.710650+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-24T21:01:19.056826+00:00",
+      "ok": false,
+      "result": {
+        "adapter": "shell",
+        "command": "python canonical/tests/test_astra_runtime_model_independence.py",
+        "duration_s": 0.346,
+        "returncode": 1,
+        "stderr": "Traceback (most recent call last):\n  File \"/home/runner/work/brain/brain/canonical/tests/test_astra_runtime_model_independence.py\", line 11, in <module>\n    spec.loader.exec_module(runtime)\n  File \"<frozen importlib._bootstrap_external>\", line 995, in exec_module\n  File \"<frozen importlib._bootstrap_external>\", line 1132, in get_code\n  File \"<frozen importlib._bootstrap_external>\", line 1190, in get_data\nFileNotFoundError: [Errno 2] No such file or directory: '/home/runner/work/brain/brain/runtime/astra_runtime.py'\n",
+        "stdout": ""
+      },
+      "step_id": "run-model-independence-regression",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-RUNTIME-MODEL-NONDEPENDENCE-REPAIR-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_MODEL_NONDEPENDENCE_REPAIR_001.json",
+  "mission_sha256": "071d2dc38ec475411f0b7321fca37565ab564a718a5798a395d9e4c9ae41017c",
+  "next_step": 0,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-24T21:01:19.057150+00:00"
+}
