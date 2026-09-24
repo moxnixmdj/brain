@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-MODEL-NONDEPENDENCE-REPAIR-001",
+  "purpose": "Prove the shared ASTRA runtime can execute a bounded goal without any mandatory model planner and fails closed rather than silently falling back to a model.",
+  "goal": "Inspect the canonical model non-dependence law and complete a bounded evidence action without invoking any model planner.",
+  "steps": [
+    {
+      "id": "run-model-independence-regression",
+      "adapter": "shell",
+      "command": "python canonical/tests/test_astra_runtime_model_independence.py",
+      "verify": {
+        "type": "returncode_zero"
+      }
+    },
+    {
+      "id": "execute-model-independent-goal",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 8,
+      "controller_actions": [
+        {
+          "type": "search_text",
+          "args": {
+            "query": "No step above requires an LLM."
+          },
+          "why": "Confirm the canonical law is present in repository evidence."
+        },
+        {
+          "type": "read_file",
+          "args": {
+            "path": "canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md"
+          },
+          "why": "Read the authoritative law through the runtime's deterministic repository action."
+        },
+        {
+          "type": "finish",
+          "args": {
+            "summary": "MODEL_INDEPENDENT_GOAL_COMPLETE"
+          },
+          "why": "Finish after sufficient evidence without consulting a model planner."
+        }
+      ],
+      "verify": {
+        "type": "stdout_contains",
+        "text": "MODEL_INDEPENDENT_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "mandatory_model_planner": false,
+    "optional_model_planner_used": false
+  }
+}
