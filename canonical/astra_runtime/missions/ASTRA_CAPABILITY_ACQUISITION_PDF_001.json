@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-CAPABILITY-ACQUISITION-PDF-001",
+  "purpose": "Exercise the model-independent acquisition loop on a useful missing professional-work capability: PDF text extraction.",
+  "goal": "Acquire a zero-cost, verifiable PDF extraction capability without using a model as the controller and without executing unreviewed third-party code.",
+  "steps": [
+    {
+      "id": "verify-discovery-ranking",
+      "adapter": "shell",
+      "command": "python canonical/tests/test_capability_discovery.py && python canonical/tests/test_capability_planner.py",
+      "verify": {
+        "type": "returncode_zero"
+      }
+    },
+    {
+      "id": "detect-pdf-gap-and-discover-candidates",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "capability_problem": {
+        "initial_facts": [
+          "repo.available"
+        ],
+        "target_effects": [
+          "pdf.extract"
+        ],
+        "max_expansions": 50,
+        "capabilities": [
+          {
+            "id": "inspect-repository",
+            "requires": [
+              "repo.available"
+            ],
+            "provides": [
+              "repo.inspected"
+            ],
+            "cost": 1,
+            "action": {
+              "type": "list_tree",
+              "args": {
+                "prefix": "canonical"
+              },
+              "why": "Existing unrelated capability; cannot satisfy PDF extraction."
+            }
+          }
+        ]
+      },
+      "verify": {
+        "type": "returncode_zero"
+      }
+    }
+  ],
+  "expected_boundary": "CAPABILITY_ACQUISITION_REQUIRED",
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "no_unreviewed_code_execution": true,
+    "models_optional_sources_only": true
+  }
+}
