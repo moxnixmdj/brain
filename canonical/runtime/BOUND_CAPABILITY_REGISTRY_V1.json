@@ -180,7 +180,7 @@
         ]
       },
       "incremental_spend_usd": 0,
-      "status": "BOUND_PENDING_RUNTIME_VERIFICATION",
+      "status": "VERIFIED_BOUND_CAPABILITY",
       "discovery_evidence": [
         "canonical/astra_runtime/evidence/ASTRA-RUNTIME-PLAIN-GOAL-QR-001__PLAIN_GOAL_CAPABILITY_DISCOVERY.json",
         "canonical/astra_runtime/evidence/ASTRA-QR-APT-SUPPLIER-PROBE-001__RESULT.json"
@@ -196,13 +196,13 @@
         }
       ],
       "verification": {
-        "mission_id": "ASTRA-RUNTIME-BOUND-QR-001",
-        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-QR-001__RECEIPT.json",
-        "state_path": "canonical/astra_runtime/state/ASTRA-RUNTIME-BOUND-QR-001.json",
+        "mission_id": "ASTRA-RUNTIME-BOUND-QR-GENERIC-001",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-QR-GENERIC-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-RUNTIME-BOUND-QR-GENERIC-001.json",
         "observed_effect": {
-          "output_path": "canonical/astra_runtime/tmp/BOUND_PROJECT_BRAIN_QR.png",
+          "output_path": "canonical/astra_runtime/tmp/GENERIC_PROJECT_BRAIN_QR.png",
           "output_sha256": "f66a687f409f2148dacd3682c49dbc7f8f100d812ec387c2deac6659d6258ef9",
-          "png_signature_valid": true
+          "output_verified": true
         },
         "observed_dependency": {
           "origin": "Ubuntu",
@@ -213,10 +213,11 @@
               "sha256": "613c5a22316489ec6a9ce5d59190293df15dd4612b55432dde04c62f7c1a0e25"
             }
           ]
-        }
+        },
+        "specialized_adapter_used": false,
+        "adapter_module": "cli_command"
       },
-      "previous_specialized_adapter": "qr_qrencode",
-      "verification_superseded_by_generic_adapter": true
+      "previous_specialized_adapter": "qr_qrencode"
     }
   }
 }
