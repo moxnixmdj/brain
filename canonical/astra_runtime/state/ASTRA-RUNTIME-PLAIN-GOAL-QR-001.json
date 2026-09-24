@@ -1,21 +1,149 @@
 {
   "blocker": {
-    "adapter": "shell",
+    "adapter": "goal",
     "error": "VERIFICATION_FAILED",
     "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-QR-001",
-    "observed_at_utc": "2026-09-24T22:01:22.712890+00:00",
-    "phase": "REHYDRATION",
+    "observed_at_utc": "2026-09-24T22:02:29.158992+00:00",
     "result": {
-      "adapter": "shell",
-      "command": "set -euo pipefail\npython canonical/tests/test_goal_compiler.py",
-      "duration_s": 0.121,
-      "returncode": 1,
-      "stderr": "test_plain_image_only_pdf_goal_selects_verified_ocr (__main__.GoalCompilerTests.test_plain_image_only_pdf_goal_selects_verified_ocr) ... ok\ntest_plain_qr_goal_selects_verified_qr_and_binds_arguments (__main__.GoalCompilerTests.test_plain_qr_goal_selects_verified_qr_and_binds_arguments) ... FAIL\ntest_unknown_goal_fails_closed (__main__.GoalCompilerTests.test_unknown_goal_fails_closed) ... ok\n\n======================================================================\nFAIL: test_plain_qr_goal_selects_verified_qr_and_binds_arguments (__main__.GoalCompilerTests.test_plain_qr_goal_selects_verified_qr_and_binds_arguments)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/brain/brain/canonical/tests/test_goal_compiler.py\", line 38, in test_plain_qr_goal_selects_verified_qr_and_binds_arguments\n    self.assertEqual(out[\"selected_capability\"],\"image.qr.generate.qrencode\")\nAssertionError: 'pdf.extract.text.pypdf' != 'image.qr.generate.qrencode'\n- pdf.extract.text.pypdf\n+ image.qr.generate.qrencode\n\n\n----------------------------------------------------------------------\nRan 3 tests in 0.002s\n\nFAILED (failures=1)\n",
-      "stdout": ""
+      "adapter": "goal",
+      "capability_plan": {
+        "expanded_states": 1,
+        "initial_facts": [],
+        "plan": [
+          "image.qr.generate.qrencode"
+        ],
+        "status": "SOLVED",
+        "target_effects": [
+          "image.qr.generate"
+        ],
+        "total_cost": 1.0
+      },
+      "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+      "cycles": 2,
+      "final_summary": "PLAIN_GOAL_COMPLETE",
+      "goal_compilation": {
+        "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+        "inputs": {
+          "output_path": "canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png",
+          "text": "PROJECT BRAIN"
+        },
+        "match_evidence": {
+          "goal_tokens": [
+            "as",
+            "astra",
+            "brain",
+            "canonical",
+            "code",
+            "generate",
+            "image",
+            "it",
+            "png",
+            "project",
+            "qr",
+            "runtime",
+            "save",
+            "text",
+            "tmp"
+          ],
+          "matched_identity": [
+            "generate",
+            "image",
+            "qr"
+          ],
+          "matched_provides": [
+            "generate",
+            "image",
+            "qr"
+          ],
+          "matched_requires": []
+        },
+        "score": 21,
+        "selected_capability": "image.qr.generate.qrencode",
+        "target_effects": [
+          "image.qr.generate"
+        ]
+      },
+      "inherited_bound_capabilities": [
+        "image.qr.generate.qrencode"
+      ],
+      "planner_model_last": null,
+      "planner_source": null,
+      "planner_transport": null,
+      "planning_mode": "DETERMINISTIC_CAPABILITY_GRAPH",
+      "returncode": 0,
+      "stdout": "PLAIN_GOAL_COMPLETE",
+      "trace": [
+        {
+          "cycle": 0,
+          "plan": {
+            "args": {
+              "argv": [
+                "qrencode",
+                "-o",
+                "canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png",
+                "PROJECT BRAIN"
+              ],
+              "capability_id": "image.qr.generate.qrencode",
+              "output_path": "canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png",
+              "output_prefix_hex": "89504e470d0a1a0a",
+              "timeout_s": 60
+            },
+            "capability_id": "image.qr.generate.qrencode",
+            "expect": {
+              "field": "output_verified",
+              "type": "field_equals",
+              "value": true
+            },
+            "type": "invoke_capability"
+          },
+          "result": {
+            "adapter": "bound_capability_cli",
+            "argv": [
+              "qrencode",
+              "-o",
+              "canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png",
+              "PROJECT BRAIN"
+            ],
+            "capability_id": "image.qr.generate.qrencode",
+            "dependency": {
+              "origin": "Ubuntu",
+              "packages": [
+                {
+                  "archive_sha256": "613c5a22316489ec6a9ce5d59190293df15dd4612b55432dde04c62f7c1a0e25",
+                  "name": "qrencode",
+                  "version": "4.1.1-1build2"
+                }
+              ],
+              "status": "INSTALLED_VERIFIED"
+            },
+            "output_bytes": 290,
+            "output_path": "canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png",
+            "output_sha256": "f66a687f409f2148dacd3682c49dbc7f8f100d812ec387c2deac6659d6258ef9",
+            "output_verified": true,
+            "returncode": 0,
+            "stderr": "",
+            "stdout": ""
+          }
+        },
+        {
+          "cycle": 1,
+          "plan": {
+            "args": {
+              "summary": "PLAIN_GOAL_COMPLETE"
+            },
+            "type": "finish",
+            "why": "All target effects have an executable minimum-cost capability plan."
+          },
+          "result": {
+            "summary": "PLAIN_GOAL_COMPLETE",
+            "type": "finish"
+          }
+        }
+      ]
     },
     "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
-    "step_id": "run-goal-compiler-regressions",
-    "step_index": 0
+    "step_id": "execute-unknown-plain-goal",
+    "step_index": 1
   },
   "created_at_utc": "2026-09-24T21:51:14.037205+00:00",
   "history": [
@@ -32,14 +160,180 @@
       },
       "step_id": "run-goal-compiler-regressions",
       "step_index": 0
+    },
+    {
+      "completed_at_utc": "2026-09-24T22:02:29.158978+00:00",
+      "ok": false,
+      "result": {
+        "adapter": "goal",
+        "capability_plan": {
+          "expanded_states": 1,
+          "initial_facts": [],
+          "plan": [
+            "image.qr.generate.qrencode"
+          ],
+          "status": "SOLVED",
+          "target_effects": [
+            "image.qr.generate"
+          ],
+          "total_cost": 1.0
+        },
+        "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+        "cycles": 2,
+        "final_summary": "PLAIN_GOAL_COMPLETE",
+        "goal_compilation": {
+          "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+          "inputs": {
+            "output_path": "canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png",
+            "text": "PROJECT BRAIN"
+          },
+          "match_evidence": {
+            "goal_tokens": [
+              "as",
+              "astra",
+              "brain",
+              "canonical",
+              "code",
+              "generate",
+              "image",
+              "it",
+              "png",
+              "project",
+              "qr",
+              "runtime",
+              "save",
+              "text",
+              "tmp"
+            ],
+            "matched_identity": [
+              "generate",
+              "image",
+              "qr"
+            ],
+            "matched_provides": [
+              "generate",
+              "image",
+              "qr"
+            ],
+            "matched_requires": []
+          },
+          "score": 21,
+          "selected_capability": "image.qr.generate.qrencode",
+          "target_effects": [
+            "image.qr.generate"
+          ]
+        },
+        "inherited_bound_capabilities": [
+          "image.qr.generate.qrencode"
+        ],
+        "planner_model_last": null,
+        "planner_source": null,
+        "planner_transport": null,
+        "planning_mode": "DETERMINISTIC_CAPABILITY_GRAPH",
+        "returncode": 0,
+        "stdout": "PLAIN_GOAL_COMPLETE",
+        "trace": [
+          {
+            "cycle": 0,
+            "plan": {
+              "args": {
+                "argv": [
+                  "qrencode",
+                  "-o",
+                  "canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png",
+                  "PROJECT BRAIN"
+                ],
+                "capability_id": "image.qr.generate.qrencode",
+                "output_path": "canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png",
+                "output_prefix_hex": "89504e470d0a1a0a",
+                "timeout_s": 60
+              },
+              "capability_id": "image.qr.generate.qrencode",
+              "expect": {
+                "field": "output_verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "bound_capability_cli",
+              "argv": [
+                "qrencode",
+                "-o",
+                "canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png",
+                "PROJECT BRAIN"
+              ],
+              "capability_id": "image.qr.generate.qrencode",
+              "dependency": {
+                "origin": "Ubuntu",
+                "packages": [
+                  {
+                    "archive_sha256": "613c5a22316489ec6a9ce5d59190293df15dd4612b55432dde04c62f7c1a0e25",
+                    "name": "qrencode",
+                    "version": "4.1.1-1build2"
+                  }
+                ],
+                "status": "INSTALLED_VERIFIED"
+              },
+              "output_bytes": 290,
+              "output_path": "canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png",
+              "output_sha256": "f66a687f409f2148dacd3682c49dbc7f8f100d812ec387c2deac6659d6258ef9",
+              "output_verified": true,
+              "returncode": 0,
+              "stderr": "",
+              "stdout": ""
+            }
+          },
+          {
+            "cycle": 1,
+            "plan": {
+              "args": {
+                "summary": "PLAIN_GOAL_COMPLETE"
+              },
+              "type": "finish",
+              "why": "All target effects have an executable minimum-cost capability plan."
+            },
+            "result": {
+              "summary": "PLAIN_GOAL_COMPLETE",
+              "type": "finish"
+            }
+          }
+        ]
+      },
+      "step_id": "execute-unknown-plain-goal",
+      "step_index": 1
     }
   ],
   "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-QR-001",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_PLAIN_GOAL_QR_001.json",
-  "mission_sha256": "5af2ca22583a7d00d7a5e7db10c7817d64020eead01bd9dc45d2da2ae057769f",
+  "mission_sha256": "9882c25165b86f5b205203eefc95af08579fb70ade7fee6c7fac364308dad00b",
   "next_step": 1,
+  "rehydrations": [
+    {
+      "at_utc": "2026-09-24T22:02:22.364088+00:00",
+      "before_step": 1,
+      "steps": [
+        {
+          "completed_at_utc": "2026-09-24T22:02:22.364062+00:00",
+          "ok": true,
+          "rehydration": true,
+          "result": {
+            "adapter": "shell",
+            "command": "set -euo pipefail\npython canonical/tests/test_goal_compiler.py",
+            "duration_s": 0.143,
+            "returncode": 0,
+            "stderr": "test_plain_image_only_pdf_goal_selects_verified_ocr (__main__.GoalCompilerTests.test_plain_image_only_pdf_goal_selects_verified_ocr) ... ok\ntest_plain_qr_goal_selects_verified_qr_and_binds_arguments (__main__.GoalCompilerTests.test_plain_qr_goal_selects_verified_qr_and_binds_arguments) ... ok\ntest_unknown_goal_fails_closed (__main__.GoalCompilerTests.test_unknown_goal_fails_closed) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.005s\n\nOK\n",
+            "stdout": ""
+          },
+          "step_id": "run-goal-compiler-regressions",
+          "step_index": 0
+        }
+      ]
+    }
+  ],
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
   "status": "BLOCKED",
-  "updated_at_utc": "2026-09-24T22:01:22.713171+00:00"
+  "updated_at_utc": "2026-09-24T22:02:29.159431+00:00"
 }
