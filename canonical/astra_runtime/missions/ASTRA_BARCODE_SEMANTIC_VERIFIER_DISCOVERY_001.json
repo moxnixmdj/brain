@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-BARCODE-SEMANTIC-VERIFIER-DISCOVERY-001",
+  "purpose": "Discover zero-cost independent suppliers that can decode/inspect a generated barcode image, so auto-acquired producers cannot self-certify semantic correctness.",
+  "steps": [
+    {
+      "id": "discover-barcode-decoders",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path(\"canonical/runtime/capability_discovery.py\")\ns=importlib.util.spec_from_file_location(\"capability_discovery_probe\",p)\nm=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nout=m.search_all(\"decode barcode image\",limit_per_source=30)\npath=pathlib.Path(\"canonical/astra_runtime/evidence/ASTRA-BARCODE-SEMANTIC-VERIFIER-DISCOVERY-001__RESULT.json\")\npath.write_text(json.dumps(out,indent=2,sort_keys=True)+\"\\n\",encoding=\"utf-8\")\nprint(\"BARCODE_VERIFIER_DISCOVERY_COMPLETE\",json.dumps([\n {\"name\":x.get(\"name\"),\"source\":x.get(\"discovery_source\"),\"score\":x.get(\"score\"),\n  \"friction\":x.get(\"integration_friction\"),\"description\":x.get(\"description\"),\n  \"version\":x.get(\"version\"),\"archive_sha256\":x.get(\"archive_sha256\")}\n for x in out.get(\"candidates\",[])[:20]\n],sort_keys=True))\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "BARCODE_VERIFIER_DISCOVERY_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "producer_independent_verifier_required": true,
+    "read_only_discovery": true,
+    "model_controller_required": false
+  }
+}
