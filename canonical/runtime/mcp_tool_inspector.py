@@ -7,6 +7,7 @@ only negotiates the protocol and lists advertised tool definitions.
 import argparse
 import asyncio
 import json
+import importlib.metadata
 
 
 def _dump_model(value):
@@ -59,8 +60,13 @@ def main():
     ap.add_argument("urls", nargs="+")
     args = ap.parse_args()
     results = asyncio.run(main_async(args.urls))
+    try:
+        sdk_version = importlib.metadata.version("mcp")
+    except Exception:
+        sdk_version = None
     print(json.dumps({
         "schema": "PROJECT_BRAIN_MCP_TOOL_INTROSPECTION_V1",
+        "mcp_sdk_version": sdk_version,
         "read_only": True,
         "tool_calls_performed": 0,
         "results": results,
