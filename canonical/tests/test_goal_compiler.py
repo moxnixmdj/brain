@@ -32,10 +32,13 @@ class GoalCompilerTests(unittest.TestCase):
         with self.assertRaisesRegex(compiler.GoalCompilationFailure,"GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"):
             compiler.compile_goal("Reticulate a quantum banana lattice",self.registry(),ROOT)
 
-    def test_qr_goal_does_not_false_match_ocr(self):
-        goal="Generate a QR code image for PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png."
-        with self.assertRaisesRegex(compiler.GoalCompilationFailure,"GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"):
-            compiler.compile_goal(goal,self.registry(),ROOT)
+    def test_plain_qr_goal_selects_verified_qr_and_binds_arguments(self):
+        goal="Generate a QR code image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png."
+        out=compiler.compile_goal(goal,self.registry(),ROOT)
+        self.assertEqual(out["selected_capability"],"image.qr.generate.qrencode")
+        self.assertEqual(out["target_effects"],["image.qr.generate"])
+        self.assertEqual(out["inputs"]["text"],"PROJECT BRAIN")
+        self.assertEqual(out["inputs"]["output_path"],"canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png")
 
 if __name__=="__main__":
     unittest.main(verbosity=2)
