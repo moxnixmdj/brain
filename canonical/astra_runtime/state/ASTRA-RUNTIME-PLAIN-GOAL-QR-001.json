@@ -1,12 +1,21 @@
 {
   "blocker": {
-    "adapter": "goal",
-    "error": "Blocker:CAPABILITY_ACQUISITION_REQUIRED:{\"evidence_path\": \"canonical/astra_runtime/evidence/ASTRA-RUNTIME-PLAIN-GOAL-QR-001__PLAIN_GOAL_CAPABILITY_DISCOVERY.json\", \"top_candidates\": [{\"name\": \"libimager-qrcode-perl\", \"required_secret_count\": 0, \"score\": 40, \"zero_cost_eligible\": true}, {\"name\": \"python3-pyqrcode\", \"required_secret_count\": 0, \"score\": 28, \"zero_cost_eligible\": true}, {\"name\": \"python3-qrcode\", \"required_secret_count\": 0, \"score\": 28, \"zero_cost_eligible\": true}, {\"name\": \"qrencode\", \"required_secret_count\": 0, \"score\": 28, \"zero_cost_eligible\": true}, {\"name\": \"librust-qrcode-generator-dev\", \"required_secret_count\": 0, \"score\": 27, \"zero_cost_eligible\": true}, {\"name\": \"go-qrcode\", \"required_secret_count\": 0, \"score\": 24, \"zero_cost_eligible\": true}, {\"name\": \"libghc-qrencode-prof\", \"required_secret_count\": 0, \"score\": 24, \"zero_cost_eligible\": true}, {\"name\": \"libqrcodegen-java\", \"required_secret_count\": 0, \"score\": 24, \"zero_cost_eligible\": true}]}",
+    "adapter": "shell",
+    "error": "VERIFICATION_FAILED",
     "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-QR-001",
-    "observed_at_utc": "2026-09-24T21:56:43.932107+00:00",
+    "observed_at_utc": "2026-09-24T21:59:46.814727+00:00",
+    "phase": "REHYDRATION",
+    "result": {
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/tests/test_goal_compiler.py",
+      "duration_s": 0.127,
+      "returncode": 1,
+      "stderr": "test_plain_image_only_pdf_goal_selects_verified_ocr (__main__.GoalCompilerTests.test_plain_image_only_pdf_goal_selects_verified_ocr) ... ok\ntest_plain_qr_goal_selects_verified_qr_and_binds_arguments (__main__.GoalCompilerTests.test_plain_qr_goal_selects_verified_qr_and_binds_arguments) ... FAIL\ntest_unknown_goal_fails_closed (__main__.GoalCompilerTests.test_unknown_goal_fails_closed) ... ok\n\n======================================================================\nFAIL: test_plain_qr_goal_selects_verified_qr_and_binds_arguments (__main__.GoalCompilerTests.test_plain_qr_goal_selects_verified_qr_and_binds_arguments)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/brain/brain/canonical/tests/test_goal_compiler.py\", line 41, in test_plain_qr_goal_selects_verified_qr_and_binds_arguments\n    self.assertEqual(out[\"inputs\"][\"output_path\"],\"canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png\")\nAssertionError: 'canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png.' != 'canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png'\n- canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png.\n?                                                 -\n+ canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png\n\n\n----------------------------------------------------------------------\nRan 3 tests in 0.006s\n\nFAILED (failures=1)\n",
+      "stdout": ""
+    },
     "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
-    "step_id": "execute-unknown-plain-goal",
-    "step_index": 1
+    "step_id": "run-goal-compiler-regressions",
+    "step_index": 0
   },
   "created_at_utc": "2026-09-24T21:51:14.037205+00:00",
   "history": [
@@ -27,10 +36,10 @@
   ],
   "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-QR-001",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_PLAIN_GOAL_QR_001.json",
-  "mission_sha256": "2066a339273c7ce2e1459dcadfeb9a48288febfe147abaee2c001d2de6b128fd",
+  "mission_sha256": "2766570ee1da8761cf857a7262be0d73e235199b8c11ef7b794f2c9865144bf1",
   "next_step": 1,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
   "status": "BLOCKED",
-  "updated_at_utc": "2026-09-24T21:56:43.932344+00:00"
+  "updated_at_utc": "2026-09-24T21:59:46.815023+00:00"
 }
