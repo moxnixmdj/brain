@@ -23,7 +23,38 @@
         "trusted_publishing": true
       },
       "incremental_spend_usd": 0,
-      "status": "BOUND_PENDING_RUNTIME_VERIFICATION"
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "requires": [
+        "pdf.file.available"
+      ],
+      "cost": 1,
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "pdf.extract.text.pypdf",
+          "path": "${input.pdf_path}",
+          "max_pages": 200
+        },
+        "expect": {
+          "type": "field_nonempty",
+          "field": "text"
+        }
+      },
+      "verification": {
+        "mission_id": "ASTRA-RUNTIME-BOUND-PDF-TEXT-001",
+        "workflow_run_id": 36060830384,
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-PDF-TEXT-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-RUNTIME-BOUND-PDF-TEXT-001.json",
+        "observed_dependency": {
+          "project": "pypdf",
+          "version": "6.19.0",
+          "wheel_sha256": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14"
+        },
+        "observed_effect": {
+          "extracted_text": "PROJECT BRAIN BOUND PDF CAPABILITY VERIFIED",
+          "text_sha256": "97fa8642db783ccc4c477a1ab0dc72a144da2932106ae51b9818eb7fc4b8030c"
+        }
+      }
     }
   }
 }
