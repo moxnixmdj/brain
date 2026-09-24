@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-VERIFY-JQ-STRUCTURED-DATA-001",
+  "purpose": "Independently verify and promote the discovered jq structured-data capability.",
+  "goal": "Verify jq can transform repository-local JSON into deterministic text and independently reproduce the semantic result with Python.",
+  "steps": [
+    {
+      "id": "invoke-pending-jq-capability",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib,sys\nroot=pathlib.Path('.').resolve()\np=root/'canonical/runtime/astra_runtime.py'\ns=importlib.util.spec_from_file_location('astra_runtime_jq_verify',p)\nm=importlib.util.module_from_spec(s); sys.modules[s.name]=m; s.loader.exec_module(m)\nargs={\n 'capability_id':'json.query.jq',\n 'input_path':'canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json',\n 'filter':'.capabilities | keys | sort | .[]',\n 'output_path':'canonical/astra_runtime/tmp/JQ_CAPABILITY_IDS.txt',\n 'raw_output':True,'require_nonempty':True,'timeout_s':60\n}\nout=m._invoke_bound_capability(args)\nev=root/'canonical/astra_runtime/evidence/ASTRA-VERIFY-JQ-STRUCTURED-DATA-001__JQ.json'\nev.write_text(json.dumps(out,indent=2,sort_keys=True)+'\\n',encoding='utf-8')\nassert out.get('output_verified') is True\nprint('JQ_PENDING_CAPABILITY_EXECUTED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "JQ_PENDING_CAPABILITY_EXECUTED"
+      }
+    },
+    {
+      "id": "independent-python-semantic-check",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport json,pathlib,hashlib\nroot=pathlib.Path('.').resolve()\nreg=json.loads((root/'canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())\nexpected=sorted(reg['capabilities'].keys())\np=root/'canonical/astra_runtime/tmp/JQ_CAPABILITY_IDS.txt'\nobserved=[x for x in p.read_text(encoding='utf-8').splitlines() if x]\nassert observed==expected,(observed,expected)\nev={\n 'schema':'PROJECT_BRAIN_INDEPENDENT_SEMANTIC_VERIFICATION_V1',\n 'verified':True,'verifier':'python-stdlib-json',\n 'expected':expected,'observed':observed,\n 'output_sha256':hashlib.sha256(p.read_bytes()).hexdigest()\n}\n(root/'canonical/astra_runtime/evidence/ASTRA-VERIFY-JQ-STRUCTURED-DATA-001__INDEPENDENT.json').write_text(json.dumps(ev,indent=2,sort_keys=True)+'\\n')\nprint('JQ_INDEPENDENT_SEMANTIC_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "JQ_INDEPENDENT_SEMANTIC_VERIFIED"
+      }
+    },
+    {
+      "id": "promote-jq-capability",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport json,pathlib\nroot=pathlib.Path('.').resolve()\nrp=root/'canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json'\nreg=json.loads(rp.read_text())\ncap=reg['capabilities']['json.query.jq']\nassert cap['status']=='BOUND_PENDING_INDEPENDENT_VERIFICATION'\nie=json.loads((root/'canonical/astra_runtime/evidence/ASTRA-VERIFY-JQ-STRUCTURED-DATA-001__INDEPENDENT.json').read_text())\nassert ie.get('verified') is True\ncap['status']='VERIFIED_BOUND_CAPABILITY'\ncap['verification']={\n 'mission_id':'ASTRA-VERIFY-JQ-STRUCTURED-DATA-001',\n 'independent_verifier':'python-stdlib-json',\n 'independent_verified':True,\n 'verification_evidence':'canonical/astra_runtime/evidence/ASTRA-VERIFY-JQ-STRUCTURED-DATA-001__INDEPENDENT.json'\n}\nrp.write_text(json.dumps(reg,indent=2,sort_keys=True)+'\\n')\nprint('JQ_CAPABILITY_PROMOTED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "JQ_CAPABILITY_PROMOTED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "allow_registry_mutation": true,
+    "independent_semantic_verification_required": true
+  }
+}
