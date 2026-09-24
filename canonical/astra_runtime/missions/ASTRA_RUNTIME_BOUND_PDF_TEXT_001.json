@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-BOUND-PDF-TEXT-001",
+  "purpose": "Verify a real externally acquired capability can be hash-pinned, bound, selected by the deterministic capability planner, executed, and effect-verified without a model controller.",
+  "goal": "Extract the known text layer from a synthetic PDF using the verified bound PDF capability.",
+  "steps": [
+    {
+      "id": "regressions-and-synthetic-pdf",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/tests/test_bound_capabilities.py\npython canonical/tests/test_capability_planner.py\npython canonical/tests/test_astra_runtime_model_independence.py\nmkdir -p canonical/astra_runtime/tmp\npython - <<'PY'\nfrom pathlib import Path\nout=Path(\"canonical/astra_runtime/tmp/BOUND_PDF_TEXT_TEST.pdf\")\nstream=b\"BT /F1 18 Tf 72 720 Td (PROJECT BRAIN BOUND PDF CAPABILITY VERIFIED) Tj ET\"\nobjects=[\n b\"<< /Type /Catalog /Pages 2 0 R >>\",\n b\"<< /Type /Pages /Kids [3 0 R] /Count 1 >>\",\n b\"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>\",\n b\"<< /Length \"+str(len(stream)).encode()+b\" >>\\nstream\\n\"+stream+b\"\\nendstream\",\n b\"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>\"\n]\npdf=bytearray(b\"%PDF-1.4\\n\")\noffsets=[0]\nfor i,obj in enumerate(objects,1):\n    offsets.append(len(pdf))\n    pdf.extend(f\"{i} 0 obj\\n\".encode())\n    pdf.extend(obj)\n    pdf.extend(b\"\\nendobj\\n\")\nxref=len(pdf)\npdf.extend(f\"xref\\n0 {len(objects)+1}\\n\".encode())\npdf.extend(b\"0000000000 65535 f \\n\")\nfor off in offsets[1:]:\n    pdf.extend(f\"{off:010d} 00000 n \\n\".encode())\npdf.extend(f\"trailer\\n<< /Size {len(objects)+1} /Root 1 0 R >>\\nstartxref\\n{xref}\\n%%EOF\\n\".encode())\nout.write_bytes(pdf)\nprint(\"SYNTHETIC_PDF_BYTES\",len(pdf))\nPY",
+      "verify": {
+        "type": "returncode_zero"
+      }
+    },
+    {
+      "id": "plan-bind-extract-and-verify",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 8,
+      "capability_problem": {
+        "initial_facts": [
+          "synthetic.pdf.available"
+        ],
+        "target_effects": [
+          "pdf.extract.text"
+        ],
+        "finish_summary": "BOUND_PDF_TEXT_EXTRACTION_COMPLETE",
+        "max_expansions": 50,
+        "capabilities": [
+          {
+            "id": "pypdf-text-extractor",
+            "requires": [
+              "synthetic.pdf.available"
+            ],
+            "provides": [
+              "pdf.extract.text"
+            ],
+            "cost": 1,
+            "action": {
+              "type": "invoke_capability",
+              "args": {
+                "capability_id": "pdf.extract.text.pypdf",
+                "path": "canonical/astra_runtime/tmp/BOUND_PDF_TEXT_TEST.pdf",
+                "max_pages": 10
+              },
+              "expect": {
+                "type": "field_contains",
+                "field": "text",
+                "value": "PROJECT BRAIN BOUND PDF CAPABILITY VERIFIED"
+              }
+            }
+          }
+        ]
+      },
+      "verify": {
+        "type": "stdout_contains",
+        "text": "BOUND_PDF_TEXT_EXTRACTION_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "third_party_package_hash_pinned": true,
+    "input_contains_no_user_data": true,
+    "input_scope": "synthetic repository-local PDF only"
+  }
+}
