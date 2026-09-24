@@ -31,6 +31,7 @@
     "manually_authored_initial_facts": false,
     "manually_authored_controller_actions": false,
     "manually_selected_supplier": false,
-    "manual_binding_forbidden": true
+    "manual_binding_forbidden": true,
+    "replay_after_supplier_race_commit": "fd28e539e2285f26ed6a1bf19fb12c7cc64df53b"
   }
 }
