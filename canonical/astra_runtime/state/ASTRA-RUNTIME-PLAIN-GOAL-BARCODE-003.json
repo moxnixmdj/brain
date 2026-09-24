@@ -17,6 +17,7 @@
     "step_id": "run-goal-compiler-regressions",
     "step_index": 0
   },
+  "completed_at_utc": "2026-09-24T23:38:09.458562+00:00",
   "created_at_utc": "2026-09-24T22:57:49.491568+00:00",
   "history": [
     {
@@ -32,12 +33,159 @@
       },
       "step_id": "run-goal-compiler-regressions",
       "step_index": 0
+    },
+    {
+      "completed_at_utc": "2026-09-24T23:38:09.457949+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "goal",
+        "capability_plan": {
+          "expanded_states": 1,
+          "initial_facts": [],
+          "plan": [
+            "auto.apt.zint"
+          ],
+          "status": "SOLVED",
+          "target_effects": [
+            "auto.effect.zint"
+          ],
+          "total_cost": 1.0
+        },
+        "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+        "cycles": 2,
+        "final_summary": "PLAIN_GOAL_COMPLETE",
+        "goal_compilation": {
+          "compiler_mode": "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH",
+          "inputs": {
+            "output_path": "canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png",
+            "text": "PROJECT BRAIN"
+          },
+          "match_evidence": {
+            "goal_tokens": [
+              "128",
+              "as",
+              "astra",
+              "barcode",
+              "brain",
+              "canonical",
+              "code",
+              "generate",
+              "image",
+              "it",
+              "png",
+              "project",
+              "runtime",
+              "save",
+              "text",
+              "tmp"
+            ],
+            "matched_identity": [],
+            "matched_keywords": [
+              "128",
+              "barcode"
+            ],
+            "matched_provides": [],
+            "matched_requires": []
+          },
+          "score": 8,
+          "selected_capability": "auto.apt.zint",
+          "target_effects": [
+            "auto.effect.zint"
+          ]
+        },
+        "inherited_bound_capabilities": [
+          "auto.apt.zint",
+          "image.qr.generate.qrencode"
+        ],
+        "planner_model_last": null,
+        "planner_source": null,
+        "planner_transport": null,
+        "planning_mode": "DETERMINISTIC_CAPABILITY_GRAPH",
+        "returncode": 0,
+        "stdout": "PLAIN_GOAL_COMPLETE",
+        "trace": [
+          {
+            "cycle": 0,
+            "plan": {
+              "args": {
+                "argv": [
+                  "zint",
+                  "-b",
+                  "CODE128",
+                  "-o",
+                  "canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png",
+                  "-d",
+                  "PROJECT BRAIN"
+                ],
+                "capability_id": "auto.apt.zint",
+                "output_path": "canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png",
+                "output_prefix_hex": "89504e470d0a1a0a",
+                "timeout_s": 60
+              },
+              "capability_id": "auto.apt.zint",
+              "expect": {
+                "field": "output_verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "bound_capability_cli",
+              "argv": [
+                "zint",
+                "-b",
+                "CODE128",
+                "-o",
+                "canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png",
+                "-d",
+                "PROJECT BRAIN"
+              ],
+              "capability_id": "auto.apt.zint",
+              "dependency": {
+                "origin": "Ubuntu",
+                "packages": [
+                  {
+                    "archive_sha256": "cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769",
+                    "name": "zint",
+                    "version": "2.13.0-1build3"
+                  }
+                ],
+                "status": "INSTALLED_VERIFIED"
+              },
+              "output_bytes": 269,
+              "output_path": "canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png",
+              "output_sha256": "c5ab48e8f4b30a1f7946a6a24db16f19e5896b188f19b0cade5636e98dabe768",
+              "output_verified": true,
+              "returncode": 0,
+              "stderr": "",
+              "stdout": ""
+            }
+          },
+          {
+            "cycle": 1,
+            "plan": {
+              "args": {
+                "summary": "PLAIN_GOAL_COMPLETE"
+              },
+              "type": "finish",
+              "why": "All target effects have an executable minimum-cost capability plan."
+            },
+            "result": {
+              "summary": "PLAIN_GOAL_COMPLETE",
+              "type": "finish"
+            }
+          }
+        ]
+      },
+      "step_id": "execute-fresh-plain-goal",
+      "step_index": 1
     }
   ],
   "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_PLAIN_GOAL_BARCODE_003.json",
-  "mission_sha256": "a32947cb6290dbfa641629d8a9e3c7c722c03e0ad5961ccf4e89f6e27f34ae5f",
-  "next_step": 1,
+  "mission_sha256": "28611e153db31083f8c90d931104fbb3b94df7316dc8a942e723d9d769e052b3",
+  "next_step": 2,
   "rehydrations": [
     {
       "at_utc": "2026-09-24T23:02:42.997879+00:00",
@@ -59,10 +207,31 @@
           "step_index": 0
         }
       ]
+    },
+    {
+      "at_utc": "2026-09-24T23:38:01.425220+00:00",
+      "before_step": 1,
+      "steps": [
+        {
+          "completed_at_utc": "2026-09-24T23:38:01.425205+00:00",
+          "ok": true,
+          "rehydration": true,
+          "result": {
+            "adapter": "shell",
+            "command": "set -euo pipefail\npython canonical/tests/test_goal_compiler.py",
+            "duration_s": 0.189,
+            "returncode": 0,
+            "stderr": "test_barcode_goal_selects_verified_barcode_not_qr (__main__.GoalCompilerTests.test_barcode_goal_selects_verified_barcode_not_qr) ... ok\ntest_plain_image_only_pdf_goal_selects_verified_ocr (__main__.GoalCompilerTests.test_plain_image_only_pdf_goal_selects_verified_ocr) ... ok\ntest_plain_qr_goal_selects_verified_qr_and_binds_arguments (__main__.GoalCompilerTests.test_plain_qr_goal_selects_verified_qr_and_binds_arguments) ... ok\ntest_unknown_goal_fails_closed (__main__.GoalCompilerTests.test_unknown_goal_fails_closed) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.003s\n\nOK\n",
+            "stdout": ""
+          },
+          "step_id": "run-goal-compiler-regressions",
+          "step_index": 0
+        }
+      ]
     }
   ],
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
-  "status": "BLOCKED",
-  "updated_at_utc": "2026-09-24T23:04:07.783520+00:00"
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-24T23:38:09.457963+00:00"
 }

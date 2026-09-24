@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-24T23:38:09.459129+00:00",
+  "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_PLAIN_GOAL_BARCODE_003.json",
+  "mission_sha256": "28611e153db31083f8c90d931104fbb3b94df7316dc8a942e723d9d769e052b3",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "9f454bf913a5f43f51d2ae7de4522b820cf39c749d2fbb755a77f98baf71b23e",
+  "status": "COMPLETE",
+  "steps_completed": 2
+}
