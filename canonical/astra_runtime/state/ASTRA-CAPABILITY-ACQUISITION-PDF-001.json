@@ -1,0 +1,44 @@
+{
+  "blocker": {
+    "adapter": "shell",
+    "error": "VERIFICATION_FAILED",
+    "mission_id": "ASTRA-CAPABILITY-ACQUISITION-PDF-001",
+    "observed_at_utc": "2026-09-24T21:10:54.533241+00:00",
+    "result": {
+      "adapter": "shell",
+      "command": "python canonical/tests/test_capability_discovery.py && python canonical/tests/test_capability_planner.py",
+      "duration_s": 0.131,
+      "returncode": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/home/runner/work/brain/brain/canonical/tests/test_capability_discovery.py\", line 35, in <module>\n    \"isRequired\": true\n                  ^^^^\nNameError: name 'true' is not defined. Did you mean: 'True'?\n",
+      "stdout": ""
+    },
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "verify-discovery-ranking",
+    "step_index": 0
+  },
+  "created_at_utc": "2026-09-24T21:10:54.401842+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-24T21:10:54.533228+00:00",
+      "ok": false,
+      "result": {
+        "adapter": "shell",
+        "command": "python canonical/tests/test_capability_discovery.py && python canonical/tests/test_capability_planner.py",
+        "duration_s": 0.131,
+        "returncode": 1,
+        "stderr": "Traceback (most recent call last):\n  File \"/home/runner/work/brain/brain/canonical/tests/test_capability_discovery.py\", line 35, in <module>\n    \"isRequired\": true\n                  ^^^^\nNameError: name 'true' is not defined. Did you mean: 'True'?\n",
+        "stdout": ""
+      },
+      "step_id": "verify-discovery-ranking",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-CAPABILITY-ACQUISITION-PDF-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_CAPABILITY_ACQUISITION_PDF_001.json",
+  "mission_sha256": "bd31638800a3a359d9d843fa2a7e964e5872c57875cb1e3dc8544067de680a90",
+  "next_step": 0,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-24T21:10:54.533524+00:00"
+}

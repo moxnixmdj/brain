@@ -1,0 +1,17 @@
+{
+  "adapter": "shell",
+  "error": "VERIFICATION_FAILED",
+  "mission_id": "ASTRA-CAPABILITY-ACQUISITION-PDF-001",
+  "observed_at_utc": "2026-09-24T21:10:54.533241+00:00",
+  "result": {
+    "adapter": "shell",
+    "command": "python canonical/tests/test_capability_discovery.py && python canonical/tests/test_capability_planner.py",
+    "duration_s": 0.131,
+    "returncode": 1,
+    "stderr": "Traceback (most recent call last):\n  File \"/home/runner/work/brain/brain/canonical/tests/test_capability_discovery.py\", line 35, in <module>\n    \"isRequired\": true\n                  ^^^^\nNameError: name 'true' is not defined. Did you mean: 'True'?\n",
+    "stdout": ""
+  },
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "verify-discovery-ranking",
+  "step_index": 0
+}
