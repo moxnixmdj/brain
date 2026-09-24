@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-BOUND-QR-GENERIC-001",
+  "purpose": "Fresh verification that the QR capability works through the generic local CLI adapter, with no specialized QR adapter code.",
+  "goal": "Generate a PNG QR code for PROJECT BRAIN through the generic verified CLI adapter.",
+  "steps": [
+    {
+      "id": "verify-generic-cli-qr-binding",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 8,
+      "capability_problem": {
+        "initial_facts": [],
+        "target_effects": [
+          "image.qr.generate"
+        ],
+        "finish_summary": "GENERIC_BOUND_QR_COMPLETE",
+        "capabilities": [
+          {
+            "id": "generic-qrencode",
+            "requires": [],
+            "provides": [
+              "image.qr.generate"
+            ],
+            "cost": 1,
+            "action": {
+              "type": "invoke_capability",
+              "args": {
+                "capability_id": "image.qr.generate.qrencode",
+                "argv": [
+                  "qrencode",
+                  "-o",
+                  "canonical/astra_runtime/tmp/GENERIC_PROJECT_BRAIN_QR.png",
+                  "PROJECT BRAIN"
+                ],
+                "output_path": "canonical/astra_runtime/tmp/GENERIC_PROJECT_BRAIN_QR.png",
+                "output_prefix_hex": "89504e470d0a1a0a",
+                "timeout_s": 60
+              },
+              "expect": {
+                "type": "field_equals",
+                "field": "output_verified",
+                "value": true
+              }
+            }
+          }
+        ]
+      },
+      "verify": {
+        "type": "stdout_contains",
+        "text": "GENERIC_BOUND_QR_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "specialized_qr_adapter_used": false,
+    "generic_cli_adapter_required": true,
+    "package_metadata_hash_checked": true
+  }
+}
