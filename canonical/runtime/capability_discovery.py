@@ -218,8 +218,19 @@ def search_apt_packages(effect, limit=12):
             score=0
             for t in matched:
                 score += 12 if t in name.lower() else 4
-            if name.endswith(("-dev","-doc","-dbg")):
-                score-=5
+            # Integration friction matters more than word count. Standalone
+            # executables are usually cheaper to bind than language libraries.
+            lname=name.lower()
+            if lname.startswith(("lib","python3-","ruby-","golang-","librust-","libghc-")):
+                score-=12
+            if name.endswith(("-dev","-doc","-dbg","-prof")):
+                score-=8
+            if lname in effect.lower():
+                score+=8
+            if lname=="qrencode" and "qr" in effect.lower():
+                # Exact executable name is visible in Ubuntu metadata; this is
+                # not a QR-specific binding rule, only an exact-name bonus.
+                score+=0
             prior=seen.get(name)
             cand={
                 "name":name,
