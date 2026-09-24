@@ -56,7 +56,7 @@ def _bind_contract_inputs(goal,root,contract):
     return {"text":text,"output_path":paths[0][0]}
 
 
-def _select_candidate(discovery):
+def _viable_candidates(discovery):
     viable=[]
     for c in discovery.get("candidates",[]):
         if c.get("discovery_source")!="APT_CATALOG":
@@ -74,17 +74,13 @@ def _select_candidate(discovery):
         viable.append(c)
     if not viable:
         raise AutoAcquisitionFailure("NO_LOW_FRICTION_APT_CLI_CANDIDATE")
-    return viable[0]
+    return viable[:12]
 
 
 def dispatch(goal,mission_id,mission_path,root,discovery=None):
     root=pathlib.Path(root).resolve()
-    discovery=discovery or capability_discovery.search_all(goal,limit_per_source=12)
-    candidate=_select_candidate(discovery)
-    package=str(candidate["name"])
-    version=str(candidate["version"])
-    sha=str(candidate["archive_sha256"]).lower()
-    probe=apt_cli_probe.probe(package,version,sha,root)
+    discovery=discovery or capability_discovery.search_all(goal,limit_per_source=30)
+    candidates=_viable_candidates(discovery)
     diag_rel=f"canonical/astra_runtime/evidence/{mission_id}__AUTO_APT_CLI_ACQUISITION.json"
     diag_path=root/diag_rel
     diag_path.parent.mkdir(parents=True,exist_ok=True)
@@ -92,21 +88,50 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
       "schema":"PROJECT_BRAIN_AUTO_APT_CLI_ACQUISITION_EVIDENCE_V1",
       "mission_id":mission_id,
       "goal":goal,
-      "selected_supplier":candidate,
-      "probe":probe,
-      "status":"PROBED_CONTRACT_PENDING"
+      "status":"SUPPLIER_CONTRACT_RACE",
+      "attempts":[]
     }
-    diag_path.write_text(json.dumps(diagnostic,indent=2,sort_keys=True)+"\n",encoding="utf-8")
-    try:
-        contract=cli_contract_inference.infer_contract(probe,goal)
-    except Exception as exc:
-        diagnostic["status"]="CONTRACT_INFERENCE_FAILED"
-        diagnostic["contract_error"]=type(exc).__name__+":"+str(exc)
+    candidate=probe=contract=None
+    for cand in candidates:
+        attempt={"supplier":cand}
+        try:
+            pkg=str(cand["name"])
+            ver=str(cand["version"])
+            digest=str(cand["archive_sha256"]).lower()
+            pr=apt_cli_probe.probe(pkg,ver,digest,root)
+            attempt["probe"]=pr
+        except Exception as exc:
+            attempt["status"]="PROBE_FAILED"
+            attempt["error"]=type(exc).__name__+":"+str(exc)
+            diagnostic["attempts"].append(attempt)
+            diag_path.write_text(json.dumps(diagnostic,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+            continue
+        try:
+            ct=cli_contract_inference.infer_contract(pr,goal)
+        except Exception as exc:
+            attempt["status"]="CONTRACT_REJECTED"
+            attempt["error"]=type(exc).__name__+":"+str(exc)
+            diagnostic["attempts"].append(attempt)
+            diag_path.write_text(json.dumps(diagnostic,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+            continue
+        attempt["status"]="CONTRACT_ACCEPTED"
+        attempt["contract"]=ct
+        diagnostic["attempts"].append(attempt)
+        candidate,probe,contract=cand,pr,ct
+        break
+    if candidate is None:
+        diagnostic["status"]="NO_COMPATIBLE_CONTRACT"
         diag_path.write_text(json.dumps(diagnostic,indent=2,sort_keys=True)+"\n",encoding="utf-8")
-        raise
+        summary=[{"name":a.get("supplier",{}).get("name"),"status":a.get("status"),"error":a.get("error")} for a in diagnostic["attempts"]]
+        raise AutoAcquisitionFailure("NO_COMPATIBLE_APT_CLI_CONTRACT",json.dumps(summary,sort_keys=True)[:3000])
     diagnostic["status"]="CONTRACT_INFERRED"
+    diagnostic["selected_supplier"]=candidate
+    diagnostic["probe"]=probe
     diagnostic["contract"]=contract
     diag_path.write_text(json.dumps(diagnostic,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+    package=str(candidate["name"])
+    version=str(candidate["version"])
+    sha=str(candidate["archive_sha256"]).lower()
     inputs=_bind_contract_inputs(goal,root,contract)
     argv=_render(contract["argv_template"],inputs)
     verification_args={
