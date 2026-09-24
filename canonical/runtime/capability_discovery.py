@@ -212,7 +212,8 @@ def search_apt_packages(effect, limit=12):
             name,description=line.split(" - ",1)
             name=name.strip(); description=description.strip()
             blob=(name+" "+description).lower()
-            matched={t for t in effect_tokens if t in blob}
+            blob_tokens=set(re.findall(r"[a-z0-9]+",blob))
+            matched={t for t in effect_tokens if t in blob_tokens}
             if not matched:
                 continue
             score=0
@@ -222,7 +223,7 @@ def search_apt_packages(effect, limit=12):
             # executables are usually cheaper to bind than language libraries.
             lname=name.lower()
             integration_friction=0
-            if lname.startswith(("python3-","ruby-","golang-")):
+            if lname.startswith(("python3-","ruby-","golang-","php-","php")):
                 integration_friction=2
                 score-=10
             if lname.startswith(("lib","librust-","libghc-")):
