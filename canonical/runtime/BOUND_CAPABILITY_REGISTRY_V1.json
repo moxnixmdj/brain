@@ -146,18 +146,25 @@
         "Requires a Linux substrate with apt and sudo rights for first-time package installation.",
         "Generates PNG QR codes from text using qrencode."
       ],
-      "adapter_module": "qr_qrencode",
+      "adapter_module": "cli_command",
       "entrypoint": "run",
       "action_template": {
         "type": "invoke_capability",
         "args": {
           "capability_id": "image.qr.generate.qrencode",
-          "text": "${input.text}",
-          "output_path": "${input.output_path}"
+          "argv": [
+            "qrencode",
+            "-o",
+            "${input.output_path}",
+            "${input.text}"
+          ],
+          "output_path": "${input.output_path}",
+          "output_prefix_hex": "89504e470d0a1a0a",
+          "timeout_s": 60
         },
         "expect": {
           "type": "field_equals",
-          "field": "png_signature_valid",
+          "field": "output_verified",
           "value": true
         }
       },
@@ -173,7 +180,7 @@
         ]
       },
       "incremental_spend_usd": 0,
-      "status": "VERIFIED_BOUND_CAPABILITY",
+      "status": "BOUND_PENDING_RUNTIME_VERIFICATION",
       "discovery_evidence": [
         "canonical/astra_runtime/evidence/ASTRA-RUNTIME-PLAIN-GOAL-QR-001__PLAIN_GOAL_CAPABILITY_DISCOVERY.json",
         "canonical/astra_runtime/evidence/ASTRA-QR-APT-SUPPLIER-PROBE-001__RESULT.json"
@@ -207,7 +214,9 @@
             }
           ]
         }
-      }
+      },
+      "previous_specialized_adapter": "qr_qrencode",
+      "verification_superseded_by_generic_adapter": true
     }
   }
 }
