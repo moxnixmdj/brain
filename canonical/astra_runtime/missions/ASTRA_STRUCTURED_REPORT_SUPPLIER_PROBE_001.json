@@ -7,7 +7,7 @@
     {
       "id": "probe-jq-pandoc",
       "adapter": "shell",
-      "command": "set -euo pipefail\nfor P in jq pandoc; do\n  echo ===$P_POLICY===\n  apt-cache policy \"$P\" || true\n  echo ===$P_SHOW===\n  apt-cache show \"$P\" 2>/dev/null | grep -E '^(Package|Version|SHA256|Description):' | head -n 20 || true\ndone\necho ===JQ_HELP===\n(jq --help || true) | head -n 100\necho ===PANDOC_HELP===\n(pandoc --help || true) | head -n 120\necho STRUCTURED_REPORT_SUPPLIER_PROBE_COMPLETE",
+      "command": "set -euo pipefail\nfor P in jq pandoc; do\n  echo ===${P}_POLICY===\n  apt-cache policy \"$P\" || true\n  echo ===${P}_SHOW===\n  apt-cache show \"$P\" 2>/dev/null | grep -E '^(Package|Version|SHA256|Description):' | head -n 20 || true\ndone\necho ===JQ_HELP===\n(jq --help || true) | head -n 100\necho ===PANDOC_HELP===\n(pandoc --help || true) | head -n 120\necho STRUCTURED_REPORT_SUPPLIER_PROBE_COMPLETE",
       "verify": {
         "type": "stdout_contains",
         "text": "STRUCTURED_REPORT_SUPPLIER_PROBE_COMPLETE"
@@ -17,6 +17,7 @@
   "constraints": {
     "incremental_spend_usd": 0,
     "read_only_discovery": true,
-    "model_controller_required": false
+    "model_controller_required": false,
+    "replay_after_shell_probe_fix": true
   }
 }
