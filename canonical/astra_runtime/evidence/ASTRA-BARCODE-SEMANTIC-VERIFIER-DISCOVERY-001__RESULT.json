@@ -1,0 +1,2604 @@
+{
+  "binding_performed": false,
+  "candidates": [
+    {
+      "archive_sha256": "cfda4a63c84333f24a72d43ceec5f0a29af27841d21e4a501a6382fb18a0f336",
+      "binding_kind": "apt",
+      "description": "Utility for barcode generation",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "barcode"
+      ],
+      "name": "barcode",
+      "packages": [],
+      "query": "barcode",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 40,
+      "version": "0.99-7",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "fd7cdc2da677c74b48ab59a993e73bce4c7ed9336561816f2cb416b5d7d71918",
+      "binding_kind": "apt",
+      "description": "decode the binary EDID information from monitors",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "decode"
+      ],
+      "name": "edid-decode",
+      "packages": [],
+      "query": "decode",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 32,
+      "version": "0.1~git20220315.cb74358c2896-1.1",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "db107d7652eb37680788a6567a58c9a6db10fcad8df05db4009464cb405122de",
+      "binding_kind": "apt",
+      "description": "base 16/32/64 encode/decode data to standard output",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "decode"
+      ],
+      "name": "basez",
+      "packages": [],
+      "query": "decode",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 18,
+      "version": "1.6.2-3",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "d7b31f464429add360d8f0cb938466d76abc3ca224306a78cf15ff37e7cba5ff",
+      "binding_kind": "apt",
+      "description": "tool to decode/encode the sample catalogue for OpenTTD",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "decode"
+      ],
+      "name": "catcodec",
+      "packages": [],
+      "query": "decode",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 18,
+      "version": "1.0.5-4",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "76dcb71604dfd21859aa8f6b94c8ff14c349340cc86cd3d87e95a63c53adf8d2",
+      "binding_kind": "apt",
+      "description": "Common Lisp package to encode and decode base64 with URI support",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "decode"
+      ],
+      "name": "cl-base64",
+      "packages": [],
+      "query": "decode",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 18,
+      "version": "3.4.0-1",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "22886a672d362f0ca8adf0ea7f1f7662650a1d5502f383252c3362988b45415c",
+      "binding_kind": "apt",
+      "description": "decode raw digital camera images",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "decode"
+      ],
+      "name": "dcraw",
+      "packages": [],
+      "query": "decode",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 18,
+      "version": "9.28-5ubuntu1",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "42ec70109217389e1588730c201cfd2bd26c6e6923c76c19e0423091e6be52e0",
+      "binding_kind": "apt",
+      "description": "decode DMARC reports",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "decode"
+      ],
+      "name": "dmarc-cat",
+      "packages": [],
+      "query": "decode",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 18,
+      "version": "0.15.0-1ubuntu0.24.04.3",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "aaa22111daf242dd0eddfb474b63446dac960c74ad02493266f05e1416f3b038",
+      "binding_kind": "apt",
+      "description": "Utility that can decode dnstap encoded files",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "decode"
+      ],
+      "name": "dnstap-ldns",
+      "packages": [],
+      "query": "decode",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 18,
+      "version": "0.2.1-1build2",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "3f92bd9fcaa2027ca7f311b4e52a1d97fee977cdf10e0ef644431729dc8fc077",
+      "binding_kind": "apt",
+      "description": "Check digit validator for EAN/PLU/UPC barcode numbers",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "barcode"
+      ],
+      "name": "eancheck",
+      "packages": [],
+      "query": "barcode",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 18,
+      "version": "1.0-2build1",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "dd99fb73bb32e2d28af54b74a8378c89e527b62915167563fc92cc90586ffd4d",
+      "binding_kind": "apt",
+      "description": "estimate PCR barcode primers quality",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "barcode"
+      ],
+      "name": "ecopcr",
+      "packages": [],
+      "query": "barcode",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 18,
+      "version": "1.0.1+dfsg-4",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "56e03f7049dae65dd5e91c647e7cc4cfc3e519c06d080798635acfc1f4a59998",
+      "binding_kind": "apt",
+      "description": "flexible barcode and adapter removal for sequencing platforms",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "barcode"
+      ],
+      "name": "flexbar",
+      "packages": [],
+      "query": "barcode",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 18,
+      "version": "1:3.5.0-5",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "8967697d74df1fba7e87aa3f1b08bc1f21c521c73ffa9d58c576a53c2c813efd",
+      "binding_kind": "apt",
+      "description": "Pure Javascript implementation of deflate, unzip, base64_decode",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "decode"
+      ],
+      "name": "jsxcompressor",
+      "packages": [],
+      "query": "decode",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 18,
+      "version": "1.7.0+dfsg2-1",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "3fce810fa15bc72f169f9e5eae86a0d836c6344fdbbaa47d797500366593026c",
+      "binding_kind": "apt",
+      "description": "utility to download/decode METAR reports",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "decode"
+      ],
+      "name": "metar",
+      "packages": [],
+      "query": "decode",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 18,
+      "version": "20190227.1-1build2",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "9231ef0561ae0cbd06b867aac5ec357be2942374f573a377ca33bea217ea3a1e",
+      "binding_kind": "apt",
+      "description": "Node.js module to encode and decode XML/HTML entities with ease",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "decode"
+      ],
+      "name": "node-entities",
+      "packages": [],
+      "query": "decode",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 18,
+      "version": "4.5.0+dfsg-1",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "73c397eb533b4a1aa2859b627be425610dc7411a5d228ebf9a135558d160410b",
+      "binding_kind": "apt",
+      "description": "Encode/decode sourcemap mappings",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "decode"
+      ],
+      "name": "node-sourcemap-codec",
+      "packages": [],
+      "query": "decode",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 18,
+      "version": "1.4.8-7",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "121aeb9547d21f4c94a77c17db75b85e68fac8c6389305968eacc38dc5dec3e7",
+      "binding_kind": "apt",
+      "description": "Encode and decode streams into string streams",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "decode"
+      ],
+      "name": "node-stringstream",
+      "packages": [],
+      "query": "decode",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 18,
+      "version": "1.0.0-2",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "ab76b5c103f1a91e0a43d74663bc07c6d029b19cc9b21e4bc9a10410f0865afd",
+      "binding_kind": "apt",
+      "description": "barcode API for Qt",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "barcode"
+      ],
+      "name": "qml-module-org-kde-prison",
+      "packages": [],
+      "query": "barcode",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 18,
+      "version": "5.115.0-0ubuntu5",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "13c1abdb03ebcad83b2a3a745bdb9bb7ee46016025527676e7e6b10eeb479865",
+      "binding_kind": "apt",
+      "description": "GNU R interface to Bold Systems for genetic barcode data",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "barcode"
+      ],
+      "name": "r-cran-bold",
+      "packages": [],
+      "query": "barcode",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 18,
+      "version": "1.3.0-1",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "b30eaa0fa915b36f8a31c50a0c01854cd3e80a7324018c260e8e1a22cffd4ec8",
+      "binding_kind": "apt",
+      "description": "Video Decode and Presentation API for Unix (driver metapackage)",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "decode"
+      ],
+      "name": "vdpau-driver-all",
+      "packages": [],
+      "query": "decode",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 18,
+      "version": "1.5-2build1",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769",
+      "binding_kind": "apt",
+      "description": "command line utility to encode data in barcode symbols",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "barcode"
+      ],
+      "name": "zint",
+      "packages": [],
+      "query": "barcode",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 18,
+      "version": "2.13.0-1build3",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "869908686b1df48db14b3420be8e1a0ce060677263c222eb3f6265de706501fc",
+      "binding_kind": "apt",
+      "description": "Zint Barcode Studio, a QT frontend to zint",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "barcode"
+      ],
+      "name": "zint-qt",
+      "packages": [],
+      "query": "barcode",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 18,
+      "version": "2.13.0-1build3",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "b96021de4968d7ee1763f205fdab4d634f4713a305ff9dbbd4c8f124e64cea2c",
+      "binding_kind": "apt",
+      "description": "Caja extension to mass resize or rotate images",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "image"
+      ],
+      "name": "caja-image-converter",
+      "packages": [],
+      "query": "image",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 14,
+      "version": "1.26.1-2",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "c4203167b5f2ccc8d7e2ff66f6ed5bb55d1ce467511d27732b91e1389e15cd9e",
+      "binding_kind": "apt",
+      "description": "cloud image management utilities",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "image"
+      ],
+      "name": "cloud-image-utils",
+      "packages": [],
+      "query": "image",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 14,
+      "version": "0.33-1",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "ccf485bbc4565a3166e560296cb7fc15200fb61e0fb0320895f2cba5ece03ec7",
+      "binding_kind": "apt",
+      "description": "Containerd snapshotter for overlaybd image format",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "image"
+      ],
+      "name": "containerd-accelerated-container-image",
+      "packages": [],
+      "query": "image",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 14,
+      "version": "1.4.4-ubuntu24.04u9",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "ea90c790f5cc20ae96e41041e754fa76f96db8db6eb9b1e97ae1bacb2800fd57",
+      "binding_kind": "apt",
+      "description": "Image Viewer for Deepin Desktop Environment",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "image"
+      ],
+      "name": "deepin-image-viewer",
+      "packages": [],
+      "query": "image",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 14,
+      "version": "5.8.2-2build5",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "49b07dd9639899a701581c9a4ce61cadab679c452f9bca20b11b57d8baf84c3e",
+      "binding_kind": "apt",
+      "description": "transitional dummy package",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "image"
+      ],
+      "name": "gce-compute-image-packages",
+      "packages": [],
+      "query": "image",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 14,
+      "version": "20260819.00-0ubuntu1~24.04.0",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "dceb9e743e78616000ac3b135e3505fffff7945c6e6cd6094cfda9cd803b699b",
+      "binding_kind": "apt",
+      "description": "Signed kernel image gke",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "image"
+      ],
+      "name": "linux-image-6.8.0-1003-gke",
+      "packages": [],
+      "query": "image",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 14,
+      "version": "6.8.0-1003.5",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "1724e64b4a9c9835340c7db47228bf3cd83b5e05c010f90d62691a59742eda26",
+      "binding_kind": "apt",
+      "description": "Signed kernel image ibm",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "image"
+      ],
+      "name": "linux-image-6.8.0-1005-ibm",
+      "packages": [],
+      "query": "image",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 14,
+      "version": "6.8.0-1005.5",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "002b666d5150806d9c721db0e93a2e93a2e810fd4e1e3fe536d4579c71d9b03d",
+      "binding_kind": "apt",
+      "description": "Signed kernel image oem",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "image"
+      ],
+      "name": "linux-image-6.8.0-1005-oem",
+      "packages": [],
+      "query": "image",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 14,
+      "version": "6.8.0-1005.5",
+      "zero_cost_eligible": true
+    },
+    {
+      "archive_sha256": "86c75352fd92f472eea15db3edb26686c13979bbfca28ef38e178cb52d2900cf",
+      "binding_kind": "apt",
+      "description": "Signed kernel image oracle",
+      "discovery_source": "APT_CATALOG",
+      "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+      "integration_friction": 0,
+      "matched_terms": [
+        "image"
+      ],
+      "name": "linux-image-6.8.0-1005-oracle",
+      "packages": [],
+      "query": "image",
+      "remotes": [],
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 14,
+      "version": "6.8.0-1005.5",
+      "zero_cost_eligible": true
+    },
+    {
+      "description": "MCP server for programmatic image comparison and visual diff generation.",
+      "discovery_source": "OFFICIAL_MCP_REGISTRY",
+      "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+      "is_latest": true,
+      "live_probe_required": true,
+      "name": "com.pulsemcp/image-diff",
+      "packages": [
+        {
+          "identifier": "@pulsemcp/image-diff-mcp-server",
+          "registry_type": "npm",
+          "required_environment": [],
+          "runtime_hint": "npx",
+          "secret_environment": [],
+          "transport": {
+            "type": "stdio"
+          },
+          "version": "0.1.3"
+        }
+      ],
+      "query": "image",
+      "remotes": [],
+      "repository": {
+        "source": "github",
+        "subfolder": "productionized/image-diff",
+        "url": "https://github.com/pulsemcp/mcp-servers"
+      },
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 18,
+      "status": "active",
+      "version": "0.1.3",
+      "zero_cost_eligible": true
+    },
+    {
+      "description": "Compress, convert and resize images locally, with marketplace presets and rule rechecks.",
+      "discovery_source": "OFFICIAL_MCP_REGISTRY",
+      "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+      "is_latest": true,
+      "live_probe_required": true,
+      "name": "com.yaktool/image",
+      "packages": [
+        {
+          "identifier": "yaktool-image-mcp",
+          "registry_type": "npm",
+          "required_environment": [],
+          "runtime_hint": null,
+          "secret_environment": [],
+          "transport": {
+            "type": "stdio"
+          },
+          "version": "0.2.0"
+        }
+      ],
+      "query": "image",
+      "remotes": [],
+      "repository": null,
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 18,
+      "status": "active",
+      "version": "0.2.0",
+      "zero_cost_eligible": true
+    },
+    {
+      "description": "Audit a web page's images: natural vs rendered sizes, oversized detection, and formats.",
+      "discovery_source": "OFFICIAL_MCP_REGISTRY",
+      "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+      "is_latest": true,
+      "live_probe_required": true,
+      "name": "io.github.Bishop81/imagedimensions-mcp",
+      "packages": [
+        {
+          "identifier": "imagedimensions-mcp",
+          "registry_type": "npm",
+          "required_environment": [],
+          "runtime_hint": null,
+          "secret_environment": [],
+          "transport": {
+            "type": "stdio"
+          },
+          "version": "0.1.2"
+        }
+      ],
+      "query": "image",
+      "remotes": [],
+      "repository": {
+        "source": "github",
+        "url": "https://github.com/Bishop81/imagedimensions-mcp"
+      },
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 18,
+      "status": "active",
+      "version": "0.1.2",
+      "zero_cost_eligible": true
+    },
+    {
+      "description": "Image Metadata Ai MCP Server by MEOK AI Labs",
+      "discovery_source": "OFFICIAL_MCP_REGISTRY",
+      "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+      "is_latest": true,
+      "live_probe_required": true,
+      "name": "io.github.CSOAI-ORG/image-metadata-ai-mcp",
+      "packages": [
+        {
+          "identifier": "image-metadata-ai-mcp",
+          "registry_type": "pypi",
+          "required_environment": [],
+          "runtime_hint": "python",
+          "secret_environment": [],
+          "transport": {
+            "type": "stdio"
+          },
+          "version": "1.0.11"
+        }
+      ],
+      "query": "image",
+      "remotes": [],
+      "repository": {
+        "source": "github",
+        "url": "https://github.com/CSOAI-ORG/image-metadata-ai-mcp"
+      },
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 18,
+      "status": "active",
+      "version": "1.0.11",
+      "zero_cost_eligible": true
+    },
+    {
+      "description": "Generate EAN-13 and Code-128 barcodes locally and return SVG data. No network and no key.",
+      "discovery_source": "OFFICIAL_MCP_REGISTRY",
+      "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+      "is_latest": true,
+      "live_probe_required": true,
+      "name": "io.github.mrfentmen/barcode-mcp",
+      "packages": [
+        {
+          "identifier": "barcode-mcp",
+          "registry_type": "npm",
+          "required_environment": [],
+          "runtime_hint": null,
+          "secret_environment": [],
+          "transport": {
+            "type": "stdio"
+          },
+          "version": "1.0.1"
+        }
+      ],
+      "query": "barcode",
+      "remotes": [],
+      "repository": {
+        "source": "github",
+        "url": "https://github.com/mrfentmen/barcode-mcp"
+      },
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 18,
+      "status": "active",
+      "version": "1.0.1",
+      "zero_cost_eligible": true
+    },
+    {
+      "description": "Decode a vehicle identification number into make, model, and year. No key required.",
+      "discovery_source": "OFFICIAL_MCP_REGISTRY",
+      "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+      "is_latest": true,
+      "live_probe_required": true,
+      "name": "io.github.mrfentmen/vin-decoder-mcp",
+      "packages": [
+        {
+          "identifier": "vin-decoder-mcp",
+          "registry_type": "npm",
+          "required_environment": [],
+          "runtime_hint": null,
+          "secret_environment": [],
+          "transport": {
+            "type": "stdio"
+          },
+          "version": "1.0.0"
+        }
+      ],
+      "query": "decode",
+      "remotes": [],
+      "repository": {
+        "source": "github",
+        "url": "https://github.com/mrfentmen/vin-decoder-mcp"
+      },
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 18,
+      "status": "active",
+      "version": "1.0.0",
+      "zero_cost_eligible": true
+    },
+    {
+      "description": "MCP server that decodes V8 CPU profiles into token-efficient bottleneck summaries for AI agents",
+      "discovery_source": "OFFICIAL_MCP_REGISTRY",
+      "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+      "is_latest": true,
+      "live_probe_required": true,
+      "name": "io.github.vola-trebla/v8-cpu-profile-decoder-mcp",
+      "packages": [
+        {
+          "identifier": "v8-cpu-profile-decoder-mcp",
+          "registry_type": "npm",
+          "required_environment": [],
+          "runtime_hint": null,
+          "secret_environment": [],
+          "transport": {
+            "type": "stdio"
+          },
+          "version": "0.3.0"
+        }
+      ],
+      "query": "decode",
+      "remotes": [],
+      "repository": {
+        "source": "github",
+        "url": "https://github.com/vola-trebla/v8-cpu-profile-decoder-mcp"
+      },
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 18,
+      "status": "active",
+      "version": "0.3.0",
+      "zero_cost_eligible": true
+    },
+    {
+      "description": "Scan and generate barcodes and QR codes.",
+      "discovery_source": "OFFICIAL_MCP_REGISTRY",
+      "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+      "is_latest": true,
+      "live_probe_required": true,
+      "name": "io.github.domdomegg/barcode-scanner-mcp",
+      "packages": [
+        {
+          "identifier": "barcode-scanner-mcp",
+          "registry_type": "npm",
+          "required_environment": [],
+          "runtime_hint": "npx",
+          "secret_environment": [],
+          "transport": {
+            "type": "stdio"
+          },
+          "version": "1.2.0"
+        },
+        {
+          "identifier": "barcode-scanner-mcp",
+          "registry_type": "npm",
+          "required_environment": [
+            "MCP_TRANSPORT"
+          ],
+          "runtime_hint": "npx",
+          "secret_environment": [],
+          "transport": {
+            "type": "streamable-http",
+            "url": "http://localhost:3000/mcp"
+          },
+          "version": "1.2.0"
+        }
+      ],
+      "query": "barcode",
+      "remotes": [],
+      "repository": {
+        "source": "github",
+        "url": "https://github.com/domdomegg/barcode-scanner-mcp.git"
+      },
+      "required_environment_count": 1,
+      "required_secret_count": 0,
+      "score": 17,
+      "status": "active",
+      "version": "1.2.0",
+      "zero_cost_eligible": true
+    },
+    {
+      "description": "Image processing for AI agents: resize, convert, compress, crop, and web-ready AI-generated images.",
+      "discovery_source": "OFFICIAL_MCP_REGISTRY",
+      "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+      "is_latest": true,
+      "live_probe_required": true,
+      "name": "ai.pictomancer/image-processing",
+      "packages": [],
+      "query": "image",
+      "remotes": [
+        {
+          "required_headers": [],
+          "type": "streamable-http",
+          "url": "https://api.pictomancer.ai/mcp"
+        }
+      ],
+      "repository": {
+        "source": "gitlab",
+        "url": "https://gitlab.com/pictomancer.ai/pig-gateway"
+      },
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 15,
+      "status": "active",
+      "version": "0.4.0",
+      "zero_cost_eligible": true
+    },
+    {
+      "description": "Generate marketing images, videos and audios for campaigns, product content, and brand assets.",
+      "discovery_source": "OFFICIAL_MCP_REGISTRY",
+      "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+      "is_latest": true,
+      "live_probe_required": true,
+      "name": "ai.saifs/media-generator-images-videos",
+      "packages": [],
+      "query": "image",
+      "remotes": [
+        {
+          "required_headers": [],
+          "type": "streamable-http",
+          "url": "https://mcp.saifs.ai/mcp"
+        }
+      ],
+      "repository": null,
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 15,
+      "status": "active",
+      "version": "1.0.0",
+      "zero_cost_eligible": true
+    },
+    {
+      "description": "Analyze images and videos with Gemini to get fast, reliable visual insights. Handle content from U\u2026",
+      "discovery_source": "OFFICIAL_MCP_REGISTRY",
+      "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+      "is_latest": true,
+      "live_probe_required": true,
+      "name": "ai.smithery/Artin0123-gemini-image-mcp-server",
+      "packages": [],
+      "query": "image",
+      "remotes": [
+        {
+          "required_headers": [
+            "Authorization"
+          ],
+          "type": "streamable-http",
+          "url": "https://server.smithery.ai/@Artin0123/gemini-image-mcp-server/mcp"
+        }
+      ],
+      "repository": {
+        "source": "github",
+        "url": "https://github.com/Artin0123/gemini-vision-mcp"
+      },
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 15,
+      "status": "active",
+      "version": "1.4.3",
+      "zero_cost_eligible": true
+    },
+    {
+      "description": "Diagrams, badges, charts and QR codes as plain image URLs you can paste into Markdown.",
+      "discovery_source": "OFFICIAL_MCP_REGISTRY",
+      "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+      "is_latest": true,
+      "live_probe_required": true,
+      "name": "com.ainetcafe/netcafe-images",
+      "packages": [],
+      "query": "image",
+      "remotes": [
+        {
+          "required_headers": [],
+          "type": "streamable-http",
+          "url": "https://ainetcafe.com/mcp/img?s=registry"
+        }
+      ],
+      "repository": {
+        "source": "github",
+        "url": "https://github.com/mario03690/ai-netcafe"
+      },
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 15,
+      "status": "active",
+      "version": "1.0.0",
+      "zero_cost_eligible": true
+    },
+    {
+      "description": "Decode an SSTV audio recording and anchor its fingerprint and image hash to the Knox event chain.",
+      "discovery_source": "OFFICIAL_MCP_REGISTRY",
+      "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+      "is_latest": true,
+      "live_probe_required": true,
+      "name": "com.bonissystems/sstv-decoder",
+      "packages": [],
+      "query": "decode",
+      "remotes": [
+        {
+          "required_headers": [],
+          "type": "streamable-http",
+          "url": "https://bonissystems.com/api/knox/agents/sstv-decoder/mcp"
+        }
+      ],
+      "repository": null,
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 15,
+      "status": "active",
+      "version": "1.0.0",
+      "zero_cost_eligible": true
+    },
+    {
+      "description": "Automatic image/video face detection, blur/redaction, and de-identification by NoonAI DIS.",
+      "discovery_source": "OFFICIAL_MCP_REGISTRY",
+      "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+      "is_latest": true,
+      "live_probe_required": true,
+      "name": "com.dyndns-server.noon-ai/image-video-anonymization-mcp",
+      "packages": [],
+      "query": "image",
+      "remotes": [
+        {
+          "required_headers": [],
+          "type": "streamable-http",
+          "url": "https://noon-ai.dyndns-server.com/image-video-anonymization-mcp"
+        }
+      ],
+      "repository": null,
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 15,
+      "status": "active",
+      "version": "0.1.12",
+      "zero_cost_eligible": true
+    },
+    {
+      "description": "Resize, compress, convert, watermark and SEO-tag e-commerce product images from a public URL.",
+      "discovery_source": "OFFICIAL_MCP_REGISTRY",
+      "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+      "is_latest": true,
+      "live_probe_required": true,
+      "name": "com.ecommerceimageoptimizer/image-optimizer",
+      "packages": [],
+      "query": "image",
+      "remotes": [
+        {
+          "required_headers": [],
+          "type": "streamable-http",
+          "url": "https://ecommerceimageoptimizer.com/api/mcp"
+        }
+      ],
+      "repository": {
+        "source": "github",
+        "url": "https://github.com/brkmehdi/ImageOptimizerforEcom"
+      },
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 15,
+      "status": "active",
+      "version": "1.0.0",
+      "zero_cost_eligible": true
+    },
+    {
+      "description": "Google Image Search: Fast and Simple Google Images Search API. You can get 100+ search results in.",
+      "discovery_source": "OFFICIAL_MCP_REGISTRY",
+      "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+      "is_latest": true,
+      "live_probe_required": true,
+      "name": "com.jojapi/google-image-search",
+      "packages": [],
+      "query": "image",
+      "remotes": [
+        {
+          "required_headers": [],
+          "type": "streamable-http",
+          "url": "https://mcp.jojapi.com/google-image-search"
+        }
+      ],
+      "repository": null,
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 15,
+      "status": "active",
+      "version": "1.0.0",
+      "zero_cost_eligible": true
+    },
+    {
+      "description": "Image Search: Fast and Simple Image Search API. You can get 100+ search results in one query!.",
+      "discovery_source": "OFFICIAL_MCP_REGISTRY",
+      "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+      "is_latest": true,
+      "live_probe_required": true,
+      "name": "com.jojapi/joj-image-search",
+      "packages": [],
+      "query": "image",
+      "remotes": [
+        {
+          "required_headers": [],
+          "type": "streamable-http",
+          "url": "https://mcp.jojapi.com/joj-image-search"
+        }
+      ],
+      "repository": null,
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 15,
+      "status": "active",
+      "version": "1.0.0",
+      "zero_cost_eligible": true
+    },
+    {
+      "description": "Product Barcode API - camgoz.net: Provides information on products available in markets across.",
+      "discovery_source": "OFFICIAL_MCP_REGISTRY",
+      "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+      "is_latest": true,
+      "live_probe_required": true,
+      "name": "com.jojapi/product-barcode-api",
+      "packages": [],
+      "query": "barcode",
+      "remotes": [
+        {
+          "required_headers": [],
+          "type": "streamable-http",
+          "url": "https://mcp.jojapi.com/product-barcode-api"
+        }
+      ],
+      "repository": null,
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 15,
+      "status": "active",
+      "version": "1.0.0",
+      "zero_cost_eligible": true
+    },
+    {
+      "description": "Social cards and OG images from designed templates: card from a URL, presets, meta tags, link checks",
+      "discovery_source": "OFFICIAL_MCP_REGISTRY",
+      "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+      "is_latest": true,
+      "live_probe_required": true,
+      "name": "io.betterimage/betterimage",
+      "packages": [],
+      "query": "image",
+      "remotes": [
+        {
+          "required_headers": [],
+          "type": "streamable-http",
+          "url": "https://betterimage.io/mcp"
+        }
+      ],
+      "repository": {
+        "source": "github",
+        "url": "https://github.com/mfundakowski/betterimage-mcp"
+      },
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 15,
+      "status": "active",
+      "version": "1.1.0",
+      "zero_cost_eligible": true
+    },
+    {
+      "description": "Decode, render, validate barcodes: QR, DataMatrix, EAN, UPC, PDF417. All tools free, no auth.",
+      "discovery_source": "OFFICIAL_MCP_REGISTRY",
+      "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+      "is_latest": true,
+      "live_probe_required": true,
+      "name": "io.github.appvantagelabs2-a11y/barcode",
+      "packages": [],
+      "query": "barcode",
+      "remotes": [
+        {
+          "required_headers": [],
+          "type": "streamable-http",
+          "url": "https://mcp.casuyi.com/mcp"
+        }
+      ],
+      "repository": null,
+      "required_environment_count": 0,
+      "required_secret_count": 0,
+      "score": 15,
+      "status": "active",
+      "version": "1.0.2",
+      "zero_cost_eligible": true
+    }
+  ],
+  "effect": "decode barcode image",
+  "results": [
+    {
+      "binding_performed": false,
+      "candidate_count": 30,
+      "candidates": [
+        {
+          "archive_sha256": "cfda4a63c84333f24a72d43ceec5f0a29af27841d21e4a501a6382fb18a0f336",
+          "binding_kind": "apt",
+          "description": "Utility for barcode generation",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "barcode"
+          ],
+          "name": "barcode",
+          "packages": [],
+          "query": "barcode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 40,
+          "version": "0.99-7",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "fd7cdc2da677c74b48ab59a993e73bce4c7ed9336561816f2cb416b5d7d71918",
+          "binding_kind": "apt",
+          "description": "decode the binary EDID information from monitors",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "decode"
+          ],
+          "name": "edid-decode",
+          "packages": [],
+          "query": "decode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.1~git20220315.cb74358c2896-1.1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "db107d7652eb37680788a6567a58c9a6db10fcad8df05db4009464cb405122de",
+          "binding_kind": "apt",
+          "description": "base 16/32/64 encode/decode data to standard output",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "decode"
+          ],
+          "name": "basez",
+          "packages": [],
+          "query": "decode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.6.2-3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "d7b31f464429add360d8f0cb938466d76abc3ca224306a78cf15ff37e7cba5ff",
+          "binding_kind": "apt",
+          "description": "tool to decode/encode the sample catalogue for OpenTTD",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "decode"
+          ],
+          "name": "catcodec",
+          "packages": [],
+          "query": "decode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.0.5-4",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "76dcb71604dfd21859aa8f6b94c8ff14c349340cc86cd3d87e95a63c53adf8d2",
+          "binding_kind": "apt",
+          "description": "Common Lisp package to encode and decode base64 with URI support",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "decode"
+          ],
+          "name": "cl-base64",
+          "packages": [],
+          "query": "decode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "3.4.0-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "22886a672d362f0ca8adf0ea7f1f7662650a1d5502f383252c3362988b45415c",
+          "binding_kind": "apt",
+          "description": "decode raw digital camera images",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "decode"
+          ],
+          "name": "dcraw",
+          "packages": [],
+          "query": "decode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "9.28-5ubuntu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "42ec70109217389e1588730c201cfd2bd26c6e6923c76c19e0423091e6be52e0",
+          "binding_kind": "apt",
+          "description": "decode DMARC reports",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "decode"
+          ],
+          "name": "dmarc-cat",
+          "packages": [],
+          "query": "decode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.15.0-1ubuntu0.24.04.3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "aaa22111daf242dd0eddfb474b63446dac960c74ad02493266f05e1416f3b038",
+          "binding_kind": "apt",
+          "description": "Utility that can decode dnstap encoded files",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "decode"
+          ],
+          "name": "dnstap-ldns",
+          "packages": [],
+          "query": "decode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.2.1-1build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "3f92bd9fcaa2027ca7f311b4e52a1d97fee977cdf10e0ef644431729dc8fc077",
+          "binding_kind": "apt",
+          "description": "Check digit validator for EAN/PLU/UPC barcode numbers",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "barcode"
+          ],
+          "name": "eancheck",
+          "packages": [],
+          "query": "barcode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.0-2build1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "dd99fb73bb32e2d28af54b74a8378c89e527b62915167563fc92cc90586ffd4d",
+          "binding_kind": "apt",
+          "description": "estimate PCR barcode primers quality",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "barcode"
+          ],
+          "name": "ecopcr",
+          "packages": [],
+          "query": "barcode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.0.1+dfsg-4",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "56e03f7049dae65dd5e91c647e7cc4cfc3e519c06d080798635acfc1f4a59998",
+          "binding_kind": "apt",
+          "description": "flexible barcode and adapter removal for sequencing platforms",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "barcode"
+          ],
+          "name": "flexbar",
+          "packages": [],
+          "query": "barcode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1:3.5.0-5",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "8967697d74df1fba7e87aa3f1b08bc1f21c521c73ffa9d58c576a53c2c813efd",
+          "binding_kind": "apt",
+          "description": "Pure Javascript implementation of deflate, unzip, base64_decode",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "decode"
+          ],
+          "name": "jsxcompressor",
+          "packages": [],
+          "query": "decode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.7.0+dfsg2-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "3fce810fa15bc72f169f9e5eae86a0d836c6344fdbbaa47d797500366593026c",
+          "binding_kind": "apt",
+          "description": "utility to download/decode METAR reports",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "decode"
+          ],
+          "name": "metar",
+          "packages": [],
+          "query": "decode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "20190227.1-1build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "9231ef0561ae0cbd06b867aac5ec357be2942374f573a377ca33bea217ea3a1e",
+          "binding_kind": "apt",
+          "description": "Node.js module to encode and decode XML/HTML entities with ease",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "decode"
+          ],
+          "name": "node-entities",
+          "packages": [],
+          "query": "decode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "4.5.0+dfsg-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "73c397eb533b4a1aa2859b627be425610dc7411a5d228ebf9a135558d160410b",
+          "binding_kind": "apt",
+          "description": "Encode/decode sourcemap mappings",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "decode"
+          ],
+          "name": "node-sourcemap-codec",
+          "packages": [],
+          "query": "decode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.4.8-7",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "121aeb9547d21f4c94a77c17db75b85e68fac8c6389305968eacc38dc5dec3e7",
+          "binding_kind": "apt",
+          "description": "Encode and decode streams into string streams",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "decode"
+          ],
+          "name": "node-stringstream",
+          "packages": [],
+          "query": "decode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.0.0-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "ab76b5c103f1a91e0a43d74663bc07c6d029b19cc9b21e4bc9a10410f0865afd",
+          "binding_kind": "apt",
+          "description": "barcode API for Qt",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "barcode"
+          ],
+          "name": "qml-module-org-kde-prison",
+          "packages": [],
+          "query": "barcode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "5.115.0-0ubuntu5",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "13c1abdb03ebcad83b2a3a745bdb9bb7ee46016025527676e7e6b10eeb479865",
+          "binding_kind": "apt",
+          "description": "GNU R interface to Bold Systems for genetic barcode data",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "barcode"
+          ],
+          "name": "r-cran-bold",
+          "packages": [],
+          "query": "barcode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.3.0-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "b30eaa0fa915b36f8a31c50a0c01854cd3e80a7324018c260e8e1a22cffd4ec8",
+          "binding_kind": "apt",
+          "description": "Video Decode and Presentation API for Unix (driver metapackage)",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "decode"
+          ],
+          "name": "vdpau-driver-all",
+          "packages": [],
+          "query": "decode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.5-2build1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769",
+          "binding_kind": "apt",
+          "description": "command line utility to encode data in barcode symbols",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "barcode"
+          ],
+          "name": "zint",
+          "packages": [],
+          "query": "barcode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.13.0-1build3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "869908686b1df48db14b3420be8e1a0ce060677263c222eb3f6265de706501fc",
+          "binding_kind": "apt",
+          "description": "Zint Barcode Studio, a QT frontend to zint",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "barcode"
+          ],
+          "name": "zint-qt",
+          "packages": [],
+          "query": "barcode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.13.0-1build3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "b96021de4968d7ee1763f205fdab4d634f4713a305ff9dbbd4c8f124e64cea2c",
+          "binding_kind": "apt",
+          "description": "Caja extension to mass resize or rotate images",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "image"
+          ],
+          "name": "caja-image-converter",
+          "packages": [],
+          "query": "image",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 14,
+          "version": "1.26.1-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c4203167b5f2ccc8d7e2ff66f6ed5bb55d1ce467511d27732b91e1389e15cd9e",
+          "binding_kind": "apt",
+          "description": "cloud image management utilities",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "image"
+          ],
+          "name": "cloud-image-utils",
+          "packages": [],
+          "query": "image",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 14,
+          "version": "0.33-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "ccf485bbc4565a3166e560296cb7fc15200fb61e0fb0320895f2cba5ece03ec7",
+          "binding_kind": "apt",
+          "description": "Containerd snapshotter for overlaybd image format",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "image"
+          ],
+          "name": "containerd-accelerated-container-image",
+          "packages": [],
+          "query": "image",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 14,
+          "version": "1.4.4-ubuntu24.04u9",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "ea90c790f5cc20ae96e41041e754fa76f96db8db6eb9b1e97ae1bacb2800fd57",
+          "binding_kind": "apt",
+          "description": "Image Viewer for Deepin Desktop Environment",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "image"
+          ],
+          "name": "deepin-image-viewer",
+          "packages": [],
+          "query": "image",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 14,
+          "version": "5.8.2-2build5",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "49b07dd9639899a701581c9a4ce61cadab679c452f9bca20b11b57d8baf84c3e",
+          "binding_kind": "apt",
+          "description": "transitional dummy package",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "image"
+          ],
+          "name": "gce-compute-image-packages",
+          "packages": [],
+          "query": "image",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 14,
+          "version": "20260819.00-0ubuntu1~24.04.0",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "dceb9e743e78616000ac3b135e3505fffff7945c6e6cd6094cfda9cd803b699b",
+          "binding_kind": "apt",
+          "description": "Signed kernel image gke",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "image"
+          ],
+          "name": "linux-image-6.8.0-1003-gke",
+          "packages": [],
+          "query": "image",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 14,
+          "version": "6.8.0-1003.5",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "1724e64b4a9c9835340c7db47228bf3cd83b5e05c010f90d62691a59742eda26",
+          "binding_kind": "apt",
+          "description": "Signed kernel image ibm",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "image"
+          ],
+          "name": "linux-image-6.8.0-1005-ibm",
+          "packages": [],
+          "query": "image",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 14,
+          "version": "6.8.0-1005.5",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "002b666d5150806d9c721db0e93a2e93a2e810fd4e1e3fe536d4579c71d9b03d",
+          "binding_kind": "apt",
+          "description": "Signed kernel image oem",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "image"
+          ],
+          "name": "linux-image-6.8.0-1005-oem",
+          "packages": [],
+          "query": "image",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 14,
+          "version": "6.8.0-1005.5",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "86c75352fd92f472eea15db3edb26686c13979bbfca28ef38e178cb52d2900cf",
+          "binding_kind": "apt",
+          "description": "Signed kernel image oracle",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "image"
+          ],
+          "name": "linux-image-6.8.0-1005-oracle",
+          "packages": [],
+          "query": "image",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 14,
+          "version": "6.8.0-1005.5",
+          "zero_cost_eligible": true
+        }
+      ],
+      "effect": "decode barcode image",
+      "errors": [],
+      "queries": [
+        "decode",
+        "barcode",
+        "image"
+      ],
+      "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+      "source": "APT_CATALOG",
+      "source_url": null
+    },
+    {
+      "binding_performed": false,
+      "candidate_count": 53,
+      "candidates": [
+        {
+          "description": "MCP server for programmatic image comparison and visual diff generation.",
+          "is_latest": true,
+          "name": "com.pulsemcp/image-diff",
+          "packages": [
+            {
+              "identifier": "@pulsemcp/image-diff-mcp-server",
+              "registry_type": "npm",
+              "required_environment": [],
+              "runtime_hint": "npx",
+              "secret_environment": [],
+              "transport": {
+                "type": "stdio"
+              },
+              "version": "0.1.3"
+            }
+          ],
+          "query": "image",
+          "remotes": [],
+          "repository": {
+            "source": "github",
+            "subfolder": "productionized/image-diff",
+            "url": "https://github.com/pulsemcp/mcp-servers"
+          },
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "status": "active",
+          "version": "0.1.3",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Compress, convert and resize images locally, with marketplace presets and rule rechecks.",
+          "is_latest": true,
+          "name": "com.yaktool/image",
+          "packages": [
+            {
+              "identifier": "yaktool-image-mcp",
+              "registry_type": "npm",
+              "required_environment": [],
+              "runtime_hint": null,
+              "secret_environment": [],
+              "transport": {
+                "type": "stdio"
+              },
+              "version": "0.2.0"
+            }
+          ],
+          "query": "image",
+          "remotes": [],
+          "repository": null,
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "status": "active",
+          "version": "0.2.0",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Audit a web page's images: natural vs rendered sizes, oversized detection, and formats.",
+          "is_latest": true,
+          "name": "io.github.Bishop81/imagedimensions-mcp",
+          "packages": [
+            {
+              "identifier": "imagedimensions-mcp",
+              "registry_type": "npm",
+              "required_environment": [],
+              "runtime_hint": null,
+              "secret_environment": [],
+              "transport": {
+                "type": "stdio"
+              },
+              "version": "0.1.2"
+            }
+          ],
+          "query": "image",
+          "remotes": [],
+          "repository": {
+            "source": "github",
+            "url": "https://github.com/Bishop81/imagedimensions-mcp"
+          },
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "status": "active",
+          "version": "0.1.2",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Image Metadata Ai MCP Server by MEOK AI Labs",
+          "is_latest": true,
+          "name": "io.github.CSOAI-ORG/image-metadata-ai-mcp",
+          "packages": [
+            {
+              "identifier": "image-metadata-ai-mcp",
+              "registry_type": "pypi",
+              "required_environment": [],
+              "runtime_hint": "python",
+              "secret_environment": [],
+              "transport": {
+                "type": "stdio"
+              },
+              "version": "1.0.11"
+            }
+          ],
+          "query": "image",
+          "remotes": [],
+          "repository": {
+            "source": "github",
+            "url": "https://github.com/CSOAI-ORG/image-metadata-ai-mcp"
+          },
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "status": "active",
+          "version": "1.0.11",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Generate EAN-13 and Code-128 barcodes locally and return SVG data. No network and no key.",
+          "is_latest": true,
+          "name": "io.github.mrfentmen/barcode-mcp",
+          "packages": [
+            {
+              "identifier": "barcode-mcp",
+              "registry_type": "npm",
+              "required_environment": [],
+              "runtime_hint": null,
+              "secret_environment": [],
+              "transport": {
+                "type": "stdio"
+              },
+              "version": "1.0.1"
+            }
+          ],
+          "query": "barcode",
+          "remotes": [],
+          "repository": {
+            "source": "github",
+            "url": "https://github.com/mrfentmen/barcode-mcp"
+          },
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "status": "active",
+          "version": "1.0.1",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Decode a vehicle identification number into make, model, and year. No key required.",
+          "is_latest": true,
+          "name": "io.github.mrfentmen/vin-decoder-mcp",
+          "packages": [
+            {
+              "identifier": "vin-decoder-mcp",
+              "registry_type": "npm",
+              "required_environment": [],
+              "runtime_hint": null,
+              "secret_environment": [],
+              "transport": {
+                "type": "stdio"
+              },
+              "version": "1.0.0"
+            }
+          ],
+          "query": "decode",
+          "remotes": [],
+          "repository": {
+            "source": "github",
+            "url": "https://github.com/mrfentmen/vin-decoder-mcp"
+          },
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "status": "active",
+          "version": "1.0.0",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "MCP server that decodes V8 CPU profiles into token-efficient bottleneck summaries for AI agents",
+          "is_latest": true,
+          "name": "io.github.vola-trebla/v8-cpu-profile-decoder-mcp",
+          "packages": [
+            {
+              "identifier": "v8-cpu-profile-decoder-mcp",
+              "registry_type": "npm",
+              "required_environment": [],
+              "runtime_hint": null,
+              "secret_environment": [],
+              "transport": {
+                "type": "stdio"
+              },
+              "version": "0.3.0"
+            }
+          ],
+          "query": "decode",
+          "remotes": [],
+          "repository": {
+            "source": "github",
+            "url": "https://github.com/vola-trebla/v8-cpu-profile-decoder-mcp"
+          },
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "status": "active",
+          "version": "0.3.0",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Scan and generate barcodes and QR codes.",
+          "is_latest": true,
+          "name": "io.github.domdomegg/barcode-scanner-mcp",
+          "packages": [
+            {
+              "identifier": "barcode-scanner-mcp",
+              "registry_type": "npm",
+              "required_environment": [],
+              "runtime_hint": "npx",
+              "secret_environment": [],
+              "transport": {
+                "type": "stdio"
+              },
+              "version": "1.2.0"
+            },
+            {
+              "identifier": "barcode-scanner-mcp",
+              "registry_type": "npm",
+              "required_environment": [
+                "MCP_TRANSPORT"
+              ],
+              "runtime_hint": "npx",
+              "secret_environment": [],
+              "transport": {
+                "type": "streamable-http",
+                "url": "http://localhost:3000/mcp"
+              },
+              "version": "1.2.0"
+            }
+          ],
+          "query": "barcode",
+          "remotes": [],
+          "repository": {
+            "source": "github",
+            "url": "https://github.com/domdomegg/barcode-scanner-mcp.git"
+          },
+          "required_environment_count": 1,
+          "required_secret_count": 0,
+          "score": 17,
+          "status": "active",
+          "version": "1.2.0",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Image processing for AI agents: resize, convert, compress, crop, and web-ready AI-generated images.",
+          "is_latest": true,
+          "name": "ai.pictomancer/image-processing",
+          "packages": [],
+          "query": "image",
+          "remotes": [
+            {
+              "required_headers": [],
+              "type": "streamable-http",
+              "url": "https://api.pictomancer.ai/mcp"
+            }
+          ],
+          "repository": {
+            "source": "gitlab",
+            "url": "https://gitlab.com/pictomancer.ai/pig-gateway"
+          },
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 15,
+          "status": "active",
+          "version": "0.4.0",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Generate marketing images, videos and audios for campaigns, product content, and brand assets.",
+          "is_latest": true,
+          "name": "ai.saifs/media-generator-images-videos",
+          "packages": [],
+          "query": "image",
+          "remotes": [
+            {
+              "required_headers": [],
+              "type": "streamable-http",
+              "url": "https://mcp.saifs.ai/mcp"
+            }
+          ],
+          "repository": null,
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 15,
+          "status": "active",
+          "version": "1.0.0",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Analyze images and videos with Gemini to get fast, reliable visual insights. Handle content from U\u2026",
+          "is_latest": true,
+          "name": "ai.smithery/Artin0123-gemini-image-mcp-server",
+          "packages": [],
+          "query": "image",
+          "remotes": [
+            {
+              "required_headers": [
+                "Authorization"
+              ],
+              "type": "streamable-http",
+              "url": "https://server.smithery.ai/@Artin0123/gemini-image-mcp-server/mcp"
+            }
+          ],
+          "repository": {
+            "source": "github",
+            "url": "https://github.com/Artin0123/gemini-vision-mcp"
+          },
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 15,
+          "status": "active",
+          "version": "1.4.3",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Diagrams, badges, charts and QR codes as plain image URLs you can paste into Markdown.",
+          "is_latest": true,
+          "name": "com.ainetcafe/netcafe-images",
+          "packages": [],
+          "query": "image",
+          "remotes": [
+            {
+              "required_headers": [],
+              "type": "streamable-http",
+              "url": "https://ainetcafe.com/mcp/img?s=registry"
+            }
+          ],
+          "repository": {
+            "source": "github",
+            "url": "https://github.com/mario03690/ai-netcafe"
+          },
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 15,
+          "status": "active",
+          "version": "1.0.0",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Decode an SSTV audio recording and anchor its fingerprint and image hash to the Knox event chain.",
+          "is_latest": true,
+          "name": "com.bonissystems/sstv-decoder",
+          "packages": [],
+          "query": "decode",
+          "remotes": [
+            {
+              "required_headers": [],
+              "type": "streamable-http",
+              "url": "https://bonissystems.com/api/knox/agents/sstv-decoder/mcp"
+            }
+          ],
+          "repository": null,
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 15,
+          "status": "active",
+          "version": "1.0.0",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Automatic image/video face detection, blur/redaction, and de-identification by NoonAI DIS.",
+          "is_latest": true,
+          "name": "com.dyndns-server.noon-ai/image-video-anonymization-mcp",
+          "packages": [],
+          "query": "image",
+          "remotes": [
+            {
+              "required_headers": [],
+              "type": "streamable-http",
+              "url": "https://noon-ai.dyndns-server.com/image-video-anonymization-mcp"
+            }
+          ],
+          "repository": null,
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 15,
+          "status": "active",
+          "version": "0.1.12",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Resize, compress, convert, watermark and SEO-tag e-commerce product images from a public URL.",
+          "is_latest": true,
+          "name": "com.ecommerceimageoptimizer/image-optimizer",
+          "packages": [],
+          "query": "image",
+          "remotes": [
+            {
+              "required_headers": [],
+              "type": "streamable-http",
+              "url": "https://ecommerceimageoptimizer.com/api/mcp"
+            }
+          ],
+          "repository": {
+            "source": "github",
+            "url": "https://github.com/brkmehdi/ImageOptimizerforEcom"
+          },
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 15,
+          "status": "active",
+          "version": "1.0.0",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Google Image Search: Fast and Simple Google Images Search API. You can get 100+ search results in.",
+          "is_latest": true,
+          "name": "com.jojapi/google-image-search",
+          "packages": [],
+          "query": "image",
+          "remotes": [
+            {
+              "required_headers": [],
+              "type": "streamable-http",
+              "url": "https://mcp.jojapi.com/google-image-search"
+            }
+          ],
+          "repository": null,
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 15,
+          "status": "active",
+          "version": "1.0.0",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Image Search: Fast and Simple Image Search API. You can get 100+ search results in one query!.",
+          "is_latest": true,
+          "name": "com.jojapi/joj-image-search",
+          "packages": [],
+          "query": "image",
+          "remotes": [
+            {
+              "required_headers": [],
+              "type": "streamable-http",
+              "url": "https://mcp.jojapi.com/joj-image-search"
+            }
+          ],
+          "repository": null,
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 15,
+          "status": "active",
+          "version": "1.0.0",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Product Barcode API - camgoz.net: Provides information on products available in markets across.",
+          "is_latest": true,
+          "name": "com.jojapi/product-barcode-api",
+          "packages": [],
+          "query": "barcode",
+          "remotes": [
+            {
+              "required_headers": [],
+              "type": "streamable-http",
+              "url": "https://mcp.jojapi.com/product-barcode-api"
+            }
+          ],
+          "repository": null,
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 15,
+          "status": "active",
+          "version": "1.0.0",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Social cards and OG images from designed templates: card from a URL, presets, meta tags, link checks",
+          "is_latest": true,
+          "name": "io.betterimage/betterimage",
+          "packages": [],
+          "query": "image",
+          "remotes": [
+            {
+              "required_headers": [],
+              "type": "streamable-http",
+              "url": "https://betterimage.io/mcp"
+            }
+          ],
+          "repository": {
+            "source": "github",
+            "url": "https://github.com/mfundakowski/betterimage-mcp"
+          },
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 15,
+          "status": "active",
+          "version": "1.1.0",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Decode, render, validate barcodes: QR, DataMatrix, EAN, UPC, PDF417. All tools free, no auth.",
+          "is_latest": true,
+          "name": "io.github.appvantagelabs2-a11y/barcode",
+          "packages": [],
+          "query": "barcode",
+          "remotes": [
+            {
+              "required_headers": [],
+              "type": "streamable-http",
+              "url": "https://mcp.casuyi.com/mcp"
+            }
+          ],
+          "repository": null,
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 15,
+          "status": "active",
+          "version": "1.0.2",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Percent-decode length, input discarded",
+          "is_latest": true,
+          "name": "io.github.sadri-dridi/percent-decode-len",
+          "packages": [],
+          "query": "decode",
+          "remotes": [
+            {
+              "required_headers": [],
+              "type": "streamable-http",
+              "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/percent-decode-len/mcp"
+            }
+          ],
+          "repository": {
+            "source": "github",
+            "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+          },
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 15,
+          "status": "active",
+          "version": "1.0.0",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Decode EVM bytes to JSON: event-log decoder, calldata explainer, selector lookup, ABI fetch.",
+          "is_latest": true,
+          "name": "io.github.zvmzaretsky/onchain-decode",
+          "packages": [],
+          "query": "decode",
+          "remotes": [
+            {
+              "required_headers": [],
+              "type": "streamable-http",
+              "url": "https://decode.fabtally.com/mcp"
+            }
+          ],
+          "repository": {
+            "source": "github",
+            "url": "https://github.com/zvmzaretsky/onchain-decode-mcp"
+          },
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 15,
+          "status": "active",
+          "version": "1.0.0",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Resize, convert, compress, crop and watermark images from chat, with a real byte count each time.",
+          "is_latest": true,
+          "name": "com.bestremotetools/image-resize-convert-compress-crop",
+          "packages": [
+            {
+              "identifier": "https://github.com/theluckystrike/mcp-servers/releases/download/v0.21.0/image.mcpb",
+              "registry_type": "mcpb",
+              "required_environment": [],
+              "runtime_hint": null,
+              "secret_environment": [
+                "MCP_LICENSE_KEY"
+              ],
+              "transport": {
+                "type": "stdio"
+              },
+              "version": "0.21.0"
+            }
+          ],
+          "query": "image",
+          "remotes": [],
+          "repository": {
+            "source": "github",
+            "subfolder": "servers/image",
+            "url": "https://github.com/theluckystrike/mcp-servers"
+          },
+          "required_environment_count": 0,
+          "required_secret_count": 1,
+          "score": 15,
+          "status": "active",
+          "version": "0.21.0",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Local MCP gateway daemon: route, audit, and inspect MCP servers from one config.",
+          "is_latest": true,
+          "name": "com.aiinfradecoded/mcp-anvil",
+          "packages": [
+            {
+              "identifier": "mcp-anvil",
+              "registry_type": "pypi",
+              "required_environment": [],
+              "runtime_hint": null,
+              "secret_environment": [],
+              "transport": {
+                "type": "stdio"
+              },
+              "version": "0.2.0"
+            }
+          ],
+          "query": "decode",
+          "remotes": [],
+          "repository": null,
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 14,
+          "status": "active",
+          "version": "0.2.0",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "MCP-first control plane for ComfyUI workflows with explicit approvals and no silent downloads.",
+          "is_latest": true,
+          "name": "io.github.ChevalGrand520/local-gpu-imagegen",
+          "packages": [
+            {
+              "identifier": "local-gpu-imagegen",
+              "registry_type": "pypi",
+              "required_environment": [],
+              "runtime_hint": "uvx",
+              "secret_environment": [],
+              "transport": {
+                "type": "stdio"
+              },
+              "version": "0.9.1"
+            }
+          ],
+          "query": "image",
+          "remotes": [],
+          "repository": {
+            "source": "github",
+            "url": "https://github.com/ChevalGrand520/local-gpu-imagegen"
+          },
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 14,
+          "status": "active",
+          "version": "0.9.1",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "MCP server for unpacking and analyzing Playwright trace.zip archives",
+          "is_latest": true,
+          "name": "io.github.vola-trebla/playwright-trace-decoder-mcp",
+          "packages": [
+            {
+              "identifier": "playwright-trace-decoder-mcp",
+              "registry_type": "npm",
+              "required_environment": [],
+              "runtime_hint": null,
+              "secret_environment": [],
+              "transport": {
+                "type": "stdio"
+              },
+              "version": "0.2.3"
+            }
+          ],
+          "query": "decode",
+          "remotes": [],
+          "repository": {
+            "source": "github",
+            "url": "https://github.com/vola-trebla/playwright-trace-decoder-mcp"
+          },
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 14,
+          "status": "active",
+          "version": "0.2.3",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "MCP server for Qwen Image 3 AI image generation",
+          "is_latest": true,
+          "name": "io.github.AceDataCloud/mcp-qwen-image",
+          "packages": [
+            {
+              "identifier": "mcp-qwen-image",
+              "registry_type": "pypi",
+              "required_environment": [
+                "ACEDATACLOUD_API_TOKEN"
+              ],
+              "runtime_hint": "uvx",
+              "secret_environment": [
+                "ACEDATACLOUD_API_TOKEN"
+              ],
+              "transport": {
+                "type": "stdio"
+              },
+              "version": "2026.8.24.1"
+            }
+          ],
+          "query": "image",
+          "remotes": [
+            {
+              "required_headers": [],
+              "type": "streamable-http",
+              "url": "https://qwen-image.mcp.acedata.cloud/mcp"
+            }
+          ],
+          "repository": {
+            "source": "github",
+            "url": "https://github.com/AceDataCloud/QwenImageMCP"
+          },
+          "required_environment_count": 1,
+          "required_secret_count": 1,
+          "score": 14,
+          "status": "active",
+          "version": "2026.8.24.1",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Generates 1200x630 OG social preview images (PNG/SVG). Tools: generate_og_image, get_quota.",
+          "is_latest": true,
+          "name": "app.rowb.oganvil/og-image-api",
+          "packages": [],
+          "query": "image",
+          "remotes": [
+            {
+              "required_headers": [
+                "Authorization"
+              ],
+              "type": "streamable-http",
+              "url": "https://oganvil.rowb.app/mcp"
+            }
+          ],
+          "repository": null,
+          "required_environment_count": 0,
+          "required_secret_count": 1,
+          "score": 12,
+          "status": "active",
+          "version": "1.0.0",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Render HTML and CSS to PNG images over HTTP. Send HTML and CSS and get a PNG back.",
+          "is_latest": true,
+          "name": "com.html2img/html-to-image",
+          "packages": [],
+          "query": "image",
+          "remotes": [
+            {
+              "required_headers": [
+                "Authorization"
+              ],
+              "type": "streamable-http",
+              "url": "https://app.html2img.com/mcp"
+            }
+          ],
+          "repository": null,
+          "required_environment_count": 0,
+          "required_secret_count": 1,
+          "score": 12,
+          "status": "active",
+          "version": "1.0.0",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Generate and edit images from your coding agent with Gemini and OpenAI, using your own API keys.",
+          "is_latest": true,
+          "name": "com.nuverlabs/image-gen",
+          "packages": [
+            {
+              "identifier": "@nuver-labs/image-gen-mcp",
+              "registry_type": "npm",
+              "required_environment": [],
+              "runtime_hint": null,
+              "secret_environment": [
+                "GEMINI_API_KEY",
+                "OPENAI_API_KEY"
+              ],
+              "transport": {
+                "type": "stdio"
+              },
+              "version": "0.2.1"
+            }
+          ],
+          "query": "image",
+          "remotes": [],
+          "repository": {
+            "source": "github",
+            "url": "https://github.com/nuver-labs/image-gen-mcp"
+          },
+          "required_environment_count": 0,
+          "required_secret_count": 2,
+          "score": 12,
+          "status": "active",
+          "version": "0.2.1",
+          "zero_cost_eligible": true
+        }
+      ],
+      "effect": "decode barcode image",
+      "errors": [],
+      "queries": [
+        "decode",
+        "barcode",
+        "image"
+      ],
+      "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+      "source": "OFFICIAL_MCP_REGISTRY",
+      "source_url": "https://registry.modelcontextprotocol.io"
+    }
+  ],
+  "schema": "PROJECT_BRAIN_FEDERATED_CAPABILITY_DISCOVERY_V1",
+  "sources": [
+    "APT_CATALOG",
+    "OFFICIAL_MCP_REGISTRY"
+  ]
+}

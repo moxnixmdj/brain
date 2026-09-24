@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-24T22:23:17.143110+00:00",
+  "mission_id": "ASTRA-BARCODE-SEMANTIC-VERIFIER-DISCOVERY-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_BARCODE_SEMANTIC_VERIFIER_DISCOVERY_001.json",
+  "mission_sha256": "6f28d6e2a5aabefc0a3d6027a1bab3d06dd8912adabf82c952174acd1c37aea3",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "74f17d1f06ef002403f5b32b5f4f9fef720df13f20ce21b5a106548bcd68c5e5",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
