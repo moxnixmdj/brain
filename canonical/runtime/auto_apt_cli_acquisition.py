@@ -128,7 +128,10 @@ def _merge_role_conditioned_apt(discovery,goal):
 
 def dispatch(goal,mission_id,mission_path,root,discovery=None):
     root=pathlib.Path(root).resolve()
-    discovery=discovery or capability_discovery.search_all(goal,limit_per_source=30)
+    # On the fast path, start from an empty pool and let the role-conditioned
+    # APT search supply causally relevant candidates. Callers may pass a broad
+    # discovery result only as a fallback after the targeted route fails.
+    discovery=discovery if discovery is not None else {"candidates":[]}
     discovery=_merge_role_conditioned_apt(discovery,goal)
     candidates=_viable_candidates(discovery,goal)
     diag_rel=f"canonical/astra_runtime/evidence/{mission_id}__AUTO_APT_CLI_ACQUISITION.json"
