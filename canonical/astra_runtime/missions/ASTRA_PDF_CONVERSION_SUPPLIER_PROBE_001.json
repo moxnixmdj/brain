@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-PDF-CONVERSION-SUPPLIER-PROBE-001",
+  "purpose": "Read-only supplier probe for zero-cost Markdown-to-PDF conversion on Ubuntu.",
+  "goal": "Inspect local/Ubuntu availability for pandoc and practical PDF engines without mutating the capability registry.",
+  "steps": [
+    {
+      "id": "probe-pdf-converters",
+      "adapter": "shell",
+      "command": "set -euo pipefail\nfor P in pandoc weasyprint wkhtmltopdf texlive-latex-base; do\n  echo ===${P}_POLICY===\n  apt-cache policy \"$P\" || true\n  echo ===${P}_SHOW===\n  apt-cache show \"$P\" 2>/dev/null | grep -E '^(Package|Version|SHA256|Installed-Size|Description):' | head -n 24 || true\ndone\nfor X in pandoc weasyprint wkhtmltopdf pdflatex; do\n  printf '%s=' \"$X\"; command -v \"$X\" || true\ndone\necho PDF_CONVERTER_PROBE_COMPLETE",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "PDF_CONVERTER_PROBE_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "read_only_discovery": true,
+    "model_controller_required": false
+  }
+}
