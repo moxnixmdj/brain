@@ -3,16 +3,70 @@
   "canonical_generation": "2026-09-22-astra-shared-runtime-portfolio-restored",
   "status": "RECONCILED_ACTIVE",
   "optimization_target": "MINIMIZE_TIME_UNTIL_ALL_TARGET_CAPABILITIES_WORK_TOGETHER_IN_ONE_SHARED_RUNTIME",
-  "runtime_components_in_use": ["GPT-5.6 Sol cognition", "GitHub canonical Brain", "GitHub connector", "Remote Desktop Commander", "web research", "scheduled ChatGPT continuation"],
-  "lanes": [
-    {"id":"UNFAMILIAR_SWE","mission_id":"ASTRA-REAL-SWE-MYPY-21968-001","state":"COMPLETE_VERIFIED_LOCAL","result":"Fresh open mypy issue #21968 reproduced, causally diagnosed, fixed generally, regression-covered, broader match suite green, packaged as local commit 89653d35c4d66fe1a67ae27360c2510e5678ac82.","evidence":["canonical/astra_runtime/missions/ASTRA-REAL-SWE-MYPY-21968-001.json","canonical/astra_runtime/evidence/ASTRA-REAL-SWE-MYPY-21968-001.patch","canonical/astra_runtime/artifacts/MYPY_21968_ENGINEERING_NOTE.html","canonical/astra_runtime/evidence/ASTRA-REAL-SWE-MYPY-21968-001__ARTIFACT_RECEIPT.json"]},
-    {"id":"END_TO_END_COMPUTER_WORK_GAMELOOP","mission_id":"ASTRA-REAL-COMPUTER-WORK-GAMELOOP-PUBG-001","state":"BLOCKED_REMOVED_FROM_CRITICAL_PATH","reason":"Concurrent controller ownership plus modified/debug-signed APK and anti-cheat/integrity boundary. Do not mutate this surface or pursue bypass/downgrade routes.","evidence":["canonical/astra_runtime/missions/ASTRA-REAL-COMPUTER-WORK-GAMELOOP-PUBG-001.json","canonical/evidence/END_TO_END_COMPUTER_WORK_GAMELOOP_20260922.json"]},
-    {"id":"END_TO_END_PROFESSIONAL_SYSTEM_STABILITY","mission_id":"ASTRA-REAL-PROFESSIONAL-SYSTEM-STABILITY-001","state":"COMPLETE_VERIFIED_LOCAL_WITH_RESIDUAL_EVIDENCE_BOUNDARY","result":"Live Windows telemetry + authoritative Microsoft/ASUS research identified a critical thermal hibernation, a 0x3B/0xC0000005 system crash, recurring virtualization/network-driver errors, BIOS-version delta, and produced a safety-bounded professional diagnosis artifact on the real host without destructive mutation.","evidence":["canonical/astra_runtime/missions/ASTRA-REAL-PROFESSIONAL-SYSTEM-STABILITY-001.json"]},
-    {"id":"AMBIGUOUS_MIXED_PROFESSIONAL_CONTINUATION","mission_id":"ASTRA-REAL-MIXED-PROFESSIONAL-CONTINUATION-001","state":"ACTIVE_CHECKPOINTED","result":"A current operational Project Brain capability brief was created and read-back verified on the live Windows host from reconciled canonical state plus historical artifact inspection. The next invocation must perform new consequential cross-application/browser delivery work from this exact checkpoint.","evidence":["canonical/astra_runtime/missions/ASTRA-REAL-MIXED-PROFESSIONAL-CONTINUATION-001.json"]}
+  "runtime_components_in_use": [
+    "GPT-5.6 Sol cognition",
+    "GitHub canonical Brain",
+    "GitHub connector",
+    "Remote Desktop Commander",
+    "web research",
+    "scheduled ChatGPT continuation"
   ],
-  "uncovered_pressure_dimensions": ["later scheduled invocation performs new consequential work from the active checkpoint", "cross-application GUI/browser delivery beyond filesystem/terminal execution"],
-  "next_action": "Resume ASTRA-REAL-MIXED-PROFESSIONAL-CONTINUATION-001 from its durable checkpoint. Do not recreate/re-read the brief as the task. Perform NEW consequential delivery through a genuinely different application/browser surface if safely available, verify the effect/content, preserve receipt; otherwise freeze the exact surface failure and attack only that smallest causal deficit.",
-  "anti_waste": ["no qualification before operational portfolio closure", "no provider hunt without an observed blocker", "no speculative infrastructure", "no duplicate proof or rerun", "blocker-local search/reuse before invention"],
+  "lanes": [
+    {
+      "id": "UNFAMILIAR_SWE",
+      "mission_id": "ASTRA-REAL-SWE-MYPY-21968-001",
+      "state": "COMPLETE_VERIFIED_LOCAL",
+      "result": "Fresh open mypy issue #21968 reproduced, causally diagnosed, fixed generally, regression-covered, broader match suite green, packaged as local commit 89653d35c4d66fe1a67ae27360c2510e5678ac82.",
+      "evidence": [
+        "canonical/astra_runtime/missions/ASTRA-REAL-SWE-MYPY-21968-001.json",
+        "canonical/astra_runtime/evidence/ASTRA-REAL-SWE-MYPY-21968-001.patch",
+        "canonical/astra_runtime/artifacts/MYPY_21968_ENGINEERING_NOTE.html",
+        "canonical/astra_runtime/evidence/ASTRA-REAL-SWE-MYPY-21968-001__ARTIFACT_RECEIPT.json"
+      ]
+    },
+    {
+      "id": "END_TO_END_COMPUTER_WORK_GAMELOOP",
+      "mission_id": "ASTRA-REAL-COMPUTER-WORK-GAMELOOP-PUBG-001",
+      "state": "BLOCKED_REMOVED_FROM_CRITICAL_PATH",
+      "reason": "Concurrent controller ownership plus modified/debug-signed APK and anti-cheat/integrity boundary. Do not mutate this surface or pursue bypass/downgrade routes.",
+      "evidence": [
+        "canonical/astra_runtime/missions/ASTRA-REAL-COMPUTER-WORK-GAMELOOP-PUBG-001.json",
+        "canonical/evidence/END_TO_END_COMPUTER_WORK_GAMELOOP_20260922.json"
+      ]
+    },
+    {
+      "id": "END_TO_END_PROFESSIONAL_SYSTEM_STABILITY",
+      "mission_id": "ASTRA-REAL-PROFESSIONAL-SYSTEM-STABILITY-001",
+      "state": "COMPLETE_VERIFIED_LOCAL_WITH_RESIDUAL_EVIDENCE_BOUNDARY",
+      "result": "Live Windows telemetry + authoritative Microsoft/ASUS research identified a critical thermal hibernation, a 0x3B/0xC0000005 system crash, recurring virtualization/network-driver errors, BIOS-version delta, and produced a safety-bounded professional diagnosis artifact on the real host without destructive mutation.",
+      "evidence": [
+        "canonical/astra_runtime/missions/ASTRA-REAL-PROFESSIONAL-SYSTEM-STABILITY-001.json"
+      ]
+    },
+    {
+      "id": "AMBIGUOUS_MIXED_PROFESSIONAL_CONTINUATION",
+      "mission_id": "ASTRA-REAL-MIXED-PROFESSIONAL-CONTINUATION-001",
+      "state": "ACTIVE_PARTIAL_VERIFIED",
+      "result": "A later invocation resumed the durable checkpoint, verified the Windows source host was offline, failed closed on byte-identical source transfer, then performed and read-back-verified new consequential delivery into native Google Docs from live canonical state. Direct Windows GUI/browser delivery and autonomous scheduled wake remain unproven.",
+      "evidence": [
+        "canonical/astra_runtime/missions/ASTRA-REAL-MIXED-PROFESSIONAL-CONTINUATION-001.json",
+        "canonical/astra_runtime/evidence/ASTRA-REAL-MIXED-PROFESSIONAL-CONTINUATION-001__CROSS_APP_DELIVERY_20260924.json"
+      ]
+    }
+  ],
+  "uncovered_pressure_dimensions": [
+    "direct Windows GUI/browser delivery from a real source artifact when an authorized host is available",
+    "autonomous continuation without a user-triggered invocation, only if it becomes naturally necessary to complete consequential work"
+  ],
+  "next_action": "Recompute T_ASTRA_REAL from live state. The only current blocker on this lane is an offline Windows source host for direct GUI/browser replay; do not wait idly if another independent real mission offers greater expected closure-time reduction. When Mo is online, replay exact source-artifact delivery only if that remains the frontier.",
+  "anti_waste": [
+    "no qualification before operational portfolio closure",
+    "no provider hunt without an observed blocker",
+    "no speculative infrastructure",
+    "no duplicate proof or rerun",
+    "blocker-local search/reuse before invention",
+    "no critical checkpoint may depend solely on an unmirrored local artifact; mirror required continuation artifacts off-host with hash and canonical reference"
+  ],
   "incremental_spend_usd": 0,
   "val_town_used": false,
   "sprites_used": false
