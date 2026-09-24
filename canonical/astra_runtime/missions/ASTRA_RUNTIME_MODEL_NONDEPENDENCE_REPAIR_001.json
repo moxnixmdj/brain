@@ -50,5 +50,11 @@
     "incremental_spend_usd": 0,
     "mandatory_model_planner": false,
     "optional_model_planner_used": false
+  },
+  "replay_after_root_cause_change": {
+    "prior_failure": "REGRESSION_TEST_RUNTIME_PATH_RESOLUTION",
+    "repair_commit": "f9089afb4ef1b5dcbbd8b01a78a5c6dd6feb6b1b",
+    "repair": "Resolve canonical/runtime/astra_runtime.py relative to canonical/ in the regression test.",
+    "replay_authorized": true
   }
 }
