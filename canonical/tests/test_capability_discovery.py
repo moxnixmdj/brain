@@ -13,7 +13,7 @@ discovery = importlib.util.module_from_spec(spec)
 sys.modules[spec.name] = discovery
 spec.loader.exec_module(discovery)
 
-FIXTURE = {
+FIXTURE = json.loads(r'''{
   "servers": [
     {
       "server": {
@@ -72,7 +72,7 @@ FIXTURE = {
       }
     }
   ]
-}
+}''')
 
 class FakeResponse:
     def __init__(self, payload):
