@@ -453,6 +453,11 @@ def execute_step(step, prior_results=None, mission=None):
 
 def verify(step,result):
     v=step.get("verify",{})
+    # A content/file predicate cannot erase process failure. Earlier runtime
+    # versions incorrectly allowed non-zero shell commands to pass whenever a
+    # marker string or file happened to exist.
+    if "returncode" in result and result.get("returncode") != 0 and not v.get("allow_nonzero_returncode",False):
+        return False
     typ=v.get("type","returncode_zero")
     if typ=="returncode_zero":
         return result.get("returncode")==0
