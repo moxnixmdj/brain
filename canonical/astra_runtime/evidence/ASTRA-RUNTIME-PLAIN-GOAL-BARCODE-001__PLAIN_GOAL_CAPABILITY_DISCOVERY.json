@@ -1,12 +1,12 @@
 {
   "auto_acquisition": {
-    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"barcode\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"gir1.2-zbar-1.0\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED\", \"name\": \"iec16022\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-html5-qrcode\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"zbar-tools\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"zbarcam-gtk\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"zbarcam-qt\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"gir-rust-code-generator\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_TEXT_INPUT_UNRESOLVED\", \"name\": \"autodia\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"byacc-j\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"cbindgen\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"codfis\", \"status\": \"CONTRACT_REJECTED\"}]",
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED\", \"name\": \"iec16022\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"gir-rust-code-generator\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_TEXT_INPUT_UNRESOLVED\", \"name\": \"autodia\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"byacc-j\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"cbindgen\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"codfis\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"cproto\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"doxygen\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:E: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/ghostscript/libgs-common_10.02.1%7edfsg1-0ubuntu7.8_all.deb  404  Not Found [IP: 52.154.174.208 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/ghostscript/libgs10-common_10.02.1%7edfsg1-0ubuntu7.8_all.deb  404  Not Found [IP: 52.154.174.208 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/ghostscript/libgs10_10.02.1%7edfsg1-0ubuntu7.8_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/ghostscript/ghostscript_10.02.1%7edfsg1-0ubuntu7.8_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\\n\", \"name\": \"doxygen-latex\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"gap-autodoc\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"lhs2tex\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"puppet-strings\", \"status\": \"CONTRACT_REJECTED\"}]",
     "status": "NOT_DISPATCHED"
   },
   "binding_performed": false,
   "goal": "Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png.",
   "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-001",
-  "observed_at_utc": "2026-09-24T22:44:41.832324+00:00",
+  "observed_at_utc": "2026-09-24T22:48:42.586723+00:00",
   "result": {
     "binding_performed": false,
     "candidates": [
@@ -1121,84 +1121,99 @@
         "zero_cost_eligible": true
       },
       {
-        "description": "CityHash128 hex length, input discarded",
+        "description": "Team-aware memory: intent, decisions, real-time conflicts for AI coding assistants.",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "io.github.sadri-dridi/city128",
-        "packages": [],
-        "query": "128",
-        "remotes": [
+        "name": "ai.kawacode/mcp",
+        "packages": [
           {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/city128/mcp"
+            "identifier": "@kawacode/mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "8.1.0"
           }
         ],
+        "query": "code",
+        "remotes": [],
         "repository": {
           "source": "github",
-          "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+          "url": "https://github.com/kawacode-ai/kawa.mcp"
         },
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 15,
+        "score": 14,
         "status": "active",
-        "version": "1.0.0",
+        "version": "8.1.0",
         "zero_cost_eligible": true
       },
       {
-        "description": "FarmHash128 hex length, input discarded",
+        "description": "Local MCP gateway daemon: route, audit, and inspect MCP servers from one config.",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "io.github.sadri-dridi/farm128",
-        "packages": [],
-        "query": "128",
-        "remotes": [
+        "name": "com.aiinfradecoded/mcp-anvil",
+        "packages": [
           {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/farm128/mcp"
+            "identifier": "mcp-anvil",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.2.0"
           }
         ],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/sadri-dridi/named-mcp-utilities"
-        },
+        "query": "code",
+        "remotes": [],
+        "repository": null,
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 15,
+        "score": 14,
         "status": "active",
-        "version": "1.0.0",
+        "version": "0.2.0",
         "zero_cost_eligible": true
       },
       {
-        "description": "FNV-1a 128 hex length, input discarded",
+        "description": "Visual tech-stack inventory of any codebase: languages, frameworks, databases, AI SDKs, infra.",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "io.github.sadri-dridi/fnv128-ok",
-        "packages": [],
-        "query": "128",
-        "remotes": [
+        "name": "io.github.askuma/generate-tech-stack",
+        "packages": [
           {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/fnv128-ok/mcp"
+            "identifier": "generate-tech-stack-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.2.2"
           }
         ],
+        "query": "generate",
+        "remotes": [],
         "repository": {
           "source": "github",
-          "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+          "url": "https://github.com/askuma/generate-tech-stack"
         },
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 15,
+        "score": 14,
         "status": "active",
-        "version": "1.0.0",
+        "version": "0.2.2",
         "zero_cost_eligible": true
       }
     ],
@@ -1824,7 +1839,7 @@
       },
       {
         "binding_performed": false,
-        "candidate_count": 56,
+        "candidate_count": 44,
         "candidates": [
           {
             "description": "Source-linked CodeGraph exploration, ranked search, and static navigation for coding agents.",
@@ -2255,198 +2270,6 @@
             "zero_cost_eligible": true
           },
           {
-            "description": "CityHash128 hex length, input discarded",
-            "is_latest": true,
-            "name": "io.github.sadri-dridi/city128",
-            "packages": [],
-            "query": "128",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/city128/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "FarmHash128 hex length, input discarded",
-            "is_latest": true,
-            "name": "io.github.sadri-dridi/farm128",
-            "packages": [],
-            "query": "128",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/farm128/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "FNV-1a 128 hex length, input discarded",
-            "is_latest": true,
-            "name": "io.github.sadri-dridi/fnv128-ok",
-            "packages": [],
-            "query": "128",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/fnv128-ok/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "MurmurHash3-128 hex length, input discarded",
-            "is_latest": true,
-            "name": "io.github.sadri-dridi/murmur128",
-            "packages": [],
-            "query": "128",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/murmur128/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "SHAKE128 hex length, input discarded",
-            "is_latest": true,
-            "name": "io.github.sadri-dridi/shake128",
-            "packages": [],
-            "query": "128",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/shake128/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "SHAKE128 hex length band, input discarded",
-            "is_latest": true,
-            "name": "io.github.sadri-dridi/shake128-ok",
-            "packages": [],
-            "query": "128",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/shake128-ok/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "XXH128 hex length, input discarded",
-            "is_latest": true,
-            "name": "io.github.sadri-dridi/xxh128-len",
-            "packages": [],
-            "query": "128",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/xxh128-len/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "XXH3-128 hex length, input discarded",
-            "is_latest": true,
-            "name": "io.github.sadri-dridi/xxh3-128",
-            "packages": [],
-            "query": "128",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/xxh3-128/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
             "description": "Team-aware memory: intent, decisions, real-time conflicts for AI coding assistants.",
             "is_latest": true,
             "name": "ai.kawacode/mcp",
@@ -2592,10 +2415,198 @@
             "status": "active",
             "version": "0.9.1",
             "zero_cost_eligible": true
+          },
+          {
+            "description": "Find open-source libraries and fetch contextual code snippets by version to accelerate development\u2026",
+            "is_latest": true,
+            "name": "ai.smithery/exa-labs-exa-code-mcp",
+            "packages": [],
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@exa-labs/exa-code-mcp/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/exa-labs/exa-code-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "0.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Generate game assets with AI for 2D games, including sprites, tilesets, and animations.",
+            "is_latest": true,
+            "name": "ai.spritecook/generate",
+            "packages": [],
+            "query": "generate",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://api.spritecook.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/spritecook/spritecook-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "0.2.17",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Postal lookups for 120 countries with cited sources; deep US tier: demographics, climate, area codes",
+            "is_latest": true,
+            "name": "com.codepostalpro/postal-codes",
+            "packages": [],
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [
+                  "X-Api-Key"
+                ],
+                "type": "streamable-http",
+                "url": "https://api.codepostalpro.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "1.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Research intelligence for AI coding agents. 2M+ CS papers with evidence and tradeoffs.",
+            "is_latest": true,
+            "name": "ai.paperlantern/code",
+            "packages": [],
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.paperlantern.ai/chat/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/paperlantern-ai/paperlantern-cli"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "0.3.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Search, read and cite a researcher's own library and the canonical corpora on tbrp.app.",
+            "is_latest": true,
+            "name": "app.tbrp/codex",
+            "packages": [],
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.tbrp-cdn.app/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "0.4.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "I do everything related to coding and execution tasks",
+            "is_latest": true,
+            "name": "co.civai.nova/code-interpreter-agent",
+            "packages": [],
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://nova.civai.co/mcp/agents/code-interpreter-agent"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Your team's shipping standards, org map and delivery metrics, inside your coding agent.",
+            "is_latest": true,
+            "name": "com.coderbuds/insights",
+            "packages": [],
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://coderbuds.com/mcp/insights"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.5.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Create family-friendly greeting text and downloadable cards in 13 languages, including Hindi.",
+            "is_latest": true,
+            "name": "com.generategreetings/greetings",
+            "packages": [],
+            "query": "generate",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://generategreetings.com/api/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
           }
         ],
         "effect": "Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png.",
-        "errors": [],
+        "errors": [
+          {
+            "error": "TimeoutError:The read operation timed out",
+            "query": "128"
+          }
+        ],
         "queries": [
           "generate",
           "code",
