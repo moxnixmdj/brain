@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-CAPABILITY-GRAPH-PLANNER-001",
+  "purpose": "Prove the model-independent controller can select and execute a minimum-cost valid capability composition from declared preconditions/effects without a model planner.",
+  "goal": "Inspect the canonical model non-dependence law by selecting the best available executable capability route.",
+  "steps": [
+    {
+      "id": "run-capability-planner-regressions",
+      "adapter": "shell",
+      "command": "python canonical/tests/test_capability_planner.py && python canonical/tests/test_astra_runtime_model_independence.py",
+      "verify": {
+        "type": "returncode_zero"
+      }
+    },
+    {
+      "id": "plan-and-execute-capability-composition",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 8,
+      "capability_problem": {
+        "initial_facts": [
+          "repo.available"
+        ],
+        "target_effects": [
+          "law.inspected"
+        ],
+        "finish_summary": "CAPABILITY_GRAPH_GOAL_COMPLETE",
+        "max_expansions": 100,
+        "capabilities": [
+          {
+            "id": "expensive-direct-read",
+            "requires": [
+              "repo.available"
+            ],
+            "provides": [
+              "law.inspected"
+            ],
+            "cost": 10,
+            "action": {
+              "type": "read_file",
+              "args": {
+                "path": "canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md"
+              },
+              "why": "Valid but deliberately more expensive direct route."
+            }
+          },
+          {
+            "id": "locate-law",
+            "requires": [
+              "repo.available"
+            ],
+            "provides": [
+              "law.located"
+            ],
+            "cost": 1,
+            "action": {
+              "type": "search_text",
+              "args": {
+                "query": "No step above requires an LLM."
+              },
+              "why": "Cheap discovery route."
+            }
+          },
+          {
+            "id": "read-located-law",
+            "requires": [
+              "law.located"
+            ],
+            "provides": [
+              "law.inspected"
+            ],
+            "cost": 1,
+            "action": {
+              "type": "read_file",
+              "args": {
+                "path": "canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md"
+              },
+              "why": "Read after discovery."
+            }
+          }
+        ]
+      },
+      "verify": {
+        "type": "stdout_contains",
+        "text": "CAPABILITY_GRAPH_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "mandatory_model_planner": false,
+    "expected_selected_plan": [
+      "locate-law",
+      "read-located-law"
+    ],
+    "forbidden_selected_plan": [
+      "expensive-direct-read"
+    ]
+  }
+}
