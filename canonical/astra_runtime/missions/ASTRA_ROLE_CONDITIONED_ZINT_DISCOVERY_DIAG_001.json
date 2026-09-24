@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-ROLE-CONDITIONED-ZINT-DISCOVERY-DIAG-001",
+  "purpose": "Verify the role-conditioned producer discovery surfaces Zint for the fresh plain barcode goal before supplier probing.",
+  "steps": [
+    {
+      "id": "check-role-conditioned-zint",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/capability_discovery.py')\ns=importlib.util.spec_from_file_location('d',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nout=m.search_apt_packages('encode barcode',limit=24)\nhits=[x for x in out['candidates'] if x.get('name')=='zint']\nprint(json.dumps({'zint':hits,'top':out['candidates'][:8]},sort_keys=True))\nassert hits, 'ZINT_NOT_DISCOVERED'\nprint('ROLE_CONDITIONED_ZINT_DISCOVERED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "ROLE_CONDITIONED_ZINT_DISCOVERED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "read_only_diagnostic": true
+  }
+}
