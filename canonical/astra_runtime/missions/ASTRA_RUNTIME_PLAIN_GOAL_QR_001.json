@@ -30,6 +30,7 @@
     "manually_authored_initial_facts": false,
     "manually_authored_controller_actions": false,
     "existing_verified_qr_capability_required": false,
-    "replay_after_false_match_repair": "fe9a963602449a896c1778d1a34f73c1c9bcb586"
+    "replay_after_false_match_repair": "fe9a963602449a896c1778d1a34f73c1c9bcb586",
+    "replay_after_federated_discovery": "1fd25afab992c7f201972889d6066372a2f1327d"
   }
 }
