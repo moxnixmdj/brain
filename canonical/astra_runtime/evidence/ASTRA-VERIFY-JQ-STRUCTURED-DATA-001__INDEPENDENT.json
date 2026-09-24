@@ -1,0 +1,20 @@
+{
+  "expected": [
+    "auto.apt.zint",
+    "image.qr.generate.qrencode",
+    "json.query.jq",
+    "pdf.extract.ocr.tesseract",
+    "pdf.extract.text.pypdf"
+  ],
+  "observed": [
+    "auto.apt.zint",
+    "image.qr.generate.qrencode",
+    "json.query.jq",
+    "pdf.extract.ocr.tesseract",
+    "pdf.extract.text.pypdf"
+  ],
+  "output_sha256": "74e8527320163eceae7205153fa50305249b6264254fbaeafdff5dadeb839dc0",
+  "schema": "PROJECT_BRAIN_INDEPENDENT_SEMANTIC_VERIFICATION_V1",
+  "verified": true,
+  "verifier": "python-stdlib-json"
+}

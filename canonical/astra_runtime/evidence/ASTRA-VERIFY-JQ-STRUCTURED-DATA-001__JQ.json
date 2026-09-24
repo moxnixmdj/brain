@@ -1,0 +1,30 @@
+{
+  "adapter": "jq_query",
+  "argv": [
+    "jq",
+    "-r",
+    ".capabilities | keys | sort | .[]",
+    "/home/runner/work/brain/brain/canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+  ],
+  "capability_id": "json.query.jq",
+  "dependency": {
+    "origin": "Ubuntu",
+    "packages": [
+      {
+        "archive_sha256": "f59183392f84fe67b407b494d8ba6185e9b0e4a106ffcb369490bd20a83fd40e",
+        "name": "jq",
+        "version": "1.7.1-3ubuntu0.24.04.2"
+      }
+    ],
+    "status": "INSTALLED_VERIFIED"
+  },
+  "input_path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+  "output_bytes": 104,
+  "output_path": "canonical/astra_runtime/tmp/JQ_CAPABILITY_IDS.txt",
+  "output_sha256": "74e8527320163eceae7205153fa50305249b6264254fbaeafdff5dadeb839dc0",
+  "output_text_excerpt": "auto.apt.zint\nimage.qr.generate.qrencode\njson.query.jq\npdf.extract.ocr.tesseract\npdf.extract.text.pypdf\n",
+  "output_text_utf8_verified": true,
+  "output_verified": true,
+  "returncode": 0,
+  "stderr": ""
+}

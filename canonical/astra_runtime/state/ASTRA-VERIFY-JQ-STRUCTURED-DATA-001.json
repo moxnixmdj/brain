@@ -1,0 +1,56 @@
+{
+  "completed_at_utc": "2026-09-24T23:56:18.375025+00:00",
+  "created_at_utc": "2026-09-24T23:56:15.828122+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-24T23:56:18.315799+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib,sys\nroot=pathlib.Path('.').resolve()\np=root/'canonical/runtime/astra_runtime.py'\ns=importlib.util.spec_from_file_location('astra_runtime_jq_verify',p)\nm=importlib.util.module_from_spec(s); sys.modules[s.name]=m; s.loader.exec_module(m)\nargs={\n 'capability_id':'json.query.jq',\n 'input_path':'canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json',\n 'filter':'.capabilities | keys | sort | .[]',\n 'output_path':'canonical/astra_runtime/tmp/JQ_CAPABILITY_IDS.txt',\n 'raw_output':True,'require_nonempty':True,'timeout_s':60\n}\nout=m._invoke_bound_capability(args)\nev=root/'canonical/astra_runtime/evidence/ASTRA-VERIFY-JQ-STRUCTURED-DATA-001__JQ.json'\nev.write_text(json.dumps(out,indent=2,sort_keys=True)+'\\n',encoding='utf-8')\nassert out.get('output_verified') is True\nprint('JQ_PENDING_CAPABILITY_EXECUTED')\nPY",
+        "duration_s": 2.488,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "JQ_PENDING_CAPABILITY_EXECUTED\n"
+      },
+      "step_id": "invoke-pending-jq-capability",
+      "step_index": 0
+    },
+    {
+      "completed_at_utc": "2026-09-24T23:56:18.346005+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport json,pathlib,hashlib\nroot=pathlib.Path('.').resolve()\nreg=json.loads((root/'canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())\nexpected=sorted(reg['capabilities'].keys())\np=root/'canonical/astra_runtime/tmp/JQ_CAPABILITY_IDS.txt'\nobserved=[x for x in p.read_text(encoding='utf-8').splitlines() if x]\nassert observed==expected,(observed,expected)\nev={\n 'schema':'PROJECT_BRAIN_INDEPENDENT_SEMANTIC_VERIFICATION_V1',\n 'verified':True,'verifier':'python-stdlib-json',\n 'expected':expected,'observed':observed,\n 'output_sha256':hashlib.sha256(p.read_bytes()).hexdigest()\n}\n(root/'canonical/astra_runtime/evidence/ASTRA-VERIFY-JQ-STRUCTURED-DATA-001__INDEPENDENT.json').write_text(json.dumps(ev,indent=2,sort_keys=True)+'\\n')\nprint('JQ_INDEPENDENT_SEMANTIC_VERIFIED')\nPY",
+        "duration_s": 0.03,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "JQ_INDEPENDENT_SEMANTIC_VERIFIED\n"
+      },
+      "step_id": "independent-python-semantic-check",
+      "step_index": 1
+    },
+    {
+      "completed_at_utc": "2026-09-24T23:56:18.374694+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport json,pathlib\nroot=pathlib.Path('.').resolve()\nrp=root/'canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json'\nreg=json.loads(rp.read_text())\ncap=reg['capabilities']['json.query.jq']\nassert cap['status']=='BOUND_PENDING_INDEPENDENT_VERIFICATION'\nie=json.loads((root/'canonical/astra_runtime/evidence/ASTRA-VERIFY-JQ-STRUCTURED-DATA-001__INDEPENDENT.json').read_text())\nassert ie.get('verified') is True\ncap['status']='VERIFIED_BOUND_CAPABILITY'\ncap['verification']={\n 'mission_id':'ASTRA-VERIFY-JQ-STRUCTURED-DATA-001',\n 'independent_verifier':'python-stdlib-json',\n 'independent_verified':True,\n 'verification_evidence':'canonical/astra_runtime/evidence/ASTRA-VERIFY-JQ-STRUCTURED-DATA-001__INDEPENDENT.json'\n}\nrp.write_text(json.dumps(reg,indent=2,sort_keys=True)+'\\n')\nprint('JQ_CAPABILITY_PROMOTED')\nPY",
+        "duration_s": 0.028,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "JQ_CAPABILITY_PROMOTED\n"
+      },
+      "step_id": "promote-jq-capability",
+      "step_index": 2
+    }
+  ],
+  "mission_id": "ASTRA-VERIFY-JQ-STRUCTURED-DATA-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_JQ_STRUCTURED_DATA_001.json",
+  "mission_sha256": "fe9c9f567cf3cd647705d5186c9e01b1e8d7af0194df3444752a38d87bcebcf2",
+  "next_step": 3,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-24T23:56:18.374702+00:00"
+}

@@ -1,0 +1,5 @@
+auto.apt.zint
+image.qr.generate.qrencode
+json.query.jq
+pdf.extract.ocr.tesseract
+pdf.extract.text.pypdf
