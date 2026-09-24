@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-24T21:31:41.315439+00:00",
+  "mission_id": "ASTRA-RUNTIME-INHERIT-PDF-OCR-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_INHERIT_PDF_OCR_001.json",
+  "mission_sha256": "ee21d003c7099a02b61441eebfa518650f51f954bc25d2fdf1a503bbe6e59e98",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "3f9b276f2c829ee4ef8edad3b082afebbd73d840440ed3e3199a8f902823c4f9",
+  "status": "COMPLETE",
+  "steps_completed": 2
+}
