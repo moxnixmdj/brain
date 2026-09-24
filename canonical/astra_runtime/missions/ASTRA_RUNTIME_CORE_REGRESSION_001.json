@@ -17,6 +17,8 @@
     "incremental_spend_usd": 0,
     "model_controller_required": false,
     "read_only_verification": true,
-    "replay_after_binding_phrase_decomposition_fix": "3d0a8b250e24ecc75a9a357c5fffeb866971d7c9"
+    "replay_after_binding_phrase_decomposition_fix": "3d0a8b250e24ecc75a9a357c5fffeb866971d7c9",
+    "replay_after_discovery_grammar_cleanup_commit": "ebe3a2de16038d91c71d0fa741978450e698459c",
+    "replay_after_discovery_grammar_regression_commit": "ee8cb5f1c0c36b85d12a75f07ee58a728e3ef172"
   }
 }
