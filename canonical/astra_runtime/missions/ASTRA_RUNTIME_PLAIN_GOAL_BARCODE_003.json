@@ -16,7 +16,8 @@
     "optional_model_planner_used": false,
     "replay_after_direct_apt_source_contract_commit": "352285ac322dbd7b5398a85b1e374bfa0f0a4146",
     "replay_after_explicit_continuation_dispatch_commit": "ce605b07ebf32bc76c68dcfcdaba0ed701e0b276",
-    "targeted_acquisition_first": true
+    "targeted_acquisition_first": true,
+    "replay_after_capability_aware_regression_commit": "99119d9b2ebfb92f4ddfe821d5fdb6f2757a3250"
   },
   "goal": "Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png.",
   "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003",
