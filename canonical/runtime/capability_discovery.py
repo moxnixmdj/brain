@@ -195,10 +195,10 @@ def _apt_query_variants(queries):
         # "bar code", qrcode vs "qr-code". apt-cache accepts regex queries,
         # so add a bounded equivalent without introducing domain names.
         if query.endswith("code") and len(query)>4:
-            stem=re.escape(query[:-4])
-            variant=stem+r"[ -]?code"
-            if variant not in out:
-                out.append(variant)
+            stem=query[:-4]
+            for variant in (stem+" code", stem+"-code"):
+                if variant not in out:
+                    out.append(variant)
     return out
 
 
