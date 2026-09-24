@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003",
+  "purpose": "Fresh optimized end-to-end proof: one plain-language barcode goal, targeted acquisition first, autonomous producer discovery/contract synthesis, independent semantic verifier acquisition, promotion, replay, and completion.",
+  "goal": "Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png.",
+  "steps": [
+    {
+      "id": "run-goal-compiler-regressions",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/tests/test_goal_compiler.py",
+      "replay_on_resume": true,
+      "verify": {
+        "type": "returncode_zero"
+      }
+    },
+    {
+      "id": "execute-fresh-plain-goal",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 8,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "PLAIN_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "mandatory_model_planner": false,
+    "optional_model_planner_used": false,
+    "manual_target_effects": false,
+    "manual_initial_facts": false,
+    "manual_controller_actions": false,
+    "manual_supplier": false,
+    "manual_binding": false,
+    "fresh_mission_identity": true,
+    "targeted_acquisition_first": true
+  }
+}
