@@ -41,6 +41,15 @@ def main():
     )
     if not independent_ok:
         raise RuntimeError("PENDING_BINDING_INDEPENDENT_EFFECT_CHECK_FAILED")
+    semantic=pending.get("semantic_verification") or {}
+    if semantic.get("required") is True:
+        evidence=semantic.get("evidence")
+        if not isinstance(evidence,dict) or evidence.get("verified") is not True:
+            raise RuntimeError("SEMANTIC_VERIFICATION_REQUIRED")
+        if evidence.get("expected_text")!=semantic.get("expected_text"):
+            raise RuntimeError("SEMANTIC_VERIFICATION_EXPECTED_TEXT_MISMATCH")
+        if evidence.get("observed_text")!=semantic.get("expected_text"):
+            raise RuntimeError("SEMANTIC_VERIFICATION_CONTENT_MISMATCH")
     result={
       "schema":"PROJECT_BRAIN_AUTO_BINDING_VERIFICATION_V1",
       "capability_id":pending["capability_id"],
