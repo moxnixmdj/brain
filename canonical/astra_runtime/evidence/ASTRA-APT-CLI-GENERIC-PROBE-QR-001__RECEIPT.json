@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-24T22:03:42.357686+00:00",
+  "mission_id": "ASTRA-APT-CLI-GENERIC-PROBE-QR-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_APT_CLI_GENERIC_PROBE_QR_001.json",
+  "mission_sha256": "a92da47b75f83771dcbd10694f09200156ad824a849608326a4512bea5f55bff",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "358543d9e49976c3ee44a0ea0523594367a6e944373038810cbb322c3619515c",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

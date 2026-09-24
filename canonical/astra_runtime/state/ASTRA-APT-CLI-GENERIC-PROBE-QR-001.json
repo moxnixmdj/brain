@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-24T22:03:42.357378+00:00",
+  "created_at_utc": "2026-09-24T22:03:25.748027+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-24T22:03:42.357027+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython canonical/runtime/apt_cli_probe.py qrencode 4.1.1-1build2 613c5a22316489ec6a9ce5d59190293df15dd4612b55432dde04c62f7c1a0e25 canonical/astra_runtime/evidence/ASTRA-APT-CLI-GENERIC-PROBE-QR-001__RESULT.json\npython - <<'PY'\nimport json\nx=json.load(open('canonical/astra_runtime/evidence/ASTRA-APT-CLI-GENERIC-PROBE-QR-001__RESULT.json'))\nassert any(e['executable'].endswith('/qrencode') for e in x['executables'])\nassert any(any(a['text'] for a in e['help_attempts']) for e in x['executables'])\nprint('GENERIC_APT_CLI_PROBE_COMPLETE')\nPY",
+        "duration_s": 16.609,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"archive_sha256\": \"613c5a22316489ec6a9ce5d59190293df15dd4612b55432dde04c62f7c1a0e25\", \"executables\": [{\"executable\": \"/usr/bin/qrencode\", \"help_attempts\": [{\"flag\": \"--help\", \"returncode\": 0, \"text\": \"qrencode version 4.1.1\\nCopyright (C) 2006-2017 Kentaro Fukuchi\\nUsage: qrencode [-o FILENAME] [OPTION]... [STRING]\\nEncode input data in a QR Code and save as a PNG or EPS image.\\n\\n  -h, --help   display the help message. -h displays only the help of short\\n               options.\\n\\n  -o FILENAME, --output=FILENAME\\n               write image to FILENAME. If '-' is specified, the result\\n               will be output to standard output. If -S is given, structured\\n               symbols are written to FILENAME-01.png, FILENAME-02.png, ...\\n               (suffix is removed from FILENAME, if specified)\\n\\n  -r FILENAME, --read-from=FILENAME\\n               read input data from FILENAME.\\n\\n  -s NUMBER, --size=NUMBER\\n               specify module size in dots (pixels). (default=3)\\n\\n  -l {LMQH}, --level={LMQH}\\n               specify error correction level from L (lowest) to H (highest).\\n               (default=L)\\n\\n  -v NUMBER, --symversion=NUMBER\\n               specify the minimum version of the symbol. See SYMBOL VERSIONS\\n               for more information. (default=auto)\\n\\n  -m NUMBER, --margin=NUMBER\\n               specify the width of the margins. (default=4 (2 for Micro QR)))\\n\\n  -d NUMBER, --dpi=NUMBER\\n               specify the DPI of the generated PNG. (default=72)\\n\\n  -t {PNG,PNG32,EPS,SVG,XPM,ANSI,ANSI256,ASCII,ASCIIi,UTF8,UTF8i,ANSIUTF8,ANSIUTF8i,ANSI256UTF8},\\n  --type={PNG,PNG32,EPS,SVG,XPM,ANSI,ANSI256,ASCII,ASCIIi,UTF8,UTF8i,ANSIUTF8,ANSIUTF8i,ANSI256UTF8}\\n               specify the type of the generated image. (default=PNG)\\n\\n  -S, --structured\\n               make structured symbols. Version must be specified with '-v'.\\n\\n  -k, --kanji  assume that the input text contains kanji (shift-jis).\\n\\n  -c, --casesensitive\\n               encode lower-case alphabet characters in 8-bit mode. (default)\\n\\n  -i, --ignorecase\\n               ignore case distinctions and use only upper-case characters.\\n\\n  -8, --8bit   encode entire data in 8-bit mode. -k, -c and -i will be ignored.\\n\\n  -M, --micro  encode in a Micro QR Code.\\n\\n      --rle    enable run-length encoding for SVG.\\n\\n      --svg-path\\n               use single path to draw modules for SVG.\\n\\n      --inline only useful for SVG output, generates an SVG without the XML tag.\\n\\n      --foreground=RRGGBB[AA]\\n      --background=RRGGBB[AA]\\n               specify foreground/background color in hexadecimal notation.\\n               6-digit (RGB) or 8-digit (RGBA) form are supported.\\n               Color output support available only in PNG, EPS and SVG.\\n\\n      --strict-version\\n               disable automatic version number adjustment. If the input data is\\n               too large for the specified version, the program exits with the\\n               code of 1.\\n\\n  -V, --version\\n               display the version number and copyrights of the qrencode.\\n\\n      --verbose\\n               display verbose information to stderr.\\n\\n  [STRING]     input data. If it is not specified, data will be taken from\\n               standard input.\\n\\nSYMBOL VERSIONS\\n               The symbol versions of QR Code range from Version 1 to Version\\n               40. Each version has a different module configuration or number\\n               of modules, ranging from Version 1 (21 x 21 modules) up to\\n               Version 40 (177 x 177 modules). Each higher version number\\n               comprises 4 additional modules per side by default. See\\n               http://www.qrcode.com/en/about/version.html for a detailed\\n               version list.\"}]}], \"package\": \"qrencode\", \"schema\": \"PROJECT_BRAIN_APT_CLI_PROBE_V1\", \"version\": \"4.1.1-1build2\"}\nGENERIC_APT_CLI_PROBE_COMPLETE\n"
+      },
+      "step_id": "generic-probe-qrencode",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-APT-CLI-GENERIC-PROBE-QR-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_APT_CLI_GENERIC_PROBE_QR_001.json",
+  "mission_sha256": "a92da47b75f83771dcbd10694f09200156ad824a849608326a4512bea5f55bff",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-24T22:03:42.357041+00:00"
+}
