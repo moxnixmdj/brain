@@ -49,6 +49,7 @@ def _placeholders(value):
 def _repo_paths(goal, root):
     candidates=[]
     for raw in re.findall(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+",goal):
+        raw=raw.rstrip(".,;:!?)]}")
         p=(pathlib.Path(root)/raw).resolve()
         rr=pathlib.Path(root).resolve()
         if p==rr or rr in p.parents:
