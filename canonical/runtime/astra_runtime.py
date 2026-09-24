@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import argparse, gzip, hashlib, json, os, pathlib, shlex, subprocess, sys, time, urllib.parse, urllib.request
+import argparse, gzip, hashlib, importlib.util, json, os, pathlib, shlex, subprocess, sys, time, urllib.parse, urllib.request
 from datetime import datetime, timezone
 
 ROOT=pathlib.Path(__file__).resolve().parents[2]
@@ -182,6 +182,8 @@ def _run_model_independent_goal(step, mission, goal):
             raise Blocker("MODEL_INDEPENDENT_CONTROLLER_ARGS_INVALID")
         action.setdefault("args",{})
         result=_goal_action(action)
+        if isinstance(result,dict) and result.get("error"):
+            raise Blocker("MODEL_INDEPENDENT_ACTION_ERROR:"+str(result.get("error")))
         trace.append({"cycle":cycle,"plan":action,"result":result})
         if typ=="finish":
             summary=result.get("summary","")
@@ -199,11 +201,58 @@ def _run_model_independent_goal(step, mission, goal):
             }
     raise Blocker("MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH")
 
+def _capability_problem(step, mission):
+    problem=step.get("capability_problem")
+    ref=step.get("capability_problem_ref")
+    if problem is None and ref:
+        problem=mission.get(ref)
+    if problem is None:
+        return None
+    if not isinstance(problem,dict):
+        raise Blocker("CAPABILITY_PROBLEM_INVALID")
+    return problem
+
+def _load_capability_planner():
+    path=pathlib.Path(__file__).resolve().with_name("capability_planner.py")
+    spec=importlib.util.spec_from_file_location("project_brain_capability_planner",path)
+    if spec is None or spec.loader is None:
+        raise Blocker("CAPABILITY_PLANNER_LOAD_FAILED")
+    module=importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+def _run_capability_planned_goal(step, mission, goal):
+    problem=_capability_problem(step, mission)
+    if problem is None:
+        return None
+    planner=_load_capability_planner()
+    try:
+        planned=planner.plan_actions(problem)
+    except Exception as e:
+        raise Blocker("CAPABILITY_PLANNING_FAILED:"+type(e).__name__+":"+str(e)) from e
+    derived=dict(step)
+    derived.pop("capability_problem",None)
+    derived.pop("capability_problem_ref",None)
+    derived["controller_actions"]=planned["actions"]
+    derived["max_controller_actions"]=max(
+        int(step.get("max_controller_actions",16)),
+        len(planned["actions"])
+    )
+    result=_run_model_independent_goal(derived,mission,goal)
+    if result is None:
+        raise Blocker("CAPABILITY_PLAN_EXECUTION_MISSING")
+    result["planning_mode"]="DETERMINISTIC_CAPABILITY_GRAPH"
+    result["capability_plan"]=planned["planning"]
+    return result
+
 def run_goal(step, mission):
     goal=mission.get(step.get("goal_ref","goal"), mission.get("goal"))
     if isinstance(goal,(dict,list)): goal=json.dumps(goal,sort_keys=True)
     goal=str(goal or "").strip()
     if not goal: raise Blocker("GOAL_REQUIRED")
+    capability_result=_run_capability_planned_goal(step, mission, goal)
+    if capability_result is not None:
+        return capability_result
     direct=_run_model_independent_goal(step, mission, goal)
     if direct is not None:
         return direct
