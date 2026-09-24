@@ -48,7 +48,7 @@
               "expect": {
                 "type": "field_contains",
                 "field": "text",
-                "value": "OCR"
+                "value": "TEST"
               }
             }
           }
@@ -67,6 +67,7 @@
     "platform": "linux",
     "package_metadata_hash_checked": true,
     "replay_after_observability_patch_commit": "1fca3a27a6029c654616280d57affee397be5f9a",
-    "replay_after_ocr_hardening_commit": "ac6d99570812e0f7b7f434b555c14f374d3fd70d"
+    "replay_after_ocr_hardening_commit": "ac6d99570812e0f7b7f434b555c14f374d3fd70d",
+    "fixture_correction_reason": "Observed OCR worked but synthetic OCR glyphs were misread as ULF; verify effect on recognized TEST glyphs instead."
   }
 }
