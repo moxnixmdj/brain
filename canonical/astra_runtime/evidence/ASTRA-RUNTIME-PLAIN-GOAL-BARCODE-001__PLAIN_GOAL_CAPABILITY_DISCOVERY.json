@@ -1,12 +1,12 @@
 {
   "auto_acquisition": {
-    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED\", \"name\": \"iec16022\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"gir-rust-code-generator\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_TEXT_INPUT_UNRESOLVED\", \"name\": \"autodia\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"byacc-j\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"cbindgen\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"codfis\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"cproto\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"doxygen\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:E: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/ghostscript/libgs-common_10.02.1%7edfsg1-0ubuntu7.8_all.deb  404  Not Found [IP: 52.154.174.208 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/ghostscript/libgs10-common_10.02.1%7edfsg1-0ubuntu7.8_all.deb  404  Not Found [IP: 52.154.174.208 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/ghostscript/libgs10_10.02.1%7edfsg1-0ubuntu7.8_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/ghostscript/ghostscript_10.02.1%7edfsg1-0ubuntu7.8_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\\n\", \"name\": \"doxygen-latex\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"gap-autodoc\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"lhs2tex\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"puppet-strings\", \"status\": \"CONTRACT_REJECTED\"}]",
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED\", \"name\": \"iec16022\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"barcode\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"gir1.2-zbar-1.0\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-html5-qrcode\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"zbar-tools\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"zbarcam-gtk\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"zbarcam-qt\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"gir-rust-code-generator\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_TEXT_INPUT_UNRESOLVED\", \"name\": \"autodia\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"byacc-j\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"cbindgen\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"codfis\", \"status\": \"CONTRACT_REJECTED\"}]",
     "status": "NOT_DISPATCHED"
   },
   "binding_performed": false,
   "goal": "Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png.",
   "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-001",
-  "observed_at_utc": "2026-09-24T22:48:42.586723+00:00",
+  "observed_at_utc": "2026-09-24T22:51:51.253681+00:00",
   "result": {
     "binding_performed": false,
     "candidates": [
@@ -708,86 +708,6 @@
         "zero_cost_eligible": true
       },
       {
-        "description": "Generate EAN-13 and Code-128 barcodes locally and return SVG data. No network and no key.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.mrfentmen/barcode-mcp",
-        "packages": [
-          {
-            "identifier": "barcode-mcp",
-            "registry_type": "npm",
-            "required_environment": [],
-            "runtime_hint": null,
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": "1.0.1"
-          }
-        ],
-        "query": "barcode",
-        "remotes": [],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/mrfentmen/barcode-mcp"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 18,
-        "status": "active",
-        "version": "1.0.1",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Scan and generate barcodes and QR codes.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.domdomegg/barcode-scanner-mcp",
-        "packages": [
-          {
-            "identifier": "barcode-scanner-mcp",
-            "registry_type": "npm",
-            "required_environment": [],
-            "runtime_hint": "npx",
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": "1.2.0"
-          },
-          {
-            "identifier": "barcode-scanner-mcp",
-            "registry_type": "npm",
-            "required_environment": [
-              "MCP_TRANSPORT"
-            ],
-            "runtime_hint": "npx",
-            "secret_environment": [],
-            "transport": {
-              "type": "streamable-http",
-              "url": "http://localhost:3000/mcp"
-            },
-            "version": "1.2.0"
-          }
-        ],
-        "query": "barcode",
-        "remotes": [],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/domdomegg/barcode-scanner-mcp.git"
-        },
-        "required_environment_count": 1,
-        "required_secret_count": 0,
-        "score": 17,
-        "status": "active",
-        "version": "1.2.0",
-        "zero_cost_eligible": true
-      },
-      {
         "description": "Driven Intent Negotiation \u2014 Contract-Oriented Deterministic Executable Runtime DinCoder brings the\u2026",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
@@ -854,30 +774,6 @@
             "required_headers": [],
             "type": "streamable-http",
             "url": "https://qrflow.codes/mcp"
-          }
-        ],
-        "repository": null,
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "1.0.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Generate 10 conversion-focused ad headlines for a Shopify/e-commerce product. Free, no signup.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "com.adcreator-ai/generate-ad-headlines",
-        "packages": [],
-        "query": "generate",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://adcreator-ai.com/mcp-ads"
           }
         ],
         "repository": null,
@@ -1073,54 +969,6 @@
         "zero_cost_eligible": true
       },
       {
-        "description": "Product Barcode API - camgoz.net: Provides information on products available in markets across.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "com.jojapi/product-barcode-api",
-        "packages": [],
-        "query": "barcode",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://mcp.jojapi.com/product-barcode-api"
-          }
-        ],
-        "repository": null,
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "1.0.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Decode, render, validate barcodes: QR, DataMatrix, EAN, UPC, PDF417. All tools free, no auth.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.appvantagelabs2-a11y/barcode",
-        "packages": [],
-        "query": "barcode",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://mcp.casuyi.com/mcp"
-          }
-        ],
-        "repository": null,
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "1.0.2",
-        "zero_cost_eligible": true
-      },
-      {
         "description": "Team-aware memory: intent, decisions, real-time conflicts for AI coding assistants.",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
@@ -1184,36 +1032,160 @@
         "zero_cost_eligible": true
       },
       {
-        "description": "Visual tech-stack inventory of any codebase: languages, frameworks, databases, AI SDKs, infra.",
+        "description": "Research intelligence for AI coding agents. 2M+ CS papers with evidence and tradeoffs.",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "io.github.askuma/generate-tech-stack",
-        "packages": [
+        "name": "ai.paperlantern/code",
+        "packages": [],
+        "query": "code",
+        "remotes": [
           {
-            "identifier": "generate-tech-stack-mcp",
-            "registry_type": "pypi",
-            "required_environment": [],
-            "runtime_hint": null,
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": "0.2.2"
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.paperlantern.ai/chat/mcp"
           }
         ],
-        "query": "generate",
-        "remotes": [],
         "repository": {
           "source": "github",
-          "url": "https://github.com/askuma/generate-tech-stack"
+          "url": "https://github.com/paperlantern-ai/paperlantern-cli"
         },
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 14,
+        "score": 11,
         "status": "active",
-        "version": "0.2.2",
+        "version": "0.3.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Search, read and cite a researcher's own library and the canonical corpora on tbrp.app.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "app.tbrp/codex",
+        "packages": [],
+        "query": "code",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.tbrp-cdn.app/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "0.4.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "I do everything related to coding and execution tasks",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "co.civai.nova/code-interpreter-agent",
+        "packages": [],
+        "query": "code",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://nova.civai.co/mcp/agents/code-interpreter-agent"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Your team's shipping standards, org map and delivery metrics, inside your coding agent.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.coderbuds/insights",
+        "packages": [],
+        "query": "code",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://coderbuds.com/mcp/insights"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "1.5.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "CodeRide eliminates the context reset cycle once and for all. Through MCP integration, it seamless\u2026",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.smithery/PixdataOrg-coderide",
+        "packages": [],
+        "query": "code",
+        "remotes": [
+          {
+            "required_headers": [
+              "Authorization"
+            ],
+            "type": "streamable-http",
+            "url": "https://server.smithery.ai/@PixdataOrg/coderide/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/PixdataOrg/coderide-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 1,
+        "score": 12,
+        "status": "active",
+        "version": "0.9.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Find open-source libraries and fetch contextual code snippets by version to accelerate development\u2026",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.smithery/exa-labs-exa-code-mcp",
+        "packages": [],
+        "query": "code",
+        "remotes": [
+          {
+            "required_headers": [
+              "Authorization"
+            ],
+            "type": "streamable-http",
+            "url": "https://server.smithery.ai/@exa-labs/exa-code-mcp/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/exa-labs/exa-code-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 1,
+        "score": 12,
+        "status": "active",
+        "version": "0.0.1",
         "zero_cost_eligible": true
       }
     ],
@@ -1839,7 +1811,7 @@
       },
       {
         "binding_performed": false,
-        "candidate_count": 44,
+        "candidate_count": 30,
         "candidates": [
           {
             "description": "Source-linked CodeGraph exploration, ranked search, and static navigation for coding agents.",
@@ -1902,80 +1874,6 @@
             "zero_cost_eligible": true
           },
           {
-            "description": "Generate EAN-13 and Code-128 barcodes locally and return SVG data. No network and no key.",
-            "is_latest": true,
-            "name": "io.github.mrfentmen/barcode-mcp",
-            "packages": [
-              {
-                "identifier": "barcode-mcp",
-                "registry_type": "npm",
-                "required_environment": [],
-                "runtime_hint": null,
-                "secret_environment": [],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "1.0.1"
-              }
-            ],
-            "query": "barcode",
-            "remotes": [],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/mrfentmen/barcode-mcp"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 18,
-            "status": "active",
-            "version": "1.0.1",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Scan and generate barcodes and QR codes.",
-            "is_latest": true,
-            "name": "io.github.domdomegg/barcode-scanner-mcp",
-            "packages": [
-              {
-                "identifier": "barcode-scanner-mcp",
-                "registry_type": "npm",
-                "required_environment": [],
-                "runtime_hint": "npx",
-                "secret_environment": [],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "1.2.0"
-              },
-              {
-                "identifier": "barcode-scanner-mcp",
-                "registry_type": "npm",
-                "required_environment": [
-                  "MCP_TRANSPORT"
-                ],
-                "runtime_hint": "npx",
-                "secret_environment": [],
-                "transport": {
-                  "type": "streamable-http",
-                  "url": "http://localhost:3000/mcp"
-                },
-                "version": "1.2.0"
-              }
-            ],
-            "query": "barcode",
-            "remotes": [],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/domdomegg/barcode-scanner-mcp.git"
-            },
-            "required_environment_count": 1,
-            "required_secret_count": 0,
-            "score": 17,
-            "status": "active",
-            "version": "1.2.0",
-            "zero_cost_eligible": true
-          },
-          {
             "description": "Driven Intent Negotiation \u2014 Contract-Oriented Deterministic Executable Runtime DinCoder brings the\u2026",
             "is_latest": true,
             "name": "ai.smithery/flight505-mcp_dincoder",
@@ -2033,27 +1931,6 @@
                 "required_headers": [],
                 "type": "streamable-http",
                 "url": "https://qrflow.codes/mcp"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Generate 10 conversion-focused ad headlines for a Shopify/e-commerce product. Free, no signup.",
-            "is_latest": true,
-            "name": "com.adcreator-ai/generate-ad-headlines",
-            "packages": [],
-            "query": "generate",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://adcreator-ai.com/mcp-ads"
               }
             ],
             "repository": null,
@@ -2228,48 +2105,6 @@
             "zero_cost_eligible": true
           },
           {
-            "description": "Product Barcode API - camgoz.net: Provides information on products available in markets across.",
-            "is_latest": true,
-            "name": "com.jojapi/product-barcode-api",
-            "packages": [],
-            "query": "barcode",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://mcp.jojapi.com/product-barcode-api"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Decode, render, validate barcodes: QR, DataMatrix, EAN, UPC, PDF417. All tools free, no auth.",
-            "is_latest": true,
-            "name": "io.github.appvantagelabs2-a11y/barcode",
-            "packages": [],
-            "query": "barcode",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://mcp.casuyi.com/mcp"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.2",
-            "zero_cost_eligible": true
-          },
-          {
             "description": "Team-aware memory: intent, decisions, real-time conflicts for AI coding assistants.",
             "is_latest": true,
             "name": "ai.kawacode/mcp",
@@ -2327,70 +2162,6 @@
             "zero_cost_eligible": true
           },
           {
-            "description": "Visual tech-stack inventory of any codebase: languages, frameworks, databases, AI SDKs, infra.",
-            "is_latest": true,
-            "name": "io.github.askuma/generate-tech-stack",
-            "packages": [
-              {
-                "identifier": "generate-tech-stack-mcp",
-                "registry_type": "pypi",
-                "required_environment": [],
-                "runtime_hint": null,
-                "secret_environment": [],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "0.2.2"
-              }
-            ],
-            "query": "generate",
-            "remotes": [],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/askuma/generate-tech-stack"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 14,
-            "status": "active",
-            "version": "0.2.2",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "MCP server for Generate-Data.com: dataset generation, AI schema design, Project management.",
-            "is_latest": true,
-            "name": "io.github.ns-3e/generate-data-mcp",
-            "packages": [
-              {
-                "identifier": "generate-data-mcp",
-                "registry_type": "pypi",
-                "required_environment": [
-                  "GENERATE_DATA_API_KEY"
-                ],
-                "runtime_hint": null,
-                "secret_environment": [
-                  "GENERATE_DATA_API_KEY"
-                ],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "2.0.1"
-              }
-            ],
-            "query": "generate",
-            "remotes": [],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/ns-3e/generate-data-mcp"
-            },
-            "required_environment_count": 1,
-            "required_secret_count": 1,
-            "score": 14,
-            "status": "active",
-            "version": "2.0.1",
-            "zero_cost_eligible": true
-          },
-          {
             "description": "CodeRide eliminates the context reset cycle once and for all. Through MCP integration, it seamless\u2026",
             "is_latest": true,
             "name": "ai.smithery/PixdataOrg-coderide",
@@ -2440,32 +2211,6 @@
             "score": 12,
             "status": "active",
             "version": "0.0.1",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Generate game assets with AI for 2D games, including sprites, tilesets, and animations.",
-            "is_latest": true,
-            "name": "ai.spritecook/generate",
-            "packages": [],
-            "query": "generate",
-            "remotes": [
-              {
-                "required_headers": [
-                  "Authorization"
-                ],
-                "type": "streamable-http",
-                "url": "https://api.spritecook.ai/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/spritecook/spritecook-mcp"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 1,
-            "score": 12,
-            "status": "active",
-            "version": "0.2.17",
             "zero_cost_eligible": true
           },
           {
@@ -2579,32 +2324,256 @@
             "zero_cost_eligible": true
           },
           {
-            "description": "Create family-friendly greeting text and downloadable cards in 13 languages, including Hindi.",
+            "description": "Proves AI-generated Python does what you asked: lint, types, security, sandbox run, exact fixes.",
             "is_latest": true,
-            "name": "com.generategreetings/greetings",
+            "name": "ai.statemind/python-code-validator",
             "packages": [],
-            "query": "generate",
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://api.statemind.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/jkanselaar/python-code-validator"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 8,
+            "status": "active",
+            "version": "1.22.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Bounded KVP, RAG search, and wipe receipts for agent jobs over remote MCP",
+            "is_latest": true,
+            "name": "com.cnrcode/tillpad",
+            "packages": [],
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://tillpad.cnrcode.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/number1101/tillpad-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 8,
+            "status": "active",
+            "version": "0.1.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "12 synthetic coded claim exception cases: duplicate payments, policy-watch list entries, missing doc",
+            "is_latest": true,
+            "name": "com.a2awire/benchmark-coded-claim-audit-2026-09-14-a7b04acd",
+            "packages": [],
+            "query": "code",
             "remotes": [
               {
                 "required_headers": [],
                 "type": "streamable-http",
-                "url": "https://generategreetings.com/api/mcp"
+                "url": "https://a2awire.com/mcp/benchmarks/coded-claim-audit-2026-09-14-a7b04acd/http"
               }
             ],
-            "repository": null,
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/ee324/a2awire"
+            },
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 11,
+            "score": -85,
             "status": "active",
             "version": "1.0.0",
-            "zero_cost_eligible": true
+            "zero_cost_eligible": false
+          },
+          {
+            "description": "12 synthetic coded claim exception cases: duplicate payments, policy-watch list entries, missing doc",
+            "is_latest": true,
+            "name": "com.a2awire/benchmark-coded-claim-review-2026-09-14-eed490ea",
+            "packages": [],
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://a2awire.com/mcp/benchmarks/coded-claim-review-2026-09-14-eed490ea/http"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/ee324/a2awire"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": -85,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": false
+          },
+          {
+            "description": "A paid remote MCP for code graph MCP for AI coding, built to return verdicts, receipts, usage logs, ",
+            "is_latest": true,
+            "name": "com.clauxel.codegraphcontext/codegraphcontext-mcp",
+            "packages": [],
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://codegraphcontext.clauxel.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/clauxel/codegraph-context-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": -85,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": false
+          },
+          {
+            "description": "A paid remote MCP for CodeG, built to return verdicts, receipts, usage logs, and audit-ready JSON.",
+            "is_latest": true,
+            "name": "com.clauxel.codegworkspace/codegworkspace-mcp",
+            "packages": [],
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://codegworkspace.clauxel.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/clauxel/codeg-agent-workspace-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": -85,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": false
+          },
+          {
+            "description": "A paid remote MCP for OpenAI Codex harness MCP, built to return verdicts, receipts, usage logs, and ",
+            "is_latest": true,
+            "name": "com.clauxel.jcodeharness/jcodeharness-mcp",
+            "packages": [],
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://jcodeharness.clauxel.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/clauxel/jcode-harness-cloud-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": -85,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": false
+          },
+          {
+            "description": "Paid remote MCP for agent code search routing MCP, structured receipts, audit logs, and reviewer-rea",
+            "is_latest": true,
+            "name": "com.clauxel.semblecodesearchgate/semblecodesearchgate-mcp",
+            "packages": [],
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://semblecodesearchgate.clauxel.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/clauxel/semble-code-search-gate-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": -85,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": false
+          },
+          {
+            "description": "QR codes, WiFi and vCard codes, SEPA payment codes and EAN, UPC and Code 128 barcodes, drawn locally",
+            "is_latest": true,
+            "name": "com.bestremotetools/qr-barcode-wifi-vcard-sepa",
+            "packages": [
+              {
+                "identifier": "https://github.com/theluckystrike/mcp-servers/releases/download/v0.21.0/barcode.mcpb",
+                "registry_type": "mcpb",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [
+                  "MCP_LICENSE_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.21.0"
+              }
+            ],
+            "query": "code",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "subfolder": "servers/barcode",
+              "url": "https://github.com/theluckystrike/mcp-servers"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": -85,
+            "status": "active",
+            "version": "0.21.0",
+            "zero_cost_eligible": false
           }
         ],
         "effect": "Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png.",
         "errors": [
           {
             "error": "TimeoutError:The read operation timed out",
+            "query": "generate"
+          },
+          {
+            "error": "TimeoutError:The read operation timed out",
             "query": "128"
+          },
+          {
+            "error": "TimeoutError:The read operation timed out",
+            "query": "barcode"
           }
         ],
         "queries": [

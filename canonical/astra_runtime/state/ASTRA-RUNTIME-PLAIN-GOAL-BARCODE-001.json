@@ -1,9 +1,9 @@
 {
   "blocker": {
     "adapter": "goal",
-    "error": "Blocker:CAPABILITY_ACQUISITION_REQUIRED:{\"auto_acquisition_error\": \"AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED\\\", \\\"name\\\": \\\"iec16022\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\\\", \\\"name\\\": \\\"gir-rust-code-generator\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_TEXT_INPUT_UNRESOLVED\\\", \\\"name\\\": \\\"autodia\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\\\", \\\"name\\\": \\\"byacc-j\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\\\", \\\"name\\\": \\\"cbindgen\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"codfis\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\\\", \\\"name\\\": \\\"cproto\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\\\", \\\"name\\\": \\\"doxygen\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ProbeFailure:APT_INSTALL_FAILED:E: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/ghostscript/libgs-common_10.02.1%7edfsg1-0ubuntu7.8_all.deb  404  Not Found [IP: 52.154.174.208 80]\\\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/ghostscript/libgs10-common_10.02.1%7edfsg1-0ubuntu7.8_all.deb  404  Not Found [IP: 52.154.174.208 80]\\\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/ghostscript/libgs10_10.02.1%7edfsg1-0ubuntu7.8_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\\\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/ghostscript/ghostscript_10.02.1%7edfsg1-0ubuntu7.8_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\\\\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\\\\n\\\", \\\"name\\\": \\\"doxygen-latex\\\", \\\"status\\\": \\\"PROBE_FAILED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"gap-autodoc\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\\\", \\\"name\\\": \\\"lhs2tex\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"puppet-strings\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}]\", \"evidence_path\": \"canonical/astra_runtime/evidence/ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-001__PLAIN_GOAL_CAPABILITY_DISCOVERY.json\", \"top_candidates\": [{\"integration_friction\": 0, \"name\": \"barcode\", \"required_secret_count\": 0, \"score\": 40, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"gir1.2-zbar-1.0\", \"required_secret_count\": 0, \"score\": 40, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"iec16022\", \"required_secret_count\": 0, \"score\": 40, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"node-html5-qrcode\", \"required_secret_count\": 0, \"score\": 40, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"zbar-tools\", \"required_secret_count\": 0, \"score\": 40, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"zbarcam-gtk\", \"required_secret_count\": 0, \"score\": 40, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"zbarcam-qt\", \"required_secret_count\": 0, \"score\": 40, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"gir-rust-code-generator\", \"required_secret_count\": 0, \"score\": 36, \"zero_cost_eligible\": true}]}",
+    "error": "Blocker:CAPABILITY_ACQUISITION_REQUIRED:{\"auto_acquisition_error\": \"AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED\\\", \\\"name\\\": \\\"iec16022\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\\\", \\\"name\\\": \\\"barcode\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"gir1.2-zbar-1.0\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"node-html5-qrcode\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\\\", \\\"name\\\": \\\"zbar-tools\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"zbarcam-gtk\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"zbarcam-qt\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\\\", \\\"name\\\": \\\"gir-rust-code-generator\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_TEXT_INPUT_UNRESOLVED\\\", \\\"name\\\": \\\"autodia\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\\\", \\\"name\\\": \\\"byacc-j\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\\\", \\\"name\\\": \\\"cbindgen\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"codfis\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}]\", \"evidence_path\": \"canonical/astra_runtime/evidence/ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-001__PLAIN_GOAL_CAPABILITY_DISCOVERY.json\", \"top_candidates\": [{\"integration_friction\": 0, \"name\": \"barcode\", \"required_secret_count\": 0, \"score\": 40, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"gir1.2-zbar-1.0\", \"required_secret_count\": 0, \"score\": 40, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"iec16022\", \"required_secret_count\": 0, \"score\": 40, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"node-html5-qrcode\", \"required_secret_count\": 0, \"score\": 40, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"zbar-tools\", \"required_secret_count\": 0, \"score\": 40, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"zbarcam-gtk\", \"required_secret_count\": 0, \"score\": 40, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"zbarcam-qt\", \"required_secret_count\": 0, \"score\": 40, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"gir-rust-code-generator\", \"required_secret_count\": 0, \"score\": 36, \"zero_cost_eligible\": true}]}",
     "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-001",
-    "observed_at_utc": "2026-09-24T22:49:48.542595+00:00",
+    "observed_at_utc": "2026-09-24T22:52:29.490187+00:00",
     "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
     "step_id": "execute-fresh-plain-goal",
     "step_index": 1
@@ -27,7 +27,7 @@
   ],
   "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-001",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_PLAIN_GOAL_BARCODE_001.json",
-  "mission_sha256": "909f03f36e3f04ed05d4e3bbe409b8ce32cee19e6ba4fbcc99fd652408c3e9a9",
+  "mission_sha256": "b2da5087ccca1c13e2be483f99c4f0b3244d4a680b8ce52034fd6ca4d016735a",
   "next_step": 1,
   "rehydrations": [
     {
@@ -113,10 +113,31 @@
           "step_index": 0
         }
       ]
+    },
+    {
+      "at_utc": "2026-09-24T22:50:15.720867+00:00",
+      "before_step": 1,
+      "steps": [
+        {
+          "completed_at_utc": "2026-09-24T22:50:15.720848+00:00",
+          "ok": true,
+          "rehydration": true,
+          "result": {
+            "adapter": "shell",
+            "command": "set -euo pipefail\npython canonical/tests/test_goal_compiler.py",
+            "duration_s": 0.109,
+            "returncode": 0,
+            "stderr": "test_barcode_goal_does_not_false_match_qr (__main__.GoalCompilerTests.test_barcode_goal_does_not_false_match_qr) ... ok\ntest_plain_image_only_pdf_goal_selects_verified_ocr (__main__.GoalCompilerTests.test_plain_image_only_pdf_goal_selects_verified_ocr) ... ok\ntest_plain_qr_goal_selects_verified_qr_and_binds_arguments (__main__.GoalCompilerTests.test_plain_qr_goal_selects_verified_qr_and_binds_arguments) ... ok\ntest_unknown_goal_fails_closed (__main__.GoalCompilerTests.test_unknown_goal_fails_closed) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.002s\n\nOK\n",
+            "stdout": ""
+          },
+          "step_id": "run-goal-compiler-regressions",
+          "step_index": 0
+        }
+      ]
     }
   ],
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
   "status": "BLOCKED",
-  "updated_at_utc": "2026-09-24T22:49:48.542851+00:00"
+  "updated_at_utc": "2026-09-24T22:52:29.490626+00:00"
 }
