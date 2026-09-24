@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-24T21:06:54.013549+00:00",
+  "mission_id": "ASTRA-RUNTIME-CAPABILITY-GRAPH-PLANNER-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_CAPABILITY_GRAPH_PLANNER_001.json",
+  "mission_sha256": "95128851fb64c440e979c1390e4bb04f39768d4565db9d0b67d108f4e495cf53",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "a206cc79be2a9f4c69a1927446cdfcabf47da7821a7d0d90f4c5978daa1b84ca",
+  "status": "COMPLETE",
+  "steps_completed": 3
+}
