@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-import argparse, gzip, hashlib, importlib.util, json, os, pathlib, shlex, subprocess, sys, time, urllib.parse, urllib.request
+import argparse, gzip, hashlib, importlib.util, json, os, pathlib, shlex, subprocess, sys, tempfile, time, urllib.parse, urllib.request
+import importlib.metadata
 from datetime import datetime, timezone
 
 ROOT=pathlib.Path(__file__).resolve().parents[2]
@@ -76,6 +77,126 @@ def _safe_repo_path(raw):
         raise Blocker("PATH_OUTSIDE_REPOSITORY")
     return p
 
+def _load_bound_capability_registry():
+    path=ROOT/"canonical"/"runtime"/"BOUND_CAPABILITY_REGISTRY_V1.json"
+    data=readj(path)
+    if data.get("schema")!="PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1":
+        raise Blocker("BOUND_CAPABILITY_REGISTRY_INVALID")
+    caps=data.get("capabilities")
+    if not isinstance(caps,dict):
+        raise Blocker("BOUND_CAPABILITY_REGISTRY_INVALID")
+    return caps
+
+def _ensure_pypi_dependency(source):
+    name=str(source.get("project") or "").strip()
+    version=str(source.get("version") or "").strip()
+    filename=str(source.get("wheel_filename") or "").strip()
+    expected=str(source.get("wheel_sha256") or "").strip().lower()
+    metadata_url=str(source.get("metadata_url") or "").strip()
+    if not all((name,version,filename,expected,metadata_url)):
+        raise Blocker("BOUND_PYPI_SOURCE_INCOMPLETE")
+    try:
+        if importlib.metadata.version(name)==version:
+            return {"status":"ALREADY_INSTALLED","project":name,"version":version}
+    except importlib.metadata.PackageNotFoundError:
+        pass
+    req=urllib.request.Request(metadata_url,headers={"User-Agent":"ProjectBrain-BoundCapability/1"})
+    with urllib.request.urlopen(req,timeout=20) as resp:
+        meta=json.loads(resp.read(2000000).decode("utf-8"))
+    matches=[u for u in meta.get("urls",[]) if u.get("filename")==filename]
+    if len(matches)!=1:
+        raise Blocker("BOUND_PYPI_WHEEL_NOT_UNIQUE")
+    artifact=matches[0]
+    metadata_sha=str((artifact.get("digests") or {}).get("sha256") or "").lower()
+    if metadata_sha!=expected:
+        raise Blocker("BOUND_PYPI_METADATA_HASH_MISMATCH")
+    url=str(artifact.get("url") or "")
+    if not url.startswith("https://"):
+        raise Blocker("BOUND_PYPI_WHEEL_URL_INVALID")
+    with urllib.request.urlopen(
+        urllib.request.Request(url,headers={"User-Agent":"ProjectBrain-BoundCapability/1"}),
+        timeout=30
+    ) as resp:
+        raw=resp.read(12000000)
+    actual=hashlib.sha256(raw).hexdigest()
+    if actual!=expected:
+        raise Blocker("BOUND_PYPI_WHEEL_HASH_MISMATCH")
+    with tempfile.TemporaryDirectory(prefix="project-brain-cap-") as td:
+        wheel=pathlib.Path(td)/filename
+        wheel.write_bytes(raw)
+        proc=subprocess.run(
+            [sys.executable,"-m","pip","install","--disable-pip-version-check","--quiet","--no-deps",str(wheel)],
+            cwd=ROOT,text=True,capture_output=True,timeout=120
+        )
+        if proc.returncode!=0:
+            raise Blocker("BOUND_PYPI_INSTALL_FAILED:"+proc.stderr[-1200:])
+    try:
+        installed=importlib.metadata.version(name)
+    except importlib.metadata.PackageNotFoundError as e:
+        raise Blocker("BOUND_PYPI_INSTALL_NOT_VISIBLE") from e
+    if installed!=version:
+        raise Blocker("BOUND_PYPI_INSTALLED_VERSION_MISMATCH:"+installed)
+    return {"status":"INSTALLED_VERIFIED","project":name,"version":version,"wheel_sha256":actual}
+
+def _invoke_bound_capability(args):
+    cid=str(args.get("capability_id") or "").strip()
+    if not cid:
+        raise Blocker("BOUND_CAPABILITY_ID_REQUIRED")
+    entry=_load_bound_capability_registry().get(cid)
+    if not isinstance(entry,dict):
+        raise Blocker("BOUND_CAPABILITY_UNKNOWN:"+cid)
+    if float(entry.get("incremental_spend_usd",0))!=0:
+        raise Blocker("BOUND_CAPABILITY_NONZERO_COST_REJECTED:"+cid)
+    source=entry.get("source") or {}
+    dependency=None
+    if source.get("type")=="pypi":
+        dependency=_ensure_pypi_dependency(source)
+    module_name=str(entry.get("adapter_module") or "")
+    if not module_name or any(ch not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_" for ch in module_name):
+        raise Blocker("BOUND_CAPABILITY_ADAPTER_INVALID")
+    path=ROOT/"canonical"/"runtime"/"bound_capabilities"/(module_name+".py")
+    if not path.is_file():
+        raise Blocker("BOUND_CAPABILITY_ADAPTER_MISSING")
+    spec=importlib.util.spec_from_file_location("project_brain_bound_"+module_name,path)
+    if spec is None or spec.loader is None:
+        raise Blocker("BOUND_CAPABILITY_ADAPTER_LOAD_FAILED")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    fn=getattr(module,str(entry.get("entrypoint") or "run"),None)
+    if not callable(fn):
+        raise Blocker("BOUND_CAPABILITY_ENTRYPOINT_MISSING")
+    call_args=dict(args)
+    call_args.pop("capability_id",None)
+    result=fn(call_args,ROOT)
+    if not isinstance(result,dict):
+        raise Blocker("BOUND_CAPABILITY_RESULT_INVALID")
+    result.setdefault("capability_id",cid)
+    result["dependency"]=dependency
+    return result
+
+def _verify_action_expectation(action,result):
+    expect=action.get("expect")
+    if expect is None:
+        return
+    if not isinstance(expect,dict):
+        raise Blocker("ACTION_EXPECTATION_INVALID")
+    field=str(expect.get("field") or "").strip()
+    if not field:
+        raise Blocker("ACTION_EXPECTATION_FIELD_REQUIRED")
+    value=result.get(field)
+    typ=expect.get("type","field_nonempty")
+    if typ=="field_nonempty":
+        ok=value not in (None,"",[],{})
+    elif typ=="field_contains":
+        ok=str(expect.get("value","")) in str(value or "")
+    elif typ=="field_equals":
+        ok=value==expect.get("value")
+    else:
+        raise Blocker("ACTION_EXPECTATION_TYPE_UNKNOWN:"+str(typ))
+    if not ok:
+        raise Blocker("ACTION_EXPECTATION_FAILED:"+field)
+
 def _goal_action(action):
     typ=action.get("type")
     args=action.get("args") or {}
@@ -112,6 +233,8 @@ def _goal_action(action):
         url=str(args.get("url",""))
         if not url.startswith(("https://","http://")): return {"type":typ,"error":"UNSUPPORTED_URL"}
         return run_http({"url":url,"timeout_s":20,"max_bytes":60000})
+    if typ=="invoke_capability":
+        return _invoke_bound_capability(args)
     if typ=="finish":
         return {"type":typ,"summary":str(args.get("summary",""))[:12000]}
     raise Blocker("GOAL_ACTION_NOT_ALLOWED:"+str(typ))
@@ -169,7 +292,7 @@ def _run_model_independent_goal(step, mission, goal):
     actions=_controller_actions(step, mission)
     if actions is None:
         return None
-    allowed_types={"read_file","list_tree","search_text","http_get","finish"}
+    allowed_types={"read_file","list_tree","search_text","http_get","invoke_capability","finish"}
     trace=[]
     for cycle, raw_action in enumerate(actions):
         if not isinstance(raw_action,dict):
@@ -184,6 +307,7 @@ def _run_model_independent_goal(step, mission, goal):
         result=_goal_action(action)
         if isinstance(result,dict) and result.get("error"):
             raise Blocker("MODEL_INDEPENDENT_ACTION_ERROR:"+str(result.get("error")))
+        _verify_action_expectation(action,result)
         trace.append({"cycle":cycle,"plan":action,"result":result})
         if typ=="finish":
             summary=result.get("summary","")
