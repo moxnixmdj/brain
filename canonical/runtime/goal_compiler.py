@@ -173,7 +173,7 @@ def decompose_goal(goal):
     parts=re.split(r"(?<=[.!?])\s+(?=[A-Z])|\b[Tt]hen\b",text)
     clauses=[]
     action_connector=re.compile(
-        r"\s+and\s+(?=(?:read|inspect|create|generate|write|save|convert|extract|verify|check|render|analy[sz]e)\b)",
+        r"\s+and\s+(?=(?:read|inspect|create|generate|convert|extract|verify|check|render|analy[sz]e)\b)",
         re.IGNORECASE,
     )
     for part in parts:
