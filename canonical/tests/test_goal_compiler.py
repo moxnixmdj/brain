@@ -41,6 +41,20 @@ class GoalCompilerTests(unittest.TestCase):
         self.assertEqual(out["inputs"]["text"],"PROJECT BRAIN")
         self.assertEqual(out["inputs"]["output_path"],"canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png")
 
+    def test_compound_goal_exposes_first_unresolved_subgoal(self):
+        goal=(
+            "Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json. "
+            "Create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.md containing a table with every VERIFIED_BOUND_CAPABILITY. "
+            "Then create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.pdf from that report and verify that the final PDF contains every capability ID."
+        )
+        with self.assertRaises(compiler.GoalCompilationFailure) as ctx:
+            compiler.compile_goal(goal,self.registry(),ROOT)
+        self.assertEqual(ctx.exception.code,"GOAL_COMPILATION_SUBGOAL_UNRESOLVED")
+        detail=json.loads(ctx.exception.detail)
+        self.assertEqual(detail["index"],1)
+        self.assertTrue(detail["subgoal"].startswith("Create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.md"))
+        self.assertEqual(detail["cause"],"GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH")
+
     def test_plain_qr_goal_selects_verified_qr_and_binds_arguments(self):
         goal="Generate a QR code image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png."
         out=compiler.compile_goal(goal,self.registry(),ROOT)
