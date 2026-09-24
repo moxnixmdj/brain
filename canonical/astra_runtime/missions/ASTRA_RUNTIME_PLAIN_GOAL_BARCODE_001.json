@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-001",
+  "purpose": "Test autonomous acquisition from a genuinely fresh plain goal: discover, probe, synthesize, independently verify, promote, replay, and finish if the conservative APT-CLI class can support it.",
+  "goal": "Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png.",
+  "steps": [
+    {
+      "id": "run-goal-compiler-regressions",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/tests/test_goal_compiler.py",
+      "replay_on_resume": true,
+      "verify": {
+        "type": "returncode_zero"
+      }
+    },
+    {
+      "id": "execute-fresh-plain-goal",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 8,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "PLAIN_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "manually_authored_target_effects": false,
+    "manually_authored_initial_facts": false,
+    "manually_authored_controller_actions": false,
+    "manually_selected_supplier": false,
+    "manual_binding_forbidden": true
+  }
+}
