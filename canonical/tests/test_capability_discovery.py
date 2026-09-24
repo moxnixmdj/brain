@@ -96,6 +96,18 @@ class CapabilityDiscoveryTests(unittest.TestCase):
         paid = [c for c in out["candidates"] if c["name"] == "io.example/paid-filesystem"][0]
         self.assertFalse(paid["zero_cost_eligible"])
 
+    def test_effect_queries_ignore_repo_path_noise_but_keep_file_type(self):
+        effect=(
+            "Create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.md "
+            "containing a table with every VERIFIED_BOUND_CAPABILITY."
+        )
+        queries=discovery.effect_queries(effect)
+        self.assertEqual(queries[:2],["markdown","table"])
+        self.assertNotIn("canonical",queries)
+        self.assertNotIn("astra",queries)
+        self.assertNotIn("runtime",queries)
+        self.assertNotIn("tmp",queries)
+
     def test_discovery_never_binds_during_search(self):
         out = discovery.search_mcp_registry("filesystem.read", opener=fake_open)
         self.assertFalse(out["binding_performed"])
