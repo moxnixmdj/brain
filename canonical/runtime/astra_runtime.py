@@ -833,6 +833,24 @@ def main():
         raise Blocker("STATE_MISSION_ID_MISMATCH")
     if state.get("mission_path", a.mission) != a.mission:
         raise Blocker("STATE_MISSION_PATH_MISMATCH")
+    prior_mission_sha256=state.get("mission_sha256")
+    if (
+        state.get("status")=="COMPLETE"
+        and prior_mission_sha256
+        and prior_mission_sha256!=mission_sha256
+    ):
+        blocker={
+          "schema":"PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+          "mission_id":mid,
+          "phase":"MISSION_IDENTITY",
+          "error":"COMPLETE_MISSION_HASH_DRIFT_REQUIRES_NEW_MISSION_ID",
+          "completed_mission_sha256":prior_mission_sha256,
+          "current_mission_sha256":mission_sha256,
+          "observed_at_utc":utc()
+        }
+        writej(EVID_DIR/f"{mid}__MISSION_DRIFT_BLOCKER.json",blocker)
+        print(json.dumps(blocker))
+        return 5
     state["mission_path"]=a.mission
     state["mission_sha256"]=mission_sha256
     # A durable checkpoint can outlive its executor, while filesystem/process
