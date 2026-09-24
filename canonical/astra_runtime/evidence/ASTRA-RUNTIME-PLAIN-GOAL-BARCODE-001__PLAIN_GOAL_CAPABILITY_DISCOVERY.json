@@ -1,0 +1,1193 @@
+{
+  "auto_acquisition": {
+    "error": "ContractInferenceFailure:CLI_HELP_USAGE_REQUIRED",
+    "status": "NOT_DISPATCHED"
+  },
+  "binding_performed": false,
+  "goal": "Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png.",
+  "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-001",
+  "observed_at_utc": "2026-09-24T22:13:07.369831+00:00",
+  "result": {
+    "binding_performed": false,
+    "candidates": [
+      {
+        "archive_sha256": "cfda4a63c84333f24a72d43ceec5f0a29af27841d21e4a501a6382fb18a0f336",
+        "binding_kind": "apt",
+        "description": "Utility for barcode generation",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "barcode",
+          "code"
+        ],
+        "name": "barcode",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 40,
+        "version": "0.99-7",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "4724dba57386f51c02c7f32eacd410284959e616a2e00144dad2212c3b2bfdeb",
+        "binding_kind": "apt",
+        "description": "Generates graphviz graphs from HDA-Intel codec information",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "codecgraph",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 24,
+        "version": "20120114-5build4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "43d69296b5005a89ec249f9e9f9db06e285ce3f9d0d67cced684eaa0328a9638",
+        "binding_kind": "apt",
+        "description": "PHP library for generating two-dimensional barcodes",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "barcode",
+          "code"
+        ],
+        "name": "phpqrcode",
+        "packages": [],
+        "query": "barcode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 24,
+        "version": "1.1.4-3.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "5b2d47a8869c5e43ceadb47c320d2ed2edf3ab716074b6c2f458b5d3d6c64c7a",
+        "binding_kind": "apt",
+        "description": "Platform files for Arduino to run on ATmega1284P",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "128"
+        ],
+        "name": "arduino-mighty-1284p",
+        "packages": [],
+        "query": "128",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 20,
+        "version": "1-5",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "6b49289240a4b59ddefec856fadcb90e69b4e9ded04e8cea3b29b6a4b5764ef4",
+        "binding_kind": "apt",
+        "description": "binary gcode generation library",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code"
+        ],
+        "name": "bgcode",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 20,
+        "version": "0.0~git20240220.33a1eeb-1build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "08c39fb07f0ee1cf6e599b8b8496cd4157ca96292b2bbccc74dbc3a2c68d210d",
+        "binding_kind": "apt",
+        "description": "code-understanding, code-browsing or code-search tool",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code"
+        ],
+        "name": "codequery",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 20,
+        "version": "0.27.0+dfsg-1build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "4d837b0919d0288ad936c393d67942479c0cc5f216273b940f1479eb23f6dd4b",
+        "binding_kind": "apt",
+        "description": "SMBIOS/DMI table decoder",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code"
+        ],
+        "name": "dmidecode",
+        "packages": [],
+        "query": "code",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 20,
+        "version": "3.5-3ubuntu0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "b4d05773411e3672f7ec07130b77befc1f8f2224be580cbe94c3b364abe6215c",
+        "binding_kind": "apt",
+        "description": "icons for the geocode-glib library",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code"
+        ],
+        "name": "geocode-glib-common",
+        "packages": [],
+        "query": "code",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 20,
+        "version": "3.26.3-6build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "dfe2a7a3bea5fd23c5141393559cae60481a450cf32db8a3afd1e367a74546b4",
+        "binding_kind": "apt",
+        "description": "introspection data for geocode-glib library",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code"
+        ],
+        "name": "gir1.2-geocodeglib-2.0",
+        "packages": [],
+        "query": "code",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 20,
+        "version": "3.26.3-6build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "10b8e63a940fc890582663aaab1413a97d7c0296e7611d9c39b746f3cc75ee4e",
+        "binding_kind": "apt",
+        "description": "QR Code encoder (Go program)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code"
+        ],
+        "name": "go-qrcode",
+        "packages": [],
+        "query": "barcode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 20,
+        "version": "0.0~git20200617.da1b656-4ubuntu0.24.04.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "b3cba02f7d4400bf8c38daf37139f9ba9c12f0e70ef49f035305a6ef27ce0f79",
+        "binding_kind": "apt",
+        "description": "Generates 2d ISO/IEC 16022 barcodes (data matrix/semacode)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "barcode",
+          "code",
+          "generate"
+        ],
+        "name": "iec16022",
+        "packages": [],
+        "query": "barcode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 20,
+        "version": "0.2.7-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "367a81b059398314db666421f8ba4e55c726c052c5832a816af384db3bbf325e",
+        "binding_kind": "apt",
+        "description": "Perl library to generate CODE 128 bar codes",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 3,
+        "matched_terms": [
+          "128",
+          "barcode",
+          "code",
+          "generate"
+        ],
+        "name": "libbarcode-code128-perl",
+        "packages": [],
+        "query": "128",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 28,
+        "version": "2.21-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Source-linked CodeGraph exploration, ranked search, and static navigation for coding agents.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.codenib/codenib",
+        "packages": [
+          {
+            "identifier": "codenib",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "uvx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.2.3"
+          }
+        ],
+        "query": "code",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/sysevol-ai/CodeNib"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.2.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Generate EAN-13 and Code-128 barcodes locally and return SVG data. No network and no key.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.mrfentmen/barcode-mcp",
+        "packages": [
+          {
+            "identifier": "barcode-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.1"
+          }
+        ],
+        "query": "barcode",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/mrfentmen/barcode-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Scan and generate barcodes and QR codes.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.domdomegg/barcode-scanner-mcp",
+        "packages": [
+          {
+            "identifier": "barcode-scanner-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": "npx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.2.0"
+          },
+          {
+            "identifier": "barcode-scanner-mcp",
+            "registry_type": "npm",
+            "required_environment": [
+              "MCP_TRANSPORT"
+            ],
+            "runtime_hint": "npx",
+            "secret_environment": [],
+            "transport": {
+              "type": "streamable-http",
+              "url": "http://localhost:3000/mcp"
+            },
+            "version": "1.2.0"
+          }
+        ],
+        "query": "barcode",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/domdomegg/barcode-scanner-mcp.git"
+        },
+        "required_environment_count": 1,
+        "required_secret_count": 0,
+        "score": 17,
+        "status": "active",
+        "version": "1.2.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Driven Intent Negotiation \u2014 Contract-Oriented Deterministic Executable Runtime DinCoder brings the\u2026",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.smithery/flight505-mcp_dincoder",
+        "packages": [],
+        "query": "code",
+        "remotes": [
+          {
+            "required_headers": [
+              "Authorization"
+            ],
+            "type": "streamable-http",
+            "url": "https://server.smithery.ai/@flight505/mcp_dincoder/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/flight505/MCP_DinCoder"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1.15",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Verified discount & referral codes for crypto exchanges, cards and more \u2014 tested first-hand.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "codes.find/verified-codes",
+        "packages": [],
+        "query": "code",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://find.codes/api/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Create QR codes, re-point printed dynamic codes, name links on your domain, read scan analytics.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "codes.qrflow/qrflow",
+        "packages": [],
+        "query": "code",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://qrflow.codes/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Generate 10 conversion-focused ad headlines for a Shopify/e-commerce product. Free, no signup.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.adcreator-ai/generate-ad-headlines",
+        "packages": [],
+        "query": "generate",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://adcreator-ai.com/mcp-ads"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Product Barcode API - camgoz.net: Provides information on products available in markets across.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.jojapi/product-barcode-api",
+        "packages": [],
+        "query": "barcode",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.jojapi.com/product-barcode-api"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Decode, render, validate barcodes: QR, DataMatrix, EAN, UPC, PDF417. All tools free, no auth.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.appvantagelabs2-a11y/barcode",
+        "packages": [],
+        "query": "barcode",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.casuyi.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "CityHash128 hex length, input discarded",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.sadri-dridi/city128",
+        "packages": [],
+        "query": "128",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/city128/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "FarmHash128 hex length, input discarded",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.sadri-dridi/farm128",
+        "packages": [],
+        "query": "128",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/farm128/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "FNV-1a 128 hex length, input discarded",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.sadri-dridi/fnv128-ok",
+        "packages": [],
+        "query": "128",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/fnv128-ok/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      }
+    ],
+    "effect": "Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png.",
+    "results": [
+      {
+        "binding_performed": false,
+        "candidate_count": 12,
+        "candidates": [
+          {
+            "archive_sha256": "cfda4a63c84333f24a72d43ceec5f0a29af27841d21e4a501a6382fb18a0f336",
+            "binding_kind": "apt",
+            "description": "Utility for barcode generation",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "barcode",
+              "code"
+            ],
+            "name": "barcode",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 40,
+            "version": "0.99-7",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "367a81b059398314db666421f8ba4e55c726c052c5832a816af384db3bbf325e",
+            "binding_kind": "apt",
+            "description": "Perl library to generate CODE 128 bar codes",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 3,
+            "matched_terms": [
+              "128",
+              "barcode",
+              "code",
+              "generate"
+            ],
+            "name": "libbarcode-code128-perl",
+            "packages": [],
+            "query": "128",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 28,
+            "version": "2.21-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "4724dba57386f51c02c7f32eacd410284959e616a2e00144dad2212c3b2bfdeb",
+            "binding_kind": "apt",
+            "description": "Generates graphviz graphs from HDA-Intel codec information",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "codecgraph",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 24,
+            "version": "20120114-5build4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "43d69296b5005a89ec249f9e9f9db06e285ce3f9d0d67cced684eaa0328a9638",
+            "binding_kind": "apt",
+            "description": "PHP library for generating two-dimensional barcodes",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "barcode",
+              "code"
+            ],
+            "name": "phpqrcode",
+            "packages": [],
+            "query": "barcode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 24,
+            "version": "1.1.4-3.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "5b2d47a8869c5e43ceadb47c320d2ed2edf3ab716074b6c2f458b5d3d6c64c7a",
+            "binding_kind": "apt",
+            "description": "Platform files for Arduino to run on ATmega1284P",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "128"
+            ],
+            "name": "arduino-mighty-1284p",
+            "packages": [],
+            "query": "128",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 20,
+            "version": "1-5",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "6b49289240a4b59ddefec856fadcb90e69b4e9ded04e8cea3b29b6a4b5764ef4",
+            "binding_kind": "apt",
+            "description": "binary gcode generation library",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code"
+            ],
+            "name": "bgcode",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 20,
+            "version": "0.0~git20240220.33a1eeb-1build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "08c39fb07f0ee1cf6e599b8b8496cd4157ca96292b2bbccc74dbc3a2c68d210d",
+            "binding_kind": "apt",
+            "description": "code-understanding, code-browsing or code-search tool",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code"
+            ],
+            "name": "codequery",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 20,
+            "version": "0.27.0+dfsg-1build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "4d837b0919d0288ad936c393d67942479c0cc5f216273b940f1479eb23f6dd4b",
+            "binding_kind": "apt",
+            "description": "SMBIOS/DMI table decoder",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code"
+            ],
+            "name": "dmidecode",
+            "packages": [],
+            "query": "code",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 20,
+            "version": "3.5-3ubuntu0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "b4d05773411e3672f7ec07130b77befc1f8f2224be580cbe94c3b364abe6215c",
+            "binding_kind": "apt",
+            "description": "icons for the geocode-glib library",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code"
+            ],
+            "name": "geocode-glib-common",
+            "packages": [],
+            "query": "code",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 20,
+            "version": "3.26.3-6build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "dfe2a7a3bea5fd23c5141393559cae60481a450cf32db8a3afd1e367a74546b4",
+            "binding_kind": "apt",
+            "description": "introspection data for geocode-glib library",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code"
+            ],
+            "name": "gir1.2-geocodeglib-2.0",
+            "packages": [],
+            "query": "code",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 20,
+            "version": "3.26.3-6build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "10b8e63a940fc890582663aaab1413a97d7c0296e7611d9c39b746f3cc75ee4e",
+            "binding_kind": "apt",
+            "description": "QR Code encoder (Go program)",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code"
+            ],
+            "name": "go-qrcode",
+            "packages": [],
+            "query": "barcode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 20,
+            "version": "0.0~git20200617.da1b656-4ubuntu0.24.04.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "b3cba02f7d4400bf8c38daf37139f9ba9c12f0e70ef49f035305a6ef27ce0f79",
+            "binding_kind": "apt",
+            "description": "Generates 2d ISO/IEC 16022 barcodes (data matrix/semacode)",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "barcode",
+              "code",
+              "generate"
+            ],
+            "name": "iec16022",
+            "packages": [],
+            "query": "barcode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 20,
+            "version": "0.2.7-1",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png.",
+        "errors": [],
+        "queries": [
+          "generate",
+          "code",
+          "128",
+          "barcode"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "APT_CATALOG",
+        "source_url": null
+      },
+      {
+        "binding_performed": false,
+        "candidate_count": 38,
+        "candidates": [
+          {
+            "description": "Source-linked CodeGraph exploration, ranked search, and static navigation for coding agents.",
+            "is_latest": true,
+            "name": "ai.codenib/codenib",
+            "packages": [
+              {
+                "identifier": "codenib",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "uvx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.2.3"
+              }
+            ],
+            "query": "code",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/sysevol-ai/CodeNib"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.2.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Generate EAN-13 and Code-128 barcodes locally and return SVG data. No network and no key.",
+            "is_latest": true,
+            "name": "io.github.mrfentmen/barcode-mcp",
+            "packages": [
+              {
+                "identifier": "barcode-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.1"
+              }
+            ],
+            "query": "barcode",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/mrfentmen/barcode-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Scan and generate barcodes and QR codes.",
+            "is_latest": true,
+            "name": "io.github.domdomegg/barcode-scanner-mcp",
+            "packages": [
+              {
+                "identifier": "barcode-scanner-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": "npx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.2.0"
+              },
+              {
+                "identifier": "barcode-scanner-mcp",
+                "registry_type": "npm",
+                "required_environment": [
+                  "MCP_TRANSPORT"
+                ],
+                "runtime_hint": "npx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "streamable-http",
+                  "url": "http://localhost:3000/mcp"
+                },
+                "version": "1.2.0"
+              }
+            ],
+            "query": "barcode",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/domdomegg/barcode-scanner-mcp.git"
+            },
+            "required_environment_count": 1,
+            "required_secret_count": 0,
+            "score": 17,
+            "status": "active",
+            "version": "1.2.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Driven Intent Negotiation \u2014 Contract-Oriented Deterministic Executable Runtime DinCoder brings the\u2026",
+            "is_latest": true,
+            "name": "ai.smithery/flight505-mcp_dincoder",
+            "packages": [],
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@flight505/mcp_dincoder/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/flight505/MCP_DinCoder"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.15",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Verified discount & referral codes for crypto exchanges, cards and more \u2014 tested first-hand.",
+            "is_latest": true,
+            "name": "codes.find/verified-codes",
+            "packages": [],
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://find.codes/api/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Create QR codes, re-point printed dynamic codes, name links on your domain, read scan analytics.",
+            "is_latest": true,
+            "name": "codes.qrflow/qrflow",
+            "packages": [],
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://qrflow.codes/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Generate 10 conversion-focused ad headlines for a Shopify/e-commerce product. Free, no signup.",
+            "is_latest": true,
+            "name": "com.adcreator-ai/generate-ad-headlines",
+            "packages": [],
+            "query": "generate",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://adcreator-ai.com/mcp-ads"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Product Barcode API - camgoz.net: Provides information on products available in markets across.",
+            "is_latest": true,
+            "name": "com.jojapi/product-barcode-api",
+            "packages": [],
+            "query": "barcode",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.jojapi.com/product-barcode-api"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Decode, render, validate barcodes: QR, DataMatrix, EAN, UPC, PDF417. All tools free, no auth.",
+            "is_latest": true,
+            "name": "io.github.appvantagelabs2-a11y/barcode",
+            "packages": [],
+            "query": "barcode",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.casuyi.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "CityHash128 hex length, input discarded",
+            "is_latest": true,
+            "name": "io.github.sadri-dridi/city128",
+            "packages": [],
+            "query": "128",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/city128/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "FarmHash128 hex length, input discarded",
+            "is_latest": true,
+            "name": "io.github.sadri-dridi/farm128",
+            "packages": [],
+            "query": "128",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/farm128/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "FNV-1a 128 hex length, input discarded",
+            "is_latest": true,
+            "name": "io.github.sadri-dridi/fnv128-ok",
+            "packages": [],
+            "query": "128",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/fnv128-ok/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png.",
+        "errors": [],
+        "queries": [
+          "generate",
+          "code",
+          "128",
+          "barcode"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "OFFICIAL_MCP_REGISTRY",
+        "source_url": "https://registry.modelcontextprotocol.io"
+      }
+    ],
+    "schema": "PROJECT_BRAIN_FEDERATED_CAPABILITY_DISCOVERY_V1",
+    "sources": [
+      "APT_CATALOG",
+      "OFFICIAL_MCP_REGISTRY"
+    ]
+  },
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
+  "source": "FEDERATED_CAPABILITY_DISCOVERY"
+}

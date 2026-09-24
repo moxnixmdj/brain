@@ -1,0 +1,9 @@
+{
+  "adapter": "goal",
+  "error": "Blocker:CAPABILITY_ACQUISITION_REQUIRED:{\"auto_acquisition_error\": \"ContractInferenceFailure:CLI_HELP_USAGE_REQUIRED\", \"evidence_path\": \"canonical/astra_runtime/evidence/ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-001__PLAIN_GOAL_CAPABILITY_DISCOVERY.json\", \"top_candidates\": [{\"integration_friction\": 0, \"name\": \"barcode\", \"required_secret_count\": 0, \"score\": 40, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"codecgraph\", \"required_secret_count\": 0, \"score\": 24, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"phpqrcode\", \"required_secret_count\": 0, \"score\": 24, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"arduino-mighty-1284p\", \"required_secret_count\": 0, \"score\": 20, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"bgcode\", \"required_secret_count\": 0, \"score\": 20, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"codequery\", \"required_secret_count\": 0, \"score\": 20, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"dmidecode\", \"required_secret_count\": 0, \"score\": 20, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"geocode-glib-common\", \"required_secret_count\": 0, \"score\": 20, \"zero_cost_eligible\": true}]}",
+  "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-001",
+  "observed_at_utc": "2026-09-24T22:13:12.189874+00:00",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "execute-fresh-plain-goal",
+  "step_index": 1
+}

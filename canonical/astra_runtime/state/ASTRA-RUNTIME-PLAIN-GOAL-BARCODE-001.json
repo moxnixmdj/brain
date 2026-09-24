@@ -1,0 +1,36 @@
+{
+  "blocker": {
+    "adapter": "goal",
+    "error": "Blocker:CAPABILITY_ACQUISITION_REQUIRED:{\"auto_acquisition_error\": \"ContractInferenceFailure:CLI_HELP_USAGE_REQUIRED\", \"evidence_path\": \"canonical/astra_runtime/evidence/ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-001__PLAIN_GOAL_CAPABILITY_DISCOVERY.json\", \"top_candidates\": [{\"integration_friction\": 0, \"name\": \"barcode\", \"required_secret_count\": 0, \"score\": 40, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"codecgraph\", \"required_secret_count\": 0, \"score\": 24, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"phpqrcode\", \"required_secret_count\": 0, \"score\": 24, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"arduino-mighty-1284p\", \"required_secret_count\": 0, \"score\": 20, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"bgcode\", \"required_secret_count\": 0, \"score\": 20, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"codequery\", \"required_secret_count\": 0, \"score\": 20, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"dmidecode\", \"required_secret_count\": 0, \"score\": 20, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"geocode-glib-common\", \"required_secret_count\": 0, \"score\": 20, \"zero_cost_eligible\": true}]}",
+    "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-001",
+    "observed_at_utc": "2026-09-24T22:13:12.189874+00:00",
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "execute-fresh-plain-goal",
+    "step_index": 1
+  },
+  "created_at_utc": "2026-09-24T22:12:44.579302+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-24T22:12:44.667896+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython canonical/tests/test_goal_compiler.py",
+        "duration_s": 0.088,
+        "returncode": 0,
+        "stderr": "test_barcode_goal_does_not_false_match_qr (__main__.GoalCompilerTests.test_barcode_goal_does_not_false_match_qr) ... ok\ntest_plain_image_only_pdf_goal_selects_verified_ocr (__main__.GoalCompilerTests.test_plain_image_only_pdf_goal_selects_verified_ocr) ... ok\ntest_plain_qr_goal_selects_verified_qr_and_binds_arguments (__main__.GoalCompilerTests.test_plain_qr_goal_selects_verified_qr_and_binds_arguments) ... ok\ntest_unknown_goal_fails_closed (__main__.GoalCompilerTests.test_unknown_goal_fails_closed) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.002s\n\nOK\n",
+        "stdout": ""
+      },
+      "step_id": "run-goal-compiler-regressions",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_PLAIN_GOAL_BARCODE_001.json",
+  "mission_sha256": "85b737bfc0e2bd3539e382ebadf7f8cc0e475ecd22ca6c939558e9eb99f5d88d",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-24T22:13:12.189974+00:00"
+}
