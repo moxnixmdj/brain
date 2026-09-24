@@ -96,5 +96,12 @@
     "forbidden_selected_plan": [
       "expensive-direct-read"
     ]
+  },
+  "replay_after_root_cause_change": {
+    "prior_failure": "DYNAMIC_IMPORT_DATACLASS_MODULE_REGISTRATION",
+    "runtime_repair_commit": "565b34faaf1ee01dde8e0bbf696d2489f640c375",
+    "test_repair_commit": "a2e1e99fda84282feeda80f08764af27963ae911",
+    "repair": "Register dynamically loaded capability_planner module in sys.modules before executing it.",
+    "replay_authorized": true
   }
 }
