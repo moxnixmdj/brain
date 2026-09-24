@@ -20,7 +20,7 @@
       "max_controller_actions": 8,
       "verify": {
         "type": "stdout_contains",
-        "text": "PLAIN_GOAL_QR_COMPLETE"
+        "text": "PLAIN_GOAL_COMPLETE"
       }
     }
   ],
@@ -36,6 +36,7 @@
     "replay_after_plain_input_binding_commit": "fa594b14a1cafbdd3702a1a40c1aa9120bc9d2d0",
     "qr_capability_must_be_inherited_from_brain": true,
     "replay_after_path_normalization_commit": "6abd1848962b6f1f1a47cc16f0ce9803bd52b8ac",
-    "replay_after_generic_qr_promotion": "57477ff006aeaad94054a97492ee52f59d6164c3"
+    "replay_after_generic_qr_promotion": "57477ff006aeaad94054a97492ee52f59d6164c3",
+    "verifier_repaired_from_task_specific_marker": true
   }
 }
