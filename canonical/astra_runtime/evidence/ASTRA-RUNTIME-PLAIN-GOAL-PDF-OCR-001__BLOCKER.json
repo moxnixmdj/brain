@@ -1,0 +1,9 @@
+{
+  "adapter": "goal",
+  "error": "Blocker:MODEL_INDEPENDENT_CONTROLLER_PLAN_REQUIRED",
+  "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-PDF-OCR-001",
+  "observed_at_utc": "2026-09-24T21:47:09.121171+00:00",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "execute-plain-goal",
+  "step_index": 1
+}
