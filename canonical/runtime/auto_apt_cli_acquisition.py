@@ -112,7 +112,10 @@ def _merge_role_conditioned_apt(discovery,goal):
     ]
     role_result=None
     if producer_intent and goal_terms:
-        role_query="encode "+" ".join(goal_terms[:2])
+        # Search the distinctive object, not a hard-coded producer verb.
+        # Supplier-role scoring below decides generator/encoder/renderer vs
+        # consumer. This keeps acquisition domain-independent.
+        role_query=" ".join(goal_terms[:2])
         role_result=capability_discovery.search_apt_packages(role_query,limit=24)
         by_key={}
         for item in candidates+list(role_result.get("candidates") or []):
