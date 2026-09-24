@@ -185,6 +185,23 @@ def search_mcp_registry(effect, limit=8, timeout_s=12, opener=None):
     }
 
 
+def _apt_query_variants(queries):
+    out=[]
+    for query in queries:
+        if query not in out:
+            out.append(query)
+        # Package descriptions frequently spell lexical compounds with a
+        # separator while goals use a closed compound, e.g. barcode vs
+        # "bar code", qrcode vs "qr-code". apt-cache accepts regex queries,
+        # so add a bounded equivalent without introducing domain names.
+        if query.endswith("code") and len(query)>4:
+            stem=re.escape(query[:-4])
+            variant=stem+r"[ -]?code"
+            if variant not in out:
+                out.append(variant)
+    return out
+
+
 def search_apt_packages(effect, limit=12):
     """Search the local Ubuntu/Debian package catalog without installing anything."""
     if not sys.platform.startswith("linux") or shutil.which("apt-cache") is None:
@@ -195,10 +212,11 @@ def search_apt_packages(effect, limit=12):
             "errors":[{"error":"APT_CACHE_UNAVAILABLE"}],"binding_performed":False,
         }
     queries=effect_queries(effect)
+    apt_queries=_apt_query_variants(queries)
     seen={}
     errors=[]
     effect_tokens=set(queries)
-    for query in queries:
+    for query in apt_queries:
         try:
             p=subprocess.run(
                 ["apt-cache","search",query],
