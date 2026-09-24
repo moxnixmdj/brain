@@ -47,18 +47,300 @@
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 28,
+        "score": 40,
         "version": "0.99-7",
         "zero_cost_eligible": true
       }
     },
     {
-      "error": "ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED",
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
       "probe": {
-        "archive_sha256": "08c39fb07f0ee1cf6e599b8b8496cd4157ca96292b2bbccc74dbc3a2c68d210d",
+        "archive_sha256": "3f92bd9fcaa2027ca7f311b4e52a1d97fee977cdf10e0ef644431729dc8fc077",
         "executables": [
           {
-            "executable": "/usr/bin/codequery",
+            "executable": "/usr/bin/eancheck",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 2,
+                "text": "Invalid input. Numbers only please."
+              }
+            ]
+          }
+        ],
+        "package": "eancheck",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.0-2build1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "archive_sha256": "3f92bd9fcaa2027ca7f311b4e52a1d97fee977cdf10e0ef644431729dc8fc077",
+        "binding_kind": "apt",
+        "description": "Check digit validator for EAN/PLU/UPC barcode numbers",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "barcode"
+        ],
+        "name": "eancheck",
+        "packages": [],
+        "query": "barcode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.0-2build1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png",
+      "probe": {
+        "archive_sha256": "dd99fb73bb32e2d28af54b74a8378c89e527b62915167563fc92cc90586ffd4d",
+        "executables": [
+          {
+            "executable": "/usr/bin/ecoPCR",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "------------------------------------------\n ecoPCR Version 1.0.1\n------------------------------------------\nsynopsis : searching for sequence and taxonomy hybriding with given primers\nusage: ecoPCR [options] <nucleotidic patterns>\n------------------------------------------\noptions:\n-a    : Salt concentration in M for Tm computation (default 0.05 M)\n\n-c    : Consider that the database sequences are [c]ircular\n\n-d    : [D]atabase : to match the expected format, the database\n        has to be formatted first by the ecoPCRFormat.py program located.\n        in the tools directory.\n        ecoPCRFormat.py creates three file types :\n            .sdx : contains the sequences\n            .tdx : contains information concerning the taxonomy\n            .rdx : contains the taxonomy rank\n\n        ecoPCR needs all the file type. As a result, you have to write the\n        database radical without any extension. For example /ecoPCRDB/gbmam\n\n-D    : Keeps the specified number of nucleotides on each side of the in silico \n        amplified sequences (including the amplified DNA fragment plus the two target \n        sequences of the primers).\n\n-e    : [E]rror : max errors allowed by oligonucleotide (0 by default)\n\n-h    : [H]elp - print <this> help\n\n-i    : [I]gnore the given taxonomy id.\n        Taxonomy id are available using the ecofind program.\n        see its help typing ecofind -h for more information.\n\n-k    : [K]ingdom mode : set the kingdom mode\n        super kingdom mode by default.\n\n-l    : minimum [L]ength : define the minimum amplication length. \n\n-L    : maximum [L]ength : define the maximum amplicationlength. \n\n-m    : Salt correction method for Tm computation (SANTALUCIA : 1\n        or OWCZARZY:2, default=1)\n\n-r    : [R]estricts the search to the given taxonomic id.\n        Taxonomy id are available using the ecofind program.\n        see its help typing ecofind -h for more information.\n\n\n------------------------------------------\nfirst argument : oligonucleotide for direct strand\n\nsecond argument : oligonucleotide for reverse strand\n\n------------------------------------------\nTable result description : \ncolumn 1 : accession number\ncolumn 2 : sequence length\ncolumn 3 : taxonomic id\ncolumn 4 : rank\ncolumn 5 : species taxonomic id\ncolumn 6 : scientific name\ncolumn 7 : genus taxonomic id\ncolumn 8 : genus name\ncolumn 9 : family taxonomic id\ncolumn 10 : family name\ncolumn 11 : super kingdom taxonomic id\ncolumn 12 : super kingdom name\ncolumn 13 : strand (direct or reverse)\ncolumn 14 : first oligonucleotide\ncolumn 15 : number of errors for the first strand\ncolumn 16 : Tm for hybridization of primer 1 at this site\ncolumn 17 : second oligonucleotide\ncolumn 18 : number of errors for the second strand\ncolumn 19 : Tm for hybridization of primer 1 at this site\ncolumn 20 : amplification length\ncolumn 21 : sequence\ncolumn 22 : definition\n------------------------------------------\n https://git.metabarcoding.org/obitools/ecopcr/wikis/home\n------------------------------------------\n\n\n\n/usr/bin/ecoPCR: invalid option -- '-'"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/ecoPCRFilter",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": ""
+              },
+              {
+                "flag": "-h",
+                "returncode": 0,
+                "text": ""
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/ecoPCRFormat",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "-----------------------------------\n ecoPCRFormat.py\n-----------------------------------\necoPCRFormat.py [option] <argument>\n-----------------------------------\n-e    --embl        :[E]mbl format\n-f    --fasta       :[F]asta format\n-g    --genbank     :[G]enbank format\n-h    --help        :[H]elp - print this help\n-n    --name        :[N]ame of the new database created\n-t    --taxonomy    :[T]axonomy - path to the taxonomy database\n                    :bcp-like dump from GenBank taxonomy database.\n-----------------------------------\n\n/usr/bin/ecoPCRFormat:260: SyntaxWarning: invalid escape sequence '\\.'\n  _gbParseDE = re.compile('(?<=^DEFINITION {2}).+?\\. *$(?=[^ ])',re.MULTILINE+re.DOTALL)\n/usr/bin/ecoPCRFormat:282: SyntaxWarning: invalid escape sequence '\\.'\n  _emblParseDE = re.compile('(?<=^DE {3}).+?\\. *$(?=[^ ])',re.MULTILINE+re.DOTALL)\n/usr/bin/ecoPCRFormat:299: SyntaxWarning: invalid escape sequence '\\W'\n  _fastaSplit=re.compile(';\\W*')"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/ecoSort",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": ""
+              },
+              {
+                "flag": "-h",
+                "returncode": 0,
+                "text": ""
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/ecofind",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "------------------------------------------\n ecofind Version 0.1\n------------------------------------------\nsynopsis : searching for taxonomic and rank and\n           taxonomy id for given regular  expression patterns\n\nusage: ecofind [options] <patterns>\n------------------------------------------\noptions:\n-a : [A]ll enable the search on all alternative names and not only scientific names.\n\n-d : [D]atabase containing the taxonomy.\n     To match the expected format, the database\n     has to be formatted first by the ecoPCRFormat.py\n     program located in the tools directory.\n     Write the database radical without any extension.\n\n-h : [H]elp - print <this> help\n\n-l : [L]ist all taxonomic rank available for -r option\n\n-P : [P]ath : add a column containing the full path for each displayed taxon\n\n-p : [P]arents : specifying this option displays all parental tree's information for the given taxid.\n\n-r : [R]estrict to given taxonomic rank\n\n-s : [S]ons: specifying this option displays all subtree's information for the given taxid.\n\n-P : Display taxonomic [P]ath as supplementary column in output\n\narguments:\n<taxon> name pattern bearing regular expressions\n\n------------------------------------------\n http://www.grenoble.prabi.fr/trac/ecoPCR/\n------------------------------------------\n\n\n/usr/bin/ecofind: invalid option -- '-'"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/ecogrep",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "------------------------------------------\n ecogrep Version 0.1\n------------------------------------------\n synopsis : filtering ecoPCR result based on\n taxonomic id filter and regular expression pattern\n usage: ecogrep [options] filename\n------------------------------------------\n options:\n -1    : [FIRST] : compare the given pattern with direct strand oligonucleotide\n\n -2    : [SECOND] : compare the given pattern with reverse strand oligonucleotide\n\n -d    : [D]atabase containing taxonomic information\n\n -e    : [E]rrors : max error allowed in pattern match (option-1, -2 and -p) (0 by default)\n\n -p    : [P]attern : oligonucleotide pattern\n\n -h    : [H]elp : print <this> help\n\n -i    : [I]gnore subtree under given taxonomic id\n\n -r    : [R]estrict search to subtree under given taxomic id\n\n -v    : in[V]ert the sense of matching, to select non-matching lines.\n\n argument:\n ecoPCR output file name\n------------------------------------------\n\n http://www.grenoble.prabi.fr/trac/ecoPCR/\n------------------------------------------\n\n\n/usr/bin/ecogrep: invalid option -- '-'"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/ecoisundertaxon",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "------------------------------------------\n ecoisundertaxon Version 0.1\n------------------------------------------\n synopsis : searching relationship in taxonomy\n usage: ecoisundertaxon [options] database\n------------------------------------------\n options:\n -1    : [FIRST] taxomic id of the hypothetical son\n\n -2    : [SECOND] taxonomic id of the hypothetical parent\n\n -h    : [H]elp - print <this> help\n\n -v    : [V]erbose mode. Display taxonomic information for both\n       : taxonomic id.\n\n------------------------------------------\n database : to match the expected format, the database\n has to be formatted first by the ecoPCRFormat.py program located.\n in the tools directory. Type the radical only, leaving out the extension\n------------------------------------------\n\n https://www.grenoble.prabi.fr/trac/ecoPCR/wiki------------------------------------------\n\n\n/usr/bin/ecoisundertaxon: invalid option -- '-'"
+              }
+            ]
+          }
+        ],
+        "package": "ecopcr",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.0.1+dfsg-4"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "archive_sha256": "dd99fb73bb32e2d28af54b74a8378c89e527b62915167563fc92cc90586ffd4d",
+        "binding_kind": "apt",
+        "description": "estimate PCR barcode primers quality",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "barcode"
+        ],
+        "name": "ecopcr",
+        "packages": [],
+        "query": "barcode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.0.1+dfsg-4",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "TimeoutExpired:Command '['/usr/bin/flexbar', '--help']' timed out after 10 seconds",
+      "status": "PROBE_FAILED",
+      "supplier": {
+        "archive_sha256": "56e03f7049dae65dd5e91c647e7cc4cfc3e519c06d080798635acfc1f4a59998",
+        "binding_kind": "apt",
+        "description": "flexible barcode and adapter removal for sequencing platforms",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "barcode"
+        ],
+        "name": "flexbar",
+        "packages": [],
+        "query": "barcode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1:3.5.0-5",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "ab76b5c103f1a91e0a43d74663bc07c6d029b19cc9b21e4bc9a10410f0865afd",
+        "executables": [],
+        "package": "qml-module-org-kde-prison",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "5.115.0-0ubuntu5"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "archive_sha256": "ab76b5c103f1a91e0a43d74663bc07c6d029b19cc9b21e4bc9a10410f0865afd",
+        "binding_kind": "apt",
+        "description": "barcode API for Qt",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "barcode"
+        ],
+        "name": "qml-module-org-kde-prison",
+        "packages": [],
+        "query": "barcode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "5.115.0-0ubuntu5",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "13c1abdb03ebcad83b2a3a745bdb9bb7ee46016025527676e7e6b10eeb479865",
+        "executables": [],
+        "package": "r-cran-bold",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.3.0-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "archive_sha256": "13c1abdb03ebcad83b2a3a745bdb9bb7ee46016025527676e7e6b10eeb479865",
+        "binding_kind": "apt",
+        "description": "GNU R interface to Bold Systems for genetic barcode data",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "barcode"
+        ],
+        "name": "r-cran-bold",
+        "packages": [],
+        "query": "barcode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.3.0-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769",
+        "executables": [
+          {
+            "executable": "/usr/bin/zint",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Zint version 2.13.0\nEncode input data in a barcode and save as BMP/EMF/EPS/GIF/PCX/PNG/SVG/TIF/TXT\n\n  -b, --barcode=TYPE    Number or name of barcode type. Default is 20 (CODE128)\n  --addongap=INTEGER    Set add-on gap in multiples of X-dimension for EAN/UPC\n  --batch               Treat each line of input file as a separate data set\n  --bg=COLOUR           Specify a background colour (as RGB(A) or \"C,M,Y,K\")\n  --binary              Treat input as raw binary data\n  --bind                Add boundary bars\n  --bindtop             Add top boundary bar only\n  --bold                Use bold text (HRT)\n  --border=INTEGER      Set width of border in multiples of X-dimension\n  --box                 Add a box around the symbol\n  --cmyk                Use CMYK colour space in EPS/TIF symbols\n  --cols=INTEGER        Set the number of data columns in symbol\n  --compliantheight     Warn if height not compliant, and use standard default\n  -d, --data=DATA       Set the symbol data content (segment 0)\n  --direct              Send output to stdout\n  --dmiso144            Use ISO format for 144x144 Data Matrix symbols\n  --dmre                Allow Data Matrix Rectangular Extended\n  --dotsize=NUMBER      Set radius of dots in dotty mode\n  --dotty               Use dots instead of squares for matrix symbols\n  --dump                Dump hexadecimal representation to stdout\n  -e, --ecinos          Display ECI (Extended Channel Interpretation) table\n  --eci=INTEGER         Set the ECI code for the data (segment 0)\n  --embedfont           Embed font in vector output (SVG only)\n  --esc                 Process escape sequences in input data\n  --extraesc            Process symbology-specific escape sequences (Code 128)\n  --fast                Use faster encodation or other shortcuts if available\n  --fg=COLOUR           Specify a foreground colour (as RGB(A) or \"C,M,Y,K\")\n  --filetype=TYPE       Set output file type BMP/EMF/EPS/GIF/PCX/PNG/SVG/TIF/TXT\n  --fullmultibyte       Use multibyte for binary/Latin (QR/Han Xin/Grid Matrix)\n  --gs1                 Treat input as GS1 compatible data\n  --gs1nocheck          Do not check validity of GS1 data\n  --gs1parens           Process parentheses \"()\" as GS1 AI delimiters, not \"[]\"\n  --gssep               Use separator GS for GS1 (Data Matrix)\n  --guarddescent=NUMBER Set height of guard bar descent in X-dims (EAN/UPC)\n  --guardwhitespace     Add quiet zone indicators (\"<\"/\">\") to HRT (EAN/UPC)\n  -h, --help            Display help message\n  --height=NUMBER       Set height of symbol in multiples of X-dimension\n  --heightperrow        Treat height as per-row\n  -i, --input=FILE      Read input data from FILE\n  --init                Create Reader Initialisation (Programming) symbol\n  --mask=INTEGER        Set masking pattern to use (QR/Han Xin/DotCode)\n  --mirror              Use batch data to determine filename\n  --mode=INTEGER        Set encoding mode (MaxiCode/Composite)\n  --nobackground        Remove background (EMF/EPS/GIF/PNG/SVG/TIF only)\n  --noquietzones        Disable default quiet zones\n  --notext              Remove human readable text (HRT)\n  -o, --output=FILE     Send output to FILE. Default is out.png\n  --primary=STRING      Set primary message (MaxiCode/Composite)\n  --quietzones          Add compliant quiet zones\n  -r, --reverse         Reverse colours (white on black)\n  --rotate=INTEGER      Rotate symbol by INTEGER (0, 90, 180, 270) degrees\n  --rows=INTEGER        Set number of rows (Codablock-F/PDF417)\n  --scale=NUMBER        Adjust size of X-dimension\n  --scalexdimdp=X[,R]   Adjust size to X-dimension X at resolution R\n  --scmvv=INTEGER       Prefix SCM with \"[)>\\R01\\Gvv\" (vv is INTEGER) (MaxiCode)\n  --secure=INTEGER      Set error correction level (ECC)\n  --segN=ECI,DATA       Set the ECI & data content for segment N, where N 1 to 9\n  --separator=INTEGER   Set height of row separator bars (stacked symbologies)\n  --small               Use small text (HRT)\n  --square              Force Data Matrix symbols to be square\n  --structapp=I,C[,ID]  Set Structured Append info (I index, C count)\n  -t, --types           Display table of barcode types\n  --textgap=NUMBER      Adjust gap between barcode and HRT in multiples of X-dim\n  --vers=INTEGER        Set symbol version (size, check digits, other options)\n  -v, --version         Display Zint version\n  --vwhitesp=INTEGER    Set height of vertical whitespace in multiples of X-dim\n  -w, --whitesp=INTEGER Set width of horizontal whitespace in multiples of X-dim\n  --werror              Convert all warnings into errors"
+              }
+            ]
+          }
+        ],
+        "package": "zint",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "2.13.0-1build3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "archive_sha256": "cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769",
+        "binding_kind": "apt",
+        "description": "command line utility to encode data in barcode symbols",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "barcode"
+        ],
+        "name": "zint",
+        "packages": [],
+        "query": "128",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.13.0-1build3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "869908686b1df48db14b3420be8e1a0ce060677263c222eb3f6265de706501fc",
+        "executables": [
+          {
+            "executable": "/usr/bin/zint-qt",
             "help_attempts": [
               {
                 "flag": "--help",
@@ -66,93 +348,31 @@
                 "text": "qt.qpa.xcb: could not connect to display \nqt.qpa.plugin: Could not load the Qt platform plugin \"xcb\" in \"\" even though it was found.\nThis application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.\n\nAvailable platform plugins are: eglfs, linuxfb, minimal, minimalegl, offscreen, vnc, xcb."
               }
             ]
-          },
-          {
-            "executable": "/usr/bin/cqmakedb",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 1,
-                "text": "Usage: cqmakedb [-s <sqdbfile> [-c <cscope.out>] [-t <ctags>]] [-p] [-d] [-v] [-h]\n\noptions:\n  -s : CodeQuery sqlite3 db file path\n  -c : cscope.out file path\n  -t : ctags tags file path\n  -p : \"vacuum\", compact database (may take more time)\n  -d : debug\n  -v : version\n  -h : help\n\nThe combinations possible are -s -c, -s -t, -s -c -t\nThe additional optional arguments are -p and -d\nif -c is present then sqdbfile need not exist. It will be created.\nif -t is present but not -c, then sqdbfile has to exist. Ctags info will be added to it.\n\n\n/usr/bin/cqmakedb: illegal option -- -\n/usr/bin/cqmakedb: illegal option -- e\n/usr/bin/cqmakedb: illegal option -- l"
-              }
-            ]
-          },
-          {
-            "executable": "/usr/bin/cqsearch",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 1,
-                "text": "Usage:\ncqsearch [-s <sqdbfile> [-p <n>] [-g] [-t <term>] [-l <len>] -[e|f] [-u] [-b <path>]]  [-d] [-v] [-h]\n\noptions:\n  -s : CodeQuery sqlite3 db file path\n  -p : parameter is a number denoted by n\n       default n = 1 (Symbol)\n  -g : Create GraphViz DOT output instead of search results\n       Applicable only for function or macro def(n=2) and\n       class or struct (n=3)\n  -t : search term without spaces\n       if Exact Match is switched off, wild card\n       searches are possible. Use * and ?\n  -l : limited line length for truncated source code preview text\n       Accepted range: 0 - 800 (use 0 for limitless)\n       By default it is 80\n  -e : Exact Match switched ON \n       Case-sensitive\n  -f : Exact Match switched OFF (fuzzy search)\n       Case-insensitive with wild card search (default)\n  -u : show full file path instead of file name\n  -b : filters the results by source file path term\n       For example, if the path term is \"test\" (without quotes),\n       then the results will be filtered by source files whose\n       path includes the term \"test\"\n  -d : debug\n  -v : version\n  -h : help\n\nThe combinations possible are -s -t -e, -s -t -f -u\nThe additional optional arguments are -d\n\nThe possible values for n are:\n    1: Symbol (default)\n    2: Function or macro definition\n    3: Class or struct\n    4: Files including this file\n    5: Full file path\n    6: Functions calling this function\n    7: Functions called by this function\n    8: Calls of this function or macro\n    9: Members and methods of this class\n   10: Class which owns this member or method\n   11: Children of this class (inheritance)\n   12: Parent of this class (inheritance)\n   13: Functions or macros inside this file\n\nExample:\ncqsearch -s myproject.db -p 6 -t read*file -f\n\nExample of using -g with GraphViz:\ncqsearch -s myproject.db -p 2 -g -t read*file > functioncallgraph.dot\ndot -Tpng -ofunctioncallgraph.png functioncallgraph.dot\n\n\n/usr/bin/cqsearch: illegal option -- -"
-              }
-            ]
           }
         ],
-        "package": "codequery",
+        "package": "zint-qt",
         "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "0.27.0+dfsg-1build2"
+        "version": "2.13.0-1build3"
       },
       "status": "CONTRACT_REJECTED",
       "supplier": {
-        "archive_sha256": "08c39fb07f0ee1cf6e599b8b8496cd4157ca96292b2bbccc74dbc3a2c68d210d",
+        "archive_sha256": "869908686b1df48db14b3420be8e1a0ce060677263c222eb3f6265de706501fc",
         "binding_kind": "apt",
-        "description": "code-understanding, code-browsing or code-search tool",
+        "description": "Zint Barcode Studio, a QT frontend to zint",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "code"
+          "barcode"
         ],
-        "name": "codequery",
+        "name": "zint-qt",
         "packages": [],
-        "query": "generate",
+        "query": "128",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 20,
-        "version": "0.27.0+dfsg-1build2",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED",
-      "probe": {
-        "archive_sha256": "10b8e63a940fc890582663aaab1413a97d7c0296e7611d9c39b746f3cc75ee4e",
-        "executables": [
-          {
-            "executable": "/usr/bin/qrcode",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 0,
-                "text": "qrcode -- QR Code encoder in Go\nhttps://github.com/skip2/go-qrcode\n\nFlags:\n  -d\tdisable QR Code border\n  -i\tinvert black and white\n  -o string\n    \tout PNG file prefix, empty for stdout\n  -s int\n    \timage size (pixel) (default 256)\n  -t\tprint as text-art on stdout\n\nUsage:\n  1. Arguments except for flags are joined by \" \" and used to generate QR code.\n     Default output is STDOUT, pipe to imagemagick command \"display\" to display\n     on any X server.\n\n       qrcode hello word | display\n\n  2. Save to file if \"display\" not available:\n\n       qrcode \"homepage: https://github.com/skip2/go-qrcode\" > out.png"
-              }
-            ]
-          }
-        ],
-        "package": "go-qrcode",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "0.0~git20200617.da1b656-4ubuntu0.24.04.3"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "archive_sha256": "10b8e63a940fc890582663aaab1413a97d7c0296e7611d9c39b746f3cc75ee4e",
-        "binding_kind": "apt",
-        "description": "QR Code encoder (Go program)",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "code"
-        ],
-        "name": "go-qrcode",
-        "packages": [],
-        "query": "barcode",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 20,
-        "version": "0.0~git20200617.da1b656-4ubuntu0.24.04.3",
+        "score": 18,
+        "version": "2.13.0-1build3",
         "zero_cost_eligible": true
       }
     },
@@ -194,7 +414,7 @@
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 16,
+        "score": 12,
         "version": "1.15-1.2",
         "zero_cost_eligible": true
       }
@@ -237,373 +457,8 @@
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 16,
+        "score": 12,
         "version": "4.7v-2",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "TimeoutExpired:Command '['/usr/bin/aldo', '--help']' timed out after 10 seconds",
-      "status": "PROBE_FAILED",
-      "supplier": {
-        "archive_sha256": "1a2b8aee566e84d1858330b6197c9e7b6846dd239b220df8ce02b746d46bac00",
-        "binding_kind": "apt",
-        "description": "Morse code training program",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "code"
-        ],
-        "name": "aldo",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 12,
-        "version": "0.7.8-2",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png",
-      "probe": {
-        "archive_sha256": "3fb6842df77c2a60373981d2a00e25c11b3793f4301e115bcb9dd3e3b69e8847",
-        "executables": [
-          {
-            "executable": "/usr/bin/apport-bug",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 0,
-                "text": "usage: apport-bug [options] [symptom|pid|package|program path|.apport/.crash file]\n\noptions:\n  -h, --help     show this help message and exit\n  -w, --window   Click a window as a target for filing a problem report.\n  --hanging      The provided pid is a hanging application.\n  --save PATH    In bug filing mode, save the collected information into a\n                 file instead of reporting it. This file can then be reported\n                 later on from a different machine.\n  --tag TAGS     Add an extra tag to the report. Can be specified multiple\n                 times.\n  -v, --version  Print the Apport version number."
-              }
-            ]
-          },
-          {
-            "executable": "/usr/bin/apport-cli",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 0,
-                "text": "usage: apport-cli [options] [symptom|pid|package|program path|.apport/.crash file]\n\noptions:\n  -h, --help            show this help message and exit\n  -f, --file-bug        Start in bug filing mode. Requires --package and an\n                        optional --pid, or just a --pid. If neither is given,\n                        display a list of known symptoms. (Implied if a single\n                        argument is given.)\n  -w, --window          Click a window as a target for filing a problem\n                        report.\n  -u UPDATE_REPORT, --update-bug UPDATE_REPORT\n                        Start in bug updating mode. Can take an optional\n                        --package.\n  -s SYMPTOM, --symptom SYMPTOM\n                        File a bug report about a symptom. (Implied if symptom\n                        name is given as only argument.)\n  -p PACKAGE, --package PACKAGE\n                        Specify package name in --file-bug mode. This is\n                        optional if a --pid is specified. (Implied if package\n                        name is given as only argument.)\n  -P PID, --pid PID     Specify a running program in --file-bug mode. If this\n                        is specified, the bug report will contain more\n                        information. (Implied if pid is given as only\n                        argument.)\n  --hanging             The provided pid is a hanging application.\n  -c PATH, --crash-file PATH\n                        Report the crash from given .apport or .crash file\n                        instead of the pending ones in /var/crash. (Implied if\n                        file is given as only argument.)\n  --save PATH           In bug filing mode, save the collected information\n                        into a file instead of reporting it. This file can\n                        then be reported later on from a different machine.\n  --tag TAGS            Add an extra tag to the report. Can be specified\n                        multiple times.\n  -v, --version         Print the Apport version number."
-              }
-            ]
-          },
-          {
-            "executable": "/usr/bin/apport-collect",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 0,
-                "text": "usage: apport-collect <report number>\n\npositional arguments:\n  report_number\n\noptions:\n  -h, --help            show this help message and exit\n  -p PACKAGE, --package PACKAGE\n                        Specify package name.\n  --tag TAGS            Add an extra tag to the report. Can be specified\n                        multiple times."
-              }
-            ]
-          },
-          {
-            "executable": "/usr/bin/apport-unpack",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 0,
-                "text": "usage: apport-unpack <report> <target directory>\n\npositional arguments:\n  report            Report file to unpack\n  target_directory  directory to unpack report to\n\noptions:\n  -h, --help        show this help message and exit"
-              }
-            ]
-          },
-          {
-            "executable": "/usr/bin/oem-getlogs",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 0,
-                "text": "usage: Useage: sudo -E oem-getlogs [-c CASE_ID]\n\nGet Hardware Enablement related logs\n\noptions:\n  -h, --help            show this help message and exit\n  -c CID, --case-id CID\n                        optional CASE_ID"
-              }
-            ]
-          },
-          {
-            "executable": "/usr/bin/ubuntu-bug",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 0,
-                "text": "usage: ubuntu-bug [options] [symptom|pid|package|program path|.apport/.crash file]\n\noptions:\n  -h, --help     show this help message and exit\n  -w, --window   Click a window as a target for filing a problem report.\n  --hanging      The provided pid is a hanging application.\n  --save PATH    In bug filing mode, save the collected information into a\n                 file instead of reporting it. This file can then be reported\n                 later on from a different machine.\n  --tag TAGS     Add an extra tag to the report. Can be specified multiple\n                 times.\n  -v, --version  Print the Apport version number."
-              }
-            ]
-          }
-        ],
-        "package": "apport",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "2.28.3-0ubuntu0.1"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "archive_sha256": "3fb6842df77c2a60373981d2a00e25c11b3793f4301e115bcb9dd3e3b69e8847",
-        "binding_kind": "apt",
-        "description": "automatically generate crash reports for debugging",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "generate"
-        ],
-        "name": "apport",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 12,
-        "version": "2.28.3-0ubuntu0.1",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png",
-      "probe": {
-        "archive_sha256": "8504eb3eb7c876fe4df7d4dd4e306be7325a2359490cb1320f9172148fa15062",
-        "executables": [
-          {
-            "executable": "/usr/bin/aln2bed",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 1,
-                "text": "aln2bed converts ALN files to a BED file\n\nUSAGE: aln2bed out_bed_file.bed in_aln_file_1 [ in_aln_file_2 ...]"
-              }
-            ]
-          },
-          {
-            "executable": "/usr/bin/art_454",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": -11,
-                "text": "===================================================================\n                      ART_454 (Version 2.6.0)                      \n                   Simulation of 454 Pyrosequencing                \n     Copyright (c) 2008-2015, Weichun Huang. All Rights Reserved.  \n===================================================================\n\n\nError: unrecognized option \"-\"\nError: unrecognized option \"h\"\nError: unrecognized option \"e\"\nError: unrecognized option \"l\""
-              }
-            ]
-          },
-          {
-            "executable": "/usr/bin/art_SOLiD",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": -11,
-                "text": "=================================================================\n                    ART_SOLiD (Version 1.3.3)                    \n         Simulation of Applied Biosystems' SOLiD Sequencing       \n   Copyright (c) 2008-2015, Weichun Huang. All Rights Reserved.  \n=================================================================\n\n\nError: unrecognized option \"-\"\nError: unrecognized option \"h\"\nError: unrecognized option \"e\"\nError: unrecognized option \"l\""
-              }
-            ]
-          },
-          {
-            "executable": "/usr/bin/art_illumina",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 1,
-                "text": "====================ART====================\n             ART_Illumina (2008-2016)          \n          Q Version 2.5.8 (June 6, 2016)       \n     Contact: Weichun Huang <whduke@gmail.com> \n    -------------------------------------------\n\n===== USAGE =====\n\nart_illumina [options] -ss <sequencing_system> -sam -i <seq_ref_file> -l <read_length> -f <fold_coverage> -o <outfile_prefix>\nart_illumina [options] -ss <sequencing_system> -sam -i <seq_ref_file> -l <read_length> -c <num_reads_per_sequence> -o <outfile_prefix>\nart_illumina [options] -ss <sequencing_system> -sam -i <seq_ref_file> -l <read_length> -f <fold_coverage> -m <mean_fragsize> -s <std_fragsize> -o <outfile_prefix>\nart_illumina [options] -ss <sequencing_system> -sam -i <seq_ref_file> -l <read_length> -c <num_reads_per_sequence> -m <mean_fragsize> -s <std_fragsize> -o <outfile_prefix>\n\n===== PARAMETERS =====\n\n  -1   --qprof1   the first-read quality profile\n  -2   --qprof2   the second-read quality profile\n  -amp --amplicon amplicon sequencing simulation\n  -c   --rcount   number of reads/read pairs to be generated per sequence/amplicon (not be used together with -f/--fcov)\n  -d   --id       the prefix identification tag for read ID\n  -ef  --errfree  indicate to generate the zero sequencing errors SAM file as well the regular one\n                  NOTE: the reads in the zero-error SAM file have the same alignment positions\n                  as those in the regular SAM file, but have no sequencing errors\n  -f   --fcov     the fold of read coverage to be simulated or number of reads/read pairs generated for each amplicon\n  -h   --help     print out usage information\n  -i   --in       the filename of input DNA/RNA reference\n  -ir  --insRate  the first-read insertion rate (default: 0.00009)\n  -ir2 --insRate2 the second-read insertion rate (default: 0.00015)\n  -dr  --delRate  the first-read deletion rate (default:  0.00011)\n  -dr2 --delRate2 the second-read deletion rate (default: 0.00023)\n  -k   --maxIndel the maximum total number of insertion and deletion per read (default: up to read length)\n  -l   --len      the length of reads to be simulated\n  -m   --mflen    the mean size of DNA/RNA fragments for paired-end simulations\n  -mp  --matepair indicate a mate-pair read simulation\n  -M  --cigarM    indicate to use CIGAR 'M' instead of '=/X' for alignment match/mismatch\n  -nf  --maskN    the cutoff frequency of 'N' in a window size of the read length for masking genomic regions\n                  NOTE: default: '-nf 1' to mask all regions with 'N'. Use '-nf 0' to turn off masking\n  -na  --noALN    do not output ALN alignment file\n  -o   --out      the prefix of output filename\n  -p   --paired   indicate a paired-end read simulation or to generate reads from both ends of amplicons\n                  NOTE: art will automatically switch to a mate-pair simulation if the given mean fragment size >= 2000\n  -q   --quiet    turn off end of run summary\n  -qL  --minQ     the minimum base quality score\n  -qU  --maxQ     the maxiumum base quality score\n  -qs  --qShift   the amount to shift every first-read quality score by \n  -qs2 --qShift2  the amount to shift every second-read quality score by\n                  NOTE: For -qs/-qs2 option, a positive number will shift up quality scores (the max is 93) \n                  that reduce substitution sequencing errors and a negative number will shift down \n                  quality scores that increase sequencing errors. If shifting scores by x, the error\n                  rate will be 1/(10^(x/10)) of the default profile.\n  -rs  --rndSeed  the seed for random number generator (default: system time in second)\n                  NOTE: using a fixed seed to generate two identical datasets from different runs\n  -s   --sdev     the standard deviation of DNA/RNA fragment size for paired-end simulations.\n  -sam --samout   indicate to generate SAM alignment file\n  -sp  --sepProf  indicate to use separate quality profiles for different bases (ATGC)\n  -ss  --seqSys   The name of Illumina sequencing system of the built-in profile used for simulation\n       NOTE: sequencing system ID names are:\n            GA1 - GenomeAnalyzer I (36bp,44bp), GA2 - GenomeAnalyzer II (50bp, 75bp)\n           HS10 - HiSeq 1000 (100bp),          HS20 - HiSeq 2000 (100bp),      HS25 - HiSeq 2500 (125bp, 150bp)\n           HSXn - HiSeqX PCR free (150bp),     HSXt - HiSeqX TruSeq (150bp),   MinS - MiniSeq TruSeq (50bp)\n           MSv1 - MiSeq v1 (250bp),            MSv3 - MiSeq v3 (250bp),        NS50 - NextSeq500 v2 (75bp)\n===== NOTES =====\n\n* ART by default selects a built-in quality score profile according to the read length specified for the run.\n\n* For single-end simulation, ART requires input sequence file, output file prefix, read length, and read count/fold coverage.\n\n* For paired-end simulation (except for amplicon sequencing), ART also requires the parameter values of\n  the mean and standard deviation of DNA/RNA fragment lengths\n\n===== EXAMPLES =====\n\n 1) single-end read simulation\n \tart_illumina -ss HS25 -sam -i reference.fa -l 150 -f 10 -o single_dat\n\n 2) paired-end read simulation\n       art_illumina -ss HS25 -sam -i reference.fa -p -l 150 -f 20 -m 200 -s 10 -o paired_dat\n\n 3) mate-pair read simulation\n       art_illumina -ss HS10 -sam -i reference.fa -mp -l 100 -f 20 -m 2500 -s 50 -o matepair_dat\n\n 4) amplicon sequencing simulation with 5' end single-end reads \n \tart_illumina -ss GA2 -amp -sam -na -i amp_reference.fa -l 50 -f 10 -o amplicon_5end_dat\n\n 5) amplicon sequencing simulation with paired-end reads\n       art_illumina -ss GA2 -amp -p -sam -na -i amp_reference.fa -l 50 -f 10 -o amplicon_pair_dat\n\n 6) amplicon sequencing simulation with matepair reads\n       art_illumina -ss MSv1 -amp -mp -sam -na -i amp_reference.fa -l 150 -f 10 -o amplicon_mate_dat\n\n 7) generate an extra SAM file with zero-sequencing errors for a paired-end read simulation\n       art_illumina -ss HSXn -ef -i reference.fa -p -l 150 -f 20 -m 200 -s 10 -o paired_twosam_dat\n\n 8) reduce the substitution error rate to one 10th of the default profile\n       art_illumina -i reference.fa -qs 10 -qs2 10 -l 50 -f 10 -p -m 500 -s 10 -sam -o reduce_error\n\n 9) turn off the masking of genomic regions with unknown nucleotides 'N'\n       art_illumina -ss HS20 -nf 0  -sam -i reference.fa -p -l 100 -f 20 -m 200 -s 10 -o paired_nomask\n\n 10) masking genomic regions with >=5 'N's within the read length 50\n       art_illumina -ss HSXt -nf 5 -sam -i reference.fa -p -l 150 -f 20 -m 200 -s 10 -o paired_maskN5"
-              }
-            ]
-          },
-          {
-            "executable": "/usr/bin/art_profiler_454",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 0,
-                "text": "DESCRIPTION:\n\tart_profiler_454 is a program for generating empirical 454 read profiles\n\tfor ART 454 simulator from 454 read data files\n\tVersion: 0.9.1, Copyright (c) Weichun Huang 2012 (whduke@gamil.com)\nUSAGE:\n\t/usr/bin/art_profiler_454 input_fastq_files_dir output_profile_dir [fastq_filename_extension]\nExamples:\n\t/usr/bin/art_profiler_454 454_dat_dir 454_profile_dir\n\t/usr/bin/art_profiler_454 454_dat_dir 454_profile_dir fastq\nNOTES:\n\t1)the default filename extension for fastq files is fq\n\t2)the program can read gzipped fastq data files with filename extension fq.gz"
-              }
-            ]
-          },
-          {
-            "executable": "/usr/bin/art_profiler_illumina",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 1,
-                "text": "This tool is to create an Illumina read quality profile from multiple fastq or gzipped fastq files\n\nUSAGE:\n\t./art_profiler_illumina output_profile_name input_fastq_dir fastq_filename_extension [max_number_threads]\n\nPARAMETERS:\n\toutput_profile_name:  the name of read quality profile to be generated\n\tinput_fastq_dir:   the directory of input fastq or zipped fastq files\n\tfastq_filename_extension: fastq or gzipped fastq filename extension\n\tmax_number_threads:: maximum number of threads/cores to be used for the run (default: all cores)\n\nEXAMPLES:\n\t1) create hiseq2k profiles from all *.fq.gz in the directory fastq_dat_dir\n\t\t./art_profiler_illumina hiseq2k fastq_dat_dir fq.gz\n\t2) create miseq2500 profiles from all *.fq in the directory fastq_dat_dir\n\t\t./art_profiler_illumina miseq250 fastq_dat_dir fq\n\t3) create hiseq1k profiles from all *.fq in the directory fastq_dat_dir using 20 threads\n\t\t./art_profiler_illumina hiseq1k fastq_dat_dir fq 20\n\nNOTES: For paired-end fastq files, e.g., *.fq or *.fq.gz,\n       the filenames of the 1st reads must be *_1.fq/*_1.fq.gz, or *.1.fq/*.1.fq.gz\n       and those of the 2nd reads must be *_2.fq./*_2.fq.gz, or *.2.fq or *.2.fq.gz\n\nCONTACT: Weichun Huang at whduke@gmail.com"
-              }
-            ]
-          }
-        ],
-        "package": "art-nextgen-simulation-tools",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "20160605+dfsg-5"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "archive_sha256": "8504eb3eb7c876fe4df7d4dd4e306be7325a2359490cb1320f9172148fa15062",
-        "binding_kind": "apt",
-        "description": "simulation tools to generate synthetic next-generation sequencing reads",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "generate"
-        ],
-        "name": "art-nextgen-simulation-tools",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 12,
-        "version": "20160605+dfsg-5",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_TEXT_INPUT_UNRESOLVED",
-      "probe": {
-        "archive_sha256": "0fe2930e58a69f9550dfa0a9b609d1684585d4fdf0d50841c3b8f59416be7510",
-        "executables": [
-          {
-            "executable": "/usr/bin/autodia",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 0,
-                "text": "getting handlers..\ngetting pattern for perl\nAutoDia - Automatic Dia XML. Copyright 2001 A Trevena\n\nusage:\nautodia ([-i filename [-p path] ] or  [-d directory [-r] ]) [options]\nautodia -i filename            : use filename as input\nautodia -i \"filea fileb filec\" : use filea, fileb and filec as input\nautodia -i filename -p ..      : use ../filename as input file\nautodia -d directoryname       : use *.pl/pm in directoryname as input files\nautodia -d 'foo bar quz'       : use *pl/pm in directories foo, bar and quz as input files\nautodia -d directory -r        : use *pl/pm in directory and its subdirectories as input files\nautodia -d directory -F        : use files in directory but only one file per diagram\nautodia -d directory -C        : use files in directory but skip CVS directories\nautodia -o outfile.xml         : use outfile.xml as output file (otherwise uses autodial.out.dia)\nautodia -O                     : output to stdout\nautodia -l language            : parse source as language (ie: C) and look for appropriate filename extensions if also -d\nautodia -t templatefile        : use templatefile as template (otherwise uses default)\nautodia -l DBI -i \"mysql:test:localhost\" -U username -P password : use the test database on localhost with username and password as username and password\nautodia -l Mason -i \"/index.html\" -p comp_root -G '$c' : use HTML::Mason to fetch /index.html from comp_root and show all components in reach. -G corresponds to allow_globals.\nautodia -z                     : use graphviz to produce dot, gif, jpg or png output\nautodia -Z                     : use springgraph to produce png output\nautodia -v                     : use vcg to output postscript\nautodia -D                     : ignore dependencies (ie do not process or display dependencies)\nautodia -K                     : process dependance but do not display in output\nautodia -k                     : process inheritance but do not display in output\nautodia -S                     : silent mode, no output to stdout except with -O\nautodia -s skipfile            : exclude files or packagenames matching those listed in file\nautodia -H                     : show only public/visible methods and attributes\nautodia -m                     : show only Class methods\nautodia -M                     : do not show Class Methods\nautodia -a                     : show only Class Attributes\nautodia -A                     : do not show Class Attributes\nautodia -h                     : display this help message\nautodia -V                     : display copyright message and version number\n\n\n\n/usr/bin/autodia version [unknown] calling Getopt::Std::getopts (version 1.13 [paranoid]),\nrunning under Perl version 5.38.2.\n\nUsage: autodia [-OPTIONS [-MORE_OPTIONS]] [--] [PROGRAM_ARG1 ...]\n\nThe following single-character options are accepted:\n\tWith arguments: -s -i -o -p -d -t -l -U -P -G\n\tBoolean (without arguments): -K -k -F -C -S -D -O -m -M -a -A -r -h -H -z -Z -v -V\n\nOptions may be merged together.  -- stops processing of options.\nSpace is not required between options and their arguments.\n\nFor more details run\n\tperldoc -F /usr/bin/autodia\n  [Now continuing due to backward compatibility and excessive paranoia.\n   See 'perldoc Getopt::Std' about $Getopt::Std::STANDARD_HELP_VERSION.]"
-              }
-            ]
-          }
-        ],
-        "package": "autodia",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "2.14-5"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "archive_sha256": "0fe2930e58a69f9550dfa0a9b609d1684585d4fdf0d50841c3b8f59416be7510",
-        "binding_kind": "apt",
-        "description": "generates Dia UML diagrams from source code, XML or data",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "code"
-        ],
-        "name": "autodia",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 12,
-        "version": "2.14-5",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
-      "probe": {
-        "archive_sha256": "26d6c22cfa5bfd6768db5d8ea07d1c194b519606660078a05e8e68d2f780e9ff",
-        "executables": [],
-        "package": "bandit",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "1.6.2-3"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "archive_sha256": "26d6c22cfa5bfd6768db5d8ea07d1c194b519606660078a05e8e68d2f780e9ff",
-        "binding_kind": "apt",
-        "description": "Security oriented static analyzer for Python code - Metapackage",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "code"
-        ],
-        "name": "bandit",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 12,
-        "version": "1.6.2-3",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png",
-      "probe": {
-        "archive_sha256": "0987ef56d8eb4e4a07775b54077d4c6f1d0c5a384c859d6249dc95761ea64e4a",
-        "executables": [
-          {
-            "executable": "/usr/bin/bdf2psf",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 0,
-                "text": "Usage:\nbdf2psf [--fb|--raw][--log LOG] BDF{+BDF} EQUIV{+EQUIV} SYMB{+[:]SYMB} SIZE PSF [SFM]\n\n--fb           Create font for framebuffer.\n--raw          Create a raw font (SIZE*8 bytes)\n--log          A log file for warnings.\nBDF{+BDF}      A list of BDF fonts.  The fonts listed first take precedence\n               when several fonts define glyphs for same unicode.\nEQUIV{+EQUIV}  A list of equivalents files.  Each non-empty line in these files\n               contains a list of unicodes to be considered equal (for all of\n               them only one position number in the PSF will be reserved).\nSYMB{+SYMB}    Files containing lists of symbols to include in the PSF font.\n               Unicodes listed first take precedence.  When a file name is\n               preceeded by a colon, no warnings about missing symbols in\n               the BDF fonts will be issued.\nSIZE           Create PSF font with how many character positions\n               (usually 256 or 512).\nPSF            The new font.  If a file with this name already exists,\n               it will be overwritten\nSFM            The SFM table of the PSF font.  If a file with this name already\n               exists, it will be overwritten.  Optional."
-              }
-            ]
-          }
-        ],
-        "package": "bdf2psf",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "1.226ubuntu1.1"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "archive_sha256": "0987ef56d8eb4e4a07775b54077d4c6f1d0c5a384c859d6249dc95761ea64e4a",
-        "binding_kind": "apt",
-        "description": "font converter to generate console fonts from BDF source fonts",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "generate"
-        ],
-        "name": "bdf2psf",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 12,
-        "version": "1.226ubuntu1.1",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png",
-      "probe": {
-        "archive_sha256": "3ff4fed98a4328a02993adf2d4ebde25685bb28ff29c78791fe4fbe9023ec6f0",
-        "executables": [
-          {
-            "executable": "/usr/bin/bear",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 0,
-                "text": "Usage: bear <command> [--output <arg>] [--verbose] -- ...\n\ncommands\n  intercept\n  citnames\n\n  --output <arg>       path of the result file (default: compile_commands.json)\n  --verbose            run in verbose mode\n  -- ...               command to execute\n\nadvanced options\n  --append             append result to an existing output file\n  --config <arg>       path of the config file\n  --force-preload      force to use library preload\n  --force-wrapper      force to use compiler wrappers\n\ndeveloper options\n  --bear-path <arg>    path to the bear executable (default: /usr/bin/bear)\n  --library <arg>      path to the preload library (default: /usr/$LIB/bear/libexec.so)\n  --wrapper <arg>      path to the wrapper executable (default: /usr/lib/x86_64-linux-gnu/bear/wrapper)\n  --wrapper-dir <arg>  path to the wrapper directory (default: /usr/lib/x86_64-linux-gnu/bear/wrapper.d)\n\nquery options\n  --help               print help and exit\n  --version            print version and exit"
-              }
-            ]
-          }
-        ],
-        "package": "bear",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "3.1.3-1build4"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "archive_sha256": "3ff4fed98a4328a02993adf2d4ebde25685bb28ff29c78791fe4fbe9023ec6f0",
-        "binding_kind": "apt",
-        "description": "generate compilation database for Clang tooling",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "generate"
-        ],
-        "name": "bear",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 12,
-        "version": "3.1.3-1build4",
         "zero_cost_eligible": true
       }
     }

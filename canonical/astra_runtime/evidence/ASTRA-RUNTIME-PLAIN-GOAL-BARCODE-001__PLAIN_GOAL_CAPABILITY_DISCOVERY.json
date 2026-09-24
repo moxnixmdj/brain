@@ -1,12 +1,12 @@
 {
   "auto_acquisition": {
-    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"barcode\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED\", \"name\": \"codequery\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED\", \"name\": \"go-qrcode\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"byacc-j\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"cproto\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"TimeoutExpired:Command '['/usr/bin/aldo', '--help']' timed out after 10 seconds\", \"name\": \"aldo\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"apport\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"art-nextgen-simulation-tools\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_TEXT_INPUT_UNRESOLVED\", \"name\": \"autodia\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"bandit\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"bdf2psf\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"bear\", \"status\": \"CONTRACT_REJECTED\"}]",
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"barcode\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"eancheck\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"ecopcr\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"TimeoutExpired:Command '['/usr/bin/flexbar', '--help']' timed out after 10 seconds\", \"name\": \"flexbar\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"qml-module-org-kde-prison\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"r-cran-bold\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"zint\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"zint-qt\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"byacc-j\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"cproto\", \"status\": \"CONTRACT_REJECTED\"}]",
     "status": "NOT_DISPATCHED"
   },
   "binding_performed": false,
   "goal": "Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png.",
   "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-001",
-  "observed_at_utc": "2026-09-24T22:19:18.364643+00:00",
+  "observed_at_utc": "2026-09-24T22:22:23.656063+00:00",
   "result": {
     "binding_performed": false,
     "candidates": [
@@ -26,48 +26,148 @@
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 28,
+        "score": 40,
         "version": "0.99-7",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "08c39fb07f0ee1cf6e599b8b8496cd4157ca96292b2bbccc74dbc3a2c68d210d",
+        "archive_sha256": "3f92bd9fcaa2027ca7f311b4e52a1d97fee977cdf10e0ef644431729dc8fc077",
         "binding_kind": "apt",
-        "description": "code-understanding, code-browsing or code-search tool",
+        "description": "Check digit validator for EAN/PLU/UPC barcode numbers",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "code"
+          "barcode"
         ],
-        "name": "codequery",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 20,
-        "version": "0.27.0+dfsg-1build2",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "10b8e63a940fc890582663aaab1413a97d7c0296e7611d9c39b746f3cc75ee4e",
-        "binding_kind": "apt",
-        "description": "QR Code encoder (Go program)",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "code"
-        ],
-        "name": "go-qrcode",
+        "name": "eancheck",
         "packages": [],
         "query": "barcode",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 20,
-        "version": "0.0~git20200617.da1b656-4ubuntu0.24.04.3",
+        "score": 18,
+        "version": "1.0-2build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "dd99fb73bb32e2d28af54b74a8378c89e527b62915167563fc92cc90586ffd4d",
+        "binding_kind": "apt",
+        "description": "estimate PCR barcode primers quality",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "barcode"
+        ],
+        "name": "ecopcr",
+        "packages": [],
+        "query": "barcode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.0.1+dfsg-4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "56e03f7049dae65dd5e91c647e7cc4cfc3e519c06d080798635acfc1f4a59998",
+        "binding_kind": "apt",
+        "description": "flexible barcode and adapter removal for sequencing platforms",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "barcode"
+        ],
+        "name": "flexbar",
+        "packages": [],
+        "query": "barcode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1:3.5.0-5",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ab76b5c103f1a91e0a43d74663bc07c6d029b19cc9b21e4bc9a10410f0865afd",
+        "binding_kind": "apt",
+        "description": "barcode API for Qt",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "barcode"
+        ],
+        "name": "qml-module-org-kde-prison",
+        "packages": [],
+        "query": "barcode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "5.115.0-0ubuntu5",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "13c1abdb03ebcad83b2a3a745bdb9bb7ee46016025527676e7e6b10eeb479865",
+        "binding_kind": "apt",
+        "description": "GNU R interface to Bold Systems for genetic barcode data",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "barcode"
+        ],
+        "name": "r-cran-bold",
+        "packages": [],
+        "query": "barcode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.3.0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769",
+        "binding_kind": "apt",
+        "description": "command line utility to encode data in barcode symbols",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "barcode"
+        ],
+        "name": "zint",
+        "packages": [],
+        "query": "128",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.13.0-1build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "869908686b1df48db14b3420be8e1a0ce060677263c222eb3f6265de706501fc",
+        "binding_kind": "apt",
+        "description": "Zint Barcode Studio, a QT frontend to zint",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "barcode"
+        ],
+        "name": "zint-qt",
+        "packages": [],
+        "query": "128",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.13.0-1build3",
         "zero_cost_eligible": true
       },
       {
@@ -87,7 +187,7 @@
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 16,
+        "score": 12,
         "version": "1.15-1.2",
         "zero_cost_eligible": true
       },
@@ -108,7 +208,7 @@
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 16,
+        "score": 12,
         "version": "4.7v-2",
         "zero_cost_eligible": true
       },
@@ -128,7 +228,7 @@
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 12,
+        "score": 10,
         "version": "0.7.8-2",
         "zero_cost_eligible": true
       },
@@ -148,7 +248,7 @@
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 12,
+        "score": 10,
         "version": "2.28.3-0ubuntu0.1",
         "zero_cost_eligible": true
       },
@@ -168,7 +268,7 @@
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 12,
+        "score": 10,
         "version": "20160605+dfsg-5",
         "zero_cost_eligible": true
       },
@@ -188,7 +288,7 @@
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 12,
+        "score": 10,
         "version": "2.14-5",
         "zero_cost_eligible": true
       },
@@ -208,7 +308,7 @@
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 12,
+        "score": 10,
         "version": "1.6.2-3",
         "zero_cost_eligible": true
       },
@@ -228,7 +328,7 @@
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 12,
+        "score": 10,
         "version": "1.226ubuntu1.1",
         "zero_cost_eligible": true
       },
@@ -248,7 +348,7 @@
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 12,
+        "score": 10,
         "version": "3.1.3-1build4",
         "zero_cost_eligible": true
       },
@@ -268,7 +368,7 @@
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 12,
+        "score": 10,
         "version": "0.66.1-4",
         "zero_cost_eligible": true
       },
@@ -288,7 +388,7 @@
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 12,
+        "score": 10,
         "version": "1.21.11-5",
         "zero_cost_eligible": true
       },
@@ -308,7 +408,7 @@
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 12,
+        "score": 10,
         "version": "4.3-23",
         "zero_cost_eligible": true
       },
@@ -328,7 +428,7 @@
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 12,
+        "score": 10,
         "version": "1.12-1",
         "zero_cost_eligible": true
       },
@@ -348,7 +448,7 @@
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 12,
+        "score": 10,
         "version": "0.26.0-3",
         "zero_cost_eligible": true
       },
@@ -368,7 +468,7 @@
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 12,
+        "score": 10,
         "version": "1.8-1",
         "zero_cost_eligible": true
       },
@@ -388,7 +488,7 @@
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 12,
+        "score": 10,
         "version": "147+dfsg-4",
         "zero_cost_eligible": true
       },
@@ -408,7 +508,7 @@
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 12,
+        "score": 10,
         "version": "20200511.git6eb65bd-1",
         "zero_cost_eligible": true
       },
@@ -428,7 +528,7 @@
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 12,
+        "score": 10,
         "version": "0.4.1-2",
         "zero_cost_eligible": true
       },
@@ -448,170 +548,68 @@
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 12,
+        "score": 10,
         "version": "0.6.13-5",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "95b0c7f31590afe978d24ccfbe3d74d6279659ccd0384b8557883dbd5f8e70ea",
+        "archive_sha256": "744ce5c85171785303f1028b0d7c3ce5084a362cf8533ef9089bf07f697121c5",
         "binding_kind": "apt",
-        "description": "Cobra CLI tool to generate Go applications and commands",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "generate"
-        ],
-        "name": "cobra-cli",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 12,
-        "version": "1.3.0-3ubuntu0.24.04.3",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "e6851734d45d3898340306d3048b2d269c4d42fdf706fe70c152dae7b0f5e4b6",
-        "binding_kind": "apt",
-        "description": "tool to generate Italian fiscal codes (codice fiscale)",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "generate"
-        ],
-        "name": "codfis",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 12,
-        "version": "0.4.7-2build4",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "542f5df6333819ed7a310529faa56f79bc422498e52ff9325a043f2d820aba0a",
-        "binding_kind": "apt",
-        "description": "Compiz Reloaded option code generator",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "code"
-        ],
-        "name": "compiz-bcop",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 12,
-        "version": "2:0.8.18-3",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "11436a20abe6149cbef24fdb7b151eadff49da47b2e96938f5e5a6b8a8f6a1c3",
-        "binding_kind": "apt",
-        "description": "Verilog code coverage analysis tool",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "code"
-        ],
-        "name": "covered",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 12,
-        "version": "0.7.10-4",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "ea3e0fc93f51d9046aa5c5e1eca27766dfa4e4854e246b859b68f09d0d80fb96",
-        "binding_kind": "apt",
-        "description": "Program to generate themable Web picture albums",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "generate"
-        ],
-        "name": "cthumb",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 12,
-        "version": "4.2-3.2",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "88ff26a633ff2434a9da670808cc6479a883d25b63e1a14b77b1db9d0bcd06ef",
-        "binding_kind": "apt",
-        "description": "generate dictionaries for attacks from personal data",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "generate"
-        ],
-        "name": "cupp",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 12,
-        "version": "0.0+20190501.git986658-6",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "447d2bab8d4ea40d47dae95d8dac1e41d3cd7214b8e614f2949f793e513bad5c",
-        "binding_kind": "apt",
-        "description": "Tool to generate CVS patch set information",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "generate"
-        ],
-        "name": "cvsps",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 12,
-        "version": "2.1-8build2",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "367a81b059398314db666421f8ba4e55c726c052c5832a816af384db3bbf325e",
-        "binding_kind": "apt",
-        "description": "Perl library to generate CODE 128 bar codes",
+        "description": "Perl module to create barcode images",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 3,
         "matched_terms": [
-          "128",
-          "code",
-          "generate"
+          "barcode"
         ],
-        "name": "libbarcode-code128-perl",
+        "name": "libgd-barcode-perl",
+        "packages": [],
+        "query": "barcode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 12,
+        "version": "2.00-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "a1228e71372e754919dc7e50f7761ece099d59041e6df5fc2d2b2b4d15fdfd19",
+        "binding_kind": "apt",
+        "description": "barcode plugin for KReport",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 3,
+        "matched_terms": [
+          "barcode"
+        ],
+        "name": "libkreport3-plugin-barcode",
+        "packages": [],
+        "query": "barcode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 12,
+        "version": "3.2.0-3build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "91edb7968f00993b0534b3723001a500a6965f4edd75191f3f902bb43f48ff88",
+        "binding_kind": "apt",
+        "description": "Create barcodes for PDF documents with PDF::Reuse",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 3,
+        "matched_terms": [
+          "barcode"
+        ],
+        "name": "libpdf-reuse-barcode-perl",
         "packages": [],
         "query": "128",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 16,
-        "version": "2.21-3",
+        "score": 12,
+        "version": "0.07-2",
         "zero_cost_eligible": true
       },
       {
@@ -1196,46 +1194,141 @@
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 28,
+            "score": 40,
             "version": "0.99-7",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "08c39fb07f0ee1cf6e599b8b8496cd4157ca96292b2bbccc74dbc3a2c68d210d",
+            "archive_sha256": "3f92bd9fcaa2027ca7f311b4e52a1d97fee977cdf10e0ef644431729dc8fc077",
             "binding_kind": "apt",
-            "description": "code-understanding, code-browsing or code-search tool",
+            "description": "Check digit validator for EAN/PLU/UPC barcode numbers",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "code"
+              "barcode"
             ],
-            "name": "codequery",
-            "packages": [],
-            "query": "generate",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 20,
-            "version": "0.27.0+dfsg-1build2",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "10b8e63a940fc890582663aaab1413a97d7c0296e7611d9c39b746f3cc75ee4e",
-            "binding_kind": "apt",
-            "description": "QR Code encoder (Go program)",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "code"
-            ],
-            "name": "go-qrcode",
+            "name": "eancheck",
             "packages": [],
             "query": "barcode",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 20,
-            "version": "0.0~git20200617.da1b656-4ubuntu0.24.04.3",
+            "score": 18,
+            "version": "1.0-2build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "dd99fb73bb32e2d28af54b74a8378c89e527b62915167563fc92cc90586ffd4d",
+            "binding_kind": "apt",
+            "description": "estimate PCR barcode primers quality",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "barcode"
+            ],
+            "name": "ecopcr",
+            "packages": [],
+            "query": "barcode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.0.1+dfsg-4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "56e03f7049dae65dd5e91c647e7cc4cfc3e519c06d080798635acfc1f4a59998",
+            "binding_kind": "apt",
+            "description": "flexible barcode and adapter removal for sequencing platforms",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "barcode"
+            ],
+            "name": "flexbar",
+            "packages": [],
+            "query": "barcode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1:3.5.0-5",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "ab76b5c103f1a91e0a43d74663bc07c6d029b19cc9b21e4bc9a10410f0865afd",
+            "binding_kind": "apt",
+            "description": "barcode API for Qt",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "barcode"
+            ],
+            "name": "qml-module-org-kde-prison",
+            "packages": [],
+            "query": "barcode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "5.115.0-0ubuntu5",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "13c1abdb03ebcad83b2a3a745bdb9bb7ee46016025527676e7e6b10eeb479865",
+            "binding_kind": "apt",
+            "description": "GNU R interface to Bold Systems for genetic barcode data",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "barcode"
+            ],
+            "name": "r-cran-bold",
+            "packages": [],
+            "query": "barcode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.3.0-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769",
+            "binding_kind": "apt",
+            "description": "command line utility to encode data in barcode symbols",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "barcode"
+            ],
+            "name": "zint",
+            "packages": [],
+            "query": "128",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "2.13.0-1build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "869908686b1df48db14b3420be8e1a0ce060677263c222eb3f6265de706501fc",
+            "binding_kind": "apt",
+            "description": "Zint Barcode Studio, a QT frontend to zint",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "barcode"
+            ],
+            "name": "zint-qt",
+            "packages": [],
+            "query": "128",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "2.13.0-1build3",
             "zero_cost_eligible": true
           },
           {
@@ -1254,7 +1347,7 @@
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 16,
+            "score": 12,
             "version": "1.15-1.2",
             "zero_cost_eligible": true
           },
@@ -1274,29 +1367,65 @@
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 16,
+            "score": 12,
             "version": "4.7v-2",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "367a81b059398314db666421f8ba4e55c726c052c5832a816af384db3bbf325e",
+            "archive_sha256": "744ce5c85171785303f1028b0d7c3ce5084a362cf8533ef9089bf07f697121c5",
             "binding_kind": "apt",
-            "description": "Perl library to generate CODE 128 bar codes",
+            "description": "Perl module to create barcode images",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 3,
             "matched_terms": [
-              "128",
-              "code",
-              "generate"
+              "barcode"
             ],
-            "name": "libbarcode-code128-perl",
+            "name": "libgd-barcode-perl",
+            "packages": [],
+            "query": "barcode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 12,
+            "version": "2.00-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "a1228e71372e754919dc7e50f7761ece099d59041e6df5fc2d2b2b4d15fdfd19",
+            "binding_kind": "apt",
+            "description": "barcode plugin for KReport",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 3,
+            "matched_terms": [
+              "barcode"
+            ],
+            "name": "libkreport3-plugin-barcode",
+            "packages": [],
+            "query": "barcode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 12,
+            "version": "3.2.0-3build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "91edb7968f00993b0534b3723001a500a6965f4edd75191f3f902bb43f48ff88",
+            "binding_kind": "apt",
+            "description": "Create barcodes for PDF documents with PDF::Reuse",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 3,
+            "matched_terms": [
+              "barcode"
+            ],
+            "name": "libpdf-reuse-barcode-perl",
             "packages": [],
             "query": "128",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 16,
-            "version": "2.21-3",
+            "score": 12,
+            "version": "0.07-2",
             "zero_cost_eligible": true
           },
           {
@@ -1314,7 +1443,7 @@
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 12,
+            "score": 10,
             "version": "0.7.8-2",
             "zero_cost_eligible": true
           },
@@ -1333,7 +1462,7 @@
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 12,
+            "score": 10,
             "version": "2.28.3-0ubuntu0.1",
             "zero_cost_eligible": true
           },
@@ -1352,7 +1481,7 @@
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 12,
+            "score": 10,
             "version": "20160605+dfsg-5",
             "zero_cost_eligible": true
           },
@@ -1371,7 +1500,7 @@
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 12,
+            "score": 10,
             "version": "2.14-5",
             "zero_cost_eligible": true
           },
@@ -1390,7 +1519,7 @@
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 12,
+            "score": 10,
             "version": "1.6.2-3",
             "zero_cost_eligible": true
           },
@@ -1409,7 +1538,7 @@
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 12,
+            "score": 10,
             "version": "1.226ubuntu1.1",
             "zero_cost_eligible": true
           },
@@ -1428,7 +1557,7 @@
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 12,
+            "score": 10,
             "version": "3.1.3-1build4",
             "zero_cost_eligible": true
           },
@@ -1447,7 +1576,7 @@
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 12,
+            "score": 10,
             "version": "0.66.1-4",
             "zero_cost_eligible": true
           },
@@ -1466,7 +1595,7 @@
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 12,
+            "score": 10,
             "version": "1.21.11-5",
             "zero_cost_eligible": true
           },
@@ -1485,7 +1614,7 @@
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 12,
+            "score": 10,
             "version": "4.3-23",
             "zero_cost_eligible": true
           },
@@ -1504,7 +1633,7 @@
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 12,
+            "score": 10,
             "version": "1.12-1",
             "zero_cost_eligible": true
           },
@@ -1523,7 +1652,7 @@
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 12,
+            "score": 10,
             "version": "0.26.0-3",
             "zero_cost_eligible": true
           },
@@ -1542,7 +1671,7 @@
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 12,
+            "score": 10,
             "version": "1.8-1",
             "zero_cost_eligible": true
           },
@@ -1561,7 +1690,7 @@
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 12,
+            "score": 10,
             "version": "147+dfsg-4",
             "zero_cost_eligible": true
           },
@@ -1580,7 +1709,7 @@
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 12,
+            "score": 10,
             "version": "20200511.git6eb65bd-1",
             "zero_cost_eligible": true
           },
@@ -1599,7 +1728,7 @@
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 12,
+            "score": 10,
             "version": "0.4.1-2",
             "zero_cost_eligible": true
           },
@@ -1618,141 +1747,8 @@
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 12,
+            "score": 10,
             "version": "0.6.13-5",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "95b0c7f31590afe978d24ccfbe3d74d6279659ccd0384b8557883dbd5f8e70ea",
-            "binding_kind": "apt",
-            "description": "Cobra CLI tool to generate Go applications and commands",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "generate"
-            ],
-            "name": "cobra-cli",
-            "packages": [],
-            "query": "generate",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 12,
-            "version": "1.3.0-3ubuntu0.24.04.3",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "e6851734d45d3898340306d3048b2d269c4d42fdf706fe70c152dae7b0f5e4b6",
-            "binding_kind": "apt",
-            "description": "tool to generate Italian fiscal codes (codice fiscale)",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "generate"
-            ],
-            "name": "codfis",
-            "packages": [],
-            "query": "generate",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 12,
-            "version": "0.4.7-2build4",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "542f5df6333819ed7a310529faa56f79bc422498e52ff9325a043f2d820aba0a",
-            "binding_kind": "apt",
-            "description": "Compiz Reloaded option code generator",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "code"
-            ],
-            "name": "compiz-bcop",
-            "packages": [],
-            "query": "generate",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 12,
-            "version": "2:0.8.18-3",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "11436a20abe6149cbef24fdb7b151eadff49da47b2e96938f5e5a6b8a8f6a1c3",
-            "binding_kind": "apt",
-            "description": "Verilog code coverage analysis tool",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "code"
-            ],
-            "name": "covered",
-            "packages": [],
-            "query": "generate",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 12,
-            "version": "0.7.10-4",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "ea3e0fc93f51d9046aa5c5e1eca27766dfa4e4854e246b859b68f09d0d80fb96",
-            "binding_kind": "apt",
-            "description": "Program to generate themable Web picture albums",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "generate"
-            ],
-            "name": "cthumb",
-            "packages": [],
-            "query": "generate",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 12,
-            "version": "4.2-3.2",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "88ff26a633ff2434a9da670808cc6479a883d25b63e1a14b77b1db9d0bcd06ef",
-            "binding_kind": "apt",
-            "description": "generate dictionaries for attacks from personal data",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "generate"
-            ],
-            "name": "cupp",
-            "packages": [],
-            "query": "generate",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 12,
-            "version": "0.0+20190501.git986658-6",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "447d2bab8d4ea40d47dae95d8dac1e41d3cd7214b8e614f2949f793e513bad5c",
-            "binding_kind": "apt",
-            "description": "Tool to generate CVS patch set information",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "generate"
-            ],
-            "name": "cvsps",
-            "packages": [],
-            "query": "generate",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 12,
-            "version": "2.1-8build2",
             "zero_cost_eligible": true
           }
         ],
