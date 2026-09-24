@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-ZINT-CONTRACT-DIAG-001",
+  "purpose": "Validate the repaired generic CLI contract inference against the highest-value discovered Code 128 barcode producer candidate.",
+  "steps": [
+    {
+      "id": "probe-and-infer-zint",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\ndef load(name,path):\n p=pathlib.Path(path); s=importlib.util.spec_from_file_location(name,p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m); return m\nprobe=load('p','canonical/runtime/apt_cli_probe.py')\ninfer=load('i','canonical/runtime/cli_contract_inference.py')\nroot=pathlib.Path('.').resolve()\npr=probe.probe('zint','2.13.0-1build3','cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769',root)\ngoal='Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png.'\nct=infer.infer_contract(pr,goal)\nprint(json.dumps(ct,sort_keys=True))\nprint('ZINT_CONTRACT_INFERRED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "ZINT_CONTRACT_INFERRED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "read_only_diagnostic": true
+  }
+}
