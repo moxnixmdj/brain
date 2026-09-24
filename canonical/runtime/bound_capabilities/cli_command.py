@@ -48,6 +48,15 @@ def run(args, root):
                 raise RuntimeError("CLI_OUTPUT_PREFIX_HEX_INVALID") from exc
             if not raw.startswith(expected):
                 raise RuntimeError("CLI_OUTPUT_PREFIX_MISMATCH")
+        if args.get("output_text_utf8") is True:
+            try:
+                decoded=raw.decode("utf-8","strict")
+            except UnicodeDecodeError as exc:
+                raise RuntimeError("CLI_OUTPUT_NOT_UTF8") from exc
+            if not decoded.strip():
+                raise RuntimeError("CLI_OUTPUT_TEXT_EMPTY")
+            result["output_text_utf8_verified"]=True
+            result["output_text_excerpt"]=decoded[:4000]
         result.update({
           "output_path":str(out.relative_to(pathlib.Path(root).resolve())),
           "output_bytes":len(raw),
