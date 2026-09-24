@@ -10,7 +10,8 @@
       "command": "set -euo pipefail\npython canonical/tests/test_goal_compiler.py",
       "verify": {
         "type": "returncode_zero"
-      }
+      },
+      "replay_on_resume": true
     },
     {
       "id": "execute-unknown-plain-goal",
@@ -31,6 +32,8 @@
     "manually_authored_controller_actions": false,
     "existing_verified_qr_capability_required": false,
     "replay_after_false_match_repair": "fe9a963602449a896c1778d1a34f73c1c9bcb586",
-    "replay_after_federated_discovery": "1fd25afab992c7f201972889d6066372a2f1327d"
+    "replay_after_federated_discovery": "1fd25afab992c7f201972889d6066372a2f1327d",
+    "replay_after_plain_input_binding_commit": "fa594b14a1cafbdd3702a1a40c1aa9120bc9d2d0",
+    "qr_capability_must_be_inherited_from_brain": true
   }
 }
