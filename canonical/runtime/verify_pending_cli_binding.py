@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Fresh verification for an automatically synthesized pending CLI binding."""
 from __future__ import annotations
-import hashlib,json,pathlib,sys
+import hashlib,json,pathlib,re,subprocess,sys
 
+import apt_cli_probe
 import astra_runtime
+import capability_discovery
 from bound_capabilities import cli_command
 
 ROOT=pathlib.Path(__file__).resolve().parents[2]
@@ -13,6 +15,112 @@ def _inside(raw):
     if p!=ROOT.resolve() and ROOT.resolve() not in p.parents:
         raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
     return p
+
+def _semantic_verifier_query(goal):
+    tokens=[
+        t for t in capability_discovery.effect_queries(goal)
+        if t not in capability_discovery.GENERIC_DISCOVERY_TOKENS
+        and not t.isdigit()
+    ]
+    distinctive=" ".join(tokens[:3]).strip()
+    return ("decode "+distinctive+" image").strip()
+
+
+def _semantic_help_contract(probe):
+    candidates=[]
+    for exe in probe.get("executables",[]):
+        path=str(exe.get("executable") or "")
+        for att in exe.get("help_attempts",[]):
+            text=str(att.get("text") or "")
+            lower=text.lower()
+            normalized=re.sub(r"[^a-z0-9]+","",lower)
+            if (
+                text
+                and "decode" in lower
+                and "image" in lower
+                and ("barcode" in normalized or "qrcode" in normalized)
+                and "--raw" in lower
+            ):
+                candidates.append((len(text),path,text))
+    if not candidates:
+        return None
+    candidates.sort(reverse=True)
+    _,path,text=candidates[0]
+    return {"executable":path,"help_excerpt":text[:4000],"argv":[path,"--quiet","--raw","__OUTPUT_PATH__"]}
+
+
+def _acquire_and_run_semantic_verifier(pending, output_path):
+    semantic=pending.get("semantic_verification") or {}
+    expected=str(semantic.get("expected_text") or "")
+    if not expected:
+        raise RuntimeError("SEMANTIC_EXPECTED_TEXT_REQUIRED")
+    goal=str(semantic.get("goal") or pending.get("goal") or "")
+    query=_semantic_verifier_query(goal)
+    discovery=capability_discovery.search_apt_packages(query,limit=24)
+    producer=str((pending.get("selected_supplier") or {}).get("name") or "")
+    attempts=[]
+    for cand in discovery.get("candidates",[]):
+        name=str(cand.get("name") or "")
+        if not name or name==producer:
+            continue
+        if not cand.get("zero_cost_eligible",False):
+            continue
+        if int(cand.get("integration_friction",99))!=0:
+            continue
+        if len(cand.get("matched_terms") or [])<2:
+            continue
+        version=str(cand.get("version") or "")
+        sha=str(cand.get("archive_sha256") or "").lower()
+        if not version or not re.fullmatch(r"[0-9a-f]{64}",sha):
+            continue
+        attempt={"candidate":cand}
+        try:
+            probe=apt_cli_probe.probe(name,version,sha,ROOT)
+            attempt["probe"]=probe
+            contract=_semantic_help_contract(probe)
+            if contract is None:
+                attempt["status"]="VERIFIER_CONTRACT_REJECTED"
+                attempts.append(attempt)
+                continue
+            argv=[output_path if x=="__OUTPUT_PATH__" else x for x in contract["argv"]]
+            proc=subprocess.run(argv,text=True,capture_output=True,timeout=60,cwd=ROOT)
+            observed=proc.stdout.strip()
+            attempt["contract"]=contract
+            attempt["returncode"]=proc.returncode
+            attempt["stdout"]=proc.stdout[-4000:]
+            attempt["stderr"]=proc.stderr[-4000:]
+            if proc.returncode!=0:
+                attempt["status"]="VERIFIER_EXECUTION_FAILED"
+                attempts.append(attempt)
+                continue
+            verified=observed==expected
+            evidence={
+              "verified":verified,
+              "expected_text":expected,
+              "observed_text":observed,
+              "verifier_package":name,
+              "verifier_version":version,
+              "verifier_archive_sha256":sha,
+              "verifier_executable":contract["executable"],
+              "query":query,
+              "producer_package":producer,
+              "producer_independent":name!=producer,
+              "attempt_count":len(attempts)+1
+            }
+            attempt["status"]="VERIFIED" if verified else "SEMANTIC_CONTENT_MISMATCH"
+            attempts.append(attempt)
+            evidence["attempts"]=attempts
+            return evidence
+        except Exception as exc:
+            attempt["status"]="VERIFIER_PROBE_FAILED"
+            attempt["error"]=type(exc).__name__+":"+str(exc)
+            attempts.append(attempt)
+            continue
+    raise RuntimeError("SEMANTIC_VERIFIER_ACQUISITION_FAILED:"+json.dumps([
+        {"name":(a.get("candidate") or {}).get("name"),"status":a.get("status"),"error":a.get("error")}
+        for a in attempts
+    ],sort_keys=True)[:3000])
+
 
 def main():
     if len(sys.argv)!=3:
@@ -45,7 +153,11 @@ def main():
     if semantic.get("required") is True:
         evidence=semantic.get("evidence")
         if not isinstance(evidence,dict) or evidence.get("verified") is not True:
-            raise RuntimeError("SEMANTIC_VERIFICATION_REQUIRED")
+            evidence=_acquire_and_run_semantic_verifier(pending,str(out))
+            semantic["evidence"]=evidence
+            semantic["status"]="VERIFIED" if evidence.get("verified") is True else "FAILED"
+            pending["semantic_verification"]=semantic
+            pending_path.write_text(json.dumps(pending,indent=2,sort_keys=True)+"\n",encoding="utf-8")
         if evidence.get("expected_text")!=semantic.get("expected_text"):
             raise RuntimeError("SEMANTIC_VERIFICATION_EXPECTED_TEXT_MISMATCH")
         if evidence.get("observed_text")!=semantic.get("expected_text"):
