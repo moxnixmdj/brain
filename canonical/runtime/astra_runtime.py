@@ -416,6 +416,16 @@ def _load_goal_compiler():
     spec.loader.exec_module(module)
     return module
 
+def _load_auto_apt_cli_acquisition():
+    path=pathlib.Path(__file__).resolve().with_name("auto_apt_cli_acquisition.py")
+    spec=importlib.util.spec_from_file_location("project_brain_auto_apt_cli_acquisition",path)
+    if spec is None or spec.loader is None:
+        raise Blocker("AUTO_APT_CLI_ACQUISITION_LOAD_FAILED")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    return module
+
 def _compile_plain_goal(goal):
     compiler=_load_goal_compiler()
     try:
@@ -581,15 +591,39 @@ def run_goal(step, mission):
             }
             mid=str(mission.get("mission_id") or "UNKNOWN")
             ep=EVID_DIR/f"{mid}__PLAIN_GOAL_CAPABILITY_DISCOVERY.json"
+            dispatch=None
+            dispatch_error=None
+            try:
+                auto=_load_auto_apt_cli_acquisition()
+                dispatch=auto.dispatch(
+                    goal,
+                    mid,
+                    str(mission.get("_runtime_mission_path") or ""),
+                    ROOT,
+                    discovery=result
+                )
+            except Exception as ae:
+                dispatch_error=type(ae).__name__+":"+str(ae)
+                evidence["auto_acquisition"]={
+                  "status":"NOT_DISPATCHED",
+                  "error":dispatch_error
+                }
+            else:
+                evidence["auto_acquisition"]=dispatch
+                evidence["status"]="AUTO_ACQUISITION_DISPATCHED"
             writej(ep,evidence)
+            if dispatch is not None:
+                raise Blocker("CAPABILITY_ACQUISITION_DISPATCHED:"+json.dumps(dispatch,sort_keys=True)) from e
             top=[{
               "name":x.get("name"),"score":x.get("score"),
               "zero_cost_eligible":x.get("zero_cost_eligible"),
-              "required_secret_count":x.get("required_secret_count")
+              "required_secret_count":x.get("required_secret_count"),
+              "integration_friction":x.get("integration_friction")
             } for x in result.get("candidates",[])[:8]]
             raise Blocker("CAPABILITY_ACQUISITION_REQUIRED:"+json.dumps({
               "evidence_path":str(ep.relative_to(ROOT)),
-              "top_candidates":top
+              "top_candidates":top,
+              "auto_acquisition_error":dispatch_error
             },sort_keys=True)) from e
         if not step.get("allow_optional_model_planner",False):
             raise
@@ -787,6 +821,7 @@ def main():
     mission=readj(mission_path)
     mid=mission["mission_id"]
     mission_sha256=sha_file(mission_path)
+    mission["_runtime_mission_path"]=a.mission
     state_path=STATE_DIR/f"{mid}.json"
     state=readj(state_path) if state_path.exists() else {
       "schema":"PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
