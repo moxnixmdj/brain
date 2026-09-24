@@ -1,0 +1,227 @@
+{
+  "binding_performed": false,
+  "discovery_sources": [
+    "OFFICIAL_MCP_REGISTRY"
+  ],
+  "mission_id": "ASTRA-CAPABILITY-ACQUISITION-PDF-001",
+  "observed_at_utc": "2026-09-24T21:11:39.366671+00:00",
+  "planner_failure_code": "UNREACHABLE_TARGET_EFFECTS",
+  "policy": "DISCOVERY_ONLY__BINDING_REQUIRES_SEPARATE_ZERO_COST_SECURITY_AND_EFFECT_VERIFICATION",
+  "results": [
+    {
+      "binding_performed": false,
+      "candidate_count": 16,
+      "candidates": [
+        {
+          "description": "Convert, merge, compress, OCR, redact, and sign PDFs inside your AI assistant. From pdfAssistant.",
+          "is_latest": true,
+          "name": "ai.pdfassistant/pdfassistant",
+          "packages": [],
+          "query": "pdf",
+          "remotes": [
+            {
+              "required_headers": [],
+              "type": "streamable-http",
+              "url": "https://chat.pdfassistant.ai/mcp"
+            }
+          ],
+          "repository": null,
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 15,
+          "status": "active",
+          "version": "1.35.17",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Sign, fill, merge and split PDFs entirely in your browser - files never leave your device.",
+          "is_latest": true,
+          "name": "app.docwand/pdf",
+          "packages": [],
+          "query": "pdf",
+          "remotes": [
+            {
+              "required_headers": [],
+              "type": "streamable-http",
+              "url": "https://mcp.docwand.app/mcp"
+            }
+          ],
+          "repository": null,
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 15,
+          "status": "active",
+          "version": "1.0.0",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Design, publish and render PDF templates with Typst. Full template lifecycle over MCP.",
+          "is_latest": true,
+          "name": "build.pdfs/pdfs-build",
+          "packages": [],
+          "query": "pdf",
+          "remotes": [
+            {
+              "required_headers": [],
+              "type": "streamable-http",
+              "url": "https://backend.pdfs.build/mcp"
+            }
+          ],
+          "repository": null,
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 15,
+          "status": "active",
+          "version": "1.0.0",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "I create PDF documents from markdown, preview, then generate a downloadable file",
+          "is_latest": true,
+          "name": "co.civai.nova/pdf-agent",
+          "packages": [],
+          "query": "pdf",
+          "remotes": [
+            {
+              "required_headers": [],
+              "type": "streamable-http",
+              "url": "https://nova.civai.co/mcp/agents/pdf-agent"
+            }
+          ],
+          "repository": null,
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 15,
+          "status": "active",
+          "version": "1.0.0",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "AU GST/ABN receipt extraction \u2014 assigns entertainment/ITC tax codes per line, not just OCR.",
+          "is_latest": true,
+          "name": "com.acjlabs/receipt-extraction",
+          "packages": [],
+          "query": "extract",
+          "remotes": [
+            {
+              "required_headers": [],
+              "type": "streamable-http",
+              "url": "https://receipt-extraction.acjlabs.com/mcp"
+            }
+          ],
+          "repository": {
+            "source": "github",
+            "url": "https://github.com/acjlabs/receipt-extraction"
+          },
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 15,
+          "status": "active",
+          "version": "0.1.2",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "PDF tools + invoice extraction, bank statement parsing, GST reconciliation & GSTIN validation.",
+          "is_latest": true,
+          "name": "com.allpdfmagic/allpdfmagic",
+          "packages": [],
+          "query": "pdf",
+          "remotes": [
+            {
+              "required_headers": [],
+              "type": "streamable-http",
+              "url": "https://api.allpdfmagic.com/mcp"
+            }
+          ],
+          "repository": null,
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 15,
+          "status": "active",
+          "version": "1.0.0",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Numbered invoices with VAT lines rendered to a real PDF. Numbers are sequential and never reused.",
+          "is_latest": true,
+          "name": "com.bestremotetools/invoice-vat-pdf-numbered",
+          "packages": [
+            {
+              "identifier": "https://github.com/theluckystrike/mcp-servers/releases/download/v0.21.0/invoice.mcpb",
+              "registry_type": "mcpb",
+              "required_environment": [],
+              "runtime_hint": null,
+              "secret_environment": [
+                "MCP_LICENSE_KEY"
+              ],
+              "transport": {
+                "type": "stdio"
+              },
+              "version": "0.21.0"
+            }
+          ],
+          "query": "pdf",
+          "remotes": [],
+          "repository": {
+            "source": "github",
+            "subfolder": "servers/invoice",
+            "url": "https://github.com/theluckystrike/mcp-servers"
+          },
+          "required_environment_count": 0,
+          "required_secret_count": 1,
+          "score": 15,
+          "status": "active",
+          "version": "0.21.0",
+          "zero_cost_eligible": true
+        },
+        {
+          "description": "Find a company contact page and extract role emails, a phone number and a postal address.",
+          "is_latest": true,
+          "name": "com.mambabuilt/mcp-company-contact-details-extractor",
+          "packages": [
+            {
+              "identifier": "@mambalabsdev/mcp-company-contact-details-extractor",
+              "registry_type": "npm",
+              "required_environment": [
+                "APIFY_TOKEN"
+              ],
+              "runtime_hint": null,
+              "secret_environment": [
+                "APIFY_TOKEN"
+              ],
+              "transport": {
+                "type": "stdio"
+              },
+              "version": "1.0.0"
+            }
+          ],
+          "query": "extract",
+          "remotes": [],
+          "repository": {
+            "source": "github",
+            "url": "https://github.com/mambalabsdev/mcp-company-contact-details-extractor"
+          },
+          "required_environment_count": 1,
+          "required_secret_count": 1,
+          "score": 14,
+          "status": "active",
+          "version": "1.0.0",
+          "zero_cost_eligible": true
+        }
+      ],
+      "effect": "pdf.extract",
+      "errors": [],
+      "queries": [
+        "extract",
+        "pdf"
+      ],
+      "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+      "source": "OFFICIAL_MCP_REGISTRY",
+      "source_url": "https://registry.modelcontextprotocol.io"
+    }
+  ],
+  "schema": "PROJECT_BRAIN_CAPABILITY_ACQUISITION_GAP_V1",
+  "unreachable_effects": [
+    "pdf.extract"
+  ]
+}
