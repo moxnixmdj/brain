@@ -296,6 +296,11 @@ def search_apt_packages(effect, limit=12):
                 score-=8
             if integration_friction==0:
                 score+=8
+            # Reward candidates that jointly cover multiple distinct pieces
+            # of the requested effect. A package matching both "decode" and
+            # "barcode" is more useful than one that merely mentions barcode.
+            if len(matched)>1:
+                score += 20*(len(matched)-1)
             if lname in effect.lower():
                 score+=8
             prior=seen.get(name)
