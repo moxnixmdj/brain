@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-STRUCTURED-REPORT-SUPPLIER-PROBE-001",
+  "purpose": "Read-only search/reuse probe for zero-cost local primitives relevant to structured JSON reporting and Markdown/PDF conversion.",
+  "goal": "Inspect Ubuntu availability and CLI contracts for jq and pandoc without modifying the canonical capability registry.",
+  "steps": [
+    {
+      "id": "probe-jq-pandoc",
+      "adapter": "shell",
+      "command": "set -euo pipefail\nfor P in jq pandoc; do\n  echo ===$P_POLICY===\n  apt-cache policy \"$P\" || true\n  echo ===$P_SHOW===\n  apt-cache show \"$P\" 2>/dev/null | grep -E '^(Package|Version|SHA256|Description):' | head -n 20 || true\ndone\necho ===JQ_HELP===\n(jq --help || true) | head -n 100\necho ===PANDOC_HELP===\n(pandoc --help || true) | head -n 120\necho STRUCTURED_REPORT_SUPPLIER_PROBE_COMPLETE",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "STRUCTURED_REPORT_SUPPLIER_PROBE_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "read_only_discovery": true,
+    "model_controller_required": false
+  }
+}
