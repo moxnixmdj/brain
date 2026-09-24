@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-24T21:24:17.689993+00:00",
+  "mission_id": "ASTRA-CAPABILITY-DISCOVERY-APT-OCR-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_CAPABILITY_DISCOVERY_APT_OCR_001.json",
+  "mission_sha256": "f5a9afa9c6701c91e5c48c9bfb0831223beeefba4a01fd4c4179f19485887bd8",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "b41bcb34136117b4712d63fcd9da846a4588f197bfc4b0b04cdca0bb7320a231",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
