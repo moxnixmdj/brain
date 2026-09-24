@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-24T21:30:39.515854+00:00",
+  "mission_id": "ASTRA-RUNTIME-BOUND-PDF-OCR-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_BOUND_PDF_OCR_001.json",
+  "mission_sha256": "957654d5ae7f77908914c1fb341f1c59fb974883e80a1c22ac9ec5470a6f47ac",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "a07a5c1a07d2152481a9beec7d5813c9f09b3be9b0a085af2019c30ee12078eb",
+  "status": "COMPLETE",
+  "steps_completed": 2
+}

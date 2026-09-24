@@ -8,6 +8,7 @@
     "step_id": "bind-ocr-and-verify-visible-text",
     "step_index": 1
   },
+  "completed_at_utc": "2026-09-24T21:30:39.515288+00:00",
   "created_at_utc": "2026-09-24T21:26:56.386557+00:00",
   "history": [
     {
@@ -23,14 +24,145 @@
       },
       "step_id": "generate-image-only-pdf",
       "step_index": 0
+    },
+    {
+      "completed_at_utc": "2026-09-24T21:30:39.514676+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "goal",
+        "capability_plan": {
+          "expanded_states": 1,
+          "initial_facts": [
+            "pdf.file.image_only.available"
+          ],
+          "plan": [
+            "tesseract-pdf-ocr"
+          ],
+          "status": "SOLVED",
+          "target_effects": [
+            "pdf.extract.ocr"
+          ],
+          "total_cost": 2.0
+        },
+        "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+        "cycles": 2,
+        "final_summary": "BOUND_PDF_OCR_COMPLETE",
+        "inherited_bound_capabilities": [],
+        "planner_model_last": null,
+        "planner_source": null,
+        "planner_transport": null,
+        "planning_mode": "DETERMINISTIC_CAPABILITY_GRAPH",
+        "returncode": 0,
+        "stdout": "BOUND_PDF_OCR_COMPLETE",
+        "trace": [
+          {
+            "cycle": 0,
+            "plan": {
+              "args": {
+                "capability_id": "pdf.extract.ocr.tesseract",
+                "dpi": 300,
+                "language": "eng",
+                "max_pages": 5,
+                "path": "canonical/astra_runtime/tmp/IMAGE_ONLY_OCR_TEST.pdf"
+              },
+              "capability_id": "tesseract-pdf-ocr",
+              "expect": {
+                "field": "text",
+                "type": "field_contains",
+                "value": "TEST"
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "bound_capability",
+              "attempts": [
+                {
+                  "candidates": [
+                    {
+                      "psm": "6",
+                      "returncode": 0,
+                      "stderr": "",
+                      "text": "TEST ULF TEST"
+                    },
+                    {
+                      "psm": "7",
+                      "returncode": 0,
+                      "stderr": "",
+                      "text": "TEST ULF TEST"
+                    },
+                    {
+                      "psm": "11",
+                      "returncode": 0,
+                      "stderr": "",
+                      "text": "TEST ULF TEST"
+                    },
+                    {
+                      "psm": "3",
+                      "returncode": 0,
+                      "stderr": "",
+                      "text": "TEST ULF TEST"
+                    }
+                  ],
+                  "image": "page-1.png",
+                  "selected_psm": "6"
+                }
+              ],
+              "capability_id": "pdf.extract.ocr.tesseract",
+              "dependency": {
+                "origin": "Ubuntu",
+                "packages": [
+                  {
+                    "archive_sha256": "2dfac382d77215aee0c3de4a2a2205505d5f2195e72e79b54ad32154fc08da77",
+                    "name": "tesseract-ocr",
+                    "version": "5.3.4-1build5"
+                  },
+                  {
+                    "archive_sha256": "fb936375b183a9d8ecb5b1fc5665a44110ca130c445946fb575c0b800b1dc0f4",
+                    "name": "poppler-utils",
+                    "version": "24.02.0-1ubuntu9.9"
+                  }
+                ],
+                "status": "INSTALLED_VERIFIED"
+              },
+              "dpi": 300,
+              "language": "eng",
+              "page_image_sha256": [
+                "9bebaaad54de7c421e5222c389fd1fa69bdb5e621af259bfb61fdc61de89f601"
+              ],
+              "pages_processed": 1,
+              "source_path": "canonical/astra_runtime/tmp/IMAGE_ONLY_OCR_TEST.pdf",
+              "text": "TEST ULF TEST",
+              "text_bytes": 13,
+              "text_sha256": "a7eaa8c1ba48058257dbcb0129019957b0d7f6844dee72447a926125fdff2d77",
+              "text_truncated": false
+            }
+          },
+          {
+            "cycle": 1,
+            "plan": {
+              "args": {
+                "summary": "BOUND_PDF_OCR_COMPLETE"
+              },
+              "type": "finish",
+              "why": "All target effects have an executable minimum-cost capability plan."
+            },
+            "result": {
+              "summary": "BOUND_PDF_OCR_COMPLETE",
+              "type": "finish"
+            }
+          }
+        ]
+      },
+      "step_id": "bind-ocr-and-verify-visible-text",
+      "step_index": 1
     }
   ],
   "mission_id": "ASTRA-RUNTIME-BOUND-PDF-OCR-001",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_BOUND_PDF_OCR_001.json",
-  "mission_sha256": "50152190507db56455d73b2b9375723f4bcb95b74811275cda64b2c335f313ba",
-  "next_step": 1,
+  "mission_sha256": "957654d5ae7f77908914c1fb341f1c59fb974883e80a1c22ac9ec5470a6f47ac",
+  "next_step": 2,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
-  "status": "BLOCKED",
-  "updated_at_utc": "2026-09-24T21:29:26.465656+00:00"
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-24T21:30:39.514694+00:00"
 }
