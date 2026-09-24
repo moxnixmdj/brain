@@ -322,6 +322,61 @@
         "state_path": "canonical/astra_runtime/state/ASTRA-RUNTIME-BOUND-PDF-TEXT-001.json",
         "workflow_run_id": 36060830384
       }
+    },
+    "json.query.jq": {
+      "provides": [
+        "json.query.transform"
+      ],
+      "requires": [
+        "json.file.available"
+      ],
+      "keywords": [
+        "json",
+        "query",
+        "transform",
+        "table",
+        "structured"
+      ],
+      "cost": 1,
+      "platforms": [
+        "linux"
+      ],
+      "limitations": [
+        "Bounded local jq transformation only; repository-local input/output paths.",
+        "No jq imports/modules/environment/input streaming functions in verified adapter."
+      ],
+      "adapter_module": "jq_query",
+      "entrypoint": "run",
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "json.query.jq",
+          "input_path": "${input.json_path}",
+          "filter": "${input.jq_filter}",
+          "output_path": "${input.output_path}",
+          "raw_output": true,
+          "require_nonempty": true,
+          "timeout_s": 60
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "source": {
+        "type": "apt",
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "jq",
+            "version": "1.7.1-3ubuntu0.24.04.2",
+            "sha256": "f59183392f84fe67b407b494d8ba6185e9b0e4a106ffcb369490bd20a83fd40e"
+          }
+        ]
+      },
+      "incremental_spend_usd": 0,
+      "status": "BOUND_PENDING_INDEPENDENT_VERIFICATION"
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
