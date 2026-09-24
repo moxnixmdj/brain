@@ -21,6 +21,10 @@ STOPWORDS = {
     "capability","tool","action","do","use","get","make","create","read","write",
     "data","file","service","external","target","effect"
 }
+GENERIC_DISCOVERY_TOKENS={
+    "generate","code","image","text","save","output","input","convert",
+    "process","program","utility","tool","data"
+}
 PAID_MARKERS = ("payment", "usdc", "x402", "$", "paid", "billing")
 
 
@@ -217,8 +221,13 @@ def search_apt_packages(effect, limit=12):
             if not matched:
                 continue
             score=0
+            name_tokens=set(re.findall(r"[a-z0-9]+",name.lower()))
             for t in matched:
-                score += 12 if t in name.lower() else 4
+                distinctive=t not in GENERIC_DISCOVERY_TOKENS
+                if t in name_tokens:
+                    score += 24 if distinctive else 6
+                else:
+                    score += 10 if distinctive else 2
             # Integration friction matters more than word count. Standalone
             # executables are usually cheaper to bind than language libraries.
             lname=name.lower()
