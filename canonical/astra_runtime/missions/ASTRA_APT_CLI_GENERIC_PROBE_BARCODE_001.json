@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-APT-CLI-GENERIC-PROBE-BARCODE-001",
+  "purpose": "Persist the exact executable/help evidence for the top barcode supplier so the generic contract parser can be extended from observed syntax rather than guessed.",
+  "steps": [
+    {
+      "id": "generic-probe-barcode",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/runtime/apt_cli_probe.py barcode 0.99-7 cfda4a63c84333f24a72d43ceec5f0a29af27841d21e4a501a6382fb18a0f336 canonical/astra_runtime/evidence/ASTRA-APT-CLI-GENERIC-PROBE-BARCODE-001__RESULT.json\npython - <<'PY'\nimport json\nx=json.load(open('canonical/astra_runtime/evidence/ASTRA-APT-CLI-GENERIC-PROBE-BARCODE-001__RESULT.json'))\nassert x['executables']\nprint('GENERIC_BARCODE_PROBE_COMPLETE')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "GENERIC_BARCODE_PROBE_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "task_specific_probe_code": false,
+    "package_version_hash_pinned": true
+  }
+}
