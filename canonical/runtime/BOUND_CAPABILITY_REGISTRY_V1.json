@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1",
+  "capabilities": {
+    "pdf.extract.text.pypdf": {
+      "provides": [
+        "pdf.extract.text"
+      ],
+      "limitations": [
+        "Extracts existing PDF text layers; does not perform OCR on image-only/scanned pages.",
+        "Input paths are restricted to the Project Brain repository checkout.",
+        "Large uncompressed PDF content streams can require substantial memory."
+      ],
+      "adapter_module": "pdf_pypdf",
+      "entrypoint": "run",
+      "source": {
+        "type": "pypi",
+        "project": "pypdf",
+        "version": "6.19.0",
+        "metadata_url": "https://pypi.org/pypi/pypdf/6.19.0/json",
+        "wheel_filename": "pypdf-6.19.0-py3-none-any.whl",
+        "wheel_sha256": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14",
+        "license": "BSD-3-Clause",
+        "trusted_publishing": true
+      },
+      "incremental_spend_usd": 0,
+      "status": "BOUND_PENDING_RUNTIME_VERIFICATION"
+    }
+  }
+}
