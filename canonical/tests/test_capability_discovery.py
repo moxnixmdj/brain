@@ -5,6 +5,7 @@ import json
 import pathlib
 import sys
 import unittest
+from unittest import mock
 
 CANONICAL_ROOT = pathlib.Path(__file__).resolve().parents[1]
 PATH = CANONICAL_ROOT / "runtime" / "capability_discovery.py"
@@ -98,6 +99,33 @@ class CapabilityDiscoveryTests(unittest.TestCase):
     def test_discovery_never_binds_during_search(self):
         out = discovery.search_mcp_registry("filesystem.read", opener=fake_open)
         self.assertFalse(out["binding_performed"])
+
+    def test_apt_discovery_keeps_late_split_compound_match(self):
+        noise="\n".join(f"noise-{i} - unrelated package" for i in range(650))
+        search_out=noise+"\nzbar-tools - QR code / bar code scanner and decoder (utilities)\n"
+        def fake_run(argv, text=True, capture_output=True, timeout=None):
+            class R:
+                returncode=0
+                stderr=""
+                stdout=""
+            r=R()
+            if argv[:2]==["apt-cache","search"]:
+                r.stdout=search_out
+            elif argv[:2]==["apt-cache","policy"]:
+                r.stdout="zbar-tools:\n  Candidate: 0.23.93-4build3\n"
+            elif argv[:2]==["apt-cache","show"]:
+                r.stdout="Package: zbar-tools\nSHA256: "+"a"*64+"\n"
+            return r
+        with mock.patch.object(discovery.sys.platform.__class__, "__str__", return_value="linux"):
+            pass
+        with mock.patch.object(discovery.shutil, "which", return_value="/usr/bin/apt-cache"), \
+             mock.patch.object(discovery.subprocess, "run", side_effect=fake_run), \
+             mock.patch.object(discovery.sys, "platform", "linux"):
+            out=discovery.search_apt_packages("decode barcode image", limit=50)
+        names=[x["name"] for x in out["candidates"]]
+        self.assertIn("zbar-tools",names)
+        cand=[x for x in out["candidates"] if x["name"]=="zbar-tools"][0]
+        self.assertIn("barcode",cand["matched_terms"])
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
