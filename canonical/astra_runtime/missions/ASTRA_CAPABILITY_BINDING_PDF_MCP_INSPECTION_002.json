@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-CAPABILITY-BINDING-PDF-MCP-INSPECTION-002",
+  "purpose": "Corrected replay of PDF MCP tool introspection under fail-closed process verification. Supersedes 001, whose shell failures were incorrectly masked by content/file verifiers.",
+  "supersedes": "ASTRA-CAPABILITY-BINDING-PDF-MCP-INSPECTION-001",
+  "steps": [
+    {
+      "id": "verify-runtime-fail-closed-semantics",
+      "adapter": "shell",
+      "command": "python canonical/tests/test_astra_runtime_verification.py && python canonical/tests/test_capability_discovery.py",
+      "verify": {
+        "type": "returncode_zero"
+      }
+    },
+    {
+      "id": "install-official-mcp-sdk-and-list-tools",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython -m pip install --disable-pip-version-check --quiet \"mcp>=1.0\"\npython canonical/runtime/mcp_tool_inspector.py   https://chat.pdfassistant.ai/mcp   https://mcp.docwand.app/mcp   https://backend.pdfs.build/mcp   > canonical/astra_runtime/evidence/ASTRA-CAPABILITY-BINDING-PDF-MCP-INSPECTION-002__TOOLS.json",
+      "verify": {
+        "type": "returncode_zero"
+      }
+    },
+    {
+      "id": "select-actual-pdf-extraction-tool-schema",
+      "adapter": "shell",
+      "command": "python - <<'PY'\nimport json, pathlib, sys\nsrc=pathlib.Path(\"canonical/astra_runtime/evidence/ASTRA-CAPABILITY-BINDING-PDF-MCP-INSPECTION-002__TOOLS.json\")\nout=pathlib.Path(\"canonical/astra_runtime/evidence/ASTRA-CAPABILITY-BINDING-PDF-MCP-INSPECTION-002__SHORTLIST.json\")\ndata=json.loads(src.read_text(encoding=\"utf-8\"))\nmatches=[]\nfor server in data.get(\"results\",[]):\n    if not server.get(\"ok\"):\n        continue\n    for tool in server.get(\"tools\",[]):\n        text=\" \".join(str(tool.get(k) or \"\") for k in (\"name\",\"title\",\"description\")).lower()\n        if any(word in text for word in (\"extract\",\"text\",\"ocr\",\"read\",\"parse\")):\n            matches.append({\"url\":server.get(\"url\"),\"protocol_version\":server.get(\"protocol_version\"),\"tool\":tool})\nout.write_text(json.dumps({\n    \"schema\":\"PROJECT_BRAIN_PDF_MCP_TOOL_SHORTLIST_V1\",\n    \"source_evidence\":str(src),\n    \"matches\":matches,\n    \"tool_calls_performed\":0\n},indent=2,sort_keys=True)+\"\\n\",encoding=\"utf-8\")\nprint(\"PDF_EXTRACTION_TOOL_SCHEMA_MATCHES\",len(matches))\nif not matches:\n    sys.exit(3)\nPY",
+      "verify": {
+        "type": "returncode_zero"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "tool_calls_performed": 0,
+    "inspection_only": true,
+    "no_user_files_uploaded": true
+  }
+}
