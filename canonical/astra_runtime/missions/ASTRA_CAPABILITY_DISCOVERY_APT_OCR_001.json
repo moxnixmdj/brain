@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-CAPABILITY-DISCOVERY-APT-OCR-001",
+  "purpose": "Search the existing Ubuntu package catalog for zero-cost local OCR and PDF rasterization capabilities after PATH probing found none installed.",
+  "steps": [
+    {
+      "id": "inspect-apt-ocr-candidates",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport json,pathlib,subprocess\npkgs=[\"tesseract-ocr\",\"poppler-utils\"]\nout={\"schema\":\"PROJECT_BRAIN_APT_CAPABILITY_DISCOVERY_V1\",\"packages\":[]}\nfor pkg in pkgs:\n    p=subprocess.run([\"apt-cache\",\"policy\",pkg],text=True,capture_output=True)\n    s=subprocess.run([\"apt-cache\",\"show\",pkg],text=True,capture_output=True)\n    out[\"packages\"].append({\n      \"name\":pkg,\n      \"policy_returncode\":p.returncode,\n      \"policy\":p.stdout[:4000],\n      \"metadata_returncode\":s.returncode,\n      \"metadata\":s.stdout[:8000]\n    })\npath=pathlib.Path(\"canonical/astra_runtime/evidence/ASTRA-CAPABILITY-DISCOVERY-APT-OCR-001__PACKAGES.json\")\npath.write_text(json.dumps(out,indent=2,sort_keys=True)+\"\\n\",encoding=\"utf-8\")\nprint(\"APT_OCR_DISCOVERY_COMPLETE\")\nprint(json.dumps(out,sort_keys=True))\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "APT_OCR_DISCOVERY_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "no_installation": true,
+    "local_package_catalog_only": true,
+    "no_model_controller": true
+  }
+}
