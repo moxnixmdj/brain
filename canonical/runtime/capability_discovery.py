@@ -30,10 +30,12 @@ def effect_queries(effect):
         raise DiscoveryFailure("EFFECT_REQUIRED")
     tokens = [
         t.lower() for t in re.split(r"[^A-Za-z0-9]+", effect)
-        if len(t) >= 3 and t.lower() not in STOPWORDS
+        if len(t) >= 2 and t.lower() not in STOPWORDS
     ]
     out = []
-    for token in sorted(set(tokens), key=lambda x: (-len(x), x)):
+    # Preserve semantic order from the goal/effect. Length-sorting pushed broad
+    # adjectives ahead of the actual capability noun (for example QR).
+    for token in tokens:
         if token not in out:
             out.append(token)
     if not out:
