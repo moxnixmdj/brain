@@ -1,0 +1,33 @@
+{
+  "constraints": {
+    "allow_registry_mutation": true,
+    "auto_generated_from_mission": "ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003",
+    "fresh_verification_invocation_required": true,
+    "incremental_spend_usd": 0,
+    "model_controller_required": false
+  },
+  "goal": "Verify the pending capability effect, promote only on verified output, then trigger replay of the originating mission.",
+  "mission_id": "ASTRA-AUTO-VERIFY-ZINT-85BC9CD2C9A4",
+  "purpose": "Fresh independently-invoked effect verification and promotion of an automatically synthesized APT CLI capability binding.",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "steps": [
+    {
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/runtime/verify_pending_cli_binding.py canonical/astra_runtime/pending_bindings/ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003__zint__85bc9cd2c9a4.json canonical/astra_runtime/evidence/ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003__zint__85bc9cd2c9a4__AUTO_VERIFY.json",
+      "id": "verify-pending-cli-binding",
+      "verify": {
+        "text": "PENDING_CLI_BINDING_EFFECT_VERIFIED",
+        "type": "stdout_contains"
+      }
+    },
+    {
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/runtime/promote_pending_binding.py canonical/astra_runtime/pending_bindings/ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003__zint__85bc9cd2c9a4.json canonical/astra_runtime/evidence/ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003__zint__85bc9cd2c9a4__AUTO_VERIFY.json",
+      "id": "promote-and-replay",
+      "verify": {
+        "text": "PENDING_CAPABILITY_PROMOTED",
+        "type": "stdout_contains"
+      }
+    }
+  ]
+}

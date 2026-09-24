@@ -1,545 +1,144 @@
 {
   "attempts": [
     {
-      "error": "ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED",
+      "contract": {
+        "argv_template": [
+          "zint",
+          "-b",
+          "CODE128",
+          "-o",
+          "${input.output_path}",
+          "-d",
+          "${input.text}"
+        ],
+        "command": "zint",
+        "evidence": {
+          "archive_sha256": "cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769",
+          "input_flag": "-d",
+          "output_flag": "-o",
+          "output_line": "-o, --output=FILE     Send output to FILE. Default is out.png",
+          "positional_input": null,
+          "probe_package": "zint",
+          "probe_version": "2.13.0-1build3",
+          "requested_suffix": ".png",
+          "selector": [
+            "-b",
+            "CODE128"
+          ],
+          "usage_line": null
+        },
+        "executable": "/usr/bin/zint",
+        "output_path_template": "${input.output_path}",
+        "output_prefix_hex": "89504e470d0a1a0a",
+        "required_inputs": [
+          "text",
+          "output_path"
+        ],
+        "schema": "PROJECT_BRAIN_CLI_CONTRACT_CANDIDATE_V1",
+        "status": "CANDIDATE_REQUIRES_EFFECT_VERIFICATION",
+        "timeout_s": 60
+      },
       "probe": {
-        "archive_sha256": "b3cba02f7d4400bf8c38daf37139f9ba9c12f0e70ef49f035305a6ef27ce0f79",
+        "archive_sha256": "cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769",
         "executables": [
           {
-            "executable": "/usr/bin/iec16022",
+            "executable": "/usr/bin/zint",
             "help_attempts": [
               {
                 "flag": "--help",
                 "returncode": 0,
-                "text": "Usage: iec16022 [barcode]\n  -s, --size=WxH                                                 Size\n  -c, --barcode=text                                             Barcode\n      --ecc=000/050/080/100/140/200                              ECC\n  -i, --infile=filename                                          Barcode file\n  -o, --outfile=filename                                         Output\n                                                                 filename\n  -e, --encoding=[CTXEAB]* for ecc200 or 11/27/41/37/128/256     Encoding\n                                                                 template\n  -f, --format=Text/UTF-8/EPS/PNG/Bin/Hex/Stamp                  Output format\n                                                                 (default:\n                                                                 \"Text\")\n      --gs1                                                      Enable GS1\n                                                                 mode, start\n                                                                 with FNC1\n\nHelp options:\n  -?, --help                                                     Show this\n                                                                 help message\n      --usage                                                    Display brief\n                                                                 usage message"
+                "text": "Zint version 2.13.0\nEncode input data in a barcode and save as BMP/EMF/EPS/GIF/PCX/PNG/SVG/TIF/TXT\n\n  -b, --barcode=TYPE    Number or name of barcode type. Default is 20 (CODE128)\n  --addongap=INTEGER    Set add-on gap in multiples of X-dimension for EAN/UPC\n  --batch               Treat each line of input file as a separate data set\n  --bg=COLOUR           Specify a background colour (as RGB(A) or \"C,M,Y,K\")\n  --binary              Treat input as raw binary data\n  --bind                Add boundary bars\n  --bindtop             Add top boundary bar only\n  --bold                Use bold text (HRT)\n  --border=INTEGER      Set width of border in multiples of X-dimension\n  --box                 Add a box around the symbol\n  --cmyk                Use CMYK colour space in EPS/TIF symbols\n  --cols=INTEGER        Set the number of data columns in symbol\n  --compliantheight     Warn if height not compliant, and use standard default\n  -d, --data=DATA       Set the symbol data content (segment 0)\n  --direct              Send output to stdout\n  --dmiso144            Use ISO format for 144x144 Data Matrix symbols\n  --dmre                Allow Data Matrix Rectangular Extended\n  --dotsize=NUMBER      Set radius of dots in dotty mode\n  --dotty               Use dots instead of squares for matrix symbols\n  --dump                Dump hexadecimal representation to stdout\n  -e, --ecinos          Display ECI (Extended Channel Interpretation) table\n  --eci=INTEGER         Set the ECI code for the data (segment 0)\n  --embedfont           Embed font in vector output (SVG only)\n  --esc                 Process escape sequences in input data\n  --extraesc            Process symbology-specific escape sequences (Code 128)\n  --fast                Use faster encodation or other shortcuts if available\n  --fg=COLOUR           Specify a foreground colour (as RGB(A) or \"C,M,Y,K\")\n  --filetype=TYPE       Set output file type BMP/EMF/EPS/GIF/PCX/PNG/SVG/TIF/TXT\n  --fullmultibyte       Use multibyte for binary/Latin (QR/Han Xin/Grid Matrix)\n  --gs1                 Treat input as GS1 compatible data\n  --gs1nocheck          Do not check validity of GS1 data\n  --gs1parens           Process parentheses \"()\" as GS1 AI delimiters, not \"[]\"\n  --gssep               Use separator GS for GS1 (Data Matrix)\n  --guarddescent=NUMBER Set height of guard bar descent in X-dims (EAN/UPC)\n  --guardwhitespace     Add quiet zone indicators (\"<\"/\">\") to HRT (EAN/UPC)\n  -h, --help            Display help message\n  --height=NUMBER       Set height of symbol in multiples of X-dimension\n  --heightperrow        Treat height as per-row\n  -i, --input=FILE      Read input data from FILE\n  --init                Create Reader Initialisation (Programming) symbol\n  --mask=INTEGER        Set masking pattern to use (QR/Han Xin/DotCode)\n  --mirror              Use batch data to determine filename\n  --mode=INTEGER        Set encoding mode (MaxiCode/Composite)\n  --nobackground        Remove background (EMF/EPS/GIF/PNG/SVG/TIF only)\n  --noquietzones        Disable default quiet zones\n  --notext              Remove human readable text (HRT)\n  -o, --output=FILE     Send output to FILE. Default is out.png\n  --primary=STRING      Set primary message (MaxiCode/Composite)\n  --quietzones          Add compliant quiet zones\n  -r, --reverse         Reverse colours (white on black)\n  --rotate=INTEGER      Rotate symbol by INTEGER (0, 90, 180, 270) degrees\n  --rows=INTEGER        Set number of rows (Codablock-F/PDF417)\n  --scale=NUMBER        Adjust size of X-dimension\n  --scalexdimdp=X[,R]   Adjust size to X-dimension X at resolution R\n  --scmvv=INTEGER       Prefix SCM with \"[)>\\R01\\Gvv\" (vv is INTEGER) (MaxiCode)\n  --secure=INTEGER      Set error correction level (ECC)\n  --segN=ECI,DATA       Set the ECI & data content for segment N, where N 1 to 9\n  --separator=INTEGER   Set height of row separator bars (stacked symbologies)\n  --small               Use small text (HRT)\n  --square              Force Data Matrix symbols to be square\n  --structapp=I,C[,ID]  Set Structured Append info (I index, C count)\n  -t, --types           Display table of barcode types\n  --textgap=NUMBER      Adjust gap between barcode and HRT in multiples of X-dim\n  --vers=INTEGER        Set symbol version (size, check digits, other options)\n  -v, --version         Display Zint version\n  --vwhitesp=INTEGER    Set height of vertical whitespace in multiples of X-dim\n  -w, --whitesp=INTEGER Set width of horizontal whitespace in multiples of X-dim\n  --werror              Convert all warnings into errors"
               }
             ]
           }
         ],
-        "package": "iec16022",
+        "package": "zint",
         "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "0.2.7-1"
+        "version": "2.13.0-1build3"
       },
-      "status": "CONTRACT_REJECTED",
+      "status": "CONTRACT_ACCEPTED",
       "supplier": {
         "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 96.0,
-        "archive_sha256": "b3cba02f7d4400bf8c38daf37139f9ba9c12f0e70ef49f035305a6ef27ce0f79",
+        "_acquisition_role_score": 104.0,
+        "archive_sha256": "cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769",
         "binding_kind": "apt",
-        "description": "Generates 2d ISO/IEC 16022 barcodes (data matrix/semacode)",
+        "description": "command line utility to encode data in barcode symbols",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
           "barcode",
-          "generate"
+          "encode"
         ],
-        "name": "iec16022",
+        "name": "zint",
         "packages": [],
-        "query": "generate",
+        "query": "encode",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 40,
-        "version": "0.2.7-1",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png",
-      "probe": {
-        "archive_sha256": "cfda4a63c84333f24a72d43ceec5f0a29af27841d21e4a501a6382fb18a0f336",
-        "executables": [
-          {
-            "executable": "/usr/bin/barcode",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 0,
-                "text": "GNU barcode 0.99 is a tool to convert text strings to printed bars.\n\n/usr/bin/barcode: Options:\n   -i <arg>     input file (strings to encode), default is stdin\n   -o <arg>     output file, default is stdout\n   -b <arg>     string to encode (use input file if missing)\n   -e <arg>     encoding type (default is best fit for first string)\n   -u <arg>     unit (\"mm\", \"in\", ...) used to decode -g, -t, -p\n   -g <arg>     geometry on the page: [<wid>x<hei>][+<margin>+<margin>]\n   -t <arg>     table geometry: <cols>x<lines>[+<margin>+<margin>]\n   -m <arg>     internal margin for each item in a table: <xm>[,<ym>]\n   -n           \"numeric\": avoid printing text along with the bars\n   -c           no Checksum character, if the chosen encoding allows it\n   -E           print one code as eps file (default: multi-page ps)\n   -S           print one code as svg file (default: multi-page ps)\n   -P           create PCL output instead of postscript\n   -p <arg>     page size (refer to the man page)\n   -s           streaming mode (refer to the man page)\n\nKnown encodings are (synonyms appear on the same line):\n\t\"ean\", \"ean13\", \"ean-13\", \"ean8\", \"ean-8\"\n\t\"upc\", \"upc-a\", \"upc-e\"\n\t\"isbn\"\n\t\"39\", \"code39\"\n\t\"39ext\", \"code39ext\"\n\t\"128c\", \"code128c\"\n\t\"128b\", \"code128b\"\n\t\"128\", \"code128\"\n\t\"128raw\"\n\t\"i25\", \"interleaved 2 of 5\"\n\t\"cbr\", \"codabar\"\n\t\"msi\"\n\t\"pls\", \"plessey\"\n\t\"code93\", \"93\"\n\t\"code11\", \"11\"\nMail bug reports and suggestions to <bug-barcode@gnu.org>."
-              }
-            ]
-          },
-          {
-            "executable": "/usr/bin/sample",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 0,
-                "text": "%!PS-Adobe-2.0\n%%Creator: barcode sample program\n%%EndComments\n%%EndProlog\n\n%%Page: 1 1\n\n% Printing barcode for \"800894002700\", scaled  1.00, encoded using \"EAN-13\"\n% The space/bar succession is represented by the following widths (space first):\n% 911132111123121321132311321111111321121221312321132111132111\n[\n%  height  xpos   ypos  width       height  xpos   ypos  width\n   [75.00  59.50  55.00  0.85]      [75.00  61.50  55.00  0.85]\n   [70.00  66.00  60.00  1.85]      [70.00  68.50  60.00  0.85]\n   [70.00  70.50  60.00  0.85]      [70.00  74.50  60.00  2.85]\n   [70.00  78.00  60.00  1.85]      [70.00  81.50  60.00  2.85]\n   [70.00  85.50  60.00  0.85]      [70.00  88.50  60.00  2.85]\n   [70.00  93.50  60.00  2.85]      [70.00  96.50  60.00  0.85]\n   [70.00 101.00  60.00  1.85]      [70.00 103.50  60.00  0.85]\n   [75.00 105.50  55.00  0.85]      [75.00 107.50  55.00  0.85]\n   [70.00 110.50  60.00  2.85]      [70.00 114.50  60.00  0.85]\n   [70.00 117.00  60.00  1.85]      [70.00 120.00  60.00  1.85]\n   [70.00 123.50  60.00  0.85]      [70.00 127.50  60.00  0.85]\n   [70.00 131.50  60.00  2.85]      [70.00 135.50  60.00  0.85]\n   [70.00 138.50  60.00  2.85]      [70.00 142.50  60.00  0.85]\n   [70.00 144.50  60.00  0.85]      [70.00 147.50  60.00  2.85]\n   [75.00 151.50  55.00  0.85]      [75.00 153.50  55.00  0.85]\n\n]\t{ {} forall setlinewidth moveto 0 exch rlineto stroke} bind forall\n[\n%   char    xpos   ypos fontsize\n    [(8)   50.00  50.00 12.00]\n    [(0)   62.00  50.00  0.00]\n    [(0)   69.00  50.00  0.00]\n    [(8)   76.00  50.00  0.00]\n    [(9)   83.00  50.00  0.00]\n    [(4)   90.00  50.00  0.00]\n    [(0)   97.00  50.00  0.00]\n    [(0)  109.00  50.00  0.00]\n    [(2)  116.00  50.00  0.00]\n    [(7)  123.00  50.00  0.00]\n    [(0)  130.00  50.00  0.00]\n    [(0)  137.00  50.00  0.00]\n    [(4)  144.00  50.00  0.00]\n]   { {} forall dup 0.00 ne {\n\t/Helvetica findfont exch scalefont setfont\n    } {pop} ifelse\n    moveto show} bind forall\n% End barcode for \"800894002700\"\n\n% Printing barcode for \"800894002700\", scaled  0.67, encoded using \"EAN-13\"\n% The space/bar succession is represented by the following widths (space first):\n% 911132111123121321132311321111111321121221312321132111132111\n[\n%  height  xpos   ypos  width       height  xpos   ypos  width\n   [46.63 176.39  68.37  0.52]      [46.63 177.74  68.37  0.52]\n   [43.27 180.77  71.73  1.20]      [43.27 182.45  71.73  0.52]\n   [43.27 183.80  71.73  0.52]      [43.27 186.49  71.73  1.87]\n   [43.27 188.85  71.73  1.20]      [43.27 191.20  71.73  1.87]\n   [43.27 193.89  71.73  0.52]      [43.27 195.91  71.73  1.87]\n   [43.27 199.28  71.73  1.87]      [43.27 201.30  71.73  0.52]\n   [43.27 204.33  71.73  1.20]      [43.27 206.01  71.73  0.52]\n   [46.63 207.36  68.37  0.52]      [46.63 208.70  68.37  0.52]\n   [43.27 210.72  71.73  1.87]      [43.27 213.41  71.73  0.52]\n   [43.27 215.10  71.73  1.20]      [43.27 217.12  71.73  1.20]\n   [43.27 219.47  71.73  0.52]      [43.27 222.16  71.73  0.52]\n   [43.27 224.86  71.73  1.87]      [43.27 227.55  71.73  0.52]\n   [43.27 229.57  71.73  1.87]      [43.27 232.26  71.73  0.52]\n   [43.27 233.61  71.73  0.52]      [43.27 235.62  71.73  1.87]\n   [46.63 238.32  68.37  0.52]      [46.63 239.66  68.37  0.52]\n\n]\t{ {} forall setlinewidth moveto 0 exch rlineto stroke} bind forall\n[\n%   char    xpos   ypos fontsize\n    [(8)  170.00  65.00  8.08]\n    [(0)  178.08  65.00  0.00]\n    [(0)  182.79  65.00  0.00]\n    [(8)  187.50  65.00  0.00]\n    [(9)  192.21  65.00  0.00]\n    [(4)  196.92  65.00  0.00]\n    [(0)  201.63  65.00  0.00]\n    [(0)  209.71  65.00  0.00]\n    [(2)  214.42  65.00  0.00]\n    [(7)  219.13  65.00  0.00]\n    [(0)  223.85  65.00  0.00]\n    [(0)  228.56  65.00  0.00]\n    [(4)  233.27  65.00  0.00]\n]   { {} forall dup 0.00 ne {\n\t/Helvetica findfont exch scalefont setfont\n    } {pop} ifelse\n    moveto show} bind forall\n% End barcode for \"800894002700\"\n\n% Printing barcode for \"800894002700\", scaled  0.38, encoded using \"EAN-13\"\n% The space/bar succession is represented by the following widths (space first):\n% 911132111123121321132311321111111321121221312321132111132111\n[\n%  height  xpos   ypos  width       height  xpos   ypos  width\n   [28.08 283.65  81.92  0.23]      [28.08 284.42  81.92  0.23]\n   [26.15 286.15  83.85  0.62]      [26.15 287.12  83.85  0.23]\n   [26.15 287.88  83.85  0.23]      [26.15 289.42  83.85  1.00]\n   [26.15 290.77  83.85  0.62]      [26.15 292.12  83.85  1.00]\n   [26.15 293.65  83.85  0.23]      [26.15 294.81  83.85  1.00]\n   [26.15 296.73  83.85  1.00]      [26.15 297.88  83.85  0.23]\n   [26.15 299.62  83.85  0.62]      [26.15 300.58  83.85  0.23]\n   [28.08 301.35  81.92  0.23]      [28.08 302.12  81.92  0.23]\n   [26.15 303.27  83.85  1.00]      [26.15 304.81  83.85  0.23]\n   [26.15 305.77  83.85  0.62]      [26.15 306.92  83.85  0.62]\n   [26.15 308.27  83.85  0.23]      [26.15 309.81  83.85  0.23]\n   [26.15 311.35  83.85  1.00]      [26.15 312.88  83.85  0.23]\n   [26.15 314.04  83.85  1.00]      [26.15 315.58  83.85  0.23]\n   [26.15 316.35  83.85  0.23]      [26.15 317.50  83.85  1.00]\n   [28.08 319.04  81.92  0.23]      [28.08 319.81  81.92  0.23]\n\n]\t{ {} forall setlinewidth moveto 0 exch rlineto stroke} bind forall\n[\n%   char    xpos   ypos fontsize\n    [(8)  280.00  80.00  4.62]\n    [(0)  284.62  80.00  0.00]\n    [(0)  287.31  80.00  0.00]\n    [(8)  290.00  80.00  0.00]\n    [(9)  292.69  80.00  0.00]\n    [(4)  295.38  80.00  0.00]\n    [(0)  298.08  80.00  0.00]\n    [(0)  302.69  80.00  0.00]\n    [(2)  305.38  80.00  0.00]\n    [(7)  308.08  80.00  0.00]\n    [(0)  310.77  80.00  0.00]\n    [(0)  313.46  80.00  0.00]\n    [(4)  316.15  80.00  0.00]\n]   { {} forall dup 0.00 ne {\n\t/Helvetica findfont exch scalefont setfont\n    } {pop} ifelse\n    moveto show} bind forall\n% End barcode for \"800894002700\"\n\n% Printing barcode for \"000000000000\", scaled  1.63, encoded using \"EAN-13\"\n% The space/bar succession is represented by the following widths (space first):\n% 911132113211321132113211321111111321132113211321132113211111\n[\n%  height  xpos   ypos  width       height  xpos   ypos  width\n   [121.83  65.53 178.17  1.48]      [121.83  68.80 178.17  1.48]\n   [113.65  76.15 186.35  3.12]      [113.65  80.24 186.35  1.48]\n   [113.65  87.60 186.35  3.12]      [113.65  91.68 186.35  1.48]\n   [113.65  99.04 186.35  3.12]      [113.65 103.12 186.35  1.48]\n   [113.65 110.48 186.35  3.12]      [113.65 114.57 186.35  1.48]\n   [113.65 121.92 186.35  3.12]      [113.65 126.01 186.35  1.48]\n   [113.65 133.37 186.35  3.12]      [113.65 137.45 186.35  1.48]\n   [121.83 140.72 178.17  1.48]      [121.83 143.99 178.17  1.48]\n   [113.65 148.89 186.35  4.75]      [113.65 155.43 186.35  1.48]\n   [113.65 160.34 186.35  4.75]      [113.65 166.88 186.35  1.48]\n   [113.65 171.78 186.35  4.75]      [113.65 178.32 186.35  1.48]\n   [113.65 183.22 186.35  4.75]      [113.65 189.76 186.35  1.48]\n   [113.65 194.66 186.35  4.75]      [113.65 201.20 186.35  1.48]\n   [113.65 206.11 186.35  4.75]      [113.65 212.64 186.35  1.48]\n   [121.83 215.91 178.17  1.48]      [121.83 219.18 178.17  1.48]\n\n]\t{ {} forall setlinewidth moveto 0 exch rlineto stroke} bind forall\n[\n%   char    xpos   ypos fontsize\n    [(0)   50.00 170.00 19.62]\n    [(0)   69.62 170.00  0.00]\n    [(0)   81.06 170.00  0.00]\n    [(0)   92.50 170.00  0.00]\n    [(0)  103.94 170.00  0.00]\n    [(0)  115.38 170.00  0.00]\n    [(0)  126.83 170.00  0.00]\n    [(0)  146.44 170.00  0.00]\n    [(0)  157.88 170.00  0.00]\n    [(0)  169.33 170.00  0.00]\n    [(0)  180.77 170.00  0.00]\n    [(0)  192.21 170.00  0.00]\n    [(0)  203.65 170.00  0.00]\n]   { {} forall dup 0.00 ne {\n\t/Helvetica findfont exch scalefont setfont\n    } {pop} ifelse\n    moveto show} bind forall\n% End barcode for \"000000000000\"\n\n% Printing barcode for \"00000000000\", scaled  2.40, encoded using \"UPC-A\"\n% The space/bar succession is represented by the following widths (space first):\n% 911132113211321132113211321111111321132113211321132113211111\n[\n%  height  xpos   ypos  width       height  xpos   ypos  width\n   [179.98 302.84 182.02  2.25]      [179.98 307.64 182.02  2.25]\n   [179.98 318.46 182.02  4.66]      [179.98 324.47 182.02  2.25]\n   [167.96 335.29 194.04  4.66]      [167.96 341.30 194.04  2.25]\n   [167.96 352.12 194.04  4.66]      [167.96 358.13 194.04  2.25]\n   [167.96 368.94 194.04  4.66]      [167.96 374.95 194.04  2.25]\n   [167.96 385.77 194.04  4.66]      [167.96 391.78 194.04  2.25]\n   [167.96 402.60 194.04  4.66]      [167.96 408.61 194.04  2.25]\n   [179.98 413.41 182.02  2.25]      [179.98 418.22 182.02  2.25]\n   [167.96 425.43 194.04  7.06]      [167.96 435.05 194.04  2.25]\n   [167.96 442.26 194.04  7.06]      [167.96 451.88 194.04  2.25]\n   [167.96 459.09 194.04  7.06]      [167.96 468.70 194.04  2.25]\n   [167.96 475.91 194.04  7.06]      [167.96 485.53 194.04  2.25]\n   [167.96 492.74 194.04  7.06]      [167.96 502.36 194.04  2.25]\n   [179.98 509.57 182.02  7.06]      [179.98 519.18 182.02  2.25]\n   [179.98 523.99 182.02  2.25]      [179.98 528.80 182.02  2.25]\n\n]\t{ {} forall setlinewidth moveto 0 exch rlineto stroke} bind forall\n[\n%   char    xpos   ypos fontsize\n    [(0)  280.00 170.00 24.04]\n    [(0)  325.67 170.00 28.85]\n    [(0)  342.50 170.00  0.00]\n    [(0)  359.33 170.00  0.00]\n    [(0)  376.15 170.00  0.00]\n    [(0)  392.98 170.00  0.00]\n    [(0)  421.83 170.00  0.00]\n    [(0)  438.65 170.00  0.00]\n    [(0)  455.48 170.00  0.00]\n    [(0)  472.31 170.00  0.00]\n    [(0)  489.13 170.00  0.00]\n    [(0)  537.21 170.00 24.04]\n]   { {} forall dup 0.00 ne {\n\t/Helvetica findfont exch scalefont setfont\n    } {pop} ifelse\n    moveto show} bind forall\n% End barcode for \"00000000000\"\n\n% Printing barcode for \"silly code\", scaled  1.00, encoded using \"code 39\"\n% The space/bar succession is represented by the following widths (space first):\n% 0131131311111311133111131133111113111133111311113313311311111133111311131311311113111311311111133113131113311113113113111131131311\n[\n%  height  xpos   ypos  width       height  xpos "
-              }
-            ]
-          }
-        ],
-        "package": "barcode",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "0.99-7"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 72.0,
-        "archive_sha256": "cfda4a63c84333f24a72d43ceec5f0a29af27841d21e4a501a6382fb18a0f336",
-        "binding_kind": "apt",
-        "description": "Utility for barcode generation",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "barcode"
-        ],
-        "name": "barcode",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 40,
-        "version": "0.99-7",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
-      "probe": {
-        "archive_sha256": "da50e7e76feb7b510e36ed8fdf228e741d887a5ad222d3ea5f52a84d66b93126",
-        "executables": [],
-        "package": "gir1.2-zbar-1.0",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "0.23.93-4build3"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 44.0,
-        "archive_sha256": "da50e7e76feb7b510e36ed8fdf228e741d887a5ad222d3ea5f52a84d66b93126",
-        "binding_kind": "apt",
-        "description": "QR code / bar code scanner and decoder (introspection data)",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "barcode",
-          "code"
-        ],
-        "name": "gir1.2-zbar-1.0",
-        "packages": [],
-        "query": "code",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 40,
-        "version": "0.23.93-4build3",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
-      "probe": {
-        "archive_sha256": "271506a0b70e9fd5bdccfc8a0eb856d8094e092934666f45737578d7737c7a57",
-        "executables": [],
-        "package": "node-html5-qrcode",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "2.3.8+repack-5"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 44.0,
-        "archive_sha256": "271506a0b70e9fd5bdccfc8a0eb856d8094e092934666f45737578d7737c7a57",
-        "binding_kind": "apt",
-        "description": "qr-code and bar-code scanning library for the web",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "barcode",
-          "code"
-        ],
-        "name": "node-html5-qrcode",
-        "packages": [],
-        "query": "code",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 40,
-        "version": "2.3.8+repack-5",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png",
-      "probe": {
-        "archive_sha256": "9e718d34a9650263aca2dd85e56d9de42ca24ff82254f90f5e4270d1e5d00422",
-        "executables": [
-          {
-            "executable": "/usr/bin/zbarcam",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 0,
-                "text": "usage: zbarcam [options] [/dev/video?]\n\nscan and decode bar codes from a video stream\n\noptions:\n    -h, --help      display this help text\n    --version       display version information and exit\n    -q, --quiet     disable beep when symbol is decoded\n    -v, --verbose   increase debug output level\n    --verbose=N     set specific debug output level\n    --xml           use XML output format\n    --raw           output decoded symbol data without converting charsets\n    -1, --oneshot   exit after scanning one bar code\n    --nodisplay     disable video display window\n    --prescale=<W>x<H>\n                    request alternate video image size from driver\n    -S<CONFIG>[=<VALUE>], --set <CONFIG>[=<VALUE>]\n                    set decoder/scanner <CONFIG> to <VALUE> (or 1)\n\n    --nodbus        disable dbus message"
-              }
-            ]
-          },
-          {
-            "executable": "/usr/bin/zbarimg",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 0,
-                "text": "usage: zbarimg [options] <image>...\n\nscan and decode bar codes from one or more image files\n\noptions:\n    -h, --help      display this help text\n    --version       display version information and exit\n    --polygon       output points delimiting code zone with decoded symbol data\n    -q, --quiet     minimal output, only print decoded symbol data\n    -v, --verbose   increase debug output level\n    --verbose=N     set specific debug output level\n    -d, --display   enable display of following images to the screen\n    -D, --nodisplay disable display of following images (default)\n    --xml, --noxml  enable/disable XML output format\n    --raw           output decoded symbol data without converting charsets\n    -1, --oneshot   exit after scanning one bar code\n    -S<CONFIG>[=<VALUE>], --set <CONFIG>[=<VALUE>]\n                    set decoder/scanner <CONFIG> to <VALUE> (or 1)\n\n    --nodbus        disable dbus message"
-              }
-            ]
-          }
-        ],
-        "package": "zbar-tools",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "0.23.93-4build3"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 44.0,
-        "archive_sha256": "9e718d34a9650263aca2dd85e56d9de42ca24ff82254f90f5e4270d1e5d00422",
-        "binding_kind": "apt",
-        "description": "QR code / bar code scanner and decoder (utilities)",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "barcode",
-          "code"
-        ],
-        "name": "zbar-tools",
-        "packages": [],
-        "query": "code",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 40,
-        "version": "0.23.93-4build3",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
-      "probe": {
-        "archive_sha256": "6563248be2191396961f4347522c8273b6e9975b20677e8b5dc7f38f4c1df5a1",
-        "executables": [
-          {
-            "executable": "/usr/bin/zbarcam-gtk",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 1,
-                "text": "(zbarcam-gtk:3661): Gtk-WARNING **: 23:00:33.322: cannot open display:"
-              }
-            ]
-          }
-        ],
-        "package": "zbarcam-gtk",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "0.23.93-4build3"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 44.0,
-        "archive_sha256": "6563248be2191396961f4347522c8273b6e9975b20677e8b5dc7f38f4c1df5a1",
-        "binding_kind": "apt",
-        "description": "QR code / bar code scanner and decoder (Gtk camera tool)",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "barcode",
-          "code"
-        ],
-        "name": "zbarcam-gtk",
-        "packages": [],
-        "query": "code",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 40,
-        "version": "0.23.93-4build3",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
-      "probe": {
-        "archive_sha256": "1a6bc737f55ca4b1cfb1bd945d5b091c3cfaf37b715ec7d56f8046899d67fcef",
-        "executables": [
-          {
-            "executable": "/usr/bin/zbarcam-qt",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": -6,
-                "text": "qt.qpa.xcb: could not connect to display \nqt.qpa.plugin: Could not load the Qt platform plugin \"xcb\" in \"\" even though it was found.\nThis application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.\n\nAvailable platform plugins are: eglfs, linuxfb, minimal, minimalegl, offscreen, vnc, xcb."
-              }
-            ]
-          }
-        ],
-        "package": "zbarcam-qt",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "0.23.93-4build3"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 44.0,
-        "archive_sha256": "1a6bc737f55ca4b1cfb1bd945d5b091c3cfaf37b715ec7d56f8046899d67fcef",
-        "binding_kind": "apt",
-        "description": "QR code / bar code scanner and decoder (Qt camera tool)",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "barcode",
-          "code"
-        ],
-        "name": "zbarcam-qt",
-        "packages": [],
-        "query": "code",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 40,
-        "version": "0.23.93-4build3",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png",
-      "probe": {
-        "archive_sha256": "84c8cc3438b6b8287f611adb5429375fddd2f7ee7d45f8137d7eff8c36b2326b",
-        "executables": [
-          {
-            "executable": "/usr/bin/gir",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 0,
-                "text": "Usage: /usr/bin/gir [options] [<library> <version>]\n       /usr/bin/gir (-h | --help)\n\nOptions:\n    -c, --config CONFIG Config file path (default: Gir.toml)\n    -h, --help          Show this message\n    -d, --girs-directories GIRSPATH\n                        Directories for GIR files\n    -m, --mode MODE     Work mode: doc, normal, sys or not_bound\n    -o, --target PATH   Target path\n    -p, --doc-target-path PATH\n                        Doc target path\n    -b, --make-backup   Make backup before generating\n    -s, --stats         Show statistics\n        --disable-format \n                        Disable formatting generated code\n        --check-gir-file PATH\n                        Check if the given `.gir` file is valid"
-              }
-            ]
-          }
-        ],
-        "package": "gir-rust-code-generator",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "0.19.0-2"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "_acquisition_object_matches": 0,
-        "_acquisition_role_score": 24.0,
-        "archive_sha256": "84c8cc3438b6b8287f611adb5429375fddd2f7ee7d45f8137d7eff8c36b2326b",
-        "binding_kind": "apt",
-        "description": "Generate rust source code from gir files",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "code",
-          "generate"
-        ],
-        "name": "gir-rust-code-generator",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 36,
-        "version": "0.19.0-2",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_TEXT_INPUT_UNRESOLVED",
-      "probe": {
-        "archive_sha256": "0fe2930e58a69f9550dfa0a9b609d1684585d4fdf0d50841c3b8f59416be7510",
-        "executables": [
-          {
-            "executable": "/usr/bin/autodia",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 0,
-                "text": "getting handlers..\ngetting pattern for perl\nAutoDia - Automatic Dia XML. Copyright 2001 A Trevena\n\nusage:\nautodia ([-i filename [-p path] ] or  [-d directory [-r] ]) [options]\nautodia -i filename            : use filename as input\nautodia -i \"filea fileb filec\" : use filea, fileb and filec as input\nautodia -i filename -p ..      : use ../filename as input file\nautodia -d directoryname       : use *.pl/pm in directoryname as input files\nautodia -d 'foo bar quz'       : use *pl/pm in directories foo, bar and quz as input files\nautodia -d directory -r        : use *pl/pm in directory and its subdirectories as input files\nautodia -d directory -F        : use files in directory but only one file per diagram\nautodia -d directory -C        : use files in directory but skip CVS directories\nautodia -o outfile.xml         : use outfile.xml as output file (otherwise uses autodial.out.dia)\nautodia -O                     : output to stdout\nautodia -l language            : parse source as language (ie: C) and look for appropriate filename extensions if also -d\nautodia -t templatefile        : use templatefile as template (otherwise uses default)\nautodia -l DBI -i \"mysql:test:localhost\" -U username -P password : use the test database on localhost with username and password as username and password\nautodia -l Mason -i \"/index.html\" -p comp_root -G '$c' : use HTML::Mason to fetch /index.html from comp_root and show all components in reach. -G corresponds to allow_globals.\nautodia -z                     : use graphviz to produce dot, gif, jpg or png output\nautodia -Z                     : use springgraph to produce png output\nautodia -v                     : use vcg to output postscript\nautodia -D                     : ignore dependencies (ie do not process or display dependencies)\nautodia -K                     : process dependance but do not display in output\nautodia -k                     : process inheritance but do not display in output\nautodia -S                     : silent mode, no output to stdout except with -O\nautodia -s skipfile            : exclude files or packagenames matching those listed in file\nautodia -H                     : show only public/visible methods and attributes\nautodia -m                     : show only Class methods\nautodia -M                     : do not show Class Methods\nautodia -a                     : show only Class Attributes\nautodia -A                     : do not show Class Attributes\nautodia -h                     : display this help message\nautodia -V                     : display copyright message and version number\n\n\n\n/usr/bin/autodia version [unknown] calling Getopt::Std::getopts (version 1.13 [paranoid]),\nrunning under Perl version 5.38.2.\n\nUsage: autodia [-OPTIONS [-MORE_OPTIONS]] [--] [PROGRAM_ARG1 ...]\n\nThe following single-character options are accepted:\n\tWith arguments: -s -i -o -p -d -t -l -U -P -G\n\tBoolean (without arguments): -K -k -F -C -S -D -O -m -M -a -A -r -h -H -z -Z -v -V\n\nOptions may be merged together.  -- stops processing of options.\nSpace is not required between options and their arguments.\n\nFor more details run\n\tperldoc -F /usr/bin/autodia\n  [Now continuing due to backward compatibility and excessive paranoia.\n   See 'perldoc Getopt::Std' about $Getopt::Std::STANDARD_HELP_VERSION.]"
-              }
-            ]
-          }
-        ],
-        "package": "autodia",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "2.14-5"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "_acquisition_object_matches": 0,
-        "_acquisition_role_score": 20.0,
-        "archive_sha256": "0fe2930e58a69f9550dfa0a9b609d1684585d4fdf0d50841c3b8f59416be7510",
-        "binding_kind": "apt",
-        "description": "generates Dia UML diagrams from source code, XML or data",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "code",
-          "generate"
-        ],
-        "name": "autodia",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "2.14-5",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png",
-      "probe": {
-        "archive_sha256": "26b336ef5ccf07bb570bfe61d6edb314744877785a9fd375fc74f8c404cb19a3",
-        "executables": [
-          {
-            "executable": "/usr/bin/byaccj",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 1,
-                "text": "usage:\n /usr/bin/byaccj [-dlrtvj] [-b file_prefix] [-Joption] filename\n  where -Joption is one or more of:\n   -J\n   -Jclass=className\n   -Jvalue=valueClassName (avoids automatic value class creation)\n   -Jpackage=packageName\n   -Jextends=extendName\n   -Jimplements=implementsName\n   -Jsemantic=semanticType\n   -Jnorun\n   -Jnoconstruct\n   -Jstack=SIZE   (default 500)\n   -Jnodebug (omits debugging code for better performance)\n   -Jfinal (makes generated class final)\n   -Jthrows (declares thrown exceptions for yyparse() method)"
-              }
-            ]
-          }
-        ],
-        "package": "byacc-j",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "1.15-1.2"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "_acquisition_object_matches": 0,
-        "_acquisition_role_score": 20.0,
-        "archive_sha256": "26b336ef5ccf07bb570bfe61d6edb314744877785a9fd375fc74f8c404cb19a3",
-        "binding_kind": "apt",
-        "description": "Berkeley YACC parser generator extended to generate Java code",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "code",
-          "generate"
-        ],
-        "name": "byacc-j",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "1.15-1.2",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png",
-      "probe": {
-        "archive_sha256": "af062a2868332e56d46ce6d1a2710d5d289256b3631e8f7b1aaccf55fa32a700",
-        "executables": [
-          {
-            "executable": "/usr/bin/cbindgen",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 0,
-                "text": "cbindgen 0.26.0\nGenerate C bindings for a Rust library\n\nUSAGE:\n    cbindgen [OPTIONS] [--] [INPUT]\n\nARGS:\n    <INPUT>    A crate directory or source file to generate bindings for. In general this is the\n               folder where the Cargo.toml file of source Rust library resides.\n\nOPTIONS:\n    -c, --config <PATH>               Specify path to a `cbindgen.toml` config to use\n        --clean                       Whether to use a new temporary directory for expanding macros.\n                                      Affects performance, but might be required in certain build\n                                      processes.\n        --cpp-compat                  Whether to add C++ compatibility to generated C bindings\n        --crate <CRATE_NAME>          If generating bindings for a crate, the specific crate to\n                                      generate bindings for\n    -d, --parse-dependencies          Whether to parse dependencies when generating bindings\n        --depfile <PATH>...           Generate a depfile at the given Path listing the source files\n                                      cbindgen traversed when generating the bindings. Useful when\n                                      integrating cbindgen into 3rd party build-systems. This option\n                                      is ignored if `--out` is missing.\n    -h, --help                        Print help information\n    -l, --lang <LANGUAGE>             Specify the language to output bindings in [possible values:\n                                      c++, C++, c, C, cython, Cython]\n        --lockfile <PATH>             Specify the path to the Cargo.lock file explicitly. If this is\n                                      not specified, the Cargo.lock file is searched for in the same\n                                      folder as the Cargo.toml file. This option is useful for\n                                      projects that use workspaces.\n        --metadata <PATH>             Specify the path to the output of a `cargo metadata` command\n                                      that allows to get dependency information. This is useful\n                                      because cargo metadata may be the longest part of cbindgen\n                                      runtime, and you may want to share it across cbindgen\n                                      invocations. By default cbindgen will run `cargo metadata\n                                      --all-features --format-version 1 --manifest-path\n                                      <path/to/crate/Cargo.toml>\n    -o, --output <PATH>               The file to output the bindings to\n        --only-target-dependencies    Only fetch dependencies needed by the target platform. The\n                                      target platform defaults to the host platform; set TARGET to\n                                      override.\n        --profile <PROFILE>           Specify the profile to use when expanding macros. Has no\n                                      effect otherwise. [possible values: Debug, debug, Release,\n                                      release]\n    -q, --quiet                       Report errors only (overrides verbosity options).\n    -s, --style <STYLE>               Specify the declaration style to use for bindings [possible\n                                      values: Both, both, Tag, tag, Type, type]\n    -v                                Enable verbose logging\n    -V, --version                     Print version information\n        --verify                      Generate bindings and compare it to the existing bindings file\n                                      and error if they are different"
-              }
-            ]
-          }
-        ],
-        "package": "cbindgen",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "0.26.0-3"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "_acquisition_object_matches": 0,
-        "_acquisition_role_score": 20.0,
-        "archive_sha256": "af062a2868332e56d46ce6d1a2710d5d289256b3631e8f7b1aaccf55fa32a700",
-        "binding_kind": "apt",
-        "description": "Generates C bindings from Rust code",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "code",
-          "generate"
-        ],
-        "name": "cbindgen",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "0.26.0-3",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
-      "probe": {
-        "archive_sha256": "e6851734d45d3898340306d3048b2d269c4d42fdf706fe70c152dae7b0f5e4b6",
-        "executables": [
-          {
-            "executable": "/usr/bin/codfis",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 1,
-                "text": "Can't open display:"
-              }
-            ]
-          }
-        ],
-        "package": "codfis",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "0.4.7-2build4"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "_acquisition_object_matches": 0,
-        "_acquisition_role_score": 20.0,
-        "archive_sha256": "e6851734d45d3898340306d3048b2d269c4d42fdf706fe70c152dae7b0f5e4b6",
-        "binding_kind": "apt",
-        "description": "tool to generate Italian fiscal codes (codice fiscale)",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "code",
-          "generate"
-        ],
-        "name": "codfis",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "0.4.7-2build4",
+        "score": 48,
+        "version": "2.13.0-1build3",
         "zero_cost_eligible": true
       }
     }
   ],
+  "contract": {
+    "argv_template": [
+      "zint",
+      "-b",
+      "CODE128",
+      "-o",
+      "${input.output_path}",
+      "-d",
+      "${input.text}"
+    ],
+    "command": "zint",
+    "evidence": {
+      "archive_sha256": "cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769",
+      "input_flag": "-d",
+      "output_flag": "-o",
+      "output_line": "-o, --output=FILE     Send output to FILE. Default is out.png",
+      "positional_input": null,
+      "probe_package": "zint",
+      "probe_version": "2.13.0-1build3",
+      "requested_suffix": ".png",
+      "selector": [
+        "-b",
+        "CODE128"
+      ],
+      "usage_line": null
+    },
+    "executable": "/usr/bin/zint",
+    "output_path_template": "${input.output_path}",
+    "output_prefix_hex": "89504e470d0a1a0a",
+    "required_inputs": [
+      "text",
+      "output_path"
+    ],
+    "schema": "PROJECT_BRAIN_CLI_CONTRACT_CANDIDATE_V1",
+    "status": "CANDIDATE_REQUIRES_EFFECT_VERIFICATION",
+    "timeout_s": 60
+  },
   "goal": "Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png.",
   "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003",
+  "probe": {
+    "archive_sha256": "cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769",
+    "executables": [
+      {
+        "executable": "/usr/bin/zint",
+        "help_attempts": [
+          {
+            "flag": "--help",
+            "returncode": 0,
+            "text": "Zint version 2.13.0\nEncode input data in a barcode and save as BMP/EMF/EPS/GIF/PCX/PNG/SVG/TIF/TXT\n\n  -b, --barcode=TYPE    Number or name of barcode type. Default is 20 (CODE128)\n  --addongap=INTEGER    Set add-on gap in multiples of X-dimension for EAN/UPC\n  --batch               Treat each line of input file as a separate data set\n  --bg=COLOUR           Specify a background colour (as RGB(A) or \"C,M,Y,K\")\n  --binary              Treat input as raw binary data\n  --bind                Add boundary bars\n  --bindtop             Add top boundary bar only\n  --bold                Use bold text (HRT)\n  --border=INTEGER      Set width of border in multiples of X-dimension\n  --box                 Add a box around the symbol\n  --cmyk                Use CMYK colour space in EPS/TIF symbols\n  --cols=INTEGER        Set the number of data columns in symbol\n  --compliantheight     Warn if height not compliant, and use standard default\n  -d, --data=DATA       Set the symbol data content (segment 0)\n  --direct              Send output to stdout\n  --dmiso144            Use ISO format for 144x144 Data Matrix symbols\n  --dmre                Allow Data Matrix Rectangular Extended\n  --dotsize=NUMBER      Set radius of dots in dotty mode\n  --dotty               Use dots instead of squares for matrix symbols\n  --dump                Dump hexadecimal representation to stdout\n  -e, --ecinos          Display ECI (Extended Channel Interpretation) table\n  --eci=INTEGER         Set the ECI code for the data (segment 0)\n  --embedfont           Embed font in vector output (SVG only)\n  --esc                 Process escape sequences in input data\n  --extraesc            Process symbology-specific escape sequences (Code 128)\n  --fast                Use faster encodation or other shortcuts if available\n  --fg=COLOUR           Specify a foreground colour (as RGB(A) or \"C,M,Y,K\")\n  --filetype=TYPE       Set output file type BMP/EMF/EPS/GIF/PCX/PNG/SVG/TIF/TXT\n  --fullmultibyte       Use multibyte for binary/Latin (QR/Han Xin/Grid Matrix)\n  --gs1                 Treat input as GS1 compatible data\n  --gs1nocheck          Do not check validity of GS1 data\n  --gs1parens           Process parentheses \"()\" as GS1 AI delimiters, not \"[]\"\n  --gssep               Use separator GS for GS1 (Data Matrix)\n  --guarddescent=NUMBER Set height of guard bar descent in X-dims (EAN/UPC)\n  --guardwhitespace     Add quiet zone indicators (\"<\"/\">\") to HRT (EAN/UPC)\n  -h, --help            Display help message\n  --height=NUMBER       Set height of symbol in multiples of X-dimension\n  --heightperrow        Treat height as per-row\n  -i, --input=FILE      Read input data from FILE\n  --init                Create Reader Initialisation (Programming) symbol\n  --mask=INTEGER        Set masking pattern to use (QR/Han Xin/DotCode)\n  --mirror              Use batch data to determine filename\n  --mode=INTEGER        Set encoding mode (MaxiCode/Composite)\n  --nobackground        Remove background (EMF/EPS/GIF/PNG/SVG/TIF only)\n  --noquietzones        Disable default quiet zones\n  --notext              Remove human readable text (HRT)\n  -o, --output=FILE     Send output to FILE. Default is out.png\n  --primary=STRING      Set primary message (MaxiCode/Composite)\n  --quietzones          Add compliant quiet zones\n  -r, --reverse         Reverse colours (white on black)\n  --rotate=INTEGER      Rotate symbol by INTEGER (0, 90, 180, 270) degrees\n  --rows=INTEGER        Set number of rows (Codablock-F/PDF417)\n  --scale=NUMBER        Adjust size of X-dimension\n  --scalexdimdp=X[,R]   Adjust size to X-dimension X at resolution R\n  --scmvv=INTEGER       Prefix SCM with \"[)>\\R01\\Gvv\" (vv is INTEGER) (MaxiCode)\n  --secure=INTEGER      Set error correction level (ECC)\n  --segN=ECI,DATA       Set the ECI & data content for segment N, where N 1 to 9\n  --separator=INTEGER   Set height of row separator bars (stacked symbologies)\n  --small               Use small text (HRT)\n  --square              Force Data Matrix symbols to be square\n  --structapp=I,C[,ID]  Set Structured Append info (I index, C count)\n  -t, --types           Display table of barcode types\n  --textgap=NUMBER      Adjust gap between barcode and HRT in multiples of X-dim\n  --vers=INTEGER        Set symbol version (size, check digits, other options)\n  -v, --version         Display Zint version\n  --vwhitesp=INTEGER    Set height of vertical whitespace in multiples of X-dim\n  -w, --whitesp=INTEGER Set width of horizontal whitespace in multiples of X-dim\n  --werror              Convert all warnings into errors"
+          }
+        ]
+      }
+    ],
+    "package": "zint",
+    "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+    "version": "2.13.0-1build3"
+  },
   "role_conditioned_discovery": {
     "binding_performed": false,
     "candidate_count": 24,
@@ -548,6 +147,7 @@
         "archive_sha256": "cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769",
         "binding_kind": "apt",
         "description": "command line utility to encode data in barcode symbols",
+        "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
@@ -568,6 +168,7 @@
         "archive_sha256": "cfda4a63c84333f24a72d43ceec5f0a29af27841d21e4a501a6382fb18a0f336",
         "binding_kind": "apt",
         "description": "Utility for barcode generation",
+        "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
@@ -587,6 +188,7 @@
         "archive_sha256": "e1e4e607012985ceb365434dd8ec1c6df23e40b8023cc6bc2acddd878d6954c4",
         "binding_kind": "apt",
         "description": "stricter URI encode adhering to RFC 3986",
+        "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
@@ -606,6 +208,7 @@
         "archive_sha256": "dcb264b165247d13d4beffc166ecade3ca32ba823d2b2f8c717db64adea00b5e",
         "binding_kind": "apt",
         "description": "video converter for Nokia Internet Tablets",
+        "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
@@ -625,6 +228,7 @@
         "archive_sha256": "3dcd593ae903551e4a9b183241b26e0ad1cb50908c1040c9cfd409baddd8b3cc",
         "binding_kind": "apt",
         "description": "Ruby library for encoding QRCode (2D barcodes)",
+        "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 2,
         "matched_terms": [
@@ -645,6 +249,7 @@
         "archive_sha256": "591f038ec354fc1c404b292c26df4f6a10af6231322bcf28158b7f37e8bea4c4",
         "binding_kind": "apt",
         "description": "library for encoding data in barcode symbols",
+        "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 3,
         "matched_terms": [
@@ -665,6 +270,7 @@
         "archive_sha256": "b08728497d67f09c8554b1a52759e90421a573d7aee1b9d497badbc42e401d14",
         "binding_kind": "apt",
         "description": "A Better CD Encoder",
+        "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
@@ -684,6 +290,7 @@
         "archive_sha256": "b2f35b2bf364d0a01075094efd1299dee79ecd65787cddcb93b82ca796edfd5c",
         "binding_kind": "apt",
         "description": "audio AC3 encoder",
+        "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
@@ -703,6 +310,7 @@
         "archive_sha256": "13650fd102318335c35d0464cb445ec105c74d27ba2684574e9c1c0282adbb24",
         "binding_kind": "apt",
         "description": "Graphical audio CD ripper and encoder",
+        "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
@@ -722,6 +330,7 @@
         "archive_sha256": "720c6de3151b20729695991dc9977eab65565349f1710c8929a6202d1fa17c5f",
         "binding_kind": "apt",
         "description": "Encode binary files to printable utf16be",
+        "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
@@ -741,6 +350,7 @@
         "archive_sha256": "38e1e65759a10db447fa682c7726c26a134c490c11cf9313d9035eaf76869196",
         "binding_kind": "apt",
         "description": "Command line encoder and decoder for Base58 format",
+        "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
@@ -760,6 +370,7 @@
         "archive_sha256": "db107d7652eb37680788a6567a58c9a6db10fcad8df05db4009464cb405122de",
         "binding_kind": "apt",
         "description": "base 16/32/64 encode/decode data to standard output",
+        "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
@@ -779,6 +390,7 @@
         "archive_sha256": "d7b31f464429add360d8f0cb938466d76abc3ca224306a78cf15ff37e7cba5ff",
         "binding_kind": "apt",
         "description": "tool to decode/encode the sample catalogue for OpenTTD",
+        "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
@@ -798,6 +410,7 @@
         "archive_sha256": "76dcb71604dfd21859aa8f6b94c8ff14c349340cc86cd3d87e95a63c53adf8d2",
         "binding_kind": "apt",
         "description": "Common Lisp package to encode and decode base64 with URI support",
+        "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
@@ -817,6 +430,7 @@
         "archive_sha256": "3b9a68f5b2a497cf80c350e2e8b512e7b28a057a9ba6082d3f7faa7bc30a3495",
         "binding_kind": "apt",
         "description": "JSON encoder/decoder for Common Lisp",
+        "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
@@ -836,6 +450,7 @@
         "archive_sha256": "d889a996fbc3d02809fe473b64d1f13fa94bc0673fa2e3a25289e13b0d6f1040",
         "binding_kind": "apt",
         "description": "filename encoding conversion tool",
+        "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
@@ -855,6 +470,7 @@
         "archive_sha256": "680f5fd1717566e03cc06af0da7ca20fa2829e40d4fe870a1b47189c0eb73f5e",
         "binding_kind": "apt",
         "description": "terminal-based ripper/encoder/tagger tool",
+        "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
@@ -874,6 +490,7 @@
         "archive_sha256": "009a2045b769a8d4c7a5099272b58a7a6bcdcf82d57a13c92124f7a4e362a7bf",
         "binding_kind": "apt",
         "description": "Utilities for reading and writing Data Matrix 2D barcodes",
+        "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
@@ -893,6 +510,7 @@
         "archive_sha256": "55d27feaaf8d5c2ea4f69f7ebfbcaaf0e29093a04d15ea3599196893c350b5db",
         "binding_kind": "apt",
         "description": "Encoder and decoder for 3D geometric meshes and point clouds",
+        "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
@@ -912,6 +530,7 @@
         "archive_sha256": "3f92bd9fcaa2027ca7f311b4e52a1d97fee977cdf10e0ef644431729dc8fc077",
         "binding_kind": "apt",
         "description": "Check digit validator for EAN/PLU/UPC barcode numbers",
+        "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
@@ -931,6 +550,7 @@
         "archive_sha256": "dd99fb73bb32e2d28af54b74a8378c89e527b62915167563fc92cc90586ffd4d",
         "binding_kind": "apt",
         "description": "estimate PCR barcode primers quality",
+        "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
@@ -950,6 +570,7 @@
         "archive_sha256": "6eb22d07c81e86257cb9ee3a7a78d0246f8485554ae5984d871d32199290a375",
         "binding_kind": "apt",
         "description": "YAML parser and encoder for Elisp",
+        "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
@@ -969,6 +590,7 @@
         "archive_sha256": "8a9d329f1ccdd398ba84fe8393600b0747aa6dbae64237365b05b41702326553",
         "binding_kind": "apt",
         "description": "MIME mail encoding and decoding package for Go (program)",
+        "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
@@ -988,6 +610,7 @@
         "archive_sha256": "3b011097b07e9e3de2b08bcd2babf28a82d8948f6b09549ef15196bfff73ec1a",
         "binding_kind": "apt",
         "description": "AAC audio encoder (frontend)",
+        "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
@@ -1015,5 +638,28 @@
     "source_url": null
   },
   "schema": "PROJECT_BRAIN_AUTO_APT_CLI_ACQUISITION_EVIDENCE_V1",
-  "status": "NO_COMPATIBLE_CONTRACT"
+  "selected_supplier": {
+    "_acquisition_object_matches": 1,
+    "_acquisition_role_score": 104.0,
+    "archive_sha256": "cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769",
+    "binding_kind": "apt",
+    "description": "command line utility to encode data in barcode symbols",
+    "discovery_source": "APT_CATALOG",
+    "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+    "integration_friction": 0,
+    "matched_terms": [
+      "barcode",
+      "encode"
+    ],
+    "name": "zint",
+    "packages": [],
+    "query": "encode",
+    "remotes": [],
+    "required_environment_count": 0,
+    "required_secret_count": 0,
+    "score": 48,
+    "version": "2.13.0-1build3",
+    "zero_cost_eligible": true
+  },
+  "status": "CONTRACT_INFERRED"
 }

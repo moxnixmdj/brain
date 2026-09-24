@@ -1,0 +1,192 @@
+{
+  "capability_id": "auto.apt.zint",
+  "contract": {
+    "argv_template": [
+      "zint",
+      "-b",
+      "CODE128",
+      "-o",
+      "${input.output_path}",
+      "-d",
+      "${input.text}"
+    ],
+    "command": "zint",
+    "evidence": {
+      "archive_sha256": "cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769",
+      "input_flag": "-d",
+      "output_flag": "-o",
+      "output_line": "-o, --output=FILE     Send output to FILE. Default is out.png",
+      "positional_input": null,
+      "probe_package": "zint",
+      "probe_version": "2.13.0-1build3",
+      "requested_suffix": ".png",
+      "selector": [
+        "-b",
+        "CODE128"
+      ],
+      "usage_line": null
+    },
+    "executable": "/usr/bin/zint",
+    "output_path_template": "${input.output_path}",
+    "output_prefix_hex": "89504e470d0a1a0a",
+    "required_inputs": [
+      "text",
+      "output_path"
+    ],
+    "schema": "PROJECT_BRAIN_CLI_CONTRACT_CANDIDATE_V1",
+    "status": "CANDIDATE_REQUIRES_EFFECT_VERIFICATION",
+    "timeout_s": 60
+  },
+  "effect": "auto.effect.zint",
+  "goal": "Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png.",
+  "inputs": {
+    "output_path": "canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png",
+    "text": "PROJECT BRAIN"
+  },
+  "origin_mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003",
+  "origin_mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_PLAIN_GOAL_BARCODE_003.json",
+  "probe": {
+    "archive_sha256": "cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769",
+    "executables": [
+      {
+        "executable": "/usr/bin/zint",
+        "help_attempts": [
+          {
+            "flag": "--help",
+            "returncode": 0,
+            "text": "Zint version 2.13.0\nEncode input data in a barcode and save as BMP/EMF/EPS/GIF/PCX/PNG/SVG/TIF/TXT\n\n  -b, --barcode=TYPE    Number or name of barcode type. Default is 20 (CODE128)\n  --addongap=INTEGER    Set add-on gap in multiples of X-dimension for EAN/UPC\n  --batch               Treat each line of input file as a separate data set\n  --bg=COLOUR           Specify a background colour (as RGB(A) or \"C,M,Y,K\")\n  --binary              Treat input as raw binary data\n  --bind                Add boundary bars\n  --bindtop             Add top boundary bar only\n  --bold                Use bold text (HRT)\n  --border=INTEGER      Set width of border in multiples of X-dimension\n  --box                 Add a box around the symbol\n  --cmyk                Use CMYK colour space in EPS/TIF symbols\n  --cols=INTEGER        Set the number of data columns in symbol\n  --compliantheight     Warn if height not compliant, and use standard default\n  -d, --data=DATA       Set the symbol data content (segment 0)\n  --direct              Send output to stdout\n  --dmiso144            Use ISO format for 144x144 Data Matrix symbols\n  --dmre                Allow Data Matrix Rectangular Extended\n  --dotsize=NUMBER      Set radius of dots in dotty mode\n  --dotty               Use dots instead of squares for matrix symbols\n  --dump                Dump hexadecimal representation to stdout\n  -e, --ecinos          Display ECI (Extended Channel Interpretation) table\n  --eci=INTEGER         Set the ECI code for the data (segment 0)\n  --embedfont           Embed font in vector output (SVG only)\n  --esc                 Process escape sequences in input data\n  --extraesc            Process symbology-specific escape sequences (Code 128)\n  --fast                Use faster encodation or other shortcuts if available\n  --fg=COLOUR           Specify a foreground colour (as RGB(A) or \"C,M,Y,K\")\n  --filetype=TYPE       Set output file type BMP/EMF/EPS/GIF/PCX/PNG/SVG/TIF/TXT\n  --fullmultibyte       Use multibyte for binary/Latin (QR/Han Xin/Grid Matrix)\n  --gs1                 Treat input as GS1 compatible data\n  --gs1nocheck          Do not check validity of GS1 data\n  --gs1parens           Process parentheses \"()\" as GS1 AI delimiters, not \"[]\"\n  --gssep               Use separator GS for GS1 (Data Matrix)\n  --guarddescent=NUMBER Set height of guard bar descent in X-dims (EAN/UPC)\n  --guardwhitespace     Add quiet zone indicators (\"<\"/\">\") to HRT (EAN/UPC)\n  -h, --help            Display help message\n  --height=NUMBER       Set height of symbol in multiples of X-dimension\n  --heightperrow        Treat height as per-row\n  -i, --input=FILE      Read input data from FILE\n  --init                Create Reader Initialisation (Programming) symbol\n  --mask=INTEGER        Set masking pattern to use (QR/Han Xin/DotCode)\n  --mirror              Use batch data to determine filename\n  --mode=INTEGER        Set encoding mode (MaxiCode/Composite)\n  --nobackground        Remove background (EMF/EPS/GIF/PNG/SVG/TIF only)\n  --noquietzones        Disable default quiet zones\n  --notext              Remove human readable text (HRT)\n  -o, --output=FILE     Send output to FILE. Default is out.png\n  --primary=STRING      Set primary message (MaxiCode/Composite)\n  --quietzones          Add compliant quiet zones\n  -r, --reverse         Reverse colours (white on black)\n  --rotate=INTEGER      Rotate symbol by INTEGER (0, 90, 180, 270) degrees\n  --rows=INTEGER        Set number of rows (Codablock-F/PDF417)\n  --scale=NUMBER        Adjust size of X-dimension\n  --scalexdimdp=X[,R]   Adjust size to X-dimension X at resolution R\n  --scmvv=INTEGER       Prefix SCM with \"[)>\\R01\\Gvv\" (vv is INTEGER) (MaxiCode)\n  --secure=INTEGER      Set error correction level (ECC)\n  --segN=ECI,DATA       Set the ECI & data content for segment N, where N 1 to 9\n  --separator=INTEGER   Set height of row separator bars (stacked symbologies)\n  --small               Use small text (HRT)\n  --square              Force Data Matrix symbols to be square\n  --structapp=I,C[,ID]  Set Structured Append info (I index, C count)\n  -t, --types           Display table of barcode types\n  --textgap=NUMBER      Adjust gap between barcode and HRT in multiples of X-dim\n  --vers=INTEGER        Set symbol version (size, check digits, other options)\n  -v, --version         Display Zint version\n  --vwhitesp=INTEGER    Set height of vertical whitespace in multiples of X-dim\n  -w, --whitesp=INTEGER Set width of horizontal whitespace in multiples of X-dim\n  --werror              Convert all warnings into errors"
+          }
+        ]
+      }
+    ],
+    "package": "zint",
+    "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+    "version": "2.13.0-1build3"
+  },
+  "registry_entry": {
+    "action_template": {
+      "args": {
+        "argv": [
+          "zint",
+          "-b",
+          "CODE128",
+          "-o",
+          "${input.output_path}",
+          "-d",
+          "${input.text}"
+        ],
+        "capability_id": "auto.apt.zint",
+        "output_path": "${input.output_path}",
+        "output_prefix_hex": "89504e470d0a1a0a",
+        "timeout_s": 60
+      },
+      "expect": {
+        "field": "output_verified",
+        "type": "field_equals",
+        "value": true
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "cli_command",
+    "autogenerated": {
+      "contract_evidence": {
+        "archive_sha256": "cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769",
+        "input_flag": "-d",
+        "output_flag": "-o",
+        "output_line": "-o, --output=FILE     Send output to FILE. Default is out.png",
+        "positional_input": null,
+        "probe_package": "zint",
+        "probe_version": "2.13.0-1build3",
+        "requested_suffix": ".png",
+        "selector": [
+          "-b",
+          "CODE128"
+        ],
+        "usage_line": null
+      },
+      "integration_friction": 0,
+      "origin_goal": "Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png.",
+      "origin_mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003",
+      "schema": "PROJECT_BRAIN_AUTO_APT_CLI_BINDING_V1",
+      "supplier_score": 48
+    },
+    "cost": 1,
+    "entrypoint": "run",
+    "incremental_spend_usd": 0,
+    "keywords": [
+      "128",
+      "barcode"
+    ],
+    "limitations": [
+      "Automatically acquired from Ubuntu package metadata and CLI help.",
+      "Only the verified text-to-output-file invocation contract is promoted."
+    ],
+    "platforms": [
+      "linux"
+    ],
+    "provides": [
+      "auto.effect.zint"
+    ],
+    "requires": [],
+    "source": {
+      "origin": "Ubuntu",
+      "packages": [
+        {
+          "name": "zint",
+          "sha256": "cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769",
+          "version": "2.13.0-1build3"
+        }
+      ],
+      "type": "apt"
+    },
+    "status": "BOUND_PENDING_INDEPENDENT_VERIFICATION"
+  },
+  "schema": "PROJECT_BRAIN_PENDING_AUTO_BINDING_V1",
+  "selected_supplier": {
+    "_acquisition_object_matches": 1,
+    "_acquisition_role_score": 104.0,
+    "archive_sha256": "cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769",
+    "binding_kind": "apt",
+    "description": "command line utility to encode data in barcode symbols",
+    "discovery_source": "APT_CATALOG",
+    "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+    "integration_friction": 0,
+    "matched_terms": [
+      "barcode",
+      "encode"
+    ],
+    "name": "zint",
+    "packages": [],
+    "query": "encode",
+    "remotes": [],
+    "required_environment_count": 0,
+    "required_secret_count": 0,
+    "score": 48,
+    "version": "2.13.0-1build3",
+    "zero_cost_eligible": true
+  },
+  "semantic_verification": {
+    "expected_text": "PROJECT BRAIN",
+    "goal": "Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png.",
+    "reason": "Auto-synthesized text-to-binary-file capability must prove semantic content independently of the producer.",
+    "required": true,
+    "status": "PENDING_VERIFIER_ACQUISITION"
+  },
+  "status": "PENDING_INDEPENDENT_VERIFICATION",
+  "verification_args": {
+    "argv": [
+      "zint",
+      "-b",
+      "CODE128",
+      "-o",
+      "canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png",
+      "-d",
+      "PROJECT BRAIN"
+    ],
+    "output_path": "canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png",
+    "output_prefix_hex": "89504e470d0a1a0a",
+    "timeout_s": 60
+  },
+  "verification_mission_id": "ASTRA-AUTO-VERIFY-ZINT-85BC9CD2C9A4",
+  "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003__zint__85bc9cd2c9a4__AUTO_VERIFY.json"
+}
