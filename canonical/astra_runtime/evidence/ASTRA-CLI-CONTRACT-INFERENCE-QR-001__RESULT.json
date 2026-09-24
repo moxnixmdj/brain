@@ -1,0 +1,27 @@
+{
+  "argv_template": [
+    "qrencode",
+    "-o",
+    "${input.output_path}",
+    "${input.text}"
+  ],
+  "command": "qrencode",
+  "evidence": {
+    "archive_sha256": "613c5a22316489ec6a9ce5d59190293df15dd4612b55432dde04c62f7c1a0e25",
+    "output_flag": "-o",
+    "positional_input": "string",
+    "probe_package": "qrencode",
+    "probe_version": "4.1.1-1build2",
+    "usage_line": "Usage: qrencode [-o FILENAME] [OPTION]... [STRING]"
+  },
+  "executable": "/usr/bin/qrencode",
+  "output_path_template": "${input.output_path}",
+  "output_prefix_hex": "89504e470d0a1a0a",
+  "required_inputs": [
+    "text",
+    "output_path"
+  ],
+  "schema": "PROJECT_BRAIN_CLI_CONTRACT_CANDIDATE_V1",
+  "status": "CANDIDATE_REQUIRES_EFFECT_VERIFICATION",
+  "timeout_s": 60
+}

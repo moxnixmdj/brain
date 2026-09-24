@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-24T22:05:27.735513+00:00",
+  "mission_id": "ASTRA-CLI-CONTRACT-INFERENCE-QR-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_CLI_CONTRACT_INFERENCE_QR_001.json",
+  "mission_sha256": "e7a441787b5824f6f3cb10d49fc2d69207a2c2a60da0a9b5e867e61bf30db870",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "e30ee3f95ccaf79b0eee16b4aa9666b893e6cf10fcb95987e997569fde7c4965",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

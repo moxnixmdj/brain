@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-24T22:05:27.735261+00:00",
+  "created_at_utc": "2026-09-24T22:05:27.682928+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-24T22:05:27.735037+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython canonical/runtime/cli_contract_inference.py canonical/astra_runtime/evidence/ASTRA-APT-CLI-GENERIC-PROBE-QR-001__RESULT.json 'Generate a QR code image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png.' canonical/astra_runtime/evidence/ASTRA-CLI-CONTRACT-INFERENCE-QR-001__RESULT.json\npython - <<'PY'\nimport json\nx=json.load(open('canonical/astra_runtime/evidence/ASTRA-CLI-CONTRACT-INFERENCE-QR-001__RESULT.json'))\nassert x['command']=='qrencode'\nassert x['argv_template']==['qrencode','-o','${input.output_path}','${input.text}']\nassert x['output_prefix_hex']=='89504e470d0a1a0a'\nassert x['status']=='CANDIDATE_REQUIRES_EFFECT_VERIFICATION'\nprint('GENERIC_CLI_CONTRACT_INFERENCE_COMPLETE')\nPY",
+        "duration_s": 0.052,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"argv_template\": [\"qrencode\", \"-o\", \"${input.output_path}\", \"${input.text}\"], \"command\": \"qrencode\", \"evidence\": {\"archive_sha256\": \"613c5a22316489ec6a9ce5d59190293df15dd4612b55432dde04c62f7c1a0e25\", \"output_flag\": \"-o\", \"positional_input\": \"string\", \"probe_package\": \"qrencode\", \"probe_version\": \"4.1.1-1build2\", \"usage_line\": \"Usage: qrencode [-o FILENAME] [OPTION]... [STRING]\"}, \"executable\": \"/usr/bin/qrencode\", \"output_path_template\": \"${input.output_path}\", \"output_prefix_hex\": \"89504e470d0a1a0a\", \"required_inputs\": [\"text\", \"output_path\"], \"schema\": \"PROJECT_BRAIN_CLI_CONTRACT_CANDIDATE_V1\", \"status\": \"CANDIDATE_REQUIRES_EFFECT_VERIFICATION\", \"timeout_s\": 60}\nGENERIC_CLI_CONTRACT_INFERENCE_COMPLETE\n"
+      },
+      "step_id": "infer-contract-from-probe",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-CLI-CONTRACT-INFERENCE-QR-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_CLI_CONTRACT_INFERENCE_QR_001.json",
+  "mission_sha256": "e7a441787b5824f6f3cb10d49fc2d69207a2c2a60da0a9b5e867e61bf30db870",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-24T22:05:27.735048+00:00"
+}
