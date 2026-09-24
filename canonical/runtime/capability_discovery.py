@@ -60,6 +60,23 @@ def _flatten_text(value):
     return str(value or "")
 
 
+def _lexical_variants(token):
+    token=str(token or "").lower()
+    out={token}
+    if len(token)>=4:
+        out.add(token+"s")
+        if token.endswith("e"):
+            out.add(token+"r")          # decode -> decoder
+            out.add(token[:-1]+"ing")   # decode -> decoding
+        else:
+            out.add(token+"er")         # scan -> scanner is handled below too
+            out.add(token+"ing")
+        if token.endswith("n"):
+            out.add(token+"ner")        # scan -> scanner
+            out.add(token+"ning")       # scan -> scanning
+    return out
+
+
 def normalize_server(entry, query):
     server = entry.get("server", entry) if isinstance(entry, dict) else {}
     meta = entry.get("_meta", {}) if isinstance(entry, dict) else {}
@@ -246,7 +263,10 @@ def search_apt_packages(effect, limit=12):
                 if len(ordered_blob_tokens[i])>=2 and len(ordered_blob_tokens[i+1])>=2
             }
             lexical_tokens=blob_tokens | compound_tokens
-            matched={t for t in effect_tokens if t in lexical_tokens}
+            matched={
+                t for t in effect_tokens
+                if any(v in lexical_tokens for v in _lexical_variants(t))
+            }
             if not matched:
                 continue
             score=0
