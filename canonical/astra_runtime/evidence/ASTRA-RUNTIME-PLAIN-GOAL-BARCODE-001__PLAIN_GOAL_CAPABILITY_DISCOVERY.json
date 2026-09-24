@@ -1,12 +1,12 @@
 {
   "auto_acquisition": {
-    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"barcode\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"eancheck\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"ecopcr\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"TimeoutExpired:Command '['/usr/bin/flexbar', '--help']' timed out after 10 seconds\", \"name\": \"flexbar\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"qml-module-org-kde-prison\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"r-cran-bold\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"zint\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"zint-qt\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"byacc-j\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"cproto\", \"status\": \"CONTRACT_REJECTED\"}]",
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"barcode\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"gir1.2-zbar-1.0\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED\", \"name\": \"iec16022\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-html5-qrcode\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"zbar-tools\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"zbarcam-gtk\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"zbarcam-qt\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"gir-rust-code-generator\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_TEXT_INPUT_UNRESOLVED\", \"name\": \"autodia\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"byacc-j\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png\", \"name\": \"cbindgen\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"codfis\", \"status\": \"CONTRACT_REJECTED\"}]",
     "status": "NOT_DISPATCHED"
   },
   "binding_performed": false,
   "goal": "Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png.",
   "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-001",
-  "observed_at_utc": "2026-09-24T22:22:23.656063+00:00",
+  "observed_at_utc": "2026-09-24T22:44:41.832324+00:00",
   "result": {
     "binding_performed": false,
     "candidates": [
@@ -31,143 +31,171 @@
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "3f92bd9fcaa2027ca7f311b4e52a1d97fee977cdf10e0ef644431729dc8fc077",
+        "archive_sha256": "da50e7e76feb7b510e36ed8fdf228e741d887a5ad222d3ea5f52a84d66b93126",
         "binding_kind": "apt",
-        "description": "Check digit validator for EAN/PLU/UPC barcode numbers",
+        "description": "QR code / bar code scanner and decoder (introspection data)",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "barcode"
+          "barcode",
+          "code"
         ],
-        "name": "eancheck",
+        "name": "gir1.2-zbar-1.0",
         "packages": [],
-        "query": "barcode",
+        "query": "code",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "1.0-2build1",
+        "score": 40,
+        "version": "0.23.93-4build3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "dd99fb73bb32e2d28af54b74a8378c89e527b62915167563fc92cc90586ffd4d",
+        "archive_sha256": "b3cba02f7d4400bf8c38daf37139f9ba9c12f0e70ef49f035305a6ef27ce0f79",
         "binding_kind": "apt",
-        "description": "estimate PCR barcode primers quality",
+        "description": "Generates 2d ISO/IEC 16022 barcodes (data matrix/semacode)",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "barcode"
+          "barcode",
+          "generate"
         ],
-        "name": "ecopcr",
+        "name": "iec16022",
         "packages": [],
-        "query": "barcode",
+        "query": "generate",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "1.0.1+dfsg-4",
+        "score": 40,
+        "version": "0.2.7-1",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "56e03f7049dae65dd5e91c647e7cc4cfc3e519c06d080798635acfc1f4a59998",
+        "archive_sha256": "271506a0b70e9fd5bdccfc8a0eb856d8094e092934666f45737578d7737c7a57",
         "binding_kind": "apt",
-        "description": "flexible barcode and adapter removal for sequencing platforms",
+        "description": "qr-code and bar-code scanning library for the web",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "barcode"
+          "barcode",
+          "code"
         ],
-        "name": "flexbar",
+        "name": "node-html5-qrcode",
         "packages": [],
-        "query": "barcode",
+        "query": "code",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "1:3.5.0-5",
+        "score": 40,
+        "version": "2.3.8+repack-5",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "ab76b5c103f1a91e0a43d74663bc07c6d029b19cc9b21e4bc9a10410f0865afd",
+        "archive_sha256": "9e718d34a9650263aca2dd85e56d9de42ca24ff82254f90f5e4270d1e5d00422",
         "binding_kind": "apt",
-        "description": "barcode API for Qt",
+        "description": "QR code / bar code scanner and decoder (utilities)",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "barcode"
+          "barcode",
+          "code"
         ],
-        "name": "qml-module-org-kde-prison",
+        "name": "zbar-tools",
         "packages": [],
-        "query": "barcode",
+        "query": "code",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "5.115.0-0ubuntu5",
+        "score": 40,
+        "version": "0.23.93-4build3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "13c1abdb03ebcad83b2a3a745bdb9bb7ee46016025527676e7e6b10eeb479865",
+        "archive_sha256": "6563248be2191396961f4347522c8273b6e9975b20677e8b5dc7f38f4c1df5a1",
         "binding_kind": "apt",
-        "description": "GNU R interface to Bold Systems for genetic barcode data",
+        "description": "QR code / bar code scanner and decoder (Gtk camera tool)",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "barcode"
+          "barcode",
+          "code"
         ],
-        "name": "r-cran-bold",
+        "name": "zbarcam-gtk",
         "packages": [],
-        "query": "barcode",
+        "query": "code",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "1.3.0-1",
+        "score": 40,
+        "version": "0.23.93-4build3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769",
+        "archive_sha256": "1a6bc737f55ca4b1cfb1bd945d5b091c3cfaf37b715ec7d56f8046899d67fcef",
         "binding_kind": "apt",
-        "description": "command line utility to encode data in barcode symbols",
+        "description": "QR code / bar code scanner and decoder (Qt camera tool)",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "barcode"
+          "barcode",
+          "code"
         ],
-        "name": "zint",
+        "name": "zbarcam-qt",
         "packages": [],
-        "query": "128",
+        "query": "code",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "2.13.0-1build3",
+        "score": 40,
+        "version": "0.23.93-4build3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "869908686b1df48db14b3420be8e1a0ce060677263c222eb3f6265de706501fc",
+        "archive_sha256": "84c8cc3438b6b8287f611adb5429375fddd2f7ee7d45f8137d7eff8c36b2326b",
         "binding_kind": "apt",
-        "description": "Zint Barcode Studio, a QT frontend to zint",
+        "description": "Generate rust source code from gir files",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "barcode"
+          "code",
+          "generate"
         ],
-        "name": "zint-qt",
+        "name": "gir-rust-code-generator",
         "packages": [],
-        "query": "128",
+        "query": "generate",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "2.13.0-1build3",
+        "score": 36,
+        "version": "0.19.0-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "0fe2930e58a69f9550dfa0a9b609d1684585d4fdf0d50841c3b8f59416be7510",
+        "binding_kind": "apt",
+        "description": "generates Dia UML diagrams from source code, XML or data",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "autodia",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.14-5",
         "zero_cost_eligible": true
       },
       {
@@ -187,8 +215,50 @@
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 12,
+        "score": 32,
         "version": "1.15-1.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "af062a2868332e56d46ce6d1a2710d5d289256b3631e8f7b1aaccf55fa32a700",
+        "binding_kind": "apt",
+        "description": "Generates C bindings from Rust code",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "cbindgen",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.26.0-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "e6851734d45d3898340306d3048b2d269c4d42fdf706fe70c152dae7b0f5e4b6",
+        "binding_kind": "apt",
+        "description": "tool to generate Italian fiscal codes (codice fiscale)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "codfis",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.4.7-2build4",
         "zero_cost_eligible": true
       },
       {
@@ -208,408 +278,367 @@
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 12,
+        "score": 32,
         "version": "4.7v-2",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "1a2b8aee566e84d1858330b6197c9e7b6846dd239b220df8ce02b746d46bac00",
+        "archive_sha256": "76a3a24a594d0cb6315eae5bfc78aa4b036b3ba981e3c8fadddcb4dea1792b7c",
         "binding_kind": "apt",
-        "description": "Morse code training program",
+        "description": "Generate documentation from source code",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "doxygen",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.9.8+ds-2ubuntu0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "b840f6fbf618523d48325506f1e74deb4d9fa3b44a42fcb07ee4a55f3df442f1",
+        "binding_kind": "apt",
+        "description": "Generate LaTeX documentation from source code",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "doxygen-latex",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.9.8+ds-2ubuntu0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "1465d4d67cbd533a7c471a37110e3fd3e25e2e56d1c92f7d86402e80ca20e49a",
+        "binding_kind": "apt",
+        "description": "C compiler generating Intel code for 16bit/32bit CPUs",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "faucc",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "20180503-1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "271fdf93bab485d65795359ce0a4c0edac52295a87c9a0db56c32c8827259f0c",
+        "binding_kind": "apt",
+        "description": "GAP AutoDoc - Generate documentation from GAP source code",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "gap-autodoc",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2023.06.19-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "be484242d7bfa08a47a65fefb1330cc8bdb3cb957d9e14b551b21b4a5a8fff3d",
+        "binding_kind": "apt",
+        "description": "Generates LaTeX code from literate Haskell sources",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "lhs2tex",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.24-1build2.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ac650c7d980b70652920be84d9cda483a84a205be659f92b4f96a69b4a3c33f9",
+        "binding_kind": "apt",
+        "description": "Tool to generate documentation from Puppet code and extensions",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "puppet-strings",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.9.0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "8017aaaa8952103fd4487cb177165fe1bdd174886da4865a2b1fbe976c90bf4e",
+        "binding_kind": "apt",
+        "description": "generate tags for source code navigation for a cargo project",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "rusty-tags",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.10.0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "5925dc6e25348bdb350c44a9157da350ef608666b2a21f7057222e8b6aebd61d",
+        "binding_kind": "apt",
+        "description": "Generate scripting interfaces to C/C++ code",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "swig",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "4.2.0-2ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "a724fa1654bb1f94c0fa4515c94b9ae7949e1d5aa57d1eb73a40eea3662bd4ab",
+        "binding_kind": "apt",
+        "description": "Generate scripting interfaces to C/C++ code",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "swig3.0",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.0.12-2.2ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d865a84468f4b591d338153f23a72b0c01454b5b1b6b87b0ed344fee0c7a5877",
+        "binding_kind": "apt",
+        "description": "Generate scripting interfaces to C/C++ code",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "swig4.1",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "4.1.0-0.3ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "8b7341f8862aaca76c5b15a0f5ad301ab3909416570439e31a2fabe1daa5dcc8",
+        "binding_kind": "apt",
+        "description": "Generates perfect hash functions as native machine code",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "triehash",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.3-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "43d69296b5005a89ec249f9e9f9db06e285ce3f9d0d67cced684eaa0328a9638",
+        "binding_kind": "apt",
+        "description": "PHP library for generating two-dimensional barcodes",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 2,
+        "matched_terms": [
+          "barcode",
+          "generate"
+        ],
+        "name": "phpqrcode",
+        "packages": [],
+        "query": "code",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 22,
+        "version": "1.1.4-3.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "27759e57915a14019b2ce8f55ca3805c94b41a58d3ce39fc31bb800f432e2094",
+        "binding_kind": "apt",
+        "description": "QR code / bar code scanner and decoder (Python bindings)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 2,
+        "matched_terms": [
+          "barcode",
           "code"
         ],
-        "name": "aldo",
+        "name": "python3-zbar",
         "packages": [],
-        "query": "generate",
+        "query": "code",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 10,
-        "version": "0.7.8-2",
+        "score": 22,
+        "version": "0.23.93-4build3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "3fb6842df77c2a60373981d2a00e25c11b3793f4301e115bcb9dd3e3b69e8847",
+        "archive_sha256": "367a81b059398314db666421f8ba4e55c726c052c5832a816af384db3bbf325e",
         "binding_kind": "apt",
-        "description": "automatically generate crash reports for debugging",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "generate"
-        ],
-        "name": "apport",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 10,
-        "version": "2.28.3-0ubuntu0.1",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "8504eb3eb7c876fe4df7d4dd4e306be7325a2359490cb1320f9172148fa15062",
-        "binding_kind": "apt",
-        "description": "simulation tools to generate synthetic next-generation sequencing reads",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "generate"
-        ],
-        "name": "art-nextgen-simulation-tools",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 10,
-        "version": "20160605+dfsg-5",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "0fe2930e58a69f9550dfa0a9b609d1684585d4fdf0d50841c3b8f59416be7510",
-        "binding_kind": "apt",
-        "description": "generates Dia UML diagrams from source code, XML or data",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "code"
-        ],
-        "name": "autodia",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 10,
-        "version": "2.14-5",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "26d6c22cfa5bfd6768db5d8ea07d1c194b519606660078a05e8e68d2f780e9ff",
-        "binding_kind": "apt",
-        "description": "Security oriented static analyzer for Python code - Metapackage",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "code"
-        ],
-        "name": "bandit",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 10,
-        "version": "1.6.2-3",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "0987ef56d8eb4e4a07775b54077d4c6f1d0c5a384c859d6249dc95761ea64e4a",
-        "binding_kind": "apt",
-        "description": "font converter to generate console fonts from BDF source fonts",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "generate"
-        ],
-        "name": "bdf2psf",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 10,
-        "version": "1.226ubuntu1.1",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "3ff4fed98a4328a02993adf2d4ebde25685bb28ff29c78791fe4fbe9023ec6f0",
-        "binding_kind": "apt",
-        "description": "generate compilation database for Clang tooling",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "generate"
-        ],
-        "name": "bear",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 10,
-        "version": "3.1.3-1build4",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "e04098379b1e815e82d612adf39f75608b969c5b0e1b8a345787428e5d8fb4fe",
-        "binding_kind": "apt",
-        "description": "Automatically generate Rust FFI bindings to C and C++ libraries",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "generate"
-        ],
-        "name": "bindgen",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 10,
-        "version": "0.66.1-4",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "1e58b3693233b694b0ea44acb93ecfe061f52ddcdaf8870c21fe6e0177710f9a",
-        "binding_kind": "apt",
-        "description": "Generate a parser in c or c++ from BNF notation",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "generate"
-        ],
-        "name": "bison++",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 10,
-        "version": "1.21.11-5",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "74359bc075366cd244dfdfa64b2cb1fcef0ecd00da45ff4a699349d09a6970d6",
-        "binding_kind": "apt",
-        "description": "generate/apply a patch between two binary files",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "generate"
-        ],
-        "name": "bsdiff",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 10,
-        "version": "4.3-23",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "7c0838ca63766db6050f0d96bb4209fb94f176a0144e79f102191f1d7f4f0fe0",
-        "binding_kind": "apt",
-        "description": "Stub code generator for Objective Caml",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "code"
-        ],
-        "name": "camlidl",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 10,
-        "version": "1.12-1",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "af062a2868332e56d46ce6d1a2710d5d289256b3631e8f7b1aaccf55fa32a700",
-        "binding_kind": "apt",
-        "description": "Generates C bindings from Rust code",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "code"
-        ],
-        "name": "cbindgen",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 10,
-        "version": "0.26.0-3",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "24db3c1456490e578024ae994326f3aca1082fd2ec0fc42ba75ca56da53108e3",
-        "binding_kind": "apt",
-        "description": "Tools to dump and generate boot config table on Tegra devices",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "generate"
-        ],
-        "name": "cbootimage",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 10,
-        "version": "1.8-1",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "cfc7368898693c1a1da23a72b1781675eae1d1a8fbbe3b5634ba44a31fe3723d",
-        "binding_kind": "apt",
-        "description": "Makefile generation tool for the Code::Blocks IDE",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "code"
-        ],
-        "name": "cbp2make",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 10,
-        "version": "147+dfsg-4",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "bbca2fe572cb070172adb97cbefb2d9da2ac7b8519393dba7bbd437537f1e567",
-        "binding_kind": "apt",
-        "description": "generate a Common Lisp backtrace portably",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "generate"
-        ],
-        "name": "cl-trivial-backtrace",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 10,
-        "version": "20200511.git6eb65bd-1",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "a60d93408c757042bb2cc0a9bfde223d8b021f0c547378177d986a1ad4062551",
-        "binding_kind": "apt",
-        "description": "Generate man pages for click based CLI applications - command (Python 3)",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "generate"
-        ],
-        "name": "click-man",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 10,
-        "version": "0.4.1-2",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "287ec3bc869d0a61edd87a33d1685245577b214a7e91bd0b5303b5ab3523dc21",
-        "binding_kind": "apt",
-        "description": "source code formatter for cmake listfiles",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "code"
-        ],
-        "name": "cmake-format",
-        "packages": [],
-        "query": "generate",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 10,
-        "version": "0.6.13-5",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "744ce5c85171785303f1028b0d7c3ce5084a362cf8533ef9089bf07f697121c5",
-        "binding_kind": "apt",
-        "description": "Perl module to create barcode images",
+        "description": "Perl library to generate CODE 128 bar codes",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 3,
         "matched_terms": [
-          "barcode"
+          "128",
+          "barcode",
+          "code",
+          "generate"
         ],
-        "name": "libgd-barcode-perl",
+        "name": "libbarcode-code128-perl",
         "packages": [],
-        "query": "barcode",
+        "query": "generate",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 12,
-        "version": "2.00-1",
+        "score": 72,
+        "version": "2.21-3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "a1228e71372e754919dc7e50f7761ece099d59041e6df5fc2d2b2b4d15fdfd19",
+        "archive_sha256": "67a8ad2659d5f7eae67784f7d1b9e499bbc8366979f4b40c357f9c7aed16d28d",
         "binding_kind": "apt",
-        "description": "barcode plugin for KReport",
+        "description": "QR code / bar code scanner and decoder (Perl bindings)",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 3,
         "matched_terms": [
-          "barcode"
+          "barcode",
+          "code"
         ],
-        "name": "libkreport3-plugin-barcode",
+        "name": "libbarcode-zbar-perl",
         "packages": [],
-        "query": "barcode",
+        "query": "code",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 12,
-        "version": "3.2.0-3build2",
+        "score": 20,
+        "version": "0.23.93-4build3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "91edb7968f00993b0534b3723001a500a6965f4edd75191f3f902bb43f48ff88",
+        "archive_sha256": "0b511808736cd057cb317bc5b0ec99154169e7a849f7f5778d36c578bdb22b0d",
         "binding_kind": "apt",
-        "description": "Create barcodes for PDF documents with PDF::Reuse",
+        "description": "Library to generate 2d ISO/IEC 16022 barcodes (data matrix/semacode)",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 3,
         "matched_terms": [
-          "barcode"
+          "barcode",
+          "generate"
         ],
-        "name": "libpdf-reuse-barcode-perl",
+        "name": "libiec16022-0",
         "packages": [],
-        "query": "128",
+        "query": "generate",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 12,
-        "version": "0.07-2",
+        "score": 20,
+        "version": "0.2.7-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "0129f77fab0834eacfb34eaf1bff47b505fbfa3f8365fd528fcdfc9c59d6dd60",
+        "binding_kind": "apt",
+        "description": "QR code / bar code scanner and decoder (library)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 3,
+        "matched_terms": [
+          "barcode",
+          "code"
+        ],
+        "name": "libzbar0t64",
+        "packages": [],
+        "query": "code",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 20,
+        "version": "0.23.93-4build3",
         "zero_cost_eligible": true
       },
       {
@@ -1180,6 +1209,28 @@
         "candidate_count": 30,
         "candidates": [
           {
+            "archive_sha256": "367a81b059398314db666421f8ba4e55c726c052c5832a816af384db3bbf325e",
+            "binding_kind": "apt",
+            "description": "Perl library to generate CODE 128 bar codes",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 3,
+            "matched_terms": [
+              "128",
+              "barcode",
+              "code",
+              "generate"
+            ],
+            "name": "libbarcode-code128-perl",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 72,
+            "version": "2.21-3",
+            "zero_cost_eligible": true
+          },
+          {
             "archive_sha256": "cfda4a63c84333f24a72d43ceec5f0a29af27841d21e4a501a6382fb18a0f336",
             "binding_kind": "apt",
             "description": "Utility for barcode generation",
@@ -1199,136 +1250,163 @@
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "3f92bd9fcaa2027ca7f311b4e52a1d97fee977cdf10e0ef644431729dc8fc077",
+            "archive_sha256": "da50e7e76feb7b510e36ed8fdf228e741d887a5ad222d3ea5f52a84d66b93126",
             "binding_kind": "apt",
-            "description": "Check digit validator for EAN/PLU/UPC barcode numbers",
+            "description": "QR code / bar code scanner and decoder (introspection data)",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "barcode"
+              "barcode",
+              "code"
             ],
-            "name": "eancheck",
+            "name": "gir1.2-zbar-1.0",
             "packages": [],
-            "query": "barcode",
+            "query": "code",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 18,
-            "version": "1.0-2build1",
+            "score": 40,
+            "version": "0.23.93-4build3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "dd99fb73bb32e2d28af54b74a8378c89e527b62915167563fc92cc90586ffd4d",
+            "archive_sha256": "b3cba02f7d4400bf8c38daf37139f9ba9c12f0e70ef49f035305a6ef27ce0f79",
             "binding_kind": "apt",
-            "description": "estimate PCR barcode primers quality",
+            "description": "Generates 2d ISO/IEC 16022 barcodes (data matrix/semacode)",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "barcode"
+              "barcode",
+              "generate"
             ],
-            "name": "ecopcr",
+            "name": "iec16022",
             "packages": [],
-            "query": "barcode",
+            "query": "generate",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 18,
-            "version": "1.0.1+dfsg-4",
+            "score": 40,
+            "version": "0.2.7-1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "56e03f7049dae65dd5e91c647e7cc4cfc3e519c06d080798635acfc1f4a59998",
+            "archive_sha256": "271506a0b70e9fd5bdccfc8a0eb856d8094e092934666f45737578d7737c7a57",
             "binding_kind": "apt",
-            "description": "flexible barcode and adapter removal for sequencing platforms",
+            "description": "qr-code and bar-code scanning library for the web",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "barcode"
+              "barcode",
+              "code"
             ],
-            "name": "flexbar",
+            "name": "node-html5-qrcode",
             "packages": [],
-            "query": "barcode",
+            "query": "code",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 18,
-            "version": "1:3.5.0-5",
+            "score": 40,
+            "version": "2.3.8+repack-5",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "ab76b5c103f1a91e0a43d74663bc07c6d029b19cc9b21e4bc9a10410f0865afd",
+            "archive_sha256": "9e718d34a9650263aca2dd85e56d9de42ca24ff82254f90f5e4270d1e5d00422",
             "binding_kind": "apt",
-            "description": "barcode API for Qt",
+            "description": "QR code / bar code scanner and decoder (utilities)",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "barcode"
+              "barcode",
+              "code"
             ],
-            "name": "qml-module-org-kde-prison",
+            "name": "zbar-tools",
             "packages": [],
-            "query": "barcode",
+            "query": "code",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 18,
-            "version": "5.115.0-0ubuntu5",
+            "score": 40,
+            "version": "0.23.93-4build3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "13c1abdb03ebcad83b2a3a745bdb9bb7ee46016025527676e7e6b10eeb479865",
+            "archive_sha256": "6563248be2191396961f4347522c8273b6e9975b20677e8b5dc7f38f4c1df5a1",
             "binding_kind": "apt",
-            "description": "GNU R interface to Bold Systems for genetic barcode data",
+            "description": "QR code / bar code scanner and decoder (Gtk camera tool)",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "barcode"
+              "barcode",
+              "code"
             ],
-            "name": "r-cran-bold",
+            "name": "zbarcam-gtk",
             "packages": [],
-            "query": "barcode",
+            "query": "code",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 18,
-            "version": "1.3.0-1",
+            "score": 40,
+            "version": "0.23.93-4build3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769",
+            "archive_sha256": "1a6bc737f55ca4b1cfb1bd945d5b091c3cfaf37b715ec7d56f8046899d67fcef",
             "binding_kind": "apt",
-            "description": "command line utility to encode data in barcode symbols",
+            "description": "QR code / bar code scanner and decoder (Qt camera tool)",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "barcode"
+              "barcode",
+              "code"
             ],
-            "name": "zint",
+            "name": "zbarcam-qt",
             "packages": [],
-            "query": "128",
+            "query": "code",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 18,
-            "version": "2.13.0-1build3",
+            "score": 40,
+            "version": "0.23.93-4build3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "869908686b1df48db14b3420be8e1a0ce060677263c222eb3f6265de706501fc",
+            "archive_sha256": "84c8cc3438b6b8287f611adb5429375fddd2f7ee7d45f8137d7eff8c36b2326b",
             "binding_kind": "apt",
-            "description": "Zint Barcode Studio, a QT frontend to zint",
+            "description": "Generate rust source code from gir files",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "barcode"
+              "code",
+              "generate"
             ],
-            "name": "zint-qt",
+            "name": "gir-rust-code-generator",
             "packages": [],
-            "query": "128",
+            "query": "generate",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 18,
-            "version": "2.13.0-1build3",
+            "score": 36,
+            "version": "0.19.0-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "0fe2930e58a69f9550dfa0a9b609d1684585d4fdf0d50841c3b8f59416be7510",
+            "binding_kind": "apt",
+            "description": "generates Dia UML diagrams from source code, XML or data",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "autodia",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2.14-5",
             "zero_cost_eligible": true
           },
           {
@@ -1347,8 +1425,48 @@
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 12,
+            "score": 32,
             "version": "1.15-1.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "af062a2868332e56d46ce6d1a2710d5d289256b3631e8f7b1aaccf55fa32a700",
+            "binding_kind": "apt",
+            "description": "Generates C bindings from Rust code",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "cbindgen",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.26.0-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "e6851734d45d3898340306d3048b2d269c4d42fdf706fe70c152dae7b0f5e4b6",
+            "binding_kind": "apt",
+            "description": "tool to generate Italian fiscal codes (codice fiscale)",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "codfis",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.4.7-2build4",
             "zero_cost_eligible": true
           },
           {
@@ -1367,388 +1485,328 @@
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 12,
+            "score": 32,
             "version": "4.7v-2",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "744ce5c85171785303f1028b0d7c3ce5084a362cf8533ef9089bf07f697121c5",
+            "archive_sha256": "76a3a24a594d0cb6315eae5bfc78aa4b036b3ba981e3c8fadddcb4dea1792b7c",
             "binding_kind": "apt",
-            "description": "Perl module to create barcode images",
+            "description": "Generate documentation from source code",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "doxygen",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.9.8+ds-2ubuntu0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "b840f6fbf618523d48325506f1e74deb4d9fa3b44a42fcb07ee4a55f3df442f1",
+            "binding_kind": "apt",
+            "description": "Generate LaTeX documentation from source code",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "doxygen-latex",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.9.8+ds-2ubuntu0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "1465d4d67cbd533a7c471a37110e3fd3e25e2e56d1c92f7d86402e80ca20e49a",
+            "binding_kind": "apt",
+            "description": "C compiler generating Intel code for 16bit/32bit CPUs",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "faucc",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "20180503-1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "271fdf93bab485d65795359ce0a4c0edac52295a87c9a0db56c32c8827259f0c",
+            "binding_kind": "apt",
+            "description": "GAP AutoDoc - Generate documentation from GAP source code",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "gap-autodoc",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2023.06.19-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "be484242d7bfa08a47a65fefb1330cc8bdb3cb957d9e14b551b21b4a5a8fff3d",
+            "binding_kind": "apt",
+            "description": "Generates LaTeX code from literate Haskell sources",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "lhs2tex",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.24-1build2.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "ac650c7d980b70652920be84d9cda483a84a205be659f92b4f96a69b4a3c33f9",
+            "binding_kind": "apt",
+            "description": "Tool to generate documentation from Puppet code and extensions",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "puppet-strings",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2.9.0-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "8017aaaa8952103fd4487cb177165fe1bdd174886da4865a2b1fbe976c90bf4e",
+            "binding_kind": "apt",
+            "description": "generate tags for source code navigation for a cargo project",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "rusty-tags",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.10.0-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "5925dc6e25348bdb350c44a9157da350ef608666b2a21f7057222e8b6aebd61d",
+            "binding_kind": "apt",
+            "description": "Generate scripting interfaces to C/C++ code",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "swig",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "4.2.0-2ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "a724fa1654bb1f94c0fa4515c94b9ae7949e1d5aa57d1eb73a40eea3662bd4ab",
+            "binding_kind": "apt",
+            "description": "Generate scripting interfaces to C/C++ code",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "swig3.0",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.0.12-2.2ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d865a84468f4b591d338153f23a72b0c01454b5b1b6b87b0ed344fee0c7a5877",
+            "binding_kind": "apt",
+            "description": "Generate scripting interfaces to C/C++ code",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "swig4.1",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "4.1.0-0.3ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "8b7341f8862aaca76c5b15a0f5ad301ab3909416570439e31a2fabe1daa5dcc8",
+            "binding_kind": "apt",
+            "description": "Generates perfect hash functions as native machine code",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "code",
+              "generate"
+            ],
+            "name": "triehash",
+            "packages": [],
+            "query": "generate",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.3-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "43d69296b5005a89ec249f9e9f9db06e285ce3f9d0d67cced684eaa0328a9638",
+            "binding_kind": "apt",
+            "description": "PHP library for generating two-dimensional barcodes",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 2,
+            "matched_terms": [
+              "barcode",
+              "generate"
+            ],
+            "name": "phpqrcode",
+            "packages": [],
+            "query": "code",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 22,
+            "version": "1.1.4-3.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "27759e57915a14019b2ce8f55ca3805c94b41a58d3ce39fc31bb800f432e2094",
+            "binding_kind": "apt",
+            "description": "QR code / bar code scanner and decoder (Python bindings)",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 2,
+            "matched_terms": [
+              "barcode",
+              "code"
+            ],
+            "name": "python3-zbar",
+            "packages": [],
+            "query": "code",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 22,
+            "version": "0.23.93-4build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "67a8ad2659d5f7eae67784f7d1b9e499bbc8366979f4b40c357f9c7aed16d28d",
+            "binding_kind": "apt",
+            "description": "QR code / bar code scanner and decoder (Perl bindings)",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 3,
             "matched_terms": [
-              "barcode"
+              "barcode",
+              "code"
             ],
-            "name": "libgd-barcode-perl",
+            "name": "libbarcode-zbar-perl",
             "packages": [],
-            "query": "barcode",
+            "query": "code",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 12,
-            "version": "2.00-1",
+            "score": 20,
+            "version": "0.23.93-4build3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "a1228e71372e754919dc7e50f7761ece099d59041e6df5fc2d2b2b4d15fdfd19",
+            "archive_sha256": "0b511808736cd057cb317bc5b0ec99154169e7a849f7f5778d36c578bdb22b0d",
             "binding_kind": "apt",
-            "description": "barcode plugin for KReport",
+            "description": "Library to generate 2d ISO/IEC 16022 barcodes (data matrix/semacode)",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 3,
             "matched_terms": [
-              "barcode"
+              "barcode",
+              "generate"
             ],
-            "name": "libkreport3-plugin-barcode",
+            "name": "libiec16022-0",
             "packages": [],
-            "query": "barcode",
+            "query": "generate",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 12,
-            "version": "3.2.0-3build2",
+            "score": 20,
+            "version": "0.2.7-1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "91edb7968f00993b0534b3723001a500a6965f4edd75191f3f902bb43f48ff88",
+            "archive_sha256": "0129f77fab0834eacfb34eaf1bff47b505fbfa3f8365fd528fcdfc9c59d6dd60",
             "binding_kind": "apt",
-            "description": "Create barcodes for PDF documents with PDF::Reuse",
+            "description": "QR code / bar code scanner and decoder (library)",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 3,
             "matched_terms": [
-              "barcode"
-            ],
-            "name": "libpdf-reuse-barcode-perl",
-            "packages": [],
-            "query": "128",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 12,
-            "version": "0.07-2",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "1a2b8aee566e84d1858330b6197c9e7b6846dd239b220df8ce02b746d46bac00",
-            "binding_kind": "apt",
-            "description": "Morse code training program",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
+              "barcode",
               "code"
             ],
-            "name": "aldo",
+            "name": "libzbar0t64",
             "packages": [],
-            "query": "generate",
+            "query": "code",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 10,
-            "version": "0.7.8-2",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "3fb6842df77c2a60373981d2a00e25c11b3793f4301e115bcb9dd3e3b69e8847",
-            "binding_kind": "apt",
-            "description": "automatically generate crash reports for debugging",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "generate"
-            ],
-            "name": "apport",
-            "packages": [],
-            "query": "generate",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 10,
-            "version": "2.28.3-0ubuntu0.1",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "8504eb3eb7c876fe4df7d4dd4e306be7325a2359490cb1320f9172148fa15062",
-            "binding_kind": "apt",
-            "description": "simulation tools to generate synthetic next-generation sequencing reads",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "generate"
-            ],
-            "name": "art-nextgen-simulation-tools",
-            "packages": [],
-            "query": "generate",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 10,
-            "version": "20160605+dfsg-5",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "0fe2930e58a69f9550dfa0a9b609d1684585d4fdf0d50841c3b8f59416be7510",
-            "binding_kind": "apt",
-            "description": "generates Dia UML diagrams from source code, XML or data",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "code"
-            ],
-            "name": "autodia",
-            "packages": [],
-            "query": "generate",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 10,
-            "version": "2.14-5",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "26d6c22cfa5bfd6768db5d8ea07d1c194b519606660078a05e8e68d2f780e9ff",
-            "binding_kind": "apt",
-            "description": "Security oriented static analyzer for Python code - Metapackage",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "code"
-            ],
-            "name": "bandit",
-            "packages": [],
-            "query": "generate",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 10,
-            "version": "1.6.2-3",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "0987ef56d8eb4e4a07775b54077d4c6f1d0c5a384c859d6249dc95761ea64e4a",
-            "binding_kind": "apt",
-            "description": "font converter to generate console fonts from BDF source fonts",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "generate"
-            ],
-            "name": "bdf2psf",
-            "packages": [],
-            "query": "generate",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 10,
-            "version": "1.226ubuntu1.1",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "3ff4fed98a4328a02993adf2d4ebde25685bb28ff29c78791fe4fbe9023ec6f0",
-            "binding_kind": "apt",
-            "description": "generate compilation database for Clang tooling",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "generate"
-            ],
-            "name": "bear",
-            "packages": [],
-            "query": "generate",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 10,
-            "version": "3.1.3-1build4",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "e04098379b1e815e82d612adf39f75608b969c5b0e1b8a345787428e5d8fb4fe",
-            "binding_kind": "apt",
-            "description": "Automatically generate Rust FFI bindings to C and C++ libraries",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "generate"
-            ],
-            "name": "bindgen",
-            "packages": [],
-            "query": "generate",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 10,
-            "version": "0.66.1-4",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "1e58b3693233b694b0ea44acb93ecfe061f52ddcdaf8870c21fe6e0177710f9a",
-            "binding_kind": "apt",
-            "description": "Generate a parser in c or c++ from BNF notation",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "generate"
-            ],
-            "name": "bison++",
-            "packages": [],
-            "query": "generate",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 10,
-            "version": "1.21.11-5",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "74359bc075366cd244dfdfa64b2cb1fcef0ecd00da45ff4a699349d09a6970d6",
-            "binding_kind": "apt",
-            "description": "generate/apply a patch between two binary files",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "generate"
-            ],
-            "name": "bsdiff",
-            "packages": [],
-            "query": "generate",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 10,
-            "version": "4.3-23",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "7c0838ca63766db6050f0d96bb4209fb94f176a0144e79f102191f1d7f4f0fe0",
-            "binding_kind": "apt",
-            "description": "Stub code generator for Objective Caml",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "code"
-            ],
-            "name": "camlidl",
-            "packages": [],
-            "query": "generate",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 10,
-            "version": "1.12-1",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "af062a2868332e56d46ce6d1a2710d5d289256b3631e8f7b1aaccf55fa32a700",
-            "binding_kind": "apt",
-            "description": "Generates C bindings from Rust code",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "code"
-            ],
-            "name": "cbindgen",
-            "packages": [],
-            "query": "generate",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 10,
-            "version": "0.26.0-3",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "24db3c1456490e578024ae994326f3aca1082fd2ec0fc42ba75ca56da53108e3",
-            "binding_kind": "apt",
-            "description": "Tools to dump and generate boot config table on Tegra devices",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "generate"
-            ],
-            "name": "cbootimage",
-            "packages": [],
-            "query": "generate",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 10,
-            "version": "1.8-1",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "cfc7368898693c1a1da23a72b1781675eae1d1a8fbbe3b5634ba44a31fe3723d",
-            "binding_kind": "apt",
-            "description": "Makefile generation tool for the Code::Blocks IDE",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "code"
-            ],
-            "name": "cbp2make",
-            "packages": [],
-            "query": "generate",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 10,
-            "version": "147+dfsg-4",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "bbca2fe572cb070172adb97cbefb2d9da2ac7b8519393dba7bbd437537f1e567",
-            "binding_kind": "apt",
-            "description": "generate a Common Lisp backtrace portably",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "generate"
-            ],
-            "name": "cl-trivial-backtrace",
-            "packages": [],
-            "query": "generate",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 10,
-            "version": "20200511.git6eb65bd-1",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "a60d93408c757042bb2cc0a9bfde223d8b021f0c547378177d986a1ad4062551",
-            "binding_kind": "apt",
-            "description": "Generate man pages for click based CLI applications - command (Python 3)",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "generate"
-            ],
-            "name": "click-man",
-            "packages": [],
-            "query": "generate",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 10,
-            "version": "0.4.1-2",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "287ec3bc869d0a61edd87a33d1685245577b214a7e91bd0b5303b5ab3523dc21",
-            "binding_kind": "apt",
-            "description": "source code formatter for cmake listfiles",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "code"
-            ],
-            "name": "cmake-format",
-            "packages": [],
-            "query": "generate",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 10,
-            "version": "0.6.13-5",
+            "score": 20,
+            "version": "0.23.93-4build3",
             "zero_cost_eligible": true
           }
         ],
@@ -1766,7 +1824,7 @@
       },
       {
         "binding_performed": false,
-        "candidate_count": 55,
+        "candidate_count": 56,
         "candidates": [
           {
             "description": "Source-linked CodeGraph exploration, ranked search, and static navigation for coding agents.",

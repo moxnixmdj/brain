@@ -55,292 +55,213 @@
     {
       "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
       "probe": {
-        "archive_sha256": "3f92bd9fcaa2027ca7f311b4e52a1d97fee977cdf10e0ef644431729dc8fc077",
-        "executables": [
-          {
-            "executable": "/usr/bin/eancheck",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 2,
-                "text": "Invalid input. Numbers only please."
-              }
-            ]
-          }
-        ],
-        "package": "eancheck",
+        "archive_sha256": "da50e7e76feb7b510e36ed8fdf228e741d887a5ad222d3ea5f52a84d66b93126",
+        "executables": [],
+        "package": "gir1.2-zbar-1.0",
         "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "1.0-2build1"
+        "version": "0.23.93-4build3"
       },
       "status": "CONTRACT_REJECTED",
       "supplier": {
-        "archive_sha256": "3f92bd9fcaa2027ca7f311b4e52a1d97fee977cdf10e0ef644431729dc8fc077",
+        "archive_sha256": "da50e7e76feb7b510e36ed8fdf228e741d887a5ad222d3ea5f52a84d66b93126",
         "binding_kind": "apt",
-        "description": "Check digit validator for EAN/PLU/UPC barcode numbers",
+        "description": "QR code / bar code scanner and decoder (introspection data)",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "barcode"
+          "barcode",
+          "code"
         ],
-        "name": "eancheck",
+        "name": "gir1.2-zbar-1.0",
         "packages": [],
-        "query": "barcode",
+        "query": "code",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "1.0-2build1",
+        "score": 40,
+        "version": "0.23.93-4build3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED",
+      "probe": {
+        "archive_sha256": "b3cba02f7d4400bf8c38daf37139f9ba9c12f0e70ef49f035305a6ef27ce0f79",
+        "executables": [
+          {
+            "executable": "/usr/bin/iec16022",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: iec16022 [barcode]\n  -s, --size=WxH                                                 Size\n  -c, --barcode=text                                             Barcode\n      --ecc=000/050/080/100/140/200                              ECC\n  -i, --infile=filename                                          Barcode file\n  -o, --outfile=filename                                         Output\n                                                                 filename\n  -e, --encoding=[CTXEAB]* for ecc200 or 11/27/41/37/128/256     Encoding\n                                                                 template\n  -f, --format=Text/UTF-8/EPS/PNG/Bin/Hex/Stamp                  Output format\n                                                                 (default:\n                                                                 \"Text\")\n      --gs1                                                      Enable GS1\n                                                                 mode, start\n                                                                 with FNC1\n\nHelp options:\n  -?, --help                                                     Show this\n                                                                 help message\n      --usage                                                    Display brief\n                                                                 usage message"
+              }
+            ]
+          }
+        ],
+        "package": "iec16022",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.2.7-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "archive_sha256": "b3cba02f7d4400bf8c38daf37139f9ba9c12f0e70ef49f035305a6ef27ce0f79",
+        "binding_kind": "apt",
+        "description": "Generates 2d ISO/IEC 16022 barcodes (data matrix/semacode)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "barcode",
+          "generate"
+        ],
+        "name": "iec16022",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 40,
+        "version": "0.2.7-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "271506a0b70e9fd5bdccfc8a0eb856d8094e092934666f45737578d7737c7a57",
+        "executables": [],
+        "package": "node-html5-qrcode",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "2.3.8+repack-5"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "archive_sha256": "271506a0b70e9fd5bdccfc8a0eb856d8094e092934666f45737578d7737c7a57",
+        "binding_kind": "apt",
+        "description": "qr-code and bar-code scanning library for the web",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "barcode",
+          "code"
+        ],
+        "name": "node-html5-qrcode",
+        "packages": [],
+        "query": "code",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 40,
+        "version": "2.3.8+repack-5",
         "zero_cost_eligible": true
       }
     },
     {
       "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png",
       "probe": {
-        "archive_sha256": "dd99fb73bb32e2d28af54b74a8378c89e527b62915167563fc92cc90586ffd4d",
+        "archive_sha256": "9e718d34a9650263aca2dd85e56d9de42ca24ff82254f90f5e4270d1e5d00422",
         "executables": [
           {
-            "executable": "/usr/bin/ecoPCR",
+            "executable": "/usr/bin/zbarcam",
             "help_attempts": [
               {
                 "flag": "--help",
                 "returncode": 0,
-                "text": "------------------------------------------\n ecoPCR Version 1.0.1\n------------------------------------------\nsynopsis : searching for sequence and taxonomy hybriding with given primers\nusage: ecoPCR [options] <nucleotidic patterns>\n------------------------------------------\noptions:\n-a    : Salt concentration in M for Tm computation (default 0.05 M)\n\n-c    : Consider that the database sequences are [c]ircular\n\n-d    : [D]atabase : to match the expected format, the database\n        has to be formatted first by the ecoPCRFormat.py program located.\n        in the tools directory.\n        ecoPCRFormat.py creates three file types :\n            .sdx : contains the sequences\n            .tdx : contains information concerning the taxonomy\n            .rdx : contains the taxonomy rank\n\n        ecoPCR needs all the file type. As a result, you have to write the\n        database radical without any extension. For example /ecoPCRDB/gbmam\n\n-D    : Keeps the specified number of nucleotides on each side of the in silico \n        amplified sequences (including the amplified DNA fragment plus the two target \n        sequences of the primers).\n\n-e    : [E]rror : max errors allowed by oligonucleotide (0 by default)\n\n-h    : [H]elp - print <this> help\n\n-i    : [I]gnore the given taxonomy id.\n        Taxonomy id are available using the ecofind program.\n        see its help typing ecofind -h for more information.\n\n-k    : [K]ingdom mode : set the kingdom mode\n        super kingdom mode by default.\n\n-l    : minimum [L]ength : define the minimum amplication length. \n\n-L    : maximum [L]ength : define the maximum amplicationlength. \n\n-m    : Salt correction method for Tm computation (SANTALUCIA : 1\n        or OWCZARZY:2, default=1)\n\n-r    : [R]estricts the search to the given taxonomic id.\n        Taxonomy id are available using the ecofind program.\n        see its help typing ecofind -h for more information.\n\n\n------------------------------------------\nfirst argument : oligonucleotide for direct strand\n\nsecond argument : oligonucleotide for reverse strand\n\n------------------------------------------\nTable result description : \ncolumn 1 : accession number\ncolumn 2 : sequence length\ncolumn 3 : taxonomic id\ncolumn 4 : rank\ncolumn 5 : species taxonomic id\ncolumn 6 : scientific name\ncolumn 7 : genus taxonomic id\ncolumn 8 : genus name\ncolumn 9 : family taxonomic id\ncolumn 10 : family name\ncolumn 11 : super kingdom taxonomic id\ncolumn 12 : super kingdom name\ncolumn 13 : strand (direct or reverse)\ncolumn 14 : first oligonucleotide\ncolumn 15 : number of errors for the first strand\ncolumn 16 : Tm for hybridization of primer 1 at this site\ncolumn 17 : second oligonucleotide\ncolumn 18 : number of errors for the second strand\ncolumn 19 : Tm for hybridization of primer 1 at this site\ncolumn 20 : amplification length\ncolumn 21 : sequence\ncolumn 22 : definition\n------------------------------------------\n https://git.metabarcoding.org/obitools/ecopcr/wikis/home\n------------------------------------------\n\n\n\n/usr/bin/ecoPCR: invalid option -- '-'"
+                "text": "usage: zbarcam [options] [/dev/video?]\n\nscan and decode bar codes from a video stream\n\noptions:\n    -h, --help      display this help text\n    --version       display version information and exit\n    -q, --quiet     disable beep when symbol is decoded\n    -v, --verbose   increase debug output level\n    --verbose=N     set specific debug output level\n    --xml           use XML output format\n    --raw           output decoded symbol data without converting charsets\n    -1, --oneshot   exit after scanning one bar code\n    --nodisplay     disable video display window\n    --prescale=<W>x<H>\n                    request alternate video image size from driver\n    -S<CONFIG>[=<VALUE>], --set <CONFIG>[=<VALUE>]\n                    set decoder/scanner <CONFIG> to <VALUE> (or 1)\n\n    --nodbus        disable dbus message"
               }
             ]
           },
           {
-            "executable": "/usr/bin/ecoPCRFilter",
+            "executable": "/usr/bin/zbarimg",
             "help_attempts": [
               {
                 "flag": "--help",
                 "returncode": 0,
-                "text": ""
-              },
-              {
-                "flag": "-h",
-                "returncode": 0,
-                "text": ""
-              }
-            ]
-          },
-          {
-            "executable": "/usr/bin/ecoPCRFormat",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 0,
-                "text": "-----------------------------------\n ecoPCRFormat.py\n-----------------------------------\necoPCRFormat.py [option] <argument>\n-----------------------------------\n-e    --embl        :[E]mbl format\n-f    --fasta       :[F]asta format\n-g    --genbank     :[G]enbank format\n-h    --help        :[H]elp - print this help\n-n    --name        :[N]ame of the new database created\n-t    --taxonomy    :[T]axonomy - path to the taxonomy database\n                    :bcp-like dump from GenBank taxonomy database.\n-----------------------------------\n\n/usr/bin/ecoPCRFormat:260: SyntaxWarning: invalid escape sequence '\\.'\n  _gbParseDE = re.compile('(?<=^DEFINITION {2}).+?\\. *$(?=[^ ])',re.MULTILINE+re.DOTALL)\n/usr/bin/ecoPCRFormat:282: SyntaxWarning: invalid escape sequence '\\.'\n  _emblParseDE = re.compile('(?<=^DE {3}).+?\\. *$(?=[^ ])',re.MULTILINE+re.DOTALL)\n/usr/bin/ecoPCRFormat:299: SyntaxWarning: invalid escape sequence '\\W'\n  _fastaSplit=re.compile(';\\W*')"
-              }
-            ]
-          },
-          {
-            "executable": "/usr/bin/ecoSort",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 0,
-                "text": ""
-              },
-              {
-                "flag": "-h",
-                "returncode": 0,
-                "text": ""
-              }
-            ]
-          },
-          {
-            "executable": "/usr/bin/ecofind",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 0,
-                "text": "------------------------------------------\n ecofind Version 0.1\n------------------------------------------\nsynopsis : searching for taxonomic and rank and\n           taxonomy id for given regular  expression patterns\n\nusage: ecofind [options] <patterns>\n------------------------------------------\noptions:\n-a : [A]ll enable the search on all alternative names and not only scientific names.\n\n-d : [D]atabase containing the taxonomy.\n     To match the expected format, the database\n     has to be formatted first by the ecoPCRFormat.py\n     program located in the tools directory.\n     Write the database radical without any extension.\n\n-h : [H]elp - print <this> help\n\n-l : [L]ist all taxonomic rank available for -r option\n\n-P : [P]ath : add a column containing the full path for each displayed taxon\n\n-p : [P]arents : specifying this option displays all parental tree's information for the given taxid.\n\n-r : [R]estrict to given taxonomic rank\n\n-s : [S]ons: specifying this option displays all subtree's information for the given taxid.\n\n-P : Display taxonomic [P]ath as supplementary column in output\n\narguments:\n<taxon> name pattern bearing regular expressions\n\n------------------------------------------\n http://www.grenoble.prabi.fr/trac/ecoPCR/\n------------------------------------------\n\n\n/usr/bin/ecofind: invalid option -- '-'"
-              }
-            ]
-          },
-          {
-            "executable": "/usr/bin/ecogrep",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 0,
-                "text": "------------------------------------------\n ecogrep Version 0.1\n------------------------------------------\n synopsis : filtering ecoPCR result based on\n taxonomic id filter and regular expression pattern\n usage: ecogrep [options] filename\n------------------------------------------\n options:\n -1    : [FIRST] : compare the given pattern with direct strand oligonucleotide\n\n -2    : [SECOND] : compare the given pattern with reverse strand oligonucleotide\n\n -d    : [D]atabase containing taxonomic information\n\n -e    : [E]rrors : max error allowed in pattern match (option-1, -2 and -p) (0 by default)\n\n -p    : [P]attern : oligonucleotide pattern\n\n -h    : [H]elp : print <this> help\n\n -i    : [I]gnore subtree under given taxonomic id\n\n -r    : [R]estrict search to subtree under given taxomic id\n\n -v    : in[V]ert the sense of matching, to select non-matching lines.\n\n argument:\n ecoPCR output file name\n------------------------------------------\n\n http://www.grenoble.prabi.fr/trac/ecoPCR/\n------------------------------------------\n\n\n/usr/bin/ecogrep: invalid option -- '-'"
-              }
-            ]
-          },
-          {
-            "executable": "/usr/bin/ecoisundertaxon",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 0,
-                "text": "------------------------------------------\n ecoisundertaxon Version 0.1\n------------------------------------------\n synopsis : searching relationship in taxonomy\n usage: ecoisundertaxon [options] database\n------------------------------------------\n options:\n -1    : [FIRST] taxomic id of the hypothetical son\n\n -2    : [SECOND] taxonomic id of the hypothetical parent\n\n -h    : [H]elp - print <this> help\n\n -v    : [V]erbose mode. Display taxonomic information for both\n       : taxonomic id.\n\n------------------------------------------\n database : to match the expected format, the database\n has to be formatted first by the ecoPCRFormat.py program located.\n in the tools directory. Type the radical only, leaving out the extension\n------------------------------------------\n\n https://www.grenoble.prabi.fr/trac/ecoPCR/wiki------------------------------------------\n\n\n/usr/bin/ecoisundertaxon: invalid option -- '-'"
+                "text": "usage: zbarimg [options] <image>...\n\nscan and decode bar codes from one or more image files\n\noptions:\n    -h, --help      display this help text\n    --version       display version information and exit\n    --polygon       output points delimiting code zone with decoded symbol data\n    -q, --quiet     minimal output, only print decoded symbol data\n    -v, --verbose   increase debug output level\n    --verbose=N     set specific debug output level\n    -d, --display   enable display of following images to the screen\n    -D, --nodisplay disable display of following images (default)\n    --xml, --noxml  enable/disable XML output format\n    --raw           output decoded symbol data without converting charsets\n    -1, --oneshot   exit after scanning one bar code\n    -S<CONFIG>[=<VALUE>], --set <CONFIG>[=<VALUE>]\n                    set decoder/scanner <CONFIG> to <VALUE> (or 1)\n\n    --nodbus        disable dbus message"
               }
             ]
           }
         ],
-        "package": "ecopcr",
+        "package": "zbar-tools",
         "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "1.0.1+dfsg-4"
+        "version": "0.23.93-4build3"
       },
       "status": "CONTRACT_REJECTED",
       "supplier": {
-        "archive_sha256": "dd99fb73bb32e2d28af54b74a8378c89e527b62915167563fc92cc90586ffd4d",
+        "archive_sha256": "9e718d34a9650263aca2dd85e56d9de42ca24ff82254f90f5e4270d1e5d00422",
         "binding_kind": "apt",
-        "description": "estimate PCR barcode primers quality",
+        "description": "QR code / bar code scanner and decoder (utilities)",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "barcode"
+          "barcode",
+          "code"
         ],
-        "name": "ecopcr",
+        "name": "zbar-tools",
         "packages": [],
-        "query": "barcode",
+        "query": "code",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "1.0.1+dfsg-4",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "TimeoutExpired:Command '['/usr/bin/flexbar', '--help']' timed out after 10 seconds",
-      "status": "PROBE_FAILED",
-      "supplier": {
-        "archive_sha256": "56e03f7049dae65dd5e91c647e7cc4cfc3e519c06d080798635acfc1f4a59998",
-        "binding_kind": "apt",
-        "description": "flexible barcode and adapter removal for sequencing platforms",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "barcode"
-        ],
-        "name": "flexbar",
-        "packages": [],
-        "query": "barcode",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 18,
-        "version": "1:3.5.0-5",
+        "score": 40,
+        "version": "0.23.93-4build3",
         "zero_cost_eligible": true
       }
     },
     {
       "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
       "probe": {
-        "archive_sha256": "ab76b5c103f1a91e0a43d74663bc07c6d029b19cc9b21e4bc9a10410f0865afd",
-        "executables": [],
-        "package": "qml-module-org-kde-prison",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "5.115.0-0ubuntu5"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "archive_sha256": "ab76b5c103f1a91e0a43d74663bc07c6d029b19cc9b21e4bc9a10410f0865afd",
-        "binding_kind": "apt",
-        "description": "barcode API for Qt",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "barcode"
-        ],
-        "name": "qml-module-org-kde-prison",
-        "packages": [],
-        "query": "barcode",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 18,
-        "version": "5.115.0-0ubuntu5",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
-      "probe": {
-        "archive_sha256": "13c1abdb03ebcad83b2a3a745bdb9bb7ee46016025527676e7e6b10eeb479865",
-        "executables": [],
-        "package": "r-cran-bold",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "1.3.0-1"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "archive_sha256": "13c1abdb03ebcad83b2a3a745bdb9bb7ee46016025527676e7e6b10eeb479865",
-        "binding_kind": "apt",
-        "description": "GNU R interface to Bold Systems for genetic barcode data",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "barcode"
-        ],
-        "name": "r-cran-bold",
-        "packages": [],
-        "query": "barcode",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 18,
-        "version": "1.3.0-1",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
-      "probe": {
-        "archive_sha256": "cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769",
+        "archive_sha256": "6563248be2191396961f4347522c8273b6e9975b20677e8b5dc7f38f4c1df5a1",
         "executables": [
           {
-            "executable": "/usr/bin/zint",
+            "executable": "/usr/bin/zbarcam-gtk",
             "help_attempts": [
               {
                 "flag": "--help",
-                "returncode": 0,
-                "text": "Zint version 2.13.0\nEncode input data in a barcode and save as BMP/EMF/EPS/GIF/PCX/PNG/SVG/TIF/TXT\n\n  -b, --barcode=TYPE    Number or name of barcode type. Default is 20 (CODE128)\n  --addongap=INTEGER    Set add-on gap in multiples of X-dimension for EAN/UPC\n  --batch               Treat each line of input file as a separate data set\n  --bg=COLOUR           Specify a background colour (as RGB(A) or \"C,M,Y,K\")\n  --binary              Treat input as raw binary data\n  --bind                Add boundary bars\n  --bindtop             Add top boundary bar only\n  --bold                Use bold text (HRT)\n  --border=INTEGER      Set width of border in multiples of X-dimension\n  --box                 Add a box around the symbol\n  --cmyk                Use CMYK colour space in EPS/TIF symbols\n  --cols=INTEGER        Set the number of data columns in symbol\n  --compliantheight     Warn if height not compliant, and use standard default\n  -d, --data=DATA       Set the symbol data content (segment 0)\n  --direct              Send output to stdout\n  --dmiso144            Use ISO format for 144x144 Data Matrix symbols\n  --dmre                Allow Data Matrix Rectangular Extended\n  --dotsize=NUMBER      Set radius of dots in dotty mode\n  --dotty               Use dots instead of squares for matrix symbols\n  --dump                Dump hexadecimal representation to stdout\n  -e, --ecinos          Display ECI (Extended Channel Interpretation) table\n  --eci=INTEGER         Set the ECI code for the data (segment 0)\n  --embedfont           Embed font in vector output (SVG only)\n  --esc                 Process escape sequences in input data\n  --extraesc            Process symbology-specific escape sequences (Code 128)\n  --fast                Use faster encodation or other shortcuts if available\n  --fg=COLOUR           Specify a foreground colour (as RGB(A) or \"C,M,Y,K\")\n  --filetype=TYPE       Set output file type BMP/EMF/EPS/GIF/PCX/PNG/SVG/TIF/TXT\n  --fullmultibyte       Use multibyte for binary/Latin (QR/Han Xin/Grid Matrix)\n  --gs1                 Treat input as GS1 compatible data\n  --gs1nocheck          Do not check validity of GS1 data\n  --gs1parens           Process parentheses \"()\" as GS1 AI delimiters, not \"[]\"\n  --gssep               Use separator GS for GS1 (Data Matrix)\n  --guarddescent=NUMBER Set height of guard bar descent in X-dims (EAN/UPC)\n  --guardwhitespace     Add quiet zone indicators (\"<\"/\">\") to HRT (EAN/UPC)\n  -h, --help            Display help message\n  --height=NUMBER       Set height of symbol in multiples of X-dimension\n  --heightperrow        Treat height as per-row\n  -i, --input=FILE      Read input data from FILE\n  --init                Create Reader Initialisation (Programming) symbol\n  --mask=INTEGER        Set masking pattern to use (QR/Han Xin/DotCode)\n  --mirror              Use batch data to determine filename\n  --mode=INTEGER        Set encoding mode (MaxiCode/Composite)\n  --nobackground        Remove background (EMF/EPS/GIF/PNG/SVG/TIF only)\n  --noquietzones        Disable default quiet zones\n  --notext              Remove human readable text (HRT)\n  -o, --output=FILE     Send output to FILE. Default is out.png\n  --primary=STRING      Set primary message (MaxiCode/Composite)\n  --quietzones          Add compliant quiet zones\n  -r, --reverse         Reverse colours (white on black)\n  --rotate=INTEGER      Rotate symbol by INTEGER (0, 90, 180, 270) degrees\n  --rows=INTEGER        Set number of rows (Codablock-F/PDF417)\n  --scale=NUMBER        Adjust size of X-dimension\n  --scalexdimdp=X[,R]   Adjust size to X-dimension X at resolution R\n  --scmvv=INTEGER       Prefix SCM with \"[)>\\R01\\Gvv\" (vv is INTEGER) (MaxiCode)\n  --secure=INTEGER      Set error correction level (ECC)\n  --segN=ECI,DATA       Set the ECI & data content for segment N, where N 1 to 9\n  --separator=INTEGER   Set height of row separator bars (stacked symbologies)\n  --small               Use small text (HRT)\n  --square              Force Data Matrix symbols to be square\n  --structapp=I,C[,ID]  Set Structured Append info (I index, C count)\n  -t, --types           Display table of barcode types\n  --textgap=NUMBER      Adjust gap between barcode and HRT in multiples of X-dim\n  --vers=INTEGER        Set symbol version (size, check digits, other options)\n  -v, --version         Display Zint version\n  --vwhitesp=INTEGER    Set height of vertical whitespace in multiples of X-dim\n  -w, --whitesp=INTEGER Set width of horizontal whitespace in multiples of X-dim\n  --werror              Convert all warnings into errors"
+                "returncode": 1,
+                "text": "(zbarcam-gtk:3101): Gtk-WARNING **: 22:44:59.019: cannot open display:"
               }
             ]
           }
         ],
-        "package": "zint",
+        "package": "zbarcam-gtk",
         "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "2.13.0-1build3"
+        "version": "0.23.93-4build3"
       },
       "status": "CONTRACT_REJECTED",
       "supplier": {
-        "archive_sha256": "cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769",
+        "archive_sha256": "6563248be2191396961f4347522c8273b6e9975b20677e8b5dc7f38f4c1df5a1",
         "binding_kind": "apt",
-        "description": "command line utility to encode data in barcode symbols",
+        "description": "QR code / bar code scanner and decoder (Gtk camera tool)",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "barcode"
+          "barcode",
+          "code"
         ],
-        "name": "zint",
+        "name": "zbarcam-gtk",
         "packages": [],
-        "query": "128",
+        "query": "code",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "2.13.0-1build3",
+        "score": 40,
+        "version": "0.23.93-4build3",
         "zero_cost_eligible": true
       }
     },
     {
       "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
       "probe": {
-        "archive_sha256": "869908686b1df48db14b3420be8e1a0ce060677263c222eb3f6265de706501fc",
+        "archive_sha256": "1a6bc737f55ca4b1cfb1bd945d5b091c3cfaf37b715ec7d56f8046899d67fcef",
         "executables": [
           {
-            "executable": "/usr/bin/zint-qt",
+            "executable": "/usr/bin/zbarcam-qt",
             "help_attempts": [
               {
                 "flag": "--help",
@@ -350,29 +271,116 @@
             ]
           }
         ],
-        "package": "zint-qt",
+        "package": "zbarcam-qt",
         "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "2.13.0-1build3"
+        "version": "0.23.93-4build3"
       },
       "status": "CONTRACT_REJECTED",
       "supplier": {
-        "archive_sha256": "869908686b1df48db14b3420be8e1a0ce060677263c222eb3f6265de706501fc",
+        "archive_sha256": "1a6bc737f55ca4b1cfb1bd945d5b091c3cfaf37b715ec7d56f8046899d67fcef",
         "binding_kind": "apt",
-        "description": "Zint Barcode Studio, a QT frontend to zint",
+        "description": "QR code / bar code scanner and decoder (Qt camera tool)",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "barcode"
+          "barcode",
+          "code"
         ],
-        "name": "zint-qt",
+        "name": "zbarcam-qt",
         "packages": [],
-        "query": "128",
+        "query": "code",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "2.13.0-1build3",
+        "score": 40,
+        "version": "0.23.93-4build3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png",
+      "probe": {
+        "archive_sha256": "84c8cc3438b6b8287f611adb5429375fddd2f7ee7d45f8137d7eff8c36b2326b",
+        "executables": [
+          {
+            "executable": "/usr/bin/gir",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: /usr/bin/gir [options] [<library> <version>]\n       /usr/bin/gir (-h | --help)\n\nOptions:\n    -c, --config CONFIG Config file path (default: Gir.toml)\n    -h, --help          Show this message\n    -d, --girs-directories GIRSPATH\n                        Directories for GIR files\n    -m, --mode MODE     Work mode: doc, normal, sys or not_bound\n    -o, --target PATH   Target path\n    -p, --doc-target-path PATH\n                        Doc target path\n    -b, --make-backup   Make backup before generating\n    -s, --stats         Show statistics\n        --disable-format \n                        Disable formatting generated code\n        --check-gir-file PATH\n                        Check if the given `.gir` file is valid"
+              }
+            ]
+          }
+        ],
+        "package": "gir-rust-code-generator",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.19.0-2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "archive_sha256": "84c8cc3438b6b8287f611adb5429375fddd2f7ee7d45f8137d7eff8c36b2326b",
+        "binding_kind": "apt",
+        "description": "Generate rust source code from gir files",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "gir-rust-code-generator",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 36,
+        "version": "0.19.0-2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_TEXT_INPUT_UNRESOLVED",
+      "probe": {
+        "archive_sha256": "0fe2930e58a69f9550dfa0a9b609d1684585d4fdf0d50841c3b8f59416be7510",
+        "executables": [
+          {
+            "executable": "/usr/bin/autodia",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "getting handlers..\ngetting pattern for perl\nAutoDia - Automatic Dia XML. Copyright 2001 A Trevena\n\nusage:\nautodia ([-i filename [-p path] ] or  [-d directory [-r] ]) [options]\nautodia -i filename            : use filename as input\nautodia -i \"filea fileb filec\" : use filea, fileb and filec as input\nautodia -i filename -p ..      : use ../filename as input file\nautodia -d directoryname       : use *.pl/pm in directoryname as input files\nautodia -d 'foo bar quz'       : use *pl/pm in directories foo, bar and quz as input files\nautodia -d directory -r        : use *pl/pm in directory and its subdirectories as input files\nautodia -d directory -F        : use files in directory but only one file per diagram\nautodia -d directory -C        : use files in directory but skip CVS directories\nautodia -o outfile.xml         : use outfile.xml as output file (otherwise uses autodial.out.dia)\nautodia -O                     : output to stdout\nautodia -l language            : parse source as language (ie: C) and look for appropriate filename extensions if also -d\nautodia -t templatefile        : use templatefile as template (otherwise uses default)\nautodia -l DBI -i \"mysql:test:localhost\" -U username -P password : use the test database on localhost with username and password as username and password\nautodia -l Mason -i \"/index.html\" -p comp_root -G '$c' : use HTML::Mason to fetch /index.html from comp_root and show all components in reach. -G corresponds to allow_globals.\nautodia -z                     : use graphviz to produce dot, gif, jpg or png output\nautodia -Z                     : use springgraph to produce png output\nautodia -v                     : use vcg to output postscript\nautodia -D                     : ignore dependencies (ie do not process or display dependencies)\nautodia -K                     : process dependance but do not display in output\nautodia -k                     : process inheritance but do not display in output\nautodia -S                     : silent mode, no output to stdout except with -O\nautodia -s skipfile            : exclude files or packagenames matching those listed in file\nautodia -H                     : show only public/visible methods and attributes\nautodia -m                     : show only Class methods\nautodia -M                     : do not show Class Methods\nautodia -a                     : show only Class Attributes\nautodia -A                     : do not show Class Attributes\nautodia -h                     : display this help message\nautodia -V                     : display copyright message and version number\n\n\n\n/usr/bin/autodia version [unknown] calling Getopt::Std::getopts (version 1.13 [paranoid]),\nrunning under Perl version 5.38.2.\n\nUsage: autodia [-OPTIONS [-MORE_OPTIONS]] [--] [PROGRAM_ARG1 ...]\n\nThe following single-character options are accepted:\n\tWith arguments: -s -i -o -p -d -t -l -U -P -G\n\tBoolean (without arguments): -K -k -F -C -S -D -O -m -M -a -A -r -h -H -z -Z -v -V\n\nOptions may be merged together.  -- stops processing of options.\nSpace is not required between options and their arguments.\n\nFor more details run\n\tperldoc -F /usr/bin/autodia\n  [Now continuing due to backward compatibility and excessive paranoia.\n   See 'perldoc Getopt::Std' about $Getopt::Std::STANDARD_HELP_VERSION.]"
+              }
+            ]
+          }
+        ],
+        "package": "autodia",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "2.14-5"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "archive_sha256": "0fe2930e58a69f9550dfa0a9b609d1684585d4fdf0d50841c3b8f59416be7510",
+        "binding_kind": "apt",
+        "description": "generates Dia UML diagrams from source code, XML or data",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "autodia",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.14-5",
         "zero_cost_eligible": true
       }
     },
@@ -414,7 +422,7 @@
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 12,
+        "score": 32,
         "version": "1.15-1.2",
         "zero_cost_eligible": true
       }
@@ -422,28 +430,28 @@
     {
       "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.png",
       "probe": {
-        "archive_sha256": "6c9110a0d75b187e82722b3bce7a15a0d463b49729c245366e2367ccc2c6e234",
+        "archive_sha256": "af062a2868332e56d46ce6d1a2710d5d289256b3631e8f7b1aaccf55fa32a700",
         "executables": [
           {
-            "executable": "/usr/bin/cproto",
+            "executable": "/usr/bin/cbindgen",
             "help_attempts": [
               {
                 "flag": "--help",
-                "returncode": 1,
-                "text": "cproto: invalid option -- '-'\nusage: cproto [ option ... ] [ file ... ]\nOptions:\n  -a, -t           Convert function definitions to ANSI or traditional style\n  -b               Rewrite function definitions in both styles\n  -c               Enable comments in prototype parameters\n  -C template      Set format for function definition with parameter comments\n  -D name[=value]  Define C preprocessor symbol\n  -d               Omit prototype macro definition\n  -E 0             Do not run any C preprocessor\n  -E command       Run specified C preprocessor command\n  -e               Output \"extern\" keyword before global declarations\n  -f n             Set function prototype style (0 to 3)\n  -F template      Set function definition format template \" int f (a, b)\"\n  -I directory     Add #include search directory\n  -i               Output inline declarations also\n  -l               Generate output in lint-library style\n  -M name          Set name of prototype macro\n  -m               Put macro around prototype parameters\n  -N name          Set parameter type for no-parameter functions\n  -n               Do not fill in \"void\" for no-parameter functions\n  -O file          Redirect errors to file\n  -o file          Redirect output to file\n  -p               Disable formal parameter promotion\n  -P template      Set prototype format template \" int f (a, b)\"\n  -q               Disable include file read failure messages\n  -s               Output static declarations also\n  -S               Output static declarations only\n  -T               Output type definitions\n  -U name          Undefine C preprocessor symbol\n  -v               Output variable declarations\n  -V               Print version information\n  -X level         Limit externs to given include-level\n  -x               Output variables and functions declared \"extern\""
+                "returncode": 0,
+                "text": "cbindgen 0.26.0\nGenerate C bindings for a Rust library\n\nUSAGE:\n    cbindgen [OPTIONS] [--] [INPUT]\n\nARGS:\n    <INPUT>    A crate directory or source file to generate bindings for. In general this is the\n               folder where the Cargo.toml file of source Rust library resides.\n\nOPTIONS:\n    -c, --config <PATH>               Specify path to a `cbindgen.toml` config to use\n        --clean                       Whether to use a new temporary directory for expanding macros.\n                                      Affects performance, but might be required in certain build\n                                      processes.\n        --cpp-compat                  Whether to add C++ compatibility to generated C bindings\n        --crate <CRATE_NAME>          If generating bindings for a crate, the specific crate to\n                                      generate bindings for\n    -d, --parse-dependencies          Whether to parse dependencies when generating bindings\n        --depfile <PATH>...           Generate a depfile at the given Path listing the source files\n                                      cbindgen traversed when generating the bindings. Useful when\n                                      integrating cbindgen into 3rd party build-systems. This option\n                                      is ignored if `--out` is missing.\n    -h, --help                        Print help information\n    -l, --lang <LANGUAGE>             Specify the language to output bindings in [possible values:\n                                      c++, C++, c, C, cython, Cython]\n        --lockfile <PATH>             Specify the path to the Cargo.lock file explicitly. If this is\n                                      not specified, the Cargo.lock file is searched for in the same\n                                      folder as the Cargo.toml file. This option is useful for\n                                      projects that use workspaces.\n        --metadata <PATH>             Specify the path to the output of a `cargo metadata` command\n                                      that allows to get dependency information. This is useful\n                                      because cargo metadata may be the longest part of cbindgen\n                                      runtime, and you may want to share it across cbindgen\n                                      invocations. By default cbindgen will run `cargo metadata\n                                      --all-features --format-version 1 --manifest-path\n                                      <path/to/crate/Cargo.toml>\n    -o, --output <PATH>               The file to output the bindings to\n        --only-target-dependencies    Only fetch dependencies needed by the target platform. The\n                                      target platform defaults to the host platform; set TARGET to\n                                      override.\n        --profile <PROFILE>           Specify the profile to use when expanding macros. Has no\n                                      effect otherwise. [possible values: Debug, debug, Release,\n                                      release]\n    -q, --quiet                       Report errors only (overrides verbosity options).\n    -s, --style <STYLE>               Specify the declaration style to use for bindings [possible\n                                      values: Both, both, Tag, tag, Type, type]\n    -v                                Enable verbose logging\n    -V, --version                     Print version information\n        --verify                      Generate bindings and compare it to the existing bindings file\n                                      and error if they are different"
               }
             ]
           }
         ],
-        "package": "cproto",
+        "package": "cbindgen",
         "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "4.7v-2"
+        "version": "0.26.0-3"
       },
       "status": "CONTRACT_REJECTED",
       "supplier": {
-        "archive_sha256": "6c9110a0d75b187e82722b3bce7a15a0d463b49729c245366e2367ccc2c6e234",
+        "archive_sha256": "af062a2868332e56d46ce6d1a2710d5d289256b3631e8f7b1aaccf55fa32a700",
         "binding_kind": "apt",
-        "description": "utilities to generate C function prototypes from C source code",
+        "description": "Generates C bindings from Rust code",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
@@ -451,14 +459,57 @@
           "code",
           "generate"
         ],
-        "name": "cproto",
+        "name": "cbindgen",
         "packages": [],
         "query": "generate",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 12,
-        "version": "4.7v-2",
+        "score": 32,
+        "version": "0.26.0-3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "e6851734d45d3898340306d3048b2d269c4d42fdf706fe70c152dae7b0f5e4b6",
+        "executables": [
+          {
+            "executable": "/usr/bin/codfis",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "Can't open display:"
+              }
+            ]
+          }
+        ],
+        "package": "codfis",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.4.7-2build4"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "archive_sha256": "e6851734d45d3898340306d3048b2d269c4d42fdf706fe70c152dae7b0f5e4b6",
+        "binding_kind": "apt",
+        "description": "tool to generate Italian fiscal codes (codice fiscale)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "code",
+          "generate"
+        ],
+        "name": "codfis",
+        "packages": [],
+        "query": "generate",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.4.7-2build4",
         "zero_cost_eligible": true
       }
     }
