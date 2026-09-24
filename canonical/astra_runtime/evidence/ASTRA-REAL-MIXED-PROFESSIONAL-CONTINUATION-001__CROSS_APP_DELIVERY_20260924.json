@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_DELIVERY_RECEIPT_V1",
+  "mission_id": "ASTRA-REAL-MIXED-PROFESSIONAL-CONTINUATION-001",
+  "canonical_head_before_delivery": "d5814c4ddaae5dba9bc53be021013d6b884be1c6",
+  "source_checkpoint_artifact": "C:\\Users\\muham\\Desktop\\PROJECT_BRAIN_CURRENT_CAPABILITY_BRIEF_2026-09-22.md",
+  "source_host": {
+    "device_name": "Mo",
+    "device_id": "2dd01132-a622-46ff-bb43-1ac1e0d70960",
+    "observed_status": "offline",
+    "last_seen": "2026-09-24T15:51:38.464+00:00"
+  },
+  "exact_source_artifact_transfer": "NOT_PERFORMED_SOURCE_HOST_OFFLINE",
+  "exact_source_recovery_attempts": {
+    "github_mirror_search": "NO_MATCH",
+    "google_drive_search": "NO_MATCH",
+    "archived_conversation_exact_filename_search": "NO_MATCH"
+  },
+  "new_consequential_effect": {
+    "surface": "Google Docs",
+    "document_id": "1O66ccqOfVme_UYNpGDmy6_gtXm7ERoKXErIRJFdY0hw",
+    "document_url": "https://docs.google.com/document/d/1O66ccqOfVme_UYNpGDmy6_gtXm7ERoKXErIRJFdY0hw",
+    "drive_parent_folder_id": "1gU1vjyOuajy4zhQiKe03Y_ShLFXMrhAS",
+    "readback_revision_id": "ANLCKQmBVvj8YieGHsRHe4OXs33VosJmV3TGXHwdozPv2Y4BXSdbQVibLKMZdf452QJGMgtVATiVf2F9-tlWGhe0Id6EMeZ3pQauXObDYQ",
+    "normalized_readback_sha256": "07b227e6d769a08c893c1a6c01e27dc17f962151fdd8d180d19e9a6cdbcef289",
+    "normalized_readback_bytes": 1560,
+    "readback_status": "VERIFIED"
+  },
+  "capability_result": {
+    "cross_application_delivery_from_live_canonical_state": "VERIFIED",
+    "continuation_from_durable_checkpoint": "VERIFIED_WITH_USER_TRIGGERED_INVOCATION",
+    "autonomous_scheduled_wake": "UNPROVEN",
+    "exact_windows_source_artifact_transfer": "UNPROVEN_SOURCE_HOST_OFFLINE",
+    "direct_windows_gui_browser_delivery": "UNPROVEN_SOURCE_HOST_OFFLINE"
+  },
+  "truth_boundary": "The Google Doc was authored from live canonical GitHub state and independently read back. It is not claimed to be a byte-identical transfer of the offline Windows checkpoint artifact.",
+  "minimal_repair": "Any critical checkpoint artifact required for continuation must be mirrored off-host at checkpoint time with a content hash and canonical reference before the local-only copy is allowed to become a critical dependency.",
+  "incremental_spend_usd": 0,
+  "val_town_used": false,
+  "sprites_used": false
+}
