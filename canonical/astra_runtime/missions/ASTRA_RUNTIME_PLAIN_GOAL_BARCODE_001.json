@@ -33,6 +33,7 @@
     "manually_selected_supplier": false,
     "manual_binding_forbidden": true,
     "replay_after_supplier_race_commit": "fd28e539e2285f26ed6a1bf19fb12c7cc64df53b",
-    "replay_after_distinctive_discovery_ranking": "7f1b6c424740e3131f5eadf8f559ac89c2206917"
+    "replay_after_distinctive_discovery_ranking": "7f1b6c424740e3131f5eadf8f559ac89c2206917",
+    "replay_after_structured_help_commit": "777c4aa0fb54790a88b7c65783ccb5d1e2a149fd"
   }
 }
