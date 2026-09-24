@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-24T21:13:23.927485+00:00",
+  "mission_id": "ASTRA-CAPABILITY-BINDING-PDF-MCP-INSPECTION-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_CAPABILITY_BINDING_PDF_MCP_INSPECTION_001.json",
+  "mission_sha256": "50c57c457d297726928f7f2936c3bd9d85c28561a25c273f301ce843d4d62db1",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "b5c582267e18b2bc17855ecee4c513ce034a5c7dfb849ffc83959298ae715389",
+  "status": "COMPLETE",
+  "steps_completed": 2
+}
