@@ -16,6 +16,7 @@
     "step_id": "probe-jq-pandoc",
     "step_index": 0
   },
+  "completed_at_utc": "2026-09-24T23:53:54.150425+00:00",
   "created_at_utc": "2026-09-24T23:53:21.217760+00:00",
   "history": [
     {
@@ -31,14 +32,28 @@
       },
       "step_id": "probe-jq-pandoc",
       "step_index": 0
+    },
+    {
+      "completed_at_utc": "2026-09-24T23:53:54.150028+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\nfor P in jq pandoc; do\n  echo ===${P}_POLICY===\n  apt-cache policy \"$P\" || true\n  echo ===${P}_SHOW===\n  apt-cache show \"$P\" 2>/dev/null | grep -E '^(Package|Version|SHA256|Description):' | head -n 20 || true\ndone\necho ===JQ_HELP===\n(jq --help || true) | head -n 100\necho ===PANDOC_HELP===\n(pandoc --help || true) | head -n 120\necho STRUCTURED_REPORT_SUPPLIER_PROBE_COMPLETE",
+        "duration_s": 3.611,
+        "returncode": 0,
+        "stderr": "/bin/bash: line 11: pandoc: command not found\n",
+        "stdout": "===jq_POLICY===\njq:\n  Installed: 1.7.1-3ubuntu0.24.04.2\n  Candidate: 1.7.1-3ubuntu0.24.04.2\n  Version table:\n *** 1.7.1-3ubuntu0.24.04.2 500\n        500 mirror+file:/etc/apt/apt-mirrors.txt noble-updates/main amd64 Packages\n        500 mirror+file:/etc/apt/apt-mirrors.txt noble-security/main amd64 Packages\n        100 /var/lib/dpkg/status\n     1.7.1-3build1 500\n        500 mirror+file:/etc/apt/apt-mirrors.txt noble/main amd64 Packages\n===jq_SHOW===\nPackage: jq\nVersion: 1.7.1-3ubuntu0.24.04.2\nSHA256: f59183392f84fe67b407b494d8ba6185e9b0e4a106ffcb369490bd20a83fd40e\nPackage: jq\nVersion: 1.7.1-3build1\nSHA256: 36276dcac711c742776377001886f5a72293391446b5d5e7646541336f2234aa\n===pandoc_POLICY===\npandoc:\n  Installed: (none)\n  Candidate: 3.1.3+ds-2\n  Version table:\n     3.1.3+ds-2 500\n        500 mirror+file:/etc/apt/apt-mirrors.txt noble/universe amd64 Packages\n===pandoc_SHOW===\nPackage: pandoc\nVersion: 3.1.3+ds-2\nSHA256: 021cf93191aea780c273e82ca3ab575b1522992705b6c28e350aa502573a27b5\n===JQ_HELP===\njq - commandline JSON processor [version 1.7]\n\nUsage:\tjq [options] <jq filter> [file...]\n\tjq [options] --args <jq filter> [strings...]\n\tjq [options] --jsonargs <jq filter> [JSON_TEXTS...]\n\njq is a tool for processing JSON inputs, applying the given filter to\nits JSON text inputs and producing the filter's results as JSON on\nstandard output.\n\nThe simplest filter is ., which copies jq's input to its output\nunmodified except for formatting. For more advanced filters see\nthe jq(1) manpage (\"man jq\") and/or https://jqlang.github.io/jq/.\n\nExample:\n\n\t$ echo '{\"foo\": 0}' | jq .\n\t{\n\t  \"foo\": 0\n\t}\n\nCommand options:\n  -n, --null-input          use `null` as the single input value;\n  -R, --raw-input           read each line as string instead of JSON;\n  -s, --slurp               read all inputs into an array and use it as\n                            the single input value;\n  -c, --compact-output      compact instead of pretty-printed output;\n  -r, --raw-output          output strings without escapes and quotes;\n      --raw-output0         implies -r and output NUL after each output;\n  -j, --join-output         implies -r and output without newline after\n                            each output;\n  -a, --ascii-output        output strings by only ASCII characters\n                            using escape sequences;\n  -S, --sort-keys           sort keys of each object on output;\n  -C, --color-output        colorize JSON output;\n  -M, --monochrome-output   disable colored output;\n      --tab                 use tabs for indentation;\n      --indent n            use n spaces for indentation (max 7 spaces);\n      --unbuffered          flush output stream after each output;\n      --stream              parse the input value in streaming fashion;\n      --stream-errors       implies --stream and report parse error as\n                            an array;\n      --seq                 parse input/output as application/json-seq;\n  -f, --from-file file      load filter from the file;\n  -L directory              search modules from the directory;\n      --arg name value      set $name to the string value;\n      --argjson name value  set $name to the JSON value;\n      --slurpfile name file set $name to an array of JSON values read\n                            from the file;\n      --rawfile name file   set $name to string contents of file;\n      --args                consume remaining arguments as positional\n                            string values;\n      --jsonargs            consume remaining arguments as positional\n                            JSON values;\n  -e, --exit-status         set exit status code based on the output;\n  -V, --version             show the version;\n  --build-configuration     show jq's build configuration;\n  -h, --help                show the help;\n  --                        terminates argument processing;\n\nNamed arguments are also available as $ARGS.named[], while\npositional arguments are available as $ARGS.positional[].\n===PANDOC_HELP===\nSTRUCTURED_REPORT_SUPPLIER_PROBE_COMPLETE\n"
+      },
+      "step_id": "probe-jq-pandoc",
+      "step_index": 0
     }
   ],
   "mission_id": "ASTRA-STRUCTURED-REPORT-SUPPLIER-PROBE-001",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_STRUCTURED_REPORT_SUPPLIER_PROBE_001.json",
-  "mission_sha256": "4af3a7e61594f7056b147e15bdfe088ff4b30e9ea36f563719bb05d8310bc77a",
-  "next_step": 0,
+  "mission_sha256": "006801d40673bb98151ebeefce574578b7347dd0c40375befc5500e95752ba6f",
+  "next_step": 1,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
-  "status": "BLOCKED",
-  "updated_at_utc": "2026-09-24T23:53:21.220066+00:00"
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-24T23:53:54.150045+00:00"
 }

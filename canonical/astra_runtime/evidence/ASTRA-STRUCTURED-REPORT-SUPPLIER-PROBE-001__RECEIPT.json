@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-24T23:53:54.150903+00:00",
+  "mission_id": "ASTRA-STRUCTURED-REPORT-SUPPLIER-PROBE-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_STRUCTURED_REPORT_SUPPLIER_PROBE_001.json",
+  "mission_sha256": "006801d40673bb98151ebeefce574578b7347dd0c40375befc5500e95752ba6f",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "456f2a2d2c845200abb23c6b085e19a020a2fd17fe8e48c0538e0c1e1db3a4db",
+  "status": "COMPLETE",
+  "steps_completed": 2
+}
