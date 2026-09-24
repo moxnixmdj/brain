@@ -406,6 +406,26 @@ def _load_capability_discovery():
     spec.loader.exec_module(module)
     return module
 
+def _load_goal_compiler():
+    path=pathlib.Path(__file__).resolve().with_name("goal_compiler.py")
+    spec=importlib.util.spec_from_file_location("project_brain_goal_compiler",path)
+    if spec is None or spec.loader is None:
+        raise Blocker("GOAL_COMPILER_LOAD_FAILED")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    return module
+
+def _compile_plain_goal(goal):
+    compiler=_load_goal_compiler()
+    try:
+        return compiler.compile_goal(goal,_load_bound_capability_registry(),ROOT)
+    except Exception as e:
+        code=getattr(e,"code",type(e).__name__)
+        detail=str(getattr(e,"detail","") or "")
+        suffix=(":"+detail) if detail else ""
+        raise Blocker("GOAL_COMPILATION_FAILED:"+str(code)+suffix) from e
+
 def _discover_unreachable_effects(mission, error):
     detail=str(getattr(error,"detail","") or "")
     effects=[x.strip() for x in detail.split(",") if x.strip()]
@@ -541,6 +561,29 @@ def run_goal(step, mission):
     direct=_run_model_independent_goal(step, mission, goal)
     if direct is not None:
         return direct
+    # No hand-authored capability graph or action plan: attempt a bounded,
+    # deterministic compilation against capabilities already verified in Brain.
+    # Unknown/ambiguous goals fail closed rather than silently becoming guesses.
+    try:
+        compiled=_compile_plain_goal(goal)
+    except Blocker:
+        if not step.get("allow_optional_model_planner",False):
+            raise
+    else:
+        derived=dict(step)
+        derived["capability_problem"]=compiled
+        capability_result=_run_capability_planned_goal(derived, mission, goal)
+        if capability_result is None:
+            raise Blocker("GOAL_COMPILER_PLAN_EXECUTION_MISSING")
+        capability_result["goal_compilation"]={
+          "compiler_mode":compiled.get("compiler_mode"),
+          "selected_capability":compiled.get("selected_capability"),
+          "score":compiled.get("score"),
+          "match_evidence":compiled.get("match_evidence"),
+          "inputs":compiled.get("inputs"),
+          "target_effects":compiled.get("target_effects"),
+        }
+        return capability_result
     if not step.get("allow_optional_model_planner",False):
         raise Blocker("MODEL_INDEPENDENT_CONTROLLER_PLAN_REQUIRED")
     observations=[]
