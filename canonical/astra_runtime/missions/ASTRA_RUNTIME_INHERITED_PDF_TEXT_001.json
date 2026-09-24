@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-INHERITED-PDF-TEXT-001",
+  "purpose": "Prove a verified bound capability is inherited automatically from canonical Brain state without being redeclared in the mission.",
+  "goal": "Extract known text from a repository-local PDF using whatever verified capability the Brain already owns.",
+  "steps": [
+    {
+      "id": "regressions-and-input",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/tests/test_bound_capabilities.py\nmkdir -p canonical/astra_runtime/tmp\npython - <<'PY'\nfrom pathlib import Path\nout=Path(\"canonical/astra_runtime/tmp/INHERITED_PDF_TEXT_TEST.pdf\")\nstream=b\"BT /F1 18 Tf 72 720 Td (PROJECT BRAIN INHERITED CAPABILITY VERIFIED) Tj ET\"\nobjs=[\n b\"<< /Type /Catalog /Pages 2 0 R >>\",\n b\"<< /Type /Pages /Kids [3 0 R] /Count 1 >>\",\n b\"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>\",\n b\"<< /Length \"+str(len(stream)).encode()+b\" >>\\nstream\\n\"+stream+b\"\\nendstream\",\n b\"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>\"\n]\npdf=bytearray(b\"%PDF-1.4\\n\"); offsets=[0]\nfor i,obj in enumerate(objs,1):\n    offsets.append(len(pdf)); pdf.extend(f\"{i} 0 obj\\n\".encode()); pdf.extend(obj); pdf.extend(b\"\\nendobj\\n\")\nxref=len(pdf); pdf.extend(f\"xref\\n0 {len(objs)+1}\\n\".encode()); pdf.extend(b\"0000000000 65535 f \\n\")\nfor off in offsets[1:]: pdf.extend(f\"{off:010d} 00000 n \\n\".encode())\npdf.extend(f\"trailer\\n<< /Size {len(objs)+1} /Root 1 0 R >>\\nstartxref\\n{xref}\\n%%EOF\\n\".encode())\nout.write_bytes(pdf)\nprint(\"INHERITED_INPUT_READY\",len(pdf))\nPY",
+      "verify": {
+        "type": "returncode_zero"
+      }
+    },
+    {
+      "id": "plan-from-inherited-capability-registry",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "capability_problem": {
+        "initial_facts": [
+          "pdf.file.available"
+        ],
+        "target_effects": [
+          "pdf.extract.text"
+        ],
+        "inputs": {
+          "pdf_path": "canonical/astra_runtime/tmp/INHERITED_PDF_TEXT_TEST.pdf"
+        },
+        "capabilities": [],
+        "finish_summary": "INHERITED_PDF_TEXT_COMPLETE"
+      },
+      "verify": {
+        "type": "stdout_contains",
+        "text": "INHERITED_PDF_TEXT_COMPLETE"
+      }
+    }
+  ],
+  "expected_inherited_capability": "pdf.extract.text.pypdf",
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "explicit_pdf_capability_in_mission": false
+  }
+}
