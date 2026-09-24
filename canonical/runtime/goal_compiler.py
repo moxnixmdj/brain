@@ -25,6 +25,11 @@ STOPWORDS={
     "which","is","are","be","this","that","into","on","in","visible"
 }
 
+GENERIC_MATCH_TOKENS={
+    "generate","image","text","extract","create","save","output","input",
+    "file","read","write","convert","process","data"
+}
+
 
 def _tokens(value):
     return {
@@ -117,10 +122,11 @@ def _score(goal, cid, entry):
     # Requirements are highly informative for environment qualifiers such as
     # image-only/scanned/local/etc. Provides represent the requested effect.
     effect_matches=(gt & provides) | (gt & identity) | (gt & keywords)
-    # Preconditions may refine a real effect match but may never create one.
-    # This prevents a word like "image" from turning an unrelated QR goal
-    # into a PDF/OCR invocation.
-    if not effect_matches:
+    distinctive={x for x in effect_matches if x not in GENERIC_MATCH_TOKENS}
+    # Preconditions and generic verbs/nouns may refine a match but may never
+    # create one. A barcode-image goal must not become a QR-image action merely
+    # because both say "generate" and "image".
+    if not effect_matches or not distinctive:
         return 0,0,{
             "goal_tokens":sorted(gt),
             "matched_provides":[],
