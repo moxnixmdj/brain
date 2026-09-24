@@ -107,6 +107,7 @@ class CapabilityDiscoveryTests(unittest.TestCase):
         self.assertNotIn("astra",queries)
         self.assertNotIn("runtime",queries)
         self.assertNotIn("tmp",queries)
+        self.assertNotIn("with",queries)
 
     def test_discovery_never_binds_during_search(self):
         out = discovery.search_mcp_registry("filesystem.read", opener=fake_open)
