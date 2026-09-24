@@ -35,6 +35,7 @@
     "replay_after_supplier_race_commit": "fd28e539e2285f26ed6a1bf19fb12c7cc64df53b",
     "replay_after_distinctive_discovery_ranking": "7f1b6c424740e3131f5eadf8f559ac89c2206917",
     "replay_after_structured_help_commit": "777c4aa0fb54790a88b7c65783ccb5d1e2a149fd",
-    "replay_after_role_aware_supplier_ranking_commit": "b4658ce596b17b41f42bbe42125ee8240b65598f"
+    "replay_after_role_aware_supplier_ranking_commit": "b4658ce596b17b41f42bbe42125ee8240b65598f",
+    "replay_after_distinctive_object_supplier_ranking_commit": "3c89b42e65b33ac8b16460a10f7f9c7946da9c3e"
   }
 }
