@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-CAPABILITY-DISCOVERY-LOCAL-OCR-001",
+  "purpose": "Search the existing zero-cost execution substrate for OCR and PDF rasterization capabilities before installing or inventing anything.",
+  "steps": [
+    {
+      "id": "probe-existing-ocr-and-pdf-tools",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport hashlib,json,pathlib,shutil,subprocess\nout={\"schema\":\"PROJECT_BRAIN_LOCAL_CAPABILITY_PROBE_V1\",\"candidates\":[]}\nfor name in (\"tesseract\",\"pdftoppm\",\"pdftotext\"):\n    path=shutil.which(name)\n    rec={\"name\":name,\"path\":path}\n    if path:\n        raw=pathlib.Path(path).read_bytes()\n        rec[\"sha256\"]=hashlib.sha256(raw).hexdigest()\n        p=subprocess.run([path,\"--version\"] if name==\"tesseract\" else [path,\"-v\"],text=True,capture_output=True)\n        rec[\"version_output\"]=(p.stdout+p.stderr)[:4000]\n        pkg=subprocess.run([\"dpkg-query\",\"-S\",path],text=True,capture_output=True)\n        rec[\"package_owner\"]=pkg.stdout.strip()[:1000]\n    out[\"candidates\"].append(rec)\npath=pathlib.Path(\"canonical/astra_runtime/evidence/ASTRA-CAPABILITY-DISCOVERY-LOCAL-OCR-001__PROBE.json\")\npath.parent.mkdir(parents=True,exist_ok=True)\npath.write_text(json.dumps(out,indent=2,sort_keys=True)+\"\\n\",encoding=\"utf-8\")\nprint(\"LOCAL_OCR_PROBE_COMPLETE\")\nprint(json.dumps(out,sort_keys=True))\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "LOCAL_OCR_PROBE_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "no_installation": true,
+    "no_network_dependency": true,
+    "no_model_controller": true
+  }
+}
