@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-24T22:41:04.154744+00:00",
+  "mission_id": "ASTRA-APT-ZBAR-DISCOVERY-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_APT_ZBAR_DISCOVERY_DIAG_001.json",
+  "mission_sha256": "9efedba5a9a706adc51e8085303f0351a538bea43a7f4ee84f9227a3b85ab4be",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "b4271ddfea474d7f72fa954b7501c09221b3eda0794ca993415634170ce36456",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
