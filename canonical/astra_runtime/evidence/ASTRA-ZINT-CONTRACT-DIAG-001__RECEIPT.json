@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-24T22:48:44.630844+00:00",
+  "mission_id": "ASTRA-ZINT-CONTRACT-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_ZINT_CONTRACT_DIAG_001.json",
+  "mission_sha256": "e9f417207f508aa5075f7153adb03efc769eceec72fdce90def7ac6a0eca5538",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "afbb9f7dc997c8397ee57a687a95badd4f00c8b389ab55d73be32707daf3aaae",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

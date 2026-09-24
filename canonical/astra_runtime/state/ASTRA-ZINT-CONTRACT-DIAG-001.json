@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-24T22:48:44.630458+00:00",
+  "created_at_utc": "2026-09-24T22:48:38.177564+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-24T22:48:44.630165+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\ndef load(name,path):\n p=pathlib.Path(path); s=importlib.util.spec_from_file_location(name,p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m); return m\nprobe=load('p','canonical/runtime/apt_cli_probe.py')\ninfer=load('i','canonical/runtime/cli_contract_inference.py')\nroot=pathlib.Path('.').resolve()\npr=probe.probe('zint','2.13.0-1build3','cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769',root)\ngoal='Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png.'\nct=infer.infer_contract(pr,goal)\nprint(json.dumps(ct,sort_keys=True))\nprint('ZINT_CONTRACT_INFERRED')\nPY",
+        "duration_s": 6.452,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"argv_template\": [\"zint\", \"-b\", \"CODE128\", \"-o\", \"${input.output_path}\", \"-d\", \"${input.text}\"], \"command\": \"zint\", \"evidence\": {\"archive_sha256\": \"cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769\", \"input_flag\": \"-d\", \"output_flag\": \"-o\", \"output_line\": \"-o, --output=FILE     Send output to FILE. Default is out.png\", \"positional_input\": null, \"probe_package\": \"zint\", \"probe_version\": \"2.13.0-1build3\", \"requested_suffix\": \".png\", \"selector\": [\"-b\", \"CODE128\"], \"usage_line\": null}, \"executable\": \"/usr/bin/zint\", \"output_path_template\": \"${input.output_path}\", \"output_prefix_hex\": \"89504e470d0a1a0a\", \"required_inputs\": [\"text\", \"output_path\"], \"schema\": \"PROJECT_BRAIN_CLI_CONTRACT_CANDIDATE_V1\", \"status\": \"CANDIDATE_REQUIRES_EFFECT_VERIFICATION\", \"timeout_s\": 60}\nZINT_CONTRACT_INFERRED\n"
+      },
+      "step_id": "probe-and-infer-zint",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-ZINT-CONTRACT-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_ZINT_CONTRACT_DIAG_001.json",
+  "mission_sha256": "e9f417207f508aa5075f7153adb03efc769eceec72fdce90def7ac6a0eca5538",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-24T22:48:44.630179+00:00"
+}
