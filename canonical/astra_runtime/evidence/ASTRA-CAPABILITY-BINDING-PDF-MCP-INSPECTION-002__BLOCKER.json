@@ -1,0 +1,17 @@
+{
+  "adapter": "shell",
+  "error": "VERIFICATION_FAILED",
+  "mission_id": "ASTRA-CAPABILITY-BINDING-PDF-MCP-INSPECTION-002",
+  "observed_at_utc": "2026-09-24T21:14:58.098722+00:00",
+  "result": {
+    "adapter": "shell",
+    "command": "set -euo pipefail\npython -m pip install --disable-pip-version-check --quiet \"mcp>=1.0\"\npython canonical/runtime/mcp_tool_inspector.py   https://chat.pdfassistant.ai/mcp   https://mcp.docwand.app/mcp   https://backend.pdfs.build/mcp   > canonical/astra_runtime/evidence/ASTRA-CAPABILITY-BINDING-PDF-MCP-INSPECTION-002__TOOLS.json",
+    "duration_s": 8.083,
+    "returncode": 2,
+    "stderr": "",
+    "stdout": ""
+  },
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "install-official-mcp-sdk-and-list-tools",
+  "step_index": 1
+}

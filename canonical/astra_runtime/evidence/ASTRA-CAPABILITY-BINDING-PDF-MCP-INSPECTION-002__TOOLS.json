@@ -1,0 +1,23 @@
+{
+  "mcp_sdk_version": "2.2.0",
+  "read_only": true,
+  "results": [
+    {
+      "error": "ExceptionGroup:unhandled errors in a TaskGroup (1 sub-exception) => [ExceptionGroup:unhandled errors in a TaskGroup (1 sub-exception) => [MCPError:Server returned an error response]]",
+      "ok": false,
+      "url": "https://chat.pdfassistant.ai/mcp"
+    },
+    {
+      "error": "ExceptionGroup:unhandled errors in a TaskGroup (1 sub-exception) => [ConnectError:[Errno -2] Name or service not known]",
+      "ok": false,
+      "url": "https://mcp.docwand.app/mcp"
+    },
+    {
+      "error": "ExceptionGroup:unhandled errors in a TaskGroup (1 sub-exception) => [ExceptionGroup:unhandled errors in a TaskGroup (1 sub-exception) => [MCPError:Server returned an error response]]",
+      "ok": false,
+      "url": "https://backend.pdfs.build/mcp"
+    }
+  ],
+  "schema": "PROJECT_BRAIN_MCP_TOOL_INTROSPECTION_V1",
+  "tool_calls_performed": 0
+}

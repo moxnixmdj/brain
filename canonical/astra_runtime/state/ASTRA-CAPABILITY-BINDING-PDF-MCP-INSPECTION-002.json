@@ -1,0 +1,58 @@
+{
+  "blocker": {
+    "adapter": "shell",
+    "error": "VERIFICATION_FAILED",
+    "mission_id": "ASTRA-CAPABILITY-BINDING-PDF-MCP-INSPECTION-002",
+    "observed_at_utc": "2026-09-24T21:14:58.098722+00:00",
+    "result": {
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython -m pip install --disable-pip-version-check --quiet \"mcp>=1.0\"\npython canonical/runtime/mcp_tool_inspector.py   https://chat.pdfassistant.ai/mcp   https://mcp.docwand.app/mcp   https://backend.pdfs.build/mcp   > canonical/astra_runtime/evidence/ASTRA-CAPABILITY-BINDING-PDF-MCP-INSPECTION-002__TOOLS.json",
+      "duration_s": 8.083,
+      "returncode": 2,
+      "stderr": "",
+      "stdout": ""
+    },
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "install-official-mcp-sdk-and-list-tools",
+    "step_index": 1
+  },
+  "created_at_utc": "2026-09-24T21:14:49.803820+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-24T21:14:50.014853+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "python canonical/tests/test_astra_runtime_verification.py && python canonical/tests/test_capability_discovery.py",
+        "duration_s": 0.211,
+        "returncode": 0,
+        "stderr": "test_existing_file_cannot_hide_nonzero_exit (__main__.RuntimeVerificationTests.test_existing_file_cannot_hide_nonzero_exit) ... ok\ntest_nonzero_requires_explicit_override (__main__.RuntimeVerificationTests.test_nonzero_requires_explicit_override) ... ok\ntest_stdout_marker_cannot_hide_nonzero_exit (__main__.RuntimeVerificationTests.test_stdout_marker_cannot_hide_nonzero_exit) ... ok\ntest_zero_exit_and_stdout_marker_pass (__main__.RuntimeVerificationTests.test_zero_exit_and_stdout_marker_pass) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.000s\n\nOK\ntest_discovery_never_binds_during_search (__main__.CapabilityDiscoveryTests.test_discovery_never_binds_during_search) ... ok\ntest_effect_query_is_deterministic (__main__.CapabilityDiscoveryTests.test_effect_query_is_deterministic) ... ok\ntest_zero_cost_candidate_ranks_before_paid_candidate (__main__.CapabilityDiscoveryTests.test_zero_cost_candidate_ranks_before_paid_candidate) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.001s\n\nOK\n",
+        "stdout": ""
+      },
+      "step_id": "verify-runtime-fail-closed-semantics",
+      "step_index": 0
+    },
+    {
+      "completed_at_utc": "2026-09-24T21:14:58.098706+00:00",
+      "ok": false,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython -m pip install --disable-pip-version-check --quiet \"mcp>=1.0\"\npython canonical/runtime/mcp_tool_inspector.py   https://chat.pdfassistant.ai/mcp   https://mcp.docwand.app/mcp   https://backend.pdfs.build/mcp   > canonical/astra_runtime/evidence/ASTRA-CAPABILITY-BINDING-PDF-MCP-INSPECTION-002__TOOLS.json",
+        "duration_s": 8.083,
+        "returncode": 2,
+        "stderr": "",
+        "stdout": ""
+      },
+      "step_id": "install-official-mcp-sdk-and-list-tools",
+      "step_index": 1
+    }
+  ],
+  "mission_id": "ASTRA-CAPABILITY-BINDING-PDF-MCP-INSPECTION-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_CAPABILITY_BINDING_PDF_MCP_INSPECTION_002.json",
+  "mission_sha256": "3aa014e86026e5dc1c4d9742c84fb89380c91af6809b7d5c1c337baf0cbab51a",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-24T21:14:58.098981+00:00"
+}
