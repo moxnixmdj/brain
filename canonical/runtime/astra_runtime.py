@@ -125,6 +125,8 @@ def _extract_json_object(text):
     return json.loads(text[a:b+1])
 
 def _planner_post(prompt, timeout_s=20):
+    if os.environ.get("ASTRA_DISABLE_MODEL_PLANNER","").strip().lower() in {"1","true","yes","on"}:
+        raise Blocker("MODEL_PLANNER_DISABLED_BY_POLICY")
     endpoint="https://text.pollinations.ai/"
     models=("openai-fast","openai","mistral")
     errors=[]
@@ -149,11 +151,64 @@ def _planner_post(prompt, timeout_s=20):
             errors.append({"model":model,"error":type(e).__name__+":"+str(e),"duration_s":round(time.monotonic()-t,3)})
     raise Blocker("PLANNER_ALL_ROUTES_FAILED:"+json.dumps(errors,sort_keys=True)[:1800])
 
+def _controller_actions(step, mission):
+    actions=step.get("controller_actions")
+    ref=step.get("controller_actions_ref")
+    if actions is None and ref:
+        actions=mission.get(ref)
+    if actions is None:
+        return None
+    if not isinstance(actions,list) or not actions:
+        raise Blocker("MODEL_INDEPENDENT_CONTROLLER_ACTIONS_INVALID")
+    limit=max(1,min(int(step.get("max_controller_actions",16)),64))
+    if len(actions)>limit:
+        raise Blocker("MODEL_INDEPENDENT_CONTROLLER_ACTION_LIMIT")
+    return actions
+
+def _run_model_independent_goal(step, mission, goal):
+    actions=_controller_actions(step, mission)
+    if actions is None:
+        return None
+    allowed_types={"read_file","list_tree","search_text","http_get","finish"}
+    trace=[]
+    for cycle, raw_action in enumerate(actions):
+        if not isinstance(raw_action,dict):
+            raise Blocker("MODEL_INDEPENDENT_CONTROLLER_ACTION_NOT_OBJECT")
+        action=dict(raw_action)
+        typ=action.get("type")
+        if typ not in allowed_types:
+            raise Blocker("MODEL_INDEPENDENT_CONTROLLER_ACTION_REJECTED:"+str(typ))
+        if not isinstance(action.get("args",{}),dict):
+            raise Blocker("MODEL_INDEPENDENT_CONTROLLER_ARGS_INVALID")
+        action.setdefault("args",{})
+        result=_goal_action(action)
+        trace.append({"cycle":cycle,"plan":action,"result":result})
+        if typ=="finish":
+            summary=result.get("summary","")
+            if not summary.strip():
+                raise Blocker("MODEL_INDEPENDENT_CONTROLLER_EMPTY_FINISH")
+            return {
+              "adapter":"goal","returncode":0,
+              "stdout":summary,
+              "controller_mode":"MODEL_INDEPENDENT_ACTION_PLAN",
+              "planner_source":None,
+              "planner_transport":None,
+              "planner_model_last":None,
+              "cycles":cycle+1,"trace":trace,
+              "final_summary":summary
+            }
+    raise Blocker("MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH")
+
 def run_goal(step, mission):
     goal=mission.get(step.get("goal_ref","goal"), mission.get("goal"))
     if isinstance(goal,(dict,list)): goal=json.dumps(goal,sort_keys=True)
     goal=str(goal or "").strip()
     if not goal: raise Blocker("GOAL_REQUIRED")
+    direct=_run_model_independent_goal(step, mission, goal)
+    if direct is not None:
+        return direct
+    if not step.get("allow_optional_model_planner",False):
+        raise Blocker("MODEL_INDEPENDENT_CONTROLLER_PLAN_REQUIRED")
     observations=[]
     trace=[]
     max_cycles=max(1,min(int(step.get("max_cycles",6)),8))
@@ -276,6 +331,7 @@ def run_goal(step, mission):
             return {
               "adapter":"goal","returncode":0,
               "stdout":summary,
+              "controller_mode":"OPTIONAL_MODEL_ADVISORY",
               "planner_source":"https://text.pollinations.ai/",
               "planner_transport":"POST_BOUNDED_FAILOVER",
               "planner_model_last":planned.get("model"),
