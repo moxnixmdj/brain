@@ -20,11 +20,18 @@ def _dump_model(value):
     return str(value)
 
 
+def _format_exception(exc):
+    children=getattr(exc,"exceptions",None)
+    head=type(exc).__name__+":"+str(exc)
+    if children:
+        return head+" => ["+" | ".join(_format_exception(child) for child in children)+"]"
+    return head
+
 async def inspect_one(url):
     try:
         from mcp import Client
     except Exception as exc:
-        return {"url": url, "ok": False, "error": "MCP_SDK_IMPORT:" + type(exc).__name__ + ":" + str(exc)}
+        return {"url": url, "ok": False, "error": "MCP_SDK_IMPORT:" + _format_exception(exc)}
 
     try:
         async with Client(url) as client:
@@ -48,7 +55,7 @@ async def inspect_one(url):
                 "tools": tools,
             }
     except Exception as exc:
-        return {"url": url, "ok": False, "error": type(exc).__name__ + ":" + str(exc)}
+        return {"url": url, "ok": False, "error": _format_exception(exc)}
 
 
 async def main_async(urls):
