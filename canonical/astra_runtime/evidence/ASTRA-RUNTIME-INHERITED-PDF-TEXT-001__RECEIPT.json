@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-24T21:22:24.960530+00:00",
+  "mission_id": "ASTRA-RUNTIME-INHERITED-PDF-TEXT-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_INHERITED_PDF_TEXT_001.json",
+  "mission_sha256": "484d90a36648036cc6725ff06260fea4e09ef81b6027fa0acee79590ba8d11b2",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "5751b9877a96bd6c5641c96412a5f49694cbdfe3334aca201b60fc7beaf9d174",
+  "status": "COMPLETE",
+  "steps_completed": 2
+}

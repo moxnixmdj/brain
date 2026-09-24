@@ -1,0 +1,112 @@
+{
+  "completed_at_utc": "2026-09-24T21:22:24.960027+00:00",
+  "created_at_utc": "2026-09-24T21:22:21.855311+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-24T21:22:22.234308+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython canonical/tests/test_bound_capabilities.py\nmkdir -p canonical/astra_runtime/tmp\npython - <<'PY'\nfrom pathlib import Path\nout=Path(\"canonical/astra_runtime/tmp/INHERITED_PDF_TEXT_TEST.pdf\")\nstream=b\"BT /F1 18 Tf 72 720 Td (PROJECT BRAIN INHERITED CAPABILITY VERIFIED) Tj ET\"\nobjs=[\n b\"<< /Type /Catalog /Pages 2 0 R >>\",\n b\"<< /Type /Pages /Kids [3 0 R] /Count 1 >>\",\n b\"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>\",\n b\"<< /Length \"+str(len(stream)).encode()+b\" >>\\nstream\\n\"+stream+b\"\\nendstream\",\n b\"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>\"\n]\npdf=bytearray(b\"%PDF-1.4\\n\"); offsets=[0]\nfor i,obj in enumerate(objs,1):\n    offsets.append(len(pdf)); pdf.extend(f\"{i} 0 obj\\n\".encode()); pdf.extend(obj); pdf.extend(b\"\\nendobj\\n\")\nxref=len(pdf); pdf.extend(f\"xref\\n0 {len(objs)+1}\\n\".encode()); pdf.extend(b\"0000000000 65535 f \\n\")\nfor off in offsets[1:]: pdf.extend(f\"{off:010d} 00000 n \\n\".encode())\npdf.extend(f\"trailer\\n<< /Size {len(objs)+1} /Root 1 0 R >>\\nstartxref\\n{xref}\\n%%EOF\\n\".encode())\nout.write_bytes(pdf)\nprint(\"INHERITED_INPUT_READY\",len(pdf))\nPY",
+        "duration_s": 0.379,
+        "returncode": 0,
+        "stderr": "test_action_expectation_contains (__main__.BoundCapabilityTests.test_action_expectation_contains) ... ok\ntest_action_expectation_fails_closed (__main__.BoundCapabilityTests.test_action_expectation_fails_closed) ... ok\ntest_adapter_rejects_path_escape (__main__.BoundCapabilityTests.test_adapter_rejects_path_escape) ... ok\ntest_registry_is_zero_cost_and_hash_pinned (__main__.BoundCapabilityTests.test_registry_is_zero_cost_and_hash_pinned) ... ok\ntest_unknown_bound_capability_rejected (__main__.BoundCapabilityTests.test_unknown_bound_capability_rejected) ... ok\ntest_verified_capability_is_inherited_from_brain (__main__.BoundCapabilityTests.test_verified_capability_is_inherited_from_brain) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.001s\n\nOK\n",
+        "stdout": "INHERITED_INPUT_READY 618\n"
+      },
+      "step_id": "regressions-and-input",
+      "step_index": 0
+    },
+    {
+      "completed_at_utc": "2026-09-24T21:22:24.959676+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "goal",
+        "capability_plan": {
+          "expanded_states": 1,
+          "initial_facts": [
+            "pdf.file.available"
+          ],
+          "plan": [
+            "pdf.extract.text.pypdf"
+          ],
+          "status": "SOLVED",
+          "target_effects": [
+            "pdf.extract.text"
+          ],
+          "total_cost": 1.0
+        },
+        "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+        "cycles": 2,
+        "final_summary": "INHERITED_PDF_TEXT_COMPLETE",
+        "inherited_bound_capabilities": [
+          "pdf.extract.text.pypdf"
+        ],
+        "planner_model_last": null,
+        "planner_source": null,
+        "planner_transport": null,
+        "planning_mode": "DETERMINISTIC_CAPABILITY_GRAPH",
+        "returncode": 0,
+        "stdout": "INHERITED_PDF_TEXT_COMPLETE",
+        "trace": [
+          {
+            "cycle": 0,
+            "plan": {
+              "args": {
+                "capability_id": "pdf.extract.text.pypdf",
+                "max_pages": 200,
+                "path": "canonical/astra_runtime/tmp/INHERITED_PDF_TEXT_TEST.pdf"
+              },
+              "capability_id": "pdf.extract.text.pypdf",
+              "expect": {
+                "field": "text",
+                "type": "field_nonempty"
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "bound_capability",
+              "capability_id": "pdf.extract.text.pypdf",
+              "dependency": {
+                "project": "pypdf",
+                "status": "INSTALLED_VERIFIED",
+                "version": "6.19.0",
+                "wheel_sha256": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14"
+              },
+              "pages_processed": 1,
+              "pages_total": 1,
+              "source_path": "canonical/astra_runtime/tmp/INHERITED_PDF_TEXT_TEST.pdf",
+              "text": "PROJECT BRAIN INHERITED CAPABILITY VERIFIED",
+              "text_bytes": 43,
+              "text_sha256": "494d94c4ab2f73544ea2cd4ab6b18a1d1f01c2522b1c34eba894a549dfb8d11b",
+              "text_truncated": false
+            }
+          },
+          {
+            "cycle": 1,
+            "plan": {
+              "args": {
+                "summary": "INHERITED_PDF_TEXT_COMPLETE"
+              },
+              "type": "finish",
+              "why": "All target effects have an executable minimum-cost capability plan."
+            },
+            "result": {
+              "summary": "INHERITED_PDF_TEXT_COMPLETE",
+              "type": "finish"
+            }
+          }
+        ]
+      },
+      "step_id": "plan-from-inherited-capability-registry",
+      "step_index": 1
+    }
+  ],
+  "mission_id": "ASTRA-RUNTIME-INHERITED-PDF-TEXT-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_INHERITED_PDF_TEXT_001.json",
+  "mission_sha256": "484d90a36648036cc6725ff06260fea4e09ef81b6027fa0acee79590ba8d11b2",
+  "next_step": 2,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-24T21:22:24.959689+00:00"
+}
