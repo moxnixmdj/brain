@@ -243,7 +243,9 @@ def _verify_action_expectation(action,result):
     else:
         raise Blocker("ACTION_EXPECTATION_TYPE_UNKNOWN:"+str(typ))
     if not ok:
-        raise Blocker("ACTION_EXPECTATION_FAILED:"+field)
+        observed=json.dumps(value,ensure_ascii=False,sort_keys=True) if isinstance(value,(dict,list)) else repr(value)
+        observed=observed.replace("\\n"," ")[:800]
+        raise Blocker("ACTION_EXPECTATION_FAILED:"+field+":OBSERVED="+observed)
 
 def _goal_action(action):
     typ=action.get("type")
