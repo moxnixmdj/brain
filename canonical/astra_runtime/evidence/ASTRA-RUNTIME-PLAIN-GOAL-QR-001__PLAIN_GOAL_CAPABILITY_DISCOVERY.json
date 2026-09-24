@@ -2,14 +2,263 @@
   "binding_performed": false,
   "goal": "Generate a QR code image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png.",
   "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-QR-001",
-  "observed_at_utc": "2026-09-24T21:52:04.723773+00:00",
+  "observed_at_utc": "2026-09-24T21:56:43.930309+00:00",
   "result": {
     "binding_performed": false,
-    "candidate_count": 39,
     "candidates": [
       {
+        "archive_sha256": "300522f0f992e99581d6ce9a4b4b865c15d889ccb884ca080f93abd4f38acd9f",
+        "binding_kind": "apt",
+        "description": "Generate QR code with Imager using libqrencode",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "matched_terms": [
+          "code",
+          "generate",
+          "image",
+          "qr"
+        ],
+        "name": "libimager-qrcode-perl",
+        "packages": [],
+        "query": "qr",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 40,
+        "version": "0.033-1.2build13",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "4663e963576065581a622feeaddba39cc4daa53c3f6332702bce4adaa8d480d4",
+        "binding_kind": "apt",
+        "description": "Python 3 module to generate QR Codes",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "matched_terms": [
+          "code",
+          "generate",
+          "qr"
+        ],
+        "name": "python3-pyqrcode",
+        "packages": [],
+        "query": "qr",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 28,
+        "version": "1.2.1-4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "2134a4a31b0fbce2b7520ce9ac441d6cfc03dc9f87b7a5d3c1bc5364978283d6",
+        "binding_kind": "apt",
+        "description": "QR Code image generator library - Python 3.x",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "matched_terms": [
+          "code",
+          "image",
+          "qr"
+        ],
+        "name": "python3-qrcode",
+        "packages": [],
+        "query": "qr",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 28,
+        "version": "7.4.2-4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "613c5a22316489ec6a9ce5d59190293df15dd4612b55432dde04c62f7c1a0e25",
+        "binding_kind": "apt",
+        "description": "QR Code encoder into PNG image",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "matched_terms": [
+          "code",
+          "image",
+          "qr"
+        ],
+        "name": "qrencode",
+        "packages": [],
+        "query": "qr",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 28,
+        "version": "4.1.1-1build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "78803e743c04c04ec3b9bab206623b9b5c91dc8bf351b6dbe3141f3ffe1d62ec",
+        "binding_kind": "apt",
+        "description": "Generate QR Code matrices and images in RAW, PNG and SVG formats - Rust source code",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "matched_terms": [
+          "code",
+          "generate",
+          "image",
+          "qr"
+        ],
+        "name": "librust-qrcode-generator-dev",
+        "packages": [],
+        "query": "qr",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 27,
+        "version": "4.1.9-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "10b8e63a940fc890582663aaab1413a97d7c0296e7611d9c39b746f3cc75ee4e",
+        "binding_kind": "apt",
+        "description": "QR Code encoder (Go program)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "matched_terms": [
+          "code",
+          "qr"
+        ],
+        "name": "go-qrcode",
+        "packages": [],
+        "query": "qr",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 24,
+        "version": "0.0~git20200617.da1b656-4ubuntu0.24.04.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "5673aa991997ffedc8efda1c55acba3c7265d571750efc1b112322532897cbf5",
+        "binding_kind": "apt",
+        "description": "Haskell bindings for libqrencode; profiling libraries",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "matched_terms": [
+          "code",
+          "qr"
+        ],
+        "name": "libghc-qrencode-prof",
+        "packages": [],
+        "query": "qr",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 24,
+        "version": "1.0.4-13",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "b7cf7eb9aa458ab07b401f925f7367c15e3c5e2fe03d616cceb34065da0e7f87",
+        "binding_kind": "apt",
+        "description": "QR Code generator library in multiple languages - Java version",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "matched_terms": [
+          "code",
+          "qr"
+        ],
+        "name": "libqrcodegen-java",
+        "packages": [],
+        "query": "qr",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 24,
+        "version": "1.8.0-1.2build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "15173e162272e79026efca7f4d7d1edd8b475de64f8d23a2ad954a983e1fadf0",
+        "binding_kind": "apt",
+        "description": "QR Code generator library in multiple languages - C version",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "matched_terms": [
+          "code",
+          "qr"
+        ],
+        "name": "libqrcodegen1",
+        "packages": [],
+        "query": "qr",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 24,
+        "version": "1.8.0-1.2build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "df2a9fe9570dd9155a30e770a3f55121ca4b0a940da4b2b7991cb32b5e8e8233",
+        "binding_kind": "apt",
+        "description": "QR Code generator library in multiple languages - C++ version",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "matched_terms": [
+          "code",
+          "qr"
+        ],
+        "name": "libqrcodegencpp1",
+        "packages": [],
+        "query": "qr",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 24,
+        "version": "1.8.0-1.2build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "fac6fe1444827f29ab5f6eb40e28575caaacf54eefc5c647ff178b9237a45c4e",
+        "binding_kind": "apt",
+        "description": "QR Code encoding library",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "matched_terms": [
+          "code",
+          "qr"
+        ],
+        "name": "libqrencode4",
+        "packages": [],
+        "query": "qr",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 24,
+        "version": "4.1.1-1build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "cbf46a6d658f940ce8f76e56d80b6f71164180ebc77c96535c6e9b633d3baf27",
+        "binding_kind": "apt",
+        "description": "module for generating text based QR Codes",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "matched_terms": [
+          "code",
+          "qr"
+        ],
+        "name": "libtext-qrcode-perl",
+        "packages": [],
+        "query": "qr",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 24,
+        "version": "0.05-2build4",
+        "zero_cost_eligible": true
+      },
+      {
         "description": "Source-linked CodeGraph exploration, ranked search, and static navigation for coding agents.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
+        "live_probe_required": true,
         "name": "ai.codenib/codenib",
         "packages": [
           {
@@ -39,7 +288,10 @@
       },
       {
         "description": "Image processing for AI agents: resize, convert, compress, crop, and web-ready AI-generated images.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
+        "live_probe_required": true,
         "name": "ai.pictomancer/image-processing",
         "packages": [],
         "query": "image",
@@ -63,7 +315,10 @@
       },
       {
         "description": "Generate marketing images, videos and audios for campaigns, product content, and brand assets.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
+        "live_probe_required": true,
         "name": "ai.saifs/media-generator-images-videos",
         "packages": [],
         "query": "image",
@@ -84,7 +339,10 @@
       },
       {
         "description": "Analyze images and videos with Gemini to get fast, reliable visual insights. Handle content from U\u2026",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
+        "live_probe_required": true,
         "name": "ai.smithery/Artin0123-gemini-image-mcp-server",
         "packages": [],
         "query": "image",
@@ -110,7 +368,10 @@
       },
       {
         "description": "Driven Intent Negotiation \u2014 Contract-Oriented Deterministic Executable Runtime DinCoder brings the\u2026",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
+        "live_probe_required": true,
         "name": "ai.smithery/flight505-mcp_dincoder",
         "packages": [],
         "query": "code",
@@ -136,7 +397,10 @@
       },
       {
         "description": "Verified discount & referral codes for crypto exchanges, cards and more \u2014 tested first-hand.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
+        "live_probe_required": true,
         "name": "codes.find/verified-codes",
         "packages": [],
         "query": "code",
@@ -157,7 +421,10 @@
       },
       {
         "description": "Create QR codes, re-point printed dynamic codes, name links on your domain, read scan analytics.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
+        "live_probe_required": true,
         "name": "codes.qrflow/qrflow",
         "packages": [],
         "query": "qr",
@@ -178,7 +445,10 @@
       },
       {
         "description": "Generate 10 conversion-focused ad headlines for a Shopify/e-commerce product. Free, no signup.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
+        "live_probe_required": true,
         "name": "com.adcreator-ai/generate-ad-headlines",
         "packages": [],
         "query": "generate",
@@ -199,7 +469,10 @@
       },
       {
         "description": "Diagrams, badges, charts and QR codes as plain image URLs you can paste into Markdown.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
+        "live_probe_required": true,
         "name": "com.ainetcafe/netcafe-images",
         "packages": [],
         "query": "image",
@@ -223,7 +496,10 @@
       },
       {
         "description": "Automatic image/video face detection, blur/redaction, and de-identification by NoonAI DIS.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
+        "live_probe_required": true,
         "name": "com.dyndns-server.noon-ai/image-video-anonymization-mcp",
         "packages": [],
         "query": "image",
@@ -244,7 +520,10 @@
       },
       {
         "description": "Resize, compress, convert, watermark and SEO-tag e-commerce product images from a public URL.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
+        "live_probe_required": true,
         "name": "com.ecommerceimageoptimizer/image-optimizer",
         "packages": [],
         "query": "image",
@@ -268,7 +547,10 @@
       },
       {
         "description": "Create dynamic QR codes and re-point ones already printed, with bot-filtered scan analytics.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
+        "live_probe_required": true,
         "name": "com.getdynamicqr/qr-codes",
         "packages": [],
         "query": "qr",
@@ -289,17 +571,563 @@
       }
     ],
     "effect": "Generate a QR code image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png.",
-    "errors": [],
-    "queries": [
-      "generate",
-      "qr",
-      "code",
-      "image"
+    "results": [
+      {
+        "binding_performed": false,
+        "candidate_count": 12,
+        "candidates": [
+          {
+            "archive_sha256": "300522f0f992e99581d6ce9a4b4b865c15d889ccb884ca080f93abd4f38acd9f",
+            "binding_kind": "apt",
+            "description": "Generate QR code with Imager using libqrencode",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "matched_terms": [
+              "code",
+              "generate",
+              "image",
+              "qr"
+            ],
+            "name": "libimager-qrcode-perl",
+            "packages": [],
+            "query": "qr",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 40,
+            "version": "0.033-1.2build13",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "4663e963576065581a622feeaddba39cc4daa53c3f6332702bce4adaa8d480d4",
+            "binding_kind": "apt",
+            "description": "Python 3 module to generate QR Codes",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "matched_terms": [
+              "code",
+              "generate",
+              "qr"
+            ],
+            "name": "python3-pyqrcode",
+            "packages": [],
+            "query": "qr",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 28,
+            "version": "1.2.1-4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "2134a4a31b0fbce2b7520ce9ac441d6cfc03dc9f87b7a5d3c1bc5364978283d6",
+            "binding_kind": "apt",
+            "description": "QR Code image generator library - Python 3.x",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "matched_terms": [
+              "code",
+              "image",
+              "qr"
+            ],
+            "name": "python3-qrcode",
+            "packages": [],
+            "query": "qr",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 28,
+            "version": "7.4.2-4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "613c5a22316489ec6a9ce5d59190293df15dd4612b55432dde04c62f7c1a0e25",
+            "binding_kind": "apt",
+            "description": "QR Code encoder into PNG image",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "matched_terms": [
+              "code",
+              "image",
+              "qr"
+            ],
+            "name": "qrencode",
+            "packages": [],
+            "query": "qr",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 28,
+            "version": "4.1.1-1build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "78803e743c04c04ec3b9bab206623b9b5c91dc8bf351b6dbe3141f3ffe1d62ec",
+            "binding_kind": "apt",
+            "description": "Generate QR Code matrices and images in RAW, PNG and SVG formats - Rust source code",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "matched_terms": [
+              "code",
+              "generate",
+              "image",
+              "qr"
+            ],
+            "name": "librust-qrcode-generator-dev",
+            "packages": [],
+            "query": "qr",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 27,
+            "version": "4.1.9-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "10b8e63a940fc890582663aaab1413a97d7c0296e7611d9c39b746f3cc75ee4e",
+            "binding_kind": "apt",
+            "description": "QR Code encoder (Go program)",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "matched_terms": [
+              "code",
+              "qr"
+            ],
+            "name": "go-qrcode",
+            "packages": [],
+            "query": "qr",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 24,
+            "version": "0.0~git20200617.da1b656-4ubuntu0.24.04.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "5673aa991997ffedc8efda1c55acba3c7265d571750efc1b112322532897cbf5",
+            "binding_kind": "apt",
+            "description": "Haskell bindings for libqrencode; profiling libraries",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "matched_terms": [
+              "code",
+              "qr"
+            ],
+            "name": "libghc-qrencode-prof",
+            "packages": [],
+            "query": "qr",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 24,
+            "version": "1.0.4-13",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "b7cf7eb9aa458ab07b401f925f7367c15e3c5e2fe03d616cceb34065da0e7f87",
+            "binding_kind": "apt",
+            "description": "QR Code generator library in multiple languages - Java version",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "matched_terms": [
+              "code",
+              "qr"
+            ],
+            "name": "libqrcodegen-java",
+            "packages": [],
+            "query": "qr",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 24,
+            "version": "1.8.0-1.2build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "15173e162272e79026efca7f4d7d1edd8b475de64f8d23a2ad954a983e1fadf0",
+            "binding_kind": "apt",
+            "description": "QR Code generator library in multiple languages - C version",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "matched_terms": [
+              "code",
+              "qr"
+            ],
+            "name": "libqrcodegen1",
+            "packages": [],
+            "query": "qr",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 24,
+            "version": "1.8.0-1.2build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "df2a9fe9570dd9155a30e770a3f55121ca4b0a940da4b2b7991cb32b5e8e8233",
+            "binding_kind": "apt",
+            "description": "QR Code generator library in multiple languages - C++ version",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "matched_terms": [
+              "code",
+              "qr"
+            ],
+            "name": "libqrcodegencpp1",
+            "packages": [],
+            "query": "qr",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 24,
+            "version": "1.8.0-1.2build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "fac6fe1444827f29ab5f6eb40e28575caaacf54eefc5c647ff178b9237a45c4e",
+            "binding_kind": "apt",
+            "description": "QR Code encoding library",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "matched_terms": [
+              "code",
+              "qr"
+            ],
+            "name": "libqrencode4",
+            "packages": [],
+            "query": "qr",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 24,
+            "version": "4.1.1-1build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "cbf46a6d658f940ce8f76e56d80b6f71164180ebc77c96535c6e9b633d3baf27",
+            "binding_kind": "apt",
+            "description": "module for generating text based QR Codes",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "matched_terms": [
+              "code",
+              "qr"
+            ],
+            "name": "libtext-qrcode-perl",
+            "packages": [],
+            "query": "qr",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 24,
+            "version": "0.05-2build4",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Generate a QR code image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png.",
+        "errors": [],
+        "queries": [
+          "generate",
+          "qr",
+          "code",
+          "image"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "APT_CATALOG",
+        "source_url": null
+      },
+      {
+        "binding_performed": false,
+        "candidate_count": 39,
+        "candidates": [
+          {
+            "description": "Source-linked CodeGraph exploration, ranked search, and static navigation for coding agents.",
+            "is_latest": true,
+            "name": "ai.codenib/codenib",
+            "packages": [
+              {
+                "identifier": "codenib",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "uvx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.2.3"
+              }
+            ],
+            "query": "code",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/sysevol-ai/CodeNib"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.2.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Image processing for AI agents: resize, convert, compress, crop, and web-ready AI-generated images.",
+            "is_latest": true,
+            "name": "ai.pictomancer/image-processing",
+            "packages": [],
+            "query": "image",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.pictomancer.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "gitlab",
+              "url": "https://gitlab.com/pictomancer.ai/pig-gateway"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.4.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Generate marketing images, videos and audios for campaigns, product content, and brand assets.",
+            "is_latest": true,
+            "name": "ai.saifs/media-generator-images-videos",
+            "packages": [],
+            "query": "image",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.saifs.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Analyze images and videos with Gemini to get fast, reliable visual insights. Handle content from U\u2026",
+            "is_latest": true,
+            "name": "ai.smithery/Artin0123-gemini-image-mcp-server",
+            "packages": [],
+            "query": "image",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@Artin0123/gemini-image-mcp-server/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Artin0123/gemini-vision-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.4.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Driven Intent Negotiation \u2014 Contract-Oriented Deterministic Executable Runtime DinCoder brings the\u2026",
+            "is_latest": true,
+            "name": "ai.smithery/flight505-mcp_dincoder",
+            "packages": [],
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@flight505/mcp_dincoder/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/flight505/MCP_DinCoder"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.15",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Verified discount & referral codes for crypto exchanges, cards and more \u2014 tested first-hand.",
+            "is_latest": true,
+            "name": "codes.find/verified-codes",
+            "packages": [],
+            "query": "code",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://find.codes/api/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Create QR codes, re-point printed dynamic codes, name links on your domain, read scan analytics.",
+            "is_latest": true,
+            "name": "codes.qrflow/qrflow",
+            "packages": [],
+            "query": "qr",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://qrflow.codes/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Generate 10 conversion-focused ad headlines for a Shopify/e-commerce product. Free, no signup.",
+            "is_latest": true,
+            "name": "com.adcreator-ai/generate-ad-headlines",
+            "packages": [],
+            "query": "generate",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://adcreator-ai.com/mcp-ads"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Diagrams, badges, charts and QR codes as plain image URLs you can paste into Markdown.",
+            "is_latest": true,
+            "name": "com.ainetcafe/netcafe-images",
+            "packages": [],
+            "query": "image",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://ainetcafe.com/mcp/img?s=registry"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/mario03690/ai-netcafe"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Automatic image/video face detection, blur/redaction, and de-identification by NoonAI DIS.",
+            "is_latest": true,
+            "name": "com.dyndns-server.noon-ai/image-video-anonymization-mcp",
+            "packages": [],
+            "query": "image",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://noon-ai.dyndns-server.com/image-video-anonymization-mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.12",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Resize, compress, convert, watermark and SEO-tag e-commerce product images from a public URL.",
+            "is_latest": true,
+            "name": "com.ecommerceimageoptimizer/image-optimizer",
+            "packages": [],
+            "query": "image",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://ecommerceimageoptimizer.com/api/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/brkmehdi/ImageOptimizerforEcom"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Create dynamic QR codes and re-point ones already printed, with bot-filtered scan analytics.",
+            "is_latest": true,
+            "name": "com.getdynamicqr/qr-codes",
+            "packages": [],
+            "query": "qr",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.getdynamicqr.com"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Generate a QR code image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png.",
+        "errors": [],
+        "queries": [
+          "generate",
+          "qr",
+          "code",
+          "image"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "OFFICIAL_MCP_REGISTRY",
+        "source_url": "https://registry.modelcontextprotocol.io"
+      }
     ],
-    "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
-    "source": "OFFICIAL_MCP_REGISTRY",
-    "source_url": "https://registry.modelcontextprotocol.io"
+    "schema": "PROJECT_BRAIN_FEDERATED_CAPABILITY_DISCOVERY_V1",
+    "sources": [
+      "APT_CATALOG",
+      "OFFICIAL_MCP_REGISTRY"
+    ]
   },
   "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
-  "source": "OFFICIAL_MCP_REGISTRY"
+  "source": "FEDERATED_CAPABILITY_DISCOVERY"
 }
