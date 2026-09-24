@@ -226,9 +226,105 @@ def _compile_single_goal(goal, registry, root):
     }
 
 
+def _find_status_collection(data, wanted, prefix=()):
+    if isinstance(data,dict):
+        if data and all(isinstance(v,dict) for v in data.values()):
+            for record in data.values():
+                if any(v==wanted for v in record.values()):
+                    return prefix
+        for key,value in data.items():
+            found=_find_status_collection(value,wanted,prefix+(str(key),))
+            if found is not None:
+                return found
+    return None
+
+
+def _jq_path(parts):
+    out="."
+    for part in parts:
+        out+="["+json.dumps(str(part))+"]"
+    return out
+
+
+def _compile_json_markdown_table(subgoal, context_paths, registry, root):
+    entry=(registry or {}).get("json.query.jq")
+    if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
+        return None
+    lower=subgoal.lower()
+    if "table" not in lower or "markdown" not in lower and ".md" not in lower:
+        return None
+    out_paths=[raw for raw,_ in _repo_paths(subgoal,root) if pathlib.Path(raw).suffix.lower() in {".md",".markdown"}]
+    if len(out_paths)!=1:
+        return None
+    json_paths=[p for p in context_paths if pathlib.Path(p).suffix.lower()==".json" and (pathlib.Path(root)/p).is_file()]
+    if not json_paths:
+        return None
+
+    # Prefer the most recent structured artifact in the causal prefix.
+    input_path=json_paths[-1]
+    data=json.loads((pathlib.Path(root)/input_path).read_text(encoding="utf-8"))
+    semantic=re.sub(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+"," ",subgoal)
+    constants=re.findall(r"\b[A-Z][A-Z0-9_]{3,}\b",semantic)
+    wanted=None
+    collection=None
+    for token in constants:
+        found=_find_status_collection(data,token)
+        if found is not None:
+            wanted=token
+            collection=found
+            break
+    if wanted is None or collection is None:
+        return None
+
+    base=_jq_path(collection)
+    wanted_json=json.dumps(wanted)
+    # Generic schema-driven report: all top-level fields of every record whose
+    # record contains the requested exact status value. Nested values are
+    # serialized, so the report preserves rather than guesses field semantics.
+    filt=(
+      f'{base} | to_entries '
+      f'| map(select(.value | any(. == {wanted_json}))) as $rows '
+      '| ($rows | map(.value | keys) | add | unique) as $cols '
+      '| (["id"] + $cols) as $headers '
+      '| ($headers | "| " + join(" | ") + " |"), '
+      '($headers | "| " + map("---") | join(" | ") + " |"), '
+      '($rows[] | . as $row '
+      '| ([ $row.key ] + ($cols | map(($row.value[.] // "") '
+      '| if type=="array" then map(tostring) | join(", ") '
+      'elif type=="object" then tojson else tostring end))) '
+      '| map(gsub("\\|"; "\\\\|") | gsub("[\\r\\n]+";" ")) '
+      '| "| " + join(" | ") + " |")'
+    )
+    action={
+      "type":"invoke_capability",
+      "args":{
+        "capability_id":"json.query.jq",
+        "input_path":input_path,
+        "filter":filt,
+        "output_path":out_paths[0],
+        "raw_output":True,
+        "require_nonempty":True,
+        "timeout_s":60,
+      },
+      "expect":{"type":"field_equals","field":"output_verified","value":True},
+    }
+    return {
+      "action":action,
+      "output_path":out_paths[0],
+      "evidence":{
+        "input_path":input_path,
+        "output_path":out_paths[0],
+        "status_value":wanted,
+        "collection_path":list(collection),
+        "capability_id":"json.query.jq",
+      }
+    }
+
+
 def _compile_compound_goal(goal, clauses, registry, root):
     actions=[]
     compiled_parts=[]
+    context_paths=[]
     for index,clause in enumerate(clauses):
         lower=clause.lower()
         # Evidence-only repository reads are native runtime actions and should
@@ -243,11 +339,23 @@ def _compile_compound_goal(goal, clauses, registry, root):
                     "expect":{"type":"field_nonempty","field":"content"},
                 }
                 actions.append(action)
+                context_paths.append(existing[0][0])
                 compiled_parts.append({
                     "index":index,"subgoal":clause,"mode":"NATIVE_READ",
                     "path":existing[0][0],
                 })
                 continue
+
+        structured=_compile_json_markdown_table(clause,context_paths,registry,root)
+        if structured is not None:
+            actions.append(structured["action"])
+            context_paths.append(structured["output_path"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"VERIFIED_STRUCTURED_TRANSFORM",
+                **structured["evidence"],
+            })
+            continue
         try:
             part=_compile_single_goal(clause,registry,root)
         except GoalCompilationFailure as exc:
@@ -265,6 +373,9 @@ def _compile_compound_goal(goal, clauses, registry, root):
         entry=registry[cid]
         action=_render_template(entry["action_template"],part["inputs"])
         actions.append(action)
+        for value in part["inputs"].values():
+            if isinstance(value,str) and pathlib.Path(value).suffix:
+                context_paths.append(value)
         compiled_parts.append({
             "index":index,
             "subgoal":clause,
