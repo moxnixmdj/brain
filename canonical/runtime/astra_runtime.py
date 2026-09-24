@@ -578,23 +578,54 @@ def run_goal(step, mission):
         compiled=_compile_plain_goal(goal)
     except Blocker as e:
         if "GOAL_COMPILATION_FAILED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH" in str(e):
+            mid=str(mission.get("mission_id") or "UNKNOWN")
+            ep=EVID_DIR/f"{mid}__PLAIN_GOAL_CAPABILITY_DISCOVERY.json"
+            auto=_load_auto_apt_cli_acquisition()
+
+            # Fast path: try a bounded role-conditioned supplier acquisition
+            # before paying for broad federated discovery.
+            targeted_error=None
+            try:
+                dispatch=auto.dispatch(
+                    goal,
+                    mid,
+                    str(mission.get("_runtime_mission_path") or ""),
+                    ROOT,
+                    discovery=None
+                )
+            except Exception as ae:
+                targeted_error=type(ae).__name__+":"+str(ae)
+            else:
+                evidence={
+                  "schema":"PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
+                  "mission_id":mid,
+                  "goal":goal,
+                  "source":"TARGETED_AUTO_ACQUISITION",
+                  "result":None,
+                  "binding_performed":False,
+                  "auto_acquisition":dispatch,
+                  "status":"AUTO_ACQUISITION_DISPATCHED",
+                  "observed_at_utc":utc()
+                }
+                writej(ep,evidence)
+                raise Blocker("CAPABILITY_ACQUISITION_DISPATCHED:"+json.dumps(dispatch,sort_keys=True)) from e
+
+            # Fallback only after the targeted route fails.
             discovery=_load_capability_discovery()
             result=discovery.search_all(goal,limit_per_source=30)
             evidence={
               "schema":"PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
-              "mission_id":mission.get("mission_id"),
+              "mission_id":mid,
               "goal":goal,
-              "source":"FEDERATED_CAPABILITY_DISCOVERY",
+              "source":"FEDERATED_CAPABILITY_DISCOVERY_FALLBACK",
+              "targeted_acquisition_error":targeted_error,
               "result":result,
               "binding_performed":False,
               "observed_at_utc":utc()
             }
-            mid=str(mission.get("mission_id") or "UNKNOWN")
-            ep=EVID_DIR/f"{mid}__PLAIN_GOAL_CAPABILITY_DISCOVERY.json"
             dispatch=None
             dispatch_error=None
             try:
-                auto=_load_auto_apt_cli_acquisition()
                 dispatch=auto.dispatch(
                     goal,
                     mid,
@@ -604,10 +635,7 @@ def run_goal(step, mission):
                 )
             except Exception as ae:
                 dispatch_error=type(ae).__name__+":"+str(ae)
-                evidence["auto_acquisition"]={
-                  "status":"NOT_DISPATCHED",
-                  "error":dispatch_error
-                }
+                evidence["auto_acquisition"]={"status":"NOT_DISPATCHED","error":dispatch_error}
             else:
                 evidence["auto_acquisition"]=dispatch
                 evidence["status"]="AUTO_ACQUISITION_DISPATCHED"
@@ -623,6 +651,7 @@ def run_goal(step, mission):
             raise Blocker("CAPABILITY_ACQUISITION_REQUIRED:"+json.dumps({
               "evidence_path":str(ep.relative_to(ROOT)),
               "top_candidates":top,
+              "targeted_acquisition_error":targeted_error,
               "auto_acquisition_error":dispatch_error
             },sort_keys=True)) from e
         if not step.get("allow_optional_model_planner",False):
