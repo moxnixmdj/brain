@@ -221,16 +221,20 @@ def search_apt_packages(effect, limit=12):
             # Integration friction matters more than word count. Standalone
             # executables are usually cheaper to bind than language libraries.
             lname=name.lower()
-            if lname.startswith(("lib","python3-","ruby-","golang-","librust-","libghc-")):
+            integration_friction=0
+            if lname.startswith(("python3-","ruby-","golang-")):
+                integration_friction=2
+                score-=10
+            if lname.startswith(("lib","librust-","libghc-")):
+                integration_friction=3
                 score-=12
             if name.endswith(("-dev","-doc","-dbg","-prof")):
+                integration_friction=max(integration_friction,4)
                 score-=8
+            if integration_friction==0:
+                score+=8
             if lname in effect.lower():
                 score+=8
-            if lname=="qrencode" and "qr" in effect.lower():
-                # Exact executable name is visible in Ubuntu metadata; this is
-                # not a QR-specific binding rule, only an exact-name bonus.
-                score+=0
             prior=seen.get(name)
             cand={
                 "name":name,
@@ -238,6 +242,7 @@ def search_apt_packages(effect, limit=12):
                 "query":query,
                 "matched_terms":sorted(matched),
                 "score":score,
+                "integration_friction":integration_friction,
                 "required_secret_count":0,
                 "required_environment_count":0,
                 "zero_cost_eligible":True,
@@ -306,6 +311,7 @@ def search_all(effect, limit_per_source=12):
         not bool(x.get("zero_cost_eligible")),
         x.get("required_secret_count",0)>0,
         0 if x.get("discovery_source")=="APT_CATALOG" else 1,
+        int(x.get("integration_friction",1 if x.get("discovery_source")=="OFFICIAL_MCP_REGISTRY" else 0)),
         -float(x.get("score",0)),
         str(x.get("name","")),
     ))
