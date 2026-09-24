@@ -20,7 +20,8 @@ MCP_REGISTRY_BASE = "https://registry.modelcontextprotocol.io"
 STOPWORDS = {
     "capability","tool","action","do","use","get","make","create","read","write",
     "data","file","service","external","target","effect",
-    "containing","contains","every","its","that","final"
+    "containing","contains","every","its","that","final",
+    "the","and","or","with","for","from","into","of","by","using","as","to"
 }
 GENERIC_DISCOVERY_TOKENS={
     "generate","code","image","text","save","output","input","convert",
