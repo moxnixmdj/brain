@@ -32,10 +32,14 @@ class GoalCompilerTests(unittest.TestCase):
         with self.assertRaisesRegex(compiler.GoalCompilationFailure,"GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"):
             compiler.compile_goal("Reticulate a quantum banana lattice",self.registry(),ROOT)
 
-    def test_barcode_goal_does_not_false_match_qr(self):
+    def test_barcode_goal_selects_verified_barcode_not_qr(self):
         goal="Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png."
-        with self.assertRaisesRegex(compiler.GoalCompilationFailure,"GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"):
-            compiler.compile_goal(goal,self.registry(),ROOT)
+        out=compiler.compile_goal(goal,self.registry(),ROOT)
+        self.assertEqual(out["selected_capability"],"auto.apt.zint")
+        self.assertNotEqual(out["selected_capability"],"image.qr.generate.qrencode")
+        self.assertEqual(out["target_effects"],["auto.effect.zint"])
+        self.assertEqual(out["inputs"]["text"],"PROJECT BRAIN")
+        self.assertEqual(out["inputs"]["output_path"],"canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png")
 
     def test_plain_qr_goal_selects_verified_qr_and_binds_arguments(self):
         goal="Generate a QR code image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png."
