@@ -566,7 +566,31 @@ def run_goal(step, mission):
     # Unknown/ambiguous goals fail closed rather than silently becoming guesses.
     try:
         compiled=_compile_plain_goal(goal)
-    except Blocker:
+    except Blocker as e:
+        if "GOAL_COMPILATION_FAILED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH" in str(e):
+            discovery=_load_capability_discovery()
+            result=discovery.search_mcp_registry(goal,limit=12,timeout_s=12)
+            evidence={
+              "schema":"PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
+              "mission_id":mission.get("mission_id"),
+              "goal":goal,
+              "source":"OFFICIAL_MCP_REGISTRY",
+              "result":result,
+              "binding_performed":False,
+              "observed_at_utc":utc()
+            }
+            mid=str(mission.get("mission_id") or "UNKNOWN")
+            ep=EVID_DIR/f"{mid}__PLAIN_GOAL_CAPABILITY_DISCOVERY.json"
+            writej(ep,evidence)
+            top=[{
+              "name":x.get("name"),"score":x.get("score"),
+              "zero_cost_eligible":x.get("zero_cost_eligible"),
+              "required_secret_count":x.get("required_secret_count")
+            } for x in result.get("candidates",[])[:8]]
+            raise Blocker("CAPABILITY_ACQUISITION_REQUIRED:"+json.dumps({
+              "evidence_path":str(ep.relative_to(ROOT)),
+              "top_candidates":top
+            },sort_keys=True)) from e
         if not step.get("allow_optional_model_planner",False):
             raise
     else:
