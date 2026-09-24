@@ -22,6 +22,7 @@
     "replay_after_apt_query_expansion_commit": "aed7454b7f951976dc3381d340a5f780c866f795",
     "replay_after_literal_compound_query_commit": "e24f69e6f2c5ec17ff0a81fc9ee3930f657acfdc",
     "replay_after_full_apt_filter_commit": "38648c197765ae2d8e76142c3967eaaaf7bb1dd5",
-    "replay_after_morphology_commit": "43c97da60ea99bbca2914629d8d6a193b31b9041"
+    "replay_after_morphology_commit": "43c97da60ea99bbca2914629d8d6a193b31b9041",
+    "replay_after_joint_coverage_commit": "8746afe1b8d6333d2ae879385db99ce44a59b83e"
   }
 }
