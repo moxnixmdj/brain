@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-24T23:59:32.804405+00:00",
+  "mission_id": "ASTRA-PDF-CONVERSION-SUPPLIER-PROBE-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_PDF_CONVERSION_SUPPLIER_PROBE_001.json",
+  "mission_sha256": "3daff504d6ed99a8d0c9475367a2a70337129ede536eaeba6498f05b61d4662e",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "0e31c0e47f311cf48c3ab430feb3b15dddd780c585fff9348e1d470b12bc7847",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
