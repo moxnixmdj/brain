@@ -195,6 +195,7 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
       "argv":argv,
       "output_path":_render(contract["output_path_template"],inputs),
       "output_prefix_hex":contract["output_prefix_hex"],
+      "output_text_utf8":bool(contract.get("output_text_utf8",False)),
       "timeout_s":int(contract.get("timeout_s",60))
     }
     slug=_slug(package)
@@ -223,6 +224,7 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
           "argv":contract["argv_template"],
           "output_path":contract["output_path_template"],
           "output_prefix_hex":contract["output_prefix_hex"],
+          "output_text_utf8":bool(contract.get("output_text_utf8",False)),
           "timeout_s":int(contract.get("timeout_s",60))
         },
         "expect":{"type":"field_equals","field":"output_verified","value":True}
