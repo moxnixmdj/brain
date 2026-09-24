@@ -37,320 +37,6 @@
     {
       "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
       "probe": {
-        "archive_sha256": "0ca9138fbbd2eb19d45091e98366952634bf5cfefff93b68f000fe99b4bdbcba",
-        "executables": [],
-        "package": "node-text-table",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "0.2.0-4"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "_acquisition_object_matches": 2,
-        "_acquisition_role_score": 126.0,
-        "archive_sha256": "0ca9138fbbd2eb19d45091e98366952634bf5cfefff93b68f000fe99b4bdbcba",
-        "binding_kind": "apt",
-        "description": "borderless text tables with alignment",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "table",
-          "with"
-        ],
-        "name": "node-text-table",
-        "packages": [],
-        "query": "table",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 62,
-        "version": "0.2.0-4",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
-      "probe": {
-        "archive_sha256": "f7572653ddc875a68da85c48514dc2eec111a7e3b2ce0fb354cfb09b111fc056",
-        "executables": [],
-        "package": "node-turndown",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "7.1.1-3"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "_acquisition_object_matches": 2,
-        "_acquisition_role_score": 112.0,
-        "archive_sha256": "f7572653ddc875a68da85c48514dc2eec111a7e3b2ce0fb354cfb09b111fc056",
-        "binding_kind": "apt",
-        "description": "convert HTML into MarkDown with JavaScript",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "markdown",
-          "with"
-        ],
-        "name": "node-turndown",
-        "packages": [],
-        "query": "markdown",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 48,
-        "version": "7.1.1-3",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
-      "probe": {
-        "archive_sha256": "b70805dbddbe63f4d9db049c4ae296aead7f2d1666fa8b843808e87f23aaac70",
-        "executables": [
-          {
-            "executable": "/usr/bin/pampi",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 134,
-                "text": "qt.qpa.xcb: could not connect to display \nqt.qpa.plugin: Could not load the Qt platform plugin \"xcb\" in \"\" even though it was found.\nThis application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.\n\nAvailable platform plugins are: eglfs, linuxfb, minimal, minimalegl, offscreen, vnc, xcb.\n\nAborted (core dumped)"
-              }
-            ]
-          },
-          {
-            "executable": "/usr/bin/pampi-nonfree",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 1,
-                "text": "Traceback (most recent call last):\n  File \"/usr/share/pampi/script-nonfree/pampi-nonfree\", line 7, in <module>\n    from PyQt5.QtWidgets import QDialog, QApplication, QMessageBox\nModuleNotFoundError: No module named 'PyQt5'"
-              }
-            ]
-          }
-        ],
-        "package": "pampi",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "1.1+dfsg1-9"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "_acquisition_object_matches": 2,
-        "_acquisition_role_score": 112.0,
-        "archive_sha256": "b70805dbddbe63f4d9db049c4ae296aead7f2d1666fa8b843808e87f23aaac70",
-        "binding_kind": "apt",
-        "description": "Presentations with Markdown, Pandoc, Impress.",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "markdown",
-          "with"
-        ],
-        "name": "pampi",
-        "packages": [],
-        "query": "markdown",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 48,
-        "version": "1.1+dfsg1-9",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
-      "probe": {
-        "archive_sha256": "cefb030d681c414e13e2a0385681870e42bb474ede01603e8cb66f59b7134514",
-        "executables": [],
-        "package": "postgresql-16-pg-fact-loader",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "2.0.1-3"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "_acquisition_object_matches": 2,
-        "_acquisition_role_score": 112.0,
-        "archive_sha256": "cefb030d681c414e13e2a0385681870e42bb474ede01603e8cb66f59b7134514",
-        "binding_kind": "apt",
-        "description": "Build fact tables asynchronously with Postgres",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "table",
-          "with"
-        ],
-        "name": "postgresql-16-pg-fact-loader",
-        "packages": [],
-        "query": "table",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 48,
-        "version": "2.0.1-3",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
-      "probe": {
-        "archive_sha256": "59f2ee4992638d8841d516bcb7973d82681966f58200f42b8079193577e538b7",
-        "executables": [],
-        "package": "postgresql-16-repack",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "1.5.0-1"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "_acquisition_object_matches": 2,
-        "_acquisition_role_score": 112.0,
-        "archive_sha256": "59f2ee4992638d8841d516bcb7973d82681966f58200f42b8079193577e538b7",
-        "binding_kind": "apt",
-        "description": "reorganize tables in PostgreSQL databases with minimal locks",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "table",
-          "with"
-        ],
-        "name": "postgresql-16-repack",
-        "packages": [],
-        "query": "table",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 48,
-        "version": "1.5.0-1",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
-      "probe": {
-        "archive_sha256": "34db36d1bb9241b414925d111b220f9b19a4decdcda678841fe91ff5fa819e53",
-        "executables": [],
-        "package": "r-cran-bookdown",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "0.37+dfsg-1"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "_acquisition_object_matches": 2,
-        "_acquisition_role_score": 112.0,
-        "archive_sha256": "34db36d1bb9241b414925d111b220f9b19a4decdcda678841fe91ff5fa819e53",
-        "binding_kind": "apt",
-        "description": "authoring books and technical documents with GNU R markdown",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "markdown",
-          "with"
-        ],
-        "name": "r-cran-bookdown",
-        "packages": [],
-        "query": "markdown",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 48,
-        "version": "0.37+dfsg-1",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
-      "probe": {
-        "archive_sha256": "c4fd0502e62e861917583ee31eccbfce810a37c94c3e90b63a52e2e9ec17b7eb",
-        "executables": [],
-        "package": "r-cran-kableextra",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "1.4.0+dfsg-1"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "_acquisition_object_matches": 2,
-        "_acquisition_role_score": 112.0,
-        "archive_sha256": "c4fd0502e62e861917583ee31eccbfce810a37c94c3e90b63a52e2e9ec17b7eb",
-        "binding_kind": "apt",
-        "description": "construct complex table with 'kable' and pipe syntax in GNU R",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "table",
-          "with"
-        ],
-        "name": "r-cran-kableextra",
-        "packages": [],
-        "query": "table",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 48,
-        "version": "1.4.0+dfsg-1",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.md",
-      "probe": {
-        "archive_sha256": "d6b965acbe19d3711149fba0bbfbe92604e55afe9e48f880b4f7e29cd4f36c12",
-        "executables": [
-          {
-            "executable": "/usr/bin/w3m",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 1,
-                "text": "w3m version w3m/0.5.3+git20230121, options lang=en,m17n,image,color,ansi-color,mouse,gpm,menu,cookie,ssl,ssl-verify,external-uri-loader,w3mmailer,nntp,gopher,ipv6,alarm,mark,migemo\nusage: w3m [options] [URL or filename]\noptions:\n    -t tab           set tab width\n    -r               ignore backspace effect\n    -l line          # of preserved line (default 10000)\n    -I charset       document charset\n    -O charset       display/output charset\n    -B               load bookmark\n    -bookmark file   specify bookmark file\n    -T type          specify content-type\n    -m               internet message mode\n    -v               visual startup mode\n    -M               monochrome display\n    -H               use high-intensity colors\n    -N               open URL of command line on each new tab\n    -F               automatically render frames\n    -cols width      specify column width (used with -dump)\n    -ppc count       specify the number of pixels per character (4.0...32.0)\n    -ppl count       specify the number of pixels per line (4.0...64.0)\n    -dump            dump formatted page into stdout\n    -dump_head       dump response of HEAD request into stdout\n    -dump_source     dump page source into stdout\n    -dump_both       dump HEAD and source into stdout\n    -dump_extra      dump HEAD, source, and extra information into stdout\n    -post file       use POST method with file content\n    -header string   insert string as a header\n    +<num>           goto <num> line\n    -num             show line number\n    -no-proxy        don't use proxy\n    -4               IPv4 only (-o dns_order=4)\n    -6               IPv6 only (-o dns_order=6)\n    -insecure        use insecure SSL config options\n    -no-mouse        don't use mouse\n    -cookie          use cookie (-no-cookie: don't use cookie)\n    -graph           use DEC special graphics for border of table and menu\n    -no-graph        use ASCII character for border of table and menu\n    -s               squeeze multiple blank lines\n    -W               toggle search wrap mode\n    -X               don't use termcap init/deinit\n    -title[=TERM]    set buffer name to terminal title string\n    -o opt=value     assign value to config option\n    -show-option     print all config options\n    -config file     specify config file\n    -debug           use debug mode (only for debugging)\n    -reqlog          write request logfile\n    -help            print this usage message\n    -version         print w3m version"
-              }
-            ]
-          },
-          {
-            "executable": "/usr/bin/w3mman",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 1,
-                "text": "w3mman [-M <path>] [[<section>] <command>]\nw3mman [-M <path>] [<section>] [-k <keyword>]\nw3mman [-l <file>]"
-              }
-            ]
-          }
-        ],
-        "package": "w3m",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "0.5.3+git20230121-2ubuntu5"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "_acquisition_object_matches": 2,
-        "_acquisition_role_score": 112.0,
-        "archive_sha256": "d6b965acbe19d3711149fba0bbfbe92604e55afe9e48f880b4f7e29cd4f36c12",
-        "binding_kind": "apt",
-        "description": "WWW browsable pager with excellent tables/frames support",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "table",
-          "with"
-        ],
-        "name": "w3m",
-        "packages": [],
-        "query": "table",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 48,
-        "version": "0.5.3+git20230121-2ubuntu5",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
-      "probe": {
         "archive_sha256": "15e721ced3b26257d5f724085e2b2ca6f745bd131623c56ce85323f664f4b48c",
         "executables": [],
         "package": "cl-markdown",
@@ -455,6 +141,270 @@
         "required_secret_count": 0,
         "score": 32,
         "version": "2.6-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "bcf98fb42ede51af7ad0a487c2ef612813c90ecdbd81de59db5012abbb11c16e",
+        "executables": [],
+        "package": "fcitx-table",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1:4.2.9.9-2build2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "bcf98fb42ede51af7ad0a487c2ef612813c90ecdbd81de59db5012abbb11c16e",
+        "binding_kind": "apt",
+        "description": "Flexible Input Method Framework - table engine",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "table"
+        ],
+        "name": "fcitx-table",
+        "packages": [],
+        "query": "table",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:4.2.9.9-2build2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "1705eb043ea3b664ec2d38b14a0f34f37f9ffd71f2be891751f9890da1b8412e",
+        "executables": [],
+        "package": "fcitx-table-all",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1:4.2.9.9-2build2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "1705eb043ea3b664ec2d38b14a0f34f37f9ffd71f2be891751f9890da1b8412e",
+        "binding_kind": "apt",
+        "description": "Flexible Input Method Framework - tables metapackage",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "table"
+        ],
+        "name": "fcitx-table-all",
+        "packages": [],
+        "query": "table",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:4.2.9.9-2build2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "16c4cf829b7585b7237fca077232994bf80ce23d8486507ee3c65a6ce033e84d",
+        "executables": [],
+        "package": "fcitx-table-amharic",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.2.4-3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "16c4cf829b7585b7237fca077232994bf80ce23d8486507ee3c65a6ce033e84d",
+        "binding_kind": "apt",
+        "description": "Flexible Input Method Framework - Amharic table",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "table"
+        ],
+        "name": "fcitx-table-amharic",
+        "packages": [],
+        "query": "table",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.2.4-3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "80be63607c73c50c49b5b7266bc9dab0d2c9cd7550fb6c73e65d8bec0e0968a6",
+        "executables": [],
+        "package": "fcitx-table-arabic",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.2.4-3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "80be63607c73c50c49b5b7266bc9dab0d2c9cd7550fb6c73e65d8bec0e0968a6",
+        "binding_kind": "apt",
+        "description": "Flexible Input Method Framework - Arabic table",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "table"
+        ],
+        "name": "fcitx-table-arabic",
+        "packages": [],
+        "query": "table",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.2.4-3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "fceab99efb0e99ea2233d454297d4921c5932e957b3a3c22665682fa538a6d27",
+        "executables": [],
+        "package": "fcitx-table-array30",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.3.8-3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "fceab99efb0e99ea2233d454297d4921c5932e957b3a3c22665682fa538a6d27",
+        "binding_kind": "apt",
+        "description": "Flexible Input Method Framework - Array30 table",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "table"
+        ],
+        "name": "fcitx-table-array30",
+        "packages": [],
+        "query": "table",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.3.8-3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "8a479a4bf1358dbb669611ca15f2def8e5e64d5e6f3895853f03ef2e473ecb50",
+        "executables": [],
+        "package": "fcitx-table-array30-big",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.3.8-3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "8a479a4bf1358dbb669611ca15f2def8e5e64d5e6f3895853f03ef2e473ecb50",
+        "binding_kind": "apt",
+        "description": "Flexible Input Method Framework - Array30-Big table",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "table"
+        ],
+        "name": "fcitx-table-array30-big",
+        "packages": [],
+        "query": "table",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.3.8-3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "701415f424a5e15f180124736cdecd77274741c2553171eb7a85f395565ad597",
+        "executables": [],
+        "package": "fcitx-table-bingchan",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1:4.2.9.9-2build2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "701415f424a5e15f180124736cdecd77274741c2553171eb7a85f395565ad597",
+        "binding_kind": "apt",
+        "description": "Flexible Input Method Framework - Bingchan table",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "table"
+        ],
+        "name": "fcitx-table-bingchan",
+        "packages": [],
+        "query": "table",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:4.2.9.9-2build2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "13f3dc1f4215f98712ea4da07b80585aaa44308903543185d5f6e2991f9d6f69",
+        "executables": [],
+        "package": "fcitx-table-boshiamy",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.3.8-3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "13f3dc1f4215f98712ea4da07b80585aaa44308903543185d5f6e2991f9d6f69",
+        "binding_kind": "apt",
+        "description": "Flexible Input Method Framework - Boshiamy table",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "table"
+        ],
+        "name": "fcitx-table-boshiamy",
+        "packages": [],
+        "query": "table",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.3.8-3",
         "zero_cost_eligible": true
       }
     }

@@ -1,12 +1,12 @@
 {
   "auto_acquisition": {
-    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-markdown-toc\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-text-table\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-turndown\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"pampi\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"postgresql-16-pg-fact-loader\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"postgresql-16-repack\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"r-cran-bookdown\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"r-cran-kableextra\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.md\", \"name\": \"w3m\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"cl-markdown\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"markdown\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-markdown-mode\", \"status\": \"CONTRACT_REJECTED\"}]",
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-markdown-toc\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"cl-markdown\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"markdown\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-markdown-mode\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table-all\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table-amharic\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table-arabic\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table-array30\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table-array30-big\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table-bingchan\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table-boshiamy\", \"status\": \"CONTRACT_REJECTED\"}]",
     "status": "NOT_DISPATCHED"
   },
   "binding_performed": false,
   "goal": "Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json. Create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.md containing a table with every VERIFIED_BOUND_CAPABILITY, its provided effects, source dependency, and verification mission. Then create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.pdf from that report and verify that the final PDF contains every capability ID from the registry.",
   "mission_id": "ASTRA-RUNTIME-CAPABILITY-AUDIT-001",
-  "observed_at_utc": "2026-09-24T23:49:02.822489+00:00",
+  "observed_at_utc": "2026-09-24T23:54:06.725029+00:00",
   "result": {
     "binding_performed": false,
     "candidates": [
@@ -29,174 +29,6 @@
         "required_secret_count": 0,
         "score": 62,
         "version": "0.1.5-3",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "0ca9138fbbd2eb19d45091e98366952634bf5cfefff93b68f000fe99b4bdbcba",
-        "binding_kind": "apt",
-        "description": "borderless text tables with alignment",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "table",
-          "with"
-        ],
-        "name": "node-text-table",
-        "packages": [],
-        "query": "table",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 62,
-        "version": "0.2.0-4",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "f7572653ddc875a68da85c48514dc2eec111a7e3b2ce0fb354cfb09b111fc056",
-        "binding_kind": "apt",
-        "description": "convert HTML into MarkDown with JavaScript",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "markdown",
-          "with"
-        ],
-        "name": "node-turndown",
-        "packages": [],
-        "query": "markdown",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 48,
-        "version": "7.1.1-3",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "b70805dbddbe63f4d9db049c4ae296aead7f2d1666fa8b843808e87f23aaac70",
-        "binding_kind": "apt",
-        "description": "Presentations with Markdown, Pandoc, Impress.",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "markdown",
-          "with"
-        ],
-        "name": "pampi",
-        "packages": [],
-        "query": "markdown",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 48,
-        "version": "1.1+dfsg1-9",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "cefb030d681c414e13e2a0385681870e42bb474ede01603e8cb66f59b7134514",
-        "binding_kind": "apt",
-        "description": "Build fact tables asynchronously with Postgres",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "table",
-          "with"
-        ],
-        "name": "postgresql-16-pg-fact-loader",
-        "packages": [],
-        "query": "table",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 48,
-        "version": "2.0.1-3",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "59f2ee4992638d8841d516bcb7973d82681966f58200f42b8079193577e538b7",
-        "binding_kind": "apt",
-        "description": "reorganize tables in PostgreSQL databases with minimal locks",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "table",
-          "with"
-        ],
-        "name": "postgresql-16-repack",
-        "packages": [],
-        "query": "table",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 48,
-        "version": "1.5.0-1",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "34db36d1bb9241b414925d111b220f9b19a4decdcda678841fe91ff5fa819e53",
-        "binding_kind": "apt",
-        "description": "authoring books and technical documents with GNU R markdown",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "markdown",
-          "with"
-        ],
-        "name": "r-cran-bookdown",
-        "packages": [],
-        "query": "markdown",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 48,
-        "version": "0.37+dfsg-1",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "c4fd0502e62e861917583ee31eccbfce810a37c94c3e90b63a52e2e9ec17b7eb",
-        "binding_kind": "apt",
-        "description": "construct complex table with 'kable' and pipe syntax in GNU R",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "table",
-          "with"
-        ],
-        "name": "r-cran-kableextra",
-        "packages": [],
-        "query": "table",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 48,
-        "version": "1.4.0+dfsg-1",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "d6b965acbe19d3711149fba0bbfbe92604e55afe9e48f880b4f7e29cd4f36c12",
-        "binding_kind": "apt",
-        "description": "WWW browsable pager with excellent tables/frames support",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "table",
-          "with"
-        ],
-        "name": "w3m",
-        "packages": [],
-        "query": "table",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 48,
-        "version": "0.5.3+git20230121-2ubuntu5",
         "zero_cost_eligible": true
       },
       {
@@ -237,46 +69,6 @@
         "required_secret_count": 0,
         "score": 32,
         "version": "2.6-1",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "6d48442652970885c7454ae1b2dd89fb35616c2a96a740f10623d80dab7c4025",
-        "binding_kind": "apt",
-        "description": "call program using Emacs as $EDITOR",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "with"
-        ],
-        "name": "elpa-with-editor",
-        "packages": [],
-        "query": "with",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "3.3.0-1",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "36e92734da0aabb44971b9c7ee5f468c1cc2516731e98d40345599c6c5866dde",
-        "binding_kind": "apt",
-        "description": "macro to simulate user input non-interactively",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "with"
-        ],
-        "name": "elpa-with-simulated-input",
-        "packages": [],
-        "query": "with",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "3.0-1",
         "zero_cost_eligible": true
       },
       {
@@ -540,6 +332,266 @@
         "zero_cost_eligible": true
       },
       {
+        "archive_sha256": "011c80dfccbccb0b0e33ea42f9ea48d58c0df4bf82a01df4e75c7b1483d804db",
+        "binding_kind": "apt",
+        "description": "Flexible Input Method Framework - Cantonhk table",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "table"
+        ],
+        "name": "fcitx-table-cantonhk",
+        "packages": [],
+        "query": "table",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.3.8-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "7c6d4a91d59d98c7a9f3a7f0304a5a5dbde0b00bc151daf22867fdfcb5b2b81a",
+        "binding_kind": "apt",
+        "description": "Flexible Input Method Framework - Cns11643 table",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "table"
+        ],
+        "name": "fcitx-table-cns11643",
+        "packages": [],
+        "query": "table",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.2.4-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "b7ed48e0a8c74c5a97d1a88adb23b23949261f2ad1796487f7fecb2a836ecc1e",
+        "binding_kind": "apt",
+        "description": "Flexible Input Method Framework - Compose table",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "table"
+        ],
+        "name": "fcitx-table-compose",
+        "packages": [],
+        "query": "table",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.2.4-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "486aff197ccad92b5e827f4311485423f13bb17eae8caf4f483c005787d29aef",
+        "binding_kind": "apt",
+        "description": "Flexible Input Method Framework - Dianbaoma table",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "table"
+        ],
+        "name": "fcitx-table-dianbaoma",
+        "packages": [],
+        "query": "table",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:4.2.9.9-2build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "f9515cd22ad8382c66df8807773551ab9a093bc10a69333add81c6b74c995fc8",
+        "binding_kind": "apt",
+        "description": "Flexible Input Method Framework - Easy-Big table",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "table"
+        ],
+        "name": "fcitx-table-easy-big",
+        "packages": [],
+        "query": "table",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.3.8-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "678c9d8c01e79022823fa9d683d35f5b8e7dfdcd7a9b2e312f34a7cb82c9f054",
+        "binding_kind": "apt",
+        "description": "Flexible Input Method Framework - Emoji table",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "table"
+        ],
+        "name": "fcitx-table-emoji",
+        "packages": [],
+        "query": "table",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.2.4-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "acbaff892b4099fefe8cf0f6364b4dae32805243b2d05f1feaed715a9f46dd92",
+        "binding_kind": "apt",
+        "description": "Flexible Input Method Framework - Erbi table",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "table"
+        ],
+        "name": "fcitx-table-erbi",
+        "packages": [],
+        "query": "table",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:4.2.9.9-2build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "cff22b65ed2d2b6bb766194177e97e3053a523cf0864f3ea19e5e4712a77325c",
+        "binding_kind": "apt",
+        "description": "Flexible Input Method Framework - IPA-X-SAMPA table",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "table"
+        ],
+        "name": "fcitx-table-ipa-x-sampa",
+        "packages": [],
+        "query": "table",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.2.4-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ab8878e3f378ab8b4d3c93698f7fc5e0d0fde08c3b070c87411e0c7b0cadec13",
+        "binding_kind": "apt",
+        "description": "Flexible Input Method Framework - Jyutping table",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "table"
+        ],
+        "name": "fcitx-table-jyutping",
+        "packages": [],
+        "query": "table",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.3.8-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "cd2d842d07580789591838227394fcf2bf174498397e4e4e16e322fb9e0968a5",
+        "binding_kind": "apt",
+        "description": "Flexible Input Method Framework - LaTeX table",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "table"
+        ],
+        "name": "fcitx-table-latex",
+        "packages": [],
+        "query": "table",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.2.4-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "5005a18e37827eec55d426a2bcede4ee52be140a2d9b0b885adf5df6cfd26fa7",
+        "binding_kind": "apt",
+        "description": "Flexible Input Method Framework - Malayalam phonetic table",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "table"
+        ],
+        "name": "fcitx-table-malayalam-phonetic",
+        "packages": [],
+        "query": "table",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.2.4-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d47eac2b95be0f25259be5d43b4dccbeeeecfebe4c4ffb558b34572c54e48d56",
+        "binding_kind": "apt",
+        "description": "Flexible Input Method Framework - Quick-Classic table",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "table"
+        ],
+        "name": "fcitx-table-quick-classic",
+        "packages": [],
+        "query": "table",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.3.8-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "56ddf7aa83a2b50f4b2a527f6ab1931554b1eaf6d2b19c275f934ce589721827",
+        "binding_kind": "apt",
+        "description": "Flexible Input Method Framework - Quick3 table",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "table"
+        ],
+        "name": "fcitx-table-quick3",
+        "packages": [],
+        "query": "table",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.3.8-3",
+        "zero_cost_eligible": true
+      },
+      {
         "archive_sha256": "960f34cfbce54127e0ba7253efb7e747ae062d1174b388d68deca9dbfb8f702b",
         "binding_kind": "apt",
         "description": "Sphinx extension for rendering markdown tables (Python 3)",
@@ -558,69 +610,6 @@
         "required_secret_count": 0,
         "score": 44,
         "version": "0.0.17-1",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "416250f72fbd9dcfd96211891bec273fbff5dd1c495d597776132f7b321a7ceb",
-        "binding_kind": "apt",
-        "description": "convert Markdown to HTML, with XSS protection",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 4,
-        "matched_terms": [
-          "markdown",
-          "with"
-        ],
-        "name": "libghc-markdown-dev",
-        "packages": [],
-        "query": "markdown",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 34,
-        "version": "0.1.17.5-2",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "c7f8c513d9f3170c7ac942fa523a16fbc04cbfd85a1ce54224ac9f42d70aca9a",
-        "binding_kind": "apt",
-        "description": "convert Markdown to HTML, with XSS protection; documentation",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 4,
-        "matched_terms": [
-          "markdown",
-          "with"
-        ],
-        "name": "libghc-markdown-doc",
-        "packages": [],
-        "query": "markdown",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 34,
-        "version": "0.1.17.5-2",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "6483996e97fbcc06538493cde1a4c1d839478f77c1a12cd85cbc093802246378",
-        "binding_kind": "apt",
-        "description": "convert Markdown to HTML, with XSS protection; profiling libraries",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 4,
-        "matched_terms": [
-          "markdown",
-          "with"
-        ],
-        "name": "libghc-markdown-prof",
-        "packages": [],
-        "query": "markdown",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 34,
-        "version": "0.1.17.5-2",
         "zero_cost_eligible": true
       },
       {
@@ -1321,174 +1310,6 @@
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "0ca9138fbbd2eb19d45091e98366952634bf5cfefff93b68f000fe99b4bdbcba",
-            "binding_kind": "apt",
-            "description": "borderless text tables with alignment",
-            "discovery_source": "APT_CATALOG",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "table",
-              "with"
-            ],
-            "name": "node-text-table",
-            "packages": [],
-            "query": "table",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 62,
-            "version": "0.2.0-4",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "f7572653ddc875a68da85c48514dc2eec111a7e3b2ce0fb354cfb09b111fc056",
-            "binding_kind": "apt",
-            "description": "convert HTML into MarkDown with JavaScript",
-            "discovery_source": "APT_CATALOG",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "markdown",
-              "with"
-            ],
-            "name": "node-turndown",
-            "packages": [],
-            "query": "markdown",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 48,
-            "version": "7.1.1-3",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "b70805dbddbe63f4d9db049c4ae296aead7f2d1666fa8b843808e87f23aaac70",
-            "binding_kind": "apt",
-            "description": "Presentations with Markdown, Pandoc, Impress.",
-            "discovery_source": "APT_CATALOG",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "markdown",
-              "with"
-            ],
-            "name": "pampi",
-            "packages": [],
-            "query": "markdown",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 48,
-            "version": "1.1+dfsg1-9",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "cefb030d681c414e13e2a0385681870e42bb474ede01603e8cb66f59b7134514",
-            "binding_kind": "apt",
-            "description": "Build fact tables asynchronously with Postgres",
-            "discovery_source": "APT_CATALOG",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "table",
-              "with"
-            ],
-            "name": "postgresql-16-pg-fact-loader",
-            "packages": [],
-            "query": "table",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 48,
-            "version": "2.0.1-3",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "59f2ee4992638d8841d516bcb7973d82681966f58200f42b8079193577e538b7",
-            "binding_kind": "apt",
-            "description": "reorganize tables in PostgreSQL databases with minimal locks",
-            "discovery_source": "APT_CATALOG",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "table",
-              "with"
-            ],
-            "name": "postgresql-16-repack",
-            "packages": [],
-            "query": "table",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 48,
-            "version": "1.5.0-1",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "34db36d1bb9241b414925d111b220f9b19a4decdcda678841fe91ff5fa819e53",
-            "binding_kind": "apt",
-            "description": "authoring books and technical documents with GNU R markdown",
-            "discovery_source": "APT_CATALOG",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "markdown",
-              "with"
-            ],
-            "name": "r-cran-bookdown",
-            "packages": [],
-            "query": "markdown",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 48,
-            "version": "0.37+dfsg-1",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "c4fd0502e62e861917583ee31eccbfce810a37c94c3e90b63a52e2e9ec17b7eb",
-            "binding_kind": "apt",
-            "description": "construct complex table with 'kable' and pipe syntax in GNU R",
-            "discovery_source": "APT_CATALOG",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "table",
-              "with"
-            ],
-            "name": "r-cran-kableextra",
-            "packages": [],
-            "query": "table",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 48,
-            "version": "1.4.0+dfsg-1",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "d6b965acbe19d3711149fba0bbfbe92604e55afe9e48f880b4f7e29cd4f36c12",
-            "binding_kind": "apt",
-            "description": "WWW browsable pager with excellent tables/frames support",
-            "discovery_source": "APT_CATALOG",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "table",
-              "with"
-            ],
-            "name": "w3m",
-            "packages": [],
-            "query": "table",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 48,
-            "version": "0.5.3+git20230121-2ubuntu5",
-            "zero_cost_eligible": true
-          },
-          {
             "archive_sha256": "960f34cfbce54127e0ba7253efb7e747ae062d1174b388d68deca9dbfb8f702b",
             "binding_kind": "apt",
             "description": "Sphinx extension for rendering markdown tables (Python 3)",
@@ -1507,69 +1328,6 @@
             "required_secret_count": 0,
             "score": 44,
             "version": "0.0.17-1",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "416250f72fbd9dcfd96211891bec273fbff5dd1c495d597776132f7b321a7ceb",
-            "binding_kind": "apt",
-            "description": "convert Markdown to HTML, with XSS protection",
-            "discovery_source": "APT_CATALOG",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 4,
-            "matched_terms": [
-              "markdown",
-              "with"
-            ],
-            "name": "libghc-markdown-dev",
-            "packages": [],
-            "query": "markdown",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 34,
-            "version": "0.1.17.5-2",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "c7f8c513d9f3170c7ac942fa523a16fbc04cbfd85a1ce54224ac9f42d70aca9a",
-            "binding_kind": "apt",
-            "description": "convert Markdown to HTML, with XSS protection; documentation",
-            "discovery_source": "APT_CATALOG",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 4,
-            "matched_terms": [
-              "markdown",
-              "with"
-            ],
-            "name": "libghc-markdown-doc",
-            "packages": [],
-            "query": "markdown",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 34,
-            "version": "0.1.17.5-2",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "6483996e97fbcc06538493cde1a4c1d839478f77c1a12cd85cbc093802246378",
-            "binding_kind": "apt",
-            "description": "convert Markdown to HTML, with XSS protection; profiling libraries",
-            "discovery_source": "APT_CATALOG",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 4,
-            "matched_terms": [
-              "markdown",
-              "with"
-            ],
-            "name": "libghc-markdown-prof",
-            "packages": [],
-            "query": "markdown",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 34,
-            "version": "0.1.17.5-2",
             "zero_cost_eligible": true
           },
           {
@@ -1610,46 +1368,6 @@
             "required_secret_count": 0,
             "score": 32,
             "version": "2.6-1",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "6d48442652970885c7454ae1b2dd89fb35616c2a96a740f10623d80dab7c4025",
-            "binding_kind": "apt",
-            "description": "call program using Emacs as $EDITOR",
-            "discovery_source": "APT_CATALOG",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "with"
-            ],
-            "name": "elpa-with-editor",
-            "packages": [],
-            "query": "with",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 32,
-            "version": "3.3.0-1",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "36e92734da0aabb44971b9c7ee5f468c1cc2516731e98d40345599c6c5866dde",
-            "binding_kind": "apt",
-            "description": "macro to simulate user input non-interactively",
-            "discovery_source": "APT_CATALOG",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "with"
-            ],
-            "name": "elpa-with-simulated-input",
-            "packages": [],
-            "query": "with",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 32,
-            "version": "3.0-1",
             "zero_cost_eligible": true
           },
           {
@@ -1911,6 +1629,266 @@
             "score": 32,
             "version": "0.3.8-3",
             "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "011c80dfccbccb0b0e33ea42f9ea48d58c0df4bf82a01df4e75c7b1483d804db",
+            "binding_kind": "apt",
+            "description": "Flexible Input Method Framework - Cantonhk table",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "table"
+            ],
+            "name": "fcitx-table-cantonhk",
+            "packages": [],
+            "query": "table",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.3.8-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "7c6d4a91d59d98c7a9f3a7f0304a5a5dbde0b00bc151daf22867fdfcb5b2b81a",
+            "binding_kind": "apt",
+            "description": "Flexible Input Method Framework - Cns11643 table",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "table"
+            ],
+            "name": "fcitx-table-cns11643",
+            "packages": [],
+            "query": "table",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.2.4-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "b7ed48e0a8c74c5a97d1a88adb23b23949261f2ad1796487f7fecb2a836ecc1e",
+            "binding_kind": "apt",
+            "description": "Flexible Input Method Framework - Compose table",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "table"
+            ],
+            "name": "fcitx-table-compose",
+            "packages": [],
+            "query": "table",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.2.4-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "486aff197ccad92b5e827f4311485423f13bb17eae8caf4f483c005787d29aef",
+            "binding_kind": "apt",
+            "description": "Flexible Input Method Framework - Dianbaoma table",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "table"
+            ],
+            "name": "fcitx-table-dianbaoma",
+            "packages": [],
+            "query": "table",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1:4.2.9.9-2build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "f9515cd22ad8382c66df8807773551ab9a093bc10a69333add81c6b74c995fc8",
+            "binding_kind": "apt",
+            "description": "Flexible Input Method Framework - Easy-Big table",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "table"
+            ],
+            "name": "fcitx-table-easy-big",
+            "packages": [],
+            "query": "table",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.3.8-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "678c9d8c01e79022823fa9d683d35f5b8e7dfdcd7a9b2e312f34a7cb82c9f054",
+            "binding_kind": "apt",
+            "description": "Flexible Input Method Framework - Emoji table",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "table"
+            ],
+            "name": "fcitx-table-emoji",
+            "packages": [],
+            "query": "table",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.2.4-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "acbaff892b4099fefe8cf0f6364b4dae32805243b2d05f1feaed715a9f46dd92",
+            "binding_kind": "apt",
+            "description": "Flexible Input Method Framework - Erbi table",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "table"
+            ],
+            "name": "fcitx-table-erbi",
+            "packages": [],
+            "query": "table",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1:4.2.9.9-2build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "cff22b65ed2d2b6bb766194177e97e3053a523cf0864f3ea19e5e4712a77325c",
+            "binding_kind": "apt",
+            "description": "Flexible Input Method Framework - IPA-X-SAMPA table",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "table"
+            ],
+            "name": "fcitx-table-ipa-x-sampa",
+            "packages": [],
+            "query": "table",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.2.4-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "ab8878e3f378ab8b4d3c93698f7fc5e0d0fde08c3b070c87411e0c7b0cadec13",
+            "binding_kind": "apt",
+            "description": "Flexible Input Method Framework - Jyutping table",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "table"
+            ],
+            "name": "fcitx-table-jyutping",
+            "packages": [],
+            "query": "table",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.3.8-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "cd2d842d07580789591838227394fcf2bf174498397e4e4e16e322fb9e0968a5",
+            "binding_kind": "apt",
+            "description": "Flexible Input Method Framework - LaTeX table",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "table"
+            ],
+            "name": "fcitx-table-latex",
+            "packages": [],
+            "query": "table",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.2.4-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "5005a18e37827eec55d426a2bcede4ee52be140a2d9b0b885adf5df6cfd26fa7",
+            "binding_kind": "apt",
+            "description": "Flexible Input Method Framework - Malayalam phonetic table",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "table"
+            ],
+            "name": "fcitx-table-malayalam-phonetic",
+            "packages": [],
+            "query": "table",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.2.4-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d47eac2b95be0f25259be5d43b4dccbeeeecfebe4c4ffb558b34572c54e48d56",
+            "binding_kind": "apt",
+            "description": "Flexible Input Method Framework - Quick-Classic table",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "table"
+            ],
+            "name": "fcitx-table-quick-classic",
+            "packages": [],
+            "query": "table",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.3.8-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "56ddf7aa83a2b50f4b2a527f6ab1931554b1eaf6d2b19c275f934ce589721827",
+            "binding_kind": "apt",
+            "description": "Flexible Input Method Framework - Quick3 table",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "table"
+            ],
+            "name": "fcitx-table-quick3",
+            "packages": [],
+            "query": "table",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.3.8-3",
+            "zero_cost_eligible": true
           }
         ],
         "effect": "Create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.md containing a table with every VERIFIED_BOUND_CAPABILITY, its provided effects, source dependency, and verification mission",
@@ -1918,8 +1896,8 @@
         "queries": [
           "markdown",
           "table",
-          "with",
-          "verified"
+          "verified",
+          "bound"
         ],
         "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
         "source": "APT_CATALOG",
@@ -1927,7 +1905,7 @@
       },
       {
         "binding_performed": false,
-        "candidate_count": 107,
+        "candidate_count": 78,
         "candidates": [
           {
             "description": "Create, read, update, and delete records in Airtable bases and tables",
@@ -2539,27 +2517,6 @@
             "zero_cost_eligible": true
           },
           {
-            "description": "Publish AI reports as managed native links with versions, access control, revocation, and audit.",
-            "is_latest": true,
-            "name": "ai.publishwith/mcp",
-            "packages": [],
-            "query": "with",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://publishwith.ai/mcp"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
             "description": "Access and manage your Airtable bases, tables, and records seamlessly",
             "is_latest": true,
             "name": "ai.waystation/airtable",
@@ -2586,27 +2543,6 @@
             "score": 15,
             "status": "active",
             "version": "0.3.1",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Your AI agent builds interactive block-based courses over MCP; take them at learnwithagents.app.",
-            "is_latest": true,
-            "name": "app.learnwithagents/learn-with-agents",
-            "packages": [],
-            "query": "with",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://learnwithagents.app/mcp"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "0.1.0",
             "zero_cost_eligible": true
           },
           {
@@ -2764,15 +2700,62 @@
             "status": "active",
             "version": "1.0.0",
             "zero_cost_eligible": true
+          },
+          {
+            "description": "Verified Hamptons & North Fork data: open now, events, beaches, permits, closures.",
+            "is_latest": true,
+            "name": "com.hamptonsverified/hamptons-verified",
+            "packages": [],
+            "query": "verified",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://hamptonsverified.com/api/ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "6.400.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Semantic search over Handsontable and HyperFormula docs, API reference, release notes, and issues.",
+            "is_latest": true,
+            "name": "com.handsontable/docs",
+            "packages": [],
+            "query": "table",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://docs-assistant.handsontable.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
           }
         ],
         "effect": "Create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.md containing a table with every VERIFIED_BOUND_CAPABILITY, its provided effects, source dependency, and verification mission",
-        "errors": [],
+        "errors": [
+          {
+            "error": "TimeoutError:The read operation timed out",
+            "query": "bound"
+          }
+        ],
         "queries": [
           "markdown",
           "table",
-          "with",
-          "verified"
+          "verified",
+          "bound"
         ],
         "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
         "source": "OFFICIAL_MCP_REGISTRY",
