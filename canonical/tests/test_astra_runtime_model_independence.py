@@ -4,8 +4,8 @@ import pathlib
 import unittest
 from unittest import mock
 
-ROOT = pathlib.Path(__file__).resolve().parents[2]
-RUNTIME_PATH = ROOT / "runtime" / "astra_runtime.py"
+CANONICAL_ROOT = pathlib.Path(__file__).resolve().parents[1]
+RUNTIME_PATH = CANONICAL_ROOT / "runtime" / "astra_runtime.py"
 spec = importlib.util.spec_from_file_location("astra_runtime", RUNTIME_PATH)
 runtime = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(runtime)
