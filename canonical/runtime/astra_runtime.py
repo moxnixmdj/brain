@@ -381,10 +381,64 @@ def _discover_unreachable_effects(mission, error):
     writej(path,evidence)
     return path,evidence
 
+def _render_bound_template(value, inputs):
+    if isinstance(value,dict):
+        return {k:_render_bound_template(v,inputs) for k,v in value.items()}
+    if isinstance(value,list):
+        return [_render_bound_template(v,inputs) for v in value]
+    if isinstance(value,str):
+        if value.startswith("${input.") and value.endswith("}") and value.count("${")==1:
+            key=value[len("${input."):-1]
+            if key not in inputs:
+                raise Blocker("BOUND_CAPABILITY_INPUT_MISSING:"+key)
+            return inputs[key]
+        out=value
+        for key,val in inputs.items():
+            out=out.replace("${input."+str(key)+"}",str(val))
+        if "${input." in out:
+            raise Blocker("BOUND_CAPABILITY_INPUT_MISSING")
+        return out
+    return value
+
+def _inherit_verified_capabilities(problem):
+    enriched=json.loads(json.dumps(problem))
+    caps=enriched.setdefault("capabilities",[])
+    if not isinstance(caps,list):
+        raise Blocker("CAPABILITIES_INVALID")
+    existing={str(x.get("id")) for x in caps if isinstance(x,dict)}
+    inputs=enriched.get("inputs") or {}
+    if not isinstance(inputs,dict):
+        raise Blocker("CAPABILITY_INPUTS_INVALID")
+    inherited=[]
+    for cid,entry in sorted(_load_bound_capability_registry().items()):
+        if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
+            continue
+        if cid in existing:
+            continue
+        template=entry.get("action_template")
+        if not isinstance(template,dict):
+            continue
+        try:
+            action=_render_bound_template(template,inputs)
+        except Blocker:
+            continue
+        cap={
+          "id":cid,
+          "requires":list(entry.get("requires") or []),
+          "provides":list(entry.get("provides") or []),
+          "cost":float(entry.get("cost",1)),
+          "action":action
+        }
+        caps.append(cap)
+        inherited.append(cid)
+    enriched["_inherited_bound_capabilities"]=inherited
+    return enriched
+
 def _run_capability_planned_goal(step, mission, goal):
     problem=_capability_problem(step, mission)
     if problem is None:
         return None
+    problem=_inherit_verified_capabilities(problem)
     planner=_load_capability_planner()
     try:
         planned=planner.plan_actions(problem)
@@ -418,6 +472,7 @@ def _run_capability_planned_goal(step, mission, goal):
         raise Blocker("CAPABILITY_PLAN_EXECUTION_MISSING")
     result["planning_mode"]="DETERMINISTIC_CAPABILITY_GRAPH"
     result["capability_plan"]=planned["planning"]
+    result["inherited_bound_capabilities"]=problem.get("_inherited_bound_capabilities",[])
     return result
 
 def run_goal(step, mission):
