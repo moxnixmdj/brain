@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-QR-001",
+  "purpose": "Force the shared runtime to handle a plain goal whose required capability is not already verified, exercising unknown-goal discovery rather than a hand-authored target effect.",
+  "goal": "Generate a QR code image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png.",
+  "steps": [
+    {
+      "id": "execute-unknown-plain-goal",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 8,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "PLAIN_GOAL_QR_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "manually_authored_target_effects": false,
+    "manually_authored_initial_facts": false,
+    "manually_authored_controller_actions": false,
+    "existing_verified_qr_capability_required": false
+  }
+}
