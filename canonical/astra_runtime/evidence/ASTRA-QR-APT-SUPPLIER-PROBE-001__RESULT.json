@@ -1,0 +1,10 @@
+{
+  "archive_sha256": "613c5a22316489ec6a9ce5d59190293df15dd4612b55432dde04c62f7c1a0e25",
+  "effect_verified": "PNG_SIGNATURE_AND_NONEMPTY",
+  "output_bytes": 290,
+  "output_path": "canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png",
+  "output_sha256": "f66a687f409f2148dacd3682c49dbc7f8f100d812ec387c2deac6659d6258ef9",
+  "package": "qrencode",
+  "schema": "PROJECT_BRAIN_APT_SUPPLIER_PROBE_V1",
+  "version": "4.1.1-1build2"
+}

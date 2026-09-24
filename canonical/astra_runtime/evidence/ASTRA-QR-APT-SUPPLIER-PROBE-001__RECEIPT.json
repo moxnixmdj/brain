@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-24T21:55:03.857338+00:00",
+  "mission_id": "ASTRA-QR-APT-SUPPLIER-PROBE-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_QR_APT_SUPPLIER_PROBE_001.json",
+  "mission_sha256": "e2a0a96db69e59a86c1e9fb7be66541fa8c3dfffd012879c6445e53b45eaa0ea",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "8625183865fb6ee13cc198b0ee0da11c4ef4b5929d49f993d1ec3321aa8d8680",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
