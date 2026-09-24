@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-CAPABILITY-AUDIT-001",
+  "purpose": "Fresh integrated professional-work pressure mission: transform live canonical structured state into a human-readable report and independently verified final artifact using the shared runtime, without hand-authored effects, suppliers, bindings, or controller actions.",
+  "goal": "Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json. Create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.md containing a table with every VERIFIED_BOUND_CAPABILITY, its provided effects, source dependency, and verification mission. Then create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.pdf from that report and verify that the final PDF contains every capability ID from the registry.",
+  "steps": [
+    {
+      "id": "execute-integrated-capability-audit",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 20,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "CAPABILITY_AUDIT_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "mandatory_model_planner": false,
+    "manual_target_effects": false,
+    "manual_initial_facts": false,
+    "manual_controller_actions": false,
+    "manual_supplier": false,
+    "manual_binding": false,
+    "real_project_artifact": true,
+    "require_final_effect_verification": true
+  }
+}
