@@ -23,9 +23,25 @@ def _help_text(probe):
         for att in exe.get("help_attempts",[]):
             text=str(att.get("text") or "")
             lower=text.lower()
-            if text and ("usage:" in lower or "options:" in lower):
-                quality=2 if "usage:" in lower else 1
-                choices.append((quality,len(text),exe.get("executable"),text))
+            if text:
+                if "usage:" in lower or "options:" in lower:
+                    quality=3 if "usage:" in lower else 2
+                    choices.append((quality,len(text),exe.get("executable"),text))
+                    continue
+                # Some mature CLIs (for example option-table style tools)
+                # provide complete help without literal "Usage:"/"Options:"
+                # headings. Accept only clearly structured help with several
+                # option declarations and action-bearing flags, otherwise fail
+                # closed as before.
+                option_lines=[
+                    line for line in text.splitlines()
+                    if re.search(r"(?:^|\s)-[A-Za-z0-9](?:,|\s)|--[A-Za-z0-9]",line)
+                ]
+                if (
+                    len(option_lines)>=4
+                    and any(k in lower for k in ("--output","output file","--data","data content","input data"))
+                ):
+                    choices.append((1,len(text),exe.get("executable"),text))
     if not choices:
         raise ContractInferenceFailure("CLI_HELP_CONTRACT_TEXT_REQUIRED")
     choices.sort(reverse=True)
