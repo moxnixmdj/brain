@@ -19,7 +19,8 @@ import urllib.request
 MCP_REGISTRY_BASE = "https://registry.modelcontextprotocol.io"
 STOPWORDS = {
     "capability","tool","action","do","use","get","make","create","read","write",
-    "data","file","service","external","target","effect"
+    "data","file","service","external","target","effect",
+    "containing","contains","every","its","that","final"
 }
 GENERIC_DISCOVERY_TOKENS={
     "generate","code","image","text","save","output","input","convert",
@@ -32,11 +33,27 @@ class DiscoveryFailure(RuntimeError):
     pass
 
 
+def _semanticize_paths(text):
+    ext_words={
+        "md":"markdown","markdown":"markdown","pdf":"pdf","json":"json",
+        "csv":"csv","tsv":"tsv","png":"image","jpg":"image","jpeg":"image",
+        "txt":"text","html":"html","htm":"html","xml":"xml"
+    }
+    pattern=r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+"
+    def repl(match):
+        raw=match.group(0)
+        leaf=raw.rsplit("/",1)[-1]
+        ext=leaf.rsplit(".",1)[-1].lower() if "." in leaf else ""
+        return " "+ext_words.get(ext,"")+" "
+    return re.sub(pattern,repl,str(text or ""))
+
+
 def effect_queries(effect):
     if not isinstance(effect, str) or not effect.strip():
         raise DiscoveryFailure("EFFECT_REQUIRED")
+    semantic=_semanticize_paths(effect)
     tokens = [
-        t.lower() for t in re.split(r"[^A-Za-z0-9]+", effect)
+        t.lower() for t in re.split(r"[^A-Za-z0-9]+", semantic)
         if len(t) >= 2 and t.lower() not in STOPWORDS
     ]
     out = []
