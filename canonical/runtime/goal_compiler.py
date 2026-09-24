@@ -113,9 +113,10 @@ def _score(goal, cid, entry):
     provides=_tokens(entry.get("provides",[]))
     requires=_tokens(entry.get("requires",[]))
     identity=_tokens(cid)
+    keywords=_tokens(entry.get("keywords",[]))
     # Requirements are highly informative for environment qualifiers such as
     # image-only/scanned/local/etc. Provides represent the requested effect.
-    effect_matches=(gt & provides) | (gt & identity)
+    effect_matches=(gt & provides) | (gt & identity) | (gt & keywords)
     # Preconditions may refine a real effect match but may never create one.
     # This prevents a word like "image" from turning an unrelated QR goal
     # into a PDF/OCR invocation.
@@ -125,8 +126,9 @@ def _score(goal, cid, entry):
             "matched_provides":[],
             "matched_requires":sorted(gt & requires),
             "matched_identity":[],
+            "matched_keywords":sorted(gt & keywords),
         }
-    score=5*len(gt & provides)+3*len(gt & requires)+2*len(gt & identity)
+    score=5*len(gt & provides)+4*len(gt & keywords)+3*len(gt & requires)+2*len(gt & identity)
     # Prefer more-specific matched preconditions when base scores tie.
     specificity=len(gt & requires)
     return score,specificity,{
@@ -134,6 +136,7 @@ def _score(goal, cid, entry):
         "matched_provides":sorted(gt & provides),
         "matched_requires":sorted(gt & requires),
         "matched_identity":sorted(gt & identity),
+        "matched_keywords":sorted(gt & keywords),
     }
 
 
