@@ -1,0 +1,44 @@
+{
+  "blocker": {
+    "adapter": "shell",
+    "error": "VERIFICATION_FAILED",
+    "mission_id": "ASTRA-STRUCTURED-REPORT-SUPPLIER-PROBE-001",
+    "observed_at_utc": "2026-09-24T23:53:21.219868+00:00",
+    "result": {
+      "adapter": "shell",
+      "command": "set -euo pipefail\nfor P in jq pandoc; do\n  echo ===$P_POLICY===\n  apt-cache policy \"$P\" || true\n  echo ===$P_SHOW===\n  apt-cache show \"$P\" 2>/dev/null | grep -E '^(Package|Version|SHA256|Description):' | head -n 20 || true\ndone\necho ===JQ_HELP===\n(jq --help || true) | head -n 100\necho ===PANDOC_HELP===\n(pandoc --help || true) | head -n 120\necho STRUCTURED_REPORT_SUPPLIER_PROBE_COMPLETE",
+      "duration_s": 0.002,
+      "returncode": 1,
+      "stderr": "/bin/bash: line 3: P_POLICY: unbound variable\n",
+      "stdout": ""
+    },
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "probe-jq-pandoc",
+    "step_index": 0
+  },
+  "created_at_utc": "2026-09-24T23:53:21.217760+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-24T23:53:21.219859+00:00",
+      "ok": false,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\nfor P in jq pandoc; do\n  echo ===$P_POLICY===\n  apt-cache policy \"$P\" || true\n  echo ===$P_SHOW===\n  apt-cache show \"$P\" 2>/dev/null | grep -E '^(Package|Version|SHA256|Description):' | head -n 20 || true\ndone\necho ===JQ_HELP===\n(jq --help || true) | head -n 100\necho ===PANDOC_HELP===\n(pandoc --help || true) | head -n 120\necho STRUCTURED_REPORT_SUPPLIER_PROBE_COMPLETE",
+        "duration_s": 0.002,
+        "returncode": 1,
+        "stderr": "/bin/bash: line 3: P_POLICY: unbound variable\n",
+        "stdout": ""
+      },
+      "step_id": "probe-jq-pandoc",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-STRUCTURED-REPORT-SUPPLIER-PROBE-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_STRUCTURED_REPORT_SUPPLIER_PROBE_001.json",
+  "mission_sha256": "4af3a7e61594f7056b147e15bdfe088ff4b30e9ea36f563719bb05d8310bc77a",
+  "next_step": 0,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-24T23:53:21.220066+00:00"
+}
