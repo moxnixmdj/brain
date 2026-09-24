@@ -228,7 +228,7 @@ def search_apt_packages(effect, limit=12):
         if p.returncode!=0:
             errors.append({"query":query,"error":"APT_SEARCH_FAILED:"+p.stderr[-500:]})
             continue
-        for line in p.stdout.splitlines()[:500]:
+        for line in p.stdout.splitlines():
             if " - " not in line:
                 continue
             name,description=line.split(" - ",1)
