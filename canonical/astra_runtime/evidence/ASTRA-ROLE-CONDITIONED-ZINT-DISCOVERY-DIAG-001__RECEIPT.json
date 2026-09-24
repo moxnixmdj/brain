@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-24T22:53:34.770395+00:00",
+  "mission_id": "ASTRA-ROLE-CONDITIONED-ZINT-DISCOVERY-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_ROLE_CONDITIONED_ZINT_DISCOVERY_DIAG_001.json",
+  "mission_sha256": "9e92f2c39fc216c2947028254eed1bded843a87d39bbb3852cfac5878a315e59",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "9f085f3c59dfa4c7d85e34251b1d048af70e8599cb35fb0c2ef76615991eb4bf",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
