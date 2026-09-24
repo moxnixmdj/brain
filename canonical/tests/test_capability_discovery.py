@@ -124,6 +124,7 @@ class CapabilityDiscoveryTests(unittest.TestCase):
         self.assertIn("zbar-tools",names)
         cand=[x for x in out["candidates"] if x["name"]=="zbar-tools"][0]
         self.assertIn("barcode",cand["matched_terms"])
+        self.assertIn("decode",cand["matched_terms"])
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
