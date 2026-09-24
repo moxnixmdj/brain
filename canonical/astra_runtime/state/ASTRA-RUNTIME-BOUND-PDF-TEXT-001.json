@@ -1,0 +1,110 @@
+{
+  "completed_at_utc": "2026-09-24T21:20:32.849430+00:00",
+  "created_at_utc": "2026-09-24T21:20:30.823715+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-24T21:20:31.486759+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython canonical/tests/test_bound_capabilities.py\npython canonical/tests/test_capability_planner.py\npython canonical/tests/test_astra_runtime_model_independence.py\nmkdir -p canonical/astra_runtime/tmp\npython - <<'PY'\nfrom pathlib import Path\nout=Path(\"canonical/astra_runtime/tmp/BOUND_PDF_TEXT_TEST.pdf\")\nstream=b\"BT /F1 18 Tf 72 720 Td (PROJECT BRAIN BOUND PDF CAPABILITY VERIFIED) Tj ET\"\nobjects=[\n b\"<< /Type /Catalog /Pages 2 0 R >>\",\n b\"<< /Type /Pages /Kids [3 0 R] /Count 1 >>\",\n b\"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>\",\n b\"<< /Length \"+str(len(stream)).encode()+b\" >>\\nstream\\n\"+stream+b\"\\nendstream\",\n b\"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>\"\n]\npdf=bytearray(b\"%PDF-1.4\\n\")\noffsets=[0]\nfor i,obj in enumerate(objects,1):\n    offsets.append(len(pdf))\n    pdf.extend(f\"{i} 0 obj\\n\".encode())\n    pdf.extend(obj)\n    pdf.extend(b\"\\nendobj\\n\")\nxref=len(pdf)\npdf.extend(f\"xref\\n0 {len(objects)+1}\\n\".encode())\npdf.extend(b\"0000000000 65535 f \\n\")\nfor off in offsets[1:]:\n    pdf.extend(f\"{off:010d} 00000 n \\n\".encode())\npdf.extend(f\"trailer\\n<< /Size {len(objects)+1} /Root 1 0 R >>\\nstartxref\\n{xref}\\n%%EOF\\n\".encode())\nout.write_bytes(pdf)\nprint(\"SYNTHETIC_PDF_BYTES\",len(pdf))\nPY",
+        "duration_s": 0.663,
+        "returncode": 0,
+        "stderr": "test_action_expectation_contains (__main__.BoundCapabilityTests.test_action_expectation_contains) ... ok\ntest_action_expectation_fails_closed (__main__.BoundCapabilityTests.test_action_expectation_fails_closed) ... ok\ntest_adapter_rejects_path_escape (__main__.BoundCapabilityTests.test_adapter_rejects_path_escape) ... ok\ntest_registry_is_zero_cost_and_hash_pinned (__main__.BoundCapabilityTests.test_registry_is_zero_cost_and_hash_pinned) ... ok\ntest_unknown_bound_capability_rejected (__main__.BoundCapabilityTests.test_unknown_bound_capability_rejected) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.002s\n\nOK\ntest_plan_actions_compiles_executable_actions_and_finish (__main__.CapabilityPlannerTests.test_plan_actions_compiles_executable_actions_and_finish) ... ok\ntest_selects_lowest_cost_valid_composition (__main__.CapabilityPlannerTests.test_selects_lowest_cost_valid_composition) ... ok\ntest_unreachable_effect_fails_closed (__main__.CapabilityPlannerTests.test_unreachable_effect_fails_closed) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.002s\n\nOK\ntest_goal_completes_with_model_planner_forbidden (__main__.ModelIndependenceTests.test_goal_completes_with_model_planner_forbidden) ... ok\ntest_goal_without_controller_plan_fails_closed (__main__.ModelIndependenceTests.test_goal_without_controller_plan_fails_closed) ... ok\ntest_model_planner_is_explicit_opt_in_only (__main__.ModelIndependenceTests.test_model_planner_is_explicit_opt_in_only) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.014s\n\nOK\n",
+        "stdout": "SYNTHETIC_PDF_BYTES 618\n"
+      },
+      "step_id": "regressions-and-synthetic-pdf",
+      "step_index": 0
+    },
+    {
+      "completed_at_utc": "2026-09-24T21:20:32.849073+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "goal",
+        "capability_plan": {
+          "expanded_states": 1,
+          "initial_facts": [
+            "synthetic.pdf.available"
+          ],
+          "plan": [
+            "pypdf-text-extractor"
+          ],
+          "status": "SOLVED",
+          "target_effects": [
+            "pdf.extract.text"
+          ],
+          "total_cost": 1.0
+        },
+        "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+        "cycles": 2,
+        "final_summary": "BOUND_PDF_TEXT_EXTRACTION_COMPLETE",
+        "planner_model_last": null,
+        "planner_source": null,
+        "planner_transport": null,
+        "planning_mode": "DETERMINISTIC_CAPABILITY_GRAPH",
+        "returncode": 0,
+        "stdout": "BOUND_PDF_TEXT_EXTRACTION_COMPLETE",
+        "trace": [
+          {
+            "cycle": 0,
+            "plan": {
+              "args": {
+                "capability_id": "pdf.extract.text.pypdf",
+                "max_pages": 10,
+                "path": "canonical/astra_runtime/tmp/BOUND_PDF_TEXT_TEST.pdf"
+              },
+              "capability_id": "pypdf-text-extractor",
+              "expect": {
+                "field": "text",
+                "type": "field_contains",
+                "value": "PROJECT BRAIN BOUND PDF CAPABILITY VERIFIED"
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "bound_capability",
+              "capability_id": "pdf.extract.text.pypdf",
+              "dependency": {
+                "project": "pypdf",
+                "status": "INSTALLED_VERIFIED",
+                "version": "6.19.0",
+                "wheel_sha256": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14"
+              },
+              "pages_processed": 1,
+              "pages_total": 1,
+              "source_path": "canonical/astra_runtime/tmp/BOUND_PDF_TEXT_TEST.pdf",
+              "text": "PROJECT BRAIN BOUND PDF CAPABILITY VERIFIED",
+              "text_bytes": 43,
+              "text_sha256": "97fa8642db783ccc4c477a1ab0dc72a144da2932106ae51b9818eb7fc4b8030c",
+              "text_truncated": false
+            }
+          },
+          {
+            "cycle": 1,
+            "plan": {
+              "args": {
+                "summary": "BOUND_PDF_TEXT_EXTRACTION_COMPLETE"
+              },
+              "type": "finish",
+              "why": "All target effects have an executable minimum-cost capability plan."
+            },
+            "result": {
+              "summary": "BOUND_PDF_TEXT_EXTRACTION_COMPLETE",
+              "type": "finish"
+            }
+          }
+        ]
+      },
+      "step_id": "plan-bind-extract-and-verify",
+      "step_index": 1
+    }
+  ],
+  "mission_id": "ASTRA-RUNTIME-BOUND-PDF-TEXT-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_BOUND_PDF_TEXT_001.json",
+  "mission_sha256": "0c8f2402518f12598e4b2d78398beab8756d9132c3d8224e29cbf9009e4ac93f",
+  "next_step": 2,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-24T21:20:32.849085+00:00"
+}
