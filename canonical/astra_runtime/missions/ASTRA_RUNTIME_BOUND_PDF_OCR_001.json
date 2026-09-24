@@ -65,6 +65,7 @@
     "model_controller_required": false,
     "source_pdf_has_no_text_layer": true,
     "platform": "linux",
-    "package_metadata_hash_checked": true
+    "package_metadata_hash_checked": true,
+    "replay_after_observability_patch_commit": "1fca3a27a6029c654616280d57affee397be5f9a"
   }
 }
