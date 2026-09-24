@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-MCP-QRFLOW-PROBE-001",
+  "purpose": "Probe a QR-specific zero-secret remote MCP supplier through the official MCP Python SDK before any binding or promotion.",
+  "steps": [
+    {
+      "id": "probe-qrflow-mcp-tools",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython -m pip install --disable-pip-version-check --quiet 'mcp==2.2.0'\npython - <<'PY'\nimport asyncio,json,pathlib\nfrom mcp import Client\n\nURL=\"https://qrflow.codes/mcp\"\n\nasync def main():\n    async with Client(URL) as client:\n        tools=await client.list_tools()\n        out={\n          \"schema\":\"PROJECT_BRAIN_MCP_SUPPLIER_PROBE_V1\",\n          \"url\":URL,\n          \"protocol_version\":str(client.protocol_version),\n          \"server_info\":str(client.server_info),\n          \"tools\":[\n            {\n              \"name\":t.name,\n              \"title\":getattr(t,\"title\",None),\n              \"description\":getattr(t,\"description\",None),\n              \"input_schema\":getattr(t,\"input_schema\",None)\n            } for t in tools.tools\n          ]\n        }\n        p=pathlib.Path(\"canonical/astra_runtime/evidence/ASTRA-MCP-QRFLOW-PROBE-001__TOOLS.json\")\n        p.parent.mkdir(parents=True,exist_ok=True)\n        p.write_text(json.dumps(out,indent=2,sort_keys=True,default=str)+\"\\n\",encoding=\"utf-8\")\n        print(\"MCP_QRFLOW_TOOLS_DISCOVERED\",len(out[\"tools\"]))\n        print(json.dumps(out,sort_keys=True,default=str)[:12000])\n\nasyncio.run(main())\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "MCP_QRFLOW_TOOLS_DISCOVERED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "authentication_required": false,
+    "probe_only": true,
+    "binding_performed": false,
+    "promotion_forbidden": true,
+    "ephemeral_runner": true,
+    "mcp_sdk_version": "2.2.0",
+    "mcp_sdk_wheel_sha256_from_pypi": "bde982589473a060ae145e3406e9a5333fe538c97229ba841f5a7f92be004f81"
+  }
+}
