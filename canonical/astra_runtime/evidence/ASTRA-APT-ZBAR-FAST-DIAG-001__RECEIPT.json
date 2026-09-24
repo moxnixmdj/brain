@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-24T22:41:10.252190+00:00",
+  "mission_id": "ASTRA-APT-ZBAR-FAST-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_APT_ZBAR_FAST_DIAG_001.json",
+  "mission_sha256": "36dc7318f1755893a032a63371e55cc6ae9abbf991090c836fb9520a086a6e7c",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "92e15159fea78a0cea9a1fa630ad0258c46421c9be513e0d8ab2c34da450568e",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

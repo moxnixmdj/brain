@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-24T22:41:10.246527+00:00",
+  "created_at_utc": "2026-09-24T22:41:03.233712+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-24T22:41:10.246214+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\necho '=== ZBAR POLICY ==='\napt-cache policy zbar-tools || true\necho '=== ZBAR SHOW ==='\napt-cache show zbar-tools 2>/dev/null | sed -n '1,80p' || true\necho '=== SEARCH BAR CODE ==='\napt-cache search 'bar code' | grep -i -E 'zbar|bar code|barcode' | tail -n 60 || true\necho '=== SEARCH DECODE ==='\napt-cache search decode | grep -i -E 'zbar|bar code|barcode' | tail -n 60 || true",
+        "duration_s": 7.012,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "=== ZBAR POLICY ===\nzbar-tools:\n  Installed: (none)\n  Candidate: 0.23.93-4build3\n  Version table:\n     0.23.93-4build3 500\n        500 mirror+file:/etc/apt/apt-mirrors.txt noble/universe amd64 Packages\n=== ZBAR SHOW ===\nPackage: zbar-tools\nArchitecture: amd64\nVersion: 0.23.93-4build3\nPriority: optional\nSection: universe/graphics\nSource: zbar\nOrigin: Ubuntu\nMaintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>\nOriginal-Maintainer: Daniel Baumann <daniel.baumann@progress-linux.org>\nBugs: https://bugs.launchpad.net/ubuntu/+filebug\nInstalled-Size: 82\nDepends: libzbar0t64 (= 0.23.93-4build3), libc6 (>= 2.34), libmagickwand-6.q16-7t64 (>= 8:6.9.12.98+dfsg1-5.2build2)\nSuggests: zbarcam-gtk, zbarcam-qt\nFilename: pool/universe/z/zbar/zbar-tools_0.23.93-4build3_amd64.deb\nSize: 22376\nMD5sum: 089c4aa1540e7ee76e4513389bd6c665\nSHA1: 593cd7e4e8624b0e55e43eac49a6d8fbc5be4345\nSHA256: 9e718d34a9650263aca2dd85e56d9de42ca24ff82254f90f5e4270d1e5d00422\nSHA512: 64e356099f0a694296389211fbacf293ec141f841f2a80542a49b1713d1a25ea42c9030e8f75a3f96038145b7702a68bd95077096aa742de9e7539e31598d4b7\nHomepage: https://github.com/mchehab/zbar\nDescription-en: QR code / bar code scanner and decoder (utilities)\n ZBar is a library for scanning and decoding bar codes from various sources\n such as video streams, image files or raw intensity sensors. It supports\n EAN-13/UPC-A, UPC-E, EAN-8, Code 128, Code 39, Interleaved 2 of 5 and QR Code.\n .\n This package contains basic applications for decoding captured bar code images\n and using a video4linux device (e.g. webcam) as a bar code scanner.\nDescription-md5: 959b1192a3ec318c05f75aac21a76707\n\n=== SEARCH BAR CODE ===\ngir1.2-zbar-1.0 - QR code / bar code scanner and decoder (introspection data)\nlibbarcode-code128-perl - Perl library to generate CODE 128 bar codes\nlibbarcode-zbar-perl - QR code / bar code scanner and decoder (Perl bindings)\nlibzbar-dev - QR code / bar code scanner and decoder (development)\nlibzbar0t64 - QR code / bar code scanner and decoder (library)\nlibzbargtk-dev - QR code / bar code scanner and decoder (GTK+ bindings development)\nlibzbargtk0t64 - QR code / bar code scanner and decoder (GTK+ bindings)\nlibzbarqt-dev - QR code / bar code scanner and decoder (Qt binding development)\nlibzbarqt0t64 - QR code / bar code scanner and decoder (Qt binding)\npython3-zbar - QR code / bar code scanner and decoder (Python bindings)\nzbar-tools - QR code / bar code scanner and decoder (utilities)\nzbarcam-gtk - QR code / bar code scanner and decoder (Gtk camera tool)\nzbarcam-qt - QR code / bar code scanner and decoder (Qt camera tool)\n=== SEARCH DECODE ===\ngir1.2-zbar-1.0 - QR code / bar code scanner and decoder (introspection data)\nlibbarcode-zbar-perl - QR code / bar code scanner and decoder (Perl bindings)\nlibzbar-dev - QR code / bar code scanner and decoder (development)\nlibzbar0t64 - QR code / bar code scanner and decoder (library)\nlibzbargtk-dev - QR code / bar code scanner and decoder (GTK+ bindings development)\nlibzbargtk0t64 - QR code / bar code scanner and decoder (GTK+ bindings)\nlibzbarqt-dev - QR code / bar code scanner and decoder (Qt binding development)\nlibzbarqt0t64 - QR code / bar code scanner and decoder (Qt binding)\npython3-pylibdmtx - Read Data Matrix barcodes (Python3 version)\npython3-pyzbar - Python bindings for libzbar\npython3-zbar - QR code / bar code scanner and decoder (Python bindings)\nzbar-tools - QR code / bar code scanner and decoder (utilities)\nzbarcam-gtk - QR code / bar code scanner and decoder (Gtk camera tool)\nzbarcam-qt - QR code / bar code scanner and decoder (Qt camera tool)\n"
+      },
+      "step_id": "raw-apt-zbar-probe",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-APT-ZBAR-FAST-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_APT_ZBAR_FAST_DIAG_001.json",
+  "mission_sha256": "36dc7318f1755893a032a63371e55cc6ae9abbf991090c836fb9520a086a6e7c",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-24T22:41:10.246233+00:00"
+}
