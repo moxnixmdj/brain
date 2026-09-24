@@ -1,0 +1,21 @@
+{
+  "blocker": {
+    "adapter": "goal",
+    "error": "RuntimeError:PDF_NOT_FOUND",
+    "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-QR-001",
+    "observed_at_utc": "2026-09-24T21:51:15.143793+00:00",
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "execute-unknown-plain-goal",
+    "step_index": 0
+  },
+  "created_at_utc": "2026-09-24T21:51:14.037205+00:00",
+  "history": [],
+  "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-QR-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_PLAIN_GOAL_QR_001.json",
+  "mission_sha256": "d0cc2d5a35c12ef2e3754130b51d89c3655ec460d78dc6e6c724d56c7317237b",
+  "next_step": 0,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-24T21:51:15.143962+00:00"
+}
