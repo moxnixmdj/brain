@@ -6,7 +6,7 @@
   "binding_performed": false,
   "goal": "Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json. Create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.md containing a table with every VERIFIED_BOUND_CAPABILITY, its provided effects, source dependency, and verification mission. Then create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.pdf from that report and verify that the final PDF contains every capability ID from the registry.",
   "mission_id": "ASTRA-RUNTIME-CAPABILITY-AUDIT-001",
-  "observed_at_utc": "2026-09-24T23:45:49.568298+00:00",
+  "observed_at_utc": "2026-09-24T23:49:02.822489+00:00",
   "result": {
     "binding_performed": false,
     "candidates": [

@@ -948,10 +948,9 @@
         "zero_cost_eligible": true
       }
     ],
-    "effect": "encode markdown table",
+    "effect": "markdown table",
     "errors": [],
     "queries": [
-      "encode",
       "markdown",
       "table"
     ],
