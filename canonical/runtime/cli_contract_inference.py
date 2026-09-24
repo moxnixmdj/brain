@@ -16,6 +16,11 @@ MAGIC_BY_SUFFIX={
     ".jpeg":"ffd8ff",
     ".pdf":"25504446",
 }
+TEXT_SUFFIXES={".md",".markdown",".txt",".csv",".tsv",".json",".html",".htm",".xml"}
+TEXT_FORMAT_NAMES={
+    ".md":"markdown",".markdown":"markdown",".txt":"text",".csv":"csv",
+    ".tsv":"tsv",".json":"json",".html":"html",".htm":"html",".xml":"xml"
+}
 
 def _help_text(probe):
     choices=[]
@@ -59,11 +64,12 @@ def infer_contract(probe, goal):
     output_path=paths[-1] if len(paths)==1 else None
     suffix=pathlib.Path(output_path).suffix.lower() if output_path else ""
     magic=MAGIC_BY_SUFFIX.get(suffix)
-    if not magic:
+    text_output=suffix in TEXT_SUFFIXES
+    if not magic and not text_output:
         raise ContractInferenceFailure("CLI_OUTPUT_FORMAT_UNVERIFIABLE:"+suffix)
     format_name=suffix.lstrip(".")
     aliases={"jpg":"jpeg"}
-    wanted=aliases.get(format_name,format_name)
+    wanted=TEXT_FORMAT_NAMES.get(suffix,aliases.get(format_name,format_name))
     if wanted and wanted not in lower_help:
         raise ContractInferenceFailure("CLI_OUTPUT_FORMAT_UNSUPPORTED:"+suffix)
 
@@ -128,7 +134,8 @@ def infer_contract(probe, goal):
       "required_inputs":["text","output_path"],
       "argv_template":argv,
       "output_path_template":"$"+"{input.output_path}",
-      "output_prefix_hex":magic,
+      "output_prefix_hex":magic or "",
+      "output_text_utf8":bool(text_output),
       "timeout_s":60,
       "evidence":{
         "usage_line":usage_line,
