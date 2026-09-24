@@ -34,6 +34,7 @@
     "manual_supplier": false,
     "manual_binding": false,
     "fresh_mission_identity": true,
-    "targeted_acquisition_first": true
+    "targeted_acquisition_first": true,
+    "replay_after_explicit_continuation_dispatch_commit": "ce605b07ebf32bc76c68dcfcdaba0ed701e0b276"
   }
 }
