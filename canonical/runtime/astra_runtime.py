@@ -434,7 +434,7 @@ def _discover_unreachable_effects(mission, error):
     discovery=_load_capability_discovery()
     results=[]
     for effect in effects[:8]:
-        results.append(discovery.search_mcp_registry(effect,limit=8,timeout_s=12))
+        results.append(discovery.search_all(effect,limit_per_source=8))
     evidence={
       "schema":"PROJECT_BRAIN_CAPABILITY_ACQUISITION_GAP_V1",
       "mission_id":mission.get("mission_id"),
@@ -569,12 +569,12 @@ def run_goal(step, mission):
     except Blocker as e:
         if "GOAL_COMPILATION_FAILED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH" in str(e):
             discovery=_load_capability_discovery()
-            result=discovery.search_mcp_registry(goal,limit=12,timeout_s=12)
+            result=discovery.search_all(goal,limit_per_source=12)
             evidence={
               "schema":"PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
               "mission_id":mission.get("mission_id"),
               "goal":goal,
-              "source":"OFFICIAL_MCP_REGISTRY",
+              "source":"FEDERATED_CAPABILITY_DISCOVERY",
               "result":result,
               "binding_performed":False,
               "observed_at_utc":utc()
