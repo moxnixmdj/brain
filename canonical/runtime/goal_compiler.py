@@ -146,10 +146,48 @@ def _score(goal, cid, entry):
     }
 
 
-def compile_goal(goal, registry, root):
-    goal=str(goal or "").strip()
-    if not goal:
-        raise GoalCompilationFailure("GOAL_REQUIRED")
+def _render_template(value, inputs):
+    if isinstance(value,dict):
+        return {k:_render_template(v,inputs) for k,v in value.items()}
+    if isinstance(value,list):
+        return [_render_template(v,inputs) for v in value]
+    if isinstance(value,str):
+        out=value
+        for key,val in inputs.items():
+            out=out.replace("${input."+str(key)+"}",str(val))
+        if "${input." in out:
+            raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED","unresolved template input")
+        return out
+    return value
+
+
+def decompose_goal(goal):
+    """Return ordered action clauses for an explicitly compound plain goal.
+
+    This is intentionally conservative: sentence boundaries, explicit "then",
+    and action-bearing "and" connectors only. It does not invent hidden steps.
+    """
+    text=" ".join(str(goal or "").strip().split())
+    if not text:
+        return []
+    parts=re.split(r"(?<=[.!?])\s+(?=[A-Z])|\b[Tt]hen\b",text)
+    clauses=[]
+    action_connector=re.compile(
+        r"\s+and\s+(?=(?:read|inspect|create|generate|write|save|convert|extract|verify|check|render|analy[sz]e)\b)",
+        re.IGNORECASE,
+    )
+    for part in parts:
+        part=part.strip(" .")
+        if not part:
+            continue
+        for sub in action_connector.split(part):
+            sub=sub.strip(" .")
+            if sub:
+                clauses.append(sub)
+    return clauses
+
+
+def _compile_single_goal(goal, registry, root):
     ranked=[]
     for cid,entry in sorted((registry or {}).items()):
         if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
@@ -186,3 +224,75 @@ def compile_goal(goal, registry, root):
         "capabilities":[],
         "finish_summary":"PLAIN_GOAL_COMPLETE",
     }
+
+
+def _compile_compound_goal(goal, clauses, registry, root):
+    actions=[]
+    compiled_parts=[]
+    for index,clause in enumerate(clauses):
+        lower=clause.lower()
+        # Evidence-only repository reads are native runtime actions and should
+        # not require a separately acquired capability.
+        if re.match(r"^(?:read|inspect|open)\b",lower):
+            paths=_repo_paths(clause,root)
+            existing=[(raw,p) for raw,p in paths if p.is_file()]
+            if len(existing)==1:
+                action={
+                    "type":"read_file",
+                    "args":{"path":existing[0][0]},
+                    "expect":{"type":"field_nonempty","field":"content"},
+                }
+                actions.append(action)
+                compiled_parts.append({
+                    "index":index,"subgoal":clause,"mode":"NATIVE_READ",
+                    "path":existing[0][0],
+                })
+                continue
+        try:
+            part=_compile_single_goal(clause,registry,root)
+        except GoalCompilationFailure as exc:
+            raise GoalCompilationFailure(
+                "GOAL_COMPILATION_SUBGOAL_UNRESOLVED",
+                json.dumps({
+                    "index":index,
+                    "subgoal":clause,
+                    "cause":exc.code,
+                    "cause_detail":exc.detail,
+                    "clauses":clauses,
+                },sort_keys=True)
+            ) from exc
+        cid=part["selected_capability"]
+        entry=registry[cid]
+        action=_render_template(entry["action_template"],part["inputs"])
+        actions.append(action)
+        compiled_parts.append({
+            "index":index,
+            "subgoal":clause,
+            "mode":"VERIFIED_CAPABILITY",
+            "selected_capability":cid,
+            "inputs":part["inputs"],
+            "target_effects":part["target_effects"],
+            "score":part["score"],
+        })
+    actions.append({
+        "type":"finish",
+        "args":{"summary":"COMPOUND_GOAL_COMPLETE"},
+    })
+    return {
+        "schema":"PROJECT_BRAIN_COMPILED_COMPOUND_GOAL_V1",
+        "compiler_mode":"DETERMINISTIC_COMPOUND_ACTION_PLAN",
+        "clauses":clauses,
+        "compiled_parts":compiled_parts,
+        "controller_actions":actions,
+        "finish_summary":"COMPOUND_GOAL_COMPLETE",
+    }
+
+
+def compile_goal(goal, registry, root):
+    goal=str(goal or "").strip()
+    if not goal:
+        raise GoalCompilationFailure("GOAL_REQUIRED")
+    clauses=decompose_goal(goal)
+    if len(clauses)>1:
+        return _compile_compound_goal(goal,clauses,registry,root)
+    return _compile_single_goal(goal,registry,root)
