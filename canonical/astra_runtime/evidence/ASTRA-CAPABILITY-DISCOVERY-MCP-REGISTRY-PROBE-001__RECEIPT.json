@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-24T21:08:21.407311+00:00",
+  "mission_id": "ASTRA-CAPABILITY-DISCOVERY-MCP-REGISTRY-PROBE-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_CAPABILITY_DISCOVERY_MCP_REGISTRY_PROBE_001.json",
+  "mission_sha256": "53bb70d031dbf3b1d38069050bf904ae6d550534e560998efa1aaa94a519cf83",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "11ef6be123c33024f6dff753105e6dfa84c3f2d6e8aec349a332be7d56f042a8",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
