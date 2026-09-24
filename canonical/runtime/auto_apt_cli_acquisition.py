@@ -85,7 +85,28 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
     version=str(candidate["version"])
     sha=str(candidate["archive_sha256"]).lower()
     probe=apt_cli_probe.probe(package,version,sha,root)
-    contract=cli_contract_inference.infer_contract(probe,goal)
+    diag_rel=f"canonical/astra_runtime/evidence/{mission_id}__AUTO_APT_CLI_ACQUISITION.json"
+    diag_path=root/diag_rel
+    diag_path.parent.mkdir(parents=True,exist_ok=True)
+    diagnostic={
+      "schema":"PROJECT_BRAIN_AUTO_APT_CLI_ACQUISITION_EVIDENCE_V1",
+      "mission_id":mission_id,
+      "goal":goal,
+      "selected_supplier":candidate,
+      "probe":probe,
+      "status":"PROBED_CONTRACT_PENDING"
+    }
+    diag_path.write_text(json.dumps(diagnostic,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+    try:
+        contract=cli_contract_inference.infer_contract(probe,goal)
+    except Exception as exc:
+        diagnostic["status"]="CONTRACT_INFERENCE_FAILED"
+        diagnostic["contract_error"]=type(exc).__name__+":"+str(exc)
+        diag_path.write_text(json.dumps(diagnostic,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+        raise
+    diagnostic["status"]="CONTRACT_INFERRED"
+    diagnostic["contract"]=contract
+    diag_path.write_text(json.dumps(diagnostic,indent=2,sort_keys=True)+"\n",encoding="utf-8")
     inputs=_bind_contract_inputs(goal,root,contract)
     argv=_render(contract["argv_template"],inputs)
     verification_args={
@@ -203,5 +224,6 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
       "pending_binding_path":pending_rel,
       "verification_mission_path":vm_rel,
       "verification_mission_id":verify_mid,
-      "keywords":keywords
+      "keywords":keywords,
+      "acquisition_evidence_path":diag_rel
     }
