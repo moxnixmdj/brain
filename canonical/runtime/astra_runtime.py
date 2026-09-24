@@ -222,6 +222,41 @@ def _load_capability_planner():
     spec.loader.exec_module(module)
     return module
 
+def _load_capability_discovery():
+    path=pathlib.Path(__file__).resolve().with_name("capability_discovery.py")
+    spec=importlib.util.spec_from_file_location("project_brain_capability_discovery",path)
+    if spec is None or spec.loader is None:
+        raise Blocker("CAPABILITY_DISCOVERY_LOAD_FAILED")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    return module
+
+def _discover_unreachable_effects(mission, error):
+    detail=str(getattr(error,"detail","") or "")
+    effects=[x.strip() for x in detail.split(",") if x.strip()]
+    if not effects:
+        effects=["unknown.capability"]
+    discovery=_load_capability_discovery()
+    results=[]
+    for effect in effects[:8]:
+        results.append(discovery.search_mcp_registry(effect,limit=8,timeout_s=12))
+    evidence={
+      "schema":"PROJECT_BRAIN_CAPABILITY_ACQUISITION_GAP_V1",
+      "mission_id":mission.get("mission_id"),
+      "planner_failure_code":getattr(error,"code",type(error).__name__),
+      "unreachable_effects":effects,
+      "discovery_sources":["OFFICIAL_MCP_REGISTRY"],
+      "results":results,
+      "binding_performed":False,
+      "policy":"DISCOVERY_ONLY__BINDING_REQUIRES_SEPARATE_ZERO_COST_SECURITY_AND_EFFECT_VERIFICATION",
+      "observed_at_utc":utc()
+    }
+    mid=str(mission.get("mission_id") or "UNKNOWN")
+    path=EVID_DIR/f"{mid}__CAPABILITY_ACQUISITION_GAP.json"
+    writej(path,evidence)
+    return path,evidence
+
 def _run_capability_planned_goal(step, mission, goal):
     problem=_capability_problem(step, mission)
     if problem is None:
@@ -230,6 +265,21 @@ def _run_capability_planned_goal(step, mission, goal):
     try:
         planned=planner.plan_actions(problem)
     except Exception as e:
+        if getattr(e,"code",None)=="UNREACHABLE_TARGET_EFFECTS":
+            path,evidence=_discover_unreachable_effects(mission,e)
+            top=[]
+            for result in evidence.get("results",[]):
+                for candidate in result.get("candidates",[])[:3]:
+                    top.append({
+                      "name":candidate.get("name"),
+                      "score":candidate.get("score"),
+                      "zero_cost_eligible":candidate.get("zero_cost_eligible")
+                    })
+            detail=json.dumps({
+              "evidence_path":str(path.relative_to(ROOT)),
+              "top_candidates":top[:8]
+            },sort_keys=True)
+            raise Blocker("CAPABILITY_ACQUISITION_REQUIRED:"+detail) from e
         raise Blocker("CAPABILITY_PLANNING_FAILED:"+type(e).__name__+":"+str(e)) from e
     derived=dict(step)
     derived.pop("capability_problem",None)
