@@ -56,8 +56,12 @@ def _bind_contract_inputs(goal,root,contract):
     return {"text":text,"output_path":paths[0][0]}
 
 
-def _viable_candidates(discovery):
+def _viable_candidates(discovery, goal=""):
     viable=[]
+    goal_lower=str(goal or "").lower()
+    producer_intent=any(w in goal_lower for w in ("generate","create","make","render","encode","save"))
+    producer_words=("generate","generator","encode","encoder","create","render","write","output")
+    consumer_words=("decode","decoder","scan","scanner","reader","inspect","viewer")
     for c in discovery.get("candidates",[]):
         if c.get("discovery_source")!="APT_CATALOG":
             continue
@@ -71,16 +75,26 @@ def _viable_candidates(discovery):
             continue
         if float(c.get("score",0))<12:
             continue
-        viable.append(c)
+        x=dict(c)
+        role_blob=(" "+str(c.get("name") or "")+" "+str(c.get("description") or "")+" ").lower()
+        role_score=float(c.get("score",0))
+        if producer_intent:
+            if any(w in role_blob for w in producer_words):
+                role_score+=24
+            if any(w in role_blob for w in consumer_words) and not any(w in role_blob for w in producer_words):
+                role_score-=28
+        x["_acquisition_role_score"]=role_score
+        viable.append(x)
     if not viable:
         raise AutoAcquisitionFailure("NO_LOW_FRICTION_APT_CLI_CANDIDATE")
+    viable.sort(key=lambda c:(-float(c.get("_acquisition_role_score",0)),-float(c.get("score",0)),str(c.get("name",""))))
     return viable[:12]
 
 
 def dispatch(goal,mission_id,mission_path,root,discovery=None):
     root=pathlib.Path(root).resolve()
     discovery=discovery or capability_discovery.search_all(goal,limit_per_source=30)
-    candidates=_viable_candidates(discovery)
+    candidates=_viable_candidates(discovery,goal)
     diag_rel=f"canonical/astra_runtime/evidence/{mission_id}__AUTO_APT_CLI_ACQUISITION.json"
     diag_path=root/diag_rel
     diag_path.parent.mkdir(parents=True,exist_ok=True)
