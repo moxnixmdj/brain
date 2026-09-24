@@ -1,12 +1,21 @@
 {
   "blocker": {
-    "adapter": "goal",
-    "error": "Blocker:CAPABILITY_ACQUISITION_DISPATCHED:{\"acquisition_evidence_path\": \"canonical/astra_runtime/evidence/ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003__AUTO_APT_CLI_ACQUISITION.json\", \"capability_id\": \"auto.apt.zint\", \"effect\": \"auto.effect.zint\", \"keywords\": [\"128\", \"barcode\"], \"pending_binding_path\": \"canonical/astra_runtime/pending_bindings/ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003__zint__85bc9cd2c9a4.json\", \"status\": \"ACQUISITION_DISPATCHED\", \"supplier\": \"zint\", \"verification_mission_id\": \"ASTRA-AUTO-VERIFY-ZINT-85BC9CD2C9A4\", \"verification_mission_path\": \"canonical/astra_runtime/missions/ASTRA_AUTO_VERIFY_ZINT_85BC9CD2C9A4.json\"}",
+    "adapter": "shell",
+    "error": "VERIFICATION_FAILED",
     "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003",
-    "observed_at_utc": "2026-09-24T23:03:28.587774+00:00",
+    "observed_at_utc": "2026-09-24T23:04:07.783157+00:00",
+    "phase": "REHYDRATION",
+    "result": {
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/tests/test_goal_compiler.py",
+      "duration_s": 0.146,
+      "returncode": 1,
+      "stderr": "test_barcode_goal_does_not_false_match_qr (__main__.GoalCompilerTests.test_barcode_goal_does_not_false_match_qr) ... FAIL\ntest_plain_image_only_pdf_goal_selects_verified_ocr (__main__.GoalCompilerTests.test_plain_image_only_pdf_goal_selects_verified_ocr) ... ok\ntest_plain_qr_goal_selects_verified_qr_and_binds_arguments (__main__.GoalCompilerTests.test_plain_qr_goal_selects_verified_qr_and_binds_arguments) ... ok\ntest_unknown_goal_fails_closed (__main__.GoalCompilerTests.test_unknown_goal_fails_closed) ... ok\n\n======================================================================\nFAIL: test_barcode_goal_does_not_false_match_qr (__main__.GoalCompilerTests.test_barcode_goal_does_not_false_match_qr)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/brain/brain/canonical/tests/test_goal_compiler.py\", line 37, in test_barcode_goal_does_not_false_match_qr\n    with self.assertRaisesRegex(compiler.GoalCompilationFailure,\"GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH\"):\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: GoalCompilationFailure not raised\n\n----------------------------------------------------------------------\nRan 4 tests in 0.005s\n\nFAILED (failures=1)\n",
+      "stdout": ""
+    },
     "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
-    "step_id": "execute-fresh-plain-goal",
-    "step_index": 1
+    "step_id": "run-goal-compiler-regressions",
+    "step_index": 0
   },
   "created_at_utc": "2026-09-24T22:57:49.491568+00:00",
   "history": [
@@ -27,7 +36,7 @@
   ],
   "mission_id": "ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_PLAIN_GOAL_BARCODE_003.json",
-  "mission_sha256": "34ce468a5c0ae51f708f6a574b6fd8348137d307c8261f5828034badb6ab3e48",
+  "mission_sha256": "a32947cb6290dbfa641629d8a9e3c7c722c03e0ad5961ccf4e89f6e27f34ae5f",
   "next_step": 1,
   "rehydrations": [
     {
@@ -55,5 +64,5 @@
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
   "status": "BLOCKED",
-  "updated_at_utc": "2026-09-24T23:03:28.588021+00:00"
+  "updated_at_utc": "2026-09-24T23:04:07.783520+00:00"
 }
