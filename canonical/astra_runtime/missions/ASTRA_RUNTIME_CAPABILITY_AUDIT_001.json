@@ -33,6 +33,9 @@
     "replay_after_decomposition_binding_fix": "3d0a8b250e24ecc75a9a357c5fffeb866971d7c9",
     "replay_after_text_output_contract_commit": "2f1d0cdd201be95c356b1ba4c4731ba78612810a",
     "replay_after_object_first_commit": "1ee1ac84502d1a4a26943cceb0d451ca75c65f16",
-    "replay_after_discovery_grammar_cleanup_commit": "ebe3a2de16038d91c71d0fa741978450e698459c"
+    "replay_after_discovery_grammar_cleanup_commit": "ebe3a2de16038d91c71d0fa741978450e698459c",
+    "replay_after_verified_jq_commit": "4ccfe0d842b860690936dd204c4840d517e0c6f8",
+    "replay_after_jq_compiler_commit": "6eac4ce5e1c203e60094d39a1f3c47a358d1aa77",
+    "replay_after_jq_frontier_regression_commit": "b9b52b1a215013e1bde3e48533afc144a2cc4ded"
   }
 }
