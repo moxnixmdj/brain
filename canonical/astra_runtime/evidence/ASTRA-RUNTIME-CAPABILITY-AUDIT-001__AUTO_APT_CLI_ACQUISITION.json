@@ -3,498 +3,458 @@
     {
       "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
       "probe": {
-        "archive_sha256": "315a0aa88c5bae3061e5bb376cb744f52a91ae5230ed56a0f85a41ab3fce271c",
+        "archive_sha256": "0f266091d9e5ca9fb3479028f3e40eebaf46cfbc8b40ef6a658847919cd4bbfb",
         "executables": [],
-        "package": "aspnetcore-runtime-10.0",
+        "package": "elpa-markdown-toc",
         "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "10.0.12-0ubuntu1~24.04.1"
+        "version": "0.1.5-3"
       },
       "status": "CONTRACT_REJECTED",
       "supplier": {
-        "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 64.0,
-        "archive_sha256": "315a0aa88c5bae3061e5bb376cb744f52a91ae5230ed56a0f85a41ab3fce271c",
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 150.0,
+        "archive_sha256": "0f266091d9e5ca9fb3479028f3e40eebaf46cfbc8b40ef6a658847919cd4bbfb",
         "binding_kind": "apt",
-        "description": "ASP.NET Core runtime",
+        "description": "Emacs TOC (table of contents) generator for markdown files",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "markdown",
+          "table"
         ],
-        "name": "aspnetcore-runtime-10.0",
+        "name": "elpa-markdown-toc",
         "packages": [],
-        "query": "runtime",
+        "query": "markdown",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 32,
-        "version": "10.0.12-0ubuntu1~24.04.1",
+        "score": 62,
+        "version": "0.1.5-3",
         "zero_cost_eligible": true
       }
     },
     {
       "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
       "probe": {
-        "archive_sha256": "eded079d030876ca9428f555b0b4b5c3a9f5ccab3c701907bb640b01de2e4961",
+        "archive_sha256": "0ca9138fbbd2eb19d45091e98366952634bf5cfefff93b68f000fe99b4bdbcba",
         "executables": [],
-        "package": "aspnetcore-runtime-8.0",
+        "package": "node-text-table",
         "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "8.0.31-0ubuntu1~24.04.1"
+        "version": "0.2.0-4"
       },
       "status": "CONTRACT_REJECTED",
       "supplier": {
-        "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 64.0,
-        "archive_sha256": "eded079d030876ca9428f555b0b4b5c3a9f5ccab3c701907bb640b01de2e4961",
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 126.0,
+        "archive_sha256": "0ca9138fbbd2eb19d45091e98366952634bf5cfefff93b68f000fe99b4bdbcba",
         "binding_kind": "apt",
-        "description": "ASP.NET Core runtime",
+        "description": "borderless text tables with alignment",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "table",
+          "with"
         ],
-        "name": "aspnetcore-runtime-8.0",
+        "name": "node-text-table",
         "packages": [],
-        "query": "runtime",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 32,
-        "version": "8.0.31-0ubuntu1~24.04.1",
+        "score": 62,
+        "version": "0.2.0-4",
         "zero_cost_eligible": true
       }
     },
     {
       "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
       "probe": {
-        "archive_sha256": "3f86479547f42388360b7527b4682ab356d06f7f7dda7e9217aacb777dacae39",
+        "archive_sha256": "f7572653ddc875a68da85c48514dc2eec111a7e3b2ce0fb354cfb09b111fc056",
         "executables": [],
-        "package": "aspnetcore-runtime-dbg-10.0",
+        "package": "node-turndown",
         "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "10.0.12-0ubuntu1~24.04.1"
+        "version": "7.1.1-3"
       },
       "status": "CONTRACT_REJECTED",
       "supplier": {
-        "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 64.0,
-        "archive_sha256": "3f86479547f42388360b7527b4682ab356d06f7f7dda7e9217aacb777dacae39",
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 112.0,
+        "archive_sha256": "f7572653ddc875a68da85c48514dc2eec111a7e3b2ce0fb354cfb09b111fc056",
         "binding_kind": "apt",
-        "description": "ASP.NET Runtime debug symbols.",
+        "description": "convert HTML into MarkDown with JavaScript",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "markdown",
+          "with"
         ],
-        "name": "aspnetcore-runtime-dbg-10.0",
+        "name": "node-turndown",
         "packages": [],
-        "query": "runtime",
+        "query": "markdown",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 32,
-        "version": "10.0.12-0ubuntu1~24.04.1",
+        "score": 48,
+        "version": "7.1.1-3",
         "zero_cost_eligible": true
       }
     },
     {
       "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
       "probe": {
-        "archive_sha256": "ffeef0e6d29f69eb3d300c73715b22e5872e902de01659b257e4303379460953",
-        "executables": [],
-        "package": "aspnetcore-runtime-dbg-8.0",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "8.0.31-0ubuntu1~24.04.1"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 64.0,
-        "archive_sha256": "ffeef0e6d29f69eb3d300c73715b22e5872e902de01659b257e4303379460953",
-        "binding_kind": "apt",
-        "description": "ASP.NET Runtime debug symbols.",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "runtime"
-        ],
-        "name": "aspnetcore-runtime-dbg-8.0",
-        "packages": [],
-        "query": "runtime",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "8.0.31-0ubuntu1~24.04.1",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.md",
-      "probe": {
-        "archive_sha256": "dc7b74c21d606e26366ff3e7261a0d49672f340db64a59c0dcc013cea67e3814",
+        "archive_sha256": "b70805dbddbe63f4d9db049c4ae296aead7f2d1666fa8b843808e87f23aaac70",
         "executables": [
           {
-            "executable": "/usr/bin/ch-checkns",
+            "executable": "/usr/bin/pampi",
             "help_attempts": [
               {
                 "flag": "--help",
-                "returncode": 0,
-                "text": "Usage: ch-checkns\n\nCheck \"ch-run\" prerequisites, e.g., namespaces and \"pivot_root(2)\".\n\nExample:\n\n  $ ch-checkns\n  ok"
+                "returncode": 134,
+                "text": "qt.qpa.xcb: could not connect to display \nqt.qpa.plugin: Could not load the Qt platform plugin \"xcb\" in \"\" even though it was found.\nThis application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.\n\nAvailable platform plugins are: eglfs, linuxfb, minimal, minimalegl, offscreen, vnc, xcb.\n\nAborted (core dumped)"
               }
             ]
           },
           {
-            "executable": "/usr/bin/ch-run",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 0,
-                "text": "Usage: ch-run [OPTION...] IMAGE -- COMMAND [ARG...]\n\nRun a command in a Charliecloud container.\n\n  -b, --bind=SRC[:DST]     mount SRC at guest DST (default: same as SRC)\n  -c, --cd=DIR             initial working directory in container\n      --env-no-expand      don't expand $ in --set-env input\n      --feature=FEAT       exit successfully if FEAT is enabled\n  -g, --gid=GID            run as GID within container\n      --home               mount host $HOME at guest /home/$USER\n      --join-ct=N          number of join peers (implies --join)\n      --join-pid=PID       join a namespace using a PID\n      --join-tag=TAG       label for peer group (implies --join)\n  -j, --join               use same container as peer ch-run\n  -m, --mount=DIR          SquashFS mount point\n      --no-passwd          don't bind-mount /etc/{passwd,group}\n  -q, --quiet              print less output (can be repeated)\n      --seccomp            fake success for some syscalls with seccomp(2)\n      --set-env[=ARG]      set env. variables per ARG (newline-delimited)\n      --set-env0[=ARG]     set env. variables per ARG (null-delimited)\n  -s, --storage=DIR        set DIR as storage directory\n      --test=TEST          do test TEST\n  -t, --private-tmp        use container-private /tmp\n      --unsafe             do unsafe things (internal use only)\n      --unset-env=GLOB     unset environment variable(s)\n  -u, --uid=UID            run as UID within container\n  -v, --verbose            be more verbose (can be repeated)\n      --warnings=NUM       log NUM warnings and exit\n  -w, --write              mount image read-write (avoid)\n  -W, --write-fake[=SIZE]  overlay read-write tmpfs on top of image\n  -?, --help               Give this help list\n      --usage              Give a short usage message\n  -V, --version            print version and exit\n\nExample:\n\n  $ ch-run /data/foo -- echo hello\n  hello\n\nYou cannot use this program to actually change your UID."
-              }
-            ]
-          },
-          {
-            "executable": "/usr/bin/ch-run-oci",
+            "executable": "/usr/bin/pampi-nonfree",
             "help_attempts": [
               {
                 "flag": "--help",
                 "returncode": 1,
-                "text": "Traceback (most recent call last):\n  File \"/usr/bin/ch-run-oci\", line 17, in <module>\n    import misc\n  File \"/usr/lib/charliecloud/misc.py\", line 11, in <module>\n    import build_cache as bu\n  File \"/usr/lib/charliecloud/build_cache.py\", line 43, in <module>\n    import image as im\n  File \"/usr/lib/charliecloud/image.py\", line 21, in <module>\n    import lark\nModuleNotFoundError: No module named 'lark'"
+                "text": "Traceback (most recent call last):\n  File \"/usr/share/pampi/script-nonfree/pampi-nonfree\", line 7, in <module>\n    from PyQt5.QtWidgets import QDialog, QApplication, QMessageBox\nModuleNotFoundError: No module named 'PyQt5'"
               }
             ]
           }
         ],
-        "package": "charliecloud-runtime",
+        "package": "pampi",
         "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "0.37-1build1"
+        "version": "1.1+dfsg1-9"
       },
       "status": "CONTRACT_REJECTED",
       "supplier": {
-        "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 64.0,
-        "archive_sha256": "dc7b74c21d606e26366ff3e7261a0d49672f340db64a59c0dcc013cea67e3814",
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 112.0,
+        "archive_sha256": "b70805dbddbe63f4d9db049c4ae296aead7f2d1666fa8b843808e87f23aaac70",
         "binding_kind": "apt",
-        "description": "user-defined software stacks (UDSS) for HPC centers (runtime tools)",
+        "description": "Presentations with Markdown, Pandoc, Impress.",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "markdown",
+          "with"
         ],
-        "name": "charliecloud-runtime",
+        "name": "pampi",
         "packages": [],
-        "query": "runtime",
+        "query": "markdown",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 32,
-        "version": "0.37-1build1",
+        "score": 48,
+        "version": "1.1+dfsg1-9",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "cefb030d681c414e13e2a0385681870e42bb474ede01603e8cb66f59b7134514",
+        "executables": [],
+        "package": "postgresql-16-pg-fact-loader",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "2.0.1-3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 112.0,
+        "archive_sha256": "cefb030d681c414e13e2a0385681870e42bb474ede01603e8cb66f59b7134514",
+        "binding_kind": "apt",
+        "description": "Build fact tables asynchronously with Postgres",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "table",
+          "with"
+        ],
+        "name": "postgresql-16-pg-fact-loader",
+        "packages": [],
+        "query": "table",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "2.0.1-3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "59f2ee4992638d8841d516bcb7973d82681966f58200f42b8079193577e538b7",
+        "executables": [],
+        "package": "postgresql-16-repack",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.5.0-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 112.0,
+        "archive_sha256": "59f2ee4992638d8841d516bcb7973d82681966f58200f42b8079193577e538b7",
+        "binding_kind": "apt",
+        "description": "reorganize tables in PostgreSQL databases with minimal locks",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "table",
+          "with"
+        ],
+        "name": "postgresql-16-repack",
+        "packages": [],
+        "query": "table",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "1.5.0-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "34db36d1bb9241b414925d111b220f9b19a4decdcda678841fe91ff5fa819e53",
+        "executables": [],
+        "package": "r-cran-bookdown",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.37+dfsg-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 112.0,
+        "archive_sha256": "34db36d1bb9241b414925d111b220f9b19a4decdcda678841fe91ff5fa819e53",
+        "binding_kind": "apt",
+        "description": "authoring books and technical documents with GNU R markdown",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "markdown",
+          "with"
+        ],
+        "name": "r-cran-bookdown",
+        "packages": [],
+        "query": "markdown",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "0.37+dfsg-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "c4fd0502e62e861917583ee31eccbfce810a37c94c3e90b63a52e2e9ec17b7eb",
+        "executables": [],
+        "package": "r-cran-kableextra",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.4.0+dfsg-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 112.0,
+        "archive_sha256": "c4fd0502e62e861917583ee31eccbfce810a37c94c3e90b63a52e2e9ec17b7eb",
+        "binding_kind": "apt",
+        "description": "construct complex table with 'kable' and pipe syntax in GNU R",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "table",
+          "with"
+        ],
+        "name": "r-cran-kableextra",
+        "packages": [],
+        "query": "table",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "1.4.0+dfsg-1",
         "zero_cost_eligible": true
       }
     },
     {
       "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.md",
       "probe": {
-        "archive_sha256": "f3f1051bf8cb77c632ea23796da8c9cf0007a5218bd698ad2ae78ebf292a6441",
+        "archive_sha256": "d6b965acbe19d3711149fba0bbfbe92604e55afe9e48f880b4f7e29cd4f36c12",
         "executables": [
           {
-            "executable": "/usr/sbin/cracklib-check",
+            "executable": "/usr/bin/w3m",
             "help_attempts": [
               {
                 "flag": "--help",
-                "returncode": 0,
-                "text": ""
-              },
-              {
-                "flag": "-h",
-                "returncode": 0,
-                "text": ""
+                "returncode": 1,
+                "text": "w3m version w3m/0.5.3+git20230121, options lang=en,m17n,image,color,ansi-color,mouse,gpm,menu,cookie,ssl,ssl-verify,external-uri-loader,w3mmailer,nntp,gopher,ipv6,alarm,mark,migemo\nusage: w3m [options] [URL or filename]\noptions:\n    -t tab           set tab width\n    -r               ignore backspace effect\n    -l line          # of preserved line (default 10000)\n    -I charset       document charset\n    -O charset       display/output charset\n    -B               load bookmark\n    -bookmark file   specify bookmark file\n    -T type          specify content-type\n    -m               internet message mode\n    -v               visual startup mode\n    -M               monochrome display\n    -H               use high-intensity colors\n    -N               open URL of command line on each new tab\n    -F               automatically render frames\n    -cols width      specify column width (used with -dump)\n    -ppc count       specify the number of pixels per character (4.0...32.0)\n    -ppl count       specify the number of pixels per line (4.0...64.0)\n    -dump            dump formatted page into stdout\n    -dump_head       dump response of HEAD request into stdout\n    -dump_source     dump page source into stdout\n    -dump_both       dump HEAD and source into stdout\n    -dump_extra      dump HEAD, source, and extra information into stdout\n    -post file       use POST method with file content\n    -header string   insert string as a header\n    +<num>           goto <num> line\n    -num             show line number\n    -no-proxy        don't use proxy\n    -4               IPv4 only (-o dns_order=4)\n    -6               IPv6 only (-o dns_order=6)\n    -insecure        use insecure SSL config options\n    -no-mouse        don't use mouse\n    -cookie          use cookie (-no-cookie: don't use cookie)\n    -graph           use DEC special graphics for border of table and menu\n    -no-graph        use ASCII character for border of table and menu\n    -s               squeeze multiple blank lines\n    -W               toggle search wrap mode\n    -X               don't use termcap init/deinit\n    -title[=TERM]    set buffer name to terminal title string\n    -o opt=value     assign value to config option\n    -show-option     print all config options\n    -config file     specify config file\n    -debug           use debug mode (only for debugging)\n    -reqlog          write request logfile\n    -help            print this usage message\n    -version         print w3m version"
               }
             ]
           },
           {
-            "executable": "/usr/sbin/cracklib-format",
+            "executable": "/usr/bin/w3mman",
             "help_attempts": [
               {
                 "flag": "--help",
-                "returncode": 0,
-                "text": "1fastcompressfaster\n9bestcompressbetter\ncompressoruncompressfilesbydefaultcompressfilesinplace\ncstdoutwriteonstandardoutputkeeporiginalfilesunchanged\nddecompressdecompress\nfforceforceoverwriteofoutputfileandcompresslinks\nhhelpgivethishelp\nkkeepkeepdontdeleteinputfiles\nllicensedisplaysoftwarelicense\nllistlistcompressedfilecontents\nmandatoryargumentstolongoptionsaremandatoryforshortoptionstoo\nnnamesaveorrestoretheoriginalnameandtimestamp\nnnonamedonotsaveorrestoretheoriginalnameandtimestamp\nqquietsuppressallwarnings\nreportbugstobuggzipgnuorg\nrrecursiveoperaterecursivelyondirectories\nrsyncablemakersyncfriendlyarchive\nssuffixsufusesuffixsufoncompressedfiles\nsynchronoussynchronousoutputsaferifsystemcrashesbutslower\nttesttestcompressedfileintegrity\nusagegzip[option][file]\nvverboseverbosemode\nvversiondisplayversionnumber\nwithnofileorwhenfileisreadstandardinput"
-              }
-            ]
-          },
-          {
-            "executable": "/usr/sbin/cracklib-packer",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 255,
-                "text": "Usage:\t/usr/sbin/cracklib-packer dbname\n  if dbname is not specified, will use compiled in default of (/var/cache/cracklib/cracklib_dict)."
-              }
-            ]
-          },
-          {
-            "executable": "/usr/sbin/cracklib-unpacker",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 255,
-                "text": "--help.pwd: No such file or directory\nPWOpen: Invalid argument"
-              }
-            ]
-          },
-          {
-            "executable": "/usr/sbin/create-cracklib-dict",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 0,
-                "text": "Usage: create-cracklib-dict [options] wordlist ...\n\nThis script takes one or more word list files as arguments\nand converts them into cracklib dictionaries for use\nby password checking programs. The results are placed in\nthe default compiled-in dictionary location.\n\nIf you wish to store the dictionary in a different location,\nuse the cracklib-format and cracklib-packer commands directly.\n\nOptions:\n  -o, --output <file>   Alternative output file for cracklib-packer\n  -h, --help            This help output\n\nExample:\ncreate-cracklib-dict /usr/share/words"
-              }
-            ]
-          },
-          {
-            "executable": "/usr/sbin/update-cracklib",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 0,
-                "text": ""
-              },
-              {
-                "flag": "-h",
-                "returncode": 0,
-                "text": ""
+                "returncode": 1,
+                "text": "w3mman [-M <path>] [[<section>] <command>]\nw3mman [-M <path>] [<section>] [-k <keyword>]\nw3mman [-l <file>]"
               }
             ]
           }
         ],
-        "package": "cracklib-runtime",
+        "package": "w3m",
         "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "2.9.6-5.1build2"
+        "version": "0.5.3+git20230121-2ubuntu5"
       },
       "status": "CONTRACT_REJECTED",
       "supplier": {
-        "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 64.0,
-        "archive_sha256": "f3f1051bf8cb77c632ea23796da8c9cf0007a5218bd698ad2ae78ebf292a6441",
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 112.0,
+        "archive_sha256": "d6b965acbe19d3711149fba0bbfbe92604e55afe9e48f880b4f7e29cd4f36c12",
         "binding_kind": "apt",
-        "description": "runtime support for password checker library cracklib2",
+        "description": "WWW browsable pager with excellent tables/frames support",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "table",
+          "with"
         ],
-        "name": "cracklib-runtime",
+        "name": "w3m",
         "packages": [],
-        "query": "runtime",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 32,
-        "version": "2.9.6-5.1build2",
+        "score": 48,
+        "version": "0.5.3+git20230121-2ubuntu5",
         "zero_cost_eligible": true
       }
     },
     {
       "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
       "probe": {
-        "archive_sha256": "4eb92415faafca5c4d72800c37c0d42eea2907058e10d23bdb4a2ce1cbc5fc77",
+        "archive_sha256": "15e721ced3b26257d5f724085e2b2ca6f745bd131623c56ce85323f664f4b48c",
         "executables": [],
-        "package": "dotnet-runtime-10.0",
+        "package": "cl-markdown",
         "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "10.0.12-0ubuntu1~24.04.1"
+        "version": "20101006-2.1"
       },
       "status": "CONTRACT_REJECTED",
       "supplier": {
         "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 64.0,
-        "archive_sha256": "4eb92415faafca5c4d72800c37c0d42eea2907058e10d23bdb4a2ce1cbc5fc77",
+        "_acquisition_role_score": 88.0,
+        "archive_sha256": "15e721ced3b26257d5f724085e2b2ca6f745bd131623c56ce85323f664f4b48c",
         "binding_kind": "apt",
-        "description": ".NET runtime",
+        "description": "Common Lisp rewrite of Markdown",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "markdown"
         ],
-        "name": "dotnet-runtime-10.0",
+        "name": "cl-markdown",
         "packages": [],
-        "query": "runtime",
+        "query": "markdown",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "10.0.12-0ubuntu1~24.04.1",
+        "version": "20101006-2.1",
         "zero_cost_eligible": true
       }
     },
     {
       "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
       "probe": {
-        "archive_sha256": "be69e4eb8206b98527164599a946d52f71bbe62aee3c0b9492a3027a69740319",
-        "executables": [],
-        "package": "dotnet-runtime-8.0",
+        "archive_sha256": "965c34044524f33c1ac33d63beeb66cdaaeceb1038f0cfdea9af821c862804c4",
+        "executables": [
+          {
+            "executable": "/usr/bin/markdown",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 2,
+                "text": "Can't open --help: No such file or directory at /usr/bin/markdown line 221."
+              }
+            ]
+          }
+        ],
+        "package": "markdown",
         "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "8.0.31-0ubuntu1~24.04.1"
+        "version": "1.0.1-12"
       },
       "status": "CONTRACT_REJECTED",
       "supplier": {
         "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 64.0,
-        "archive_sha256": "be69e4eb8206b98527164599a946d52f71bbe62aee3c0b9492a3027a69740319",
+        "_acquisition_role_score": 72.0,
+        "archive_sha256": "965c34044524f33c1ac33d63beeb66cdaaeceb1038f0cfdea9af821c862804c4",
         "binding_kind": "apt",
-        "description": ".NET runtime",
+        "description": "Text-to-HTML conversion tool",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "markdown"
         ],
-        "name": "dotnet-runtime-8.0",
+        "name": "markdown",
         "packages": [],
-        "query": "runtime",
+        "query": "markdown",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 32,
-        "version": "8.0.31-0ubuntu1~24.04.1",
+        "score": 40,
+        "version": "1.0.1-12",
         "zero_cost_eligible": true
       }
     },
     {
       "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
       "probe": {
-        "archive_sha256": "460601eca2d9e8b2b3eeee420be9587e6c3ef7c63d1563b9f95b632a66613a3b",
+        "archive_sha256": "c145062b381c7b7ee62dab600d4594b43aeb5ef3c55e29d5a51ff2e10a1d553b",
         "executables": [],
-        "package": "dotnet-runtime-dbg-10.0",
+        "package": "elpa-markdown-mode",
         "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "10.0.12-0ubuntu1~24.04.1"
+        "version": "2.6-1"
       },
       "status": "CONTRACT_REJECTED",
       "supplier": {
         "_acquisition_object_matches": 1,
         "_acquisition_role_score": 64.0,
-        "archive_sha256": "460601eca2d9e8b2b3eeee420be9587e6c3ef7c63d1563b9f95b632a66613a3b",
+        "archive_sha256": "c145062b381c7b7ee62dab600d4594b43aeb5ef3c55e29d5a51ff2e10a1d553b",
         "binding_kind": "apt",
-        "description": ".NET Runtime debug symbols.",
+        "description": "mode for editing Markdown-formatted text files in GNU Emacs",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "markdown"
         ],
-        "name": "dotnet-runtime-dbg-10.0",
+        "name": "elpa-markdown-mode",
         "packages": [],
-        "query": "runtime",
+        "query": "markdown",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "10.0.12-0ubuntu1~24.04.1",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
-      "probe": {
-        "archive_sha256": "41c2ca6fcd262e1b7a5ec2d7f4ba8176a5829aa53ac71d308b2608b6c10d80e6",
-        "executables": [],
-        "package": "dotnet-runtime-dbg-8.0",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "8.0.31-0ubuntu1~24.04.1"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 64.0,
-        "archive_sha256": "41c2ca6fcd262e1b7a5ec2d7f4ba8176a5829aa53ac71d308b2608b6c10d80e6",
-        "binding_kind": "apt",
-        "description": ".NET Runtime debug symbols.",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "runtime"
-        ],
-        "name": "dotnet-runtime-dbg-8.0",
-        "packages": [],
-        "query": "runtime",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "8.0.31-0ubuntu1~24.04.1",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
-      "probe": {
-        "archive_sha256": "831d39302722ccced7e9321b01f2607cb4222707574ece462c9a92a514610b8e",
-        "executables": [],
-        "package": "erlang-runtime-tools",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "1:25.3.2.8+dfsg-1ubuntu4.6"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 64.0,
-        "archive_sha256": "831d39302722ccced7e9321b01f2607cb4222707574ece462c9a92a514610b8e",
-        "binding_kind": "apt",
-        "description": "Erlang/OTP runtime tracing/debugging tools",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "runtime"
-        ],
-        "name": "erlang-runtime-tools",
-        "packages": [],
-        "query": "runtime",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "1:25.3.2.8+dfsg-1ubuntu4.6",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
-      "probe": {
-        "archive_sha256": "c8ae17c7e8d2ff4066049e39f3ec7caf2e91e544479d35a3b094ef93d5690cfa",
-        "executables": [],
-        "package": "fwts-efi-runtime-dkms",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "24.01.00-0ubuntu4.1"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 64.0,
-        "archive_sha256": "c8ae17c7e8d2ff4066049e39f3ec7caf2e91e544479d35a3b094ef93d5690cfa",
-        "binding_kind": "apt",
-        "description": "Firmware Test Suite UEFI Runtime Service kernel driver",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "runtime"
-        ],
-        "name": "fwts-efi-runtime-dkms",
-        "packages": [],
-        "query": "runtime",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "24.01.00-0ubuntu4.1",
+        "version": "2.6-1",
         "zero_cost_eligible": true
       }
     }
@@ -506,492 +466,494 @@
     "candidate_count": 24,
     "candidates": [
       {
-        "archive_sha256": "e1e4e607012985ceb365434dd8ec1c6df23e40b8023cc6bc2acddd878d6954c4",
+        "archive_sha256": "0f266091d9e5ca9fb3479028f3e40eebaf46cfbc8b40ef6a658847919cd4bbfb",
         "binding_kind": "apt",
-        "description": "stricter URI encode adhering to RFC 3986",
+        "description": "Emacs TOC (table of contents) generator for markdown files",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "encode"
+          "markdown",
+          "table"
         ],
-        "name": "node-strict-uri-encode",
+        "name": "elpa-markdown-toc",
         "packages": [],
-        "query": "encode",
+        "query": "markdown",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 62,
+        "version": "0.1.5-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "960f34cfbce54127e0ba7253efb7e747ae062d1174b388d68deca9dbfb8f702b",
+        "binding_kind": "apt",
+        "description": "Sphinx extension for rendering markdown tables (Python 3)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 2,
+        "matched_terms": [
+          "markdown",
+          "table"
+        ],
+        "name": "python3-sphinx-markdown-tables",
+        "packages": [],
+        "query": "markdown",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 44,
+        "version": "0.0.17-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "965c34044524f33c1ac33d63beeb66cdaaeceb1038f0cfdea9af821c862804c4",
+        "binding_kind": "apt",
+        "description": "Text-to-HTML conversion tool",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "markdown"
+        ],
+        "name": "markdown",
+        "packages": [],
+        "query": "markdown",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 40,
+        "version": "1.0.1-12",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "15e721ced3b26257d5f724085e2b2ca6f745bd131623c56ce85323f664f4b48c",
+        "binding_kind": "apt",
+        "description": "Common Lisp rewrite of Markdown",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "markdown"
+        ],
+        "name": "cl-markdown",
+        "packages": [],
+        "query": "markdown",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "2.0.0+~2.0.0-1",
+        "version": "20101006-2.1",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "90927553209d80260afa5558ed58ac427284eea766d7385b874421bd81e9a966",
+        "archive_sha256": "c145062b381c7b7ee62dab600d4594b43aeb5ef3c55e29d5a51ff2e10a1d553b",
         "binding_kind": "apt",
-        "description": "Unicode property names supported in ES RegExp in Node.js",
+        "description": "mode for editing Markdown-formatted text files in GNU Emacs",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "canonical"
+          "markdown"
         ],
-        "name": "node-unicode-canonical-property-names-ecmascript",
+        "name": "elpa-markdown-mode",
         "packages": [],
-        "query": "canonical",
+        "query": "markdown",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "2.0.0-2",
+        "version": "2.6-1",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "bf8805696f92ce97b835933296e4a786fbd4af8ad20decc5c177d69de2ccc446",
+        "archive_sha256": "bcf98fb42ede51af7ad0a487c2ef612813c90ecdbd81de59db5012abbb11c16e",
         "binding_kind": "apt",
-        "description": "toolbox of high-performance GPU primitives for 2D and 3D tomography (octave)",
+        "description": "Flexible Input Method Framework - table engine",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "astra"
+          "table"
         ],
-        "name": "octave-astra-toolbox",
+        "name": "fcitx-table",
         "packages": [],
-        "query": "astra",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "2.1.0-4",
+        "version": "1:4.2.9.9-2build2",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "dcb264b165247d13d4beffc166ecade3ca32ba823d2b2f8c717db64adea00b5e",
+        "archive_sha256": "1705eb043ea3b664ec2d38b14a0f34f37f9ffd71f2be891751f9890da1b8412e",
         "binding_kind": "apt",
-        "description": "video converter for Nokia Internet Tablets",
+        "description": "Flexible Input Method Framework - tables metapackage",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "encode"
+          "table"
         ],
-        "name": "tablet-encode",
+        "name": "fcitx-table-all",
         "packages": [],
-        "query": "encode",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "2.30-0.1ubuntu2",
+        "version": "1:4.2.9.9-2build2",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "b08728497d67f09c8554b1a52759e90421a573d7aee1b9d497badbc42e401d14",
+        "archive_sha256": "16c4cf829b7585b7237fca077232994bf80ce23d8486507ee3c65a6ce033e84d",
         "binding_kind": "apt",
-        "description": "A Better CD Encoder",
+        "description": "Flexible Input Method Framework - Amharic table",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "encode"
+          "table"
         ],
-        "name": "abcde",
+        "name": "fcitx-table-amharic",
         "packages": [],
-        "query": "encode",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "2.9.3-1",
+        "score": 32,
+        "version": "0.2.4-3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "b2f35b2bf364d0a01075094efd1299dee79ecd65787cddcb93b82ca796edfd5c",
+        "archive_sha256": "80be63607c73c50c49b5b7266bc9dab0d2c9cd7550fb6c73e65d8bec0e0968a6",
         "binding_kind": "apt",
-        "description": "audio AC3 encoder",
+        "description": "Flexible Input Method Framework - Arabic table",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "encode"
+          "table"
         ],
-        "name": "aften",
+        "name": "fcitx-table-arabic",
         "packages": [],
-        "query": "encode",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "0.0.8+git20100105-0ubuntu4",
+        "score": 32,
+        "version": "0.2.4-3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "13650fd102318335c35d0464cb445ec105c74d27ba2684574e9c1c0282adbb24",
+        "archive_sha256": "fceab99efb0e99ea2233d454297d4921c5932e957b3a3c22665682fa538a6d27",
         "binding_kind": "apt",
-        "description": "Graphical audio CD ripper and encoder",
+        "description": "Flexible Input Method Framework - Array30 table",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "encode"
+          "table"
         ],
-        "name": "asunder",
+        "name": "fcitx-table-array30",
         "packages": [],
-        "query": "encode",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "3.0.1+ds-1build2",
+        "score": 32,
+        "version": "0.3.8-3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "720c6de3151b20729695991dc9977eab65565349f1710c8929a6202d1fa17c5f",
+        "archive_sha256": "8a479a4bf1358dbb669611ca15f2def8e5e64d5e6f3895853f03ef2e473ecb50",
         "binding_kind": "apt",
-        "description": "Encode binary files to printable utf16be",
+        "description": "Flexible Input Method Framework - Array30-Big table",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "encode"
+          "table"
         ],
-        "name": "base16384",
+        "name": "fcitx-table-array30-big",
         "packages": [],
-        "query": "encode",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "2.2.5-1",
+        "score": 32,
+        "version": "0.3.8-3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "38e1e65759a10db447fa682c7726c26a134c490c11cf9313d9035eaf76869196",
+        "archive_sha256": "701415f424a5e15f180124736cdecd77274741c2553171eb7a85f395565ad597",
         "binding_kind": "apt",
-        "description": "Command line encoder and decoder for Base58 format",
+        "description": "Flexible Input Method Framework - Bingchan table",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "encode"
+          "table"
         ],
-        "name": "base58",
+        "name": "fcitx-table-bingchan",
         "packages": [],
-        "query": "encode",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "1.0.3-2",
+        "score": 32,
+        "version": "1:4.2.9.9-2build2",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "db107d7652eb37680788a6567a58c9a6db10fcad8df05db4009464cb405122de",
+        "archive_sha256": "13f3dc1f4215f98712ea4da07b80585aaa44308903543185d5f6e2991f9d6f69",
         "binding_kind": "apt",
-        "description": "base 16/32/64 encode/decode data to standard output",
+        "description": "Flexible Input Method Framework - Boshiamy table",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "encode"
+          "table"
         ],
-        "name": "basez",
+        "name": "fcitx-table-boshiamy",
         "packages": [],
-        "query": "encode",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "1.6.2-3",
+        "score": 32,
+        "version": "0.3.8-3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "d7b31f464429add360d8f0cb938466d76abc3ca224306a78cf15ff37e7cba5ff",
+        "archive_sha256": "d5f8bfd67f711dc4668f2bc7958af4cb3a7fb10fcf63fdb80118dffa20156977",
         "binding_kind": "apt",
-        "description": "tool to decode/encode the sample catalogue for OpenTTD",
+        "description": "Flexible Input Method Framework - Cangjie table (DO NOT USE)",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "encode"
+          "table"
         ],
-        "name": "catcodec",
+        "name": "fcitx-table-cangjie",
         "packages": [],
-        "query": "encode",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "1.0.5-4",
+        "score": 32,
+        "version": "1:4.2.9.9-2build2",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "76dcb71604dfd21859aa8f6b94c8ff14c349340cc86cd3d87e95a63c53adf8d2",
+        "archive_sha256": "7f040c465b05e04dab25e64cd81ed68c7b7d03d1c22dbfdee7e7ec9cd24341e2",
         "binding_kind": "apt",
-        "description": "Common Lisp package to encode and decode base64 with URI support",
+        "description": "Flexible Input Method Framework - Cangjie-Big table",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "encode"
+          "table"
         ],
-        "name": "cl-base64",
+        "name": "fcitx-table-cangjie-big",
         "packages": [],
-        "query": "encode",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "3.4.0-1",
+        "score": 32,
+        "version": "0.3.8-3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "3b9a68f5b2a497cf80c350e2e8b512e7b28a057a9ba6082d3f7faa7bc30a3495",
+        "archive_sha256": "437c2ac3e5b65e21057afe0279385deebcc0caa64b3ceb7a728b6c0b90272106",
         "binding_kind": "apt",
-        "description": "JSON encoder/decoder for Common Lisp",
+        "description": "Flexible Input Method Framework - Cangjie3 table",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "encode"
+          "table"
         ],
-        "name": "cl-yason",
+        "name": "fcitx-table-cangjie3",
         "packages": [],
-        "query": "encode",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "0.7.6-1.1",
+        "score": 32,
+        "version": "0.3.8-3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "d889a996fbc3d02809fe473b64d1f13fa94bc0673fa2e3a25289e13b0d6f1040",
+        "archive_sha256": "91b1cb37b511971f57c353e66180dd58ee3c231a52311c011c817ef7ad1f8ea6",
         "binding_kind": "apt",
-        "description": "filename encoding conversion tool",
+        "description": "Flexible Input Method Framework - Cangjie5 table",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "encode"
+          "table"
         ],
-        "name": "convmv",
+        "name": "fcitx-table-cangjie5",
         "packages": [],
-        "query": "encode",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "2.05-1.1",
+        "score": 32,
+        "version": "0.3.8-3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "680f5fd1717566e03cc06af0da7ca20fa2829e40d4fe870a1b47189c0eb73f5e",
+        "archive_sha256": "9fbc35134ff59f39f50a6b99555b44f6c570cd7ce5f26043f282e0ecb801a11b",
         "binding_kind": "apt",
-        "description": "terminal-based ripper/encoder/tagger tool",
+        "description": "Flexible Input Method Framework - Cantonese table",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "encode"
+          "table"
         ],
-        "name": "crip",
+        "name": "fcitx-table-cantonese",
         "packages": [],
-        "query": "encode",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "3.9-3",
+        "score": 32,
+        "version": "0.3.8-3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "55d27feaaf8d5c2ea4f69f7ebfbcaaf0e29093a04d15ea3599196893c350b5db",
+        "archive_sha256": "011c80dfccbccb0b0e33ea42f9ea48d58c0df4bf82a01df4e75c7b1483d804db",
         "binding_kind": "apt",
-        "description": "Encoder and decoder for 3D geometric meshes and point clouds",
+        "description": "Flexible Input Method Framework - Cantonhk table",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "encode"
+          "table"
         ],
-        "name": "draco",
+        "name": "fcitx-table-cantonhk",
         "packages": [],
-        "query": "encode",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "1.5.6+dfsg-3build1",
+        "score": 32,
+        "version": "0.3.8-3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "6eb22d07c81e86257cb9ee3a7a78d0246f8485554ae5984d871d32199290a375",
+        "archive_sha256": "7c6d4a91d59d98c7a9f3a7f0304a5a5dbde0b00bc151daf22867fdfcb5b2b81a",
         "binding_kind": "apt",
-        "description": "YAML parser and encoder for Elisp",
+        "description": "Flexible Input Method Framework - Cns11643 table",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "encode"
+          "table"
         ],
-        "name": "elpa-yaml",
+        "name": "fcitx-table-cns11643",
         "packages": [],
-        "query": "encode",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "0.5.5-1",
+        "score": 32,
+        "version": "0.2.4-3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "8a9d329f1ccdd398ba84fe8393600b0747aa6dbae64237365b05b41702326553",
+        "archive_sha256": "b7ed48e0a8c74c5a97d1a88adb23b23949261f2ad1796487f7fecb2a836ecc1e",
         "binding_kind": "apt",
-        "description": "MIME mail encoding and decoding package for Go (program)",
+        "description": "Flexible Input Method Framework - Compose table",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "encode"
+          "table"
         ],
-        "name": "enmime",
+        "name": "fcitx-table-compose",
         "packages": [],
-        "query": "encode",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "0.9.3-5ubuntu0.24.04.3",
+        "score": 32,
+        "version": "0.2.4-3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "3b011097b07e9e3de2b08bcd2babf28a82d8948f6b09549ef15196bfff73ec1a",
+        "archive_sha256": "486aff197ccad92b5e827f4311485423f13bb17eae8caf4f483c005787d29aef",
         "binding_kind": "apt",
-        "description": "AAC audio encoder (frontend)",
+        "description": "Flexible Input Method Framework - Dianbaoma table",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "encode"
+          "table"
         ],
-        "name": "faac",
+        "name": "fcitx-table-dianbaoma",
         "packages": [],
-        "query": "encode",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "1.30-1",
+        "score": 32,
+        "version": "1:4.2.9.9-2build2",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "d286ed21e510c3af09f1e895fc80368474748ae866e17064b1d56c91d73a5868",
+        "archive_sha256": "f9515cd22ad8382c66df8807773551ab9a093bc10a69333add81c6b74c995fc8",
         "binding_kind": "apt",
-        "description": "command line encoder frontend for libfdk-aac",
+        "description": "Flexible Input Method Framework - Easy-Big table",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "encode"
+          "table"
         ],
-        "name": "fdkaac",
+        "name": "fcitx-table-easy-big",
         "packages": [],
-        "query": "encode",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "1.0.0-1build1",
+        "score": 32,
+        "version": "0.3.8-3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "350f8ee4f504cf48aa0009bf0164caced35e1580a8ca9a4fdc64b3fd62a73b78",
+        "archive_sha256": "678c9d8c01e79022823fa9d683d35f5b8e7dfdcd7a9b2e312f34a7cb82c9f054",
         "binding_kind": "apt",
-        "description": "Alternative encoder for the Free Lossless Audio Codec",
+        "description": "Flexible Input Method Framework - Emoji table",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "encode"
+          "table"
         ],
-        "name": "flake",
+        "name": "fcitx-table-emoji",
         "packages": [],
-        "query": "encode",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "0.11-4",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "e4e7a5c7faa1e635953d780aba492ddf6d40188fcecf7f2280f07f014a757838",
-        "binding_kind": "apt",
-        "description": "minimalist audio encoder for generating live streams",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "encode"
-        ],
-        "name": "glasscoder",
-        "packages": [],
-        "query": "encode",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 18,
-        "version": "2.0.1-2build5",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "e4b834081f17a92e9933e961566f1077251326810d1e0c945f8a8155524d0a95",
-        "binding_kind": "apt",
-        "description": "minimalist audio encoder GUI for generating live streams",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "encode"
-        ],
-        "name": "glassgui",
-        "packages": [],
-        "query": "encode",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 18,
-        "version": "2.0.1-2build5",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "10b8e63a940fc890582663aaab1413a97d7c0296e7611d9c39b746f3cc75ee4e",
-        "binding_kind": "apt",
-        "description": "QR Code encoder (Go program)",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "encode"
-        ],
-        "name": "go-qrcode",
-        "packages": [],
-        "query": "encode",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 18,
-        "version": "0.0~git20200617.da1b656-4ubuntu0.24.04.3",
+        "score": 32,
+        "version": "0.2.4-3",
         "zero_cost_eligible": true
       }
     ],
-    "effect": "encode canonical astra",
+    "effect": "encode markdown table",
     "errors": [],
     "queries": [
       "encode",
-      "canonical",
-      "astra"
+      "markdown",
+      "table"
     ],
     "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
     "source": "APT_CATALOG",

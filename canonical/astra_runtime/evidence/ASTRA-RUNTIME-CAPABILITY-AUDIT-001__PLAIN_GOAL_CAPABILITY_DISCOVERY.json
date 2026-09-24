@@ -1,989 +1,638 @@
 {
   "auto_acquisition": {
-    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"aspnetcore-runtime-10.0\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"aspnetcore-runtime-8.0\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"aspnetcore-runtime-dbg-10.0\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"aspnetcore-runtime-dbg-8.0\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.md\", \"name\": \"charliecloud-runtime\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.md\", \"name\": \"cracklib-runtime\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"dotnet-runtime-10.0\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"dotnet-runtime-8.0\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"dotnet-runtime-dbg-10.0\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"dotnet-runtime-dbg-8.0\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"erlang-runtime-tools\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fwts-efi-runtime-dkms\", \"status\": \"CONTRACT_REJECTED\"}]",
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-markdown-toc\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-text-table\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-turndown\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"pampi\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"postgresql-16-pg-fact-loader\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"postgresql-16-repack\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"r-cran-bookdown\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"r-cran-kableextra\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.md\", \"name\": \"w3m\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"cl-markdown\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"markdown\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-markdown-mode\", \"status\": \"CONTRACT_REJECTED\"}]",
     "status": "NOT_DISPATCHED"
   },
   "binding_performed": false,
   "goal": "Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json. Create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.md containing a table with every VERIFIED_BOUND_CAPABILITY, its provided effects, source dependency, and verification mission. Then create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.pdf from that report and verify that the final PDF contains every capability ID from the registry.",
   "mission_id": "ASTRA-RUNTIME-CAPABILITY-AUDIT-001",
-  "observed_at_utc": "2026-09-24T23:43:22.422541+00:00",
+  "observed_at_utc": "2026-09-24T23:45:49.568298+00:00",
   "result": {
     "binding_performed": false,
     "candidates": [
       {
-        "archive_sha256": "315a0aa88c5bae3061e5bb376cb744f52a91ae5230ed56a0f85a41ab3fce271c",
+        "archive_sha256": "0f266091d9e5ca9fb3479028f3e40eebaf46cfbc8b40ef6a658847919cd4bbfb",
         "binding_kind": "apt",
-        "description": "ASP.NET Core runtime",
+        "description": "Emacs TOC (table of contents) generator for markdown files",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "markdown",
+          "table"
         ],
-        "name": "aspnetcore-runtime-10.0",
+        "name": "elpa-markdown-toc",
         "packages": [],
-        "query": "runtime",
+        "query": "markdown",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 32,
-        "version": "10.0.12-0ubuntu1~24.04.1",
+        "score": 62,
+        "version": "0.1.5-3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "eded079d030876ca9428f555b0b4b5c3a9f5ccab3c701907bb640b01de2e4961",
+        "archive_sha256": "0ca9138fbbd2eb19d45091e98366952634bf5cfefff93b68f000fe99b4bdbcba",
         "binding_kind": "apt",
-        "description": "ASP.NET Core runtime",
+        "description": "borderless text tables with alignment",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "table",
+          "with"
         ],
-        "name": "aspnetcore-runtime-8.0",
+        "name": "node-text-table",
         "packages": [],
-        "query": "runtime",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 32,
-        "version": "8.0.31-0ubuntu1~24.04.1",
+        "score": 62,
+        "version": "0.2.0-4",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "3f86479547f42388360b7527b4682ab356d06f7f7dda7e9217aacb777dacae39",
+        "archive_sha256": "f7572653ddc875a68da85c48514dc2eec111a7e3b2ce0fb354cfb09b111fc056",
         "binding_kind": "apt",
-        "description": "ASP.NET Runtime debug symbols.",
+        "description": "convert HTML into MarkDown with JavaScript",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "markdown",
+          "with"
         ],
-        "name": "aspnetcore-runtime-dbg-10.0",
+        "name": "node-turndown",
         "packages": [],
-        "query": "runtime",
+        "query": "markdown",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 32,
-        "version": "10.0.12-0ubuntu1~24.04.1",
+        "score": 48,
+        "version": "7.1.1-3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "ffeef0e6d29f69eb3d300c73715b22e5872e902de01659b257e4303379460953",
+        "archive_sha256": "b70805dbddbe63f4d9db049c4ae296aead7f2d1666fa8b843808e87f23aaac70",
         "binding_kind": "apt",
-        "description": "ASP.NET Runtime debug symbols.",
+        "description": "Presentations with Markdown, Pandoc, Impress.",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "markdown",
+          "with"
         ],
-        "name": "aspnetcore-runtime-dbg-8.0",
+        "name": "pampi",
         "packages": [],
-        "query": "runtime",
+        "query": "markdown",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 32,
-        "version": "8.0.31-0ubuntu1~24.04.1",
+        "score": 48,
+        "version": "1.1+dfsg1-9",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "dc7b74c21d606e26366ff3e7261a0d49672f340db64a59c0dcc013cea67e3814",
+        "archive_sha256": "cefb030d681c414e13e2a0385681870e42bb474ede01603e8cb66f59b7134514",
         "binding_kind": "apt",
-        "description": "user-defined software stacks (UDSS) for HPC centers (runtime tools)",
+        "description": "Build fact tables asynchronously with Postgres",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "table",
+          "with"
         ],
-        "name": "charliecloud-runtime",
+        "name": "postgresql-16-pg-fact-loader",
         "packages": [],
-        "query": "runtime",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 32,
-        "version": "0.37-1build1",
+        "score": 48,
+        "version": "2.0.1-3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "f3f1051bf8cb77c632ea23796da8c9cf0007a5218bd698ad2ae78ebf292a6441",
+        "archive_sha256": "59f2ee4992638d8841d516bcb7973d82681966f58200f42b8079193577e538b7",
         "binding_kind": "apt",
-        "description": "runtime support for password checker library cracklib2",
+        "description": "reorganize tables in PostgreSQL databases with minimal locks",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "table",
+          "with"
         ],
-        "name": "cracklib-runtime",
+        "name": "postgresql-16-repack",
         "packages": [],
-        "query": "runtime",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 32,
-        "version": "2.9.6-5.1build2",
+        "score": 48,
+        "version": "1.5.0-1",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "4eb92415faafca5c4d72800c37c0d42eea2907058e10d23bdb4a2ce1cbc5fc77",
+        "archive_sha256": "34db36d1bb9241b414925d111b220f9b19a4decdcda678841fe91ff5fa819e53",
         "binding_kind": "apt",
-        "description": ".NET runtime",
+        "description": "authoring books and technical documents with GNU R markdown",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "markdown",
+          "with"
         ],
-        "name": "dotnet-runtime-10.0",
+        "name": "r-cran-bookdown",
         "packages": [],
-        "query": "runtime",
+        "query": "markdown",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 32,
-        "version": "10.0.12-0ubuntu1~24.04.1",
+        "score": 48,
+        "version": "0.37+dfsg-1",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "be69e4eb8206b98527164599a946d52f71bbe62aee3c0b9492a3027a69740319",
+        "archive_sha256": "c4fd0502e62e861917583ee31eccbfce810a37c94c3e90b63a52e2e9ec17b7eb",
         "binding_kind": "apt",
-        "description": ".NET runtime",
+        "description": "construct complex table with 'kable' and pipe syntax in GNU R",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "table",
+          "with"
         ],
-        "name": "dotnet-runtime-8.0",
+        "name": "r-cran-kableextra",
         "packages": [],
-        "query": "runtime",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 32,
-        "version": "8.0.31-0ubuntu1~24.04.1",
+        "score": 48,
+        "version": "1.4.0+dfsg-1",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "460601eca2d9e8b2b3eeee420be9587e6c3ef7c63d1563b9f95b632a66613a3b",
+        "archive_sha256": "d6b965acbe19d3711149fba0bbfbe92604e55afe9e48f880b4f7e29cd4f36c12",
         "binding_kind": "apt",
-        "description": ".NET Runtime debug symbols.",
+        "description": "WWW browsable pager with excellent tables/frames support",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "table",
+          "with"
         ],
-        "name": "dotnet-runtime-dbg-10.0",
+        "name": "w3m",
         "packages": [],
-        "query": "runtime",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 32,
-        "version": "10.0.12-0ubuntu1~24.04.1",
+        "score": 48,
+        "version": "0.5.3+git20230121-2ubuntu5",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "41c2ca6fcd262e1b7a5ec2d7f4ba8176a5829aa53ac71d308b2608b6c10d80e6",
+        "archive_sha256": "15e721ced3b26257d5f724085e2b2ca6f745bd131623c56ce85323f664f4b48c",
         "binding_kind": "apt",
-        "description": ".NET Runtime debug symbols.",
+        "description": "Common Lisp rewrite of Markdown",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "markdown"
         ],
-        "name": "dotnet-runtime-dbg-8.0",
+        "name": "cl-markdown",
         "packages": [],
-        "query": "runtime",
+        "query": "markdown",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "8.0.31-0ubuntu1~24.04.1",
+        "version": "20101006-2.1",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "831d39302722ccced7e9321b01f2607cb4222707574ece462c9a92a514610b8e",
+        "archive_sha256": "c145062b381c7b7ee62dab600d4594b43aeb5ef3c55e29d5a51ff2e10a1d553b",
         "binding_kind": "apt",
-        "description": "Erlang/OTP runtime tracing/debugging tools",
+        "description": "mode for editing Markdown-formatted text files in GNU Emacs",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "markdown"
         ],
-        "name": "erlang-runtime-tools",
+        "name": "elpa-markdown-mode",
         "packages": [],
-        "query": "runtime",
+        "query": "markdown",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "1:25.3.2.8+dfsg-1ubuntu4.6",
+        "version": "2.6-1",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "c8ae17c7e8d2ff4066049e39f3ec7caf2e91e544479d35a3b094ef93d5690cfa",
+        "archive_sha256": "6d48442652970885c7454ae1b2dd89fb35616c2a96a740f10623d80dab7c4025",
         "binding_kind": "apt",
-        "description": "Firmware Test Suite UEFI Runtime Service kernel driver",
+        "description": "call program using Emacs as $EDITOR",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "with"
         ],
-        "name": "fwts-efi-runtime-dkms",
+        "name": "elpa-with-editor",
         "packages": [],
-        "query": "runtime",
+        "query": "with",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "24.01.00-0ubuntu4.1",
+        "version": "3.3.0-1",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "4a3ffe8fe4b2be9400fb788ed71d27b29f2975e6fa7d5207f71aea68bbae674c",
+        "archive_sha256": "36e92734da0aabb44971b9c7ee5f468c1cc2516731e98d40345599c6c5866dde",
         "binding_kind": "apt",
-        "description": "Gambas runtime interpreter",
+        "description": "macro to simulate user input non-interactively",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "with"
         ],
-        "name": "gambas3-runtime",
+        "name": "elpa-with-simulated-input",
         "packages": [],
-        "query": "runtime",
+        "query": "with",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "3.19.0-2ubuntu10",
+        "version": "3.0-1",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "fcf40e17ab33ebf78ccf2c94a9ea65782afbfb4249fb457cd2483897dcef398e",
+        "archive_sha256": "bcf98fb42ede51af7ad0a487c2ef612813c90ecdbd81de59db5012abbb11c16e",
         "binding_kind": "apt",
-        "description": "Launcher for proprietary games",
+        "description": "Flexible Input Method Framework - table engine",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "table"
         ],
-        "name": "game-data-packager-runtime",
+        "name": "fcitx-table",
         "packages": [],
-        "query": "runtime",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "77ubuntu2",
+        "version": "1:4.2.9.9-2build2",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "650bcd76e0c56c713428950aec8823fd517f911eaad80406907379a69d36ad0a",
+        "archive_sha256": "1705eb043ea3b664ec2d38b14a0f34f37f9ffd71f2be891751f9890da1b8412e",
         "binding_kind": "apt",
-        "description": "GNU Compiler Collection for MinGW-w64, i686/POSIX",
+        "description": "Flexible Input Method Framework - tables metapackage",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "table"
         ],
-        "name": "gcc-mingw-w64-i686-posix-runtime",
+        "name": "fcitx-table-all",
         "packages": [],
-        "query": "runtime",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "13.2.0-6ubuntu1+26.1",
+        "version": "1:4.2.9.9-2build2",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "34fe47512cb203ff0cfb52f1ca157c3b1d257b105913cf17875d6d72556de50e",
+        "archive_sha256": "16c4cf829b7585b7237fca077232994bf80ce23d8486507ee3c65a6ce033e84d",
         "binding_kind": "apt",
-        "description": "GNU Compiler Collection for MinGW-w64, i686/Win32",
+        "description": "Flexible Input Method Framework - Amharic table",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "table"
         ],
-        "name": "gcc-mingw-w64-i686-win32-runtime",
+        "name": "fcitx-table-amharic",
         "packages": [],
-        "query": "runtime",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "13.2.0-6ubuntu1+26.1",
+        "version": "0.2.4-3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "aca6b438e0b55b11cedcf1170a1ee26e7979e34192e34f6e6389e560908a5bfc",
+        "archive_sha256": "80be63607c73c50c49b5b7266bc9dab0d2c9cd7550fb6c73e65d8bec0e0968a6",
         "binding_kind": "apt",
-        "description": "GNU Compiler Collection for MinGW-w64, x86-64/POSIX",
+        "description": "Flexible Input Method Framework - Arabic table",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "table"
         ],
-        "name": "gcc-mingw-w64-x86-64-posix-runtime",
+        "name": "fcitx-table-arabic",
         "packages": [],
-        "query": "runtime",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "13.2.0-6ubuntu1+26.1",
+        "version": "0.2.4-3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "7ac09bc7f283f1148c8e1697373db069c1d4364a9f5fa58bb66c8a93760b8b65",
+        "archive_sha256": "fceab99efb0e99ea2233d454297d4921c5932e957b3a3c22665682fa538a6d27",
         "binding_kind": "apt",
-        "description": "GNU Compiler Collection for MinGW-w64, x86-64/Win32",
+        "description": "Flexible Input Method Framework - Array30 table",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "table"
         ],
-        "name": "gcc-mingw-w64-x86-64-win32-runtime",
+        "name": "fcitx-table-array30",
         "packages": [],
-        "query": "runtime",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "13.2.0-6ubuntu1+26.1",
+        "version": "0.3.8-3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "0f1e3541ab9d3f0fe59c51308f70cac40a06a75b90e13f840ccfef636bd2d1cd",
+        "archive_sha256": "8a479a4bf1358dbb669611ca15f2def8e5e64d5e6f3895853f03ef2e473ecb50",
         "binding_kind": "apt",
-        "description": "GNUstep Base library - daemons and tools",
+        "description": "Flexible Input Method Framework - Array30-Big table",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "table"
         ],
-        "name": "gnustep-base-runtime",
+        "name": "fcitx-table-array30-big",
         "packages": [],
-        "query": "runtime",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "1.29.0-7ubuntu4",
+        "version": "0.3.8-3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "a1947682192a5663d12873dd69e54b36095921665d55f5e15feff95694d689b5",
+        "archive_sha256": "701415f424a5e15f180124736cdecd77274741c2553171eb7a85f395565ad597",
         "binding_kind": "apt",
-        "description": "GNUstep GUI Library - runtime files",
+        "description": "Flexible Input Method Framework - Bingchan table",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "table"
         ],
-        "name": "gnustep-gui-runtime",
+        "name": "fcitx-table-bingchan",
         "packages": [],
-        "query": "runtime",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "0.30.0-3build8",
+        "version": "1:4.2.9.9-2build2",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "17942b90f8ab27a3236054bcda898a9c4e3bd2c8a03b93338392a486d73d8232",
+        "archive_sha256": "13f3dc1f4215f98712ea4da07b80585aaa44308903543185d5f6e2991f9d6f69",
         "binding_kind": "apt",
-        "description": "Runtime hardening configuration files",
+        "description": "Flexible Input Method Framework - Boshiamy table",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "table"
         ],
-        "name": "hardening-runtime",
+        "name": "fcitx-table-boshiamy",
         "packages": [],
-        "query": "runtime",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "2",
+        "version": "0.3.8-3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "f5046bc4c553349eeb9cea205551f508530136b8d43ebeb17c1c91b64ef725ea",
+        "archive_sha256": "d5f8bfd67f711dc4668f2bc7958af4cb3a7fb10fcf63fdb80118dffa20156977",
         "binding_kind": "apt",
-        "description": "runtime components for Akonadi KDE",
+        "description": "Flexible Input Method Framework - Cangjie table (DO NOT USE)",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "table"
         ],
-        "name": "kdepim-runtime",
+        "name": "fcitx-table-cangjie",
         "packages": [],
-        "query": "runtime",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "4:23.08.5-0ubuntu3",
+        "version": "1:4.2.9.9-2build2",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "5c906fdcb41ab7197fa180bdf8d873c0a36e51b51ba79ba55792629fd7d30198",
+        "archive_sha256": "7f040c465b05e04dab25e64cd81ed68c7b7d03d1c22dbfdee7e7ec9cd24341e2",
         "binding_kind": "apt",
-        "description": "LAM runtime environment for executing parallel programs",
+        "description": "Flexible Input Method Framework - Cangjie-Big table",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "table"
         ],
-        "name": "lam-runtime",
+        "name": "fcitx-table-cangjie-big",
         "packages": [],
-        "query": "runtime",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "7.1.4-7.1build2",
+        "version": "0.3.8-3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "c29ce6f973bcbc729b22e51872b442e2df1a003ca658c3568a6e5d761b0f9146",
+        "archive_sha256": "437c2ac3e5b65e21057afe0279385deebcc0caa64b3ceb7a728b6c0b90272106",
         "binding_kind": "apt",
-        "description": "Modular compiler and toolchain technologies, IR interpreter",
+        "description": "Flexible Input Method Framework - Cangjie3 table",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "table"
         ],
-        "name": "llvm-14-runtime",
+        "name": "fcitx-table-cangjie3",
         "packages": [],
-        "query": "runtime",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "1:14.0.6-19build4",
+        "version": "0.3.8-3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "b2caf977d98a3bd2586325d5b1ddccf4d40d6b29ab651f20ee2e18ae7b443d98",
+        "archive_sha256": "91b1cb37b511971f57c353e66180dd58ee3c231a52311c011c817ef7ad1f8ea6",
         "binding_kind": "apt",
-        "description": "Modular compiler and toolchain technologies, IR interpreter",
+        "description": "Flexible Input Method Framework - Cangjie5 table",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "table"
         ],
-        "name": "llvm-15-runtime",
+        "name": "fcitx-table-cangjie5",
         "packages": [],
-        "query": "runtime",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "1:15.0.7-14build3",
+        "version": "0.3.8-3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "d0169f60fea6c3787a91494ad8ba1ce84391c5f59ad943c905238169155fa9d7",
+        "archive_sha256": "9fbc35134ff59f39f50a6b99555b44f6c570cd7ce5f26043f282e0ecb801a11b",
         "binding_kind": "apt",
-        "description": "Modular compiler and toolchain technologies, IR interpreter",
+        "description": "Flexible Input Method Framework - Cantonese table",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "runtime"
+          "table"
         ],
-        "name": "llvm-16-runtime",
+        "name": "fcitx-table-cantonese",
         "packages": [],
-        "query": "runtime",
+        "query": "table",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "1:16.0.6-23ubuntu4",
+        "version": "0.3.8-3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "b29f2239a8487c701fd76c62dba78609c9ad611c674bff81c5059d9052b29d66",
+        "archive_sha256": "960f34cfbce54127e0ba7253efb7e747ae062d1174b388d68deca9dbfb8f702b",
         "binding_kind": "apt",
-        "description": "Modular compiler and toolchain technologies, IR interpreter",
+        "description": "Sphinx extension for rendering markdown tables (Python 3)",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
+        "integration_friction": 2,
         "matched_terms": [
-          "runtime"
+          "markdown",
+          "table"
         ],
-        "name": "llvm-17-runtime",
+        "name": "python3-sphinx-markdown-tables",
         "packages": [],
-        "query": "runtime",
+        "query": "markdown",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 32,
-        "version": "1:17.0.6-9ubuntu1",
+        "score": 44,
+        "version": "0.0.17-1",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "1ad04ff658929491f8bf30fcf6454e07b1815a2b04164f1894156e92c91ef895",
+        "archive_sha256": "416250f72fbd9dcfd96211891bec273fbff5dd1c495d597776132f7b321a7ceb",
         "binding_kind": "apt",
-        "description": "Modular compiler and toolchain technologies, IR interpreter",
+        "description": "convert Markdown to HTML, with XSS protection",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
+        "integration_friction": 4,
         "matched_terms": [
-          "runtime"
+          "markdown",
+          "with"
         ],
-        "name": "llvm-18-runtime",
+        "name": "libghc-markdown-dev",
         "packages": [],
-        "query": "runtime",
+        "query": "markdown",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 32,
-        "version": "1:18.1.3-1ubuntu1",
+        "score": 34,
+        "version": "0.1.17.5-2",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "2aa55713edfc8f0be44987075dbced8bf9971047af786b9246d1600419bda605",
+        "archive_sha256": "c7f8c513d9f3170c7ac942fa523a16fbc04cbfd85a1ce54224ac9f42d70aca9a",
         "binding_kind": "apt",
-        "description": "Modular compiler and toolchain technologies, IR interpreter",
+        "description": "convert Markdown to HTML, with XSS protection; documentation",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
+        "integration_friction": 4,
         "matched_terms": [
-          "runtime"
+          "markdown",
+          "with"
         ],
-        "name": "llvm-19-runtime",
+        "name": "libghc-markdown-doc",
         "packages": [],
-        "query": "runtime",
+        "query": "markdown",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 32,
-        "version": "1:19.1.1-1ubuntu1~24.04.2",
+        "score": 34,
+        "version": "0.1.17.5-2",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "85db2d2a062006f3780bc0e6bd610af4ed21f9664b5d3bca4b4f951e9fb6381f",
+        "archive_sha256": "6483996e97fbcc06538493cde1a4c1d839478f77c1a12cd85cbc093802246378",
         "binding_kind": "apt",
-        "description": "Modular compiler and toolchain technologies, IR interpreter",
+        "description": "convert Markdown to HTML, with XSS protection; profiling libraries",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
+        "integration_friction": 4,
         "matched_terms": [
-          "runtime"
+          "markdown",
+          "with"
         ],
-        "name": "llvm-20-runtime",
+        "name": "libghc-markdown-prof",
         "packages": [],
-        "query": "runtime",
+        "query": "markdown",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 32,
-        "version": "1:20.1.2-0ubuntu1~24.04.3",
+        "score": 34,
+        "version": "0.1.17.5-2",
         "zero_cost_eligible": true
       },
       {
-        "description": "Local MCP runtime for coordinating Freebuff, Codex, OpenCode, Claude Code, and Cursor agents.",
+        "description": "Create, read, update, and delete records in Airtable bases and tables",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "io.github.Praket7/agent-interop-runtime",
+        "name": "com.mcparmory/airtable",
         "packages": [
           {
-            "identifier": "agent-interop-runtime",
-            "registry_type": "npm",
-            "required_environment": [],
-            "runtime_hint": null,
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": "0.3.2"
-          }
-        ],
-        "query": "runtime",
-        "remotes": [],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/Praket7/agent-interop-runtime"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 18,
-        "status": "active",
-        "version": "0.3.2",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Verify whether a local Agent or MCP runtime matches an approved artifact.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.fantasyce/agent-runtime-proof",
-        "packages": [
-          {
-            "identifier": "https://github.com/fantasyce/agent-runtime-proof/releases/download/v1.1.0/agent-runtime-proof_1.1.0.mcpb",
-            "registry_type": "mcpb",
-            "required_environment": [],
-            "runtime_hint": null,
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": "1.1.0"
-          }
-        ],
-        "query": "runtime",
-        "remotes": [],
-        "repository": {
-          "id": "1345289397",
-          "source": "github",
-          "url": "https://github.com/fantasyce/agent-runtime-proof"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 18,
-        "status": "active",
-        "version": "1.1.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Finds the end-of-life runtimes an AI assistant still writes for you \u2014 node:20, python3.9, ubuntu-22",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.jmshinhwa/runtime-eol-deploy-block-audit",
-        "packages": [
-          {
-            "identifier": "@readystack/runtime-eol-deploy-block-audit",
-            "registry_type": "npm",
-            "required_environment": [],
-            "runtime_hint": "npx",
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": "0.1.3"
-          }
-        ],
-        "query": "runtime",
-        "remotes": [],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/jmshinhwa/readystack-themes"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 18,
-        "status": "active",
-        "version": "0.1.3",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Summarize runtime declarations across local manifests and CI files without returning versions,...",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.mrfentmen/runtime-support-mcp",
-        "packages": [
-          {
-            "identifier": "runtime-support-mcp",
-            "registry_type": "npm",
-            "required_environment": [],
-            "runtime_hint": null,
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": "1.0.0"
-          }
-        ],
-        "query": "runtime",
-        "remotes": [],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/mrfentmen/runtime-support-mcp"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 18,
-        "status": "active",
-        "version": "1.0.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Self-hosted MCP runtime for ChatGPT to edit files, run commands, and test local projects.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.flytohub/flyto-runtime",
-        "packages": [],
-        "query": "runtime",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://{runtime_host}/mcp"
-          }
-        ],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/flytohub/flyto-runtime"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "1.0.8",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Hosted Python sandbox for package runtime verification: pip install and usable-import evidence.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.ligafew/python-package-runtime-test",
-        "packages": [],
-        "query": "runtime",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://apcs-public-mcp-gateway.apcs-mcp.workers.dev/mcp/python-package-runtime-test"
-          }
-        ],
-        "repository": null,
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "1.0.2",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "ECRVSP Documentos: Altera\u00e7\u00e3o de Dados Cadastrais, official-source lookup. Platform-hosted, pay per q",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.mcp-dir/ecrvsp_docs_dados_cadastrais-mcp",
-        "packages": [],
-        "query": "astra",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://api.mcp.ai/p_ecrvsp_docs_dados_cadastrais"
-          }
-        ],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/mcp-dir/ecrvsp_docs_dados_cadastrais-mcp"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "0.1.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Canonical URL host only, URL discarded",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.sadri-dridi/canonical-host",
-        "packages": [],
-        "query": "canonical",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/canonical-host/mcp"
-          }
-        ],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/sadri-dridi/named-mcp-utilities"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "1.0.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "HTML canonical link count, markup discarded",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.sadri-dridi/canonical-ok",
-        "packages": [],
-        "query": "canonical",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/canonical-ok/mcp"
-          }
-        ],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/sadri-dridi/named-mcp-utilities"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "1.0.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Self-hosted MCP server: 26 deterministic dev, security, and EVM tools.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "com.formatho/runtime",
-        "packages": [
-          {
-            "identifier": "docker.io/formatho/formatho-runtime:0.3.0",
-            "registry_type": "oci",
-            "required_environment": [],
-            "runtime_hint": null,
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": null
-          }
-        ],
-        "query": "runtime",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://mcp.formatho.com/mcp"
-          }
-        ],
-        "repository": null,
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 14,
-        "status": "active",
-        "version": "0.3.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Engineering-grade MCP debugging SDK turning the PPSSPP PSP emulator into an AI-debuggable target.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.AstralVoidZ/ppsspp-dfx-mcp",
-        "packages": [
-          {
-            "identifier": "ppsspp-dfx-mcp",
-            "registry_type": "pypi",
-            "required_environment": [],
-            "runtime_hint": null,
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": "0.1.4"
-          }
-        ],
-        "query": "astra",
-        "remotes": [],
-        "repository": null,
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 14,
-        "status": "active",
-        "version": "0.1.4",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Zero-addon MCP server for Godot 4: agents edit, run, and play-test the game.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.Erodenn/godot-mcp-runtime",
-        "packages": [
-          {
-            "identifier": "godot-mcp-runtime",
-            "registry_type": "npm",
-            "required_environment": [],
-            "runtime_hint": "npx",
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": "3.8.0"
-          }
-        ],
-        "query": "runtime",
-        "remotes": [],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/Erodenn/godot-mcp-runtime"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 14,
-        "status": "active",
-        "version": "3.8.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "A lightweight Java IDE for AI agents: incremental builds, fast tests, HotSwap and live debugging.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.L1ch404/jolink-runtime",
-        "packages": [
-          {
-            "identifier": "jolink-runtime",
+            "identifier": "mcparmory-airtable",
             "registry_type": "pypi",
             "required_environment": [],
             "runtime_hint": "uvx",
@@ -991,35 +640,13 @@
             "transport": {
               "type": "stdio"
             },
-            "version": "0.1.0a7"
-          }
-        ],
-        "query": "runtime",
-        "remotes": [],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/L1ch404/jolink-runtime"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 14,
-        "status": "active",
-        "version": "0.1.0a7",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Resumable API pagination, repeated-failure detection and tool-progress cache hints for AI agents",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.Warddamn/tiny-runtime",
-        "packages": [
+            "version": "1.0.3"
+          },
           {
-            "identifier": "https://github.com/Warddamn/tiny-tools/releases/download/runtime-v0.1.1/tiny-runtime-0.1.1.mcpb",
-            "registry_type": "mcpb",
+            "identifier": "ghcr.io/mcparmory/airtable:1.0.3",
+            "registry_type": "oci",
             "required_environment": [],
-            "runtime_hint": null,
+            "runtime_hint": "docker",
             "secret_environment": [],
             "transport": {
               "type": "stdio"
@@ -1027,30 +654,95 @@
             "version": null
           }
         ],
-        "query": "runtime",
+        "query": "table",
         "remotes": [],
         "repository": {
           "source": "github",
-          "subfolder": "packages/runtime",
-          "url": "https://github.com/Warddamn/tiny-tools"
+          "url": "https://github.com/mcparmory/registry"
         },
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 14,
+        "score": 18,
         "status": "active",
-        "version": "0.1.1",
+        "version": "1.0.3",
         "zero_cost_eligible": true
       },
       {
-        "description": "Precision-audited astrology MCP: natal charts, transits, synastry, moon phases. No API key.",
+        "description": "Manage Airtable bases: schema, field CRUD, views, formula validation, extensions",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "io.github.davidmosiah/astral-mcp",
+        "name": "io.github.Automations-Project/airtable-user-mcp",
         "packages": [
           {
-            "identifier": "astral-mcp",
+            "identifier": "airtable-user-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": "npx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "2.1.1"
+          }
+        ],
+        "query": "table",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/Automations-Project/VSCode-Airtable-Formula"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "2.1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Markdown Ai MCP Server by MEOK AI Labs",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.CSOAI-ORG/markdown-ai-mcp",
+        "packages": [
+          {
+            "identifier": "markdown-ai-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "python",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.10"
+          }
+        ],
+        "query": "markdown",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/CSOAI-ORG/markdown-ai-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.10",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Tabler.io for AI assistants: search 5,000+ icons, UI components, layouts, themes and docs.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.MaFady/tabler-mcp-server",
+        "packages": [
+          {
+            "identifier": "tabler-mcp-server",
             "registry_type": "npm",
             "required_environment": [],
             "runtime_hint": null,
@@ -1058,32 +750,32 @@
             "transport": {
               "type": "stdio"
             },
-            "version": "0.2.0"
+            "version": "1.0.1"
           }
         ],
-        "query": "astra",
+        "query": "table",
         "remotes": [],
         "repository": {
           "source": "github",
-          "url": "https://github.com/davidmosiah/astral-mcp"
+          "url": "https://github.com/MaFady/tabler-mcp-server"
         },
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 14,
+        "score": 18,
         "status": "active",
-        "version": "0.2.0",
+        "version": "1.0.1",
         "zero_cost_eligible": true
       },
       {
-        "description": "Control CesiumJS 3D globes via MCP: camera, layers, entities, animation, and interaction.",
+        "description": "Convert HTML to Markdown or strip to plain text. For web-scraping agents.",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "io.github.gaopengbin/cesium-mcp-runtime",
+        "name": "io.github.MukundaKatta/html-to-markdown-mcp",
         "packages": [
           {
-            "identifier": "cesium-mcp-runtime",
+            "identifier": "@mukundakatta/html-to-markdown-mcp",
             "registry_type": "npm",
             "required_environment": [],
             "runtime_hint": null,
@@ -1091,33 +783,167 @@
             "transport": {
               "type": "stdio"
             },
-            "version": "1.145.3"
+            "version": "0.1.0"
           }
         ],
-        "query": "runtime",
+        "query": "markdown",
         "remotes": [],
         "repository": {
           "source": "github",
-          "subfolder": "packages/cesium-mcp-runtime",
-          "url": "https://github.com/gaopengbin/cesium-mcp"
+          "subfolder": "packages/html-to-markdown-mcp",
+          "url": "https://github.com/MukundaKatta/mcp-stack"
         },
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 14,
+        "score": 18,
         "status": "active",
-        "version": "1.145.3",
+        "version": "0.1.0",
         "zero_cost_eligible": true
       },
       {
-        "description": "Connect AI assistants to ITM Platform projects, tasks, budgets, risks, and team workload.",
+        "description": "AI Answer Copier \u2014 Convert Markdown to PDF, DOCX, HTML, LaTeX, CSV, JSON, XML, XLSX, RTF, PNG",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "io.github.itmplatform/mcp-server",
+        "name": "io.github.XJTLUmedia/markdown-formatter",
         "packages": [
           {
-            "identifier": "@itm-platform/mcp-server",
+            "identifier": "@xjtlumedia/markdown-mcp-server",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.5"
+          }
+        ],
+        "query": "markdown",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/XJTLUmedia/AI_answer_copier"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.5",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Local-only Tableau .twbx audit: lineage, unused fields, duplicate calcs, SQL, version diffs",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.andey0Saikiran/tableau-lineage",
+        "packages": [
+          {
+            "identifier": "tableau-lineage-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": "npx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.1"
+          }
+        ],
+        "query": "table",
+        "remotes": [],
+        "repository": {
+          "id": "1278695609",
+          "source": "github",
+          "subfolder": "mcp",
+          "url": "https://github.com/andey0Saikiran/tableau-lineage"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "easyTable restaurant reservations for Claude \u2014 availability, and create/modify/cancel bookings",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.chrischall/easytable-mcp",
+        "packages": [
+          {
+            "identifier": "easytable-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.2.0"
+          }
+        ],
+        "query": "table",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/chrischall/easytable-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.2.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Any URL to clean, LLM-ready Markdown for RAG. Strips ads, nav, and boilerplate.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.damonwill78-a11y/clean-markdown",
+        "packages": [
+          {
+            "identifier": "clean-markdown-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.1.3"
+          }
+        ],
+        "query": "markdown",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/damonwill78-a11y/clean-markdown-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.1.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Convert Markdown into WhatsApp formatting: tables drawn to fit the phone's monospace width.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.drsound/markdown-to-whatsapp",
+        "packages": [
+          {
+            "identifier": "markdown-to-whatsapp",
             "registry_type": "npm",
             "required_environment": [],
             "runtime_hint": null,
@@ -1128,68 +954,227 @@
             "version": "1.0.3"
           }
         ],
-        "query": "tmp",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://api.itmplatform.com/v2/_/mcp/"
-          }
-        ],
+        "query": "markdown",
+        "remotes": [],
         "repository": {
           "source": "github",
-          "url": "https://github.com/itmplatform/mcp-server"
+          "url": "https://github.com/drsound/markdown-to-whatsapp"
         },
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 14,
+        "score": 18,
         "status": "active",
         "version": "1.0.3",
         "zero_cost_eligible": true
       },
       {
-        "description": "Finds the GitHub Actions steps that stop running on 2026-09-23, with the version to move to",
+        "description": "MCP server for GroupDocs.Markdown \u2014 convert documents to Markdown via AI agents.",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "io.github.jmshinhwa/action-runtime-sunset-lint",
+        "name": "io.github.groupdocs-markdown/groupdocs-markdown-mcp",
         "packages": [
           {
-            "identifier": "@readystack/action-runtime-sunset-lint",
-            "registry_type": "npm",
+            "identifier": "GroupDocs.Markdown.Mcp",
+            "registry_type": "nuget",
             "required_environment": [],
-            "runtime_hint": "npx",
+            "runtime_hint": null,
             "secret_environment": [],
             "transport": {
               "type": "stdio"
             },
-            "version": "1.0.2"
+            "version": "26.9.0"
           }
         ],
-        "query": "runtime",
+        "query": "markdown",
         "remotes": [],
         "repository": {
           "source": "github",
-          "url": "https://github.com/jmshinhwa/readystack-themes"
+          "url": "https://github.com/groupdocs-markdown/GroupDocs.Markdown.Mcp"
         },
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 14,
+        "score": 18,
         "status": "active",
-        "version": "1.0.2",
+        "version": "26.9.0",
         "zero_cost_eligible": true
       },
       {
-        "description": "This package is intended for demonstration only. Maintained by JFrog Security.",
+        "description": "MCP server for Feishu Markdown",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "io.github.mcp-protocol/node-runtime",
+        "name": "io.github.huandu/feishu-markdown-mcp",
         "packages": [
           {
-            "identifier": "@mcp-protocol/node-runtime",
+            "identifier": "feishu-markdown-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.3"
+          }
+        ],
+        "query": "markdown",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/huandu/feishu-markdown"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.1.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "MCP server for Google Docs with verified writes \u2014 every mutation returns before/after proof.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.michaelrobertsutton/verified-googledocs-mcp",
+        "packages": [
+          {
+            "identifier": "verified-googledocs-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "uvx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.0"
+          }
+        ],
+        "query": "verified",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/michaelrobertsutton/verified-googledocs-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Convert HTML to clean markdown locally. No network and no key.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.mrfentmen/html-to-markdown-mcp",
+        "packages": [
+          {
+            "identifier": "@mrfentmen/html-to-markdown-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.0"
+          }
+        ],
+        "query": "markdown",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/mrfentmen/html-to-markdown-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Convert markdown to HTML and extract headings locally. No network and no key.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.mrfentmen/markdown-mcp",
+        "packages": [
+          {
+            "identifier": "@mrfentmen/markdown-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.0"
+          }
+        ],
+        "query": "markdown",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/mrfentmen/markdown-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Markdown MCP \u2014 search, extract sections, list headings, find code blocks.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.ofershap/markdown",
+        "packages": [
+          {
+            "identifier": "mcp-server-markdown",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.1"
+          }
+        ],
+        "query": "markdown",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/ofershap/mcp-server-markdown"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Markdown TOC, lint, format, stats for AI agents",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.rog0x/markdown",
+        "packages": [
+          {
+            "identifier": "@rog0x/mcp-markdown-tools",
             "registry_type": "npm",
             "required_environment": [],
             "runtime_hint": null,
@@ -1200,29 +1185,29 @@
             "version": "1.0.2"
           }
         ],
-        "query": "runtime",
+        "query": "markdown",
         "remotes": [],
         "repository": {
           "source": "github",
-          "url": "https://github.com/mcp-protocol/node-runtime"
+          "url": "https://github.com/rog0x/mcp-markdown-tools"
         },
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 14,
+        "score": 18,
         "status": "active",
         "version": "1.0.2",
         "zero_cost_eligible": true
       },
       {
-        "description": "Cryptographic identity for AI agents: W3C DIDs, Verifiable Credentials, post-quantum crypto",
+        "description": "MCP server for markdown: tables, TOC, HTML conversion, formatting.",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "io.github.san-techie21/astracipher",
+        "name": "io.github.ryudi84/markdown",
         "packages": [
           {
-            "identifier": "@astracipher/core",
+            "identifier": "markdown-forge-mcp",
             "registry_type": "npm",
             "required_environment": [],
             "runtime_hint": null,
@@ -1230,20 +1215,81 @@
             "transport": {
               "type": "stdio"
             },
-            "version": "0.1.1"
+            "version": "1.0.3"
           }
         ],
-        "query": "astra",
+        "query": "markdown",
         "remotes": [],
         "repository": {
           "source": "github",
-          "url": "https://github.com/san-techie21/astracipher"
+          "url": "https://github.com/ryudi84/sovereign-mcp-servers"
         },
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 14,
+        "score": 18,
         "status": "active",
-        "version": "0.1.1",
+        "version": "1.0.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Markdown processing, TOC generation, HTML conversion",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.ryudi84/markdown-forge-mcp",
+        "packages": [
+          {
+            "identifier": "markdown-forge-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.1"
+          }
+        ],
+        "query": "markdown",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "subfolder": "markdown-forge",
+          "url": "https://github.com/ryudi84/sovereign-mcp-servers"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Your portable context layer \u2014 load it into any AI.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.portablecontext/pcd",
+        "packages": [],
+        "query": "table",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.portablecontext.ai/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/d3lanight/pcd"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.4.0",
         "zero_cost_eligible": true
       }
     ],
@@ -1254,613 +1300,626 @@
         "candidate_count": 30,
         "candidates": [
           {
-            "archive_sha256": "315a0aa88c5bae3061e5bb376cb744f52a91ae5230ed56a0f85a41ab3fce271c",
+            "archive_sha256": "0f266091d9e5ca9fb3479028f3e40eebaf46cfbc8b40ef6a658847919cd4bbfb",
             "binding_kind": "apt",
-            "description": "ASP.NET Core runtime",
+            "description": "Emacs TOC (table of contents) generator for markdown files",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "runtime"
+              "markdown",
+              "table"
             ],
-            "name": "aspnetcore-runtime-10.0",
+            "name": "elpa-markdown-toc",
             "packages": [],
-            "query": "runtime",
+            "query": "markdown",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "10.0.12-0ubuntu1~24.04.1",
+            "score": 62,
+            "version": "0.1.5-3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "eded079d030876ca9428f555b0b4b5c3a9f5ccab3c701907bb640b01de2e4961",
+            "archive_sha256": "0ca9138fbbd2eb19d45091e98366952634bf5cfefff93b68f000fe99b4bdbcba",
             "binding_kind": "apt",
-            "description": "ASP.NET Core runtime",
+            "description": "borderless text tables with alignment",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "runtime"
+              "table",
+              "with"
             ],
-            "name": "aspnetcore-runtime-8.0",
+            "name": "node-text-table",
             "packages": [],
-            "query": "runtime",
+            "query": "table",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "8.0.31-0ubuntu1~24.04.1",
+            "score": 62,
+            "version": "0.2.0-4",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "3f86479547f42388360b7527b4682ab356d06f7f7dda7e9217aacb777dacae39",
+            "archive_sha256": "f7572653ddc875a68da85c48514dc2eec111a7e3b2ce0fb354cfb09b111fc056",
             "binding_kind": "apt",
-            "description": "ASP.NET Runtime debug symbols.",
+            "description": "convert HTML into MarkDown with JavaScript",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "runtime"
+              "markdown",
+              "with"
             ],
-            "name": "aspnetcore-runtime-dbg-10.0",
+            "name": "node-turndown",
             "packages": [],
-            "query": "runtime",
+            "query": "markdown",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "10.0.12-0ubuntu1~24.04.1",
+            "score": 48,
+            "version": "7.1.1-3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "ffeef0e6d29f69eb3d300c73715b22e5872e902de01659b257e4303379460953",
+            "archive_sha256": "b70805dbddbe63f4d9db049c4ae296aead7f2d1666fa8b843808e87f23aaac70",
             "binding_kind": "apt",
-            "description": "ASP.NET Runtime debug symbols.",
+            "description": "Presentations with Markdown, Pandoc, Impress.",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "runtime"
+              "markdown",
+              "with"
             ],
-            "name": "aspnetcore-runtime-dbg-8.0",
+            "name": "pampi",
             "packages": [],
-            "query": "runtime",
+            "query": "markdown",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "8.0.31-0ubuntu1~24.04.1",
+            "score": 48,
+            "version": "1.1+dfsg1-9",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "dc7b74c21d606e26366ff3e7261a0d49672f340db64a59c0dcc013cea67e3814",
+            "archive_sha256": "cefb030d681c414e13e2a0385681870e42bb474ede01603e8cb66f59b7134514",
             "binding_kind": "apt",
-            "description": "user-defined software stacks (UDSS) for HPC centers (runtime tools)",
+            "description": "Build fact tables asynchronously with Postgres",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "runtime"
+              "table",
+              "with"
             ],
-            "name": "charliecloud-runtime",
+            "name": "postgresql-16-pg-fact-loader",
             "packages": [],
-            "query": "runtime",
+            "query": "table",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "0.37-1build1",
+            "score": 48,
+            "version": "2.0.1-3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "f3f1051bf8cb77c632ea23796da8c9cf0007a5218bd698ad2ae78ebf292a6441",
+            "archive_sha256": "59f2ee4992638d8841d516bcb7973d82681966f58200f42b8079193577e538b7",
             "binding_kind": "apt",
-            "description": "runtime support for password checker library cracklib2",
+            "description": "reorganize tables in PostgreSQL databases with minimal locks",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "runtime"
+              "table",
+              "with"
             ],
-            "name": "cracklib-runtime",
+            "name": "postgresql-16-repack",
             "packages": [],
-            "query": "runtime",
+            "query": "table",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "2.9.6-5.1build2",
+            "score": 48,
+            "version": "1.5.0-1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "4eb92415faafca5c4d72800c37c0d42eea2907058e10d23bdb4a2ce1cbc5fc77",
+            "archive_sha256": "34db36d1bb9241b414925d111b220f9b19a4decdcda678841fe91ff5fa819e53",
             "binding_kind": "apt",
-            "description": ".NET runtime",
+            "description": "authoring books and technical documents with GNU R markdown",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "runtime"
+              "markdown",
+              "with"
             ],
-            "name": "dotnet-runtime-10.0",
+            "name": "r-cran-bookdown",
             "packages": [],
-            "query": "runtime",
+            "query": "markdown",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "10.0.12-0ubuntu1~24.04.1",
+            "score": 48,
+            "version": "0.37+dfsg-1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "be69e4eb8206b98527164599a946d52f71bbe62aee3c0b9492a3027a69740319",
+            "archive_sha256": "c4fd0502e62e861917583ee31eccbfce810a37c94c3e90b63a52e2e9ec17b7eb",
             "binding_kind": "apt",
-            "description": ".NET runtime",
+            "description": "construct complex table with 'kable' and pipe syntax in GNU R",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "runtime"
+              "table",
+              "with"
             ],
-            "name": "dotnet-runtime-8.0",
+            "name": "r-cran-kableextra",
             "packages": [],
-            "query": "runtime",
+            "query": "table",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "8.0.31-0ubuntu1~24.04.1",
+            "score": 48,
+            "version": "1.4.0+dfsg-1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "460601eca2d9e8b2b3eeee420be9587e6c3ef7c63d1563b9f95b632a66613a3b",
+            "archive_sha256": "d6b965acbe19d3711149fba0bbfbe92604e55afe9e48f880b4f7e29cd4f36c12",
             "binding_kind": "apt",
-            "description": ".NET Runtime debug symbols.",
+            "description": "WWW browsable pager with excellent tables/frames support",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "runtime"
+              "table",
+              "with"
             ],
-            "name": "dotnet-runtime-dbg-10.0",
+            "name": "w3m",
             "packages": [],
-            "query": "runtime",
+            "query": "table",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "10.0.12-0ubuntu1~24.04.1",
+            "score": 48,
+            "version": "0.5.3+git20230121-2ubuntu5",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "41c2ca6fcd262e1b7a5ec2d7f4ba8176a5829aa53ac71d308b2608b6c10d80e6",
+            "archive_sha256": "960f34cfbce54127e0ba7253efb7e747ae062d1174b388d68deca9dbfb8f702b",
             "binding_kind": "apt",
-            "description": ".NET Runtime debug symbols.",
+            "description": "Sphinx extension for rendering markdown tables (Python 3)",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
+            "integration_friction": 2,
             "matched_terms": [
-              "runtime"
+              "markdown",
+              "table"
             ],
-            "name": "dotnet-runtime-dbg-8.0",
+            "name": "python3-sphinx-markdown-tables",
             "packages": [],
-            "query": "runtime",
+            "query": "markdown",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "8.0.31-0ubuntu1~24.04.1",
+            "score": 44,
+            "version": "0.0.17-1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "831d39302722ccced7e9321b01f2607cb4222707574ece462c9a92a514610b8e",
+            "archive_sha256": "416250f72fbd9dcfd96211891bec273fbff5dd1c495d597776132f7b321a7ceb",
             "binding_kind": "apt",
-            "description": "Erlang/OTP runtime tracing/debugging tools",
+            "description": "convert Markdown to HTML, with XSS protection",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
+            "integration_friction": 4,
             "matched_terms": [
-              "runtime"
+              "markdown",
+              "with"
             ],
-            "name": "erlang-runtime-tools",
+            "name": "libghc-markdown-dev",
             "packages": [],
-            "query": "runtime",
+            "query": "markdown",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "1:25.3.2.8+dfsg-1ubuntu4.6",
+            "score": 34,
+            "version": "0.1.17.5-2",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "c8ae17c7e8d2ff4066049e39f3ec7caf2e91e544479d35a3b094ef93d5690cfa",
+            "archive_sha256": "c7f8c513d9f3170c7ac942fa523a16fbc04cbfd85a1ce54224ac9f42d70aca9a",
             "binding_kind": "apt",
-            "description": "Firmware Test Suite UEFI Runtime Service kernel driver",
+            "description": "convert Markdown to HTML, with XSS protection; documentation",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
+            "integration_friction": 4,
             "matched_terms": [
-              "runtime"
+              "markdown",
+              "with"
             ],
-            "name": "fwts-efi-runtime-dkms",
+            "name": "libghc-markdown-doc",
             "packages": [],
-            "query": "runtime",
+            "query": "markdown",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "24.01.00-0ubuntu4.1",
+            "score": 34,
+            "version": "0.1.17.5-2",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "4a3ffe8fe4b2be9400fb788ed71d27b29f2975e6fa7d5207f71aea68bbae674c",
+            "archive_sha256": "6483996e97fbcc06538493cde1a4c1d839478f77c1a12cd85cbc093802246378",
             "binding_kind": "apt",
-            "description": "Gambas runtime interpreter",
+            "description": "convert Markdown to HTML, with XSS protection; profiling libraries",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
+            "integration_friction": 4,
             "matched_terms": [
-              "runtime"
+              "markdown",
+              "with"
             ],
-            "name": "gambas3-runtime",
+            "name": "libghc-markdown-prof",
             "packages": [],
-            "query": "runtime",
+            "query": "markdown",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "3.19.0-2ubuntu10",
+            "score": 34,
+            "version": "0.1.17.5-2",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "fcf40e17ab33ebf78ccf2c94a9ea65782afbfb4249fb457cd2483897dcef398e",
+            "archive_sha256": "15e721ced3b26257d5f724085e2b2ca6f745bd131623c56ce85323f664f4b48c",
             "binding_kind": "apt",
-            "description": "Launcher for proprietary games",
+            "description": "Common Lisp rewrite of Markdown",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "runtime"
+              "markdown"
             ],
-            "name": "game-data-packager-runtime",
+            "name": "cl-markdown",
             "packages": [],
-            "query": "runtime",
+            "query": "markdown",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "77ubuntu2",
+            "version": "20101006-2.1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "650bcd76e0c56c713428950aec8823fd517f911eaad80406907379a69d36ad0a",
+            "archive_sha256": "c145062b381c7b7ee62dab600d4594b43aeb5ef3c55e29d5a51ff2e10a1d553b",
             "binding_kind": "apt",
-            "description": "GNU Compiler Collection for MinGW-w64, i686/POSIX",
+            "description": "mode for editing Markdown-formatted text files in GNU Emacs",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "runtime"
+              "markdown"
             ],
-            "name": "gcc-mingw-w64-i686-posix-runtime",
+            "name": "elpa-markdown-mode",
             "packages": [],
-            "query": "runtime",
+            "query": "markdown",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "13.2.0-6ubuntu1+26.1",
+            "version": "2.6-1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "34fe47512cb203ff0cfb52f1ca157c3b1d257b105913cf17875d6d72556de50e",
+            "archive_sha256": "6d48442652970885c7454ae1b2dd89fb35616c2a96a740f10623d80dab7c4025",
             "binding_kind": "apt",
-            "description": "GNU Compiler Collection for MinGW-w64, i686/Win32",
+            "description": "call program using Emacs as $EDITOR",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "runtime"
+              "with"
             ],
-            "name": "gcc-mingw-w64-i686-win32-runtime",
+            "name": "elpa-with-editor",
             "packages": [],
-            "query": "runtime",
+            "query": "with",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "13.2.0-6ubuntu1+26.1",
+            "version": "3.3.0-1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "aca6b438e0b55b11cedcf1170a1ee26e7979e34192e34f6e6389e560908a5bfc",
+            "archive_sha256": "36e92734da0aabb44971b9c7ee5f468c1cc2516731e98d40345599c6c5866dde",
             "binding_kind": "apt",
-            "description": "GNU Compiler Collection for MinGW-w64, x86-64/POSIX",
+            "description": "macro to simulate user input non-interactively",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "runtime"
+              "with"
             ],
-            "name": "gcc-mingw-w64-x86-64-posix-runtime",
+            "name": "elpa-with-simulated-input",
             "packages": [],
-            "query": "runtime",
+            "query": "with",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "13.2.0-6ubuntu1+26.1",
+            "version": "3.0-1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "7ac09bc7f283f1148c8e1697373db069c1d4364a9f5fa58bb66c8a93760b8b65",
+            "archive_sha256": "bcf98fb42ede51af7ad0a487c2ef612813c90ecdbd81de59db5012abbb11c16e",
             "binding_kind": "apt",
-            "description": "GNU Compiler Collection for MinGW-w64, x86-64/Win32",
+            "description": "Flexible Input Method Framework - table engine",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "runtime"
+              "table"
             ],
-            "name": "gcc-mingw-w64-x86-64-win32-runtime",
+            "name": "fcitx-table",
             "packages": [],
-            "query": "runtime",
+            "query": "table",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "13.2.0-6ubuntu1+26.1",
+            "version": "1:4.2.9.9-2build2",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "0f1e3541ab9d3f0fe59c51308f70cac40a06a75b90e13f840ccfef636bd2d1cd",
+            "archive_sha256": "1705eb043ea3b664ec2d38b14a0f34f37f9ffd71f2be891751f9890da1b8412e",
             "binding_kind": "apt",
-            "description": "GNUstep Base library - daemons and tools",
+            "description": "Flexible Input Method Framework - tables metapackage",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "runtime"
+              "table"
             ],
-            "name": "gnustep-base-runtime",
+            "name": "fcitx-table-all",
             "packages": [],
-            "query": "runtime",
+            "query": "table",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "1.29.0-7ubuntu4",
+            "version": "1:4.2.9.9-2build2",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "a1947682192a5663d12873dd69e54b36095921665d55f5e15feff95694d689b5",
+            "archive_sha256": "16c4cf829b7585b7237fca077232994bf80ce23d8486507ee3c65a6ce033e84d",
             "binding_kind": "apt",
-            "description": "GNUstep GUI Library - runtime files",
+            "description": "Flexible Input Method Framework - Amharic table",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "runtime"
+              "table"
             ],
-            "name": "gnustep-gui-runtime",
+            "name": "fcitx-table-amharic",
             "packages": [],
-            "query": "runtime",
+            "query": "table",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "0.30.0-3build8",
+            "version": "0.2.4-3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "17942b90f8ab27a3236054bcda898a9c4e3bd2c8a03b93338392a486d73d8232",
+            "archive_sha256": "80be63607c73c50c49b5b7266bc9dab0d2c9cd7550fb6c73e65d8bec0e0968a6",
             "binding_kind": "apt",
-            "description": "Runtime hardening configuration files",
+            "description": "Flexible Input Method Framework - Arabic table",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "runtime"
+              "table"
             ],
-            "name": "hardening-runtime",
+            "name": "fcitx-table-arabic",
             "packages": [],
-            "query": "runtime",
+            "query": "table",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "2",
+            "version": "0.2.4-3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "f5046bc4c553349eeb9cea205551f508530136b8d43ebeb17c1c91b64ef725ea",
+            "archive_sha256": "fceab99efb0e99ea2233d454297d4921c5932e957b3a3c22665682fa538a6d27",
             "binding_kind": "apt",
-            "description": "runtime components for Akonadi KDE",
+            "description": "Flexible Input Method Framework - Array30 table",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "runtime"
+              "table"
             ],
-            "name": "kdepim-runtime",
+            "name": "fcitx-table-array30",
             "packages": [],
-            "query": "runtime",
+            "query": "table",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "4:23.08.5-0ubuntu3",
+            "version": "0.3.8-3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "5c906fdcb41ab7197fa180bdf8d873c0a36e51b51ba79ba55792629fd7d30198",
+            "archive_sha256": "8a479a4bf1358dbb669611ca15f2def8e5e64d5e6f3895853f03ef2e473ecb50",
             "binding_kind": "apt",
-            "description": "LAM runtime environment for executing parallel programs",
+            "description": "Flexible Input Method Framework - Array30-Big table",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "runtime"
+              "table"
             ],
-            "name": "lam-runtime",
+            "name": "fcitx-table-array30-big",
             "packages": [],
-            "query": "runtime",
+            "query": "table",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "7.1.4-7.1build2",
+            "version": "0.3.8-3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "c29ce6f973bcbc729b22e51872b442e2df1a003ca658c3568a6e5d761b0f9146",
+            "archive_sha256": "701415f424a5e15f180124736cdecd77274741c2553171eb7a85f395565ad597",
             "binding_kind": "apt",
-            "description": "Modular compiler and toolchain technologies, IR interpreter",
+            "description": "Flexible Input Method Framework - Bingchan table",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "runtime"
+              "table"
             ],
-            "name": "llvm-14-runtime",
+            "name": "fcitx-table-bingchan",
             "packages": [],
-            "query": "runtime",
+            "query": "table",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "1:14.0.6-19build4",
+            "version": "1:4.2.9.9-2build2",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "b2caf977d98a3bd2586325d5b1ddccf4d40d6b29ab651f20ee2e18ae7b443d98",
+            "archive_sha256": "13f3dc1f4215f98712ea4da07b80585aaa44308903543185d5f6e2991f9d6f69",
             "binding_kind": "apt",
-            "description": "Modular compiler and toolchain technologies, IR interpreter",
+            "description": "Flexible Input Method Framework - Boshiamy table",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "runtime"
+              "table"
             ],
-            "name": "llvm-15-runtime",
+            "name": "fcitx-table-boshiamy",
             "packages": [],
-            "query": "runtime",
+            "query": "table",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "1:15.0.7-14build3",
+            "version": "0.3.8-3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "d0169f60fea6c3787a91494ad8ba1ce84391c5f59ad943c905238169155fa9d7",
+            "archive_sha256": "d5f8bfd67f711dc4668f2bc7958af4cb3a7fb10fcf63fdb80118dffa20156977",
             "binding_kind": "apt",
-            "description": "Modular compiler and toolchain technologies, IR interpreter",
+            "description": "Flexible Input Method Framework - Cangjie table (DO NOT USE)",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "runtime"
+              "table"
             ],
-            "name": "llvm-16-runtime",
+            "name": "fcitx-table-cangjie",
             "packages": [],
-            "query": "runtime",
+            "query": "table",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "1:16.0.6-23ubuntu4",
+            "version": "1:4.2.9.9-2build2",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "b29f2239a8487c701fd76c62dba78609c9ad611c674bff81c5059d9052b29d66",
+            "archive_sha256": "7f040c465b05e04dab25e64cd81ed68c7b7d03d1c22dbfdee7e7ec9cd24341e2",
             "binding_kind": "apt",
-            "description": "Modular compiler and toolchain technologies, IR interpreter",
+            "description": "Flexible Input Method Framework - Cangjie-Big table",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "runtime"
+              "table"
             ],
-            "name": "llvm-17-runtime",
+            "name": "fcitx-table-cangjie-big",
             "packages": [],
-            "query": "runtime",
+            "query": "table",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "1:17.0.6-9ubuntu1",
+            "version": "0.3.8-3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "1ad04ff658929491f8bf30fcf6454e07b1815a2b04164f1894156e92c91ef895",
+            "archive_sha256": "437c2ac3e5b65e21057afe0279385deebcc0caa64b3ceb7a728b6c0b90272106",
             "binding_kind": "apt",
-            "description": "Modular compiler and toolchain technologies, IR interpreter",
+            "description": "Flexible Input Method Framework - Cangjie3 table",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "runtime"
+              "table"
             ],
-            "name": "llvm-18-runtime",
+            "name": "fcitx-table-cangjie3",
             "packages": [],
-            "query": "runtime",
+            "query": "table",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "1:18.1.3-1ubuntu1",
+            "version": "0.3.8-3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "2aa55713edfc8f0be44987075dbced8bf9971047af786b9246d1600419bda605",
+            "archive_sha256": "91b1cb37b511971f57c353e66180dd58ee3c231a52311c011c817ef7ad1f8ea6",
             "binding_kind": "apt",
-            "description": "Modular compiler and toolchain technologies, IR interpreter",
+            "description": "Flexible Input Method Framework - Cangjie5 table",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "runtime"
+              "table"
             ],
-            "name": "llvm-19-runtime",
+            "name": "fcitx-table-cangjie5",
             "packages": [],
-            "query": "runtime",
+            "query": "table",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "1:19.1.1-1ubuntu1~24.04.2",
+            "version": "0.3.8-3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "85db2d2a062006f3780bc0e6bd610af4ed21f9664b5d3bca4b4f951e9fb6381f",
+            "archive_sha256": "9fbc35134ff59f39f50a6b99555b44f6c570cd7ce5f26043f282e0ecb801a11b",
             "binding_kind": "apt",
-            "description": "Modular compiler and toolchain technologies, IR interpreter",
+            "description": "Flexible Input Method Framework - Cantonese table",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "runtime"
+              "table"
             ],
-            "name": "llvm-20-runtime",
+            "name": "fcitx-table-cantonese",
             "packages": [],
-            "query": "runtime",
+            "query": "table",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "1:20.1.2-0ubuntu1~24.04.3",
+            "version": "0.3.8-3",
             "zero_cost_eligible": true
           }
         ],
         "effect": "Create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.md containing a table with every VERIFIED_BOUND_CAPABILITY, its provided effects, source dependency, and verification mission",
         "errors": [],
         "queries": [
-          "canonical",
-          "astra",
-          "runtime",
-          "tmp"
+          "markdown",
+          "table",
+          "with",
+          "verified"
         ],
         "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
         "source": "APT_CATALOG",
@@ -1868,76 +1927,56 @@
       },
       {
         "binding_performed": false,
-        "candidate_count": 41,
+        "candidate_count": 107,
         "candidates": [
           {
-            "description": "Local MCP runtime for coordinating Freebuff, Codex, OpenCode, Claude Code, and Cursor agents.",
+            "description": "Create, read, update, and delete records in Airtable bases and tables",
             "is_latest": true,
-            "name": "io.github.Praket7/agent-interop-runtime",
+            "name": "com.mcparmory/airtable",
             "packages": [
               {
-                "identifier": "agent-interop-runtime",
-                "registry_type": "npm",
+                "identifier": "mcparmory-airtable",
+                "registry_type": "pypi",
                 "required_environment": [],
-                "runtime_hint": null,
+                "runtime_hint": "uvx",
                 "secret_environment": [],
                 "transport": {
                   "type": "stdio"
                 },
-                "version": "0.3.2"
+                "version": "1.0.3"
+              },
+              {
+                "identifier": "ghcr.io/mcparmory/airtable:1.0.3",
+                "registry_type": "oci",
+                "required_environment": [],
+                "runtime_hint": "docker",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": null
               }
             ],
-            "query": "runtime",
+            "query": "table",
             "remotes": [],
             "repository": {
               "source": "github",
-              "url": "https://github.com/Praket7/agent-interop-runtime"
+              "url": "https://github.com/mcparmory/registry"
             },
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
             "status": "active",
-            "version": "0.3.2",
+            "version": "1.0.3",
             "zero_cost_eligible": true
           },
           {
-            "description": "Verify whether a local Agent or MCP runtime matches an approved artifact.",
+            "description": "Manage Airtable bases: schema, field CRUD, views, formula validation, extensions",
             "is_latest": true,
-            "name": "io.github.fantasyce/agent-runtime-proof",
+            "name": "io.github.Automations-Project/airtable-user-mcp",
             "packages": [
               {
-                "identifier": "https://github.com/fantasyce/agent-runtime-proof/releases/download/v1.1.0/agent-runtime-proof_1.1.0.mcpb",
-                "registry_type": "mcpb",
-                "required_environment": [],
-                "runtime_hint": null,
-                "secret_environment": [],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "1.1.0"
-              }
-            ],
-            "query": "runtime",
-            "remotes": [],
-            "repository": {
-              "id": "1345289397",
-              "source": "github",
-              "url": "https://github.com/fantasyce/agent-runtime-proof"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 18,
-            "status": "active",
-            "version": "1.1.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Finds the end-of-life runtimes an AI assistant still writes for you \u2014 node:20, python3.9, ubuntu-22",
-            "is_latest": true,
-            "name": "io.github.jmshinhwa/runtime-eol-deploy-block-audit",
-            "packages": [
-              {
-                "identifier": "@readystack/runtime-eol-deploy-block-audit",
+                "identifier": "airtable-user-mcp",
                 "registry_type": "npm",
                 "required_environment": [],
                 "runtime_hint": "npx",
@@ -1945,29 +1984,59 @@
                 "transport": {
                   "type": "stdio"
                 },
-                "version": "0.1.3"
+                "version": "2.1.1"
               }
             ],
-            "query": "runtime",
+            "query": "table",
             "remotes": [],
             "repository": {
               "source": "github",
-              "url": "https://github.com/jmshinhwa/readystack-themes"
+              "url": "https://github.com/Automations-Project/VSCode-Airtable-Formula"
             },
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
             "status": "active",
-            "version": "0.1.3",
+            "version": "2.1.1",
             "zero_cost_eligible": true
           },
           {
-            "description": "Summarize runtime declarations across local manifests and CI files without returning versions,...",
+            "description": "Markdown Ai MCP Server by MEOK AI Labs",
             "is_latest": true,
-            "name": "io.github.mrfentmen/runtime-support-mcp",
+            "name": "io.github.CSOAI-ORG/markdown-ai-mcp",
             "packages": [
               {
-                "identifier": "runtime-support-mcp",
+                "identifier": "markdown-ai-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "python",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.10"
+              }
+            ],
+            "query": "markdown",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/CSOAI-ORG/markdown-ai-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.10",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Tabler.io for AI assistants: search 5,000+ icons, UI components, layouts, themes and docs.",
+            "is_latest": true,
+            "name": "io.github.MaFady/tabler-mcp-server",
+            "packages": [
+              {
+                "identifier": "tabler-mcp-server",
                 "registry_type": "npm",
                 "required_environment": [],
                 "runtime_hint": null,
@@ -1975,277 +2044,90 @@
                 "transport": {
                   "type": "stdio"
                 },
-                "version": "1.0.0"
+                "version": "1.0.1"
               }
             ],
-            "query": "runtime",
+            "query": "table",
             "remotes": [],
             "repository": {
               "source": "github",
-              "url": "https://github.com/mrfentmen/runtime-support-mcp"
+              "url": "https://github.com/MaFady/tabler-mcp-server"
             },
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
             "status": "active",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "zero_cost_eligible": true
           },
           {
-            "description": "Self-hosted MCP runtime for ChatGPT to edit files, run commands, and test local projects.",
+            "description": "Convert HTML to Markdown or strip to plain text. For web-scraping agents.",
             "is_latest": true,
-            "name": "io.github.flytohub/flyto-runtime",
-            "packages": [],
-            "query": "runtime",
-            "remotes": [
+            "name": "io.github.MukundaKatta/html-to-markdown-mcp",
+            "packages": [
               {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://{runtime_host}/mcp"
+                "identifier": "@mukundakatta/html-to-markdown-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.0"
               }
             ],
+            "query": "markdown",
+            "remotes": [],
             "repository": {
               "source": "github",
-              "url": "https://github.com/flytohub/flyto-runtime"
+              "subfolder": "packages/html-to-markdown-mcp",
+              "url": "https://github.com/MukundaKatta/mcp-stack"
             },
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.8",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Hosted Python sandbox for package runtime verification: pip install and usable-import evidence.",
-            "is_latest": true,
-            "name": "io.github.ligafew/python-package-runtime-test",
-            "packages": [],
-            "query": "runtime",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://apcs-public-mcp-gateway.apcs-mcp.workers.dev/mcp/python-package-runtime-test"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.2",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "ECRVSP Documentos: Altera\u00e7\u00e3o de Dados Cadastrais, official-source lookup. Platform-hosted, pay per q",
-            "is_latest": true,
-            "name": "io.github.mcp-dir/ecrvsp_docs_dados_cadastrais-mcp",
-            "packages": [],
-            "query": "astra",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://api.mcp.ai/p_ecrvsp_docs_dados_cadastrais"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/mcp-dir/ecrvsp_docs_dados_cadastrais-mcp"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
+            "score": 18,
             "status": "active",
             "version": "0.1.0",
             "zero_cost_eligible": true
           },
           {
-            "description": "Canonical URL host only, URL discarded",
+            "description": "AI Answer Copier \u2014 Convert Markdown to PDF, DOCX, HTML, LaTeX, CSV, JSON, XML, XLSX, RTF, PNG",
             "is_latest": true,
-            "name": "io.github.sadri-dridi/canonical-host",
-            "packages": [],
-            "query": "canonical",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/canonical-host/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "HTML canonical link count, markup discarded",
-            "is_latest": true,
-            "name": "io.github.sadri-dridi/canonical-ok",
-            "packages": [],
-            "query": "canonical",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/canonical-ok/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "SEAM: local-first memory runtime for AI agents, with retrieval and glassbox provenance over MCP.",
-            "is_latest": true,
-            "name": "io.github.BlackhatShiftey/seam-runtime",
+            "name": "io.github.XJTLUmedia/markdown-formatter",
             "packages": [
               {
-                "identifier": "seam-runtime",
-                "registry_type": "pypi",
-                "required_environment": [],
-                "runtime_hint": "uvx",
-                "secret_environment": [
-                  "SEAM_PGVECTOR_DSN"
-                ],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "1.3.1"
-              }
-            ],
-            "query": "runtime",
-            "remotes": [],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/BlackhatShiftey/Seam_Runtime"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 1,
-            "score": 15,
-            "status": "active",
-            "version": "1.3.1",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Astra DB tools for agents: schema, find, vector search, guarded writes, and interactive views.",
-            "is_latest": true,
-            "name": "io.github.erichare/astra-mcp",
-            "packages": [
-              {
-                "identifier": "@erichare/astra-mcp",
+                "identifier": "@xjtlumedia/markdown-mcp-server",
                 "registry_type": "npm",
                 "required_environment": [],
-                "runtime_hint": "npx",
-                "secret_environment": [
-                  "ASTRA_DB_APPLICATION_TOKEN"
-                ],
+                "runtime_hint": null,
+                "secret_environment": [],
                 "transport": {
                   "type": "stdio"
                 },
-                "version": "2.0.0"
+                "version": "1.0.5"
               }
             ],
-            "query": "astra",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://astra-widgets-mcp.vercel.app/mcp"
-              }
-            ],
+            "query": "markdown",
+            "remotes": [],
             "repository": {
               "source": "github",
-              "subfolder": "server",
-              "url": "https://github.com/erichare/astra-db-plugin"
+              "url": "https://github.com/XJTLUmedia/AI_answer_copier"
             },
             "required_environment_count": 0,
-            "required_secret_count": 1,
-            "score": 15,
-            "status": "active",
-            "version": "2.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Self-hosted MCP server: 26 deterministic dev, security, and EVM tools.",
-            "is_latest": true,
-            "name": "com.formatho/runtime",
-            "packages": [
-              {
-                "identifier": "docker.io/formatho/formatho-runtime:0.3.0",
-                "registry_type": "oci",
-                "required_environment": [],
-                "runtime_hint": null,
-                "secret_environment": [],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": null
-              }
-            ],
-            "query": "runtime",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://mcp.formatho.com/mcp"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 14,
+            "score": 18,
             "status": "active",
-            "version": "0.3.0",
+            "version": "1.0.5",
             "zero_cost_eligible": true
           },
           {
-            "description": "Engineering-grade MCP debugging SDK turning the PPSSPP PSP emulator into an AI-debuggable target.",
+            "description": "Local-only Tableau .twbx audit: lineage, unused fields, duplicate calcs, SQL, version diffs",
             "is_latest": true,
-            "name": "io.github.AstralVoidZ/ppsspp-dfx-mcp",
+            "name": "io.github.andey0Saikiran/tableau-lineage",
             "packages": [
               {
-                "identifier": "ppsspp-dfx-mcp",
-                "registry_type": "pypi",
-                "required_environment": [],
-                "runtime_hint": null,
-                "secret_environment": [],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "0.1.4"
-              }
-            ],
-            "query": "astra",
-            "remotes": [],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 14,
-            "status": "active",
-            "version": "0.1.4",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Zero-addon MCP server for Godot 4: agents edit, run, and play-test the game.",
-            "is_latest": true,
-            "name": "io.github.Erodenn/godot-mcp-runtime",
-            "packages": [
-              {
-                "identifier": "godot-mcp-runtime",
+                "identifier": "tableau-lineage-mcp",
                 "registry_type": "npm",
                 "required_environment": [],
                 "runtime_hint": "npx",
@@ -2253,90 +2135,31 @@
                 "transport": {
                   "type": "stdio"
                 },
-                "version": "3.8.0"
+                "version": "1.0.1"
               }
             ],
-            "query": "runtime",
+            "query": "table",
             "remotes": [],
             "repository": {
+              "id": "1278695609",
               "source": "github",
-              "url": "https://github.com/Erodenn/godot-mcp-runtime"
+              "subfolder": "mcp",
+              "url": "https://github.com/andey0Saikiran/tableau-lineage"
             },
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 14,
+            "score": 18,
             "status": "active",
-            "version": "3.8.0",
+            "version": "1.0.1",
             "zero_cost_eligible": true
           },
           {
-            "description": "A lightweight Java IDE for AI agents: incremental builds, fast tests, HotSwap and live debugging.",
+            "description": "easyTable restaurant reservations for Claude \u2014 availability, and create/modify/cancel bookings",
             "is_latest": true,
-            "name": "io.github.L1ch404/jolink-runtime",
+            "name": "io.github.chrischall/easytable-mcp",
             "packages": [
               {
-                "identifier": "jolink-runtime",
-                "registry_type": "pypi",
-                "required_environment": [],
-                "runtime_hint": "uvx",
-                "secret_environment": [],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "0.1.0a7"
-              }
-            ],
-            "query": "runtime",
-            "remotes": [],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/L1ch404/jolink-runtime"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 14,
-            "status": "active",
-            "version": "0.1.0a7",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Resumable API pagination, repeated-failure detection and tool-progress cache hints for AI agents",
-            "is_latest": true,
-            "name": "io.github.Warddamn/tiny-runtime",
-            "packages": [
-              {
-                "identifier": "https://github.com/Warddamn/tiny-tools/releases/download/runtime-v0.1.1/tiny-runtime-0.1.1.mcpb",
-                "registry_type": "mcpb",
-                "required_environment": [],
-                "runtime_hint": null,
-                "secret_environment": [],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": null
-              }
-            ],
-            "query": "runtime",
-            "remotes": [],
-            "repository": {
-              "source": "github",
-              "subfolder": "packages/runtime",
-              "url": "https://github.com/Warddamn/tiny-tools"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 14,
-            "status": "active",
-            "version": "0.1.1",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Precision-audited astrology MCP: natal charts, transits, synastry, moon phases. No API key.",
-            "is_latest": true,
-            "name": "io.github.davidmosiah/astral-mcp",
-            "packages": [
-              {
-                "identifier": "astral-mcp",
+                "identifier": "easytable-mcp",
                 "registry_type": "npm",
                 "required_environment": [],
                 "runtime_hint": null,
@@ -2344,29 +2167,29 @@
                 "transport": {
                   "type": "stdio"
                 },
-                "version": "0.2.0"
+                "version": "1.2.0"
               }
             ],
-            "query": "astra",
+            "query": "table",
             "remotes": [],
             "repository": {
               "source": "github",
-              "url": "https://github.com/davidmosiah/astral-mcp"
+              "url": "https://github.com/chrischall/easytable-mcp"
             },
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 14,
+            "score": 18,
             "status": "active",
-            "version": "0.2.0",
+            "version": "1.2.0",
             "zero_cost_eligible": true
           },
           {
-            "description": "Control CesiumJS 3D globes via MCP: camera, layers, entities, animation, and interaction.",
+            "description": "Any URL to clean, LLM-ready Markdown for RAG. Strips ads, nav, and boilerplate.",
             "is_latest": true,
-            "name": "io.github.gaopengbin/cesium-mcp-runtime",
+            "name": "io.github.damonwill78-a11y/clean-markdown",
             "packages": [
               {
-                "identifier": "cesium-mcp-runtime",
+                "identifier": "clean-markdown-mcp",
                 "registry_type": "npm",
                 "required_environment": [],
                 "runtime_hint": null,
@@ -2374,30 +2197,29 @@
                 "transport": {
                   "type": "stdio"
                 },
-                "version": "1.145.3"
+                "version": "1.1.3"
               }
             ],
-            "query": "runtime",
+            "query": "markdown",
             "remotes": [],
             "repository": {
               "source": "github",
-              "subfolder": "packages/cesium-mcp-runtime",
-              "url": "https://github.com/gaopengbin/cesium-mcp"
+              "url": "https://github.com/damonwill78-a11y/clean-markdown-mcp"
             },
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 14,
+            "score": 18,
             "status": "active",
-            "version": "1.145.3",
+            "version": "1.1.3",
             "zero_cost_eligible": true
           },
           {
-            "description": "Connect AI assistants to ITM Platform projects, tasks, budgets, risks, and team workload.",
+            "description": "Convert Markdown into WhatsApp formatting: tables drawn to fit the phone's monospace width.",
             "is_latest": true,
-            "name": "io.github.itmplatform/mcp-server",
+            "name": "io.github.drsound/markdown-to-whatsapp",
             "packages": [
               {
-                "identifier": "@itm-platform/mcp-server",
+                "identifier": "markdown-to-whatsapp",
                 "registry_type": "npm",
                 "required_environment": [],
                 "runtime_hint": null,
@@ -2408,62 +2230,56 @@
                 "version": "1.0.3"
               }
             ],
-            "query": "tmp",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://api.itmplatform.com/v2/_/mcp/"
-              }
-            ],
+            "query": "markdown",
+            "remotes": [],
             "repository": {
               "source": "github",
-              "url": "https://github.com/itmplatform/mcp-server"
+              "url": "https://github.com/drsound/markdown-to-whatsapp"
             },
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 14,
+            "score": 18,
             "status": "active",
             "version": "1.0.3",
             "zero_cost_eligible": true
           },
           {
-            "description": "Finds the GitHub Actions steps that stop running on 2026-09-23, with the version to move to",
+            "description": "MCP server for GroupDocs.Markdown \u2014 convert documents to Markdown via AI agents.",
             "is_latest": true,
-            "name": "io.github.jmshinhwa/action-runtime-sunset-lint",
+            "name": "io.github.groupdocs-markdown/groupdocs-markdown-mcp",
             "packages": [
               {
-                "identifier": "@readystack/action-runtime-sunset-lint",
-                "registry_type": "npm",
+                "identifier": "GroupDocs.Markdown.Mcp",
+                "registry_type": "nuget",
                 "required_environment": [],
-                "runtime_hint": "npx",
+                "runtime_hint": null,
                 "secret_environment": [],
                 "transport": {
                   "type": "stdio"
                 },
-                "version": "1.0.2"
+                "version": "26.9.0"
               }
             ],
-            "query": "runtime",
+            "query": "markdown",
             "remotes": [],
             "repository": {
               "source": "github",
-              "url": "https://github.com/jmshinhwa/readystack-themes"
+              "url": "https://github.com/groupdocs-markdown/GroupDocs.Markdown.Mcp"
             },
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 14,
+            "score": 18,
             "status": "active",
-            "version": "1.0.2",
+            "version": "26.9.0",
             "zero_cost_eligible": true
           },
           {
-            "description": "This package is intended for demonstration only. Maintained by JFrog Security.",
+            "description": "MCP server for Feishu Markdown",
             "is_latest": true,
-            "name": "io.github.mcp-protocol/node-runtime",
+            "name": "io.github.huandu/feishu-markdown-mcp",
             "packages": [
               {
-                "identifier": "@mcp-protocol/node-runtime",
+                "identifier": "feishu-markdown-mcp",
                 "registry_type": "npm",
                 "required_environment": [],
                 "runtime_hint": null,
@@ -2471,245 +2287,480 @@
                 "transport": {
                   "type": "stdio"
                 },
-                "version": "1.0.2"
+                "version": "0.1.3"
               }
             ],
-            "query": "runtime",
+            "query": "markdown",
             "remotes": [],
             "repository": {
               "source": "github",
-              "url": "https://github.com/mcp-protocol/node-runtime"
+              "url": "https://github.com/huandu/feishu-markdown"
             },
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 14,
+            "score": 18,
             "status": "active",
-            "version": "1.0.2",
+            "version": "0.1.3",
             "zero_cost_eligible": true
           },
           {
-            "description": "Cryptographic identity for AI agents: W3C DIDs, Verifiable Credentials, post-quantum crypto",
+            "description": "MCP server for Google Docs with verified writes \u2014 every mutation returns before/after proof.",
             "is_latest": true,
-            "name": "io.github.san-techie21/astracipher",
+            "name": "io.github.michaelrobertsutton/verified-googledocs-mcp",
             "packages": [
               {
-                "identifier": "@astracipher/core",
-                "registry_type": "npm",
-                "required_environment": [],
-                "runtime_hint": null,
-                "secret_environment": [],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "0.1.1"
-              }
-            ],
-            "query": "astra",
-            "remotes": [],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/san-techie21/astracipher"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 14,
-            "status": "active",
-            "version": "0.1.1",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "MCP server for IBM Quantum computing services through Qiskit IBM Runtime",
-            "is_latest": true,
-            "name": "io.github.Qiskit/qiskit-ibm-runtime-mcp-server",
-            "packages": [
-              {
-                "identifier": "qiskit-ibm-runtime-mcp-server",
+                "identifier": "verified-googledocs-mcp",
                 "registry_type": "pypi",
-                "required_environment": [
-                  "QISKIT_IBM_TOKEN"
-                ],
+                "required_environment": [],
                 "runtime_hint": "uvx",
-                "secret_environment": [
-                  "QISKIT_IBM_TOKEN"
-                ],
+                "secret_environment": [],
                 "transport": {
                   "type": "stdio"
                 },
-                "version": "0.6.1"
+                "version": "0.1.0"
               }
             ],
-            "query": "runtime",
+            "query": "verified",
             "remotes": [],
             "repository": {
-              "id": "1051018539",
               "source": "github",
-              "subfolder": "qiskit-ibm-runtime-mcp-server",
-              "url": "https://github.com/Qiskit/mcp-servers"
+              "url": "https://github.com/michaelrobertsutton/verified-googledocs-mcp"
             },
-            "required_environment_count": 1,
-            "required_secret_count": 1,
-            "score": 14,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
             "status": "active",
-            "version": "0.6.1",
+            "version": "0.1.0",
             "zero_cost_eligible": true
           },
           {
-            "description": "Verified, long-tail company search: describe what you want, get an LLM-verified company shortlist.",
+            "description": "Convert HTML to clean markdown locally. No network and no key.",
             "is_latest": true,
-            "name": "ai.trycanonical/company-search",
-            "packages": [],
-            "query": "canonical",
-            "remotes": [
+            "name": "io.github.mrfentmen/html-to-markdown-mcp",
+            "packages": [
               {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://trycanonical.ai/mcp"
+                "identifier": "@mrfentmen/html-to-markdown-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.0"
               }
             ],
-            "repository": null,
+            "query": "markdown",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/mrfentmen/html-to-markdown-mcp"
+            },
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 11,
+            "score": 18,
             "status": "active",
             "version": "1.0.0",
             "zero_cost_eligible": true
           },
           {
-            "description": "Verified local hands for AI agents: physical errands, funds held until agreed proof.",
+            "description": "Convert markdown to HTML and extract headings locally. No network and no key.",
             "is_latest": true,
-            "name": "com.astranl/mcp",
+            "name": "io.github.mrfentmen/markdown-mcp",
+            "packages": [
+              {
+                "identifier": "@mrfentmen/markdown-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.0"
+              }
+            ],
+            "query": "markdown",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/mrfentmen/markdown-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Markdown MCP \u2014 search, extract sections, list headings, find code blocks.",
+            "is_latest": true,
+            "name": "io.github.ofershap/markdown",
+            "packages": [
+              {
+                "identifier": "mcp-server-markdown",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.1"
+              }
+            ],
+            "query": "markdown",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/ofershap/mcp-server-markdown"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Markdown TOC, lint, format, stats for AI agents",
+            "is_latest": true,
+            "name": "io.github.rog0x/markdown",
+            "packages": [
+              {
+                "identifier": "@rog0x/mcp-markdown-tools",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.2"
+              }
+            ],
+            "query": "markdown",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/rog0x/mcp-markdown-tools"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP server for markdown: tables, TOC, HTML conversion, formatting.",
+            "is_latest": true,
+            "name": "io.github.ryudi84/markdown",
+            "packages": [
+              {
+                "identifier": "markdown-forge-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.3"
+              }
+            ],
+            "query": "markdown",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/ryudi84/sovereign-mcp-servers"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Markdown processing, TOC generation, HTML conversion",
+            "is_latest": true,
+            "name": "io.github.ryudi84/markdown-forge-mcp",
+            "packages": [
+              {
+                "identifier": "markdown-forge-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.1"
+              }
+            ],
+            "query": "markdown",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "subfolder": "markdown-forge",
+              "url": "https://github.com/ryudi84/sovereign-mcp-servers"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Your portable context layer \u2014 load it into any AI.",
+            "is_latest": true,
+            "name": "ai.portablecontext/pcd",
             "packages": [],
-            "query": "astra",
+            "query": "table",
             "remotes": [
               {
                 "required_headers": [],
                 "type": "streamable-http",
-                "url": "https://astranl.com/mcp/streamable"
+                "url": "https://mcp.portablecontext.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/d3lanight/pcd"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.4.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Publish AI reports as managed native links with versions, access control, revocation, and audit.",
+            "is_latest": true,
+            "name": "ai.publishwith/mcp",
+            "packages": [],
+            "query": "with",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://publishwith.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Access and manage your Airtable bases, tables, and records seamlessly",
+            "is_latest": true,
+            "name": "ai.waystation/airtable",
+            "packages": [],
+            "query": "table",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://waystation.ai/airtable/mcp"
               },
               {
                 "required_headers": [],
                 "type": "sse",
-                "url": "https://astranl.com/mcp/sse"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 11,
-            "status": "active",
-            "version": "1.35.175",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Email security and AI discoverability scores for any domain, with the exact record or tag to fix.",
-            "is_latest": true,
-            "name": "com.astraverify/domain-trust",
-            "packages": [],
-            "query": "astra",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://astraverify.com/mcp"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 11,
-            "status": "active",
-            "version": "1.0.1",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Manage projects, tasks, time tracking, and team collaboration through natural language.",
-            "is_latest": true,
-            "name": "com.astravue/astravue-mcp",
-            "packages": [],
-            "query": "astra",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://api.astravue.com/mcp"
+                "url": "https://waystation.ai/airtable/mcp/sse"
               }
             ],
             "repository": {
               "source": "github",
-              "url": "https://github.com/AstravueOrg/astravue-mcp-server"
+              "url": "https://github.com/waystation-ai/mcp"
             },
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 11,
+            "score": 15,
             "status": "active",
-            "version": "1.0.1",
+            "version": "0.3.1",
             "zero_cost_eligible": true
           },
           {
-            "description": "Zero-key temporary JSON database for agents: one tool call, no signup, no OAuth, no API keys.",
+            "description": "Your AI agent builds interactive block-based courses over MCP; take them at learnwithagents.app.",
             "is_latest": true,
-            "name": "dev.tmpstate/tmpstate",
+            "name": "app.learnwithagents/learn-with-agents",
             "packages": [],
-            "query": "tmp",
+            "query": "with",
             "remotes": [
               {
                 "required_headers": [],
                 "type": "streamable-http",
-                "url": "https://tmpstate.dev/mcp"
+                "url": "https://learnwithagents.app/mcp"
               }
             ],
             "repository": null,
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 11,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Verified discount & referral codes for crypto exchanges, cards and more \u2014 tested first-hand.",
+            "is_latest": true,
+            "name": "codes.find/verified-codes",
+            "packages": [],
+            "query": "verified",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://find.codes/api/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
             "status": "active",
             "version": "1.0.0",
             "zero_cost_eligible": true
           },
           {
-            "description": "Governed MCP: agent audit, provenance, deterministic checks, and receipt-backed FragGate execution.",
+            "description": "Messy spreadsheets in, clean checkable tables out. Every result carries its arithmetic proof.",
             "is_latest": true,
-            "name": "io.github.AzielEliab/aziel-runtime",
+            "name": "com.ainetcafe/netcafe-tables",
             "packages": [],
-            "query": "runtime",
+            "query": "table",
             "remotes": [
               {
                 "required_headers": [],
                 "type": "streamable-http",
-                "url": "https://aziel-runtime.vibelock.workers.dev/mcp"
+                "url": "https://ainetcafe.com/mcp/table?s=registry"
               }
             ],
             "repository": {
               "source": "github",
-              "url": "https://github.com/AzielEliab/aziel-runtime"
+              "url": "https://github.com/mario03690/ai-netcafe"
             },
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 11,
+            "score": 15,
             "status": "active",
-            "version": "2.0.0-rc1",
+            "version": "1.0.0",
             "zero_cost_eligible": true
           },
           {
-            "description": "Read-only search of your Sortio knowledge graph (files and entities) for Claude and ChatGPT.",
+            "description": "Official Airtable MCP server \u2014 database and operations layer for agents.",
             "is_latest": true,
-            "name": "io.github.canonicalmg/sortio",
+            "name": "com.airtable/mcp",
             "packages": [],
-            "query": "canonical",
+            "query": "table",
             "remotes": [
               {
                 "required_headers": [],
                 "type": "streamable-http",
-                "url": "https://mcp.getsortio.com/mcp"
+                "url": "https://mcp.airtable.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Company knowledge, services, case studies, pricing, and tools for craftable software.",
+            "is_latest": true,
+            "name": "com.craftablesoftware/mcp",
+            "packages": [],
+            "query": "table",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.craftablesoftware.com/mcp"
               }
             ],
             "repository": {
               "source": "github",
-              "url": "https://github.com/canonicalmg/sortio_desktop_v2"
+              "url": "https://github.com/craftsw-rjso/craftablewebsite"
             },
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 11,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Share markdown as public links from your AI assistant \u2014 expiring or permanent, no API key.",
+            "is_latest": true,
+            "name": "com.docs-md/markdown-share",
+            "packages": [],
+            "query": "markdown",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://docs-md.com/api/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/invisible-hand/docs-md.com"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Contradiction-verified, freshness-SLA'd signed feed: per-record status + as-of date + receipt.",
+            "is_latest": true,
+            "name": "com.dropwatchhq/verified-feed",
+            "packages": [],
+            "query": "verified",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://verified.dropwatchhq.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Interact with your Google Bigtable resources using natural language commands.",
+            "is_latest": true,
+            "name": "com.googleapis.bigtableadmin/mcp",
+            "packages": [],
+            "query": "table",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://bigtableadmin.googleapis.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
             "status": "active",
             "version": "1.0.0",
             "zero_cost_eligible": true
@@ -2718,10 +2769,10 @@
         "effect": "Create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.md containing a table with every VERIFIED_BOUND_CAPABILITY, its provided effects, source dependency, and verification mission",
         "errors": [],
         "queries": [
-          "canonical",
-          "astra",
-          "runtime",
-          "tmp"
+          "markdown",
+          "table",
+          "with",
+          "verified"
         ],
         "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
         "source": "OFFICIAL_MCP_REGISTRY",
@@ -2736,5 +2787,5 @@
   },
   "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
   "source": "FEDERATED_CAPABILITY_DISCOVERY_FALLBACK",
-  "targeted_acquisition_error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-unicode-canonical-property-names-ecmascript\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"octave-astra-toolbox\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-strict-uri-encode\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.md\", \"name\": \"tablet-encode\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.md\", \"name\": \"abcde\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.md\", \"name\": \"aften\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"asunder\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.md\", \"name\": \"base16384\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.md\", \"name\": \"base58\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.md\", \"name\": \"basez\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.md\", \"name\": \"catcodec\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"cl-base64\", \"status\": \"CONTRACT_REJECTED\"}]"
+  "targeted_acquisition_error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-markdown-toc\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"cl-markdown\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"markdown\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-markdown-mode\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table-all\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table-amharic\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table-arabic\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table-array30\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table-array30-big\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table-bingchan\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table-boshiamy\", \"status\": \"CONTRACT_REJECTED\"}]"
 }
