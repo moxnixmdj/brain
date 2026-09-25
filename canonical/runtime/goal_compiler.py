@@ -3240,6 +3240,7 @@ def _compile_compound_goal(goal, clauses, registry, root):
                 module=template_args.get("module")
                 decode_callable=template_args.get("decode_callable")
                 decode_kwargs=template_args.get("decode_kwargs") or {}
+                envelope_key=template_args.get("envelope_key")
                 if all(isinstance(x,str) and x for x in (json_path,binary_path,module,decode_callable)):
                     actions.append({
                       "type":"invoke_capability",
@@ -3249,6 +3250,7 @@ def _compile_compound_goal(goal, clauses, registry, root):
                         "module":module,
                         "decode_callable":decode_callable,
                         "decode_kwargs":decode_kwargs,
+                        "envelope_key":envelope_key,
                         "json_path":json_path,
                         "binary_path":binary_path,
                       },
@@ -3261,6 +3263,7 @@ def _compile_compound_goal(goal, clauses, registry, root):
                       "json_path":json_path,
                       "binary_path":binary_path,
                       "decode_callable":decode_callable,
+                      "envelope_key":envelope_key,
                     })
                     continue
 
