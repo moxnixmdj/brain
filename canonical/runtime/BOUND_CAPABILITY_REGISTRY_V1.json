@@ -980,17 +980,28 @@
         "page",
         "screenshot",
         "url",
-        "website"
+        "website",
+        "interact",
+        "form",
+        "type",
+        "enter",
+        "select",
+        "choose",
+        "check",
+        "click",
+        "submit"
       ],
       "limitations": [
         "Requires a compatible local Chrome/Chromium binary and Chromedriver.",
-        "Captures one rendered page, visible text, title, final URL, result JSON, and a bounded full-page screenshot."
+        "Captures one rendered page, visible text, title, final URL, result JSON, and a bounded full-page screenshot.",
+        "Verified interaction extension supports declarative set_text, select_option, check, click, submit, and bounded wait actions."
       ],
       "platforms": [
         "linux"
       ],
       "provides": [
-        "web.browser.rendered.capture"
+        "web.browser.rendered.capture",
+        "web.browser.rendered.interact"
       ],
       "requires": [],
       "source": {
@@ -1008,7 +1019,19 @@
           "screenshot_sha256": "f549568c9bcb3869e88c3b16f3d6f304e0ac0292be088fb4dcd67364c389101b"
         },
         "producer_independent_verifier": true,
-        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001__RESULT.json"
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001__RESULT.json",
+        "interaction_extension": {
+          "mission_id": "ASTRA-VERIFY-BROWSER-INTERACTION-001",
+          "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-BROWSER-INTERACTION-001__RECEIPT.json",
+          "observed_effect": {
+            "final_url": "https://httpbin.org/post",
+            "submitted_customer_name": "PROJECT BRAIN",
+            "submitted_size": "medium",
+            "submitted_topping": "bacon",
+            "actions_completed": 4,
+            "independently_checked_post_submit_state": true
+          }
+        }
       }
     },
     "web.release.verify.independent_http": {
