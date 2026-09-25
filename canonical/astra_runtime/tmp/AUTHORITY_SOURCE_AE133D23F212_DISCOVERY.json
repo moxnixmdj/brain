@@ -1,0 +1,500 @@
+{
+  "attempts": [
+    {
+      "discovered_hosts": 11,
+      "engine": "authority_root",
+      "status": "OK",
+      "url": "https://python.org/"
+    },
+    {
+      "discovered_hosts": 0,
+      "engine": "authority_root",
+      "status": "OK",
+      "url": "https://www.python.org/"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 0,
+      "status": "OK",
+      "url": "https://python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 0,
+      "status": "OK",
+      "url": "https://www.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://peps.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://blog.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 1,
+      "status": "OK",
+      "url": "https://docs.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 0,
+      "status": "OK",
+      "url": "https://donate.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://wiki.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://translations.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 0,
+      "status": "OK",
+      "url": "https://jobs.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 1,
+      "status": "OK",
+      "url": "https://devguide.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 0,
+      "status": "OK",
+      "url": "https://mail.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 0,
+      "status": "OK",
+      "url": "https://status.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 1,
+      "status": "OK",
+      "url": "https://policies.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://python.org/sitemap.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://python.org/sitemap_index.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://www.python.org/sitemap.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://www.python.org/sitemap_index.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://peps.python.org/sitemap.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://peps.python.org/sitemap_index.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://blog.python.org/sitemap.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://blog.python.org/sitemap_index.xml"
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://docs.python.org/sitemap.xml",
+      "url_count": 8
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://docs.python.org/sitemap_index.xml"
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://donate.python.org/sitemap.xml",
+      "url_count": 0
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://donate.python.org/sitemap_index.xml",
+      "url_count": 0
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://wiki.python.org/sitemap.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://wiki.python.org/sitemap_index.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://translations.python.org/sitemap.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://translations.python.org/sitemap_index.xml"
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://jobs.python.org/sitemap.xml",
+      "url_count": 0
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://jobs.python.org/sitemap_index.xml",
+      "url_count": 0
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://devguide.python.org/sitemap.xml",
+      "url_count": 1
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://devguide.python.org/sitemap_index.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://mail.python.org/sitemap.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://mail.python.org/sitemap_index.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://status.python.org/sitemap.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://status.python.org/sitemap_index.xml"
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://policies.python.org/sitemap.xml",
+      "url_count": 23
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://policies.python.org/sitemap_index.xml"
+    }
+  ],
+  "authority_domains": [
+    "python.org"
+  ],
+  "candidates": [
+    {
+      "engine": "authority_root_link",
+      "host": "www.python.org",
+      "matched_authority_domains": [
+        "python.org"
+      ],
+      "score": 202,
+      "url": "https://www.python.org/success-stories/category/software-development/"
+    },
+    {
+      "engine": "authority_root_link",
+      "host": "peps.python.org",
+      "matched_authority_domains": [
+        "python.org"
+      ],
+      "score": 194,
+      "url": "https://peps.python.org"
+    },
+    {
+      "engine": "authority_root_link",
+      "host": "peps.python.org",
+      "matched_authority_domains": [
+        "python.org"
+      ],
+      "score": 194,
+      "url": "https://peps.python.org/peps.rss"
+    },
+    {
+      "engine": "authority_root_link",
+      "host": "docs.python.org",
+      "matched_authority_domains": [
+        "python.org"
+      ],
+      "score": 191,
+      "url": "http://docs.python.org/3/tutorial/introduction.html#using-python-as-a-calculator"
+    },
+    {
+      "engine": "authority_root_link",
+      "host": "blog.python.org",
+      "matched_authority_domains": [
+        "python.org"
+      ],
+      "score": 191,
+      "url": "https://blog.python.org"
+    },
+    {
+      "engine": "authority_root_link",
+      "host": "blog.python.org",
+      "matched_authority_domains": [
+        "python.org"
+      ],
+      "score": 191,
+      "url": "https://blog.python.org/2026/09/the-python-documentation-is-now-available-in-persian/"
+    },
+    {
+      "engine": "authority_root_link",
+      "host": "blog.python.org",
+      "matched_authority_domains": [
+        "python.org"
+      ],
+      "score": 191,
+      "url": "https://blog.python.org/feeds/posts/default?alt=rss"
+    },
+    {
+      "engine": "authority_root_link",
+      "host": "devguide.python.org",
+      "matched_authority_domains": [
+        "python.org"
+      ],
+      "score": 191,
+      "url": "https://devguide.python.org/"
+    },
+    {
+      "engine": "authority_root_link",
+      "host": "docs.python.org",
+      "matched_authority_domains": [
+        "python.org"
+      ],
+      "score": 191,
+      "url": "https://docs.python.org"
+    },
+    {
+      "engine": "authority_root_link",
+      "host": "docs.python.org",
+      "matched_authority_domains": [
+        "python.org"
+      ],
+      "score": 191,
+      "url": "https://docs.python.org/3/faq/"
+    },
+    {
+      "engine": "authority_root_link",
+      "host": "docs.python.org",
+      "matched_authority_domains": [
+        "python.org"
+      ],
+      "score": 191,
+      "url": "https://docs.python.org/3/license.html"
+    },
+    {
+      "engine": "authority_root_link",
+      "host": "docs.python.org",
+      "matched_authority_domains": [
+        "python.org"
+      ],
+      "score": 191,
+      "url": "https://docs.python.org/3/tutorial/"
+    },
+    {
+      "engine": "authority_root_link",
+      "host": "docs.python.org",
+      "matched_authority_domains": [
+        "python.org"
+      ],
+      "score": 191,
+      "url": "https://docs.python.org/3/tutorial/controlflow.html"
+    },
+    {
+      "engine": "authority_root_link",
+      "host": "docs.python.org",
+      "matched_authority_domains": [
+        "python.org"
+      ],
+      "score": 191,
+      "url": "https://docs.python.org/3/tutorial/controlflow.html#defining-functions"
+    },
+    {
+      "engine": "authority_root_link",
+      "host": "docs.python.org",
+      "matched_authority_domains": [
+        "python.org"
+      ],
+      "score": 191,
+      "url": "https://docs.python.org/3/tutorial/introduction.html#lists"
+    },
+    {
+      "engine": "authority_root_link",
+      "host": "donate.python.org",
+      "matched_authority_domains": [
+        "python.org"
+      ],
+      "score": 191,
+      "url": "https://donate.python.org/"
+    },
+    {
+      "engine": "authority_root_link",
+      "host": "jobs.python.org",
+      "matched_authority_domains": [
+        "python.org"
+      ],
+      "score": 191,
+      "url": "https://jobs.python.org"
+    },
+    {
+      "engine": "authority_root_link",
+      "host": "mail.python.org",
+      "matched_authority_domains": [
+        "python.org"
+      ],
+      "score": 191,
+      "url": "https://mail.python.org/mailman/listinfo/python-dev"
+    },
+    {
+      "engine": "authority_root_link",
+      "host": "policies.python.org",
+      "matched_authority_domains": [
+        "python.org"
+      ],
+      "score": 191,
+      "url": "https://policies.python.org/python.org/Privacy-Notice/"
+    },
+    {
+      "engine": "authority_root_link",
+      "host": "status.python.org",
+      "matched_authority_domains": [
+        "python.org"
+      ],
+      "score": 191,
+      "url": "https://status.python.org/"
+    },
+    {
+      "engine": "authority_root_link",
+      "host": "translations.python.org",
+      "matched_authority_domains": [
+        "python.org"
+      ],
+      "score": 191,
+      "url": "https://translations.python.org/"
+    },
+    {
+      "engine": "authority_root_link",
+      "host": "wiki.python.org",
+      "matched_authority_domains": [
+        "python.org"
+      ],
+      "score": 191,
+      "url": "https://wiki.python.org/moin/"
+    },
+    {
+      "engine": "authority_root_link",
+      "host": "wiki.python.org",
+      "matched_authority_domains": [
+        "python.org"
+      ],
+      "score": 191,
+      "url": "https://wiki.python.org/moin/BeginnersGuide"
+    },
+    {
+      "engine": "authority_root_link",
+      "host": "wiki.python.org",
+      "matched_authority_domains": [
+        "python.org"
+      ],
+      "score": 191,
+      "url": "https://wiki.python.org/moin/PythonBooks"
+    },
+    {
+      "engine": "authority_root_link",
+      "host": "wiki.python.org",
+      "matched_authority_domains": [
+        "python.org"
+      ],
+      "score": 191,
+      "url": "https://wiki.python.org/moin/PythonEventsCalendar#Submitting_an_Event"
+    }
+  ],
+  "chosen_host": "www.python.org",
+  "chosen_url": "https://www.python.org/success-stories/category/software-development/",
+  "discovered_at_utc": "2026-09-25T21:24:20.604860+00:00",
+  "query": "Python Software Foundation PEP-0703 official source",
+  "schema": "PROJECT_BRAIN_SOURCE_DISCOVERY_EVIDENCE_V1",
+  "trust_claim": "DOMAIN_FILTERED_SEARCH_DISCOVERY_ONLY_NOT_FACT_VERIFICATION"
+}

@@ -1,0 +1,33 @@
+{
+  "authority_domain": "python.org",
+  "candidates": [
+    {
+      "aliases": [
+        "PSF"
+      ],
+      "authority_domain": "python.org",
+      "claim_rank": "normal",
+      "description": "American nonprofit organization",
+      "entity_id": "Q83818",
+      "final_url": "https://www.python.org/psf-landing/",
+      "http_status": 200,
+      "label": "Python Software Foundation",
+      "official_url": "https://www.python.org/psf/",
+      "page_name_token_matches": 0,
+      "score": 230
+    }
+  ],
+  "entity_description": "American nonprofit organization",
+  "entity_id": "Q83818",
+  "entity_label": "Python Software Foundation",
+  "entity_name": "Python Software Foundation",
+  "final_url": "https://www.python.org/psf-landing/",
+  "http_status": 200,
+  "official_url": "https://www.python.org/psf/",
+  "registry": "wikidata",
+  "registry_search_url": "https://www.wikidata.org/w/api.php?action=wbsearchentities&search=Python+Software+Foundation&language=en&format=json&limit=8&type=item",
+  "resolved_at_utc": "2026-09-25T21:24:03.390659+00:00",
+  "schema": "PROJECT_BRAIN_AUTHORITY_IDENTITY_EVIDENCE_V1",
+  "status": "IDENTITY_CANDIDATE_RESOLVED",
+  "trust_claim": "STRUCTURED_ENTITY_REGISTRY_DISCOVERY_REQUIRES_INDEPENDENT_SITE_VERIFICATION"
+}

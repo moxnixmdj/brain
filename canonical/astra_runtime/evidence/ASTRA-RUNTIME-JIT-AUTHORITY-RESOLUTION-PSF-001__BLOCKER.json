@@ -1,0 +1,9 @@
+{
+  "adapter": "goal",
+  "error": "Blocker:ACTION_EXPECTATION_FAILED:verified:OBSERVED=False",
+  "mission_id": "ASTRA-RUNTIME-JIT-AUTHORITY-RESOLUTION-PSF-001",
+  "observed_at_utc": "2026-09-25T21:24:22.980863+00:00",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "plain-authority-and-source",
+  "step_index": 0
+}
