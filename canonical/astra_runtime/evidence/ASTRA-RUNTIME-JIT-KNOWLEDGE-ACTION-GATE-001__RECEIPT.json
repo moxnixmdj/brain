@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T21:51:57.360372+00:00",
+  "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-ACTION-GATE-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_JIT_KNOWLEDGE_ACTION_GATE_001.json",
+  "mission_sha256": "aba6f2fec70336108d0cbe4d8cd12b8b6d21cfc50b4752d444433bc18226b185",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "d622d9d7660d0280e11fb8676031f1c9daa21a2497aa3736bfa9506689cb271b",
+  "status": "COMPLETE",
+  "steps_completed": 2
+}

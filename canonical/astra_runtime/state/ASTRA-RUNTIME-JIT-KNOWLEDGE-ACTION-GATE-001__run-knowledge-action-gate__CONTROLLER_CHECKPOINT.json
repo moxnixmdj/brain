@@ -217,16 +217,52 @@
         "type": "assess_knowledge_consistency",
         "verified": true
       }
+    },
+    {
+      "cycle": 7,
+      "plan": {
+        "args": {
+          "assessment_path": "canonical/astra_runtime/tmp/GATE_CONFLICT_ASSESSMENT.json",
+          "field_name": "claim",
+          "output_path": "canonical/astra_runtime/tmp/GATE_CONFLICTED_FACT_MUST_NOT_EXIST.json"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": false
+        },
+        "type": "materialize_supported_knowledge"
+      },
+      "result": {
+        "assessment_path": "canonical/astra_runtime/tmp/GATE_CONFLICT_ASSESSMENT.json",
+        "blocked_reason": "KNOWLEDGE_NOT_ACTIONABLE:CONFLICTED",
+        "output_verified": false,
+        "status": "CONFLICTED",
+        "type": "materialize_supported_knowledge"
+      }
+    },
+    {
+      "cycle": 8,
+      "plan": {
+        "args": {
+          "summary": "KNOWLEDGE_ACTION_GATE_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "KNOWLEDGE_ACTION_GATE_COMPLETE",
+        "type": "finish"
+      }
     }
   ],
   "created_at_utc": "2026-09-25T21:50:18.252881+00:00",
   "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-ACTION-GATE-001",
-  "next_action_index": 7,
+  "next_action_index": 9,
   "plan_sha256": "a997e949ce52027d31060a7bfb9ebb5095191b44d984b4a142853e83f2ee9471",
-  "resume_count": 0,
+  "resume_count": 1,
   "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
-  "status": "IN_PROGRESS",
+  "status": "COMPLETE",
   "step_id": "run-knowledge-action-gate",
   "test_interrupt_injected": false,
-  "updated_at_utc": "2026-09-25T21:50:19.423066+00:00"
+  "updated_at_utc": "2026-09-25T21:51:57.329904+00:00"
 }
