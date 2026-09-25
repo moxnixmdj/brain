@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-BOUNDED-LOOP-002",
+  "purpose": "Fresh clean proof of bounded repeated observation with runtime stopping, explicit exhaustion semantics, and independent trace verification.",
+  "goal": "Open https://httpbin.org/uuid in a rendered browser repeatedly, no more than 8 times. After each result, inspect the UUID. Finish when its first hexadecimal character is in 0,1,2,3,4,5,6,7, otherwise continue until attempt 8. Save every observed result under canonical/astra_runtime/tmp/UUID_LOOP_ATTEMPTS and save canonical/astra_runtime/tmp/UUID_LOOP_RESULT.json with status, attempts, matched, selected_uuid, and selected_attempt. Independently verify the saved trace and stopping decision.",
+  "steps": [
+    {
+      "id": "run-bounded-loop",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 40,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "max_attempts": 8,
+    "manual_controller_actions": false,
+    "explicit_retrigger_after_join_frontier": "v1",
+    "fresh_mission_identity": true,
+    "loop_runtime_commit": "4d0cd51c332da608bc6dc93876816fb4ae7e49f6",
+    "loop_compiler_commit": "c6918ce7a082584e4e6574be2c802b2324e0c0ac",
+    "loop_dispatch_commit": "5c3bed96593984ac7b1c3319da247e9542fbb634",
+    "source_mission": "ASTRA-RUNTIME-BOUNDED-LOOP-001"
+  }
+}
