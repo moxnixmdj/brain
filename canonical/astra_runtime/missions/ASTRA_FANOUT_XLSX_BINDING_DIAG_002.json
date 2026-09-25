@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-FANOUT-XLSX-BINDING-DIAG-002",
+  "purpose": "Verify typed context binding passes the actual manifest path to the downstream XLSX verifier.",
+  "steps": [
+    {
+      "id": "compile-and-assert-bindings",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/goal_compiler.py')\ns=importlib.util.spec_from_file_location('gc',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads(pathlib.Path('canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads(pathlib.Path('canonical/astra_runtime/missions/ASTRA_RUNTIME_FANOUT_XLSX_JOIN_004.json').read_text())['goal']\nout=m.compile_goal(goal,reg,pathlib.Path('.').resolve())\nxlsx=[a for a in out.get('controller_actions') or [] if a.get('type')=='invoke_capability' and (a.get('args') or {}).get('capability_id','').startswith('xlsx.')]\nassert len(xlsx)==2,xlsx\ncreate,verify=xlsx\nmanifest='canonical/astra_runtime/tmp/FANOUT_JOIN_MANIFEST.json'\nbook='canonical/astra_runtime/tmp/FANOUT_JOIN.xlsx'\nassert create['args']['json_path']==manifest,create\nassert create['args']['output_path']==book,create\nassert verify['args']['json_path']==manifest,verify\nassert verify['args']['xlsx_path']==book,verify\nprint('FANOUT_XLSX_TYPED_BINDING_COMPLETE')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "FANOUT_XLSX_TYPED_BINDING_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "read_only_diagnostic": true
+  }
+}
