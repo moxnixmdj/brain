@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T01:40:00.731220+00:00",
+  "mission_id": "ASTRA-XLSX-SUPPLIER-DISCOVERY-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_XLSX_SUPPLIER_DISCOVERY_DIAG_001.json",
+  "mission_sha256": "d15d039c5c07591db66c487b44f099b83f322c7afde019be5fcc1a3951d9d523",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "4f24c2f356107852e6000334cd58730262eb2ad202211dd12f23dc782f62a0cf",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
