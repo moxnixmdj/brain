@@ -28,6 +28,7 @@
     "orthogonal_pressure_family": "dynamic_test_execution_aggregation_fresh_replay",
     "fresh_mission_identity": true,
     "verified_test_audit_composition": true,
-    "replay_after_compound_verification_decomposition_commit": "dc26698fed7e8fc170fc4fc881a3186e7dcb7309"
+    "replay_after_compound_verification_decomposition_commit": "dc26698fed7e8fc170fc4fc881a3186e7dcb7309",
+    "replay_after_unittest_dependency_contract_commit": "a4779499253e5c86714a268e8fa63f3edc22e86a"
   }
 }
