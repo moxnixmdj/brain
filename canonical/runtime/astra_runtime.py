@@ -3849,6 +3849,137 @@ def _capability_problem(step, mission):
         raise Blocker("CAPABILITY_PROBLEM_INVALID")
     return problem
 
+def _validate_proposal_value(value,path="proposal"):
+    if isinstance(value,dict):
+        special=[str(k) for k in value if str(k).startswith("$")]
+        if special:
+            if set(value)!={"$effect_result"}:
+                raise Blocker("CAPABILITY_PROPOSAL_SPECIAL_VALUE_REJECTED:"+path)
+            spec=value["$effect_result"]
+            if not isinstance(spec,dict) or set(spec)!={"effect","field"}:
+                raise Blocker("CAPABILITY_PROPOSAL_EFFECT_RESULT_INVALID:"+path)
+            effect=str(spec.get("effect") or "").strip()
+            field=str(spec.get("field") or "").strip()
+            if not effect or not field:
+                raise Blocker("CAPABILITY_PROPOSAL_EFFECT_RESULT_INVALID:"+path)
+            return
+        for key,item in value.items():
+            _validate_proposal_value(item,path+"."+str(key))
+        return
+    if isinstance(value,list):
+        for index,item in enumerate(value):
+            _validate_proposal_value(item,path+"["+str(index)+"]")
+        return
+    if value is None or isinstance(value,(str,int,float,bool)):
+        return
+    raise Blocker("CAPABILITY_PROPOSAL_VALUE_INVALID:"+path)
+
+
+def _capability_problem_proposal(step,mission):
+    proposal=step.get("capability_problem_proposal")
+    ref=step.get("capability_problem_proposal_ref")
+    if proposal is None and ref:
+        proposal=mission.get(ref)
+    if proposal is None:
+        return None
+    if not isinstance(proposal,dict):
+        raise Blocker("CAPABILITY_PROPOSAL_INVALID")
+    allowed_keys={
+      "capability_instances","inputs","finish_summary","max_expansions",
+    }
+    unknown=sorted(str(k) for k in proposal if str(k) not in allowed_keys)
+    if unknown:
+        raise Blocker("CAPABILITY_PROPOSAL_TOP_LEVEL_FIELD_REJECTED:"+",".join(unknown))
+    verified_initial=step.get("verified_initial_facts") or []
+    required_targets=step.get("required_target_effects") or []
+    if (
+        not isinstance(verified_initial,list)
+        or any(not isinstance(x,str) or not x.strip() for x in verified_initial)
+    ):
+        raise Blocker("CAPABILITY_PROPOSAL_VERIFIED_INITIAL_FACTS_INVALID")
+    if (
+        not isinstance(required_targets,list) or not required_targets
+        or any(not isinstance(x,str) or not x.strip() for x in required_targets)
+    ):
+        raise Blocker("CAPABILITY_PROPOSAL_REQUIRED_TARGET_EFFECTS_INVALID")
+    raw_instances=proposal.get("capability_instances") or []
+    if (
+        not isinstance(raw_instances,list) or not raw_instances
+        or len(raw_instances)>64
+    ):
+        raise Blocker("CAPABILITY_PROPOSAL_INSTANCES_INVALID")
+    registry=_load_bound_capability_registry()
+    seen=set()
+    normalized=[]
+    allowed_instance_fields={
+      "instance_id","capability_id","inputs","requires_as","provides_as",
+    }
+    for index,raw in enumerate(raw_instances):
+        if not isinstance(raw,dict):
+            raise Blocker("CAPABILITY_PROPOSAL_INSTANCE_INVALID:"+str(index))
+        extra=sorted(str(k) for k in raw if str(k) not in allowed_instance_fields)
+        if extra:
+            raise Blocker(
+                "CAPABILITY_PROPOSAL_INSTANCE_FIELD_REJECTED:"
+                +str(index)+":"+",".join(extra)
+            )
+        instance_id=str(raw.get("instance_id") or "").strip()
+        cid=str(raw.get("capability_id") or "").strip()
+        if not instance_id or instance_id in seen:
+            raise Blocker("CAPABILITY_PROPOSAL_INSTANCE_ID_INVALID_OR_DUPLICATE:"+instance_id)
+        seen.add(instance_id)
+        entry=registry.get(cid)
+        if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
+            raise Blocker("CAPABILITY_PROPOSAL_SOURCE_NOT_VERIFIED:"+cid)
+        try:
+            incremental_spend=float(entry.get("incremental_spend_usd",0))
+        except Exception as exc:
+            raise Blocker("CAPABILITY_PROPOSAL_SOURCE_COST_INVALID:"+cid) from exc
+        if incremental_spend>0:
+            raise Blocker("CAPABILITY_PROPOSAL_NONZERO_SPEND_REJECTED:"+cid)
+        inputs=raw.get("inputs") or {}
+        if not isinstance(inputs,dict):
+            raise Blocker("CAPABILITY_PROPOSAL_INPUTS_INVALID:"+instance_id)
+        _validate_proposal_value(inputs,"instance."+instance_id+".inputs")
+        normalized.append(json.loads(json.dumps(raw)))
+    proposal_inputs=proposal.get("inputs") or {}
+    if not isinstance(proposal_inputs,dict):
+        raise Blocker("CAPABILITY_PROPOSAL_GLOBAL_INPUTS_INVALID")
+    _validate_proposal_value(proposal_inputs,"proposal.inputs")
+    finish_summary=str(
+        proposal.get("finish_summary") or "VERIFIED_CAPABILITY_PROPOSAL_COMPLETE"
+    ).strip()
+    if not finish_summary:
+        raise Blocker("CAPABILITY_PROPOSAL_FINISH_SUMMARY_INVALID")
+    max_expansions=int(proposal.get("max_expansions") or 5000)
+    if max_expansions<1 or max_expansions>100000:
+        raise Blocker("CAPABILITY_PROPOSAL_MAX_EXPANSIONS_INVALID")
+    return {
+      "initial_facts":[str(x).strip() for x in verified_initial],
+      "target_effects":[str(x).strip() for x in required_targets],
+      "inputs":proposal_inputs,
+      "capabilities":[],
+      "capability_instances":normalized,
+      "finish_summary":finish_summary,
+      "max_expansions":max_expansions,
+      "_proposal_contract":"VERIFIED_REGISTRY_REFERENCES_ONLY",
+    }
+
+
+def _run_verified_capability_proposal(step,mission,goal):
+    problem=_capability_problem_proposal(step,mission)
+    if problem is None:
+        return None
+    derived=dict(step)
+    derived.pop("capability_problem_proposal",None)
+    derived.pop("capability_problem_proposal_ref",None)
+    derived["capability_problem"]=problem
+    result=_run_capability_planned_goal(derived,mission,goal)
+    if result is None:
+        raise Blocker("CAPABILITY_PROPOSAL_EXECUTION_MISSING")
+    result["proposal_contract"]=problem["_proposal_contract"]
+    return result
+
 def _load_capability_planner():
     path=pathlib.Path(__file__).resolve().with_name("capability_planner.py")
     spec=importlib.util.spec_from_file_location("project_brain_capability_planner",path)
@@ -4209,6 +4340,9 @@ def run_goal(step, mission):
     if isinstance(goal,(dict,list)): goal=json.dumps(goal,sort_keys=True)
     goal=str(goal or "").strip()
     if not goal: raise Blocker("GOAL_REQUIRED")
+    proposal_result=_run_verified_capability_proposal(step,mission,goal)
+    if proposal_result is not None:
+        return proposal_result
     capability_result=_run_capability_planned_goal(step, mission, goal)
     if capability_result is not None:
         return capability_result
