@@ -127,12 +127,37 @@ def _bind_inputs(goal, root, entry, context_paths=None):
         if key=="goal":
             result[key]=str(goal)
             continue
+        if key=="url":
+            urls=re.findall(r"https?://[^\\s)\\]}>]+",goal)
+            urls=[u.rstrip(".,;:!?") for u in urls]
+            if len(urls)==1:
+                result[key]=urls[0]
+                continue
+            raise GoalCompilationFailure("GOAL_URL_BINDING_REQUIRED",str(len(urls)))
         if key.endswith("_path"):
             stem=key[:-5].lower()
-            if key.startswith("output_"):
-                # Output paths are expected not to exist yet. Bind only a
-                # repository-safe path explicitly present in the goal.
-                matching=[raw for raw,p in paths if (not stem or stem in raw.lower() or p.suffix.lower() in {".png",".jpg",".jpeg",".pdf",".txt",".json",".csv",".md",".xlsx",".sqlite",".db",".sqlite3"})]
+            output_stems={"output","result","report","screenshot","image","artifact","destination","dest"}
+            if key.startswith("output_") or stem in output_stems:
+                # Future outputs may not exist. Prefer type-compatible paths
+                # explicitly named by the goal so multiple outputs can bind
+                # without positional guessing.
+                suffix_map={
+                  "screenshot":{".png",".jpg",".jpeg",".webp"},
+                  "image":{".png",".jpg",".jpeg",".webp"},
+                  "result":{".json"},
+                  "report":{".json",".md",".txt"},
+                  "json":{".json"},
+                  "archive":{".gz",".tgz",".zip",".tar"},
+                  "xlsx":{".xlsx"},
+                  "spreadsheet":{".xlsx"},
+                  "sqlite":{".sqlite",".db",".sqlite3"},
+                  "database":{".sqlite",".db",".sqlite3"},
+                }
+                wanted=suffix_map.get(stem)
+                if wanted:
+                    matching=[raw for raw,p in paths if p.suffix.lower() in wanted]
+                else:
+                    matching=[raw for raw,p in paths if (not stem or stem in raw.lower())]
                 if len(matching)==1:
                     result[key]=matching[0]
                     continue
