@@ -1591,6 +1591,69 @@
           "title": "Browser Submission Report"
         }
       }
+    },
+    "image.code.decode.zbarimg": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "image.code.decode.zbarimg",
+          "argv": [
+            "zbarimg",
+            "--quiet",
+            "--raw",
+            "${input.path}"
+          ],
+          "timeout_s": 60
+        },
+        "expect": {
+          "type": "field_nonempty",
+          "field": "stdout"
+        }
+      },
+      "adapter_module": "cli_command",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "decode",
+        "qr",
+        "barcode",
+        "code128",
+        "image",
+        "zbar"
+      ],
+      "limitations": [
+        "Verified for QR and Code 128 PNG decoding through zbarimg."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "image.code.decode"
+      ],
+      "requires": [],
+      "source": {
+        "type": "apt",
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "zbar-tools",
+            "version": "0.23.93-4build3",
+            "sha256": "9e718d34a9650263aca2dd85e56d9de42ca24ff82254f90f5e4270d1e5d00422"
+          }
+        ]
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "mission_id": "ASTRA-VERIFY-ZBAR-MULTIFORMAT-001",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-ZBAR-MULTIFORMAT-001__RECEIPT.json",
+        "independent_verified": true,
+        "formats": [
+          "QR",
+          "CODE128"
+        ],
+        "payload": "PROJECT BRAIN"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
