@@ -764,6 +764,148 @@ def _goal_action(action):
         if not isinstance(items,list) or len(items)>100 or any(not isinstance(x,dict) for x in items):
             return {"type":typ,"output_verified":False,"error":"FANOUT_SOURCE_INVALID"}
 
+        # Per-item fallback mode: each runtime item owns its primary attempt,
+        # semantic validation, fallback, and final record. One failed primary
+        # therefore cannot abort unrelated items.
+        item_fallback=args.get("item_fallback")
+        if item_fallback is not None:
+            copy_fields=args.get("copy_fields") or ["id"]
+            output_dir_raw=str(args.get("output_dir") or "")
+            artifact_field=str(args.get("artifact_field") or "artifact_path")
+            used_field=str(args.get("used_fallback_field") or "used_fallback")
+            kind_field=str(args.get("artifact_kind_field") or "artifact_kind")
+            if (
+                not isinstance(item_fallback,dict)
+                or not output_dir_raw
+                or not isinstance(copy_fields,list) or not copy_fields
+                or any(not isinstance(x,str) or not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*",x) for x in copy_fields)
+                or not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*",artifact_field)
+                or not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*",used_field)
+                or not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*",kind_field)
+            ):
+                return {"type":typ,"output_verified":False,"error":"FANOUT_ITEM_FALLBACK_SPEC_INVALID"}
+            primary=item_fallback.get("primary_action")
+            fallback=item_fallback.get("fallback_action")
+            validation=item_fallback.get("primary_validation")
+            if (
+                not isinstance(primary,dict) or primary.get("type")!="invoke_capability"
+                or not isinstance(fallback,dict) or fallback.get("type")!="invoke_capability"
+                or not isinstance(validation,dict)
+                or validation.get("type")!="decoded_equals_source_field"
+            ):
+                return {"type":typ,"output_verified":False,"error":"FANOUT_ITEM_FALLBACK_ACTION_INVALID"}
+            expected_field=str(validation.get("expected_source_field") or "")
+            decoder=str(validation.get("decoder_capability") or "image.code.decode.zbarimg")
+            primary_kind=str(item_fallback.get("primary_kind") or "PRIMARY")
+            fallback_kind=str(item_fallback.get("fallback_kind") or "FALLBACK")
+            if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*",expected_field):
+                return {"type":typ,"output_verified":False,"error":"FANOUT_ITEM_FALLBACK_EXPECTED_FIELD_INVALID"}
+
+            output_dir=_safe_repo_path(output_dir_raw)
+            attempt_dir=output_dir/".primary_attempts"
+            output_dir.mkdir(parents=True,exist_ok=True)
+            attempt_dir.mkdir(parents=True,exist_ok=True)
+
+            def subst_item(v,item,item_id,out):
+                if isinstance(v,str):
+                    if v=="__ITEM_OUTPUT_PATH__":
+                        return out
+                    if v=="__ITEM_ID__":
+                        return item_id
+                    m=re.fullmatch(r"__ITEM_FIELD_([A-Za-z_][A-Za-z0-9_]*)__",v)
+                    if m:
+                        return item.get(m.group(1))
+                    return v
+                if isinstance(v,list):
+                    return [subst_item(x,item,item_id,out) for x in v]
+                if isinstance(v,dict):
+                    return {k:subst_item(x,item,item_id,out) for k,x in v.items()}
+                return v
+
+            def invoke_nested(template,item,item_id,out):
+                rendered=subst_item(template,item,item_id,out)
+                result=_invoke_bound_capability(rendered.get("args") or {})
+                _verify_action_expectation(rendered,result)
+                return result
+
+            manifest=[]
+            fallback_count=0
+            primary_valid_count=0
+            for item in items:
+                item_id=str(item.get("id"))
+                if not item_id:
+                    return {"type":typ,"output_verified":False,"error":"FANOUT_ITEM_ID_MISSING"}
+                expected=str(item.get(expected_field) or "")
+                final_out=str((output_dir/(item_id+".png")).relative_to(ROOT))
+                primary_out=str((attempt_dir/(item_id+".png")).relative_to(ROOT))
+                primary_valid=False
+                primary_error=None
+                try:
+                    invoke_nested(primary,item,item_id,primary_out)
+                    decoded=_invoke_bound_capability({
+                      "capability_id":decoder,
+                      "argv":["zbarimg","--quiet","--raw",primary_out],
+                      "timeout_s":60,
+                    })
+                    primary_valid=str(decoded.get("stdout") or "").strip()==expected
+                except Exception as exc:
+                    primary_error=type(exc).__name__+":"+str(exc)
+                    primary_valid=False
+
+                if primary_valid:
+                    primary_valid_count+=1
+                    src=_safe_repo_path(primary_out)
+                    dst=_safe_repo_path(final_out)
+                    if dst.exists():
+                        dst.unlink()
+                    src.replace(dst)
+                    used_fallback=False
+                    kind=primary_kind
+                else:
+                    fallback_count+=1
+                    try:
+                        dst=_safe_repo_path(final_out)
+                        if dst.exists():
+                            dst.unlink()
+                        invoke_nested(fallback,item,item_id,final_out)
+                        decoded=_invoke_bound_capability({
+                          "capability_id":decoder,
+                          "argv":["zbarimg","--quiet","--raw",final_out],
+                          "timeout_s":60,
+                        })
+                        if str(decoded.get("stdout") or "").strip()!=expected:
+                            return {
+                              "type":typ,"output_verified":False,
+                              "error":"FANOUT_ITEM_FALLBACK_VALIDATION_FAILED",
+                              "id":item_id,
+                            }
+                    except Exception as exc:
+                        return {
+                          "type":typ,"output_verified":False,
+                          "error":"FANOUT_ITEM_FALLBACK_FAILED",
+                          "id":item_id,
+                          "detail":type(exc).__name__+":"+str(exc),
+                          "primary_error":primary_error,
+                        }
+                    used_fallback=True
+                    kind=fallback_kind
+
+                rec={field:item.get(field) for field in copy_fields}
+                rec[used_field]=used_fallback
+                rec[kind_field]=kind
+                rec[artifact_field]=final_out
+                manifest.append(rec)
+
+            manifest_path.parent.mkdir(parents=True,exist_ok=True)
+            manifest_path.write_text(json.dumps(manifest,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+            return {
+              "type":typ,"output_verified":True,
+              "item_count":len(manifest),
+              "fallback_count":fallback_count,
+              "primary_valid_count":primary_valid_count,
+              "manifest_path":str(manifest_path.relative_to(ROOT)),
+            }
+
         # Generic mode: execute an arbitrary bounded list of already-verified
         # capability action templates for every runtime-discovered item.
         item_actions=args.get("item_actions")
@@ -870,6 +1012,67 @@ def _goal_action(action):
         manifest_path.parent.mkdir(parents=True,exist_ok=True)
         manifest_path.write_text(json.dumps(manifest,indent=2,sort_keys=True)+"\n",encoding="utf-8")
         return {"type":typ,"output_verified":True,"item_count":len(manifest),"manifest_path":str(manifest_path.relative_to(ROOT))}
+    if typ=="assert_runtime_per_item_fallback_decodes":
+        source=_safe_repo_path(args.get("source_path",""))
+        manifest_path=_safe_repo_path(args.get("manifest_path",""))
+        if not source.is_file() or not manifest_path.is_file():
+            return {"type":typ,"verified":False,"error":"PER_ITEM_FALLBACK_VERIFY_SOURCE_MISSING"}
+        try:
+            wrapper=json.loads(source.read_text(encoding="utf-8"))
+            items=json.loads(str(wrapper.get("observed_text") or ""))
+            manifest=json.loads(manifest_path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            return {"type":typ,"verified":False,"error":"PER_ITEM_FALLBACK_VERIFY_JSON_INVALID:"+type(exc).__name__}
+        expected_field=str(args.get("expected_source_field") or "")
+        primary_field=str(args.get("primary_source_field") or "")
+        artifact_field=str(args.get("artifact_field") or "artifact_path")
+        used_field=str(args.get("used_fallback_field") or "used_fallback")
+        kind_field=str(args.get("artifact_kind_field") or "artifact_kind")
+        fallback_kind=str(args.get("fallback_kind") or "FALLBACK")
+        decoder=str(args.get("decoder_capability") or "image.code.decode.zbarimg")
+        if not isinstance(items,list) or not isinstance(manifest,list):
+            return {"type":typ,"verified":False,"error":"PER_ITEM_FALLBACK_VERIFY_INVALID"}
+        by_id={str(x.get("id")):x for x in manifest if isinstance(x,dict) and "id" in x}
+        failures=[]
+        if len(items)!=len(manifest) or len(by_id)!=len(manifest):
+            failures.append({"error":"CARDINALITY_MISMATCH"})
+        for item in items:
+            item_id=str(item.get("id"))
+            rec=by_id.get(item_id)
+            if rec is None:
+                failures.append({"id":item_id,"error":"MANIFEST_RECORD_MISSING"})
+                continue
+            expected=str(item.get(expected_field) or "")
+            primary_value=str(item.get(primary_field) or "")
+            if primary_value==expected:
+                failures.append({"id":item_id,"error":"PRIMARY_WAS_EXPECTED_TO_FAIL_VALIDATION"})
+            if rec.get(expected_field)!=item.get(expected_field) or rec.get(primary_field)!=item.get(primary_field):
+                failures.append({"id":item_id,"error":"MANIFEST_SOURCE_FIELD_MISMATCH"})
+            if rec.get(used_field) is not True:
+                failures.append({"id":item_id,"error":"FALLBACK_FLAG_FALSE"})
+            if str(rec.get(kind_field) or "")!=fallback_kind:
+                failures.append({"id":item_id,"error":"FALLBACK_KIND_MISMATCH"})
+            path=str(rec.get(artifact_field) or "")
+            if not path:
+                failures.append({"id":item_id,"error":"FINAL_ARTIFACT_PATH_MISSING"})
+                continue
+            try:
+                decoded=_invoke_bound_capability({
+                  "capability_id":decoder,
+                  "argv":["zbarimg","--quiet","--raw",path],
+                  "timeout_s":60,
+                })
+            except Exception as exc:
+                failures.append({"id":item_id,"error":"FINAL_DECODE_FAILED","detail":type(exc).__name__})
+                continue
+            if str(decoded.get("stdout") or "").strip()!=expected:
+                failures.append({"id":item_id,"error":"FINAL_DECODE_MISMATCH"})
+        return {
+          "type":typ,"verified":not failures,
+          "source_count":len(items),"manifest_count":len(manifest),
+          "failures":failures[:20],
+        }
+
     if typ=="assert_runtime_fanout_artifacts_decode":
         source=_safe_repo_path(args.get("source_path",""))
         manifest_path=_safe_repo_path(args.get("manifest_path",""))
@@ -1300,7 +1503,7 @@ def _run_model_independent_goal(step, mission, goal):
     allowed_types={
       "read_file","list_tree","search_text","http_get","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback",
       "project_browser_result_json","assert_hex_prefix_bucket","assert_collection_length_bucket","assert_runtime_selected_code_decodes",
-      "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal","assert_runtime_fanout_decodes","assert_runtime_fanout_artifacts_decode","assert_runtime_fallback_decision",
+      "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal","assert_runtime_fanout_decodes","assert_runtime_fanout_artifacts_decode","assert_runtime_per_item_fallback_decodes","assert_runtime_fallback_decision",
       "assert_workflow_audit_supported_by_source","assert_python_source_audit_supported_by_source",
       "assert_python_test_audit_zero","assert_python_test_audit_supported_by_fresh_execution",
       "finish"
