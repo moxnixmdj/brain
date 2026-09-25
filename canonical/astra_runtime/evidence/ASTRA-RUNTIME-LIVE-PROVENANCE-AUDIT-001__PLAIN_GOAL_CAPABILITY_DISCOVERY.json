@@ -1,0 +1,2566 @@
+{
+  "auto_acquisition": {
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"abisip-find\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-find-file-in-project\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"fd-find\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-array-find-index\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-find-cache-dir\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-find-root\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-find-up\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"raku-file-find\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"anorack\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"aoflagger\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"bfs\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"black-box\", \"status\": \"CONTRACT_REJECTED\"}]",
+    "status": "NOT_DISPATCHED"
+  },
+  "binding_performed": false,
+  "goal": "Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json. Find the VERIFIED_BOUND_CAPABILITY whose source type is pypi. Fetch that project's authoritative live PyPI metadata from the metadata URL recorded in the registry. Verify that the pinned version and wheel filename still exist in that metadata, download that exact wheel, compute its SHA-256, and verify it equals the wheel_sha256 recorded in the registry. Create canonical/astra_runtime/tmp/LIVE_PYPI_PROVENANCE_AUDIT.json containing the capability ID, project, pinned version, wheel filename, recorded hash, live metadata hash, downloaded artifact hash, metadata URL, artifact URL, and a final verified boolean. Finally independently read the report and fail unless all three hashes are identical and verified is true.",
+  "mission_id": "ASTRA-RUNTIME-LIVE-PROVENANCE-AUDIT-001",
+  "observed_at_utc": "2026-09-25T00:34:27.272971+00:00",
+  "result": {
+    "binding_performed": false,
+    "candidates": [
+      {
+        "archive_sha256": "14c9c9b8ffabefeeeeba02fc1953fbeb758da195052326a31775a930f4606170",
+        "binding_kind": "apt",
+        "description": "Command line utility to find ip.access compatible BTS",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "abisip-find",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.9.0-3build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "23bb5365162dce84ddeb31c27bf62287ce802ee35639cbf72e0b8b58390f969b",
+        "binding_kind": "apt",
+        "description": "quick access to project files in Emacs",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "elpa-find-file-in-project",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.2.0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "2f4f1bf881e3e967f7ef3da0b757638f4b0db5227f21b2ac0aaa89ae76e6672d",
+        "binding_kind": "apt",
+        "description": "Simple, fast and user-friendly alternative to find",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "fd-find",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "9.0.0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "a2681d2cfc4191e6c0214d4e8c491ea0ebecbfef17fd579e947d43a6f1995859",
+        "binding_kind": "apt",
+        "description": "ES2015 Array",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "node-array-find-index",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.0.2+~1.0.0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "04644cc1abd481bc6e815f21439d41deff076d82dd23a833264aee775062cdc0",
+        "binding_kind": "apt",
+        "description": "finds the common standard cache directory",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "node-find-cache-dir",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.3.2+~3.2.1-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "b363968365a95f7047a0086031252191c9493313b36a884bf49837a702842b2a",
+        "binding_kind": "apt",
+        "description": "Node.js module to get the closest package.json",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "node-find-root",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.1.0~11.10.7+ds1+~cs8.3.3-4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "643cbf4a12639c52e864344798eda7fab249eedaa137a7b85ca754efd51d633a",
+        "binding_kind": "apt",
+        "description": "Find a file by walking up parent directories",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "node-find-up",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.3.0-7",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "4b497bb5b804153927365830e42b3cd371bd2e2b65b8b93daca0e20c6610b545",
+        "binding_kind": "apt",
+        "description": "Get a lazy list of a directory tree",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "raku-file-find",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.2.0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "dab1d789ec97e842b121864ffc4c3532d81c66b5810e5623c6e839a7e9dfe8ea",
+        "binding_kind": "apt",
+        "description": "specialized spell-checker that finds incorrect indefinite articles",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "anorack",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.2.8-0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "2d69c082ab93ab23e023e015d59c8ddafee239656adae670a2fbc66438c140ad",
+        "binding_kind": "apt",
+        "description": "Find RFI in radio astronomical observations",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "aoflagger",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "3.4.0-2build4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "9d901ae57b2f690dbec8edfc48dad67f14d331fb523ad93c75811b74d4a28887",
+        "binding_kind": "apt",
+        "description": "Breadth-first version of find(1)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "bfs",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "3.1.2-1build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "84a7599334063b640c35f241286c8a97b0ea5bd3a3e02e7a8c471b20b399c92a",
+        "binding_kind": "apt",
+        "description": "Find the crystals",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "black-box",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.4.8-4build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "4549519b89b10fab8c18e1ed8d3638b25e60eeb52f8a62618104f62125cc0de6",
+        "binding_kind": "apt",
+        "description": "Try to find a password of a LUKS encrypted volume",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "bruteforce-luks",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.4.0-4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d1529e1d9f77bc732b3133cea1543dbd42fa5e09dee8ed4d17528ccb79495cfb",
+        "binding_kind": "apt",
+        "description": "try to find the passphrase for files encrypted with OpenSSL",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "bruteforce-salted-openssl",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.4.2-4build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "7fa952fec1608e9f71fcb5dc54ea466353555df974229b51e14dfbdeb00b647e",
+        "binding_kind": "apt",
+        "description": "try to find the password of an encrypted wallet file",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "bruteforce-wallet",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.5.3-6build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "cc1c7cf81249cf261b3c53637c0b3e6216e6c7dfa68b814db58becffa2d3b6b4",
+        "binding_kind": "apt",
+        "description": "GUI to find and choose locale characters",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "budgie-quickchar",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.8.0-1build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "110bce61483de1fd566eb64b74e208e66697a65f2965252e455d3a8f67deb0f7",
+        "binding_kind": "apt",
+        "description": "Find inadequately-tested code that can be removed without any tests failing",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "cargo-mutants",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "23.10.0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "45f2a50141c982eeeda2658faacd38421f2bc7aafcafe166c47da03e37144fff",
+        "binding_kind": "apt",
+        "description": "Finds typographic errors in LaTeX",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "chktex",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.7.8-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "f11e2160fad4f18788f880706c8a7fd186ef4123074c234f2bb1776ca85b213b",
+        "binding_kind": "apt",
+        "description": "Profile OpenCL devices to find peak capacities",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "clpeak",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.1.2-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "bb059610e858e66661cea585ef01a37c33e917a2be2abef257fcdd9056a87109",
+        "binding_kind": "apt",
+        "description": "Find and fix common misspellings in text files",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "codespell",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.2.6-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "77bf11449239c7a7a8739d1d7ae6d13d3984aff7e89139dd7a1e417869aaac97",
+        "binding_kind": "apt",
+        "description": "Finding Code that Counts with Causal Profiling",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "coz-profiler",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.2.2-2build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "2e348ad82c5d3c0ba34e84f1ee2d8e4e2f9220cc7d0411be8a7b3e36e4bab9ce",
+        "binding_kind": "apt",
+        "description": "program that can find unused packages, e.g. libraries",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "deborphan",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.7.35",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "683df61a27ce0486ca6c27b9e8f2f7808300b564097ad2f5b608eb10d31f3085",
+        "binding_kind": "apt",
+        "description": "Find and remove unnecessary includes in C or C++ source files",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "deheader",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.10-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "dc0c602887813c5f17834ccc0e4d5a8a42cb79aadafe6b9f0a5cc7715b8fb331",
+        "binding_kind": "apt",
+        "description": "find windows and perform actions on them",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "devilspie",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.23-2build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "82204dfd1d12380cd149efccfefe1dc7df51290278b135e3c870b574a51b60b2",
+        "binding_kind": "apt",
+        "description": "Method to find rearrangements in long DNA reads relative to a genome seq",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "dnarrange",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.5.3-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "e179edc7529ab805be2007d39f49beeb1ddcd1f44214e66f22361f11197b2083",
+        "binding_kind": "apt",
+        "description": "DNS cache - tool for finding addresses of Internet hosts",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "dnscache",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1:1.05-15ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "97821e0a7e4ea03f49c564a114c552aa655a543785b0fb30608af8db3a0e4ab7",
+        "binding_kind": "apt",
+        "description": "Duplicate file finder",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "duff",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.5.2-1.1build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "b47ed8d53844045ad0114fe606803a0ebeafaf4284d62da6ed9f2a22a7be04ac",
+        "binding_kind": "apt",
+        "description": "GUI tool to find duplicate files in a system",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "dupeguru",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "4.3.1-4build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "54eb82f35709f6334488fd1722624ffc55a981101d6d1704a1216501b1812052",
+        "binding_kind": "apt",
+        "description": "find callers of elisp functions or macros",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "elpa-elisp-refs",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.5-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "51981b90fac8eca9f4769a3f6925332fb0b26a57010e034174486181966f2411",
+        "binding_kind": "apt",
+        "description": "Emacs Lisp regexp mistake finder",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "elpa-relint",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.24+repack-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "FindAgency HQ: the median advertised marketing retainer starting price per month, read from...",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.findagencyhq/agency-pricing-index",
+        "packages": [
+          {
+            "identifier": "@ellul-estate/findagencyhq-com-agency-pricing-index-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.0"
+          }
+        ],
+        "query": "find",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/joeetdev/venture-estate"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Nigerian admin boundaries (state/LGA/ward): centroid, bbox, reverse-geocode. GRID3, keyless.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.Braynexservices/nigeria-grid3-boundaries",
+        "packages": [
+          {
+            "identifier": "@braynexservices/nigeria-mcp-grid3-boundaries",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.1"
+          }
+        ],
+        "query": "bound",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/Braynexservices/nigeria-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Read-only MCP server over bounded.tools's Sigstore-verified static API (stdio).",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.bounded-systems/bounded-tools-mcp",
+        "packages": [
+          {
+            "identifier": "@bounded-systems/bounded-tools-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": "npx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.0"
+          }
+        ],
+        "query": "bound",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/bounded-systems/bounded-tools-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "MCP server for Google Docs with verified writes \u2014 every mutation returns before/after proof.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.michaelrobertsutton/verified-googledocs-mcp",
+        "packages": [
+          {
+            "identifier": "verified-googledocs-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "uvx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.0"
+          }
+        ],
+        "query": "verified",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/michaelrobertsutton/verified-googledocs-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Semantic patent search & analysis: find, compare, and analyze patents by meaning.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.findip/patent-search",
+        "packages": [],
+        "query": "find",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.findip.ai"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Verified discount & referral codes for crypto exchanges, cards and more \u2014 tested first-hand.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "codes.find/verified-codes",
+        "packages": [],
+        "query": "verified",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://find.codes/api/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Find a food pantry near a US location (ZIP or City, ST) from ~17,000 pantries. Free.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.0xpi.pantrypos/find-food-pantry",
+        "packages": [],
+        "query": "find",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://pantrypos.0xpi.com/mcp-pantry"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Permission boundary receipts for ChatGPT agents.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.clauxel.agentdataboundary/agentdataboundary-mcp",
+        "packages": [],
+        "query": "bound",
+        "remotes": [
+          {
+            "required_headers": [
+              "Authorization"
+            ],
+            "type": "streamable-http",
+            "url": "https://agentdataboundary.clauxel.com/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/clauxel/agent-data-boundary-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Find federal and public grants a business may qualify for, with eligibility and links.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.dropwatchhq/grant-finder",
+        "packages": [],
+        "query": "find",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://qualify.dropwatchhq.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Contradiction-verified, freshness-SLA'd signed feed: per-record status + as-of date + receipt.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.dropwatchhq/verified-feed",
+        "packages": [],
+        "query": "verified",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://verified.dropwatchhq.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "FindAgency HQ: the site's own MCP server \u2014 dataset; every answer cites the site.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.findagencyhq/site",
+        "packages": [],
+        "query": "find",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://findagencyhq.com/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/joeetdev/venture-estate"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Look up a FindMeTool page URL. Tool input stays in the browser.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.findmetool/lookup",
+        "packages": [],
+        "query": "find",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://findmetool.com/mcp"
+          }
+        ],
+        "repository": {
+          "id": "1301307021",
+          "source": "github",
+          "url": "https://github.com/findmetool/findmetool"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Freight Forwarder Finder: the site's own MCP server \u2014 compare, enquiry (enquiry = a human...",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.freightforwarderfinder/site",
+        "packages": [],
+        "query": "find",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://freightforwarderfinder.com/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/joeetdev/venture-estate"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Verified Hamptons & North Fork data: open now, events, beaches, permits, closures.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.hamptonsverified/hamptons-verified",
+        "packages": [],
+        "query": "verified",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://hamptonsverified.com/api/ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "6.400.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Find a vetted, licensed U.S. locksmith and request a quote or booking.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.hirelocksmiths/locksmith-finder",
+        "packages": [],
+        "query": "find",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://hirelocksmiths-mcp.onrender.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.5.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Immigration Adviser Finder: the site's own MCP server \u2014 dataset, enquiry, entities (enquiry = a...",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.immigrationadviserfinder/site",
+        "packages": [],
+        "query": "find",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://immigrationadviserfinder.com/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/joeetdev/venture-estate"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Hire evidence-verified home-service contractors. Confirmed-job reviews only; rank is never buyable.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.ironcladverified/verified",
+        "packages": [],
+        "query": "verified",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://ironcladverified.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Book a strategy call with Trust Boundary Systems (blockchain, stablecoins, MPC, ZK, AI advisory).",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.trustboundarysystems/bookings",
+        "packages": [],
+        "query": "bound",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.trustboundarysystems.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.2.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Turn inbound email into a webhook \u2014 verify, parse, route, and store incoming messages.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "dev.mailkite/inbound-email",
+        "packages": [],
+        "query": "bound",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.mailkite.dev/mcp?ref=inbound-email"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/mailkite/mailkite-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.12.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "UK administrative boundary data from OS Boundary Line: name search, point lookup, GeoJSON geometries",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.danielinniss/boundr",
+        "packages": [],
+        "query": "bound",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.boundr.dev/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/danielinniss/boundr"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.1.0",
+        "zero_cost_eligible": true
+      }
+    ],
+    "effect": "Find the VERIFIED_BOUND_CAPABILITY whose source type is pypi",
+    "results": [
+      {
+        "binding_performed": false,
+        "candidate_count": 30,
+        "candidates": [
+          {
+            "archive_sha256": "14c9c9b8ffabefeeeeba02fc1953fbeb758da195052326a31775a930f4606170",
+            "binding_kind": "apt",
+            "description": "Command line utility to find ip.access compatible BTS",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "abisip-find",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.9.0-3build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "23bb5365162dce84ddeb31c27bf62287ce802ee35639cbf72e0b8b58390f969b",
+            "binding_kind": "apt",
+            "description": "quick access to project files in Emacs",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "elpa-find-file-in-project",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.2.0-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "2f4f1bf881e3e967f7ef3da0b757638f4b0db5227f21b2ac0aaa89ae76e6672d",
+            "binding_kind": "apt",
+            "description": "Simple, fast and user-friendly alternative to find",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "fd-find",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "9.0.0-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "a2681d2cfc4191e6c0214d4e8c491ea0ebecbfef17fd579e947d43a6f1995859",
+            "binding_kind": "apt",
+            "description": "ES2015 Array",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "node-array-find-index",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.0.2+~1.0.0-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "04644cc1abd481bc6e815f21439d41deff076d82dd23a833264aee775062cdc0",
+            "binding_kind": "apt",
+            "description": "finds the common standard cache directory",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "node-find-cache-dir",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.3.2+~3.2.1-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "b363968365a95f7047a0086031252191c9493313b36a884bf49837a702842b2a",
+            "binding_kind": "apt",
+            "description": "Node.js module to get the closest package.json",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "node-find-root",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.1.0~11.10.7+ds1+~cs8.3.3-4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "643cbf4a12639c52e864344798eda7fab249eedaa137a7b85ca754efd51d633a",
+            "binding_kind": "apt",
+            "description": "Find a file by walking up parent directories",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "node-find-up",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.3.0-7",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "4b497bb5b804153927365830e42b3cd371bd2e2b65b8b93daca0e20c6610b545",
+            "binding_kind": "apt",
+            "description": "Get a lazy list of a directory tree",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "raku-file-find",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.2.0-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "dab1d789ec97e842b121864ffc4c3532d81c66b5810e5623c6e839a7e9dfe8ea",
+            "binding_kind": "apt",
+            "description": "specialized spell-checker that finds incorrect indefinite articles",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "anorack",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.2.8-0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "2d69c082ab93ab23e023e015d59c8ddafee239656adae670a2fbc66438c140ad",
+            "binding_kind": "apt",
+            "description": "Find RFI in radio astronomical observations",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "aoflagger",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "3.4.0-2build4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "9d901ae57b2f690dbec8edfc48dad67f14d331fb523ad93c75811b74d4a28887",
+            "binding_kind": "apt",
+            "description": "Breadth-first version of find(1)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "bfs",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "3.1.2-1build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "84a7599334063b640c35f241286c8a97b0ea5bd3a3e02e7a8c471b20b399c92a",
+            "binding_kind": "apt",
+            "description": "Find the crystals",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "black-box",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.4.8-4build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "4549519b89b10fab8c18e1ed8d3638b25e60eeb52f8a62618104f62125cc0de6",
+            "binding_kind": "apt",
+            "description": "Try to find a password of a LUKS encrypted volume",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "bruteforce-luks",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.4.0-4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d1529e1d9f77bc732b3133cea1543dbd42fa5e09dee8ed4d17528ccb79495cfb",
+            "binding_kind": "apt",
+            "description": "try to find the passphrase for files encrypted with OpenSSL",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "bruteforce-salted-openssl",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.4.2-4build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "7fa952fec1608e9f71fcb5dc54ea466353555df974229b51e14dfbdeb00b647e",
+            "binding_kind": "apt",
+            "description": "try to find the password of an encrypted wallet file",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "bruteforce-wallet",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.5.3-6build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "cc1c7cf81249cf261b3c53637c0b3e6216e6c7dfa68b814db58becffa2d3b6b4",
+            "binding_kind": "apt",
+            "description": "GUI to find and choose locale characters",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "budgie-quickchar",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.8.0-1build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "110bce61483de1fd566eb64b74e208e66697a65f2965252e455d3a8f67deb0f7",
+            "binding_kind": "apt",
+            "description": "Find inadequately-tested code that can be removed without any tests failing",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "cargo-mutants",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "23.10.0-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "45f2a50141c982eeeda2658faacd38421f2bc7aafcafe166c47da03e37144fff",
+            "binding_kind": "apt",
+            "description": "Finds typographic errors in LaTeX",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "chktex",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.7.8-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "f11e2160fad4f18788f880706c8a7fd186ef4123074c234f2bb1776ca85b213b",
+            "binding_kind": "apt",
+            "description": "Profile OpenCL devices to find peak capacities",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "clpeak",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.1.2-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "bb059610e858e66661cea585ef01a37c33e917a2be2abef257fcdd9056a87109",
+            "binding_kind": "apt",
+            "description": "Find and fix common misspellings in text files",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "codespell",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "2.2.6-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "77bf11449239c7a7a8739d1d7ae6d13d3984aff7e89139dd7a1e417869aaac97",
+            "binding_kind": "apt",
+            "description": "Finding Code that Counts with Causal Profiling",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "coz-profiler",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.2.2-2build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "2e348ad82c5d3c0ba34e84f1ee2d8e4e2f9220cc7d0411be8a7b3e36e4bab9ce",
+            "binding_kind": "apt",
+            "description": "program that can find unused packages, e.g. libraries",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "deborphan",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.7.35",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "683df61a27ce0486ca6c27b9e8f2f7808300b564097ad2f5b608eb10d31f3085",
+            "binding_kind": "apt",
+            "description": "Find and remove unnecessary includes in C or C++ source files",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "deheader",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.10-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "dc0c602887813c5f17834ccc0e4d5a8a42cb79aadafe6b9f0a5cc7715b8fb331",
+            "binding_kind": "apt",
+            "description": "find windows and perform actions on them",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "devilspie",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.23-2build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "82204dfd1d12380cd149efccfefe1dc7df51290278b135e3c870b574a51b60b2",
+            "binding_kind": "apt",
+            "description": "Method to find rearrangements in long DNA reads relative to a genome seq",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "dnarrange",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.5.3-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "e179edc7529ab805be2007d39f49beeb1ddcd1f44214e66f22361f11197b2083",
+            "binding_kind": "apt",
+            "description": "DNS cache - tool for finding addresses of Internet hosts",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "dnscache",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1:1.05-15ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "97821e0a7e4ea03f49c564a114c552aa655a543785b0fb30608af8db3a0e4ab7",
+            "binding_kind": "apt",
+            "description": "Duplicate file finder",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "duff",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.5.2-1.1build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "b47ed8d53844045ad0114fe606803a0ebeafaf4284d62da6ed9f2a22a7be04ac",
+            "binding_kind": "apt",
+            "description": "GUI tool to find duplicate files in a system",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "dupeguru",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "4.3.1-4build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "54eb82f35709f6334488fd1722624ffc55a981101d6d1704a1216501b1812052",
+            "binding_kind": "apt",
+            "description": "find callers of elisp functions or macros",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "elpa-elisp-refs",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.5-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "51981b90fac8eca9f4769a3f6925332fb0b26a57010e034174486181966f2411",
+            "binding_kind": "apt",
+            "description": "Emacs Lisp regexp mistake finder",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "find"
+            ],
+            "name": "elpa-relint",
+            "packages": [],
+            "query": "find",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.24+repack-1",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Find the VERIFIED_BOUND_CAPABILITY whose source type is pypi",
+        "errors": [],
+        "queries": [
+          "find",
+          "verified",
+          "bound",
+          "whose"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "APT_CATALOG",
+        "source_url": null
+      },
+      {
+        "binding_performed": false,
+        "candidate_count": 77,
+        "candidates": [
+          {
+            "description": "FindAgency HQ: the median advertised marketing retainer starting price per month, read from...",
+            "is_latest": true,
+            "name": "com.findagencyhq/agency-pricing-index",
+            "packages": [
+              {
+                "identifier": "@ellul-estate/findagencyhq-com-agency-pricing-index-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.0"
+              }
+            ],
+            "query": "find",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/joeetdev/venture-estate"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Nigerian admin boundaries (state/LGA/ward): centroid, bbox, reverse-geocode. GRID3, keyless.",
+            "is_latest": true,
+            "name": "io.github.Braynexservices/nigeria-grid3-boundaries",
+            "packages": [
+              {
+                "identifier": "@braynexservices/nigeria-mcp-grid3-boundaries",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.1"
+              }
+            ],
+            "query": "bound",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Braynexservices/nigeria-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Read-only MCP server over bounded.tools's Sigstore-verified static API (stdio).",
+            "is_latest": true,
+            "name": "io.github.bounded-systems/bounded-tools-mcp",
+            "packages": [
+              {
+                "identifier": "@bounded-systems/bounded-tools-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": "npx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.0"
+              }
+            ],
+            "query": "bound",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/bounded-systems/bounded-tools-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP server for Google Docs with verified writes \u2014 every mutation returns before/after proof.",
+            "is_latest": true,
+            "name": "io.github.michaelrobertsutton/verified-googledocs-mcp",
+            "packages": [
+              {
+                "identifier": "verified-googledocs-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "uvx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.0"
+              }
+            ],
+            "query": "verified",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/michaelrobertsutton/verified-googledocs-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Semantic patent search & analysis: find, compare, and analyze patents by meaning.",
+            "is_latest": true,
+            "name": "ai.findip/patent-search",
+            "packages": [],
+            "query": "find",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.findip.ai"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Verified discount & referral codes for crypto exchanges, cards and more \u2014 tested first-hand.",
+            "is_latest": true,
+            "name": "codes.find/verified-codes",
+            "packages": [],
+            "query": "verified",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://find.codes/api/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Find a food pantry near a US location (ZIP or City, ST) from ~17,000 pantries. Free.",
+            "is_latest": true,
+            "name": "com.0xpi.pantrypos/find-food-pantry",
+            "packages": [],
+            "query": "find",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://pantrypos.0xpi.com/mcp-pantry"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Permission boundary receipts for ChatGPT agents.",
+            "is_latest": true,
+            "name": "com.clauxel.agentdataboundary/agentdataboundary-mcp",
+            "packages": [],
+            "query": "bound",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://agentdataboundary.clauxel.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/clauxel/agent-data-boundary-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Find federal and public grants a business may qualify for, with eligibility and links.",
+            "is_latest": true,
+            "name": "com.dropwatchhq/grant-finder",
+            "packages": [],
+            "query": "find",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://qualify.dropwatchhq.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Contradiction-verified, freshness-SLA'd signed feed: per-record status + as-of date + receipt.",
+            "is_latest": true,
+            "name": "com.dropwatchhq/verified-feed",
+            "packages": [],
+            "query": "verified",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://verified.dropwatchhq.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "FindAgency HQ: the site's own MCP server \u2014 dataset; every answer cites the site.",
+            "is_latest": true,
+            "name": "com.findagencyhq/site",
+            "packages": [],
+            "query": "find",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://findagencyhq.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/joeetdev/venture-estate"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Look up a FindMeTool page URL. Tool input stays in the browser.",
+            "is_latest": true,
+            "name": "com.findmetool/lookup",
+            "packages": [],
+            "query": "find",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://findmetool.com/mcp"
+              }
+            ],
+            "repository": {
+              "id": "1301307021",
+              "source": "github",
+              "url": "https://github.com/findmetool/findmetool"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Freight Forwarder Finder: the site's own MCP server \u2014 compare, enquiry (enquiry = a human...",
+            "is_latest": true,
+            "name": "com.freightforwarderfinder/site",
+            "packages": [],
+            "query": "find",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://freightforwarderfinder.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/joeetdev/venture-estate"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Verified Hamptons & North Fork data: open now, events, beaches, permits, closures.",
+            "is_latest": true,
+            "name": "com.hamptonsverified/hamptons-verified",
+            "packages": [],
+            "query": "verified",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://hamptonsverified.com/api/ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "6.400.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Find a vetted, licensed U.S. locksmith and request a quote or booking.",
+            "is_latest": true,
+            "name": "com.hirelocksmiths/locksmith-finder",
+            "packages": [],
+            "query": "find",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://hirelocksmiths-mcp.onrender.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.5.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Immigration Adviser Finder: the site's own MCP server \u2014 dataset, enquiry, entities (enquiry = a...",
+            "is_latest": true,
+            "name": "com.immigrationadviserfinder/site",
+            "packages": [],
+            "query": "find",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://immigrationadviserfinder.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/joeetdev/venture-estate"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Hire evidence-verified home-service contractors. Confirmed-job reviews only; rank is never buyable.",
+            "is_latest": true,
+            "name": "com.ironcladverified/verified",
+            "packages": [],
+            "query": "verified",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://ironcladverified.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Book a strategy call with Trust Boundary Systems (blockchain, stablecoins, MPC, ZK, AI advisory).",
+            "is_latest": true,
+            "name": "com.trustboundarysystems/bookings",
+            "packages": [],
+            "query": "bound",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.trustboundarysystems.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.2.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Turn inbound email into a webhook \u2014 verify, parse, route, and store incoming messages.",
+            "is_latest": true,
+            "name": "dev.mailkite/inbound-email",
+            "packages": [],
+            "query": "bound",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.mailkite.dev/mcp?ref=inbound-email"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/mailkite/mailkite-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.12.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "UK administrative boundary data from OS Boundary Line: name search, point lookup, GeoJSON geometries",
+            "is_latest": true,
+            "name": "io.github.danielinniss/boundr",
+            "packages": [],
+            "query": "bound",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.boundr.dev/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/danielinniss/boundr"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Verified AI free tiers plus source-backed agent and MCP discovery monitoring.",
+            "is_latest": true,
+            "name": "io.github.f-tiger/verified-ai-free-tiers",
+            "packages": [],
+            "query": "verified",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://baipiaoji.com/api/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.13.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Viridis Verified: wrap any MCP server with tamper-evident delivery receipts + metered fees.",
+            "is_latest": true,
+            "name": "io.github.jdhart81/agent-verified-relay",
+            "packages": [],
+            "query": "verified",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.viridisconservation.com/verified/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/jdhart81/viridis-agent-fleet"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "geoBoundaries MCP \u2014 open database of political administrative boundaries.",
+            "is_latest": true,
+            "name": "io.github.pipeworx-io/geoboundaries",
+            "packages": [],
+            "query": "bound",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://gateway.pipeworx.io/geoboundaries/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/pipeworx-io/mcp-geoboundaries"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Search and vet SEC-registered financial advisors: profiles, disclosures, firm fees, credentials.",
+            "is_latest": true,
+            "name": "com.advisorfinder/mcp",
+            "packages": [
+              {
+                "identifier": "advisorfinder-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "2.1.0"
+              }
+            ],
+            "query": "find",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.advisorfinder.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/drew-keever/advisorfinder-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "2.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "AI contract analysis with partner-level redlines, OOXML Track Changes, and risk analysis.",
+            "is_latest": true,
+            "name": "com.bitsbound/contract-analysis",
+            "packages": [
+              {
+                "identifier": "@bitsbound/mcp-server",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.6"
+              }
+            ],
+            "query": "bound",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/taytrom/bitsbound-mcp-server"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "1.0.6",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "AI contract automation with partner-level redlines, OOXML Track Changes, and risk analysis.",
+            "is_latest": true,
+            "name": "com.bitsbound/contract-automation",
+            "packages": [
+              {
+                "identifier": "@bitsbound/mcp-server",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.8"
+              }
+            ],
+            "query": "bound",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/taytrom/bitsbound-mcp-server"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "1.0.8",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Evidence-based supplement guidance: clinical doses, form comparisons, interactions, cost-per-dose.",
+            "is_latest": true,
+            "name": "com.verifiedsupplementdata/supplement-advisor-mcp",
+            "packages": [
+              {
+                "identifier": "supplement-advisor-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.1.0"
+              }
+            ],
+            "query": "verified",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/erinheit451/supplement-advisor-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "1.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Checks agent traces for evidence-readiness: verifies evidence is present, not that it is true.",
+            "is_latest": true,
+            "name": "io.github.BrienBounded/evr",
+            "packages": [
+              {
+                "identifier": "evidence-readiness",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "uvx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.2"
+              }
+            ],
+            "query": "bound",
+            "remotes": [],
+            "repository": {
+              "id": "1330042571",
+              "source": "github",
+              "url": "https://github.com/evidence-readiness/spec"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.1.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Physical Layer Linter: validates RF and radar calculations against hard physical limits.",
+            "is_latest": true,
+            "name": "io.github.JonesRobM/physbound",
+            "packages": [
+              {
+                "identifier": "physbound",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.3.0"
+              }
+            ],
+            "query": "bound",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/JonesRobM/physbound"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.3.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Search and retrieve scholarly metadata from the Crossref REST API",
+            "is_latest": true,
+            "name": "io.github.SMABoundless/crossref",
+            "packages": [
+              {
+                "identifier": "crossref-mcp-server",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "uvx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.0"
+              }
+            ],
+            "query": "bound",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/SMABoundless/crossref-mcp-server.git"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Find the VERIFIED_BOUND_CAPABILITY whose source type is pypi",
+        "errors": [],
+        "queries": [
+          "find",
+          "verified",
+          "bound",
+          "whose"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "OFFICIAL_MCP_REGISTRY",
+        "source_url": "https://registry.modelcontextprotocol.io"
+      }
+    ],
+    "schema": "PROJECT_BRAIN_FEDERATED_CAPABILITY_DISCOVERY_V1",
+    "sources": [
+      "APT_CATALOG",
+      "OFFICIAL_MCP_REGISTRY"
+    ]
+  },
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
+  "source": "FEDERATED_CAPABILITY_DISCOVERY_FALLBACK",
+  "targeted_acquisition_error": "AutoAcquisitionFailure:NO_LOW_FRICTION_APT_CLI_CANDIDATE"
+}

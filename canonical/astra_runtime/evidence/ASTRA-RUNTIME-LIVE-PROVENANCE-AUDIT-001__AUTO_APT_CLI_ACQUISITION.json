@@ -1,0 +1,490 @@
+{
+  "attempts": [
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "14c9c9b8ffabefeeeeba02fc1953fbeb758da195052326a31775a930f4606170",
+        "executables": [
+          {
+            "executable": "/usr/bin/abisip-find",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "abisip-find (C) 2009-2010 by Harald Welte\n            (C) 2017 by sysmocom - s.f.m.c. GmbH\nThis is FREE SOFTWARE with ABSOLUTELY NO WARRANTY\n\n\nUsage: abisip-find [-l] [<interface-name>]\n  <interface-name>  Specify the outgoing network interface,\n                    e.g. 'eth0'\n  -b --bind-ip <ip> Specify the local IP to bind to,\n                    e.g. '192.168.1.10'\n  -i --interval <s> Send broadcast frames every <s> seconds.\n  -l --list-view    Instead of printing received responses,\n                    output a sorted list of currently present\n                    base stations and change events.\n  -t --timeout <s>  Drop base stations after <s> seconds of\n                    receiving no more replies from it.\n                    Implies --list-view.\n  -j --format-json  Print BTS information using json syntax."
+              }
+            ]
+          }
+        ],
+        "package": "abisip-find",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.9.0-3build2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "14c9c9b8ffabefeeeeba02fc1953fbeb758da195052326a31775a930f4606170",
+        "binding_kind": "apt",
+        "description": "Command line utility to find ip.access compatible BTS",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "abisip-find",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.9.0-3build2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "23bb5365162dce84ddeb31c27bf62287ce802ee35639cbf72e0b8b58390f969b",
+        "executables": [],
+        "package": "elpa-find-file-in-project",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "6.2.0-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "23bb5365162dce84ddeb31c27bf62287ce802ee35639cbf72e0b8b58390f969b",
+        "binding_kind": "apt",
+        "description": "quick access to project files in Emacs",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "elpa-find-file-in-project",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.2.0-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "2f4f1bf881e3e967f7ef3da0b757638f4b0db5227f21b2ac0aaa89ae76e6672d",
+        "executables": [
+          {
+            "executable": "/usr/bin/fdfind",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "A program to find entries in your filesystem\n\nUsage: fdfind [OPTIONS] [pattern] [path]...\n\nArguments:\n  [pattern]\n          the search pattern which is either a regular expression (default) or a glob pattern (if\n          --glob is used). If no pattern has been specified, every entry is considered a match. If\n          your pattern starts with a dash (-), make sure to pass '--' first, or it will be\n          considered as a flag (fd -- '-foo').\n\n  [path]...\n          The directory where the filesystem search is rooted (optional). If omitted, search the\n          current working directory.\n\nOptions:\n  -H, --hidden\n          Include hidden directories and files in the search results (default: hidden files and\n          directories are skipped). Files and directories are considered to be hidden if their\n          name starts with a `.` sign (dot). Any files or directories that are ignored due to the\n          rules described by --no-ignore are still ignored unless otherwise specified. The flag\n          can be overridden with --no-hidden.\n\n  -I, --no-ignore\n          Show search results from files and directories that would otherwise be ignored by\n          '.gitignore', '.ignore', '.fdignore', the global ignore file, or the default rule that\n          excludes .git/. The flag can be overridden with --ignore.\n\n      --no-ignore-vcs\n          Show search results from '.git/' folders and files and directories that would otherwise\n          be ignored by '.gitignore' files. The flag can be overridden with --ignore-vcs.\n\n      --no-require-git\n          Do not require a git repository to respect gitignores. By default, fd will only respect\n          global gitignore rules, .gitignore rules, and local exclude rules if fd detects that you\n          are searching inside a git repository. This flag allows you to relax this restriction\n          such that fd will respect all git related ignore rules regardless of whether you're\n          searching in a git repository or not.\n          \n          This flag can be disabled with --require-git.\n\n      --no-ignore-parent\n          Show search results from files and directories that would otherwise be ignored by\n          '.gitignore', '.ignore', or '.fdignore' files in parent directories.\n\n  -u, --unrestricted...\n          Perform an unrestricted search, including ignored and hidden files. This is an alias for\n          '--no-ignore --hidden'.\n\n  -s, --case-sensitive\n          Perform a case-sensitive search. By default, fd uses case-insensitive searches, unless\n          the pattern contains an uppercase character (smart case).\n\n  -i, --ignore-case\n          Perform a case-insensitive search. By default, fd uses case-insensitive searches, unless\n          the pattern contains an uppercase character (smart case).\n\n  -g, --glob\n          Perform a glob-based search instead of a regular expression search.\n\n      --regex\n          Perform a regular-expression based search (default). This can be used to override\n          --glob.\n\n  -F, --fixed-strings\n          Treat the pattern as a literal string instead of a regular expression. Note that this\n          also performs substring comparison. If you want to match on an exact filename, consider\n          using '--glob'.\n\n      --and <pattern>\n          Add additional required search patterns, all of which must be matched. Multiple\n          additional patterns can be specified. The patterns are regular expressions, unless\n          '--glob' or '--fixed-strings' is used.\n\n  -a, --absolute-path\n          Shows the full path starting from the root as opposed to relative paths. The flag can be\n          overridden with --relative-path.\n\n  -l, --list-details\n          Use a detailed listing format like 'ls -l'. This is basically an alias for '--exec-batch\n          ls -l' with some additional 'ls' options. This can be used to see more metadata, to show\n          symlink targets and to achieve a deterministic sort order.\n\n  -L, --follow\n          By default, fd does not descend into symlinked directories. Using this flag, symbolic\n          links are also traversed. Flag can be overridden with --no-follow.\n\n  -p, --full-path\n          By default, the search pattern is only matched against the filename (or directory name).\n          Using this flag, the pattern is matched against the full (absolute) path. Example:\n            fd --glob -p '**/.git/config'\n\n  -0, --print0\n          Separate search results by the null character (instead of newlines). Useful for piping\n          results to 'xargs'.\n\n  -d, --max-depth <depth>\n          Limit the directory traversal to a given depth. By default, there is no limit on the\n          search depth.\n\n      --min-depth <depth>\n          Only show search results starting at the given depth. See also: '--max-depth' and\n          '--exact-depth'\n\n      --exact-depth <depth>\n          Only show search results at the exact given depth. This is an alias for '--min-depth\n          <depth> --max-depth <depth>'.\n\n  -E, --exclude <pattern>\n          Exclude files/directories that match the given glob pattern. This overrides any other\n          ignore logic. Multiple exclude patterns can be specified.\n          \n          Examples: \n            --exclude '*.pyc' \n            --exclude node_modules\n\n      --prune\n          Do not traverse into directories that match the search criteria. If you want to exclude\n          specific directories, use the '--exclude=\u2026' option.\n\n  -t, --type <filetype>\n          Filter the search by type: \n            'f' or 'file':         regular files \n            'd' or 'directory':    directories \n            'l' or 'symlink':      symbolic links \n            's' or 'socket':       socket \n            'p' or 'pipe':         named pipe (FIFO) \n            'b' or 'block-device': block device \n            'c' or 'char-device':  character device \n          \n            'x' or 'executable':   executables \n            'e' or 'empty':        empty files or directories\n          \n          This option can be specified more than once to include multiple file types. Searching\n          for '--type file --type symlink' will show both regular files as well as symlinks. Note\n          that the 'executable' and 'empty' filters work differently: '--type executable' implies\n          '--type file' by default. And '--type empty' searches for empty files and directories,\n          unless either '--type file' or '--type directory' is specified in addition.\n          \n          Examples: \n            - Only search for files: \n                fd --type file \u2026 \n                fd -tf \u2026 \n            - Find both files and symlinks \n                fd --type file --type symlink \u2026 \n                fd -tf -tl \u2026 \n            - Find executable files: \n                fd --type executable \n                fd -tx \n            - Find empty files: \n                fd --type empty --type file \n                fd -te -tf \n            - Find empty directories: \n                fd --type empty --type directory \n                fd -te -td\n\n  -e, --extension <ext>\n          (Additionally) filter search results by their file extension. Multiple allowable file\n          extensions can be specified.\n          \n          If you want to search for files without extension, you can use the regex '^[^.]+$' as a\n          normal search pattern.\n\n  -S, --size <size>\n          Limit results based on the size of files using the format <+-><NUM><UNIT>.\n             '+': file size must be greater than or equal to this\n             '-': file size must be less than or equal to this\n          \n          If neither '+' nor '-' is specified, file size must be exactly equal to this.\n             'NUM':  The numeric size (e.g. 500)\n             'UNIT': The units for NUM. They are not case-sensitive.\n          Allowed unit values:\n              'b':  bytes\n              'k':  kilobytes (base ten, 10^3 = 1000 bytes)\n              'm':  megabytes\n              'g':  gigabytes\n              't':  terabytes\n              'ki': kibibytes (base two, 2^10 = 1024 bytes)\n              'mi': mebibytes\n              'gi': gibibytes\n              'ti': tebibytes\n\n      --changed-within <date|dur>\n          Filter results based on the file modification time. Files with modification times\n          greater than the argument are returned. The argument can be provided as a specific point\n          in time (YYYY-MM-DD HH:MM:SS) or as a duration (10h, 1d, 35min). If the time is not\n          specified, it defaults to 00:00:00. '--change-newer-than', '--newer', or\n          '--changed-after' can be used as aliases.\n          \n          Examples: \n              --changed-within 2weeks \n              --change-newer-than '2018-10-27 10:00:00' \n              --newer 2018-10-27 \n              --changed-after 1day\n\n      --changed-before <date|dur>\n          Filter results based on the file modification time. Files with modification times less\n          than the argument are returned. The argument can be provided as a specific point in time\n          (YYYY-MM-DD HH:MM:SS) or as a duration (10h, 1d, 35min). '--change-older-than' or\n          '--older' can be used as aliases.\n          \n          Examples: \n              --changed-before '2018-10-27 10:00:00' \n              --change-older-than 2weeks \n              --older 2018-10-27\n\n  -o, --owner <user:group>\n          Filter files by their user and/or group. Format: [(user|uid)][:(group|gid)]. Either side\n          is optional. Precede either side with a '!' to exclude files instead.\n          \n          Examples: \n              --owner john \n              --owner :students \n              --owner '!john:students'\n\n  -x, --exec <cmd>...\n          Execute a command for each search result in parallel (use --threads=1 for sequential\n          command execution). There is no guarantee of the order commands are executed in, and the\n          order should not be depended upon. All positional arguments following --exec are"
+              }
+            ]
+          }
+        ],
+        "package": "fd-find",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "9.0.0-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "2f4f1bf881e3e967f7ef3da0b757638f4b0db5227f21b2ac0aaa89ae76e6672d",
+        "binding_kind": "apt",
+        "description": "Simple, fast and user-friendly alternative to find",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "fd-find",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "9.0.0-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "a2681d2cfc4191e6c0214d4e8c491ea0ebecbfef17fd579e947d43a6f1995859",
+        "executables": [],
+        "package": "node-array-find-index",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.0.2+~1.0.0-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "a2681d2cfc4191e6c0214d4e8c491ea0ebecbfef17fd579e947d43a6f1995859",
+        "binding_kind": "apt",
+        "description": "ES2015 Array",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "node-array-find-index",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.0.2+~1.0.0-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "04644cc1abd481bc6e815f21439d41deff076d82dd23a833264aee775062cdc0",
+        "executables": [],
+        "package": "node-find-cache-dir",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "3.3.2+~3.2.1-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "04644cc1abd481bc6e815f21439d41deff076d82dd23a833264aee775062cdc0",
+        "binding_kind": "apt",
+        "description": "finds the common standard cache directory",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "node-find-cache-dir",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.3.2+~3.2.1-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "b363968365a95f7047a0086031252191c9493313b36a884bf49837a702842b2a",
+        "executables": [],
+        "package": "node-find-root",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.1.0~11.10.7+ds1+~cs8.3.3-4"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "b363968365a95f7047a0086031252191c9493313b36a884bf49837a702842b2a",
+        "binding_kind": "apt",
+        "description": "Node.js module to get the closest package.json",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "node-find-root",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.1.0~11.10.7+ds1+~cs8.3.3-4",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "643cbf4a12639c52e864344798eda7fab249eedaa137a7b85ca754efd51d633a",
+        "executables": [],
+        "package": "node-find-up",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "6.3.0-7"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "643cbf4a12639c52e864344798eda7fab249eedaa137a7b85ca754efd51d633a",
+        "binding_kind": "apt",
+        "description": "Find a file by walking up parent directories",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "node-find-up",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.3.0-7",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "4b497bb5b804153927365830e42b3cd371bd2e2b65b8b93daca0e20c6610b545",
+        "executables": [],
+        "package": "raku-file-find",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.2.0-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "4b497bb5b804153927365830e42b3cd371bd2e2b65b8b93daca0e20c6610b545",
+        "binding_kind": "apt",
+        "description": "Get a lazy list of a directory tree",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "raku-file-find",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.2.0-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "dab1d789ec97e842b121864ffc4c3532d81c66b5810e5623c6e839a7e9dfe8ea",
+        "executables": [
+          {
+            "executable": "/usr/bin/anorack",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "usage: anorack [-h] [--version] [--ipa] [FILE ...]\n\n\"a\" vs \"an\" checker\n\npositional arguments:\n  FILE        file to check (default: stdin)\n\noptions:\n  -h, --help  show this help message and exit\n  --version   show version information and exit\n  --ipa       use IPA instead of phoneme mnemonics"
+              }
+            ]
+          }
+        ],
+        "package": "anorack",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.2.8-0.1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 18.0,
+        "archive_sha256": "dab1d789ec97e842b121864ffc4c3532d81c66b5810e5623c6e839a7e9dfe8ea",
+        "binding_kind": "apt",
+        "description": "specialized spell-checker that finds incorrect indefinite articles",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "anorack",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.2.8-0.1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "2d69c082ab93ab23e023e015d59c8ddafee239656adae670a2fbc66438c140ad",
+        "executables": [
+          {
+            "executable": "/usr/bin/aoflagger",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 10,
+                "text": "Incorrect usage; parameter \"--help\" not understood."
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/aoqplot",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Syntax: aoqplot [<options>] [<observation>]\n\n<observation> can be a measurement set for opening a single observation.\nTo get statistics for a (remote) observation consisting of multiple measurement\nsets, specify a measurement set specifier instead (generally a .ref, .vds\n.gvds or .gds file).\n\nOptions can be:\n-help\n  Show syntax help.\n-version\n  Print version info and exit.\n-v\n  Verbose logging.\n-save [filename prefix] [statistic name]\n  Save every plot for the given kind of statistic as a PDF file. This\n  will prevent the GUI from opening. You can repeat this parameter to save\n  multiple kinds at once. A list of allowed names can be retrieved with\n  'aoquality liststats'. Some common ones are: StandardDeviation, Variance, Mean,\n  RFIPercentage, RFIRatio, Count.\n\nAOQPlot is part of the AOFlagger software package, written by Andr\u00e9 Offringa\n  (offringa@gmail.com). This AOQPlot belongs to AOFlagger 3.4 (2023-10-06)"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/aoquality",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 255,
+                "text": "Unknown action '--help'.\n\nSyntax: /usr/bin/aoquality <action> [options]\n\nPossible actions:\n\thelp        - Get more info about an action (usage: '/usr/bin/aoquality help <action>')\n\tcollect     - Processes the entire measurement set, collects the statistics\n\t              and writes them in the quality tables.\n\tcombine     - Combine several tables.\n\thistogram   - Various histogram actions.\n\tliststats   - Display a list of possible statistic kinds.\n\tquery_a     - Query per antenna.\n\tquery_b     - Query per baseline.\n\tquery_t     - Query per time step.\n\tquery_f     - Query per frequency.\n\tquery_fr    - Query a frequency range\n\tquery_g     - Query single global statistic.\n\tremove      - Remove all quality tables.\n\tsummarize   - Give a summary of the statistics currently in the quality tables.\n\tsummarizerfi- Give a summary of the rfi statistics.\n\n\nA few actions take a statistic kind. Some common statistic kinds are: StandardDeviation,\nVariance, Mean, RFIPercentage, RFIRatio, Count. These are case sensitive. Run 'aoquality liststats' for a full list."
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/rfigui",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "The RFIGui is a program to analyze the time-frequency information in radio astronomical observations.\nIt is written by Andr\u00e9 Offringa (offringa@gmail.com) and published under the GPL 3.\nThis program is part of AOFlagger 3.4 (2023-10-06)\n\nSyntax:\n  rfigui [-option1 [-option2 ...]] [measurement set]\n\nThe main window will be opened when no parameters are specified.\nPossible options:\n -help\n    Display this help message and exit.\n -version\n    Display AOFlagger version and exit.\n -v\n    Verbose logging.\n -save-baseline <filename> <antenna1> <antenna2> <band> <sequence index>\n    Save the selected baseline to the given filename. The parameter can be specified\n    multiple times to save multiple baselines in one run. When this parameter is specified,\n    the main window will not open and the program will exit after saving the requested baselines.\n -data-column <columnname>\n    Open the selected column name.\n -hide-flags / -show-flags\n    Do not (or do) plot the flag mask on top of the data. Default: plot them."
+              }
+            ]
+          }
+        ],
+        "package": "aoflagger",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "3.4.0-2build4"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 18.0,
+        "archive_sha256": "2d69c082ab93ab23e023e015d59c8ddafee239656adae670a2fbc66438c140ad",
+        "binding_kind": "apt",
+        "description": "Find RFI in radio astronomical observations",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "aoflagger",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "3.4.0-2build4",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "9d901ae57b2f690dbec8edfc48dad67f14d331fb523ad93c75811b74d4a28887",
+        "executables": [
+          {
+            "executable": "/usr/bin/bfs",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: /usr/bin/bfs [flags...] [paths...] [expression...]\n\nbfs is compatible with find, with some extensions. Flags (-H/-L/-P etc.), paths,\nand expressions may be freely mixed in any order.\n\nFlags:\n\n  -H\n      Follow symbolic links on the command line, but not while searching\n  -L\n      Follow all symbolic links\n  -P\n      Never follow symbolic links (the default)\n  -E\n      Use extended regular expressions (same as -regextype posix-extended)\n  -X\n      Filter out files with non-xargs-safe names\n  -d\n      Search in post-order (same as -depth)\n  -s\n      Visit directory entries in sorted order\n  -x\n      Don't descend into other mount points (same as -xdev)\n  -f PATH\n      Treat PATH as a path to search (useful if begins with a dash)\n  -D FLAG\n      Turn on a debugging flag (see -D help)\n  -ON\n      Enable optimization level N (default: 3)\n  -S bfs|dfs|ids|eds\n      Use breadth-first/depth-first/iterative/exponential deepening search\n      (default: -S bfs)\n  -jN\n      Search with N threads in parallel (default: number of CPUs, up to 8)\n\nOperators:\n\n  ( expression )\n\n  ! expression\n  -not expression\n\n  expression expression\n  expression -a expression\n  expression -and expression\n\n  expression -o expression\n  expression -or expression\n\n  expression , expression\n\nSpecial forms:\n\n  -exclude expression\n      Exclude all paths matching the expression from the search.\n\nOptions:\n\n  -color\n  -nocolor\n      Turn colors on or off (default: -color if outputting to a terminal,\n      -nocolor otherwise)\n  -daystart\n      Measure times relative to the start of today\n  -depth\n      Search in post-order (descendents first)\n  -files0-from FILE\n      Search the NUL ('\\0')-separated paths from FILE (- for standard input).\n  -follow\n      Follow all symbolic links (same as -L)\n  -ignore_readdir_race\n  -noignore_readdir_race\n      Whether to report an error if bfs detects that the file tree is modified\n      during the search (default: -noignore_readdir_race)\n  -maxdepth N\n  -mindepth N\n      Ignore files deeper/shallower than N\n  -mount\n      Don't descend into other mount points (same as -xdev for now, but will\n      skip mount points entirely in the future)\n  -nohidden\n      Exclude hidden files\n  -noleaf\n      Ignored; for compatibility with GNU find\n  -regextype TYPE\n      Use TYPE-flavored regexes (default: posix-basic; see -regextype help)\n  -status\n      Display a status bar while searching\n  -unique\n      Skip any files that have already been seen\n  -warn\n  -nowarn\n      Turn on or off warnings about the command line\n  -xdev\n      Don't descend into other mount points\n\nTests:\n\n  -acl\n      Find files with a non-trivial Access Control List\n  -[aBcm]min [-+]N\n      Find files accessed/Birthed/changed/modified N minutes ago\n  -[aBcm]newer FILE\n      Find files accessed/Birthed/changed/modified more recently than FILE was\n      modified\n  -[aBcm]since TIME\n      Find files accessed/Birthed/changed/modified more recently than TIME\n  -[aBcm]time [-+]N\n      Find files accessed/Birthed/changed/modified N days ago\n  -capable\n      Find files with POSIX.1e capabilities set\n  -depth [-+]N\n      Find files with depth N\n  -empty\n      Find empty files/directories\n  -executable\n  -readable\n  -writable\n      Find files the current user can execute/read/write\n  -false\n  -true\n      Always false/true\n  -fstype TYPE\n      Find files on file systems with the given TYPE\n  -gid [-+]N\n  -uid [-+]N\n      Find files owned by group/user ID N\n  -group NAME\n  -user  NAME\n      Find files owned by the group/user NAME\n  -hidden\n      Find hidden files\n  -ilname GLOB\n  -iname  GLOB\n  -ipath  GLOB\n  -iregex REGEX\n  -iwholename GLOB\n      Case-insensitive versions of -lname/-name/-path/-regex/-wholename\n  -inum [-+]N\n      Find files with inode number N\n  -links [-+]N\n      Find files with N hard links\n  -lname GLOB\n      Find symbolic links whose target matches the GLOB\n  -name GLOB\n      Find files whose name matches the GLOB\n  -newer FILE\n      Find files newer than FILE\n  -newerXY REFERENCE\n      Find files whose X time is newer than the Y time of REFERENCE.  X and Y\n      can be any of [aBcm].  Y may also be t to parse REFERENCE an explicit\n      timestamp.\n  -nogroup\n  -nouser\n      Find files owned by nonexistent groups/users\n  -path GLOB\n  -wholename GLOB\n      Find files whose entire path matches the GLOB\n  -perm [-]MODE\n      Find files with a matching mode\n  -regex REGEX\n      Find files whose entire path matches the regular expression REGEX\n  -samefile FILE\n      Find hard links to FILE\n  -since TIME\n      Find files modified since TIME\n  -size [-+]N[cwbkMGTP]\n      Find files with the given size, in 1-byte characters, 2-byte words,\n      512-byte blocks (default), or kiB/MiB/GiB/TiB/PiB\n  -sparse\n      Find files that occupy fewer disk blocks than expected\n  -type [bcdlpfswD]\n      Find files of the given type\n  -used [-+]N\n      Find files last accessed N days after they were changed\n  -xattr\n      Find files with extended attributes\n  -xattrname NAME\n      Find files with the extended attribute NAME\n  -xtype [bcdlpfswD]\n      Find files of the given type, following links when -type would not, and\n      vice versa\n\nActions:\n\n  -delete\n  -rm\n      Delete any found files (implies -depth)\n  -exec command ... {} ;\n      Execute a command\n  -exec command ... {} +\n      Execute a command with multiple files at once\n  -ok command ... {} ;\n      Prompt the user whether to execute a command\n  -execdir command ... {} ;\n  -execdir command ... {} +\n  -okdir command ... {} ;\n      Like -exec/-ok, but run the command in the same directory as the found\n      file(s)\n  -exit [STATUS]\n      Exit immediately with the given status (0 if unspecified)\n  -fls FILE\n  -fprint FILE\n  -fprint0 FILE\n  -fprintf FILE FORMAT\n      Like -ls/-print/-print0/-printf, but write to FILE instead of standard\n      output\n  -ls\n      List files like ls -dils\n  -print\n      Print the path to the found file\n  -print0\n      Like -print, but use the null character ('\\0') as a separator rather than\n      newlines\n  -printf FORMAT\n      Print according to a format string (see man find).  The additional format\n      directives %w and %Wk for printing file birth times are supported.\n  -printx\n      Like -print, but escape whitespace and quotation characters, to make the\n      output safe for xargs.  Consider using -print0 and xargs -0 instead.\n  -prune\n      Don't descend into this directory\n  -quit\n      Quit immediately\n  -version\n      Print version information\n  -help\n      Print this help message\n\nhttps://tavianator.com/projects/bfs.html"
+              }
+            ]
+          }
+        ],
+        "package": "bfs",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "3.1.2-1build1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 18.0,
+        "archive_sha256": "9d901ae57b2f690dbec8edfc48dad67f14d331fb523ad93c75811b74d4a28887",
+        "binding_kind": "apt",
+        "description": "Breadth-first version of find(1)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "bfs",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "3.1.2-1build1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "84a7599334063b640c35f241286c8a97b0ea5bd3a3e02e7a8c471b20b399c92a",
+        "executables": [],
+        "package": "black-box",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.4.8-4build1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 18.0,
+        "archive_sha256": "84a7599334063b640c35f241286c8a97b0ea5bd3a3e02e7a8c471b20b399c92a",
+        "binding_kind": "apt",
+        "description": "Find the crystals",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "find"
+        ],
+        "name": "black-box",
+        "packages": [],
+        "query": "find",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.4.8-4build1",
+        "zero_cost_eligible": true
+      }
+    }
+  ],
+  "goal": "Find the VERIFIED_BOUND_CAPABILITY whose source type is pypi",
+  "mission_id": "ASTRA-RUNTIME-LIVE-PROVENANCE-AUDIT-001",
+  "role_conditioned_discovery": null,
+  "schema": "PROJECT_BRAIN_AUTO_APT_CLI_ACQUISITION_EVIDENCE_V1",
+  "status": "NO_COMPATIBLE_CONTRACT"
+}
