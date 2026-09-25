@@ -1,0 +1,21 @@
+{
+  "blocker": {
+    "adapter": "goal",
+    "error": "RuntimeError:XLSX_COLUMNS_UNRESOLVED",
+    "mission_id": "ASTRA-RUNTIME-MULTI-SOURCE-REDUCE-001",
+    "observed_at_utc": "2026-09-25T17:18:50.800725+00:00",
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "run-multi-source-reduce",
+    "step_index": 0
+  },
+  "created_at_utc": "2026-09-25T17:18:30.235892+00:00",
+  "history": [],
+  "mission_id": "ASTRA-RUNTIME-MULTI-SOURCE-REDUCE-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_MULTI_SOURCE_REDUCE_001.json",
+  "mission_sha256": "94d057009e70f0a1b666bc6365f802794d33060522c9edda63bd7bfacb98c019",
+  "next_step": 0,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-25T17:18:50.800907+00:00"
+}

@@ -1,0 +1,9 @@
+{
+  "adapter": "goal",
+  "error": "RuntimeError:XLSX_COLUMNS_UNRESOLVED",
+  "mission_id": "ASTRA-RUNTIME-MULTI-SOURCE-REDUCE-001",
+  "observed_at_utc": "2026-09-25T17:18:50.800725+00:00",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "run-multi-source-reduce",
+  "step_index": 0
+}
