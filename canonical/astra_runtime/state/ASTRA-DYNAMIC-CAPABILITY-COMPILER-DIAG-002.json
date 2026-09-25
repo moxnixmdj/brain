@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T04:38:29.481310+00:00",
+  "created_at_utc": "2026-09-25T04:38:29.418712+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T04:38:29.481034+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/goal_compiler.py')\ns=importlib.util.spec_from_file_location('gc',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads(pathlib.Path('canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads(pathlib.Path('canonical/astra_runtime/missions/ASTRA_RUNTIME_DYNAMIC_CAPABILITY_CHOICE_001.json').read_text())['goal']\nout=m.compile_goal(goal,reg,pathlib.Path('.').resolve())\nacts=out.get('controller_actions') or []\nassert any(a.get('type')=='invoke_capability_by_runtime_value' for a in acts), acts\nassert any(a.get('type')=='assert_runtime_selected_code_decodes' for a in acts), acts\nparts=out.get('compiled_parts') or []\nassert any(p.get('mode')=='RUNTIME_SELECTED_VERIFIED_CAPABILITY' for p in parts), parts\nprint('DYNAMIC_CAPABILITY_COMPILER_V2_COMPLETE')\nPY",
+        "duration_s": 0.062,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "DYNAMIC_CAPABILITY_COMPILER_V2_COMPLETE\n"
+      },
+      "step_id": "compile-dynamic-choice",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-DYNAMIC-CAPABILITY-COMPILER-DIAG-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_DYNAMIC_CAPABILITY_COMPILER_DIAG_002.json",
+  "mission_sha256": "c3a1e6cd9eaa78b639ec87e2e1b1cc1be6b383428907294ab7aea340c25bd9d3",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T04:38:29.481050+00:00"
+}
