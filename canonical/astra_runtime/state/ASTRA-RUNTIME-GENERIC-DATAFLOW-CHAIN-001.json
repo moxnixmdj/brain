@@ -1,0 +1,21 @@
+{
+  "blocker": {
+    "adapter": "goal",
+    "error": "Blocker:MODEL_INDEPENDENT_ACTION_ERROR:RuntimeError:GROUP_DERIVE_COPY_FIELD_MISSING:userid",
+    "mission_id": "ASTRA-RUNTIME-GENERIC-DATAFLOW-CHAIN-001",
+    "observed_at_utc": "2026-09-25T20:27:21.560291+00:00",
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "run-chained-generic-dataflow",
+    "step_index": 0
+  },
+  "created_at_utc": "2026-09-25T20:27:12.101242+00:00",
+  "history": [],
+  "mission_id": "ASTRA-RUNTIME-GENERIC-DATAFLOW-CHAIN-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_GENERIC_DATAFLOW_CHAIN_001.json",
+  "mission_sha256": "b325fc70b8f425256162dd6b37e709d7776ff0318e58d7ed8ce749fab8293c30",
+  "next_step": 0,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-25T20:27:21.560525+00:00"
+}
