@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-DYNAMIC-FANOUT-EXECUTION-HARNESS-002",
+  "purpose": "Execute the unchanged dynamic-fanout mission after universal compiled-controller-plan dispatch repair.",
+  "steps": [
+    {
+      "id": "execute-unchanged-dynamic-fanout",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/runtime/astra_runtime.py canonical/astra_runtime/missions/ASTRA_RUNTIME_LIVE_DYNAMIC_FANOUT_001.json\npython - <<'PY'\nimport json,pathlib\np=pathlib.Path('canonical/astra_runtime/state/ASTRA-RUNTIME-LIVE-DYNAMIC-FANOUT-001.json')\nx=json.loads(p.read_text(encoding='utf-8'))\nassert x.get('status')=='COMPLETE', x\nhist=x.get('history') or []\nassert hist and (hist[-1].get('result') or {}).get('planning_mode')=='DETERMINISTIC_DYNAMIC_FANOUT_PLAN', hist\nprint('DYNAMIC_FANOUT_UNIVERSAL_DISPATCH_COMPLETE')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "DYNAMIC_FANOUT_UNIVERSAL_DISPATCH_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "original_mission_unchanged": true,
+    "universal_compiled_plan_dispatch_commit": "d9fdfe69673d5993fd35fb13e294d2bc1c84afd4"
+  }
+}
