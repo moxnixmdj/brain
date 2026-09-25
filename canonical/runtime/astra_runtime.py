@@ -2523,6 +2523,158 @@ def _goal_action(action):
           "missing_distinctive_query_tokens":missing_distinctive,
         }
 
+    if typ=="resolve_authority_identity":
+        entity_name=str(args.get("entity_name") or "").strip()
+        output=_safe_repo_path(args.get("output_path",""))
+        if not entity_name:
+            return {"type":typ,"verified":False,"error":"AUTHORITY_ENTITY_NAME_REQUIRED"}
+        search_url="https://www.wikidata.org/w/api.php?"+urllib.parse.urlencode({
+          "action":"wbsearchentities","search":entity_name,"language":"en",
+          "format":"json","limit":"8","type":"item"
+        })
+        try:
+            req=urllib.request.Request(search_url,headers={"User-Agent":"ProjectBrain-AuthorityIdentity/1"})
+            with urllib.request.urlopen(req,timeout=int(args.get("timeout_s") or 20)) as resp:
+                search_raw=resp.read(1000000)
+            search_payload=json.loads(search_raw.decode("utf-8"))
+        except Exception as exc:
+            return {"type":typ,"verified":False,"error":"AUTHORITY_ENTITY_SEARCH_FAILED:"+type(exc).__name__}
+        results=search_payload.get("search") or []
+        wanted_norm=re.sub(r"[^a-z0-9]+","",entity_name.lower())
+        candidates=[]
+        for item in results[:8]:
+            entity_id=str(item.get("id") or "")
+            if not re.fullmatch(r"Q\d+",entity_id):
+                continue
+            entity_url="https://www.wikidata.org/w/api.php?"+urllib.parse.urlencode({
+              "action":"wbgetentities","ids":entity_id,"props":"labels|descriptions|aliases|claims",
+              "languages":"en","format":"json"
+            })
+            try:
+                req=urllib.request.Request(entity_url,headers={"User-Agent":"ProjectBrain-AuthorityIdentity/1"})
+                with urllib.request.urlopen(req,timeout=int(args.get("timeout_s") or 20)) as resp:
+                    entity_raw=resp.read(2000000)
+                payload=json.loads(entity_raw.decode("utf-8"))
+                entity=(payload.get("entities") or {}).get(entity_id) or {}
+            except Exception:
+                continue
+            label=str((((entity.get("labels") or {}).get("en") or {}).get("value") or item.get("label") or ""))
+            description=str((((entity.get("descriptions") or {}).get("en") or {}).get("value") or item.get("description") or ""))
+            aliases=[
+                str(x.get("value") or "") for x in ((entity.get("aliases") or {}).get("en") or [])
+                if isinstance(x,dict)
+            ]
+            label_norm=re.sub(r"[^a-z0-9]+","",label.lower())
+            alias_norms=[re.sub(r"[^a-z0-9]+","",x.lower()) for x in aliases]
+            name_score=220 if label_norm==wanted_norm else (180 if wanted_norm in alias_norms else 0)
+            if not name_score:
+                wanted_tokens=[t for t in re.findall(r"[a-z0-9]+",entity_name.lower()) if len(t)>=3]
+                blob=(label+" "+description+" "+" ".join(aliases)).lower()
+                name_score=20*sum(1 for t in wanted_tokens if t in blob)
+            websites=[]
+            for claim in ((entity.get("claims") or {}).get("P856") or []):
+                if not isinstance(claim,dict):
+                    continue
+                snak=claim.get("mainsnak") or {}
+                datavalue=snak.get("datavalue") or {}
+                value=datavalue.get("value")
+                if isinstance(value,str) and value.startswith(("https://","http://")):
+                    websites.append({
+                      "url":value,
+                      "rank":str(claim.get("rank") or "normal")
+                    })
+            for website in websites:
+                raw_url=website["url"]
+                try:
+                    req=urllib.request.Request(raw_url,headers={"User-Agent":"Mozilla/5.0 ProjectBrain-AuthorityIdentity/1"})
+                    with urllib.request.urlopen(req,timeout=int(args.get("timeout_s") or 20)) as resp:
+                        body=resp.read(500000)
+                        final_url=resp.geturl()
+                        status=int(resp.status)
+                except Exception:
+                    continue
+                parsed=urllib.parse.urlparse(final_url)
+                host=(parsed.hostname or "").lower()
+                if not host:
+                    continue
+                domain=host[4:] if host.startswith("www.") else host
+                page_text=body.decode("utf-8","replace")
+                page_blob=re.sub(r"[^a-z0-9]+"," ",page_text.lower())
+                name_tokens=[t for t in re.findall(r"[a-z0-9]+",entity_name.lower()) if len(t)>=3]
+                page_matches=sum(1 for t in name_tokens if t in page_blob)
+                score=name_score+page_matches*8+(25 if website["rank"]=="preferred" else 0)+(10 if final_url.startswith("https://") else 0)
+                candidates.append({
+                  "entity_id":entity_id,"label":label,"description":description,
+                  "aliases":aliases[:20],"official_url":raw_url,"final_url":final_url,
+                  "http_status":status,"authority_domain":domain,
+                  "claim_rank":website["rank"],"score":score,
+                  "page_name_token_matches":page_matches,
+                })
+        candidates.sort(key=lambda x:(-int(x.get("score") or 0),x["entity_id"],x["official_url"]))
+        if not candidates:
+            evidence={
+              "schema":"PROJECT_BRAIN_AUTHORITY_IDENTITY_EVIDENCE_V1",
+              "entity_name":entity_name,"registry":"wikidata","registry_search_url":search_url,
+              "status":"NO_LIVE_OFFICIAL_WEBSITE_CANDIDATE","candidates":[],
+              "resolved_at_utc":utc(),
+              "trust_claim":"STRUCTURED_ENTITY_REGISTRY_DISCOVERY_REQUIRES_INDEPENDENT_SITE_VERIFICATION",
+            }
+            output.parent.mkdir(parents=True,exist_ok=True)
+            output.write_text(json.dumps(evidence,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+            return {"type":typ,"verified":False,"error":"AUTHORITY_IDENTITY_NOT_RESOLVED","output_path":str(output.relative_to(ROOT))}
+        chosen=candidates[0]
+        evidence={
+          "schema":"PROJECT_BRAIN_AUTHORITY_IDENTITY_EVIDENCE_V1",
+          "entity_name":entity_name,"registry":"wikidata","registry_search_url":search_url,
+          "entity_id":chosen["entity_id"],"entity_label":chosen["label"],
+          "entity_description":chosen["description"],"official_url":chosen["official_url"],
+          "final_url":chosen["final_url"],"authority_domain":chosen["authority_domain"],
+          "http_status":chosen["http_status"],"candidates":candidates[:16],
+          "resolved_at_utc":utc(),"status":"IDENTITY_CANDIDATE_RESOLVED",
+          "trust_claim":"STRUCTURED_ENTITY_REGISTRY_DISCOVERY_REQUIRES_INDEPENDENT_SITE_VERIFICATION",
+        }
+        output.parent.mkdir(parents=True,exist_ok=True)
+        output.write_text(json.dumps(evidence,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+        return {
+          "type":typ,"verified":True,
+          "entity_id":chosen["entity_id"],"entity_label":chosen["label"],
+          "official_url":chosen["official_url"],"final_url":chosen["final_url"],
+          "authority_domain":chosen["authority_domain"],
+          "output_path":str(output.relative_to(ROOT)),
+        }
+
+    if typ=="assert_authority_identity":
+        evidence_path=_safe_repo_path(args.get("evidence_path",""))
+        browser_result_path=_safe_repo_path(args.get("browser_result_path",""))
+        if not evidence_path.is_file() or not browser_result_path.is_file():
+            return {"type":typ,"verified":False,"error":"AUTHORITY_IDENTITY_VERIFICATION_INPUT_MISSING"}
+        try:
+            evidence=json.loads(evidence_path.read_text(encoding="utf-8"))
+            browser=json.loads(browser_result_path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            return {"type":typ,"verified":False,"error":"AUTHORITY_IDENTITY_VERIFICATION_JSON_INVALID:"+type(exc).__name__}
+        entity_name=str(evidence.get("entity_name") or "")
+        domain=str(evidence.get("authority_domain") or "").lower()
+        final_url=str(browser.get("final_url") or "")
+        final_host=(urllib.parse.urlparse(final_url).hostname or "").lower()
+        text=str(browser.get("observed_text") or "")
+        tokens=[t for t in re.findall(r"[a-z0-9]+",entity_name.lower()) if len(t)>=3]
+        normalized_text=re.sub(r"[^a-z0-9]+"," ",text.lower())
+        matched=[t for t in tokens if t in normalized_text]
+        host_ok=bool(final_host and (final_host==domain or final_host.endswith("."+domain)))
+        verified=(
+            evidence.get("schema")=="PROJECT_BRAIN_AUTHORITY_IDENTITY_EVIDENCE_V1"
+            and host_ok and bool(text.strip())
+            and (not tokens or len(matched)>=max(1,min(2,len(tokens))))
+        )
+        return {
+          "type":typ,"verified":verified,
+          "entity_name":entity_name,"authority_domain":domain,
+          "official_url":evidence.get("official_url"),"final_url":final_url,
+          "final_host":final_host,"matched_entity_tokens":matched,
+          "required_entity_token_matches":0 if not tokens else max(1,min(2,len(tokens))),
+        }
+
     if typ=="discover_authoritative_web_source":
         query=str(args.get("query") or "").strip()
         output=_safe_repo_path(args.get("output_path",""))
@@ -3248,7 +3400,7 @@ def _run_model_independent_goal(step, mission, goal):
     if actions is None:
         return None
     allowed_types={
-      "read_file","list_tree","search_text","http_get","discover_authoritative_web_source","assert_authoritative_source_discovery","fetch_json_knowledge","assert_json_knowledge","write_json_records","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback","invoke_capability_until","verify_with_independent_pypi_codec",
+      "read_file","list_tree","search_text","http_get","resolve_authority_identity","assert_authority_identity","discover_authoritative_web_source","assert_authoritative_source_discovery","fetch_json_knowledge","assert_json_knowledge","write_json_records","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback","invoke_capability_until","verify_with_independent_pypi_codec",
       "project_browser_result_json","join_runtime_json_arrays","assert_runtime_json_join","aggregate_runtime_json_arrays","assert_runtime_json_aggregate","derive_grouped_records","assert_grouped_derived_records","select_ranked_record","assert_ranked_record","assert_hex_prefix_bucket","assert_collection_length_bucket","assert_runtime_selected_code_decodes",
       "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal","assert_runtime_fanout_decodes","assert_runtime_fanout_artifacts_decode","assert_runtime_per_item_fallback_decodes","assert_runtime_fallback_decision","assert_runtime_bounded_loop_trace",
       "assert_workflow_audit_supported_by_source","assert_python_source_audit_supported_by_source",
