@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-FALLBACK-COMPILER-DIAG-001",
+  "purpose": "Prove fallback remains control flow, uses only verified browser capabilities, has full clause coverage, and does not misbind JSON creation to DOCX.",
+  "steps": [
+    {
+      "id": "compile-and-assert-fallback",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/goal_compiler.py')\ns=importlib.util.spec_from_file_location('gc',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads(pathlib.Path('canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads(pathlib.Path('canonical/astra_runtime/missions/ASTRA_RUNTIME_FALLBACK_CONTROL_002.json').read_text())['goal']\nout=m.compile_goal(goal,reg,pathlib.Path('.').resolve())\nassert out['compiler_mode']=='DETERMINISTIC_RUNTIME_FALLBACK_PLAN',out\nassert out.get('clause_coverage_verified') is True,out\nassert sorted(p['index'] for p in out['compiled_parts'])==[0,1,2,3],out['compiled_parts']\ntypes=[a.get('type') for a in out['controller_actions']]\nassert types==['invoke_capability_fallback','assert_runtime_fallback_decision','finish'],types\nfb=out['controller_actions'][0]\nassert fb['args']['primary_action']['args']['capability_id']=='web.browser.rendered.capture.chromedriver',fb\nassert fb['args']['fallback_action']['args']['capability_id']=='web.browser.rendered.capture.chromedriver',fb\nassert fb['args']['decision_path']=='canonical/astra_runtime/tmp/FALLBACK_DECISION.json',fb\nassert not any('docx' in json.dumps(x).lower() for x in out['compiled_parts']),out['compiled_parts']\nprint('RUNTIME_FALLBACK_COMPILER_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "RUNTIME_FALLBACK_COMPILER_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "read_only_diagnostic": true
+  }
+}
