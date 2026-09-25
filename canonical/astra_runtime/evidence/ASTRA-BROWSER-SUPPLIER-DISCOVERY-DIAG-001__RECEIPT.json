@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T02:02:37.341793+00:00",
+  "mission_id": "ASTRA-BROWSER-SUPPLIER-DISCOVERY-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_BROWSER_SUPPLIER_DISCOVERY_DIAG_001.json",
+  "mission_sha256": "770472abe0cc75382ea9e4efbce9f9cd40cb6a32ad94e99e1e6fb4653755baba",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "6f4c0fa72a50d461c79743670ceaa27c59057af326c9214a92a0f4f5af5de819",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
