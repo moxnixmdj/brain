@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T21:19:02.471293+00:00",
+  "mission_id": "ASTRA-RUNTIME-JIT-AUTHORITY-RESOLUTION-WORLDBANK-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_JIT_AUTHORITY_RESOLUTION_WORLDBANK_001.json",
+  "mission_sha256": "5a6029a9ce3ab7b8b31f7f7d18ea3b867e39c21149e9ea7c433611aaff89eb54",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "26f29010d285c72f554b249df7f503b0982297c263251b55cf768efbb107c425",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

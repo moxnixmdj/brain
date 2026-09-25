@@ -1,0 +1,546 @@
+{
+  "attempts": [
+    {
+      "discovered_hosts": 7,
+      "engine": "authority_root",
+      "status": "OK",
+      "url": "https://worldbank.org/"
+    },
+    {
+      "discovered_hosts": 0,
+      "engine": "authority_root",
+      "status": "OK",
+      "url": "https://www.worldbank.org/"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 1,
+      "status": "OK",
+      "url": "https://worldbank.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 1,
+      "status": "OK",
+      "url": "https://www.worldbank.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 0,
+      "status": "OK",
+      "url": "https://data.worldbank.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "error": "TimeoutError",
+      "status": "FETCH_FAILED",
+      "url": "https://data360.worldbank.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 1,
+      "status": "OK",
+      "url": "https://blogs.worldbank.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 2,
+      "status": "OK",
+      "url": "https://openknowledge.worldbank.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://academy.worldbank.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 0,
+      "status": "OK",
+      "url": "https://scorecard.worldbank.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 1,
+      "status": "OK",
+      "url": "https://projects.worldbank.org/robots.txt"
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 13,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://www.worldbank.org/sitemap.xml",
+      "url_count": 13
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://www.worldbank.org/content/vdam/sitemap/www-worldbank-org/sitemap-www-worldbank-org-5.xml",
+      "url_count": 19
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://www.worldbank.org/content/vdam/sitemap/www-worldbank-org/sitemap-www-worldbank-org-4.xml",
+      "url_count": 5000
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://www.worldbank.org/content/vdam/sitemap/www-worldbank-org/sitemap-www-worldbank-org-3.xml",
+      "url_count": 5000
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://www.worldbank.org/content/vdam/sitemap/www-worldbank-org/en-news-sitemap-3.xml",
+      "url_count": 2102
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://www.worldbank.org/content/vdam/sitemap/www-worldbank-org/sitemap-www-worldbank-org-2.xml",
+      "url_count": 5000
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://www.worldbank.org/content/vdam/sitemap/www-worldbank-org/en-news-sitemap-2.xml",
+      "url_count": 5000
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://www.worldbank.org/content/vdam/sitemap/www-worldbank-org/sitemap-www-worldbank-org-1.xml",
+      "url_count": 5000
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://www.worldbank.org/content/vdam/sitemap/www-worldbank-org/en-publication-sitemap-1.xml",
+      "url_count": 1854
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://www.worldbank.org/content/vdam/sitemap/www-worldbank-org/en-news-sitemap-1.xml",
+      "url_count": 5000
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://www.worldbank.org/content/vdam/sitemap/www-worldbank-org/en-brief-sitemap-1.xml",
+      "url_count": 2202
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://www.worldbank.org/content/vdam/sitemap/www-worldbank-org-bready/sitemap-www-worldbank-org-others-api-1.xml",
+      "url_count": 4
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://www.worldbank.org/content/vdam/sitemap/www-worldbank-org-Subnational/sitemap-www-worldbank-org-others-api-1.xml",
+      "url_count": 7
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://www.worldbank.org/content/vdam/sitemap/www-worldbank-org-Subnational/sitemap-www-worldbank-org-country-api-1.xml",
+      "url_count": 13
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://worldbank.org/sitemap.xml",
+      "url_count": 13
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://worldbank.org/sitemap_index.xml",
+      "url_count": 0
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://www.worldbank.org/sitemap_index.xml",
+      "url_count": 0
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 21,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://data.worldbank.org/sitemap.xml",
+      "url_count": 21
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://data.worldbank.org/sitemap_en_part21.xml",
+      "url_count": 6262
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://data.worldbank.org/sitemap_en_part20.xml",
+      "url_count": 20000
+    },
+    {
+      "candidate_count": 1355,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://data.worldbank.org/sitemap_en_part19.xml",
+      "url_count": 20000
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://data.worldbank.org/sitemap_en_part18.xml",
+      "url_count": 20000
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://data.worldbank.org/sitemap_en_part17.xml",
+      "url_count": 20000
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://data.worldbank.org/sitemap_en_part16.xml",
+      "url_count": 20000
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://data.worldbank.org/sitemap_en_part15.xml",
+      "url_count": 20000
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://data.worldbank.org/sitemap_en_part14.xml",
+      "url_count": 20000
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://data.worldbank.org/sitemap_en_part13.xml",
+      "url_count": 20000
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://data.worldbank.org/sitemap_en_part12.xml",
+      "url_count": 20000
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://data.worldbank.org/sitemap_en_part11.xml",
+      "url_count": 20000
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://data.worldbank.org/sitemap_en_part10.xml",
+      "url_count": 20000
+    }
+  ],
+  "authority_domains": [
+    "worldbank.org"
+  ],
+  "candidates": [
+    {
+      "engine": "authority_sitemap",
+      "host": "data.worldbank.org",
+      "matched_authority_domains": [
+        "worldbank.org"
+      ],
+      "score": 446,
+      "url": "https://data.worldbank.org/indicator/SP.POP.TOTL"
+    },
+    {
+      "engine": "authority_sitemap",
+      "host": "data.worldbank.org",
+      "matched_authority_domains": [
+        "worldbank.org"
+      ],
+      "score": 446,
+      "url": "https://data.worldbank.org/indicator/SP.POP.TOTL.FE.IN"
+    },
+    {
+      "engine": "authority_sitemap",
+      "host": "data.worldbank.org",
+      "matched_authority_domains": [
+        "worldbank.org"
+      ],
+      "score": 446,
+      "url": "https://data.worldbank.org/indicator/SP.POP.TOTL.FE.IN?locations=1A"
+    },
+    {
+      "engine": "authority_sitemap",
+      "host": "data.worldbank.org",
+      "matched_authority_domains": [
+        "worldbank.org"
+      ],
+      "score": 446,
+      "url": "https://data.worldbank.org/indicator/SP.POP.TOTL.FE.IN?locations=1W"
+    },
+    {
+      "engine": "authority_sitemap",
+      "host": "data.worldbank.org",
+      "matched_authority_domains": [
+        "worldbank.org"
+      ],
+      "score": 446,
+      "url": "https://data.worldbank.org/indicator/SP.POP.TOTL.FE.IN?locations=4E"
+    },
+    {
+      "engine": "authority_sitemap",
+      "host": "data.worldbank.org",
+      "matched_authority_domains": [
+        "worldbank.org"
+      ],
+      "score": 446,
+      "url": "https://data.worldbank.org/indicator/SP.POP.TOTL.FE.IN?locations=6X"
+    },
+    {
+      "engine": "authority_sitemap",
+      "host": "data.worldbank.org",
+      "matched_authority_domains": [
+        "worldbank.org"
+      ],
+      "score": 446,
+      "url": "https://data.worldbank.org/indicator/SP.POP.TOTL.FE.IN?locations=7E"
+    },
+    {
+      "engine": "authority_sitemap",
+      "host": "data.worldbank.org",
+      "matched_authority_domains": [
+        "worldbank.org"
+      ],
+      "score": 446,
+      "url": "https://data.worldbank.org/indicator/SP.POP.TOTL.FE.IN?locations=8S"
+    },
+    {
+      "engine": "authority_sitemap",
+      "host": "data.worldbank.org",
+      "matched_authority_domains": [
+        "worldbank.org"
+      ],
+      "score": 446,
+      "url": "https://data.worldbank.org/indicator/SP.POP.TOTL.FE.IN?locations=A4"
+    },
+    {
+      "engine": "authority_sitemap",
+      "host": "data.worldbank.org",
+      "matched_authority_domains": [
+        "worldbank.org"
+      ],
+      "score": 446,
+      "url": "https://data.worldbank.org/indicator/SP.POP.TOTL.FE.IN?locations=A5"
+    },
+    {
+      "engine": "authority_sitemap",
+      "host": "data.worldbank.org",
+      "matched_authority_domains": [
+        "worldbank.org"
+      ],
+      "score": 446,
+      "url": "https://data.worldbank.org/indicator/SP.POP.TOTL.FE.IN?locations=A9"
+    },
+    {
+      "engine": "authority_sitemap",
+      "host": "data.worldbank.org",
+      "matched_authority_domains": [
+        "worldbank.org"
+      ],
+      "score": 446,
+      "url": "https://data.worldbank.org/indicator/SP.POP.TOTL.FE.IN?locations=AD"
+    },
+    {
+      "engine": "authority_sitemap",
+      "host": "data.worldbank.org",
+      "matched_authority_domains": [
+        "worldbank.org"
+      ],
+      "score": 446,
+      "url": "https://data.worldbank.org/indicator/SP.POP.TOTL.FE.IN?locations=AE"
+    },
+    {
+      "engine": "authority_sitemap",
+      "host": "data.worldbank.org",
+      "matched_authority_domains": [
+        "worldbank.org"
+      ],
+      "score": 446,
+      "url": "https://data.worldbank.org/indicator/SP.POP.TOTL.FE.IN?locations=AF"
+    },
+    {
+      "engine": "authority_sitemap",
+      "host": "data.worldbank.org",
+      "matched_authority_domains": [
+        "worldbank.org"
+      ],
+      "score": 446,
+      "url": "https://data.worldbank.org/indicator/SP.POP.TOTL.FE.IN?locations=AG"
+    },
+    {
+      "engine": "authority_sitemap",
+      "host": "data.worldbank.org",
+      "matched_authority_domains": [
+        "worldbank.org"
+      ],
+      "score": 446,
+      "url": "https://data.worldbank.org/indicator/SP.POP.TOTL.FE.IN?locations=AL"
+    },
+    {
+      "engine": "authority_sitemap",
+      "host": "data.worldbank.org",
+      "matched_authority_domains": [
+        "worldbank.org"
+      ],
+      "score": 446,
+      "url": "https://data.worldbank.org/indicator/SP.POP.TOTL.FE.IN?locations=AM"
+    },
+    {
+      "engine": "authority_sitemap",
+      "host": "data.worldbank.org",
+      "matched_authority_domains": [
+        "worldbank.org"
+      ],
+      "score": 446,
+      "url": "https://data.worldbank.org/indicator/SP.POP.TOTL.FE.IN?locations=AO"
+    },
+    {
+      "engine": "authority_sitemap",
+      "host": "data.worldbank.org",
+      "matched_authority_domains": [
+        "worldbank.org"
+      ],
+      "score": 446,
+      "url": "https://data.worldbank.org/indicator/SP.POP.TOTL.FE.IN?locations=AR"
+    },
+    {
+      "engine": "authority_sitemap",
+      "host": "data.worldbank.org",
+      "matched_authority_domains": [
+        "worldbank.org"
+      ],
+      "score": 446,
+      "url": "https://data.worldbank.org/indicator/SP.POP.TOTL.FE.IN?locations=AS"
+    },
+    {
+      "engine": "authority_sitemap",
+      "host": "data.worldbank.org",
+      "matched_authority_domains": [
+        "worldbank.org"
+      ],
+      "score": 446,
+      "url": "https://data.worldbank.org/indicator/SP.POP.TOTL.FE.IN?locations=AT"
+    },
+    {
+      "engine": "authority_sitemap",
+      "host": "data.worldbank.org",
+      "matched_authority_domains": [
+        "worldbank.org"
+      ],
+      "score": 446,
+      "url": "https://data.worldbank.org/indicator/SP.POP.TOTL.FE.IN?locations=AU"
+    },
+    {
+      "engine": "authority_sitemap",
+      "host": "data.worldbank.org",
+      "matched_authority_domains": [
+        "worldbank.org"
+      ],
+      "score": 446,
+      "url": "https://data.worldbank.org/indicator/SP.POP.TOTL.FE.IN?locations=AW"
+    },
+    {
+      "engine": "authority_sitemap",
+      "host": "data.worldbank.org",
+      "matched_authority_domains": [
+        "worldbank.org"
+      ],
+      "score": 446,
+      "url": "https://data.worldbank.org/indicator/SP.POP.TOTL.FE.IN?locations=AZ"
+    },
+    {
+      "engine": "authority_sitemap",
+      "host": "data.worldbank.org",
+      "matched_authority_domains": [
+        "worldbank.org"
+      ],
+      "score": 446,
+      "url": "https://data.worldbank.org/indicator/SP.POP.TOTL.FE.IN?locations=B8"
+    }
+  ],
+  "chosen_host": "data.worldbank.org",
+  "chosen_url": "https://data.worldbank.org/indicator/SP.POP.TOTL",
+  "discovered_at_utc": "2026-09-25T21:18:58.005014+00:00",
+  "query": "World Bank SP.POP.TOTL official indicator",
+  "schema": "PROJECT_BRAIN_SOURCE_DISCOVERY_EVIDENCE_V1",
+  "trust_claim": "DOMAIN_FILTERED_SEARCH_DISCOVERY_ONLY_NOT_FACT_VERIFICATION"
+}
