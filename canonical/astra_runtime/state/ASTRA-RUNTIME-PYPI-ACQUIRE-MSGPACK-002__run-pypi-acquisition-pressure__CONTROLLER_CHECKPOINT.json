@@ -1,0 +1,146 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "plan": {
+        "args": {
+          "fields": [
+            "id",
+            "text"
+          ],
+          "output_path": "canonical/astra_runtime/tmp/MSGPACK_SOURCE.json",
+          "records": [
+            {
+              "id": 1,
+              "text": "alpha"
+            },
+            {
+              "id": 2,
+              "text": "beta"
+            },
+            {
+              "id": 3,
+              "text": "gamma"
+            }
+          ]
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "write_json_records"
+      },
+      "result": {
+        "fields": [
+          "id",
+          "text"
+        ],
+        "output_bytes": 128,
+        "output_path": "canonical/astra_runtime/tmp/MSGPACK_SOURCE.json",
+        "output_sha256": "409afd216b66047381928244f08967870ae5e3193f364832c83b92e2febe3280",
+        "record_count": 3,
+        "type": "write_json_records",
+        "verified": true
+      }
+    },
+    {
+      "cycle": 1,
+      "plan": {
+        "args": {
+          "capability_id": "auto.pypi.msgpack",
+          "decode_callable": "unpackb",
+          "decode_kwargs": {},
+          "encode_callable": "packb",
+          "encode_kwargs": {},
+          "json_path": "canonical/astra_runtime/tmp/MSGPACK_SOURCE.json",
+          "module": "msgpack",
+          "output_path": "canonical/astra_runtime/tmp/MSGPACK_RECORDS.msgpack"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "result": {
+        "adapter": "python_library_codec",
+        "capability_id": "auto.pypi.msgpack",
+        "dependency": {
+          "project": "msgpack",
+          "status": "INSTALLED_VERIFIED",
+          "version": "1.2.2",
+          "wheel_sha256": "77c2e018417dc1d66f235e383877ee885b60ade9d29e494dd581e08af2cb1923"
+        },
+        "encode_callable": "packb",
+        "module": "msgpack",
+        "output_bytes": 48,
+        "output_path": "canonical/astra_runtime/tmp/MSGPACK_RECORDS.msgpack",
+        "output_sha256": "ed55ca720d5e6c0c480b5fd978892b43ead8c314401e919b172ccab184a214c1",
+        "output_verified": true,
+        "source_path": "canonical/astra_runtime/tmp/MSGPACK_SOURCE.json"
+      }
+    },
+    {
+      "cycle": 2,
+      "plan": {
+        "args": {
+          "capability_id": "auto.pypi.msgpack",
+          "decode_callable": "unpackb",
+          "decode_kwargs": {},
+          "encode_callable": "packb",
+          "encode_kwargs": {},
+          "json_path": "canonical/astra_runtime/tmp/MSGPACK_SOURCE.json",
+          "module": "msgpack",
+          "output_path": "canonical/astra_runtime/tmp/MSGPACK_SOURCE.json"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "result": {
+        "adapter": "python_library_codec",
+        "capability_id": "auto.pypi.msgpack",
+        "dependency": {
+          "project": "msgpack",
+          "status": "ALREADY_INSTALLED",
+          "version": "1.2.2"
+        },
+        "encode_callable": "packb",
+        "module": "msgpack",
+        "output_bytes": 48,
+        "output_path": "canonical/astra_runtime/tmp/MSGPACK_SOURCE.json",
+        "output_sha256": "ed55ca720d5e6c0c480b5fd978892b43ead8c314401e919b172ccab184a214c1",
+        "output_verified": true,
+        "source_path": "canonical/astra_runtime/tmp/MSGPACK_SOURCE.json"
+      }
+    },
+    {
+      "cycle": 3,
+      "plan": {
+        "args": {
+          "summary": "COMPOUND_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "COMPOUND_GOAL_COMPLETE",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-09-25T18:37:22.249482+00:00",
+  "mission_id": "ASTRA-RUNTIME-PYPI-ACQUIRE-MSGPACK-002",
+  "next_action_index": 4,
+  "plan_sha256": "7489ea78bc0649df34d3f06a3a9c8768f6042ef0399c562b4ff48cc2a84d7c9e",
+  "resume_count": 0,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "run-pypi-acquisition-pressure",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-09-25T18:37:24.028039+00:00"
+}
