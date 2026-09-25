@@ -1,0 +1,153 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-DETERMINISTIC-SEMANTIC-AUTHORITIES-001",
+  "purpose": "Prove an ordinary goal can obtain its frozen target effect from two non-executing deterministic semantic authority generators, then pass through semantic quorum into the constrained verified-registry capability graph without mission-authored target effects or semantic proposals.",
+  "goal": "Acquire two agreeing external observations, assess them, and materialize the supported fact through a constrained verified-capability proposal.",
+  "steps": [
+    {
+      "id": "execute-deterministically-grounded-constrained-proposal",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "verified_initial_facts": [
+        "network.http.available"
+      ],
+      "semantic_authority_policy": {
+        "min_distinct_authority_classes": 2,
+        "authorities": {
+          "registry-effect-lexical-v1": "independent-registry-effect-lexical",
+          "compiler-score-v1": "existing-goal-compiler-generic-score"
+        }
+      },
+      "max_controller_actions": 12,
+      "capability_problem_proposal": {
+        "goal_sha256": "604cb4332ad465fdfe6071a83eb38bc7320fe92fea1919daa35cb192e647a82b",
+        "clauses": [
+          {
+            "start": 0,
+            "end": 143,
+            "text": "Acquire two agreeing external observations, assess them, and materialize the supported fact through a constrained verified-capability proposal.",
+            "target_effects": [
+              "knowledge.fact.materialized"
+            ]
+          }
+        ],
+        "finish_summary": "DETERMINISTIC_SEMANTIC_AUTHORITIES_COMPLETE",
+        "max_expansions": 200,
+        "capability_instances": [
+          {
+            "instance_id": "observe-a",
+            "capability_id": "knowledge.json.fetch.external",
+            "inputs": {
+              "url": "https://httpbin.org/get?claim=alpha",
+              "json_path": [
+                "args",
+                "claim"
+              ],
+              "output_path": "canonical/astra_runtime/tmp/SEMANTIC_QUORUM_A.json",
+              "authoritative": false
+            },
+            "provides_as": {
+              "knowledge.observation.available": "knowledge.observation.a.available"
+            }
+          },
+          {
+            "instance_id": "observe-b",
+            "capability_id": "knowledge.json.fetch.external",
+            "inputs": {
+              "url": "https://httpbin.org/anything?claim=alpha",
+              "json_path": [
+                "args",
+                "claim"
+              ],
+              "output_path": "canonical/astra_runtime/tmp/SEMANTIC_QUORUM_B.json",
+              "authoritative": false
+            },
+            "provides_as": {
+              "knowledge.observation.available": "knowledge.observation.b.available"
+            }
+          },
+          {
+            "instance_id": "assess-two",
+            "capability_id": "knowledge.consistency.assess",
+            "inputs": {
+              "evidence_paths": [
+                {
+                  "$effect_result": {
+                    "effect": "knowledge.observation.a.available",
+                    "field": "output_path"
+                  }
+                },
+                {
+                  "$effect_result": {
+                    "effect": "knowledge.observation.b.available",
+                    "field": "output_path"
+                  }
+                }
+              ],
+              "output_path": "canonical/astra_runtime/tmp/SEMANTIC_QUORUM_ASSESSMENT.json",
+              "max_age_s": null
+            },
+            "requires_as": [
+              {
+                "effect": "knowledge.observation.available",
+                "as": "knowledge.observation.a.available"
+              },
+              {
+                "effect": "knowledge.observation.available",
+                "as": "knowledge.observation.b.available"
+              }
+            ]
+          },
+          {
+            "instance_id": "materialize-fact",
+            "capability_id": "knowledge.support.materialize",
+            "inputs": {
+              "assessment_path": {
+                "$effect_result": {
+                  "effect": "knowledge.assessment.available",
+                  "field": "output_path"
+                }
+              },
+              "field_name": "claim",
+              "output_path": "canonical/astra_runtime/tmp/SEMANTIC_QUORUM_FACT.json"
+            }
+          }
+        ]
+      },
+      "verify": {
+        "type": "stdout_contains",
+        "text": "DETERMINISTIC_SEMANTIC_AUTHORITIES_COMPLETE"
+      },
+      "semantic_goal_authority_generators": [
+        "registry-effect-lexical-v1",
+        "compiler-score-v1"
+      ]
+    },
+    {
+      "id": "independent-deterministic-semantic-artifact-check",
+      "adapter": "shell",
+      "command": "python - <<'PY'\nimport json,pathlib\np=pathlib.Path('canonical/astra_runtime/tmp/SEMANTIC_QUORUM_FACT.json')\ndata=json.loads(p.read_text(encoding='utf-8'))\nassert data==[{'claim':'alpha'}],data\nprint('DETERMINISTIC_SEMANTIC_AUTHORITIES_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "DETERMINISTIC_SEMANTIC_AUTHORITIES_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "required_target_effects_supplied_by_mission": false,
+    "semantic_quorum_required": true,
+    "exact_goal_hash_binding_required": true,
+    "full_goal_span_grounding_required": true,
+    "verified_registry_references_only": true,
+    "untrusted_semantic_proposals_may_execute_actions": false,
+    "independent_artifact_verification_required": true,
+    "semantic_fixture_note": "This mission tests two independently implemented deterministic matching methods over the verified registry. They are algorithmically distinct but share the same registry and do not constitute independent external semantic engines.",
+    "semantic_goal_proposals_supplied_by_mission": false,
+    "deterministic_semantic_authority_generators_required": [
+      "registry-effect-lexical-v1",
+      "compiler-score-v1"
+    ],
+    "distinct_semantic_method_classes_required": 2
+  }
+}
