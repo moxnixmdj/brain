@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T04:47:01.596285+00:00",
+  "mission_id": "ASTRA-LIVE-DYNAMIC-FANOUT-COMPILER-DIAG-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_LIVE_DYNAMIC_FANOUT_COMPILER_DIAG_002.json",
+  "mission_sha256": "0da06347dde30b8ce95c54bc095e2bb25f83172bd5d6bd89391b9c37aaeaa5c2",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "0568741681440d23fa1d0c1fc6fa426ac47fb51352e42d9219fccd39a200190c",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
