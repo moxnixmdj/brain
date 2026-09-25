@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-DOCX-SUPPLIER-DIAG-001",
+  "purpose": "Read-only targeted supplier discovery for the active DOCX frontier.",
+  "steps": [
+    {
+      "id": "discover-docx-suppliers",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/capability_discovery.py')\ns=importlib.util.spec_from_file_location('d',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nout=m.search_apt_packages('create docx',limit=30)\nprint(json.dumps(out['candidates'][:20],sort_keys=True))\nprint('DOCX_SUPPLIER_DISCOVERY_COMPLETE')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "DOCX_SUPPLIER_DISCOVERY_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "read_only_diagnostic": true,
+    "model_controller_required": false
+  }
+}
