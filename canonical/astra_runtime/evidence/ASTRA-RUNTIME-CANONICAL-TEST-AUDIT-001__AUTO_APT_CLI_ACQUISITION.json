@@ -1,0 +1,586 @@
+{
+  "attempts": [
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "1db7c7971929651dbf766cc041b4a5afc5430855b5d4de329fdff4b0814dd142",
+        "executables": [],
+        "package": "cl-py-configparser",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "20170830-1.1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "1db7c7971929651dbf766cc041b4a5afc5430855b5d4de329fdff4b0814dd142",
+        "binding_kind": "apt",
+        "description": "implements the ConfigParser Python module functionality in Common Lisp",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "py"
+        ],
+        "name": "cl-py-configparser",
+        "packages": [],
+        "query": "py",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "20170830-1.1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "884a9815aaa9ef7a3c195bf3732261c35881bc87a7962d7a7efad84d130de271",
+        "executables": [],
+        "package": "elpa-py-autopep8",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "2016.1-3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "884a9815aaa9ef7a3c195bf3732261c35881bc87a7962d7a7efad84d130de271",
+        "binding_kind": "apt",
+        "description": "use autopep8 to beautify a Python buffer",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "py"
+        ],
+        "name": "elpa-py-autopep8",
+        "packages": [],
+        "query": "py",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2016.1-3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "46a17d3ea19156e0c7bcd2f9c776c6322faa8cceda625a85c13236951d901210",
+        "executables": [],
+        "package": "elpa-py-isort",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "2016.1-5"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "46a17d3ea19156e0c7bcd2f9c776c6322faa8cceda625a85c13236951d901210",
+        "binding_kind": "apt",
+        "description": "use isort to sort the imports in a Python buffer",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "py"
+        ],
+        "name": "elpa-py-isort",
+        "packages": [],
+        "query": "py",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2016.1-5",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "179ea587aaecf9aa6368256ed32e5c186a7e538854772f9bb9f463c9d40c94bc",
+        "executables": [
+          {
+            "executable": "/usr/bin/py-cpuinfo",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "usage: py-cpuinfo [-h] [--json] [--version] [--trace]\n\nGets CPU info with pure Python\n\noptions:\n  -h, --help  show this help message and exit\n  --json      Return the info in JSON format\n  --version   Return the version of py-cpuinfo\n  --trace     Traces code paths used to find CPU info to file"
+              }
+            ]
+          }
+        ],
+        "package": "py-cpuinfo",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "9.0.0-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "179ea587aaecf9aa6368256ed32e5c186a7e538854772f9bb9f463c9d40c94bc",
+        "binding_kind": "apt",
+        "description": "Python script for getting CPU info",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "py"
+        ],
+        "name": "py-cpuinfo",
+        "packages": [],
+        "query": "py",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "9.0.0-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "08890efc45d6053a3c511e7eeec5384f716f4560484dec36d433cde4be81aebd",
+        "executables": [
+          {
+            "executable": "/usr/bin/tldr-py",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: tldr-py [OPTIONS] COMMAND [ARGS]...\n\n  A python client for tldr: simplified and community-driven man pages.\n\nOptions:\n  -V, --version  Show the version and exit.\n  -h, --help     Show this message and exit.\n\nCommands:\n  find     Find the command usage.\n  init     Init config file.\n  locate   Locate the command's man page.\n  reindex  Rebuild the index.\n  update   Update to the latest pages."
+              }
+            ]
+          }
+        ],
+        "package": "tldr-py",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.7.0-6"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "08890efc45d6053a3c511e7eeec5384f716f4560484dec36d433cde4be81aebd",
+        "binding_kind": "apt",
+        "description": "Python client for tldr: simplified and community-driven man pages",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "py"
+        ],
+        "name": "tldr-py",
+        "packages": [],
+        "query": "py",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.7.0-6",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "6000ac2866dd249129c68aaa802b81bf606f95dce08161f44e4d05871776f104",
+        "executables": [
+          {
+            "executable": "/usr/bin/lsusb.py",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: lsusb.py [options]\n\nOptions:\n  -h, --help            display this help\n  -i, --interfaces      display interface information\n  -I, --hub-interfaces  display interface information, even for hubs\n  -u, --hide-empty-hubs suppress empty hubs\n  -U, --hide-hubs       suppress all hubs\n  -c, --color           use colors\n  -C, --no-color        disable colors\n  -e, --endpoints       display endpoint info\n  -f FILE, --usbids-path FILE\n                        override filename for /usr/share/usb.ids\n  -w, --wakeup          display power wakeup setting\n\nUse lsusb.py -ciu to get a nice overview of your USB devices."
+              }
+            ]
+          }
+        ],
+        "package": "usbutils-py",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1:017-3build1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "6000ac2866dd249129c68aaa802b81bf606f95dce08161f44e4d05871776f104",
+        "binding_kind": "apt",
+        "description": "Linux USB utilities - lsusb.py command",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "py"
+        ],
+        "name": "usbutils-py",
+        "packages": [],
+        "query": "py",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:017-3build1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "50dcec4f36fa0f0737ba84c66613c5f4e6d36211c7024b16221aefdab352c3a7",
+        "executables": [
+          {
+            "executable": "/usr/bin/binfmtasm-interpreter",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "binfmtc: Could not determine the directory name of source --help"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/binfmtc-interpreter",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "binfmtc: Could not determine the directory name of source --help"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/binfmtcxx-interpreter",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "binfmtc: Could not determine the directory name of source --help"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/binfmtf-interpreter",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "binfmtc: Could not determine the directory name of source --help"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/binfmtf95-interpreter",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "binfmtc: Could not determine the directory name of source --help"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/binfmtgcj-interpreter",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "binfmtc: Could not determine the directory name of source --help"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/realcsh.c",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "realcsh.c:28:10: fatal error: readline.h: No such file or directory\n   28 | #include <readline.h>\n      |          ^~~~~~~~~~~~\ncompilation terminated.\nbinfmtc: Compilation failed for /usr/bin/realcsh.c, see above messages for details"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/realcxxsh.cc",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "realcxxsh.cc:27:10: fatal error: readline.h: No such file or directory\n   27 | #include <readline.h>\n      |          ^~~~~~~~~~~~\ncompilation terminated.\nbinfmtc: Compilation failed for /usr/bin/realcxxsh.cc, see above messages for details"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/sbin/realksh.c",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "realksh.c:30:10: fatal error: history.h: No such file or directory\n   30 | #include <history.h>\n      |          ^~~~~~~~~~~\ncompilation terminated.\nbinfmtc: Compilation failed for /usr/sbin/realksh.c, see above messages for details"
+              }
+            ]
+          }
+        ],
+        "package": "binfmtc",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.17-2.3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 18.0,
+        "archive_sha256": "50dcec4f36fa0f0737ba84c66613c5f4e6d36211c7024b16221aefdab352c3a7",
+        "binding_kind": "apt",
+        "description": "Execute C program as script",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "binfmtc",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.17-2.3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "1df9d527c63f4bf6459ad5ffcced6b196bcd7d5b60eeef79c175fbbd391e1960",
+        "executables": [
+          {
+            "executable": "/usr/bin/cap",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "See full documentation at http://capistranorb.com/.\n\nInstall capistrano in a project:\n    bundle exec cap install [STAGES=qa,staging,production,...]\n\nShow available tasks:\n    bundle exec cap -T\n\nInvoke (or simulate invoking) a task:\n    bundle exec cap [--dry-run] STAGE TASK\n\nAdvanced options:\n        --backtrace=[OUT]            Enable full backtrace.  OUT can be stderr (default) or stdout.\n        --comments                   Show commented tasks only\n        --job-stats [LEVEL]          Display job statistics. LEVEL=history displays a complete job list\n        --rules                      Trace the rules resolution.\n        --suppress-backtrace PATTERN Suppress backtrace lines matching regexp PATTERN. Ignored if --trace is on.\n    -A, --all                        Show all tasks, even uncommented ones (in combination with -T or -D)\n    -B, --build-all                  Build all prerequisites, including those which are up-to-date.\n    -C, --directory [DIRECTORY]      Change to DIRECTORY before doing anything.\n    -D, --describe [PATTERN]         Describe the tasks (matching optional PATTERN), then exit.\n    -e, --execute CODE               Execute some Ruby code and exit.\n    -E, --execute-continue CODE      Execute some Ruby code, then continue with normal task processing.\n    -f, --rakefile [FILENAME]        Use FILENAME as the rakefile to search for.\n    -G, --no-system, --nosystem      Use standard project Rakefile search paths, ignore system wide rakefiles.\n    -g, --system                     Using system wide (global) rakefiles (usually '~/.rake/*.rake').\n    -I, --libdir LIBDIR              Include LIBDIR in the search path for required modules.\n    -j, --jobs [NUMBER]              Specifies the maximum number of tasks to execute in parallel. (default is number of CPU cores + 4)\n    -m, --multitask                  Treat all tasks as multitasks.\n    -N, --no-search, --nosearch      Do not search parent directories for the Rakefile.\n    -P, --prereqs                    Display the tasks and dependencies, then exit.\n        --execute-print CODE         Execute some Ruby code, print the result, then exit.\n        --require MODULE             Require MODULE before executing rakefile.\n    -R, --rakelibdir RAKELIBDIR,     Auto-import any .rake files in RAKELIBDIR. (default is 'rakelib')\n        --rakelib\n    -t, --trace=[OUT]                Turn on invoke/execute tracing, enable full backtrace. OUT can be stderr (default) or stdout.\n    -T, --tasks [PATTERN]            Display the tasks (matching optional PATTERN) with descriptions, then exit. -AT combination displays all of tasks contained no description.\n    -W, --where [PATTERN]            Describe the tasks (matching optional PATTERN), then exit.\n    -X, --no-deprecation-warnings    Disable the deprecation warnings.\n    -V, --version                    Display the program version.\n    -n, --dry-run                    Do a dry run without executing actions\n    -r, --roles ROLES                Run SSH commands only on hosts matching these roles\n    -z, --hosts HOSTS                Run SSH commands only on matching hosts\n    -p, --print-config-variables     Display the defined config variables before starting the deployment tasks.\n    -h, -H, --help                   Display this help message."
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/capify",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "--------------------------------------------------------------------------------\nCapistrano 3.x is incompatible with Capistrano 2.x. \n\nThis command has become `cap install` in Capistrano 3.x\n\nFor more information see http://www.capistranorb.com/\n--------------------------------------------------------------------------------"
+              }
+            ]
+          }
+        ],
+        "package": "capistrano",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "3.17.2-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 18.0,
+        "archive_sha256": "1df9d527c63f4bf6459ad5ffcced6b196bcd7d5b60eeef79c175fbbd391e1960",
+        "binding_kind": "apt",
+        "description": "tool to execute commands in parallel on multiple servers",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "capistrano",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "3.17.2-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "99a3d77e53d96504c4ace6a1eb3376b5a46ce7b9456738919a24e3644e588c5d",
+        "executables": [
+          {
+            "executable": "/usr/bin/cdde",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: cdde [-c filename] [-rbvVh]\nRun commands when discs are inserted into CD/DVD drives.\n\n -r\t--run\t\tRun commands on disc already in drive when is started.\n -b\t--batch\t\tBatch mode: check all drives once then exit.\n\t\t\t(implies -r)\n -c\t--config\tUse an alternate config file. (Default is ~/.cdde.xml)\n -V\t--version\tPrint out version information.\n -v\t--verbose\tPrint out lots of information.\n -h\t--help\t\tPrint this help message."
+              }
+            ]
+          }
+        ],
+        "package": "cdde",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.3.1-1.1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 18.0,
+        "archive_sha256": "99a3d77e53d96504c4ace6a1eb3376b5a46ce7b9456738919a24e3644e588c5d",
+        "binding_kind": "apt",
+        "description": "CD Detect & Execute utility",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "cdde",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.3.1-1.1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "fdef95b69750dc4cd2ea704beac1a34d92389a58baed5f29aec080610bfc41d8",
+        "executables": [
+          {
+            "executable": "/usr/bin/cde",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "/usr/bin/cde: invalid option -- '-'\nCDE: Code, Data, and Environment packaging for Linux\nCopyright 2010-2012 Philip Guo (philip@pgbovine.net)\n\nFull user manual: http://www.pgbovine.net/cde.html\n\nBasic usage: cde [command to run and package]\n\nOptions\n  -c  : Print the order of files copied into the package in cde-copied-files.log\n  -o <output dir> : Set a custom output directory instead of \"cde-package/\"\n  -f  : Do NOT follow forks, so child processes are not packaged\n  -i '<file path>' : Ignore the given exact file path\n  -p '<file path>' : Ignore the given file path prefix\n  -v  : Verbose mode (for debugging)\n  -V  : Print version"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/cde-exec",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "/usr/bin/cde-exec: invalid option -- '-'\nCDE: Code, Data, and Environment packaging for Linux\nCopyright 2010-2012 Philip Guo (philip@pgbovine.net)\n\nFull user manual: http://www.pgbovine.net/cde.html\n\nBasic usage: cde-exec [command within cde-root/ to run]\n\nOptions\n  -l  : Use native dynamic linker on machine (less portable but more robust)\n  -n  : Block network access (blank out bind/connect syscalls)\n  -f  : Do NOT follow forks, so child processes run natively\n  -s  : Streaming mode (ooh, mysterious!)\n  -i '<file path>' : Ignore the given exact file path\n  -p '<file path>' : Ignore the given file path prefix\n  -v  : Verbose mode (for debugging)\n  -V  : Print version"
+              }
+            ]
+          }
+        ],
+        "package": "cde",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.1+git9-g551e54d-1.2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 18.0,
+        "archive_sha256": "fdef95b69750dc4cd2ea704beac1a34d92389a58baed5f29aec080610bfc41d8",
+        "binding_kind": "apt",
+        "description": "package everything required to execute a Linux command on another computer",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "cde",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.1+git9-g551e54d-1.2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "9b6da452bf5f240f8055f8d0b0298a1696a15b558700694cfe44d3fb3af72003",
+        "executables": [
+          {
+            "executable": "/usr/bin/dex",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "usage: dex [options] [DesktopEntryFile [DesktopEntryFile ...]]\n\ndex, DesktopEntry Execution, is a program to generate and execute DesktopEntry\nfiles of the type Application\n\npositional arguments:\n  files                 DesktopEntry files\n\noptions:\n  -h, --help            show this help message and exit\n  --test                perform a self-test\n  -v, --verbose         verbose output\n  -V, --version         display version information\n\nrun:\n  -a, --autostart       autostart programs\n  -d, --dry-run         dry run, don't execute any command\n  -e ENVIRONMENT, --environment ENVIRONMENT\n                        specify the Desktop Environment an autostart should be\n                        performed for; works only in combination with\n                        --autostart\n  -s SEARCHPATHS, --search-paths SEARCHPATHS\n                        colon separated list of paths to search for desktop\n                        files, overriding the default search list\n  --term TERM           the terminal emulator that will be used to run the\n                        program if Terminal=true is set in the desktop file,\n                        defaults to x-terminal-emulator\n  -w, --wait            block until the program exits\n\ncreate:\n  -c CREATE [CREATE ...], --create CREATE [CREATE ...]\n                        create a DesktopEntry file for the given program. If a\n                        second argument is provided it's taken as output\n                        filename or written to stdout (filename: -). By\n                        default a new file with the postfix .desktop is\n                        created\n  -t TARGETDIR, --target-directory TARGETDIR\n                        create files in target directory\n\nExample usage: list autostart programs: dex -ad"
+              }
+            ]
+          }
+        ],
+        "package": "dex",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.9.0-2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 18.0,
+        "archive_sha256": "9b6da452bf5f240f8055f8d0b0298a1696a15b558700694cfe44d3fb3af72003",
+        "binding_kind": "apt",
+        "description": "generate and execute Application type .desktop files",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "dex",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.9.0-2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ProbeFailure:APT_INSTALL_FAILED:E: Sub-process /usr/bin/dpkg returned an error code (1)\n",
+      "status": "PROBE_FAILED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 18.0,
+        "archive_sha256": "dc1889227086749f37f90003b694445adb45dea91236982beffa4125c4a62405",
+        "binding_kind": "apt",
+        "description": "ejabberd module to execute scheduled commands",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "ejabberd-mod-cron",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.2023.10.04~dfsg0-1",
+        "zero_cost_eligible": true
+      }
+    }
+  ],
+  "goal": "Execute every canonical/tests/test_*.py file",
+  "mission_id": "ASTRA-RUNTIME-CANONICAL-TEST-AUDIT-001",
+  "role_conditioned_discovery": null,
+  "schema": "PROJECT_BRAIN_AUTO_APT_CLI_ACQUISITION_EVIDENCE_V1",
+  "status": "NO_COMPATIBLE_CONTRACT"
+}

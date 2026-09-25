@@ -1,0 +1,2534 @@
+{
+  "auto_acquisition": {
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"cl-py-configparser\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-py-autopep8\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-py-isort\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"py-cpuinfo\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"tldr-py\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"usbutils-py\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"binfmtc\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"capistrano\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"cdde\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"cde\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"dex\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:E: Sub-process /usr/bin/dpkg returned an error code (1)\\n\", \"name\": \"ejabberd-mod-cron\", \"status\": \"PROBE_FAILED\"}]",
+    "status": "NOT_DISPATCHED"
+  },
+  "binding_performed": false,
+  "goal": "Execute every canonical/tests/test_*.py file. Create canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json containing one record per test file with repository-relative path, exit code, passed test count, failed test count, error count, skipped count, and duration, plus totals across the corpus. Fail if any test file exits nonzero. Finally independently execute the same complete test corpus again and verify that every file in the report still exits zero, that no canonical test file is missing from the report, and that the report totals are internally consistent.",
+  "mission_id": "ASTRA-RUNTIME-CANONICAL-TEST-AUDIT-001",
+  "observed_at_utc": "2026-09-25T01:13:39.709055+00:00",
+  "result": {
+    "binding_performed": false,
+    "candidates": [
+      {
+        "archive_sha256": "1db7c7971929651dbf766cc041b4a5afc5430855b5d4de329fdff4b0814dd142",
+        "binding_kind": "apt",
+        "description": "implements the ConfigParser Python module functionality in Common Lisp",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "py"
+        ],
+        "name": "cl-py-configparser",
+        "packages": [],
+        "query": "py",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "20170830-1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "884a9815aaa9ef7a3c195bf3732261c35881bc87a7962d7a7efad84d130de271",
+        "binding_kind": "apt",
+        "description": "use autopep8 to beautify a Python buffer",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "py"
+        ],
+        "name": "elpa-py-autopep8",
+        "packages": [],
+        "query": "py",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2016.1-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "46a17d3ea19156e0c7bcd2f9c776c6322faa8cceda625a85c13236951d901210",
+        "binding_kind": "apt",
+        "description": "use isort to sort the imports in a Python buffer",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "py"
+        ],
+        "name": "elpa-py-isort",
+        "packages": [],
+        "query": "py",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2016.1-5",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "179ea587aaecf9aa6368256ed32e5c186a7e538854772f9bb9f463c9d40c94bc",
+        "binding_kind": "apt",
+        "description": "Python script for getting CPU info",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "py"
+        ],
+        "name": "py-cpuinfo",
+        "packages": [],
+        "query": "py",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "9.0.0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "08890efc45d6053a3c511e7eeec5384f716f4560484dec36d433cde4be81aebd",
+        "binding_kind": "apt",
+        "description": "Python client for tldr: simplified and community-driven man pages",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "py"
+        ],
+        "name": "tldr-py",
+        "packages": [],
+        "query": "py",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.7.0-6",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "6000ac2866dd249129c68aaa802b81bf606f95dce08161f44e4d05871776f104",
+        "binding_kind": "apt",
+        "description": "Linux USB utilities - lsusb.py command",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "py"
+        ],
+        "name": "usbutils-py",
+        "packages": [],
+        "query": "py",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:017-3build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "50dcec4f36fa0f0737ba84c66613c5f4e6d36211c7024b16221aefdab352c3a7",
+        "binding_kind": "apt",
+        "description": "Execute C program as script",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "binfmtc",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.17-2.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "1df9d527c63f4bf6459ad5ffcced6b196bcd7d5b60eeef79c175fbbd391e1960",
+        "binding_kind": "apt",
+        "description": "tool to execute commands in parallel on multiple servers",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "capistrano",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "3.17.2-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "99a3d77e53d96504c4ace6a1eb3376b5a46ce7b9456738919a24e3644e588c5d",
+        "binding_kind": "apt",
+        "description": "CD Detect & Execute utility",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "cdde",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.3.1-1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "fdef95b69750dc4cd2ea704beac1a34d92389a58baed5f29aec080610bfc41d8",
+        "binding_kind": "apt",
+        "description": "package everything required to execute a Linux command on another computer",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "cde",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.1+git9-g551e54d-1.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "9b6da452bf5f240f8055f8d0b0298a1696a15b558700694cfe44d3fb3af72003",
+        "binding_kind": "apt",
+        "description": "generate and execute Application type .desktop files",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "dex",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.9.0-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "dc1889227086749f37f90003b694445adb45dea91236982beffa4125c4a62405",
+        "binding_kind": "apt",
+        "description": "ejabberd module to execute scheduled commands",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "ejabberd-mod-cron",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.2023.10.04~dfsg0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c8b5f72811b21252201db139fce224d2e1a64de96a50b40ca43cf7ef6f8672d1",
+        "binding_kind": "apt",
+        "description": "ejabberd module to execute shell commands via XMPP (dangerous!)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "ejabberd-mod-shcommands",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.2023.10.04~dfsg0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d76b244cf265a3f43a39473009453bf341222776241262665a05e14ac85388b0",
+        "binding_kind": "apt",
+        "description": "Small command executer with autocompletion using GTK+",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "gexec",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.4-3build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "52b775b9196e19a7b9716f837d3ed5c5e06d39a19548a6249960b008a612c0a8",
+        "binding_kind": "apt",
+        "description": "C API to execute JavaScript code - header files",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "ino-headers",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.4.0-2.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "5c906fdcb41ab7197fa180bdf8d873c0a36e51b51ba79ba55792629fd7d30198",
+        "binding_kind": "apt",
+        "description": "LAM runtime environment for executing parallel programs",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "lam-runtime",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "7.1.4-7.1build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ba81c2a13032fdac670934bf726be9026acf51a9d2305745bdf071073bb6d9c7",
+        "binding_kind": "apt",
+        "description": "Nodejs module for executing heavy tasks under forked processes in parallel",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "node-jest-worker",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "29.6.2~ds1+~cs73.45.28-5",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d1db86a78e6c614fb351dcd8d538801ef137ed472a99dd0ef7c22e6f31351346",
+        "binding_kind": "apt",
+        "description": "sequence and execute tasks and dependencies in concurrency",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "node-orchestrator",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.3.8-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "80c2cbe4bfccc205f7b9a489dc642aa8c9f1b185187204ec0dcc5cdfeaeda440",
+        "binding_kind": "apt",
+        "description": "plugin for OBS Studio providing a dummy source to execute commands",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "obs-command-source",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.4.0-4build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "905bb55da70911c0b87b34908962bf8860581d2db468adbfe99c8cc1bbb351b5",
+        "binding_kind": "apt",
+        "description": "execute tasks in parallel",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "paexec",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.1.1-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "fa16dd98a0d45672666f0b93eb9a5c1eeab76da2634d4aff59a4e3ef6c8a5db5",
+        "binding_kind": "apt",
+        "description": "build and execute command lines from standard input in parallel",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "parallel",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "20231122+ds-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "f252092cc1dafe6b14baa71c0d05a3ac8cb69f85ecda75ecd3b0951ac941167d",
+        "binding_kind": "apt",
+        "description": "Executing commands in parallel",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "pexec",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.0~rc8-4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "e4b409ea60e2e40d5c9a9a36d5fa69aaec8c619a7a7dd306ddf3fdac0e77ffec",
+        "binding_kind": "apt",
+        "description": "execute binaries from Python packages in isolated environments",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "pipx",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.4.3-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "f8691dbb4f4c626d6e4632ffeaa9b3283a2b6b48be090aeff9f5deb92275ed4a",
+        "binding_kind": "apt",
+        "description": "GNU R execute and control system processes",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "r-cran-processx",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "3.8.3-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ff9d757d405b31f4c96fab6905e0093ab1f76f47ea0508802789c548c77e6420",
+        "binding_kind": "apt",
+        "description": "copy a file to a remote host and execute it there",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "remrun",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.2.3-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "2123df09d7b3c69fad6904d9625f6a9792c1cf2f89b63a0362f2510a078eef20",
+        "binding_kind": "apt",
+        "description": "simple and complete Ren'Py game",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "py"
+        ],
+        "name": "renpy-thequestion",
+        "packages": [],
+        "query": "py",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "8.1.3+dfsg-1build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "df680c53cb1e2af802f5433b04a2470047a362c70ae9d87f773a4e9eeaa85ae4",
+        "binding_kind": "apt",
+        "description": "Execute commands in a chroot environment",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "schroot",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.6.13-3build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "97f2088294b3f774951b313fa9fc2309677fb00d14d369a2e9e1b0fd944813e1",
+        "binding_kind": "apt",
+        "description": "Execute commands setuid root",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "super",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "3.30.3-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d7c59f0f73cb9a8fa40b2bc89e658a288861a3b0c1e537b2abe9c94951a3ef3b",
+        "binding_kind": "apt",
+        "description": "execute SQL against structured text like CSV or TSV",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "textql",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.0.3-5ubuntu0.24.04.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "8f764e7fe91b43f15b66761f55d1ec21ad5ff12bfd4486b24fe689f6e3295619",
+        "binding_kind": "apt",
+        "description": "reads job description line by line and executes them in parallel",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "execute"
+        ],
+        "name": "xjobs",
+        "packages": [],
+        "query": "execute",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "20120412-1build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Ship, discover and review vibe-coded projects on Shipyard, the invite-only feed for AI-built apps.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "app.goshipyard/shipyard",
+        "packages": [],
+        "query": "py",
+        "remotes": [
+          {
+            "required_headers": [
+              "Authorization"
+            ],
+            "type": "streamable-http",
+            "url": "https://goshipyard.app/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/jonnonz1/shipyard"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Yappy for macOS (yappy.biz): release, pricing, features, requirements, Mac compatibility.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "biz.yappy/yappy",
+        "packages": [],
+        "query": "py",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://yappy.biz/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Yappy macOS docs (yappy.biz): setup, permissions, LLM backends, troubleshooting.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "biz.yappy/yappy-docs",
+        "packages": [],
+        "query": "py",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://yappy.biz/docs/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Package intelligence for AI agents across npm, PyPI, crates.io and deps.dev. No API keys.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.datakoot/npm-pypi-crates-packages",
+        "packages": [],
+        "query": "py",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://package.datakoot.com/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/datakoot/package-intel-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "2.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Scan a public GitHub repo for known Vercel Python-runtime deploy footguns.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.edgethirteen.www/vercelpycheck",
+        "packages": [],
+        "query": "py",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://www.edgethirteen.com/api/mcp/vercelpycheck"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Check live availability and book therapy sessions with a Malayalam-speaking psychologist.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.ellomind/therapy-booking",
+        "packages": [],
+        "query": "py",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.ellomind.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Free World Cup 2026 prediction game with fixtures, picks, brackets, and leaderboards",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.fantopy/fantopy",
+        "packages": [],
+        "query": "py",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.fantopy.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "AI CRO for Agencies and MSPs: full automatic CRM; multichannel tracking; draft follow-ups.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.klipy/klipy",
+        "packages": [],
+        "query": "py",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.klipy.ai/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/klipyai/poc-nextjs-nylas"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "1.3.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Send personalized greetings by name, with an optional pirate tone. Generate greeting prompts and e\u2026",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.smithery/arjunkmrm-py-test-0",
+        "packages": [],
+        "query": "py",
+        "remotes": [
+          {
+            "required_headers": [
+              "Authorization"
+            ],
+            "type": "streamable-http",
+            "url": "https://server.smithery.ai/@arjunkmrm/py-test-0/mcp"
+          }
+        ],
+        "repository": {},
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "1.16.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Greet people by name with friendly, customizable messages. Toggle Pirate Mode to speak like a swas\u2026",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.smithery/arjunkmrm-py-test-2",
+        "packages": [],
+        "query": "py",
+        "remotes": [
+          {
+            "required_headers": [
+              "Authorization"
+            ],
+            "type": "streamable-http",
+            "url": "https://server.smithery.ai/@arjunkmrm/py-test-2/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/arjunkmrm/mango-sago"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "1.16.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Persistent AI memory with semantic search, conflict detection, and ticketing.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.stompy/stompy",
+        "packages": [],
+        "query": "py",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.stompy.ai"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/banton/stompy-mcp-server"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Persistent AI agents that run 24/7 in your Slack, Telegram, SMS, or email.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.stumpy/agents",
+        "packages": [],
+        "query": "py",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://stumpy.ai/mcp/message"
+          },
+          {
+            "required_headers": [],
+            "type": "sse",
+            "url": "https://stumpy.ai/mcp/sse"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Teen-first library on CBT, DBT, and finding the right therapist.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.teentherapy/library",
+        "packages": [],
+        "query": "py",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://teentherapy.ai/api/mcp/v1"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Find MP4 download options for public Facebook videos and Reels. No login or local file upload.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.copythevideo/video",
+        "packages": [],
+        "query": "py",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://copythevideo.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Order real 3D prints from chat: send an STL or OpenSCAD model, see one price, get it by UPS.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.hardcopylabs/hardcopy",
+        "packages": [],
+        "query": "py",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.hardcopylabs.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Local-only Python MCP server for the Files.com API.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.files/python-mcp",
+        "packages": [
+          {
+            "identifier": "files-com-mcp",
+            "registry_type": "pypi",
+            "required_environment": [
+              "FILES_COM_API_KEY"
+            ],
+            "runtime_hint": null,
+            "secret_environment": [
+              "FILES_COM_API_KEY"
+            ],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.90"
+          }
+        ],
+        "query": "py",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/Files-com/files-mcp"
+        },
+        "required_environment_count": 1,
+        "required_secret_count": 1,
+        "score": 14,
+        "status": "active",
+        "version": "1.0.90",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Run Python code in a secure sandbox without local setup. Declare inline dependencies and execute s\u2026",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.smithery/STUzhy-py_execute_mcp",
+        "packages": [],
+        "query": "py",
+        "remotes": [
+          {
+            "required_headers": [
+              "Authorization"
+            ],
+            "type": "streamable-http",
+            "url": "https://server.smithery.ai/@STUzhy/py_execute_mcp/mcp"
+          }
+        ],
+        "repository": {},
+        "required_environment_count": 0,
+        "required_secret_count": 1,
+        "score": 12,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Primarily to be used as a template repository for developing MCP servers with FastMCP in Python, P\u2026",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.smithery/anirbanbasu-pymcp",
+        "packages": [],
+        "query": "py",
+        "remotes": [
+          {
+            "required_headers": [
+              "Authorization"
+            ],
+            "type": "streamable-http",
+            "url": "https://server.smithery.ai/@anirbanbasu/pymcp/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/anirbanbasu/pymcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 1,
+        "score": 12,
+        "status": "active",
+        "version": "0.1.7",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "A simple MCP server built with FastMCP and python",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.smithery/smithery-ai-cookbook-python-quickstart",
+        "packages": [],
+        "query": "py",
+        "remotes": [
+          {
+            "required_headers": [
+              "Authorization"
+            ],
+            "type": "streamable-http",
+            "url": "https://server.smithery.ai/@smithery-ai/cookbook-python-quickstart/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "subfolder": "servers/python/quickstart",
+          "url": "https://github.com/smithery-ai/smithery-cookbook"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 1,
+        "score": 12,
+        "status": "active",
+        "version": "1.13.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Proves AI-generated Python does what you asked: lint, types, security, sandbox run, exact fixes.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.statemind/python-code-validator",
+        "packages": [],
+        "query": "py",
+        "remotes": [
+          {
+            "required_headers": [
+              "Authorization"
+            ],
+            "type": "streamable-http",
+            "url": "https://api.statemind.ai/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/jkanselaar/python-code-validator"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 1,
+        "score": 12,
+        "status": "active",
+        "version": "1.22.0",
+        "zero_cost_eligible": true
+      }
+    ],
+    "effect": "Execute every canonical/tests/test_*.py file",
+    "results": [
+      {
+        "binding_performed": false,
+        "candidate_count": 30,
+        "candidates": [
+          {
+            "archive_sha256": "1db7c7971929651dbf766cc041b4a5afc5430855b5d4de329fdff4b0814dd142",
+            "binding_kind": "apt",
+            "description": "implements the ConfigParser Python module functionality in Common Lisp",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "py"
+            ],
+            "name": "cl-py-configparser",
+            "packages": [],
+            "query": "py",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "20170830-1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "884a9815aaa9ef7a3c195bf3732261c35881bc87a7962d7a7efad84d130de271",
+            "binding_kind": "apt",
+            "description": "use autopep8 to beautify a Python buffer",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "py"
+            ],
+            "name": "elpa-py-autopep8",
+            "packages": [],
+            "query": "py",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2016.1-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "46a17d3ea19156e0c7bcd2f9c776c6322faa8cceda625a85c13236951d901210",
+            "binding_kind": "apt",
+            "description": "use isort to sort the imports in a Python buffer",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "py"
+            ],
+            "name": "elpa-py-isort",
+            "packages": [],
+            "query": "py",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2016.1-5",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "179ea587aaecf9aa6368256ed32e5c186a7e538854772f9bb9f463c9d40c94bc",
+            "binding_kind": "apt",
+            "description": "Python script for getting CPU info",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "py"
+            ],
+            "name": "py-cpuinfo",
+            "packages": [],
+            "query": "py",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "9.0.0-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "08890efc45d6053a3c511e7eeec5384f716f4560484dec36d433cde4be81aebd",
+            "binding_kind": "apt",
+            "description": "Python client for tldr: simplified and community-driven man pages",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "py"
+            ],
+            "name": "tldr-py",
+            "packages": [],
+            "query": "py",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.7.0-6",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "6000ac2866dd249129c68aaa802b81bf606f95dce08161f44e4d05871776f104",
+            "binding_kind": "apt",
+            "description": "Linux USB utilities - lsusb.py command",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "py"
+            ],
+            "name": "usbutils-py",
+            "packages": [],
+            "query": "py",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1:017-3build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "50dcec4f36fa0f0737ba84c66613c5f4e6d36211c7024b16221aefdab352c3a7",
+            "binding_kind": "apt",
+            "description": "Execute C program as script",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "execute"
+            ],
+            "name": "binfmtc",
+            "packages": [],
+            "query": "execute",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.17-2.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "1df9d527c63f4bf6459ad5ffcced6b196bcd7d5b60eeef79c175fbbd391e1960",
+            "binding_kind": "apt",
+            "description": "tool to execute commands in parallel on multiple servers",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "execute"
+            ],
+            "name": "capistrano",
+            "packages": [],
+            "query": "execute",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "3.17.2-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "99a3d77e53d96504c4ace6a1eb3376b5a46ce7b9456738919a24e3644e588c5d",
+            "binding_kind": "apt",
+            "description": "CD Detect & Execute utility",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "execute"
+            ],
+            "name": "cdde",
+            "packages": [],
+            "query": "execute",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.3.1-1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "fdef95b69750dc4cd2ea704beac1a34d92389a58baed5f29aec080610bfc41d8",
+            "binding_kind": "apt",
+            "description": "package everything required to execute a Linux command on another computer",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "execute"
+            ],
+            "name": "cde",
+            "packages": [],
+            "query": "execute",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.1+git9-g551e54d-1.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "9b6da452bf5f240f8055f8d0b0298a1696a15b558700694cfe44d3fb3af72003",
+            "binding_kind": "apt",
+            "description": "generate and execute Application type .desktop files",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "execute"
+            ],
+            "name": "dex",
+            "packages": [],
+            "query": "execute",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.9.0-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "dc1889227086749f37f90003b694445adb45dea91236982beffa4125c4a62405",
+            "binding_kind": "apt",
+            "description": "ejabberd module to execute scheduled commands",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "execute"
+            ],
+            "name": "ejabberd-mod-cron",
+            "packages": [],
+            "query": "execute",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.2023.10.04~dfsg0-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c8b5f72811b21252201db139fce224d2e1a64de96a50b40ca43cf7ef6f8672d1",
+            "binding_kind": "apt",
+            "description": "ejabberd module to execute shell commands via XMPP (dangerous!)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "execute"
+            ],
+            "name": "ejabberd-mod-shcommands",
+            "packages": [],
+            "query": "execute",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.2023.10.04~dfsg0-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d76b244cf265a3f43a39473009453bf341222776241262665a05e14ac85388b0",
+            "binding_kind": "apt",
+            "description": "Small command executer with autocompletion using GTK+",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "execute"
+            ],
+            "name": "gexec",
+            "packages": [],
+            "query": "execute",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.4-3build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "52b775b9196e19a7b9716f837d3ed5c5e06d39a19548a6249960b008a612c0a8",
+            "binding_kind": "apt",
+            "description": "C API to execute JavaScript code - header files",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "execute"
+            ],
+            "name": "ino-headers",
+            "packages": [],
+            "query": "execute",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.4.0-2.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "5c906fdcb41ab7197fa180bdf8d873c0a36e51b51ba79ba55792629fd7d30198",
+            "binding_kind": "apt",
+            "description": "LAM runtime environment for executing parallel programs",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "execute"
+            ],
+            "name": "lam-runtime",
+            "packages": [],
+            "query": "execute",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "7.1.4-7.1build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "ba81c2a13032fdac670934bf726be9026acf51a9d2305745bdf071073bb6d9c7",
+            "binding_kind": "apt",
+            "description": "Nodejs module for executing heavy tasks under forked processes in parallel",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "execute"
+            ],
+            "name": "node-jest-worker",
+            "packages": [],
+            "query": "execute",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "29.6.2~ds1+~cs73.45.28-5",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d1db86a78e6c614fb351dcd8d538801ef137ed472a99dd0ef7c22e6f31351346",
+            "binding_kind": "apt",
+            "description": "sequence and execute tasks and dependencies in concurrency",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "execute"
+            ],
+            "name": "node-orchestrator",
+            "packages": [],
+            "query": "execute",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.3.8-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "80c2cbe4bfccc205f7b9a489dc642aa8c9f1b185187204ec0dcc5cdfeaeda440",
+            "binding_kind": "apt",
+            "description": "plugin for OBS Studio providing a dummy source to execute commands",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "execute"
+            ],
+            "name": "obs-command-source",
+            "packages": [],
+            "query": "execute",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.4.0-4build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "905bb55da70911c0b87b34908962bf8860581d2db468adbfe99c8cc1bbb351b5",
+            "binding_kind": "apt",
+            "description": "execute tasks in parallel",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "execute"
+            ],
+            "name": "paexec",
+            "packages": [],
+            "query": "execute",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.1.1-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "fa16dd98a0d45672666f0b93eb9a5c1eeab76da2634d4aff59a4e3ef6c8a5db5",
+            "binding_kind": "apt",
+            "description": "build and execute command lines from standard input in parallel",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "execute"
+            ],
+            "name": "parallel",
+            "packages": [],
+            "query": "execute",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "20231122+ds-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "f252092cc1dafe6b14baa71c0d05a3ac8cb69f85ecda75ecd3b0951ac941167d",
+            "binding_kind": "apt",
+            "description": "Executing commands in parallel",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "execute"
+            ],
+            "name": "pexec",
+            "packages": [],
+            "query": "execute",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.0~rc8-4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "e4b409ea60e2e40d5c9a9a36d5fa69aaec8c619a7a7dd306ddf3fdac0e77ffec",
+            "binding_kind": "apt",
+            "description": "execute binaries from Python packages in isolated environments",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "execute"
+            ],
+            "name": "pipx",
+            "packages": [],
+            "query": "execute",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.4.3-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "f8691dbb4f4c626d6e4632ffeaa9b3283a2b6b48be090aeff9f5deb92275ed4a",
+            "binding_kind": "apt",
+            "description": "GNU R execute and control system processes",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "execute"
+            ],
+            "name": "r-cran-processx",
+            "packages": [],
+            "query": "execute",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "3.8.3-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "ff9d757d405b31f4c96fab6905e0093ab1f76f47ea0508802789c548c77e6420",
+            "binding_kind": "apt",
+            "description": "copy a file to a remote host and execute it there",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "execute"
+            ],
+            "name": "remrun",
+            "packages": [],
+            "query": "execute",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.2.3-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "2123df09d7b3c69fad6904d9625f6a9792c1cf2f89b63a0362f2510a078eef20",
+            "binding_kind": "apt",
+            "description": "simple and complete Ren'Py game",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "py"
+            ],
+            "name": "renpy-thequestion",
+            "packages": [],
+            "query": "py",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "8.1.3+dfsg-1build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "df680c53cb1e2af802f5433b04a2470047a362c70ae9d87f773a4e9eeaa85ae4",
+            "binding_kind": "apt",
+            "description": "Execute commands in a chroot environment",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "execute"
+            ],
+            "name": "schroot",
+            "packages": [],
+            "query": "execute",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.6.13-3build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "97f2088294b3f774951b313fa9fc2309677fb00d14d369a2e9e1b0fd944813e1",
+            "binding_kind": "apt",
+            "description": "Execute commands setuid root",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "execute"
+            ],
+            "name": "super",
+            "packages": [],
+            "query": "execute",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "3.30.3-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d7c59f0f73cb9a8fa40b2bc89e658a288861a3b0c1e537b2abe9c94951a3ef3b",
+            "binding_kind": "apt",
+            "description": "execute SQL against structured text like CSV or TSV",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "execute"
+            ],
+            "name": "textql",
+            "packages": [],
+            "query": "execute",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "2.0.3-5ubuntu0.24.04.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "8f764e7fe91b43f15b66761f55d1ec21ad5ff12bfd4486b24fe689f6e3295619",
+            "binding_kind": "apt",
+            "description": "reads job description line by line and executes them in parallel",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "execute"
+            ],
+            "name": "xjobs",
+            "packages": [],
+            "query": "execute",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "20120412-1build2",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Execute every canonical/tests/test_*.py file",
+        "errors": [],
+        "queries": [
+          "execute",
+          "py"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "APT_CATALOG",
+        "source_url": null
+      },
+      {
+        "binding_performed": false,
+        "candidate_count": 30,
+        "candidates": [
+          {
+            "description": "Ship, discover and review vibe-coded projects on Shipyard, the invite-only feed for AI-built apps.",
+            "is_latest": true,
+            "name": "app.goshipyard/shipyard",
+            "packages": [],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://goshipyard.app/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/jonnonz1/shipyard"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Yappy for macOS (yappy.biz): release, pricing, features, requirements, Mac compatibility.",
+            "is_latest": true,
+            "name": "biz.yappy/yappy",
+            "packages": [],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://yappy.biz/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Yappy macOS docs (yappy.biz): setup, permissions, LLM backends, troubleshooting.",
+            "is_latest": true,
+            "name": "biz.yappy/yappy-docs",
+            "packages": [],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://yappy.biz/docs/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Package intelligence for AI agents across npm, PyPI, crates.io and deps.dev. No API keys.",
+            "is_latest": true,
+            "name": "com.datakoot/npm-pypi-crates-packages",
+            "packages": [],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://package.datakoot.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/datakoot/package-intel-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "2.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Scan a public GitHub repo for known Vercel Python-runtime deploy footguns.",
+            "is_latest": true,
+            "name": "com.edgethirteen.www/vercelpycheck",
+            "packages": [],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://www.edgethirteen.com/api/mcp/vercelpycheck"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Check live availability and book therapy sessions with a Malayalam-speaking psychologist.",
+            "is_latest": true,
+            "name": "com.ellomind/therapy-booking",
+            "packages": [],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.ellomind.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Local-only Python MCP server for the Files.com API.",
+            "is_latest": true,
+            "name": "com.files/python-mcp",
+            "packages": [
+              {
+                "identifier": "files-com-mcp",
+                "registry_type": "pypi",
+                "required_environment": [
+                  "FILES_COM_API_KEY"
+                ],
+                "runtime_hint": null,
+                "secret_environment": [
+                  "FILES_COM_API_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.90"
+              }
+            ],
+            "query": "py",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Files-com/files-mcp"
+            },
+            "required_environment_count": 1,
+            "required_secret_count": 1,
+            "score": 14,
+            "status": "active",
+            "version": "1.0.90",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Run Python code in a secure sandbox without local setup. Declare inline dependencies and execute s\u2026",
+            "is_latest": true,
+            "name": "ai.smithery/STUzhy-py_execute_mcp",
+            "packages": [],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@STUzhy/py_execute_mcp/mcp"
+              }
+            ],
+            "repository": {},
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Primarily to be used as a template repository for developing MCP servers with FastMCP in Python, P\u2026",
+            "is_latest": true,
+            "name": "ai.smithery/anirbanbasu-pymcp",
+            "packages": [],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@anirbanbasu/pymcp/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/anirbanbasu/pymcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "0.1.7",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "A simple MCP server built with FastMCP and python",
+            "is_latest": true,
+            "name": "ai.smithery/smithery-ai-cookbook-python-quickstart",
+            "packages": [],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@smithery-ai/cookbook-python-quickstart/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "subfolder": "servers/python/quickstart",
+              "url": "https://github.com/smithery-ai/smithery-cookbook"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "1.13.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Proves AI-generated Python does what you asked: lint, types, security, sandbox run, exact fixes.",
+            "is_latest": true,
+            "name": "ai.statemind/python-code-validator",
+            "packages": [],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://api.statemind.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/jkanselaar/python-code-validator"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "1.22.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Amazon product API & MCP server: search, prices, reviews, sellers, deals, and ASIN lookup by Canopy.",
+            "is_latest": true,
+            "name": "co.canopyapi/mcp",
+            "packages": [],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [
+                  "CANOPY-API-KEY"
+                ],
+                "type": "streamable-http",
+                "url": "https://mcp.canopyapi.co/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/canopy-api/canopy-api-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "2.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "GDPR-compliant ApyHub utility APIs hosted in the EU. Requires an EU-generated ApyHub API key.",
+            "is_latest": true,
+            "name": "com.apyhub/mcp-server-eu",
+            "packages": [],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://mcp.eu.apyhub.com"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "1,500+ ApyHub utility APIs served from the US cluster. Requires a US-generated ApyHub API key.",
+            "is_latest": true,
+            "name": "com.apyhub/mcp-server-us",
+            "packages": [],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://mcp.us.apyhub.com"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Free World Cup 2026 prediction game with fixtures, picks, brackets, and leaderboards",
+            "is_latest": true,
+            "name": "ai.fantopy/fantopy",
+            "packages": [],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.fantopy.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "AI CRO for Agencies and MSPs: full automatic CRM; multichannel tracking; draft follow-ups.",
+            "is_latest": true,
+            "name": "ai.klipy/klipy",
+            "packages": [],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.klipy.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/klipyai/poc-nextjs-nylas"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.3.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Send personalized greetings by name, with an optional pirate tone. Generate greeting prompts and e\u2026",
+            "is_latest": true,
+            "name": "ai.smithery/arjunkmrm-py-test-0",
+            "packages": [],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@arjunkmrm/py-test-0/mcp"
+              }
+            ],
+            "repository": {},
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.16.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Greet people by name with friendly, customizable messages. Toggle Pirate Mode to speak like a swas\u2026",
+            "is_latest": true,
+            "name": "ai.smithery/arjunkmrm-py-test-2",
+            "packages": [],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@arjunkmrm/py-test-2/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/arjunkmrm/mango-sago"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.16.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Persistent AI memory with semantic search, conflict detection, and ticketing.",
+            "is_latest": true,
+            "name": "ai.stompy/stompy",
+            "packages": [],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.stompy.ai"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/banton/stompy-mcp-server"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Persistent AI agents that run 24/7 in your Slack, Telegram, SMS, or email.",
+            "is_latest": true,
+            "name": "ai.stumpy/agents",
+            "packages": [],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://stumpy.ai/mcp/message"
+              },
+              {
+                "required_headers": [],
+                "type": "sse",
+                "url": "https://stumpy.ai/mcp/sse"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Teen-first library on CBT, DBT, and finding the right therapist.",
+            "is_latest": true,
+            "name": "ai.teentherapy/library",
+            "packages": [],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://teentherapy.ai/api/mcp/v1"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Find MP4 download options for public Facebook videos and Reels. No login or local file upload.",
+            "is_latest": true,
+            "name": "com.copythevideo/video",
+            "packages": [],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://copythevideo.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Order real 3D prints from chat: send an STL or OpenSCAD model, see one price, get it by UPS.",
+            "is_latest": true,
+            "name": "com.hardcopylabs/hardcopy",
+            "packages": [],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.hardcopylabs.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Transcribe audio & video: diarization, timed SRT/VTT, podcasts, paste-a-link, whole-feed batch.",
+            "is_latest": true,
+            "name": "co.pepys/pepys-mcp",
+            "packages": [
+              {
+                "identifier": "pepys-mcp",
+                "registry_type": "npm",
+                "required_environment": [
+                  "PEPYS_API_KEY"
+                ],
+                "runtime_hint": null,
+                "secret_environment": [
+                  "PEPYS_API_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.1"
+              }
+            ],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://pepys.co/api/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 1,
+            "required_secret_count": 1,
+            "score": 10,
+            "status": "active",
+            "version": "0.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Search Ellen G. White\u2019s writings by keyword to surface relevant quotations. Retrieve exact passage\u2026",
+            "is_latest": true,
+            "name": "ai.smithery/pythondev-pro-egw_writings_mcp_server",
+            "packages": [],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@pythondev-pro/egw_writings_mcp_server/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/pythondev-pro/egw_writings_mcp_server"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 8,
+            "status": "active",
+            "version": "1.12.4",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "AI crypto signals, whale positions, 19 technical indicators, derivatives, screener and backtests",
+            "is_latest": true,
+            "name": "app.traderspy/traderspy",
+            "packages": [],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://mcp.traderspy.app/mcp"
+              }
+            ],
+            "repository": {
+              "id": "1178882102",
+              "source": "github",
+              "url": "https://github.com/target1m/traderspy-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 8,
+            "status": "active",
+            "version": "3.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "PyPI releases: Python package versions, daily. Register in-session \u2014 free testnet funds.",
+            "is_latest": true,
+            "name": "com.a2awire/data-pypi-release-package-release-python-dependency",
+            "packages": [],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://a2awire.com/mcp/data/pypiwatch-new-pypi-package-releases-python-dependency-updates-dffb95/http"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/ee324/a2awire"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": -85,
+            "status": "active",
+            "version": "0.1.1",
+            "zero_cost_eligible": false
+          },
+          {
+            "description": "A paid remote MCP for Pydantic AI structured output, built to return verdicts, receipts, usage logs,",
+            "is_latest": true,
+            "name": "com.clauxel.pydanticcontract/pydanticcontract-mcp",
+            "packages": [],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://pydanticcontract.clauxel.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/clauxel/pydantic-contract-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": -85,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": false
+          },
+          {
+            "description": "Agent-commerce MCP server for x402/USDC payments and affiliate splits on Base.",
+            "is_latest": true,
+            "name": "ai.pyrimid/pyrimid",
+            "packages": [],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://pyrimid.ai/api/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/pyrimid-ai/pyrimid"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": -89,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": false
+          },
+          {
+            "description": "Verify a US business exists and is active by name + state. Status, formation date, agent.",
+            "is_latest": true,
+            "name": "com.gensparkclaw.mbiyepyh/business-verify",
+            "packages": [],
+            "query": "py",
+            "remotes": [
+              {
+                "required_headers": [
+                  "X-API-Key"
+                ],
+                "type": "streamable-http",
+                "url": "https://mbiyepyh.gensparkclaw.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": -92,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": false
+          }
+        ],
+        "effect": "Execute every canonical/tests/test_*.py file",
+        "errors": [
+          {
+            "error": "TimeoutError:The read operation timed out",
+            "query": "execute"
+          }
+        ],
+        "queries": [
+          "execute",
+          "py"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "OFFICIAL_MCP_REGISTRY",
+        "source_url": "https://registry.modelcontextprotocol.io"
+      }
+    ],
+    "schema": "PROJECT_BRAIN_FEDERATED_CAPABILITY_DISCOVERY_V1",
+    "sources": [
+      "APT_CATALOG",
+      "OFFICIAL_MCP_REGISTRY"
+    ]
+  },
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
+  "source": "FEDERATED_CAPABILITY_DISCOVERY_FALLBACK",
+  "targeted_acquisition_error": "AutoAcquisitionFailure:NO_LOW_FRICTION_APT_CLI_CANDIDATE"
+}

@@ -1,0 +1,21 @@
+{
+  "blocker": {
+    "adapter": "goal",
+    "error": "Blocker:CAPABILITY_ACQUISITION_REQUIRED:{\"auto_acquisition_error\": \"AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"cl-py-configparser\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"elpa-py-autopep8\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"elpa-py-isort\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\\\", \\\"name\\\": \\\"py-cpuinfo\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\\\", \\\"name\\\": \\\"tldr-py\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\\\", \\\"name\\\": \\\"usbutils-py\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"binfmtc\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\\\", \\\"name\\\": \\\"capistrano\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\\\", \\\"name\\\": \\\"cdde\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\\\", \\\"name\\\": \\\"cde\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\\\", \\\"name\\\": \\\"dex\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ProbeFailure:APT_INSTALL_FAILED:E: Sub-process /usr/bin/dpkg returned an error code (1)\\\\n\\\", \\\"name\\\": \\\"ejabberd-mod-cron\\\", \\\"status\\\": \\\"PROBE_FAILED\\\"}]\", \"evidence_path\": \"canonical/astra_runtime/evidence/ASTRA-RUNTIME-CANONICAL-TEST-AUDIT-001__PLAIN_GOAL_CAPABILITY_DISCOVERY.json\", \"targeted_acquisition_error\": \"AutoAcquisitionFailure:NO_LOW_FRICTION_APT_CLI_CANDIDATE\", \"top_candidates\": [{\"integration_friction\": 0, \"name\": \"cl-py-configparser\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"elpa-py-autopep8\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"elpa-py-isort\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"py-cpuinfo\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"tldr-py\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"usbutils-py\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"binfmtc\", \"required_secret_count\": 0, \"score\": 18, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"capistrano\", \"required_secret_count\": 0, \"score\": 18, \"zero_cost_eligible\": true}]}",
+    "mission_id": "ASTRA-RUNTIME-CANONICAL-TEST-AUDIT-001",
+    "observed_at_utc": "2026-09-25T01:14:37.726585+00:00",
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "execute-canonical-test-audit",
+    "step_index": 0
+  },
+  "created_at_utc": "2026-09-25T01:12:31.725654+00:00",
+  "history": [],
+  "mission_id": "ASTRA-RUNTIME-CANONICAL-TEST-AUDIT-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_CANONICAL_TEST_AUDIT_001.json",
+  "mission_sha256": "e18bb3679cdd7fd4728c7f1ad62a813188ef6d3a751d096104be57b91b9182c4",
+  "next_step": 0,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-25T01:14:37.726783+00:00"
+}
