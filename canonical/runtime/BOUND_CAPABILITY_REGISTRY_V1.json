@@ -1,5 +1,117 @@
 {
   "capabilities": {
+    "archive.tar_gz.create_from_manifest": {
+      "action_template": {
+        "args": {
+          "capability_id": "archive.tar_gz.create_from_manifest",
+          "manifest_path": "${input.manifest_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "archive_tarfile",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "archive",
+        "tar",
+        "tar.gz",
+        "bundle",
+        "manifest",
+        "package"
+      ],
+      "limitations": [
+        "Creates repository-local tar.gz archives from a JSON manifest's repository-local verification_paths.",
+        "Only regular files under the repository root are included."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "archive.tar_gz.create_from_manifest"
+      ],
+      "requires": [
+        "manifest.json.available"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/archive_tarfile.py",
+        "module": "tarfile",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "archive.verify.tar_gz.gnu",
+        "mission_id": "ASTRA-VERIFY-MANIFEST-ARCHIVE-001",
+        "observed_effect": {
+          "member_count": 2,
+          "output_sha256": "5f2b144d07156cbb48cc37d66627f7ba98e32498e3bebcc4c89eb23f23a277d6"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MANIFEST-ARCHIVE-001__RECEIPT.json"
+      }
+    },
+    "archive.verify.tar_gz.gnu": {
+      "action_template": {
+        "args": {
+          "archive_path": "${input.archive_path}",
+          "capability_id": "archive.verify.tar_gz.gnu",
+          "manifest_path": "${input.manifest_path}"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "archive_verify_gnu_tar",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "verify",
+        "archive",
+        "tar",
+        "hash",
+        "manifest",
+        "bundle",
+        "members"
+      ],
+      "limitations": [
+        "Verification uses GNU tar to list and extract the archive, then SHA-256 compares extracted bytes to repository sources.",
+        "Manifest and archive paths must be repository-local."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "archive.tar_gz.verify_manifest_members"
+      ],
+      "requires": [
+        "manifest.json.available",
+        "archive.tar_gz.available"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py",
+        "executable": "tar",
+        "type": "system_tool"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "mission_id": "ASTRA-VERIFY-MANIFEST-ARCHIVE-001",
+        "observed_effect": {
+          "member_count": 2,
+          "verified": true
+        },
+        "producer_independent": true,
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MANIFEST-ARCHIVE-001__RECEIPT.json"
+      }
+    },
     "auto.apt.zint": {
       "action_template": {
         "args": {
@@ -165,6 +277,71 @@
         "independent_verifier_capability": "pdf.extract.text.pypdf",
         "mission_id": "ASTRA-VERIFY-MARKDOWN-PDF-001",
         "verification_evidence": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MARKDOWN-PDF-001__INDEPENDENT.json"
+      }
+    },
+    "http.json.fetch_from_state": {
+      "action_template": {
+        "args": {
+          "capability_id": "http.json.fetch_from_state",
+          "max_bytes": 5000000,
+          "output_path": "${input.output_path}",
+          "source_json_path": "${input.source_json_path}",
+          "timeout_s": 30,
+          "url_key": "${input.url_key}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "http_json_fetch",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "fetch",
+        "http",
+        "https",
+        "json",
+        "url",
+        "metadata",
+        "live",
+        "authoritative"
+      ],
+      "limitations": [
+        "HTTPS only.",
+        "The requested URL must be uniquely named by url_key inside a repository-local JSON source.",
+        "Fetched content must parse as JSON and is size bounded."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "http.json.fetch_from_state"
+      ],
+      "requires": [
+        "structured.json.available"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/http_json_fetch.py",
+        "module": "urllib.request",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independent_semantics_equal": true,
+        "independent_verifier": "curl",
+        "mission_id": "ASTRA-VERIFY-HTTP-JSON-FROM-STATE-001",
+        "observed_effect": {
+          "output_bytes": 9248,
+          "output_sha256": "9eca4c2315cec5fcb72f58ed96752dabd6711ba84603eb53160caa19eefe8c7f",
+          "requested_url": "https://pypi.org/pypi/pypdf/6.19.0/json"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-HTTP-JSON-FROM-STATE-001__RECEIPT.json"
       }
     },
     "image.qr.generate.qrencode": {
@@ -446,191 +623,27 @@
         "workflow_run_id": 36060830384
       }
     },
-    "archive.tar_gz.create_from_manifest": {
-      "provides": [
-        "archive.tar_gz.create_from_manifest"
-      ],
-      "requires": [
-        "manifest.json.available"
-      ],
-      "keywords": [
-        "archive",
-        "tar",
-        "tar.gz",
-        "bundle",
-        "manifest",
-        "package"
-      ],
-      "cost": 1,
-      "platforms": [
-        "linux"
-      ],
-      "limitations": [
-        "Creates repository-local tar.gz archives from a JSON manifest's repository-local verification_paths.",
-        "Only regular files under the repository root are included."
-      ],
-      "adapter_module": "archive_tarfile",
-      "entrypoint": "run",
-      "action_template": {
-        "type": "invoke_capability",
-        "args": {
-          "capability_id": "archive.tar_gz.create_from_manifest",
-          "manifest_path": "${input.manifest_path}",
-          "output_path": "${input.output_path}"
-        },
-        "expect": {
-          "type": "field_equals",
-          "field": "output_verified",
-          "value": true
-        }
-      },
-      "source": {
-        "type": "python_stdlib",
-        "module": "tarfile",
-        "adapter_path": "canonical/runtime/bound_capabilities/archive_tarfile.py"
-      },
-      "incremental_spend_usd": 0,
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "verification": {
-        "mission_id": "ASTRA-VERIFY-MANIFEST-ARCHIVE-001",
-        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MANIFEST-ARCHIVE-001__RECEIPT.json",
-        "independently_verified_by": "archive.verify.tar_gz.gnu",
-        "observed_effect": {
-          "member_count": 2,
-          "output_sha256": "5f2b144d07156cbb48cc37d66627f7ba98e32498e3bebcc4c89eb23f23a277d6"
-        }
-      }
-    },
-    "archive.verify.tar_gz.gnu": {
-      "provides": [
-        "archive.tar_gz.verify_manifest_members"
-      ],
-      "requires": [
-        "manifest.json.available",
-        "archive.tar_gz.available"
-      ],
-      "keywords": [
-        "verify",
-        "archive",
-        "tar",
-        "hash",
-        "manifest",
-        "bundle",
-        "members"
-      ],
-      "cost": 1,
-      "platforms": [
-        "linux"
-      ],
-      "limitations": [
-        "Verification uses GNU tar to list and extract the archive, then SHA-256 compares extracted bytes to repository sources.",
-        "Manifest and archive paths must be repository-local."
-      ],
-      "adapter_module": "archive_verify_gnu_tar",
-      "entrypoint": "run",
-      "action_template": {
-        "type": "invoke_capability",
-        "args": {
-          "capability_id": "archive.verify.tar_gz.gnu",
-          "manifest_path": "${input.manifest_path}",
-          "archive_path": "${input.archive_path}"
-        },
-        "expect": {
-          "type": "field_equals",
-          "field": "verified",
-          "value": true
-        }
-      },
-      "source": {
-        "type": "system_tool",
-        "executable": "tar",
-        "adapter_path": "canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py"
-      },
-      "incremental_spend_usd": 0,
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "verification": {
-        "mission_id": "ASTRA-VERIFY-MANIFEST-ARCHIVE-001",
-        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MANIFEST-ARCHIVE-001__RECEIPT.json",
-        "producer_independent": true,
-        "observed_effect": {
-          "verified": true,
-          "member_count": 2
-        }
-      }
-    },
-    "http.json.fetch_from_state": {
-      "provides": [
-        "http.json.fetch_from_state"
-      ],
-      "requires": [
-        "structured.json.available"
-      ],
-      "keywords": [
-        "fetch",
-        "http",
-        "https",
-        "json",
-        "url",
-        "metadata",
-        "live",
-        "authoritative"
-      ],
-      "cost": 1,
-      "platforms": [
-        "linux",
-        "windows",
-        "darwin"
-      ],
-      "limitations": [
-        "HTTPS only.",
-        "The requested URL must be uniquely named by url_key inside a repository-local JSON source.",
-        "Fetched content must parse as JSON and is size bounded."
-      ],
-      "adapter_module": "http_json_fetch",
-      "entrypoint": "run",
-      "action_template": {
-        "type": "invoke_capability",
-        "args": {
-          "capability_id": "http.json.fetch_from_state",
-          "source_json_path": "${input.source_json_path}",
-          "url_key": "${input.url_key}",
-          "output_path": "${input.output_path}",
-          "max_bytes": 5000000,
-          "timeout_s": 30
-        },
-        "expect": {
-          "type": "field_equals",
-          "field": "output_verified",
-          "value": true
-        }
-      },
-      "source": {
-        "type": "python_stdlib",
-        "module": "urllib.request",
-        "adapter_path": "canonical/runtime/bound_capabilities/http_json_fetch.py"
-      },
-      "incremental_spend_usd": 0,
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "verification": {
-        "mission_id": "ASTRA-VERIFY-HTTP-JSON-FROM-STATE-001",
-        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-HTTP-JSON-FROM-STATE-001__RECEIPT.json",
-        "independent_verifier": "curl",
-        "independent_semantics_equal": true,
-        "observed_effect": {
-          "output_bytes": 9248,
-          "output_sha256": "9eca4c2315cec5fcb72f58ed96752dabd6711ba84603eb53160caa19eefe8c7f",
-          "requested_url": "https://pypi.org/pypi/pypdf/6.19.0/json"
-        }
-      }
-    },
     "pypi.provenance.audit_live_artifact": {
-      "provides": [
-        "pypi.provenance.audit_live_artifact"
-      ],
-      "requires": [
-        "pypi.selection.available",
-        "pypi.live_metadata.available"
-      ],
+      "action_template": {
+        "args": {
+          "capability_id": "pypi.provenance.audit_live_artifact",
+          "max_bytes": 20000000,
+          "metadata_path": "${input.metadata_path}",
+          "report_path": "${input.report_path}",
+          "selection_path": "${input.selection_path}",
+          "timeout_s": 60
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "pypi_provenance_audit",
+      "cost": 2,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
       "keywords": [
         "verify",
         "pypi",
@@ -643,131 +656,61 @@
         "provenance",
         "live"
       ],
-      "cost": 2,
-      "platforms": [
-        "linux",
-        "windows",
-        "darwin"
-      ],
       "limitations": [
         "Supports canonical records whose source type is pypi and names an exact wheel filename/hash.",
         "Uses authoritative live PyPI JSON metadata and downloads the exact recorded wheel over HTTPS.",
         "Produces a report; final acceptance should be performed by a separate verifier."
       ],
-      "adapter_module": "pypi_provenance_audit",
-      "entrypoint": "run",
-      "action_template": {
-        "type": "invoke_capability",
-        "args": {
-          "capability_id": "pypi.provenance.audit_live_artifact",
-          "selection_path": "${input.selection_path}",
-          "metadata_path": "${input.metadata_path}",
-          "report_path": "${input.report_path}",
-          "max_bytes": 20000000,
-          "timeout_s": 60
-        },
-        "expect": {
-          "type": "field_equals",
-          "field": "verified",
-          "value": true
-        }
-      },
-      "source": {
-        "type": "python_stdlib",
-        "module": "urllib.request",
-        "adapter_path": "canonical/runtime/bound_capabilities/pypi_provenance_audit.py"
-      },
-      "incremental_spend_usd": 0,
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "verification": {
-        "mission_id": "ASTRA-VERIFY-PYPI-PROVENANCE-001",
-        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PYPI-PROVENANCE-001__RECEIPT.json",
-        "independent_verifier": "curl",
-        "independent_report_assertion": true,
-        "observed_effect": {
-          "project": "pypdf",
-          "artifact_bytes": 395480,
-          "recorded_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14",
-          "live_metadata_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14",
-          "downloaded_artifact_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14"
-        }
-      }
-    },
-    "yaml.to_json.yq": {
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
       "provides": [
-        "yaml.to_json"
+        "pypi.provenance.audit_live_artifact"
       ],
       "requires": [
-        "yaml.file.available"
+        "pypi.selection.available",
+        "pypi.live_metadata.available"
       ],
-      "keywords": [
-        "yaml",
-        "yml",
-        "json",
-        "parse",
-        "convert",
-        "workflow",
-        "structured"
-      ],
-      "cost": 1,
-      "platforms": [
-        "linux"
-      ],
-      "limitations": [
-        "Converts repository-local YAML/YML files into deterministic JSON.",
-        "Verified with Ubuntu yq 3.1.0-3."
-      ],
-      "adapter_module": "yq_yaml_json",
-      "entrypoint": "run",
-      "action_template": {
-        "type": "invoke_capability",
-        "args": {
-          "capability_id": "yaml.to_json.yq",
-          "yaml_path": "${input.yaml_path}",
-          "output_path": "${input.output_path}",
-          "timeout_s": 60
-        },
-        "expect": {
-          "type": "field_equals",
-          "field": "output_verified",
-          "value": true
-        }
-      },
       "source": {
-        "type": "apt",
-        "origin": "Ubuntu",
-        "packages": [
-          {
-            "name": "yq",
-            "version": "3.1.0-3",
-            "sha256": "ef935e2b644e6c70ed080396dbe3d93330d1482fd9ce6f34813bdcf3616cb809"
-          }
-        ]
+        "adapter_path": "canonical/runtime/bound_capabilities/pypi_provenance_audit.py",
+        "module": "urllib.request",
+        "type": "python_stdlib"
       },
-      "incremental_spend_usd": 0,
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
-        "mission_id": "ASTRA-VERIFY-YAML-JSON-YQ-001",
-        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-YAML-JSON-YQ-001__RECEIPT.json",
-        "independent_verifier": "raw_yaml_regex_crosscheck",
+        "independent_report_assertion": true,
+        "independent_verifier": "curl",
+        "mission_id": "ASTRA-VERIFY-PYPI-PROVENANCE-001",
         "observed_effect": {
-          "input_sha256": "34ec38e5e55a2fc3e2661fe52eb84b0eaf61b09126729180ffbc22eb068f46ac",
-          "output_sha256": "23c812aa8aa6e6ebd0e8674d15bd9994fa00674f46afd002704e2f7624c64f13",
-          "job_ids": [
-            "run-mission"
-          ],
-          "uses": [
-            "actions/checkout@v4",
-            "actions/setup-python@v5"
-          ]
-        }
+          "artifact_bytes": 395480,
+          "downloaded_artifact_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14",
+          "live_metadata_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14",
+          "project": "pypdf",
+          "recorded_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PYPI-PROVENANCE-001__RECEIPT.json"
       }
     },
     "python.source.audit.ast": {
-      "provides": [
-        "python.source.audit"
-      ],
-      "requires": [],
+      "action_template": {
+        "args": {
+          "capability_id": "python.source.audit.ast",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_source_audit",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
       "keywords": [
         "python",
         "source",
@@ -777,56 +720,58 @@
         "classes",
         "sha256"
       ],
-      "cost": 1,
+      "limitations": [
+        "Audits repository-local Python files using the Python standard-library AST parser.",
+        "Reports top-level imports, functions, and classes only."
+      ],
       "platforms": [
         "linux",
         "windows",
         "darwin"
       ],
-      "limitations": [
-        "Audits repository-local Python files using the Python standard-library AST parser.",
-        "Reports top-level imports, functions, and classes only."
+      "provides": [
+        "python.source.audit"
       ],
-      "adapter_module": "python_source_audit",
-      "entrypoint": "run",
-      "action_template": {
-        "type": "invoke_capability",
-        "args": {
-          "capability_id": "python.source.audit.ast",
-          "source_root": "${input.source_root}",
-          "output_path": "${input.output_path}"
-        },
-        "expect": {
-          "type": "field_equals",
-          "field": "output_verified",
-          "value": true
-        }
-      },
+      "requires": [],
       "source": {
-        "type": "python_stdlib",
         "module": "ast",
+        "type": "python_stdlib",
         "version_family": "3.x"
       },
-      "incremental_spend_usd": 0,
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
-        "mission_id": "ASTRA-VERIFY-PYTHON-SOURCE-AUDIT-001",
-        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PYTHON-SOURCE-AUDIT-001__RECEIPT.json",
-        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-PYTHON-SOURCE-AUDIT-001.json",
         "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-PYTHON-SOURCE-AUDIT-001",
         "observed_effect": {
-          "files": 26,
-          "functions": 151,
           "classes": 12,
-          "distinct_imported_modules": 41
-        }
+          "distinct_imported_modules": 41,
+          "files": 26,
+          "functions": 151
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PYTHON-SOURCE-AUDIT-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-PYTHON-SOURCE-AUDIT-001.json"
       }
     },
     "python.tests.audit.unittest": {
-      "provides": [
-        "python.tests.audit"
-      ],
-      "requires": [],
+      "action_template": {
+        "args": {
+          "capability_id": "python.tests.audit.unittest",
+          "output_path": "${input.output_path}",
+          "pattern": "${input.pattern}",
+          "source_root": "${input.source_root}",
+          "timeout_s": 180
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_test_audit",
+      "cost": 2,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
       "keywords": [
         "python",
         "tests",
@@ -836,49 +781,248 @@
         "failed",
         "skipped"
       ],
-      "cost": 2,
       "platforms": [
         "linux",
         "windows",
         "darwin"
       ],
-      "adapter_module": "python_test_audit",
-      "entrypoint": "run",
-      "action_template": {
-        "type": "invoke_capability",
-        "args": {
-          "capability_id": "python.tests.audit.unittest",
-          "source_root": "${input.source_root}",
-          "pattern": "${input.pattern}",
-          "output_path": "${input.output_path}",
-          "timeout_s": 180
-        },
-        "expect": {
-          "type": "field_equals",
-          "field": "output_verified",
-          "value": true
-        }
-      },
+      "provides": [
+        "python.tests.audit"
+      ],
+      "requires": [],
       "source": {
+        "module": "unittest",
         "type": "python_stdlib",
-        "version_family": "3.x",
-        "module": "unittest"
+        "version_family": "3.x"
       },
-      "incremental_spend_usd": 0,
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
-        "mission_id": "ASTRA-VERIFY-PYTHON-TEST-AUDIT-005",
-        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PYTHON-TEST-AUDIT-005__RECEIPT.json",
-        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-PYTHON-TEST-AUDIT-005.json",
         "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-PYTHON-TEST-AUDIT-005",
         "observed_effect": {
-          "files": 8,
-          "tests": 41,
-          "passed": 41,
-          "failed": 0,
           "errors": 0,
-          "skipped": 0
-        }
+          "failed": 0,
+          "files": 8,
+          "passed": 41,
+          "skipped": 0,
+          "tests": 41
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PYTHON-TEST-AUDIT-005__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-PYTHON-TEST-AUDIT-005.json"
+      }
+    },
+    "xlsx.table.create_from_json_records": {
+      "action_template": {
+        "args": {
+          "capability_id": "xlsx.table.create_from_json_records",
+          "goal": "${input.goal}",
+          "json_path": "${input.json_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "xlsx_table_xlsxwriter",
+      "cost": 2,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "xlsx",
+        "spreadsheet",
+        "workbook",
+        "rows",
+        "columns",
+        "create"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "xlsx.table.create_from_json_records"
+      ],
+      "requires": [],
+      "source": {
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "python3-xlsxwriter",
+            "sha256": "234db5c80ba8d2eaf9933a95566f81a86aa01bb15b884f2ee6c932847e58bfd2",
+            "version": "3.1.9-1"
+          }
+        ],
+        "type": "apt"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independent_verifier_package": "python3-openpyxl",
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-001",
+        "observed_effect": {
+          "adapter": "xlsx_table_xlsxwriter",
+          "collection_path": [
+            "capabilities"
+          ],
+          "column_count": 5,
+          "columns": [
+            "capability_id",
+            "status",
+            "source_type",
+            "provides",
+            "incremental_spend_usd"
+          ],
+          "output_bytes": 5975,
+          "output_path": "canonical/astra_runtime/tmp/XLSX_LIBRARY_ROUNDTRIP_VERIFY.xlsx",
+          "output_sha256": "a54af2964857624e9da15e48369055e6e2ab74faed0239f2032261c217eb1ec7",
+          "output_verified": true,
+          "row_count": 13,
+          "status_value": "VERIFIED_BOUND_CAPABILITY"
+        },
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-001__RESULT.json"
+      }
+    },
+    "xlsx.table.verify_against_json_records": {
+      "action_template": {
+        "args": {
+          "capability_id": "xlsx.table.verify_against_json_records",
+          "goal": "${input.goal}",
+          "json_path": "${input.json_path}",
+          "xlsx_path": "${input.xlsx_path}"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "xlsx_verify_openpyxl",
+      "cost": 2,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "xlsx",
+        "spreadsheet",
+        "workbook",
+        "rows",
+        "columns",
+        "verify",
+        "reopen",
+        "independently"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "xlsx.table.verify_against_json_records"
+      ],
+      "requires": [],
+      "source": {
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "python3-openpyxl",
+            "sha256": "0892bf202df1f56bb36530c3ba9ac9f24f6a5b115442e7aa602b12e46aa0433c",
+            "version": "3.1.2+dfsg-6"
+          }
+        ],
+        "type": "apt"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-001",
+        "observed_effect": {
+          "adapter": "xlsx_verify_openpyxl",
+          "columns": [
+            "capability_id",
+            "status",
+            "source_type",
+            "provides",
+            "incremental_spend_usd"
+          ],
+          "producer_independent_verifier": true,
+          "status_value": "VERIFIED_BOUND_CAPABILITY",
+          "verified": true,
+          "verified_rows": 13,
+          "xlsx_path": "canonical/astra_runtime/tmp/XLSX_LIBRARY_ROUNDTRIP_VERIFY.xlsx",
+          "xlsx_sha256": "a54af2964857624e9da15e48369055e6e2ab74faed0239f2032261c217eb1ec7"
+        },
+        "producer_package": "python3-xlsxwriter",
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-001__RESULT.json"
+      }
+    },
+    "yaml.to_json.yq": {
+      "action_template": {
+        "args": {
+          "capability_id": "yaml.to_json.yq",
+          "output_path": "${input.output_path}",
+          "timeout_s": 60,
+          "yaml_path": "${input.yaml_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "yq_yaml_json",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "yaml",
+        "yml",
+        "json",
+        "parse",
+        "convert",
+        "workflow",
+        "structured"
+      ],
+      "limitations": [
+        "Converts repository-local YAML/YML files into deterministic JSON.",
+        "Verified with Ubuntu yq 3.1.0-3."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "yaml.to_json"
+      ],
+      "requires": [
+        "yaml.file.available"
+      ],
+      "source": {
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "yq",
+            "sha256": "ef935e2b644e6c70ed080396dbe3d93330d1482fd9ce6f34813bdcf3616cb809",
+            "version": "3.1.0-3"
+          }
+        ],
+        "type": "apt"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independent_verifier": "raw_yaml_regex_crosscheck",
+        "mission_id": "ASTRA-VERIFY-YAML-JSON-YQ-001",
+        "observed_effect": {
+          "input_sha256": "34ec38e5e55a2fc3e2661fe52eb84b0eaf61b09126729180ffbc22eb068f46ac",
+          "job_ids": [
+            "run-mission"
+          ],
+          "output_sha256": "23c812aa8aa6e6ebd0e8674d15bd9994fa00674f46afd002704e2f7624c64f13",
+          "uses": [
+            "actions/checkout@v4",
+            "actions/setup-python@v5"
+          ]
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-YAML-JSON-YQ-001__RECEIPT.json"
       }
     }
   },

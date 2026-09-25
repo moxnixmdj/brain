@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T01:45:41.639826+00:00",
+  "mission_id": "ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_XLSX_LIBRARY_ROUNDTRIP_001.json",
+  "mission_sha256": "bc120d6bdcbd4612a04e88da6a968b1365fad9fcbd43e81aaa6ea69aa8c506cc",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "e78f03f59d818af33cc8471c4cf69265797445dc6aed00fefa82fe86d68ca58f",
+  "status": "COMPLETE",
+  "steps_completed": 2
+}
