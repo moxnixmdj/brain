@@ -1,0 +1,21 @@
+{
+  "blocker": {
+    "adapter": "goal",
+    "error": "Blocker:MODEL_INDEPENDENT_ACTION_ERROR:GROUP_DERIVE_SOURCE_INVALID:AttributeError:'list' object has no attribute 'get'",
+    "mission_id": "ASTRA-RUNTIME-GENERIC-DATAFLOW-CHAIN-002",
+    "observed_at_utc": "2026-09-25T20:32:09.207131+00:00",
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "run-chained-generic-dataflow",
+    "step_index": 0
+  },
+  "created_at_utc": "2026-09-25T20:31:59.749270+00:00",
+  "history": [],
+  "mission_id": "ASTRA-RUNTIME-GENERIC-DATAFLOW-CHAIN-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_GENERIC_DATAFLOW_CHAIN_002.json",
+  "mission_sha256": "7200fa16d4587c4315a1186868b5126f5d80cd51e0f06d16dea5b9a0c374d510",
+  "next_step": 0,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-25T20:32:09.207309+00:00"
+}

@@ -1,0 +1,9 @@
+{
+  "adapter": "goal",
+  "error": "Blocker:MODEL_INDEPENDENT_ACTION_ERROR:GROUP_DERIVE_SOURCE_INVALID:AttributeError:'list' object has no attribute 'get'",
+  "mission_id": "ASTRA-RUNTIME-GENERIC-DATAFLOW-CHAIN-002",
+  "observed_at_utc": "2026-09-25T20:32:09.207131+00:00",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "run-chained-generic-dataflow",
+  "step_index": 0
+}
