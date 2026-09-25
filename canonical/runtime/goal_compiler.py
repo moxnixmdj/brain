@@ -221,7 +221,44 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
     return result
 
 
+def _structured_binary_format_match(goal,entry):
+    provides=[str(x).lower() for x in (entry.get("provides") or [])]
+    formats={
+        p[len("structured.binary.encode."):]
+        for p in provides
+        if p.startswith("structured.binary.encode.") and p!="structured.binary.encode"
+    }
+    if not formats:
+        return True,None
+    paths=re.findall(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+",str(goal or ""))
+    output_formats={
+        pathlib.Path(raw.rstrip(".,;:!?)]}")).suffix.lower().lstrip(".")
+        for raw in paths
+    }
+    output_formats.discard("")
+    nonformat={"json","txt","md","markdown","csv","tsv"}
+    requested=output_formats-nonformat
+    if not requested:
+        return True,None
+    matched=requested & formats
+    return bool(matched),{
+      "requested_formats":sorted(requested),
+      "capability_formats":sorted(formats),
+      "matched_formats":sorted(matched),
+    }
+
+
 def _score(goal, cid, entry):
+    format_ok,format_evidence=_structured_binary_format_match(goal,entry)
+    if not format_ok:
+        return 0,0,{
+          "goal_tokens":sorted(_tokens(goal)),
+          "matched_provides":[],
+          "matched_requires":[],
+          "matched_identity":[],
+          "matched_keywords":[],
+          "format_rejection":format_evidence,
+        }
     gt=_tokens(goal)
     provides=_tokens(entry.get("provides",[]))
     requires=_tokens(entry.get("requires",[]))
