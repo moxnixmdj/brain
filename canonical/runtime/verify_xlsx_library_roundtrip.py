@@ -21,9 +21,10 @@ def load(name,path):
     mod=importlib.util.module_from_spec(spec); spec.loader.exec_module(mod); return mod
 
 def main():
-    if len(sys.argv)!=2:
-        raise SystemExit("usage: verify_xlsx_library_roundtrip.py RESULT_JSON")
+    if len(sys.argv) not in (2,3):
+        raise SystemExit("usage: verify_xlsx_library_roundtrip.py RESULT_JSON [MISSION_ID]")
     result_path=(ROOT/sys.argv[1]).resolve()
+    verification_mission_id=sys.argv[2] if len(sys.argv)==3 else "ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-001"
     astra_runtime._ensure_apt_dependencies(WRITER_SOURCE)
     astra_runtime._ensure_apt_dependencies(READER_SOURCE)
     writer=load("xlsx_writer_verify",ROOT/"canonical/runtime/bound_capabilities/xlsx_table_xlsxwriter.py")
@@ -44,6 +45,7 @@ def main():
     },ROOT)
     result={
       "schema":"PROJECT_BRAIN_XLSX_LIBRARY_ROUNDTRIP_VERIFICATION_V1",
+      "verification_mission_id":verification_mission_id,
       "status":"VERIFIED" if v.get("verified") is True else "FAILED",
       "writer_package":WRITER_SOURCE["packages"][0],
       "reader_package":READER_SOURCE["packages"][0],
