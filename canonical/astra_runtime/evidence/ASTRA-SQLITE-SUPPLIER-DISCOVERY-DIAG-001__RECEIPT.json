@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T01:53:37.069998+00:00",
+  "mission_id": "ASTRA-SQLITE-SUPPLIER-DISCOVERY-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_SQLITE_SUPPLIER_DISCOVERY_DIAG_001.json",
+  "mission_sha256": "5ac5d599bfb350c685e200cc20a6dc8fea1992193e52b9fd3ddc701e96f881a8",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "cbd431156eda18cf54ffbbbccf93800c2c315bf82c183205def7a57fd74bfbe8",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
