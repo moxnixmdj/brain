@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T04:17:59.491731+00:00",
+  "mission_id": "ASTRA-LIVE-CONDITIONAL-COMPILER-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_LIVE_CONDITIONAL_COMPILER_DIAG_001.json",
+  "mission_sha256": "a1540767d4ef94e8df4c4ebacc30dd6f31475f3f8d87d20dda4b960fb3fece60",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "878bb8c5c4c3ca147bcadf8d6d5f4f2c360d84f69125f96b9777065ec3c7665a",
+  "status": "COMPLETE",
+  "steps_completed": 2
+}

@@ -1,21 +1,5 @@
 {
-  "blocker": {
-    "adapter": "shell",
-    "error": "VERIFICATION_FAILED",
-    "mission_id": "ASTRA-LIVE-CONDITIONAL-COMPILER-DIAG-001",
-    "observed_at_utc": "2026-09-25T04:05:50.450849+00:00",
-    "result": {
-      "adapter": "shell",
-      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/goal_compiler.py')\ns=importlib.util.spec_from_file_location('gc',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads(pathlib.Path('canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads(pathlib.Path('canonical/astra_runtime/missions/ASTRA_RUNTIME_LIVE_CONDITIONAL_001.json').read_text())['goal']\nout=m.compile_goal(goal,reg,pathlib.Path('.').resolve())\nprint(json.dumps({'parts':out.get('compiled_parts'),'actions':out.get('controller_actions')},sort_keys=True))\nprint('LIVE_CONDITIONAL_COMPILER_COMPLETE')\nPY",
-      "duration_s": 0.067,
-      "returncode": 1,
-      "stderr": "Traceback (most recent call last):\n  File \"/home/runner/work/brain/brain/canonical/runtime/goal_compiler.py\", line 1781, in _compile_compound_goal\n    part=_compile_single_goal(\n         ^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/brain/brain/canonical/runtime/goal_compiler.py\", line 434, in _compile_single_goal\n    raise GoalCompilationFailure(\"GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH\")\ngc.GoalCompilationFailure: GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"<stdin>\", line 6, in <module>\n  File \"/home/runner/work/brain/brain/canonical/runtime/goal_compiler.py\", line 1838, in compile_goal\n    return _compile_compound_goal(goal,clauses,registry,root)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/brain/brain/canonical/runtime/goal_compiler.py\", line 1787, in _compile_compound_goal\n    raise GoalCompilationFailure(\ngc.GoalCompilationFailure: GOAL_COMPILATION_SUBGOAL_UNRESOLVED:{\"cause\": \"GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH\", \"cause_detail\": null, \"clauses\": [\"Using a real rendered browser, open https://httpbin.org/uuid, save a screenshot to canonical/astra_runtime/tmp/LIVE_UUID.png, and save the rendered result to canonical/astra_runtime/tmp/LIVE_UUID.json\", \"Read the UUID from that live result\", \"If its first hexadecimal character is one of 0,1,2,3,4,5,6,7 create canonical/astra_runtime/tmp/LIVE_UUID_CLASSIFICATION.json with uuid equal to the observed UUID and bucket equal to LOW; otherwise create it with the same observed uuid and bucket equal to HIGH\", \"Finally independently reread both files\", \"verify the bucket is correct for the actual UUID\"], \"compiled_prefix\": [{\"index\": 0, \"inputs\": {\"result_path\": \"canonical/astra_runtime/tmp/LIVE_UUID.json\", \"screenshot_path\": \"canonical/astra_runtime/tmp/LIVE_UUID.png\", \"url\": \"https://httpbin.org/uuid\"}, \"mode\": \"VERIFIED_CAPABILITY\", \"score\": 30, \"selected_capability\": \"web.browser.rendered.capture.chromedriver\", \"subgoal\": \"Using a real rendered browser, open https://httpbin.org/uuid, save a screenshot to canonical/astra_runtime/tmp/LIVE_UUID.png, and save the rendered result to canonical/astra_runtime/tmp/LIVE_UUID.json\", \"target_effects\": [\"web.browser.rendered.capture\", \"web.browser.rendered.interact\"]}, {\"index\": 1, \"mode\": \"DEFERRED_RUNTIME_VALUE_READ\", \"source_path\": \"canonical/astra_runtime/tmp/LIVE_UUID.json\", \"subgoal\": \"Read the UUID from that live result\"}, {\"high_bucket\": \"HIGH\", \"index\": 2, \"low_bucket\": \"LOW\", \"low_chars\": \"01234567\", \"mode\": \"VERIFIED_RUNTIME_CONDITIONAL\", \"output_path\": \"canonical/astra_runtime/tmp/LIVE_UUID_CLASSIFICATION.json\", \"source_path\": \"canonical/astra_runtime/tmp/LIVE_UUID.json\", \"subgoal\": \"If its first hexadecimal character is one of 0,1,2,3,4,5,6,7 create canonical/astra_runtime/tmp/LIVE_UUID_CLASSIFICATION.json with uuid equal to the observed UUID and bucket equal to LOW; otherwise create it with the same observed uuid and bucket equal to HIGH\"}], \"context_paths\": [\"canonical/astra_runtime/tmp/LIVE_UUID.json\", \"canonical/astra_runtime/tmp/LIVE_UUID.png\", \"canonical/astra_runtime/tmp/LIVE_UUID_CLASSIFICATION.json\"], \"index\": 3, \"subgoal\": \"Finally independently reread both files\"}\n",
-      "stdout": ""
-    },
-    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
-    "step_id": "compile-only",
-    "step_index": 0
-  },
+  "completed_at_utc": "2026-09-25T04:17:59.491115+00:00",
   "created_at_utc": "2026-09-25T04:05:50.383633+00:00",
   "history": [
     {
@@ -31,14 +15,28 @@
       },
       "step_id": "compile-only",
       "step_index": 0
+    },
+    {
+      "completed_at_utc": "2026-09-25T04:17:59.490576+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/goal_compiler.py')\ns=importlib.util.spec_from_file_location('gc',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads(pathlib.Path('canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads(pathlib.Path('canonical/astra_runtime/missions/ASTRA_RUNTIME_LIVE_CONDITIONAL_001.json').read_text())['goal']\nout=m.compile_goal(goal,reg,pathlib.Path('.').resolve())\nprint(json.dumps({'parts':out.get('compiled_parts'),'actions':out.get('controller_actions')},sort_keys=True))\nprint('LIVE_CONDITIONAL_COMPILER_COMPLETE')\nPY",
+        "duration_s": 0.104,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"actions\": [{\"args\": {\"capability_id\": \"web.browser.rendered.capture.chromedriver\", \"result_path\": \"canonical/astra_runtime/tmp/LIVE_UUID.json\", \"screenshot_path\": \"canonical/astra_runtime/tmp/LIVE_UUID.png\", \"url\": \"https://httpbin.org/uuid\"}, \"expect\": {\"field\": \"output_verified\", \"type\": \"field_equals\", \"value\": true}, \"type\": \"invoke_capability\"}, {\"args\": {\"capability_id\": \"json.query.jq\", \"filter\": \"(.observed_text | fromjson | .uuid) as $u | {uuid:$u,bucket:(if (\\\"01234567\\\" | contains(($u[0:1]|ascii_downcase))) then \\\"LOW\\\" else \\\"HIGH\\\" end)}\", \"input_path\": \"canonical/astra_runtime/tmp/LIVE_UUID.json\", \"output_path\": \"canonical/astra_runtime/tmp/LIVE_UUID_CLASSIFICATION.json\", \"raw_output\": false, \"require_nonempty\": true, \"timeout_s\": 60}, \"expect\": {\"field\": \"output_verified\", \"type\": \"field_equals\", \"value\": true}, \"type\": \"invoke_capability\"}, {\"args\": {\"bucket_field\": \"bucket\", \"classification_path\": \"canonical/astra_runtime/tmp/LIVE_UUID_CLASSIFICATION.json\", \"low_chars\": \"01234567\", \"output_value_field\": \"uuid\", \"source_key\": \"uuid\", \"source_path\": \"canonical/astra_runtime/tmp/LIVE_UUID.json\"}, \"expect\": {\"field\": \"verified\", \"type\": \"field_equals\", \"value\": true}, \"type\": \"assert_hex_prefix_bucket\"}, {\"args\": {\"summary\": \"COMPOUND_GOAL_COMPLETE\"}, \"type\": \"finish\"}], \"parts\": [{\"index\": 0, \"inputs\": {\"result_path\": \"canonical/astra_runtime/tmp/LIVE_UUID.json\", \"screenshot_path\": \"canonical/astra_runtime/tmp/LIVE_UUID.png\", \"url\": \"https://httpbin.org/uuid\"}, \"mode\": \"VERIFIED_CAPABILITY\", \"score\": 30, \"selected_capability\": \"web.browser.rendered.capture.chromedriver\", \"subgoal\": \"Using a real rendered browser, open https://httpbin.org/uuid, save a screenshot to canonical/astra_runtime/tmp/LIVE_UUID.png, and save the rendered result to canonical/astra_runtime/tmp/LIVE_UUID.json\", \"target_effects\": [\"web.browser.rendered.capture\", \"web.browser.rendered.interact\"]}, {\"index\": 1, \"mode\": \"DEFERRED_RUNTIME_VALUE_READ\", \"source_path\": \"canonical/astra_runtime/tmp/LIVE_UUID.json\", \"subgoal\": \"Read the UUID from that live result\"}, {\"high_bucket\": \"HIGH\", \"index\": 2, \"low_bucket\": \"LOW\", \"low_chars\": \"01234567\", \"mode\": \"VERIFIED_RUNTIME_CONDITIONAL\", \"output_path\": \"canonical/astra_runtime/tmp/LIVE_UUID_CLASSIFICATION.json\", \"source_path\": \"canonical/astra_runtime/tmp/LIVE_UUID.json\", \"subgoal\": \"If its first hexadecimal character is one of 0,1,2,3,4,5,6,7 create canonical/astra_runtime/tmp/LIVE_UUID_CLASSIFICATION.json with uuid equal to the observed UUID and bucket equal to LOW; otherwise create it with the same observed uuid and bucket equal to HIGH\"}, {\"classification_path\": \"canonical/astra_runtime/tmp/LIVE_UUID_CLASSIFICATION.json\", \"index\": 3, \"mode\": \"INDEPENDENT_RUNTIME_CONDITIONAL_VERIFICATION\", \"source_path\": \"canonical/astra_runtime/tmp/LIVE_UUID.json\", \"subgoal\": \"Finally independently reread both files and verify the bucket is correct for the actual UUID\"}]}\nLIVE_CONDITIONAL_COMPILER_COMPLETE\n"
+      },
+      "step_id": "compile-only",
+      "step_index": 0
     }
   ],
   "mission_id": "ASTRA-LIVE-CONDITIONAL-COMPILER-DIAG-001",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_LIVE_CONDITIONAL_COMPILER_DIAG_001.json",
-  "mission_sha256": "395cc31519d5ac38c69d55e6ecb327dd8ae3ed4089fe5d3015fbd4bd538f83aa",
-  "next_step": 0,
+  "mission_sha256": "a1540767d4ef94e8df4c4ebacc30dd6f31475f3f8d87d20dda4b960fb3fece60",
+  "next_step": 1,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
-  "status": "BLOCKED",
-  "updated_at_utc": "2026-09-25T04:05:50.451116+00:00"
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T04:17:59.490601+00:00"
 }
