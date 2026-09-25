@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T17:20:25.487585+00:00",
+  "mission_id": "ASTRA-MULTI-SOURCE-REDUCE-COMPILER-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_MULTI_SOURCE_REDUCE_COMPILER_DIAG_001.json",
+  "mission_sha256": "21ae709b8298e4eea18fd7df15043b10d530c316f7cb0b13d2f53735a21cffdb",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "0e20753d2464c6fa1766cabe840049d6f59f2cb7a443d0989f9305fcf6674c3a",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
