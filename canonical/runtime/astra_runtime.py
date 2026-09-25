@@ -141,21 +141,39 @@ def _ensure_pypi_dependency(source):
 def _ensure_local_dependency(source):
     typ=str(source.get("type") or "").strip()
     if typ=="python_stdlib":
-        module=str(source.get("module") or "").strip()
-        if not module:
+        raw_modules=source.get("modules")
+        if raw_modules is None:
+            one=str(source.get("module") or "").strip()
+            modules=[one] if one else []
+        elif isinstance(raw_modules,list):
+            modules=[str(x or "").strip() for x in raw_modules]
+        else:
+            raise Blocker("BOUND_PYTHON_STDLIB_MODULES_INVALID")
+        modules=[m for m in modules if m]
+        if not modules:
             raise Blocker("BOUND_PYTHON_STDLIB_MODULE_REQUIRED")
-        try:
-            spec=importlib.util.find_spec(module)
-        except Exception as exc:
-            raise Blocker("BOUND_PYTHON_STDLIB_PROBE_FAILED:"+module+":"+type(exc).__name__) from exc
-        if spec is None:
-            raise Blocker("BOUND_PYTHON_STDLIB_MODULE_MISSING:"+module)
-        return {
+        if len(set(modules))!=len(modules):
+            raise Blocker("BOUND_PYTHON_STDLIB_MODULES_DUPLICATE")
+        verified=[]
+        for module in modules:
+            if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_.]*",module):
+                raise Blocker("BOUND_PYTHON_STDLIB_MODULE_INVALID:"+module)
+            try:
+                spec=importlib.util.find_spec(module)
+            except Exception as exc:
+                raise Blocker("BOUND_PYTHON_STDLIB_PROBE_FAILED:"+module+":"+type(exc).__name__) from exc
+            if spec is None:
+                raise Blocker("BOUND_PYTHON_STDLIB_MODULE_MISSING:"+module)
+            verified.append(module)
+        out={
           "status":"LOCAL_VERIFIED",
           "type":"python_stdlib",
-          "module":module,
+          "modules":verified,
           "python_version":sys.version.split()[0],
         }
+        if len(verified)==1:
+            out["module"]=verified[0]
+        return out
     if typ=="system_tool":
         exe=str(source.get("executable") or "").strip()
         if not exe or pathlib.Path(exe).name!=exe:
