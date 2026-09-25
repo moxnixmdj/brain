@@ -1680,6 +1680,287 @@ def _goal_action(action):
           "all_true":truths,
           "verified":bool(equal and nonempty and truths),
         }
+    if typ=="derive_grouped_records":
+        dimension_path=_safe_repo_path(args.get("dimension_path",""))
+        fact_path=_safe_repo_path(args.get("fact_path",""))
+        output_path=_safe_repo_path(args.get("output_path",""))
+        dimension_key=str(args.get("dimension_key") or "")
+        fact_key=str(args.get("fact_key") or "")
+        output_id_field=str(args.get("output_id_field") or "")
+        copy_fields=list(args.get("copy_fields") or [])
+        metrics=list(args.get("metrics") or [])
+        derived=list(args.get("derived") or [])
+        field_re=r"^[A-Za-z_][A-Za-z0-9_]*$"
+        if (
+            not dimension_path.is_file() or not fact_path.is_file()
+            or not dimension_key or not fact_key or not output_id_field
+            or not re.fullmatch(field_re,output_id_field)
+            or any(not isinstance(x,str) or not re.fullmatch(field_re,x) for x in copy_fields)
+            or any(not isinstance(x,dict) for x in metrics+derived)
+        ):
+            return {"type":typ,"output_verified":False,"error":"GROUP_DERIVE_SPEC_INVALID"}
+
+        def observed_array(path):
+            wrapper=json.loads(path.read_text(encoding="utf-8"))
+            data=json.loads(str(wrapper.get("observed_text") or ""))
+            if not isinstance(data,list) or any(not isinstance(x,dict) for x in data):
+                raise RuntimeError("GROUP_DERIVE_SOURCE_NOT_OBJECT_ARRAY")
+            return data
+
+        try:
+            dimensions=observed_array(dimension_path)
+            facts=observed_array(fact_path)
+        except Exception as exc:
+            return {"type":typ,"output_verified":False,"error":"GROUP_DERIVE_SOURCE_INVALID:"+type(exc).__name__+":"+str(exc)}
+
+        dim_index={}
+        groups={}
+        for row in dimensions:
+            if dimension_key not in row:
+                return {"type":typ,"output_verified":False,"error":"GROUP_DERIVE_DIMENSION_KEY_MISSING"}
+            token=json.dumps(row.get(dimension_key),sort_keys=True)
+            if token in dim_index:
+                return {"type":typ,"output_verified":False,"error":"GROUP_DERIVE_DIMENSION_KEY_DUPLICATE","key":row.get(dimension_key)}
+            dim_index[token]=row
+            groups[token]=[]
+
+        unmatched=[]
+        for fact in facts:
+            if fact_key not in fact:
+                return {"type":typ,"output_verified":False,"error":"GROUP_DERIVE_FACT_KEY_MISSING"}
+            token=json.dumps(fact.get(fact_key),sort_keys=True)
+            if token not in groups:
+                unmatched.append(fact.get(fact_key))
+                continue
+            groups[token].append(fact)
+        if unmatched:
+            return {"type":typ,"output_verified":False,"error":"GROUP_DERIVE_UNMATCHED_FACTS","keys":unmatched[:20]}
+
+        def metric_value(spec,related):
+            name=str(spec.get("name") or "")
+            op=str(spec.get("op") or "")
+            if not re.fullmatch(field_re,name):
+                raise RuntimeError("GROUP_DERIVE_METRIC_NAME_INVALID")
+            if op=="count":
+                return len(related)
+            if op=="count_where":
+                where=spec.get("where") or {}
+                if not isinstance(where,dict) or not where:
+                    raise RuntimeError("GROUP_DERIVE_WHERE_INVALID")
+                return sum(1 for row in related if all(row.get(str(k))==v for k,v in where.items()))
+            raise RuntimeError("GROUP_DERIVE_METRIC_OP_UNSUPPORTED:"+op)
+
+        summary=[]
+        try:
+            for dim in dimensions:
+                token=json.dumps(dim.get(dimension_key),sort_keys=True)
+                rec={output_id_field:dim.get(dimension_key)}
+                for field in copy_fields:
+                    if field not in dim:
+                        raise RuntimeError("GROUP_DERIVE_COPY_FIELD_MISSING:"+field)
+                    rec[field]=dim[field]
+                for spec in metrics:
+                    rec[str(spec.get("name"))]=metric_value(spec,groups[token])
+                for spec in derived:
+                    name=str(spec.get("name") or "")
+                    op=str(spec.get("op") or "")
+                    if not re.fullmatch(field_re,name):
+                        raise RuntimeError("GROUP_DERIVE_DERIVED_NAME_INVALID")
+                    if op!="divide":
+                        raise RuntimeError("GROUP_DERIVE_DERIVED_OP_UNSUPPORTED:"+op)
+                    numerator=str(spec.get("numerator") or "")
+                    denominator=str(spec.get("denominator") or "")
+                    if numerator not in rec or denominator not in rec:
+                        raise RuntimeError("GROUP_DERIVE_DERIVED_INPUT_MISSING")
+                    den=rec[denominator]
+                    if not isinstance(den,(int,float)) or den==0:
+                        raise RuntimeError("GROUP_DERIVE_DIVIDE_BY_ZERO_OR_NONNUMERIC")
+                    num=rec[numerator]
+                    if not isinstance(num,(int,float)):
+                        raise RuntimeError("GROUP_DERIVE_NUMERATOR_NONNUMERIC")
+                    rec[name]=num/den
+                summary.append(rec)
+        except Exception as exc:
+            return {"type":typ,"output_verified":False,"error":type(exc).__name__+":"+str(exc)}
+
+        output_path.parent.mkdir(parents=True,exist_ok=True)
+        output_path.write_text(json.dumps(summary,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+        return {
+          "type":typ,"output_verified":True,
+          "dimension_count":len(dimensions),"fact_count":len(facts),
+          "summary_count":len(summary),
+          "output_path":str(output_path.relative_to(ROOT)),
+        }
+
+    if typ=="assert_grouped_derived_records":
+        dimension_path=_safe_repo_path(args.get("dimension_path",""))
+        fact_path=_safe_repo_path(args.get("fact_path",""))
+        summary_path=_safe_repo_path(args.get("summary_path",""))
+        dimension_key=str(args.get("dimension_key") or "")
+        fact_key=str(args.get("fact_key") or "")
+        output_id_field=str(args.get("output_id_field") or "")
+        copy_fields=list(args.get("copy_fields") or [])
+        metrics=list(args.get("metrics") or [])
+        derived=list(args.get("derived") or [])
+        if not dimension_path.is_file() or not fact_path.is_file() or not summary_path.is_file():
+            return {"type":typ,"verified":False,"error":"GROUP_DERIVE_VERIFY_SOURCE_MISSING"}
+        try:
+            dw=json.loads(dimension_path.read_text(encoding="utf-8"))
+            fw=json.loads(fact_path.read_text(encoding="utf-8"))
+            dimensions=json.loads(str(dw.get("observed_text") or ""))
+            facts=json.loads(str(fw.get("observed_text") or ""))
+            summary=json.loads(summary_path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            return {"type":typ,"verified":False,"error":"GROUP_DERIVE_VERIFY_JSON_INVALID:"+type(exc).__name__}
+        if not isinstance(dimensions,list) or not isinstance(facts,list) or not isinstance(summary,list):
+            return {"type":typ,"verified":False,"error":"GROUP_DERIVE_VERIFY_NOT_ARRAY"}
+        failures=[]
+        by_id={}
+        for rec in summary:
+            if not isinstance(rec,dict) or output_id_field not in rec:
+                failures.append("SUMMARY_RECORD_INVALID")
+                continue
+            token=json.dumps(rec.get(output_id_field),sort_keys=True)
+            if token in by_id:
+                failures.append("SUMMARY_DUPLICATE_ID")
+            by_id[token]=rec
+        if len(summary)!=len(dimensions):
+            failures.append("SUMMARY_CARDINALITY_MISMATCH")
+        groups={}
+        for dim in dimensions:
+            if not isinstance(dim,dict) or dimension_key not in dim:
+                failures.append("DIMENSION_KEY_MISSING")
+                continue
+            groups[json.dumps(dim.get(dimension_key),sort_keys=True)]=[]
+        for fact in facts:
+            if not isinstance(fact,dict) or fact_key not in fact:
+                failures.append("FACT_KEY_MISSING")
+                continue
+            token=json.dumps(fact.get(fact_key),sort_keys=True)
+            if token not in groups:
+                failures.append("UNMATCHED_FACT")
+                continue
+            groups[token].append(fact)
+        for dim in dimensions:
+            if not isinstance(dim,dict) or dimension_key not in dim:
+                continue
+            token=json.dumps(dim.get(dimension_key),sort_keys=True)
+            rec=by_id.get(token)
+            if rec is None:
+                failures.append("SUMMARY_RECORD_MISSING")
+                continue
+            for field in copy_fields:
+                if rec.get(field)!=dim.get(field):
+                    failures.append("COPY_FIELD_MISMATCH:"+field)
+            expected={}
+            for spec in metrics:
+                name=str(spec.get("name") or "")
+                op=str(spec.get("op") or "")
+                related=groups.get(token,[])
+                if op=="count":
+                    expected[name]=len(related)
+                elif op=="count_where":
+                    where=spec.get("where") or {}
+                    expected[name]=sum(1 for row in related if all(row.get(str(k))==v for k,v in where.items()))
+                else:
+                    failures.append("METRIC_OP_UNSUPPORTED:"+op)
+            for spec in derived:
+                name=str(spec.get("name") or "")
+                if str(spec.get("op") or "")!="divide":
+                    failures.append("DERIVED_OP_UNSUPPORTED")
+                    continue
+                num=expected.get(str(spec.get("numerator") or ""),rec.get(str(spec.get("numerator") or "")))
+                den=expected.get(str(spec.get("denominator") or ""),rec.get(str(spec.get("denominator") or "")))
+                if not isinstance(num,(int,float)) or not isinstance(den,(int,float)) or den==0:
+                    failures.append("DERIVED_INPUT_INVALID")
+                    continue
+                expected[name]=num/den
+            for name,value in expected.items():
+                if rec.get(name)!=value:
+                    failures.append("DERIVED_VALUE_MISMATCH:"+name)
+        return {
+          "type":typ,"verified":not failures,
+          "dimension_count":len(dimensions),"fact_count":len(facts),"summary_count":len(summary),
+          "failures":failures[:40],
+        }
+
+    if typ=="select_ranked_record":
+        source_path=_safe_repo_path(args.get("source_path",""))
+        output_path=_safe_repo_path(args.get("output_path",""))
+        order_by=list(args.get("order_by") or [])
+        output_fields=list(args.get("output_fields") or [])
+        if not source_path.is_file() or not order_by or not output_fields:
+            return {"type":typ,"output_verified":False,"error":"RANK_SELECT_SPEC_INVALID"}
+        try:
+            rows=json.loads(source_path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            return {"type":typ,"output_verified":False,"error":"RANK_SELECT_SOURCE_INVALID:"+type(exc).__name__}
+        if not isinstance(rows,list) or not rows or any(not isinstance(x,dict) for x in rows):
+            return {"type":typ,"output_verified":False,"error":"RANK_SELECT_SOURCE_NOT_OBJECT_ARRAY"}
+        def better(candidate,current):
+            for spec in order_by:
+                field=str(spec.get("field") or "")
+                direction=str(spec.get("direction") or "").lower()
+                if field not in candidate or field not in current or direction not in {"asc","desc"}:
+                    raise RuntimeError("RANK_SELECT_ORDER_INVALID")
+                a,b=candidate[field],current[field]
+                if a==b:
+                    continue
+                try:
+                    return a>b if direction=="desc" else a<b
+                except Exception as exc:
+                    raise RuntimeError("RANK_SELECT_VALUES_NOT_COMPARABLE:"+field) from exc
+            return False
+        try:
+            best=rows[0]
+            for row in rows[1:]:
+                if better(row,best):
+                    best=row
+            record={field:best[field] for field in output_fields}
+        except Exception as exc:
+            return {"type":typ,"output_verified":False,"error":type(exc).__name__+":"+str(exc)}
+        output_path.parent.mkdir(parents=True,exist_ok=True)
+        output_path.write_text(json.dumps(record,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+        return {"type":typ,"output_verified":True,"source_count":len(rows),"output_path":str(output_path.relative_to(ROOT)),"record":record}
+
+    if typ=="assert_ranked_record":
+        source_path=_safe_repo_path(args.get("source_path",""))
+        selected_path=_safe_repo_path(args.get("selected_path",""))
+        order_by=list(args.get("order_by") or [])
+        output_fields=list(args.get("output_fields") or [])
+        if not source_path.is_file() or not selected_path.is_file() or not order_by or not output_fields:
+            return {"type":typ,"verified":False,"error":"RANK_VERIFY_SPEC_INVALID"}
+        try:
+            rows=json.loads(source_path.read_text(encoding="utf-8"))
+            selected=json.loads(selected_path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            return {"type":typ,"verified":False,"error":"RANK_VERIFY_JSON_INVALID:"+type(exc).__name__}
+        if not isinstance(rows,list) or not rows or not isinstance(selected,dict):
+            return {"type":typ,"verified":False,"error":"RANK_VERIFY_SHAPE_INVALID"}
+        def precedes(candidate,current):
+            for spec in order_by:
+                field=str(spec.get("field") or "")
+                direction=str(spec.get("direction") or "").lower()
+                if field not in candidate or field not in current or direction not in {"asc","desc"}:
+                    raise RuntimeError("RANK_VERIFY_ORDER_INVALID")
+                a,b=candidate[field],current[field]
+                if a==b:
+                    continue
+                return a>b if direction=="desc" else a<b
+            return False
+        try:
+            best=rows[0]
+            for row in rows[1:]:
+                if precedes(row,best):
+                    best=row
+            expected={field:best[field] for field in output_fields}
+        except Exception as exc:
+            return {"type":typ,"verified":False,"error":type(exc).__name__+":"+str(exc)}
+        return {
+          "type":typ,"verified":selected==expected,
+          "source_count":len(rows),"expected":expected,"observed":selected,
+        }
+
     if typ=="aggregate_runtime_json_arrays":
         dimension_path=_safe_repo_path(args.get("dimension_path",""))
         fact_path=_safe_repo_path(args.get("fact_path",""))
@@ -2367,7 +2648,7 @@ def _run_model_independent_goal(step, mission, goal):
         return None
     allowed_types={
       "read_file","list_tree","search_text","http_get","write_json_records","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback","invoke_capability_until","verify_with_independent_pypi_codec",
-      "project_browser_result_json","join_runtime_json_arrays","assert_runtime_json_join","aggregate_runtime_json_arrays","assert_runtime_json_aggregate","assert_hex_prefix_bucket","assert_collection_length_bucket","assert_runtime_selected_code_decodes",
+      "project_browser_result_json","join_runtime_json_arrays","assert_runtime_json_join","aggregate_runtime_json_arrays","assert_runtime_json_aggregate","derive_grouped_records","assert_grouped_derived_records","select_ranked_record","assert_ranked_record","assert_hex_prefix_bucket","assert_collection_length_bucket","assert_runtime_selected_code_decodes",
       "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal","assert_runtime_fanout_decodes","assert_runtime_fanout_artifacts_decode","assert_runtime_per_item_fallback_decodes","assert_runtime_fallback_decision","assert_runtime_bounded_loop_trace",
       "assert_workflow_audit_supported_by_source","assert_python_source_audit_supported_by_source",
       "assert_python_test_audit_zero","assert_python_test_audit_supported_by_fresh_execution",
