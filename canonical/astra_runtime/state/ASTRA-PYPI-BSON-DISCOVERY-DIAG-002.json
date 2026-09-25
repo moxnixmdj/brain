@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T18:50:41.763633+00:00",
+  "created_at_utc": "2026-09-25T18:50:40.156278+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T18:50:41.763352+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,pathlib,json\np=pathlib.Path('canonical/runtime/capability_discovery.py')\ns=importlib.util.spec_from_file_location('cd',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\ngoal='Encode those exact records as BSON and save canonical/astra_runtime/tmp/BSON_RECORDS.bson'\nout=m.search_pypi_packages(goal,limit=20,timeout_s=20)\nnames=[str(x.get('name') or '') for x in out.get('candidates') or []]\nprint(json.dumps({'queries':out.get('queries'),'names':names},sort_keys=True))\nassert any('bson' in n.lower() for n in names),names\nprint('PYPI_BSON_DISCOVERY_VERIFIED')\nPY",
+        "duration_s": 1.607,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"names\": [\"adamdobson2048\", \"aiobsonrpc\", \"apis-bibsonomy\", \"advanced-encoder-and-decoder\", \"alibabacloud-darabonba-encode-util\", \"alibabacloud-darabonba-encode-util-py2\", \"astral-token-encoder\", \"autoencoder\", \"autoencodersplz\", \"base64-encoder-cli\", \"basen-encoder\", \"basencode\", \"amqencode\", \"apiverve-ascii85encoder\", \"apiverve-base64encoderdecoder\", \"bencode2\", \"ainative-opencode-memory\", \"animethemes-batch-encoder\", \"animethemes-beta-batch-encoder\", \"ansar-encode\"], \"queries\": [\"encode\", \"bson\", \"adamdobson2048\", \"address-encoder\", \"advanced-encoder-and-decoder\", \"agencode\", \"ai4pa_opencode_sdk\", \"ainative-opencode-memory\", \"aiobsonrpc\", \"aiogibson\", \"alabamaEncoder\", \"alibabacloud-darabonba-encode-util\", \"alibabacloud-darabonba-encode-util-py2\", \"amonhen-code\", \"amqencode\", \"animethemes-batch-encoder\", \"animethemes-beta-batch-encoder\", \"ansar-encode\", \"anyconfig-bson-backend\", \"anyencoder\", \"anymal-belief-state-encoder-decoder-pytorch\", \"apis-bibsonomy\", \"apiverve-ascii85encoder\", \"apiverve-base64encoderdecoder\", \"ascii-encoder\", \"astc-encoder-py\", \"astral-token-encoder\", \"attention-encoders\", \"audio-encoders-pytorch\", \"augint-opencodex\", \"autoencoder\", \"autoencoders\", \"autoencodersplz\", \"autoencoder-tools\", \"azure-schemaregistry-avroencoder\", \"base58_encoded\", \"base64-encoder-cli\", \"basencode\", \"basen-encoder\", \"bencode\", \"bencode2\", \"bencode3\"]}\nPYPI_BSON_DISCOVERY_VERIFIED\n"
+      },
+      "step_id": "discover-bson-candidates",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-PYPI-BSON-DISCOVERY-DIAG-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_PYPI_BSON_DISCOVERY_DIAG_002.json",
+  "mission_sha256": "065547142dd34d5c5952f484898b515514d2fe429ecef4aaab9a841a30382c12",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T18:50:41.763366+00:00"
+}
