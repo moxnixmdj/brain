@@ -68,6 +68,7 @@
     "incremental_spend_usd": 0,
     "model_controller_required": false,
     "fresh_verification_invocation_required": true,
-    "promotion_not_implied_by_code_write": true
+    "promotion_not_implied_by_code_write": true,
+    "replay_after_radio_choice_support_commit": "c6db47253d86755dbc880d6d45a7021a2601bf5c"
   }
 }
