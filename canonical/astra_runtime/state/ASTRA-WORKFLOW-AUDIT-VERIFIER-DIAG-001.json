@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T01:01:51.657342+00:00",
+  "created_at_utc": "2026-09-25T01:01:51.522057+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T01:01:51.656898+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/astra_runtime.py')\ns=importlib.util.spec_from_file_location('rt_diag',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nresult=m._goal_action({'type':'assert_workflow_audit_supported_by_source','args':{'audit_path':'canonical/astra_runtime/tmp/ASTRA_WORKFLOW_AUDIT.json','yaml_path':'.github/workflows/astra-shared-runtime.yml'}})\nprint(json.dumps(result,sort_keys=True))\nprint('WORKFLOW_VERIFIER_DIAG_COMPLETE')\nPY",
+        "duration_s": 0.135,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"audit_path\": \"canonical/astra_runtime/tmp/ASTRA_WORKFLOW_AUDIT.json\", \"audit_sha256\": \"4a252c0092ee0be61235e0d0610c6115dcd7f6496819e83e4130c36eb0c63e12\", \"job_count\": 1, \"missing_support\": [\"name:ASTRA Shared Runtime Mission\", \"trigger:push\", \"trigger:workflow_dispatch\", \"dispatch_input:mission_path\", \"permission:actions=write\", \"permission:contents=write\", \"job_id:run-mission\", \"runner:run-mission:ubuntu-24.04\", \"timeout:run-mission:10\", \"step_name:run-mission:Resolve exact mission\", \"step_name:run-mission:Execute shared runtime mission\", \"step_name:run-mission:Persist runtime state, evidence, and continuation missions\", \"uses:run-mission:actions/checkout@v4\", \"uses:run-mission:actions/setup-python@v5\"], \"source_sha256\": \"34ec38e5e55a2fc3e2661fe52eb84b0eaf61b09126729180ffbc22eb068f46ac\", \"type\": \"assert_workflow_audit_supported_by_source\", \"uses_count\": 2, \"verified\": false, \"yaml_path\": \".github/workflows/astra-shared-runtime.yml\"}\nWORKFLOW_VERIFIER_DIAG_COMPLETE\n"
+      },
+      "step_id": "diagnose-workflow-source-verifier",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-WORKFLOW-AUDIT-VERIFIER-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_WORKFLOW_AUDIT_VERIFIER_DIAG_001.json",
+  "mission_sha256": "0bc8facfc0c5f5ab3fb4573ec476c8dd4f4049a208ee72d3dc42d9f95c7b0870",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T01:01:51.656919+00:00"
+}

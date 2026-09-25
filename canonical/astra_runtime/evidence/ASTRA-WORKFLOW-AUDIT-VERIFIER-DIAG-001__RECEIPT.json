@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T01:01:51.657767+00:00",
+  "mission_id": "ASTRA-WORKFLOW-AUDIT-VERIFIER-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_WORKFLOW_AUDIT_VERIFIER_DIAG_001.json",
+  "mission_sha256": "0bc8facfc0c5f5ab3fb4573ec476c8dd4f4049a208ee72d3dc42d9f95c7b0870",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "7f48af952d6f4c07036faab2c9c71104bb5fbbb0846790603fd69b636f64af58",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
