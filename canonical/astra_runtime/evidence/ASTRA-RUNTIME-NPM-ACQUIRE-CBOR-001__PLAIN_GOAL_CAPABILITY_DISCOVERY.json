@@ -1,0 +1,28 @@
+{
+  "auto_acquisition": {
+    "acquisition_evidence_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-NPM-ACQUIRE-CBOR-001__AUTO_NPM_LIBRARY_ACQUISITION.json",
+    "capability_id": "auto.npm.dfinity-cbor",
+    "keywords": [
+      "encode",
+      "npm",
+      "node",
+      "javascript",
+      "@dfinity/cbor",
+      "cbor"
+    ],
+    "pending_binding_path": "canonical/astra_runtime/pending_bindings/ASTRA-RUNTIME-NPM-ACQUIRE-CBOR-001__dfinity-cbor__b52d51692bc6.json",
+    "status": "ACQUISITION_DISPATCHED",
+    "supplier": "@dfinity/cbor",
+    "supplier_class": "npm_javascript_library",
+    "verification_mission_id": "ASTRA-AUTO-VERIFY-NPM-DFINITY-CBOR-B52D51692BC6",
+    "verification_mission_path": "canonical/astra_runtime/missions/ASTRA_AUTO_VERIFY_NPM_DFINITY_CBOR_B52D51692BC6.json"
+  },
+  "binding_performed": false,
+  "goal": "Using a zero-cost npm JavaScript library executed by Node.js, encode those exact records as CBOR and save canonical/astra_runtime/tmp/NPM_CBOR_RECORDS.cbor",
+  "mission_id": "ASTRA-RUNTIME-NPM-ACQUIRE-CBOR-001",
+  "observed_at_utc": "2026-09-25T19:43:25.982694+00:00",
+  "result": null,
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
+  "source": "TARGETED_AUTO_ACQUISITION",
+  "status": "AUTO_ACQUISITION_DISPATCHED"
+}

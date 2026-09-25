@@ -1,0 +1,143 @@
+{
+  "attempts": [
+    {
+      "error": "AutoNpmAcquisitionFailure:NPM_RUNTIME_DEPENDENCIES_UNSUPPORTED:cbor:[\"nofilter\"]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "description": "Encode and parse data in the Concise Binary Object Representation (CBOR) data format (RFC8949).",
+        "format": "cbor",
+        "links": {
+          "bugs": "https://github.com/hildjj/node-cbor/issues",
+          "homepage": "https://github.com/hildjj/node-cbor/tree/main/packages/cbor",
+          "npm": "https://www.npmjs.com/package/cbor",
+          "repository": "git+ssh://git@github.com/hildjj/node-cbor.git"
+        },
+        "name": "cbor",
+        "package": "cbor",
+        "registry_search_url": "https://registry.npmjs.org/-/v1/search?text=cbor&size=30",
+        "score": 180,
+        "version": "10.0.12"
+      }
+    },
+    {
+      "contract": {
+        "decode_export": "decode",
+        "dependency_count": 0,
+        "encode_export": "encode",
+        "fixture": [
+          {
+            "id": 1,
+            "text": "alpha"
+          },
+          {
+            "id": 2,
+            "text": "beta"
+          }
+        ],
+        "integrity": "sha512-5GX+9tAf29r94Pxv8nCzrv2/t+AkOfem/c/G61+FA2Wadq7THvc5cvr/AVLH0LpukVfNSWRRHvl1fkCdiB9MMQ==",
+        "integrity_algorithm": "sha512",
+        "integrity_digest_hex": "e465fef6d01fdbdafde0fc6ff270b3aefdbfb7e02439f7a6fdcfc6eb5f8503659a76aed31ef73972faff0152c7d0ba6e9157cd4964511ef9757e409d881f4c31",
+        "loader": "require",
+        "metadata_url": "https://registry.npmjs.org/%40dfinity%2Fcbor/0.2.3",
+        "package": "@dfinity/cbor",
+        "probe_output_bytes": 32,
+        "root_selector": "module",
+        "schema": "PROJECT_BRAIN_NPM_CODEC_CONTRACT_V1",
+        "tarball_bytes": 21559,
+        "tarball_path": "canonical/astra_runtime/tmp/npm_probe_packages/dfinity-cbor-0.2.3-e465fef6d01fdbda.tgz",
+        "tarball_url": "https://registry.npmjs.org/@dfinity/cbor/-/cbor-0.2.3.tgz",
+        "version": "0.2.3"
+      },
+      "metadata": {
+        "dependency_count": 0,
+        "description": "A small implementation of Concise Binary Object Representation (CBOR) in pure JavaScript.",
+        "engines": null,
+        "format": "cbor",
+        "integrity": "sha512-5GX+9tAf29r94Pxv8nCzrv2/t+AkOfem/c/G61+FA2Wadq7THvc5cvr/AVLH0LpukVfNSWRRHvl1fkCdiB9MMQ==",
+        "license": "Apache-2.0",
+        "links": {
+          "bugs": "https://github.com/dfinity/cbor-js/issues",
+          "homepage": "https://github.com/dfinity/cbor-js#readme",
+          "npm": "https://www.npmjs.com/package/@dfinity/cbor",
+          "repository": "git+https://github.com/dfinity/cbor-js.git"
+        },
+        "metadata_url": "https://registry.npmjs.org/%40dfinity%2Fcbor/0.2.3",
+        "name": "@dfinity/cbor",
+        "package": "@dfinity/cbor",
+        "registry_search_url": "https://registry.npmjs.org/-/v1/search?text=cbor&size=30",
+        "score": 150,
+        "tarball_url": "https://registry.npmjs.org/@dfinity/cbor/-/cbor-0.2.3.tgz",
+        "version": "0.2.3"
+      },
+      "status": "CONTRACT_ACCEPTED",
+      "supplier": {
+        "description": "A small implementation of Concise Binary Object Representation (CBOR) in pure JavaScript.",
+        "format": "cbor",
+        "links": {
+          "bugs": "https://github.com/dfinity/cbor-js/issues",
+          "homepage": "https://github.com/dfinity/cbor-js#readme",
+          "npm": "https://www.npmjs.com/package/@dfinity/cbor",
+          "repository": "git+https://github.com/dfinity/cbor-js.git"
+        },
+        "name": "@dfinity/cbor",
+        "package": "@dfinity/cbor",
+        "registry_search_url": "https://registry.npmjs.org/-/v1/search?text=cbor&size=30",
+        "score": 150,
+        "version": "0.2.3"
+      }
+    }
+  ],
+  "contract": {
+    "decode_export": "decode",
+    "dependency_count": 0,
+    "encode_export": "encode",
+    "fixture": [
+      {
+        "id": 1,
+        "text": "alpha"
+      },
+      {
+        "id": 2,
+        "text": "beta"
+      }
+    ],
+    "integrity": "sha512-5GX+9tAf29r94Pxv8nCzrv2/t+AkOfem/c/G61+FA2Wadq7THvc5cvr/AVLH0LpukVfNSWRRHvl1fkCdiB9MMQ==",
+    "integrity_algorithm": "sha512",
+    "integrity_digest_hex": "e465fef6d01fdbdafde0fc6ff270b3aefdbfb7e02439f7a6fdcfc6eb5f8503659a76aed31ef73972faff0152c7d0ba6e9157cd4964511ef9757e409d881f4c31",
+    "loader": "require",
+    "metadata_url": "https://registry.npmjs.org/%40dfinity%2Fcbor/0.2.3",
+    "package": "@dfinity/cbor",
+    "probe_output_bytes": 32,
+    "root_selector": "module",
+    "schema": "PROJECT_BRAIN_NPM_CODEC_CONTRACT_V1",
+    "tarball_bytes": 21559,
+    "tarball_path": "canonical/astra_runtime/tmp/npm_probe_packages/dfinity-cbor-0.2.3-e465fef6d01fdbda.tgz",
+    "tarball_url": "https://registry.npmjs.org/@dfinity/cbor/-/cbor-0.2.3.tgz",
+    "version": "0.2.3"
+  },
+  "goal": "Using a zero-cost npm JavaScript library executed by Node.js, encode those exact records as CBOR and save canonical/astra_runtime/tmp/NPM_CBOR_RECORDS.cbor",
+  "mission_id": "ASTRA-RUNTIME-NPM-ACQUIRE-CBOR-001",
+  "schema": "PROJECT_BRAIN_AUTO_NPM_LIBRARY_ACQUISITION_V1",
+  "selected_supplier": {
+    "dependency_count": 0,
+    "description": "A small implementation of Concise Binary Object Representation (CBOR) in pure JavaScript.",
+    "engines": null,
+    "format": "cbor",
+    "integrity": "sha512-5GX+9tAf29r94Pxv8nCzrv2/t+AkOfem/c/G61+FA2Wadq7THvc5cvr/AVLH0LpukVfNSWRRHvl1fkCdiB9MMQ==",
+    "license": "Apache-2.0",
+    "links": {
+      "bugs": "https://github.com/dfinity/cbor-js/issues",
+      "homepage": "https://github.com/dfinity/cbor-js#readme",
+      "npm": "https://www.npmjs.com/package/@dfinity/cbor",
+      "repository": "git+https://github.com/dfinity/cbor-js.git"
+    },
+    "metadata_url": "https://registry.npmjs.org/%40dfinity%2Fcbor/0.2.3",
+    "name": "@dfinity/cbor",
+    "package": "@dfinity/cbor",
+    "registry_search_url": "https://registry.npmjs.org/-/v1/search?text=cbor&size=30",
+    "score": 150,
+    "tarball_url": "https://registry.npmjs.org/@dfinity/cbor/-/cbor-0.2.3.tgz",
+    "version": "0.2.3"
+  },
+  "status": "CONTRACT_INFERRED"
+}

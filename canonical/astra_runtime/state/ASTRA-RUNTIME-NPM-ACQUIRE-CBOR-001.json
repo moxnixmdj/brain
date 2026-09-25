@@ -1,0 +1,21 @@
+{
+  "blocker": {
+    "adapter": "goal",
+    "error": "Blocker:CAPABILITY_ACQUISITION_DISPATCHED:{\"acquisition_evidence_path\": \"canonical/astra_runtime/evidence/ASTRA-RUNTIME-NPM-ACQUIRE-CBOR-001__AUTO_NPM_LIBRARY_ACQUISITION.json\", \"capability_id\": \"auto.npm.dfinity-cbor\", \"keywords\": [\"encode\", \"npm\", \"node\", \"javascript\", \"@dfinity/cbor\", \"cbor\"], \"pending_binding_path\": \"canonical/astra_runtime/pending_bindings/ASTRA-RUNTIME-NPM-ACQUIRE-CBOR-001__dfinity-cbor__b52d51692bc6.json\", \"status\": \"ACQUISITION_DISPATCHED\", \"supplier\": \"@dfinity/cbor\", \"supplier_class\": \"npm_javascript_library\", \"verification_mission_id\": \"ASTRA-AUTO-VERIFY-NPM-DFINITY-CBOR-B52D51692BC6\", \"verification_mission_path\": \"canonical/astra_runtime/missions/ASTRA_AUTO_VERIFY_NPM_DFINITY_CBOR_B52D51692BC6.json\"}",
+    "mission_id": "ASTRA-RUNTIME-NPM-ACQUIRE-CBOR-001",
+    "observed_at_utc": "2026-09-25T19:43:25.982877+00:00",
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "run-held-out-npm-cbor",
+    "step_index": 0
+  },
+  "created_at_utc": "2026-09-25T19:43:24.882022+00:00",
+  "history": [],
+  "mission_id": "ASTRA-RUNTIME-NPM-ACQUIRE-CBOR-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_NPM_ACQUIRE_CBOR_001.json",
+  "mission_sha256": "c7cd583f91794fe24b653144c6928e4ef9f14a94ed0f21de29caf41f4f1a41f5",
+  "next_step": 0,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-25T19:43:25.983009+00:00"
+}
