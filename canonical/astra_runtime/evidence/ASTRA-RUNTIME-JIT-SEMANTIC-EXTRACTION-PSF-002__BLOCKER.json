@@ -1,0 +1,9 @@
+{
+  "adapter": "goal",
+  "error": "Blocker:ACTION_EXPECTATION_FAILED:verified:OBSERVED=False",
+  "mission_id": "ASTRA-RUNTIME-JIT-SEMANTIC-EXTRACTION-PSF-002",
+  "observed_at_utc": "2026-09-25T21:33:24.032870+00:00",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "run-semantic-extraction-goal",
+  "step_index": 0
+}
