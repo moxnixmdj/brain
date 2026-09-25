@@ -1,0 +1,9 @@
+{
+  "adapter": "goal",
+  "error": "RuntimeError:XLSX_STATUS_VALUE_UNRESOLVED",
+  "mission_id": "ASTRA-RUNTIME-FANOUT-XLSX-JOIN-002",
+  "observed_at_utc": "2026-09-25T16:11:07.581666+00:00",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "run-fanout-to-xlsx-goal",
+  "step_index": 0
+}
