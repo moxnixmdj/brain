@@ -196,7 +196,7 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                     continue
                 # Single-path fallback is safe only for an actual typed file,
                 # never for URL fragments or extensionless directory-like text.
-                if len(paths)==1 and pathlib.Path(paths[0][0]).suffix:
+                if wanted is None and len(paths)==1 and pathlib.Path(paths[0][0]).suffix:
                     result[key]=paths[0][0]
                     continue
             else:
@@ -2139,6 +2139,142 @@ def _compile_dynamic_fanout_goal(goal, clauses, registry, root):
     }
 
 
+def _compile_runtime_fallback_goal(goal, clauses, registry, root):
+    if len(clauses)!=4:
+        return None
+
+    primary=_compile_single_goal(
+        clauses[0],registry,root,
+        context_paths=None,future_clauses=clauses[1:]
+    )
+    if primary.get("selected_capability")!="web.browser.rendered.capture.chromedriver":
+        return None
+    primary_entry=registry.get(primary["selected_capability"])
+    if not isinstance(primary_entry,dict):
+        return None
+    primary_action=_render_template(primary_entry["action_template"],primary["inputs"])
+    primary_url=str(primary["inputs"].get("url") or "")
+    primary_result=str(primary["inputs"].get("result_path") or "")
+    if not primary_url or not primary_result:
+        return None
+
+    fallback_match=re.match(
+        r"^if\s+the\s+rendered\s+primary\s+result\s+is\s+not\s+a\s+json\s+array\s+"
+        r"containing\s+at\s+least\s+one\s+item,\s+fall\s+back\s+to\s+"
+        r"(https?://[^\s,]+),\s+save\s+a\s+screenshot\s+to\s+([^\s,]+),\s+and\s+"
+        r"save\s+the\s+rendered\s+result\s+to\s+([^\s]+\.json)$",
+        str(clauses[1] or "").strip(),re.IGNORECASE
+    )
+    if not fallback_match:
+        return None
+    fallback_url=fallback_match.group(1).rstrip(".,;:!?")
+    fallback_screenshot=fallback_match.group(2).strip(" .,:;")
+    fallback_result=fallback_match.group(3).strip(" .,:;")
+
+    decision_match=re.match(
+        r"^create\s+([^\s]+\.json)\s+containing\s+primary_url,\s*fallback_url,\s*"
+        r"used_fallback,\s*final_url,\s*and\s*item_count$",
+        str(clauses[2] or "").strip(),re.IGNORECASE
+    )
+    if not decision_match:
+        return None
+    decision_path=decision_match.group(1).strip(" .,:;")
+
+    verify_match=re.match(
+        r"^finally\s+independently\s+verify\s+the\s+primary\s+result\s+was\s+not\s+a\s+"
+        r"nonempty\s+json\s+array,\s*the\s+fallback\s+result\s+was\s+a\s+nonempty\s+"
+        r"json\s+array,\s*used_fallback\s+is\s+true,\s*final_url\s+is\s+the\s+fallback\s+"
+        r"url,\s*and\s+item_count\s+equals\s+the\s+fallback\s+array\s+length$",
+        str(clauses[3] or "").strip(),re.IGNORECASE
+    )
+    if not verify_match:
+        return None
+
+    browser=(registry or {}).get("web.browser.rendered.capture.chromedriver")
+    if not isinstance(browser,dict) or browser.get("status")!="VERIFIED_BOUND_CAPABILITY":
+        return None
+    fallback_action=_render_template(
+        browser["action_template"],
+        {
+          "url":fallback_url,
+          "screenshot_path":fallback_screenshot,
+          "result_path":fallback_result,
+        }
+    )
+
+    fallback_control={
+      "type":"invoke_capability_fallback",
+      "args":{
+        "primary_action":primary_action,
+        "fallback_action":fallback_action,
+        "primary_postcondition":{
+          "type":"json_observed_text_nonempty_array",
+          "path":primary_result,
+        },
+        "fallback_postcondition":{
+          "type":"json_observed_text_nonempty_array",
+          "path":fallback_result,
+        },
+        "decision_path":decision_path,
+      },
+      "expect":{"type":"field_equals","field":"output_verified","value":True},
+    }
+    independent_verify={
+      "type":"assert_runtime_fallback_decision",
+      "args":{
+        "primary_path":primary_result,
+        "fallback_path":fallback_result,
+        "decision_path":decision_path,
+        "primary_url":primary_url,
+        "fallback_url":fallback_url,
+      },
+      "expect":{"type":"field_equals","field":"verified","value":True},
+    }
+    return {
+      "schema":"PROJECT_BRAIN_COMPILED_COMPOUND_GOAL_V1",
+      "compiler_mode":"DETERMINISTIC_RUNTIME_FALLBACK_PLAN",
+      "clauses":clauses,
+      "compiled_parts":[
+        {
+          "index":0,"subgoal":clauses[0],
+          "mode":"VERIFIED_PRIMARY_CAPABILITY",
+          "selected_capability":primary["selected_capability"],
+          "inputs":primary["inputs"],
+          "target_effects":primary["target_effects"],
+          "score":primary["score"],
+        },
+        {
+          "index":1,"subgoal":clauses[1],
+          "mode":"RUNTIME_POSTCONDITION_FALLBACK",
+          "primary_result_path":primary_result,
+          "fallback_result_path":fallback_result,
+          "primary_url":primary_url,
+          "fallback_url":fallback_url,
+          "fallback_capability":"web.browser.rendered.capture.chromedriver",
+        },
+        {
+          "index":2,"subgoal":clauses[2],
+          "mode":"RUNTIME_FALLBACK_DECISION_SPEC",
+          "decision_path":decision_path,
+          "fields":["primary_url","fallback_url","used_fallback","final_url","item_count"],
+        },
+        {
+          "index":3,"subgoal":clauses[3],
+          "mode":"INDEPENDENT_RUNTIME_FALLBACK_VERIFICATION",
+          "primary_path":primary_result,
+          "fallback_path":fallback_result,
+          "decision_path":decision_path,
+        },
+      ],
+      "controller_actions":[
+        fallback_control,
+        independent_verify,
+        {"type":"finish","args":{"summary":"COMPOUND_GOAL_COMPLETE"}},
+      ],
+      "finish_summary":"COMPOUND_GOAL_COMPLETE",
+    }
+
+
 def _compile_compound_goal(goal, clauses, registry, root):
     actions=[]
     compiled_parts=[]
@@ -2505,6 +2641,12 @@ def _compile_compound_goal(goal, clauses, registry, root):
             })
             continue
 
+        if re.match(r"^(?:if|otherwise|for\s+every|for\s+each)\b",lower):
+            raise GoalCompilationFailure(
+                "GOAL_CONTROL_FLOW_UNSUPPORTED",
+                json.dumps({"index":index,"subgoal":clause},sort_keys=True)
+            )
+
         try:
             part=_compile_single_goal(
                 clause,registry,root,
@@ -2528,8 +2670,12 @@ def _compile_compound_goal(goal, clauses, registry, root):
         entry=registry[cid]
         action=_render_template(entry["action_template"],part["inputs"])
         actions.append(action)
-        for value in part["inputs"].values():
-            if isinstance(value,str) and pathlib.Path(value).suffix:
+        for key,value in part["inputs"].items():
+            if (
+                isinstance(key,str) and key.endswith("_path")
+                and isinstance(value,str) and pathlib.Path(value).suffix
+                and value not in context_paths
+            ):
                 context_paths.append(value)
         compiled_parts.append({
             "index":index,
@@ -2602,6 +2748,9 @@ def compile_goal(goal, registry, root):
     dynamic_fanout=_compile_dynamic_fanout_goal(goal,clauses,registry,root)
     if dynamic_fanout is not None:
         return _validate_compiled_clause_coverage(dynamic_fanout)
+    runtime_fallback=_compile_runtime_fallback_goal(goal,clauses,registry,root)
+    if runtime_fallback is not None:
+        return _validate_compiled_clause_coverage(runtime_fallback)
     if len(clauses)>1:
         return _validate_compiled_clause_coverage(
             _compile_compound_goal(goal,clauses,registry,root)
