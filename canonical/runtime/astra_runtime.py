@@ -1427,6 +1427,149 @@ def _goal_action(action):
           "all_true":truths,
           "verified":bool(equal and nonempty and truths),
         }
+    if typ=="aggregate_runtime_json_arrays":
+        dimension_path=_safe_repo_path(args.get("dimension_path",""))
+        fact_path=_safe_repo_path(args.get("fact_path",""))
+        output_path=_safe_repo_path(args.get("output_path",""))
+        dimension_key=str(args.get("dimension_key") or "")
+        fact_key=str(args.get("fact_key") or "")
+        output_id_field=str(args.get("output_id_field") or "")
+        count_field=str(args.get("count_field") or "")
+        copy_fields=list(args.get("copy_fields") or [])
+        if (
+            not dimension_path.is_file() or not fact_path.is_file()
+            or not dimension_key or not fact_key or not output_id_field or not count_field
+            or any(not isinstance(x,str) for x in copy_fields)
+        ):
+            return {"type":typ,"output_verified":False,"error":"RUNTIME_REDUCE_SPEC_INVALID"}
+
+        def observed_array(path):
+            wrapper=json.loads(path.read_text(encoding="utf-8"))
+            data=json.loads(str(wrapper.get("observed_text") or ""))
+            if not isinstance(data,list) or any(not isinstance(x,dict) for x in data):
+                raise RuntimeError("RUNTIME_REDUCE_SOURCE_NOT_OBJECT_ARRAY")
+            return data
+
+        try:
+            dimensions=observed_array(dimension_path)
+            facts=observed_array(fact_path)
+        except Exception as exc:
+            return {"type":typ,"output_verified":False,"error":"RUNTIME_REDUCE_SOURCE_INVALID:"+type(exc).__name__+":"+str(exc)}
+
+        index={}
+        counts={}
+        for row in dimensions:
+            key=row.get(dimension_key)
+            if key is None:
+                return {"type":typ,"output_verified":False,"error":"RUNTIME_REDUCE_DIMENSION_KEY_MISSING"}
+            token=json.dumps(key,sort_keys=True)
+            if token in index:
+                return {"type":typ,"output_verified":False,"error":"RUNTIME_REDUCE_DIMENSION_KEY_DUPLICATE","key":key}
+            index[token]=row
+            counts[token]=0
+
+        unmatched=[]
+        for row in facts:
+            if fact_key not in row:
+                return {"type":typ,"output_verified":False,"error":"RUNTIME_REDUCE_FACT_KEY_MISSING"}
+            token=json.dumps(row.get(fact_key),sort_keys=True)
+            if token not in counts:
+                unmatched.append(row.get(fact_key))
+                continue
+            counts[token]+=1
+        if unmatched:
+            return {"type":typ,"output_verified":False,"error":"RUNTIME_REDUCE_UNMATCHED_FACTS","keys":unmatched[:20]}
+
+        summary=[]
+        for row in dimensions:
+            token=json.dumps(row.get(dimension_key),sort_keys=True)
+            rec={output_id_field:row.get(dimension_key)}
+            for field in copy_fields:
+                if field not in row:
+                    return {"type":typ,"output_verified":False,"error":"RUNTIME_REDUCE_COPY_FIELD_MISSING","field":field}
+                rec[field]=row[field]
+            rec[count_field]=counts[token]
+            summary.append(rec)
+
+        if sum(counts.values())!=len(facts):
+            return {"type":typ,"output_verified":False,"error":"RUNTIME_REDUCE_COUNT_SUM_MISMATCH"}
+        output_path.parent.mkdir(parents=True,exist_ok=True)
+        output_path.write_text(json.dumps(summary,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+        return {
+          "type":typ,"output_verified":True,
+          "dimension_count":len(dimensions),"fact_count":len(facts),
+          "summary_count":len(summary),"count_sum":sum(counts.values()),
+          "output_path":str(output_path.relative_to(ROOT)),
+        }
+
+    if typ=="assert_runtime_json_aggregate":
+        dimension_path=_safe_repo_path(args.get("dimension_path",""))
+        fact_path=_safe_repo_path(args.get("fact_path",""))
+        summary_path=_safe_repo_path(args.get("summary_path",""))
+        dimension_key=str(args.get("dimension_key") or "")
+        fact_key=str(args.get("fact_key") or "")
+        output_id_field=str(args.get("output_id_field") or "")
+        count_field=str(args.get("count_field") or "")
+        copy_fields=list(args.get("copy_fields") or [])
+        if not dimension_path.is_file() or not fact_path.is_file() or not summary_path.is_file():
+            return {"type":typ,"verified":False,"error":"RUNTIME_REDUCE_VERIFY_SOURCE_MISSING"}
+        try:
+            dw=json.loads(dimension_path.read_text(encoding="utf-8"))
+            fw=json.loads(fact_path.read_text(encoding="utf-8"))
+            dimensions=json.loads(str(dw.get("observed_text") or ""))
+            facts=json.loads(str(fw.get("observed_text") or ""))
+            summary=json.loads(summary_path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            return {"type":typ,"verified":False,"error":"RUNTIME_REDUCE_VERIFY_JSON_INVALID:"+type(exc).__name__}
+        failures=[]
+        if not isinstance(dimensions,list) or not isinstance(facts,list) or not isinstance(summary,list):
+            return {"type":typ,"verified":False,"error":"RUNTIME_REDUCE_VERIFY_NOT_ARRAY"}
+        by_id={}
+        for rec in summary:
+            if not isinstance(rec,dict) or output_id_field not in rec:
+                failures.append("SUMMARY_RECORD_INVALID")
+                continue
+            token=json.dumps(rec.get(output_id_field),sort_keys=True)
+            if token in by_id:
+                failures.append("SUMMARY_DUPLICATE_ID")
+            by_id[token]=rec
+        if len(summary)!=len(dimensions):
+            failures.append("SUMMARY_CARDINALITY_MISMATCH")
+        fact_counts={}
+        for fact in facts:
+            if not isinstance(fact,dict) or fact_key not in fact:
+                failures.append("FACT_KEY_MISSING")
+                continue
+            token=json.dumps(fact.get(fact_key),sort_keys=True)
+            fact_counts[token]=fact_counts.get(token,0)+1
+        total=0
+        for dim in dimensions:
+            if not isinstance(dim,dict) or dimension_key not in dim:
+                failures.append("DIMENSION_KEY_MISSING")
+                continue
+            token=json.dumps(dim.get(dimension_key),sort_keys=True)
+            rec=by_id.get(token)
+            if rec is None:
+                failures.append("SUMMARY_RECORD_MISSING")
+                continue
+            for field in copy_fields:
+                if rec.get(field)!=dim.get(field):
+                    failures.append("COPY_FIELD_MISMATCH:"+field)
+            expected=fact_counts.get(token,0)
+            if rec.get(count_field)!=expected:
+                failures.append("COUNT_MISMATCH")
+            total+=expected
+        if total!=len(facts):
+            failures.append("COUNT_SUM_MISMATCH")
+        if any(token not in {json.dumps(d.get(dimension_key),sort_keys=True) for d in dimensions if isinstance(d,dict)} for token in fact_counts):
+            failures.append("UNMATCHED_FACTS")
+        return {
+          "type":typ,"verified":not failures,
+          "dimension_count":len(dimensions),"fact_count":len(facts),
+          "summary_count":len(summary),"count_sum":total,
+          "failures":failures[:30],
+        }
+
     if typ=="join_runtime_json_arrays":
         left_path=_safe_repo_path(args.get("left_path",""))
         right_path=_safe_repo_path(args.get("right_path",""))
@@ -1816,7 +1959,7 @@ def _run_model_independent_goal(step, mission, goal):
         return None
     allowed_types={
       "read_file","list_tree","search_text","http_get","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback","invoke_capability_until",
-      "project_browser_result_json","join_runtime_json_arrays","assert_runtime_json_join","assert_hex_prefix_bucket","assert_collection_length_bucket","assert_runtime_selected_code_decodes",
+      "project_browser_result_json","join_runtime_json_arrays","assert_runtime_json_join","aggregate_runtime_json_arrays","assert_runtime_json_aggregate","assert_hex_prefix_bucket","assert_collection_length_bucket","assert_runtime_selected_code_decodes",
       "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal","assert_runtime_fanout_decodes","assert_runtime_fanout_artifacts_decode","assert_runtime_per_item_fallback_decodes","assert_runtime_fallback_decision","assert_runtime_bounded_loop_trace",
       "assert_workflow_audit_supported_by_source","assert_python_source_audit_supported_by_source",
       "assert_python_test_audit_zero","assert_python_test_audit_supported_by_fresh_execution",
