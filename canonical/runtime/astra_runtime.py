@@ -620,6 +620,140 @@ def _goal_action(action):
           "audit_sha256":sha_file(audit_path),
           "source_sha256":sha_file(yaml_path),
         }
+    if typ=="invoke_capability_fallback":
+        primary=args.get("primary_action")
+        fallback=args.get("fallback_action")
+        primary_condition=args.get("primary_postcondition")
+        fallback_condition=args.get("fallback_postcondition")
+        decision_path=_safe_repo_path(args.get("decision_path",""))
+        if (
+            not isinstance(primary,dict) or primary.get("type")!="invoke_capability"
+            or not isinstance(fallback,dict) or fallback.get("type")!="invoke_capability"
+            or not isinstance(primary_condition,dict)
+            or not isinstance(fallback_condition,dict)
+        ):
+            return {"type":typ,"output_verified":False,"error":"FALLBACK_SPEC_INVALID"}
+
+        def run_nested(action):
+            result=_invoke_bound_capability((action.get("args") or {}))
+            _verify_action_expectation(action,result)
+            return result
+
+        def eval_condition(spec):
+            ctype=str(spec.get("type") or "")
+            if ctype!="json_observed_text_nonempty_array":
+                raise RuntimeError("FALLBACK_POSTCONDITION_UNSUPPORTED:"+ctype)
+            path=_safe_repo_path(spec.get("path",""))
+            if not path.is_file():
+                return {"ok":False,"item_count":0,"error":"POSTCONDITION_PATH_MISSING"}
+            try:
+                wrapper=json.loads(path.read_text(encoding="utf-8"))
+                payload=json.loads(str(wrapper.get("observed_text") or ""))
+            except Exception as exc:
+                return {"ok":False,"item_count":0,"error":"POSTCONDITION_JSON_INVALID:"+type(exc).__name__}
+            ok=isinstance(payload,list) and len(payload)>0
+            return {"ok":ok,"item_count":len(payload) if isinstance(payload,list) else 0}
+
+        primary_result=None
+        primary_error=None
+        try:
+            primary_result=run_nested(primary)
+            primary_eval=eval_condition(primary_condition)
+        except Exception as exc:
+            primary_error=type(exc).__name__+":"+str(exc)
+            primary_eval={"ok":False,"item_count":0,"error":"PRIMARY_ACTION_FAILED"}
+
+        used_fallback=not bool(primary_eval.get("ok"))
+        fallback_result=None
+        if used_fallback:
+            try:
+                fallback_result=run_nested(fallback)
+                final_eval=eval_condition(fallback_condition)
+            except Exception as exc:
+                return {
+                  "type":typ,"output_verified":False,
+                  "error":"FALLBACK_ACTION_FAILED",
+                  "detail":type(exc).__name__+":"+str(exc),
+                  "primary_error":primary_error,
+                }
+            final_result=fallback_result
+        else:
+            final_eval=primary_eval
+            final_result=primary_result
+
+        if not final_eval.get("ok"):
+            return {
+              "type":typ,"output_verified":False,
+              "error":"FALLBACK_POSTCONDITION_FAILED",
+              "used_fallback":used_fallback,
+              "primary_evaluation":primary_eval,
+              "final_evaluation":final_eval,
+            }
+
+        primary_url=str((primary.get("args") or {}).get("url") or "")
+        fallback_url=str((fallback.get("args") or {}).get("url") or "")
+        final_url=str((final_result or {}).get("final_url") or (fallback_url if used_fallback else primary_url))
+        decision={
+          "primary_url":primary_url,
+          "fallback_url":fallback_url,
+          "used_fallback":used_fallback,
+          "final_url":final_url,
+          "item_count":int(final_eval.get("item_count") or 0),
+        }
+        decision_path.parent.mkdir(parents=True,exist_ok=True)
+        decision_path.write_text(json.dumps(decision,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+        return {
+          "type":typ,"output_verified":True,
+          **decision,
+          "decision_path":str(decision_path.relative_to(ROOT)),
+          "primary_evaluation":primary_eval,
+          "final_evaluation":final_eval,
+        }
+
+    if typ=="assert_runtime_fallback_decision":
+        primary_path=_safe_repo_path(args.get("primary_path",""))
+        fallback_path=_safe_repo_path(args.get("fallback_path",""))
+        decision_path=_safe_repo_path(args.get("decision_path",""))
+        if not primary_path.is_file() or not fallback_path.is_file() or not decision_path.is_file():
+            return {"type":typ,"verified":False,"error":"FALLBACK_VERIFY_SOURCE_MISSING"}
+        def payload(path):
+            wrapper=json.loads(path.read_text(encoding="utf-8"))
+            return json.loads(str(wrapper.get("observed_text") or ""))
+        try:
+            primary_payload=payload(primary_path)
+            fallback_payload=payload(fallback_path)
+            decision=json.loads(decision_path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            return {"type":typ,"verified":False,"error":"FALLBACK_VERIFY_JSON_INVALID:"+type(exc).__name__}
+        primary_ok=isinstance(primary_payload,list) and len(primary_payload)>0
+        fallback_ok=isinstance(fallback_payload,list) and len(fallback_payload)>0
+        expected_fallback=not primary_ok
+        expected_count=len(fallback_payload) if expected_fallback and isinstance(fallback_payload,list) else (
+            len(primary_payload) if isinstance(primary_payload,list) else 0
+        )
+        expected_url=str(args.get("fallback_url") if expected_fallback else args.get("primary_url"))
+        failures=[]
+        if expected_fallback and not fallback_ok:
+            failures.append("FALLBACK_NOT_NONEMPTY_ARRAY")
+        if bool(decision.get("used_fallback"))!=expected_fallback:
+            failures.append("USED_FALLBACK_MISMATCH")
+        if str(decision.get("final_url") or "")!=expected_url:
+            failures.append("FINAL_URL_MISMATCH")
+        if int(decision.get("item_count") or -1)!=expected_count:
+            failures.append("ITEM_COUNT_MISMATCH")
+        if str(decision.get("primary_url") or "")!=str(args.get("primary_url") or ""):
+            failures.append("PRIMARY_URL_MISMATCH")
+        if str(decision.get("fallback_url") or "")!=str(args.get("fallback_url") or ""):
+            failures.append("FALLBACK_URL_MISMATCH")
+        return {
+          "type":typ,"verified":not failures,
+          "failures":failures,
+          "primary_nonempty_array":primary_ok,
+          "fallback_nonempty_array":fallback_ok,
+          "expected_used_fallback":expected_fallback,
+          "expected_item_count":expected_count,
+        }
+
     if typ=="invoke_capability_fanout":
         source=_safe_repo_path(args.get("source_path",""))
         manifest_path=_safe_repo_path(args.get("manifest_path",""))
@@ -1164,9 +1298,9 @@ def _run_model_independent_goal(step, mission, goal):
     if actions is None:
         return None
     allowed_types={
-      "read_file","list_tree","search_text","http_get","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout",
+      "read_file","list_tree","search_text","http_get","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback",
       "project_browser_result_json","assert_hex_prefix_bucket","assert_collection_length_bucket","assert_runtime_selected_code_decodes",
-      "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal","assert_runtime_fanout_decodes","assert_runtime_fanout_artifacts_decode",
+      "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal","assert_runtime_fanout_decodes","assert_runtime_fanout_artifacts_decode","assert_runtime_fallback_decision",
       "assert_workflow_audit_supported_by_source","assert_python_source_audit_supported_by_source",
       "assert_python_test_audit_zero","assert_python_test_audit_supported_by_fresh_execution",
       "finish"
