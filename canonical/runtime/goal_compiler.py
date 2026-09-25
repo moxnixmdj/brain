@@ -1565,7 +1565,7 @@ def _compile_multi_source_reduce_goal(goal,clauses,registry,root):
         row=(re.search(r"\bone\s+(?:row|record)\s+(?:for\s+)?(?:each|per)\s+(?:observed|live)?\s*(\w+)\b",semantic,re.I) or re.search(r"\beach\s+(\w+)\s+has\s+a\s+single\s+summary\s+entry\b",semantic,re.I) or re.search(r"\bone\s+summary\s+(?:row|entry|record)\s+per\s+(\w+)\b",semantic,re.I))
         relation=re.search(r"\b(\w+)\.(\w+)\s*(?:=|equals|matching|matches)\s*(\w+)\.(\w+)\b",semantic,re.I)
         count=(re.search(r"\b([A-Za-z_][A-Za-z0-9_]*)\s+(?:equal\s+to|equals|is)\s+(?:how\s+many|the\s+number\s+of)\b",semantic,re.I) or re.search(r"\bderive\s+([A-Za-z_][A-Za-z0-9_]*)\s+by\s+counting\b",semantic,re.I))
-        field_segment=re.search(r"\b(?:carrying|with)\s+(.+?)(?:,\s*(?:plus|where)|\s+where\b)",semantic,re.I)
+        field_segment=(re.search(r"\b(?:carrying|with)\s+(.+?)(?:,\s*(?:plus|where)|\s+where\b)",semantic,re.I) or re.search(r"\bcontaining\s+(.+?)(?:;|\.|$)",semantic,re.I))
         if len(paths)!=1 or not row or not relation or not count:
             return None
         summary=paths[0]
@@ -1597,23 +1597,29 @@ def _compile_multi_source_reduce_goal(goal,clauses,registry,root):
       r"^create\s+([^\s]+\.xlsx)\s+from\s+([^\s]+\.json)\s+with\s+columns\s+(.+)$",
       clauses[3],re.IGNORECASE)
     if not xm:
-        xm=re.match(
-          r"^turn\s+([^\s]+\.json)\s+into\s+([^\s]+\.xlsx)\s+using\s+(?:the\s+)?columns\s+(.+)$",
-          clauses[3],re.IGNORECASE)
-        if xm:
+        alt=(
+            re.match(
+              r"^turn\s+([^\s]+\.json)\s+into\s+([^\s]+\.xlsx)\s+using\s+(?:the\s+)?columns\s+(.+)$",
+              clauses[3],re.IGNORECASE)
+            or re.match(
+              r"^export\s+([^\s]+\.json)\s+as\s+([^\s]+\.xlsx)\s+with\s+(.+?)\s+as\s+(?:the\s+)?table\s+columns$",
+              clauses[3],re.IGNORECASE)
+        )
+        if alt:
             class _X:
                 def __init__(self,m): self.m=m
                 def group(self,n):
                     return {1:self.m.group(2),2:self.m.group(1),3:self.m.group(3)}[n]
-            xm=_X(xm)
+            xm=_X(alt)
     verify_text=str(clauses[4] or "").lower()
     vm=(
       bool(re.match(r"^independently\s+reread\s+both\s+live\s+source\s+results,\s+the\s+summary\s+json,\s+and\s+the\s+xlsx\s+and\s+verify\b",clauses[4],re.IGNORECASE))
       or (
-        ("cross-check" in verify_text or "cross check" in verify_text)
-        and "json" in verify_text
-        and ("workbook" in verify_text or "xlsx" in verify_text)
-        and ("count" in verify_text or "counts" in verify_text)
+        ("cross-check" in verify_text or "cross check" in verify_text or "validate" in verify_text)
+        and ("json" in verify_text or "summary" in verify_text)
+        and ("workbook" in verify_text or "spreadsheet" in verify_text or "xlsx" in verify_text)
+        and ("count" in verify_text or "counts" in verify_text or "totals" in verify_text)
+        and ("source" in verify_text or "dataset" in verify_text)
       )
     )
     if not xm or not vm:
