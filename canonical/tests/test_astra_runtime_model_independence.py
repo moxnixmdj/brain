@@ -28,9 +28,22 @@ class ModelIndependenceTests(unittest.TestCase):
         self.assertIsNone(result["planner_model_last"])
         self.assertIn("MODEL_INDEPENDENT_GOAL_COMPLETE", result["stdout"])
 
-    def test_goal_without_controller_plan_fails_closed(self):
-        with self.assertRaisesRegex(runtime.Blocker, "MODEL_INDEPENDENT_CONTROLLER_PLAN_REQUIRED"):
-            runtime.run_goal({}, {"goal": "No implicit model fallback is allowed."})
+    def test_unknown_goal_attempts_model_independent_acquisition_without_model_fallback(self):
+        class EmptyAuto:
+            def dispatch(self,*args,**kwargs):
+                raise RuntimeError("NO_TEST_CAPABILITY")
+        class EmptyDiscovery:
+            def search_all(self,*args,**kwargs):
+                return {"candidates":[]}
+        with mock.patch.object(runtime, "_planner_post", side_effect=AssertionError("model planner must not be called")), \
+             mock.patch.object(runtime, "_load_auto_apt_cli_acquisition", return_value=EmptyAuto()), \
+             mock.patch.object(runtime, "_load_capability_discovery", return_value=EmptyDiscovery()), \
+             mock.patch.object(runtime, "writej"):
+            with self.assertRaisesRegex(runtime.Blocker, "CAPABILITY_ACQUISITION_REQUIRED"):
+                runtime.run_goal(
+                    {},
+                    {"mission_id":"TEST-MODEL-INDEPENDENCE-NO-PLAN","goal":"No implicit model fallback is allowed."}
+                )
 
     def test_model_planner_is_explicit_opt_in_only(self):
         planned = '{"actions":[{"type":"finish","args":{"summary":"OPTIONAL_MODEL_ROUTE_USED"},"why":"explicit opt-in"}]}'
