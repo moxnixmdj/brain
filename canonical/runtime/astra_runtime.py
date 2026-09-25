@@ -1399,6 +1399,52 @@ def _run_capability_planned_goal(step, mission, goal):
     result["inherited_bound_capabilities"]=problem.get("_inherited_bound_capabilities",[])
     return result
 
+def _classify_plain_goal_gap(text):
+    value=str(text or "").strip()
+    lower=value.lower()
+    if not value:
+        return "UNKNOWN"
+    if (
+        re.match(r"^(?:for\s+every|for\s+each)\b",lower)
+        or " at runtime" in lower
+        or re.search(r"\botherwise\b",lower)
+    ):
+        return "CONTROL_OR_FANOUT"
+    if re.match(r"^if\b",lower) or re.search(r"\bthen\b",lower):
+        return "CONTROL_FLOW"
+    if (
+        re.match(r"^(?:finally\s+)?independently\b",lower)
+        or re.match(r"^(?:verify|reread|reopen|assert|check)\b",lower)
+        or re.search(r"\bindependently\s+(?:verify|decode|reread|reopen|check)\b",lower)
+    ):
+        return "VERIFICATION"
+    if (
+        "from that result" in lower
+        or "using that result" in lower
+        or "from the previous result" in lower
+        or "from the live result" in lower
+    ):
+        return "CAUSAL_COMPOSITION"
+    return "CAPABILITY_CANDIDATE"
+
+
+def _write_goal_gap_classification(mission, subgoal, gap_class, compile_error):
+    mid=str(mission.get("mission_id") or "UNKNOWN")
+    path=EVID_DIR/f"{mid}__GOAL_GAP_CLASSIFICATION.json"
+    evidence={
+      "schema":"PROJECT_BRAIN_GOAL_GAP_CLASSIFICATION_V1",
+      "mission_id":mid,
+      "subgoal":str(subgoal or ""),
+      "gap_class":gap_class,
+      "capability_acquisition_allowed":gap_class=="CAPABILITY_CANDIDATE",
+      "compile_error":str(compile_error),
+      "policy":"ONLY_CAPABILITY_CANDIDATE_MAY_TRIGGER_EXTERNAL_CAPABILITY_ACQUISITION",
+      "observed_at_utc":utc(),
+    }
+    writej(path,evidence)
+    return path,evidence
+
+
 def run_goal(step, mission):
     goal=mission.get(step.get("goal_ref","goal"), mission.get("goal"))
     if isinstance(goal,(dict,list)): goal=json.dumps(goal,sort_keys=True)
@@ -1431,6 +1477,19 @@ def run_goal(step, mission):
             if not acquisition_goal:
                 raise
         if (is_no_match or is_unresolved_subgoal) and not optional_planner:
+            gap_class=_classify_plain_goal_gap(acquisition_goal)
+            gap_path,gap_evidence=_write_goal_gap_classification(
+                mission,acquisition_goal,gap_class,error_text
+            )
+            if gap_class!="CAPABILITY_CANDIDATE":
+                raise Blocker(
+                    "GOAL_ARCHITECTURAL_GAP:"+json.dumps({
+                      "gap_class":gap_class,
+                      "subgoal":acquisition_goal,
+                      "evidence_path":str(gap_path.relative_to(ROOT)),
+                      "capability_acquisition_attempted":False,
+                    },sort_keys=True)
+                ) from e
             mid=str(mission.get("mission_id") or "UNKNOWN")
             ep=EVID_DIR/f"{mid}__PLAIN_GOAL_CAPABILITY_DISCOVERY.json"
             auto=_load_auto_apt_cli_acquisition()
