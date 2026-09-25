@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T03:26:22.600957+00:00",
+  "mission_id": "ASTRA-VERIFY-DOCX-LIBRARY-BINDING-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_DOCX_LIBRARY_BINDING_001.json",
+  "mission_sha256": "d9353c66650aa21b55082cbd4de87ff20c0a91a5dde799055a7cae5f34448edc",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "3b92fca8daf7e70f478c69e5ffcec0a5a9b49fadcf09436857ee3c110c6f9648",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
