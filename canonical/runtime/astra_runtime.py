@@ -347,6 +347,94 @@ def _goal_action(action):
           "verified":p.is_file(),
           "sha256":sha_file(p) if p.is_file() else None,
         }
+    if typ=="assert_workflow_audit_supported_by_source":
+        audit_path=_safe_repo_path(args.get("audit_path",""))
+        yaml_path=_safe_repo_path(args.get("yaml_path",""))
+        if not audit_path.is_file() or not yaml_path.is_file():
+            return {
+              "type":typ,"verified":False,"error":"WORKFLOW_AUDIT_SOURCE_MISSING",
+              "audit_path":str(args.get("audit_path","")),
+              "yaml_path":str(args.get("yaml_path","")),
+            }
+        try:
+            audit=json.loads(audit_path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            return {"type":typ,"verified":False,"error":"WORKFLOW_AUDIT_JSON_INVALID:"+type(exc).__name__}
+        raw=yaml_path.read_text(encoding="utf-8")
+        missing=[]
+        if audit.get("schema")!="PROJECT_BRAIN_GITHUB_WORKFLOW_AUDIT_V1":
+            missing.append("schema")
+        name=str(audit.get("name") or "")
+        if not name or not re.search(r"(?m)^name:\\s*"+re.escape(name)+r"\\s*$",raw):
+            missing.append("name:"+name)
+        triggers=list(audit.get("trigger_names") or [])
+        if not triggers:
+            missing.append("trigger_names:empty")
+        for item in triggers:
+            value=str(item)
+            if not re.search(r"(?m)^  "+re.escape(value)+r":(?:\\s*|\\s+.*)$",raw):
+                missing.append("trigger:"+value)
+        for value in audit.get("push_branches") or []:
+            if str(value) not in raw:
+                missing.append("push_branch:"+str(value))
+        for value in audit.get("push_paths") or []:
+            if str(value) not in raw:
+                missing.append("push_path:"+str(value))
+        for value in audit.get("workflow_dispatch_input_names") or []:
+            if not re.search(r"(?m)^\\s{4,}"+re.escape(str(value))+r":\\s*$",raw):
+                missing.append("dispatch_input:"+str(value))
+        permissions=audit.get("permissions") or {}
+        if not isinstance(permissions,dict):
+            missing.append("permissions:not_object")
+            permissions={}
+        for key,value in permissions.items():
+            if not re.search(
+                r"(?m)^\\s{2}"+re.escape(str(key))+r":\\s*"+re.escape(str(value))+r"\\s*$",raw
+            ):
+                missing.append("permission:"+str(key)+"="+str(value))
+        jobs=list(audit.get("jobs") or [])
+        if not jobs:
+            missing.append("jobs:empty")
+        uses_count=0
+        for job in jobs:
+            if not isinstance(job,dict):
+                missing.append("job:not_object")
+                continue
+            jid=str(job.get("id") or "")
+            if not jid or not re.search(r"(?m)^  "+re.escape(jid)+r":\\s*$",raw):
+                missing.append("job_id:"+jid)
+            runner=job.get("runner_label")
+            if runner is None or not re.search(
+                r"(?m)^\\s{4}runs-on:\\s*"+re.escape(str(runner))+r"\\s*$",raw
+            ):
+                missing.append("runner:"+jid+":"+str(runner))
+            timeout=job.get("timeout_minutes")
+            if timeout is not None and not re.search(
+                r"(?m)^\\s{4}timeout-minutes:\\s*"+re.escape(str(timeout))+r"\\s*$",raw
+            ):
+                missing.append("timeout:"+jid+":"+str(timeout))
+            for step_name in job.get("step_names") or []:
+                if not re.search(
+                    r"(?m)^\\s*-\\s+name:\\s*"+re.escape(str(step_name))+r"\\s*$",raw
+                ):
+                    missing.append("step_name:"+jid+":"+str(step_name))
+            for ref in job.get("uses") or []:
+                uses_count+=1
+                if not re.search(
+                    r"(?m)^\\s*-?\\s*uses:\\s*"+re.escape(str(ref))+r"\\s*$",raw
+                ):
+                    missing.append("uses:"+jid+":"+str(ref))
+        return {
+          "type":typ,
+          "verified":not missing,
+          "audit_path":str(audit_path.relative_to(ROOT)),
+          "yaml_path":str(yaml_path.relative_to(ROOT)),
+          "job_count":len(jobs),
+          "uses_count":uses_count,
+          "missing_support":missing,
+          "audit_sha256":sha_file(audit_path),
+          "source_sha256":sha_file(yaml_path),
+        }
     if typ=="assert_json_fields_equal":
         p=_safe_repo_path(args.get("path",""))
         if not p.is_file():
@@ -486,6 +574,7 @@ def _run_model_independent_goal(step, mission, goal):
     allowed_types={
       "read_file","list_tree","search_text","http_get","invoke_capability",
       "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal",
+      "assert_workflow_audit_supported_by_source",
       "finish"
     }
     trace=[]
