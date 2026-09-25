@@ -106,6 +106,37 @@ class GoalCompilerTests(unittest.TestCase):
             self.assertEqual(inputs["markdown_path"],md_rel)
             self.assertEqual(inputs["output_path"],pdf_rel)
 
+    def test_json_status_manifest_compiles_and_executes(self):
+        subgoal=(
+            "Create canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_MANIFEST.json "
+            "containing one record for every VERIFIED_BOUND_CAPABILITY with its capability ID, "
+            "verification mission ID, repository-local verification evidence or receipt paths when present, "
+            "and source dependency names, versions, and hashes"
+        )
+        out=compiler._compile_json_status_manifest(
+            subgoal,
+            ["canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"],
+            self.registry(),
+            ROOT,
+        )
+        self.assertIsNotNone(out)
+        action=out["action"]
+        self.assertEqual(action["args"]["capability_id"],"json.query.jq")
+        self.assertFalse(action["args"]["raw_output"])
+        proc=subprocess.run(
+            ["jq",action["args"]["filter"],str(ROOT/action["args"]["input_path"])],
+            text=True,capture_output=True,timeout=20,
+        )
+        self.assertEqual(proc.returncode,0,proc.stderr)
+        manifest=json.loads(proc.stdout)
+        self.assertEqual(manifest["schema"],"PROJECT_BRAIN_STATUS_MANIFEST_V1")
+        self.assertEqual(manifest["status_value"],"VERIFIED_BOUND_CAPABILITY")
+        ids={x["capability_id"] for x in manifest["records"]}
+        self.assertIn("auto.apt.zint",ids)
+        zint=next(x for x in manifest["records"] if x["capability_id"]=="auto.apt.zint")
+        self.assertEqual(zint["verification_mission_id"],"ASTRA-AUTO-VERIFY-ZINT-85BC9CD2C9A4")
+        self.assertIsInstance(zint["source"],dict)
+
     def test_plain_qr_goal_selects_verified_qr_and_binds_arguments(self):
         goal="Generate a QR code image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png."
         out=compiler.compile_goal(goal,self.registry(),ROOT)
