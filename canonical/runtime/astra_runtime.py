@@ -347,6 +347,95 @@ def _goal_action(action):
           "verified":p.is_file(),
           "sha256":sha_file(p) if p.is_file() else None,
         }
+    if typ=="assert_python_test_audit_zero":
+        audit_path=_safe_repo_path(args.get("audit_path",""))
+        if not audit_path.is_file():
+            return {"type":typ,"verified":False,"error":"PYTHON_TEST_AUDIT_MISSING"}
+        try:
+            audit=json.loads(audit_path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            return {"type":typ,"verified":False,"error":"PYTHON_TEST_AUDIT_JSON_INVALID:"+type(exc).__name__}
+        totals=audit.get("totals") or {}
+        ok=(
+            audit.get("schema")=="PROJECT_BRAIN_PYTHON_TEST_AUDIT_V1"
+            and int(totals.get("files",0))>0
+            and int(totals.get("failed",-1))==0
+            and int(totals.get("errors",-1))==0
+            and int(totals.get("tests",0))==(
+                int(totals.get("passed",0))+int(totals.get("skipped",0))
+            )
+        )
+        return {
+          "type":typ,"verified":ok,
+          "audit_path":str(audit_path.relative_to(ROOT)),
+          "totals":totals,
+          "audit_sha256":sha_file(audit_path),
+        }
+    if typ=="assert_python_test_audit_supported_by_fresh_execution":
+        audit_path=_safe_repo_path(args.get("audit_path",""))
+        source_root=_safe_repo_path(args.get("source_root",""))
+        pattern=str(args.get("pattern") or "test_*.py")
+        if not audit_path.is_file() or not source_root.is_dir():
+            return {"type":typ,"verified":False,"error":"PYTHON_TEST_AUDIT_SOURCE_MISSING"}
+        try:
+            audit=json.loads(audit_path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            return {"type":typ,"verified":False,"error":"PYTHON_TEST_AUDIT_JSON_INVALID:"+type(exc).__name__}
+        files=sorted(p for p in source_root.glob(pattern) if p.is_file())
+        reported={str(x.get("path")):x for x in audit.get("records") or [] if isinstance(x,dict)}
+        expected_paths={str(p.relative_to(ROOT)).replace("\\","/") for p in files}
+        errors=[]
+        if set(reported)!=expected_paths:
+            errors.append("file_coverage_mismatch")
+        totals={"files":0,"tests":0,"passed":0,"failed":0,"errors":0,"skipped":0}
+        for p in files:
+            rel=str(p.relative_to(ROOT)).replace("\\","/")
+            try:
+                proc=subprocess.run(
+                    [sys.executable,str(p)],cwd=ROOT,text=True,capture_output=True,timeout=180
+                )
+            except Exception as exc:
+                errors.append("execution:"+rel+":"+type(exc).__name__)
+                continue
+            combined=(proc.stdout or "")+"\n"+(proc.stderr or "")
+            m=re.search(r"Ran\s+(\d+)\s+tests?\s+in\s+[0-9.]+s",combined)
+            if not m:
+                errors.append("summary_missing:"+rel)
+                continue
+            ran=int(m.group(1))
+            skipped=0
+            ok_match=re.search(r"OK\s*\(([^)]*)\)",combined)
+            if ok_match:
+                sm=re.search(r"skipped=(\d+)",ok_match.group(1))
+                if sm:
+                    skipped=int(sm.group(1))
+            if proc.returncode!=0:
+                errors.append("nonzero:"+rel+":"+str(proc.returncode))
+            rec=reported.get(rel) or {}
+            if (
+                int(rec.get("exit_code",-1))!=0
+                or int(rec.get("tests",-1))!=ran
+                or int(rec.get("failed",-1))!=0
+                or int(rec.get("errors",-1))!=0
+                or int(rec.get("skipped",-1))!=skipped
+                or str(rec.get("sha256") or "")!=sha_file(p)
+            ):
+                errors.append("record_mismatch:"+rel)
+            totals["files"]+=1
+            totals["tests"]+=ran
+            totals["passed"]+=max(0,ran-skipped)
+            totals["skipped"]+=skipped
+        if audit.get("totals")!=totals:
+            errors.append("totals_mismatch")
+        return {
+          "type":typ,"verified":not errors,
+          "audit_path":str(audit_path.relative_to(ROOT)),
+          "source_root":str(source_root.relative_to(ROOT)),
+          "pattern":pattern,
+          "totals":totals,
+          "errors":errors,
+          "audit_sha256":sha_file(audit_path),
+        }
     if typ=="assert_python_source_audit_supported_by_source":
         audit_path=_safe_repo_path(args.get("audit_path",""))
         source_root=_safe_repo_path(args.get("source_root",""))
@@ -653,6 +742,7 @@ def _run_model_independent_goal(step, mission, goal):
       "read_file","list_tree","search_text","http_get","invoke_capability",
       "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal",
       "assert_workflow_audit_supported_by_source","assert_python_source_audit_supported_by_source",
+      "assert_python_test_audit_zero","assert_python_test_audit_supported_by_fresh_execution",
       "finish"
     }
     trace=[]
