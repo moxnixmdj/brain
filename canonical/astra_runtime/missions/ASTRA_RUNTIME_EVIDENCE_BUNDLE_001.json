@@ -26,6 +26,7 @@
     "real_project_artifact": true,
     "require_final_effect_verification": true,
     "orthogonal_pressure_family": "structured_extraction_multi_file_archive_independent_hash_verification",
-    "replay_after_manifest_archive_composition_commit": "939b74f1cdc62b91d7a2cdc2401768ca130f80b3"
+    "replay_after_manifest_archive_composition_commit": "939b74f1cdc62b91d7a2cdc2401768ca130f80b3",
+    "replay_after_local_source_admission_commit": "23185f28e7bd1b332ad2bbaa46d245e4013a615c"
   }
 }
