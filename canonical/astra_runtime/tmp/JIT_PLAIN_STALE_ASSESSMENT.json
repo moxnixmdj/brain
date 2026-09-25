@@ -1,0 +1,31 @@
+{
+  "assessed_at_utc": "2026-09-25T21:48:33.549671+00:00",
+  "distinct_fresh_values": 0,
+  "evidence_count": 2,
+  "fresh_evidence_count": 0,
+  "invalid": [],
+  "records": [
+    {
+      "age_s": 0.219515,
+      "body_sha256": "05e5089fee25fac6f23a79a117b39ff2de691ce9db2c5aa257f4d1b2ad0ceef2",
+      "path": "canonical/astra_runtime/tmp/JIT_PLAIN_STALE_A.json",
+      "retrieved_at_utc": "2026-09-25T21:48:33.329705+00:00",
+      "source_type": "external_json",
+      "source_url": "https://httpbin.org/get?claim=alpha",
+      "stale": true,
+      "value": "alpha"
+    },
+    {
+      "age_s": 0.001027,
+      "body_sha256": "4ce789312aea4b4398c4c25aa638797953c9df639b15d7eccf604e52aba4fb93",
+      "path": "canonical/astra_runtime/tmp/JIT_PLAIN_STALE_B.json",
+      "retrieved_at_utc": "2026-09-25T21:48:33.548193+00:00",
+      "source_type": "external_json",
+      "source_url": "https://httpbin.org/anything?claim=alpha",
+      "stale": true,
+      "value": "alpha"
+    }
+  ],
+  "schema": "PROJECT_BRAIN_KNOWLEDGE_ASSESSMENT_V1",
+  "status": "STALE"
+}

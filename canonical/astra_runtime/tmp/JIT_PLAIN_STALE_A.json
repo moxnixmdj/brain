@@ -1,0 +1,14 @@
+{
+  "body_sha256": "05e5089fee25fac6f23a79a117b39ff2de691ce9db2c5aa257f4d1b2ad0ceef2",
+  "final_url": "https://httpbin.org/get?claim=alpha",
+  "http_status": 200,
+  "json_path": [
+    "args",
+    "claim"
+  ],
+  "retrieved_at_utc": "2026-09-25T21:48:33.329705+00:00",
+  "schema": "PROJECT_BRAIN_KNOWLEDGE_EVIDENCE_V1",
+  "source_type": "external_json",
+  "source_url": "https://httpbin.org/get?claim=alpha",
+  "value": "alpha"
+}
