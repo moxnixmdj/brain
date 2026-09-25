@@ -28,6 +28,8 @@
     "screenshot_required": true,
     "independent_semantic_verification_required": true,
     "fresh_mission_identity": true,
-    "orthogonal_pressure_family": "rendered_browser_web_navigation_and_independent_semantic_verification"
+    "orthogonal_pressure_family": "rendered_browser_web_navigation_and_independent_semantic_verification",
+    "replay_after_browser_promotion_commit": "f986e9999a1456139e8d8473ee4d6685f01ea075",
+    "replay_after_browser_goal_binding_commit": "1007abf0f32e42e6ee4eefe0bb1552e9316395a7"
   }
 }
