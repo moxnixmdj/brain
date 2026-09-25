@@ -3306,14 +3306,27 @@ def _compile_learned_value_record(clause,compiled_parts):
     }
 
 
-def _compile_knowledge_revalidation(clause,compiled_parts):
+def _compile_knowledge_revalidation(clause,compiled_parts,future_clauses=None):
     text=str(clause or "").strip()
-    if not re.match(
+    consume_future=0
+    whole=re.match(
         r"^finally\s+independently\s+re-fetch\s+the\s+authoritative\s+source\s+and\s+"
         r"verify\s+the\s+learned\s+value\s+is\s+unchanged$",
         text,re.IGNORECASE
-    ):
-        return None
+    )
+    if not whole:
+        first=re.match(
+            r"^finally\s+independently\s+re-fetch\s+the\s+authoritative\s+source$",
+            text,re.IGNORECASE
+        )
+        next_clause=str((future_clauses or [""])[0] or "").strip() if (future_clauses or []) else ""
+        second=re.match(
+            r"^verify\s+the\s+learned\s+value\s+is\s+unchanged$",
+            next_clause,re.IGNORECASE
+        )
+        if not first or not second:
+            return None
+        consume_future=1
     prior=None
     for part in reversed(compiled_parts or []):
         if isinstance(part,dict) and part.get("mode")=="AUTHORITATIVE_JSON_KNOWLEDGE_FETCH":
@@ -3331,6 +3344,7 @@ def _compile_knowledge_revalidation(clause,compiled_parts):
         },
         "expect":{"type":"field_equals","field":"verified","value":True},
       },
+      "consume_future":consume_future,
       "evidence":{
         "evidence_path":prior["evidence_path"],
         "source_url":prior["source_url"],
@@ -3371,14 +3385,26 @@ def _compile_compound_goal(goal, clauses, registry, root):
             })
             continue
 
-        knowledge_revalidation=_compile_knowledge_revalidation(clause,compiled_parts)
+        knowledge_revalidation=_compile_knowledge_revalidation(
+            clause,compiled_parts,clauses[index+1:]
+        )
         if knowledge_revalidation is not None:
             actions.append(knowledge_revalidation["action"])
+            consume=int(knowledge_revalidation.get("consume_future") or 0)
+            for offset in range(1,consume+1):
+                consumed_indices.add(index+offset)
             compiled_parts.append({
                 "index":index,"subgoal":clause,
                 "mode":"INDEPENDENT_KNOWLEDGE_REVALIDATION",
                 **knowledge_revalidation["evidence"],
             })
+            for offset in range(1,consume+1):
+                compiled_parts.append({
+                    "index":index+offset,
+                    "subgoal":clauses[index+offset],
+                    "mode":"KNOWLEDGE_REVALIDATION_CONTINUATION",
+                    **knowledge_revalidation["evidence"],
+                })
             continue
 
         literal_json=_compile_literal_json_records(clause,root)
