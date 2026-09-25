@@ -1390,12 +1390,118 @@ def _compile_browser_result_record_projection(subgoal, context_paths, root):
     }
 
 
+def _compile_live_uuid_conditional(subgoal, context_paths, registry):
+    text=str(subgoal or "").strip()
+    m=re.match(
+        r"^if\s+its\s+first\s+hexadecimal\s+character\s+is\s+one\s+of\s+([0-9a-fA-F,]+)\s+"
+        r"create\s+([^\s]+\.json)\s+with\s+uuid\s+equal\s+to\s+the\s+observed\s+uuid\s+and\s+"
+        r"bucket\s+equal\s+to\s+([A-Za-z_]+);?\s*otherwise\s+create\s+it\s+with\s+the\s+same\s+"
+        r"observed\s+uuid\s+and\s+bucket\s+equal\s+to\s+([A-Za-z_]+)$",
+        text,re.IGNORECASE
+    )
+    if not m:
+        return None
+    jq=(registry or {}).get("json.query.jq")
+    if not isinstance(jq,dict) or jq.get("status")!="VERIFIED_BOUND_CAPABILITY":
+        return None
+    json_paths=[str(p) for p in context_paths if pathlib.Path(str(p)).suffix.lower()==".json"]
+    if not json_paths:
+        return None
+    source_path=json_paths[-1]
+    output_path=m.group(2).strip(" .,:;")
+    low_chars="".join(x.strip().lower() for x in m.group(1).split(",") if x.strip())
+    low_bucket=m.group(3).upper()
+    high_bucket=m.group(4).upper()
+    if not low_chars or not re.fullmatch(r"[0-9a-f]+",low_chars):
+        return None
+    filt=(
+      '(.observed_text | fromjson | .uuid) as $u '
+      '| {uuid:$u,bucket:(if ('+json.dumps(low_chars)+' | contains(($u[0:1]|ascii_downcase))) '
+      'then '+json.dumps(low_bucket)+' else '+json.dumps(high_bucket)+' end)}'
+    )
+    return {
+      "action":{
+        "type":"invoke_capability",
+        "args":{
+          "capability_id":"json.query.jq",
+          "input_path":source_path,
+          "filter":filt,
+          "output_path":output_path,
+          "raw_output":False,
+          "require_nonempty":True,
+          "timeout_s":60,
+        },
+        "expect":{"type":"field_equals","field":"output_verified","value":True},
+      },
+      "output_path":output_path,
+      "evidence":{
+        "source_path":source_path,"output_path":output_path,
+        "low_chars":low_chars,"low_bucket":low_bucket,"high_bucket":high_bucket,
+      }
+    }
+
+
+def _compile_live_uuid_verification(subgoal, context_paths):
+    if not re.match(r"^finally\s+independently\s+reread\s+both\s+files\s+and\s+verify\b",str(subgoal or ""),re.IGNORECASE):
+        return None
+    json_paths=[str(p) for p in context_paths if pathlib.Path(str(p)).suffix.lower()==".json"]
+    if len(json_paths)<2:
+        return None
+    return {
+      "action":{
+        "type":"assert_hex_prefix_bucket",
+        "args":{
+          "source_path":json_paths[-2],
+          "classification_path":json_paths[-1],
+          "source_key":"uuid",
+          "output_value_field":"uuid",
+          "bucket_field":"bucket",
+          "low_chars":"01234567",
+        },
+        "expect":{"type":"field_equals","field":"verified","value":True},
+      },
+      "evidence":{"source_path":json_paths[-2],"classification_path":json_paths[-1]}
+    }
+
+
 def _compile_compound_goal(goal, clauses, registry, root):
     actions=[]
     compiled_parts=[]
     context_paths=[]
     for index,clause in enumerate(clauses):
         lower=clause.lower()
+
+        if re.match(r"^read\s+the\s+uuid\s+from\s+that\s+live\s+result$",str(clause or ""),re.IGNORECASE):
+            json_paths=[str(p) for p in context_paths if pathlib.Path(str(p)).suffix.lower()==".json"]
+            if not json_paths:
+                raise GoalCompilationFailure("LIVE_UUID_SOURCE_REQUIRED")
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"DEFERRED_RUNTIME_VALUE_READ",
+                "source_path":json_paths[-1],
+            })
+            continue
+
+        live_conditional=_compile_live_uuid_conditional(clause,context_paths,registry)
+        if live_conditional is not None:
+            actions.append(live_conditional["action"])
+            context_paths.append(live_conditional["output_path"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"VERIFIED_RUNTIME_CONDITIONAL",
+                **live_conditional["evidence"],
+            })
+            continue
+
+        live_verify=_compile_live_uuid_verification(clause,context_paths)
+        if live_verify is not None:
+            actions.append(live_verify["action"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"INDEPENDENT_RUNTIME_CONDITIONAL_VERIFICATION",
+                **live_verify["evidence"],
+            })
+            continue
 
         browser_interaction=_compile_verified_browser_interaction(clause,registry,root)
         if browser_interaction is not None:
