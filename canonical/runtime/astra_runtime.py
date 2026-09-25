@@ -794,6 +794,42 @@ def _goal_action(action):
         url=str(args.get("url",""))
         if not url.startswith(("https://","http://")): return {"type":typ,"error":"UNSUPPORTED_URL"}
         return run_http({"url":url,"timeout_s":20,"max_bytes":60000})
+    if typ=="invoke_capability_by_runtime_value":
+        source=_safe_repo_path(args.get("source_path",""))
+        if not source.is_file():
+            return {"type":typ,"output_verified":False,"error":"RUNTIME_VALUE_SOURCE_MISSING"}
+        try:
+            wrapper=json.loads(source.read_text(encoding="utf-8"))
+            observed=json.loads(str(wrapper.get("observed_text") or ""))
+        except Exception as exc:
+            return {"type":typ,"output_verified":False,"error":"RUNTIME_VALUE_SOURCE_INVALID:"+type(exc).__name__}
+        value=str(observed.get(str(args.get("value_key") or "")) or "")
+        chars=set(str(args.get("match_chars") or "").lower())
+        if not value or not chars:
+            return {"type":typ,"output_verified":False,"error":"RUNTIME_VALUE_CONDITION_INVALID"}
+        branch="match" if value[0].lower() in chars else "other"
+        selected=args.get(branch+"_action")
+        if not isinstance(selected,dict) or selected.get("type")!="invoke_capability":
+            return {"type":typ,"output_verified":False,"error":"RUNTIME_BRANCH_ACTION_INVALID"}
+        def subst(v):
+            if isinstance(v,str):
+                return value if v=="__RUNTIME_VALUE__" else v
+            if isinstance(v,list):
+                return [subst(x) for x in v]
+            if isinstance(v,dict):
+                return {k:subst(x) for k,x in v.items()}
+            return v
+        inner_args=subst(selected.get("args") or {})
+        result=_invoke_bound_capability(inner_args)
+        return {
+          "type":typ,
+          "branch":branch,
+          "observed_value":value,
+          "selected_capability":inner_args.get("capability_id"),
+          "selected_output_path":inner_args.get("output_path"),
+          "selected_result":result,
+          "output_verified":bool(result.get("output_verified")),
+        }
     if typ=="invoke_capability":
         return _invoke_bound_capability(args)
     if typ=="assert_text_contains_json_keys":
@@ -892,7 +928,7 @@ def _run_model_independent_goal(step, mission, goal):
     if actions is None:
         return None
     allowed_types={
-      "read_file","list_tree","search_text","http_get","invoke_capability",
+      "read_file","list_tree","search_text","http_get","invoke_capability","invoke_capability_by_runtime_value",
       "project_browser_result_json","assert_hex_prefix_bucket","assert_collection_length_bucket",
       "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal",
       "assert_workflow_audit_supported_by_source","assert_python_source_audit_supported_by_source",
