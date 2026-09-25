@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T16:14:15.299417+00:00",
+  "created_at_utc": "2026-09-25T16:14:15.195740+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T16:14:15.299121+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/goal_compiler.py')\ns=importlib.util.spec_from_file_location('gc',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads(pathlib.Path('canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads(pathlib.Path('canonical/astra_runtime/missions/ASTRA_RUNTIME_FANOUT_XLSX_JOIN_003.json').read_text())['goal']\nout=m.compile_goal(goal,reg,pathlib.Path('.').resolve())\nfor a in out.get('controller_actions') or []:\n    if a.get('type')=='invoke_capability' and (a.get('args') or {}).get('capability_id','').startswith('xlsx.'):\n        print(json.dumps(a,sort_keys=True))\nprint('FANOUT_XLSX_BINDING_DIAG_COMPLETE')\nPY",
+        "duration_s": 0.103,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"args\": {\"capability_id\": \"xlsx.table.create_from_json_records\", \"goal\": \"create canonical/astra_runtime/tmp/FANOUT_JOIN.xlsx from canonical/astra_runtime/tmp/FANOUT_JOIN_MANIFEST.json with columns id, username, capability_kind, and artifact_path\", \"json_path\": \"canonical/astra_runtime/tmp/FANOUT_JOIN_MANIFEST.json\", \"output_path\": \"canonical/astra_runtime/tmp/FANOUT_JOIN.xlsx\"}, \"expect\": {\"field\": \"output_verified\", \"type\": \"field_equals\", \"value\": true}, \"type\": \"invoke_capability\"}\n{\"args\": {\"capability_id\": \"xlsx.table.verify_against_json_records\", \"goal\": \"Independently reopen the XLSX and verify it contains exactly one row per manifest record and every value is identical\", \"json_path\": \"create canonical/astra_runtime/tmp/FANOUT_JOIN.xlsx from canonical/astra_runtime/tmp/FANOUT_JOIN_MANIFEST.json with columns id, username, capability_kind, and artifact_path\", \"xlsx_path\": \"canonical/astra_runtime/tmp/FANOUT_JOIN.xlsx\"}, \"expect\": {\"field\": \"verified\", \"type\": \"field_equals\", \"value\": true}, \"type\": \"invoke_capability\"}\nFANOUT_XLSX_BINDING_DIAG_COMPLETE\n"
+      },
+      "step_id": "compile-and-print-bindings",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-FANOUT-XLSX-BINDING-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_FANOUT_XLSX_BINDING_DIAG_001.json",
+  "mission_sha256": "47c025b0e8395a6db1730b4e3e011c3aa185eea5d321cea001f4cc82ab2de952",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T16:14:15.299136+00:00"
+}
