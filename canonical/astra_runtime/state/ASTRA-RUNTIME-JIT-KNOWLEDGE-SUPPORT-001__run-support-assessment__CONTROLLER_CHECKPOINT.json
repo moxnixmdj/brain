@@ -1,0 +1,146 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "plan": {
+        "args": {
+          "authoritative": false,
+          "json_path": [
+            "args",
+            "claim"
+          ],
+          "max_bytes": 500000,
+          "output_path": "canonical/astra_runtime/tmp/JIT_SUPPORT_A.json",
+          "timeout_s": 20,
+          "url": "https://httpbin.org/get?claim=alpha"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "fetch_json_knowledge"
+      },
+      "result": {
+        "body_sha256": "59ec285f6e3cf0ab6ab461d2f2a7cbd1066589d9ae7d087861cb98d0d0e4d412",
+        "duration_s": 0.102,
+        "final_url": "https://httpbin.org/get?claim=alpha",
+        "json_path": [
+          "args",
+          "claim"
+        ],
+        "output_path": "canonical/astra_runtime/tmp/JIT_SUPPORT_A.json",
+        "type": "fetch_json_knowledge",
+        "value": "alpha",
+        "verified": true
+      }
+    },
+    {
+      "cycle": 1,
+      "plan": {
+        "args": {
+          "authoritative": false,
+          "json_path": [
+            "args",
+            "claim"
+          ],
+          "max_bytes": 500000,
+          "output_path": "canonical/astra_runtime/tmp/JIT_SUPPORT_B.json",
+          "timeout_s": 20,
+          "url": "https://httpbin.org/anything?claim=alpha"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "fetch_json_knowledge"
+      },
+      "result": {
+        "body_sha256": "fb1cdd9c691e7c5dc2d93e027dbe283afbbb99edf81dc13c50cccf73f1e3609b",
+        "duration_s": 0.102,
+        "final_url": "https://httpbin.org/anything?claim=alpha",
+        "json_path": [
+          "args",
+          "claim"
+        ],
+        "output_path": "canonical/astra_runtime/tmp/JIT_SUPPORT_B.json",
+        "type": "fetch_json_knowledge",
+        "value": "alpha",
+        "verified": true
+      }
+    },
+    {
+      "cycle": 2,
+      "plan": {
+        "args": {
+          "evidence_paths": [
+            "canonical/astra_runtime/tmp/JIT_SUPPORT_A.json",
+            "canonical/astra_runtime/tmp/JIT_SUPPORT_B.json"
+          ],
+          "output_path": "canonical/astra_runtime/tmp/JIT_SUPPORT_ASSESSMENT.json"
+        },
+        "expect": {
+          "field": "status",
+          "type": "field_equals",
+          "value": "SUPPORTED"
+        },
+        "type": "assess_knowledge_consistency"
+      },
+      "result": {
+        "distinct_fresh_values": 1,
+        "evidence_count": 2,
+        "fresh_evidence_count": 2,
+        "output_path": "canonical/astra_runtime/tmp/JIT_SUPPORT_ASSESSMENT.json",
+        "status": "SUPPORTED",
+        "type": "assess_knowledge_consistency",
+        "verified": true
+      }
+    },
+    {
+      "cycle": 3,
+      "plan": {
+        "args": {
+          "assessment_path": "canonical/astra_runtime/tmp/JIT_SUPPORT_ASSESSMENT.json",
+          "expected_status": "SUPPORTED"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "assert_knowledge_status"
+      },
+      "result": {
+        "assessment_path": "canonical/astra_runtime/tmp/JIT_SUPPORT_ASSESSMENT.json",
+        "expected_status": "SUPPORTED",
+        "observed_status": "SUPPORTED",
+        "type": "assert_knowledge_status",
+        "verified": true
+      }
+    },
+    {
+      "cycle": 4,
+      "plan": {
+        "args": {
+          "summary": "KNOWLEDGE_SUPPORT_CONFIRMED"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "KNOWLEDGE_SUPPORT_CONFIRMED",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-09-25T21:45:11.951098+00:00",
+  "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-SUPPORT-001",
+  "next_action_index": 5,
+  "plan_sha256": "5f796a15253a671bb95f8b90efeba5df9edf33f3fe7b1b68f98f94be62d856c5",
+  "resume_count": 0,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "run-support-assessment",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-09-25T21:45:12.160438+00:00"
+}
