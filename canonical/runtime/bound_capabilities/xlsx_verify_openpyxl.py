@@ -119,7 +119,7 @@ def run(args,root):
     cols=[str(x or "").strip() for x in rows[0]]
     if not cols or any(not x for x in cols) or len(set(cols))!=len(cols):
         raise RuntimeError("XLSX_HEADER_INVALID:"+json.dumps(cols))
-    if "capability_id" not in cols:
+    if not cols or not (cols[0]=="capability_id" or cols[0].endswith("_id")):
         raise RuntimeError("XLSX_ID_COLUMN_REQUIRED")
 
     expected={}
