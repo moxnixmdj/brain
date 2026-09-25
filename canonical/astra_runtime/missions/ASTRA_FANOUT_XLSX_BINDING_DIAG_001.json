@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-FANOUT-XLSX-BINDING-DIAG-001",
+  "purpose": "Inspect exact downstream XLSX producer/verifier bindings for the fanout join goal after arbitrary-record XLSX generalization.",
+  "steps": [
+    {
+      "id": "compile-and-print-bindings",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/goal_compiler.py')\ns=importlib.util.spec_from_file_location('gc',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads(pathlib.Path('canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads(pathlib.Path('canonical/astra_runtime/missions/ASTRA_RUNTIME_FANOUT_XLSX_JOIN_003.json').read_text())['goal']\nout=m.compile_goal(goal,reg,pathlib.Path('.').resolve())\nfor a in out.get('controller_actions') or []:\n    if a.get('type')=='invoke_capability' and (a.get('args') or {}).get('capability_id','').startswith('xlsx.'):\n        print(json.dumps(a,sort_keys=True))\nprint('FANOUT_XLSX_BINDING_DIAG_COMPLETE')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "FANOUT_XLSX_BINDING_DIAG_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "read_only_diagnostic": true
+  }
+}
