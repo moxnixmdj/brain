@@ -169,6 +169,7 @@
     "model_controller_required": false,
     "supported_only_actionability": true,
     "conflicted_output_must_not_exist": true,
-    "gate_commit": "7f4d8f96c9a6f14661b0f6051733f3636ca9e8be"
+    "gate_commit": "7f4d8f96c9a6f14661b0f6051733f3636ca9e8be",
+    "replay_after_epistemic_refusal_semantics_commit": "1a3d4ca0c61624837cafb7227e75cb671bb480f1"
   }
 }
