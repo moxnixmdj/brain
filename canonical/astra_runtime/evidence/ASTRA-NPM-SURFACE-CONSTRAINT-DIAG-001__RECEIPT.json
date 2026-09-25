@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T19:33:21.415327+00:00",
+  "mission_id": "ASTRA-NPM-SURFACE-CONSTRAINT-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_NPM_SURFACE_CONSTRAINT_DIAG_001.json",
+  "mission_sha256": "8b52805b68856747f2e5c03ceb558258fece31be2f098ea4ddb312d555829796",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "6d67c1857e87928780961bc206cc39b59abf2031c2a4653d6d4952ead7911bfb",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
