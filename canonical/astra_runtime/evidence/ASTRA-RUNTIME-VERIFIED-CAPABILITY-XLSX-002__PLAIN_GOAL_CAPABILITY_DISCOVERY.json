@@ -1,0 +1,2579 @@
+{
+  "auto_acquisition": {
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"r-cran-openxlsx\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"r-cran-writexl\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"an\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"firefox-locale-an\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"hunspell-an\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"language-pack-an\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"language-pack-an-base\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"language-pack-gnome-an\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"language-pack-gnome-an-base\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.xlsx\", \"name\": \"2vcard\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.xlsx\", \"name\": \"abi-dumper\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.xlsx\", \"name\": \"adcli\", \"status\": \"CONTRACT_REJECTED\"}]",
+    "status": "NOT_DISPATCHED"
+  },
+  "binding_performed": false,
+  "goal": "Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json. Create an XLSX spreadsheet workbook at canonical/astra_runtime/tmp/VERIFIED_CAPABILITIES.xlsx containing exactly one row for every VERIFIED_BOUND_CAPABILITY with columns capability_id, status, source_type, provides, and incremental_spend_usd. Finally independently reopen the workbook and verify that every VERIFIED_BOUND_CAPABILITY from the registry appears exactly once, that no non-verified capability appears, and that every row's values match the canonical registry.",
+  "mission_id": "ASTRA-RUNTIME-VERIFIED-CAPABILITY-XLSX-002",
+  "observed_at_utc": "2026-09-25T01:41:39.092370+00:00",
+  "result": {
+    "binding_performed": false,
+    "candidates": [
+      {
+        "archive_sha256": "c10e1ab4e9e97dcb53bf7275ffbf9598c8edfc0e0859659420397e8731257127",
+        "binding_kind": "apt",
+        "description": "very fast anagram generator",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "an",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 40,
+        "version": "1.2-7build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "8cd8a080c118d5917097362fe4c87f5e288127063f187a144747aea0fe4983dc",
+        "binding_kind": "apt",
+        "description": "Transitional package - firefox-locale-an -> firefox snap",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "firefox-locale-an",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:1snap1-0ubuntu5",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "3d1c247d42e7c940e2183ca21c271023a617398efe14341dacfedcbadfdcda62",
+        "binding_kind": "apt",
+        "description": "Aragonese dictionary for hunspell",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "hunspell-an",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:24.2.1-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c26b4976a5f1ec619726b88f7bff947c00a4520d091765724d8d889d4bd91743",
+        "binding_kind": "apt",
+        "description": "translation updates for language Aragonese",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "language-pack-an",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:24.04+20250130",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c8f943735354c913f9e739ddeebad8859f52aac66df921c252bd52f661918f3d",
+        "binding_kind": "apt",
+        "description": "translations for language Aragonese",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "language-pack-an-base",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:24.04+20250130",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "4df5a93e44f36f7b90a65515c02cf77373f08334b27738a62e5961caf7b47857",
+        "binding_kind": "apt",
+        "description": "GNOME translation updates for language Aragonese",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "language-pack-gnome-an",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:24.04+20250130",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "95e18c0b25177b71f7117696c7d10fc2abd49bffa600a3e2b3b93535dab0f6c9",
+        "binding_kind": "apt",
+        "description": "GNOME translations for language Aragonese",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "language-pack-gnome-an-base",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:24.04+20250130",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "5eae3a353745299315dd662153d80c437de2d240763df02672bc1f24a49f3964",
+        "binding_kind": "apt",
+        "description": "convert an addressbook to VCARD file format",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "2vcard",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.6-4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "55ba1e573aa6f7f9bc529ed0b332b438689fe00f283bb97cd2a44568c3852c4b",
+        "binding_kind": "apt",
+        "description": "tool to dump ABI of an ELF object containing DWARF debug info",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "abi-dumper",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.2-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "aa5d0099167a9e70c7c25550f31c6fb85321e01c386eeea3518db9ad854471e5",
+        "binding_kind": "apt",
+        "description": "Tool for performing actions on an Active Directory domain",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "adcli",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.9.2-1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "703cd070aa8bdaf8350e03864cdb6849ec07ee74eeb6752e12612cdaf593e3f0",
+        "binding_kind": "apt",
+        "description": "tool for correcting bit errors in an AES key schedule",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "aesfix",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.0.1-8",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "f0461b599a0d94d9b30acb69d08e92b302e088895a0b2f6a66514c3302755fcf",
+        "binding_kind": "apt",
+        "description": "This package provides an English-language thesaurus (utility)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "aiksaurus",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.2.1+dev-0.12-7.2build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c97498bcfa56433ad08bca752aed84f7d07a006888919ae9b24edb74dd122773",
+        "binding_kind": "apt",
+        "description": "Qur'an typesetting macros for TeX/LaTeX",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "alqalam",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.2-10",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "01b3c58dfca1d454855e2f54170d59017d0d37b18546f1647e0809f653a69ee1",
+        "binding_kind": "apt",
+        "description": "Decompress flashfiles equipped with an AMI BIOS",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "amideco",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.31e-3.3build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d9c1a1220cf62904c38249fbb811b51b1f8c1c2d4cfb4708e15bcf45d58928cb",
+        "binding_kind": "apt",
+        "description": "Tools for interacting with an Android platform",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "android-sdk-platform-tools",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "28.0.2+9",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "689be78d138e7f476f53e92b6326e1796cfff1af4e46920c24a2dc50efe697da",
+        "binding_kind": "apt",
+        "description": "Tools for interacting with an Android platform - Common files",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "android-sdk-platform-tools-common",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "28.0.2+9",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "f5cd5d1edb1206c15151edfed64d53ee05886968922fd24e267bed627773739b",
+        "binding_kind": "apt",
+        "description": "an on screen display tool which uses libaosd",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "aosd-cat",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.2.7-1.1ubuntu4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "961e91b7f688926aeec26e4423d4785164af5d1168d6adbe2cab5830e55aef0a",
+        "binding_kind": "apt",
+        "description": "Simple CLI script to display info about an APK file",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "apkinfo",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.3.28-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "bb045ced6fa20eaf97f86be57b3c390cfa27a5dfca782f67c24fe7459e3f97b3",
+        "binding_kind": "apt",
+        "description": "mounts an archive for access as a file system",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "archivemount",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.8.7-1build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ec94232138585c182a5003565ec70277e8fa389cdfef13a671f48e61fae460da",
+        "binding_kind": "apt",
+        "description": "specificity control for read alignments using an artificial reference",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "arden",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.0-5",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "f31f1f50dda28fb0be30d0508e5ca181b88b5d2f8d3440c00d17a21edebe06c3",
+        "binding_kind": "apt",
+        "description": "communicate with an Aurora Magnetek Photovoltaic (solar) Power Inverter",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "aurora",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.9.4-0ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "9ec25a11b6f65daff2685bf3478eeb679d9f238ab57dc6de3885512850bca03e",
+        "binding_kind": "apt",
+        "description": "Decompress flashfiles equipped with an AWARD BIOS",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "awardeco",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.2-4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "f3ac090db893665f71c8e1183f4e530aa072209ed1da6b65653fd8833bf2e798",
+        "binding_kind": "apt",
+        "description": "An user-space filesystem for interacting with Azure Storage",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "blobfuse2",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.5.5",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "86e7a2d410060c5a5a1997fc63bdbabde905c52f97f41916f62fba138cd2041c",
+        "binding_kind": "apt",
+        "description": "An user-space filesystem for interacting with Azure Storage",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "blobfuse2-preview",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.6.0~preview.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "7fa952fec1608e9f71fcb5dc54ea466353555df974229b51e14dfbdeb00b647e",
+        "binding_kind": "apt",
+        "description": "try to find the password of an encrypted wallet file",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "bruteforce-wallet",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.5.3-6build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "93da996e1f505dcc37cc89335147ad1561a0a1def7e78bbe9525707582bd1bc7",
+        "binding_kind": "apt",
+        "description": "Applet to provide an alternative means to launch applications",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "budgie-app-launcher-applet",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.8.0-1build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "93f5a36bed076014b66b8ffbc264164d5a8f34df10443178cb5660641a569f74",
+        "binding_kind": "apt",
+        "description": "Show byte statistics as an ASCII circle graph",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "bytes-circle",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "3.1-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "8ba4bf34ee834a8ac525d30d4464fe9078dfa8c5497005b5fd86bc32f6247ac5",
+        "binding_kind": "apt",
+        "description": "spreadsheet for the Calligra Suite",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "spreadsheet"
+        ],
+        "name": "calligrasheets",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1:3.2.1+dfsg-8build4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "624e86f4f8c95949e81d727b5cf107fe818065f54180465067e4402487cd76c4",
+        "binding_kind": "apt",
+        "description": "data files for Sheets spreadsheet",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "spreadsheet"
+        ],
+        "name": "calligrasheets-data",
+        "packages": [],
+        "query": "spreadsheet",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1:3.2.1+dfsg-8build4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "8bf2ddea0f7fa899ae7fc8fea28f7fa034f38a0b0f8dc37b7e1c865f1b9d9612",
+        "binding_kind": "apt",
+        "description": "module to create Excel spreadsheets in xlsx format",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 3,
+        "matched_terms": [
+          "spreadsheet",
+          "xlsx"
+        ],
+        "name": "libexcel-writer-xlsx-perl",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 42,
+        "version": "1.11-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "MCP server for Anki flashcards: adaptive review, notes, media, and deck management via AnkiConnect.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.ankimcp/anki-mcp-server",
+        "packages": [
+          {
+            "identifier": "@ankimcp/anki-mcp-server",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.26.0"
+          }
+        ],
+        "query": "an",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/ankimcp/anki-mcp-server"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.26.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Let your AI read a whole spreadsheet as tab-separated text \u2014 Excel, ODS, SQLite and more",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.demos-ra/text-spreadsheet",
+        "packages": [
+          {
+            "identifier": "text-spreadsheet",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.2.0"
+          }
+        ],
+        "query": "spreadsheet",
+        "remotes": [],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.2.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "MCP server for spreadsheet files (.xlsx, .csv, .ods) - cell-level ops + DuckDB SQL engine.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.marekrost/mcp-server-spreadsheet",
+        "packages": [
+          {
+            "identifier": "mcp-server-spreadsheet",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.3.3"
+          }
+        ],
+        "query": "spreadsheet",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/marekrost/mcp-server-spreadsheet"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.3.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "MCP server for accurate, structure-preserving read/write access to Excel (.xlsx) files",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.ruriazz/xlsx-tools-mcp",
+        "packages": [
+          {
+            "identifier": "xlsx-tools-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.1"
+          }
+        ],
+        "query": "xlsx",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/ruriazz/xlsx-tools-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "50 spreadsheet tools for .xlsx: recalc formulas, repair broken refs, read/write, diff, audit.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.senoff/xlsx-for-ai",
+        "packages": [
+          {
+            "identifier": "xlsx-for-ai",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "4.0.6"
+          }
+        ],
+        "query": "xlsx",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/senoff/xlsx-for-ai"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "4.0.6",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Remote MCP server for Tandem docs, install guides, SDKs, workflows, and agent setup help.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ac.tandem/docs-mcp",
+        "packages": [],
+        "query": "an",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://tandem.ac/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/frumu-ai/tandem"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.3.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Did this contractor's licence change? Observed lapses and reinstatements, not a snapshot.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "agency.ottobot/contractor-license-changes",
+        "packages": [],
+        "query": "an",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://license-changes-mcp.ottobot2025.workers.dev/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/modelcontextprotocol/registry"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Google Ads reporting and campaign management. Everything it creates starts paused.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.adplane/google-ads",
+        "packages": [],
+        "query": "an",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.adplane.ai"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.29.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Resolve @handles to post-quantum-signed agent identities and transact with the brands behind them.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.anha/resolver",
+        "packages": [],
+        "query": "an",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://resolver.anha.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Anki addon that exposes your flashcard collection to AI assistants via a local MCP server.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.ankimcp/anki-mcp-server-addon",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/ankimcp/anki-mcp-server-addon"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.29.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "MCP server for Anzenna",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.anzenna/anzenna",
+        "packages": [],
+        "query": "an",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "sse",
+            "url": "https://mcp.anzenna.ai/sse"
+          }
+        ],
+        "repository": {},
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "MCP registry: 138k servers crawled, handshake-validated, reliability-scored. 744 production-safe.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.arclan/registry",
+        "packages": [],
+        "query": "an",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://arclan.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.2.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Balan\u00e7os, DREs, DFPs e ITRs da CVM e IF.data do BCB. Brazilian companies' financial statements.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.balancos/mcp",
+        "packages": [],
+        "query": "an",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.balancos.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.5.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "AI story development, screenplay editing, review, media, and export tools for BeatBandit projects.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.beatbandit/beatbandit",
+        "packages": [],
+        "query": "an",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://beatbandit.ai/api/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Live tech-stack scan of any public site \u2014 vendors, account IDs, scripts, JSON-LD. 2 tools.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.boolsai/scan",
+        "packages": [],
+        "query": "an",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://boolsai.ai/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/Boolsai-ai/mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Live status and health checks for AI coding providers: Claude, Cursor, Copilot, Codex and more.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.canivibe/status",
+        "packages": [],
+        "query": "an",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://canivibe.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Turn any idea, URL, doc, or PDF into on-brand visuals: 100+ formats, native in 150+ languages",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.canvora/canvora",
+        "packages": [],
+        "query": "an",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.canvora.ai/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/canvora/canvora-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.2.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Clinician-reviewed library on anxiety, OCD, and phobias in children ages 5\u201312.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.childanxiety/library",
+        "packages": [],
+        "query": "an",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://childanxiety.ai/api/mcp/v1"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Check bank marketing for FDIC, NCUA, TILA, Reg DD, Reg Z, UDAAP, and Equal Housing compliance.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.clarid/compliance",
+        "packages": [],
+        "query": "an",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.clarid.ai/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/clarid-ai/compliance-checker"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Financial and covenant data for public and private credit: statements, cap stacks, covenants.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.constellationfinance/constellation-finance-mcp",
+        "packages": [],
+        "query": "an",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.constellationfinance.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.2",
+        "zero_cost_eligible": true
+      }
+    ],
+    "effect": "Create an XLSX spreadsheet workbook at canonical/astra_runtime/tmp/VERIFIED_CAPABILITIES.xlsx containing exactly one row for every VERIFIED_BOUND_CAPABILITY with columns capability_id, status, source_type, provides, and incremental_spend_usd",
+    "results": [
+      {
+        "binding_performed": false,
+        "candidate_count": 30,
+        "candidates": [
+          {
+            "archive_sha256": "8bf2ddea0f7fa899ae7fc8fea28f7fa034f38a0b0f8dc37b7e1c865f1b9d9612",
+            "binding_kind": "apt",
+            "description": "module to create Excel spreadsheets in xlsx format",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 3,
+            "matched_terms": [
+              "spreadsheet",
+              "xlsx"
+            ],
+            "name": "libexcel-writer-xlsx-perl",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 42,
+            "version": "1.11-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c10e1ab4e9e97dcb53bf7275ffbf9598c8edfc0e0859659420397e8731257127",
+            "binding_kind": "apt",
+            "description": "very fast anagram generator",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "an"
+            ],
+            "name": "an",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 40,
+            "version": "1.2-7build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "8cd8a080c118d5917097362fe4c87f5e288127063f187a144747aea0fe4983dc",
+            "binding_kind": "apt",
+            "description": "Transitional package - firefox-locale-an -> firefox snap",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "an"
+            ],
+            "name": "firefox-locale-an",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1:1snap1-0ubuntu5",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "3d1c247d42e7c940e2183ca21c271023a617398efe14341dacfedcbadfdcda62",
+            "binding_kind": "apt",
+            "description": "Aragonese dictionary for hunspell",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "an"
+            ],
+            "name": "hunspell-an",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1:24.2.1-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c26b4976a5f1ec619726b88f7bff947c00a4520d091765724d8d889d4bd91743",
+            "binding_kind": "apt",
+            "description": "translation updates for language Aragonese",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "an"
+            ],
+            "name": "language-pack-an",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1:24.04+20250130",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c8f943735354c913f9e739ddeebad8859f52aac66df921c252bd52f661918f3d",
+            "binding_kind": "apt",
+            "description": "translations for language Aragonese",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "an"
+            ],
+            "name": "language-pack-an-base",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1:24.04+20250130",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "4df5a93e44f36f7b90a65515c02cf77373f08334b27738a62e5961caf7b47857",
+            "binding_kind": "apt",
+            "description": "GNOME translation updates for language Aragonese",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "an"
+            ],
+            "name": "language-pack-gnome-an",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1:24.04+20250130",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "95e18c0b25177b71f7117696c7d10fc2abd49bffa600a3e2b3b93535dab0f6c9",
+            "binding_kind": "apt",
+            "description": "GNOME translations for language Aragonese",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "an"
+            ],
+            "name": "language-pack-gnome-an-base",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1:24.04+20250130",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "5eae3a353745299315dd662153d80c437de2d240763df02672bc1f24a49f3964",
+            "binding_kind": "apt",
+            "description": "convert an addressbook to VCARD file format",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "an"
+            ],
+            "name": "2vcard",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.6-4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "55ba1e573aa6f7f9bc529ed0b332b438689fe00f283bb97cd2a44568c3852c4b",
+            "binding_kind": "apt",
+            "description": "tool to dump ABI of an ELF object containing DWARF debug info",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "an"
+            ],
+            "name": "abi-dumper",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.2-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "aa5d0099167a9e70c7c25550f31c6fb85321e01c386eeea3518db9ad854471e5",
+            "binding_kind": "apt",
+            "description": "Tool for performing actions on an Active Directory domain",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "an"
+            ],
+            "name": "adcli",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.9.2-1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "703cd070aa8bdaf8350e03864cdb6849ec07ee74eeb6752e12612cdaf593e3f0",
+            "binding_kind": "apt",
+            "description": "tool for correcting bit errors in an AES key schedule",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "an"
+            ],
+            "name": "aesfix",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.0.1-8",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "f0461b599a0d94d9b30acb69d08e92b302e088895a0b2f6a66514c3302755fcf",
+            "binding_kind": "apt",
+            "description": "This package provides an English-language thesaurus (utility)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "an"
+            ],
+            "name": "aiksaurus",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.2.1+dev-0.12-7.2build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c97498bcfa56433ad08bca752aed84f7d07a006888919ae9b24edb74dd122773",
+            "binding_kind": "apt",
+            "description": "Qur'an typesetting macros for TeX/LaTeX",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "an"
+            ],
+            "name": "alqalam",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.2-10",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "01b3c58dfca1d454855e2f54170d59017d0d37b18546f1647e0809f653a69ee1",
+            "binding_kind": "apt",
+            "description": "Decompress flashfiles equipped with an AMI BIOS",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "an"
+            ],
+            "name": "amideco",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.31e-3.3build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d9c1a1220cf62904c38249fbb811b51b1f8c1c2d4cfb4708e15bcf45d58928cb",
+            "binding_kind": "apt",
+            "description": "Tools for interacting with an Android platform",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "an"
+            ],
+            "name": "android-sdk-platform-tools",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "28.0.2+9",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "689be78d138e7f476f53e92b6326e1796cfff1af4e46920c24a2dc50efe697da",
+            "binding_kind": "apt",
+            "description": "Tools for interacting with an Android platform - Common files",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "an"
+            ],
+            "name": "android-sdk-platform-tools-common",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "28.0.2+9",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "f5cd5d1edb1206c15151edfed64d53ee05886968922fd24e267bed627773739b",
+            "binding_kind": "apt",
+            "description": "an on screen display tool which uses libaosd",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "an"
+            ],
+            "name": "aosd-cat",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.2.7-1.1ubuntu4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "961e91b7f688926aeec26e4423d4785164af5d1168d6adbe2cab5830e55aef0a",
+            "binding_kind": "apt",
+            "description": "Simple CLI script to display info about an APK file",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "an"
+            ],
+            "name": "apkinfo",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.3.28-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "bb045ced6fa20eaf97f86be57b3c390cfa27a5dfca782f67c24fe7459e3f97b3",
+            "binding_kind": "apt",
+            "description": "mounts an archive for access as a file system",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "an"
+            ],
+            "name": "archivemount",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.8.7-1build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "ec94232138585c182a5003565ec70277e8fa389cdfef13a671f48e61fae460da",
+            "binding_kind": "apt",
+            "description": "specificity control for read alignments using an artificial reference",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "an"
+            ],
+            "name": "arden",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.0-5",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "f31f1f50dda28fb0be30d0508e5ca181b88b5d2f8d3440c00d17a21edebe06c3",
+            "binding_kind": "apt",
+            "description": "communicate with an Aurora Magnetek Photovoltaic (solar) Power Inverter",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "an"
+            ],
+            "name": "aurora",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.9.4-0ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "9ec25a11b6f65daff2685bf3478eeb679d9f238ab57dc6de3885512850bca03e",
+            "binding_kind": "apt",
+            "description": "Decompress flashfiles equipped with an AWARD BIOS",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "an"
+            ],
+            "name": "awardeco",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.2-4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "f3ac090db893665f71c8e1183f4e530aa072209ed1da6b65653fd8833bf2e798",
+            "binding_kind": "apt",
+            "description": "An user-space filesystem for interacting with Azure Storage",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "an"
+            ],
+            "name": "blobfuse2",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "2.5.5",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "86e7a2d410060c5a5a1997fc63bdbabde905c52f97f41916f62fba138cd2041c",
+            "binding_kind": "apt",
+            "description": "An user-space filesystem for interacting with Azure Storage",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "an"
+            ],
+            "name": "blobfuse2-preview",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "2.6.0~preview.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "7fa952fec1608e9f71fcb5dc54ea466353555df974229b51e14dfbdeb00b647e",
+            "binding_kind": "apt",
+            "description": "try to find the password of an encrypted wallet file",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "an"
+            ],
+            "name": "bruteforce-wallet",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.5.3-6build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "93da996e1f505dcc37cc89335147ad1561a0a1def7e78bbe9525707582bd1bc7",
+            "binding_kind": "apt",
+            "description": "Applet to provide an alternative means to launch applications",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "an"
+            ],
+            "name": "budgie-app-launcher-applet",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.8.0-1build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "93f5a36bed076014b66b8ffbc264164d5a8f34df10443178cb5660641a569f74",
+            "binding_kind": "apt",
+            "description": "Show byte statistics as an ASCII circle graph",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "an"
+            ],
+            "name": "bytes-circle",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "3.1-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "8ba4bf34ee834a8ac525d30d4464fe9078dfa8c5497005b5fd86bc32f6247ac5",
+            "binding_kind": "apt",
+            "description": "spreadsheet for the Calligra Suite",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "spreadsheet"
+            ],
+            "name": "calligrasheets",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1:3.2.1+dfsg-8build4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "624e86f4f8c95949e81d727b5cf107fe818065f54180465067e4402487cd76c4",
+            "binding_kind": "apt",
+            "description": "data files for Sheets spreadsheet",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "spreadsheet"
+            ],
+            "name": "calligrasheets-data",
+            "packages": [],
+            "query": "spreadsheet",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1:3.2.1+dfsg-8build4",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Create an XLSX spreadsheet workbook at canonical/astra_runtime/tmp/VERIFIED_CAPABILITIES.xlsx containing exactly one row for every VERIFIED_BOUND_CAPABILITY with columns capability_id, status, source_type, provides, and incremental_spend_usd",
+        "errors": [],
+        "queries": [
+          "an",
+          "xlsx",
+          "spreadsheet",
+          "workbook"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "APT_CATALOG",
+        "source_url": null
+      },
+      {
+        "binding_performed": false,
+        "candidate_count": 41,
+        "candidates": [
+          {
+            "description": "MCP server for Anki flashcards: adaptive review, notes, media, and deck management via AnkiConnect.",
+            "is_latest": true,
+            "name": "ai.ankimcp/anki-mcp-server",
+            "packages": [
+              {
+                "identifier": "@ankimcp/anki-mcp-server",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.26.0"
+              }
+            ],
+            "query": "an",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/ankimcp/anki-mcp-server"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.26.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Let your AI read a whole spreadsheet as tab-separated text \u2014 Excel, ODS, SQLite and more",
+            "is_latest": true,
+            "name": "io.github.demos-ra/text-spreadsheet",
+            "packages": [
+              {
+                "identifier": "text-spreadsheet",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.2.0"
+              }
+            ],
+            "query": "spreadsheet",
+            "remotes": [],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.2.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP server for spreadsheet files (.xlsx, .csv, .ods) - cell-level ops + DuckDB SQL engine.",
+            "is_latest": true,
+            "name": "io.github.marekrost/mcp-server-spreadsheet",
+            "packages": [
+              {
+                "identifier": "mcp-server-spreadsheet",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.3.3"
+              }
+            ],
+            "query": "spreadsheet",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/marekrost/mcp-server-spreadsheet"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.3.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP server for accurate, structure-preserving read/write access to Excel (.xlsx) files",
+            "is_latest": true,
+            "name": "io.github.ruriazz/xlsx-tools-mcp",
+            "packages": [
+              {
+                "identifier": "xlsx-tools-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.1"
+              }
+            ],
+            "query": "xlsx",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/ruriazz/xlsx-tools-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "50 spreadsheet tools for .xlsx: recalc formulas, repair broken refs, read/write, diff, audit.",
+            "is_latest": true,
+            "name": "io.github.senoff/xlsx-for-ai",
+            "packages": [
+              {
+                "identifier": "xlsx-for-ai",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "4.0.6"
+              }
+            ],
+            "query": "xlsx",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/senoff/xlsx-for-ai"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "4.0.6",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Remote MCP server for Tandem docs, install guides, SDKs, workflows, and agent setup help.",
+            "is_latest": true,
+            "name": "ac.tandem/docs-mcp",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://tandem.ac/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/frumu-ai/tandem"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.3.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Did this contractor's licence change? Observed lapses and reinstatements, not a snapshot.",
+            "is_latest": true,
+            "name": "agency.ottobot/contractor-license-changes",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://license-changes-mcp.ottobot2025.workers.dev/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/modelcontextprotocol/registry"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Google Ads reporting and campaign management. Everything it creates starts paused.",
+            "is_latest": true,
+            "name": "ai.adplane/google-ads",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.adplane.ai"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.29.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Resolve @handles to post-quantum-signed agent identities and transact with the brands behind them.",
+            "is_latest": true,
+            "name": "ai.anha/resolver",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://resolver.anha.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Anki addon that exposes your flashcard collection to AI assistants via a local MCP server.",
+            "is_latest": true,
+            "name": "ai.ankimcp/anki-mcp-server-addon",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/ankimcp/anki-mcp-server-addon"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.29.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP server for Anzenna",
+            "is_latest": true,
+            "name": "ai.anzenna/anzenna",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "sse",
+                "url": "https://mcp.anzenna.ai/sse"
+              }
+            ],
+            "repository": {},
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP registry: 138k servers crawled, handshake-validated, reliability-scored. 744 production-safe.",
+            "is_latest": true,
+            "name": "ai.arclan/registry",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://arclan.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.2.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Balan\u00e7os, DREs, DFPs e ITRs da CVM e IF.data do BCB. Brazilian companies' financial statements.",
+            "is_latest": true,
+            "name": "ai.balancos/mcp",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.balancos.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.5.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "AI story development, screenplay editing, review, media, and export tools for BeatBandit projects.",
+            "is_latest": true,
+            "name": "ai.beatbandit/beatbandit",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://beatbandit.ai/api/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Live tech-stack scan of any public site \u2014 vendors, account IDs, scripts, JSON-LD. 2 tools.",
+            "is_latest": true,
+            "name": "ai.boolsai/scan",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://boolsai.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Boolsai-ai/mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Live status and health checks for AI coding providers: Claude, Cursor, Copilot, Codex and more.",
+            "is_latest": true,
+            "name": "ai.canivibe/status",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://canivibe.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Turn any idea, URL, doc, or PDF into on-brand visuals: 100+ formats, native in 150+ languages",
+            "is_latest": true,
+            "name": "ai.canvora/canvora",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.canvora.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/canvora/canvora-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.2.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Clinician-reviewed library on anxiety, OCD, and phobias in children ages 5\u201312.",
+            "is_latest": true,
+            "name": "ai.childanxiety/library",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://childanxiety.ai/api/mcp/v1"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Check bank marketing for FDIC, NCUA, TILA, Reg DD, Reg Z, UDAAP, and Equal Housing compliance.",
+            "is_latest": true,
+            "name": "ai.clarid/compliance",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.clarid.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/clarid-ai/compliance-checker"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Financial and covenant data for public and private credit: statements, cap stacks, covenants.",
+            "is_latest": true,
+            "name": "ai.constellationfinance/constellation-finance-mcp",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.constellationfinance.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Normalized US-GAAP financial statements & fundamentals from SEC EDGAR, as MCP tools for LLM agents.",
+            "is_latest": true,
+            "name": "ai.datavidence/datavidence-financials",
+            "packages": [
+              {
+                "identifier": "datavidence-financials",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "uvx",
+                "secret_environment": [
+                  "FL_API_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.5"
+              }
+            ],
+            "query": "an",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/datavidence/datavidence-financials-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.5",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Agent-safe Excel workbook analysis, editing, recalc, and verification tools.",
+            "is_latest": true,
+            "name": "io.github.PSU3D0/agent-spreadsheet",
+            "packages": [
+              {
+                "identifier": "ghcr.io/psu3d0/agent-spreadsheet:0.16.0-full",
+                "registry_type": "oci",
+                "required_environment": [],
+                "runtime_hint": "docker",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": null
+              }
+            ],
+            "query": "spreadsheet",
+            "remotes": [],
+            "repository": {
+              "id": "1059818445",
+              "source": "github",
+              "url": "https://github.com/PSU3D0/agent-spreadsheet"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.16.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Agent-safe Excel workbook analysis, editing, recalc, and verification tools.",
+            "is_latest": true,
+            "name": "io.github.PSU3D0/spreadsheet-mcp",
+            "packages": [
+              {
+                "identifier": "ghcr.io/psu3d0/spreadsheet-mcp:0.11.1-full",
+                "registry_type": "oci",
+                "required_environment": [],
+                "runtime_hint": "docker",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": null
+              }
+            ],
+            "query": "spreadsheet",
+            "remotes": [],
+            "repository": {
+              "id": "1059818445",
+              "source": "github",
+              "url": "https://github.com/PSU3D0/spreadsheet-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.11.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Audit Excel workbooks: formula dependency tracing, circular references, risk smells. Local only.",
+            "is_latest": true,
+            "name": "io.github.arose26/xlsx-audit-mcp",
+            "packages": [
+              {
+                "identifier": "xlsx-audit-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.0"
+              }
+            ],
+            "query": "xlsx",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/arose26/xlsx-audit-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Search and analyze Dimensions research data: publications, grants, researchers, patents, trials",
+            "is_latest": true,
+            "name": "ai.dimensions/analytics-mcp",
+            "packages": [
+              {
+                "identifier": "@digital-science-dsl/dimensions-analytics-mcp",
+                "registry_type": "npm",
+                "required_environment": [
+                  "DIMENSIONS_API_KEY"
+                ],
+                "runtime_hint": null,
+                "secret_environment": [
+                  "DIMENSIONS_API_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.4.2"
+              }
+            ],
+            "query": "an",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "subfolder": "apps/mcp",
+              "url": "https://github.com/digital-science/dimensions-analytics-mcp"
+            },
+            "required_environment_count": 1,
+            "required_secret_count": 1,
+            "score": 14,
+            "status": "active",
+            "version": "1.4.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Rust MCP server and CLI for Arcane Docker and container management.",
+            "is_latest": true,
+            "name": "ai.dinglebear/arcane-rmcp",
+            "packages": [
+              {
+                "identifier": "arcane-rmcp",
+                "registry_type": "npm",
+                "required_environment": [
+                  "RARCANE_API_URL",
+                  "RARCANE_API_KEY"
+                ],
+                "runtime_hint": "npx",
+                "secret_environment": [
+                  "RARCANE_API_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.4.2"
+              }
+            ],
+            "query": "an",
+            "remotes": [],
+            "repository": {
+              "id": "1247261735",
+              "source": "github",
+              "url": "https://github.com/jmagar/arcane-rmcp"
+            },
+            "required_environment_count": 2,
+            "required_secret_count": 1,
+            "score": 13,
+            "status": "active",
+            "version": "0.4.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Arcane Docker and Compose management over MCP and CLI with authenticated stdio and HTTP.",
+            "is_latest": true,
+            "name": "ai.dinglebear/rarcane",
+            "packages": [
+              {
+                "identifier": "@dinglebear/rarcane",
+                "registry_type": "npm",
+                "required_environment": [
+                  "RARCANE_API_URL",
+                  "RARCANE_API_KEY"
+                ],
+                "runtime_hint": "npx",
+                "secret_environment": [
+                  "RARCANE_API_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.4.4"
+              }
+            ],
+            "query": "an",
+            "remotes": [],
+            "repository": {
+              "id": "1247261735",
+              "source": "github",
+              "url": "https://github.com/dinglebear-ai/rarcane"
+            },
+            "required_environment_count": 2,
+            "required_secret_count": 1,
+            "score": 13,
+            "status": "active",
+            "version": "0.4.4",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Crypto backtest statistics: the server owns the trial count, so it cannot be understated.",
+            "is_latest": true,
+            "name": "ai.avasis/quant-research",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://quant-mcp.avasis.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/abhayjnayakk/quant-integrity"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "0.2.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Loan & mortgage calculator, compound interest, ROI, crypto prices, FX conversion for AI agents.",
+            "is_latest": true,
+            "name": "ai.bankee/inferventis-mcp",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [
+                  "x-api-key"
+                ],
+                "type": "streamable-http",
+                "url": "https://mcp-server-295985738387.europe-west1.run.app/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Bankee-ai/inferventis"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "1.0.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "A flock of AI users tests your deployed app and reports where real people get stuck, with fixes.",
+            "is_latest": true,
+            "name": "ai.canaryusers/canaryusers",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://www.canaryusers.ai/api/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/CanaryUsers-ai/canaryusers-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "1.2.2",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Create an XLSX spreadsheet workbook at canonical/astra_runtime/tmp/VERIFIED_CAPABILITIES.xlsx containing exactly one row for every VERIFIED_BOUND_CAPABILITY with columns capability_id, status, source_type, provides, and incremental_spend_usd",
+        "errors": [],
+        "queries": [
+          "an",
+          "xlsx",
+          "spreadsheet",
+          "workbook"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "OFFICIAL_MCP_REGISTRY",
+        "source_url": "https://registry.modelcontextprotocol.io"
+      }
+    ],
+    "schema": "PROJECT_BRAIN_FEDERATED_CAPABILITY_DISCOVERY_V1",
+    "sources": [
+      "APT_CATALOG",
+      "OFFICIAL_MCP_REGISTRY"
+    ]
+  },
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
+  "source": "FEDERATED_CAPABILITY_DISCOVERY_FALLBACK",
+  "targeted_acquisition_error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"r-cran-openxlsx\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"r-cran-writexl\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"an\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"firefox-locale-an\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"hunspell-an\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"language-pack-an\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"language-pack-an-base\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"language-pack-gnome-an\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"language-pack-gnome-an-base\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.xlsx\", \"name\": \"2vcard\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.xlsx\", \"name\": \"abi-dumper\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.xlsx\", \"name\": \"adcli\", \"status\": \"CONTRACT_REJECTED\"}]"
+}

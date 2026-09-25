@@ -1,0 +1,1228 @@
+{
+  "attempts": [
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "37bf44e76f725eb1861131c6654b0ee69c0176566f9a9e4b0a5f3463ef588bae",
+        "executables": [],
+        "package": "r-cran-openxlsx",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "4.2.5.2-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 106.0,
+        "archive_sha256": "37bf44e76f725eb1861131c6654b0ee69c0176566f9a9e4b0a5f3463ef588bae",
+        "binding_kind": "apt",
+        "description": "GNU R package to read and write XLSX files",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "xlsx"
+        ],
+        "name": "r-cran-openxlsx",
+        "packages": [],
+        "query": "xlsx",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "4.2.5.2-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "5fa9385482cdb29639e048e1ea8bc168cdfbf94c1d7c1a24696b2ee0667b8012",
+        "executables": [],
+        "package": "r-cran-writexl",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.5.0-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 106.0,
+        "archive_sha256": "5fa9385482cdb29639e048e1ea8bc168cdfbf94c1d7c1a24696b2ee0667b8012",
+        "binding_kind": "apt",
+        "description": "GNU R package to Export Data Frames to Excel 'xlsx' Format",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "xlsx"
+        ],
+        "name": "r-cran-writexl",
+        "packages": [],
+        "query": "xlsx",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.5.0-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "c10e1ab4e9e97dcb53bf7275ffbf9598c8edfc0e0859659420397e8731257127",
+        "executables": [],
+        "package": "an",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.2-7build2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 96.0,
+        "archive_sha256": "c10e1ab4e9e97dcb53bf7275ffbf9598c8edfc0e0859659420397e8731257127",
+        "binding_kind": "apt",
+        "description": "very fast anagram generator",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "an",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 40,
+        "version": "1.2-7build2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "8cd8a080c118d5917097362fe4c87f5e288127063f187a144747aea0fe4983dc",
+        "executables": [],
+        "package": "firefox-locale-an",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1:1snap1-0ubuntu5"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "8cd8a080c118d5917097362fe4c87f5e288127063f187a144747aea0fe4983dc",
+        "binding_kind": "apt",
+        "description": "Transitional package - firefox-locale-an -> firefox snap",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "firefox-locale-an",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:1snap1-0ubuntu5",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "3d1c247d42e7c940e2183ca21c271023a617398efe14341dacfedcbadfdcda62",
+        "executables": [],
+        "package": "hunspell-an",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1:24.2.1-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "3d1c247d42e7c940e2183ca21c271023a617398efe14341dacfedcbadfdcda62",
+        "binding_kind": "apt",
+        "description": "Aragonese dictionary for hunspell",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "hunspell-an",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:24.2.1-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "c26b4976a5f1ec619726b88f7bff947c00a4520d091765724d8d889d4bd91743",
+        "executables": [],
+        "package": "language-pack-an",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1:24.04+20250130"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "c26b4976a5f1ec619726b88f7bff947c00a4520d091765724d8d889d4bd91743",
+        "binding_kind": "apt",
+        "description": "translation updates for language Aragonese",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "language-pack-an",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:24.04+20250130",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "c8f943735354c913f9e739ddeebad8859f52aac66df921c252bd52f661918f3d",
+        "executables": [],
+        "package": "language-pack-an-base",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1:24.04+20250130"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "c8f943735354c913f9e739ddeebad8859f52aac66df921c252bd52f661918f3d",
+        "binding_kind": "apt",
+        "description": "translations for language Aragonese",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "language-pack-an-base",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:24.04+20250130",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "4df5a93e44f36f7b90a65515c02cf77373f08334b27738a62e5961caf7b47857",
+        "executables": [],
+        "package": "language-pack-gnome-an",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1:24.04+20250130"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "4df5a93e44f36f7b90a65515c02cf77373f08334b27738a62e5961caf7b47857",
+        "binding_kind": "apt",
+        "description": "GNOME translation updates for language Aragonese",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "language-pack-gnome-an",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:24.04+20250130",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "95e18c0b25177b71f7117696c7d10fc2abd49bffa600a3e2b3b93535dab0f6c9",
+        "executables": [],
+        "package": "language-pack-gnome-an-base",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1:24.04+20250130"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "95e18c0b25177b71f7117696c7d10fc2abd49bffa600a3e2b3b93535dab0f6c9",
+        "binding_kind": "apt",
+        "description": "GNOME translations for language Aragonese",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "language-pack-gnome-an-base",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:24.04+20250130",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.xlsx",
+      "probe": {
+        "archive_sha256": "5eae3a353745299315dd662153d80c437de2d240763df02672bc1f24a49f3964",
+        "executables": [
+          {
+            "executable": "/usr/bin/2vcard",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "/usr/bin/2vcard version [unknown] calling Getopt::Std::getopts (version 1.13 [paranoid]),\nrunning under Perl version 5.38.2.\n\nUsage: 2vcard [-OPTIONS [-MORE_OPTIONS]] [--] [PROGRAM_ARG1 ...]\n\nThe following single-character options are accepted:\n\tWith arguments: -f -i -o\n\tBoolean (without arguments): -F -h -v\n\nOptions may be merged together.  -- stops processing of options.\nSpace is not required between options and their arguments.\n  [Now continuing due to backward compatibility and excessive paranoia.\n   See 'perldoc Getopt::Std' about $Getopt::Std::STANDARD_HELP_VERSION.]"
+              }
+            ]
+          }
+        ],
+        "package": "2vcard",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.6-4"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 50.0,
+        "archive_sha256": "5eae3a353745299315dd662153d80c437de2d240763df02672bc1f24a49f3964",
+        "binding_kind": "apt",
+        "description": "convert an addressbook to VCARD file format",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "2vcard",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.6-4",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.xlsx",
+      "probe": {
+        "archive_sha256": "55ba1e573aa6f7f9bc529ed0b332b438689fe00f283bb97cd2a44568c3852c4b",
+        "executables": [
+          {
+            "executable": "/usr/bin/abi-dumper",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "NAME:\n  ABI Dumper (abi-dumper)\n  Dump ABI of an ELF object containing DWARF debug info\n\nDESCRIPTION:\n  ABI Dumper is a tool for dumping ABI information of an ELF object\n  containing DWARF debug info.\n  \n  The tool is intended to be used with ABI Compliance Checker tool for\n  tracking ABI changes of a C/C++ library or kernel module.\n\n  This tool is free software: you can redistribute it and/or modify it\n  under the terms of the GNU LGPL 2.1.\n\nUSAGE:\n  abi-dumper [options] [object]\n\nEXAMPLES:\n  abi-dumper libTest.so -o ABI.dump\n\n  abi-dumper Module.ko.debug -o ABI.dump\n\nINFORMATION OPTIONS:\n  -h|-help\n      Print this help.\n\n  -v|-version\n      Print version information.\n\n  -dumpversion\n      Print the tool version (1.2) and don't do anything else.\n\nGENERAL OPTIONS:\n  -o|-output PATH\n      Path to the output ABI dump file.\n      Default: ./ABI.dump\n      \n  -sort\n      Sort data in ABI dump.\n      \n  -stdout\n      Print ABI dump to stdout.\n      \n  -loud\n      Print all warnings.\n      \n  -vnum NUM\n      Set version of the library to NUM.\n      \n  -extra-info DIR\n      Dump extra analysis info to DIR.\n      \n  -bin-only\n      Do not dump information about inline functions,\n      pure virtual functions and non-exported global data.\n      \n  -all-types\n      Dump unused data types.\n      \n  -all-symbols\n      Dump symbols not exported by the object.\n      \n  -symbols-list PATH\n      Specify a file with a list of symbols that should be dumped.\n      \n  -skip-cxx\n      Do not dump stdc++ and gnu c++ symbols.\n      \n  -all\n      Equal to: -all-types -all-symbols.\n      \n  -dump-static\n      Dump static (local) symbols.\n      \n  -compare OLD.dump NEW.dump\n      Show added/removed symbols between two ABI dumps.\n      \n  -alt PATH\n      Path to the alternate debug info (Fedora). It is\n      detected automatically from gnu_debugaltlink section\n      of the input object if not specified.\n      \n  -dir\n      Show full paths of source files.\n  \n  -vt-dumper PATH\n      Path to the vtable-dumper executable if it is installed\n      to non-default location (not in PATH).\n  \n  -public-headers PATH\n      Path to directory with public header files or to file with\n      the list of header files. This option allows one to filter out\n      private symbols from the ABI dump.\n  \n  -ignore-tags PATH\n      Path to ignore.tags file to help ctags tool to read\n      symbols in header files.\n  \n  -ctags-def DEF\n      Add -D DEF option to the ctags call. This option may be\n      specified multiple times.\n  \n  -reimplement-std\n      Do nothing.\n  \n  -mixed-headers\n      This option should be specified if you are using\n      -public-headers option and the names of public headers\n      intersect with the internal headers.\n  \n  -kernel-export\n      Dump symbols exported by the Linux kernel and modules, i.e.\n      symbols declared in the ksymtab section of the object and\n      system calls.\n  \n  -search-debuginfo DIR\n      Search for debug-info files referenced from gnu_debuglink\n      section of the object in DIR.\n  \n  -keep-registers-and-offsets\n      Dump used registers and stack offsets even if incompatible\n      build options detected.\n  \n  -all-units\n      Extract ABI info after reading all compilation units from\n      the debug info. This may require a lot of extra RAM memory.\n      By default all compilation units are processed separately.\n  \n  -quiet\n      Do not warn about incompatible build options.\n  \n  -debug\n      Enable debug messages.\n\nEXTRA OPTIONS:\n  -use-tu-dump\n      Use g++ -fdump-translation-unit instead of ctags to\n      list symbols in headers. This may be useful if all\n      functions are declared via macros in headers and\n      ctags can't recognize them.\n  \n  -include-preamble PATHS\n      Specify header files (separated by semicolon) that\n      should be included before others to compile without\n      errors.\n  \n  -include-paths DIRS\n      Specify include directories (separated by semicolon)\n      that should be passed to the compiler by -I option\n      in order to compile headers without errors. If this\n      option is not set then the tool will try to generate\n      include paths automatically.\n  \n  -cache-headers DIR\n      Cache headers analysis results to reuse later.\n  \n  -lambda\n      Enable support for lambda and checking of lexical\n      blocks. Define it if your C++ library API functions\n      use lambda expressions.\n  \n  -ld-library-path PATHS\n      Specify paths to add to LD_LIBRARY_PATH variable before\n      executing vtable-dumper (separated by colon).\n      \n      By default lexical blocks are not analyzed to\n      improve performance."
+              }
+            ]
+          }
+        ],
+        "package": "abi-dumper",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.2-3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 50.0,
+        "archive_sha256": "55ba1e573aa6f7f9bc529ed0b332b438689fe00f283bb97cd2a44568c3852c4b",
+        "binding_kind": "apt",
+        "description": "tool to dump ABI of an ELF object containing DWARF debug info",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "abi-dumper",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.2-3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.xlsx",
+      "probe": {
+        "archive_sha256": "aa5d0099167a9e70c7c25550f31c6fb85321e01c386eeea3518db9ad854471e5",
+        "executables": [
+          {
+            "executable": "/usr/sbin/adcli",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "usage: adcli command <args>...\n\nCommon adcli commands are:\n  info             Print information about a domain\n  join             Join this machine to a domain\n  update           Update machine membership in a domain\n  testjoin         Test if machine account password is valid\n  preset-computer  Pre setup computers accounts\n  reset-computer   Reset a computer account\n  delete-computer  Delete a computer account\n  show-computer    Show computer account attributes stored in AD\n  create-msa       Create a managed service account in the given AD domain\n  create-user      Create a user account\n  delete-user      Delete a user account\n  passwd-user      (Re)set a user password\n  create-group     Create a group\n  delete-group     Delete a group\n  add-member       Add users to a group\n  remove-member    Remove users from a group\n\nSee 'adcli <command> --help' for more information"
+              }
+            ]
+          }
+        ],
+        "package": "adcli",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.9.2-1ubuntu2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 50.0,
+        "archive_sha256": "aa5d0099167a9e70c7c25550f31c6fb85321e01c386eeea3518db9ad854471e5",
+        "binding_kind": "apt",
+        "description": "Tool for performing actions on an Active Directory domain",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "an"
+        ],
+        "name": "adcli",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.9.2-1ubuntu2",
+        "zero_cost_eligible": true
+      }
+    }
+  ],
+  "goal": "Create an XLSX spreadsheet workbook at canonical/astra_runtime/tmp/VERIFIED_CAPABILITIES.xlsx containing exactly one row for every VERIFIED_BOUND_CAPABILITY with columns capability_id, status, source_type, provides, and incremental_spend_usd",
+  "mission_id": "ASTRA-RUNTIME-VERIFIED-CAPABILITY-XLSX-002",
+  "role_conditioned_discovery": [
+    {
+      "binding_performed": false,
+      "candidate_count": 14,
+      "candidates": [
+        {
+          "archive_sha256": "37bf44e76f725eb1861131c6654b0ee69c0176566f9a9e4b0a5f3463ef588bae",
+          "binding_kind": "apt",
+          "description": "GNU R package to read and write XLSX files",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "xlsx"
+          ],
+          "name": "r-cran-openxlsx",
+          "packages": [],
+          "query": "xlsx",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "4.2.5.2-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "5fa9385482cdb29639e048e1ea8bc168cdfbf94c1d7c1a24696b2ee0667b8012",
+          "binding_kind": "apt",
+          "description": "GNU R package to Export Data Frames to Excel 'xlsx' Format",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "xlsx"
+          ],
+          "name": "r-cran-writexl",
+          "packages": [],
+          "query": "xlsx",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.5.0-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "57e837664e7d24badfcd81bfa49812d5e2f8bc5b92138d8f072a33e7f17a0816",
+          "binding_kind": "apt",
+          "description": "convert xlsx files to csv format",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "xlsx"
+          ],
+          "name": "xlsx2csv",
+          "packages": [],
+          "query": "xlsx",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1:0.7.8-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "8bf2ddea0f7fa899ae7fc8fea28f7fa034f38a0b0f8dc37b7e1c865f1b9d9612",
+          "binding_kind": "apt",
+          "description": "module to create Excel spreadsheets in xlsx format",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 3,
+          "matched_terms": [
+            "xlsx"
+          ],
+          "name": "libexcel-writer-xlsx-perl",
+          "packages": [],
+          "query": "xlsx",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 12,
+          "version": "1.11-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "898e761cdcba6e6f7907d22c2082064724fa9e31cf74aa221fdad27456a22a32",
+          "binding_kind": "apt",
+          "description": "Perl extension for reading MS Excel 2007 files",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 3,
+          "matched_terms": [
+            "xlsx"
+          ],
+          "name": "libspreadsheet-xlsx-perl",
+          "packages": [],
+          "query": "xlsx",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 12,
+          "version": "0.17-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "a2549dcf495db5fa1748e1c1ab41deb77ad3c97ebcf8d9891427f69c1ef8f40a",
+          "binding_kind": "apt",
+          "description": "golang library for reading and writing XLSX files",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 4,
+          "matched_terms": [
+            "xlsx"
+          ],
+          "name": "golang-github-tealeg-xlsx-dev",
+          "packages": [],
+          "query": "xlsx",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 6,
+          "version": "1.0.5-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "1b87e0accda337ce2a2f269e113f9ebb01ff513fb3c30b1039b5153d59ce2a54",
+          "binding_kind": "apt",
+          "description": "Python module to read/write OpenXML xlsx/xlsm files - docs",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 4,
+          "matched_terms": [
+            "xlsx"
+          ],
+          "name": "python-openpyxl-doc",
+          "packages": [],
+          "query": "xlsx",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 2,
+          "version": "3.1.2+dfsg-6",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "0892bf202df1f56bb36530c3ba9ac9f24f6a5b115442e7aa602b12e46aa0433c",
+          "binding_kind": "apt",
+          "description": "Python 3 module to read/write OpenXML xlsx/xlsm files",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 2,
+          "matched_terms": [
+            "xlsx"
+          ],
+          "name": "python3-openpyxl",
+          "packages": [],
+          "query": "xlsx",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 0,
+          "version": "3.1.2+dfsg-6",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "234db5c80ba8d2eaf9933a95566f81a86aa01bb15b884f2ee6c932847e58bfd2",
+          "binding_kind": "apt",
+          "description": "Python 3 module for creating Excel XLSX files",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 2,
+          "matched_terms": [
+            "xlsx"
+          ],
+          "name": "python3-xlsxwriter",
+          "packages": [],
+          "query": "xlsx",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 0,
+          "version": "3.1.9-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "686363b55e029f27248d8586ec1df6cca649a90a08624fa4a9f3516fbfc894b8",
+          "binding_kind": "apt",
+          "description": "Excel file (*.xlsx) reader/writer library for Qt5 (library).",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 3,
+          "matched_terms": [
+            "xlsx"
+          ],
+          "name": "libqt5qxlsx0t64",
+          "packages": [],
+          "query": "xlsx",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": -2,
+          "version": "1.4.4-1.1build4",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "fbd53ae94410c513acb84ac98c1b093081d7e00d1836e05a85ab019d4ee54e78",
+          "binding_kind": "apt",
+          "description": "Perl module to parse XLSX files",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 3,
+          "matched_terms": [
+            "xlsx"
+          ],
+          "name": "libspreadsheet-parsexlsx-perl",
+          "packages": [],
+          "query": "xlsx",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": -2,
+          "version": "0.31-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "3eff24241cd24e491f2be0c84a09d65f4e46356d05aeefdbb2e58d641d512c84",
+          "binding_kind": "apt",
+          "description": "Library for XLSX -- runtime library",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 3,
+          "matched_terms": [
+            "xlsx"
+          ],
+          "name": "libxlsxwriter5t64",
+          "packages": [],
+          "query": "xlsx",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": -2,
+          "version": "1.1.5-1.1build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "2345b047cd1bf98c416094db123096b144b47b8524594178feb7a113b9a071a5",
+          "binding_kind": "apt",
+          "description": "Excel file (*.xlsx) reader/writer library for Qt5 (development).",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 4,
+          "matched_terms": [
+            "xlsx"
+          ],
+          "name": "libqt5qxlsx-dev",
+          "packages": [],
+          "query": "xlsx",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": -10,
+          "version": "1.4.4-1.1build4",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "087d4d2519c4d206147be337fa3506a29f03676dfc495a7058895e2cd703bfcd",
+          "binding_kind": "apt",
+          "description": "Library for XLSX -- development library of xlsxwriter",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 4,
+          "matched_terms": [
+            "xlsx"
+          ],
+          "name": "libxlsxwriter-dev",
+          "packages": [],
+          "query": "xlsx",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": -10,
+          "version": "1.1.5-1.1build2",
+          "zero_cost_eligible": true
+        }
+      ],
+      "effect": "xlsx",
+      "errors": [],
+      "queries": [
+        "xlsx"
+      ],
+      "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+      "source": "APT_CATALOG",
+      "source_url": null
+    },
+    {
+      "binding_performed": false,
+      "candidate_count": 24,
+      "candidates": [
+        {
+          "archive_sha256": "c10e1ab4e9e97dcb53bf7275ffbf9598c8edfc0e0859659420397e8731257127",
+          "binding_kind": "apt",
+          "description": "very fast anagram generator",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "an"
+          ],
+          "name": "an",
+          "packages": [],
+          "query": "an",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 40,
+          "version": "1.2-7build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "8cd8a080c118d5917097362fe4c87f5e288127063f187a144747aea0fe4983dc",
+          "binding_kind": "apt",
+          "description": "Transitional package - firefox-locale-an -> firefox snap",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "an"
+          ],
+          "name": "firefox-locale-an",
+          "packages": [],
+          "query": "an",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1:1snap1-0ubuntu5",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "3d1c247d42e7c940e2183ca21c271023a617398efe14341dacfedcbadfdcda62",
+          "binding_kind": "apt",
+          "description": "Aragonese dictionary for hunspell",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "an"
+          ],
+          "name": "hunspell-an",
+          "packages": [],
+          "query": "an",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1:24.2.1-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c26b4976a5f1ec619726b88f7bff947c00a4520d091765724d8d889d4bd91743",
+          "binding_kind": "apt",
+          "description": "translation updates for language Aragonese",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "an"
+          ],
+          "name": "language-pack-an",
+          "packages": [],
+          "query": "an",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1:24.04+20250130",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c8f943735354c913f9e739ddeebad8859f52aac66df921c252bd52f661918f3d",
+          "binding_kind": "apt",
+          "description": "translations for language Aragonese",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "an"
+          ],
+          "name": "language-pack-an-base",
+          "packages": [],
+          "query": "an",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1:24.04+20250130",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "4df5a93e44f36f7b90a65515c02cf77373f08334b27738a62e5961caf7b47857",
+          "binding_kind": "apt",
+          "description": "GNOME translation updates for language Aragonese",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "an"
+          ],
+          "name": "language-pack-gnome-an",
+          "packages": [],
+          "query": "an",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1:24.04+20250130",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "95e18c0b25177b71f7117696c7d10fc2abd49bffa600a3e2b3b93535dab0f6c9",
+          "binding_kind": "apt",
+          "description": "GNOME translations for language Aragonese",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "an"
+          ],
+          "name": "language-pack-gnome-an-base",
+          "packages": [],
+          "query": "an",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1:24.04+20250130",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "5eae3a353745299315dd662153d80c437de2d240763df02672bc1f24a49f3964",
+          "binding_kind": "apt",
+          "description": "convert an addressbook to VCARD file format",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "an"
+          ],
+          "name": "2vcard",
+          "packages": [],
+          "query": "an",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.6-4",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "55ba1e573aa6f7f9bc529ed0b332b438689fe00f283bb97cd2a44568c3852c4b",
+          "binding_kind": "apt",
+          "description": "tool to dump ABI of an ELF object containing DWARF debug info",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "an"
+          ],
+          "name": "abi-dumper",
+          "packages": [],
+          "query": "an",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.2-3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "aa5d0099167a9e70c7c25550f31c6fb85321e01c386eeea3518db9ad854471e5",
+          "binding_kind": "apt",
+          "description": "Tool for performing actions on an Active Directory domain",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "an"
+          ],
+          "name": "adcli",
+          "packages": [],
+          "query": "an",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.9.2-1ubuntu2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "703cd070aa8bdaf8350e03864cdb6849ec07ee74eeb6752e12612cdaf593e3f0",
+          "binding_kind": "apt",
+          "description": "tool for correcting bit errors in an AES key schedule",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "an"
+          ],
+          "name": "aesfix",
+          "packages": [],
+          "query": "an",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.0.1-8",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "f0461b599a0d94d9b30acb69d08e92b302e088895a0b2f6a66514c3302755fcf",
+          "binding_kind": "apt",
+          "description": "This package provides an English-language thesaurus (utility)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "an"
+          ],
+          "name": "aiksaurus",
+          "packages": [],
+          "query": "an",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.2.1+dev-0.12-7.2build1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c97498bcfa56433ad08bca752aed84f7d07a006888919ae9b24edb74dd122773",
+          "binding_kind": "apt",
+          "description": "Qur'an typesetting macros for TeX/LaTeX",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "an"
+          ],
+          "name": "alqalam",
+          "packages": [],
+          "query": "an",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.2-10",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "01b3c58dfca1d454855e2f54170d59017d0d37b18546f1647e0809f653a69ee1",
+          "binding_kind": "apt",
+          "description": "Decompress flashfiles equipped with an AMI BIOS",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "an"
+          ],
+          "name": "amideco",
+          "packages": [],
+          "query": "an",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.31e-3.3build1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "d9c1a1220cf62904c38249fbb811b51b1f8c1c2d4cfb4708e15bcf45d58928cb",
+          "binding_kind": "apt",
+          "description": "Tools for interacting with an Android platform",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "an"
+          ],
+          "name": "android-sdk-platform-tools",
+          "packages": [],
+          "query": "an",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "28.0.2+9",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "689be78d138e7f476f53e92b6326e1796cfff1af4e46920c24a2dc50efe697da",
+          "binding_kind": "apt",
+          "description": "Tools for interacting with an Android platform - Common files",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "an"
+          ],
+          "name": "android-sdk-platform-tools-common",
+          "packages": [],
+          "query": "an",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "28.0.2+9",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "f5cd5d1edb1206c15151edfed64d53ee05886968922fd24e267bed627773739b",
+          "binding_kind": "apt",
+          "description": "an on screen display tool which uses libaosd",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "an"
+          ],
+          "name": "aosd-cat",
+          "packages": [],
+          "query": "an",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.2.7-1.1ubuntu4",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "961e91b7f688926aeec26e4423d4785164af5d1168d6adbe2cab5830e55aef0a",
+          "binding_kind": "apt",
+          "description": "Simple CLI script to display info about an APK file",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "an"
+          ],
+          "name": "apkinfo",
+          "packages": [],
+          "query": "an",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.3.28-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "bb045ced6fa20eaf97f86be57b3c390cfa27a5dfca782f67c24fe7459e3f97b3",
+          "binding_kind": "apt",
+          "description": "mounts an archive for access as a file system",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "an"
+          ],
+          "name": "archivemount",
+          "packages": [],
+          "query": "an",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.8.7-1build3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "ec94232138585c182a5003565ec70277e8fa389cdfef13a671f48e61fae460da",
+          "binding_kind": "apt",
+          "description": "specificity control for read alignments using an artificial reference",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "an"
+          ],
+          "name": "arden",
+          "packages": [],
+          "query": "an",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.0-5",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "f31f1f50dda28fb0be30d0508e5ca181b88b5d2f8d3440c00d17a21edebe06c3",
+          "binding_kind": "apt",
+          "description": "communicate with an Aurora Magnetek Photovoltaic (solar) Power Inverter",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "an"
+          ],
+          "name": "aurora",
+          "packages": [],
+          "query": "an",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.9.4-0ubuntu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "9ec25a11b6f65daff2685bf3478eeb679d9f238ab57dc6de3885512850bca03e",
+          "binding_kind": "apt",
+          "description": "Decompress flashfiles equipped with an AWARD BIOS",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "an"
+          ],
+          "name": "awardeco",
+          "packages": [],
+          "query": "an",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.2-4",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "f3ac090db893665f71c8e1183f4e530aa072209ed1da6b65653fd8833bf2e798",
+          "binding_kind": "apt",
+          "description": "An user-space filesystem for interacting with Azure Storage",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "an"
+          ],
+          "name": "blobfuse2",
+          "packages": [],
+          "query": "an",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.5.5",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "86e7a2d410060c5a5a1997fc63bdbabde905c52f97f41916f62fba138cd2041c",
+          "binding_kind": "apt",
+          "description": "An user-space filesystem for interacting with Azure Storage",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "an"
+          ],
+          "name": "blobfuse2-preview",
+          "packages": [],
+          "query": "an",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.6.0~preview.2",
+          "zero_cost_eligible": true
+        }
+      ],
+      "effect": "an xlsx",
+      "errors": [],
+      "queries": [
+        "an",
+        "xlsx"
+      ],
+      "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+      "source": "APT_CATALOG",
+      "source_url": null
+    }
+  ],
+  "schema": "PROJECT_BRAIN_AUTO_APT_CLI_ACQUISITION_EVIDENCE_V1",
+  "status": "NO_COMPATIBLE_CONTRACT"
+}
