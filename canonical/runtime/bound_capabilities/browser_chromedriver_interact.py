@@ -82,13 +82,38 @@ if (action.type==='set_text') {
   return {ok:true,type:action.type,target:action.target,value:el.value,name:el.name||null,id:el.id||null};
 }
 if (action.type==='select_option') {
-  const el=controlFor(action.target,['select']) || document.querySelector('select');
-  if (!el) return {ok:false,error:'SELECT_TARGET_NOT_FOUND',action};
   const wanted=norm(action.value);
-  const opt=[...el.options].find(o=>norm(o.textContent)===wanted || norm(o.value)===wanted || norm(o.textContent).includes(wanted));
-  if (!opt) return {ok:false,error:'SELECT_OPTION_NOT_FOUND',action,options:[...el.options].map(o=>o.textContent)};
-  el.value=opt.value; fire(el,'input'); fire(el,'change');
-  return {ok:true,type:action.type,target:action.target,value:opt.textContent.trim(),raw_value:el.value,name:el.name||null};
+  const el=controlFor(action.target,['select']) || document.querySelector('select');
+  if (el) {
+    const opt=[...el.options].find(o=>norm(o.textContent)===wanted || norm(o.value)===wanted || norm(o.textContent).includes(wanted));
+    if (!opt) return {ok:false,error:'SELECT_OPTION_NOT_FOUND',action,options:[...el.options].map(o=>o.textContent)};
+    el.value=opt.value; fire(el,'input'); fire(el,'change');
+    return {ok:true,type:action.type,target:action.target,value:opt.textContent.trim(),raw_value:el.value,name:el.name||null,mechanism:'select'};
+  }
+  // Choice groups are frequently represented as radio inputs under a
+  // fieldset/legend rather than a <select>. Resolve the requested option by
+  // its own label/value and click it. The target remains evidence about the
+  // semantic group even when HTML does not attach that group name to a label.
+  const labels=[...document.querySelectorAll('label')];
+  for (const lab of labels) {
+    if (!norm(lab.innerText||lab.textContent).includes(wanted)) continue;
+    let radio=null;
+    if (lab.htmlFor) radio=document.getElementById(lab.htmlFor);
+    if (!radio) radio=lab.querySelector('input[type=radio]');
+    if (radio && (radio.type||'').toLowerCase()==='radio') {
+      if (!radio.checked) radio.click();
+      fire(radio,'change');
+      return {ok:!!radio.checked,type:action.type,target:action.target,value:(lab.innerText||lab.textContent||action.value).trim(),raw_value:radio.value||null,name:radio.name||null,mechanism:'radio'};
+    }
+  }
+  const radios=[...document.querySelectorAll('input[type=radio]')];
+  const radio=radios.find(r=>norm([r.value,r.name,r.id,r.getAttribute('aria-label')].filter(Boolean).join(' ')).includes(wanted));
+  if (radio) {
+    if (!radio.checked) radio.click();
+    fire(radio,'change');
+    return {ok:!!radio.checked,type:action.type,target:action.target,value:action.value,raw_value:radio.value||null,name:radio.name||null,mechanism:'radio'};
+  }
+  return {ok:false,error:'SELECT_TARGET_NOT_FOUND',action};
 }
 if (action.type==='check') {
   const el=controlFor(action.target,['input']);
