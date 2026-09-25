@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T20:12:57.350034+00:00",
+  "mission_id": "ASTRA-RUNTIME-GENERIC-DATAFLOW-RANK-HELDOUT-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_GENERIC_DATAFLOW_RANK_HELDOUT_001.json",
+  "mission_sha256": "7ae0c6a3c33ec5244b0da6b2117944db3d38533782399f6895a85aeb8ba7c4f1",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "be530570a5e8577d42507f0bc89ccef8a4dbc02fa631baeca3c0d046c857cfff",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
