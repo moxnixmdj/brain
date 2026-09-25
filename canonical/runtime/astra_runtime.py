@@ -1748,6 +1748,19 @@ def _goal_action(action):
                 if not isinstance(where,dict) or not where:
                     raise RuntimeError("GROUP_DERIVE_WHERE_INVALID")
                 return sum(1 for row in related if all(row.get(str(k))==v for k,v in where.items()))
+            if op=="sum":
+                field=str(spec.get("field") or "")
+                if not re.fullmatch(field_re,field):
+                    raise RuntimeError("GROUP_DERIVE_SUM_FIELD_INVALID")
+                total=0
+                for row in related:
+                    if field not in row:
+                        raise RuntimeError("GROUP_DERIVE_SUM_FIELD_MISSING:"+field)
+                    value=row[field]
+                    if isinstance(value,bool) or not isinstance(value,(int,float)):
+                        raise RuntimeError("GROUP_DERIVE_SUM_VALUE_NONNUMERIC:"+field)
+                    total+=value
+                return total
             raise RuntimeError("GROUP_DERIVE_METRIC_OP_UNSUPPORTED:"+op)
 
         summary=[]
@@ -1862,6 +1875,23 @@ def _goal_action(action):
                 elif op=="count_where":
                     where=spec.get("where") or {}
                     expected[name]=sum(1 for row in related if all(row.get(str(k))==v for k,v in where.items()))
+                elif op=="sum":
+                    field=str(spec.get("field") or "")
+                    values=[]
+                    invalid=False
+                    for row in related:
+                        if field not in row:
+                            failures.append("SUM_FIELD_MISSING:"+field)
+                            invalid=True
+                            break
+                        value=row[field]
+                        if isinstance(value,bool) or not isinstance(value,(int,float)):
+                            failures.append("SUM_VALUE_NONNUMERIC:"+field)
+                            invalid=True
+                            break
+                        values.append(value)
+                    if not invalid:
+                        expected[name]=sum(values)
                 else:
                     failures.append("METRIC_OP_UNSUPPORTED:"+op)
             for spec in derived:
@@ -1889,7 +1919,11 @@ def _goal_action(action):
         output_path=_safe_repo_path(args.get("output_path",""))
         order_by=list(args.get("order_by") or [])
         output_fields=list(args.get("output_fields") or [])
-        if not source_path.is_file() or not order_by or not output_fields:
+        try:
+            limit=int(args.get("limit") or 1)
+        except Exception:
+            limit=0
+        if not source_path.is_file() or not order_by or not output_fields or limit<1 or limit>1000:
             return {"type":typ,"output_verified":False,"error":"RANK_SELECT_SPEC_INVALID"}
         try:
             rows=json.loads(source_path.read_text(encoding="utf-8"))
@@ -1897,6 +1931,8 @@ def _goal_action(action):
             return {"type":typ,"output_verified":False,"error":"RANK_SELECT_SOURCE_INVALID:"+type(exc).__name__}
         if not isinstance(rows,list) or not rows or any(not isinstance(x,dict) for x in rows):
             return {"type":typ,"output_verified":False,"error":"RANK_SELECT_SOURCE_NOT_OBJECT_ARRAY"}
+        if limit>len(rows):
+            return {"type":typ,"output_verified":False,"error":"RANK_SELECT_LIMIT_EXCEEDS_SOURCE","limit":limit,"source_count":len(rows)}
         def better(candidate,current):
             for spec in order_by:
                 field=str(spec.get("field") or "")
@@ -1912,31 +1948,51 @@ def _goal_action(action):
                     raise RuntimeError("RANK_SELECT_VALUES_NOT_COMPARABLE:"+field) from exc
             return False
         try:
-            best=rows[0]
-            for row in rows[1:]:
-                if better(row,best):
-                    best=row
-            record={field:best[field] for field in output_fields}
+            ranked=[]
+            for row in rows:
+                inserted=False
+                for idx,current in enumerate(ranked):
+                    if better(row,current):
+                        ranked.insert(idx,row)
+                        inserted=True
+                        break
+                if not inserted:
+                    ranked.append(row)
+            selected_rows=ranked[:limit]
+            projected=[{field:row[field] for field in output_fields} for row in selected_rows]
+            payload=projected[0] if limit==1 else projected
         except Exception as exc:
             return {"type":typ,"output_verified":False,"error":type(exc).__name__+":"+str(exc)}
         output_path.parent.mkdir(parents=True,exist_ok=True)
-        output_path.write_text(json.dumps(record,indent=2,sort_keys=True)+"\n",encoding="utf-8")
-        return {"type":typ,"output_verified":True,"source_count":len(rows),"output_path":str(output_path.relative_to(ROOT)),"record":record}
+        output_path.write_text(json.dumps(payload,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+        result={"type":typ,"output_verified":True,"source_count":len(rows),"limit":limit,"output_path":str(output_path.relative_to(ROOT))}
+        if limit==1:
+            result["record"]=payload
+        else:
+            result["records"]=payload
+        return result
 
     if typ=="assert_ranked_record":
         source_path=_safe_repo_path(args.get("source_path",""))
         selected_path=_safe_repo_path(args.get("selected_path",""))
         order_by=list(args.get("order_by") or [])
         output_fields=list(args.get("output_fields") or [])
-        if not source_path.is_file() or not selected_path.is_file() or not order_by or not output_fields:
+        try:
+            limit=int(args.get("limit") or 1)
+        except Exception:
+            limit=0
+        if not source_path.is_file() or not selected_path.is_file() or not order_by or not output_fields or limit<1 or limit>1000:
             return {"type":typ,"verified":False,"error":"RANK_VERIFY_SPEC_INVALID"}
         try:
             rows=json.loads(source_path.read_text(encoding="utf-8"))
             selected=json.loads(selected_path.read_text(encoding="utf-8"))
         except Exception as exc:
             return {"type":typ,"verified":False,"error":"RANK_VERIFY_JSON_INVALID:"+type(exc).__name__}
-        if not isinstance(rows,list) or not rows or not isinstance(selected,dict):
+        expected_shape=dict if limit==1 else list
+        if not isinstance(rows,list) or not rows or not isinstance(selected,expected_shape):
             return {"type":typ,"verified":False,"error":"RANK_VERIFY_SHAPE_INVALID"}
+        if limit>len(rows):
+            return {"type":typ,"verified":False,"error":"RANK_VERIFY_LIMIT_EXCEEDS_SOURCE"}
         def precedes(candidate,current):
             for spec in order_by:
                 field=str(spec.get("field") or "")
@@ -1946,19 +2002,29 @@ def _goal_action(action):
                 a,b=candidate[field],current[field]
                 if a==b:
                     continue
-                return a>b if direction=="desc" else a<b
+                try:
+                    return a>b if direction=="desc" else a<b
+                except Exception as exc:
+                    raise RuntimeError("RANK_VERIFY_VALUES_NOT_COMPARABLE:"+field) from exc
             return False
         try:
-            best=rows[0]
-            for row in rows[1:]:
-                if precedes(row,best):
-                    best=row
-            expected={field:best[field] for field in output_fields}
+            ranked=[]
+            for row in rows:
+                inserted=False
+                for idx,current in enumerate(ranked):
+                    if precedes(row,current):
+                        ranked.insert(idx,row)
+                        inserted=True
+                        break
+                if not inserted:
+                    ranked.append(row)
+            projected=[{field:row[field] for field in output_fields} for row in ranked[:limit]]
+            expected=projected[0] if limit==1 else projected
         except Exception as exc:
             return {"type":typ,"verified":False,"error":type(exc).__name__+":"+str(exc)}
         return {
           "type":typ,"verified":selected==expected,
-          "source_count":len(rows),"expected":expected,"observed":selected,
+          "source_count":len(rows),"limit":limit,"expected":expected,"observed":selected,
         }
 
     if typ=="aggregate_runtime_json_arrays":
