@@ -952,6 +952,65 @@
         "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SQLITE-ROUNDTRIP-002__RESULT.json"
       }
     },
+    "web.browser.rendered.capture.chromedriver": {
+      "action_template": {
+        "args": {
+          "capability_id": "web.browser.rendered.capture.chromedriver",
+          "result_path": "${input.result_path}",
+          "screenshot_path": "${input.screenshot_path}",
+          "url": "${input.url}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "browser_chromedriver",
+      "cost": 2,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "browser",
+        "web",
+        "rendered",
+        "navigate",
+        "open",
+        "page",
+        "screenshot",
+        "url",
+        "website"
+      ],
+      "limitations": [
+        "Requires a compatible local Chrome/Chromium binary and Chromedriver.",
+        "Captures one rendered page, visible text, title, final URL, result JSON, and a bounded full-page screenshot."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "web.browser.rendered.capture"
+      ],
+      "requires": [],
+      "source": {
+        "executable": "chromedriver",
+        "type": "system_tool"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "mission_id": "ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001",
+        "observed_effect": {
+          "latest_stable_python3": "3.14.7",
+          "page_title": "Download Python | Python.org",
+          "rendered": true,
+          "screenshot_bytes": 885055,
+          "screenshot_sha256": "f549568c9bcb3869e88c3b16f3d6f304e0ac0292be088fb4dcd67364c389101b"
+        },
+        "producer_independent_verifier": true,
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001__RESULT.json"
+      }
+    },
     "xlsx.table.create_from_json_records": {
       "action_template": {
         "args": {

@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T02:15:13.212320+00:00",
+  "mission_id": "ASTRA-BROWSER-CAPABILITY-PROMOTE-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_BROWSER_CAPABILITY_PROMOTE_001.json",
+  "mission_sha256": "b9443b7728d9d76e704f610790f48c10227ff06745958ecbd8383224b7a5ed65",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "c1f41b7a09dfaaf4140aaa548c4231c60ad5ca4e99b6484a5443f7226c92b801",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

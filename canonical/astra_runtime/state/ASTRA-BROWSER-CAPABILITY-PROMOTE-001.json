@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T02:15:13.212044+00:00",
+  "created_at_utc": "2026-09-25T02:15:13.172707+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T02:15:13.211738+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython canonical/runtime/promote_browser_capability.py canonical/astra_runtime/evidence/ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001__RESULT.json",
+        "duration_s": 0.039,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "RENDERED_BROWSER_CAPABILITY_PROMOTED\n"
+      },
+      "step_id": "promote-verified-rendered-browser",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-BROWSER-CAPABILITY-PROMOTE-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_BROWSER_CAPABILITY_PROMOTE_001.json",
+  "mission_sha256": "b9443b7728d9d76e704f610790f48c10227ff06745958ecbd8383224b7a5ed65",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T02:15:13.211754+00:00"
+}
