@@ -1,0 +1,2533 @@
+{
+  "auto_acquisition": {
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"lua-json\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fonts-kacst-one\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fonts-leckerli-one\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"gir1.2-json-1.0\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED\", \"name\": \"gjh-asl-json\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED\", \"name\": \"gpgme-json\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"guile-json\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED\", \"name\": \"indi-weewx-json\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_TEXT_INPUT_UNRESOLVED\", \"name\": \"json-glib-tools\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED\", \"name\": \"json-schema-test-suite\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"kamailio-json-modules\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED\", \"name\": \"metadata-json-lint\", \"status\": \"CONTRACT_REJECTED\"}]",
+    "status": "NOT_DISPATCHED"
+  },
+  "binding_performed": false,
+  "goal": "Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json. Create canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_MANIFEST.json containing one record for every VERIFIED_BOUND_CAPABILITY with its capability ID, verification mission ID, repository-local verification evidence or receipt paths when present, and source dependency names, versions, and hashes. Then create canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_BUNDLE.tar.gz containing that manifest and every repository-local verification evidence or receipt file referenced by the manifest. Finally verify independently that the archive contains the manifest plus every referenced repository-local evidence file and that the archived bytes hash exactly to the source bytes.",
+  "mission_id": "ASTRA-RUNTIME-EVIDENCE-BUNDLE-001",
+  "observed_at_utc": "2026-09-25T00:25:25.553919+00:00",
+  "result": {
+    "binding_performed": false,
+    "candidates": [
+      {
+        "archive_sha256": "4f43af84645563b12c037fd312f53836d4ae395e8490db698fd549e3c614362a",
+        "binding_kind": "apt",
+        "description": "TrueType font designed for Arabic language",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "fonts-kacst-one",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "5.0+svn11846-10",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "5847cfb6e8ad70151a8bca2d701fc359e15b6512885e1f298e33695a8d7391a5",
+        "binding_kind": "apt",
+        "description": "fat display typeface with a handwritten feeling",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "fonts-leckerli-one",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "20120409-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "39b9766a2fcacd2105318734478b5536172b740c50d9743a21e8869e62662f24",
+        "binding_kind": "apt",
+        "description": "GLib JSON manipulation library (introspection data)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "gir1.2-json-1.0",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.8.0-2build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "95581ecd747961b82573f89cfedf6b4251477e1b4be80468559e99e25380da71",
+        "binding_kind": "apt",
+        "description": "gjh solver, like solver from AMPL Library",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "gjh-asl-json",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.0+git20210628.867c5da-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "a8d38ae2198798e4ef041e3b8bcb71b8f381cd40766d0e6b9607c92015ee5af0",
+        "binding_kind": "apt",
+        "description": "json interface to the GPGME GnuPG encryption library",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "gpgme-json",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.18.0-4.1ubuntu4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c7757245e712d960048c41d7baa109f48e7db8bef0720be9775ce833fa46e543",
+        "binding_kind": "apt",
+        "description": "JSON module for Guile",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "guile-json",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "4.7.3-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ae249dfbd4c2d70c201b145310309462f7a3d32bb79c7c4daed2cdf22465090d",
+        "binding_kind": "apt",
+        "description": "INDI driver for the WeeWX Weather Station",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "indi-weewx-json",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.0-1build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "b77a447f3c6a1eeb1486606865f1bf20ab504b6d8579a150e27b7652406d564c",
+        "binding_kind": "apt",
+        "description": "GLib JSON manipulation library (tools)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "json-glib-tools",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.8.0-2build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "0cc9ca2ac64ab3ed3287b234310020581ddd914a72664a744335354db0434284",
+        "binding_kind": "apt",
+        "description": "Language agnostic test suite for the JSON Schema specifications",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "json-schema-test-suite",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.0.0-1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "147e274a8ccc4a7b34433ef248ef0a417530e39bddc6a4a8bae4e8fca1356e23",
+        "binding_kind": "apt",
+        "description": "Json parser and Json-RPC modules for the Kamailio SIP server",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "kamailio-json-modules",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "5.7.4-1build7",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "afd7b8168089f68003994131e8e89465566e614db8c672fd72fe83e5f9a9e3ce",
+        "binding_kind": "apt",
+        "description": "JSON decoder/encoder for Lua",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "lua-json",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.3.4-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c434726fba31a641aa23899c221faaa90d4ce79baa0a2849e0fea2844ee0c6ac",
+        "binding_kind": "apt",
+        "description": "Utility to verify Puppet metadata.json files",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "metadata-json-lint",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.0.0-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c6e919c50b86c29ea876a876e73091beda6b78c574327e98d2ccca0d83bce183",
+        "binding_kind": "apt",
+        "description": "compiled XML documentation for Json.NET",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "monodoc-newtonsoft-json-manual",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.0.8+dfsg-1.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "667178c7efe0fed05c931721e008f15a39c6ad57aa7f9a64127e2d8b22c169cf",
+        "binding_kind": "apt",
+        "description": "JSON language support for the CodeMirror code editor",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "node-codemirror-lang-json",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.0.1~6.22.3+~cs119.52.50-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "88b813b1e2706d4777cde72d3a4eeeba576efc1f4e22fb93eb17f7df2551b511",
+        "binding_kind": "apt",
+        "description": "Node.js implementation of JSON-Patch",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "node-fast-json-patch",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.1.1+ds-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "214ade9cebcca2920caeba9a77f9cbeafabc1be9eb2bbfec54a35f6c778155c6",
+        "binding_kind": "apt",
+        "description": "Deterministic JSON.stringify()",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "node-fast-json-stable-stringify",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.1.0-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "75ce76531996c74cb52addaab0df1abc589afd9b9338021ee898ae06b2e057e5",
+        "binding_kind": "apt",
+        "description": "JSON functions that can convert buffers.",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "node-json-buffer",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.0.1+~3.0.0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "895924cd995281ac0b8696b85e657ae5ecda76ab89cd72cd6edf4a03dec769d8",
+        "binding_kind": "apt",
+        "description": "json loader for webpack",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "node-json-loader",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.5.7-5",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d1969a32dfae90ed791a636a71837c4c728219c6e56f8a670ea70a3b287e84ed",
+        "binding_kind": "apt",
+        "description": "Utility to localize a json object",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "node-json-localizer",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.0.3-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "489d3493f12c0c56f6420f862212c646b1af02194293d4a5a6d50288cd6c2d3b",
+        "binding_kind": "apt",
+        "description": "JSON.parse() with context information on error",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "node-json-parse-better-errors",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.0.2+~cs3.3.1-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "949b5b9328f88b3068c6c70aa56e91c584a62fedde75347680e1d79808639b66",
+        "binding_kind": "apt",
+        "description": "drop-in replacement for JSON.parse that uses `jju`",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "node-json-parse-helpfulerror",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.0.3-4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "21fb4a3552acaed37dcaccb4fb1b7df3ad222f9204b2b3c4cbbf98215df7ae40",
+        "binding_kind": "apt",
+        "description": "JSON Schema validation and specifications",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "node-json-schema",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.4.0+~7.0.11-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "634d66e0a3b8a54b2444056129dd38d79928fe985357fdf8ea743c6a22f85662",
+        "binding_kind": "apt",
+        "description": "Node.js module to merge schemas combined using allOf",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "node-json-schema-merge-allof",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.8.1+~cs9.16.23-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c040f9d26ec19b7f2fb7d18adced2006c0094fd13158b0d74091173f5e4778e1",
+        "binding_kind": "apt",
+        "description": "Json schema traversal package",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "node-json-schema-traverse",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.0.0-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "901ca2a54760a0a33b45e698e6f057bd2786881033fbfbb852f32c4482729603",
+        "binding_kind": "apt",
+        "description": "deterministic JSON.stringify()",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "node-json-stable-stringify",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.0.2+repack1+~cs1.0.34-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c620a27381ee77cfaf27a3b018bbe090e8b65278ea9eea8630da2fde2bb128e2",
+        "binding_kind": "apt",
+        "description": "JSON.stringify with circular references module for Node.js",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "node-json-stringify-safe",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "5.0.1+repack-6",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "2310b46f0daf6bc3c522790dadd4f373e1cd9c46309028fac7a5e77d091089f2",
+        "binding_kind": "apt",
+        "description": "Node.js module to provide JSON grammar for the lezer parser system",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "node-lezer-json",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.0.2~1.4.13+~cs14.24.45-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "16d256420cd9f64740458880b93955ed0c32ff56e4c8c7d9f413efd590e54559",
+        "binding_kind": "apt",
+        "description": "read and parse a JSON file",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "node-load-json-file",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "7.0.1-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "cf862f0d707c35908d2b1da4541e42576698059e8e46027e80cadbaacdc57fc8",
+        "binding_kind": "apt",
+        "description": "Run the supplied Node.js function exactly once",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "node-one-time",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.0.0-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c618975f412c2860278852252787d1157730a662b55ac6d2b429ee1468ee5e5d",
+        "binding_kind": "apt",
+        "description": "Get metadata of a package from the npm registry",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "node-package-json",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "8.1.1-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Connect any AI agent to your Synchronex workspace \u2014 portable memory, decisions, and workers.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.synchronex/mcp-proxy",
+        "packages": [
+          {
+            "identifier": "@synchronex/mcp-proxy",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.2.1"
+          }
+        ],
+        "query": "one",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/kmdesle/synchronex"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.2.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "US tax sale dates & rules: 51 states, ~3,140 counties. Every record cites its official source.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.ustaxrecords/tax-sales",
+        "packages": [
+          {
+            "identifier": "ustaxrecords-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.0"
+          }
+        ],
+        "query": "record",
+        "remotes": [],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "GOC-compliant optical dispense record validation. Captures prescription, lens choice, fitting",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.CSOAI-ORG/dispense-record-mcp",
+        "packages": [
+          {
+            "identifier": "dispense-record-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "python",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.9"
+          }
+        ],
+        "query": "record",
+        "remotes": [],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.10",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "A free one-minute reset for people, delivered by AI, with no account or personal data.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.ai-akari/one-minute-akari",
+        "packages": [],
+        "query": "one",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://ai-akari.ai/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/AInoAKARI/arigatou-kawaii-lp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Drone-sector market intelligence for AI agents: free briefings and profiles, licenced tracker data.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.droneintelligence/drone-intelligence",
+        "packages": [],
+        "query": "one",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://droneintelligence.ai/api/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Versioned agent memory in your own Postgres: portable context, permissioned, audit trail.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.onedroid/engram",
+        "packages": [],
+        "query": "one",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://engram.onedroid.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Place real phone calls and hold spoken conversations on a user's behalf, billed per minute.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "app.alterphone/phone-calls",
+        "packages": [],
+        "query": "one",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.alterphone.app/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/marius-bardan/alterphone-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "An agent records what it finished into a team's standup feed, one line at a time.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "app.donelane/donelane",
+        "packages": [],
+        "query": "one",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://donelane.app/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "OneHaus household tools: tasks, calendar, contacts, pets, vehicles, documents and more.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "app.onehaus/haus",
+        "packages": [],
+        "query": "one",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.onehaus.app"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "subfolder": "backend/src/Haus.Mcp",
+          "url": "https://github.com/Im5tu/haus"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.3.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Indonesia shipping for AI agents via Biteship: courier rates, create orders, track waybills.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "app.wishpool/indonesia-logistics-mcp",
+        "packages": [],
+        "query": "one",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://logi-id.wishpool.app/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/junter1989k-ai/indonesia-logistics-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "12 synthetic accurate financial record exception cases: duplicate reimbursements, policy-watch list ",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.a2awire/benchmark-accurate-financial-record-reconcile-2026-09-22-af293a80",
+        "packages": [],
+        "query": "record",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://a2awire.com/mcp/benchmarks/accurate-financial-record-reconcile-2026-09-22-af293a80/http"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/ee324/a2awire"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "12 synthetic medical record exception cases: duplicate reimbursements, policy-watch list entries, mi",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.a2awire/benchmark-medical-record-review-2026-09-21-dd8c58b7",
+        "packages": [],
+        "query": "record",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://a2awire.com/mcp/benchmarks/medical-record-review-2026-09-21-dd8c58b7/http"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/ee324/a2awire"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Consent-scoped vault access and free verification of family-issued learning records.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.eformogi/records-vault",
+        "packages": [],
+        "query": "record",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://eformogi.com/api/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "The public record of local government: what your officials actually say and do, word for word.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.hometownwire/civic-record",
+        "packages": [],
+        "query": "record",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://hometownwire.com/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/blong-dev/hometownwire"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Dated motor-carrier records with receipts, verification, and specimens, from a records custodian.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.substradium/carrier-records",
+        "packages": [],
+        "query": "record",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://substradium.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Look up a domain's public Website Launches launch record, owner verification & trust context.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.websitelaunches/launch-record-lookup",
+        "packages": [],
+        "query": "record",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://websitelaunches.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Prepare a customer record field",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.Wxt-ai/customer-record-field-prep",
+        "packages": [],
+        "query": "record",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://openings-vote-drilling-initially.trycloudflare.com/mcp/customer-record-field-prep"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.7",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Prepare a customer record field for reporting",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.Wxt-ai/record-export-field-identifier",
+        "packages": [],
+        "query": "record",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://antibody-package-occasional-floppy.trycloudflare.com/mcp/record-export-field/upstream"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.4",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Read-only public CVE records, capability metadata, and agent instructions from Hacker Bob.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.bobnetsec/hacker-bob-public-records",
+        "packages": [],
+        "query": "record",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://hackerbob.ai/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/bobnetsec/www"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Dead-man switch for AI agents & cron jobs: heartbeat with state capsule, alerts + resume links",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.aislabs/recorder",
+        "packages": [],
+        "query": "record",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.aislabs.ai/recorder/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "0.1.0",
+        "zero_cost_eligible": true
+      }
+    ],
+    "effect": "Create canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_MANIFEST.json containing one record for every VERIFIED_BOUND_CAPABILITY with its capability ID, verification mission ID, repository-local verification evidence or receipt paths when present, and source dependency names, versions, and hashes",
+    "results": [
+      {
+        "binding_performed": false,
+        "candidate_count": 30,
+        "candidates": [
+          {
+            "archive_sha256": "4f43af84645563b12c037fd312f53836d4ae395e8490db698fd549e3c614362a",
+            "binding_kind": "apt",
+            "description": "TrueType font designed for Arabic language",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "one"
+            ],
+            "name": "fonts-kacst-one",
+            "packages": [],
+            "query": "one",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "5.0+svn11846-10",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "5847cfb6e8ad70151a8bca2d701fc359e15b6512885e1f298e33695a8d7391a5",
+            "binding_kind": "apt",
+            "description": "fat display typeface with a handwritten feeling",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "one"
+            ],
+            "name": "fonts-leckerli-one",
+            "packages": [],
+            "query": "one",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "20120409-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "39b9766a2fcacd2105318734478b5536172b740c50d9743a21e8869e62662f24",
+            "binding_kind": "apt",
+            "description": "GLib JSON manipulation library (introspection data)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "gir1.2-json-1.0",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.8.0-2build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "95581ecd747961b82573f89cfedf6b4251477e1b4be80468559e99e25380da71",
+            "binding_kind": "apt",
+            "description": "gjh solver, like solver from AMPL Library",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "gjh-asl-json",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.0+git20210628.867c5da-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "a8d38ae2198798e4ef041e3b8bcb71b8f381cd40766d0e6b9607c92015ee5af0",
+            "binding_kind": "apt",
+            "description": "json interface to the GPGME GnuPG encryption library",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "gpgme-json",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.18.0-4.1ubuntu4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c7757245e712d960048c41d7baa109f48e7db8bef0720be9775ce833fa46e543",
+            "binding_kind": "apt",
+            "description": "JSON module for Guile",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "guile-json",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "4.7.3-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "ae249dfbd4c2d70c201b145310309462f7a3d32bb79c7c4daed2cdf22465090d",
+            "binding_kind": "apt",
+            "description": "INDI driver for the WeeWX Weather Station",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "indi-weewx-json",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.0-1build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "b77a447f3c6a1eeb1486606865f1bf20ab504b6d8579a150e27b7652406d564c",
+            "binding_kind": "apt",
+            "description": "GLib JSON manipulation library (tools)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "json-glib-tools",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.8.0-2build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "0cc9ca2ac64ab3ed3287b234310020581ddd914a72664a744335354db0434284",
+            "binding_kind": "apt",
+            "description": "Language agnostic test suite for the JSON Schema specifications",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "json-schema-test-suite",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2.0.0-1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "147e274a8ccc4a7b34433ef248ef0a417530e39bddc6a4a8bae4e8fca1356e23",
+            "binding_kind": "apt",
+            "description": "Json parser and Json-RPC modules for the Kamailio SIP server",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "kamailio-json-modules",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "5.7.4-1build7",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "afd7b8168089f68003994131e8e89465566e614db8c672fd72fe83e5f9a9e3ce",
+            "binding_kind": "apt",
+            "description": "JSON decoder/encoder for Lua",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "lua-json",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.3.4-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c434726fba31a641aa23899c221faaa90d4ce79baa0a2849e0fea2844ee0c6ac",
+            "binding_kind": "apt",
+            "description": "Utility to verify Puppet metadata.json files",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "metadata-json-lint",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.0.0-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c6e919c50b86c29ea876a876e73091beda6b78c574327e98d2ccca0d83bce183",
+            "binding_kind": "apt",
+            "description": "compiled XML documentation for Json.NET",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "monodoc-newtonsoft-json-manual",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.0.8+dfsg-1.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "667178c7efe0fed05c931721e008f15a39c6ad57aa7f9a64127e2d8b22c169cf",
+            "binding_kind": "apt",
+            "description": "JSON language support for the CodeMirror code editor",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "node-codemirror-lang-json",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.0.1~6.22.3+~cs119.52.50-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "88b813b1e2706d4777cde72d3a4eeeba576efc1f4e22fb93eb17f7df2551b511",
+            "binding_kind": "apt",
+            "description": "Node.js implementation of JSON-Patch",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "node-fast-json-patch",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.1.1+ds-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "214ade9cebcca2920caeba9a77f9cbeafabc1be9eb2bbfec54a35f6c778155c6",
+            "binding_kind": "apt",
+            "description": "Deterministic JSON.stringify()",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "node-fast-json-stable-stringify",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2.1.0-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "75ce76531996c74cb52addaab0df1abc589afd9b9338021ee898ae06b2e057e5",
+            "binding_kind": "apt",
+            "description": "JSON functions that can convert buffers.",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "node-json-buffer",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.0.1+~3.0.0-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "895924cd995281ac0b8696b85e657ae5ecda76ab89cd72cd6edf4a03dec769d8",
+            "binding_kind": "apt",
+            "description": "json loader for webpack",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "node-json-loader",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.5.7-5",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d1969a32dfae90ed791a636a71837c4c728219c6e56f8a670ea70a3b287e84ed",
+            "binding_kind": "apt",
+            "description": "Utility to localize a json object",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "node-json-localizer",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.0.3-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "489d3493f12c0c56f6420f862212c646b1af02194293d4a5a6d50288cd6c2d3b",
+            "binding_kind": "apt",
+            "description": "JSON.parse() with context information on error",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "node-json-parse-better-errors",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.0.2+~cs3.3.1-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "949b5b9328f88b3068c6c70aa56e91c584a62fedde75347680e1d79808639b66",
+            "binding_kind": "apt",
+            "description": "drop-in replacement for JSON.parse that uses `jju`",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "node-json-parse-helpfulerror",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.0.3-4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "21fb4a3552acaed37dcaccb4fb1b7df3ad222f9204b2b3c4cbbf98215df7ae40",
+            "binding_kind": "apt",
+            "description": "JSON Schema validation and specifications",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "node-json-schema",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.4.0+~7.0.11-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "634d66e0a3b8a54b2444056129dd38d79928fe985357fdf8ea743c6a22f85662",
+            "binding_kind": "apt",
+            "description": "Node.js module to merge schemas combined using allOf",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "node-json-schema-merge-allof",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.8.1+~cs9.16.23-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c040f9d26ec19b7f2fb7d18adced2006c0094fd13158b0d74091173f5e4778e1",
+            "binding_kind": "apt",
+            "description": "Json schema traversal package",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "node-json-schema-traverse",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.0.0-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "901ca2a54760a0a33b45e698e6f057bd2786881033fbfbb852f32c4482729603",
+            "binding_kind": "apt",
+            "description": "deterministic JSON.stringify()",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "node-json-stable-stringify",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.0.2+repack1+~cs1.0.34-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c620a27381ee77cfaf27a3b018bbe090e8b65278ea9eea8630da2fde2bb128e2",
+            "binding_kind": "apt",
+            "description": "JSON.stringify with circular references module for Node.js",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "node-json-stringify-safe",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "5.0.1+repack-6",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "2310b46f0daf6bc3c522790dadd4f373e1cd9c46309028fac7a5e77d091089f2",
+            "binding_kind": "apt",
+            "description": "Node.js module to provide JSON grammar for the lezer parser system",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "node-lezer-json",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.0.2~1.4.13+~cs14.24.45-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "16d256420cd9f64740458880b93955ed0c32ff56e4c8c7d9f413efd590e54559",
+            "binding_kind": "apt",
+            "description": "read and parse a JSON file",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "node-load-json-file",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "7.0.1-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "cf862f0d707c35908d2b1da4541e42576698059e8e46027e80cadbaacdc57fc8",
+            "binding_kind": "apt",
+            "description": "Run the supplied Node.js function exactly once",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "one"
+            ],
+            "name": "node-one-time",
+            "packages": [],
+            "query": "one",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.0.0-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c618975f412c2860278852252787d1157730a662b55ac6d2b429ee1468ee5e5d",
+            "binding_kind": "apt",
+            "description": "Get metadata of a package from the npm registry",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "node-package-json",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "8.1.1-1",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Create canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_MANIFEST.json containing one record for every VERIFIED_BOUND_CAPABILITY with its capability ID, verification mission ID, repository-local verification evidence or receipt paths when present, and source dependency names, versions, and hashes",
+        "errors": [],
+        "queries": [
+          "json",
+          "one",
+          "record",
+          "verified"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "APT_CATALOG",
+        "source_url": null
+      },
+      {
+        "binding_performed": false,
+        "candidate_count": 60,
+        "candidates": [
+          {
+            "description": "Connect any AI agent to your Synchronex workspace \u2014 portable memory, decisions, and workers.",
+            "is_latest": true,
+            "name": "ai.synchronex/mcp-proxy",
+            "packages": [
+              {
+                "identifier": "@synchronex/mcp-proxy",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.2.1"
+              }
+            ],
+            "query": "one",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/kmdesle/synchronex"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.2.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "US tax sale dates & rules: 51 states, ~3,140 counties. Every record cites its official source.",
+            "is_latest": true,
+            "name": "com.ustaxrecords/tax-sales",
+            "packages": [
+              {
+                "identifier": "ustaxrecords-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.0"
+              }
+            ],
+            "query": "record",
+            "remotes": [],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "GOC-compliant optical dispense record validation. Captures prescription, lens choice, fitting",
+            "is_latest": true,
+            "name": "io.github.CSOAI-ORG/dispense-record-mcp",
+            "packages": [
+              {
+                "identifier": "dispense-record-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "python",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.9"
+              }
+            ],
+            "query": "record",
+            "remotes": [],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.10",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "A free one-minute reset for people, delivered by AI, with no account or personal data.",
+            "is_latest": true,
+            "name": "ai.ai-akari/one-minute-akari",
+            "packages": [],
+            "query": "one",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://ai-akari.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/AInoAKARI/arigatou-kawaii-lp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Drone-sector market intelligence for AI agents: free briefings and profiles, licenced tracker data.",
+            "is_latest": true,
+            "name": "ai.droneintelligence/drone-intelligence",
+            "packages": [],
+            "query": "one",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://droneintelligence.ai/api/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Versioned agent memory in your own Postgres: portable context, permissioned, audit trail.",
+            "is_latest": true,
+            "name": "ai.onedroid/engram",
+            "packages": [],
+            "query": "one",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://engram.onedroid.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Place real phone calls and hold spoken conversations on a user's behalf, billed per minute.",
+            "is_latest": true,
+            "name": "app.alterphone/phone-calls",
+            "packages": [],
+            "query": "one",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.alterphone.app/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/marius-bardan/alterphone-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "An agent records what it finished into a team's standup feed, one line at a time.",
+            "is_latest": true,
+            "name": "app.donelane/donelane",
+            "packages": [],
+            "query": "one",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://donelane.app/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "OneHaus household tools: tasks, calendar, contacts, pets, vehicles, documents and more.",
+            "is_latest": true,
+            "name": "app.onehaus/haus",
+            "packages": [],
+            "query": "one",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.onehaus.app"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "subfolder": "backend/src/Haus.Mcp",
+              "url": "https://github.com/Im5tu/haus"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.3.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Indonesia shipping for AI agents via Biteship: courier rates, create orders, track waybills.",
+            "is_latest": true,
+            "name": "app.wishpool/indonesia-logistics-mcp",
+            "packages": [],
+            "query": "one",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://logi-id.wishpool.app/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/junter1989k-ai/indonesia-logistics-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "12 synthetic accurate financial record exception cases: duplicate reimbursements, policy-watch list ",
+            "is_latest": true,
+            "name": "com.a2awire/benchmark-accurate-financial-record-reconcile-2026-09-22-af293a80",
+            "packages": [],
+            "query": "record",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://a2awire.com/mcp/benchmarks/accurate-financial-record-reconcile-2026-09-22-af293a80/http"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/ee324/a2awire"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "12 synthetic medical record exception cases: duplicate reimbursements, policy-watch list entries, mi",
+            "is_latest": true,
+            "name": "com.a2awire/benchmark-medical-record-review-2026-09-21-dd8c58b7",
+            "packages": [],
+            "query": "record",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://a2awire.com/mcp/benchmarks/medical-record-review-2026-09-21-dd8c58b7/http"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/ee324/a2awire"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Consent-scoped vault access and free verification of family-issued learning records.",
+            "is_latest": true,
+            "name": "com.eformogi/records-vault",
+            "packages": [],
+            "query": "record",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://eformogi.com/api/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "The public record of local government: what your officials actually say and do, word for word.",
+            "is_latest": true,
+            "name": "com.hometownwire/civic-record",
+            "packages": [],
+            "query": "record",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://hometownwire.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/blong-dev/hometownwire"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Dated motor-carrier records with receipts, verification, and specimens, from a records custodian.",
+            "is_latest": true,
+            "name": "com.substradium/carrier-records",
+            "packages": [],
+            "query": "record",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://substradium.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Look up a domain's public Website Launches launch record, owner verification & trust context.",
+            "is_latest": true,
+            "name": "com.websitelaunches/launch-record-lookup",
+            "packages": [],
+            "query": "record",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://websitelaunches.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Prepare a customer record field",
+            "is_latest": true,
+            "name": "io.github.Wxt-ai/customer-record-field-prep",
+            "packages": [],
+            "query": "record",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://openings-vote-drilling-initially.trycloudflare.com/mcp/customer-record-field-prep"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.7",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Prepare a customer record field for reporting",
+            "is_latest": true,
+            "name": "io.github.Wxt-ai/record-export-field-identifier",
+            "packages": [],
+            "query": "record",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://antibody-package-occasional-floppy.trycloudflare.com/mcp/record-export-field/upstream"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.4",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Read-only public CVE records, capability metadata, and agent instructions from Hacker Bob.",
+            "is_latest": true,
+            "name": "io.github.bobnetsec/hacker-bob-public-records",
+            "packages": [],
+            "query": "record",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://hackerbob.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/bobnetsec/www"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "One install that runs every sibling MCP server as a child process and merges their tools behind one ",
+            "is_latest": true,
+            "name": "com.bestremotetools/office-suite-all-servers-one-install",
+            "packages": [
+              {
+                "identifier": "https://github.com/theluckystrike/mcp-servers/releases/download/v0.21.0/office-suite.mcpb",
+                "registry_type": "mcpb",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [
+                  "MCP_LICENSE_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.21.0"
+              }
+            ],
+            "query": "one",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/theluckystrike/mcp-office-suite"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 15,
+            "status": "active",
+            "version": "0.21.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Search, document and execute authenticated API calls across 700+ apps via one MCP server",
+            "is_latest": true,
+            "name": "ai.withone/mcp",
+            "packages": [
+              {
+                "identifier": "@withone/mcp",
+                "registry_type": "npm",
+                "required_environment": [
+                  "ONE_SECRET"
+                ],
+                "runtime_hint": "npx",
+                "secret_environment": [
+                  "ONE_SECRET"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.4.0"
+              }
+            ],
+            "query": "one",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.withone.ai/mcp"
+              }
+            ],
+            "repository": {
+              "id": "1187553569",
+              "source": "github",
+              "url": "https://github.com/withoneai/mcp"
+            },
+            "required_environment_count": 1,
+            "required_secret_count": 1,
+            "score": 14,
+            "status": "active",
+            "version": "1.4.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Get a company funding record from SEC Form D, Companies House and press, each labelled.",
+            "is_latest": true,
+            "name": "com.mambabuilt/mcp-funding-investor-record",
+            "packages": [
+              {
+                "identifier": "@mambalabsdev/mcp-funding-investor-record",
+                "registry_type": "npm",
+                "required_environment": [
+                  "APIFY_TOKEN"
+                ],
+                "runtime_hint": null,
+                "secret_environment": [
+                  "APIFY_TOKEN"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.0"
+              }
+            ],
+            "query": "record",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/mambalabsdev/mcp-funding-investor-record"
+            },
+            "required_environment_count": 1,
+            "required_secret_count": 1,
+            "score": 14,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Ask a company's DeskClone support agent from Claude, Cursor or any MCP client (API key needed).",
+            "is_latest": true,
+            "name": "ai.deskclone/deskclone",
+            "packages": [],
+            "query": "one",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://api.deskclone.ai/v1/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Governed MCP gateway: one endpoint for your tools, with credential custody and audit log.",
+            "is_latest": true,
+            "name": "ai.onedroid/synapse",
+            "packages": [],
+            "query": "one",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://synapse.onedroid.ai/hub/{hub}/mcp"
+              },
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://synapse.onedroid.ai/agent/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "1.0.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP server that lets AI assistants use all OneSchema features exposed via the public API.",
+            "is_latest": true,
+            "name": "co.oneschema/mcp",
+            "packages": [],
+            "query": "one",
+            "remotes": [
+              {
+                "required_headers": [
+                  "X-Api-Key"
+                ],
+                "type": "streamable-http",
+                "url": "https://api.oneschema.co/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Read patient-authorized EHR records: medications, labs, conditions, allergies. Consent-bounded.",
+            "is_latest": true,
+            "name": "com.finchnode/health-records",
+            "packages": [],
+            "query": "record",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://api.finchnode.com/api/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "US public-records intelligence for AI agents \u2014 companies, SEC, courts, spending, licenses.",
+            "is_latest": true,
+            "name": "io.github.bch1212/pubrecords",
+            "packages": [],
+            "query": "record",
+            "remotes": [
+              {
+                "required_headers": [
+                  "X-API-Key"
+                ],
+                "type": "streamable-http",
+                "url": "https://mcp-pubrecords-production.up.railway.app/mcp/"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/bch1212/mcp-pubrecords"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Dead-man switch for AI agents & cron jobs: heartbeat with state capsule, alerts + resume links",
+            "is_latest": true,
+            "name": "ai.aislabs/recorder",
+            "packages": [],
+            "query": "record",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.aislabs.ai/recorder/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Privacy-first work tracking with summaries, reports, coaching, and AI-ready long-term memory.",
+            "is_latest": true,
+            "name": "ai.donethat/donethat",
+            "packages": [],
+            "query": "one",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.donethat.ai/"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Build zero-shot video models for object detection, and category and attribute classification.",
+            "is_latest": true,
+            "name": "ai.dragoneye/mcp",
+            "packages": [],
+            "query": "one",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://nexus.api.dragoneye.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Create canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_MANIFEST.json containing one record for every VERIFIED_BOUND_CAPABILITY with its capability ID, verification mission ID, repository-local verification evidence or receipt paths when present, and source dependency names, versions, and hashes",
+        "errors": [
+          {
+            "error": "TimeoutError:The read operation timed out",
+            "query": "json"
+          },
+          {
+            "error": "TimeoutError:The read operation timed out",
+            "query": "verified"
+          }
+        ],
+        "queries": [
+          "json",
+          "one",
+          "record",
+          "verified"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "OFFICIAL_MCP_REGISTRY",
+        "source_url": "https://registry.modelcontextprotocol.io"
+      }
+    ],
+    "schema": "PROJECT_BRAIN_FEDERATED_CAPABILITY_DISCOVERY_V1",
+    "sources": [
+      "APT_CATALOG",
+      "OFFICIAL_MCP_REGISTRY"
+    ]
+  },
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
+  "source": "FEDERATED_CAPABILITY_DISCOVERY_FALLBACK",
+  "targeted_acquisition_error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"lua-json\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fonts-kacst-one\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fonts-leckerli-one\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"gir1.2-json-1.0\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED\", \"name\": \"gjh-asl-json\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED\", \"name\": \"gpgme-json\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"guile-json\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED\", \"name\": \"indi-weewx-json\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_TEXT_INPUT_UNRESOLVED\", \"name\": \"json-glib-tools\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED\", \"name\": \"json-schema-test-suite\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"kamailio-json-modules\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED\", \"name\": \"metadata-json-lint\", \"status\": \"CONTRACT_REJECTED\"}]"
+}
