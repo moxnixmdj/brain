@@ -1085,8 +1085,15 @@ def main():
             state["status"]="BLOCKED"; state["blocker"]=blocker; state["updated_at_utc"]=utc()
             writej(state_path,state)
             print(json.dumps(blocker)); return 4
-        state["next_step"]=i+1; state["updated_at_utc"]=utc()
+        state["next_step"]=i+1
+        # A previously blocked mission may later succeed after a verified
+        # repair/replay. Do not leave the obsolete blocker looking like live
+        # state once forward progress has been re-established.
+        state.pop("blocker",None)
+        state["status"]="RUNNING"
+        state["updated_at_utc"]=utc()
         writej(state_path,state)
+    state.pop("blocker",None)
     state["status"]="COMPLETE"; state["completed_at_utc"]=utc()
     writej(state_path,state)
     receipt={
