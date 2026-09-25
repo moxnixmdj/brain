@@ -137,6 +137,37 @@ class GoalCompilerTests(unittest.TestCase):
         self.assertEqual(zint["verification_mission_id"],"ASTRA-AUTO-VERIFY-ZINT-85BC9CD2C9A4")
         self.assertIsInstance(zint["source"],dict)
 
+    def test_compound_evidence_bundle_compiles_manifest_archive_and_verifier(self):
+        goal=(
+            "Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json. "
+            "Create canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_MANIFEST.json containing one record for every VERIFIED_BOUND_CAPABILITY "
+            "with its capability ID, verification mission ID, repository-local verification evidence or receipt paths when present, "
+            "and source dependency names, versions, and hashes. "
+            "Then create canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_BUNDLE.tar.gz containing that manifest and every repository-local "
+            "verification evidence or receipt file referenced by the manifest. "
+            "Finally verify independently that the archive contains the manifest plus every referenced repository-local evidence file "
+            "and that the archived bytes hash exactly to the source bytes."
+        )
+        out=compiler.compile_goal(goal,self.registry(),ROOT)
+        self.assertEqual(out["compiler_mode"],"DETERMINISTIC_COMPOUND_ACTION_PLAN")
+        modes=[x["mode"] for x in out["compiled_parts"]]
+        self.assertEqual(modes,[
+            "NATIVE_READ",
+            "VERIFIED_STRUCTURED_MANIFEST",
+            "VERIFIED_CAPABILITY",
+            "VERIFIED_CAPABILITY",
+        ])
+        self.assertEqual(out["compiled_parts"][2]["selected_capability"],"archive.tar_gz.create_from_manifest")
+        self.assertEqual(out["compiled_parts"][3]["selected_capability"],"archive.verify.tar_gz.gnu")
+        self.assertEqual(
+            out["compiled_parts"][3]["inputs"]["manifest_path"],
+            "canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_MANIFEST.json",
+        )
+        self.assertEqual(
+            out["compiled_parts"][3]["inputs"]["archive_path"],
+            "canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_BUNDLE.tar.gz",
+        )
+
     def test_plain_qr_goal_selects_verified_qr_and_binds_arguments(self):
         goal="Generate a QR code image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png."
         out=compiler.compile_goal(goal,self.registry(),ROOT)
