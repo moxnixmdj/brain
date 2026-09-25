@@ -1,0 +1,1001 @@
+{
+  "attempts": [
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "918432b16c96e61d9bca9215e751c2b720eeab42579ca11a551e6bb78e24d2d8",
+        "executables": [],
+        "package": "qml-module-org-kde-runnermodel",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "5.115.0-0ubuntu4"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 136.0,
+        "archive_sha256": "918432b16c96e61d9bca9215e751c2b720eeab42579ca11a551e6bb78e24d2d8",
+        "binding_kind": "apt",
+        "description": "Used to write plugins loaded at runtime called \"Runners\".",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "at",
+          "runtime"
+        ],
+        "name": "qml-module-org-kde-runnermodel",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "5.115.0-0ubuntu4",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "dc7b74c21d606e26366ff3e7261a0d49672f340db64a59c0dcc013cea67e3814",
+        "executables": [
+          {
+            "executable": "/usr/bin/ch-checkns",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: ch-checkns\n\nCheck \"ch-run\" prerequisites, e.g., namespaces and \"pivot_root(2)\".\n\nExample:\n\n  $ ch-checkns\n  ok"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/ch-run",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: ch-run [OPTION...] IMAGE -- COMMAND [ARG...]\n\nRun a command in a Charliecloud container.\n\n  -b, --bind=SRC[:DST]     mount SRC at guest DST (default: same as SRC)\n  -c, --cd=DIR             initial working directory in container\n      --env-no-expand      don't expand $ in --set-env input\n      --feature=FEAT       exit successfully if FEAT is enabled\n  -g, --gid=GID            run as GID within container\n      --home               mount host $HOME at guest /home/$USER\n      --join-ct=N          number of join peers (implies --join)\n      --join-pid=PID       join a namespace using a PID\n      --join-tag=TAG       label for peer group (implies --join)\n  -j, --join               use same container as peer ch-run\n  -m, --mount=DIR          SquashFS mount point\n      --no-passwd          don't bind-mount /etc/{passwd,group}\n  -q, --quiet              print less output (can be repeated)\n      --seccomp            fake success for some syscalls with seccomp(2)\n      --set-env[=ARG]      set env. variables per ARG (newline-delimited)\n      --set-env0[=ARG]     set env. variables per ARG (null-delimited)\n  -s, --storage=DIR        set DIR as storage directory\n      --test=TEST          do test TEST\n  -t, --private-tmp        use container-private /tmp\n      --unsafe             do unsafe things (internal use only)\n      --unset-env=GLOB     unset environment variable(s)\n  -u, --uid=UID            run as UID within container\n  -v, --verbose            be more verbose (can be repeated)\n      --warnings=NUM       log NUM warnings and exit\n  -w, --write              mount image read-write (avoid)\n  -W, --write-fake[=SIZE]  overlay read-write tmpfs on top of image\n  -?, --help               Give this help list\n      --usage              Give a short usage message\n  -V, --version            print version and exit\n\nExample:\n\n  $ ch-run /data/foo -- echo hello\n  hello\n\nYou cannot use this program to actually change your UID."
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/ch-run-oci",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "Traceback (most recent call last):\n  File \"/usr/bin/ch-run-oci\", line 17, in <module>\n    import misc\n  File \"/usr/lib/charliecloud/misc.py\", line 11, in <module>\n    import build_cache as bu\n  File \"/usr/lib/charliecloud/build_cache.py\", line 43, in <module>\n    import image as im\n  File \"/usr/lib/charliecloud/image.py\", line 21, in <module>\n    import lark\nModuleNotFoundError: No module named 'lark'"
+              }
+            ]
+          }
+        ],
+        "package": "charliecloud-runtime",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.37-1build1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 126.0,
+        "archive_sha256": "dc7b74c21d606e26366ff3e7261a0d49672f340db64a59c0dcc013cea67e3814",
+        "binding_kind": "apt",
+        "description": "user-defined software stacks (UDSS) for HPC centers (runtime tools)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime",
+          "user"
+        ],
+        "name": "charliecloud-runtime",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 62,
+        "version": "0.37-1build1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "ac94388249d6f2af9a89bad8317a966b0d34151adb11bf02ecaa068f9d4041c0",
+        "executables": [
+          {
+            "executable": "/usr/bin/airspyhf_calibrate",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "Usage:\n\t-s <serial number>: open receiver with specified 64-bit serial number (required).\n\t-c <new ppb>: set receiver with specified new calibration value (optional, signed decimal).\n\n/usr/bin/airspyhf_calibrate: invalid option -- '-'"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/airspyhf_gpio",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "/usr/bin/airspyhf_gpio: invalid option -- '-'\nUsage:\n\t-s serial number: open receiver with specified 64 bits serial number.\n\t-0 on|off\n\t-1 on|off\n\t-2 on|off\n\t-3 on|off"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/airspyhf_info",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "Usage:\n\t-s serial number: open receiver with specified 64 bits serial number.\n\n/usr/bin/airspyhf_info: invalid option -- '-'"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/airspyhf_lib_version",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "AirSpy HF library version: 1.6.8"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/airspyhf_rx",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "/usr/bin/airspyhf_rx: invalid option -- '-'\nunknown argument '-? (null)'\nairspyhf_rx\nUsage:\n\t-r <filename>\t\tReceive data into the file;\n\t\t\t\tstdout emits values on standard output\n\t-s <serial number>\tOpen device with specified 64bits serial number\n\t-f <frequency>\t\tSet frequency in MHz between 9 kHz - 31 MHz or 60 - 260 MHz\n\t-a <sample_rate>\tSet sample rate, at the moment only 768 kS/s supported\n\t-n <#samples>\t\tNumber of samples to transfer (default is unlimited)\n\t-d\t\t\tVerbose mode\n\t-w\t\t\tReceive data into file with WAV header and automatic name\n\t\t\t\tThis is for SDR# compatibility and may not work with other software\n\t\t\t\tIt works even with HDSDR\n\t-g on|off\t\tHF AGC on / off\n\t-l high|low\t\tHF AGC threshold high / low (when AGC On)\n\t-t <value>\t\tHF attenuator value 0..8 (each step increases 6 dB the attenuation)\n\t-m on|off\t\ton to activate LNA (preamplifier): +6 dB gain - compensated in digital.\n\t-z\t\t\tDo not attempt to use manual AGC/LNA commands\n\t\t\t\t(useful in order to avoid errors with old firmware)"
+              }
+            ]
+          }
+        ],
+        "package": "airspyhf",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.6.8-4build1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 112.0,
+        "archive_sha256": "ac94388249d6f2af9a89bad8317a966b0d34151adb11bf02ecaa068f9d4041c0",
+        "binding_kind": "apt",
+        "description": "HF+VHF software defined radio receiver - user runtime",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime",
+          "user"
+        ],
+        "name": "airspyhf",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "1.6.8-4build1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "e390b66584704aff3596094994186c684474a148d876694337af39634664cbaf",
+        "executables": [
+          {
+            "executable": "/usr/sbin/netplan",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "usage: /usr/sbin/netplan  [-h] [--debug]  ...\n\nNetwork configuration in YAML\n\noptions:\n  -h, --help  show this help message and exit\n  --debug     Enable debug messages\n\nAvailable commands:\n  \n    help      Show this help message\n    apply     Apply current netplan config to running system\n    generate  Generate backend specific configuration files from\n              /etc/netplan/*.yaml\n    get       Get a setting by specifying a nested key like\n              \"ethernets.eth0.addresses\", or \"all\"\n    info      Show available features\n    ip        Retrieve IP information from the system\n    set       Add new setting by specifying a dotted key=value pair like\n              ethernets.eth0.dhcp4=true\n    rebind    Rebind SR-IOV virtual functions of given physical functions to\n              their driver\n    status    Query networking state of the running system\n    try       Try to apply a new netplan config to running system, with\n              automatic rollback"
+              }
+            ]
+          }
+        ],
+        "package": "netplan.io",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.1.2-8ubuntu1~24.04.3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 112.0,
+        "archive_sha256": "e390b66584704aff3596094994186c684474a148d876694337af39634664cbaf",
+        "binding_kind": "apt",
+        "description": "Declarative network configuration for various backends at runtime",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "at",
+          "runtime"
+        ],
+        "name": "netplan.io",
+        "packages": [],
+        "query": "at",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "1.1.2-8ubuntu1~24.04.3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "7a7aa225f02284c954c8940417a875fb65d38fc1f6220190220f18dfdc374027",
+        "executables": [],
+        "package": "node-type-check",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.4.0+dfsg-3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 112.0,
+        "archive_sha256": "7a7aa225f02284c954c8940417a875fb65d38fc1f6220190220f18dfdc374027",
+        "binding_kind": "apt",
+        "description": "Check the types of JavaScript values at runtime",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "at",
+          "runtime"
+        ],
+        "name": "node-type-check",
+        "packages": [],
+        "query": "at",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "0.4.0+dfsg-3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "cf7bb9b2fe33257c69cc4123a0f13ea5e41f92eb5d136ee2403ab72ae180cad6",
+        "executables": [
+          {
+            "executable": "/usr/bin/standardskriver",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "Traceback (most recent call last):\n  File \"/usr/bin/standardskriver\", line 62, in <module>\n    import netaddr\nModuleNotFoundError: No module named 'netaddr'"
+              }
+            ]
+          }
+        ],
+        "package": "standardskriver",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.0.4-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 112.0,
+        "archive_sha256": "cf7bb9b2fe33257c69cc4123a0f13ea5e41f92eb5d136ee2403ab72ae180cad6",
+        "binding_kind": "apt",
+        "description": "Tool for dynamically setting a user's default printer at desktop session logon",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "at",
+          "user"
+        ],
+        "name": "standardskriver",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "0.0.4-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "e585b1694b854c3b75bfb39cc4022cafe7b14e44fd435433b613b8fb9919cb41",
+        "executables": [],
+        "package": "dbus-user-session",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.14.10-4ubuntu4.1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 96.0,
+        "archive_sha256": "e585b1694b854c3b75bfb39cc4022cafe7b14e44fd435433b613b8fb9919cb41",
+        "binding_kind": "apt",
+        "description": "simple interprocess messaging system (systemd --user integration)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "dbus-user-session",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.14.10-4ubuntu4.1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "d02c7eca01652497ba2dd753c71de31913fa4be2825883b138270fc1d53722ae",
+        "executables": [
+          {
+            "executable": "/usr/bin/dh_user-session-migration",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "Usage: dh_user-session-migration [options]\n\n  dh_user-session-migration is a part of debhelper. See debhelper(7)\n  and dh_user-session-migration(1) for complete usage instructions."
+              }
+            ]
+          }
+        ],
+        "package": "dh-user-session-migration",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.4.1ubuntu3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 96.0,
+        "archive_sha256": "d02c7eca01652497ba2dd753c71de31913fa4be2825883b138270fc1d53722ae",
+        "binding_kind": "apt",
+        "description": "debhelper extension for user-session-migration support",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "dh-user-session-migration",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.4.1ubuntu3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "fcf40e17ab33ebf78ccf2c94a9ea65782afbfb4249fb457cd2483897dcef398e",
+        "executables": [],
+        "package": "game-data-packager-runtime",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "77ubuntu2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 96.0,
+        "archive_sha256": "fcf40e17ab33ebf78ccf2c94a9ea65782afbfb4249fb457cd2483897dcef398e",
+        "binding_kind": "apt",
+        "description": "Launcher for proprietary games",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "game-data-packager-runtime",
+        "packages": [],
+        "query": "at",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "77ubuntu2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ProbeFailure:APT_INSTALL_FAILED:: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.147.219.192 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/gstreamer1.0-plugins-base_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.147.219.192 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/libgstreamer-plugins-good1.0-0_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 52.147.219.192 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/gstreamer1.0-plugins-good_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 52.147.219.192 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-gl1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.147.219.192 80]\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\n",
+      "status": "PROBE_FAILED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 96.0,
+        "archive_sha256": "9fadb9ed9e8e2ca10d8566f6cb5a8c4e9367931ba22e4bba1a0a320d066bb470",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Catalan)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-ca",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ProbeFailure:APT_INSTALL_FAILED:: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.147.219.192 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/gstreamer1.0-plugins-base_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.147.219.192 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/libgstreamer-plugins-good1.0-0_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 52.147.219.192 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/gstreamer1.0-plugins-good_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 52.147.219.192 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-gl1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.147.219.192 80]\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\n",
+      "status": "PROBE_FAILED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 96.0,
+        "archive_sha256": "fd2edb8a0ab3f2a93f6eae5583f357ed1815aa675f8fa45bf5a9734dec8f18c1",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Gujarati)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-gu",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ProbeFailure:APT_INSTALL_FAILED:: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.147.219.192 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/gstreamer1.0-plugins-base_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.147.219.192 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/libgstreamer-plugins-good1.0-0_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 52.147.219.192 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/gstreamer1.0-plugins-good_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 52.147.219.192 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-gl1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.147.219.192 80]\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\n",
+      "status": "PROBE_FAILED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 96.0,
+        "archive_sha256": "24dbf37a172416688a59c73f87e69094c734ece800f488ab38e8cdcd58cbebe5",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Croatian)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-hr",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      }
+    }
+  ],
+  "goal": "For every user returned at runtime, if that user's username length is at most 8 characters generate a QR code image encoding that username; otherwise generate a Code 128 barcode image encoding that username",
+  "mission_id": "ASTRA-RUNTIME-LIVE-DYNAMIC-FANOUT-001",
+  "role_conditioned_discovery": [
+    {
+      "binding_performed": false,
+      "candidate_count": 24,
+      "candidates": [
+        {
+          "archive_sha256": "e585b1694b854c3b75bfb39cc4022cafe7b14e44fd435433b613b8fb9919cb41",
+          "binding_kind": "apt",
+          "description": "simple interprocess messaging system (systemd --user integration)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "user"
+          ],
+          "name": "dbus-user-session",
+          "packages": [],
+          "query": "user",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.14.10-4ubuntu4.1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "d02c7eca01652497ba2dd753c71de31913fa4be2825883b138270fc1d53722ae",
+          "binding_kind": "apt",
+          "description": "debhelper extension for user-session-migration support",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "user"
+          ],
+          "name": "dh-user-session-migration",
+          "packages": [],
+          "query": "user",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.4.1ubuntu3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "ce6c4907acf695d28bbb900ddf98c232cd1bda7142edcc1d13fd1984c66491b1",
+          "binding_kind": "apt",
+          "description": "GNOME Help",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "user"
+          ],
+          "name": "gnome-user-docs",
+          "packages": [],
+          "query": "user",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "46.0-1ubuntu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "da541d3ad7557a81fb343979996852625831989b4dab4dbfe447a06c3f26f6b8",
+          "binding_kind": "apt",
+          "description": "GNOME Help (Assamese)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "user"
+          ],
+          "name": "gnome-user-docs-as",
+          "packages": [],
+          "query": "user",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "46.0-1ubuntu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "9fadb9ed9e8e2ca10d8566f6cb5a8c4e9367931ba22e4bba1a0a320d066bb470",
+          "binding_kind": "apt",
+          "description": "GNOME Help (Catalan)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "user"
+          ],
+          "name": "gnome-user-docs-ca",
+          "packages": [],
+          "query": "user",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "46.0-1ubuntu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "aaaf8c6054906afdd0fa7f9c5b5ca9f9be66ae55b95d8e6092eb79541042ca75",
+          "binding_kind": "apt",
+          "description": "GNOME Help (Czech)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "user"
+          ],
+          "name": "gnome-user-docs-cs",
+          "packages": [],
+          "query": "user",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "46.0-1ubuntu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "d15d0240eb401e5364394f6c187b7ab5ee427203c270120fbdf5930772eedac2",
+          "binding_kind": "apt",
+          "description": "GNOME Help (Danish)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "user"
+          ],
+          "name": "gnome-user-docs-da",
+          "packages": [],
+          "query": "user",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "46.0-1ubuntu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "d6bb084067d9aded3681bb7160046c4d2d0165bfb27d7bb111f8931dbbbb4a8c",
+          "binding_kind": "apt",
+          "description": "GNOME Help (German)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "user"
+          ],
+          "name": "gnome-user-docs-de",
+          "packages": [],
+          "query": "user",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "46.0-1ubuntu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "6da00bfb239d208bb577654b3d51cda119ede23e638ef1c567e532a29534ba31",
+          "binding_kind": "apt",
+          "description": "GNOME Help (Greek)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "user"
+          ],
+          "name": "gnome-user-docs-el",
+          "packages": [],
+          "query": "user",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "46.0-1ubuntu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "8baa25c420b713f12ebe69f8207dee00b0e21c03c8d064d4824f3f1de0ef2274",
+          "binding_kind": "apt",
+          "description": "GNOME Help (Spanish)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "user"
+          ],
+          "name": "gnome-user-docs-es",
+          "packages": [],
+          "query": "user",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "46.0-1ubuntu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "945a2fb946931fa42aa360c3608f1de07ee2bf84d16877735d213ac82b3b7ec5",
+          "binding_kind": "apt",
+          "description": "GNOME Help (Basque)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "user"
+          ],
+          "name": "gnome-user-docs-eu",
+          "packages": [],
+          "query": "user",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "46.0-1ubuntu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "8dedd42e4eb6e984263d3122543693561f149a31bea0ac36cd4d5252877cb10a",
+          "binding_kind": "apt",
+          "description": "GNOME Help (Farsi)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "user"
+          ],
+          "name": "gnome-user-docs-fa",
+          "packages": [],
+          "query": "user",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "46.0-1ubuntu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "045a34dd87819e02832d0e17faef8ad3cb5d76a61c5e647bc659e7bbfabe2f3e",
+          "binding_kind": "apt",
+          "description": "GNOME Help (Finnish)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "user"
+          ],
+          "name": "gnome-user-docs-fi",
+          "packages": [],
+          "query": "user",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "46.0-1ubuntu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "3bcbcb9fe608b790b4a495b604f8a0d93419af3d7ea0d5c782a66b298df4709b",
+          "binding_kind": "apt",
+          "description": "GNOME Help (French)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "user"
+          ],
+          "name": "gnome-user-docs-fr",
+          "packages": [],
+          "query": "user",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "46.0-1ubuntu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "6a5bef9bedd32960f5e22fc027c9b44ec8a3c95b9f998e7570eb8af85ad10d74",
+          "binding_kind": "apt",
+          "description": "GNOME Help (Galician)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "user"
+          ],
+          "name": "gnome-user-docs-gl",
+          "packages": [],
+          "query": "user",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "46.0-1ubuntu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "fd2edb8a0ab3f2a93f6eae5583f357ed1815aa675f8fa45bf5a9734dec8f18c1",
+          "binding_kind": "apt",
+          "description": "GNOME Help (Gujarati)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "user"
+          ],
+          "name": "gnome-user-docs-gu",
+          "packages": [],
+          "query": "user",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "46.0-1ubuntu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "32246b7e540513f1503ae1bdc14a0ba1887151a3ef9789bafd6805dbb5510920",
+          "binding_kind": "apt",
+          "description": "GNOME Help (Hebrew)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "user"
+          ],
+          "name": "gnome-user-docs-he",
+          "packages": [],
+          "query": "user",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "46.0-1ubuntu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "1567292bd065fe8876c475f64a635f5ff19db5a6899a379023db1abd98ef31b0",
+          "binding_kind": "apt",
+          "description": "GNOME Help (Hindi)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "user"
+          ],
+          "name": "gnome-user-docs-hi",
+          "packages": [],
+          "query": "user",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "46.0-1ubuntu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "24dbf37a172416688a59c73f87e69094c734ece800f488ab38e8cdcd58cbebe5",
+          "binding_kind": "apt",
+          "description": "GNOME Help (Croatian)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "user"
+          ],
+          "name": "gnome-user-docs-hr",
+          "packages": [],
+          "query": "user",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "46.0-1ubuntu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c2a82e383992649cd559d31ceb3b1755595c2dcceda2f826c5e4bd08f61f5ca3",
+          "binding_kind": "apt",
+          "description": "GNOME Help (Hungarian)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "user"
+          ],
+          "name": "gnome-user-docs-hu",
+          "packages": [],
+          "query": "user",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "46.0-1ubuntu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "2b7423416ba12fb21d1c67a4e5683a16474a9db62156ab9728e32de12f5b6c51",
+          "binding_kind": "apt",
+          "description": "GNOME Help (Indonesian)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "user"
+          ],
+          "name": "gnome-user-docs-id",
+          "packages": [],
+          "query": "user",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "46.0-1ubuntu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "8cf66f1f2a01af232e0246a5cbf54779eaf61ab51f7a0c044d56708062d209f6",
+          "binding_kind": "apt",
+          "description": "GNOME Help (Italian)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "user"
+          ],
+          "name": "gnome-user-docs-it",
+          "packages": [],
+          "query": "user",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "46.0-1ubuntu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "094907e5652c132efce5863730d7c5843e67095d2a5c52262647a67dede77fa1",
+          "binding_kind": "apt",
+          "description": "GNOME Help (Japanese)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "user"
+          ],
+          "name": "gnome-user-docs-ja",
+          "packages": [],
+          "query": "user",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "46.0-1ubuntu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "4e48a2981a949f5cf59a889cb59469b95494c3197629dd356962447d6d23e1a6",
+          "binding_kind": "apt",
+          "description": "GNOME Help (Kannada)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "user"
+          ],
+          "name": "gnome-user-docs-kn",
+          "packages": [],
+          "query": "user",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "46.0-1ubuntu1",
+          "zero_cost_eligible": true
+        }
+      ],
+      "effect": "user returned",
+      "errors": [],
+      "queries": [
+        "user",
+        "returned"
+      ],
+      "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+      "source": "APT_CATALOG",
+      "source_url": null
+    }
+  ],
+  "schema": "PROJECT_BRAIN_AUTO_APT_CLI_ACQUISITION_EVIDENCE_V1",
+  "status": "NO_COMPATIBLE_CONTRACT"
+}
