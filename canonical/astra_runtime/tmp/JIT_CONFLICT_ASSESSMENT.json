@@ -1,0 +1,31 @@
+{
+  "assessed_at_utc": "2026-09-25T21:44:32.227910+00:00",
+  "distinct_fresh_values": 2,
+  "evidence_count": 2,
+  "fresh_evidence_count": 2,
+  "invalid": [],
+  "records": [
+    {
+      "age_s": null,
+      "body_sha256": "38b25e6c1ad89aa183e0b73a57bdee90fdd186e60fa54d29e81113afe0dbeab2",
+      "path": "canonical/astra_runtime/tmp/JIT_CONFLICT_ALPHA.json",
+      "retrieved_at_utc": "2026-09-25T21:43:42.168231+00:00",
+      "source_type": "external_json",
+      "source_url": "https://httpbin.org/get?claim=alpha",
+      "stale": false,
+      "value": "alpha"
+    },
+    {
+      "age_s": null,
+      "body_sha256": "299c231f6a21bd0cef3c52081e8c60bb1ff5c1f3c9f68ce092877eb4b644da23",
+      "path": "canonical/astra_runtime/tmp/JIT_CONFLICT_BETA.json",
+      "retrieved_at_utc": "2026-09-25T21:43:42.308653+00:00",
+      "source_type": "external_json",
+      "source_url": "https://httpbin.org/get?claim=beta",
+      "stale": false,
+      "value": "beta"
+    }
+  ],
+  "schema": "PROJECT_BRAIN_KNOWLEDGE_ASSESSMENT_V1",
+  "status": "CONFLICTED"
+}

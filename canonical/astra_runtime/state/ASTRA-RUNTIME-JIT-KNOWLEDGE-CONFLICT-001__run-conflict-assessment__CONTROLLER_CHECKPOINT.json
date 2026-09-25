@@ -69,16 +69,78 @@
         "value": "beta",
         "verified": true
       }
+    },
+    {
+      "cycle": 2,
+      "plan": {
+        "args": {
+          "evidence_paths": [
+            "canonical/astra_runtime/tmp/JIT_CONFLICT_ALPHA.json",
+            "canonical/astra_runtime/tmp/JIT_CONFLICT_BETA.json"
+          ],
+          "output_path": "canonical/astra_runtime/tmp/JIT_CONFLICT_ASSESSMENT.json"
+        },
+        "expect": {
+          "field": "status",
+          "type": "field_equals",
+          "value": "CONFLICTED"
+        },
+        "type": "assess_knowledge_consistency"
+      },
+      "result": {
+        "distinct_fresh_values": 2,
+        "evidence_count": 2,
+        "fresh_evidence_count": 2,
+        "output_path": "canonical/astra_runtime/tmp/JIT_CONFLICT_ASSESSMENT.json",
+        "status": "CONFLICTED",
+        "type": "assess_knowledge_consistency",
+        "verified": true
+      }
+    },
+    {
+      "cycle": 3,
+      "plan": {
+        "args": {
+          "assessment_path": "canonical/astra_runtime/tmp/JIT_CONFLICT_ASSESSMENT.json",
+          "expected_status": "CONFLICTED"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "assert_knowledge_status"
+      },
+      "result": {
+        "assessment_path": "canonical/astra_runtime/tmp/JIT_CONFLICT_ASSESSMENT.json",
+        "expected_status": "CONFLICTED",
+        "observed_status": "CONFLICTED",
+        "type": "assert_knowledge_status",
+        "verified": true
+      }
+    },
+    {
+      "cycle": 4,
+      "plan": {
+        "args": {
+          "summary": "KNOWLEDGE_CONFLICT_DETECTED"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "KNOWLEDGE_CONFLICT_DETECTED",
+        "type": "finish"
+      }
     }
   ],
   "created_at_utc": "2026-09-25T21:43:41.957491+00:00",
   "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-CONFLICT-001",
-  "next_action_index": 2,
+  "next_action_index": 5,
   "plan_sha256": "a74a48dbcc78fa334fff3d79b17e263e1214090d102b7c23adcb2b7d8fcfb523",
-  "resume_count": 0,
+  "resume_count": 1,
   "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
-  "status": "IN_PROGRESS",
+  "status": "COMPLETE",
   "step_id": "run-conflict-assessment",
   "test_interrupt_injected": false,
-  "updated_at_utc": "2026-09-25T21:43:42.309014+00:00"
+  "updated_at_utc": "2026-09-25T21:44:32.230158+00:00"
 }
