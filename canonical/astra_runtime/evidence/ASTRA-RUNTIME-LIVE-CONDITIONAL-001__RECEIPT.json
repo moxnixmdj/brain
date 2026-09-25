@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T04:19:36.005555+00:00",
+  "mission_id": "ASTRA-RUNTIME-LIVE-CONDITIONAL-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_LIVE_CONDITIONAL_001.json",
+  "mission_sha256": "33cc1314903fee59028a282a3f564cc8af884ed793841e3d4f726c092353c9a4",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "e0212e6530f33285d8dc0ef322585e31986e9f46cc0e0b1f5e4dcf2684646686",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

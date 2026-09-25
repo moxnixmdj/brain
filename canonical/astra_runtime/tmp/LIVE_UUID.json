@@ -1,0 +1,14 @@
+{
+  "document_ready_state": "complete",
+  "final_url": "https://httpbin.org/uuid",
+  "observed_text": "{\n  \"uuid\": \"85a36bfa-ad6c-4227-b6b6-767e0523799f\"\n}\n",
+  "page_title": "",
+  "screenshot_bytes": 10714,
+  "screenshot_path": "canonical/astra_runtime/tmp/LIVE_UUID.png",
+  "screenshot_sha256": "a7e042ce1882232701351fec59889f96382500002162cbb1f67cb8762df931ef",
+  "source_url": "https://httpbin.org/uuid",
+  "viewport": {
+    "height": 857,
+    "width": 1440
+  }
+}

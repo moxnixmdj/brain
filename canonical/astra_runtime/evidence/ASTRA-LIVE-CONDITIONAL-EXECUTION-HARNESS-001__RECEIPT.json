@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T04:19:36.043658+00:00",
+  "mission_id": "ASTRA-LIVE-CONDITIONAL-EXECUTION-HARNESS-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_LIVE_CONDITIONAL_EXECUTION_HARNESS_001.json",
+  "mission_sha256": "c435f21baaae8205a24fefccc14c6c7b357db5901cd79440e4a91445b58de2b5",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "a7bfbc5cca178a40e33817f4ffdda094d3c4407081722d7504ef78274ad1d345",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
