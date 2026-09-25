@@ -1,0 +1,72 @@
+{
+  "blocker": {
+    "adapter": "shell",
+    "error": "VERIFICATION_FAILED",
+    "mission_id": "ASTRA-VERIFY-MARKDOWN-PDF-001",
+    "observed_at_utc": "2026-09-25T00:01:47.670781+00:00",
+    "result": {
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib,sys\nroot=pathlib.Path('.').resolve()\np=root/'canonical/runtime/astra_runtime.py'\ns=importlib.util.spec_from_file_location('astra_runtime_pdf_readback',p)\nm=importlib.util.module_from_spec(s); sys.modules[s.name]=m; s.loader.exec_module(m)\nout=m._invoke_bound_capability({\n 'capability_id':'pdf.extract.text.pypdf',\n 'path':'canonical/astra_runtime/tmp/MARKDOWN_PDF_VERIFY.pdf',\n 'max_pages':20\n})\ntext=str(out.get('text') or '')\nrequired=['PROJECT BRAIN PDF CONVERSION','ALPHA-VERIFY-7319','BETA-VERIFY-2846','VERIFIED','COMPLETE']\nmissing=[x for x in required if x not in text]\nassert not missing,missing\nev={'schema':'PROJECT_BRAIN_INDEPENDENT_SEMANTIC_VERIFICATION_V1','verified':True,'verifier_capability':'pdf.extract.text.pypdf','required_strings':required,'extracted_text':text}\n(root/'canonical/astra_runtime/evidence/ASTRA-VERIFY-MARKDOWN-PDF-001__INDEPENDENT.json').write_text(json.dumps(ev,indent=2,sort_keys=True)+'\\n')\nprint('MARKDOWN_PDF_INDEPENDENT_SEMANTIC_VERIFIED')\nPY",
+      "duration_s": 1.579,
+      "returncode": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 14, in <module>\nAssertionError: ['PROJECT BRAIN PDF CONVERSION', 'ALPHA-VERIFY-7319', 'BETA-VERIFY-2846']\n",
+      "stdout": ""
+    },
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "independent-pypdf-semantic-check",
+    "step_index": 2
+  },
+  "created_at_utc": "2026-09-25T00:01:18.980588+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T00:01:18.988075+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\ncat > canonical/astra_runtime/tmp/MARKDOWN_PDF_VERIFY.md <<'EOF'\n# PROJECT BRAIN PDF CONVERSION\n\n| Capability | State |\n| --- | --- |\n| ALPHA-VERIFY-7319 | VERIFIED |\n| BETA-VERIFY-2846 | COMPLETE |\nEOF\ngrep -q 'ALPHA-VERIFY-7319' canonical/astra_runtime/tmp/MARKDOWN_PDF_VERIFY.md\necho MARKDOWN_FIXTURE_CREATED",
+        "duration_s": 0.007,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "MARKDOWN_FIXTURE_CREATED\n"
+      },
+      "step_id": "create-verification-markdown",
+      "step_index": 0
+    },
+    {
+      "completed_at_utc": "2026-09-25T00:01:46.091501+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib,sys\nroot=pathlib.Path('.').resolve()\np=root/'canonical/runtime/astra_runtime.py'\ns=importlib.util.spec_from_file_location('astra_runtime_pdf_verify',p)\nm=importlib.util.module_from_spec(s); sys.modules[s.name]=m; s.loader.exec_module(m)\nout=m._invoke_bound_capability({\n 'capability_id':'document.convert.markdown_pdf.pandoc_weasyprint',\n 'markdown_path':'canonical/astra_runtime/tmp/MARKDOWN_PDF_VERIFY.md',\n 'output_path':'canonical/astra_runtime/tmp/MARKDOWN_PDF_VERIFY.pdf',\n 'timeout_s':180\n})\n(root/'canonical/astra_runtime/evidence/ASTRA-VERIFY-MARKDOWN-PDF-001__PRODUCER.json').write_text(json.dumps(out,indent=2,sort_keys=True)+'\\n')\nassert out.get('output_verified') is True\nprint('MARKDOWN_PDF_PRODUCED')\nPY",
+        "duration_s": 27.103,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "MARKDOWN_PDF_PRODUCED\n"
+      },
+      "step_id": "invoke-pending-markdown-pdf",
+      "step_index": 1
+    },
+    {
+      "completed_at_utc": "2026-09-25T00:01:47.670763+00:00",
+      "ok": false,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib,sys\nroot=pathlib.Path('.').resolve()\np=root/'canonical/runtime/astra_runtime.py'\ns=importlib.util.spec_from_file_location('astra_runtime_pdf_readback',p)\nm=importlib.util.module_from_spec(s); sys.modules[s.name]=m; s.loader.exec_module(m)\nout=m._invoke_bound_capability({\n 'capability_id':'pdf.extract.text.pypdf',\n 'path':'canonical/astra_runtime/tmp/MARKDOWN_PDF_VERIFY.pdf',\n 'max_pages':20\n})\ntext=str(out.get('text') or '')\nrequired=['PROJECT BRAIN PDF CONVERSION','ALPHA-VERIFY-7319','BETA-VERIFY-2846','VERIFIED','COMPLETE']\nmissing=[x for x in required if x not in text]\nassert not missing,missing\nev={'schema':'PROJECT_BRAIN_INDEPENDENT_SEMANTIC_VERIFICATION_V1','verified':True,'verifier_capability':'pdf.extract.text.pypdf','required_strings':required,'extracted_text':text}\n(root/'canonical/astra_runtime/evidence/ASTRA-VERIFY-MARKDOWN-PDF-001__INDEPENDENT.json').write_text(json.dumps(ev,indent=2,sort_keys=True)+'\\n')\nprint('MARKDOWN_PDF_INDEPENDENT_SEMANTIC_VERIFIED')\nPY",
+        "duration_s": 1.579,
+        "returncode": 1,
+        "stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 14, in <module>\nAssertionError: ['PROJECT BRAIN PDF CONVERSION', 'ALPHA-VERIFY-7319', 'BETA-VERIFY-2846']\n",
+        "stdout": ""
+      },
+      "step_id": "independent-pypdf-semantic-check",
+      "step_index": 2
+    }
+  ],
+  "mission_id": "ASTRA-VERIFY-MARKDOWN-PDF-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_MARKDOWN_PDF_001.json",
+  "mission_sha256": "a643a5e098bb84eb2d3439756150a5f033aa0b33985e86f77d3257782c287c15",
+  "next_step": 2,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-25T00:01:47.671102+00:00"
+}

@@ -1,0 +1,34 @@
+{
+  "adapter": "pandoc_weasyprint",
+  "argv": [
+    "pandoc",
+    "/home/runner/work/brain/brain/canonical/astra_runtime/tmp/MARKDOWN_PDF_VERIFY.md",
+    "-o",
+    "/home/runner/work/brain/brain/canonical/astra_runtime/tmp/MARKDOWN_PDF_VERIFY.pdf",
+    "--pdf-engine=weasyprint"
+  ],
+  "capability_id": "document.convert.markdown_pdf.pandoc_weasyprint",
+  "dependency": {
+    "origin": "Ubuntu",
+    "packages": [
+      {
+        "archive_sha256": "021cf93191aea780c273e82ca3ab575b1522992705b6c28e350aa502573a27b5",
+        "name": "pandoc",
+        "version": "3.1.3+ds-2"
+      },
+      {
+        "archive_sha256": "79a1303592e2882ff58fb58658c6ae70f925ce335c6342cb1e778ed049514981",
+        "name": "weasyprint",
+        "version": "61.1-1"
+      }
+    ],
+    "status": "INSTALLED_VERIFIED"
+  },
+  "input_path": "canonical/astra_runtime/tmp/MARKDOWN_PDF_VERIFY.md",
+  "output_bytes": 7530,
+  "output_path": "canonical/astra_runtime/tmp/MARKDOWN_PDF_VERIFY.pdf",
+  "output_sha256": "1f35a63755e23c0435555bb2bd919adf729f4fdbab6594ad6fafa9e208aac301",
+  "output_verified": true,
+  "returncode": 0,
+  "stderr": "[WARNING] This document format requires a nonempty <title> element.\n  Defaulting to 'MARKDOWN_PDF_VERIFY' as the title.\n  To specify a title, use 'title' in metadata or --metadata title=\"...\".\nWARNING: Ignored `text-rendering: optimizeLegibility` at 15:7, unknown property.\nWARNING: Expected a media type, got '(max-width: 600px)'\nWARNING: Invalid media type ' (max-width: 600px) ' the whole @media rule was ignored at 18:5.\nWARNING: Ignored `overflow-x: auto` at 108:7, unknown property.\nWARNING: Ignored `gap: min(4vw, 1.5em)` at 145:32, unknown property.\nWARNING: Ignored `overflow-x: auto` at 146:28, unknown property.\n"
+}
