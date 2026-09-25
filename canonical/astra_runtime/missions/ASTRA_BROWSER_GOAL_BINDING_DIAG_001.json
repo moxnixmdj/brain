@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-BROWSER-GOAL-BINDING-DIAG-001",
+  "purpose": "Read-only isolate of the generic rendered-browser goal binding failure.",
+  "steps": [
+    {
+      "id": "diagnose-browser-goal-binding",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib,sys\np=pathlib.Path('canonical/runtime/goal_compiler.py')\ns=importlib.util.spec_from_file_location('g',p); g=importlib.util.module_from_spec(s); sys.modules[s.name]=g; s.loader.exec_module(g)\nroot=pathlib.Path('.').resolve()\nentry={\n \"status\":\"VERIFIED_BOUND_CAPABILITY\",\n \"provides\":[\"web.browser.rendered.capture\"],\"requires\":[],\n \"keywords\":[\"browser\",\"rendered\",\"web\",\"screenshot\",\"url\"],\n \"action_template\":{\"type\":\"invoke_capability\",\"args\":{\n  \"capability_id\":\"web.browser.rendered.capture.test\",\n  \"url\":\"${input.url}\",\"screenshot_path\":\"${input.screenshot_path}\",\"result_path\":\"${input.result_path}\"\n }}\n}\ngoal=(\"Using a rendered browser, open https://example.com and save a screenshot to \"\n      \"canonical/astra_runtime/tmp/EXAMPLE.png and save the result to \"\n      \"canonical/astra_runtime/tmp/EXAMPLE.json\")\nout={\"placeholders\":g._placeholders(entry[\"action_template\"]),\"repo_paths\":[x[0] for x in g._repo_paths(goal,root)],\n     \"score\":g._score(goal,\"web.browser.rendered.capture.test\",entry)}\ntry: out[\"bound\"]=g._bind_inputs(goal,root,entry)\nexcept Exception as e: out[\"bind_error\"]=type(e).__name__+\":\"+str(e)\nprint(json.dumps(out,sort_keys=True))\nprint(\"BROWSER_GOAL_BINDING_DIAG_COMPLETE\")\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "BROWSER_GOAL_BINDING_DIAG_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "read_only_diagnostic": true
+  }
+}
