@@ -1831,7 +1831,34 @@
         },
         "producer_independent_verifier": true,
         "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001__RESULT.json"
-      }
+      },
+      "input_contract": {
+        "url": {
+          "kind": "goal_input",
+          "key": "url"
+        },
+        "screenshot_path": {
+          "kind": "goal_input",
+          "key": "screenshot_path"
+        },
+        "result_path": {
+          "kind": "goal_input",
+          "key": "result_path"
+        }
+      },
+      "result_fields": [
+        "source_url",
+        "final_url",
+        "page_title",
+        "text",
+        "text_nonempty",
+        "result_path",
+        "screenshot_path",
+        "screenshot_sha256",
+        "screenshot_bytes",
+        "rendered",
+        "output_verified"
+      ]
     },
     "web.release.verify.independent_http": {
       "action_template": {
