@@ -41,32 +41,42 @@ class GoalCompilerTests(unittest.TestCase):
         self.assertEqual(out["inputs"]["text"],"PROJECT BRAIN")
         self.assertEqual(out["inputs"]["output_path"],"canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png")
 
-    def test_compound_goal_uses_jq_then_exposes_pdf_frontier(self):
+    def test_compound_goal_compiles_full_verified_audit_pipeline(self):
         goal=(
             "Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json. "
             "Create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.md containing a table with every VERIFIED_BOUND_CAPABILITY. "
             "Then create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.pdf from that report and verify that the final PDF contains every capability ID."
         )
-        with self.assertRaises(compiler.GoalCompilationFailure) as ctx:
-            compiler.compile_goal(goal,self.registry(),ROOT)
-        self.assertEqual(ctx.exception.code,"GOAL_COMPILATION_SUBGOAL_UNRESOLVED")
-        detail=json.loads(ctx.exception.detail)
-        self.assertEqual(detail["index"],2)
-        self.assertTrue(detail["subgoal"].startswith("create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.pdf"))
-        self.assertEqual(detail["cause"],"GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH")
-
-        clauses=compiler.decompose_goal(goal)
-        self.assertEqual(len(clauses),4)
-        structured=compiler._compile_json_markdown_table(
-            clauses[1],
-            ["canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"],
-            self.registry(),
-            ROOT,
+        out=compiler.compile_goal(goal,self.registry(),ROOT)
+        self.assertEqual(out["compiler_mode"],"DETERMINISTIC_COMPOUND_ACTION_PLAN")
+        self.assertEqual(len(out["clauses"]),4)
+        modes=[x["mode"] for x in out["compiled_parts"]]
+        self.assertEqual(modes,[
+            "NATIVE_READ",
+            "VERIFIED_STRUCTURED_TRANSFORM",
+            "VERIFIED_CAPABILITY",
+            "INDEPENDENT_CONTENT_VERIFICATION",
+        ])
+        self.assertEqual(out["compiled_parts"][1]["capability_id"],"json.query.jq")
+        self.assertEqual(
+            out["compiled_parts"][2]["selected_capability"],
+            "document.convert.markdown_pdf.pandoc_weasyprint",
         )
-        self.assertIsNotNone(structured)
-        self.assertEqual(structured["evidence"]["capability_id"],"json.query.jq")
-        self.assertEqual(structured["output_path"],"canonical/astra_runtime/tmp/CAPABILITY_AUDIT.md")
-        self.assertIn("VERIFIED_BOUND_CAPABILITY",structured["action"]["args"]["filter"])
+        self.assertEqual(
+            out["compiled_parts"][2]["inputs"]["markdown_path"],
+            "canonical/astra_runtime/tmp/CAPABILITY_AUDIT.md",
+        )
+        self.assertEqual(
+            out["compiled_parts"][2]["inputs"]["output_path"],
+            "canonical/astra_runtime/tmp/CAPABILITY_AUDIT.pdf",
+        )
+        actions=out["controller_actions"]
+        self.assertEqual([x["type"] for x in actions],[
+            "read_file","invoke_capability","invoke_capability",
+            "invoke_capability","assert_text_contains_json_keys","finish",
+        ])
+        ref=actions[4]["args"]["text"]["$result"]
+        self.assertEqual(ref,{"cycle":3,"field":"text"})
 
     def test_plain_qr_goal_selects_verified_qr_and_binds_arguments(self):
         goal="Generate a QR code image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png."
