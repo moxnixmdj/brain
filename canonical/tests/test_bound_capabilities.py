@@ -2,6 +2,7 @@
 import importlib.util
 import json
 import pathlib
+import re
 import sys
 import unittest
 
@@ -17,6 +18,7 @@ def load(name, path):
 
 runtime = load("astra_runtime_bound_test", CANONICAL_ROOT/"runtime"/"astra_runtime.py")
 adapter = load("pdf_pypdf_bound_test", CANONICAL_ROOT/"runtime"/"bound_capabilities"/"pdf_pypdf.py")
+jq_adapter = load("jq_query_bound_test", CANONICAL_ROOT/"runtime"/"bound_capabilities"/"jq_query.py")
 
 class BoundCapabilityTests(unittest.TestCase):
     def test_registry_is_zero_cost_and_hash_pinned(self):
@@ -56,6 +58,15 @@ class BoundCapabilityTests(unittest.TestCase):
     def test_unknown_bound_capability_rejected(self):
         with self.assertRaisesRegex(runtime.Blocker,"BOUND_CAPABILITY_UNKNOWN"):
             runtime._invoke_bound_capability({"capability_id":"does.not.exist"})
+
+    def test_jq_allows_inputs_as_object_key(self):
+        filt='.["on"].workflow_dispatch.inputs // {}'
+        self.assertFalse(any(re.search(p,filt,flags=re.IGNORECASE) for p in jq_adapter.FORBIDDEN_FILTER_PATTERNS))
+
+    def test_jq_still_rejects_external_input_primitives(self):
+        filters=("inputs","input()","env.PATH","$ENV.PATH")
+        for filt in filters:
+            self.assertTrue(any(re.search(p,filt,flags=re.IGNORECASE) for p in jq_adapter.FORBIDDEN_FILTER_PATTERNS),filt)
 
 if __name__=="__main__":
     unittest.main(verbosity=2)
