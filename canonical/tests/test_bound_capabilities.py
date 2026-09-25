@@ -55,6 +55,16 @@ class BoundCapabilityTests(unittest.TestCase):
         self.assertEqual(inherited["action"]["args"]["path"],"canonical/example.pdf")
         self.assertIn("pdf.extract.text.pypdf",enriched["_inherited_bound_capabilities"])
 
+    def test_python_stdlib_capabilities_declare_importable_module(self):
+        data=json.loads((CANONICAL_ROOT/"runtime"/"BOUND_CAPABILITY_REGISTRY_V1.json").read_text())
+        for cid,cap in data["capabilities"].items():
+            source=cap.get("source") or {}
+            if source.get("type")!="python_stdlib":
+                continue
+            module=str(source.get("module") or "").strip()
+            self.assertTrue(module,cid)
+            self.assertIsNotNone(importlib.util.find_spec(module),cid)
+
     def test_unknown_bound_capability_rejected(self):
         with self.assertRaisesRegex(runtime.Blocker,"BOUND_CAPABILITY_UNKNOWN"):
             runtime._invoke_bound_capability({"capability_id":"does.not.exist"})
