@@ -1,0 +1,147 @@
+{
+  "schema": "PROJECT_BRAIN_STATUS_MANIFEST_V1",
+  "status_value": "VERIFIED_BOUND_CAPABILITY",
+  "records": [
+    {
+      "capability_id": "auto.apt.zint",
+      "verification_mission_id": "ASTRA-AUTO-VERIFY-ZINT-85BC9CD2C9A4",
+      "verification_paths": [
+        "canonical/astra_runtime/evidence/ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003__zint__85bc9cd2c9a4__AUTO_VERIFY.json"
+      ],
+      "source": {
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "zint",
+            "sha256": "cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769",
+            "version": "2.13.0-1build3"
+          }
+        ],
+        "type": "apt"
+      }
+    },
+    {
+      "capability_id": "document.convert.markdown_pdf.pandoc_weasyprint",
+      "verification_mission_id": "ASTRA-VERIFY-MARKDOWN-PDF-001",
+      "verification_paths": [
+        "canonical/astra_runtime/evidence/ASTRA-VERIFY-MARKDOWN-PDF-001__INDEPENDENT.json"
+      ],
+      "source": {
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "pandoc",
+            "sha256": "021cf93191aea780c273e82ca3ab575b1522992705b6c28e350aa502573a27b5",
+            "version": "3.1.3+ds-2"
+          },
+          {
+            "name": "weasyprint",
+            "sha256": "79a1303592e2882ff58fb58658c6ae70f925ce335c6342cb1e778ed049514981",
+            "version": "61.1-1"
+          }
+        ],
+        "type": "apt"
+      }
+    },
+    {
+      "capability_id": "image.qr.generate.qrencode",
+      "verification_mission_id": "ASTRA-RUNTIME-BOUND-QR-GENERIC-001",
+      "verification_paths": [
+        "canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-QR-GENERIC-001__RECEIPT.json"
+      ],
+      "source": {
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "qrencode",
+            "sha256": "613c5a22316489ec6a9ce5d59190293df15dd4612b55432dde04c62f7c1a0e25",
+            "version": "4.1.1-1build2"
+          }
+        ],
+        "type": "apt"
+      }
+    },
+    {
+      "capability_id": "json.query.jq",
+      "verification_mission_id": "ASTRA-VERIFY-JQ-STRUCTURED-DATA-001",
+      "verification_paths": [
+        "canonical/astra_runtime/evidence/ASTRA-VERIFY-JQ-STRUCTURED-DATA-001__INDEPENDENT.json"
+      ],
+      "source": {
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "jq",
+            "sha256": "f59183392f84fe67b407b494d8ba6185e9b0e4a106ffcb369490bd20a83fd40e",
+            "version": "1.7.1-3ubuntu0.24.04.2"
+          }
+        ],
+        "type": "apt"
+      }
+    },
+    {
+      "capability_id": "pdf.extract.ocr.tesseract",
+      "verification_mission_id": "ASTRA-RUNTIME-BOUND-PDF-OCR-001",
+      "verification_paths": [
+        "canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-PDF-OCR-001__RECEIPT.json"
+      ],
+      "source": {
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "tesseract-ocr",
+            "sha256": "2dfac382d77215aee0c3de4a2a2205505d5f2195e72e79b54ad32154fc08da77",
+            "version": "5.3.4-1build5"
+          },
+          {
+            "name": "poppler-utils",
+            "sha256": "fb936375b183a9d8ecb5b1fc5665a44110ca130c445946fb575c0b800b1dc0f4",
+            "version": "24.02.0-1ubuntu9.9"
+          }
+        ],
+        "type": "apt"
+      }
+    },
+    {
+      "capability_id": "pdf.extract.text.pypdf",
+      "verification_mission_id": "ASTRA-RUNTIME-BOUND-PDF-TEXT-001",
+      "verification_paths": [
+        "canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-PDF-TEXT-001__RECEIPT.json"
+      ],
+      "source": {
+        "license": "BSD-3-Clause",
+        "metadata_url": "https://pypi.org/pypi/pypdf/6.19.0/json",
+        "project": "pypdf",
+        "trusted_publishing": true,
+        "type": "pypi",
+        "version": "6.19.0",
+        "wheel_filename": "pypdf-6.19.0-py3-none-any.whl",
+        "wheel_sha256": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14"
+      }
+    },
+    {
+      "capability_id": "archive.tar_gz.create_from_manifest",
+      "verification_mission_id": "ASTRA-VERIFY-MANIFEST-ARCHIVE-001",
+      "verification_paths": [
+        "canonical/astra_runtime/evidence/ASTRA-VERIFY-MANIFEST-ARCHIVE-001__RECEIPT.json"
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "module": "tarfile",
+        "adapter_path": "canonical/runtime/bound_capabilities/archive_tarfile.py"
+      }
+    },
+    {
+      "capability_id": "archive.verify.tar_gz.gnu",
+      "verification_mission_id": "ASTRA-VERIFY-MANIFEST-ARCHIVE-001",
+      "verification_paths": [
+        "canonical/astra_runtime/evidence/ASTRA-VERIFY-MANIFEST-ARCHIVE-001__RECEIPT.json"
+      ],
+      "source": {
+        "type": "system_tool",
+        "executable": "tar",
+        "adapter_path": "canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py"
+      }
+    }
+  ]
+}
