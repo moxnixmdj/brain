@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T17:23:54.919122+00:00",
+  "mission_id": "ASTRA-RUNTIME-MULTI-SOURCE-REDUCE-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_MULTI_SOURCE_REDUCE_002.json",
+  "mission_sha256": "42101af0e8de44638c6af83fb4a66039f256a1e774933d5547a1e40e7eea27a7",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "3242d58e6348c484893a3d933f3e57a8f2087be1b01e68d6040a0e070ba987a6",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
