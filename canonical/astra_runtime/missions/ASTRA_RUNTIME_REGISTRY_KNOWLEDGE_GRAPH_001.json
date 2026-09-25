@@ -1,0 +1,123 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-REGISTRY-KNOWLEDGE-GRAPH-001",
+  "purpose": "Deletion-readiness proof that the JIT knowledge path can be composed entirely from verified registry capability instances plus generic effect-result valueflow, with no task-specific knowledge compiler and no mission-invented executable actions.",
+  "goal": "Acquire two agreeing external observations, assess them through verified registry primitives, materialize the supported value, and independently verify the resulting fact artifact.",
+  "steps": [
+    {
+      "id": "plan-and-execute-registry-knowledge-graph",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 12,
+      "capability_problem": {
+        "initial_facts": ["network.http.available"],
+        "target_effects": ["knowledge.fact.materialized"],
+        "finish_summary": "REGISTRY_KNOWLEDGE_GRAPH_COMPLETE",
+        "max_expansions": 200,
+        "inputs": {},
+        "capabilities": [],
+        "capability_instances": [
+          {
+            "instance_id": "observe-a",
+            "capability_id": "knowledge.json.fetch.external",
+            "inputs": {
+              "url": "https://httpbin.org/get?claim=alpha",
+              "json_path": ["args", "claim"],
+              "output_path": "canonical/astra_runtime/tmp/REGISTRY_KNOWLEDGE_A.json",
+              "authoritative": false
+            },
+            "provides_as": {
+              "knowledge.observation.available": "knowledge.observation.a.available"
+            }
+          },
+          {
+            "instance_id": "observe-b",
+            "capability_id": "knowledge.json.fetch.external",
+            "inputs": {
+              "url": "https://httpbin.org/anything?claim=alpha",
+              "json_path": ["args", "claim"],
+              "output_path": "canonical/astra_runtime/tmp/REGISTRY_KNOWLEDGE_B.json",
+              "authoritative": false
+            },
+            "provides_as": {
+              "knowledge.observation.available": "knowledge.observation.b.available"
+            }
+          },
+          {
+            "instance_id": "assess-two",
+            "capability_id": "knowledge.consistency.assess",
+            "inputs": {
+              "evidence_paths": [
+                {
+                  "$effect_result": {
+                    "effect": "knowledge.observation.a.available",
+                    "field": "output_path"
+                  }
+                },
+                {
+                  "$effect_result": {
+                    "effect": "knowledge.observation.b.available",
+                    "field": "output_path"
+                  }
+                }
+              ],
+              "output_path": "canonical/astra_runtime/tmp/REGISTRY_KNOWLEDGE_ASSESSMENT.json",
+              "max_age_s": null
+            },
+            "requires_as": [
+              {
+                "effect": "knowledge.observation.available",
+                "as": "knowledge.observation.a.available"
+              },
+              {
+                "effect": "knowledge.observation.available",
+                "as": "knowledge.observation.b.available"
+              }
+            ]
+          },
+          {
+            "instance_id": "materialize-fact",
+            "capability_id": "knowledge.support.materialize",
+            "inputs": {
+              "assessment_path": {
+                "$effect_result": {
+                  "effect": "knowledge.assessment.available",
+                  "field": "output_path"
+                }
+              },
+              "field_name": "claim",
+              "output_path": "canonical/astra_runtime/tmp/REGISTRY_KNOWLEDGE_FACT.json"
+            }
+          }
+        ]
+      },
+      "verify": {
+        "type": "stdout_contains",
+        "text": "REGISTRY_KNOWLEDGE_GRAPH_COMPLETE"
+      }
+    },
+    {
+      "id": "independently-verify-registry-knowledge-artifact",
+      "adapter": "shell",
+      "command": "python - <<'PY'\nimport json,pathlib\np=pathlib.Path('canonical/astra_runtime/tmp/REGISTRY_KNOWLEDGE_FACT.json')\ndata=json.loads(p.read_text(encoding='utf-8'))\nassert data==[{'claim':'alpha'}],data\nprint('REGISTRY_KNOWLEDGE_GRAPH_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "REGISTRY_KNOWLEDGE_GRAPH_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "manual_controller_actions": false,
+    "task_specific_knowledge_compiler_forbidden": true,
+    "mission_defined_executable_capabilities_forbidden": true,
+    "verified_registry_capability_instances_required": true,
+    "effect_result_valueflow_required": true,
+    "candidate_compiler_deletions_after_pass": [
+      "_compile_external_json_knowledge_fetch",
+      "_compile_knowledge_consistency_assessment",
+      "_compile_learned_value_record"
+    ]
+  }
+}
