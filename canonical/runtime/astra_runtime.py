@@ -2212,11 +2212,11 @@ def _load_goal_compiler():
     spec.loader.exec_module(module)
     return module
 
-def _load_auto_apt_cli_acquisition():
-    path=pathlib.Path(__file__).resolve().with_name("auto_apt_cli_acquisition.py")
-    spec=importlib.util.spec_from_file_location("project_brain_auto_apt_cli_acquisition",path)
+def _load_auto_capability_acquisition():
+    path=pathlib.Path(__file__).resolve().with_name("auto_capability_acquisition.py")
+    spec=importlib.util.spec_from_file_location("project_brain_auto_capability_acquisition",path)
     if spec is None or spec.loader is None:
-        raise Blocker("AUTO_APT_CLI_ACQUISITION_LOAD_FAILED")
+        raise Blocker("AUTO_CAPABILITY_ACQUISITION_LOAD_FAILED")
     module=importlib.util.module_from_spec(spec)
     sys.modules[spec.name]=module
     runtime_dir=str(path.parent)
@@ -2469,7 +2469,7 @@ def run_goal(step, mission):
                 ) from e
             mid=str(mission.get("mission_id") or "UNKNOWN")
             ep=EVID_DIR/f"{mid}__PLAIN_GOAL_CAPABILITY_DISCOVERY.json"
-            auto=_load_auto_apt_cli_acquisition()
+            auto=_load_auto_capability_acquisition()
 
             # Fast path: try a bounded role-conditioned supplier acquisition
             # before paying for broad federated discovery.
