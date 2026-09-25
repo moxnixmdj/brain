@@ -4156,6 +4156,15 @@ def _semantic_goal_contract(step,mission,goal):
       "authority_ids":sorted(selected["authority_ids"]),
       "authority_classes":sorted(selected["authority_classes"]),
       "minimum_distinct_authority_classes":minimum,
+      "generated_authorities":sorted(
+          x for x in selected["authority_ids"] if x in set(generator_ids)
+      ),
+      "authority_evidence":{
+          key:authority_evidence[key]
+          for key in sorted(selected["authority_ids"])
+          if key in authority_evidence
+      },
+      "generator_failures":generator_failures,
       "status":"QUORUM_VERIFIED",
     }
 
