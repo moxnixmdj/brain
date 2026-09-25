@@ -358,6 +358,65 @@ def _compile_json_markdown_table(subgoal, context_paths, registry, root):
     }
 
 
+def _compile_context_url_json_fetch(subgoal, context_paths, registry, root):
+    entry=(registry or {}).get("http.json.fetch_from_state")
+    if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
+        return None
+    lower=subgoal.lower()
+    if not re.match(r"^(?:fetch|get|download|retrieve)\b",lower):
+        return None
+    if "url" not in lower or not any(x in lower for x in ("json","metadata")):
+        return None
+
+    # Use the most recent structured artifact in the causal prefix. It may not
+    # exist yet during compilation because an earlier action will create it.
+    json_paths=[str(p) for p in context_paths if pathlib.Path(str(p)).suffix.lower()==".json"]
+    if not json_paths:
+        return None
+    source_json_path=json_paths[-1]
+
+    # Convert phrases such as "metadata URL" / "artifact URL" into the key
+    # expected inside the structured state. Fail closed if the clause does not
+    # name the URL role.
+    m=re.search(r"\b([a-z][a-z0-9_-]*)\s+url\b",lower)
+    if not m:
+        return None
+    role=m.group(1).replace("-","_")
+    if role in {"the","a","an","that","this","live","authoritative","recorded"}:
+        # Prefer a semantically meaningful token immediately before that noise.
+        tokens=re.findall(r"[a-z][a-z0-9_-]*",lower[:m.end()])
+        meaningful=[t for t in tokens if t not in {"the","a","an","that","this","live","authoritative","recorded","from","in","its","project","projects"}]
+        role=meaningful[-2] if len(meaningful)>=2 and meaningful[-1]=="url" else (meaningful[-1] if meaningful else "")
+    if not role or role=="url":
+        return None
+    url_key=role+"_url"
+
+    digest=hashlib.sha256(subgoal.encode("utf-8")).hexdigest()[:12]
+    output_path=f"canonical/astra_runtime/tmp/LIVE_FETCH_{digest}.json"
+    action={
+      "type":"invoke_capability",
+      "args":{
+        "capability_id":"http.json.fetch_from_state",
+        "source_json_path":source_json_path,
+        "url_key":url_key,
+        "output_path":output_path,
+        "max_bytes":5000000,
+        "timeout_s":30,
+      },
+      "expect":{"type":"field_equals","field":"output_verified","value":True},
+    }
+    return {
+      "action":action,
+      "output_path":output_path,
+      "evidence":{
+        "source_json_path":source_json_path,
+        "url_key":url_key,
+        "output_path":output_path,
+        "capability_id":"http.json.fetch_from_state",
+      }
+    }
+
+
 def _compile_json_record_selection(subgoal, context_paths, registry, root):
     entry=(registry or {}).get("json.query.jq")
     if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
@@ -611,6 +670,17 @@ def _compile_compound_goal(goal, clauses, registry, root):
                 "index":index,"subgoal":clause,
                 "mode":"INDEPENDENT_CONTENT_VERIFICATION",
                 **verification["evidence"],
+            })
+            continue
+
+        live_fetch=_compile_context_url_json_fetch(clause,context_paths,registry,root)
+        if live_fetch is not None:
+            actions.append(live_fetch["action"])
+            context_paths.append(live_fetch["output_path"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"VERIFIED_LIVE_JSON_FETCH",
+                **live_fetch["evidence"],
             })
             continue
 
