@@ -58,6 +58,7 @@
     "model_controller_required": false,
     "intentional_one_shot_interrupt": true,
     "completed_side_effect_must_not_replay": true,
-    "checkpoint_runtime_commit": "c7dc6e4cafd9801e49b1252d56b9946b1d0459e8"
+    "checkpoint_runtime_commit": "c7dc6e4cafd9801e49b1252d56b9946b1d0459e8",
+    "resume_trigger_after_durable_checkpoint": "v1"
   }
 }
