@@ -19,6 +19,8 @@
     "incremental_spend_usd": 0,
     "model_controller_required": false,
     "collection_size_not_known_before_execution": true,
-    "manual_controller_actions": false
+    "manual_controller_actions": false,
+    "replay_after_collection_verifier_commit": "5ed1fa635b3ae153c747a685447aa4409c63e29f",
+    "replay_after_collection_compiler_commit": "4dee97c390582facd734c373133c10b84fbf4c06"
   }
 }
