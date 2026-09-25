@@ -4169,6 +4169,19 @@ def _semantic_goal_contract(step,mission,goal):
     }
 
 
+def _load_capability_proposal_generators():
+    path=pathlib.Path(__file__).resolve().with_name("capability_proposal_generators.py")
+    spec=importlib.util.spec_from_file_location(
+        "project_brain_capability_proposal_generators",path
+    )
+    if spec is None or spec.loader is None:
+        raise Blocker("CAPABILITY_PROPOSAL_GENERATOR_MODULE_LOAD_FAILED")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    return module
+
+
 def _capability_problem_proposal(step,mission,goal):
     proposal=step.get("capability_problem_proposal")
     ref=step.get("capability_problem_proposal_ref")
