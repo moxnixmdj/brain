@@ -1,0 +1,9 @@
+{
+  "adapter": "goal",
+  "error": "Blocker:MODEL_INDEPENDENT_ACTION_ERROR:KNOWLEDGE_NOT_ACTIONABLE:CONFLICTED",
+  "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-ACTION-GATE-001",
+  "observed_at_utc": "2026-09-25T21:50:19.423902+00:00",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "run-knowledge-action-gate",
+  "step_index": 0
+}
