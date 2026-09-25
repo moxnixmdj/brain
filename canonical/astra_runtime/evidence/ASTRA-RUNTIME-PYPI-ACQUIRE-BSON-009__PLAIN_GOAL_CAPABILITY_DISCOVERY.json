@@ -1,0 +1,25 @@
+{
+  "auto_acquisition": {
+    "acquisition_evidence_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-PYPI-ACQUIRE-BSON-009__AUTO_PYPI_LIBRARY_ACQUISITION.json",
+    "capability_id": "auto.pypi.bson-modern",
+    "keywords": [
+      "encode",
+      "bson",
+      "bson-modern"
+    ],
+    "pending_binding_path": "canonical/astra_runtime/pending_bindings/ASTRA-RUNTIME-PYPI-ACQUIRE-BSON-009__bson-modern__c0bb873e73b6.json",
+    "status": "ACQUISITION_DISPATCHED",
+    "supplier": "bson-modern",
+    "supplier_class": "pypi_python_library",
+    "verification_mission_id": "ASTRA-AUTO-VERIFY-PYPI-BSON-MODERN-C0BB873E73B6",
+    "verification_mission_path": "canonical/astra_runtime/missions/ASTRA_AUTO_VERIFY_PYPI_BSON_MODERN_C0BB873E73B6.json"
+  },
+  "binding_performed": false,
+  "goal": "Encode those exact records as BSON and save canonical/astra_runtime/tmp/BSON_RECORDS.bson",
+  "mission_id": "ASTRA-RUNTIME-PYPI-ACQUIRE-BSON-009",
+  "observed_at_utc": "2026-09-25T19:20:36.491169+00:00",
+  "result": null,
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
+  "source": "TARGETED_AUTO_ACQUISITION",
+  "status": "AUTO_ACQUISITION_DISPATCHED"
+}
