@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T02:12:47.388657+00:00",
+  "mission_id": "ASTRA-PYTHON-DOWNLOADS-HTTP-DIAG-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_PYTHON_DOWNLOADS_HTTP_DIAG_002.json",
+  "mission_sha256": "e4ba7ab4b9655b897aa61c9991b8b019c69e49850e33f63c0df6c39c310d8aa4",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "143d8722ae2decdb92f60f9d6e00b04365f4c07c092f20439854f8f112ddefd3",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
