@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-VERIFIED-CAPABILITY-XLSX-003",
+  "purpose": "Fresh acceptance test of the verified library-backed XLSX capability family from the unchanged plain goal, with no stale mission state.",
+  "goal": "Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json. Create an XLSX spreadsheet workbook at canonical/astra_runtime/tmp/VERIFIED_CAPABILITIES.xlsx containing exactly one row for every VERIFIED_BOUND_CAPABILITY with columns capability_id, status, source_type, provides, and incremental_spend_usd. Finally independently reopen the workbook and verify that every VERIFIED_BOUND_CAPABILITY from the registry appears exactly once, that no non-verified capability appears, and that every row's values match the canonical registry.",
+  "steps": [
+    {
+      "id": "execute-verified-capability-xlsx",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 32,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "mandatory_model_planner": false,
+    "manual_target_effects": false,
+    "manual_initial_facts": false,
+    "manual_controller_actions": false,
+    "manual_supplier": false,
+    "manual_binding": false,
+    "real_project_artifact": true,
+    "final_effect_verification_required": true,
+    "orthogonal_pressure_family": "spreadsheet_binary_artifact_library_acquisition_and_semantic_reopen",
+    "fresh_mission_identity": true,
+    "explicit_format_semantics": "XLSX spreadsheet workbook",
+    "replay_after_output_format_discovery_commit": "f24ad41dd4c8688e6c04532d85f9a950c9d637df",
+    "parent_pressure_mission": "ASTRA-RUNTIME-VERIFIED-CAPABILITY-XLSX-001",
+    "replay_after_verified_xlsx_library_capabilities_commit": "70709729318b9fb5adeadc723041d45e2b00f99d",
+    "replay_after_xlsx_verifier_reverification_commit": "0021ab594c3b16c38b77c38860de166d0a462de8",
+    "fresh_acceptance_identity": true,
+    "parent_mission": "ASTRA-RUNTIME-VERIFIED-CAPABILITY-XLSX-002"
+  }
+}
