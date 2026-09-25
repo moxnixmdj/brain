@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-WEB-BROWSER-PYTHON-RELEASE-003",
+  "purpose": "Fresh end-to-end proof of rendered web navigation, semantic extraction, artifact persistence, and independent release verification from one plain-language goal.",
+  "goal": "Using a real rendered browser, open https://www.python.org/downloads/. Determine the latest stable Python 3 release shown on the page. Save a full-page screenshot to canonical/astra_runtime/tmp/PYTHON_DOWNLOADS.png and save canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_RESULT.json containing source_url, final_url, page_title, latest_stable_python3, and observed_text_evidence. Finally independently verify from the official Python downloads page, without trusting the browser extraction, that the claimed latest_stable_python3 string is present and corresponds to the current stable Python 3 release shown there.",
+  "steps": [
+    {
+      "id": "execute-browser-python-release",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 40,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "mandatory_model_planner": false,
+    "manual_target_effects": false,
+    "manual_initial_facts": false,
+    "manual_controller_actions": false,
+    "manual_supplier": false,
+    "manual_binding": false,
+    "real_web_navigation_required": true,
+    "rendered_browser_required": true,
+    "screenshot_required": true,
+    "independent_semantic_verification_required": true,
+    "fresh_mission_identity": true,
+    "orthogonal_pressure_family": "rendered_browser_web_navigation_and_independent_semantic_verification",
+    "previous_blocked_state_reuse": false,
+    "compiler_regression_receipt": "canonical/astra_runtime/evidence/ASTRA-GOAL-COMPILER-REGRESSION-FULL-BROWSER-002__RECEIPT.json"
+  }
+}
