@@ -1,0 +1,2799 @@
+{
+  "auto_acquisition": {
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"raku-json-name\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-css-color-names\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"lua-json\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:E: Sub-process /usr/bin/dpkg returned an error code (1)\\n\", \"name\": \"dnssec-trigger\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:E: Sub-process /usr/bin/dpkg returned an error code (1)\\n\", \"name\": \"gir1.2-json-1.0\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:E: Sub-process /usr/bin/dpkg returned an error code (1)\\n\", \"name\": \"gjh-asl-json\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:E: Sub-process /usr/bin/dpkg returned an error code (1)\\n\", \"name\": \"gpgme-json\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:E: Sub-process /usr/bin/dpkg returned an error code (1)\\n\", \"name\": \"guile-json\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:E: Sub-process /usr/bin/dpkg returned an error code (1)\\n\", \"name\": \"hipercontracer-trigger\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:E: Sub-process /usr/bin/dpkg returned an error code (1)\\n\", \"name\": \"indi-weewx-json\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:E: Sub-process /usr/bin/dpkg returned an error code (1)\\n\", \"name\": \"json-glib-tools\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:E: Sub-process /usr/bin/dpkg returned an error code (1)\\n\", \"name\": \"json-schema-test-suite\", \"status\": \"PROBE_FAILED\"}]",
+    "status": "NOT_DISPATCHED"
+  },
+  "binding_performed": false,
+  "goal": "Read .github/workflows/astra-shared-runtime.yml. Create canonical/astra_runtime/tmp/ASTRA_WORKFLOW_AUDIT.json containing the workflow name, trigger names, push branches, push path filters, workflow_dispatch input names, top-level permissions, every job ID, each job's runner label and timeout-minutes, and for each job the ordered list of step names plus every uses action reference. Finally independently verify against the raw YAML text that every reported job ID and every reported uses action reference really appears in the workflow, and fail if the audit is empty or any reported item is unsupported by the source.",
+  "mission_id": "ASTRA-RUNTIME-WORKFLOW-YAML-AUDIT-001",
+  "observed_at_utc": "2026-09-25T00:48:38.504709+00:00",
+  "result": {
+    "binding_performed": false,
+    "candidates": [
+      {
+        "archive_sha256": "35eaa00bed5c03ffd94d63d40e06015602d58b1411713e434b685fef9a9212f9",
+        "binding_kind": "apt",
+        "description": "Provides a trait to store an alternative JSON Name",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json",
+          "name"
+        ],
+        "name": "raku-json-name",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 76,
+        "version": "0.0.7-3build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "bf3f19abea514ea24578b8f2b171fe77f8f7ed9cad82f4943319e5bfe20cdd4a",
+        "binding_kind": "apt",
+        "description": "JSON Object of css color names mapped to their hex value",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json",
+          "name"
+        ],
+        "name": "node-css-color-names",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "1.0.1+dfsg-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "873db5ad12390f1113493fb11b46ca0f5ce3025639d134d973165739a65497ae",
+        "binding_kind": "apt",
+        "description": "reconfiguration tool to make DNSSEC work",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "trigger"
+        ],
+        "name": "dnssec-trigger",
+        "packages": [],
+        "query": "trigger",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.17+repack-5.1build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "39b9766a2fcacd2105318734478b5536172b740c50d9743a21e8869e62662f24",
+        "binding_kind": "apt",
+        "description": "GLib JSON manipulation library (introspection data)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "gir1.2-json-1.0",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.8.0-2build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "95581ecd747961b82573f89cfedf6b4251477e1b4be80468559e99e25380da71",
+        "binding_kind": "apt",
+        "description": "gjh solver, like solver from AMPL Library",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "gjh-asl-json",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.0+git20210628.867c5da-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "a8d38ae2198798e4ef041e3b8bcb71b8f381cd40766d0e6b9607c92015ee5af0",
+        "binding_kind": "apt",
+        "description": "json interface to the GPGME GnuPG encryption library",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "gpgme-json",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.18.0-4.1ubuntu4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c7757245e712d960048c41d7baa109f48e7db8bef0720be9775ce833fa46e543",
+        "binding_kind": "apt",
+        "description": "JSON module for Guile",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "guile-json",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "4.7.3-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d5873b478cd024ebfc5ef79c8881b25cf616fce8ff24669ad483fb4f457da5b7",
+        "binding_kind": "apt",
+        "description": "Triggered HiPerConTracer service",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "trigger"
+        ],
+        "name": "hipercontracer-trigger",
+        "packages": [],
+        "query": "trigger",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.6.10-1build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ae249dfbd4c2d70c201b145310309462f7a3d32bb79c7c4daed2cdf22465090d",
+        "binding_kind": "apt",
+        "description": "INDI driver for the WeeWX Weather Station",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "indi-weewx-json",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.0-1build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "b77a447f3c6a1eeb1486606865f1bf20ab504b6d8579a150e27b7652406d564c",
+        "binding_kind": "apt",
+        "description": "GLib JSON manipulation library (tools)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "json-glib-tools",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.8.0-2build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "0cc9ca2ac64ab3ed3287b234310020581ddd914a72664a744335354db0434284",
+        "binding_kind": "apt",
+        "description": "Language agnostic test suite for the JSON Schema specifications",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "json-schema-test-suite",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.0.0-1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "147e274a8ccc4a7b34433ef248ef0a417530e39bddc6a4a8bae4e8fca1356e23",
+        "binding_kind": "apt",
+        "description": "Json parser and Json-RPC modules for the Kamailio SIP server",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "kamailio-json-modules",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "5.7.4-1build7",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "afd7b8168089f68003994131e8e89465566e614db8c672fd72fe83e5f9a9e3ce",
+        "binding_kind": "apt",
+        "description": "JSON decoder/encoder for Lua",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "lua-json",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.3.4-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c434726fba31a641aa23899c221faaa90d4ce79baa0a2849e0fea2844ee0c6ac",
+        "binding_kind": "apt",
+        "description": "Utility to verify Puppet metadata.json files",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "metadata-json-lint",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.0.0-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c6e919c50b86c29ea876a876e73091beda6b78c574327e98d2ccca0d83bce183",
+        "binding_kind": "apt",
+        "description": "compiled XML documentation for Json.NET",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "monodoc-newtonsoft-json-manual",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.0.8+dfsg-1.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "667178c7efe0fed05c931721e008f15a39c6ad57aa7f9a64127e2d8b22c169cf",
+        "binding_kind": "apt",
+        "description": "JSON language support for the CodeMirror code editor",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "node-codemirror-lang-json",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.0.1~6.22.3+~cs119.52.50-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "2657c53e61477ac5396ebe415e619b53cb4fab713910fce9d41832cdeadeac6e",
+        "binding_kind": "apt",
+        "description": "list of color names and its values",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "name"
+        ],
+        "name": "node-color-name",
+        "packages": [],
+        "query": "name",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.1.4+~1.1.1-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "88b813b1e2706d4777cde72d3a4eeeba576efc1f4e22fb93eb17f7df2551b511",
+        "binding_kind": "apt",
+        "description": "Node.js implementation of JSON-Patch",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "node-fast-json-patch",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.1.1+ds-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "214ade9cebcca2920caeba9a77f9cbeafabc1be9eb2bbfec54a35f6c778155c6",
+        "binding_kind": "apt",
+        "description": "Deterministic JSON.stringify()",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "node-fast-json-stable-stringify",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.1.0-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "bd272ae4271893ef80563c5d396516f472b58af042a211e645fa3e5978d265af",
+        "binding_kind": "apt",
+        "description": "Get the name of a named function",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "name"
+        ],
+        "name": "node-fn-name",
+        "packages": [],
+        "query": "name",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.0.0-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "445dbf152cb87ebe53daa0849944ed533ddcb537a2bbf15fdccb397cf32604f7",
+        "binding_kind": "apt",
+        "description": "Extract the name of a given function.",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "name"
+        ],
+        "name": "node-fn.name",
+        "packages": [],
+        "query": "name",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.1.0-7",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "6ad305d178e2b57c3e4a1468c90c62e15c72e0b2cc8561e8234657e9f5fd6832",
+        "binding_kind": "apt",
+        "description": "Utility for getting a function's name for node and the browser",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "name"
+        ],
+        "name": "node-get-func-name",
+        "packages": [],
+        "query": "name",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.0.2-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "75ce76531996c74cb52addaab0df1abc589afd9b9338021ee898ae06b2e057e5",
+        "binding_kind": "apt",
+        "description": "JSON functions that can convert buffers.",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "node-json-buffer",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.0.1+~3.0.0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "895924cd995281ac0b8696b85e657ae5ecda76ab89cd72cd6edf4a03dec769d8",
+        "binding_kind": "apt",
+        "description": "json loader for webpack",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "node-json-loader",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.5.7-5",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d1969a32dfae90ed791a636a71837c4c728219c6e56f8a670ea70a3b287e84ed",
+        "binding_kind": "apt",
+        "description": "Utility to localize a json object",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "node-json-localizer",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.0.3-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "489d3493f12c0c56f6420f862212c646b1af02194293d4a5a6d50288cd6c2d3b",
+        "binding_kind": "apt",
+        "description": "JSON.parse() with context information on error",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "node-json-parse-better-errors",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.0.2+~cs3.3.1-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "949b5b9328f88b3068c6c70aa56e91c584a62fedde75347680e1d79808639b66",
+        "binding_kind": "apt",
+        "description": "drop-in replacement for JSON.parse that uses `jju`",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "node-json-parse-helpfulerror",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.0.3-4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "21fb4a3552acaed37dcaccb4fb1b7df3ad222f9204b2b3c4cbbf98215df7ae40",
+        "binding_kind": "apt",
+        "description": "JSON Schema validation and specifications",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "node-json-schema",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.4.0+~7.0.11-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "634d66e0a3b8a54b2444056129dd38d79928fe985357fdf8ea743c6a22f85662",
+        "binding_kind": "apt",
+        "description": "Node.js module to merge schemas combined using allOf",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "node-json-schema-merge-allof",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.8.1+~cs9.16.23-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c040f9d26ec19b7f2fb7d18adced2006c0094fd13158b0d74091173f5e4778e1",
+        "binding_kind": "apt",
+        "description": "Json schema traversal package",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "node-json-schema-traverse",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.0.0-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Json Ai MCP Server by MEOK AI Labs",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.CSOAI-ORG/json-ai-mcp",
+        "packages": [
+          {
+            "identifier": "json-ai-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "python",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.11"
+          }
+        ],
+        "query": "json",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/CSOAI-ORG/json-ai-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.10",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Parse JSON5 (comments, trailing commas, unquoted keys) and emit strict JSON.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.MukundaKatta/json5-mcp",
+        "packages": [
+          {
+            "identifier": "@mukundakatta/json5-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.0"
+          }
+        ],
+        "query": "json",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "subfolder": "packages/json5-mcp",
+          "url": "https://github.com/MukundaKatta/mcp-stack"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Parse, format, and convert configs across TOML, YAML, and JSON.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.MukundaKatta/toml-yaml-json-mcp",
+        "packages": [
+          {
+            "identifier": "@mukundakatta/toml-yaml-json-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.0"
+          }
+        ],
+        "query": "json",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "subfolder": "packages/toml-yaml-json-mcp",
+          "url": "https://github.com/MukundaKatta/mcp-stack"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Two-key JSON seal/open. Cloak needs a live license. Open is keys-only.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.ceedot-rock/json-chamber-mcp",
+        "packages": [
+          {
+            "identifier": "json-chamber-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": "npx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.2.0"
+          }
+        ],
+        "query": "json",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/ceedot-rock/json-chamber-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.2.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Signed, cited, replayable workflows for Claude, Codex, Gemini, DeepSeek, and other agents.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.coo1white/cool-workflow",
+        "packages": [
+          {
+            "identifier": "cool-workflow",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.97"
+          }
+        ],
+        "query": "workflow",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/coo1white/cool-workflow"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.1.97",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Store, query, and create YAML workflow playbooks for LLM agents.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.cyanheads/workflows-mcp-server",
+        "packages": [
+          {
+            "identifier": "@cyanheads/workflows-mcp-server",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": "bun",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.4.0"
+          },
+          {
+            "identifier": "@cyanheads/workflows-mcp-server",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": "bun",
+            "secret_environment": [],
+            "transport": {
+              "type": "streamable-http",
+              "url": "http://localhost:3010/mcp"
+            },
+            "version": "0.4.0"
+          }
+        ],
+        "query": "workflow",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/cyanheads/workflows-mcp-server"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.4.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Search people open to work and fetch their machine-readable cv.json, from any AI assistant.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.freecvorg/cvjson",
+        "packages": [
+          {
+            "identifier": "cvjson-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.1.1"
+          }
+        ],
+        "query": "json",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://freecv.org/api/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "subfolder": "mcp",
+          "url": "https://github.com/freecvorg/cv-json"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Workflow automation for AI agents \u2014 browse 125 connectors + 234 templates, run via FluxTurn.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.infoinlet-marketplace/mcp-workflow",
+        "packages": [
+          {
+            "identifier": "@infoinlet/mcp-workflow",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.1"
+          }
+        ],
+        "query": "workflow",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "subfolder": "services/workflow-mcp",
+          "url": "https://github.com/infoinlet-marketplace/marketplace"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "MCP server for inspecting, validating, and summarizing GeoJSON documents (stdlib only)",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.iowarp/geojson-mcp",
+        "packages": [
+          {
+            "identifier": "clio-kit",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "2.2.3"
+          }
+        ],
+        "query": "json",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/iowarp/clio-kit"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "2.2.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "14 rules, four CISA attestation sections, one workflow file",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.jmshinhwa/ssdf-attestation-workflow-audit",
+        "packages": [
+          {
+            "identifier": "@readystack/ssdf-attestation-workflow-audit",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": "npx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.1"
+          }
+        ],
+        "query": "workflow",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/jmshinhwa/readystack-themes"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "JSON contract registry and validator for structured LLM and agent outputs.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.json-contracts/json-contracts",
+        "packages": [
+          {
+            "identifier": "json-contracts",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.2"
+          }
+        ],
+        "query": "json",
+        "remotes": [],
+        "repository": {
+          "id": "1230012930",
+          "source": "github",
+          "url": "https://github.com/json-contracts/json-contracts"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.1.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Dummy JSON test data. No key required.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.mrfentmen/dummyjson-mcp",
+        "packages": [
+          {
+            "identifier": "dummyjson-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.1"
+          }
+        ],
+        "query": "json",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/mrfentmen/dummyjson-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Browse the JSON Schema Store catalog. No key required.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.mrfentmen/json-schema-store-mcp",
+        "packages": [
+          {
+            "identifier": "json-schema-store-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.0"
+          }
+        ],
+        "query": "json",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/mrfentmen/json-schema-store-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Validate, format, and inspect JSON locally. No network and no key.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.mrfentmen/json-tools-mcp",
+        "packages": [
+          {
+            "identifier": "json-tools-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.0"
+          }
+        ],
+        "query": "json",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/mrfentmen/json-tools-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Placeholder JSON test data. No key required.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.mrfentmen/jsonplaceholder-mcp",
+        "packages": [
+          {
+            "identifier": "jsonplaceholder-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.0"
+          }
+        ],
+        "query": "json",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/mrfentmen/jsonplaceholder-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Estimate age and gender from a first name using Agify and Genderize. No key required.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.mrfentmen/name-age-mcp",
+        "packages": [
+          {
+            "identifier": "name-age-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.0"
+          }
+        ],
+        "query": "name",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/mrfentmen/name-age-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Generate random names, usernames, and project codenames locally. No network and no key.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.mrfentmen/name-generator-mcp",
+        "packages": [
+          {
+            "identifier": "name-generator-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.0"
+          }
+        ],
+        "query": "name",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/mrfentmen/name-generator-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Expose declarative YAML-defined workflows as MCP tools over stdio",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.orieg/yaml-workflow",
+        "packages": [
+          {
+            "identifier": "yaml-workflow",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "uvx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.9.6"
+          }
+        ],
+        "query": "workflow",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/orieg/yaml-workflow"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.9.6",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "MCP server to enforce development workflow discipline",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.programinglive/dev-workflow-mcp-server",
+        "packages": [
+          {
+            "identifier": "@programinglive/dev-workflow-mcp-server",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.4.6"
+          }
+        ],
+        "query": "workflow",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/programinglive/dev-workflow-mcp-server"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.4.6",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Provable, declarative multi-agent workflows for Claude Code (typed .slang, non-LLM executor).",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.shofer-dev/slang-workflows",
+        "packages": [
+          {
+            "identifier": "slang-workflows",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.2"
+          }
+        ],
+        "query": "workflow",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/shofer-dev/claude-code-slang-orchestrator"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.1.2",
+        "zero_cost_eligible": true
+      }
+    ],
+    "effect": "Create canonical/astra_runtime/tmp/ASTRA_WORKFLOW_AUDIT.json containing the workflow name, trigger names, push branches, push path filters, workflow_dispatch input names, top-level permissions, every job ID, each job's runner label and timeout-minutes, and for each job the ordered list of step names plus every uses action reference",
+    "results": [
+      {
+        "binding_performed": false,
+        "candidate_count": 30,
+        "candidates": [
+          {
+            "archive_sha256": "35eaa00bed5c03ffd94d63d40e06015602d58b1411713e434b685fef9a9212f9",
+            "binding_kind": "apt",
+            "description": "Provides a trait to store an alternative JSON Name",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json",
+              "name"
+            ],
+            "name": "raku-json-name",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 76,
+            "version": "0.0.7-3build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "bf3f19abea514ea24578b8f2b171fe77f8f7ed9cad82f4943319e5bfe20cdd4a",
+            "binding_kind": "apt",
+            "description": "JSON Object of css color names mapped to their hex value",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json",
+              "name"
+            ],
+            "name": "node-css-color-names",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 48,
+            "version": "1.0.1+dfsg-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "873db5ad12390f1113493fb11b46ca0f5ce3025639d134d973165739a65497ae",
+            "binding_kind": "apt",
+            "description": "reconfiguration tool to make DNSSEC work",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "trigger"
+            ],
+            "name": "dnssec-trigger",
+            "packages": [],
+            "query": "trigger",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.17+repack-5.1build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "39b9766a2fcacd2105318734478b5536172b740c50d9743a21e8869e62662f24",
+            "binding_kind": "apt",
+            "description": "GLib JSON manipulation library (introspection data)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "gir1.2-json-1.0",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.8.0-2build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "95581ecd747961b82573f89cfedf6b4251477e1b4be80468559e99e25380da71",
+            "binding_kind": "apt",
+            "description": "gjh solver, like solver from AMPL Library",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "gjh-asl-json",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.0+git20210628.867c5da-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "a8d38ae2198798e4ef041e3b8bcb71b8f381cd40766d0e6b9607c92015ee5af0",
+            "binding_kind": "apt",
+            "description": "json interface to the GPGME GnuPG encryption library",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "gpgme-json",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.18.0-4.1ubuntu4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c7757245e712d960048c41d7baa109f48e7db8bef0720be9775ce833fa46e543",
+            "binding_kind": "apt",
+            "description": "JSON module for Guile",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "guile-json",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "4.7.3-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d5873b478cd024ebfc5ef79c8881b25cf616fce8ff24669ad483fb4f457da5b7",
+            "binding_kind": "apt",
+            "description": "Triggered HiPerConTracer service",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "trigger"
+            ],
+            "name": "hipercontracer-trigger",
+            "packages": [],
+            "query": "trigger",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.6.10-1build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "ae249dfbd4c2d70c201b145310309462f7a3d32bb79c7c4daed2cdf22465090d",
+            "binding_kind": "apt",
+            "description": "INDI driver for the WeeWX Weather Station",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "indi-weewx-json",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.0-1build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "b77a447f3c6a1eeb1486606865f1bf20ab504b6d8579a150e27b7652406d564c",
+            "binding_kind": "apt",
+            "description": "GLib JSON manipulation library (tools)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "json-glib-tools",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.8.0-2build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "0cc9ca2ac64ab3ed3287b234310020581ddd914a72664a744335354db0434284",
+            "binding_kind": "apt",
+            "description": "Language agnostic test suite for the JSON Schema specifications",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "json-schema-test-suite",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2.0.0-1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "147e274a8ccc4a7b34433ef248ef0a417530e39bddc6a4a8bae4e8fca1356e23",
+            "binding_kind": "apt",
+            "description": "Json parser and Json-RPC modules for the Kamailio SIP server",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "kamailio-json-modules",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "5.7.4-1build7",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "afd7b8168089f68003994131e8e89465566e614db8c672fd72fe83e5f9a9e3ce",
+            "binding_kind": "apt",
+            "description": "JSON decoder/encoder for Lua",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "lua-json",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.3.4-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c434726fba31a641aa23899c221faaa90d4ce79baa0a2849e0fea2844ee0c6ac",
+            "binding_kind": "apt",
+            "description": "Utility to verify Puppet metadata.json files",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "metadata-json-lint",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.0.0-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c6e919c50b86c29ea876a876e73091beda6b78c574327e98d2ccca0d83bce183",
+            "binding_kind": "apt",
+            "description": "compiled XML documentation for Json.NET",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "monodoc-newtonsoft-json-manual",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.0.8+dfsg-1.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "667178c7efe0fed05c931721e008f15a39c6ad57aa7f9a64127e2d8b22c169cf",
+            "binding_kind": "apt",
+            "description": "JSON language support for the CodeMirror code editor",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "node-codemirror-lang-json",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.0.1~6.22.3+~cs119.52.50-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "2657c53e61477ac5396ebe415e619b53cb4fab713910fce9d41832cdeadeac6e",
+            "binding_kind": "apt",
+            "description": "list of color names and its values",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "name"
+            ],
+            "name": "node-color-name",
+            "packages": [],
+            "query": "name",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.1.4+~1.1.1-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "88b813b1e2706d4777cde72d3a4eeeba576efc1f4e22fb93eb17f7df2551b511",
+            "binding_kind": "apt",
+            "description": "Node.js implementation of JSON-Patch",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "node-fast-json-patch",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.1.1+ds-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "214ade9cebcca2920caeba9a77f9cbeafabc1be9eb2bbfec54a35f6c778155c6",
+            "binding_kind": "apt",
+            "description": "Deterministic JSON.stringify()",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "node-fast-json-stable-stringify",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2.1.0-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "bd272ae4271893ef80563c5d396516f472b58af042a211e645fa3e5978d265af",
+            "binding_kind": "apt",
+            "description": "Get the name of a named function",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "name"
+            ],
+            "name": "node-fn-name",
+            "packages": [],
+            "query": "name",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.0.0-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "445dbf152cb87ebe53daa0849944ed533ddcb537a2bbf15fdccb397cf32604f7",
+            "binding_kind": "apt",
+            "description": "Extract the name of a given function.",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "name"
+            ],
+            "name": "node-fn.name",
+            "packages": [],
+            "query": "name",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.1.0-7",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "6ad305d178e2b57c3e4a1468c90c62e15c72e0b2cc8561e8234657e9f5fd6832",
+            "binding_kind": "apt",
+            "description": "Utility for getting a function's name for node and the browser",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "name"
+            ],
+            "name": "node-get-func-name",
+            "packages": [],
+            "query": "name",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2.0.2-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "75ce76531996c74cb52addaab0df1abc589afd9b9338021ee898ae06b2e057e5",
+            "binding_kind": "apt",
+            "description": "JSON functions that can convert buffers.",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "node-json-buffer",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.0.1+~3.0.0-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "895924cd995281ac0b8696b85e657ae5ecda76ab89cd72cd6edf4a03dec769d8",
+            "binding_kind": "apt",
+            "description": "json loader for webpack",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "node-json-loader",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.5.7-5",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d1969a32dfae90ed791a636a71837c4c728219c6e56f8a670ea70a3b287e84ed",
+            "binding_kind": "apt",
+            "description": "Utility to localize a json object",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "node-json-localizer",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.0.3-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "489d3493f12c0c56f6420f862212c646b1af02194293d4a5a6d50288cd6c2d3b",
+            "binding_kind": "apt",
+            "description": "JSON.parse() with context information on error",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "node-json-parse-better-errors",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.0.2+~cs3.3.1-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "949b5b9328f88b3068c6c70aa56e91c584a62fedde75347680e1d79808639b66",
+            "binding_kind": "apt",
+            "description": "drop-in replacement for JSON.parse that uses `jju`",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "node-json-parse-helpfulerror",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.0.3-4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "21fb4a3552acaed37dcaccb4fb1b7df3ad222f9204b2b3c4cbbf98215df7ae40",
+            "binding_kind": "apt",
+            "description": "JSON Schema validation and specifications",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "node-json-schema",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.4.0+~7.0.11-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "634d66e0a3b8a54b2444056129dd38d79928fe985357fdf8ea743c6a22f85662",
+            "binding_kind": "apt",
+            "description": "Node.js module to merge schemas combined using allOf",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "node-json-schema-merge-allof",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.8.1+~cs9.16.23-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c040f9d26ec19b7f2fb7d18adced2006c0094fd13158b0d74091173f5e4778e1",
+            "binding_kind": "apt",
+            "description": "Json schema traversal package",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "node-json-schema-traverse",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.0.0-3",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Create canonical/astra_runtime/tmp/ASTRA_WORKFLOW_AUDIT.json containing the workflow name, trigger names, push branches, push path filters, workflow_dispatch input names, top-level permissions, every job ID, each job's runner label and timeout-minutes, and for each job the ordered list of step names plus every uses action reference",
+        "errors": [],
+        "queries": [
+          "json",
+          "workflow",
+          "name",
+          "trigger"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "APT_CATALOG",
+        "source_url": null
+      },
+      {
+        "binding_performed": false,
+        "candidate_count": 78,
+        "candidates": [
+          {
+            "description": "Json Ai MCP Server by MEOK AI Labs",
+            "is_latest": true,
+            "name": "io.github.CSOAI-ORG/json-ai-mcp",
+            "packages": [
+              {
+                "identifier": "json-ai-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "python",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.11"
+              }
+            ],
+            "query": "json",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/CSOAI-ORG/json-ai-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.10",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Parse JSON5 (comments, trailing commas, unquoted keys) and emit strict JSON.",
+            "is_latest": true,
+            "name": "io.github.MukundaKatta/json5-mcp",
+            "packages": [
+              {
+                "identifier": "@mukundakatta/json5-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.0"
+              }
+            ],
+            "query": "json",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "subfolder": "packages/json5-mcp",
+              "url": "https://github.com/MukundaKatta/mcp-stack"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Parse, format, and convert configs across TOML, YAML, and JSON.",
+            "is_latest": true,
+            "name": "io.github.MukundaKatta/toml-yaml-json-mcp",
+            "packages": [
+              {
+                "identifier": "@mukundakatta/toml-yaml-json-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.0"
+              }
+            ],
+            "query": "json",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "subfolder": "packages/toml-yaml-json-mcp",
+              "url": "https://github.com/MukundaKatta/mcp-stack"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Two-key JSON seal/open. Cloak needs a live license. Open is keys-only.",
+            "is_latest": true,
+            "name": "io.github.ceedot-rock/json-chamber-mcp",
+            "packages": [
+              {
+                "identifier": "json-chamber-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": "npx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.2.0"
+              }
+            ],
+            "query": "json",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/ceedot-rock/json-chamber-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.2.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Signed, cited, replayable workflows for Claude, Codex, Gemini, DeepSeek, and other agents.",
+            "is_latest": true,
+            "name": "io.github.coo1white/cool-workflow",
+            "packages": [
+              {
+                "identifier": "cool-workflow",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.97"
+              }
+            ],
+            "query": "workflow",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/coo1white/cool-workflow"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.1.97",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Store, query, and create YAML workflow playbooks for LLM agents.",
+            "is_latest": true,
+            "name": "io.github.cyanheads/workflows-mcp-server",
+            "packages": [
+              {
+                "identifier": "@cyanheads/workflows-mcp-server",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": "bun",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.4.0"
+              },
+              {
+                "identifier": "@cyanheads/workflows-mcp-server",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": "bun",
+                "secret_environment": [],
+                "transport": {
+                  "type": "streamable-http",
+                  "url": "http://localhost:3010/mcp"
+                },
+                "version": "0.4.0"
+              }
+            ],
+            "query": "workflow",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/cyanheads/workflows-mcp-server"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.4.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Search people open to work and fetch their machine-readable cv.json, from any AI assistant.",
+            "is_latest": true,
+            "name": "io.github.freecvorg/cvjson",
+            "packages": [
+              {
+                "identifier": "cvjson-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.1.1"
+              }
+            ],
+            "query": "json",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://freecv.org/api/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "subfolder": "mcp",
+              "url": "https://github.com/freecvorg/cv-json"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Workflow automation for AI agents \u2014 browse 125 connectors + 234 templates, run via FluxTurn.",
+            "is_latest": true,
+            "name": "io.github.infoinlet-marketplace/mcp-workflow",
+            "packages": [
+              {
+                "identifier": "@infoinlet/mcp-workflow",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.1"
+              }
+            ],
+            "query": "workflow",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "subfolder": "services/workflow-mcp",
+              "url": "https://github.com/infoinlet-marketplace/marketplace"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP server for inspecting, validating, and summarizing GeoJSON documents (stdlib only)",
+            "is_latest": true,
+            "name": "io.github.iowarp/geojson-mcp",
+            "packages": [
+              {
+                "identifier": "clio-kit",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "2.2.3"
+              }
+            ],
+            "query": "json",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/iowarp/clio-kit"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "2.2.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "14 rules, four CISA attestation sections, one workflow file",
+            "is_latest": true,
+            "name": "io.github.jmshinhwa/ssdf-attestation-workflow-audit",
+            "packages": [
+              {
+                "identifier": "@readystack/ssdf-attestation-workflow-audit",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": "npx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.1"
+              }
+            ],
+            "query": "workflow",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/jmshinhwa/readystack-themes"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "JSON contract registry and validator for structured LLM and agent outputs.",
+            "is_latest": true,
+            "name": "io.github.json-contracts/json-contracts",
+            "packages": [
+              {
+                "identifier": "json-contracts",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.2"
+              }
+            ],
+            "query": "json",
+            "remotes": [],
+            "repository": {
+              "id": "1230012930",
+              "source": "github",
+              "url": "https://github.com/json-contracts/json-contracts"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.1.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Dummy JSON test data. No key required.",
+            "is_latest": true,
+            "name": "io.github.mrfentmen/dummyjson-mcp",
+            "packages": [
+              {
+                "identifier": "dummyjson-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.1"
+              }
+            ],
+            "query": "json",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/mrfentmen/dummyjson-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Browse the JSON Schema Store catalog. No key required.",
+            "is_latest": true,
+            "name": "io.github.mrfentmen/json-schema-store-mcp",
+            "packages": [
+              {
+                "identifier": "json-schema-store-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.0"
+              }
+            ],
+            "query": "json",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/mrfentmen/json-schema-store-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Validate, format, and inspect JSON locally. No network and no key.",
+            "is_latest": true,
+            "name": "io.github.mrfentmen/json-tools-mcp",
+            "packages": [
+              {
+                "identifier": "json-tools-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.0"
+              }
+            ],
+            "query": "json",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/mrfentmen/json-tools-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Placeholder JSON test data. No key required.",
+            "is_latest": true,
+            "name": "io.github.mrfentmen/jsonplaceholder-mcp",
+            "packages": [
+              {
+                "identifier": "jsonplaceholder-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.0"
+              }
+            ],
+            "query": "json",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/mrfentmen/jsonplaceholder-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Estimate age and gender from a first name using Agify and Genderize. No key required.",
+            "is_latest": true,
+            "name": "io.github.mrfentmen/name-age-mcp",
+            "packages": [
+              {
+                "identifier": "name-age-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.0"
+              }
+            ],
+            "query": "name",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/mrfentmen/name-age-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Generate random names, usernames, and project codenames locally. No network and no key.",
+            "is_latest": true,
+            "name": "io.github.mrfentmen/name-generator-mcp",
+            "packages": [
+              {
+                "identifier": "name-generator-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.0"
+              }
+            ],
+            "query": "name",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/mrfentmen/name-generator-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Expose declarative YAML-defined workflows as MCP tools over stdio",
+            "is_latest": true,
+            "name": "io.github.orieg/yaml-workflow",
+            "packages": [
+              {
+                "identifier": "yaml-workflow",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "uvx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.9.6"
+              }
+            ],
+            "query": "workflow",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/orieg/yaml-workflow"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.9.6",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP server to enforce development workflow discipline",
+            "is_latest": true,
+            "name": "io.github.programinglive/dev-workflow-mcp-server",
+            "packages": [
+              {
+                "identifier": "@programinglive/dev-workflow-mcp-server",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.4.6"
+              }
+            ],
+            "query": "workflow",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/programinglive/dev-workflow-mcp-server"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.4.6",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Provable, declarative multi-agent workflows for Claude Code (typed .slang, non-LLM executor).",
+            "is_latest": true,
+            "name": "io.github.shofer-dev/slang-workflows",
+            "packages": [
+              {
+                "identifier": "slang-workflows",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.2"
+              }
+            ],
+            "query": "workflow",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/shofer-dev/claude-code-slang-orchestrator"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.1.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Resolve .hood names on Robinhood Chain \u2014 forward/reverse, text records, availability & pricing.",
+            "is_latest": true,
+            "name": "ag.hood/name-service",
+            "packages": [],
+            "query": "name",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://www.hood.ag/api/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Domain availability search, WHOIS lookup, TLD pricing and registry rules from name.ai. Read-only.",
+            "is_latest": true,
+            "name": "ai.name/nameai-mcp",
+            "packages": [],
+            "query": "name",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.name.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/namekart/nameai_mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "44 MCP tools to search, value, register, trade, and manage ENS names. AI-powered intelligence layer.",
+            "is_latest": true,
+            "name": "ai.namewhisper/ens-tools",
+            "packages": [],
+            "query": "name",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://namewhisper.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/eggybug42069/namewhisper-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.2.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Compare two JSON files deeply without worrying about key or array order. Detect missing, extra, an\u2026",
+            "is_latest": true,
+            "name": "ai.smithery/keremurat-json",
+            "packages": [],
+            "query": "json",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@keremurat/json/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/keremurat/mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.16.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Compare two JSON files deeply, ignoring order, to surface every difference. Get a clear, structure\u2026",
+            "is_latest": true,
+            "name": "ai.smithery/keremurat-jsonmcp",
+            "packages": [],
+            "query": "json",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@keremurat/jsonmcp/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/keremurat/mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.16.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Read-only access to Namesake's baby name catalog: meaning, origin, pronunciation, popularity trend.",
+            "is_latest": true,
+            "name": "baby.namesake/discovery",
+            "packages": [],
+            "query": "name",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://namesake.baby/api/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Vietnamese Lunar Calendar for date and calendar conversion, and cultural insights.",
+            "is_latest": true,
+            "name": "com.am-lich/vietnamese-calendar",
+            "packages": [],
+            "query": "name",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://am-lich.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.3.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Convert JSON samples into TypeScript interfaces and Zod schemas, with inference caveats.",
+            "is_latest": true,
+            "name": "com.gumballtools/json-to-types",
+            "packages": [],
+            "query": "json",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://json-to-types.gumballtools.com/api/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/bwalvoord/gumball"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "NameResolver: The ViewCaller API empowers developers with powerful phone number intelligence and.",
+            "is_latest": true,
+            "name": "com.jojapi/nameresolver",
+            "packages": [],
+            "query": "name",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.jojapi.com/nameresolver"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Search domains for sale on Nameshift, check pricing, and buy one via a hosted checkout link.",
+            "is_latest": true,
+            "name": "com.nameshift/marketplace",
+            "packages": [],
+            "query": "name",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.nameshift.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Create canonical/astra_runtime/tmp/ASTRA_WORKFLOW_AUDIT.json containing the workflow name, trigger names, push branches, push path filters, workflow_dispatch input names, top-level permissions, every job ID, each job's runner label and timeout-minutes, and for each job the ordered list of step names plus every uses action reference",
+        "errors": [],
+        "queries": [
+          "json",
+          "workflow",
+          "name",
+          "trigger"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "OFFICIAL_MCP_REGISTRY",
+        "source_url": "https://registry.modelcontextprotocol.io"
+      }
+    ],
+    "schema": "PROJECT_BRAIN_FEDERATED_CAPABILITY_DISCOVERY_V1",
+    "sources": [
+      "APT_CATALOG",
+      "OFFICIAL_MCP_REGISTRY"
+    ]
+  },
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
+  "source": "FEDERATED_CAPABILITY_DISCOVERY_FALLBACK",
+  "targeted_acquisition_error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"lua-json\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"gir1.2-json-1.0\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED\", \"name\": \"gjh-asl-json\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED\", \"name\": \"gpgme-json\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"guile-json\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED\", \"name\": \"indi-weewx-json\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_TEXT_INPUT_UNRESOLVED\", \"name\": \"json-glib-tools\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED\", \"name\": \"json-schema-test-suite\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"kamailio-json-modules\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED\", \"name\": \"metadata-json-lint\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"monodoc-newtonsoft-json-manual\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-codemirror-lang-json\", \"status\": \"CONTRACT_REJECTED\"}]"
+}
