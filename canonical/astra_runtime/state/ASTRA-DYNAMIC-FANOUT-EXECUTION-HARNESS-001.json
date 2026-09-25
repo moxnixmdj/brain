@@ -1,0 +1,44 @@
+{
+  "blocker": {
+    "adapter": "shell",
+    "error": "VERIFICATION_FAILED",
+    "mission_id": "ASTRA-DYNAMIC-FANOUT-EXECUTION-HARNESS-001",
+    "observed_at_utc": "2026-09-25T04:47:45.159384+00:00",
+    "result": {
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/runtime/astra_runtime.py canonical/astra_runtime/missions/ASTRA_RUNTIME_LIVE_DYNAMIC_FANOUT_001.json\npython - <<'PY'\nimport json,pathlib\np=pathlib.Path('canonical/astra_runtime/state/ASTRA-RUNTIME-LIVE-DYNAMIC-FANOUT-001.json')\nx=json.loads(p.read_text(encoding='utf-8'))\nassert x.get('status')=='COMPLETE', x\nprint('DYNAMIC_FANOUT_EXECUTION_COMPLETE')\nPY",
+      "duration_s": 0.111,
+      "returncode": 3,
+      "stderr": "",
+      "stdout": "{\"schema\": \"PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1\", \"mission_id\": \"ASTRA-RUNTIME-LIVE-DYNAMIC-FANOUT-001\", \"step_index\": 0, \"step_id\": \"run-live-dynamic-fanout\", \"adapter\": \"goal\", \"error\": \"Blocker:CAPABILITY_PLANNING_FAILED:PlanningFailure:TARGET_EFFECTS_REQUIRED\", \"observed_at_utc\": \"2026-09-25T04:47:45.144166+00:00\"}\n"
+    },
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "execute-original-dynamic-fanout",
+    "step_index": 0
+  },
+  "created_at_utc": "2026-09-25T04:47:45.048454+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T04:47:45.159366+00:00",
+      "ok": false,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython canonical/runtime/astra_runtime.py canonical/astra_runtime/missions/ASTRA_RUNTIME_LIVE_DYNAMIC_FANOUT_001.json\npython - <<'PY'\nimport json,pathlib\np=pathlib.Path('canonical/astra_runtime/state/ASTRA-RUNTIME-LIVE-DYNAMIC-FANOUT-001.json')\nx=json.loads(p.read_text(encoding='utf-8'))\nassert x.get('status')=='COMPLETE', x\nprint('DYNAMIC_FANOUT_EXECUTION_COMPLETE')\nPY",
+        "duration_s": 0.111,
+        "returncode": 3,
+        "stderr": "",
+        "stdout": "{\"schema\": \"PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1\", \"mission_id\": \"ASTRA-RUNTIME-LIVE-DYNAMIC-FANOUT-001\", \"step_index\": 0, \"step_id\": \"run-live-dynamic-fanout\", \"adapter\": \"goal\", \"error\": \"Blocker:CAPABILITY_PLANNING_FAILED:PlanningFailure:TARGET_EFFECTS_REQUIRED\", \"observed_at_utc\": \"2026-09-25T04:47:45.144166+00:00\"}\n"
+      },
+      "step_id": "execute-original-dynamic-fanout",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-DYNAMIC-FANOUT-EXECUTION-HARNESS-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_DYNAMIC_FANOUT_EXECUTION_HARNESS_001.json",
+  "mission_sha256": "96932332f3d7de61bd17b46abc3792d9158ef85796846c947d76e14b16e18a1c",
+  "next_step": 0,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-25T04:47:45.159677+00:00"
+}
