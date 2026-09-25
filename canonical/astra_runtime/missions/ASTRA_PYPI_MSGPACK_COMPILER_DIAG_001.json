@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-PYPI-MSGPACK-COMPILER-DIAG-001",
+  "purpose": "Verify native literal JSON removes the false first blocker and the remaining unresolved clause is MessagePack encoding.",
+  "steps": [
+    {
+      "id": "compile-msgpack-goal",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/goal_compiler.py')\ns=importlib.util.spec_from_file_location('gc',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads(pathlib.Path('canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads(pathlib.Path('canonical/astra_runtime/missions/ASTRA_RUNTIME_PYPI_ACQUIRE_MSGPACK_001.json').read_text())['goal']\nclauses=m.decompose_goal(goal)\ntry:\n    out=m.compile_goal(goal,reg,pathlib.Path('.').resolve())\nexcept m.GoalCompilationFailure as exc:\n    print(json.dumps({'code':exc.code,'detail':exc.detail,'clauses':clauses},sort_keys=True))\n    assert exc.code=='GOAL_COMPILATION_SUBGOAL_UNRESOLVED',exc\n    d=json.loads(exc.detail)\n    assert d['index']==1,d\n    assert 'MessagePack' in d['subgoal'],d\n    assert d['compiled_prefix'][0]['mode']=='NATIVE_LITERAL_JSON_RECORDS',d\n    print('MSGPACK_REAL_GAP_IS_SECOND_CLAUSE')\nelse:\n    raise AssertionError(out)\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "MSGPACK_REAL_GAP_IS_SECOND_CLAUSE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "read_only_diagnostic": true
+  }
+}
