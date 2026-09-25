@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-DOCX-001",
+  "goal": "Create canonical/astra_runtime/tmp/PROJECT_BRAIN_REPORT.docx with title Project Brain Report, paragraph Verified cross-tool composition, and a table with columns Capability and Status containing Browser interaction | VERIFIED and Browser-to-XLSX composition | VERIFIED. Finally independently reopen the DOCX and verify all requested content.",
+  "steps": [
+    {
+      "id": "run-docx-goal",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 16,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false
+  }
+}
