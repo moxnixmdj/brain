@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T00:29:32.385374+00:00",
+  "created_at_utc": "2026-09-25T00:29:32.351552+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T00:29:32.385137+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\nroot=pathlib.Path('.').resolve()\np=root/'canonical/runtime/goal_compiler.py'\ns=importlib.util.spec_from_file_location('gcdiag3',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads((root/'canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads((root/'canonical/astra_runtime/missions/ASTRA_RUNTIME_EVIDENCE_BUNDLE_001.json').read_text())['goal']\ntry:\n out=m.compile_goal(goal,reg,root); print(json.dumps({'status':'COMPILED','modes':[x['mode'] for x in out.get('compiled_parts',[])],'parts':out.get('compiled_parts'),'actions':[x.get('type') for x in out.get('controller_actions',[])]},sort_keys=True))\nexcept Exception as e:\n print(json.dumps({'status':'FAILED','type':type(e).__name__,'code':getattr(e,'code',None),'detail':getattr(e,'detail',None),'error':str(e)},sort_keys=True))\nprint('EVIDENCE_BUNDLE_COMPILER_DIAG_3_COMPLETE')\nPY",
+        "duration_s": 0.033,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"actions\": [\"read_file\", \"invoke_capability\", \"invoke_capability\", \"invoke_capability\", \"finish\"], \"modes\": [\"NATIVE_READ\", \"VERIFIED_STRUCTURED_MANIFEST\", \"VERIFIED_CAPABILITY\", \"VERIFIED_CAPABILITY\"], \"parts\": [{\"index\": 0, \"mode\": \"NATIVE_READ\", \"path\": \"canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json\", \"subgoal\": \"Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json\"}, {\"capability_id\": \"json.query.jq\", \"collection_path\": [\"capabilities\"], \"index\": 1, \"input_path\": \"canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json\", \"manifest_schema\": \"PROJECT_BRAIN_STATUS_MANIFEST_V1\", \"mode\": \"VERIFIED_STRUCTURED_MANIFEST\", \"output_path\": \"canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_MANIFEST.json\", \"status_value\": \"VERIFIED_BOUND_CAPABILITY\", \"subgoal\": \"Create canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_MANIFEST.json containing one record for every VERIFIED_BOUND_CAPABILITY with its capability ID, verification mission ID, repository-local verification evidence or receipt paths when present, and source dependency names, versions, and hashes\"}, {\"index\": 2, \"inputs\": {\"manifest_path\": \"canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_MANIFEST.json\", \"output_path\": \"canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_BUNDLE.tar.gz\"}, \"mode\": \"VERIFIED_CAPABILITY\", \"score\": 47, \"selected_capability\": \"archive.tar_gz.create_from_manifest\", \"subgoal\": \"create canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_BUNDLE.tar.gz containing that manifest and every repository-local verification evidence or receipt file referenced by the manifest\", \"target_effects\": [\"archive.tar_gz.create_from_manifest\"]}, {\"index\": 3, \"inputs\": {\"archive_path\": \"canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_BUNDLE.tar.gz\", \"manifest_path\": \"canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_MANIFEST.json\"}, \"mode\": \"VERIFIED_CAPABILITY\", \"score\": 41, \"selected_capability\": \"archive.verify.tar_gz.gnu\", \"subgoal\": \"Finally verify independently that the archive contains the manifest plus every referenced repository-local evidence file and that the archived bytes hash exactly to the source bytes\", \"target_effects\": [\"archive.tar_gz.verify_manifest_members\"]}], \"status\": \"COMPILED\"}\nEVIDENCE_BUNDLE_COMPILER_DIAG_3_COMPLETE\n"
+      },
+      "step_id": "compile-only",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-EVIDENCE-BUNDLE-COMPILER-DIAG-003",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_EVIDENCE_BUNDLE_COMPILER_DIAG_003.json",
+  "mission_sha256": "643ae07ca1d4b7dbeaec38a45d0d801a40cc79364088772271e83b0d35499a8f",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T00:29:32.385150+00:00"
+}
