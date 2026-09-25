@@ -16,6 +16,7 @@ def main():
     if v.get("supplier_independent") is not True:
         raise RuntimeError("XLSX_VERIFIER_NOT_INDEPENDENT")
     writer=v["writer_package"]; reader=v["reader_package"]
+    verification_mission_id=str(v.get("verification_mission_id") or "ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-001")
     reg=json.loads(REG.read_text(encoding="utf-8"))
     caps=reg.setdefault("capabilities",{})
     common_keywords=["xlsx","spreadsheet","workbook","rows","columns"]
@@ -43,7 +44,7 @@ def main():
       "incremental_spend_usd":0,
       "status":"VERIFIED_BOUND_CAPABILITY",
       "verification":{
-        "mission_id":"ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-001",
+        "mission_id":verification_mission_id,
         "verification_result_path":str(verify_path.relative_to(ROOT)),
         "observed_effect":v.get("writer_result"),
         "independently_verified":True,
@@ -74,7 +75,7 @@ def main():
       "incremental_spend_usd":0,
       "status":"VERIFIED_BOUND_CAPABILITY",
       "verification":{
-        "mission_id":"ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-001",
+        "mission_id":verification_mission_id,
         "verification_result_path":str(verify_path.relative_to(ROOT)),
         "observed_effect":v.get("reader_result"),
         "independently_verified":True,
