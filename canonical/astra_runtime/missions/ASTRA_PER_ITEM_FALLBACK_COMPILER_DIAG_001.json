@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-PER-ITEM-FALLBACK-COMPILER-DIAG-001",
+  "purpose": "Prove per-item fallback compiles to one isolated fanout fallback graph with full clause coverage and no acquisition.",
+  "steps": [
+    {
+      "id": "compile-and-assert",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/goal_compiler.py')\ns=importlib.util.spec_from_file_location('gc',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads(pathlib.Path('canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads(pathlib.Path('canonical/astra_runtime/missions/ASTRA_RUNTIME_PER_ITEM_FALLBACK_002.json').read_text())['goal']\nout=m.compile_goal(goal,reg,pathlib.Path('.').resolve())\nassert out['compiler_mode']=='DETERMINISTIC_PER_ITEM_FALLBACK_FANOUT_PLAN',out\nassert out.get('clause_coverage_verified') is True,out\nassert sorted(p['index'] for p in out['compiled_parts'])==list(range(6)),out['compiled_parts']\nacts=out['controller_actions']\nassert [a.get('type') for a in acts]==['invoke_capability','invoke_capability_fanout','assert_runtime_per_item_fallback_decodes','finish'],acts\nfan=acts[1]['args']\nspec=fan['item_fallback']\nassert spec['primary_action']['args']['capability_id']=='image.qr.generate.qrencode',spec\nassert spec['fallback_action']['args']['capability_id']=='auto.apt.zint',spec\nassert spec['primary_validation']['expected_source_field']=='email',spec\nassert fan['copy_fields']==['id','username','email'],fan\nprint('PER_ITEM_FALLBACK_COMPILER_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "PER_ITEM_FALLBACK_COMPILER_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "read_only_diagnostic": true
+  }
+}
