@@ -1300,6 +1300,8 @@ def _compile_compound_goal(goal, clauses, registry, root):
                     "cause":exc.code,
                     "cause_detail":exc.detail,
                     "clauses":clauses,
+                    "compiled_prefix":compiled_parts,
+                    "context_paths":context_paths,
                 },sort_keys=True)
             ) from exc
         cid=part["selected_capability"]
