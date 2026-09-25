@@ -38,6 +38,27 @@ def _status_value(goal,data):
     for token in re.findall(r"\b[A-Z][A-Z0-9_]{3,}\b",str(goal or "")):
         if _find_collection(data,token) is not None:
             return token
+    # If the clause does not repeat the status literal, infer it from the
+    # source records only when there is exactly one unambiguous non-empty
+    # status value. This preserves fail-closed behavior while allowing a
+    # causally produced normalized JSON artifact to carry its own semantics.
+    values=set()
+    def walk(node):
+        if isinstance(node,dict):
+            if "status" in node and not isinstance(node.get("status"),(dict,list)):
+                value=str(node.get("status") or "").strip()
+                if value:
+                    values.add(value)
+            for value in node.values():
+                walk(value)
+        elif isinstance(node,list):
+            for value in node:
+                walk(value)
+    walk(data)
+    if len(values)==1:
+        candidate=next(iter(values))
+        if _find_collection(data,candidate) is not None:
+            return candidate
     raise RuntimeError("XLSX_STATUS_VALUE_UNRESOLVED")
 
 def _columns(goal):
