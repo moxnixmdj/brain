@@ -483,7 +483,11 @@ def _run_model_independent_goal(step, mission, goal):
     actions=_controller_actions(step, mission)
     if actions is None:
         return None
-    allowed_types={"read_file","list_tree","search_text","http_get","invoke_capability","assert_text_contains_json_keys","finish"}
+    allowed_types={
+      "read_file","list_tree","search_text","http_get","invoke_capability",
+      "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal",
+      "finish"
+    }
     trace=[]
     for cycle, raw_action in enumerate(actions):
         if not isinstance(raw_action,dict):
