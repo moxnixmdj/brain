@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-INDEPENDENT-CODEC-VERIFIER-BSON-002",
+  "purpose": "Fresh proof of automatic producer-independent BSON verifier acquisition after explicit independence semantics were added.",
+  "goal": "Create canonical/astra_runtime/tmp/BSON_INDEPENDENT_SOURCE.json containing exactly four records with fields id and text: 1 alpha, 2 beta, 3 gamma, 4 delta. Encode those exact records as BSON and save canonical/astra_runtime/tmp/BSON_INDEPENDENT_RECORDS.bson. Independently decode the BSON artifact using an implementation that is not provided by the BSON producer package, and verify the decoded records are exactly identical to canonical/astra_runtime/tmp/BSON_INDEPENDENT_SOURCE.json in values, order, field names, and record count.",
+  "steps": [
+    {
+      "id": "run-independent-codec-verifier-goal",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 24,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    },
+    {
+      "id": "assert-verifier-implementation-independence",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport json,pathlib\np=pathlib.Path('canonical/astra_runtime/state/ASTRA-RUNTIME-INDEPENDENT-CODEC-VERIFIER-BSON-002.json')\nx=json.loads(p.read_text())\nhist=x.get('history') or []\nassert hist,x\ntrace=(hist[0].get('result') or {}).get('trace') or []\nsteps=[t for t in trace if (t.get('plan') or {}).get('type')=='verify_with_independent_pypi_codec']\nassert len(steps)==1,trace\nresult=steps[0].get('result') or {}\nassert result.get('verified') is True,result\nassert result.get('producer_independent') is True,result\nassert result.get('dependency_independent') is True,result\nassert result.get('producer_project')!=result.get('verifier_project'),result\nprint('INDEPENDENT_CODEC_VERIFIER_IMPLEMENTATION_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "INDEPENDENT_CODEC_VERIFIER_IMPLEMENTATION_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "manual_verifier_supplier": false,
+    "producer_and_verifier_implementation_must_differ": true,
+    "independent_semantic_verification_required": true,
+    "fresh_mission_identity": true,
+    "independent_verifier_engine_commit": "4f8e90b1a362f054a8440e63eede48665388eca2",
+    "independent_verifier_runtime_commit": "a719d2e6e9934d750ccac7ae554b1ccceeb43b38",
+    "independent_verifier_compiler_commit": "965fa128bb3ea74821573d956a678f2325fd6703",
+    "source_mission": "ASTRA-RUNTIME-INDEPENDENT-CODEC-VERIFIER-BSON-001"
+  }
+}
