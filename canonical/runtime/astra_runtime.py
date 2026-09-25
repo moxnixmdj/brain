@@ -2520,22 +2520,183 @@ def _goal_action(action):
         ):
             return {"type":typ,"verified":False,"error":"SOURCE_DISCOVERY_AUTHORITY_DOMAINS_REQUIRED"}
         normalized_domains=[x.lower().strip().lstrip(".") for x in authority_domains]
+        attempts=[]
+        candidates=[]
+        href_re=re.compile(r'''href=["']([^"'<>\s]+)["']''',re.IGNORECASE)
+        query_tokens=[
+            t for t in re.findall(r"[a-z0-9_.-]+",query.lower())
+            if len(t)>=3 and t not in {
+              "official","indicator","authoritative","source","world","bank","find","web"
+            }
+        ]
+        def authority_match(host):
+            host=str(host or "").lower()
+            return [d for d in normalized_domains if host==d or host.endswith("."+d)]
+        def discovery_score(url,base):
+            low=str(url or "").lower()
+            score=int(base)
+            for token in query_tokens:
+                if token in low:
+                    score+=30 if "." in token or "-" in token else 8
+                for part in re.findall(r"[a-z0-9]+",token):
+                    if len(part)>=3 and part in low:
+                        score+=3
+            return score
+        def fetch_discovery(url,max_bytes):
+            req=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0 ProjectBrain-AuthorityDiscovery/1"})
+            with urllib.request.urlopen(req,timeout=int(args.get("timeout_s") or 20)) as resp:
+                raw=resp.read(int(max_bytes))
+                final_url=resp.geturl()
+                encoding=str(resp.headers.get("Content-Encoding") or "").lower()
+            if raw[:2]==b"\x1f\x8b" or "gzip" in encoding or str(final_url).lower().endswith(".gz"):
+                raw=gzip.decompress(raw)
+                if len(raw)>int(max_bytes)*8:
+                    raise RuntimeError("DISCOVERY_DECOMPRESSED_BYTES_LIMIT")
+            return raw,final_url
+
+        # First-party discovery comes first. Discover same-authority hosts from
+        # official root pages, then honor robots.txt sitemap declarations and
+        # bounded common sitemap locations. Public web search is fallback only.
+        authority_hosts=[]
+        for domain in normalized_domains:
+            for host in (domain,"www."+domain if not domain.startswith("www.") else domain):
+                if host not in authority_hosts:
+                    authority_hosts.append(host)
+        for host in list(authority_hosts):
+            root_url="https://"+host+"/"
+            try:
+                raw,final_url=fetch_discovery(root_url,800000)
+                final_host=(urllib.parse.urlparse(final_url).hostname or "").lower()
+                if not authority_match(final_host):
+                    attempts.append({"engine":"authority_root","url":root_url,"status":"REDIRECT_OUTSIDE_AUTHORITY"})
+                    continue
+                text=raw.decode("utf-8","replace")
+                discovered=0
+                for raw_href in href_re.findall(text):
+                    href=urllib.parse.urljoin(final_url,raw_href.replace("&amp;","&"))
+                    try:
+                        parsed=urllib.parse.urlparse(href)
+                    except Exception:
+                        continue
+                    candidate_host=(parsed.hostname or "").lower()
+                    if not authority_match(candidate_host):
+                        continue
+                    if candidate_host not in authority_hosts and len(authority_hosts)<24:
+                        authority_hosts.append(candidate_host)
+                        discovered+=1
+                    if discovery_score(href,180)>180:
+                        candidates.append({
+                          "url":href,"host":candidate_host,
+                          "matched_authority_domains":authority_match(candidate_host),
+                          "score":discovery_score(href,180),
+                          "engine":"authority_root_link"
+                        })
+                attempts.append({"engine":"authority_root","url":root_url,"status":"OK","discovered_hosts":discovered})
+            except Exception as exc:
+                attempts.append({"engine":"authority_root","url":root_url,"status":"FETCH_FAILED","error":type(exc).__name__})
+
+        sitemap_queue=[]
+        sitemap_seen=set()
+        for host in authority_hosts[:24]:
+            robots_url="https://"+host+"/robots.txt"
+            declared=[]
+            try:
+                raw,final_url=fetch_discovery(robots_url,500000)
+                final_host=(urllib.parse.urlparse(final_url).hostname or "").lower()
+                if not authority_match(final_host):
+                    raise RuntimeError("ROBOTS_REDIRECT_OUTSIDE_AUTHORITY")
+                robots=raw.decode("utf-8","replace")
+                for line in robots.splitlines():
+                    m=re.match(r"^\s*Sitemap\s*:\s*(https?://\S+)\s*$",line,re.IGNORECASE)
+                    if not m:
+                        continue
+                    sm=m.group(1).strip()
+                    shost=(urllib.parse.urlparse(sm).hostname or "").lower()
+                    if authority_match(shost) and sm not in declared:
+                        declared.append(sm)
+                attempts.append({"engine":"authority_robots","url":robots_url,"status":"OK","sitemap_count":len(declared)})
+            except Exception as exc:
+                attempts.append({"engine":"authority_robots","url":robots_url,"status":"FETCH_FAILED","error":type(exc).__name__})
+            for sm in declared+[
+                "https://"+host+"/sitemap.xml",
+                "https://"+host+"/sitemap_index.xml",
+            ]:
+                if sm not in sitemap_seen and len(sitemap_queue)<80:
+                    sitemap_queue.append(sm)
+
+        sitemap_docs=0
+        sitemap_urls_seen=0
+        while sitemap_queue and sitemap_docs<32 and sitemap_urls_seen<250000:
+            sitemap_url=sitemap_queue.pop(0)
+            if sitemap_url in sitemap_seen:
+                continue
+            sitemap_seen.add(sitemap_url)
+            try:
+                raw,final_url=fetch_discovery(sitemap_url,4000000)
+                final_host=(urllib.parse.urlparse(final_url).hostname or "").lower()
+                if not authority_match(final_host):
+                    attempts.append({"engine":"authority_sitemap","url":sitemap_url,"status":"REDIRECT_OUTSIDE_AUTHORITY"})
+                    continue
+                text=raw.decode("utf-8","replace")
+                locs=[
+                    x.replace("&amp;","&").strip()
+                    for x in re.findall(r"<loc>\s*([^<]+?)\s*</loc>",text,re.IGNORECASE)
+                ]
+                sitemap_docs+=1
+                sitemap_urls_seen+=len(locs)
+                local_candidates=0
+                child_sitemaps=0
+                for loc in locs:
+                    try:
+                        parsed=urllib.parse.urlparse(loc)
+                    except Exception:
+                        continue
+                    lhost=(parsed.hostname or "").lower()
+                    if not authority_match(lhost):
+                        continue
+                    path_lower=(parsed.path or "").lower()
+                    looks_sitemap=(
+                        "sitemap" in path_lower
+                        or path_lower.endswith(".xml")
+                        or path_lower.endswith(".xml.gz")
+                    )
+                    if looks_sitemap:
+                        if loc not in sitemap_seen and loc not in sitemap_queue and len(sitemap_queue)<80:
+                            sitemap_queue.append(loc)
+                            child_sitemaps+=1
+                        continue
+                    score=discovery_score(loc,260)
+                    if score<=260:
+                        continue
+                    candidates.append({
+                      "url":loc,"host":lhost,
+                      "matched_authority_domains":authority_match(lhost),
+                      "score":score,
+                      "engine":"authority_sitemap"
+                    })
+                    local_candidates+=1
+                attempts.append({
+                  "engine":"authority_sitemap","url":sitemap_url,"status":"OK",
+                  "url_count":len(locs),"candidate_count":local_candidates,
+                  "child_sitemaps":child_sitemaps
+                })
+            except Exception as exc:
+                attempts.append({"engine":"authority_sitemap","url":sitemap_url,"status":"FETCH_FAILED","error":type(exc).__name__})
+
         query_variants=[query]
         for domain in normalized_domains:
             scoped="site:"+domain+" "+query
             if scoped not in query_variants:
                 query_variants.append(scoped)
         engines=[]
-        for qv in query_variants:
-            engines.extend([
-              ("bing_rss",qv,"https://www.bing.com/search?"+urllib.parse.urlencode({"q":qv,"format":"rss","count":"20"})),
-              ("bing",qv,"https://www.bing.com/search?"+urllib.parse.urlencode({"q":qv,"count":"20"})),
-              ("duckduckgo",qv,"https://html.duckduckgo.com/html/?"+urllib.parse.urlencode({"q":qv})),
-              ("google",qv,"https://www.google.com/search?"+urllib.parse.urlencode({"q":qv,"num":"20"})),
-            ])
-        attempts=[]
-        candidates=[]
-        href_re=re.compile(r'''href=["']([^"'<>\s]+)["']''',re.IGNORECASE)
+        if not candidates:
+            for qv in query_variants:
+                engines.extend([
+                  ("bing_rss",qv,"https://www.bing.com/search?"+urllib.parse.urlencode({"q":qv,"format":"rss","count":"20"})),
+                  ("bing",qv,"https://www.bing.com/search?"+urllib.parse.urlencode({"q":qv,"count":"20"})),
+                  ("duckduckgo",qv,"https://html.duckduckgo.com/html/?"+urllib.parse.urlencode({"q":qv})),
+                  ("google",qv,"https://www.google.com/search?"+urllib.parse.urlencode({"q":qv,"num":"20"})),
+                ])
         def normalize_result_href(engine,href):
             raw=str(href or "").replace("&amp;","&").strip()
             if not raw:
