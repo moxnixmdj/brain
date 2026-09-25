@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-MULTI-ACTION-FANOUT-002",
+  "purpose": "Fresh clean proof of generic per-item verified action graphs over a runtime-discovered collection.",
+  "goal": "Using a real rendered browser, open https://jsonplaceholder.typicode.com/users, save a screenshot to canonical/astra_runtime/tmp/MULTI_FANOUT_USERS.png, and save the rendered result to canonical/astra_runtime/tmp/MULTI_FANOUT_USERS.json. Read the live JSON array from that result. For every user returned at runtime, generate a QR code image encoding that user's username and also generate a Code 128 barcode image encoding that user's email. Save each QR image under canonical/astra_runtime/tmp/MULTI_FANOUT_QR using the user's id as the filename, save each Code 128 image under canonical/astra_runtime/tmp/MULTI_FANOUT_CODE128 using the user's id as the filename, and create canonical/astra_runtime/tmp/MULTI_FANOUT_MANIFEST.json with exactly one record per live user containing id, username, email, qr_path, and code128_path. Finally independently decode every generated QR and Code 128 image and verify each decoded QR equals that live user's username, each decoded Code 128 equals that live user's email, every live user has both artifacts, and no extra manifest records exist.",
+  "steps": [
+    {
+      "id": "run-multi-action-fanout",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 40,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    },
+    {
+      "id": "independent-mission-level-acceptance",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport json,pathlib,subprocess\nwrapper=json.loads(pathlib.Path('canonical/astra_runtime/tmp/MULTI_FANOUT_USERS.json').read_text())\nusers=json.loads(wrapper['observed_text'])\nmanifest=json.loads(pathlib.Path('canonical/astra_runtime/tmp/MULTI_FANOUT_MANIFEST.json').read_text())\nassert isinstance(users,list) and isinstance(manifest,list)\nassert len(users)==len(manifest)\nby_id={str(r['id']):r for r in manifest}\nassert len(by_id)==len(users)\nfor u in users:\n    rec=by_id[str(u['id'])]\n    assert rec['username']==u['username'] and rec['email']==u['email']\n    q=pathlib.Path(rec['qr_path']); b=pathlib.Path(rec['code128_path'])\n    assert q.is_file() and b.is_file()\n    qv=subprocess.run(['zbarimg','--quiet','--raw',str(q)],capture_output=True,text=True,check=True).stdout.strip()\n    bv=subprocess.run(['zbarimg','--quiet','--raw',str(b)],capture_output=True,text=True,check=True).stdout.strip()\n    assert qv==u['username'],(u['id'],qv,u['username'])\n    assert bv==u['email'],(u['id'],bv,u['email'])\nprint('MULTI_ACTION_FANOUT_INDEPENDENTLY_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "MULTI_ACTION_FANOUT_INDEPENDENTLY_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "runtime_collection_size_unknown": true,
+    "more_than_one_verified_capability_per_item": true,
+    "manual_controller_actions": false,
+    "omitted_goal_clauses_are_failure": true,
+    "fresh_mission_identity": true,
+    "generic_runtime_fanout_commit": "42e0aff9049dab6c6bfa9ed07b5b32b79aafb13e",
+    "generic_fanout_compiler_commit": "f426d26488c2165bf4e72fa2e91de1ab67c24eef",
+    "source_mission": "ASTRA-RUNTIME-MULTI-ACTION-FANOUT-001"
+  }
+}
