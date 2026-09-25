@@ -1,0 +1,111 @@
+{
+  "pattern": "test_*.py",
+  "records": [
+    {
+      "duration_s": 0.799596,
+      "errors": 0,
+      "exit_code": 0,
+      "failed": 0,
+      "passed": 3,
+      "path": "canonical/tests/test_astra_runtime_model_independence.py",
+      "reported_test_duration_s": 0.029,
+      "sha256": "f931c5fd8d9a376640ef52ca9dd47d1d26cf161f2d98d155ea873e1bb3ad00bc",
+      "skipped": 0,
+      "tests": 3
+    },
+    {
+      "duration_s": 0.111844,
+      "errors": 0,
+      "exit_code": 0,
+      "failed": 0,
+      "passed": 5,
+      "path": "canonical/tests/test_astra_runtime_verification.py",
+      "reported_test_duration_s": 0.0,
+      "sha256": "3499f58d9a569ab5e54f44d8d83cd79eadc97ac455641878e59bc713c6ffabd4",
+      "skipped": 0,
+      "tests": 5
+    },
+    {
+      "duration_s": 0.100024,
+      "errors": 0,
+      "exit_code": 0,
+      "failed": 0,
+      "passed": 9,
+      "path": "canonical/tests/test_bound_capabilities.py",
+      "reported_test_duration_s": 0.004,
+      "sha256": "0b1e90d25855a6627ba3dd7010c864d30eee9c3449c443da75cfc3bc01bf4464",
+      "skipped": 0,
+      "tests": 9
+    },
+    {
+      "duration_s": 0.142297,
+      "errors": 0,
+      "exit_code": 0,
+      "failed": 0,
+      "passed": 5,
+      "path": "canonical/tests/test_capability_discovery.py",
+      "reported_test_duration_s": 0.036,
+      "sha256": "e1c10c6b78ebba44b5d7455dfc63d3d921cac8ae4d85cc1b1963184682143556",
+      "skipped": 0,
+      "tests": 5
+    },
+    {
+      "duration_s": 0.058343,
+      "errors": 0,
+      "exit_code": 0,
+      "failed": 0,
+      "passed": 3,
+      "path": "canonical/tests/test_capability_planner.py",
+      "reported_test_duration_s": 0.001,
+      "sha256": "a4cfb348e017bd9c9b400cfea97d0725b6c36babf29a3ccb5411ac619a6c74e7",
+      "skipped": 0,
+      "tests": 3
+    },
+    {
+      "duration_s": 0.073514,
+      "errors": 0,
+      "exit_code": 0,
+      "failed": 0,
+      "passed": 2,
+      "path": "canonical/tests/test_capability_reality_auditor.py",
+      "reported_test_duration_s": 0.003,
+      "sha256": "f17338be02502a96dbb87980d8d367d2fc270aef15e87be794099ccdf8630311",
+      "skipped": 0,
+      "tests": 2
+    },
+    {
+      "duration_s": 0.097975,
+      "errors": 0,
+      "exit_code": 0,
+      "failed": 0,
+      "passed": 12,
+      "path": "canonical/tests/test_goal_compiler.py",
+      "reported_test_duration_s": 0.034,
+      "sha256": "30239dfb108b1c9f3cf93a16b9c2d3c80ca307489cdf93358a5a679dd48c790b",
+      "skipped": 0,
+      "tests": 12
+    },
+    {
+      "duration_s": 0.094582,
+      "errors": 0,
+      "exit_code": 0,
+      "failed": 0,
+      "passed": 4,
+      "path": "canonical/tests/test_runtime_composition.py",
+      "reported_test_duration_s": 0.002,
+      "sha256": "87f474d573dc0abf7781b3837640416c03bb3473d6f428cc7dad44b7a2f57a24",
+      "skipped": 0,
+      "tests": 4
+    }
+  ],
+  "schema": "PROJECT_BRAIN_PYTHON_TEST_AUDIT_V1",
+  "source_root": "canonical/tests",
+  "totals": {
+    "errors": 0,
+    "failed": 0,
+    "files": 8,
+    "passed": 43,
+    "skipped": 0,
+    "tests": 43
+  }
+}

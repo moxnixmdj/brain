@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T01:29:38.974063+00:00",
+  "mission_id": "ASTRA-RUNTIME-CANONICAL-TEST-AUDIT-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_CANONICAL_TEST_AUDIT_002.json",
+  "mission_sha256": "f5aa603c84c4b0e23a7fb488c5b53b1dde931154cb76fe991c827cce765c1f6c",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "a657cdf344431a158ea31f23c6eb03c1b9cb6503df886a43d4295d533472e300",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

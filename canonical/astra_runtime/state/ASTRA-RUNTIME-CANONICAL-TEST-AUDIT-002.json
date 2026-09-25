@@ -1,21 +1,214 @@
 {
-  "blocker": {
-    "adapter": "goal",
-    "error": "Blocker:BOUND_PYTHON_STDLIB_MODULE_REQUIRED",
-    "mission_id": "ASTRA-RUNTIME-CANONICAL-TEST-AUDIT-002",
-    "observed_at_utc": "2026-09-25T01:28:19.766346+00:00",
-    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
-    "step_id": "execute-canonical-test-audit",
-    "step_index": 0
-  },
+  "completed_at_utc": "2026-09-25T01:29:38.973461+00:00",
   "created_at_utc": "2026-09-25T01:23:00.690305+00:00",
-  "history": [],
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T01:29:38.972985+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "goal",
+        "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+        "cycles": 5,
+        "final_summary": "COMPOUND_GOAL_COMPLETE",
+        "goal_compilation": {
+          "clauses": [
+            "Execute every canonical/tests/test_*.py file",
+            "Create canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json containing one record per test file with repository-relative path, exit code, passed test count, failed test count, error count, skipped count, and duration, plus totals across the corpus",
+            "Fail if any test file exits nonzero",
+            "Finally independently execute the same complete test corpus again and verify that every file in the report still exits zero, that no canonical test file is missing from the report, and that the report totals are internally consistent"
+          ],
+          "compiled_parts": [
+            {
+              "index": 0,
+              "mode": "NATIVE_TEST_CORPUS_DISCOVERY",
+              "pattern": "test_*.py",
+              "source_root": "canonical/tests",
+              "subgoal": "Execute every canonical/tests/test_*.py file"
+            },
+            {
+              "capability_id": "python.tests.audit.unittest",
+              "index": 1,
+              "mode": "VERIFIED_PYTHON_TEST_AUDIT",
+              "output_path": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json",
+              "pattern": "test_*.py",
+              "source_root": "canonical/tests",
+              "subgoal": "Create canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json containing one record per test file with repository-relative path, exit code, passed test count, failed test count, error count, skipped count, and duration, plus totals across the corpus"
+            },
+            {
+              "audit_path": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json",
+              "index": 2,
+              "mode": "PYTHON_TEST_ZERO_FAILURE_ASSERTION",
+              "subgoal": "Fail if any test file exits nonzero"
+            },
+            {
+              "audit_path": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json",
+              "index": 3,
+              "mode": "INDEPENDENT_PYTHON_TEST_CORPUS_VERIFICATION",
+              "pattern": "test_*.py",
+              "source_root": "canonical/tests",
+              "subgoal": "Finally independently execute the same complete test corpus again and verify that every file in the report still exits zero, that no canonical test file is missing from the report, and that the report totals are internally consistent",
+              "verification_action": "assert_python_test_audit_supported_by_fresh_execution"
+            }
+          ],
+          "compiler_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN"
+        },
+        "planner_model_last": null,
+        "planner_source": null,
+        "planner_transport": null,
+        "planning_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN",
+        "returncode": 0,
+        "stdout": "COMPOUND_GOAL_COMPLETE",
+        "trace": [
+          {
+            "cycle": 0,
+            "plan": {
+              "args": {
+                "prefix": "canonical/tests"
+              },
+              "expect": {
+                "field": "items",
+                "type": "field_nonempty"
+              },
+              "type": "list_tree"
+            },
+            "result": {
+              "items": [
+                "canonical/tests/test_astra_runtime_model_independence.py",
+                "canonical/tests/test_astra_runtime_verification.py",
+                "canonical/tests/test_bound_capabilities.py",
+                "canonical/tests/test_capability_discovery.py",
+                "canonical/tests/test_capability_planner.py",
+                "canonical/tests/test_capability_reality_auditor.py",
+                "canonical/tests/test_goal_compiler.py",
+                "canonical/tests/test_runtime_composition.py"
+              ],
+              "truncated": false,
+              "type": "list_tree"
+            }
+          },
+          {
+            "cycle": 1,
+            "plan": {
+              "args": {
+                "capability_id": "python.tests.audit.unittest",
+                "output_path": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json",
+                "pattern": "test_*.py",
+                "source_root": "canonical/tests",
+                "timeout_s": 180
+              },
+              "expect": {
+                "field": "output_verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "python_test_audit",
+              "capability_id": "python.tests.audit.unittest",
+              "dependency": {
+                "module": "unittest",
+                "python_version": "3.12.14",
+                "status": "LOCAL_VERIFIED",
+                "type": "python_stdlib"
+              },
+              "error_count": 0,
+              "failed_count": 0,
+              "file_count": 8,
+              "output_path": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json",
+              "output_sha256": "93dfec34ec9a559844dab7e962f1ae3a49d1600f6e17b3174cec50ac13502bd7",
+              "output_verified": true,
+              "passed_count": 43,
+              "skipped_count": 0,
+              "test_count": 43
+            }
+          },
+          {
+            "cycle": 2,
+            "plan": {
+              "args": {
+                "audit_path": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json"
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "assert_python_test_audit_zero"
+            },
+            "result": {
+              "audit_path": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json",
+              "audit_sha256": "93dfec34ec9a559844dab7e962f1ae3a49d1600f6e17b3174cec50ac13502bd7",
+              "totals": {
+                "errors": 0,
+                "failed": 0,
+                "files": 8,
+                "passed": 43,
+                "skipped": 0,
+                "tests": 43
+              },
+              "type": "assert_python_test_audit_zero",
+              "verified": true
+            }
+          },
+          {
+            "cycle": 3,
+            "plan": {
+              "args": {
+                "audit_path": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json",
+                "pattern": "test_*.py",
+                "source_root": "canonical/tests"
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "assert_python_test_audit_supported_by_fresh_execution"
+            },
+            "result": {
+              "audit_path": "canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json",
+              "audit_sha256": "93dfec34ec9a559844dab7e962f1ae3a49d1600f6e17b3174cec50ac13502bd7",
+              "errors": [],
+              "pattern": "test_*.py",
+              "source_root": "canonical/tests",
+              "totals": {
+                "errors": 0,
+                "failed": 0,
+                "files": 8,
+                "passed": 43,
+                "skipped": 0,
+                "tests": 43
+              },
+              "type": "assert_python_test_audit_supported_by_fresh_execution",
+              "verified": true
+            }
+          },
+          {
+            "cycle": 4,
+            "plan": {
+              "args": {
+                "summary": "COMPOUND_GOAL_COMPLETE"
+              },
+              "type": "finish"
+            },
+            "result": {
+              "summary": "COMPOUND_GOAL_COMPLETE",
+              "type": "finish"
+            }
+          }
+        ]
+      },
+      "step_id": "execute-canonical-test-audit",
+      "step_index": 0
+    }
+  ],
   "mission_id": "ASTRA-RUNTIME-CANONICAL-TEST-AUDIT-002",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_CANONICAL_TEST_AUDIT_002.json",
-  "mission_sha256": "991b9f5f1c0bb08cb5dc1cdc19ca1a2d685353f5c70ab63962131dae992387a7",
-  "next_step": 0,
+  "mission_sha256": "f5aa603c84c4b0e23a7fb488c5b53b1dde931154cb76fe991c827cce765c1f6c",
+  "next_step": 1,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
-  "status": "BLOCKED",
-  "updated_at_utc": "2026-09-25T01:28:19.766574+00:00"
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T01:29:38.973002+00:00"
 }
