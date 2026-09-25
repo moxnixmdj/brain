@@ -1,0 +1,930 @@
+{
+  "attempts": [
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "cf862f0d707c35908d2b1da4541e42576698059e8e46027e80cadbaacdc57fc8",
+        "executables": [],
+        "package": "node-one-time",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.0.0-3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 126.0,
+        "archive_sha256": "cf862f0d707c35908d2b1da4541e42576698059e8e46027e80cadbaacdc57fc8",
+        "binding_kind": "apt",
+        "description": "Run the supplied Node.js function exactly once",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "exactly",
+          "one"
+        ],
+        "name": "node-one-time",
+        "packages": [],
+        "query": "exactly",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 62,
+        "version": "1.0.0-3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "FileNotFoundError:[Errno 2] No such file or directory: '/usr/bin/rotate'",
+      "status": "PROBE_FAILED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 74.0,
+        "archive_sha256": "0be2ed7480267300ad90ae088082b1c8b41628e429ce0405294ccca94136078f",
+        "binding_kind": "apt",
+        "description": "Generates a static html photo gallery from one or more directories of images",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "jigl",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.0.1+20060126-7",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "4f43af84645563b12c037fd312f53836d4ae395e8490db698fd549e3c614362a",
+        "executables": [],
+        "package": "fonts-kacst-one",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "5.0+svn11846-10"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "4f43af84645563b12c037fd312f53836d4ae395e8490db698fd549e3c614362a",
+        "binding_kind": "apt",
+        "description": "TrueType font designed for Arabic language",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "fonts-kacst-one",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "5.0+svn11846-10",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "5847cfb6e8ad70151a8bca2d701fc359e15b6512885e1f298e33695a8d7391a5",
+        "executables": [],
+        "package": "fonts-leckerli-one",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "20120409-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "5847cfb6e8ad70151a8bca2d701fc359e15b6512885e1f298e33695a8d7391a5",
+        "binding_kind": "apt",
+        "description": "fat display typeface with a handwritten feeling",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "fonts-leckerli-one",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "20120409-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "9099c790b40ddf977a8c0e9d9271936525c5f6c17653e66d1c01f0b8b7769cdc",
+        "executables": [],
+        "package": "four-in-a-row",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1:3.38.1-1build3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "9099c790b40ddf977a8c0e9d9271936525c5f6c17653e66d1c01f0b8b7769cdc",
+        "binding_kind": "apt",
+        "description": "Four in a Row game for GNOME",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "row"
+        ],
+        "name": "four-in-a-row",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:3.38.1-1build3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "TimeoutExpired:Command '['/usr/bin/keep-one-running', '--help']' timed out after 10 seconds",
+      "status": "PROBE_FAILED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "fea035fbcb0b3212a9fe8681eddfe84b48e87d5bc2ccd0e4f0e652521906812e",
+        "binding_kind": "apt",
+        "description": "run just one instance of a command and its args at a time",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "run-one",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.17-0ubuntu2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "00276b7ee367bdb886c4c79cde3da7975553438bdf70fe3a5831099f481f9f66",
+        "executables": [],
+        "package": "tryton-server-all-in-one",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "6.0.39-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "00276b7ee367bdb886c4c79cde3da7975553438bdf70fe3a5831099f481f9f66",
+        "binding_kind": "apt",
+        "description": "Tryton application platform - full installation",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "tryton-server-all-in-one",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.0.39-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.xlsx",
+      "probe": {
+        "archive_sha256": "ccbd2437e309ad0a5a39410777b17c634f178e0dca66d368313584095ac513de",
+        "executables": [
+          {
+            "executable": "/usr/bin/apt-rollback",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "apt-rollback ver. 1.0.16\nUndo the last APT commands or a specified one\n\nWARNING: Cannot determinate the OS Installation Date\n         This will prevent to block UNDOing of Installation Packages\n\nUsage: apt-rollback [--last <n>] [--remove/--reinstall package-name] [--help]\n\n  --last       Undo the last <n> APT commands\n               Supports the undo of the only Install, Remove and Purge commands\n\n  --remove     Remove an INSTALLED package and related configuration files\n               Removing also all its first installed dependencies\n\n  --reinstall  Reinstall a REMOVED package,\n               and all its first installed dependences\n               Reproducing exactly its first installation\n\n  --help       Print this help"
+              }
+            ]
+          }
+        ],
+        "package": "apt-rollback",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.0.16-0ubuntu1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 50.0,
+        "archive_sha256": "ccbd2437e309ad0a5a39410777b17c634f178e0dca66d368313584095ac513de",
+        "binding_kind": "apt",
+        "description": "Undo the last APT commands or a specified one",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "apt-rollback",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.0.16-0ubuntu1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.xlsx",
+      "probe": {
+        "archive_sha256": "64d515a20db6f096c8db6b00904d41200d6951f739a783db8b364a0df7b0a979",
+        "executables": [
+          {
+            "executable": "/usr/bin/athena-jot",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "jot: Unknown option --help\nusage:  jot [ options ] [ reps [ begin [ end [ s ] ] ] ]"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/jot",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "jot: Unknown option --help\nusage:  jot [ options ] [ reps [ begin [ end [ s ] ] ] ]"
+              }
+            ]
+          }
+        ],
+        "package": "athena-jot",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "9.0-8"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 50.0,
+        "archive_sha256": "64d515a20db6f096c8db6b00904d41200d6951f739a783db8b364a0df7b0a979",
+        "binding_kind": "apt",
+        "description": "print out increasing, decreasing, random, or redundant data, one per line",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "athena-jot",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "9.0-8",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.xlsx",
+      "probe": {
+        "archive_sha256": "23cdf16c7b030197d1dd214aec2620f16811d04adb0aa65034487db4297615a5",
+        "executables": [
+          {
+            "executable": "/usr/sbin/dbackup",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "AWIT-DBackup v0.0.22-1, Copyright (c) 2010-2014, AllWorldIT\n\nUsage: /usr/sbin/dbackup [args] <src> <dst>\n\n    General Options:\n      --help                             What you seeing now.\n      --config=file                      Config file to use.\n      --log-level                        5 = debug, 4 = info, 3 = notice\n                                         2 = warning, 1 = error\n      --tar                              Path to tar binary.\n\n    Backing Options:\n      --backup                           Backup src to dst.\n      --backup-upgrade                   Upgrade backup to new dbackup ver.\n      --compress=<xz|bz2|gzip|lz|none>   Compression method to use defaults\n                                         to using xz, or bzip2 if xz unavail.\n\n      --exclude-data                     Exclude all data dirs listed below.\n      --exclude-system                   Exclude system dirs listed below.\n\n      --exclude-path=pcre                PCRE to exclude paths from backup.\n      --exclude-file=pcre                PCRE to exclude files from backup.\n\n      --exclude-fs-type=fstype           Filesystem type to exclude.\n\n      --data-dir=dir                     Add an additional data directory.\n      --system-dir=dir                   Add an additional system directory.\n      --system-base=path                 Add a system base. This defaults to /\n                                         and this option will override that.\n\n      --tar-ignore-failed-read=path      This is passed to tar only. It will\n                                         not cause errors of files that cannot\n                                         be read for the path matched.\n\n    Restore Options:\n      --restore                          Restore src to dst.\n      --tar-keep-newer                   Do not overwrite newer files.\n      --tar-keep-old-files               Don't replace existing files.\n\n\nBuiltins:\n---------\n    system-dirs:\n      /dev, /run, /proc, /sys, /tmp, /var/tmp, /misc, /media, /mnt\n\n    data-dirs:\n      /var/lib/mysql, /var/lib/pgsql, /var/amavis/tmp/, /var/lib/amavis/tmp/, /var/spool/amavis/virusmails/, /var/spool/mailman/retry, /var/spool/postfix/active, /var/spool/postfix/defer, /var/spool/postfix/deferred, /var/spool/postfix/public, /var/spool/postfix/private, /var/spool/squid, /var/cache/yum, /var/cache/apt/archives, /home/virtfs"
+              }
+            ]
+          }
+        ],
+        "package": "awit-dbackup",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.0.22-1.1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 50.0,
+        "archive_sha256": "23cdf16c7b030197d1dd214aec2620f16811d04adb0aa65034487db4297615a5",
+        "binding_kind": "apt",
+        "description": "Flexible one archive per directory backup tool",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "awit-dbackup",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.0.22-1.1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "6add88f122257587b9a3343b2fd143f9469c585dd8f84a120c689a8035bc1573",
+        "executables": [],
+        "package": "caja-share",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.26.1-2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 50.0,
+        "archive_sha256": "6add88f122257587b9a3343b2fd143f9469c585dd8f84a120c689a8035bc1573",
+        "binding_kind": "apt",
+        "description": "Allows one to quickly share a folder from the Caja file manager",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "caja-share",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.26.1-2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "576a5fdf763a186f96895eff73e5d8afe675b72a06843f6f97d13f8702a308e8",
+        "executables": [],
+        "package": "caja-wallpaper",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.26.1-2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 50.0,
+        "archive_sha256": "576a5fdf763a186f96895eff73e5d8afe675b72a06843f6f97d13f8702a308e8",
+        "binding_kind": "apt",
+        "description": "Allows one to quickly set a wallpaper from folders",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "caja-wallpaper",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.26.1-2",
+        "zero_cost_eligible": true
+      }
+    }
+  ],
+  "goal": "Create canonical/astra_runtime/tmp/VERIFIED_CAPABILITIES.xlsx containing exactly one row for every VERIFIED_BOUND_CAPABILITY with columns capability_id, status, source_type, provides, and incremental_spend_usd",
+  "mission_id": "ASTRA-RUNTIME-VERIFIED-CAPABILITY-XLSX-001",
+  "role_conditioned_discovery": {
+    "binding_performed": false,
+    "candidate_count": 24,
+    "candidates": [
+      {
+        "archive_sha256": "cf862f0d707c35908d2b1da4541e42576698059e8e46027e80cadbaacdc57fc8",
+        "binding_kind": "apt",
+        "description": "Run the supplied Node.js function exactly once",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "exactly",
+          "one"
+        ],
+        "name": "node-one-time",
+        "packages": [],
+        "query": "exactly",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 62,
+        "version": "1.0.0-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "4f43af84645563b12c037fd312f53836d4ae395e8490db698fd549e3c614362a",
+        "binding_kind": "apt",
+        "description": "TrueType font designed for Arabic language",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "fonts-kacst-one",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "5.0+svn11846-10",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "5847cfb6e8ad70151a8bca2d701fc359e15b6512885e1f298e33695a8d7391a5",
+        "binding_kind": "apt",
+        "description": "fat display typeface with a handwritten feeling",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "fonts-leckerli-one",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "20120409-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "fea035fbcb0b3212a9fe8681eddfe84b48e87d5bc2ccd0e4f0e652521906812e",
+        "binding_kind": "apt",
+        "description": "run just one instance of a command and its args at a time",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "run-one",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.17-0ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "00276b7ee367bdb886c4c79cde3da7975553438bdf70fe3a5831099f481f9f66",
+        "binding_kind": "apt",
+        "description": "Tryton application platform - full installation",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "tryton-server-all-in-one",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.0.39-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ccbd2437e309ad0a5a39410777b17c634f178e0dca66d368313584095ac513de",
+        "binding_kind": "apt",
+        "description": "Undo the last APT commands or a specified one",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "apt-rollback",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.0.16-0ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "64d515a20db6f096c8db6b00904d41200d6951f739a783db8b364a0df7b0a979",
+        "binding_kind": "apt",
+        "description": "print out increasing, decreasing, random, or redundant data, one per line",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "athena-jot",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "9.0-8",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "23cdf16c7b030197d1dd214aec2620f16811d04adb0aa65034487db4297615a5",
+        "binding_kind": "apt",
+        "description": "Flexible one archive per directory backup tool",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "awit-dbackup",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.0.22-1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "6add88f122257587b9a3343b2fd143f9469c585dd8f84a120c689a8035bc1573",
+        "binding_kind": "apt",
+        "description": "Allows one to quickly share a folder from the Caja file manager",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "caja-share",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.26.1-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "576a5fdf763a186f96895eff73e5d8afe675b72a06843f6f97d13f8702a308e8",
+        "binding_kind": "apt",
+        "description": "Allows one to quickly set a wallpaper from folders",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "caja-wallpaper",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.26.1-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "1bb51c7de4ee861f8a6fa3d3d4b2b7299c596119214dab5a7577e00cc5d746da",
+        "binding_kind": "apt",
+        "description": "Allows one to view extended attributes",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "caja-xattr-tags",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.26.1-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "a887702f8bea51d161b1fd70c5142db4e9e58f2e830261d3ab7962081e243032",
+        "binding_kind": "apt",
+        "description": "parse a string into one of the standard Common Lisp number types",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "cl-parse-number",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.7-1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ac43876455b6be0abf88e6946cade6a3b637b96d27a7bf1e9fd8fc33f9daeccd",
+        "binding_kind": "apt",
+        "description": "Little shoot-'em-up arcade game for one or two players",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "dodgindiamond2",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.2.2-4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "861ae1ffe62cccf2469681710e164e2dec41b48853380ea6582c7d0e1ec9565e",
+        "binding_kind": "apt",
+        "description": "One Time Password calculator",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "donkey",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.2.0-6",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "831039a14eba610dca9601ef384169475214d9e5489669a3e2a25b57dd9692e9",
+        "binding_kind": "apt",
+        "description": "Ultra-fast all-in-one FASTQ preprocessor",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "fastp",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.23.4+dfsg-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "3b340070cc4d8e26a418e59100a9dc27a2fa8107406944e01df9afbc0151d6d5",
+        "binding_kind": "apt",
+        "description": "all-in-one NES/Famicom Emulator",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "fceux",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.6.5+dfsg1-2build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "06caa99cfa037094ed2c2524906483220cfe2701e6b3fc28237e72a49b716b39",
+        "binding_kind": "apt",
+        "description": "Sans-serif font for decorative signs, one of the Warsaw Types",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "fonts-apropal",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.0-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "938725d9a731597b9e4999c271af87c660bb5d0aaecea14b2609156054c04104",
+        "binding_kind": "apt",
+        "description": "The Emoji One Truetype Bitmap Font",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "fonts-emojione",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.2.6+16.10.20160804-0ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ca8ec7529141d9aa0d4337166b49e87da5ef76c42de7ebf5e8fc5631bf7cb329",
+        "binding_kind": "apt",
+        "description": "font similar to the one used for the Debian logo",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "fonts-prociono",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.3-6",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "dcef1ae45c4e32a25b771d655cc6079b3eb627ca928c5d79ff1833082c868ba7",
+        "binding_kind": "apt",
+        "description": "mirrors a whole filesystem tree from one charset to another",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "fuse-convmvfs",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.2.6-2build4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "3438115462281894d8bc2d0e92ad00fbb2c67d543369fa889683865f6c0e55e0",
+        "binding_kind": "apt",
+        "description": "Gem Drop X is an interesting one-player puzzle game for X11",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "gemdropx",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.9-9",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "dc80fc7c3198d9b1769791e1faf2ab72e48f47b84744727dd13bce6949ca809f",
+        "binding_kind": "apt",
+        "description": "Manage git repositories in one place",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "gitbatch",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.5.0-4build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "13f549683e2fd8510c9ea0e5e1d867bef0b405378c10e99229d26b02a0670a46",
+        "binding_kind": "apt",
+        "description": "JVM Dynamic Attach utility all in one jmap jstack jcmd jinfo",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "jattach",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.2-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "0be2ed7480267300ad90ae088082b1c8b41628e429ce0405294ccca94136078f",
+        "binding_kind": "apt",
+        "description": "Generates a static html photo gallery from one or more directories of images",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "one"
+        ],
+        "name": "jigl",
+        "packages": [],
+        "query": "one",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.0.1+20060126-7",
+        "zero_cost_eligible": true
+      }
+    ],
+    "effect": "exactly one",
+    "errors": [],
+    "queries": [
+      "exactly",
+      "one"
+    ],
+    "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+    "source": "APT_CATALOG",
+    "source_url": null
+  },
+  "schema": "PROJECT_BRAIN_AUTO_APT_CLI_ACQUISITION_EVIDENCE_V1",
+  "status": "NO_COMPATIBLE_CONTRACT"
+}
