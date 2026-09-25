@@ -1379,12 +1379,25 @@
           }
         ]
       },
-      "status": "BOUND_PENDING_INDEPENDENT_VERIFICATION",
+      "status": "VERIFIED_BOUND_CAPABILITY",
       "acquisition_evidence": {
         "mission_id": "ASTRA-DOCX-SUPPLIER-DIAG-001",
         "discovery_source": "APT_CATALOG",
         "integration_friction": 2,
         "description": "library for creating and updating Microsoft Word files (Python 3)"
+      },
+      "verification": {
+        "mission_id": "ASTRA-VERIFY-DOCX-LIBRARY-BINDING-001",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DOCX-LIBRARY-BINDING-001__RECEIPT.json",
+        "independently_verified_by": "docx.document.verify.ooxml",
+        "observed_effect": {
+          "output_path": "canonical/astra_runtime/tmp/DOCX_LIBRARY_VERIFY.docx",
+          "output_sha256": "02c358981319f7dbe12dee7431b4ed88633d093db4aa64ed078c715dc7cee4aa",
+          "output_bytes": 36826,
+          "title": "Project Brain Report",
+          "paragraph": "Verified cross-tool composition",
+          "table_rows": 3
+        }
       }
     },
     "docx.document.verify.ooxml": {
@@ -1422,7 +1435,19 @@
           "xml.etree.ElementTree"
         ]
       },
-      "status": "BOUND_PENDING_INDEPENDENT_VERIFICATION"
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "mission_id": "ASTRA-VERIFY-DOCX-LIBRARY-BINDING-001",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DOCX-LIBRARY-BINDING-001__RECEIPT.json",
+        "producer_independent": true,
+        "observed_effect": {
+          "verified": true,
+          "title_ok": true,
+          "paragraphs_ok": true,
+          "table_ok": true,
+          "producer_sha256": "02c358981319f7dbe12dee7431b4ed88633d093db4aa64ed078c715dc7cee4aa"
+        }
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
