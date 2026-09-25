@@ -22,6 +22,7 @@
     "authoritative_source_required": true,
     "provenance_must_be_persisted": true,
     "downstream_use_required": true,
-    "source_revalidation_required": true
+    "source_revalidation_required": true,
+    "replay_after_generic_knowledge_compiler_commit": "e9ce36db7e22e14d4991cb1bbea9a1847f01611c"
   }
 }
