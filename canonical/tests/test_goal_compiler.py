@@ -356,6 +356,35 @@ class GoalCompilerTests(unittest.TestCase):
         ])
         self.assertIn("and verify that every file in the report still exits zero",out["clauses"][-1].lower())
 
+    def test_verified_browser_interaction_compiles_declarative_actions(self):
+        goal=(
+            "Using a real rendered browser, open https://httpbin.org/forms/post. "
+            "Enter PROJECT BRAIN into the customer name field, choose Medium pizza size, "
+            "check the Bacon topping, submit the form, and save a full-page screenshot to "
+            "canonical/astra_runtime/tmp/HTTPBIN_FORM_SUBMITTED.png and a result JSON to "
+            "canonical/astra_runtime/tmp/HTTPBIN_FORM_SUBMITTED.json. "
+            "The final rendered page must independently show the submitted customer name PROJECT BRAIN, "
+            "size Medium, and topping Bacon; do not count merely opening or screenshotting the form as success."
+        )
+        out=compiler.compile_goal(goal,self.registry(),ROOT)
+        self.assertEqual(out["compiler_mode"],"DETERMINISTIC_COMPOUND_ACTION_PLAN")
+        self.assertEqual(out["compiled_parts"][0]["mode"],"VERIFIED_BROWSER_INTERACTION")
+        self.assertEqual(
+            out["compiled_parts"][0]["selected_capability"],
+            "web.browser.rendered.capture.chromedriver",
+        )
+        actions=out["controller_actions"][0]["args"]["actions"]
+        self.assertEqual([x["type"] for x in actions],[
+            "set_text","select_option","check","submit",
+        ])
+        self.assertEqual(actions[0]["value"],"PROJECT BRAIN")
+        self.assertEqual(actions[1]["value"],"Medium")
+        self.assertEqual(actions[2]["target"],"Bacon")
+        self.assertEqual(
+            out["controller_actions"][0]["args"]["result_path"],
+            "canonical/astra_runtime/tmp/HTTPBIN_FORM_SUBMITTED.json",
+        )
+
     def test_plain_qr_goal_selects_verified_qr_and_binds_arguments(self):
         goal="Generate a QR code image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png."
         out=compiler.compile_goal(goal,self.registry(),ROOT)
