@@ -147,7 +147,7 @@
     "tarball_url": "https://registry.npmjs.org/@dfinity/cbor/-/cbor-0.2.3.tgz",
     "version": "0.2.3"
   },
-  "status": "PENDING_INDEPENDENT_VERIFICATION",
+  "status": "PROMOTED_VERIFIED",
   "verification_fixture": [
     {
       "id": 1,

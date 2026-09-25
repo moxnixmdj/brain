@@ -1,28 +1,33 @@
 {
-  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "constraints": {
+    "auto_acquisition_promoted": {
+      "capability_id": "auto.npm.dfinity-cbor",
+      "verification_mission_id": "ASTRA-AUTO-VERIFY-NPM-DFINITY-CBOR-B52D51692BC6",
+      "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-NPM-ACQUIRE-CBOR-001__dfinity-cbor__b52d51692bc6__AUTO_VERIFY.json"
+    },
+    "fresh_node_verification_required": true,
+    "held_out_format": true,
+    "incremental_spend_usd": 0,
+    "manual_binding": false,
+    "manual_supplier": false,
+    "model_controller_required": false,
+    "nodejs_execution_required": true,
+    "npm_javascript_library_required": true
+  },
+  "goal": "Create canonical/astra_runtime/tmp/NPM_CBOR_SOURCE.json containing exactly four records with fields id and text: 1 alpha, 2 beta, 3 gamma, 4 delta. Using a zero-cost npm JavaScript library executed by Node.js, encode those exact records as CBOR and save canonical/astra_runtime/tmp/NPM_CBOR_RECORDS.cbor. Independently decode the CBOR artifact in a fresh Node.js process and verify the decoded records are exactly identical to canonical/astra_runtime/tmp/NPM_CBOR_SOURCE.json in values, order, field names, and record count.",
   "mission_id": "ASTRA-RUNTIME-NPM-ACQUIRE-CBOR-001",
   "purpose": "Held-out npm/Node codec acquisition test on a different binary format, with no package-name or binding hint.",
-  "goal": "Create canonical/astra_runtime/tmp/NPM_CBOR_SOURCE.json containing exactly four records with fields id and text: 1 alpha, 2 beta, 3 gamma, 4 delta. Using a zero-cost npm JavaScript library executed by Node.js, encode those exact records as CBOR and save canonical/astra_runtime/tmp/NPM_CBOR_RECORDS.cbor. Independently decode the CBOR artifact in a fresh Node.js process and verify the decoded records are exactly identical to canonical/astra_runtime/tmp/NPM_CBOR_SOURCE.json in values, order, field names, and record count.",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
   "steps": [
     {
-      "id": "run-held-out-npm-cbor",
       "adapter": "goal",
       "goal_ref": "goal",
+      "id": "run-held-out-npm-cbor",
       "max_controller_actions": 24,
       "verify": {
-        "type": "stdout_contains",
-        "text": "COMPOUND_GOAL_COMPLETE"
+        "text": "COMPOUND_GOAL_COMPLETE",
+        "type": "stdout_contains"
       }
     }
-  ],
-  "constraints": {
-    "incremental_spend_usd": 0,
-    "model_controller_required": false,
-    "manual_supplier": false,
-    "manual_binding": false,
-    "npm_javascript_library_required": true,
-    "nodejs_execution_required": true,
-    "fresh_node_verification_required": true,
-    "held_out_format": true
-  }
+  ]
 }

@@ -1,0 +1,7 @@
+{
+  "algorithm": "sha512",
+  "digest_hex": "e465fef6d01fdbdafde0fc6ff270b3aefdbfb7e02439f7a6fdcfc6eb5f8503659a76aed31ef73972faff0152c7d0ba6e9157cd4964511ef9757e409d881f4c31",
+  "integrity": "sha512-5GX+9tAf29r94Pxv8nCzrv2/t+AkOfem/c/G61+FA2Wadq7THvc5cvr/AVLH0LpukVfNSWRRHvl1fkCdiB9MMQ==",
+  "package": "@dfinity/cbor",
+  "version": "0.2.3"
+}
