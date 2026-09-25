@@ -1964,6 +1964,62 @@ def _controller_plan_sha256(actions):
     return hashlib.sha256(raw).hexdigest()
 
 
+def _controller_checkpoint_record_valid(record):
+    if not isinstance(record,dict):
+        return False
+    action=record.get("plan")
+    result=record.get("result")
+    if not isinstance(action,dict) or not isinstance(result,dict):
+        return False
+    typ=str(action.get("type") or "")
+    if typ=="finish":
+        return True
+
+    checks=[]
+    for path_key,hash_key in (
+        ("output_path","output_sha256"),
+        ("screenshot_path","screenshot_sha256"),
+        ("xlsx_path","xlsx_sha256"),
+    ):
+        raw=result.get(path_key)
+        if isinstance(raw,str) and raw:
+            checks.append((raw,result.get(hash_key)))
+
+    # Some adapters report durable paths without hashes. Existence is still
+    # required before trusting a checkpointed effect.
+    for path_key in ("result_path","manifest_path","decision_path"):
+        raw=result.get(path_key)
+        if isinstance(raw,str) and raw and not any(x[0]==raw for x in checks):
+            checks.append((raw,None))
+
+    if typ=="assert_file_exists":
+        raw=(action.get("args") or {}).get("path")
+        if isinstance(raw,str) and raw:
+            checks.append((raw,result.get("sha256")))
+
+    for raw,expected_hash in checks:
+        try:
+            p=_safe_repo_path(raw)
+        except Exception:
+            return False
+        if not p.is_file():
+            return False
+        if isinstance(expected_hash,str) and expected_hash:
+            try:
+                if sha_file(p)!=expected_hash:
+                    return False
+            except Exception:
+                return False
+    return True
+
+
+def _validated_checkpoint_prefix(completed):
+    for index,record in enumerate(completed):
+        if not _controller_checkpoint_record_valid(record):
+            return completed[:index],index
+    return completed,None
+
+
 def _load_controller_checkpoint(step,mission,actions):
     path=_controller_checkpoint_path(step,mission)
     plan_sha=_controller_plan_sha256(actions)
@@ -1993,8 +2049,14 @@ def _load_controller_checkpoint(step,mission,actions):
     observed=[x.get("cycle") for x in completed if isinstance(x,dict)]
     if observed!=expected:
         raise Blocker("CONTROLLER_CHECKPOINT_SEQUENCE_INVALID")
+    valid_prefix,rewound_from=_validated_checkpoint_prefix(completed)
+    if rewound_from is not None:
+        data["completed_actions"]=valid_prefix
+        data["rewind_count"]=int(data.get("rewind_count") or 0)+1
+        data["last_rewound_from_action_index"]=rewound_from
+        data["last_rewind_reason"]="DURABLE_EFFECT_INVALID_OR_MISSING"
     data["resume_count"]=int(data.get("resume_count") or 0)+1
-    data["next_action_index"]=len(completed)
+    data["next_action_index"]=len(data.get("completed_actions") or [])
     data["updated_at_utc"]=utc()
     writej(path,data)
     return path,data,True
@@ -2071,6 +2133,8 @@ def _run_model_independent_goal(step, mission, goal):
                 "resumed":bool(resumed),
                 "resume_count":int(checkpoint.get("resume_count") or 0),
                 "resumed_from_action_index":start_cycle,
+                "rewind_count":int(checkpoint.get("rewind_count") or 0),
+                "last_rewound_from_action_index":checkpoint.get("last_rewound_from_action_index"),
               }
             }
     raise Blocker("MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH")
