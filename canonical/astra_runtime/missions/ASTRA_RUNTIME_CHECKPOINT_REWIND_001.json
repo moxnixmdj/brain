@@ -58,6 +58,7 @@
     "model_controller_required": false,
     "intentional_one_shot_interrupt": true,
     "artifact_will_be_removed_between_runs": true,
-    "checkpoint_revalidation_commit": "4595ab2e0b9603792d1d9ecbca4ffd300d6033db"
+    "checkpoint_revalidation_commit": "4595ab2e0b9603792d1d9ecbca4ffd300d6033db",
+    "resume_after_artifact_removal_commit": "84adf6e055dd44304cdfd2122a4d93763276e9c6"
   }
 }
