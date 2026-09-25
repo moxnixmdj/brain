@@ -1,0 +1,99 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-STALE-001",
+  "purpose": "Prove freshness expiry produces explicit STALE epistemic state rather than SUPPORTED or generic INSUFFICIENT.",
+  "goal": "Fetch two agreeing external observations, apply a zero-second freshness budget, and verify the assessment is STALE because both observations have expired before assessment.",
+  "steps": [
+    {
+      "id": "run-stale-assessment",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 8,
+      "controller_actions": [
+        {
+          "type": "fetch_json_knowledge",
+          "args": {
+            "url": "https://httpbin.org/get?claim=alpha",
+            "json_path": [
+              "args",
+              "claim"
+            ],
+            "output_path": "canonical/astra_runtime/tmp/JIT_STALE_A.json",
+            "authoritative": false,
+            "timeout_s": 20,
+            "max_bytes": 500000
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "verified",
+            "value": true
+          }
+        },
+        {
+          "type": "fetch_json_knowledge",
+          "args": {
+            "url": "https://httpbin.org/anything?claim=alpha",
+            "json_path": [
+              "args",
+              "claim"
+            ],
+            "output_path": "canonical/astra_runtime/tmp/JIT_STALE_B.json",
+            "authoritative": false,
+            "timeout_s": 20,
+            "max_bytes": 500000
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "verified",
+            "value": true
+          }
+        },
+        {
+          "type": "assess_knowledge_consistency",
+          "args": {
+            "evidence_paths": [
+              "canonical/astra_runtime/tmp/JIT_STALE_A.json",
+              "canonical/astra_runtime/tmp/JIT_STALE_B.json"
+            ],
+            "output_path": "canonical/astra_runtime/tmp/JIT_STALE_ASSESSMENT.json",
+            "max_age_s": 0
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "status",
+            "value": "STALE"
+          }
+        },
+        {
+          "type": "assert_knowledge_status",
+          "args": {
+            "assessment_path": "canonical/astra_runtime/tmp/JIT_STALE_ASSESSMENT.json",
+            "expected_status": "STALE"
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "verified",
+            "value": true
+          }
+        },
+        {
+          "type": "finish",
+          "args": {
+            "summary": "KNOWLEDGE_STALENESS_DETECTED"
+          }
+        }
+      ],
+      "verify": {
+        "type": "stdout_contains",
+        "text": "KNOWLEDGE_STALENESS_DETECTED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "freshness_bound_s": 0,
+    "stale_status_required": true,
+    "stale_semantics_commit": "9b509d17246edcd54633d94ac8efcf3956776784"
+  }
+}
