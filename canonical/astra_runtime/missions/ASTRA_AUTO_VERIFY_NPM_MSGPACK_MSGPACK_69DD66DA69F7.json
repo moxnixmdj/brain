@@ -1,0 +1,34 @@
+{
+  "constraints": {
+    "allow_registry_mutation": true,
+    "auto_generated_from_mission": "ASTRA-RUNTIME-NPM-ACQUIRE-MSGPACKR-003",
+    "fresh_verification_invocation_required": true,
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "supplier_class": "npm_javascript_library"
+  },
+  "goal": "Verify the pending npm JavaScript codec in fresh Node.js processes, promote only after exact semantic equality, then replay the originating mission.",
+  "mission_id": "ASTRA-AUTO-VERIFY-NPM-MSGPACK-MSGPACK-69DD66DA69F7",
+  "purpose": "Fresh Node.js semantic round-trip verification and promotion of an automatically synthesized npm codec binding.",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "steps": [
+    {
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/runtime/verify_pending_cli_binding.py canonical/astra_runtime/pending_bindings/ASTRA-RUNTIME-NPM-ACQUIRE-MSGPACKR-003__msgpack-msgpack__69dd66da69f7.json canonical/astra_runtime/evidence/ASTRA-RUNTIME-NPM-ACQUIRE-MSGPACKR-003__msgpack-msgpack__69dd66da69f7__AUTO_VERIFY.json",
+      "id": "verify-pending-node-codec",
+      "verify": {
+        "text": "PENDING_NPM_BINDING_EFFECT_VERIFIED",
+        "type": "stdout_contains"
+      }
+    },
+    {
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/runtime/promote_pending_binding.py canonical/astra_runtime/pending_bindings/ASTRA-RUNTIME-NPM-ACQUIRE-MSGPACKR-003__msgpack-msgpack__69dd66da69f7.json canonical/astra_runtime/evidence/ASTRA-RUNTIME-NPM-ACQUIRE-MSGPACKR-003__msgpack-msgpack__69dd66da69f7__AUTO_VERIFY.json",
+      "id": "promote-and-replay",
+      "verify": {
+        "text": "PENDING_CAPABILITY_PROMOTED",
+        "type": "stdout_contains"
+      }
+    }
+  ]
+}

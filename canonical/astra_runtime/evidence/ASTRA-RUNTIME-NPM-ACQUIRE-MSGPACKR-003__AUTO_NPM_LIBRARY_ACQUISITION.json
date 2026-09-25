@@ -1,0 +1,147 @@
+{
+  "attempts": [
+    {
+      "error": "AutoNpmAcquisitionFailure:NPM_LIFECYCLE_SCRIPTS_REJECTED:msgpack:install",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "description": "A space-efficient object serialization library for node.js",
+        "format": "msgpack",
+        "links": {
+          "bugs": "https://github.com/msgpack/msgpack-node/issues",
+          "homepage": "https://github.com/msgpack/msgpack-node",
+          "npm": "https://www.npmjs.com/package/msgpack",
+          "repository": "git+https://github.com/msgpack/msgpack-node.git"
+        },
+        "name": "msgpack",
+        "package": "msgpack",
+        "registry_search_url": "https://registry.npmjs.org/-/v1/search?text=msgpack&size=30",
+        "score": 180,
+        "version": "1.0.3"
+      }
+    },
+    {
+      "contract": {
+        "decode_export": "decode",
+        "dependency_count": 0,
+        "encode_export": "encode",
+        "fixture": [
+          {
+            "id": 1,
+            "text": "alpha"
+          },
+          {
+            "id": 2,
+            "text": "beta"
+          }
+        ],
+        "integrity": "sha512-47XIizs9XZXvuJgoaJUIE2lFoID8ugvc0jzSHP+Ptfk8nTbnR8g788wv48N03Kx0UkAv559HWRQ3yzOgzlRNUA==",
+        "integrity_algorithm": "sha512",
+        "integrity_digest_hex": "e3b5c88b3b3d5d95efb89828689508136945a080fcba0bdcd23cd21cff8fb5f93c9d36e747c83bf3cc2fe3c374dcac7452402fe79f47591437cb33a0ce544d50",
+        "loader": "require",
+        "metadata_url": "https://registry.npmjs.org/%40msgpack%2Fmsgpack/3.1.3",
+        "package": "@msgpack/msgpack",
+        "probe_output_bytes": 32,
+        "root_selector": "module",
+        "schema": "PROJECT_BRAIN_NPM_CODEC_CONTRACT_V1",
+        "tarball_bytes": 120141,
+        "tarball_path": "canonical/astra_runtime/tmp/npm_probe_packages/msgpack-msgpack-3.1.3-e3b5c88b3b3d5d95.tgz",
+        "tarball_url": "https://registry.npmjs.org/@msgpack/msgpack/-/msgpack-3.1.3.tgz",
+        "version": "3.1.3"
+      },
+      "metadata": {
+        "dependency_count": 0,
+        "description": "MessagePack for ECMA-262/JavaScript/TypeScript",
+        "engines": {
+          "node": ">= 18"
+        },
+        "format": "msgpack",
+        "integrity": "sha512-47XIizs9XZXvuJgoaJUIE2lFoID8ugvc0jzSHP+Ptfk8nTbnR8g788wv48N03Kx0UkAv559HWRQ3yzOgzlRNUA==",
+        "license": "ISC",
+        "links": {
+          "bugs": "https://github.com/msgpack/msgpack-javascript/issues",
+          "homepage": "https://msgpack.org/",
+          "npm": "https://www.npmjs.com/package/@msgpack/msgpack",
+          "repository": "git+https://github.com/msgpack/msgpack-javascript.git"
+        },
+        "metadata_url": "https://registry.npmjs.org/%40msgpack%2Fmsgpack/3.1.3",
+        "name": "@msgpack/msgpack",
+        "package": "@msgpack/msgpack",
+        "registry_search_url": "https://registry.npmjs.org/-/v1/search?text=msgpack&size=30",
+        "score": 150,
+        "tarball_url": "https://registry.npmjs.org/@msgpack/msgpack/-/msgpack-3.1.3.tgz",
+        "version": "3.1.3"
+      },
+      "status": "CONTRACT_ACCEPTED",
+      "supplier": {
+        "description": "MessagePack for ECMA-262/JavaScript/TypeScript",
+        "format": "msgpack",
+        "links": {
+          "bugs": "https://github.com/msgpack/msgpack-javascript/issues",
+          "homepage": "https://msgpack.org/",
+          "npm": "https://www.npmjs.com/package/@msgpack/msgpack",
+          "repository": "git+https://github.com/msgpack/msgpack-javascript.git"
+        },
+        "name": "@msgpack/msgpack",
+        "package": "@msgpack/msgpack",
+        "registry_search_url": "https://registry.npmjs.org/-/v1/search?text=msgpack&size=30",
+        "score": 150,
+        "version": "3.1.3"
+      }
+    }
+  ],
+  "contract": {
+    "decode_export": "decode",
+    "dependency_count": 0,
+    "encode_export": "encode",
+    "fixture": [
+      {
+        "id": 1,
+        "text": "alpha"
+      },
+      {
+        "id": 2,
+        "text": "beta"
+      }
+    ],
+    "integrity": "sha512-47XIizs9XZXvuJgoaJUIE2lFoID8ugvc0jzSHP+Ptfk8nTbnR8g788wv48N03Kx0UkAv559HWRQ3yzOgzlRNUA==",
+    "integrity_algorithm": "sha512",
+    "integrity_digest_hex": "e3b5c88b3b3d5d95efb89828689508136945a080fcba0bdcd23cd21cff8fb5f93c9d36e747c83bf3cc2fe3c374dcac7452402fe79f47591437cb33a0ce544d50",
+    "loader": "require",
+    "metadata_url": "https://registry.npmjs.org/%40msgpack%2Fmsgpack/3.1.3",
+    "package": "@msgpack/msgpack",
+    "probe_output_bytes": 32,
+    "root_selector": "module",
+    "schema": "PROJECT_BRAIN_NPM_CODEC_CONTRACT_V1",
+    "tarball_bytes": 120141,
+    "tarball_path": "canonical/astra_runtime/tmp/npm_probe_packages/msgpack-msgpack-3.1.3-e3b5c88b3b3d5d95.tgz",
+    "tarball_url": "https://registry.npmjs.org/@msgpack/msgpack/-/msgpack-3.1.3.tgz",
+    "version": "3.1.3"
+  },
+  "goal": "Using a zero-cost npm JavaScript library executed by Node.js, encode those exact records as MessagePack and save canonical/astra_runtime/tmp/NPM_MSGPACK_RECORDS.msgpack",
+  "mission_id": "ASTRA-RUNTIME-NPM-ACQUIRE-MSGPACKR-003",
+  "schema": "PROJECT_BRAIN_AUTO_NPM_LIBRARY_ACQUISITION_V1",
+  "selected_supplier": {
+    "dependency_count": 0,
+    "description": "MessagePack for ECMA-262/JavaScript/TypeScript",
+    "engines": {
+      "node": ">= 18"
+    },
+    "format": "msgpack",
+    "integrity": "sha512-47XIizs9XZXvuJgoaJUIE2lFoID8ugvc0jzSHP+Ptfk8nTbnR8g788wv48N03Kx0UkAv559HWRQ3yzOgzlRNUA==",
+    "license": "ISC",
+    "links": {
+      "bugs": "https://github.com/msgpack/msgpack-javascript/issues",
+      "homepage": "https://msgpack.org/",
+      "npm": "https://www.npmjs.com/package/@msgpack/msgpack",
+      "repository": "git+https://github.com/msgpack/msgpack-javascript.git"
+    },
+    "metadata_url": "https://registry.npmjs.org/%40msgpack%2Fmsgpack/3.1.3",
+    "name": "@msgpack/msgpack",
+    "package": "@msgpack/msgpack",
+    "registry_search_url": "https://registry.npmjs.org/-/v1/search?text=msgpack&size=30",
+    "score": 150,
+    "tarball_url": "https://registry.npmjs.org/@msgpack/msgpack/-/msgpack-3.1.3.tgz",
+    "version": "3.1.3"
+  },
+  "status": "CONTRACT_INFERRED"
+}

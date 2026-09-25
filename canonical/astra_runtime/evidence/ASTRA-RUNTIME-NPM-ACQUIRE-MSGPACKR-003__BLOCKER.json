@@ -1,0 +1,9 @@
+{
+  "adapter": "goal",
+  "error": "Blocker:CAPABILITY_ACQUISITION_DISPATCHED:{\"acquisition_evidence_path\": \"canonical/astra_runtime/evidence/ASTRA-RUNTIME-NPM-ACQUIRE-MSGPACKR-003__AUTO_NPM_LIBRARY_ACQUISITION.json\", \"capability_id\": \"auto.npm.msgpack-msgpack\", \"keywords\": [\"encode\", \"npm\", \"node\", \"javascript\", \"@msgpack/msgpack\", \"msgpack\"], \"pending_binding_path\": \"canonical/astra_runtime/pending_bindings/ASTRA-RUNTIME-NPM-ACQUIRE-MSGPACKR-003__msgpack-msgpack__69dd66da69f7.json\", \"status\": \"ACQUISITION_DISPATCHED\", \"supplier\": \"@msgpack/msgpack\", \"supplier_class\": \"npm_javascript_library\", \"verification_mission_id\": \"ASTRA-AUTO-VERIFY-NPM-MSGPACK-MSGPACK-69DD66DA69F7\", \"verification_mission_path\": \"canonical/astra_runtime/missions/ASTRA_AUTO_VERIFY_NPM_MSGPACK_MSGPACK_69DD66DA69F7.json\"}",
+  "mission_id": "ASTRA-RUNTIME-NPM-ACQUIRE-MSGPACKR-003",
+  "observed_at_utc": "2026-09-25T19:41:07.373720+00:00",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "run-npm-acquisition-pressure",
+  "step_index": 0
+}

@@ -1,0 +1,28 @@
+{
+  "auto_acquisition": {
+    "acquisition_evidence_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-NPM-ACQUIRE-MSGPACKR-003__AUTO_NPM_LIBRARY_ACQUISITION.json",
+    "capability_id": "auto.npm.msgpack-msgpack",
+    "keywords": [
+      "encode",
+      "npm",
+      "node",
+      "javascript",
+      "@msgpack/msgpack",
+      "msgpack"
+    ],
+    "pending_binding_path": "canonical/astra_runtime/pending_bindings/ASTRA-RUNTIME-NPM-ACQUIRE-MSGPACKR-003__msgpack-msgpack__69dd66da69f7.json",
+    "status": "ACQUISITION_DISPATCHED",
+    "supplier": "@msgpack/msgpack",
+    "supplier_class": "npm_javascript_library",
+    "verification_mission_id": "ASTRA-AUTO-VERIFY-NPM-MSGPACK-MSGPACK-69DD66DA69F7",
+    "verification_mission_path": "canonical/astra_runtime/missions/ASTRA_AUTO_VERIFY_NPM_MSGPACK_MSGPACK_69DD66DA69F7.json"
+  },
+  "binding_performed": false,
+  "goal": "Using a zero-cost npm JavaScript library executed by Node.js, encode those exact records as MessagePack and save canonical/astra_runtime/tmp/NPM_MSGPACK_RECORDS.msgpack",
+  "mission_id": "ASTRA-RUNTIME-NPM-ACQUIRE-MSGPACKR-003",
+  "observed_at_utc": "2026-09-25T19:41:07.373477+00:00",
+  "result": null,
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
+  "source": "TARGETED_AUTO_ACQUISITION",
+  "status": "AUTO_ACQUISITION_DISPATCHED"
+}
