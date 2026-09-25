@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-CANONICAL-TEST-AUDIT-002",
+  "purpose": "Fresh end-to-end canonical test corpus audit using the independently verified test-audit capability and fresh replay verification.",
+  "goal": "Execute every canonical/tests/test_*.py file. Create canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json containing one record per test file with repository-relative path, exit code, passed test count, failed test count, error count, skipped count, and duration, plus totals across the corpus. Fail if any test file exits nonzero. Finally independently execute the same complete test corpus again and verify that every file in the report still exits zero, that no canonical test file is missing from the report, and that the report totals are internally consistent.",
+  "steps": [
+    {
+      "id": "execute-canonical-test-audit",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 32,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "mandatory_model_planner": false,
+    "manual_target_effects": false,
+    "manual_initial_facts": false,
+    "manual_controller_actions": false,
+    "manual_supplier": false,
+    "manual_binding": false,
+    "real_project_artifact": true,
+    "final_effect_verification_required": true,
+    "orthogonal_pressure_family": "dynamic_test_execution_aggregation_fresh_replay",
+    "fresh_mission_identity": true,
+    "verified_test_audit_composition": true
+  }
+}
