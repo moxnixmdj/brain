@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-001",
+  "purpose": "Independently verify and promote reusable library-backed XLSX table creation and semantic reopen capabilities from two distinct zero-cost Ubuntu Python packages.",
+  "goal": "Verify XLSX creation with one hash-pinned library and independently reopen and compare the workbook to canonical JSON with a different hash-pinned library. Promote only if the round trip is exact.",
+  "steps": [
+    {
+      "id": "verify-independent-xlsx-roundtrip",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/runtime/verify_xlsx_library_roundtrip.py canonical/astra_runtime/evidence/ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-001__RESULT.json",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "XLSX_LIBRARY_ROUNDTRIP_VERIFIED"
+      }
+    },
+    {
+      "id": "promote-verified-xlsx-capabilities",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/runtime/promote_xlsx_library_capabilities.py canonical/astra_runtime/evidence/ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-001__RESULT.json",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "XLSX_LIBRARY_CAPABILITIES_PROMOTED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "fresh_verification_invocation_required": true,
+    "producer_verifier_supplier_independence_required": true,
+    "allow_registry_mutation": true,
+    "writer_package": "python3-xlsxwriter",
+    "verifier_package": "python3-openpyxl"
+  }
+}
