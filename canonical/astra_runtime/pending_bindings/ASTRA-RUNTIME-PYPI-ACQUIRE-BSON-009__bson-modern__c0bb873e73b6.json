@@ -192,7 +192,7 @@
     ],
     "zero_cost_eligible": true
   },
-  "status": "PENDING_INDEPENDENT_VERIFICATION",
+  "status": "PROMOTED_VERIFIED",
   "verification_fixture": [
     {
       "id": 1,

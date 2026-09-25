@@ -1,36 +1,41 @@
 {
-  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
-  "mission_id": "ASTRA-RUNTIME-PYPI-ACQUIRE-BSON-009",
-  "purpose": "Fresh held-out BSON acquisition proof after hash-pinned wheel-only transitive PyPI dependency closure.",
-  "goal": "Create canonical/astra_runtime/tmp/BSON_SOURCE.json containing exactly four records with fields id and text: 1 alpha, 2 beta, 3 gamma, 4 delta. Encode those exact records as BSON and save canonical/astra_runtime/tmp/BSON_RECORDS.bson. Independently decode the BSON artifact and verify the decoded records are exactly identical to canonical/astra_runtime/tmp/BSON_SOURCE.json in values, order, field names, and record count.",
-  "steps": [
-    {
-      "id": "run-held-out-codec-goal",
-      "adapter": "goal",
-      "goal_ref": "goal",
-      "max_controller_actions": 20,
-      "verify": {
-        "type": "stdout_contains",
-        "text": "COMPOUND_GOAL_COMPLETE"
-      }
-    }
-  ],
   "constraints": {
+    "auto_acquisition_promoted": {
+      "capability_id": "auto.pypi.bson-modern",
+      "verification_mission_id": "ASTRA-AUTO-VERIFY-PYPI-BSON-MODERN-C0BB873E73B6",
+      "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-PYPI-ACQUIRE-BSON-009__bson-modern__c0bb873e73b6__AUTO_VERIFY.json"
+    },
+    "binary_format_guard_commit": "3797ad75a3239e6b8462483ef3c60a26ee3a2903",
+    "dependency_closure_acquisition_commit": "39342d6d6bb87ee87dcfae480c4ce66312ee3297",
+    "dependency_closure_import_fix_commit": "802e13e7f4d7598897b8496af6dd3f8205edbd93",
+    "dependency_closure_runtime_commit": "a12812cc861b222ccdde3144fd6e26b29cb05728",
+    "fresh_mission_identity": true,
     "incremental_spend_usd": 0,
     "model_controller_required": false,
-    "fresh_mission_identity": true,
-    "binary_format_guard_commit": "3797ad75a3239e6b8462483ef3c60a26ee3a2903",
-    "pypi_related_name_discovery_commit": "02a2ed28b9fedfcbba92e1b7e0ad546b1f687449",
-    "source_mission": "ASTRA-RUNTIME-PYPI-ACQUIRE-BSON-008",
     "pypi_format_aware_widening_commit": "e81a83e9ca759cf06648f261ff5e44c0ee936ef8",
     "pypi_format_first_discovery_commit": "f395d47ca010bef958fd04982c666704f81c9ca7",
     "pypi_format_specific_ranking_commit": "6700eb2f1b90d96d71afcbc14829a899794a2a2a",
+    "pypi_related_name_discovery_commit": "02a2ed28b9fedfcbba92e1b7e0ad546b1f687449",
     "python_codec_envelope_inference_commit": "626259087f9ca2831569750c8f8ec36b3bb8a2b4",
     "python_codec_envelope_runtime_commit": "1eb1ecab778b4772cdf02c1c80c304041d0bcf72",
     "python_codec_envelope_verifier_commit": "c9085e97cf52fec903c927eb505ee649300d2a9a",
-    "supplier_local_candidate_refresh_commit": "56d714c4df0d7486e42dccc423e4c85df0e442ff",
-    "dependency_closure_acquisition_commit": "39342d6d6bb87ee87dcfae480c4ce66312ee3297",
-    "dependency_closure_import_fix_commit": "802e13e7f4d7598897b8496af6dd3f8205edbd93",
-    "dependency_closure_runtime_commit": "a12812cc861b222ccdde3144fd6e26b29cb05728"
-  }
+    "source_mission": "ASTRA-RUNTIME-PYPI-ACQUIRE-BSON-008",
+    "supplier_local_candidate_refresh_commit": "56d714c4df0d7486e42dccc423e4c85df0e442ff"
+  },
+  "goal": "Create canonical/astra_runtime/tmp/BSON_SOURCE.json containing exactly four records with fields id and text: 1 alpha, 2 beta, 3 gamma, 4 delta. Encode those exact records as BSON and save canonical/astra_runtime/tmp/BSON_RECORDS.bson. Independently decode the BSON artifact and verify the decoded records are exactly identical to canonical/astra_runtime/tmp/BSON_SOURCE.json in values, order, field names, and record count.",
+  "mission_id": "ASTRA-RUNTIME-PYPI-ACQUIRE-BSON-009",
+  "purpose": "Fresh held-out BSON acquisition proof after hash-pinned wheel-only transitive PyPI dependency closure.",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "steps": [
+    {
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "id": "run-held-out-codec-goal",
+      "max_controller_actions": 20,
+      "verify": {
+        "text": "COMPOUND_GOAL_COMPLETE",
+        "type": "stdout_contains"
+      }
+    }
+  ]
 }
