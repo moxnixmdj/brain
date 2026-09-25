@@ -23,6 +23,10 @@
     "three_live_sources_required": true,
     "recursive_derived_state_required": true,
     "independent_recursive_verification_required": true,
-    "capability_acquisition_for_transform_gap_forbidden": true
+    "capability_acquisition_for_transform_gap_forbidden": true,
+    "replay_after_recursive_dataflow_repairs": [
+      "de24d7f47919128292c62886e212c83b05725d05",
+      "64cafbed386b972190d11ff209be714860b29c4b"
+    ]
   }
 }
