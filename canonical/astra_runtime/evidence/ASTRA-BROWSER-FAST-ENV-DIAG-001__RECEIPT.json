@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T02:02:18.289844+00:00",
+  "mission_id": "ASTRA-BROWSER-FAST-ENV-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_BROWSER_FAST_ENV_DIAG_001.json",
+  "mission_sha256": "5131d38ec3c20bac5adefc676006235f5c70588479d650e56a6671fbafe4f786",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "ff9adc6bff3e10e53109cae531be1a2a1a4fc870bc7814ad1203038d6453982d",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T02:02:18.289575+00:00",
+  "created_at_utc": "2026-09-25T02:02:16.540341+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T02:02:18.289282+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,shutil,subprocess\nbins=['chromium','chromium-browser','google-chrome','google-chrome-stable','firefox','firefox-esr','chromedriver','geckodriver']\ninstalled={x:shutil.which(x) for x in bins}\nmods={x:bool(importlib.util.find_spec(x)) for x in ['selenium','playwright']}\nversions={}\nfor name,path in installed.items():\n if path:\n  try:\n   p=subprocess.run([path,'--version'],text=True,capture_output=True,timeout=10)\n   versions[name]=(p.stdout or p.stderr).strip()[:500]\n  except Exception as e: versions[name]=type(e).__name__+':'+str(e)\nprint(json.dumps({'installed':installed,'modules':mods,'versions':versions},sort_keys=True))\nprint('BROWSER_FAST_ENV_DIAG_COMPLETE')\nPY",
+        "duration_s": 1.749,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"installed\": {\"chromedriver\": \"/usr/bin/chromedriver\", \"chromium\": \"/usr/bin/chromium\", \"chromium-browser\": \"/usr/bin/chromium-browser\", \"firefox\": \"/usr/bin/firefox\", \"firefox-esr\": null, \"geckodriver\": \"/usr/bin/geckodriver\", \"google-chrome\": \"/usr/bin/google-chrome\", \"google-chrome-stable\": \"/usr/bin/google-chrome-stable\"}, \"modules\": {\"playwright\": false, \"selenium\": false}, \"versions\": {\"chromedriver\": \"ChromeDriver 153.0.8010.52 (78e5e45d4bb41035e17ea4da2cc257f496416ac9-refs/branch-heads/8010@{#1443})\", \"chromium\": \"Chromium 153.0.8010.0\", \"chromium-browser\": \"Chromium 153.0.8010.0\", \"firefox\": \"Mozilla Firefox 156.0\", \"geckodriver\": \"geckodriver 0.37.1 (300705c65d1b 2026-07-17 09:25 +0000)\\n\\nThe source code of this program is available from\\ntesting/geckodriver in https://hg.mozilla.org/mozilla-central.\\n\\nThis program is subject to the terms of the Mozilla Public License 2.0.\\nYou can obtain a copy of the license at https://mozilla.org/MPL/2.0/.\", \"google-chrome\": \"Google Chrome 153.0.8010.52\", \"google-chrome-stable\": \"Google Chrome 153.0.8010.52\"}}\nBROWSER_FAST_ENV_DIAG_COMPLETE\n"
+      },
+      "step_id": "probe-installed-browser-stack",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-BROWSER-FAST-ENV-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_BROWSER_FAST_ENV_DIAG_001.json",
+  "mission_sha256": "5131d38ec3c20bac5adefc676006235f5c70588479d650e56a6671fbafe4f786",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T02:02:18.289295+00:00"
+}
