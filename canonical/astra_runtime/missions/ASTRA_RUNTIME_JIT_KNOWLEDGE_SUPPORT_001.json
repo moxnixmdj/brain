@@ -1,0 +1,99 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-SUPPORT-001",
+  "purpose": "Prove explicit corroboration handling over two live external observations that agree.",
+  "goal": "Fetch two external JSON observations of the same claim slot that agree, preserve both evidence records, assess them together, and verify the epistemic status is SUPPORTED.",
+  "steps": [
+    {
+      "id": "run-support-assessment",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 8,
+      "controller_actions": [
+        {
+          "type": "fetch_json_knowledge",
+          "args": {
+            "url": "https://httpbin.org/get?claim=alpha",
+            "json_path": [
+              "args",
+              "claim"
+            ],
+            "output_path": "canonical/astra_runtime/tmp/JIT_SUPPORT_A.json",
+            "authoritative": false,
+            "timeout_s": 20,
+            "max_bytes": 500000
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "verified",
+            "value": true
+          }
+        },
+        {
+          "type": "fetch_json_knowledge",
+          "args": {
+            "url": "https://httpbin.org/anything?claim=alpha",
+            "json_path": [
+              "args",
+              "claim"
+            ],
+            "output_path": "canonical/astra_runtime/tmp/JIT_SUPPORT_B.json",
+            "authoritative": false,
+            "timeout_s": 20,
+            "max_bytes": 500000
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "verified",
+            "value": true
+          }
+        },
+        {
+          "type": "assess_knowledge_consistency",
+          "args": {
+            "evidence_paths": [
+              "canonical/astra_runtime/tmp/JIT_SUPPORT_A.json",
+              "canonical/astra_runtime/tmp/JIT_SUPPORT_B.json"
+            ],
+            "output_path": "canonical/astra_runtime/tmp/JIT_SUPPORT_ASSESSMENT.json"
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "status",
+            "value": "SUPPORTED"
+          }
+        },
+        {
+          "type": "assert_knowledge_status",
+          "args": {
+            "assessment_path": "canonical/astra_runtime/tmp/JIT_SUPPORT_ASSESSMENT.json",
+            "expected_status": "SUPPORTED"
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "verified",
+            "value": true
+          }
+        },
+        {
+          "type": "finish",
+          "args": {
+            "summary": "KNOWLEDGE_SUPPORT_CONFIRMED"
+          }
+        }
+      ],
+      "verify": {
+        "type": "stdout_contains",
+        "text": "KNOWLEDGE_SUPPORT_CONFIRMED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "explicit_epistemic_status_required": true,
+    "corroborating_sources_required": 2,
+    "conflict_assessment_commit": "1c1243d478051b3309a333161aa1db38395fbbe3",
+    "datetime_fix_commit": "d97ecad25a53733516674ff81b2f69b8dcd594d7"
+  }
+}
