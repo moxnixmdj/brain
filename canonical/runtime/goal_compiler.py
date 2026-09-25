@@ -2752,17 +2752,32 @@ def _literal_atom(raw):
     return text.strip("\"'")
 
 
+def _parse_small_count(raw):
+    text=str(raw or "").strip().lower()
+    if re.fullmatch(r"\d+",text):
+        return int(text)
+    words={
+      "zero":0,"one":1,"two":2,"three":3,"four":4,"five":5,
+      "six":6,"seven":7,"eight":8,"nine":9,"ten":10,
+      "eleven":11,"twelve":12,"thirteen":13,"fourteen":14,"fifteen":15,
+      "sixteen":16,"seventeen":17,"eighteen":18,"nineteen":19,"twenty":20,
+    }
+    return words.get(text)
+
+
 def _compile_literal_json_records(subgoal, root):
     text=str(subgoal or "").strip()
     m=re.match(
-        r"^create\s+([^\s]+\.json)\s+containing\s+exactly\s+(\d+)\s+records?\s+"
+        r"^create\s+([^\s]+\.json)\s+containing\s+exactly\s+([A-Za-z0-9]+)\s+records?\s+"
         r"with\s+fields\s+(.+?):\s+(.+)$",
         text,re.IGNORECASE
     )
     if not m:
         return None
     output_path=m.group(1).strip(" .,:;")
-    expected_count=int(m.group(2))
+    expected_count=_parse_small_count(m.group(2))
+    if expected_count is None:
+        return None
     raw_fields=re.sub(r"\s+and\s+",",",m.group(3),flags=re.IGNORECASE)
     fields=[x.strip(" .,:;") for x in raw_fields.split(",") if x.strip(" .,:;")]
     if (
