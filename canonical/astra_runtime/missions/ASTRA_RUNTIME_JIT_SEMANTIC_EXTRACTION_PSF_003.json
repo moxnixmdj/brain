@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-JIT-SEMANTIC-EXTRACTION-PSF-003",
+  "purpose": "Fresh semantic extraction proof after punctuation-safe fresh-source verification.",
+  "goal": "Find the authoritative Python Software Foundation source for code PEP-0703 without being given either the authority domain or the source URL, independently verify the official authority site, render the discovered code source, and verify that source is semantically relevant to PEP-0703. Extract the source fields Status and Python-Version and save canonical/astra_runtime/tmp/JIT_PEP703_METADATA.json containing exactly one record with fields status and python_version. Finally independently verify the saved values against a fresh retrieval of the discovered authoritative source.",
+  "steps": [
+    {
+      "id": "run-semantic-extraction-goal",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 20,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    },
+    {
+      "id": "external-acceptance",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport json,pathlib,re,urllib.request\nout=pathlib.Path('canonical/astra_runtime/tmp/JIT_PEP703_METADATA.json')\nassert out.is_file(),'SEMANTIC_EXTRACTION_OUTPUT_MISSING'\nrows=json.loads(out.read_text(encoding='utf-8'))\nassert isinstance(rows,list) and len(rows)==1,rows\nrec=rows[0]\nassert set(rec)=={'status','python_version'},rec\nurl='https://peps.python.org/pep-0703/'\nreq=urllib.request.Request(url,headers={'User-Agent':'ProjectBrain-IndependentSemanticAcceptance/1'})\ntext=urllib.request.urlopen(req,timeout=20).read(1000000).decode('utf-8','replace')\ndef field(label):\n    m=re.search(r'(?is)>'+re.escape(label)+r':</dt>\\s*<dd[^>]*>\\s*([^<]+)',text)\n    if not m:\n        m=re.search(r'(?im)^'+re.escape(label)+r':\\s*\\n?\\s*([^\\n<]+)',re.sub(r'<[^>]+>','\\n',text))\n    assert m,label\n    return re.sub(r'\\s+',' ',m.group(1)).strip()\nassert str(rec['status']).strip()==field('Status'),(rec,field('Status'))\nassert str(rec['python_version']).strip()==field('Python-Version'),(rec,field('Python-Version'))\nprint('JIT_SEMANTIC_EXTRACTION_INDEPENDENTLY_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "JIT_SEMANTIC_EXTRACTION_INDEPENDENTLY_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "manual_controller_actions": false,
+    "direct_authority_domain_provided": false,
+    "direct_source_url_provided": false,
+    "semantic_extraction_required": true,
+    "independent_fresh_source_acceptance_required": true,
+    "omitted_extraction_is_failure": true,
+    "held_out_from_existing_source_discovery_receipts": true,
+    "fresh_mission_identity": true,
+    "semantic_extraction_runtime_commit": "82bd4eeb90f77306e04df154d5221077e4f72d95",
+    "semantic_extraction_compiler_commit": "eab8dccc1f39323382e804b1a9d15a6bcdd60fd7",
+    "source_mission": "ASTRA-RUNTIME-JIT-SEMANTIC-EXTRACTION-PSF-002",
+    "semantic_field_separator_fix_commit": "430b577f10efa2c5f4bead4d97cffbe60b1dc35e"
+  }
+}
