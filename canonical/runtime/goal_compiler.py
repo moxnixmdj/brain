@@ -4037,6 +4037,131 @@ def _compile_compound_goal(goal, clauses, registry, root):
     }
 
 
+def _compile_domain_free_authority_source_goal(goal,clauses,registry,root):
+    text=" ".join(str(goal or "").strip().split())
+    m=re.search(
+        r"\bfind\s+the\s+authoritative\s+(.+?)\s+source\s+for\s+"
+        r"(?:indicator|series|code|item|subject)\s+([A-Za-z0-9][A-Za-z0-9._:-]{2,})\b",
+        text,re.IGNORECASE
+    )
+    if not m:
+        return None
+    lower=text.lower()
+    if "authority domain" not in lower or "source url" not in lower:
+        return None
+    if not any(x in lower for x in ("verify the official authority site","verify the authority site")):
+        return None
+    if "semantically relevant" not in lower:
+        return None
+
+    entity_name=m.group(1).strip(" ,.;:")
+    subject_id=m.group(2).strip(" ,.;:")
+    if not entity_name or not subject_id:
+        return None
+    entry=(registry or {}).get("web.browser.rendered.capture.chromedriver")
+    if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
+        raise GoalCompilationFailure("AUTHORITY_SOURCE_BROWSER_CAPABILITY_REQUIRED")
+
+    digest=hashlib.sha256(text.encode("utf-8")).hexdigest()[:12].upper()
+    prefix="canonical/astra_runtime/tmp/AUTHORITY_SOURCE_"+digest
+    identity_path=prefix+"_IDENTITY.json"
+    home_screen=prefix+"_HOME.png"
+    home_result=prefix+"_HOME_RENDER.json"
+    discovery_path=prefix+"_DISCOVERY.json"
+    source_screen=prefix+"_SOURCE.png"
+    source_result=prefix+"_SOURCE_RENDER.json"
+    query=f"{entity_name} {subject_id} official source"
+
+    actions=[
+      {
+        "type":"resolve_authority_identity",
+        "args":{
+          "entity_name":entity_name,
+          "output_path":identity_path,
+          "timeout_s":20,
+        },
+        "expect":{"type":"field_equals","field":"verified","value":True},
+      },
+      {
+        "type":"invoke_capability",
+        "args":{
+          "capability_id":"web.browser.rendered.capture.chromedriver",
+          "url":{"$result":{"cycle":0,"field":"official_url"}},
+          "screenshot_path":home_screen,
+          "result_path":home_result,
+        },
+        "expect":{"type":"field_equals","field":"output_verified","value":True},
+      },
+      {
+        "type":"assert_authority_identity",
+        "args":{
+          "evidence_path":identity_path,
+          "browser_result_path":home_result,
+        },
+        "expect":{"type":"field_equals","field":"verified","value":True},
+      },
+      {
+        "type":"discover_authoritative_web_source",
+        "args":{
+          "query":query,
+          "authority_domains":[{"$result":{"cycle":0,"field":"authority_domain"}}],
+          "output_path":discovery_path,
+          "timeout_s":20,
+          "max_bytes":1500000,
+        },
+        "expect":{"type":"field_equals","field":"verified","value":True},
+      },
+      {
+        "type":"invoke_capability",
+        "args":{
+          "capability_id":"web.browser.rendered.capture.chromedriver",
+          "url":{"$result":{"cycle":3,"field":"chosen_url"}},
+          "screenshot_path":source_screen,
+          "result_path":source_result,
+        },
+        "expect":{"type":"field_equals","field":"output_verified","value":True},
+      },
+      {
+        "type":"assert_authoritative_source_discovery",
+        "args":{
+          "evidence_path":discovery_path,
+          "browser_result_path":source_result,
+        },
+        "expect":{"type":"field_equals","field":"verified","value":True},
+      },
+      {"type":"finish","args":{"summary":"COMPOUND_GOAL_COMPLETE"}},
+    ]
+    frame_evidence={
+      "entity_name":entity_name,
+      "subject_id":subject_id,
+      "query":query,
+      "identity_evidence_path":identity_path,
+      "authority_home_result_path":home_result,
+      "source_discovery_path":discovery_path,
+      "source_result_path":source_result,
+      "authority_domain_from_runtime":True,
+      "source_url_from_runtime":True,
+      "semantic_relevance_required":True,
+    }
+    parts=[]
+    for index,clause in enumerate(clauses):
+        parts.append({
+          "index":index,
+          "subgoal":clause,
+          "mode":"DOMAIN_FREE_AUTHORITY_SOURCE_RESOLUTION" if index==0
+                 else "DOMAIN_FREE_AUTHORITY_SOURCE_RESOLUTION_CONTINUATION",
+          **frame_evidence,
+        })
+    return {
+      "schema":"PROJECT_BRAIN_COMPILED_COMPOUND_GOAL_V1",
+      "compiler_mode":"DETERMINISTIC_DOMAIN_FREE_AUTHORITY_SOURCE_PLAN",
+      "clauses":clauses,
+      "compiled_parts":parts,
+      "controller_actions":actions,
+      "finish_summary":"COMPOUND_GOAL_COMPLETE",
+    }
+
+
 def _validate_compiled_clause_coverage(compiled):
     if not isinstance(compiled,dict):
         raise GoalCompilationFailure("COMPILED_PLAN_INVALID")
@@ -4079,6 +4204,9 @@ def compile_goal(goal, registry, root):
     if browser_interaction is not None:
         return _validate_compiled_clause_coverage(browser_interaction)
     clauses=decompose_goal(goal)
+    authority_source=_compile_domain_free_authority_source_goal(goal,clauses,registry,root)
+    if authority_source is not None:
+        return _validate_compiled_clause_coverage(authority_source)
     bounded_loop=_compile_bounded_loop_goal(goal,clauses,registry,root)
     if bounded_loop is not None:
         return _validate_compiled_clause_coverage(bounded_loop)
