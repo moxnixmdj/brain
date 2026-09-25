@@ -90,6 +90,9 @@ def _context_path_for_key(key, context_paths):
         "manifest":{".json"},
         "yaml":{".yml",".yaml"},
         "workflow":{".yml",".yaml"},
+        "xlsx":{".xlsx"},
+        "spreadsheet":{".xlsx"},
+        "workbook":{".xlsx"},
     }.get(stem,set())
     candidates=[]
     for raw in reversed(list(context_paths or [])):
@@ -118,12 +121,15 @@ def _bind_inputs(goal, root, entry, context_paths=None):
         if key=="text":
             result[key]=_extract_text_argument(goal)
             continue
+        if key=="goal":
+            result[key]=str(goal)
+            continue
         if key.endswith("_path"):
             stem=key[:-5].lower()
             if key.startswith("output_"):
                 # Output paths are expected not to exist yet. Bind only a
                 # repository-safe path explicitly present in the goal.
-                matching=[raw for raw,p in paths if (not stem or stem in raw.lower() or p.suffix.lower() in {".png",".jpg",".jpeg",".pdf",".txt",".json",".csv",".md"})]
+                matching=[raw for raw,p in paths if (not stem or stem in raw.lower() or p.suffix.lower() in {".png",".jpg",".jpeg",".pdf",".txt",".json",".csv",".md",".xlsx"})]
                 if len(matching)==1:
                     result[key]=matching[0]
                     continue
@@ -234,7 +240,7 @@ def decompose_goal(goal):
         current=clauses[i]
         if (
             i+1 < len(clauses)
-            and re.search(r"\bindependently\s+(?:execute|run)\b",current,re.IGNORECASE)
+            and re.search(r"\bindependently\s+(?:execute|run|reopen|read|inspect)\b",current,re.IGNORECASE)
             and re.match(r"^(?:verify|check|assert)\b",clauses[i+1],re.IGNORECASE)
         ):
             merged.append(current+" and "+clauses[i+1])
