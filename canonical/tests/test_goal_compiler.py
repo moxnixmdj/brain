@@ -4,6 +4,7 @@ import json
 import pathlib
 import sys
 import subprocess
+import tempfile
 import unittest
 
 CANONICAL=pathlib.Path(__file__).resolve().parents[1]
@@ -87,6 +88,23 @@ class GoalCompilerTests(unittest.TestCase):
         self.assertEqual(proc.returncode,0,proc.stderr)
         self.assertIn("auto.apt.zint",proc.stdout)
         self.assertIn("| id |",proc.stdout)
+
+    def test_replay_prefers_typed_context_over_stale_later_output(self):
+        entry=self.registry()["document.convert.markdown_pdf.pandoc_weasyprint"]
+        tmp_root=CANONICAL/"astra_runtime"/"tmp"
+        tmp_root.mkdir(parents=True,exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=tmp_root) as td:
+            td=pathlib.Path(td)
+            md=td/"REPORT.md"
+            pdf=td/"REPORT.pdf"
+            md.write_text("# report\n",encoding="utf-8")
+            pdf.write_bytes(b"%PDF-stale-output")
+            md_rel=str(md.relative_to(ROOT)).replace("\\","/")
+            pdf_rel=str(pdf.relative_to(ROOT)).replace("\\","/")
+            goal=f"create {pdf_rel} from that report"
+            inputs=compiler._bind_inputs(goal,ROOT,entry,context_paths=[md_rel])
+            self.assertEqual(inputs["markdown_path"],md_rel)
+            self.assertEqual(inputs["output_path"],pdf_rel)
 
     def test_plain_qr_goal_selects_verified_qr_and_binds_arguments(self):
         goal="Generate a QR code image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png."
