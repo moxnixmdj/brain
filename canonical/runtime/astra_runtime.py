@@ -622,14 +622,93 @@ def _goal_action(action):
         }
     if typ=="invoke_capability_fanout":
         source=_safe_repo_path(args.get("source_path",""))
-        output_dir=_safe_repo_path(args.get("output_dir",""))
         manifest_path=_safe_repo_path(args.get("manifest_path",""))
         if not source.is_file():
             return {"type":typ,"output_verified":False,"error":"FANOUT_SOURCE_MISSING"}
         wrapper=json.loads(source.read_text(encoding="utf-8"))
         items=json.loads(str(wrapper.get("observed_text") or ""))
-        if not isinstance(items,list) or len(items)>100:
+        if not isinstance(items,list) or len(items)>100 or any(not isinstance(x,dict) for x in items):
             return {"type":typ,"output_verified":False,"error":"FANOUT_SOURCE_INVALID"}
+
+        # Generic mode: execute an arbitrary bounded list of already-verified
+        # capability action templates for every runtime-discovered item.
+        item_actions=args.get("item_actions")
+        if item_actions is not None:
+            if (
+                not isinstance(item_actions,list) or not item_actions
+                or len(item_actions)>8
+                or any(not isinstance(x,dict) for x in item_actions)
+            ):
+                return {"type":typ,"output_verified":False,"error":"FANOUT_ITEM_ACTIONS_INVALID"}
+            copy_fields=args.get("copy_fields") or ["id"]
+            if (
+                not isinstance(copy_fields,list) or not copy_fields
+                or len(copy_fields)>32
+                or any(not isinstance(x,str) or not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*",x) for x in copy_fields)
+            ):
+                return {"type":typ,"output_verified":False,"error":"FANOUT_COPY_FIELDS_INVALID"}
+            manifest=[]
+            for item in items:
+                item_id=str(item.get("id"))
+                if not item_id:
+                    return {"type":typ,"output_verified":False,"error":"FANOUT_ITEM_ID_MISSING"}
+                rec={field:item.get(field) for field in copy_fields}
+                for spec in item_actions:
+                    artifact_field=str(spec.get("artifact_field") or "")
+                    output_dir_raw=str(spec.get("output_dir") or "")
+                    extension=str(spec.get("extension") or ".png")
+                    template=spec.get("action")
+                    if (
+                        not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*",artifact_field)
+                        or not output_dir_raw
+                        or not re.fullmatch(r"\.[A-Za-z0-9]{1,10}",extension)
+                        or not isinstance(template,dict)
+                        or template.get("type")!="invoke_capability"
+                        or not isinstance(template.get("args"),dict)
+                    ):
+                        return {"type":typ,"output_verified":False,"error":"FANOUT_ITEM_ACTION_SPEC_INVALID","id":item_id}
+                    output_dir=_safe_repo_path(output_dir_raw)
+                    output_dir.mkdir(parents=True,exist_ok=True)
+                    out=str((output_dir/(item_id+extension)).relative_to(ROOT))
+                    def subst(v):
+                        if isinstance(v,str):
+                            if v=="__ITEM_OUTPUT_PATH__":
+                                return out
+                            if v=="__ITEM_ID__":
+                                return item_id
+                            m=re.fullmatch(r"__ITEM_FIELD_([A-Za-z_][A-Za-z0-9_]*)__",v)
+                            if m:
+                                return item.get(m.group(1))
+                            return v
+                        if isinstance(v,list):
+                            return [subst(x) for x in v]
+                        if isinstance(v,dict):
+                            return {k:subst(x) for k,x in v.items()}
+                        return v
+                    rendered=subst(template)
+                    result=_invoke_bound_capability(rendered.get("args") or {})
+                    try:
+                        _verify_action_expectation(rendered,result)
+                    except Exception as exc:
+                        return {
+                          "type":typ,"output_verified":False,
+                          "error":"FANOUT_ITEM_ACTION_FAILED",
+                          "id":item_id,"artifact_field":artifact_field,
+                          "detail":type(exc).__name__+":"+str(exc),
+                        }
+                    rec[artifact_field]=out
+                manifest.append(rec)
+            manifest_path.parent.mkdir(parents=True,exist_ok=True)
+            manifest_path.write_text(json.dumps(manifest,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+            return {
+              "type":typ,"output_verified":True,
+              "item_count":len(manifest),
+              "actions_per_item":len(item_actions),
+              "manifest_path":str(manifest_path.relative_to(ROOT)),
+            }
+
+        # Legacy conditional mode remains supported for already-verified plans.
+        output_dir=_safe_repo_path(args.get("output_dir",""))
         value_field=str(args.get("value_field") or "")
         threshold=int(args.get("max_length") or 0)
         output_dir.mkdir(parents=True,exist_ok=True)
@@ -657,6 +736,59 @@ def _goal_action(action):
         manifest_path.parent.mkdir(parents=True,exist_ok=True)
         manifest_path.write_text(json.dumps(manifest,indent=2,sort_keys=True)+"\n",encoding="utf-8")
         return {"type":typ,"output_verified":True,"item_count":len(manifest),"manifest_path":str(manifest_path.relative_to(ROOT))}
+    if typ=="assert_runtime_fanout_artifacts_decode":
+        source=_safe_repo_path(args.get("source_path",""))
+        manifest_path=_safe_repo_path(args.get("manifest_path",""))
+        if not source.is_file() or not manifest_path.is_file():
+            return {"type":typ,"verified":False,"error":"FANOUT_VERIFY_SOURCE_MISSING"}
+        wrapper=json.loads(source.read_text(encoding="utf-8"))
+        items=json.loads(str(wrapper.get("observed_text") or ""))
+        manifest=json.loads(manifest_path.read_text(encoding="utf-8"))
+        checks=args.get("checks") or []
+        copy_fields=args.get("copy_fields") or ["id"]
+        decoder=str(args.get("decoder_capability") or "image.code.decode.zbarimg")
+        if (
+            not isinstance(items,list) or not isinstance(manifest,list)
+            or not isinstance(checks,list) or not checks
+            or any(not isinstance(x,dict) for x in checks)
+        ):
+            return {"type":typ,"verified":False,"error":"FANOUT_VERIFY_INVALID"}
+        by_id={str(x.get("id")):x for x in manifest if isinstance(x,dict) and "id" in x}
+        failures=[]
+        if len(items)!=len(manifest) or len(by_id)!=len(manifest):
+            failures.append({"error":"CARDINALITY_MISMATCH"})
+        for item in items:
+            item_id=str(item.get("id"))
+            rec=by_id.get(item_id)
+            if rec is None:
+                failures.append({"id":item_id,"error":"MANIFEST_RECORD_MISSING"})
+                continue
+            for field in copy_fields:
+                if rec.get(field)!=item.get(field):
+                    failures.append({"id":item_id,"error":"COPIED_FIELD_MISMATCH","field":field})
+            for check in checks:
+                source_field=str(check.get("source_field") or "")
+                artifact_field=str(check.get("artifact_field") or "")
+                expected=str(item.get(source_field) or "")
+                path=str(rec.get(artifact_field) or "")
+                if not expected or not path:
+                    failures.append({"id":item_id,"error":"ARTIFACT_CHECK_INPUT_MISSING","artifact_field":artifact_field})
+                    continue
+                decoded=_invoke_bound_capability({
+                  "capability_id":decoder,
+                  "argv":["zbarimg","--quiet","--raw",path],
+                  "timeout_s":60,
+                })
+                if str(decoded.get("stdout") or "").strip()!=expected:
+                    failures.append({
+                      "id":item_id,"error":"DECODE_MISMATCH",
+                      "artifact_field":artifact_field,"source_field":source_field,
+                    })
+        return {
+          "type":typ,"verified":not failures,
+          "source_count":len(items),"manifest_count":len(manifest),
+          "checks_per_item":len(checks),"failures":failures[:20],
+        }
     if typ=="assert_runtime_fanout_decodes":
         source=_safe_repo_path(args.get("source_path",""))
         manifest_path=_safe_repo_path(args.get("manifest_path",""))
@@ -1034,7 +1166,7 @@ def _run_model_independent_goal(step, mission, goal):
     allowed_types={
       "read_file","list_tree","search_text","http_get","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout",
       "project_browser_result_json","assert_hex_prefix_bucket","assert_collection_length_bucket","assert_runtime_selected_code_decodes",
-      "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal","assert_runtime_fanout_decodes",
+      "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal","assert_runtime_fanout_decodes","assert_runtime_fanout_artifacts_decode",
       "assert_workflow_audit_supported_by_source","assert_python_source_audit_supported_by_source",
       "assert_python_test_audit_zero","assert_python_test_audit_supported_by_fresh_execution",
       "finish"
