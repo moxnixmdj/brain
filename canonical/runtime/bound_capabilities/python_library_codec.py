@@ -24,9 +24,39 @@ def _resolve_callable(module,name):
 
 def run(args,root):
     module_name=str(args.get("module") or "").strip()
-    encode_name=str(args.get("encode_callable") or "").strip()
-    if not module_name or not encode_name:
+    mode=str(args.get("mode") or "encode").strip().lower()
+    if not module_name:
         raise RuntimeError("PYTHON_CODEC_CONTRACT_INCOMPLETE")
+    if mode=="decode_verify":
+        decode_name=str(args.get("decode_callable") or "").strip()
+        if not decode_name:
+            raise RuntimeError("PYTHON_CODEC_DECODE_CALLABLE_REQUIRED")
+        src=_safe_path(root,args.get("json_path"))
+        binary=_safe_path(root,args.get("binary_path"))
+        if not src.is_file() or not binary.is_file():
+            raise RuntimeError("PYTHON_CODEC_VERIFY_INPUT_MISSING")
+        expected=json.loads(src.read_text(encoding="utf-8"))
+        module=importlib.import_module(module_name)
+        fn=_resolve_callable(module,decode_name)
+        kwargs=args.get("decode_kwargs") or {}
+        if not isinstance(kwargs,dict):
+            raise RuntimeError("PYTHON_CODEC_DECODE_KWARGS_INVALID")
+        observed=fn(binary.read_bytes(),**kwargs)
+        return {
+          "adapter":"python_library_codec",
+          "mode":"decode_verify",
+          "module":module_name,
+          "decode_callable":decode_name,
+          "source_path":str(src.relative_to(pathlib.Path(root).resolve())),
+          "binary_path":str(binary.relative_to(pathlib.Path(root).resolve())),
+          "verified":observed==expected,
+          "record_count":len(observed) if isinstance(observed,list) else None,
+        }
+    if mode!="encode":
+        raise RuntimeError("PYTHON_CODEC_MODE_UNSUPPORTED:"+mode)
+    encode_name=str(args.get("encode_callable") or "").strip()
+    if not encode_name:
+        raise RuntimeError("PYTHON_CODEC_ENCODE_CALLABLE_REQUIRED")
     src=_safe_path(root,args.get("json_path"))
     out=_safe_path(root,args.get("output_path"))
     if not src.is_file():
