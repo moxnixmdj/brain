@@ -36,7 +36,7 @@ class ModelIndependenceTests(unittest.TestCase):
             def search_all(self,*args,**kwargs):
                 return {"candidates":[]}
         with mock.patch.object(runtime, "_planner_post", side_effect=AssertionError("model planner must not be called")), \
-             mock.patch.object(runtime, "_load_auto_apt_cli_acquisition", return_value=EmptyAuto()), \
+             mock.patch.object(runtime, "_load_auto_capability_acquisition", return_value=EmptyAuto()), \
              mock.patch.object(runtime, "_load_capability_discovery", return_value=EmptyDiscovery()), \
              mock.patch.object(runtime, "writej"):
             with self.assertRaisesRegex(runtime.Blocker, "CAPABILITY_ACQUISITION_REQUIRED"):
