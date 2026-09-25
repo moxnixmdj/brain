@@ -82,6 +82,7 @@
     "source_discovery_commit": "5594367ba5f4ff27534f6884d44c3cb00931b26f",
     "source_verifier_commit": "41a948c5267b1f280de05cd319f0d7a46a1e106f",
     "replay_after_search_redirect_normalization_commit": "c0a436b3cc1e1971b1c35e0c6baddde6bf5e55b0",
-    "replay_after_bing_rss_discovery_commit": "df236f67c9f27c42f6e796f1e392792bb0a4f785"
+    "replay_after_bing_rss_discovery_commit": "df236f67c9f27c42f6e796f1e392792bb0a4f785",
+    "replay_after_site_scoped_discovery_commit": "99168189f97d02de632ef66ce316769c3637b6f2"
   }
 }
