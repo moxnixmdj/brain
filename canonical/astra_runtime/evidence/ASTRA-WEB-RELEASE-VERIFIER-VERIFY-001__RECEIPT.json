@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T02:29:30.077288+00:00",
+  "mission_id": "ASTRA-WEB-RELEASE-VERIFIER-VERIFY-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_WEB_RELEASE_VERIFIER_VERIFY_001.json",
+  "mission_sha256": "9dfdb78ff8dd2f48a4c90049c74d4d7e0674c37ea5b1f671a8297b38566c7d72",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "538fe9cf3cfea1ad5521ce6e9eafca222d30231a7a8eb918eaf8919f9d88c184",
+  "status": "COMPLETE",
+  "steps_completed": 2
+}

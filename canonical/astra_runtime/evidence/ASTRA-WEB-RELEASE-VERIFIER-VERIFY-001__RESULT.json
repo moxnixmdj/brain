@@ -1,0 +1,26 @@
+{
+  "independent_reference_evidence": "canonical/astra_runtime/evidence/ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001__RESULT.json",
+  "independent_reference_version": "3.14.7",
+  "observed_effect": {
+    "adapter": "web_release_verify",
+    "claimed_string_present": true,
+    "claimed_version": "3.14.7",
+    "final_url": "https://www.python.org/downloads/",
+    "major": "3",
+    "observed_text_evidence": "Python 3.14.7",
+    "observed_version": "3.14.7",
+    "parser": "html.parser",
+    "producer_independent_verifier": true,
+    "product": "Python",
+    "response_bytes": 215042,
+    "source_url": "https://www.python.org/downloads/",
+    "transport": "urllib.request",
+    "verified": true,
+    "version_field": "latest_stable_python3"
+  },
+  "producer_independent_of_rendered_browser": true,
+  "schema": "PROJECT_BRAIN_WEB_RELEASE_VERIFIER_VERIFICATION_V1",
+  "status": "VERIFIED",
+  "verification_mission_id": "ASTRA-WEB-RELEASE-VERIFIER-VERIFY-001",
+  "verified": true
+}

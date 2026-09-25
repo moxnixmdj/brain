@@ -1011,6 +1011,86 @@
         "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001__RESULT.json"
       }
     },
+    "web.release.verify.independent_http": {
+      "action_template": {
+        "args": {
+          "capability_id": "web.release.verify.independent_http",
+          "major": "${input.major}",
+          "max_bytes": 3000000,
+          "product": "${input.product}",
+          "result_path": "${input.result_path}",
+          "timeout_s": 30,
+          "version_field": "${input.version_field}"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "web_release_verify",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "web",
+        "release",
+        "version",
+        "latest",
+        "stable",
+        "verify",
+        "independent",
+        "official",
+        "http"
+      ],
+      "limitations": [
+        "Verifies semantic versions exposed in an official HTTPS page's visible text.",
+        "Current verified contract targets major.minor.patch release strings and compares against a claimed field in repository-local JSON."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "web.release.verify.current"
+      ],
+      "requires": [
+        "structured.release_claim.available"
+      ],
+      "source": {
+        "modules": [
+          "urllib.request",
+          "html.parser",
+          "gzip"
+        ],
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independent_reference_evidence": "canonical/astra_runtime/evidence/ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001__RESULT.json",
+        "mission_id": "ASTRA-WEB-RELEASE-VERIFIER-VERIFY-001",
+        "observed_effect": {
+          "adapter": "web_release_verify",
+          "claimed_string_present": true,
+          "claimed_version": "3.14.7",
+          "final_url": "https://www.python.org/downloads/",
+          "major": "3",
+          "observed_text_evidence": "Python 3.14.7",
+          "observed_version": "3.14.7",
+          "parser": "html.parser",
+          "producer_independent_verifier": true,
+          "product": "Python",
+          "response_bytes": 215042,
+          "source_url": "https://www.python.org/downloads/",
+          "transport": "urllib.request",
+          "verified": true,
+          "version_field": "latest_stable_python3"
+        },
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-WEB-RELEASE-VERIFIER-VERIFY-001__RESULT.json"
+      }
+    },
     "xlsx.table.create_from_json_records": {
       "action_template": {
         "args": {

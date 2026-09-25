@@ -1,0 +1,42 @@
+{
+  "completed_at_utc": "2026-09-25T02:29:30.076809+00:00",
+  "created_at_utc": "2026-09-25T02:29:29.825392+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T02:29:30.027349+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython canonical/runtime/verify_web_release_verifier.py",
+        "duration_s": 0.202,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "WEB_RELEASE_VERIFIER_EFFECT_VERIFIED {\"independent_reference_evidence\": \"canonical/astra_runtime/evidence/ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001__RESULT.json\", \"independent_reference_version\": \"3.14.7\", \"observed_effect\": {\"adapter\": \"web_release_verify\", \"claimed_string_present\": true, \"claimed_version\": \"3.14.7\", \"final_url\": \"https://www.python.org/downloads/\", \"major\": \"3\", \"observed_text_evidence\": \"Python 3.14.7\", \"observed_version\": \"3.14.7\", \"parser\": \"html.parser\", \"producer_independent_verifier\": true, \"product\": \"Python\", \"response_bytes\": 215042, \"source_url\": \"https://www.python.org/downloads/\", \"transport\": \"urllib.request\", \"verified\": true, \"version_field\": \"latest_stable_python3\"}, \"producer_independent_of_rendered_browser\": true, \"schema\": \"PROJECT_BRAIN_WEB_RELEASE_VERIFIER_VERIFICATION_V1\", \"status\": \"VERIFIED\", \"verification_mission_id\": \"ASTRA-WEB-RELEASE-VERIFIER-VERIFY-001\", \"verified\": true}\n"
+      },
+      "step_id": "verify-independent-web-release-verifier",
+      "step_index": 0
+    },
+    {
+      "completed_at_utc": "2026-09-25T02:29:30.076389+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython canonical/runtime/promote_web_release_verifier.py canonical/astra_runtime/evidence/ASTRA-WEB-RELEASE-VERIFIER-VERIFY-001__RESULT.json",
+        "duration_s": 0.048,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "WEB_RELEASE_VERIFIER_CAPABILITY_PROMOTED\n"
+      },
+      "step_id": "promote-independent-web-release-verifier",
+      "step_index": 1
+    }
+  ],
+  "mission_id": "ASTRA-WEB-RELEASE-VERIFIER-VERIFY-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_WEB_RELEASE_VERIFIER_VERIFY_001.json",
+  "mission_sha256": "9dfdb78ff8dd2f48a4c90049c74d4d7e0674c37ea5b1f671a8297b38566c7d72",
+  "next_step": 2,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T02:29:30.076411+00:00"
+}
