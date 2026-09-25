@@ -1390,6 +1390,120 @@ def _compile_browser_result_record_projection(subgoal, context_paths, root):
     }
 
 
+def _compile_live_collection_read(subgoal, context_paths):
+    if not re.match(r"^read\s+the\s+live\s+json\s+array\s+from\s+that\s+result$",str(subgoal or "").strip(),re.IGNORECASE):
+        return None
+    json_paths=[str(p) for p in context_paths if pathlib.Path(str(p)).suffix.lower()==".json"]
+    if not json_paths:
+        return None
+    return {"source_path":json_paths[-1]}
+
+
+def _compile_live_collection_map(subgoal, context_paths, registry):
+    text=str(subgoal or "").strip()
+    m=re.match(
+        r"^for\s+every\s+([A-Za-z_][A-Za-z0-9_-]*)\s+returned\s+at\s+runtime,\s+"
+        r"create\s+([^\s]+\.json)\s+containing\s+exactly\s+one\s+record\s+with\s+that\s+"
+        r"(?:user|item)'s\s+(.+?),\s+and\s+bucket\s+equal\s+to\s+([A-Za-z_]+)\s+when\s+the\s+"
+        r"([A-Za-z_][A-Za-z0-9_]*)\s+length\s+is\s+at\s+most\s+(\d+)\s+characters\s+and\s+"
+        r"([A-Za-z_]+)\s+otherwise$",
+        text,re.IGNORECASE
+    )
+    if not m:
+        return None
+    jq=(registry or {}).get("json.query.jq")
+    if not isinstance(jq,dict) or jq.get("status")!="VERIFIED_BOUND_CAPABILITY":
+        return None
+    json_paths=[str(p) for p in context_paths if pathlib.Path(str(p)).suffix.lower()==".json"]
+    if not json_paths:
+        return None
+    source_path=json_paths[-1]
+    output_path=m.group(2).strip(" .,:;")
+    raw_fields=re.sub(r"\s+and\s+",",",m.group(3),flags=re.IGNORECASE)
+    fields=[x.strip(" .,:;").lower() for x in raw_fields.split(",") if x.strip(" .,:;")]
+    measured=m.group(5).lower()
+    max_length=int(m.group(6))
+    short_label=m.group(4).upper()
+    long_label=m.group(7).upper()
+    if not fields or measured not in fields or len(fields)>24:
+        return None
+    if any(not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*",f) for f in fields):
+        return None
+    pairs=",".join(json.dumps(f)+":."+f for f in fields)
+    filt=(
+      '(.observed_text | fromjson) '
+      '| map({'+pairs+','
+      '"bucket":(if (.'+measured+' | tostring | length) <= '+str(max_length)+' '
+      'then '+json.dumps(short_label)+' else '+json.dumps(long_label)+' end)})'
+    )
+    return {
+      "action":{
+        "type":"invoke_capability",
+        "args":{
+          "capability_id":"json.query.jq",
+          "input_path":source_path,
+          "filter":filt,
+          "output_path":output_path,
+          "raw_output":False,
+          "require_nonempty":True,
+          "timeout_s":60,
+        },
+        "expect":{"type":"field_equals","field":"output_verified","value":True},
+      },
+      "output_path":output_path,
+      "evidence":{
+        "source_path":source_path,
+        "output_path":output_path,
+        "copy_fields":fields,
+        "measured_field":measured,
+        "max_length":max_length,
+        "short_label":short_label,
+        "long_label":long_label,
+      }
+    }
+
+
+def _compile_live_collection_verification(subgoal, compiled_parts):
+    text=str(subgoal or "").strip()
+    if not re.match(
+        r"^finally\s+independently\s+reread\s+both\s+files\s+and\s+verify\s+the\s+output\s+contains\s+exactly\s+one\s+record\s+per\s+live\b",
+        text,re.IGNORECASE
+    ):
+        return None
+    prior=None
+    for part in reversed(compiled_parts or []):
+        if isinstance(part,dict) and part.get("mode")=="VERIFIED_RUNTIME_COLLECTION_MAP":
+            prior=part
+            break
+    if prior is None:
+        return None
+    return {
+      "action":{
+        "type":"assert_collection_length_bucket",
+        "args":{
+          "source_path":prior["source_path"],
+          "output_path":prior["output_path"],
+          "copy_fields":prior["copy_fields"],
+          "measured_field":prior["measured_field"],
+          "label_field":"bucket",
+          "max_length":prior["max_length"],
+          "short_label":prior["short_label"],
+          "long_label":prior["long_label"],
+        },
+        "expect":{"type":"field_equals","field":"verified","value":True},
+      },
+      "evidence":{
+        "source_path":prior["source_path"],
+        "output_path":prior["output_path"],
+        "copy_fields":prior["copy_fields"],
+        "measured_field":prior["measured_field"],
+        "max_length":prior["max_length"],
+        "short_label":prior["short_label"],
+        "long_label":prior["long_label"],
+      }
+    }
+
+
 def _compile_live_uuid_conditional(subgoal, context_paths, registry):
     text=str(subgoal or "").strip()
     m=re.match(
@@ -1480,6 +1594,36 @@ def _compile_compound_goal(goal, clauses, registry, root):
     context_paths=[]
     for index,clause in enumerate(clauses):
         lower=clause.lower()
+
+        live_collection_read=_compile_live_collection_read(clause,context_paths)
+        if live_collection_read is not None:
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"DEFERRED_RUNTIME_COLLECTION_READ",
+                "source_path":live_collection_read["source_path"],
+            })
+            continue
+
+        live_collection_map=_compile_live_collection_map(clause,context_paths,registry)
+        if live_collection_map is not None:
+            actions.append(live_collection_map["action"])
+            context_paths.append(live_collection_map["output_path"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"VERIFIED_RUNTIME_COLLECTION_MAP",
+                **live_collection_map["evidence"],
+            })
+            continue
+
+        live_collection_verify=_compile_live_collection_verification(clause,compiled_parts)
+        if live_collection_verify is not None:
+            actions.append(live_collection_verify["action"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"INDEPENDENT_RUNTIME_COLLECTION_VERIFICATION",
+                **live_collection_verify["evidence"],
+            })
+            continue
 
         if re.match(r"^read\s+the\s+uuid\s+from\s+that\s+live\s+result$",str(clause or ""),re.IGNORECASE):
             json_paths=[str(p) for p in context_paths if pathlib.Path(str(p)).suffix.lower()==".json"]
