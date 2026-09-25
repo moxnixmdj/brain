@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T02:17:56.515523+00:00",
+  "mission_id": "ASTRA-GOAL-COMPILER-REGRESSION-POST-BROWSER-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_GOAL_COMPILER_REGRESSION_POST_BROWSER_001.json",
+  "mission_sha256": "8d906bc034306fcc3a58ea0217b2ab56ccd5748866ee8c98966d3bd1d55fca69",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "510e60f8d200d83812256a3d08d06ee38cc131e9550e9dbf373a4c8f3e487968",
+  "status": "COMPLETE",
+  "steps_completed": 2
+}
