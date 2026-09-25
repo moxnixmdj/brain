@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-YAML-YQ-SUPPLIER-PROBE-001",
+  "purpose": "Probe Ubuntu yq as a zero-cost generic YAML-to-JSON capability for the live workflow audit.",
+  "steps": [
+    {
+      "id": "probe-yq",
+      "adapter": "shell",
+      "command": "set -euo pipefail\nVER=$(apt-cache policy yq | awk '/Candidate:/ {print $2}')\ntest -n \"$VER\" && test \"$VER\" != '(none)'\nSHA=$(apt-cache show \"yq=$VER\" | awk '/^SHA256:/ {print $2; exit}')\ntest ${#SHA} -eq 64\nsudo apt-get install -y --no-install-recommends \"yq=$VER\" >/dev/null\nOUT=$(mktemp)\nyq '.' .github/workflows/astra-shared-runtime.yml > \"$OUT\"\npython - \"$OUT\" \"$VER\" \"$SHA\" <<'PY'\nimport json,pathlib,sys\np=pathlib.Path(sys.argv[1]); data=json.loads(p.read_text())\nassert data['name']=='ASTRA Shared Runtime Mission'\nassert 'on' in data\nassert 'jobs' in data and 'run-mission' in data['jobs']\nprint(json.dumps({'package':'yq','version':sys.argv[2],'archive_sha256':sys.argv[3],'workflow_name':data['name'],'job_ids':sorted(data['jobs'])},sort_keys=True))\nprint('YQ_YAML_JSON_SUPPLIER_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "YQ_YAML_JSON_SUPPLIER_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "read_only_probe_except_ephemeral_package_install": true
+  }
+}
