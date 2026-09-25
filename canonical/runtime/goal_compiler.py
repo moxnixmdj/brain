@@ -85,6 +85,8 @@ def _context_path_for_key(key, context_paths):
         "pdf":{".pdf"},
         "text":{".txt",".md",".markdown",".csv",".tsv"},
         "image":{".png",".jpg",".jpeg",".webp"},
+        "archive":{".gz",".tgz",".zip",".tar"},
+        "manifest":{".json"},
     }.get(stem,set())
     candidates=[]
     for raw in reversed(list(context_paths or [])):
