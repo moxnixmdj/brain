@@ -38,6 +38,19 @@ def stable_release(text):
             return m.group(1),m
     return None,None
 
+
+def independent_stable_release(text):
+    marker="Python releases by version number"
+    i=text.lower().find(marker.lower())
+    if i<0:
+        return None,None
+    tail=text[i:i+12000]
+    m=re.search(r"Python\s+(3\.\d+\.\d+)\b",tail,re.IGNORECASE)
+    if not m:
+        return None,None
+    return m.group(1),m
+
+
 def main():
     evidence_path=ROOT/"canonical/astra_runtime/evidence/ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001__RESULT.json"
     screenshot="canonical/astra_runtime/tmp/PYTHON_DOWNLOADS.png"
@@ -55,7 +68,7 @@ def main():
         final=r.geturl()
     html=raw.decode("utf-8","replace")
     independent_text=html_text(html)
-    independent,imatch=stable_release(independent_text)
+    independent,imatch=independent_stable_release(independent_text)
     if not independent:
         raise RuntimeError("INDEPENDENT_STABLE_RELEASE_NOT_FOUND")
     if independent!=version:
