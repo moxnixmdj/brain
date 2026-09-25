@@ -2737,6 +2737,63 @@ def _compile_runtime_fallback_goal(goal, clauses, registry, root):
     }
 
 
+def _literal_atom(raw):
+    text=str(raw or "").strip()
+    if re.fullmatch(r"-?\d+",text):
+        return int(text)
+    if re.fullmatch(r"-?\d+\.\d+",text):
+        return float(text)
+    if text.lower()=="true":
+        return True
+    if text.lower()=="false":
+        return False
+    if text.lower()=="null":
+        return None
+    return text.strip("\"'")
+
+
+def _compile_literal_json_records(subgoal, root):
+    text=str(subgoal or "").strip()
+    m=re.match(
+        r"^create\s+([^\s]+\.json)\s+containing\s+exactly\s+(\d+)\s+records?\s+"
+        r"with\s+fields\s+(.+?):\s+(.+)$",
+        text,re.IGNORECASE
+    )
+    if not m:
+        return None
+    output_path=m.group(1).strip(" .,:;")
+    expected_count=int(m.group(2))
+    raw_fields=re.sub(r"\s+and\s+",",",m.group(3),flags=re.IGNORECASE)
+    fields=[x.strip(" .,:;") for x in raw_fields.split(",") if x.strip(" .,:;")]
+    if (
+        not fields or len(fields)>16 or len(set(fields))!=len(fields)
+        or any(not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*",x) for x in fields)
+        or expected_count<0 or expected_count>1000
+    ):
+        return None
+    chunks=[x.strip() for x in re.split(r"\s*;\s*|\s*,\s*",m.group(4)) if x.strip()]
+    if len(chunks)!=expected_count:
+        return None
+    records=[]
+    for chunk in chunks:
+        if len(fields)==1:
+            values=[chunk]
+        else:
+            values=chunk.split(None,len(fields)-1)
+        if len(values)!=len(fields):
+            return None
+        records.append({field:_literal_atom(value) for field,value in zip(fields,values)})
+    return {
+      "action":{
+        "type":"write_json_records",
+        "args":{"output_path":output_path,"fields":fields,"records":records},
+        "expect":{"type":"field_equals","field":"verified","value":True},
+      },
+      "output_path":output_path,
+      "evidence":{"output_path":output_path,"fields":fields,"record_count":expected_count},
+    }
+
+
 def _compile_compound_goal(goal, clauses, registry, root):
     actions=[]
     compiled_parts=[]
@@ -2746,6 +2803,17 @@ def _compile_compound_goal(goal, clauses, registry, root):
         if index in consumed_indices:
             continue
         lower=clause.lower()
+
+        literal_json=_compile_literal_json_records(clause,root)
+        if literal_json is not None:
+            actions.append(literal_json["action"])
+            context_paths.append(literal_json["output_path"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"NATIVE_LITERAL_JSON_RECORDS",
+                **literal_json["evidence"],
+            })
+            continue
 
         live_collection_read=_compile_live_collection_read(clause,context_paths)
         if live_collection_read is not None:
