@@ -3,21 +3,49 @@
     {
       "candidate_count": 0,
       "engine": "bing_rss",
+      "query": "World Bank SP.POP.TOTL official indicator",
       "status": "OK"
     },
     {
       "candidate_count": 0,
       "engine": "bing",
+      "query": "World Bank SP.POP.TOTL official indicator",
       "status": "OK"
     },
     {
       "candidate_count": 0,
       "engine": "duckduckgo",
+      "query": "World Bank SP.POP.TOTL official indicator",
       "status": "OK"
     },
     {
       "candidate_count": 0,
       "engine": "google",
+      "query": "World Bank SP.POP.TOTL official indicator",
+      "status": "OK"
+    },
+    {
+      "candidate_count": 0,
+      "engine": "bing_rss",
+      "query": "site:worldbank.org World Bank SP.POP.TOTL official indicator",
+      "status": "OK"
+    },
+    {
+      "candidate_count": 0,
+      "engine": "bing",
+      "query": "site:worldbank.org World Bank SP.POP.TOTL official indicator",
+      "status": "OK"
+    },
+    {
+      "candidate_count": 0,
+      "engine": "duckduckgo",
+      "query": "site:worldbank.org World Bank SP.POP.TOTL official indicator",
+      "status": "OK"
+    },
+    {
+      "candidate_count": 0,
+      "engine": "google",
+      "query": "site:worldbank.org World Bank SP.POP.TOTL official indicator",
       "status": "OK"
     }
   ],
@@ -27,7 +55,7 @@
   "candidates": [],
   "chosen_host": null,
   "chosen_url": null,
-  "discovered_at_utc": "2026-09-25T20:58:58.012302+00:00",
+  "discovered_at_utc": "2026-09-25T21:00:22.962363+00:00",
   "query": "World Bank SP.POP.TOTL official indicator",
   "schema": "PROJECT_BRAIN_SOURCE_DISCOVERY_EVIDENCE_V1",
   "status": "NO_AUTHORITATIVE_CANDIDATE",
