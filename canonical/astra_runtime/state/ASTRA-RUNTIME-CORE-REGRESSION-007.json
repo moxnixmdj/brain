@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T00:32:44.317587+00:00",
+  "created_at_utc": "2026-09-25T00:32:43.682415+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T00:32:44.317158+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython canonical/tests/test_goal_compiler.py\npython canonical/tests/test_capability_discovery.py\npython canonical/tests/test_runtime_composition.py",
+        "duration_s": 0.635,
+        "returncode": 0,
+        "stderr": "test_barcode_goal_selects_verified_barcode_not_qr (__main__.GoalCompilerTests.test_barcode_goal_selects_verified_barcode_not_qr) ... ok\ntest_compound_evidence_bundle_compiles_manifest_archive_and_verifier (__main__.GoalCompilerTests.test_compound_evidence_bundle_compiles_manifest_archive_and_verifier) ... ok\ntest_compound_goal_compiles_full_verified_audit_pipeline (__main__.GoalCompilerTests.test_compound_goal_compiles_full_verified_audit_pipeline) ... ok\ntest_json_status_manifest_compiles_and_executes (__main__.GoalCompilerTests.test_json_status_manifest_compiles_and_executes) ... ok\ntest_plain_image_only_pdf_goal_selects_verified_ocr (__main__.GoalCompilerTests.test_plain_image_only_pdf_goal_selects_verified_ocr) ... ok\ntest_plain_qr_goal_selects_verified_qr_and_binds_arguments (__main__.GoalCompilerTests.test_plain_qr_goal_selects_verified_qr_and_binds_arguments) ... ok\ntest_replay_prefers_typed_context_over_stale_later_output (__main__.GoalCompilerTests.test_replay_prefers_typed_context_over_stale_later_output) ... ok\ntest_unknown_goal_fails_closed (__main__.GoalCompilerTests.test_unknown_goal_fails_closed) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 0.036s\n\nOK\ntest_apt_discovery_keeps_late_split_compound_match (__main__.CapabilityDiscoveryTests.test_apt_discovery_keeps_late_split_compound_match) ... ok\ntest_discovery_never_binds_during_search (__main__.CapabilityDiscoveryTests.test_discovery_never_binds_during_search) ... ok\ntest_effect_queries_ignore_repo_path_noise_but_keep_file_type (__main__.CapabilityDiscoveryTests.test_effect_queries_ignore_repo_path_noise_but_keep_file_type) ... ok\ntest_effect_query_is_deterministic (__main__.CapabilityDiscoveryTests.test_effect_query_is_deterministic) ... ok\ntest_zero_cost_candidate_ranks_before_paid_candidate (__main__.CapabilityDiscoveryTests.test_zero_cost_candidate_ranks_before_paid_candidate) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.036s\n\nOK\ntest_json_key_assertion_is_layout_insensitive (__main__.RuntimeCompositionTests.test_json_key_assertion_is_layout_insensitive) ... ok\ntest_result_reference_resolves_prior_action_field (__main__.RuntimeCompositionTests.test_result_reference_resolves_prior_action_field) ... ok\ntest_verified_local_dependency_admission (__main__.RuntimeCompositionTests.test_verified_local_dependency_admission) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.001s\n\nOK\n",
+        "stdout": ""
+      },
+      "step_id": "run-current-regressions",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-RUNTIME-CORE-REGRESSION-007",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_CORE_REGRESSION_007.json",
+  "mission_sha256": "013c5e8306f4906946281c41729c60776d0aaca442bda839b1cd40fb64eee0e7",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T00:32:44.317175+00:00"
+}
