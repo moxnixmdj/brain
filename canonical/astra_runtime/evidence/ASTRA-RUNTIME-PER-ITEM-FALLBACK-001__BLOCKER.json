@@ -1,0 +1,9 @@
+{
+  "adapter": "goal",
+  "error": "Blocker:GOAL_COMPILATION_FAILED:GOAL_CONTROL_FLOW_UNSUPPORTED:{\"index\": 2, \"subgoal\": \"For every user returned at runtime, first generate a QR code image encoding that user's username and validate the decoded QR against that user's email; if that validation fails, fall back for only that user to a Code 128 barcode image encoding that user's email\"}",
+  "mission_id": "ASTRA-RUNTIME-PER-ITEM-FALLBACK-001",
+  "observed_at_utc": "2026-09-25T16:42:44.131954+00:00",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "run-per-item-fallback",
+  "step_index": 0
+}
