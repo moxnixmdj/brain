@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T01:02:58.118196+00:00",
+  "mission_id": "ASTRA-RUNTIME-WORKFLOW-YAML-AUDIT-003",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_WORKFLOW_YAML_AUDIT_003.json",
+  "mission_sha256": "2f352e8b3092c4571bd89635313ccd345bac331de816324072cf988c99f830db",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "096e3a27910b9f9f8c0bc6a6c7cf7713f87b6b35818e728e2d0d03d993b14f15",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
