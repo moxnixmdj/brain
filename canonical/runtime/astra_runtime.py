@@ -620,6 +620,44 @@ def _goal_action(action):
           "audit_sha256":sha_file(audit_path),
           "source_sha256":sha_file(yaml_path),
         }
+    if typ=="assert_collection_length_bucket":
+        source=_safe_repo_path(args.get("source_path",""))
+        output=_safe_repo_path(args.get("output_path",""))
+        if not source.is_file() or not output.is_file():
+            return {"type":typ,"verified":False,"error":"COLLECTION_SOURCE_MISSING"}
+        try:
+            src_wrap=json.loads(source.read_text(encoding="utf-8"))
+            src=json.loads(str(src_wrap.get("observed_text") or ""))
+            out=json.loads(output.read_text(encoding="utf-8"))
+        except Exception as exc:
+            return {"type":typ,"verified":False,"error":"COLLECTION_JSON_INVALID:"+type(exc).__name__}
+        copy_fields=[str(x) for x in (args.get("copy_fields") or [])]
+        measured=str(args.get("measured_field") or "")
+        label_field=str(args.get("label_field") or "bucket")
+        threshold=int(args.get("max_length") or 0)
+        short_label=str(args.get("short_label") or "")
+        long_label=str(args.get("long_label") or "")
+        if not isinstance(src,list) or not isinstance(out,list) or not copy_fields or not measured or threshold<0:
+            return {"type":typ,"verified":False,"error":"COLLECTION_SPEC_INVALID"}
+        if len(src)!=len(out):
+            return {"type":typ,"verified":False,"error":"COLLECTION_LENGTH_MISMATCH","source_count":len(src),"output_count":len(out)}
+        failures=[]
+        for idx,(s,o) in enumerate(zip(src,out)):
+            if not isinstance(s,dict) or not isinstance(o,dict):
+                failures.append({"index":idx,"error":"RECORD_NOT_OBJECT"})
+                continue
+            copied=all(o.get(f)==s.get(f) for f in copy_fields)
+            raw=str(s.get(measured) or "")
+            expected=short_label if len(raw)<=threshold else long_label
+            if not copied or o.get(label_field)!=expected:
+                failures.append({"index":idx,"expected":expected,"observed":o.get(label_field),"copied":copied})
+        return {
+          "type":typ,
+          "verified":not failures,
+          "source_count":len(src),
+          "output_count":len(out),
+          "failures":failures[:20],
+        }
     if typ=="assert_hex_prefix_bucket":
         source=_safe_repo_path(args.get("source_path",""))
         classified=_safe_repo_path(args.get("classification_path",""))
@@ -855,7 +893,7 @@ def _run_model_independent_goal(step, mission, goal):
         return None
     allowed_types={
       "read_file","list_tree","search_text","http_get","invoke_capability",
-      "project_browser_result_json","assert_hex_prefix_bucket",
+      "project_browser_result_json","assert_hex_prefix_bucket","assert_collection_length_bucket",
       "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal",
       "assert_workflow_audit_supported_by_source","assert_python_source_audit_supported_by_source",
       "assert_python_test_audit_zero","assert_python_test_audit_supported_by_fresh_execution",
