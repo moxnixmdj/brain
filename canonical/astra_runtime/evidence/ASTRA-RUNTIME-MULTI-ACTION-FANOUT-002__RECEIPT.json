@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T16:34:35.905806+00:00",
+  "mission_id": "ASTRA-RUNTIME-MULTI-ACTION-FANOUT-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_MULTI_ACTION_FANOUT_002.json",
+  "mission_sha256": "09cba546746d50681abc00b7e6ee9fa64bf4f04ab43e8b1920b0e2f08ecea929",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "c597b0cd85435997417961bf548b8068e683598badc24fb5b5513f770866bcc9",
+  "status": "COMPLETE",
+  "steps_completed": 2
+}

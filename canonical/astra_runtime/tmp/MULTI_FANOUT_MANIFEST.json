@@ -1,0 +1,72 @@
+[
+  {
+    "code128_path": "canonical/astra_runtime/tmp/MULTI_FANOUT_CODE128/1.png",
+    "email": "Sincere@april.biz",
+    "id": 1,
+    "qr_path": "canonical/astra_runtime/tmp/MULTI_FANOUT_QR/1.png",
+    "username": "Bret"
+  },
+  {
+    "code128_path": "canonical/astra_runtime/tmp/MULTI_FANOUT_CODE128/2.png",
+    "email": "Shanna@melissa.tv",
+    "id": 2,
+    "qr_path": "canonical/astra_runtime/tmp/MULTI_FANOUT_QR/2.png",
+    "username": "Antonette"
+  },
+  {
+    "code128_path": "canonical/astra_runtime/tmp/MULTI_FANOUT_CODE128/3.png",
+    "email": "Nathan@yesenia.net",
+    "id": 3,
+    "qr_path": "canonical/astra_runtime/tmp/MULTI_FANOUT_QR/3.png",
+    "username": "Samantha"
+  },
+  {
+    "code128_path": "canonical/astra_runtime/tmp/MULTI_FANOUT_CODE128/4.png",
+    "email": "Julianne.OConner@kory.org",
+    "id": 4,
+    "qr_path": "canonical/astra_runtime/tmp/MULTI_FANOUT_QR/4.png",
+    "username": "Karianne"
+  },
+  {
+    "code128_path": "canonical/astra_runtime/tmp/MULTI_FANOUT_CODE128/5.png",
+    "email": "Lucio_Hettinger@annie.ca",
+    "id": 5,
+    "qr_path": "canonical/astra_runtime/tmp/MULTI_FANOUT_QR/5.png",
+    "username": "Kamren"
+  },
+  {
+    "code128_path": "canonical/astra_runtime/tmp/MULTI_FANOUT_CODE128/6.png",
+    "email": "Karley_Dach@jasper.info",
+    "id": 6,
+    "qr_path": "canonical/astra_runtime/tmp/MULTI_FANOUT_QR/6.png",
+    "username": "Leopoldo_Corkery"
+  },
+  {
+    "code128_path": "canonical/astra_runtime/tmp/MULTI_FANOUT_CODE128/7.png",
+    "email": "Telly.Hoeger@billy.biz",
+    "id": 7,
+    "qr_path": "canonical/astra_runtime/tmp/MULTI_FANOUT_QR/7.png",
+    "username": "Elwyn.Skiles"
+  },
+  {
+    "code128_path": "canonical/astra_runtime/tmp/MULTI_FANOUT_CODE128/8.png",
+    "email": "Sherwood@rosamond.me",
+    "id": 8,
+    "qr_path": "canonical/astra_runtime/tmp/MULTI_FANOUT_QR/8.png",
+    "username": "Maxime_Nienow"
+  },
+  {
+    "code128_path": "canonical/astra_runtime/tmp/MULTI_FANOUT_CODE128/9.png",
+    "email": "Chaim_McDermott@dana.io",
+    "id": 9,
+    "qr_path": "canonical/astra_runtime/tmp/MULTI_FANOUT_QR/9.png",
+    "username": "Delphine"
+  },
+  {
+    "code128_path": "canonical/astra_runtime/tmp/MULTI_FANOUT_CODE128/10.png",
+    "email": "Rey.Padberg@karina.biz",
+    "id": 10,
+    "qr_path": "canonical/astra_runtime/tmp/MULTI_FANOUT_QR/10.png",
+    "username": "Moriah.Stanton"
+  }
+]
