@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-DYNAMIC-CAPABILITY-EXECUTION-HARNESS-001",
+  "purpose": "Execute the unchanged dynamic capability-choice mission against the repaired current runtime/compiler.",
+  "steps": [
+    {
+      "id": "execute-original-dynamic-choice",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/runtime/astra_runtime.py canonical/astra_runtime/missions/ASTRA_RUNTIME_DYNAMIC_CAPABILITY_CHOICE_001.json\npython - <<'PY'\nimport json,pathlib\np=pathlib.Path('canonical/astra_runtime/state/ASTRA-RUNTIME-DYNAMIC-CAPABILITY-CHOICE-001.json')\nx=json.loads(p.read_text(encoding='utf-8'))\nassert x.get('status')=='COMPLETE', x\nprint('DYNAMIC_CAPABILITY_CHOICE_COMPLETE')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "DYNAMIC_CAPABILITY_CHOICE_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "original_mission_unchanged": true
+  }
+}
