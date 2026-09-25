@@ -1,0 +1,246 @@
+{
+  "completed_at_utc": "2026-09-25T19:48:34.529460+00:00",
+  "created_at_utc": "2026-09-25T19:48:17.308855+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T19:48:34.528972+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "goal",
+        "controller_checkpoint": {
+          "last_rewound_from_action_index": null,
+          "path": "canonical/astra_runtime/state/ASTRA-RUNTIME-NPM-CROSS-SUPPLIER-VERIFY-CBOR-001__run-cross-supplier-verification__CONTROLLER_CHECKPOINT.json",
+          "plan_sha256": "345b31bedcd701acba3506a23aadfd5a11c42937feaa3e4dd0b214c7d6331f42",
+          "resume_count": 0,
+          "resumed": false,
+          "resumed_from_action_index": 0,
+          "rewind_count": 0
+        },
+        "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+        "cycles": 4,
+        "final_summary": "COMPOUND_GOAL_COMPLETE",
+        "goal_compilation": {
+          "clauses": [
+            "Create canonical/astra_runtime/tmp/NPM_CBOR_INDEPENDENT_SOURCE.json containing exactly four records with fields id and text: 1 alpha, 2 beta, 3 gamma, 4 delta",
+            "Using a zero-cost npm JavaScript library executed by Node.js, encode those exact records as CBOR and save canonical/astra_runtime/tmp/NPM_CBOR_INDEPENDENT_RECORDS.cbor",
+            "Finally independently decode the CBOR artifact using a different implementation that is not provided by the npm producer and verify the decoded records are exactly identical to canonical/astra_runtime/tmp/NPM_CBOR_INDEPENDENT_SOURCE.json in values, order, field names, and record count"
+          ],
+          "compiled_parts": [
+            {
+              "fields": [
+                "id",
+                "text"
+              ],
+              "index": 0,
+              "mode": "NATIVE_LITERAL_JSON_RECORDS",
+              "output_path": "canonical/astra_runtime/tmp/NPM_CBOR_INDEPENDENT_SOURCE.json",
+              "record_count": 4,
+              "subgoal": "Create canonical/astra_runtime/tmp/NPM_CBOR_INDEPENDENT_SOURCE.json containing exactly four records with fields id and text: 1 alpha, 2 beta, 3 gamma, 4 delta"
+            },
+            {
+              "index": 1,
+              "inputs": {
+                "json_path": "canonical/astra_runtime/tmp/NPM_CBOR_INDEPENDENT_SOURCE.json",
+                "output_path": "canonical/astra_runtime/tmp/NPM_CBOR_INDEPENDENT_RECORDS.cbor"
+              },
+              "mode": "VERIFIED_CAPABILITY",
+              "score": 40,
+              "selected_capability": "auto.npm.dfinity-cbor",
+              "subgoal": "Using a zero-cost npm JavaScript library executed by Node.js, encode those exact records as CBOR and save canonical/astra_runtime/tmp/NPM_CBOR_INDEPENDENT_RECORDS.cbor",
+              "target_effects": [
+                "structured.binary.encode",
+                "structured.binary.encode.cbor"
+              ]
+            },
+            {
+              "binary_path": "canonical/astra_runtime/tmp/NPM_CBOR_INDEPENDENT_RECORDS.cbor",
+              "format": "cbor",
+              "index": 2,
+              "json_path": "canonical/astra_runtime/tmp/NPM_CBOR_INDEPENDENT_SOURCE.json",
+              "mode": "CROSS_SUPPLIER_PRODUCER_INDEPENDENT_CODEC_VERIFICATION",
+              "producer_capability": "auto.npm.dfinity-cbor",
+              "producer_project": "@dfinity/cbor",
+              "subgoal": "Finally independently decode the CBOR artifact using a different implementation that is not provided by the npm producer and verify the decoded records are exactly identical to canonical/astra_runtime/tmp/NPM_CBOR_INDEPENDENT_SOURCE.json in values, order, field names, and record count",
+              "verifier_supplier_class": "pypi_python_library"
+            }
+          ],
+          "compiler_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN"
+        },
+        "planner_model_last": null,
+        "planner_source": null,
+        "planner_transport": null,
+        "planning_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN",
+        "returncode": 0,
+        "stdout": "COMPOUND_GOAL_COMPLETE",
+        "trace": [
+          {
+            "cycle": 0,
+            "plan": {
+              "args": {
+                "fields": [
+                  "id",
+                  "text"
+                ],
+                "output_path": "canonical/astra_runtime/tmp/NPM_CBOR_INDEPENDENT_SOURCE.json",
+                "records": [
+                  {
+                    "id": 1,
+                    "text": "alpha"
+                  },
+                  {
+                    "id": 2,
+                    "text": "beta"
+                  },
+                  {
+                    "id": 3,
+                    "text": "gamma"
+                  },
+                  {
+                    "id": 4,
+                    "text": "delta"
+                  }
+                ]
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "write_json_records"
+            },
+            "result": {
+              "fields": [
+                "id",
+                "text"
+              ],
+              "output_bytes": 170,
+              "output_path": "canonical/astra_runtime/tmp/NPM_CBOR_INDEPENDENT_SOURCE.json",
+              "output_sha256": "13eb9a391dade8114674863c439be32ae34ffd8a1a2bd4837625826039cb8a54",
+              "record_count": 4,
+              "type": "write_json_records",
+              "verified": true
+            }
+          },
+          {
+            "cycle": 1,
+            "plan": {
+              "args": {
+                "capability_id": "auto.npm.dfinity-cbor",
+                "decode_export": "decode",
+                "encode_export": "encode",
+                "json_path": "canonical/astra_runtime/tmp/NPM_CBOR_INDEPENDENT_SOURCE.json",
+                "output_path": "canonical/astra_runtime/tmp/NPM_CBOR_INDEPENDENT_RECORDS.cbor",
+                "package": "@dfinity/cbor",
+                "root_selector": "module"
+              },
+              "expect": {
+                "field": "output_verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "node_library_codec",
+              "capability_id": "auto.npm.dfinity-cbor",
+              "decode_export": "decode",
+              "dependency": {
+                "digest_hex": "e465fef6d01fdbdafde0fc6ff270b3aefdbfb7e02439f7a6fdcfc6eb5f8503659a76aed31ef73972faff0152c7d0ba6e9157cd4964511ef9757e409d881f4c31",
+                "integrity": "sha512-5GX+9tAf29r94Pxv8nCzrv2/t+AkOfem/c/G61+FA2Wadq7THvc5cvr/AVLH0LpukVfNSWRRHvl1fkCdiB9MMQ==",
+                "package": "@dfinity/cbor",
+                "package_root": "/home/runner/work/brain/brain/canonical/astra_runtime/tmp/npm_bound/dfinity_cbor__0.2.3__906ceb239f406440/package",
+                "status": "ALREADY_MATERIALIZED",
+                "version": "0.2.3"
+              },
+              "encode_export": "encode",
+              "output_bytes": 64,
+              "output_path": "canonical/astra_runtime/tmp/NPM_CBOR_INDEPENDENT_RECORDS.cbor",
+              "output_sha256": "ccc7f15067da5a26812078bd8f4c4f4c4fe78e578c0ce4537ada57accf29ffb8",
+              "output_verified": true,
+              "source_path": "canonical/astra_runtime/tmp/NPM_CBOR_INDEPENDENT_SOURCE.json"
+            }
+          },
+          {
+            "cycle": 2,
+            "plan": {
+              "args": {
+                "binary_path": "canonical/astra_runtime/tmp/NPM_CBOR_INDEPENDENT_RECORDS.cbor",
+                "format": "cbor",
+                "json_path": "canonical/astra_runtime/tmp/NPM_CBOR_INDEPENDENT_SOURCE.json",
+                "producer_capability_id": "auto.npm.dfinity-cbor",
+                "producer_project": "@dfinity/cbor"
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "verify_with_independent_pypi_codec"
+            },
+            "result": {
+              "attempt_count": 6,
+              "decode_callable": "loads",
+              "decode_kwargs": {},
+              "dependency_closure": {
+                "closure_sha256": "ae8309486f423a0672eae17abbfa4cdeedc6c7883677b12a197b9ecff9de49a9",
+                "network_required_for_install": false,
+                "resolver": "pip-download-only-binary",
+                "root_filename": "cborx-0.2.5-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+                "root_project": "cborx",
+                "root_version": "0.2.5",
+                "schema": "PROJECT_BRAIN_PYPI_WHEEL_CLOSURE_V1",
+                "source_only_artifacts_allowed": false,
+                "wheel_count": 1,
+                "wheels": [
+                  {
+                    "bytes": 575675,
+                    "filename": "cborx-0.2.5-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+                    "metadata_url": "https://pypi.org/pypi/cborx/0.2.5/json",
+                    "project": "cborx",
+                    "sha256": "61b31116810d4a2a00223b8767b5820ea1583bb3319857ed22ee8da0355b5c9f",
+                    "url": "https://files.pythonhosted.org/packages/6d/90/2ebebde765483581329bc289dbe7971004427b5079f4d29403d0fda18a83/cborx-0.2.5-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+                    "version": "0.2.5"
+                  }
+                ]
+              },
+              "dependency_independent": true,
+              "format": "cbor",
+              "module": "cborx",
+              "producer_capability_id": "auto.npm.dfinity-cbor",
+              "producer_independent": true,
+              "producer_project": "@dfinity/cbor",
+              "type": "verify_with_independent_pypi_codec",
+              "unwrap_key": null,
+              "verified": true,
+              "verifier_project": "cborx",
+              "verifier_version": "0.2.5"
+            }
+          },
+          {
+            "cycle": 3,
+            "plan": {
+              "args": {
+                "summary": "COMPOUND_GOAL_COMPLETE"
+              },
+              "type": "finish"
+            },
+            "result": {
+              "summary": "COMPOUND_GOAL_COMPLETE",
+              "type": "finish"
+            }
+          }
+        ]
+      },
+      "step_id": "run-cross-supplier-verification",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-RUNTIME-NPM-CROSS-SUPPLIER-VERIFY-CBOR-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_NPM_CROSS_SUPPLIER_VERIFY_CBOR_001.json",
+  "mission_sha256": "708e0cb21625734e04954976bd7457170937da46275ebd0d92d52477955656c6",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T19:48:34.528981+00:00"
+}

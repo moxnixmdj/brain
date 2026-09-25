@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T19:48:34.529956+00:00",
+  "mission_id": "ASTRA-RUNTIME-NPM-CROSS-SUPPLIER-VERIFY-CBOR-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_NPM_CROSS_SUPPLIER_VERIFY_CBOR_001.json",
+  "mission_sha256": "708e0cb21625734e04954976bd7457170937da46275ebd0d92d52477955656c6",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "79de12d0c4e756c094b247d1c124e557056929e2b6afc52d5da525313eb1206c",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
