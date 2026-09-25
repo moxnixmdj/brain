@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-VERIFY-PYTHON-TEST-AUDIT-005",
+  "purpose": "Fresh independent verification of the Python test-corpus audit with corrected post-loop aggregate checking.",
+  "steps": [
+    {
+      "id": "run-pending-test-audit",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\nroot=pathlib.Path('.').resolve()\np=root/'canonical/runtime/bound_capabilities/python_test_audit.py'\ns=importlib.util.spec_from_file_location('pta_verify',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nr=m.run({'source_root':'canonical/tests','pattern':'test_*.py','output_path':'canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT_VERIFY.json','timeout_s':180},root)\nprint(json.dumps(r,sort_keys=True)); print('PYTHON_TEST_AUDIT_ADAPTER_COMPLETE')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "PYTHON_TEST_AUDIT_ADAPTER_COMPLETE"
+      }
+    },
+    {
+      "id": "freshly-rerun-and-verify-corpus",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport json,pathlib,re,subprocess,sys\nroot=pathlib.Path('.').resolve(); tests=root/'canonical/tests'\nreport=json.loads((root/'canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT_VERIFY.json').read_text())\nfiles=sorted(p for p in tests.glob('test_*.py') if p.is_file())\nrecords={x['path']:x for x in report['records']}\nassert set(records)=={str(p.relative_to(root)).replace('\\\\','/') for p in files}\ntot={'files':0,'tests':0,'passed':0,'failed':0,'errors':0,'skipped':0}\nfor p in files:\n proc=subprocess.run([sys.executable,str(p)],cwd=root,text=True,capture_output=True,timeout=180)\n combined=(proc.stdout or '')+'\\n'+(proc.stderr or '')\n assert proc.returncode==0,(str(p),combined[-2000:])\n m=re.search(r'Ran\\s+(\\d+)\\s+tests?\\s+in\\s+[0-9.]+s',combined); assert m,(str(p),combined[-1000:])\n ran=int(m.group(1)); skipped=0\n sm=re.search(r'OK\\s*\\(([^)]*)\\)',combined)\n if sm:\n  z=re.search(r'skipped=(\\d+)',sm.group(1)); skipped=int(z.group(1)) if z else 0\n rel=str(p.relative_to(root)).replace('\\\\','/'); rec=records[rel]\n assert rec['exit_code']==0 and rec['tests']==ran and rec['failed']==0 and rec['errors']==0 and rec['skipped']==skipped\n tot['files']+=1; tot['tests']+=ran; tot['skipped']+=skipped; tot['passed']+=ran-skipped\nassert report['totals']==tot,(report['totals'],tot)\nprint(json.dumps({'verified':True,'totals':tot},sort_keys=True)); print('PYTHON_TEST_AUDIT_INDEPENDENTLY_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "PYTHON_TEST_AUDIT_INDEPENDENTLY_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "independent_verification_required": true,
+    "fresh_mission_identity": true,
+    "sibling_runtime_import_repaired": true,
+    "optional_planner_fallback_order_repaired": true,
+    "model_independence_regression_repaired": true,
+    "verification_aggregate_check_after_loop": true
+  }
+}
