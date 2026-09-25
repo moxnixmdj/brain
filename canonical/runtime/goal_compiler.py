@@ -1504,6 +1504,99 @@ def _compile_live_collection_verification(subgoal, compiled_parts):
     }
 
 
+def _compile_runtime_capability_choice(subgoal, context_paths, registry):
+    text=str(subgoal or "").strip()
+    m=re.match(
+        r"^if\s+its\s+first\s+hexadecimal\s+character\s+is\s+one\s+of\s+([0-9a-fA-F,]+),?\s+"
+        r"generate\s+a\s+qr\s+code\s+image\s+for\s+the\s+observed\s+uuid\s+and\s+save\s+it\s+to\s+"
+        r"([^\s;]+\.png);?\s*otherwise\s+generate\s+a\s+code\s+128\s+barcode\s+image\s+for\s+the\s+"
+        r"same\s+observed\s+uuid\s+and\s+save\s+it\s+to\s+([^\s]+\.png)$",
+        text,re.IGNORECASE
+    )
+    if not m:
+        return None
+    qr=(registry or {}).get("image.qr.generate.qrencode")
+    barcode=(registry or {}).get("auto.apt.zint")
+    if not isinstance(qr,dict) or qr.get("status")!="VERIFIED_BOUND_CAPABILITY":
+        return None
+    if not isinstance(barcode,dict) or barcode.get("status")!="VERIFIED_BOUND_CAPABILITY":
+        return None
+    json_paths=[str(p) for p in context_paths if pathlib.Path(str(p)).suffix.lower()==".json"]
+    if not json_paths:
+        return None
+    source_path=json_paths[-1]
+    match_chars="".join(x.strip().lower() for x in m.group(1).split(",") if x.strip())
+    qr_path=m.group(2).strip(" .,:;")
+    barcode_path=m.group(3).strip(" .,:;")
+    if not match_chars or not re.fullmatch(r"[0-9a-f]+",match_chars):
+        return None
+    qr_action=_render_template(qr["action_template"],{
+      "output_path":qr_path,
+      "text":"__RUNTIME_VALUE__",
+    })
+    barcode_action=_render_template(barcode["action_template"],{
+      "output_path":barcode_path,
+      "text":"__RUNTIME_VALUE__",
+    })
+    return {
+      "action":{
+        "type":"invoke_capability_by_runtime_value",
+        "args":{
+          "source_path":source_path,
+          "value_key":"uuid",
+          "match_chars":match_chars,
+          "match_action":qr_action,
+          "other_action":barcode_action,
+        },
+        "expect":{"type":"field_equals","field":"output_verified","value":True},
+      },
+      "evidence":{
+        "source_path":source_path,
+        "value_key":"uuid",
+        "match_chars":match_chars,
+        "match_capability":"image.qr.generate.qrencode",
+        "other_capability":"auto.apt.zint",
+        "match_path":qr_path,
+        "other_path":barcode_path,
+      }
+    }
+
+
+def _compile_runtime_capability_choice_verification(subgoal, compiled_parts):
+    if not re.match(
+        r"^finally\s+independently\s+verify\s+that\s+the\s+artifact\s+selected\s+by\s+the\s+live\s+branch\s+decodes\s+to\s+the\s+observed\s+uuid$",
+        str(subgoal or "").strip(),re.IGNORECASE
+    ):
+        return None
+    prior=None
+    for part in reversed(compiled_parts or []):
+        if isinstance(part,dict) and part.get("mode")=="RUNTIME_SELECTED_VERIFIED_CAPABILITY":
+            prior=part
+            break
+    if prior is None:
+        return None
+    return {
+      "action":{
+        "type":"assert_runtime_selected_code_decodes",
+        "args":{
+          "source_path":prior["source_path"],
+          "value_key":prior["value_key"],
+          "match_chars":prior["match_chars"],
+          "match_path":prior["match_path"],
+          "other_path":prior["other_path"],
+        },
+        "expect":{"type":"field_equals","field":"verified","value":True},
+      },
+      "evidence":{
+        "source_path":prior["source_path"],
+        "match_chars":prior["match_chars"],
+        "match_path":prior["match_path"],
+        "other_path":prior["other_path"],
+        "decoder_capability":"image.code.decode.zbarimg",
+      }
+    }
+
+
 def _compile_live_uuid_conditional(subgoal, context_paths, registry):
     text=str(subgoal or "").strip()
     m=re.match(
@@ -1633,6 +1726,26 @@ def _compile_compound_goal(goal, clauses, registry, root):
                 "index":index,"subgoal":clause,
                 "mode":"DEFERRED_RUNTIME_VALUE_READ",
                 "source_path":json_paths[-1],
+            })
+            continue
+
+        runtime_choice=_compile_runtime_capability_choice(clause,context_paths,registry)
+        if runtime_choice is not None:
+            actions.append(runtime_choice["action"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"RUNTIME_SELECTED_VERIFIED_CAPABILITY",
+                **runtime_choice["evidence"],
+            })
+            continue
+
+        runtime_choice_verify=_compile_runtime_capability_choice_verification(clause,compiled_parts)
+        if runtime_choice_verify is not None:
+            actions.append(runtime_choice_verify["action"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"INDEPENDENT_RUNTIME_CAPABILITY_CHOICE_VERIFICATION",
+                **runtime_choice_verify["evidence"],
             })
             continue
 
