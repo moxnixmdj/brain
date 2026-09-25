@@ -1,0 +1,117 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-UNTRUSTED-CAPABILITY-PROPOSAL-001",
+  "purpose": "Prove an untrusted semantic proposal can select and bind only verified registry capabilities while deterministic authority freezes initial facts and target effects and constructs every executable action.",
+  "goal": "Acquire two agreeing external observations, assess them, and materialize the supported fact through a constrained verified-capability proposal.",
+  "steps": [
+    {
+      "id": "execute-constrained-proposal",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "verified_initial_facts": ["network.http.available"],
+      "required_target_effects": ["knowledge.fact.materialized"],
+      "max_controller_actions": 12,
+      "capability_problem_proposal": {
+        "finish_summary": "UNTRUSTED_CAPABILITY_PROPOSAL_COMPLETE",
+        "max_expansions": 200,
+        "capability_instances": [
+          {
+            "instance_id": "observe-a",
+            "capability_id": "knowledge.json.fetch.external",
+            "inputs": {
+              "url": "https://httpbin.org/get?claim=alpha",
+              "json_path": ["args", "claim"],
+              "output_path": "canonical/astra_runtime/tmp/UNTRUSTED_PROPOSAL_A.json",
+              "authoritative": false
+            },
+            "provides_as": {
+              "knowledge.observation.available": "knowledge.observation.a.available"
+            }
+          },
+          {
+            "instance_id": "observe-b",
+            "capability_id": "knowledge.json.fetch.external",
+            "inputs": {
+              "url": "https://httpbin.org/anything?claim=alpha",
+              "json_path": ["args", "claim"],
+              "output_path": "canonical/astra_runtime/tmp/UNTRUSTED_PROPOSAL_B.json",
+              "authoritative": false
+            },
+            "provides_as": {
+              "knowledge.observation.available": "knowledge.observation.b.available"
+            }
+          },
+          {
+            "instance_id": "assess-two",
+            "capability_id": "knowledge.consistency.assess",
+            "inputs": {
+              "evidence_paths": [
+                {
+                  "$effect_result": {
+                    "effect": "knowledge.observation.a.available",
+                    "field": "output_path"
+                  }
+                },
+                {
+                  "$effect_result": {
+                    "effect": "knowledge.observation.b.available",
+                    "field": "output_path"
+                  }
+                }
+              ],
+              "output_path": "canonical/astra_runtime/tmp/UNTRUSTED_PROPOSAL_ASSESSMENT.json",
+              "max_age_s": null
+            },
+            "requires_as": [
+              {
+                "effect": "knowledge.observation.available",
+                "as": "knowledge.observation.a.available"
+              },
+              {
+                "effect": "knowledge.observation.available",
+                "as": "knowledge.observation.b.available"
+              }
+            ]
+          },
+          {
+            "instance_id": "materialize-fact",
+            "capability_id": "knowledge.support.materialize",
+            "inputs": {
+              "assessment_path": {
+                "$effect_result": {
+                  "effect": "knowledge.assessment.available",
+                  "field": "output_path"
+                }
+              },
+              "field_name": "claim",
+              "output_path": "canonical/astra_runtime/tmp/UNTRUSTED_PROPOSAL_FACT.json"
+            }
+          }
+        ]
+      },
+      "verify": {
+        "type": "stdout_contains",
+        "text": "UNTRUSTED_CAPABILITY_PROPOSAL_COMPLETE"
+      }
+    },
+    {
+      "id": "independent-artifact-check",
+      "adapter": "shell",
+      "command": "python - <<'PY'\nimport json,pathlib\np=pathlib.Path('canonical/astra_runtime/tmp/UNTRUSTED_PROPOSAL_FACT.json')\ndata=json.loads(p.read_text(encoding='utf-8'))\nassert data==[{'claim':'alpha'}],data\nprint('UNTRUSTED_CAPABILITY_PROPOSAL_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "UNTRUSTED_CAPABILITY_PROPOSAL_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "untrusted_proposal_may_define_actions": false,
+    "untrusted_proposal_may_define_capabilities": false,
+    "untrusted_proposal_may_define_initial_facts": false,
+    "untrusted_proposal_may_define_target_effects": false,
+    "verified_registry_references_only": true,
+    "deterministic_action_construction_required": true,
+    "independent_artifact_verification_required": true
+  }
+}
