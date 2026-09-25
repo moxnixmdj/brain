@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T17:10:30.020675+00:00",
+  "mission_id": "ASTRA-RUNTIME-MULTI-SOURCE-JOIN-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_MULTI_SOURCE_JOIN_002.json",
+  "mission_sha256": "3982e7a259489e14083ac3430f3dd42b4b6f142f745b4076db1e2f20cf6e776e",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "087a254e0e1cba139eae6a81b8f6c68149b3016b7a3db9e5dc7e3b980a480735",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
