@@ -655,6 +655,79 @@ def _goal_action(action):
           "all_true":truths,
           "verified":bool(equal and nonempty and truths),
         }
+    if typ=="project_browser_result_json":
+        source=_safe_repo_path(args.get("source_path",""))
+        output=_safe_repo_path(args.get("output_path",""))
+        if not source.is_file():
+            return {"type":typ,"error":"SOURCE_JSON_NOT_FOUND","path":str(args.get("source_path",""))}
+        try:
+            data=json.loads(source.read_text(encoding="utf-8"))
+        except Exception as exc:
+            return {"type":typ,"error":"SOURCE_JSON_INVALID:"+type(exc).__name__}
+        collection=str(args.get("collection") or "").strip()
+        record_id=str(args.get("record_id") or "").strip()
+        if not collection or not record_id:
+            return {"type":typ,"error":"COLLECTION_AND_RECORD_ID_REQUIRED"}
+        constants=args.get("constants") or {}
+        fields=args.get("fields") or []
+        if not isinstance(constants,dict) or not isinstance(fields,list) or not fields:
+            return {"type":typ,"error":"PROJECTION_SPEC_INVALID"}
+
+        bag={}
+        final_url=data.get("final_url")
+        if final_url not in (None,""):
+            bag["final_url"]=final_url
+        for item in data.get("action_trace") or []:
+            if not isinstance(item,dict):
+                continue
+            action=item.get("action") or {}
+            observed=item.get("result") or {}
+            if not isinstance(action,dict) or not isinstance(observed,dict):
+                continue
+            value=observed.get("value")
+            if str(action.get("type") or "")=="check" and observed.get("checked") is True:
+                value=observed.get("value") or action.get("target")
+            if value is None:
+                continue
+            aliases=[]
+            for raw_key in (action.get("target"),observed.get("name")):
+                if not raw_key:
+                    continue
+                key="_".join(re.findall(r"[A-Za-z0-9]+",str(raw_key).lower()))
+                if key and key not in aliases:
+                    aliases.append(key)
+            for key in aliases:
+                bag[key]=value
+
+        record=dict(constants)
+        missing=[]
+        for raw_field in fields:
+            field=str(raw_field)
+            if field in record:
+                continue
+            if field in bag:
+                record[field]=bag[field]
+                continue
+            missing.append(field)
+        if missing:
+            return {"type":typ,"error":"PROJECTION_FIELDS_MISSING:"+json.dumps(missing,sort_keys=True),"available_fields":sorted(bag)}
+        payload={collection:{record_id:record}}
+        output.parent.mkdir(parents=True,exist_ok=True)
+        output.write_text(json.dumps(payload,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+        raw=output.read_bytes()
+        return {
+          "type":typ,
+          "source_path":str(source.relative_to(ROOT)),
+          "output_path":str(output.relative_to(ROOT)),
+          "collection":collection,
+          "record_id":record_id,
+          "fields":sorted(record),
+          "record":record,
+          "output_sha256":hashlib.sha256(raw).hexdigest(),
+          "output_bytes":len(raw),
+          "verified":True,
+        }
+
     if typ=="http_get":
         url=str(args.get("url",""))
         if not url.startswith(("https://","http://")): return {"type":typ,"error":"UNSUPPORTED_URL"}
@@ -758,6 +831,7 @@ def _run_model_independent_goal(step, mission, goal):
         return None
     allowed_types={
       "read_file","list_tree","search_text","http_get","invoke_capability",
+      "project_browser_result_json",
       "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal",
       "assert_workflow_audit_supported_by_source","assert_python_source_audit_supported_by_source",
       "assert_python_test_audit_zero","assert_python_test_audit_supported_by_fresh_execution",
