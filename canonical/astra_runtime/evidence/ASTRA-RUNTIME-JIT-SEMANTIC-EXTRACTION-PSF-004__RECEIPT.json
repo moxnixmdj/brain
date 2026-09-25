@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T21:41:04.863720+00:00",
+  "mission_id": "ASTRA-RUNTIME-JIT-SEMANTIC-EXTRACTION-PSF-004",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_JIT_SEMANTIC_EXTRACTION_PSF_004.json",
+  "mission_sha256": "3f3d394fd407324df3df82d6f1732b0f64a7fc358624d34bd5ffbdf59c8ade60",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "82e895dceb7b8a17890474ff5f06baaad763e3ea1f458f2224821cf9ff8e47dc",
+  "status": "COMPLETE",
+  "steps_completed": 2
+}
