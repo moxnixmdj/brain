@@ -2310,8 +2310,8 @@ def _validated_checkpoint_prefix(completed):
 
 
 def _load_controller_checkpoint(step,mission,actions):
-    path=_controller_checkpoint_path(step,mission)
     plan_sha=_controller_plan_sha256(actions)
+    path=_controller_checkpoint_path(step,mission,plan_sha=plan_sha)
     if not path.is_file():
         return path,{
           "schema":"PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
