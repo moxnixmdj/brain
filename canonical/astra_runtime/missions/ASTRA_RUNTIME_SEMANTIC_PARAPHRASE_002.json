@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-SEMANTIC-PARAPHRASE-002",
+  "purpose": "Fresh clean proof that the already verified reduction survives materially different wording after semantic extraction generalization.",
+  "goal": "Using a real rendered browser, open https://jsonplaceholder.typicode.com/users, save a screenshot to canonical/astra_runtime/tmp/PARA_USERS.png, and save the rendered result to canonical/astra_runtime/tmp/PARA_USERS.json. Using a real rendered browser, open https://jsonplaceholder.typicode.com/posts, save a screenshot to canonical/astra_runtime/tmp/PARA_POSTS.png, and save the rendered result to canonical/astra_runtime/tmp/PARA_POSTS.json. From these two live datasets, summarize posting activity by user into canonical/astra_runtime/tmp/PARA_POST_COUNTS.json: produce one row for each observed user, carrying user_id and username, plus post_count equal to how many observed posts belong to that user through posts.userId = users.id. Turn canonical/astra_runtime/tmp/PARA_POST_COUNTS.json into canonical/astra_runtime/tmp/PARA_POST_COUNTS.xlsx using the columns user_id, username, and post_count. Cross-check the two captured datasets against the JSON summary and the workbook: every user must occur once, usernames must agree with the user source, every post must contribute to exactly one user's count, the counts must sum to the number of observed posts, no extra rows may exist, and the workbook must reproduce the JSON summary exactly.",
+  "steps": [
+    {
+      "id": "run-paraphrased-known-capability",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 32,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "same_underlying_effect_as_verified_reduce": true,
+    "new_capability_acquisition_for_paraphrase_forbidden": true,
+    "manual_controller_actions": false,
+    "fresh_mission_identity": true,
+    "semantic_reduce_generalization_commit": "52f1aa59381d651ad9876474725546769d08250d",
+    "source_mission": "ASTRA-RUNTIME-SEMANTIC-PARAPHRASE-001"
+  }
+}
