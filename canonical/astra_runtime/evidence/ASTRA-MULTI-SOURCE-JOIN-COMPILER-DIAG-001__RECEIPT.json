@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T17:11:21.374267+00:00",
+  "mission_id": "ASTRA-MULTI-SOURCE-JOIN-COMPILER-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_MULTI_SOURCE_JOIN_COMPILER_DIAG_001.json",
+  "mission_sha256": "ec93e17f1592d3d9d00da46fa0ab08cb5a8ca30100f349dfea1814e663efb982",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "639da74ff1a750ba64a7381f52671ecbc1c577cf409fab6ae817b34dbaa692ae",
+  "status": "COMPLETE",
+  "steps_completed": 2
+}
