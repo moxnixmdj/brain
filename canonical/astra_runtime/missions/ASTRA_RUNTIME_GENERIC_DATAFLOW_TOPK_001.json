@@ -23,6 +23,10 @@
     "numeric_sum_aggregation_required": true,
     "derived_average_required": true,
     "deterministic_top_k_required": true,
-    "capability_acquisition_for_transform_gap_forbidden": true
+    "capability_acquisition_for_transform_gap_forbidden": true,
+    "replay_after_sum_topk_ir": [
+      "b39424f6e1fa4d3e47b73a815089d28b647c3324",
+      "c94454b775c51c0ade01b34414c0a7aff97f5f50"
+    ]
   }
 }
