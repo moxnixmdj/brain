@@ -1,627 +1,692 @@
 {
   "auto_acquisition": {
-    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-markdown-toc\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"cl-markdown\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"markdown\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-markdown-mode\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table-all\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table-amharic\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table-arabic\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table-array30\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table-array30-big\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table-bingchan\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table-boshiamy\", \"status\": \"CONTRACT_REJECTED\"}]",
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"c++-annotations-pdf\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"auto-multiple-choice-doc-pdf\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"claws-mail-spam-report\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"coq-doc-pdf\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED\", \"name\": \"diff-pdf-wx\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.pdf\", \"name\": \"dmarcts-report-parser\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"docbook-xsl-doc-pdf\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-pdf-tools\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-pdf-tools-server\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"gambas3-gb-pdf\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"gambas3-gb-report\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"gsl-doc-pdf\", \"status\": \"CONTRACT_REJECTED\"}]",
     "status": "NOT_DISPATCHED"
   },
   "binding_performed": false,
   "goal": "Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json. Create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.md containing a table with every VERIFIED_BOUND_CAPABILITY, its provided effects, source dependency, and verification mission. Then create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.pdf from that report and verify that the final PDF contains every capability ID from the registry.",
   "mission_id": "ASTRA-RUNTIME-CAPABILITY-AUDIT-001",
-  "observed_at_utc": "2026-09-24T23:54:06.725029+00:00",
+  "observed_at_utc": "2026-09-25T00:00:28.015418+00:00",
   "result": {
     "binding_performed": false,
     "candidates": [
       {
-        "archive_sha256": "0f266091d9e5ca9fb3479028f3e40eebaf46cfbc8b40ef6a658847919cd4bbfb",
+        "archive_sha256": "67d86fe992163841cf57e3108fecda5a7b004fbcc3da1d132ec46fd3b272899f",
         "binding_kind": "apt",
-        "description": "Emacs TOC (table of contents) generator for markdown files",
+        "description": "Auto Multiple Choice - PDF documentation",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "markdown",
-          "table"
+          "pdf"
         ],
-        "name": "elpa-markdown-toc",
+        "name": "auto-multiple-choice-doc-pdf",
         "packages": [],
-        "query": "markdown",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 62,
-        "version": "0.1.5-3",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "15e721ced3b26257d5f724085e2b2ca6f745bd131623c56ce85323f664f4b48c",
-        "binding_kind": "apt",
-        "description": "Common Lisp rewrite of Markdown",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "markdown"
-        ],
-        "name": "cl-markdown",
-        "packages": [],
-        "query": "markdown",
+        "query": "pdf",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "20101006-2.1",
+        "version": "1.6.0-3build4",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "c145062b381c7b7ee62dab600d4594b43aeb5ef3c55e29d5a51ff2e10a1d553b",
+        "archive_sha256": "6cf6dc06c6630251b49e1a350be1890301793d853b215a4bb248324d5182303c",
         "binding_kind": "apt",
-        "description": "mode for editing Markdown-formatted text files in GNU Emacs",
+        "description": "Extensive tutorial and documentation about C++ - PDF output",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "markdown"
+          "pdf"
         ],
-        "name": "elpa-markdown-mode",
+        "name": "c++-annotations-pdf",
         "packages": [],
-        "query": "markdown",
+        "query": "pdf",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "2.6-1",
+        "version": "12.4.0-1",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "bcf98fb42ede51af7ad0a487c2ef612813c90ecdbd81de59db5012abbb11c16e",
+        "archive_sha256": "cd74868cc87c147d2915f0a313ea30455c1258104ab9b7c7086e0cea465486f8",
         "binding_kind": "apt",
-        "description": "Flexible Input Method Framework - table engine",
+        "description": "PDF and PostScript attachment viewer for Claws Mail",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "table"
+          "pdf"
         ],
-        "name": "fcitx-table",
+        "name": "claws-mail-pdf-viewer",
         "packages": [],
-        "query": "table",
+        "query": "pdf",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "1:4.2.9.9-2build2",
+        "version": "4.2.0-2build7",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "1705eb043ea3b664ec2d38b14a0f34f37f9ffd71f2be891751f9890da1b8412e",
+        "archive_sha256": "68ac9a3924d19db487ceb961e2d396c9561931327d6018cce75d1c7ac061e7a5",
         "binding_kind": "apt",
-        "description": "Flexible Input Method Framework - tables metapackage",
+        "description": "Spam reporting plugin for Claws Mail",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "table"
+          "report"
         ],
-        "name": "fcitx-table-all",
+        "name": "claws-mail-spam-report",
         "packages": [],
-        "query": "table",
+        "query": "report",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "1:4.2.9.9-2build2",
+        "version": "4.2.0-2build7",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "16c4cf829b7585b7237fca077232994bf80ce23d8486507ee3c65a6ce033e84d",
+        "archive_sha256": "91bcc8e85ce05351f7d6545c2739aaa56769a25c084fe9a3eb8f33ab8511cf0c",
         "binding_kind": "apt",
-        "description": "Flexible Input Method Framework - Amharic table",
+        "description": "documentation for Coq in pdf format",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "table"
+          "pdf"
         ],
-        "name": "fcitx-table-amharic",
+        "name": "coq-doc-pdf",
         "packages": [],
-        "query": "table",
+        "query": "pdf",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "0.2.4-3",
+        "version": "8.18.0-1",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "80be63607c73c50c49b5b7266bc9dab0d2c9cd7550fb6c73e65d8bec0e0968a6",
+        "archive_sha256": "90db48a81bd634923478b5fb54a935e3b394f2b641ae957e17bdf14f5eac7e71",
         "binding_kind": "apt",
-        "description": "Flexible Input Method Framework - Arabic table",
+        "description": "Simple tool for visually comparing two PDF files",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "table"
+          "pdf"
         ],
-        "name": "fcitx-table-arabic",
+        "name": "diff-pdf-wx",
         "packages": [],
-        "query": "table",
+        "query": "pdf",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "0.2.4-3",
+        "version": "0.5.1-2build3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "fceab99efb0e99ea2233d454297d4921c5932e957b3a3c22665682fa538a6d27",
+        "archive_sha256": "09be6f9efd655fdb64aefc6bbbdf629373ac5c10cdef7262ccea7010fb6a3728",
         "binding_kind": "apt",
-        "description": "Flexible Input Method Framework - Array30 table",
+        "description": "Perl based tool to parse DMARC reports",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "table"
+          "report"
         ],
-        "name": "fcitx-table-array30",
+        "name": "dmarcts-report-parser",
         "packages": [],
-        "query": "table",
+        "query": "report",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "0.3.8-3",
+        "version": "1.0+git20220721.51ba1de-1",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "8a479a4bf1358dbb669611ca15f2def8e5e64d5e6f3895853f03ef2e473ecb50",
+        "archive_sha256": "31d031500d8bb5b2b2ed4dfaba17f1018d3719ced7de27d1c6ca7be7f8bfb6d9",
         "binding_kind": "apt",
-        "description": "Flexible Input Method Framework - Array30-Big table",
+        "description": "stylesheets for processing DocBook XML files (PDF documentation)",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "table"
+          "pdf"
         ],
-        "name": "fcitx-table-array30-big",
+        "name": "docbook-xsl-doc-pdf",
         "packages": [],
-        "query": "table",
+        "query": "pdf",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "0.3.8-3",
+        "version": "1.79.1-1",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "701415f424a5e15f180124736cdecd77274741c2553171eb7a85f395565ad597",
+        "archive_sha256": "deb9a2f43e7059eace7dced6bd5663772f5920a8a076525b42b901e7de2f6c78",
         "binding_kind": "apt",
-        "description": "Flexible Input Method Framework - Bingchan table",
+        "description": "Display and interact with pdf in Emacs",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "table"
+          "pdf"
         ],
-        "name": "fcitx-table-bingchan",
+        "name": "elpa-pdf-tools",
         "packages": [],
-        "query": "table",
+        "query": "pdf",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "1:4.2.9.9-2build2",
+        "version": "1.1.0-1ubuntu2",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "13f3dc1f4215f98712ea4da07b80585aaa44308903543185d5f6e2991f9d6f69",
+        "archive_sha256": "984de60781685c1a56a9b2673e855daed3c50223bd4988aeddfb6be7f8641458",
         "binding_kind": "apt",
-        "description": "Flexible Input Method Framework - Boshiamy table",
+        "description": "server for Emacs's pdf-tools",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "table"
+          "pdf"
         ],
-        "name": "fcitx-table-boshiamy",
+        "name": "elpa-pdf-tools-server",
         "packages": [],
-        "query": "table",
+        "query": "pdf",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "0.3.8-3",
+        "version": "1.1.0-1ubuntu2",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "d5f8bfd67f711dc4668f2bc7958af4cb3a7fb10fcf63fdb80118dffa20156977",
+        "archive_sha256": "e0b76301749cf3aab8aa0482a1fce92c7ef862c04943c8be734b5f2a3d5e860b",
         "binding_kind": "apt",
-        "description": "Flexible Input Method Framework - Cangjie table (DO NOT USE)",
+        "description": "Gambas pdf component",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "table"
+          "pdf"
         ],
-        "name": "fcitx-table-cangjie",
+        "name": "gambas3-gb-pdf",
         "packages": [],
-        "query": "table",
+        "query": "pdf",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "1:4.2.9.9-2build2",
+        "version": "3.19.0-2ubuntu10",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "7f040c465b05e04dab25e64cd81ed68c7b7d03d1c22dbfdee7e7ec9cd24341e2",
+        "archive_sha256": "68dd209643e65397bc83bb070067d1089557ed02874ab71723d467745e9f59ec",
         "binding_kind": "apt",
-        "description": "Flexible Input Method Framework - Cangjie-Big table",
+        "description": "Gambas report component",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "table"
+          "report"
         ],
-        "name": "fcitx-table-cangjie-big",
+        "name": "gambas3-gb-report",
         "packages": [],
-        "query": "table",
+        "query": "report",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "0.3.8-3",
+        "version": "3.19.0-2ubuntu10",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "437c2ac3e5b65e21057afe0279385deebcc0caa64b3ceb7a728b6c0b90272106",
+        "archive_sha256": "61ada33700e7544a8ae35bee2a9bd07b8c22ba83f498a01f6db51cd04dcf8d4d",
         "binding_kind": "apt",
-        "description": "Flexible Input Method Framework - Cangjie3 table",
+        "description": "GNU Scientific Library (GSL) Reference Manual in pdf",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "table"
+          "pdf"
         ],
-        "name": "fcitx-table-cangjie3",
+        "name": "gsl-doc-pdf",
         "packages": [],
-        "query": "table",
+        "query": "pdf",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "0.3.8-3",
+        "version": "2.7.1-1",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "91b1cb37b511971f57c353e66180dd58ee3c231a52311c011c817ef7ad1f8ea6",
+        "archive_sha256": "52d98aaca5e7adbaf037e4f8a0faa25c8f8c21c5e36ea12ef23ed0e4c790164e",
         "binding_kind": "apt",
-        "description": "Flexible Input Method Framework - Cangjie5 table",
+        "description": "The Haskell 98 Language and Libraries Revised Report & addenda",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "table"
+          "report"
         ],
-        "name": "fcitx-table-cangjie5",
+        "name": "haskell98-report",
         "packages": [],
-        "query": "table",
+        "query": "pdf",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "0.3.8-3",
+        "version": "20080907-11",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "9fbc35134ff59f39f50a6b99555b44f6c570cd7ce5f26043f282e0ecb801a11b",
+        "archive_sha256": "100c56dfd86fd49f8a4e0da749a1d9e1c2b0866dbdf6ff483ba21d5d3b6a0256",
         "binding_kind": "apt",
-        "description": "Flexible Input Method Framework - Cantonese table",
+        "description": "LilyPond PDF Documentation",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "table"
+          "pdf"
         ],
-        "name": "fcitx-table-cantonese",
+        "name": "lilypond-doc-pdf",
         "packages": [],
-        "query": "table",
+        "query": "pdf",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "0.3.8-3",
+        "version": "2.24.3-1build3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "011c80dfccbccb0b0e33ea42f9ea48d58c0df4bf82a01df4e75c7b1483d804db",
+        "archive_sha256": "8fb8853c961ed310803d33b301081426132ff05010dd3e57cf685d7c5734b7ab",
         "binding_kind": "apt",
-        "description": "Flexible Input Method Framework - Cantonhk table",
+        "description": "LilyPond PDF Documentation in Catalan",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "table"
+          "pdf"
         ],
-        "name": "fcitx-table-cantonhk",
+        "name": "lilypond-doc-pdf-ca",
         "packages": [],
-        "query": "table",
+        "query": "pdf",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "0.3.8-3",
+        "version": "2.24.3-1build3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "7c6d4a91d59d98c7a9f3a7f0304a5a5dbde0b00bc151daf22867fdfcb5b2b81a",
+        "archive_sha256": "e91b758debf1c1bf921d13b84ac3480498ab61f446dae0d8a851a9312cb2e1a1",
         "binding_kind": "apt",
-        "description": "Flexible Input Method Framework - Cns11643 table",
+        "description": "LilyPond PDF Documentation in German",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "table"
+          "pdf"
         ],
-        "name": "fcitx-table-cns11643",
+        "name": "lilypond-doc-pdf-de",
         "packages": [],
-        "query": "table",
+        "query": "pdf",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "0.2.4-3",
+        "version": "2.24.3-1build3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "b7ed48e0a8c74c5a97d1a88adb23b23949261f2ad1796487f7fecb2a836ecc1e",
+        "archive_sha256": "ba65a33fdb16534f0181ce9c61efc56a24e66ff471b8e6019936e912bdfc3aa8",
         "binding_kind": "apt",
-        "description": "Flexible Input Method Framework - Compose table",
+        "description": "LilyPond PDF Documentation in Spanish",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "table"
+          "pdf"
         ],
-        "name": "fcitx-table-compose",
+        "name": "lilypond-doc-pdf-es",
         "packages": [],
-        "query": "table",
+        "query": "pdf",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "0.2.4-3",
+        "version": "2.24.3-1build3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "486aff197ccad92b5e827f4311485423f13bb17eae8caf4f483c005787d29aef",
+        "archive_sha256": "ac94a7077796a930988da3e6a605c53ceb6fe4601532310d6e806a0fe3667208",
         "binding_kind": "apt",
-        "description": "Flexible Input Method Framework - Dianbaoma table",
+        "description": "LilyPond PDF Documentation in French",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "table"
+          "pdf"
         ],
-        "name": "fcitx-table-dianbaoma",
+        "name": "lilypond-doc-pdf-fr",
         "packages": [],
-        "query": "table",
+        "query": "pdf",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "1:4.2.9.9-2build2",
+        "version": "2.24.3-1build3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "f9515cd22ad8382c66df8807773551ab9a093bc10a69333add81c6b74c995fc8",
+        "archive_sha256": "4705b7fe26e0f92ceb6d3739de9f272a82aa9e7a522579c6a18d090a4252c75d",
         "binding_kind": "apt",
-        "description": "Flexible Input Method Framework - Easy-Big table",
+        "description": "LilyPond PDF Documentation in Hungarian",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "table"
+          "pdf"
         ],
-        "name": "fcitx-table-easy-big",
+        "name": "lilypond-doc-pdf-hu",
         "packages": [],
-        "query": "table",
+        "query": "pdf",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "0.3.8-3",
+        "version": "2.24.3-1build3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "678c9d8c01e79022823fa9d683d35f5b8e7dfdcd7a9b2e312f34a7cb82c9f054",
+        "archive_sha256": "d8c9efbd4a49e9cbfe3a806a87c97234d43194b3fc154217a48b2c7c67620065",
         "binding_kind": "apt",
-        "description": "Flexible Input Method Framework - Emoji table",
+        "description": "LilyPond PDF Documentation in Italian",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "table"
+          "pdf"
         ],
-        "name": "fcitx-table-emoji",
+        "name": "lilypond-doc-pdf-it",
         "packages": [],
-        "query": "table",
+        "query": "pdf",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "0.2.4-3",
+        "version": "2.24.3-1build3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "acbaff892b4099fefe8cf0f6364b4dae32805243b2d05f1feaed715a9f46dd92",
+        "archive_sha256": "e7b448a2ce7ee8b1d44959cca9a87809e72775fe413ba57af2f3a598644d8227",
         "binding_kind": "apt",
-        "description": "Flexible Input Method Framework - Erbi table",
+        "description": "LilyPond PDF Documentation in Dutch",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "table"
+          "pdf"
         ],
-        "name": "fcitx-table-erbi",
+        "name": "lilypond-doc-pdf-nl",
         "packages": [],
-        "query": "table",
+        "query": "pdf",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "1:4.2.9.9-2build2",
+        "version": "2.24.3-1build3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "cff22b65ed2d2b6bb766194177e97e3053a523cf0864f3ea19e5e4712a77325c",
+        "archive_sha256": "ce11b9fe8747c31db81f623d1cd78d12b8a24973ff18c4085e68246aeb2abbc9",
         "binding_kind": "apt",
-        "description": "Flexible Input Method Framework - IPA-X-SAMPA table",
+        "description": "LilyPond PDF Documentation in Portuguese",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "table"
+          "pdf"
         ],
-        "name": "fcitx-table-ipa-x-sampa",
+        "name": "lilypond-doc-pdf-pt",
         "packages": [],
-        "query": "table",
+        "query": "pdf",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "0.2.4-3",
+        "version": "2.24.3-1build3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "ab8878e3f378ab8b4d3c93698f7fc5e0d0fde08c3b070c87411e0c7b0cadec13",
+        "archive_sha256": "999f9fdbeaacc55f3029ece4aef4f52c12feb60e56b02005fe61b2deca56a64a",
         "binding_kind": "apt",
-        "description": "Flexible Input Method Framework - Jyutping table",
+        "description": "Live Systems Documentation (pdf)",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "table"
+          "pdf"
         ],
-        "name": "fcitx-table-jyutping",
+        "name": "live-manual-pdf",
         "packages": [],
-        "query": "table",
+        "query": "pdf",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "0.3.8-3",
+        "version": "2:20151217.2",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "cd2d842d07580789591838227394fcf2bf174498397e4e4e16e322fb9e0968a5",
+        "archive_sha256": "67987d38e6ad52437bd5a8bf68ee0cb8a426148c63817cb734cbad5d1328dd56",
         "binding_kind": "apt",
-        "description": "Flexible Input Method Framework - LaTeX table",
+        "description": "PDF analysis and manipulation tool",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "table"
+          "pdf"
         ],
-        "name": "fcitx-table-latex",
+        "name": "origami-pdf",
         "packages": [],
-        "query": "table",
+        "query": "pdf",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "0.2.4-3",
+        "version": "2.1.0-1~exp2",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "5005a18e37827eec55d426a2bcede4ee52be140a2d9b0b885adf5df6cfd26fa7",
+        "archive_sha256": "635240214cec31148157e07251a2a17aba0e83229584ab432e65eb311780aa63",
         "binding_kind": "apt",
-        "description": "Flexible Input Method Framework - Malayalam phonetic table",
+        "description": "multi-monitor presentation tool (ala Keynote) for PDF files",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "table"
+          "pdf"
         ],
-        "name": "fcitx-table-malayalam-phonetic",
+        "name": "pdf-presenter-console",
         "packages": [],
-        "query": "table",
+        "query": "pdf",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "0.2.4-3",
+        "version": "4.6.0-3build3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "d47eac2b95be0f25259be5d43b4dccbeeeecfebe4c4ffb558b34572c54e48d56",
+        "archive_sha256": "0d041ffa0b03c084f75aa95041c262eb49dcb757e33aefd966ea619c6f54fb97",
         "binding_kind": "apt",
-        "description": "Flexible Input Method Framework - Quick-Classic table",
+        "description": "Portable Document Format (PDF) viewer - common files",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "table"
+          "pdf"
         ],
-        "name": "fcitx-table-quick-classic",
+        "name": "pdf.js-common",
         "packages": [],
-        "query": "table",
+        "query": "pdf",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "0.3.8-3",
+        "version": "2.14.305+dfsg-2",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "56ddf7aa83a2b50f4b2a527f6ab1931554b1eaf6d2b19c275f934ce589721827",
+        "archive_sha256": "081c094586a1dc40f1acf69bc4c855e8c4f820c91c433164fdcfca7f437754b4",
         "binding_kind": "apt",
-        "description": "Flexible Input Method Framework - Quick3 table",
+        "description": "printer driver for PDF writing via CUPS",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "table"
+          "pdf"
         ],
-        "name": "fcitx-table-quick3",
+        "name": "printer-driver-cups-pdf",
         "packages": [],
-        "query": "table",
+        "query": "pdf",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "0.3.8-3",
+        "version": "3.0.1-14ubuntu0.24.04.1",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "960f34cfbce54127e0ba7253efb7e747ae062d1174b388d68deca9dbfb8f702b",
+        "archive_sha256": "0886119fdbb9acd9e2aeadd90b38008430eb2b93c3e2374f2689346f8215203e",
         "binding_kind": "apt",
-        "description": "Sphinx extension for rendering markdown tables (Python 3)",
+        "description": "Qt Quick PDF QML module",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 2,
+        "integration_friction": 0,
         "matched_terms": [
-          "markdown",
-          "table"
+          "pdf"
         ],
-        "name": "python3-sphinx-markdown-tables",
+        "name": "qml-module-qtquick-pdf",
         "packages": [],
-        "query": "markdown",
+        "query": "pdf",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 44,
-        "version": "0.0.17-1",
+        "score": 32,
+        "version": "5.15.16+dfsg-3",
         "zero_cost_eligible": true
       },
       {
-        "description": "Create, read, update, and delete records in Airtable bases and tables",
+        "archive_sha256": "ce061b81d524d738b71633a3a18b1dffc12c7b2e4a56025c45c5969acfc82df3",
+        "binding_kind": "apt",
+        "description": "simplified PDF report generator",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 3,
+        "matched_terms": [
+          "pdf",
+          "report"
+        ],
+        "name": "libpdf-report-perl",
+        "packages": [],
+        "query": "pdf",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 42,
+        "version": "1.36-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Agent-facing PDF API: merge, split, rotate, compress, images, metadata, text, and Markdown.",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "com.mcparmory/airtable",
+        "name": "com.exactpdf/mcp",
         "packages": [
           {
-            "identifier": "mcparmory-airtable",
+            "identifier": "@exactpdf/mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.2.3"
+          }
+        ],
+        "query": "pdf",
+        "remotes": [],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.2.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "AI-powered PDF tools: fill forms via natural language",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.hellobasestation/pdfkit",
+        "packages": [
+          {
+            "identifier": "pdfkit-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.7"
+          }
+        ],
+        "query": "pdf",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.hellobasestation.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.7",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Extract data, edit, convert, and parse PDF documents with OCR and AI",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.mcparmory/pdfco",
+        "packages": [
+          {
+            "identifier": "mcparmory-pdfco",
             "registry_type": "pypi",
             "required_environment": [],
             "runtime_hint": "uvx",
@@ -629,10 +694,10 @@
             "transport": {
               "type": "stdio"
             },
-            "version": "1.0.3"
+            "version": "1.0.2"
           },
           {
-            "identifier": "ghcr.io/mcparmory/airtable:1.0.3",
+            "identifier": "ghcr.io/mcparmory/pdfco:1.0.2",
             "registry_type": "oci",
             "required_environment": [],
             "runtime_hint": "docker",
@@ -643,7 +708,7 @@
             "version": null
           }
         ],
-        "query": "table",
+        "query": "pdf",
         "remotes": [],
         "repository": {
           "source": "github",
@@ -653,52 +718,118 @@
         "required_secret_count": 0,
         "score": 18,
         "status": "active",
-        "version": "1.0.3",
+        "version": "1.0.2",
         "zero_cost_eligible": true
       },
       {
-        "description": "Manage Airtable bases: schema, field CRUD, views, formula validation, extensions",
+        "description": "Keyless MCP for Just Signal: live quotes, report publishing, scorecard, and Chophouse panel grades.",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "io.github.Automations-Project/airtable-user-mcp",
+        "name": "com.ou-reports/just-signal",
         "packages": [
           {
-            "identifier": "airtable-user-mcp",
+            "identifier": "just-signal-mcp",
             "registry_type": "npm",
             "required_environment": [],
-            "runtime_hint": "npx",
+            "runtime_hint": null,
             "secret_environment": [],
             "transport": {
               "type": "stdio"
             },
-            "version": "2.1.1"
+            "version": "1.3.0"
           }
         ],
-        "query": "table",
+        "query": "report",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://www.ou-reports.com/api/mcp.php"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.3.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Merge, split, compress, unlock, organize, extract, fill forms and check PDFs \u2014 12 local tools.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.yaktool/pdf",
+        "packages": [
+          {
+            "identifier": "yaktool-pdf-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.7.0"
+          }
+        ],
+        "query": "pdf",
+        "remotes": [],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.7.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Deterministic PDF tools for AI agents: inspect fields, fill forms, merge PDFs, invoices.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "dev.pdfops/pdfops-mcp",
+        "packages": [
+          {
+            "identifier": "pdfops-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.3.3"
+          }
+        ],
+        "query": "pdf",
         "remotes": [],
         "repository": {
           "source": "github",
-          "url": "https://github.com/Automations-Project/VSCode-Airtable-Formula"
+          "url": "https://github.com/pdfops/pdfops-mcp"
         },
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
         "status": "active",
-        "version": "2.1.1",
+        "version": "0.3.3",
         "zero_cost_eligible": true
       },
       {
-        "description": "Markdown Ai MCP Server by MEOK AI Labs",
+        "description": "AI Incident Reporting Compliance MCP. Unified classification + reporting-clock tracker across EU...",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "io.github.CSOAI-ORG/markdown-ai-mcp",
+        "name": "io.github.CSOAI-ORG/ai-incident-reporting-mcp",
         "packages": [
           {
-            "identifier": "markdown-ai-mcp",
+            "identifier": "ai-incident-reporting-mcp",
             "registry_type": "pypi",
             "required_environment": [],
             "runtime_hint": "python",
@@ -706,102 +837,69 @@
             "transport": {
               "type": "stdio"
             },
-            "version": "1.0.10"
+            "version": "1.1.9"
           }
         ],
-        "query": "markdown",
+        "query": "report",
         "remotes": [],
         "repository": {
+          "id": "1232725636",
           "source": "github",
-          "url": "https://github.com/CSOAI-ORG/markdown-ai-mcp"
+          "url": "https://github.com/CSOAI-ORG/ai-incident-reporting-mcp"
         },
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
         "status": "active",
-        "version": "1.0.10",
+        "version": "1.1.9",
         "zero_cost_eligible": true
       },
       {
-        "description": "Tabler.io for AI assistants: search 5,000+ icons, UI components, layouts, themes and docs.",
+        "description": "Explainability Report MCP Server by MEOK AI Labs",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "io.github.MaFady/tabler-mcp-server",
+        "name": "io.github.CSOAI-ORG/explainability-report-mcp",
         "packages": [
           {
-            "identifier": "tabler-mcp-server",
-            "registry_type": "npm",
+            "identifier": "explainability-report-mcp",
+            "registry_type": "pypi",
             "required_environment": [],
-            "runtime_hint": null,
+            "runtime_hint": "python",
             "secret_environment": [],
             "transport": {
               "type": "stdio"
             },
-            "version": "1.0.1"
+            "version": "1.0.16"
           }
         ],
-        "query": "table",
+        "query": "report",
         "remotes": [],
         "repository": {
           "source": "github",
-          "url": "https://github.com/MaFady/tabler-mcp-server"
+          "url": "https://github.com/CSOAI-ORG/explainability-report-mcp"
         },
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
         "status": "active",
-        "version": "1.0.1",
+        "version": "1.0.16",
         "zero_cost_eligible": true
       },
       {
-        "description": "Convert HTML to Markdown or strip to plain text. For web-scraping agents.",
+        "description": "MEOK CRA Article 14 Reporter MCP \u2014 actively-exploited-vulnerability notification with 24h/72h/14d",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "io.github.MukundaKatta/html-to-markdown-mcp",
+        "name": "io.github.CSOAI-ORG/meok-cra-art14-reporter-mcp",
         "packages": [
           {
-            "identifier": "@mukundakatta/html-to-markdown-mcp",
-            "registry_type": "npm",
+            "identifier": "meok-cra-art14-reporter-mcp",
+            "registry_type": "pypi",
             "required_environment": [],
-            "runtime_hint": null,
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": "0.1.0"
-          }
-        ],
-        "query": "markdown",
-        "remotes": [],
-        "repository": {
-          "source": "github",
-          "subfolder": "packages/html-to-markdown-mcp",
-          "url": "https://github.com/MukundaKatta/mcp-stack"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 18,
-        "status": "active",
-        "version": "0.1.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "AI Answer Copier \u2014 Convert Markdown to PDF, DOCX, HTML, LaTeX, CSV, JSON, XML, XLSX, RTF, PNG",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.XJTLUmedia/markdown-formatter",
-        "packages": [
-          {
-            "identifier": "@xjtlumedia/markdown-mcp-server",
-            "registry_type": "npm",
-            "required_environment": [],
-            "runtime_hint": null,
+            "runtime_hint": "python",
             "secret_environment": [],
             "transport": {
               "type": "stdio"
@@ -809,11 +907,17 @@
             "version": "1.0.5"
           }
         ],
-        "query": "markdown",
-        "remotes": [],
+        "query": "report",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.meok.ai/v1/governance/cra-art14-reporter"
+          }
+        ],
         "repository": {
           "source": "github",
-          "url": "https://github.com/XJTLUmedia/AI_answer_copier"
+          "url": "https://github.com/CSOAI-ORG/meok-cra-art14-reporter-mcp"
         },
         "required_environment_count": 0,
         "required_secret_count": 0,
@@ -823,1081 +927,911 @@
         "zero_cost_eligible": true
       },
       {
-        "description": "Local-only Tableau .twbx audit: lineage, unused fields, duplicate calcs, SQL, version diffs",
+        "description": "HPE GreenLake reporting MCP Server",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "io.github.andey0Saikiran/tableau-lineage",
+        "name": "io.github.HewlettPackard/greenlake-reporting-mcp",
         "packages": [
           {
-            "identifier": "tableau-lineage-mcp",
-            "registry_type": "npm",
-            "required_environment": [],
-            "runtime_hint": "npx",
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": "1.0.1"
-          }
-        ],
-        "query": "table",
-        "remotes": [],
-        "repository": {
-          "id": "1278695609",
-          "source": "github",
-          "subfolder": "mcp",
-          "url": "https://github.com/andey0Saikiran/tableau-lineage"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 18,
-        "status": "active",
-        "version": "1.0.1",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "easyTable restaurant reservations for Claude \u2014 availability, and create/modify/cancel bookings",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.chrischall/easytable-mcp",
-        "packages": [
-          {
-            "identifier": "easytable-mcp",
-            "registry_type": "npm",
-            "required_environment": [],
-            "runtime_hint": null,
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": "1.2.0"
-          }
-        ],
-        "query": "table",
-        "remotes": [],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/chrischall/easytable-mcp"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 18,
-        "status": "active",
-        "version": "1.2.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Any URL to clean, LLM-ready Markdown for RAG. Strips ads, nav, and boilerplate.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.damonwill78-a11y/clean-markdown",
-        "packages": [
-          {
-            "identifier": "clean-markdown-mcp",
-            "registry_type": "npm",
-            "required_environment": [],
-            "runtime_hint": null,
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": "1.1.3"
-          }
-        ],
-        "query": "markdown",
-        "remotes": [],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/damonwill78-a11y/clean-markdown-mcp"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 18,
-        "status": "active",
-        "version": "1.1.3",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Convert Markdown into WhatsApp formatting: tables drawn to fit the phone's monospace width.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.drsound/markdown-to-whatsapp",
-        "packages": [
-          {
-            "identifier": "markdown-to-whatsapp",
-            "registry_type": "npm",
-            "required_environment": [],
-            "runtime_hint": null,
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": "1.0.3"
-          }
-        ],
-        "query": "markdown",
-        "remotes": [],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/drsound/markdown-to-whatsapp"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 18,
-        "status": "active",
-        "version": "1.0.3",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "MCP server for GroupDocs.Markdown \u2014 convert documents to Markdown via AI agents.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.groupdocs-markdown/groupdocs-markdown-mcp",
-        "packages": [
-          {
-            "identifier": "GroupDocs.Markdown.Mcp",
-            "registry_type": "nuget",
-            "required_environment": [],
-            "runtime_hint": null,
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": "26.9.0"
-          }
-        ],
-        "query": "markdown",
-        "remotes": [],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/groupdocs-markdown/GroupDocs.Markdown.Mcp"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 18,
-        "status": "active",
-        "version": "26.9.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "MCP server for Feishu Markdown",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.huandu/feishu-markdown-mcp",
-        "packages": [
-          {
-            "identifier": "feishu-markdown-mcp",
-            "registry_type": "npm",
-            "required_environment": [],
-            "runtime_hint": null,
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": "0.1.3"
-          }
-        ],
-        "query": "markdown",
-        "remotes": [],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/huandu/feishu-markdown"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 18,
-        "status": "active",
-        "version": "0.1.3",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "MCP server for Google Docs with verified writes \u2014 every mutation returns before/after proof.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.michaelrobertsutton/verified-googledocs-mcp",
-        "packages": [
-          {
-            "identifier": "verified-googledocs-mcp",
+            "identifier": "greenlake-reporting-mcp",
             "registry_type": "pypi",
             "required_environment": [],
-            "runtime_hint": "uvx",
+            "runtime_hint": null,
             "secret_environment": [],
             "transport": {
               "type": "stdio"
             },
-            "version": "0.1.0"
+            "version": "1.1.2"
           }
         ],
-        "query": "verified",
+        "query": "report",
         "remotes": [],
         "repository": {
           "source": "github",
-          "url": "https://github.com/michaelrobertsutton/verified-googledocs-mcp"
+          "url": "https://github.com/HewlettPackard/gl-mcp"
         },
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
         "status": "active",
-        "version": "0.1.0",
+        "version": "1.1.2",
         "zero_cost_eligible": true
       },
       {
-        "description": "Convert HTML to clean markdown locally. No network and no key.",
+        "description": "MCP server for AI agents to report infrastructure needs they encounter during task execution",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "io.github.mrfentmen/html-to-markdown-mcp",
+        "name": "io.github.JarvisOnM4/report-needs",
         "packages": [
           {
-            "identifier": "@mrfentmen/html-to-markdown-mcp",
-            "registry_type": "npm",
+            "identifier": "report-needs",
+            "registry_type": "pypi",
             "required_environment": [],
             "runtime_hint": null,
             "secret_environment": [],
             "transport": {
               "type": "stdio"
             },
-            "version": "1.0.0"
+            "version": "0.1.1"
           }
         ],
-        "query": "markdown",
+        "query": "report",
         "remotes": [],
         "repository": {
+          "id": "1181547464",
           "source": "github",
-          "url": "https://github.com/mrfentmen/html-to-markdown-mcp"
+          "url": "https://github.com/JarvisOnM4/report-needs"
         },
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
         "status": "active",
-        "version": "1.0.0",
+        "version": "0.1.1",
         "zero_cost_eligible": true
       },
       {
-        "description": "Convert markdown to HTML and extract headings locally. No network and no key.",
+        "description": "Convert, merge, compress, OCR, redact, and sign PDFs inside your AI assistant. From pdfAssistant.",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "io.github.mrfentmen/markdown-mcp",
-        "packages": [
-          {
-            "identifier": "@mrfentmen/markdown-mcp",
-            "registry_type": "npm",
-            "required_environment": [],
-            "runtime_hint": null,
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": "1.0.0"
-          }
-        ],
-        "query": "markdown",
-        "remotes": [],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/mrfentmen/markdown-mcp"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 18,
-        "status": "active",
-        "version": "1.0.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Markdown MCP \u2014 search, extract sections, list headings, find code blocks.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.ofershap/markdown",
-        "packages": [
-          {
-            "identifier": "mcp-server-markdown",
-            "registry_type": "npm",
-            "required_environment": [],
-            "runtime_hint": null,
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": "1.0.1"
-          }
-        ],
-        "query": "markdown",
-        "remotes": [],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/ofershap/mcp-server-markdown"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 18,
-        "status": "active",
-        "version": "1.0.1",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Markdown TOC, lint, format, stats for AI agents",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.rog0x/markdown",
-        "packages": [
-          {
-            "identifier": "@rog0x/mcp-markdown-tools",
-            "registry_type": "npm",
-            "required_environment": [],
-            "runtime_hint": null,
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": "1.0.2"
-          }
-        ],
-        "query": "markdown",
-        "remotes": [],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/rog0x/mcp-markdown-tools"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 18,
-        "status": "active",
-        "version": "1.0.2",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "MCP server for markdown: tables, TOC, HTML conversion, formatting.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.ryudi84/markdown",
-        "packages": [
-          {
-            "identifier": "markdown-forge-mcp",
-            "registry_type": "npm",
-            "required_environment": [],
-            "runtime_hint": null,
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": "1.0.3"
-          }
-        ],
-        "query": "markdown",
-        "remotes": [],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/ryudi84/sovereign-mcp-servers"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 18,
-        "status": "active",
-        "version": "1.0.3",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Markdown processing, TOC generation, HTML conversion",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.ryudi84/markdown-forge-mcp",
-        "packages": [
-          {
-            "identifier": "markdown-forge-mcp",
-            "registry_type": "npm",
-            "required_environment": [],
-            "runtime_hint": null,
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": "1.0.1"
-          }
-        ],
-        "query": "markdown",
-        "remotes": [],
-        "repository": {
-          "source": "github",
-          "subfolder": "markdown-forge",
-          "url": "https://github.com/ryudi84/sovereign-mcp-servers"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 18,
-        "status": "active",
-        "version": "1.0.1",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Your portable context layer \u2014 load it into any AI.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "ai.portablecontext/pcd",
+        "name": "ai.pdfassistant/pdfassistant",
         "packages": [],
-        "query": "table",
+        "query": "pdf",
         "remotes": [
           {
             "required_headers": [],
             "type": "streamable-http",
-            "url": "https://mcp.portablecontext.ai/mcp"
+            "url": "https://chat.pdfassistant.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.35.17",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Sign, fill, merge and split PDFs entirely in your browser - files never leave your device.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "app.docwand/pdf",
+        "packages": [],
+        "query": "pdf",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.docwand.app/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Design, publish and render PDF templates with Typst. Full template lifecycle over MCP.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "build.pdfs/pdfs-build",
+        "packages": [],
+        "query": "pdf",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://backend.pdfs.build/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "I create PDF documents from markdown, preview, then generate a downloadable file",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "co.civai.nova/pdf-agent",
+        "packages": [],
+        "query": "pdf",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://nova.civai.co/mcp/agents/pdf-agent"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "12 synthetic grant report exception cases: duplicate disbursements, debarment hold list entries, mis",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.a2awire/benchmark-grant-report-review-2026-09-17-9189341d",
+        "packages": [],
+        "query": "report",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://a2awire.com/mcp/benchmarks/grant-report-review-2026-09-17-9189341d/http"
           }
         ],
         "repository": {
           "source": "github",
-          "url": "https://github.com/d3lanight/pcd"
+          "url": "https://github.com/ee324/a2awire"
         },
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 15,
         "status": "active",
-        "version": "0.4.0",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "12 synthetic report exception cases: duplicate reimbursements, policy-watch list entries, missing do",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.a2awire/benchmark-report-audit-2026-09-21-b9e5e630",
+        "packages": [],
+        "query": "report",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://a2awire.com/mcp/benchmarks/report-audit-2026-09-21-b9e5e630/http"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/ee324/a2awire"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "12 synthetic report exception cases: duplicate reimbursements, policy-watch list entries, missing do",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.a2awire/benchmark-report-review-2026-09-23-f72b2bd5",
+        "packages": [],
+        "query": "report",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://a2awire.com/mcp/benchmarks/report-review-2026-09-23-f72b2bd5/http"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/ee324/a2awire"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "PDF tools + invoice extraction, bank statement parsing, GST reconciliation & GSTIN validation.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.allpdfmagic/allpdfmagic",
+        "packages": [],
+        "query": "pdf",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.allpdfmagic.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Detect fillable fields in any PDF with AI, scans included, then fill and sign it.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.ifillpdf/pdf",
+        "packages": [],
+        "query": "pdf",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.ifillpdf.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
         "zero_cost_eligible": true
       }
     ],
-    "effect": "Create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.md containing a table with every VERIFIED_BOUND_CAPABILITY, its provided effects, source dependency, and verification mission",
+    "effect": "create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.pdf from that report",
     "results": [
       {
         "binding_performed": false,
         "candidate_count": 30,
         "candidates": [
           {
-            "archive_sha256": "0f266091d9e5ca9fb3479028f3e40eebaf46cfbc8b40ef6a658847919cd4bbfb",
+            "archive_sha256": "ce061b81d524d738b71633a3a18b1dffc12c7b2e4a56025c45c5969acfc82df3",
             "binding_kind": "apt",
-            "description": "Emacs TOC (table of contents) generator for markdown files",
+            "description": "simplified PDF report generator",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 3,
+            "matched_terms": [
+              "pdf",
+              "report"
+            ],
+            "name": "libpdf-report-perl",
+            "packages": [],
+            "query": "pdf",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 42,
+            "version": "1.36-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "67d86fe992163841cf57e3108fecda5a7b004fbcc3da1d132ec46fd3b272899f",
+            "binding_kind": "apt",
+            "description": "Auto Multiple Choice - PDF documentation",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "markdown",
-              "table"
+              "pdf"
             ],
-            "name": "elpa-markdown-toc",
+            "name": "auto-multiple-choice-doc-pdf",
             "packages": [],
-            "query": "markdown",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 62,
-            "version": "0.1.5-3",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "960f34cfbce54127e0ba7253efb7e747ae062d1174b388d68deca9dbfb8f702b",
-            "binding_kind": "apt",
-            "description": "Sphinx extension for rendering markdown tables (Python 3)",
-            "discovery_source": "APT_CATALOG",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 2,
-            "matched_terms": [
-              "markdown",
-              "table"
-            ],
-            "name": "python3-sphinx-markdown-tables",
-            "packages": [],
-            "query": "markdown",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 44,
-            "version": "0.0.17-1",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "15e721ced3b26257d5f724085e2b2ca6f745bd131623c56ce85323f664f4b48c",
-            "binding_kind": "apt",
-            "description": "Common Lisp rewrite of Markdown",
-            "discovery_source": "APT_CATALOG",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "markdown"
-            ],
-            "name": "cl-markdown",
-            "packages": [],
-            "query": "markdown",
+            "query": "pdf",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "20101006-2.1",
+            "version": "1.6.0-3build4",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "c145062b381c7b7ee62dab600d4594b43aeb5ef3c55e29d5a51ff2e10a1d553b",
+            "archive_sha256": "6cf6dc06c6630251b49e1a350be1890301793d853b215a4bb248324d5182303c",
             "binding_kind": "apt",
-            "description": "mode for editing Markdown-formatted text files in GNU Emacs",
+            "description": "Extensive tutorial and documentation about C++ - PDF output",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "markdown"
+              "pdf"
             ],
-            "name": "elpa-markdown-mode",
+            "name": "c++-annotations-pdf",
             "packages": [],
-            "query": "markdown",
+            "query": "pdf",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "2.6-1",
+            "version": "12.4.0-1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "bcf98fb42ede51af7ad0a487c2ef612813c90ecdbd81de59db5012abbb11c16e",
+            "archive_sha256": "cd74868cc87c147d2915f0a313ea30455c1258104ab9b7c7086e0cea465486f8",
             "binding_kind": "apt",
-            "description": "Flexible Input Method Framework - table engine",
+            "description": "PDF and PostScript attachment viewer for Claws Mail",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "table"
+              "pdf"
             ],
-            "name": "fcitx-table",
+            "name": "claws-mail-pdf-viewer",
             "packages": [],
-            "query": "table",
+            "query": "pdf",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "1:4.2.9.9-2build2",
+            "version": "4.2.0-2build7",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "1705eb043ea3b664ec2d38b14a0f34f37f9ffd71f2be891751f9890da1b8412e",
+            "archive_sha256": "68ac9a3924d19db487ceb961e2d396c9561931327d6018cce75d1c7ac061e7a5",
             "binding_kind": "apt",
-            "description": "Flexible Input Method Framework - tables metapackage",
+            "description": "Spam reporting plugin for Claws Mail",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "table"
+              "report"
             ],
-            "name": "fcitx-table-all",
+            "name": "claws-mail-spam-report",
             "packages": [],
-            "query": "table",
+            "query": "report",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "1:4.2.9.9-2build2",
+            "version": "4.2.0-2build7",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "16c4cf829b7585b7237fca077232994bf80ce23d8486507ee3c65a6ce033e84d",
+            "archive_sha256": "91bcc8e85ce05351f7d6545c2739aaa56769a25c084fe9a3eb8f33ab8511cf0c",
             "binding_kind": "apt",
-            "description": "Flexible Input Method Framework - Amharic table",
+            "description": "documentation for Coq in pdf format",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "table"
+              "pdf"
             ],
-            "name": "fcitx-table-amharic",
+            "name": "coq-doc-pdf",
             "packages": [],
-            "query": "table",
+            "query": "pdf",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "0.2.4-3",
+            "version": "8.18.0-1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "80be63607c73c50c49b5b7266bc9dab0d2c9cd7550fb6c73e65d8bec0e0968a6",
+            "archive_sha256": "90db48a81bd634923478b5fb54a935e3b394f2b641ae957e17bdf14f5eac7e71",
             "binding_kind": "apt",
-            "description": "Flexible Input Method Framework - Arabic table",
+            "description": "Simple tool for visually comparing two PDF files",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "table"
+              "pdf"
             ],
-            "name": "fcitx-table-arabic",
+            "name": "diff-pdf-wx",
             "packages": [],
-            "query": "table",
+            "query": "pdf",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "0.2.4-3",
+            "version": "0.5.1-2build3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "fceab99efb0e99ea2233d454297d4921c5932e957b3a3c22665682fa538a6d27",
+            "archive_sha256": "09be6f9efd655fdb64aefc6bbbdf629373ac5c10cdef7262ccea7010fb6a3728",
             "binding_kind": "apt",
-            "description": "Flexible Input Method Framework - Array30 table",
+            "description": "Perl based tool to parse DMARC reports",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "table"
+              "report"
             ],
-            "name": "fcitx-table-array30",
+            "name": "dmarcts-report-parser",
             "packages": [],
-            "query": "table",
+            "query": "report",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "0.3.8-3",
+            "version": "1.0+git20220721.51ba1de-1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "8a479a4bf1358dbb669611ca15f2def8e5e64d5e6f3895853f03ef2e473ecb50",
+            "archive_sha256": "31d031500d8bb5b2b2ed4dfaba17f1018d3719ced7de27d1c6ca7be7f8bfb6d9",
             "binding_kind": "apt",
-            "description": "Flexible Input Method Framework - Array30-Big table",
+            "description": "stylesheets for processing DocBook XML files (PDF documentation)",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "table"
+              "pdf"
             ],
-            "name": "fcitx-table-array30-big",
+            "name": "docbook-xsl-doc-pdf",
             "packages": [],
-            "query": "table",
+            "query": "pdf",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "0.3.8-3",
+            "version": "1.79.1-1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "701415f424a5e15f180124736cdecd77274741c2553171eb7a85f395565ad597",
+            "archive_sha256": "deb9a2f43e7059eace7dced6bd5663772f5920a8a076525b42b901e7de2f6c78",
             "binding_kind": "apt",
-            "description": "Flexible Input Method Framework - Bingchan table",
+            "description": "Display and interact with pdf in Emacs",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "table"
+              "pdf"
             ],
-            "name": "fcitx-table-bingchan",
+            "name": "elpa-pdf-tools",
             "packages": [],
-            "query": "table",
+            "query": "pdf",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "1:4.2.9.9-2build2",
+            "version": "1.1.0-1ubuntu2",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "13f3dc1f4215f98712ea4da07b80585aaa44308903543185d5f6e2991f9d6f69",
+            "archive_sha256": "984de60781685c1a56a9b2673e855daed3c50223bd4988aeddfb6be7f8641458",
             "binding_kind": "apt",
-            "description": "Flexible Input Method Framework - Boshiamy table",
+            "description": "server for Emacs's pdf-tools",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "table"
+              "pdf"
             ],
-            "name": "fcitx-table-boshiamy",
+            "name": "elpa-pdf-tools-server",
             "packages": [],
-            "query": "table",
+            "query": "pdf",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "0.3.8-3",
+            "version": "1.1.0-1ubuntu2",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "d5f8bfd67f711dc4668f2bc7958af4cb3a7fb10fcf63fdb80118dffa20156977",
+            "archive_sha256": "e0b76301749cf3aab8aa0482a1fce92c7ef862c04943c8be734b5f2a3d5e860b",
             "binding_kind": "apt",
-            "description": "Flexible Input Method Framework - Cangjie table (DO NOT USE)",
+            "description": "Gambas pdf component",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "table"
+              "pdf"
             ],
-            "name": "fcitx-table-cangjie",
+            "name": "gambas3-gb-pdf",
             "packages": [],
-            "query": "table",
+            "query": "pdf",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "1:4.2.9.9-2build2",
+            "version": "3.19.0-2ubuntu10",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "7f040c465b05e04dab25e64cd81ed68c7b7d03d1c22dbfdee7e7ec9cd24341e2",
+            "archive_sha256": "68dd209643e65397bc83bb070067d1089557ed02874ab71723d467745e9f59ec",
             "binding_kind": "apt",
-            "description": "Flexible Input Method Framework - Cangjie-Big table",
+            "description": "Gambas report component",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "table"
+              "report"
             ],
-            "name": "fcitx-table-cangjie-big",
+            "name": "gambas3-gb-report",
             "packages": [],
-            "query": "table",
+            "query": "report",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "0.3.8-3",
+            "version": "3.19.0-2ubuntu10",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "437c2ac3e5b65e21057afe0279385deebcc0caa64b3ceb7a728b6c0b90272106",
+            "archive_sha256": "61ada33700e7544a8ae35bee2a9bd07b8c22ba83f498a01f6db51cd04dcf8d4d",
             "binding_kind": "apt",
-            "description": "Flexible Input Method Framework - Cangjie3 table",
+            "description": "GNU Scientific Library (GSL) Reference Manual in pdf",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "table"
+              "pdf"
             ],
-            "name": "fcitx-table-cangjie3",
+            "name": "gsl-doc-pdf",
             "packages": [],
-            "query": "table",
+            "query": "pdf",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "0.3.8-3",
+            "version": "2.7.1-1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "91b1cb37b511971f57c353e66180dd58ee3c231a52311c011c817ef7ad1f8ea6",
+            "archive_sha256": "52d98aaca5e7adbaf037e4f8a0faa25c8f8c21c5e36ea12ef23ed0e4c790164e",
             "binding_kind": "apt",
-            "description": "Flexible Input Method Framework - Cangjie5 table",
+            "description": "The Haskell 98 Language and Libraries Revised Report & addenda",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "table"
+              "report"
             ],
-            "name": "fcitx-table-cangjie5",
+            "name": "haskell98-report",
             "packages": [],
-            "query": "table",
+            "query": "pdf",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "0.3.8-3",
+            "version": "20080907-11",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "9fbc35134ff59f39f50a6b99555b44f6c570cd7ce5f26043f282e0ecb801a11b",
+            "archive_sha256": "100c56dfd86fd49f8a4e0da749a1d9e1c2b0866dbdf6ff483ba21d5d3b6a0256",
             "binding_kind": "apt",
-            "description": "Flexible Input Method Framework - Cantonese table",
+            "description": "LilyPond PDF Documentation",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "table"
+              "pdf"
             ],
-            "name": "fcitx-table-cantonese",
+            "name": "lilypond-doc-pdf",
             "packages": [],
-            "query": "table",
+            "query": "pdf",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "0.3.8-3",
+            "version": "2.24.3-1build3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "011c80dfccbccb0b0e33ea42f9ea48d58c0df4bf82a01df4e75c7b1483d804db",
+            "archive_sha256": "8fb8853c961ed310803d33b301081426132ff05010dd3e57cf685d7c5734b7ab",
             "binding_kind": "apt",
-            "description": "Flexible Input Method Framework - Cantonhk table",
+            "description": "LilyPond PDF Documentation in Catalan",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "table"
+              "pdf"
             ],
-            "name": "fcitx-table-cantonhk",
+            "name": "lilypond-doc-pdf-ca",
             "packages": [],
-            "query": "table",
+            "query": "pdf",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "0.3.8-3",
+            "version": "2.24.3-1build3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "7c6d4a91d59d98c7a9f3a7f0304a5a5dbde0b00bc151daf22867fdfcb5b2b81a",
+            "archive_sha256": "e91b758debf1c1bf921d13b84ac3480498ab61f446dae0d8a851a9312cb2e1a1",
             "binding_kind": "apt",
-            "description": "Flexible Input Method Framework - Cns11643 table",
+            "description": "LilyPond PDF Documentation in German",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "table"
+              "pdf"
             ],
-            "name": "fcitx-table-cns11643",
+            "name": "lilypond-doc-pdf-de",
             "packages": [],
-            "query": "table",
+            "query": "pdf",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "0.2.4-3",
+            "version": "2.24.3-1build3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "b7ed48e0a8c74c5a97d1a88adb23b23949261f2ad1796487f7fecb2a836ecc1e",
+            "archive_sha256": "ba65a33fdb16534f0181ce9c61efc56a24e66ff471b8e6019936e912bdfc3aa8",
             "binding_kind": "apt",
-            "description": "Flexible Input Method Framework - Compose table",
+            "description": "LilyPond PDF Documentation in Spanish",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "table"
+              "pdf"
             ],
-            "name": "fcitx-table-compose",
+            "name": "lilypond-doc-pdf-es",
             "packages": [],
-            "query": "table",
+            "query": "pdf",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "0.2.4-3",
+            "version": "2.24.3-1build3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "486aff197ccad92b5e827f4311485423f13bb17eae8caf4f483c005787d29aef",
+            "archive_sha256": "ac94a7077796a930988da3e6a605c53ceb6fe4601532310d6e806a0fe3667208",
             "binding_kind": "apt",
-            "description": "Flexible Input Method Framework - Dianbaoma table",
+            "description": "LilyPond PDF Documentation in French",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "table"
+              "pdf"
             ],
-            "name": "fcitx-table-dianbaoma",
+            "name": "lilypond-doc-pdf-fr",
             "packages": [],
-            "query": "table",
+            "query": "pdf",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "1:4.2.9.9-2build2",
+            "version": "2.24.3-1build3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "f9515cd22ad8382c66df8807773551ab9a093bc10a69333add81c6b74c995fc8",
+            "archive_sha256": "4705b7fe26e0f92ceb6d3739de9f272a82aa9e7a522579c6a18d090a4252c75d",
             "binding_kind": "apt",
-            "description": "Flexible Input Method Framework - Easy-Big table",
+            "description": "LilyPond PDF Documentation in Hungarian",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "table"
+              "pdf"
             ],
-            "name": "fcitx-table-easy-big",
+            "name": "lilypond-doc-pdf-hu",
             "packages": [],
-            "query": "table",
+            "query": "pdf",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "0.3.8-3",
+            "version": "2.24.3-1build3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "678c9d8c01e79022823fa9d683d35f5b8e7dfdcd7a9b2e312f34a7cb82c9f054",
+            "archive_sha256": "d8c9efbd4a49e9cbfe3a806a87c97234d43194b3fc154217a48b2c7c67620065",
             "binding_kind": "apt",
-            "description": "Flexible Input Method Framework - Emoji table",
+            "description": "LilyPond PDF Documentation in Italian",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "table"
+              "pdf"
             ],
-            "name": "fcitx-table-emoji",
+            "name": "lilypond-doc-pdf-it",
             "packages": [],
-            "query": "table",
+            "query": "pdf",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "0.2.4-3",
+            "version": "2.24.3-1build3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "acbaff892b4099fefe8cf0f6364b4dae32805243b2d05f1feaed715a9f46dd92",
+            "archive_sha256": "e7b448a2ce7ee8b1d44959cca9a87809e72775fe413ba57af2f3a598644d8227",
             "binding_kind": "apt",
-            "description": "Flexible Input Method Framework - Erbi table",
+            "description": "LilyPond PDF Documentation in Dutch",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "table"
+              "pdf"
             ],
-            "name": "fcitx-table-erbi",
+            "name": "lilypond-doc-pdf-nl",
             "packages": [],
-            "query": "table",
+            "query": "pdf",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "1:4.2.9.9-2build2",
+            "version": "2.24.3-1build3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "cff22b65ed2d2b6bb766194177e97e3053a523cf0864f3ea19e5e4712a77325c",
+            "archive_sha256": "ce11b9fe8747c31db81f623d1cd78d12b8a24973ff18c4085e68246aeb2abbc9",
             "binding_kind": "apt",
-            "description": "Flexible Input Method Framework - IPA-X-SAMPA table",
+            "description": "LilyPond PDF Documentation in Portuguese",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "table"
+              "pdf"
             ],
-            "name": "fcitx-table-ipa-x-sampa",
+            "name": "lilypond-doc-pdf-pt",
             "packages": [],
-            "query": "table",
+            "query": "pdf",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "0.2.4-3",
+            "version": "2.24.3-1build3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "ab8878e3f378ab8b4d3c93698f7fc5e0d0fde08c3b070c87411e0c7b0cadec13",
+            "archive_sha256": "999f9fdbeaacc55f3029ece4aef4f52c12feb60e56b02005fe61b2deca56a64a",
             "binding_kind": "apt",
-            "description": "Flexible Input Method Framework - Jyutping table",
+            "description": "Live Systems Documentation (pdf)",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "table"
+              "pdf"
             ],
-            "name": "fcitx-table-jyutping",
+            "name": "live-manual-pdf",
             "packages": [],
-            "query": "table",
+            "query": "pdf",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "0.3.8-3",
+            "version": "2:20151217.2",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "cd2d842d07580789591838227394fcf2bf174498397e4e4e16e322fb9e0968a5",
+            "archive_sha256": "67987d38e6ad52437bd5a8bf68ee0cb8a426148c63817cb734cbad5d1328dd56",
             "binding_kind": "apt",
-            "description": "Flexible Input Method Framework - LaTeX table",
+            "description": "PDF analysis and manipulation tool",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "table"
+              "pdf"
             ],
-            "name": "fcitx-table-latex",
+            "name": "origami-pdf",
             "packages": [],
-            "query": "table",
+            "query": "pdf",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "0.2.4-3",
+            "version": "2.1.0-1~exp2",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "5005a18e37827eec55d426a2bcede4ee52be140a2d9b0b885adf5df6cfd26fa7",
+            "archive_sha256": "635240214cec31148157e07251a2a17aba0e83229584ab432e65eb311780aa63",
             "binding_kind": "apt",
-            "description": "Flexible Input Method Framework - Malayalam phonetic table",
+            "description": "multi-monitor presentation tool (ala Keynote) for PDF files",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "table"
+              "pdf"
             ],
-            "name": "fcitx-table-malayalam-phonetic",
+            "name": "pdf-presenter-console",
             "packages": [],
-            "query": "table",
+            "query": "pdf",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "0.2.4-3",
+            "version": "4.6.0-3build3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "d47eac2b95be0f25259be5d43b4dccbeeeecfebe4c4ffb558b34572c54e48d56",
+            "archive_sha256": "0d041ffa0b03c084f75aa95041c262eb49dcb757e33aefd966ea619c6f54fb97",
             "binding_kind": "apt",
-            "description": "Flexible Input Method Framework - Quick-Classic table",
+            "description": "Portable Document Format (PDF) viewer - common files",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "table"
+              "pdf"
             ],
-            "name": "fcitx-table-quick-classic",
+            "name": "pdf.js-common",
             "packages": [],
-            "query": "table",
+            "query": "pdf",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "0.3.8-3",
+            "version": "2.14.305+dfsg-2",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "56ddf7aa83a2b50f4b2a527f6ab1931554b1eaf6d2b19c275f934ce589721827",
+            "archive_sha256": "081c094586a1dc40f1acf69bc4c855e8c4f820c91c433164fdcfca7f437754b4",
             "binding_kind": "apt",
-            "description": "Flexible Input Method Framework - Quick3 table",
+            "description": "printer driver for PDF writing via CUPS",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "table"
+              "pdf"
             ],
-            "name": "fcitx-table-quick3",
+            "name": "printer-driver-cups-pdf",
             "packages": [],
-            "query": "table",
+            "query": "pdf",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "0.3.8-3",
+            "version": "3.0.1-14ubuntu0.24.04.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "0886119fdbb9acd9e2aeadd90b38008430eb2b93c3e2374f2689346f8215203e",
+            "binding_kind": "apt",
+            "description": "Qt Quick PDF QML module",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "pdf"
+            ],
+            "name": "qml-module-qtquick-pdf",
+            "packages": [],
+            "query": "pdf",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "5.15.16+dfsg-3",
             "zero_cost_eligible": true
           }
         ],
-        "effect": "Create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.md containing a table with every VERIFIED_BOUND_CAPABILITY, its provided effects, source dependency, and verification mission",
+        "effect": "create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.pdf from that report",
         "errors": [],
         "queries": [
-          "markdown",
-          "table",
-          "verified",
-          "bound"
+          "pdf",
+          "report"
         ],
         "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
         "source": "APT_CATALOG",
@@ -1905,15 +1839,75 @@
       },
       {
         "binding_performed": false,
-        "candidate_count": 78,
+        "candidate_count": 60,
         "candidates": [
           {
-            "description": "Create, read, update, and delete records in Airtable bases and tables",
+            "description": "Agent-facing PDF API: merge, split, rotate, compress, images, metadata, text, and Markdown.",
             "is_latest": true,
-            "name": "com.mcparmory/airtable",
+            "name": "com.exactpdf/mcp",
             "packages": [
               {
-                "identifier": "mcparmory-airtable",
+                "identifier": "@exactpdf/mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.2.3"
+              }
+            ],
+            "query": "pdf",
+            "remotes": [],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.2.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "AI-powered PDF tools: fill forms via natural language",
+            "is_latest": true,
+            "name": "com.hellobasestation/pdfkit",
+            "packages": [
+              {
+                "identifier": "pdfkit-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.7"
+              }
+            ],
+            "query": "pdf",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.hellobasestation.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.7",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Extract data, edit, convert, and parse PDF documents with OCR and AI",
+            "is_latest": true,
+            "name": "com.mcparmory/pdfco",
+            "packages": [
+              {
+                "identifier": "mcparmory-pdfco",
                 "registry_type": "pypi",
                 "required_environment": [],
                 "runtime_hint": "uvx",
@@ -1921,10 +1915,10 @@
                 "transport": {
                   "type": "stdio"
                 },
-                "version": "1.0.3"
+                "version": "1.0.2"
               },
               {
-                "identifier": "ghcr.io/mcparmory/airtable:1.0.3",
+                "identifier": "ghcr.io/mcparmory/pdfco:1.0.2",
                 "registry_type": "oci",
                 "required_environment": [],
                 "runtime_hint": "docker",
@@ -1935,7 +1929,7 @@
                 "version": null
               }
             ],
-            "query": "table",
+            "query": "pdf",
             "remotes": [],
             "repository": {
               "source": "github",
@@ -1945,46 +1939,106 @@
             "required_secret_count": 0,
             "score": 18,
             "status": "active",
-            "version": "1.0.3",
+            "version": "1.0.2",
             "zero_cost_eligible": true
           },
           {
-            "description": "Manage Airtable bases: schema, field CRUD, views, formula validation, extensions",
+            "description": "Keyless MCP for Just Signal: live quotes, report publishing, scorecard, and Chophouse panel grades.",
             "is_latest": true,
-            "name": "io.github.Automations-Project/airtable-user-mcp",
+            "name": "com.ou-reports/just-signal",
             "packages": [
               {
-                "identifier": "airtable-user-mcp",
+                "identifier": "just-signal-mcp",
                 "registry_type": "npm",
                 "required_environment": [],
-                "runtime_hint": "npx",
+                "runtime_hint": null,
                 "secret_environment": [],
                 "transport": {
                   "type": "stdio"
                 },
-                "version": "2.1.1"
+                "version": "1.3.0"
               }
             ],
-            "query": "table",
+            "query": "report",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://www.ou-reports.com/api/mcp.php"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.3.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Merge, split, compress, unlock, organize, extract, fill forms and check PDFs \u2014 12 local tools.",
+            "is_latest": true,
+            "name": "com.yaktool/pdf",
+            "packages": [
+              {
+                "identifier": "yaktool-pdf-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.7.0"
+              }
+            ],
+            "query": "pdf",
+            "remotes": [],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.7.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Deterministic PDF tools for AI agents: inspect fields, fill forms, merge PDFs, invoices.",
+            "is_latest": true,
+            "name": "dev.pdfops/pdfops-mcp",
+            "packages": [
+              {
+                "identifier": "pdfops-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.3.3"
+              }
+            ],
+            "query": "pdf",
             "remotes": [],
             "repository": {
               "source": "github",
-              "url": "https://github.com/Automations-Project/VSCode-Airtable-Formula"
+              "url": "https://github.com/pdfops/pdfops-mcp"
             },
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
             "status": "active",
-            "version": "2.1.1",
+            "version": "0.3.3",
             "zero_cost_eligible": true
           },
           {
-            "description": "Markdown Ai MCP Server by MEOK AI Labs",
+            "description": "AI Incident Reporting Compliance MCP. Unified classification + reporting-clock tracker across EU...",
             "is_latest": true,
-            "name": "io.github.CSOAI-ORG/markdown-ai-mcp",
+            "name": "io.github.CSOAI-ORG/ai-incident-reporting-mcp",
             "packages": [
               {
-                "identifier": "markdown-ai-mcp",
+                "identifier": "ai-incident-reporting-mcp",
                 "registry_type": "pypi",
                 "required_environment": [],
                 "runtime_hint": "python",
@@ -1992,93 +2046,63 @@
                 "transport": {
                   "type": "stdio"
                 },
-                "version": "1.0.10"
+                "version": "1.1.9"
               }
             ],
-            "query": "markdown",
+            "query": "report",
             "remotes": [],
             "repository": {
+              "id": "1232725636",
               "source": "github",
-              "url": "https://github.com/CSOAI-ORG/markdown-ai-mcp"
+              "url": "https://github.com/CSOAI-ORG/ai-incident-reporting-mcp"
             },
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
             "status": "active",
-            "version": "1.0.10",
+            "version": "1.1.9",
             "zero_cost_eligible": true
           },
           {
-            "description": "Tabler.io for AI assistants: search 5,000+ icons, UI components, layouts, themes and docs.",
+            "description": "Explainability Report MCP Server by MEOK AI Labs",
             "is_latest": true,
-            "name": "io.github.MaFady/tabler-mcp-server",
+            "name": "io.github.CSOAI-ORG/explainability-report-mcp",
             "packages": [
               {
-                "identifier": "tabler-mcp-server",
-                "registry_type": "npm",
+                "identifier": "explainability-report-mcp",
+                "registry_type": "pypi",
                 "required_environment": [],
-                "runtime_hint": null,
+                "runtime_hint": "python",
                 "secret_environment": [],
                 "transport": {
                   "type": "stdio"
                 },
-                "version": "1.0.1"
+                "version": "1.0.16"
               }
             ],
-            "query": "table",
+            "query": "report",
             "remotes": [],
             "repository": {
               "source": "github",
-              "url": "https://github.com/MaFady/tabler-mcp-server"
+              "url": "https://github.com/CSOAI-ORG/explainability-report-mcp"
             },
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
             "status": "active",
-            "version": "1.0.1",
+            "version": "1.0.16",
             "zero_cost_eligible": true
           },
           {
-            "description": "Convert HTML to Markdown or strip to plain text. For web-scraping agents.",
+            "description": "MEOK CRA Article 14 Reporter MCP \u2014 actively-exploited-vulnerability notification with 24h/72h/14d",
             "is_latest": true,
-            "name": "io.github.MukundaKatta/html-to-markdown-mcp",
+            "name": "io.github.CSOAI-ORG/meok-cra-art14-reporter-mcp",
             "packages": [
               {
-                "identifier": "@mukundakatta/html-to-markdown-mcp",
-                "registry_type": "npm",
+                "identifier": "meok-cra-art14-reporter-mcp",
+                "registry_type": "pypi",
                 "required_environment": [],
-                "runtime_hint": null,
-                "secret_environment": [],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "0.1.0"
-              }
-            ],
-            "query": "markdown",
-            "remotes": [],
-            "repository": {
-              "source": "github",
-              "subfolder": "packages/html-to-markdown-mcp",
-              "url": "https://github.com/MukundaKatta/mcp-stack"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 18,
-            "status": "active",
-            "version": "0.1.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "AI Answer Copier \u2014 Convert Markdown to PDF, DOCX, HTML, LaTeX, CSV, JSON, XML, XLSX, RTF, PNG",
-            "is_latest": true,
-            "name": "io.github.XJTLUmedia/markdown-formatter",
-            "packages": [
-              {
-                "identifier": "@xjtlumedia/markdown-mcp-server",
-                "registry_type": "npm",
-                "required_environment": [],
-                "runtime_hint": null,
+                "runtime_hint": "python",
                 "secret_environment": [],
                 "transport": {
                   "type": "stdio"
@@ -2086,11 +2110,17 @@
                 "version": "1.0.5"
               }
             ],
-            "query": "markdown",
-            "remotes": [],
+            "query": "report",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.meok.ai/v1/governance/cra-art14-reporter"
+              }
+            ],
             "repository": {
               "source": "github",
-              "url": "https://github.com/XJTLUmedia/AI_answer_copier"
+              "url": "https://github.com/CSOAI-ORG/meok-cra-art14-reporter-mcp"
             },
             "required_environment_count": 0,
             "required_secret_count": 0,
@@ -2100,507 +2130,482 @@
             "zero_cost_eligible": true
           },
           {
-            "description": "Local-only Tableau .twbx audit: lineage, unused fields, duplicate calcs, SQL, version diffs",
+            "description": "HPE GreenLake reporting MCP Server",
             "is_latest": true,
-            "name": "io.github.andey0Saikiran/tableau-lineage",
+            "name": "io.github.HewlettPackard/greenlake-reporting-mcp",
             "packages": [
               {
-                "identifier": "tableau-lineage-mcp",
-                "registry_type": "npm",
-                "required_environment": [],
-                "runtime_hint": "npx",
-                "secret_environment": [],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "1.0.1"
-              }
-            ],
-            "query": "table",
-            "remotes": [],
-            "repository": {
-              "id": "1278695609",
-              "source": "github",
-              "subfolder": "mcp",
-              "url": "https://github.com/andey0Saikiran/tableau-lineage"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 18,
-            "status": "active",
-            "version": "1.0.1",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "easyTable restaurant reservations for Claude \u2014 availability, and create/modify/cancel bookings",
-            "is_latest": true,
-            "name": "io.github.chrischall/easytable-mcp",
-            "packages": [
-              {
-                "identifier": "easytable-mcp",
-                "registry_type": "npm",
+                "identifier": "greenlake-reporting-mcp",
+                "registry_type": "pypi",
                 "required_environment": [],
                 "runtime_hint": null,
                 "secret_environment": [],
                 "transport": {
                   "type": "stdio"
                 },
-                "version": "1.2.0"
+                "version": "1.1.2"
               }
             ],
-            "query": "table",
+            "query": "report",
             "remotes": [],
             "repository": {
               "source": "github",
-              "url": "https://github.com/chrischall/easytable-mcp"
+              "url": "https://github.com/HewlettPackard/gl-mcp"
             },
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
+            "status": "active",
+            "version": "1.1.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP server for AI agents to report infrastructure needs they encounter during task execution",
+            "is_latest": true,
+            "name": "io.github.JarvisOnM4/report-needs",
+            "packages": [
+              {
+                "identifier": "report-needs",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.1"
+              }
+            ],
+            "query": "report",
+            "remotes": [],
+            "repository": {
+              "id": "1181547464",
+              "source": "github",
+              "url": "https://github.com/JarvisOnM4/report-needs"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Convert, merge, compress, OCR, redact, and sign PDFs inside your AI assistant. From pdfAssistant.",
+            "is_latest": true,
+            "name": "ai.pdfassistant/pdfassistant",
+            "packages": [],
+            "query": "pdf",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://chat.pdfassistant.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.35.17",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Sign, fill, merge and split PDFs entirely in your browser - files never leave your device.",
+            "is_latest": true,
+            "name": "app.docwand/pdf",
+            "packages": [],
+            "query": "pdf",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.docwand.app/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Design, publish and render PDF templates with Typst. Full template lifecycle over MCP.",
+            "is_latest": true,
+            "name": "build.pdfs/pdfs-build",
+            "packages": [],
+            "query": "pdf",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://backend.pdfs.build/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "I create PDF documents from markdown, preview, then generate a downloadable file",
+            "is_latest": true,
+            "name": "co.civai.nova/pdf-agent",
+            "packages": [],
+            "query": "pdf",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://nova.civai.co/mcp/agents/pdf-agent"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "12 synthetic grant report exception cases: duplicate disbursements, debarment hold list entries, mis",
+            "is_latest": true,
+            "name": "com.a2awire/benchmark-grant-report-review-2026-09-17-9189341d",
+            "packages": [],
+            "query": "report",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://a2awire.com/mcp/benchmarks/grant-report-review-2026-09-17-9189341d/http"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/ee324/a2awire"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "12 synthetic report exception cases: duplicate reimbursements, policy-watch list entries, missing do",
+            "is_latest": true,
+            "name": "com.a2awire/benchmark-report-audit-2026-09-21-b9e5e630",
+            "packages": [],
+            "query": "report",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://a2awire.com/mcp/benchmarks/report-audit-2026-09-21-b9e5e630/http"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/ee324/a2awire"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "12 synthetic report exception cases: duplicate reimbursements, policy-watch list entries, missing do",
+            "is_latest": true,
+            "name": "com.a2awire/benchmark-report-review-2026-09-23-f72b2bd5",
+            "packages": [],
+            "query": "report",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://a2awire.com/mcp/benchmarks/report-review-2026-09-23-f72b2bd5/http"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/ee324/a2awire"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "PDF tools + invoice extraction, bank statement parsing, GST reconciliation & GSTIN validation.",
+            "is_latest": true,
+            "name": "com.allpdfmagic/allpdfmagic",
+            "packages": [],
+            "query": "pdf",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.allpdfmagic.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Detect fillable fields in any PDF with AI, scans included, then fill and sign it.",
+            "is_latest": true,
+            "name": "com.ifillpdf/pdf",
+            "packages": [],
+            "query": "pdf",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.ifillpdf.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Upload, edit, compress, protect, redact, and compare PDFs with KDAN PDF in Claude and ChatGPT.",
+            "is_latest": true,
+            "name": "com.kdandoc.mcp/kdan-pdf-mcp",
+            "packages": [],
+            "query": "pdf",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.kdandoc.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/KDAN-PDF/KDAN-PDF-MCP"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "LPreportly: the site's own MCP server \u2014 dataset; every answer cites the site.",
+            "is_latest": true,
+            "name": "com.lpreportly/site",
+            "packages": [],
+            "query": "report",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://lpreportly.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/joeetdev/venture-estate"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Mail Merge PDF: the site's own MCP server \u2014 checker, enquiry (enquiry = a human handoff, not a...",
+            "is_latest": true,
+            "name": "com.mailmergepdf/site",
+            "packages": [],
+            "query": "pdf",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mailmergepdf.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/joeetdev/venture-estate"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Vehicle valuations and market reports in Claude or ChatGPT. Pay per report, no subscription.",
+            "is_latest": true,
+            "name": "com.marketcheck/marketcheck-ai-reports",
+            "packages": [],
+            "query": "report",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://ai.marketcheck.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/MarketcheckHub/marketcheck-ai-reports"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
             "status": "active",
             "version": "1.2.0",
             "zero_cost_eligible": true
           },
           {
-            "description": "Any URL to clean, LLM-ready Markdown for RAG. Strips ads, nav, and boilerplate.",
+            "description": "MCP server for detecting and redacting PII (Personally Identifiable Information) in PDF documents.",
             "is_latest": true,
-            "name": "io.github.damonwill78-a11y/clean-markdown",
-            "packages": [
+            "name": "com.pdf-redaction/pdf-redaction-mcp",
+            "packages": [],
+            "query": "pdf",
+            "remotes": [
               {
-                "identifier": "clean-markdown-mcp",
-                "registry_type": "npm",
-                "required_environment": [],
-                "runtime_hint": null,
-                "secret_environment": [],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "1.1.3"
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.pdf-redaction.com/mcp/"
               }
             ],
-            "query": "markdown",
-            "remotes": [],
             "repository": {
               "source": "github",
-              "url": "https://github.com/damonwill78-a11y/clean-markdown-mcp"
+              "url": "https://github.com/StabRise/pdf-redaction-api"
             },
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 18,
-            "status": "active",
-            "version": "1.1.3",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Convert Markdown into WhatsApp formatting: tables drawn to fit the phone's monospace width.",
-            "is_latest": true,
-            "name": "io.github.drsound/markdown-to-whatsapp",
-            "packages": [
-              {
-                "identifier": "markdown-to-whatsapp",
-                "registry_type": "npm",
-                "required_environment": [],
-                "runtime_hint": null,
-                "secret_environment": [],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "1.0.3"
-              }
-            ],
-            "query": "markdown",
-            "remotes": [],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/drsound/markdown-to-whatsapp"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 18,
-            "status": "active",
-            "version": "1.0.3",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "MCP server for GroupDocs.Markdown \u2014 convert documents to Markdown via AI agents.",
-            "is_latest": true,
-            "name": "io.github.groupdocs-markdown/groupdocs-markdown-mcp",
-            "packages": [
-              {
-                "identifier": "GroupDocs.Markdown.Mcp",
-                "registry_type": "nuget",
-                "required_environment": [],
-                "runtime_hint": null,
-                "secret_environment": [],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "26.9.0"
-              }
-            ],
-            "query": "markdown",
-            "remotes": [],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/groupdocs-markdown/GroupDocs.Markdown.Mcp"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 18,
-            "status": "active",
-            "version": "26.9.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "MCP server for Feishu Markdown",
-            "is_latest": true,
-            "name": "io.github.huandu/feishu-markdown-mcp",
-            "packages": [
-              {
-                "identifier": "feishu-markdown-mcp",
-                "registry_type": "npm",
-                "required_environment": [],
-                "runtime_hint": null,
-                "secret_environment": [],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "0.1.3"
-              }
-            ],
-            "query": "markdown",
-            "remotes": [],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/huandu/feishu-markdown"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 18,
-            "status": "active",
-            "version": "0.1.3",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "MCP server for Google Docs with verified writes \u2014 every mutation returns before/after proof.",
-            "is_latest": true,
-            "name": "io.github.michaelrobertsutton/verified-googledocs-mcp",
-            "packages": [
-              {
-                "identifier": "verified-googledocs-mcp",
-                "registry_type": "pypi",
-                "required_environment": [],
-                "runtime_hint": "uvx",
-                "secret_environment": [],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "0.1.0"
-              }
-            ],
-            "query": "verified",
-            "remotes": [],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/michaelrobertsutton/verified-googledocs-mcp"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 18,
-            "status": "active",
-            "version": "0.1.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Convert HTML to clean markdown locally. No network and no key.",
-            "is_latest": true,
-            "name": "io.github.mrfentmen/html-to-markdown-mcp",
-            "packages": [
-              {
-                "identifier": "@mrfentmen/html-to-markdown-mcp",
-                "registry_type": "npm",
-                "required_environment": [],
-                "runtime_hint": null,
-                "secret_environment": [],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "1.0.0"
-              }
-            ],
-            "query": "markdown",
-            "remotes": [],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/mrfentmen/html-to-markdown-mcp"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 18,
+            "score": 15,
             "status": "active",
             "version": "1.0.0",
             "zero_cost_eligible": true
           },
           {
-            "description": "Convert markdown to HTML and extract headings locally. No network and no key.",
+            "description": "Free PDF tools for AI agents: merge, split, rotate, watermark, page numbers, metadata, flatten.",
             "is_latest": true,
-            "name": "io.github.mrfentmen/markdown-mcp",
-            "packages": [
+            "name": "com.pdfia/pdf-tools",
+            "packages": [],
+            "query": "pdf",
+            "remotes": [
               {
-                "identifier": "@mrfentmen/markdown-mcp",
-                "registry_type": "npm",
-                "required_environment": [],
-                "runtime_hint": null,
-                "secret_environment": [],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "1.0.0"
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://pdfia.com/mcp"
               }
             ],
-            "query": "markdown",
-            "remotes": [],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/mrfentmen/markdown-mcp"
-            },
+            "repository": null,
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 18,
+            "score": 15,
             "status": "active",
             "version": "1.0.0",
             "zero_cost_eligible": true
           },
           {
-            "description": "Markdown MCP \u2014 search, extract sections, list headings, find code blocks.",
+            "description": "Extract tables, text and formulas from PDFs, including scanned pages and broken text layers.",
             "is_latest": true,
-            "name": "io.github.ofershap/markdown",
-            "packages": [
+            "name": "com.pdfintact/pdfintact",
+            "packages": [],
+            "query": "pdf",
+            "remotes": [
               {
-                "identifier": "mcp-server-markdown",
-                "registry_type": "npm",
-                "required_environment": [],
-                "runtime_hint": null,
-                "secret_environment": [],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "1.0.1"
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.pdfintact.com/mcp"
               }
             ],
-            "query": "markdown",
-            "remotes": [],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/ofershap/mcp-server-markdown"
-            },
+            "repository": null,
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 18,
+            "score": 15,
             "status": "active",
-            "version": "1.0.1",
+            "version": "1.0.0",
             "zero_cost_eligible": true
           },
           {
-            "description": "Markdown TOC, lint, format, stats for AI agents",
+            "description": "Query marketing data across 20+ ad platforms; with write access, create, schedule and share reports.",
             "is_latest": true,
-            "name": "io.github.rog0x/markdown",
-            "packages": [
+            "name": "com.reportingninja/reporting-ninja",
+            "packages": [],
+            "query": "report",
+            "remotes": [
               {
-                "identifier": "@rog0x/mcp-markdown-tools",
-                "registry_type": "npm",
-                "required_environment": [],
-                "runtime_hint": null,
-                "secret_environment": [],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "1.0.2"
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.reportingninja.com/mcp"
               }
             ],
-            "query": "markdown",
-            "remotes": [],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.5.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Convert PDFs/images to Word, Excel, and Markdown. Split, merge, and watermark PDF files.",
+            "is_latest": true,
+            "name": "com.tensormaster/pdf",
+            "packages": [],
+            "query": "pdf",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.tensormaster.com/pdf/mcp"
+              }
+            ],
             "repository": {
               "source": "github",
-              "url": "https://github.com/rog0x/mcp-markdown-tools"
+              "url": "https://github.com/tensorslab/pdf-mcp"
             },
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 18,
+            "score": 15,
             "status": "active",
             "version": "1.0.2",
             "zero_cost_eligible": true
           },
           {
-            "description": "MCP server for markdown: tables, TOC, HTML conversion, formatting.",
+            "description": "Israeli mortgage reports with Hebrew results, 15-minute recovery and authorized external OCR.",
             "is_latest": true,
-            "name": "io.github.ryudi84/markdown",
-            "packages": [
-              {
-                "identifier": "markdown-forge-mcp",
-                "registry_type": "npm",
-                "required_environment": [],
-                "runtime_hint": null,
-                "secret_environment": [],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "1.0.3"
-              }
-            ],
-            "query": "markdown",
-            "remotes": [],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/ryudi84/sovereign-mcp-servers"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 18,
-            "status": "active",
-            "version": "1.0.3",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Markdown processing, TOC generation, HTML conversion",
-            "is_latest": true,
-            "name": "io.github.ryudi84/markdown-forge-mcp",
-            "packages": [
-              {
-                "identifier": "markdown-forge-mcp",
-                "registry_type": "npm",
-                "required_environment": [],
-                "runtime_hint": null,
-                "secret_environment": [],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "1.0.1"
-              }
-            ],
-            "query": "markdown",
-            "remotes": [],
-            "repository": {
-              "source": "github",
-              "subfolder": "markdown-forge",
-              "url": "https://github.com/ryudi84/sovereign-mcp-servers"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 18,
-            "status": "active",
-            "version": "1.0.1",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Your portable context layer \u2014 load it into any AI.",
-            "is_latest": true,
-            "name": "ai.portablecontext/pcd",
+            "name": "il.co.finly/report-analysis",
             "packages": [],
-            "query": "table",
+            "query": "report",
             "remotes": [
               {
                 "required_headers": [],
                 "type": "streamable-http",
-                "url": "https://mcp.portablecontext.ai/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/d3lanight/pcd"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "0.4.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Access and manage your Airtable bases, tables, and records seamlessly",
-            "is_latest": true,
-            "name": "ai.waystation/airtable",
-            "packages": [],
-            "query": "table",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://waystation.ai/airtable/mcp"
-              },
-              {
-                "required_headers": [],
-                "type": "sse",
-                "url": "https://waystation.ai/airtable/mcp/sse"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/waystation-ai/mcp"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "0.3.1",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Verified discount & referral codes for crypto exchanges, cards and more \u2014 tested first-hand.",
-            "is_latest": true,
-            "name": "codes.find/verified-codes",
-            "packages": [],
-            "query": "verified",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://find.codes/api/mcp"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Messy spreadsheets in, clean checkable tables out. Every result carries its arithmetic proof.",
-            "is_latest": true,
-            "name": "com.ainetcafe/netcafe-tables",
-            "packages": [],
-            "query": "table",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://ainetcafe.com/mcp/table?s=registry"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/mario03690/ai-netcafe"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Official Airtable MCP server \u2014 database and operations layer for agents.",
-            "is_latest": true,
-            "name": "com.airtable/mcp",
-            "packages": [],
-            "query": "table",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://mcp.airtable.com/mcp"
+                "url": "https://finly.co.il/mcp/reports"
               }
             ],
             "repository": null,
@@ -2610,152 +2615,13 @@
             "status": "active",
             "version": "0.1.0",
             "zero_cost_eligible": true
-          },
-          {
-            "description": "Company knowledge, services, case studies, pricing, and tools for craftable software.",
-            "is_latest": true,
-            "name": "com.craftablesoftware/mcp",
-            "packages": [],
-            "query": "table",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://mcp.craftablesoftware.com/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/craftsw-rjso/craftablewebsite"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Share markdown as public links from your AI assistant \u2014 expiring or permanent, no API key.",
-            "is_latest": true,
-            "name": "com.docs-md/markdown-share",
-            "packages": [],
-            "query": "markdown",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://docs-md.com/api/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/invisible-hand/docs-md.com"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.1.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Contradiction-verified, freshness-SLA'd signed feed: per-record status + as-of date + receipt.",
-            "is_latest": true,
-            "name": "com.dropwatchhq/verified-feed",
-            "packages": [],
-            "query": "verified",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://verified.dropwatchhq.com/mcp"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Interact with your Google Bigtable resources using natural language commands.",
-            "is_latest": true,
-            "name": "com.googleapis.bigtableadmin/mcp",
-            "packages": [],
-            "query": "table",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://bigtableadmin.googleapis.com/mcp"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Verified Hamptons & North Fork data: open now, events, beaches, permits, closures.",
-            "is_latest": true,
-            "name": "com.hamptonsverified/hamptons-verified",
-            "packages": [],
-            "query": "verified",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://hamptonsverified.com/api/ai/mcp"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "6.400.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Semantic search over Handsontable and HyperFormula docs, API reference, release notes, and issues.",
-            "is_latest": true,
-            "name": "com.handsontable/docs",
-            "packages": [],
-            "query": "table",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://docs-assistant.handsontable.com/mcp"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
           }
         ],
-        "effect": "Create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.md containing a table with every VERIFIED_BOUND_CAPABILITY, its provided effects, source dependency, and verification mission",
-        "errors": [
-          {
-            "error": "TimeoutError:The read operation timed out",
-            "query": "bound"
-          }
-        ],
+        "effect": "create canonical/astra_runtime/tmp/CAPABILITY_AUDIT.pdf from that report",
+        "errors": [],
         "queries": [
-          "markdown",
-          "table",
-          "verified",
-          "bound"
+          "pdf",
+          "report"
         ],
         "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
         "source": "OFFICIAL_MCP_REGISTRY",
@@ -2770,5 +2636,5 @@
   },
   "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
   "source": "FEDERATED_CAPABILITY_DISCOVERY_FALLBACK",
-  "targeted_acquisition_error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-markdown-toc\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"cl-markdown\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"markdown\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-markdown-mode\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table-all\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table-amharic\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table-arabic\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table-array30\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table-array30-big\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table-bingchan\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fcitx-table-boshiamy\", \"status\": \"CONTRACT_REJECTED\"}]"
+  "targeted_acquisition_error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"c++-annotations-pdf\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"auto-multiple-choice-doc-pdf\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"claws-mail-spam-report\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"coq-doc-pdf\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED\", \"name\": \"diff-pdf-wx\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNSUPPORTED:.pdf\", \"name\": \"dmarcts-report-parser\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"docbook-xsl-doc-pdf\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-pdf-tools\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-pdf-tools-server\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"gambas3-gb-pdf\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"gambas3-gb-report\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"gsl-doc-pdf\", \"status\": \"CONTRACT_REJECTED\"}]"
 }
