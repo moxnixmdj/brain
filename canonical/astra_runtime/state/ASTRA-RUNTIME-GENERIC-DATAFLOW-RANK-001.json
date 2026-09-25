@@ -1,0 +1,21 @@
+{
+  "blocker": {
+    "adapter": "goal",
+    "error": "Blocker:GOAL_COMPILATION_FAILED:GOAL_CAUSAL_COMPOSITION_UNSUPPORTED:{\"index\": 2, \"subgoal\": \"Using both live results, create canonical/astra_runtime/tmp/USER_TODO_RATES.json containing exactly one record per live user with user_id, username, total_count, completed_count, and completion_ratio, where total_count is the number of live todos whose userId equals that user's id, completed_count is the number of those todos whose completed field is true, and completion_ratio is completed_count divided by total_count\"}",
+    "mission_id": "ASTRA-RUNTIME-GENERIC-DATAFLOW-RANK-001",
+    "observed_at_utc": "2026-09-25T20:07:53.419682+00:00",
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "run-generic-dataflow-rank",
+    "step_index": 0
+  },
+  "created_at_utc": "2026-09-25T20:07:53.326727+00:00",
+  "history": [],
+  "mission_id": "ASTRA-RUNTIME-GENERIC-DATAFLOW-RANK-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_GENERIC_DATAFLOW_RANK_001.json",
+  "mission_sha256": "72a46876b96df18eb21d687a90c98ad5875314a70c3791358f87a425af78b1e5",
+  "next_step": 0,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-25T20:07:53.419984+00:00"
+}
