@@ -21,6 +21,7 @@
     "independent_semantic_verification_required": true,
     "replay_after_independent_html_parse_commit": "17588cb0d6be9f77bd135f774d04df546af2a66f",
     "replay_after_release_list_verifier_commit": "91d818948f0e02cc087ef27d83da0c01879ede3a",
-    "replay_after_identity_encoding_commit": "b269dbdbf52de853adb0c274bfe638cb018ac1f5"
+    "replay_after_identity_encoding_commit": "b269dbdbf52de853adb0c274bfe638cb018ac1f5",
+    "replay_after_gzip_decode_commit": "2a64980bb55e92d9b19d7f1d868e3ecfbe0f3613"
   }
 }
