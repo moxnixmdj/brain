@@ -762,6 +762,53 @@
           ]
         }
       }
+    },
+    "python.source.audit.ast": {
+      "provides": [
+        "python.source.audit"
+      ],
+      "requires": [],
+      "keywords": [
+        "python",
+        "source",
+        "audit",
+        "imports",
+        "functions",
+        "classes",
+        "sha256"
+      ],
+      "cost": 1,
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Audits repository-local Python files using the Python standard-library AST parser.",
+        "Reports top-level imports, functions, and classes only."
+      ],
+      "adapter_module": "python_source_audit",
+      "entrypoint": "run",
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "python.source.audit.ast",
+          "source_root": "${input.source_root}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "source": {
+        "type": "python_stdlib",
+        "module": "ast",
+        "version_family": "3.x"
+      },
+      "incremental_spend_usd": 0,
+      "status": "BOUND_PENDING_INDEPENDENT_VERIFICATION"
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
