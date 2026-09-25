@@ -94,6 +94,26 @@ class GoalCompilerTests(unittest.TestCase):
         self.assertEqual(out["inputs"]["screenshot_path"],"canonical/astra_runtime/tmp/EXAMPLE.png")
         self.assertEqual(out["inputs"]["result_path"],"canonical/astra_runtime/tmp/EXAMPLE.json")
 
+    def test_browser_capture_then_semver_extraction_compiles(self):
+        goal=(
+            "Using a real rendered browser, open https://www.python.org/downloads/. "
+            "Determine the latest stable Python 3 release shown on the page. "
+            "Save a full-page screenshot to canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_TEST.png "
+            "and save canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_TEST_RESULT.json containing "
+            "source_url, final_url, page_title, latest_stable_python3, and observed_text_evidence."
+        )
+        out=compiler.compile_goal(goal,self.registry(),ROOT)
+        self.assertEqual(out["compiler_mode"],"DETERMINISTIC_COMPOUND_ACTION_PLAN")
+        modes=[x["mode"] for x in out["compiled_parts"]]
+        self.assertIn("VERIFIED_STRUCTURED_SEMANTIC_EXTRACTION",modes)
+        browser=[x for x in out["compiled_parts"] if x.get("selected_capability")=="web.browser.rendered.capture.chromedriver"][0]
+        self.assertEqual(browser["inputs"]["screenshot_path"],"canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_TEST.png")
+        self.assertEqual(browser["inputs"]["result_path"],"canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_TEST_RESULT.json")
+        semantic=[x for x in out["compiled_parts"] if x["mode"]=="VERIFIED_STRUCTURED_SEMANTIC_EXTRACTION"][0]
+        self.assertEqual(semantic["field"],"latest_stable_python3")
+        self.assertEqual(semantic["product"],"Python")
+        self.assertEqual(semantic["major"],"3")
+
     def test_barcode_goal_selects_verified_barcode_not_qr(self):
         goal="Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png."
         out=compiler.compile_goal(goal,self.registry(),ROOT)
