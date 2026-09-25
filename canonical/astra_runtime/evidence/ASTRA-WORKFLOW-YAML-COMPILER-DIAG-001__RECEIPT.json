@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T00:47:16.587134+00:00",
+  "mission_id": "ASTRA-WORKFLOW-YAML-COMPILER-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_WORKFLOW_YAML_COMPILER_DIAG_001.json",
+  "mission_sha256": "085956a8e161f87e8d20234ad4a35ee7f1c7d3a8d372bfe3a87afa85a5c0a8d2",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "098be064a61ff85460530bee047d4e8ee14897d7fa73c9bfe0577a235416fd3d",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
