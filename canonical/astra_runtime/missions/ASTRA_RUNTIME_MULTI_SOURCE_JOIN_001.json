@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-MULTI-SOURCE-JOIN-001",
+  "purpose": "Pressure-test model-independent composition across two independently observed live collections, a runtime key join, downstream structured artifact creation, and independent cross-source verification.",
+  "goal": "Using a real rendered browser, open https://jsonplaceholder.typicode.com/users, save a screenshot to canonical/astra_runtime/tmp/JOIN_USERS.png, and save the rendered result to canonical/astra_runtime/tmp/JOIN_USERS.json. Using a real rendered browser, open https://jsonplaceholder.typicode.com/posts, save a screenshot to canonical/astra_runtime/tmp/JOIN_POSTS.png, and save the rendered result to canonical/astra_runtime/tmp/JOIN_POSTS.json. Using both live results, join every live post to exactly one live user where post userId equals user id, and create canonical/astra_runtime/tmp/JOINED_POSTS.json containing exactly one record per live post with post_id, user_id, username, and title. Create canonical/astra_runtime/tmp/JOINED_POSTS.xlsx from canonical/astra_runtime/tmp/JOINED_POSTS.json with columns post_id, user_id, username, and title. Independently reopen both live source results, the joined JSON, and the XLSX and verify every post appears exactly once, every joined username matches the user with the same id, every title matches its source post, there are no unmatched or extra records, and the XLSX is identical to the joined JSON.",
+  "steps": [
+    {
+      "id": "run-multi-source-join",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 32,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "two_independent_live_sources_required": true,
+    "runtime_join_required": true,
+    "manual_controller_actions": false,
+    "omitted_goal_clauses_are_failure": true
+  }
+}
