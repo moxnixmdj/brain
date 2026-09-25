@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-JIT-AUTHORITY-RESOLUTION-WORLDBANK-002",
+  "purpose": "Plain-goal proof of domain-free authority identity resolution and semantically relevant authority-native source discovery with no manual controller action graph.",
+  "goal": "Find the authoritative World Bank source for indicator SP.POP.TOTL without being given either the authority domain or the source URL, independently verify the official authority site, render the discovered indicator source, and verify that source is semantically relevant to SP.POP.TOTL.",
+  "steps": [
+    {
+      "id": "plain-authority-and-source",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 16,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "manual_controller_actions": false,
+    "direct_authority_domain_provided": false,
+    "direct_source_url_provided": false,
+    "independent_authority_site_verification_required": true,
+    "authority_native_source_discovery_required": true,
+    "semantic_relevance_required": true
+  }
+}
