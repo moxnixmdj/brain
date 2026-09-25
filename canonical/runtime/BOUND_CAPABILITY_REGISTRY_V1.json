@@ -692,6 +692,76 @@
           "downloaded_artifact_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14"
         }
       }
+    },
+    "yaml.to_json.yq": {
+      "provides": [
+        "yaml.to_json"
+      ],
+      "requires": [
+        "yaml.file.available"
+      ],
+      "keywords": [
+        "yaml",
+        "yml",
+        "json",
+        "parse",
+        "convert",
+        "workflow",
+        "structured"
+      ],
+      "cost": 1,
+      "platforms": [
+        "linux"
+      ],
+      "limitations": [
+        "Converts repository-local YAML/YML files into deterministic JSON.",
+        "Verified with Ubuntu yq 3.1.0-3."
+      ],
+      "adapter_module": "yq_yaml_json",
+      "entrypoint": "run",
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "yaml.to_json.yq",
+          "yaml_path": "${input.yaml_path}",
+          "output_path": "${input.output_path}",
+          "timeout_s": 60
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "source": {
+        "type": "apt",
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "yq",
+            "version": "3.1.0-3",
+            "sha256": "ef935e2b644e6c70ed080396dbe3d93330d1482fd9ce6f34813bdcf3616cb809"
+          }
+        ]
+      },
+      "incremental_spend_usd": 0,
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "mission_id": "ASTRA-VERIFY-YAML-JSON-YQ-001",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-YAML-JSON-YQ-001__RECEIPT.json",
+        "independent_verifier": "raw_yaml_regex_crosscheck",
+        "observed_effect": {
+          "input_sha256": "34ec38e5e55a2fc3e2661fe52eb84b0eaf61b09126729180ffbc22eb068f46ac",
+          "output_sha256": "23c812aa8aa6e6ebd0e8674d15bd9994fa00674f46afd002704e2f7624c64f13",
+          "job_ids": [
+            "run-mission"
+          ],
+          "uses": [
+            "actions/checkout@v4",
+            "actions/setup-python@v5"
+          ]
+        }
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
