@@ -409,8 +409,9 @@ def _compile_json_record_selection(subgoal, context_paths, registry, root):
     if wanted_status is not None:
         predicates.append(f'any(. == {json.dumps(wanted_status)})')
     path_expr="".join("["+json.dumps(x)+"]" for x in nested_field)
-    predicates.append(f'(.{path_expr} == {json.dumps(nested_value)})'.replace('.[','[' ,1))
-    # The expression above intentionally starts from .value below.
+    predicates.append(f'(.{path_expr} == {json.dumps(nested_value)})')
+    # The predicate executes under ".value |", so .["source"]["type"]
+    # remains relative to the current record.
     pred=" and ".join(predicates)
     filt=(
       f'{base} | to_entries | map(select(.value | {pred})) '
