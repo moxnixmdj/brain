@@ -25,6 +25,10 @@
     "filtered_aggregation_required": true,
     "arithmetic_derivation_required": true,
     "deterministic_argmax_tiebreak_required": true,
-    "independent_verification_required": true
+    "independent_verification_required": true,
+    "replay_after_generic_dataflow_ir": [
+      "5044ee5e3b3452277128276b4436b0be57750ed6",
+      "cf9efe7d547901b9eabb8890aa75e886fd96fa8f"
+    ]
   }
 }
