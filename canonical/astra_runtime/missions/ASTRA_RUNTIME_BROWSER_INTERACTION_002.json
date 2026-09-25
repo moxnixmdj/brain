@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-BROWSER-INTERACTION-002",
+  "purpose": "Fresh clean end-to-end proof of plain-language rendered-browser interaction after verified interaction promotion and compiler binding.",
+  "goal": "Using a real rendered browser, open https://httpbin.org/forms/post. Enter PROJECT BRAIN into the customer name field, choose Medium pizza size, check the Bacon topping, submit the form, and save a full-page screenshot to canonical/astra_runtime/tmp/HTTPBIN_FORM_SUBMITTED.png and a result JSON to canonical/astra_runtime/tmp/HTTPBIN_FORM_SUBMITTED.json. The final rendered page must independently show the submitted customer name PROJECT BRAIN, size Medium, and topping Bacon; do not count merely opening or screenshotting the form as success.",
+  "steps": [
+    {
+      "id": "execute-fresh-browser-interaction-goal",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 12,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "PLAIN_GOAL_COMPLETE"
+      }
+    },
+    {
+      "id": "verify-post-submit-evidence",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport json,pathlib\np=pathlib.Path('canonical/astra_runtime/tmp/HTTPBIN_FORM_SUBMITTED.json')\nif not p.is_file(): raise SystemExit('RESULT_JSON_MISSING')\nx=json.loads(p.read_text(encoding='utf-8'))\nblob=' '.join(str(x.get(k,'')) for k in ('observed_text','text','body','page_text','final_url'))\nneed=['PROJECT BRAIN','Medium','Bacon']\nmissing=[v for v in need if v.lower() not in blob.lower()]\nif missing: raise SystemExit('POST_SUBMIT_VALUES_MISSING:'+','.join(missing))\nprint('BROWSER_INTERACTION_EFFECT_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "BROWSER_INTERACTION_EFFECT_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "manual_controller_actions": false,
+    "manual_supplier": false,
+    "manual_binding": false,
+    "post_submit_state_required": true,
+    "passive_capture_is_not_success": true,
+    "fresh_mission_identity": true,
+    "inherited_verified_browser_interaction": true
+  }
+}
