@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T17:42:21.955348+00:00",
+  "mission_id": "ASTRA-RUNTIME-CHECKPOINT-REWIND-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_CHECKPOINT_REWIND_001.json",
+  "mission_sha256": "b6a68b42bf963f60242aa1bf675477b74bdbbaed62b06519d1c32aed235f089e",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "cf41ed9d126d0b5c6b2f8aae4dd86f136ab961c6aba53fb5f9b0b0f7f2710d26",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
