@@ -4072,6 +4072,67 @@ def _compile_domain_free_authority_source_goal(goal,clauses,registry,root):
     source_result=prefix+"_SOURCE_RENDER.json"
     query=f"{entity_name} {subject_id} official source"
 
+    extraction_spec=None
+    extraction_index=None
+    extraction_verify_index=None
+    recognized_clause_modes={}
+    for index,clause in enumerate(clauses):
+        cl=str(clause or "").strip()
+        low=cl.lower()
+        if index==0 and "find the authoritative" in low:
+            recognized_clause_modes[index]="DOMAIN_FREE_AUTHORITY_SOURCE_RESOLUTION"
+            continue
+        if "semantically relevant" in low and subject_id.lower() in low:
+            recognized_clause_modes[index]="DOMAIN_FREE_AUTHORITY_SOURCE_SEMANTIC_VERIFICATION"
+            continue
+        em=re.match(
+            r"^extract\s+the\s+source\s+fields\s+(.+?)\s+and\s+save\s+"
+            r"([^\s]+\.json)\s+containing\s+exactly\s+one\s+record\s+with\s+fields\s+(.+)$",
+            cl,re.IGNORECASE
+        )
+        if em:
+            raw_labels=re.sub(r"\s+and\s+",",",em.group(1),flags=re.IGNORECASE)
+            raw_outputs=re.sub(r"\s+and\s+",",",em.group(3),flags=re.IGNORECASE)
+            labels=[x.strip(" .,:;") for x in raw_labels.split(",") if x.strip(" .,:;")]
+            outputs=[x.strip(" .,:;") for x in raw_outputs.split(",") if x.strip(" .,:;")]
+            if (
+                not labels or len(labels)!=len(outputs)
+                or any(not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*",x) for x in outputs)
+            ):
+                raise GoalCompilationFailure(
+                    "SEMANTIC_EXTRACTION_FIELD_MAPPING_INVALID",
+                    json.dumps({"labels":labels,"outputs":outputs},sort_keys=True)
+                )
+            extraction_spec={
+              "output_path":em.group(2).strip(" .,:;"),
+              "fields":[
+                {"label":label,"output_field":output}
+                for label,output in zip(labels,outputs)
+              ],
+            }
+            extraction_index=index
+            recognized_clause_modes[index]="SEMANTIC_LABELED_FIELD_EXTRACTION"
+            continue
+        if re.match(
+            r"^finally\s+independently\s+verify\s+the\s+saved\s+values\s+against\s+"
+            r"a\s+fresh\s+retrieval\s+of\s+the\s+discovered\s+authoritative\s+source$",
+            cl,re.IGNORECASE
+        ):
+            extraction_verify_index=index
+            recognized_clause_modes[index]="INDEPENDENT_FRESH_SOURCE_FIELD_VERIFICATION"
+            continue
+
+    if extraction_spec is not None and extraction_verify_index is None:
+        raise GoalCompilationFailure("SEMANTIC_EXTRACTION_INDEPENDENT_VERIFICATION_REQUIRED")
+    if extraction_verify_index is not None and extraction_spec is None:
+        raise GoalCompilationFailure("SEMANTIC_EXTRACTION_SPEC_REQUIRED")
+    unrecognized=[i for i in range(len(clauses)) if i not in recognized_clause_modes]
+    if unrecognized:
+        raise GoalCompilationFailure(
+            "DOMAIN_FREE_AUTHORITY_SOURCE_UNCONSUMED_CLAUSE",
+            json.dumps({"indices":unrecognized,"clauses":[clauses[i] for i in unrecognized]},sort_keys=True)
+        )
+
     actions=[
       {
         "type":"resolve_authority_identity",
@@ -4129,8 +4190,29 @@ def _compile_domain_free_authority_source_goal(goal,clauses,registry,root):
         },
         "expect":{"type":"field_equals","field":"verified","value":True},
       },
-      {"type":"finish","args":{"summary":"COMPOUND_GOAL_COMPLETE"}},
     ]
+    if extraction_spec is not None:
+        actions.append({
+          "type":"extract_labeled_fields_from_rendered_source",
+          "args":{
+            "browser_result_path":source_result,
+            "output_path":extraction_spec["output_path"],
+            "fields":extraction_spec["fields"],
+          },
+          "expect":{"type":"field_equals","field":"verified","value":True},
+        })
+        actions.append({
+          "type":"assert_labeled_fields_against_fresh_source",
+          "args":{
+            "browser_result_path":source_result,
+            "extracted_path":extraction_spec["output_path"],
+            "fields":extraction_spec["fields"],
+            "timeout_s":20,
+            "max_bytes":2000000,
+          },
+          "expect":{"type":"field_equals","field":"verified","value":True},
+        })
+    actions.append({"type":"finish","args":{"summary":"COMPOUND_GOAL_COMPLETE"}})
     frame_evidence={
       "entity_name":entity_name,
       "subject_id":subject_id,
@@ -4145,13 +4227,20 @@ def _compile_domain_free_authority_source_goal(goal,clauses,registry,root):
     }
     parts=[]
     for index,clause in enumerate(clauses):
-        parts.append({
+        mode=recognized_clause_modes[index]
+        part={
           "index":index,
           "subgoal":clause,
-          "mode":"DOMAIN_FREE_AUTHORITY_SOURCE_RESOLUTION" if index==0
-                 else "DOMAIN_FREE_AUTHORITY_SOURCE_RESOLUTION_CONTINUATION",
+          "mode":mode,
           **frame_evidence,
-        })
+        }
+        if mode=="SEMANTIC_LABELED_FIELD_EXTRACTION":
+            part["output_path"]=extraction_spec["output_path"]
+            part["fields"]=extraction_spec["fields"]
+        elif mode=="INDEPENDENT_FRESH_SOURCE_FIELD_VERIFICATION":
+            part["extracted_path"]=extraction_spec["output_path"]
+            part["fields"]=extraction_spec["fields"]
+        parts.append(part)
     return {
       "schema":"PROJECT_BRAIN_COMPILED_COMPOUND_GOAL_V1",
       "compiler_mode":"DETERMINISTIC_DOMAIN_FREE_AUTHORITY_SOURCE_PLAN",
