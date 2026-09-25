@@ -1,0 +1,20 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-CORE-REGRESSION-008",
+  "purpose": "Fresh regression after live HTTP, PyPI provenance, and deterministic assertion integration.",
+  "goal": "Run current compiler, discovery, and runtime-composition regressions after the latest verified repairs.",
+  "steps": [
+    {
+      "id": "run-current-regressions",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/tests/test_goal_compiler.py\npython canonical/tests/test_capability_discovery.py\npython canonical/tests/test_runtime_composition.py",
+      "verify": {
+        "type": "returncode_zero"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false
+  }
+}
