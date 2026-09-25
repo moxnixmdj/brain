@@ -1,0 +1,21 @@
+{
+  "blocker": {
+    "adapter": "goal",
+    "error": "Blocker:ACTION_EXPECTATION_FAILED:verified:OBSERVED=False",
+    "mission_id": "ASTRA-RUNTIME-WORKFLOW-YAML-AUDIT-002",
+    "observed_at_utc": "2026-09-25T01:01:16.885730+00:00",
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "execute-workflow-yaml-audit",
+    "step_index": 0
+  },
+  "created_at_utc": "2026-09-25T01:00:57.646319+00:00",
+  "history": [],
+  "mission_id": "ASTRA-RUNTIME-WORKFLOW-YAML-AUDIT-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_WORKFLOW_YAML_AUDIT_002.json",
+  "mission_sha256": "a788fd5e7d00c3d3eb947e6c7754af81b3cfca75a74f69f20cb3931faa1cefe7",
+  "next_step": 0,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-25T01:01:16.885872+00:00"
+}

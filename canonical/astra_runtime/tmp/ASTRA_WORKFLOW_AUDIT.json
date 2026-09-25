@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_GITHUB_WORKFLOW_AUDIT_V1",
+  "name": "ASTRA Shared Runtime Mission",
+  "trigger_names": [
+    "push",
+    "workflow_dispatch"
+  ],
+  "push_branches": [
+    "main"
+  ],
+  "push_paths": [
+    "canonical/astra_runtime/missions/**.json"
+  ],
+  "workflow_dispatch_input_names": [
+    "mission_path"
+  ],
+  "permissions": {
+    "actions": "write",
+    "contents": "write"
+  },
+  "jobs": [
+    {
+      "id": "run-mission",
+      "runner_label": "ubuntu-24.04",
+      "timeout_minutes": 10,
+      "step_names": [
+        "Resolve exact mission",
+        "Execute shared runtime mission",
+        "Persist runtime state, evidence, and continuation missions"
+      ],
+      "uses": [
+        "actions/checkout@v4",
+        "actions/setup-python@v5"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "adapter": "goal",
+  "error": "Blocker:ACTION_EXPECTATION_FAILED:verified:OBSERVED=False",
+  "mission_id": "ASTRA-RUNTIME-WORKFLOW-YAML-AUDIT-002",
+  "observed_at_utc": "2026-09-25T01:01:16.885730+00:00",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "execute-workflow-yaml-audit",
+  "step_index": 0
+}
