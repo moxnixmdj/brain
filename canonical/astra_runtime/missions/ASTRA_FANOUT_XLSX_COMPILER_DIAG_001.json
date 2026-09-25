@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-FANOUT-XLSX-COMPILER-DIAG-001",
+  "purpose": "Compile-only proof that downstream XLSX creation and independent verification are not dropped after runtime dynamic fanout.",
+  "steps": [
+    {
+      "id": "compile-fanout-xlsx",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/goal_compiler.py')\ns=importlib.util.spec_from_file_location('gc',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads(pathlib.Path('canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads(pathlib.Path('canonical/astra_runtime/missions/ASTRA_RUNTIME_FANOUT_XLSX_JOIN_002.json').read_text())['goal']\nout=m.compile_goal(goal,reg,pathlib.Path('.').resolve())\nacts=out.get('controller_actions') or []\ncaps=[(a.get('args') or {}).get('capability_id') for a in acts if a.get('type')=='invoke_capability']\nassert any(a.get('type')=='invoke_capability_fanout' for a in acts),acts\nassert 'xlsx.table.create_from_json_records' in caps,caps\nassert 'xlsx.table.verify_against_json_records' in caps,caps\nassert any(a.get('type')=='assert_runtime_fanout_decodes' for a in acts),acts\nparts=out.get('compiled_parts') or []\nassert any(p.get('selected_capability')=='xlsx.table.create_from_json_records' for p in parts),parts\nassert any(p.get('selected_capability')=='xlsx.table.verify_against_json_records' for p in parts),parts\nprint(json.dumps({'compiler_mode':out.get('compiler_mode'),'action_types':[a.get('type') for a in acts],'capabilities':caps},sort_keys=True))\nprint('FANOUT_XLSX_COMPILER_COMPLETE')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "FANOUT_XLSX_COMPILER_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "read_only_diagnostic": true
+  }
+}
