@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-PER-ITEM-FALLBACK-002",
+  "purpose": "Fresh clean proof that each runtime item owns isolated primary validation and fallback without aborting other items.",
+  "goal": "Using a real rendered browser, open https://jsonplaceholder.typicode.com/users, save a screenshot to canonical/astra_runtime/tmp/ITEM_FALLBACK_USERS.png, and save the rendered result to canonical/astra_runtime/tmp/ITEM_FALLBACK_USERS.json. Read the live JSON array from that result. For every user returned at runtime, first generate a QR code image encoding that user's username and validate the decoded QR against that user's email; if that validation fails, fall back for only that user to a Code 128 barcode image encoding that user's email. Save the final artifact for each user under canonical/astra_runtime/tmp/ITEM_FALLBACK_CODES using the user's id as the filename, and create canonical/astra_runtime/tmp/ITEM_FALLBACK_MANIFEST.json with exactly one record per live user containing id, username, email, used_fallback, artifact_kind, and artifact_path. Finally independently decode every final artifact and verify it equals that live user's email, every live user has exactly one final artifact, every primary QR validation failed as expected because username differs from email, used_fallback is true for every record, and no extra manifest records exist.",
+  "steps": [
+    {
+      "id": "run-per-item-fallback",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 48,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "runtime_collection_size_unknown": true,
+    "failure_isolation_per_item_required": true,
+    "one_item_failure_must_not_abort_other_items": true,
+    "capability_acquisition_for_control_gap_forbidden": true,
+    "manual_controller_actions": false,
+    "fresh_mission_identity": true,
+    "per_item_fallback_runtime_commit": "99d7245d77ecf77aaee518cd9afbeb77394f6ae6",
+    "per_item_fallback_compiler_commit": "1aaccf8c2f64bbe09527855d448e6e8a57588670",
+    "source_mission": "ASTRA-RUNTIME-PER-ITEM-FALLBACK-001"
+  }
+}
