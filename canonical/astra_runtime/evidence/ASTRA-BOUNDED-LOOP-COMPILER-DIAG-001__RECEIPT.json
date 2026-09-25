@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T17:16:56.304286+00:00",
+  "mission_id": "ASTRA-BOUNDED-LOOP-COMPILER-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_BOUNDED_LOOP_COMPILER_DIAG_001.json",
+  "mission_sha256": "09ea5fb9d32b7d796453303da879779921ba3d8503e97a023836665d82728542",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "ebfd1dbb505b350296cbe12857bfe73e4a2e6629e56c24ee9693eb7c8ea1ab09",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

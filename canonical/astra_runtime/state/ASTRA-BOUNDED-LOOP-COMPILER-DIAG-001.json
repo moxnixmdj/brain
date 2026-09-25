@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T17:16:56.294752+00:00",
+  "created_at_utc": "2026-09-25T17:16:56.120784+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T17:16:56.294495+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\ndef load(name,path):\n s=importlib.util.spec_from_file_location(name,path); m=importlib.util.module_from_spec(s); s.loader.exec_module(m); return m\ngc=load('gc',pathlib.Path('canonical/runtime/goal_compiler.py'))\nrt=load('rt',pathlib.Path('canonical/runtime/astra_runtime.py'))\nreg=json.loads(pathlib.Path('canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads(pathlib.Path('canonical/astra_runtime/missions/ASTRA_RUNTIME_BOUNDED_LOOP_002.json').read_text())['goal']\nout=gc.compile_goal(goal,reg,pathlib.Path('.').resolve())\nassert out['compiler_mode']=='DETERMINISTIC_BOUNDED_RUNTIME_LOOP_PLAN',out\nassert out.get('clause_coverage_verified') is True,out\nassert [a.get('type') for a in out['controller_actions']]==['invoke_capability_until','assert_runtime_bounded_loop_trace','finish'],out['controller_actions']\nassert rt._classify_plain_goal_gap(out['clauses'][0])=='CONTROL_OR_FANOUT',rt._classify_plain_goal_gap(out['clauses'][0])\nassert rt._classify_plain_goal_gap(out['clauses'][2]) in {'CONTROL_OR_FANOUT','CONTROL_FLOW'},rt._classify_plain_goal_gap(out['clauses'][2])\nprint('BOUNDED_LOOP_COMPILER_VERIFIED')\nPY",
+        "duration_s": 0.174,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "BOUNDED_LOOP_COMPILER_VERIFIED\n"
+      },
+      "step_id": "compile-and-classify",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-BOUNDED-LOOP-COMPILER-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_BOUNDED_LOOP_COMPILER_DIAG_001.json",
+  "mission_sha256": "09ea5fb9d32b7d796453303da879779921ba3d8503e97a023836665d82728542",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T17:16:56.294510+00:00"
+}
