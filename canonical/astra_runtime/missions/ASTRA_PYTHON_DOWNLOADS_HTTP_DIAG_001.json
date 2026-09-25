@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-PYTHON-DOWNLOADS-HTTP-DIAG-001",
+  "purpose": "Read-only inspect of the official Python downloads HTML as seen by the independent urllib verifier.",
+  "steps": [
+    {
+      "id": "inspect-independent-http-representation",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport json,re,urllib.request\nfrom html.parser import HTMLParser\nclass P(HTMLParser):\n def __init__(self): super().__init__(); self.parts=[]\n def handle_data(self,d):\n  if d and d.strip(): self.parts.append(d.strip())\nreq=urllib.request.Request('https://www.python.org/downloads/',headers={'User-Agent':'ProjectBrain-IndependentVerifier/1'})\nwith urllib.request.urlopen(req,timeout=30) as r:\n raw=r.read(2000000); final=r.geturl(); headers=dict(r.headers.items())\nhtml=raw.decode('utf-8','replace')\np=P(); p.feed(html); text=' '.join(p.parts)\nout={\n 'final_url':final,\n 'content_type':headers.get('Content-Type'),\n 'content_encoding':headers.get('Content-Encoding'),\n 'raw_bytes':len(raw),\n 'has_release_marker':'Python releases by version number' in text,\n 'has_3147':'3.14.7' in text,\n 'semvers':re.findall(r'3\\.\\d+\\.\\d+',text)[:30],\n 'text_excerpt':text[:8000],\n 'raw_excerpt':html[:4000]\n}\nprint(json.dumps(out,sort_keys=True))\nprint('PYTHON_HTTP_DIAG_COMPLETE')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "PYTHON_HTTP_DIAG_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "read_only_diagnostic": true
+  }
+}
