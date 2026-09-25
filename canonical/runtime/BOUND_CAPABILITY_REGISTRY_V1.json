@@ -1448,6 +1448,55 @@
           "producer_sha256": "02c358981319f7dbe12dee7431b4ed88633d093db4aa64ed078c715dc7cee4aa"
         }
       }
+    },
+    "docx.document.verify.intent_ooxml": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "docx.document.verify.intent_ooxml",
+          "path": "${input.docx_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "verified",
+          "value": true
+        }
+      },
+      "adapter_module": "docx_verify_ooxml_intent",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "docx",
+        "document",
+        "word",
+        "verify",
+        "reopen",
+        "independent",
+        "content",
+        "exact"
+      ],
+      "limitations": [
+        "Requires the producer's repository-local raw-intent sidecar beside the DOCX.",
+        "Derives expected semantics from the raw creation goal independently of the producer's parsed document_spec."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "docx.document.verify"
+      ],
+      "requires": [],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "zipfile",
+          "xml.etree.ElementTree"
+        ]
+      },
+      "status": "BOUND_PENDING_INDEPENDENT_VERIFICATION"
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
