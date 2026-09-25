@@ -8,6 +8,7 @@ install third-party code. Binding is a separate verified step.
 from __future__ import annotations
 
 import json
+import pathlib
 import re
 import shutil
 import subprocess
@@ -386,6 +387,18 @@ def search_apt_packages(effect, limit=12):
     }
 
 
+def _requested_output_format_tokens(effect):
+    text=re.sub(r"https?://[^\s)\]}>]+"," ",str(effect or ""))
+    paths=re.findall(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+",text)
+    out=[]
+    common={"json","txt","md","markdown","csv","tsv","html","xml","png","jpg","jpeg","webp","pdf","docx","xlsx","zip","gz","tgz","tar","sqlite","db","sqlite3"}
+    for raw in paths:
+        suffix=pathlib.PurePosixPath(raw.rstrip(".,;:!?)]}")).suffix.lower().lstrip(".")
+        if suffix and suffix not in common and suffix not in out:
+            out.append(suffix)
+    return out
+
+
 def _pypi_candidate_names(effect):
     names=[]
     for token in effect_queries(effect):
@@ -520,6 +533,12 @@ def search_pypi_packages(effect, limit=12, timeout_s=12, opener=None):
             normalized_name=re.sub(r"[-_.]+","",name.lower())
             normalized_query=re.sub(r"[-_.]+","",query.lower())
             score=(50 if normalized_name==normalized_query else 0)+12*len(matched)
+            format_tokens=_requested_output_format_tokens(effect)
+            normalized_blob=re.sub(r"[-_.]+","",blob)
+            for fmt in format_tokens:
+                nfmt=re.sub(r"[-_.]+","",fmt.lower())
+                if nfmt and (nfmt in normalized_name or nfmt in normalized_blob):
+                    score+=80
             requires_dist=info.get("requires_dist") or []
             dependency_count=len(requires_dist) if isinstance(requires_dist,list) else 0
             score-=4*dependency_count
@@ -551,9 +570,21 @@ def search_pypi_packages(effect, limit=12, timeout_s=12, opener=None):
     errors.extend(exact_errors)
 
     # Exact-name probing misses common relationships such as a format token
-    # being embedded in a longer project name. Widen only when exact probes
-    # produced no viable wheel-backed candidate.
-    if not candidates:
+    # being embedded in a longer project name. Widen unless an exact probe
+    # produced a candidate that actually matches the requested binary format.
+    format_tokens=_requested_output_format_tokens(effect)
+    def matches_requested_format(cand):
+        if not format_tokens:
+            return True
+        blob=(
+            str(cand.get("name") or "")+" "
+            +str(cand.get("description") or "")+" "
+            +" ".join(str(x) for x in cand.get("matched_terms") or [])
+        ).lower()
+        normalized=re.sub(r"[-_.]+","",blob)
+        return any(re.sub(r"[-_.]+","",fmt.lower()) in normalized for fmt in format_tokens)
+
+    if not any(matches_requested_format(x) for x in candidates):
         related=_pypi_simple_related_names(effect,timeout_s=timeout_s,opener=opener,limit=max(12,int(limit)*2))
         related=[x for x in related if x.lower() not in {q.lower() for q in queries}]
         queries.extend(related)
