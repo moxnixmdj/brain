@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T17:32:00.569507+00:00",
+  "mission_id": "ASTRA-SEMANTIC-HELDOUT-COMPILER-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_SEMANTIC_HELDOUT_COMPILER_001.json",
+  "mission_sha256": "d476298fc0da937e434342786c5b21bc09855943dd2a4a444944889992f8c5ee",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "c0124b6c435056b9b83844d8448893c2053862ebea2427561028b01db86e9cb3",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
