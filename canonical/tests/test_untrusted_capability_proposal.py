@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import importlib.util
+import hashlib
 import pathlib
 import sys
 import unittest
@@ -14,6 +15,19 @@ spec.loader.exec_module(runtime)
 
 
 class UntrustedCapabilityProposalTests(unittest.TestCase):
+    GOAL="Acquire one verified observation."
+
+    def bound(self,proposal):
+        out=dict(proposal)
+        out["goal_sha256"]=hashlib.sha256(self.GOAL.encode("utf-8")).hexdigest()
+        out["clauses"]=[{
+            "start":0,
+            "end":len(self.GOAL),
+            "text":self.GOAL,
+            "target_effects":["knowledge.observation.a.available"],
+        }]
+        return out
+
     def registry(self,spend=0):
         return {
             "test.fetch":{
@@ -44,7 +58,7 @@ class UntrustedCapabilityProposalTests(unittest.TestCase):
         }
 
     def test_proposal_can_only_reference_verified_capability_and_frozen_goal_contract(self):
-        proposal={
+        proposal=self.bound({
             "finish_summary":"SAFE_PROPOSAL_COMPLETE",
             "capability_instances":[{
                 "instance_id":"observe-a",
@@ -58,13 +72,20 @@ class UntrustedCapabilityProposalTests(unittest.TestCase):
                     "knowledge.observation.available":"knowledge.observation.a.available"
                 },
             }],
-        }
+        })
         with mock.patch.object(runtime,"_load_bound_capability_registry",return_value=self.registry()):
-            out=runtime._capability_problem_proposal(self.step(proposal),{})
+            out=runtime._capability_problem_proposal(self.step(proposal),{},self.GOAL)
         self.assertEqual(out["initial_facts"],["network.http.available"])
         self.assertEqual(out["target_effects"],["knowledge.observation.a.available"])
         self.assertEqual(out["capabilities"],[])
-        self.assertEqual(out["_proposal_contract"],"VERIFIED_REGISTRY_REFERENCES_ONLY")
+        self.assertEqual(
+            out["_proposal_contract"],
+            "GOAL_BOUND__CLAUSE_COVERED__VERIFIED_REGISTRY_REFERENCES_ONLY",
+        )
+        self.assertEqual(
+            out["_goal_binding"]["goal_sha256"],
+            hashlib.sha256(self.GOAL.encode("utf-8")).hexdigest(),
+        )
         self.assertEqual(out["capability_instances"][0]["capability_id"],"test.fetch")
 
     def test_proposal_cannot_redefine_initial_facts_or_target_effects(self):
@@ -79,7 +100,7 @@ class UntrustedCapabilityProposalTests(unittest.TestCase):
         }
         with mock.patch.object(runtime,"_load_bound_capability_registry",return_value=self.registry()):
             with self.assertRaisesRegex(runtime.Blocker,"CAPABILITY_PROPOSAL_TOP_LEVEL_FIELD_REJECTED"):
-                runtime._capability_problem_proposal(self.step(proposal),{})
+                runtime._capability_problem_proposal(self.step(proposal),{},self.GOAL)
 
     def test_proposal_cannot_inject_raw_capability_or_action(self):
         proposal={
@@ -95,34 +116,34 @@ class UntrustedCapabilityProposalTests(unittest.TestCase):
         }
         with mock.patch.object(runtime,"_load_bound_capability_registry",return_value=self.registry()):
             with self.assertRaisesRegex(runtime.Blocker,"CAPABILITY_PROPOSAL_TOP_LEVEL_FIELD_REJECTED"):
-                runtime._capability_problem_proposal(self.step(proposal),{})
+                runtime._capability_problem_proposal(self.step(proposal),{},self.GOAL)
 
     def test_proposal_cannot_reference_unverified_or_unknown_capability(self):
-        proposal={
+        proposal=self.bound({
             "capability_instances":[{
                 "instance_id":"bad",
                 "capability_id":"unknown.capability",
                 "inputs":{},
             }],
-        }
+        })
         with mock.patch.object(runtime,"_load_bound_capability_registry",return_value=self.registry()):
             with self.assertRaisesRegex(runtime.Blocker,"CAPABILITY_PROPOSAL_SOURCE_NOT_VERIFIED"):
-                runtime._capability_problem_proposal(self.step(proposal),{})
+                runtime._capability_problem_proposal(self.step(proposal),{},self.GOAL)
 
     def test_proposal_rejects_nonzero_incremental_spend_capability(self):
-        proposal={
+        proposal=self.bound({
             "capability_instances":[{
                 "instance_id":"paid",
                 "capability_id":"test.fetch",
                 "inputs":{"url":"https://example.test","json_path":[],"output_path":"a.json"},
             }],
-        }
+        })
         with mock.patch.object(runtime,"_load_bound_capability_registry",return_value=self.registry(spend=0.01)):
             with self.assertRaisesRegex(runtime.Blocker,"CAPABILITY_PROPOSAL_NONZERO_SPEND_REJECTED"):
-                runtime._capability_problem_proposal(self.step(proposal),{})
+                runtime._capability_problem_proposal(self.step(proposal),{},self.GOAL)
 
     def test_proposal_allows_effect_result_but_rejects_raw_result_reference(self):
-        allowed={
+        allowed=self.bound({
             "capability_instances":[{
                 "instance_id":"observe-a",
                 "capability_id":"test.fetch",
@@ -132,12 +153,12 @@ class UntrustedCapabilityProposalTests(unittest.TestCase):
                     "output_path":{"$effect_result":{"effect":"prior.effect","field":"output_path"}},
                 },
             }],
-        }
+        })
         with mock.patch.object(runtime,"_load_bound_capability_registry",return_value=self.registry()):
-            out=runtime._capability_problem_proposal(self.step(allowed),{})
+            out=runtime._capability_problem_proposal(self.step(allowed),{},self.GOAL)
         self.assertIn("$effect_result",out["capability_instances"][0]["inputs"]["output_path"])
 
-        rejected={
+        rejected=self.bound({
             "capability_instances":[{
                 "instance_id":"observe-a",
                 "capability_id":"test.fetch",
@@ -147,10 +168,51 @@ class UntrustedCapabilityProposalTests(unittest.TestCase):
                     "output_path":{"$result":{"cycle":999,"field":"value"}},
                 },
             }],
-        }
+        })
         with mock.patch.object(runtime,"_load_bound_capability_registry",return_value=self.registry()):
             with self.assertRaisesRegex(runtime.Blocker,"CAPABILITY_PROPOSAL_SPECIAL_VALUE_REJECTED"):
-                runtime._capability_problem_proposal(self.step(rejected),{})
+                runtime._capability_problem_proposal(self.step(rejected),{},self.GOAL)
+
+
+    def test_proposal_rejects_goal_hash_mismatch(self):
+        proposal=self.bound({
+            "capability_instances":[{
+                "instance_id":"observe-a",
+                "capability_id":"test.fetch",
+                "inputs":{"url":"https://example.test","json_path":[],"output_path":"a.json"},
+            }],
+        })
+        proposal["goal_sha256"]="0"*64
+        with mock.patch.object(runtime,"_load_bound_capability_registry",return_value=self.registry()):
+            with self.assertRaisesRegex(runtime.Blocker,"CAPABILITY_PROPOSAL_GOAL_HASH_MISMATCH"):
+                runtime._capability_problem_proposal(self.step(proposal),{},self.GOAL)
+
+    def test_proposal_rejects_uncovered_goal_text(self):
+        proposal=self.bound({
+            "capability_instances":[{
+                "instance_id":"observe-a",
+                "capability_id":"test.fetch",
+                "inputs":{"url":"https://example.test","json_path":[],"output_path":"a.json"},
+            }],
+        })
+        proposal["clauses"][0]["end"]=len(self.GOAL)-1
+        proposal["clauses"][0]["text"]=self.GOAL[:-1]
+        with mock.patch.object(runtime,"_load_bound_capability_registry",return_value=self.registry()):
+            with self.assertRaisesRegex(runtime.Blocker,"CAPABILITY_PROPOSAL_GOAL_TEXT_UNCOVERED"):
+                runtime._capability_problem_proposal(self.step(proposal),{},self.GOAL)
+
+    def test_proposal_rejects_required_target_not_represented_by_goal_clause(self):
+        proposal=self.bound({
+            "capability_instances":[{
+                "instance_id":"observe-a",
+                "capability_id":"test.fetch",
+                "inputs":{"url":"https://example.test","json_path":[],"output_path":"a.json"},
+            }],
+        })
+        proposal["clauses"][0]["target_effects"]=[]
+        with mock.patch.object(runtime,"_load_bound_capability_registry",return_value=self.registry()):
+            with self.assertRaisesRegex(runtime.Blocker,"CAPABILITY_PROPOSAL_CLAUSE_TARGETS_INVALID"):
+                runtime._capability_problem_proposal(self.step(proposal),{},self.GOAL)
 
 
 if __name__=="__main__":
