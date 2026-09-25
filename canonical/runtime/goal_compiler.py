@@ -1778,7 +1778,10 @@ def _compile_compound_goal(goal, clauses, registry, root):
     actions=[]
     compiled_parts=[]
     context_paths=[]
+    consumed_indices=set()
     for index,clause in enumerate(clauses):
+        if index in consumed_indices:
+            continue
         lower=clause.lower()
 
         live_collection_read=_compile_live_collection_read(clause,context_paths)
