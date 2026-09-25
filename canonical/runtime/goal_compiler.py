@@ -223,7 +223,26 @@ def decompose_goal(goal):
             sub=sub.strip(" .")
             if sub:
                 clauses.append(sub)
-    return clauses
+
+    # "Independently execute/run X and verify/check/assert Y" is one
+    # verification operation. Splitting the verification tail into a fresh
+    # subgoal causes the compiler to search for a new capability even though
+    # the fresh-execution verifier already owns those assertions.
+    merged=[]
+    i=0
+    while i < len(clauses):
+        current=clauses[i]
+        if (
+            i+1 < len(clauses)
+            and re.search(r"\bindependently\s+(?:execute|run)\b",current,re.IGNORECASE)
+            and re.match(r"^(?:verify|check|assert)\b",clauses[i+1],re.IGNORECASE)
+        ):
+            merged.append(current+" and "+clauses[i+1])
+            i+=2
+            continue
+        merged.append(current)
+        i+=1
+    return merged
 
 
 def _compile_single_goal(goal, registry, root, context_paths=None):
