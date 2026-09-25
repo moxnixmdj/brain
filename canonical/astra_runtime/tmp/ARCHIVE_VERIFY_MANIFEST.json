@@ -1,0 +1,16 @@
+{
+  "records": [
+    {
+      "capability_id": "verification-fixture",
+      "source": {
+        "type": "fixture"
+      },
+      "verification_mission_id": "ASTRA-RUNTIME-CORE-REGRESSION-006",
+      "verification_paths": [
+        "canonical/astra_runtime/evidence/ASTRA-RUNTIME-CORE-REGRESSION-006__RECEIPT.json"
+      ]
+    }
+  ],
+  "schema": "PROJECT_BRAIN_STATUS_MANIFEST_V1",
+  "status_value": "VERIFIED_BOUND_CAPABILITY"
+}

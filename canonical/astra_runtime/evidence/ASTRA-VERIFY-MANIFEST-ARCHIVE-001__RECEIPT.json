@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T00:27:26.932081+00:00",
+  "mission_id": "ASTRA-VERIFY-MANIFEST-ARCHIVE-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_MANIFEST_ARCHIVE_001.json",
+  "mission_sha256": "199799eb3457b329b0f69fb08bdf6cfee4625597c83fb433bb4eeacd20fc87e1",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "401cd32681394f32d48a25eb18f1c0cb18ff4dad7ffc50c5f9804f69f97c9b0a",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

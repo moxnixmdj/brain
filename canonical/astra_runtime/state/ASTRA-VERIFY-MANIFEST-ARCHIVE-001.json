@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T00:27:26.931818+00:00",
+  "created_at_utc": "2026-09-25T00:27:26.868857+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T00:27:26.931593+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\nroot=pathlib.Path('.').resolve()\ndef load(name,path):\n p=root/path; s=importlib.util.spec_from_file_location(name,p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m); return m\ncreator=load('archive_creator','canonical/runtime/bound_capabilities/archive_tarfile.py')\nverifier=load('archive_verifier','canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py')\ntmp=root/'canonical/astra_runtime/tmp'; tmp.mkdir(parents=True,exist_ok=True)\nmanifest_rel='canonical/astra_runtime/tmp/ARCHIVE_VERIFY_MANIFEST.json'\narchive_rel='canonical/astra_runtime/tmp/ARCHIVE_VERIFY_BUNDLE.tar.gz'\nevidence_rel='canonical/astra_runtime/evidence/ASTRA-RUNTIME-CORE-REGRESSION-006__RECEIPT.json'\nmanifest={'schema':'PROJECT_BRAIN_STATUS_MANIFEST_V1','status_value':'VERIFIED_BOUND_CAPABILITY','records':[{'capability_id':'verification-fixture','verification_mission_id':'ASTRA-RUNTIME-CORE-REGRESSION-006','verification_paths':[evidence_rel],'source':{'type':'fixture'}}]}\n(root/manifest_rel).write_text(json.dumps(manifest,indent=2,sort_keys=True)+'\\n',encoding='utf-8')\ncreated=creator.run({'manifest_path':manifest_rel,'output_path':archive_rel},root)\nchecked=verifier.run({'manifest_path':manifest_rel,'archive_path':archive_rel},root)\nassert created['output_verified'] is True\nassert checked['verified'] is True\nassert checked['member_count']==2\nprint(json.dumps({'created':created,'verified':checked},sort_keys=True))\nprint('MANIFEST_ARCHIVE_INDEPENDENTLY_VERIFIED')\nPY",
+        "duration_s": 0.063,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"created\": {\"adapter\": \"archive_tarfile\", \"member_count\": 2, \"members\": [\"canonical/astra_runtime/evidence/ASTRA-RUNTIME-CORE-REGRESSION-006__RECEIPT.json\", \"canonical/astra_runtime/tmp/ARCHIVE_VERIFY_MANIFEST.json\"], \"output_bytes\": 755, \"output_path\": \"canonical/astra_runtime/tmp/ARCHIVE_VERIFY_BUNDLE.tar.gz\", \"output_sha256\": \"5f2b144d07156cbb48cc37d66627f7ba98e32498e3bebcc4c89eb23f23a277d6\", \"output_verified\": true, \"source_sha256\": {\"canonical/astra_runtime/evidence/ASTRA-RUNTIME-CORE-REGRESSION-006__RECEIPT.json\": \"5dd156fbb933f74642609560cc489d1d5702c5c1c58ce788510269a62512489a\", \"canonical/astra_runtime/tmp/ARCHIVE_VERIFY_MANIFEST.json\": \"cb4a936b42564e2b71d2062595969f8a4da2af5a7985c4695224aa53d4f2a41c\"}}, \"verified\": {\"adapter\": \"archive_verify_gnu_tar\", \"archive_path\": \"canonical/astra_runtime/tmp/ARCHIVE_VERIFY_BUNDLE.tar.gz\", \"manifest_path\": \"canonical/astra_runtime/tmp/ARCHIVE_VERIFY_MANIFEST.json\", \"member_count\": 2, \"members\": [\"canonical/astra_runtime/evidence/ASTRA-RUNTIME-CORE-REGRESSION-006__RECEIPT.json\", \"canonical/astra_runtime/tmp/ARCHIVE_VERIFY_MANIFEST.json\"], \"verified\": true}}\nMANIFEST_ARCHIVE_INDEPENDENTLY_VERIFIED\n"
+      },
+      "step_id": "verify-archive-create-and-check",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-VERIFY-MANIFEST-ARCHIVE-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_MANIFEST_ARCHIVE_001.json",
+  "mission_sha256": "199799eb3457b329b0f69fb08bdf6cfee4625597c83fb433bb4eeacd20fc87e1",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T00:27:26.931604+00:00"
+}
