@@ -1,0 +1,7 @@
+{
+  "algorithm": "sha512",
+  "digest_hex": "e3b5c88b3b3d5d95efb89828689508136945a080fcba0bdcd23cd21cff8fb5f93c9d36e747c83bf3cc2fe3c374dcac7452402fe79f47591437cb33a0ce544d50",
+  "integrity": "sha512-47XIizs9XZXvuJgoaJUIE2lFoID8ugvc0jzSHP+Ptfk8nTbnR8g788wv48N03Kx0UkAv559HWRQ3yzOgzlRNUA==",
+  "package": "@msgpack/msgpack",
+  "version": "3.1.3"
+}

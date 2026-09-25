@@ -1,40 +1,45 @@
 {
-  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "constraints": {
+    "auto_acquisition_promoted": {
+      "capability_id": "auto.npm.msgpack-msgpack",
+      "verification_mission_id": "ASTRA-AUTO-VERIFY-NPM-MSGPACK-MSGPACK-69DD66DA69F7",
+      "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-NPM-ACQUIRE-MSGPACKR-003__msgpack-msgpack__69dd66da69f7__AUTO_VERIFY.json"
+    },
+    "execution_surface_constraint_commit": "aadb7a136889387e19b3fa372f1b3864e6cf5a33",
+    "fresh_mission_identity": true,
+    "fresh_node_verification_required": true,
+    "incremental_spend_usd": 0,
+    "manual_binding": false,
+    "manual_supplier": false,
+    "model_controller_required": false,
+    "node_codec_adapter_commit": "8af4310f5e5529bd1aaa2f25409efc3190e99dc5",
+    "node_codec_runner_commit": "94628e47d42c842d32e650e99764d38f4adb490e",
+    "node_decode_compiler_commit": "2194088acc1e80783de2950ac740202bb18f375a",
+    "nodejs_execution_required": true,
+    "npm_acquisition_commit": "201ae70ab54bb5c2c516224868712067a8dcc881",
+    "npm_javascript_library_required": true,
+    "npm_router_commit": "c2a1d9f9f7343800b5bf19a9b8a5e3103d19e8a7",
+    "npm_runtime_args_fix_commit": "19a63e4cb2abece8707b675fdce66ed7999507bd",
+    "npm_runtime_commit": "47951862de02ecc29635ca12793507f659dcfb64",
+    "npm_utils_commit": "bf4709c0ad9c0477cf132d7da9896857fa5707a1",
+    "npm_verifier_commit": "1947a45a6315bed8554f36e9d6bdad7b35b52aad",
+    "source_mission": "ASTRA-RUNTIME-NPM-ACQUIRE-MSGPACKR-002",
+    "supplier_constraint_router_commit": "1c85ce8f54c969faacd467cb58eb26a7343b9dcc"
+  },
+  "goal": "Create canonical/astra_runtime/tmp/NPM_MSGPACK_SOURCE.json containing exactly four records with fields id and text: 1 alpha, 2 beta, 3 gamma, 4 delta. Using a zero-cost npm JavaScript library executed by Node.js, encode those exact records as MessagePack and save canonical/astra_runtime/tmp/NPM_MSGPACK_RECORDS.msgpack. Independently decode the MessagePack artifact in a fresh Node.js process and verify the decoded records are exactly identical to canonical/astra_runtime/tmp/NPM_MSGPACK_SOURCE.json in values, order, field names, and record count.",
   "mission_id": "ASTRA-RUNTIME-NPM-ACQUIRE-MSGPACKR-003",
   "purpose": "Fresh proof of autonomous npm JavaScript codec acquisition, fresh Node verification, promotion, and origin replay.",
-  "goal": "Create canonical/astra_runtime/tmp/NPM_MSGPACK_SOURCE.json containing exactly four records with fields id and text: 1 alpha, 2 beta, 3 gamma, 4 delta. Using a zero-cost npm JavaScript library executed by Node.js, encode those exact records as MessagePack and save canonical/astra_runtime/tmp/NPM_MSGPACK_RECORDS.msgpack. Independently decode the MessagePack artifact in a fresh Node.js process and verify the decoded records are exactly identical to canonical/astra_runtime/tmp/NPM_MSGPACK_SOURCE.json in values, order, field names, and record count.",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
   "steps": [
     {
-      "id": "run-npm-acquisition-pressure",
       "adapter": "goal",
       "goal_ref": "goal",
+      "id": "run-npm-acquisition-pressure",
       "max_controller_actions": 24,
       "verify": {
-        "type": "stdout_contains",
-        "text": "COMPOUND_GOAL_COMPLETE"
+        "text": "COMPOUND_GOAL_COMPLETE",
+        "type": "stdout_contains"
       }
     }
-  ],
-  "constraints": {
-    "incremental_spend_usd": 0,
-    "model_controller_required": false,
-    "manual_supplier": false,
-    "manual_binding": false,
-    "npm_javascript_library_required": true,
-    "nodejs_execution_required": true,
-    "fresh_node_verification_required": true,
-    "fresh_mission_identity": true,
-    "execution_surface_constraint_commit": "aadb7a136889387e19b3fa372f1b3864e6cf5a33",
-    "supplier_constraint_router_commit": "1c85ce8f54c969faacd467cb58eb26a7343b9dcc",
-    "source_mission": "ASTRA-RUNTIME-NPM-ACQUIRE-MSGPACKR-002",
-    "npm_utils_commit": "bf4709c0ad9c0477cf132d7da9896857fa5707a1",
-    "node_codec_runner_commit": "94628e47d42c842d32e650e99764d38f4adb490e",
-    "node_codec_adapter_commit": "8af4310f5e5529bd1aaa2f25409efc3190e99dc5",
-    "npm_acquisition_commit": "201ae70ab54bb5c2c516224868712067a8dcc881",
-    "npm_router_commit": "c2a1d9f9f7343800b5bf19a9b8a5e3103d19e8a7",
-    "npm_runtime_commit": "47951862de02ecc29635ca12793507f659dcfb64",
-    "npm_runtime_args_fix_commit": "19a63e4cb2abece8707b675fdce66ed7999507bd",
-    "npm_verifier_commit": "1947a45a6315bed8554f36e9d6bdad7b35b52aad",
-    "node_decode_compiler_commit": "2194088acc1e80783de2950ac740202bb18f375a"
-  }
+  ]
 }

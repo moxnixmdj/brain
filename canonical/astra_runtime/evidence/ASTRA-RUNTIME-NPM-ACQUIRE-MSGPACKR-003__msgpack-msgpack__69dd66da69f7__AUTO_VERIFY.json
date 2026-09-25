@@ -1,0 +1,34 @@
+{
+  "adapter_result": {
+    "adapter": "node_library_codec",
+    "decode_export": "decode",
+    "encode_export": "encode",
+    "output_bytes": 32,
+    "output_path": "canonical/astra_runtime/tmp/ASTRA-AUTO-VERIFY-NPM-MSGPACK-MSGPACK-69DD66DA69F7_OUTPUT.bin",
+    "output_sha256": "9e0e4c4b36b56bfe36758b790eb035dd3fbf9a1b4f3f625999590dd228d4cb6e",
+    "output_verified": true,
+    "source_path": "canonical/astra_runtime/tmp/ASTRA-AUTO-VERIFY-NPM-MSGPACK-MSGPACK-69DD66DA69F7_SOURCE.json"
+  },
+  "capability_id": "auto.npm.msgpack-msgpack",
+  "dependency": {
+    "digest_hex": "e3b5c88b3b3d5d95efb89828689508136945a080fcba0bdcd23cd21cff8fb5f93c9d36e747c83bf3cc2fe3c374dcac7452402fe79f47591437cb33a0ce544d50",
+    "integrity": "sha512-47XIizs9XZXvuJgoaJUIE2lFoID8ugvc0jzSHP+Ptfk8nTbnR8g788wv48N03Kx0UkAv559HWRQ3yzOgzlRNUA==",
+    "package": "@msgpack/msgpack",
+    "package_root": "/home/runner/work/brain/brain/canonical/astra_runtime/tmp/npm_bound/msgpack_msgpack__3.1.3__20d4b6b0ddbc18fe/package",
+    "status": "MATERIALIZED_VERIFIED",
+    "version": "3.1.3"
+  },
+  "independent_output_bytes": 32,
+  "independent_output_sha256": "9e0e4c4b36b56bfe36758b790eb035dd3fbf9a1b4f3f625999590dd228d4cb6e",
+  "independent_verified": true,
+  "schema": "PROJECT_BRAIN_AUTO_BINDING_VERIFICATION_V1",
+  "semantic_roundtrip": {
+    "decode_export": "decode",
+    "fresh_node_decode_invocation": true,
+    "implementation_independent": false,
+    "package": "@msgpack/msgpack",
+    "verified": true
+  },
+  "status": "VERIFIED",
+  "verification_mission_id": "ASTRA-AUTO-VERIFY-NPM-MSGPACK-MSGPACK-69DD66DA69F7"
+}
