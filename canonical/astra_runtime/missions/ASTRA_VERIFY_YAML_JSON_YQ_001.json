@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-VERIFY-YAML-JSON-YQ-001",
+  "purpose": "Fresh independent effect verification of generic YAML-to-JSON conversion with pinned Ubuntu yq.",
+  "steps": [
+    {
+      "id": "verify-yq-adapter",
+      "adapter": "shell",
+      "command": "set -euo pipefail\nsudo apt-get install -y --no-install-recommends 'yq=3.1.0-3' >/dev/null\npython - <<'PY'\nimport hashlib,importlib.util,json,pathlib,re,sys\nroot=pathlib.Path('.').resolve()\np=root/'canonical/runtime/bound_capabilities/yq_yaml_json.py'\ns=importlib.util.spec_from_file_location('yq_verify',p); m=importlib.util.module_from_spec(s); sys.modules[s.name]=m; s.loader.exec_module(m)\nsrc='.github/workflows/astra-shared-runtime.yml'\nout='canonical/astra_runtime/tmp/YQ_WORKFLOW_VERIFY.json'\nres=m.run({'yaml_path':src,'output_path':out},root)\ndata=json.loads((root/out).read_text(encoding='utf-8'))\nraw=(root/src).read_text(encoding='utf-8')\nassert data['name']=='ASTRA Shared Runtime Mission'\nassert re.search(r'(?m)^name:\\s*ASTRA Shared Runtime Mission\\s*$',raw)\njobs=data.get('jobs') or {}; assert jobs\nfor job_id in jobs:\n assert re.search(r'(?m)^  '+re.escape(job_id)+r':\\s*$',raw),job_id\nuses=[]\nfor job in jobs.values():\n for step in job.get('steps') or []:\n  if isinstance(step,dict) and step.get('uses'): uses.append(str(step['uses']))\nassert uses\nfor ref in uses:\n assert re.search(r'(?m)^\\s*-?\\s*uses:\\s*'+re.escape(ref)+r'\\s*$',raw),ref\nassert 'workflow_dispatch' in (data.get('on') or {})\nprint(json.dumps({'adapter_result':res,'workflow_name':data['name'],'job_ids':sorted(jobs),'uses':uses,'raw_source_sha256':hashlib.sha256(raw.encode()).hexdigest(),'independent_raw_support':True},sort_keys=True))\nprint('YQ_YAML_JSON_INDEPENDENTLY_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "YQ_YAML_JSON_INDEPENDENTLY_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "producer": "yq",
+    "independent_verifier": "raw_yaml_regex_crosscheck",
+    "pinned_package": {
+      "name": "yq",
+      "version": "3.1.0-3",
+      "sha256": "ef935e2b644e6c70ed080396dbe3d93330d1482fd9ce6f34813bdcf3616cb809"
+    }
+  }
+}
