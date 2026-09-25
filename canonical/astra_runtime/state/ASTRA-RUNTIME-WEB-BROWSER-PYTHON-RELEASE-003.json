@@ -1,21 +1,283 @@
 {
-  "blocker": {
-    "adapter": "goal",
-    "error": "Blocker:BOUND_PYTHON_STDLIB_MODULE_REQUIRED",
-    "mission_id": "ASTRA-RUNTIME-WEB-BROWSER-PYTHON-RELEASE-003",
-    "observed_at_utc": "2026-09-25T02:33:27.105266+00:00",
-    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
-    "step_id": "execute-browser-python-release",
-    "step_index": 0
-  },
+  "completed_at_utc": "2026-09-25T02:34:43.194112+00:00",
   "created_at_utc": "2026-09-25T02:33:20.597897+00:00",
-  "history": [],
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T02:34:43.193417+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "goal",
+        "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+        "cycles": 6,
+        "final_summary": "COMPOUND_GOAL_COMPLETE",
+        "goal_compilation": {
+          "clauses": [
+            "Using a real rendered browser, open https://www.python.org/downloads/",
+            "Determine the latest stable Python 3 release shown on the page",
+            "Save a full-page screenshot to canonical/astra_runtime/tmp/PYTHON_DOWNLOADS.png and save canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_RESULT.json containing source_url, final_url, page_title, latest_stable_python3, and observed_text_evidence",
+            "Finally independently verify from the official Python downloads page, without trusting the browser extraction, that the claimed latest_stable_python3 string is present and corresponds to the current stable Python 3 release shown there"
+          ],
+          "compiled_parts": [
+            {
+              "index": 0,
+              "inputs": {
+                "result_path": "canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_RESULT.json",
+                "screenshot_path": "canonical/astra_runtime/tmp/PYTHON_DOWNLOADS.png",
+                "url": "https://www.python.org/downloads/"
+              },
+              "mode": "VERIFIED_CAPABILITY",
+              "score": 26,
+              "selected_capability": "web.browser.rendered.capture.chromedriver",
+              "subgoal": "Using a real rendered browser, open https://www.python.org/downloads/",
+              "target_effects": [
+                "web.browser.rendered.capture"
+              ]
+            },
+            {
+              "capability_id": "json.query.jq",
+              "extraction_mode": "ANCHORED_SEMVER_FROM_CAPTURED_TEXT",
+              "field": "latest_stable_python3",
+              "index": 1,
+              "input_path": "canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_RESULT.json",
+              "major": "3",
+              "mode": "VERIFIED_STRUCTURED_SEMANTIC_EXTRACTION",
+              "output_path": "canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_RESULT.json",
+              "product": "Python",
+              "subgoal": "Determine the latest stable Python 3 release shown on the page"
+            },
+            {
+              "index": 2,
+              "mode": "CAUSAL_ARTIFACT_ALREADY_PRODUCED",
+              "paths": [
+                "canonical/astra_runtime/tmp/PYTHON_DOWNLOADS.png",
+                "canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_RESULT.json"
+              ],
+              "subgoal": "Save a full-page screenshot to canonical/astra_runtime/tmp/PYTHON_DOWNLOADS.png and save canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_RESULT.json containing source_url, final_url, page_title, latest_stable_python3, and observed_text_evidence"
+            },
+            {
+              "capability_id": "web.release.verify.independent_http",
+              "index": 3,
+              "major": "3",
+              "mode": "INDEPENDENT_WEB_RELEASE_VERIFICATION",
+              "producer_independent_verifier": true,
+              "product": "Python",
+              "result_path": "canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_RESULT.json",
+              "subgoal": "Finally independently verify from the official Python downloads page, without trusting the browser extraction, that the claimed latest_stable_python3 string is present and corresponds to the current stable Python 3 release shown there",
+              "version_field": "latest_stable_python3"
+            }
+          ],
+          "compiler_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN"
+        },
+        "planner_model_last": null,
+        "planner_source": null,
+        "planner_transport": null,
+        "planning_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN",
+        "returncode": 0,
+        "stdout": "COMPOUND_GOAL_COMPLETE",
+        "trace": [
+          {
+            "cycle": 0,
+            "plan": {
+              "args": {
+                "capability_id": "web.browser.rendered.capture.chromedriver",
+                "result_path": "canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_RESULT.json",
+                "screenshot_path": "canonical/astra_runtime/tmp/PYTHON_DOWNLOADS.png",
+                "url": "https://www.python.org/downloads/"
+              },
+              "expect": {
+                "field": "output_verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "browser_chromedriver",
+              "capability_id": "web.browser.rendered.capture.chromedriver",
+              "dependency": {
+                "executable": "chromedriver",
+                "resolved_path": "/usr/bin/chromedriver",
+                "status": "LOCAL_VERIFIED",
+                "type": "system_tool"
+              },
+              "final_url": "https://www.python.org/downloads/",
+              "output_verified": true,
+              "page_title": "Download Python | Python.org",
+              "rendered": true,
+              "result_path": "canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_RESULT.json",
+              "screenshot_bytes": 885055,
+              "screenshot_path": "canonical/astra_runtime/tmp/PYTHON_DOWNLOADS.png",
+              "screenshot_sha256": "f549568c9bcb3869e88c3b16f3d6f304e0ac0292be088fb4dcd67364c389101b",
+              "source_url": "https://www.python.org/downloads/",
+              "text": "Skip to content\nPython\nPSF\nDocs\nPyPI\nJobs\nCommunity\nDonate\n \nSearch This Site\n GO\nSocialize\nAbout\n \nDownloads\n \nDocumentation\n \nCommunity\n \nSuccess Stories\n \nNews\n \nEvents\nDownload the latest source release\n\nDownload Python 3.14.7\n\nLooking for Python with a different OS? Python for Windows, Linux/Unix, macOS, Android, iOS, other\n\nWant to help test development versions of Python 3.15? Pre-releases, Docker images\n\nActive Python releases\n\nFor more information visit the Python Developer's Guide.\n\nPython version Maintenance status \u00a0 First released End of support Release schedule\n3.15 pre-release Download 2026-10-01 (planned) 2031-10 PEP 790\n3.14 bugfix Download 2025-10-07 2030-10 PEP 745\n3.13 bugfix Download 2024-10-07 2029-10 PEP 719\n3.12 security Download 2023-10-02 2028-10 PEP 693\n3.11 security Download 2022-10-24 2027-10 PEP 664\n3.10 security Download 2021-10-04 2026-10 PEP 619\n3.9 end-of-life, last release was 3.9.25 Download 2020-10-05 2025-10-31 PEP 596\nLooking for a specific release?\n\nPython releases by version number:\n\nRelease version Release date \u00a0 Click for more\nPython 3.14.7 Aug. 5, 2026  Download Release notes\nPython 3.14.6 June 10, 2026  Download Release notes\nPython 3.14.5 May 10, 2026  Download Release notes\nPython 3.14.4 April 7, 2026  Download Release notes\nPython 3.14.3 Feb. 3, 2026  Download Release notes\nPython 3.14.2 Dec. 5, 2025  Download Release notes\nPython 3.14.1 Dec. 2, 2025  Download Release notes\nPython 3.14.0 Oct. 7, 2025  Download Release notes\nPython 3.13.15 Aug. 5, 2026  Download Release notes\nPython 3.13.14 June 10, 2026  Download Release notes\nPython 3.13.13 April 7, 2026  Download Release notes\nPython 3.13.12 Feb. 3, 2026  Download Release notes\nPython 3.13.11 Dec. 5, 2025  Download Release notes\nPython 3.13.10 Dec. 2, 2025  Download Release notes\nPython 3.13.9 Oct. 14, 2025  Download Release notes\nPython 3.13.8 Oct. 7, 2025  Download Release notes\nPython 3.13.7 Aug. 14, 2025  Download Release notes\nPython 3.13.6 Aug. 6, 2025  Download Release notes\nPython 3.13.5 June 11, 2025  Download Release notes\nPython 3.13.4 June 3, 2025  Download Release notes\nPython 3.13.3 April 8, 2025  Download Release notes\nPython 3.13.2 Feb. 4, 2025  Download Release notes\nPython 3.13.1 Dec. 3, 2024  Download Release notes\nPython 3.13.0 Oct. 7, 2024  Download Release notes\nPython 3.12.14 Aug. 12, 2026  Download Release notes\nPython 3.12.13 March 3, 2026  Download Release notes\nPython 3.12.12 Oct. 9, 2025  Download Release notes\nPython 3.12.11 June 3, 2025  Download Release notes\nPython 3.12.10 April 8, 2025  Download Release notes\nPython 3.12.9 Feb. 4, 2025  Download Release notes\nPython 3.12.8 Dec. 3, 2024  Download Release notes\nPython 3.12.7 Oct. 1, 2024  Download Release notes\nPython 3.12.6 Sept. 6, 2024  Download Release notes\nPython 3.12.5 Aug. 6, 2024  Download Release notes\nPython 3.12.4 June 6, 2024  Download Release notes\nPython 3.12.3 April 9, 2024  Download Release notes\nPython 3.12.2 Feb. 6, 2024  Download Release notes\nPython 3.12.1 Dec. 8, 2023  Download Release notes\nPython 3.12.0 Oct. 2, 2023  Download Release notes\nPython 3.11.16 Aug. 12, 2026  Download Release notes\nPython 3.11.15 March 3, 2026  Download Release notes\nPython 3.11.14 Oct. 9, 2025  Download Release notes\nPython 3.11.13 June 3, 2025  Download Release notes\nPython 3.11.12 April 8, 2025  Download Release notes\nPython 3.11.11 Dec. 3, 2024  Download Release notes\nPython 3.11.10 Sept. 7, 2024  Download Release notes\nPython 3.11.9 April 2, 2024  Download Release notes\nPython 3.11.8 Feb. 6, 2024  Download Release notes\nPython 3.11.7 Dec. 4, 2023  Download Release notes\nPython 3.11.6 Oct. 2, 2023  Download Release notes\nPython 3.11.5 Aug. 24, 2023  Download Release notes\nPython 3.11.4 June 6, 2023  Download Release notes\nPython 3.11.3 April 5, 2023  Download Release notes\nPython 3.11.2 Feb. 8, 2023  Download Release notes\nPython 3.11.1 Dec. 6, 2022  Download Release notes\nPython 3.11.0 Oct. 24, 2022  Download Release notes\nPython 3.10.21 Aug. 12, 2026  Download Release notes\nPython 3.10.20 March 3, 2026  Download Release notes\nPython 3.10.19 Oct. 9, 2025  Download Release notes\nPython 3.10.18 June 3, 2025  Download Release notes\nPython 3.10.17 April 8, 2025  Download Release notes\nPython 3.10.16 Dec. 3, 2024  Download Release notes\nPython 3.10.15 Sept. 7, 2024  Download Release notes\nPython 3.10.14 March 19, 2024  Download Release notes\nPython 3.10.13 Aug. 24, 2023  Download Release notes\nPython 3.10.12 June 6, 2023  Download Release notes\nPython 3.10.11 April 5, 2023  Download Release notes\nPython 3.10.10 Feb. 8, 2023  Download Release notes\nPython 3.10.9 Dec. 6, 2022  Download Release notes\nPython 3.10.8 Oct. 11, 2022  Download Release notes\nPython 3.10.7 Sept. 6, 2022  Download Release notes\nPython 3.10.6 Aug. 2, 2022  Download Release notes\nPython 3.10.5 June 6, 2022  Download Release notes\nPython 3.10.4 March 24, 2022  Download Release notes\nPython 3.10.3 March 16, 2022  Download Release notes\nPython 3.10.2 Jan. 14, 2022  Download Release notes\nPython 3.10.1 Dec. 6, 2021  Download Release notes\nPython 3.10.0 Oct. 4, 2021  Download Release notes\nPython 3.9.25 Oct. 31, 2025  Download Release notes\nPython 3.9.24 Oct. 9, 2025  Download Release notes\nPython 3.9.23 June 3, 2025  Download Release notes\nPython 3.9.22 April 8, 2025  Download Release notes\nPython 3.9.21 Dec. 3, 2024  Download Release notes\nPython 3.9.20 Sept. 6, 2024  Download Release notes\nPython 3.9.19 March 19, 2024  Download Release notes\nPython 3.9.18 Aug. 24, 2023  Download Release notes\nPython 3.9.17 June 6, 2023  Download Release notes\nPython 3.9.16 Dec. 6, 2022  Download Release notes\nPython 3.9.15 Oct. 11, 2022  Download Release notes\nPython 3.9.14 Sept. 6, 2022  Download Release notes\nPython 3.9.13 May 17, 2022  Download Release notes\nPython 3.9.12 March 23, 2022  Download Release notes\nPython 3.9.11 March 16, 2022  Download Release notes\nPython 3.9.10 Jan. 14, 2022  Download Release notes\nPython 3.9.9 Nov. 15, 2021  Download Release notes\nPython 3.9.8 Nov. 5, 2021  Download Release notes\nPython 3.9.7 Aug. 30, 2021  Download Release notes\nPython 3.9.6 June 28, 2021  Download Release notes\nPython 3.9.5 May 3, 2021  Download Release notes\nPython 3.9.4 April 4, 2021  Download Release notes\nPython 3.9.2 Feb. 19, 2021  Download Release notes\nPython 3.9.1 Dec. 7, 2020  Download Release notes\nPython 3.9.0 Oct. 5, 2020  Download Release notes\nPython 3.8.20 Sept. 6, 2024  Download Release notes\nPython 3.8.19 March 19, 2024  Download Release notes\nPython 3.8.18 Aug. 24, 2023  Download Release notes\nPython 3.8.17 June 6, 2023  Download Release notes\nPython 3.8.16 Dec. 6, 2022  Download Release notes\nPython 3.8.15 Oct. 11, 2022  Download Release notes\nPython 3.8.14 Sept. 6, 2022  Download Release notes\nPython 3.8.13 March 16, 2022  Download Release notes\nPython 3.8.12 Aug. 30, 2021  Download Release notes\nPython 3.8.11 June 28, 2021  Download Release notes\nPython 3.8.10 May 3, 2021  Download Release notes\nPython 3.8.9 April 2, 2021  Download Release notes\nPython 3.8.8 Feb. 19, 2021  Download Release notes\nPython 3.8.7 Dec. 21, 2020  Download Release notes\nPython 3.8.6 Sept. 24, 2020  Download Release notes\nPython 3.8.5 July 20, 2020  Download Release notes\nPython 3.8.4 July 13, 2020  Download Release notes\nPython 3.8.3 May 13, 2020  Download Release notes\nPython 3.8.2 Feb. 24, 2020  Download Release notes\nPython 3.8.1 Dec. 18, 2019  Download Release notes\nPython 3.8.0 Oct. 14, 2019  Download Release notes\nPython 3.7.17 June 6, 2023  Download Release notes\nPython 3.7.16 Dec. 6, 2022  Download Release notes\nPython 3.7.15 Oct. 11, 2022  Download Release notes\nPython 3.7.14 Sept. 6, 2022  Download Release notes\nPython 3.7.13 March 16, 2022  Download Release notes\nPython 3.7.12 Sept. 4, 2021  Download Release notes\nPython 3.7.11 June 28, 2021  Download Release notes\nPython 3.7.10 Feb. 15, 2021  Download Release notes\nPython 3.7.9 Aug. 17, 2020  Download Release notes\nPython 3.7.8 June 27, 2020  Download Release notes\nPython 3.7.7 March 10, 2020  Download Release notes\nPython 3.7.6 Dec. 18, 2019  Download Release notes\nPython 3.7.5 Oct. 15, 2019  Download Release notes\nPython 3.7.4 July 8, 2019  Download Release notes\nPython 3.7.3 March 25, 2019  Download Release notes\nPython 3.7.2 Dec. 24, 2018  Download Release notes\nPython 3.7.1 Oct. 20, 2018  Download Release notes\nPython 3.7.0 June 27, 2018  Download Release notes\nPython 3.6.15 Sept. 4, 2021  Download Release notes\nPython 3.6.14 June 28, 2021  Download Release notes\nPython 3.6.13 Feb. 15, 2021  Download Release notes\nPython 3.6.12 Aug. 17, 2020  Download Release notes\nPython 3.6.11 June 27, 2020  Download Release notes\nPython 3.6.10 Dec. 18, 2019  Download Release notes\nPython 3.6.9 July 2, 2019  Download Release notes\nPython 3.6.8 Dec. 24, 2018  Download Release notes\nPython 3.6.7 Oct. 20, 2018  Download Release notes\nPython 3.6.6 June 27, 2018  Download Release notes\nPython 3.6.5 March 28, 2018  Download Release notes\nPython 3.6.4 Dec. 19, 2017  Download Release notes\nPython 3.6.3 Oct. 3, 2017  Download Release notes\nPython 3.6.2 July 17, 2017  Download Release notes\nPython 3.6.1 March 21, 2017  Download Release notes\nPython 3.6.0 Dec. 23, 2016  Download Release notes\nPython 3.5.10 Sept. 5, 2020  Download Release notes\nPython 3.5.9 Nov. 2, 2019  Download Release notes\nPython 3.5.8 Oct. 29, 2019  Download Release notes\nPython 3.5.7 March 18, 2019  Download Release notes\nPython 3.5.6 Aug. 2, 2018  Download Release notes\nPython 3.5.5 Feb. 5, 2018  Download Release notes\nPython 3.5.4 Aug. 8, 2017  Download Release notes\nPython 3.5.3 Jan. 17, 2017  Download Release notes\nPython 3.5.2 June 27, 2016  Download Release notes\nPython 3.5.1 Dec. 7, 2015  Download Release notes\nPython 3.5.0 Sept. 13, 2015  Download Release notes\nPython 3.4.10 March 18, 2019  Download Release notes\nPython 3.4.9 Aug. 2, 2018  Download Release notes\nPython 3.4.8 Feb. 5, 2018  Download Release notes\nPython 3.4.7 Aug. 9, 2017  Download Release notes\nPython 3.4.6 Jan. 17, 2017  Download Release notes\nPython 3.4.5 June 27, 2016  Download Release notes\nPython 3.4.4 Dec. 21, 2015  Download Release notes\nPython 3.4.3 Feb. 25, 2015  Download Release notes\nPython 3.4.2 Oct. 13, 2014  Download Release notes\nPython 3.4.1 May 19, 2014  Download Release notes\nPython 3.4.0 March 17, 2014  Download Release notes\nPython 3.3.7 Sept. 19, 2017  Download Release notes\nPython 3.3.6 Oct. 12, 2014  Download Release notes\nPython 3.3.5 March 9, 2014  Download Release notes\nPython 3.3.4 Feb. 9, 2014  Download Release notes\nPython 3.3.3 Nov. 17, 2013  Download Release notes\nPython 3.3.2 May 15, 2013  Download Release notes\nPython 3.3.1 April 6, 2013  Download Release notes\nPython 3.3.0 Sept. 29, 2012  Download Release notes\nPython 3.2.6 Oct. 12, 2014  Download Release notes\nPython 3.2.5 May 15, 2013  Download Release notes\nPython 3.2.4 April 6, 2013  Download Release notes\nPython 3.2.3 April 10, 2012  Download Release notes\nPython 3.2.2 Sept. 3, 2011  Download Release notes\nPython 3.2.1 July 9, 2011  Download Release notes\nPython 3.2.0 Feb. 20, 2011  Download Release notes\nPython 3.1.5 April 9, 2012  Download Release notes\nPython 3.1.4 June 11, 2011  Download Release notes\nPython 3.1.3 Nov. 27, 2010  Download Release notes\nPython 3.1.2 March 20, 2010  Download Release notes\nPython 3.1.1 Aug. 17, 2009  Download Release notes\nPython 3.1.0 June 26, 2009  Download Release notes\nPython 3.0.1 Feb. 13, 2009  Download Release notes\nPython 3.0.0 Dec. 3, 2008  Download Release notes\nPython 2.7.18 April 20, 2020  Download Release notes\nPython 2.7.17 Oct. 19, 2019  Download Release notes\nPython 2.7.16 March 4, 2019  Download Release notes\nPython 2.7.15 May 1, 2018  Download Release notes\nPython 2.7.14 Sept. 16, 2017  Download Release notes\nPython 2.7.13 Dec. 17, 2016  Download Release notes\nPython 2.7.12 June 25, 2016  Download Release notes\nPython 2.7.11 Dec. 5, 2015  Download Release notes\nPython 2.7.10 May 23, 2015  Download Release notes\nPython 2.7.9 Dec. 10, 2014  Download Release notes\nPython 2.7.8 July 2, 2014  Download Release notes\nPython 2.7.7 June 1, 2014  Download Release notes\nPython 2.7.6 Nov. 10, 2013  Download Release notes\nPython 2.7.5 May 12, 2013  Download Release notes\nPython 2.7.4 April 6, 2013  Download Release notes\nPython 2.7.3 April 9, 2012  Download Release notes\nPython 2.7.2 June 11, 2011  Download Release notes\nPython 2.7.1 Nov. 27, 2010  Download Release notes\nPython 2.7.0 July 3, 2010  Download Release notes\nPython 2.6.9 Oct. 29, 2013  Download Release notes\nPython 2.6.8 April 10, 2012  Download Release notes\nPython 2.6.7 June 3, 2011  Download Release notes\nPython 2.6.6 Aug. 24, 2010  Download Release notes\nPython 2.6.5 March 18, 2010  Download Release notes\nPython 2.6.4 Oct. 26, 2009  Download Release notes\nPython 2.6.3 Oct. 2, 2009  Download Release notes\nPython 2.6.2 April 14, 2009  Download Release notes\nPython 2.6.1 Dec. 4, 2008  Download Release notes\nPython 2.6.0 Oct. 2, 2008  Download Release notes\nPython 2.5.6 May 26, 2011  Download Release notes\nPython 2.5.5 Jan. 31, 2010  Download Release notes\nPython 2.5.4 Dec. 23, 2008  Download Release notes\nPython 2.5.3 Dec. 19, 2008  Download Release notes\nPython 2.5.2 Feb. 21, 2008  Download Release notes\nPython 2.5.1 April 19, 2007  Download Release notes\nPython 2.5.0 Sept. 19, 2006  Download Release notes\nPython 2.4.6 Dec. 19, 2008  Download Release notes\nPython 2.4.5 March 11, 2008  Download Release notes\nPython 2.4.4 Oct. 18, 2006  Download Release notes\nPython 2.4.3 April 15, 2006  Download Release notes\nPython 2.4.2 Sept. 27, 2005  Download Release notes\nPython 2.4.1 March 30, 2005  Download Release notes\nPython 2.4.0 Nov. 30, 2004  Download Release notes\nPython 2.3.7 March 11, 2008  Download Release notes\nPython 2.3.6 Nov. 1, 2006  Download Release notes\nPython 2.3.5 Feb. 8, 2005  Download Release notes\nPython 2.3.4 May 27, 2004  Download Release notes\nPython 2.3.3 Dec. 19, 2003  Download Release notes\nPython 2.3.2 Oct. 3, 2003  Download Release notes\nPython 2.3.1 Sept. 23, 2003  Download Release notes\nPython 2.3.0 July 29, 2003  Download Release notes\nPython 2.2.3 May 30, 2003  Download Release notes\nPython 2.2.2 Oct. 14, 2002  Download Release notes\nPython 2.2.1 April 10, 2002  Download Release notes\nPython 2.2.0 Dec. 21, 2001  Download Release notes\nPython 2.1.3 April 9, 2002  Download Release notes\nPython 2.0.1 June 22, 2001  Download Release notes\n\nView older releases\n\nSponsors\n\nVisionary sponsors help to host Python downloads.\n\nGoogle\n\nAnthropic, PBC\n\nBloomberg\n\nNVIDIA\n\nMeta\n\nFastly\n\nHudson River Trading\n\nLicenses\n\nAll Python releases are Open Source. Historically, most, but not all, Python releases have also been GPL-compatible. The Licenses page details GPL-compatibility and Terms and Conditions.\n\nRead more\n\nSources\n\nFor most Unix systems, you must download and compile the source code. The same source code archive can also be used to build the Windows and Mac versions, and is the starting point for ports to all other platforms.\n\nDownload the latest Python 3 source.\n\nRead more\n\nAlternative implementations\n\nThis site hosts the \"traditional\" implementation of Python (nicknamed CPython). A number of alternative implementations are available as well.\n\nRead more\n\nHistory\n\nPython was created in the early 1990s by Guido van Rossum at Stichting Mathematisch Centrum in the Netherlands as a successor of a language called ABC. Guido remains Python\u2019s principal author, although it includes many contributions from others.\n\nRead more\n\nRelease schedules\nPython 3.15 release schedule\nPython 3.14 release schedule\nPython 3.13 release schedule\nPython 3.12 release schedule\nPython 3.11 release schedule\nPython 3.10 release schedule\nPython 3.9 release schedule\n\n\n\nSee Status of Python versions for all an overview of all versions, including unsupported.\n\nInformation about specific ports, and developer info\nWindows\nmacOS\nAndroid\nOther platforms\nSource\nPython developer's guide\nPython issue tracker\nHow to verify your downloaded files are genuine\nSigstore verification\n\nStarting with the Python 3.11.0, Python 3.10.7, and Python 3.9.14 releases, CPython release artifacts are signed with Sigstore. See our dedicated Sigstore Information page for how it works.\n\nOpenPGP verification\n\nPython versions before 3.14 are also signed using OpenPGP private keys of the respective release manager. In this case, verification through the release manager's public key is also possible. See our dedicated OpenPGP Verification page for how it works.\n\n\nSee PEP 761 for why OpenPGP key verification was dropped in Python 3.14.\n\nWindows\n\n(Updated for Azure Trusted Signing, which applies for all releases chronologically from 3.14.0a1)\nThe Windows installers and all binaries produced as part of each Python release are signed using an Authenticode signing certificate issued to the Python Software Foundation. This can be verified by viewing the properties of any executable file, looking at the Digital Signatures tab, and confirming the name of the signer. Our full certificate subject is CN = Python Software Foundation, O = Python Software Foundation, L = Beaverton, S = Oregon, C = US and as of 14th October 2024 the certificate authority is Microsoft Identity Verification Root Certificate Authority. Our previous certificates were issued by DigiCert.\nNote that some executables may not be signed, notably, the default pip command. These are not built as part of Python, but are included from third-party libraries. Files that are intended to be modified before use cannot be signed and so will not have a signature.\n\nmacOS installer packages\n\nInstaller packages for Python on macOS downloadable from python.org are signed with with an Apple Developer ID Installer certificate.\n\nAs of Python 3.11.4 and 3.12.0b1 (2023-05-23), release installer packages are signed with certificates issued to the Python Software Foundation (Apple Developer ID BMM5U3QVKW).\n\nInstaller packages for previous releases were signed with certificates issued to Ned Deily (DJ3H93M7VJ).\n\nOther useful items\nLooking for third-party Python modules? The Python Package Index has many of them.\nYou can view the standard documentation online, or you can download it in HTML, EPUB and other formats. See the main Documentation page.\nTip: even if you download a ready-made binary for your platform, it makes sense to also download the source. This lets you browse the standard library (the subdirectory Lib) and the standard collections of tools (Tools) that come with it. There's a lot you can learn from the source!\nWant to contribute?\n\nWant to contribute? See the Python Developer's Guide to learn about how Python development is managed.\n\nAbout\nApplications\nQuotes\nGetting Started\nHelp\nDownloads\nAll releases\nSource code\nWindows\nmacOS\nAndroid\niOS\nOther Platforms\nLicense\nAlternative Implementations\nDocumentation\nDocs\nAudio/Visual Talks\nBeginner's Guide\nFAQ\nNon-English Docs\nPEP Index\nPython Books\nPython Essays\nCommunity\nDiversity\nMailing Lists\nIRC\nForums\nPSF Annual Impact Report\nPython Conferences\nSpecial Interest Groups\nPython Logo\nPython Wiki\nCode of Conduct\nCommunity Awards\nGet Involved\nShared Stories\nSuccess Stories\nArts\nBusiness\nEducation\nEngineering\nGovernment\nScientific\nSoftware Development\nNews\nPython News\nPSF Newsletter\nPSF News\nPyCon US News\nPython Insider\nNews from the Community\nEvents\nPython Events\nUser Group Events\nPython Events Archive\nUser Group Events Archive\nSubmit an Event\nContributing\nDeveloper's Guide\nIssue Tracker\npython-dev list\nCore Mentorship\nReport a Security Issue\nHelp & General Contact\n \nDiversity Initiatives\n \nSubmit Website Bug\n \nStatus \n\nCopyright \u00a92001-2026. \u00a0Python Software Foundation \u00a0Legal Statements \u00a0Privacy Notice",
+              "text_nonempty": true
+            }
+          },
+          {
+            "cycle": 1,
+            "plan": {
+              "args": {
+                "capability_id": "json.query.jq",
+                "filter": "(.observed_text // .text // .content // \"\") as $t | ($t | match(\"(?:Download\\\\s+|Latest:\\\\s*)?Python\\\\s+(?<version>3\\\\.\\\\d+\\\\.\\\\d+)\";\"i\")) as $m | ($m.captures | map(select(.name==\"version\")) | .[0].string) as $v | {source_url:.source_url, final_url:.final_url, page_title:.page_title, \"latest_stable_python3\":$v, observed_text_evidence:$m.string} | if (.source_url|type)==\"string\" and (.final_url|type)==\"string\" and (.page_title|type)==\"string\" and ($v|type)==\"string\" and ($v|length)>0 then . else error(\"SEMANTIC_FACT_FIELDS_INCOMPLETE\") end",
+                "input_path": "canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_RESULT.json",
+                "output_path": "canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_RESULT.json",
+                "raw_output": false,
+                "require_nonempty": true,
+                "timeout_s": 60
+              },
+              "expect": {
+                "field": "output_verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "jq_query",
+              "argv": [
+                "jq",
+                "",
+                "(.observed_text // .text // .content // \"\") as $t | ($t | match(\"(?:Download\\\\s+|Latest:\\\\s*)?Python\\\\s+(?<version>3\\\\.\\\\d+\\\\.\\\\d+)\";\"i\")) as $m | ($m.captures | map(select(.name==\"version\")) | .[0].string) as $v | {source_url:.source_url, final_url:.final_url, page_title:.page_title, \"latest_stable_python3\":$v, observed_text_evidence:$m.string} | if (.source_url|type)==\"string\" and (.final_url|type)==\"string\" and (.page_title|type)==\"string\" and ($v|type)==\"string\" and ($v|length)>0 then . else error(\"SEMANTIC_FACT_FIELDS_INCOMPLETE\") end",
+                "/home/runner/work/brain/brain/canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_RESULT.json"
+              ],
+              "capability_id": "json.query.jq",
+              "dependency": {
+                "origin": "Ubuntu",
+                "packages": [
+                  {
+                    "archive_sha256": "f59183392f84fe67b407b494d8ba6185e9b0e4a106ffcb369490bd20a83fd40e",
+                    "name": "jq",
+                    "version": "1.7.1-3ubuntu0.24.04.2"
+                  }
+                ],
+                "status": "INSTALLED_VERIFIED"
+              },
+              "input_path": "canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_RESULT.json",
+              "output_bytes": 247,
+              "output_path": "canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_RESULT.json",
+              "output_sha256": "f4c0ab23d3003c006690c46e230dc93c4dc2b448813e4e8ac38353e6fc58ae64",
+              "output_text_excerpt": "{\n  \"source_url\": \"https://www.python.org/downloads/\",\n  \"final_url\": \"https://www.python.org/downloads/\",\n  \"page_title\": \"Download Python | Python.org\",\n  \"latest_stable_python3\": \"3.14.7\",\n  \"observed_text_evidence\": \"Download Python 3.14.7\"\n}\n",
+              "output_text_utf8_verified": true,
+              "output_verified": true,
+              "returncode": 0,
+              "stderr": ""
+            }
+          },
+          {
+            "cycle": 2,
+            "plan": {
+              "args": {
+                "path": "canonical/astra_runtime/tmp/PYTHON_DOWNLOADS.png"
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "assert_file_exists"
+            },
+            "result": {
+              "exists": true,
+              "path": "canonical/astra_runtime/tmp/PYTHON_DOWNLOADS.png",
+              "sha256": "f549568c9bcb3869e88c3b16f3d6f304e0ac0292be088fb4dcd67364c389101b",
+              "type": "assert_file_exists",
+              "verified": true
+            }
+          },
+          {
+            "cycle": 3,
+            "plan": {
+              "args": {
+                "path": "canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_RESULT.json"
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "assert_file_exists"
+            },
+            "result": {
+              "exists": true,
+              "path": "canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_RESULT.json",
+              "sha256": "f4c0ab23d3003c006690c46e230dc93c4dc2b448813e4e8ac38353e6fc58ae64",
+              "type": "assert_file_exists",
+              "verified": true
+            }
+          },
+          {
+            "cycle": 4,
+            "plan": {
+              "args": {
+                "capability_id": "web.release.verify.independent_http",
+                "major": "3",
+                "max_bytes": 3000000,
+                "product": "Python",
+                "result_path": "canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_RESULT.json",
+                "timeout_s": 30,
+                "version_field": "latest_stable_python3"
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "web_release_verify",
+              "capability_id": "web.release.verify.independent_http",
+              "claimed_string_present": true,
+              "claimed_version": "3.14.7",
+              "dependency": {
+                "modules": [
+                  "urllib.request",
+                  "html.parser",
+                  "gzip"
+                ],
+                "python_version": "3.12.14",
+                "status": "LOCAL_VERIFIED",
+                "type": "python_stdlib"
+              },
+              "final_url": "https://www.python.org/downloads/",
+              "major": "3",
+              "observed_text_evidence": "Python 3.14.7",
+              "observed_version": "3.14.7",
+              "parser": "html.parser",
+              "producer_independent_verifier": true,
+              "product": "Python",
+              "response_bytes": 215042,
+              "source_url": "https://www.python.org/downloads/",
+              "transport": "urllib.request",
+              "verified": true,
+              "version_field": "latest_stable_python3"
+            }
+          },
+          {
+            "cycle": 5,
+            "plan": {
+              "args": {
+                "summary": "COMPOUND_GOAL_COMPLETE"
+              },
+              "type": "finish"
+            },
+            "result": {
+              "summary": "COMPOUND_GOAL_COMPLETE",
+              "type": "finish"
+            }
+          }
+        ]
+      },
+      "step_id": "execute-browser-python-release",
+      "step_index": 0
+    }
+  ],
   "mission_id": "ASTRA-RUNTIME-WEB-BROWSER-PYTHON-RELEASE-003",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_WEB_BROWSER_PYTHON_RELEASE_003.json",
-  "mission_sha256": "fee471b0f233fe06640410dc5ba27bd2776bf0ad6d1a793199fb6fcf03eca9aa",
-  "next_step": 0,
+  "mission_sha256": "0982b01687685c5001133f06ac2d6541b078ed1cb46e6286c54297c3562899a0",
+  "next_step": 1,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
-  "status": "BLOCKED",
-  "updated_at_utc": "2026-09-25T02:33:27.105412+00:00"
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T02:34:43.193437+00:00"
 }
