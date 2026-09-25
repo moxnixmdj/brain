@@ -16,6 +16,8 @@
     "incremental_spend_usd": 0,
     "model_controller_required": false,
     "read_only_regression": true,
-    "replay_after_url_regex_fix_commit": "636f6a01199ef9e6dbd4ec39d9266df5a412832f"
+    "replay_after_url_regex_fix_commit": "636f6a01199ef9e6dbd4ec39d9266df5a412832f",
+    "replay_after_future_output_binding_commit": "c931faf76cb5b2794bb4379018c5bedeb8e71ab1",
+    "replay_after_future_output_regression_commit": "065ef7d4cc15dbd89ff241ecf2ebbed860d25e25"
   }
 }
