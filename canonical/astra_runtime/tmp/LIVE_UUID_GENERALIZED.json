@@ -1,11 +1,11 @@
 {
   "document_ready_state": "complete",
   "final_url": "https://httpbin.org/uuid",
-  "observed_text": "{\n  \"uuid\": \"28d8bfdf-799b-4302-b491-fac3838a8c6b\"\n}\n",
+  "observed_text": "{\n  \"uuid\": \"b3c9c178-59a4-4eb0-83b9-e08f08f5a1f1\"\n}\n",
   "page_title": "",
-  "screenshot_bytes": 10306,
+  "screenshot_bytes": 10734,
   "screenshot_path": "canonical/astra_runtime/tmp/LIVE_UUID_GENERALIZED.png",
-  "screenshot_sha256": "563c46485177b282da82709a9d5517385e5396c8606ca36fd2aafacd31f3c351",
+  "screenshot_sha256": "e153e8145cc75fa1eb91c2e51ed8d2b9cdfc7d51a57870301ef01ff20d25c348",
   "source_url": "https://httpbin.org/uuid",
   "viewport": {
     "height": 857,

@@ -1,21 +1,212 @@
 {
-  "blocker": {
-    "adapter": "goal",
-    "error": "Blocker:ACTION_EXPECTATION_FAILED:verified:OBSERVED=False",
-    "mission_id": "ASTRA-RUNTIME-LIVE-CONDITIONAL-GENERALIZATION-001",
-    "observed_at_utc": "2026-09-25T04:20:58.529222+00:00",
-    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
-    "step_id": "run-generalized-live-conditional",
-    "step_index": 0
-  },
+  "completed_at_utc": "2026-09-25T04:27:05.003938+00:00",
   "created_at_utc": "2026-09-25T04:20:46.401246+00:00",
-  "history": [],
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T04:27:05.003382+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "goal",
+        "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+        "cycles": 4,
+        "final_summary": "COMPOUND_GOAL_COMPLETE",
+        "goal_compilation": {
+          "clauses": [
+            "Using a real rendered browser, open https://httpbin.org/uuid, save a screenshot to canonical/astra_runtime/tmp/LIVE_UUID_GENERALIZED.png, and save the rendered result to canonical/astra_runtime/tmp/LIVE_UUID_GENERALIZED.json",
+            "Read the UUID from that live result",
+            "If its first hexadecimal character is one of a,b,c,d,e,f create canonical/astra_runtime/tmp/LIVE_UUID_GENERALIZED_CLASSIFICATION.json with uuid equal to the observed UUID and bucket equal to LETTER; otherwise create it with the same observed uuid and bucket equal to DIGIT",
+            "Finally independently reread both files and verify the bucket is correct for the actual UUID"
+          ],
+          "compiled_parts": [
+            {
+              "index": 0,
+              "inputs": {
+                "result_path": "canonical/astra_runtime/tmp/LIVE_UUID_GENERALIZED.json",
+                "screenshot_path": "canonical/astra_runtime/tmp/LIVE_UUID_GENERALIZED.png",
+                "url": "https://httpbin.org/uuid"
+              },
+              "mode": "VERIFIED_CAPABILITY",
+              "score": 30,
+              "selected_capability": "web.browser.rendered.capture.chromedriver",
+              "subgoal": "Using a real rendered browser, open https://httpbin.org/uuid, save a screenshot to canonical/astra_runtime/tmp/LIVE_UUID_GENERALIZED.png, and save the rendered result to canonical/astra_runtime/tmp/LIVE_UUID_GENERALIZED.json",
+              "target_effects": [
+                "web.browser.rendered.capture",
+                "web.browser.rendered.interact"
+              ]
+            },
+            {
+              "index": 1,
+              "mode": "DEFERRED_RUNTIME_VALUE_READ",
+              "source_path": "canonical/astra_runtime/tmp/LIVE_UUID_GENERALIZED.json",
+              "subgoal": "Read the UUID from that live result"
+            },
+            {
+              "high_bucket": "DIGIT",
+              "index": 2,
+              "low_bucket": "LETTER",
+              "low_chars": "abcdef",
+              "mode": "VERIFIED_RUNTIME_CONDITIONAL",
+              "output_path": "canonical/astra_runtime/tmp/LIVE_UUID_GENERALIZED_CLASSIFICATION.json",
+              "source_path": "canonical/astra_runtime/tmp/LIVE_UUID_GENERALIZED.json",
+              "subgoal": "If its first hexadecimal character is one of a,b,c,d,e,f create canonical/astra_runtime/tmp/LIVE_UUID_GENERALIZED_CLASSIFICATION.json with uuid equal to the observed UUID and bucket equal to LETTER; otherwise create it with the same observed uuid and bucket equal to DIGIT"
+            },
+            {
+              "classification_path": "canonical/astra_runtime/tmp/LIVE_UUID_GENERALIZED_CLASSIFICATION.json",
+              "index": 3,
+              "mode": "INDEPENDENT_RUNTIME_CONDITIONAL_VERIFICATION",
+              "source_path": "canonical/astra_runtime/tmp/LIVE_UUID_GENERALIZED.json",
+              "subgoal": "Finally independently reread both files and verify the bucket is correct for the actual UUID"
+            }
+          ],
+          "compiler_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN"
+        },
+        "planner_model_last": null,
+        "planner_source": null,
+        "planner_transport": null,
+        "planning_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN",
+        "returncode": 0,
+        "stdout": "COMPOUND_GOAL_COMPLETE",
+        "trace": [
+          {
+            "cycle": 0,
+            "plan": {
+              "args": {
+                "capability_id": "web.browser.rendered.capture.chromedriver",
+                "result_path": "canonical/astra_runtime/tmp/LIVE_UUID_GENERALIZED.json",
+                "screenshot_path": "canonical/astra_runtime/tmp/LIVE_UUID_GENERALIZED.png",
+                "url": "https://httpbin.org/uuid"
+              },
+              "expect": {
+                "field": "output_verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "browser_chromedriver",
+              "capability_id": "web.browser.rendered.capture.chromedriver",
+              "dependency": {
+                "executable": "chromedriver",
+                "resolved_path": "/usr/bin/chromedriver",
+                "status": "LOCAL_VERIFIED",
+                "type": "system_tool"
+              },
+              "final_url": "https://httpbin.org/uuid",
+              "output_verified": true,
+              "page_title": "",
+              "rendered": true,
+              "result_path": "canonical/astra_runtime/tmp/LIVE_UUID_GENERALIZED.json",
+              "screenshot_bytes": 10734,
+              "screenshot_path": "canonical/astra_runtime/tmp/LIVE_UUID_GENERALIZED.png",
+              "screenshot_sha256": "e153e8145cc75fa1eb91c2e51ed8d2b9cdfc7d51a57870301ef01ff20d25c348",
+              "source_url": "https://httpbin.org/uuid",
+              "text": "{\n  \"uuid\": \"b3c9c178-59a4-4eb0-83b9-e08f08f5a1f1\"\n}\n",
+              "text_nonempty": true
+            }
+          },
+          {
+            "cycle": 1,
+            "plan": {
+              "args": {
+                "capability_id": "json.query.jq",
+                "filter": "(.observed_text | fromjson | .uuid) as $u | {uuid:$u,bucket:(if (\"abcdef\" | contains(($u[0:1]|ascii_downcase))) then \"LETTER\" else \"DIGIT\" end),_branch:(if (\"abcdef\" | contains(($u[0:1]|ascii_downcase))) then \"LOW\" else \"HIGH\" end)}",
+                "input_path": "canonical/astra_runtime/tmp/LIVE_UUID_GENERALIZED.json",
+                "output_path": "canonical/astra_runtime/tmp/LIVE_UUID_GENERALIZED_CLASSIFICATION.json",
+                "raw_output": false,
+                "require_nonempty": true,
+                "timeout_s": 60
+              },
+              "expect": {
+                "field": "output_verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "jq_query",
+              "argv": [
+                "jq",
+                "",
+                "(.observed_text | fromjson | .uuid) as $u | {uuid:$u,bucket:(if (\"abcdef\" | contains(($u[0:1]|ascii_downcase))) then \"LETTER\" else \"DIGIT\" end),_branch:(if (\"abcdef\" | contains(($u[0:1]|ascii_downcase))) then \"LOW\" else \"HIGH\" end)}",
+                "/home/runner/work/brain/brain/canonical/astra_runtime/tmp/LIVE_UUID_GENERALIZED.json"
+              ],
+              "capability_id": "json.query.jq",
+              "dependency": {
+                "origin": "Ubuntu",
+                "packages": [
+                  {
+                    "archive_sha256": "f59183392f84fe67b407b494d8ba6185e9b0e4a106ffcb369490bd20a83fd40e",
+                    "name": "jq",
+                    "version": "1.7.1-3ubuntu0.24.04.2"
+                  }
+                ],
+                "status": "INSTALLED_VERIFIED"
+              },
+              "input_path": "canonical/astra_runtime/tmp/LIVE_UUID_GENERALIZED.json",
+              "output_bytes": 95,
+              "output_path": "canonical/astra_runtime/tmp/LIVE_UUID_GENERALIZED_CLASSIFICATION.json",
+              "output_sha256": "83637e6bca1ff63d330d6a76562b555d921a2385d8734d4b51c6d773e0e86c21",
+              "output_text_excerpt": "{\n  \"uuid\": \"b3c9c178-59a4-4eb0-83b9-e08f08f5a1f1\",\n  \"bucket\": \"LETTER\",\n  \"_branch\": \"LOW\"\n}\n",
+              "output_text_utf8_verified": true,
+              "output_verified": true,
+              "returncode": 0,
+              "stderr": ""
+            }
+          },
+          {
+            "cycle": 2,
+            "plan": {
+              "args": {
+                "bucket_field": "_branch",
+                "classification_path": "canonical/astra_runtime/tmp/LIVE_UUID_GENERALIZED_CLASSIFICATION.json",
+                "low_chars": "abcdef",
+                "output_value_field": "uuid",
+                "source_key": "uuid",
+                "source_path": "canonical/astra_runtime/tmp/LIVE_UUID_GENERALIZED.json"
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "assert_hex_prefix_bucket"
+            },
+            "result": {
+              "claimed_bucket": "LOW",
+              "claimed_value": "b3c9c178-59a4-4eb0-83b9-e08f08f5a1f1",
+              "expected_bucket": "LOW",
+              "observed_value": "b3c9c178-59a4-4eb0-83b9-e08f08f5a1f1",
+              "type": "assert_hex_prefix_bucket",
+              "verified": true
+            }
+          },
+          {
+            "cycle": 3,
+            "plan": {
+              "args": {
+                "summary": "COMPOUND_GOAL_COMPLETE"
+              },
+              "type": "finish"
+            },
+            "result": {
+              "summary": "COMPOUND_GOAL_COMPLETE",
+              "type": "finish"
+            }
+          }
+        ]
+      },
+      "step_id": "run-generalized-live-conditional",
+      "step_index": 0
+    }
+  ],
   "mission_id": "ASTRA-RUNTIME-LIVE-CONDITIONAL-GENERALIZATION-001",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_LIVE_CONDITIONAL_GENERALIZATION_001.json",
-  "mission_sha256": "307f5b93ddfdaa0c9bba621d9ba64c620399f6352ce820826676ce2d1fe97a8b",
-  "next_step": 0,
+  "mission_sha256": "a1e5cf34290f9830bcab1b5a0a57d13ee5f54613ee5ac2970cb0c8b0b8116591",
+  "next_step": 1,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
-  "status": "BLOCKED",
-  "updated_at_utc": "2026-09-25T04:20:58.529381+00:00"
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T04:27:05.003401+00:00"
 }
