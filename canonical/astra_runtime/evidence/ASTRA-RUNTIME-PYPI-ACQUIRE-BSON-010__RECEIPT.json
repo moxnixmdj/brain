@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T19:22:39.814050+00:00",
+  "mission_id": "ASTRA-RUNTIME-PYPI-ACQUIRE-BSON-010",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_PYPI_ACQUIRE_BSON_010.json",
+  "mission_sha256": "cfb688a545c4cbf61e13e831cdb18dc2f0bf67f1a7cf81f3ccb7863769e017ba",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "438480ef3074e3e1b3eda6c70683bb984bf6cb519fb59684abec5608134b5199",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

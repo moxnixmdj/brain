@@ -1,0 +1,174 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "plan": {
+        "args": {
+          "fields": [
+            "id",
+            "text"
+          ],
+          "output_path": "canonical/astra_runtime/tmp/BSON_SOURCE.json",
+          "records": [
+            {
+              "id": 1,
+              "text": "alpha"
+            },
+            {
+              "id": 2,
+              "text": "beta"
+            },
+            {
+              "id": 3,
+              "text": "gamma"
+            },
+            {
+              "id": 4,
+              "text": "delta"
+            }
+          ]
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "write_json_records"
+      },
+      "result": {
+        "fields": [
+          "id",
+          "text"
+        ],
+        "output_bytes": 170,
+        "output_path": "canonical/astra_runtime/tmp/BSON_SOURCE.json",
+        "output_sha256": "13eb9a391dade8114674863c439be32ae34ffd8a1a2bd4837625826039cb8a54",
+        "record_count": 4,
+        "type": "write_json_records",
+        "verified": true
+      }
+    },
+    {
+      "cycle": 1,
+      "plan": {
+        "args": {
+          "capability_id": "auto.pypi.bson-modern",
+          "decode_callable": "loads",
+          "decode_kwargs": {},
+          "encode_callable": "dumps",
+          "encode_kwargs": {},
+          "envelope_key": "__project_brain_payload__",
+          "json_path": "canonical/astra_runtime/tmp/BSON_SOURCE.json",
+          "module": "bson",
+          "output_path": "canonical/astra_runtime/tmp/BSON_RECORDS.bson"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "result": {
+        "adapter": "python_library_codec",
+        "capability_id": "auto.pypi.bson-modern",
+        "dependency": {
+          "closure_sha256": "72f5d32b23edd318fdd0a19f5c0db6b48eb85d5f6d299fd469130a66678cc5b7",
+          "dependency_wheel_count": 3,
+          "project": "bson-modern",
+          "status": "INSTALLED_VERIFIED",
+          "version": "1.1.0",
+          "wheels": [
+            {
+              "filename": "bson_modern-1.1.0-py3-none-any.whl",
+              "project": "bson-modern",
+              "sha256": "80bc582f4618db44eb3dd0c98271f9031a6360b4e642a4da926c9c3628aa4c5e",
+              "version": "1.1.0"
+            },
+            {
+              "filename": "python_dateutil-2.9.0.post0-py2.py3-none-any.whl",
+              "project": "python-dateutil",
+              "sha256": "a8b2bc7bffae282281c8140a97d3aa9c14da0b136dfe83f850eea9a5f7470427",
+              "version": "2.9.0.post0"
+            },
+            {
+              "filename": "six-1.17.0-py2.py3-none-any.whl",
+              "project": "six",
+              "sha256": "4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274",
+              "version": "1.17.0"
+            }
+          ]
+        },
+        "encode_callable": "dumps",
+        "module": "bson",
+        "output_bytes": 164,
+        "output_path": "canonical/astra_runtime/tmp/BSON_RECORDS.bson",
+        "output_sha256": "c52985e62e017cea9fdc87de5760ac37598503050d88bb53d7de69b745b2f017",
+        "output_verified": true,
+        "source_path": "canonical/astra_runtime/tmp/BSON_SOURCE.json"
+      }
+    },
+    {
+      "cycle": 2,
+      "plan": {
+        "args": {
+          "binary_path": "canonical/astra_runtime/tmp/BSON_RECORDS.bson",
+          "capability_id": "auto.pypi.bson-modern",
+          "decode_callable": "loads",
+          "decode_kwargs": {},
+          "envelope_key": "__project_brain_payload__",
+          "json_path": "canonical/astra_runtime/tmp/BSON_SOURCE.json",
+          "mode": "decode_verify",
+          "module": "bson"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "result": {
+        "adapter": "python_library_codec",
+        "binary_path": "canonical/astra_runtime/tmp/BSON_RECORDS.bson",
+        "capability_id": "auto.pypi.bson-modern",
+        "decode_callable": "loads",
+        "dependency": {
+          "closure_sha256": "72f5d32b23edd318fdd0a19f5c0db6b48eb85d5f6d299fd469130a66678cc5b7",
+          "dependency_wheel_count": 3,
+          "project": "bson-modern",
+          "status": "ALREADY_INSTALLED",
+          "version": "1.1.0"
+        },
+        "mode": "decode_verify",
+        "module": "bson",
+        "record_count": 4,
+        "source_path": "canonical/astra_runtime/tmp/BSON_SOURCE.json",
+        "verified": true
+      }
+    },
+    {
+      "cycle": 3,
+      "plan": {
+        "args": {
+          "summary": "COMPOUND_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "COMPOUND_GOAL_COMPLETE",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-09-25T19:22:38.801183+00:00",
+  "mission_id": "ASTRA-RUNTIME-PYPI-ACQUIRE-BSON-010",
+  "next_action_index": 4,
+  "plan_sha256": "8f842b5d8756dc95bffe7a13cd4f1342a44f7f208829e336a45cb67c981be0e5",
+  "resume_count": 0,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "run-held-out-codec-goal",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-09-25T19:22:39.812568+00:00"
+}
