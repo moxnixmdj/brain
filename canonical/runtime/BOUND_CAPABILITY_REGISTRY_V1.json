@@ -808,7 +808,19 @@
         "version_family": "3.x"
       },
       "incremental_spend_usd": 0,
-      "status": "BOUND_PENDING_INDEPENDENT_VERIFICATION"
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "mission_id": "ASTRA-VERIFY-PYTHON-SOURCE-AUDIT-001",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PYTHON-SOURCE-AUDIT-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-PYTHON-SOURCE-AUDIT-001.json",
+        "independently_verified": true,
+        "observed_effect": {
+          "files": 26,
+          "functions": 151,
+          "classes": 12,
+          "distinct_imported_modules": 41
+        }
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
