@@ -178,7 +178,7 @@ class GoalCompilerTests(unittest.TestCase):
             "Find the VERIFIED_BOUND_CAPABILITY whose source type is pypi. "
             "Fetch that project's authoritative live PyPI metadata from the metadata URL recorded in the registry. "
             "Verify that the pinned version and wheel filename still exist in that metadata, download that exact wheel, compute its SHA-256, "
-            "verify it equals the wheel_sha256 recorded in the registry. "
+            "and verify it equals the wheel_sha256 recorded in the registry. "
             "Create canonical/astra_runtime/tmp/LIVE_PYPI_PROVENANCE_AUDIT.json containing the capability ID, project, pinned version, wheel filename, recorded hash, live metadata hash, downloaded artifact hash, metadata URL, artifact URL, and a final verified boolean. "
             "Finally independently read the report and fail unless all three hashes are identical and verified is true."
         )
