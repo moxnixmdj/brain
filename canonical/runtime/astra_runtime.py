@@ -2736,7 +2736,11 @@ def _goal_action(action):
             for host in (domain,"www."+domain if not domain.startswith("www.") else domain):
                 if host not in authority_hosts:
                     authority_hosts.append(host)
-        for host in list(authority_hosts):
+        internal_seed_pages=[]
+        host_index=0
+        while host_index<len(authority_hosts) and host_index<24:
+            host=authority_hosts[host_index]
+            host_index+=1
             root_url="https://"+host+"/"
             try:
                 raw,final_url=fetch_discovery(root_url,800000)
@@ -2746,6 +2750,7 @@ def _goal_action(action):
                     continue
                 text=raw.decode("utf-8","replace")
                 discovered=0
+                root_links=[]
                 for raw_href in href_re.findall(text):
                     href=urllib.parse.urljoin(final_url,raw_href.replace("&amp;","&"))
                     try:
@@ -2758,16 +2763,116 @@ def _goal_action(action):
                     if candidate_host not in authority_hosts and len(authority_hosts)<24:
                         authority_hosts.append(candidate_host)
                         discovered+=1
-                    if discovery_score(href,180)>180:
+                    root_links.append(href)
+                    normalized_href=re.sub(r"[^a-z0-9]+","",href.lower())
+                    distinctive_ok=(
+                        not distinctive_query_tokens
+                        or any(
+                            re.sub(r"[^a-z0-9]+","",token) in normalized_href
+                            for token in distinctive_query_tokens
+                        )
+                    )
+                    score=discovery_score(href,180)
+                    if distinctive_ok and score>180:
                         candidates.append({
                           "url":href,"host":candidate_host,
                           "matched_authority_domains":authority_match(candidate_host),
-                          "score":discovery_score(href,180),
+                          "score":score,
                           "engine":"authority_root_link"
                         })
-                attempts.append({"engine":"authority_root","url":root_url,"status":"OK","discovered_hosts":discovered})
+                internal_seed_pages.append((final_url,0))
+                # Prefer likely navigation/index pages for bounded internal crawl.
+                for href in root_links:
+                    low=href.lower()
+                    if any(k in low for k in ("index","numerical","catalog","search","api","docs","documentation","reference","spec","pep")):
+                        internal_seed_pages.append((href,1))
+                attempts.append({
+                  "engine":"authority_root","url":root_url,"status":"OK",
+                  "discovered_hosts":discovered,"internal_seed_count":len(root_links)
+                })
             except Exception as exc:
                 attempts.append({"engine":"authority_root","url":root_url,"status":"FETCH_FAILED","error":type(exc).__name__})
+
+        # Shallow bounded internal crawl. This bridges authority home pages to
+        # structured/index pages when no sitemap exists, without turning source
+        # discovery into an unbounded crawler.
+        internal_queue=[]
+        internal_seen=set()
+        for item in internal_seed_pages:
+            if item[0] not in {u for u,_ in internal_queue}:
+                internal_queue.append(item)
+        internal_docs=0
+        while internal_queue and internal_docs<48:
+            page_url,depth=internal_queue.pop(0)
+            if page_url in internal_seen or depth>2:
+                continue
+            internal_seen.add(page_url)
+            try:
+                parsed_page=urllib.parse.urlparse(page_url)
+                page_host=(parsed_page.hostname or "").lower()
+                if not authority_match(page_host):
+                    continue
+                raw,final_url=fetch_discovery(page_url,1200000)
+                final_host=(urllib.parse.urlparse(final_url).hostname or "").lower()
+                if not authority_match(final_host):
+                    attempts.append({"engine":"authority_internal","url":page_url,"status":"REDIRECT_OUTSIDE_AUTHORITY"})
+                    continue
+                text=raw.decode("utf-8","replace")
+                internal_docs+=1
+                local_candidates=0
+                queued=0
+                for raw_href in href_re.findall(text):
+                    href=urllib.parse.urljoin(final_url,raw_href.replace("&amp;","&"))
+                    try:
+                        parsed=urllib.parse.urlparse(href)
+                    except Exception:
+                        continue
+                    hhost=(parsed.hostname or "").lower()
+                    if not authority_match(hhost):
+                        continue
+                    normalized_href=re.sub(r"[^a-z0-9]+","",href.lower())
+                    distinctive_ok=(
+                        not distinctive_query_tokens
+                        or any(
+                            re.sub(r"[^a-z0-9]+","",token) in normalized_href
+                            for token in distinctive_query_tokens
+                        )
+                    )
+                    score=discovery_score(href,235)
+                    if distinctive_ok and score>235:
+                        candidates.append({
+                          "url":href,"host":hhost,
+                          "matched_authority_domains":authority_match(hhost),
+                          "score":score,
+                          "engine":"authority_internal"
+                        })
+                        local_candidates+=1
+                    if depth<2 and href not in internal_seen and len(internal_queue)<120:
+                        low=href.lower()
+                        nav_hint=any(k in low for k in (
+                            "index","numerical","catalog","search","api","docs",
+                            "documentation","reference","spec","pep","standards"
+                        ))
+                        # Also follow links whose anchor URL already contains
+                        # any query token; this is a bounded causal search.
+                        token_hint=any(
+                            re.sub(r"[^a-z0-9]+","",t) in normalized_href
+                            for t in query_tokens
+                            if len(re.sub(r"[^a-z0-9]+","",t))>=3
+                        )
+                        if nav_hint or token_hint:
+                            internal_queue.append((href,depth+1))
+                            queued+=1
+                attempts.append({
+                  "engine":"authority_internal","url":page_url,"status":"OK",
+                  "depth":depth,"candidate_count":local_candidates,
+                  "queued_links":queued
+                })
+            except Exception as exc:
+                attempts.append({
+                  "engine":"authority_internal","url":page_url,
+                  "status":"FETCH_FAILED","error":type(exc).__name__
+                })
 
         sitemap_queue=[]
         sitemap_seen=set()
@@ -2956,6 +3061,12 @@ def _goal_action(action):
                 score=100*len(matched)
                 qtokens=[t for t in re.findall(r"[a-z0-9]+",query.lower()) if len(t)>=3]
                 low=href.lower()
+                normalized_href=re.sub(r"[^a-z0-9]+","",low)
+                if distinctive_query_tokens and not any(
+                    re.sub(r"[^a-z0-9]+","",token) in normalized_href
+                    for token in distinctive_query_tokens
+                ):
+                    continue
                 score+=sum(3 for t in qtokens if t in low)
                 local.append({
                   "url":href,"host":host,"matched_authority_domains":matched,
