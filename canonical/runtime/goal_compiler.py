@@ -258,7 +258,7 @@ def decompose_goal(goal):
     parts=re.split(r"(?<=[.!?])\s+(?=[A-Z])|\b[Tt]hen\b",text)
     clauses=[]
     action_connector=re.compile(
-        r"\s+and\s+(?=(?:read|inspect|create|generate|convert|extract|verify|check|render|analy[sz]e)\b)",
+        r"\s+and\s+(?=(?:read|inspect|create|generate|convert|extract|verify|check|render|analy[sz]e|save|write|store)\b)",
         re.IGNORECASE,
     )
     for part in parts:
@@ -1074,6 +1074,77 @@ def _compile_pdf_json_key_verification(subgoal, context_paths, registry, root, r
     }
 
 
+def _compile_latest_stable_release_from_capture(subgoal, context_paths, registry, root):
+    """Extract an anchored latest-stable semantic version from prior captured page text.
+
+    The producer is intentionally generic: it consumes a structured JSON
+    capture containing observed_text/text/content and rewrites that JSON to a
+    compact fact record. jq is already independently verified, so this adds no
+    new parser/runtime dependency.
+    """
+    lower=subgoal.lower()
+    m=re.search(
+        r"^(?:determine|identify|find|extract)\s+the\s+latest\s+stable\s+"
+        r"([A-Za-z][A-Za-z0-9_.+-]*)(?:\s+(\d+))?\s+(?:release|version)\b",
+        subgoal,re.IGNORECASE
+    )
+    if not m:
+        return None
+    entry=(registry or {}).get("json.query.jq")
+    if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
+        return None
+    json_paths=[str(p) for p in context_paths if pathlib.Path(str(p)).suffix.lower()==".json"]
+    if not json_paths:
+        return None
+    input_path=json_paths[-1]
+    product=m.group(1)
+    major=m.group(2)
+    product_key=re.sub(r"[^a-z0-9]+","",product.lower())
+    field="latest_stable_"+product_key+(major or "")
+    version_pattern=(re.escape(product)+r"\s+(?<version>"+(re.escape(major)+r"\." if major else r"\d+\.")+r"\d+\.\d+)")
+    # Prefer an explicit Download/Latest anchor, but remain page-layout tolerant
+    # while keeping the product token adjacent to the captured semantic version.
+    anchored=r"(?:Download\s+|Latest:\s*)?"+version_pattern
+    jq_regex=json.dumps(anchored)
+    field_json=json.dumps(field)
+    filt=(
+      '(.observed_text // .text // .content // "") as $t '
+      f'| ($t | match({jq_regex};"i")) as $m '
+      '| ($m.captures | map(select(.name=="version")) | .[0].string) as $v '
+      f'| {{source_url:.source_url, final_url:.final_url, page_title:.page_title, '
+      f'{field_json}:$v, observed_text_evidence:$m.string}} '
+      '| if (.source_url|type)=="string" and (.final_url|type)=="string" '
+      'and (.page_title|type)=="string" and ($v|type)=="string" and ($v|length)>0 '
+      'then . else error("SEMANTIC_FACT_FIELDS_INCOMPLETE") end'
+    )
+    action={
+      "type":"invoke_capability",
+      "args":{
+        "capability_id":"json.query.jq",
+        "input_path":input_path,
+        "filter":filt,
+        "output_path":input_path,
+        "raw_output":False,
+        "require_nonempty":True,
+        "timeout_s":60,
+      },
+      "expect":{"type":"field_equals","field":"output_verified","value":True},
+    }
+    return {
+      "action":action,
+      "output_path":input_path,
+      "evidence":{
+        "input_path":input_path,
+        "output_path":input_path,
+        "field":field,
+        "product":product,
+        "major":major,
+        "capability_id":"json.query.jq",
+        "mode":"ANCHORED_SEMVER_FROM_CAPTURED_TEXT",
+      }
+    }
+
+
 def _compile_compound_goal(goal, clauses, registry, root):
     actions=[]
     compiled_parts=[]
@@ -1301,6 +1372,20 @@ def _compile_compound_goal(goal, clauses, registry, root):
                 **manifest["evidence"],
             })
             continue
+        semantic_fact=_compile_latest_stable_release_from_capture(
+            clause,context_paths,registry,root
+        )
+        if semantic_fact is not None:
+            actions.append(semantic_fact["action"])
+            if semantic_fact["output_path"] not in context_paths:
+                context_paths.append(semantic_fact["output_path"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"VERIFIED_STRUCTURED_SEMANTIC_EXTRACTION",
+                **semantic_fact["evidence"],
+            })
+            continue
+
         try:
             part=_compile_single_goal(
                 clause,registry,root,
