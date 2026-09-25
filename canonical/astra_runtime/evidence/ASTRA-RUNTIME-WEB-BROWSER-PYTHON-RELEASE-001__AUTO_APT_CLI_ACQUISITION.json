@@ -164,7 +164,7 @@
               {
                 "flag": "--help",
                 "returncode": 0,
-                "text": "Type \"q\" to close application.\n[[]         ### Invalid configuration file. ###"
+                "text": "[2026-09-25 02:18:56.488707] [0x00007f962c935300] [error]    0# 0x000055E5B2561152\n 1# 0x00007FF128445330\n 2# 0x00007FF12849EC0C\n 3# 0x00007FF12844527E\n 4# 0x00007FF128445330\n 5# 0x000055E5B25F0251\n 6# 0x000055E5B25F25E6\n 7# 0x000055E5B25F3006\n 8# 0x00007FF12B13C99F\n 9# 0x00007FF12849CB84\n10# 0x00007FF128529ECC\n\nType \"q\" to close application.\n[[]         ### Invalid configuration file. ###"
               }
             ]
           }
@@ -231,7 +231,7 @@
       }
     },
     {
-      "error": "ProbeFailure:APT_INSTALL_FAILED:E: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/x/xdg-desktop-portal/xdg-desktop-portal_1.18.4-1ubuntu2.24.04.2_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\n",
+      "error": "ProbeFailure:APT_INSTALL_FAILED:E: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.147.219.192 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/x/xdg-desktop-portal/xdg-desktop-portal_1.18.4-1ubuntu2.24.04.2_amd64.deb  404  Not Found [IP: 52.147.219.192 80]\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\n",
       "status": "PROBE_FAILED",
       "supplier": {
         "_acquisition_object_matches": 1,
