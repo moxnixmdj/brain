@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T02:32:50.583073+00:00",
+  "mission_id": "ASTRA-GOAL-COMPILER-REGRESSION-FULL-BROWSER-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_GOAL_COMPILER_REGRESSION_FULL_BROWSER_002.json",
+  "mission_sha256": "6135fe4e02e7456cec3b783525a8b78ae8103d1775fd0e6fa4b011ef47ed8581",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "d1fcab833aab703405e632fbeb7115c06d5ed48ff65c81fb67c5c24ac71fb7a0",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

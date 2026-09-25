@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T02:32:50.582686+00:00",
+  "created_at_utc": "2026-09-25T02:32:50.380358+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T02:32:50.582276+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython canonical/tests/test_goal_compiler.py",
+        "duration_s": 0.202,
+        "returncode": 0,
+        "stderr": "test_barcode_goal_selects_verified_barcode_not_qr (__main__.GoalCompilerTests.test_barcode_goal_selects_verified_barcode_not_qr) ... ok\ntest_browser_capture_then_semver_extraction_compiles (__main__.GoalCompilerTests.test_browser_capture_then_semver_extraction_compiles) ... ok\ntest_browser_clause_binds_outputs_from_future_clause (__main__.GoalCompilerTests.test_browser_clause_binds_outputs_from_future_clause) ... ok\ntest_browser_goal_binds_url_and_typed_future_outputs (__main__.GoalCompilerTests.test_browser_goal_binds_url_and_typed_future_outputs) ... ok\ntest_compound_evidence_bundle_compiles_manifest_archive_and_verifier (__main__.GoalCompilerTests.test_compound_evidence_bundle_compiles_manifest_archive_and_verifier) ... ok\ntest_compound_goal_compiles_full_verified_audit_pipeline (__main__.GoalCompilerTests.test_compound_goal_compiles_full_verified_audit_pipeline) ... ok\ntest_compound_live_pypi_provenance_compiles_full_verified_pipeline (__main__.GoalCompilerTests.test_compound_live_pypi_provenance_compiles_full_verified_pipeline) ... ok\ntest_compound_test_audit_keeps_independent_execution_and_verification_together (__main__.GoalCompilerTests.test_compound_test_audit_keeps_independent_execution_and_verification_together) ... ok\ntest_context_url_json_fetch_compiles_from_prior_structured_state (__main__.GoalCompilerTests.test_context_url_json_fetch_compiles_from_prior_structured_state) ... ok\ntest_full_browser_release_goal_compiles_independent_verifier (__main__.GoalCompilerTests.test_full_browser_release_goal_compiles_independent_verifier) ... ok\ntest_json_status_manifest_compiles_and_executes (__main__.GoalCompilerTests.test_json_status_manifest_compiles_and_executes) ... ok\ntest_plain_image_only_pdf_goal_selects_verified_ocr (__main__.GoalCompilerTests.test_plain_image_only_pdf_goal_selects_verified_ocr) ... ok\ntest_plain_qr_goal_selects_verified_qr_and_binds_arguments (__main__.GoalCompilerTests.test_plain_qr_goal_selects_verified_qr_and_binds_arguments) ... ok\ntest_replay_prefers_typed_context_over_stale_later_output (__main__.GoalCompilerTests.test_replay_prefers_typed_context_over_stale_later_output) ... ok\ntest_repo_path_extraction_ignores_url_path_components (__main__.GoalCompilerTests.test_repo_path_extraction_ignores_url_path_components) ... ok\ntest_structured_nested_record_selection_compiles_and_executes (__main__.GoalCompilerTests.test_structured_nested_record_selection_compiles_and_executes) ... ok\ntest_unknown_goal_fails_closed (__main__.GoalCompilerTests.test_unknown_goal_fails_closed) ... ok\n\n----------------------------------------------------------------------\nRan 17 tests in 0.072s\n\nOK\n",
+        "stdout": ""
+      },
+      "step_id": "run-goal-compiler-tests",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-GOAL-COMPILER-REGRESSION-FULL-BROWSER-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_GOAL_COMPILER_REGRESSION_FULL_BROWSER_002.json",
+  "mission_sha256": "6135fe4e02e7456cec3b783525a8b78ae8103d1775fd0e6fa4b011ef47ed8581",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T02:32:50.582292+00:00"
+}
