@@ -356,6 +356,38 @@ def _goal_action(action):
                 hits.append(str(p.relative_to(ROOT)))
                 if len(hits)>=80: break
         return {"type":typ,"query":q,"hits":hits,"truncated":len(hits)>=80}
+    if typ=="write_json_records":
+        output=_safe_repo_path(args.get("output_path",""))
+        fields=args.get("fields")
+        records=args.get("records")
+        if (
+            not isinstance(fields,list) or not fields
+            or len(fields)>64
+            or any(not isinstance(x,str) or not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*",x) for x in fields)
+            or len(set(fields))!=len(fields)
+            or not isinstance(records,list)
+            or len(records)>10000
+        ):
+            return {"type":typ,"verified":False,"error":"JSON_RECORD_SPEC_INVALID"}
+        normalized=[]
+        for record in records:
+            if not isinstance(record,dict) or set(record)!=set(fields):
+                return {"type":typ,"verified":False,"error":"JSON_RECORD_FIELDS_MISMATCH"}
+            normalized.append({field:record[field] for field in fields})
+        output.parent.mkdir(parents=True,exist_ok=True)
+        output.write_text(json.dumps(normalized,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
+        raw=output.read_bytes()
+        reread=json.loads(raw.decode("utf-8"))
+        return {
+          "type":typ,
+          "verified":reread==normalized,
+          "output_path":str(output.relative_to(ROOT)),
+          "record_count":len(normalized),
+          "fields":fields,
+          "output_sha256":hashlib.sha256(raw).hexdigest(),
+          "output_bytes":len(raw),
+        }
+
     if typ=="assert_file_exists":
         p=_safe_repo_path(args.get("path",""))
         return {
@@ -2077,7 +2109,7 @@ def _run_model_independent_goal(step, mission, goal):
     if actions is None:
         return None
     allowed_types={
-      "read_file","list_tree","search_text","http_get","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback","invoke_capability_until",
+      "read_file","list_tree","search_text","http_get","write_json_records","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback","invoke_capability_until",
       "project_browser_result_json","join_runtime_json_arrays","assert_runtime_json_join","aggregate_runtime_json_arrays","assert_runtime_json_aggregate","assert_hex_prefix_bucket","assert_collection_length_bucket","assert_runtime_selected_code_decodes",
       "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal","assert_runtime_fanout_decodes","assert_runtime_fanout_artifacts_decode","assert_runtime_per_item_fallback_decodes","assert_runtime_fallback_decision","assert_runtime_bounded_loop_trace",
       "assert_workflow_audit_supported_by_source","assert_python_source_audit_supported_by_source",
