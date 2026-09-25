@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T02:17:17.255593+00:00",
+  "mission_id": "ASTRA-BROWSER-GOAL-BINDING-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_BROWSER_GOAL_BINDING_DIAG_001.json",
+  "mission_sha256": "8f7c9fad984724c8670489a2f6f296705b1262b44f18797251b223650a05acfe",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "4464645cb5f0b68c7a79f89d964483446df29aa714749b2b1fb37aa56a2a2f32",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

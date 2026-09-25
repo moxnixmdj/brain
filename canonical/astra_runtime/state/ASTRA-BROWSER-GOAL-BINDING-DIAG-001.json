@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T02:17:17.255293+00:00",
+  "created_at_utc": "2026-09-25T02:17:17.197410+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T02:17:17.254992+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib,sys\np=pathlib.Path('canonical/runtime/goal_compiler.py')\ns=importlib.util.spec_from_file_location('g',p); g=importlib.util.module_from_spec(s); sys.modules[s.name]=g; s.loader.exec_module(g)\nroot=pathlib.Path('.').resolve()\nentry={\n \"status\":\"VERIFIED_BOUND_CAPABILITY\",\n \"provides\":[\"web.browser.rendered.capture\"],\"requires\":[],\n \"keywords\":[\"browser\",\"rendered\",\"web\",\"screenshot\",\"url\"],\n \"action_template\":{\"type\":\"invoke_capability\",\"args\":{\n  \"capability_id\":\"web.browser.rendered.capture.test\",\n  \"url\":\"${input.url}\",\"screenshot_path\":\"${input.screenshot_path}\",\"result_path\":\"${input.result_path}\"\n }}\n}\ngoal=(\"Using a rendered browser, open https://example.com and save a screenshot to \"\n      \"canonical/astra_runtime/tmp/EXAMPLE.png and save the result to \"\n      \"canonical/astra_runtime/tmp/EXAMPLE.json\")\nout={\"placeholders\":g._placeholders(entry[\"action_template\"]),\"repo_paths\":[x[0] for x in g._repo_paths(goal,root)],\n     \"score\":g._score(goal,\"web.browser.rendered.capture.test\",entry)}\ntry: out[\"bound\"]=g._bind_inputs(goal,root,entry)\nexcept Exception as e: out[\"bind_error\"]=type(e).__name__+\":\"+str(e)\nprint(json.dumps(out,sort_keys=True))\nprint(\"BROWSER_GOAL_BINDING_DIAG_COMPLETE\")\nPY",
+        "duration_s": 0.057,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"bind_error\": \"GoalCompilationFailure:GOAL_URL_BINDING_REQUIRED:0\", \"placeholders\": [\"result_path\", \"screenshot_path\", \"url\"], \"repo_paths\": [\"canonical/astra_runtime/tmp/EXAMPLE.png\", \"canonical/astra_runtime/tmp/EXAMPLE.json\"], \"score\": [26, 0, {\"goal_tokens\": [\"astra\", \"browser\", \"canonical\", \"com\", \"example\", \"https\", \"json\", \"open\", \"png\", \"rendered\", \"result\", \"runtime\", \"save\", \"screenshot\", \"tmp\"], \"matched_identity\": [\"browser\", \"rendered\"], \"matched_keywords\": [\"browser\", \"rendered\", \"screenshot\"], \"matched_provides\": [\"browser\", \"rendered\"], \"matched_requires\": []}]}\nBROWSER_GOAL_BINDING_DIAG_COMPLETE\n"
+      },
+      "step_id": "diagnose-browser-goal-binding",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-BROWSER-GOAL-BINDING-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_BROWSER_GOAL_BINDING_DIAG_001.json",
+  "mission_sha256": "8f7c9fad984724c8670489a2f6f296705b1262b44f18797251b223650a05acfe",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T02:17:17.255007+00:00"
+}
