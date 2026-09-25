@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T16:28:40.362176+00:00",
+  "mission_id": "ASTRA-COMPILED-CLAUSE-COVERAGE-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_COMPILED_CLAUSE_COVERAGE_DIAG_001.json",
+  "mission_sha256": "e775c9e8722b38cd4061a48c83e4a60a73b648b8b05e2aa58abebb317b6135dc",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "bbdc51d7e839f3cfa96a0f40425d9e468381b3177c7cf9d2504ce6567ba54122",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
