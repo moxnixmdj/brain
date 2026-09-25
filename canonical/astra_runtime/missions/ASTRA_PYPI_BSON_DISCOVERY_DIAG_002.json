@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-PYPI-BSON-DISCOVERY-DIAG-002",
+  "purpose": "Verify exact-name PyPI probes widen when they miss the requested BSON format and surface a BSON-related wheel-backed candidate.",
+  "steps": [
+    {
+      "id": "discover-bson-candidates",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,pathlib,json\np=pathlib.Path('canonical/runtime/capability_discovery.py')\ns=importlib.util.spec_from_file_location('cd',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\ngoal='Encode those exact records as BSON and save canonical/astra_runtime/tmp/BSON_RECORDS.bson'\nout=m.search_pypi_packages(goal,limit=20,timeout_s=20)\nnames=[str(x.get('name') or '') for x in out.get('candidates') or []]\nprint(json.dumps({'queries':out.get('queries'),'names':names},sort_keys=True))\nassert any('bson' in n.lower() for n in names),names\nprint('PYPI_BSON_DISCOVERY_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "PYPI_BSON_DISCOVERY_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "read_only_diagnostic": true
+  }
+}
