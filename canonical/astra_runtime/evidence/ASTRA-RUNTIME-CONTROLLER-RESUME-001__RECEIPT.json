@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T17:38:30.189221+00:00",
+  "mission_id": "ASTRA-RUNTIME-CONTROLLER-RESUME-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_CONTROLLER_RESUME_001.json",
+  "mission_sha256": "20505953a30d29252729b5c168eb42a7c97f4d150ef57441045f6ebf94e0752d",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "9b9ca13c319b1dc9abb3be131a894779d559cbef6e50dd1dfdb62297c1f99e9b",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

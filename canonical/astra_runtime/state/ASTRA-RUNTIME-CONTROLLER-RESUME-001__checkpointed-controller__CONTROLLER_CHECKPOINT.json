@@ -50,16 +50,50 @@
         "stderr": "",
         "stdout": ""
       }
+    },
+    {
+      "cycle": 1,
+      "plan": {
+        "args": {
+          "path": "canonical/astra_runtime/tmp/CHECKPOINT_RESUME_QR.png"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "assert_file_exists"
+      },
+      "result": {
+        "exists": true,
+        "path": "canonical/astra_runtime/tmp/CHECKPOINT_RESUME_QR.png",
+        "sha256": "e026fb283999c52ec5c6b1f1cea49ee5d8437ef8a4d19661adfb1f4e819cf0bb",
+        "type": "assert_file_exists",
+        "verified": true
+      }
+    },
+    {
+      "cycle": 2,
+      "plan": {
+        "args": {
+          "summary": "CONTROLLER_CHECKPOINT_RESUME_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "CONTROLLER_CHECKPOINT_RESUME_COMPLETE",
+        "type": "finish"
+      }
     }
   ],
   "created_at_utc": "2026-09-25T17:37:19.676063+00:00",
   "mission_id": "ASTRA-RUNTIME-CONTROLLER-RESUME-001",
-  "next_action_index": 1,
+  "next_action_index": 3,
   "plan_sha256": "01db762b5814e0f2c8ab0efb52c12c23df2a7d716f756b9c33e6c8844c2ddffe",
-  "resume_count": 0,
+  "resume_count": 1,
   "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
-  "status": "IN_PROGRESS",
+  "status": "COMPLETE",
   "step_id": "checkpointed-controller",
   "test_interrupt_injected": true,
-  "updated_at_utc": "2026-09-25T17:37:28.552086+00:00"
+  "updated_at_utc": "2026-09-25T17:38:30.187976+00:00"
 }

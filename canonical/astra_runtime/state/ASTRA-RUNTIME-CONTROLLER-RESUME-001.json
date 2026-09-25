@@ -1,21 +1,125 @@
 {
-  "blocker": {
-    "adapter": "goal",
-    "error": "Blocker:CONTROLLER_CHECKPOINT_TEST_INTERRUPTION",
-    "mission_id": "ASTRA-RUNTIME-CONTROLLER-RESUME-001",
-    "observed_at_utc": "2026-09-25T17:37:28.552300+00:00",
-    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
-    "step_id": "checkpointed-controller",
-    "step_index": 0
-  },
+  "completed_at_utc": "2026-09-25T17:38:30.188790+00:00",
   "created_at_utc": "2026-09-25T17:37:19.675889+00:00",
-  "history": [],
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T17:38:30.188440+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "goal",
+        "controller_checkpoint": {
+          "path": "canonical/astra_runtime/state/ASTRA-RUNTIME-CONTROLLER-RESUME-001__checkpointed-controller__CONTROLLER_CHECKPOINT.json",
+          "plan_sha256": "01db762b5814e0f2c8ab0efb52c12c23df2a7d716f756b9c33e6c8844c2ddffe",
+          "resume_count": 1,
+          "resumed": true,
+          "resumed_from_action_index": 1
+        },
+        "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+        "cycles": 3,
+        "final_summary": "CONTROLLER_CHECKPOINT_RESUME_COMPLETE",
+        "planner_model_last": null,
+        "planner_source": null,
+        "planner_transport": null,
+        "returncode": 0,
+        "stdout": "CONTROLLER_CHECKPOINT_RESUME_COMPLETE",
+        "trace": [
+          {
+            "cycle": 0,
+            "plan": {
+              "args": {
+                "argv": [
+                  "qrencode",
+                  "-o",
+                  "canonical/astra_runtime/tmp/CHECKPOINT_RESUME_QR.png",
+                  "CHECKPOINT-RESUME-PROOF"
+                ],
+                "capability_id": "image.qr.generate.qrencode",
+                "output_path": "canonical/astra_runtime/tmp/CHECKPOINT_RESUME_QR.png",
+                "output_prefix_hex": "89504e470d0a1a0a",
+                "timeout_s": 60
+              },
+              "expect": {
+                "field": "output_verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "bound_capability_cli",
+              "argv": [
+                "qrencode",
+                "-o",
+                "canonical/astra_runtime/tmp/CHECKPOINT_RESUME_QR.png",
+                "CHECKPOINT-RESUME-PROOF"
+              ],
+              "capability_id": "image.qr.generate.qrencode",
+              "dependency": {
+                "origin": "Ubuntu",
+                "packages": [
+                  {
+                    "archive_sha256": "613c5a22316489ec6a9ce5d59190293df15dd4612b55432dde04c62f7c1a0e25",
+                    "name": "qrencode",
+                    "version": "4.1.1-1build2"
+                  }
+                ],
+                "status": "INSTALLED_VERIFIED"
+              },
+              "output_bytes": 290,
+              "output_path": "canonical/astra_runtime/tmp/CHECKPOINT_RESUME_QR.png",
+              "output_sha256": "e026fb283999c52ec5c6b1f1cea49ee5d8437ef8a4d19661adfb1f4e819cf0bb",
+              "output_verified": true,
+              "returncode": 0,
+              "stderr": "",
+              "stdout": ""
+            }
+          },
+          {
+            "cycle": 1,
+            "plan": {
+              "args": {
+                "path": "canonical/astra_runtime/tmp/CHECKPOINT_RESUME_QR.png"
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "assert_file_exists"
+            },
+            "result": {
+              "exists": true,
+              "path": "canonical/astra_runtime/tmp/CHECKPOINT_RESUME_QR.png",
+              "sha256": "e026fb283999c52ec5c6b1f1cea49ee5d8437ef8a4d19661adfb1f4e819cf0bb",
+              "type": "assert_file_exists",
+              "verified": true
+            }
+          },
+          {
+            "cycle": 2,
+            "plan": {
+              "args": {
+                "summary": "CONTROLLER_CHECKPOINT_RESUME_COMPLETE"
+              },
+              "type": "finish"
+            },
+            "result": {
+              "summary": "CONTROLLER_CHECKPOINT_RESUME_COMPLETE",
+              "type": "finish"
+            }
+          }
+        ]
+      },
+      "step_id": "checkpointed-controller",
+      "step_index": 0
+    }
+  ],
   "mission_id": "ASTRA-RUNTIME-CONTROLLER-RESUME-001",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_CONTROLLER_RESUME_001.json",
-  "mission_sha256": "31b88cab5df843a1c087b8aea4e21835269dee3e6b66e4f152b67763ccb84a3b",
-  "next_step": 0,
+  "mission_sha256": "20505953a30d29252729b5c168eb42a7c97f4d150ef57441045f6ebf94e0752d",
+  "next_step": 1,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
-  "status": "BLOCKED",
-  "updated_at_utc": "2026-09-25T17:37:28.552437+00:00"
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T17:38:30.188455+00:00"
 }
