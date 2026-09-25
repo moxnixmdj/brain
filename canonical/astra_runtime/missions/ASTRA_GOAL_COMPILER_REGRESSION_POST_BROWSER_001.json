@@ -15,6 +15,7 @@
   "constraints": {
     "incremental_spend_usd": 0,
     "model_controller_required": false,
-    "read_only_regression": true
+    "read_only_regression": true,
+    "replay_after_url_regex_fix_commit": "636f6a01199ef9e6dbd4ec39d9266df5a412832f"
   }
 }
