@@ -87,56 +87,202 @@ def _load_bound_capability_registry():
         raise Blocker("BOUND_CAPABILITY_REGISTRY_INVALID")
     return caps
 
+def _normalized_project_name(value):
+    return re.sub(r"[-_.]+","-",str(value or "").strip()).lower()
+
+
+def _verified_pypi_wheel_bytes(record):
+    name=str(record.get("project") or "").strip()
+    version=str(record.get("version") or "").strip()
+    filename=str(record.get("filename") or "").strip()
+    expected=str(record.get("sha256") or "").strip().lower()
+    metadata_url=str(record.get("metadata_url") or "").strip()
+    declared_url=str(record.get("url") or "").strip()
+    if not all((name,version,filename,expected,metadata_url,declared_url)):
+        raise Blocker("BOUND_PYPI_CLOSURE_RECORD_INCOMPLETE")
+    if not re.fullmatch(r"[0-9a-f]{64}",expected):
+        raise Blocker("BOUND_PYPI_CLOSURE_HASH_INVALID:"+name)
+    req=urllib.request.Request(metadata_url,headers={"User-Agent":"ProjectBrain-BoundCapability/1"})
+    with urllib.request.urlopen(req,timeout=20) as resp:
+        meta=json.loads(resp.read(3000000).decode("utf-8"))
+    matches=[u for u in meta.get("urls",[]) if str(u.get("filename") or "")==filename]
+    if len(matches)!=1:
+        raise Blocker("BOUND_PYPI_CLOSURE_WHEEL_NOT_UNIQUE:"+name)
+    artifact=matches[0]
+    metadata_sha=str((artifact.get("digests") or {}).get("sha256") or "").lower()
+    url=str(artifact.get("url") or "")
+    if metadata_sha!=expected:
+        raise Blocker("BOUND_PYPI_CLOSURE_METADATA_HASH_MISMATCH:"+name)
+    if url!=declared_url or not url.startswith("https://"):
+        raise Blocker("BOUND_PYPI_CLOSURE_URL_MISMATCH:"+name)
+    with urllib.request.urlopen(
+        urllib.request.Request(url,headers={"User-Agent":"ProjectBrain-BoundCapability/1"}),
+        timeout=45
+    ) as resp:
+        raw=resp.read(50000000)
+    actual=hashlib.sha256(raw).hexdigest()
+    if actual!=expected:
+        raise Blocker("BOUND_PYPI_CLOSURE_WHEEL_HASH_MISMATCH:"+name)
+    return raw
+
+
 def _ensure_pypi_dependency(source):
     name=str(source.get("project") or "").strip()
     version=str(source.get("version") or "").strip()
-    filename=str(source.get("wheel_filename") or "").strip()
-    expected=str(source.get("wheel_sha256") or "").strip().lower()
-    metadata_url=str(source.get("metadata_url") or "").strip()
-    if not all((name,version,filename,expected,metadata_url)):
+    if not name or not version:
         raise Blocker("BOUND_PYPI_SOURCE_INCOMPLETE")
-    try:
-        if importlib.metadata.version(name)==version:
-            return {"status":"ALREADY_INSTALLED","project":name,"version":version}
-    except importlib.metadata.PackageNotFoundError:
-        pass
-    req=urllib.request.Request(metadata_url,headers={"User-Agent":"ProjectBrain-BoundCapability/1"})
-    with urllib.request.urlopen(req,timeout=20) as resp:
-        meta=json.loads(resp.read(2000000).decode("utf-8"))
-    matches=[u for u in meta.get("urls",[]) if u.get("filename")==filename]
-    if len(matches)!=1:
-        raise Blocker("BOUND_PYPI_WHEEL_NOT_UNIQUE")
-    artifact=matches[0]
-    metadata_sha=str((artifact.get("digests") or {}).get("sha256") or "").lower()
-    if metadata_sha!=expected:
-        raise Blocker("BOUND_PYPI_METADATA_HASH_MISMATCH")
-    url=str(artifact.get("url") or "")
-    if not url.startswith("https://"):
-        raise Blocker("BOUND_PYPI_WHEEL_URL_INVALID")
-    with urllib.request.urlopen(
-        urllib.request.Request(url,headers={"User-Agent":"ProjectBrain-BoundCapability/1"}),
-        timeout=30
-    ) as resp:
-        raw=resp.read(12000000)
-    actual=hashlib.sha256(raw).hexdigest()
-    if actual!=expected:
-        raise Blocker("BOUND_PYPI_WHEEL_HASH_MISMATCH")
-    with tempfile.TemporaryDirectory(prefix="project-brain-cap-") as td:
-        wheel=pathlib.Path(td)/filename
-        wheel.write_bytes(raw)
+
+    closure=source.get("dependency_closure")
+    if closure is None:
+        # Backward compatibility for already-promoted single-wheel bindings.
+        filename=str(source.get("wheel_filename") or "").strip()
+        expected=str(source.get("wheel_sha256") or "").strip().lower()
+        metadata_url=str(source.get("metadata_url") or "").strip()
+        if not all((filename,expected,metadata_url)):
+            raise Blocker("BOUND_PYPI_SOURCE_INCOMPLETE")
+        try:
+            if importlib.metadata.version(name)==version:
+                return {"status":"ALREADY_INSTALLED","project":name,"version":version}
+        except importlib.metadata.PackageNotFoundError:
+            pass
+        req=urllib.request.Request(metadata_url,headers={"User-Agent":"ProjectBrain-BoundCapability/1"})
+        with urllib.request.urlopen(req,timeout=20) as resp:
+            meta=json.loads(resp.read(2000000).decode("utf-8"))
+        matches=[u for u in meta.get("urls",[]) if u.get("filename")==filename]
+        if len(matches)!=1:
+            raise Blocker("BOUND_PYPI_WHEEL_NOT_UNIQUE")
+        artifact=matches[0]
+        metadata_sha=str((artifact.get("digests") or {}).get("sha256") or "").lower()
+        if metadata_sha!=expected:
+            raise Blocker("BOUND_PYPI_METADATA_HASH_MISMATCH")
+        url=str(artifact.get("url") or "")
+        if not url.startswith("https://"):
+            raise Blocker("BOUND_PYPI_WHEEL_URL_INVALID")
+        with urllib.request.urlopen(
+            urllib.request.Request(url,headers={"User-Agent":"ProjectBrain-BoundCapability/1"}),
+            timeout=30
+        ) as resp:
+            raw=resp.read(12000000)
+        actual=hashlib.sha256(raw).hexdigest()
+        if actual!=expected:
+            raise Blocker("BOUND_PYPI_WHEEL_HASH_MISMATCH")
+        with tempfile.TemporaryDirectory(prefix="project-brain-cap-") as td:
+            wheel=pathlib.Path(td)/filename
+            wheel.write_bytes(raw)
+            proc=subprocess.run(
+                [sys.executable,"-m","pip","install","--disable-pip-version-check","--quiet","--no-deps",str(wheel)],
+                cwd=ROOT,text=True,capture_output=True,timeout=120
+            )
+            if proc.returncode!=0:
+                raise Blocker("BOUND_PYPI_INSTALL_FAILED:"+proc.stderr[-1200:])
+        try:
+            installed=importlib.metadata.version(name)
+        except importlib.metadata.PackageNotFoundError as e:
+            raise Blocker("BOUND_PYPI_INSTALL_NOT_VISIBLE") from e
+        if installed!=version:
+            raise Blocker("BOUND_PYPI_INSTALLED_VERSION_MISMATCH:"+installed)
+        return {"status":"INSTALLED_VERIFIED","project":name,"version":version,"wheel_sha256":actual}
+
+    if not isinstance(closure,dict) or closure.get("schema")!="PROJECT_BRAIN_PYPI_WHEEL_CLOSURE_V1":
+        raise Blocker("BOUND_PYPI_CLOSURE_INVALID")
+    wheels=closure.get("wheels")
+    if not isinstance(wheels,list) or not wheels or len(wheels)>32:
+        raise Blocker("BOUND_PYPI_CLOSURE_WHEELS_INVALID")
+    if _normalized_project_name(closure.get("root_project"))!=_normalized_project_name(name):
+        raise Blocker("BOUND_PYPI_CLOSURE_ROOT_PROJECT_MISMATCH")
+    if str(closure.get("root_version") or "")!=version:
+        raise Blocker("BOUND_PYPI_CLOSURE_ROOT_VERSION_MISMATCH")
+    supplied_sha=str(closure.get("closure_sha256") or "")
+    canonical=dict(closure)
+    canonical.pop("closure_sha256",None)
+    computed_sha=hashlib.sha256(
+        json.dumps(canonical,sort_keys=True,separators=(",",":")).encode()
+    ).hexdigest()
+    if not re.fullmatch(r"[0-9a-f]{64}",supplied_sha) or supplied_sha!=computed_sha:
+        raise Blocker("BOUND_PYPI_CLOSURE_LOCK_HASH_MISMATCH")
+
+    expected_versions={}
+    for record in wheels:
+        if not isinstance(record,dict):
+            raise Blocker("BOUND_PYPI_CLOSURE_RECORD_INVALID")
+        project=str(record.get("project") or "").strip()
+        wheel_version=str(record.get("version") or "").strip()
+        key=_normalized_project_name(project)
+        if not key or not wheel_version:
+            raise Blocker("BOUND_PYPI_CLOSURE_IDENTITY_INVALID")
+        if key in expected_versions and expected_versions[key]!=wheel_version:
+            raise Blocker("BOUND_PYPI_CLOSURE_VERSION_CONFLICT:"+project)
+        expected_versions[key]=wheel_version
+
+    already=True
+    for record in wheels:
+        project=str(record.get("project") or "")
+        expected_version=str(record.get("version") or "")
+        try:
+            installed=importlib.metadata.version(project)
+        except importlib.metadata.PackageNotFoundError:
+            already=False
+            break
+        if installed!=expected_version:
+            already=False
+            break
+    if already:
+        return {
+          "status":"ALREADY_INSTALLED",
+          "project":name,"version":version,
+          "dependency_wheel_count":len(wheels),
+          "closure_sha256":supplied_sha,
+        }
+
+    with tempfile.TemporaryDirectory(prefix="project-brain-pypi-closure-") as td:
+        wheelhouse=pathlib.Path(td)/"wheelhouse"
+        wheelhouse.mkdir()
+        total_bytes=0
+        local_wheels=[]
+        for record in wheels:
+            raw=_verified_pypi_wheel_bytes(record)
+            total_bytes+=len(raw)
+            if total_bytes>160000000:
+                raise Blocker("BOUND_PYPI_CLOSURE_BYTES_LIMIT")
+            p=wheelhouse/str(record.get("filename"))
+            p.write_bytes(raw)
+            local_wheels.append(p)
         proc=subprocess.run(
-            [sys.executable,"-m","pip","install","--disable-pip-version-check","--quiet","--no-deps",str(wheel)],
-            cwd=ROOT,text=True,capture_output=True,timeout=120
+            [
+              sys.executable,"-m","pip","install",
+              "--disable-pip-version-check","--quiet",
+              "--no-index","--no-deps",
+              *[str(p) for p in local_wheels],
+            ],
+            cwd=ROOT,text=True,capture_output=True,timeout=240
         )
         if proc.returncode!=0:
-            raise Blocker("BOUND_PYPI_INSTALL_FAILED:"+proc.stderr[-1200:])
-    try:
-        installed=importlib.metadata.version(name)
-    except importlib.metadata.PackageNotFoundError as e:
-        raise Blocker("BOUND_PYPI_INSTALL_NOT_VISIBLE") from e
-    if installed!=version:
-        raise Blocker("BOUND_PYPI_INSTALLED_VERSION_MISMATCH:"+installed)
-    return {"status":"INSTALLED_VERIFIED","project":name,"version":version,"wheel_sha256":actual}
+            raise Blocker("BOUND_PYPI_CLOSURE_INSTALL_FAILED:"+proc.stderr[-1800:])
+
+    mismatches=[]
+    for record in wheels:
+        project=str(record.get("project") or "")
+        expected_version=str(record.get("version") or "")
+        try:
+            installed=importlib.metadata.version(project)
+        except importlib.metadata.PackageNotFoundError:
+            mismatches.append({"project":project,"expected":expected_version,"observed":None})
+            continue
+        if installed!=expected_version:
+            mismatches.append({"project":project,"expected":expected_version,"observed":installed})
+    if mismatches:
+        raise Blocker("BOUND_PYPI_CLOSURE_INSTALLED_VERSION_MISMATCH:"+json.dumps(mismatches,sort_keys=True)[:1400])
+    return {
+      "status":"INSTALLED_VERIFIED",
+      "project":name,"version":version,
+      "dependency_wheel_count":len(wheels),
+      "closure_sha256":supplied_sha,
+      "wheels":[
+        {"project":x.get("project"),"version":x.get("version"),"filename":x.get("filename"),"sha256":x.get("sha256")}
+        for x in wheels
+      ],
+    }
+
 
 def _ensure_local_dependency(source):
     typ=str(source.get("type") or "").strip()
