@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T03:16:50.668689+00:00",
+  "mission_id": "ASTRA-DOCX-SUPPLIER-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_DOCX_SUPPLIER_DIAG_001.json",
+  "mission_sha256": "6e5ada374c7cdd76b893c3d4aa49fc5d539d7b4695211b15650c1d6c0fd86efd",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "a5ac2db6c3e0a6c35779b9f1a2d1d59ea4b3b1176c49c847395667a93bc5b036",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
