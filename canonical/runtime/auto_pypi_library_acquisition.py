@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Autonomously acquire a zero-cost Python-library structured codec from PyPI."""
 from __future__ import annotations
-import hashlib,importlib,json,pathlib,re,subprocess,sys,tempfile,zipfile
+import hashlib,importlib,json,pathlib,re,subprocess,sys,tempfile,urllib.parse,urllib.request,zipfile
 
 import capability_discovery
 
