@@ -131,12 +131,17 @@ def _bind_inputs(goal, root, entry, context_paths=None):
                 if len(matching)==1:
                     result[key]=matching[0]
                     continue
-                if len(existing)==1:
-                    result[key]=existing[0][0]
-                    continue
+                # Typed inputs such as markdown_path/json_path/pdf_path must
+                # prefer causally produced, type-compatible context. A replay
+                # may leave a later output artifact on disk; treating that
+                # unrelated "only existing file" as the input corrupts the
+                # action graph (e.g. binding an existing PDF as markdown_path).
                 context_value=_context_path_for_key(key,context_paths)
                 if context_value is not None:
                     result[key]=context_value
+                    continue
+                if stem in {"input","source"} and len(existing)==1:
+                    result[key]=existing[0][0]
                     continue
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED",key)
     return result
