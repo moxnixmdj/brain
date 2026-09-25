@@ -400,6 +400,72 @@ def _pypi_candidate_names(effect):
     return names[:12]
 
 
+def _pypi_simple_related_names(effect,timeout_s=12,opener=None,limit=24):
+    """Discover related PyPI project names from the official Simple index.
+
+    PyPI does not expose a supported full-text search API. The Simple index is
+    authoritative project-name metadata, so use it only to widen exact-name
+    probes after those probes produce no viable candidate. No package code is
+    downloaded or executed here.
+    """
+    opener=opener or urllib.request.urlopen
+    distinctive=[
+        t for t in effect_queries(effect)
+        if t not in GENERIC_DISCOVERY_TOKENS
+        and t not in {"those","these","exact","records","record","fields","field","values","value","same","identical","order","count","save"}
+        and not t.isdigit()
+        and len(t)>=3
+    ]
+    if not distinctive:
+        return []
+    req=urllib.request.Request(
+        "https://pypi.org/simple/",
+        headers={"User-Agent":"ProjectBrain-CapabilityDiscovery/1"}
+    )
+    found=[]
+    try:
+        with opener(req,timeout=timeout_s) as resp:
+            carry=""
+            total=0
+            while True:
+                raw=resp.read(262144)
+                if not raw:
+                    break
+                total+=len(raw)
+                # Bound metadata work. The current Simple index is large, but
+                # 64 MiB is enough to inspect a substantial authoritative name
+                # surface without turning discovery into an unbounded crawl.
+                if total>64*1024*1024:
+                    break
+                text=carry+raw.decode("utf-8","replace")
+                # Keep a small tail because an anchor may straddle chunks.
+                carry=text[-1024:]
+                body=text[:-1024] if len(text)>1024 else ""
+                for name in re.findall(r">\s*([^<>\s][^<>]{0,120}?)\s*</a>",body,re.IGNORECASE):
+                    project=name.strip()
+                    normalized=re.sub(r"[-_.]+","",project.lower())
+                    if not re.fullmatch(r"[a-z0-9][a-z0-9._-]{0,120}",project.lower()):
+                        continue
+                    if not any(re.sub(r"[-_.]+","",token.lower()) in normalized for token in distinctive):
+                        continue
+                    if project.lower() not in [x.lower() for x in found]:
+                        found.append(project)
+                    if len(found)>=max(1,min(int(limit),50)):
+                        return found
+            if carry:
+                for name in re.findall(r">\s*([^<>\s][^<>]{0,120}?)\s*</a>",carry,re.IGNORECASE):
+                    project=name.strip()
+                    normalized=re.sub(r"[-_.]+","",project.lower())
+                    if any(re.sub(r"[-_.]+","",token.lower()) in normalized for token in distinctive):
+                        if re.fullmatch(r"[a-z0-9][a-z0-9._-]{0,120}",project.lower()) and project.lower() not in [x.lower() for x in found]:
+                            found.append(project)
+                            if len(found)>=max(1,min(int(limit),50)):
+                                break
+    except Exception:
+        return []
+    return found
+
+
 def search_pypi_packages(effect, limit=12, timeout_s=12, opener=None):
     """Probe exact PyPI project candidates derived from the effect contract.
 
@@ -408,70 +474,101 @@ def search_pypi_packages(effect, limit=12, timeout_s=12, opener=None):
     Metadata discovery never installs code.
     """
     opener=opener or urllib.request.urlopen
-    queries=_pypi_candidate_names(effect)
+    exact_queries=_pypi_candidate_names(effect)
+    queries=list(exact_queries)
     candidates=[]
     errors=[]
     effect_tokens=set(effect_queries(effect))
-    for query in queries:
-        url="https://pypi.org/pypi/"+urllib.parse.quote(query,safe="")+"/json"
-        req=urllib.request.Request(url,headers={"User-Agent":"ProjectBrain-CapabilityDiscovery/1"})
-        try:
-            with opener(req,timeout=timeout_s) as resp:
-                raw=resp.read(3000000)
-            payload=json.loads(raw.decode("utf-8"))
-        except Exception as exc:
-            errors.append({"query":query,"error":type(exc).__name__+":"+str(exc)})
-            continue
-        info=payload.get("info") or {}
-        name=str(info.get("name") or query)
-        version=str(info.get("version") or "")
-        if not version:
-            continue
-        urls=payload.get("urls") or []
-        wheels=[]
-        for item in urls:
-            filename=str(item.get("filename") or "")
-            digest=str((item.get("digests") or {}).get("sha256") or "").lower()
-            artifact_url=str(item.get("url") or "")
-            if filename.endswith(".whl") and re.fullmatch(r"[0-9a-f]{64}",digest) and artifact_url.startswith("https://"):
-                wheels.append({
-                  "filename":filename,
-                  "sha256":digest,
-                  "url":artifact_url,
-                  "size":item.get("size"),
-                  "python_version":item.get("python_version"),
-                })
-        if not wheels:
-            continue
-        blob=(name+" "+str(info.get("summary") or "")+" "+str(info.get("keywords") or "")).lower()
-        matched=sorted(t for t in effect_tokens if t in blob or t==re.sub(r"[-_.]+","",name.lower()))
-        normalized_name=re.sub(r"[-_.]+","",name.lower())
-        normalized_query=re.sub(r"[-_.]+","",query.lower())
-        score=(50 if normalized_name==normalized_query else 0)+12*len(matched)
-        requires_dist=info.get("requires_dist") or []
-        dependency_count=len(requires_dist) if isinstance(requires_dist,list) else 0
-        score-=4*dependency_count
-        candidates.append({
-          "discovery_source":"PYPI",
-          "name":name,
-          "project":name,
-          "description":str(info.get("summary") or ""),
-          "version":version,
-          "metadata_url":"https://pypi.org/pypi/"+urllib.parse.quote(name,safe="")+"/"+urllib.parse.quote(version,safe="")+"/json",
-          "query":query,
-          "matched_terms":matched,
-          "score":score,
-          "integration_friction":1+dependency_count,
-          "required_secret_count":0,
-          "required_environment_count":0,
-          "dependency_count":dependency_count,
-          "zero_cost_eligible":True,
-          "eligibility_status":"PYPI_METADATA_CANDIDATE_UNVERIFIED",
-          "binding_kind":"pypi",
-          "wheels":wheels,
-          "requires_python":info.get("requires_python"),
-          "license":info.get("license"),
-        })
+
+    def probe_queries(query_values):
+        local=[]
+        local_errors=[]
+        for query in query_values:
+            url="https://pypi.org/pypi/"+urllib.parse.quote(query,safe="")+"/json"
+            req=urllib.request.Request(url,headers={"User-Agent":"ProjectBrain-CapabilityDiscovery/1"})
+            try:
+                with opener(req,timeout=timeout_s) as resp:
+                    raw=resp.read(3000000)
+                payload=json.loads(raw.decode("utf-8"))
+            except Exception as exc:
+                local_errors.append({"query":query,"error":type(exc).__name__+":"+str(exc)})
+                continue
+            info=payload.get("info") or {}
+            name=str(info.get("name") or query)
+            version=str(info.get("version") or "")
+            if not version:
+                continue
+            urls=payload.get("urls") or []
+            wheels=[]
+            for item in urls:
+                filename=str(item.get("filename") or "")
+                digest=str((item.get("digests") or {}).get("sha256") or "").lower()
+                artifact_url=str(item.get("url") or "")
+                if filename.endswith(".whl") and re.fullmatch(r"[0-9a-f]{64}",digest) and artifact_url.startswith("https://"):
+                    wheels.append({
+                      "filename":filename,
+                      "sha256":digest,
+                      "url":artifact_url,
+                      "size":item.get("size"),
+                      "python_version":item.get("python_version"),
+                    })
+            if not wheels:
+                continue
+            blob=(name+" "+str(info.get("summary") or "")+" "+str(info.get("keywords") or "")).lower()
+            matched=sorted(t for t in effect_tokens if t in blob or t==re.sub(r"[-_.]+","",name.lower()))
+            normalized_name=re.sub(r"[-_.]+","",name.lower())
+            normalized_query=re.sub(r"[-_.]+","",query.lower())
+            score=(50 if normalized_name==normalized_query else 0)+12*len(matched)
+            requires_dist=info.get("requires_dist") or []
+            dependency_count=len(requires_dist) if isinstance(requires_dist,list) else 0
+            score-=4*dependency_count
+            local.append({
+              "discovery_source":"PYPI",
+              "name":name,
+              "project":name,
+              "description":str(info.get("summary") or ""),
+              "version":version,
+              "metadata_url":"https://pypi.org/pypi/"+urllib.parse.quote(name,safe="")+"/"+urllib.parse.quote(version,safe="")+"/json",
+              "query":query,
+              "matched_terms":matched,
+              "score":score,
+              "integration_friction":1+dependency_count,
+              "required_secret_count":0,
+              "required_environment_count":0,
+              "dependency_count":dependency_count,
+              "zero_cost_eligible":True,
+              "eligibility_status":"PYPI_METADATA_CANDIDATE_UNVERIFIED",
+              "binding_kind":"pypi",
+              "wheels":wheels,
+              "requires_python":info.get("requires_python"),
+              "license":info.get("license"),
+            })
+        return local,local_errors
+
+    exact_candidates,exact_errors=probe_queries(exact_queries)
+    candidates.extend(exact_candidates)
+    errors.extend(exact_errors)
+
+    # Exact-name probing misses common relationships such as a format token
+    # being embedded in a longer project name. Widen only when exact probes
+    # produced no viable wheel-backed candidate.
+    if not candidates:
+        related=_pypi_simple_related_names(effect,timeout_s=timeout_s,opener=opener,limit=max(12,int(limit)*2))
+        related=[x for x in related if x.lower() not in {q.lower() for q in queries}]
+        queries.extend(related)
+        widened,widened_errors=probe_queries(related)
+        candidates.extend(widened)
+        errors.extend(widened_errors)
+
+    # Deduplicate projects while preserving the best-scoring metadata record.
+    by_project={}
+    for cand in candidates:
+        key=re.sub(r"[-_.]+","",str(cand.get("project") or cand.get("name") or "").lower())
+        prior=by_project.get(key)
+        if prior is None or float(cand.get("score",0))>float(prior.get("score",0)):
+            by_project[key]=cand
+    candidates=list(by_project.values())
+
     candidates.sort(key=lambda x:(-float(x.get("score",0)),int(x.get("dependency_count",0)),str(x.get("name",""))))
     return {
       "schema":"PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
