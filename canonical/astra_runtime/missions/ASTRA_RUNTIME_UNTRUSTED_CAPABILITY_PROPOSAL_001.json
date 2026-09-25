@@ -8,8 +8,12 @@
       "id": "execute-constrained-proposal",
       "adapter": "goal",
       "goal_ref": "goal",
-      "verified_initial_facts": ["network.http.available"],
-      "required_target_effects": ["knowledge.fact.materialized"],
+      "verified_initial_facts": [
+        "network.http.available"
+      ],
+      "required_target_effects": [
+        "knowledge.fact.materialized"
+      ],
       "max_controller_actions": 12,
       "capability_problem_proposal": {
         "finish_summary": "UNTRUSTED_CAPABILITY_PROPOSAL_COMPLETE",
@@ -20,7 +24,10 @@
             "capability_id": "knowledge.json.fetch.external",
             "inputs": {
               "url": "https://httpbin.org/get?claim=alpha",
-              "json_path": ["args", "claim"],
+              "json_path": [
+                "args",
+                "claim"
+              ],
               "output_path": "canonical/astra_runtime/tmp/UNTRUSTED_PROPOSAL_A.json",
               "authoritative": false
             },
@@ -33,7 +40,10 @@
             "capability_id": "knowledge.json.fetch.external",
             "inputs": {
               "url": "https://httpbin.org/anything?claim=alpha",
-              "json_path": ["args", "claim"],
+              "json_path": [
+                "args",
+                "claim"
+              ],
               "output_path": "canonical/astra_runtime/tmp/UNTRUSTED_PROPOSAL_B.json",
               "authoritative": false
             },
@@ -87,6 +97,17 @@
               "output_path": "canonical/astra_runtime/tmp/UNTRUSTED_PROPOSAL_FACT.json"
             }
           }
+        ],
+        "goal_sha256": "604cb4332ad465fdfe6071a83eb38bc7320fe92fea1919daa35cb192e647a82b",
+        "clauses": [
+          {
+            "start": 0,
+            "end": 143,
+            "text": "Acquire two agreeing external observations, assess them, and materialize the supported fact through a constrained verified-capability proposal.",
+            "target_effects": [
+              "knowledge.fact.materialized"
+            ]
+          }
         ]
       },
       "verify": {
@@ -112,6 +133,9 @@
     "untrusted_proposal_may_define_target_effects": false,
     "verified_registry_references_only": true,
     "deterministic_action_construction_required": true,
-    "independent_artifact_verification_required": true
+    "independent_artifact_verification_required": true,
+    "exact_goal_hash_binding_required": true,
+    "complete_nonwhitespace_goal_coverage_required": true,
+    "required_target_effect_clause_coverage_required": true
   }
 }
