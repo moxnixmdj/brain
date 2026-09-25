@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T21:28:12.125049+00:00",
+  "mission_id": "ASTRA-RUNTIME-JIT-AUTHORITY-RESOLUTION-PSF-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_JIT_AUTHORITY_RESOLUTION_PSF_002.json",
+  "mission_sha256": "66cecec4211e4b45f4a0f26f2d44a64a1dc91e703409d9f970c24b008fd59a73",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "97a2305f598c54175eda45a51aa4d4e59c22a94ec385319c8acec315acf8177b",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
