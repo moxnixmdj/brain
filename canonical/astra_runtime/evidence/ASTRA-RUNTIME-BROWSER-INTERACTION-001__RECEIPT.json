@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T02:50:24.349863+00:00",
+  "mission_id": "ASTRA-RUNTIME-BROWSER-INTERACTION-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_BROWSER_INTERACTION_001.json",
+  "mission_sha256": "4ee5124debe8a2997db79d96d991c1c2371e9897dba955157689d54a8ff3ce4a",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "eca41249bc5631889b78560a7f952ca012157198b3f76cb2c2d2640498405efd",
+  "status": "COMPLETE",
+  "steps_completed": 2
+}

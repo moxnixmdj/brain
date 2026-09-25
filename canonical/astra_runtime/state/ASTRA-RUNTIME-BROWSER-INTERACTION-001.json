@@ -1,21 +1,156 @@
 {
-  "blocker": {
-    "adapter": "goal",
-    "error": "Blocker:CAPABILITY_ACQUISITION_REQUIRED:{\"auto_acquisition_error\": \"AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"lua-json\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"r-cran-png\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\\\", \\\"name\\\": \\\"cookiecutter\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"pngphoon\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\\\", \\\"name\\\": \\\"qrencode\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"elpa-find-file-in-project\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"elpa-project\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"famfamfam-flag-png\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"gir1.2-json-1.0\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\\\", \\\"name\\\": \\\"gjh-asl-json\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\\\", \\\"name\\\": \\\"gpgme-json\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"guile-json\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}]\", \"evidence_path\": \"canonical/astra_runtime/evidence/ASTRA-RUNTIME-BROWSER-INTERACTION-001__PLAIN_GOAL_CAPABILITY_DISCOVERY.json\", \"targeted_acquisition_error\": \"AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"lua-json\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"r-cran-png\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\\\", \\\"name\\\": \\\"cookiecutter\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"pngphoon\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\\\", \\\"name\\\": \\\"qrencode\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"elpa-find-file-in-project\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"elpa-project\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"famfamfam-flag-png\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"gir1.2-json-1.0\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\\\", \\\"name\\\": \\\"gjh-asl-json\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\\\", \\\"name\\\": \\\"gpgme-json\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"guile-json\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}]\", \"top_candidates\": [{\"integration_friction\": 0, \"name\": \"elpa-find-file-in-project\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"elpa-project\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"project-x\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"tryton-modules-project\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"tryton-modules-project-invoice\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"tryton-modules-project-plan\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"tryton-modules-project-revenue\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"tryton-modules-sale-product-customer\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}]}",
-    "mission_id": "ASTRA-RUNTIME-BROWSER-INTERACTION-001",
-    "observed_at_utc": "2026-09-25T02:46:27.594375+00:00",
-    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
-    "step_id": "execute-fresh-browser-interaction-goal",
-    "step_index": 0
-  },
+  "completed_at_utc": "2026-09-25T02:50:24.349338+00:00",
   "created_at_utc": "2026-09-25T02:43:23.873449+00:00",
-  "history": [],
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T02:50:24.316609+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "goal",
+        "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+        "cycles": 2,
+        "final_summary": "PLAIN_GOAL_COMPLETE",
+        "goal_compilation": {
+          "clauses": [
+            "Using a real rendered browser, open https://httpbin.org/forms/post. Enter PROJECT BRAIN into the customer name field, choose Medium pizza size, check the Bacon topping, submit the form, and save a full-page screenshot to canonical/astra_runtime/tmp/HTTPBIN_FORM_SUBMITTED.png and a result JSON to canonical/astra_runtime/tmp/HTTPBIN_FORM_SUBMITTED.json. The final rendered page must independently show the submitted customer name PROJECT BRAIN, size Medium, and topping Bacon; do not count merely opening or screenshotting the form as success."
+          ],
+          "compiled_parts": [
+            {
+              "actions": [
+                {
+                  "target": "customer name",
+                  "type": "set_text",
+                  "value": "PROJECT BRAIN"
+                },
+                {
+                  "target": "size",
+                  "type": "select_option",
+                  "value": "Medium"
+                },
+                {
+                  "target": "Bacon",
+                  "type": "check"
+                },
+                {
+                  "type": "submit"
+                }
+              ],
+              "index": 0,
+              "mode": "VERIFIED_BROWSER_INTERACTION",
+              "result_path": "canonical/astra_runtime/tmp/HTTPBIN_FORM_SUBMITTED.json",
+              "screenshot_path": "canonical/astra_runtime/tmp/HTTPBIN_FORM_SUBMITTED.png",
+              "selected_capability": "web.browser.rendered.capture.chromedriver",
+              "subgoal": "Using a real rendered browser, open https://httpbin.org/forms/post. Enter PROJECT BRAIN into the customer name field, choose Medium pizza size, check the Bacon topping, submit the form, and save a full-page screenshot to canonical/astra_runtime/tmp/HTTPBIN_FORM_SUBMITTED.png and a result JSON to canonical/astra_runtime/tmp/HTTPBIN_FORM_SUBMITTED.json. The final rendered page must independently show the submitted customer name PROJECT BRAIN, size Medium, and topping Bacon; do not count merely opening or screenshotting the form as success.",
+              "url": "https://httpbin.org/forms/post",
+              "verification_mission_id": "ASTRA-VERIFY-BROWSER-INTERACTION-001"
+            }
+          ],
+          "compiler_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN"
+        },
+        "planner_model_last": null,
+        "planner_source": null,
+        "planner_transport": null,
+        "planning_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN",
+        "returncode": 0,
+        "stdout": "PLAIN_GOAL_COMPLETE",
+        "trace": [
+          {
+            "cycle": 0,
+            "plan": {
+              "args": {
+                "actions": [
+                  {
+                    "target": "customer name",
+                    "type": "set_text",
+                    "value": "PROJECT BRAIN"
+                  },
+                  {
+                    "target": "size",
+                    "type": "select_option",
+                    "value": "Medium"
+                  },
+                  {
+                    "target": "Bacon",
+                    "type": "check"
+                  },
+                  {
+                    "type": "submit"
+                  }
+                ],
+                "capability_id": "web.browser.rendered.capture.chromedriver",
+                "result_path": "canonical/astra_runtime/tmp/HTTPBIN_FORM_SUBMITTED.json",
+                "screenshot_path": "canonical/astra_runtime/tmp/HTTPBIN_FORM_SUBMITTED.png",
+                "url": "https://httpbin.org/forms/post"
+              },
+              "expect": {
+                "field": "interaction_verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "actions_completed": 4,
+              "adapter": "browser_chromedriver_interact",
+              "capability_id": "web.browser.rendered.capture.chromedriver",
+              "dependency": {
+                "executable": "chromedriver",
+                "resolved_path": "/usr/bin/chromedriver",
+                "status": "LOCAL_VERIFIED",
+                "type": "system_tool"
+              },
+              "final_url": "https://httpbin.org/post",
+              "interaction_verified": true,
+              "output_verified": true,
+              "page_title": "",
+              "rendered": true,
+              "result_path": "canonical/astra_runtime/tmp/HTTPBIN_FORM_SUBMITTED.json",
+              "screenshot_bytes": 81194,
+              "screenshot_path": "canonical/astra_runtime/tmp/HTTPBIN_FORM_SUBMITTED.png",
+              "screenshot_sha256": "06c60c2cd1ed38cbed73ad33085a0e43615d2b89020758d2a335f1983b73ae40",
+              "source_url": "https://httpbin.org/forms/post",
+              "text": "{\n  \"args\": {}, \n  \"data\": \"\", \n  \"files\": {}, \n  \"form\": {\n    \"comments\": \"\", \n    \"custemail\": \"\", \n    \"custname\": \"PROJECT BRAIN\", \n    \"custtel\": \"\", \n    \"delivery\": \"\", \n    \"size\": \"medium\", \n    \"topping\": \"bacon\"\n  }, \n  \"headers\": {\n    \"Accept\": \"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7\", \n    \"Accept-Encoding\": \"gzip, deflate, br, zstd\", \n    \"Accept-Language\": \"en-US,en;q=0.9\", \n    \"Cache-Control\": \"max-age=0\", \n    \"Content-Length\": \"88\", \n    \"Content-Type\": \"application/x-www-form-urlencoded\", \n    \"Host\": \"httpbin.org\", \n    \"Origin\": \"https://httpbin.org\", \n    \"Priority\": \"u=0, i\", \n    \"Referer\": \"https://httpbin.org/forms/post\", \n    \"Sec-Ch-Ua\": \"\\\"Google Chrome\\\";v=\\\"153\\\", \\\"Not_A Brand\\\";v=\\\"8\\\", \\\"Chromium\\\";v=\\\"153\\\"\", \n    \"Sec-Ch-Ua-Mobile\": \"?0\", \n    \"Sec-Ch-Ua-Platform\": \"\\\"Linux\\\"\", \n    \"Sec-Fetch-Dest\": \"document\", \n    \"Sec-Fetch-Mode\": \"navigate\", \n    \"Sec-Fetch-Site\": \"same-origin\", \n    \"Upgrade-Insecure-Requests\": \"1\", \n    \"User-Agent\": \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36\", \n    \"X-Amzn-Trace-Id\": \"Root=1-6ab5e16f-1b311a197720a57c6ba445aa\"\n  }, \n  \"json\": null, \n  \"origin\": \"64.236.161.37\", \n  \"url\": \"https://httpbin.org/post\"\n}\n"
+            }
+          },
+          {
+            "cycle": 1,
+            "plan": {
+              "args": {
+                "summary": "PLAIN_GOAL_COMPLETE"
+              },
+              "type": "finish"
+            },
+            "result": {
+              "summary": "PLAIN_GOAL_COMPLETE",
+              "type": "finish"
+            }
+          }
+        ]
+      },
+      "step_id": "execute-fresh-browser-interaction-goal",
+      "step_index": 0
+    },
+    {
+      "completed_at_utc": "2026-09-25T02:50:24.348726+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport json,pathlib\np=pathlib.Path('canonical/astra_runtime/tmp/HTTPBIN_FORM_SUBMITTED.json')\nif not p.is_file(): raise SystemExit('RESULT_JSON_MISSING')\nx=json.loads(p.read_text(encoding='utf-8'))\nblob=' '.join(str(x.get(k,'')) for k in ('observed_text','text','body','page_text','final_url'))\nneed=['PROJECT BRAIN','Medium','Bacon']\nmissing=[v for v in need if v.lower() not in blob.lower()]\nif missing: raise SystemExit('POST_SUBMIT_VALUES_MISSING:'+','.join(missing))\nprint('BROWSER_INTERACTION_EFFECT_VERIFIED')\nPY",
+        "duration_s": 0.031,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "BROWSER_INTERACTION_EFFECT_VERIFIED\n"
+      },
+      "step_id": "verify-post-submit-evidence",
+      "step_index": 1
+    }
+  ],
   "mission_id": "ASTRA-RUNTIME-BROWSER-INTERACTION-001",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_BROWSER_INTERACTION_001.json",
-  "mission_sha256": "e617a5a14d1c306c20418541cefd09ac60eafded4371ea6fc988cfd5a3d27ae2",
-  "next_step": 0,
+  "mission_sha256": "4ee5124debe8a2997db79d96d991c1c2371e9897dba955157689d54a8ff3ce4a",
+  "next_step": 2,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
-  "status": "BLOCKED",
-  "updated_at_utc": "2026-09-25T02:46:27.594536+00:00"
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T02:50:24.348740+00:00"
 }
