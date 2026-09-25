@@ -258,7 +258,7 @@ def decompose_goal(goal):
     parts=re.split(r"(?<=[.!?])\s+(?=[A-Z])|\b[Tt]hen\b",text)
     clauses=[]
     action_connector=re.compile(
-        r"\s+and\s+(?=(?:read|inspect|create|generate|convert|extract|verify|check|render|analy[sz]e|save|write|store)\b)",
+        r"\s+and\s+(?=(?:read|inspect|create|generate|convert|extract|verify|check|render|analy[sz]e)\b)",
         re.IGNORECASE,
     )
     for part in parts:
@@ -520,16 +520,19 @@ def _compile_existing_causal_artifact_assertion(subgoal, context_paths, root):
     if not re.match(r"^(?:create|write|save|store)\b",lower):
         return None
     paths=[raw for raw,_ in _repo_paths(subgoal,root)]
-    matches=[p for p in paths if p in set(context_paths or [])]
-    if len(matches)!=1:
+    context=set(context_paths or [])
+    matches=[]
+    for p in paths:
+        if p in context and p not in matches:
+            matches.append(p)
+    if not matches or len(matches)!=len(dict.fromkeys(paths)):
         return None
-    path=matches[0]
-    action={
+    actions=[{
       "type":"assert_file_exists",
-      "args":{"path":path},
+      "args":{"path":p},
       "expect":{"type":"field_equals","field":"verified","value":True},
-    }
-    return {"action":action,"evidence":{"path":path}}
+    } for p in matches]
+    return {"actions":actions,"evidence":{"paths":matches}}
 
 
 def _compile_context_url_json_fetch(subgoal, context_paths, registry, root):
@@ -1140,7 +1143,7 @@ def _compile_latest_stable_release_from_capture(subgoal, context_paths, registry
         "product":product,
         "major":major,
         "capability_id":"json.query.jq",
-        "mode":"ANCHORED_SEMVER_FROM_CAPTURED_TEXT",
+        "extraction_mode":"ANCHORED_SEMVER_FROM_CAPTURED_TEXT",
       }
     }
 
@@ -1382,7 +1385,7 @@ def _compile_compound_goal(goal, clauses, registry, root):
 
         existing=_compile_existing_causal_artifact_assertion(clause,context_paths,root)
         if existing is not None:
-            actions.append(existing["action"])
+            actions.extend(existing["actions"])
             compiled_parts.append({
                 "index":index,"subgoal":clause,
                 "mode":"CAUSAL_ARTIFACT_ALREADY_PRODUCED",
