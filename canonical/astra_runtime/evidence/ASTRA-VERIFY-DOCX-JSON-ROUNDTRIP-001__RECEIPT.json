@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T03:38:21.188578+00:00",
+  "mission_id": "ASTRA-VERIFY-DOCX-JSON-ROUNDTRIP-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_DOCX_JSON_ROUNDTRIP_001.json",
+  "mission_sha256": "0f8f903ef9fd2f8b4f10f962b0ce111654a4a8c07004382d68c48a6ada741838",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "36d597fc36894a8f576cd9c407bfe7b0d55dfa4388d4507484766b2f075450e6",
+  "status": "COMPLETE",
+  "steps_completed": 2
+}

@@ -1,0 +1,275 @@
+{
+  "completed_at_utc": "2026-09-25T03:38:21.187968+00:00",
+  "created_at_utc": "2026-09-25T03:38:06.074833+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T03:38:06.109004+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport json,pathlib\np=pathlib.Path('canonical/astra_runtime/tmp/DOCX_JSON_ROUNDTRIP_SOURCE.json')\np.parent.mkdir(parents=True,exist_ok=True)\np.write_text(json.dumps({'submissions':{'httpbin':{'customer_name':'PROJECT BRAIN','size':'Medium','topping':'bacon','final_url':'https://httpbin.org/post','status':'VERIFIED_BROWSER_SUBMISSION'}}},indent=2,sort_keys=True)+'\\n',encoding='utf-8')\nprint('DOCX_JSON_SOURCE_READY')\nPY",
+        "duration_s": 0.034,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "DOCX_JSON_SOURCE_READY\n"
+      },
+      "step_id": "create-verification-source-json",
+      "step_index": 0
+    },
+    {
+      "completed_at_utc": "2026-09-25T03:38:21.187301+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "goal",
+        "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+        "cycles": 3,
+        "final_summary": "DOCX_JSON_ROUNDTRIP_VERIFIED",
+        "planner_model_last": null,
+        "planner_source": null,
+        "planner_transport": null,
+        "returncode": 0,
+        "stdout": "DOCX_JSON_ROUNDTRIP_VERIFIED",
+        "trace": [
+          {
+            "cycle": 0,
+            "plan": {
+              "args": {
+                "capability_id": "docx.document.create_from_json_record",
+                "goal": "Create canonical/astra_runtime/tmp/DOCX_JSON_ROUNDTRIP_VERIFY.docx from that normalized JSON with title Browser Submission Report, paragraph Verified browser submission, and a two-column table with headers Field and Value containing one row for each of customer_name, size, topping, and final_url using their values from the normalized JSON.",
+                "json_path": "canonical/astra_runtime/tmp/DOCX_JSON_ROUNDTRIP_SOURCE.json",
+                "output_path": "canonical/astra_runtime/tmp/DOCX_JSON_ROUNDTRIP_VERIFY.docx"
+              },
+              "expect": {
+                "field": "output_verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "docx_report_from_json",
+              "capability_id": "docx.document.create_from_json_record",
+              "dependency": {
+                "origin": "Ubuntu",
+                "packages": [
+                  {
+                    "archive_sha256": "8dec367f86be44b86bb3c7329ccc6af165854008fd23e185f44500ece39bdb80",
+                    "name": "python3-docx",
+                    "version": "1.1.0+dfsg-2"
+                  }
+                ],
+                "status": "INSTALLED_VERIFIED"
+              },
+              "document_spec": {
+                "headers": [
+                  "Field",
+                  "Value"
+                ],
+                "paragraphs": [
+                  "Verified browser submission"
+                ],
+                "rows": [
+                  [
+                    "customer_name",
+                    "PROJECT BRAIN"
+                  ],
+                  [
+                    "size",
+                    "Medium"
+                  ],
+                  [
+                    "topping",
+                    "bacon"
+                  ],
+                  [
+                    "final_url",
+                    "https://httpbin.org/post"
+                  ]
+                ],
+                "title": "Browser Submission Report"
+              },
+              "fields": [
+                "customer_name",
+                "size",
+                "topping",
+                "final_url"
+              ],
+              "intent_path": "canonical/astra_runtime/tmp/DOCX_JSON_ROUNDTRIP_VERIFY.docx.intent.json",
+              "intent_sha256": "a3d6af914fe31bab68a6a2ecb37d224756ea069fa30d4b958f86029263eadf9d",
+              "output_bytes": 36864,
+              "output_path": "canonical/astra_runtime/tmp/DOCX_JSON_ROUNDTRIP_VERIFY.docx",
+              "output_sha256": "ebd1ca200e7aed9befb0cdd78ebb099014c289b8774d743e52b0a6e34543dc25",
+              "output_verified": true,
+              "rows": [
+                [
+                  "customer_name",
+                  "PROJECT BRAIN"
+                ],
+                [
+                  "size",
+                  "Medium"
+                ],
+                [
+                  "topping",
+                  "bacon"
+                ],
+                [
+                  "final_url",
+                  "https://httpbin.org/post"
+                ]
+              ],
+              "source_json_path": "canonical/astra_runtime/tmp/DOCX_JSON_ROUNDTRIP_SOURCE.json"
+            }
+          },
+          {
+            "cycle": 1,
+            "plan": {
+              "args": {
+                "capability_id": "docx.document.verify.intent_ooxml",
+                "path": "canonical/astra_runtime/tmp/DOCX_JSON_ROUNDTRIP_VERIFY.docx"
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "docx_verify_ooxml_intent",
+              "bytes": 36864,
+              "capability_id": "docx.document.verify.intent_ooxml",
+              "dependency": {
+                "modules": [
+                  "zipfile",
+                  "xml.etree.ElementTree"
+                ],
+                "python_version": "3.12.14",
+                "status": "LOCAL_VERIFIED",
+                "type": "python_stdlib"
+              },
+              "expected": {
+                "headers": [
+                  "Field",
+                  "Value"
+                ],
+                "paragraphs": [
+                  "Verified browser submission"
+                ],
+                "rows": [
+                  [
+                    "customer_name",
+                    "PROJECT BRAIN"
+                  ],
+                  [
+                    "size",
+                    "Medium"
+                  ],
+                  [
+                    "topping",
+                    "bacon"
+                  ],
+                  [
+                    "final_url",
+                    "https://httpbin.org/post"
+                  ]
+                ],
+                "title": "Browser Submission Report"
+              },
+              "intent_derived_expected": {
+                "headers": [
+                  "Field",
+                  "Value"
+                ],
+                "paragraphs": [
+                  "Verified browser submission"
+                ],
+                "rows": [
+                  [
+                    "customer_name",
+                    "PROJECT BRAIN"
+                  ],
+                  [
+                    "size",
+                    "Medium"
+                  ],
+                  [
+                    "topping",
+                    "bacon"
+                  ],
+                  [
+                    "final_url",
+                    "https://httpbin.org/post"
+                  ]
+                ],
+                "title": "Browser Submission Report"
+              },
+              "intent_path": "canonical/astra_runtime/tmp/DOCX_JSON_ROUNDTRIP_VERIFY.docx.intent.json",
+              "intent_source_goal": "Create canonical/astra_runtime/tmp/DOCX_JSON_ROUNDTRIP_VERIFY.docx from that normalized JSON with title Browser Submission Report, paragraph Verified browser submission, and a two-column table with headers Field and Value containing one row for each of customer_name, size, topping, and final_url using their values from the normalized JSON.",
+              "observed_paragraphs": [
+                "Browser Submission Report",
+                "Verified browser submission"
+              ],
+              "observed_tables": [
+                [
+                  [
+                    "Field",
+                    "Value"
+                  ],
+                  [
+                    "customer_name",
+                    "PROJECT BRAIN"
+                  ],
+                  [
+                    "size",
+                    "Medium"
+                  ],
+                  [
+                    "topping",
+                    "bacon"
+                  ],
+                  [
+                    "final_url",
+                    "https://httpbin.org/post"
+                  ]
+                ]
+              ],
+              "paragraphs_ok": true,
+              "path": "canonical/astra_runtime/tmp/DOCX_JSON_ROUNDTRIP_VERIFY.docx",
+              "producer_independent_verifier": true,
+              "sha256": "ebd1ca200e7aed9befb0cdd78ebb099014c289b8774d743e52b0a6e34543dc25",
+              "source_json_path": "canonical/astra_runtime/tmp/DOCX_JSON_ROUNDTRIP_SOURCE.json",
+              "source_record_verified": true,
+              "table_ok": true,
+              "title_ok": true,
+              "verified": true
+            }
+          },
+          {
+            "cycle": 2,
+            "plan": {
+              "args": {
+                "summary": "DOCX_JSON_ROUNDTRIP_VERIFIED"
+              },
+              "type": "finish"
+            },
+            "result": {
+              "summary": "DOCX_JSON_ROUNDTRIP_VERIFIED",
+              "type": "finish"
+            }
+          }
+        ]
+      },
+      "step_id": "produce-and-independently-verify-docx",
+      "step_index": 1
+    }
+  ],
+  "mission_id": "ASTRA-VERIFY-DOCX-JSON-ROUNDTRIP-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_DOCX_JSON_ROUNDTRIP_001.json",
+  "mission_sha256": "0f8f903ef9fd2f8b4f10f962b0ce111654a4a8c07004382d68c48a6ada741838",
+  "next_step": 2,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T03:38:21.187317+00:00"
+}
