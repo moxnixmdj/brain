@@ -423,7 +423,8 @@ def _pypi_simple_related_names(effect,timeout_s=12,opener=None,limit=24):
     downloaded or executed here.
     """
     opener=opener or urllib.request.urlopen
-    distinctive=[
+    format_tokens=_requested_output_format_tokens(effect)
+    distinctive=format_tokens or [
         t for t in effect_queries(effect)
         if t not in GENERIC_DISCOVERY_TOKENS
         and t not in {"those","these","exact","records","record","fields","field","values","value","same","identical","order","count","save"}
