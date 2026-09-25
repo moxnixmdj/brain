@@ -172,6 +172,37 @@ class GoalCompilerTests(unittest.TestCase):
         self.assertEqual(zint["verification_mission_id"],"ASTRA-AUTO-VERIFY-ZINT-85BC9CD2C9A4")
         self.assertIsInstance(zint["source"],dict)
 
+    def test_compound_live_pypi_provenance_compiles_full_verified_pipeline(self):
+        goal=(
+            "Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json. "
+            "Find the VERIFIED_BOUND_CAPABILITY whose source type is pypi. "
+            "Fetch that project's authoritative live PyPI metadata from the metadata URL recorded in the registry. "
+            "Verify that the pinned version and wheel filename still exist in that metadata, download that exact wheel, compute its SHA-256, "
+            "verify it equals the wheel_sha256 recorded in the registry. "
+            "Create canonical/astra_runtime/tmp/LIVE_PYPI_PROVENANCE_AUDIT.json containing the capability ID, project, pinned version, wheel filename, recorded hash, live metadata hash, downloaded artifact hash, metadata URL, artifact URL, and a final verified boolean. "
+            "Finally independently read the report and fail unless all three hashes are identical and verified is true."
+        )
+        out=compiler.compile_goal(goal,self.registry(),ROOT)
+        self.assertEqual(out["compiler_mode"],"DETERMINISTIC_COMPOUND_ACTION_PLAN")
+        self.assertEqual([x["mode"] for x in out["compiled_parts"]],[
+            "NATIVE_READ",
+            "VERIFIED_STRUCTURED_SELECTION",
+            "VERIFIED_LIVE_JSON_FETCH",
+            "VERIFIED_PYPI_PROVENANCE",
+            "INDEPENDENT_JSON_INTEGRITY_ASSERTION",
+            "CAUSAL_ARTIFACT_ALREADY_PRODUCED",
+            "INDEPENDENT_JSON_INTEGRITY_ASSERTION",
+        ])
+        self.assertEqual(out["compiled_parts"][3]["capability_id"],"pypi.provenance.audit_live_artifact")
+        self.assertEqual(
+            out["compiled_parts"][3]["report_path"],
+            "canonical/astra_runtime/tmp/LIVE_PYPI_PROVENANCE_AUDIT.json",
+        )
+        self.assertEqual(
+            out["compiled_parts"][-1]["equal_fields"],
+            ["recorded_hash","live_metadata_hash","downloaded_artifact_hash"],
+        )
+
     def test_compound_evidence_bundle_compiles_manifest_archive_and_verifier(self):
         goal=(
             "Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json. "
