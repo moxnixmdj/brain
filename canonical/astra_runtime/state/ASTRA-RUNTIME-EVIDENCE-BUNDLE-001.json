@@ -8,14 +8,267 @@
     "step_id": "execute-evidence-bundle",
     "step_index": 0
   },
+  "completed_at_utc": "2026-09-25T00:31:46.228851+00:00",
   "created_at_utc": "2026-09-25T00:23:18.437131+00:00",
-  "history": [],
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T00:31:46.228516+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "goal",
+        "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+        "cycles": 5,
+        "final_summary": "COMPOUND_GOAL_COMPLETE",
+        "goal_compilation": {
+          "clauses": [
+            "Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+            "Create canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_MANIFEST.json containing one record for every VERIFIED_BOUND_CAPABILITY with its capability ID, verification mission ID, repository-local verification evidence or receipt paths when present, and source dependency names, versions, and hashes",
+            "create canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_BUNDLE.tar.gz containing that manifest and every repository-local verification evidence or receipt file referenced by the manifest",
+            "Finally verify independently that the archive contains the manifest plus every referenced repository-local evidence file and that the archived bytes hash exactly to the source bytes"
+          ],
+          "compiled_parts": [
+            {
+              "index": 0,
+              "mode": "NATIVE_READ",
+              "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+              "subgoal": "Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+            },
+            {
+              "capability_id": "json.query.jq",
+              "collection_path": [
+                "capabilities"
+              ],
+              "index": 1,
+              "input_path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+              "manifest_schema": "PROJECT_BRAIN_STATUS_MANIFEST_V1",
+              "mode": "VERIFIED_STRUCTURED_MANIFEST",
+              "output_path": "canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_MANIFEST.json",
+              "status_value": "VERIFIED_BOUND_CAPABILITY",
+              "subgoal": "Create canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_MANIFEST.json containing one record for every VERIFIED_BOUND_CAPABILITY with its capability ID, verification mission ID, repository-local verification evidence or receipt paths when present, and source dependency names, versions, and hashes"
+            },
+            {
+              "index": 2,
+              "inputs": {
+                "manifest_path": "canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_MANIFEST.json",
+                "output_path": "canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_BUNDLE.tar.gz"
+              },
+              "mode": "VERIFIED_CAPABILITY",
+              "score": 47,
+              "selected_capability": "archive.tar_gz.create_from_manifest",
+              "subgoal": "create canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_BUNDLE.tar.gz containing that manifest and every repository-local verification evidence or receipt file referenced by the manifest",
+              "target_effects": [
+                "archive.tar_gz.create_from_manifest"
+              ]
+            },
+            {
+              "index": 3,
+              "inputs": {
+                "archive_path": "canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_BUNDLE.tar.gz",
+                "manifest_path": "canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_MANIFEST.json"
+              },
+              "mode": "VERIFIED_CAPABILITY",
+              "score": 41,
+              "selected_capability": "archive.verify.tar_gz.gnu",
+              "subgoal": "Finally verify independently that the archive contains the manifest plus every referenced repository-local evidence file and that the archived bytes hash exactly to the source bytes",
+              "target_effects": [
+                "archive.tar_gz.verify_manifest_members"
+              ]
+            }
+          ],
+          "compiler_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN"
+        },
+        "planner_model_last": null,
+        "planner_source": null,
+        "planner_transport": null,
+        "planning_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN",
+        "returncode": 0,
+        "stdout": "COMPOUND_GOAL_COMPLETE",
+        "trace": [
+          {
+            "cycle": 0,
+            "plan": {
+              "args": {
+                "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+              },
+              "expect": {
+                "field": "content",
+                "type": "field_nonempty"
+              },
+              "type": "read_file"
+            },
+            "result": {
+              "content": "{\n  \"capabilities\": {\n    \"auto.apt.zint\": {\n      \"action_template\": {\n        \"args\": {\n          \"argv\": [\n            \"zint\",\n            \"-b\",\n            \"CODE128\",\n            \"-o\",\n            \"${input.output_path}\",\n            \"-d\",\n            \"${input.text}\"\n          ],\n          \"capability_id\": \"auto.apt.zint\",\n          \"output_path\": \"${input.output_path}\",\n          \"output_prefix_hex\": \"89504e470d0a1a0a\",\n          \"timeout_s\": 60\n        },\n        \"expect\": {\n          \"field\": \"output_verified\",\n          \"type\": \"field_equals\",\n          \"value\": true\n        },\n        \"type\": \"invoke_capability\"\n      },\n      \"adapter_module\": \"cli_command\",\n      \"autogenerated\": {\n        \"contract_evidence\": {\n          \"archive_sha256\": \"cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769\",\n          \"input_flag\": \"-d\",\n          \"output_flag\": \"-o\",\n          \"output_line\": \"-o, --output=FILE     Send output to FILE. Default is out.png\",\n          \"positional_input\": null,\n          \"probe_package\": \"zint\",\n          \"probe_version\": \"2.13.0-1build3\",\n          \"requested_suffix\": \".png\",\n          \"selector\": [\n            \"-b\",\n            \"CODE128\"\n          ],\n          \"usage_line\": null\n        },\n        \"integration_friction\": 0,\n        \"origin_goal\": \"Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png.\",\n        \"origin_mission_id\": \"ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003\",\n        \"schema\": \"PROJECT_BRAIN_AUTO_APT_CLI_BINDING_V1\",\n        \"supplier_score\": 48\n      },\n      \"cost\": 1,\n      \"entrypoint\": \"run\",\n      \"incremental_spend_usd\": 0,\n      \"keywords\": [\n        \"128\",\n        \"barcode\"\n      ],\n      \"limitations\": [\n        \"Automatically acquired from Ubuntu package metadata and CLI help.\",\n        \"Only the verified text-to-output-file invocation contract is promoted.\"\n      ],\n      \"platforms\": [\n        \"linux\"\n      ],\n      \"provides\": [\n        \"auto.effect.zint\"\n      ],\n      \"requires\": [],\n      \"source\": {\n        \"origin\": \"Ubuntu\",\n        \"packages\": [\n          {\n            \"name\": \"zint\",\n            \"sha256\": \"cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769\",\n            \"version\": \"2.13.0-1build3\"\n          }\n        ],\n        \"type\": \"apt\"\n      },\n      \"status\": \"VERIFIED_BOUND_CAPABILITY\",\n      \"verification\": {\n        \"autonomous_acquisition\": true,\n        \"independent_output_bytes\": 269,\n        \"independent_output_sha256\": \"c5ab48e8f4b30a1f7946a6a24db16f19e5896b188f19b0cade5636e98dabe768\",\n        \"independent_verified\": true,\n        \"mission_id\": \"ASTRA-AUTO-VERIFY-ZINT-85BC9CD2C9A4\",\n        \"observed_effect\": {\n          \"adapter\": \"bound_capability_cli\",\n          \"argv\": [\n            \"zint\",\n            \"-b\",\n            \"CODE128\",\n            \"-o\",\n            \"canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png\",\n            \"-d\",\n            \"PROJECT BRAIN\"\n          ],\n          \"output_bytes\": 269,\n          \"output_path\": \"canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png\",\n          \"output_sha256\": \"c5ab48e8f4b30a1f7946a6a24db16f19e5896b188f19b0cade5636e98dabe768\",\n          \"output_verified\": true,\n          \"returncode\": 0,\n          \"stderr\": \"\",\n          \"stdout\": \"\"\n        },\n        \"verification_result_path\": \"canonical/astra_runtime/evidence/ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003__zint__85bc9cd2c9a4__AUTO_VERIFY.json\"\n      }\n    },\n    \"document.convert.markdown_pdf.pandoc_weasyprint\": {\n      \"action_template\": {\n        \"args\": {\n          \"capability_id\": \"document.convert.markdown_pdf.pandoc_weasyprint\",\n          \"markdown_path\": \"${input.markdown_path}\",\n          \"output_path\": \"${input.output_path}\",\n          \"timeout_s\": 120\n        },\n        \"expect\": {\n          \"field\": \"output_verified\",\n          \"type\": \"field_equals\",\n          \"value\": true\n        },\n        \"type\": \"invoke_capability\"\n      },\n      \"adapter_module\": \"pandoc_weasyprint\",\n      \"cost\": 2,\n      \"entrypoint\": \"run\",\n      \"incremental_spend_usd\": 0,\n      \"keywords\": [\n        \"markdown\",\n        \"pdf\",\n        \"convert\",\n        \"document\",\n        \"report\"\n      ],\n      \"limitations\": [\n        \"Verified route is repository-local Markdown input to PDF output using WeasyPrint as Pandoc PDF engine.\"\n      ],\n      \"platforms\": [\n        \"linux\"\n      ],\n      \"provides\": [\n        \"document.convert.markdown_pdf\"\n      ],\n      \"requires\": [\n        \"markdown.file.available\"\n      ],\n      \"source\": {\n        \"origin\": \"Ubuntu\",\n        \"packages\": [\n          {\n            \"name\": \"pandoc\",\n            \"sha256\": \"021cf93191aea780c273e82ca3ab575b1522992705b6c28e350aa502573a27b5\",\n            \"version\": \"3.1.3+ds-2\"\n          },\n          {\n            \"name\": \"weasyprint\",\n            \"sha256\": \"79a1303592e2882ff58fb58658c6ae70f925ce335c6342cb1e778ed049514981\",\n            \"version\": \"61.1-1\"\n          }\n        ],\n        \"type\": \"apt\"\n      },\n      \"status\": \"VERIFIED_BOUND_CAPABILITY\",\n      \"verification\": {\n        \"independent_verified\": true,\n        \"independent_verifier_capability\": \"pdf.extract.text.pypdf\",\n        \"mission_id\": \"ASTRA-VERIFY-MARKDOWN-PDF-001\",\n        \"verification_evidence\": \"canonical/astra_runtime/evidence/ASTRA-VERIFY-MARKDOWN-PDF-001__INDEPENDENT.json\"\n      }\n    },\n    \"image.qr.generate.qrencode\": {\n      \"action_template\": {\n        \"args\": {\n          \"argv\": [\n            \"qrencode\",\n            \"-o\",\n            \"${input.output_path}\",\n            \"${input.text}\"\n          ],\n          \"capability_id\": \"image.qr.generate.qrencode\",\n          \"output_path\": \"${input.output_path}\",\n          \"output_prefix_hex\": \"89504e470d0a1a0a\",\n          \"timeout_s\": 60\n        },\n        \"expect\": {\n          \"field\": \"output_verified\",\n          \"type\": \"field_equals\",\n          \"value\": true\n        },\n        \"type\": \"invoke_capability\"\n      },\n      \"adapter_module\": \"",
+              "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+              "truncated": true,
+              "type": "read_file"
+            }
+          },
+          {
+            "cycle": 1,
+            "plan": {
+              "args": {
+                "capability_id": "json.query.jq",
+                "filter": ".[\"capabilities\"] | to_entries | map(select(.value | any(. == \"VERIFIED_BOUND_CAPABILITY\")) | {capability_id:.key, verification_mission_id:(.value.verification.mission_id // null), verification_paths:([.value.verification | paths(strings) as $p | select(($p[-1] | tostring | test(\"evidence|receipt|result_path\";\"i\"))) | getpath($p) | select(startswith(\"canonical/\"))] | unique), source:(.value.source // {})}) | {schema:\"PROJECT_BRAIN_STATUS_MANIFEST_V1\",status_value:\"VERIFIED_BOUND_CAPABILITY\",records:.}",
+                "input_path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+                "output_path": "canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_MANIFEST.json",
+                "raw_output": false,
+                "require_nonempty": true,
+                "timeout_s": 60
+              },
+              "expect": {
+                "field": "output_verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "jq_query",
+              "argv": [
+                "jq",
+                "",
+                ".[\"capabilities\"] | to_entries | map(select(.value | any(. == \"VERIFIED_BOUND_CAPABILITY\")) | {capability_id:.key, verification_mission_id:(.value.verification.mission_id // null), verification_paths:([.value.verification | paths(strings) as $p | select(($p[-1] | tostring | test(\"evidence|receipt|result_path\";\"i\"))) | getpath($p) | select(startswith(\"canonical/\"))] | unique), source:(.value.source // {})}) | {schema:\"PROJECT_BRAIN_STATUS_MANIFEST_V1\",status_value:\"VERIFIED_BOUND_CAPABILITY\",records:.}",
+                "/home/runner/work/brain/brain/canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+              ],
+              "capability_id": "json.query.jq",
+              "dependency": {
+                "origin": "Ubuntu",
+                "packages": [
+                  {
+                    "archive_sha256": "f59183392f84fe67b407b494d8ba6185e9b0e4a106ffcb369490bd20a83fd40e",
+                    "name": "jq",
+                    "version": "1.7.1-3ubuntu0.24.04.2"
+                  }
+                ],
+                "status": "INSTALLED_VERIFIED"
+              },
+              "input_path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+              "output_bytes": 4859,
+              "output_path": "canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_MANIFEST.json",
+              "output_sha256": "72deb4ea179e5f93a434aba2e99f85a294f6bd0bfffaadea6220ae3cdb79a200",
+              "output_text_excerpt": "{\n  \"schema\": \"PROJECT_BRAIN_STATUS_MANIFEST_V1\",\n  \"status_value\": \"VERIFIED_BOUND_CAPABILITY\",\n  \"records\": [\n    {\n      \"capability_id\": \"auto.apt.zint\",\n      \"verification_mission_id\": \"ASTRA-AUTO-VERIFY-ZINT-85BC9CD2C9A4\",\n      \"verification_paths\": [\n        \"canonical/astra_runtime/evidence/ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003__zint__85bc9cd2c9a4__AUTO_VERIFY.json\"\n      ],\n      \"source\": {\n        \"origin\": \"Ubuntu\",\n        \"packages\": [\n          {\n            \"name\": \"zint\",\n            \"sha256\": \"cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769\",\n            \"version\": \"2.13.0-1build3\"\n          }\n        ],\n        \"type\": \"apt\"\n      }\n    },\n    {\n      \"capability_id\": \"document.convert.markdown_pdf.pandoc_weasyprint\",\n      \"verification_mission_id\": \"ASTRA-VERIFY-MARKDOWN-PDF-001\",\n      \"verification_paths\": [\n        \"canonical/astra_runtime/evidence/ASTRA-VERIFY-MARKDOWN-PDF-001__INDEPENDENT.json\"\n      ],\n      \"source\": {\n        \"origin\": \"Ubuntu\",\n        \"packages\": [\n          {\n            \"name\": \"pandoc\",\n            \"sha256\": \"021cf93191aea780c273e82ca3ab575b1522992705b6c28e350aa502573a27b5\",\n            \"version\": \"3.1.3+ds-2\"\n          },\n          {\n            \"name\": \"weasyprint\",\n            \"sha256\": \"79a1303592e2882ff58fb58658c6ae70f925ce335c6342cb1e778ed049514981\",\n            \"version\": \"61.1-1\"\n          }\n        ],\n        \"type\": \"apt\"\n      }\n    },\n    {\n      \"capability_id\": \"image.qr.generate.qrencode\",\n      \"verification_mission_id\": \"ASTRA-RUNTIME-BOUND-QR-GENERIC-001\",\n      \"verification_paths\": [\n        \"canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-QR-GENERIC-001__RECEIPT.json\"\n      ],\n      \"source\": {\n        \"origin\": \"Ubuntu\",\n        \"packages\": [\n          {\n            \"name\": \"qrencode\",\n            \"sha256\": \"613c5a22316489ec6a9ce5d59190293df15dd4612b55432dde04c62f7c1a0e25\",\n            \"version\": \"4.1.1-1build2\"\n          }\n        ],\n        \"type\": \"apt\"\n      }\n    },\n    {\n      \"capability_id\": \"json.query.jq\",\n      \"verification_mission_id\": \"ASTRA-VERIFY-JQ-STRUCTURED-DATA-001\",\n      \"verification_paths\": [\n        \"canonical/astra_runtime/evidence/ASTRA-VERIFY-JQ-STRUCTURED-DATA-001__INDEPENDENT.json\"\n      ],\n      \"source\": {\n        \"origin\": \"Ubuntu\",\n        \"packages\": [\n          {\n            \"name\": \"jq\",\n            \"sha256\": \"f59183392f84fe67b407b494d8ba6185e9b0e4a106ffcb369490bd20a83fd40e\",\n            \"version\": \"1.7.1-3ubuntu0.24.04.2\"\n          }\n        ],\n        \"type\": \"apt\"\n      }\n    },\n    {\n      \"capability_id\": \"pdf.extract.ocr.tesseract\",\n      \"verification_mission_id\": \"ASTRA-RUNTIME-BOUND-PDF-OCR-001\",\n      \"verification_paths\": [\n        \"canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-PDF-OCR-001__RECEIPT.json\"\n      ],\n      \"source\": {\n        \"origin\": \"Ubuntu\",\n        \"packages\": [\n          {\n            \"name\": \"tesseract-ocr\",\n            \"sha256\": \"2dfac382d77215aee0c3de4a2a2205505d5f2195e72e79b54ad32154fc08da77\",\n            \"version\": \"5.3.4-1build5\"\n          },\n          {\n            \"name\": \"poppler-utils\",\n            \"sha256\": \"fb936375b183a9d8ecb5b1fc5665a44110ca130c445946fb575c0b800b1dc0f4\",\n            \"version\": \"24.02.0-1ubuntu9.9\"\n          }\n        ],\n        \"type\": \"apt\"\n      }\n    },\n    {\n      \"capability_id\": \"pdf.extract.text.pypdf\",\n      \"verification_mission_id\": \"ASTRA-RUNTIME-BOUND-PDF-TEXT-001\",\n      \"verification_paths\": [\n        \"canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-PDF-TEXT-001__RECEIPT.json\"\n      ],\n      \"source\": {\n        \"license\": \"BSD-3-Clause\",\n        \"metadata_url\": \"https://pypi.org/pypi/pypdf/6.19.0/json\",\n        \"project\": \"pypdf\",\n        \"trusted_publishing\": true,\n        \"type\": \"pypi\",\n        \"version\": \"6.19.0\",\n        \"wheel_filename\": \"pypdf-6.19.0-py3-none-any.whl\",\n        \"wheel_sha256\": \"7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14\"\n      }\n    },\n    {\n      \"capability_id\": \"a",
+              "output_text_utf8_verified": true,
+              "output_verified": true,
+              "returncode": 0,
+              "stderr": ""
+            }
+          },
+          {
+            "cycle": 2,
+            "plan": {
+              "args": {
+                "capability_id": "archive.tar_gz.create_from_manifest",
+                "manifest_path": "canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_MANIFEST.json",
+                "output_path": "canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_BUNDLE.tar.gz"
+              },
+              "expect": {
+                "field": "output_verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "archive_tarfile",
+              "capability_id": "archive.tar_gz.create_from_manifest",
+              "dependency": {
+                "module": "tarfile",
+                "python_version": "3.12.14",
+                "status": "LOCAL_VERIFIED",
+                "type": "python_stdlib"
+              },
+              "member_count": 8,
+              "members": [
+                "canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-PDF-OCR-001__RECEIPT.json",
+                "canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-PDF-TEXT-001__RECEIPT.json",
+                "canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-QR-GENERIC-001__RECEIPT.json",
+                "canonical/astra_runtime/evidence/ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003__zint__85bc9cd2c9a4__AUTO_VERIFY.json",
+                "canonical/astra_runtime/evidence/ASTRA-VERIFY-JQ-STRUCTURED-DATA-001__INDEPENDENT.json",
+                "canonical/astra_runtime/evidence/ASTRA-VERIFY-MANIFEST-ARCHIVE-001__RECEIPT.json",
+                "canonical/astra_runtime/evidence/ASTRA-VERIFY-MARKDOWN-PDF-001__INDEPENDENT.json",
+                "canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_MANIFEST.json"
+              ],
+              "output_bytes": 3064,
+              "output_path": "canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_BUNDLE.tar.gz",
+              "output_sha256": "afffd404fc15860fdb01ab1906ec15724c62f992ad9dd747a70935518e81e289",
+              "output_verified": true,
+              "source_sha256": {
+                "canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-PDF-OCR-001__RECEIPT.json": "b7faea12052eba8fafca3853d32bb1c72f0665ef401fca0395b49bd4d633cf87",
+                "canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-PDF-TEXT-001__RECEIPT.json": "92ac8cc31da88096ad19418809991642e84f221ff9d9ece6b681f97f909d4393",
+                "canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-QR-GENERIC-001__RECEIPT.json": "31142b07906bf962301bd4bde52524fc29ce1c98eacef99853082a839ca48ac4",
+                "canonical/astra_runtime/evidence/ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003__zint__85bc9cd2c9a4__AUTO_VERIFY.json": "fe0aa20ffd3a15ca3ddef02ddb2e9b2c867fc2d59b83b6f179db85dcaef9589b",
+                "canonical/astra_runtime/evidence/ASTRA-VERIFY-JQ-STRUCTURED-DATA-001__INDEPENDENT.json": "b9d08f27463a7c96d273ff6329a0360f7a938d54e5167353d54cfcf338d17708",
+                "canonical/astra_runtime/evidence/ASTRA-VERIFY-MANIFEST-ARCHIVE-001__RECEIPT.json": "8f66bc009811856578b0a3f15cc0c2160e93d47a247178ce36513f7a384f83fd",
+                "canonical/astra_runtime/evidence/ASTRA-VERIFY-MARKDOWN-PDF-001__INDEPENDENT.json": "faf2ea9bdc628652dad9f5d19dd58c36cd454219a76cc6660e957bdd3eff174c",
+                "canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_MANIFEST.json": "72deb4ea179e5f93a434aba2e99f85a294f6bd0bfffaadea6220ae3cdb79a200"
+              }
+            }
+          },
+          {
+            "cycle": 3,
+            "plan": {
+              "args": {
+                "archive_path": "canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_BUNDLE.tar.gz",
+                "capability_id": "archive.verify.tar_gz.gnu",
+                "manifest_path": "canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_MANIFEST.json"
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "archive_verify_gnu_tar",
+              "archive_path": "canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_BUNDLE.tar.gz",
+              "capability_id": "archive.verify.tar_gz.gnu",
+              "dependency": {
+                "executable": "tar",
+                "resolved_path": "/usr/bin/tar",
+                "status": "LOCAL_VERIFIED",
+                "type": "system_tool"
+              },
+              "manifest_path": "canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_MANIFEST.json",
+              "member_count": 8,
+              "members": [
+                "canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-PDF-OCR-001__RECEIPT.json",
+                "canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-PDF-TEXT-001__RECEIPT.json",
+                "canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-QR-GENERIC-001__RECEIPT.json",
+                "canonical/astra_runtime/evidence/ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003__zint__85bc9cd2c9a4__AUTO_VERIFY.json",
+                "canonical/astra_runtime/evidence/ASTRA-VERIFY-JQ-STRUCTURED-DATA-001__INDEPENDENT.json",
+                "canonical/astra_runtime/evidence/ASTRA-VERIFY-MANIFEST-ARCHIVE-001__RECEIPT.json",
+                "canonical/astra_runtime/evidence/ASTRA-VERIFY-MARKDOWN-PDF-001__INDEPENDENT.json",
+                "canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_MANIFEST.json"
+              ],
+              "verified": true
+            }
+          },
+          {
+            "cycle": 4,
+            "plan": {
+              "args": {
+                "summary": "COMPOUND_GOAL_COMPLETE"
+              },
+              "type": "finish"
+            },
+            "result": {
+              "summary": "COMPOUND_GOAL_COMPLETE",
+              "type": "finish"
+            }
+          }
+        ]
+      },
+      "step_id": "execute-evidence-bundle",
+      "step_index": 0
+    }
+  ],
   "mission_id": "ASTRA-RUNTIME-EVIDENCE-BUNDLE-001",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_EVIDENCE_BUNDLE_001.json",
-  "mission_sha256": "2617f9c7fece2dbb3dc61dd733034b6aae7f3374d91d5bb75e3ddaf60c84477a",
-  "next_step": 0,
+  "mission_sha256": "35d1e9accfa0a19ebe18ad4a979cf4f93a6d931c5216878f7c2c7deeb108f18e",
+  "next_step": 1,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
-  "status": "BLOCKED",
-  "updated_at_utc": "2026-09-25T00:29:11.995822+00:00"
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T00:31:46.228531+00:00"
 }
