@@ -77,7 +77,32 @@ def _extract_text_argument(goal):
     raise GoalCompilationFailure("GOAL_TEXT_INPUT_BINDING_REQUIRED")
 
 
-def _bind_inputs(goal, root, entry):
+def _context_path_for_key(key, context_paths):
+    stem=key[:-5].lower() if key.endswith("_path") else key.lower()
+    suffixes={
+        "markdown":{".md",".markdown"},
+        "json":{".json"},
+        "pdf":{".pdf"},
+        "text":{".txt",".md",".markdown",".csv",".tsv"},
+        "image":{".png",".jpg",".jpeg",".webp"},
+    }.get(stem,set())
+    candidates=[]
+    for raw in reversed(list(context_paths or [])):
+        p=pathlib.Path(str(raw))
+        if suffixes and p.suffix.lower() in suffixes:
+            candidates.append(str(raw))
+        elif stem in {"input","source"}:
+            candidates.append(str(raw))
+        elif stem and (stem in p.name.lower() or stem in p.suffix.lower()):
+            candidates.append(str(raw))
+    seen=[]
+    for x in candidates:
+        if x not in seen:
+            seen.append(x)
+    return seen[0] if len(seen)>=1 else None
+
+
+def _bind_inputs(goal, root, entry, context_paths=None):
     template=entry.get("action_template") or {}
     keys=_placeholders(template)
     if not keys:
@@ -108,6 +133,10 @@ def _bind_inputs(goal, root, entry):
                     continue
                 if len(existing)==1:
                     result[key]=existing[0][0]
+                    continue
+                context_value=_context_path_for_key(key,context_paths)
+                if context_value is not None:
+                    result[key]=context_value
                     continue
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED",key)
     return result
@@ -187,7 +216,7 @@ def decompose_goal(goal):
     return clauses
 
 
-def _compile_single_goal(goal, registry, root):
+def _compile_single_goal(goal, registry, root, context_paths=None):
     ranked=[]
     for cid,entry in sorted((registry or {}).items()):
         if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
@@ -198,7 +227,7 @@ def _compile_single_goal(goal, registry, root):
         if score<=0:
             continue
         try:
-            inputs=_bind_inputs(goal,root,entry)
+            inputs=_bind_inputs(goal,root,entry,context_paths=context_paths)
         except GoalCompilationFailure:
             continue
         ranked.append((score,specificity,cid,entry,inputs,evidence))
@@ -321,6 +350,61 @@ def _compile_json_markdown_table(subgoal, context_paths, registry, root):
     }
 
 
+def _find_record_collection(data, prefix=()):
+    if isinstance(data,dict):
+        if data and all(isinstance(v,dict) for v in data.values()):
+            return prefix
+        for key,value in data.items():
+            found=_find_record_collection(value,prefix+(str(key),))
+            if found is not None:
+                return found
+    return None
+
+
+def _compile_pdf_json_key_verification(subgoal, context_paths, registry, root, result_cycle):
+    lower=subgoal.lower()
+    if not re.match(r"^(?:verify|check)\b",lower):
+        return None
+    if "pdf" not in lower or "contain" not in lower or (" id" not in lower and " key" not in lower):
+        return None
+    pdf_paths=[p for p in context_paths if pathlib.Path(p).suffix.lower()==".pdf"]
+    json_paths=[p for p in context_paths if pathlib.Path(p).suffix.lower()==".json" and (pathlib.Path(root)/p).is_file()]
+    cap=(registry or {}).get("pdf.extract.text.pypdf")
+    if not pdf_paths or not json_paths or not isinstance(cap,dict) or cap.get("status")!="VERIFIED_BOUND_CAPABILITY":
+        return None
+    pdf_path=pdf_paths[-1]
+    json_path=json_paths[0]
+    data=json.loads((pathlib.Path(root)/json_path).read_text(encoding="utf-8"))
+    collection=_find_record_collection(data)
+    if collection is None:
+        return None
+    extract_action={
+      "type":"invoke_capability",
+      "args":{"capability_id":"pdf.extract.text.pypdf","path":pdf_path,"max_pages":200},
+      "expect":{"type":"field_nonempty","field":"text"},
+    }
+    assert_action={
+      "type":"assert_text_contains_json_keys",
+      "args":{
+        "text":{"$result":{"cycle":result_cycle,"field":"text"}},
+        "json_path":json_path,
+        "collection_path":list(collection),
+        "normalization":"alnum_upper",
+      },
+      "expect":{"type":"field_equals","field":"verified","value":True},
+    }
+    return {
+      "actions":[extract_action,assert_action],
+      "evidence":{
+        "pdf_path":pdf_path,
+        "json_path":json_path,
+        "collection_path":list(collection),
+        "extractor_capability":"pdf.extract.text.pypdf",
+        "verification_action":"assert_text_contains_json_keys",
+      }
+    }
+
+
 def _compile_compound_goal(goal, clauses, registry, root):
     actions=[]
     compiled_parts=[]
@@ -346,6 +430,18 @@ def _compile_compound_goal(goal, clauses, registry, root):
                 })
                 continue
 
+        verification=_compile_pdf_json_key_verification(
+            clause,context_paths,registry,root,len(actions)
+        )
+        if verification is not None:
+            actions.extend(verification["actions"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"INDEPENDENT_CONTENT_VERIFICATION",
+                **verification["evidence"],
+            })
+            continue
+
         structured=_compile_json_markdown_table(clause,context_paths,registry,root)
         if structured is not None:
             actions.append(structured["action"])
@@ -357,7 +453,7 @@ def _compile_compound_goal(goal, clauses, registry, root):
             })
             continue
         try:
-            part=_compile_single_goal(clause,registry,root)
+            part=_compile_single_goal(clause,registry,root,context_paths=context_paths)
         except GoalCompilationFailure as exc:
             raise GoalCompilationFailure(
                 "GOAL_COMPILATION_SUBGOAL_UNRESOLVED",
