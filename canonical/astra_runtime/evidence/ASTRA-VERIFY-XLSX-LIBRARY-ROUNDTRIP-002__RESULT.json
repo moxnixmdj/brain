@@ -1,0 +1,53 @@
+{
+  "reader_package": {
+    "name": "python3-openpyxl",
+    "sha256": "0892bf202df1f56bb36530c3ba9ac9f24f6a5b115442e7aa602b12e46aa0433c",
+    "version": "3.1.2+dfsg-6"
+  },
+  "reader_result": {
+    "adapter": "xlsx_verify_openpyxl",
+    "columns": [
+      "capability_id",
+      "status",
+      "source_type",
+      "provides",
+      "incremental_spend_usd"
+    ],
+    "producer_independent_verifier": true,
+    "status_value": "VERIFIED_BOUND_CAPABILITY",
+    "verified": true,
+    "verified_rows": 15,
+    "xlsx_path": "canonical/astra_runtime/tmp/XLSX_LIBRARY_ROUNDTRIP_VERIFY.xlsx",
+    "xlsx_sha256": "1574856b2a7f81cdbd09e2a1d5ecd2f3e732af557c1c31461840e7870c1d532d"
+  },
+  "schema": "PROJECT_BRAIN_XLSX_LIBRARY_ROUNDTRIP_VERIFICATION_V1",
+  "status": "VERIFIED",
+  "supplier_independent": true,
+  "verification_mission_id": "ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-002",
+  "verified": true,
+  "writer_package": {
+    "name": "python3-xlsxwriter",
+    "sha256": "234db5c80ba8d2eaf9933a95566f81a86aa01bb15b884f2ee6c932847e58bfd2",
+    "version": "3.1.9-1"
+  },
+  "writer_result": {
+    "adapter": "xlsx_table_xlsxwriter",
+    "collection_path": [
+      "capabilities"
+    ],
+    "column_count": 5,
+    "columns": [
+      "capability_id",
+      "status",
+      "source_type",
+      "provides",
+      "incremental_spend_usd"
+    ],
+    "output_bytes": 6061,
+    "output_path": "canonical/astra_runtime/tmp/XLSX_LIBRARY_ROUNDTRIP_VERIFY.xlsx",
+    "output_sha256": "1574856b2a7f81cdbd09e2a1d5ecd2f3e732af557c1c31461840e7870c1d532d",
+    "output_verified": true,
+    "row_count": 15,
+    "status_value": "VERIFIED_BOUND_CAPABILITY"
+  }
+}

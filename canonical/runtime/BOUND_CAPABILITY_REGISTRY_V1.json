@@ -860,7 +860,7 @@
       "verification": {
         "independent_verifier_package": "python3-openpyxl",
         "independently_verified": true,
-        "mission_id": "ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-001",
+        "mission_id": "ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-002",
         "observed_effect": {
           "adapter": "xlsx_table_xlsxwriter",
           "collection_path": [
@@ -874,14 +874,14 @@
             "provides",
             "incremental_spend_usd"
           ],
-          "output_bytes": 5975,
+          "output_bytes": 6061,
           "output_path": "canonical/astra_runtime/tmp/XLSX_LIBRARY_ROUNDTRIP_VERIFY.xlsx",
-          "output_sha256": "a54af2964857624e9da15e48369055e6e2ab74faed0239f2032261c217eb1ec7",
+          "output_sha256": "1574856b2a7f81cdbd09e2a1d5ecd2f3e732af557c1c31461840e7870c1d532d",
           "output_verified": true,
-          "row_count": 13,
+          "row_count": 15,
           "status_value": "VERIFIED_BOUND_CAPABILITY"
         },
-        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-001__RESULT.json"
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-002__RESULT.json"
       }
     },
     "xlsx.table.verify_against_json_records": {
@@ -934,7 +934,7 @@
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
         "independently_verified": true,
-        "mission_id": "ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-001",
+        "mission_id": "ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-002",
         "observed_effect": {
           "adapter": "xlsx_verify_openpyxl",
           "columns": [
@@ -947,12 +947,12 @@
           "producer_independent_verifier": true,
           "status_value": "VERIFIED_BOUND_CAPABILITY",
           "verified": true,
-          "verified_rows": 13,
+          "verified_rows": 15,
           "xlsx_path": "canonical/astra_runtime/tmp/XLSX_LIBRARY_ROUNDTRIP_VERIFY.xlsx",
-          "xlsx_sha256": "a54af2964857624e9da15e48369055e6e2ab74faed0239f2032261c217eb1ec7"
+          "xlsx_sha256": "1574856b2a7f81cdbd09e2a1d5ecd2f3e732af557c1c31461840e7870c1d532d"
         },
         "producer_package": "python3-xlsxwriter",
-        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-001__RESULT.json"
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-002__RESULT.json"
       }
     },
     "yaml.to_json.yq": {

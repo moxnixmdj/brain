@@ -1,0 +1,42 @@
+{
+  "completed_at_utc": "2026-09-25T01:49:07.428609+00:00",
+  "created_at_utc": "2026-09-25T01:48:54.211232+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T01:49:07.396456+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython canonical/runtime/verify_xlsx_library_roundtrip.py canonical/astra_runtime/evidence/ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-002__RESULT.json ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-002",
+        "duration_s": 13.185,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "XLSX_LIBRARY_ROUNDTRIP_VERIFIED {\"reader_package\": {\"name\": \"python3-openpyxl\", \"sha256\": \"0892bf202df1f56bb36530c3ba9ac9f24f6a5b115442e7aa602b12e46aa0433c\", \"version\": \"3.1.2+dfsg-6\"}, \"reader_result\": {\"adapter\": \"xlsx_verify_openpyxl\", \"columns\": [\"capability_id\", \"status\", \"source_type\", \"provides\", \"incremental_spend_usd\"], \"producer_independent_verifier\": true, \"status_value\": \"VERIFIED_BOUND_CAPABILITY\", \"verified\": true, \"verified_rows\": 15, \"xlsx_path\": \"canonical/astra_runtime/tmp/XLSX_LIBRARY_ROUNDTRIP_VERIFY.xlsx\", \"xlsx_sha256\": \"1574856b2a7f81cdbd09e2a1d5ecd2f3e732af557c1c31461840e7870c1d532d\"}, \"schema\": \"PROJECT_BRAIN_XLSX_LIBRARY_ROUNDTRIP_VERIFICATION_V1\", \"status\": \"VERIFIED\", \"supplier_independent\": true, \"verification_mission_id\": \"ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-002\", \"verified\": true, \"writer_package\": {\"name\": \"python3-xlsxwriter\", \"sha256\": \"234db5c80ba8d2eaf9933a95566f81a86aa01bb15b884f2ee6c932847e58bfd2\", \"version\": \"3.1.9-1\"}, \"writer_result\": {\"adapter\": \"xlsx_table_xlsxwriter\", \"collection_path\": [\"capabilities\"], \"column_count\": 5, \"columns\": [\"capability_id\", \"status\", \"source_type\", \"provides\", \"incremental_spend_usd\"], \"output_bytes\": 6061, \"output_path\": \"canonical/astra_runtime/tmp/XLSX_LIBRARY_ROUNDTRIP_VERIFY.xlsx\", \"output_sha256\": \"1574856b2a7f81cdbd09e2a1d5ecd2f3e732af557c1c31461840e7870c1d532d\", \"output_verified\": true, \"row_count\": 15, \"status_value\": \"VERIFIED_BOUND_CAPABILITY\"}}\n"
+      },
+      "step_id": "reverify-independent-xlsx-roundtrip",
+      "step_index": 0
+    },
+    {
+      "completed_at_utc": "2026-09-25T01:49:07.428294+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython canonical/runtime/promote_xlsx_library_capabilities.py canonical/astra_runtime/evidence/ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-002__RESULT.json",
+        "duration_s": 0.031,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "XLSX_LIBRARY_CAPABILITIES_PROMOTED\n"
+      },
+      "step_id": "refresh-promoted-xlsx-capabilities",
+      "step_index": 1
+    }
+  ],
+  "mission_id": "ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_XLSX_LIBRARY_ROUNDTRIP_002.json",
+  "mission_sha256": "6d6ee2884f5eb3460c4cb32fbca36734f537f0f64cb1a1392955a6c83ef49b73",
+  "next_step": 2,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T01:49:07.428308+00:00"
+}
