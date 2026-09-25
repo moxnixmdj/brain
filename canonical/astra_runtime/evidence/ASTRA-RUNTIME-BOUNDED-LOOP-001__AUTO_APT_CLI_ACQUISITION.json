@@ -1,0 +1,912 @@
+{
+  "attempts": [
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "76f4dfa24bbccdd9728f23d7eee045bdd33804549bceac8ad7a083f40c58a1e7",
+        "executables": [],
+        "package": "caja-open-terminal",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.26.1-2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 126.0,
+        "archive_sha256": "76f4dfa24bbccdd9728f23d7eee045bdd33804549bceac8ad7a083f40c58a1e7",
+        "binding_kind": "apt",
+        "description": "Caja plugin for opening terminals in arbitrary local paths",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "open"
+        ],
+        "name": "caja-open-terminal",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 62,
+        "version": "1.26.1-2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "007d3c33e315dca1e6d6c5282219741ce73afddd2755f0b7f9f6755db7940057",
+        "executables": [],
+        "package": "peony-open-terminal",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "3.2.4-1ubuntu4"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 126.0,
+        "archive_sha256": "007d3c33e315dca1e6d6c5282219741ce73afddd2755f0b7f9f6755db7940057",
+        "binding_kind": "apt",
+        "description": "Peony plugin for opening terminals in arbitrary local paths",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "open"
+        ],
+        "name": "peony-open-terminal",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 62,
+        "version": "3.2.4-1ubuntu4",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "591a4d18d36ecc0f3d4c25059d1d4eedd70c5ace2bf52f1d9ca99fedf2b5b0c1",
+        "executables": [
+          {
+            "executable": "/usr/bin/chemstruc",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Error: no DISPLAY environment variable specified"
+              }
+            ]
+          }
+        ],
+        "package": "chemical-structures",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "2.2.dfsg.0-20"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 112.0,
+        "archive_sha256": "591a4d18d36ecc0f3d4c25059d1d4eedd70c5ace2bf52f1d9ca99fedf2b5b0c1",
+        "binding_kind": "apt",
+        "description": "web service providing molecular structures in open formats",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "open"
+        ],
+        "name": "chemical-structures",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "2.2.dfsg.0-20",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "3ab63493923e8d6f0408ab9e5f1dc3ce9d16bdddb03c7434d3feab5f2869ccc0",
+        "executables": [],
+        "package": "chemical-structures-data",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "2.2.dfsg.0-20"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 112.0,
+        "archive_sha256": "3ab63493923e8d6f0408ab9e5f1dc3ce9d16bdddb03c7434d3feab5f2869ccc0",
+        "binding_kind": "apt",
+        "description": "set of molecular structures in open formats",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "open"
+        ],
+        "name": "chemical-structures-data",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "2.2.dfsg.0-20",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ProbeFailure:APT_INSTALL_FAILED:E: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\n",
+      "status": "PROBE_FAILED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 112.0,
+        "archive_sha256": "a092f4ec30455db4e7c9aea99332934738d117cac588301523455f39cb8d2b48",
+        "binding_kind": "apt",
+        "description": "Open Source Neural Networks in C",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "open"
+        ],
+        "name": "darknet",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "0.0.0+git20180914.61c9d02e-2build7",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "ea60c5696ed155f3ffe19a601b659881fc655e547cc17e5f5828c63542710cf9",
+        "executables": [],
+        "package": "elpa-openwith",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.8g-5"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 112.0,
+        "archive_sha256": "ea60c5696ed155f3ffe19a601b659881fc655e547cc17e5f5828c63542710cf9",
+        "binding_kind": "apt",
+        "description": "seamlessly open files in external programs with Emacs",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "open"
+        ],
+        "name": "elpa-openwith",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "0.8g-5",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "b9649737dc4acfd4d434c2063f6d22e18ba8654a81fbec20a77a8d1543a6d67b",
+        "executables": [],
+        "package": "mde-netfilter",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "100.69.73"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 112.0,
+        "archive_sha256": "b9649737dc4acfd4d434c2063f6d22e18ba8654a81fbec20a77a8d1543a6d67b",
+        "binding_kind": "apt",
+        "description": "Microsoft Defender for Endpoints Netfitler ({{{RELEASE_RING}}}) Microsoft Defender for Endpoints Netfilter is an open source software to filter packets in userspace",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "open"
+        ],
+        "name": "mde-netfilter",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "100.69.73",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "e6c42222b97620ad6aae8e89ed54b1b187e5525722ac0292ad93527b6500743a",
+        "executables": [],
+        "package": "xmms2-plugin-ofa",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.8+dfsg-24ubuntu3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 112.0,
+        "archive_sha256": "e6c42222b97620ad6aae8e89ed54b1b187e5525722ac0292ad93527b6500743a",
+        "binding_kind": "apt",
+        "description": "XMMS2 - Open Fingerprint Architecture plug-in",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "open"
+        ],
+        "name": "xmms2-plugin-ofa",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "0.8+dfsg-24ubuntu3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "65b11d56b9baeb9ef58f39a0ed9b45f2aed77b029279a5be416e6fc60084245f",
+        "executables": [
+          {
+            "executable": "/usr/bin/ynew",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "command does not exist\n\u001b[?2004h\u001b)0\u001b[1;24r\u001b[m\u001b(B\u001b[4l\u001b[?7h\u001b[?25l\u001b[H\u001b[J\u001b[22;34H\u001b[0;7m\u001b(B[ Reading... ]\u001b[m\u001b(B\u001b[22;33H\u001b[0;7m\u001b(B[ Read 1 line ]\u001b[m\u001b(B\u001b[?25h\u001b[24;1H\n\u001b[?2004l\nStandard input is not a terminal"
+              }
+            ]
+          }
+        ],
+        "package": "ynew",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.5-1build2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 112.0,
+        "archive_sha256": "65b11d56b9baeb9ef58f39a0ed9b45f2aed77b029279a5be416e6fc60084245f",
+        "binding_kind": "apt",
+        "description": "Open a named yakuake tab and runs a script in it",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "open"
+        ],
+        "name": "ynew",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "1.5-1build2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "d438564bc17b854772482af5dc92bdeb1dd8dcd9172e68d93b0cff6ea6c3185c",
+        "executables": [],
+        "package": "inkscape-open-symbols",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.2.1-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 96.0,
+        "archive_sha256": "d438564bc17b854772482af5dc92bdeb1dd8dcd9172e68d93b0cff6ea6c3185c",
+        "binding_kind": "apt",
+        "description": "Open source SVG symbol sets that can be used as Inkscape symbols",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "open"
+        ],
+        "name": "inkscape-open-symbols",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.2.1-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ProbeFailure:APT_INSTALL_FAILED:E: Failed to fetch https://security.ubuntu.com/ubuntu/pool/restricted/l/linux-restricted-modules-aws-7.0/linux-modules-nvidia-580-open-aws_7.0.0-1012.12%7e24.04.1%2b1_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch https://security.ubuntu.com/ubuntu/pool/restricted/l/linux-restricted-modules-aws-7.0/linux-modules-nvidia-535-open-aws_7.0.0-1012.12%7e24.04.1%2b1_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\n",
+      "status": "PROBE_FAILED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 96.0,
+        "archive_sha256": "03370057bddb776dd920ef1283ac654025156c7141c1a95a13d0e3b85239174c",
+        "binding_kind": "apt",
+        "description": "Extra drivers for nvidia-525-open for the aws flavour (dummy transitional package)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "open"
+        ],
+        "name": "linux-modules-nvidia-525-open-aws",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.17.0-1019.19~24.04.1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ProbeFailure:APT_INSTALL_FAILED:E: Unable to correct problems, you have held broken packages.\n",
+      "status": "PROBE_FAILED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 96.0,
+        "archive_sha256": "66ad823140da14c62be7cef701574baa0dadf1e8577f0999bd1402e57b17caa7",
+        "binding_kind": "apt",
+        "description": "Extra drivers for nvidia-525-open for the aws flavour (dummy transitional package)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "open"
+        ],
+        "name": "linux-modules-nvidia-525-open-aws-6.14",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.14.0-1018.18~24.04.1+3",
+        "zero_cost_eligible": true
+      }
+    }
+  ],
+  "goal": "Open https://httpbin.org/uuid in a rendered browser repeatedly, no more than 8 times",
+  "mission_id": "ASTRA-RUNTIME-BOUNDED-LOOP-001",
+  "role_conditioned_discovery": [
+    {
+      "binding_performed": false,
+      "candidate_count": 24,
+      "candidates": [
+        {
+          "archive_sha256": "2153aacd39a59ddf5aee4d6c2b7b3fb4b7d0c411c081a744d2a5346f86b99191",
+          "binding_kind": "apt",
+          "description": "openuri patch to allow redirections between HTTP and HTTPS",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 2,
+          "matched_terms": [
+            "https",
+            "open"
+          ],
+          "name": "ruby-open-uri-redirections",
+          "packages": [],
+          "query": "open",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 44,
+          "version": "0.2.1-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "472c59e11a30427c3b7107a294599a35ea8f8b9e3a4bd6fe4cfa6979a052f5cb",
+          "binding_kind": "apt",
+          "description": "transitional package for https support",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "https"
+          ],
+          "name": "apt-transport-https",
+          "packages": [],
+          "query": "https",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "2.8.3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "76f4dfa24bbccdd9728f23d7eee045bdd33804549bceac8ad7a083f40c58a1e7",
+          "binding_kind": "apt",
+          "description": "Caja plugin for opening terminals in arbitrary local paths",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "open"
+          ],
+          "name": "caja-open-terminal",
+          "packages": [],
+          "query": "open",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.26.1-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "d7b1f2d7f39da18e4e3de703e25bb91b09757e8a70bae037ae57410a7fd57a10",
+          "binding_kind": "apt",
+          "description": "humanist sans serif typeface by Steve Matteson",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "open"
+          ],
+          "name": "fonts-open-sans",
+          "packages": [],
+          "query": "open",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.11-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "d438564bc17b854772482af5dc92bdeb1dd8dcd9172e68d93b0cff6ea6c3185c",
+          "binding_kind": "apt",
+          "description": "Open source SVG symbol sets that can be used as Inkscape symbols",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "open"
+          ],
+          "name": "inkscape-open-symbols",
+          "packages": [],
+          "query": "open",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.2.1-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "03370057bddb776dd920ef1283ac654025156c7141c1a95a13d0e3b85239174c",
+          "binding_kind": "apt",
+          "description": "Extra drivers for nvidia-525-open for the aws flavour (dummy transitional package)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "open"
+          ],
+          "name": "linux-modules-nvidia-525-open-aws",
+          "packages": [],
+          "query": "open",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.17.0-1019.19~24.04.1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "66ad823140da14c62be7cef701574baa0dadf1e8577f0999bd1402e57b17caa7",
+          "binding_kind": "apt",
+          "description": "Extra drivers for nvidia-525-open for the aws flavour (dummy transitional package)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "open"
+          ],
+          "name": "linux-modules-nvidia-525-open-aws-6.14",
+          "packages": [],
+          "query": "open",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.14.0-1018.18~24.04.1+3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "943abb39021c45f455f374dee60487e050a27012b6d45b078dd7cef1e834b1bf",
+          "binding_kind": "apt",
+          "description": "Extra drivers for nvidia-525-open for the aws flavour (dummy transitional package)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "open"
+          ],
+          "name": "linux-modules-nvidia-525-open-aws-6.17",
+          "packages": [],
+          "query": "open",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.17.0-1019.19~24.04.1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "fc4bac2e98844d65d8a6dd3fcc04c0ecd4b93ea645b4684a0a2c764dafa040e6",
+          "binding_kind": "apt",
+          "description": "Extra drivers for nvidia-525-open for the aws flavour (dummy transitional package)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "open"
+          ],
+          "name": "linux-modules-nvidia-525-open-aws-6.8",
+          "packages": [],
+          "query": "open",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.8.0-1060.63",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "9182a4e20269fc64435de939b795d0e136259abe9bd6a1d8dfcd9ed6b2b39868",
+          "binding_kind": "apt",
+          "description": "Extra drivers for nvidia-525-open for the aws flavour (dummy transitional package)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "open"
+          ],
+          "name": "linux-modules-nvidia-525-open-aws-7.0",
+          "packages": [],
+          "query": "open",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "7.0.0-1007.7~24.04.2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "9769447fb673478edf8c1ed61085814acf8f1ed1f2df2ff09bc99723cc4dcf93",
+          "binding_kind": "apt",
+          "description": "Extra drivers for nvidia-525-open for the aws flavour (dummy transitional package)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "open"
+          ],
+          "name": "linux-modules-nvidia-525-open-aws-edge",
+          "packages": [],
+          "query": "open",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "7.0.0-1007.7~24.04.2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "4d6ca0ef17d2af19fb6f53689438d6a70f2f4c647ba8a2d557bdac5e0b372771",
+          "binding_kind": "apt",
+          "description": "Extra drivers for nvidia-525-open for the aws flavour (dummy transitional package)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "open"
+          ],
+          "name": "linux-modules-nvidia-525-open-aws-lts-24.04",
+          "packages": [],
+          "query": "open",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.8.0-1060.63",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "756018fda475cf232d65ee1468a93407122a18766c91a8b62fcf41b8a198b056",
+          "binding_kind": "apt",
+          "description": "Extra drivers for nvidia-525-open for the azure flavour (dummy transitional package)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "open"
+          ],
+          "name": "linux-modules-nvidia-525-open-azure",
+          "packages": [],
+          "query": "open",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.17.0-1020.20~24.04.1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "4e85cd57f13501616f1cbb3be3a9c2e2b999711fdf62f93b2ed60bc3dedb590a",
+          "binding_kind": "apt",
+          "description": "Extra drivers for nvidia-525-open for the azure flavour (dummy transitional package)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "open"
+          ],
+          "name": "linux-modules-nvidia-525-open-azure-6.11",
+          "packages": [],
+          "query": "open",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.11.0-1018.18~24.04.1+3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "660a216492f1995806a86dab107e7182ef86e8a61889d62a36a711bcfd929d73",
+          "binding_kind": "apt",
+          "description": "Extra drivers for nvidia-525-open for the azure flavour (dummy transitional package)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "open"
+          ],
+          "name": "linux-modules-nvidia-525-open-azure-6.14",
+          "packages": [],
+          "query": "open",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.14.0-1017.17~24.04.1+2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "8340da477587778f24c705903fa4a069346a49d783ca6a1144a787742f3e0f37",
+          "binding_kind": "apt",
+          "description": "Extra drivers for nvidia-525-open for the azure flavour (dummy transitional package)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "open"
+          ],
+          "name": "linux-modules-nvidia-525-open-azure-6.17",
+          "packages": [],
+          "query": "open",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.17.0-1020.20~24.04.1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "46d7d3e5065a75a69375c11caa755721b10186291b4b074683fc68c0111a65e9",
+          "binding_kind": "apt",
+          "description": "Extra drivers for nvidia-525-open for the azure flavour (dummy transitional package)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "open"
+          ],
+          "name": "linux-modules-nvidia-525-open-azure-6.8",
+          "packages": [],
+          "query": "open",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.8.0-1062.69",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "ddb87f53f842c8663eb5d905210330657d16de493f3df1a2f5b6edb96bc1e037",
+          "binding_kind": "apt",
+          "description": "Extra drivers for nvidia-525-open for the azure flavour (dummy transitional package)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "open"
+          ],
+          "name": "linux-modules-nvidia-525-open-azure-7.0",
+          "packages": [],
+          "query": "open",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "7.0.0-1008.8~24.04.2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "963f6db7a9436d8338727d0416a8d21aaa60fba84bf5fa23ae3108306dc16a53",
+          "binding_kind": "apt",
+          "description": "Extra drivers for nvidia-525-open for the azure flavour (dummy transitional package)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "open"
+          ],
+          "name": "linux-modules-nvidia-525-open-azure-edge",
+          "packages": [],
+          "query": "open",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "7.0.0-1008.8~24.04.2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "0317b34f83e24d07d1e0d9b283237f83cb98cecbd5e9741c9b3d0d8c01ea6d76",
+          "binding_kind": "apt",
+          "description": "Extra drivers for nvidia-525-open for the azure-fde flavour (dummy transitional package)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "open"
+          ],
+          "name": "linux-modules-nvidia-525-open-azure-fde",
+          "packages": [],
+          "query": "open",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.17.0-1017.17~24.04.1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "af88a87a4abf0bbc0225b988b0de5cb36b9a21657494f482fec6e07545c3bd29",
+          "binding_kind": "apt",
+          "description": "Extra drivers for nvidia-525-open for the azure-fde flavour (dummy transitional package)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "open"
+          ],
+          "name": "linux-modules-nvidia-525-open-azure-fde-6.14",
+          "packages": [],
+          "query": "open",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.14.0-1017.17~24.04.1+2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "37bfbdeace85c06c6ef472563a2de972f94701b819b79130914c47237b1d5fc4",
+          "binding_kind": "apt",
+          "description": "Extra drivers for nvidia-525-open for the azure-fde flavour (dummy transitional package)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "open"
+          ],
+          "name": "linux-modules-nvidia-525-open-azure-fde-6.17",
+          "packages": [],
+          "query": "open",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.17.0-1017.17~24.04.1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "7ac73fc7782c596a2e11e7b1434f3060103c5878afddcbd84b3db41a8958735c",
+          "binding_kind": "apt",
+          "description": "Extra drivers for nvidia-525-open for the azure-fde flavour (dummy transitional package)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "open"
+          ],
+          "name": "linux-modules-nvidia-525-open-azure-fde-6.8",
+          "packages": [],
+          "query": "open",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.8.0-1061.68",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "57da5d65b977f8e5a5314d8cb429dfd428b85bc3e92c546ba4c8ccb65e830e9d",
+          "binding_kind": "apt",
+          "description": "Extra drivers for nvidia-525-open for the azure-fde flavour (dummy transitional package)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "open"
+          ],
+          "name": "linux-modules-nvidia-525-open-azure-fde-7.0",
+          "packages": [],
+          "query": "open",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "7.0.0-1007.7~24.04.3",
+          "zero_cost_eligible": true
+        }
+      ],
+      "effect": "open https",
+      "errors": [],
+      "queries": [
+        "open",
+        "https"
+      ],
+      "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+      "source": "APT_CATALOG",
+      "source_url": null
+    }
+  ],
+  "schema": "PROJECT_BRAIN_AUTO_APT_CLI_ACQUISITION_EVIDENCE_V1",
+  "status": "NO_COMPATIBLE_CONTRACT"
+}

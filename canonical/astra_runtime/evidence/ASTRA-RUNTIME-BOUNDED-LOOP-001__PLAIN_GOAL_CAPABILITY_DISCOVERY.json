@@ -1,0 +1,2475 @@
+{
+  "auto_acquisition": {
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"caja-open-terminal\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"peony-open-terminal\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"chemical-structures\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"chemical-structures-data\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:E: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\\n\", \"name\": \"darknet\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-openwith\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"mde-netfilter\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"xmms2-plugin-ofa\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"ynew\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"inkscape-open-symbols\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:E: Failed to fetch https://security.ubuntu.com/ubuntu/pool/restricted/l/linux-restricted-modules-aws-7.0/linux-modules-nvidia-580-open-aws_7.0.0-1012.12%7e24.04.1%2b1_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Failed to fetch https://security.ubuntu.com/ubuntu/pool/restricted/l/linux-restricted-modules-aws-7.0/linux-modules-nvidia-535-open-aws_7.0.0-1012.12%7e24.04.1%2b1_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\\n\", \"name\": \"linux-modules-nvidia-525-open-aws\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:E: Unable to correct problems, you have held broken packages.\\n\", \"name\": \"linux-modules-nvidia-525-open-aws-6.14\", \"status\": \"PROBE_FAILED\"}]",
+    "status": "NOT_DISPATCHED"
+  },
+  "binding_performed": false,
+  "goal": "Open https://httpbin.org/uuid in a rendered browser repeatedly, no more than 8 times. After each result, inspect the UUID. Finish when its first hexadecimal character is in 0,1,2,3,4,5,6,7, otherwise continue until attempt 8. Save every observed result under canonical/astra_runtime/tmp/UUID_LOOP_ATTEMPTS and save canonical/astra_runtime/tmp/UUID_LOOP_RESULT.json with status, attempts, matched, selected_uuid, and selected_attempt. Independently verify the saved trace and stopping decision.",
+  "mission_id": "ASTRA-RUNTIME-BOUNDED-LOOP-001",
+  "observed_at_utc": "2026-09-25T17:13:32.148277+00:00",
+  "result": {
+    "binding_performed": false,
+    "candidates": [
+      {
+        "archive_sha256": "76f4dfa24bbccdd9728f23d7eee045bdd33804549bceac8ad7a083f40c58a1e7",
+        "binding_kind": "apt",
+        "description": "Caja plugin for opening terminals in arbitrary local paths",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "open"
+        ],
+        "name": "caja-open-terminal",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 62,
+        "version": "1.26.1-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "007d3c33e315dca1e6d6c5282219741ce73afddd2755f0b7f9f6755db7940057",
+        "binding_kind": "apt",
+        "description": "Peony plugin for opening terminals in arbitrary local paths",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "open"
+        ],
+        "name": "peony-open-terminal",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 62,
+        "version": "3.2.4-1ubuntu4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "591a4d18d36ecc0f3d4c25059d1d4eedd70c5ace2bf52f1d9ca99fedf2b5b0c1",
+        "binding_kind": "apt",
+        "description": "web service providing molecular structures in open formats",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "open"
+        ],
+        "name": "chemical-structures",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "2.2.dfsg.0-20",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "3ab63493923e8d6f0408ab9e5f1dc3ce9d16bdddb03c7434d3feab5f2869ccc0",
+        "binding_kind": "apt",
+        "description": "set of molecular structures in open formats",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "open"
+        ],
+        "name": "chemical-structures-data",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "2.2.dfsg.0-20",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "a092f4ec30455db4e7c9aea99332934738d117cac588301523455f39cb8d2b48",
+        "binding_kind": "apt",
+        "description": "Open Source Neural Networks in C",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "open"
+        ],
+        "name": "darknet",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "0.0.0+git20180914.61c9d02e-2build7",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ea60c5696ed155f3ffe19a601b659881fc655e547cc17e5f5828c63542710cf9",
+        "binding_kind": "apt",
+        "description": "seamlessly open files in external programs with Emacs",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "open"
+        ],
+        "name": "elpa-openwith",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "0.8g-5",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "b9649737dc4acfd4d434c2063f6d22e18ba8654a81fbec20a77a8d1543a6d67b",
+        "binding_kind": "apt",
+        "description": "Microsoft Defender for Endpoints Netfitler ({{{RELEASE_RING}}}) Microsoft Defender for Endpoints Netfilter is an open source software to filter packets in userspace",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "open"
+        ],
+        "name": "mde-netfilter",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "100.69.73",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "e6c42222b97620ad6aae8e89ed54b1b187e5525722ac0292ad93527b6500743a",
+        "binding_kind": "apt",
+        "description": "XMMS2 - Open Fingerprint Architecture plug-in",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "open"
+        ],
+        "name": "xmms2-plugin-ofa",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "0.8+dfsg-24ubuntu3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "65b11d56b9baeb9ef58f39a0ed9b45f2aed77b029279a5be416e6fc60084245f",
+        "binding_kind": "apt",
+        "description": "Open a named yakuake tab and runs a script in it",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "open"
+        ],
+        "name": "ynew",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "1.5-1build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "472c59e11a30427c3b7107a294599a35ea8f8b9e3a4bd6fe4cfa6979a052f5cb",
+        "binding_kind": "apt",
+        "description": "transitional package for https support",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "https"
+        ],
+        "name": "apt-transport-https",
+        "packages": [],
+        "query": "https",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.8.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "06e36657e49871a4e7c1f7eafe72767ba4910ca0eb6f6780370bbdc45fd749d1",
+        "binding_kind": "apt",
+        "description": "apt transport method for in-toto supply chain verification",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "apt-transport-in-toto",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.1.1-4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "9d6fb4cc115dbc1b5e9db3abb840c67e8f29e5989c5bd12cf11c5a7afddfc9b9",
+        "binding_kind": "apt",
+        "description": "Alsamixer plug-in for Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-alsamixer-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "40e02cf501ebf32ff2635a938d9a55e89ba4e42b6aafd69fc33cf9bcb682871f",
+        "binding_kind": "apt",
+        "description": "Animated icons plug-in Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-animated-icons-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "be461fc4ab6b5a62f94f289f37cca80d5079eaab5caba3b0a5d1b6f9e0a6917b",
+        "binding_kind": "apt",
+        "description": "Cairo-Penguin plug-in for Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-cairo-penguin-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "4b52f651b4646f2e296909e1b14988fc4e322d7b623a248044a10794e553d807",
+        "binding_kind": "apt",
+        "description": "Clipper plug-in for Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-clipper-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "db1917010f6a69bee651068474b076ee7c11a9d3bf27d3b2125eafac394c34af",
+        "binding_kind": "apt",
+        "description": "Clock plug-in for Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-clock-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "f4a3f90969325882d034b1e92c764ffbd7afeaf7c927580ec0d52c42573d6b36",
+        "binding_kind": "apt",
+        "description": "Dbus plug-in for Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-dbus-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c7951529483042d42cc35f0d14b332f315e37f82092fb82a309db6c067803cf0",
+        "binding_kind": "apt",
+        "description": "library of D-Bus interface for Python of Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-dbus-plug-in-interface-python",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "7050a675d3826b37274c0e978059dbd925ff535032c163ef2a7a4e29ec6c321a",
+        "binding_kind": "apt",
+        "description": "library of D-Bus interface for ruby of Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-dbus-plug-in-interface-ruby",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "67a3063663460115da719d97c73cf0e96914834b54aa6e200ffdc19154b132cb",
+        "binding_kind": "apt",
+        "description": "library of D-Bus interface for vala of Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-dbus-plug-in-interface-vala",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "2bf04bb7569755aea2629c18b4f4e88ffb8b366b2561964f107e179503a5d473",
+        "binding_kind": "apt",
+        "description": "Desklet rendering plug-in for Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-desklet-rendering-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c802632a826de2a96598b0dd8d1cfbfd4b7e01c475d784c17569fcaaf21c74fa",
+        "binding_kind": "apt",
+        "description": "Dialog rendering plug-in for Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-dialog-rendering-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ea7450de3dd245bbe81a79346f2699ca9a4b5877e6abcf531b13f469cdb1bca0",
+        "binding_kind": "apt",
+        "description": "Dnd2share plug-in for Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-dnd2share-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "319a49a226c199ac98fb53a84c9862b55c2e01d8f86bbf06e3eae3afe68659e3",
+        "binding_kind": "apt",
+        "description": "Drop indicator plug-in for Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-drop-indicator-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "59fb84e555b5e2a0aae19f5b64f908fd6ecf6a2ca72419cc8f2446b8b5966c19",
+        "binding_kind": "apt",
+        "description": "Dustbin plug-in for Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-dustbin-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "58f6b8b803898c432ae5f12ed90a25f5aeb6a76b7b263787bf2107e7b01839f7",
+        "binding_kind": "apt",
+        "description": "Folders plug-in Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-folders-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "3dc7509713024102d46864a1a96717b86350d022c886e46507fbe5876a0cda8b",
+        "binding_kind": "apt",
+        "description": "GMenu plug-in for Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-gmenu-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "2153aacd39a59ddf5aee4d6c2b7b3fb4b7d0c411c081a744d2a5346f86b99191",
+        "binding_kind": "apt",
+        "description": "openuri patch to allow redirections between HTTP and HTTPS",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 2,
+        "matched_terms": [
+          "https",
+          "open"
+        ],
+        "name": "ruby-open-uri-redirections",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 44,
+        "version": "0.2.1-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "135d88b473e0b49c3fe408bedf3d638657d64f80239a47be713a81df17e3bf34",
+        "binding_kind": "apt",
+        "description": "Perl module to open a browser in a given URL",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 3,
+        "matched_terms": [
+          "in",
+          "open"
+        ],
+        "name": "libbrowser-open-perl",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 42,
+        "version": "0.04-1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "8f2c9750cc1e05ca6e1b5309b73e409639c874323aaa1fab5ddeeeb29afc4aa5",
+        "binding_kind": "apt",
+        "description": "library to open an URI in the user's preferred application",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 4,
+        "matched_terms": [
+          "in",
+          "open"
+        ],
+        "name": "golang-github-skratchdot-open-golang-dev",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 36,
+        "version": "0.0~git20160302.0.75fb7ed-2.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "AI-powered trading strategy development: backtesting, market data, and portfolio analysis",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "agency.lona/trading",
+        "packages": [],
+        "query": "in",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.lona.agency/mcp"
+          }
+        ],
+        "repository": {
+          "id": "891584339",
+          "source": "github",
+          "subfolder": "packages/lona-mcp-server",
+          "url": "https://github.com/mindsightventures/lona"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "2.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Check how to contact a business website, and whether that contact path actually works.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "agency.ottobot/business-contact-finder",
+        "packages": [],
+        "query": "in",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://business-contact-finder-mcp.ottobot2025.workers.dev/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/modelcontextprotocol/registry"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.2.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Ten machine-readable signals on one public page: the top miss if any, and a receipt we re-verify.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.advisorsai/store-readiness",
+        "packages": [],
+        "query": "in",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://advisorsai.ai/store-readiness-mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.6",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Turn construction drawings into takeoffs, measured routes, schedules and estimates.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.aginera/preconstruction",
+        "packages": [],
+        "query": "in",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.aginera.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "A free one-minute reset for people, delivered by AI, with no account or personal data.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.ai-akari/one-minute-akari",
+        "packages": [],
+        "query": "in",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://ai-akari.ai/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/AInoAKARI/arigatou-kawaii-lp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Askline shows what ChatGPT says about a brand, then the SEO that feeds it.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.askline/askline",
+        "packages": [],
+        "query": "in",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://askline.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Schedule, generate and publish social posts to X, LinkedIn, Instagram, Threads and YouTube",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.autoposting/autoposting",
+        "packages": [],
+        "query": "in",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://app.autoposting.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Manage Kinnovis self-storage tariffs from chat.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.b77/kinnovis-storage",
+        "packages": [],
+        "query": "in",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://kinnovis-storage.b77.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Surface customer & prospect context from Slack, email, transcripts and tickets in any MCP client.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.backengine/backengine-mcp",
+        "packages": [],
+        "query": "in",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://backengine-prod.backengine.ai/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/BackEngine-ai/backengine-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "8.1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Remote MCP server for China brand visibility, destination demand, and KOL discovery workflows.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.chinamarketing/intelligence",
+        "packages": [],
+        "query": "in",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.chinamarketing.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Authenticated MCP Agent (Openai)",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.getvda/authenticated-mcp-agent-openai",
+        "packages": [],
+        "query": "open",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://authenticated-mcp-agent-openai.getvda.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "LLM Orchestration Agent (Langchain Openai)",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.getvda/llm-orchestration-agent-langchain-openai",
+        "packages": [],
+        "query": "open",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://llm-orchestration-agent-langchain-openai.getvda.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "LLM Orchestration Agent (Openai)",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.getvda/llm-orchestration-agent-openai",
+        "packages": [],
+        "query": "open",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://llm-orchestration-agent-openai.getvda.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "LLM Orchestration Agent (Opentelemetry Api)",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.getvda/llm-orchestration-agent-opentelemetry-api",
+        "packages": [],
+        "query": "open",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://llm-orchestration-agent-opentelemetry-api.getvda.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "LLM Orchestration Agent (Opentelemetry Instrumentation Fastapi)",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.getvda/llm-orchestration-agent-opentelemetry-instrumentation-fastapi",
+        "packages": [],
+        "query": "open",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://llm-orchestration-agent-opentelemetry-instrume-a529e4.getvda.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "OAuth LangChain OpenAI Agent",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.getvda/oauth-langchain-openai-agent",
+        "packages": [],
+        "query": "open",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://authenticated-llm-agent-google-auth-oauthlib.getvda.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Structured Output Agent (Openai)",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.getvda/structured-output-agent-openai",
+        "packages": [],
+        "query": "open",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://structured-output-agent-openai.getvda.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Traced OpenAI LangChain Agent",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.getvda/traced-openai-langchain-agent",
+        "packages": [],
+        "query": "open",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://authenticated-mcp-agent-opentelemetry-api.getvda.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "The Open House: a locker, a verifier, a fair coin, a job board, and rooms that give nothing back.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.gregbenza/openhouse",
+        "packages": [],
+        "query": "open",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://gregbenza.ai/mcp/openhouse"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/TheNonduality/gregbenza-ai"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Open scientific and engineering knowledge for AI agents: search, evidence, document publishing.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.openarx/openarx",
+        "packages": [],
+        "query": "open",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.openarx.ai/researcher/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/OpenArx-AI/openarx-core"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.3.2",
+        "zero_cost_eligible": true
+      }
+    ],
+    "effect": "Open https://httpbin.org/uuid in a rendered browser repeatedly, no more than 8 times",
+    "results": [
+      {
+        "binding_performed": false,
+        "candidate_count": 30,
+        "candidates": [
+          {
+            "archive_sha256": "76f4dfa24bbccdd9728f23d7eee045bdd33804549bceac8ad7a083f40c58a1e7",
+            "binding_kind": "apt",
+            "description": "Caja plugin for opening terminals in arbitrary local paths",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in",
+              "open"
+            ],
+            "name": "caja-open-terminal",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 62,
+            "version": "1.26.1-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "007d3c33e315dca1e6d6c5282219741ce73afddd2755f0b7f9f6755db7940057",
+            "binding_kind": "apt",
+            "description": "Peony plugin for opening terminals in arbitrary local paths",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in",
+              "open"
+            ],
+            "name": "peony-open-terminal",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 62,
+            "version": "3.2.4-1ubuntu4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "591a4d18d36ecc0f3d4c25059d1d4eedd70c5ace2bf52f1d9ca99fedf2b5b0c1",
+            "binding_kind": "apt",
+            "description": "web service providing molecular structures in open formats",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in",
+              "open"
+            ],
+            "name": "chemical-structures",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 48,
+            "version": "2.2.dfsg.0-20",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "3ab63493923e8d6f0408ab9e5f1dc3ce9d16bdddb03c7434d3feab5f2869ccc0",
+            "binding_kind": "apt",
+            "description": "set of molecular structures in open formats",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in",
+              "open"
+            ],
+            "name": "chemical-structures-data",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 48,
+            "version": "2.2.dfsg.0-20",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "a092f4ec30455db4e7c9aea99332934738d117cac588301523455f39cb8d2b48",
+            "binding_kind": "apt",
+            "description": "Open Source Neural Networks in C",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in",
+              "open"
+            ],
+            "name": "darknet",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 48,
+            "version": "0.0.0+git20180914.61c9d02e-2build7",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "ea60c5696ed155f3ffe19a601b659881fc655e547cc17e5f5828c63542710cf9",
+            "binding_kind": "apt",
+            "description": "seamlessly open files in external programs with Emacs",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in",
+              "open"
+            ],
+            "name": "elpa-openwith",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 48,
+            "version": "0.8g-5",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "b9649737dc4acfd4d434c2063f6d22e18ba8654a81fbec20a77a8d1543a6d67b",
+            "binding_kind": "apt",
+            "description": "Microsoft Defender for Endpoints Netfitler ({{{RELEASE_RING}}}) Microsoft Defender for Endpoints Netfilter is an open source software to filter packets in userspace",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in",
+              "open"
+            ],
+            "name": "mde-netfilter",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 48,
+            "version": "100.69.73",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "e6c42222b97620ad6aae8e89ed54b1b187e5525722ac0292ad93527b6500743a",
+            "binding_kind": "apt",
+            "description": "XMMS2 - Open Fingerprint Architecture plug-in",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in",
+              "open"
+            ],
+            "name": "xmms2-plugin-ofa",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 48,
+            "version": "0.8+dfsg-24ubuntu3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "65b11d56b9baeb9ef58f39a0ed9b45f2aed77b029279a5be416e6fc60084245f",
+            "binding_kind": "apt",
+            "description": "Open a named yakuake tab and runs a script in it",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in",
+              "open"
+            ],
+            "name": "ynew",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 48,
+            "version": "1.5-1build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "2153aacd39a59ddf5aee4d6c2b7b3fb4b7d0c411c081a744d2a5346f86b99191",
+            "binding_kind": "apt",
+            "description": "openuri patch to allow redirections between HTTP and HTTPS",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 2,
+            "matched_terms": [
+              "https",
+              "open"
+            ],
+            "name": "ruby-open-uri-redirections",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 44,
+            "version": "0.2.1-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "135d88b473e0b49c3fe408bedf3d638657d64f80239a47be713a81df17e3bf34",
+            "binding_kind": "apt",
+            "description": "Perl module to open a browser in a given URL",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 3,
+            "matched_terms": [
+              "in",
+              "open"
+            ],
+            "name": "libbrowser-open-perl",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 42,
+            "version": "0.04-1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "8f2c9750cc1e05ca6e1b5309b73e409639c874323aaa1fab5ddeeeb29afc4aa5",
+            "binding_kind": "apt",
+            "description": "library to open an URI in the user's preferred application",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 4,
+            "matched_terms": [
+              "in",
+              "open"
+            ],
+            "name": "golang-github-skratchdot-open-golang-dev",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 36,
+            "version": "0.0~git20160302.0.75fb7ed-2.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "472c59e11a30427c3b7107a294599a35ea8f8b9e3a4bd6fe4cfa6979a052f5cb",
+            "binding_kind": "apt",
+            "description": "transitional package for https support",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "https"
+            ],
+            "name": "apt-transport-https",
+            "packages": [],
+            "query": "https",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2.8.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "06e36657e49871a4e7c1f7eafe72767ba4910ca0eb6f6780370bbdc45fd749d1",
+            "binding_kind": "apt",
+            "description": "apt transport method for in-toto supply chain verification",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "apt-transport-in-toto",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.1.1-4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "9d6fb4cc115dbc1b5e9db3abb840c67e8f29e5989c5bd12cf11c5a7afddfc9b9",
+            "binding_kind": "apt",
+            "description": "Alsamixer plug-in for Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-alsamixer-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "40e02cf501ebf32ff2635a938d9a55e89ba4e42b6aafd69fc33cf9bcb682871f",
+            "binding_kind": "apt",
+            "description": "Animated icons plug-in Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-animated-icons-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "be461fc4ab6b5a62f94f289f37cca80d5079eaab5caba3b0a5d1b6f9e0a6917b",
+            "binding_kind": "apt",
+            "description": "Cairo-Penguin plug-in for Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-cairo-penguin-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "4b52f651b4646f2e296909e1b14988fc4e322d7b623a248044a10794e553d807",
+            "binding_kind": "apt",
+            "description": "Clipper plug-in for Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-clipper-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "db1917010f6a69bee651068474b076ee7c11a9d3bf27d3b2125eafac394c34af",
+            "binding_kind": "apt",
+            "description": "Clock plug-in for Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-clock-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "f4a3f90969325882d034b1e92c764ffbd7afeaf7c927580ec0d52c42573d6b36",
+            "binding_kind": "apt",
+            "description": "Dbus plug-in for Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-dbus-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c7951529483042d42cc35f0d14b332f315e37f82092fb82a309db6c067803cf0",
+            "binding_kind": "apt",
+            "description": "library of D-Bus interface for Python of Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-dbus-plug-in-interface-python",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "7050a675d3826b37274c0e978059dbd925ff535032c163ef2a7a4e29ec6c321a",
+            "binding_kind": "apt",
+            "description": "library of D-Bus interface for ruby of Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-dbus-plug-in-interface-ruby",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "67a3063663460115da719d97c73cf0e96914834b54aa6e200ffdc19154b132cb",
+            "binding_kind": "apt",
+            "description": "library of D-Bus interface for vala of Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-dbus-plug-in-interface-vala",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "2bf04bb7569755aea2629c18b4f4e88ffb8b366b2561964f107e179503a5d473",
+            "binding_kind": "apt",
+            "description": "Desklet rendering plug-in for Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-desklet-rendering-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c802632a826de2a96598b0dd8d1cfbfd4b7e01c475d784c17569fcaaf21c74fa",
+            "binding_kind": "apt",
+            "description": "Dialog rendering plug-in for Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-dialog-rendering-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "ea7450de3dd245bbe81a79346f2699ca9a4b5877e6abcf531b13f469cdb1bca0",
+            "binding_kind": "apt",
+            "description": "Dnd2share plug-in for Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-dnd2share-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "319a49a226c199ac98fb53a84c9862b55c2e01d8f86bbf06e3eae3afe68659e3",
+            "binding_kind": "apt",
+            "description": "Drop indicator plug-in for Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-drop-indicator-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "59fb84e555b5e2a0aae19f5b64f908fd6ecf6a2ca72419cc8f2446b8b5966c19",
+            "binding_kind": "apt",
+            "description": "Dustbin plug-in for Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-dustbin-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "58f6b8b803898c432ae5f12ed90a25f5aeb6a76b7b263787bf2107e7b01839f7",
+            "binding_kind": "apt",
+            "description": "Folders plug-in Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-folders-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "3dc7509713024102d46864a1a96717b86350d022c886e46507fbe5876a0cda8b",
+            "binding_kind": "apt",
+            "description": "GMenu plug-in for Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-gmenu-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Open https://httpbin.org/uuid in a rendered browser repeatedly, no more than 8 times",
+        "errors": [],
+        "queries": [
+          "open",
+          "https",
+          "in",
+          "rendered"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "APT_CATALOG",
+        "source_url": null
+      },
+      {
+        "binding_performed": false,
+        "candidate_count": 63,
+        "candidates": [
+          {
+            "description": "AI-powered trading strategy development: backtesting, market data, and portfolio analysis",
+            "is_latest": true,
+            "name": "agency.lona/trading",
+            "packages": [],
+            "query": "in",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.lona.agency/mcp"
+              }
+            ],
+            "repository": {
+              "id": "891584339",
+              "source": "github",
+              "subfolder": "packages/lona-mcp-server",
+              "url": "https://github.com/mindsightventures/lona"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "2.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Check how to contact a business website, and whether that contact path actually works.",
+            "is_latest": true,
+            "name": "agency.ottobot/business-contact-finder",
+            "packages": [],
+            "query": "in",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://business-contact-finder-mcp.ottobot2025.workers.dev/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/modelcontextprotocol/registry"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.2.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Ten machine-readable signals on one public page: the top miss if any, and a receipt we re-verify.",
+            "is_latest": true,
+            "name": "ai.advisorsai/store-readiness",
+            "packages": [],
+            "query": "in",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://advisorsai.ai/store-readiness-mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.6",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Turn construction drawings into takeoffs, measured routes, schedules and estimates.",
+            "is_latest": true,
+            "name": "ai.aginera/preconstruction",
+            "packages": [],
+            "query": "in",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.aginera.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "A free one-minute reset for people, delivered by AI, with no account or personal data.",
+            "is_latest": true,
+            "name": "ai.ai-akari/one-minute-akari",
+            "packages": [],
+            "query": "in",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://ai-akari.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/AInoAKARI/arigatou-kawaii-lp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Askline shows what ChatGPT says about a brand, then the SEO that feeds it.",
+            "is_latest": true,
+            "name": "ai.askline/askline",
+            "packages": [],
+            "query": "in",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://askline.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Schedule, generate and publish social posts to X, LinkedIn, Instagram, Threads and YouTube",
+            "is_latest": true,
+            "name": "ai.autoposting/autoposting",
+            "packages": [],
+            "query": "in",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://app.autoposting.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Manage Kinnovis self-storage tariffs from chat.",
+            "is_latest": true,
+            "name": "ai.b77/kinnovis-storage",
+            "packages": [],
+            "query": "in",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://kinnovis-storage.b77.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Surface customer & prospect context from Slack, email, transcripts and tickets in any MCP client.",
+            "is_latest": true,
+            "name": "ai.backengine/backengine-mcp",
+            "packages": [],
+            "query": "in",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://backengine-prod.backengine.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/BackEngine-ai/backengine-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "8.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Remote MCP server for China brand visibility, destination demand, and KOL discovery workflows.",
+            "is_latest": true,
+            "name": "ai.chinamarketing/intelligence",
+            "packages": [],
+            "query": "in",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.chinamarketing.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Authenticated MCP Agent (Openai)",
+            "is_latest": true,
+            "name": "ai.getvda/authenticated-mcp-agent-openai",
+            "packages": [],
+            "query": "open",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://authenticated-mcp-agent-openai.getvda.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "LLM Orchestration Agent (Langchain Openai)",
+            "is_latest": true,
+            "name": "ai.getvda/llm-orchestration-agent-langchain-openai",
+            "packages": [],
+            "query": "open",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://llm-orchestration-agent-langchain-openai.getvda.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "LLM Orchestration Agent (Openai)",
+            "is_latest": true,
+            "name": "ai.getvda/llm-orchestration-agent-openai",
+            "packages": [],
+            "query": "open",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://llm-orchestration-agent-openai.getvda.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "LLM Orchestration Agent (Opentelemetry Api)",
+            "is_latest": true,
+            "name": "ai.getvda/llm-orchestration-agent-opentelemetry-api",
+            "packages": [],
+            "query": "open",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://llm-orchestration-agent-opentelemetry-api.getvda.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "LLM Orchestration Agent (Opentelemetry Instrumentation Fastapi)",
+            "is_latest": true,
+            "name": "ai.getvda/llm-orchestration-agent-opentelemetry-instrumentation-fastapi",
+            "packages": [],
+            "query": "open",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://llm-orchestration-agent-opentelemetry-instrume-a529e4.getvda.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "OAuth LangChain OpenAI Agent",
+            "is_latest": true,
+            "name": "ai.getvda/oauth-langchain-openai-agent",
+            "packages": [],
+            "query": "open",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://authenticated-llm-agent-google-auth-oauthlib.getvda.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Structured Output Agent (Openai)",
+            "is_latest": true,
+            "name": "ai.getvda/structured-output-agent-openai",
+            "packages": [],
+            "query": "open",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://structured-output-agent-openai.getvda.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Traced OpenAI LangChain Agent",
+            "is_latest": true,
+            "name": "ai.getvda/traced-openai-langchain-agent",
+            "packages": [],
+            "query": "open",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://authenticated-mcp-agent-opentelemetry-api.getvda.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "The Open House: a locker, a verifier, a fair coin, a job board, and rooms that give nothing back.",
+            "is_latest": true,
+            "name": "ai.gregbenza/openhouse",
+            "packages": [],
+            "query": "open",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://gregbenza.ai/mcp/openhouse"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/TheNonduality/gregbenza-ai"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Open scientific and engineering knowledge for AI agents: search, evidence, document publishing.",
+            "is_latest": true,
+            "name": "ai.openarx/openarx",
+            "packages": [],
+            "query": "open",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.openarx.ai/researcher/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/OpenArx-AI/openarx-core"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.3.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Score any website's AI-agent readiness. Open Agent Registry scanner + platform tools.",
+            "is_latest": true,
+            "name": "bot.myagi/openagent-registry",
+            "packages": [],
+            "query": "open",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://myagi.bot/api/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/aaronkpickrell/openagent-registry"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "X-Forwarded-Proto https token, value discarded",
+            "is_latest": true,
+            "name": "io.github.sadri-dridi/xfp-https",
+            "packages": [],
+            "query": "https",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/xfp-https/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Use OpenMayhem text, embedding and media models with explicit cost controls.",
+            "is_latest": true,
+            "name": "ai.openmayhem/openmayhem",
+            "packages": [
+              {
+                "identifier": "https://github.com/Trac-Systems/openmayhem-mcp/releases/download/v1.0.0/openmayhem-mcp-v1.0.0.mcpb",
+                "registry_type": "mcpb",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": null
+              }
+            ],
+            "query": "open",
+            "remotes": [
+              {
+                "required_headers": [
+                  "X-OpenMayhem-API-Key"
+                ],
+                "type": "streamable-http",
+                "url": "https://mcp.openmayhem.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Trac-Systems/openmayhem-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Loan & mortgage calculator, compound interest, ROI, crypto prices, FX conversion for AI agents.",
+            "is_latest": true,
+            "name": "ai.bankee/inferventis-mcp",
+            "packages": [],
+            "query": "in",
+            "remotes": [
+              {
+                "required_headers": [
+                  "x-api-key"
+                ],
+                "type": "streamable-http",
+                "url": "https://mcp-server-295985738387.europe-west1.run.app/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Bankee-ai/inferventis"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "1.0.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Independent build-vs-buy index: score software categories BUILD/BUY/BRIDGE/BEWARE.",
+            "is_latest": true,
+            "name": "ai.benroberts/b4-index",
+            "packages": [],
+            "query": "in",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://b4-index.vercel.app/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "3.3.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Reuse your team's AI instructions (Bindings and Stacks) from Bindry in any MCP client.",
+            "is_latest": true,
+            "name": "ai.bindry/bindry",
+            "packages": [],
+            "query": "in",
+            "remotes": [
+              {
+                "required_headers": [
+                  "X-Api-Key"
+                ],
+                "type": "streamable-http",
+                "url": "https://api.bindry.ai/api/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "0.2.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Ask your AI about the markets: filings, insider & congress trades, fund flows, options, macro",
+            "is_latest": true,
+            "name": "ai.clawterminal/markets",
+            "packages": [],
+            "query": "in",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://mcp.clawterminal.ai"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Focused MCP server for OpenAI image/audio generation (v2.0.0). Wraps endpoints via HAPI CLI.",
+            "is_latest": true,
+            "name": "ai.com.mcp/openai-tools",
+            "packages": [],
+            "query": "open",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://openai-tools.run.mcp.com.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/la-rebelion/hapimcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "0.6.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "OpenMandate is in private development and is not accepting new mandates or integrations.",
+            "is_latest": true,
+            "name": "ai.openmandate/mcp",
+            "packages": [],
+            "query": "open",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://mcp.openmandate.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "0.6.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "run any ai model. compose agents, stack knowledge, connect tools. one api, pay per run.",
+            "is_latest": true,
+            "name": "ac.inference.sh/mcp",
+            "packages": [],
+            "query": "in",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.inference.sh/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "2.0.1",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Open https://httpbin.org/uuid in a rendered browser repeatedly, no more than 8 times",
+        "errors": [],
+        "queries": [
+          "open",
+          "https",
+          "in",
+          "rendered"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "OFFICIAL_MCP_REGISTRY",
+        "source_url": "https://registry.modelcontextprotocol.io"
+      }
+    ],
+    "schema": "PROJECT_BRAIN_FEDERATED_CAPABILITY_DISCOVERY_V1",
+    "sources": [
+      "APT_CATALOG",
+      "OFFICIAL_MCP_REGISTRY"
+    ]
+  },
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
+  "source": "FEDERATED_CAPABILITY_DISCOVERY_FALLBACK",
+  "targeted_acquisition_error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"caja-open-terminal\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"inkscape-open-symbols\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:E: Failed to fetch https://security.ubuntu.com/ubuntu/pool/restricted/l/linux-restricted-modules-aws-7.0/linux-modules-nvidia-580-open-aws_7.0.0-1012.12%7e24.04.1%2b1_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Failed to fetch https://security.ubuntu.com/ubuntu/pool/restricted/l/linux-restricted-modules-aws-7.0/linux-modules-nvidia-535-open-aws_7.0.0-1012.12%7e24.04.1%2b1_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\\n\", \"name\": \"linux-modules-nvidia-525-open-aws\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:E: Unable to correct problems, you have held broken packages.\\n\", \"name\": \"linux-modules-nvidia-525-open-aws-6.14\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:E: Unable to correct problems, you have held broken packages.\\n\", \"name\": \"linux-modules-nvidia-525-open-aws-6.17\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"linux-modules-nvidia-525-open-aws-6.8\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:E: Failed to fetch https://security.ubuntu.com/ubuntu/pool/restricted/l/linux-restricted-modules-aws-7.0/linux-modules-nvidia-580-open-aws-7.0_7.0.0-1012.12%7e24.04.1%2b1_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Failed to fetch https://security.ubuntu.com/ubuntu/pool/restricted/l/linux-restricted-modules-aws-7.0/linux-modules-nvidia-535-open-aws-7.0_7.0.0-1012.12%7e24.04.1%2b1_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\\n\", \"name\": \"linux-modules-nvidia-525-open-aws-7.0\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:E: Failed to fetch https://security.ubuntu.com/ubuntu/pool/restricted/l/linux-restricted-modules-aws-7.0/linux-modules-nvidia-580-open-aws-edge_7.0.0-1012.12%7e24.04.1%2b1_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Failed to fetch https://security.ubuntu.com/ubuntu/pool/restricted/l/linux-restricted-modules-aws-7.0/linux-modules-nvidia-535-open-aws-edge_7.0.0-1012.12%7e24.04.1%2b1_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\\n\", \"name\": \"linux-modules-nvidia-525-open-aws-edge\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"linux-modules-nvidia-525-open-aws-lts-24.04\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:E: Unable to correct problems, you have held broken package"
+}

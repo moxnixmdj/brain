@@ -1,0 +1,10 @@
+{
+  "capability_acquisition_allowed": true,
+  "compile_error": "GOAL_COMPILATION_FAILED:GOAL_COMPILATION_SUBGOAL_UNRESOLVED:{\"cause\": \"GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH\", \"cause_detail\": null, \"clauses\": [\"Open https://httpbin.org/uuid in a rendered browser repeatedly, no more than 8 times\", \"After each result, inspect the UUID\", \"Finish when its first hexadecimal character is in 0,1,2,3,4,5,6,7, otherwise continue until attempt 8\", \"Save every observed result under canonical/astra_runtime/tmp/UUID_LOOP_ATTEMPTS and save canonical/astra_runtime/tmp/UUID_LOOP_RESULT.json with status, attempts, matched, selected_uuid, and selected_attempt\", \"Independently verify the saved trace and stopping decision\"], \"compiled_prefix\": [], \"context_paths\": [], \"index\": 0, \"subgoal\": \"Open https://httpbin.org/uuid in a rendered browser repeatedly, no more than 8 times\"}",
+  "gap_class": "CAPABILITY_CANDIDATE",
+  "mission_id": "ASTRA-RUNTIME-BOUNDED-LOOP-001",
+  "observed_at_utc": "2026-09-25T17:11:53.961200+00:00",
+  "policy": "ONLY_CAPABILITY_CANDIDATE_MAY_TRIGGER_EXTERNAL_CAPABILITY_ACQUISITION",
+  "schema": "PROJECT_BRAIN_GOAL_GAP_CLASSIFICATION_V1",
+  "subgoal": "Open https://httpbin.org/uuid in a rendered browser repeatedly, no more than 8 times"
+}
