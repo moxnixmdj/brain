@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T02:13:22.969197+00:00",
+  "mission_id": "ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_BROWSER_PYTHON_RELEASE_VERIFY_001.json",
+  "mission_sha256": "525f363e5e8365cef9a82ba7a20575b69557167dd8eae7ebc076eaae6c3224fc",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "26a6fc95149698ad87a113f87ffca0eafdc0ea4fc6dc72b8f6082d6fb7a4a520",
+  "status": "COMPLETE",
+  "steps_completed": 5
+}

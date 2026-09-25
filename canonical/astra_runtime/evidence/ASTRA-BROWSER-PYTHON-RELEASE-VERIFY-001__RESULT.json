@@ -1,0 +1,17 @@
+{
+  "independent_final_url": "https://www.python.org/downloads/",
+  "independent_latest_stable_python3": "3.14.7",
+  "latest_stable_python3": "3.14.7",
+  "page_title": "Download Python | Python.org",
+  "producer": "chromedriver_rendered_browser",
+  "producer_independent_verifier": "urllib_official_python_downloads_page",
+  "rendered": true,
+  "result_path": "canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_RESULT.json",
+  "schema": "PROJECT_BRAIN_RENDERED_BROWSER_VERIFICATION_V1",
+  "screenshot_bytes": 885055,
+  "screenshot_path": "canonical/astra_runtime/tmp/PYTHON_DOWNLOADS.png",
+  "screenshot_sha256": "f549568c9bcb3869e88c3b16f3d6f304e0ac0292be088fb4dcd67364c389101b",
+  "source_url": "https://www.python.org/downloads/",
+  "status": "VERIFIED",
+  "verified": true
+}

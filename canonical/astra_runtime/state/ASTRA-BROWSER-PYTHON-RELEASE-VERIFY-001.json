@@ -1,21 +1,5 @@
 {
-  "blocker": {
-    "adapter": "shell",
-    "error": "VERIFICATION_FAILED",
-    "mission_id": "ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001",
-    "observed_at_utc": "2026-09-25T02:11:42.288896+00:00",
-    "result": {
-      "adapter": "shell",
-      "command": "set -euo pipefail\npython canonical/runtime/verify_browser_python_release.py",
-      "duration_s": 21.87,
-      "returncode": 1,
-      "stderr": "Traceback (most recent call last):\n  File \"/home/runner/work/brain/brain/canonical/runtime/verify_browser_python_release.py\", line 114, in <module>\n    main()\n  File \"/home/runner/work/brain/brain/canonical/runtime/verify_browser_python_release.py\", line 76, in main\n    raise RuntimeError(\"INDEPENDENT_STABLE_RELEASE_NOT_FOUND\")\nRuntimeError: INDEPENDENT_STABLE_RELEASE_NOT_FOUND\n",
-      "stdout": ""
-    },
-    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
-    "step_id": "verify-rendered-browser-effect",
-    "step_index": 0
-  },
+  "completed_at_utc": "2026-09-25T02:13:22.968772+00:00",
   "created_at_utc": "2026-09-25T02:06:42.968309+00:00",
   "history": [
     {
@@ -73,14 +57,28 @@
       },
       "step_id": "verify-rendered-browser-effect",
       "step_index": 0
+    },
+    {
+      "completed_at_utc": "2026-09-25T02:13:22.968261+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython canonical/runtime/verify_browser_python_release.py",
+        "duration_s": 6.639,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "RENDERED_BROWSER_EFFECT_VERIFIED {\"independent_final_url\": \"https://www.python.org/downloads/\", \"independent_latest_stable_python3\": \"3.14.7\", \"latest_stable_python3\": \"3.14.7\", \"page_title\": \"Download Python | Python.org\", \"producer\": \"chromedriver_rendered_browser\", \"producer_independent_verifier\": \"urllib_official_python_downloads_page\", \"rendered\": true, \"result_path\": \"canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_RESULT.json\", \"schema\": \"PROJECT_BRAIN_RENDERED_BROWSER_VERIFICATION_V1\", \"screenshot_bytes\": 885055, \"screenshot_path\": \"canonical/astra_runtime/tmp/PYTHON_DOWNLOADS.png\", \"screenshot_sha256\": \"f549568c9bcb3869e88c3b16f3d6f304e0ac0292be088fb4dcd67364c389101b\", \"source_url\": \"https://www.python.org/downloads/\", \"status\": \"VERIFIED\", \"verified\": true}\n"
+      },
+      "step_id": "verify-rendered-browser-effect",
+      "step_index": 0
     }
   ],
   "mission_id": "ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_BROWSER_PYTHON_RELEASE_VERIFY_001.json",
-  "mission_sha256": "38c3fe69f12f8606f4d4e9ee4593e110e7bf914159cda2ab87aa14d0068749e0",
-  "next_step": 0,
+  "mission_sha256": "525f363e5e8365cef9a82ba7a20575b69557167dd8eae7ebc076eaae6c3224fc",
+  "next_step": 1,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
-  "status": "BLOCKED",
-  "updated_at_utc": "2026-09-25T02:11:42.289205+00:00"
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T02:13:22.968280+00:00"
 }
