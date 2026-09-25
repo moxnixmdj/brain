@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-VERIFY-MANIFEST-ARCHIVE-001",
+  "purpose": "Fresh independent verification of manifest-driven tar.gz creation using Python stdlib and verification using GNU tar plus SHA-256 comparison.",
+  "steps": [
+    {
+      "id": "verify-archive-create-and-check",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\nroot=pathlib.Path('.').resolve()\ndef load(name,path):\n p=root/path; s=importlib.util.spec_from_file_location(name,p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m); return m\ncreator=load('archive_creator','canonical/runtime/bound_capabilities/archive_tarfile.py')\nverifier=load('archive_verifier','canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py')\ntmp=root/'canonical/astra_runtime/tmp'; tmp.mkdir(parents=True,exist_ok=True)\nmanifest_rel='canonical/astra_runtime/tmp/ARCHIVE_VERIFY_MANIFEST.json'\narchive_rel='canonical/astra_runtime/tmp/ARCHIVE_VERIFY_BUNDLE.tar.gz'\nevidence_rel='canonical/astra_runtime/evidence/ASTRA-RUNTIME-CORE-REGRESSION-006__RECEIPT.json'\nmanifest={'schema':'PROJECT_BRAIN_STATUS_MANIFEST_V1','status_value':'VERIFIED_BOUND_CAPABILITY','records':[{'capability_id':'verification-fixture','verification_mission_id':'ASTRA-RUNTIME-CORE-REGRESSION-006','verification_paths':[evidence_rel],'source':{'type':'fixture'}}]}\n(root/manifest_rel).write_text(json.dumps(manifest,indent=2,sort_keys=True)+'\\n',encoding='utf-8')\ncreated=creator.run({'manifest_path':manifest_rel,'output_path':archive_rel},root)\nchecked=verifier.run({'manifest_path':manifest_rel,'archive_path':archive_rel},root)\nassert created['output_verified'] is True\nassert checked['verified'] is True\nassert checked['member_count']==2\nprint(json.dumps({'created':created,'verified':checked},sort_keys=True))\nprint('MANIFEST_ARCHIVE_INDEPENDENTLY_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "MANIFEST_ARCHIVE_INDEPENDENTLY_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "producer_verifier_implementation_independent": true
+  }
+}
