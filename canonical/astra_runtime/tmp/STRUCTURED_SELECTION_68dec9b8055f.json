@@ -1,0 +1,58 @@
+{
+  "id": "pdf.extract.text.pypdf",
+  "record": {
+    "action_template": {
+      "args": {
+        "capability_id": "pdf.extract.text.pypdf",
+        "max_pages": 200,
+        "path": "${input.pdf_path}"
+      },
+      "expect": {
+        "field": "text",
+        "type": "field_nonempty"
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "pdf_pypdf",
+    "cost": 1,
+    "entrypoint": "run",
+    "incremental_spend_usd": 0,
+    "limitations": [
+      "Extracts existing PDF text layers; does not perform OCR on image-only/scanned pages.",
+      "Input paths are restricted to the Project Brain repository checkout.",
+      "Large uncompressed PDF content streams can require substantial memory."
+    ],
+    "provides": [
+      "pdf.extract.text"
+    ],
+    "requires": [
+      "pdf.file.available"
+    ],
+    "source": {
+      "license": "BSD-3-Clause",
+      "metadata_url": "https://pypi.org/pypi/pypdf/6.19.0/json",
+      "project": "pypdf",
+      "trusted_publishing": true,
+      "type": "pypi",
+      "version": "6.19.0",
+      "wheel_filename": "pypdf-6.19.0-py3-none-any.whl",
+      "wheel_sha256": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14"
+    },
+    "status": "VERIFIED_BOUND_CAPABILITY",
+    "verification": {
+      "mission_id": "ASTRA-RUNTIME-BOUND-PDF-TEXT-001",
+      "observed_dependency": {
+        "project": "pypdf",
+        "version": "6.19.0",
+        "wheel_sha256": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14"
+      },
+      "observed_effect": {
+        "extracted_text": "PROJECT BRAIN BOUND PDF CAPABILITY VERIFIED",
+        "text_sha256": "97fa8642db783ccc4c477a1ab0dc72a144da2932106ae51b9818eb7fc4b8030c"
+      },
+      "receipt_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-PDF-TEXT-001__RECEIPT.json",
+      "state_path": "canonical/astra_runtime/state/ASTRA-RUNTIME-BOUND-PDF-TEXT-001.json",
+      "workflow_run_id": 36060830384
+    }
+  }
+}
