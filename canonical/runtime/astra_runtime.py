@@ -1290,6 +1290,183 @@ def _goal_action(action):
           "all_true":truths,
           "verified":bool(equal and nonempty and truths),
         }
+    if typ=="join_runtime_json_arrays":
+        left_path=_safe_repo_path(args.get("left_path",""))
+        right_path=_safe_repo_path(args.get("right_path",""))
+        output_path=_safe_repo_path(args.get("output_path",""))
+        left_key=str(args.get("left_key") or "")
+        right_key=str(args.get("right_key") or "")
+        left_entity=str(args.get("left_entity") or "left")
+        right_entity=str(args.get("right_entity") or "right")
+        output_fields=list(args.get("output_fields") or [])
+        if (
+            not left_path.is_file() or not right_path.is_file()
+            or not left_key or not right_key
+            or not output_fields
+            or any(not isinstance(x,str) or not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*",x) for x in output_fields)
+        ):
+            return {"type":typ,"output_verified":False,"error":"RUNTIME_JOIN_SPEC_INVALID"}
+
+        def observed_array(path):
+            wrapper=json.loads(path.read_text(encoding="utf-8"))
+            data=json.loads(str(wrapper.get("observed_text") or ""))
+            if not isinstance(data,list) or any(not isinstance(x,dict) for x in data):
+                raise RuntimeError("RUNTIME_JOIN_SOURCE_NOT_OBJECT_ARRAY")
+            return data
+
+        try:
+            left=observed_array(left_path)
+            right=observed_array(right_path)
+        except Exception as exc:
+            return {"type":typ,"output_verified":False,"error":"RUNTIME_JOIN_SOURCE_INVALID:"+type(exc).__name__+":"+str(exc)}
+
+        index={}
+        for row in left:
+            key=row.get(left_key)
+            token=json.dumps(key,sort_keys=True)
+            if key is None:
+                return {"type":typ,"output_verified":False,"error":"RUNTIME_JOIN_LEFT_KEY_MISSING"}
+            if token in index:
+                return {"type":typ,"output_verified":False,"error":"RUNTIME_JOIN_LEFT_KEY_NOT_UNIQUE","key":key}
+            index[token]=row
+
+        def norm(x):
+            return re.sub(r"[^a-z0-9]+","",str(x).lower())
+
+        def value_for(out,left_row,right_row):
+            n=norm(out)
+            if n==norm(right_entity+" id") or n==norm(right_entity+"_id"):
+                if "id" not in right_row:
+                    raise KeyError(out)
+                return right_row["id"]
+            if n==norm(left_entity+" id") or n==norm(left_entity+"_id"):
+                # Prefer the observed foreign key when it semantically names
+                # the left entity; otherwise use the matched left primary key.
+                if norm(right_key)==norm(left_entity+" id"):
+                    return right_row[right_key]
+                return left_row[left_key]
+            candidates=[]
+            for side,row in (("left",left_row),("right",right_row)):
+                for k,v in row.items():
+                    if norm(k)==n:
+                        candidates.append((side,k,v))
+            if len(candidates)!=1:
+                raise KeyError(out)
+            return candidates[0][2]
+
+        joined=[]
+        unmatched=[]
+        try:
+            for right_row in right:
+                if right_key not in right_row:
+                    raise RuntimeError("RUNTIME_JOIN_RIGHT_KEY_MISSING")
+                token=json.dumps(right_row.get(right_key),sort_keys=True)
+                left_row=index.get(token)
+                if left_row is None:
+                    unmatched.append(right_row.get(right_key))
+                    continue
+                joined.append({field:value_for(field,left_row,right_row) for field in output_fields})
+        except Exception as exc:
+            return {"type":typ,"output_verified":False,"error":"RUNTIME_JOIN_PROJECTION_FAILED:"+type(exc).__name__+":"+str(exc)}
+        if unmatched:
+            return {"type":typ,"output_verified":False,"error":"RUNTIME_JOIN_UNMATCHED_RIGHT","unmatched":unmatched[:20]}
+        if len(joined)!=len(right):
+            return {"type":typ,"output_verified":False,"error":"RUNTIME_JOIN_CARDINALITY_MISMATCH"}
+
+        output_path.parent.mkdir(parents=True,exist_ok=True)
+        output_path.write_text(json.dumps(joined,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+        raw=output_path.read_bytes()
+        return {
+          "type":typ,"output_verified":True,
+          "left_count":len(left),"right_count":len(right),"joined_count":len(joined),
+          "output_path":str(output_path.relative_to(ROOT)),
+          "output_sha256":hashlib.sha256(raw).hexdigest(),
+          "left_key":left_key,"right_key":right_key,
+          "output_fields":output_fields,
+        }
+
+    if typ=="assert_runtime_json_join":
+        left_path=_safe_repo_path(args.get("left_path",""))
+        right_path=_safe_repo_path(args.get("right_path",""))
+        joined_path=_safe_repo_path(args.get("joined_path",""))
+        left_key=str(args.get("left_key") or "")
+        right_key=str(args.get("right_key") or "")
+        left_entity=str(args.get("left_entity") or "left")
+        right_entity=str(args.get("right_entity") or "right")
+        output_fields=list(args.get("output_fields") or [])
+        if not left_path.is_file() or not right_path.is_file() or not joined_path.is_file():
+            return {"type":typ,"verified":False,"error":"RUNTIME_JOIN_VERIFY_SOURCE_MISSING"}
+
+        def arr(path,wrapped=False):
+            obj=json.loads(path.read_text(encoding="utf-8"))
+            if wrapped:
+                obj=json.loads(str(obj.get("observed_text") or ""))
+            if not isinstance(obj,list) or any(not isinstance(x,dict) for x in obj):
+                raise RuntimeError("NOT_OBJECT_ARRAY")
+            return obj
+
+        try:
+            left=arr(left_path,True)
+            right=arr(right_path,True)
+            joined=arr(joined_path,False)
+        except Exception as exc:
+            return {"type":typ,"verified":False,"error":"RUNTIME_JOIN_VERIFY_JSON_INVALID:"+type(exc).__name__}
+
+        failures=[]
+        left_index={}
+        for row in left:
+            if left_key not in row:
+                failures.append({"error":"LEFT_KEY_MISSING"})
+                continue
+            token=json.dumps(row[left_key],sort_keys=True)
+            if token in left_index:
+                failures.append({"error":"LEFT_KEY_DUPLICATE","key":row[left_key]})
+            left_index[token]=row
+
+        if len(joined)!=len(right):
+            failures.append({"error":"JOINED_CARDINALITY_MISMATCH","right":len(right),"joined":len(joined)})
+
+        def norm(x):
+            return re.sub(r"[^a-z0-9]+","",str(x).lower())
+
+        for idx,right_row in enumerate(right):
+            if idx>=len(joined):
+                break
+            out=joined[idx]
+            if set(out.keys())!=set(output_fields):
+                failures.append({"index":idx,"error":"OUTPUT_FIELDS_MISMATCH"})
+                continue
+            if right_key not in right_row:
+                failures.append({"index":idx,"error":"RIGHT_KEY_MISSING"})
+                continue
+            left_row=left_index.get(json.dumps(right_row[right_key],sort_keys=True))
+            if left_row is None:
+                failures.append({"index":idx,"error":"UNMATCHED_RIGHT"})
+                continue
+            for field in output_fields:
+                n=norm(field)
+                if n==norm(right_entity+" id"):
+                    expected=right_row.get("id")
+                elif n==norm(left_entity+" id"):
+                    expected=right_row.get(right_key) if norm(right_key)==norm(left_entity+" id") else left_row.get(left_key)
+                else:
+                    candidates=[]
+                    for row in (left_row,right_row):
+                        for k,v in row.items():
+                            if norm(k)==n:
+                                candidates.append(v)
+                    if len(candidates)!=1:
+                        failures.append({"index":idx,"field":field,"error":"VERIFY_FIELD_AMBIGUOUS"})
+                        continue
+                    expected=candidates[0]
+                if out.get(field)!=expected:
+                    failures.append({"index":idx,"field":field,"error":"VALUE_MISMATCH"})
+        return {
+          "type":typ,"verified":not failures,
+          "left_count":len(left),"right_count":len(right),"joined_count":len(joined),
+          "failures":failures[:30],
+        }
+
     if typ=="project_browser_result_json":
         source=_safe_repo_path(args.get("source_path",""))
         output=_safe_repo_path(args.get("output_path",""))
@@ -1502,7 +1679,7 @@ def _run_model_independent_goal(step, mission, goal):
         return None
     allowed_types={
       "read_file","list_tree","search_text","http_get","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback",
-      "project_browser_result_json","assert_hex_prefix_bucket","assert_collection_length_bucket","assert_runtime_selected_code_decodes",
+      "project_browser_result_json","join_runtime_json_arrays","assert_runtime_json_join","assert_hex_prefix_bucket","assert_collection_length_bucket","assert_runtime_selected_code_decodes",
       "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal","assert_runtime_fanout_decodes","assert_runtime_fanout_artifacts_decode","assert_runtime_per_item_fallback_decodes","assert_runtime_fallback_decision",
       "assert_workflow_audit_supported_by_source","assert_python_source_audit_supported_by_source",
       "assert_python_test_audit_zero","assert_python_test_audit_supported_by_fresh_execution",
@@ -1760,6 +1937,11 @@ def _classify_plain_goal_gap(text):
         or "using that result" in lower
         or "from the previous result" in lower
         or "from the live result" in lower
+        or "using both live results" in lower
+        or (
+            re.search(r"\b(?:join|merge|combine)\b",lower)
+            and re.search(r"\b(?:live|result|source|collection|records?)\b",lower)
+        )
     ):
         return "CAUSAL_COMPOSITION"
     return "CAPABILITY_CANDIDATE"
