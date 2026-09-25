@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-SEMANTIC-HELDOUT-COMPILER-001",
+  "purpose": "Held-out semantic generalization test for the already verified users/posts reduction, using different syntax and vocabulary from both known formulations.",
+  "steps": [
+    {
+      "id": "compile-heldout-paraphrase",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/goal_compiler.py')\ns=importlib.util.spec_from_file_location('gc',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads(pathlib.Path('canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=' '.join([\n 'Using a real rendered browser, open https://jsonplaceholder.typicode.com/users, save a screenshot to canonical/astra_runtime/tmp/HOLD_USERS.png, and save the rendered result to canonical/astra_runtime/tmp/HOLD_USERS.json.',\n 'Using a real rendered browser, open https://jsonplaceholder.typicode.com/posts, save a screenshot to canonical/astra_runtime/tmp/HOLD_POSTS.png, and save the rendered result to canonical/astra_runtime/tmp/HOLD_POSTS.json.',\n 'Take those two observed datasets and write canonical/astra_runtime/tmp/HOLD_COUNTS.json so each user has a single summary entry containing user_id, username, and post_count; derive post_count by counting posts linked through posts.userId matching users.id.',\n 'Export canonical/astra_runtime/tmp/HOLD_COUNTS.json as canonical/astra_runtime/tmp/HOLD_COUNTS.xlsx with user_id, username, and post_count as the table columns.',\n 'Validate the summary and spreadsheet against both captured sources, requiring one summary per user, exact usernames, exact post totals per user, total counts equal to the number of posts, no extras, and spreadsheet equality with the JSON.'\n ])\ntry:\n out=m.compile_goal(goal,reg,pathlib.Path('.').resolve())\n print(json.dumps({'status':'COMPILED','mode':out.get('compiler_mode'),'parts':out.get('compiled_parts')},sort_keys=True))\n print('HELDOUT_SEMANTIC_COMPILED')\nexcept Exception as exc:\n print(json.dumps({'status':'BLOCKED','type':type(exc).__name__,'error':str(exc)},sort_keys=True))\n print('HELDOUT_SEMANTIC_BLOCKED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "HELDOUT_SEMANTIC_"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "read_only_diagnostic": true,
+    "heldout_wording": true
+  }
+}
