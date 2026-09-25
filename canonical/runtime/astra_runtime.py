@@ -3350,7 +3350,9 @@ def _goal_action(action):
         for rec in fresh:
             key=json.dumps(rec.get("value"),sort_keys=True,separators=(",",":"),ensure_ascii=False)
             canonical.setdefault(key,[]).append(rec["path"])
-        if len(fresh)<2:
+        if records and not fresh:
+            status="STALE"
+        elif len(fresh)<2:
             status="INSUFFICIENT"
         elif len(canonical)==1:
             status="SUPPORTED"
