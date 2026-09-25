@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-MULTI-ACTION-FANOUT-COMPILER-DIAG-002",
+  "purpose": "Prove the multi-action fanout goal compiles to one generic per-item action graph with full clause coverage.",
+  "steps": [
+    {
+      "id": "compile-and-assert",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/goal_compiler.py')\ns=importlib.util.spec_from_file_location('gc',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads(pathlib.Path('canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads(pathlib.Path('canonical/astra_runtime/missions/ASTRA_RUNTIME_MULTI_ACTION_FANOUT_002.json').read_text())['goal']\nout=m.compile_goal(goal,reg,pathlib.Path('.').resolve())\nassert out['compiler_mode']=='DETERMINISTIC_MULTI_ACTION_FANOUT_PLAN',out\nassert out.get('clause_coverage_verified') is True,out\nacts=out['controller_actions']\nfan=[a for a in acts if a.get('type')=='invoke_capability_fanout']\nassert len(fan)==1,acts\nspecs=fan[0]['args']['item_actions']\nassert len(specs)==2,specs\ncaps=[s['action']['args']['capability_id'] for s in specs]\nassert caps==['image.qr.generate.qrencode','auto.apt.zint'],caps\nassert [s['source_field'] for s in specs]==['username','email'],specs\nassert any(a.get('type')=='assert_runtime_fanout_artifacts_decode' for a in acts),acts\nprint('MULTI_ACTION_FANOUT_COMPILER_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "MULTI_ACTION_FANOUT_COMPILER_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "read_only_diagnostic": true
+  }
+}
