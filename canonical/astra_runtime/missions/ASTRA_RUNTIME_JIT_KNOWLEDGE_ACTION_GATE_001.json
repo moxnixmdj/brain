@@ -1,0 +1,174 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-ACTION-GATE-001",
+  "purpose": "Prove epistemic status controls downstream action: SUPPORTED knowledge materializes, CONFLICTED knowledge is refused and produces no actionable artifact.",
+  "goal": "Demonstrate that only supported knowledge can become an actionable fact, while conflicted knowledge is fail-closed.",
+  "steps": [
+    {
+      "id": "run-knowledge-action-gate",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 16,
+      "controller_actions": [
+        {
+          "type": "fetch_json_knowledge",
+          "args": {
+            "url": "https://httpbin.org/get?claim=alpha",
+            "json_path": [
+              "args",
+              "claim"
+            ],
+            "output_path": "canonical/astra_runtime/tmp/GATE_SUPPORT_A.json",
+            "authoritative": false,
+            "timeout_s": 20,
+            "max_bytes": 500000
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "verified",
+            "value": true
+          }
+        },
+        {
+          "type": "fetch_json_knowledge",
+          "args": {
+            "url": "https://httpbin.org/anything?claim=alpha",
+            "json_path": [
+              "args",
+              "claim"
+            ],
+            "output_path": "canonical/astra_runtime/tmp/GATE_SUPPORT_B.json",
+            "authoritative": false,
+            "timeout_s": 20,
+            "max_bytes": 500000
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "verified",
+            "value": true
+          }
+        },
+        {
+          "type": "assess_knowledge_consistency",
+          "args": {
+            "evidence_paths": [
+              "canonical/astra_runtime/tmp/GATE_SUPPORT_A.json",
+              "canonical/astra_runtime/tmp/GATE_SUPPORT_B.json"
+            ],
+            "output_path": "canonical/astra_runtime/tmp/GATE_SUPPORT_ASSESSMENT.json"
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "status",
+            "value": "SUPPORTED"
+          }
+        },
+        {
+          "type": "materialize_supported_knowledge",
+          "args": {
+            "assessment_path": "canonical/astra_runtime/tmp/GATE_SUPPORT_ASSESSMENT.json",
+            "output_path": "canonical/astra_runtime/tmp/GATE_SUPPORTED_FACT.json",
+            "field_name": "claim"
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "output_verified",
+            "value": true
+          }
+        },
+        {
+          "type": "fetch_json_knowledge",
+          "args": {
+            "url": "https://httpbin.org/get?claim=alpha",
+            "json_path": [
+              "args",
+              "claim"
+            ],
+            "output_path": "canonical/astra_runtime/tmp/GATE_CONFLICT_A.json",
+            "authoritative": false,
+            "timeout_s": 20,
+            "max_bytes": 500000
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "verified",
+            "value": true
+          }
+        },
+        {
+          "type": "fetch_json_knowledge",
+          "args": {
+            "url": "https://httpbin.org/get?claim=beta",
+            "json_path": [
+              "args",
+              "claim"
+            ],
+            "output_path": "canonical/astra_runtime/tmp/GATE_CONFLICT_B.json",
+            "authoritative": false,
+            "timeout_s": 20,
+            "max_bytes": 500000
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "verified",
+            "value": true
+          }
+        },
+        {
+          "type": "assess_knowledge_consistency",
+          "args": {
+            "evidence_paths": [
+              "canonical/astra_runtime/tmp/GATE_CONFLICT_A.json",
+              "canonical/astra_runtime/tmp/GATE_CONFLICT_B.json"
+            ],
+            "output_path": "canonical/astra_runtime/tmp/GATE_CONFLICT_ASSESSMENT.json"
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "status",
+            "value": "CONFLICTED"
+          }
+        },
+        {
+          "type": "materialize_supported_knowledge",
+          "args": {
+            "assessment_path": "canonical/astra_runtime/tmp/GATE_CONFLICT_ASSESSMENT.json",
+            "output_path": "canonical/astra_runtime/tmp/GATE_CONFLICTED_FACT_MUST_NOT_EXIST.json",
+            "field_name": "claim"
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "output_verified",
+            "value": false
+          }
+        },
+        {
+          "type": "finish",
+          "args": {
+            "summary": "KNOWLEDGE_ACTION_GATE_COMPLETE"
+          }
+        }
+      ],
+      "verify": {
+        "type": "stdout_contains",
+        "text": "KNOWLEDGE_ACTION_GATE_COMPLETE"
+      }
+    },
+    {
+      "id": "independent-file-acceptance",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport json,pathlib\ngood=pathlib.Path('canonical/astra_runtime/tmp/GATE_SUPPORTED_FACT.json')\nbad=pathlib.Path('canonical/astra_runtime/tmp/GATE_CONFLICTED_FACT_MUST_NOT_EXIST.json')\nassert good.is_file(),'SUPPORTED_FACT_MISSING'\nrows=json.loads(good.read_text(encoding='utf-8'))\nassert rows==[{'claim':'alpha'}],rows\nassert not bad.exists(),'CONFLICTED_FACT_WAS_MATERIALIZED'\nassessment=json.loads(pathlib.Path('canonical/astra_runtime/tmp/GATE_CONFLICT_ASSESSMENT.json').read_text(encoding='utf-8'))\nassert assessment.get('status')=='CONFLICTED',assessment\nprint('KNOWLEDGE_ACTION_GATE_INDEPENDENTLY_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "KNOWLEDGE_ACTION_GATE_INDEPENDENTLY_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "supported_only_actionability": true,
+    "conflicted_output_must_not_exist": true,
+    "gate_commit": "7f4d8f96c9a6f14661b0f6051733f3636ca9e8be"
+  }
+}
