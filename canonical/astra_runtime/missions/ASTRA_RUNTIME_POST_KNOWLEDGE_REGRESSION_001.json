@@ -1,0 +1,23 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-POST-KNOWLEDGE-REGRESSION-001",
+  "purpose": "Canonical regression sweep after authority resolution, authority-native source discovery, semantic relevance gating, JIT knowledge compilation, and semantic extraction.",
+  "steps": [
+    {
+      "id": "run-canonical-regressions",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython -m py_compile canonical/runtime/astra_runtime.py canonical/runtime/goal_compiler.py\npython -m unittest discover -s canonical/tests -p 'test*.py'",
+      "verify": {
+        "type": "returncode_zero"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "regression_only": true,
+    "authority_discovery_commit": "4f8b3661ae5a09725305fe27e2df587e1d80f35e",
+    "semantic_extraction_runtime_commit": "430b577f10efa2c5f4bead4d97cffbe60b1dc35e",
+    "semantic_extraction_compiler_commit": "eab8dccc1f39323382e804b1a9d15a6bcdd60fd7"
+  }
+}
