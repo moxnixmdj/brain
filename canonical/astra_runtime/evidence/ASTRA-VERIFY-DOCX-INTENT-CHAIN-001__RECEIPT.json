@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T03:29:54.568600+00:00",
+  "mission_id": "ASTRA-VERIFY-DOCX-INTENT-CHAIN-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_DOCX_INTENT_CHAIN_001.json",
+  "mission_sha256": "0835d9e9e5f90e84d3f9520df3038544785206e8db13855d79cc6ec928f9e3e2",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "15cdb23cbca0400261b06285064c2d430f36cfc7a21e74eb5eb65bc9b50cb92d",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
