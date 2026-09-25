@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_RESEARCH_STRUCTURAL_EVIDENCE_V1",
+  "evidence_id": "SEMANTIC-GOAL-QUORUM-STRUCTURAL-20260926-001",
+  "branch": "research/semantic-goal-quorum-20260926",
+  "evidence_class": "STRUCTURAL_ISOLATED_EXECUTION",
+  "status": "PASS",
+  "checks": {
+    "agreeing_distinct_authority_classes": "PASS",
+    "same_authority_class_not_independent": "PASS",
+    "semantic_disagreement_fails_closed": "PASS",
+    "unknown_target_effect_rejected": "PASS",
+    "duplicate_authority_rejected": "PASS",
+    "exact_goal_hash_mismatch_rejected": "PASS"
+  },
+  "promotion_status": "NOT_PROMOTED",
+  "canonical_regression_status": "NOT_RUN",
+  "held_out_runtime_mission_status": "NOT_RUN",
+  "limitations": [
+    "The isolated harness exercises the semantic-quorum core logic, not the full canonical runtime.",
+    "Fixture authority classes prove enforcement semantics, not real semantic-engine independence or semantic accuracy."
+  ],
+  "required_before_promotion": [
+    "exact branch Python compile checks",
+    "full canonical unittest discovery",
+    "all stacked held-out missions through PR #8",
+    "ASTRA-RUNTIME-SEMANTIC-GOAL-QUORUM-001",
+    "independent final artifact verification",
+    "reconcile against then-current main"
+  ]
+}
