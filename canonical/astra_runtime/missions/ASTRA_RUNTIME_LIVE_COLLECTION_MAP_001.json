@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-LIVE-COLLECTION-MAP-001",
+  "purpose": "Pressure-test iteration and per-item conditional transformation over a collection whose membership is only known at runtime.",
+  "goal": "Using a real rendered browser, open https://jsonplaceholder.typicode.com/users, save a screenshot to canonical/astra_runtime/tmp/LIVE_USERS.png, and save the rendered result to canonical/astra_runtime/tmp/LIVE_USERS.json. Read the live JSON array from that result. For every user returned at runtime, create canonical/astra_runtime/tmp/LIVE_USERS_CLASSIFIED.json containing exactly one record with that user's id, name, username, and bucket equal to SHORT when the username length is at most 8 characters and LONG otherwise. Finally independently reread both files and verify the output contains exactly one record per live user, preserves every id, name, and username, and assigns every bucket correctly.",
+  "steps": [
+    {
+      "id": "run-live-collection-map-goal",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 16,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "collection_size_not_known_before_execution": true,
+    "manual_controller_actions": false
+  }
+}
