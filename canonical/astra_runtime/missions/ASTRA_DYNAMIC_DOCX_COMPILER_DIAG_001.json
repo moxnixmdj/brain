@@ -1,0 +1,20 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-DYNAMIC-DOCX-COMPILER-DIAG-001",
+  "goal": "Using a real rendered browser, open https://httpbin.org/forms/post, enter PROJECT BRAIN into the customer name field, choose Medium pizza size, check the Bacon topping, submit the form, save a screenshot to canonical/astra_runtime/tmp/DYNAMIC_DOCX_BROWSER.png, and save the result to canonical/astra_runtime/tmp/DYNAMIC_DOCX_BROWSER.json. Create canonical/astra_runtime/tmp/DYNAMIC_DOCX_NORMALIZED.json containing a top-level submissions object with exactly one record named httpbin whose status is VERIFIED_BROWSER_SUBMISSION and whose customer_name, size, topping, and final_url values come from the browser result. Create canonical/astra_runtime/tmp/DYNAMIC_BROWSER_REPORT.docx from that normalized JSON with title Browser Submission Report, paragraph Verified browser submission, and a two-column table with headers Field and Value containing one row for each of customer_name, size, topping, and final_url using their values from the normalized JSON. Finally independently reopen the DOCX and verify every requested value matches the normalized JSON.",
+  "steps": [
+    {
+      "id": "compile-only",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/goal_compiler.py')\ns=importlib.util.spec_from_file_location('gc',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads(pathlib.Path('canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads(pathlib.Path('canonical/astra_runtime/missions/ASTRA_RUNTIME_BROWSER_DYNAMIC_DOCX_001.json').read_text())['goal']\nout=m.compile_goal(goal,reg,pathlib.Path('.').resolve())\nprint(json.dumps({'parts':out.get('compiled_parts'),'actions':out.get('controller_actions')},sort_keys=True))\nprint('DYNAMIC_DOCX_COMPILER_COMPLETE')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "DYNAMIC_DOCX_COMPILER_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false
+  }
+}
