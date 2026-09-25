@@ -6,6 +6,7 @@ import re
 
 import auto_apt_cli_acquisition
 import auto_pypi_library_acquisition
+import auto_npm_library_acquisition
 
 
 class AutoAcquisitionFailure(RuntimeError):
@@ -29,10 +30,19 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
     attempts=[]
     required=_required_supplier_class(goal)
     if required=="npm_javascript_library":
-        raise AutoAcquisitionFailure(
-            "REQUIRED_SUPPLIER_CLASS_UNSUPPORTED",
-            json.dumps({"required_supplier_class":required},sort_keys=True)
-        )
+        try:
+            return auto_npm_library_acquisition.dispatch(
+                goal,mission_id,mission_path,root,discovery=discovery
+            )
+        except Exception as exc:
+            attempts.append({
+              "supplier_class":"npm_javascript_library",
+              "error":type(exc).__name__+":"+str(exc),
+            })
+            raise AutoAcquisitionFailure(
+                "NO_COMPATIBLE_REQUIRED_SUPPLIER_CONTRACT",
+                json.dumps(attempts,sort_keys=True)[:4000]
+            ) from exc
     if auto_pypi_library_acquisition.supports(goal):
         try:
             return auto_pypi_library_acquisition.dispatch(
