@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T16:11:17.586909+00:00",
+  "mission_id": "ASTRA-FANOUT-XLSX-COMPILER-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_FANOUT_XLSX_COMPILER_DIAG_001.json",
+  "mission_sha256": "631a448373a7055919ed917f8b482e0ffe5990e2da5b928cbe2e87b03c1aefbe",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "30d62b0dd516ee70a90bb5ca69604fbad8bec1056e47a559e007e8dfb574b7cd",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
