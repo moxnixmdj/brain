@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T04:33:50.102272+00:00",
+  "mission_id": "ASTRA-VERIFY-ZBAR-MULTIFORMAT-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_ZBAR_MULTIFORMAT_001.json",
+  "mission_sha256": "cf89bb2d3787397f539e38dd5457934489ca94131b5361f2c0d91273308120d0",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "72169bf369b779cd46ffdef4563defbeaba5e6b125bbe179e609e6b745873245",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

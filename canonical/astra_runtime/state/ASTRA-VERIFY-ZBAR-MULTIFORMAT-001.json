@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T04:33:50.101992+00:00",
+  "created_at_utc": "2026-09-25T04:33:34.176364+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T04:33:50.101691+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\ncheck_sha(){ pkg=\"$1\" ver=\"$2\" expected=\"$3\"; got=\"$(apt-cache show \"$pkg=$ver\" | awk '/^SHA256:/{print $2; exit}')\"; [ \"$got\" = \"$expected\" ]; }\ncheck_sha zbar-tools 0.23.93-4build3 9e718d34a9650263aca2dd85e56d9de42ca24ff82254f90f5e4270d1e5d00422\ncheck_sha qrencode 4.1.1-1build2 613c5a22316489ec6a9ce5d59190293df15dd4612b55432dde04c62f7c1a0e25\ncheck_sha zint 2.13.0-1build3 cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769\nsudo apt-get update -qq\nsudo apt-get install -y --no-install-recommends zbar-tools=0.23.93-4build3 qrencode=4.1.1-1build2 zint=2.13.0-1build3 >/dev/null\nqrencode -o canonical/astra_runtime/tmp/ZBAR_VERIFY_QR.png 'PROJECT BRAIN'\nzint -b CODE128 -o canonical/astra_runtime/tmp/ZBAR_VERIFY_BARCODE.png -d 'PROJECT BRAIN'\nqr=\"$(zbarimg --quiet --raw canonical/astra_runtime/tmp/ZBAR_VERIFY_QR.png)\"\nbar=\"$(zbarimg --quiet --raw canonical/astra_runtime/tmp/ZBAR_VERIFY_BARCODE.png)\"\n[ \"$qr\" = 'PROJECT BRAIN' ]\n[ \"$bar\" = 'PROJECT BRAIN' ]\nprintf 'ZBAR_MULTIFORMAT_VERIFIED\\n'",
+        "duration_s": 15.925,
+        "returncode": 0,
+        "stderr": "\nRunning kernel seems to be up-to-date.\n\nNo services need to be restarted.\n\nNo containers need to be restarted.\n\nNo user sessions are running outdated binaries.\n\nNo VM guests are running outdated hypervisor (qemu) binaries on this host.\n",
+        "stdout": "ZBAR_MULTIFORMAT_VERIFIED\n"
+      },
+      "step_id": "verify-zbar-both-formats",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-VERIFY-ZBAR-MULTIFORMAT-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_ZBAR_MULTIFORMAT_001.json",
+  "mission_sha256": "cf89bb2d3787397f539e38dd5457934489ca94131b5361f2c0d91273308120d0",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T04:33:50.101706+00:00"
+}
