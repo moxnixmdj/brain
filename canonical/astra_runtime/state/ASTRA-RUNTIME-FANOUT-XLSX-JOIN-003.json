@@ -1,0 +1,21 @@
+{
+  "blocker": {
+    "adapter": "goal",
+    "error": "RuntimeError:INPUT_FILE_MISSING",
+    "mission_id": "ASTRA-RUNTIME-FANOUT-XLSX-JOIN-003",
+    "observed_at_utc": "2026-09-25T16:13:33.733554+00:00",
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "run-fanout-to-xlsx-goal",
+    "step_index": 0
+  },
+  "created_at_utc": "2026-09-25T16:13:05.552075+00:00",
+  "history": [],
+  "mission_id": "ASTRA-RUNTIME-FANOUT-XLSX-JOIN-003",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_FANOUT_XLSX_JOIN_003.json",
+  "mission_sha256": "a6743bebd6559d1b455e999e60cda6814b00c3a48a925a587e063cdcb7d0d8c1",
+  "next_step": 0,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-25T16:13:33.733788+00:00"
+}
