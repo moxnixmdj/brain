@@ -17,6 +17,7 @@
   ],
   "constraints": {
     "incremental_spend_usd": 0,
-    "model_controller_required": false
+    "model_controller_required": false,
+    "replay_after_verified_json_docx_commit": "a70474a4a1e2aff9a3d7b3791a95c865bdfd12a4"
   }
 }
