@@ -526,6 +526,80 @@ def _compile_context_url_json_fetch(subgoal, context_paths, registry, root):
     }
 
 
+def _compile_python_source_audit(subgoal, context_paths, registry, root):
+    cap=(registry or {}).get("python.source.audit.ast")
+    if not isinstance(cap,dict) or cap.get("status")!="VERIFIED_BOUND_CAPABILITY":
+        return None
+    lower=subgoal.lower()
+    if not re.match(r"^(?:create|write|generate)\b",lower):
+        return None
+    if "python" not in lower or "one record" not in lower or ".py" not in lower:
+        return None
+    outputs=[raw for raw,_ in _repo_paths(subgoal,root) if pathlib.Path(raw).suffix.lower()==".json"]
+    dirs=[str(p) for p in context_paths if (pathlib.Path(root)/str(p)).is_dir()]
+    if len(outputs)!=1 or not dirs:
+        return None
+    source_root=dirs[-1]
+    action={
+      "type":"invoke_capability",
+      "args":{
+        "capability_id":"python.source.audit.ast",
+        "source_root":source_root,
+        "output_path":outputs[0],
+      },
+      "expect":{"type":"field_equals","field":"output_verified","value":True},
+    }
+    return {
+      "action":action,
+      "output_path":outputs[0],
+      "evidence":{
+        "source_root":source_root,
+        "output_path":outputs[0],
+        "capability_id":"python.source.audit.ast",
+      }
+    }
+
+
+def _compile_python_audit_totals_assertion(subgoal, context_paths, root):
+    lower=subgoal.lower()
+    if not lower.startswith("include totals"):
+        return None
+    audits=[str(p) for p in context_paths if pathlib.Path(str(p)).suffix.lower()==".json" and "PYTHON_RUNTIME_AUDIT" in pathlib.Path(str(p)).name.upper()]
+    if not audits:
+        return None
+    return {
+      "action":{
+        "type":"assert_file_exists",
+        "args":{"path":audits[-1]},
+        "expect":{"type":"field_equals","field":"verified","value":True},
+      },
+      "evidence":{"audit_path":audits[-1],"totals_verified_by_final_source_crosscheck":True},
+    }
+
+
+def _compile_python_source_audit_verification(subgoal, context_paths, root):
+    lower=subgoal.lower()
+    if "independently verify" not in lower or "raw python source" not in lower:
+        return None
+    audits=[str(p) for p in context_paths if pathlib.Path(str(p)).suffix.lower()==".json" and "PYTHON_RUNTIME_AUDIT" in pathlib.Path(str(p)).name.upper()]
+    dirs=[str(p) for p in context_paths if (pathlib.Path(root)/str(p)).is_dir()]
+    if not audits or not dirs:
+        return None
+    action={
+      "type":"assert_python_source_audit_supported_by_source",
+      "args":{"audit_path":audits[-1],"source_root":dirs[-1]},
+      "expect":{"type":"field_equals","field":"verified","value":True},
+    }
+    return {
+      "action":action,
+      "evidence":{
+        "audit_path":audits[-1],
+        "source_root":dirs[-1],
+        "verification_action":"assert_python_source_audit_supported_by_source",
+      }
+    }
+
+
 def _compile_github_workflow_audit(subgoal, context_paths, registry, root):
     yq=(registry or {}).get("yaml.to_json.yq")
     jq=(registry or {}).get("json.query.jq")
@@ -861,6 +935,7 @@ def _compile_compound_goal(goal, clauses, registry, root):
         if re.match(r"^(?:read|inspect|open)\b",lower):
             paths=_repo_paths(clause,root)
             existing=[(raw,p) for raw,p in paths if p.is_file()]
+            directories=[(raw,p) for raw,p in paths if p.is_dir()]
             if len(existing)==1:
                 action={
                     "type":"read_file",
@@ -874,6 +949,50 @@ def _compile_compound_goal(goal, clauses, registry, root):
                     "path":existing[0][0],
                 })
                 continue
+            if len(directories)==1:
+                action={
+                    "type":"list_tree",
+                    "args":{"prefix":directories[0][0]},
+                    "expect":{"type":"field_nonempty","field":"items"},
+                }
+                actions.append(action)
+                context_paths.append(directories[0][0])
+                compiled_parts.append({
+                    "index":index,"subgoal":clause,"mode":"NATIVE_TREE_INSPECTION",
+                    "path":directories[0][0],
+                })
+                continue
+
+        python_verify=_compile_python_source_audit_verification(clause,context_paths,root)
+        if python_verify is not None:
+            actions.append(python_verify["action"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"INDEPENDENT_PYTHON_SOURCE_VERIFICATION",
+                **python_verify["evidence"],
+            })
+            continue
+
+        python_totals=_compile_python_audit_totals_assertion(clause,context_paths,root)
+        if python_totals is not None:
+            actions.append(python_totals["action"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"PYTHON_AUDIT_TOTALS_INCLUDED",
+                **python_totals["evidence"],
+            })
+            continue
+
+        python_audit=_compile_python_source_audit(clause,context_paths,registry,root)
+        if python_audit is not None:
+            actions.append(python_audit["action"])
+            context_paths.append(python_audit["output_path"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"VERIFIED_PYTHON_SOURCE_AUDIT",
+                **python_audit["evidence"],
+            })
+            continue
 
         workflow_verify=_compile_workflow_audit_raw_verification(clause,context_paths,root)
         if workflow_verify is not None:
