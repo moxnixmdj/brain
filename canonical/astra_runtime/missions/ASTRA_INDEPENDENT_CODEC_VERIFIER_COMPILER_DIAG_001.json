@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-INDEPENDENT-CODEC-VERIFIER-COMPILER-DIAG-001",
+  "purpose": "Prove an explicit implementation-independence requirement compiles to verifier acquisition rather than producer self-decoding.",
+  "steps": [
+    {
+      "id": "compile-and-assert-independent-verifier",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/goal_compiler.py')\ns=importlib.util.spec_from_file_location('gc',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads(pathlib.Path('canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads(pathlib.Path('canonical/astra_runtime/missions/ASTRA_RUNTIME_INDEPENDENT_CODEC_VERIFIER_BSON_002.json').read_text())['goal']\nout=m.compile_goal(goal,reg,pathlib.Path('.').resolve())\nacts=out.get('controller_actions') or []\nv=[a for a in acts if a.get('type')=='verify_with_independent_pypi_codec']\nassert len(v)==1,acts\nassert v[0]['args']['producer_project']=='bson-modern',v\nassert v[0]['args']['format']=='bson',v\nassert not any((a.get('args') or {}).get('mode')=='decode_verify' for a in acts),acts\nprint('INDEPENDENT_CODEC_VERIFIER_COMPILER_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "INDEPENDENT_CODEC_VERIFIER_COMPILER_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "read_only_diagnostic": true
+  }
+}
