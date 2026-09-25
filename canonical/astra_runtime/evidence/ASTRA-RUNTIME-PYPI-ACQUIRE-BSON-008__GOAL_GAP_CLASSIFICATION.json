@@ -1,0 +1,10 @@
+{
+  "capability_acquisition_allowed": true,
+  "compile_error": "GOAL_COMPILATION_FAILED:GOAL_COMPILATION_SUBGOAL_UNRESOLVED:{\"cause\": \"GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH\", \"cause_detail\": null, \"clauses\": [\"Create canonical/astra_runtime/tmp/BSON_SOURCE.json containing exactly four records with fields id and text: 1 alpha, 2 beta, 3 gamma, 4 delta\", \"Encode those exact records as BSON and save canonical/astra_runtime/tmp/BSON_RECORDS.bson\", \"Independently decode the BSON artifact and verify the decoded records are exactly identical to canonical/astra_runtime/tmp/BSON_SOURCE.json in values, order, field names, and record count\"], \"compiled_prefix\": [{\"fields\": [\"id\", \"text\"], \"index\": 0, \"mode\": \"NATIVE_LITERAL_JSON_RECORDS\", \"output_path\": \"canonical/astra_runtime/tmp/BSON_SOURCE.json\", \"record_count\": 4, \"subgoal\": \"Create canonical/astra_runtime/tmp/BSON_SOURCE.json containing exactly four records with fields id and text: 1 alpha, 2 beta, 3 gamma, 4 delta\"}], \"context_paths\": [\"canonical/astra_runtime/tmp/BSON_SOURCE.json\"], \"index\": 1, \"subgoal\": \"Encode those exact records as BSON and save canonical/astra_runtime/tmp/BSON_RECORDS.bson\"}",
+  "gap_class": "CAPABILITY_CANDIDATE",
+  "mission_id": "ASTRA-RUNTIME-PYPI-ACQUIRE-BSON-008",
+  "observed_at_utc": "2026-09-25T19:00:31.327383+00:00",
+  "policy": "ONLY_CAPABILITY_CANDIDATE_MAY_TRIGGER_EXTERNAL_CAPABILITY_ACQUISITION",
+  "schema": "PROJECT_BRAIN_GOAL_GAP_CLASSIFICATION_V1",
+  "subgoal": "Encode those exact records as BSON and save canonical/astra_runtime/tmp/BSON_RECORDS.bson"
+}
