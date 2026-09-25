@@ -82,6 +82,13 @@ def run(args,root):
             cells[i].text=value
     output.parent.mkdir(parents=True,exist_ok=True)
     save(str(output))
+    intent_path=pathlib.Path(str(output)+".intent.json")
+    intent_payload={
+      "schema":"PROJECT_BRAIN_DOCUMENT_INTENT_V1",
+      "source_goal":goal,
+      "output_path":str(output.relative_to(pathlib.Path(root).resolve())).replace("\\","/"),
+    }
+    intent_path.write_text(json.dumps(intent_payload,indent=2,sort_keys=True)+"\n",encoding="utf-8")
     raw=output.read_bytes()
     if not raw.startswith(b"PK\x03\x04"):
         raise RuntimeError("DOCX_ZIP_MAGIC_MISSING")
@@ -94,5 +101,7 @@ def run(args,root):
       "output_sha256":hashlib.sha256(raw).hexdigest(),
       "output_bytes":len(raw),
       "document_spec":spec,
+      "intent_path":str(intent_path.relative_to(pathlib.Path(root).resolve())).replace("\\","/"),
+      "intent_sha256":hashlib.sha256(intent_path.read_bytes()).hexdigest(),
       "output_verified":True,
     }
