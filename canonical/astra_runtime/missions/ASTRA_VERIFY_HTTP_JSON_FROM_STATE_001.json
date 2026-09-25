@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-VERIFY-HTTP-JSON-FROM-STATE-001",
+  "purpose": "Fresh verification of structured-state HTTPS JSON retrieval, independently checked with curl.",
+  "steps": [
+    {
+      "id": "verify-structured-http-json",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport hashlib,importlib.util,json,pathlib,shutil,subprocess\nroot=pathlib.Path('.').resolve()\nreg=json.loads((root/'canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\nmatches=[(cid,e) for cid,e in reg.items() if e.get('status')=='VERIFIED_BOUND_CAPABILITY' and (e.get('source') or {}).get('type')=='pypi']\nassert len(matches)==1,matches\ncid,entry=matches[0]\nsel={'id':cid,'record':entry}\nsel_rel='canonical/astra_runtime/tmp/HTTP_JSON_VERIFY_SELECTION.json'\nout_rel='canonical/astra_runtime/tmp/HTTP_JSON_VERIFY_LIVE.json'\n(root/sel_rel).write_text(json.dumps(sel,indent=2,sort_keys=True)+'\\n',encoding='utf-8')\np=root/'canonical/runtime/bound_capabilities/http_json_fetch.py'\ns=importlib.util.spec_from_file_location('hf',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nres=m.run({'source_json_path':sel_rel,'url_key':'metadata_url','output_path':out_rel,'max_bytes':5000000},root)\nurl=entry['source']['metadata_url']\nassert shutil.which('curl')\ncurl=subprocess.run(['curl','-fsSL','-H','Accept: application/json',url],capture_output=True,timeout=60)\nassert curl.returncode==0,curl.stderr[-1000:]\na=json.loads((root/out_rel).read_text(encoding='utf-8'))\nb=json.loads(curl.stdout.decode('utf-8'))\nassert a['info']['name']==b['info']['name']==entry['source']['project']\nassert a['info']['version']==b['info']['version']\nan={(x.get('filename'),(x.get('digests') or {}).get('sha256')) for x in a.get('urls',[])}\nbn={(x.get('filename'),(x.get('digests') or {}).get('sha256')) for x in b.get('urls',[])}\nassert an==bn and an\nprint(json.dumps({'adapter_result':res,'project':a['info']['name'],'live_version':a['info']['version'],'independent_semantics_equal':True,'curl_sha256':hashlib.sha256(curl.stdout).hexdigest()},sort_keys=True))\nprint('STRUCTURED_HTTP_JSON_INDEPENDENTLY_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "STRUCTURED_HTTP_JSON_INDEPENDENTLY_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "independent_verifier": "curl",
+    "authoritative_live_source": true
+  }
+}
