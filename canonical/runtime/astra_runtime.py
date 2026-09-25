@@ -3986,7 +3986,8 @@ def _inherit_verified_capabilities(problem):
           "requires":list(entry.get("requires") or []),
           "provides":list(entry.get("provides") or []),
           "cost":float(entry.get("cost",1)),
-          "action":action
+          "action":action,
+          "result_fields":list(entry.get("result_fields") or []),
         }
         caps.append(cap)
         inherited.append(cid)
