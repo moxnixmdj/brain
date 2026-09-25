@@ -920,7 +920,7 @@
   ],
   "chosen_host": "peps.python.org",
   "chosen_url": "https://peps.python.org/pep-0703/",
-  "discovered_at_utc": "2026-09-25T21:33:20.261749+00:00",
+  "discovered_at_utc": "2026-09-25T21:38:47.970212+00:00",
   "query": "Python Software Foundation PEP-0703 official source",
   "schema": "PROJECT_BRAIN_SOURCE_DISCOVERY_EVIDENCE_V1",
   "trust_claim": "DOMAIN_FILTERED_SEARCH_DISCOVERY_ONLY_NOT_FACT_VERIFICATION"

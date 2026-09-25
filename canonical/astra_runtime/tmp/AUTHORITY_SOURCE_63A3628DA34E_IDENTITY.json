@@ -26,7 +26,7 @@
   "official_url": "https://www.python.org/psf/",
   "registry": "wikidata",
   "registry_search_url": "https://www.wikidata.org/w/api.php?action=wbsearchentities&search=Python+Software+Foundation&language=en&format=json&limit=8&type=item",
-  "resolved_at_utc": "2026-09-25T21:33:00.379166+00:00",
+  "resolved_at_utc": "2026-09-25T21:38:31.572574+00:00",
   "schema": "PROJECT_BRAIN_AUTHORITY_IDENTITY_EVIDENCE_V1",
   "status": "IDENTITY_CANDIDATE_RESOLVED",
   "trust_claim": "STRUCTURED_ENTITY_REGISTRY_DISCOVERY_REQUIRES_INDEPENDENT_SITE_VERIFICATION"

@@ -1,0 +1,17 @@
+{
+  "adapter": "shell",
+  "error": "VERIFICATION_FAILED",
+  "mission_id": "ASTRA-RUNTIME-JIT-SEMANTIC-EXTRACTION-PSF-003",
+  "observed_at_utc": "2026-09-25T21:38:51.818826+00:00",
+  "result": {
+    "adapter": "shell",
+    "command": "set -euo pipefail\npython - <<'PY'\nimport json,pathlib,re,urllib.request\nout=pathlib.Path('canonical/astra_runtime/tmp/JIT_PEP703_METADATA.json')\nassert out.is_file(),'SEMANTIC_EXTRACTION_OUTPUT_MISSING'\nrows=json.loads(out.read_text(encoding='utf-8'))\nassert isinstance(rows,list) and len(rows)==1,rows\nrec=rows[0]\nassert set(rec)=={'status','python_version'},rec\nurl='https://peps.python.org/pep-0703/'\nreq=urllib.request.Request(url,headers={'User-Agent':'ProjectBrain-IndependentSemanticAcceptance/1'})\ntext=urllib.request.urlopen(req,timeout=20).read(1000000).decode('utf-8','replace')\ndef field(label):\n    m=re.search(r'(?is)>'+re.escape(label)+r':</dt>\\s*<dd[^>]*>\\s*([^<]+)',text)\n    if not m:\n        m=re.search(r'(?im)^'+re.escape(label)+r':\\s*\\n?\\s*([^\\n<]+)',re.sub(r'<[^>]+>','\\n',text))\n    assert m,label\n    return re.sub(r'\\s+',' ',m.group(1)).strip()\nassert str(rec['status']).strip()==field('Status'),(rec,field('Status'))\nassert str(rec['python_version']).strip()==field('Python-Version'),(rec,field('Python-Version'))\nprint('JIT_SEMANTIC_EXTRACTION_INDEPENDENTLY_VERIFIED')\nPY",
+    "duration_s": 0.103,
+    "returncode": 1,
+    "stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 17, in <module>\n  File \"<stdin>\", line 15, in field\nAssertionError: Status\n",
+    "stdout": ""
+  },
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "external-acceptance",
+  "step_index": 1
+}
