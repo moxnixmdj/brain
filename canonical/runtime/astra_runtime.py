@@ -3395,7 +3395,7 @@ def _goal_action(action):
         if status!="SUPPORTED":
             return {
               "type":typ,"output_verified":False,
-              "error":"KNOWLEDGE_NOT_ACTIONABLE:"+status,
+              "blocked_reason":"KNOWLEDGE_NOT_ACTIONABLE:"+status,
               "status":status,
               "assessment_path":str(assessment_path.relative_to(ROOT)),
             }
