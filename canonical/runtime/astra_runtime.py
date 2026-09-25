@@ -347,6 +347,84 @@ def _goal_action(action):
           "verified":p.is_file(),
           "sha256":sha_file(p) if p.is_file() else None,
         }
+    if typ=="assert_python_source_audit_supported_by_source":
+        audit_path=_safe_repo_path(args.get("audit_path",""))
+        source_root=_safe_repo_path(args.get("source_root",""))
+        if not audit_path.is_file() or not source_root.is_dir():
+            return {"type":typ,"verified":False,"error":"PYTHON_SOURCE_AUDIT_SOURCE_MISSING"}
+        try:
+            audit=json.loads(audit_path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            return {"type":typ,"verified":False,"error":"PYTHON_SOURCE_AUDIT_JSON_INVALID:"+type(exc).__name__}
+        if audit.get("schema")!="PROJECT_BRAIN_PYTHON_SOURCE_AUDIT_V1":
+            return {"type":typ,"verified":False,"error":"PYTHON_SOURCE_AUDIT_SCHEMA_INVALID"}
+        actual={}
+        imports=set()
+        total_functions=0
+        total_classes=0
+        errors=[]
+        for p in sorted(source_root.rglob("*.py")):
+            if not p.is_file():
+                continue
+            raw=p.read_bytes()
+            rel=str(p.relative_to(ROOT)).replace("\\","/")
+            try:
+                tree=ast.parse(raw.decode("utf-8"),filename=str(p))
+            except Exception as exc:
+                errors.append("parse:"+rel+":"+type(exc).__name__)
+                continue
+            funcs=sorted(n.name for n in tree.body if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef)))
+            classes=sorted(n.name for n in tree.body if isinstance(n,ast.ClassDef))
+            mods=set()
+            for n in tree.body:
+                if isinstance(n,ast.Import):
+                    mods.update(a.name.split(".")[0] for a in n.names)
+                elif isinstance(n,ast.ImportFrom) and n.module:
+                    mods.add(n.module.split(".")[0])
+            actual[rel]={
+              "sha256":hashlib.sha256(raw).hexdigest(),
+              "imports":sorted(mods),
+              "functions":funcs,
+              "classes":classes,
+            }
+            imports.update(mods)
+            total_functions+=len(funcs)
+            total_classes+=len(classes)
+        reported={}
+        for item in audit.get("files") or []:
+            if not isinstance(item,dict) or not item.get("path"):
+                errors.append("invalid_record")
+                continue
+            reported[str(item["path"])]={
+              "sha256":item.get("sha256"),
+              "imports":sorted(item.get("imports") or []),
+              "functions":sorted(item.get("functions") or []),
+              "classes":sorted(item.get("classes") or []),
+            }
+        if reported!=actual:
+            errors.append("records_mismatch")
+        expected_totals={
+          "files":len(actual),
+          "functions":total_functions,
+          "classes":total_classes,
+          "distinct_imported_modules":len(imports),
+        }
+        if audit.get("totals")!=expected_totals:
+            errors.append("totals_mismatch")
+        if sorted(audit.get("distinct_imported_modules") or [])!=sorted(imports):
+            errors.append("imports_total_mismatch")
+        return {
+          "type":typ,
+          "verified":not errors,
+          "audit_path":str(audit_path.relative_to(ROOT)),
+          "source_root":str(source_root.relative_to(ROOT)),
+          "file_count":len(actual),
+          "function_count":total_functions,
+          "class_count":total_classes,
+          "distinct_imported_module_count":len(imports),
+          "errors":errors,
+          "audit_sha256":sha_file(audit_path),
+        }
     if typ=="assert_workflow_audit_supported_by_source":
         audit_path=_safe_repo_path(args.get("audit_path",""))
         yaml_path=_safe_repo_path(args.get("yaml_path",""))
@@ -574,7 +652,7 @@ def _run_model_independent_goal(step, mission, goal):
     allowed_types={
       "read_file","list_tree","search_text","http_get","invoke_capability",
       "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal",
-      "assert_workflow_audit_supported_by_source",
+      "assert_workflow_audit_supported_by_source","assert_python_source_audit_supported_by_source",
       "finish"
     }
     trace=[]
