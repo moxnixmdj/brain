@@ -3335,10 +3335,37 @@ def _goal_action(action):
                     stale=age_s>float(max_age_s)
                 except Exception:
                     stale=True
+            source_url=str(item.get("source_url") or "")
+            final_url=str(item.get("final_url") or source_url)
+            try:
+                parsed=urllib.parse.urlsplit(final_url)
+                scheme=parsed.scheme.lower()
+                host=(parsed.hostname or "").lower()
+                port=parsed.port
+                netloc=host
+                if port is not None and not (
+                    (scheme=="http" and port==80) or (scheme=="https" and port==443)
+                ):
+                    netloc=f"{host}:{port}"
+                canonical_url=urllib.parse.urlunsplit(
+                    (scheme,netloc,parsed.path or "/",parsed.query,"")
+                )
+            except Exception:
+                canonical_url=final_url
+            json_path=item.get("json_path") if isinstance(item.get("json_path"),list) else []
+            source_identity=hashlib.sha256(
+                json.dumps(
+                    {"url":canonical_url,"json_path":json_path},
+                    sort_keys=True,separators=(",",":"),ensure_ascii=False
+                ).encode("utf-8")
+            ).hexdigest()
             records.append({
               "path":raw_path,
-              "source_url":item.get("source_url"),
+              "source_url":source_url,
+              "final_url":final_url,
               "source_type":item.get("source_type"),
+              "json_path":json_path,
+              "source_identity":source_identity,
               "retrieved_at_utc":retrieved,
               "value":value,
               "body_sha256":item.get("body_sha256"),
@@ -3346,6 +3373,9 @@ def _goal_action(action):
               "age_s":age_s,
             })
         fresh=[x for x in records if not x.get("stale")]
+        fresh_source_identities={
+            str(x.get("source_identity") or "") for x in fresh if x.get("source_identity")
+        }
         canonical={}
         for rec in fresh:
             key=json.dumps(rec.get("value"),sort_keys=True,separators=(",",":"),ensure_ascii=False)
@@ -3354,16 +3384,19 @@ def _goal_action(action):
             status="STALE"
         elif len(fresh)<2:
             status="INSUFFICIENT"
-        elif len(canonical)==1:
-            status="SUPPORTED"
-        else:
+        elif len(canonical)>1:
             status="CONFLICTED"
+        elif len(fresh_source_identities)<2:
+            status="INSUFFICIENT"
+        else:
+            status="SUPPORTED"
         assessment={
           "schema":"PROJECT_BRAIN_KNOWLEDGE_ASSESSMENT_V1",
           "status":status,
           "evidence_count":len(records),
           "fresh_evidence_count":len(fresh),
           "distinct_fresh_values":len(canonical),
+          "distinct_fresh_source_identities":len(fresh_source_identities),
           "records":records,
           "invalid":invalid,
           "assessed_at_utc":utc(),
@@ -3376,6 +3409,7 @@ def _goal_action(action):
           "evidence_count":len(records),
           "fresh_evidence_count":len(fresh),
           "distinct_fresh_values":len(canonical),
+          "distinct_fresh_source_identities":len(fresh_source_identities),
           "output_path":str(output.relative_to(ROOT)),
         }
 
