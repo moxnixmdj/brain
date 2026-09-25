@@ -1,0 +1,23 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001",
+  "purpose": "Fresh effect verification of the reusable rendered-browser adapter using the official Python downloads page and an independent non-browser verifier.",
+  "steps": [
+    {
+      "id": "verify-rendered-browser-effect",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/runtime/verify_browser_python_release.py",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "RENDERED_BROWSER_EFFECT_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "rendered_browser_required": true,
+    "screenshot_required": true,
+    "independent_semantic_verification_required": true
+  }
+}
