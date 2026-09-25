@@ -1,0 +1,2608 @@
+{
+  "auto_acquisition": {
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"w3c-linkchecker\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"daptup\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"diffmon\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"icingaweb2-module-reporting\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"mp3report\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-postcss-reporter\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"ohai\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"reportbug\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"reportbug-gtk\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"apt-transport-in-toto\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"cairo-dock-alsamixer-plug-in\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"cairo-dock-animated-icons-plug-in\", \"status\": \"CONTRACT_REJECTED\"}]",
+    "status": "NOT_DISPATCHED"
+  },
+  "binding_performed": false,
+  "goal": "Execute every canonical/tests/test_*.py file. Create canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json containing one record per test file with repository-relative path, exit code, passed test count, failed test count, error count, skipped count, and duration, plus totals across the corpus. Fail if any test file exits nonzero. Finally independently execute the same complete test corpus again and verify that every file in the report still exits zero, that no canonical test file is missing from the report, and that the report totals are internally consistent.",
+  "mission_id": "ASTRA-RUNTIME-CANONICAL-TEST-AUDIT-002",
+  "observed_at_utc": "2026-09-25T01:24:14.595282+00:00",
+  "result": {
+    "binding_performed": false,
+    "candidates": [
+      {
+        "archive_sha256": "ff661f6f08ee205b12fd41f1c6e56d3a819cbc3d44a8c41524afcbdbe6d6e464",
+        "binding_kind": "apt",
+        "description": "tool to verify the links in a web page are still valid",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "still",
+          "verify"
+        ],
+        "name": "w3c-linkchecker",
+        "packages": [],
+        "query": "verify",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 78,
+        "version": "5.0.0-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c60b053b6ad5ca15b44718f6ff87be99e85e8613312e98015a7480ccd1d51976",
+        "binding_kind": "apt",
+        "description": "reporter of changes in list of available packages from repositories",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "report"
+        ],
+        "name": "daptup",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "0.12.7+nmu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c59b923cf64c819856b8985696ef6e902dcb667a3ccbb2a335d3d218681fd41e",
+        "binding_kind": "apt",
+        "description": "Tool for reporting changes in system configuration",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "report"
+        ],
+        "name": "diffmon",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "20020222-9.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "edefca1f9b6e45ff8475179d3f5f7fa5acd433d83a7293aac42f67538eaaa9e4",
+        "binding_kind": "apt",
+        "description": "Reporting functionality in the web frontend",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "report"
+        ],
+        "name": "icingaweb2-module-reporting",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "0.10.0-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "744abd23f7b508d6369a3cd4ac4b4a98da4d360ed58c478630dde62b87b8c89c",
+        "binding_kind": "apt",
+        "description": "Script to create an HTML report of MP3 files in a directory",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "report"
+        ],
+        "name": "mp3report",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "1.0.3-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "0dcbdd716f5cc4319189c025670bf92fb02ed341890326b08148a756873fdc73",
+        "binding_kind": "apt",
+        "description": "Log PostCSS messages in the console",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "report"
+        ],
+        "name": "node-postcss-reporter",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "7.0.5+~7.0.1-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "a63201d37f1d54648323add60999c5c9211bb9ff539d3808fcf917ef531e840a",
+        "binding_kind": "apt",
+        "description": "Detects data about your operating system and reports it in JSON",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "report"
+        ],
+        "name": "ohai",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "18.1.3-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "bb91d2bb7c730cfe15e4a70c6fdf5a4c59471a29ed70830c5c37d10b19ed2f11",
+        "binding_kind": "apt",
+        "description": "reports bugs in the Debian distribution",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "report"
+        ],
+        "name": "reportbug",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "13.0.1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "7d48480baa001ff705415190beb679e4bc1e73354d8f52bbf2c10099577cc4ac",
+        "binding_kind": "apt",
+        "description": "reports bugs in the Debian distribution (GTK+ UI)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "report"
+        ],
+        "name": "reportbug-gtk",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "13.0.1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "06e36657e49871a4e7c1f7eafe72767ba4910ca0eb6f6780370bbdc45fd749d1",
+        "binding_kind": "apt",
+        "description": "apt transport method for in-toto supply chain verification",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "apt-transport-in-toto",
+        "packages": [],
+        "query": "verify",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.1.1-4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "9d6fb4cc115dbc1b5e9db3abb840c67e8f29e5989c5bd12cf11c5a7afddfc9b9",
+        "binding_kind": "apt",
+        "description": "Alsamixer plug-in for Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-alsamixer-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "40e02cf501ebf32ff2635a938d9a55e89ba4e42b6aafd69fc33cf9bcb682871f",
+        "binding_kind": "apt",
+        "description": "Animated icons plug-in Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-animated-icons-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "be461fc4ab6b5a62f94f289f37cca80d5079eaab5caba3b0a5d1b6f9e0a6917b",
+        "binding_kind": "apt",
+        "description": "Cairo-Penguin plug-in for Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-cairo-penguin-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "4b52f651b4646f2e296909e1b14988fc4e322d7b623a248044a10794e553d807",
+        "binding_kind": "apt",
+        "description": "Clipper plug-in for Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-clipper-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "db1917010f6a69bee651068474b076ee7c11a9d3bf27d3b2125eafac394c34af",
+        "binding_kind": "apt",
+        "description": "Clock plug-in for Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-clock-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "f4a3f90969325882d034b1e92c764ffbd7afeaf7c927580ec0d52c42573d6b36",
+        "binding_kind": "apt",
+        "description": "Dbus plug-in for Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-dbus-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c7951529483042d42cc35f0d14b332f315e37f82092fb82a309db6c067803cf0",
+        "binding_kind": "apt",
+        "description": "library of D-Bus interface for Python of Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-dbus-plug-in-interface-python",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "7050a675d3826b37274c0e978059dbd925ff535032c163ef2a7a4e29ec6c321a",
+        "binding_kind": "apt",
+        "description": "library of D-Bus interface for ruby of Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-dbus-plug-in-interface-ruby",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "67a3063663460115da719d97c73cf0e96914834b54aa6e200ffdc19154b132cb",
+        "binding_kind": "apt",
+        "description": "library of D-Bus interface for vala of Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-dbus-plug-in-interface-vala",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "2bf04bb7569755aea2629c18b4f4e88ffb8b366b2561964f107e179503a5d473",
+        "binding_kind": "apt",
+        "description": "Desklet rendering plug-in for Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-desklet-rendering-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c802632a826de2a96598b0dd8d1cfbfd4b7e01c475d784c17569fcaaf21c74fa",
+        "binding_kind": "apt",
+        "description": "Dialog rendering plug-in for Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-dialog-rendering-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ea7450de3dd245bbe81a79346f2699ca9a4b5877e6abcf531b13f469cdb1bca0",
+        "binding_kind": "apt",
+        "description": "Dnd2share plug-in for Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-dnd2share-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "319a49a226c199ac98fb53a84c9862b55c2e01d8f86bbf06e3eae3afe68659e3",
+        "binding_kind": "apt",
+        "description": "Drop indicator plug-in for Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-drop-indicator-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "59fb84e555b5e2a0aae19f5b64f908fd6ecf6a2ca72419cc8f2446b8b5966c19",
+        "binding_kind": "apt",
+        "description": "Dustbin plug-in for Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-dustbin-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "58f6b8b803898c432ae5f12ed90a25f5aeb6a76b7b263787bf2107e7b01839f7",
+        "binding_kind": "apt",
+        "description": "Folders plug-in Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-folders-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "3dc7509713024102d46864a1a96717b86350d022c886e46507fbe5876a0cda8b",
+        "binding_kind": "apt",
+        "description": "GMenu plug-in for Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-gmenu-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "5393cc0b788454297c2ff487f4c545b06d0bc33cbe3d27ae55a5eb0d5d30948f",
+        "binding_kind": "apt",
+        "description": "GNOME integration plug-in for Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-gnome-integration-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "59cde4cd72f69492490904e075d8771b06df59daea0c01f36b7a212daa8b3428",
+        "binding_kind": "apt",
+        "description": "Icon effect plug-in for Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-icon-effect-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "9ce7595789b363d10fce4c1ee5efad24c3be8720592fb6bd6ba437260f91b515",
+        "binding_kind": "apt",
+        "description": "Illusion plug-in for Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-illusion-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "8399934ffe34e85585691bc3a6937accc62d145f8dd356d4bd8eef33b5ea20e1",
+        "binding_kind": "apt",
+        "description": "Report versions of all modules in memory",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 3,
+        "matched_terms": [
+          "in",
+          "report"
+        ],
+        "name": "libmodule-versions-report-perl",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 42,
+        "version": "1.06-4",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Keyless MCP for Just Signal: live quotes, report publishing, scorecard, and Chophouse panel grades.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.ou-reports/just-signal",
+        "packages": [
+          {
+            "identifier": "just-signal-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.3.0"
+          }
+        ],
+        "query": "report",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://www.ou-reports.com/api/mcp.php"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.3.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Verify a SCITT receipt under a trust root you hold \u2014 offline, no backend, no key, no network",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "dev.forestrie/verify",
+        "packages": [
+          {
+            "identifier": "@forestrie/mcp-verify",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": "npx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.5.1"
+          }
+        ],
+        "query": "verify",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/forestrie/mcp-verify"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.5.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "AI Incident Reporting Compliance MCP. Unified classification + reporting-clock tracker across EU...",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.CSOAI-ORG/ai-incident-reporting-mcp",
+        "packages": [
+          {
+            "identifier": "ai-incident-reporting-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "python",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.1.9"
+          }
+        ],
+        "query": "report",
+        "remotes": [],
+        "repository": {
+          "id": "1232725636",
+          "source": "github",
+          "url": "https://github.com/CSOAI-ORG/ai-incident-reporting-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.1.9",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Explainability Report MCP Server by MEOK AI Labs",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.CSOAI-ORG/explainability-report-mcp",
+        "packages": [
+          {
+            "identifier": "explainability-report-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "python",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.16"
+          }
+        ],
+        "query": "report",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/CSOAI-ORG/explainability-report-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.16",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "VM-side verify proxy for keystone attestations",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.CSOAI-ORG/keystone-verify-proxy-mcp",
+        "packages": [
+          {
+            "identifier": "keystone-verify-proxy-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.1"
+          }
+        ],
+        "query": "verify",
+        "remotes": [],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "MEOK CRA Article 14 Reporter MCP \u2014 actively-exploited-vulnerability notification with 24h/72h/14d",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.CSOAI-ORG/meok-cra-art14-reporter-mcp",
+        "packages": [
+          {
+            "identifier": "meok-cra-art14-reporter-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "python",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.5"
+          }
+        ],
+        "query": "report",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.meok.ai/v1/governance/cra-art14-reporter"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/CSOAI-ORG/meok-cra-art14-reporter-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.5",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "HPE GreenLake reporting MCP Server",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.HewlettPackard/greenlake-reporting-mcp",
+        "packages": [
+          {
+            "identifier": "greenlake-reporting-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.1.2"
+          }
+        ],
+        "query": "report",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/HewlettPackard/gl-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.1.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "MCP server for AI agents to report infrastructure needs they encounter during task execution",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.JarvisOnM4/report-needs",
+        "packages": [
+          {
+            "identifier": "report-needs",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.1"
+          }
+        ],
+        "query": "report",
+        "remotes": [],
+        "repository": {
+          "id": "1181547464",
+          "source": "github",
+          "url": "https://github.com/JarvisOnM4/report-needs"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "AI-powered trading strategy development: backtesting, market data, and portfolio analysis",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "agency.lona/trading",
+        "packages": [],
+        "query": "in",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.lona.agency/mcp"
+          }
+        ],
+        "repository": {
+          "id": "891584339",
+          "source": "github",
+          "subfolder": "packages/lona-mcp-server",
+          "url": "https://github.com/mindsightventures/lona"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "2.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Check how to contact a business website, and whether that contact path actually works.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "agency.ottobot/business-contact-finder",
+        "packages": [],
+        "query": "in",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://business-contact-finder-mcp.ottobot2025.workers.dev/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/modelcontextprotocol/registry"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.2.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Ten machine-readable signals on one public page: the top miss if any, and a receipt we re-verify.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.advisorsai/store-readiness",
+        "packages": [],
+        "query": "in",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://advisorsai.ai/store-readiness-mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.6",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Turn construction drawings into takeoffs, measured routes, schedules and estimates.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.aginera/preconstruction",
+        "packages": [],
+        "query": "in",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.aginera.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "A free one-minute reset for people, delivered by AI, with no account or personal data.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.ai-akari/one-minute-akari",
+        "packages": [],
+        "query": "in",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://ai-akari.ai/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/AInoAKARI/arigatou-kawaii-lp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Askline shows what ChatGPT says about a brand, then the SEO that feeds it.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.askline/askline",
+        "packages": [],
+        "query": "in",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://askline.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Schedule, generate and publish social posts to X, LinkedIn, Instagram, Threads and YouTube",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.autoposting/autoposting",
+        "packages": [],
+        "query": "in",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://app.autoposting.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Manage Kinnovis self-storage tariffs from chat.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.b77/kinnovis-storage",
+        "packages": [],
+        "query": "in",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://kinnovis-storage.b77.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Surface customer & prospect context from Slack, email, transcripts and tickets in any MCP client.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.backengine/backengine-mcp",
+        "packages": [],
+        "query": "in",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://backengine-prod.backengine.ai/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/BackEngine-ai/backengine-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "8.1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Remote MCP server for China brand visibility, destination demand, and KOL discovery workflows.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.chinamarketing/intelligence",
+        "packages": [],
+        "query": "in",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.chinamarketing.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Verify claims and sources, and check whether AI assistants name a brand.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.whysaid/verify",
+        "packages": [],
+        "query": "verify",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.whysaid.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "KYB for AI agents: verify business registrations from MCP clients.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "co.bizverify/mcp",
+        "packages": [],
+        "query": "verify",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.bizverify.co/mcp"
+          }
+        ],
+        "repository": {
+          "id": "1183216135",
+          "source": "github",
+          "url": "https://github.com/BizVerify/bizverify-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.1",
+        "zero_cost_eligible": true
+      }
+    ],
+    "effect": "verify that every file in the report still exits zero, that no canonical test file is missing from the report, and that the report totals are internally consistent",
+    "results": [
+      {
+        "binding_performed": false,
+        "candidate_count": 30,
+        "candidates": [
+          {
+            "archive_sha256": "ff661f6f08ee205b12fd41f1c6e56d3a819cbc3d44a8c41524afcbdbe6d6e464",
+            "binding_kind": "apt",
+            "description": "tool to verify the links in a web page are still valid",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in",
+              "still",
+              "verify"
+            ],
+            "name": "w3c-linkchecker",
+            "packages": [],
+            "query": "verify",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 78,
+            "version": "5.0.0-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c60b053b6ad5ca15b44718f6ff87be99e85e8613312e98015a7480ccd1d51976",
+            "binding_kind": "apt",
+            "description": "reporter of changes in list of available packages from repositories",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in",
+              "report"
+            ],
+            "name": "daptup",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 48,
+            "version": "0.12.7+nmu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c59b923cf64c819856b8985696ef6e902dcb667a3ccbb2a335d3d218681fd41e",
+            "binding_kind": "apt",
+            "description": "Tool for reporting changes in system configuration",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in",
+              "report"
+            ],
+            "name": "diffmon",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 48,
+            "version": "20020222-9.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "edefca1f9b6e45ff8475179d3f5f7fa5acd433d83a7293aac42f67538eaaa9e4",
+            "binding_kind": "apt",
+            "description": "Reporting functionality in the web frontend",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in",
+              "report"
+            ],
+            "name": "icingaweb2-module-reporting",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 48,
+            "version": "0.10.0-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "744abd23f7b508d6369a3cd4ac4b4a98da4d360ed58c478630dde62b87b8c89c",
+            "binding_kind": "apt",
+            "description": "Script to create an HTML report of MP3 files in a directory",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in",
+              "report"
+            ],
+            "name": "mp3report",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 48,
+            "version": "1.0.3-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "0dcbdd716f5cc4319189c025670bf92fb02ed341890326b08148a756873fdc73",
+            "binding_kind": "apt",
+            "description": "Log PostCSS messages in the console",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in",
+              "report"
+            ],
+            "name": "node-postcss-reporter",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 48,
+            "version": "7.0.5+~7.0.1-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "a63201d37f1d54648323add60999c5c9211bb9ff539d3808fcf917ef531e840a",
+            "binding_kind": "apt",
+            "description": "Detects data about your operating system and reports it in JSON",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in",
+              "report"
+            ],
+            "name": "ohai",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 48,
+            "version": "18.1.3-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "bb91d2bb7c730cfe15e4a70c6fdf5a4c59471a29ed70830c5c37d10b19ed2f11",
+            "binding_kind": "apt",
+            "description": "reports bugs in the Debian distribution",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in",
+              "report"
+            ],
+            "name": "reportbug",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 48,
+            "version": "13.0.1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "7d48480baa001ff705415190beb679e4bc1e73354d8f52bbf2c10099577cc4ac",
+            "binding_kind": "apt",
+            "description": "reports bugs in the Debian distribution (GTK+ UI)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in",
+              "report"
+            ],
+            "name": "reportbug-gtk",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 48,
+            "version": "13.0.1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "8399934ffe34e85585691bc3a6937accc62d145f8dd356d4bd8eef33b5ea20e1",
+            "binding_kind": "apt",
+            "description": "Report versions of all modules in memory",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 3,
+            "matched_terms": [
+              "in",
+              "report"
+            ],
+            "name": "libmodule-versions-report-perl",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 42,
+            "version": "1.06-4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "06e36657e49871a4e7c1f7eafe72767ba4910ca0eb6f6780370bbdc45fd749d1",
+            "binding_kind": "apt",
+            "description": "apt transport method for in-toto supply chain verification",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "apt-transport-in-toto",
+            "packages": [],
+            "query": "verify",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.1.1-4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "9d6fb4cc115dbc1b5e9db3abb840c67e8f29e5989c5bd12cf11c5a7afddfc9b9",
+            "binding_kind": "apt",
+            "description": "Alsamixer plug-in for Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-alsamixer-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "40e02cf501ebf32ff2635a938d9a55e89ba4e42b6aafd69fc33cf9bcb682871f",
+            "binding_kind": "apt",
+            "description": "Animated icons plug-in Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-animated-icons-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "be461fc4ab6b5a62f94f289f37cca80d5079eaab5caba3b0a5d1b6f9e0a6917b",
+            "binding_kind": "apt",
+            "description": "Cairo-Penguin plug-in for Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-cairo-penguin-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "4b52f651b4646f2e296909e1b14988fc4e322d7b623a248044a10794e553d807",
+            "binding_kind": "apt",
+            "description": "Clipper plug-in for Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-clipper-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "db1917010f6a69bee651068474b076ee7c11a9d3bf27d3b2125eafac394c34af",
+            "binding_kind": "apt",
+            "description": "Clock plug-in for Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-clock-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "f4a3f90969325882d034b1e92c764ffbd7afeaf7c927580ec0d52c42573d6b36",
+            "binding_kind": "apt",
+            "description": "Dbus plug-in for Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-dbus-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c7951529483042d42cc35f0d14b332f315e37f82092fb82a309db6c067803cf0",
+            "binding_kind": "apt",
+            "description": "library of D-Bus interface for Python of Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-dbus-plug-in-interface-python",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "7050a675d3826b37274c0e978059dbd925ff535032c163ef2a7a4e29ec6c321a",
+            "binding_kind": "apt",
+            "description": "library of D-Bus interface for ruby of Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-dbus-plug-in-interface-ruby",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "67a3063663460115da719d97c73cf0e96914834b54aa6e200ffdc19154b132cb",
+            "binding_kind": "apt",
+            "description": "library of D-Bus interface for vala of Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-dbus-plug-in-interface-vala",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "2bf04bb7569755aea2629c18b4f4e88ffb8b366b2561964f107e179503a5d473",
+            "binding_kind": "apt",
+            "description": "Desklet rendering plug-in for Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-desklet-rendering-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c802632a826de2a96598b0dd8d1cfbfd4b7e01c475d784c17569fcaaf21c74fa",
+            "binding_kind": "apt",
+            "description": "Dialog rendering plug-in for Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-dialog-rendering-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "ea7450de3dd245bbe81a79346f2699ca9a4b5877e6abcf531b13f469cdb1bca0",
+            "binding_kind": "apt",
+            "description": "Dnd2share plug-in for Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-dnd2share-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "319a49a226c199ac98fb53a84c9862b55c2e01d8f86bbf06e3eae3afe68659e3",
+            "binding_kind": "apt",
+            "description": "Drop indicator plug-in for Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-drop-indicator-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "59fb84e555b5e2a0aae19f5b64f908fd6ecf6a2ca72419cc8f2446b8b5966c19",
+            "binding_kind": "apt",
+            "description": "Dustbin plug-in for Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-dustbin-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "58f6b8b803898c432ae5f12ed90a25f5aeb6a76b7b263787bf2107e7b01839f7",
+            "binding_kind": "apt",
+            "description": "Folders plug-in Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-folders-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "3dc7509713024102d46864a1a96717b86350d022c886e46507fbe5876a0cda8b",
+            "binding_kind": "apt",
+            "description": "GMenu plug-in for Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-gmenu-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "5393cc0b788454297c2ff487f4c545b06d0bc33cbe3d27ae55a5eb0d5d30948f",
+            "binding_kind": "apt",
+            "description": "GNOME integration plug-in for Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-gnome-integration-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "59cde4cd72f69492490904e075d8771b06df59daea0c01f36b7a212daa8b3428",
+            "binding_kind": "apt",
+            "description": "Icon effect plug-in for Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-icon-effect-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "9ce7595789b363d10fce4c1ee5efad24c3be8720592fb6bd6ba437260f91b515",
+            "binding_kind": "apt",
+            "description": "Illusion plug-in for Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "in"
+            ],
+            "name": "cairo-dock-illusion-plug-in",
+            "packages": [],
+            "query": "in",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "verify that every file in the report still exits zero, that no canonical test file is missing from the report, and that the report totals are internally consistent",
+        "errors": [],
+        "queries": [
+          "verify",
+          "in",
+          "report",
+          "still"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "APT_CATALOG",
+        "source_url": null
+      },
+      {
+        "binding_performed": false,
+        "candidate_count": 90,
+        "candidates": [
+          {
+            "description": "Keyless MCP for Just Signal: live quotes, report publishing, scorecard, and Chophouse panel grades.",
+            "is_latest": true,
+            "name": "com.ou-reports/just-signal",
+            "packages": [
+              {
+                "identifier": "just-signal-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.3.0"
+              }
+            ],
+            "query": "report",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://www.ou-reports.com/api/mcp.php"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.3.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Verify a SCITT receipt under a trust root you hold \u2014 offline, no backend, no key, no network",
+            "is_latest": true,
+            "name": "dev.forestrie/verify",
+            "packages": [
+              {
+                "identifier": "@forestrie/mcp-verify",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": "npx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.5.1"
+              }
+            ],
+            "query": "verify",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/forestrie/mcp-verify"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.5.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "AI Incident Reporting Compliance MCP. Unified classification + reporting-clock tracker across EU...",
+            "is_latest": true,
+            "name": "io.github.CSOAI-ORG/ai-incident-reporting-mcp",
+            "packages": [
+              {
+                "identifier": "ai-incident-reporting-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "python",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.1.9"
+              }
+            ],
+            "query": "report",
+            "remotes": [],
+            "repository": {
+              "id": "1232725636",
+              "source": "github",
+              "url": "https://github.com/CSOAI-ORG/ai-incident-reporting-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.1.9",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Explainability Report MCP Server by MEOK AI Labs",
+            "is_latest": true,
+            "name": "io.github.CSOAI-ORG/explainability-report-mcp",
+            "packages": [
+              {
+                "identifier": "explainability-report-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "python",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.16"
+              }
+            ],
+            "query": "report",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/CSOAI-ORG/explainability-report-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.16",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "VM-side verify proxy for keystone attestations",
+            "is_latest": true,
+            "name": "io.github.CSOAI-ORG/keystone-verify-proxy-mcp",
+            "packages": [
+              {
+                "identifier": "keystone-verify-proxy-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.1"
+              }
+            ],
+            "query": "verify",
+            "remotes": [],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MEOK CRA Article 14 Reporter MCP \u2014 actively-exploited-vulnerability notification with 24h/72h/14d",
+            "is_latest": true,
+            "name": "io.github.CSOAI-ORG/meok-cra-art14-reporter-mcp",
+            "packages": [
+              {
+                "identifier": "meok-cra-art14-reporter-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "python",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.5"
+              }
+            ],
+            "query": "report",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.meok.ai/v1/governance/cra-art14-reporter"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/CSOAI-ORG/meok-cra-art14-reporter-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.5",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "HPE GreenLake reporting MCP Server",
+            "is_latest": true,
+            "name": "io.github.HewlettPackard/greenlake-reporting-mcp",
+            "packages": [
+              {
+                "identifier": "greenlake-reporting-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.1.2"
+              }
+            ],
+            "query": "report",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/HewlettPackard/gl-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.1.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP server for AI agents to report infrastructure needs they encounter during task execution",
+            "is_latest": true,
+            "name": "io.github.JarvisOnM4/report-needs",
+            "packages": [
+              {
+                "identifier": "report-needs",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.1"
+              }
+            ],
+            "query": "report",
+            "remotes": [],
+            "repository": {
+              "id": "1181547464",
+              "source": "github",
+              "url": "https://github.com/JarvisOnM4/report-needs"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "AI-powered trading strategy development: backtesting, market data, and portfolio analysis",
+            "is_latest": true,
+            "name": "agency.lona/trading",
+            "packages": [],
+            "query": "in",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.lona.agency/mcp"
+              }
+            ],
+            "repository": {
+              "id": "891584339",
+              "source": "github",
+              "subfolder": "packages/lona-mcp-server",
+              "url": "https://github.com/mindsightventures/lona"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "2.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Check how to contact a business website, and whether that contact path actually works.",
+            "is_latest": true,
+            "name": "agency.ottobot/business-contact-finder",
+            "packages": [],
+            "query": "in",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://business-contact-finder-mcp.ottobot2025.workers.dev/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/modelcontextprotocol/registry"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.2.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Ten machine-readable signals on one public page: the top miss if any, and a receipt we re-verify.",
+            "is_latest": true,
+            "name": "ai.advisorsai/store-readiness",
+            "packages": [],
+            "query": "in",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://advisorsai.ai/store-readiness-mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.6",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Turn construction drawings into takeoffs, measured routes, schedules and estimates.",
+            "is_latest": true,
+            "name": "ai.aginera/preconstruction",
+            "packages": [],
+            "query": "in",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.aginera.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "A free one-minute reset for people, delivered by AI, with no account or personal data.",
+            "is_latest": true,
+            "name": "ai.ai-akari/one-minute-akari",
+            "packages": [],
+            "query": "in",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://ai-akari.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/AInoAKARI/arigatou-kawaii-lp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Askline shows what ChatGPT says about a brand, then the SEO that feeds it.",
+            "is_latest": true,
+            "name": "ai.askline/askline",
+            "packages": [],
+            "query": "in",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://askline.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Schedule, generate and publish social posts to X, LinkedIn, Instagram, Threads and YouTube",
+            "is_latest": true,
+            "name": "ai.autoposting/autoposting",
+            "packages": [],
+            "query": "in",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://app.autoposting.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Manage Kinnovis self-storage tariffs from chat.",
+            "is_latest": true,
+            "name": "ai.b77/kinnovis-storage",
+            "packages": [],
+            "query": "in",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://kinnovis-storage.b77.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Surface customer & prospect context from Slack, email, transcripts and tickets in any MCP client.",
+            "is_latest": true,
+            "name": "ai.backengine/backengine-mcp",
+            "packages": [],
+            "query": "in",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://backengine-prod.backengine.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/BackEngine-ai/backengine-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "8.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Remote MCP server for China brand visibility, destination demand, and KOL discovery workflows.",
+            "is_latest": true,
+            "name": "ai.chinamarketing/intelligence",
+            "packages": [],
+            "query": "in",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.chinamarketing.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Verify claims and sources, and check whether AI assistants name a brand.",
+            "is_latest": true,
+            "name": "ai.whysaid/verify",
+            "packages": [],
+            "query": "verify",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.whysaid.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "KYB for AI agents: verify business registrations from MCP clients.",
+            "is_latest": true,
+            "name": "co.bizverify/mcp",
+            "packages": [],
+            "query": "verify",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.bizverify.co/mcp"
+              }
+            ],
+            "repository": {
+              "id": "1183216135",
+              "source": "github",
+              "url": "https://github.com/BizVerify/bizverify-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Verify a SickSlip doctor's note by Document ID; states served, pricing, physician NPI. Read-only.",
+            "is_latest": true,
+            "name": "co.sickslip.www/verify",
+            "packages": [],
+            "query": "verify",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://sickslip.onrender.com/api/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.2.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "12 synthetic grant report exception cases: duplicate disbursements, debarment hold list entries, mis",
+            "is_latest": true,
+            "name": "com.a2awire/benchmark-grant-report-review-2026-09-17-9189341d",
+            "packages": [],
+            "query": "report",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://a2awire.com/mcp/benchmarks/grant-report-review-2026-09-17-9189341d/http"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/ee324/a2awire"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "12 synthetic report exception cases: duplicate reimbursements, policy-watch list entries, missing do",
+            "is_latest": true,
+            "name": "com.a2awire/benchmark-report-audit-2026-09-21-b9e5e630",
+            "packages": [],
+            "query": "report",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://a2awire.com/mcp/benchmarks/report-audit-2026-09-21-b9e5e630/http"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/ee324/a2awire"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "12 synthetic report exception cases: duplicate reimbursements, policy-watch list entries, missing do",
+            "is_latest": true,
+            "name": "com.a2awire/benchmark-report-review-2026-09-23-f72b2bd5",
+            "packages": [],
+            "query": "report",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://a2awire.com/mcp/benchmarks/report-review-2026-09-23-f72b2bd5/http"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/ee324/a2awire"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "SMS Verify: SMS Verify API is a secure and easy-to-integrate service that sends verification codes.",
+            "is_latest": true,
+            "name": "com.jojapi/sms-verify",
+            "packages": [],
+            "query": "verify",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.jojapi.com/sms-verify"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Verify the email instantly: Identify the spam email while authenticating your users.",
+            "is_latest": true,
+            "name": "com.jojapi/verify-the-email-instantly",
+            "packages": [],
+            "query": "verify",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.jojapi.com/verify-the-email-instantly"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "LPreportly: the site's own MCP server \u2014 dataset; every answer cites the site.",
+            "is_latest": true,
+            "name": "com.lpreportly/site",
+            "packages": [],
+            "query": "report",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://lpreportly.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/joeetdev/venture-estate"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Verify photos are real camera captures, not AI: C2PA and RAW+JPEG forensics. OAuth or API key.",
+            "is_latest": true,
+            "name": "com.lumethic/verify",
+            "packages": [],
+            "query": "verify",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.lumethic.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Vehicle valuations and market reports in Claude or ChatGPT. Pay per report, no subscription.",
+            "is_latest": true,
+            "name": "com.marketcheck/marketcheck-ai-reports",
+            "packages": [],
+            "query": "report",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://ai.marketcheck.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/MarketcheckHub/marketcheck-ai-reports"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.2.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Query marketing data across 20+ ad platforms; with write access, create, schedule and share reports.",
+            "is_latest": true,
+            "name": "com.reportingninja/reporting-ninja",
+            "packages": [],
+            "query": "report",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.reportingninja.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.5.0",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "verify that every file in the report still exits zero, that no canonical test file is missing from the report, and that the report totals are internally consistent",
+        "errors": [
+          {
+            "error": "TimeoutError:The read operation timed out",
+            "query": "still"
+          }
+        ],
+        "queries": [
+          "verify",
+          "in",
+          "report",
+          "still"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "OFFICIAL_MCP_REGISTRY",
+        "source_url": "https://registry.modelcontextprotocol.io"
+      }
+    ],
+    "schema": "PROJECT_BRAIN_FEDERATED_CAPABILITY_DISCOVERY_V1",
+    "sources": [
+      "APT_CATALOG",
+      "OFFICIAL_MCP_REGISTRY"
+    ]
+  },
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
+  "source": "FEDERATED_CAPABILITY_DISCOVERY_FALLBACK",
+  "targeted_acquisition_error": "AutoAcquisitionFailure:NO_LOW_FRICTION_APT_CLI_CANDIDATE"
+}

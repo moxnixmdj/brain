@@ -1,0 +1,491 @@
+{
+  "attempts": [
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "ff661f6f08ee205b12fd41f1c6e56d3a819cbc3d44a8c41524afcbdbe6d6e464",
+        "executables": [
+          {
+            "executable": "/usr/bin/checklink",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "W3C Link Checker version 5.0.0 (c) 1999-2019 W3C\n\nUsage: checklink <options> <uris>\nOptions:\n -s, --summary              Result summary only.\n -b, --broken               Show only the broken links, not the redirects.\n -e, --dir-redirects        Hide directory redirects, for example\n                            https://www.w3.org/TR -> https://www.w3.org/TR/\n -r, --recursive            Check the documents linked from the first one.\n -D, --depth N              Check the documents linked from the first one to\n                            depth N (implies --recursive).\n -l, --location URI         Scope of the documents checked in recursive mode\n                            (implies --recursive).  Can be specified multiple\n                            times.  If not specified, the default eg. for\n                            https://www.w3.org/TR/html4/Overview.html\n                            would be https://www.w3.org/TR/html4/\n -X, --exclude REGEXP       Do not check links whose full, canonical URIs\n                            match REGEXP; also limits recursion the same way\n                            as --exclude-docs with the same regexp would.\n                            This option may be specified multiple times.\n --exclude-docs REGEXP      In recursive mode, do not check links in documents\n                            whose full, canonical URIs match REGEXP.  This\n                            option may be specified multiple times.\n --suppress-redirect URI->URI  Do not report a redirect from the first to the\n                            second URI.  This option may be specified multiple\n                            times.\n --suppress-redirect-prefix URI->URI  Do not report a redirect from a child of\n                            the first URI to the same child of the second URI.\n                            This option may be specified multiple times.\n --suppress-temp-redirects  Suppress warnings about temporary redirects.\n --suppress-broken CODE(:URI)  Do not report a broken link with the given CODE.\n                            CODE is HTTP response, or -1 for robots exclusion.\n                            This option may be specified multiple times, and\n                            can optionally be limited to a single pair of CODE /\n                            URI.\n --suppress-fragment URI    Do not report the given broken fragment URI.\n                            A fragment URI contains \"#\".  This option may be\n                            specified multiple times.\n --follow-file-links        When encountering a file: URI, try to follow it\n                            (disabled by default for security reasons)\n -L, --languages LANGS      Accept-Language header to send.  The special value\n                            'auto' causes autodetection from the environment.\n -c, --cookies FILE         Use cookies, load/save them in FILE.  The special\n                            value 'tmp' causes non-persistent use of cookies.\n -R, --no-referer           Do not send the Referer HTTP header.\n -q, --quiet                No output if no errors are found (implies -s).\n -v, --verbose              Verbose mode.\n -i, --indicator            Show percentage of lines processed while parsing.\n -u, --user USERNAME        Specify a username for authentication.\n -p, --password PASSWORD    Specify a password.\n --hide-same-realm          Hide 401's that are in the same realm as the\n                            document checked.\n -S, --sleep SECS           Sleep SECS seconds between requests to each server\n                            (default and minimum: 1 second).\n -t, --timeout SECS         Timeout for requests in seconds (default: 30).\n -d, --domain DOMAIN        Regular expression describing the domain to which\n                            authentication information will be sent\n                            (default: same host only).\n --masquerade \"BASE1 BASE2\" Masquerade base URI BASE1 as BASE2.  See the\n                            manual page for more information.\n --https                    Check the file as if it was served on https://\n -H, --html                 HTML output.\n -?, -h, --help             Show this message and exit.\n -V, --version              Output version information and exit.\n\nSee \"perldoc LWP\" for information about proxy server support,\n\"perldoc Net::FTP\" for information about various environment variables\naffecting FTP connections and \"perldoc Net::NNTP\" for setting a default\nNNTP server for news: URIs.\n\nThe W3C_CHECKLINK_CFG environment variable can be used to set the\nconfiguration file to use.  See details in the full manual page, it can\nbe displayed with: perldoc checklink\n\nMore documentation at: http://localhost/w3c-linkchecker/docs/checklink.html\nPlease file bug reports and comments at https://github.com/w3c/link-checker/issues"
+              }
+            ]
+          }
+        ],
+        "package": "w3c-linkchecker",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "5.0.0-2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 3,
+        "_acquisition_role_score": 78.0,
+        "archive_sha256": "ff661f6f08ee205b12fd41f1c6e56d3a819cbc3d44a8c41524afcbdbe6d6e464",
+        "binding_kind": "apt",
+        "description": "tool to verify the links in a web page are still valid",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "still",
+          "verify"
+        ],
+        "name": "w3c-linkchecker",
+        "packages": [],
+        "query": "verify",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 78,
+        "version": "5.0.0-2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "c60b053b6ad5ca15b44718f6ff87be99e85e8613312e98015a7480ccd1d51976",
+        "executables": [
+          {
+            "executable": "/usr/bin/daptup",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: daptup ( --pre | --post | --last ) [ -h | --help | --nocolor ].\n\ndaptup outputs:\n - list of packages recently entered to repo;\n - list of packages which got new updates;\n - list of changes in 'watched' packages;\n - list of outdated packages (optionally).\n\nOptions:\n -h, --help: output this help and exit\n --nocolor: do not use colored output\n --pre: do only 'pre' stage: collect info that will be used as 'old'\n --post: do only 'post' stage: collect 'new' info and output changes\n         if appropriate option is not disabled in config file\n --last: only output last changes"
+              }
+            ]
+          }
+        ],
+        "package": "daptup",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.12.7+nmu1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 48.0,
+        "archive_sha256": "c60b053b6ad5ca15b44718f6ff87be99e85e8613312e98015a7480ccd1d51976",
+        "binding_kind": "apt",
+        "description": "reporter of changes in list of available packages from repositories",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "report"
+        ],
+        "name": "daptup",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "0.12.7+nmu1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "c59b923cf64c819856b8985696ef6e902dcb667a3ccbb2a335d3d218681fd41e",
+        "executables": [
+          {
+            "executable": "/usr/bin/diffmon",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "Usage: diffmon {options}\n\nOptions are:\n-D, --debug                  Turn on shell debugging (\"set -x\").\n-C, --compress-program CPROG Use CPROG to compress saved file images\n-c, --config-file FILE       Use FILE as the config file instead of the\n                             default, searching DIFFMONPATH if FILE not\n                             absolute pathname.\n-e, --errors-to MAINTAINER   Stderr is reported to maintainer via email.\n                             If MAINTAINER is set to \"maintainer\", the\n                             default maintainer is assumed (see above).\n-h, --help                   You're looking at it.\n-o, --old DIR                Old reference files are kept and looked for in\n                             DIR instead of the default.\n-p, --config-path CPATH      Use CPATH to search for configuration files\n                             instead of default path.  Overrides value of\n                             DIFFMONPATH environment variable.\n-S, --suffix SUFFIX          Compressed file suffix.\n-Z, --zcat-program ZPROG     Use ZPROG to read compressed file and output\n                             uncompressed version (should not uncompress\n                             file itself).\n-n, --no-update              Don't update the saved file images\n\nAll switches are optional (some have defaults).\n\nDefault configuration file is `diffmon.cf'\nDefault configuration path is `/etc/diffmon'\nDefault maintainer is `diffmon-errors'\nDefault old reference file dir is `/var/cache/diffmon/old_file_dir'\nDefault compression program is `gzip'\nDefault zcat program is `zcat'\nDefault compressed file suffix is `.gz'"
+              }
+            ]
+          }
+        ],
+        "package": "diffmon",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "20020222-9.2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 48.0,
+        "archive_sha256": "c59b923cf64c819856b8985696ef6e902dcb667a3ccbb2a335d3d218681fd41e",
+        "binding_kind": "apt",
+        "description": "Tool for reporting changes in system configuration",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "report"
+        ],
+        "name": "diffmon",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "20020222-9.2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "edefca1f9b6e45ff8475179d3f5f7fa5acd433d83a7293aac42f67538eaaa9e4",
+        "executables": [],
+        "package": "icingaweb2-module-reporting",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.10.0-2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 48.0,
+        "archive_sha256": "edefca1f9b6e45ff8475179d3f5f7fa5acd433d83a7293aac42f67538eaaa9e4",
+        "binding_kind": "apt",
+        "description": "Reporting functionality in the web frontend",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "report"
+        ],
+        "name": "icingaweb2-module-reporting",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "0.10.0-2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "744abd23f7b508d6369a3cd4ac4b4a98da4d360ed58c478630dde62b87b8c89c",
+        "executables": [
+          {
+            "executable": "/usr/bin/mp3report",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Neon Goat MP3 Report Generator v1.0.3\nCopyright (C) 2000, David Parker, Neon Goat Productions.\nwww.neongoat.com - david@neongoat.com\n\nUsage: /usr/bin/mp3report [options] [directory...]\n --help\t\t\tshows this help screen\n --printmode\t\tuses a smaller font for printing\n --title=TITLE\t\tsets the title used in the report\n --outfile=OUTFILE\tfile to write report to, '-' for STDOUT\n --template=FILE\tfile to use as report template\n --stdgenres\t\tuse standard genres instead of winamp genres\n --id3v2\t\tenable id3v2 support (experimental)\n directory...\t\tdirs to scan (subdirs included)"
+              }
+            ]
+          }
+        ],
+        "package": "mp3report",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.0.3-2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 48.0,
+        "archive_sha256": "744abd23f7b508d6369a3cd4ac4b4a98da4d360ed58c478630dde62b87b8c89c",
+        "binding_kind": "apt",
+        "description": "Script to create an HTML report of MP3 files in a directory",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "report"
+        ],
+        "name": "mp3report",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "1.0.3-2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "0dcbdd716f5cc4319189c025670bf92fb02ed341890326b08148a756873fdc73",
+        "executables": [],
+        "package": "node-postcss-reporter",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "7.0.5+~7.0.1-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 48.0,
+        "archive_sha256": "0dcbdd716f5cc4319189c025670bf92fb02ed341890326b08148a756873fdc73",
+        "binding_kind": "apt",
+        "description": "Log PostCSS messages in the console",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "report"
+        ],
+        "name": "node-postcss-reporter",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "7.0.5+~7.0.1-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "a63201d37f1d54648323add60999c5c9211bb9ff539d3808fcf917ef531e840a",
+        "executables": [
+          {
+            "executable": "/usr/bin/ohai",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: /usr/bin/ohai (options)\n    -c, --config CONFIG              A configuration file to use\n    -d, --directory DIRECTORY        A directory to add to the Ohai plugin search path. If passing multiple directories use this option more than once.\n    -l, --log_level LEVEL            Set the log level (debug, info, warn, error, fatal)\n    -L, --logfile LOGLOCATION        Set the log file location, defaults to STDOUT - recommended for daemonizing\n    -t, --target TARGET              Target Ohai against a remote system or device\n    -v, --version                    Show Ohai version\n    -h, --help                       Show this message"
+              }
+            ]
+          }
+        ],
+        "package": "ohai",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "18.1.3-2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 48.0,
+        "archive_sha256": "a63201d37f1d54648323add60999c5c9211bb9ff539d3808fcf917ef531e840a",
+        "binding_kind": "apt",
+        "description": "Detects data about your operating system and reports it in JSON",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "report"
+        ],
+        "name": "ohai",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "18.1.3-2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "bb91d2bb7c730cfe15e4a70c6fdf5a4c59471a29ed70830c5c37d10b19ed2f11",
+        "executables": [
+          {
+            "executable": "/usr/bin/querybts",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: querybts [options] {<package> | <report number> [report2] ...}\n\nquerybts - Examine the state of a debbugs server.\n\nOptions:\n  --version             show program's version number and exit\n  -h, --help            show this help message and exit\n  -A, --archive         Browse archived bugs.\n  -b, --buglist         Display a bugs list for the given package.\n  -B SYSTEM, --bts=SYSTEM\n                        Specify an alternate debbugs BTS; available values:\n                        debian\n  -m, --mbox            generate mbox\n  --proxy=HTTP_PROXY, --http_proxy=HTTP_PROXY\n                        define the proxy to use\n  -s, --source          Query for source packages rather than binary packages.\n  --timeout=TIMEOUT     Specify the network timeout, in seconds [default: 60].\n  -u INTERFACE, --ui=INTERFACE, --interface=INTERFACE\n                        Specify the user interface to use; available values:\n                        text\n  -w, --web             Use a web browser instead of the internal interface.\n  --mbox-reader-cmd=MBOX_READER_CMD\n                        Specify the program to open the reports mbox.\n  --latest-first        Order bugs to show the latest first"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/reportbug",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: reportbug [options] <package | filename>\n\nOptions:\n  --version             show program's version number and exit\n  -h, --help            show this help message and exit\n  -c, --no-config-files\n                        do not include conffiles in report\n  -C CLASS, --class=CLASS\n                        specify report class for GNATS BTSes\n  -d, --debug           send report only to yourself\n  --test                operate in test mode (maintainer use only)\n  -e EDITOR, --editor=EDITOR\n                        specify an editor for your report\n  -f SEARCHFOR, --filename=SEARCHFOR\n                        report the bug against the package containing the\n                        specified file\n  --from-buildd=BUILDD_FORMAT\n                        parse information from buildd format: $source_$version\n  --path                only search the path with -f\n  -g, --gnupg, --gpg    sign report with GNU Privacy Guard (GnuPG/gpg)\n  -G, --gnus            send the report using Gnus\n  --pgp                 sign report with Pretty Good Privacy (PGP)\n  -K KEYID, --keyid=KEYID\n                        key ID to use for PGP/GnuPG signatures\n  -H HEADERS, --header=HEADERS\n                        add a custom RFC2822 header to your report\n  -P PSEUDOS, --pseudo-header=PSEUDOS\n                        add a custom pseudo-header to your report\n  --license             show copyright and license information\n  -m, --maintonly       send the report to the maintainer only\n  -M, --mutt            send the report using mutt\n  --mirror=MIRRORS      add a BTS mirror\n  -n, --mh, --nmh       send the report using mh/nmh\n  -N, --bugnumber       specify a bug number to look for\n  --mua=MUA             send the report using the specified mail user agent\n  --mta=MTA             send the report using the specified mail transport\n                        agent\n  --list-cc=LISTCC      send a copy to the specified address\n  --list-cc-me          send a copy to your detected email address\n  -p, --print           output the report to standard output only\n  --report-quiet        file report without any mail to the maintainer or\n                        tracking lists\n  -q, --quiet           reduce the verbosity of the output\n  -s SUBJECT, --subject=SUBJECT\n                        the subject for your report\n  -x, --no-cc           do not send a copy of the report to yourself\n  -z, --no-compress     do not strip blank lines and comments from config\n                        files\n  -o OUTFILE, --output=OUTFILE\n                        output the report to the specified file (both mail\n                        headers and body)\n  -O, --offline         disable all external queries\n  -i INCLUDE, --include=INCLUDE\n                        include the specified file in the report\n  -A ATTACHMENTS, --attach=ATTACHMENTS\n                        attach the specified file to the report\n  -b, --no-query-bts    do not query the BTS for reports\n  --query-bts           query the BTS for reports\n  -T TAGS, --tag=TAGS   add the specified tag to the report\n  --http_proxy=HTTP_PROXY, --proxy=HTTP_PROXY\n                        use this proxy for HTTP accesses\n  --email=EMAIL         specify originating email address\n  --realname=REALNAME   specify real name for your report\n  --smtphost=SMTPHOST   specify SMTP server for mailing\n  --tls                 use TLS to talk to SMTP servers\n  --source, --src       report the bug against the source package\n  --smtpuser=SMTPUSER   username to use for SMTP\n  --smtppasswd=SMTPPASSWD\n                        password to use for SMTP\n  --replyto=REPLYTO, --reply-to=REPLYTO\n                        specify Reply-To address for your report\n  --query-source        query on source packages, not binary packages\n  --no-query-source     query on binary packages only\n  --security-team       send the report only to the security team, if\n                        tag=security\n  --no-security-team    do not send the report only to the security team, if\n                        tag=security\n  --debconf             include debconf settings in your report\n  --no-debconf          exclude debconf settings from your report\n  -j JUSTIFICATION, --justification=JUSTIFICATION\n                        include justification for the severity of your report\n  -V PKGVERSION, --package-version=PKGVERSION\n                        specify the version number for the package\n  -u INTERFACE, --interface=INTERFACE, --ui=INTERFACE\n                        choose which user interface to use\n  -Q, --query-only      only query the BTS\n  -t TYPE, --type=TYPE  choose the type of report to file\n  -B BTS, --bts=BTS     choose BTS to file the report with\n  -S SEVERITY, --severity=SEVERITY\n                        identify the severity of the report\n  --template            output a template report only\n  --configure           reconfigure reportbug for this user\n  --check-available     check for new releases on various sites\n  --no-check-available  do not check for new releases\n  --mode=MODE           choose the operating mode for reportbug\n  -v, --verify          verify integrity of installed package using debsums\n  --no-verify           do not verify package installation\n  -k, --kudos           send appreciative email to the maintainer, rather than\n                        filing a bug report\n  --body=BODY           specify the body for the report as a string\n  --body-file=BODYFILE, --bodyfile=BODYFILE\n                        use the specified file as the body of the report\n  -r RESUME_SAVED, --resume-saved=RESUME_SAVED\n                        resume report from previously saved temporary file\n  -I, --no-check-installed\n                        don't check whether the package is installed\n  --check-installed     check whether the specified package is installed when\n                        filing a report (default)\n  --paranoid            show contents of message before sending\n  --no-paranoid         don't show contents of message before sending\n                        (default)\n  --no-bug-script       don't execute the bug script (if present)\n  --draftpath=DRAFTPATH\n                        Save the draft in this directory\n  --timeout=TIMEOUT     Specify the network timeout, in seconds [default: 60]\n  --no-cc-menu          don't show additional CC menu\n  --no-tags-menu        don't show tags menu\n  --mbox-reader-cmd=MBOX_READER_CMD\n                        Specify the program to open the reports mbox.\n  --max-attachment-size=MAX_ATTACHMENT_SIZE\n                        Specify the maximum size in byte for an attachment\n                        [default: 10485760].\n  --latest-first        Order bugs to show the latest first\n  --envelope-from=ENVELOPEFROM\n                        Specify the Envelope From (Return-path) address used\n                        to send the bug report\n  --archive             also show archived bugs"
+              }
+            ]
+          }
+        ],
+        "package": "reportbug",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "13.0.1ubuntu1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 48.0,
+        "archive_sha256": "bb91d2bb7c730cfe15e4a70c6fdf5a4c59471a29ed70830c5c37d10b19ed2f11",
+        "binding_kind": "apt",
+        "description": "reports bugs in the Debian distribution",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "report"
+        ],
+        "name": "reportbug",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "13.0.1ubuntu1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "7d48480baa001ff705415190beb679e4bc1e73354d8f52bbf2c10099577cc4ac",
+        "executables": [],
+        "package": "reportbug-gtk",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "13.0.1ubuntu1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 48.0,
+        "archive_sha256": "7d48480baa001ff705415190beb679e4bc1e73354d8f52bbf2c10099577cc4ac",
+        "binding_kind": "apt",
+        "description": "reports bugs in the Debian distribution (GTK+ UI)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in",
+          "report"
+        ],
+        "name": "reportbug-gtk",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "13.0.1ubuntu1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "06e36657e49871a4e7c1f7eafe72767ba4910ca0eb6f6780370bbdc45fd749d1",
+        "executables": [],
+        "package": "apt-transport-in-toto",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.1.1-4"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "06e36657e49871a4e7c1f7eafe72767ba4910ca0eb6f6780370bbdc45fd749d1",
+        "binding_kind": "apt",
+        "description": "apt transport method for in-toto supply chain verification",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "apt-transport-in-toto",
+        "packages": [],
+        "query": "verify",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.1.1-4",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "9d6fb4cc115dbc1b5e9db3abb840c67e8f29e5989c5bd12cf11c5a7afddfc9b9",
+        "executables": [],
+        "package": "cairo-dock-alsamixer-plug-in",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "9d6fb4cc115dbc1b5e9db3abb840c67e8f29e5989c5bd12cf11c5a7afddfc9b9",
+        "binding_kind": "apt",
+        "description": "Alsamixer plug-in for Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-alsamixer-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "40e02cf501ebf32ff2635a938d9a55e89ba4e42b6aafd69fc33cf9bcb682871f",
+        "executables": [],
+        "package": "cairo-dock-animated-icons-plug-in",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "40e02cf501ebf32ff2635a938d9a55e89ba4e42b6aafd69fc33cf9bcb682871f",
+        "binding_kind": "apt",
+        "description": "Animated icons plug-in Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "in"
+        ],
+        "name": "cairo-dock-animated-icons-plug-in",
+        "packages": [],
+        "query": "in",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      }
+    }
+  ],
+  "goal": "verify that every file in the report still exits zero, that no canonical test file is missing from the report, and that the report totals are internally consistent",
+  "mission_id": "ASTRA-RUNTIME-CANONICAL-TEST-AUDIT-002",
+  "role_conditioned_discovery": null,
+  "schema": "PROJECT_BRAIN_AUTO_APT_CLI_ACQUISITION_EVIDENCE_V1",
+  "status": "NO_COMPATIBLE_CONTRACT"
+}
