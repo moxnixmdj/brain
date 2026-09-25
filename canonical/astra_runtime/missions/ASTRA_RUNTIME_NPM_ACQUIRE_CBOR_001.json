@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-NPM-ACQUIRE-CBOR-001",
+  "purpose": "Held-out npm/Node codec acquisition test on a different binary format, with no package-name or binding hint.",
+  "goal": "Create canonical/astra_runtime/tmp/NPM_CBOR_SOURCE.json containing exactly four records with fields id and text: 1 alpha, 2 beta, 3 gamma, 4 delta. Using a zero-cost npm JavaScript library executed by Node.js, encode those exact records as CBOR and save canonical/astra_runtime/tmp/NPM_CBOR_RECORDS.cbor. Independently decode the CBOR artifact in a fresh Node.js process and verify the decoded records are exactly identical to canonical/astra_runtime/tmp/NPM_CBOR_SOURCE.json in values, order, field names, and record count.",
+  "steps": [
+    {
+      "id": "run-held-out-npm-cbor",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 24,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "manual_supplier": false,
+    "manual_binding": false,
+    "npm_javascript_library_required": true,
+    "nodejs_execution_required": true,
+    "fresh_node_verification_required": true,
+    "held_out_format": true
+  }
+}
