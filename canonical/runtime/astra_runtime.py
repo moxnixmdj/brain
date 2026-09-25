@@ -4334,6 +4334,7 @@ def _capability_problem_proposal(step,mission,goal):
       "_proposal_contract":"GOAL_BOUND__CLAUSE_COVERED__VERIFIED_REGISTRY_REFERENCES_ONLY",
       "_goal_binding":goal_binding,
       "_semantic_goal_contract":semantic_contract,
+      "_proposal_generation":proposal_generation,
     }
 
 
@@ -4349,6 +4350,8 @@ def _run_verified_capability_proposal(step,mission,goal):
     if result is None:
         raise Blocker("CAPABILITY_PROPOSAL_EXECUTION_MISSING")
     result["proposal_contract"]=problem["_proposal_contract"]
+    if problem.get("_proposal_generation") is not None:
+        result["proposal_generation"]=problem["_proposal_generation"]
     return result
 
 def _load_capability_planner():
