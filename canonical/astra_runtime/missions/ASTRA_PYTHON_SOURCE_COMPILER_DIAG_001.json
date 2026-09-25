@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-PYTHON-SOURCE-COMPILER-DIAG-001",
+  "purpose": "Read-only compiler diagnosis for the orthogonal Python runtime source-audit mission.",
+  "steps": [
+    {
+      "id": "compile-python-audit-only",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\nroot=pathlib.Path('.').resolve()\np=root/'canonical/runtime/goal_compiler.py'\ns=importlib.util.spec_from_file_location('gc_py_audit',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads((root/'canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads((root/'canonical/astra_runtime/missions/ASTRA_RUNTIME_PYTHON_SOURCE_AUDIT_001.json').read_text())['goal']\ntry:\n out=m.compile_goal(goal,reg,root); print(json.dumps({'status':'COMPILED','mode':out.get('compiler_mode'),'parts':out.get('compiled_parts'),'actions':out.get('controller_actions')},sort_keys=True))\nexcept Exception as e:\n print(json.dumps({'status':'FAILED','type':type(e).__name__,'code':getattr(e,'code',None),'detail':getattr(e,'detail',None),'error':str(e)},sort_keys=True))\nprint('PYTHON_SOURCE_COMPILER_DIAG_COMPLETE')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "PYTHON_SOURCE_COMPILER_DIAG_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "read_only_diagnostic": true,
+    "model_controller_required": false
+  }
+}
