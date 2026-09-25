@@ -56,16 +56,33 @@ def _bind_contract_inputs(goal,root,contract):
     return {"text":text,"output_path":paths[0][0]}
 
 
+def _format_terms(goal):
+    out=[]
+    for ext in re.findall(r"\.([A-Za-z0-9]{2,10})(?=[\s.,;:!?)]|$)",str(goal or "")):
+        ext=ext.lower()
+        if ext not in out:
+            out.append(ext)
+    return out
+
+
+def _acquisition_terms(goal):
+    out=[
+        t for t in capability_discovery.effect_queries(goal)
+        if t not in GENERIC_KEYWORDS and not t.isdigit()
+    ]
+    for ext in _format_terms(goal):
+        if ext not in out:
+            out.append(ext)
+    return out
+
+
 def _viable_candidates(discovery, goal=""):
     viable=[]
     goal_lower=str(goal or "").lower()
     producer_intent=any(w in goal_lower for w in ("generate","create","make","render","encode","save"))
     producer_words=("generate","generator","encode","encoder","create","render","write","output")
     consumer_words=("decode","decoder","scan","scanner","reader","inspect","viewer")
-    goal_terms=[
-        t for t in capability_discovery.effect_queries(goal)
-        if t not in GENERIC_KEYWORDS and not t.isdigit()
-    ]
+    goal_terms=_acquisition_terms(goal)
     for c in discovery.get("candidates",[]):
         if c.get("discovery_source")!="APT_CATALOG":
             continue
@@ -106,26 +123,32 @@ def _merge_role_conditioned_apt(discovery,goal):
     candidates=list(merged.get("candidates") or [])
     goal_lower=str(goal or "").lower()
     producer_intent=any(w in goal_lower for w in ("generate","create","make","render","encode","save"))
-    goal_terms=[
-        t for t in capability_discovery.effect_queries(goal)
-        if t not in GENERIC_KEYWORDS and not t.isdigit()
-    ]
-    role_result=None
-    if producer_intent and goal_terms:
-        # Search the distinctive object, not a hard-coded producer verb.
-        # Supplier-role scoring below decides generator/encoder/renderer vs
-        # consumer. This keeps acquisition domain-independent.
-        role_query=" ".join(goal_terms[:2])
-        role_result=capability_discovery.search_apt_packages(role_query,limit=24)
-        by_key={}
-        for item in candidates+list(role_result.get("candidates") or []):
+    goal_terms=_acquisition_terms(goal)
+    role_queries=[]
+    if producer_intent:
+        # Output suffixes are direct evidence of the requested capability class
+        # and survive even when prose contains low-information scaffolding.
+        role_queries.extend(_format_terms(goal)[:2])
+        if goal_terms:
+            role_queries.append(" ".join(goal_terms[:2]))
+    role_queries=list(dict.fromkeys(q for q in role_queries if q.strip()))
+
+    role_results=[]
+    by_key={}
+    for item in candidates:
+        key=(str(item.get("discovery_source") or ""),str(item.get("name") or ""),str(item.get("version") or ""))
+        by_key[key]=item
+    for role_query in role_queries:
+        result=capability_discovery.search_apt_packages(role_query,limit=24)
+        role_results.append(result)
+        for item in result.get("candidates") or []:
             key=(str(item.get("discovery_source") or ""),str(item.get("name") or ""),str(item.get("version") or ""))
             prior=by_key.get(key)
             if prior is None or float(item.get("score",0))>float(prior.get("score",0)):
                 by_key[key]=item
-        candidates=list(by_key.values())
-    merged["candidates"]=candidates
-    merged["_role_conditioned_apt_discovery"]=role_result
+    merged["candidates"]=list(by_key.values())
+    merged["_role_conditioned_apt_discovery"]=role_results
+    merged["_role_conditioned_queries"]=role_queries
     return merged
 
 
