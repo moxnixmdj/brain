@@ -1,0 +1,145 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "plan": {
+        "args": {
+          "authoritative": false,
+          "json_path": [
+            "args",
+            "claim"
+          ],
+          "max_bytes": 1000000,
+          "output_path": "canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_ALPHA.json",
+          "timeout_s": 20,
+          "url": "https://httpbin.org/get?claim=alpha"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "fetch_json_knowledge"
+      },
+      "result": {
+        "body_sha256": "dc6a5ae3cb18a2a11f6b84bc751e47e762e4647751ef04a593982bbee014c49b",
+        "duration_s": 0.157,
+        "final_url": "https://httpbin.org/get?claim=alpha",
+        "json_path": [
+          "args",
+          "claim"
+        ],
+        "output_path": "canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_ALPHA.json",
+        "type": "fetch_json_knowledge",
+        "value": "alpha",
+        "verified": true
+      }
+    },
+    {
+      "cycle": 1,
+      "plan": {
+        "args": {
+          "authoritative": false,
+          "json_path": [
+            "args",
+            "claim"
+          ],
+          "max_bytes": 1000000,
+          "output_path": "canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_BETA.json",
+          "timeout_s": 20,
+          "url": "https://httpbin.org/get?claim=beta"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "fetch_json_knowledge"
+      },
+      "result": {
+        "body_sha256": "599286c41b9eb0eeb8e16b567cf391efc53373568b3f49e5047f438b667e03b8",
+        "duration_s": 0.021,
+        "final_url": "https://httpbin.org/get?claim=beta",
+        "json_path": [
+          "args",
+          "claim"
+        ],
+        "output_path": "canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_BETA.json",
+        "type": "fetch_json_knowledge",
+        "value": "beta",
+        "verified": true
+      }
+    },
+    {
+      "cycle": 2,
+      "plan": {
+        "args": {
+          "evidence_paths": [
+            "canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_ALPHA.json",
+            "canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_BETA.json"
+          ],
+          "output_path": "canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_ASSESSMENT.json"
+        },
+        "expect": {
+          "field": "status",
+          "type": "field_nonempty"
+        },
+        "type": "assess_knowledge_consistency"
+      },
+      "result": {
+        "distinct_fresh_values": 2,
+        "evidence_count": 2,
+        "fresh_evidence_count": 2,
+        "output_path": "canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_ASSESSMENT.json",
+        "status": "CONFLICTED",
+        "type": "assess_knowledge_consistency",
+        "verified": true
+      }
+    },
+    {
+      "cycle": 3,
+      "plan": {
+        "args": {
+          "assessment_path": "canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_ASSESSMENT.json",
+          "expected_status": "CONFLICTED"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "assert_knowledge_status"
+      },
+      "result": {
+        "assessment_path": "canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_ASSESSMENT.json",
+        "expected_status": "CONFLICTED",
+        "observed_status": "CONFLICTED",
+        "type": "assert_knowledge_status",
+        "verified": true
+      }
+    },
+    {
+      "cycle": 4,
+      "plan": {
+        "args": {
+          "summary": "COMPOUND_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "COMPOUND_GOAL_COMPLETE",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-09-25T21:47:38.920761+00:00",
+  "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-CONFLICT-PLAIN-001",
+  "next_action_index": 5,
+  "plan_sha256": "6cee92886e6a27d23fcfb8976b4ab94a502cdf7b591e3cce9ae6ffddb671bea7",
+  "resume_count": 0,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "plain-conflict-assessment",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-09-25T21:47:39.103552+00:00"
+}

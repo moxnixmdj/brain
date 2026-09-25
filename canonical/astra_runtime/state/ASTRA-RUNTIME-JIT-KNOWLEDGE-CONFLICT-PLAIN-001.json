@@ -1,0 +1,229 @@
+{
+  "completed_at_utc": "2026-09-25T21:47:39.107595+00:00",
+  "created_at_utc": "2026-09-25T21:47:38.826950+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T21:47:39.107024+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "goal",
+        "controller_checkpoint": {
+          "last_rewound_from_action_index": null,
+          "path": "canonical/astra_runtime/state/ASTRA-RUNTIME-JIT-KNOWLEDGE-CONFLICT-PLAIN-001__plain-conflict-assessment__CONTROLLER_CHECKPOINT.json",
+          "plan_sha256": "6cee92886e6a27d23fcfb8976b4ab94a502cdf7b591e3cce9ae6ffddb671bea7",
+          "resume_count": 0,
+          "resumed": false,
+          "resumed_from_action_index": 0,
+          "rewind_count": 0
+        },
+        "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+        "cycles": 5,
+        "final_summary": "COMPOUND_GOAL_COMPLETE",
+        "goal_compilation": {
+          "clauses": [
+            "Using external JSON source https://httpbin.org/get?claim=alpha, extract JSON path args.claim and save knowledge evidence to canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_ALPHA.json",
+            "Using external JSON source https://httpbin.org/get?claim=beta, extract JSON path args.claim and save knowledge evidence to canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_BETA.json",
+            "Assess the knowledge evidence canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_ALPHA.json and canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_BETA.json and save the assessment to canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_ASSESSMENT.json",
+            "Finally verify that the knowledge status is CONFLICTED"
+          ],
+          "compiled_parts": [
+            {
+              "authoritative": false,
+              "evidence_path": "canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_ALPHA.json",
+              "index": 0,
+              "json_path": [
+                "args",
+                "claim"
+              ],
+              "mode": "EXTERNAL_JSON_KNOWLEDGE_FETCH",
+              "result_cycle": 0,
+              "source_url": "https://httpbin.org/get?claim=alpha",
+              "subgoal": "Using external JSON source https://httpbin.org/get?claim=alpha, extract JSON path args.claim and save knowledge evidence to canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_ALPHA.json"
+            },
+            {
+              "authoritative": false,
+              "evidence_path": "canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_BETA.json",
+              "index": 1,
+              "json_path": [
+                "args",
+                "claim"
+              ],
+              "mode": "EXTERNAL_JSON_KNOWLEDGE_FETCH",
+              "result_cycle": 1,
+              "source_url": "https://httpbin.org/get?claim=beta",
+              "subgoal": "Using external JSON source https://httpbin.org/get?claim=beta, extract JSON path args.claim and save knowledge evidence to canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_BETA.json"
+            },
+            {
+              "evidence_paths": [
+                "canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_ALPHA.json",
+                "canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_BETA.json"
+              ],
+              "index": 2,
+              "max_age_s": null,
+              "mode": "KNOWLEDGE_CONSISTENCY_ASSESSMENT",
+              "output_path": "canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_ASSESSMENT.json",
+              "subgoal": "Assess the knowledge evidence canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_ALPHA.json and canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_BETA.json and save the assessment to canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_ASSESSMENT.json"
+            },
+            {
+              "assessment_path": "canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_ASSESSMENT.json",
+              "expected_status": "CONFLICTED",
+              "index": 3,
+              "mode": "KNOWLEDGE_STATUS_ASSERTION",
+              "subgoal": "Finally verify that the knowledge status is CONFLICTED"
+            }
+          ],
+          "compiler_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN"
+        },
+        "planner_model_last": null,
+        "planner_source": null,
+        "planner_transport": null,
+        "planning_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN",
+        "returncode": 0,
+        "stdout": "COMPOUND_GOAL_COMPLETE",
+        "trace": [
+          {
+            "cycle": 0,
+            "plan": {
+              "args": {
+                "authoritative": false,
+                "json_path": [
+                  "args",
+                  "claim"
+                ],
+                "max_bytes": 1000000,
+                "output_path": "canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_ALPHA.json",
+                "timeout_s": 20,
+                "url": "https://httpbin.org/get?claim=alpha"
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "fetch_json_knowledge"
+            },
+            "result": {
+              "body_sha256": "dc6a5ae3cb18a2a11f6b84bc751e47e762e4647751ef04a593982bbee014c49b",
+              "duration_s": 0.157,
+              "final_url": "https://httpbin.org/get?claim=alpha",
+              "json_path": [
+                "args",
+                "claim"
+              ],
+              "output_path": "canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_ALPHA.json",
+              "type": "fetch_json_knowledge",
+              "value": "alpha",
+              "verified": true
+            }
+          },
+          {
+            "cycle": 1,
+            "plan": {
+              "args": {
+                "authoritative": false,
+                "json_path": [
+                  "args",
+                  "claim"
+                ],
+                "max_bytes": 1000000,
+                "output_path": "canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_BETA.json",
+                "timeout_s": 20,
+                "url": "https://httpbin.org/get?claim=beta"
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "fetch_json_knowledge"
+            },
+            "result": {
+              "body_sha256": "599286c41b9eb0eeb8e16b567cf391efc53373568b3f49e5047f438b667e03b8",
+              "duration_s": 0.021,
+              "final_url": "https://httpbin.org/get?claim=beta",
+              "json_path": [
+                "args",
+                "claim"
+              ],
+              "output_path": "canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_BETA.json",
+              "type": "fetch_json_knowledge",
+              "value": "beta",
+              "verified": true
+            }
+          },
+          {
+            "cycle": 2,
+            "plan": {
+              "args": {
+                "evidence_paths": [
+                  "canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_ALPHA.json",
+                  "canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_BETA.json"
+                ],
+                "output_path": "canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_ASSESSMENT.json"
+              },
+              "expect": {
+                "field": "status",
+                "type": "field_nonempty"
+              },
+              "type": "assess_knowledge_consistency"
+            },
+            "result": {
+              "distinct_fresh_values": 2,
+              "evidence_count": 2,
+              "fresh_evidence_count": 2,
+              "output_path": "canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_ASSESSMENT.json",
+              "status": "CONFLICTED",
+              "type": "assess_knowledge_consistency",
+              "verified": true
+            }
+          },
+          {
+            "cycle": 3,
+            "plan": {
+              "args": {
+                "assessment_path": "canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_ASSESSMENT.json",
+                "expected_status": "CONFLICTED"
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "assert_knowledge_status"
+            },
+            "result": {
+              "assessment_path": "canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_ASSESSMENT.json",
+              "expected_status": "CONFLICTED",
+              "observed_status": "CONFLICTED",
+              "type": "assert_knowledge_status",
+              "verified": true
+            }
+          },
+          {
+            "cycle": 4,
+            "plan": {
+              "args": {
+                "summary": "COMPOUND_GOAL_COMPLETE"
+              },
+              "type": "finish"
+            },
+            "result": {
+              "summary": "COMPOUND_GOAL_COMPLETE",
+              "type": "finish"
+            }
+          }
+        ]
+      },
+      "step_id": "plain-conflict-assessment",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-CONFLICT-PLAIN-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_JIT_KNOWLEDGE_CONFLICT_PLAIN_001.json",
+  "mission_sha256": "5bcd7438ba95a20f6f8ea6a3c17a9325c77859660c81cb6cf576b95697dbe735",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T21:47:39.107035+00:00"
+}

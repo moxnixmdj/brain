@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T21:47:39.108249+00:00",
+  "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-CONFLICT-PLAIN-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_JIT_KNOWLEDGE_CONFLICT_PLAIN_001.json",
+  "mission_sha256": "5bcd7438ba95a20f6f8ea6a3c17a9325c77859660c81cb6cf576b95697dbe735",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "8dcd9c4a30b35f9617f84ed947d84806e01cd5b97e4d524de30316e8b36e94e2",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
