@@ -526,6 +526,91 @@ def _compile_context_url_json_fetch(subgoal, context_paths, registry, root):
     }
 
 
+def _python_test_glob(subgoal, root):
+    m=re.search(r"((?:[A-Za-z0-9_.-]+/)+)(test_[A-Za-z0-9_.*?-]*\.py)",subgoal)
+    if not m:
+        return None
+    raw_root=m.group(1).rstrip("/")
+    pattern=m.group(2)
+    p=(pathlib.Path(root)/raw_root).resolve()
+    rr=pathlib.Path(root).resolve()
+    if not p.is_dir() or (p!=rr and rr not in p.parents):
+        return None
+    return {"source_root":raw_root,"pattern":pattern}
+
+
+def _compile_python_test_audit(subgoal, context_paths, registry, root):
+    cap=(registry or {}).get("python.tests.audit.unittest")
+    if not isinstance(cap,dict) or cap.get("status")!="VERIFIED_BOUND_CAPABILITY":
+        return None
+    lower=subgoal.lower()
+    if not re.match(r"^(?:create|write|generate)\b",lower):
+        return None
+    if "record per test file" not in lower or "exit code" not in lower:
+        return None
+    outputs=[raw for raw,_ in _repo_paths(subgoal,root) if pathlib.Path(raw).suffix.lower()==".json"]
+    roots=[str(p) for p in context_paths if str(p).replace("\\","/").endswith("/tests")]
+    if len(outputs)!=1 or not roots:
+        return None
+    source_root=roots[-1]
+    action={
+      "type":"invoke_capability",
+      "args":{
+        "capability_id":"python.tests.audit.unittest",
+        "source_root":source_root,
+        "pattern":"test_*.py",
+        "output_path":outputs[0],
+        "timeout_s":180,
+      },
+      "expect":{"type":"field_equals","field":"output_verified","value":True},
+    }
+    return {
+      "action":action,"output_path":outputs[0],
+      "evidence":{
+        "source_root":source_root,"pattern":"test_*.py",
+        "output_path":outputs[0],"capability_id":"python.tests.audit.unittest",
+      }
+    }
+
+
+def _compile_python_test_zero_assertion(subgoal, context_paths, root):
+    lower=subgoal.lower()
+    if "fail if any test file exits nonzero" not in lower:
+        return None
+    audits=[str(p) for p in context_paths if pathlib.Path(str(p)).suffix.lower()==".json" and "TEST_AUDIT" in pathlib.Path(str(p)).name.upper()]
+    if not audits:
+        return None
+    return {
+      "action":{
+        "type":"assert_python_test_audit_zero",
+        "args":{"audit_path":audits[-1]},
+        "expect":{"type":"field_equals","field":"verified","value":True},
+      },
+      "evidence":{"audit_path":audits[-1]},
+    }
+
+
+def _compile_python_test_fresh_verification(subgoal, context_paths, root):
+    lower=subgoal.lower()
+    if "independently execute" not in lower or "same complete test corpus" not in lower:
+        return None
+    audits=[str(p) for p in context_paths if pathlib.Path(str(p)).suffix.lower()==".json" and "TEST_AUDIT" in pathlib.Path(str(p)).name.upper()]
+    roots=[str(p) for p in context_paths if str(p).replace("\\","/").endswith("/tests")]
+    if not audits or not roots:
+        return None
+    return {
+      "action":{
+        "type":"assert_python_test_audit_supported_by_fresh_execution",
+        "args":{"audit_path":audits[-1],"source_root":roots[-1],"pattern":"test_*.py"},
+        "expect":{"type":"field_equals","field":"verified","value":True},
+      },
+      "evidence":{
+        "audit_path":audits[-1],"source_root":roots[-1],"pattern":"test_*.py",
+        "verification_action":"assert_python_test_audit_supported_by_fresh_execution",
+      }
+    }
+
+
 def _compile_python_source_audit(subgoal, context_paths, registry, root):
     cap=(registry or {}).get("python.source.audit.ast")
     if not isinstance(cap,dict) or cap.get("status")!="VERIFIED_BOUND_CAPABILITY":
@@ -930,6 +1015,22 @@ def _compile_compound_goal(goal, clauses, registry, root):
     context_paths=[]
     for index,clause in enumerate(clauses):
         lower=clause.lower()
+        test_glob=_python_test_glob(clause,root)
+        if test_glob is not None and re.match(r"^(?:execute|run)\b",lower):
+            action={
+                "type":"list_tree",
+                "args":{"prefix":test_glob["source_root"]},
+                "expect":{"type":"field_nonempty","field":"items"},
+            }
+            actions.append(action)
+            context_paths.append(test_glob["source_root"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"NATIVE_TEST_CORPUS_DISCOVERY",
+                **test_glob,
+            })
+            continue
+
         # Evidence-only repository reads are native runtime actions and should
         # not require a separately acquired capability.
         if re.match(r"^(?:read|inspect|open)\b",lower):
@@ -962,6 +1063,37 @@ def _compile_compound_goal(goal, clauses, registry, root):
                     "path":directories[0][0],
                 })
                 continue
+
+        test_fresh=_compile_python_test_fresh_verification(clause,context_paths,root)
+        if test_fresh is not None:
+            actions.append(test_fresh["action"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"INDEPENDENT_PYTHON_TEST_CORPUS_VERIFICATION",
+                **test_fresh["evidence"],
+            })
+            continue
+
+        test_zero=_compile_python_test_zero_assertion(clause,context_paths,root)
+        if test_zero is not None:
+            actions.append(test_zero["action"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"PYTHON_TEST_ZERO_FAILURE_ASSERTION",
+                **test_zero["evidence"],
+            })
+            continue
+
+        test_audit=_compile_python_test_audit(clause,context_paths,registry,root)
+        if test_audit is not None:
+            actions.append(test_audit["action"])
+            context_paths.append(test_audit["output_path"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"VERIFIED_PYTHON_TEST_AUDIT",
+                **test_audit["evidence"],
+            })
+            continue
 
         python_verify=_compile_python_source_audit_verification(clause,context_paths,root)
         if python_verify is not None:
