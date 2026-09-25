@@ -1,0 +1,2568 @@
+{
+  "auto_acquisition": {
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"aspell-no\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"dbconfig-no-thanks\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-no-littering\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fonts-droid-fallback\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"gnome-model-thumbnailer\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"hunspell-no\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"hyphen-no\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"mythes-no\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-prosemirror-model\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"nvidia-headless-no-dkms-460\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"nvidia-headless-no-dkms-460-server\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"nvidia-headless-no-dkms-465\", \"status\": \"CONTRACT_REJECTED\"}]",
+    "status": "NOT_DISPATCHED"
+  },
+  "binding_performed": false,
+  "goal": "No implicit model fallback is allowed.",
+  "mission_id": "UNKNOWN",
+  "observed_at_utc": "2026-09-25T01:16:50.378113+00:00",
+  "result": {
+    "binding_performed": false,
+    "candidates": [
+      {
+        "archive_sha256": "4d94c6662082c97a4385a5cc8831ad77bb9e67d08cc5e161c837b19aabce568d",
+        "binding_kind": "apt",
+        "description": "Norwegian dictionary for aspell",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "no"
+        ],
+        "name": "aspell-no",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.2-4build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "bbd6f60078ae0f8fd05c6249c339959fb6fd96b439f3c239e51415268c86683e",
+        "binding_kind": "apt",
+        "description": "dbconfig-common bypass",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "no"
+        ],
+        "name": "dbconfig-no-thanks",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.0.24",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "4a524693e8ddd8a5421c86e7cad3bc71864662ad85b34c73637d4989dd6628f6",
+        "binding_kind": "apt",
+        "description": "help keeping ~/.emacs.d clean",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "no"
+        ],
+        "name": "elpa-no-littering",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.5.0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "353e093dd32677e48edbdc9c94c4e92db0e80763fc326ddec1ba8281d8553a5e",
+        "binding_kind": "apt",
+        "description": "handheld device font with extensive style and language support (fallback)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "fallback"
+        ],
+        "name": "fonts-droid-fallback",
+        "packages": [],
+        "query": "fallback",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:6.0.1r16-1.1build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "3ed6f9d9c360be9154f3d7bcc3e3494b28d6ab1a25f05fb9f3d6fddfc8d15a1f",
+        "binding_kind": "apt",
+        "description": "3d model thumbnailer for GNOME",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "model"
+        ],
+        "name": "gnome-model-thumbnailer",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0+git20240108+ds-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "b3a8f639d4a8e6807932ba24ee8f7de6c410874dbbba30b6dfe48cfcc4093690",
+        "binding_kind": "apt",
+        "description": "Norwegian dictionary for hunspell",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "no"
+        ],
+        "name": "hunspell-no",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:24.2.1-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "146c2d21c3226fe6b9623050d766b7fb0bb9a31213f32275834867a0549b69d7",
+        "binding_kind": "apt",
+        "description": "Norwegian hyphenation patterns",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "no"
+        ],
+        "name": "hyphen-no",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:24.2.1-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "5921fbcb1c4dde2f714b4db7d739b14cd8a0c37f0ee96997e56c71971dc69c88",
+        "binding_kind": "apt",
+        "description": "Norwegian Thesaurus for LibreOffice",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "no"
+        ],
+        "name": "mythes-no",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:24.2.1-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ca66f3be427b6cb63d131a6d7b94f96cf3bee584a1f3f93e188f3e89b4104ad0",
+        "binding_kind": "apt",
+        "description": "ProseMirror's document model",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "model"
+        ],
+        "name": "node-prosemirror-model",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.16.1+~cs1.1.5-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "e18570d0523fc85e9754365c3bd234a80c09123a26ff42311db63f168cec7069",
+        "binding_kind": "apt",
+        "description": "Transitional package for nvidia-headless-no-dkms-470",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "no"
+        ],
+        "name": "nvidia-headless-no-dkms-460",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "470.256.02-0ubuntu0.24.04.5",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "02ade7b407d85be3aab4cc2298270b3561448afc27683a1228c1ca045bfe9711",
+        "binding_kind": "apt",
+        "description": "Transitional package for nvidia-headless-no-dkms-470-server",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "no"
+        ],
+        "name": "nvidia-headless-no-dkms-460-server",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "470.256.02-0ubuntu0.24.04.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "f13e18d24757e4f08b1c4b22d4fb863d7852b77a78aad35d55e64be08f13c828",
+        "binding_kind": "apt",
+        "description": "Transitional package for nvidia-headless-no-dkms-470",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "no"
+        ],
+        "name": "nvidia-headless-no-dkms-465",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "470.256.02-0ubuntu0.24.04.5",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "1d1385e325fc2b0472fa02ce7bcf4cf28fc164f5f34846044dc3a904f9bc87d0",
+        "binding_kind": "apt",
+        "description": "NVIDIA headless metapackage - no DKMS",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "no"
+        ],
+        "name": "nvidia-headless-no-dkms-470",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "470.256.02-0ubuntu0.24.04.5",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "0c9583422f903c7ca8d7e03bde09876c578e0ec781967224fb79a3b42da143d2",
+        "binding_kind": "apt",
+        "description": "NVIDIA headless metapackage - no DKMS",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "no"
+        ],
+        "name": "nvidia-headless-no-dkms-470-server",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "470.256.02-0ubuntu0.24.04.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "2c4370bbe067029f66be12ff9a485fab9f19b74db5a177cda1d6af7a19ddbcc2",
+        "binding_kind": "apt",
+        "description": "Transitional package for nvidia-headless-no-dkms-535",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "no"
+        ],
+        "name": "nvidia-headless-no-dkms-510",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "525.147.05-0ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "cb3e6946e9954a70117552ec5e1400c00ffd1fbb9a953727376141a3cf75de8e",
+        "binding_kind": "apt",
+        "description": "Transitional package for nvidia-headless-no-dkms-535",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "no"
+        ],
+        "name": "nvidia-headless-no-dkms-515",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "525.147.05-0ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "dfee0c3cfee71c3a91bcaa14f7bad1310605e284711eabc12ce9a80a8486bd71",
+        "binding_kind": "apt",
+        "description": "Transitional package for nvidia-headless-no-dkms-535",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "no"
+        ],
+        "name": "nvidia-headless-no-dkms-515-open",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "525.147.05-0ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ce7b583b5cafc5cb94d2d4eef2fa788660f75e933ebdb835e8d7b2bd2ad980a8",
+        "binding_kind": "apt",
+        "description": "Transitional package for nvidia-headless-no-dkms-535-server",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "no"
+        ],
+        "name": "nvidia-headless-no-dkms-515-server",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "525.147.05-0ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "59bce10ddcb8145a0823964149979278df7687a6ffa0894382439dc79244fc58",
+        "binding_kind": "apt",
+        "description": "Transitional package for nvidia-headless-no-dkms-535",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "no"
+        ],
+        "name": "nvidia-headless-no-dkms-520",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "525.147.05-0ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "0d53ab8cd94915a7ffbc9a1eeac143e022388662f4b7f7dd3df14ddc0fd0a7e8",
+        "binding_kind": "apt",
+        "description": "Transitional package for nvidia-headless-no-dkms-535",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "no"
+        ],
+        "name": "nvidia-headless-no-dkms-520-open",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "525.147.05-0ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c761552d326379ff4863ccce89b51ae37a299d434fdcb77354fa75d4f425f317",
+        "binding_kind": "apt",
+        "description": "NVIDIA headless metapackage - no DKMS (transitional package)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "no"
+        ],
+        "name": "nvidia-headless-no-dkms-525",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "525.147.05-0ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "29753a0e50c95bfc70eef9103e871e2e01778f00a71d750b94a734a78f477de1",
+        "binding_kind": "apt",
+        "description": "NVIDIA headless metapackage - no DKMS (open kernel module) (transitional package)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "no"
+        ],
+        "name": "nvidia-headless-no-dkms-525-open",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "525.147.05-0ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "cc968ab85bf73801b5b566fb5a880b3d1ef13505c351c965a80aa8c8ecb774d7",
+        "binding_kind": "apt",
+        "description": "NVIDIA headless metapackage - no DKMS (transitional package)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "no"
+        ],
+        "name": "nvidia-headless-no-dkms-525-server",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "525.147.05-0ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "5d0076855392c8c7a00f0db234e1aec636cd1473f2ea270aabb8ca0c7cec850f",
+        "binding_kind": "apt",
+        "description": "Transitional package for nvidia-headless-no-dkms-535",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "no"
+        ],
+        "name": "nvidia-headless-no-dkms-530",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "535.309.01-0ubuntu0.24.04.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "65f68edfb3008857df6c2c1a427b483a4a506b73cc1f91a0137fa4d987be7418",
+        "binding_kind": "apt",
+        "description": "Transitional package for nvidia-headless-no-dkms-535-open",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "no"
+        ],
+        "name": "nvidia-headless-no-dkms-530-open",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "535.309.01-0ubuntu0.24.04.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "0a330951d883e326d45280c86adf76474c04256526b555f5ff49e5673a974d03",
+        "binding_kind": "apt",
+        "description": "NVIDIA headless metapackage - no DKMS (transitional package)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "no"
+        ],
+        "name": "nvidia-headless-no-dkms-535",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "535.309.01-0ubuntu0.24.04.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d6484c7ff02712c73cc6016161c1963cab04a22e0945e1ddab36eb2f40ebf66f",
+        "binding_kind": "apt",
+        "description": "NVIDIA headless metapackage - no DKMS (open kernel module) (transitional package)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "no"
+        ],
+        "name": "nvidia-headless-no-dkms-535-open",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "535.309.01-0ubuntu0.24.04.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "2850497c1938a4690de0d8c979512967371ab5fd755065f5f99319be29363761",
+        "binding_kind": "apt",
+        "description": "NVIDIA headless metapackage - no DKMS (transitional package)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "no"
+        ],
+        "name": "nvidia-headless-no-dkms-535-server",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "535.309.01-0ubuntu0.24.04.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "2efb4e3826d9ca3de9b3875a9190dd7eebac0364baaf66b390c9d3e4a42598d9",
+        "binding_kind": "apt",
+        "description": "NVIDIA headless metapackage - no DKMS (open kernel module) (transitional package)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "no"
+        ],
+        "name": "nvidia-headless-no-dkms-535-server-open",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "535.309.01-0ubuntu0.24.04.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "2a9bf990f099af53fc6243d962908673140a57fbfbe07f10ff59fdd79c44c863",
+        "binding_kind": "apt",
+        "description": "NVIDIA headless metapackage - no DKMS",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "no"
+        ],
+        "name": "nvidia-headless-no-dkms-550",
+        "packages": [],
+        "query": "no",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "550.163.01-0ubuntu0.24.04.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "AI travel agent \u2014 book flights, hotels, activities, and events worldwide via autonomad.ai.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.autonomad/travel",
+        "packages": [
+          {
+            "identifier": "autonomad-travel",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.4.4"
+          }
+        ],
+        "query": "no",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.autonomad.ai/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "subfolder": "packages/mcp-hotel-tools",
+          "url": "https://github.com/Autonomad1/autonomad1"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.4.4",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Trainable non-fiction writing voice, presets, and an anti-AI-tells audit for Claude, via MCP.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.etincel/etincel-nonfiction",
+        "packages": [
+          {
+            "identifier": "etincel",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": "npx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.10.1"
+          }
+        ],
+        "query": "no",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://etincel.ai/api/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/AIStoryHub/etincel"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.10.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "The Power BI Authoring MCP server lets an AI agent create and change Power BI semantic models.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.microsoft/powerbi-modeling-mcp",
+        "packages": [
+          {
+            "identifier": "@microsoft/powerbi-modeling-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.5.0-beta.16"
+          }
+        ],
+        "query": "model",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/microsoft/powerbi-modeling-mcp.git"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.5.0-beta.16",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Live LLM API pricing: token prices, comparisons, cheapest-model lookups. No key required.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.modelpricewatch/mcp",
+        "packages": [
+          {
+            "identifier": "@modelpricewatch/mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.0"
+          }
+        ],
+        "query": "model",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://modelpricewatch.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "AI-powered life cycle assessment and modelling: connect to LCA databases, build and analyze systems",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.aeviamodeler/aevia",
+        "packages": [],
+        "query": "model",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://app.aeviamodeler.ai/api/v1/connector/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Manage Kinnovis self-storage tariffs from chat.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.b77/kinnovis-storage",
+        "packages": [],
+        "query": "no",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://kinnovis-storage.b77.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "A searchable knowledge base your assistant reads and writes.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.b77/knowledge-base",
+        "packages": [],
+        "query": "no",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://knowledge-base.b77.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "The knowledge base your AI reads and writes, under your rules \u2014 over MCP, EU-hosted.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.brainattic/knowledge-base",
+        "packages": [],
+        "query": "no",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://app.brainattic.ai/api/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "3.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Access your Cosmonote audio notes, transcriptions, summaries, and action items.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.cosmonote/notes",
+        "packages": [],
+        "query": "no",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://nebula.cosmonote.ai/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/cosmonote/pocketbase"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Family Office Knowledge Graph: read-only MCP door over the public record. Agentic KG Holdings.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.familyofficeknowledgegraph/fo-kg",
+        "packages": [],
+        "query": "no",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.familyofficeknowledgegraph.ai/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/Agentic-Private-Office/fo-kg-door"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.19.13",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Personalized hypnosis sessions and multi-day journeys, a free session library, and audio rendering.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.hypnothera/hypnothera",
+        "packages": [],
+        "query": "no",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://hypnothera.ai/api/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/La-Salida/hypnothera-skill"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.3.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Lucky AI study buddy over your own LlamaNotes courses: chat, progress, and AI course generation.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.llamanotes/llamanotes",
+        "packages": [],
+        "query": "no",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.llamanotes.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "AI Retrievability by Norg \u2014 mirror and optimize your site for AI agents like ChatGPT and Claude.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.norg/express",
+        "packages": [],
+        "query": "no",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://content-craft-api.norg.ai/v2/mcp/express"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Swedish normhyra calculation engine: convert rents, process rent rolls, generate PDF reports.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.normhyra/normhyra",
+        "packages": [],
+        "query": "no",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.normhyra.ai/"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Robert Blust: One model, true everywhere",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ch.blust/mental-model",
+        "packages": [],
+        "query": "model",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.blust.ch/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Ship models, build logs, tutorials, galleries, public URLs, and contextual content search.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.glushkov-modelling/content",
+        "packages": [],
+        "query": "model",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.glushkov-modelling.com/mcp-oauth"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.3.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Book a free consultation or home valuation with SimpliCity Real Estate in Lincoln, Nebraska.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.nesimplicity/real-estate",
+        "packages": [],
+        "query": "implicit",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://hooks.nesimplicity.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "61 verified financial models and a household planning engine: 20 MCP tools, 6 keyless, specs cited.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.worthune/models",
+        "packages": [],
+        "query": "model",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://worthune.com/api/mcp/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.8.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Find open models and get download links with the SHA-256 each file must have.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "foundation.uor.hub/model-hub",
+        "packages": [],
+        "query": "model",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://hub.uor.foundation/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "subfolder": "apps/model-hub",
+          "url": "https://github.com/Hologram-Technologies/hologram-live"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Live pricing data for AI models across vendors: input/output prices per 1k tokens as JSON.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.DataLeadsPRO/ai-model-pricing",
+        "packages": [],
+        "query": "model",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://data.dataleads.pro/mcp/ai-model-pricing"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/DataLeadsPRO/ai-model-pricing"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      }
+    ],
+    "effect": "No implicit model fallback is allowed.",
+    "results": [
+      {
+        "binding_performed": false,
+        "candidate_count": 30,
+        "candidates": [
+          {
+            "archive_sha256": "4d94c6662082c97a4385a5cc8831ad77bb9e67d08cc5e161c837b19aabce568d",
+            "binding_kind": "apt",
+            "description": "Norwegian dictionary for aspell",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "no"
+            ],
+            "name": "aspell-no",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2.2-4build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "bbd6f60078ae0f8fd05c6249c339959fb6fd96b439f3c239e51415268c86683e",
+            "binding_kind": "apt",
+            "description": "dbconfig-common bypass",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "no"
+            ],
+            "name": "dbconfig-no-thanks",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2.0.24",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "4a524693e8ddd8a5421c86e7cad3bc71864662ad85b34c73637d4989dd6628f6",
+            "binding_kind": "apt",
+            "description": "help keeping ~/.emacs.d clean",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "no"
+            ],
+            "name": "elpa-no-littering",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.5.0-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "353e093dd32677e48edbdc9c94c4e92db0e80763fc326ddec1ba8281d8553a5e",
+            "binding_kind": "apt",
+            "description": "handheld device font with extensive style and language support (fallback)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "fallback"
+            ],
+            "name": "fonts-droid-fallback",
+            "packages": [],
+            "query": "fallback",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1:6.0.1r16-1.1build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "3ed6f9d9c360be9154f3d7bcc3e3494b28d6ab1a25f05fb9f3d6fddfc8d15a1f",
+            "binding_kind": "apt",
+            "description": "3d model thumbnailer for GNOME",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "model"
+            ],
+            "name": "gnome-model-thumbnailer",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0+git20240108+ds-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "b3a8f639d4a8e6807932ba24ee8f7de6c410874dbbba30b6dfe48cfcc4093690",
+            "binding_kind": "apt",
+            "description": "Norwegian dictionary for hunspell",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "no"
+            ],
+            "name": "hunspell-no",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1:24.2.1-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "146c2d21c3226fe6b9623050d766b7fb0bb9a31213f32275834867a0549b69d7",
+            "binding_kind": "apt",
+            "description": "Norwegian hyphenation patterns",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "no"
+            ],
+            "name": "hyphen-no",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1:24.2.1-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "5921fbcb1c4dde2f714b4db7d739b14cd8a0c37f0ee96997e56c71971dc69c88",
+            "binding_kind": "apt",
+            "description": "Norwegian Thesaurus for LibreOffice",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "no"
+            ],
+            "name": "mythes-no",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1:24.2.1-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "ca66f3be427b6cb63d131a6d7b94f96cf3bee584a1f3f93e188f3e89b4104ad0",
+            "binding_kind": "apt",
+            "description": "ProseMirror's document model",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "model"
+            ],
+            "name": "node-prosemirror-model",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.16.1+~cs1.1.5-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "e18570d0523fc85e9754365c3bd234a80c09123a26ff42311db63f168cec7069",
+            "binding_kind": "apt",
+            "description": "Transitional package for nvidia-headless-no-dkms-470",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "no"
+            ],
+            "name": "nvidia-headless-no-dkms-460",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "470.256.02-0ubuntu0.24.04.5",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "02ade7b407d85be3aab4cc2298270b3561448afc27683a1228c1ca045bfe9711",
+            "binding_kind": "apt",
+            "description": "Transitional package for nvidia-headless-no-dkms-470-server",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "no"
+            ],
+            "name": "nvidia-headless-no-dkms-460-server",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "470.256.02-0ubuntu0.24.04.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "f13e18d24757e4f08b1c4b22d4fb863d7852b77a78aad35d55e64be08f13c828",
+            "binding_kind": "apt",
+            "description": "Transitional package for nvidia-headless-no-dkms-470",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "no"
+            ],
+            "name": "nvidia-headless-no-dkms-465",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "470.256.02-0ubuntu0.24.04.5",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "1d1385e325fc2b0472fa02ce7bcf4cf28fc164f5f34846044dc3a904f9bc87d0",
+            "binding_kind": "apt",
+            "description": "NVIDIA headless metapackage - no DKMS",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "no"
+            ],
+            "name": "nvidia-headless-no-dkms-470",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "470.256.02-0ubuntu0.24.04.5",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "0c9583422f903c7ca8d7e03bde09876c578e0ec781967224fb79a3b42da143d2",
+            "binding_kind": "apt",
+            "description": "NVIDIA headless metapackage - no DKMS",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "no"
+            ],
+            "name": "nvidia-headless-no-dkms-470-server",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "470.256.02-0ubuntu0.24.04.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "2c4370bbe067029f66be12ff9a485fab9f19b74db5a177cda1d6af7a19ddbcc2",
+            "binding_kind": "apt",
+            "description": "Transitional package for nvidia-headless-no-dkms-535",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "no"
+            ],
+            "name": "nvidia-headless-no-dkms-510",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "525.147.05-0ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "cb3e6946e9954a70117552ec5e1400c00ffd1fbb9a953727376141a3cf75de8e",
+            "binding_kind": "apt",
+            "description": "Transitional package for nvidia-headless-no-dkms-535",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "no"
+            ],
+            "name": "nvidia-headless-no-dkms-515",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "525.147.05-0ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "dfee0c3cfee71c3a91bcaa14f7bad1310605e284711eabc12ce9a80a8486bd71",
+            "binding_kind": "apt",
+            "description": "Transitional package for nvidia-headless-no-dkms-535",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "no"
+            ],
+            "name": "nvidia-headless-no-dkms-515-open",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "525.147.05-0ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "ce7b583b5cafc5cb94d2d4eef2fa788660f75e933ebdb835e8d7b2bd2ad980a8",
+            "binding_kind": "apt",
+            "description": "Transitional package for nvidia-headless-no-dkms-535-server",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "no"
+            ],
+            "name": "nvidia-headless-no-dkms-515-server",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "525.147.05-0ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "59bce10ddcb8145a0823964149979278df7687a6ffa0894382439dc79244fc58",
+            "binding_kind": "apt",
+            "description": "Transitional package for nvidia-headless-no-dkms-535",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "no"
+            ],
+            "name": "nvidia-headless-no-dkms-520",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "525.147.05-0ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "0d53ab8cd94915a7ffbc9a1eeac143e022388662f4b7f7dd3df14ddc0fd0a7e8",
+            "binding_kind": "apt",
+            "description": "Transitional package for nvidia-headless-no-dkms-535",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "no"
+            ],
+            "name": "nvidia-headless-no-dkms-520-open",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "525.147.05-0ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c761552d326379ff4863ccce89b51ae37a299d434fdcb77354fa75d4f425f317",
+            "binding_kind": "apt",
+            "description": "NVIDIA headless metapackage - no DKMS (transitional package)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "no"
+            ],
+            "name": "nvidia-headless-no-dkms-525",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "525.147.05-0ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "29753a0e50c95bfc70eef9103e871e2e01778f00a71d750b94a734a78f477de1",
+            "binding_kind": "apt",
+            "description": "NVIDIA headless metapackage - no DKMS (open kernel module) (transitional package)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "no"
+            ],
+            "name": "nvidia-headless-no-dkms-525-open",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "525.147.05-0ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "cc968ab85bf73801b5b566fb5a880b3d1ef13505c351c965a80aa8c8ecb774d7",
+            "binding_kind": "apt",
+            "description": "NVIDIA headless metapackage - no DKMS (transitional package)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "no"
+            ],
+            "name": "nvidia-headless-no-dkms-525-server",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "525.147.05-0ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "5d0076855392c8c7a00f0db234e1aec636cd1473f2ea270aabb8ca0c7cec850f",
+            "binding_kind": "apt",
+            "description": "Transitional package for nvidia-headless-no-dkms-535",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "no"
+            ],
+            "name": "nvidia-headless-no-dkms-530",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "535.309.01-0ubuntu0.24.04.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "65f68edfb3008857df6c2c1a427b483a4a506b73cc1f91a0137fa4d987be7418",
+            "binding_kind": "apt",
+            "description": "Transitional package for nvidia-headless-no-dkms-535-open",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "no"
+            ],
+            "name": "nvidia-headless-no-dkms-530-open",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "535.309.01-0ubuntu0.24.04.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "0a330951d883e326d45280c86adf76474c04256526b555f5ff49e5673a974d03",
+            "binding_kind": "apt",
+            "description": "NVIDIA headless metapackage - no DKMS (transitional package)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "no"
+            ],
+            "name": "nvidia-headless-no-dkms-535",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "535.309.01-0ubuntu0.24.04.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d6484c7ff02712c73cc6016161c1963cab04a22e0945e1ddab36eb2f40ebf66f",
+            "binding_kind": "apt",
+            "description": "NVIDIA headless metapackage - no DKMS (open kernel module) (transitional package)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "no"
+            ],
+            "name": "nvidia-headless-no-dkms-535-open",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "535.309.01-0ubuntu0.24.04.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "2850497c1938a4690de0d8c979512967371ab5fd755065f5f99319be29363761",
+            "binding_kind": "apt",
+            "description": "NVIDIA headless metapackage - no DKMS (transitional package)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "no"
+            ],
+            "name": "nvidia-headless-no-dkms-535-server",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "535.309.01-0ubuntu0.24.04.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "2efb4e3826d9ca3de9b3875a9190dd7eebac0364baaf66b390c9d3e4a42598d9",
+            "binding_kind": "apt",
+            "description": "NVIDIA headless metapackage - no DKMS (open kernel module) (transitional package)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "no"
+            ],
+            "name": "nvidia-headless-no-dkms-535-server-open",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "535.309.01-0ubuntu0.24.04.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "2a9bf990f099af53fc6243d962908673140a57fbfbe07f10ff59fdd79c44c863",
+            "binding_kind": "apt",
+            "description": "NVIDIA headless metapackage - no DKMS",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "no"
+            ],
+            "name": "nvidia-headless-no-dkms-550",
+            "packages": [],
+            "query": "no",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "550.163.01-0ubuntu0.24.04.2",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "No implicit model fallback is allowed.",
+        "errors": [],
+        "queries": [
+          "no",
+          "implicit",
+          "model",
+          "fallback"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "APT_CATALOG",
+        "source_url": null
+      },
+      {
+        "binding_performed": false,
+        "candidate_count": 59,
+        "candidates": [
+          {
+            "description": "AI travel agent \u2014 book flights, hotels, activities, and events worldwide via autonomad.ai.",
+            "is_latest": true,
+            "name": "ai.autonomad/travel",
+            "packages": [
+              {
+                "identifier": "autonomad-travel",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.4.4"
+              }
+            ],
+            "query": "no",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.autonomad.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "subfolder": "packages/mcp-hotel-tools",
+              "url": "https://github.com/Autonomad1/autonomad1"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.4.4",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Trainable non-fiction writing voice, presets, and an anti-AI-tells audit for Claude, via MCP.",
+            "is_latest": true,
+            "name": "ai.etincel/etincel-nonfiction",
+            "packages": [
+              {
+                "identifier": "etincel",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": "npx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.10.1"
+              }
+            ],
+            "query": "no",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://etincel.ai/api/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/AIStoryHub/etincel"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.10.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "The Power BI Authoring MCP server lets an AI agent create and change Power BI semantic models.",
+            "is_latest": true,
+            "name": "com.microsoft/powerbi-modeling-mcp",
+            "packages": [
+              {
+                "identifier": "@microsoft/powerbi-modeling-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.5.0-beta.16"
+              }
+            ],
+            "query": "model",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/microsoft/powerbi-modeling-mcp.git"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.5.0-beta.16",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Live LLM API pricing: token prices, comparisons, cheapest-model lookups. No key required.",
+            "is_latest": true,
+            "name": "com.modelpricewatch/mcp",
+            "packages": [
+              {
+                "identifier": "@modelpricewatch/mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.0"
+              }
+            ],
+            "query": "model",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://modelpricewatch.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "AI-powered life cycle assessment and modelling: connect to LCA databases, build and analyze systems",
+            "is_latest": true,
+            "name": "ai.aeviamodeler/aevia",
+            "packages": [],
+            "query": "model",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://app.aeviamodeler.ai/api/v1/connector/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Manage Kinnovis self-storage tariffs from chat.",
+            "is_latest": true,
+            "name": "ai.b77/kinnovis-storage",
+            "packages": [],
+            "query": "no",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://kinnovis-storage.b77.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "A searchable knowledge base your assistant reads and writes.",
+            "is_latest": true,
+            "name": "ai.b77/knowledge-base",
+            "packages": [],
+            "query": "no",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://knowledge-base.b77.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "The knowledge base your AI reads and writes, under your rules \u2014 over MCP, EU-hosted.",
+            "is_latest": true,
+            "name": "ai.brainattic/knowledge-base",
+            "packages": [],
+            "query": "no",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://app.brainattic.ai/api/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "3.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Access your Cosmonote audio notes, transcriptions, summaries, and action items.",
+            "is_latest": true,
+            "name": "ai.cosmonote/notes",
+            "packages": [],
+            "query": "no",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://nebula.cosmonote.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/cosmonote/pocketbase"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Family Office Knowledge Graph: read-only MCP door over the public record. Agentic KG Holdings.",
+            "is_latest": true,
+            "name": "ai.familyofficeknowledgegraph/fo-kg",
+            "packages": [],
+            "query": "no",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.familyofficeknowledgegraph.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Agentic-Private-Office/fo-kg-door"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.19.13",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Personalized hypnosis sessions and multi-day journeys, a free session library, and audio rendering.",
+            "is_latest": true,
+            "name": "ai.hypnothera/hypnothera",
+            "packages": [],
+            "query": "no",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://hypnothera.ai/api/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/La-Salida/hypnothera-skill"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.3.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Lucky AI study buddy over your own LlamaNotes courses: chat, progress, and AI course generation.",
+            "is_latest": true,
+            "name": "ai.llamanotes/llamanotes",
+            "packages": [],
+            "query": "no",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.llamanotes.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "AI Retrievability by Norg \u2014 mirror and optimize your site for AI agents like ChatGPT and Claude.",
+            "is_latest": true,
+            "name": "ai.norg/express",
+            "packages": [],
+            "query": "no",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://content-craft-api.norg.ai/v2/mcp/express"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Swedish normhyra calculation engine: convert rents, process rent rolls, generate PDF reports.",
+            "is_latest": true,
+            "name": "ai.normhyra/normhyra",
+            "packages": [],
+            "query": "no",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.normhyra.ai/"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Robert Blust: One model, true everywhere",
+            "is_latest": true,
+            "name": "ch.blust/mental-model",
+            "packages": [],
+            "query": "model",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.blust.ch/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Ship models, build logs, tutorials, galleries, public URLs, and contextual content search.",
+            "is_latest": true,
+            "name": "com.glushkov-modelling/content",
+            "packages": [],
+            "query": "model",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.glushkov-modelling.com/mcp-oauth"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.3.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Book a free consultation or home valuation with SimpliCity Real Estate in Lincoln, Nebraska.",
+            "is_latest": true,
+            "name": "com.nesimplicity/real-estate",
+            "packages": [],
+            "query": "implicit",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://hooks.nesimplicity.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "61 verified financial models and a household planning engine: 20 MCP tools, 6 keyless, specs cited.",
+            "is_latest": true,
+            "name": "com.worthune/models",
+            "packages": [],
+            "query": "model",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://worthune.com/api/mcp/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.8.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Find open models and get download links with the SHA-256 each file must have.",
+            "is_latest": true,
+            "name": "foundation.uor.hub/model-hub",
+            "packages": [],
+            "query": "model",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://hub.uor.foundation/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "subfolder": "apps/model-hub",
+              "url": "https://github.com/Hologram-Technologies/hologram-live"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Live pricing data for AI models across vendors: input/output prices per 1k tokens as JSON.",
+            "is_latest": true,
+            "name": "io.github.DataLeadsPRO/ai-model-pricing",
+            "packages": [],
+            "query": "model",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://data.dataleads.pro/mcp/ai-model-pricing"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/DataLeadsPRO/ai-model-pricing"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Check whether an LLM model id is deprecated, retiring, or retired, and what to migrate to.",
+            "is_latest": true,
+            "name": "ai.llmintel/model-lifecycle",
+            "packages": [
+              {
+                "identifier": "@llmintel/mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [
+                  "LLMINTEL_API_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.2.0"
+              }
+            ],
+            "query": "model",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://llmintel.ai/v1/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/hivemindunit/llmintel-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 15,
+            "status": "active",
+            "version": "0.2.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Dividend-adjusted US equity total returns, risk decomposition, attribution & ETF hedge ratios",
+            "is_latest": true,
+            "name": "io.github.BlueWaterCorp/riskmodels",
+            "packages": [
+              {
+                "identifier": "@riskmodels/mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.6"
+              }
+            ],
+            "query": "model",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://riskmodels.app/api/mcp/sse"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/BlueWaterCorp/RiskModels_API"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "1.0.6",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Search 760K+ companies by technographics with direction of change: adopting, replacing, evaluating",
+            "is_latest": true,
+            "name": "ai.echoloc/company-technographics",
+            "packages": [],
+            "query": "no",
+            "remotes": [
+              {
+                "required_headers": [
+                  "X-API-Key"
+                ],
+                "type": "streamable-http",
+                "url": "https://api.echoloc.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Hosted DNA language models: promoter, splice, enhancer, chromatin, expression, annotation",
+            "is_latest": true,
+            "name": "ai.genomicintelligence/genomic-intelligence",
+            "packages": [],
+            "query": "no",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://mcp.genomicintelligence.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Search log events, investigate anomalies, and manage cases in your Knowledge Grid tenant.",
+            "is_latest": true,
+            "name": "ai.knowledgegrid/knowledge-grid",
+            "packages": [],
+            "query": "no",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://knowledgegrid.ai/api/external/v1/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Graph memory that dreams: Neo4j knowledge-graph memory for AI agents with hybrid search",
+            "is_latest": true,
+            "name": "ai.knowall/reverie",
+            "packages": [
+              {
+                "identifier": "@knowall-ai/reverie",
+                "registry_type": "npm",
+                "required_environment": [
+                  "NEO4J_URI",
+                  "NEO4J_USERNAME",
+                  "NEO4J_PASSWORD"
+                ],
+                "runtime_hint": null,
+                "secret_environment": [
+                  "NEO4J_PASSWORD"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.5.3"
+              }
+            ],
+            "query": "no",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/knowall-ai/mcp-reverie"
+            },
+            "required_environment_count": 3,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "0.5.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Evidence-graded, task-level record of how AI and automation change 70 occupations. Read-only.",
+            "is_latest": true,
+            "name": "ai.flyvolo/knowledge",
+            "packages": [],
+            "query": "no",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.flyvolo.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/weihermans/VOLO"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Governance runtime for compliance: verified, human-approved writes to a tamper-evident record.",
+            "is_latest": true,
+            "name": "ai.kanonik/kanonik",
+            "packages": [],
+            "query": "no",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://app.kanonik.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Kanonik-LLC/kanonik-plugin"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Zero-install security baseline for AI coding agents \u2014 OWASP/CWE-cited rules over MCP.",
+            "is_latest": true,
+            "name": "ai.kernora/agent-sec",
+            "packages": [],
+            "query": "no",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://agentsec.kernora.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/kernora-ai/agent-sec"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "AI-driven daily-focus todo app on your phone (max 3/day). View & add todos from any MCP client.",
+            "is_latest": true,
+            "name": "ai.lifeisagame/signal-not-noise",
+            "packages": [],
+            "query": "no",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://signal.lifeisagame.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.2",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "No implicit model fallback is allowed.",
+        "errors": [],
+        "queries": [
+          "no",
+          "implicit",
+          "model",
+          "fallback"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "OFFICIAL_MCP_REGISTRY",
+        "source_url": "https://registry.modelcontextprotocol.io"
+      }
+    ],
+    "schema": "PROJECT_BRAIN_FEDERATED_CAPABILITY_DISCOVERY_V1",
+    "sources": [
+      "APT_CATALOG",
+      "OFFICIAL_MCP_REGISTRY"
+    ]
+  },
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
+  "source": "FEDERATED_CAPABILITY_DISCOVERY_FALLBACK",
+  "targeted_acquisition_error": "AutoAcquisitionFailure:NO_LOW_FRICTION_APT_CLI_CANDIDATE"
+}

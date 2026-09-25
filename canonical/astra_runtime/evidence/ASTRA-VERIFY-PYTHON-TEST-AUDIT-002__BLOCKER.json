@@ -1,0 +1,17 @@
+{
+  "adapter": "shell",
+  "error": "VERIFICATION_FAILED",
+  "mission_id": "ASTRA-VERIFY-PYTHON-TEST-AUDIT-002",
+  "observed_at_utc": "2026-09-25T01:18:33.924856+00:00",
+  "result": {
+    "adapter": "shell",
+    "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\nroot=pathlib.Path('.').resolve()\np=root/'canonical/runtime/bound_capabilities/python_test_audit.py'\ns=importlib.util.spec_from_file_location('pta_verify',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nr=m.run({'source_root':'canonical/tests','pattern':'test_*.py','output_path':'canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT_VERIFY.json','timeout_s':180},root)\nprint(json.dumps(r,sort_keys=True)); print('PYTHON_TEST_AUDIT_ADAPTER_COMPLETE')\nPY",
+    "duration_s": 180.128,
+    "returncode": 1,
+    "stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 5, in <module>\n  File \"/home/runner/work/brain/brain/canonical/runtime/bound_capabilities/python_test_audit.py\", line 50, in run\n    proc=subprocess.run([sys.executable,str(path)],cwd=repo,text=True,capture_output=True,timeout=timeout_s)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/subprocess.py\", line 550, in run\n    stdout, stderr = process.communicate(input, timeout=timeout)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/subprocess.py\", line 1209, in communicate\n    stdout, stderr = self._communicate(input, endtime, timeout)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/subprocess.py\", line 2116, in _communicate\n    self._check_timeout(endtime, orig_timeout, stdout, stderr)\n  File \"/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/subprocess.py\", line 1253, in _check_timeout\n    raise TimeoutExpired(\nsubprocess.TimeoutExpired: Command '['/opt/hostedtoolcache/Python/3.12.14/x64/bin/python', '/home/runner/work/brain/brain/canonical/tests/test_astra_runtime_model_independence.py']' timed out after 180 seconds\n",
+    "stdout": ""
+  },
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "run-pending-test-audit",
+  "step_index": 0
+}

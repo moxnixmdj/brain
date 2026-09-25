@@ -1,0 +1,293 @@
+{
+  "attempts": [
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "55b89b156ca763693519ed5e7e926da94f679d25637f7b5e896df90e959dd9d0",
+        "executables": [
+          {
+            "executable": "/usr/bin/only",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "only (GNU Only) 0.0.6.0\n\nUsage:\n\n  only -w EXPR FILES...          Print words matching EXPR\n  only -l EXPR FILES...          Print lines matching EXPR\n  only -l EXPR -w WORD FILES...  Print words matching WORD from lines matching EXPR\n\nOptions:\n\n  -h, -?   --help          Help and usage\n  -V       --version       Verison number\n  -W EXPR  --wordsep=EXPR  Word seperator\n  -w EXPR  --words=EXPR    Word expression\n  -l EXPR  --lines=EXPR    Line expression\n\nExpressions:\n\n  The matching expressions [EXPR] are one of:\n\tNUMBER               Token (word/line) selection\n\t/REGEX/NUMBER        Token (word/line) relative to match (0-based, +/-)\n\tNUMBER/REGEX/        Select which matches to print (1-based, +)\n\tNUMBER/REGEX/NUMBER  Both\n\t/REGEX/:/REGEX/      Between two expressions\n\n  where [NUMBER] is one of:\n\tAT             One\n\tFROM:TO        Range\n\tFROM:TO;STEP   Range with step\n\tFROM;NEXT:TO   Range with implicit step\n\tL,I,S,T,I,N,G  Explicit listing"
+              }
+            ]
+          }
+        ],
+        "package": "only",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.0.6.0-2build5"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 40.0,
+        "archive_sha256": "55b89b156ca763693519ed5e7e926da94f679d25637f7b5e896df90e959dd9d0",
+        "binding_kind": "apt",
+        "description": "grep-like tool for filtering on words or lines",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "only"
+        ],
+        "name": "only",
+        "packages": [],
+        "query": "only",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 40,
+        "version": "0.0.6.0-2build5",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "ee411c506904d035ad2e1dcc884d0b6c3c8155b27019bdfe2ecccceccf843cca",
+        "executables": [],
+        "package": "ant-optional",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.10.14-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "ee411c506904d035ad2e1dcc884d0b6c3c8155b27019bdfe2ecccceccf843cca",
+        "binding_kind": "apt",
+        "description": "Java based build tool like make - optional libraries",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "optional"
+        ],
+        "name": "ant-optional",
+        "packages": [],
+        "query": "optional",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.10.14-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "b49300e7512fae637a729be360b0482702cc3fe55e26e873f34f1ccd06bd78e5",
+        "executables": [
+          {
+            "executable": "/usr/bin/ettercap",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "\u001b[1mettercap 0.8.3.1\u001b[0m copyright 2001-2020 Ettercap Development Team\n\n\nUsage: ettercap [OPTIONS] [TARGET1] [TARGET2]\n\nTARGET is in the format MAC/IP/IPv6/PORTs (see the man for further detail)\n\nSniffing and Attack options:\n  -M, --mitm <METHOD:ARGS>    perform a mitm attack\n  -o, --only-mitm             don't sniff, only perform the mitm attack\n  -b, --broadcast             sniff packets destined to broadcast\n  -B, --bridge <IFACE>        use bridged sniff (needs 2 ifaces)\n  -p, --nopromisc             do not put the iface in promisc mode\n  -S, --nosslmitm             do not forge SSL certificates\n  -u, --unoffensive           do not forward packets\n  -r, --read <file>           read data from pcapfile <file>\n  -f, --pcapfilter <string>   set the pcap filter <string>\n  -R, --reversed              use reversed TARGET matching\n  -t, --proto <proto>         sniff only this proto (default is all)\n      --certificate <file>    certificate file to use for SSL MiTM\n      --private-key <file>    private key file to use for SSL MiTM\n\nUser Interface Type:\n  -T, --text                  use text only GUI\n       -q, --quiet                 do not display packet contents\n       -s, --script <CMD>          issue these commands to the GUI\n  -C, --curses                use curses GUI\n  -D, --daemon                daemonize ettercap (no GUI)\n  -G, --gtk                   use GTK+ GUI\n\nLogging options:\n  -w, --write <file>          write sniffed data to pcapfile <file>\n  -L, --log <logfile>         log all the traffic to this <logfile>\n  -l, --log-info <logfile>    log only passive infos to this <logfile>\n  -m, --log-msg <logfile>     log all the messages to this <logfile>\n  -c, --compress              use gzip compression on log files\n\nVisualization options:\n  -d, --dns                   resolves ip addresses into hostnames\n  -V, --visual <format>       set the visualization format\n  -e, --regex <regex>         visualize only packets matching this regex\n  -E, --ext-headers           print extended header for every pck\n  -Q, --superquiet            do not display user and password\n\nLUA options:\n      --lua-script <script1>,[<script2>,...]     comma-separted list of LUA scripts\n      --lua-args n1=v1,[n2=v2,...]               comma-separated arguments to LUA script(s)\n\nGeneral options:\n  -i, --iface <iface>         use this network interface\n  -I, --liface                show all the network interfaces\n  -Y, --secondary <ifaces>    list of secondary network interfaces\n  -n, --netmask <netmask>     force this <netmask> on iface\n  -A, --address <address>     force this local <address> on iface\n  -P, --plugin <plugin>       launch this <plugin> - multiple occurance allowed\n      --plugin-list <plugin1>,[<plugin2>,...]       comma-separated list of plugins\n  -F, --filter <file>         load the filter <file> (content filter)\n  -z, --silent                do not perform the initial ARP scan\n  -6, --ip6scan               send ICMPv6 probes to discover IPv6 nodes on the link\n  -j, --load-hosts <file>     load the hosts list from <file>\n  -k, --save-hosts <file>     save the hosts list to <file>\n  -W, --wifi-key <wkey>       use this key to decrypt wifi packets (wep or wpa)\n  -a, --config <config>       use the alternative config file <config>\n\nStandard options:\n  -v, --version               prints the version and exit\n  -h, --help                  this help screen"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/etterfilter",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: etterfilter [OPTIONS] filterfile\n\nGeneral Options:\n  -o, --output <file>         output file (default is filter.ef)\n  -t, --test <file>           test the file (debug mode)\n  -d, --debug                 print some debug info while compiling\n  -w, --suppress-warnings     ignore warnings during compilation\n\nStandard Options:\n  -v, --version               prints the version and exit\n  -h, --help                  this help screen\n\n\n\n\u001b[1metterfilter 0.8.3.1\u001b[0m copyright 2001-2020 Ettercap Development Team"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/etterlog",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: etterlog [OPTIONS] logfile\n\nGeneral Options:\n  -a, --analyze               analyze a log file and return useful infos\n  -c, --connections           display the table of connections\n  -f, --filter <TARGET>       print packets only from this target\n  -t, --proto <proto>         display only this proto (default is all)\n  -F, --filcon <CONN>         print packets only from this connection \n  -s, --only-source           print packets only from the source\n  -d, --only-dest             print packets only from the destination\n  -r, --reverse               reverse the target/connection matching\n  -n, --no-headers            skip header information between packets\n  -m, --show-mac              show mac addresses in the headers\n  -k, --color                 colorize the output\n  -l, --only-local            show only local hosts parsing info files\n  -L, --only-remote           show only remote hosts parsing info files\n\nSearch Options:\n  -e, --regex <regex>         display only packets that match the regex\n  -u, --user <user>           search for info about the user <user>\n  -p, --passwords             print only accounts information\n  -i, --show-client           show client address in the password profiles\n  -I, --client <ip>           search for pass from a specific client\n\nEditing Options:\n  -C, --concat                concatenate more files into one single file\n  -o, --outfile <file>        the file used as output for concatenation\n  -D, --decode                used to extract files from connections\n\nVisualization Method:\n  -B, --binary                print packets as they are\n  -X, --hex                   print packets in hex mode\n  -A, --ascii                 print packets in ascii mode (default)\n  -T, --text                  print packets in text mode\n  -E, --ebcdic                print packets in ebcdic mode\n  -H, --html                  print packets in html mode\n  -U, --utf8 <encoding>       print packets in uft-8 using the <encoding>\n  -Z, --zero                  do not print packets, only headers\n  -x, --xml                   print host infos in xml format\n\nStandard Options:\n  -v, --version               prints the version and exit\n  -h, --help                  this help screen\n\n\n\n\u001b[1metterlog 0.8.3.1\u001b[0m copyright 2001-2020 Ettercap Development Team"
+              }
+            ]
+          }
+        ],
+        "package": "ettercap-text-only",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1:0.8.3.1-13build3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "b49300e7512fae637a729be360b0482702cc3fe55e26e873f34f1ccd06bd78e5",
+        "binding_kind": "apt",
+        "description": "Ettercap console-mode executable",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "only"
+        ],
+        "name": "ettercap-text-only",
+        "packages": [],
+        "query": "only",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:0.8.3.1-13build3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "3ed6f9d9c360be9154f3d7bcc3e3494b28d6ab1a25f05fb9f3d6fddfc8d15a1f",
+        "executables": [
+          {
+            "executable": "/usr/bin/gnome-model-thumbnailer",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 254,
+                "text": "gnome-model-thumnailer -s 128 -i INPUT -o OUTPUT"
+              }
+            ]
+          }
+        ],
+        "package": "gnome-model-thumbnailer",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0+git20240108+ds-2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "3ed6f9d9c360be9154f3d7bcc3e3494b28d6ab1a25f05fb9f3d6fddfc8d15a1f",
+        "binding_kind": "apt",
+        "description": "3d model thumbnailer for GNOME",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "model"
+        ],
+        "name": "gnome-model-thumbnailer",
+        "packages": [],
+        "query": "model",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0+git20240108+ds-2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "ca66f3be427b6cb63d131a6d7b94f96cf3bee584a1f3f93e188f3e89b4104ad0",
+        "executables": [],
+        "package": "node-prosemirror-model",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.16.1+~cs1.1.5-2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "ca66f3be427b6cb63d131a6d7b94f96cf3bee584a1f3f93e188f3e89b4104ad0",
+        "binding_kind": "apt",
+        "description": "ProseMirror's document model",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "model"
+        ],
+        "name": "node-prosemirror-model",
+        "packages": [],
+        "query": "model",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.16.1+~cs1.1.5-2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "537e1d505a0fc495ef2df0fb53459e0866a8c001e1595ff385977e3e17858ab4",
+        "executables": [],
+        "package": "node-read-only-stream",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "2.0.0-6"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "537e1d505a0fc495ef2df0fb53459e0866a8c001e1595ff385977e3e17858ab4",
+        "binding_kind": "apt",
+        "description": "Node.js read-only stream implementation",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "only"
+        ],
+        "name": "node-read-only-stream",
+        "packages": [],
+        "query": "only",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.0.0-6",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "b9fdeefcaaad847bb3d6a22a697d0cf5ebf843cb34ae1e3a2a63840f37d42762",
+        "executables": [],
+        "package": "node-route-recognizer",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.3.4+git.20200411.3de84ec-7"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "b9fdeefcaaad847bb3d6a22a697d0cf5ebf843cb34ae1e3a2a63840f37d42762",
+        "binding_kind": "apt",
+        "description": "library that matches paths against registered routes",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "route"
+        ],
+        "name": "node-route-recognizer",
+        "packages": [],
+        "query": "route",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.3.4+git.20200411.3de84ec-7",
+        "zero_cost_eligible": true
+      }
+    }
+  ],
+  "goal": "Use optional model route only because this step explicitly opts in.",
+  "mission_id": "UNKNOWN",
+  "role_conditioned_discovery": null,
+  "schema": "PROJECT_BRAIN_AUTO_APT_CLI_ACQUISITION_EVIDENCE_V1",
+  "status": "SUPPLIER_CONTRACT_RACE"
+}
