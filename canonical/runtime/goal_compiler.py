@@ -1332,6 +1332,64 @@ def _compile_independent_web_release_verification(subgoal, context_paths, regist
     }
 
 
+def _compile_browser_result_record_projection(subgoal, context_paths, root):
+    """Compile a deterministic projection from a verified browser result JSON.
+
+    Expected shape: create OUTPUT.json containing a top-level COLLECTION object
+    with exactly one record named ID whose status is CONSTANT and whose listed
+    fields come from the browser result.
+    """
+    m=re.match(
+        r"^create\s+([^\s]+\.json)\s+containing\s+a\s+top-level\s+"
+        r"([A-Za-z_][A-Za-z0-9_]*)\s+object\s+with\s+exactly\s+one\s+record\s+named\s+"
+        r"([A-Za-z0-9_.-]+)\s+whose\s+status\s+is\s+([A-Z][A-Z0-9_]{3,})\s+"
+        r"and\s+whose\s+(.+?)\s+values\s+come\s+from\s+the\s+browser\s+result$",
+        str(subgoal or "").strip(),re.IGNORECASE
+    )
+    if not m:
+        return None
+    output_path=m.group(1).strip(" .,:;")
+    collection=m.group(2)
+    record_id=m.group(3)
+    status=m.group(4).upper()
+    raw_fields=re.sub(r"\s+and\s+",", ",m.group(5),flags=re.IGNORECASE)
+    fields=[x.strip(" .,:;") for x in raw_fields.split(",") if x.strip(" .,:;")]
+    if not fields or len(fields)>32 or any(not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*",f) for f in fields):
+        return None
+    json_context=[
+        str(p) for p in context_paths
+        if pathlib.Path(str(p)).suffix.lower()==".json" and str(p)!=output_path
+    ]
+    if not json_context:
+        return None
+    source_path=json_context[-1]
+    action={
+      "type":"project_browser_result_json",
+      "args":{
+        "source_path":source_path,
+        "output_path":output_path,
+        "collection":collection,
+        "record_id":record_id,
+        "constants":{"status":status},
+        "fields":fields,
+      },
+      "expect":{"type":"field_equals","field":"verified","value":True},
+    }
+    return {
+      "action":action,
+      "output_path":output_path,
+      "evidence":{
+        "source_path":source_path,
+        "output_path":output_path,
+        "collection":collection,
+        "record_id":record_id,
+        "constant_status":status,
+        "projected_fields":fields,
+        "mode":"NATIVE_TYPED_BROWSER_RESULT_PROJECTION",
+      }
+    }
+
+
 def _compile_compound_goal(goal, clauses, registry, root):
     actions=[]
     compiled_parts=[]
@@ -1353,6 +1411,17 @@ def _compile_compound_goal(goal, clauses, registry, root):
                 "index":index,
                 "subgoal":clause,
                 **{k:v for k,v in part.items() if k not in {"index","subgoal"}},
+            })
+            continue
+
+        projection=_compile_browser_result_record_projection(clause,context_paths,root)
+        if projection is not None:
+            actions.append(projection["action"])
+            context_paths.append(projection["output_path"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"NATIVE_TYPED_BROWSER_RESULT_PROJECTION",
+                **projection["evidence"],
             })
             continue
         test_glob=_python_test_glob(clause,root)
