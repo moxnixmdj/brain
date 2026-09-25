@@ -106,6 +106,26 @@ class GoalCompilerTests(unittest.TestCase):
             self.assertEqual(inputs["markdown_path"],md_rel)
             self.assertEqual(inputs["output_path"],pdf_rel)
 
+    def test_structured_nested_record_selection_compiles_and_executes(self):
+        subgoal="Find the VERIFIED_BOUND_CAPABILITY whose source type is pypi"
+        out=compiler._compile_json_record_selection(
+            subgoal,
+            ["canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"],
+            self.registry(),
+            ROOT,
+        )
+        self.assertIsNotNone(out)
+        action=out["action"]
+        proc=subprocess.run(
+            ["jq",action["args"]["filter"],str(ROOT/action["args"]["input_path"])],
+            text=True,capture_output=True,timeout=20,
+        )
+        self.assertEqual(proc.returncode,0,proc.stderr)
+        selected=json.loads(proc.stdout)
+        self.assertEqual(selected["id"],"pdf.extract.text.pypdf")
+        self.assertEqual(selected["record"]["source"]["type"],"pypi")
+        self.assertEqual(selected["record"]["status"],"VERIFIED_BOUND_CAPABILITY")
+
     def test_json_status_manifest_compiles_and_executes(self):
         subgoal=(
             "Create canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_MANIFEST.json "
