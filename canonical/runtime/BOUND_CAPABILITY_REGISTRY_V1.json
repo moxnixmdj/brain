@@ -864,7 +864,21 @@
         "version_family": "3.x"
       },
       "incremental_spend_usd": 0,
-      "status": "BOUND_PENDING_INDEPENDENT_VERIFICATION"
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "mission_id": "ASTRA-VERIFY-PYTHON-TEST-AUDIT-005",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PYTHON-TEST-AUDIT-005__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-PYTHON-TEST-AUDIT-005.json",
+        "independently_verified": true,
+        "observed_effect": {
+          "files": 8,
+          "tests": 41,
+          "passed": 41,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
