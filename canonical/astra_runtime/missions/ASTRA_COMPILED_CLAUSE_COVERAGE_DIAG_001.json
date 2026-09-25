@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-COMPILED-CLAUSE-COVERAGE-DIAG-001",
+  "purpose": "Verify compiled plans account for every decomposed goal clause and fail closed on silent omissions.",
+  "steps": [
+    {
+      "id": "verify-clause-coverage",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/goal_compiler.py')\ns=importlib.util.spec_from_file_location('gc',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads(pathlib.Path('canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads(pathlib.Path('canonical/astra_runtime/missions/ASTRA_RUNTIME_FANOUT_XLSX_JOIN_004.json').read_text())['goal']\nout=m.compile_goal(goal,reg,pathlib.Path('.').resolve())\nassert out.get('clause_coverage_verified') is True,out\nclauses=out.get('clauses') or []\nparts=out.get('compiled_parts') or []\nassert sorted(p['index'] for p in parts)==list(range(len(clauses))),(clauses,parts)\nbad=dict(out); bad['compiled_parts']=[p for p in parts if p['index']!=5]\ntry:\n    m._validate_compiled_clause_coverage(bad)\nexcept m.GoalCompilationFailure as exc:\n    assert exc.code=='COMPILED_CLAUSE_COVERAGE_INCOMPLETE',exc\nelse:\n    raise AssertionError('MISSING_CLAUSE_WAS_ACCEPTED')\nprint('COMPILED_CLAUSE_COVERAGE_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPILED_CLAUSE_COVERAGE_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "read_only_diagnostic": true
+  }
+}
