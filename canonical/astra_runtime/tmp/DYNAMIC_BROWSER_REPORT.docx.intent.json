@@ -1,0 +1,6 @@
+{
+  "output_path": "canonical/astra_runtime/tmp/DYNAMIC_BROWSER_REPORT.docx",
+  "schema": "PROJECT_BRAIN_DOCUMENT_JSON_INTENT_V1",
+  "source_goal": "Create canonical/astra_runtime/tmp/DYNAMIC_BROWSER_REPORT.docx from that normalized JSON with title Browser Submission Report, paragraph Verified browser submission, and a two-column table with headers Field and Value containing one row for each of customer_name, size, topping, and final_url using their values from the normalized JSON",
+  "source_json_path": "canonical/astra_runtime/tmp/DYNAMIC_DOCX_NORMALIZED.json"
+}

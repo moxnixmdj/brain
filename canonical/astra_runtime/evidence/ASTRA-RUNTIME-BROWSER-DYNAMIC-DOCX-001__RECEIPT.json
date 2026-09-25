@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T03:39:49.229208+00:00",
+  "mission_id": "ASTRA-RUNTIME-BROWSER-DYNAMIC-DOCX-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_BROWSER_DYNAMIC_DOCX_001.json",
+  "mission_sha256": "bef94fe542a7ca8dfbfc2b957bba00906a3240ff1e92b7025a77952b8be164b2",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "c29e7a04cb9e498509e597e5dab32c34338ec68ba83f35f1e23297877ff52c39",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

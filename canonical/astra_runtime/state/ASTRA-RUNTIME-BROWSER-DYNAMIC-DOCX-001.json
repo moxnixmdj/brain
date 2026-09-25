@@ -1,21 +1,454 @@
 {
-  "blocker": {
-    "adapter": "goal",
-    "error": "RuntimeError:DOCUMENT_TABLE_ROW_WIDTH_MISMATCH",
-    "mission_id": "ASTRA-RUNTIME-BROWSER-DYNAMIC-DOCX-001",
-    "observed_at_utc": "2026-09-25T03:34:34.161302+00:00",
-    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
-    "step_id": "run-dynamic-browser-docx-goal",
-    "step_index": 0
-  },
+  "completed_at_utc": "2026-09-25T03:39:49.228391+00:00",
   "created_at_utc": "2026-09-25T03:34:11.875778+00:00",
-  "history": [],
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T03:39:49.227672+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "goal",
+        "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+        "cycles": 5,
+        "final_summary": "COMPOUND_GOAL_COMPLETE",
+        "goal_compilation": {
+          "clauses": [
+            "Using a real rendered browser, open https://httpbin.org/forms/post, enter PROJECT BRAIN into the customer name field, choose Medium pizza size, check the Bacon topping, submit the form, save a screenshot to canonical/astra_runtime/tmp/DYNAMIC_DOCX_BROWSER.png, and save the result to canonical/astra_runtime/tmp/DYNAMIC_DOCX_BROWSER.json",
+            "Create canonical/astra_runtime/tmp/DYNAMIC_DOCX_NORMALIZED.json containing a top-level submissions object with exactly one record named httpbin whose status is VERIFIED_BROWSER_SUBMISSION and whose customer_name, size, topping, and final_url values come from the browser result",
+            "Create canonical/astra_runtime/tmp/DYNAMIC_BROWSER_REPORT.docx from that normalized JSON with title Browser Submission Report, paragraph Verified browser submission, and a two-column table with headers Field and Value containing one row for each of customer_name, size, topping, and final_url using their values from the normalized JSON",
+            "Finally independently reopen the DOCX and verify every requested value matches the normalized JSON"
+          ],
+          "compiled_parts": [
+            {
+              "actions": [
+                {
+                  "target": "customer name",
+                  "type": "set_text",
+                  "value": "PROJECT BRAIN"
+                },
+                {
+                  "target": "size",
+                  "type": "select_option",
+                  "value": "Medium"
+                },
+                {
+                  "target": "Bacon",
+                  "type": "check"
+                },
+                {
+                  "type": "submit"
+                }
+              ],
+              "index": 0,
+              "mode": "VERIFIED_BROWSER_INTERACTION",
+              "result_path": "canonical/astra_runtime/tmp/DYNAMIC_DOCX_BROWSER.json",
+              "screenshot_path": "canonical/astra_runtime/tmp/DYNAMIC_DOCX_BROWSER.png",
+              "selected_capability": "web.browser.rendered.capture.chromedriver",
+              "subgoal": "Using a real rendered browser, open https://httpbin.org/forms/post, enter PROJECT BRAIN into the customer name field, choose Medium pizza size, check the Bacon topping, submit the form, save a screenshot to canonical/astra_runtime/tmp/DYNAMIC_DOCX_BROWSER.png, and save the result to canonical/astra_runtime/tmp/DYNAMIC_DOCX_BROWSER.json",
+              "url": "https://httpbin.org/forms/post",
+              "verification_mission_id": "ASTRA-VERIFY-BROWSER-INTERACTION-001"
+            },
+            {
+              "collection": "submissions",
+              "constant_status": "VERIFIED_BROWSER_SUBMISSION",
+              "index": 1,
+              "mode": "NATIVE_TYPED_BROWSER_RESULT_PROJECTION",
+              "output_path": "canonical/astra_runtime/tmp/DYNAMIC_DOCX_NORMALIZED.json",
+              "projected_fields": [
+                "customer_name",
+                "size",
+                "topping",
+                "final_url"
+              ],
+              "record_id": "httpbin",
+              "source_path": "canonical/astra_runtime/tmp/DYNAMIC_DOCX_BROWSER.json",
+              "subgoal": "Create canonical/astra_runtime/tmp/DYNAMIC_DOCX_NORMALIZED.json containing a top-level submissions object with exactly one record named httpbin whose status is VERIFIED_BROWSER_SUBMISSION and whose customer_name, size, topping, and final_url values come from the browser result"
+            },
+            {
+              "index": 2,
+              "inputs": {
+                "goal": "Create canonical/astra_runtime/tmp/DYNAMIC_BROWSER_REPORT.docx from that normalized JSON with title Browser Submission Report, paragraph Verified browser submission, and a two-column table with headers Field and Value containing one row for each of customer_name, size, topping, and final_url using their values from the normalized JSON",
+                "json_path": "canonical/astra_runtime/tmp/DYNAMIC_DOCX_NORMALIZED.json",
+                "output_path": "canonical/astra_runtime/tmp/DYNAMIC_BROWSER_REPORT.docx"
+              },
+              "mode": "VERIFIED_CAPABILITY",
+              "score": 56,
+              "selected_capability": "docx.document.create_from_json_record",
+              "subgoal": "Create canonical/astra_runtime/tmp/DYNAMIC_BROWSER_REPORT.docx from that normalized JSON with title Browser Submission Report, paragraph Verified browser submission, and a two-column table with headers Field and Value containing one row for each of customer_name, size, topping, and final_url using their values from the normalized JSON",
+              "target_effects": [
+                "docx.document.create_from_json_record"
+              ]
+            },
+            {
+              "index": 3,
+              "inputs": {
+                "docx_path": "canonical/astra_runtime/tmp/DYNAMIC_BROWSER_REPORT.docx"
+              },
+              "mode": "VERIFIED_CAPABILITY",
+              "score": 26,
+              "selected_capability": "docx.document.verify.intent_ooxml",
+              "subgoal": "Finally independently reopen the DOCX and verify every requested value matches the normalized JSON",
+              "target_effects": [
+                "docx.document.verify"
+              ]
+            }
+          ],
+          "compiler_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN"
+        },
+        "planner_model_last": null,
+        "planner_source": null,
+        "planner_transport": null,
+        "planning_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN",
+        "returncode": 0,
+        "stdout": "COMPOUND_GOAL_COMPLETE",
+        "trace": [
+          {
+            "cycle": 0,
+            "plan": {
+              "args": {
+                "actions": [
+                  {
+                    "target": "customer name",
+                    "type": "set_text",
+                    "value": "PROJECT BRAIN"
+                  },
+                  {
+                    "target": "size",
+                    "type": "select_option",
+                    "value": "Medium"
+                  },
+                  {
+                    "target": "Bacon",
+                    "type": "check"
+                  },
+                  {
+                    "type": "submit"
+                  }
+                ],
+                "capability_id": "web.browser.rendered.capture.chromedriver",
+                "result_path": "canonical/astra_runtime/tmp/DYNAMIC_DOCX_BROWSER.json",
+                "screenshot_path": "canonical/astra_runtime/tmp/DYNAMIC_DOCX_BROWSER.png",
+                "url": "https://httpbin.org/forms/post"
+              },
+              "expect": {
+                "field": "interaction_verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "actions_completed": 4,
+              "adapter": "browser_chromedriver_interact",
+              "capability_id": "web.browser.rendered.capture.chromedriver",
+              "dependency": {
+                "executable": "chromedriver",
+                "resolved_path": "/usr/bin/chromedriver",
+                "status": "LOCAL_VERIFIED",
+                "type": "system_tool"
+              },
+              "final_url": "https://httpbin.org/post",
+              "interaction_verified": true,
+              "output_verified": true,
+              "page_title": "",
+              "rendered": true,
+              "result_path": "canonical/astra_runtime/tmp/DYNAMIC_DOCX_BROWSER.json",
+              "screenshot_bytes": 81422,
+              "screenshot_path": "canonical/astra_runtime/tmp/DYNAMIC_DOCX_BROWSER.png",
+              "screenshot_sha256": "67695ce150dcaddca2c2425972a2e68a861a5e3d3f33713cb90a39a8a8d6994f",
+              "source_url": "https://httpbin.org/forms/post",
+              "text": "{\n  \"args\": {}, \n  \"data\": \"\", \n  \"files\": {}, \n  \"form\": {\n    \"comments\": \"\", \n    \"custemail\": \"\", \n    \"custname\": \"PROJECT BRAIN\", \n    \"custtel\": \"\", \n    \"delivery\": \"\", \n    \"size\": \"medium\", \n    \"topping\": \"bacon\"\n  }, \n  \"headers\": {\n    \"Accept\": \"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7\", \n    \"Accept-Encoding\": \"gzip, deflate, br, zstd\", \n    \"Accept-Language\": \"en-US,en;q=0.9\", \n    \"Cache-Control\": \"max-age=0\", \n    \"Content-Length\": \"88\", \n    \"Content-Type\": \"application/x-www-form-urlencoded\", \n    \"Host\": \"httpbin.org\", \n    \"Origin\": \"https://httpbin.org\", \n    \"Priority\": \"u=0, i\", \n    \"Referer\": \"https://httpbin.org/forms/post\", \n    \"Sec-Ch-Ua\": \"\\\"Google Chrome\\\";v=\\\"153\\\", \\\"Not_A Brand\\\";v=\\\"8\\\", \\\"Chromium\\\";v=\\\"153\\\"\", \n    \"Sec-Ch-Ua-Mobile\": \"?0\", \n    \"Sec-Ch-Ua-Platform\": \"\\\"Linux\\\"\", \n    \"Sec-Fetch-Dest\": \"document\", \n    \"Sec-Fetch-Mode\": \"navigate\", \n    \"Sec-Fetch-Site\": \"same-origin\", \n    \"Upgrade-Insecure-Requests\": \"1\", \n    \"User-Agent\": \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36\", \n    \"X-Amzn-Trace-Id\": \"Root=1-6ab5ecfc-73fac5282c041e083d9514e9\"\n  }, \n  \"json\": null, \n  \"origin\": \"172.184.211.68\", \n  \"url\": \"https://httpbin.org/post\"\n}\n"
+            }
+          },
+          {
+            "cycle": 1,
+            "plan": {
+              "args": {
+                "collection": "submissions",
+                "constants": {
+                  "status": "VERIFIED_BROWSER_SUBMISSION"
+                },
+                "fields": [
+                  "customer_name",
+                  "size",
+                  "topping",
+                  "final_url"
+                ],
+                "output_path": "canonical/astra_runtime/tmp/DYNAMIC_DOCX_NORMALIZED.json",
+                "record_id": "httpbin",
+                "source_path": "canonical/astra_runtime/tmp/DYNAMIC_DOCX_BROWSER.json"
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "project_browser_result_json"
+            },
+            "result": {
+              "collection": "submissions",
+              "fields": [
+                "customer_name",
+                "final_url",
+                "size",
+                "status",
+                "topping"
+              ],
+              "output_bytes": 233,
+              "output_path": "canonical/astra_runtime/tmp/DYNAMIC_DOCX_NORMALIZED.json",
+              "output_sha256": "843498d4e1e2de6c93962b6a00fbd71e46212b5a08e429d70e5b0ab93a415392",
+              "record": {
+                "customer_name": "PROJECT BRAIN",
+                "final_url": "https://httpbin.org/post",
+                "size": "Medium",
+                "status": "VERIFIED_BROWSER_SUBMISSION",
+                "topping": "bacon"
+              },
+              "record_id": "httpbin",
+              "source_path": "canonical/astra_runtime/tmp/DYNAMIC_DOCX_BROWSER.json",
+              "type": "project_browser_result_json",
+              "verified": true
+            }
+          },
+          {
+            "cycle": 2,
+            "plan": {
+              "args": {
+                "capability_id": "docx.document.create_from_json_record",
+                "goal": "Create canonical/astra_runtime/tmp/DYNAMIC_BROWSER_REPORT.docx from that normalized JSON with title Browser Submission Report, paragraph Verified browser submission, and a two-column table with headers Field and Value containing one row for each of customer_name, size, topping, and final_url using their values from the normalized JSON",
+                "json_path": "canonical/astra_runtime/tmp/DYNAMIC_DOCX_NORMALIZED.json",
+                "output_path": "canonical/astra_runtime/tmp/DYNAMIC_BROWSER_REPORT.docx"
+              },
+              "expect": {
+                "field": "output_verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "docx_report_from_json",
+              "capability_id": "docx.document.create_from_json_record",
+              "dependency": {
+                "origin": "Ubuntu",
+                "packages": [
+                  {
+                    "archive_sha256": "8dec367f86be44b86bb3c7329ccc6af165854008fd23e185f44500ece39bdb80",
+                    "name": "python3-docx",
+                    "version": "1.1.0+dfsg-2"
+                  }
+                ],
+                "status": "INSTALLED_VERIFIED"
+              },
+              "document_spec": {
+                "headers": [
+                  "Field",
+                  "Value"
+                ],
+                "paragraphs": [
+                  "Verified browser submission"
+                ],
+                "rows": [
+                  [
+                    "customer_name",
+                    "PROJECT BRAIN"
+                  ],
+                  [
+                    "size",
+                    "Medium"
+                  ],
+                  [
+                    "topping",
+                    "bacon"
+                  ],
+                  [
+                    "final_url",
+                    "https://httpbin.org/post"
+                  ]
+                ],
+                "title": "Browser Submission Report"
+              },
+              "fields": [
+                "customer_name",
+                "size",
+                "topping",
+                "final_url"
+              ],
+              "intent_path": "canonical/astra_runtime/tmp/DYNAMIC_BROWSER_REPORT.docx.intent.json",
+              "intent_sha256": "b5308c128841de22ed10a277421955b0d4d3542d9f1a565ae8dd3b71471c7dc3",
+              "output_bytes": 36864,
+              "output_path": "canonical/astra_runtime/tmp/DYNAMIC_BROWSER_REPORT.docx",
+              "output_sha256": "d5983129a5090a3438ca4f3bf8ba3263fecea9f29d11f36b45e024be82e31ec3",
+              "output_verified": true,
+              "rows": [
+                [
+                  "customer_name",
+                  "PROJECT BRAIN"
+                ],
+                [
+                  "size",
+                  "Medium"
+                ],
+                [
+                  "topping",
+                  "bacon"
+                ],
+                [
+                  "final_url",
+                  "https://httpbin.org/post"
+                ]
+              ],
+              "source_json_path": "canonical/astra_runtime/tmp/DYNAMIC_DOCX_NORMALIZED.json"
+            }
+          },
+          {
+            "cycle": 3,
+            "plan": {
+              "args": {
+                "capability_id": "docx.document.verify.intent_ooxml",
+                "path": "canonical/astra_runtime/tmp/DYNAMIC_BROWSER_REPORT.docx"
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "docx_verify_ooxml_intent",
+              "bytes": 36864,
+              "capability_id": "docx.document.verify.intent_ooxml",
+              "dependency": {
+                "modules": [
+                  "zipfile",
+                  "xml.etree.ElementTree"
+                ],
+                "python_version": "3.12.14",
+                "status": "LOCAL_VERIFIED",
+                "type": "python_stdlib"
+              },
+              "expected": {
+                "headers": [
+                  "Field",
+                  "Value"
+                ],
+                "paragraphs": [
+                  "Verified browser submission"
+                ],
+                "rows": [
+                  [
+                    "customer_name",
+                    "PROJECT BRAIN"
+                  ],
+                  [
+                    "size",
+                    "Medium"
+                  ],
+                  [
+                    "topping",
+                    "bacon"
+                  ],
+                  [
+                    "final_url",
+                    "https://httpbin.org/post"
+                  ]
+                ],
+                "title": "Browser Submission Report"
+              },
+              "intent_derived_expected": {
+                "headers": [
+                  "Field",
+                  "Value"
+                ],
+                "paragraphs": [
+                  "Verified browser submission"
+                ],
+                "rows": [
+                  [
+                    "customer_name",
+                    "PROJECT BRAIN"
+                  ],
+                  [
+                    "size",
+                    "Medium"
+                  ],
+                  [
+                    "topping",
+                    "bacon"
+                  ],
+                  [
+                    "final_url",
+                    "https://httpbin.org/post"
+                  ]
+                ],
+                "title": "Browser Submission Report"
+              },
+              "intent_path": "canonical/astra_runtime/tmp/DYNAMIC_BROWSER_REPORT.docx.intent.json",
+              "intent_source_goal": "Create canonical/astra_runtime/tmp/DYNAMIC_BROWSER_REPORT.docx from that normalized JSON with title Browser Submission Report, paragraph Verified browser submission, and a two-column table with headers Field and Value containing one row for each of customer_name, size, topping, and final_url using their values from the normalized JSON",
+              "observed_paragraphs": [
+                "Browser Submission Report",
+                "Verified browser submission"
+              ],
+              "observed_tables": [
+                [
+                  [
+                    "Field",
+                    "Value"
+                  ],
+                  [
+                    "customer_name",
+                    "PROJECT BRAIN"
+                  ],
+                  [
+                    "size",
+                    "Medium"
+                  ],
+                  [
+                    "topping",
+                    "bacon"
+                  ],
+                  [
+                    "final_url",
+                    "https://httpbin.org/post"
+                  ]
+                ]
+              ],
+              "paragraphs_ok": true,
+              "path": "canonical/astra_runtime/tmp/DYNAMIC_BROWSER_REPORT.docx",
+              "producer_independent_verifier": true,
+              "sha256": "d5983129a5090a3438ca4f3bf8ba3263fecea9f29d11f36b45e024be82e31ec3",
+              "source_json_path": "canonical/astra_runtime/tmp/DYNAMIC_DOCX_NORMALIZED.json",
+              "source_record_verified": true,
+              "table_ok": true,
+              "title_ok": true,
+              "verified": true
+            }
+          },
+          {
+            "cycle": 4,
+            "plan": {
+              "args": {
+                "summary": "COMPOUND_GOAL_COMPLETE"
+              },
+              "type": "finish"
+            },
+            "result": {
+              "summary": "COMPOUND_GOAL_COMPLETE",
+              "type": "finish"
+            }
+          }
+        ]
+      },
+      "step_id": "run-dynamic-browser-docx-goal",
+      "step_index": 0
+    }
+  ],
   "mission_id": "ASTRA-RUNTIME-BROWSER-DYNAMIC-DOCX-001",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_BROWSER_DYNAMIC_DOCX_001.json",
-  "mission_sha256": "561cf1b3cbcf9822259885d22a65fe0c5a192889108fcde7ec1e005719b27755",
-  "next_step": 0,
+  "mission_sha256": "bef94fe542a7ca8dfbfc2b957bba00906a3240ff1e92b7025a77952b8be164b2",
+  "next_step": 1,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
-  "status": "BLOCKED",
-  "updated_at_utc": "2026-09-25T03:34:34.161559+00:00"
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T03:39:49.227688+00:00"
 }
