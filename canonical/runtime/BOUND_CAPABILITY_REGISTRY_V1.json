@@ -622,6 +622,76 @@
           "requested_url": "https://pypi.org/pypi/pypdf/6.19.0/json"
         }
       }
+    },
+    "pypi.provenance.audit_live_artifact": {
+      "provides": [
+        "pypi.provenance.audit_live_artifact"
+      ],
+      "requires": [
+        "pypi.selection.available",
+        "pypi.live_metadata.available"
+      ],
+      "keywords": [
+        "verify",
+        "pypi",
+        "wheel",
+        "artifact",
+        "download",
+        "sha256",
+        "hash",
+        "metadata",
+        "provenance",
+        "live"
+      ],
+      "cost": 2,
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Supports canonical records whose source type is pypi and names an exact wheel filename/hash.",
+        "Uses authoritative live PyPI JSON metadata and downloads the exact recorded wheel over HTTPS.",
+        "Produces a report; final acceptance should be performed by a separate verifier."
+      ],
+      "adapter_module": "pypi_provenance_audit",
+      "entrypoint": "run",
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "pypi.provenance.audit_live_artifact",
+          "selection_path": "${input.selection_path}",
+          "metadata_path": "${input.metadata_path}",
+          "report_path": "${input.report_path}",
+          "max_bytes": 20000000,
+          "timeout_s": 60
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "verified",
+          "value": true
+        }
+      },
+      "source": {
+        "type": "python_stdlib",
+        "module": "urllib.request",
+        "adapter_path": "canonical/runtime/bound_capabilities/pypi_provenance_audit.py"
+      },
+      "incremental_spend_usd": 0,
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "mission_id": "ASTRA-VERIFY-PYPI-PROVENANCE-001",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PYPI-PROVENANCE-001__RECEIPT.json",
+        "independent_verifier": "curl",
+        "independent_report_assertion": true,
+        "observed_effect": {
+          "project": "pypdf",
+          "artifact_bytes": 395480,
+          "recorded_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14",
+          "live_metadata_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14",
+          "downloaded_artifact_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14"
+        }
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
