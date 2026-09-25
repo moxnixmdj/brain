@@ -811,6 +811,147 @@
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-PYTHON-TEST-AUDIT-005.json"
       }
     },
+    "sqlite.table.create_from_json_records": {
+      "action_template": {
+        "args": {
+          "capability_id": "sqlite.table.create_from_json_records",
+          "goal": "${input.goal}",
+          "json_path": "${input.json_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "sqlite_table_stdlib",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "sqlite",
+        "database",
+        "table",
+        "rows",
+        "columns",
+        "create"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "sqlite.table.create_from_json_records"
+      ],
+      "requires": [],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/sqlite_table_stdlib.py",
+        "module": "sqlite3",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independent_verifier_package": "sqlite3",
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-SQLITE-ROUNDTRIP-001",
+        "observed_effect": {
+          "adapter": "sqlite_table_stdlib",
+          "collection_path": [
+            "capabilities"
+          ],
+          "column_count": 5,
+          "columns": [
+            "capability_id",
+            "status",
+            "source_type",
+            "provides",
+            "incremental_spend_usd"
+          ],
+          "output_bytes": 8192,
+          "output_path": "canonical/astra_runtime/tmp/SQLITE_ROUNDTRIP_VERIFY.sqlite",
+          "output_sha256": "4e008aa49ec7ddc240d10011f9fea881e783f9f268e48aeafb59ffd7d6823b52",
+          "output_verified": true,
+          "row_count": 15,
+          "sqlite_version": "3.45.1",
+          "status_value": "VERIFIED_BOUND_CAPABILITY",
+          "table_name": "verified_capabilities"
+        },
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SQLITE-ROUNDTRIP-001__RESULT.json"
+      }
+    },
+    "sqlite.table.verify_against_json_records": {
+      "action_template": {
+        "args": {
+          "capability_id": "sqlite.table.verify_against_json_records",
+          "goal": "${input.goal}",
+          "json_path": "${input.json_path}",
+          "sqlite_path": "${input.sqlite_path}"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "sqlite_verify_cli",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "sqlite",
+        "database",
+        "table",
+        "rows",
+        "columns",
+        "verify",
+        "query",
+        "independently"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "sqlite.table.verify_against_json_records"
+      ],
+      "requires": [],
+      "source": {
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "sqlite3",
+            "sha256": "78493e56909614ec1d588c9fae1739a704d9e1a6ff65509b1f06c3e4d53ed0c3",
+            "version": "3.45.1-1ubuntu2.8"
+          }
+        ],
+        "type": "apt"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-SQLITE-ROUNDTRIP-001",
+        "observed_effect": {
+          "adapter": "sqlite_verify_cli",
+          "columns": [
+            "capability_id",
+            "status",
+            "source_type",
+            "provides",
+            "incremental_spend_usd"
+          ],
+          "producer_independent_verifier": true,
+          "sqlite_path": "canonical/astra_runtime/tmp/SQLITE_ROUNDTRIP_VERIFY.sqlite",
+          "sqlite_sha256": "4e008aa49ec7ddc240d10011f9fea881e783f9f268e48aeafb59ffd7d6823b52",
+          "status_value": "VERIFIED_BOUND_CAPABILITY",
+          "table_name": "verified_capabilities",
+          "verified": true,
+          "verified_rows": 15
+        },
+        "producer_source": "python_stdlib:sqlite3",
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SQLITE-ROUNDTRIP-001__RESULT.json"
+      }
+    },
     "xlsx.table.create_from_json_records": {
       "action_template": {
         "args": {

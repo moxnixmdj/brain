@@ -1,0 +1,42 @@
+{
+  "completed_at_utc": "2026-09-25T01:56:03.680111+00:00",
+  "created_at_utc": "2026-09-25T01:56:01.021597+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T01:56:03.639992+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython canonical/runtime/verify_sqlite_roundtrip.py canonical/astra_runtime/evidence/ASTRA-VERIFY-SQLITE-ROUNDTRIP-001__RESULT.json ASTRA-VERIFY-SQLITE-ROUNDTRIP-001",
+        "duration_s": 2.618,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "SQLITE_ROUNDTRIP_VERIFIED {\"producer_result\": {\"adapter\": \"sqlite_table_stdlib\", \"collection_path\": [\"capabilities\"], \"column_count\": 5, \"columns\": [\"capability_id\", \"status\", \"source_type\", \"provides\", \"incremental_spend_usd\"], \"output_bytes\": 8192, \"output_path\": \"canonical/astra_runtime/tmp/SQLITE_ROUNDTRIP_VERIFY.sqlite\", \"output_sha256\": \"4e008aa49ec7ddc240d10011f9fea881e783f9f268e48aeafb59ffd7d6823b52\", \"output_verified\": true, \"row_count\": 15, \"sqlite_version\": \"3.45.1\", \"status_value\": \"VERIFIED_BOUND_CAPABILITY\", \"table_name\": \"verified_capabilities\"}, \"producer_source\": {\"module\": \"sqlite3\", \"type\": \"python_stdlib\"}, \"producer_verifier_independent\": true, \"schema\": \"PROJECT_BRAIN_SQLITE_ROUNDTRIP_VERIFICATION_V1\", \"status\": \"VERIFIED\", \"verification_mission_id\": \"ASTRA-VERIFY-SQLITE-ROUNDTRIP-001\", \"verified\": true, \"verifier_package\": {\"name\": \"sqlite3\", \"sha256\": \"78493e56909614ec1d588c9fae1739a704d9e1a6ff65509b1f06c3e4d53ed0c3\", \"version\": \"3.45.1-1ubuntu2.8\"}, \"verifier_result\": {\"adapter\": \"sqlite_verify_cli\", \"columns\": [\"capability_id\", \"status\", \"source_type\", \"provides\", \"incremental_spend_usd\"], \"producer_independent_verifier\": true, \"sqlite_path\": \"canonical/astra_runtime/tmp/SQLITE_ROUNDTRIP_VERIFY.sqlite\", \"sqlite_sha256\": \"4e008aa49ec7ddc240d10011f9fea881e783f9f268e48aeafb59ffd7d6823b52\", \"status_value\": \"VERIFIED_BOUND_CAPABILITY\", \"table_name\": \"verified_capabilities\", \"verified\": true, \"verified_rows\": 15}}\n"
+      },
+      "step_id": "verify-independent-sqlite-roundtrip",
+      "step_index": 0
+    },
+    {
+      "completed_at_utc": "2026-09-25T01:56:03.673602+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython canonical/runtime/promote_sqlite_capabilities.py canonical/astra_runtime/evidence/ASTRA-VERIFY-SQLITE-ROUNDTRIP-001__RESULT.json",
+        "duration_s": 0.033,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "SQLITE_CAPABILITIES_PROMOTED\n"
+      },
+      "step_id": "promote-sqlite-capabilities",
+      "step_index": 1
+    }
+  ],
+  "mission_id": "ASTRA-VERIFY-SQLITE-ROUNDTRIP-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_SQLITE_ROUNDTRIP_001.json",
+  "mission_sha256": "534963d5dde2d0f5470c76f22049e5e01b112a6a350dd68c1ad108ef537e6423",
+  "next_step": 2,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T01:56:03.673615+00:00"
+}
