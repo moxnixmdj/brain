@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 import importlib.util, json, pathlib, re, sys, urllib.request
+from html.parser import HTMLParser
 
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 
@@ -8,6 +9,23 @@ def load_adapter():
     p=ROOT/"canonical/runtime/bound_capabilities/browser_chromedriver.py"
     s=importlib.util.spec_from_file_location("browser_verify_adapter",p)
     m=importlib.util.module_from_spec(s); s.loader.exec_module(m); return m
+
+class _TextExtractor(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.parts=[]
+    def handle_data(self,data):
+        if data and data.strip():
+            self.parts.append(data.strip())
+    def text(self):
+        return " ".join(self.parts)
+
+
+def html_text(raw_html):
+    p=_TextExtractor()
+    p.feed(raw_html)
+    return p.text()
+
 
 def stable_release(text):
     patterns=[
@@ -36,7 +54,8 @@ def main():
         raw=r.read(2_000_000)
         final=r.geturl()
     html=raw.decode("utf-8","replace")
-    independent,imatch=stable_release(html)
+    independent_text=html_text(html)
+    independent,imatch=stable_release(independent_text)
     if not independent:
         raise RuntimeError("INDEPENDENT_STABLE_RELEASE_NOT_FOUND")
     if independent!=version:
