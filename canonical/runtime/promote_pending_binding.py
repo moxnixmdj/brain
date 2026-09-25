@@ -46,6 +46,29 @@ def main():
       "autonomous_acquisition":True
     }
     caps[cid]=entry
+    promoted_related=[]
+    additional=pending.get("additional_registry_entries") or {}
+    if not isinstance(additional,dict):
+        raise RuntimeError("ADDITIONAL_REGISTRY_ENTRIES_INVALID")
+    for related_id,related_raw in sorted(additional.items()):
+        if not isinstance(related_id,str) or not isinstance(related_raw,dict):
+            raise RuntimeError("ADDITIONAL_REGISTRY_ENTRY_INVALID")
+        related=json.loads(json.dumps(related_raw))
+        prior_related=caps.get(related_id)
+        if isinstance(prior_related,dict) and prior_related.get("status")=="VERIFIED_BOUND_CAPABILITY":
+            if prior_related.get("source")!=related.get("source") or prior_related.get("action_template")!=related.get("action_template"):
+                raise RuntimeError("RELATED_CAPABILITY_ID_VERIFIED_CONFLICT")
+        related["status"]="VERIFIED_BOUND_CAPABILITY"
+        related["verification"]={
+          "mission_id":pending["verification_mission_id"],
+          "verification_result_path":str(verify_path.relative_to(ROOT)),
+          "observed_effect":verified.get("semantic_roundtrip") or verified.get("adapter_result"),
+          "independent_verified":True,
+          "autonomous_acquisition":True,
+          "promoted_with_primary_capability":cid
+        }
+        caps[related_id]=related
+        promoted_related.append(related_id)
     REGISTRY.write_text(json.dumps(registry,indent=2,sort_keys=True)+"\n",encoding="utf-8")
     original=_inside(pending["origin_mission_path"])
     if original.parent!=(ROOT/"canonical"/"astra_runtime"/"missions").resolve():
@@ -61,6 +84,6 @@ def main():
     pending["status"]="PROMOTED_VERIFIED"
     pending["verification_result_path"]=str(verify_path.relative_to(ROOT))
     pending_path.write_text(json.dumps(pending,indent=2,sort_keys=True)+"\n",encoding="utf-8")
-    print("PENDING_CAPABILITY_PROMOTED",cid)
+    print("PENDING_CAPABILITY_PROMOTED",cid,"RELATED",",".join(promoted_related))
 if __name__=="__main__":
     main()
