@@ -24,6 +24,7 @@
     "fresh_mission_identity": true,
     "reduce_runtime_commit": "caaf54174cebd1d17888ba8a781675c09d3a76f1",
     "reduce_compiler_commit": "af5bd8054df4c56d39735dcc01282d4947b69bbf",
-    "source_mission": "ASTRA-RUNTIME-MULTI-SOURCE-REDUCE-001"
+    "source_mission": "ASTRA-RUNTIME-MULTI-SOURCE-REDUCE-001",
+    "explicit_retrigger_after_compiler_receipt": "v1"
   }
 }
