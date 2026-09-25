@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-PYTHON-SOURCE-AUDIT-001",
+  "purpose": "Orthogonal real project mission: build and independently verify a structural inventory of the live Python runtime source tree without hand-authored parser/tool bindings.",
+  "goal": "Inspect every Python file under canonical/runtime. Create canonical/astra_runtime/tmp/PYTHON_RUNTIME_AUDIT.json containing one record per .py file with its repository-relative path, SHA-256, top-level imported module names, top-level function names, and top-level class names. Include totals for files, functions, classes, and distinct imported modules. Finally independently verify against the raw Python source files that every reported file exists, every reported SHA-256 matches its exact bytes, every reported top-level function and class is actually defined in that file, and fail if any Python file under canonical/runtime is missing from the audit.",
+  "steps": [
+    {
+      "id": "execute-python-runtime-source-audit",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 32,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "mandatory_model_planner": false,
+    "manual_target_effects": false,
+    "manual_initial_facts": false,
+    "manual_controller_actions": false,
+    "manual_supplier": false,
+    "manual_binding": false,
+    "real_project_artifact": true,
+    "final_effect_verification_required": true,
+    "orthogonal_pressure_family": "python_ast_multifile_inventory_hash_source_crosscheck"
+  }
+}
