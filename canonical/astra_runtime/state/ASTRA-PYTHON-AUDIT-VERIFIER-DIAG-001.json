@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T01:09:18.197558+00:00",
+  "created_at_utc": "2026-09-25T01:09:18.071200+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T01:09:18.197080+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/astra_runtime.py')\ns=importlib.util.spec_from_file_location('rt_py_diag',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nr=m._goal_action({'type':'assert_python_source_audit_supported_by_source','args':{'audit_path':'canonical/astra_runtime/tmp/PYTHON_RUNTIME_AUDIT.json','source_root':'canonical/runtime'}})\nprint(json.dumps(r,sort_keys=True)); print('PYTHON_AUDIT_VERIFIER_DIAG_COMPLETE')\nPY",
+        "duration_s": 0.126,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"audit_path\": \"canonical/astra_runtime/tmp/PYTHON_RUNTIME_AUDIT.json\", \"audit_sha256\": \"4dc3c64a4b189fabd4cc41d53a273693f38442640c241226a115bc1bf0d06dae\", \"class_count\": 0, \"distinct_imported_module_count\": 0, \"errors\": [\"parse:canonical/runtime/apt_cli_probe.py:NameError\", \"parse:canonical/runtime/astra_hidden_verifier.py:NameError\", \"parse:canonical/runtime/astra_hidden_visual_executor.py:NameError\", \"parse:canonical/runtime/astra_runtime.py:NameError\", \"parse:canonical/runtime/auto_apt_cli_acquisition.py:NameError\", \"parse:canonical/runtime/bound_capabilities/archive_tarfile.py:NameError\", \"parse:canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py:NameError\", \"parse:canonical/runtime/bound_capabilities/cli_command.py:NameError\", \"parse:canonical/runtime/bound_capabilities/http_json_fetch.py:NameError\", \"parse:canonical/runtime/bound_capabilities/jq_query.py:NameError\", \"parse:canonical/runtime/bound_capabilities/pandoc_weasyprint.py:NameError\", \"parse:canonical/runtime/bound_capabilities/pdf_ocr_tesseract.py:NameError\", \"parse:canonical/runtime/bound_capabilities/pdf_pypdf.py:NameError\", \"parse:canonical/runtime/bound_capabilities/pypi_provenance_audit.py:NameError\", \"parse:canonical/runtime/bound_capabilities/python_source_audit.py:NameError\", \"parse:canonical/runtime/bound_capabilities/qr_qrencode.py:NameError\", \"parse:canonical/runtime/bound_capabilities/yq_yaml_json.py:NameError\", \"parse:canonical/runtime/capability_discovery.py:NameError\", \"parse:canonical/runtime/capability_planner.py:NameError\", \"parse:canonical/runtime/capability_reality_auditor.py:NameError\", \"parse:canonical/runtime/cli_contract_inference.py:NameError\", \"parse:canonical/runtime/goal_compiler.py:NameError\", \"parse:canonical/runtime/mcp_tool_inspector.py:NameError\", \"parse:canonical/runtime/promote_pending_binding.py:NameError\", \"parse:canonical/runtime/raw_visual_cdp_preflight.py:NameError\", \"parse:canonical/runtime/verify_pending_cli_binding.py:NameError\", \"records_mismatch\", \"totals_mismatch\", \"imports_total_mismatch\"], \"file_count\": 0, \"function_count\": 0, \"source_root\": \"canonical/runtime\", \"type\": \"assert_python_source_audit_supported_by_source\", \"verified\": false}\nPYTHON_AUDIT_VERIFIER_DIAG_COMPLETE\n"
+      },
+      "step_id": "diagnose-python-source-verifier",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-PYTHON-AUDIT-VERIFIER-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_PYTHON_AUDIT_VERIFIER_DIAG_001.json",
+  "mission_sha256": "ce85ee17b3c5f4cb9e7a9b8617e1d392b3fc78297e93800d664799a807c48596",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T01:09:18.197102+00:00"
+}
