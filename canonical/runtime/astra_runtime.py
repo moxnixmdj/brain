@@ -905,7 +905,8 @@ def run_goal(step, mission):
         unresolved_marker="GOAL_COMPILATION_FAILED:GOAL_COMPILATION_SUBGOAL_UNRESOLVED:"
         is_no_match="GOAL_COMPILATION_FAILED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH" in error_text
         is_unresolved_subgoal=unresolved_marker in error_text
-        if is_unresolved_subgoal:
+        optional_planner=bool(step.get("allow_optional_model_planner",False))
+        if is_unresolved_subgoal and not optional_planner:
             raw=error_text.split(unresolved_marker,1)[1]
             try:
                 acquisition_goal=str(json.loads(raw).get("subgoal") or "").strip()
@@ -913,7 +914,7 @@ def run_goal(step, mission):
                 acquisition_goal=""
             if not acquisition_goal:
                 raise
-        if is_no_match or is_unresolved_subgoal:
+        if (is_no_match or is_unresolved_subgoal) and not optional_planner:
             mid=str(mission.get("mission_id") or "UNKNOWN")
             ep=EVID_DIR/f"{mid}__PLAIN_GOAL_CAPABILITY_DISCOVERY.json"
             auto=_load_auto_apt_cli_acquisition()
