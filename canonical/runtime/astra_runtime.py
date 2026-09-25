@@ -1378,23 +1378,32 @@ def run_goal(step, mission):
         if not step.get("allow_optional_model_planner",False):
             raise
     else:
-        if compiled.get("compiler_mode")=="DETERMINISTIC_COMPOUND_ACTION_PLAN":
+        controller_actions=compiled.get("controller_actions")
+        if controller_actions is not None:
+            if (
+                not isinstance(controller_actions,list)
+                or not controller_actions
+                or not all(isinstance(action,dict) for action in controller_actions)
+            ):
+                raise Blocker("COMPILED_CONTROLLER_ACTIONS_INVALID")
             derived=dict(step)
-            derived["controller_actions"]=compiled.get("controller_actions")
+            derived["controller_actions"]=controller_actions
             derived["max_controller_actions"]=max(
                 int(step.get("max_controller_actions",16)),
-                len(compiled.get("controller_actions") or [])
+                len(controller_actions)
             )
-            compound_result=_run_model_independent_goal(derived,mission,goal)
-            if compound_result is None:
-                raise Blocker("COMPOUND_GOAL_PLAN_EXECUTION_MISSING")
-            compound_result["planning_mode"]="DETERMINISTIC_COMPOUND_ACTION_PLAN"
-            compound_result["goal_compilation"]={
+            compiled_result=_run_model_independent_goal(derived,mission,goal)
+            if compiled_result is None:
+                raise Blocker("COMPILED_CONTROLLER_PLAN_EXECUTION_MISSING")
+            compiled_result["planning_mode"]=str(
+                compiled.get("compiler_mode") or "COMPILED_CONTROLLER_ACTION_PLAN"
+            )
+            compiled_result["goal_compilation"]={
               "compiler_mode":compiled.get("compiler_mode"),
               "clauses":compiled.get("clauses"),
               "compiled_parts":compiled.get("compiled_parts"),
             }
-            return compound_result
+            return compiled_result
 
         derived=dict(step)
         derived["capability_problem"]=compiled
