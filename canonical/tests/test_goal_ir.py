@@ -129,5 +129,37 @@ class GoalIRTests(unittest.TestCase):
         self.assertTrue(all(x["action"]["type"]!="shell" for x in problem["capabilities"]))
 
 
+    def test_real_browser_registry_entry_compiles_without_special_browser_handler(self):
+        import json
+        registry=json.loads(
+            (CANONICAL_ROOT/"runtime"/"BOUND_CAPABILITY_REGISTRY_V1.json").read_text(encoding="utf-8")
+        )["capabilities"]
+        goal="Open https://example.com in a rendered browser and save its screenshot and result."
+        ir={
+          "schema":"PROJECT_BRAIN_GOAL_IR_V1",
+          "goal_sha256":hashlib.sha256(goal.encode("utf-8")).hexdigest(),
+          "initial_facts":[],
+          "target_effects":["web.browser.rendered.capture"],
+          "inputs":{
+            "url":"https://example.com",
+            "screenshot_path":"canonical/astra_runtime/tmp/GOAL_IR_BROWSER.png",
+            "result_path":"canonical/astra_runtime/tmp/GOAL_IR_BROWSER.json"
+          },
+          "capability_allowlist":["web.browser.rendered.capture.chromedriver"],
+          "clauses":[{
+            "index":0,"start":0,"end":len(goal),"text":goal,
+            "target_effects":["web.browser.rendered.capture"]
+          }]
+        }
+        problem=goal_ir.build_capability_problem(goal,ir,registry)
+        out=planner.plan_actions(problem)
+        self.assertEqual(out["planning"]["plan"],["web.browser.rendered.capture.chromedriver"])
+        action=out["actions"][0]
+        self.assertEqual(action["type"],"invoke_capability")
+        self.assertEqual(action["args"]["url"],"https://example.com")
+        self.assertEqual(action["args"]["screenshot_path"],"canonical/astra_runtime/tmp/GOAL_IR_BROWSER.png")
+        self.assertEqual(action["args"]["result_path"],"canonical/astra_runtime/tmp/GOAL_IR_BROWSER.json")
+
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
