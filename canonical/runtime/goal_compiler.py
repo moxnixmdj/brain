@@ -2997,6 +2997,9 @@ def compile_goal(goal, registry, root):
     if browser_interaction is not None:
         return _validate_compiled_clause_coverage(browser_interaction)
     clauses=decompose_goal(goal)
+    multi_source_join=_compile_multi_source_join_goal(goal,clauses,registry,root)
+    if multi_source_join is not None:
+        return _validate_compiled_clause_coverage(multi_source_join)
     per_item_fallback=_compile_per_item_fallback_goal(goal,clauses,registry,root)
     if per_item_fallback is not None:
         return _validate_compiled_clause_coverage(per_item_fallback)
