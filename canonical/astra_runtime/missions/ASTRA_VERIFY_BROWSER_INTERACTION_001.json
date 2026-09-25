@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-VERIFY-BROWSER-INTERACTION-001",
+  "purpose": "Fresh effect verification of the backward-compatible declarative browser interaction path on the already verified Chromedriver substrate.",
+  "goal": "Verify rendered browser form interaction and post-submit state.",
+  "steps": [
+    {
+      "id": "execute-browser-interaction",
+      "adapter": "goal",
+      "controller_actions": [
+        {
+          "type": "invoke_capability",
+          "args": {
+            "capability_id": "web.browser.rendered.capture.chromedriver",
+            "url": "https://httpbin.org/forms/post",
+            "actions": [
+              {
+                "type": "set_text",
+                "target": "customer name",
+                "value": "PROJECT BRAIN"
+              },
+              {
+                "type": "select_option",
+                "target": "size",
+                "value": "Medium"
+              },
+              {
+                "type": "check",
+                "target": "Bacon"
+              },
+              {
+                "type": "submit"
+              }
+            ],
+            "screenshot_path": "canonical/astra_runtime/tmp/BROWSER_INTERACTION_VERIFY.png",
+            "result_path": "canonical/astra_runtime/tmp/BROWSER_INTERACTION_VERIFY.json"
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "interaction_verified",
+            "value": true
+          }
+        },
+        {
+          "type": "finish",
+          "args": {
+            "summary": "BROWSER_INTERACTION_EXECUTED"
+          }
+        }
+      ],
+      "max_controller_actions": 4,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "BROWSER_INTERACTION_EXECUTED"
+      }
+    },
+    {
+      "id": "independently-check-post-submit-state",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport json,pathlib\np=pathlib.Path('canonical/astra_runtime/tmp/BROWSER_INTERACTION_VERIFY.json')\nx=json.loads(p.read_text(encoding='utf-8'))\ntext=str(x.get('observed_text',''))\nneed=['PROJECT BRAIN','Medium','Bacon']\nmissing=[v for v in need if v.lower() not in text.lower()]\nif missing: raise SystemExit('POST_SUBMIT_VALUES_MISSING:'+','.join(missing))\ntrace=x.get('action_trace') or []\nif len(trace)!=4 or not all((r.get('result') or {}).get('ok') is True for r in trace):\n    raise SystemExit('ACTION_TRACE_INVALID')\nif not pathlib.Path('canonical/astra_runtime/tmp/BROWSER_INTERACTION_VERIFY.png').is_file():\n    raise SystemExit('SCREENSHOT_MISSING')\nprint('BROWSER_INTERACTION_EFFECT_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "BROWSER_INTERACTION_EFFECT_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "fresh_verification_invocation_required": true,
+    "promotion_not_implied_by_code_write": true
+  }
+}
