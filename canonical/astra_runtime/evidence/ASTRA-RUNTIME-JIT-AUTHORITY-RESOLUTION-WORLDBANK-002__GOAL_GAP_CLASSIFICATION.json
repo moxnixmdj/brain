@@ -1,0 +1,10 @@
+{
+  "capability_acquisition_allowed": false,
+  "compile_error": "GOAL_COMPILATION_FAILED:GOAL_COMPILATION_SUBGOAL_UNRESOLVED:{\"cause\": \"GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH\", \"cause_detail\": null, \"clauses\": [\"Find the authoritative World Bank source for indicator SP.POP.TOTL without being given either the authority domain or the source URL, independently verify the official authority site, render the discovered indicator source,\", \"verify that source is semantically relevant to SP.POP.TOTL\"], \"compiled_prefix\": [], \"context_paths\": [], \"index\": 0, \"subgoal\": \"Find the authoritative World Bank source for indicator SP.POP.TOTL without being given either the authority domain or the source URL, independently verify the official authority site, render the discovered indicator source,\"}",
+  "gap_class": "VERIFICATION",
+  "mission_id": "ASTRA-RUNTIME-JIT-AUTHORITY-RESOLUTION-WORLDBANK-002",
+  "observed_at_utc": "2026-09-25T21:20:08.055488+00:00",
+  "policy": "ONLY_CAPABILITY_CANDIDATE_MAY_TRIGGER_EXTERNAL_CAPABILITY_ACQUISITION",
+  "schema": "PROJECT_BRAIN_GOAL_GAP_CLASSIFICATION_V1",
+  "subgoal": "Find the authoritative World Bank source for indicator SP.POP.TOTL without being given either the authority domain or the source URL, independently verify the official authority site, render the discovered indicator source,"
+}

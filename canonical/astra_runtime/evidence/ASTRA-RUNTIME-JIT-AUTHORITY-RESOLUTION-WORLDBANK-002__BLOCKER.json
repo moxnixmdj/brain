@@ -1,0 +1,9 @@
+{
+  "adapter": "goal",
+  "error": "Blocker:GOAL_ARCHITECTURAL_GAP:{\"capability_acquisition_attempted\": false, \"evidence_path\": \"canonical/astra_runtime/evidence/ASTRA-RUNTIME-JIT-AUTHORITY-RESOLUTION-WORLDBANK-002__GOAL_GAP_CLASSIFICATION.json\", \"gap_class\": \"VERIFICATION\", \"subgoal\": \"Find the authoritative World Bank source for indicator SP.POP.TOTL without being given either the authority domain or the source URL, independently verify the official authority site, render the discovered indicator source,\"}",
+  "mission_id": "ASTRA-RUNTIME-JIT-AUTHORITY-RESOLUTION-WORLDBANK-002",
+  "observed_at_utc": "2026-09-25T21:20:08.055816+00:00",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "plain-authority-and-source",
+  "step_index": 0
+}
