@@ -1,0 +1,9 @@
+{
+  "adapter": "goal",
+  "error": "Blocker:MODEL_INDEPENDENT_ACTION_ERROR:AUTHORITATIVE_SOURCE_NOT_DISCOVERED",
+  "mission_id": "ASTRA-RUNTIME-JIT-SOURCE-DISCOVERY-WORLDBANK-001",
+  "observed_at_utc": "2026-09-25T20:56:03.687229+00:00",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "discover-and-verify-authoritative-source",
+  "step_index": 0
+}
