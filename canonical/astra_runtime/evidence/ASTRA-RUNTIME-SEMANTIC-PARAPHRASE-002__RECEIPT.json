@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T17:30:55.963057+00:00",
+  "mission_id": "ASTRA-RUNTIME-SEMANTIC-PARAPHRASE-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_SEMANTIC_PARAPHRASE_002.json",
+  "mission_sha256": "2507e1beec1f3d1c206249dd7e593250efa23e0d59efd93c10a95906d19f21c2",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "c302a28e700059b904f7a0c545dd236cb67a51676699ac4c083f4647927a00c9",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
