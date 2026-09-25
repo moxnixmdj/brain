@@ -19,6 +19,8 @@
     "incremental_spend_usd": 0,
     "model_controller_required": false,
     "fresh_mission_identity": true,
-    "prior_exact_low_high_rule_not_sufficient": true
+    "prior_exact_low_high_rule_not_sufficient": true,
+    "replay_after_canonical_branch_commit": "9b16519c902ce7613d488ab45593e0849d2e8869",
+    "replay_after_dynamic_set_verifier_commit": "c741779616fcb09ce2cb28fe5aedeec737519793"
   }
 }
