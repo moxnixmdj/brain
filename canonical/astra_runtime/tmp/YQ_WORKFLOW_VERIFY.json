@@ -1,0 +1,74 @@
+{
+  "concurrency": {
+    "cancel-in-progress": false,
+    "group": "astra-shared-runtime-${{ github.sha }}"
+  },
+  "jobs": {
+    "run-mission": {
+      "runs-on": "ubuntu-24.04",
+      "steps": [
+        {
+          "uses": "actions/checkout@v4",
+          "with": {
+            "fetch-depth": 2,
+            "ref": "${{ github.sha }}"
+          }
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "with": {
+            "python-version": "3.12"
+          }
+        },
+        {
+          "env": {
+            "DISPATCH_MISSION_PATH": "${{ inputs.mission_path }}"
+          },
+          "id": "mission",
+          "name": "Resolve exact mission",
+          "run": "set -euo pipefail\nif [ \"${{ github.event_name }}\" = \"workflow_dispatch\" ]; then\n  MISSION=\"$DISPATCH_MISSION_PATH\"\n  case \"$MISSION\" in\n    canonical/astra_runtime/missions/*.json) ;;\n    *)\n      echo \"Rejected non-canonical dispatched mission path: $MISSION\" >&2\n      exit 41\n      ;;\n  esac\n  git ls-files --error-unmatch \"$MISSION\" >/dev/null\nelse\n  mapfile -t MISSIONS < <(\n    git diff-tree --no-commit-id --name-only -r \"$GITHUB_SHA\" |\n    grep '^canonical/astra_runtime/missions/.*\\.json$'\n  )\n  if [ \"${#MISSIONS[@]}\" -ne 1 ]; then\n    printf 'Expected exactly one changed mission, got %s\\n' \"${#MISSIONS[@]}\" >&2\n    printf '%s\\n' \"${MISSIONS[@]:-}\" >&2\n    exit 40\n  fi\n  MISSION=\"${MISSIONS[0]}\"\nfi\necho \"path=$MISSION\" >> \"$GITHUB_OUTPUT\"\necho \"ASTRA_RUNTIME_MISSION_PATH=$MISSION\"\npython - \"$MISSION\" <<'PY'\nimport json, pathlib, sys\np = pathlib.Path(sys.argv[1])\nx = json.loads(p.read_text(encoding=\"utf-8\"))\nif x.get(\"schema\") != \"PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1\":\n    raise SystemExit(\"invalid mission schema\")\nprint(\"ASTRA_RUNTIME_MISSION_ID=\" + x[\"mission_id\"])\nPY\n",
+          "shell": "bash"
+        },
+        {
+          "name": "Execute shared runtime mission",
+          "run": "set -euo pipefail\npython canonical/runtime/astra_runtime.py \"${{ steps.mission.outputs.path }}\"\n",
+          "shell": "bash"
+        },
+        {
+          "env": {
+            "GH_TOKEN": "${{ github.token }}"
+          },
+          "if": "always()",
+          "name": "Persist runtime state, evidence, and continuation missions",
+          "run": "set -euo pipefail\ngit config user.name \"Project Brain ASTRA Runtime\"\ngit config user.email \"project-brain-astra-runtime@users.noreply.github.com\"\ngit add -A canonical/astra_runtime\n\n# Registry mutation is allowed only for missions that explicitly\n# declare it. Runtime/source code remains unstaged and immutable.\nMISSION=\"${{ steps.mission.outputs.path }}\"\nif python - \"$MISSION\" <<'PY'\nimport json,sys\nx=json.load(open(sys.argv[1],encoding=\"utf-8\"))\nraise SystemExit(0 if (x.get(\"constraints\") or {}).get(\"allow_registry_mutation\") is True else 1)\nPY\nthen\n  git add canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json\nfi\n\n# Runtime-generated mission files are continuation edges. Capture\n# them before committing, then explicitly dispatch them after the\n# durable push. A push made with GITHUB_TOKEN does not wake another\n# push-triggered Actions run.\nmapfile -t CONTINUATIONS < <(\n  git diff --cached --name-only |\n  grep '^canonical/astra_runtime/missions/.*\\.json$' |\n  grep -vxF \"$MISSION\" || true\n)\n\nif ! git diff --cached --quiet; then\n  git commit -m \"Record ASTRA shared runtime mission execution\"\n  PUSHED=0\n  for attempt in 1 2 3 4 5; do\n    git fetch origin main\n    git rebase origin/main\n    if git push origin HEAD:main; then\n      PUSHED=1\n      break\n    fi\n    sleep $((attempt * 2))\n  done\n  if [ \"$PUSHED\" -ne 1 ]; then\n    echo \"Failed to persist ASTRA runtime evidence after 5 push attempts\" >&2\n    exit 52\n  fi\nfi\n\nfor NEXT in \"${CONTINUATIONS[@]:-}\"; do\n  [ -n \"$NEXT\" ] || continue\n  echo \"Dispatching ASTRA continuation: $NEXT\"\n  gh workflow run astra-shared-runtime.yml --ref main -f mission_path=\"$NEXT\"\ndone\n",
+          "shell": "bash"
+        }
+      ],
+      "timeout-minutes": 10
+    }
+  },
+  "name": "ASTRA Shared Runtime Mission",
+  "on": {
+    "push": {
+      "branches": [
+        "main"
+      ],
+      "paths": [
+        "canonical/astra_runtime/missions/**.json"
+      ]
+    },
+    "workflow_dispatch": {
+      "inputs": {
+        "mission_path": {
+          "description": "Canonical ASTRA mission path to execute",
+          "required": true,
+          "type": "string"
+        }
+      }
+    }
+  },
+  "permissions": {
+    "actions": "write",
+    "contents": "write"
+  }
+}

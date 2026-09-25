@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T00:51:36.042124+00:00",
+  "mission_id": "ASTRA-VERIFY-YAML-JSON-YQ-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_YAML_JSON_YQ_001.json",
+  "mission_sha256": "debc2bde63b3a701a58d8d3c5f64d0590b975335b0e425319b7969ad2badd621",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "ecb90e1076f0e71197818be9481838f4d8861df12d04bf618a7e4fb547cefe5e",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

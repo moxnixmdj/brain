@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T00:51:36.041840+00:00",
+  "created_at_utc": "2026-09-25T00:51:30.368836+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T00:51:36.041529+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\nsudo apt-get install -y --no-install-recommends 'yq=3.1.0-3' >/dev/null\npython - <<'PY'\nimport hashlib,importlib.util,json,pathlib,re,sys\nroot=pathlib.Path('.').resolve()\np=root/'canonical/runtime/bound_capabilities/yq_yaml_json.py'\ns=importlib.util.spec_from_file_location('yq_verify',p); m=importlib.util.module_from_spec(s); sys.modules[s.name]=m; s.loader.exec_module(m)\nsrc='.github/workflows/astra-shared-runtime.yml'\nout='canonical/astra_runtime/tmp/YQ_WORKFLOW_VERIFY.json'\nres=m.run({'yaml_path':src,'output_path':out},root)\ndata=json.loads((root/out).read_text(encoding='utf-8'))\nraw=(root/src).read_text(encoding='utf-8')\nassert data['name']=='ASTRA Shared Runtime Mission'\nassert re.search(r'(?m)^name:\\s*ASTRA Shared Runtime Mission\\s*$',raw)\njobs=data.get('jobs') or {}; assert jobs\nfor job_id in jobs:\n assert re.search(r'(?m)^  '+re.escape(job_id)+r':\\s*$',raw),job_id\nuses=[]\nfor job in jobs.values():\n for step in job.get('steps') or []:\n  if isinstance(step,dict) and step.get('uses'): uses.append(str(step['uses']))\nassert uses\nfor ref in uses:\n assert re.search(r'(?m)^\\s*-?\\s*uses:\\s*'+re.escape(ref)+r'\\s*$',raw),ref\nassert 'workflow_dispatch' in (data.get('on') or {})\nprint(json.dumps({'adapter_result':res,'workflow_name':data['name'],'job_ids':sorted(jobs),'uses':uses,'raw_source_sha256':hashlib.sha256(raw.encode()).hexdigest(),'independent_raw_support':True},sort_keys=True))\nprint('YQ_YAML_JSON_INDEPENDENTLY_VERIFIED')\nPY",
+        "duration_s": 5.673,
+        "returncode": 0,
+        "stderr": "\nRunning kernel seems to be up-to-date.\n\nNo services need to be restarted.\n\nNo containers need to be restarted.\n\nNo user sessions are running outdated binaries.\n\nNo VM guests are running outdated hypervisor (qemu) binaries on this host.\n",
+        "stdout": "{\"adapter_result\": {\"adapter\": \"yq_yaml_json\", \"input_path\": \".github/workflows/astra-shared-runtime.yml\", \"input_sha256\": \"34ec38e5e55a2fc3e2661fe52eb84b0eaf61b09126729180ffbc22eb068f46ac\", \"output_bytes\": 4629, \"output_path\": \"canonical/astra_runtime/tmp/YQ_WORKFLOW_VERIFY.json\", \"output_sha256\": \"23c812aa8aa6e6ebd0e8674d15bd9994fa00674f46afd002704e2f7624c64f13\", \"output_verified\": true, \"top_level_type\": \"dict\"}, \"independent_raw_support\": true, \"job_ids\": [\"run-mission\"], \"raw_source_sha256\": \"34ec38e5e55a2fc3e2661fe52eb84b0eaf61b09126729180ffbc22eb068f46ac\", \"uses\": [\"actions/checkout@v4\", \"actions/setup-python@v5\"], \"workflow_name\": \"ASTRA Shared Runtime Mission\"}\nYQ_YAML_JSON_INDEPENDENTLY_VERIFIED\n"
+      },
+      "step_id": "verify-yq-adapter",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-VERIFY-YAML-JSON-YQ-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_YAML_JSON_YQ_001.json",
+  "mission_sha256": "debc2bde63b3a701a58d8d3c5f64d0590b975335b0e425319b7969ad2badd621",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T00:51:36.041544+00:00"
+}
