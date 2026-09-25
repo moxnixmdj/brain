@@ -1,0 +1,28 @@
+{
+  "auto_acquisition": {
+    "acquisition_evidence_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-PYPI-ACQUIRE-MSGPACK-002__AUTO_PYPI_LIBRARY_ACQUISITION.json",
+    "capability_id": "auto.pypi.msgpack",
+    "keywords": [
+      "encode",
+      "messagepack",
+      "msgpack",
+      "those",
+      "exact",
+      "records"
+    ],
+    "pending_binding_path": "canonical/astra_runtime/pending_bindings/ASTRA-RUNTIME-PYPI-ACQUIRE-MSGPACK-002__msgpack__9f0974d98983.json",
+    "status": "ACQUISITION_DISPATCHED",
+    "supplier": "msgpack",
+    "supplier_class": "pypi_python_library",
+    "verification_mission_id": "ASTRA-AUTO-VERIFY-PYPI-MSGPACK-9F0974D98983",
+    "verification_mission_path": "canonical/astra_runtime/missions/ASTRA_AUTO_VERIFY_PYPI_MSGPACK_9F0974D98983.json"
+  },
+  "binding_performed": false,
+  "goal": "Encode those exact records as MessagePack and save canonical/astra_runtime/tmp/MSGPACK_RECORDS.msgpack",
+  "mission_id": "ASTRA-RUNTIME-PYPI-ACQUIRE-MSGPACK-002",
+  "observed_at_utc": "2026-09-25T18:36:55.711969+00:00",
+  "result": null,
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
+  "source": "TARGETED_AUTO_ACQUISITION",
+  "status": "AUTO_ACQUISITION_DISPATCHED"
+}
