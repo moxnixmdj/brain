@@ -26,6 +26,7 @@
     "real_external_truth_required": true,
     "authoritative_source_required": true,
     "final_effect_verification_required": true,
-    "orthogonal_pressure_family": "live_network_metadata_binary_hash_provenance"
+    "orthogonal_pressure_family": "live_network_metadata_binary_hash_provenance",
+    "replay_after_full_live_provenance_composition_commit": "3a5cb998a297e623d7b17bac9ccb85c67263d8fa"
   }
 }
