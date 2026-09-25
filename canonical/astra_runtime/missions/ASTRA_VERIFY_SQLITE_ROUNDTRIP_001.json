@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-VERIFY-SQLITE-ROUNDTRIP-001",
+  "purpose": "Fresh independent verification and promotion of reusable SQLite table creation and semantic query capabilities.",
+  "goal": "Create the SQLite artifact with Python stdlib sqlite3, independently verify it with the hash-pinned sqlite3 CLI, and promote only if schema, IDs, values, row count, file hash, and integrity all agree with canonical JSON.",
+  "steps": [
+    {
+      "id": "verify-independent-sqlite-roundtrip",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/runtime/verify_sqlite_roundtrip.py canonical/astra_runtime/evidence/ASTRA-VERIFY-SQLITE-ROUNDTRIP-001__RESULT.json ASTRA-VERIFY-SQLITE-ROUNDTRIP-001",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "SQLITE_ROUNDTRIP_VERIFIED"
+      }
+    },
+    {
+      "id": "promote-sqlite-capabilities",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/runtime/promote_sqlite_capabilities.py canonical/astra_runtime/evidence/ASTRA-VERIFY-SQLITE-ROUNDTRIP-001__RESULT.json",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "SQLITE_CAPABILITIES_PROMOTED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "fresh_verification_invocation_required": true,
+    "producer_verifier_independence_required": true,
+    "allow_registry_mutation": true,
+    "producer": "python_stdlib:sqlite3",
+    "verifier_package": "sqlite3@3.45.1-1ubuntu2.8"
+  }
+}
