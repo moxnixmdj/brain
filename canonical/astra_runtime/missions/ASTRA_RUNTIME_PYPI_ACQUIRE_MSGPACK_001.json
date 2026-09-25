@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-PYPI-ACQUIRE-MSGPACK-001",
+  "purpose": "Pressure-test autonomous acquisition of a missing Python-library capability from PyPI rather than an APT CLI.",
+  "goal": "Create canonical/astra_runtime/tmp/MSGPACK_SOURCE.json containing exactly three records with fields id and text: 1 alpha, 2 beta, 3 gamma. Encode those exact records as MessagePack and save canonical/astra_runtime/tmp/MSGPACK_RECORDS.msgpack. Independently decode the MessagePack artifact and verify the decoded records are exactly identical to canonical/astra_runtime/tmp/MSGPACK_SOURCE.json in values, order, field names, and record count.",
+  "steps": [
+    {
+      "id": "run-pypi-acquisition-pressure",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 20,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "manual_supplier": false,
+    "manual_binding": false,
+    "external_python_library_acquisition_allowed": true,
+    "apt_cli_is_not_a_valid_substitute_for_python_library_binding": true,
+    "independent_semantic_verification_required": true
+  }
+}
