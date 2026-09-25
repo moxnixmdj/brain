@@ -106,6 +106,21 @@ class GoalCompilerTests(unittest.TestCase):
             self.assertEqual(inputs["markdown_path"],md_rel)
             self.assertEqual(inputs["output_path"],pdf_rel)
 
+    def test_context_url_json_fetch_compiles_from_prior_structured_state(self):
+        subgoal="Fetch that project's authoritative live PyPI metadata from the metadata URL recorded in the registry"
+        out=compiler._compile_context_url_json_fetch(
+            subgoal,
+            ["canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json","canonical/astra_runtime/tmp/STRUCTURED_SELECTION_TEST.json"],
+            self.registry(),
+            ROOT,
+        )
+        self.assertIsNotNone(out)
+        action=out["action"]
+        self.assertEqual(action["args"]["capability_id"],"http.json.fetch_from_state")
+        self.assertEqual(action["args"]["source_json_path"],"canonical/astra_runtime/tmp/STRUCTURED_SELECTION_TEST.json")
+        self.assertEqual(action["args"]["url_key"],"metadata_url")
+        self.assertTrue(action["args"]["output_path"].endswith(".json"))
+
     def test_structured_nested_record_selection_compiles_and_executes(self):
         subgoal="Find the VERIFIED_BOUND_CAPABILITY whose source type is pypi"
         out=compiler._compile_json_record_selection(
