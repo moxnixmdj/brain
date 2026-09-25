@@ -1953,6 +1953,63 @@ def _controller_actions(step, mission):
         raise Blocker("MODEL_INDEPENDENT_CONTROLLER_ACTION_LIMIT")
     return actions
 
+def _controller_checkpoint_path(step,mission):
+    mid=re.sub(r"[^A-Za-z0-9_.-]+","_",str(mission.get("mission_id") or "UNKNOWN"))
+    sid=re.sub(r"[^A-Za-z0-9_.-]+","_",str(step.get("id") or step.get("step_id") or "goal"))
+    return STATE_DIR/f"{mid}__{sid}__CONTROLLER_CHECKPOINT.json"
+
+
+def _controller_plan_sha256(actions):
+    raw=json.dumps(actions,sort_keys=True,separators=(",",":"),ensure_ascii=False).encode("utf-8")
+    return hashlib.sha256(raw).hexdigest()
+
+
+def _load_controller_checkpoint(step,mission,actions):
+    path=_controller_checkpoint_path(step,mission)
+    plan_sha=_controller_plan_sha256(actions)
+    if not path.is_file():
+        return path,{
+          "schema":"PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+          "mission_id":mission.get("mission_id"),
+          "step_id":step.get("id") or step.get("step_id") or "goal",
+          "plan_sha256":plan_sha,
+          "status":"IN_PROGRESS",
+          "completed_actions":[],
+          "next_action_index":0,
+          "resume_count":0,
+          "test_interrupt_injected":False,
+          "created_at_utc":utc(),
+          "updated_at_utc":utc(),
+        },False
+    data=readj(path)
+    if data.get("schema")!="PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1":
+        raise Blocker("CONTROLLER_CHECKPOINT_SCHEMA_INVALID")
+    if data.get("plan_sha256")!=plan_sha:
+        raise Blocker("CONTROLLER_CHECKPOINT_PLAN_HASH_MISMATCH")
+    completed=data.get("completed_actions")
+    if not isinstance(completed,list) or len(completed)>len(actions):
+        raise Blocker("CONTROLLER_CHECKPOINT_TRACE_INVALID")
+    expected=list(range(len(completed)))
+    observed=[x.get("cycle") for x in completed if isinstance(x,dict)]
+    if observed!=expected:
+        raise Blocker("CONTROLLER_CHECKPOINT_SEQUENCE_INVALID")
+    data["resume_count"]=int(data.get("resume_count") or 0)+1
+    data["next_action_index"]=len(completed)
+    data["updated_at_utc"]=utc()
+    writej(path,data)
+    return path,data,True
+
+
+def _write_controller_checkpoint(path,data,trace,status="IN_PROGRESS"):
+    data=dict(data)
+    data["completed_actions"]=trace
+    data["next_action_index"]=len(trace)
+    data["status"]=status
+    data["updated_at_utc"]=utc()
+    writej(path,data)
+    return data
+
+
 def _run_model_independent_goal(step, mission, goal):
     actions=_controller_actions(step, mission)
     if actions is None:
@@ -1965,8 +2022,11 @@ def _run_model_independent_goal(step, mission, goal):
       "assert_python_test_audit_zero","assert_python_test_audit_supported_by_fresh_execution",
       "finish"
     }
-    trace=[]
-    for cycle, raw_action in enumerate(actions):
+    checkpoint_path,checkpoint,resumed=_load_controller_checkpoint(step,mission,actions)
+    trace=list(checkpoint.get("completed_actions") or [])
+    start_cycle=len(trace)
+    for cycle in range(start_cycle,len(actions)):
+        raw_action=actions[cycle]
         if not isinstance(raw_action,dict):
             raise Blocker("MODEL_INDEPENDENT_CONTROLLER_ACTION_NOT_OBJECT")
         action=_resolve_result_refs(dict(raw_action),trace)
@@ -1981,10 +2041,21 @@ def _run_model_independent_goal(step, mission, goal):
             raise Blocker("MODEL_INDEPENDENT_ACTION_ERROR:"+str(result.get("error")))
         _verify_action_expectation(action,result)
         trace.append({"cycle":cycle,"plan":action,"result":result})
+        checkpoint=_write_controller_checkpoint(checkpoint_path,checkpoint,trace)
+        interrupt_after=step.get("interrupt_after_controller_actions_once")
+        if interrupt_after is not None:
+            limit=int(interrupt_after)
+            if limit<1 or limit>len(actions):
+                raise Blocker("CONTROLLER_TEST_INTERRUPT_LIMIT_INVALID")
+            if len(trace)==limit and not checkpoint.get("test_interrupt_injected"):
+                checkpoint["test_interrupt_injected"]=True
+                checkpoint=_write_controller_checkpoint(checkpoint_path,checkpoint,trace)
+                raise Blocker("CONTROLLER_CHECKPOINT_TEST_INTERRUPTION")
         if typ=="finish":
             summary=result.get("summary","")
             if not summary.strip():
                 raise Blocker("MODEL_INDEPENDENT_CONTROLLER_EMPTY_FINISH")
+            checkpoint=_write_controller_checkpoint(checkpoint_path,checkpoint,trace,status="COMPLETE")
             return {
               "adapter":"goal","returncode":0,
               "stdout":summary,
@@ -1992,8 +2063,15 @@ def _run_model_independent_goal(step, mission, goal):
               "planner_source":None,
               "planner_transport":None,
               "planner_model_last":None,
-              "cycles":cycle+1,"trace":trace,
-              "final_summary":summary
+              "cycles":len(trace),"trace":trace,
+              "final_summary":summary,
+              "controller_checkpoint":{
+                "path":str(checkpoint_path.relative_to(ROOT)),
+                "plan_sha256":checkpoint.get("plan_sha256"),
+                "resumed":bool(resumed),
+                "resume_count":int(checkpoint.get("resume_count") or 0),
+                "resumed_from_action_index":start_cycle,
+              }
             }
     raise Blocker("MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH")
 
