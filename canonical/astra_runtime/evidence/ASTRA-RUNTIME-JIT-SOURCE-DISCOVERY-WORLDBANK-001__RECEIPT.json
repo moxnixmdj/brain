@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T21:13:46.766200+00:00",
+  "mission_id": "ASTRA-RUNTIME-JIT-SOURCE-DISCOVERY-WORLDBANK-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_JIT_SOURCE_DISCOVERY_WORLDBANK_001.json",
+  "mission_sha256": "435f334c861410bcbdc9d16e448f61831467080e25b5ff910c8fcd959e005d0f",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "cf596c5de3c84ee5ec1e020a32f099b5a8e8d2dadf1cb927e61f5857ce9e778c",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

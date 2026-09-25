@@ -1,21 +1,148 @@
 {
-  "blocker": {
-    "adapter": "goal",
-    "error": "Blocker:MODEL_INDEPENDENT_ACTION_ERROR:AUTHORITATIVE_SOURCE_NOT_DISCOVERED",
-    "mission_id": "ASTRA-RUNTIME-JIT-SOURCE-DISCOVERY-WORLDBANK-001",
-    "observed_at_utc": "2026-09-25T21:00:22.963961+00:00",
-    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
-    "step_id": "discover-and-verify-authoritative-source",
-    "step_index": 0
-  },
+  "completed_at_utc": "2026-09-25T21:13:46.765547+00:00",
   "created_at_utc": "2026-09-25T20:56:03.267522+00:00",
-  "history": [],
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T21:13:46.764974+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "goal",
+        "controller_checkpoint": {
+          "last_rewound_from_action_index": null,
+          "path": "canonical/astra_runtime/state/ASTRA-RUNTIME-JIT-SOURCE-DISCOVERY-WORLDBANK-001__discover-and-verify-authoritative-source__CONTROLLER_CHECKPOINT.json",
+          "plan_sha256": "9ed9bc58fc5dcf57852562412e4272482a4a0562f8f9abaf2a41ea265ad03da2",
+          "resume_count": 0,
+          "resumed": false,
+          "resumed_from_action_index": 0,
+          "rewind_count": 0
+        },
+        "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+        "cycles": 4,
+        "final_summary": "AUTHORITATIVE_SOURCE_DISCOVERY_COMPLETE",
+        "planner_model_last": null,
+        "planner_source": null,
+        "planner_transport": null,
+        "returncode": 0,
+        "stdout": "AUTHORITATIVE_SOURCE_DISCOVERY_COMPLETE",
+        "trace": [
+          {
+            "cycle": 0,
+            "plan": {
+              "args": {
+                "authority_domains": [
+                  "worldbank.org"
+                ],
+                "max_bytes": 1500000,
+                "output_path": "canonical/astra_runtime/tmp/JIT_SOURCE_DISCOVERY_WORLDBANK.json",
+                "query": "World Bank SP.POP.TOTL official indicator",
+                "timeout_s": 20
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "discover_authoritative_web_source"
+            },
+            "result": {
+              "candidate_count": 25,
+              "chosen_host": "data.worldbank.org",
+              "chosen_url": "https://data.worldbank.org/indicator/AG.LND.TOTL.K2",
+              "output_path": "canonical/astra_runtime/tmp/JIT_SOURCE_DISCOVERY_WORLDBANK.json",
+              "type": "discover_authoritative_web_source",
+              "verified": true
+            }
+          },
+          {
+            "cycle": 1,
+            "plan": {
+              "args": {
+                "capability_id": "web.browser.rendered.capture.chromedriver",
+                "result_path": "canonical/astra_runtime/tmp/JIT_SOURCE_DISCOVERY_WORLDBANK_RENDER.json",
+                "screenshot_path": "canonical/astra_runtime/tmp/JIT_SOURCE_DISCOVERY_WORLDBANK.png",
+                "url": "https://data.worldbank.org/indicator/AG.LND.TOTL.K2"
+              },
+              "expect": {
+                "field": "output_verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "browser_chromedriver",
+              "capability_id": "web.browser.rendered.capture.chromedriver",
+              "dependency": {
+                "executable": "chromedriver",
+                "resolved_path": "/usr/bin/chromedriver",
+                "status": "LOCAL_VERIFIED",
+                "type": "system_tool"
+              },
+              "final_url": "https://data.worldbank.org/indicator/AG.LND.TOTL.K2",
+              "output_verified": true,
+              "page_title": "Land area (sq. km) | Data",
+              "rendered": true,
+              "result_path": "canonical/astra_runtime/tmp/JIT_SOURCE_DISCOVERY_WORLDBANK_RENDER.json",
+              "screenshot_bytes": 1011009,
+              "screenshot_path": "canonical/astra_runtime/tmp/JIT_SOURCE_DISCOVERY_WORLDBANK.png",
+              "screenshot_sha256": "28921834e1dd86e45ec86c4247ec63cfb9aec5159e899bd6d8f4b32e86be9451",
+              "source_url": "https://data.worldbank.org/indicator/AG.LND.TOTL.K2",
+              "text": "Data\nHOME\nECONOMIES\nTHEMES\nDATA & RESOURCES\nABOUT\nEnglish\nEspa\u00f1ol\nFran\u00e7ais\n\u0627\u0644\u0639\u0631\u0628\u064a\u0629\n\u4e2d\u6587\nLand area (sq. km)\nDataBank\nMicrodata\nData Catalog\nLand area (sq. km)\nFAOSTAT, Food and Agriculture Organization of the United Nations ( FAO ), uri: fao.org/faostat/en/#data/RL, publisher: Food and Agriculture Organization of the United Nations ( FAO )\nLicense : CC BY-4.0 \u00a0\nLineBarMap\nShare\nDetails\nLABEL\n1970\n1980\n1990\n2000\n2010\n2020\nMillion\n105\n110\n115\n120\n125\n130\nWORLD\n\n1961 - 2023\n\nRural land area (sq. km)\t\nUrban land area (sq. km)\t\nAgricultural land (sq. km)\t\nAgricultural land (% of land area)\t\nArable land (hectares)\t\nArable land (hectares per person)\t\nArable land (% of land area)\t\nLand under cereal production (hectares)\t\nDownload\n\nCSVXMLEXCEL\n\nDataBank\n\nExplore Our DataBank\n\nWDI Tables\n\nThematic data tables from WDI\n\nAll Countries and Economies\nCountry\tMost Recent Year\tMost Recent Value\t\nAfghanistan\t2023\t652,230.0\t\nAlbania\t2023\t27,400.0\t\nAlgeria\t2023\t2,381,740.0\t\nAmerican Samoa\t2023\t200.0\t\nAndorra\t2023\t470.0\t\nAngola\t2023\t1,246,700.0\t\nAntigua and Barbuda\t2023\t440.0\t\nArgentina\t2023\t2,736,690.0\t\nArmenia\t2023\t28,199.4\t\nAruba\t2023\t180.0\t\nAustralia\t2023\t7,692,020.0\t\nAustria\t2023\t82,520.0\t\nAzerbaijan\t2023\t82,650.0\t\nBahamas, The\t2023\t10,010.0\t\nBahrain\t2023\t800.0\t\nBangladesh\t2023\t129,980.0\t\nBarbados\t2023\t430.0\t\nBelarus\t2023\t202,983.0\t\nBelgium\t2023\t30,494.0\t\nBelize\t2023\t22,810.0\t\nBenin\t2023\t112,760.0\t\nBermuda\t2023\t54.0\t\nBhutan\t2023\t38,140.0\t\nBolivia\t2023\t1,083,300.0\t\nBosnia and Herzegovina\t2023\t51,200.0\t\nBotswana\t2023\t566,730.0\t\nBrazil\t2023\t8,358,140.0\t\nBritish Virgin Islands\t2023\t150.0\t\nBrunei Darussalam\t2023\t5,270.0\t\nBulgaria\t2023\t108,560.0\t\nBurkina Faso\t2023\t273,600.0\t\nBurundi\t2023\t25,680.0\t\nCabo Verde\t2023\t4,030.0\t\nCambodia\t2023\t176,520.0\t\nCameroon\t2023\t472,710.0\t\nCanada\t2023\t8,788,700.0\t\nCayman Islands\t2023\t240.0\t\nCentral African Republic\t2023\t622,980.0\t\nChad\t2023\t1,259,200.0\t\nChannel Islands\t2021\t198.0\t\nChile\t2023\t742,831.6\t\nChina\t2023\t9,388,210.0\t\nColombia\t2023\t1,109,500.0\t\nComoros\t2023\t1,861.0\t\nCongo, Dem. Rep.\t2023\t2,267,050.0\t\nCongo, Rep.\t2023\t341,500.0\t\nCosta Rica\t2023\t51,060.0\t\nCote d'Ivoire\t2023\t318,000.0\t\nCroatia\t2023\t55,960.0\t\nCuba\t2023\t103,800.0\t\nCuracao\t2023\t444.0\t\nCyprus\t2023\t9,240.0\t\nCzechia\t2023\t77,167.3\t\nDenmark\t2023\t40,000.0\t\nDjibouti\t2023\t23,180.0\t\nDominica\t2023\t750.0\t\nDominican Republic\t2023\t48,198.0\t\nEcuador\t2023\t248,360.0\t\nEgypt, Arab Rep.\t2023\t995,450.0\t\nEl Salvador\t2023\t20,720.0\t\nEquatorial Guinea\t2023\t28,050.0\t\nEritrea\t2023\t121,178.2\t\nEstonia\t2023\t42,730.0\t\nEswatini\t2023\t17,200.0\t\nEthiopia\t2023\t1,128,498.8\t\nFaroe Islands\t2023\t1,370.0\t\nFiji\t2023\t18,270.0\t\nFinland\t2023\t303,960.0\t\nFrance\t2023\t538,950.0\t\nFrench Polynesia\t2023\t3,471.0\t\nGabon\t2023\t257,670.0\t\nGambia, The\t2023\t10,120.0\t\nGeorgia\t2023\t69,490.0\t\nGermany\t2023\t349,430.0\t\nGhana\t2023\t227,533.0\t\nGibraltar\t2023\t10.0\t\nGreece\t2023\t128,900.0\t\nGreenland\t2023\t410,450.0\t\nGrenada\t2023\t340.0\t\nGuam\t2023\t540.0\t\nGuatemala\t2023\t107,160.0\t\nGuinea\t2023\t245,720.0\t\nGuinea-Bissau\t2023\t28,120.0\t\nGuyana\t2023\t211,140.0\t\nHaiti\t2023\t27,560.0\t\nHonduras\t2023\t111,890.0\t\nHong Kong SAR, China\t2023\t1,050.0\t\nHungary\t2023\t91,260.0\t\nIceland\t2023\t100,830.0\t\nIndia\t2023\t2,973,190.0\t\nIndonesia\t2023\t1,892,555.5\t\nIran, Islamic Rep.\t2023\t1,622,500.0\t\nIraq\t2023\t434,130.0\t\nIreland\t2023\t68,890.0\t\nIsle of Man\t2023\t570.0\t\nIsrael\t2023\t21,640.0\t\nItaly\t2023\t295,720.0\t\nJamaica\t2023\t10,830.0\t\nJapan\t2023\t364,569.3\t\nJordan\t2023\t88,794.0\t\nKazakhstan\t2023\t2,699,700.0\t\nKenya\t2023\t580,876.3\t\nKiribati\t2023\t810.0\t\nKorea, Dem. People's Rep.\t2023\t120,410.0\t\nKorea, Rep.\t2023\t97,600.0\t\nKosovo\t\t\t\nKuwait\t2023\t17,820.0\t\nKyrgyz Republic\t2023\t191,800.0\t\nLao PDR\t2023\t230,800.0\t\nLatvia\t2023\t62,230.0\t\nLebanon\t2023\t10,230.0\t\nLesotho\t2023\t30,360.0\t\nLiberia\t2023\t96,320.0\t\nLibya\t2023\t1,759,540.0\t\nLiechtenstein\t2023\t160.0\t\nLithuania\t2023\t62,600.0\t\nLuxembourg\t2023\t2,574.5\t\nMacao SAR, China\t2023\t33.0\t\nMadagascar\t2023\t581,800.0\t\nMalawi\t2023\t94,280.0\t\nMalaysia\t2023\t328,550.0\t\nMaldives\t2023\t298.0\t\nMali\t2023\t1,220,190.0\t\nMalta\t2023\t320.0\t\nMarshall Islands\t2023\t180.0\t\nMauritania\t2023\t1,030,700.0\t\nMauritius\t2023\t1,997.0\t\nMexico\t2023\t1,943,950.0\t\nMicronesia, Fed. Sts.\t2023\t700.0\t\nMoldova\t2023\t32,930.0\t\nMonaco\t2023\t2.1\t\nMongolia\t2023\t1,558,499.8\t\nMontenegro\t2023\t13,450.0\t\nMorocco\t2023\t446,300.0\t\nMozambique\t2023\t786,380.0\t\nMyanmar\t2023\t652,670.0\t\nNamibia\t2023\t823,290.0\t\nNaoero\t2023\t20.0\t\nNepal\t2023\t143,350.0\t\nNetherlands\t2023\t33,670.0\t\nNew Caledonia\t2023\t18,280.0\t\nNew Zealand\t2023\t263,310.0\t\nNicaragua\t2023\t120,340.0\t\nNiger\t2023\t1,266,700.0\t\nNigeria\t2023\t910,770.0\t\nNorth Macedonia\t2023\t25,220.0\t\nNorthern Mariana Islands\t2023\t460.0\t\nNorway\t2023\t364,270.0\t\nOman\t2023\t309,500.0\t\nPakistan\t2023\t770,880.0\t\nPalau\t2023\t460.0\t\nPanama\t2023\t74,180.0\t\nPapua New Guinea\t2023\t452,860.0\t\nParaguay\t2023\t396,012.0\t\nPeru\t2023\t1,280,000.0\t\nPhilippines\t2023\t298,170.0\t\nPoland\t2023\t306,270.0\t\nPortugal\t2023\t91,605.6\t\nPuerto Rico (US)\t2023\t8,870.0\t\nQatar\t2023\t11,490.0\t\nRomania\t2023\t230,080.0\t\nRussian Federation\t2023\t16,376,870.0\t\nRwanda\t2023\t24,670.0\t\nSamoa\t2023\t2,780.0\t\nSan Marino\t2023\t60.0\t\nSao Tome and Principe\t2023\t960.0\t\nSaudi Arabia\t2023\t2,149,690.0\t\nSenegal\t2023\t192,530.0\t\nSerbia\t2023\t84,090.0\t\nSeychelles\t2023\t460.0\t\nSierra Leone\t2023\t72,180.0\t\nSingapore\t2023\t718.0\t\nSint Maarten (Dutch part)\t2023\t34.0\t\nSlovak Republic\t2023\t48,080.0\t\nSlovenia\t2023\t20,134.5\t\nSolomon Islands\t2023\t27,990.0\t\nSomalia, Fed. Rep.\t2023\t627,340.0\t\nSouth Africa\t2023\t1,213,090.0\t\nSouth Sudan\t2023\t631,930.0\t\nSpain\t2023\t499,697.4\t\nSri Lanka\t2023\t61,860.0\t\nSt. Kitts and Nevis\t2023\t260.0\t\nSt. Lucia\t2023\t610.0\t\nSt. Martin (French part)\t2023\t50.0\t\nSt. Vincent and the Grenadines\t2023\t390.0\t\nSudan\t2023\t1,868,000.0\t\nSuriname\t2023\t160,507.6\t\nSweden\t2023\t407,270.0\t\nSwitzerland\t2023\t39,509.6\t\nSyrian Arab Republic\t2023\t183,630.0\t\nTajikistan\t2023\t138,790.0\t\nTanzania\t2023\t885,800.0\t\nThailand\t2023\t510,890.0\t\nTimor-Leste\t2023\t14,870.0\t\nTogo\t2023\t54,390.0\t\nTonga\t2023\t720.0\t\nTrinidad and Tobago\t2023\t5,130.0\t\nTunisia\t2023\t155,360.0\t\nTurkiye\t2023\t769,630.0\t\nTurkmenistan\t2023\t469,930.0\t\nTurks and Caicos Islands\t2023\t950.0\t\nTuvalu\t2023\t30.0\t\nUganda\t2023\t200,520.0\t\nUkraine\t2023\t579,400.0\t\nUnited Arab Emirates\t2023\t71,020.0\t\nUnited Kingdom\t2023\t241,930.0\t\nUnited States\t2023\t9,147,420.0\t\nUruguay\t2023\t175,020.0\t\nUzbekistan\t2023\t440,650.0\t\nVanuatu\t2023\t12,190.0\t\nVenezuela, RB\t2023\t882,050.0\t\nViet Nam\t2023\t313,429.0\t\nVirgin Islands (U.S.)\t2023\t350.0\t\nWest Bank and Gaza\t2023\t6,025.0\t\nYemen, Rep.\t2023\t527,970.0\t\nZambia\t2023\t743,390.0\t\nZimbabwe\t2023\t386,850.0\t\nWorld\t2023\t129,763,685.5\t\nArab World\t2023\t13,100,570.0\t\nCaribbean small states\t2023\t412,817.6\t\nCentral Europe and the Baltics\t2023\t1,105,071.8\t\nEast Asia & Pacific\t2023\t24,450,105.5\t\nEast Asia & Pacific (excluding high income)\t2023\t16,002,104.3\t\nEuro area\t2023\t2,836,266.0\t\nEurope & Central Asia\t2023\t27,432,007.4\t\nEurope & Central Asia (excluding high income)\t2023\t5,907,512.4\t\nEuropean Union\t2023\t3,988,313.3\t\nHeavily indebted poor countries (HIPC)\t2023\t19,409,121.0\t\nLatin America & Caribbean\t2023\t20,055,677.3\t\nLatin America & Caribbean (excluding high income)\t2023\t18,773,907.7\t\nLeast developed countries: UN classification\t2023\t20,358,908.0\t\nMiddle East, North Africa, Afghanistan & Pakistan\t2023\t12,640,239.0\t\nMiddle East, North Africa, Afghanistan & Pakistan (excluding high income)\t2023\t10,057,959.0\t\nNorth America\t2023\t17,936,174.0\t\nOECD members\t2023\t35,322,923.8\t\nOther small states\t2023\t274,896.0\t\nPacific island small states\t2023\t64,150.0\t\nSmall states\t2023\t751,863.6\t\nSouth Asia\t2023\t3,346,818.0\t\nSub-Saharan Africa\t2023\t23,902,664.3\t\nSub-Saharan Africa (excluding high income)\t2023\t23,902,204.3\t\nHigh income\t2023\t51,773,179.9\t\nLow & middle income\t2023\t77,990,505.7\t\nLow income\t2023\t14,690,977.0\t\nLower middle income\t2023\t18,881,075.3\t\nMiddle income\t2023\t63,299,528.7\t\nUpper middle income\t2023\t44,418,453.4\t\nHelp / Feedback\nIBRD\nIDA\nIFC\nMIGA\nICSID\nLegal\nPrivacy Notice\nAccess to Information\nJobs\nContact\n\u00a9 2026 The World Bank Group, All Rights Reserved.\nREPORT FRAUD OR CORRUPTION\n\nThis site uses cookies to optimize functionality and give you the best possible experience. If you continue to navigate this website beyond this page, cookies will be placed on your browser. To learn more about cookies, click here.\n\n\u00d7",
+              "text_nonempty": true
+            }
+          },
+          {
+            "cycle": 2,
+            "plan": {
+              "args": {
+                "browser_result_path": "canonical/astra_runtime/tmp/JIT_SOURCE_DISCOVERY_WORLDBANK_RENDER.json",
+                "evidence_path": "canonical/astra_runtime/tmp/JIT_SOURCE_DISCOVERY_WORLDBANK.json"
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "assert_authoritative_source_discovery"
+            },
+            "result": {
+              "authority_domains": [
+                "worldbank.org"
+              ],
+              "chosen_host": "data.worldbank.org",
+              "chosen_url": "https://data.worldbank.org/indicator/AG.LND.TOTL.K2",
+              "final_host": "data.worldbank.org",
+              "final_url": "https://data.worldbank.org/indicator/AG.LND.TOTL.K2",
+              "rendered_text_nonempty": true,
+              "type": "assert_authoritative_source_discovery",
+              "verified": true
+            }
+          },
+          {
+            "cycle": 3,
+            "plan": {
+              "args": {
+                "summary": "AUTHORITATIVE_SOURCE_DISCOVERY_COMPLETE"
+              },
+              "type": "finish"
+            },
+            "result": {
+              "summary": "AUTHORITATIVE_SOURCE_DISCOVERY_COMPLETE",
+              "type": "finish"
+            }
+          }
+        ]
+      },
+      "step_id": "discover-and-verify-authoritative-source",
+      "step_index": 0
+    }
+  ],
   "mission_id": "ASTRA-RUNTIME-JIT-SOURCE-DISCOVERY-WORLDBANK-001",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_JIT_SOURCE_DISCOVERY_WORLDBANK_001.json",
-  "mission_sha256": "3ac6a3201984f931d90025fc0421c842cc8ea8cf16099b3c0efa0bf508d095a0",
-  "next_step": 0,
+  "mission_sha256": "435f334c861410bcbdc9d16e448f61831467080e25b5ff910c8fcd959e005d0f",
+  "next_step": 1,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
-  "status": "BLOCKED",
-  "updated_at_utc": "2026-09-25T21:00:22.964154+00:00"
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T21:13:46.764989+00:00"
 }
