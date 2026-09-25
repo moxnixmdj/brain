@@ -280,7 +280,7 @@ def decompose_goal(goal):
         current=clauses[i]
         if (
             i+1 < len(clauses)
-            and re.search(r"\bindependently\s+(?:execute|run|reopen|read|reread|inspect|query)\b",current,re.IGNORECASE)
+            and re.search(r"\bindependently\s+(?:execute|run|reopen|read|reread|inspect|query|decode)\b",current,re.IGNORECASE)
             and re.match(r"^(?:verify|check|assert)\b",clauses[i+1],re.IGNORECASE)
         ):
             merged.append(current+" and "+clauses[i+1])
