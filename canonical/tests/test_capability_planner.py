@@ -156,6 +156,56 @@ class CapabilityPlannerTests(unittest.TestCase):
         ):
             planner.plan_actions(problem)
 
+    def test_plan_actions_wires_multiple_required_effect_results(self):
+        problem = {
+            "initial_facts": [],
+            "target_effects": ["assessment.available"],
+            "capabilities": [
+                {
+                    "id": "observe-a",
+                    "requires": [],
+                    "provides": ["observation.a"],
+                    "result_fields": ["output_path"],
+                    "cost": 1,
+                    "action": {"type": "fetch_json_knowledge", "args": {"output_path": "a.json"}}
+                },
+                {
+                    "id": "observe-b",
+                    "requires": [],
+                    "provides": ["observation.b"],
+                    "result_fields": ["output_path"],
+                    "cost": 1,
+                    "action": {"type": "fetch_json_knowledge", "args": {"output_path": "b.json"}}
+                },
+                {
+                    "id": "assess",
+                    "requires": ["observation.a", "observation.b"],
+                    "provides": ["assessment.available"],
+                    "result_fields": ["output_path"],
+                    "cost": 1,
+                    "action": {
+                        "type": "assess_knowledge_consistency",
+                        "args": {
+                            "evidence_paths": [
+                                {"$effect_result": {"effect": "observation.a", "field": "output_path"}},
+                                {"$effect_result": {"effect": "observation.b", "field": "output_path"}}
+                            ],
+                            "output_path": "assessment.json"
+                        }
+                    }
+                }
+            ]
+        }
+        out = planner.plan_actions(problem)
+        self.assertEqual(out["planning"]["plan"], ["observe-a", "observe-b", "assess"])
+        self.assertEqual(
+            out["actions"][2]["args"]["evidence_paths"],
+            [
+                {"$result": {"cycle": 0, "field": "output_path"}},
+                {"$result": {"cycle": 1, "field": "output_path"}}
+            ],
+        )
+
     def test_effect_result_binding_must_correspond_to_required_effect(self):
         problem = {
             "initial_facts": [],
