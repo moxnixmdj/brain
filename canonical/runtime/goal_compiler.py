@@ -103,9 +103,13 @@ def _context_path_for_key(key, context_paths):
     candidates=[]
     for raw in reversed(list(context_paths or [])):
         p=pathlib.Path(str(raw))
-        if suffixes and p.suffix.lower() in suffixes:
-            candidates.append(str(raw))
-        elif stem in {"input","source"}:
+        if suffixes:
+            if p.suffix.lower() in suffixes:
+                candidates.append(str(raw))
+            # Typed inputs must never fall back to lexical substring matching;
+            # prose containing "json", "xlsx", etc. is not a file path.
+            continue
+        if stem in {"input","source"}:
             candidates.append(str(raw))
         elif stem and (stem in p.name.lower() or stem in p.suffix.lower()):
             candidates.append(str(raw))
@@ -1840,8 +1844,12 @@ def _compile_dynamic_fanout_goal(goal, clauses, registry, root):
         entry=registry[part["selected_capability"]]
         action=_render_template(entry["action_template"],part["inputs"])
         actions.append(action)
-        for value in part["inputs"].values():
-            if isinstance(value,str) and pathlib.Path(value).suffix and value not in context_paths:
+        for key,value in part["inputs"].items():
+            if (
+                isinstance(key,str) and key.endswith("_path")
+                and isinstance(value,str) and pathlib.Path(value).suffix
+                and value not in context_paths
+            ):
                 context_paths.append(value)
         compiled_parts.append({
           "index":index,"subgoal":subgoal,"mode":"VERIFIED_CAPABILITY",
