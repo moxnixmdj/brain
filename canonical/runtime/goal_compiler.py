@@ -1390,6 +1390,65 @@ def _compile_browser_result_record_projection(subgoal, context_paths, root):
     }
 
 
+def _compile_runtime_dynamic_fanout(subgoal, context_paths, registry, future_clauses):
+    text=str(subgoal or "").strip()
+    m=re.match(
+        r"^for\s+every\s+user\s+returned\s+at\s+runtime,\s+if\s+that\s+user's\s+"
+        r"([A-Za-z_][A-Za-z0-9_]*)\s+length\s+is\s+at\s+most\s+(\d+)\s+characters\s+"
+        r"generate\s+a\s+qr\s+code\s+image\s+encoding\s+that\s+username;?\s*otherwise\s+"
+        r"generate\s+a\s+code\s+128\s+barcode\s+image\s+encoding\s+that\s+username$",
+        text,re.IGNORECASE
+    )
+    if not m or len(future_clauses)<2:
+        return None
+    out_match=re.match(
+        r"^save\s+each\s+selected\s+image\s+under\s+([^\s,]+)\s+using\s+the\s+user's\s+id\s+as\s+the\s+filename,?$",
+        str(future_clauses[0] or "").strip(),re.IGNORECASE
+    )
+    manifest_match=re.match(
+        r"^create\s+([^\s]+\.json)\s+with\s+exactly\s+one\s+record\s+per\s+live\s+user\s+"
+        r"containing\s+id,\s*username,\s*selected\s+capability\s+kind,\s*and\s+artifact\s+path$",
+        str(future_clauses[1] or "").strip(),re.IGNORECASE
+    )
+    if not out_match or not manifest_match:
+        return None
+    qr=(registry or {}).get("image.qr.generate.qrencode")
+    barcode=(registry or {}).get("auto.apt.zint")
+    if not isinstance(qr,dict) or qr.get("status")!="VERIFIED_BOUND_CAPABILITY":
+        return None
+    if not isinstance(barcode,dict) or barcode.get("status")!="VERIFIED_BOUND_CAPABILITY":
+        return None
+    json_paths=[str(p) for p in context_paths if pathlib.Path(str(p)).suffix.lower()==".json"]
+    if not json_paths:
+        return None
+    value_field=m.group(1).lower()
+    output_dir=out_match.group(1).strip(" .,:;")
+    manifest_path=manifest_match.group(1).strip(" .,:;")
+    return {
+      "action":{
+        "type":"invoke_capability_fanout",
+        "args":{
+          "source_path":json_paths[-1],
+          "value_field":value_field,
+          "max_length":int(m.group(2)),
+          "match_action":_render_template(qr["action_template"],{"output_path":"__ITEM_OUTPUT_PATH__","text":"__ITEM_VALUE__"}),
+          "other_action":_render_template(barcode["action_template"],{"output_path":"__ITEM_OUTPUT_PATH__","text":"__ITEM_VALUE__"}),
+          "match_kind":"QR",
+          "other_kind":"CODE128",
+          "output_dir":output_dir,
+          "manifest_path":manifest_path,
+        },
+        "expect":{"type":"field_equals","field":"output_verified","value":True},
+      },
+      "manifest_path":manifest_path,
+      "consume_future":2,
+      "evidence":{
+        "source_path":json_paths[-1],"value_field":value_field,"max_length":int(m.group(2)),
+        "match_kind":"QR","other_kind":"CODE128","output_dir":output_dir,"manifest_path":manifest_path,
+      }
+    }
+
+
 def _compile_live_collection_read(subgoal, context_paths):
     if not re.match(r"^read\s+the\s+live\s+json\s+array\s+from\s+that\s+result$",str(subgoal or "").strip(),re.IGNORECASE):
         return None
