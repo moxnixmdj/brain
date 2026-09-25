@@ -3313,7 +3313,7 @@ def _goal_action(action):
             return {"type":typ,"verified":False,"error":"KNOWLEDGE_ASSESSMENT_INPUT_INVALID"}
         records=[]
         invalid=[]
-        now=datetime.datetime.now(datetime.timezone.utc)
+        now=datetime.now(timezone.utc)
         for raw_path in evidence_paths:
             p=_safe_repo_path(raw_path)
             if not p.is_file():
@@ -3330,7 +3330,7 @@ def _goal_action(action):
             age_s=None
             if max_age_s is not None:
                 try:
-                    ts=datetime.datetime.fromisoformat(retrieved.replace("Z","+00:00"))
+                    ts=datetime.fromisoformat(retrieved.replace("Z","+00:00"))
                     age_s=max(0.0,(now-ts).total_seconds())
                     stale=age_s>float(max_age_s)
                 except Exception:
