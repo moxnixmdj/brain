@@ -20,6 +20,7 @@
     "model_controller_required": false,
     "same_underlying_effect_as_verified_reduce": true,
     "new_capability_acquisition_for_paraphrase_forbidden": true,
-    "manual_controller_actions": false
+    "manual_controller_actions": false,
+    "explicit_retrigger": "v1"
   }
 }
