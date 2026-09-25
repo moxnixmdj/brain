@@ -34,10 +34,15 @@ def main():
       "output_path":"canonical/astra_runtime/tmp/SQLITE_ROUNDTRIP_VERIFY.sqlite",
       "goal":goal
     },ROOT)
+    verifier_goal=(
+      "Finally independently query the SQLite database and verify that every VERIFIED_BOUND_CAPABILITY "
+      "appears exactly once, that no non-verified capability appears, and that every stored value "
+      "matches the canonical registry."
+    )
     v=verifier.run({
       "json_path":"canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
       "sqlite_path":"canonical/astra_runtime/tmp/SQLITE_ROUNDTRIP_VERIFY.sqlite",
-      "goal":goal
+      "goal":verifier_goal
     },ROOT)
     result={
       "schema":"PROJECT_BRAIN_SQLITE_ROUNDTRIP_VERIFICATION_V1",
