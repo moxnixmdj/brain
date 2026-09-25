@@ -23,6 +23,7 @@
     "provenance_must_be_persisted": true,
     "downstream_use_required": true,
     "source_revalidation_required": true,
-    "replay_after_generic_knowledge_compiler_commit": "e9ce36db7e22e14d4991cb1bbea9a1847f01611c"
+    "replay_after_generic_knowledge_compiler_commit": "e9ce36db7e22e14d4991cb1bbea9a1847f01611c",
+    "replay_after_split_knowledge_verification_fix": "191f47cb353360f8f23613e615866ca007b48d05"
   }
 }
