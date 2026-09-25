@@ -1,0 +1,2603 @@
+{
+  "auto_acquisition": {
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"ironic-python-agent\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"kodi-eventclients-python\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"netdata-plugins-python\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"ola-python\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"casparcg-server\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fonts-gnutypewriter\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:E: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/x/xdg-desktop-portal/xdg-desktop-portal_1.18.4-1ubuntu2.24.04.2_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\\n\", \"name\": \"cairo-dock-dbus-plug-in-interface-python\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"cairo-dock-quick-browser-plug-in\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"caja-open-terminal\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"chromium-browser\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"chromium-browser-l10n\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"claws-mail-python-plugin\", \"status\": \"CONTRACT_REJECTED\"}]",
+    "status": "NOT_DISPATCHED"
+  },
+  "binding_performed": false,
+  "goal": "Using a real rendered browser, open https://www.python.org/downloads/. Determine the latest stable Python 3 release shown on the page. Save a full-page screenshot to canonical/astra_runtime/tmp/PYTHON_DOWNLOADS.png and save canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_RESULT.json containing source_url, final_url, page_title, latest_stable_python3, and observed_text_evidence. Finally independently verify from the official Python downloads page, without trusting the browser extraction, that the claimed latest_stable_python3 string is present and corresponds to the current stable Python 3 release shown there.",
+  "mission_id": "ASTRA-RUNTIME-WEB-BROWSER-PYTHON-RELEASE-001",
+  "observed_at_utc": "2026-09-25T02:03:27.785191+00:00",
+  "result": {
+    "binding_performed": false,
+    "candidates": [
+      {
+        "archive_sha256": "dc261e2e8f6122f1e02a1df18696829f3c82f2bdd8f078fee8898a8c4d126c9d",
+        "binding_kind": "apt",
+        "description": "Quick browser plug-in for Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "browser"
+        ],
+        "name": "cairo-dock-quick-browser-plug-in",
+        "packages": [],
+        "query": "browser",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "76f4dfa24bbccdd9728f23d7eee045bdd33804549bceac8ad7a083f40c58a1e7",
+        "binding_kind": "apt",
+        "description": "Caja plugin for opening terminals in arbitrary local paths",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "open"
+        ],
+        "name": "caja-open-terminal",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.26.1-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "a58c5f91884b06f58fc00aac4632c19fdfeeda12520b892f9e580e5cf2005c36",
+        "binding_kind": "apt",
+        "description": "Transitional package - chromium-browser -> chromium snap",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "browser"
+        ],
+        "name": "chromium-browser",
+        "packages": [],
+        "query": "browser",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2:1snap1-0ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "6c37210b815610820d229c9189746dad7aa8c456f25a5e4010ba6ba8384c1cff",
+        "binding_kind": "apt",
+        "description": "Transitional package - chromium-browser-l10n -> chromium snap",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "browser"
+        ],
+        "name": "chromium-browser-l10n",
+        "packages": [],
+        "query": "browser",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2:1snap1-0ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d11b912183292c47c6994c33fedd0a920559b87058caab93b64adc7c690d0547",
+        "binding_kind": "apt",
+        "description": "Intuitive GNOME web browser",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "browser"
+        ],
+        "name": "epiphany-browser",
+        "packages": [],
+        "query": "browser",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.5-0ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "6cb08d7091b01dc6e1c01a5e22ea37a959b0c92e66ff6bc43d19f5a5f2a78c6f",
+        "binding_kind": "apt",
+        "description": "Data files for the GNOME web browser",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "browser"
+        ],
+        "name": "epiphany-browser-data",
+        "packages": [],
+        "query": "browser",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.5-0ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d7b1f2d7f39da18e4e3de703e25bb91b09757e8a70bae037ae57410a7fd57a10",
+        "binding_kind": "apt",
+        "description": "humanist sans serif typeface by Steve Matteson",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "open"
+        ],
+        "name": "fonts-open-sans",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.11-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "3b081196665977c418e534a7426d66f5e69924f7ad87ac82089c11a22627394c",
+        "binding_kind": "apt",
+        "description": "source code class and function browser plugin for Gedit",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "browser"
+        ],
+        "name": "gedit-source-code-browser-plugin",
+        "packages": [],
+        "query": "browser",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.0.3-6",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "15af5661e857f72724856b5b47b4816b7ff35ba14dc4c73a7f0027e6c1b0c0ad",
+        "binding_kind": "apt",
+        "description": "GNOME Shell extensions integration for web browsers",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "browser"
+        ],
+        "name": "gnome-browser-connector",
+        "packages": [],
+        "query": "browser",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "42.1-4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d438564bc17b854772482af5dc92bdeb1dd8dcd9172e68d93b0cff6ea6c3185c",
+        "binding_kind": "apt",
+        "description": "Open source SVG symbol sets that can be used as Inkscape symbols",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "open"
+        ],
+        "name": "inkscape-open-symbols",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.2.1-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "03370057bddb776dd920ef1283ac654025156c7141c1a95a13d0e3b85239174c",
+        "binding_kind": "apt",
+        "description": "Extra drivers for nvidia-525-open for the aws flavour (dummy transitional package)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "open"
+        ],
+        "name": "linux-modules-nvidia-525-open-aws",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.17.0-1019.19~24.04.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "66ad823140da14c62be7cef701574baa0dadf1e8577f0999bd1402e57b17caa7",
+        "binding_kind": "apt",
+        "description": "Extra drivers for nvidia-525-open for the aws flavour (dummy transitional package)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "open"
+        ],
+        "name": "linux-modules-nvidia-525-open-aws-6.14",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.14.0-1018.18~24.04.1+3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "943abb39021c45f455f374dee60487e050a27012b6d45b078dd7cef1e834b1bf",
+        "binding_kind": "apt",
+        "description": "Extra drivers for nvidia-525-open for the aws flavour (dummy transitional package)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "open"
+        ],
+        "name": "linux-modules-nvidia-525-open-aws-6.17",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.17.0-1019.19~24.04.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "fc4bac2e98844d65d8a6dd3fcc04c0ecd4b93ea645b4684a0a2c764dafa040e6",
+        "binding_kind": "apt",
+        "description": "Extra drivers for nvidia-525-open for the aws flavour (dummy transitional package)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "open"
+        ],
+        "name": "linux-modules-nvidia-525-open-aws-6.8",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.8.0-1060.63",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "9182a4e20269fc64435de939b795d0e136259abe9bd6a1d8dfcd9ed6b2b39868",
+        "binding_kind": "apt",
+        "description": "Extra drivers for nvidia-525-open for the aws flavour (dummy transitional package)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "open"
+        ],
+        "name": "linux-modules-nvidia-525-open-aws-7.0",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "7.0.0-1007.7~24.04.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "9769447fb673478edf8c1ed61085814acf8f1ed1f2df2ff09bc99723cc4dcf93",
+        "binding_kind": "apt",
+        "description": "Extra drivers for nvidia-525-open for the aws flavour (dummy transitional package)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "open"
+        ],
+        "name": "linux-modules-nvidia-525-open-aws-edge",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "7.0.0-1007.7~24.04.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "4d6ca0ef17d2af19fb6f53689438d6a70f2f4c647ba8a2d557bdac5e0b372771",
+        "binding_kind": "apt",
+        "description": "Extra drivers for nvidia-525-open for the aws flavour (dummy transitional package)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "open"
+        ],
+        "name": "linux-modules-nvidia-525-open-aws-lts-24.04",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.8.0-1060.63",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "756018fda475cf232d65ee1468a93407122a18766c91a8b62fcf41b8a198b056",
+        "binding_kind": "apt",
+        "description": "Extra drivers for nvidia-525-open for the azure flavour (dummy transitional package)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "open"
+        ],
+        "name": "linux-modules-nvidia-525-open-azure",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.17.0-1020.20~24.04.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "4e85cd57f13501616f1cbb3be3a9c2e2b999711fdf62f93b2ed60bc3dedb590a",
+        "binding_kind": "apt",
+        "description": "Extra drivers for nvidia-525-open for the azure flavour (dummy transitional package)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "open"
+        ],
+        "name": "linux-modules-nvidia-525-open-azure-6.11",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.11.0-1018.18~24.04.1+3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "660a216492f1995806a86dab107e7182ef86e8a61889d62a36a711bcfd929d73",
+        "binding_kind": "apt",
+        "description": "Extra drivers for nvidia-525-open for the azure flavour (dummy transitional package)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "open"
+        ],
+        "name": "linux-modules-nvidia-525-open-azure-6.14",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.14.0-1017.17~24.04.1+2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "8340da477587778f24c705903fa4a069346a49d783ca6a1144a787742f3e0f37",
+        "binding_kind": "apt",
+        "description": "Extra drivers for nvidia-525-open for the azure flavour (dummy transitional package)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "open"
+        ],
+        "name": "linux-modules-nvidia-525-open-azure-6.17",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.17.0-1020.20~24.04.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "46d7d3e5065a75a69375c11caa755721b10186291b4b074683fc68c0111a65e9",
+        "binding_kind": "apt",
+        "description": "Extra drivers for nvidia-525-open for the azure flavour (dummy transitional package)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "open"
+        ],
+        "name": "linux-modules-nvidia-525-open-azure-6.8",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.8.0-1062.69",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ddb87f53f842c8663eb5d905210330657d16de493f3df1a2f5b6edb96bc1e037",
+        "binding_kind": "apt",
+        "description": "Extra drivers for nvidia-525-open for the azure flavour (dummy transitional package)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "open"
+        ],
+        "name": "linux-modules-nvidia-525-open-azure-7.0",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "7.0.0-1008.8~24.04.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "963f6db7a9436d8338727d0416a8d21aaa60fba84bf5fa23ae3108306dc16a53",
+        "binding_kind": "apt",
+        "description": "Extra drivers for nvidia-525-open for the azure flavour (dummy transitional package)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "open"
+        ],
+        "name": "linux-modules-nvidia-525-open-azure-edge",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "7.0.0-1008.8~24.04.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "135d88b473e0b49c3fe408bedf3d638657d64f80239a47be713a81df17e3bf34",
+        "binding_kind": "apt",
+        "description": "Perl module to open a browser in a given URL",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 3,
+        "matched_terms": [
+          "browser",
+          "open"
+        ],
+        "name": "libbrowser-open-perl",
+        "packages": [],
+        "query": "browser",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 42,
+        "version": "0.04-1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "285a6a35874da62f8314c9798f00191b3dc242ac5bbb046a8a52b29b9f273570",
+        "binding_kind": "apt",
+        "description": "open a web browser from Haskell",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 4,
+        "matched_terms": [
+          "browser",
+          "open"
+        ],
+        "name": "libghc-open-browser-dev",
+        "packages": [],
+        "query": "browser",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "0.2.1.0-9",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "21dd74d44e4d2cb596e00c5e7b68555467dc792a95ee93e16add6176bb74679e",
+        "binding_kind": "apt",
+        "description": "open a web browser from Haskell; documentation",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 4,
+        "matched_terms": [
+          "browser",
+          "open"
+        ],
+        "name": "libghc-open-browser-doc",
+        "packages": [],
+        "query": "browser",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "0.2.1.0-9",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "439f5d2b0a57e9088fd5320e02f63397978fd9b1a26fd3ff14760131ae75f92a",
+        "binding_kind": "apt",
+        "description": "open a web browser from Haskell; profiling libraries",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 4,
+        "matched_terms": [
+          "browser",
+          "open"
+        ],
+        "name": "libghc-open-browser-prof",
+        "packages": [],
+        "query": "browser",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "0.2.1.0-9",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "e3bbcccc2eeee213a416936b6b238bced7fcdffc321625c4c5320c3a03e25892",
+        "binding_kind": "apt",
+        "description": "helpers to open URLs, files, or readers in a web browser (Go library)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 4,
+        "matched_terms": [
+          "browser",
+          "open"
+        ],
+        "name": "golang-github-cli-browser-dev",
+        "packages": [],
+        "query": "browser",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 36,
+        "version": "1.3.0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "a3c02e3a5c8d6ff9c001e0a305d116879559b6f5849ce1b9b896bf9666c29324",
+        "binding_kind": "apt",
+        "description": "Helpers to open files, readers, and URLs in a browser window",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 4,
+        "matched_terms": [
+          "browser",
+          "open"
+        ],
+        "name": "golang-github-pkg-browser-dev",
+        "packages": [],
+        "query": "browser",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 36,
+        "version": "0.0~git20210911.681adbf-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Bridge a live Chrome browser to your agent: 150 tools for capture, extraction, and observation.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "app.crawlio/crawlio-browser",
+        "packages": [
+          {
+            "identifier": "crawlio-browser",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.11.0"
+          }
+        ],
+        "query": "browser",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/Crawlio-app/crawlio-browser"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.11.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Control a real Chrome browser to complete any task: fill forms, extract data, book flights.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.browser-use/browser-use",
+        "packages": [
+          {
+            "identifier": "browser-use",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "uvx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.13.5"
+          }
+        ],
+        "query": "browser",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/browser-use/browser-use"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.13.5",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Create and control browser sessions for web automation, testing, and AI agent tasks",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.mcparmory/browserbase",
+        "packages": [
+          {
+            "identifier": "mcparmory-browserbase",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "uvx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.4"
+          },
+          {
+            "identifier": "ghcr.io/mcparmory/browserbase:1.0.4",
+            "registry_type": "oci",
+            "required_environment": [],
+            "runtime_hint": "docker",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": null
+          }
+        ],
+        "query": "browser",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/mcparmory/registry"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.4",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Czech distressed real estate \u2014 anonymized district aggregates (k\u22655). Free tier.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "dev.cz-agents/realestate",
+        "packages": [
+          {
+            "identifier": "@czagents/realestate",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": "npx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.2.1"
+          }
+        ],
+        "query": "real",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://realestate.cz-agents.dev/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "subfolder": "packages/realestate",
+          "url": "https://github.com/martinhavel/cz-agents-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.3.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "AI-powered browser automation MCP \u2014 6 tools for web interaction, extraction, and validation.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.AINative-Studio/ainative-browser-mcp",
+        "packages": [
+          {
+            "identifier": "@ainative/browser-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.1.2"
+          }
+        ],
+        "query": "browser",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/AINative-Studio/ainative-browser-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.1.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Real Estate Listing MCP Server by MEOK AI Labs",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.CSOAI-ORG/real-estate-listing-mcp",
+        "packages": [
+          {
+            "identifier": "real-estate-listing-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "python",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.9"
+          }
+        ],
+        "query": "real",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/CSOAI-ORG/real-estate-listing-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.9",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "MCP server for Unreal Engine 5 with 23 tools for game development automation.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.ChiR24/unreal-engine-mcp",
+        "packages": [
+          {
+            "identifier": "unreal-engine-mcp-server",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.6.0-beta-a"
+          }
+        ],
+        "query": "real",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/ChiR24/Unreal_mcp.git"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.6.0-beta-a",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Chrome over CDP for AI agents. Blind benchmark vs agent-browser: -33% tokens, -33% cost, -32% time",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.Silbercue/public-browser",
+        "packages": [
+          {
+            "identifier": "public-browser",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "3.0.0"
+          }
+        ],
+        "query": "browser",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/Silbercue/public-browser"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "3.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Authenticated MCP Agent (Openai)",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.getvda/authenticated-mcp-agent-openai",
+        "packages": [],
+        "query": "open",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://authenticated-mcp-agent-openai.getvda.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "LLM Orchestration Agent (Langchain Openai)",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.getvda/llm-orchestration-agent-langchain-openai",
+        "packages": [],
+        "query": "open",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://llm-orchestration-agent-langchain-openai.getvda.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "LLM Orchestration Agent (Openai)",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.getvda/llm-orchestration-agent-openai",
+        "packages": [],
+        "query": "open",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://llm-orchestration-agent-openai.getvda.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "LLM Orchestration Agent (Opentelemetry Api)",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.getvda/llm-orchestration-agent-opentelemetry-api",
+        "packages": [],
+        "query": "open",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://llm-orchestration-agent-opentelemetry-api.getvda.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "LLM Orchestration Agent (Opentelemetry Instrumentation Fastapi)",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.getvda/llm-orchestration-agent-opentelemetry-instrumentation-fastapi",
+        "packages": [],
+        "query": "open",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://llm-orchestration-agent-opentelemetry-instrume-a529e4.getvda.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "OAuth LangChain OpenAI Agent",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.getvda/oauth-langchain-openai-agent",
+        "packages": [],
+        "query": "open",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://authenticated-llm-agent-google-auth-oauthlib.getvda.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Structured Output Agent (Openai)",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.getvda/structured-output-agent-openai",
+        "packages": [],
+        "query": "open",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://structured-output-agent-openai.getvda.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Traced OpenAI LangChain Agent",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.getvda/traced-openai-langchain-agent",
+        "packages": [],
+        "query": "open",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://authenticated-mcp-agent-opentelemetry-api.getvda.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "The Open House: a locker, a verifier, a fair coin, a job board, and rooms that give nothing back.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.gregbenza/openhouse",
+        "packages": [],
+        "query": "open",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://gregbenza.ai/mcp/openhouse"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/TheNonduality/gregbenza-ai"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Open scientific and engineering knowledge for AI agents: search, evidence, document publishing.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.openarx/openarx",
+        "packages": [],
+        "query": "open",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.openarx.ai/researcher/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/OpenArx-AI/openarx-core"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.3.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Real estate deal analysis from chat: rental underwriting, buy-box matching, deal library, docs.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.realastat/realastat",
+        "packages": [],
+        "query": "real",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://realastat.ai/api/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Control Unreal Engine to browse assets, import content, and manage levels and sequences. Automate\u2026",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.smithery/ChiR24-unreal_mcp",
+        "packages": [],
+        "query": "real",
+        "remotes": [
+          {
+            "required_headers": [
+              "Authorization"
+            ],
+            "type": "streamable-http",
+            "url": "https://server.smithery.ai/@ChiR24/unreal_mcp/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/ChiR24/Unreal_mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.4.6",
+        "zero_cost_eligible": true
+      }
+    ],
+    "effect": "Using a real rendered browser, open https://www.python.org/downloads/",
+    "results": [
+      {
+        "binding_performed": false,
+        "candidate_count": 30,
+        "candidates": [
+          {
+            "archive_sha256": "285a6a35874da62f8314c9798f00191b3dc242ac5bbb046a8a52b29b9f273570",
+            "binding_kind": "apt",
+            "description": "open a web browser from Haskell",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 4,
+            "matched_terms": [
+              "browser",
+              "open"
+            ],
+            "name": "libghc-open-browser-dev",
+            "packages": [],
+            "query": "browser",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 48,
+            "version": "0.2.1.0-9",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "21dd74d44e4d2cb596e00c5e7b68555467dc792a95ee93e16add6176bb74679e",
+            "binding_kind": "apt",
+            "description": "open a web browser from Haskell; documentation",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 4,
+            "matched_terms": [
+              "browser",
+              "open"
+            ],
+            "name": "libghc-open-browser-doc",
+            "packages": [],
+            "query": "browser",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 48,
+            "version": "0.2.1.0-9",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "439f5d2b0a57e9088fd5320e02f63397978fd9b1a26fd3ff14760131ae75f92a",
+            "binding_kind": "apt",
+            "description": "open a web browser from Haskell; profiling libraries",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 4,
+            "matched_terms": [
+              "browser",
+              "open"
+            ],
+            "name": "libghc-open-browser-prof",
+            "packages": [],
+            "query": "browser",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 48,
+            "version": "0.2.1.0-9",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "135d88b473e0b49c3fe408bedf3d638657d64f80239a47be713a81df17e3bf34",
+            "binding_kind": "apt",
+            "description": "Perl module to open a browser in a given URL",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 3,
+            "matched_terms": [
+              "browser",
+              "open"
+            ],
+            "name": "libbrowser-open-perl",
+            "packages": [],
+            "query": "browser",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 42,
+            "version": "0.04-1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "e3bbcccc2eeee213a416936b6b238bced7fcdffc321625c4c5320c3a03e25892",
+            "binding_kind": "apt",
+            "description": "helpers to open URLs, files, or readers in a web browser (Go library)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 4,
+            "matched_terms": [
+              "browser",
+              "open"
+            ],
+            "name": "golang-github-cli-browser-dev",
+            "packages": [],
+            "query": "browser",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 36,
+            "version": "1.3.0-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "a3c02e3a5c8d6ff9c001e0a305d116879559b6f5849ce1b9b896bf9666c29324",
+            "binding_kind": "apt",
+            "description": "Helpers to open files, readers, and URLs in a browser window",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 4,
+            "matched_terms": [
+              "browser",
+              "open"
+            ],
+            "name": "golang-github-pkg-browser-dev",
+            "packages": [],
+            "query": "browser",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 36,
+            "version": "0.0~git20210911.681adbf-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "dc261e2e8f6122f1e02a1df18696829f3c82f2bdd8f078fee8898a8c4d126c9d",
+            "binding_kind": "apt",
+            "description": "Quick browser plug-in for Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "browser"
+            ],
+            "name": "cairo-dock-quick-browser-plug-in",
+            "packages": [],
+            "query": "browser",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "76f4dfa24bbccdd9728f23d7eee045bdd33804549bceac8ad7a083f40c58a1e7",
+            "binding_kind": "apt",
+            "description": "Caja plugin for opening terminals in arbitrary local paths",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "open"
+            ],
+            "name": "caja-open-terminal",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.26.1-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "a58c5f91884b06f58fc00aac4632c19fdfeeda12520b892f9e580e5cf2005c36",
+            "binding_kind": "apt",
+            "description": "Transitional package - chromium-browser -> chromium snap",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "browser"
+            ],
+            "name": "chromium-browser",
+            "packages": [],
+            "query": "browser",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2:1snap1-0ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "6c37210b815610820d229c9189746dad7aa8c456f25a5e4010ba6ba8384c1cff",
+            "binding_kind": "apt",
+            "description": "Transitional package - chromium-browser-l10n -> chromium snap",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "browser"
+            ],
+            "name": "chromium-browser-l10n",
+            "packages": [],
+            "query": "browser",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2:1snap1-0ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d11b912183292c47c6994c33fedd0a920559b87058caab93b64adc7c690d0547",
+            "binding_kind": "apt",
+            "description": "Intuitive GNOME web browser",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "browser"
+            ],
+            "name": "epiphany-browser",
+            "packages": [],
+            "query": "browser",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.5-0ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "6cb08d7091b01dc6e1c01a5e22ea37a959b0c92e66ff6bc43d19f5a5f2a78c6f",
+            "binding_kind": "apt",
+            "description": "Data files for the GNOME web browser",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "browser"
+            ],
+            "name": "epiphany-browser-data",
+            "packages": [],
+            "query": "browser",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.5-0ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d7b1f2d7f39da18e4e3de703e25bb91b09757e8a70bae037ae57410a7fd57a10",
+            "binding_kind": "apt",
+            "description": "humanist sans serif typeface by Steve Matteson",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "open"
+            ],
+            "name": "fonts-open-sans",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.11-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "3b081196665977c418e534a7426d66f5e69924f7ad87ac82089c11a22627394c",
+            "binding_kind": "apt",
+            "description": "source code class and function browser plugin for Gedit",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "browser"
+            ],
+            "name": "gedit-source-code-browser-plugin",
+            "packages": [],
+            "query": "browser",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.0.3-6",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "15af5661e857f72724856b5b47b4816b7ff35ba14dc4c73a7f0027e6c1b0c0ad",
+            "binding_kind": "apt",
+            "description": "GNOME Shell extensions integration for web browsers",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "browser"
+            ],
+            "name": "gnome-browser-connector",
+            "packages": [],
+            "query": "browser",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "42.1-4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d438564bc17b854772482af5dc92bdeb1dd8dcd9172e68d93b0cff6ea6c3185c",
+            "binding_kind": "apt",
+            "description": "Open source SVG symbol sets that can be used as Inkscape symbols",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "open"
+            ],
+            "name": "inkscape-open-symbols",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.2.1-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "03370057bddb776dd920ef1283ac654025156c7141c1a95a13d0e3b85239174c",
+            "binding_kind": "apt",
+            "description": "Extra drivers for nvidia-525-open for the aws flavour (dummy transitional package)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "open"
+            ],
+            "name": "linux-modules-nvidia-525-open-aws",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.17.0-1019.19~24.04.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "66ad823140da14c62be7cef701574baa0dadf1e8577f0999bd1402e57b17caa7",
+            "binding_kind": "apt",
+            "description": "Extra drivers for nvidia-525-open for the aws flavour (dummy transitional package)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "open"
+            ],
+            "name": "linux-modules-nvidia-525-open-aws-6.14",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.14.0-1018.18~24.04.1+3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "943abb39021c45f455f374dee60487e050a27012b6d45b078dd7cef1e834b1bf",
+            "binding_kind": "apt",
+            "description": "Extra drivers for nvidia-525-open for the aws flavour (dummy transitional package)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "open"
+            ],
+            "name": "linux-modules-nvidia-525-open-aws-6.17",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.17.0-1019.19~24.04.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "fc4bac2e98844d65d8a6dd3fcc04c0ecd4b93ea645b4684a0a2c764dafa040e6",
+            "binding_kind": "apt",
+            "description": "Extra drivers for nvidia-525-open for the aws flavour (dummy transitional package)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "open"
+            ],
+            "name": "linux-modules-nvidia-525-open-aws-6.8",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.8.0-1060.63",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "9182a4e20269fc64435de939b795d0e136259abe9bd6a1d8dfcd9ed6b2b39868",
+            "binding_kind": "apt",
+            "description": "Extra drivers for nvidia-525-open for the aws flavour (dummy transitional package)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "open"
+            ],
+            "name": "linux-modules-nvidia-525-open-aws-7.0",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "7.0.0-1007.7~24.04.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "9769447fb673478edf8c1ed61085814acf8f1ed1f2df2ff09bc99723cc4dcf93",
+            "binding_kind": "apt",
+            "description": "Extra drivers for nvidia-525-open for the aws flavour (dummy transitional package)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "open"
+            ],
+            "name": "linux-modules-nvidia-525-open-aws-edge",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "7.0.0-1007.7~24.04.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "4d6ca0ef17d2af19fb6f53689438d6a70f2f4c647ba8a2d557bdac5e0b372771",
+            "binding_kind": "apt",
+            "description": "Extra drivers for nvidia-525-open for the aws flavour (dummy transitional package)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "open"
+            ],
+            "name": "linux-modules-nvidia-525-open-aws-lts-24.04",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.8.0-1060.63",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "756018fda475cf232d65ee1468a93407122a18766c91a8b62fcf41b8a198b056",
+            "binding_kind": "apt",
+            "description": "Extra drivers for nvidia-525-open for the azure flavour (dummy transitional package)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "open"
+            ],
+            "name": "linux-modules-nvidia-525-open-azure",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.17.0-1020.20~24.04.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "4e85cd57f13501616f1cbb3be3a9c2e2b999711fdf62f93b2ed60bc3dedb590a",
+            "binding_kind": "apt",
+            "description": "Extra drivers for nvidia-525-open for the azure flavour (dummy transitional package)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "open"
+            ],
+            "name": "linux-modules-nvidia-525-open-azure-6.11",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.11.0-1018.18~24.04.1+3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "660a216492f1995806a86dab107e7182ef86e8a61889d62a36a711bcfd929d73",
+            "binding_kind": "apt",
+            "description": "Extra drivers for nvidia-525-open for the azure flavour (dummy transitional package)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "open"
+            ],
+            "name": "linux-modules-nvidia-525-open-azure-6.14",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.14.0-1017.17~24.04.1+2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "8340da477587778f24c705903fa4a069346a49d783ca6a1144a787742f3e0f37",
+            "binding_kind": "apt",
+            "description": "Extra drivers for nvidia-525-open for the azure flavour (dummy transitional package)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "open"
+            ],
+            "name": "linux-modules-nvidia-525-open-azure-6.17",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.17.0-1020.20~24.04.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "46d7d3e5065a75a69375c11caa755721b10186291b4b074683fc68c0111a65e9",
+            "binding_kind": "apt",
+            "description": "Extra drivers for nvidia-525-open for the azure flavour (dummy transitional package)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "open"
+            ],
+            "name": "linux-modules-nvidia-525-open-azure-6.8",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.8.0-1062.69",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "ddb87f53f842c8663eb5d905210330657d16de493f3df1a2f5b6edb96bc1e037",
+            "binding_kind": "apt",
+            "description": "Extra drivers for nvidia-525-open for the azure flavour (dummy transitional package)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "open"
+            ],
+            "name": "linux-modules-nvidia-525-open-azure-7.0",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "7.0.0-1008.8~24.04.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "963f6db7a9436d8338727d0416a8d21aaa60fba84bf5fa23ae3108306dc16a53",
+            "binding_kind": "apt",
+            "description": "Extra drivers for nvidia-525-open for the azure flavour (dummy transitional package)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "open"
+            ],
+            "name": "linux-modules-nvidia-525-open-azure-edge",
+            "packages": [],
+            "query": "open",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "7.0.0-1008.8~24.04.2",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Using a real rendered browser, open https://www.python.org/downloads/",
+        "errors": [],
+        "queries": [
+          "real",
+          "rendered",
+          "browser",
+          "open"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "APT_CATALOG",
+        "source_url": null
+      },
+      {
+        "binding_performed": false,
+        "candidate_count": 90,
+        "candidates": [
+          {
+            "description": "Bridge a live Chrome browser to your agent: 150 tools for capture, extraction, and observation.",
+            "is_latest": true,
+            "name": "app.crawlio/crawlio-browser",
+            "packages": [
+              {
+                "identifier": "crawlio-browser",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.11.0"
+              }
+            ],
+            "query": "browser",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Crawlio-app/crawlio-browser"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.11.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Control a real Chrome browser to complete any task: fill forms, extract data, book flights.",
+            "is_latest": true,
+            "name": "com.browser-use/browser-use",
+            "packages": [
+              {
+                "identifier": "browser-use",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "uvx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.13.5"
+              }
+            ],
+            "query": "browser",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/browser-use/browser-use"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.13.5",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Create and control browser sessions for web automation, testing, and AI agent tasks",
+            "is_latest": true,
+            "name": "com.mcparmory/browserbase",
+            "packages": [
+              {
+                "identifier": "mcparmory-browserbase",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "uvx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.4"
+              },
+              {
+                "identifier": "ghcr.io/mcparmory/browserbase:1.0.4",
+                "registry_type": "oci",
+                "required_environment": [],
+                "runtime_hint": "docker",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": null
+              }
+            ],
+            "query": "browser",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/mcparmory/registry"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.4",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Czech distressed real estate \u2014 anonymized district aggregates (k\u22655). Free tier.",
+            "is_latest": true,
+            "name": "dev.cz-agents/realestate",
+            "packages": [
+              {
+                "identifier": "@czagents/realestate",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": "npx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.2.1"
+              }
+            ],
+            "query": "real",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://realestate.cz-agents.dev/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "subfolder": "packages/realestate",
+              "url": "https://github.com/martinhavel/cz-agents-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.3.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "AI-powered browser automation MCP \u2014 6 tools for web interaction, extraction, and validation.",
+            "is_latest": true,
+            "name": "io.github.AINative-Studio/ainative-browser-mcp",
+            "packages": [
+              {
+                "identifier": "@ainative/browser-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.1.2"
+              }
+            ],
+            "query": "browser",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/AINative-Studio/ainative-browser-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.1.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Real Estate Listing MCP Server by MEOK AI Labs",
+            "is_latest": true,
+            "name": "io.github.CSOAI-ORG/real-estate-listing-mcp",
+            "packages": [
+              {
+                "identifier": "real-estate-listing-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "python",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.9"
+              }
+            ],
+            "query": "real",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/CSOAI-ORG/real-estate-listing-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.9",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP server for Unreal Engine 5 with 23 tools for game development automation.",
+            "is_latest": true,
+            "name": "io.github.ChiR24/unreal-engine-mcp",
+            "packages": [
+              {
+                "identifier": "unreal-engine-mcp-server",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.6.0-beta-a"
+              }
+            ],
+            "query": "real",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/ChiR24/Unreal_mcp.git"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.6.0-beta-a",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Chrome over CDP for AI agents. Blind benchmark vs agent-browser: -33% tokens, -33% cost, -32% time",
+            "is_latest": true,
+            "name": "io.github.Silbercue/public-browser",
+            "packages": [
+              {
+                "identifier": "public-browser",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "3.0.0"
+              }
+            ],
+            "query": "browser",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Silbercue/public-browser"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "3.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Authenticated MCP Agent (Openai)",
+            "is_latest": true,
+            "name": "ai.getvda/authenticated-mcp-agent-openai",
+            "packages": [],
+            "query": "open",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://authenticated-mcp-agent-openai.getvda.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "LLM Orchestration Agent (Langchain Openai)",
+            "is_latest": true,
+            "name": "ai.getvda/llm-orchestration-agent-langchain-openai",
+            "packages": [],
+            "query": "open",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://llm-orchestration-agent-langchain-openai.getvda.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "LLM Orchestration Agent (Openai)",
+            "is_latest": true,
+            "name": "ai.getvda/llm-orchestration-agent-openai",
+            "packages": [],
+            "query": "open",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://llm-orchestration-agent-openai.getvda.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "LLM Orchestration Agent (Opentelemetry Api)",
+            "is_latest": true,
+            "name": "ai.getvda/llm-orchestration-agent-opentelemetry-api",
+            "packages": [],
+            "query": "open",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://llm-orchestration-agent-opentelemetry-api.getvda.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "LLM Orchestration Agent (Opentelemetry Instrumentation Fastapi)",
+            "is_latest": true,
+            "name": "ai.getvda/llm-orchestration-agent-opentelemetry-instrumentation-fastapi",
+            "packages": [],
+            "query": "open",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://llm-orchestration-agent-opentelemetry-instrume-a529e4.getvda.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "OAuth LangChain OpenAI Agent",
+            "is_latest": true,
+            "name": "ai.getvda/oauth-langchain-openai-agent",
+            "packages": [],
+            "query": "open",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://authenticated-llm-agent-google-auth-oauthlib.getvda.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Structured Output Agent (Openai)",
+            "is_latest": true,
+            "name": "ai.getvda/structured-output-agent-openai",
+            "packages": [],
+            "query": "open",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://structured-output-agent-openai.getvda.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Traced OpenAI LangChain Agent",
+            "is_latest": true,
+            "name": "ai.getvda/traced-openai-langchain-agent",
+            "packages": [],
+            "query": "open",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://authenticated-mcp-agent-opentelemetry-api.getvda.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "The Open House: a locker, a verifier, a fair coin, a job board, and rooms that give nothing back.",
+            "is_latest": true,
+            "name": "ai.gregbenza/openhouse",
+            "packages": [],
+            "query": "open",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://gregbenza.ai/mcp/openhouse"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/TheNonduality/gregbenza-ai"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Open scientific and engineering knowledge for AI agents: search, evidence, document publishing.",
+            "is_latest": true,
+            "name": "ai.openarx/openarx",
+            "packages": [],
+            "query": "open",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.openarx.ai/researcher/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/OpenArx-AI/openarx-core"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.3.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Real estate deal analysis from chat: rental underwriting, buy-box matching, deal library, docs.",
+            "is_latest": true,
+            "name": "ai.realastat/realastat",
+            "packages": [],
+            "query": "real",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://realastat.ai/api/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Control Unreal Engine to browse assets, import content, and manage levels and sequences. Automate\u2026",
+            "is_latest": true,
+            "name": "ai.smithery/ChiR24-unreal_mcp",
+            "packages": [],
+            "query": "real",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@ChiR24/unreal_mcp/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/ChiR24/Unreal_mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.4.6",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "A comprehensive Model Context Protocol (MCP) server that enables AI assistants to control Unreal E\u2026",
+            "is_latest": true,
+            "name": "ai.smithery/ChiR24-unreal_mcp_server",
+            "packages": [],
+            "query": "real",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@ChiR24/unreal_mcp_server/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/ChiR24/Unreal_mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.4.4",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Broker opinions of value, comparables and underwriting for commercial real estate.",
+            "is_latest": true,
+            "name": "ai.titleman/commercial-real-estate-property-valuation",
+            "packages": [],
+            "query": "real",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://titleman.ai/_mcp/titleman"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Korean real estate: court auctions, 10M+ MOLIT records, subscription notice facts, loan/DSR rules",
+            "is_latest": true,
+            "name": "app.sallim/korea-realty",
+            "packages": [],
+            "query": "real",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://realty.sallim.app/mcp?via=official"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/sallim-app/korea-realty"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.86.8",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Floreal Holidays Belgium: live prices and availability; staff sign in for groups, day sheets, tasks.",
+            "is_latest": true,
+            "name": "be.florealholidays/workspace",
+            "packages": [],
+            "query": "real",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.florealholidays.be/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/devliegerwout/FlorealSystem"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.6.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Score any website's AI-agent readiness. Open Agent Registry scanner + platform tools.",
+            "is_latest": true,
+            "name": "bot.myagi/openagent-registry",
+            "packages": [],
+            "query": "open",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://myagi.bot/api/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/aaronkpickrell/openagent-registry"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "I do everything related to Browser Automation & Management",
+            "is_latest": true,
+            "name": "co.civai.nova/browsergpt-agent",
+            "packages": [],
+            "query": "browser",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://nova.civai.co/mcp/agents/browsergpt-agent"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Undetectable cloud browser sessions for AI agents and scrapers. Navigate, extract, click, captcha.",
+            "is_latest": true,
+            "name": "com.browserforest/browser-forest",
+            "packages": [],
+            "query": "browser",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://browserforest.com/api/mcp/bf"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Approval receipts for AI browser purchases.",
+            "is_latest": true,
+            "name": "com.clauxel.browserspendguard/browserspendguard-mcp",
+            "packages": [],
+            "query": "browser",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://browserspendguard.clauxel.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/clauxel/browser-spend-guard-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "AI-native real estate discovery with structured property search and market intelligence.",
+            "is_latest": true,
+            "name": "com.housenstars/real-estate-discovery",
+            "packages": [],
+            "query": "real",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://hns-chatgpt-app.onrender.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Read-only server for jacobcampbellrealtor.com: licensee, service area, referrals, site search.",
+            "is_latest": true,
+            "name": "com.jacobcampbellrealtor/jacobcampbellrealtor",
+            "packages": [],
+            "query": "real",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://jacobcampbellrealtor.com/mcp-server.php"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Using a real rendered browser, open https://www.python.org/downloads/",
+        "errors": [],
+        "queries": [
+          "real",
+          "rendered",
+          "browser",
+          "open"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "OFFICIAL_MCP_REGISTRY",
+        "source_url": "https://registry.modelcontextprotocol.io"
+      }
+    ],
+    "schema": "PROJECT_BRAIN_FEDERATED_CAPABILITY_DISCOVERY_V1",
+    "sources": [
+      "APT_CATALOG",
+      "OFFICIAL_MCP_REGISTRY"
+    ]
+  },
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
+  "source": "FEDERATED_CAPABILITY_DISCOVERY_FALLBACK",
+  "targeted_acquisition_error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"ironic-python-agent\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"kodi-eventclients-python\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"netdata-plugins-python\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"ola-python\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"casparcg-server\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fonts-gnutypewriter\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:E: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/x/xdg-desktop-portal/xdg-desktop-portal_1.18.4-1ubuntu2.24.04.2_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\\n\", \"name\": \"cairo-dock-dbus-plug-in-interface-python\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"claws-mail-python-plugin\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"colortest-python\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"dh-python\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"dico-module-python\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-python-environment\", \"status\": \"CONTRACT_REJECTED\"}]"
+}

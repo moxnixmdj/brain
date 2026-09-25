@@ -1,0 +1,1431 @@
+{
+  "attempts": [
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "0e2e78a5d0a1d15f6f966d5d8f7f3603b0cfd70f9d1578f742fcc139596424aa",
+        "executables": [
+          {
+            "executable": "/usr/bin/ironic-collect-introspection-data",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "usage: ironic-collect-introspection-data [-h]\n                                         [--advertise_host ADVERTISE_HOST]\n                                         [--advertise_port ADVERTISE_PORT]\n                                         [--advertise_protocol ADVERTISE_PROTOCOL]\n                                         [--agent_token AGENT_TOKEN]\n                                         [--agent_token_required]\n                                         [--api_url API_URL]\n                                         [--auto_tls_allowed_clock_skew AUTO_TLS_ALLOWED_CLOCK_SKEW]\n                                         [--cafile CAFILE]\n                                         [--certfile CERTFILE]\n                                         [--collect_lldp] [--config-dir DIR]\n                                         [--config-file PATH] [--debug]\n                                         [--disk_wait_attempts DISK_WAIT_ATTEMPTS]\n                                         [--disk_wait_delay DISK_WAIT_DELAY]\n                                         [--enable_auto_tls]\n                                         [--enable_vlan_interfaces ENABLE_VLAN_INTERFACES]\n                                         [--fail_if_clock_not_set]\n                                         [--global_request_id GLOBAL_REQUEST_ID]\n                                         [--guard-special-filesystems]\n                                         [--hardware_initialization_delay HARDWARE_INITIALIZATION_DELAY]\n                                         [--ignore_bootloader_failure]\n                                         [--image_download_connection_retries IMAGE_DOWNLOAD_CONNECTION_RETRIES]\n                                         [--image_download_connection_retry_interval IMAGE_DOWNLOAD_CONNECTION_RETRY_INTERVAL]\n                                         [--image_download_connection_timeout IMAGE_DOWNLOAD_CONNECTION_TIMEOUT]\n                                         [--inject_files_priority INJECT_FILES_PRIORITY]\n                                         [--insecure]\n                                         [--inspection_callback_url INSPECTION_CALLBACK_URL]\n                                         [--inspection_collectors INSPECTION_COLLECTORS]\n                                         [--inspection_dhcp_all_interfaces]\n                                         [--inspection_dhcp_wait_timeout INSPECTION_DHCP_WAIT_TIMEOUT]\n                                         [--introspection_daemon]\n                                         [--introspection_daemon_post_interval INTROSPECTION_DAEMON_POST_INTERVAL]\n                                         [--ip_lookup_attempts IP_LOOKUP_ATTEMPTS]\n                                         [--ip_lookup_sleep IP_LOOKUP_SLEEP]\n                                         [--ironic_api_version IRONIC_API_VERSION]\n                                         [--keyfile KEYFILE]\n                                         [--listen_host LISTEN_HOST]\n                                         [--listen_port LISTEN_PORT]\n                                         [--listen_tls]\n                                         [--lldp_timeout LLDP_TIMEOUT]\n                                         [--log-config-append PATH]\n                                         [--log-date-format DATE_FORMAT]\n                                         [--log-dir LOG_DIR] [--log-file PATH]\n                                         [--lookup_interval LOOKUP_INTERVAL]\n                                         [--lookup_timeout LOOKUP_TIMEOUT]\n                                         [--network_interface NETWORK_INTERFACE]\n                                         [--noagent_token_required]\n                                         [--nocollect_lldp] [--nodebug]\n                                         [--noenable_auto_tls]\n                                         [--nofail_if_clock_not_set]\n                                         [--noguard-special-filesystems]\n                                         [--noignore_bootloader_failure]\n                                         [--noinsecure]\n                                         [--noinspection_dhcp_all_interfaces]\n                                         [--nointrospection_daemon]\n                                         [--nolisten_tls] [--nouse-journal]\n                                         [--nouse-json] [--nouse-syslog]\n                                         [--nowatch-log-file]\n                                         [--ntp_server NTP_SERVER]\n                                         [--syslog-log-facility SYSLOG_LOG_FACILITY]\n                                         [--use-journal] [--use-json]\n                                         [--use-syslog] [--watch-log-file]\n\noptions:\n  -h, --help            show this help message and exit\n  --advertise_host ADVERTISE_HOST\n                        The host to tell Ironic to reply and send commands to.\n                        Can be supplied as \"ipa-advertise-host\" kernel\n                        parameter.\n  --advertise_port ADVERTISE_PORT\n                        The port to tell Ironic to reply and send commands to.\n                        Can be supplied as \"ipa-advertise-port\" kernel\n                        parameter.\n  --advertise_protocol ADVERTISE_PROTOCOL\n                        Protocol to use for the callback URL. HTTP is used by\n                        default, set to \"https\" if you have HTTPS configured.\n                        Allowed values: http, https\n  --agent_token AGENT_TOKEN\n                        Pre-shared token to use when working with the ironic\n                        API. This value is typically supplied by ironic\n                        automatically.\n  --agent_token_required\n                        Control to enforce if API command requests should\n                        enforce token validation. The configuration provided\n                        by the conductor MAY override this and force this\n                        setting to be changed to True in memory.\n  --api_url API_URL     URL of the Ironic API. Can be supplied as \"ipa-api-\n                        url\" kernel parameter.The value must start with either\n                        http:// or https://. A special value \"mdns\" can be\n                        specified to fetch the URL using multicast DNS service\n                        discovery.\n  --auto_tls_allowed_clock_skew AUTO_TLS_ALLOWED_CLOCK_SKEW\n                        Clock skew (in seconds) allowed in the generated TLS\n                        certificate.\n  --cafile CAFILE       Path to PEM encoded Certificate Authority file to use\n                        when verifying HTTPS connections. Default is to use\n                        available system-wide configured CAs.\n  --certfile CERTFILE   Path to PEM encoded client certificate cert file. Must\n                        be provided together with \"keyfile\" option. Default is\n                        to not present any client certificates to the server.\n  --collect_lldp        Whether IPA should attempt to receive LLDP packets for\n                        each network interface it discovers in the inventory.\n                        Can be supplied as \"ipa-collect-lldp\" kernel\n                        parameter.\n  --config-dir DIR      Path to a config directory to pull `*.conf` files\n                        from. This file set is sorted, so as to provide a\n                        predictable parse order if individual options are\n                        over-ridden. The set is parsed after the file(s)\n                        specified via previous --config-file, arguments hence\n                        over-ridden options in the directory take precedence.\n                        This option must be set from the command-line.\n  --config-file PATH    Path to a config file to use. Multiple config files\n                        can be specified, with values in later files taking\n                        precedence. Defaults to None. This option must be set\n                        from the command-line.\n  --debug, -d           If set to true, the logging level will be set to DEBUG\n                        instead of the default INFO level.\n  --disk_wait_attempts DISK_WAIT_ATTEMPTS\n                        The number of times to try and check to see if at\n                        least one suitable disk has appeared in inventory\n                        before proceeding with any actions. Can be supplied as\n                        \"ipa-disk-wait-attempts\" kernel parameter.\n  --disk_wait_delay DISK_WAIT_DELAY\n                        How much time (in seconds) to wait between attempts to\n                        check if at least one suitable disk has appeared in\n                        inventory. Set to zero to disable. Can be supplied as\n                        \"ipa-disk-wait-delay\" kernel parameter.\n  --enable_auto_tls     Enables auto-generating TLS parameters when listen_tls\n                        is False and ironic API version indicates support for\n                        automatic agent TLS.\n  --enable_vlan_interfaces ENABLE_VLAN_INTERFACES\n                        Comma-separated list of VLAN interfaces to enable, in\n                        the format \"interface.vlan\". If only an interface is\n                        provided, then IPA should attempt to bring up all\n                        VLANs on that interface detected via lldp. If \"all\" is\n                        set then IPA should attempt to bring up all VLANs from\n                        lldp on all interfaces. By default, no VLANs will be\n                        brought up.\n  --fail_if_clock_not_set\n                        If operations should fail if the clock time sync fails\n                        to complete successfully.\n  --global_request_id GLOBAL_REQUEST_ID\n                        Global request ID header to provide to Ironic API. Can\n                        be supplied as \"ipa-global-request-id\" kernel\n                        parameter. The v"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/ironic-python-agent",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "usage: ironic-python-agent [-h] [--advertise_host ADVERTISE_HOST]\n                           [--advertise_port ADVERTISE_PORT]\n                           [--advertise_protocol ADVERTISE_PROTOCOL]\n                           [--agent_token AGENT_TOKEN]\n                           [--agent_token_required] [--api_url API_URL]\n                           [--auto_tls_allowed_clock_skew AUTO_TLS_ALLOWED_CLOCK_SKEW]\n                           [--cafile CAFILE] [--certfile CERTFILE]\n                           [--collect_lldp] [--config-dir DIR]\n                           [--config-file PATH] [--debug]\n                           [--disk_wait_attempts DISK_WAIT_ATTEMPTS]\n                           [--disk_wait_delay DISK_WAIT_DELAY]\n                           [--enable_auto_tls]\n                           [--enable_vlan_interfaces ENABLE_VLAN_INTERFACES]\n                           [--fail_if_clock_not_set]\n                           [--global_request_id GLOBAL_REQUEST_ID]\n                           [--guard-special-filesystems]\n                           [--hardware_initialization_delay HARDWARE_INITIALIZATION_DELAY]\n                           [--ignore_bootloader_failure]\n                           [--image_download_connection_retries IMAGE_DOWNLOAD_CONNECTION_RETRIES]\n                           [--image_download_connection_retry_interval IMAGE_DOWNLOAD_CONNECTION_RETRY_INTERVAL]\n                           [--image_download_connection_timeout IMAGE_DOWNLOAD_CONNECTION_TIMEOUT]\n                           [--inject_files_priority INJECT_FILES_PRIORITY]\n                           [--insecure]\n                           [--inspection_callback_url INSPECTION_CALLBACK_URL]\n                           [--inspection_collectors INSPECTION_COLLECTORS]\n                           [--inspection_dhcp_all_interfaces]\n                           [--inspection_dhcp_wait_timeout INSPECTION_DHCP_WAIT_TIMEOUT]\n                           [--introspection_daemon]\n                           [--introspection_daemon_post_interval INTROSPECTION_DAEMON_POST_INTERVAL]\n                           [--ip_lookup_attempts IP_LOOKUP_ATTEMPTS]\n                           [--ip_lookup_sleep IP_LOOKUP_SLEEP]\n                           [--ironic_api_version IRONIC_API_VERSION]\n                           [--keyfile KEYFILE] [--listen_host LISTEN_HOST]\n                           [--listen_port LISTEN_PORT] [--listen_tls]\n                           [--lldp_timeout LLDP_TIMEOUT]\n                           [--log-config-append PATH]\n                           [--log-date-format DATE_FORMAT] [--log-dir LOG_DIR]\n                           [--log-file PATH]\n                           [--lookup_interval LOOKUP_INTERVAL]\n                           [--lookup_timeout LOOKUP_TIMEOUT]\n                           [--network_interface NETWORK_INTERFACE]\n                           [--noagent_token_required] [--nocollect_lldp]\n                           [--nodebug] [--noenable_auto_tls]\n                           [--nofail_if_clock_not_set]\n                           [--noguard-special-filesystems]\n                           [--noignore_bootloader_failure] [--noinsecure]\n                           [--noinspection_dhcp_all_interfaces]\n                           [--nointrospection_daemon] [--nolisten_tls]\n                           [--nouse-journal] [--nouse-json] [--nouse-syslog]\n                           [--nowatch-log-file] [--ntp_server NTP_SERVER]\n                           [--syslog-log-facility SYSLOG_LOG_FACILITY]\n                           [--use-journal] [--use-json] [--use-syslog]\n                           [--watch-log-file]\n\noptions:\n  -h, --help            show this help message and exit\n  --advertise_host ADVERTISE_HOST\n                        The host to tell Ironic to reply and send commands to.\n                        Can be supplied as \"ipa-advertise-host\" kernel\n                        parameter.\n  --advertise_port ADVERTISE_PORT\n                        The port to tell Ironic to reply and send commands to.\n                        Can be supplied as \"ipa-advertise-port\" kernel\n                        parameter.\n  --advertise_protocol ADVERTISE_PROTOCOL\n                        Protocol to use for the callback URL. HTTP is used by\n                        default, set to \"https\" if you have HTTPS configured.\n                        Allowed values: http, https\n  --agent_token AGENT_TOKEN\n                        Pre-shared token to use when working with the ironic\n                        API. This value is typically supplied by ironic\n                        automatically.\n  --agent_token_required\n                        Control to enforce if API command requests should\n                        enforce token validation. The configuration provided\n                        by the conductor MAY override this and force this\n                        setting to be changed to True in memory.\n  --api_url API_URL     URL of the Ironic API. Can be supplied as \"ipa-api-\n                        url\" kernel parameter.The value must start with either\n                        http:// or https://. A special value \"mdns\" can be\n                        specified to fetch the URL using multicast DNS service\n                        discovery.\n  --auto_tls_allowed_clock_skew AUTO_TLS_ALLOWED_CLOCK_SKEW\n                        Clock skew (in seconds) allowed in the generated TLS\n                        certificate.\n  --cafile CAFILE       Path to PEM encoded Certificate Authority file to use\n                        when verifying HTTPS connections. Default is to use\n                        available system-wide configured CAs.\n  --certfile CERTFILE   Path to PEM encoded client certificate cert file. Must\n                        be provided together with \"keyfile\" option. Default is\n                        to not present any client certificates to the server.\n  --collect_lldp        Whether IPA should attempt to receive LLDP packets for\n                        each network interface it discovers in the inventory.\n                        Can be supplied as \"ipa-collect-lldp\" kernel\n                        parameter.\n  --config-dir DIR      Path to a config directory to pull `*.conf` files\n                        from. This file set is sorted, so as to provide a\n                        predictable parse order if individual options are\n                        over-ridden. The set is parsed after the file(s)\n                        specified via previous --config-file, arguments hence\n                        over-ridden options in the directory take precedence.\n                        This option must be set from the command-line.\n  --config-file PATH    Path to a config file to use. Multiple config files\n                        can be specified, with values in later files taking\n                        precedence. Defaults to None. This option must be set\n                        from the command-line.\n  --debug, -d           If set to true, the logging level will be set to DEBUG\n                        instead of the default INFO level.\n  --disk_wait_attempts DISK_WAIT_ATTEMPTS\n                        The number of times to try and check to see if at\n                        least one suitable disk has appeared in inventory\n                        before proceeding with any actions. Can be supplied as\n                        \"ipa-disk-wait-attempts\" kernel parameter.\n  --disk_wait_delay DISK_WAIT_DELAY\n                        How much time (in seconds) to wait between attempts to\n                        check if at least one suitable disk has appeared in\n                        inventory. Set to zero to disable. Can be supplied as\n                        \"ipa-disk-wait-delay\" kernel parameter.\n  --enable_auto_tls     Enables auto-generating TLS parameters when listen_tls\n                        is False and ironic API version indicates support for\n                        automatic agent TLS.\n  --enable_vlan_interfaces ENABLE_VLAN_INTERFACES\n                        Comma-separated list of VLAN interfaces to enable, in\n                        the format \"interface.vlan\". If only an interface is\n                        provided, then IPA should attempt to bring up all\n                        VLANs on that interface detected via lldp. If \"all\" is\n                        set then IPA should attempt to bring up all VLANs from\n                        lldp on all interfaces. By default, no VLANs will be\n                        brought up.\n  --fail_if_clock_not_set\n                        If operations should fail if the clock time sync fails\n                        to complete successfully.\n  --global_request_id GLOBAL_REQUEST_ID\n                        Global request ID header to provide to Ironic API. Can\n                        be supplied as \"ipa-global-request-id\" kernel\n                        parameter. The value must be in form \"req-<UUID>\".\n  --guard-special-filesystems\n                        Guard \"special\" shared device filesystems from\n                        cleaning by the stock hardware manager's cleaning\n                        methods. If one of these filesystems is detected\n                        during cleaning, the cleaning process will be aborted\n                        and infrastructure operator intervention may be\n                        required as this option is intended to prevent\n                        cleaning from inadvertently destroying a running\n                        cluster which may be visible over a storage fabric\n                        such as FibreChannel.\n  --hardware_initialization_delay HARDWARE_INITIALIZATION_DELAY\n                        How much time (in seconds) to wait for hardware to\n                        initialize before proceeding with any actions. Can be\n                        supplied as \"ipa-hardware-initialization-delay\" kernel\n                        parameter.\n  --ignore_bootloader_failure\n                        If the agent should ignore f"
+              }
+            ]
+          }
+        ],
+        "package": "ironic-python-agent",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "9.1.0-1ubuntu1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 96.0,
+        "archive_sha256": "0e2e78a5d0a1d15f6f966d5d8f7f3603b0cfd70f9d1578f742fcc139596424aa",
+        "binding_kind": "apt",
+        "description": "bare metal hypervisor API for OpenStack - Python Agent",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "ironic-python-agent",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "9.1.0-1ubuntu1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "eaba4a4694675c74a6933476401f51b777fa10cbaf575e990189ce5a5c2612bd",
+        "executables": [],
+        "package": "kodi-eventclients-python",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "2:20.5+dfsg-1ubuntu1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 96.0,
+        "archive_sha256": "eaba4a4694675c74a6933476401f51b777fa10cbaf575e990189ce5a5c2612bd",
+        "binding_kind": "apt",
+        "description": "Open Source Home Theatre (Event Client Python package)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "kodi-eventclients-python",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2:20.5+dfsg-1ubuntu1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "11de2658672dbf7b8415488a948a6711c48ea2ba57ec52a7fb66fa6b894cbc96",
+        "executables": [],
+        "package": "netdata-plugins-python",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.43.2-1build2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 96.0,
+        "archive_sha256": "11de2658672dbf7b8415488a948a6711c48ea2ba57ec52a7fb66fa6b894cbc96",
+        "binding_kind": "apt",
+        "description": "real-time performance monitoring (python plugins)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "netdata-plugins-python",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.43.2-1build2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "899e97bc466932b0bcfc07643ed4edcdb9a03ea3722621b7158ce7db16c044b7",
+        "executables": [],
+        "package": "ola-python",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.10.9.nojsmin-4.1build2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 96.0,
+        "archive_sha256": "899e97bc466932b0bcfc07643ed4edcdb9a03ea3722621b7158ce7db16c044b7",
+        "binding_kind": "apt",
+        "description": "Open Lighting Architecture - Python Classes",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "ola-python",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.10.9.nojsmin-4.1build2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "bf2257cf303fe838857ccbfe85f9d0ddd3ead8747e5697737f92bcea4a5820e7",
+        "executables": [
+          {
+            "executable": "/usr/bin/casparcg",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Type \"q\" to close application.\n[[]         ### Invalid configuration file. ###"
+              }
+            ]
+          }
+        ],
+        "package": "casparcg-server",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "2.3.3+dfsg-3.2build1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 74.0,
+        "archive_sha256": "bf2257cf303fe838857ccbfe85f9d0ddd3ead8747e5697737f92bcea4a5820e7",
+        "binding_kind": "apt",
+        "description": "layered real-time video compositor to multiple outputs",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "real"
+        ],
+        "name": "casparcg-server",
+        "packages": [],
+        "query": "real",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.3.3+dfsg-3.2build1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "12d8378c34cc2d515182d30c27f80de4af9ba517836cd68372f34609d907186b",
+        "executables": [],
+        "package": "fonts-gnutypewriter",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.0-2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 74.0,
+        "archive_sha256": "12d8378c34cc2d515182d30c27f80de4af9ba517836cd68372f34609d907186b",
+        "binding_kind": "apt",
+        "description": "Multilingual font imitating a real typewriter",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "real"
+        ],
+        "name": "fonts-gnutypewriter",
+        "packages": [],
+        "query": "real",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.0-2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ProbeFailure:APT_INSTALL_FAILED:E: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/x/xdg-desktop-portal/xdg-desktop-portal_1.18.4-1ubuntu2.24.04.2_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\n",
+      "status": "PROBE_FAILED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "c7951529483042d42cc35f0d14b332f315e37f82092fb82a309db6c067803cf0",
+        "binding_kind": "apt",
+        "description": "library of D-Bus interface for Python of Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "cairo-dock-dbus-plug-in-interface-python",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "dc261e2e8f6122f1e02a1df18696829f3c82f2bdd8f078fee8898a8c4d126c9d",
+        "executables": [],
+        "package": "cairo-dock-quick-browser-plug-in",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "dc261e2e8f6122f1e02a1df18696829f3c82f2bdd8f078fee8898a8c4d126c9d",
+        "binding_kind": "apt",
+        "description": "Quick browser plug-in for Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "browser"
+        ],
+        "name": "cairo-dock-quick-browser-plug-in",
+        "packages": [],
+        "query": "browser",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "76f4dfa24bbccdd9728f23d7eee045bdd33804549bceac8ad7a083f40c58a1e7",
+        "executables": [],
+        "package": "caja-open-terminal",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.26.1-2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "76f4dfa24bbccdd9728f23d7eee045bdd33804549bceac8ad7a083f40c58a1e7",
+        "binding_kind": "apt",
+        "description": "Caja plugin for opening terminals in arbitrary local paths",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "open"
+        ],
+        "name": "caja-open-terminal",
+        "packages": [],
+        "query": "open",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.26.1-2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "a58c5f91884b06f58fc00aac4632c19fdfeeda12520b892f9e580e5cf2005c36",
+        "executables": [
+          {
+            "executable": "/usr/bin/chromium-browser",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "@@PACKAGE(1)                     USER COMMANDS                    @@PACKAGE(1)\n\nNAME\n       @@PACKAGE - the web browser from Google\n\nSYNOPSIS\n       @@PACKAGE [OPTION] [PATH|URL]\n\nDESCRIPTION\n       See the Google Chrome help center for help on using the browser.\n\n              <https://support.google.com/chrome/>\n\n       This manpage only describes invocation, environment, and arguments.\n\nOPTIONS\n       @@MENUNAME  has  hundreds  of  undocumented command\u2010line flags that are\n       added and removed at the whim of the  developers.   Here,  we  document\n       relatively stable flags.\n\n       --user-data-dir=DIR\n              Specifies  the directory that user data (your \"profile\") is kept\n              in.  Defaults to $SNAP_USER_DATA/.config/@@PACKAGE  .   Separate\n              instances of @@MENUNAME must use separate user data directories;\n              repeated invocations of @@PACKAGE will reuse an existing process\n              for a given user data directory.\n\n       --incognito\n              Open in incognito mode.\n\n       --new\u2010window\n              If PATH or URL is given, open it in a new window.\n\n       --proxy\u2010server=host:port\n              Specify the HTTP/SOCKS4/SOCKS5 proxy server to use for requests.\n              This  overrides any environment variables or settings picked via\n              the options dialog.  An individual proxy server is specified us\u2010\n              ing the format:\n\n                [<proxy\u2010scheme>://]<proxy\u2010host>[:<proxy\u2010port>]\n\n              Where <proxy\u2010scheme> is the protocol of the proxy server, and is\n              one of:\n\n                \"http\", \"socks\", \"socks4\", \"socks5\".\n\n              If the <proxy\u2010scheme> is omitted, it defaults  to  \"http\".  Also\n              note that \"socks\" is equivalent to \"socks5\".\n\n              Examples:\n\n                \u2010\u2010proxy\u2010server=\"foopy:99\"\n                    Use the HTTP proxy \"foopy:99\" to load all URLs.\n\n                \u2010\u2010proxy\u2010server=\"socks://foobar:1080\"\n                    Use the SOCKS v5 proxy \"foobar:1080\" to load all URLs.\n\n                \u2010\u2010proxy\u2010server=\"socks4://foobar:1080\"\n                    Use the SOCKS v4 proxy \"foobar:1080\" to load all URLs.\n\n                \u2010\u2010proxy\u2010server=\"socks5://foobar:66\"\n                    Use the SOCKS v5 proxy \"foobar:66\" to load all URLs.\n\n              It  is also possible to specify a separate proxy server for dif\u2010\n              ferent URL types, by prefixing the proxy server specifier with a\n              URL specifier:\n\n              Example:\n\n                \u2010\u2010proxy\u2010server=\"https=proxy1:80;http=socks4://baz:1080\"\n                    Load https://* URLs using the HTTP proxy \"proxy1:80\".  And\n              load http://*\n                    URLs using the SOCKS v4 proxy \"baz:1080\".\n\n       --no\u2010proxy\u2010server\n              Disables  the proxy server.  Overrides any environment variables\n              or settings picked via the options dialog.\n\n       --proxy\u2010auto\u2010detect\n              Autodetect proxy configuration.  Overrides any environment vari\u2010\n              ables or settings picked via the options dialog.\n\n       --proxy\u2010pac\u2010url=URL\n              Specify proxy autoconfiguration URL.  Overrides any  environment\n              variables or settings picked via the options dialog.\n\n       --password\u2010store=<basic|gnome|kwallet>\n              Set  the password store to use.  The default is to automatically\n              detect based on the  desktop  environment.   basic  selects  the\n              built  in,  unencrypted  password  store.   gnome  selects Gnome\n              keyring.  kwallet selects (KDE) KWallet.  (Note that KWallet may\n              not work reliably outside KDE.)\n\n       --version\n              Show version information.\n\n       As a GTK+ app, @@MENUNAME also obeys GTK+ command\u2010line flags,  such  as\n       --display.  See the GTK documentation for more:\n\n              <http://library.gnome.org/devel/gtk/stable/gtk\u2010running.html>\n\n              <http://library.gnome.org/devel/gtk/stable/gtk\u2010x11.html>\n\nENVIRONMENT\n       @@MENUNAME obeys the following environment variables:\n\n       all_proxy\n              Shorthand   for   specifying  all  of  http_proxy,  https_proxy,\n              ftp_proxy\n\n       http_proxy, https_proxy, ftp_proxy\n              The proxy servers used for HTTP, HTTPS, and FTP.  Note:  because\n              Gnome/KDE  proxy  settings may propagate into these variables in\n              some terminals, this variable is ignored (in preference for  ac\u2010\n              tual  system  proxy  settings)  when running under Gnome or KDE.\n              Use the command\u2010line flags to set these when you want  to  force\n              their values.\n\n       auto_proxy\n              Specify proxy autoconfiguration.  Defined and empty autodetects;\n              otherwise,  it  should be an autoconfig URL.  But see above note\n              about Gnome/KDE.\n\n       SOCKS_SERVER\n              SOCKS proxy server (defaults to SOCKS v4,  also  set  SOCKS_VER\u2010\n              SION=5 to use SOCKS v5).\n\n       no_proxy\n              Comma separated list of hosts or patterns to bypass proxying.\n\nFILES\n       $SNAP_USER_DATA/.config/@@PACKAGE\n              Default directory for configuration data.\n\n       $SNAP_USER_COMMON/.cache/@@PACKAGE\n              Default  directory  for  cache  data.   (Why?  See <http://stan\u2010\n              dards.freedesktop.org/basedir\u2010spec/latest/> .)\n\nBUGS\n       Bug tracker:\n\n              http://code.google.com/p/chromium/issues/list\n\n       Be sure to do your search within \"All Issues\"  before  reporting  bugs,\n       and  be  sure  to pick the \"Defect on Linux\" template when filing a new\n       one.\n\nAUTHOR\n       The Chromium team - <http://www.chromium.org>\n\n                                                                  @@PACKAGE(1)"
+              }
+            ]
+          }
+        ],
+        "package": "chromium-browser",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "2:1snap1-0ubuntu2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "a58c5f91884b06f58fc00aac4632c19fdfeeda12520b892f9e580e5cf2005c36",
+        "binding_kind": "apt",
+        "description": "Transitional package - chromium-browser -> chromium snap",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "browser"
+        ],
+        "name": "chromium-browser",
+        "packages": [],
+        "query": "browser",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2:1snap1-0ubuntu2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "6c37210b815610820d229c9189746dad7aa8c456f25a5e4010ba6ba8384c1cff",
+        "executables": [],
+        "package": "chromium-browser-l10n",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "2:1snap1-0ubuntu2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "6c37210b815610820d229c9189746dad7aa8c456f25a5e4010ba6ba8384c1cff",
+        "binding_kind": "apt",
+        "description": "Transitional package - chromium-browser-l10n -> chromium snap",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "browser"
+        ],
+        "name": "chromium-browser-l10n",
+        "packages": [],
+        "query": "browser",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2:1snap1-0ubuntu2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "a600a70509759e09f0e04c6f0b2d510a0f3531b45092ee8f4c727b05beae9b95",
+        "executables": [],
+        "package": "claws-mail-python-plugin",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "4.2.0-2build7"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "a600a70509759e09f0e04c6f0b2d510a0f3531b45092ee8f4c727b05beae9b95",
+        "binding_kind": "apt",
+        "description": "Python plugin and console for Claws Mail",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "claws-mail-python-plugin",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "4.2.0-2build7",
+        "zero_cost_eligible": true
+      }
+    }
+  ],
+  "goal": "Using a real rendered browser, open https://www.python.org/downloads/",
+  "mission_id": "ASTRA-RUNTIME-WEB-BROWSER-PYTHON-RELEASE-001",
+  "role_conditioned_discovery": [
+    {
+      "binding_performed": false,
+      "candidate_count": 24,
+      "candidates": [
+        {
+          "archive_sha256": "c7951529483042d42cc35f0d14b332f315e37f82092fb82a309db6c067803cf0",
+          "binding_kind": "apt",
+          "description": "library of D-Bus interface for Python of Cairo-dock",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "python"
+          ],
+          "name": "cairo-dock-dbus-plug-in-interface-python",
+          "packages": [],
+          "query": "python",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "a600a70509759e09f0e04c6f0b2d510a0f3531b45092ee8f4c727b05beae9b95",
+          "binding_kind": "apt",
+          "description": "Python plugin and console for Claws Mail",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "python"
+          ],
+          "name": "claws-mail-python-plugin",
+          "packages": [],
+          "query": "python",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "4.2.0-2build7",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "5950fb9db8bb176d1f104299be602ae59c8da7eaad84fb429908033c9e37e33b",
+          "binding_kind": "apt",
+          "description": "utility to test color capabilities of terminal",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "python"
+          ],
+          "name": "colortest-python",
+          "packages": [],
+          "query": "python",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "3.0.2-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "cbe3ee89359a799c7ce21d374b8e0fb39f9a6d1b4a404481b4f1659a8a4cc8e8",
+          "binding_kind": "apt",
+          "description": "Debian helper tools for packaging Python libraries and applications",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "python"
+          ],
+          "name": "dh-python",
+          "packages": [],
+          "query": "python",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.20240401",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "7fb4a902f67d93c5a4dc1ffea201151b30dca4e9ebe3ed73d523c46fccfb65a2",
+          "binding_kind": "apt",
+          "description": "RFC 2229 compliant modular dictionary server (Python module)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "python"
+          ],
+          "name": "dico-module-python",
+          "packages": [],
+          "query": "python",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "2.11-4.1build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "d865bb9515b41928ab792360724cd9ecfbd596671ce260c0a1111b84495de6b6",
+          "binding_kind": "apt",
+          "description": "virtualenv API for Emacs Lisp",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "python"
+          ],
+          "name": "elpa-python-environment",
+          "packages": [],
+          "query": "python",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.0.2-6",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "74eb3028c96572fa977456173728629def25cc7dbda6f46f98d9e1c680882d2a",
+          "binding_kind": "apt",
+          "description": "Python Console plugin for GNOME Image Viewer",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "python"
+          ],
+          "name": "eog-plugin-python-console",
+          "packages": [],
+          "query": "python",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "44.0-2build3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "0e2e78a5d0a1d15f6f966d5d8f7f3603b0cfd70f9d1578f742fcc139596424aa",
+          "binding_kind": "apt",
+          "description": "bare metal hypervisor API for OpenStack - Python Agent",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "python"
+          ],
+          "name": "ironic-python-agent",
+          "packages": [],
+          "query": "python",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "9.1.0-1ubuntu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c00a28811d34479677149b6bdb9616522d8cbf7b722fb220487af88342196133",
+          "binding_kind": "apt",
+          "description": "Python 3 plugin for KDevelop",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "python"
+          ],
+          "name": "kdevelop-python",
+          "packages": [],
+          "query": "python",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "23.08.5-0ubuntu4",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "1463fc465281e5ddffa7a7421c07d37aca506221d4dae78814c7571c050dae84",
+          "binding_kind": "apt",
+          "description": "Python 3 plugin for KDevelop - data files",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "python"
+          ],
+          "name": "kdevelop-python-data",
+          "packages": [],
+          "query": "python",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "23.08.5-0ubuntu4",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "2a2d40e8e4e9cd0376a7752006fddd289b7bec5a0e847570420da5c87bbd3f28",
+          "binding_kind": "apt",
+          "description": "localization files for KDevelop Python 3 plugin",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "python"
+          ],
+          "name": "kdevelop-python-l10n",
+          "packages": [],
+          "query": "python",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "23.08.5-0ubuntu4",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "eaba4a4694675c74a6933476401f51b777fa10cbaf575e990189ce5a5c2612bd",
+          "binding_kind": "apt",
+          "description": "Open Source Home Theatre (Event Client Python package)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "python"
+          ],
+          "name": "kodi-eventclients-python",
+          "packages": [],
+          "query": "python",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "2:20.5+dfsg-1ubuntu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "81af33f997dec78daaef96b3b3d261c667eecb007f38960cd4a763cff575d7f3",
+          "binding_kind": "apt",
+          "description": "Python handler for mkdocstrings",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "python"
+          ],
+          "name": "mkdocstrings-python-handlers",
+          "packages": [],
+          "query": "python",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.8.0-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "b71427b2da95486eba92e46e16df9059d6345c28adcdde300c61fc2310667644",
+          "binding_kind": "apt",
+          "description": "Legacy Python handler for mkdocstrings",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "python"
+          ],
+          "name": "mkdocstrings-python-legacy",
+          "packages": [],
+          "query": "python",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.2.3-6",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "00d62d9b9b02d9301f7b4be99621b155e09b23745e71130fff3999f8265f88e0",
+          "binding_kind": "apt",
+          "description": "Python plugin for nbdkit",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "python"
+          ],
+          "name": "nbdkit-plugin-python",
+          "packages": [],
+          "query": "python",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.36.3-1ubuntu10",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "9018a1b7eae97693ad432370789ba047bfdb3bd779e7bcf0a552c32393201fd7",
+          "binding_kind": "apt",
+          "description": "Python bindings for nemo components",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "python"
+          ],
+          "name": "nemo-python",
+          "packages": [],
+          "query": "python",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.0.0+ds-1build3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "11de2658672dbf7b8415488a948a6711c48ea2ba57ec52a7fb66fa6b894cbc96",
+          "binding_kind": "apt",
+          "description": "real-time performance monitoring (python plugins)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "python"
+          ],
+          "name": "netdata-plugins-python",
+          "packages": [],
+          "query": "python",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.43.2-1build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "0e42e0563516a21939cb970f4228e7743d34262508751e42470dba6439695538",
+          "binding_kind": "apt",
+          "description": "Python language support for the CodeMirror code editor",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "python"
+          ],
+          "name": "node-codemirror-lang-python",
+          "packages": [],
+          "query": "python",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.1.3~6.22.3+~cs119.52.50-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "5a9a74a0673fefad1a789e913e4f6013f35725778570b40fbb6eda09451d799b",
+          "binding_kind": "apt",
+          "description": "Node.js module to provide Python grammar for the lezer parser system",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "python"
+          ],
+          "name": "node-lezer-python",
+          "packages": [],
+          "query": "python",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.1.13~1.4.13+~cs14.24.45-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "903f19ff0a74c5978bac3e958e0b1872a916ec06fd9007c640022d6cd4e5f30a",
+          "binding_kind": "apt",
+          "description": "ARC Resource-coupled EXecution service - Python LRMS backends",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "python"
+          ],
+          "name": "nordugrid-arc-arex-python-lrms",
+          "packages": [],
+          "query": "python",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.18.0-2.2ubuntu0.1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "9ffb9447b905d8a4a6490890f18c70a48b4e3660761ec8c2793e15bc83187608",
+          "binding_kind": "apt",
+          "description": "ARC Python dependent plugin",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "python"
+          ],
+          "name": "nordugrid-arc-plugins-python",
+          "packages": [],
+          "query": "python",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.18.0-2.2ubuntu0.1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "899e97bc466932b0bcfc07643ed4edcdb9a03ea3722621b7158ce7db16c044b7",
+          "binding_kind": "apt",
+          "description": "Open Lighting Architecture - Python Classes",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "python"
+          ],
+          "name": "ola-python",
+          "packages": [],
+          "query": "python",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.10.9.nojsmin-4.1build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "cf33616ffbc703e611ec5d8f887795efd6afed3bb956e71727858c07f5cbf122",
+          "binding_kind": "apt",
+          "description": "Develop plugins for Orthanc using the Python programming language",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "python"
+          ],
+          "name": "orthanc-python",
+          "packages": [],
+          "query": "python",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "4.1+ds-2ubuntu2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "704b3c0daa8fc2f00ecc073c1335f6d477a796065fffbcc9273c8fab53e75862",
+          "binding_kind": "apt",
+          "description": "SELinux core policy utilities (Python utilities)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "python"
+          ],
+          "name": "policycoreutils-python-utils",
+          "packages": [],
+          "query": "python",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "3.5-1",
+          "zero_cost_eligible": true
+        }
+      ],
+      "effect": "python",
+      "errors": [],
+      "queries": [
+        "python"
+      ],
+      "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+      "source": "APT_CATALOG",
+      "source_url": null
+    },
+    {
+      "binding_performed": false,
+      "candidate_count": 24,
+      "candidates": [
+        {
+          "archive_sha256": "3efa9eff8dc651be9c05f98e5be4a06562787bfb2c46159f7c7a8a858ca12e16",
+          "binding_kind": "apt",
+          "description": "Real-time strategy game of ancient warfare",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "real"
+          ],
+          "name": "0ad",
+          "packages": [],
+          "query": "real",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.0.26-6ubuntu0.24.04.1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "1ddb228533593b8cb9d457e5fe3dec774aaf2af3c58b7b303a1fa8fd082bc59a",
+          "binding_kind": "apt",
+          "description": "Real-time strategy game of ancient warfare (data files)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "real"
+          ],
+          "name": "0ad-data",
+          "packages": [],
+          "query": "real",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.0.26-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "46f99fdf8ddc67ef8663054d0773b6b0ad019d2ed108744f99e2a8081e70fd58",
+          "binding_kind": "apt",
+          "description": "Real-time strategy game of ancient warfare (common data files)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "real"
+          ],
+          "name": "0ad-data-common",
+          "packages": [],
+          "query": "real",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.0.26-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "a7e3305a15ba9568152d73430876593cc3ebf90caa8e0cf20d5675e10232cc84",
+          "binding_kind": "apt",
+          "description": "Seven Kingdoms: Ancient Adversaries - real-time strategy game",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "real"
+          ],
+          "name": "7kaa",
+          "packages": [],
+          "query": "real",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.15.6+ds-1build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "cb53d061027ca70008d72d86c38444fb357f98a904c17a5323fb7fd2ae189464",
+          "binding_kind": "apt",
+          "description": "pipeline components for real-time virus analysis",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "real"
+          ],
+          "name": "augur",
+          "packages": [],
+          "query": "real",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "24.2.2-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "b09fee017c018f551f5059841ff8685045daaabdc4be8f85923eb3aa545a7c66",
+          "binding_kind": "apt",
+          "description": "futuristic real-time strategy game",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "real"
+          ],
+          "name": "boswars",
+          "packages": [],
+          "query": "real",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.8-2build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "bf2257cf303fe838857ccbfe85f9d0ddd3ead8747e5697737f92bcea4a5820e7",
+          "binding_kind": "apt",
+          "description": "layered real-time video compositor to multiple outputs",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "real"
+          ],
+          "name": "casparcg-server",
+          "packages": [],
+          "query": "real",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.3.3+dfsg-3.2build1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "f2e3243fad04d9ca175592c72d36ee758ab3273bc8f81cc45e2ea629f02f8640",
+          "binding_kind": "apt",
+          "description": "display in real time the network traffic speed",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "real"
+          ],
+          "name": "cbm",
+          "packages": [],
+          "query": "real",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.3.2-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "1c3c07ee36423cd10a026c498767fcdcc10e389a3087758ea02911b77cb7d1b3",
+          "binding_kind": "apt",
+          "description": "Audio sampler plugin and stand-alone app that simulates a real drum kit",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "real"
+          ],
+          "name": "drumgizmo",
+          "packages": [],
+          "query": "real",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.9.20-3build3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "ef8fb0f2742aa939bd7011ab89053213c822a6f6f6896f6552e7df23bb9b9323",
+          "binding_kind": "apt",
+          "description": "Concurrent, real-time, distributed functional language",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "real"
+          ],
+          "name": "erlang",
+          "packages": [],
+          "query": "real",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1:25.3.2.8+dfsg-1ubuntu4.6",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "6042c19aaa3840c9f4eac42683c93e91ad20c75af6bed1355ab2ec7d1043d598",
+          "binding_kind": "apt",
+          "description": "test real flash memory capacity",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "real"
+          ],
+          "name": "f3",
+          "packages": [],
+          "query": "real",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "8.0-2build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c91c2528fed6d2ec97ba65dc6cba93c6a2096ea3147e47889a420bb9df8f36b0",
+          "binding_kind": "apt",
+          "description": "Real-time MIDI software synthesizer",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "real"
+          ],
+          "name": "fluidsynth",
+          "packages": [],
+          "query": "real",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.3.4-1build3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "12d8378c34cc2d515182d30c27f80de4af9ba517836cd68372f34609d907186b",
+          "binding_kind": "apt",
+          "description": "Multilingual font imitating a real typewriter",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "real"
+          ],
+          "name": "fonts-gnutypewriter",
+          "packages": [],
+          "query": "real",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.0-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "74167530c7e3f22c512bdf7c26b214e46804e0cabc33961bd1b86ecea1c21ab7",
+          "binding_kind": "apt",
+          "description": "Invoke f2c like a real compiler",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "real"
+          ],
+          "name": "fort77",
+          "packages": [],
+          "query": "real",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.15-12",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "fdce2bc5f8c4a3a2041c20140e53183f70352ce15d751c3adc2f4c350520a510",
+          "binding_kind": "apt",
+          "description": "innovative Real Time Strategy game",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "real"
+          ],
+          "name": "glob2",
+          "packages": [],
+          "query": "real",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.9.4.4-6build1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "ed1bf8347b6a5be956b567f4d0a2884f1fda46ea0eca7188a14ae47eded6de0c",
+          "binding_kind": "apt",
+          "description": "innovative Real Time Strategy game - data files",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "real"
+          ],
+          "name": "glob2-data",
+          "packages": [],
+          "query": "real",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.9.4.4-6build1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "db578815805cb41b5a2a7cbbe2eb113be2dc8dbf4d51e5177d3a88c390b6303e",
+          "binding_kind": "apt",
+          "description": "data compression/decompression library for embedded/real-time systems",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "real"
+          ],
+          "name": "heatshrink",
+          "packages": [],
+          "query": "real",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.4.1-3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "ea0848636ad061fd88f9977da0725da0b50400817466530194e99e214250108b",
+          "binding_kind": "apt",
+          "description": "Scalable datastore for metrics, events, and real-time analytics",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "real"
+          ],
+          "name": "influxdb",
+          "packages": [],
+          "query": "real",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.6.7~rc0-2ubuntu0.24.04.3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "24502af03be60c694f533f07f8acf2597b20a19c4f7c18b345b07b2641d8fed0",
+          "binding_kind": "apt",
+          "description": "real-time collaborative music session client and server",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "real"
+          ],
+          "name": "jamulus",
+          "packages": [],
+          "query": "real",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "3.9.1+dfsg-1build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "6c05af4894eabd2aff96c01eac9314ef8a56acff712de662bb9f5bd21f3fd8a8",
+          "binding_kind": "apt",
+          "description": "Real time response measurement tool",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "real"
+          ],
+          "name": "jitterdebugger",
+          "packages": [],
+          "query": "real",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.3.1+git20200117.b90ff3a-5",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "553416e5666c1f8f854866955bbd4eeed92cb5fc28f513a3aae6f91a6d1bc5ba",
+          "binding_kind": "apt",
+          "description": "Real time response measurement tool - metapackage",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "real"
+          ],
+          "name": "jitterdebugger-all",
+          "packages": [],
+          "query": "real",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.3.1+git20200117.b90ff3a-5",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "0f0c604980fb43460225e7f4ceb381619bffc99d84eb0d53d3573877789de34a",
+          "binding_kind": "apt",
+          "description": "Java based visualization library for real algebraic geometry",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "real"
+          ],
+          "name": "jsurf-alggeo",
+          "packages": [],
+          "query": "real",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.4.1+ds-4ubuntu2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c49ea281fb2ce10620c2c64c8fc227575f2d69f7b977d6778a872a41d9ca9400",
+          "binding_kind": "apt",
+          "description": "single player real-time strategy game with steampunk sci-fi",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "real"
+          ],
+          "name": "lightyears",
+          "packages": [],
+          "query": "real",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.5.0-3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "a3cdb315c0fd39008e970278e9cb6846f6dbb507efbd233eefffcee661c82580",
+          "binding_kind": "apt",
+          "description": "Linux kernel headers for real-time systems.",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "real"
+          ],
+          "name": "linux-headers-realtime",
+          "packages": [],
+          "query": "real",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "6.8.1-1015.16",
+          "zero_cost_eligible": true
+        }
+      ],
+      "effect": "real rendered",
+      "errors": [],
+      "queries": [
+        "real",
+        "rendered"
+      ],
+      "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+      "source": "APT_CATALOG",
+      "source_url": null
+    }
+  ],
+  "schema": "PROJECT_BRAIN_AUTO_APT_CLI_ACQUISITION_EVIDENCE_V1",
+  "status": "NO_COMPATIBLE_CONTRACT"
+}
