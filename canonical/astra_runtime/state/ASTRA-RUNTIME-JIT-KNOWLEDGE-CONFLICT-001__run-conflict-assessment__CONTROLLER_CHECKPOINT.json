@@ -1,0 +1,84 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "plan": {
+        "args": {
+          "authoritative": false,
+          "json_path": [
+            "args",
+            "claim"
+          ],
+          "max_bytes": 500000,
+          "output_path": "canonical/astra_runtime/tmp/JIT_CONFLICT_ALPHA.json",
+          "timeout_s": 20,
+          "url": "https://httpbin.org/get?claim=alpha"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "fetch_json_knowledge"
+      },
+      "result": {
+        "body_sha256": "38b25e6c1ad89aa183e0b73a57bdee90fdd186e60fa54d29e81113afe0dbeab2",
+        "duration_s": 0.211,
+        "final_url": "https://httpbin.org/get?claim=alpha",
+        "json_path": [
+          "args",
+          "claim"
+        ],
+        "output_path": "canonical/astra_runtime/tmp/JIT_CONFLICT_ALPHA.json",
+        "type": "fetch_json_knowledge",
+        "value": "alpha",
+        "verified": true
+      }
+    },
+    {
+      "cycle": 1,
+      "plan": {
+        "args": {
+          "authoritative": false,
+          "json_path": [
+            "args",
+            "claim"
+          ],
+          "max_bytes": 500000,
+          "output_path": "canonical/astra_runtime/tmp/JIT_CONFLICT_BETA.json",
+          "timeout_s": 20,
+          "url": "https://httpbin.org/get?claim=beta"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "fetch_json_knowledge"
+      },
+      "result": {
+        "body_sha256": "299c231f6a21bd0cef3c52081e8c60bb1ff5c1f3c9f68ce092877eb4b644da23",
+        "duration_s": 0.14,
+        "final_url": "https://httpbin.org/get?claim=beta",
+        "json_path": [
+          "args",
+          "claim"
+        ],
+        "output_path": "canonical/astra_runtime/tmp/JIT_CONFLICT_BETA.json",
+        "type": "fetch_json_knowledge",
+        "value": "beta",
+        "verified": true
+      }
+    }
+  ],
+  "created_at_utc": "2026-09-25T21:43:41.957491+00:00",
+  "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-CONFLICT-001",
+  "next_action_index": 2,
+  "plan_sha256": "a74a48dbcc78fa334fff3d79b17e263e1214090d102b7c23adcb2b7d8fcfb523",
+  "resume_count": 0,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "IN_PROGRESS",
+  "step_id": "run-conflict-assessment",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-09-25T21:43:42.309014+00:00"
+}

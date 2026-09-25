@@ -1,0 +1,21 @@
+{
+  "blocker": {
+    "adapter": "goal",
+    "error": "AttributeError:type object 'datetime.datetime' has no attribute 'datetime'",
+    "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-CONFLICT-001",
+    "observed_at_utc": "2026-09-25T21:43:42.309433+00:00",
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "run-conflict-assessment",
+    "step_index": 0
+  },
+  "created_at_utc": "2026-09-25T21:43:41.957318+00:00",
+  "history": [],
+  "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-CONFLICT-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_JIT_KNOWLEDGE_CONFLICT_001.json",
+  "mission_sha256": "bf20dda1d958e4fd804efaeb062e41fde27f2987500814a1fe1fda9eb5036ce5",
+  "next_step": 0,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-25T21:43:42.309537+00:00"
+}

@@ -1,0 +1,14 @@
+{
+  "body_sha256": "299c231f6a21bd0cef3c52081e8c60bb1ff5c1f3c9f68ce092877eb4b644da23",
+  "final_url": "https://httpbin.org/get?claim=beta",
+  "http_status": 200,
+  "json_path": [
+    "args",
+    "claim"
+  ],
+  "retrieved_at_utc": "2026-09-25T21:43:42.308653+00:00",
+  "schema": "PROJECT_BRAIN_KNOWLEDGE_EVIDENCE_V1",
+  "source_type": "external_json",
+  "source_url": "https://httpbin.org/get?claim=beta",
+  "value": "beta"
+}
