@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-VERIFY-ZBAR-MULTIFORMAT-001",
+  "purpose": "Fresh independent verification that one pinned Ubuntu decoder can recover payloads from both QR and Code 128 images.",
+  "steps": [
+    {
+      "id": "verify-zbar-both-formats",
+      "adapter": "shell",
+      "command": "set -euo pipefail\ncheck_sha(){ pkg=\"$1\" ver=\"$2\" expected=\"$3\"; got=\"$(apt-cache show \"$pkg=$ver\" | awk '/^SHA256:/{print $2; exit}')\"; [ \"$got\" = \"$expected\" ]; }\ncheck_sha zbar-tools 0.23.93-4build3 9e718d34a9650263aca2dd85e56d9de42ca24ff82254f90f5e4270d1e5d00422\ncheck_sha qrencode 4.1.1-1build2 613c5a22316489ec6a9ce5d59190293df15dd4612b55432dde04c62f7c1a0e25\ncheck_sha zint 2.13.0-1build3 cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769\nsudo apt-get update -qq\nsudo apt-get install -y --no-install-recommends zbar-tools=0.23.93-4build3 qrencode=4.1.1-1build2 zint=2.13.0-1build3 >/dev/null\nqrencode -o canonical/astra_runtime/tmp/ZBAR_VERIFY_QR.png 'PROJECT BRAIN'\nzint -b CODE128 -o canonical/astra_runtime/tmp/ZBAR_VERIFY_BARCODE.png -d 'PROJECT BRAIN'\nqr=\"$(zbarimg --quiet --raw canonical/astra_runtime/tmp/ZBAR_VERIFY_QR.png)\"\nbar=\"$(zbarimg --quiet --raw canonical/astra_runtime/tmp/ZBAR_VERIFY_BARCODE.png)\"\n[ \"$qr\" = 'PROJECT BRAIN' ]\n[ \"$bar\" = 'PROJECT BRAIN' ]\nprintf 'ZBAR_MULTIFORMAT_VERIFIED\\n'",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "ZBAR_MULTIFORMAT_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "producer_independent_verifier": true
+  }
+}
