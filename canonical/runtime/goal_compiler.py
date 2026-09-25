@@ -1338,6 +1338,23 @@ def _compile_compound_goal(goal, clauses, registry, root):
     context_paths=[]
     for index,clause in enumerate(clauses):
         lower=clause.lower()
+
+        browser_interaction=_compile_verified_browser_interaction(clause,registry,root)
+        if browser_interaction is not None:
+            first_action=(browser_interaction.get("controller_actions") or [None])[0]
+            part=(browser_interaction.get("compiled_parts") or [None])[0]
+            if not isinstance(first_action,dict) or not isinstance(part,dict):
+                raise GoalCompilationFailure("BROWSER_INTERACTION_COMPILED_PLAN_INVALID")
+            actions.append(first_action)
+            for p in (part.get("screenshot_path"),part.get("result_path")):
+                if isinstance(p,str) and p not in context_paths:
+                    context_paths.append(p)
+            compiled_parts.append({
+                "index":index,
+                "subgoal":clause,
+                **{k:v for k,v in part.items() if k not in {"index","subgoal"}},
+            })
+            continue
         test_glob=_python_test_glob(clause,root)
         if test_glob is not None and re.match(r"^(?:execute|run)\b",lower):
             action={
