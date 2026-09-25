@@ -114,6 +114,29 @@ class GoalCompilerTests(unittest.TestCase):
         self.assertEqual(semantic["product"],"Python")
         self.assertEqual(semantic["major"],"3")
 
+    def test_full_browser_release_goal_compiles_independent_verifier(self):
+        goal=(
+            "Using a real rendered browser, open https://www.python.org/downloads/. "
+            "Determine the latest stable Python 3 release shown on the page. "
+            "Save a full-page screenshot to canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_FULL_TEST.png "
+            "and save canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_FULL_TEST_RESULT.json containing "
+            "source_url, final_url, page_title, latest_stable_python3, and observed_text_evidence. "
+            "Finally independently verify from the official Python downloads page, without trusting "
+            "the browser extraction, that the claimed latest_stable_python3 string is present and "
+            "corresponds to the current stable Python 3 release shown there."
+        )
+        out=compiler.compile_goal(goal,self.registry(),ROOT)
+        self.assertEqual(out["compiler_mode"],"DETERMINISTIC_COMPOUND_ACTION_PLAN")
+        modes=[x["mode"] for x in out["compiled_parts"]]
+        self.assertIn("VERIFIED_STRUCTURED_SEMANTIC_EXTRACTION",modes)
+        self.assertIn("INDEPENDENT_WEB_RELEASE_VERIFICATION",modes)
+        verifier=[x for x in out["compiled_parts"] if x["mode"]=="INDEPENDENT_WEB_RELEASE_VERIFICATION"][0]
+        self.assertEqual(verifier["capability_id"],"web.release.verify.independent_http")
+        self.assertEqual(verifier["version_field"],"latest_stable_python3")
+        self.assertEqual(verifier["product"],"Python")
+        self.assertEqual(verifier["major"],"3")
+        self.assertEqual(verifier["result_path"],"canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_FULL_TEST_RESULT.json")
+
     def test_barcode_goal_selects_verified_barcode_not_qr(self):
         goal="Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png."
         out=compiler.compile_goal(goal,self.registry(),ROOT)
