@@ -1,0 +1,2660 @@
+{
+  "auto_acquisition": {
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fonts-ubuntu-title\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.docx\", \"name\": \"apport\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.docx\", \"name\": \"cookiecutter\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"claws-mail-spam-report\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.docx\", \"name\": \"dmarcts-report-parser\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-find-file-in-project\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-project\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"gambas3-gb-report\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"haskell98-report\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"mate-window-title-applet\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"openrct2-title-sequences\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.docx\", \"name\": \"project-x\", \"status\": \"CONTRACT_REJECTED\"}]",
+    "status": "NOT_DISPATCHED"
+  },
+  "binding_performed": false,
+  "goal": "Create canonical/astra_runtime/tmp/PROJECT_BRAIN_REPORT.docx with title Project Brain Report, paragraph Verified cross-tool composition, and a table with columns Capability and Status containing Browser interaction | VERIFIED and Browser-to-XLSX composition | VERIFIED. Finally independently reopen the DOCX and verify all requested content.",
+  "mission_id": "ASTRA-RUNTIME-DOCX-001",
+  "observed_at_utc": "2026-09-25T03:16:57.767855+00:00",
+  "result": {
+    "binding_performed": false,
+    "candidates": [
+      {
+        "archive_sha256": "68ac9a3924d19db487ceb961e2d396c9561931327d6018cce75d1c7ac061e7a5",
+        "binding_kind": "apt",
+        "description": "Spam reporting plugin for Claws Mail",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "report"
+        ],
+        "name": "claws-mail-spam-report",
+        "packages": [],
+        "query": "report",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "4.2.0-2build7",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "09be6f9efd655fdb64aefc6bbbdf629373ac5c10cdef7262ccea7010fb6a3728",
+        "binding_kind": "apt",
+        "description": "Perl based tool to parse DMARC reports",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "report"
+        ],
+        "name": "dmarcts-report-parser",
+        "packages": [],
+        "query": "report",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.0+git20220721.51ba1de-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "23bb5365162dce84ddeb31c27bf62287ce802ee35639cbf72e0b8b58390f969b",
+        "binding_kind": "apt",
+        "description": "quick access to project files in Emacs",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "elpa-find-file-in-project",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.2.0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "2394bf199cdaea188afb8abf78227585ded9efe3f5f6bdb0866b52913a3fe304",
+        "binding_kind": "apt",
+        "description": "Emacs library for operations on the current project",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "elpa-project",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.10.0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "582829aa711a21d430fb2850e53e411d7f6ebd1e1195853ab87bfaec3d364f1b",
+        "binding_kind": "apt",
+        "description": "font used to create the Ubuntu logo (2004\u20122010)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "title"
+        ],
+        "name": "fonts-ubuntu-title",
+        "packages": [],
+        "query": "title",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:0.3-2.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "68dd209643e65397bc83bb070067d1089557ed02874ab71723d467745e9f59ec",
+        "binding_kind": "apt",
+        "description": "Gambas report component",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "report"
+        ],
+        "name": "gambas3-gb-report",
+        "packages": [],
+        "query": "report",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.19.0-2ubuntu10",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "52d98aaca5e7adbaf037e4f8a0faa25c8f8c21c5e36ea12ef23ed0e4c790164e",
+        "binding_kind": "apt",
+        "description": "The Haskell 98 Language and Libraries Revised Report & addenda",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "report"
+        ],
+        "name": "haskell98-report",
+        "packages": [],
+        "query": "report",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "20080907-11",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "f999361f6e095fb1f3304ea6a924f8bd864eb8ebeb4cb25c4aa110301c841af5",
+        "binding_kind": "apt",
+        "description": "MATE Window Applets (WindowTitle Applet)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "title"
+        ],
+        "name": "mate-window-title-applet",
+        "packages": [],
+        "query": "title",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "21.04.0-1build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "7df61cd6f798e91c3d6fca6993e972c2300c23d76b1aa0ae14d9652ed10d55ac",
+        "binding_kind": "apt",
+        "description": "Title sequences for OpenRCT2",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "title"
+        ],
+        "name": "openrct2-title-sequences",
+        "packages": [],
+        "query": "title",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.4.6-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "726829fd2dd0d807c997c744c509d9c80df41d63548a6c62ffc35cbd5eaffebf",
+        "binding_kind": "apt",
+        "description": "DVB demuxing tool",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "project-x",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.90.4dfsg-0ubuntu6",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "cf0d32289b48c120c025ba02cca01bfa6d8308535a619911a07c5ebba105762b",
+        "binding_kind": "apt",
+        "description": "Tryton application platform - project module",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "tryton-modules-project",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.0.0-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "76f9c558651e2307f2e2bfa8b4c687d1b175aa7a2b4d2be881ac715168362949",
+        "binding_kind": "apt",
+        "description": "Tryton application platform - project invoice module",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "tryton-modules-project-invoice",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.0.4-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ba5a155a80ad80a46b6249ba6020c3258f7425e67ba0db291186bb58276d924e",
+        "binding_kind": "apt",
+        "description": "Tryton application platform - project plan module",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "tryton-modules-project-plan",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.0.0-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "70a3e8a200ce4164b78f249a4d1e58a5f10d0e62c12e506c386c34054941555c",
+        "binding_kind": "apt",
+        "description": "Tryton application platform - project revenue module",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "tryton-modules-project-revenue",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.0.1-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ec97ab878f83efb59789abe56fcf81c8f94274fb80232043f568918c4f8b759e",
+        "binding_kind": "apt",
+        "description": "Report hardware and other collected metrics",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "report"
+        ],
+        "name": "ubuntu-report",
+        "packages": [],
+        "query": "report",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.7.3ubuntu0.24.04.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "e9852cbcd1527bac6204187a738a6275a31a31818933a6f2d7efe6a3fd6d84fd",
+        "binding_kind": "apt",
+        "description": "Implementation of Algol 68 as defined by the Revised Report",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "report"
+        ],
+        "name": "algol68g",
+        "packages": [],
+        "query": "report",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "3.1.2-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "3fb6842df77c2a60373981d2a00e25c11b3793f4301e115bcb9dd3e3b69e8847",
+        "binding_kind": "apt",
+        "description": "automatically generate crash reports for debugging",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "report"
+        ],
+        "name": "apport",
+        "packages": [],
+        "query": "report",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.28.3-0ubuntu0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "86cdb667d4f124ab8f2419a6910be206f5af6b173595e48553b72e6d473ee58f",
+        "binding_kind": "apt",
+        "description": "GTK+ frontend for the apport crash report system",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "report"
+        ],
+        "name": "apport-gtk",
+        "packages": [],
+        "query": "report",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.28.3-0ubuntu0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d6eb3165b256e5f84cd3780e9ed2bc0b8acce2f4063ed588daf8b07dfc243189",
+        "binding_kind": "apt",
+        "description": "KDE frontend for the apport crash report system",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "report"
+        ],
+        "name": "apport-kde",
+        "packages": [],
+        "query": "report",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.28.3-0ubuntu0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "f0687cde1cde2fb88025b4ce51ff5306a7d4021d5ff2895d101000b418920ddd",
+        "binding_kind": "apt",
+        "description": "tools for automatically reporting Apport crash reports",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "report"
+        ],
+        "name": "apport-noui",
+        "packages": [],
+        "query": "report",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.28.3-0ubuntu0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "96afecfa8bf5cbe6c0f2c7e12292f10bb38deda95c91abf3a8184ecf3c6eb0d2",
+        "binding_kind": "apt",
+        "description": "tools for reprocessing Apport crash reports",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "report"
+        ],
+        "name": "apport-retrace",
+        "packages": [],
+        "query": "report",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.28.3-0ubuntu0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "4f2372124965376e5ab6978e00e2dc1f3577244dd606c10f830eca8164e0fda6",
+        "binding_kind": "apt",
+        "description": "command line tool reporting RAID status for several RAID types",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "report"
+        ],
+        "name": "array-info",
+        "packages": [],
+        "query": "report",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.16-6",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "0dda010275924afb48c3a2184d49267f48e9a4b0afa1c6aec18280357b50311c",
+        "binding_kind": "apt",
+        "description": "dark GTK+ theme from the Shimmer Project",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "blackbird-gtk-theme",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.4+20171213-4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "783ab0c2dd152dda9bbd1a8cd798af4ef7278e9893b79830133b70b54f0df936",
+        "binding_kind": "apt",
+        "description": "blue GTK+ theme from the Shimmer Project",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "bluebird-gtk-theme",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.3-4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "cbbb28d6388eb81978f8d7caa703285296a6eb76dccc8898e941d8b7e5bb821f",
+        "binding_kind": "apt",
+        "description": "A mind boggling (brain twisting) game of logic",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "brain"
+        ],
+        "name": "blupimania",
+        "packages": [],
+        "query": "brain",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.6.2-17-g5f6cf8b-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "6b73d506364e523ccc956582dd684e725fa6e61167484b75b0be4fa12ab275de",
+        "binding_kind": "apt",
+        "description": "A mind boggling (brain twisting) game of logic - data",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "brain"
+        ],
+        "name": "blupimania-common",
+        "packages": [],
+        "query": "brain",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.6.2-17-g5f6cf8b-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "17a043e720621347b163161fd21d85860d897bf10d8992c3e6193a0dd591d442",
+        "binding_kind": "apt",
+        "description": "metapackage for virtualbox-savvy projects",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "boinc-virtualbox",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "7.24.1+dfsg-4build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "384cb5cf9629d9951604d87d99aad0d26c580118e78531c293d5543053e8d82b",
+        "binding_kind": "apt",
+        "description": "toolset for the Buildstream project",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "buildstream",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.6.9-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "470fc3014a27f4b131d97b87da4a9911f44c5276b160535c3612b4f6d2a32141",
+        "binding_kind": "apt",
+        "description": "integrated project management and planning tool",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "calligraplan",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1:3.3.0-2build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "94ce7fc8f352fe8ffc5e1f53f7d288eccd764cc0e66093d2b41d9eadc8edc47d",
+        "binding_kind": "apt",
+        "description": "print dependency tree of a Rust project using Cargo",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "cargo-debstatus",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.5.2-2build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Local-first agent memory. Source, date, bind/abstain. Permanent name: lbrain.ai/claim.html",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.lbrain/lbrain",
+        "packages": [
+          {
+            "identifier": "lbrain-coding-agents",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "uvx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.3"
+          }
+        ],
+        "query": "brain",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/metavolve-labs/lbrain-coding-agents"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.1.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Helper for brainCloud MCP that gives it local file access, enabling easy git sync of cloud code.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.braincloudservers/braincloud-mcp-helper",
+        "packages": [
+          {
+            "identifier": "@braincloud/mcp-helper",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "6.0.0"
+          }
+        ],
+        "query": "brain",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "subfolder": "packages/mcp-helper",
+          "url": "https://github.com/getbraincloud/braincloud-mcp-helper"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "6.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Keyless MCP for Just Signal: live quotes, report publishing, scorecard, and Chophouse panel grades.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.ou-reports/just-signal",
+        "packages": [
+          {
+            "identifier": "just-signal-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.3.0"
+          }
+        ],
+        "query": "report",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://www.ou-reports.com/api/mcp.php"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.3.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "AI Incident Reporting Compliance MCP. Unified classification + reporting-clock tracker across EU...",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.CSOAI-ORG/ai-incident-reporting-mcp",
+        "packages": [
+          {
+            "identifier": "ai-incident-reporting-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "python",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.1.9"
+          }
+        ],
+        "query": "report",
+        "remotes": [],
+        "repository": {
+          "id": "1232725636",
+          "source": "github",
+          "url": "https://github.com/CSOAI-ORG/ai-incident-reporting-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.1.9",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Explainability Report MCP Server by MEOK AI Labs",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.CSOAI-ORG/explainability-report-mcp",
+        "packages": [
+          {
+            "identifier": "explainability-report-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "python",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.16"
+          }
+        ],
+        "query": "report",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/CSOAI-ORG/explainability-report-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.16",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "MEOK CRA Article 14 Reporter MCP \u2014 actively-exploited-vulnerability notification with 24h/72h/14d",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.CSOAI-ORG/meok-cra-art14-reporter-mcp",
+        "packages": [
+          {
+            "identifier": "meok-cra-art14-reporter-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "python",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.5"
+          }
+        ],
+        "query": "report",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.meok.ai/v1/governance/cra-art14-reporter"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/CSOAI-ORG/meok-cra-art14-reporter-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.5",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Project Management Ai MCP Server by MEOK AI Labs",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.CSOAI-ORG/project-management-ai-mcp",
+        "packages": [
+          {
+            "identifier": "project-management-ai-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "python",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.9"
+          }
+        ],
+        "query": "project",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/CSOAI-ORG/project-management-ai-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.9",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "HPE GreenLake reporting MCP Server",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.HewlettPackard/greenlake-reporting-mcp",
+        "packages": [
+          {
+            "identifier": "greenlake-reporting-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.1.2"
+          }
+        ],
+        "query": "report",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/HewlettPackard/gl-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.1.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Audit, reschedule and author Microsoft Project schedules. No Java, no Project install.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.HorizunGroup/horizun-msproject-mcp",
+        "packages": [
+          {
+            "identifier": "HorizunMsProjectMcp",
+            "registry_type": "nuget",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.2.1"
+          }
+        ],
+        "query": "project",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/HorizunGroup/horizun-msproject-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.2.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "MCP server for AI agents to report infrastructure needs they encounter during task execution",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.JarvisOnM4/report-needs",
+        "packages": [
+          {
+            "identifier": "report-needs",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.1"
+          }
+        ],
+        "query": "report",
+        "remotes": [],
+        "repository": {
+          "id": "1181547464",
+          "source": "github",
+          "url": "https://github.com/JarvisOnM4/report-needs"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Search TV series on tvsubtitles.net, read a season's subtitle coverage and one record. No API key.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.smeet666/mcp-tvsubtitles",
+        "packages": [
+          {
+            "identifier": "mcp-tvsubtitles",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.1"
+          },
+          {
+            "identifier": "https://github.com/smeet666/mcp-tvsubtitles/releases/download/v1.0.1/mcp-tvsubtitles-1.0.1.mcpb",
+            "registry_type": "mcpb",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.1"
+          }
+        ],
+        "query": "title",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/smeet666/mcp-tvsubtitles"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Agent-updated work tracker for builders directing AI across multiple projects.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.atlier/project-desk",
+        "packages": [],
+        "query": "project",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://atlier.ai/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/Wildsdesign/Atlier"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "4.7.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Read, analyze, and safely edit Microsoft Project MPP files.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.projectdata/mpp-connector",
+        "packages": [],
+        "query": "project",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.projectdata.ai/"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/projectdata-io/mpp-poweautomate-connector"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "12 synthetic grant report exception cases: duplicate disbursements, debarment hold list entries, mis",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.a2awire/benchmark-grant-report-review-2026-09-17-9189341d",
+        "packages": [],
+        "query": "report",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://a2awire.com/mcp/benchmarks/grant-report-review-2026-09-17-9189341d/http"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/ee324/a2awire"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "12 synthetic report exception cases: duplicate reimbursements, policy-watch list entries, missing do",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.a2awire/benchmark-report-audit-2026-09-21-b9e5e630",
+        "packages": [],
+        "query": "report",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://a2awire.com/mcp/benchmarks/report-audit-2026-09-21-b9e5e630/http"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/ee324/a2awire"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "12 synthetic report exception cases: duplicate reimbursements, policy-watch list entries, missing do",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.a2awire/benchmark-report-review-2026-09-23-f72b2bd5",
+        "packages": [],
+        "query": "report",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://a2awire.com/mcp/benchmarks/report-review-2026-09-23-f72b2bd5/http"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/ee324/a2awire"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Manage brainCloud apps, cloud code, hooks and servers; API lookups to help generate client code.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.braincloudservers/braincloud-mcp",
+        "packages": [],
+        "query": "brain",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.braincloudservers.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "6.0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Read-only access to Cogram projects, meetings, emails, RFIs and drawings for AEC teams",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.cogram/project",
+        "packages": [],
+        "query": "project",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.cogram.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "VIN/HIN pre-purchase report: open NHTSA recalls, complaints, investigations, title-brand & liens.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.dropwatchhq/title-check",
+        "packages": [],
+        "query": "title",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://titlecheck.dropwatchhq.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "LPreportly: the site's own MCP server \u2014 dataset; every answer cites the site.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.lpreportly/site",
+        "packages": [],
+        "query": "report",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://lpreportly.com/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/joeetdev/venture-estate"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      }
+    ],
+    "effect": "Create canonical/astra_runtime/tmp/PROJECT_BRAIN_REPORT.docx with title Project Brain Report, paragraph Verified cross-tool composition, and a table with columns Capability and Status containing Browser interaction | VERIFIED and Browser-to-XLSX composition | VERIFIED",
+    "results": [
+      {
+        "binding_performed": false,
+        "candidate_count": 30,
+        "candidates": [
+          {
+            "archive_sha256": "68ac9a3924d19db487ceb961e2d396c9561931327d6018cce75d1c7ac061e7a5",
+            "binding_kind": "apt",
+            "description": "Spam reporting plugin for Claws Mail",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "report"
+            ],
+            "name": "claws-mail-spam-report",
+            "packages": [],
+            "query": "report",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "4.2.0-2build7",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "09be6f9efd655fdb64aefc6bbbdf629373ac5c10cdef7262ccea7010fb6a3728",
+            "binding_kind": "apt",
+            "description": "Perl based tool to parse DMARC reports",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "report"
+            ],
+            "name": "dmarcts-report-parser",
+            "packages": [],
+            "query": "report",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.0+git20220721.51ba1de-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "23bb5365162dce84ddeb31c27bf62287ce802ee35639cbf72e0b8b58390f969b",
+            "binding_kind": "apt",
+            "description": "quick access to project files in Emacs",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "elpa-find-file-in-project",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.2.0-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "2394bf199cdaea188afb8abf78227585ded9efe3f5f6bdb0866b52913a3fe304",
+            "binding_kind": "apt",
+            "description": "Emacs library for operations on the current project",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "elpa-project",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.10.0-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "582829aa711a21d430fb2850e53e411d7f6ebd1e1195853ab87bfaec3d364f1b",
+            "binding_kind": "apt",
+            "description": "font used to create the Ubuntu logo (2004\u20122010)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "title"
+            ],
+            "name": "fonts-ubuntu-title",
+            "packages": [],
+            "query": "title",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1:0.3-2.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "68dd209643e65397bc83bb070067d1089557ed02874ab71723d467745e9f59ec",
+            "binding_kind": "apt",
+            "description": "Gambas report component",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "report"
+            ],
+            "name": "gambas3-gb-report",
+            "packages": [],
+            "query": "report",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.19.0-2ubuntu10",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "52d98aaca5e7adbaf037e4f8a0faa25c8f8c21c5e36ea12ef23ed0e4c790164e",
+            "binding_kind": "apt",
+            "description": "The Haskell 98 Language and Libraries Revised Report & addenda",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "report"
+            ],
+            "name": "haskell98-report",
+            "packages": [],
+            "query": "report",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "20080907-11",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "f999361f6e095fb1f3304ea6a924f8bd864eb8ebeb4cb25c4aa110301c841af5",
+            "binding_kind": "apt",
+            "description": "MATE Window Applets (WindowTitle Applet)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "title"
+            ],
+            "name": "mate-window-title-applet",
+            "packages": [],
+            "query": "title",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "21.04.0-1build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "7df61cd6f798e91c3d6fca6993e972c2300c23d76b1aa0ae14d9652ed10d55ac",
+            "binding_kind": "apt",
+            "description": "Title sequences for OpenRCT2",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "title"
+            ],
+            "name": "openrct2-title-sequences",
+            "packages": [],
+            "query": "title",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.4.6-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "726829fd2dd0d807c997c744c509d9c80df41d63548a6c62ffc35cbd5eaffebf",
+            "binding_kind": "apt",
+            "description": "DVB demuxing tool",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "project-x",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.90.4dfsg-0ubuntu6",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "cf0d32289b48c120c025ba02cca01bfa6d8308535a619911a07c5ebba105762b",
+            "binding_kind": "apt",
+            "description": "Tryton application platform - project module",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "tryton-modules-project",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.0.0-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "76f9c558651e2307f2e2bfa8b4c687d1b175aa7a2b4d2be881ac715168362949",
+            "binding_kind": "apt",
+            "description": "Tryton application platform - project invoice module",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "tryton-modules-project-invoice",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.0.4-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "ba5a155a80ad80a46b6249ba6020c3258f7425e67ba0db291186bb58276d924e",
+            "binding_kind": "apt",
+            "description": "Tryton application platform - project plan module",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "tryton-modules-project-plan",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.0.0-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "70a3e8a200ce4164b78f249a4d1e58a5f10d0e62c12e506c386c34054941555c",
+            "binding_kind": "apt",
+            "description": "Tryton application platform - project revenue module",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "tryton-modules-project-revenue",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.0.1-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "ec97ab878f83efb59789abe56fcf81c8f94274fb80232043f568918c4f8b759e",
+            "binding_kind": "apt",
+            "description": "Report hardware and other collected metrics",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "report"
+            ],
+            "name": "ubuntu-report",
+            "packages": [],
+            "query": "report",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.7.3ubuntu0.24.04.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "e9852cbcd1527bac6204187a738a6275a31a31818933a6f2d7efe6a3fd6d84fd",
+            "binding_kind": "apt",
+            "description": "Implementation of Algol 68 as defined by the Revised Report",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "report"
+            ],
+            "name": "algol68g",
+            "packages": [],
+            "query": "report",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "3.1.2-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "3fb6842df77c2a60373981d2a00e25c11b3793f4301e115bcb9dd3e3b69e8847",
+            "binding_kind": "apt",
+            "description": "automatically generate crash reports for debugging",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "report"
+            ],
+            "name": "apport",
+            "packages": [],
+            "query": "report",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "2.28.3-0ubuntu0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "86cdb667d4f124ab8f2419a6910be206f5af6b173595e48553b72e6d473ee58f",
+            "binding_kind": "apt",
+            "description": "GTK+ frontend for the apport crash report system",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "report"
+            ],
+            "name": "apport-gtk",
+            "packages": [],
+            "query": "report",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "2.28.3-0ubuntu0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d6eb3165b256e5f84cd3780e9ed2bc0b8acce2f4063ed588daf8b07dfc243189",
+            "binding_kind": "apt",
+            "description": "KDE frontend for the apport crash report system",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "report"
+            ],
+            "name": "apport-kde",
+            "packages": [],
+            "query": "report",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "2.28.3-0ubuntu0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "f0687cde1cde2fb88025b4ce51ff5306a7d4021d5ff2895d101000b418920ddd",
+            "binding_kind": "apt",
+            "description": "tools for automatically reporting Apport crash reports",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "report"
+            ],
+            "name": "apport-noui",
+            "packages": [],
+            "query": "report",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "2.28.3-0ubuntu0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "96afecfa8bf5cbe6c0f2c7e12292f10bb38deda95c91abf3a8184ecf3c6eb0d2",
+            "binding_kind": "apt",
+            "description": "tools for reprocessing Apport crash reports",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "report"
+            ],
+            "name": "apport-retrace",
+            "packages": [],
+            "query": "report",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "2.28.3-0ubuntu0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "4f2372124965376e5ab6978e00e2dc1f3577244dd606c10f830eca8164e0fda6",
+            "binding_kind": "apt",
+            "description": "command line tool reporting RAID status for several RAID types",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "report"
+            ],
+            "name": "array-info",
+            "packages": [],
+            "query": "report",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.16-6",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "0dda010275924afb48c3a2184d49267f48e9a4b0afa1c6aec18280357b50311c",
+            "binding_kind": "apt",
+            "description": "dark GTK+ theme from the Shimmer Project",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "blackbird-gtk-theme",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.4+20171213-4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "783ab0c2dd152dda9bbd1a8cd798af4ef7278e9893b79830133b70b54f0df936",
+            "binding_kind": "apt",
+            "description": "blue GTK+ theme from the Shimmer Project",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "bluebird-gtk-theme",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.3-4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "cbbb28d6388eb81978f8d7caa703285296a6eb76dccc8898e941d8b7e5bb821f",
+            "binding_kind": "apt",
+            "description": "A mind boggling (brain twisting) game of logic",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "brain"
+            ],
+            "name": "blupimania",
+            "packages": [],
+            "query": "brain",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.6.2-17-g5f6cf8b-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "6b73d506364e523ccc956582dd684e725fa6e61167484b75b0be4fa12ab275de",
+            "binding_kind": "apt",
+            "description": "A mind boggling (brain twisting) game of logic - data",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "brain"
+            ],
+            "name": "blupimania-common",
+            "packages": [],
+            "query": "brain",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.6.2-17-g5f6cf8b-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "17a043e720621347b163161fd21d85860d897bf10d8992c3e6193a0dd591d442",
+            "binding_kind": "apt",
+            "description": "metapackage for virtualbox-savvy projects",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "boinc-virtualbox",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "7.24.1+dfsg-4build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "384cb5cf9629d9951604d87d99aad0d26c580118e78531c293d5543053e8d82b",
+            "binding_kind": "apt",
+            "description": "toolset for the Buildstream project",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "buildstream",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.6.9-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "470fc3014a27f4b131d97b87da4a9911f44c5276b160535c3612b4f6d2a32141",
+            "binding_kind": "apt",
+            "description": "integrated project management and planning tool",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "calligraplan",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1:3.3.0-2build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "94ce7fc8f352fe8ffc5e1f53f7d288eccd764cc0e66093d2b41d9eadc8edc47d",
+            "binding_kind": "apt",
+            "description": "print dependency tree of a Rust project using Cargo",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "cargo-debstatus",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.5.2-2build1",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Create canonical/astra_runtime/tmp/PROJECT_BRAIN_REPORT.docx with title Project Brain Report, paragraph Verified cross-tool composition, and a table with columns Capability and Status containing Browser interaction | VERIFIED and Browser-to-XLSX composition | VERIFIED",
+        "errors": [],
+        "queries": [
+          "title",
+          "project",
+          "brain",
+          "report"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "APT_CATALOG",
+        "source_url": null
+      },
+      {
+        "binding_performed": false,
+        "candidate_count": 102,
+        "candidates": [
+          {
+            "description": "Local-first agent memory. Source, date, bind/abstain. Permanent name: lbrain.ai/claim.html",
+            "is_latest": true,
+            "name": "ai.lbrain/lbrain",
+            "packages": [
+              {
+                "identifier": "lbrain-coding-agents",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "uvx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.3"
+              }
+            ],
+            "query": "brain",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/metavolve-labs/lbrain-coding-agents"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.1.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Helper for brainCloud MCP that gives it local file access, enabling easy git sync of cloud code.",
+            "is_latest": true,
+            "name": "com.braincloudservers/braincloud-mcp-helper",
+            "packages": [
+              {
+                "identifier": "@braincloud/mcp-helper",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "6.0.0"
+              }
+            ],
+            "query": "brain",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "subfolder": "packages/mcp-helper",
+              "url": "https://github.com/getbraincloud/braincloud-mcp-helper"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "6.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Keyless MCP for Just Signal: live quotes, report publishing, scorecard, and Chophouse panel grades.",
+            "is_latest": true,
+            "name": "com.ou-reports/just-signal",
+            "packages": [
+              {
+                "identifier": "just-signal-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.3.0"
+              }
+            ],
+            "query": "report",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://www.ou-reports.com/api/mcp.php"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.3.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "AI Incident Reporting Compliance MCP. Unified classification + reporting-clock tracker across EU...",
+            "is_latest": true,
+            "name": "io.github.CSOAI-ORG/ai-incident-reporting-mcp",
+            "packages": [
+              {
+                "identifier": "ai-incident-reporting-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "python",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.1.9"
+              }
+            ],
+            "query": "report",
+            "remotes": [],
+            "repository": {
+              "id": "1232725636",
+              "source": "github",
+              "url": "https://github.com/CSOAI-ORG/ai-incident-reporting-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.1.9",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Explainability Report MCP Server by MEOK AI Labs",
+            "is_latest": true,
+            "name": "io.github.CSOAI-ORG/explainability-report-mcp",
+            "packages": [
+              {
+                "identifier": "explainability-report-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "python",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.16"
+              }
+            ],
+            "query": "report",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/CSOAI-ORG/explainability-report-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.16",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MEOK CRA Article 14 Reporter MCP \u2014 actively-exploited-vulnerability notification with 24h/72h/14d",
+            "is_latest": true,
+            "name": "io.github.CSOAI-ORG/meok-cra-art14-reporter-mcp",
+            "packages": [
+              {
+                "identifier": "meok-cra-art14-reporter-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "python",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.5"
+              }
+            ],
+            "query": "report",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.meok.ai/v1/governance/cra-art14-reporter"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/CSOAI-ORG/meok-cra-art14-reporter-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.5",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Project Management Ai MCP Server by MEOK AI Labs",
+            "is_latest": true,
+            "name": "io.github.CSOAI-ORG/project-management-ai-mcp",
+            "packages": [
+              {
+                "identifier": "project-management-ai-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "python",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.9"
+              }
+            ],
+            "query": "project",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/CSOAI-ORG/project-management-ai-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.9",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "HPE GreenLake reporting MCP Server",
+            "is_latest": true,
+            "name": "io.github.HewlettPackard/greenlake-reporting-mcp",
+            "packages": [
+              {
+                "identifier": "greenlake-reporting-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.1.2"
+              }
+            ],
+            "query": "report",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/HewlettPackard/gl-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.1.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Audit, reschedule and author Microsoft Project schedules. No Java, no Project install.",
+            "is_latest": true,
+            "name": "io.github.HorizunGroup/horizun-msproject-mcp",
+            "packages": [
+              {
+                "identifier": "HorizunMsProjectMcp",
+                "registry_type": "nuget",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.2.1"
+              }
+            ],
+            "query": "project",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/HorizunGroup/horizun-msproject-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.2.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP server for AI agents to report infrastructure needs they encounter during task execution",
+            "is_latest": true,
+            "name": "io.github.JarvisOnM4/report-needs",
+            "packages": [
+              {
+                "identifier": "report-needs",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.1"
+              }
+            ],
+            "query": "report",
+            "remotes": [],
+            "repository": {
+              "id": "1181547464",
+              "source": "github",
+              "url": "https://github.com/JarvisOnM4/report-needs"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Search TV series on tvsubtitles.net, read a season's subtitle coverage and one record. No API key.",
+            "is_latest": true,
+            "name": "io.github.smeet666/mcp-tvsubtitles",
+            "packages": [
+              {
+                "identifier": "mcp-tvsubtitles",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.1"
+              },
+              {
+                "identifier": "https://github.com/smeet666/mcp-tvsubtitles/releases/download/v1.0.1/mcp-tvsubtitles-1.0.1.mcpb",
+                "registry_type": "mcpb",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.1"
+              }
+            ],
+            "query": "title",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/smeet666/mcp-tvsubtitles"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Agent-updated work tracker for builders directing AI across multiple projects.",
+            "is_latest": true,
+            "name": "ai.atlier/project-desk",
+            "packages": [],
+            "query": "project",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://atlier.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Wildsdesign/Atlier"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "4.7.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Read, analyze, and safely edit Microsoft Project MPP files.",
+            "is_latest": true,
+            "name": "ai.projectdata/mpp-connector",
+            "packages": [],
+            "query": "project",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.projectdata.ai/"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/projectdata-io/mpp-poweautomate-connector"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "12 synthetic grant report exception cases: duplicate disbursements, debarment hold list entries, mis",
+            "is_latest": true,
+            "name": "com.a2awire/benchmark-grant-report-review-2026-09-17-9189341d",
+            "packages": [],
+            "query": "report",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://a2awire.com/mcp/benchmarks/grant-report-review-2026-09-17-9189341d/http"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/ee324/a2awire"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "12 synthetic report exception cases: duplicate reimbursements, policy-watch list entries, missing do",
+            "is_latest": true,
+            "name": "com.a2awire/benchmark-report-audit-2026-09-21-b9e5e630",
+            "packages": [],
+            "query": "report",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://a2awire.com/mcp/benchmarks/report-audit-2026-09-21-b9e5e630/http"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/ee324/a2awire"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "12 synthetic report exception cases: duplicate reimbursements, policy-watch list entries, missing do",
+            "is_latest": true,
+            "name": "com.a2awire/benchmark-report-review-2026-09-23-f72b2bd5",
+            "packages": [],
+            "query": "report",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://a2awire.com/mcp/benchmarks/report-review-2026-09-23-f72b2bd5/http"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/ee324/a2awire"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Manage brainCloud apps, cloud code, hooks and servers; API lookups to help generate client code.",
+            "is_latest": true,
+            "name": "com.braincloudservers/braincloud-mcp",
+            "packages": [],
+            "query": "brain",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.braincloudservers.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "6.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Read-only access to Cogram projects, meetings, emails, RFIs and drawings for AEC teams",
+            "is_latest": true,
+            "name": "com.cogram/project",
+            "packages": [],
+            "query": "project",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.cogram.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "VIN/HIN pre-purchase report: open NHTSA recalls, complaints, investigations, title-brand & liens.",
+            "is_latest": true,
+            "name": "com.dropwatchhq/title-check",
+            "packages": [],
+            "query": "title",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://titlecheck.dropwatchhq.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "LPreportly: the site's own MCP server \u2014 dataset; every answer cites the site.",
+            "is_latest": true,
+            "name": "com.lpreportly/site",
+            "packages": [],
+            "query": "report",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://lpreportly.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/joeetdev/venture-estate"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Vehicle valuations and market reports in Claude or ChatGPT. Pay per report, no subscription.",
+            "is_latest": true,
+            "name": "com.marketcheck/marketcheck-ai-reports",
+            "packages": [],
+            "query": "report",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://ai.marketcheck.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/MarketcheckHub/marketcheck-ai-reports"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.2.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Manage customers, reviews, requests, and reputation for one More Good Reviews project.",
+            "is_latest": true,
+            "name": "com.moregoodreviews/project",
+            "packages": [],
+            "query": "project",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.moregoodreviews.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "AI project timelines & Gantt charts, plus enterprise resourcing, capacity & weekly status reporting.",
+            "is_latest": true,
+            "name": "com.projectpaced/timeline",
+            "packages": [],
+            "query": "project",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.projectpaced.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "subfolder": "mcp-server",
+              "url": "https://github.com/suleman-k/Project-Paced-v2"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.3.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Query marketing data across 20+ ad platforms; with write access, create, schedule and share reports.",
+            "is_latest": true,
+            "name": "com.reportingninja/reporting-ninja",
+            "packages": [],
+            "query": "report",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.reportingninja.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.5.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Explore your Userbrain user test data, summarize feedback, and uncover actionable insights faster.",
+            "is_latest": true,
+            "name": "com.userbrain/mcp",
+            "packages": [],
+            "query": "brain",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.userbrain.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.5.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Personal project management with AI agents: numbered tickets, statuses, files, a thread per ticket.",
+            "is_latest": true,
+            "name": "com.verysimpleprojects/mcp",
+            "packages": [],
+            "query": "project",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://verysimpleprojects.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Israeli mortgage reports with Hebrew results, 15-minute recovery and authorized external OCR.",
+            "is_latest": true,
+            "name": "il.co.finly/report-analysis",
+            "packages": [],
+            "query": "report",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://finly.co.il/mcp/reports"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Brainfile memory layer for Claude Code over MCP: free starter files + weekly freshness feed.",
+            "is_latest": true,
+            "name": "io.brainfile/brainfile",
+            "packages": [],
+            "query": "brain",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://brainfile.io/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Build a grouped account report",
+            "is_latest": true,
+            "name": "io.github.Wxt-ai/account-group-report-builder",
+            "packages": [],
+            "query": "report",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://openings-vote-drilling-initially.trycloudflare.com/mcp/account-group-report-builder"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.7",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Title-case token count, text discarded",
+            "is_latest": true,
+            "name": "io.github.sadri-dridi/title-case-ok",
+            "packages": [],
+            "query": "title",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/title-case-ok/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Create canonical/astra_runtime/tmp/PROJECT_BRAIN_REPORT.docx with title Project Brain Report, paragraph Verified cross-tool composition, and a table with columns Capability and Status containing Browser interaction | VERIFIED and Browser-to-XLSX composition | VERIFIED",
+        "errors": [],
+        "queries": [
+          "title",
+          "project",
+          "brain",
+          "report"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "OFFICIAL_MCP_REGISTRY",
+        "source_url": "https://registry.modelcontextprotocol.io"
+      }
+    ],
+    "schema": "PROJECT_BRAIN_FEDERATED_CAPABILITY_DISCOVERY_V1",
+    "sources": [
+      "APT_CATALOG",
+      "OFFICIAL_MCP_REGISTRY"
+    ]
+  },
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
+  "source": "FEDERATED_CAPABILITY_DISCOVERY_FALLBACK",
+  "targeted_acquisition_error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fonts-ubuntu-title\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.docx\", \"name\": \"cookiecutter\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-find-file-in-project\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-project\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"mate-window-title-applet\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"openrct2-title-sequences\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.docx\", \"name\": \"project-x\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"tryton-modules-project\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"tryton-modules-project-invoice\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"tryton-modules-project-plan\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"tryton-modules-project-revenue\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"blackbird-gtk-theme\", \"status\": \"CONTRACT_REJECTED\"}]"
+}

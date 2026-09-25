@@ -1,0 +1,1089 @@
+{
+  "attempts": [
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "582829aa711a21d430fb2850e53e411d7f6ebd1e1195853ab87bfaec3d364f1b",
+        "executables": [],
+        "package": "fonts-ubuntu-title",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1:0.3-2.1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 88.0,
+        "archive_sha256": "582829aa711a21d430fb2850e53e411d7f6ebd1e1195853ab87bfaec3d364f1b",
+        "binding_kind": "apt",
+        "description": "font used to create the Ubuntu logo (2004\u20122010)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "title"
+        ],
+        "name": "fonts-ubuntu-title",
+        "packages": [],
+        "query": "title",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:0.3-2.1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.docx",
+      "probe": {
+        "archive_sha256": "3fb6842df77c2a60373981d2a00e25c11b3793f4301e115bcb9dd3e3b69e8847",
+        "executables": [
+          {
+            "executable": "/usr/bin/apport-bug",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "usage: apport-bug [options] [symptom|pid|package|program path|.apport/.crash file]\n\noptions:\n  -h, --help     show this help message and exit\n  -w, --window   Click a window as a target for filing a problem report.\n  --hanging      The provided pid is a hanging application.\n  --save PATH    In bug filing mode, save the collected information into a\n                 file instead of reporting it. This file can then be reported\n                 later on from a different machine.\n  --tag TAGS     Add an extra tag to the report. Can be specified multiple\n                 times.\n  -v, --version  Print the Apport version number."
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/apport-cli",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "usage: apport-cli [options] [symptom|pid|package|program path|.apport/.crash file]\n\noptions:\n  -h, --help            show this help message and exit\n  -f, --file-bug        Start in bug filing mode. Requires --package and an\n                        optional --pid, or just a --pid. If neither is given,\n                        display a list of known symptoms. (Implied if a single\n                        argument is given.)\n  -w, --window          Click a window as a target for filing a problem\n                        report.\n  -u UPDATE_REPORT, --update-bug UPDATE_REPORT\n                        Start in bug updating mode. Can take an optional\n                        --package.\n  -s SYMPTOM, --symptom SYMPTOM\n                        File a bug report about a symptom. (Implied if symptom\n                        name is given as only argument.)\n  -p PACKAGE, --package PACKAGE\n                        Specify package name in --file-bug mode. This is\n                        optional if a --pid is specified. (Implied if package\n                        name is given as only argument.)\n  -P PID, --pid PID     Specify a running program in --file-bug mode. If this\n                        is specified, the bug report will contain more\n                        information. (Implied if pid is given as only\n                        argument.)\n  --hanging             The provided pid is a hanging application.\n  -c PATH, --crash-file PATH\n                        Report the crash from given .apport or .crash file\n                        instead of the pending ones in /var/crash. (Implied if\n                        file is given as only argument.)\n  --save PATH           In bug filing mode, save the collected information\n                        into a file instead of reporting it. This file can\n                        then be reported later on from a different machine.\n  --tag TAGS            Add an extra tag to the report. Can be specified\n                        multiple times.\n  -v, --version         Print the Apport version number."
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/apport-collect",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "usage: apport-collect <report number>\n\npositional arguments:\n  report_number\n\noptions:\n  -h, --help            show this help message and exit\n  -p PACKAGE, --package PACKAGE\n                        Specify package name.\n  --tag TAGS            Add an extra tag to the report. Can be specified\n                        multiple times."
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/apport-unpack",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "usage: apport-unpack <report> <target directory>\n\npositional arguments:\n  report            Report file to unpack\n  target_directory  directory to unpack report to\n\noptions:\n  -h, --help        show this help message and exit"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/oem-getlogs",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "usage: Useage: sudo -E oem-getlogs [-c CASE_ID]\n\nGet Hardware Enablement related logs\n\noptions:\n  -h, --help            show this help message and exit\n  -c CID, --case-id CID\n                        optional CASE_ID"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/ubuntu-bug",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "usage: ubuntu-bug [options] [symptom|pid|package|program path|.apport/.crash file]\n\noptions:\n  -h, --help     show this help message and exit\n  -w, --window   Click a window as a target for filing a problem report.\n  --hanging      The provided pid is a hanging application.\n  --save PATH    In bug filing mode, save the collected information into a\n                 file instead of reporting it. This file can then be reported\n                 later on from a different machine.\n  --tag TAGS     Add an extra tag to the report. Can be specified multiple\n                 times.\n  -v, --version  Print the Apport version number."
+              }
+            ]
+          }
+        ],
+        "package": "apport",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "2.28.3-0ubuntu0.1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 74.0,
+        "archive_sha256": "3fb6842df77c2a60373981d2a00e25c11b3793f4301e115bcb9dd3e3b69e8847",
+        "binding_kind": "apt",
+        "description": "automatically generate crash reports for debugging",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "report"
+        ],
+        "name": "apport",
+        "packages": [],
+        "query": "report",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.28.3-0ubuntu0.1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.docx",
+      "probe": {
+        "archive_sha256": "21a8594fb176fb4c865f211513f35488022b1b3ded756f090d0afb65e17bb1b5",
+        "executables": [
+          {
+            "executable": "/usr/bin/cookiecutter",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: cookiecutter [OPTIONS] [TEMPLATE] [EXTRA_CONTEXT]...\n\n  Create a project from a Cookiecutter project template (TEMPLATE).\n\n  Cookiecutter is free and open source software, developed and managed by\n  volunteers. If you would like to help out or fund the project, please get in\n  touch at https://github.com/cookiecutter/cookiecutter.\n\nOptions:\n  -V, --version                Show the version and exit.\n  --no-input                   Do not prompt for parameters and only use\n                               cookiecutter.json file content. Defaults to\n                               deleting any cached resources and redownloading\n                               them. Cannot be combined with the --replay\n                               flag.\n  -c, --checkout TEXT          branch, tag or commit to checkout after git\n                               clone\n  --directory TEXT             Directory within repo that holds\n                               cookiecutter.json file for advanced\n                               repositories with multi templates in it\n  -v, --verbose                Print debug information\n  --replay                     Do not prompt for parameters and only use\n                               information entered previously. Cannot be\n                               combined with the --no-input flag or with extra\n                               configuration passed.\n  --replay-file PATH           Use this file for replay instead of the\n                               default.\n  -f, --overwrite-if-exists    Overwrite the contents of the output directory\n                               if it already exists\n  -s, --skip-if-file-exists    Skip the files in the corresponding directories\n                               if they already exist\n  -o, --output-dir PATH        Where to output the generated project dir into\n  --config-file PATH           User configuration file\n  --default-config             Do not load a config file. Use the defaults\n                               instead\n  --debug-file PATH            File to be used as a stream for DEBUG logging\n  --accept-hooks [yes|ask|no]  Accept pre/post hooks\n  -l, --list-installed         List currently installed templates.\n  --keep-project-on-failure    Do not delete project folder on failure\n  -h, --help                   Show this message and exit."
+              }
+            ]
+          }
+        ],
+        "package": "cookiecutter",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "2.6.0-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 74.0,
+        "archive_sha256": "21a8594fb176fb4c865f211513f35488022b1b3ded756f090d0afb65e17bb1b5",
+        "binding_kind": "apt",
+        "description": "create projects from project templates",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "cookiecutter",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.6.0-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "68ac9a3924d19db487ceb961e2d396c9561931327d6018cce75d1c7ac061e7a5",
+        "executables": [],
+        "package": "claws-mail-spam-report",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "4.2.0-2build7"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "68ac9a3924d19db487ceb961e2d396c9561931327d6018cce75d1c7ac061e7a5",
+        "binding_kind": "apt",
+        "description": "Spam reporting plugin for Claws Mail",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "report"
+        ],
+        "name": "claws-mail-spam-report",
+        "packages": [],
+        "query": "report",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "4.2.0-2build7",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.docx",
+      "probe": {
+        "archive_sha256": "09be6f9efd655fdb64aefc6bbbdf629373ac5c10cdef7262ccea7010fb6a3728",
+        "executables": [
+          {
+            "executable": "/usr/sbin/dmarcts-report-parser",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 2,
+                "text": "Usage: \n    ./dmarcts-report-parser.pl [OPTIONS] [PATH] \n\n This script needs a configuration file called <dmarcts-report-parser.conf> in \n the current working directory, which defines a database server with credentials \n and (if used) an IMAP server with credentials. \n\n Additionaly, one of the following source options must be provided: \n        -i : Read reports from messages on IMAP server as defined in the \n             config file. \n        -m : Read reports from mbox file(s) provided in PATH. \n        -e : Read reports from MIME email file(s) provided in PATH. \n        -x : Read reports from xml file(s) provided in PATH. \n        -z : Read reports from zip file(s) provided in PATH. \n\n The following optional options are allowed: \n        -d : Print debug info. \n        -r : Replace existing reports rather than skipping them. \n  --delete : Delete processed message files (the XML is stored in the \n             database for later reference). \n    --info : Print out number of XML files or emails processed. \n\n\nUnknown option: help\ndmarcts-report-parser.pl: Could not read config file 'dmarcts-report-parser.conf' from current working directory or path (/usr/sbin) at /usr/sbin/dmarcts-report-parser line 188."
+              }
+            ]
+          }
+        ],
+        "package": "dmarcts-report-parser",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.0+git20220721.51ba1de-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "09be6f9efd655fdb64aefc6bbbdf629373ac5c10cdef7262ccea7010fb6a3728",
+        "binding_kind": "apt",
+        "description": "Perl based tool to parse DMARC reports",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "report"
+        ],
+        "name": "dmarcts-report-parser",
+        "packages": [],
+        "query": "report",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.0+git20220721.51ba1de-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "23bb5365162dce84ddeb31c27bf62287ce802ee35639cbf72e0b8b58390f969b",
+        "executables": [],
+        "package": "elpa-find-file-in-project",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "6.2.0-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "23bb5365162dce84ddeb31c27bf62287ce802ee35639cbf72e0b8b58390f969b",
+        "binding_kind": "apt",
+        "description": "quick access to project files in Emacs",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "elpa-find-file-in-project",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.2.0-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "2394bf199cdaea188afb8abf78227585ded9efe3f5f6bdb0866b52913a3fe304",
+        "executables": [],
+        "package": "elpa-project",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.10.0-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "2394bf199cdaea188afb8abf78227585ded9efe3f5f6bdb0866b52913a3fe304",
+        "binding_kind": "apt",
+        "description": "Emacs library for operations on the current project",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "elpa-project",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.10.0-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "68dd209643e65397bc83bb070067d1089557ed02874ab71723d467745e9f59ec",
+        "executables": [],
+        "package": "gambas3-gb-report",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "3.19.0-2ubuntu10"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "68dd209643e65397bc83bb070067d1089557ed02874ab71723d467745e9f59ec",
+        "binding_kind": "apt",
+        "description": "Gambas report component",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "report"
+        ],
+        "name": "gambas3-gb-report",
+        "packages": [],
+        "query": "report",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.19.0-2ubuntu10",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "52d98aaca5e7adbaf037e4f8a0faa25c8f8c21c5e36ea12ef23ed0e4c790164e",
+        "executables": [],
+        "package": "haskell98-report",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "20080907-11"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "52d98aaca5e7adbaf037e4f8a0faa25c8f8c21c5e36ea12ef23ed0e4c790164e",
+        "binding_kind": "apt",
+        "description": "The Haskell 98 Language and Libraries Revised Report & addenda",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "report"
+        ],
+        "name": "haskell98-report",
+        "packages": [],
+        "query": "report",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "20080907-11",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "f999361f6e095fb1f3304ea6a924f8bd864eb8ebeb4cb25c4aa110301c841af5",
+        "executables": [],
+        "package": "mate-window-title-applet",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "21.04.0-1build3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "f999361f6e095fb1f3304ea6a924f8bd864eb8ebeb4cb25c4aa110301c841af5",
+        "binding_kind": "apt",
+        "description": "MATE Window Applets (WindowTitle Applet)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "title"
+        ],
+        "name": "mate-window-title-applet",
+        "packages": [],
+        "query": "title",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "21.04.0-1build3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "7df61cd6f798e91c3d6fca6993e972c2300c23d76b1aa0ae14d9652ed10d55ac",
+        "executables": [],
+        "package": "openrct2-title-sequences",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.4.6-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "7df61cd6f798e91c3d6fca6993e972c2300c23d76b1aa0ae14d9652ed10d55ac",
+        "binding_kind": "apt",
+        "description": "Title sequences for OpenRCT2",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "title"
+        ],
+        "name": "openrct2-title-sequences",
+        "packages": [],
+        "query": "title",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.4.6-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.docx",
+      "probe": {
+        "archive_sha256": "726829fd2dd0d807c997c744c509d9c80df41d63548a6c62ffc35cbd5eaffebf",
+        "executables": [
+          {
+            "executable": "/usr/bin/projectx",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "Reading GUI-Switch...\nReading Help Switch...\nReading Config File Switch...\nStart without GUI...\nLoading last Config or Standard File...\nini load error: java.io.FileNotFoundException: /home/runner/work/brain/brain/X.ini (No such file or directory)\nLoading Language -> 'en'\n\nProjectX 0.90.4.00/30.03.2006 TEST PROJECT ONLY , User: runner\n\n\nTERMS AND CONDITIONS:\n(1) this is a free Java based demux utility.\n(2) It is intended for educational purposes only, as a non-commercial test project.\n(3) released under the terms of the GNU GPL.\n(4) there is NO WARRANTY of any kind attached to this software.\n(5) use it at your own risk and for your own education.\n\nJava Environment\nSeptember 25, 2026    3:17:27 AM UTC\njava.version\t17.0.20.1\njava.vendor\tEclipse Adoptium\njava.home\t/usr/lib/jvm/temurin-17-jdk-amd64\njava.vm.version\t17.0.20.1+1\njava.vm.vendor\tEclipse Adoptium\njava.vm.name\tOpenJDK 64-Bit Server VM\njava.class.vers\t61.0\njava.class.path\t/usr/share/java/ProjectX.jar\nos.name\tLinux\nos.arch\tamd64\nos.version\t6.17.0-1022-azure\nini.file\t/home/runner/work/brain/brain/X.ini\next.disk.access\tdisabled or library not found\nuser.language\ten\nuser.name\trunner\nuser.home\t/home/runner\n\nquick CL usage: \nNote: CL doesn't load the GUI components, except with switch [-gui]\n<without options>  ...starts the GUI\nswitches and inputfiles can be in any order\n\noptions:\n[-ini <path + inifile>] ..use that specified iniFile instead of the standard\n[-dvx1] ..create a .d2v ProjectFile on demux\n[-dvx2] ..create a .d2v ProjectFile + .ac3.wav (RIFF WAVE Header)\n[-dvx3] ..create a .d2v ProjectFile + .mpa.wav (RIFF WAVE Header)\n[-dvx4] ..create a .d2v ProjectFile + .ac3.wav + mpa.wav (RIFF WAVE Header)\n[-out <path>] ..use that specified directory for output\n[-name <filename>] ..use that specified filename for output\n[-cut <file>] ..use that text based file as cutpoint list\n[-chp <file>] ..use that text based file as chapterpoint list\n[-id <tokens>] ..use only these (P)IDs, separated by comma \",\"\n[-gui] ..display the GUI using all given CLI options\n[-log] ..write the normal logfile\n[-saveini] ..save changes made bei CLI in active .ini\n[-split <xxx>] ..split output at xxx MB\n[-demux, -tom2p, -topva, -tovdr, -tots, -filter] ..action types\n\nLoading Basic Classes...\nReading CLI Switches...\n\n!> an error has occured..  (please inform the authors at 'forum.dvbtechnics.info')\nNo matching FileType found or file doesn't exist: '--help'\n\n!> an error has occured..  (please inform the authors at 'forum.dvbtechnics.info')\njava.lang.NoSuchMethodException: net.sourceforge.dvb.projectx.xinput.file.XInputFileImpl.<init>(java.lang.String)\n\tat java.base/java.lang.Class.getConstructor0(Class.java:3587)\n\tat java.base/java.lang.Class.getConstructor(Class.java:2273)\n\tat net.sourceforge.dvb.projectx.xinput.XInputFile.retrieveImplementation(Unknown Source)\n\tat net.sourceforge.dvb.projectx.xinput.XInputFile.<init>(Unknown Source)\n\tat net.sourceforge.dvb.projectx.common.Common.getInputFile(Unknown Source)\n\tat net.sourceforge.dvb.projectx.common.Start.readSwitches(Unknown Source)\n\tat net.sourceforge.dvb.projectx.common.Start.main(Unknown Source)\n\nError while reading CLI Switches ...\nChecking Commons-Net library access...\nLoading AC3 frames...\nStarting Collection Process...\npreparing collection(s)...\n\n1 %<<< session infos >>>\n\nFriday, September 25, 2026  3:17:27 AM Coordinated Universal Time\nProjectX 0.90.4.00 (30.03.2006)\n\n-> working with collection 0\n \n-> save normal log file\n-> write all video data\n-> write all other data\n-> patch c.d.flagged infos of pictures\n-> add sequence end code\n-> set resolution in SDE \n-> PVA: strictly specs. for audio streams\n-> VOB: determine diff. Cell timelines\n-> TS: ignore scrambled packets\n-> TS: enhanced search for open packets\n-> TS: join file segments (of Dreambox\u00ae)\n-> TS: generate PMT stream dependent\n-> get only enclosed PES/TS packets\n-> concatenate different recordings\n-> ensure 1st PES-packet start with video\n-> generate PCR/SCR from PTS\n \nstopped...\n\n!> an error has occured..  (please inform the authors at 'forum.dvbtechnics.info')\njava.lang.NullPointerException: Cannot invoke \"net.sourceforge.dvb.projectx.xinput.XInputFileIF.toString()\" because \"this.impl\" is null\n\tat net.sourceforge.dvb.projectx.xinput.XInputFile.toString(Unknown Source)\n\tat net.sourceforge.dvb.projectx.common.JobCollection.checkOutputDirectory(Unknown Source)\n\tat net.sourceforge.dvb.projectx.parser.MainProcess.startProcessing(Unknown Source)\n\tat net.sourceforge.dvb.projectx.parser.MainProcess.run(Unknown Source)\n\n-> we have 1 warnings/errors.\n\n!> an error has occured..  (please inform the authors at 'forum.dvbtechnics.info')\njava.io.FileNotFoundException:  (No such file or directory)\n\tat java.base/java.io.FileOutputStream.open0(Native Method)\n\tat java.base/java.io.FileOutputStream.open(FileOutputStream.java:293)\n\tat java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:235)\n\tat java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:123)\n\tat net.sourceforge.dvb.projectx.common.JobCollection.closeNormalLogStream(Unknown Source)\n\tat net.sourceforge.dvb.projectx.parser.MainProcess.startProcessing(Unknown Source)\n\tat net.sourceforge.dvb.projectx.parser.MainProcess.run(Unknown Source)\n\n\nFile input error"
+              }
+            ]
+          }
+        ],
+        "package": "project-x",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.90.4dfsg-0ubuntu6"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "726829fd2dd0d807c997c744c509d9c80df41d63548a6c62ffc35cbd5eaffebf",
+        "binding_kind": "apt",
+        "description": "DVB demuxing tool",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "project-x",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.90.4dfsg-0ubuntu6",
+        "zero_cost_eligible": true
+      }
+    }
+  ],
+  "goal": "Create canonical/astra_runtime/tmp/PROJECT_BRAIN_REPORT.docx with title Project Brain Report, paragraph Verified cross-tool composition, and a table with columns Capability and Status containing Browser interaction | VERIFIED and Browser-to-XLSX composition | VERIFIED",
+  "mission_id": "ASTRA-RUNTIME-DOCX-001",
+  "role_conditioned_discovery": [
+    {
+      "binding_performed": false,
+      "candidate_count": 4,
+      "candidates": [
+        {
+          "archive_sha256": "8dec367f86be44b86bb3c7329ccc6af165854008fd23e185f44500ece39bdb80",
+          "binding_kind": "apt",
+          "description": "library for creating and updating Microsoft Word files (Python 3)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 2,
+          "matched_terms": [
+            "docx"
+          ],
+          "name": "python3-docx",
+          "packages": [],
+          "query": "docx",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 14,
+          "version": "1.1.0+dfsg-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "2c27d5736056cebccc576f8f4edd02cdb9d2eec46bc8b881be55763c118d520f",
+          "binding_kind": "apt",
+          "description": "transitional package",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 2,
+          "matched_terms": [
+            "docx"
+          ],
+          "name": "python3-python-docx",
+          "packages": [],
+          "query": "docx",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 14,
+          "version": "1.1.0+dfsg-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "0bf0c6a0f0f52d19cb35eeba337f229e8b645ab73097139f1befb4aded288912",
+          "binding_kind": "apt",
+          "description": "concatenate/append Microsoft Word (.docx) files",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 2,
+          "matched_terms": [
+            "docx"
+          ],
+          "name": "python3-docxcompose",
+          "packages": [],
+          "query": "docx",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 0,
+          "version": "1.4.0-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "49a49bf56163e3d3943e225677baa5e425dab409b0c4ca2583b55471906a9fbf",
+          "binding_kind": "apt",
+          "description": "Python DOCX template engine",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 2,
+          "matched_terms": [
+            "docx"
+          ],
+          "name": "python3-docxtpl",
+          "packages": [],
+          "query": "docx",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 0,
+          "version": "0.16.7+dfsg-1",
+          "zero_cost_eligible": true
+        }
+      ],
+      "effect": "docx",
+      "errors": [],
+      "queries": [
+        "docx"
+      ],
+      "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+      "source": "APT_CATALOG",
+      "source_url": null
+    },
+    {
+      "binding_performed": false,
+      "candidate_count": 24,
+      "candidates": [
+        {
+          "archive_sha256": "23bb5365162dce84ddeb31c27bf62287ce802ee35639cbf72e0b8b58390f969b",
+          "binding_kind": "apt",
+          "description": "quick access to project files in Emacs",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "elpa-find-file-in-project",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.2.0-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "2394bf199cdaea188afb8abf78227585ded9efe3f5f6bdb0866b52913a3fe304",
+          "binding_kind": "apt",
+          "description": "Emacs library for operations on the current project",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "elpa-project",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.10.0-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "582829aa711a21d430fb2850e53e411d7f6ebd1e1195853ab87bfaec3d364f1b",
+          "binding_kind": "apt",
+          "description": "font used to create the Ubuntu logo (2004\u20122010)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "title"
+          ],
+          "name": "fonts-ubuntu-title",
+          "packages": [],
+          "query": "title",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1:0.3-2.1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "f999361f6e095fb1f3304ea6a924f8bd864eb8ebeb4cb25c4aa110301c841af5",
+          "binding_kind": "apt",
+          "description": "MATE Window Applets (WindowTitle Applet)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "title"
+          ],
+          "name": "mate-window-title-applet",
+          "packages": [],
+          "query": "title",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "21.04.0-1build3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "7df61cd6f798e91c3d6fca6993e972c2300c23d76b1aa0ae14d9652ed10d55ac",
+          "binding_kind": "apt",
+          "description": "Title sequences for OpenRCT2",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "title"
+          ],
+          "name": "openrct2-title-sequences",
+          "packages": [],
+          "query": "title",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.4.6-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "726829fd2dd0d807c997c744c509d9c80df41d63548a6c62ffc35cbd5eaffebf",
+          "binding_kind": "apt",
+          "description": "DVB demuxing tool",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "project-x",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.90.4dfsg-0ubuntu6",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "cf0d32289b48c120c025ba02cca01bfa6d8308535a619911a07c5ebba105762b",
+          "binding_kind": "apt",
+          "description": "Tryton application platform - project module",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "tryton-modules-project",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.0.0-3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "76f9c558651e2307f2e2bfa8b4c687d1b175aa7a2b4d2be881ac715168362949",
+          "binding_kind": "apt",
+          "description": "Tryton application platform - project invoice module",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "tryton-modules-project-invoice",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.0.4-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "ba5a155a80ad80a46b6249ba6020c3258f7425e67ba0db291186bb58276d924e",
+          "binding_kind": "apt",
+          "description": "Tryton application platform - project plan module",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "tryton-modules-project-plan",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.0.0-3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "70a3e8a200ce4164b78f249a4d1e58a5f10d0e62c12e506c386c34054941555c",
+          "binding_kind": "apt",
+          "description": "Tryton application platform - project revenue module",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "tryton-modules-project-revenue",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.0.1-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "0dda010275924afb48c3a2184d49267f48e9a4b0afa1c6aec18280357b50311c",
+          "binding_kind": "apt",
+          "description": "dark GTK+ theme from the Shimmer Project",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "blackbird-gtk-theme",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.4+20171213-4",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "783ab0c2dd152dda9bbd1a8cd798af4ef7278e9893b79830133b70b54f0df936",
+          "binding_kind": "apt",
+          "description": "blue GTK+ theme from the Shimmer Project",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "bluebird-gtk-theme",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.3-4",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "17a043e720621347b163161fd21d85860d897bf10d8992c3e6193a0dd591d442",
+          "binding_kind": "apt",
+          "description": "metapackage for virtualbox-savvy projects",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "boinc-virtualbox",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "7.24.1+dfsg-4build1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "384cb5cf9629d9951604d87d99aad0d26c580118e78531c293d5543053e8d82b",
+          "binding_kind": "apt",
+          "description": "toolset for the Buildstream project",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "buildstream",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.6.9-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "470fc3014a27f4b131d97b87da4a9911f44c5276b160535c3612b4f6d2a32141",
+          "binding_kind": "apt",
+          "description": "integrated project management and planning tool",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "calligraplan",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1:3.3.0-2build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "94ce7fc8f352fe8ffc5e1f53f7d288eccd764cc0e66093d2b41d9eadc8edc47d",
+          "binding_kind": "apt",
+          "description": "print dependency tree of a Rust project using Cargo",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "cargo-debstatus",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.5.2-2build1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "add3c10e495fafdb25c296a7ee75b205450e181dc546961f3d0d20c15f6ecb86",
+          "binding_kind": "apt",
+          "description": "CMake utility modules needed for building Vala Panel (and related projects)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "cmake-vala",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "3-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "21a8594fb176fb4c865f211513f35488022b1b3ded756f090d0afb65e17bb1b5",
+          "binding_kind": "apt",
+          "description": "create projects from project templates",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "cookiecutter",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.6.0-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "aac501a133606f3cdaf69ba350dd138929a0dffd717fc662e56add5200a4ae7d",
+          "binding_kind": "apt",
+          "description": "Tool for integrating rust with an existing CMake project",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "corrosion",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.4.7-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "57829e6f3b315a076ffae8befbe13f54d702cc144b313d0d9fd966f4f3d73c8b",
+          "binding_kind": "apt",
+          "description": "super-parallel Python port of the C-Reduce project",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "cvise",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.10.0-1ubuntu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "3169457b8dd7735b4f54f762dbebd468d50fb51a22e6df601ad5ef518e7c4e9f",
+          "binding_kind": "apt",
+          "description": "Short History of the Debian Project",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "debian-history",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.28",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "3000376a2faa1061cf02ef6d790ad6e04a9b58e67de278afd491f221ee780c66",
+          "binding_kind": "apt",
+          "description": "Web-based timeline of the Debian Project",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "debian-timeline",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "46",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c77b3c9624737bb2f47d6f502eb5ebdf27e10cf0c9fbe769d61471a7cb2a23ba",
+          "binding_kind": "apt",
+          "description": "Debhelper programs for CMake projects",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "dh-cmake",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.6.2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "f73be9fcdc5cb4870e9ba2720c2810fe84a994431343608a17882ea6a46d7849",
+          "binding_kind": "apt",
+          "description": "dhewm3's gamelibrary for the title DOOM\u00b3: Resurrection of Evil",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "title"
+          ],
+          "name": "dhewm3-d3xp",
+          "packages": [],
+          "query": "title",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.5.2+dfsg-1build2",
+          "zero_cost_eligible": true
+        }
+      ],
+      "effect": "title project",
+      "errors": [],
+      "queries": [
+        "title",
+        "project"
+      ],
+      "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+      "source": "APT_CATALOG",
+      "source_url": null
+    }
+  ],
+  "schema": "PROJECT_BRAIN_AUTO_APT_CLI_ACQUISITION_EVIDENCE_V1",
+  "status": "NO_COMPATIBLE_CONTRACT"
+}
