@@ -2235,8 +2235,15 @@ def _controller_actions(step, mission):
         raise Blocker("MODEL_INDEPENDENT_CONTROLLER_ACTION_LIMIT")
     return actions
 
-def _controller_checkpoint_path(step,mission):
-    mid=re.sub(r"[^A-Za-z0-9_.-]+","_",str(mission.get("mission_id") or "UNKNOWN"))
+def _controller_checkpoint_path(step,mission,plan_sha=None):
+    raw_mid=mission.get("mission_id")
+    if raw_mid:
+        mid=re.sub(r"[^A-Za-z0-9_.-]+","_",str(raw_mid))
+    else:
+        digest=str(plan_sha or "")
+        if len(digest)!=64:
+            raise Blocker("ANONYMOUS_CONTROLLER_PLAN_HASH_REQUIRED")
+        mid="ANON_"+digest[:16]
     sid=re.sub(r"[^A-Za-z0-9_.-]+","_",str(step.get("id") or step.get("step_id") or "goal"))
     return STATE_DIR/f"{mid}__{sid}__CONTROLLER_CHECKPOINT.json"
 
