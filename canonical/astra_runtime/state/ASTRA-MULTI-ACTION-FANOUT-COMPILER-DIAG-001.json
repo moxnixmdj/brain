@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T16:30:03.650451+00:00",
+  "created_at_utc": "2026-09-25T16:30:03.565332+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T16:30:03.650140+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/goal_compiler.py')\ns=importlib.util.spec_from_file_location('gc',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads(pathlib.Path('canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads(pathlib.Path('canonical/astra_runtime/missions/ASTRA_RUNTIME_MULTI_ACTION_FANOUT_001.json').read_text())['goal']\ntry:\n    out=m.compile_goal(goal,reg,pathlib.Path('.').resolve())\nexcept m.GoalCompilationFailure as exc:\n    print(json.dumps({'status':'BLOCKED','code':exc.code,'detail':exc.detail},sort_keys=True))\n    print('MULTI_ACTION_FANOUT_COMPILER_BLOCKED')\nelse:\n    print(json.dumps({'status':'COMPILED','mode':out.get('compiler_mode'),'parts':out.get('compiled_parts'),'actions':out.get('controller_actions')},sort_keys=True))\n    print('MULTI_ACTION_FANOUT_COMPILER_COMPILED')\nPY",
+        "duration_s": 0.085,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"code\": \"GOAL_COMPILATION_SUBGOAL_UNRESOLVED\", \"detail\": \"{\\\"cause\\\": \\\"GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH\\\", \\\"cause_detail\\\": null, \\\"clauses\\\": [\\\"Using a real rendered browser, open https://jsonplaceholder.typicode.com/users, save a screenshot to canonical/astra_runtime/tmp/MULTI_FANOUT_USERS.png, and save the rendered result to canonical/astra_runtime/tmp/MULTI_FANOUT_USERS.json\\\", \\\"Read the live JSON array from that result\\\", \\\"For every user returned at runtime, generate a QR code image encoding that user's username and also generate a Code 128 barcode image encoding that user's email\\\", \\\"Save each QR image under canonical/astra_runtime/tmp/MULTI_FANOUT_QR using the user's id as the filename, save each Code 128 image under canonical/astra_runtime/tmp/MULTI_FANOUT_CODE128 using the user's id as the filename,\\\", \\\"create canonical/astra_runtime/tmp/MULTI_FANOUT_MANIFEST.json with exactly one record per live user containing id, username, email, qr_path, and code128_path\\\", \\\"Finally independently decode every generated QR and Code 128 image and verify each decoded QR equals that live user's username, each decoded Code 128 equals that live user's email, every live user has both artifacts, and no extra manifest records exist\\\"], \\\"compiled_prefix\\\": [{\\\"index\\\": 0, \\\"inputs\\\": {\\\"result_path\\\": \\\"canonical/astra_runtime/tmp/MULTI_FANOUT_USERS.json\\\", \\\"screenshot_path\\\": \\\"canonical/astra_runtime/tmp/MULTI_FANOUT_USERS.png\\\", \\\"url\\\": \\\"https://jsonplaceholder.typicode.com/users\\\"}, \\\"mode\\\": \\\"VERIFIED_CAPABILITY\\\", \\\"score\\\": 30, \\\"selected_capability\\\": \\\"web.browser.rendered.capture.chromedriver\\\", \\\"subgoal\\\": \\\"Using a real rendered browser, open https://jsonplaceholder.typicode.com/users, save a screenshot to canonical/astra_runtime/tmp/MULTI_FANOUT_USERS.png, and save the rendered result to canonical/astra_runtime/tmp/MULTI_FANOUT_USERS.json\\\", \\\"target_effects\\\": [\\\"web.browser.rendered.capture\\\", \\\"web.browser.rendered.interact\\\"]}, {\\\"index\\\": 1, \\\"mode\\\": \\\"DEFERRED_RUNTIME_COLLECTION_READ\\\", \\\"source_path\\\": \\\"canonical/astra_runtime/tmp/MULTI_FANOUT_USERS.json\\\", \\\"subgoal\\\": \\\"Read the live JSON array from that result\\\"}], \\\"context_paths\\\": [\\\"canonical/astra_runtime/tmp/MULTI_FANOUT_USERS.json\\\", \\\"canonical/astra_runtime/tmp/MULTI_FANOUT_USERS.png\\\"], \\\"index\\\": 2, \\\"subgoal\\\": \\\"For every user returned at runtime, generate a QR code image encoding that user's username and also generate a Code 128 barcode image encoding that user's email\\\"}\", \"status\": \"BLOCKED\"}\nMULTI_ACTION_FANOUT_COMPILER_BLOCKED\n"
+      },
+      "step_id": "compile-multi-action-fanout",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-MULTI-ACTION-FANOUT-COMPILER-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_MULTI_ACTION_FANOUT_COMPILER_DIAG_001.json",
+  "mission_sha256": "7cf651411fbb143f188512aea7d4d61a14db41cbb5d3dd6f4cb2e4fbc03c4e8a",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T16:30:03.650155+00:00"
+}
