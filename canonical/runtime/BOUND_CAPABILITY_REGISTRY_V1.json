@@ -557,6 +557,71 @@
           "member_count": 2
         }
       }
+    },
+    "http.json.fetch_from_state": {
+      "provides": [
+        "http.json.fetch_from_state"
+      ],
+      "requires": [
+        "structured.json.available"
+      ],
+      "keywords": [
+        "fetch",
+        "http",
+        "https",
+        "json",
+        "url",
+        "metadata",
+        "live",
+        "authoritative"
+      ],
+      "cost": 1,
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "HTTPS only.",
+        "The requested URL must be uniquely named by url_key inside a repository-local JSON source.",
+        "Fetched content must parse as JSON and is size bounded."
+      ],
+      "adapter_module": "http_json_fetch",
+      "entrypoint": "run",
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "http.json.fetch_from_state",
+          "source_json_path": "${input.source_json_path}",
+          "url_key": "${input.url_key}",
+          "output_path": "${input.output_path}",
+          "max_bytes": 5000000,
+          "timeout_s": 30
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "source": {
+        "type": "python_stdlib",
+        "module": "urllib.request",
+        "adapter_path": "canonical/runtime/bound_capabilities/http_json_fetch.py"
+      },
+      "incremental_spend_usd": 0,
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "mission_id": "ASTRA-VERIFY-HTTP-JSON-FROM-STATE-001",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-HTTP-JSON-FROM-STATE-001__RECEIPT.json",
+        "independent_verifier": "curl",
+        "independent_semantics_equal": true,
+        "observed_effect": {
+          "output_bytes": 9248,
+          "output_sha256": "9eca4c2315cec5fcb72f58ed96752dabd6711ba84603eb53160caa19eefe8c7f",
+          "requested_url": "https://pypi.org/pypi/pypdf/6.19.0/json"
+        }
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
