@@ -1,0 +1,9 @@
+{
+  "adapter": "goal",
+  "error": "Blocker:CONTROLLER_CHECKPOINT_TEST_INTERRUPTION",
+  "mission_id": "ASTRA-RUNTIME-CONTROLLER-RESUME-001",
+  "observed_at_utc": "2026-09-25T17:37:28.552300+00:00",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "checkpointed-controller",
+  "step_index": 0
+}
