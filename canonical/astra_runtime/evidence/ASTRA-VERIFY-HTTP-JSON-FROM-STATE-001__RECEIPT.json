@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T00:37:31.962205+00:00",
+  "mission_id": "ASTRA-VERIFY-HTTP-JSON-FROM-STATE-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_HTTP_JSON_FROM_STATE_001.json",
+  "mission_sha256": "0b1b8db6443fe39d2e3a1f731d410219a7e3ad6a3f1bc123760387300a1cc544",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "73562fbf0d363335ab55575b2e7b9d94a694e1cb638394369b3bd9e8bfa8b455",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
