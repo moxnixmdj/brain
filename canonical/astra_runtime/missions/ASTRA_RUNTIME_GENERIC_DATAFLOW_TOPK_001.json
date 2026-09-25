@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-GENERIC-DATAFLOW-TOPK-001",
+  "purpose": "Pressure-test generic dataflow IR beyond counts: numeric sum aggregation, derived average, and deterministic top-K ranking over live multi-source data.",
+  "goal": "Using a real rendered browser, open https://jsonplaceholder.typicode.com/posts, save a screenshot to canonical/astra_runtime/tmp/TOPK_POSTS.png, and save the rendered result to canonical/astra_runtime/tmp/TOPK_POSTS.json. Using a real rendered browser, open https://jsonplaceholder.typicode.com/comments, save a screenshot to canonical/astra_runtime/tmp/TOPK_COMMENTS.png, and save the rendered result to canonical/astra_runtime/tmp/TOPK_COMMENTS.json. Using both live results, create canonical/astra_runtime/tmp/POST_COMMENT_AVERAGES.json containing exactly one record per live post with post_id, title, comment_count, comment_id_sum, and average_comment_id, where comment_count is the number of live comments whose postId equals that post's id, comment_id_sum is the sum of those comments' id field, and average_comment_id is comment_id_sum divided by comment_count. From canonical/astra_runtime/tmp/POST_COMMENT_AVERAGES.json select exactly three winners with the greatest average_comment_id, breaking ties by the lowest post_id, and save canonical/astra_runtime/tmp/POST_COMMENT_TOP3.json containing post_id, title, comment_count, comment_id_sum, and average_comment_id in ranked order. Finally independently reopen both live source results, canonical/astra_runtime/tmp/POST_COMMENT_AVERAGES.json, and canonical/astra_runtime/tmp/POST_COMMENT_TOP3.json and verify every post's count, sum, and average_comment_id are correct, the selected three records are exactly the top three under the requested ordering, every live post appears exactly once in the averages file, and there are no extra records.",
+  "steps": [
+    {
+      "id": "run-generic-dataflow-topk",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 32,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "manual_controller_actions": false,
+    "manual_target_effects": false,
+    "numeric_sum_aggregation_required": true,
+    "derived_average_required": true,
+    "deterministic_top_k_required": true,
+    "capability_acquisition_for_transform_gap_forbidden": true
+  }
+}
