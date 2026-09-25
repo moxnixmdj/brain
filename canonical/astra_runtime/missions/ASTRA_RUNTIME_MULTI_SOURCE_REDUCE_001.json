@@ -1,0 +1,25 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-MULTI-SOURCE-REDUCE-001",
+  "purpose": "Pressure-test runtime group-by/reduction across independently observed live collections, downstream XLSX materialization, and independent aggregate verification.",
+  "goal": "Using a real rendered browser, open https://jsonplaceholder.typicode.com/users, save a screenshot to canonical/astra_runtime/tmp/REDUCE_USERS.png, and save the rendered result to canonical/astra_runtime/tmp/REDUCE_USERS.json. Using a real rendered browser, open https://jsonplaceholder.typicode.com/posts, save a screenshot to canonical/astra_runtime/tmp/REDUCE_POSTS.png, and save the rendered result to canonical/astra_runtime/tmp/REDUCE_POSTS.json. Using both live results, create canonical/astra_runtime/tmp/USER_POST_COUNTS.json containing exactly one record per live user with user_id, username, and post_count, where post_count is the number of live posts whose userId equals that user's id. Create canonical/astra_runtime/tmp/USER_POST_COUNTS.xlsx from canonical/astra_runtime/tmp/USER_POST_COUNTS.json with columns user_id, username, and post_count. Independently reread both live source results, the summary JSON, and the XLSX and verify every live user appears exactly once, each username is correct, each post_count exactly matches the live posts, the sum of post_count equals the live post count, there are no extra records, and the XLSX is identical to the summary JSON.",
+  "steps": [
+    {
+      "id": "run-multi-source-reduce",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 32,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "runtime_group_by_reduce_required": true,
+    "manual_controller_actions": false,
+    "capability_acquisition_for_composition_gap_forbidden": true
+  }
+}
