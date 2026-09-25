@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-LIVE-CONDITIONAL-EXECUTION-HARNESS-001",
+  "purpose": "Execute the existing live conditional mission unchanged against current runtime/compiler code after the verified decomposition repair.",
+  "steps": [
+    {
+      "id": "execute-original-live-conditional",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/runtime/astra_runtime.py canonical/astra_runtime/missions/ASTRA_RUNTIME_LIVE_CONDITIONAL_001.json\npython - <<'PY'\nimport json,pathlib\np=pathlib.Path('canonical/astra_runtime/state/ASTRA-RUNTIME-LIVE-CONDITIONAL-001.json')\nx=json.loads(p.read_text(encoding='utf-8'))\nassert x.get('status')=='COMPLETE', x\nprint('LIVE_CONDITIONAL_EXECUTION_COMPLETE')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "LIVE_CONDITIONAL_EXECUTION_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "original_mission_unchanged": true
+  }
+}
