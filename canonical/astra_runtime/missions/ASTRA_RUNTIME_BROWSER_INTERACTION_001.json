@@ -31,6 +31,8 @@
     "manual_supplier": false,
     "manual_binding": false,
     "post_submit_state_required": true,
-    "passive_capture_is_not_success": true
+    "passive_capture_is_not_success": true,
+    "replay_after_verified_interaction_compiler_commit": "078f438678cb534ad60f4ea903ffbd54215faa93",
+    "replay_after_interaction_regression_commit": "2d76aaaaa896d3153837c24cdd028e2a9304670e"
   }
 }
