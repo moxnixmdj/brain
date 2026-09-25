@@ -1539,23 +1539,85 @@ def _compile_multi_source_reduce_goal(goal,clauses,registry,root):
     rm=re.match(
       r"^using\s+both\s+live\s+results,\s+create\s+([^\s]+\.json)\s+containing\s+exactly\s+one\s+record\s+per\s+live\s+(\w+)\s+with\s+(.+?),\s+where\s+(\w+)\s+is\s+the\s+number\s+of\s+live\s+(\w+)\s+whose\s+(\w+)\s+equals\s+that\s+(\w+)'s\s+(\w+)$",
       clauses[2],re.IGNORECASE)
+
+    summary=None
+    dim_entity=None
+    fields=None
+    count_field=None
+    fact_entity=None
+    fact_key=None
+    dim_key=None
+    if rm:
+        summary=rm.group(1).strip(" .,:;")
+        dim_entity=rm.group(2).lower()
+        fields=[x.strip(" .,:;").lower() for x in re.sub(r"\s+and\s+",",",rm.group(3),flags=re.I).split(",") if x.strip(" .,:;")]
+        count_field=rm.group(4).lower()
+        fact_entity=rm.group(5).lower()
+        if fact_entity.endswith("s") and not fact_entity.endswith("ss"):
+            fact_entity=fact_entity[:-1]
+        fact_key=rm.group(6)
+        if rm.group(7).lower()!=dim_entity:
+            return None
+        dim_key=rm.group(8)
+    else:
+        semantic=str(clauses[2] or "").strip()
+        paths=[raw for raw,_ in _repo_paths(semantic,root) if pathlib.Path(raw).suffix.lower()==".json"]
+        row=re.search(r"\bone\s+(?:row|record)\s+(?:for\s+)?(?:each|per)\s+(?:observed|live)?\s*(\w+)\b",semantic,re.I)
+        relation=re.search(r"\b(\w+)\.(\w+)\s*=\s*(\w+)\.(\w+)\b",semantic,re.I)
+        count=re.search(r"\b([A-Za-z_][A-Za-z0-9_]*)\s+(?:equal\s+to|equals|is)\s+(?:how\s+many|the\s+number\s+of)\b",semantic,re.I)
+        field_segment=re.search(r"\b(?:carrying|with)\s+(.+?)(?:,\s*(?:plus|where)|\s+where\b)",semantic,re.I)
+        if len(paths)!=1 or not row or not relation or not count:
+            return None
+        summary=paths[0]
+        dim_entity=row.group(1).lower()
+        if dim_entity.endswith("s") and not dim_entity.endswith("ss"):
+            dim_entity=dim_entity[:-1]
+        left_entity,left_key,right_entity,right_key=relation.group(1).lower(),relation.group(2),relation.group(3).lower(),relation.group(4)
+        if left_entity.endswith("s") and not left_entity.endswith("ss"):
+            left_entity=left_entity[:-1]
+        if right_entity.endswith("s") and not right_entity.endswith("ss"):
+            right_entity=right_entity[:-1]
+        if right_entity==dim_entity:
+            fact_entity,fact_key,dim_key=left_entity,left_key,right_key
+        elif left_entity==dim_entity:
+            fact_entity,fact_key,dim_key=right_entity,right_key,left_key
+        else:
+            return None
+        count_field=count.group(1).lower()
+        fields=[]
+        if field_segment:
+            cleaned=re.sub(r"\s+and\s+",",",field_segment.group(1),flags=re.I)
+            fields=[x.strip(" .,:;").lower() for x in cleaned.split(",") if re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*",x.strip(" .,:;"))]
+        output_id=dim_entity+"_id"
+        for required in (output_id,count_field):
+            if required not in fields:
+                fields.append(required)
+
     xm=re.match(
       r"^create\s+([^\s]+\.xlsx)\s+from\s+([^\s]+\.json)\s+with\s+columns\s+(.+)$",
       clauses[3],re.IGNORECASE)
-    vm=re.match(r"^independently\s+reread\s+both\s+live\s+source\s+results,\s+the\s+summary\s+json,\s+and\s+the\s+xlsx\s+and\s+verify\b",clauses[4],re.IGNORECASE)
-    if not rm or not xm or not vm:
+    if not xm:
+        xm=re.match(
+          r"^turn\s+([^\s]+\.json)\s+into\s+([^\s]+\.xlsx)\s+using\s+(?:the\s+)?columns\s+(.+)$",
+          clauses[3],re.IGNORECASE)
+        if xm:
+            class _X:
+                def __init__(self,m): self.m=m
+                def group(self,n):
+                    return {1:self.m.group(2),2:self.m.group(1),3:self.m.group(3)}[n]
+            xm=_X(xm)
+    verify_text=str(clauses[4] or "").lower()
+    vm=(
+      bool(re.match(r"^independently\s+reread\s+both\s+live\s+source\s+results,\s+the\s+summary\s+json,\s+and\s+the\s+xlsx\s+and\s+verify\b",clauses[4],re.IGNORECASE))
+      or (
+        ("cross-check" in verify_text or "cross check" in verify_text)
+        and "json" in verify_text
+        and ("workbook" in verify_text or "xlsx" in verify_text)
+        and ("count" in verify_text or "counts" in verify_text)
+      )
+    )
+    if not xm or not vm:
         return None
-    summary=rm.group(1).strip(" .,:;")
-    dim_entity=rm.group(2).lower()
-    fields=[x.strip(" .,:;").lower() for x in re.sub(r"\s+and\s+",",",rm.group(3),flags=re.I).split(",") if x.strip(" .,:;")]
-    count_field=rm.group(4).lower()
-    fact_entity=rm.group(5).lower()
-    if fact_entity.endswith("s") and not fact_entity.endswith("ss"):
-        fact_entity=fact_entity[:-1]
-    fact_key=rm.group(6)
-    if rm.group(7).lower()!=dim_entity:
-        return None
-    dim_key=rm.group(8)
     if dim_entity not in by or fact_entity not in by:
         return None
     output_id=dim_entity+"_id"
@@ -3040,7 +3102,10 @@ def _compile_compound_goal(goal, clauses, registry, root):
                 "GOAL_CONTROL_FLOW_UNSUPPORTED",
                 json.dumps({"index":index,"subgoal":clause},sort_keys=True)
             )
-        if re.match(r"^using\s+both\s+live\s+results\b",lower):
+        if (
+            re.match(r"^using\s+both\s+live\s+results\b",lower)
+            or re.match(r"^from\s+(?:these\s+two|both)\s+live\s+datasets\b",lower)
+        ):
             raise GoalCompilationFailure(
                 "GOAL_CAUSAL_COMPOSITION_UNSUPPORTED",
                 json.dumps({"index":index,"subgoal":clause},sort_keys=True)
