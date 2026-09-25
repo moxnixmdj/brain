@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-BROWSER-SUPPLIER-DISCOVERY-DIAG-001",
+  "purpose": "Read-only discovery of rendered-browser and browser-automation supply on the shared Ubuntu runtime.",
+  "steps": [
+    {
+      "id": "discover-browser-supply",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib,shutil\nroot=pathlib.Path('.').resolve()\np=root/'canonical/runtime/capability_discovery.py'\ns=importlib.util.spec_from_file_location('d',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nqueries=['chromium browser','firefox browser','playwright','selenium webdriver']\nout={q:m.search_apt_packages(q,limit=20).get('candidates',[])[:20] for q in queries}\ninstalled={name:shutil.which(name) for name in ['chromium','chromium-browser','google-chrome','google-chrome-stable','firefox','firefox-esr']}\nmodules={name:bool(importlib.util.find_spec(name)) for name in ['playwright','selenium']}\nprint(json.dumps({'installed':installed,'python_modules':modules,'apt':out},sort_keys=True))\nprint('BROWSER_SUPPLY_DISCOVERY_COMPLETE')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "BROWSER_SUPPLY_DISCOVERY_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "read_only_discovery": true
+  }
+}
