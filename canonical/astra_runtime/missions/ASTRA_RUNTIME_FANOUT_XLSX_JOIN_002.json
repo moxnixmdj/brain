@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-FANOUT-XLSX-JOIN-002",
+  "purpose": "Fresh clean proof that runtime fanout output composes into downstream XLSX creation and independent verification on the repaired compiler/runtime stack.",
+  "goal": "Using a real rendered browser, open https://jsonplaceholder.typicode.com/users, save a screenshot to canonical/astra_runtime/tmp/FANOUT_JOIN_USERS.png, and save the rendered result to canonical/astra_runtime/tmp/FANOUT_JOIN_USERS.json. Read the live JSON array from that result. For every user returned at runtime, if that user's username length is at most 8 characters generate a QR code image encoding that username; otherwise generate a Code 128 barcode image encoding that username. Save each selected image under canonical/astra_runtime/tmp/FANOUT_JOIN_CODES using the user's id as the filename, and create canonical/astra_runtime/tmp/FANOUT_JOIN_MANIFEST.json with exactly one record per live user containing id, username, selected capability kind, and artifact path. Then create canonical/astra_runtime/tmp/FANOUT_JOIN.xlsx from canonical/astra_runtime/tmp/FANOUT_JOIN_MANIFEST.json with columns id, username, capability_kind, and artifact_path. Independently reopen the XLSX and verify it contains exactly one row per manifest record and every value is identical. Finally independently decode every generated image and verify each decoded value equals that live user's username, every live user has exactly one artifact, and no extra manifest records exist.",
+  "steps": [
+    {
+      "id": "run-fanout-to-xlsx-goal",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 40,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    },
+    {
+      "id": "mission-level-independent-xlsx-acceptance",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport json,pathlib,zipfile,xml.etree.ElementTree as ET\nmanifest_path=pathlib.Path('canonical/astra_runtime/tmp/FANOUT_JOIN_MANIFEST.json')\nxlsx_path=pathlib.Path('canonical/astra_runtime/tmp/FANOUT_JOIN.xlsx')\nassert manifest_path.is_file(), 'MANIFEST_MISSING'\nassert xlsx_path.is_file(), 'XLSX_MISSING'\nmanifest=json.loads(manifest_path.read_text(encoding='utf-8'))\nassert isinstance(manifest,list) and manifest, 'MANIFEST_INVALID'\nNS={'m':'http://schemas.openxmlformats.org/spreadsheetml/2006/main'}\nwith zipfile.ZipFile(xlsx_path,'r') as z:\n    shared=[]\n    if 'xl/sharedStrings.xml' in z.namelist():\n        root=ET.fromstring(z.read('xl/sharedStrings.xml'))\n        for si in root.findall('m:si',NS):\n            shared.append(''.join(t.text or '' for t in si.iterfind('.//m:t',NS)))\n    sheet=ET.fromstring(z.read('xl/worksheets/sheet1.xml'))\n    rows=[]\n    for row in sheet.findall('.//m:sheetData/m:row',NS):\n        vals=[]\n        for cell in row.findall('m:c',NS):\n            typ=cell.get('t')\n            v=cell.find('m:v',NS)\n            raw='' if v is None or v.text is None else v.text\n            if typ=='s' and raw:\n                val=shared[int(raw)]\n            elif typ=='inlineStr':\n                val=''.join(t.text or '' for t in cell.iterfind('.//m:t',NS))\n            else:\n                val=raw\n            vals.append(val)\n        rows.append(vals)\nassert rows, 'WORKBOOK_EMPTY'\nheader=[str(x) for x in rows[0]]\nexpected_header=['id','username','capability_kind','artifact_path']\nassert header==expected_header,(header,expected_header)\nactual=[dict(zip(header,row)) for row in rows[1:]]\nexpected=[{k:r[k] for k in expected_header} for r in manifest]\nassert len(actual)==len(expected),(len(actual),len(expected))\nfor a,e in zip(actual,expected):\n    assert str(a['id']).rstrip('.0')==str(e['id']),(a,e)\n    for k in ('username','capability_kind','artifact_path'):\n        assert str(a[k])==str(e[k]),(k,a,e)\nprint('FANOUT_XLSX_JOIN_INDEPENDENTLY_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "FANOUT_XLSX_JOIN_INDEPENDENTLY_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "manual_controller_actions": false,
+    "runtime_collection_size_unknown": true,
+    "downstream_xlsx_must_be_causally_derived_from_runtime_manifest": true,
+    "omitted_goal_clauses_are_failure": true,
+    "mission_level_xlsx_verifier": "PYTHON_STDLIB_OOXML",
+    "fresh_mission_identity": true,
+    "replay_from_step_zero": true,
+    "source_mission": "ASTRA-RUNTIME-FANOUT-XLSX-JOIN-001"
+  }
+}
