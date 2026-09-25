@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-BROWSER-XLSX-COMPOSITION-001",
+  "purpose": "Fresh cross-tool composition pressure: rendered browser interaction must feed a normalized JSON artifact, XLSX production, and independent XLSX verification.",
+  "goal": "Using a real rendered browser, open https://httpbin.org/forms/post, enter PROJECT BRAIN into the customer name field, choose Medium pizza size, check the Bacon topping, submit the form, save a full-page screenshot to canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_SUBMISSION.png, and save the rendered result to canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_SUBMISSION.json. Create canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_NORMALIZED.json containing a top-level submissions object with exactly one record named httpbin whose status is VERIFIED_BROWSER_SUBMISSION and whose customer_name, size, topping, and final_url values come from the browser result. Create canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_SUBMISSION.xlsx from that normalized JSON with columns submission_id, status, customer_name, size, topping, and final_url. Finally independently reopen the XLSX and verify it contains exactly the one normalized JSON record with every value identical.",
+  "steps": [
+    {
+      "id": "execute-cross-tool-composition-goal",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 16,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "manual_controller_actions": false,
+    "manual_target_effects": false,
+    "manual_supplier": false,
+    "browser_interaction_must_feed_downstream_artifact": true,
+    "independent_xlsx_verification_required": true
+  }
+}
