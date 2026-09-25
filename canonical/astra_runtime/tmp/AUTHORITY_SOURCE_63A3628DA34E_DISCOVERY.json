@@ -1,0 +1,927 @@
+{
+  "attempts": [
+    {
+      "discovered_hosts": 11,
+      "engine": "authority_root",
+      "internal_seed_count": 182,
+      "status": "OK",
+      "url": "https://python.org/"
+    },
+    {
+      "discovered_hosts": 0,
+      "engine": "authority_root",
+      "internal_seed_count": 182,
+      "status": "OK",
+      "url": "https://www.python.org/"
+    },
+    {
+      "discovered_hosts": 0,
+      "engine": "authority_root",
+      "internal_seed_count": 2108,
+      "status": "OK",
+      "url": "https://peps.python.org/"
+    },
+    {
+      "discovered_hosts": 1,
+      "engine": "authority_root",
+      "internal_seed_count": 29,
+      "status": "OK",
+      "url": "https://blog.python.org/"
+    },
+    {
+      "discovered_hosts": 2,
+      "engine": "authority_root",
+      "internal_seed_count": 106,
+      "status": "OK",
+      "url": "https://docs.python.org/"
+    },
+    {
+      "discovered_hosts": 0,
+      "engine": "authority_root",
+      "internal_seed_count": 146,
+      "status": "OK",
+      "url": "https://donate.python.org/"
+    },
+    {
+      "discovered_hosts": 0,
+      "engine": "authority_root",
+      "internal_seed_count": 0,
+      "status": "OK",
+      "url": "https://wiki.python.org/"
+    },
+    {
+      "discovered_hosts": 1,
+      "engine": "authority_root",
+      "internal_seed_count": 71,
+      "status": "OK",
+      "url": "https://translations.python.org/"
+    },
+    {
+      "discovered_hosts": 0,
+      "engine": "authority_root",
+      "internal_seed_count": 314,
+      "status": "OK",
+      "url": "https://jobs.python.org/"
+    },
+    {
+      "discovered_hosts": 1,
+      "engine": "authority_root",
+      "internal_seed_count": 425,
+      "status": "OK",
+      "url": "https://devguide.python.org/"
+    },
+    {
+      "discovered_hosts": 0,
+      "engine": "authority_root",
+      "internal_seed_count": 2,
+      "status": "OK",
+      "url": "https://mail.python.org/"
+    },
+    {
+      "discovered_hosts": 0,
+      "engine": "authority_root",
+      "internal_seed_count": 36,
+      "status": "OK",
+      "url": "https://status.python.org/"
+    },
+    {
+      "discovered_hosts": 0,
+      "engine": "authority_root",
+      "internal_seed_count": 30,
+      "status": "OK",
+      "url": "https://policies.python.org/"
+    },
+    {
+      "discovered_hosts": 1,
+      "engine": "authority_root",
+      "internal_seed_count": 37,
+      "status": "OK",
+      "url": "https://discuss.python.org/"
+    },
+    {
+      "discovered_hosts": 0,
+      "engine": "authority_root",
+      "internal_seed_count": 150,
+      "status": "OK",
+      "url": "https://packaging.python.org/"
+    },
+    {
+      "discovered_hosts": 0,
+      "engine": "authority_root",
+      "internal_seed_count": 109,
+      "status": "OK",
+      "url": "https://typing.python.org/"
+    },
+    {
+      "discovered_hosts": 0,
+      "engine": "authority_root",
+      "internal_seed_count": 8,
+      "status": "OK",
+      "url": "https://analytics.python.org/"
+    },
+    {
+      "discovered_hosts": 0,
+      "engine": "authority_root",
+      "internal_seed_count": 4,
+      "status": "OK",
+      "url": "https://buildbot.python.org/"
+    },
+    {
+      "discovered_hosts": 0,
+      "engine": "authority_root",
+      "internal_seed_count": 11,
+      "status": "OK",
+      "url": "https://education.python.org/"
+    },
+    {
+      "candidate_count": 0,
+      "depth": 0,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://www.python.org/"
+    },
+    {
+      "candidate_count": 0,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/peps.rss"
+    },
+    {
+      "candidate_count": 0,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://docs.python.org"
+    },
+    {
+      "candidate_count": 0,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://docs.python.org/3/license.html"
+    },
+    {
+      "candidate_count": 0,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://docs.python.org/3/faq/"
+    },
+    {
+      "candidate_count": 2,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org"
+    },
+    {
+      "candidate_count": 0,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "http://docs.python.org/3/tutorial/introduction.html#using-python-as-a-calculator"
+    },
+    {
+      "candidate_count": 0,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://docs.python.org/3/tutorial/introduction.html#lists"
+    },
+    {
+      "candidate_count": 0,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://docs.python.org/3/tutorial/controlflow.html"
+    },
+    {
+      "candidate_count": 0,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://docs.python.org/3/tutorial/controlflow.html#defining-functions"
+    },
+    {
+      "candidate_count": 0,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://docs.python.org/3/tutorial/"
+    },
+    {
+      "candidate_count": 0,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://blog.python.org/2026/09/the-python-documentation-is-now-available-in-persian/"
+    },
+    {
+      "candidate_count": 2,
+      "depth": 0,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/"
+    },
+    {
+      "candidate_count": 0,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/_static/py.png"
+    },
+    {
+      "candidate_count": 2,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/pep-0000/"
+    },
+    {
+      "candidate_count": 0,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/pagefind/pagefind-component-ui.css"
+    },
+    {
+      "candidate_count": 0,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/_static/style.css"
+    },
+    {
+      "candidate_count": 0,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/_static/mq.css"
+    },
+    {
+      "candidate_count": 0,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/_static/pygments.css"
+    },
+    {
+      "candidate_count": 0,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/_static/pygments_dark.css"
+    },
+    {
+      "candidate_count": 2,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/#svg-sun-half"
+    },
+    {
+      "candidate_count": 2,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/#svg-moon"
+    },
+    {
+      "candidate_count": 2,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/#svg-sun"
+    },
+    {
+      "candidate_count": 2,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/#introduction"
+    },
+    {
+      "candidate_count": 2,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/#topics"
+    },
+    {
+      "candidate_count": 2,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/#api"
+    },
+    {
+      "candidate_count": 2,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/#numerical-index"
+    },
+    {
+      "candidate_count": 2,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/#index-by-category"
+    },
+    {
+      "candidate_count": 2,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/#process-and-meta-peps"
+    },
+    {
+      "candidate_count": 2,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/#other-informational-peps"
+    },
+    {
+      "candidate_count": 2,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/#provisional-peps-provisionally-accepted-interface-may-still-change"
+    },
+    {
+      "candidate_count": 2,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/#accepted-peps-accepted-may-not-be-implemented-yet"
+    },
+    {
+      "candidate_count": 2,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/#open-peps-under-consideration"
+    },
+    {
+      "candidate_count": 2,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/#finished-peps-done-with-a-stable-interface"
+    },
+    {
+      "candidate_count": 2,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/#historical-meta-peps-and-informational-peps"
+    },
+    {
+      "candidate_count": 2,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/#deferred-peps-postponed-pending-further-research-or-updates"
+    },
+    {
+      "candidate_count": 2,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/#rejected-superseded-and-withdrawn-peps"
+    },
+    {
+      "candidate_count": 2,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/#reserved-pep-numbers"
+    },
+    {
+      "candidate_count": 2,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/#pep-types-key"
+    },
+    {
+      "candidate_count": 2,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/#pep-status-key"
+    },
+    {
+      "candidate_count": 2,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/#authors-owners"
+    },
+    {
+      "candidate_count": 0,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/pep-0001/#pep-editors"
+    },
+    {
+      "candidate_count": 0,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/topic/"
+    },
+    {
+      "candidate_count": 0,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/topic/governance/"
+    },
+    {
+      "candidate_count": 0,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/topic/packaging/"
+    },
+    {
+      "candidate_count": 0,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/topic/release/"
+    },
+    {
+      "candidate_count": 0,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/topic/typing/"
+    },
+    {
+      "candidate_count": 0,
+      "depth": 1,
+      "engine": "authority_internal",
+      "queued_links": 0,
+      "status": "OK",
+      "url": "https://peps.python.org/api/peps.json"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 0,
+      "status": "OK",
+      "url": "https://python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 0,
+      "status": "OK",
+      "url": "https://www.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://peps.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://blog.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 1,
+      "status": "OK",
+      "url": "https://docs.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 0,
+      "status": "OK",
+      "url": "https://donate.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://wiki.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://translations.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 0,
+      "status": "OK",
+      "url": "https://jobs.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 1,
+      "status": "OK",
+      "url": "https://devguide.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 0,
+      "status": "OK",
+      "url": "https://mail.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 0,
+      "status": "OK",
+      "url": "https://status.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 1,
+      "status": "OK",
+      "url": "https://policies.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 1,
+      "status": "OK",
+      "url": "https://discuss.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 1,
+      "status": "OK",
+      "url": "https://packaging.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 1,
+      "status": "OK",
+      "url": "https://typing.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 0,
+      "status": "OK",
+      "url": "https://analytics.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "sitemap_count": 0,
+      "status": "OK",
+      "url": "https://buildbot.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_robots",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://education.python.org/robots.txt"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://python.org/sitemap.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://python.org/sitemap_index.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://www.python.org/sitemap.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://www.python.org/sitemap_index.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://peps.python.org/sitemap.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://peps.python.org/sitemap_index.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://blog.python.org/sitemap.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://blog.python.org/sitemap_index.xml"
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://docs.python.org/sitemap.xml",
+      "url_count": 8
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://docs.python.org/sitemap_index.xml"
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://donate.python.org/sitemap.xml",
+      "url_count": 0
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://donate.python.org/sitemap_index.xml",
+      "url_count": 0
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://wiki.python.org/sitemap.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://wiki.python.org/sitemap_index.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://translations.python.org/sitemap.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://translations.python.org/sitemap_index.xml"
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://jobs.python.org/sitemap.xml",
+      "url_count": 0
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://jobs.python.org/sitemap_index.xml",
+      "url_count": 0
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://devguide.python.org/sitemap.xml",
+      "url_count": 1
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://devguide.python.org/sitemap_index.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://mail.python.org/sitemap.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://mail.python.org/sitemap_index.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://status.python.org/sitemap.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://status.python.org/sitemap_index.xml"
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://policies.python.org/sitemap.xml",
+      "url_count": 23
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://policies.python.org/sitemap_index.xml"
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 3,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://discuss.python.org/sitemap.xml",
+      "url_count": 3
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://discuss.python.org/sitemap_recent.xml",
+      "url_count": 39
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://discuss.python.org/sitemap_2.xml",
+      "url_count": 8241
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://discuss.python.org/sitemap_1.xml",
+      "url_count": 10000
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://discuss.python.org/sitemap_index.xml"
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://packaging.python.org/sitemap.xml",
+      "url_count": 1
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://packaging.python.org/sitemap_index.xml"
+    },
+    {
+      "candidate_count": 0,
+      "child_sitemaps": 0,
+      "engine": "authority_sitemap",
+      "status": "OK",
+      "url": "https://typing.python.org/sitemap.xml",
+      "url_count": 1
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://typing.python.org/sitemap_index.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://analytics.python.org/sitemap.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://analytics.python.org/sitemap_index.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://buildbot.python.org/sitemap.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://buildbot.python.org/sitemap_index.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://education.python.org/sitemap.xml"
+    },
+    {
+      "engine": "authority_sitemap",
+      "error": "HTTPError",
+      "status": "FETCH_FAILED",
+      "url": "https://education.python.org/sitemap_index.xml"
+    }
+  ],
+  "authority_domains": [
+    "python.org"
+  ],
+  "candidates": [
+    {
+      "engine": "authority_internal",
+      "host": "peps.python.org",
+      "matched_authority_domains": [
+        "python.org"
+      ],
+      "score": 432,
+      "url": "https://peps.python.org/pep-0703/"
+    }
+  ],
+  "chosen_host": "peps.python.org",
+  "chosen_url": "https://peps.python.org/pep-0703/",
+  "discovered_at_utc": "2026-09-25T21:30:16.333150+00:00",
+  "query": "Python Software Foundation PEP-0703 official source",
+  "schema": "PROJECT_BRAIN_SOURCE_DISCOVERY_EVIDENCE_V1",
+  "trust_claim": "DOMAIN_FILTERED_SEARCH_DISCOVERY_ONLY_NOT_FACT_VERIFICATION"
+}
