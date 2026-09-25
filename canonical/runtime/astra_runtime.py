@@ -4093,6 +4093,32 @@ def _semantic_goal_contract(step,mission,goal):
                 known_effects.add(effect.strip())
     if not known_effects:
         raise Blocker("SEMANTIC_GOAL_EFFECT_VOCABULARY_EMPTY")
+    candidates=list(explicit)
+    authority_evidence={}
+    generator_failures={}
+    if generator_ids:
+        module=_load_semantic_authorities()
+        for authority_id in generator_ids:
+            try:
+                generated=module.generate(
+                    authority_id,goal,registry,
+                    runtime_dir=pathlib.Path(__file__).resolve().parent,
+                )
+            except Exception as exc:
+                generator_failures[authority_id]=type(exc).__name__+":"+str(exc)
+                continue
+            if not isinstance(generated,dict):
+                generator_failures[authority_id]="GENERATED_CANDIDATE_NOT_OBJECT"
+                continue
+            generated=dict(generated)
+            evidence=generated.pop("_authority_evidence",None)
+            if str(generated.get("authority_id") or "")!=authority_id:
+                raise Blocker("SEMANTIC_GOAL_GENERATOR_AUTHORITY_ID_MISMATCH:"+authority_id)
+            if evidence is not None:
+                authority_evidence[authority_id]=evidence
+            candidates.append(generated)
+    if not candidates:
+        raise Blocker("SEMANTIC_GOAL_QUORUM_NOT_REACHED")
     groups={}
     seen_authorities=set()
     for raw in candidates:
