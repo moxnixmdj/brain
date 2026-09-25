@@ -1452,6 +1452,83 @@ def _fanout_kind_label(description):
     return label or "ARTIFACT"
 
 
+def _compile_multi_source_join_goal(goal,clauses,registry,root):
+    if len(clauses)!=6:
+        return None
+    browser=(registry or {}).get("web.browser.rendered.capture.chromedriver")
+    xcreate=(registry or {}).get("xlsx.table.create_from_json_records")
+    xverify=(registry or {}).get("xlsx.table.verify_against_json_records")
+    if any(not isinstance(x,dict) or x.get("status")!="VERIFIED_BOUND_CAPABILITY" for x in (browser,xcreate,xverify)):
+        return None
+
+    def browser_spec(clause):
+        urls=re.findall(r"https?://[^\s,]+",clause)
+        paths=[raw for raw,_ in _repo_paths(clause,root)]
+        png=[p for p in paths if pathlib.Path(p).suffix.lower()==".png"]
+        js=[p for p in paths if pathlib.Path(p).suffix.lower()==".json"]
+        if len(urls)!=1 or len(png)!=1 or len(js)!=1:
+            return None
+        url=urls[0].rstrip(".,;:!?")
+        tail=url.split("?",1)[0].rstrip("/").rsplit("/",1)[-1].lower()
+        entity=tail[:-1] if tail.endswith("s") and not tail.endswith("ss") else tail
+        action=_render_template(browser["action_template"],{"url":url,"screenshot_path":png[0],"result_path":js[0]})
+        return {"url":url,"entity":entity,"result_path":js[0],"action":action}
+
+    s0=browser_spec(clauses[0]); s1=browser_spec(clauses[1])
+    if s0 is None or s1 is None or s0["entity"]==s1["entity"]:
+        return None
+    by_entity={s0["entity"]:s0,s1["entity"]:s1}
+
+    jm=re.match(
+      r"^using\s+both\s+live\s+results,\s+join\s+every\s+live\s+(\w+)\s+to\s+exactly\s+one\s+live\s+(\w+)\s+where\s+(\w+)\s+(\w+)\s+equals\s+(\w+)\s+(\w+),?$",
+      clauses[2],re.IGNORECASE)
+    om=re.match(
+      r"^create\s+([^\s]+\.json)\s+containing\s+exactly\s+one\s+record\s+per\s+live\s+(\w+)\s+with\s+(.+)$",
+      clauses[3],re.IGNORECASE)
+    xm=re.match(
+      r"^create\s+([^\s]+\.xlsx)\s+from\s+([^\s]+\.json)\s+with\s+columns\s+(.+)$",
+      clauses[4],re.IGNORECASE)
+    vm=re.match(r"^independently\s+reopen\s+both\s+live\s+source\s+results,\s+the\s+joined\s+json,\s+and\s+the\s+xlsx\s+and\s+verify\b",clauses[5],re.IGNORECASE)
+    if not jm or not om or not xm or not vm:
+        return None
+    right_entity,left_entity=jm.group(1).lower(),jm.group(2).lower()
+    if jm.group(3).lower()!=right_entity or jm.group(5).lower()!=left_entity:
+        return None
+    if left_entity not in by_entity or right_entity not in by_entity or om.group(2).lower()!=right_entity:
+        return None
+    left,right=by_entity[left_entity],by_entity[right_entity]
+    right_key,left_key=jm.group(4),jm.group(6)
+    joined=om.group(1).strip(" .,:;")
+    fields=[x.strip(" .,:;").lower() for x in re.sub(r"\s+and\s+",",",om.group(3),flags=re.I).split(",") if x.strip(" .,:;")]
+    xlsx=xm.group(1).strip(" .,:;")
+    cols=[x.strip(" .,:;").lower() for x in re.sub(r"\s+and\s+",",",xm.group(3),flags=re.I).split(",") if x.strip(" .,:;")]
+    if xm.group(2).strip(" .,:;")!=joined or cols!=fields or not fields:
+        return None
+
+    join={"type":"join_runtime_json_arrays","args":{
+      "left_path":left["result_path"],"right_path":right["result_path"],
+      "left_key":left_key,"right_key":right_key,
+      "left_entity":left_entity,"right_entity":right_entity,
+      "output_path":joined,"output_fields":fields
+    },"expect":{"type":"field_equals","field":"output_verified","value":True}}
+    verify_join={"type":"assert_runtime_json_join","args":{
+      "left_path":left["result_path"],"right_path":right["result_path"],
+      "joined_path":joined,"left_key":left_key,"right_key":right_key,
+      "left_entity":left_entity,"right_entity":right_entity,"output_fields":fields
+    },"expect":{"type":"field_equals","field":"verified","value":True}}
+    create=_render_template(xcreate["action_template"],{"goal":clauses[4],"json_path":joined,"output_path":xlsx})
+    verify_xlsx=_render_template(xverify["action_template"],{"goal":clauses[5],"json_path":joined,"xlsx_path":xlsx})
+    parts=[
+      {"index":0,"subgoal":clauses[0],"mode":"VERIFIED_CAPABILITY","selected_capability":"web.browser.rendered.capture.chromedriver","inputs":{"url":s0["url"],"result_path":s0["result_path"]}},
+      {"index":1,"subgoal":clauses[1],"mode":"VERIFIED_CAPABILITY","selected_capability":"web.browser.rendered.capture.chromedriver","inputs":{"url":s1["url"],"result_path":s1["result_path"]}},
+      {"index":2,"subgoal":clauses[2],"mode":"NATIVE_RUNTIME_KEY_JOIN","left_key":left_key,"right_key":right_key},
+      {"index":3,"subgoal":clauses[3],"mode":"RUNTIME_JOIN_OUTPUT_SPEC","output_path":joined,"output_fields":fields},
+      {"index":4,"subgoal":clauses[4],"mode":"VERIFIED_CAPABILITY","selected_capability":"xlsx.table.create_from_json_records","inputs":{"json_path":joined,"output_path":xlsx}},
+      {"index":5,"subgoal":clauses[5],"mode":"INDEPENDENT_MULTI_SOURCE_JOIN_AND_XLSX_VERIFICATION","joined_path":joined,"xlsx_path":xlsx}
+    ]
+    return {"schema":"PROJECT_BRAIN_COMPILED_COMPOUND_GOAL_V1","compiler_mode":"DETERMINISTIC_MULTI_SOURCE_JOIN_PLAN","clauses":clauses,"compiled_parts":parts,"controller_actions":[s0["action"],s1["action"],join,create,verify_join,verify_xlsx,{"type":"finish","args":{"summary":"COMPOUND_GOAL_COMPLETE"}}],"finish_summary":"COMPOUND_GOAL_COMPLETE"}
+
+
 def _compile_per_item_fallback_goal(goal, clauses, registry, root):
     if len(clauses)!=6:
         return None
