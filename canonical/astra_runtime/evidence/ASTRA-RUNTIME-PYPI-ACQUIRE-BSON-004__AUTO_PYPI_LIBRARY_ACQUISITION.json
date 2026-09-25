@@ -1,0 +1,773 @@
+{
+  "attempts": [
+    {
+      "error": "AutoPyPIAcquisitionFailure:NO_COMPATIBLE_PYPI_CODEC_CONTRACT:[]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "binding_kind": "pypi",
+        "dependency_count": 0,
+        "description": "A small example package",
+        "discovery_source": "PYPI",
+        "eligibility_status": "PYPI_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 1,
+        "license": "",
+        "matched_terms": [
+          "bson"
+        ],
+        "metadata_url": "https://pypi.org/pypi/adamdobson2048/0.0.1/json",
+        "name": "adamdobson2048",
+        "project": "adamdobson2048",
+        "query": "adamdobson2048",
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "requires_python": ">=3.7",
+        "score": 142,
+        "version": "0.0.1",
+        "wheels": [
+          {
+            "filename": "adamdobson2048-0.0.1-py3-none-any.whl",
+            "python_version": "py3",
+            "sha256": "07d8b63a78f629cbc42d48e4dd8cca626aa231687c3c13b2461091f25f735ba3",
+            "size": 6149,
+            "url": "https://files.pythonhosted.org/packages/76/84/c98479a6990da90f579469d6d241227ac0defb7485f24351f2677be6ce2f/adamdobson2048-0.0.1-py3-none-any.whl"
+          }
+        ],
+        "zero_cost_eligible": true
+      },
+      "wheel": {
+        "bytes": 6149,
+        "filename": "adamdobson2048-0.0.1-py3-none-any.whl",
+        "sha256": "07d8b63a78f629cbc42d48e4dd8cca626aa231687c3c13b2461091f25f735ba3",
+        "url": "https://files.pythonhosted.org/packages/76/84/c98479a6990da90f579469d6d241227ac0defb7485f24351f2677be6ce2f/adamdobson2048-0.0.1-py3-none-any.whl"
+      }
+    },
+    {
+      "error": "AutoPyPIAcquisitionFailure:NO_COMPATIBLE_PYPI_CODEC_CONTRACT:[{\"error\": \"AttributeError\", \"module\": \"aiobsonrpc\", \"status\": \"IMPORT_FAILED\"}]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "binding_kind": "pypi",
+        "dependency_count": 0,
+        "description": "A Python library for JSON-RPC 2.0",
+        "discovery_source": "PYPI",
+        "eligibility_status": "PYPI_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 1,
+        "license": "",
+        "matched_terms": [
+          "bson"
+        ],
+        "metadata_url": "https://pypi.org/pypi/aiobsonrpc/0.0.4/json",
+        "name": "aiobsonrpc",
+        "project": "aiobsonrpc",
+        "query": "aiobsonrpc",
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "requires_python": "",
+        "score": 142,
+        "version": "0.0.4",
+        "wheels": [
+          {
+            "filename": "aiobsonrpc-0.0.4-py3-none-any.whl",
+            "python_version": "py3",
+            "sha256": "f4c2a0051151f82aee11c9d7b6fc25fd926d1387942a4c803b3534f397f6cdae",
+            "size": 12155,
+            "url": "https://files.pythonhosted.org/packages/3f/6a/dbfe6dd4b1c487db7460c81b241c6e2c84489c0ca4dc30b24d71534bec29/aiobsonrpc-0.0.4-py3-none-any.whl"
+          }
+        ],
+        "zero_cost_eligible": true
+      },
+      "wheel": {
+        "bytes": 12155,
+        "filename": "aiobsonrpc-0.0.4-py3-none-any.whl",
+        "sha256": "f4c2a0051151f82aee11c9d7b6fc25fd926d1387942a4c803b3534f397f6cdae",
+        "url": "https://files.pythonhosted.org/packages/3f/6a/dbfe6dd4b1c487db7460c81b241c6e2c84489c0ca4dc30b24d71534bec29/aiobsonrpc-0.0.4-py3-none-any.whl"
+      }
+    },
+    {
+      "error": "AutoPyPIAcquisitionFailure:NO_COMPATIBLE_PYPI_CODEC_CONTRACT:[{\"error\": \"ImportError\", \"module\": \"__init__\", \"status\": \"IMPORT_FAILED\"}, {\"error\": \"ModuleNotFoundError\", \"module\": \"advanced_encoder_and_decoder\", \"status\": \"IMPORT_FAILED\"}]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "binding_kind": "pypi",
+        "dependency_count": 0,
+        "description": "A small, easy to use module that helps you store data easily.",
+        "discovery_source": "PYPI",
+        "eligibility_status": "PYPI_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 1,
+        "license": null,
+        "matched_terms": [
+          "encode"
+        ],
+        "metadata_url": "https://pypi.org/pypi/advanced-encoder-and-decoder/1.0.0/json",
+        "name": "advanced-encoder-and-decoder",
+        "project": "advanced-encoder-and-decoder",
+        "query": "advanced-encoder-and-decoder",
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "requires_python": ">=3.9",
+        "score": 62,
+        "version": "1.0.0",
+        "wheels": [
+          {
+            "filename": "advanced_encoder_and_decoder-1.0.0-py3-none-any.whl",
+            "python_version": "py3",
+            "sha256": "def5eea773e8c7b07c105a4d58aeb75102dda27fcfc7a2c80b598686768f0fd5",
+            "size": 4227,
+            "url": "https://files.pythonhosted.org/packages/29/d4/3b6a7c28a79d2f09dd9ef835a3707f81eb85b680019d736a47f89297f12c/advanced_encoder_and_decoder-1.0.0-py3-none-any.whl"
+          }
+        ],
+        "zero_cost_eligible": true
+      },
+      "wheel": {
+        "bytes": 4227,
+        "filename": "advanced_encoder_and_decoder-1.0.0-py3-none-any.whl",
+        "sha256": "def5eea773e8c7b07c105a4d58aeb75102dda27fcfc7a2c80b598686768f0fd5",
+        "url": "https://files.pythonhosted.org/packages/29/d4/3b6a7c28a79d2f09dd9ef835a3707f81eb85b680019d736a47f89297f12c/advanced_encoder_and_decoder-1.0.0-py3-none-any.whl"
+      }
+    },
+    {
+      "error": "AutoPyPIAcquisitionFailure:NO_COMPATIBLE_PYPI_CODEC_CONTRACT:[]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "binding_kind": "pypi",
+        "dependency_count": 0,
+        "description": "Darabonba Util Library for Alibaba Cloud Python SDK",
+        "discovery_source": "PYPI",
+        "eligibility_status": "PYPI_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 1,
+        "license": "Apache License 2.0",
+        "matched_terms": [
+          "encode"
+        ],
+        "metadata_url": "https://pypi.org/pypi/alibabacloud-darabonba-encode-util/0.0.3/json",
+        "name": "alibabacloud-darabonba-encode-util",
+        "project": "alibabacloud-darabonba-encode-util",
+        "query": "alibabacloud-darabonba-encode-util",
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "requires_python": ">=3.6",
+        "score": 62,
+        "version": "0.0.3",
+        "wheels": [
+          {
+            "filename": "alibabacloud_darabonba_encode_util-0.0.3-py3-none-any.whl",
+            "python_version": "py3",
+            "sha256": "6a91c82f6cc4227091be39b65d1f6921d7330119bac7b911e5a26daf895cc9dc",
+            "size": 4295,
+            "url": "https://files.pythonhosted.org/packages/c1/33/a2f254e5610b6b83b28c010c1c8e67c26d4ac0355f59f16cba25c9440567/alibabacloud_darabonba_encode_util-0.0.3-py3-none-any.whl"
+          }
+        ],
+        "zero_cost_eligible": true
+      },
+      "wheel": {
+        "bytes": 4295,
+        "filename": "alibabacloud_darabonba_encode_util-0.0.3-py3-none-any.whl",
+        "sha256": "6a91c82f6cc4227091be39b65d1f6921d7330119bac7b911e5a26daf895cc9dc",
+        "url": "https://files.pythonhosted.org/packages/c1/33/a2f254e5610b6b83b28c010c1c8e67c26d4ac0355f59f16cba25c9440567/alibabacloud_darabonba_encode_util-0.0.3-py3-none-any.whl"
+      }
+    },
+    {
+      "error": "AutoPyPIAcquisitionFailure:NO_COMPATIBLE_PYPI_CODEC_CONTRACT:[]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "binding_kind": "pypi",
+        "dependency_count": 0,
+        "description": "Darabonba Util Library for Alibaba Cloud Python2 SDK",
+        "discovery_source": "PYPI",
+        "eligibility_status": "PYPI_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 1,
+        "license": "Apache License 2.0",
+        "matched_terms": [
+          "encode"
+        ],
+        "metadata_url": "https://pypi.org/pypi/alibabacloud-darabonba-encode-util-py2/0.0.3/json",
+        "name": "alibabacloud-darabonba-encode-util-py2",
+        "project": "alibabacloud-darabonba-encode-util-py2",
+        "query": "alibabacloud-darabonba-encode-util-py2",
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "requires_python": null,
+        "score": 62,
+        "version": "0.0.3",
+        "wheels": [
+          {
+            "filename": "alibabacloud_darabonba_encode_util_py2-0.0.3-py3-none-any.whl",
+            "python_version": "py3",
+            "sha256": "883470d4e065a5792e0e23ab9570244081f10d7e773fed23f71824df6c7d4b0e",
+            "size": 4327,
+            "url": "https://files.pythonhosted.org/packages/dd/71/a1b4cfffeb1e026da92513f152327688112ad804ae6b19c22f6673bdd738/alibabacloud_darabonba_encode_util_py2-0.0.3-py3-none-any.whl"
+          }
+        ],
+        "zero_cost_eligible": true
+      },
+      "wheel": {
+        "bytes": 4327,
+        "filename": "alibabacloud_darabonba_encode_util_py2-0.0.3-py3-none-any.whl",
+        "sha256": "883470d4e065a5792e0e23ab9570244081f10d7e773fed23f71824df6c7d4b0e",
+        "url": "https://files.pythonhosted.org/packages/dd/71/a1b4cfffeb1e026da92513f152327688112ad804ae6b19c22f6673bdd738/alibabacloud_darabonba_encode_util_py2-0.0.3-py3-none-any.whl"
+      }
+    },
+    {
+      "error": "AutoPyPIAcquisitionFailure:NO_COMPATIBLE_PYPI_CODEC_CONTRACT:[]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "binding_kind": "pypi",
+        "dependency_count": 0,
+        "description": "A versatile Python token generation and formatting library supporting custom schemas, hashing for Telegram/Discord IDs, multiple security versions, and SQLite/JSON export utilities.",
+        "discovery_source": "PYPI",
+        "eligibility_status": "PYPI_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 1,
+        "license": null,
+        "matched_terms": [
+          "encode"
+        ],
+        "metadata_url": "https://pypi.org/pypi/astral-token-encoder/4.0.1/json",
+        "name": "astral-token-encoder",
+        "project": "astral-token-encoder",
+        "query": "astral-token-encoder",
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "requires_python": ">=3.7",
+        "score": 62,
+        "version": "4.0.1",
+        "wheels": [
+          {
+            "filename": "astral_token_encoder-4.0.1-py3-none-any.whl",
+            "python_version": "py3",
+            "sha256": "f23e3dd06927822627090c628281efcbad011cdcbf8d29240420760d03d8942e",
+            "size": 3889,
+            "url": "https://files.pythonhosted.org/packages/69/f9/ca640f68b82e60a78876c232668c31935ec05d96e60ef01b94b7c6abb520/astral_token_encoder-4.0.1-py3-none-any.whl"
+          }
+        ],
+        "zero_cost_eligible": true
+      },
+      "wheel": {
+        "bytes": 3889,
+        "filename": "astral_token_encoder-4.0.1-py3-none-any.whl",
+        "sha256": "f23e3dd06927822627090c628281efcbad011cdcbf8d29240420760d03d8942e",
+        "url": "https://files.pythonhosted.org/packages/69/f9/ca640f68b82e60a78876c232668c31935ec05d96e60ef01b94b7c6abb520/astral_token_encoder-4.0.1-py3-none-any.whl"
+      }
+    },
+    {
+      "error": "AutoPyPIAcquisitionFailure:NO_COMPATIBLE_PYPI_CODEC_CONTRACT:[{\"error\": \"ModuleNotFoundError\", \"module\": \"autoencoder\", \"status\": \"IMPORT_FAILED\"}]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "binding_kind": "pypi",
+        "dependency_count": 0,
+        "description": "A toolkit for flexibly building convolutional autoencoders in pytorch",
+        "discovery_source": "PYPI",
+        "eligibility_status": "PYPI_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 1,
+        "license": "",
+        "matched_terms": [
+          "encode"
+        ],
+        "metadata_url": "https://pypi.org/pypi/autoencoder/0.0.8/json",
+        "name": "autoencoder",
+        "project": "autoencoder",
+        "query": "autoencoder",
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "requires_python": "",
+        "score": 62,
+        "version": "0.0.8",
+        "wheels": [
+          {
+            "filename": "autoencoder-0.0.8-py3-none-any.whl",
+            "python_version": "py3",
+            "sha256": "ecb644d3d18c97bf8157863e5c585f940c9bc1a0ccf96fa0cff01d6a2f608858",
+            "size": 11487,
+            "url": "https://files.pythonhosted.org/packages/46/62/fd4471bbb6cacfe4c20becd0c66b23c364be2074e9830641bec9e9ee68a0/autoencoder-0.0.8-py3-none-any.whl"
+          }
+        ],
+        "zero_cost_eligible": true
+      },
+      "wheel": {
+        "bytes": 11487,
+        "filename": "autoencoder-0.0.8-py3-none-any.whl",
+        "sha256": "ecb644d3d18c97bf8157863e5c585f940c9bc1a0ccf96fa0cff01d6a2f608858",
+        "url": "https://files.pythonhosted.org/packages/46/62/fd4471bbb6cacfe4c20becd0c66b23c364be2074e9830641bec9e9ee68a0/autoencoder-0.0.8-py3-none-any.whl"
+      }
+    },
+    {
+      "error": "AutoPyPIAcquisitionFailure:NO_COMPATIBLE_PYPI_CODEC_CONTRACT:[]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "binding_kind": "pypi",
+        "dependency_count": 0,
+        "description": "Generative modeling and representation learning through reconstruction",
+        "discovery_source": "PYPI",
+        "eligibility_status": "PYPI_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 1,
+        "license": "",
+        "matched_terms": [
+          "encode"
+        ],
+        "metadata_url": "https://pypi.org/pypi/autoencodersplz/2024.2.8/json",
+        "name": "autoencodersplz",
+        "project": "autoencodersplz",
+        "query": "autoencodersplz",
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "requires_python": ">=3.7",
+        "score": 62,
+        "version": "2024.2.8",
+        "wheels": [
+          {
+            "filename": "autoencodersplz-2024.2.8-py3-none-any.whl",
+            "python_version": "py3",
+            "sha256": "74d36fd79a41ebff6b60c9e0ebbe2fe59554e5c6d87ddebf1783e9a733f0033e",
+            "size": 47777,
+            "url": "https://files.pythonhosted.org/packages/e8/a7/5c6c8c23458206650c30fe596b1145d146d2f78b15a7ce06ce818e690f25/autoencodersplz-2024.2.8-py3-none-any.whl"
+          }
+        ],
+        "zero_cost_eligible": true
+      },
+      "wheel": {
+        "bytes": 47777,
+        "filename": "autoencodersplz-2024.2.8-py3-none-any.whl",
+        "sha256": "74d36fd79a41ebff6b60c9e0ebbe2fe59554e5c6d87ddebf1783e9a733f0033e",
+        "url": "https://files.pythonhosted.org/packages/e8/a7/5c6c8c23458206650c30fe596b1145d146d2f78b15a7ce06ce818e690f25/autoencodersplz-2024.2.8-py3-none-any.whl"
+      }
+    },
+    {
+      "error": "AutoPyPIAcquisitionFailure:NO_COMPATIBLE_PYPI_CODEC_CONTRACT:[]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "binding_kind": "pypi",
+        "dependency_count": 0,
+        "description": "Interactive Base64 encoding/decoding utility",
+        "discovery_source": "PYPI",
+        "eligibility_status": "PYPI_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 1,
+        "license": null,
+        "matched_terms": [
+          "encode"
+        ],
+        "metadata_url": "https://pypi.org/pypi/base64-encoder-cli/1.0.0/json",
+        "name": "base64-encoder-cli",
+        "project": "base64-encoder-cli",
+        "query": "base64-encoder-cli",
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "requires_python": ">=3.6",
+        "score": 62,
+        "version": "1.0.0",
+        "wheels": [
+          {
+            "filename": "base64_encoder_cli-1.0.0-py3-none-any.whl",
+            "python_version": "py3",
+            "sha256": "187d2f95a28412ed8c9c586470171b2d0af5537a89853e316eb72ea22fde1e7d",
+            "size": 2418,
+            "url": "https://files.pythonhosted.org/packages/ec/21/c95f31c3cbc583787c84d831d8cb30d138470b7f598d4cc9dbc28ad270ad/base64_encoder_cli-1.0.0-py3-none-any.whl"
+          }
+        ],
+        "zero_cost_eligible": true
+      },
+      "wheel": {
+        "bytes": 2418,
+        "filename": "base64_encoder_cli-1.0.0-py3-none-any.whl",
+        "sha256": "187d2f95a28412ed8c9c586470171b2d0af5537a89853e316eb72ea22fde1e7d",
+        "url": "https://files.pythonhosted.org/packages/ec/21/c95f31c3cbc583787c84d831d8cb30d138470b7f598d4cc9dbc28ad270ad/base64_encoder_cli-1.0.0-py3-none-any.whl"
+      }
+    },
+    {
+      "error": "AutoPyPIAcquisitionFailure:NO_COMPATIBLE_PYPI_CODEC_CONTRACT:[]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "binding_kind": "pypi",
+        "dependency_count": 0,
+        "description": "Custom encoder that encodes any binary data to given alphabet.",
+        "discovery_source": "PYPI",
+        "eligibility_status": "PYPI_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 1,
+        "license": "MIT License\n        \n        Copyright (c) 2017-2024 Vd\n        \n        Permission is hereby granted, free of charge, to any person obtaining a copy\n        of this software and associated documentation files (the \"Software\"), to deal\n        in the Software without restriction, including without limitation the rights\n        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n        copies of the Software, and to permit persons to whom the Software is\n        furnished to do so, subject to the following conditions:\n        \n        The above copyright notice and this permission notice shall be included in all\n        copies or substantial portions of the Software.\n        \n        THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n        SOFTWARE.",
+        "matched_terms": [
+          "encode"
+        ],
+        "metadata_url": "https://pypi.org/pypi/basen-encoder/1.0.2/json",
+        "name": "basen-encoder",
+        "project": "basen-encoder",
+        "query": "basen-encoder",
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "requires_python": "<3.13,>=3.8",
+        "score": 62,
+        "version": "1.0.2",
+        "wheels": [
+          {
+            "filename": "basen_encoder-1.0.2-py3-none-any.whl",
+            "python_version": "py3",
+            "sha256": "76c57def490bae3da454b6ca16b83d41bd10cfe63f0d871119ef539337e17399",
+            "size": 5612,
+            "url": "https://files.pythonhosted.org/packages/b8/ae/c4dfc9a07bcfe540e397602dd669d82e0d7ad3d597edf0e7815a52361ebb/basen_encoder-1.0.2-py3-none-any.whl"
+          }
+        ],
+        "zero_cost_eligible": true
+      },
+      "wheel": {
+        "bytes": 5612,
+        "filename": "basen_encoder-1.0.2-py3-none-any.whl",
+        "sha256": "76c57def490bae3da454b6ca16b83d41bd10cfe63f0d871119ef539337e17399",
+        "url": "https://files.pythonhosted.org/packages/b8/ae/c4dfc9a07bcfe540e397602dd669d82e0d7ad3d597edf0e7815a52361ebb/basen_encoder-1.0.2-py3-none-any.whl"
+      }
+    },
+    {
+      "error": "AutoPyPIAcquisitionFailure:NO_COMPATIBLE_PYPI_CODEC_CONTRACT:[]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "binding_kind": "pypi",
+        "dependency_count": 0,
+        "description": "Convert numbers of any base back and forth.",
+        "discovery_source": "PYPI",
+        "eligibility_status": "PYPI_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 1,
+        "license": "MIT",
+        "matched_terms": [
+          "encode"
+        ],
+        "metadata_url": "https://pypi.org/pypi/basencode/2.1.0/json",
+        "name": "basencode",
+        "project": "basencode",
+        "query": "basencode",
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "requires_python": "",
+        "score": 62,
+        "version": "2.1.0",
+        "wheels": [
+          {
+            "filename": "basencode-2.1.0-py3-none-any.whl",
+            "python_version": "py3",
+            "sha256": "4101234ad574433947477683e99b4d7ecfb0973fe8ec688b683893316a5640a3",
+            "size": 7082,
+            "url": "https://files.pythonhosted.org/packages/bd/c1/3a1ccea26cf25040d533e149861dacf3666565ad1403ddc4e1a62fa70bed/basencode-2.1.0-py3-none-any.whl"
+          }
+        ],
+        "zero_cost_eligible": true
+      },
+      "wheel": {
+        "bytes": 7082,
+        "filename": "basencode-2.1.0-py3-none-any.whl",
+        "sha256": "4101234ad574433947477683e99b4d7ecfb0973fe8ec688b683893316a5640a3",
+        "url": "https://files.pythonhosted.org/packages/bd/c1/3a1ccea26cf25040d533e149861dacf3666565ad1403ddc4e1a62fa70bed/basencode-2.1.0-py3-none-any.whl"
+      }
+    },
+    {
+      "error": "AutoPyPIAcquisitionFailure:NO_COMPATIBLE_PYPI_CODEC_CONTRACT:[]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "binding_kind": "pypi",
+        "dependency_count": 0,
+        "description": "A fast and correct bencode serialize/deserialize library",
+        "discovery_source": "PYPI",
+        "eligibility_status": "PYPI_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 1,
+        "license": "MIT",
+        "matched_terms": [
+          "encode"
+        ],
+        "metadata_url": "https://pypi.org/pypi/bencode-cpp/0.0.4a1/json",
+        "name": "bencode-cpp",
+        "project": "bencode-cpp",
+        "query": "bencode-cpp",
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "requires_python": "<4.0,>=3.8",
+        "score": 62,
+        "version": "0.0.4a1",
+        "wheels": [
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp310-cp310-macosx_10_13_x86_64.whl",
+            "python_version": "cp310",
+            "sha256": "0b0cb9581bb72e328138f7d290004e378bbc9fdc8b09b6c64c452d73930339cd",
+            "size": 129233,
+            "url": "https://files.pythonhosted.org/packages/08/ee/77c6608eb56cf3e5142a3e1baa694ec4ea4d2e55574dce62c2de0c235411/bencode_cpp-0.0.4a1-cp310-cp310-macosx_10_13_x86_64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp310-cp310-macosx_11_0_arm64.whl",
+            "python_version": "cp310",
+            "sha256": "c92c9dd5cec5f7c15497bf74cfe748d345108daab7f0120f61451c8b49124200",
+            "size": 119956,
+            "url": "https://files.pythonhosted.org/packages/67/1e/03b42a74d94675dce9e7d383edde6a5f0cefaf6d81654110cf04d97acfce/bencode_cpp-0.0.4a1-cp310-cp310-macosx_11_0_arm64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+            "python_version": "cp310",
+            "sha256": "c7f249c910808f70e06726e5b5c639fee90ee0ff1e212111d6afd83c2b0bd9dc",
+            "size": 174966,
+            "url": "https://files.pythonhosted.org/packages/2f/11/950c90e2a0c28b7d90f07b3fa76504e83ada5518c67859960303a5c6ece7/bencode_cpp-0.0.4a1-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+            "python_version": "cp310",
+            "sha256": "f6fbb73cbd08ee3de5934e25d15ad517ea25867e6fbce77486b68d2d11210933",
+            "size": 180193,
+            "url": "https://files.pythonhosted.org/packages/50/e3/381c6b671e7ac7ee625db42877045b4a625ca3ff1c7574af713f4e0beede/bencode_cpp-0.0.4a1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp310-cp310-musllinux_1_2_aarch64.whl",
+            "python_version": "cp310",
+            "sha256": "d51ccd7deffe26a277a493a321a7224c96fb28e500553b1385dffd9821b6a3d2",
+            "size": 1103398,
+            "url": "https://files.pythonhosted.org/packages/2c/df/af37599681511ebda835e34d252c27349d5693fecda648840e854b6630d1/bencode_cpp-0.0.4a1-cp310-cp310-musllinux_1_2_aarch64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp310-cp310-musllinux_1_2_x86_64.whl",
+            "python_version": "cp310",
+            "sha256": "cf77e93a350c911f953411b87fe6ef5547c931f681899b27cc625001fd926394",
+            "size": 1151949,
+            "url": "https://files.pythonhosted.org/packages/30/eb/c8f309b7650fb9afaf87c8ce0ff31a45957f78acc6ccdb04460159d71f69/bencode_cpp-0.0.4a1-cp310-cp310-musllinux_1_2_x86_64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp310-cp310-win32.whl",
+            "python_version": "cp310",
+            "sha256": "67648a3bb29f2b6f602cc1dcde87ca42eb8d842d845e0aa8a0438e60d99a8b2d",
+            "size": 103975,
+            "url": "https://files.pythonhosted.org/packages/69/74/9a0948815573049951defc3d3da6499cfc84c87f4a70dc393dad5907952d/bencode_cpp-0.0.4a1-cp310-cp310-win32.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp310-cp310-win_amd64.whl",
+            "python_version": "cp310",
+            "sha256": "4dd893b4ff73e2f3c7c2905cd231bc311ca500be5f16625b367a6a023e84d000",
+            "size": 116830,
+            "url": "https://files.pythonhosted.org/packages/fb/b1/58daabf7b004bd21dc3114fdbb881dacbf74515b25e53c3dbe3b5c002c2a/bencode_cpp-0.0.4a1-cp310-cp310-win_amd64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp311-cp311-macosx_10_13_x86_64.whl",
+            "python_version": "cp311",
+            "sha256": "958bd694fa6cb354aef42620c52399b7808afb5996e2b05b3667c24b7a1fade3",
+            "size": 130735,
+            "url": "https://files.pythonhosted.org/packages/09/ba/fb9a4525b00daad26a3b050f44c32af6b8947f1074dfec081a70a5d319ef/bencode_cpp-0.0.4a1-cp311-cp311-macosx_10_13_x86_64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp311-cp311-macosx_11_0_arm64.whl",
+            "python_version": "cp311",
+            "sha256": "6fed82a4e70d812f020f2f176427dce275bf76c75700917b7d658e22acbc8482",
+            "size": 121297,
+            "url": "https://files.pythonhosted.org/packages/5f/c1/631d179a22b956e03d70acb703a3f0164759c2b137f15d6ff7649c33d5fe/bencode_cpp-0.0.4a1-cp311-cp311-macosx_11_0_arm64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+            "python_version": "cp311",
+            "sha256": "f61ae6063406460269b01b0ddf7fdc1292f501408d6260040e8c1896c85eafd9",
+            "size": 176641,
+            "url": "https://files.pythonhosted.org/packages/27/bd/1e1825273e3c21408f4ea946f50140f59c30b813967343a2e3878ea266c4/bencode_cpp-0.0.4a1-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+            "python_version": "cp311",
+            "sha256": "ae1c86c70dff636bc05e4a25a2b77f7b4107ce24d8cf22c08763d270feadd974",
+            "size": 182285,
+            "url": "https://files.pythonhosted.org/packages/fc/cc/ff0a1db9d3cd8de5a03bd302acb58ba4fa5d4e9af703c1adc4ec267b6c79/bencode_cpp-0.0.4a1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp311-cp311-musllinux_1_2_aarch64.whl",
+            "python_version": "cp311",
+            "sha256": "c5d106653d97805822b26acb9fb7da57c4018d1dc4e72360c21da8173b96bfe6",
+            "size": 1104934,
+            "url": "https://files.pythonhosted.org/packages/10/1b/45343e5837b00fc950c74fcf83b1f13efadc74b123bd4fb31d492c974aa6/bencode_cpp-0.0.4a1-cp311-cp311-musllinux_1_2_aarch64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp311-cp311-musllinux_1_2_x86_64.whl",
+            "python_version": "cp311",
+            "sha256": "55fc09abcb6906832eb4134e41f3d44759be6512b06da0d828018181d31ce98e",
+            "size": 1153179,
+            "url": "https://files.pythonhosted.org/packages/6e/80/4856a5eb4577810ff9b47068085c8ddd7c16440fc0fa8cfbc08b62d4f870/bencode_cpp-0.0.4a1-cp311-cp311-musllinux_1_2_x86_64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp311-cp311-win32.whl",
+            "python_version": "cp311",
+            "sha256": "a7a1526024f590b40ac0b7996622cc266b64e853301bd4f06fd8a485482b17de",
+            "size": 105171,
+            "url": "https://files.pythonhosted.org/packages/05/5c/45f8661425f13472c443fd5609282e744a5477b3ada24fc3aacf918524a8/bencode_cpp-0.0.4a1-cp311-cp311-win32.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp311-cp311-win_amd64.whl",
+            "python_version": "cp311",
+            "sha256": "e95d592e063ec041fef323c1b701f66567a9c325514a00e0390109d5bfdcb354",
+            "size": 117885,
+            "url": "https://files.pythonhosted.org/packages/96/80/4f8bc4c69295324839115cc060f964a72caea0b7b0f094cca6a301678a63/bencode_cpp-0.0.4a1-cp311-cp311-win_amd64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp312-cp312-macosx_10_13_x86_64.whl",
+            "python_version": "cp312",
+            "sha256": "43f15cf64cc9e6b09bc91cf4eb524e58be0025d3e8fea93145c516fa6b0d1cde",
+            "size": 128111,
+            "url": "https://files.pythonhosted.org/packages/02/92/24c80af586ed4211c8eb9a1aa74c0fefe480367fcbf62cc3e5f139af1a1f/bencode_cpp-0.0.4a1-cp312-cp312-macosx_10_13_x86_64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp312-cp312-macosx_11_0_arm64.whl",
+            "python_version": "cp312",
+            "sha256": "0171d41a1a32a05d2e0f2167f816b6ad656f2ec73184f761b4cfb7cf3b588861",
+            "size": 118848,
+            "url": "https://files.pythonhosted.org/packages/80/9b/76e68a0d4c6b2adc997cc0716367c260fb5f74efa9b84efbddd845adad20/bencode_cpp-0.0.4a1-cp312-cp312-macosx_11_0_arm64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+            "python_version": "cp312",
+            "sha256": "2551ed017a0a1c45631c7e3c7b830dd8f5a90ccafbdc839de6e9a015ed2a9723",
+            "size": 177209,
+            "url": "https://files.pythonhosted.org/packages/f9/0d/0ed688a5cc1516634ba0f31a5b0a5de51aff4a7e367d2c62e267311d053b/bencode_cpp-0.0.4a1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+            "python_version": "cp312",
+            "sha256": "edc63429e8006582ab83daff1c109bb24d4a47cf3c2f4e5701e29ae116d77d83",
+            "size": 181618,
+            "url": "https://files.pythonhosted.org/packages/e8/8f/cc680589cb943b6973771b359ad8d304f6079be5cae6eef8007468078d35/bencode_cpp-0.0.4a1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp312-cp312-musllinux_1_2_aarch64.whl",
+            "python_version": "cp312",
+            "sha256": "cf9d6221455b298afb7bc8ec4419fdd2ec842912a781740ad4768a3fa5543454",
+            "size": 1105568,
+            "url": "https://files.pythonhosted.org/packages/62/cd/a2b6d96f721dac05d7757ca86d46d95c16f8aaa3f2ac944c1fa827e41acc/bencode_cpp-0.0.4a1-cp312-cp312-musllinux_1_2_aarch64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp312-cp312-musllinux_1_2_x86_64.whl",
+            "python_version": "cp312",
+            "sha256": "694255fe03539fb600ecc8b8e54ceef697fc34b952b89e5ddbc92be95698ef98",
+            "size": 1155228,
+            "url": "https://files.pythonhosted.org/packages/de/e4/43345effb5d2743eb5a0df457cf98503f9099b6122b60d30c429edf5fe7b/bencode_cpp-0.0.4a1-cp312-cp312-musllinux_1_2_x86_64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp312-cp312-win32.whl",
+            "python_version": "cp312",
+            "sha256": "ad19d462e78ac6ba4dc6537e425ea43682d9b6fac0adebb24d201a941b189aa1",
+            "size": 105692,
+            "url": "https://files.pythonhosted.org/packages/7f/54/c8902f301eb550f1c634e1b31dbb9ed9c2fb8ba177759955c79b5e57d6e7/bencode_cpp-0.0.4a1-cp312-cp312-win32.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp312-cp312-win_amd64.whl",
+            "python_version": "cp312",
+            "sha256": "7211206efcca4da15cee4bb4b81d574135bac23c92d7be7b64a59fb381d7de90",
+            "size": 118096,
+            "url": "https://files.pythonhosted.org/packages/b0/b9/7667a3c94dd7fccf70011e70d4a6f2bc1a449a90f70509a579ade6ce853e/bencode_cpp-0.0.4a1-cp312-cp312-win_amd64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp38-cp38-macosx_10_13_x86_64.whl",
+            "python_version": "cp38",
+            "sha256": "d98847c946b0366a307dd3163fe02181b539477befa80330270919355f9d3a42",
+            "size": 129178,
+            "url": "https://files.pythonhosted.org/packages/19/3a/ce0bd9489cf56f67bf3973701ba0cf5d0f2171e1a8740ce0af131551c9fc/bencode_cpp-0.0.4a1-cp38-cp38-macosx_10_13_x86_64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp38-cp38-macosx_11_0_arm64.whl",
+            "python_version": "cp38",
+            "sha256": "fe6da9ced52be23a646df86c3e93a962b67a0e7439af98af1244f0240ba57bac",
+            "size": 119886,
+            "url": "https://files.pythonhosted.org/packages/ea/7e/f65c4523e459bd84f43f1d0588c8ecf29e896a16fc8305dd6255b478f588/bencode_cpp-0.0.4a1-cp38-cp38-macosx_11_0_arm64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+            "python_version": "cp38",
+            "sha256": "406e9ba515b6de0df293336c3d1cac78dc5fa9d4919ca7eed975d39221c6da8f",
+            "size": 174808,
+            "url": "https://files.pythonhosted.org/packages/6b/e9/c460961ede8ffa0fbbd879ed6b9a469127e529c26f5114f21f13a69c42f1/bencode_cpp-0.0.4a1-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+            "python_version": "cp38",
+            "sha256": "a118107f7a81f1eacde326565e014a84efe02e9caffbee0299ed9484c0ad39f6",
+            "size": 180225,
+            "url": "https://files.pythonhosted.org/packages/c6/2e/d5d45201165f73abc7a1dd3734e2e8275499b8233183b2d14df1b61ba52a/bencode_cpp-0.0.4a1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp38-cp38-musllinux_1_2_aarch64.whl",
+            "python_version": "cp38",
+            "sha256": "1c35133b17404337f24231162ab210642d9a0752f80db84233aa91120453e217",
+            "size": 1102729,
+            "url": "https://files.pythonhosted.org/packages/d6/d6/b490c48e5f42a6d5c55c89c57d4572182b8bea7b563d6fc234a0bc2fa735/bencode_cpp-0.0.4a1-cp38-cp38-musllinux_1_2_aarch64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp38-cp38-musllinux_1_2_x86_64.whl",
+            "python_version": "cp38",
+            "sha256": "c6f9162e068735bc487814fddd725aad2be98389dd071b4f41c0397ab74306b0",
+            "size": 1149236,
+            "url": "https://files.pythonhosted.org/packages/48/10/7e250d467546fcc120d14849855bd026cab7fa8ca1f1844e2b8db9928fbf/bencode_cpp-0.0.4a1-cp38-cp38-musllinux_1_2_x86_64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp38-cp38-win32.whl",
+            "python_version": "cp38",
+            "sha256": "de2497e9368f4018f5a9bb8549e6bbbb86e3c6d10578805d78117aedf36cda80",
+            "size": 104191,
+            "url": "https://files.pythonhosted.org/packages/18/f9/275f7b35b4d1ef3cc9d3d4c1b4314861a9390a1a1d05701188fd19095c3b/bencode_cpp-0.0.4a1-cp38-cp38-win32.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp38-cp38-win_amd64.whl",
+            "python_version": "cp38",
+            "sha256": "8fed06169aa906f5d2f85888069659c9d19658324636ea18f11eaf0b8cf90361",
+            "size": 116816,
+            "url": "https://files.pythonhosted.org/packages/e3/a4/0b700f3ea5b9ea0782291dc5341e61cf3c91871199959c325b89de233637/bencode_cpp-0.0.4a1-cp38-cp38-win_amd64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp39-cp39-macosx_10_13_x86_64.whl",
+            "python_version": "cp39",
+            "sha256": "c71c58f2dc7bb48f6849e740fc0e55683824ebc1bc3b11536cb8f4c1a9765af5",
+            "size": 129427,
+            "url": "https://files.pythonhosted.org/packages/57/d9/82f44a61f3ecc0f62d88a21fecded20c1770074377073a99a283c93552a7/bencode_cpp-0.0.4a1-cp39-cp39-macosx_10_13_x86_64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp39-cp39-macosx_11_0_arm64.whl",
+            "python_version": "cp39",
+            "sha256": "d0e90897a81c9b3db984edc08a898233b03e83e9080c5b655791a95c3084341e",
+            "size": 120128,
+            "url": "https://files.pythonhosted.org/packages/71/62/52ea4228d0bf197079f9bb2f6e3090fc1aa5a65159c037b73efb733fa54a/bencode_cpp-0.0.4a1-cp39-cp39-macosx_11_0_arm64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+            "python_version": "cp39",
+            "sha256": "cb3702fb6d51a4d2bfc7c825c07853df158fb22b712f623edc5996c9c8425ed8",
+            "size": 174930,
+            "url": "https://files.pythonhosted.org/packages/70/2c/6ed168b75f040fcef4adedc96bedd55b5335a41399a004cfd91b252c9fb5/bencode_cpp-0.0.4a1-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+            "python_version": "cp39",
+            "sha256": "705d99778e32cd032a50cbc8c00584019b5ff2ee8c50eef55e4e032820fe09fb",
+            "size": 180407,
+            "url": "https://files.pythonhosted.org/packages/6d/0e/c676d1ae6dae6c53c0b79847a61a9b5569fe2d605cd6a7334c7a7a951a24/bencode_cpp-0.0.4a1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp39-cp39-musllinux_1_2_aarch64.whl",
+            "python_version": "cp39",
+            "sha256": "4cec45be004c444f33bb05f941f800bb6c38ba499d63646594062e1ff690de54",
+            "size": 1101437,
+            "url": "https://files.pythonhosted.org/packages/91/a0/ebb762fc58ce5518d261ed69a890e8a2d25e68ecf81339060e57312a838f/bencode_cpp-0.0.4a1-cp39-cp39-musllinux_1_2_aarch64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp39-cp39-musllinux_1_2_x86_64.whl",
+            "python_version": "cp39",
+            "sha256": "3c2e7511ed8f4f94cb8b590f6122d1e71742b5b7fcab87c3d2c5fb1ee043262b",
+            "size": 1149648,
+            "url": "https://files.pythonhosted.org/packages/1b/b5/29e6f4bf70679d2deba6fb9d1d9395b7b3cb9590ef3b93dd4a18a8824a50/bencode_cpp-0.0.4a1-cp39-cp39-musllinux_1_2_x86_64.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp39-cp39-win32.whl",
+            "python_version": "cp39",
+            "sha256": "414a980f8a472699ac56aad9c4663de038ebc307dd1a329de9538d6c51137d45",
+            "size": 104126,
+            "url": "https://files.pythonhosted.org/packages/74/80/7248be8d3b5007f15ff862b011cb6040d1db59af11202f59491377d614a6/bencode_cpp-0.0.4a1-cp39-cp39-win32.whl"
+          },
+          {
+            "filename": "bencode_cpp-0.0.4a1-cp39-cp39-win_amd64.whl",
+            "python_version": "cp39",
+            "sha256": "6d6892f5ac9756348742b899b337f57c497e2bf4530aacfdb1373b12d8371cf0",
+            "size": 116544,
+            "url": "https://files.pythonhosted.org/packages/98/c5/0b1d86f589a8dcd631ec989e4df950bb356c1c4790290626242fe83234ab/bencode_cpp-0.0.4a1-cp39-cp39-win_amd64.whl"
+          }
+        ],
+        "zero_cost_eligible": true
+      },
+      "wheel": {
+        "bytes": 181618,
+        "filename": "bencode_cpp-0.0.4a1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "sha256": "edc63429e8006582ab83daff1c109bb24d4a47cf3c2f4e5701e29ae116d77d83",
+        "url": "https://files.pythonhosted.org/packages/e8/8f/cc680589cb943b6973771b359ad8d304f6079be5cae6eef8007468078d35/bencode_cpp-0.0.4a1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+      }
+    }
+  ],
+  "goal": "Encode those exact records as BSON and save canonical/astra_runtime/tmp/BSON_RECORDS.bson",
+  "mission_id": "ASTRA-RUNTIME-PYPI-ACQUIRE-BSON-004",
+  "schema": "PROJECT_BRAIN_AUTO_PYPI_LIBRARY_ACQUISITION_V1",
+  "status": "NO_COMPATIBLE_CONTRACT"
+}
