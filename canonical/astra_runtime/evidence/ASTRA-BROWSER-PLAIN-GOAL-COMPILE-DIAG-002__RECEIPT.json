@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T02:23:31.926708+00:00",
+  "mission_id": "ASTRA-BROWSER-PLAIN-GOAL-COMPILE-DIAG-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_BROWSER_PLAIN_GOAL_COMPILE_DIAG_002.json",
+  "mission_sha256": "56c692939d3946aef5a55ce6def2891042999e11eff7cb7c581e8cc7bbfc6e3a",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "ae3558266c6a2e5f8654bd574ff07cdf0dbf47943e97ce070fad9e4ac6dfba5d",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
