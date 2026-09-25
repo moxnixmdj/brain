@@ -620,6 +620,143 @@ def _goal_action(action):
           "audit_sha256":sha_file(audit_path),
           "source_sha256":sha_file(yaml_path),
         }
+    if typ=="invoke_capability_until":
+        template=args.get("action")
+        attempts_dir=_safe_repo_path(args.get("attempts_dir",""))
+        result_path=_safe_repo_path(args.get("result_path",""))
+        max_attempts=int(args.get("max_attempts") or 0)
+        value_key=str(args.get("value_key") or "")
+        match_chars=set(str(args.get("match_chars") or "").lower())
+        if (
+            not isinstance(template,dict) or template.get("type")!="invoke_capability"
+            or not isinstance(template.get("args"),dict)
+            or max_attempts<1 or max_attempts>64
+            or not value_key or not match_chars
+        ):
+            return {"type":typ,"output_verified":False,"error":"BOUNDED_LOOP_SPEC_INVALID"}
+        attempts_dir.mkdir(parents=True,exist_ok=True)
+        trace=[]
+        matched=False
+        selected_uuid=None
+        selected_attempt=None
+
+        def subst(v,attempt_json,attempt_png):
+            if isinstance(v,str):
+                if v=="__ATTEMPT_RESULT_PATH__": return attempt_json
+                if v=="__ATTEMPT_SCREENSHOT_PATH__": return attempt_png
+                return v
+            if isinstance(v,list): return [subst(x,attempt_json,attempt_png) for x in v]
+            if isinstance(v,dict): return {k:subst(x,attempt_json,attempt_png) for k,x in v.items()}
+            return v
+
+        for attempt in range(1,max_attempts+1):
+            attempt_json=str((attempts_dir/(str(attempt)+".json")).relative_to(ROOT))
+            attempt_png=str((attempts_dir/(str(attempt)+".png")).relative_to(ROOT))
+            rendered=subst(template,attempt_json,attempt_png)
+            try:
+                result=_invoke_bound_capability(rendered.get("args") or {})
+                _verify_action_expectation(rendered,result)
+                wrapper=json.loads(_safe_repo_path(attempt_json).read_text(encoding="utf-8"))
+                observed=json.loads(str(wrapper.get("observed_text") or ""))
+                value=str(observed.get(value_key) or "")
+            except Exception as exc:
+                return {
+                  "type":typ,"output_verified":False,
+                  "error":"BOUNDED_LOOP_ATTEMPT_FAILED",
+                  "attempt":attempt,"detail":type(exc).__name__+":"+str(exc),
+                }
+            is_match=bool(value and value[0].lower() in match_chars)
+            trace.append({"attempt":attempt,"value":value,"matched":is_match,"result_path":attempt_json})
+            if is_match:
+                matched=True
+                selected_uuid=value
+                selected_attempt=attempt
+                break
+
+        summary={
+          "status":"MATCHED" if matched else "EXHAUSTED",
+          "attempts":len(trace),
+          "matched":matched,
+          "selected_uuid":selected_uuid,
+          "selected_attempt":selected_attempt,
+        }
+        result_path.parent.mkdir(parents=True,exist_ok=True)
+        result_path.write_text(json.dumps(summary,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+        return {
+          "type":typ,"output_verified":True,
+          **summary,
+          "result_path":str(result_path.relative_to(ROOT)),
+          "attempts_dir":str(attempts_dir.relative_to(ROOT)),
+          "trace":trace,
+        }
+
+    if typ=="assert_runtime_bounded_loop_trace":
+        attempts_dir=_safe_repo_path(args.get("attempts_dir",""))
+        result_path=_safe_repo_path(args.get("result_path",""))
+        max_attempts=int(args.get("max_attempts") or 0)
+        value_key=str(args.get("value_key") or "")
+        match_chars=set(str(args.get("match_chars") or "").lower())
+        if not attempts_dir.is_dir() or not result_path.is_file() or max_attempts<1:
+            return {"type":typ,"verified":False,"error":"BOUNDED_LOOP_VERIFY_SOURCE_MISSING"}
+        try:
+            summary=json.loads(result_path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            return {"type":typ,"verified":False,"error":"BOUNDED_LOOP_RESULT_INVALID:"+type(exc).__name__}
+        failures=[]
+        observed=[]
+        numeric=[]
+        for p in attempts_dir.glob("*.json"):
+            if p.stem.isdigit():
+                numeric.append((int(p.stem),p))
+        numeric.sort()
+        if not numeric:
+            failures.append("NO_ATTEMPTS")
+        indexes=[i for i,_ in numeric]
+        if indexes and indexes!=list(range(1,max(indexes)+1)):
+            failures.append("ATTEMPT_SEQUENCE_HAS_GAPS")
+        if len(numeric)>max_attempts:
+            failures.append("MAX_ATTEMPTS_EXCEEDED")
+        first_match=None
+        for i,p in numeric:
+            try:
+                wrapper=json.loads(p.read_text(encoding="utf-8"))
+                payload=json.loads(str(wrapper.get("observed_text") or ""))
+                value=str(payload.get(value_key) or "")
+            except Exception:
+                failures.append("ATTEMPT_JSON_INVALID:"+str(i))
+                continue
+            matched=bool(value and value[0].lower() in match_chars)
+            observed.append({"attempt":i,"value":value,"matched":matched})
+            if matched and first_match is None:
+                first_match=(i,value)
+        expected_attempts=first_match[0] if first_match else max_attempts
+        expected_matched=first_match is not None
+        expected_status="MATCHED" if expected_matched else "EXHAUSTED"
+        if len(numeric)!=expected_attempts:
+            failures.append("STOPPING_POINT_MISMATCH")
+        if int(summary.get("attempts") or -1)!=expected_attempts:
+            failures.append("RESULT_ATTEMPT_COUNT_MISMATCH")
+        if bool(summary.get("matched"))!=expected_matched:
+            failures.append("RESULT_MATCHED_MISMATCH")
+        if str(summary.get("status") or "")!=expected_status:
+            failures.append("RESULT_STATUS_MISMATCH")
+        if expected_matched:
+            if summary.get("selected_attempt")!=first_match[0]:
+                failures.append("SELECTED_ATTEMPT_MISMATCH")
+            if str(summary.get("selected_uuid") or "")!=first_match[1]:
+                failures.append("SELECTED_UUID_MISMATCH")
+        else:
+            if summary.get("selected_attempt") is not None or summary.get("selected_uuid") is not None:
+                failures.append("EXHAUSTED_SELECTION_NOT_NULL")
+        return {
+          "type":typ,"verified":not failures,
+          "failures":failures,
+          "observed_attempts":observed,
+          "first_match":first_match,
+          "expected_status":expected_status,
+          "expected_attempts":expected_attempts,
+        }
+
     if typ=="invoke_capability_fallback":
         primary=args.get("primary_action")
         fallback=args.get("fallback_action")
@@ -1678,9 +1815,9 @@ def _run_model_independent_goal(step, mission, goal):
     if actions is None:
         return None
     allowed_types={
-      "read_file","list_tree","search_text","http_get","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback",
+      "read_file","list_tree","search_text","http_get","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback","invoke_capability_until",
       "project_browser_result_json","join_runtime_json_arrays","assert_runtime_json_join","assert_hex_prefix_bucket","assert_collection_length_bucket","assert_runtime_selected_code_decodes",
-      "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal","assert_runtime_fanout_decodes","assert_runtime_fanout_artifacts_decode","assert_runtime_per_item_fallback_decodes","assert_runtime_fallback_decision",
+      "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal","assert_runtime_fanout_decodes","assert_runtime_fanout_artifacts_decode","assert_runtime_per_item_fallback_decodes","assert_runtime_fallback_decision","assert_runtime_bounded_loop_trace",
       "assert_workflow_audit_supported_by_source","assert_python_source_audit_supported_by_source",
       "assert_python_test_audit_zero","assert_python_test_audit_supported_by_fresh_execution",
       "finish"
@@ -1922,6 +2059,8 @@ def _classify_plain_goal_gap(text):
         re.match(r"^(?:for\s+every|for\s+each)\b",lower)
         or " at runtime" in lower
         or re.search(r"\botherwise\b",lower)
+        or re.search(r"\b(?:repeatedly|retry|retries|attempts?|until)\b",lower)
+        or re.match(r"^(?:after\s+each|finish\s+when|continue\s+until)\b",lower)
     ):
         return "CONTROL_OR_FANOUT"
     if re.match(r"^if\b",lower) or re.search(r"\bthen\b",lower):
