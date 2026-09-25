@@ -1,0 +1,21 @@
+{
+  "blocker": {
+    "adapter": "goal",
+    "error": "Blocker:ACTION_EXPECTATION_FAILED:verified:OBSERVED=False",
+    "mission_id": "ASTRA-RUNTIME-PYTHON-SOURCE-AUDIT-002",
+    "observed_at_utc": "2026-09-25T01:08:41.014466+00:00",
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "execute-python-runtime-source-audit",
+    "step_index": 0
+  },
+  "created_at_utc": "2026-09-25T01:08:40.935286+00:00",
+  "history": [],
+  "mission_id": "ASTRA-RUNTIME-PYTHON-SOURCE-AUDIT-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_PYTHON_SOURCE_AUDIT_002.json",
+  "mission_sha256": "a9642cd0302ddd1494e969e5c487ee7f5bc6c9f328d1b6d4b2ef625b3224673a",
+  "next_step": 0,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-25T01:08:41.014642+00:00"
+}
