@@ -1,8 +1,8 @@
 {
   "adapter": "goal",
-  "error": "Blocker:MODEL_INDEPENDENT_ACTION_ERROR:RuntimeError:GROUP_DERIVE_COPY_FIELD_MISSING:userid",
+  "error": "Blocker:CONTROLLER_CHECKPOINT_PLAN_HASH_MISMATCH",
   "mission_id": "ASTRA-RUNTIME-GENERIC-DATAFLOW-CHAIN-001",
-  "observed_at_utc": "2026-09-25T20:27:21.560291+00:00",
+  "observed_at_utc": "2026-09-25T20:30:54.170848+00:00",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
   "step_id": "run-chained-generic-dataflow",
   "step_index": 0
