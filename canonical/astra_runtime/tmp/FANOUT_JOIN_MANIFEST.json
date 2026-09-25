@@ -1,0 +1,62 @@
+[
+  {
+    "artifact_path": "canonical/astra_runtime/tmp/FANOUT_JOIN_CODES/1.png",
+    "capability_kind": "QR",
+    "id": 1,
+    "username": "Bret"
+  },
+  {
+    "artifact_path": "canonical/astra_runtime/tmp/FANOUT_JOIN_CODES/2.png",
+    "capability_kind": "CODE128",
+    "id": 2,
+    "username": "Antonette"
+  },
+  {
+    "artifact_path": "canonical/astra_runtime/tmp/FANOUT_JOIN_CODES/3.png",
+    "capability_kind": "QR",
+    "id": 3,
+    "username": "Samantha"
+  },
+  {
+    "artifact_path": "canonical/astra_runtime/tmp/FANOUT_JOIN_CODES/4.png",
+    "capability_kind": "QR",
+    "id": 4,
+    "username": "Karianne"
+  },
+  {
+    "artifact_path": "canonical/astra_runtime/tmp/FANOUT_JOIN_CODES/5.png",
+    "capability_kind": "QR",
+    "id": 5,
+    "username": "Kamren"
+  },
+  {
+    "artifact_path": "canonical/astra_runtime/tmp/FANOUT_JOIN_CODES/6.png",
+    "capability_kind": "CODE128",
+    "id": 6,
+    "username": "Leopoldo_Corkery"
+  },
+  {
+    "artifact_path": "canonical/astra_runtime/tmp/FANOUT_JOIN_CODES/7.png",
+    "capability_kind": "CODE128",
+    "id": 7,
+    "username": "Elwyn.Skiles"
+  },
+  {
+    "artifact_path": "canonical/astra_runtime/tmp/FANOUT_JOIN_CODES/8.png",
+    "capability_kind": "CODE128",
+    "id": 8,
+    "username": "Maxime_Nienow"
+  },
+  {
+    "artifact_path": "canonical/astra_runtime/tmp/FANOUT_JOIN_CODES/9.png",
+    "capability_kind": "QR",
+    "id": 9,
+    "username": "Delphine"
+  },
+  {
+    "artifact_path": "canonical/astra_runtime/tmp/FANOUT_JOIN_CODES/10.png",
+    "capability_kind": "CODE128",
+    "id": 10,
+    "username": "Moriah.Stanton"
+  }
+]
