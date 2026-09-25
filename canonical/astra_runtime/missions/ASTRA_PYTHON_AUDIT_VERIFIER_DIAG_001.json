@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-PYTHON-AUDIT-VERIFIER-DIAG-001",
+  "purpose": "Read-only diagnosis of the exact Python source audit verifier mismatch.",
+  "steps": [
+    {
+      "id": "diagnose-python-source-verifier",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/astra_runtime.py')\ns=importlib.util.spec_from_file_location('rt_py_diag',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nr=m._goal_action({'type':'assert_python_source_audit_supported_by_source','args':{'audit_path':'canonical/astra_runtime/tmp/PYTHON_RUNTIME_AUDIT.json','source_root':'canonical/runtime'}})\nprint(json.dumps(r,sort_keys=True)); print('PYTHON_AUDIT_VERIFIER_DIAG_COMPLETE')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "PYTHON_AUDIT_VERIFIER_DIAG_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "read_only_diagnostic": true,
+    "model_controller_required": false
+  }
+}
