@@ -2521,6 +2521,7 @@ def _goal_action(action):
             return {"type":typ,"verified":False,"error":"SOURCE_DISCOVERY_AUTHORITY_DOMAINS_REQUIRED"}
         normalized_domains=[x.lower().strip().lstrip(".") for x in authority_domains]
         engines=[
+          ("bing_rss","https://www.bing.com/search?"+urllib.parse.urlencode({"q":query,"format":"rss","count":"20"})),
           ("bing","https://www.bing.com/search?"+urllib.parse.urlencode({"q":query,"count":"20"})),
           ("duckduckgo","https://html.duckduckgo.com/html/?"+urllib.parse.urlencode({"q":query})),
           ("google","https://www.google.com/search?"+urllib.parse.urlencode({"q":query,"num":"20"})),
@@ -2580,7 +2581,14 @@ def _goal_action(action):
                 continue
             seen=set()
             local=[]
-            for raw_href in href_re.findall(text):
+            raw_hrefs=[]
+            if engine=="bing_rss":
+                raw_hrefs.extend(
+                    re.findall(r"<item>.*?<link>\s*(https?://[^<\s]+)\s*</link>.*?</item>",text,re.IGNORECASE|re.DOTALL)
+                )
+            else:
+                raw_hrefs.extend(href_re.findall(text))
+            for raw_href in raw_hrefs:
                 href=normalize_result_href(engine,raw_href)
                 if not href:
                     continue
