@@ -23,6 +23,7 @@
     "direct_source_url_provided": false,
     "independent_authority_site_verification_required": true,
     "authority_native_source_discovery_required": true,
-    "semantic_relevance_required": true
+    "semantic_relevance_required": true,
+    "replay_after_domain_free_authority_compiler_commit": "605318968924641747515d3f5854201e086ddf0f"
   }
 }
