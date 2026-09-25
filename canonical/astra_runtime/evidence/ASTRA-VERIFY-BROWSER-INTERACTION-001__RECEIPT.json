@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T02:48:10.357892+00:00",
+  "mission_id": "ASTRA-VERIFY-BROWSER-INTERACTION-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_BROWSER_INTERACTION_001.json",
+  "mission_sha256": "fbcf3a032963ca888ce54f5a3ec249b9a139b091fa69ab83ded8129f74d7a843",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "94490a7cb6da14f8e14268e95cb3f3521901cb970dc671942535e3c8afdd5247",
+  "status": "COMPLETE",
+  "steps_completed": 2
+}
