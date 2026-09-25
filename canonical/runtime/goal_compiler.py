@@ -3215,6 +3215,130 @@ def _compile_generic_dataflow_verification_ir(clause,compiled_parts):
     }
 
 
+def _compile_authoritative_json_knowledge_fetch(clause,action_cycle):
+    text=str(clause or "").strip()
+    m=re.match(
+        r"^using\s+the\s+authoritative\s+json\s+source\s+(https?://[^\s,]+),\s*"
+        r"extract\s+json\s+path\s+([^\s]+)\s+and\s+save\s+the\s+knowledge\s+evidence\s+to\s+"
+        r"([^\s]+\.json)$",
+        text,re.IGNORECASE
+    )
+    if not m:
+        return None
+    url=m.group(1).rstrip(".,;:!?")
+    raw_path=m.group(2).strip(" .,:;")
+    output_path=m.group(3).strip(" .,:;")
+    path_spec=[]
+    for part in raw_path.split("."):
+        if not part:
+            return None
+        if re.fullmatch(r"\d+",part):
+            path_spec.append(int(part))
+        elif re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*",part):
+            path_spec.append(part)
+        else:
+            return None
+    return {
+      "action":{
+        "type":"fetch_json_knowledge",
+        "args":{
+          "url":url,
+          "json_path":path_spec,
+          "output_path":output_path,
+          "authoritative":True,
+          "timeout_s":20,
+          "max_bytes":1000000,
+        },
+        "expect":{"type":"field_equals","field":"verified","value":True},
+      },
+      "output_path":output_path,
+      "result_cycle":int(action_cycle),
+      "evidence":{
+        "source_url":url,
+        "json_path":path_spec,
+        "evidence_path":output_path,
+        "result_cycle":int(action_cycle),
+      }
+    }
+
+
+def _compile_learned_value_record(clause,compiled_parts):
+    text=str(clause or "").strip()
+    m=re.match(
+        r"^create\s+([^\s]+\.json)\s+with\s+one\s+record\s+containing\s+"
+        r"([A-Za-z_][A-Za-z0-9_]*)\s+([^\s,]+)\s+and\s+"
+        r"([A-Za-z_][A-Za-z0-9_]*)\s+equal\s+to\s+the\s+learned\s+value$",
+        text,re.IGNORECASE
+    )
+    if not m:
+        return None
+    prior=None
+    for part in reversed(compiled_parts or []):
+        if isinstance(part,dict) and part.get("mode")=="AUTHORITATIVE_JSON_KNOWLEDGE_FETCH":
+            prior=part
+            break
+    if prior is None:
+        return None
+    output_path=m.group(1).strip(" .,:;")
+    literal_field=m.group(2)
+    literal_value=m.group(3).strip(" .,:;")
+    learned_field=m.group(4)
+    return {
+      "action":{
+        "type":"write_json_records",
+        "args":{
+          "output_path":output_path,
+          "fields":[literal_field,learned_field],
+          "records":[{
+            literal_field:literal_value,
+            learned_field:{"$result":{"cycle":int(prior["result_cycle"]),"field":"value"}},
+          }],
+        },
+        "expect":{"type":"field_equals","field":"verified","value":True},
+      },
+      "output_path":output_path,
+      "evidence":{
+        "output_path":output_path,
+        "literal_field":literal_field,
+        "learned_field":learned_field,
+        "knowledge_evidence_path":prior["evidence_path"],
+      }
+    }
+
+
+def _compile_knowledge_revalidation(clause,compiled_parts):
+    text=str(clause or "").strip()
+    if not re.match(
+        r"^finally\s+independently\s+re-fetch\s+the\s+authoritative\s+source\s+and\s+"
+        r"verify\s+the\s+learned\s+value\s+is\s+unchanged$",
+        text,re.IGNORECASE
+    ):
+        return None
+    prior=None
+    for part in reversed(compiled_parts or []):
+        if isinstance(part,dict) and part.get("mode")=="AUTHORITATIVE_JSON_KNOWLEDGE_FETCH":
+            prior=part
+            break
+    if prior is None:
+        return None
+    return {
+      "action":{
+        "type":"assert_json_knowledge",
+        "args":{
+          "evidence_path":prior["evidence_path"],
+          "timeout_s":20,
+          "max_bytes":1000000,
+        },
+        "expect":{"type":"field_equals","field":"verified","value":True},
+      },
+      "evidence":{
+        "evidence_path":prior["evidence_path"],
+        "source_url":prior["source_url"],
+        "json_path":prior["json_path"],
+      }
+    }
+
+
 def _compile_compound_goal(goal, clauses, registry, root):
     actions=[]
     compiled_parts=[]
@@ -3224,6 +3348,38 @@ def _compile_compound_goal(goal, clauses, registry, root):
         if index in consumed_indices:
             continue
         lower=clause.lower()
+
+        knowledge_fetch=_compile_authoritative_json_knowledge_fetch(clause,len(actions))
+        if knowledge_fetch is not None:
+            actions.append(knowledge_fetch["action"])
+            context_paths.append(knowledge_fetch["output_path"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"AUTHORITATIVE_JSON_KNOWLEDGE_FETCH",
+                **knowledge_fetch["evidence"],
+            })
+            continue
+
+        learned_record=_compile_learned_value_record(clause,compiled_parts)
+        if learned_record is not None:
+            actions.append(learned_record["action"])
+            context_paths.append(learned_record["output_path"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"KNOWLEDGE_VALUE_DOWNSTREAM_MATERIALIZATION",
+                **learned_record["evidence"],
+            })
+            continue
+
+        knowledge_revalidation=_compile_knowledge_revalidation(clause,compiled_parts)
+        if knowledge_revalidation is not None:
+            actions.append(knowledge_revalidation["action"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"INDEPENDENT_KNOWLEDGE_REVALIDATION",
+                **knowledge_revalidation["evidence"],
+            })
+            continue
 
         literal_json=_compile_literal_json_records(clause,root)
         if literal_json is not None:
