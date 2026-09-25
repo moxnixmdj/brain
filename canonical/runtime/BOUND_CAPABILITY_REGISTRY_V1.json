@@ -821,6 +821,50 @@
           "distinct_imported_modules": 41
         }
       }
+    },
+    "python.tests.audit.unittest": {
+      "provides": [
+        "python.tests.audit"
+      ],
+      "requires": [],
+      "keywords": [
+        "python",
+        "tests",
+        "audit",
+        "unittest",
+        "passed",
+        "failed",
+        "skipped"
+      ],
+      "cost": 2,
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "adapter_module": "python_test_audit",
+      "entrypoint": "run",
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "python.tests.audit.unittest",
+          "source_root": "${input.source_root}",
+          "pattern": "${input.pattern}",
+          "output_path": "${input.output_path}",
+          "timeout_s": 180
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "source": {
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "incremental_spend_usd": 0,
+      "status": "BOUND_PENDING_INDEPENDENT_VERIFICATION"
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
