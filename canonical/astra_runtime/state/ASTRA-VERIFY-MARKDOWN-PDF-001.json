@@ -16,6 +16,7 @@
     "step_id": "independent-pypdf-semantic-check",
     "step_index": 2
   },
+  "completed_at_utc": "2026-09-25T00:03:12.993491+00:00",
   "created_at_utc": "2026-09-25T00:01:18.980588+00:00",
   "history": [
     {
@@ -59,14 +60,42 @@
       },
       "step_id": "independent-pypdf-semantic-check",
       "step_index": 2
+    },
+    {
+      "completed_at_utc": "2026-09-25T00:03:12.969970+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib,re,sys\nroot=pathlib.Path('.').resolve()\np=root/'canonical/runtime/astra_runtime.py'\ns=importlib.util.spec_from_file_location('astra_runtime_pdf_readback',p)\nm=importlib.util.module_from_spec(s); sys.modules[s.name]=m; s.loader.exec_module(m)\nout=m._invoke_bound_capability({\n 'capability_id':'pdf.extract.text.pypdf',\n 'path':'canonical/astra_runtime/tmp/MARKDOWN_PDF_VERIFY.pdf',\n 'max_pages':20\n})\ntext=str(out.get('text') or '')\nrequired=['PROJECT BRAIN PDF CONVERSION','ALPHA-VERIFY-7319','BETA-VERIFY-2846','VERIFIED','COMPLETE']\nnorm=lambda x: re.sub(r'[^A-Z0-9]+','',str(x).upper())\nobserved_norm=norm(text)\nmissing=[x for x in required if norm(x) not in observed_norm]\nassert not missing,{'missing':missing,'text':text}\nev={'schema':'PROJECT_BRAIN_INDEPENDENT_SEMANTIC_VERIFICATION_V1','verified':True,'verification_mode':'LAYOUT_INSENSITIVE_ALNUM','verifier_capability':'pdf.extract.text.pypdf','required_strings':required,'extracted_text':text,'normalized_text':observed_norm}\n(root/'canonical/astra_runtime/evidence/ASTRA-VERIFY-MARKDOWN-PDF-001__INDEPENDENT.json').write_text(json.dumps(ev,indent=2,sort_keys=True)+'\\n')\nprint('MARKDOWN_PDF_INDEPENDENT_SEMANTIC_VERIFIED')\nPY",
+        "duration_s": 1.273,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "MARKDOWN_PDF_INDEPENDENT_SEMANTIC_VERIFIED\n"
+      },
+      "step_id": "independent-pypdf-semantic-check",
+      "step_index": 2
+    },
+    {
+      "completed_at_utc": "2026-09-25T00:03:12.993012+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport json,pathlib\nroot=pathlib.Path('.').resolve()\nrp=root/'canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json'\nreg=json.loads(rp.read_text())\ncap=reg['capabilities']['document.convert.markdown_pdf.pandoc_weasyprint']\nassert cap['status']=='BOUND_PENDING_INDEPENDENT_VERIFICATION'\nie=json.loads((root/'canonical/astra_runtime/evidence/ASTRA-VERIFY-MARKDOWN-PDF-001__INDEPENDENT.json').read_text())\nassert ie.get('verified') is True\ncap['status']='VERIFIED_BOUND_CAPABILITY'\ncap['verification']={\n 'mission_id':'ASTRA-VERIFY-MARKDOWN-PDF-001',\n 'independent_verified':True,\n 'independent_verifier_capability':'pdf.extract.text.pypdf',\n 'verification_evidence':'canonical/astra_runtime/evidence/ASTRA-VERIFY-MARKDOWN-PDF-001__INDEPENDENT.json'\n}\nrp.write_text(json.dumps(reg,indent=2,sort_keys=True)+'\\n')\nprint('MARKDOWN_PDF_CAPABILITY_PROMOTED')\nPY",
+        "duration_s": 0.023,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "MARKDOWN_PDF_CAPABILITY_PROMOTED\n"
+      },
+      "step_id": "promote-markdown-pdf-capability",
+      "step_index": 3
     }
   ],
   "mission_id": "ASTRA-VERIFY-MARKDOWN-PDF-001",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_MARKDOWN_PDF_001.json",
-  "mission_sha256": "a643a5e098bb84eb2d3439756150a5f033aa0b33985e86f77d3257782c287c15",
-  "next_step": 2,
+  "mission_sha256": "56908630b46204064d976235b83b99aac2d4336d18461d9739b428a0fe846182",
+  "next_step": 4,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
-  "status": "BLOCKED",
-  "updated_at_utc": "2026-09-25T00:01:47.671102+00:00"
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T00:03:12.993027+00:00"
 }

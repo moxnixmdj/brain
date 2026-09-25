@@ -1,0 +1,15 @@
+{
+  "extracted_text": "PROJECT BRAIN PDF\nCONVERSION\nCapability State\nALPHA-VERIFY -7319 VERIFIED\nBETA-VERIFY -2846 COMPLETE",
+  "normalized_text": "PROJECTBRAINPDFCONVERSIONCAPABILITYSTATEALPHAVERIFY7319VERIFIEDBETAVERIFY2846COMPLETE",
+  "required_strings": [
+    "PROJECT BRAIN PDF CONVERSION",
+    "ALPHA-VERIFY-7319",
+    "BETA-VERIFY-2846",
+    "VERIFIED",
+    "COMPLETE"
+  ],
+  "schema": "PROJECT_BRAIN_INDEPENDENT_SEMANTIC_VERIFICATION_V1",
+  "verification_mode": "LAYOUT_INSENSITIVE_ALNUM",
+  "verified": true,
+  "verifier_capability": "pdf.extract.text.pypdf"
+}
