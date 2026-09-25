@@ -1,0 +1,1428 @@
+{
+  "attempts": [
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "9a43a8ba7c2c9693ae985c3a88b4f43d47828fb53d0fc25c1656477e4463b0bd",
+        "executables": [],
+        "package": "r-cran-png",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.1-8-1build2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 88.0,
+        "archive_sha256": "9a43a8ba7c2c9693ae985c3a88b4f43d47828fb53d0fc25c1656477e4463b0bd",
+        "binding_kind": "apt",
+        "description": "GNU R package to read and write PNG images",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "png"
+        ],
+        "name": "r-cran-png",
+        "packages": [],
+        "query": "png",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.1-8-1build2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "b2ab8d82b0bd2bb959852670d725c41e0c3b19a9f02ab0b8bf27eb01340043e9",
+        "executables": [
+          {
+            "executable": "/usr/bin/ccdiff",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "usage: ccdiff [options] file1 [file2]\n       ccdiff [options] dir1   dir2\n       ccdiff --man | --info\n\tfile1 or file2 can be - (but not both)\n   -V     --version      Show version and exit\n   -v[1]  --verbose[=1]  Set verbosity\n  Diff options:\n   -U     --utf-8                 Input is in UTF-8\n   -u[3]  --unified=3             Show a unified diff\n          --no-header             Skip header with file names/stamps\n   -I     --index                 Add indices to the change chunks\n   -I n   --index=4               Only show chunk n\n   -w     --ignore-all-space      Ignore all whitespace\n   -b     --ignore-space-change   Ignore horizontal whitespace changes\n   -Z     --ignore-trailing-space Ignore whitespace at line ending\n   -B     --ignore-blank-lines    Ignore changes where lines are all blank\n   -i     --ignore-case           Ignore case changes\n   --dc=C --diff-class=C          Select Algorithm::Diff (AD or PP)\n                                      or Algorithm::Diff::XS (XS = default)\n  Other options:\n   -t n   --threshold=2  Horizontal line diff threshold\n   -h n   --heuristics=n Horizontal char diff threshold\n   -e n   --ellipsis=n   Compress horizontal equal sections\n   -m     --markers      Use markers to indicate change positions\n   -a     --ascii        Use ASCII instead of Unicode indicators\n          --no-color     Reset all colors to none.\n          --list-colors  List available colors and exit\n          --old=red      Color to indicate removed content\n          --new=green    Color to indicate added   content\n          --bg=white     Background color for colored indicators\n   -p     --pink         Shortcut for --old=magenta\n   -r     --reverse      Reverse/invert the colors of the indicators\n   -s     --swap         Swap old/new color indicators\n          --settings     Show default settings (after reading rc)"
+              }
+            ]
+          }
+        ],
+        "package": "ccdiff",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.33-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 82.0,
+        "archive_sha256": "b2ab8d82b0bd2bb959852670d725c41e0c3b19a9f02ab0b8bf27eb01340043e9",
+        "binding_kind": "apt",
+        "description": "Colored Character Diff",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "character"
+        ],
+        "name": "ccdiff",
+        "packages": [],
+        "query": "if",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.33-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "f2480a7867ce5cc52de00fa3058779568ff87ec320d2705d744bd6424dd114c5",
+        "executables": [
+          {
+            "executable": "/usr/bin/pngphoon",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "unknown option: '?'"
+              }
+            ]
+          }
+        ],
+        "package": "pngphoon",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.3-3build2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 74.0,
+        "archive_sha256": "f2480a7867ce5cc52de00fa3058779568ff87ec320d2705d744bd6424dd114c5",
+        "binding_kind": "apt",
+        "description": "Creates a png file with the current phase of the moon",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "png"
+        ],
+        "name": "pngphoon",
+        "packages": [],
+        "query": "png",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.3-3build2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "613c5a22316489ec6a9ce5d59190293df15dd4612b55432dde04c62f7c1a0e25",
+        "executables": [
+          {
+            "executable": "/usr/bin/qrencode",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "qrencode version 4.1.1\nCopyright (C) 2006-2017 Kentaro Fukuchi\nUsage: qrencode [-o FILENAME] [OPTION]... [STRING]\nEncode input data in a QR Code and save as a PNG or EPS image.\n\n  -h, --help   display the help message. -h displays only the help of short\n               options.\n\n  -o FILENAME, --output=FILENAME\n               write image to FILENAME. If '-' is specified, the result\n               will be output to standard output. If -S is given, structured\n               symbols are written to FILENAME-01.png, FILENAME-02.png, ...\n               (suffix is removed from FILENAME, if specified)\n\n  -r FILENAME, --read-from=FILENAME\n               read input data from FILENAME.\n\n  -s NUMBER, --size=NUMBER\n               specify module size in dots (pixels). (default=3)\n\n  -l {LMQH}, --level={LMQH}\n               specify error correction level from L (lowest) to H (highest).\n               (default=L)\n\n  -v NUMBER, --symversion=NUMBER\n               specify the minimum version of the symbol. See SYMBOL VERSIONS\n               for more information. (default=auto)\n\n  -m NUMBER, --margin=NUMBER\n               specify the width of the margins. (default=4 (2 for Micro QR)))\n\n  -d NUMBER, --dpi=NUMBER\n               specify the DPI of the generated PNG. (default=72)\n\n  -t {PNG,PNG32,EPS,SVG,XPM,ANSI,ANSI256,ASCII,ASCIIi,UTF8,UTF8i,ANSIUTF8,ANSIUTF8i,ANSI256UTF8},\n  --type={PNG,PNG32,EPS,SVG,XPM,ANSI,ANSI256,ASCII,ASCIIi,UTF8,UTF8i,ANSIUTF8,ANSIUTF8i,ANSI256UTF8}\n               specify the type of the generated image. (default=PNG)\n\n  -S, --structured\n               make structured symbols. Version must be specified with '-v'.\n\n  -k, --kanji  assume that the input text contains kanji (shift-jis).\n\n  -c, --casesensitive\n               encode lower-case alphabet characters in 8-bit mode. (default)\n\n  -i, --ignorecase\n               ignore case distinctions and use only upper-case characters.\n\n  -8, --8bit   encode entire data in 8-bit mode. -k, -c and -i will be ignored.\n\n  -M, --micro  encode in a Micro QR Code.\n\n      --rle    enable run-length encoding for SVG.\n\n      --svg-path\n               use single path to draw modules for SVG.\n\n      --inline only useful for SVG output, generates an SVG without the XML tag.\n\n      --foreground=RRGGBB[AA]\n      --background=RRGGBB[AA]\n               specify foreground/background color in hexadecimal notation.\n               6-digit (RGB) or 8-digit (RGBA) form are supported.\n               Color output support available only in PNG, EPS and SVG.\n\n      --strict-version\n               disable automatic version number adjustment. If the input data is\n               too large for the specified version, the program exits with the\n               code of 1.\n\n  -V, --version\n               display the version number and copyrights of the qrencode.\n\n      --verbose\n               display verbose information to stderr.\n\n  [STRING]     input data. If it is not specified, data will be taken from\n               standard input.\n\nSYMBOL VERSIONS\n               The symbol versions of QR Code range from Version 1 to Version\n               40. Each version has a different module configuration or number\n               of modules, ranging from Version 1 (21 x 21 modules) up to\n               Version 40 (177 x 177 modules). Each higher version number\n               comprises 4 additional modules per side by default. See\n               http://www.qrcode.com/en/about/version.html for a detailed\n               version list."
+              }
+            ]
+          }
+        ],
+        "package": "qrencode",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "4.1.1-1build2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 74.0,
+        "archive_sha256": "613c5a22316489ec6a9ce5d59190293df15dd4612b55432dde04c62f7c1a0e25",
+        "binding_kind": "apt",
+        "description": "QR Code encoder into PNG image",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "png"
+        ],
+        "name": "qrencode",
+        "packages": [],
+        "query": "png",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "4.1.1-1build2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "a51637e49ffc35c41d7b153094e9b3e9459a083a594da6583d7ddf47c48cf535",
+        "executables": [],
+        "package": "famfamfam-flag-png",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.1-3.2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "a51637e49ffc35c41d7b153094e9b3e9459a083a594da6583d7ddf47c48cf535",
+        "binding_kind": "apt",
+        "description": "Free collection of countries' flags",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "png"
+        ],
+        "name": "famfamfam-flag-png",
+        "packages": [],
+        "query": "png",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.1-3.2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "38286c706cbe0d3b6e2512297691f826f26a0713addca1f252f9530c9226d070",
+        "executables": [],
+        "package": "gap-character-tables",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.3.7-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "38286c706cbe0d3b6e2512297691f826f26a0713addca1f252f9530c9226d070",
+        "binding_kind": "apt",
+        "description": "GAP Library of character tables",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "character"
+        ],
+        "name": "gap-character-tables",
+        "packages": [],
+        "query": "character",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.3.7-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "a77eaedcd6a1ade84be9cd1cc18a3f327feb11ee09e71d53a37c66266af47705",
+        "executables": [],
+        "package": "gedit-plugin-character-map",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "46.0-2build3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "a77eaedcd6a1ade84be9cd1cc18a3f327feb11ee09e71d53a37c66266af47705",
+        "binding_kind": "apt",
+        "description": "Character Map plugin for gedit",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "character"
+        ],
+        "name": "gedit-plugin-character-map",
+        "packages": [],
+        "query": "character",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-2build3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "bb7d5f37ebb091bde0b96bdb0da4c525d4b7be8d761b900980b9e716c70e84df",
+        "executables": [],
+        "package": "iso-flags-png-320x240",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.0.2-2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "bb7d5f37ebb091bde0b96bdb0da4c525d4b7be8d761b900980b9e716c70e84df",
+        "binding_kind": "apt",
+        "description": "ISO country flags in PNG format (320x240)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "png"
+        ],
+        "name": "iso-flags-png-320x240",
+        "packages": [],
+        "query": "png",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.0.2-2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "678f46c34c37a0b4da04a2f0b204c844ddfbbc37b481720cb289ac2857b81a65",
+        "executables": [],
+        "package": "minetest-mod-character-creator",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.2-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "678f46c34c37a0b4da04a2f0b204c844ddfbbc37b481720cb289ac2857b81a65",
+        "binding_kind": "apt",
+        "description": "Minetest module to customize your skin",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "character"
+        ],
+        "name": "minetest-mod-character-creator",
+        "packages": [],
+        "query": "if",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.2-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "afd3b0bb4d73678354663abbb0756478e894081583c89f8f23f769f3157bdd47",
+        "executables": [],
+        "package": "node-character-parser",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "3.1.0-4"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "afd3b0bb4d73678354663abbb0756478e894081583c89f8f23f769f3157bdd47",
+        "binding_kind": "apt",
+        "description": "JavaScript parser character by character",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "character"
+        ],
+        "name": "node-character-parser",
+        "packages": [],
+        "query": "character",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.1.0-4",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "5d242de9fb2271c2ded095ddeef98a6efe4df6f7f13425f62e36be96b45d553a",
+        "executables": [],
+        "package": "node-first-chunk-stream",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "4.0.0-2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "5d242de9fb2271c2ded095ddeef98a6efe4df6f7f13425f62e36be96b45d553a",
+        "binding_kind": "apt",
+        "description": "buffer and transform the first chunk in a stream",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "first"
+        ],
+        "name": "node-first-chunk-stream",
+        "packages": [],
+        "query": "first",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "4.0.0-2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "76f6c968384e59f8d8ecd41dfeea2b161378c73060ac3d4df2265d6c154e4ca5",
+        "executables": [],
+        "package": "node-locate-character",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "2.0.5+repack-5"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "76f6c968384e59f8d8ecd41dfeea2b161378c73060ac3d4df2265d6c154e4ca5",
+        "binding_kind": "apt",
+        "description": "Helper to find the line and column of a character in a string",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "character"
+        ],
+        "name": "node-locate-character",
+        "packages": [],
+        "query": "character",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.0.5+repack-5",
+        "zero_cost_eligible": true
+      }
+    }
+  ],
+  "goal": "If its first hexadecimal character is one of a,b,c,d,e,f, generate a QR code image for the observed UUID and save it to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_QR.png; otherwise generate a Code 128 barcode image for the same observed UUID and save it to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_BARCODE.png",
+  "mission_id": "ASTRA-RUNTIME-DYNAMIC-CAPABILITY-CHOICE-001",
+  "role_conditioned_discovery": [
+    {
+      "binding_performed": false,
+      "candidate_count": 24,
+      "candidates": [
+        {
+          "archive_sha256": "a51637e49ffc35c41d7b153094e9b3e9459a083a594da6583d7ddf47c48cf535",
+          "binding_kind": "apt",
+          "description": "Free collection of countries' flags",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "famfamfam-flag-png",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.1-3.2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "bb7d5f37ebb091bde0b96bdb0da4c525d4b7be8d761b900980b9e716c70e84df",
+          "binding_kind": "apt",
+          "description": "ISO country flags in PNG format (320x240)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "iso-flags-png-320x240",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.0.2-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "6cc284be9f51e2f973a1cc56b57e3be817840983a33333270770022f88acebca",
+          "binding_kind": "apt",
+          "description": "clip art in PNG format",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "openclipart-png",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1:0.18+dfsg-19ubuntu2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "fd87d4e2cd86ea63d4f548c7203763bcc5139444a335e038d5942e235d8bfebc",
+          "binding_kind": "apt",
+          "description": "PNG: The Definitive Guide",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "png-definitive-guide",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "20060430-4",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "9a43a8ba7c2c9693ae985c3a88b4f43d47828fb53d0fc25c1656477e4463b0bd",
+          "binding_kind": "apt",
+          "description": "GNU R package to read and write PNG images",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "r-cran-png",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.1-8-1build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "ad7f808a4478ad7b8ecdbba98d3b47a6da4cdea4044a94f10e8cb5ae3a37cc5d",
+          "binding_kind": "apt",
+          "description": "ANSI and ASCII art to PNG converter",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "ansilove",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "4.2.0-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "0cbbd1d73bd29e5476a1332f2705275d1425742598ecdeba231082f941c9c703",
+          "binding_kind": "apt",
+          "description": "assemble APNG animation from PNG/TGA image sequence",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "apngasm",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.91-5build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "a3b6b684f6b071f49ea4782544be00d2f60919e0d0713ec03655c69ec6b0b63c",
+          "binding_kind": "apt",
+          "description": "deconstruct APNG file into a sequence of PNG frames",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "apngdis",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.9-6build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "9b74bb20afa41c42c52027aa9240cb2a0d9075c0c8ecf536f9ae669df34a6036",
+          "binding_kind": "apt",
+          "description": "SVG to PDF/PS/PNG converter based on Cairo",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "cairosvg",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.7.1-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "1983103def3dec971da6c57b19ec54f0c2fe646c18c532573b067090c7781a12",
+          "binding_kind": "apt",
+          "description": "convert DVI files to PNG graphics",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "dvipng",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.15-1.1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "8a9234072c70a4dfc264c197ad261f169839c58641040c47069142279588f823",
+          "binding_kind": "apt",
+          "description": "FITS to PNG converter",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "fitspng",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.0-2build3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "e5fa2a359728ad905747730928c2ca801653deab361318a670ca7888f7ecfa38",
+          "binding_kind": "apt",
+          "description": "converts jpg and png images to ascii",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "jp2a",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.1.1-2ubuntu2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "826b9be722f02eaa983e6d0f6c31ee12cf7cf53ef963f95fb963e704c5954027",
+          "binding_kind": "apt",
+          "description": "advanced PNG (Portable Network Graphics) optimizer",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "optipng",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.7.8+ds-1build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "15dbb7c871313ba1a4d691a9d0b3a27cbb9a773d1a85b78cea4100dc85487d59",
+          "binding_kind": "apt",
+          "description": "Converts PNG images into three dimensional representations.",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "png23d",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.10-1.3build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "0cd18fb658c39a154bc8fb9566f06f1cf8aafd6f1ef08639e55d4ded85ffbe97",
+          "binding_kind": "apt",
+          "description": "transforms a PNG image to a web page",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "png2html",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.1-9",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "4c678e1dba13f61ff0d73d20fb622c810e7853bee6981b51eede8dee9bed7d2a",
+          "binding_kind": "apt",
+          "description": "CLI utility for converting small PNG images to SVG Tiny 1.2",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "png2svg",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.5.4-1ubuntu0.3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "9cd9d382a3c6c27c482b0997401391273e9f2716c6c29f038ce841c37fbc5e43",
+          "binding_kind": "apt",
+          "description": "print info and check PNG, JNG and MNG files",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "pngcheck",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "3.0.3-3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "78807cc9628680bf5a668a722b388a1a13e72eaf88c9a9fd88ed88e4cc9506c3",
+          "binding_kind": "apt",
+          "description": "optimizes PNG (Portable Network Graphics) files",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "pngcrush",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.8.13-1build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "101114bdfaa1b2acd9178465a515f6ffbc214a71a75ae191d28047bbf57215a0",
+          "binding_kind": "apt",
+          "description": "Display metadata information from PNG images",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "pngmeta",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.11-10build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "30a840c7336368e327e7b9d8f3f7d506cfe805aa81cc600aa9369a66165430cb",
+          "binding_kind": "apt",
+          "description": "tool for optimizing PNG (Portable Network Graphics) images",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "pngnq",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.1+ds-3build1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "f2480a7867ce5cc52de00fa3058779568ff87ec320d2705d744bd6424dd114c5",
+          "binding_kind": "apt",
+          "description": "Creates a png file with the current phase of the moon",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "pngphoon",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.3-3build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "924fe4b18c86e9314b5667ea4945916f320e8c785f14a5e99edd2d370441164c",
+          "binding_kind": "apt",
+          "description": "PNG (Portable Network Graphics) image optimising utility",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "pngquant",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.18.0-1build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "6bf527d83d97fb1dfdc72f216f6019da8c6e06827ffbcfd1af40a6be36173607",
+          "binding_kind": "apt",
+          "description": "series of tools for PNG (Portable Network Graphics) images",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "pngtools",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.5~git20220314.1ccca3a-2ubuntu3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "613c5a22316489ec6a9ce5d59190293df15dd4612b55432dde04c62f7c1a0e25",
+          "binding_kind": "apt",
+          "description": "QR Code encoder into PNG image",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "qrencode",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "4.1.1-1build2",
+          "zero_cost_eligible": true
+        }
+      ],
+      "effect": "png",
+      "errors": [],
+      "queries": [
+        "png"
+      ],
+      "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+      "source": "APT_CATALOG",
+      "source_url": null
+    },
+    {
+      "binding_performed": false,
+      "candidate_count": 24,
+      "candidates": [
+        {
+          "archive_sha256": "5d242de9fb2271c2ded095ddeef98a6efe4df6f7f13425f62e36be96b45d553a",
+          "binding_kind": "apt",
+          "description": "buffer and transform the first chunk in a stream",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "first"
+          ],
+          "name": "node-first-chunk-stream",
+          "packages": [],
+          "query": "first",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "4.0.0-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "351699d60cc81e5837d08d84c2e2f882b30f762f2db1bf4c86b39574304d4d5b",
+          "binding_kind": "apt",
+          "description": "PostgreSQL extension providing first and last aggregate functions",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "first"
+          ],
+          "name": "postgresql-16-first-last-agg",
+          "packages": [],
+          "query": "first",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.1.4-4-gd63ea3b-7",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "26eebd0e3bba9f59706a46a43bfe339d972980b46a561922ef2b665903f14a9a",
+          "binding_kind": "apt",
+          "description": "dependency package to pull in Valgrind if it's available",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "if"
+          ],
+          "name": "valgrind-if-available",
+          "packages": [],
+          "query": "if",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "3.18.1-1-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "90cd188da4dee7c184dc991ffee4fe71734f13499328469c48d85af5961ed886",
+          "binding_kind": "apt",
+          "description": "Standalone 3D first person online deathmatch shooter",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "first"
+          ],
+          "name": "alien-arena",
+          "packages": [],
+          "query": "first",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "7.71.3+dfsg-3ubuntu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "ad567717661ede42574331091d613f93ae94c4a8381c7bd07ed1feb41562bfa4",
+          "binding_kind": "apt",
+          "description": "Ambisonic decoder for first and second order",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "first"
+          ],
+          "name": "ambdec",
+          "packages": [],
+          "query": "first",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.7.1-1build3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "9b9cb073674dea90be71d69b5ee3dd309658194a5130be3e4947a881b1311f0f",
+          "binding_kind": "apt",
+          "description": "valgrind wrapper that first downloads debug symbols",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "first"
+          ],
+          "name": "apport-valgrind",
+          "packages": [],
+          "query": "first",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.28.3-0ubuntu0.1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "2dbcf62ef8e774821851af59fa739e6ac0fc5e1613344601a865fbbd634c56a9",
+          "binding_kind": "apt",
+          "description": "realistic first-person-shooter",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "first"
+          ],
+          "name": "assaultcube",
+          "packages": [],
+          "query": "first",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.3.0.2+dfsg-5",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "9d901ae57b2f690dbec8edfc48dad67f14d331fb523ad93c75811b74d4a28887",
+          "binding_kind": "apt",
+          "description": "Breadth-first version of find(1)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "first"
+          ],
+          "name": "bfs",
+          "packages": [],
+          "query": "first",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "3.1.2-1build1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "2d4d4c3c53aa5ff49d3805e0c2d93960de3c39a914bad9a2ce5d9750f3a0be83",
+          "binding_kind": "apt",
+          "description": "copy all but the first few lines",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "first"
+          ],
+          "name": "buthead",
+          "packages": [],
+          "query": "first",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.1-7",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "5b1b396b19be68726d48c42960c326a1f4a8cf27743287b264ccdc4f0f1aed94",
+          "binding_kind": "apt",
+          "description": "3D first person tank battle game",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "first"
+          ],
+          "name": "bzflag",
+          "packages": [],
+          "query": "first",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.4.26-1build3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "513252c03fd7f9ec33ae5e50b09e0da6a87636b9979a3d2c670bbf26a803785a",
+          "binding_kind": "apt",
+          "description": "3D first person tank battle game -- client",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "first"
+          ],
+          "name": "bzflag-client",
+          "packages": [],
+          "query": "first",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.4.26-1build3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "2bb238a378e4e281e9167ac6c2a99d349679e2c87e93efb768b7aa60f6fc529a",
+          "binding_kind": "apt",
+          "description": "3D first person tank battle game -- data",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "first"
+          ],
+          "name": "bzflag-data",
+          "packages": [],
+          "query": "first",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.4.26-1build3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "4f01cf9920f53cb14918c3dee03d2a548746ca935a5a176a4465105c74c6fcca",
+          "binding_kind": "apt",
+          "description": "3D first person tank battle game -- server",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "first"
+          ],
+          "name": "bzflag-server",
+          "packages": [],
+          "query": "if",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.4.26-1build3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "5750a45b54a5a829c4f8cf4d70488beb9e223826ef35c29484fb8f106c4d49c4",
+          "binding_kind": "apt",
+          "description": "automatically resize the root partition on first boot",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "first"
+          ],
+          "name": "cloud-initramfs-growroot",
+          "packages": [],
+          "query": "first",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.49~24.04.1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "e616df51cdfa51b30620eafe0bbed16163fe073467859f48571ef4eb5c2839e1",
+          "binding_kind": "apt",
+          "description": "3D first-person shooter game engine",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "first"
+          ],
+          "name": "cube2",
+          "packages": [],
+          "query": "if",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.0.20201227+dfsg-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "3570aa439a910b540fcc1d542517d9d67ee3672436b7ace1130f504f839b08d8",
+          "binding_kind": "apt",
+          "description": "old-school first person shooter game",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "first"
+          ],
+          "name": "cytadela",
+          "packages": [],
+          "query": "first",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.1.0-4build1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "273a483fc86e609ac05742d3e6df127ba7bdec559d4405c93dc15c25695fbde0",
+          "binding_kind": "apt",
+          "description": "port of the 1995 classic game Descent 1: First Strike",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "first"
+          ],
+          "name": "d1x-rebirth",
+          "packages": [],
+          "query": "first",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.58.1-1.2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "b735427a831ca814a11f48f77d73345796cecd7629b6fa355dd74512a86e179f",
+          "binding_kind": "apt",
+          "description": "Game engine for Quake and similar 3D first person shooter games",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "first"
+          ],
+          "name": "darkplaces",
+          "packages": [],
+          "query": "first",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0~20180908~beta1-5build3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c87506bb195bf4c0ee85eac2833eba3bcf8b249727ddb22556433026bbfab3d4",
+          "binding_kind": "apt",
+          "description": "First boot configuration for Raspberry Pi",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "first"
+          ],
+          "name": "edubuntu-firstboot",
+          "packages": [],
+          "query": "first",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "24.04.26.1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "b100d7f5ee3474ed58be93bc1718754c82256d3cb018057374faf05244578ec2",
+          "binding_kind": "apt",
+          "description": "semi-abstract first person 3d-shooter game",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "first"
+          ],
+          "name": "enemylines3",
+          "packages": [],
+          "query": "first",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.25-1build3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "5e4090aee32c756cfbf1f317f4592ee2511a273a0d3bc177dda4e132ca0423a8",
+          "binding_kind": "apt",
+          "description": "first person 3d-shooter game",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "first"
+          ],
+          "name": "enemylines7",
+          "packages": [],
+          "query": "first",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.6-6",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "e904a00c594e34168eb977879bfe73220ceee107866db0364f3fc1882261a2a5",
+          "binding_kind": "apt",
+          "description": "Fence Agents for Red Hat Cluster - IF-MIB SNMP agent",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "if"
+          ],
+          "name": "fence-agents-ifmib",
+          "packages": [],
+          "query": "if",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "4.12.1-2~exp1ubuntu4",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "f8d21412da10be26351eb1166934804484144c6d09a155a609e042cb1e889a23",
+          "binding_kind": "apt",
+          "description": "functional-first programming language - compiler for the CLI",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "first"
+          ],
+          "name": "fsharp",
+          "packages": [],
+          "query": "first",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "4.0.0.4+dfsg2-2build1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "269edee64d4a83e3cb1f9ced22624af1ba67fcfebf9b6963c51001c09a92b977",
+          "binding_kind": "apt",
+          "description": "Debian's first-person shooter games",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "first"
+          ],
+          "name": "games-fps",
+          "packages": [],
+          "query": "if",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "5",
+          "zero_cost_eligible": true
+        }
+      ],
+      "effect": "if first",
+      "errors": [],
+      "queries": [
+        "if",
+        "first"
+      ],
+      "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+      "source": "APT_CATALOG",
+      "source_url": null
+    }
+  ],
+  "schema": "PROJECT_BRAIN_AUTO_APT_CLI_ACQUISITION_EVIDENCE_V1",
+  "status": "NO_COMPATIBLE_CONTRACT"
+}

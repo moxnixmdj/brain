@@ -1,0 +1,2623 @@
+{
+  "auto_acquisition": {
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"r-cran-png\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"ccdiff\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"pngphoon\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"qrencode\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"famfamfam-flag-png\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"gap-character-tables\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"gedit-plugin-character-map\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"iso-flags-png-320x240\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"minetest-mod-character-creator\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-character-parser\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-first-chunk-stream\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-locate-character\", \"status\": \"CONTRACT_REJECTED\"}]",
+    "status": "NOT_DISPATCHED"
+  },
+  "binding_performed": false,
+  "goal": "Using a real rendered browser, open https://httpbin.org/uuid, save a screenshot to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_UUID.png, and save the rendered result to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_UUID.json. Read the UUID from that live result. If its first hexadecimal character is one of a,b,c,d,e,f, generate a QR code image for the observed UUID and save it to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_QR.png; otherwise generate a Code 128 barcode image for the same observed UUID and save it to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_BARCODE.png. Finally independently verify that the artifact selected by the live branch decodes to the observed UUID.",
+  "mission_id": "ASTRA-RUNTIME-DYNAMIC-CAPABILITY-CHOICE-001",
+  "observed_at_utc": "2026-09-25T04:34:20.246310+00:00",
+  "result": {
+    "binding_performed": false,
+    "candidates": [
+      {
+        "archive_sha256": "38286c706cbe0d3b6e2512297691f826f26a0713addca1f252f9530c9226d070",
+        "binding_kind": "apt",
+        "description": "GAP Library of character tables",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "character"
+        ],
+        "name": "gap-character-tables",
+        "packages": [],
+        "query": "character",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.3.7-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "a77eaedcd6a1ade84be9cd1cc18a3f327feb11ee09e71d53a37c66266af47705",
+        "binding_kind": "apt",
+        "description": "Character Map plugin for gedit",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "character"
+        ],
+        "name": "gedit-plugin-character-map",
+        "packages": [],
+        "query": "character",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-2build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "678f46c34c37a0b4da04a2f0b204c844ddfbbc37b481720cb289ac2857b81a65",
+        "binding_kind": "apt",
+        "description": "Minetest module to customize your skin",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "character"
+        ],
+        "name": "minetest-mod-character-creator",
+        "packages": [],
+        "query": "if",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.2-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "afd3b0bb4d73678354663abbb0756478e894081583c89f8f23f769f3157bdd47",
+        "binding_kind": "apt",
+        "description": "JavaScript parser character by character",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "character"
+        ],
+        "name": "node-character-parser",
+        "packages": [],
+        "query": "character",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.1.0-4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "5d242de9fb2271c2ded095ddeef98a6efe4df6f7f13425f62e36be96b45d553a",
+        "binding_kind": "apt",
+        "description": "buffer and transform the first chunk in a stream",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "first"
+        ],
+        "name": "node-first-chunk-stream",
+        "packages": [],
+        "query": "first",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "4.0.0-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "76f6c968384e59f8d8ecd41dfeea2b161378c73060ac3d4df2265d6c154e4ca5",
+        "binding_kind": "apt",
+        "description": "Helper to find the line and column of a character in a string",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "character"
+        ],
+        "name": "node-locate-character",
+        "packages": [],
+        "query": "character",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.0.5+repack-5",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "bc83950d642bc262118460e531b121c7d70c7681dbaa35caf1026322bdcbdd48",
+        "binding_kind": "apt",
+        "description": "POSIX character classes for creating regular expressions",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "character"
+        ],
+        "name": "node-posix-character-classes",
+        "packages": [],
+        "query": "character",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.0.0-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "351699d60cc81e5837d08d84c2e2f882b30f762f2db1bf4c86b39574304d4d5b",
+        "binding_kind": "apt",
+        "description": "PostgreSQL extension providing first and last aggregate functions",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "first"
+        ],
+        "name": "postgresql-16-first-last-agg",
+        "packages": [],
+        "query": "first",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.1.4-4-gd63ea3b-7",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "26eebd0e3bba9f59706a46a43bfe339d972980b46a561922ef2b665903f14a9a",
+        "binding_kind": "apt",
+        "description": "dependency package to pull in Valgrind if it's available",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "if"
+        ],
+        "name": "valgrind-if-available",
+        "packages": [],
+        "query": "if",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.18.1-1-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "1f663b82f8ec95f33205d83a2909676be59f143c86b606dd26a736a2872c3992",
+        "binding_kind": "apt",
+        "description": "Full-screen character mode text editor",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "character"
+        ],
+        "name": "the",
+        "packages": [],
+        "query": "character",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 26,
+        "version": "3.3~rc1-3.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "90cd188da4dee7c184dc991ffee4fe71734f13499328469c48d85af5961ed886",
+        "binding_kind": "apt",
+        "description": "Standalone 3D first person online deathmatch shooter",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "first"
+        ],
+        "name": "alien-arena",
+        "packages": [],
+        "query": "first",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "7.71.3+dfsg-3ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ad567717661ede42574331091d613f93ae94c4a8381c7bd07ed1feb41562bfa4",
+        "binding_kind": "apt",
+        "description": "Ambisonic decoder for first and second order",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "first"
+        ],
+        "name": "ambdec",
+        "packages": [],
+        "query": "first",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.7.1-1build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "9b9cb073674dea90be71d69b5ee3dd309658194a5130be3e4947a881b1311f0f",
+        "binding_kind": "apt",
+        "description": "valgrind wrapper that first downloads debug symbols",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "first"
+        ],
+        "name": "apport-valgrind",
+        "packages": [],
+        "query": "first",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.28.3-0ubuntu0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "50a4fd217d093e8c86c33b5842c98fb3dfbb633e53ae1c5255f1f66f579bb124",
+        "binding_kind": "apt",
+        "description": "Action/RPG sidescoller, focused on story and character development",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "character"
+        ],
+        "name": "ardentryst",
+        "packages": [],
+        "query": "if",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.71-10",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "11d7b93f833db57f1ab96899ec8b92f0be739a1527c821c7df78ce3ea1dbc826",
+        "binding_kind": "apt",
+        "description": "Convert between ASCII, hexadecimal and binary representations",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "hexadecimal"
+        ],
+        "name": "ascii2binary",
+        "packages": [],
+        "query": "if",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.14-1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "2dbcf62ef8e774821851af59fa739e6ac0fc5e1613344601a865fbbd634c56a9",
+        "binding_kind": "apt",
+        "description": "realistic first-person-shooter",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "first"
+        ],
+        "name": "assaultcube",
+        "packages": [],
+        "query": "first",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.3.0.2+dfsg-5",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "9d901ae57b2f690dbec8edfc48dad67f14d331fb523ad93c75811b74d4a28887",
+        "binding_kind": "apt",
+        "description": "Breadth-first version of find(1)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "first"
+        ],
+        "name": "bfs",
+        "packages": [],
+        "query": "first",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "3.1.2-1build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "cc1c7cf81249cf261b3c53637c0b3e6216e6c7dfa68b814db58becffa2d3b6b4",
+        "binding_kind": "apt",
+        "description": "GUI to find and choose locale characters",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "character"
+        ],
+        "name": "budgie-quickchar",
+        "packages": [],
+        "query": "character",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.8.0-1build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "2d4d4c3c53aa5ff49d3805e0c2d93960de3c39a914bad9a2ce5d9750f3a0be83",
+        "binding_kind": "apt",
+        "description": "copy all but the first few lines",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "first"
+        ],
+        "name": "buthead",
+        "packages": [],
+        "query": "first",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.1-7",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "5b1b396b19be68726d48c42960c326a1f4a8cf27743287b264ccdc4f0f1aed94",
+        "binding_kind": "apt",
+        "description": "3D first person tank battle game",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "first"
+        ],
+        "name": "bzflag",
+        "packages": [],
+        "query": "first",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.4.26-1build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "513252c03fd7f9ec33ae5e50b09e0da6a87636b9979a3d2c670bbf26a803785a",
+        "binding_kind": "apt",
+        "description": "3D first person tank battle game -- client",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "first"
+        ],
+        "name": "bzflag-client",
+        "packages": [],
+        "query": "first",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.4.26-1build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "2bb238a378e4e281e9167ac6c2a99d349679e2c87e93efb768b7aa60f6fc529a",
+        "binding_kind": "apt",
+        "description": "3D first person tank battle game -- data",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "first"
+        ],
+        "name": "bzflag-data",
+        "packages": [],
+        "query": "first",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.4.26-1build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "4f01cf9920f53cb14918c3dee03d2a548746ca935a5a176a4465105c74c6fcca",
+        "binding_kind": "apt",
+        "description": "3D first person tank battle game -- server",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "first"
+        ],
+        "name": "bzflag-server",
+        "packages": [],
+        "query": "if",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.4.26-1build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "b2ab8d82b0bd2bb959852670d725c41e0c3b19a9f02ab0b8bf27eb01340043e9",
+        "binding_kind": "apt",
+        "description": "Colored Character Diff",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "character"
+        ],
+        "name": "ccdiff",
+        "packages": [],
+        "query": "if",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.33-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "b5d39caf37816eeb4ea4078a4735942384802829db202f973aed88364b56f4ad",
+        "binding_kind": "apt",
+        "description": "Character map for GNUstep",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "character"
+        ],
+        "name": "charmap.app",
+        "packages": [],
+        "query": "character",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.3~rc1-4build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "b1d25e560f4d3805a7d29c15c8b17b774605c72dadf425935376f13db7eab14f",
+        "binding_kind": "apt",
+        "description": "Character map for GNUstep (arch-independent files)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "character"
+        ],
+        "name": "charmap.app-common",
+        "packages": [],
+        "query": "character",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.3~rc1-4build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "1d8cdd0f9329b78a8dc9f486051ec601f2ad697ea69bc61d053b89cb8c6359b0",
+        "binding_kind": "apt",
+        "description": "CHISE db, the character information database",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "character"
+        ],
+        "name": "chise-db",
+        "packages": [],
+        "query": "character",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.3.0-2.4build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "5750a45b54a5a829c4f8cf4d70488beb9e223826ef35c29484fb8f106c4d49c4",
+        "binding_kind": "apt",
+        "description": "automatically resize the root partition on first boot",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "first"
+        ],
+        "name": "cloud-initramfs-growroot",
+        "packages": [],
+        "query": "first",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.49~24.04.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c1045ec4f9c3ef04a15c4a3205fba81a93cb459e686e74ec39fb215567c5b849",
+        "binding_kind": "apt",
+        "description": "convert 8 bit character encoding in file names and text content to UTF-8",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "character"
+        ],
+        "name": "conv-tools",
+        "packages": [],
+        "query": "character",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "20160905-4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "1cb307de053204adf0d6e4e167a0e16592f9f0672673760a4b1771992c4c01be",
+        "binding_kind": "apt",
+        "description": "To determine the width of a UTF-8 character by providing its first byte - Rust source code",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 4,
+        "matched_terms": [
+          "character",
+          "first"
+        ],
+        "name": "librust-utf8-width-dev",
+        "packages": [],
+        "query": "first",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 20,
+        "version": "0.1.5-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Read-only CharacterCheck MCP server for deterministic character context with provenance and trust.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.chaoz23/charactercheck",
+        "packages": [
+          {
+            "identifier": "charactercheck",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "uvx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.7.0"
+          }
+        ],
+        "query": "character",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/chaoz23/charactercheck"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.7.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "AI-powered organic supply chain verification: certification, OFAC, FDA import checks.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.atlasverified/atlas-mcp",
+        "packages": [],
+        "query": "if",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.atlasverified.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Analyze and score leads to identify high-potential prospects and prioritize sales outreach.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.saifs/lead-intelligence",
+        "packages": [],
+        "query": "if",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://lead-scoring-mcp.saifs.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "AI-powered scam and threat verification for phone numbers, URLs, texts, and emails.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.scamverify/mcp",
+        "packages": [],
+        "query": "if",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://scamverify.ai/api/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/scamverifyai/scamverify-ai"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "FirstKey MCP: agent wallets, free cycles faucet, and one-command site deploys on ICP.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.FirstKeyHQ/firstkey-mcp",
+        "packages": [],
+        "query": "first",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.firstkey.io/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/FirstKeyHQ/firstkey-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Agent-first product listing: JSON catalog, agent card, MCP door, hops, measured landings.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.sadri-dridi/agent-first-listing",
+        "packages": [],
+        "query": "first",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/agent-first-listing/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "subfolder": "agent-ads/agent-first-listing",
+          "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "The agent switchboard: identity, policy, loop-guard, and an append-only audit ledger.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.positif/positif",
+        "packages": [
+          {
+            "identifier": "positif-ai",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.2.1"
+          },
+          {
+            "identifier": "positif-ai",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.2.2"
+          }
+        ],
+        "query": "if",
+        "remotes": [],
+        "repository": {
+          "source": "gitlab",
+          "url": "https://gitlab.com/getpositif/positif"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "0.2.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "MCP tools: WCAG contrast, JP char/X-weight count, WebP convert, JSON-LD, llms.txt.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.First-CH/tools-mcp",
+        "packages": [
+          {
+            "identifier": "@first-ch/tools-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.4.1"
+          }
+        ],
+        "query": "first",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/First-CH/firstch-tools-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "0.4.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "37-tool MCP server: context health, memory, reasoning, truthfulness & research pipeline.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.XJTLUmedia/context-first-mcp",
+        "packages": [
+          {
+            "identifier": "context-first-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.2.2"
+          }
+        ],
+        "query": "first",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/XJTLUmedia/Context-First-MCP"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "1.2.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Android phone camera, sensors & files for any MCP client \u2014 local, no cloud, no ADB.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.hufirst/onsense",
+        "packages": [
+          {
+            "identifier": "onsense",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "uvx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.3.20"
+          }
+        ],
+        "query": "first",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/hufirst/onsense"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "0.3.20",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "An MCP that teaches AI agents to use the wallets they already have. Teacher, not butler.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.lisamaraventano-spine/firstdollar",
+        "packages": [
+          {
+            "identifier": "firstdollar",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.7"
+          }
+        ],
+        "query": "first",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/lisamaraventano-spine/firstdollar"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "1.0.7",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "FRC documentation MCP server for WPILib, REV, CTRE, Redux, and PhotonVision.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.ramalamadingdong/first-agentic-csa",
+        "packages": [
+          {
+            "identifier": "first-agentic-csa",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.7.0"
+          }
+        ],
+        "query": "first",
+        "remotes": [],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "0.7.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Look up what your verification method cannot see: 48 failures that report success.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.simulacra/verifyfirst",
+        "packages": [
+          {
+            "identifier": "verifyfirst-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.8.0"
+          }
+        ],
+        "query": "first",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "subfolder": "pypi",
+          "url": "https://github.com/simulacra/verifyfirst"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "1.8.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Three MCP tools: fetch_page, fetch_pages_batch, search_web. Ad-free Markdown for AI agents.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.yubinkim444/ai-first-scraper-mcp",
+        "packages": [
+          {
+            "identifier": "ai-first-scraper-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "uvx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.2"
+          }
+        ],
+        "query": "first",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/yubinkim444/ai-first-scraper-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "1.0.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Fear ladders for your assistant: small exposure steps, logged attempts, real progress.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.lifeisagame/conquer-fear",
+        "packages": [],
+        "query": "if",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.lifeisagame.ai/mcp/conquer-fear"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "AI-driven daily-focus todo app on your phone (max 3/day). View & add todos from any MCP client.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.lifeisagame/signal-not-noise",
+        "packages": [],
+        "query": "if",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://signal.lifeisagame.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "1.0.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Independent fact-checking for AI answers: a verdict and sources for every claim.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.noevant/fidenta-verify",
+        "packages": [],
+        "query": "if",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://verify.noevant.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Describe a trading strategy in plain English and deploy a live signal model in one call. No signup.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.quantifyme/quantifyme",
+        "packages": [],
+        "query": "if",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.quantifyme.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Analyze customer data to make segmentation and predict which customer to focus on for more sales.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.saifs/customer-intelligence",
+        "packages": [],
+        "query": "if",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://customer-tiering-mcp-latest.saifs.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "1.0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Forecast product demand using historical sales and market signals.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.saifs/demand-forecasting",
+        "packages": [],
+        "query": "if",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://demand-forecaster-mcp.saifs.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      }
+    ],
+    "effect": "If its first hexadecimal character is one of a,b,c,d,e,f, generate a QR code image for the observed UUID and save it to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_QR.png; otherwise generate a Code 128 barcode image for the same observed UUID and save it to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_BARCODE.png",
+    "results": [
+      {
+        "binding_performed": false,
+        "candidate_count": 30,
+        "candidates": [
+          {
+            "archive_sha256": "38286c706cbe0d3b6e2512297691f826f26a0713addca1f252f9530c9226d070",
+            "binding_kind": "apt",
+            "description": "GAP Library of character tables",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "character"
+            ],
+            "name": "gap-character-tables",
+            "packages": [],
+            "query": "character",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.3.7-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "a77eaedcd6a1ade84be9cd1cc18a3f327feb11ee09e71d53a37c66266af47705",
+            "binding_kind": "apt",
+            "description": "Character Map plugin for gedit",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "character"
+            ],
+            "name": "gedit-plugin-character-map",
+            "packages": [],
+            "query": "character",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.0-2build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "678f46c34c37a0b4da04a2f0b204c844ddfbbc37b481720cb289ac2857b81a65",
+            "binding_kind": "apt",
+            "description": "Minetest module to customize your skin",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "character"
+            ],
+            "name": "minetest-mod-character-creator",
+            "packages": [],
+            "query": "if",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.2-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "afd3b0bb4d73678354663abbb0756478e894081583c89f8f23f769f3157bdd47",
+            "binding_kind": "apt",
+            "description": "JavaScript parser character by character",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "character"
+            ],
+            "name": "node-character-parser",
+            "packages": [],
+            "query": "character",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.1.0-4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "5d242de9fb2271c2ded095ddeef98a6efe4df6f7f13425f62e36be96b45d553a",
+            "binding_kind": "apt",
+            "description": "buffer and transform the first chunk in a stream",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "first"
+            ],
+            "name": "node-first-chunk-stream",
+            "packages": [],
+            "query": "first",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "4.0.0-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "76f6c968384e59f8d8ecd41dfeea2b161378c73060ac3d4df2265d6c154e4ca5",
+            "binding_kind": "apt",
+            "description": "Helper to find the line and column of a character in a string",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "character"
+            ],
+            "name": "node-locate-character",
+            "packages": [],
+            "query": "character",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2.0.5+repack-5",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "bc83950d642bc262118460e531b121c7d70c7681dbaa35caf1026322bdcbdd48",
+            "binding_kind": "apt",
+            "description": "POSIX character classes for creating regular expressions",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "character"
+            ],
+            "name": "node-posix-character-classes",
+            "packages": [],
+            "query": "character",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.0.0-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "351699d60cc81e5837d08d84c2e2f882b30f762f2db1bf4c86b39574304d4d5b",
+            "binding_kind": "apt",
+            "description": "PostgreSQL extension providing first and last aggregate functions",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "first"
+            ],
+            "name": "postgresql-16-first-last-agg",
+            "packages": [],
+            "query": "first",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.1.4-4-gd63ea3b-7",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "26eebd0e3bba9f59706a46a43bfe339d972980b46a561922ef2b665903f14a9a",
+            "binding_kind": "apt",
+            "description": "dependency package to pull in Valgrind if it's available",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "if"
+            ],
+            "name": "valgrind-if-available",
+            "packages": [],
+            "query": "if",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.18.1-1-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "1f663b82f8ec95f33205d83a2909676be59f143c86b606dd26a736a2872c3992",
+            "binding_kind": "apt",
+            "description": "Full-screen character mode text editor",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "character"
+            ],
+            "name": "the",
+            "packages": [],
+            "query": "character",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 26,
+            "version": "3.3~rc1-3.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "1cb307de053204adf0d6e4e167a0e16592f9f0672673760a4b1771992c4c01be",
+            "binding_kind": "apt",
+            "description": "To determine the width of a UTF-8 character by providing its first byte - Rust source code",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 4,
+            "matched_terms": [
+              "character",
+              "first"
+            ],
+            "name": "librust-utf8-width-dev",
+            "packages": [],
+            "query": "first",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 20,
+            "version": "0.1.5-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "90cd188da4dee7c184dc991ffee4fe71734f13499328469c48d85af5961ed886",
+            "binding_kind": "apt",
+            "description": "Standalone 3D first person online deathmatch shooter",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "first"
+            ],
+            "name": "alien-arena",
+            "packages": [],
+            "query": "first",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "7.71.3+dfsg-3ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "ad567717661ede42574331091d613f93ae94c4a8381c7bd07ed1feb41562bfa4",
+            "binding_kind": "apt",
+            "description": "Ambisonic decoder for first and second order",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "first"
+            ],
+            "name": "ambdec",
+            "packages": [],
+            "query": "first",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.7.1-1build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "9b9cb073674dea90be71d69b5ee3dd309658194a5130be3e4947a881b1311f0f",
+            "binding_kind": "apt",
+            "description": "valgrind wrapper that first downloads debug symbols",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "first"
+            ],
+            "name": "apport-valgrind",
+            "packages": [],
+            "query": "first",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "2.28.3-0ubuntu0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "50a4fd217d093e8c86c33b5842c98fb3dfbb633e53ae1c5255f1f66f579bb124",
+            "binding_kind": "apt",
+            "description": "Action/RPG sidescoller, focused on story and character development",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "character"
+            ],
+            "name": "ardentryst",
+            "packages": [],
+            "query": "if",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.71-10",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "11d7b93f833db57f1ab96899ec8b92f0be739a1527c821c7df78ce3ea1dbc826",
+            "binding_kind": "apt",
+            "description": "Convert between ASCII, hexadecimal and binary representations",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "hexadecimal"
+            ],
+            "name": "ascii2binary",
+            "packages": [],
+            "query": "if",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "2.14-1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "2dbcf62ef8e774821851af59fa739e6ac0fc5e1613344601a865fbbd634c56a9",
+            "binding_kind": "apt",
+            "description": "realistic first-person-shooter",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "first"
+            ],
+            "name": "assaultcube",
+            "packages": [],
+            "query": "first",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.3.0.2+dfsg-5",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "9d901ae57b2f690dbec8edfc48dad67f14d331fb523ad93c75811b74d4a28887",
+            "binding_kind": "apt",
+            "description": "Breadth-first version of find(1)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "first"
+            ],
+            "name": "bfs",
+            "packages": [],
+            "query": "first",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "3.1.2-1build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "cc1c7cf81249cf261b3c53637c0b3e6216e6c7dfa68b814db58becffa2d3b6b4",
+            "binding_kind": "apt",
+            "description": "GUI to find and choose locale characters",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "character"
+            ],
+            "name": "budgie-quickchar",
+            "packages": [],
+            "query": "character",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.8.0-1build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "2d4d4c3c53aa5ff49d3805e0c2d93960de3c39a914bad9a2ce5d9750f3a0be83",
+            "binding_kind": "apt",
+            "description": "copy all but the first few lines",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "first"
+            ],
+            "name": "buthead",
+            "packages": [],
+            "query": "first",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.1-7",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "5b1b396b19be68726d48c42960c326a1f4a8cf27743287b264ccdc4f0f1aed94",
+            "binding_kind": "apt",
+            "description": "3D first person tank battle game",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "first"
+            ],
+            "name": "bzflag",
+            "packages": [],
+            "query": "first",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "2.4.26-1build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "513252c03fd7f9ec33ae5e50b09e0da6a87636b9979a3d2c670bbf26a803785a",
+            "binding_kind": "apt",
+            "description": "3D first person tank battle game -- client",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "first"
+            ],
+            "name": "bzflag-client",
+            "packages": [],
+            "query": "first",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "2.4.26-1build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "2bb238a378e4e281e9167ac6c2a99d349679e2c87e93efb768b7aa60f6fc529a",
+            "binding_kind": "apt",
+            "description": "3D first person tank battle game -- data",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "first"
+            ],
+            "name": "bzflag-data",
+            "packages": [],
+            "query": "first",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "2.4.26-1build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "4f01cf9920f53cb14918c3dee03d2a548746ca935a5a176a4465105c74c6fcca",
+            "binding_kind": "apt",
+            "description": "3D first person tank battle game -- server",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "first"
+            ],
+            "name": "bzflag-server",
+            "packages": [],
+            "query": "if",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "2.4.26-1build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "b2ab8d82b0bd2bb959852670d725c41e0c3b19a9f02ab0b8bf27eb01340043e9",
+            "binding_kind": "apt",
+            "description": "Colored Character Diff",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "character"
+            ],
+            "name": "ccdiff",
+            "packages": [],
+            "query": "if",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.33-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "b5d39caf37816eeb4ea4078a4735942384802829db202f973aed88364b56f4ad",
+            "binding_kind": "apt",
+            "description": "Character map for GNUstep",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "character"
+            ],
+            "name": "charmap.app",
+            "packages": [],
+            "query": "character",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.3~rc1-4build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "b1d25e560f4d3805a7d29c15c8b17b774605c72dadf425935376f13db7eab14f",
+            "binding_kind": "apt",
+            "description": "Character map for GNUstep (arch-independent files)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "character"
+            ],
+            "name": "charmap.app-common",
+            "packages": [],
+            "query": "character",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.3~rc1-4build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "1d8cdd0f9329b78a8dc9f486051ec601f2ad697ea69bc61d053b89cb8c6359b0",
+            "binding_kind": "apt",
+            "description": "CHISE db, the character information database",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "character"
+            ],
+            "name": "chise-db",
+            "packages": [],
+            "query": "character",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.3.0-2.4build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "5750a45b54a5a829c4f8cf4d70488beb9e223826ef35c29484fb8f106c4d49c4",
+            "binding_kind": "apt",
+            "description": "automatically resize the root partition on first boot",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "first"
+            ],
+            "name": "cloud-initramfs-growroot",
+            "packages": [],
+            "query": "first",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.49~24.04.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c1045ec4f9c3ef04a15c4a3205fba81a93cb459e686e74ec39fb215567c5b849",
+            "binding_kind": "apt",
+            "description": "convert 8 bit character encoding in file names and text content to UTF-8",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "character"
+            ],
+            "name": "conv-tools",
+            "packages": [],
+            "query": "character",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "20160905-4",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "If its first hexadecimal character is one of a,b,c,d,e,f, generate a QR code image for the observed UUID and save it to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_QR.png; otherwise generate a Code 128 barcode image for the same observed UUID and save it to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_BARCODE.png",
+        "errors": [],
+        "queries": [
+          "if",
+          "first",
+          "hexadecimal",
+          "character"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "APT_CATALOG",
+        "source_url": null
+      },
+      {
+        "binding_performed": false,
+        "candidate_count": 52,
+        "candidates": [
+          {
+            "description": "Read-only CharacterCheck MCP server for deterministic character context with provenance and trust.",
+            "is_latest": true,
+            "name": "io.github.chaoz23/charactercheck",
+            "packages": [
+              {
+                "identifier": "charactercheck",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "uvx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.7.0"
+              }
+            ],
+            "query": "character",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/chaoz23/charactercheck"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.7.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "AI-powered organic supply chain verification: certification, OFAC, FDA import checks.",
+            "is_latest": true,
+            "name": "ai.atlasverified/atlas-mcp",
+            "packages": [],
+            "query": "if",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.atlasverified.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Analyze and score leads to identify high-potential prospects and prioritize sales outreach.",
+            "is_latest": true,
+            "name": "ai.saifs/lead-intelligence",
+            "packages": [],
+            "query": "if",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://lead-scoring-mcp.saifs.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "AI-powered scam and threat verification for phone numbers, URLs, texts, and emails.",
+            "is_latest": true,
+            "name": "ai.scamverify/mcp",
+            "packages": [],
+            "query": "if",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://scamverify.ai/api/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/scamverifyai/scamverify-ai"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "FirstKey MCP: agent wallets, free cycles faucet, and one-command site deploys on ICP.",
+            "is_latest": true,
+            "name": "io.github.FirstKeyHQ/firstkey-mcp",
+            "packages": [],
+            "query": "first",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.firstkey.io/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/FirstKeyHQ/firstkey-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Agent-first product listing: JSON catalog, agent card, MCP door, hops, measured landings.",
+            "is_latest": true,
+            "name": "io.github.sadri-dridi/agent-first-listing",
+            "packages": [],
+            "query": "first",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/agent-first-listing/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "subfolder": "agent-ads/agent-first-listing",
+              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Post crowdsourced content collection jobs and fetch approved files via FirstHandAPI",
+            "is_latest": true,
+            "name": "com.firsthandapi/mcp-server",
+            "packages": [
+              {
+                "identifier": "@firsthandapi/mcp-server",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": "npx",
+                "secret_environment": [
+                  "FIRSTHAND_API_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.3.1"
+              }
+            ],
+            "query": "first",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/jjfisherdev/firsthandapi-mcp-server"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 15,
+            "status": "active",
+            "version": "0.3.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "The agent switchboard: identity, policy, loop-guard, and an append-only audit ledger.",
+            "is_latest": true,
+            "name": "ai.positif/positif",
+            "packages": [
+              {
+                "identifier": "positif-ai",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.2.1"
+              },
+              {
+                "identifier": "positif-ai",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.2.2"
+              }
+            ],
+            "query": "if",
+            "remotes": [],
+            "repository": {
+              "source": "gitlab",
+              "url": "https://gitlab.com/getpositif/positif"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.2.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP tools: WCAG contrast, JP char/X-weight count, WebP convert, JSON-LD, llms.txt.",
+            "is_latest": true,
+            "name": "io.github.First-CH/tools-mcp",
+            "packages": [
+              {
+                "identifier": "@first-ch/tools-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.4.1"
+              }
+            ],
+            "query": "first",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/First-CH/firstch-tools-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.4.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "37-tool MCP server: context health, memory, reasoning, truthfulness & research pipeline.",
+            "is_latest": true,
+            "name": "io.github.XJTLUmedia/context-first-mcp",
+            "packages": [
+              {
+                "identifier": "context-first-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.2.2"
+              }
+            ],
+            "query": "first",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/XJTLUmedia/Context-First-MCP"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "1.2.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Android phone camera, sensors & files for any MCP client \u2014 local, no cloud, no ADB.",
+            "is_latest": true,
+            "name": "io.github.hufirst/onsense",
+            "packages": [
+              {
+                "identifier": "onsense",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "uvx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.3.20"
+              }
+            ],
+            "query": "first",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/hufirst/onsense"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.3.20",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "An MCP that teaches AI agents to use the wallets they already have. Teacher, not butler.",
+            "is_latest": true,
+            "name": "io.github.lisamaraventano-spine/firstdollar",
+            "packages": [
+              {
+                "identifier": "firstdollar",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.7"
+              }
+            ],
+            "query": "first",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/lisamaraventano-spine/firstdollar"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "1.0.7",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "FRC documentation MCP server for WPILib, REV, CTRE, Redux, and PhotonVision.",
+            "is_latest": true,
+            "name": "io.github.ramalamadingdong/first-agentic-csa",
+            "packages": [
+              {
+                "identifier": "first-agentic-csa",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.7.0"
+              }
+            ],
+            "query": "first",
+            "remotes": [],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.7.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Look up what your verification method cannot see: 48 failures that report success.",
+            "is_latest": true,
+            "name": "io.github.simulacra/verifyfirst",
+            "packages": [
+              {
+                "identifier": "verifyfirst-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.8.0"
+              }
+            ],
+            "query": "first",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "subfolder": "pypi",
+              "url": "https://github.com/simulacra/verifyfirst"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "1.8.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Three MCP tools: fetch_page, fetch_pages_batch, search_web. Ad-free Markdown for AI agents.",
+            "is_latest": true,
+            "name": "io.github.yubinkim444/ai-first-scraper-mcp",
+            "packages": [
+              {
+                "identifier": "ai-first-scraper-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "uvx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.2"
+              }
+            ],
+            "query": "first",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/yubinkim444/ai-first-scraper-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "1.0.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Rust MCP server and CLI for UniFi Network controller operations.",
+            "is_latest": true,
+            "name": "ai.dinglebear/runifi",
+            "packages": [
+              {
+                "identifier": "@dinglebear/runifi",
+                "registry_type": "npm",
+                "required_environment": [
+                  "UNIFI_URL",
+                  "UNIFI_API_KEY"
+                ],
+                "runtime_hint": "npx",
+                "secret_environment": [
+                  "UNIFI_API_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.2.5"
+              }
+            ],
+            "query": "if",
+            "remotes": [],
+            "repository": {
+              "id": "1238227294",
+              "source": "github",
+              "url": "https://github.com/dinglebear-ai/runifi"
+            },
+            "required_environment_count": 2,
+            "required_secret_count": 1,
+            "score": 13,
+            "status": "active",
+            "version": "0.2.5",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Rust MCP server and CLI for UniFi Network controller operations.",
+            "is_latest": true,
+            "name": "ai.dinglebear/unifi-rmcp",
+            "packages": [
+              {
+                "identifier": "unifi-rmcp",
+                "registry_type": "npm",
+                "required_environment": [
+                  "UNIFI_URL",
+                  "UNIFI_API_KEY"
+                ],
+                "runtime_hint": "npx",
+                "secret_environment": [
+                  "UNIFI_API_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.2.4"
+              }
+            ],
+            "query": "if",
+            "remotes": [],
+            "repository": {
+              "id": "1238227294",
+              "source": "github",
+              "url": "https://github.com/jmagar/unifi-rmcp"
+            },
+            "required_environment_count": 2,
+            "required_secret_count": 1,
+            "score": 13,
+            "status": "active",
+            "version": "0.2.4",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "This MCP server enables users to perform scientific computations regarding linear algebra and vect\u2026",
+            "is_latest": true,
+            "name": "ai.smithery/Aman-Amith-Shastry-scientific_computation_mcp",
+            "packages": [],
+            "query": "if",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@Aman-Amith-Shastry/scientific_computation_mcp/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Aman-Amith-Shastry/scientific_computation_mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "1.13.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Fear ladders for your assistant: small exposure steps, logged attempts, real progress.",
+            "is_latest": true,
+            "name": "ai.lifeisagame/conquer-fear",
+            "packages": [],
+            "query": "if",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.lifeisagame.ai/mcp/conquer-fear"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "AI-driven daily-focus todo app on your phone (max 3/day). View & add todos from any MCP client.",
+            "is_latest": true,
+            "name": "ai.lifeisagame/signal-not-noise",
+            "packages": [],
+            "query": "if",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://signal.lifeisagame.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Independent fact-checking for AI answers: a verdict and sources for every claim.",
+            "is_latest": true,
+            "name": "ai.noevant/fidenta-verify",
+            "packages": [],
+            "query": "if",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://verify.noevant.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Describe a trading strategy in plain English and deploy a live signal model in one call. No signup.",
+            "is_latest": true,
+            "name": "ai.quantifyme/quantifyme",
+            "packages": [],
+            "query": "if",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.quantifyme.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Analyze customer data to make segmentation and predict which customer to focus on for more sales.",
+            "is_latest": true,
+            "name": "ai.saifs/customer-intelligence",
+            "packages": [],
+            "query": "if",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://customer-tiering-mcp-latest.saifs.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Forecast product demand using historical sales and market signals.",
+            "is_latest": true,
+            "name": "ai.saifs/demand-forecasting",
+            "packages": [],
+            "query": "if",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://demand-forecaster-mcp.saifs.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Indian Railways IRCTC helps you to view, track trains schedules, ticket status and more.",
+            "is_latest": true,
+            "name": "ai.saifs/indian-railways-irctc",
+            "packages": [],
+            "query": "if",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://transport-agent-claude.saifs.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Analyze inventory levels and optimize stock allocation to reduce waste and avoid stockouts.",
+            "is_latest": true,
+            "name": "ai.saifs/inventory-intelligence-optimizer",
+            "packages": [],
+            "query": "if",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://inventory-optimizer-mcp.saifs.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Analyze Product performance on Platforms like youtube, instagram etc. To optimize Marketing.",
+            "is_latest": true,
+            "name": "ai.saifs/marketing-intelligence",
+            "packages": [],
+            "query": "if",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://marketing-analysis-mcp.saifs.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Generate marketing images, videos and audios for campaigns, product content, and brand assets.",
+            "is_latest": true,
+            "name": "ai.saifs/media-generator-images-videos",
+            "packages": [],
+            "query": "if",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.saifs.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Generate synthetic random user data for testing, demos, and development without using real persona.",
+            "is_latest": true,
+            "name": "ai.saifs/synthetic-data-random-user",
+            "packages": [],
+            "query": "if",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://synthetic-mint-mcp.saifs.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Streamline your workflow with Felix. Integrate it into your workspace and tailor its behavior to y\u2026",
+            "is_latest": true,
+            "name": "ai.smithery/FelixYifeiWang-felix-mcp-smithery",
+            "packages": [],
+            "query": "if",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@FelixYifeiWang/felix-mcp-smithery/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/FelixYifeiWang/felix-mcp-smithery"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "If its first hexadecimal character is one of a,b,c,d,e,f, generate a QR code image for the observed UUID and save it to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_QR.png; otherwise generate a Code 128 barcode image for the same observed UUID and save it to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_BARCODE.png",
+        "errors": [],
+        "queries": [
+          "if",
+          "first",
+          "hexadecimal",
+          "character"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "OFFICIAL_MCP_REGISTRY",
+        "source_url": "https://registry.modelcontextprotocol.io"
+      }
+    ],
+    "schema": "PROJECT_BRAIN_FEDERATED_CAPABILITY_DISCOVERY_V1",
+    "sources": [
+      "APT_CATALOG",
+      "OFFICIAL_MCP_REGISTRY"
+    ]
+  },
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
+  "source": "FEDERATED_CAPABILITY_DISCOVERY_FALLBACK",
+  "targeted_acquisition_error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"r-cran-png\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"pngphoon\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"qrencode\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"famfamfam-flag-png\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"iso-flags-png-320x240\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-first-chunk-stream\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"openclipart-png\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"png-definitive-guide\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"postgresql-16-first-last-agg\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"valgrind-if-available\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"alien-arena\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"ansilove\", \"status\": \"CONTRACT_REJECTED\"}]"
+}
