@@ -1,21 +1,383 @@
 {
-  "blocker": {
-    "adapter": "goal",
-    "error": "Blocker:MODEL_INDEPENDENT_CONTROLLER_ACTION_REJECTED:assert_json_fields_equal",
-    "mission_id": "ASTRA-RUNTIME-LIVE-PROVENANCE-AUDIT-001",
-    "observed_at_utc": "2026-09-25T00:44:03.621678+00:00",
-    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
-    "step_id": "execute-live-provenance-audit",
-    "step_index": 0
-  },
+  "completed_at_utc": "2026-09-25T00:44:55.064592+00:00",
   "created_at_utc": "2026-09-25T00:33:22.889200+00:00",
-  "history": [],
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T00:44:55.064012+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "goal",
+        "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+        "cycles": 8,
+        "final_summary": "COMPOUND_GOAL_COMPLETE",
+        "goal_compilation": {
+          "clauses": [
+            "Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+            "Find the VERIFIED_BOUND_CAPABILITY whose source type is pypi",
+            "Fetch that project's authoritative live PyPI metadata from the metadata URL recorded in the registry",
+            "Verify that the pinned version and wheel filename still exist in that metadata, download that exact wheel, compute its SHA-256,",
+            "verify it equals the wheel_sha256 recorded in the registry",
+            "Create canonical/astra_runtime/tmp/LIVE_PYPI_PROVENANCE_AUDIT.json containing the capability ID, project, pinned version, wheel filename, recorded hash, live metadata hash, downloaded artifact hash, metadata URL, artifact URL, and a final verified boolean",
+            "Finally independently read the report and fail unless all three hashes are identical and verified is true"
+          ],
+          "compiled_parts": [
+            {
+              "index": 0,
+              "mode": "NATIVE_READ",
+              "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+              "subgoal": "Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+            },
+            {
+              "capability_id": "json.query.jq",
+              "collection_path": [
+                "capabilities"
+              ],
+              "index": 1,
+              "input_path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+              "mode": "VERIFIED_STRUCTURED_SELECTION",
+              "nested_field": [
+                "source",
+                "type"
+              ],
+              "nested_value": "pypi",
+              "output_path": "canonical/astra_runtime/tmp/STRUCTURED_SELECTION_68dec9b8055f.json",
+              "status_value": "VERIFIED_BOUND_CAPABILITY",
+              "subgoal": "Find the VERIFIED_BOUND_CAPABILITY whose source type is pypi"
+            },
+            {
+              "capability_id": "http.json.fetch_from_state",
+              "index": 2,
+              "mode": "VERIFIED_LIVE_JSON_FETCH",
+              "output_path": "canonical/astra_runtime/tmp/LIVE_FETCH_1dac9f4a77bd.json",
+              "source_json_path": "canonical/astra_runtime/tmp/STRUCTURED_SELECTION_68dec9b8055f.json",
+              "subgoal": "Fetch that project's authoritative live PyPI metadata from the metadata URL recorded in the registry",
+              "url_key": "metadata_url"
+            },
+            {
+              "capability_id": "pypi.provenance.audit_live_artifact",
+              "index": 3,
+              "metadata_path": "canonical/astra_runtime/tmp/LIVE_FETCH_1dac9f4a77bd.json",
+              "mode": "VERIFIED_PYPI_PROVENANCE",
+              "report_path": "canonical/astra_runtime/tmp/LIVE_PYPI_PROVENANCE_AUDIT.json",
+              "selection_path": "canonical/astra_runtime/tmp/STRUCTURED_SELECTION_68dec9b8055f.json",
+              "subgoal": "Verify that the pinned version and wheel filename still exist in that metadata, download that exact wheel, compute its SHA-256,"
+            },
+            {
+              "equal_fields": [
+                "recorded_hash",
+                "live_metadata_hash",
+                "downloaded_artifact_hash"
+              ],
+              "index": 4,
+              "mode": "INDEPENDENT_JSON_INTEGRITY_ASSERTION",
+              "report_path": "canonical/astra_runtime/tmp/LIVE_PYPI_PROVENANCE_AUDIT.json",
+              "subgoal": "verify it equals the wheel_sha256 recorded in the registry",
+              "true_fields": [
+                "verified"
+              ]
+            },
+            {
+              "index": 5,
+              "mode": "CAUSAL_ARTIFACT_ALREADY_PRODUCED",
+              "path": "canonical/astra_runtime/tmp/LIVE_PYPI_PROVENANCE_AUDIT.json",
+              "subgoal": "Create canonical/astra_runtime/tmp/LIVE_PYPI_PROVENANCE_AUDIT.json containing the capability ID, project, pinned version, wheel filename, recorded hash, live metadata hash, downloaded artifact hash, metadata URL, artifact URL, and a final verified boolean"
+            },
+            {
+              "equal_fields": [
+                "recorded_hash",
+                "live_metadata_hash",
+                "downloaded_artifact_hash"
+              ],
+              "index": 6,
+              "mode": "INDEPENDENT_JSON_INTEGRITY_ASSERTION",
+              "report_path": "canonical/astra_runtime/tmp/LIVE_PYPI_PROVENANCE_AUDIT.json",
+              "subgoal": "Finally independently read the report and fail unless all three hashes are identical and verified is true",
+              "true_fields": [
+                "verified"
+              ]
+            }
+          ],
+          "compiler_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN"
+        },
+        "planner_model_last": null,
+        "planner_source": null,
+        "planner_transport": null,
+        "planning_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN",
+        "returncode": 0,
+        "stdout": "COMPOUND_GOAL_COMPLETE",
+        "trace": [
+          {
+            "cycle": 0,
+            "plan": {
+              "args": {
+                "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+              },
+              "expect": {
+                "field": "content",
+                "type": "field_nonempty"
+              },
+              "type": "read_file"
+            },
+            "result": {
+              "content": "{\n  \"capabilities\": {\n    \"auto.apt.zint\": {\n      \"action_template\": {\n        \"args\": {\n          \"argv\": [\n            \"zint\",\n            \"-b\",\n            \"CODE128\",\n            \"-o\",\n            \"${input.output_path}\",\n            \"-d\",\n            \"${input.text}\"\n          ],\n          \"capability_id\": \"auto.apt.zint\",\n          \"output_path\": \"${input.output_path}\",\n          \"output_prefix_hex\": \"89504e470d0a1a0a\",\n          \"timeout_s\": 60\n        },\n        \"expect\": {\n          \"field\": \"output_verified\",\n          \"type\": \"field_equals\",\n          \"value\": true\n        },\n        \"type\": \"invoke_capability\"\n      },\n      \"adapter_module\": \"cli_command\",\n      \"autogenerated\": {\n        \"contract_evidence\": {\n          \"archive_sha256\": \"cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769\",\n          \"input_flag\": \"-d\",\n          \"output_flag\": \"-o\",\n          \"output_line\": \"-o, --output=FILE     Send output to FILE. Default is out.png\",\n          \"positional_input\": null,\n          \"probe_package\": \"zint\",\n          \"probe_version\": \"2.13.0-1build3\",\n          \"requested_suffix\": \".png\",\n          \"selector\": [\n            \"-b\",\n            \"CODE128\"\n          ],\n          \"usage_line\": null\n        },\n        \"integration_friction\": 0,\n        \"origin_goal\": \"Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png.\",\n        \"origin_mission_id\": \"ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003\",\n        \"schema\": \"PROJECT_BRAIN_AUTO_APT_CLI_BINDING_V1\",\n        \"supplier_score\": 48\n      },\n      \"cost\": 1,\n      \"entrypoint\": \"run\",\n      \"incremental_spend_usd\": 0,\n      \"keywords\": [\n        \"128\",\n        \"barcode\"\n      ],\n      \"limitations\": [\n        \"Automatically acquired from Ubuntu package metadata and CLI help.\",\n        \"Only the verified text-to-output-file invocation contract is promoted.\"\n      ],\n      \"platforms\": [\n        \"linux\"\n      ],\n      \"provides\": [\n        \"auto.effect.zint\"\n      ],\n      \"requires\": [],\n      \"source\": {\n        \"origin\": \"Ubuntu\",\n        \"packages\": [\n          {\n            \"name\": \"zint\",\n            \"sha256\": \"cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769\",\n            \"version\": \"2.13.0-1build3\"\n          }\n        ],\n        \"type\": \"apt\"\n      },\n      \"status\": \"VERIFIED_BOUND_CAPABILITY\",\n      \"verification\": {\n        \"autonomous_acquisition\": true,\n        \"independent_output_bytes\": 269,\n        \"independent_output_sha256\": \"c5ab48e8f4b30a1f7946a6a24db16f19e5896b188f19b0cade5636e98dabe768\",\n        \"independent_verified\": true,\n        \"mission_id\": \"ASTRA-AUTO-VERIFY-ZINT-85BC9CD2C9A4\",\n        \"observed_effect\": {\n          \"adapter\": \"bound_capability_cli\",\n          \"argv\": [\n            \"zint\",\n            \"-b\",\n            \"CODE128\",\n            \"-o\",\n            \"canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png\",\n            \"-d\",\n            \"PROJECT BRAIN\"\n          ],\n          \"output_bytes\": 269,\n          \"output_path\": \"canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png\",\n          \"output_sha256\": \"c5ab48e8f4b30a1f7946a6a24db16f19e5896b188f19b0cade5636e98dabe768\",\n          \"output_verified\": true,\n          \"returncode\": 0,\n          \"stderr\": \"\",\n          \"stdout\": \"\"\n        },\n        \"verification_result_path\": \"canonical/astra_runtime/evidence/ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003__zint__85bc9cd2c9a4__AUTO_VERIFY.json\"\n      }\n    },\n    \"document.convert.markdown_pdf.pandoc_weasyprint\": {\n      \"action_template\": {\n        \"args\": {\n          \"capability_id\": \"document.convert.markdown_pdf.pandoc_weasyprint\",\n          \"markdown_path\": \"${input.markdown_path}\",\n          \"output_path\": \"${input.output_path}\",\n          \"timeout_s\": 120\n        },\n        \"expect\": {\n          \"field\": \"output_verified\",\n          \"type\": \"field_equals\",\n          \"value\": true\n        },\n        \"type\": \"invoke_capability\"\n      },\n      \"adapter_module\": \"pandoc_weasyprint\",\n      \"cost\": 2,\n      \"entrypoint\": \"run\",\n      \"incremental_spend_usd\": 0,\n      \"keywords\": [\n        \"markdown\",\n        \"pdf\",\n        \"convert\",\n        \"document\",\n        \"report\"\n      ],\n      \"limitations\": [\n        \"Verified route is repository-local Markdown input to PDF output using WeasyPrint as Pandoc PDF engine.\"\n      ],\n      \"platforms\": [\n        \"linux\"\n      ],\n      \"provides\": [\n        \"document.convert.markdown_pdf\"\n      ],\n      \"requires\": [\n        \"markdown.file.available\"\n      ],\n      \"source\": {\n        \"origin\": \"Ubuntu\",\n        \"packages\": [\n          {\n            \"name\": \"pandoc\",\n            \"sha256\": \"021cf93191aea780c273e82ca3ab575b1522992705b6c28e350aa502573a27b5\",\n            \"version\": \"3.1.3+ds-2\"\n          },\n          {\n            \"name\": \"weasyprint\",\n            \"sha256\": \"79a1303592e2882ff58fb58658c6ae70f925ce335c6342cb1e778ed049514981\",\n            \"version\": \"61.1-1\"\n          }\n        ],\n        \"type\": \"apt\"\n      },\n      \"status\": \"VERIFIED_BOUND_CAPABILITY\",\n      \"verification\": {\n        \"independent_verified\": true,\n        \"independent_verifier_capability\": \"pdf.extract.text.pypdf\",\n        \"mission_id\": \"ASTRA-VERIFY-MARKDOWN-PDF-001\",\n        \"verification_evidence\": \"canonical/astra_runtime/evidence/ASTRA-VERIFY-MARKDOWN-PDF-001__INDEPENDENT.json\"\n      }\n    },\n    \"image.qr.generate.qrencode\": {\n      \"action_template\": {\n        \"args\": {\n          \"argv\": [\n            \"qrencode\",\n            \"-o\",\n            \"${input.output_path}\",\n            \"${input.text}\"\n          ],\n          \"capability_id\": \"image.qr.generate.qrencode\",\n          \"output_path\": \"${input.output_path}\",\n          \"output_prefix_hex\": \"89504e470d0a1a0a\",\n          \"timeout_s\": 60\n        },\n        \"expect\": {\n          \"field\": \"output_verified\",\n          \"type\": \"field_equals\",\n          \"value\": true\n        },\n        \"type\": \"invoke_capability\"\n      },\n      \"adapter_module\": \"",
+              "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+              "truncated": true,
+              "type": "read_file"
+            }
+          },
+          {
+            "cycle": 1,
+            "plan": {
+              "args": {
+                "capability_id": "json.query.jq",
+                "filter": ".[\"capabilities\"] | to_entries | map(select(.value | any(. == \"VERIFIED_BOUND_CAPABILITY\") and (.[\"source\"][\"type\"] == \"pypi\"))) | if length==1 then .[0] | {id:.key, record:.value} else error(\"SELECTION_NOT_UNIQUE:\"+((length)|tostring)) end",
+                "input_path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+                "output_path": "canonical/astra_runtime/tmp/STRUCTURED_SELECTION_68dec9b8055f.json",
+                "raw_output": false,
+                "require_nonempty": true,
+                "timeout_s": 60
+              },
+              "expect": {
+                "field": "output_verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "jq_query",
+              "argv": [
+                "jq",
+                "",
+                ".[\"capabilities\"] | to_entries | map(select(.value | any(. == \"VERIFIED_BOUND_CAPABILITY\") and (.[\"source\"][\"type\"] == \"pypi\"))) | if length==1 then .[0] | {id:.key, record:.value} else error(\"SELECTION_NOT_UNIQUE:\"+((length)|tostring)) end",
+                "/home/runner/work/brain/brain/canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+              ],
+              "capability_id": "json.query.jq",
+              "dependency": {
+                "origin": "Ubuntu",
+                "packages": [
+                  {
+                    "archive_sha256": "f59183392f84fe67b407b494d8ba6185e9b0e4a106ffcb369490bd20a83fd40e",
+                    "name": "jq",
+                    "version": "1.7.1-3ubuntu0.24.04.2"
+                  }
+                ],
+                "status": "INSTALLED_VERIFIED"
+              },
+              "input_path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+              "output_bytes": 1956,
+              "output_path": "canonical/astra_runtime/tmp/STRUCTURED_SELECTION_68dec9b8055f.json",
+              "output_sha256": "19582b42e982fec8264bcca0ff59dac0a27d676e34c289b9ca5aca995cdcc5d6",
+              "output_text_excerpt": "{\n  \"id\": \"pdf.extract.text.pypdf\",\n  \"record\": {\n    \"action_template\": {\n      \"args\": {\n        \"capability_id\": \"pdf.extract.text.pypdf\",\n        \"max_pages\": 200,\n        \"path\": \"${input.pdf_path}\"\n      },\n      \"expect\": {\n        \"field\": \"text\",\n        \"type\": \"field_nonempty\"\n      },\n      \"type\": \"invoke_capability\"\n    },\n    \"adapter_module\": \"pdf_pypdf\",\n    \"cost\": 1,\n    \"entrypoint\": \"run\",\n    \"incremental_spend_usd\": 0,\n    \"limitations\": [\n      \"Extracts existing PDF text layers; does not perform OCR on image-only/scanned pages.\",\n      \"Input paths are restricted to the Project Brain repository checkout.\",\n      \"Large uncompressed PDF content streams can require substantial memory.\"\n    ],\n    \"provides\": [\n      \"pdf.extract.text\"\n    ],\n    \"requires\": [\n      \"pdf.file.available\"\n    ],\n    \"source\": {\n      \"license\": \"BSD-3-Clause\",\n      \"metadata_url\": \"https://pypi.org/pypi/pypdf/6.19.0/json\",\n      \"project\": \"pypdf\",\n      \"trusted_publishing\": true,\n      \"type\": \"pypi\",\n      \"version\": \"6.19.0\",\n      \"wheel_filename\": \"pypdf-6.19.0-py3-none-any.whl\",\n      \"wheel_sha256\": \"7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14\"\n    },\n    \"status\": \"VERIFIED_BOUND_CAPABILITY\",\n    \"verification\": {\n      \"mission_id\": \"ASTRA-RUNTIME-BOUND-PDF-TEXT-001\",\n      \"observed_dependency\": {\n        \"project\": \"pypdf\",\n        \"version\": \"6.19.0\",\n        \"wheel_sha256\": \"7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14\"\n      },\n      \"observed_effect\": {\n        \"extracted_text\": \"PROJECT BRAIN BOUND PDF CAPABILITY VERIFIED\",\n        \"text_sha256\": \"97fa8642db783ccc4c477a1ab0dc72a144da2932106ae51b9818eb7fc4b8030c\"\n      },\n      \"receipt_path\": \"canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-PDF-TEXT-001__RECEIPT.json\",\n      \"state_path\": \"canonical/astra_runtime/state/ASTRA-RUNTIME-BOUND-PDF-TEXT-001.json\",\n      \"workflow_run_id\": 36060830384\n    }\n  }\n}\n",
+              "output_text_utf8_verified": true,
+              "output_verified": true,
+              "returncode": 0,
+              "stderr": ""
+            }
+          },
+          {
+            "cycle": 2,
+            "plan": {
+              "args": {
+                "capability_id": "http.json.fetch_from_state",
+                "max_bytes": 5000000,
+                "output_path": "canonical/astra_runtime/tmp/LIVE_FETCH_1dac9f4a77bd.json",
+                "source_json_path": "canonical/astra_runtime/tmp/STRUCTURED_SELECTION_68dec9b8055f.json",
+                "timeout_s": 30,
+                "url_key": "metadata_url"
+              },
+              "expect": {
+                "field": "output_verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "http_json_fetch",
+              "capability_id": "http.json.fetch_from_state",
+              "content_type": "application/json",
+              "dependency": {
+                "module": "urllib.request",
+                "python_version": "3.12.14",
+                "status": "LOCAL_VERIFIED",
+                "type": "python_stdlib"
+              },
+              "final_url": "https://pypi.org/pypi/pypdf/6.19.0/json",
+              "json_top_level_type": "dict",
+              "output_bytes": 9248,
+              "output_path": "canonical/astra_runtime/tmp/LIVE_FETCH_1dac9f4a77bd.json",
+              "output_sha256": "9eca4c2315cec5fcb72f58ed96752dabd6711ba84603eb53160caa19eefe8c7f",
+              "output_verified": true,
+              "requested_url": "https://pypi.org/pypi/pypdf/6.19.0/json",
+              "source_json_path": "canonical/astra_runtime/tmp/STRUCTURED_SELECTION_68dec9b8055f.json",
+              "status": 200,
+              "url_field_path": [
+                "record",
+                "source",
+                "metadata_url"
+              ],
+              "url_key": "metadata_url"
+            }
+          },
+          {
+            "cycle": 3,
+            "plan": {
+              "args": {
+                "capability_id": "pypi.provenance.audit_live_artifact",
+                "max_bytes": 20000000,
+                "metadata_path": "canonical/astra_runtime/tmp/LIVE_FETCH_1dac9f4a77bd.json",
+                "report_path": "canonical/astra_runtime/tmp/LIVE_PYPI_PROVENANCE_AUDIT.json",
+                "selection_path": "canonical/astra_runtime/tmp/STRUCTURED_SELECTION_68dec9b8055f.json",
+                "timeout_s": 60
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "pypi_provenance_audit",
+              "artifact_bytes": 395480,
+              "capability_id": "pdf.extract.text.pypdf",
+              "dependency": {
+                "module": "urllib.request",
+                "python_version": "3.12.14",
+                "status": "LOCAL_VERIFIED",
+                "type": "python_stdlib"
+              },
+              "downloaded_artifact_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14",
+              "live_metadata_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14",
+              "project": "pypdf",
+              "recorded_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14",
+              "report_path": "canonical/astra_runtime/tmp/LIVE_PYPI_PROVENANCE_AUDIT.json",
+              "verified": true
+            }
+          },
+          {
+            "cycle": 4,
+            "plan": {
+              "args": {
+                "fields": [
+                  "recorded_hash",
+                  "live_metadata_hash",
+                  "downloaded_artifact_hash"
+                ],
+                "path": "canonical/astra_runtime/tmp/LIVE_PYPI_PROVENANCE_AUDIT.json",
+                "true_fields": [
+                  "verified"
+                ]
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "assert_json_fields_equal"
+            },
+            "result": {
+              "all_equal": true,
+              "all_nonempty": true,
+              "all_true": true,
+              "fields": {
+                "downloaded_artifact_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14",
+                "live_metadata_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14",
+                "recorded_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14"
+              },
+              "path": "canonical/astra_runtime/tmp/LIVE_PYPI_PROVENANCE_AUDIT.json",
+              "true_fields": {
+                "verified": true
+              },
+              "type": "assert_json_fields_equal",
+              "verified": true
+            }
+          },
+          {
+            "cycle": 5,
+            "plan": {
+              "args": {
+                "path": "canonical/astra_runtime/tmp/LIVE_PYPI_PROVENANCE_AUDIT.json"
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "assert_file_exists"
+            },
+            "result": {
+              "exists": true,
+              "path": "canonical/astra_runtime/tmp/LIVE_PYPI_PROVENANCE_AUDIT.json",
+              "sha256": "4cf43a825c52b2d64c8048f23ae8c62178bdf0ac211aab7eef33dee8bedcd979",
+              "type": "assert_file_exists",
+              "verified": true
+            }
+          },
+          {
+            "cycle": 6,
+            "plan": {
+              "args": {
+                "fields": [
+                  "recorded_hash",
+                  "live_metadata_hash",
+                  "downloaded_artifact_hash"
+                ],
+                "path": "canonical/astra_runtime/tmp/LIVE_PYPI_PROVENANCE_AUDIT.json",
+                "true_fields": [
+                  "verified"
+                ]
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "assert_json_fields_equal"
+            },
+            "result": {
+              "all_equal": true,
+              "all_nonempty": true,
+              "all_true": true,
+              "fields": {
+                "downloaded_artifact_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14",
+                "live_metadata_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14",
+                "recorded_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14"
+              },
+              "path": "canonical/astra_runtime/tmp/LIVE_PYPI_PROVENANCE_AUDIT.json",
+              "true_fields": {
+                "verified": true
+              },
+              "type": "assert_json_fields_equal",
+              "verified": true
+            }
+          },
+          {
+            "cycle": 7,
+            "plan": {
+              "args": {
+                "summary": "COMPOUND_GOAL_COMPLETE"
+              },
+              "type": "finish"
+            },
+            "result": {
+              "summary": "COMPOUND_GOAL_COMPLETE",
+              "type": "finish"
+            }
+          }
+        ]
+      },
+      "step_id": "execute-live-provenance-audit",
+      "step_index": 0
+    }
+  ],
   "mission_id": "ASTRA-RUNTIME-LIVE-PROVENANCE-AUDIT-001",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_LIVE_PROVENANCE_AUDIT_001.json",
-  "mission_sha256": "91dc748e670b904d0b31178bfd867e080d01ca8574cee7c63854fd05fa8d3553",
-  "next_step": 0,
+  "mission_sha256": "659708bd2c91746e30d83f268f15e6dd397c003eabbf8f6f4ef4566a8cf51cac",
+  "next_step": 1,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
-  "status": "BLOCKED",
-  "updated_at_utc": "2026-09-25T00:44:03.621901+00:00"
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T00:44:55.064035+00:00"
 }

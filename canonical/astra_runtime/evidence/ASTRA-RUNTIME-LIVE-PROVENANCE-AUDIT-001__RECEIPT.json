@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T00:44:55.259431+00:00",
+  "mission_id": "ASTRA-RUNTIME-LIVE-PROVENANCE-AUDIT-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_LIVE_PROVENANCE_AUDIT_001.json",
+  "mission_sha256": "659708bd2c91746e30d83f268f15e6dd397c003eabbf8f6f4ef4566a8cf51cac",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "101d452bae18e48b47cd01ad2b30a2e429501f7c539497df776705c00644fb8e",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
