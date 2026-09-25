@@ -2472,6 +2472,99 @@ def _goal_action(action):
           "verified":True,
         }
 
+    if typ=="discover_authoritative_web_source":
+        query=str(args.get("query") or "").strip()
+        output=_safe_repo_path(args.get("output_path",""))
+        authority_domains=args.get("authority_domains") or []
+        if not query:
+            return {"type":typ,"verified":False,"error":"SOURCE_DISCOVERY_QUERY_REQUIRED"}
+        if (
+            not isinstance(authority_domains,list) or not authority_domains
+            or len(authority_domains)>16
+            or any(not isinstance(x,str) or not x.strip() for x in authority_domains)
+        ):
+            return {"type":typ,"verified":False,"error":"SOURCE_DISCOVERY_AUTHORITY_DOMAINS_REQUIRED"}
+        normalized_domains=[x.lower().strip().lstrip(".") for x in authority_domains]
+        engines=[
+          ("bing","https://www.bing.com/search?"+urllib.parse.urlencode({"q":query,"count":"20"})),
+          ("duckduckgo","https://html.duckduckgo.com/html/?"+urllib.parse.urlencode({"q":query})),
+        ]
+        attempts=[]
+        candidates=[]
+        href_re=re.compile(r'''href=["'](https?://[^"'<>\s]+)["']''',re.IGNORECASE)
+        for engine,search_url in engines:
+            req=urllib.request.Request(search_url,headers={
+              "User-Agent":"Mozilla/5.0 ProjectBrain-SourceDiscovery/1"
+            })
+            try:
+                with urllib.request.urlopen(req,timeout=int(args.get("timeout_s") or 20)) as resp:
+                    raw=resp.read(int(args.get("max_bytes") or 1500000))
+                text=raw.decode("utf-8","replace")
+            except Exception as exc:
+                attempts.append({"engine":engine,"status":"FETCH_FAILED","error":type(exc).__name__})
+                continue
+            seen=set()
+            local=[]
+            for href in href_re.findall(text):
+                href=href.replace("&amp;","&")
+                try:
+                    parsed=urllib.parse.urlparse(href)
+                except Exception:
+                    continue
+                host=(parsed.hostname or "").lower()
+                if not host or host in {"www.bing.com","bing.com","html.duckduckgo.com","duckduckgo.com"}:
+                    continue
+                if href in seen:
+                    continue
+                seen.add(href)
+                matched=[d for d in normalized_domains if host==d or host.endswith("."+d)]
+                if not matched:
+                    continue
+                score=100*len(matched)
+                qtokens=[t for t in re.findall(r"[a-z0-9]+",query.lower()) if len(t)>=3]
+                low=href.lower()
+                score+=sum(3 for t in qtokens if t in low)
+                local.append({
+                  "url":href,"host":host,"matched_authority_domains":matched,
+                  "score":score,"engine":engine
+                })
+            attempts.append({"engine":engine,"status":"OK","candidate_count":len(local)})
+            candidates.extend(local)
+            if local:
+                break
+        dedup={}
+        for cand in candidates:
+            prior=dedup.get(cand["url"])
+            if prior is None or cand["score"]>prior["score"]:
+                dedup[cand["url"]]=cand
+        candidates=sorted(dedup.values(),key=lambda x:(-x["score"],x["url"]))[:25]
+        if not candidates:
+            return {
+              "type":typ,"verified":False,"error":"AUTHORITATIVE_SOURCE_NOT_DISCOVERED",
+              "attempts":attempts
+            }
+        chosen=candidates[0]
+        evidence={
+          "schema":"PROJECT_BRAIN_SOURCE_DISCOVERY_EVIDENCE_V1",
+          "query":query,
+          "authority_domains":normalized_domains,
+          "chosen_url":chosen["url"],
+          "chosen_host":chosen["host"],
+          "candidates":candidates,
+          "attempts":attempts,
+          "discovered_at_utc":utc(),
+          "trust_claim":"DOMAIN_FILTERED_SEARCH_DISCOVERY_ONLY_NOT_FACT_VERIFICATION",
+        }
+        output.parent.mkdir(parents=True,exist_ok=True)
+        output.write_text(json.dumps(evidence,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+        return {
+          "type":typ,"verified":True,
+          "chosen_url":chosen["url"],
+          "chosen_host":chosen["host"],
+          "candidate_count":len(candidates),
+          "output_path":str(output.relative_to(ROOT)),
+        }
+
     if typ=="fetch_json_knowledge":
         url=str(args.get("url") or "").strip()
         output=_safe_repo_path(args.get("output_path",""))
@@ -2860,7 +2953,7 @@ def _run_model_independent_goal(step, mission, goal):
     if actions is None:
         return None
     allowed_types={
-      "read_file","list_tree","search_text","http_get","fetch_json_knowledge","assert_json_knowledge","write_json_records","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback","invoke_capability_until","verify_with_independent_pypi_codec",
+      "read_file","list_tree","search_text","http_get","discover_authoritative_web_source","fetch_json_knowledge","assert_json_knowledge","write_json_records","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback","invoke_capability_until","verify_with_independent_pypi_codec",
       "project_browser_result_json","join_runtime_json_arrays","assert_runtime_json_join","aggregate_runtime_json_arrays","assert_runtime_json_aggregate","derive_grouped_records","assert_grouped_derived_records","select_ranked_record","assert_ranked_record","assert_hex_prefix_bucket","assert_collection_length_bucket","assert_runtime_selected_code_decodes",
       "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal","assert_runtime_fanout_decodes","assert_runtime_fanout_artifacts_decode","assert_runtime_per_item_fallback_decodes","assert_runtime_fallback_decision","assert_runtime_bounded_loop_trace",
       "assert_workflow_audit_supported_by_source","assert_python_source_audit_supported_by_source",
