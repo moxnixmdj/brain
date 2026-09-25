@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-CONTROLLER-RESUME-001",
+  "purpose": "Prove durable intra-goal action checkpoint/resume across an intentional interruption without replaying an already verified side effect.",
+  "goal": "Prove action-level controller checkpoint recovery.",
+  "steps": [
+    {
+      "id": "checkpointed-controller",
+      "adapter": "goal",
+      "controller_actions": [
+        {
+          "type": "invoke_capability",
+          "args": {
+            "capability_id": "image.qr.generate.qrencode",
+            "output_path": "canonical/astra_runtime/tmp/CHECKPOINT_RESUME_QR.png",
+            "argv": [
+              "qrencode",
+              "-o",
+              "canonical/astra_runtime/tmp/CHECKPOINT_RESUME_QR.png",
+              "CHECKPOINT-RESUME-PROOF"
+            ],
+            "output_prefix_hex": "89504e470d0a1a0a",
+            "timeout_s": 60
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "output_verified",
+            "value": true
+          }
+        },
+        {
+          "type": "assert_file_exists",
+          "args": {
+            "path": "canonical/astra_runtime/tmp/CHECKPOINT_RESUME_QR.png"
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "verified",
+            "value": true
+          }
+        },
+        {
+          "type": "finish",
+          "args": {
+            "summary": "CONTROLLER_CHECKPOINT_RESUME_COMPLETE"
+          }
+        }
+      ],
+      "interrupt_after_controller_actions_once": 1,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "CONTROLLER_CHECKPOINT_RESUME_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "intentional_one_shot_interrupt": true,
+    "completed_side_effect_must_not_replay": true,
+    "checkpoint_runtime_commit": "c7dc6e4cafd9801e49b1252d56b9946b1d0459e8"
+  }
+}
