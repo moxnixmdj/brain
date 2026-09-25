@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-GENERIC-DATAFLOW-RANK-HELDOUT-001",
+  "purpose": "Held-out proof that generic grouped derivation and ranked selection IR generalizes across different entities, relation fields, copied fields, and scalar filter types.",
+  "goal": "Using a real rendered browser, open https://jsonplaceholder.typicode.com/posts, save a screenshot to canonical/astra_runtime/tmp/RANK_POSTS.png, and save the rendered result to canonical/astra_runtime/tmp/RANK_POSTS.json. Using a real rendered browser, open https://jsonplaceholder.typicode.com/comments, save a screenshot to canonical/astra_runtime/tmp/RANK_COMMENTS.png, and save the rendered result to canonical/astra_runtime/tmp/RANK_COMMENTS.json. Using both live results, create canonical/astra_runtime/tmp/POST_COMMENT_RATES.json containing exactly one record per live post with post_id, title, total_count, matched_count, and match_ratio, where total_count is the number of live comments whose postId equals that post's id, matched_count is the number of those comments whose email field is Eliseo@gardner.biz, and match_ratio is matched_count divided by total_count. From canonical/astra_runtime/tmp/POST_COMMENT_RATES.json select exactly one winner with the greatest match_ratio, breaking ties by the lowest post_id, and save canonical/astra_runtime/tmp/POST_COMMENT_WINNER.json containing post_id, title, total_count, matched_count, and match_ratio. Finally independently reopen both live source results, canonical/astra_runtime/tmp/POST_COMMENT_RATES.json, and canonical/astra_runtime/tmp/POST_COMMENT_WINNER.json and verify every post's counts and match_ratio are correct, the winner has the greatest match_ratio, the lowest post_id wins any tie, every live post appears exactly once in the rates file, and there are no extra records.",
+  "steps": [
+    {
+      "id": "run-heldout-generic-dataflow-rank",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 32,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "manual_controller_actions": false,
+    "manual_target_effects": false,
+    "held_out_from_original_entities": true,
+    "scalar_string_filter_required": true,
+    "generic_dataflow_ir_commits": [
+      "5044ee5e3b3452277128276b4436b0be57750ed6",
+      "cf9efe7d547901b9eabb8890aa75e886fd96fa8f"
+    ]
+  }
+}
