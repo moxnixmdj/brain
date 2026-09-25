@@ -28,6 +28,7 @@ class Capability:
     provides: frozenset[str]
     cost: float
     action: dict
+    result_fields: frozenset[str]
 
 
 def _string_set(value, field):
@@ -68,7 +69,8 @@ def _normalize(problem):
         action = raw.get("action")
         if not isinstance(action, dict) or not isinstance(action.get("type"), str):
             raise PlanningFailure("EXECUTABLE_ACTION_REQUIRED", cid)
-        caps.append(Capability(cid, requires, provides, cost, action))
+        result_fields = _string_set(raw.get("result_fields", []), f"{cid}.result_fields")
+        caps.append(Capability(cid, requires, provides, cost, action, result_fields))
     return initial, targets, caps
 
 
@@ -143,16 +145,58 @@ def plan_capabilities(problem):
     raise PlanningFailure("NO_CAPABILITY_PLAN")
 
 
+def _resolve_effect_bindings(value, consumer, providers):
+    if isinstance(value, dict):
+        if set(value.keys()) == {"$effect_result"}:
+            spec = value["$effect_result"]
+            if not isinstance(spec, dict):
+                raise PlanningFailure("INVALID_EFFECT_RESULT_BINDING", consumer.capability_id)
+            effect = str(spec.get("effect", "")).strip()
+            field = str(spec.get("field", "")).strip()
+            if not effect or not field:
+                raise PlanningFailure("INVALID_EFFECT_RESULT_BINDING", consumer.capability_id)
+            if effect not in consumer.requires:
+                raise PlanningFailure(
+                    "BINDING_EFFECT_NOT_REQUIRED",
+                    f"{consumer.capability_id}:{effect}",
+                )
+            provider = providers.get(effect)
+            if provider is None:
+                raise PlanningFailure(
+                    "BINDING_PROVIDER_MISSING",
+                    f"{consumer.capability_id}:{effect}",
+                )
+            cycle, producer = provider
+            if field not in producer.result_fields:
+                raise PlanningFailure(
+                    "BINDING_RESULT_FIELD_UNDECLARED",
+                    f"{producer.capability_id}:{field}",
+                )
+            return {"$result": {"cycle": cycle, "field": field}}
+        return {
+            key: _resolve_effect_bindings(item, consumer, providers)
+            for key, item in value.items()
+        }
+    if isinstance(value, list):
+        return [_resolve_effect_bindings(item, consumer, providers) for item in value]
+    return value
+
+
 def plan_actions(problem):
     result = plan_capabilities(problem)
     _, _, caps = _normalize(problem)
     cap_by_id = {c.capability_id: c for c in caps}
     actions = []
+    providers = {}
     for cid in result["plan"]:
-        action = dict(cap_by_id[cid].action)
+        cap = cap_by_id[cid]
+        action = _resolve_effect_bindings(cap.action, cap, providers)
         action.setdefault("args", {})
         action["capability_id"] = cid
+        cycle = len(actions)
         actions.append(action)
+        for effect in cap.provides:
+            providers[effect] = (cycle, cap)
     finish_summary = str(problem.get("finish_summary", "CAPABILITY_PLAN_COMPLETE")).strip()
     if not finish_summary:
         raise PlanningFailure("FINISH_SUMMARY_REQUIRED")
