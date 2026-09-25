@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-PDF-READBACK-DIAG-001",
+  "purpose": "Inspect independent pypdf text extraction from the produced Pandoc+WeasyPrint verification PDF.",
+  "goal": "Persist exact extracted PDF text and normalized forms without promoting the pending converter.",
+  "steps": [
+    {
+      "id": "inspect-pdf-text",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib,re,sys\nroot=pathlib.Path('.').resolve()\np=root/'canonical/runtime/astra_runtime.py'\ns=importlib.util.spec_from_file_location('astra_pdf_diag',p)\nm=importlib.util.module_from_spec(s); sys.modules[s.name]=m; s.loader.exec_module(m)\nout=m._invoke_bound_capability({'capability_id':'pdf.extract.text.pypdf','path':'canonical/astra_runtime/tmp/MARKDOWN_PDF_VERIFY.pdf','max_pages':20})\ntext=str(out.get('text') or '')\nev={'raw_text':text,'repr':repr(text),'whitespace_normalized':' '.join(text.split()),'alnum_normalized':re.sub(r'[^A-Z0-9]+','',text.upper()),'adapter_result':out}\n(root/'canonical/astra_runtime/evidence/ASTRA-PDF-READBACK-DIAG-001__RESULT.json').write_text(json.dumps(ev,indent=2,sort_keys=True)+'\\n')\nprint('PDF_READBACK_DIAG_COMPLETE')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "PDF_READBACK_DIAG_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "read_only_diagnostic": true,
+    "model_controller_required": false
+  }
+}
