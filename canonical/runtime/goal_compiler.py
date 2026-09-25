@@ -3186,6 +3186,47 @@ def _compile_compound_goal(goal, clauses, registry, root):
             })
             continue
 
+        if re.match(r"^(?:finally\s+)?independently\s+decode\b",lower):
+            prior=None
+            for item in reversed(compiled_parts):
+                cid=item.get("selected_capability") if isinstance(item,dict) else None
+                entry=(registry or {}).get(cid) if cid else None
+                if isinstance(entry,dict) and entry.get("adapter_module")=="python_library_codec":
+                    prior=(item,entry)
+                    break
+            if prior is not None:
+                item,entry=prior
+                inputs=item.get("inputs") or {}
+                template_args=((entry.get("action_template") or {}).get("args") or {})
+                json_path=inputs.get("json_path")
+                binary_path=inputs.get("output_path")
+                module=template_args.get("module")
+                decode_callable=template_args.get("decode_callable")
+                decode_kwargs=template_args.get("decode_kwargs") or {}
+                if all(isinstance(x,str) and x for x in (json_path,binary_path,module,decode_callable)):
+                    actions.append({
+                      "type":"invoke_capability",
+                      "args":{
+                        "capability_id":item["selected_capability"],
+                        "mode":"decode_verify",
+                        "module":module,
+                        "decode_callable":decode_callable,
+                        "decode_kwargs":decode_kwargs,
+                        "json_path":json_path,
+                        "binary_path":binary_path,
+                      },
+                      "expect":{"type":"field_equals","field":"verified","value":True},
+                    })
+                    compiled_parts.append({
+                      "index":index,"subgoal":clause,
+                      "mode":"INDEPENDENT_PYTHON_CODEC_ROUNDTRIP_VERIFICATION",
+                      "selected_capability":item["selected_capability"],
+                      "json_path":json_path,
+                      "binary_path":binary_path,
+                      "decode_callable":decode_callable,
+                    })
+                    continue
+
         if re.match(r"^(?:if|otherwise|for\s+every|for\s+each)\b",lower):
             raise GoalCompilationFailure(
                 "GOAL_CONTROL_FLOW_UNSUPPORTED",
@@ -3222,6 +3263,17 @@ def _compile_compound_goal(goal, clauses, registry, root):
             ) from exc
         cid=part["selected_capability"]
         entry=registry[cid]
+        if re.match(r"^(?:finally\s+)?(?:independently\s+)?(?:verify|check|assert|decode|reopen|reread)\b",lower):
+            semantic=" ".join(
+                [str(x) for x in entry.get("provides",[])]
+                +[str(x) for x in entry.get("keywords",[])]
+                +[str(cid)]
+            ).lower()
+            if not any(token in semantic for token in ("verify","decode","audit","check","assert","validate")):
+                raise GoalCompilationFailure(
+                    "GOAL_VERIFICATION_CAPABILITY_REQUIRED",
+                    json.dumps({"index":index,"subgoal":clause,"rejected_capability":cid},sort_keys=True)
+                )
         action=_render_template(entry["action_template"],part["inputs"])
         actions.append(action)
         for key,value in part["inputs"].items():
