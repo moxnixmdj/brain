@@ -3954,6 +3954,31 @@ def _render_bound_template(value, inputs):
         return out
     return value
 
+def _validate_effect_aliases(raw_aliases, declared, field, instance_id):
+    aliases=raw_aliases or {}
+    if not isinstance(aliases,dict):
+        raise Blocker("CAPABILITY_INSTANCE_"+field.upper()+"_ALIASES_INVALID:"+instance_id)
+    declared_set={str(x) for x in declared or []}
+    unknown=sorted(str(k) for k in aliases if str(k) not in declared_set)
+    if unknown:
+        raise Blocker(
+            "CAPABILITY_INSTANCE_"+field.upper()+"_ALIAS_SOURCE_UNKNOWN:"
+            +instance_id+":"+",".join(unknown)
+        )
+    out={}
+    for key,value in aliases.items():
+        src=str(key).strip()
+        dst=str(value).strip()
+        if not src or not dst:
+            raise Blocker("CAPABILITY_INSTANCE_"+field.upper()+"_ALIAS_INVALID:"+instance_id)
+        out[src]=dst
+    return out
+
+
+def _alias_effects(effects,aliases):
+    return [aliases.get(str(effect),str(effect)) for effect in effects or []]
+
+
 def _inherit_verified_capabilities(problem):
     enriched=json.loads(json.dumps(problem))
     caps=enriched.setdefault("capabilities",[])
@@ -3963,8 +3988,62 @@ def _inherit_verified_capabilities(problem):
     inputs=enriched.get("inputs") or {}
     if not isinstance(inputs,dict):
         raise Blocker("CAPABILITY_INPUTS_INVALID")
+    registry=_load_bound_capability_registry()
     inherited=[]
-    for cid,entry in sorted(_load_bound_capability_registry().items()):
+    instantiated=[]
+
+    raw_instances=enriched.get("capability_instances") or []
+    if not isinstance(raw_instances,list):
+        raise Blocker("CAPABILITY_INSTANCES_INVALID")
+    for raw in raw_instances:
+        if not isinstance(raw,dict):
+            raise Blocker("CAPABILITY_INSTANCE_INVALID")
+        instance_id=str(raw.get("instance_id") or "").strip()
+        cid=str(raw.get("capability_id") or "").strip()
+        if not instance_id or instance_id in existing:
+            raise Blocker("CAPABILITY_INSTANCE_ID_INVALID_OR_DUPLICATE:"+instance_id)
+        entry=registry.get(cid)
+        if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
+            raise Blocker("CAPABILITY_INSTANCE_SOURCE_NOT_VERIFIED:"+cid)
+        platforms=entry.get("platforms")
+        if isinstance(platforms,list) and platforms:
+            current="linux" if sys.platform.startswith("linux") else ("windows" if sys.platform.startswith("win") else sys.platform)
+            if current not in platforms:
+                raise Blocker("CAPABILITY_INSTANCE_PLATFORM_UNSUPPORTED:"+instance_id)
+        instance_inputs=raw.get("inputs") or {}
+        if not isinstance(instance_inputs,dict):
+            raise Blocker("CAPABILITY_INSTANCE_INPUTS_INVALID:"+instance_id)
+        template=entry.get("action_template")
+        if not isinstance(template,dict):
+            raise Blocker("CAPABILITY_INSTANCE_ACTION_TEMPLATE_MISSING:"+cid)
+        try:
+            action=_render_bound_template(template,instance_inputs)
+        except Blocker as exc:
+            raise Blocker("CAPABILITY_INSTANCE_BINDING_FAILED:"+instance_id+":"+str(exc)) from exc
+        require_aliases=_validate_effect_aliases(
+            raw.get("requires_as"),entry.get("requires") or [],"requires",instance_id
+        )
+        provide_aliases=_validate_effect_aliases(
+            raw.get("provides_as"),entry.get("provides") or [],"provides",instance_id
+        )
+        caps.append({
+          "id":instance_id,
+          "source_capability_id":cid,
+          "requires":_alias_effects(entry.get("requires") or [],require_aliases),
+          "provides":_alias_effects(entry.get("provides") or [],provide_aliases),
+          "cost":float(entry.get("cost",1)),
+          "action":action,
+          "result_fields":list(entry.get("result_fields") or []),
+        })
+        existing.add(instance_id)
+        instantiated.append({
+          "instance_id":instance_id,
+          "capability_id":cid,
+          "requires_as":require_aliases,
+          "provides_as":provide_aliases,
+        })
+
+    for cid,entry in sorted(registry.items()):
         if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
             continue
         if cid in existing:
@@ -3983,6 +4062,7 @@ def _inherit_verified_capabilities(problem):
             continue
         cap={
           "id":cid,
+          "source_capability_id":cid,
           "requires":list(entry.get("requires") or []),
           "provides":list(entry.get("provides") or []),
           "cost":float(entry.get("cost",1)),
@@ -3992,6 +4072,7 @@ def _inherit_verified_capabilities(problem):
         caps.append(cap)
         inherited.append(cid)
     enriched["_inherited_bound_capabilities"]=inherited
+    enriched["_instantiated_bound_capabilities"]=instantiated
     return enriched
 
 def _run_capability_planned_goal(step, mission, goal):
