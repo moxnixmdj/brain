@@ -27,6 +27,7 @@
     "final_effect_verification_required": true,
     "orthogonal_pressure_family": "spreadsheet_binary_artifact_library_acquisition_and_semantic_reopen",
     "fresh_mission_identity": true,
-    "explicit_format_semantics": "XLSX spreadsheet workbook"
+    "explicit_format_semantics": "XLSX spreadsheet workbook",
+    "replay_after_output_format_discovery_commit": "f24ad41dd4c8688e6c04532d85f9a950c9d637df"
   }
 }
