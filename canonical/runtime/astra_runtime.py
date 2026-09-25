@@ -450,6 +450,8 @@ def _invoke_bound_capability(args):
     if float(entry.get("incremental_spend_usd",0))!=0:
         raise Blocker("BOUND_CAPABILITY_NONZERO_COST_REJECTED:"+cid)
     source=entry.get("source") or {}
+    call_args=dict(args)
+    call_args.pop("capability_id",None)
     dependency=None
     if source.get("type")=="pypi":
         dependency=_ensure_pypi_dependency(source)
@@ -477,8 +479,6 @@ def _invoke_bound_capability(args):
     fn=getattr(module,str(entry.get("entrypoint") or "run"),None)
     if not callable(fn):
         raise Blocker("BOUND_CAPABILITY_ENTRYPOINT_MISSING")
-    call_args=dict(args)
-    call_args.pop("capability_id",None)
     result=fn(call_args,ROOT)
     if not isinstance(result,dict):
         raise Blocker("BOUND_CAPABILITY_RESULT_INVALID")
