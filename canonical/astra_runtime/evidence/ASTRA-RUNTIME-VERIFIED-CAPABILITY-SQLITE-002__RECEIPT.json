@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T01:58:38.122762+00:00",
+  "mission_id": "ASTRA-RUNTIME-VERIFIED-CAPABILITY-SQLITE-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_VERIFIED_CAPABILITY_SQLITE_002.json",
+  "mission_sha256": "6573792d201d1c8d0b8869993ba2970b32ce238c358148622a5631838061bcd2",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "f8099b2fd2124b74cabd14ff302d51ef8474e86966fd7a39195ee581631dba0a",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

@@ -1,0 +1,204 @@
+{
+  "completed_at_utc": "2026-09-25T01:58:38.122253+00:00",
+  "created_at_utc": "2026-09-25T01:58:35.266618+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T01:58:38.121552+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "goal",
+        "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+        "cycles": 4,
+        "final_summary": "COMPOUND_GOAL_COMPLETE",
+        "goal_compilation": {
+          "clauses": [
+            "Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+            "Create a SQLite database at canonical/astra_runtime/tmp/VERIFIED_CAPABILITIES.sqlite with a table named verified_capabilities containing exactly one row for every VERIFIED_BOUND_CAPABILITY and columns capability_id, status, source_type, provides, and incremental_spend_usd",
+            "Finally independently query the SQLite database and verify that every VERIFIED_BOUND_CAPABILITY from the registry appears exactly once, that no non-verified capability appears, and that every stored value matches the canonical registry"
+          ],
+          "compiled_parts": [
+            {
+              "index": 0,
+              "mode": "NATIVE_READ",
+              "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+              "subgoal": "Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+            },
+            {
+              "index": 1,
+              "inputs": {
+                "goal": "Create a SQLite database at canonical/astra_runtime/tmp/VERIFIED_CAPABILITIES.sqlite with a table named verified_capabilities containing exactly one row for every VERIFIED_BOUND_CAPABILITY and columns capability_id, status, source_type, provides, and incremental_spend_usd",
+                "json_path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+                "output_path": "canonical/astra_runtime/tmp/VERIFIED_CAPABILITIES.sqlite"
+              },
+              "mode": "VERIFIED_CAPABILITY",
+              "score": 41,
+              "selected_capability": "sqlite.table.create_from_json_records",
+              "subgoal": "Create a SQLite database at canonical/astra_runtime/tmp/VERIFIED_CAPABILITIES.sqlite with a table named verified_capabilities containing exactly one row for every VERIFIED_BOUND_CAPABILITY and columns capability_id, status, source_type, provides, and incremental_spend_usd",
+              "target_effects": [
+                "sqlite.table.create_from_json_records"
+              ]
+            },
+            {
+              "index": 2,
+              "inputs": {
+                "goal": "Finally independently query the SQLite database and verify that every VERIFIED_BOUND_CAPABILITY from the registry appears exactly once, that no non-verified capability appears, and that every stored value matches the canonical registry",
+                "json_path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+                "sqlite_path": "canonical/astra_runtime/tmp/VERIFIED_CAPABILITIES.sqlite"
+              },
+              "mode": "VERIFIED_CAPABILITY",
+              "score": 34,
+              "selected_capability": "sqlite.table.verify_against_json_records",
+              "subgoal": "Finally independently query the SQLite database and verify that every VERIFIED_BOUND_CAPABILITY from the registry appears exactly once, that no non-verified capability appears, and that every stored value matches the canonical registry",
+              "target_effects": [
+                "sqlite.table.verify_against_json_records"
+              ]
+            }
+          ],
+          "compiler_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN"
+        },
+        "planner_model_last": null,
+        "planner_source": null,
+        "planner_transport": null,
+        "planning_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN",
+        "returncode": 0,
+        "stdout": "COMPOUND_GOAL_COMPLETE",
+        "trace": [
+          {
+            "cycle": 0,
+            "plan": {
+              "args": {
+                "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+              },
+              "expect": {
+                "field": "content",
+                "type": "field_nonempty"
+              },
+              "type": "read_file"
+            },
+            "result": {
+              "content": "{\n  \"capabilities\": {\n    \"archive.tar_gz.create_from_manifest\": {\n      \"action_template\": {\n        \"args\": {\n          \"capability_id\": \"archive.tar_gz.create_from_manifest\",\n          \"manifest_path\": \"${input.manifest_path}\",\n          \"output_path\": \"${input.output_path}\"\n        },\n        \"expect\": {\n          \"field\": \"output_verified\",\n          \"type\": \"field_equals\",\n          \"value\": true\n        },\n        \"type\": \"invoke_capability\"\n      },\n      \"adapter_module\": \"archive_tarfile\",\n      \"cost\": 1,\n      \"entrypoint\": \"run\",\n      \"incremental_spend_usd\": 0,\n      \"keywords\": [\n        \"archive\",\n        \"tar\",\n        \"tar.gz\",\n        \"bundle\",\n        \"manifest\",\n        \"package\"\n      ],\n      \"limitations\": [\n        \"Creates repository-local tar.gz archives from a JSON manifest's repository-local verification_paths.\",\n        \"Only regular files under the repository root are included.\"\n      ],\n      \"platforms\": [\n        \"linux\"\n      ],\n      \"provides\": [\n        \"archive.tar_gz.create_from_manifest\"\n      ],\n      \"requires\": [\n        \"manifest.json.available\"\n      ],\n      \"source\": {\n        \"adapter_path\": \"canonical/runtime/bound_capabilities/archive_tarfile.py\",\n        \"module\": \"tarfile\",\n        \"type\": \"python_stdlib\"\n      },\n      \"status\": \"VERIFIED_BOUND_CAPABILITY\",\n      \"verification\": {\n        \"independently_verified_by\": \"archive.verify.tar_gz.gnu\",\n        \"mission_id\": \"ASTRA-VERIFY-MANIFEST-ARCHIVE-001\",\n        \"observed_effect\": {\n          \"member_count\": 2,\n          \"output_sha256\": \"5f2b144d07156cbb48cc37d66627f7ba98e32498e3bebcc4c89eb23f23a277d6\"\n        },\n        \"receipt_path\": \"canonical/astra_runtime/evidence/ASTRA-VERIFY-MANIFEST-ARCHIVE-001__RECEIPT.json\"\n      }\n    },\n    \"archive.verify.tar_gz.gnu\": {\n      \"action_template\": {\n        \"args\": {\n          \"archive_path\": \"${input.archive_path}\",\n          \"capability_id\": \"archive.verify.tar_gz.gnu\",\n          \"manifest_path\": \"${input.manifest_path}\"\n        },\n        \"expect\": {\n          \"field\": \"verified\",\n          \"type\": \"field_equals\",\n          \"value\": true\n        },\n        \"type\": \"invoke_capability\"\n      },\n      \"adapter_module\": \"archive_verify_gnu_tar\",\n      \"cost\": 1,\n      \"entrypoint\": \"run\",\n      \"incremental_spend_usd\": 0,\n      \"keywords\": [\n        \"verify\",\n        \"archive\",\n        \"tar\",\n        \"hash\",\n        \"manifest\",\n        \"bundle\",\n        \"members\"\n      ],\n      \"limitations\": [\n        \"Verification uses GNU tar to list and extract the archive, then SHA-256 compares extracted bytes to repository sources.\",\n        \"Manifest and archive paths must be repository-local.\"\n      ],\n      \"platforms\": [\n        \"linux\"\n      ],\n      \"provides\": [\n        \"archive.tar_gz.verify_manifest_members\"\n      ],\n      \"requires\": [\n        \"manifest.json.available\",\n        \"archive.tar_gz.available\"\n      ],\n      \"source\": {\n        \"adapter_path\": \"canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py\",\n        \"executable\": \"tar\",\n        \"type\": \"system_tool\"\n      },\n      \"status\": \"VERIFIED_BOUND_CAPABILITY\",\n      \"verification\": {\n        \"mission_id\": \"ASTRA-VERIFY-MANIFEST-ARCHIVE-001\",\n        \"observed_effect\": {\n          \"member_count\": 2,\n          \"verified\": true\n        },\n        \"producer_independent\": true,\n        \"receipt_path\": \"canonical/astra_runtime/evidence/ASTRA-VERIFY-MANIFEST-ARCHIVE-001__RECEIPT.json\"\n      }\n    },\n    \"auto.apt.zint\": {\n      \"action_template\": {\n        \"args\": {\n          \"argv\": [\n            \"zint\",\n            \"-b\",\n            \"CODE128\",\n            \"-o\",\n            \"${input.output_path}\",\n            \"-d\",\n            \"${input.text}\"\n          ],\n          \"capability_id\": \"auto.apt.zint\",\n          \"output_path\": \"${input.output_path}\",\n          \"output_prefix_hex\": \"89504e470d0a1a0a\",\n          \"timeout_s\": 60\n        },\n        \"expect\": {\n          \"field\": \"output_verified\",\n          \"type\": \"field_equals\",\n          \"value\": true\n        },\n        \"type\": \"invoke_capability\"\n      },\n      \"adapter_module\": \"cli_command\",\n      \"autogenerated\": {\n        \"contract_evidence\": {\n          \"archive_sha256\": \"cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769\",\n          \"input_flag\": \"-d\",\n          \"output_flag\": \"-o\",\n          \"output_line\": \"-o, --output=FILE     Send output to FILE. Default is out.png\",\n          \"positional_input\": null,\n          \"probe_package\": \"zint\",\n          \"probe_version\": \"2.13.0-1build3\",\n          \"requested_suffix\": \".png\",\n          \"selector\": [\n            \"-b\",\n            \"CODE128\"\n          ],\n          \"usage_line\": null\n        },\n        \"integration_friction\": 0,\n        \"origin_goal\": \"Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png.\",\n        \"origin_mission_id\": \"ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003\",\n        \"schema\": \"PROJECT_BRAIN_AUTO_APT_CLI_BINDING_V1\",\n        \"supplier_score\": 48\n      },\n      \"cost\": 1,\n      \"entrypoint\": \"run\",\n      \"incremental_spend_usd\": 0,\n      \"keywords\": [\n        \"128\",\n        \"barcode\"\n      ],\n      \"limitations\": [\n        \"Automatically acquired from Ubuntu package metadata and CLI help.\",\n        \"Only the verified text-to-output-file invocation contract is promoted.\"\n      ],\n      \"platforms\": [\n        \"linux\"\n      ],\n      \"provides\": [\n        \"auto.effect.zint\"\n      ],\n      \"requires\": [],\n      \"source\": {\n        \"origin\": \"Ubuntu\",\n        \"packages\": [\n          {\n            \"name\": \"zint\",\n            \"sha256\": \"cdd7a7379dae12c3effdb5f3d55c89077003b72772bcf543f7139146f272b769\",\n            \"version\": \"2.13.0-1build3\"\n          }\n        ],\n        \"type\": \"apt\"\n      },\n      \"status\": \"VERIFIED_BOUND_CAPABILITY\",\n      \"verification\": {\n        \"autonomous_acquisition\": true,\n        \"independent_output_bytes\": 269,\n        \"independent_output_sha256\": \"c5ab48e8",
+              "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+              "truncated": true,
+              "type": "read_file"
+            }
+          },
+          {
+            "cycle": 1,
+            "plan": {
+              "args": {
+                "capability_id": "sqlite.table.create_from_json_records",
+                "goal": "Create a SQLite database at canonical/astra_runtime/tmp/VERIFIED_CAPABILITIES.sqlite with a table named verified_capabilities containing exactly one row for every VERIFIED_BOUND_CAPABILITY and columns capability_id, status, source_type, provides, and incremental_spend_usd",
+                "json_path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+                "output_path": "canonical/astra_runtime/tmp/VERIFIED_CAPABILITIES.sqlite"
+              },
+              "expect": {
+                "field": "output_verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "sqlite_table_stdlib",
+              "capability_id": "sqlite.table.create_from_json_records",
+              "collection_path": [
+                "capabilities"
+              ],
+              "column_count": 5,
+              "columns": [
+                "capability_id",
+                "status",
+                "source_type",
+                "provides",
+                "incremental_spend_usd"
+              ],
+              "dependency": {
+                "module": "sqlite3",
+                "python_version": "3.12.14",
+                "status": "LOCAL_VERIFIED",
+                "type": "python_stdlib"
+              },
+              "output_bytes": 8192,
+              "output_path": "canonical/astra_runtime/tmp/VERIFIED_CAPABILITIES.sqlite",
+              "output_sha256": "b67c1545d8e91b6da2e4cef13075f32083a6bdfd8231ad1454ecaf3eae48a27a",
+              "output_verified": true,
+              "row_count": 17,
+              "sqlite_version": "3.45.1",
+              "status_value": "VERIFIED_BOUND_CAPABILITY",
+              "table_name": "verified_capabilities"
+            }
+          },
+          {
+            "cycle": 2,
+            "plan": {
+              "args": {
+                "capability_id": "sqlite.table.verify_against_json_records",
+                "goal": "Finally independently query the SQLite database and verify that every VERIFIED_BOUND_CAPABILITY from the registry appears exactly once, that no non-verified capability appears, and that every stored value matches the canonical registry",
+                "json_path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+                "sqlite_path": "canonical/astra_runtime/tmp/VERIFIED_CAPABILITIES.sqlite"
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "sqlite_verify_cli",
+              "capability_id": "sqlite.table.verify_against_json_records",
+              "columns": [
+                "capability_id",
+                "status",
+                "source_type",
+                "provides",
+                "incremental_spend_usd"
+              ],
+              "dependency": {
+                "origin": "Ubuntu",
+                "packages": [
+                  {
+                    "archive_sha256": "78493e56909614ec1d588c9fae1739a704d9e1a6ff65509b1f06c3e4d53ed0c3",
+                    "name": "sqlite3",
+                    "version": "3.45.1-1ubuntu2.8"
+                  }
+                ],
+                "status": "INSTALLED_VERIFIED"
+              },
+              "producer_independent_verifier": true,
+              "sqlite_path": "canonical/astra_runtime/tmp/VERIFIED_CAPABILITIES.sqlite",
+              "sqlite_sha256": "b67c1545d8e91b6da2e4cef13075f32083a6bdfd8231ad1454ecaf3eae48a27a",
+              "status_value": "VERIFIED_BOUND_CAPABILITY",
+              "table_name": "verified_capabilities",
+              "verified": true,
+              "verified_rows": 17
+            }
+          },
+          {
+            "cycle": 3,
+            "plan": {
+              "args": {
+                "summary": "COMPOUND_GOAL_COMPLETE"
+              },
+              "type": "finish"
+            },
+            "result": {
+              "summary": "COMPOUND_GOAL_COMPLETE",
+              "type": "finish"
+            }
+          }
+        ]
+      },
+      "step_id": "execute-verified-capability-sqlite",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-RUNTIME-VERIFIED-CAPABILITY-SQLITE-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_VERIFIED_CAPABILITY_SQLITE_002.json",
+  "mission_sha256": "6573792d201d1c8d0b8869993ba2970b32ce238c358148622a5631838061bcd2",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T01:58:38.121571+00:00"
+}
