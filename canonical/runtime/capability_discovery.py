@@ -45,7 +45,7 @@ def _semanticize_paths(text):
         raw=match.group(0)
         leaf=raw.rsplit("/",1)[-1]
         ext=leaf.rsplit(".",1)[-1].lower() if "." in leaf else ""
-        return " "+ext_words.get(ext,"")+" "
+        return " "+ext_words.get(ext,ext)+" "
     return re.sub(pattern,repl,str(text or ""))
 
 
@@ -57,17 +57,25 @@ def effect_queries(effect):
         t.lower() for t in re.split(r"[^A-Za-z0-9]+", semantic)
         if len(t) >= 2 and t.lower() not in STOPWORDS
     ]
-    out = []
-    # Preserve semantic order from the goal/effect. Length-sorting pushed broad
-    # adjectives ahead of the actual capability noun (for example QR).
+    low_information=set(GENERIC_DISCOVERY_TOKENS) | {
+        "those","these","exact","records","record","fields","field",
+        "values","value","same","identical","order","count","save"
+    }
+    distinctive=[]
+    generic=[]
     for token in tokens:
+        target=generic if token in low_information or token.isdigit() else distinctive
+        if token not in target:
+            target.append(token)
+    out=[]
+    for token in distinctive+generic:
         if token not in out:
             out.append(token)
     if not out:
         compact = re.sub(r"[^A-Za-z0-9]+", "", effect).lower()
         if compact:
             out.append(compact)
-    return out[:4]
+    return out[:6]
 
 
 def _flatten_text(value):
@@ -377,10 +385,112 @@ def search_apt_packages(effect, limit=12):
     }
 
 
+def _pypi_candidate_names(effect):
+    names=[]
+    for token in effect_queries(effect):
+        variants=[
+            token,
+            token.replace("_","-"),
+            token.replace("-",""),
+        ]
+        for value in variants:
+            value=value.strip("-_.").lower()
+            if re.fullmatch(r"[a-z0-9][a-z0-9._-]{0,80}",value) and value not in names:
+                names.append(value)
+    return names[:12]
+
+
+def search_pypi_packages(effect, limit=12, timeout_s=12, opener=None):
+    """Probe exact PyPI project candidates derived from the effect contract.
+
+    PyPI has no supported full-text search API, so this stays conservative:
+    semantic/effect tokens and output extensions become exact project probes.
+    Metadata discovery never installs code.
+    """
+    opener=opener or urllib.request.urlopen
+    queries=_pypi_candidate_names(effect)
+    candidates=[]
+    errors=[]
+    effect_tokens=set(effect_queries(effect))
+    for query in queries:
+        url="https://pypi.org/pypi/"+urllib.parse.quote(query,safe="")+"/json"
+        req=urllib.request.Request(url,headers={"User-Agent":"ProjectBrain-CapabilityDiscovery/1"})
+        try:
+            with opener(req,timeout=timeout_s) as resp:
+                raw=resp.read(3000000)
+            payload=json.loads(raw.decode("utf-8"))
+        except Exception as exc:
+            errors.append({"query":query,"error":type(exc).__name__+":"+str(exc)})
+            continue
+        info=payload.get("info") or {}
+        name=str(info.get("name") or query)
+        version=str(info.get("version") or "")
+        if not version:
+            continue
+        urls=payload.get("urls") or []
+        wheels=[]
+        for item in urls:
+            filename=str(item.get("filename") or "")
+            digest=str((item.get("digests") or {}).get("sha256") or "").lower()
+            artifact_url=str(item.get("url") or "")
+            if filename.endswith(".whl") and re.fullmatch(r"[0-9a-f]{64}",digest) and artifact_url.startswith("https://"):
+                wheels.append({
+                  "filename":filename,
+                  "sha256":digest,
+                  "url":artifact_url,
+                  "size":item.get("size"),
+                  "python_version":item.get("python_version"),
+                })
+        if not wheels:
+            continue
+        blob=(name+" "+str(info.get("summary") or "")+" "+str(info.get("keywords") or "")).lower()
+        matched=sorted(t for t in effect_tokens if t in blob or t==re.sub(r"[-_.]+","",name.lower()))
+        normalized_name=re.sub(r"[-_.]+","",name.lower())
+        normalized_query=re.sub(r"[-_.]+","",query.lower())
+        score=(50 if normalized_name==normalized_query else 0)+12*len(matched)
+        requires_dist=info.get("requires_dist") or []
+        dependency_count=len(requires_dist) if isinstance(requires_dist,list) else 0
+        score-=4*dependency_count
+        candidates.append({
+          "discovery_source":"PYPI",
+          "name":name,
+          "project":name,
+          "description":str(info.get("summary") or ""),
+          "version":version,
+          "metadata_url":"https://pypi.org/pypi/"+urllib.parse.quote(name,safe="")+"/"+urllib.parse.quote(version,safe="")+"/json",
+          "query":query,
+          "matched_terms":matched,
+          "score":score,
+          "integration_friction":1+dependency_count,
+          "required_secret_count":0,
+          "required_environment_count":0,
+          "dependency_count":dependency_count,
+          "zero_cost_eligible":True,
+          "eligibility_status":"PYPI_METADATA_CANDIDATE_UNVERIFIED",
+          "binding_kind":"pypi",
+          "wheels":wheels,
+          "requires_python":info.get("requires_python"),
+          "license":info.get("license"),
+        })
+    candidates.sort(key=lambda x:(-float(x.get("score",0)),int(x.get("dependency_count",0)),str(x.get("name",""))))
+    return {
+      "schema":"PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+      "effect":effect,
+      "source":"PYPI",
+      "source_url":"https://pypi.org/",
+      "queries":queries,
+      "candidate_count":len(candidates),
+      "candidates":candidates[:max(1,min(int(limit),50))],
+      "errors":errors,
+      "binding_performed":False,
+    }
+
+
 def search_all(effect, limit_per_source=12):
     """Federated discovery. Metadata is candidate evidence, never binding proof."""
     results=[
         search_apt_packages(effect,limit=limit_per_source),
+        search_pypi_packages(effect,limit=limit_per_source,timeout_s=12),
         search_mcp_registry(effect,limit=limit_per_source,timeout_s=12),
     ]
     merged=[]
@@ -397,7 +507,7 @@ def search_all(effect, limit_per_source=12):
     merged.sort(key=lambda x:(
         not bool(x.get("zero_cost_eligible")),
         x.get("required_secret_count",0)>0,
-        0 if x.get("discovery_source")=="APT_CATALOG" else 1,
+        0 if x.get("discovery_source") in {"APT_CATALOG","PYPI"} else 1,
         int(x.get("integration_friction",1 if x.get("discovery_source")=="OFFICIAL_MCP_REGISTRY" else 0)),
         -float(x.get("score",0)),
         str(x.get("name","")),
