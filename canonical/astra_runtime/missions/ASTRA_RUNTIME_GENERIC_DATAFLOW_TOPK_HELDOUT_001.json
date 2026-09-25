@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-GENERIC-DATAFLOW-TOPK-HELDOUT-001",
+  "purpose": "Held-out proof that generic sum metrics, derived averages, and bounded top-K ranking generalize across different live entities and output cardinalities.",
+  "goal": "Using a real rendered browser, open https://jsonplaceholder.typicode.com/users, save a screenshot to canonical/astra_runtime/tmp/TOPK_H_USERS.png, and save the rendered result to canonical/astra_runtime/tmp/TOPK_H_USERS.json. Using a real rendered browser, open https://jsonplaceholder.typicode.com/todos, save a screenshot to canonical/astra_runtime/tmp/TOPK_H_TODOS.png, and save the rendered result to canonical/astra_runtime/tmp/TOPK_H_TODOS.json. Using both live results, create canonical/astra_runtime/tmp/USER_TODO_AVERAGES.json containing exactly one record per live user with user_id, username, todo_count, todo_id_sum, and average_todo_id, where todo_count is the number of live todos whose userId equals that user's id, todo_id_sum is the sum of those todos' id field, and average_todo_id is todo_id_sum divided by todo_count. From canonical/astra_runtime/tmp/USER_TODO_AVERAGES.json select exactly two winners with the greatest average_todo_id, breaking ties by the lowest user_id, and save canonical/astra_runtime/tmp/USER_TODO_TOP2.json containing user_id, username, todo_count, todo_id_sum, and average_todo_id in ranked order. Finally independently reopen both live source results, canonical/astra_runtime/tmp/USER_TODO_AVERAGES.json, and canonical/astra_runtime/tmp/USER_TODO_TOP2.json and verify every user's count, sum, and average_todo_id are correct, the selected two records are exactly the top two under the requested ordering, every live user appears exactly once in the averages file, and there are no extra records.",
+  "steps": [
+    {
+      "id": "run-heldout-sum-topk",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 32,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "manual_controller_actions": false,
+    "manual_target_effects": false,
+    "held_out_sum_topk": true,
+    "generic_sum_topk_ir_commits": [
+      "b39424f6e1fa4d3e47b73a815089d28b647c3324",
+      "c94454b775c51c0ade01b34414c0a7aff97f5f50"
+    ]
+  }
+}
