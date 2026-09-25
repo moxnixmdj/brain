@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T04:31:31.597003+00:00",
+  "mission_id": "ASTRA-DYNAMIC-CAPABILITY-COMPILER-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_DYNAMIC_CAPABILITY_COMPILER_DIAG_001.json",
+  "mission_sha256": "3622e10a8ccba4eacfb98bd4d624e12ac00b35522ab179b43f7e1de923e7613b",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "0f8a1809a2a6555c91ae958adffc03e1f2af5d00dfb7d1e98ff90c16ad864b16",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

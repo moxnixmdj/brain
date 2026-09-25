@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T04:31:31.596703+00:00",
+  "created_at_utc": "2026-09-25T04:31:31.526105+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T04:31:31.596368+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/goal_compiler.py')\ns=importlib.util.spec_from_file_location('gc',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads(pathlib.Path('canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads(pathlib.Path('canonical/astra_runtime/missions/ASTRA_RUNTIME_DYNAMIC_CAPABILITY_CHOICE_001.json').read_text())['goal']\ntry:\n out=m.compile_goal(goal,reg,pathlib.Path('.').resolve())\n print(json.dumps({'status':'COMPILED','parts':out.get('compiled_parts'),'actions':out.get('controller_actions')},sort_keys=True))\nexcept Exception as e:\n print(json.dumps({'status':'FAILED','type':type(e).__name__,'error':str(e)},sort_keys=True))\nprint('DYNAMIC_CAPABILITY_COMPILER_DIAG_COMPLETE')\nPY",
+        "duration_s": 0.07,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"GOAL_COMPILATION_SUBGOAL_UNRESOLVED:{\\\"cause\\\": \\\"GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH\\\", \\\"cause_detail\\\": null, \\\"clauses\\\": [\\\"Using a real rendered browser, open https://httpbin.org/uuid, save a screenshot to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_UUID.png, and save the rendered result to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_UUID.json\\\", \\\"Read the UUID from that live result\\\", \\\"If its first hexadecimal character is one of a,b,c,d,e,f, generate a QR code image for the observed UUID and save it to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_QR.png; otherwise generate a Code 128 barcode image for the same observed UUID and save it to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_BARCODE.png\\\", \\\"Finally independently verify that the artifact selected by the live branch decodes to the observed UUID\\\"], \\\"compiled_prefix\\\": [{\\\"index\\\": 0, \\\"inputs\\\": {\\\"result_path\\\": \\\"canonical/astra_runtime/tmp/DYNAMIC_CHOICE_UUID.json\\\", \\\"screenshot_path\\\": \\\"canonical/astra_runtime/tmp/DYNAMIC_CHOICE_UUID.png\\\", \\\"url\\\": \\\"https://httpbin.org/uuid\\\"}, \\\"mode\\\": \\\"VERIFIED_CAPABILITY\\\", \\\"score\\\": 30, \\\"selected_capability\\\": \\\"web.browser.rendered.capture.chromedriver\\\", \\\"subgoal\\\": \\\"Using a real rendered browser, open https://httpbin.org/uuid, save a screenshot to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_UUID.png, and save the rendered result to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_UUID.json\\\", \\\"target_effects\\\": [\\\"web.browser.rendered.capture\\\", \\\"web.browser.rendered.interact\\\"]}, {\\\"index\\\": 1, \\\"mode\\\": \\\"DEFERRED_RUNTIME_VALUE_READ\\\", \\\"source_path\\\": \\\"canonical/astra_runtime/tmp/DYNAMIC_CHOICE_UUID.json\\\", \\\"subgoal\\\": \\\"Read the UUID from that live result\\\"}], \\\"context_paths\\\": [\\\"canonical/astra_runtime/tmp/DYNAMIC_CHOICE_UUID.json\\\", \\\"canonical/astra_runtime/tmp/DYNAMIC_CHOICE_UUID.png\\\"], \\\"index\\\": 2, \\\"subgoal\\\": \\\"If its first hexadecimal character is one of a,b,c,d,e,f, generate a QR code image for the observed UUID and save it to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_QR.png; otherwise generate a Code 128 barcode image for the same observed UUID and save it to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_BARCODE.png\\\"}\", \"status\": \"FAILED\", \"type\": \"GoalCompilationFailure\"}\nDYNAMIC_CAPABILITY_COMPILER_DIAG_COMPLETE\n"
+      },
+      "step_id": "compile-dynamic-capability-choice",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-DYNAMIC-CAPABILITY-COMPILER-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_DYNAMIC_CAPABILITY_COMPILER_DIAG_001.json",
+  "mission_sha256": "3622e10a8ccba4eacfb98bd4d624e12ac00b35522ab179b43f7e1de923e7613b",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T04:31:31.596385+00:00"
+}
