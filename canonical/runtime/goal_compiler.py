@@ -1774,6 +1774,57 @@ def _compile_live_uuid_verification(subgoal, context_paths, compiled_parts):
     }
 
 
+def _compile_dynamic_fanout_goal(goal, clauses, registry, root):
+    if len(clauses)<6:
+        return None
+    if not re.match(r"^read\s+the\s+live\s+json\s+array\s+from\s+that\s+result$",clauses[1],re.IGNORECASE):
+        return None
+    first=_compile_single_goal(
+        clauses[0],registry,root,
+        context_paths=None,future_clauses=clauses[1:]
+    )
+    first_entry=registry[first["selected_capability"]]
+    first_action=_render_template(first_entry["action_template"],first["inputs"])
+    context_paths=[
+        str(v) for v in first["inputs"].values()
+        if isinstance(v,str) and pathlib.Path(v).suffix
+    ]
+    fanout=_compile_runtime_dynamic_fanout(
+        clauses[2],context_paths,registry,clauses[3:]
+    )
+    if fanout is None:
+        return None
+    fanout_part={"mode":"RUNTIME_DYNAMIC_CAPABILITY_FANOUT",**fanout["evidence"]}
+    verify=_compile_runtime_dynamic_fanout_verification(
+        clauses[-1],[fanout_part]
+    )
+    if verify is None:
+        return None
+    return {
+      "schema":"PROJECT_BRAIN_COMPILED_COMPOUND_GOAL_V1",
+      "compiler_mode":"DETERMINISTIC_DYNAMIC_FANOUT_PLAN",
+      "clauses":clauses,
+      "compiled_parts":[
+        {"index":0,"subgoal":clauses[0],"mode":"VERIFIED_CAPABILITY",
+         "selected_capability":first["selected_capability"],"inputs":first["inputs"],
+         "target_effects":first["target_effects"],"score":first["score"]},
+        {"index":1,"subgoal":clauses[1],"mode":"DEFERRED_RUNTIME_COLLECTION_READ",
+         "source_path":context_paths[-1]},
+        {"index":2,"subgoal":clauses[2],"mode":"RUNTIME_DYNAMIC_CAPABILITY_FANOUT",
+         **fanout["evidence"]},
+        {"index":len(clauses)-1,"subgoal":clauses[-1],
+         "mode":"INDEPENDENT_RUNTIME_FANOUT_VERIFICATION",**verify["evidence"]},
+      ],
+      "controller_actions":[
+        first_action,
+        fanout["action"],
+        verify["action"],
+        {"type":"finish","args":{"summary":"COMPOUND_GOAL_COMPLETE"}},
+      ],
+      "finish_summary":"COMPOUND_GOAL_COMPLETE",
+    }
+
+
 def _compile_compound_goal(goal, clauses, registry, root):
     actions=[]
     compiled_parts=[]
