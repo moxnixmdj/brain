@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-LIVE-PROVENANCE-AUDIT-001",
+  "purpose": "Orthogonal real correctness mission: verify a live external dependency provenance claim from canonical Brain against its authoritative current package registry and artifact bytes, without hand-authored controller actions.",
+  "goal": "Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json. Find the VERIFIED_BOUND_CAPABILITY whose source type is pypi. Fetch that project's authoritative live PyPI metadata from the metadata URL recorded in the registry. Verify that the pinned version and wheel filename still exist in that metadata, download that exact wheel, compute its SHA-256, and verify it equals the wheel_sha256 recorded in the registry. Create canonical/astra_runtime/tmp/LIVE_PYPI_PROVENANCE_AUDIT.json containing the capability ID, project, pinned version, wheel filename, recorded hash, live metadata hash, downloaded artifact hash, metadata URL, artifact URL, and a final verified boolean. Finally independently read the report and fail unless all three hashes are identical and verified is true.",
+  "steps": [
+    {
+      "id": "execute-live-provenance-audit",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 24,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "mandatory_model_planner": false,
+    "manual_target_effects": false,
+    "manual_initial_facts": false,
+    "manual_controller_actions": false,
+    "manual_supplier": false,
+    "manual_binding": false,
+    "real_external_truth_required": true,
+    "authoritative_source_required": true,
+    "final_effect_verification_required": true,
+    "orthogonal_pressure_family": "live_network_metadata_binary_hash_provenance"
+  }
+}
