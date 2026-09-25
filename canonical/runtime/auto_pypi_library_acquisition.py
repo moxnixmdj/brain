@@ -40,12 +40,24 @@ def supports(goal):
 
 
 def _candidate_pool(goal,discovery=None):
-    if discovery is None:
-        candidates=(capability_discovery.search_pypi_packages(goal,limit=16).get("candidates") or [])
-    else:
-        candidates=[x for x in discovery.get("candidates",[]) if x.get("discovery_source")=="PYPI"]
-        if not candidates:
-            candidates=(capability_discovery.search_pypi_packages(goal,limit=16).get("candidates") or [])
+    # Federated discovery is intentionally truncated across supplier classes
+    # and is suitable for routing, not for a supplier-local contract race.
+    # Always refresh the supplier's own authoritative candidate surface, then
+    # merge any already-known PyPI candidates and rank the union.
+    fresh=(capability_discovery.search_pypi_packages(goal,limit=32).get("candidates") or [])
+    inherited=[
+        x for x in (discovery or {}).get("candidates",[])
+        if x.get("discovery_source")=="PYPI"
+    ]
+    merged={}
+    for cand in inherited+fresh:
+        key=str(cand.get("project") or cand.get("name") or "").strip().lower()
+        if not key:
+            continue
+        prior=merged.get(key)
+        if prior is None or float(cand.get("score",0))>float(prior.get("score",0)):
+            merged[key]=cand
+    candidates=list(merged.values())
     viable=[]
     for cand in candidates:
         if not cand.get("zero_cost_eligible",False): continue
@@ -56,7 +68,7 @@ def _candidate_pool(goal,discovery=None):
     viable.sort(key=lambda x:(-float(x.get("score",0)),str(x.get("name",""))))
     if not viable:
         raise AutoPyPIAcquisitionFailure("NO_ZERO_DEPENDENCY_PYPI_CANDIDATE")
-    return viable[:12]
+    return viable[:16]
 
 
 def _download_compatible_wheel(candidate,root):
