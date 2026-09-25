@@ -1562,9 +1562,9 @@ def _compile_multi_source_reduce_goal(goal,clauses,registry,root):
     else:
         semantic=str(clauses[2] or "").strip()
         paths=[raw for raw,_ in _repo_paths(semantic,root) if pathlib.Path(raw).suffix.lower()==".json"]
-        row=re.search(r"\bone\s+(?:row|record)\s+(?:for\s+)?(?:each|per)\s+(?:observed|live)?\s*(\w+)\b",semantic,re.I)
-        relation=re.search(r"\b(\w+)\.(\w+)\s*=\s*(\w+)\.(\w+)\b",semantic,re.I)
-        count=re.search(r"\b([A-Za-z_][A-Za-z0-9_]*)\s+(?:equal\s+to|equals|is)\s+(?:how\s+many|the\s+number\s+of)\b",semantic,re.I)
+        row=(re.search(r"\bone\s+(?:row|record)\s+(?:for\s+)?(?:each|per)\s+(?:observed|live)?\s*(\w+)\b",semantic,re.I) or re.search(r"\beach\s+(\w+)\s+has\s+a\s+single\s+summary\s+entry\b",semantic,re.I) or re.search(r"\bone\s+summary\s+(?:row|entry|record)\s+per\s+(\w+)\b",semantic,re.I))
+        relation=re.search(r"\b(\w+)\.(\w+)\s*(?:=|equals|matching|matches)\s*(\w+)\.(\w+)\b",semantic,re.I)
+        count=(re.search(r"\b([A-Za-z_][A-Za-z0-9_]*)\s+(?:equal\s+to|equals|is)\s+(?:how\s+many|the\s+number\s+of)\b",semantic,re.I) or re.search(r"\bderive\s+([A-Za-z_][A-Za-z0-9_]*)\s+by\s+counting\b",semantic,re.I))
         field_segment=re.search(r"\b(?:carrying|with)\s+(.+?)(?:,\s*(?:plus|where)|\s+where\b)",semantic,re.I)
         if len(paths)!=1 or not row or not relation or not count:
             return None
