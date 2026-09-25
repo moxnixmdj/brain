@@ -236,7 +236,7 @@ class GoalCompilerTests(unittest.TestCase):
         self.assertTrue(action["args"]["output_path"].endswith(".json"))
 
     def test_structured_nested_record_selection_compiles_and_executes(self):
-        subgoal="Find the VERIFIED_BOUND_CAPABILITY whose source type is pypi"
+        subgoal="Find the VERIFIED_BOUND_CAPABILITY whose source project is pypdf"
         out=compiler._compile_json_record_selection(
             subgoal,
             ["canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"],
@@ -253,7 +253,25 @@ class GoalCompilerTests(unittest.TestCase):
         selected=json.loads(proc.stdout)
         self.assertEqual(selected["id"],"pdf.extract.text.pypdf")
         self.assertEqual(selected["record"]["source"]["type"],"pypi")
+        self.assertEqual(selected["record"]["source"]["project"],"pypdf")
         self.assertEqual(selected["record"]["status"],"VERIFIED_BOUND_CAPABILITY")
+
+    def test_structured_nested_record_selection_fails_closed_when_not_unique(self):
+        subgoal="Find the VERIFIED_BOUND_CAPABILITY whose source type is pypi"
+        out=compiler._compile_json_record_selection(
+            subgoal,
+            ["canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"],
+            self.registry(),
+            ROOT,
+        )
+        self.assertIsNotNone(out)
+        action=out["action"]
+        proc=subprocess.run(
+            ["jq",action["args"]["filter"],str(ROOT/action["args"]["input_path"])],
+            text=True,capture_output=True,timeout=20,
+        )
+        self.assertNotEqual(proc.returncode,0)
+        self.assertIn("SELECTION_NOT_UNIQUE",proc.stderr)
 
     def test_json_status_manifest_compiles_and_executes(self):
         subgoal=(
@@ -289,7 +307,7 @@ class GoalCompilerTests(unittest.TestCase):
     def test_compound_live_pypi_provenance_compiles_full_verified_pipeline(self):
         goal=(
             "Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json. "
-            "Find the VERIFIED_BOUND_CAPABILITY whose source type is pypi. "
+            "Find the VERIFIED_BOUND_CAPABILITY whose source project is pypdf. "
             "Fetch that project's authoritative live PyPI metadata from the metadata URL recorded in the registry. "
             "Verify that the pinned version and wheel filename still exist in that metadata, download that exact wheel, compute its SHA-256, "
             "and verify it equals the wheel_sha256 recorded in the registry. "
