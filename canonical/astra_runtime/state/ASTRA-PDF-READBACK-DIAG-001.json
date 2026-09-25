@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T00:02:32.872952+00:00",
+  "created_at_utc": "2026-09-25T00:02:31.691439+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T00:02:32.872603+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib,re,sys\nroot=pathlib.Path('.').resolve()\np=root/'canonical/runtime/astra_runtime.py'\ns=importlib.util.spec_from_file_location('astra_pdf_diag',p)\nm=importlib.util.module_from_spec(s); sys.modules[s.name]=m; s.loader.exec_module(m)\nout=m._invoke_bound_capability({'capability_id':'pdf.extract.text.pypdf','path':'canonical/astra_runtime/tmp/MARKDOWN_PDF_VERIFY.pdf','max_pages':20})\ntext=str(out.get('text') or '')\nev={'raw_text':text,'repr':repr(text),'whitespace_normalized':' '.join(text.split()),'alnum_normalized':re.sub(r'[^A-Z0-9]+','',text.upper()),'adapter_result':out}\n(root/'canonical/astra_runtime/evidence/ASTRA-PDF-READBACK-DIAG-001__RESULT.json').write_text(json.dumps(ev,indent=2,sort_keys=True)+'\\n')\nprint('PDF_READBACK_DIAG_COMPLETE')\nPY",
+        "duration_s": 1.181,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "PDF_READBACK_DIAG_COMPLETE\n"
+      },
+      "step_id": "inspect-pdf-text",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-PDF-READBACK-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_PDF_READBACK_DIAG_001.json",
+  "mission_sha256": "d778746e870acd2ddb224e5edc04221c0b6b41971474573141344325d4be2630",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T00:02:32.872621+00:00"
+}

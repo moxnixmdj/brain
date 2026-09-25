@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T00:02:32.873176+00:00",
+  "mission_id": "ASTRA-PDF-READBACK-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_PDF_READBACK_DIAG_001.json",
+  "mission_sha256": "d778746e870acd2ddb224e5edc04221c0b6b41971474573141344325d4be2630",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "d099d7df36983e38aecc20575ba1fe050cc8b8c7464877dcf9437b7f577abac0",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

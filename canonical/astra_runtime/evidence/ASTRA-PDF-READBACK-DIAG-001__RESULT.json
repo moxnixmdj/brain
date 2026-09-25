@@ -1,0 +1,23 @@
+{
+  "adapter_result": {
+    "adapter": "bound_capability",
+    "capability_id": "pdf.extract.text.pypdf",
+    "dependency": {
+      "project": "pypdf",
+      "status": "INSTALLED_VERIFIED",
+      "version": "6.19.0",
+      "wheel_sha256": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14"
+    },
+    "pages_processed": 1,
+    "pages_total": 1,
+    "source_path": "canonical/astra_runtime/tmp/MARKDOWN_PDF_VERIFY.pdf",
+    "text": "PROJECT BRAIN PDF\nCONVERSION\nCapability State\nALPHA-VERIFY -7319 VERIFIED\nBETA-VERIFY -2846 COMPLETE",
+    "text_bytes": 100,
+    "text_sha256": "7eaa6d30af3afe91a0f5da05eaef3fa35ee950358976789a57303189d84235b0",
+    "text_truncated": false
+  },
+  "alnum_normalized": "PROJECTBRAINPDFCONVERSIONCAPABILITYSTATEALPHAVERIFY7319VERIFIEDBETAVERIFY2846COMPLETE",
+  "raw_text": "PROJECT BRAIN PDF\nCONVERSION\nCapability State\nALPHA-VERIFY -7319 VERIFIED\nBETA-VERIFY -2846 COMPLETE",
+  "repr": "'PROJECT BRAIN PDF\\nCONVERSION\\nCapability State\\nALPHA-VERIFY -7319 VERIFIED\\nBETA-VERIFY -2846 COMPLETE'",
+  "whitespace_normalized": "PROJECT BRAIN PDF CONVERSION Capability State ALPHA-VERIFY -7319 VERIFIED BETA-VERIFY -2846 COMPLETE"
+}
