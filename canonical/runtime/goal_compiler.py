@@ -358,6 +358,113 @@ def _compile_json_markdown_table(subgoal, context_paths, registry, root):
     }
 
 
+def _compile_pypi_provenance_audit(subgoal, context_paths, registry, root, future_clauses=None):
+    entry=(registry or {}).get("pypi.provenance.audit_live_artifact")
+    if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
+        return None
+    lower=subgoal.lower()
+    if not re.match(r"^verify\b",lower):
+        return None
+    if "wheel" not in lower or "download" not in lower or ("sha-256" not in lower and "sha256" not in lower):
+        return None
+
+    json_paths=[str(p) for p in context_paths if pathlib.Path(str(p)).suffix.lower()==".json"]
+    selection_paths=[p for p in json_paths if "STRUCTURED_SELECTION_" in pathlib.Path(p).name]
+    metadata_paths=[p for p in json_paths if "LIVE_FETCH_" in pathlib.Path(p).name]
+    if not selection_paths or not metadata_paths:
+        return None
+    selection_path=selection_paths[-1]
+    metadata_path=metadata_paths[-1]
+
+    report_path=None
+    for clause in future_clauses or []:
+        for raw,_ in _repo_paths(clause,root):
+            if pathlib.Path(raw).suffix.lower()==".json" and raw not in context_paths:
+                report_path=raw
+                break
+        if report_path:
+            break
+    if not report_path:
+        digest=hashlib.sha256(subgoal.encode("utf-8")).hexdigest()[:12]
+        report_path=f"canonical/astra_runtime/tmp/PYPI_PROVENANCE_{digest}.json"
+
+    action={
+      "type":"invoke_capability",
+      "args":{
+        "capability_id":"pypi.provenance.audit_live_artifact",
+        "selection_path":selection_path,
+        "metadata_path":metadata_path,
+        "report_path":report_path,
+        "max_bytes":20000000,
+        "timeout_s":60,
+      },
+      "expect":{"type":"field_equals","field":"verified","value":True},
+    }
+    return {
+      "action":action,
+      "output_path":report_path,
+      "evidence":{
+        "selection_path":selection_path,
+        "metadata_path":metadata_path,
+        "report_path":report_path,
+        "capability_id":"pypi.provenance.audit_live_artifact",
+      }
+    }
+
+
+def _compile_json_hash_equality_assertion(subgoal, context_paths, root):
+    lower=subgoal.lower()
+    if not re.match(r"^(?:finally\s+)?(?:verify|check|assert|read)\b",lower):
+        return None
+    relevant=(
+        "wheel_sha256" in lower
+        or ("hash" in lower and any(x in lower for x in ("identical","equal","equals","match")))
+        or ("verified is true" in lower)
+    )
+    if not relevant:
+        return None
+    json_paths=[str(p) for p in context_paths if pathlib.Path(str(p)).suffix.lower()==".json"]
+    if not json_paths:
+        return None
+    # Prefer a provenance/audit report in the causal prefix.
+    report_paths=[p for p in json_paths if any(x in pathlib.Path(p).name.upper() for x in ("PROVENANCE","AUDIT","REPORT"))]
+    report_path=(report_paths or json_paths)[-1]
+    action={
+      "type":"assert_json_fields_equal",
+      "args":{
+        "path":report_path,
+        "fields":["recorded_hash","live_metadata_hash","downloaded_artifact_hash"],
+        "true_fields":["verified"],
+      },
+      "expect":{"type":"field_equals","field":"verified","value":True},
+    }
+    return {
+      "action":action,
+      "evidence":{
+        "report_path":report_path,
+        "equal_fields":["recorded_hash","live_metadata_hash","downloaded_artifact_hash"],
+        "true_fields":["verified"],
+      }
+    }
+
+
+def _compile_existing_causal_artifact_assertion(subgoal, context_paths, root):
+    lower=subgoal.lower()
+    if not re.match(r"^(?:create|write|save|store)\b",lower):
+        return None
+    paths=[raw for raw,_ in _repo_paths(subgoal,root)]
+    matches=[p for p in paths if p in set(context_paths or [])]
+    if len(matches)!=1:
+        return None
+    path=matches[0]
+    action={
+      "type":"assert_file_exists",
+      "args":{"path":path},
+      "expect":{"type":"field_equals","field":"verified","value":True},
+    }
+    return {"action":action,"evidence":{"path":path}}
+
+
 def _compile_context_url_json_fetch(subgoal, context_paths, registry, root):
     entry=(registry or {}).get("http.json.fetch_from_state")
     if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
@@ -670,6 +777,39 @@ def _compile_compound_goal(goal, clauses, registry, root):
                 "index":index,"subgoal":clause,
                 "mode":"INDEPENDENT_CONTENT_VERIFICATION",
                 **verification["evidence"],
+            })
+            continue
+
+        provenance=_compile_pypi_provenance_audit(
+            clause,context_paths,registry,root,future_clauses=clauses[index+1:]
+        )
+        if provenance is not None:
+            actions.append(provenance["action"])
+            context_paths.append(provenance["output_path"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"VERIFIED_PYPI_PROVENANCE",
+                **provenance["evidence"],
+            })
+            continue
+
+        hash_assert=_compile_json_hash_equality_assertion(clause,context_paths,root)
+        if hash_assert is not None:
+            actions.append(hash_assert["action"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"INDEPENDENT_JSON_INTEGRITY_ASSERTION",
+                **hash_assert["evidence"],
+            })
+            continue
+
+        existing=_compile_existing_causal_artifact_assertion(clause,context_paths,root)
+        if existing is not None:
+            actions.append(existing["action"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"CAUSAL_ARTIFACT_ALREADY_PRODUCED",
+                **existing["evidence"],
             })
             continue
 
