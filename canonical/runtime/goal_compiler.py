@@ -1145,6 +1145,67 @@ def _compile_latest_stable_release_from_capture(subgoal, context_paths, registry
     }
 
 
+def _compile_independent_web_release_verification(subgoal, context_paths, registry, root):
+    """Compile an independent official-page verification of a structured release claim."""
+    lower=subgoal.lower()
+    if not re.match(r"^(?:finally\s+)?independently\s+(?:verify|check|confirm)\b",lower):
+        return None
+    if "without trusting" not in lower and "independent" not in lower:
+        return None
+    entry=(registry or {}).get("web.release.verify.independent_http")
+    if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
+        return None
+
+    field_match=re.search(r"\bclaimed\s+([A-Za-z_][A-Za-z0-9_]*)\b",subgoal,re.IGNORECASE)
+    if not field_match:
+        return None
+    version_field=field_match.group(1)
+
+    release_match=re.search(
+        r"\b(?:current\s+)?stable\s+([A-Za-z][A-Za-z0-9_.+-]*)\s+(\d+)\s+release\b",
+        subgoal,re.IGNORECASE
+    )
+    if not release_match:
+        release_match=re.search(
+            r"\b([A-Za-z][A-Za-z0-9_.+-]*)\s+(\d+)\s+(?:stable\s+)?release\b",
+            subgoal,re.IGNORECASE
+        )
+    if not release_match:
+        return None
+    product=release_match.group(1)
+    major=release_match.group(2)
+
+    json_paths=[str(p) for p in context_paths if pathlib.Path(str(p)).suffix.lower()==".json"]
+    if not json_paths:
+        return None
+    result_path=json_paths[-1]
+
+    action={
+      "type":"invoke_capability",
+      "args":{
+        "capability_id":"web.release.verify.independent_http",
+        "result_path":result_path,
+        "version_field":version_field,
+        "product":product,
+        "major":major,
+        "timeout_s":30,
+        "max_bytes":3000000,
+      },
+      "expect":{"type":"field_equals","field":"verified","value":True},
+    }
+    return {
+      "action":action,
+      "evidence":{
+        "result_path":result_path,
+        "version_field":version_field,
+        "product":product,
+        "major":major,
+        "capability_id":"web.release.verify.independent_http",
+        "producer_independent_verifier":True,
+      }
+    }
+
+
 def _compile_compound_goal(goal, clauses, registry, root):
     actions=[]
     compiled_parts=[]
@@ -1372,6 +1433,18 @@ def _compile_compound_goal(goal, clauses, registry, root):
                 **manifest["evidence"],
             })
             continue
+        release_verify=_compile_independent_web_release_verification(
+            clause,context_paths,registry,root
+        )
+        if release_verify is not None:
+            actions.append(release_verify["action"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"INDEPENDENT_WEB_RELEASE_VERIFICATION",
+                **release_verify["evidence"],
+            })
+            continue
+
         semantic_fact=_compile_latest_stable_release_from_capture(
             clause,context_paths,registry,root
         )
