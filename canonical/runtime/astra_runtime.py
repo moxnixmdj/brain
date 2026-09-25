@@ -1701,8 +1701,11 @@ def _goal_action(action):
             return {"type":typ,"output_verified":False,"error":"GROUP_DERIVE_SPEC_INVALID"}
 
         def observed_array(path):
-            wrapper=json.loads(path.read_text(encoding="utf-8"))
-            data=json.loads(str(wrapper.get("observed_text") or ""))
+            payload=json.loads(path.read_text(encoding="utf-8"))
+            if isinstance(payload,dict) and isinstance(payload.get("observed_text"),str):
+                data=json.loads(payload["observed_text"])
+            else:
+                data=payload
             if not isinstance(data,list) or any(not isinstance(x,dict) for x in data):
                 raise RuntimeError("GROUP_DERIVE_SOURCE_NOT_OBJECT_ARRAY")
             return data
@@ -1836,8 +1839,8 @@ def _goal_action(action):
         try:
             dw=json.loads(dimension_path.read_text(encoding="utf-8"))
             fw=json.loads(fact_path.read_text(encoding="utf-8"))
-            dimensions=json.loads(str(dw.get("observed_text") or ""))
-            facts=json.loads(str(fw.get("observed_text") or ""))
+            dimensions=json.loads(dw["observed_text"]) if isinstance(dw,dict) and isinstance(dw.get("observed_text"),str) else dw
+            facts=json.loads(fw["observed_text"]) if isinstance(fw,dict) and isinstance(fw.get("observed_text"),str) else fw
             summary=json.loads(summary_path.read_text(encoding="utf-8"))
         except Exception as exc:
             return {"type":typ,"verified":False,"error":"GROUP_DERIVE_VERIFY_JSON_INVALID:"+type(exc).__name__}
