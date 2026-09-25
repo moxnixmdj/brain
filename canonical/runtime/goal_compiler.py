@@ -3366,14 +3366,40 @@ def _compile_compound_goal(goal, clauses, registry, root):
                         json_path,binary_path,package,root_selector,encode_export,decode_export
                     )):
                         if requires_distinct_implementation:
-                            raise GoalCompilationFailure(
-                                "INDEPENDENT_NODE_CODEC_VERIFIER_BINDING_REQUIRED",
-                                json.dumps({
-                                  "capability_id":item["selected_capability"],
-                                  "package":package,
-                                  "binary_path":binary_path,
-                                },sort_keys=True)
-                            )
+                            source=entry.get("source") or {}
+                            producer_project=str(source.get("package") or package or "")
+                            fmt=pathlib.Path(str(binary_path)).suffix.lower().lstrip(".")
+                            if not producer_project or not fmt:
+                                raise GoalCompilationFailure(
+                                    "INDEPENDENT_NODE_CODEC_VERIFIER_BINDING_REQUIRED",
+                                    json.dumps({
+                                      "capability_id":item["selected_capability"],
+                                      "package":package,
+                                      "binary_path":binary_path,
+                                    },sort_keys=True)
+                                )
+                            actions.append({
+                              "type":"verify_with_independent_pypi_codec",
+                              "args":{
+                                "format":fmt,
+                                "json_path":json_path,
+                                "binary_path":binary_path,
+                                "producer_project":producer_project,
+                                "producer_capability_id":item["selected_capability"],
+                              },
+                              "expect":{"type":"field_equals","field":"verified","value":True},
+                            })
+                            compiled_parts.append({
+                              "index":index,"subgoal":clause,
+                              "mode":"CROSS_SUPPLIER_PRODUCER_INDEPENDENT_CODEC_VERIFICATION",
+                              "producer_capability":item["selected_capability"],
+                              "producer_project":producer_project,
+                              "verifier_supplier_class":"pypi_python_library",
+                              "format":fmt,
+                              "json_path":json_path,
+                              "binary_path":binary_path,
+                            })
+                            continue
                         actions.append({
                           "type":"invoke_capability",
                           "args":{
