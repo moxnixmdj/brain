@@ -2950,12 +2950,19 @@ def _compile_generic_group_derive_ir(clause,context_paths,root):
     output_path=head.group(1).strip(" .,:;")
     dimension_entity=head.group(2).lower()
     fields=[
-      x.strip(" .,:;").lower()
+      x.strip(" .,:;")
       for x in re.sub(r"\s+and\s+",",",head.group(3),flags=re.IGNORECASE).split(",")
       if x.strip(" .,:;")
     ]
-    if not fields or len(set(fields))!=len(fields):
+    field_by_lower={}
+    for field in fields:
+        key=field.lower()
+        if key in field_by_lower:
+            return None
+        field_by_lower[key]=field
+    if not fields:
         return None
+
     semantic=head.group(4)
     relation=re.search(
       r"\b([A-Za-z_][A-Za-z0-9_]*)\s+is\s+the\s+number\s+of\s+live\s+"
@@ -2982,53 +2989,58 @@ def _compile_generic_group_derive_ir(clause,context_paths,root):
     if not relation or not ratio:
         return None
 
-    count_all=relation.group(1).lower()
+    count_all_key=relation.group(1).lower()
     fact_entity=relation.group(2).lower()
     fact_key=relation.group(3)
     relation_dim=relation.group(4).lower()
     dimension_key=relation.group(5)
     if not (_generic_entity_forms(relation_dim)&_generic_entity_forms(dimension_entity)):
         return None
+    if count_all_key not in field_by_lower:
+        return None
 
-    metrics=[{"name":count_all,"op":"count"}]
-    metric_names={count_all}
+    metric_keys={count_all_key}
+    metrics=[{"name":field_by_lower[count_all_key],"op":"count"}]
 
     if filtered:
-        count_filtered=filtered.group(1).lower()
+        filtered_key=filtered.group(1).lower()
         filtered_entity=filtered.group(2).lower()
+        if filtered_key not in field_by_lower:
+            return None
         if not (_generic_entity_forms(filtered_entity)&_generic_entity_forms(fact_entity)):
             return None
         metrics.append({
-          "name":count_filtered,
+          "name":field_by_lower[filtered_key],
           "op":"count_where",
           "where":{filtered.group(3):_parse_scalar_literal(filtered.group(4))},
         })
-        metric_names.add(count_filtered)
+        metric_keys.add(filtered_key)
 
     if summed:
-        sum_name=summed.group(1).lower()
+        sum_key=summed.group(1).lower()
         sum_entity=summed.group(2).lower()
+        if sum_key not in field_by_lower:
+            return None
         if not (_generic_entity_forms(sum_entity)&_generic_entity_forms(fact_entity)):
             return None
         metrics.append({
-          "name":sum_name,
+          "name":field_by_lower[sum_key],
           "op":"sum",
           "field":summed.group(3),
         })
-        metric_names.add(sum_name)
+        metric_keys.add(sum_key)
 
-    ratio_name=ratio.group(1).lower()
-    ratio_num=ratio.group(2).lower()
-    ratio_den=ratio.group(3).lower()
-    if ratio_num not in metric_names or ratio_den not in metric_names:
+    ratio_key=ratio.group(1).lower()
+    ratio_num_key=ratio.group(2).lower()
+    ratio_den_key=ratio.group(3).lower()
+    if ratio_key not in field_by_lower:
         return None
-    required=set(metric_names)|{ratio_name}
-    if not required.issubset(set(fields)):
+    if ratio_num_key not in metric_keys or ratio_den_key not in metric_keys:
         return None
 
     output_id_candidates=[
       f for f in fields
-      if re.sub(r"[^a-z0-9]+","",f)==re.sub(r"[^a-z0-9]+","",dimension_entity+"id")
+      if re.sub(r"[^a-z0-9]+","",f.lower())==re.sub(r"[^a-z0-9]+","",dimension_entity+"id")
     ]
     if len(output_id_candidates)!=1:
         return None
@@ -3037,13 +3049,15 @@ def _compile_generic_group_derive_ir(clause,context_paths,root):
     fact_path=_context_json_for_entity(context_paths,fact_entity)
     if not dimension_path or not fact_path or dimension_path==fact_path:
         return None
-    copy_fields=[
-      f for f in fields
-      if f not in ({output_id_field,ratio_name}|metric_names)
-    ]
-    derived=[
-      {"name":ratio_name,"op":"divide","numerator":ratio_num,"denominator":ratio_den},
-    ]
+
+    semantic_output_keys=metric_keys|{ratio_key,output_id_field.lower()}
+    copy_fields=[f for f in fields if f.lower() not in semantic_output_keys]
+    derived=[{
+      "name":field_by_lower[ratio_key],
+      "op":"divide",
+      "numerator":field_by_lower[ratio_num_key],
+      "denominator":field_by_lower[ratio_den_key],
+    }]
     return {
       "action":{
         "type":"derive_grouped_records",
@@ -3099,20 +3113,29 @@ def _compile_generic_rank_select_ir(clause,context_paths,root):
         return None
     source_path=m.group(1).strip(" .,:;")
     limit=_parse_rank_limit(m.group(2))
-    primary=m.group(4).lower()
-    tie=m.group(5).lower()
+    primary_key=m.group(4).lower()
+    tie_key=m.group(5).lower()
     output_path=m.group(6).strip(" .,:;")
     field_text=re.sub(r"\s+in\s+ranked\s+order\s*$","",m.group(7),flags=re.IGNORECASE)
     fields=[
-      x.strip(" .,:;").lower()
+      x.strip(" .,:;")
       for x in re.sub(r"\s+and\s+",",",field_text,flags=re.IGNORECASE).split(",")
       if x.strip(" .,:;")
     ]
-    if limit is None or source_path not in context_paths or not fields or primary not in fields or tie not in fields:
+    field_by_lower={}
+    for field in fields:
+        key=field.lower()
+        if key in field_by_lower:
+            return None
+        field_by_lower[key]=field
+    if (
+        limit is None or source_path not in context_paths or not fields
+        or primary_key not in field_by_lower or tie_key not in field_by_lower
+    ):
         return None
     order_by=[
-      {"field":primary,"direction":"desc"},
-      {"field":tie,"direction":"asc"},
+      {"field":field_by_lower[primary_key],"direction":"desc"},
+      {"field":field_by_lower[tie_key],"direction":"asc"},
     ]
     return {
       "action":{
@@ -3138,54 +3161,56 @@ def _compile_generic_dataflow_verification_ir(clause,compiled_parts):
     lower=str(clause or "").strip().lower()
     if not re.match(r"^finally\s+independently\s+(?:reopen|reread|verify|check)\b",lower):
         return None
-    grouped=None
+    grouped=[]
     ranked=None
     for part in compiled_parts or []:
         if not isinstance(part,dict):
             continue
         if part.get("mode")=="GENERIC_GROUP_DERIVE_IR":
-            grouped=part
+            path=str(part.get("output_path") or "")
+            if path and path.lower() in lower:
+                grouped.append(part)
         elif part.get("mode")=="GENERIC_RANK_SELECT_IR":
             ranked=part
-    if grouped is None or ranked is None:
-        return None
-    if str(grouped.get("output_path") or "").lower() not in lower:
+    if not grouped or ranked is None:
         return None
     if str(ranked.get("output_path") or "").lower() not in lower:
         return None
-    return {
-      "actions":[
-        {
+
+    actions=[]
+    for part in grouped:
+        actions.append({
           "type":"assert_grouped_derived_records",
           "args":{
-            "dimension_path":grouped["dimension_path"],
-            "fact_path":grouped["fact_path"],
-            "summary_path":grouped["output_path"],
-            "dimension_key":grouped["dimension_key"],
-            "fact_key":grouped["fact_key"],
-            "output_id_field":grouped["output_id_field"],
-            "copy_fields":grouped["copy_fields"],
-            "metrics":grouped["metrics"],
-            "derived":grouped["derived"],
+            "dimension_path":part["dimension_path"],
+            "fact_path":part["fact_path"],
+            "summary_path":part["output_path"],
+            "dimension_key":part["dimension_key"],
+            "fact_key":part["fact_key"],
+            "output_id_field":part["output_id_field"],
+            "copy_fields":part["copy_fields"],
+            "metrics":part["metrics"],
+            "derived":part["derived"],
           },
           "expect":{"type":"field_equals","field":"verified","value":True},
-        },
-        {
-          "type":"assert_ranked_record",
-          "args":{
-            "source_path":ranked["source_path"],
-            "selected_path":ranked["output_path"],
-            "order_by":ranked["order_by"],
-            "output_fields":ranked["output_fields"],
-            "limit":ranked.get("limit",1),
-          },
-          "expect":{"type":"field_equals","field":"verified","value":True},
-        },
-      ],
-      "evidence":{
-        "summary_path":grouped["output_path"],
+        })
+    actions.append({
+      "type":"assert_ranked_record",
+      "args":{
+        "source_path":ranked["source_path"],
         "selected_path":ranked["output_path"],
-        "verification_mode":"INDEPENDENT_RECOMPUTATION_FROM_LIVE_SOURCES",
+        "order_by":ranked["order_by"],
+        "output_fields":ranked["output_fields"],
+        "limit":ranked.get("limit",1),
+      },
+      "expect":{"type":"field_equals","field":"verified","value":True},
+    })
+    return {
+      "actions":actions,
+      "evidence":{
+        "summary_paths":[part["output_path"] for part in grouped],
+        "selected_path":ranked["output_path"],
+        "verification_mode":"INDEPENDENT_RECOMPUTATION_OF_EVERY_REFERENCED_DERIVED_STAGE",
       }
     }
 
