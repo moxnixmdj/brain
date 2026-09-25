@@ -221,6 +221,34 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
     return result
 
 
+def _execution_surface_constraint_match(goal,entry):
+    lower=str(goal or "").lower()
+    source=(entry or {}).get("source") or {}
+    source_type=str(source.get("type") or "").lower()
+    adapter=str((entry or {}).get("adapter_module") or "").lower()
+    requires_npm=bool(
+        re.search(r"\bnpm\b",lower)
+        or re.search(r"\bnode(?:\.js|js)?\b",lower)
+        or "javascript library" in lower
+    )
+    requires_pypi=bool("pypi" in lower or "python library" in lower)
+    requires_apt=bool(
+        re.search(r"\bapt\b",lower)
+        or "ubuntu package" in lower
+        or "debian package" in lower
+    )
+    if requires_npm:
+        ok=source_type=="npm" or adapter.startswith("node_") or adapter.startswith("javascript_")
+        return ok,{"required_surface":"npm_node","observed_source_type":source_type,"adapter_module":adapter}
+    if requires_pypi:
+        ok=source_type=="pypi" or adapter.startswith("python_")
+        return ok,{"required_surface":"pypi_python","observed_source_type":source_type,"adapter_module":adapter}
+    if requires_apt:
+        ok=source_type=="apt"
+        return ok,{"required_surface":"apt","observed_source_type":source_type,"adapter_module":adapter}
+    return True,None
+
+
 def _structured_binary_format_match(goal,entry):
     provides=[str(x).lower() for x in (entry.get("provides") or [])]
     formats={
@@ -249,6 +277,16 @@ def _structured_binary_format_match(goal,entry):
 
 
 def _score(goal, cid, entry):
+    surface_ok,surface_evidence=_execution_surface_constraint_match(goal,entry)
+    if not surface_ok:
+        return 0,0,{
+          "goal_tokens":sorted(_tokens(goal)),
+          "matched_provides":[],
+          "matched_requires":[],
+          "matched_identity":[],
+          "matched_keywords":[],
+          "execution_surface_rejection":surface_evidence,
+        }
     format_ok,format_evidence=_structured_binary_format_match(goal,entry)
     if not format_ok:
         return 0,0,{
@@ -3233,8 +3271,14 @@ def _compile_compound_goal(goal, clauses, registry, root):
                     break
             if prior is not None:
                 item,entry=prior
-                inputs=item.get("inputs") or {}
-                template_args=((entry.get("action_template") or {}).get("args") or {})
+                if not _execution_surface_constraint_match(clause,entry)[0]:
+                    prior=None
+                if prior is None:
+                    item=entry=None
+                    inputs={}
+                else:
+                    inputs=item.get("inputs") or {}
+                template_args=((entry.get("action_template") or {}).get("args") or {}) if isinstance(entry,dict) else {}
                 json_path=inputs.get("json_path")
                 binary_path=inputs.get("output_path")
                 module=template_args.get("module")
