@@ -1327,6 +1327,102 @@
         },
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-YAML-JSON-YQ-001__RECEIPT.json"
       }
+    },
+    "docx.document.create.python_docx": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "docx.document.create.python_docx",
+          "goal": "${input.goal}",
+          "output_path": "${input.output_path}",
+          "module": "docx",
+          "factory": "Document"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "python_document_builder",
+      "cost": 2,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "docx",
+        "document",
+        "word",
+        "title",
+        "paragraph",
+        "table",
+        "create"
+      ],
+      "limitations": [
+        "Bound to the pinned Ubuntu python3-docx package discovered from the live DOCX capability gap.",
+        "Current contract family builds one title, paragraphs, and tabular rows from a deterministic goal specification."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "docx.document.create"
+      ],
+      "requires": [],
+      "source": {
+        "type": "apt",
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "python3-docx",
+            "version": "1.1.0+dfsg-2",
+            "sha256": "8dec367f86be44b86bb3c7329ccc6af165854008fd23e185f44500ece39bdb80"
+          }
+        ]
+      },
+      "status": "BOUND_PENDING_INDEPENDENT_VERIFICATION",
+      "acquisition_evidence": {
+        "mission_id": "ASTRA-DOCX-SUPPLIER-DIAG-001",
+        "discovery_source": "APT_CATALOG",
+        "integration_friction": 2,
+        "description": "library for creating and updating Microsoft Word files (Python 3)"
+      }
+    },
+    "docx.document.verify.ooxml": {
+      "adapter_module": "docx_verify_ooxml",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "docx",
+        "document",
+        "word",
+        "ooxml",
+        "verify",
+        "reopen",
+        "independent",
+        "table"
+      ],
+      "limitations": [
+        "Verifies repository-local DOCX semantic content by parsing word/document.xml with Python stdlib only.",
+        "Checks exact expected title, paragraph strings, and complete table rows."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "docx.document.verify"
+      ],
+      "requires": [],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "zipfile",
+          "xml.etree.ElementTree"
+        ]
+      },
+      "status": "BOUND_PENDING_INDEPENDENT_VERIFICATION"
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
