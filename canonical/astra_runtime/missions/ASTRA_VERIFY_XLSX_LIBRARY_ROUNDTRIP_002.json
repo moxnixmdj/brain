@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-002",
+  "purpose": "Reverify the modified XLSX independent semantic verifier, then refresh promotion evidence only on exact round-trip success.",
+  "goal": "Verify XLSX creation with hash-pinned XlsxWriter and independently reopen the workbook with hash-pinned OpenPyXL, deriving the claimed schema from workbook headers and checking every value against canonical JSON.",
+  "steps": [
+    {
+      "id": "reverify-independent-xlsx-roundtrip",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/runtime/verify_xlsx_library_roundtrip.py canonical/astra_runtime/evidence/ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-002__RESULT.json ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-002",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "XLSX_LIBRARY_ROUNDTRIP_VERIFIED"
+      }
+    },
+    {
+      "id": "refresh-promoted-xlsx-capabilities",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/runtime/promote_xlsx_library_capabilities.py canonical/astra_runtime/evidence/ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-002__RESULT.json",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "XLSX_LIBRARY_CAPABILITIES_PROMOTED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "fresh_verification_invocation_required": true,
+    "producer_verifier_supplier_independence_required": true,
+    "allow_registry_mutation": true
+  }
+}
