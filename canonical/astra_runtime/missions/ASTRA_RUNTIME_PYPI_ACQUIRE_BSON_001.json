@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-PYPI-ACQUIRE-BSON-001",
+  "purpose": "Held-out autonomous Python-library structured codec acquisition test.",
+  "goal": "Create canonical/astra_runtime/tmp/BSON_SOURCE.json containing exactly four records with fields id and text: 1 alpha, 2 beta, 3 gamma, 4 delta. Encode those exact records as BSON and save canonical/astra_runtime/tmp/BSON_RECORDS.bson. Independently decode the BSON artifact and verify the decoded records are exactly identical to canonical/astra_runtime/tmp/BSON_SOURCE.json in values, order, field names, and record count.",
+  "steps": [
+    {
+      "id": "run-held-out-codec-goal",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 20,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false
+  }
+}
