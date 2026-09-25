@@ -414,7 +414,7 @@ def _compile_pypi_provenance_audit(subgoal, context_paths, registry, root, futur
 
 def _compile_json_hash_equality_assertion(subgoal, context_paths, root):
     lower=subgoal.lower()
-    if not re.match(r"^(?:finally\s+)?(?:verify|check|assert|read)\b",lower):
+    if not re.match(r"^(?:finally\s+)?(?:independently\s+)?(?:verify|check|assert|read)\b",lower):
         return None
     relevant=(
         "wheel_sha256" in lower
