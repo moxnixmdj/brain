@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T19:22:45.404703+00:00",
+  "mission_id": "ASTRA-BSON-DECODE-ENVELOPE-COMPILER-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_BSON_DECODE_ENVELOPE_COMPILER_DIAG_001.json",
+  "mission_sha256": "f5af6c13db4ee099a6b11d94e375b76fe4d45301e6e1b4184d5a6f0b4c68a789",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "b95e5143593f36b31735324d3d4cf348397dcda7f65b0f62d99d0a4efad046a6",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
