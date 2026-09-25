@@ -445,6 +445,118 @@
         "state_path": "canonical/astra_runtime/state/ASTRA-RUNTIME-BOUND-PDF-TEXT-001.json",
         "workflow_run_id": 36060830384
       }
+    },
+    "archive.tar_gz.create_from_manifest": {
+      "provides": [
+        "archive.tar_gz.create_from_manifest"
+      ],
+      "requires": [
+        "manifest.json.available"
+      ],
+      "keywords": [
+        "archive",
+        "tar",
+        "tar.gz",
+        "bundle",
+        "manifest",
+        "package"
+      ],
+      "cost": 1,
+      "platforms": [
+        "linux"
+      ],
+      "limitations": [
+        "Creates repository-local tar.gz archives from a JSON manifest's repository-local verification_paths.",
+        "Only regular files under the repository root are included."
+      ],
+      "adapter_module": "archive_tarfile",
+      "entrypoint": "run",
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "archive.tar_gz.create_from_manifest",
+          "manifest_path": "${input.manifest_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "source": {
+        "type": "python_stdlib",
+        "module": "tarfile",
+        "adapter_path": "canonical/runtime/bound_capabilities/archive_tarfile.py"
+      },
+      "incremental_spend_usd": 0,
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "mission_id": "ASTRA-VERIFY-MANIFEST-ARCHIVE-001",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MANIFEST-ARCHIVE-001__RECEIPT.json",
+        "independently_verified_by": "archive.verify.tar_gz.gnu",
+        "observed_effect": {
+          "member_count": 2,
+          "output_sha256": "5f2b144d07156cbb48cc37d66627f7ba98e32498e3bebcc4c89eb23f23a277d6"
+        }
+      }
+    },
+    "archive.verify.tar_gz.gnu": {
+      "provides": [
+        "archive.tar_gz.verify_manifest_members"
+      ],
+      "requires": [
+        "manifest.json.available",
+        "archive.tar_gz.available"
+      ],
+      "keywords": [
+        "verify",
+        "archive",
+        "tar",
+        "hash",
+        "manifest",
+        "bundle",
+        "members"
+      ],
+      "cost": 1,
+      "platforms": [
+        "linux"
+      ],
+      "limitations": [
+        "Verification uses GNU tar to list and extract the archive, then SHA-256 compares extracted bytes to repository sources.",
+        "Manifest and archive paths must be repository-local."
+      ],
+      "adapter_module": "archive_verify_gnu_tar",
+      "entrypoint": "run",
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "archive.verify.tar_gz.gnu",
+          "manifest_path": "${input.manifest_path}",
+          "archive_path": "${input.archive_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "verified",
+          "value": true
+        }
+      },
+      "source": {
+        "type": "system_tool",
+        "executable": "tar",
+        "adapter_path": "canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py"
+      },
+      "incremental_spend_usd": 0,
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "mission_id": "ASTRA-VERIFY-MANIFEST-ARCHIVE-001",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MANIFEST-ARCHIVE-001__RECEIPT.json",
+        "producer_independent": true,
+        "observed_effect": {
+          "verified": true,
+          "member_count": 2
+        }
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
