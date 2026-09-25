@@ -47,6 +47,39 @@ class ModelIndependenceTests(unittest.TestCase):
         self.assertIn(first_sha[:16],p1.name)
         self.assertIn(second_sha[:16],p2.name)
 
+    def test_anonymous_controller_does_not_resume_completed_checkpoint(self):
+        actions=[
+            {"type":"read_file","args":{"path":"canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md"}},
+            {"type":"finish","args":{"summary":"ANON_RESET_TEST"}},
+        ]
+        plan_sha=runtime._controller_plan_sha256(actions)
+        path=runtime._controller_checkpoint_path({}, {}, plan_sha=plan_sha)
+        path.unlink(missing_ok=True)
+        self.addCleanup(lambda: path.unlink(missing_ok=True))
+        checkpoint={
+            "schema":"PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+            "mission_id":None,
+            "step_id":"goal",
+            "plan_sha256":plan_sha,
+            "status":"COMPLETE",
+            "completed_actions":[
+                {"cycle":0,"plan":actions[0],"result":{"type":"read_file","content":"x"}},
+                {"cycle":1,"plan":actions[1],"result":{"type":"finish","summary":"ANON_RESET_TEST"}},
+            ],
+            "next_action_index":2,
+            "resume_count":7,
+            "test_interrupt_injected":False,
+            "created_at_utc":runtime.utc(),
+            "updated_at_utc":runtime.utc(),
+        }
+        runtime.writej(path,checkpoint)
+        loaded_path,loaded,resumed=runtime._load_controller_checkpoint({}, {}, actions)
+        self.assertEqual(loaded_path,path)
+        self.assertFalse(resumed)
+        self.assertEqual(loaded["completed_actions"],[])
+        self.assertEqual(loaded["next_action_index"],0)
+        self.assertEqual(loaded["resume_count"],0)
+
     def test_unknown_goal_attempts_model_independent_acquisition_without_model_fallback(self):
         class EmptyAuto:
             def dispatch(self,*args,**kwargs):
