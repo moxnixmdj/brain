@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T01:50:19.525101+00:00",
+  "mission_id": "ASTRA-RUNTIME-VERIFIED-CAPABILITY-XLSX-003",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_VERIFIED_CAPABILITY_XLSX_003.json",
+  "mission_sha256": "11da8e476b3a52beae656f4d868993cd51d680981ad4614337a3f162821273f8",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "08a26d8f63132f82272be99f7aa0d6a7b47de91c357a9231c469950b54309050",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
