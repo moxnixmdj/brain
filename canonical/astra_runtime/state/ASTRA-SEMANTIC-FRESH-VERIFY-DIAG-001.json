@@ -1,0 +1,21 @@
+{
+  "blocker": {
+    "adapter": "goal",
+    "error": "Blocker:GOAL_REQUIRED",
+    "mission_id": "ASTRA-SEMANTIC-FRESH-VERIFY-DIAG-001",
+    "observed_at_utc": "2026-09-25T21:34:58.295771+00:00",
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "diagnose-fresh-field-verifier",
+    "step_index": 0
+  },
+  "created_at_utc": "2026-09-25T21:34:58.295732+00:00",
+  "history": [],
+  "mission_id": "ASTRA-SEMANTIC-FRESH-VERIFY-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_SEMANTIC_FRESH_VERIFY_DIAG_001.json",
+  "mission_sha256": "05231bf734fe418dbfdfdd7dd6c59ef5b136a7ee072ef3ac80de6ad7210dd729",
+  "next_step": 0,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-25T21:34:58.296004+00:00"
+}
