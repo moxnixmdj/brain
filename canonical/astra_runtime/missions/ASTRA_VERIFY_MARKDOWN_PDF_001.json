@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-VERIFY-MARKDOWN-PDF-001",
+  "purpose": "Independently verify and promote Markdown-to-PDF conversion using Pandoc+WeasyPrint.",
+  "goal": "Convert a fresh Markdown fixture to PDF and independently prove its semantic text using verified pypdf extraction.",
+  "steps": [
+    {
+      "id": "create-verification-markdown",
+      "adapter": "shell",
+      "command": "set -euo pipefail\ncat > canonical/astra_runtime/tmp/MARKDOWN_PDF_VERIFY.md <<'EOF'\n# PROJECT BRAIN PDF CONVERSION\n\n| Capability | State |\n| --- | --- |\n| ALPHA-VERIFY-7319 | VERIFIED |\n| BETA-VERIFY-2846 | COMPLETE |\nEOF\ngrep -q 'ALPHA-VERIFY-7319' canonical/astra_runtime/tmp/MARKDOWN_PDF_VERIFY.md\necho MARKDOWN_FIXTURE_CREATED",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "MARKDOWN_FIXTURE_CREATED"
+      }
+    },
+    {
+      "id": "invoke-pending-markdown-pdf",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib,sys\nroot=pathlib.Path('.').resolve()\np=root/'canonical/runtime/astra_runtime.py'\ns=importlib.util.spec_from_file_location('astra_runtime_pdf_verify',p)\nm=importlib.util.module_from_spec(s); sys.modules[s.name]=m; s.loader.exec_module(m)\nout=m._invoke_bound_capability({\n 'capability_id':'document.convert.markdown_pdf.pandoc_weasyprint',\n 'markdown_path':'canonical/astra_runtime/tmp/MARKDOWN_PDF_VERIFY.md',\n 'output_path':'canonical/astra_runtime/tmp/MARKDOWN_PDF_VERIFY.pdf',\n 'timeout_s':180\n})\n(root/'canonical/astra_runtime/evidence/ASTRA-VERIFY-MARKDOWN-PDF-001__PRODUCER.json').write_text(json.dumps(out,indent=2,sort_keys=True)+'\\n')\nassert out.get('output_verified') is True\nprint('MARKDOWN_PDF_PRODUCED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "MARKDOWN_PDF_PRODUCED"
+      }
+    },
+    {
+      "id": "independent-pypdf-semantic-check",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib,sys\nroot=pathlib.Path('.').resolve()\np=root/'canonical/runtime/astra_runtime.py'\ns=importlib.util.spec_from_file_location('astra_runtime_pdf_readback',p)\nm=importlib.util.module_from_spec(s); sys.modules[s.name]=m; s.loader.exec_module(m)\nout=m._invoke_bound_capability({\n 'capability_id':'pdf.extract.text.pypdf',\n 'path':'canonical/astra_runtime/tmp/MARKDOWN_PDF_VERIFY.pdf',\n 'max_pages':20\n})\ntext=str(out.get('text') or '')\nrequired=['PROJECT BRAIN PDF CONVERSION','ALPHA-VERIFY-7319','BETA-VERIFY-2846','VERIFIED','COMPLETE']\nmissing=[x for x in required if x not in text]\nassert not missing,missing\nev={'schema':'PROJECT_BRAIN_INDEPENDENT_SEMANTIC_VERIFICATION_V1','verified':True,'verifier_capability':'pdf.extract.text.pypdf','required_strings':required,'extracted_text':text}\n(root/'canonical/astra_runtime/evidence/ASTRA-VERIFY-MARKDOWN-PDF-001__INDEPENDENT.json').write_text(json.dumps(ev,indent=2,sort_keys=True)+'\\n')\nprint('MARKDOWN_PDF_INDEPENDENT_SEMANTIC_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "MARKDOWN_PDF_INDEPENDENT_SEMANTIC_VERIFIED"
+      }
+    },
+    {
+      "id": "promote-markdown-pdf-capability",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport json,pathlib\nroot=pathlib.Path('.').resolve()\nrp=root/'canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json'\nreg=json.loads(rp.read_text())\ncap=reg['capabilities']['document.convert.markdown_pdf.pandoc_weasyprint']\nassert cap['status']=='BOUND_PENDING_INDEPENDENT_VERIFICATION'\nie=json.loads((root/'canonical/astra_runtime/evidence/ASTRA-VERIFY-MARKDOWN-PDF-001__INDEPENDENT.json').read_text())\nassert ie.get('verified') is True\ncap['status']='VERIFIED_BOUND_CAPABILITY'\ncap['verification']={\n 'mission_id':'ASTRA-VERIFY-MARKDOWN-PDF-001',\n 'independent_verified':True,\n 'independent_verifier_capability':'pdf.extract.text.pypdf',\n 'verification_evidence':'canonical/astra_runtime/evidence/ASTRA-VERIFY-MARKDOWN-PDF-001__INDEPENDENT.json'\n}\nrp.write_text(json.dumps(reg,indent=2,sort_keys=True)+'\\n')\nprint('MARKDOWN_PDF_CAPABILITY_PROMOTED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "MARKDOWN_PDF_CAPABILITY_PROMOTED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "allow_registry_mutation": true,
+    "independent_semantic_verification_required": true
+  }
+}
