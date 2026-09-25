@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-GENERIC-DATAFLOW-RANK-001",
+  "purpose": "Pressure-test whether novel causal dataflow can be compiled from existing capabilities without a mission-specific compiler: multi-source filtered aggregation, arithmetic derivation, deterministic ranking, and independent verification.",
+  "goal": "Using a real rendered browser, open https://jsonplaceholder.typicode.com/users, save a screenshot to canonical/astra_runtime/tmp/RANK_USERS.png, and save the rendered result to canonical/astra_runtime/tmp/RANK_USERS.json. Using a real rendered browser, open https://jsonplaceholder.typicode.com/todos, save a screenshot to canonical/astra_runtime/tmp/RANK_TODOS.png, and save the rendered result to canonical/astra_runtime/tmp/RANK_TODOS.json. Using both live results, create canonical/astra_runtime/tmp/USER_TODO_RATES.json containing exactly one record per live user with user_id, username, total_count, completed_count, and completion_ratio, where total_count is the number of live todos whose userId equals that user's id, completed_count is the number of those todos whose completed field is true, and completion_ratio is completed_count divided by total_count. From canonical/astra_runtime/tmp/USER_TODO_RATES.json select exactly one winner with the greatest completion_ratio, breaking ties by the lowest user_id, and save canonical/astra_runtime/tmp/USER_TODO_WINNER.json containing user_id, username, total_count, completed_count, and completion_ratio. Finally independently reopen both live source results, canonical/astra_runtime/tmp/USER_TODO_RATES.json, and canonical/astra_runtime/tmp/USER_TODO_WINNER.json and verify every user's counts and completion_ratio are correct, the winner has the greatest completion_ratio, the lowest user_id wins any tie, every live user appears exactly once in the rates file, and there are no extra records.",
+  "steps": [
+    {
+      "id": "run-generic-dataflow-rank",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 32,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "manual_controller_actions": false,
+    "manual_target_effects": false,
+    "existing_capabilities_must_be_reused_before_acquisition": true,
+    "capability_acquisition_for_transform_or_control_gap_forbidden": true,
+    "filtered_aggregation_required": true,
+    "arithmetic_derivation_required": true,
+    "deterministic_argmax_tiebreak_required": true,
+    "independent_verification_required": true
+  }
+}
