@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T00:49:00.178692+00:00",
+  "created_at_utc": "2026-09-25T00:48:32.835181+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T00:49:00.178434+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\nVER=$(apt-cache policy yq | awk '/Candidate:/ {print $2}')\ntest -n \"$VER\" && test \"$VER\" != '(none)'\nSHA=$(apt-cache show \"yq=$VER\" | awk '/^SHA256:/ {print $2; exit}')\ntest ${#SHA} -eq 64\nsudo apt-get install -y --no-install-recommends \"yq=$VER\" >/dev/null\nOUT=$(mktemp)\nyq '.' .github/workflows/astra-shared-runtime.yml > \"$OUT\"\npython - \"$OUT\" \"$VER\" \"$SHA\" <<'PY'\nimport json,pathlib,sys\np=pathlib.Path(sys.argv[1]); data=json.loads(p.read_text())\nassert data['name']=='ASTRA Shared Runtime Mission'\nassert 'on' in data\nassert 'jobs' in data and 'run-mission' in data['jobs']\nprint(json.dumps({'package':'yq','version':sys.argv[2],'archive_sha256':sys.argv[3],'workflow_name':data['name'],'job_ids':sorted(data['jobs'])},sort_keys=True))\nprint('YQ_YAML_JSON_SUPPLIER_VERIFIED')\nPY",
+        "duration_s": 27.343,
+        "returncode": 0,
+        "stderr": "\nRunning kernel seems to be up-to-date.\n\nNo services need to be restarted.\n\nNo containers need to be restarted.\n\nNo user sessions are running outdated binaries.\n\nNo VM guests are running outdated hypervisor (qemu) binaries on this host.\n",
+        "stdout": "{\"archive_sha256\": \"ef935e2b644e6c70ed080396dbe3d93330d1482fd9ce6f34813bdcf3616cb809\", \"job_ids\": [\"run-mission\"], \"package\": \"yq\", \"version\": \"3.1.0-3\", \"workflow_name\": \"ASTRA Shared Runtime Mission\"}\nYQ_YAML_JSON_SUPPLIER_VERIFIED\n"
+      },
+      "step_id": "probe-yq",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-YAML-YQ-SUPPLIER-PROBE-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_YAML_YQ_SUPPLIER_PROBE_001.json",
+  "mission_sha256": "846db9986714c99ee844d3a61d2f19a3bf19eb7bdca74dc5469a79b36536185d",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T00:49:00.178448+00:00"
+}

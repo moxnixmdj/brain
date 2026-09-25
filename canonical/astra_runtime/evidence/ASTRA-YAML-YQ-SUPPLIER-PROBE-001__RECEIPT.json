@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T00:49:00.178891+00:00",
+  "mission_id": "ASTRA-YAML-YQ-SUPPLIER-PROBE-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_YAML_YQ_SUPPLIER_PROBE_001.json",
+  "mission_sha256": "846db9986714c99ee844d3a61d2f19a3bf19eb7bdca74dc5469a79b36536185d",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "6c7bfe2abb6ca3b9a15f9550e796d30b2850040b15837b479e62070f2ac7f0c2",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
