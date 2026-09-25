@@ -1,0 +1,1472 @@
+{
+  "attempts": [
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "41ee281f5bd72141de67cafce32801f9e53f28ad6c0f908e12d9dcdc92ec186a",
+        "executables": [],
+        "package": "icingaweb2-module-toplevelview",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.3.3-3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 112.0,
+        "archive_sha256": "41ee281f5bd72141de67cafce32801f9e53f28ad6c0f908e12d9dcdc92ec186a",
+        "binding_kind": "apt",
+        "description": "simple and responsive web interface for Icinga - top level view",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "level",
+          "top"
+        ],
+        "name": "icingaweb2-module-toplevelview",
+        "packages": [],
+        "query": "top",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "0.3.3-3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "afd7b8168089f68003994131e8e89465566e614db8c672fd72fe83e5f9a9e3ce",
+        "executables": [],
+        "package": "lua-json",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.3.4-2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 88.0,
+        "archive_sha256": "afd7b8168089f68003994131e8e89465566e614db8c672fd72fe83e5f9a9e3ce",
+        "binding_kind": "apt",
+        "description": "JSON decoder/encoder for Lua",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "lua-json",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.3.4-2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "39b9766a2fcacd2105318734478b5536172b740c50d9743a21e8869e62662f24",
+        "executables": [],
+        "package": "gir1.2-json-1.0",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.8.0-2build2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "39b9766a2fcacd2105318734478b5536172b740c50d9743a21e8869e62662f24",
+        "binding_kind": "apt",
+        "description": "GLib JSON manipulation library (introspection data)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "gir1.2-json-1.0",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.8.0-2build2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED",
+      "probe": {
+        "archive_sha256": "95581ecd747961b82573f89cfedf6b4251477e1b4be80468559e99e25380da71",
+        "executables": [
+          {
+            "executable": "/usr/bin/gjh_asl_json",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "usage: gjh_asl_json [options] stub [-AMPL] [<assignment> ...]\n\nOptions:\n\t--  {end of options}\n\t-=  {show name= possibilities}\n\t-?  {show usage}\n\t-bf {read boundsfile f}\n\t-e  {suppress echoing of assignments}\n\t-of {write .sol file to file f}\n\t-s  {write .sol file (without -AMPL)}\n\t-v  {just show version}"
+              }
+            ]
+          }
+        ],
+        "package": "gjh-asl-json",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.0+git20210628.867c5da-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "95581ecd747961b82573f89cfedf6b4251477e1b4be80468559e99e25380da71",
+        "binding_kind": "apt",
+        "description": "gjh solver, like solver from AMPL Library",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "gjh-asl-json",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.0+git20210628.867c5da-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED",
+      "probe": {
+        "archive_sha256": "a8d38ae2198798e4ef041e3b8bcb71b8f381cd40766d0e6b9607c92015ee5af0",
+        "executables": [
+          {
+            "executable": "/usr/bin/gpgme-json",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "gpgme-json 1.18.0\nCopyright (C) 2018 g10 Code GmbH\nLicense GNU LGPL-2.1-or-later <https://gnu.org/licenses/>\nThis is free software: you are free to change and redistribute it.\nThere is NO WARRANTY, to the extent permitted by law.\n\nNative messaging based GPGME operations.\n\nOptions:\n -i, --interactive   Interactive REPL\n -s, --single        Single request mode\n     --lib-version   Show library version\n     --debug         Flyswatter\n\nPlease report bugs to <https://bugs.gnupg.org>.\n\nUsage: gpgme-json [OPTIONS]"
+              }
+            ]
+          }
+        ],
+        "package": "gpgme-json",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.18.0-4.1ubuntu4"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "a8d38ae2198798e4ef041e3b8bcb71b8f381cd40766d0e6b9607c92015ee5af0",
+        "binding_kind": "apt",
+        "description": "json interface to the GPGME GnuPG encryption library",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "gpgme-json",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.18.0-4.1ubuntu4",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "c7757245e712d960048c41d7baa109f48e7db8bef0720be9775ce833fa46e543",
+        "executables": [],
+        "package": "guile-json",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "4.7.3-2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "c7757245e712d960048c41d7baa109f48e7db8bef0720be9775ce833fa46e543",
+        "binding_kind": "apt",
+        "description": "JSON module for Guile",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "guile-json",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "4.7.3-2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED",
+      "probe": {
+        "archive_sha256": "ae249dfbd4c2d70c201b145310309462f7a3d32bb79c7c4daed2cdf22465090d",
+        "executables": [
+          {
+            "executable": "/usr/bin/indi_weewx_json",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "Usage: indi_weewx_json [options]\nPurpose: INDI Device driver framework.\nOptions:\n -v    : more verbose to stderr"
+              }
+            ]
+          }
+        ],
+        "package": "indi-weewx-json",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.0-1build2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "ae249dfbd4c2d70c201b145310309462f7a3d32bb79c7c4daed2cdf22465090d",
+        "binding_kind": "apt",
+        "description": "INDI driver for the WeeWX Weather Station",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "indi-weewx-json",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.0-1build2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_TEXT_INPUT_UNRESOLVED",
+      "probe": {
+        "archive_sha256": "b77a447f3c6a1eeb1486606865f1bf20ab504b6d8579a150e27b7652406d564c",
+        "executables": [
+          {
+            "executable": "/usr/bin/json-glib-format",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage:\n  json-glib-format [OPTION\u2026] FILE\u2026\n\nFormat JSON files.\n\nHelp Options:\n  -h, --help                     Show help options\n\nApplication Options:\n  -p, --prettify                 Prettify output\n  -i, --indent-spaces=SPACES     Indentation spaces\n  -o, --output=FILE              Output file\n\njson-glib-format formats JSON resources."
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/json-glib-validate",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage:\n  json-glib-validate [OPTION\u2026] FILE...\n\nValidate JSON files.\n\nHelp Options:\n  -h, --help       Show help options\n\njson-glib-validate validates JSON data at the given URI."
+              }
+            ]
+          }
+        ],
+        "package": "json-glib-tools",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.8.0-2build2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "b77a447f3c6a1eeb1486606865f1bf20ab504b6d8579a150e27b7652406d564c",
+        "binding_kind": "apt",
+        "description": "GLib JSON manipulation library (tools)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "json-glib-tools",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.8.0-2build2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED",
+      "probe": {
+        "archive_sha256": "0cc9ca2ac64ab3ed3287b234310020581ddd914a72664a744335354db0434284",
+        "executables": [
+          {
+            "executable": "/usr/bin/jsonschema_suite",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "usage: jsonschema_suite [-h] {check,flatten,remotes,dump_remotes,serve} ...\n\nJSON Schema Test Suite utilities\n\npositional arguments:\n  {check,flatten,remotes,dump_remotes,serve}\n                        utility commands\n    check               Sanity check the test suite.\n    flatten             Output a flattened file containing a selected\n                        version's test cases.\n    remotes             Output the expected URLs and their associated schemas\n                        for remote ref tests as a JSON object.\n    dump_remotes        Dump the remote ref schemas into a file tree\n    serve               Start a webserver to serve schemas used by remote ref\n                        tests.\n\noptions:\n  -h, --help            show this help message and exit\n\n/usr/bin/jsonschema_suite:23: DeprecationWarning: Accessing jsonschema.validators.validators is deprecated. Use jsonschema.validators.validator_for with a given schema.\n  validators = getattr("
+              }
+            ]
+          }
+        ],
+        "package": "json-schema-test-suite",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "2.0.0-1.1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "0cc9ca2ac64ab3ed3287b234310020581ddd914a72664a744335354db0434284",
+        "binding_kind": "apt",
+        "description": "Language agnostic test suite for the JSON Schema specifications",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "json-schema-test-suite",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.0.0-1.1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "147e274a8ccc4a7b34433ef248ef0a417530e39bddc6a4a8bae4e8fca1356e23",
+        "executables": [],
+        "package": "kamailio-json-modules",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "5.7.4-1build7"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "147e274a8ccc4a7b34433ef248ef0a417530e39bddc6a4a8bae4e8fca1356e23",
+        "binding_kind": "apt",
+        "description": "Json parser and Json-RPC modules for the Kamailio SIP server",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "kamailio-json-modules",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "5.7.4-1build7",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FLAG_UNRESOLVED",
+      "probe": {
+        "archive_sha256": "c434726fba31a641aa23899c221faaa90d4ce79baa0a2849e0fea2844ee0c6ac",
+        "executables": [
+          {
+            "executable": "/usr/bin/metadata-json-lint",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: metadata-json-lint [options] [metadata.json]\n        --[no-]strict-dependencies   Fail on open-ended module version dependencies. Defaults to 'false'.\n        --[no-]strict-license        Don't fail on strict license check. Defaults to 'true'.\n        --[no-]fail-on-warnings      Fail on any warnings. Defaults to 'true'.\n        --[no-]strict-puppet-version Fail on strict Puppet Version check based on current supported Puppet versions. Defaults to 'false'.\n    -f, --format FORMAT              The format in which results will be output (text, json)\n\nCould not find semantic_puppet gem, falling back to internal functionality. Version checks may be less robust."
+              }
+            ]
+          }
+        ],
+        "package": "metadata-json-lint",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "3.0.0-2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "c434726fba31a641aa23899c221faaa90d4ce79baa0a2849e0fea2844ee0c6ac",
+        "binding_kind": "apt",
+        "description": "Utility to verify Puppet metadata.json files",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "metadata-json-lint",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.0.0-2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "c6e919c50b86c29ea876a876e73091beda6b78c574327e98d2ccca0d83bce183",
+        "executables": [],
+        "package": "monodoc-newtonsoft-json-manual",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "6.0.8+dfsg-1.2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "c6e919c50b86c29ea876a876e73091beda6b78c574327e98d2ccca0d83bce183",
+        "binding_kind": "apt",
+        "description": "compiled XML documentation for Json.NET",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "monodoc-newtonsoft-json-manual",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.0.8+dfsg-1.2",
+        "zero_cost_eligible": true
+      }
+    }
+  ],
+  "goal": "Create canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_NORMALIZED.json containing a top-level submissions object with exactly one record named httpbin whose status is VERIFIED_BROWSER_SUBMISSION and whose customer_name, size, topping, and final_url values come from the browser result",
+  "mission_id": "ASTRA-RUNTIME-BROWSER-XLSX-COMPOSITION-001",
+  "role_conditioned_discovery": [
+    {
+      "binding_performed": false,
+      "candidate_count": 24,
+      "candidates": [
+        {
+          "archive_sha256": "39b9766a2fcacd2105318734478b5536172b740c50d9743a21e8869e62662f24",
+          "binding_kind": "apt",
+          "description": "GLib JSON manipulation library (introspection data)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "gir1.2-json-1.0",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.8.0-2build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "95581ecd747961b82573f89cfedf6b4251477e1b4be80468559e99e25380da71",
+          "binding_kind": "apt",
+          "description": "gjh solver, like solver from AMPL Library",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "gjh-asl-json",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.0+git20210628.867c5da-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "a8d38ae2198798e4ef041e3b8bcb71b8f381cd40766d0e6b9607c92015ee5af0",
+          "binding_kind": "apt",
+          "description": "json interface to the GPGME GnuPG encryption library",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "gpgme-json",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.18.0-4.1ubuntu4",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c7757245e712d960048c41d7baa109f48e7db8bef0720be9775ce833fa46e543",
+          "binding_kind": "apt",
+          "description": "JSON module for Guile",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "guile-json",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "4.7.3-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "ae249dfbd4c2d70c201b145310309462f7a3d32bb79c7c4daed2cdf22465090d",
+          "binding_kind": "apt",
+          "description": "INDI driver for the WeeWX Weather Station",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "indi-weewx-json",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.0-1build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "b77a447f3c6a1eeb1486606865f1bf20ab504b6d8579a150e27b7652406d564c",
+          "binding_kind": "apt",
+          "description": "GLib JSON manipulation library (tools)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "json-glib-tools",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.8.0-2build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "0cc9ca2ac64ab3ed3287b234310020581ddd914a72664a744335354db0434284",
+          "binding_kind": "apt",
+          "description": "Language agnostic test suite for the JSON Schema specifications",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "json-schema-test-suite",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "2.0.0-1.1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "147e274a8ccc4a7b34433ef248ef0a417530e39bddc6a4a8bae4e8fca1356e23",
+          "binding_kind": "apt",
+          "description": "Json parser and Json-RPC modules for the Kamailio SIP server",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "kamailio-json-modules",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "5.7.4-1build7",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "afd7b8168089f68003994131e8e89465566e614db8c672fd72fe83e5f9a9e3ce",
+          "binding_kind": "apt",
+          "description": "JSON decoder/encoder for Lua",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "lua-json",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.3.4-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c434726fba31a641aa23899c221faaa90d4ce79baa0a2849e0fea2844ee0c6ac",
+          "binding_kind": "apt",
+          "description": "Utility to verify Puppet metadata.json files",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "metadata-json-lint",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "3.0.0-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c6e919c50b86c29ea876a876e73091beda6b78c574327e98d2ccca0d83bce183",
+          "binding_kind": "apt",
+          "description": "compiled XML documentation for Json.NET",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "monodoc-newtonsoft-json-manual",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.0.8+dfsg-1.2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "667178c7efe0fed05c931721e008f15a39c6ad57aa7f9a64127e2d8b22c169cf",
+          "binding_kind": "apt",
+          "description": "JSON language support for the CodeMirror code editor",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-codemirror-lang-json",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.0.1~6.22.3+~cs119.52.50-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "88b813b1e2706d4777cde72d3a4eeeba576efc1f4e22fb93eb17f7df2551b511",
+          "binding_kind": "apt",
+          "description": "Node.js implementation of JSON-Patch",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-fast-json-patch",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "3.1.1+ds-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "214ade9cebcca2920caeba9a77f9cbeafabc1be9eb2bbfec54a35f6c778155c6",
+          "binding_kind": "apt",
+          "description": "Deterministic JSON.stringify()",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-fast-json-stable-stringify",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "2.1.0-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "75ce76531996c74cb52addaab0df1abc589afd9b9338021ee898ae06b2e057e5",
+          "binding_kind": "apt",
+          "description": "JSON functions that can convert buffers.",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-buffer",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "3.0.1+~3.0.0-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "895924cd995281ac0b8696b85e657ae5ecda76ab89cd72cd6edf4a03dec769d8",
+          "binding_kind": "apt",
+          "description": "json loader for webpack",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-loader",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.5.7-5",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "d1969a32dfae90ed791a636a71837c4c728219c6e56f8a670ea70a3b287e84ed",
+          "binding_kind": "apt",
+          "description": "Utility to localize a json object",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-localizer",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.0.3-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "489d3493f12c0c56f6420f862212c646b1af02194293d4a5a6d50288cd6c2d3b",
+          "binding_kind": "apt",
+          "description": "JSON.parse() with context information on error",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-parse-better-errors",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.0.2+~cs3.3.1-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "949b5b9328f88b3068c6c70aa56e91c584a62fedde75347680e1d79808639b66",
+          "binding_kind": "apt",
+          "description": "drop-in replacement for JSON.parse that uses `jju`",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-parse-helpfulerror",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.0.3-4",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "21fb4a3552acaed37dcaccb4fb1b7df3ad222f9204b2b3c4cbbf98215df7ae40",
+          "binding_kind": "apt",
+          "description": "JSON Schema validation and specifications",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-schema",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.4.0+~7.0.11-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "634d66e0a3b8a54b2444056129dd38d79928fe985357fdf8ea743c6a22f85662",
+          "binding_kind": "apt",
+          "description": "Node.js module to merge schemas combined using allOf",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-schema-merge-allof",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.8.1+~cs9.16.23-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c040f9d26ec19b7f2fb7d18adced2006c0094fd13158b0d74091173f5e4778e1",
+          "binding_kind": "apt",
+          "description": "Json schema traversal package",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-schema-traverse",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.0.0-3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "901ca2a54760a0a33b45e698e6f057bd2786881033fbfbb852f32c4482729603",
+          "binding_kind": "apt",
+          "description": "deterministic JSON.stringify()",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-stable-stringify",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.0.2+repack1+~cs1.0.34-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c620a27381ee77cfaf27a3b018bbe090e8b65278ea9eea8630da2fde2bb128e2",
+          "binding_kind": "apt",
+          "description": "JSON.stringify with circular references module for Node.js",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-stringify-safe",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "5.0.1+repack-6",
+          "zero_cost_eligible": true
+        }
+      ],
+      "effect": "json",
+      "errors": [],
+      "queries": [
+        "json"
+      ],
+      "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+      "source": "APT_CATALOG",
+      "source_url": null
+    },
+    {
+      "binding_performed": false,
+      "candidate_count": 24,
+      "candidates": [
+        {
+          "archive_sha256": "39b9766a2fcacd2105318734478b5536172b740c50d9743a21e8869e62662f24",
+          "binding_kind": "apt",
+          "description": "GLib JSON manipulation library (introspection data)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "gir1.2-json-1.0",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.8.0-2build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "95581ecd747961b82573f89cfedf6b4251477e1b4be80468559e99e25380da71",
+          "binding_kind": "apt",
+          "description": "gjh solver, like solver from AMPL Library",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "gjh-asl-json",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.0+git20210628.867c5da-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "a8d38ae2198798e4ef041e3b8bcb71b8f381cd40766d0e6b9607c92015ee5af0",
+          "binding_kind": "apt",
+          "description": "json interface to the GPGME GnuPG encryption library",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "gpgme-json",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.18.0-4.1ubuntu4",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c7757245e712d960048c41d7baa109f48e7db8bef0720be9775ce833fa46e543",
+          "binding_kind": "apt",
+          "description": "JSON module for Guile",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "guile-json",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "4.7.3-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "ae249dfbd4c2d70c201b145310309462f7a3d32bb79c7c4daed2cdf22465090d",
+          "binding_kind": "apt",
+          "description": "INDI driver for the WeeWX Weather Station",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "indi-weewx-json",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.0-1build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "b77a447f3c6a1eeb1486606865f1bf20ab504b6d8579a150e27b7652406d564c",
+          "binding_kind": "apt",
+          "description": "GLib JSON manipulation library (tools)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "json-glib-tools",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.8.0-2build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "0cc9ca2ac64ab3ed3287b234310020581ddd914a72664a744335354db0434284",
+          "binding_kind": "apt",
+          "description": "Language agnostic test suite for the JSON Schema specifications",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "json-schema-test-suite",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "2.0.0-1.1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "147e274a8ccc4a7b34433ef248ef0a417530e39bddc6a4a8bae4e8fca1356e23",
+          "binding_kind": "apt",
+          "description": "Json parser and Json-RPC modules for the Kamailio SIP server",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "kamailio-json-modules",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "5.7.4-1build7",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "afd7b8168089f68003994131e8e89465566e614db8c672fd72fe83e5f9a9e3ce",
+          "binding_kind": "apt",
+          "description": "JSON decoder/encoder for Lua",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "lua-json",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.3.4-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c434726fba31a641aa23899c221faaa90d4ce79baa0a2849e0fea2844ee0c6ac",
+          "binding_kind": "apt",
+          "description": "Utility to verify Puppet metadata.json files",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "metadata-json-lint",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "3.0.0-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c6e919c50b86c29ea876a876e73091beda6b78c574327e98d2ccca0d83bce183",
+          "binding_kind": "apt",
+          "description": "compiled XML documentation for Json.NET",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "monodoc-newtonsoft-json-manual",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.0.8+dfsg-1.2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "667178c7efe0fed05c931721e008f15a39c6ad57aa7f9a64127e2d8b22c169cf",
+          "binding_kind": "apt",
+          "description": "JSON language support for the CodeMirror code editor",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-codemirror-lang-json",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.0.1~6.22.3+~cs119.52.50-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "88b813b1e2706d4777cde72d3a4eeeba576efc1f4e22fb93eb17f7df2551b511",
+          "binding_kind": "apt",
+          "description": "Node.js implementation of JSON-Patch",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-fast-json-patch",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "3.1.1+ds-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "214ade9cebcca2920caeba9a77f9cbeafabc1be9eb2bbfec54a35f6c778155c6",
+          "binding_kind": "apt",
+          "description": "Deterministic JSON.stringify()",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-fast-json-stable-stringify",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "2.1.0-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "75ce76531996c74cb52addaab0df1abc589afd9b9338021ee898ae06b2e057e5",
+          "binding_kind": "apt",
+          "description": "JSON functions that can convert buffers.",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-buffer",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "3.0.1+~3.0.0-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "895924cd995281ac0b8696b85e657ae5ecda76ab89cd72cd6edf4a03dec769d8",
+          "binding_kind": "apt",
+          "description": "json loader for webpack",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-loader",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.5.7-5",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "d1969a32dfae90ed791a636a71837c4c728219c6e56f8a670ea70a3b287e84ed",
+          "binding_kind": "apt",
+          "description": "Utility to localize a json object",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-localizer",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.0.3-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "489d3493f12c0c56f6420f862212c646b1af02194293d4a5a6d50288cd6c2d3b",
+          "binding_kind": "apt",
+          "description": "JSON.parse() with context information on error",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-parse-better-errors",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.0.2+~cs3.3.1-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "949b5b9328f88b3068c6c70aa56e91c584a62fedde75347680e1d79808639b66",
+          "binding_kind": "apt",
+          "description": "drop-in replacement for JSON.parse that uses `jju`",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-parse-helpfulerror",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.0.3-4",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "21fb4a3552acaed37dcaccb4fb1b7df3ad222f9204b2b3c4cbbf98215df7ae40",
+          "binding_kind": "apt",
+          "description": "JSON Schema validation and specifications",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-schema",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.4.0+~7.0.11-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "634d66e0a3b8a54b2444056129dd38d79928fe985357fdf8ea743c6a22f85662",
+          "binding_kind": "apt",
+          "description": "Node.js module to merge schemas combined using allOf",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-schema-merge-allof",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.8.1+~cs9.16.23-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c040f9d26ec19b7f2fb7d18adced2006c0094fd13158b0d74091173f5e4778e1",
+          "binding_kind": "apt",
+          "description": "Json schema traversal package",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-schema-traverse",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.0.0-3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "901ca2a54760a0a33b45e698e6f057bd2786881033fbfbb852f32c4482729603",
+          "binding_kind": "apt",
+          "description": "deterministic JSON.stringify()",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-stable-stringify",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.0.2+repack1+~cs1.0.34-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c620a27381ee77cfaf27a3b018bbe090e8b65278ea9eea8630da2fde2bb128e2",
+          "binding_kind": "apt",
+          "description": "JSON.stringify with circular references module for Node.js",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-stringify-safe",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "5.0.1+repack-6",
+          "zero_cost_eligible": true
+        }
+      ],
+      "effect": "json top",
+      "errors": [],
+      "queries": [
+        "json",
+        "top"
+      ],
+      "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+      "source": "APT_CATALOG",
+      "source_url": null
+    }
+  ],
+  "schema": "PROJECT_BRAIN_AUTO_APT_CLI_ACQUISITION_EVIDENCE_V1",
+  "status": "NO_COMPATIBLE_CONTRACT"
+}
