@@ -3,13 +3,13 @@
     "adapter": "shell",
     "error": "VERIFICATION_FAILED",
     "mission_id": "ASTRA-RUNTIME-FANOUT-XLSX-JOIN-001",
-    "observed_at_utc": "2026-09-25T16:07:57.783546+00:00",
+    "observed_at_utc": "2026-09-25T16:09:58.075541+00:00",
     "result": {
       "adapter": "shell",
-      "command": "set -euo pipefail\npython - <<'PY'\nimport json,pathlib\nfrom openpyxl import load_workbook\nmanifest_path=pathlib.Path('canonical/astra_runtime/tmp/FANOUT_JOIN_MANIFEST.json')\nxlsx_path=pathlib.Path('canonical/astra_runtime/tmp/FANOUT_JOIN.xlsx')\nassert manifest_path.is_file(), 'MANIFEST_MISSING'\nassert xlsx_path.is_file(), 'XLSX_MISSING'\nmanifest=json.loads(manifest_path.read_text(encoding='utf-8'))\nassert isinstance(manifest,list) and manifest, 'MANIFEST_INVALID'\nwb=load_workbook(xlsx_path,read_only=True,data_only=True)\nws=wb.active\nrows=list(ws.iter_rows(values_only=True))\nassert rows, 'WORKBOOK_EMPTY'\nheader=[str(x) for x in rows[0]]\nexpected_header=['id','username','capability_kind','artifact_path']\nassert header==expected_header,(header,expected_header)\nactual=[dict(zip(header,row)) for row in rows[1:]]\nexpected=[{k:r[k] for k in expected_header} for r in manifest]\nassert len(actual)==len(expected),(len(actual),len(expected))\nfor a,e in zip(actual,expected):\n    assert str(a['id'])==str(e['id']),(a,e)\n    for k in ('username','capability_kind','artifact_path'):\n        assert str(a[k])==str(e[k]),(k,a,e)\nprint('FANOUT_XLSX_JOIN_INDEPENDENTLY_VERIFIED')\nPY",
-      "duration_s": 0.022,
+      "command": "set -euo pipefail\npython - <<'PY'\nimport json,pathlib,zipfile,xml.etree.ElementTree as ET\nmanifest_path=pathlib.Path('canonical/astra_runtime/tmp/FANOUT_JOIN_MANIFEST.json')\nxlsx_path=pathlib.Path('canonical/astra_runtime/tmp/FANOUT_JOIN.xlsx')\nassert manifest_path.is_file(), 'MANIFEST_MISSING'\nassert xlsx_path.is_file(), 'XLSX_MISSING'\nmanifest=json.loads(manifest_path.read_text(encoding='utf-8'))\nassert isinstance(manifest,list) and manifest, 'MANIFEST_INVALID'\nNS={'m':'http://schemas.openxmlformats.org/spreadsheetml/2006/main'}\nwith zipfile.ZipFile(xlsx_path,'r') as z:\n    shared=[]\n    if 'xl/sharedStrings.xml' in z.namelist():\n        root=ET.fromstring(z.read('xl/sharedStrings.xml'))\n        for si in root.findall('m:si',NS):\n            shared.append(''.join(t.text or '' for t in si.iterfind('.//m:t',NS)))\n    sheet=ET.fromstring(z.read('xl/worksheets/sheet1.xml'))\n    rows=[]\n    for row in sheet.findall('.//m:sheetData/m:row',NS):\n        vals=[]\n        for cell in row.findall('m:c',NS):\n            typ=cell.get('t')\n            v=cell.find('m:v',NS)\n            raw='' if v is None or v.text is None else v.text\n            if typ=='s' and raw:\n                val=shared[int(raw)]\n            elif typ=='inlineStr':\n                val=''.join(t.text or '' for t in cell.iterfind('.//m:t',NS))\n            else:\n                val=raw\n            vals.append(val)\n        rows.append(vals)\nassert rows, 'WORKBOOK_EMPTY'\nheader=[str(x) for x in rows[0]]\nexpected_header=['id','username','capability_kind','artifact_path']\nassert header==expected_header,(header,expected_header)\nactual=[dict(zip(header,row)) for row in rows[1:]]\nexpected=[{k:r[k] for k in expected_header} for r in manifest]\nassert len(actual)==len(expected),(len(actual),len(expected))\nfor a,e in zip(actual,expected):\n    assert str(a['id']).rstrip('.0')==str(e['id']),(a,e)\n    for k in ('username','capability_kind','artifact_path'):\n        assert str(a[k])==str(e[k]),(k,a,e)\nprint('FANOUT_XLSX_JOIN_INDEPENDENTLY_VERIFIED')\nPY",
+      "duration_s": 0.171,
       "returncode": 1,
-      "stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 2, in <module>\nModuleNotFoundError: No module named 'openpyxl'\n",
+      "stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 5, in <module>\nAssertionError: XLSX_MISSING\n",
       "stdout": ""
     },
     "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
@@ -254,14 +254,28 @@
       },
       "step_id": "mission-level-independent-xlsx-acceptance",
       "step_index": 1
+    },
+    {
+      "completed_at_utc": "2026-09-25T16:09:58.075526+00:00",
+      "ok": false,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport json,pathlib,zipfile,xml.etree.ElementTree as ET\nmanifest_path=pathlib.Path('canonical/astra_runtime/tmp/FANOUT_JOIN_MANIFEST.json')\nxlsx_path=pathlib.Path('canonical/astra_runtime/tmp/FANOUT_JOIN.xlsx')\nassert manifest_path.is_file(), 'MANIFEST_MISSING'\nassert xlsx_path.is_file(), 'XLSX_MISSING'\nmanifest=json.loads(manifest_path.read_text(encoding='utf-8'))\nassert isinstance(manifest,list) and manifest, 'MANIFEST_INVALID'\nNS={'m':'http://schemas.openxmlformats.org/spreadsheetml/2006/main'}\nwith zipfile.ZipFile(xlsx_path,'r') as z:\n    shared=[]\n    if 'xl/sharedStrings.xml' in z.namelist():\n        root=ET.fromstring(z.read('xl/sharedStrings.xml'))\n        for si in root.findall('m:si',NS):\n            shared.append(''.join(t.text or '' for t in si.iterfind('.//m:t',NS)))\n    sheet=ET.fromstring(z.read('xl/worksheets/sheet1.xml'))\n    rows=[]\n    for row in sheet.findall('.//m:sheetData/m:row',NS):\n        vals=[]\n        for cell in row.findall('m:c',NS):\n            typ=cell.get('t')\n            v=cell.find('m:v',NS)\n            raw='' if v is None or v.text is None else v.text\n            if typ=='s' and raw:\n                val=shared[int(raw)]\n            elif typ=='inlineStr':\n                val=''.join(t.text or '' for t in cell.iterfind('.//m:t',NS))\n            else:\n                val=raw\n            vals.append(val)\n        rows.append(vals)\nassert rows, 'WORKBOOK_EMPTY'\nheader=[str(x) for x in rows[0]]\nexpected_header=['id','username','capability_kind','artifact_path']\nassert header==expected_header,(header,expected_header)\nactual=[dict(zip(header,row)) for row in rows[1:]]\nexpected=[{k:r[k] for k in expected_header} for r in manifest]\nassert len(actual)==len(expected),(len(actual),len(expected))\nfor a,e in zip(actual,expected):\n    assert str(a['id']).rstrip('.0')==str(e['id']),(a,e)\n    for k in ('username','capability_kind','artifact_path'):\n        assert str(a[k])==str(e[k]),(k,a,e)\nprint('FANOUT_XLSX_JOIN_INDEPENDENTLY_VERIFIED')\nPY",
+        "duration_s": 0.171,
+        "returncode": 1,
+        "stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 5, in <module>\nAssertionError: XLSX_MISSING\n",
+        "stdout": ""
+      },
+      "step_id": "mission-level-independent-xlsx-acceptance",
+      "step_index": 1
     }
   ],
   "mission_id": "ASTRA-RUNTIME-FANOUT-XLSX-JOIN-001",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_FANOUT_XLSX_JOIN_001.json",
-  "mission_sha256": "e2e0b45d62c4c5b7179cfaeaa54aa60c7b2750f53dfa89719f1ab4ada01563a1",
+  "mission_sha256": "6f32684294d6b992dce4919de0690fe4be40f79275666e06cfade9b99f823d98",
   "next_step": 1,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
   "status": "BLOCKED",
-  "updated_at_utc": "2026-09-25T16:07:57.783739+00:00"
+  "updated_at_utc": "2026-09-25T16:09:58.075926+00:00"
 }
