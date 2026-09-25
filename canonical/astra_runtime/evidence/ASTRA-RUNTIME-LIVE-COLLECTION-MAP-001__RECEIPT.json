@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T04:30:18.880802+00:00",
+  "mission_id": "ASTRA-RUNTIME-LIVE-COLLECTION-MAP-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_LIVE_COLLECTION_MAP_001.json",
+  "mission_sha256": "6fccf7b871ff7f9804fedb7cfc2bfda2af0cb6c06f7949f12c3d5b9e18c8d6d6",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "e527aa5ed694eb65e4f4f306caeba6a714be59521ac100748d78b10cb38d4453",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

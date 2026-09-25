@@ -1,0 +1,232 @@
+{
+  "completed_at_utc": "2026-09-25T04:30:18.880412+00:00",
+  "created_at_utc": "2026-09-25T04:30:11.953251+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T04:30:18.880023+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "goal",
+        "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+        "cycles": 4,
+        "final_summary": "COMPOUND_GOAL_COMPLETE",
+        "goal_compilation": {
+          "clauses": [
+            "Using a real rendered browser, open https://jsonplaceholder.typicode.com/users, save a screenshot to canonical/astra_runtime/tmp/LIVE_USERS.png, and save the rendered result to canonical/astra_runtime/tmp/LIVE_USERS.json",
+            "Read the live JSON array from that result",
+            "For every user returned at runtime, create canonical/astra_runtime/tmp/LIVE_USERS_CLASSIFIED.json containing exactly one record with that user's id, name, username, and bucket equal to SHORT when the username length is at most 8 characters and LONG otherwise",
+            "Finally independently reread both files and verify the output contains exactly one record per live user, preserves every id, name, and username, and assigns every bucket correctly"
+          ],
+          "compiled_parts": [
+            {
+              "index": 0,
+              "inputs": {
+                "result_path": "canonical/astra_runtime/tmp/LIVE_USERS.json",
+                "screenshot_path": "canonical/astra_runtime/tmp/LIVE_USERS.png",
+                "url": "https://jsonplaceholder.typicode.com/users"
+              },
+              "mode": "VERIFIED_CAPABILITY",
+              "score": 30,
+              "selected_capability": "web.browser.rendered.capture.chromedriver",
+              "subgoal": "Using a real rendered browser, open https://jsonplaceholder.typicode.com/users, save a screenshot to canonical/astra_runtime/tmp/LIVE_USERS.png, and save the rendered result to canonical/astra_runtime/tmp/LIVE_USERS.json",
+              "target_effects": [
+                "web.browser.rendered.capture",
+                "web.browser.rendered.interact"
+              ]
+            },
+            {
+              "index": 1,
+              "mode": "DEFERRED_RUNTIME_COLLECTION_READ",
+              "source_path": "canonical/astra_runtime/tmp/LIVE_USERS.json",
+              "subgoal": "Read the live JSON array from that result"
+            },
+            {
+              "copy_fields": [
+                "id",
+                "name",
+                "username"
+              ],
+              "index": 2,
+              "long_label": "LONG",
+              "max_length": 8,
+              "measured_field": "username",
+              "mode": "VERIFIED_RUNTIME_COLLECTION_MAP",
+              "output_path": "canonical/astra_runtime/tmp/LIVE_USERS_CLASSIFIED.json",
+              "short_label": "SHORT",
+              "source_path": "canonical/astra_runtime/tmp/LIVE_USERS.json",
+              "subgoal": "For every user returned at runtime, create canonical/astra_runtime/tmp/LIVE_USERS_CLASSIFIED.json containing exactly one record with that user's id, name, username, and bucket equal to SHORT when the username length is at most 8 characters and LONG otherwise"
+            },
+            {
+              "copy_fields": [
+                "id",
+                "name",
+                "username"
+              ],
+              "index": 3,
+              "long_label": "LONG",
+              "max_length": 8,
+              "measured_field": "username",
+              "mode": "INDEPENDENT_RUNTIME_COLLECTION_VERIFICATION",
+              "output_path": "canonical/astra_runtime/tmp/LIVE_USERS_CLASSIFIED.json",
+              "short_label": "SHORT",
+              "source_path": "canonical/astra_runtime/tmp/LIVE_USERS.json",
+              "subgoal": "Finally independently reread both files and verify the output contains exactly one record per live user, preserves every id, name, and username, and assigns every bucket correctly"
+            }
+          ],
+          "compiler_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN"
+        },
+        "planner_model_last": null,
+        "planner_source": null,
+        "planner_transport": null,
+        "planning_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN",
+        "returncode": 0,
+        "stdout": "COMPOUND_GOAL_COMPLETE",
+        "trace": [
+          {
+            "cycle": 0,
+            "plan": {
+              "args": {
+                "capability_id": "web.browser.rendered.capture.chromedriver",
+                "result_path": "canonical/astra_runtime/tmp/LIVE_USERS.json",
+                "screenshot_path": "canonical/astra_runtime/tmp/LIVE_USERS.png",
+                "url": "https://jsonplaceholder.typicode.com/users"
+              },
+              "expect": {
+                "field": "output_verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "browser_chromedriver",
+              "capability_id": "web.browser.rendered.capture.chromedriver",
+              "dependency": {
+                "executable": "chromedriver",
+                "resolved_path": "/usr/bin/chromedriver",
+                "status": "LOCAL_VERIFIED",
+                "type": "system_tool"
+              },
+              "final_url": "https://jsonplaceholder.typicode.com/users",
+              "output_verified": true,
+              "page_title": "",
+              "rendered": true,
+              "result_path": "canonical/astra_runtime/tmp/LIVE_USERS.json",
+              "screenshot_bytes": 311644,
+              "screenshot_path": "canonical/astra_runtime/tmp/LIVE_USERS.png",
+              "screenshot_sha256": "01a23b3082922b625c5bdef0b027223646b874d2b4a72bcbabb958a81272d715",
+              "source_url": "https://jsonplaceholder.typicode.com/users",
+              "text": "[\n  {\n    \"id\": 1,\n    \"name\": \"Leanne Graham\",\n    \"username\": \"Bret\",\n    \"email\": \"Sincere@april.biz\",\n    \"address\": {\n      \"street\": \"Kulas Light\",\n      \"suite\": \"Apt. 556\",\n      \"city\": \"Gwenborough\",\n      \"zipcode\": \"92998-3874\",\n      \"geo\": {\n        \"lat\": \"-37.3159\",\n        \"lng\": \"81.1496\"\n      }\n    },\n    \"phone\": \"1-770-736-8031 x56442\",\n    \"website\": \"hildegard.org\",\n    \"company\": {\n      \"name\": \"Romaguera-Crona\",\n      \"catchPhrase\": \"Multi-layered client-server neural-net\",\n      \"bs\": \"harness real-time e-markets\"\n    }\n  },\n  {\n    \"id\": 2,\n    \"name\": \"Ervin Howell\",\n    \"username\": \"Antonette\",\n    \"email\": \"Shanna@melissa.tv\",\n    \"address\": {\n      \"street\": \"Victor Plains\",\n      \"suite\": \"Suite 879\",\n      \"city\": \"Wisokyburgh\",\n      \"zipcode\": \"90566-7771\",\n      \"geo\": {\n        \"lat\": \"-43.9509\",\n        \"lng\": \"-34.4618\"\n      }\n    },\n    \"phone\": \"010-692-6593 x09125\",\n    \"website\": \"anastasia.net\",\n    \"company\": {\n      \"name\": \"Deckow-Crist\",\n      \"catchPhrase\": \"Proactive didactic contingency\",\n      \"bs\": \"synergize scalable supply-chains\"\n    }\n  },\n  {\n    \"id\": 3,\n    \"name\": \"Clementine Bauch\",\n    \"username\": \"Samantha\",\n    \"email\": \"Nathan@yesenia.net\",\n    \"address\": {\n      \"street\": \"Douglas Extension\",\n      \"suite\": \"Suite 847\",\n      \"city\": \"McKenziehaven\",\n      \"zipcode\": \"59590-4157\",\n      \"geo\": {\n        \"lat\": \"-68.6102\",\n        \"lng\": \"-47.0653\"\n      }\n    },\n    \"phone\": \"1-463-123-4447\",\n    \"website\": \"ramiro.info\",\n    \"company\": {\n      \"name\": \"Romaguera-Jacobson\",\n      \"catchPhrase\": \"Face to face bifurcated interface\",\n      \"bs\": \"e-enable strategic applications\"\n    }\n  },\n  {\n    \"id\": 4,\n    \"name\": \"Patricia Lebsack\",\n    \"username\": \"Karianne\",\n    \"email\": \"Julianne.OConner@kory.org\",\n    \"address\": {\n      \"street\": \"Hoeger Mall\",\n      \"suite\": \"Apt. 692\",\n      \"city\": \"South Elvis\",\n      \"zipcode\": \"53919-4257\",\n      \"geo\": {\n        \"lat\": \"29.4572\",\n        \"lng\": \"-164.2990\"\n      }\n    },\n    \"phone\": \"493-170-9623 x156\",\n    \"website\": \"kale.biz\",\n    \"company\": {\n      \"name\": \"Robel-Corkery\",\n      \"catchPhrase\": \"Multi-tiered zero tolerance productivity\",\n      \"bs\": \"transition cutting-edge web services\"\n    }\n  },\n  {\n    \"id\": 5,\n    \"name\": \"Chelsey Dietrich\",\n    \"username\": \"Kamren\",\n    \"email\": \"Lucio_Hettinger@annie.ca\",\n    \"address\": {\n      \"street\": \"Skiles Walks\",\n      \"suite\": \"Suite 351\",\n      \"city\": \"Roscoeview\",\n      \"zipcode\": \"33263\",\n      \"geo\": {\n        \"lat\": \"-31.8129\",\n        \"lng\": \"62.5342\"\n      }\n    },\n    \"phone\": \"(254)954-1289\",\n    \"website\": \"demarco.info\",\n    \"company\": {\n      \"name\": \"Keebler LLC\",\n      \"catchPhrase\": \"User-centric fault-tolerant solution\",\n      \"bs\": \"revolutionize end-to-end systems\"\n    }\n  },\n  {\n    \"id\": 6,\n    \"name\": \"Mrs. Dennis Schulist\",\n    \"username\": \"Leopoldo_Corkery\",\n    \"email\": \"Karley_Dach@jasper.info\",\n    \"address\": {\n      \"street\": \"Norberto Crossing\",\n      \"suite\": \"Apt. 950\",\n      \"city\": \"South Christy\",\n      \"zipcode\": \"23505-1337\",\n      \"geo\": {\n        \"lat\": \"-71.4197\",\n        \"lng\": \"71.7478\"\n      }\n    },\n    \"phone\": \"1-477-935-8478 x6430\",\n    \"website\": \"ola.org\",\n    \"company\": {\n      \"name\": \"Considine-Lockman\",\n      \"catchPhrase\": \"Synchronised bottom-line interface\",\n      \"bs\": \"e-enable innovative applications\"\n    }\n  },\n  {\n    \"id\": 7,\n    \"name\": \"Kurtis Weissnat\",\n    \"username\": \"Elwyn.Skiles\",\n    \"email\": \"Telly.Hoeger@billy.biz\",\n    \"address\": {\n      \"street\": \"Rex Trail\",\n      \"suite\": \"Suite 280\",\n      \"city\": \"Howemouth\",\n      \"zipcode\": \"58804-1099\",\n      \"geo\": {\n        \"lat\": \"24.8918\",\n        \"lng\": \"21.8984\"\n      }\n    },\n    \"phone\": \"210.067.6132\",\n    \"website\": \"elvis.io\",\n    \"company\": {\n      \"name\": \"Johns Group\",\n      \"catchPhrase\": \"Configurable multimedia task-force\",\n      \"bs\": \"generate enterprise e-tailers\"\n    }\n  },\n  {\n    \"id\": 8,\n    \"name\": \"Nicholas Runolfsdottir V\",\n    \"username\": \"Maxime_Nienow\",\n    \"email\": \"Sherwood@rosamond.me\",\n    \"address\": {\n      \"street\": \"Ellsworth Summit\",\n      \"suite\": \"Suite 729\",\n      \"city\": \"Aliyaview\",\n      \"zipcode\": \"45169\",\n      \"geo\": {\n        \"lat\": \"-14.3990\",\n        \"lng\": \"-120.7677\"\n      }\n    },\n    \"phone\": \"586.493.6943 x140\",\n    \"website\": \"jacynthe.com\",\n    \"company\": {\n      \"name\": \"Abernathy Group\",\n      \"catchPhrase\": \"Implemented secondary concept\",\n      \"bs\": \"e-enable extensible e-tailers\"\n    }\n  },\n  {\n    \"id\": 9,\n    \"name\": \"Glenna Reichert\",\n    \"username\": \"Delphine\",\n    \"email\": \"Chaim_McDermott@dana.io\",\n    \"address\": {\n      \"street\": \"Dayna Park\",\n      \"suite\": \"Suite 449\",\n      \"city\": \"Bartholomebury\",\n      \"zipcode\": \"76495-3109\",\n      \"geo\": {\n        \"lat\": \"24.6463\",\n        \"lng\": \"-168.8889\"\n      }\n    },\n    \"phone\": \"(775)976-6794 x41206\",\n    \"website\": \"conrad.com\",\n    \"company\": {\n      \"name\": \"Yost and Sons\",\n      \"catchPhrase\": \"Switchable contextually-based project\",\n      \"bs\": \"aggregate real-time technologies\"\n    }\n  },\n  {\n    \"id\": 10,\n    \"name\": \"Clementina DuBuque\",\n    \"username\": \"Moriah.Stanton\",\n    \"email\": \"Rey.Padberg@karina.biz\",\n    \"address\": {\n      \"street\": \"Kattie Turnpike\",\n      \"suite\": \"Suite 198\",\n      \"city\": \"Lebsackbury\",\n      \"zipcode\": \"31428-2261\",\n      \"geo\": {\n        \"lat\": \"-38.2386\",\n        \"lng\": \"57.2232\"\n      }\n    },\n    \"phone\": \"024-648-3804\",\n    \"website\": \"ambrose.net\",\n    \"company\": {\n      \"name\": \"Hoeger LLC\",\n      \"catchPhrase\": \"Centralized empowering task-force\",\n      \"bs\": \"target end-to-end models\"\n    }\n  }\n]",
+              "text_nonempty": true
+            }
+          },
+          {
+            "cycle": 1,
+            "plan": {
+              "args": {
+                "capability_id": "json.query.jq",
+                "filter": "(.observed_text | fromjson) | map({\"id\":.id,\"name\":.name,\"username\":.username,\"bucket\":(if (.username | tostring | length) <= 8 then \"SHORT\" else \"LONG\" end)})",
+                "input_path": "canonical/astra_runtime/tmp/LIVE_USERS.json",
+                "output_path": "canonical/astra_runtime/tmp/LIVE_USERS_CLASSIFIED.json",
+                "raw_output": false,
+                "require_nonempty": true,
+                "timeout_s": 60
+              },
+              "expect": {
+                "field": "output_verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "jq_query",
+              "argv": [
+                "jq",
+                "",
+                "(.observed_text | fromjson) | map({\"id\":.id,\"name\":.name,\"username\":.username,\"bucket\":(if (.username | tostring | length) <= 8 then \"SHORT\" else \"LONG\" end)})",
+                "/home/runner/work/brain/brain/canonical/astra_runtime/tmp/LIVE_USERS.json"
+              ],
+              "capability_id": "json.query.jq",
+              "dependency": {
+                "origin": "Ubuntu",
+                "packages": [
+                  {
+                    "archive_sha256": "f59183392f84fe67b407b494d8ba6185e9b0e4a106ffcb369490bd20a83fd40e",
+                    "name": "jq",
+                    "version": "1.7.1-3ubuntu0.24.04.2"
+                  }
+                ],
+                "status": "INSTALLED_VERIFIED"
+              },
+              "input_path": "canonical/astra_runtime/tmp/LIVE_USERS.json",
+              "output_bytes": 1062,
+              "output_path": "canonical/astra_runtime/tmp/LIVE_USERS_CLASSIFIED.json",
+              "output_sha256": "f01ddb3d579a4e0ada1ab585eb7701d550fb1af6632ad185d4c75a263a23c7b5",
+              "output_text_excerpt": "[\n  {\n    \"id\": 1,\n    \"name\": \"Leanne Graham\",\n    \"username\": \"Bret\",\n    \"bucket\": \"SHORT\"\n  },\n  {\n    \"id\": 2,\n    \"name\": \"Ervin Howell\",\n    \"username\": \"Antonette\",\n    \"bucket\": \"LONG\"\n  },\n  {\n    \"id\": 3,\n    \"name\": \"Clementine Bauch\",\n    \"username\": \"Samantha\",\n    \"bucket\": \"SHORT\"\n  },\n  {\n    \"id\": 4,\n    \"name\": \"Patricia Lebsack\",\n    \"username\": \"Karianne\",\n    \"bucket\": \"SHORT\"\n  },\n  {\n    \"id\": 5,\n    \"name\": \"Chelsey Dietrich\",\n    \"username\": \"Kamren\",\n    \"bucket\": \"SHORT\"\n  },\n  {\n    \"id\": 6,\n    \"name\": \"Mrs. Dennis Schulist\",\n    \"username\": \"Leopoldo_Corkery\",\n    \"bucket\": \"LONG\"\n  },\n  {\n    \"id\": 7,\n    \"name\": \"Kurtis Weissnat\",\n    \"username\": \"Elwyn.Skiles\",\n    \"bucket\": \"LONG\"\n  },\n  {\n    \"id\": 8,\n    \"name\": \"Nicholas Runolfsdottir V\",\n    \"username\": \"Maxime_Nienow\",\n    \"bucket\": \"LONG\"\n  },\n  {\n    \"id\": 9,\n    \"name\": \"Glenna Reichert\",\n    \"username\": \"Delphine\",\n    \"bucket\": \"SHORT\"\n  },\n  {\n    \"id\": 10,\n    \"name\": \"Clementina DuBuque\",\n    \"username\": \"Moriah.Stanton\",\n    \"bucket\": \"LONG\"\n  }\n]\n",
+              "output_text_utf8_verified": true,
+              "output_verified": true,
+              "returncode": 0,
+              "stderr": ""
+            }
+          },
+          {
+            "cycle": 2,
+            "plan": {
+              "args": {
+                "copy_fields": [
+                  "id",
+                  "name",
+                  "username"
+                ],
+                "label_field": "bucket",
+                "long_label": "LONG",
+                "max_length": 8,
+                "measured_field": "username",
+                "output_path": "canonical/astra_runtime/tmp/LIVE_USERS_CLASSIFIED.json",
+                "short_label": "SHORT",
+                "source_path": "canonical/astra_runtime/tmp/LIVE_USERS.json"
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "assert_collection_length_bucket"
+            },
+            "result": {
+              "failures": [],
+              "output_count": 10,
+              "source_count": 10,
+              "type": "assert_collection_length_bucket",
+              "verified": true
+            }
+          },
+          {
+            "cycle": 3,
+            "plan": {
+              "args": {
+                "summary": "COMPOUND_GOAL_COMPLETE"
+              },
+              "type": "finish"
+            },
+            "result": {
+              "summary": "COMPOUND_GOAL_COMPLETE",
+              "type": "finish"
+            }
+          }
+        ]
+      },
+      "step_id": "run-live-collection-map-goal",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-RUNTIME-LIVE-COLLECTION-MAP-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_LIVE_COLLECTION_MAP_001.json",
+  "mission_sha256": "6fccf7b871ff7f9804fedb7cfc2bfda2af0cb6c06f7949f12c3d5b9e18c8d6d6",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T04:30:18.880036+00:00"
+}
