@@ -1,1023 +1,632 @@
 {
   "auto_acquisition": {
-    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"uuid\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/gstreamer1.0-plugins-base_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/libgstreamer-plugins-good1.0-0_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/gstreamer1.0-plugins-good_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-gl1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\\n\", \"name\": \"budgie-live-settings\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"cl-uuid\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"dracut-live\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"TimeoutExpired:Command '['/usr/bin/edubuntu-langpack-installer', '--help']' timed out after 10 seconds\", \"name\": \"edubuntu-live\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:8 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/gstreamer1.0-plugins-base_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/libgstreamer-plugins-good1.0-0_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/gstreamer1.0-plugins-good_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-gl1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/x/xdg-desktop-portal/xdg-desktop-portal_1.18.4-1ubuntu2.24.04.2_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\\n\", \"name\": \"edubuntu-live-settings\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-uuid\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"erlang-uuid\", \"status\": \"CONTRACT_REJECT",
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-p-finally\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"links2\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-hash.js\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-universalify\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"pencil2d\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"phyutility\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"samba-common\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"samba-common-bin\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"soundstretch\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"tigervnc-tools\", \"status\": \"CONTRACT_REJECTED\"}]",
     "status": "NOT_DISPATCHED"
   },
   "binding_performed": false,
   "goal": "Using a real rendered browser, open https://httpbin.org/uuid, save a screenshot to canonical/astra_runtime/tmp/LIVE_UUID.png, and save the rendered result to canonical/astra_runtime/tmp/LIVE_UUID.json. Read the UUID from that live result. If its first hexadecimal character is one of 0,1,2,3,4,5,6,7 create canonical/astra_runtime/tmp/LIVE_UUID_CLASSIFICATION.json with uuid equal to the observed UUID and bucket equal to LOW; otherwise create it with the same observed uuid and bucket equal to HIGH. Finally independently reread both files and verify the bucket is correct for the actual UUID.",
   "mission_id": "ASTRA-RUNTIME-LIVE-CONDITIONAL-001",
-  "observed_at_utc": "2026-09-25T03:42:10.065469+00:00",
+  "observed_at_utc": "2026-09-25T04:07:03.907426+00:00",
   "result": {
     "binding_performed": false,
     "candidates": [
       {
-        "archive_sha256": "aced03872402198356690e6ca1969ddd1471c285dcbb6fa0b67f309dcc77ff5c",
+        "archive_sha256": "650e36951dedc048fe95f78d887e481b0354bb5846236760d5e9db6cf9097441",
         "binding_kind": "apt",
-        "description": "Universally Unique Identifier Command-Line Tool",
+        "description": "Invoked when the promise is settled regardless of outcome",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "uuid"
+          "finally"
         ],
-        "name": "uuid",
+        "name": "node-p-finally",
         "packages": [],
-        "query": "uuid",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 40,
-        "version": "1.6.2-1.5build13",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "3a5d1ce9bd4e03683f0c5ca8563fd3185b7df4a42f588b2125d84e854c2e02c2",
-        "binding_kind": "apt",
-        "description": "Configuration for the Ubuntu Budgie Live .iso Image",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "budgie-live-settings",
-        "packages": [],
-        "query": "live",
+        "query": "finally",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "0.20.13",
+        "version": "2.0.1-2",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "b3163ed1be217b517f73267b0f6cfb6772b848a28ab3945a55045fb92614914e",
+        "archive_sha256": "d5363139a7def307ddc85b0b5cf74544f2c6ce59ad7f4ac9f27955fc74a0526e",
         "binding_kind": "apt",
-        "description": "Common Lisp librabry for generation of UUIDs as described by RFC 4122",
+        "description": "Web browser running in both graphics and text mode",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "uuid"
+          "both"
         ],
-        "name": "cl-uuid",
+        "name": "links2",
         "packages": [],
-        "query": "uuid",
+        "query": "both",
         "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "20130813-1.1",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "8d5ebe2c55469751ac95ef46751d7625bc055b7cb3886d10017331fddf98805b",
-        "binding_kind": "apt",
-        "description": "dracut is an event driven initramfs infrastructure (live image modules)",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "dracut-live",
-        "packages": [],
-        "query": "live",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "060+5-1ubuntu3.3",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "e8155e2a4011eea6dd8d5c1a9b1696d51b3e0f46b5c2963ca53af3c76fb3d6dd",
-        "binding_kind": "apt",
-        "description": "Edubuntu live media support",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "edubuntu-live",
-        "packages": [],
-        "query": "live",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "14.04.2build2",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "6f74a785b5cd214d8e82c70ae921468540019a0fdc077d391d8b3137f7ae8e1a",
-        "binding_kind": "apt",
-        "description": "Configuration for the Edubuntu .iso Image",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "edubuntu-live-settings",
-        "packages": [],
-        "query": "live",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "24.04.26.1",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "17bd07002d9072766d8f46d800b714534684ab0a62dda9911141e98ff0fc5c52",
-        "binding_kind": "apt",
-        "description": "UUID/GUID library for Emacs Lisp",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "uuid"
-        ],
-        "name": "elpa-uuid",
-        "packages": [],
-        "query": "uuid",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "0.0.3~git20120910.1519bfe-3",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "c39d0d4f9aaede690bfb1aa9e21b18b1498d4f74cb3af2cac0c2511a25dc2331",
-        "binding_kind": "apt",
-        "description": "UUID generator for Erlang",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "uuid"
-        ],
-        "name": "erlang-uuid",
-        "packages": [],
-        "query": "uuid",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "0.4.6-2",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "a5dcd71880816022d5555b0844b3a1990ff1f290823e60311063d3990636ddcd",
-        "binding_kind": "apt",
-        "description": "KIWI - Dracut module for iso(live) image type",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "kiwi-dracut-live",
-        "packages": [],
-        "query": "live",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "9.25.22-1ubuntu1",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "1f72ac3dbd8c98502d1c387a3a755ec949de5d4866d517cdd33d7da82916c1a4",
-        "binding_kind": "apt",
-        "description": "Live System Boot Components",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "live-boot",
-        "packages": [],
-        "query": "live",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "1:20230131",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "0c040ff86a5e522d602af08f59011e817677fbe0602118270ee2cf624e395f34",
-        "binding_kind": "apt",
-        "description": "Live System Boot Components (initramfs-tools backend)",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "live-boot-initramfs-tools",
-        "packages": [],
-        "query": "live",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "1:20230131",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "29fdb5b25138533c614c5d148df37a634010d40414ba98e0ee7153f026d5dd7a",
-        "binding_kind": "apt",
-        "description": "Debian Live - System build scripts",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "live-build",
-        "packages": [],
-        "query": "live",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "3.0~a57-1ubuntu49.1",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "a03a1fcb84176a9364116e7fd045e513a30f93f5da48d094fe1c911142d87d2f",
-        "binding_kind": "apt",
-        "description": "Debian Live - System build scripts (CGI frontend)",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "live-build-cgi",
-        "packages": [],
-        "query": "live",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "3.0~a57-1ubuntu49.1",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "6aef47f7c83493f8ef6c596409fde080abf816ff615cf65665252cc63b0016a7",
-        "binding_kind": "apt",
-        "description": "GUI to clone and manage Live-Build USB sticks",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "live-clone",
-        "packages": [],
-        "query": "live",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "3.1-1",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "c94f4773ca5f1a54c35adcbdf86233579ae90a595042b356f74a58bc6d5f5fd9",
-        "binding_kind": "apt",
-        "description": "Live System Configuration Components",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "live-config",
-        "packages": [],
-        "query": "live",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "11.0.4",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "d732051d9604f27a15d4d1f09a0b66fc2761b1e7d5efde81430cb2d05291a965",
-        "binding_kind": "apt",
-        "description": "Live System Configuration Components (systemd backend)",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "live-config-systemd",
-        "packages": [],
-        "query": "live",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "11.0.4",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "cc9240adf8b7f52dedfeb923c76c39925f6f2421c280e42d061c2222e89951a4",
-        "binding_kind": "apt",
-        "description": "Live Systems Documentation (metapackage)",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "live-manual",
-        "packages": [],
-        "query": "live",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "2:20151217.2",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "06dc26008e9976c2d590020af8c9eaa11394f1232c6825bc3605645af74f6d4c",
-        "binding_kind": "apt",
-        "description": "Live Systems Documentation (epub)",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "live-manual-epub",
-        "packages": [],
-        "query": "live",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "2:20151217.2",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "506bd970c9900074a18d5b6ef0f91abf2385ea11eeedf739523d9a3707c7741b",
-        "binding_kind": "apt",
-        "description": "Live Systems Documentation (html)",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "live-manual-html",
-        "packages": [],
-        "query": "live",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "2:20151217.2",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "66b87c59f7bb6dd1454375bb9fe28b33fb19b05fa2d088584e1e8eeb0ae14774",
-        "binding_kind": "apt",
-        "description": "Live Systems Documentation (odf)",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "live-manual-odf",
-        "packages": [],
-        "query": "live",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "2:20151217.2",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "999f9fdbeaacc55f3029ece4aef4f52c12feb60e56b02005fe61b2deca56a64a",
-        "binding_kind": "apt",
-        "description": "Live Systems Documentation (pdf)",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "live-manual-pdf",
-        "packages": [],
-        "query": "live",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "2:20151217.2",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "99ba19f3aa07cc051e83824995082df4a2fb1b7c9a7a4cca7cb1ea46bf207eda",
-        "binding_kind": "apt",
-        "description": "Live Systems Documentation (txt)",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "live-manual-txt",
-        "packages": [],
-        "query": "live",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "2:20151217.2",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "cb23626500a6d554b40065c352e6081c646b3c22ddbaec89d41b9062d47b7d48",
-        "binding_kind": "apt",
-        "description": "selection of oft-used non-free-firmware shipped on live systems",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "live-task-non-free-firmware-pc",
-        "packages": [],
-        "query": "live",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "12.0.1",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "4e842a5e781c8c4d9bbd9c8358dee8334048ba4fc3dde64153670917fe88fafa",
-        "binding_kind": "apt",
-        "description": "provides firmware for server network and storage devices",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "live-task-non-free-firmware-server",
-        "packages": [],
-        "query": "live",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "12.0.1",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "911727605f504e858b71a04d67175d064ff4c0881f81762772b4cb6fced5a03c",
-        "binding_kind": "apt",
-        "description": "Live System Extra Components",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "live-tools",
-        "packages": [],
-        "query": "live",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "1:20190831.1",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "8e8ffcd429f4115d4956c86d73eb6e8ea9f82426a42ec5c27ef8951e4340b0f0",
-        "binding_kind": "apt",
-        "description": "simple and fast RFC4122 UUID generation - Node.js module",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "uuid"
-        ],
-        "name": "node-uuid",
-        "packages": [],
-        "query": "uuid",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "8.3.2+~8.3.3-4",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "534f0bd3d6548041720b6e5d33e5e8c7b18c0df17e337378a8c8dcc60e280219",
-        "binding_kind": "apt",
-        "description": "Tools for generating and handling UUIDs",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "uuid"
-        ],
-        "name": "r-cran-uuid",
-        "packages": [],
-        "query": "uuid",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "1.2-0-1",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "95f3d7e24ee526263bd5243c5972a7e804ce25c27886dad8cb5df75d18230792",
-        "binding_kind": "apt",
-        "description": "Default settings for Ubuntu MATE live CD",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "ubuntu-mate-live-settings",
-        "packages": [],
-        "query": "live",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "24.04.4",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "36f0707316699503d505c565e4c799a94de3a06c82405e0befa0e9d541388a4b",
-        "binding_kind": "apt",
-        "description": "Configuration for the Ubuntu Cinnamon .iso image",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "ubuntucinnamon-live-settings",
-        "packages": [],
-        "query": "live",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "24.04.3",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "fd1e8307435042e183725462ac6f5199cb31662b1526b5f1ab3294373c9b5e67",
-        "binding_kind": "apt",
-        "description": "Configuration for the Ubuntu Kylin .iso image",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "ubuntukylin-live-settings",
-        "packages": [],
-        "query": "live",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "24.04.1",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "AI-powered uuid ai MCP server for agents. Supports generate uuid, parse uuid, generate ulid. By",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.CSOAI-ORG/uuid-ai-mcp",
-        "packages": [
-          {
-            "identifier": "uuid-ai-mcp",
-            "registry_type": "pypi",
-            "required_environment": [],
-            "runtime_hint": "python",
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": "1.0.11"
-          }
-        ],
-        "query": "uuid",
-        "remotes": [],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/CSOAI-ORG/uuid-ai-mcp"
-        },
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
-        "status": "active",
-        "version": "1.0.11",
+        "version": "2.29-1build6",
         "zero_cost_eligible": true
       },
       {
-        "description": "Unofficial read-only client for the mein-aldi.de (ALDI S\u00fcd) grocery-delivery catalog.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.RayNCooper/grocery-delivery-mcp",
-        "packages": [
-          {
-            "identifier": "grocery-delivery-mcp",
-            "registry_type": "npm",
-            "required_environment": [],
-            "runtime_hint": null,
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": "0.2.0"
-          }
+        "archive_sha256": "3504f6c6e269a14ba57a905330b20e3031f305f83d5cda57b26a3d2aaf2b8e27",
+        "binding_kind": "apt",
+        "description": "Hash functions that could be run by both browser and nodejs",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "both"
         ],
-        "query": "live",
+        "name": "node-hash.js",
+        "packages": [],
+        "query": "both",
         "remotes": [],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/RayNCooper/grocery-delivery-mcp"
-        },
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
-        "status": "active",
-        "version": "0.2.0",
+        "version": "1.1.7-4",
         "zero_cost_eligible": true
       },
       {
-        "description": "Generate UUIDs and validate formats locally. No network and no key.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.mrfentmen/uuid-mcp",
-        "packages": [
-          {
-            "identifier": "@mrfentmen/uuid-mcp",
-            "registry_type": "npm",
-            "required_environment": [],
-            "runtime_hint": null,
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": "1.0.0"
-          }
+        "archive_sha256": "117eaff886628c45435465fc9e97c719968e34cde15570514da7eeb07aabd268",
+        "binding_kind": "apt",
+        "description": "Make a callback- or promise-based function support both promises and callbacks",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "both"
         ],
-        "query": "uuid",
+        "name": "node-universalify",
+        "packages": [],
+        "query": "both",
         "remotes": [],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/mrfentmen/uuid-mcp"
-        },
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
-        "status": "active",
-        "version": "1.0.0",
+        "version": "2.0.0-3",
         "zero_cost_eligible": true
       },
       {
-        "description": "MCP server for generating UUIDs (v4, v7), ULIDs, nanoids, random IDs.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.ryudi84/uuid",
-        "packages": [
-          {
-            "identifier": "uuid-forge-mcp",
-            "registry_type": "npm",
-            "required_environment": [],
-            "runtime_hint": null,
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": "1.0.3"
-          }
+        "archive_sha256": "e56b4107e10fad2c0abd7a8704b8b6a6e486b79e04d8ce92ad5a3e1e9c10ecc0",
+        "binding_kind": "apt",
+        "description": "Create hand-drawn animation using both bitmap and vector graphics",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "both"
         ],
-        "query": "uuid",
+        "name": "pencil2d",
+        "packages": [],
+        "query": "both",
         "remotes": [],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/ryudi84/sovereign-mcp-servers"
-        },
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
-        "status": "active",
-        "version": "1.0.3",
+        "version": "0.6.6-3build2",
         "zero_cost_eligible": true
       },
       {
-        "description": "Generate UUID v4/v7, ULID, nanoid, and random unique identifiers",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.ryudi84/uuid-forge-mcp",
-        "packages": [
-          {
-            "identifier": "uuid-forge-mcp",
-            "registry_type": "npm",
-            "required_environment": [],
-            "runtime_hint": null,
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": "1.0.1"
-          }
+        "archive_sha256": "f1ab9b258c1177926d676e1bd733472808a158f13b99d76ca9bddc7311fe81e0",
+        "binding_kind": "apt",
+        "description": "simple analyses or modifications on both phylogenetic trees and data matrices",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "both"
         ],
-        "query": "uuid",
+        "name": "phyutility",
+        "packages": [],
+        "query": "both",
         "remotes": [],
-        "repository": {
-          "source": "github",
-          "subfolder": "uuid-forge",
-          "url": "https://github.com/ryudi84/sovereign-mcp-servers"
-        },
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
-        "status": "active",
-        "version": "1.0.1",
+        "version": "2.7.3+dfsg-4",
         "zero_cost_eligible": true
       },
       {
-        "description": "Live chess tournament results and up-to-date player ratings in chat.",
+        "archive_sha256": "e544b4ed9157d9893c990a60c4680972146c4b0be62a8b06d14f1e334511df7d",
+        "binding_kind": "apt",
+        "description": "common files used by both the Samba server and client",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "both"
+        ],
+        "name": "samba-common",
+        "packages": [],
+        "query": "both",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2:4.19.5+dfsg-4ubuntu9.7",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "6460ca0c497b8dda5b37c66b45a5334ee7f0cd86ed76a503aab31c4c8bf10b19",
+        "binding_kind": "apt",
+        "description": "Samba common files used by both the server and the client",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "both"
+        ],
+        "name": "samba-common-bin",
+        "packages": [],
+        "query": "both",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2:4.19.5+dfsg-4ubuntu9.7",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "1c0cc9c9c9a45f67964ddc306e7da6b09289494a5667e4384591d83544c84ca8",
+        "binding_kind": "apt",
+        "description": "Stretches and pitch-shifts sound independently",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "independently"
+        ],
+        "name": "soundstretch",
+        "packages": [],
+        "query": "independently",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.3.2+ds1-1build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "bf318c544f39c7597006a6ba7df3246c0ec02718918ec5b74881a87f1672c9f9",
+        "binding_kind": "apt",
+        "description": "Virtual network computing; Tools for both clients and servers",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "both"
+        ],
+        "name": "tigervnc-tools",
+        "packages": [],
+        "query": "both",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.13.1+dfsg-2build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "fccfd91351d00a09d3c306f309b702921c66c89651b47ee169957775e77a0279",
+        "binding_kind": "apt",
+        "description": "assertion library for both testing and for production code",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 2,
+        "matched_terms": [
+          "both"
+        ],
+        "name": "ruby-insist",
+        "packages": [],
+        "query": "both",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 0,
+        "version": "1.0.0-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "0e39035723cae76925a15a8eff1ab924710a687ce41da7c4adce58f0401aa64e",
+        "binding_kind": "apt",
+        "description": "Perl module to manipulate schemas independently of databases",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 3,
+        "matched_terms": [
+          "independently"
+        ],
+        "name": "libdbix-dbschema-perl",
+        "packages": [],
+        "query": "independently",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": -2,
+        "version": "0.47-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "723c391e5a22f69f14b55142c2590341d21baca88df4097a754bbcee7bc32832",
+        "binding_kind": "apt",
+        "description": "parses js object paths using both dot and bracket notation",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 3,
+        "matched_terms": [
+          "both"
+        ],
+        "name": "libjs-objectpath",
+        "packages": [],
+        "query": "both",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": -2,
+        "version": "1.2.1-2.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "063411daa6c6c50ef163e5c134636eb6744c8ba903d05775147ff4ee623aea58",
+        "binding_kind": "apt",
+        "description": "Compressed library containing both prototype and scriptaculous",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 3,
+        "matched_terms": [
+          "both"
+        ],
+        "name": "libjs-protoaculous",
+        "packages": [],
+        "query": "both",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": -2,
+        "version": "5+nmu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "3a215defdda4bf44b80ec33a0e99ab9535e24dfd0803be5432ca9c8c2419e46c",
+        "binding_kind": "apt",
+        "description": "return a pair only if they are both defined",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 3,
+        "matched_terms": [
+          "both"
+        ],
+        "name": "libperlx-maybe-perl",
+        "packages": [],
+        "query": "both",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": -2,
+        "version": "1.202-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "1a44763ba41986218bd8fffbd59935b77c0def752cb0a16c1094c452b3e0276b",
+        "binding_kind": "apt",
+        "description": "Loadable dynamic extension to both SQLite and SpatiaLite",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 3,
+        "matched_terms": [
+          "both"
+        ],
+        "name": "libsqlite3-mod-virtualpg",
+        "packages": [],
+        "query": "both",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": -2,
+        "version": "2.0.1-4build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "5f096011d704c2f2981a8e6d469804d84c486f03183d627b88ba9a98e8d1cfb1",
+        "binding_kind": "apt",
+        "description": "try/catch/finally syntax for perl",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 3,
+        "matched_terms": [
+          "finally"
+        ],
+        "name": "libsyntax-keyword-try-perl",
+        "packages": [],
+        "query": "finally",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": -2,
+        "version": "0.29-1build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "e76db986154bce14d013868863b9f265b4fcf8e7b937643c43252b5367a46b0c",
+        "binding_kind": "apt",
+        "description": "Metapackage providing both CG-3 CLI dev tools and dev library",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 4,
+        "matched_terms": [
+          "both"
+        ],
+        "name": "cg3-dev",
+        "packages": [],
+        "query": "both",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 2,
+        "version": "1.4.6-1build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "bf7cfd38f5530eee5256866f40f4f86c916589e6ba8e1f82b0db66b90c39875f",
+        "binding_kind": "apt",
+        "description": "debug symbols of TclCL: both tclcl and libtclcl1",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 4,
+        "matched_terms": [
+          "both"
+        ],
+        "name": "tclcl-dbg",
+        "packages": [],
+        "query": "both",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 2,
+        "version": "1.20-10",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d01ef7542f67f31dd8f04e79a232f4c2908b1abb30da91d815c82b0ed9ea7102",
+        "binding_kind": "apt",
+        "description": "Go library for both printing to the terminal and logging to files",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 4,
+        "matched_terms": [
+          "both"
+        ],
+        "name": "golang-github-spf13-jwalterweatherman-dev",
+        "packages": [],
+        "query": "both",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": -8,
+        "version": "1.1.0+really1.1.0-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "5f5c674240a90e6cfb4e57e5706a1b06715dd93d47fb91e7b3033978d2e412f8",
+        "binding_kind": "apt",
+        "description": "Common Print Dialog Backends - Development files for both libraries",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 4,
+        "matched_terms": [
+          "both"
+        ],
+        "name": "libcpdb-dev",
+        "packages": [],
+        "query": "both",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": -10,
+        "version": "2.0~b5-1.2build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "e8b8ff2734b9082cd8cade2a9db17f10d57e93f3283761dd16c759e7902b3d61",
+        "binding_kind": "apt",
+        "description": "template system supporting both HTML5 and XML",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 4,
+        "matched_terms": [
+          "both"
+        ],
+        "name": "libghc-heist-dev",
+        "packages": [],
+        "query": "both",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": -10,
+        "version": "1.1.1.1-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "0e3e6845e733f58aedffa691ea3090bf90ab8c40e08168ac3856d74432a7beb3",
+        "binding_kind": "apt",
+        "description": "template system supporting both HTML5 and XML; documentation",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 4,
+        "matched_terms": [
+          "both"
+        ],
+        "name": "libghc-heist-doc",
+        "packages": [],
+        "query": "both",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": -10,
+        "version": "1.1.1.1-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c5219035075d8b84be6781110058ef0e15d6ec9baec1e240c36da6d139589142",
+        "binding_kind": "apt",
+        "description": "template system supporting both HTML5 and XML; profiling libraries",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 4,
+        "matched_terms": [
+          "both"
+        ],
+        "name": "libghc-heist-prof",
+        "packages": [],
+        "query": "both",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": -10,
+        "version": "1.1.1.1-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "3b87ba5b3f5483d584aa6957b6f70ffa34889bbda83b3c411d992c0977742a98",
+        "binding_kind": "apt",
+        "description": "Generic HTTP types (for both client and server code)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 4,
+        "matched_terms": [
+          "both"
+        ],
+        "name": "libghc-http-types-dev",
+        "packages": [],
+        "query": "both",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": -10,
+        "version": "0.12.3-6",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "2aef86f488c1a6d6195cfb03224bb34a4d9000640d0507962360de4fbac10eee",
+        "binding_kind": "apt",
+        "description": "Generic HTTP types (for both client and server code); documentation",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 4,
+        "matched_terms": [
+          "both"
+        ],
+        "name": "libghc-http-types-doc",
+        "packages": [],
+        "query": "both",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": -10,
+        "version": "0.12.3-6",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "5913dddbb67a6b38bb0c3a57c46e03d8af421aa9a5d5704a4f9e8981b3350d63",
+        "binding_kind": "apt",
+        "description": "Generic HTTP types (for both client and server code); profiling libraries",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 4,
+        "matched_terms": [
+          "both"
+        ],
+        "name": "libghc-http-types-prof",
+        "packages": [],
+        "query": "both",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": -10,
+        "version": "0.12.3-6",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "6dd042bf4d2854e65660921d69e593159ede5514116f8b0a6ef045d675438a2b",
+        "binding_kind": "apt",
+        "description": "either-or-both data type",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 4,
+        "matched_terms": [
+          "both"
+        ],
+        "name": "libghc-these-dev",
+        "packages": [],
+        "query": "both",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": -10,
+        "version": "1.2-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "b59f4047e7143cc79d23648d50b2dd82e815324c874f85e11cb71d27b1e3a5ea",
+        "binding_kind": "apt",
+        "description": "either-or-both data type; documentation",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 4,
+        "matched_terms": [
+          "both"
+        ],
+        "name": "libghc-these-doc",
+        "packages": [],
+        "query": "both",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": -10,
+        "version": "1.2-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "2c83b67a55a69ea21978dd5bade1e5b2026150fbc662e0a6dc3d399d4c5cfed1",
+        "binding_kind": "apt",
+        "description": "either-or-both data type; profiling libraries",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 4,
+        "matched_terms": [
+          "both"
+        ],
+        "name": "libghc-these-prof",
+        "packages": [],
+        "query": "both",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": -10,
+        "version": "1.2-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Ask runboth.dev in plain language: what RunBoth does, how to install it, and its limits.",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "ai.b77/chess-results",
+        "name": "dev.runboth/agent",
         "packages": [],
-        "query": "result",
+        "query": "both",
         "remotes": [
           {
             "required_headers": [],
             "type": "streamable-http",
-            "url": "https://chess-results.b77.ai/mcp"
+            "url": "https://runboth-agent-mgbxvs4loq-uc.a.run.app/mcp"
           }
         ],
         "repository": null,
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "1.0.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Live verified resort snow, forecasts, powder search, trip planning & grounded Q&A for 430+ resorts.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "ai.snowdata/live-snow",
-        "packages": [],
-        "query": "live",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://mcp.snowdata.ai"
-          }
-        ],
-        "repository": null,
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "1.0.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Plan a Virtual Delivery Center for any initiative: pods, roles, AI agents, Delivery Units.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "com.aidoos/virtual-delivery-center",
-        "packages": [],
-        "query": "live",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://aidoos.com/mcp"
-          }
-        ],
-        "repository": null,
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "1.0.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Live data: weather, air quality, FX, CN/HK/US stocks, IP geo, domain, SSL, China reachability.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "com.ainetcafe/netcafe-live-data",
-        "packages": [],
-        "query": "live",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://ainetcafe.com/mcp/data?s=registry"
-          }
-        ],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/mario03690/ai-netcafe"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "1.2.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Search and read the public Applivery docs (MDM & app distribution). Read-only, no auth.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "com.applivery.docs/mcp",
-        "packages": [],
-        "query": "live",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://docs.applivery.com/mcp"
-          }
-        ],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/applivery/docs-front"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "2.4.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Live audience engagement: run Q&A, polls, liveblogs and chat for webinars and town halls.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "com.reactlive/reactlive",
-        "packages": [],
-        "query": "live",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://www.reactlive.com/api/v2/mcp"
-          }
-        ],
-        "repository": null,
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "1.0.1",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Live GPS sports tracking + per-sport analysis of GPX/IGC/FIT files: thermals, wind, phases, laps",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "com.sportstracklive/mcp",
-        "packages": [],
-        "query": "live",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://mcp.sportstracklive.com/mcp"
-          }
-        ],
-        "repository": null,
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "0.1.1",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Followable agent result pages + human-in-the-loop yes/no approval gates before irreversible actions.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "dev.workers.notdown-app.handoff/human-approval-decision-gate-and-shareable-result-page-publisher",
-        "packages": [],
-        "query": "result",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://handoff.notdown-app.workers.dev/mcp/{key}"
-          }
-        ],
-        "repository": null,
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "0.5.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "GingerLive livestream ad formats, network reach stats, campaign case studies, and streamer program.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.gingerlive/mcp",
-        "packages": [],
-        "query": "live",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://mcp.gingerlive.io/mcp"
-          }
-        ],
-        "repository": null,
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "0.2.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "UK livestock welfare, feed, health, and movement rules \u2014 8 species, DEFRA codes",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.Ansvar-Systems/uk-livestock",
-        "packages": [],
-        "query": "live",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://mcp.ansvar.eu/uk-livestock/mcp"
-          }
-        ],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/Ansvar-Systems/uk-livestock-mcp"
-        },
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 15,
@@ -1026,748 +635,706 @@
         "zero_cost_eligible": true
       },
       {
-        "description": "Connects AI assistants to a live ChemDraw window on Windows via COM automation.",
+        "description": "Human culture news, trends and search across sports, music, fashion and streetwear.",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "io.github.MALeitch/live-chemdraw-mcp",
+        "name": "com.finallyoffline.www/culture",
         "packages": [],
-        "query": "live",
-        "remotes": [],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/MALeitch/live-chemdraw-mcp"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "1.2.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "UUID validation & generation MCP.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.pipeworx-io/uuid",
-        "packages": [],
-        "query": "uuid",
+        "query": "finally",
         "remotes": [
           {
             "required_headers": [],
             "type": "streamable-http",
-            "url": "https://gateway.pipeworx.io/uuid/mcp"
+            "url": "https://www.finallyoffline.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "2.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Independent agent preflight: verify change, mandates, evidence, and exact execution.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.Gabothefounder/scanscam-integrity",
+        "packages": [],
+        "query": "both",
+        "remotes": [
+          {
+            "required_headers": [
+              "Authorization"
+            ],
+            "type": "streamable-http",
+            "url": "https://www.scanscam.ca/api/integrity/v1/mcp"
           }
         ],
         "repository": {
           "source": "github",
-          "url": "https://github.com/pipeworx-io/mcp-uuid"
+          "url": "https://github.com/Gabothefounder/scanscam"
         },
         "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
+        "required_secret_count": 1,
+        "score": 8,
         "status": "active",
         "version": "0.1.1",
         "zero_cost_eligible": true
       },
       {
-        "description": "Google UUID timeuuid layout, value discarded",
+        "description": "Hire, pay gaslessly, deliver and get paid between AI agents on BotHire (USDT/USDC, escrow).",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "io.github.sadri-dridi/guuid-ok",
-        "packages": [],
-        "query": "uuid",
-        "remotes": [
+        "name": "io.github.BotHireAgent/bothire",
+        "packages": [
           {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/guuid-ok/mcp"
+            "identifier": "bothire-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.1.0"
           }
         ],
+        "query": "both",
+        "remotes": [],
         "repository": {
           "source": "github",
-          "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+          "url": "https://github.com/BotHireAgent/BotHireMCPServer"
         },
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 15,
+        "score": -82,
         "status": "active",
-        "version": "1.0.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "shortuuid hex charset, value discarded",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.sadri-dridi/shortuuid-hex",
-        "packages": [],
-        "query": "uuid",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/shortuuid-hex/mcp"
-          }
-        ],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/sadri-dridi/named-mcp-utilities"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "1.0.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Short-UUID charset, value discarded",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "io.github.sadri-dridi/shortuuid-ok",
-        "packages": [],
-        "query": "uuid",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/shortuuid-ok/mcp"
-          }
-        ],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/sadri-dridi/named-mcp-utilities"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "1.0.0",
-        "zero_cost_eligible": true
+        "version": "1.1.0",
+        "zero_cost_eligible": false
       }
     ],
-    "effect": "Read the UUID from that live result",
+    "effect": "Finally independently reread both files",
     "results": [
       {
         "binding_performed": false,
         "candidate_count": 30,
         "candidates": [
           {
-            "archive_sha256": "aced03872402198356690e6ca1969ddd1471c285dcbb6fa0b67f309dcc77ff5c",
+            "archive_sha256": "650e36951dedc048fe95f78d887e481b0354bb5846236760d5e9db6cf9097441",
             "binding_kind": "apt",
-            "description": "Universally Unique Identifier Command-Line Tool",
+            "description": "Invoked when the promise is settled regardless of outcome",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "uuid"
+              "finally"
             ],
-            "name": "uuid",
+            "name": "node-p-finally",
             "packages": [],
-            "query": "uuid",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 40,
-            "version": "1.6.2-1.5build13",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "3a5d1ce9bd4e03683f0c5ca8563fd3185b7df4a42f588b2125d84e854c2e02c2",
-            "binding_kind": "apt",
-            "description": "Configuration for the Ubuntu Budgie Live .iso Image",
-            "discovery_source": "APT_CATALOG",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "live"
-            ],
-            "name": "budgie-live-settings",
-            "packages": [],
-            "query": "live",
+            "query": "finally",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "0.20.13",
+            "version": "2.0.1-2",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "b3163ed1be217b517f73267b0f6cfb6772b848a28ab3945a55045fb92614914e",
+            "archive_sha256": "d5363139a7def307ddc85b0b5cf74544f2c6ce59ad7f4ac9f27955fc74a0526e",
             "binding_kind": "apt",
-            "description": "Common Lisp librabry for generation of UUIDs as described by RFC 4122",
+            "description": "Web browser running in both graphics and text mode",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "uuid"
+              "both"
             ],
-            "name": "cl-uuid",
+            "name": "links2",
             "packages": [],
-            "query": "uuid",
+            "query": "both",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "20130813-1.1",
+            "score": 18,
+            "version": "2.29-1build6",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "8d5ebe2c55469751ac95ef46751d7625bc055b7cb3886d10017331fddf98805b",
+            "archive_sha256": "3504f6c6e269a14ba57a905330b20e3031f305f83d5cda57b26a3d2aaf2b8e27",
             "binding_kind": "apt",
-            "description": "dracut is an event driven initramfs infrastructure (live image modules)",
+            "description": "Hash functions that could be run by both browser and nodejs",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "live"
+              "both"
             ],
-            "name": "dracut-live",
+            "name": "node-hash.js",
             "packages": [],
-            "query": "live",
+            "query": "both",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "060+5-1ubuntu3.3",
+            "score": 18,
+            "version": "1.1.7-4",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "e8155e2a4011eea6dd8d5c1a9b1696d51b3e0f46b5c2963ca53af3c76fb3d6dd",
+            "archive_sha256": "117eaff886628c45435465fc9e97c719968e34cde15570514da7eeb07aabd268",
             "binding_kind": "apt",
-            "description": "Edubuntu live media support",
+            "description": "Make a callback- or promise-based function support both promises and callbacks",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "live"
+              "both"
             ],
-            "name": "edubuntu-live",
+            "name": "node-universalify",
             "packages": [],
-            "query": "live",
+            "query": "both",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "14.04.2build2",
+            "score": 18,
+            "version": "2.0.0-3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "6f74a785b5cd214d8e82c70ae921468540019a0fdc077d391d8b3137f7ae8e1a",
+            "archive_sha256": "e56b4107e10fad2c0abd7a8704b8b6a6e486b79e04d8ce92ad5a3e1e9c10ecc0",
             "binding_kind": "apt",
-            "description": "Configuration for the Edubuntu .iso Image",
+            "description": "Create hand-drawn animation using both bitmap and vector graphics",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "live"
+              "both"
             ],
-            "name": "edubuntu-live-settings",
+            "name": "pencil2d",
             "packages": [],
-            "query": "live",
+            "query": "both",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "24.04.26.1",
+            "score": 18,
+            "version": "0.6.6-3build2",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "17bd07002d9072766d8f46d800b714534684ab0a62dda9911141e98ff0fc5c52",
+            "archive_sha256": "f1ab9b258c1177926d676e1bd733472808a158f13b99d76ca9bddc7311fe81e0",
             "binding_kind": "apt",
-            "description": "UUID/GUID library for Emacs Lisp",
+            "description": "simple analyses or modifications on both phylogenetic trees and data matrices",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "uuid"
+              "both"
             ],
-            "name": "elpa-uuid",
+            "name": "phyutility",
             "packages": [],
-            "query": "uuid",
+            "query": "both",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "0.0.3~git20120910.1519bfe-3",
+            "score": 18,
+            "version": "2.7.3+dfsg-4",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "c39d0d4f9aaede690bfb1aa9e21b18b1498d4f74cb3af2cac0c2511a25dc2331",
+            "archive_sha256": "e544b4ed9157d9893c990a60c4680972146c4b0be62a8b06d14f1e334511df7d",
             "binding_kind": "apt",
-            "description": "UUID generator for Erlang",
+            "description": "common files used by both the Samba server and client",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "uuid"
+              "both"
             ],
-            "name": "erlang-uuid",
+            "name": "samba-common",
             "packages": [],
-            "query": "uuid",
+            "query": "both",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "0.4.6-2",
+            "score": 18,
+            "version": "2:4.19.5+dfsg-4ubuntu9.7",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "a5dcd71880816022d5555b0844b3a1990ff1f290823e60311063d3990636ddcd",
+            "archive_sha256": "6460ca0c497b8dda5b37c66b45a5334ee7f0cd86ed76a503aab31c4c8bf10b19",
             "binding_kind": "apt",
-            "description": "KIWI - Dracut module for iso(live) image type",
+            "description": "Samba common files used by both the server and the client",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "live"
+              "both"
             ],
-            "name": "kiwi-dracut-live",
+            "name": "samba-common-bin",
             "packages": [],
-            "query": "live",
+            "query": "both",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "9.25.22-1ubuntu1",
+            "score": 18,
+            "version": "2:4.19.5+dfsg-4ubuntu9.7",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "1f72ac3dbd8c98502d1c387a3a755ec949de5d4866d517cdd33d7da82916c1a4",
+            "archive_sha256": "1c0cc9c9c9a45f67964ddc306e7da6b09289494a5667e4384591d83544c84ca8",
             "binding_kind": "apt",
-            "description": "Live System Boot Components",
+            "description": "Stretches and pitch-shifts sound independently",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "live"
+              "independently"
             ],
-            "name": "live-boot",
+            "name": "soundstretch",
             "packages": [],
-            "query": "live",
+            "query": "independently",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "1:20230131",
+            "score": 18,
+            "version": "2.3.2+ds1-1build1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "0c040ff86a5e522d602af08f59011e817677fbe0602118270ee2cf624e395f34",
+            "archive_sha256": "bf318c544f39c7597006a6ba7df3246c0ec02718918ec5b74881a87f1672c9f9",
             "binding_kind": "apt",
-            "description": "Live System Boot Components (initramfs-tools backend)",
+            "description": "Virtual network computing; Tools for both clients and servers",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "live"
+              "both"
             ],
-            "name": "live-boot-initramfs-tools",
+            "name": "tigervnc-tools",
             "packages": [],
-            "query": "live",
+            "query": "both",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "1:20230131",
+            "score": 18,
+            "version": "1.13.1+dfsg-2build2",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "29fdb5b25138533c614c5d148df37a634010d40414ba98e0ee7153f026d5dd7a",
+            "archive_sha256": "e76db986154bce14d013868863b9f265b4fcf8e7b937643c43252b5367a46b0c",
             "binding_kind": "apt",
-            "description": "Debian Live - System build scripts",
+            "description": "Metapackage providing both CG-3 CLI dev tools and dev library",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
+            "integration_friction": 4,
             "matched_terms": [
-              "live"
+              "both"
             ],
-            "name": "live-build",
+            "name": "cg3-dev",
             "packages": [],
-            "query": "live",
+            "query": "both",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "3.0~a57-1ubuntu49.1",
+            "score": 2,
+            "version": "1.4.6-1build2",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "a03a1fcb84176a9364116e7fd045e513a30f93f5da48d094fe1c911142d87d2f",
+            "archive_sha256": "bf7cfd38f5530eee5256866f40f4f86c916589e6ba8e1f82b0db66b90c39875f",
             "binding_kind": "apt",
-            "description": "Debian Live - System build scripts (CGI frontend)",
+            "description": "debug symbols of TclCL: both tclcl and libtclcl1",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
+            "integration_friction": 4,
             "matched_terms": [
-              "live"
+              "both"
             ],
-            "name": "live-build-cgi",
+            "name": "tclcl-dbg",
             "packages": [],
-            "query": "live",
+            "query": "both",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "3.0~a57-1ubuntu49.1",
+            "score": 2,
+            "version": "1.20-10",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "6aef47f7c83493f8ef6c596409fde080abf816ff615cf65665252cc63b0016a7",
+            "archive_sha256": "fccfd91351d00a09d3c306f309b702921c66c89651b47ee169957775e77a0279",
             "binding_kind": "apt",
-            "description": "GUI to clone and manage Live-Build USB sticks",
+            "description": "assertion library for both testing and for production code",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
+            "integration_friction": 2,
             "matched_terms": [
-              "live"
+              "both"
             ],
-            "name": "live-clone",
+            "name": "ruby-insist",
             "packages": [],
-            "query": "live",
+            "query": "both",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "3.1-1",
+            "score": 0,
+            "version": "1.0.0-2",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "c94f4773ca5f1a54c35adcbdf86233579ae90a595042b356f74a58bc6d5f5fd9",
+            "archive_sha256": "0e39035723cae76925a15a8eff1ab924710a687ce41da7c4adce58f0401aa64e",
             "binding_kind": "apt",
-            "description": "Live System Configuration Components",
+            "description": "Perl module to manipulate schemas independently of databases",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
+            "integration_friction": 3,
             "matched_terms": [
-              "live"
+              "independently"
             ],
-            "name": "live-config",
+            "name": "libdbix-dbschema-perl",
             "packages": [],
-            "query": "live",
+            "query": "independently",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "11.0.4",
+            "score": -2,
+            "version": "0.47-1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "d732051d9604f27a15d4d1f09a0b66fc2761b1e7d5efde81430cb2d05291a965",
+            "archive_sha256": "723c391e5a22f69f14b55142c2590341d21baca88df4097a754bbcee7bc32832",
             "binding_kind": "apt",
-            "description": "Live System Configuration Components (systemd backend)",
+            "description": "parses js object paths using both dot and bracket notation",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
+            "integration_friction": 3,
             "matched_terms": [
-              "live"
+              "both"
             ],
-            "name": "live-config-systemd",
+            "name": "libjs-objectpath",
             "packages": [],
-            "query": "live",
+            "query": "both",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "11.0.4",
+            "score": -2,
+            "version": "1.2.1-2.1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "cc9240adf8b7f52dedfeb923c76c39925f6f2421c280e42d061c2222e89951a4",
+            "archive_sha256": "063411daa6c6c50ef163e5c134636eb6744c8ba903d05775147ff4ee623aea58",
             "binding_kind": "apt",
-            "description": "Live Systems Documentation (metapackage)",
+            "description": "Compressed library containing both prototype and scriptaculous",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
+            "integration_friction": 3,
             "matched_terms": [
-              "live"
+              "both"
             ],
-            "name": "live-manual",
+            "name": "libjs-protoaculous",
             "packages": [],
-            "query": "live",
+            "query": "both",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "2:20151217.2",
+            "score": -2,
+            "version": "5+nmu1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "06dc26008e9976c2d590020af8c9eaa11394f1232c6825bc3605645af74f6d4c",
+            "archive_sha256": "3a215defdda4bf44b80ec33a0e99ab9535e24dfd0803be5432ca9c8c2419e46c",
             "binding_kind": "apt",
-            "description": "Live Systems Documentation (epub)",
+            "description": "return a pair only if they are both defined",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
+            "integration_friction": 3,
             "matched_terms": [
-              "live"
+              "both"
             ],
-            "name": "live-manual-epub",
+            "name": "libperlx-maybe-perl",
             "packages": [],
-            "query": "live",
+            "query": "both",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "2:20151217.2",
+            "score": -2,
+            "version": "1.202-1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "506bd970c9900074a18d5b6ef0f91abf2385ea11eeedf739523d9a3707c7741b",
+            "archive_sha256": "1a44763ba41986218bd8fffbd59935b77c0def752cb0a16c1094c452b3e0276b",
             "binding_kind": "apt",
-            "description": "Live Systems Documentation (html)",
+            "description": "Loadable dynamic extension to both SQLite and SpatiaLite",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
+            "integration_friction": 3,
             "matched_terms": [
-              "live"
+              "both"
             ],
-            "name": "live-manual-html",
+            "name": "libsqlite3-mod-virtualpg",
             "packages": [],
-            "query": "live",
+            "query": "both",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "2:20151217.2",
+            "score": -2,
+            "version": "2.0.1-4build1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "66b87c59f7bb6dd1454375bb9fe28b33fb19b05fa2d088584e1e8eeb0ae14774",
+            "archive_sha256": "5f096011d704c2f2981a8e6d469804d84c486f03183d627b88ba9a98e8d1cfb1",
             "binding_kind": "apt",
-            "description": "Live Systems Documentation (odf)",
+            "description": "try/catch/finally syntax for perl",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
+            "integration_friction": 3,
             "matched_terms": [
-              "live"
+              "finally"
             ],
-            "name": "live-manual-odf",
+            "name": "libsyntax-keyword-try-perl",
             "packages": [],
-            "query": "live",
+            "query": "finally",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "2:20151217.2",
+            "score": -2,
+            "version": "0.29-1build3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "999f9fdbeaacc55f3029ece4aef4f52c12feb60e56b02005fe61b2deca56a64a",
+            "archive_sha256": "d01ef7542f67f31dd8f04e79a232f4c2908b1abb30da91d815c82b0ed9ea7102",
             "binding_kind": "apt",
-            "description": "Live Systems Documentation (pdf)",
+            "description": "Go library for both printing to the terminal and logging to files",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
+            "integration_friction": 4,
             "matched_terms": [
-              "live"
+              "both"
             ],
-            "name": "live-manual-pdf",
+            "name": "golang-github-spf13-jwalterweatherman-dev",
             "packages": [],
-            "query": "live",
+            "query": "both",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "2:20151217.2",
+            "score": -8,
+            "version": "1.1.0+really1.1.0-2",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "99ba19f3aa07cc051e83824995082df4a2fb1b7c9a7a4cca7cb1ea46bf207eda",
+            "archive_sha256": "5f5c674240a90e6cfb4e57e5706a1b06715dd93d47fb91e7b3033978d2e412f8",
             "binding_kind": "apt",
-            "description": "Live Systems Documentation (txt)",
+            "description": "Common Print Dialog Backends - Development files for both libraries",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
+            "integration_friction": 4,
             "matched_terms": [
-              "live"
+              "both"
             ],
-            "name": "live-manual-txt",
+            "name": "libcpdb-dev",
             "packages": [],
-            "query": "live",
+            "query": "both",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "2:20151217.2",
+            "score": -10,
+            "version": "2.0~b5-1.2build1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "cb23626500a6d554b40065c352e6081c646b3c22ddbaec89d41b9062d47b7d48",
+            "archive_sha256": "e8b8ff2734b9082cd8cade2a9db17f10d57e93f3283761dd16c759e7902b3d61",
             "binding_kind": "apt",
-            "description": "selection of oft-used non-free-firmware shipped on live systems",
+            "description": "template system supporting both HTML5 and XML",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
+            "integration_friction": 4,
             "matched_terms": [
-              "live"
+              "both"
             ],
-            "name": "live-task-non-free-firmware-pc",
+            "name": "libghc-heist-dev",
             "packages": [],
-            "query": "live",
+            "query": "both",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "12.0.1",
+            "score": -10,
+            "version": "1.1.1.1-1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "4e842a5e781c8c4d9bbd9c8358dee8334048ba4fc3dde64153670917fe88fafa",
+            "archive_sha256": "0e3e6845e733f58aedffa691ea3090bf90ab8c40e08168ac3856d74432a7beb3",
             "binding_kind": "apt",
-            "description": "provides firmware for server network and storage devices",
+            "description": "template system supporting both HTML5 and XML; documentation",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
+            "integration_friction": 4,
             "matched_terms": [
-              "live"
+              "both"
             ],
-            "name": "live-task-non-free-firmware-server",
+            "name": "libghc-heist-doc",
             "packages": [],
-            "query": "live",
+            "query": "both",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "12.0.1",
+            "score": -10,
+            "version": "1.1.1.1-1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "911727605f504e858b71a04d67175d064ff4c0881f81762772b4cb6fced5a03c",
+            "archive_sha256": "c5219035075d8b84be6781110058ef0e15d6ec9baec1e240c36da6d139589142",
             "binding_kind": "apt",
-            "description": "Live System Extra Components",
+            "description": "template system supporting both HTML5 and XML; profiling libraries",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
+            "integration_friction": 4,
             "matched_terms": [
-              "live"
+              "both"
             ],
-            "name": "live-tools",
+            "name": "libghc-heist-prof",
             "packages": [],
-            "query": "live",
+            "query": "both",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "1:20190831.1",
+            "score": -10,
+            "version": "1.1.1.1-1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "8e8ffcd429f4115d4956c86d73eb6e8ea9f82426a42ec5c27ef8951e4340b0f0",
+            "archive_sha256": "3b87ba5b3f5483d584aa6957b6f70ffa34889bbda83b3c411d992c0977742a98",
             "binding_kind": "apt",
-            "description": "simple and fast RFC4122 UUID generation - Node.js module",
+            "description": "Generic HTTP types (for both client and server code)",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
+            "integration_friction": 4,
             "matched_terms": [
-              "uuid"
+              "both"
             ],
-            "name": "node-uuid",
+            "name": "libghc-http-types-dev",
             "packages": [],
-            "query": "uuid",
+            "query": "both",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "8.3.2+~8.3.3-4",
+            "score": -10,
+            "version": "0.12.3-6",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "534f0bd3d6548041720b6e5d33e5e8c7b18c0df17e337378a8c8dcc60e280219",
+            "archive_sha256": "2aef86f488c1a6d6195cfb03224bb34a4d9000640d0507962360de4fbac10eee",
             "binding_kind": "apt",
-            "description": "Tools for generating and handling UUIDs",
+            "description": "Generic HTTP types (for both client and server code); documentation",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
+            "integration_friction": 4,
             "matched_terms": [
-              "uuid"
+              "both"
             ],
-            "name": "r-cran-uuid",
+            "name": "libghc-http-types-doc",
             "packages": [],
-            "query": "uuid",
+            "query": "both",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "1.2-0-1",
+            "score": -10,
+            "version": "0.12.3-6",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "95f3d7e24ee526263bd5243c5972a7e804ce25c27886dad8cb5df75d18230792",
+            "archive_sha256": "5913dddbb67a6b38bb0c3a57c46e03d8af421aa9a5d5704a4f9e8981b3350d63",
             "binding_kind": "apt",
-            "description": "Default settings for Ubuntu MATE live CD",
+            "description": "Generic HTTP types (for both client and server code); profiling libraries",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
+            "integration_friction": 4,
             "matched_terms": [
-              "live"
+              "both"
             ],
-            "name": "ubuntu-mate-live-settings",
+            "name": "libghc-http-types-prof",
             "packages": [],
-            "query": "live",
+            "query": "both",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "24.04.4",
+            "score": -10,
+            "version": "0.12.3-6",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "36f0707316699503d505c565e4c799a94de3a06c82405e0befa0e9d541388a4b",
+            "archive_sha256": "6dd042bf4d2854e65660921d69e593159ede5514116f8b0a6ef045d675438a2b",
             "binding_kind": "apt",
-            "description": "Configuration for the Ubuntu Cinnamon .iso image",
+            "description": "either-or-both data type",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
+            "integration_friction": 4,
             "matched_terms": [
-              "live"
+              "both"
             ],
-            "name": "ubuntucinnamon-live-settings",
+            "name": "libghc-these-dev",
             "packages": [],
-            "query": "live",
+            "query": "both",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "24.04.3",
+            "score": -10,
+            "version": "1.2-1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "fd1e8307435042e183725462ac6f5199cb31662b1526b5f1ab3294373c9b5e67",
+            "archive_sha256": "b59f4047e7143cc79d23648d50b2dd82e815324c874f85e11cb71d27b1e3a5ea",
             "binding_kind": "apt",
-            "description": "Configuration for the Ubuntu Kylin .iso image",
+            "description": "either-or-both data type; documentation",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
+            "integration_friction": 4,
             "matched_terms": [
-              "live"
+              "both"
             ],
-            "name": "ubuntukylin-live-settings",
+            "name": "libghc-these-doc",
             "packages": [],
-            "query": "live",
+            "query": "both",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 32,
-            "version": "24.04.1",
+            "score": -10,
+            "version": "1.2-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "2c83b67a55a69ea21978dd5bade1e5b2026150fbc662e0a6dc3d399d4c5cfed1",
+            "binding_kind": "apt",
+            "description": "either-or-both data type; profiling libraries",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 4,
+            "matched_terms": [
+              "both"
+            ],
+            "name": "libghc-these-prof",
+            "packages": [],
+            "query": "both",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": -10,
+            "version": "1.2-1",
             "zero_cost_eligible": true
           }
         ],
-        "effect": "Read the UUID from that live result",
+        "effect": "Finally independently reread both files",
         "errors": [],
         "queries": [
-          "uuid",
-          "live",
-          "result"
+          "finally",
+          "independently",
+          "reread",
+          "both"
         ],
         "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
         "source": "APT_CATALOG",
@@ -1775,371 +1342,22 @@
       },
       {
         "binding_performed": false,
-        "candidate_count": 68,
+        "candidate_count": 4,
         "candidates": [
           {
-            "description": "AI-powered uuid ai MCP server for agents. Supports generate uuid, parse uuid, generate ulid. By",
+            "description": "Ask runboth.dev in plain language: what RunBoth does, how to install it, and its limits.",
             "is_latest": true,
-            "name": "io.github.CSOAI-ORG/uuid-ai-mcp",
-            "packages": [
-              {
-                "identifier": "uuid-ai-mcp",
-                "registry_type": "pypi",
-                "required_environment": [],
-                "runtime_hint": "python",
-                "secret_environment": [],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "1.0.11"
-              }
-            ],
-            "query": "uuid",
-            "remotes": [],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/CSOAI-ORG/uuid-ai-mcp"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 18,
-            "status": "active",
-            "version": "1.0.11",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Unofficial read-only client for the mein-aldi.de (ALDI S\u00fcd) grocery-delivery catalog.",
-            "is_latest": true,
-            "name": "io.github.RayNCooper/grocery-delivery-mcp",
-            "packages": [
-              {
-                "identifier": "grocery-delivery-mcp",
-                "registry_type": "npm",
-                "required_environment": [],
-                "runtime_hint": null,
-                "secret_environment": [],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "0.2.0"
-              }
-            ],
-            "query": "live",
-            "remotes": [],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/RayNCooper/grocery-delivery-mcp"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 18,
-            "status": "active",
-            "version": "0.2.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Generate UUIDs and validate formats locally. No network and no key.",
-            "is_latest": true,
-            "name": "io.github.mrfentmen/uuid-mcp",
-            "packages": [
-              {
-                "identifier": "@mrfentmen/uuid-mcp",
-                "registry_type": "npm",
-                "required_environment": [],
-                "runtime_hint": null,
-                "secret_environment": [],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "1.0.0"
-              }
-            ],
-            "query": "uuid",
-            "remotes": [],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/mrfentmen/uuid-mcp"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 18,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "MCP server for generating UUIDs (v4, v7), ULIDs, nanoids, random IDs.",
-            "is_latest": true,
-            "name": "io.github.ryudi84/uuid",
-            "packages": [
-              {
-                "identifier": "uuid-forge-mcp",
-                "registry_type": "npm",
-                "required_environment": [],
-                "runtime_hint": null,
-                "secret_environment": [],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "1.0.3"
-              }
-            ],
-            "query": "uuid",
-            "remotes": [],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/ryudi84/sovereign-mcp-servers"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 18,
-            "status": "active",
-            "version": "1.0.3",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Generate UUID v4/v7, ULID, nanoid, and random unique identifiers",
-            "is_latest": true,
-            "name": "io.github.ryudi84/uuid-forge-mcp",
-            "packages": [
-              {
-                "identifier": "uuid-forge-mcp",
-                "registry_type": "npm",
-                "required_environment": [],
-                "runtime_hint": null,
-                "secret_environment": [],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "1.0.1"
-              }
-            ],
-            "query": "uuid",
-            "remotes": [],
-            "repository": {
-              "source": "github",
-              "subfolder": "uuid-forge",
-              "url": "https://github.com/ryudi84/sovereign-mcp-servers"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 18,
-            "status": "active",
-            "version": "1.0.1",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Live chess tournament results and up-to-date player ratings in chat.",
-            "is_latest": true,
-            "name": "ai.b77/chess-results",
+            "name": "dev.runboth/agent",
             "packages": [],
-            "query": "result",
+            "query": "both",
             "remotes": [
               {
                 "required_headers": [],
                 "type": "streamable-http",
-                "url": "https://chess-results.b77.ai/mcp"
+                "url": "https://runboth-agent-mgbxvs4loq-uc.a.run.app/mcp"
               }
             ],
             "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Live verified resort snow, forecasts, powder search, trip planning & grounded Q&A for 430+ resorts.",
-            "is_latest": true,
-            "name": "ai.snowdata/live-snow",
-            "packages": [],
-            "query": "live",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://mcp.snowdata.ai"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Plan a Virtual Delivery Center for any initiative: pods, roles, AI agents, Delivery Units.",
-            "is_latest": true,
-            "name": "com.aidoos/virtual-delivery-center",
-            "packages": [],
-            "query": "live",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://aidoos.com/mcp"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Live data: weather, air quality, FX, CN/HK/US stocks, IP geo, domain, SSL, China reachability.",
-            "is_latest": true,
-            "name": "com.ainetcafe/netcafe-live-data",
-            "packages": [],
-            "query": "live",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://ainetcafe.com/mcp/data?s=registry"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/mario03690/ai-netcafe"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.2.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Search and read the public Applivery docs (MDM & app distribution). Read-only, no auth.",
-            "is_latest": true,
-            "name": "com.applivery.docs/mcp",
-            "packages": [],
-            "query": "live",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://docs.applivery.com/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/applivery/docs-front"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "2.4.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Live audience engagement: run Q&A, polls, liveblogs and chat for webinars and town halls.",
-            "is_latest": true,
-            "name": "com.reactlive/reactlive",
-            "packages": [],
-            "query": "live",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://www.reactlive.com/api/v2/mcp"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.1",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Live GPS sports tracking + per-sport analysis of GPX/IGC/FIT files: thermals, wind, phases, laps",
-            "is_latest": true,
-            "name": "com.sportstracklive/mcp",
-            "packages": [],
-            "query": "live",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://mcp.sportstracklive.com/mcp"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "0.1.1",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Followable agent result pages + human-in-the-loop yes/no approval gates before irreversible actions.",
-            "is_latest": true,
-            "name": "dev.workers.notdown-app.handoff/human-approval-decision-gate-and-shareable-result-page-publisher",
-            "packages": [],
-            "query": "result",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://handoff.notdown-app.workers.dev/mcp/{key}"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "0.5.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "GingerLive livestream ad formats, network reach stats, campaign case studies, and streamer program.",
-            "is_latest": true,
-            "name": "io.gingerlive/mcp",
-            "packages": [],
-            "query": "live",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://mcp.gingerlive.io/mcp"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "0.2.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "UK livestock welfare, feed, health, and movement rules \u2014 8 species, DEFRA codes",
-            "is_latest": true,
-            "name": "io.github.Ansvar-Systems/uk-livestock",
-            "packages": [],
-            "query": "live",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://mcp.ansvar.eu/uk-livestock/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/Ansvar-Systems/uk-livestock-mcp"
-            },
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 15,
@@ -2148,366 +1366,90 @@
             "zero_cost_eligible": true
           },
           {
-            "description": "Connects AI assistants to a live ChemDraw window on Windows via COM automation.",
+            "description": "Human culture news, trends and search across sports, music, fashion and streetwear.",
             "is_latest": true,
-            "name": "io.github.MALeitch/live-chemdraw-mcp",
+            "name": "com.finallyoffline.www/culture",
             "packages": [],
-            "query": "live",
-            "remotes": [],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/MALeitch/live-chemdraw-mcp"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.2.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "UUID validation & generation MCP.",
-            "is_latest": true,
-            "name": "io.github.pipeworx-io/uuid",
-            "packages": [],
-            "query": "uuid",
+            "query": "finally",
             "remotes": [
               {
                 "required_headers": [],
                 "type": "streamable-http",
-                "url": "https://gateway.pipeworx.io/uuid/mcp"
+                "url": "https://www.finallyoffline.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "2.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Independent agent preflight: verify change, mandates, evidence, and exact execution.",
+            "is_latest": true,
+            "name": "io.github.Gabothefounder/scanscam-integrity",
+            "packages": [],
+            "query": "both",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://www.scanscam.ca/api/integrity/v1/mcp"
               }
             ],
             "repository": {
               "source": "github",
-              "url": "https://github.com/pipeworx-io/mcp-uuid"
+              "url": "https://github.com/Gabothefounder/scanscam"
             },
             "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
+            "required_secret_count": 1,
+            "score": 8,
             "status": "active",
             "version": "0.1.1",
             "zero_cost_eligible": true
           },
           {
-            "description": "Google UUID timeuuid layout, value discarded",
+            "description": "Hire, pay gaslessly, deliver and get paid between AI agents on BotHire (USDT/USDC, escrow).",
             "is_latest": true,
-            "name": "io.github.sadri-dridi/guuid-ok",
-            "packages": [],
-            "query": "uuid",
-            "remotes": [
+            "name": "io.github.BotHireAgent/bothire",
+            "packages": [
               {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/guuid-ok/mcp"
+                "identifier": "bothire-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.1.0"
               }
             ],
+            "query": "both",
+            "remotes": [],
             "repository": {
               "source": "github",
-              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+              "url": "https://github.com/BotHireAgent/BotHireMCPServer"
             },
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 15,
+            "score": -82,
             "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "shortuuid hex charset, value discarded",
-            "is_latest": true,
-            "name": "io.github.sadri-dridi/shortuuid-hex",
-            "packages": [],
-            "query": "uuid",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/shortuuid-hex/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Short-UUID charset, value discarded",
-            "is_latest": true,
-            "name": "io.github.sadri-dridi/shortuuid-ok",
-            "packages": [],
-            "query": "uuid",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/shortuuid-ok/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Cassandra unixTimeUUID layout, value discarded",
-            "is_latest": true,
-            "name": "io.github.sadri-dridi/timeuuid-unix",
-            "packages": [],
-            "query": "uuid",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/timeuuid-unix/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "UUID Crockford-32 shape, value discarded",
-            "is_latest": true,
-            "name": "io.github.sadri-dridi/uuid-b32",
-            "packages": [],
-            "query": "uuid",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/uuid-b32/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "UUID Base58 shape, value discarded",
-            "is_latest": true,
-            "name": "io.github.sadri-dridi/uuid-b58",
-            "packages": [],
-            "query": "uuid",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/uuid-b58/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "UUID no-hyphen lowercase, value discarded",
-            "is_latest": true,
-            "name": "io.github.sadri-dridi/uuid-compact",
-            "packages": [],
-            "query": "uuid",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/uuid-compact/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Max UUID constant",
-            "is_latest": true,
-            "name": "io.github.sadri-dridi/uuid-max",
-            "packages": [],
-            "query": "uuid",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/uuid-max/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "UUID max (all-ones) shape",
-            "is_latest": true,
-            "name": "io.github.sadri-dridi/uuid-max-ok",
-            "packages": [],
-            "query": "uuid",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/uuid-max-ok/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Mint a random UUID v4.",
-            "is_latest": true,
-            "name": "io.github.sadri-dridi/uuid-mint",
-            "packages": [],
-            "query": "uuid",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/uuid-mint/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/sadri-dridi/uuid-mint-mcp"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "UUID no-hyphen 32-hex, value discarded",
-            "is_latest": true,
-            "name": "io.github.sadri-dridi/uuid-nhex",
-            "packages": [],
-            "query": "uuid",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/uuid-nhex/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Nil UUID constant",
-            "is_latest": true,
-            "name": "io.github.sadri-dridi/uuid-nil",
-            "packages": [],
-            "query": "uuid",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/uuid-nil/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Nil UUID shape",
-            "is_latest": true,
-            "name": "io.github.sadri-dridi/uuid-nil-ok",
-            "packages": [],
-            "query": "uuid",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/uuid-nil-ok/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
+            "version": "1.1.0",
+            "zero_cost_eligible": false
           }
         ],
-        "effect": "Read the UUID from that live result",
+        "effect": "Finally independently reread both files",
         "errors": [],
         "queries": [
-          "uuid",
-          "live",
-          "result"
+          "finally",
+          "independently",
+          "reread",
+          "both"
         ],
         "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
         "source": "OFFICIAL_MCP_REGISTRY",

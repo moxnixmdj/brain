@@ -1,435 +1,493 @@
 {
   "attempts": [
     {
-      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
       "probe": {
-        "archive_sha256": "aced03872402198356690e6ca1969ddd1471c285dcbb6fa0b67f309dcc77ff5c",
+        "archive_sha256": "650e36951dedc048fe95f78d887e481b0354bb5846236760d5e9db6cf9097441",
+        "executables": [],
+        "package": "node-p-finally",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "2.0.1-2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "650e36951dedc048fe95f78d887e481b0354bb5846236760d5e9db6cf9097441",
+        "binding_kind": "apt",
+        "description": "Invoked when the promise is settled regardless of outcome",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "finally"
+        ],
+        "name": "node-p-finally",
+        "packages": [],
+        "query": "finally",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.0.1-2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "d5363139a7def307ddc85b0b5cf74544f2c6ce59ad7f4ac9f27955fc74a0526e",
         "executables": [
           {
-            "executable": "/usr/bin/uuid",
+            "executable": "/usr/bin/links2",
             "help_attempts": [
               {
                 "flag": "--help",
-                "returncode": 1,
-                "text": "/usr/bin/uuid: invalid option -- '-'\nuuid:ERROR: invalid option '-'\nusage: uuid [-v version] [-m] [-n count] [-1] [-F format] [-o filename] [namespace name]\nusage: uuid -d [-F format] [-o filename] [uuid]"
+                "returncode": 0,
+                "text": "links [options] URL\n\nOptions are:\n\n -help\n  Prints this help screen\n\n -version\n  Prints the links version number and exit.\n\n -lookup <hostname>\n  Does name lookup, like command \"host\".\n\n -g\n  Run in graphics mode.\n\n -no-g\n  Run in text mode (overrides previous -g).\n\n -driver <driver name>\n  Graphics driver to use. Drivers are: x, svgalib, fb, directfb, pmshell,\n    atheos.\n  List of drivers will be shown if you give it an unknown driver.\n  Available drivers depend on your operating system and available libraries.\n\n -mode <graphics mode>\n  Graphics mode. For SVGALIB it is in format COLUMNSxROWSxCOLORS --\n    for example 640x480x256, 800x600x64k, 960x720x16M, 1024x768x16M32\n    List of modes will be shown if you give it an unknown videomode.\n  For framebuffer it is number of pixels in border --- LEFT,TOP,RIGHT,BOTTOM\n    other 3 values are optional --- i.e. -mode 10 will set all borders to 10,\n    -mode 10,20 will set left & right border to 10 and top & bottom to 20.\n  For Xwindow it is size of a window in format WIDTHxHEIGHT.\n\n -display <x-display>\n  Set Xwindow display.\n\n -force-html\n  Treat files with unknown type as html rather than text.\n    (can be toggled with '\\' key)\n\n -source <url>\n  Write unformatted data stream to stdout.\n\n -dump <url>\n  Write formatted document to stdout.\n\n -width <number>\n  For dump, document will be formatted to this screen width (but it can still\n    exceed it if lines can't be broken).\n\n -codepage <codepage>\n  For dump, convert output to specified character set --\n    for eaxmple iso-8859-2, windows-1250.\n\n -anonymous\n  Restrict links so that it can run on an anonymous account.\n  No local file browsing. No downloads. Executing viewers\n    is allowed, but user can't add or modify entries in\n    association table.\n\n -no-connect\n  Runs links as a separate instance - instead of connecting to\n    existing instance.\n\n -download-dir <path>\n  Default download directory.\n    (default: actual dir)\n\n -language <language>\n  Set user interface language.\n\n -max-connections <max>\n  Maximum number of concurrent connections.\n    (default: 10)\n\n -max-connections-to-host <max>\n  Maximum number of concurrent connection to a given host.\n    (default: 2)\n\n -retries <retry>\n  Number of retries.\n    (default: 3)\n\n -receive-timeout <sec>\n  Timeout on receive.\n    (default: 120)\n\n -unrestartable-receive-timeout <sec>\n  Timeout on non restartable connections.\n    (default: 600)\n\n -timeout-when-trying-multiple-addresses <sec>\n  Timeout for connection when trying multiple addresses or keepalive connection.\n    (default: 3)\n\n -bind-address <ip address or interface name>\n  Use a specific local IP address.\n\n -bind-address-ipv6 <ipv6 address or interface name>\n  Use a specific local IPv6 address.\n\n -no-libevent\n  Don't use libevent library.\n\n -no-openmp\n  Don't use OpenMP.\n\n -download-utime <0>/<1>\n  Set time of downloaded files to last modification time reported by server.\n\n -format-cache-size <num>\n  Number of formatted document pages cached.\n    (default: 5)\n\n -memory-cache-size <bytes>\n  Cache memory in bytes.\n    (default: 1048576)\n\n -image-cache-size <bytes>\n  Image cache in bytes.\n    (default: 1048576)\n\n -font-cache-size <bytes>\n  Font cache in bytes.\n    (default: 2097152)\n\n -aggressive-cache <0>/<1>\n    (default 1)\n  Always cache everything regardless of server's caching recomendations.\n    Many servers deny caching even if their content is not changing\n    just to get more hits and more money from ads.\n\n -address-preference <0>/<1>/<2>/<3>/<4>\n    (default 0)\n  0 - use system default.\n  1 - prefer IPv4.\n  2 - prefer IPv6.\n  3 - use only IPv4.\n  4 - use only IPv6.\n\n -http-proxy <host:port>\n  Host and port number of the HTTP proxy, or blank.\n    (default: blank)\n\n -ftp-proxy <host:port>\n  Host and port number of the FTP proxy, or blank.\n    (default: blank)\n\n -https-proxy <host:port>\n  Host and port number of the HTTPS proxy, or blank.\n    (default: blank)\n\n -socks-proxy <user@host:port>\n  Userid, host and port of Socks4a, or blank.\n    (default: blank)\n\n -append-text-to-dns-lookups <text>\n  Append text to dns lookups. It is useful for specifying fixed\n    tor exit node.\n    (default: blank)\n\n -no-proxy-domains <domain,domain...>\n  No proxy for specified domains.\n    (default: blank)\n\n -only-proxies <0>/<1>\n    (default 0)\n  \"1\" causes that Links won't initiate any non-proxy connection.\n    It is useful for anonymization with tor or similar networks.\n\n -ssl.certificates <0>/<1>/<2>\n    (default 1)\n  0 - ignore invalid certificate\n  1 - warn on invalid certificate\n  2 - reject invalid certificate\n\n -ssl.builtin-certificates <0>/<1>\n    (default 0)\n  Use built-in certificates instead of system certificates.\n\n -ssl.client-cert-key <filename>\n  Name of the PEM encoded file with the user private key\n  for client certificate authentication.\n\n -ssl.client-cert-crt <filename>\n  Name of the PEM encoded file with the user certificate\n  for client certificate authentication.\n\n -ssl.client-cert-password <text>\n  Password for the user private key.\n\n -async-dns <0>/<1>\n  Asynchronous DNS resolver on(1)/off(0).\n\n -dns-over-https <url>\n  DNS over HTTPS url.\n    (default: blank)\n\n -http-bugs.http10 <0>/<1>\n    (default 0)\n  \"1\" forces using only HTTP/1.0 protocol. (useful for buggy servers\n    that claim to be HTTP/1.1 compliant but are not)\n  \"0\" use both HTTP/1.0 and HTTP/1.1.\n\n -http-bugs.allow-blacklist <0>/<1>\n    (default 1)\n  \"1\" defaults to using list of servers that have broken HTTP/1.1 support.\n     When links finds such server, it will retry the request with HTTP/1.0.\n\n -http-bugs.bug-no-accept-charset <0>/<1>\n    (default 0)\n  Do not send Accept-Charset field of HTTP header. Because it is too long\n    some servers will deny the request. Other servers will convert content\n    to plain ascii when Accept-Charset is missing.\n\n -http-bugs.no-compression <0>/<1>\n    (default 0)\n  \"1\" causes that links won't advertise HTTP compression support (but it\n    will still accept compressed data). Use it when you communicate with\n    server that has broken compression support.\n\n -http-bugs.retry-internal-errors <0>/<1>\n    (default 0)\n  Retry on internal server errors (50x).\n\n -http.fake-firefox <0>/<1>\n    (default 0)\n  Fake Firefox in the HTTP header.\n\n -http.do-not-track <0>/<1>\n    (default 0)\n  Send do not track request in the HTTP header.\n\n -http.referer <0>/<1>/<2>/<3>/<4>\n    (default 4)\n  0 - do not send referer.\n  1 - send the requested URL as referer.\n  2 - send fake referer.\n  3 - send real referer.\n  4 - send real referer only to the same server.\n\n -http.fake-referer <string>\n  Fake referer value.\n\n -http.fake-user-agent <string>\n  Fake user agent value.\n\n -http.extra-header <string>\n  Extra string added to HTTP header.\n\n -ftp.anonymous-password <string>\n  Password for anonymous ftp access.\n\n -ftp.use-passive <0>/<1>\n  Use ftp PASV command to bypass firewalls.\n\n -ftp.use-eprt-epsv <0>/<1>\n  Use EPRT and EPSV commands instead of PORT and PASV.\n\n -ftp.set-iptos <0>/<1>\n  Set IP Type-of-service to high throughput on ftp connections.\n\n -smb.allow-hyperlinks-to-smb <0>/<1>\n  Allow hyperlinks to SMB protocol.\n    Disabling this improves security, because internet sites cannot\n    exploit possible bugs in the SMB client.\n\n -menu-font-size <size>\n  Size of font in menu.\n\n -menu-background-color 0xRRGGBB\n  Set menu background color in graphics mode, RRGGBB are hex.\n\n -menu-foreground-color 0xRRGGBB\n  Set menu foreground color in graphics mode.\n\n -scroll-bar-area-color 0xRRGGBB\n  Set color of scroll bar area.\n\n -scroll-bar-bar-color 0xRRGGBB\n  Set color of scroll bar.\n\n -scroll-bar-frame-color 0xRRGGBB\n  Set color of scroll bar frame.\n\n -bookmarks-file <file>\n  File to store bookmarks.\n\n -bookmarks-codepage <codepage>\n  Character set of bookmarks file.\n\n -save-url-history <0>/<1>\n  Save URL history on exit.\n\n -enable-cookies <0>/<1>\n  Enable cookiest.\n\n -save-cookies <0>/<1>\n  Save cookies on exit.\n\n -max-cookie-age <fp-value>\n  Maximum cookie age in days. 0 - unlimited\n\n -display-red-gamma <fp-value>\n  Red gamma of display.\n    (default 2.2)\n\n -display-green-gamma <fp-value>\n  Green gamma of display.\n    (default 2.2)\n\n -display-blue-gamma <fp-value>\n  Blue gamma of display.\n    (default 2.2)\n\n -user-gamma <fp-value>\n  Additional gamma.\n    (default 1)\n\n -bfu-aspect <fp-value>\n  Display aspect ration.\n\n -dither-letters <0>/<1>\n  Do letter dithering.\n\n -dither-images <0>/<1>\n  Do image dithering.\n\n -display-optimize <0>/<1>/<2>\n  Optimize for CRT (0), LCD RGB (1), LCD BGR (2).\n\n -gamma-correction <0>/<1>/<2>\n  Type of gamma correction:\n    (default 2)\n  0 - 8-bit (fast).\n  1 - 16-bit (slow).\n  2 - automatically detect according to speed of FPU.\n\n -overwrite-instead-of-scroll <0>/<1>\n  Overwrite the screen instead of scrolling it\n    (valid for svgalib and framebuffer).\n    Overwriting may or may not be faster, depending on hardware.\n\n -font <file>\n  Font file for normal text\n\n -font-bold <file>\n  Font file for bold text\n\n -font-monospaced <file>\n  Font file for monospaced text\n\n -font-monospaced-bold <file>\n  Font file for monospaced bold text\n\n -font-italic <file>\n  Font file for normal text\n\n -font-italic-bold <file>\n  Font file for bold text\n\n -font-monospaced-italic <file>\n  Font file for monospaced text\n\n -font-monospaced-italic-bold <file>\n  Font file for monospaced bold text\n\n -html-assume-codepage <codepage>\n  If server didn't specify document character set, assume this.\n\n -html-hard-assume <0>/<1>\n  Use always character set from \"-html-assume-codepage\" no matter\n    what server sent.\n\n -html-tables <0>/<1>\n  Render tables. (0) causes tables being rendered like in lynx.\n\n -html-frames <0>/<1>\n  Render frames. (0) causes frames  rendered like in lynx.\n\n -html-break-long-lines <0>/<1>\n  Break long lines in <pre> sections.\n\n -html-images <0>/<1>\n  Display links to unnamed images as [IMG].\n\n -html-image-names <0>/<1>\n  Display filename of an image instead of [IMG].\n\n -html-display-images <0>/<1>\n  Display images i"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/xlinks2",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "links [options] URL\n\nOptions are:\n\n -help\n  Prints this help screen\n\n -version\n  Prints the links version number and exit.\n\n -lookup <hostname>\n  Does name lookup, like command \"host\".\n\n -g\n  Run in graphics mode.\n\n -no-g\n  Run in text mode (overrides previous -g).\n\n -driver <driver name>\n  Graphics driver to use. Drivers are: x, svgalib, fb, directfb, pmshell,\n    atheos.\n  List of drivers will be shown if you give it an unknown driver.\n  Available drivers depend on your operating system and available libraries.\n\n -mode <graphics mode>\n  Graphics mode. For SVGALIB it is in format COLUMNSxROWSxCOLORS --\n    for example 640x480x256, 800x600x64k, 960x720x16M, 1024x768x16M32\n    List of modes will be shown if you give it an unknown videomode.\n  For framebuffer it is number of pixels in border --- LEFT,TOP,RIGHT,BOTTOM\n    other 3 values are optional --- i.e. -mode 10 will set all borders to 10,\n    -mode 10,20 will set left & right border to 10 and top & bottom to 20.\n  For Xwindow it is size of a window in format WIDTHxHEIGHT.\n\n -display <x-display>\n  Set Xwindow display.\n\n -force-html\n  Treat files with unknown type as html rather than text.\n    (can be toggled with '\\' key)\n\n -source <url>\n  Write unformatted data stream to stdout.\n\n -dump <url>\n  Write formatted document to stdout.\n\n -width <number>\n  For dump, document will be formatted to this screen width (but it can still\n    exceed it if lines can't be broken).\n\n -codepage <codepage>\n  For dump, convert output to specified character set --\n    for eaxmple iso-8859-2, windows-1250.\n\n -anonymous\n  Restrict links so that it can run on an anonymous account.\n  No local file browsing. No downloads. Executing viewers\n    is allowed, but user can't add or modify entries in\n    association table.\n\n -no-connect\n  Runs links as a separate instance - instead of connecting to\n    existing instance.\n\n -download-dir <path>\n  Default download directory.\n    (default: actual dir)\n\n -language <language>\n  Set user interface language.\n\n -max-connections <max>\n  Maximum number of concurrent connections.\n    (default: 10)\n\n -max-connections-to-host <max>\n  Maximum number of concurrent connection to a given host.\n    (default: 2)\n\n -retries <retry>\n  Number of retries.\n    (default: 3)\n\n -receive-timeout <sec>\n  Timeout on receive.\n    (default: 120)\n\n -unrestartable-receive-timeout <sec>\n  Timeout on non restartable connections.\n    (default: 600)\n\n -timeout-when-trying-multiple-addresses <sec>\n  Timeout for connection when trying multiple addresses or keepalive connection.\n    (default: 3)\n\n -bind-address <ip address or interface name>\n  Use a specific local IP address.\n\n -bind-address-ipv6 <ipv6 address or interface name>\n  Use a specific local IPv6 address.\n\n -no-libevent\n  Don't use libevent library.\n\n -no-openmp\n  Don't use OpenMP.\n\n -download-utime <0>/<1>\n  Set time of downloaded files to last modification time reported by server.\n\n -format-cache-size <num>\n  Number of formatted document pages cached.\n    (default: 5)\n\n -memory-cache-size <bytes>\n  Cache memory in bytes.\n    (default: 1048576)\n\n -image-cache-size <bytes>\n  Image cache in bytes.\n    (default: 1048576)\n\n -font-cache-size <bytes>\n  Font cache in bytes.\n    (default: 2097152)\n\n -aggressive-cache <0>/<1>\n    (default 1)\n  Always cache everything regardless of server's caching recomendations.\n    Many servers deny caching even if their content is not changing\n    just to get more hits and more money from ads.\n\n -address-preference <0>/<1>/<2>/<3>/<4>\n    (default 0)\n  0 - use system default.\n  1 - prefer IPv4.\n  2 - prefer IPv6.\n  3 - use only IPv4.\n  4 - use only IPv6.\n\n -http-proxy <host:port>\n  Host and port number of the HTTP proxy, or blank.\n    (default: blank)\n\n -ftp-proxy <host:port>\n  Host and port number of the FTP proxy, or blank.\n    (default: blank)\n\n -https-proxy <host:port>\n  Host and port number of the HTTPS proxy, or blank.\n    (default: blank)\n\n -socks-proxy <user@host:port>\n  Userid, host and port of Socks4a, or blank.\n    (default: blank)\n\n -append-text-to-dns-lookups <text>\n  Append text to dns lookups. It is useful for specifying fixed\n    tor exit node.\n    (default: blank)\n\n -no-proxy-domains <domain,domain...>\n  No proxy for specified domains.\n    (default: blank)\n\n -only-proxies <0>/<1>\n    (default 0)\n  \"1\" causes that Links won't initiate any non-proxy connection.\n    It is useful for anonymization with tor or similar networks.\n\n -ssl.certificates <0>/<1>/<2>\n    (default 1)\n  0 - ignore invalid certificate\n  1 - warn on invalid certificate\n  2 - reject invalid certificate\n\n -ssl.builtin-certificates <0>/<1>\n    (default 0)\n  Use built-in certificates instead of system certificates.\n\n -ssl.client-cert-key <filename>\n  Name of the PEM encoded file with the user private key\n  for client certificate authentication.\n\n -ssl.client-cert-crt <filename>\n  Name of the PEM encoded file with the user certificate\n  for client certificate authentication.\n\n -ssl.client-cert-password <text>\n  Password for the user private key.\n\n -async-dns <0>/<1>\n  Asynchronous DNS resolver on(1)/off(0).\n\n -dns-over-https <url>\n  DNS over HTTPS url.\n    (default: blank)\n\n -http-bugs.http10 <0>/<1>\n    (default 0)\n  \"1\" forces using only HTTP/1.0 protocol. (useful for buggy servers\n    that claim to be HTTP/1.1 compliant but are not)\n  \"0\" use both HTTP/1.0 and HTTP/1.1.\n\n -http-bugs.allow-blacklist <0>/<1>\n    (default 1)\n  \"1\" defaults to using list of servers that have broken HTTP/1.1 support.\n     When links finds such server, it will retry the request with HTTP/1.0.\n\n -http-bugs.bug-no-accept-charset <0>/<1>\n    (default 0)\n  Do not send Accept-Charset field of HTTP header. Because it is too long\n    some servers will deny the request. Other servers will convert content\n    to plain ascii when Accept-Charset is missing.\n\n -http-bugs.no-compression <0>/<1>\n    (default 0)\n  \"1\" causes that links won't advertise HTTP compression support (but it\n    will still accept compressed data). Use it when you communicate with\n    server that has broken compression support.\n\n -http-bugs.retry-internal-errors <0>/<1>\n    (default 0)\n  Retry on internal server errors (50x).\n\n -http.fake-firefox <0>/<1>\n    (default 0)\n  Fake Firefox in the HTTP header.\n\n -http.do-not-track <0>/<1>\n    (default 0)\n  Send do not track request in the HTTP header.\n\n -http.referer <0>/<1>/<2>/<3>/<4>\n    (default 4)\n  0 - do not send referer.\n  1 - send the requested URL as referer.\n  2 - send fake referer.\n  3 - send real referer.\n  4 - send real referer only to the same server.\n\n -http.fake-referer <string>\n  Fake referer value.\n\n -http.fake-user-agent <string>\n  Fake user agent value.\n\n -http.extra-header <string>\n  Extra string added to HTTP header.\n\n -ftp.anonymous-password <string>\n  Password for anonymous ftp access.\n\n -ftp.use-passive <0>/<1>\n  Use ftp PASV command to bypass firewalls.\n\n -ftp.use-eprt-epsv <0>/<1>\n  Use EPRT and EPSV commands instead of PORT and PASV.\n\n -ftp.set-iptos <0>/<1>\n  Set IP Type-of-service to high throughput on ftp connections.\n\n -smb.allow-hyperlinks-to-smb <0>/<1>\n  Allow hyperlinks to SMB protocol.\n    Disabling this improves security, because internet sites cannot\n    exploit possible bugs in the SMB client.\n\n -menu-font-size <size>\n  Size of font in menu.\n\n -menu-background-color 0xRRGGBB\n  Set menu background color in graphics mode, RRGGBB are hex.\n\n -menu-foreground-color 0xRRGGBB\n  Set menu foreground color in graphics mode.\n\n -scroll-bar-area-color 0xRRGGBB\n  Set color of scroll bar area.\n\n -scroll-bar-bar-color 0xRRGGBB\n  Set color of scroll bar.\n\n -scroll-bar-frame-color 0xRRGGBB\n  Set color of scroll bar frame.\n\n -bookmarks-file <file>\n  File to store bookmarks.\n\n -bookmarks-codepage <codepage>\n  Character set of bookmarks file.\n\n -save-url-history <0>/<1>\n  Save URL history on exit.\n\n -enable-cookies <0>/<1>\n  Enable cookiest.\n\n -save-cookies <0>/<1>\n  Save cookies on exit.\n\n -max-cookie-age <fp-value>\n  Maximum cookie age in days. 0 - unlimited\n\n -display-red-gamma <fp-value>\n  Red gamma of display.\n    (default 2.2)\n\n -display-green-gamma <fp-value>\n  Green gamma of display.\n    (default 2.2)\n\n -display-blue-gamma <fp-value>\n  Blue gamma of display.\n    (default 2.2)\n\n -user-gamma <fp-value>\n  Additional gamma.\n    (default 1)\n\n -bfu-aspect <fp-value>\n  Display aspect ration.\n\n -dither-letters <0>/<1>\n  Do letter dithering.\n\n -dither-images <0>/<1>\n  Do image dithering.\n\n -display-optimize <0>/<1>/<2>\n  Optimize for CRT (0), LCD RGB (1), LCD BGR (2).\n\n -gamma-correction <0>/<1>/<2>\n  Type of gamma correction:\n    (default 2)\n  0 - 8-bit (fast).\n  1 - 16-bit (slow).\n  2 - automatically detect according to speed of FPU.\n\n -overwrite-instead-of-scroll <0>/<1>\n  Overwrite the screen instead of scrolling it\n    (valid for svgalib and framebuffer).\n    Overwriting may or may not be faster, depending on hardware.\n\n -font <file>\n  Font file for normal text\n\n -font-bold <file>\n  Font file for bold text\n\n -font-monospaced <file>\n  Font file for monospaced text\n\n -font-monospaced-bold <file>\n  Font file for monospaced bold text\n\n -font-italic <file>\n  Font file for normal text\n\n -font-italic-bold <file>\n  Font file for bold text\n\n -font-monospaced-italic <file>\n  Font file for monospaced text\n\n -font-monospaced-italic-bold <file>\n  Font file for monospaced bold text\n\n -html-assume-codepage <codepage>\n  If server didn't specify document character set, assume this.\n\n -html-hard-assume <0>/<1>\n  Use always character set from \"-html-assume-codepage\" no matter\n    what server sent.\n\n -html-tables <0>/<1>\n  Render tables. (0) causes tables being rendered like in lynx.\n\n -html-frames <0>/<1>\n  Render frames. (0) causes frames  rendered like in lynx.\n\n -html-break-long-lines <0>/<1>\n  Break long lines in <pre> sections.\n\n -html-images <0>/<1>\n  Display links to unnamed images as [IMG].\n\n -html-image-names <0>/<1>\n  Display filename of an image instead of [IMG].\n\n -html-display-images <0>/<1>\n  Display images i"
               }
             ]
           }
         ],
-        "package": "uuid",
+        "package": "links2",
         "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "1.6.2-1.5build13"
+        "version": "2.29-1build6"
       },
       "status": "CONTRACT_REJECTED",
       "supplier": {
         "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 40.0,
-        "archive_sha256": "aced03872402198356690e6ca1969ddd1471c285dcbb6fa0b67f309dcc77ff5c",
+        "_acquisition_role_score": 18.0,
+        "archive_sha256": "d5363139a7def307ddc85b0b5cf74544f2c6ce59ad7f4ac9f27955fc74a0526e",
         "binding_kind": "apt",
-        "description": "Universally Unique Identifier Command-Line Tool",
+        "description": "Web browser running in both graphics and text mode",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "uuid"
+          "both"
         ],
-        "name": "uuid",
+        "name": "links2",
         "packages": [],
-        "query": "uuid",
+        "query": "both",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 40,
-        "version": "1.6.2-1.5build13",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ProbeFailure:APT_INSTALL_FAILED:: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/gstreamer1.0-plugins-base_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/libgstreamer-plugins-good1.0-0_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/gstreamer1.0-plugins-good_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-gl1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\n",
-      "status": "PROBE_FAILED",
-      "supplier": {
-        "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 32.0,
-        "archive_sha256": "3a5d1ce9bd4e03683f0c5ca8563fd3185b7df4a42f588b2125d84e854c2e02c2",
-        "binding_kind": "apt",
-        "description": "Configuration for the Ubuntu Budgie Live .iso Image",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "budgie-live-settings",
-        "packages": [],
-        "query": "live",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "0.20.13",
+        "score": 18,
+        "version": "2.29-1build6",
         "zero_cost_eligible": true
       }
     },
     {
       "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
       "probe": {
-        "archive_sha256": "b3163ed1be217b517f73267b0f6cfb6772b848a28ab3945a55045fb92614914e",
+        "archive_sha256": "3504f6c6e269a14ba57a905330b20e3031f305f83d5cda57b26a3d2aaf2b8e27",
         "executables": [],
-        "package": "cl-uuid",
+        "package": "node-hash.js",
         "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "20130813-1.1"
+        "version": "1.1.7-4"
       },
       "status": "CONTRACT_REJECTED",
       "supplier": {
         "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 32.0,
-        "archive_sha256": "b3163ed1be217b517f73267b0f6cfb6772b848a28ab3945a55045fb92614914e",
+        "_acquisition_role_score": 18.0,
+        "archive_sha256": "3504f6c6e269a14ba57a905330b20e3031f305f83d5cda57b26a3d2aaf2b8e27",
         "binding_kind": "apt",
-        "description": "Common Lisp librabry for generation of UUIDs as described by RFC 4122",
+        "description": "Hash functions that could be run by both browser and nodejs",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "uuid"
+          "both"
         ],
-        "name": "cl-uuid",
+        "name": "node-hash.js",
         "packages": [],
-        "query": "uuid",
+        "query": "both",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 32,
-        "version": "20130813-1.1",
+        "score": 18,
+        "version": "1.1.7-4",
         "zero_cost_eligible": true
       }
     },
     {
       "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
       "probe": {
-        "archive_sha256": "8d5ebe2c55469751ac95ef46751d7625bc055b7cb3886d10017331fddf98805b",
+        "archive_sha256": "117eaff886628c45435465fc9e97c719968e34cde15570514da7eeb07aabd268",
         "executables": [],
-        "package": "dracut-live",
+        "package": "node-universalify",
         "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "060+5-1ubuntu3.3"
+        "version": "2.0.0-3"
       },
       "status": "CONTRACT_REJECTED",
       "supplier": {
         "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 32.0,
-        "archive_sha256": "8d5ebe2c55469751ac95ef46751d7625bc055b7cb3886d10017331fddf98805b",
+        "_acquisition_role_score": 18.0,
+        "archive_sha256": "117eaff886628c45435465fc9e97c719968e34cde15570514da7eeb07aabd268",
         "binding_kind": "apt",
-        "description": "dracut is an event driven initramfs infrastructure (live image modules)",
+        "description": "Make a callback- or promise-based function support both promises and callbacks",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "live"
+          "both"
         ],
-        "name": "dracut-live",
+        "name": "node-universalify",
         "packages": [],
-        "query": "live",
+        "query": "both",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 32,
-        "version": "060+5-1ubuntu3.3",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "TimeoutExpired:Command '['/usr/bin/edubuntu-langpack-installer', '--help']' timed out after 10 seconds",
-      "status": "PROBE_FAILED",
-      "supplier": {
-        "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 32.0,
-        "archive_sha256": "e8155e2a4011eea6dd8d5c1a9b1696d51b3e0f46b5c2963ca53af3c76fb3d6dd",
-        "binding_kind": "apt",
-        "description": "Edubuntu live media support",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "edubuntu-live",
-        "packages": [],
-        "query": "live",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "14.04.2build2",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ProbeFailure:APT_INSTALL_FAILED:8 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/gstreamer1.0-plugins-base_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/libgstreamer-plugins-good1.0-0_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/gstreamer1.0-plugins-good_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-gl1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/x/xdg-desktop-portal/xdg-desktop-portal_1.18.4-1ubuntu2.24.04.2_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\n",
-      "status": "PROBE_FAILED",
-      "supplier": {
-        "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 32.0,
-        "archive_sha256": "6f74a785b5cd214d8e82c70ae921468540019a0fdc077d391d8b3137f7ae8e1a",
-        "binding_kind": "apt",
-        "description": "Configuration for the Edubuntu .iso Image",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "edubuntu-live-settings",
-        "packages": [],
-        "query": "live",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "24.04.26.1",
+        "score": 18,
+        "version": "2.0.0-3",
         "zero_cost_eligible": true
       }
     },
     {
       "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
       "probe": {
-        "archive_sha256": "17bd07002d9072766d8f46d800b714534684ab0a62dda9911141e98ff0fc5c52",
-        "executables": [],
-        "package": "elpa-uuid",
+        "archive_sha256": "e56b4107e10fad2c0abd7a8704b8b6a6e486b79e04d8ce92ad5a3e1e9c10ecc0",
+        "executables": [
+          {
+            "executable": "/usr/bin/pencil2d",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": -6,
+                "text": "qt.qpa.xcb: could not connect to display \nqt.qpa.plugin: Could not load the Qt platform plugin \"xcb\" in \"\" even though it was found.\nThis application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.\n\nAvailable platform plugins are: eglfs, linuxfb, minimal, minimalegl, offscreen, vnc, xcb."
+              }
+            ]
+          }
+        ],
+        "package": "pencil2d",
         "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "0.0.3~git20120910.1519bfe-3"
+        "version": "0.6.6-3build2"
       },
       "status": "CONTRACT_REJECTED",
       "supplier": {
         "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 32.0,
-        "archive_sha256": "17bd07002d9072766d8f46d800b714534684ab0a62dda9911141e98ff0fc5c52",
+        "_acquisition_role_score": 18.0,
+        "archive_sha256": "e56b4107e10fad2c0abd7a8704b8b6a6e486b79e04d8ce92ad5a3e1e9c10ecc0",
         "binding_kind": "apt",
-        "description": "UUID/GUID library for Emacs Lisp",
+        "description": "Create hand-drawn animation using both bitmap and vector graphics",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "uuid"
+          "both"
         ],
-        "name": "elpa-uuid",
+        "name": "pencil2d",
         "packages": [],
-        "query": "uuid",
+        "query": "both",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 32,
-        "version": "0.0.3~git20120910.1519bfe-3",
+        "score": 18,
+        "version": "0.6.6-3build2",
         "zero_cost_eligible": true
       }
     },
     {
       "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
       "probe": {
-        "archive_sha256": "c39d0d4f9aaede690bfb1aa9e21b18b1498d4f74cb3af2cac0c2511a25dc2331",
-        "executables": [],
-        "package": "erlang-uuid",
+        "archive_sha256": "f1ab9b258c1177926d676e1bd733472808a158f13b99d76ca9bddc7311fe81e0",
+        "executables": [
+          {
+            "executable": "/usr/bin/phyutility",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "don't recognize argument --help\nyou have to enter some sort of analysis\nPhyutility (fyoo-til-i-te) v.2.7.1\nStephen A. Smith http://www.blackrim.org eebsmith@umich.edu\nhelp on a specific command use option -h <command>\ncommands:\ntrees:\n\tconsensus\n\tconvert\n\tleafstab\n\tlinmove\n\tprune\n\treroot\n\tthin\n\ttreesupp\nseqs:\n\tclean\n\tconcat\n\tncbiget\n\tncbisearch\n\tparse\nsee documentation for more information"
+              }
+            ]
+          }
+        ],
+        "package": "phyutility",
         "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "0.4.6-2"
+        "version": "2.7.3+dfsg-4"
       },
       "status": "CONTRACT_REJECTED",
       "supplier": {
         "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 32.0,
-        "archive_sha256": "c39d0d4f9aaede690bfb1aa9e21b18b1498d4f74cb3af2cac0c2511a25dc2331",
+        "_acquisition_role_score": 18.0,
+        "archive_sha256": "f1ab9b258c1177926d676e1bd733472808a158f13b99d76ca9bddc7311fe81e0",
         "binding_kind": "apt",
-        "description": "UUID generator for Erlang",
+        "description": "simple analyses or modifications on both phylogenetic trees and data matrices",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "uuid"
+          "both"
         ],
-        "name": "erlang-uuid",
+        "name": "phyutility",
         "packages": [],
-        "query": "uuid",
+        "query": "both",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 32,
-        "version": "0.4.6-2",
+        "score": 18,
+        "version": "2.7.3+dfsg-4",
         "zero_cost_eligible": true
       }
     },
     {
       "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
       "probe": {
-        "archive_sha256": "a5dcd71880816022d5555b0844b3a1990ff1f290823e60311063d3990636ddcd",
+        "archive_sha256": "e544b4ed9157d9893c990a60c4680972146c4b0be62a8b06d14f1e334511df7d",
         "executables": [],
-        "package": "kiwi-dracut-live",
+        "package": "samba-common",
         "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "9.25.22-1ubuntu1"
+        "version": "2:4.19.5+dfsg-4ubuntu9.7"
       },
       "status": "CONTRACT_REJECTED",
       "supplier": {
         "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 32.0,
-        "archive_sha256": "a5dcd71880816022d5555b0844b3a1990ff1f290823e60311063d3990636ddcd",
+        "_acquisition_role_score": 18.0,
+        "archive_sha256": "e544b4ed9157d9893c990a60c4680972146c4b0be62a8b06d14f1e334511df7d",
         "binding_kind": "apt",
-        "description": "KIWI - Dracut module for iso(live) image type",
+        "description": "common files used by both the Samba server and client",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "live"
+          "both"
         ],
-        "name": "kiwi-dracut-live",
+        "name": "samba-common",
         "packages": [],
-        "query": "live",
+        "query": "both",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 32,
-        "version": "9.25.22-1ubuntu1",
+        "score": 18,
+        "version": "2:4.19.5+dfsg-4ubuntu9.7",
         "zero_cost_eligible": true
       }
     },
     {
       "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
       "probe": {
-        "archive_sha256": "1f72ac3dbd8c98502d1c387a3a755ec949de5d4866d517cdd33d7da82916c1a4",
+        "archive_sha256": "6460ca0c497b8dda5b37c66b45a5334ee7f0cd86ed76a503aab31c4c8bf10b19",
         "executables": [
           {
-            "executable": "/bin/live-boot",
+            "executable": "/usr/bin/dbwrap_tool",
             "help_attempts": [
               {
                 "flag": "--help",
                 "returncode": 0,
-                "text": "mkdir: cannot create directory \u2018/run/live\u2019: Permission denied\nmkdir: cannot create directory \u2018/var/lib/live\u2019: Permission denied"
+                "text": "Usage: [OPTION...]\n      --non-persistent               treat the database as non-persistent\n                                     (CAVEAT: This mode might wipe your\n                                     database!)\n      --persistent                   treat the database as persistent\n\nHelp options:\n  -?, --help                         Show this help message\n      --usage                        Display brief usage message\n\nCommon Samba options:\n  -d, --debuglevel=DEBUGLEVEL        Set debug level\n      --debug-stdout                 Send debug output to standard output\n  -s, --configfile=CONFIGFILE        Use alternative configuration file\n      --option=name=value            Set smb.conf option from command line\n  -l, --log-basename=LOGFILEBASE     Basename for log/debug files\n      --leak-report                  enable talloc leak reporting on exit\n      --leak-report-full             enable full talloc leak reporting on exit\n\nVersion options:\n  -V, --version                      Print version"
               }
             ]
           },
           {
-            "executable": "/bin/live-swapfile",
+            "executable": "/usr/bin/net",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage:\n  Use 'net help rpc' to get more extensive information about 'net rpc' commands.\n  Use 'net help rap' to get more extensive information about 'net rap' commands.\n  Use 'net help ads' to get more extensive information about 'net ads' commands.\n  Use 'net help file' to get more information about 'net file' commands.\n  Use 'net help share' to get more information about 'net share' commands.\n  Use 'net help session' to get more information about 'net session' commands.\n  Use 'net help server' to get more information about 'net server' commands.\n  Use 'net help domain' to get more information about 'net domain' commands.\n  Use 'net help printq' to get more information about 'net printq' commands.\n  Use 'net help user' to get more information about 'net user' commands.\n  Use 'net help group' to get more information about 'net group' commands.\n  Use 'net help groupmap' to get more information about 'net groupmap' commands.\n  Use 'net help sam' to get more information about 'net sam' commands.\n  Use 'net help validate' to get more information about 'net validate' commands.\n  Use 'net help groupmember' to get more information about 'net groupmember' commands.\n  Use 'net help admin' to get more information about 'net admin' commands.\n  Use 'net help service' to get more information about 'net service' commands.\n  Use 'net help password' to get more information about 'net password' commands.\n  Use 'net help primarytrust' to get more extensive information about 'net primarytrust' commands.\n  Use 'net help changetrustpw' to get more information about 'net changetrustpw'.\n  net [options] changesecretpw\n    Change the ADS domain member machine account password in secrets.tdb.\n    Do NOT use this function unless you know what it does.\n    Requires the -f flag to work.\n  net -U user[%%password] [-W domain] setauthuser\n    Set the auth user, password (and optionally domain\n    Will prompt for password if not given.\n  net setauthuser delete\n    Delete the existing auth user settings.\n  net getauthuser\n    Get the current winbind auth user settings.\n  Use 'net help time' to get more information about 'net time' commands.\n  Use 'net help lookup' to get more information about 'net lookup' commands.\n  Use 'net help g_lock' to get more information about 'net g_lock' commands.\n  Use 'net help join' to get more information about 'net join'.\n  Use 'net help offlinejoin' to get more information about 'net offlinejoin'.\n  Use 'net help dom' to get more information about 'net dom' commands.\n  Use 'net help cache' to get more information about 'net cache' commands.\n  net getlocalsid\n  net setlocalsid S-1-5-21-x-y-z\n  net setdomainsid S-1-5-21-x-y-z\n  net getdomainsid\n  net maxrid\n  Use 'net help idmap to get more information about 'net idmap' commands.\n  Use 'net help status' to get more information about 'net status' commands.\n  Use 'net help usershare to get more information about 'net usershare' commands.\n  Use 'net help usersidlist' to get more information about 'net usersidlist'.\n  Use 'net help conf' to get more information about 'net conf' commands.\n  Use 'net help registry' to get more information about 'net registry' commands.\n  Use 'net help eventlog' to get more information about 'net eventlog' commands.\n  Use 'net help printing' to get more information about 'net printing' commands.\n  Use 'net help serverid' to get more information about 'net serverid' commands.\n  Use 'net help notify' to get more information about 'net notify' commands.\n  Use 'net help tdb' to get more information about 'net tdb' commands.\n  Use 'net help vfs' to get more information about 'net vfs' commands.\n  Use 'net help help' to list usage information for 'net' commands."
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/nmblookup",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: <NODE> ...\n  -B, --broadcast=BROADCAST-ADDRESS         Specify address to use for\n                                            broadcasts\n  -f, --flags                               List the NMB flags returned\n  -U, --unicast=STRING                      Specify address to use for unicast\n  -M, --master-browser                      Search for a master browser\n      --recursion                           Set recursion desired in package\n  -S, --status                              Lookup node status as well\n  -T, --translate                           Translate IP addresses into names\n  -r, --root-port                           Use root port 137 (Win95 only\n                                            replies to this)\n  -A, --lookup-by-ip                        Do a node status on <name> as an\n                                            IP Address\n\nHelp options:\n  -?, --help                                Show this help message\n      --usage                               Display brief usage message\n\nCommon Samba options:\n  -d, --debuglevel=DEBUGLEVEL               Set debug level\n      --debug-stdout                        Send debug output to standard\n                                            output\n  -s, --configfile=CONFIGFILE               Use alternative configuration file\n      --option=name=value                   Set smb.conf option from command\n                                            line\n  -l, --log-basename=LOGFILEBASE            Basename for log/debug files\n      --leak-report                         enable talloc leak reporting on\n                                            exit\n      --leak-report-full                    enable full talloc leak reporting\n                                            on exit\n\nConnection options:\n  -R, --name-resolve=NAME-RESOLVE-ORDER     Use these name resolution services\n                                            only\n  -O, --socket-options=SOCKETOPTIONS        socket options to use\n  -m, --max-protocol=MAXPROTOCOL            Set max protocol level\n  -n, --netbiosname=NETBIOSNAME             Primary netbios name\n      --netbios-scope=SCOPE                 Use this Netbios scope\n  -W, --workgroup=WORKGROUP                 Set the workgroup name\n      --realm=REALM                         Set the realm name\n\nVersion options:\n  -V, --version                             Print version"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/samba-log-parser",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "usage: samba-log-parser [-h] [--traceid ID] [--pid PID] [--breakdown]\n                        [--merge-by-timestamp] [--flow] [--flow-compact]\n                        path\n\npositional arguments:\n  path                  logfile or directory\n\noptions:\n  -h, --help            show this help message and exit\n  --traceid ID          specify the traceid of the trace records\n  --pid PID             specify the pid of winbind client\n  --breakdown           breakdown the traces into per traceid files\n  --merge-by-timestamp  merge logs by timestamp\n  --flow                show the request/sub-request flow traces\n  --flow-compact        show the request/sub-request flow traces without\n                        dcerpc details"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/samba-regedit",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: samba-regedit [OPTION...]\n\nHelp options:\n  -?, --help                                   Show this help message\n      --usage                                  Display brief usage message\n\nCommon Samba options:\n  -d, --debuglevel=DEBUGLEVEL                  Set debug level\n      --debug-stdout                           Send debug output to standard\n                                               output\n  -s, --configfile=CONFIGFILE                  Use alternative configuration\n                                               file\n      --option=name=value                      Set smb.conf option from\n                                               command line\n  -l, --log-basename=LOGFILEBASE               Basename for log/debug files\n      --leak-report                            enable talloc leak reporting on\n                                               exit\n      --leak-report-full                       enable full talloc leak\n                                               reporting on exit\n\nConnection options:\n  -R, --name-resolve=NAME-RESOLVE-ORDER        Use these name resolution\n                                               services only\n  -O, --socket-options=SOCKETOPTIONS           socket options to use\n  -m, --max-protocol=MAXPROTOCOL               Set max protocol level\n  -n, --netbiosname=NETBIOSNAME                Primary netbios name\n      --netbios-scope=SCOPE                    Use this Netbios scope\n  -W, --workgroup=WORKGROUP                    Set the workgroup name\n      --realm=REALM                            Set the realm name\n\nCredential options:\n  -U, --user=[DOMAIN/]USERNAME[%PASSWORD]      Set the network username\n  -N, --no-pass                                Don't ask for a password\n      --password=STRING                        Password\n      --pw-nt-hash                             The supplied password is the NT\n                                               hash\n  -A, --authentication-file=FILE               Get the credentials from a file\n  -P, --machine-pass                           Use stored machine account\n                                               password\n      --simple-bind-dn=DN                      DN to use for a simple bind\n      --use-kerberos=desired|required|off      Use Kerberos authentication\n      --use-krb5-ccache=CCACHE                 Credentials cache location for\n                                               Kerberos\n      --use-winbind-ccache                     Use the winbind ccache for\n                                               authentication\n      --client-protection=sign|encrypt|off     Configure used protection for\n                                               client connections\n\nVersion options:\n  -V, --version                                Print version"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/samba-tool",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "samba-tool: missing subcommand\n\nUsage: samba-tool <subcommand>\n\nMain samba administration tool.\n\n\nOptions:\n  -h, --help            show this help message and exit\n  --color=always|never|auto\n                        use colour if available (default: auto)\n\n  Version Options:\n    -V, --version       Display version number\n\n\nAvailable subcommands:\n  computer    - Computer management.\n  contact     - Contact management.\n  dbcheck     - Check local AD database for errors.\n  delegation  - Delegation management.\n  dns         - Domain Name Service (DNS) management.\n  domain      - Domain management.\n  drs         - Directory Replication Services (DRS) management.\n  dsacl       - DS ACLs manipulation.\n  forest      - Forest management.\n  fsmo        - Flexible Single Master Operations (FSMO) roles management.\n  gpo         - Group Policy Object (GPO) management.\n  group       - Group management.\n  ldapcmp     - Compare two ldap databases.\n  ntacl       - NT ACLs manipulation.\n  ou          - Organizational Units (OU) management.\n  processes   - List processes (to aid debugging on systems without setproctitle).\n  rodc        - Read-Only Domain Controller (RODC) management.\n  schema      - Schema querying and management.\n  sites       - Sites management.\n  spn         - Service Principal Name (SPN) management.\n  testparm    - Syntax check the configuration file.\n  time        - Retrieve the time on a server.\n  user        - User management.\n  visualize   - Produces graphical representations of Samba network state.\nFor more help on a specific subcommand, please type: samba-tool <subcommand> (-h|--help)"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/smbpasswd",
             "help_attempts": [
               {
                 "flag": "--help",
                 "returncode": 1,
-                "text": "Usage: /bin/live-swapfile {add|remove}"
-              }
-            ]
-          }
-        ],
-        "package": "live-boot",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "1:20230131"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 32.0,
-        "archive_sha256": "1f72ac3dbd8c98502d1c387a3a755ec949de5d4866d517cdd33d7da82916c1a4",
-        "binding_kind": "apt",
-        "description": "Live System Boot Components",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "live-boot",
-        "packages": [],
-        "query": "live",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "1:20230131",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
-      "probe": {
-        "archive_sha256": "0c040ff86a5e522d602af08f59011e817677fbe0602118270ee2cf624e395f34",
-        "executables": [],
-        "package": "live-boot-initramfs-tools",
-        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "1:20230131"
-      },
-      "status": "CONTRACT_REJECTED",
-      "supplier": {
-        "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 32.0,
-        "archive_sha256": "0c040ff86a5e522d602af08f59011e817677fbe0602118270ee2cf624e395f34",
-        "binding_kind": "apt",
-        "description": "Live System Boot Components (initramfs-tools backend)",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "live"
-        ],
-        "name": "live-boot-initramfs-tools",
-        "packages": [],
-        "query": "live",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "1:20230131",
-        "zero_cost_eligible": true
-      }
-    },
-    {
-      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
-      "probe": {
-        "archive_sha256": "29fdb5b25138533c614c5d148df37a634010d40414ba98e0ee7153f026d5dd7a",
-        "executables": [
-          {
-            "executable": "/usr/bin/lb",
-            "help_attempts": [
-              {
-                "flag": "--help",
-                "returncode": 0,
-                "text": "LIVE-BUILD(1)                 Debian Live Project                LIVE-BUILD(1)\n\nNAME\n       lb - wrapper for live-build programs\n\nSYNOPSIS\n       lb COMMAND [COMMAND_OPTIONS]\n\n       lb [live-build options]\n\nDESCRIPTION\n       lb  is  a  high-level  command (porcelain) of live-build(7), the Debian\n       Live tool suite.\n\nOPTIONS\n       lb has no specific options but understands all generic  live-build  op\u2010\n       tions.  See live-build(7) for a complete list of all generic live-build\n       options.\n\nFILES\n       none\n\nSEE ALSO\n       live-build(7)\n\n       This program is a part of live-build.\n\nHOMEPAGE\n       More information about live-build and the Debian Live  project  can  be\n       found on the homepage at <http://live.debian.net/> and in the manual at\n       <http://live.debian.net/manual/>.\n\nBUGS\n       Bugs can be reported by submitting a bugreport for the live-build pack\u2010\n       age  in  the Debian Bug Tracking System at <http://bugs.debian.org/> or\n       by writing  a  mail  to  the  Debian  Live  mailing  list  at  <debian-\n       live@lists.debian.org>.\n\nAUTHOR\n       live-build  was  written  by Daniel Baumann <daniel@debian.org> for the\n       Debian project.\n\n3.0~a57-1                         2012-08-10                     LIVE-BUILD(1)"
+                "text": "When run by root:\n    smbpasswd [options] [username]\notherwise:\n    smbpasswd [options]\n\noptions:\n  -L                   local mode (must be first option)\n  -h                   print this usage message\n  -s                   use stdin for password prompt\n  -c smb.conf file     Use the given path to the smb.conf file\n  -D LEVEL             debug level\n  -r MACHINE           remote machine\n  -U USER              remote username (e.g. SAM/user)\nextra options when run by root or in local mode:\n  -a                   add user\n  -d                   disable user\n  -e                   enable user\n  -i                   interdomain trust account\n  -m                   machine trust account\n  -n                   set no password\n  -W                   use stdin ldap admin password\n  -w PASSWORD          ldap admin password\n  -x                   delete user\n  -R ORDER             name resolve order\n\n/usr/bin/smbpasswd: invalid option -- '-'"
               }
             ]
           },
           {
-            "executable": "/usr/bin/live-build",
+            "executable": "/usr/bin/testparm",
             "help_attempts": [
               {
                 "flag": "--help",
                 "returncode": 0,
-                "text": "LIVE-BUILD(7)                 Debian Live Project                LIVE-BUILD(7)\n\nNAME\n       live-build - the Debian Live tool suite\n\nSYNOPSIS\n       lb  COMMAND  [-h|--help]  [-u|--usage]  [-v|--version]  [--breakpoints]\n       [--conffile] [--debug] [--force] [--quiet] [--verbose]\n\nDESCRIPTION\n       live-build is a set of scripts to build Debian Live system images.  The\n       idea behind live-build is a tool suite that uses a configuration direc\u2010\n       tory  to  completely  automate  and customize all aspects of building a\n       Live image.\n\n       The COMMAND is a name of a live-build command (see below).\n\n       More documentation about how to use live-build is available in the  in\u2010\n       dividual manpages for each helper and in the manual at <http://live.de\u2010\n       bian.net/manual/>.\n\nOPTIONS\n   Shared live-build options\n       The following command line options are supported by all live-build pro\u2010\n       grams.\n\n       -h, --help\n           display help and exit.\n\n       -u, --usage\n           show usage and exit.\n\n       -v, --version\n           output version information and exit.\n\n   Common live-build options\n       The  following  command  line  options are supported by most live-build\n       programs. See the man page of each program for a  complete  explanation\n       of what each option does.\n\n       --breakpoints\n           run with breakpoints.\n\n       --conffile\n           use custom configuration file.\n\n       --debug\n           show debug information.\n\n       --force\n           force helper execution, even if stage file exists.\n\n       --quiet\n           be quiet.\n\n       --verbose\n           be verbose.\n\nLIVE-BUILD COMMANDS\n       We  divide  live-build  into  high level (\"porcelain\") commands and low\n       level (\"plumbing\") commands.\n\n       Here is the complete list of all  available  live-build  commands.  See\n       their man pages for additional documentation.\n\nHIGH-LEVEL COMMANDS (PORCELAIN)\n       We  separate the porcelain commands into the main commands and some an\u2010\n       cillary user utilities.\n\n   Main porcelain commands\n       lb_config(1)\n           create configuration for live-build\n\n       lb_bootstrap(1)\n           create the first stage by bootstrapping a basic debian system\n\n       lb_chroot(1)\n           create the second stage by customizing the chroot\n\n       lb_binary(1)\n           create the third stage by generating a binary image\n\n       lb_source(1)\n           create the optional fourth stage by generating a source image\n\n       lb_clean(1)\n           clean up system build directories\n\n   Ancillary Commands\n       lb(1)\n           generic live-build wrapper\n\n       lb_build(1)\n           alias for all stages\n\n       lb_local(1)\n           helper for using a local live-build\n\n       lb_testroot(1)\n           ensure that a system is built as root\n\nLOW-LEVEL COMMANDS (PLUMBING)\n       The actual work of live-build is implemented in the low-level commands,\n       called plumbing. They are not supposed to be used by  end  users,  they\n       should  stick  with  porcelains  as  they ensure that all the different\n       plumbing commands are executed in the right order. However, if you  in\u2010\n       tend  to reuse live-build commands in your own scripts, then the plumb\u2010\n       ings might be of interest for you.\n\n       Note that the interface (set of options and  the  semantics)  to  these\n       low-level  commands  are  meant  to be a lot more stable than Porcelain\n       level commands. The interface to Porcelain commands on the  other  hand\n       are subject to change in order to improve the end user experience.\n\n   Bootstrap commands\n       lb_bootstrap_cache(1)\n           cache bootstrap stage\n\n       lb_bootstrap_cdebootstrap(1)\n           bootstrap a Debian system with cdebootstrap(1)\n\n       lb_bootstrap_copy(1)\n           bootstrap by copying the host system\n\n       lb_bootstrap_debootstrap(1)\n           bootstrap a Debian system with debootstrap(8)\n\n   Chroot commands\n       lb_chroot_apt(1)\n           manage /etc/apt/apt.conf\n\n       lb_chroot_cache(1)\n           cache chroot stage\n\n       lb_chroot_debianchroot(1)\n           manage /etc/debian_chroot\n\n       lb_chroot_devpts(1)\n           mount /dev/pts\n\n       lb_chroot_dpkg(1)\n           manage /sbin/dpkg\n\n       lb_chroot_hacks(1)\n           execute hacks in chroot\n\n       lb_chroot_hostname(1)\n           manage /bin/hostname\n\n       lb_chroot_hosts(1)\n           manage /etc/hosts\n\n       lb_chroot_install-packages(1)\n           install queued packages into chroot\n\n       lb_chroot_interactive(1)\n           make build interactive\n\n       lb_chroot_linux-image(1)\n           manage /etc/kernel-img.conf\n\n       lb_chroot_hooks(1)\n           execute local hooks in chroot\n\n       lb_chroot_local-includes(1)\n           copy local files into chroot\n\n       lb_chroot_packages(1)\n           queue install of packages into chroot\n\n       lb_chroot_local-patches(1)\n           apply local patches against chroot\n\n       lb_chroot_local-preseed(1)\n           use debconf local preseeding file\n\n       lb_chroot_packagelists(1)\n           queue install of package lists into chroot\n\n       lb_chroot_proc(1)\n           mount /proc\n\n       lb_chroot_resolv(1)\n           manage /etc/resolv.conf\n\n       lb_chroot_selinuxfs(1)\n           mount /selinux\n\n       lb_chroot_archives(1)\n           manage /etc/apt/sources.list\n\n       lb_chroot_sysfs(1)\n           mount /sys\n\n       lb_chroot_sysv-rc(1)\n           manage /usr/sbin/policy-rc.d\n\n       lb_chroot_task-lists(1)\n           install task lists into chroot\n\n   Binary commands\n       lb_binary_chroot(1)\n           copy chroot into chroot\n\n       lb_binary_debian-installer(1)\n           install debian-installer into binary\n\n       lb_binary_disk(1)\n           install disk information into binary\n\n       lb_binary_grub(1)\n           installs grub into binary\n\n       lb_binary_grub2(1)\n           installs grub2 into binary\n\n       lb_binary_includes(1)\n           copy files into binary\n\n       lb_binary_iso(1)\n           build iso binary image\n\n       lb_binary_linux-image(1)\n           install linux-image into binary\n\n       lb_binary_local-hooks(1)\n           execute local hooks in binary\n\n       lb_binary_local-includes(1)\n           copy files into binary\n\n       lb_binary_local-packagelists(1)\n           install local package lists into binary\n\n       lb_binary_manifest(1)\n           create manifest\n\n       lb_binary_checksums(1)\n           create binary checksums (md5, sha1, and/or sha256)\n\n       lb_binary_memtest(1)\n           installs a memtest into binary\n\n       lb_binary_net(1)\n           build netboot binary image\n\n       lb_binary_rootfs(1)\n           build rootfs image\n\n       lb_binary_silo(1)\n           installs silo into binary\n\n       lb_binary_syslinux(1)\n           installs syslinux into binary\n\n       lb_binary_tar(1)\n           build harddisk binary image\n\n       lb_binary_hdd(1)\n           build binary hdd image\n\n       lb_binary_virtual-hdd(1)\n           build binary virtual-hdd image\n\n       lb_binary_win32-loader(1)\n           installs win32-loader into binary\n\n       lb_binary_yaboot(1)\n           installs yaboot into binary\n\n   Source commands\n       lb_source_debian(1)\n           download sources\n\n       lb_source_debian-live(1)\n           copy debian-live config into source\n\n       lb_source_disk(1)\n           install disk information into source\n\n       lb_source_iso(1)\n           build iso source image\n\n       lb_source_checksums(1)\n           create source checksums (md5, sha1, and/or sha256)\n\n       lb_source_net(1)\n           build source net image\n\n       lb_source_tar(1)\n           build source tarball\n\n       lb_source_hdd(1)\n           build source hdd image\n\n       lb_source_virtual-hdd(1)\n           build source virtual-hdd image\n\nCONFIG FILES\n       Many  live-build commands make use of files in the config/ directory to\n       control what they do. Besides the common config/common, which  is  used\n       by  all  live-build commands, some additional files can be used to con\u2010\n       figure the behavior of specific live-build commands.  These  files  are\n       typically  named  config/stage or config/stage_helper (where \"stage\" of\n       course, is replaced with the name of the stage that they belong to, and\n       \"helper\" with the name of the helper).\n\n       For example, lb_bootstrap_debootstrap uses files named config/bootstrap\n       and config/bootstrap_debootstrap to read the options it will  use.  See\n       the  man  pages  of individual commands for details about the names and\n       formats of the files they use. Generally, these files contain variables\n       with  values  assigned,  one  variable  per  line.  Some  programs   in\n       live-build  use  pairs  of values or slightly more complicated variable\n       assignments.\n\n       Note that live-build  will  respect  environment  variables  which  are\n       present  in the context of the shell it is running. If variables can be\n       read from config files, then they override environment  variables,  and\n       if  command  line  options  are  used, they override values from config\n       files. If no value for a given variable can be found and thus is unset,\n       live-build will automatically set it to the default value.\n\n       In some rare cases, you may want to have different  versions  of  these\n       files for different architectures or distributions. If files named con\u2010\n       fig/stage.arch  or  config/stage_helper.arch,  and config/stage.dist or\n       config/stage_helper.dist exist, where \"arch\" is the same as the  output\n       of  \"dpkg  --print-architecture\" and \"dist\" is the same as the codename\n       of the target distribution, then they will be  used  in  preference  to\n       other, more general files.\n\n       All  config  files  are shell scripts which are sourced by a live-build\n       program. That means they have to follow the normal  shel"
+                "text": "Usage: testparm [OPTION...] <config-file> [host-name] [host-ip]\n  -s, --suppress-prompt           Suppress prompt for enter\n  -v, --verbose                   Show default options too\n  -l, --skip-logic-checks         Skip the global checks\n      --show-all-parameters       Show the parameters, type, possible values\n      --parameter-name=STRING     Limit testparm to a named parameter\n      --section-name=STRING       Limit testparm to a named section\n\nHelp options:\n  -?, --help                      Show this help message\n      --usage                     Display brief usage message\n\nCommon debug options:\n  -d, --debuglevel=DEBUGLEVEL     Set debug level\n      --debug-stdout              Send debug output to standard output\n\nOptions:\n      --option=name=value         Set smb.conf option from command line\n\nVersion options:\n  -V, --version                   Print version"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/sbin/samba_kcc",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: samba_kcc [options]\n\nOptions:\n  -h, --help            show this help message and exit\n  --readonly            compute topology but do not update database\n  --debug               debug output\n  --verify              verify that assorted invariants are kept\n  --list-verify-tests   list what verification actions are available and do\n                        nothing else\n  --dot-file-dir=DOT_FILE_DIR\n                        Write Graphviz .dot files to this directory\n  --seed=SEED           random number seed\n  --importldif=<file>   import topology ldif file\n  --exportldif=<file>   export topology ldif file\n  -H <URL>, --URL=<URL>\n                        LDB URL for database or target server\n  --tmpdb=<file>        schemaless database file to create for ldif import\n  --now=<date>          assume current time is this ('YYYYmmddHHMMSS[tz]',\n                        default: system time)\n  --forced-local-dsa=<DSA>\n                        run calculations assuming the DSA is this DN\n  --attempt-live-connections\n                        Attempt to connect to other DSAs to test links\n  --list-valid-dsas     Print a list of DSA dnstrs that could be used in\n                        --forced-local-dsa\n  --test-all-reps-from  Create and verify a graph of reps-from for every DSA\n  --forget-local-links  pretend not to know the existing local topology\n  --forget-intersite-links\n                        pretend not to know the existing intersite topology\n\n  Samba Common Options:\n    -s FILE, --configfile=FILE\n                        Configuration file\n    -d DEBUGLEVEL, --debuglevel=DEBUGLEVEL\n                        debug level\n    --option=OPTION     set smb.conf option from command line\n    --realm=REALM       set the realm name\n\n  Credentials Options:\n    --simple-bind-dn=DN\n                        DN to use for a simple bind\n    --password=PASSWORD\n                        Password\n    -U USERNAME, --username=USERNAME\n                        Username\n    -W WORKGROUP, --workgroup=WORKGROUP\n                        Workgroup\n    -N, --no-pass       Don't ask for a password\n    --ipaddress=IPADDRESS\n                        IP address of server\n    -P, --machine-pass  Use stored machine account password\n    --use-kerberos=desired|required|off\n                        Use Kerberos authentication\n    --use-krb5-ccache=KRB5CCNAME\n                        Kerberos Credentials cache\n    -A AUTHFILE, --authentication-file=AUTHFILE\n                        Authentication file\n    -k KERBEROS, --kerberos=KERBEROS\n                        DEPRECATED: Migrate to --use-kerberos\n\n  Version Options:\n    -V, --version       Display version number"
               }
             ]
           }
         ],
-        "package": "live-build",
+        "package": "samba-common-bin",
         "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
-        "version": "3.0~a57-1ubuntu49.1"
+        "version": "2:4.19.5+dfsg-4ubuntu9.7"
       },
       "status": "CONTRACT_REJECTED",
       "supplier": {
         "_acquisition_object_matches": 1,
-        "_acquisition_role_score": 32.0,
-        "archive_sha256": "29fdb5b25138533c614c5d148df37a634010d40414ba98e0ee7153f026d5dd7a",
+        "_acquisition_role_score": 18.0,
+        "archive_sha256": "6460ca0c497b8dda5b37c66b45a5334ee7f0cd86ed76a503aab31c4c8bf10b19",
         "binding_kind": "apt",
-        "description": "Debian Live - System build scripts",
+        "description": "Samba common files used by both the server and the client",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "live"
+          "both"
         ],
-        "name": "live-build",
+        "name": "samba-common-bin",
         "packages": [],
-        "query": "live",
+        "query": "both",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 32,
-        "version": "3.0~a57-1ubuntu49.1",
+        "score": 18,
+        "version": "2:4.19.5+dfsg-4ubuntu9.7",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "1c0cc9c9c9a45f67964ddc306e7da6b09289494a5667e4384591d83544c84ca8",
+        "executables": [
+          {
+            "executable": "/usr/bin/soundstretch",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 255,
+                "text": "SoundStretch v2.3.2 -  Copyright (c) Olli Parviainen\n=========================================================\nauthor e-mail: <oparviai@iki.fi> - WWW: http://www.surina.net/soundtouch\n\nThis program is subject to (L)GPL license. Run \"soundstretch -license\" for\nmore information.\n\nThis application processes WAV audio files by modifying the sound tempo,\npitch and playback rate properties independently from each other.\n\nUsage :\n    soundstretch infilename outfilename [switches]\n\nTo use standard input/output pipes, give 'stdin' and 'stdout' as filenames.\n\nAvailable switches are:\n  -tempo=n : Change sound tempo by n percents  (n=-95..+5000 %)\n  -pitch=n : Change sound pitch by n semitones (n=-60..+60 semitones)\n  -rate=n  : Change sound rate by n percents   (n=-95..+5000 %)\n  -bpm=n   : Detect the BPM rate of sound and adjust tempo to meet 'n' BPMs.\n             If '=n' is omitted, just detects the BPM rate.\n  -quick   : Use quicker tempo change algorithm (gain speed, lose quality)\n  -naa     : Don't use anti-alias filtering (gain speed, lose quality)\n  -speech  : Tune algorithm for speech processing (default is for music)\n  -license : Display the program license text (LGPL)"
+              }
+            ]
+          }
+        ],
+        "package": "soundstretch",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "2.3.2+ds1-1build1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 18.0,
+        "archive_sha256": "1c0cc9c9c9a45f67964ddc306e7da6b09289494a5667e4384591d83544c84ca8",
+        "binding_kind": "apt",
+        "description": "Stretches and pitch-shifts sound independently",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "independently"
+        ],
+        "name": "soundstretch",
+        "packages": [],
+        "query": "independently",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.3.2+ds1-1build1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "bf318c544f39c7597006a6ba7df3246c0ec02718918ec5b74881a87f1672c9f9",
+        "executables": [
+          {
+            "executable": "/usr/bin/tigervncpasswd",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "usage: /usr/bin/tigervncpasswd [file]\n       /usr/bin/tigervncpasswd -f"
+              }
+            ]
+          }
+        ],
+        "package": "tigervnc-tools",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.13.1+dfsg-2build2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 18.0,
+        "archive_sha256": "bf318c544f39c7597006a6ba7df3246c0ec02718918ec5b74881a87f1672c9f9",
+        "binding_kind": "apt",
+        "description": "Virtual network computing; Tools for both clients and servers",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "both"
+        ],
+        "name": "tigervnc-tools",
+        "packages": [],
+        "query": "both",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.13.1+dfsg-2build2",
         "zero_cost_eligible": true
       }
     }
   ],
-  "goal": "Read the UUID from that live result",
+  "goal": "Finally independently reread both files",
   "mission_id": "ASTRA-RUNTIME-LIVE-CONDITIONAL-001",
   "role_conditioned_discovery": [],
   "schema": "PROJECT_BRAIN_AUTO_APT_CLI_ACQUISITION_EVIDENCE_V1",
