@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T03:40:13.570287+00:00",
+  "mission_id": "ASTRA-DYNAMIC-DOCX-COMPILER-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_DYNAMIC_DOCX_COMPILER_DIAG_001.json",
+  "mission_sha256": "bfcbd408f2c4b67343634e1ebbc7ef32b601e2d8c8300466c0140819cf66bb2b",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "573119fc69ab7c92f2f25eeed186b40bf2dbe7c4ab2f7e04bd4662e242eb312d",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
