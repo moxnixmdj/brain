@@ -42,6 +42,12 @@ def run(args,root):
         if not isinstance(kwargs,dict):
             raise RuntimeError("PYTHON_CODEC_DECODE_KWARGS_INVALID")
         observed=fn(binary.read_bytes(),**kwargs)
+        envelope_key=args.get("envelope_key")
+        if envelope_key is not None:
+            key=str(envelope_key)
+            if not isinstance(observed,dict) or key not in observed:
+                raise RuntimeError("PYTHON_CODEC_ENVELOPE_MISSING:"+key)
+            observed=observed[key]
         return {
           "adapter":"python_library_codec",
           "mode":"decode_verify",
@@ -62,6 +68,9 @@ def run(args,root):
     if not src.is_file():
         raise RuntimeError("PYTHON_CODEC_SOURCE_JSON_MISSING")
     payload=json.loads(src.read_text(encoding="utf-8"))
+    envelope_key=args.get("envelope_key")
+    if envelope_key is not None:
+        payload={str(envelope_key):payload}
     module=importlib.import_module(module_name)
     fn=_resolve_callable(module,encode_name)
     kwargs=args.get("encode_kwargs") or {}
