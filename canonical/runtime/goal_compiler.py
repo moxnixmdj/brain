@@ -3266,73 +3266,111 @@ def _compile_compound_goal(goal, clauses, registry, root):
             for item in reversed(compiled_parts):
                 cid=item.get("selected_capability") if isinstance(item,dict) else None
                 entry=(registry or {}).get(cid) if cid else None
-                if isinstance(entry,dict) and entry.get("adapter_module")=="python_library_codec":
-                    prior=(item,entry)
-                    break
+                if isinstance(entry,dict) and entry.get("adapter_module") in {"python_library_codec","node_library_codec"}:
+                    if _execution_surface_constraint_match(clause,entry)[0]:
+                        prior=(item,entry)
+                        break
             if prior is not None:
                 item,entry=prior
-                if not _execution_surface_constraint_match(clause,entry)[0]:
-                    prior=None
-                if prior is None:
-                    item=entry=None
-                    inputs={}
-                else:
-                    inputs=item.get("inputs") or {}
-                template_args=((entry.get("action_template") or {}).get("args") or {}) if isinstance(entry,dict) else {}
+                inputs=item.get("inputs") or {}
+                template_args=((entry.get("action_template") or {}).get("args") or {})
                 json_path=inputs.get("json_path")
                 binary_path=inputs.get("output_path")
-                module=template_args.get("module")
-                decode_callable=template_args.get("decode_callable")
-                decode_kwargs=template_args.get("decode_kwargs") or {}
-                envelope_key=template_args.get("envelope_key")
+                adapter=str(entry.get("adapter_module") or "")
                 requires_distinct_implementation=bool(re.search(
                     r"(?:implementation\s+that\s+is\s+not\s+provided\s+by|different\s+implementation|not\s+provided\s+by\s+the\s+.+?producer|producer-independent)",
                     lower,re.IGNORECASE
                 ))
-                if all(isinstance(x,str) and x for x in (json_path,binary_path,module,decode_callable)):
-                    if requires_distinct_implementation:
-                        source=entry.get("source") or {}
-                        producer_project=str(source.get("project") or "")
-                        fmt=pathlib.Path(str(binary_path)).suffix.lower().lstrip(".")
-                        if not producer_project or not fmt:
+                if adapter=="python_library_codec":
+                    module=template_args.get("module")
+                    decode_callable=template_args.get("decode_callable")
+                    decode_kwargs=template_args.get("decode_kwargs") or {}
+                    envelope_key=template_args.get("envelope_key")
+                    if all(isinstance(x,str) and x for x in (json_path,binary_path,module,decode_callable)):
+                        if requires_distinct_implementation:
+                            source=entry.get("source") or {}
+                            producer_project=str(source.get("project") or "")
+                            fmt=pathlib.Path(str(binary_path)).suffix.lower().lstrip(".")
+                            if not producer_project or not fmt:
+                                raise GoalCompilationFailure(
+                                    "INDEPENDENT_CODEC_VERIFIER_BINDING_REQUIRED",
+                                    json.dumps({
+                                      "capability_id":item["selected_capability"],
+                                      "producer_project":producer_project,
+                                      "binary_path":binary_path,
+                                    },sort_keys=True)
+                                )
+                            actions.append({
+                              "type":"verify_with_independent_pypi_codec",
+                              "args":{
+                                "format":fmt,
+                                "json_path":json_path,
+                                "binary_path":binary_path,
+                                "producer_project":producer_project,
+                                "producer_capability_id":item["selected_capability"],
+                              },
+                              "expect":{"type":"field_equals","field":"verified","value":True},
+                            })
+                            compiled_parts.append({
+                              "index":index,"subgoal":clause,
+                              "mode":"PRODUCER_INDEPENDENT_CODEC_VERIFIER_ACQUISITION",
+                              "producer_capability":item["selected_capability"],
+                              "producer_project":producer_project,
+                              "format":fmt,
+                              "json_path":json_path,
+                              "binary_path":binary_path,
+                            })
+                        else:
+                            actions.append({
+                              "type":"invoke_capability",
+                              "args":{
+                                "capability_id":item["selected_capability"],
+                                "mode":"decode_verify",
+                                "module":module,
+                                "decode_callable":decode_callable,
+                                "decode_kwargs":decode_kwargs,
+                                "envelope_key":envelope_key,
+                                "json_path":json_path,
+                                "binary_path":binary_path,
+                              },
+                              "expect":{"type":"field_equals","field":"verified","value":True},
+                            })
+                            compiled_parts.append({
+                              "index":index,"subgoal":clause,
+                              "mode":"INDEPENDENT_PYTHON_CODEC_ROUNDTRIP_VERIFICATION",
+                              "selected_capability":item["selected_capability"],
+                              "json_path":json_path,
+                              "binary_path":binary_path,
+                              "decode_callable":decode_callable,
+                              "envelope_key":envelope_key,
+                            })
+                        continue
+                elif adapter=="node_library_codec":
+                    package=template_args.get("package")
+                    root_selector=template_args.get("root_selector")
+                    encode_export=template_args.get("encode_export")
+                    decode_export=template_args.get("decode_export")
+                    if all(isinstance(x,str) and x for x in (
+                        json_path,binary_path,package,root_selector,encode_export,decode_export
+                    )):
+                        if requires_distinct_implementation:
                             raise GoalCompilationFailure(
-                                "INDEPENDENT_CODEC_VERIFIER_BINDING_REQUIRED",
+                                "INDEPENDENT_NODE_CODEC_VERIFIER_BINDING_REQUIRED",
                                 json.dumps({
                                   "capability_id":item["selected_capability"],
-                                  "producer_project":producer_project,
+                                  "package":package,
                                   "binary_path":binary_path,
                                 },sort_keys=True)
                             )
-                        actions.append({
-                          "type":"verify_with_independent_pypi_codec",
-                          "args":{
-                            "format":fmt,
-                            "json_path":json_path,
-                            "binary_path":binary_path,
-                            "producer_project":producer_project,
-                            "producer_capability_id":item["selected_capability"],
-                          },
-                          "expect":{"type":"field_equals","field":"verified","value":True},
-                        })
-                        compiled_parts.append({
-                          "index":index,"subgoal":clause,
-                          "mode":"PRODUCER_INDEPENDENT_CODEC_VERIFIER_ACQUISITION",
-                          "producer_capability":item["selected_capability"],
-                          "producer_project":producer_project,
-                          "format":fmt,
-                          "json_path":json_path,
-                          "binary_path":binary_path,
-                        })
-                    else:
                         actions.append({
                           "type":"invoke_capability",
                           "args":{
                             "capability_id":item["selected_capability"],
                             "mode":"decode_verify",
-                            "module":module,
-                            "decode_callable":decode_callable,
-                            "decode_kwargs":decode_kwargs,
-                            "envelope_key":envelope_key,
+                            "package":package,
+                            "root_selector":root_selector,
+                            "encode_export":encode_export,
+                            "decode_export":decode_export,
                             "json_path":json_path,
                             "binary_path":binary_path,
                           },
@@ -3340,14 +3378,14 @@ def _compile_compound_goal(goal, clauses, registry, root):
                         })
                         compiled_parts.append({
                           "index":index,"subgoal":clause,
-                          "mode":"INDEPENDENT_PYTHON_CODEC_ROUNDTRIP_VERIFICATION",
+                          "mode":"FRESH_NODE_CODEC_ROUNDTRIP_VERIFICATION",
                           "selected_capability":item["selected_capability"],
+                          "package":package,
                           "json_path":json_path,
                           "binary_path":binary_path,
-                          "decode_callable":decode_callable,
-                          "envelope_key":envelope_key,
+                          "decode_export":decode_export,
                         })
-                    continue
+                        continue
 
         if re.match(r"^(?:if|otherwise|for\s+every|for\s+each)\b",lower):
             raise GoalCompilationFailure(
