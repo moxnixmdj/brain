@@ -2,13 +2,13 @@
   "adapter": "shell",
   "error": "VERIFICATION_FAILED",
   "mission_id": "ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001",
-  "observed_at_utc": "2026-09-25T02:09:20.331585+00:00",
+  "observed_at_utc": "2026-09-25T02:11:42.288896+00:00",
   "result": {
     "adapter": "shell",
     "command": "set -euo pipefail\npython canonical/runtime/verify_browser_python_release.py",
-    "duration_s": 11.453,
+    "duration_s": 21.87,
     "returncode": 1,
-    "stderr": "Traceback (most recent call last):\n  File \"/home/runner/work/brain/brain/canonical/runtime/verify_browser_python_release.py\", line 111, in <module>\n    main()\n  File \"/home/runner/work/brain/brain/canonical/runtime/verify_browser_python_release.py\", line 73, in main\n    raise RuntimeError(\"INDEPENDENT_STABLE_RELEASE_NOT_FOUND\")\nRuntimeError: INDEPENDENT_STABLE_RELEASE_NOT_FOUND\n",
+    "stderr": "Traceback (most recent call last):\n  File \"/home/runner/work/brain/brain/canonical/runtime/verify_browser_python_release.py\", line 114, in <module>\n    main()\n  File \"/home/runner/work/brain/brain/canonical/runtime/verify_browser_python_release.py\", line 76, in main\n    raise RuntimeError(\"INDEPENDENT_STABLE_RELEASE_NOT_FOUND\")\nRuntimeError: INDEPENDENT_STABLE_RELEASE_NOT_FOUND\n",
     "stdout": ""
   },
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
