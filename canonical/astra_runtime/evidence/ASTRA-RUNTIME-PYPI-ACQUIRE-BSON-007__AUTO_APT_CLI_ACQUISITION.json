@@ -1,0 +1,1375 @@
+{
+  "attempts": [
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "e1e4e607012985ceb365434dd8ec1c6df23e40b8023cc6bc2acddd878d6954c4",
+        "executables": [],
+        "package": "node-strict-uri-encode",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "2.0.0+~2.0.0-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 88.0,
+        "archive_sha256": "e1e4e607012985ceb365434dd8ec1c6df23e40b8023cc6bc2acddd878d6954c4",
+        "binding_kind": "apt",
+        "description": "stricter URI encode adhering to RFC 3986",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "node-strict-uri-encode",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.0.0+~2.0.0-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.bson",
+      "probe": {
+        "archive_sha256": "dcb264b165247d13d4beffc166ecade3ca32ba823d2b2f8c717db64adea00b5e",
+        "executables": [
+          {
+            "executable": "/usr/bin/tablet-encode",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 2,
+                "text": "tablet-encode                              (c) Andrew Flegg 2006, 2008\n~~~~~~~~~~~~~                              Released under the Artistic Licence.\nSyntax:\n    tablet-encode [options] <input> <destination>\n    tablet-encode [options] <input1> [<input2>...] <directory>\n    tablet-encode [options] --list <input1> [<input2> ...]\n\nOptions:\n    -h, --help              This message\n    -g, --gui               Open a graphical interface to tablet-encode\n    -q, --quiet             Be vewwy vewwy quiet\n    -p, --preset=PRESET     Preset to use. Use --preset=list to see them all.\n        --hq                High quality encoding (takes longer).\n    -s, --sample[=SECS]     Produce a SECS second sample encoding. Default: 30.\n    -i, --index             Generate avi file index\n    -7, --770               Use a different FOURCC for better 770 compatibility.\n    -o, --original-aspect   Disable cropping image to better fit screen\n    -c, --copy-audio        Copy the existing audio track\n    -2, --two-pass          Encode in two passes for better quality\n    -m, --mencoder=ARGn     Pass ARGn to mencoder. Can occur multiple times.\n    -t, --subtitle[=FILE]   Embed subtitles in the converted video, from the\n                            specified file, or <file>.srt.\n    -e, --episodes          When auto-detecting DVD track, rip all episodes.\n    -l, --list              Specify that the arguments are a list of files to\n                            encode. Output file is input suffixed with preset.\n\nPlease report bugs to <andrew@bleb.org>. Thanks."
+              }
+            ]
+          }
+        ],
+        "package": "tablet-encode",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "2.30-0.1ubuntu2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 88.0,
+        "archive_sha256": "dcb264b165247d13d4beffc166ecade3ca32ba823d2b2f8c717db64adea00b5e",
+        "binding_kind": "apt",
+        "description": "video converter for Nokia Internet Tablets",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "tablet-encode",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.30-0.1ubuntu2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.bson",
+      "probe": {
+        "archive_sha256": "b08728497d67f09c8554b1a52759e90421a573d7aee1b9d497badbc42e401d14",
+        "executables": [
+          {
+            "executable": "/usr/bin/abcde",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "This is abcde v2.9.3.\nUsage: abcde [options] [tracks]\nOptions:\n-1     Encode the whole CD in a single file\n-a <action1[,action2]...>\n       Actions to perform, comma separated:\n       (cddb,read,getalbumart,embedalbumart,normalize,encode,\n       tag,move,replaygain,playlist,clean)\n-b     Enable batch normalization\n-B     Embed albumart (this also activates getalbumart)\n-c <file>\n       Specify a configuration file (overrides system and user config files)\n-C <discid#>\n       Specify discid to resume from (only needed if you no longer have the cd)\n-d <device>\n       Specify CDROM device to grab (flac uses a single-track flac file)\n-D     Debugging mode (equivalent to sh -x abcde)\n-e     Erase encoded track information from status file\n-f     Force operations that otherwise are considered harmful. Read \"man abcde\"\n-g     Use \"lame --nogap\" for MP3 encoding. Disables low disk and pipes flags\n-G     Get album art by using the 'getalbumart' action\n-h     This help information\n-j <#> Number of encoder processes to run at once (localhost)\n-k     Keep the wav tracks for later use\n-l     Use low disk space algorithm\n-L     Use local CDDB storage directory\n-m     Modify playlist to include CRLF endings, to comply with some players\n-n     No lookup. Don't query CDDB, just create and use template\n-N     Noninteractive. Never prompt for anything\n-o <type1[,type2]...>\n       Output file type(s), comma separated\n       (vorbis,mp3,flac,spx,mpc,wav,m4a,opus,mka,wv,ape,mp2,tta,aiff).\n       Defaults to vorbis\n-p     Pad track numbers with 0's (if less than 10 tracks)\n-P     Use UNIX pipes to read+encode without wav files\n-Q     CD lookup method(s), comma separated\n       (musicbrainz,cddb,cdtext). Defaults to musicbrainz.\n-r <host1[,host2]...>\n       Also encode on these remote hosts\n-s <field>\n       Show fields from the CDDB info (year,genre)\n-S <#> Set the CD speed\n-t <#> Start the track numbering at a given number\n-T <#> Same as -t but modifies tag numbering\n-U     Do NOT use UNICODE (UTF8) tags and comments\n-v     Show version number and exit\n-V     Be a bit more verbose about what is happening behind the scenes\n-x     Eject CD after all tracks are read\n-w <comment>\n       Add a comment to the CD tracks\n-W <#> Concatenate CDs: -T #01 -w \"CD #\"\n-z     Use debug CDROMREADERSYNTAX option (needs cdparanoia)\n\nTracks is a space-delimited list of tracks to grab.\nRanges specified with hyphens are allowed (i.e., 1-5).\n\n\n/usr/bin/abcde: illegal option -- -"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/abcde-musicbrainz-tool",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage:\n     abcde-musicbrainz-tool [options]\n\n     Options:\n       --command {id|data|calcid} mode of operation (default: id)\n       --device <DEV>             read from CD-ROM device DEV (default: /dev/cdrom)\n       --discid <ID>              Disc ID to query with --command data.\n       --discinfo <F> <L> <LI> <LO> <TRK1OFF> [<TRK2OFF> [...]]\n                                  Disc information for --command calcid.\n       --workdir <DIR>            working directory (default: /tmp)\n       --help                     print option summary\n       --man                      full documentation\n\nOptions:\n    --command {id|data|calcid}\n            Select mode of operation:\n\n            id      Read the disc-ID from the disc in the given device, and\n                    print it, the number of tracks, their start sectors, and\n                    the duration of the disc in seconds, to stdout. Format:\n\n                     ID TRACKCOUNT OFFSET1 [OFFSET2 [...]] LENGTH_S\n\n            data    Query MusicBrainz web service and store data into the\n                    workdir into cddbread.1, cddbread.2, ... files in the\n                    workdir.\n\n            calcid  Calculate MusicBrainz ID from given --discinfo data.\n\n    --device\n            Specify CD-ROM drive's device name, to read ID from with\n            --command id.\n\n    --discid\n            Supply disc ID for --command data.\n\n    --discinfo <first track <last track> <lead-in sector> <lead-out sector>\n    <track1 offset> [<track2 offset> [...]]>\n            Supply disc information for --command calcid.\n\n    --workdir directory\n            The cddbread.* output files from --command data go into this\n            directory.\n\n    --help  Print a brief help message and exit.\n\n    --man   Display full manual and exit."
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/cddb-tool",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "cddb-tool version 0.4.7\nusage: one of:\n  /usr/bin/cddb-tool parse file\n  /usr/bin/cddb-tool template disc-id tracks\n  /usr/bin/cddb-tool send file address\n  /usr/bin/cddb-tool read server proto user host disc-id genre\n  /usr/bin/cddb-tool query server proto user host disc-id tracks\n  /usr/bin/cddb-tool stat serverurl user host proto\n  /usr/bin/cddb-tool help"
+              }
+            ]
+          }
+        ],
+        "package": "abcde",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "2.9.3-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 74.0,
+        "archive_sha256": "b08728497d67f09c8554b1a52759e90421a573d7aee1b9d497badbc42e401d14",
+        "binding_kind": "apt",
+        "description": "A Better CD Encoder",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "abcde",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.9.3-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.bson",
+      "probe": {
+        "archive_sha256": "b2f35b2bf364d0a01075094efd1299dee79ecd65787cddcb93b82ca796edfd5c",
+        "executables": [
+          {
+            "executable": "/usr/bin/aften",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "invalid option: --help\n\nAften: A/52 audio encoder\nVersion git\n(c) 2006-2009 Justin Ruggles, Prakash Punnoor, et al.\n\nusage: aften [options] <input.wav> <output.ac3>\ntype 'aften -h' for more details."
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/wavfilter",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "usage: wavfilter <lp | hp> <cutoff> <in.wav> <out.wav>"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/wavrms",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "WavRMS: utility program to calculate AC-3 dialnorm.\n(c) 2006-2007 Justin Ruggles, et al.\n\n\ncannot open file"
+              }
+            ]
+          }
+        ],
+        "package": "aften",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.0.8+git20100105-0ubuntu4"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 74.0,
+        "archive_sha256": "b2f35b2bf364d0a01075094efd1299dee79ecd65787cddcb93b82ca796edfd5c",
+        "binding_kind": "apt",
+        "description": "audio AC3 encoder",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "aften",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.0.8+git20100105-0ubuntu4",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "13650fd102318335c35d0464cb445ec105c74d27ba2684574e9c1c0282adbb24",
+        "executables": [
+          {
+            "executable": "/usr/bin/asunder",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "(asunder:5839): Gtk-WARNING **: 18:59:23.905: cannot open display:"
+              }
+            ]
+          }
+        ],
+        "package": "asunder",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "3.0.1+ds-1build2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 74.0,
+        "archive_sha256": "13650fd102318335c35d0464cb445ec105c74d27ba2684574e9c1c0282adbb24",
+        "binding_kind": "apt",
+        "description": "Graphical audio CD ripper and encoder",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "asunder",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "3.0.1+ds-1build2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.bson",
+      "probe": {
+        "archive_sha256": "720c6de3151b20729695991dc9977eab65565349f1710c8929a6202d1fa17c5f",
+        "executables": [
+          {
+            "executable": "/usr/bin/base16384",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 255,
+                "text": "Copyright (c) 2022-2023 Fumiama Minamoto.\nBase16384 2.2.5 (August 26th 2023). Usage:\nbase16384 [-edt] [inputfile] [outputfile]\n  -e\t\tencode\n  -d\t\tdecode\n  -t\t\tshow spend time\n  inputfile\tpass - to read from stdin\n  outputfile\tpass - to write to stdout"
+              }
+            ]
+          }
+        ],
+        "package": "base16384",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "2.2.5-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 74.0,
+        "archive_sha256": "720c6de3151b20729695991dc9977eab65565349f1710c8929a6202d1fa17c5f",
+        "binding_kind": "apt",
+        "description": "Encode binary files to printable utf16be",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "base16384",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.2.5-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.bson",
+      "probe": {
+        "archive_sha256": "38e1e65759a10db447fa682c7726c26a134c490c11cf9313d9035eaf76869196",
+        "executables": [
+          {
+            "executable": "/usr/bin/base58",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "usage: base58 [-h] [-d] [-c] [FILE]\n\nBase58 encode or decode FILE, or standard input, to standard output.\n\npositional arguments:\n  FILE\n\noptions:\n  -h, --help    show this help message and exit\n  -d, --decode  decode data\n  -c, --check   append a checksum before encoding"
+              }
+            ]
+          }
+        ],
+        "package": "base58",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.0.3-2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 74.0,
+        "archive_sha256": "38e1e65759a10db447fa682c7726c26a134c490c11cf9313d9035eaf76869196",
+        "binding_kind": "apt",
+        "description": "Command line encoder and decoder for Base58 format",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "base58",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.0.3-2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.bson",
+      "probe": {
+        "archive_sha256": "db107d7652eb37680788a6567a58c9a6db10fcad8df05db4009464cb405122de",
+        "executables": [
+          {
+            "executable": "/usr/bin/base16",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: basez  [OPTION]... [FILE]\n   or: hex [OPTION]... [FILE]\n   or: base16 [OPTION]... [FILE]\n   or: base32plain [OPTION]... [FILE]\n   or: base32hex [OPTION]... [FILE]\n   or: base64plain [OPTION]... [FILE]\n   or: base64url [OPTION]... [FILE]\n   or: base64mime [OPTION]... [FILE]\n   or: base64pem [OPTION]... [FILE]\n\nBaseZ encodes/decodes base16, base32, base32hex, base64 or base64url data \nstream per RFC 4648; MIME base64 Content-Transfer-Encoding per RFC 2045; \nor PEM Printable Encoding per RFC 1421.\n\nBase16 encoding produces a multiple of two-character blocks in hexadecimal \nnotation [0-9a-f]. It needs no padding and preserves the sort order of the \nencoded data. Decoding is case insensitive.\n\nBase32 encoded stream is a multiple of eight-character blocks consisting of \nletters and numbers [A-Z2-7]. Numbers easily confused with some letters \nare skipped intentionally to make this encoding suitable for storage on -- \nor transport over -- any medium or data transport mechanism, including \nnon-case-preserving barcodes or printed out strings that could be spelled \nout and typed in by humans. If needed, the last encoded block is padded \nwith equal sign end padding. Appearance of the padding character [=] at the \nend of the encoded steam can be avoided by encoding data of size divisible \nby 5. Base32 decoding is case insensitive.\n\nBase32hex encoding works the same way as base32 but with an alternative \ncharacter-set [0-9a-v] to preserve the encoded data sort order. \nThis encoding should not be confused with base32.\n\nBase64 encoded stream is a multiple of four-character blocks using \nuppercase letters, lowercase letters, numbers, plus and slash \n[A-Za-z0-9+/]. It uses equal sign [=] for end padding. Base64 decoding \nis case sensitive. It has an option to convert local native text line \nbreaks into canonical CRLF sequences prior to encoding or to convert CRLF \nsequences into native text line breaks after the decoding.\n\nBase64url encoding is technically the same as base64 but instead of the \nplus and slash signs [+/] it uses minus and underscore [-_]. Appearance of \nthe padding character [=] in the encoded stream can be avoided by encoding \ndata of size divisible by 3.\n\nBase64mime and base64pem are the same encodes as base64 but with encoded \nstream line length limit of 76 and 64 characters respectively. PEM decoding \nignores all white and non-printable characters; MIME decoding ignores\nall characters outside of the encode character-set.\n\n\nOptions:\nWhen no FILE is specified or when FILE is -, read standard input. \nWhen multiple conflicting options appear, the last option wins.\n\n   -d, -D, --decode\n                    Decode. \n                    By default ignore the space and newline characters. \n                    The --strict, --ignore-all-space, and \n                    --ignore-garbage options provide alternative behaviors. \n                    Default option for unhex command.\n\n   -r, --strict     Do not ignore any characters outside of the encode \n                    character-set on decoding.\n\n   -s, --ignore-all-space\n                    Ignore all white and non-printable ASCII characters \n                    on decoding. Default for base64pem decoding.\n\n   -g, --ignore-garbage\n                    Ignore all characters outside of the encode \n                    character-set on decoding. Default for \n                    base64mime decoding.\n\n   -x, --hex, --base16\n                    Base16 coding. Default for base16, hex and \n                    unhex commands.\n\n   -j, --base32     Base32 coding. Default for base32 and base32plain \n                    commands.\n\n   -e  --base32hex  Base32hex coding. Default for base32hex command.\n\n   -c, --capitals, --upper-case\n                    Output upper case letters on encoding, if applicable.\n\n   -l, --lower-case\n                    Output lower case letters on encoding, if applicable.\n\n   -a, --base64     Base64 coding. Default for basez, base64 and \n                    base64plain commands.\n\n   -u, --base64url  Base64url coding. Default for base64url command.\n\n   -p, --base64pem  PEM printable coding. Default for base64pem command.\n\n   -m, --base64mime\n                    MIME base64 coding. Default for base64mime command.\n\n   -t, --text       Convert native text line breaks into CRLF sequences \n                    prior to encoding or convert CRLF sequences into \n                    native text line breaks after decoding. This option \n                    applies to all variants of base64 codings.\n\n   -w N, -b N, --wrap=N, --break=N\n                    Set encoded stream line length limit to N characters. \n                    The default value is 76 for base64mime encode, 64 for\n                    base64pem encode, infinity for all other encodes.\n                    To disable any appearance of EOL characters in the \n                    encoded stream, set to 0.\n\n   -i FILEIN, --input=FILEIN\n                    Input file. Default is standard input.\n                    When FILEIN is -, read stdin.\n\n   -o FILEOUT, --output=FILEOUT\n                    Output file. Default is standard output.\n                    When FILEOUT is -, write to stdout.\n\n   -h, --help       Display help.\n\n       --version    Display program version information.\n\n\nExamples:\nBase16 decode a string:\n\n    echo 4a6f650a | hex --decode\n\nInspect output of a command:\n\n    echo Joe | hex --wrap 2\n\nBase32 encode a string:\n\n    printf \"Hi People\\n\" | base32plain\n\nMIME base64 encode a binary file to stdout per RFC 2045:\n\n    base64mime FILE\n\nMIME base64 encode a text file to stdout per RFC 2045:\n\n    base64mime --text FILE\n\nBase64 encode a file per RFC 4648\n\n    base64plain FILE > base64.rfc4648.file\n\n\nReport bugs to <bug-basez@quarkline.net> with a 'bug:' somewhere in the subject line.\n\nThese commands are parts of the BaseZ software package.\n\n    [BaseZ]        <http://www.quarkline.net/basez>"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/base32hex",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: basez  [OPTION]... [FILE]\n   or: hex [OPTION]... [FILE]\n   or: base16 [OPTION]... [FILE]\n   or: base32plain [OPTION]... [FILE]\n   or: base32hex [OPTION]... [FILE]\n   or: base64plain [OPTION]... [FILE]\n   or: base64url [OPTION]... [FILE]\n   or: base64mime [OPTION]... [FILE]\n   or: base64pem [OPTION]... [FILE]\n\nBaseZ encodes/decodes base16, base32, base32hex, base64 or base64url data \nstream per RFC 4648; MIME base64 Content-Transfer-Encoding per RFC 2045; \nor PEM Printable Encoding per RFC 1421.\n\nBase16 encoding produces a multiple of two-character blocks in hexadecimal \nnotation [0-9a-f]. It needs no padding and preserves the sort order of the \nencoded data. Decoding is case insensitive.\n\nBase32 encoded stream is a multiple of eight-character blocks consisting of \nletters and numbers [A-Z2-7]. Numbers easily confused with some letters \nare skipped intentionally to make this encoding suitable for storage on -- \nor transport over -- any medium or data transport mechanism, including \nnon-case-preserving barcodes or printed out strings that could be spelled \nout and typed in by humans. If needed, the last encoded block is padded \nwith equal sign end padding. Appearance of the padding character [=] at the \nend of the encoded steam can be avoided by encoding data of size divisible \nby 5. Base32 decoding is case insensitive.\n\nBase32hex encoding works the same way as base32 but with an alternative \ncharacter-set [0-9a-v] to preserve the encoded data sort order. \nThis encoding should not be confused with base32.\n\nBase64 encoded stream is a multiple of four-character blocks using \nuppercase letters, lowercase letters, numbers, plus and slash \n[A-Za-z0-9+/]. It uses equal sign [=] for end padding. Base64 decoding \nis case sensitive. It has an option to convert local native text line \nbreaks into canonical CRLF sequences prior to encoding or to convert CRLF \nsequences into native text line breaks after the decoding.\n\nBase64url encoding is technically the same as base64 but instead of the \nplus and slash signs [+/] it uses minus and underscore [-_]. Appearance of \nthe padding character [=] in the encoded stream can be avoided by encoding \ndata of size divisible by 3.\n\nBase64mime and base64pem are the same encodes as base64 but with encoded \nstream line length limit of 76 and 64 characters respectively. PEM decoding \nignores all white and non-printable characters; MIME decoding ignores\nall characters outside of the encode character-set.\n\n\nOptions:\nWhen no FILE is specified or when FILE is -, read standard input. \nWhen multiple conflicting options appear, the last option wins.\n\n   -d, -D, --decode\n                    Decode. \n                    By default ignore the space and newline characters. \n                    The --strict, --ignore-all-space, and \n                    --ignore-garbage options provide alternative behaviors. \n                    Default option for unhex command.\n\n   -r, --strict     Do not ignore any characters outside of the encode \n                    character-set on decoding.\n\n   -s, --ignore-all-space\n                    Ignore all white and non-printable ASCII characters \n                    on decoding. Default for base64pem decoding.\n\n   -g, --ignore-garbage\n                    Ignore all characters outside of the encode \n                    character-set on decoding. Default for \n                    base64mime decoding.\n\n   -x, --hex, --base16\n                    Base16 coding. Default for base16, hex and \n                    unhex commands.\n\n   -j, --base32     Base32 coding. Default for base32 and base32plain \n                    commands.\n\n   -e  --base32hex  Base32hex coding. Default for base32hex command.\n\n   -c, --capitals, --upper-case\n                    Output upper case letters on encoding, if applicable.\n\n   -l, --lower-case\n                    Output lower case letters on encoding, if applicable.\n\n   -a, --base64     Base64 coding. Default for basez, base64 and \n                    base64plain commands.\n\n   -u, --base64url  Base64url coding. Default for base64url command.\n\n   -p, --base64pem  PEM printable coding. Default for base64pem command.\n\n   -m, --base64mime\n                    MIME base64 coding. Default for base64mime command.\n\n   -t, --text       Convert native text line breaks into CRLF sequences \n                    prior to encoding or convert CRLF sequences into \n                    native text line breaks after decoding. This option \n                    applies to all variants of base64 codings.\n\n   -w N, -b N, --wrap=N, --break=N\n                    Set encoded stream line length limit to N characters. \n                    The default value is 76 for base64mime encode, 64 for\n                    base64pem encode, infinity for all other encodes.\n                    To disable any appearance of EOL characters in the \n                    encoded stream, set to 0.\n\n   -i FILEIN, --input=FILEIN\n                    Input file. Default is standard input.\n                    When FILEIN is -, read stdin.\n\n   -o FILEOUT, --output=FILEOUT\n                    Output file. Default is standard output.\n                    When FILEOUT is -, write to stdout.\n\n   -h, --help       Display help.\n\n       --version    Display program version information.\n\n\nExamples:\nBase16 decode a string:\n\n    echo 4a6f650a | hex --decode\n\nInspect output of a command:\n\n    echo Joe | hex --wrap 2\n\nBase32 encode a string:\n\n    printf \"Hi People\\n\" | base32plain\n\nMIME base64 encode a binary file to stdout per RFC 2045:\n\n    base64mime FILE\n\nMIME base64 encode a text file to stdout per RFC 2045:\n\n    base64mime --text FILE\n\nBase64 encode a file per RFC 4648\n\n    base64plain FILE > base64.rfc4648.file\n\n\nReport bugs to <bug-basez@quarkline.net> with a 'bug:' somewhere in the subject line.\n\nThese commands are parts of the BaseZ software package.\n\n    [BaseZ]        <http://www.quarkline.net/basez>"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/base32plain",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: basez  [OPTION]... [FILE]\n   or: hex [OPTION]... [FILE]\n   or: base16 [OPTION]... [FILE]\n   or: base32plain [OPTION]... [FILE]\n   or: base32hex [OPTION]... [FILE]\n   or: base64plain [OPTION]... [FILE]\n   or: base64url [OPTION]... [FILE]\n   or: base64mime [OPTION]... [FILE]\n   or: base64pem [OPTION]... [FILE]\n\nBaseZ encodes/decodes base16, base32, base32hex, base64 or base64url data \nstream per RFC 4648; MIME base64 Content-Transfer-Encoding per RFC 2045; \nor PEM Printable Encoding per RFC 1421.\n\nBase16 encoding produces a multiple of two-character blocks in hexadecimal \nnotation [0-9a-f]. It needs no padding and preserves the sort order of the \nencoded data. Decoding is case insensitive.\n\nBase32 encoded stream is a multiple of eight-character blocks consisting of \nletters and numbers [A-Z2-7]. Numbers easily confused with some letters \nare skipped intentionally to make this encoding suitable for storage on -- \nor transport over -- any medium or data transport mechanism, including \nnon-case-preserving barcodes or printed out strings that could be spelled \nout and typed in by humans. If needed, the last encoded block is padded \nwith equal sign end padding. Appearance of the padding character [=] at the \nend of the encoded steam can be avoided by encoding data of size divisible \nby 5. Base32 decoding is case insensitive.\n\nBase32hex encoding works the same way as base32 but with an alternative \ncharacter-set [0-9a-v] to preserve the encoded data sort order. \nThis encoding should not be confused with base32.\n\nBase64 encoded stream is a multiple of four-character blocks using \nuppercase letters, lowercase letters, numbers, plus and slash \n[A-Za-z0-9+/]. It uses equal sign [=] for end padding. Base64 decoding \nis case sensitive. It has an option to convert local native text line \nbreaks into canonical CRLF sequences prior to encoding or to convert CRLF \nsequences into native text line breaks after the decoding.\n\nBase64url encoding is technically the same as base64 but instead of the \nplus and slash signs [+/] it uses minus and underscore [-_]. Appearance of \nthe padding character [=] in the encoded stream can be avoided by encoding \ndata of size divisible by 3.\n\nBase64mime and base64pem are the same encodes as base64 but with encoded \nstream line length limit of 76 and 64 characters respectively. PEM decoding \nignores all white and non-printable characters; MIME decoding ignores\nall characters outside of the encode character-set.\n\n\nOptions:\nWhen no FILE is specified or when FILE is -, read standard input. \nWhen multiple conflicting options appear, the last option wins.\n\n   -d, -D, --decode\n                    Decode. \n                    By default ignore the space and newline characters. \n                    The --strict, --ignore-all-space, and \n                    --ignore-garbage options provide alternative behaviors. \n                    Default option for unhex command.\n\n   -r, --strict     Do not ignore any characters outside of the encode \n                    character-set on decoding.\n\n   -s, --ignore-all-space\n                    Ignore all white and non-printable ASCII characters \n                    on decoding. Default for base64pem decoding.\n\n   -g, --ignore-garbage\n                    Ignore all characters outside of the encode \n                    character-set on decoding. Default for \n                    base64mime decoding.\n\n   -x, --hex, --base16\n                    Base16 coding. Default for base16, hex and \n                    unhex commands.\n\n   -j, --base32     Base32 coding. Default for base32 and base32plain \n                    commands.\n\n   -e  --base32hex  Base32hex coding. Default for base32hex command.\n\n   -c, --capitals, --upper-case\n                    Output upper case letters on encoding, if applicable.\n\n   -l, --lower-case\n                    Output lower case letters on encoding, if applicable.\n\n   -a, --base64     Base64 coding. Default for basez, base64 and \n                    base64plain commands.\n\n   -u, --base64url  Base64url coding. Default for base64url command.\n\n   -p, --base64pem  PEM printable coding. Default for base64pem command.\n\n   -m, --base64mime\n                    MIME base64 coding. Default for base64mime command.\n\n   -t, --text       Convert native text line breaks into CRLF sequences \n                    prior to encoding or convert CRLF sequences into \n                    native text line breaks after decoding. This option \n                    applies to all variants of base64 codings.\n\n   -w N, -b N, --wrap=N, --break=N\n                    Set encoded stream line length limit to N characters. \n                    The default value is 76 for base64mime encode, 64 for\n                    base64pem encode, infinity for all other encodes.\n                    To disable any appearance of EOL characters in the \n                    encoded stream, set to 0.\n\n   -i FILEIN, --input=FILEIN\n                    Input file. Default is standard input.\n                    When FILEIN is -, read stdin.\n\n   -o FILEOUT, --output=FILEOUT\n                    Output file. Default is standard output.\n                    When FILEOUT is -, write to stdout.\n\n   -h, --help       Display help.\n\n       --version    Display program version information.\n\n\nExamples:\nBase16 decode a string:\n\n    echo 4a6f650a | hex --decode\n\nInspect output of a command:\n\n    echo Joe | hex --wrap 2\n\nBase32 encode a string:\n\n    printf \"Hi People\\n\" | base32plain\n\nMIME base64 encode a binary file to stdout per RFC 2045:\n\n    base64mime FILE\n\nMIME base64 encode a text file to stdout per RFC 2045:\n\n    base64mime --text FILE\n\nBase64 encode a file per RFC 4648\n\n    base64plain FILE > base64.rfc4648.file\n\n\nReport bugs to <bug-basez@quarkline.net> with a 'bug:' somewhere in the subject line.\n\nThese commands are parts of the BaseZ software package.\n\n    [BaseZ]        <http://www.quarkline.net/basez>"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/base64mime",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: basez  [OPTION]... [FILE]\n   or: hex [OPTION]... [FILE]\n   or: base16 [OPTION]... [FILE]\n   or: base32plain [OPTION]... [FILE]\n   or: base32hex [OPTION]... [FILE]\n   or: base64plain [OPTION]... [FILE]\n   or: base64url [OPTION]... [FILE]\n   or: base64mime [OPTION]... [FILE]\n   or: base64pem [OPTION]... [FILE]\n\nBaseZ encodes/decodes base16, base32, base32hex, base64 or base64url data \nstream per RFC 4648; MIME base64 Content-Transfer-Encoding per RFC 2045; \nor PEM Printable Encoding per RFC 1421.\n\nBase16 encoding produces a multiple of two-character blocks in hexadecimal \nnotation [0-9a-f]. It needs no padding and preserves the sort order of the \nencoded data. Decoding is case insensitive.\n\nBase32 encoded stream is a multiple of eight-character blocks consisting of \nletters and numbers [A-Z2-7]. Numbers easily confused with some letters \nare skipped intentionally to make this encoding suitable for storage on -- \nor transport over -- any medium or data transport mechanism, including \nnon-case-preserving barcodes or printed out strings that could be spelled \nout and typed in by humans. If needed, the last encoded block is padded \nwith equal sign end padding. Appearance of the padding character [=] at the \nend of the encoded steam can be avoided by encoding data of size divisible \nby 5. Base32 decoding is case insensitive.\n\nBase32hex encoding works the same way as base32 but with an alternative \ncharacter-set [0-9a-v] to preserve the encoded data sort order. \nThis encoding should not be confused with base32.\n\nBase64 encoded stream is a multiple of four-character blocks using \nuppercase letters, lowercase letters, numbers, plus and slash \n[A-Za-z0-9+/]. It uses equal sign [=] for end padding. Base64 decoding \nis case sensitive. It has an option to convert local native text line \nbreaks into canonical CRLF sequences prior to encoding or to convert CRLF \nsequences into native text line breaks after the decoding.\n\nBase64url encoding is technically the same as base64 but instead of the \nplus and slash signs [+/] it uses minus and underscore [-_]. Appearance of \nthe padding character [=] in the encoded stream can be avoided by encoding \ndata of size divisible by 3.\n\nBase64mime and base64pem are the same encodes as base64 but with encoded \nstream line length limit of 76 and 64 characters respectively. PEM decoding \nignores all white and non-printable characters; MIME decoding ignores\nall characters outside of the encode character-set.\n\n\nOptions:\nWhen no FILE is specified or when FILE is -, read standard input. \nWhen multiple conflicting options appear, the last option wins.\n\n   -d, -D, --decode\n                    Decode. \n                    By default ignore the space and newline characters. \n                    The --strict, --ignore-all-space, and \n                    --ignore-garbage options provide alternative behaviors. \n                    Default option for unhex command.\n\n   -r, --strict     Do not ignore any characters outside of the encode \n                    character-set on decoding.\n\n   -s, --ignore-all-space\n                    Ignore all white and non-printable ASCII characters \n                    on decoding. Default for base64pem decoding.\n\n   -g, --ignore-garbage\n                    Ignore all characters outside of the encode \n                    character-set on decoding. Default for \n                    base64mime decoding.\n\n   -x, --hex, --base16\n                    Base16 coding. Default for base16, hex and \n                    unhex commands.\n\n   -j, --base32     Base32 coding. Default for base32 and base32plain \n                    commands.\n\n   -e  --base32hex  Base32hex coding. Default for base32hex command.\n\n   -c, --capitals, --upper-case\n                    Output upper case letters on encoding, if applicable.\n\n   -l, --lower-case\n                    Output lower case letters on encoding, if applicable.\n\n   -a, --base64     Base64 coding. Default for basez, base64 and \n                    base64plain commands.\n\n   -u, --base64url  Base64url coding. Default for base64url command.\n\n   -p, --base64pem  PEM printable coding. Default for base64pem command.\n\n   -m, --base64mime\n                    MIME base64 coding. Default for base64mime command.\n\n   -t, --text       Convert native text line breaks into CRLF sequences \n                    prior to encoding or convert CRLF sequences into \n                    native text line breaks after decoding. This option \n                    applies to all variants of base64 codings.\n\n   -w N, -b N, --wrap=N, --break=N\n                    Set encoded stream line length limit to N characters. \n                    The default value is 76 for base64mime encode, 64 for\n                    base64pem encode, infinity for all other encodes.\n                    To disable any appearance of EOL characters in the \n                    encoded stream, set to 0.\n\n   -i FILEIN, --input=FILEIN\n                    Input file. Default is standard input.\n                    When FILEIN is -, read stdin.\n\n   -o FILEOUT, --output=FILEOUT\n                    Output file. Default is standard output.\n                    When FILEOUT is -, write to stdout.\n\n   -h, --help       Display help.\n\n       --version    Display program version information.\n\n\nExamples:\nBase16 decode a string:\n\n    echo 4a6f650a | hex --decode\n\nInspect output of a command:\n\n    echo Joe | hex --wrap 2\n\nBase32 encode a string:\n\n    printf \"Hi People\\n\" | base32plain\n\nMIME base64 encode a binary file to stdout per RFC 2045:\n\n    base64mime FILE\n\nMIME base64 encode a text file to stdout per RFC 2045:\n\n    base64mime --text FILE\n\nBase64 encode a file per RFC 4648\n\n    base64plain FILE > base64.rfc4648.file\n\n\nReport bugs to <bug-basez@quarkline.net> with a 'bug:' somewhere in the subject line.\n\nThese commands are parts of the BaseZ software package.\n\n    [BaseZ]        <http://www.quarkline.net/basez>"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/base64pem",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: basez  [OPTION]... [FILE]\n   or: hex [OPTION]... [FILE]\n   or: base16 [OPTION]... [FILE]\n   or: base32plain [OPTION]... [FILE]\n   or: base32hex [OPTION]... [FILE]\n   or: base64plain [OPTION]... [FILE]\n   or: base64url [OPTION]... [FILE]\n   or: base64mime [OPTION]... [FILE]\n   or: base64pem [OPTION]... [FILE]\n\nBaseZ encodes/decodes base16, base32, base32hex, base64 or base64url data \nstream per RFC 4648; MIME base64 Content-Transfer-Encoding per RFC 2045; \nor PEM Printable Encoding per RFC 1421.\n\nBase16 encoding produces a multiple of two-character blocks in hexadecimal \nnotation [0-9a-f]. It needs no padding and preserves the sort order of the \nencoded data. Decoding is case insensitive.\n\nBase32 encoded stream is a multiple of eight-character blocks consisting of \nletters and numbers [A-Z2-7]. Numbers easily confused with some letters \nare skipped intentionally to make this encoding suitable for storage on -- \nor transport over -- any medium or data transport mechanism, including \nnon-case-preserving barcodes or printed out strings that could be spelled \nout and typed in by humans. If needed, the last encoded block is padded \nwith equal sign end padding. Appearance of the padding character [=] at the \nend of the encoded steam can be avoided by encoding data of size divisible \nby 5. Base32 decoding is case insensitive.\n\nBase32hex encoding works the same way as base32 but with an alternative \ncharacter-set [0-9a-v] to preserve the encoded data sort order. \nThis encoding should not be confused with base32.\n\nBase64 encoded stream is a multiple of four-character blocks using \nuppercase letters, lowercase letters, numbers, plus and slash \n[A-Za-z0-9+/]. It uses equal sign [=] for end padding. Base64 decoding \nis case sensitive. It has an option to convert local native text line \nbreaks into canonical CRLF sequences prior to encoding or to convert CRLF \nsequences into native text line breaks after the decoding.\n\nBase64url encoding is technically the same as base64 but instead of the \nplus and slash signs [+/] it uses minus and underscore [-_]. Appearance of \nthe padding character [=] in the encoded stream can be avoided by encoding \ndata of size divisible by 3.\n\nBase64mime and base64pem are the same encodes as base64 but with encoded \nstream line length limit of 76 and 64 characters respectively. PEM decoding \nignores all white and non-printable characters; MIME decoding ignores\nall characters outside of the encode character-set.\n\n\nOptions:\nWhen no FILE is specified or when FILE is -, read standard input. \nWhen multiple conflicting options appear, the last option wins.\n\n   -d, -D, --decode\n                    Decode. \n                    By default ignore the space and newline characters. \n                    The --strict, --ignore-all-space, and \n                    --ignore-garbage options provide alternative behaviors. \n                    Default option for unhex command.\n\n   -r, --strict     Do not ignore any characters outside of the encode \n                    character-set on decoding.\n\n   -s, --ignore-all-space\n                    Ignore all white and non-printable ASCII characters \n                    on decoding. Default for base64pem decoding.\n\n   -g, --ignore-garbage\n                    Ignore all characters outside of the encode \n                    character-set on decoding. Default for \n                    base64mime decoding.\n\n   -x, --hex, --base16\n                    Base16 coding. Default for base16, hex and \n                    unhex commands.\n\n   -j, --base32     Base32 coding. Default for base32 and base32plain \n                    commands.\n\n   -e  --base32hex  Base32hex coding. Default for base32hex command.\n\n   -c, --capitals, --upper-case\n                    Output upper case letters on encoding, if applicable.\n\n   -l, --lower-case\n                    Output lower case letters on encoding, if applicable.\n\n   -a, --base64     Base64 coding. Default for basez, base64 and \n                    base64plain commands.\n\n   -u, --base64url  Base64url coding. Default for base64url command.\n\n   -p, --base64pem  PEM printable coding. Default for base64pem command.\n\n   -m, --base64mime\n                    MIME base64 coding. Default for base64mime command.\n\n   -t, --text       Convert native text line breaks into CRLF sequences \n                    prior to encoding or convert CRLF sequences into \n                    native text line breaks after decoding. This option \n                    applies to all variants of base64 codings.\n\n   -w N, -b N, --wrap=N, --break=N\n                    Set encoded stream line length limit to N characters. \n                    The default value is 76 for base64mime encode, 64 for\n                    base64pem encode, infinity for all other encodes.\n                    To disable any appearance of EOL characters in the \n                    encoded stream, set to 0.\n\n   -i FILEIN, --input=FILEIN\n                    Input file. Default is standard input.\n                    When FILEIN is -, read stdin.\n\n   -o FILEOUT, --output=FILEOUT\n                    Output file. Default is standard output.\n                    When FILEOUT is -, write to stdout.\n\n   -h, --help       Display help.\n\n       --version    Display program version information.\n\n\nExamples:\nBase16 decode a string:\n\n    echo 4a6f650a | hex --decode\n\nInspect output of a command:\n\n    echo Joe | hex --wrap 2\n\nBase32 encode a string:\n\n    printf \"Hi People\\n\" | base32plain\n\nMIME base64 encode a binary file to stdout per RFC 2045:\n\n    base64mime FILE\n\nMIME base64 encode a text file to stdout per RFC 2045:\n\n    base64mime --text FILE\n\nBase64 encode a file per RFC 4648\n\n    base64plain FILE > base64.rfc4648.file\n\n\nReport bugs to <bug-basez@quarkline.net> with a 'bug:' somewhere in the subject line.\n\nThese commands are parts of the BaseZ software package.\n\n    [BaseZ]        <http://www.quarkline.net/basez>"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/base64plain",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: basez  [OPTION]... [FILE]\n   or: hex [OPTION]... [FILE]\n   or: base16 [OPTION]... [FILE]\n   or: base32plain [OPTION]... [FILE]\n   or: base32hex [OPTION]... [FILE]\n   or: base64plain [OPTION]... [FILE]\n   or: base64url [OPTION]... [FILE]\n   or: base64mime [OPTION]... [FILE]\n   or: base64pem [OPTION]... [FILE]\n\nBaseZ encodes/decodes base16, base32, base32hex, base64 or base64url data \nstream per RFC 4648; MIME base64 Content-Transfer-Encoding per RFC 2045; \nor PEM Printable Encoding per RFC 1421.\n\nBase16 encoding produces a multiple of two-character blocks in hexadecimal \nnotation [0-9a-f]. It needs no padding and preserves the sort order of the \nencoded data. Decoding is case insensitive.\n\nBase32 encoded stream is a multiple of eight-character blocks consisting of \nletters and numbers [A-Z2-7]. Numbers easily confused with some letters \nare skipped intentionally to make this encoding suitable for storage on -- \nor transport over -- any medium or data transport mechanism, including \nnon-case-preserving barcodes or printed out strings that could be spelled \nout and typed in by humans. If needed, the last encoded block is padded \nwith equal sign end padding. Appearance of the padding character [=] at the \nend of the encoded steam can be avoided by encoding data of size divisible \nby 5. Base32 decoding is case insensitive.\n\nBase32hex encoding works the same way as base32 but with an alternative \ncharacter-set [0-9a-v] to preserve the encoded data sort order. \nThis encoding should not be confused with base32.\n\nBase64 encoded stream is a multiple of four-character blocks using \nuppercase letters, lowercase letters, numbers, plus and slash \n[A-Za-z0-9+/]. It uses equal sign [=] for end padding. Base64 decoding \nis case sensitive. It has an option to convert local native text line \nbreaks into canonical CRLF sequences prior to encoding or to convert CRLF \nsequences into native text line breaks after the decoding.\n\nBase64url encoding is technically the same as base64 but instead of the \nplus and slash signs [+/] it uses minus and underscore [-_]. Appearance of \nthe padding character [=] in the encoded stream can be avoided by encoding \ndata of size divisible by 3.\n\nBase64mime and base64pem are the same encodes as base64 but with encoded \nstream line length limit of 76 and 64 characters respectively. PEM decoding \nignores all white and non-printable characters; MIME decoding ignores\nall characters outside of the encode character-set.\n\n\nOptions:\nWhen no FILE is specified or when FILE is -, read standard input. \nWhen multiple conflicting options appear, the last option wins.\n\n   -d, -D, --decode\n                    Decode. \n                    By default ignore the space and newline characters. \n                    The --strict, --ignore-all-space, and \n                    --ignore-garbage options provide alternative behaviors. \n                    Default option for unhex command.\n\n   -r, --strict     Do not ignore any characters outside of the encode \n                    character-set on decoding.\n\n   -s, --ignore-all-space\n                    Ignore all white and non-printable ASCII characters \n                    on decoding. Default for base64pem decoding.\n\n   -g, --ignore-garbage\n                    Ignore all characters outside of the encode \n                    character-set on decoding. Default for \n                    base64mime decoding.\n\n   -x, --hex, --base16\n                    Base16 coding. Default for base16, hex and \n                    unhex commands.\n\n   -j, --base32     Base32 coding. Default for base32 and base32plain \n                    commands.\n\n   -e  --base32hex  Base32hex coding. Default for base32hex command.\n\n   -c, --capitals, --upper-case\n                    Output upper case letters on encoding, if applicable.\n\n   -l, --lower-case\n                    Output lower case letters on encoding, if applicable.\n\n   -a, --base64     Base64 coding. Default for basez, base64 and \n                    base64plain commands.\n\n   -u, --base64url  Base64url coding. Default for base64url command.\n\n   -p, --base64pem  PEM printable coding. Default for base64pem command.\n\n   -m, --base64mime\n                    MIME base64 coding. Default for base64mime command.\n\n   -t, --text       Convert native text line breaks into CRLF sequences \n                    prior to encoding or convert CRLF sequences into \n                    native text line breaks after decoding. This option \n                    applies to all variants of base64 codings.\n\n   -w N, -b N, --wrap=N, --break=N\n                    Set encoded stream line length limit to N characters. \n                    The default value is 76 for base64mime encode, 64 for\n                    base64pem encode, infinity for all other encodes.\n                    To disable any appearance of EOL characters in the \n                    encoded stream, set to 0.\n\n   -i FILEIN, --input=FILEIN\n                    Input file. Default is standard input.\n                    When FILEIN is -, read stdin.\n\n   -o FILEOUT, --output=FILEOUT\n                    Output file. Default is standard output.\n                    When FILEOUT is -, write to stdout.\n\n   -h, --help       Display help.\n\n       --version    Display program version information.\n\n\nExamples:\nBase16 decode a string:\n\n    echo 4a6f650a | hex --decode\n\nInspect output of a command:\n\n    echo Joe | hex --wrap 2\n\nBase32 encode a string:\n\n    printf \"Hi People\\n\" | base32plain\n\nMIME base64 encode a binary file to stdout per RFC 2045:\n\n    base64mime FILE\n\nMIME base64 encode a text file to stdout per RFC 2045:\n\n    base64mime --text FILE\n\nBase64 encode a file per RFC 4648\n\n    base64plain FILE > base64.rfc4648.file\n\n\nReport bugs to <bug-basez@quarkline.net> with a 'bug:' somewhere in the subject line.\n\nThese commands are parts of the BaseZ software package.\n\n    [BaseZ]        <http://www.quarkline.net/basez>"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/base64url",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: basez  [OPTION]... [FILE]\n   or: hex [OPTION]... [FILE]\n   or: base16 [OPTION]... [FILE]\n   or: base32plain [OPTION]... [FILE]\n   or: base32hex [OPTION]... [FILE]\n   or: base64plain [OPTION]... [FILE]\n   or: base64url [OPTION]... [FILE]\n   or: base64mime [OPTION]... [FILE]\n   or: base64pem [OPTION]... [FILE]\n\nBaseZ encodes/decodes base16, base32, base32hex, base64 or base64url data \nstream per RFC 4648; MIME base64 Content-Transfer-Encoding per RFC 2045; \nor PEM Printable Encoding per RFC 1421.\n\nBase16 encoding produces a multiple of two-character blocks in hexadecimal \nnotation [0-9a-f]. It needs no padding and preserves the sort order of the \nencoded data. Decoding is case insensitive.\n\nBase32 encoded stream is a multiple of eight-character blocks consisting of \nletters and numbers [A-Z2-7]. Numbers easily confused with some letters \nare skipped intentionally to make this encoding suitable for storage on -- \nor transport over -- any medium or data transport mechanism, including \nnon-case-preserving barcodes or printed out strings that could be spelled \nout and typed in by humans. If needed, the last encoded block is padded \nwith equal sign end padding. Appearance of the padding character [=] at the \nend of the encoded steam can be avoided by encoding data of size divisible \nby 5. Base32 decoding is case insensitive.\n\nBase32hex encoding works the same way as base32 but with an alternative \ncharacter-set [0-9a-v] to preserve the encoded data sort order. \nThis encoding should not be confused with base32.\n\nBase64 encoded stream is a multiple of four-character blocks using \nuppercase letters, lowercase letters, numbers, plus and slash \n[A-Za-z0-9+/]. It uses equal sign [=] for end padding. Base64 decoding \nis case sensitive. It has an option to convert local native text line \nbreaks into canonical CRLF sequences prior to encoding or to convert CRLF \nsequences into native text line breaks after the decoding.\n\nBase64url encoding is technically the same as base64 but instead of the \nplus and slash signs [+/] it uses minus and underscore [-_]. Appearance of \nthe padding character [=] in the encoded stream can be avoided by encoding \ndata of size divisible by 3.\n\nBase64mime and base64pem are the same encodes as base64 but with encoded \nstream line length limit of 76 and 64 characters respectively. PEM decoding \nignores all white and non-printable characters; MIME decoding ignores\nall characters outside of the encode character-set.\n\n\nOptions:\nWhen no FILE is specified or when FILE is -, read standard input. \nWhen multiple conflicting options appear, the last option wins.\n\n   -d, -D, --decode\n                    Decode. \n                    By default ignore the space and newline characters. \n                    The --strict, --ignore-all-space, and \n                    --ignore-garbage options provide alternative behaviors. \n                    Default option for unhex command.\n\n   -r, --strict     Do not ignore any characters outside of the encode \n                    character-set on decoding.\n\n   -s, --ignore-all-space\n                    Ignore all white and non-printable ASCII characters \n                    on decoding. Default for base64pem decoding.\n\n   -g, --ignore-garbage\n                    Ignore all characters outside of the encode \n                    character-set on decoding. Default for \n                    base64mime decoding.\n\n   -x, --hex, --base16\n                    Base16 coding. Default for base16, hex and \n                    unhex commands.\n\n   -j, --base32     Base32 coding. Default for base32 and base32plain \n                    commands.\n\n   -e  --base32hex  Base32hex coding. Default for base32hex command.\n\n   -c, --capitals, --upper-case\n                    Output upper case letters on encoding, if applicable.\n\n   -l, --lower-case\n                    Output lower case letters on encoding, if applicable.\n\n   -a, --base64     Base64 coding. Default for basez, base64 and \n                    base64plain commands.\n\n   -u, --base64url  Base64url coding. Default for base64url command.\n\n   -p, --base64pem  PEM printable coding. Default for base64pem command.\n\n   -m, --base64mime\n                    MIME base64 coding. Default for base64mime command.\n\n   -t, --text       Convert native text line breaks into CRLF sequences \n                    prior to encoding or convert CRLF sequences into \n                    native text line breaks after decoding. This option \n                    applies to all variants of base64 codings.\n\n   -w N, -b N, --wrap=N, --break=N\n                    Set encoded stream line length limit to N characters. \n                    The default value is 76 for base64mime encode, 64 for\n                    base64pem encode, infinity for all other encodes.\n                    To disable any appearance of EOL characters in the \n                    encoded stream, set to 0.\n\n   -i FILEIN, --input=FILEIN\n                    Input file. Default is standard input.\n                    When FILEIN is -, read stdin.\n\n   -o FILEOUT, --output=FILEOUT\n                    Output file. Default is standard output.\n                    When FILEOUT is -, write to stdout.\n\n   -h, --help       Display help.\n\n       --version    Display program version information.\n\n\nExamples:\nBase16 decode a string:\n\n    echo 4a6f650a | hex --decode\n\nInspect output of a command:\n\n    echo Joe | hex --wrap 2\n\nBase32 encode a string:\n\n    printf \"Hi People\\n\" | base32plain\n\nMIME base64 encode a binary file to stdout per RFC 2045:\n\n    base64mime FILE\n\nMIME base64 encode a text file to stdout per RFC 2045:\n\n    base64mime --text FILE\n\nBase64 encode a file per RFC 4648\n\n    base64plain FILE > base64.rfc4648.file\n\n\nReport bugs to <bug-basez@quarkline.net> with a 'bug:' somewhere in the subject line.\n\nThese commands are parts of the BaseZ software package.\n\n    [BaseZ]        <http://www.quarkline.net/basez>"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/basez",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: basez  [OPTION]... [FILE]\n   or: hex [OPTION]... [FILE]\n   or: base16 [OPTION]... [FILE]\n   or: base32plain [OPTION]... [FILE]\n   or: base32hex [OPTION]... [FILE]\n   or: base64plain [OPTION]... [FILE]\n   or: base64url [OPTION]... [FILE]\n   or: base64mime [OPTION]... [FILE]\n   or: base64pem [OPTION]... [FILE]\n\nBaseZ encodes/decodes base16, base32, base32hex, base64 or base64url data \nstream per RFC 4648; MIME base64 Content-Transfer-Encoding per RFC 2045; \nor PEM Printable Encoding per RFC 1421.\n\nBase16 encoding produces a multiple of two-character blocks in hexadecimal \nnotation [0-9a-f]. It needs no padding and preserves the sort order of the \nencoded data. Decoding is case insensitive.\n\nBase32 encoded stream is a multiple of eight-character blocks consisting of \nletters and numbers [A-Z2-7]. Numbers easily confused with some letters \nare skipped intentionally to make this encoding suitable for storage on -- \nor transport over -- any medium or data transport mechanism, including \nnon-case-preserving barcodes or printed out strings that could be spelled \nout and typed in by humans. If needed, the last encoded block is padded \nwith equal sign end padding. Appearance of the padding character [=] at the \nend of the encoded steam can be avoided by encoding data of size divisible \nby 5. Base32 decoding is case insensitive.\n\nBase32hex encoding works the same way as base32 but with an alternative \ncharacter-set [0-9a-v] to preserve the encoded data sort order. \nThis encoding should not be confused with base32.\n\nBase64 encoded stream is a multiple of four-character blocks using \nuppercase letters, lowercase letters, numbers, plus and slash \n[A-Za-z0-9+/]. It uses equal sign [=] for end padding. Base64 decoding \nis case sensitive. It has an option to convert local native text line \nbreaks into canonical CRLF sequences prior to encoding or to convert CRLF \nsequences into native text line breaks after the decoding.\n\nBase64url encoding is technically the same as base64 but instead of the \nplus and slash signs [+/] it uses minus and underscore [-_]. Appearance of \nthe padding character [=] in the encoded stream can be avoided by encoding \ndata of size divisible by 3.\n\nBase64mime and base64pem are the same encodes as base64 but with encoded \nstream line length limit of 76 and 64 characters respectively. PEM decoding \nignores all white and non-printable characters; MIME decoding ignores\nall characters outside of the encode character-set.\n\n\nOptions:\nWhen no FILE is specified or when FILE is -, read standard input. \nWhen multiple conflicting options appear, the last option wins.\n\n   -d, -D, --decode\n                    Decode. \n                    By default ignore the space and newline characters. \n                    The --strict, --ignore-all-space, and \n                    --ignore-garbage options provide alternative behaviors. \n                    Default option for unhex command.\n\n   -r, --strict     Do not ignore any characters outside of the encode \n                    character-set on decoding.\n\n   -s, --ignore-all-space\n                    Ignore all white and non-printable ASCII characters \n                    on decoding. Default for base64pem decoding.\n\n   -g, --ignore-garbage\n                    Ignore all characters outside of the encode \n                    character-set on decoding. Default for \n                    base64mime decoding.\n\n   -x, --hex, --base16\n                    Base16 coding. Default for base16, hex and \n                    unhex commands.\n\n   -j, --base32     Base32 coding. Default for base32 and base32plain \n                    commands.\n\n   -e  --base32hex  Base32hex coding. Default for base32hex command.\n\n   -c, --capitals, --upper-case\n                    Output upper case letters on encoding, if applicable.\n\n   -l, --lower-case\n                    Output lower case letters on encoding, if applicable.\n\n   -a, --base64     Base64 coding. Default for basez, base64 and \n                    base64plain commands.\n\n   -u, --base64url  Base64url coding. Default for base64url command.\n\n   -p, --base64pem  PEM printable coding. Default for base64pem command.\n\n   -m, --base64mime\n                    MIME base64 coding. Default for base64mime command.\n\n   -t, --text       Convert native text line breaks into CRLF sequences \n                    prior to encoding or convert CRLF sequences into \n                    native text line breaks after decoding. This option \n                    applies to all variants of base64 codings.\n\n   -w N, -b N, --wrap=N, --break=N\n                    Set encoded stream line length limit to N characters. \n                    The default value is 76 for base64mime encode, 64 for\n                    base64pem encode, infinity for all other encodes.\n                    To disable any appearance of EOL characters in the \n                    encoded stream, set to 0.\n\n   -i FILEIN, --input=FILEIN\n                    Input file. Default is standard input.\n                    When FILEIN is -, read stdin.\n\n   -o FILEOUT, --output=FILEOUT\n                    Output file. Default is standard output.\n                    When FILEOUT is -, write to stdout.\n\n   -h, --help       Display help.\n\n       --version    Display program version information.\n\n\nExamples:\nBase16 decode a string:\n\n    echo 4a6f650a | hex --decode\n\nInspect output of a command:\n\n    echo Joe | hex --wrap 2\n\nBase32 encode a string:\n\n    printf \"Hi People\\n\" | base32plain\n\nMIME base64 encode a binary file to stdout per RFC 2045:\n\n    base64mime FILE\n\nMIME base64 encode a text file to stdout per RFC 2045:\n\n    base64mime --text FILE\n\nBase64 encode a file per RFC 4648\n\n    base64plain FILE > base64.rfc4648.file\n\n\nReport bugs to <bug-basez@quarkline.net> with a 'bug:' somewhere in the subject line.\n\nThese commands are parts of the BaseZ software package.\n\n    [BaseZ]        <http://www.quarkline.net/basez>"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/hex",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: basez  [OPTION]... [FILE]\n   or: hex [OPTION]... [FILE]\n   or: base16 [OPTION]... [FILE]\n   or: base32plain [OPTION]... [FILE]\n   or: base32hex [OPTION]... [FILE]\n   or: base64plain [OPTION]... [FILE]\n   or: base64url [OPTION]... [FILE]\n   or: base64mime [OPTION]... [FILE]\n   or: base64pem [OPTION]... [FILE]\n\nBaseZ encodes/decodes base16, base32, base32hex, base64 or base64url data \nstream per RFC 4648; MIME base64 Content-Transfer-Encoding per RFC 2045; \nor PEM Printable Encoding per RFC 1421.\n\nBase16 encoding produces a multiple of two-character blocks in hexadecimal \nnotation [0-9a-f]. It needs no padding and preserves the sort order of the \nencoded data. Decoding is case insensitive.\n\nBase32 encoded stream is a multiple of eight-character blocks consisting of \nletters and numbers [A-Z2-7]. Numbers easily confused with some letters \nare skipped intentionally to make this encoding suitable for storage on -- \nor transport over -- any medium or data transport mechanism, including \nnon-case-preserving barcodes or printed out strings that could be spelled \nout and typed in by humans. If needed, the last encoded block is padded \nwith equal sign end padding. Appearance of the padding character [=] at the \nend of the encoded steam can be avoided by encoding data of size divisible \nby 5. Base32 decoding is case insensitive.\n\nBase32hex encoding works the same way as base32 but with an alternative \ncharacter-set [0-9a-v] to preserve the encoded data sort order. \nThis encoding should not be confused with base32.\n\nBase64 encoded stream is a multiple of four-character blocks using \nuppercase letters, lowercase letters, numbers, plus and slash \n[A-Za-z0-9+/]. It uses equal sign [=] for end padding. Base64 decoding \nis case sensitive. It has an option to convert local native text line \nbreaks into canonical CRLF sequences prior to encoding or to convert CRLF \nsequences into native text line breaks after the decoding.\n\nBase64url encoding is technically the same as base64 but instead of the \nplus and slash signs [+/] it uses minus and underscore [-_]. Appearance of \nthe padding character [=] in the encoded stream can be avoided by encoding \ndata of size divisible by 3.\n\nBase64mime and base64pem are the same encodes as base64 but with encoded \nstream line length limit of 76 and 64 characters respectively. PEM decoding \nignores all white and non-printable characters; MIME decoding ignores\nall characters outside of the encode character-set.\n\n\nOptions:\nWhen no FILE is specified or when FILE is -, read standard input. \nWhen multiple conflicting options appear, the last option wins.\n\n   -d, -D, --decode\n                    Decode. \n                    By default ignore the space and newline characters. \n                    The --strict, --ignore-all-space, and \n                    --ignore-garbage options provide alternative behaviors. \n                    Default option for unhex command.\n\n   -r, --strict     Do not ignore any characters outside of the encode \n                    character-set on decoding.\n\n   -s, --ignore-all-space\n                    Ignore all white and non-printable ASCII characters \n                    on decoding. Default for base64pem decoding.\n\n   -g, --ignore-garbage\n                    Ignore all characters outside of the encode \n                    character-set on decoding. Default for \n                    base64mime decoding.\n\n   -x, --hex, --base16\n                    Base16 coding. Default for base16, hex and \n                    unhex commands.\n\n   -j, --base32     Base32 coding. Default for base32 and base32plain \n                    commands.\n\n   -e  --base32hex  Base32hex coding. Default for base32hex command.\n\n   -c, --capitals, --upper-case\n                    Output upper case letters on encoding, if applicable.\n\n   -l, --lower-case\n                    Output lower case letters on encoding, if applicable.\n\n   -a, --base64     Base64 coding. Default for basez, base64 and \n                    base64plain commands.\n\n   -u, --base64url  Base64url coding. Default for base64url command.\n\n   -p, --base64pem  PEM printable coding. Default for base64pem command.\n\n   -m, --base64mime\n                    MIME base64 coding. Default for base64mime command.\n\n   -t, --text       Convert native text line breaks into CRLF sequences \n                    prior to encoding or convert CRLF sequences into \n                    native text line breaks after decoding. This option \n                    applies to all variants of base64 codings.\n\n   -w N, -b N, --wrap=N, --break=N\n                    Set encoded stream line length limit to N characters. \n                    The default value is 76 for base64mime encode, 64 for\n                    base64pem encode, infinity for all other encodes.\n                    To disable any appearance of EOL characters in the \n                    encoded stream, set to 0.\n\n   -i FILEIN, --input=FILEIN\n                    Input file. Default is standard input.\n                    When FILEIN is -, read stdin.\n\n   -o FILEOUT, --output=FILEOUT\n                    Output file. Default is standard output.\n                    When FILEOUT is -, write to stdout.\n\n   -h, --help       Display help.\n\n       --version    Display program version information.\n\n\nExamples:\nBase16 decode a string:\n\n    echo 4a6f650a | hex --decode\n\nInspect output of a command:\n\n    echo Joe | hex --wrap 2\n\nBase32 encode a string:\n\n    printf \"Hi People\\n\" | base32plain\n\nMIME base64 encode a binary file to stdout per RFC 2045:\n\n    base64mime FILE\n\nMIME base64 encode a text file to stdout per RFC 2045:\n\n    base64mime --text FILE\n\nBase64 encode a file per RFC 4648\n\n    base64plain FILE > base64.rfc4648.file\n\n\nReport bugs to <bug-basez@quarkline.net> with a 'bug:' somewhere in the subject line.\n\nThese commands are parts of the BaseZ software package.\n\n    [BaseZ]        <http://www.quarkline.net/basez>"
+              }
+            ]
+          }
+        ],
+        "package": "basez",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.6.2-3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 74.0,
+        "archive_sha256": "db107d7652eb37680788a6567a58c9a6db10fcad8df05db4009464cb405122de",
+        "binding_kind": "apt",
+        "description": "base 16/32/64 encode/decode data to standard output",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "basez",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.6.2-3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.bson",
+      "probe": {
+        "archive_sha256": "d7b31f464429add360d8f0cb938466d76abc3ca224306a78cf15ff37e7cba5ff",
+        "executables": [
+          {
+            "executable": "/usr/bin/catcodec",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "catcodec version 1.0.5 - Copyright 2009 by Remko Bijker\nUsage:\n  /usr/bin/catcodec -d <sample file>\n    Decode all samples in the sample file and put them in this directory\n  /usr/bin/catcodec -e <sample file>\n    Encode all samples in this directory and put them in the sample file\n\n<sample file> denotes the .cat file you want to work on, e.g. sample.cat\n\ncatcodec is Copyright 2009 by Remko Bijker\nYou may copy and redistribute it under the terms of the GNU General Public\nLicense version 2, as stated in the file 'COPYING'"
+              }
+            ]
+          }
+        ],
+        "package": "catcodec",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.0.5-4"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 74.0,
+        "archive_sha256": "d7b31f464429add360d8f0cb938466d76abc3ca224306a78cf15ff37e7cba5ff",
+        "binding_kind": "apt",
+        "description": "tool to decode/encode the sample catalogue for OpenTTD",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "catcodec",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.0.5-4",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "76dcb71604dfd21859aa8f6b94c8ff14c349340cc86cd3d87e95a63c53adf8d2",
+        "executables": [],
+        "package": "cl-base64",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "3.4.0-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 74.0,
+        "archive_sha256": "76dcb71604dfd21859aa8f6b94c8ff14c349340cc86cd3d87e95a63c53adf8d2",
+        "binding_kind": "apt",
+        "description": "Common Lisp package to encode and decode base64 with URI support",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "cl-base64",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "3.4.0-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "3b9a68f5b2a497cf80c350e2e8b512e7b28a057a9ba6082d3f7faa7bc30a3495",
+        "executables": [],
+        "package": "cl-yason",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.7.6-1.1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 74.0,
+        "archive_sha256": "3b9a68f5b2a497cf80c350e2e8b512e7b28a057a9ba6082d3f7faa7bc30a3495",
+        "binding_kind": "apt",
+        "description": "JSON encoder/decoder for Common Lisp",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "cl-yason",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.7.6-1.1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.bson",
+      "probe": {
+        "archive_sha256": "680f5fd1717566e03cc06af0da7ca20fa2829e40d4fe870a1b47189c0eb73f5e",
+        "executables": [
+          {
+            "executable": "/usr/bin/crip",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "/usr/bin/crip [options]\n\nOptions:\n  -h, --help        Print this help then exit\n  -i, --info        Print crip variable information then exit\n  -v, --version     Print version of crip then exit\n  -e codec          Encode to vorbis or flac (default = vorbis)\n  -s media          Specify the source media (default = CD)\n  -g genre          Specify the music genre (default = classical)\n  -q [on/off]       Classical-style questioning (default = off)\n  -m [on/off]       Map European to American-only chars (default = off)\n  -t [on/off]       Trim leading/trailing silence (default = off)\n  -n [on/off]       Normalize the audio (default = off)\n  -V volthresh      Volume threshold for normalizing (default = 1.078)\n                       (only used when normalizing is enabled)\n  -r [on/off]       Remove files after encoding (default = on)\n  -E editor         Editor to use (default = sensible-editor)\n  -u [on/off/both]  Use editor to name the files (default = on)\n                       (as opposed to the command-line)\n  -o \" flags\"       Flags to pass to oggenc (default = '-q 5')\n  -f \" flags\"       Flags to pass to flac (default = '--best --replay-gain')\n  -c \" flags\"       Flags to pass to cdparanoia (default = '-v -z')\n  -d device         CDrom device to read from (default = /dev/cdrom)\n  -w [on/off]       Skip the ripping (makes empty .wav files) (default = off)\n                       (useful if you already have the .wav files to encode)\n  -p [on/off]       Prompt to continue after ripping (default = off)\n                       (useful pause to edit .wav files before encoding)\n  -x [on/off]       Eject CD when done ripping (default = off)\n  -P proxyserver    Pass an http proxy to CDDB_get if necessary"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/editcomment",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 2,
+                "text": "File \"--help\" does not exist."
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/editfilenames",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage:  /usr/bin/editfilenames [-p] [-h] [filenames]\n\n   Allows you to quickly and conveniently edit the names of a list of files\n   using your favorite editor.  Distributed with crip.\n\nOptions:\n  -p                Prompt for a prefix to put onto all the filenames\n  -h, -?, --help    Print this help then exit"
+              }
+            ]
+          }
+        ],
+        "package": "crip",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "3.9-3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 74.0,
+        "archive_sha256": "680f5fd1717566e03cc06af0da7ca20fa2829e40d4fe870a1b47189c0eb73f5e",
+        "binding_kind": "apt",
+        "description": "terminal-based ripper/encoder/tagger tool",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "crip",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "3.9-3",
+        "zero_cost_eligible": true
+      }
+    }
+  ],
+  "goal": "Encode those exact records as BSON and save canonical/astra_runtime/tmp/BSON_RECORDS.bson",
+  "mission_id": "ASTRA-RUNTIME-PYPI-ACQUIRE-BSON-007",
+  "role_conditioned_discovery": [
+    {
+      "binding_performed": false,
+      "candidate_count": 11,
+      "candidates": [
+        {
+          "archive_sha256": "fc9a955e5d0b1897e2d1535d26f1989d46c66d7926f5fc156d6ab797715862c6",
+          "binding_kind": "apt",
+          "description": "convert between YAML, JSON, TOML and BSON",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "bson"
+          ],
+          "name": "reserialize",
+          "packages": [],
+          "query": "bson",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "20220929-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "caf24888340ece92a548d17d0375f9d9d5df2505950ec3e1c44d8dc981bb73b6",
+          "binding_kind": "apt",
+          "description": "Python3 implementation of BSON for MongoDB",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 2,
+          "matched_terms": [
+            "bson"
+          ],
+          "name": "python3-bson",
+          "packages": [],
+          "query": "bson",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 14,
+          "version": "3.11.0-1ubuntu0.24.04.1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c7cb99548b33446de20a73dfb8da40843a6d19fffccf5d350b9cc96737186811",
+          "binding_kind": "apt",
+          "description": "C-coded extension to the python3-bson package",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 2,
+          "matched_terms": [
+            "bson"
+          ],
+          "name": "python3-bson-ext",
+          "packages": [],
+          "query": "bson",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 14,
+          "version": "3.11.0-1ubuntu0.24.04.1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "50b05fd88cafa44c183303a1cb0f024c6529679a1ac1a35fc81518f6ac197434",
+          "binding_kind": "apt",
+          "description": "Ruby implementation of BSON",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 2,
+          "matched_terms": [
+            "bson"
+          ],
+          "name": "ruby-bson",
+          "packages": [],
+          "query": "bson",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 14,
+          "version": "4.15.0-1build4",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "f24e507b509603456126ebe0832962a532e3c31b8017ec1319ddc583fb84a749",
+          "binding_kind": "apt",
+          "description": "Encoding and decoding support for BSON in Rust - Rust source code",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 4,
+          "matched_terms": [
+            "bson"
+          ],
+          "name": "librust-bson-dev",
+          "packages": [],
+          "query": "bson",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 4,
+          "version": "2.9.0-1build1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "e64bf1aa2e11e5215f0ddf5ffa76538093140db2b3c6b13487b80a5ab0d13a97",
+          "binding_kind": "apt",
+          "description": "Ruby templating library with JSON, BSON, XML and MessagePack support",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 2,
+          "matched_terms": [
+            "bson"
+          ],
+          "name": "ruby-rabl",
+          "packages": [],
+          "query": "bson",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 0,
+          "version": "0.16.1-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "4cd891580b97c0386e9245972ab0f488a172764ecdb1fa4ca334b9b10dca0342",
+          "binding_kind": "apt",
+          "description": "Library to parse and generate BSON documents - runtime files",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 3,
+          "matched_terms": [
+            "bson"
+          ],
+          "name": "libbson-1.0-0t64",
+          "packages": [],
+          "query": "bson",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": -2,
+          "version": "1.26.0-1.1ubuntu2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "a9005f9005080f6aac325404f9c85b00589bb3b8ad0a53654f8e7f53320b4689",
+          "binding_kind": "apt",
+          "description": "BSON serialization and deserialization for Perl",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 3,
+          "matched_terms": [
+            "bson"
+          ],
+          "name": "libbson-perl",
+          "packages": [],
+          "query": "bson",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": -2,
+          "version": "1.12.2-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "126fbe140e7e8c41dae1d70831ba311f009c8149b6a6a8180817573a7b5513fd",
+          "binding_kind": "apt",
+          "description": "Perl XS implementation of MongoDB's BSON serialization",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 3,
+          "matched_terms": [
+            "bson"
+          ],
+          "name": "libbson-xs-perl",
+          "packages": [],
+          "query": "bson",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": -2,
+          "version": "0.8.4-3build1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "000827f613635259cf76f7d02ca60c75c0a6d0537cb43c99aa823232298e3f32",
+          "binding_kind": "apt",
+          "description": "Library to parse and generate BSON documents - dev files",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 4,
+          "matched_terms": [
+            "bson"
+          ],
+          "name": "libbson-dev",
+          "packages": [],
+          "query": "bson",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": -10,
+          "version": "1.26.0-1.1ubuntu2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "5adcb6cee97a35dc2b191069ca548a32a378f53c2ad7a01feb354bb25d35d278",
+          "binding_kind": "apt",
+          "description": "Library to parse and generate BSON documents - documentation",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 4,
+          "matched_terms": [
+            "bson"
+          ],
+          "name": "libbson-doc",
+          "packages": [],
+          "query": "bson",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": -10,
+          "version": "1.26.0-1.1ubuntu2",
+          "zero_cost_eligible": true
+        }
+      ],
+      "effect": "bson",
+      "errors": [],
+      "queries": [
+        "bson"
+      ],
+      "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+      "source": "APT_CATALOG",
+      "source_url": null
+    },
+    {
+      "binding_performed": false,
+      "candidate_count": 24,
+      "candidates": [
+        {
+          "archive_sha256": "f24e507b509603456126ebe0832962a532e3c31b8017ec1319ddc583fb84a749",
+          "binding_kind": "apt",
+          "description": "Encoding and decoding support for BSON in Rust - Rust source code",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 4,
+          "matched_terms": [
+            "bson",
+            "encode"
+          ],
+          "name": "librust-bson-dev",
+          "packages": [],
+          "query": "bson",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 34,
+          "version": "2.9.0-1build1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "e1e4e607012985ceb365434dd8ec1c6df23e40b8023cc6bc2acddd878d6954c4",
+          "binding_kind": "apt",
+          "description": "stricter URI encode adhering to RFC 3986",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "encode"
+          ],
+          "name": "node-strict-uri-encode",
+          "packages": [],
+          "query": "encode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "2.0.0+~2.0.0-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "dcb264b165247d13d4beffc166ecade3ca32ba823d2b2f8c717db64adea00b5e",
+          "binding_kind": "apt",
+          "description": "video converter for Nokia Internet Tablets",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "encode"
+          ],
+          "name": "tablet-encode",
+          "packages": [],
+          "query": "encode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "2.30-0.1ubuntu2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "b08728497d67f09c8554b1a52759e90421a573d7aee1b9d497badbc42e401d14",
+          "binding_kind": "apt",
+          "description": "A Better CD Encoder",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "encode"
+          ],
+          "name": "abcde",
+          "packages": [],
+          "query": "encode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.9.3-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "b2f35b2bf364d0a01075094efd1299dee79ecd65787cddcb93b82ca796edfd5c",
+          "binding_kind": "apt",
+          "description": "audio AC3 encoder",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "encode"
+          ],
+          "name": "aften",
+          "packages": [],
+          "query": "encode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.0.8+git20100105-0ubuntu4",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "13650fd102318335c35d0464cb445ec105c74d27ba2684574e9c1c0282adbb24",
+          "binding_kind": "apt",
+          "description": "Graphical audio CD ripper and encoder",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "encode"
+          ],
+          "name": "asunder",
+          "packages": [],
+          "query": "encode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "3.0.1+ds-1build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "720c6de3151b20729695991dc9977eab65565349f1710c8929a6202d1fa17c5f",
+          "binding_kind": "apt",
+          "description": "Encode binary files to printable utf16be",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "encode"
+          ],
+          "name": "base16384",
+          "packages": [],
+          "query": "encode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.2.5-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "38e1e65759a10db447fa682c7726c26a134c490c11cf9313d9035eaf76869196",
+          "binding_kind": "apt",
+          "description": "Command line encoder and decoder for Base58 format",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "encode"
+          ],
+          "name": "base58",
+          "packages": [],
+          "query": "encode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.0.3-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "db107d7652eb37680788a6567a58c9a6db10fcad8df05db4009464cb405122de",
+          "binding_kind": "apt",
+          "description": "base 16/32/64 encode/decode data to standard output",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "encode"
+          ],
+          "name": "basez",
+          "packages": [],
+          "query": "encode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.6.2-3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "d7b31f464429add360d8f0cb938466d76abc3ca224306a78cf15ff37e7cba5ff",
+          "binding_kind": "apt",
+          "description": "tool to decode/encode the sample catalogue for OpenTTD",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "encode"
+          ],
+          "name": "catcodec",
+          "packages": [],
+          "query": "encode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.0.5-4",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "76dcb71604dfd21859aa8f6b94c8ff14c349340cc86cd3d87e95a63c53adf8d2",
+          "binding_kind": "apt",
+          "description": "Common Lisp package to encode and decode base64 with URI support",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "encode"
+          ],
+          "name": "cl-base64",
+          "packages": [],
+          "query": "encode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "3.4.0-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "3b9a68f5b2a497cf80c350e2e8b512e7b28a057a9ba6082d3f7faa7bc30a3495",
+          "binding_kind": "apt",
+          "description": "JSON encoder/decoder for Common Lisp",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "encode"
+          ],
+          "name": "cl-yason",
+          "packages": [],
+          "query": "encode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.7.6-1.1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "d889a996fbc3d02809fe473b64d1f13fa94bc0673fa2e3a25289e13b0d6f1040",
+          "binding_kind": "apt",
+          "description": "filename encoding conversion tool",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "encode"
+          ],
+          "name": "convmv",
+          "packages": [],
+          "query": "encode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.05-1.1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "680f5fd1717566e03cc06af0da7ca20fa2829e40d4fe870a1b47189c0eb73f5e",
+          "binding_kind": "apt",
+          "description": "terminal-based ripper/encoder/tagger tool",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "encode"
+          ],
+          "name": "crip",
+          "packages": [],
+          "query": "encode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "3.9-3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "55d27feaaf8d5c2ea4f69f7ebfbcaaf0e29093a04d15ea3599196893c350b5db",
+          "binding_kind": "apt",
+          "description": "Encoder and decoder for 3D geometric meshes and point clouds",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "encode"
+          ],
+          "name": "draco",
+          "packages": [],
+          "query": "encode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.5.6+dfsg-3build1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "6eb22d07c81e86257cb9ee3a7a78d0246f8485554ae5984d871d32199290a375",
+          "binding_kind": "apt",
+          "description": "YAML parser and encoder for Elisp",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "encode"
+          ],
+          "name": "elpa-yaml",
+          "packages": [],
+          "query": "encode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.5.5-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "8a9d329f1ccdd398ba84fe8393600b0747aa6dbae64237365b05b41702326553",
+          "binding_kind": "apt",
+          "description": "MIME mail encoding and decoding package for Go (program)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "encode"
+          ],
+          "name": "enmime",
+          "packages": [],
+          "query": "encode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.9.3-5ubuntu0.24.04.3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "3b011097b07e9e3de2b08bcd2babf28a82d8948f6b09549ef15196bfff73ec1a",
+          "binding_kind": "apt",
+          "description": "AAC audio encoder (frontend)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "encode"
+          ],
+          "name": "faac",
+          "packages": [],
+          "query": "encode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.30-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "d286ed21e510c3af09f1e895fc80368474748ae866e17064b1d56c91d73a5868",
+          "binding_kind": "apt",
+          "description": "command line encoder frontend for libfdk-aac",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "encode"
+          ],
+          "name": "fdkaac",
+          "packages": [],
+          "query": "encode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.0.0-1build1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "350f8ee4f504cf48aa0009bf0164caced35e1580a8ca9a4fdc64b3fd62a73b78",
+          "binding_kind": "apt",
+          "description": "Alternative encoder for the Free Lossless Audio Codec",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "encode"
+          ],
+          "name": "flake",
+          "packages": [],
+          "query": "encode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.11-4",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "e4e7a5c7faa1e635953d780aba492ddf6d40188fcecf7f2280f07f014a757838",
+          "binding_kind": "apt",
+          "description": "minimalist audio encoder for generating live streams",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "encode"
+          ],
+          "name": "glasscoder",
+          "packages": [],
+          "query": "encode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.0.1-2build5",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "e4b834081f17a92e9933e961566f1077251326810d1e0c945f8a8155524d0a95",
+          "binding_kind": "apt",
+          "description": "minimalist audio encoder GUI for generating live streams",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "encode"
+          ],
+          "name": "glassgui",
+          "packages": [],
+          "query": "encode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.0.1-2build5",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "10b8e63a940fc890582663aaab1413a97d7c0296e7611d9c39b746f3cc75ee4e",
+          "binding_kind": "apt",
+          "description": "QR Code encoder (Go program)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "encode"
+          ],
+          "name": "go-qrcode",
+          "packages": [],
+          "query": "encode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.0~git20200617.da1b656-4ubuntu0.24.04.3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c6f72cc1e374646e76e77aca8aeedbe85c66141d0a5fe08d04af7ccb84366fc7",
+          "binding_kind": "apt",
+          "description": "Graphical audio CD ripper and encoder",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "encode"
+          ],
+          "name": "grimripper",
+          "packages": [],
+          "query": "encode",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "3.0.2-3build2",
+          "zero_cost_eligible": true
+        }
+      ],
+      "effect": "encode bson",
+      "errors": [],
+      "queries": [
+        "encode",
+        "bson"
+      ],
+      "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+      "source": "APT_CATALOG",
+      "source_url": null
+    }
+  ],
+  "schema": "PROJECT_BRAIN_AUTO_APT_CLI_ACQUISITION_EVIDENCE_V1",
+  "status": "NO_COMPATIBLE_CONTRACT"
+}

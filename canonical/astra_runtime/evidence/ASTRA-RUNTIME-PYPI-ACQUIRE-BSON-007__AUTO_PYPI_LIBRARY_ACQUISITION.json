@@ -1,0 +1,637 @@
+{
+  "attempts": [
+    {
+      "error": "AutoPyPIAcquisitionFailure:PYPI_WHEEL_DOWNLOAD_FAILED:ERROR: Ignored the following versions that require a different python version: 0.2.0 Requires-Python <3.0,>=2.7\nERROR: Could not find a version that satisfies the requirement bson303==0.2.0 (from versions: none)\nERROR: No matching distribution found for bson303==0.2.0\n",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "binding_kind": "pypi",
+        "dependency_count": 0,
+        "description": "",
+        "discovery_source": "PYPI",
+        "eligibility_status": "PYPI_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 1,
+        "license": "",
+        "matched_terms": [
+          "bson"
+        ],
+        "metadata_url": "https://pypi.org/pypi/bson303/0.2.0/json",
+        "name": "bson303",
+        "project": "bson303",
+        "query": "bson303",
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "requires_python": ">=2.7,<3.0",
+        "score": 172,
+        "version": "0.2.0",
+        "wheels": [
+          {
+            "filename": "bson303-0.2.0-py2.py3-none-any.whl",
+            "python_version": "py2.py3",
+            "sha256": "d7fda701fe50ac70c7aedb003af1e24b5e0bee971dea5d01d7525c9bf08739eb",
+            "size": 72131,
+            "url": "https://files.pythonhosted.org/packages/fb/e4/c19160116513555b7139a09c6a37616687b11c7628e73e28afe1b3b8d654/bson303-0.2.0-py2.py3-none-any.whl"
+          }
+        ],
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "AutoPyPIAcquisitionFailure:NO_COMPATIBLE_PYPI_CODEC_CONTRACT:[{\"error\": \"ModuleNotFoundError\", \"module\": \"bsonschema\", \"status\": \"IMPORT_FAILED\"}]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "binding_kind": "pypi",
+        "dependency_count": 0,
+        "description": "Validation similar to bsonschema using BSON types",
+        "discovery_source": "PYPI",
+        "eligibility_status": "PYPI_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 1,
+        "license": "",
+        "matched_terms": [
+          "bson"
+        ],
+        "metadata_url": "https://pypi.org/pypi/bsonschema/0.0.0/json",
+        "name": "bsonschema",
+        "project": "bsonschema",
+        "query": "bsonschema",
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "requires_python": ">=3.8",
+        "score": 172,
+        "version": "0.0.0",
+        "wheels": [
+          {
+            "filename": "bsonschema-0.0.0-py3-none-any.whl",
+            "python_version": "py3",
+            "sha256": "0e0618e0d6f2570b15f40e74113fac9b2357e88ea39cb35cdf0988ca67afb05b",
+            "size": 24591,
+            "url": "https://files.pythonhosted.org/packages/bd/cb/1f095d7798d51a91b021b51ae78f54b0eee433480f4901ca4ab88d32a06e/bsonschema-0.0.0-py3-none-any.whl"
+          }
+        ],
+        "zero_cost_eligible": true
+      },
+      "wheel": {
+        "bytes": 24591,
+        "filename": "bsonschema-0.0.0-py3-none-any.whl",
+        "sha256": "0e0618e0d6f2570b15f40e74113fac9b2357e88ea39cb35cdf0988ca67afb05b",
+        "url": "https://files.pythonhosted.org/packages/bd/cb/1f095d7798d51a91b021b51ae78f54b0eee433480f4901ca4ab88d32a06e/bsonschema-0.0.0-py3-none-any.whl"
+      }
+    },
+    {
+      "error": "AutoPyPIAcquisitionFailure:NO_COMPATIBLE_PYPI_CODEC_CONTRACT:[]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "binding_kind": "pypi",
+        "dependency_count": 0,
+        "description": "compare BSON/JSON documents locally",
+        "discovery_source": "PYPI",
+        "eligibility_status": "PYPI_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 1,
+        "license": null,
+        "matched_terms": [
+          "bson"
+        ],
+        "metadata_url": "https://pypi.org/pypi/bsonsearch/2.2.1/json",
+        "name": "bsonsearch",
+        "project": "bsonsearch",
+        "query": "bsonsearch",
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "requires_python": ">=3.11",
+        "score": 172,
+        "version": "2.2.1",
+        "wheels": [
+          {
+            "filename": "bsonsearch-2.2.1-cp311-cp311-macosx_10_9_x86_64.whl",
+            "python_version": "cp311",
+            "sha256": "902cf4587ce8da940f33219426098216e92b646c5d0c36de13e7054c826be88b",
+            "size": 810203,
+            "url": "https://files.pythonhosted.org/packages/92/d1/759456dfa37ed804f174348b427800d51bde9038c002241eba09f1066f07/bsonsearch-2.2.1-cp311-cp311-macosx_10_9_x86_64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp311-cp311-macosx_11_0_arm64.whl",
+            "python_version": "cp311",
+            "sha256": "755eefbb74f83e816d9e6b0990d79eb7f64c007b3d89bd42b19dd055df034205",
+            "size": 726641,
+            "url": "https://files.pythonhosted.org/packages/b5/0f/94629068ebd6eaa9f2e268cd15b7146d055129714883d71174a35c36b378/bsonsearch-2.2.1-cp311-cp311-macosx_11_0_arm64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp311-cp311-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl",
+            "python_version": "cp311",
+            "sha256": "9cfd3d8314fca116ee90b03ab5490fe47184d23298816a43efca48b7f952bd89",
+            "size": 1489315,
+            "url": "https://files.pythonhosted.org/packages/cc/ba/873606d22c895295891fae81434fd7a735f2ac2dfebd280d29850ad2ed9b/bsonsearch-2.2.1-cp311-cp311-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp311-cp311-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl",
+            "python_version": "cp311",
+            "sha256": "5e6638e4b0c498984ea8829623b391baeeb75dd39d775d821e4dfa254c87f949",
+            "size": 1571241,
+            "url": "https://files.pythonhosted.org/packages/23/8d/8fdd6946f389bc7185d4c6bc81bf5642c25d663c2bed6f15a318ff290447/bsonsearch-2.2.1-cp311-cp311-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp311-cp311-musllinux_1_2_aarch64.whl",
+            "python_version": "cp311",
+            "sha256": "8486fe4b8ad66795f21b575ba386c0ad29b201facc58d66ff713b7e75b378aed",
+            "size": 1465768,
+            "url": "https://files.pythonhosted.org/packages/d2/59/9208399b218d53b78b2437db164808c8867bda6b7b3f489bc9dca1307237/bsonsearch-2.2.1-cp311-cp311-musllinux_1_2_aarch64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp311-cp311-musllinux_1_2_x86_64.whl",
+            "python_version": "cp311",
+            "sha256": "5075e5d128c429511e456183999b2c1f0e6b897a863238d14c77278c9c96e721",
+            "size": 1565188,
+            "url": "https://files.pythonhosted.org/packages/60/73/af0b6775ab42c1790cfce64134deaaa36448977f124b6df36c11ba0ea54d/bsonsearch-2.2.1-cp311-cp311-musllinux_1_2_x86_64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp312-cp312-macosx_10_13_x86_64.whl",
+            "python_version": "cp312",
+            "sha256": "59280c61b8322d1b8ad273c23c7f234dd5b0081107d12a35a688e04f2ecc8ee1",
+            "size": 810105,
+            "url": "https://files.pythonhosted.org/packages/bc/d2/50a95596d31f41760b632540196222fcba739d72af3a5045cea623166fe0/bsonsearch-2.2.1-cp312-cp312-macosx_10_13_x86_64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp312-cp312-macosx_11_0_arm64.whl",
+            "python_version": "cp312",
+            "sha256": "9a52f816a1c4b3f5492ffa7d3179e3d307cab8a3445db09472816b2b789c62a3",
+            "size": 726631,
+            "url": "https://files.pythonhosted.org/packages/b9/4d/fbf9071e3d447ce014b2d1c9c18f5f7c1da7e207c3f9a82a1012c59c431f/bsonsearch-2.2.1-cp312-cp312-macosx_11_0_arm64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp312-cp312-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl",
+            "python_version": "cp312",
+            "sha256": "bc233cc5a534cd4a671af1e696a0c5664a3a03d8326088cb8d02b6fe5cff490c",
+            "size": 1489701,
+            "url": "https://files.pythonhosted.org/packages/4f/62/fe6957f2483893796d844cf2f716dcaed60071a2b8b0203b3c640ccad9f6/bsonsearch-2.2.1-cp312-cp312-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp312-cp312-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl",
+            "python_version": "cp312",
+            "sha256": "29677767cf306a8e8885b1fbac01c1e11d9c54147fb6316f30e81274a0c1de51",
+            "size": 1571752,
+            "url": "https://files.pythonhosted.org/packages/d0/ae/ee0d691b95401f8363b44049d40a06b869a20452a1ca6451be27247eafb6/bsonsearch-2.2.1-cp312-cp312-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp312-cp312-musllinux_1_2_aarch64.whl",
+            "python_version": "cp312",
+            "sha256": "04e3a83875ebf1e9c68c1f6a796f3dd558e542d28c36d3ff4411435e16499e8d",
+            "size": 1466092,
+            "url": "https://files.pythonhosted.org/packages/f0/dc/8a593244f2921f455595467c0c0209cde0da14dd3913ceb52b81d2d3caae/bsonsearch-2.2.1-cp312-cp312-musllinux_1_2_aarch64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp312-cp312-musllinux_1_2_x86_64.whl",
+            "python_version": "cp312",
+            "sha256": "b3832c1179d771e45217825155da32046df7cf81b568ad33018b339c68ac4967",
+            "size": 1565653,
+            "url": "https://files.pythonhosted.org/packages/92/b1/362acc47286f1c628013975f1cf2eaf5a975029f89932075aa4b4c4373e7/bsonsearch-2.2.1-cp312-cp312-musllinux_1_2_x86_64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp313-cp313-macosx_10_13_x86_64.whl",
+            "python_version": "cp313",
+            "sha256": "f011b8b4c4896beff301b9ba14c25e1807e18cbcfb78d205432a25ad17aeaba2",
+            "size": 810095,
+            "url": "https://files.pythonhosted.org/packages/1d/6c/d65b2daa02b05d0140e871577764e61c14c3be67520c702a6f085d18605e/bsonsearch-2.2.1-cp313-cp313-macosx_10_13_x86_64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp313-cp313-macosx_11_0_arm64.whl",
+            "python_version": "cp313",
+            "sha256": "82b1e258e896b374053acad9d75ce2c17e71d9614a1d45f4c8a6f3e06af69714",
+            "size": 726631,
+            "url": "https://files.pythonhosted.org/packages/76/52/e8d44691f3259f538f999d90ba2e65635cb525be5c17a65fdc7ca5910a90/bsonsearch-2.2.1-cp313-cp313-macosx_11_0_arm64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp313-cp313-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl",
+            "python_version": "cp313",
+            "sha256": "ed72bf26156f565c5f1daabaeddce25faf263d7063617c425d974baa11315ef4",
+            "size": 1489747,
+            "url": "https://files.pythonhosted.org/packages/f0/a7/50315b83481ee8801a15ae9768642d33cdc6ccbcc3598cd7c0284fc623c6/bsonsearch-2.2.1-cp313-cp313-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp313-cp313-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl",
+            "python_version": "cp313",
+            "sha256": "47316bef121a98e0c0ba0880f6757872ec25ca90e02250109beb4d6f3fdc164a",
+            "size": 1571795,
+            "url": "https://files.pythonhosted.org/packages/a1/ab/ae275cf9e16c6a9fe21511dfa8dc721f8271ae3a79d637070054243b67b9/bsonsearch-2.2.1-cp313-cp313-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp313-cp313-musllinux_1_2_aarch64.whl",
+            "python_version": "cp313",
+            "sha256": "e4ae9fca591ffbf5d6793516f390cfd544f6c7d0a7df36ff413ddc7bea344996",
+            "size": 1466109,
+            "url": "https://files.pythonhosted.org/packages/d4/11/d3154bdb953a1b17bf5c56d437b0a0926523950f94edef53115928b40617/bsonsearch-2.2.1-cp313-cp313-musllinux_1_2_aarch64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp313-cp313-musllinux_1_2_x86_64.whl",
+            "python_version": "cp313",
+            "sha256": "9c4e3370ee346e38953228030a9a57db45b18846e8df12e89671091ca936d020",
+            "size": 1565700,
+            "url": "https://files.pythonhosted.org/packages/be/12/7742d7abe3565f70ab21312b14eec9aafccf6a4cdfe451c541aa661334f1/bsonsearch-2.2.1-cp313-cp313-musllinux_1_2_x86_64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp314-cp314-macosx_10_15_x86_64.whl",
+            "python_version": "cp314",
+            "sha256": "c502f69d8e5a114e6d6812160f6e77ba0b4ebb277191392d18eb7e9b6a7c9055",
+            "size": 810211,
+            "url": "https://files.pythonhosted.org/packages/78/51/d660b345405c2b13984ae81e8faf6fa080dbf760bf0e97f6db228fd35c2a/bsonsearch-2.2.1-cp314-cp314-macosx_10_15_x86_64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp314-cp314-macosx_11_0_arm64.whl",
+            "python_version": "cp314",
+            "sha256": "ec3287f8f226b87fe459de6b84d5a1fa1dd49f4984f2b027e870975393adfcc9",
+            "size": 726637,
+            "url": "https://files.pythonhosted.org/packages/6d/98/2427ea1bb7eb96bc10dbf7b429d5f048cdfd67d7b9d5a04bc149a99f7c03/bsonsearch-2.2.1-cp314-cp314-macosx_11_0_arm64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp314-cp314-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl",
+            "python_version": "cp314",
+            "sha256": "a0fc1c2d3e08df77018880cd112e7c58878dece04d0145fb216e95db0c861636",
+            "size": 1489759,
+            "url": "https://files.pythonhosted.org/packages/30/bf/fe9fe00d71284c822412ca715e34882788cf1c6b6c005b1514f4297af841/bsonsearch-2.2.1-cp314-cp314-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp314-cp314-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl",
+            "python_version": "cp314",
+            "sha256": "e2e1be5f9b129d136e0e49b5eb46dad08a83d62cd8f61061c95f35903949e16e",
+            "size": 1571782,
+            "url": "https://files.pythonhosted.org/packages/66/d3/b08d202761c01ea724681ce832e943af0260ea99bd22bd656123d44b7abd/bsonsearch-2.2.1-cp314-cp314-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp314-cp314-musllinux_1_2_aarch64.whl",
+            "python_version": "cp314",
+            "sha256": "0e01437df70b1f302e2a263e1b146cbabfe0c069fb892e91b6e78f3e1b7c30ef",
+            "size": 1466122,
+            "url": "https://files.pythonhosted.org/packages/6d/e2/43335ed70715bf6be8d0a5a9fe2d161f12cdff917ee56d738b56343ccaa2/bsonsearch-2.2.1-cp314-cp314-musllinux_1_2_aarch64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp314-cp314-musllinux_1_2_x86_64.whl",
+            "python_version": "cp314",
+            "sha256": "39cbb49a13f2846323d1e1642a1ba41fbb7418cf0c93450bc6829fc5a7b77b6d",
+            "size": 1565718,
+            "url": "https://files.pythonhosted.org/packages/9b/3e/c12587d19dfdba94a28c434d47aa6e670559ccc4685bd0061eb4a4b66d65/bsonsearch-2.2.1-cp314-cp314-musllinux_1_2_x86_64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp314-cp314t-macosx_10_15_x86_64.whl",
+            "python_version": "cp314",
+            "sha256": "5373daa0ae87deb9556cbf34d46d4b620eb7f674c3ca59d308efa8c8b2b45e62",
+            "size": 810438,
+            "url": "https://files.pythonhosted.org/packages/ee/ca/cba1b82a7352c4cfacebde63bac9cc1e5284d65ca1f8f3dbc8a31267ce82/bsonsearch-2.2.1-cp314-cp314t-macosx_10_15_x86_64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp314-cp314t-macosx_11_0_arm64.whl",
+            "python_version": "cp314",
+            "sha256": "a3b6da8d30d47aab3b6fe01bf66a91d686a73586611426fc6af3429869c8adff",
+            "size": 726858,
+            "url": "https://files.pythonhosted.org/packages/d4/ad/afd973c5bb09933e3b99797d1f6ce12b568aeb4c4fc011169ba89f1ada31/bsonsearch-2.2.1-cp314-cp314t-macosx_11_0_arm64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp314-cp314t-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl",
+            "python_version": "cp314",
+            "sha256": "293cb38a5af5b654b85422ad011aa8db9b428f8ee0779f80b05ffa459e8e0f46",
+            "size": 1492047,
+            "url": "https://files.pythonhosted.org/packages/88/6a/9709d6f389a1d85dff94b356a9a6c195b464fb777329ff25582ee4d39cb1/bsonsearch-2.2.1-cp314-cp314t-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp314-cp314t-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl",
+            "python_version": "cp314",
+            "sha256": "5ed50c5e33b599d46c7ffcaeb49c1e146db9ff25321397dc5e4cb25236a4690b",
+            "size": 1573774,
+            "url": "https://files.pythonhosted.org/packages/d3/ef/abce4ae3da29701a051f9333c359353e455c87e743270352dc28adcadcf4/bsonsearch-2.2.1-cp314-cp314t-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp314-cp314t-musllinux_1_2_aarch64.whl",
+            "python_version": "cp314",
+            "sha256": "c1919998e46d5b0ae618c254f409b51a37aa3ce4d7485a7a512ab87f995fcb4f",
+            "size": 1468318,
+            "url": "https://files.pythonhosted.org/packages/94/8e/9b84ca30d761e1c30ec97e72ed7e37a9c1faa9aa0c5953a60230971b8cd6/bsonsearch-2.2.1-cp314-cp314t-musllinux_1_2_aarch64.whl"
+          },
+          {
+            "filename": "bsonsearch-2.2.1-cp314-cp314t-musllinux_1_2_x86_64.whl",
+            "python_version": "cp314",
+            "sha256": "4c9a67eb6f44d55cca269ebb6541a1687534dc36003543535c4946c2f21ee2cd",
+            "size": 1567627,
+            "url": "https://files.pythonhosted.org/packages/65/f8/4a2808619794d6c19c5d28d292bc87a0d03f0b8b9ffc7f0378326484d36a/bsonsearch-2.2.1-cp314-cp314t-musllinux_1_2_x86_64.whl"
+          }
+        ],
+        "zero_cost_eligible": true
+      },
+      "wheel": {
+        "bytes": 1571752,
+        "filename": "bsonsearch-2.2.1-cp312-cp312-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl",
+        "sha256": "29677767cf306a8e8885b1fbac01c1e11d9c54147fb6316f30e81274a0c1de51",
+        "url": "https://files.pythonhosted.org/packages/d0/ae/ee0d691b95401f8363b44049d40a06b869a20452a1ca6451be27247eafb6/bsonsearch-2.2.1-cp312-cp312-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl"
+      }
+    },
+    {
+      "error": "AutoPyPIAcquisitionFailure:NO_COMPATIBLE_PYPI_CODEC_CONTRACT:[]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "binding_kind": "pypi",
+        "dependency_count": 0,
+        "description": "A Python package for designing influenza reverse genetics                  primers using the seamless cloning methods (e.g. Gibson                  assembly, CPEC assembly).",
+        "discovery_source": "PYPI",
+        "eligibility_status": "PYPI_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 1,
+        "license": "MIT",
+        "matched_terms": [
+          "bson"
+        ],
+        "metadata_url": "https://pypi.org/pypi/FluGibson/1.2/json",
+        "name": "FluGibson",
+        "project": "FluGibson",
+        "query": "FluGibson",
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "requires_python": null,
+        "score": 107,
+        "version": "1.2",
+        "wheels": [
+          {
+            "filename": "FluGibson-1.2-py3-none-any.whl",
+            "python_version": "py3",
+            "sha256": "f79e7e73e0710023eaebaa9a08dcb3c72d60a23577aafbd2e77334fe180b03fa",
+            "size": 24827,
+            "url": "https://files.pythonhosted.org/packages/1a/ec/a94fff9c8ec5923a96cbfab5113dff37237c85ddd445094138c7f053aa1d/FluGibson-1.2-py3-none-any.whl"
+          }
+        ],
+        "zero_cost_eligible": true
+      },
+      "wheel": {
+        "bytes": 24827,
+        "filename": "FluGibson-1.2-py3-none-any.whl",
+        "sha256": "f79e7e73e0710023eaebaa9a08dcb3c72d60a23577aafbd2e77334fe180b03fa",
+        "url": "https://files.pythonhosted.org/packages/1a/ec/a94fff9c8ec5923a96cbfab5113dff37237c85ddd445094138c7f053aa1d/FluGibson-1.2-py3-none-any.whl"
+      }
+    },
+    {
+      "error": "AutoPyPIAcquisitionFailure:NO_COMPATIBLE_PYPI_CODEC_CONTRACT:[]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "binding_kind": "pypi",
+        "dependency_count": 0,
+        "description": "A small example package",
+        "discovery_source": "PYPI",
+        "eligibility_status": "PYPI_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 1,
+        "license": "",
+        "matched_terms": [
+          "bson"
+        ],
+        "metadata_url": "https://pypi.org/pypi/adamdobson2048/0.0.1/json",
+        "name": "adamdobson2048",
+        "project": "adamdobson2048",
+        "query": "adamdobson2048",
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "requires_python": ">=3.7",
+        "score": 107,
+        "version": "0.0.1",
+        "wheels": [
+          {
+            "filename": "adamdobson2048-0.0.1-py3-none-any.whl",
+            "python_version": "py3",
+            "sha256": "07d8b63a78f629cbc42d48e4dd8cca626aa231687c3c13b2461091f25f735ba3",
+            "size": 6149,
+            "url": "https://files.pythonhosted.org/packages/76/84/c98479a6990da90f579469d6d241227ac0defb7485f24351f2677be6ce2f/adamdobson2048-0.0.1-py3-none-any.whl"
+          }
+        ],
+        "zero_cost_eligible": true
+      },
+      "wheel": {
+        "bytes": 6149,
+        "filename": "adamdobson2048-0.0.1-py3-none-any.whl",
+        "sha256": "07d8b63a78f629cbc42d48e4dd8cca626aa231687c3c13b2461091f25f735ba3",
+        "url": "https://files.pythonhosted.org/packages/76/84/c98479a6990da90f579469d6d241227ac0defb7485f24351f2677be6ce2f/adamdobson2048-0.0.1-py3-none-any.whl"
+      }
+    },
+    {
+      "error": "AutoPyPIAcquisitionFailure:NO_COMPATIBLE_PYPI_CODEC_CONTRACT:[{\"error\": \"AttributeError\", \"module\": \"aiobsonrpc\", \"status\": \"IMPORT_FAILED\"}]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "binding_kind": "pypi",
+        "dependency_count": 0,
+        "description": "A Python library for JSON-RPC 2.0",
+        "discovery_source": "PYPI",
+        "eligibility_status": "PYPI_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 1,
+        "license": "",
+        "matched_terms": [
+          "bson"
+        ],
+        "metadata_url": "https://pypi.org/pypi/aiobsonrpc/0.0.4/json",
+        "name": "aiobsonrpc",
+        "project": "aiobsonrpc",
+        "query": "aiobsonrpc",
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "requires_python": "",
+        "score": 107,
+        "version": "0.0.4",
+        "wheels": [
+          {
+            "filename": "aiobsonrpc-0.0.4-py3-none-any.whl",
+            "python_version": "py3",
+            "sha256": "f4c2a0051151f82aee11c9d7b6fc25fd926d1387942a4c803b3534f397f6cdae",
+            "size": 12155,
+            "url": "https://files.pythonhosted.org/packages/3f/6a/dbfe6dd4b1c487db7460c81b241c6e2c84489c0ca4dc30b24d71534bec29/aiobsonrpc-0.0.4-py3-none-any.whl"
+          }
+        ],
+        "zero_cost_eligible": true
+      },
+      "wheel": {
+        "bytes": 12155,
+        "filename": "aiobsonrpc-0.0.4-py3-none-any.whl",
+        "sha256": "f4c2a0051151f82aee11c9d7b6fc25fd926d1387942a4c803b3534f397f6cdae",
+        "url": "https://files.pythonhosted.org/packages/3f/6a/dbfe6dd4b1c487db7460c81b241c6e2c84489c0ca4dc30b24d71534bec29/aiobsonrpc-0.0.4-py3-none-any.whl"
+      }
+    },
+    {
+      "error": "AutoPyPIAcquisitionFailure:NO_COMPATIBLE_PYPI_CODEC_CONTRACT:[]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "binding_kind": "pypi",
+        "dependency_count": 0,
+        "description": "",
+        "discovery_source": "PYPI",
+        "eligibility_status": "PYPI_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 1,
+        "license": "",
+        "matched_terms": [
+          "bson"
+        ],
+        "metadata_url": "https://pypi.org/pypi/dbson/0.0.1/json",
+        "name": "dbson",
+        "project": "dbson",
+        "query": "dbson",
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "requires_python": "",
+        "score": 107,
+        "version": "0.0.1",
+        "wheels": [
+          {
+            "filename": "dbson-0.0.1-py3-none-any.whl",
+            "python_version": "py3",
+            "sha256": "0c2a00b0b0d71330617ee45890c2c353ab5bb9d21de3f3a5ce55140767eff655",
+            "size": 4644,
+            "url": "https://files.pythonhosted.org/packages/4d/b6/d1ac6049c72cb927c09031a17525e19297e06e0ac5d3932c878c0d88d943/dbson-0.0.1-py3-none-any.whl"
+          }
+        ],
+        "zero_cost_eligible": true
+      },
+      "wheel": {
+        "bytes": 4644,
+        "filename": "dbson-0.0.1-py3-none-any.whl",
+        "sha256": "0c2a00b0b0d71330617ee45890c2c353ab5bb9d21de3f3a5ce55140767eff655",
+        "url": "https://files.pythonhosted.org/packages/4d/b6/d1ac6049c72cb927c09031a17525e19297e06e0ac5d3932c878c0d88d943/dbson-0.0.1-py3-none-any.whl"
+      }
+    },
+    {
+      "error": "AutoPyPIAcquisitionFailure:NO_COMPATIBLE_PYPI_CODEC_CONTRACT:[]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "binding_kind": "pypi",
+        "dependency_count": 0,
+        "description": "A small example package",
+        "discovery_source": "PYPI",
+        "eligibility_status": "PYPI_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 1,
+        "license": "",
+        "matched_terms": [
+          "bson"
+        ],
+        "metadata_url": "https://pypi.org/pypi/example-pkg-jasongibsonufl/0.0.1/json",
+        "name": "example-pkg-jasongibsonufl",
+        "project": "example-pkg-jasongibsonufl",
+        "query": "example-pkg-jasongibsonufl",
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "requires_python": ">=3.6",
+        "score": 107,
+        "version": "0.0.1",
+        "wheels": [
+          {
+            "filename": "example_pkg_jasongibsonufl-0.0.1-py3-none-any.whl",
+            "python_version": "py3",
+            "sha256": "d9b51fbfb11e6a4bfe86a5dd64c5449b19ae089dc1a29f426d70bda315dab45e",
+            "size": 2904,
+            "url": "https://files.pythonhosted.org/packages/4e/55/006807a7a42d1589a05ad166082c52176e5f4f62525dbebd5521c44c4031/example_pkg_jasongibsonufl-0.0.1-py3-none-any.whl"
+          }
+        ],
+        "zero_cost_eligible": true
+      },
+      "wheel": {
+        "bytes": 2904,
+        "filename": "example_pkg_jasongibsonufl-0.0.1-py3-none-any.whl",
+        "sha256": "d9b51fbfb11e6a4bfe86a5dd64c5449b19ae089dc1a29f426d70bda315dab45e",
+        "url": "https://files.pythonhosted.org/packages/4e/55/006807a7a42d1589a05ad166082c52176e5f4f62525dbebd5521c44c4031/example_pkg_jasongibsonufl-0.0.1-py3-none-any.whl"
+      }
+    },
+    {
+      "error": "AutoPyPIAcquisitionFailure:PYPI_WHEEL_DOWNLOAD_FAILED:ERROR: Could not find a version that satisfies the requirement gibson==1.0.3 (from versions: none)\nERROR: No matching distribution found for gibson==1.0.3\n",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "binding_kind": "pypi",
+        "dependency_count": 0,
+        "description": "Real Environment Developed by Stanford University",
+        "discovery_source": "PYPI",
+        "eligibility_status": "PYPI_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 1,
+        "license": null,
+        "matched_terms": [
+          "bson"
+        ],
+        "metadata_url": "https://pypi.org/pypi/gibson/1.0.3/json",
+        "name": "gibson",
+        "project": "gibson",
+        "query": "gibson",
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "requires_python": "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,<4,>2.7",
+        "score": 107,
+        "version": "1.0.3",
+        "wheels": [
+          {
+            "filename": "gibson-1.0.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+            "python_version": "cp310",
+            "sha256": "ef88c14b0fd63508c4b7280730d0be7d454ba85683458d36991961618605ed4d",
+            "size": 20793877,
+            "url": "https://files.pythonhosted.org/packages/02/16/aae880d3a2084578652d0a91db767df8f497ca5db3f23dc558eda2ee5b22/gibson-1.0.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+          },
+          {
+            "filename": "gibson-1.0.3-cp36-cp36m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+            "python_version": "cp36",
+            "sha256": "712c75bf8cb58d23a3950b6fbb823afbed629f60a1393a60929cf2542d36fe8a",
+            "size": 20793889,
+            "url": "https://files.pythonhosted.org/packages/c0/c1/e7783466b7c3ffe7a5d7e735d88b816bc01f333ac950e7163ec0064e5b5b/gibson-1.0.3-cp36-cp36m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+          },
+          {
+            "filename": "gibson-1.0.3-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+            "python_version": "cp37",
+            "sha256": "accb43ba0d04eac18f4ba71ad59afbf972ffdcfa352158f5f1630ede86fa70bc",
+            "size": 20793904,
+            "url": "https://files.pythonhosted.org/packages/4e/9b/ef73a1b9766d271c681f0b3c5906e7176bcf5ad8dad546ac5e3dfda3f030/gibson-1.0.3-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+          },
+          {
+            "filename": "gibson-1.0.3-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+            "python_version": "cp38",
+            "sha256": "691050bd00e2699fedc22a4581bbf58246d73af7f7e7e75da38f6bbff2f0340b",
+            "size": 20793890,
+            "url": "https://files.pythonhosted.org/packages/ae/0a/9069e2468ca511883ca4c247d4cf4eb02c63b584a81b62610b121f0d335b/gibson-1.0.3-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+          },
+          {
+            "filename": "gibson-1.0.3-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+            "python_version": "cp39",
+            "sha256": "dd6bba38653743498e33dc58e5b895a53c88842f234b8368f1523d6fb6f73212",
+            "size": 20793876,
+            "url": "https://files.pythonhosted.org/packages/63/05/55289d7be657eaf24074d169d97224258a8657f8b3036ed26c6ae6303d39/gibson-1.0.3-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+          }
+        ],
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "AutoPyPIAcquisitionFailure:NO_COMPATIBLE_PYPI_CODEC_CONTRACT:[]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "binding_kind": "pypi",
+        "dependency_count": 0,
+        "description": "A high-performance search result deduplication engine that groups duplicate results by canonical URL and semantic similarity, returning clean batches with the most authoritative source and full traceability to all original sources.",
+        "discovery_source": "PYPI",
+        "eligibility_status": "PYPI_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 1,
+        "license": null,
+        "matched_terms": [
+          "bson"
+        ],
+        "metadata_url": "https://pypi.org/pypi/gibsondedup/0.1.1/json",
+        "name": "gibsondedup",
+        "project": "gibsondedup",
+        "query": "gibsondedup",
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "requires_python": ">=3.8",
+        "score": 107,
+        "version": "0.1.1",
+        "wheels": [
+          {
+            "filename": "gibsondedup-0.1.1-py3-none-any.whl",
+            "python_version": "py3",
+            "sha256": "e9b1aebfa4b9fd7f51600ca1513412c4228d94d50049adcee0682629ce0b0162",
+            "size": 18915,
+            "url": "https://files.pythonhosted.org/packages/4a/0a/24bacc3663b3f9b925f5b367f6f9edec69b2d9aa2d7492000dfaad44a559/gibsondedup-0.1.1-py3-none-any.whl"
+          }
+        ],
+        "zero_cost_eligible": true
+      },
+      "wheel": {
+        "bytes": 18915,
+        "filename": "gibsondedup-0.1.1-py3-none-any.whl",
+        "sha256": "e9b1aebfa4b9fd7f51600ca1513412c4228d94d50049adcee0682629ce0b0162",
+        "url": "https://files.pythonhosted.org/packages/4a/0a/24bacc3663b3f9b925f5b367f6f9edec69b2d9aa2d7492000dfaad44a559/gibsondedup-0.1.1-py3-none-any.whl"
+      }
+    }
+  ],
+  "goal": "Encode those exact records as BSON and save canonical/astra_runtime/tmp/BSON_RECORDS.bson",
+  "mission_id": "ASTRA-RUNTIME-PYPI-ACQUIRE-BSON-007",
+  "schema": "PROJECT_BRAIN_AUTO_PYPI_LIBRARY_ACQUISITION_V1",
+  "status": "NO_COMPATIBLE_CONTRACT"
+}
