@@ -37,12 +37,14 @@
       "verify": {
         "type": "stdout_contains",
         "text": "SEMANTIC_FRESH_VERIFY_DIAG_COMPLETE"
-      }
+      },
+      "goal_ref": "goal"
     }
   ],
   "constraints": {
     "incremental_spend_usd": 0,
     "model_controller_required": false,
     "read_only_diagnostic": true
-  }
+  },
+  "goal": "Diagnose the already persisted fresh-source semantic field verification result without changing any source or extracted artifact."
 }
