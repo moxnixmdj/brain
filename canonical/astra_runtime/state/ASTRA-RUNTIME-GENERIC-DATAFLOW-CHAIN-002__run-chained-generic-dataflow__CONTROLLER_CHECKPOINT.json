@@ -162,16 +162,303 @@
         "summary_count": 100,
         "type": "derive_grouped_records"
       }
+    },
+    {
+      "cycle": 4,
+      "plan": {
+        "args": {
+          "copy_fields": [
+            "username"
+          ],
+          "derived": [
+            {
+              "denominator": "post_count",
+              "name": "average_comments_per_post",
+              "numerator": "comment_count_sum",
+              "op": "divide"
+            }
+          ],
+          "dimension_key": "id",
+          "dimension_path": "canonical/astra_runtime/tmp/CHAIN_USERS.json",
+          "fact_key": "userId",
+          "fact_path": "canonical/astra_runtime/tmp/CHAIN_POST_COMMENT_STATS.json",
+          "metrics": [
+            {
+              "name": "post_count",
+              "op": "count"
+            },
+            {
+              "field": "comment_count",
+              "name": "comment_count_sum",
+              "op": "sum"
+            }
+          ],
+          "output_id_field": "user_id",
+          "output_path": "canonical/astra_runtime/tmp/CHAIN_USER_POST_STATS.json"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "derive_grouped_records"
+      },
+      "result": {
+        "dimension_count": 10,
+        "fact_count": 100,
+        "output_path": "canonical/astra_runtime/tmp/CHAIN_USER_POST_STATS.json",
+        "output_verified": true,
+        "summary_count": 10,
+        "type": "derive_grouped_records"
+      }
+    },
+    {
+      "cycle": 5,
+      "plan": {
+        "args": {
+          "limit": 2,
+          "order_by": [
+            {
+              "direction": "desc",
+              "field": "average_comments_per_post"
+            },
+            {
+              "direction": "asc",
+              "field": "user_id"
+            }
+          ],
+          "output_fields": [
+            "user_id",
+            "username",
+            "post_count",
+            "comment_count_sum",
+            "average_comments_per_post"
+          ],
+          "output_path": "canonical/astra_runtime/tmp/CHAIN_USER_TOP2.json",
+          "source_path": "canonical/astra_runtime/tmp/CHAIN_USER_POST_STATS.json"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "select_ranked_record"
+      },
+      "result": {
+        "limit": 2,
+        "output_path": "canonical/astra_runtime/tmp/CHAIN_USER_TOP2.json",
+        "output_verified": true,
+        "records": [
+          {
+            "average_comments_per_post": 5.0,
+            "comment_count_sum": 50,
+            "post_count": 10,
+            "user_id": 1,
+            "username": "Bret"
+          },
+          {
+            "average_comments_per_post": 5.0,
+            "comment_count_sum": 50,
+            "post_count": 10,
+            "user_id": 2,
+            "username": "Antonette"
+          }
+        ],
+        "source_count": 10,
+        "type": "select_ranked_record"
+      }
+    },
+    {
+      "cycle": 6,
+      "plan": {
+        "args": {
+          "copy_fields": [
+            "userId"
+          ],
+          "derived": [
+            {
+              "denominator": "comment_count",
+              "name": "average_comment_id",
+              "numerator": "comment_id_sum",
+              "op": "divide"
+            }
+          ],
+          "dimension_key": "id",
+          "dimension_path": "canonical/astra_runtime/tmp/CHAIN_POSTS.json",
+          "fact_key": "postId",
+          "fact_path": "canonical/astra_runtime/tmp/CHAIN_COMMENTS.json",
+          "metrics": [
+            {
+              "name": "comment_count",
+              "op": "count"
+            },
+            {
+              "field": "id",
+              "name": "comment_id_sum",
+              "op": "sum"
+            }
+          ],
+          "output_id_field": "post_id",
+          "summary_path": "canonical/astra_runtime/tmp/CHAIN_POST_COMMENT_STATS.json"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "assert_grouped_derived_records"
+      },
+      "result": {
+        "dimension_count": 100,
+        "fact_count": 500,
+        "failures": [],
+        "summary_count": 100,
+        "type": "assert_grouped_derived_records",
+        "verified": true
+      }
+    },
+    {
+      "cycle": 7,
+      "plan": {
+        "args": {
+          "copy_fields": [
+            "username"
+          ],
+          "derived": [
+            {
+              "denominator": "post_count",
+              "name": "average_comments_per_post",
+              "numerator": "comment_count_sum",
+              "op": "divide"
+            }
+          ],
+          "dimension_key": "id",
+          "dimension_path": "canonical/astra_runtime/tmp/CHAIN_USERS.json",
+          "fact_key": "userId",
+          "fact_path": "canonical/astra_runtime/tmp/CHAIN_POST_COMMENT_STATS.json",
+          "metrics": [
+            {
+              "name": "post_count",
+              "op": "count"
+            },
+            {
+              "field": "comment_count",
+              "name": "comment_count_sum",
+              "op": "sum"
+            }
+          ],
+          "output_id_field": "user_id",
+          "summary_path": "canonical/astra_runtime/tmp/CHAIN_USER_POST_STATS.json"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "assert_grouped_derived_records"
+      },
+      "result": {
+        "dimension_count": 10,
+        "fact_count": 100,
+        "failures": [],
+        "summary_count": 10,
+        "type": "assert_grouped_derived_records",
+        "verified": true
+      }
+    },
+    {
+      "cycle": 8,
+      "plan": {
+        "args": {
+          "limit": 2,
+          "order_by": [
+            {
+              "direction": "desc",
+              "field": "average_comments_per_post"
+            },
+            {
+              "direction": "asc",
+              "field": "user_id"
+            }
+          ],
+          "output_fields": [
+            "user_id",
+            "username",
+            "post_count",
+            "comment_count_sum",
+            "average_comments_per_post"
+          ],
+          "selected_path": "canonical/astra_runtime/tmp/CHAIN_USER_TOP2.json",
+          "source_path": "canonical/astra_runtime/tmp/CHAIN_USER_POST_STATS.json"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "assert_ranked_record"
+      },
+      "result": {
+        "expected": [
+          {
+            "average_comments_per_post": 5.0,
+            "comment_count_sum": 50,
+            "post_count": 10,
+            "user_id": 1,
+            "username": "Bret"
+          },
+          {
+            "average_comments_per_post": 5.0,
+            "comment_count_sum": 50,
+            "post_count": 10,
+            "user_id": 2,
+            "username": "Antonette"
+          }
+        ],
+        "limit": 2,
+        "observed": [
+          {
+            "average_comments_per_post": 5.0,
+            "comment_count_sum": 50,
+            "post_count": 10,
+            "user_id": 1,
+            "username": "Bret"
+          },
+          {
+            "average_comments_per_post": 5.0,
+            "comment_count_sum": 50,
+            "post_count": 10,
+            "user_id": 2,
+            "username": "Antonette"
+          }
+        ],
+        "source_count": 10,
+        "type": "assert_ranked_record",
+        "verified": true
+      }
+    },
+    {
+      "cycle": 9,
+      "plan": {
+        "args": {
+          "summary": "COMPOUND_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "COMPOUND_GOAL_COMPLETE",
+        "type": "finish"
+      }
     }
   ],
   "created_at_utc": "2026-09-25T20:31:59.930675+00:00",
   "mission_id": "ASTRA-RUNTIME-GENERIC-DATAFLOW-CHAIN-002",
-  "next_action_index": 4,
+  "next_action_index": 10,
   "plan_sha256": "13c3246d8aab2dd63afe5a405c005b1540f69e2a82fa8508873694e9ded7295e",
-  "resume_count": 0,
+  "resume_count": 1,
   "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
-  "status": "IN_PROGRESS",
+  "status": "COMPLETE",
   "step_id": "run-chained-generic-dataflow",
   "test_interrupt_injected": false,
-  "updated_at_utc": "2026-09-25T20:32:09.204763+00:00"
+  "updated_at_utc": "2026-09-25T20:46:15.893145+00:00"
 }

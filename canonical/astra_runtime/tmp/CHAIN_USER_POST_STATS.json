@@ -1,0 +1,72 @@
+[
+  {
+    "average_comments_per_post": 5.0,
+    "comment_count_sum": 50,
+    "post_count": 10,
+    "user_id": 1,
+    "username": "Bret"
+  },
+  {
+    "average_comments_per_post": 5.0,
+    "comment_count_sum": 50,
+    "post_count": 10,
+    "user_id": 2,
+    "username": "Antonette"
+  },
+  {
+    "average_comments_per_post": 5.0,
+    "comment_count_sum": 50,
+    "post_count": 10,
+    "user_id": 3,
+    "username": "Samantha"
+  },
+  {
+    "average_comments_per_post": 5.0,
+    "comment_count_sum": 50,
+    "post_count": 10,
+    "user_id": 4,
+    "username": "Karianne"
+  },
+  {
+    "average_comments_per_post": 5.0,
+    "comment_count_sum": 50,
+    "post_count": 10,
+    "user_id": 5,
+    "username": "Kamren"
+  },
+  {
+    "average_comments_per_post": 5.0,
+    "comment_count_sum": 50,
+    "post_count": 10,
+    "user_id": 6,
+    "username": "Leopoldo_Corkery"
+  },
+  {
+    "average_comments_per_post": 5.0,
+    "comment_count_sum": 50,
+    "post_count": 10,
+    "user_id": 7,
+    "username": "Elwyn.Skiles"
+  },
+  {
+    "average_comments_per_post": 5.0,
+    "comment_count_sum": 50,
+    "post_count": 10,
+    "user_id": 8,
+    "username": "Maxime_Nienow"
+  },
+  {
+    "average_comments_per_post": 5.0,
+    "comment_count_sum": 50,
+    "post_count": 10,
+    "user_id": 9,
+    "username": "Delphine"
+  },
+  {
+    "average_comments_per_post": 5.0,
+    "comment_count_sum": 50,
+    "post_count": 10,
+    "user_id": 10,
+    "username": "Moriah.Stanton"
+  }
+]

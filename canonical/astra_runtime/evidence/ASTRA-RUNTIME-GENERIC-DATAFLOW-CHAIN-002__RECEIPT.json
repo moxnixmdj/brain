@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T20:46:15.899222+00:00",
+  "mission_id": "ASTRA-RUNTIME-GENERIC-DATAFLOW-CHAIN-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_GENERIC_DATAFLOW_CHAIN_002.json",
+  "mission_sha256": "27ae0e08deb417f0d5064ff0b5113236f96e05b31c69b2af658f52c6a54bd56b",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "bd8746eccea7edf85f447db81550c8443be13aeda5e8757d46fcaec881baf1e6",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

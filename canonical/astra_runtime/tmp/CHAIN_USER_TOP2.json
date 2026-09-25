@@ -1,0 +1,16 @@
+[
+  {
+    "average_comments_per_post": 5.0,
+    "comment_count_sum": 50,
+    "post_count": 10,
+    "user_id": 1,
+    "username": "Bret"
+  },
+  {
+    "average_comments_per_post": 5.0,
+    "comment_count_sum": 50,
+    "post_count": 10,
+    "user_id": 2,
+    "username": "Antonette"
+  }
+]
