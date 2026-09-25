@@ -1,0 +1,9 @@
+{
+  "completed_mission_sha256": "42101af0e8de44638c6af83fb4a66039f256a1e774933d5547a1e40e7eea27a7",
+  "current_mission_sha256": "3f93ce4b4654abf0123836c44d16caaab3919514b18e3d44659bb0bb87c1b50f",
+  "error": "COMPLETE_MISSION_HASH_DRIFT_REQUIRES_NEW_MISSION_ID",
+  "mission_id": "ASTRA-RUNTIME-MULTI-SOURCE-REDUCE-002",
+  "observed_at_utc": "2026-09-25T17:24:37.734429+00:00",
+  "phase": "MISSION_IDENTITY",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1"
+}
