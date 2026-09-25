@@ -4043,14 +4043,24 @@ def _load_semantic_authorities():
 
 
 def _semantic_goal_contract(step,mission,goal):
-    candidates=step.get("semantic_goal_proposals")
+    explicit=step.get("semantic_goal_proposals")
     ref=step.get("semantic_goal_proposals_ref")
-    if candidates is None and ref:
-        candidates=mission.get(ref)
-    if candidates is None:
-        return None
-    if not isinstance(candidates,list) or not candidates:
+    if explicit is None and ref:
+        explicit=mission.get(ref)
+    if explicit is None:
+        explicit=[]
+    if not isinstance(explicit,list):
         raise Blocker("SEMANTIC_GOAL_PROPOSALS_INVALID")
+    generator_ids=step.get("semantic_goal_authority_generators") or []
+    if not isinstance(generator_ids,list) or any(
+        not isinstance(x,str) or not x.strip() for x in generator_ids
+    ):
+        raise Blocker("SEMANTIC_GOAL_AUTHORITY_GENERATORS_INVALID")
+    generator_ids=[str(x).strip() for x in generator_ids]
+    if len(generator_ids)!=len(set(generator_ids)):
+        raise Blocker("SEMANTIC_GOAL_AUTHORITY_GENERATOR_DUPLICATE")
+    if not explicit and not generator_ids:
+        return None
     policy=step.get("semantic_authority_policy")
     policy_ref=step.get("semantic_authority_policy_ref")
     if policy is None and policy_ref:
