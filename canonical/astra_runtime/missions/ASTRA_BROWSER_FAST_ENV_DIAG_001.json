@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-BROWSER-FAST-ENV-DIAG-001",
+  "purpose": "Fast read-only check for already installed rendered browsers, drivers, and Python automation modules.",
+  "steps": [
+    {
+      "id": "probe-installed-browser-stack",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,shutil,subprocess\nbins=['chromium','chromium-browser','google-chrome','google-chrome-stable','firefox','firefox-esr','chromedriver','geckodriver']\ninstalled={x:shutil.which(x) for x in bins}\nmods={x:bool(importlib.util.find_spec(x)) for x in ['selenium','playwright']}\nversions={}\nfor name,path in installed.items():\n if path:\n  try:\n   p=subprocess.run([path,'--version'],text=True,capture_output=True,timeout=10)\n   versions[name]=(p.stdout or p.stderr).strip()[:500]\n  except Exception as e: versions[name]=type(e).__name__+':'+str(e)\nprint(json.dumps({'installed':installed,'modules':mods,'versions':versions},sort_keys=True))\nprint('BROWSER_FAST_ENV_DIAG_COMPLETE')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "BROWSER_FAST_ENV_DIAG_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "read_only_diagnostic": true
+  }
+}
