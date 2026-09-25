@@ -3,7 +3,7 @@
     "adapter": "goal",
     "error": "Blocker:MODEL_INDEPENDENT_ACTION_ERROR:AUTHORITATIVE_SOURCE_NOT_DISCOVERED",
     "mission_id": "ASTRA-RUNTIME-JIT-SOURCE-DISCOVERY-WORLDBANK-001",
-    "observed_at_utc": "2026-09-25T20:56:03.687229+00:00",
+    "observed_at_utc": "2026-09-25T20:57:42.851853+00:00",
     "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
     "step_id": "discover-and-verify-authoritative-source",
     "step_index": 0
@@ -12,10 +12,10 @@
   "history": [],
   "mission_id": "ASTRA-RUNTIME-JIT-SOURCE-DISCOVERY-WORLDBANK-001",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_JIT_SOURCE_DISCOVERY_WORLDBANK_001.json",
-  "mission_sha256": "e0b6edf391aba50a05e948b387dddbf9ca12eecfc59e471e53a917865f21ceef",
+  "mission_sha256": "d0842deea20371dbbee62d3983a7b194d91926ae4605686efdb648a7e452822b",
   "next_step": 0,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
   "status": "BLOCKED",
-  "updated_at_utc": "2026-09-25T20:56:03.687514+00:00"
+  "updated_at_utc": "2026-09-25T20:57:42.852143+00:00"
 }
