@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-XLSX-COMPILER-DIAG-001",
+  "purpose": "Read-only compile of the exact XLSX pressure goal against the promoted library-backed capability registry.",
+  "steps": [
+    {
+      "id": "compile-xlsx-goal",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\nroot=pathlib.Path('.').resolve()\np=root/'canonical/runtime/goal_compiler.py'\ns=importlib.util.spec_from_file_location('gc',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads((root/'canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\nmission=json.loads((root/'canonical/astra_runtime/missions/ASTRA_RUNTIME_VERIFIED_CAPABILITY_XLSX_002.json').read_text())\nout=m.compile_goal(mission['goal'],reg,root)\nprint(json.dumps(out,sort_keys=True))\nprint('XLSX_GOAL_COMPILED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "XLSX_GOAL_COMPILED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "read_only_diagnostic": true
+  }
+}
