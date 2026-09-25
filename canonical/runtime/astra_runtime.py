@@ -2520,12 +2520,19 @@ def _goal_action(action):
         ):
             return {"type":typ,"verified":False,"error":"SOURCE_DISCOVERY_AUTHORITY_DOMAINS_REQUIRED"}
         normalized_domains=[x.lower().strip().lstrip(".") for x in authority_domains]
-        engines=[
-          ("bing_rss","https://www.bing.com/search?"+urllib.parse.urlencode({"q":query,"format":"rss","count":"20"})),
-          ("bing","https://www.bing.com/search?"+urllib.parse.urlencode({"q":query,"count":"20"})),
-          ("duckduckgo","https://html.duckduckgo.com/html/?"+urllib.parse.urlencode({"q":query})),
-          ("google","https://www.google.com/search?"+urllib.parse.urlencode({"q":query,"num":"20"})),
-        ]
+        query_variants=[query]
+        for domain in normalized_domains:
+            scoped="site:"+domain+" "+query
+            if scoped not in query_variants:
+                query_variants.append(scoped)
+        engines=[]
+        for qv in query_variants:
+            engines.extend([
+              ("bing_rss",qv,"https://www.bing.com/search?"+urllib.parse.urlencode({"q":qv,"format":"rss","count":"20"})),
+              ("bing",qv,"https://www.bing.com/search?"+urllib.parse.urlencode({"q":qv,"count":"20"})),
+              ("duckduckgo",qv,"https://html.duckduckgo.com/html/?"+urllib.parse.urlencode({"q":qv})),
+              ("google",qv,"https://www.google.com/search?"+urllib.parse.urlencode({"q":qv,"num":"20"})),
+            ])
         attempts=[]
         candidates=[]
         href_re=re.compile(r'''href=["']([^"'<>\s]+)["']''',re.IGNORECASE)
@@ -2568,7 +2575,7 @@ def _goal_action(action):
             if parsed.scheme not in {"https","http"} or not parsed.hostname:
                 return None
             return raw
-        for engine,search_url in engines:
+        for engine,query_variant,search_url in engines:
             req=urllib.request.Request(search_url,headers={
               "User-Agent":"Mozilla/5.0 ProjectBrain-SourceDiscovery/1"
             })
@@ -2577,7 +2584,7 @@ def _goal_action(action):
                     raw=resp.read(int(args.get("max_bytes") or 1500000))
                 text=raw.decode("utf-8","replace")
             except Exception as exc:
-                attempts.append({"engine":engine,"status":"FETCH_FAILED","error":type(exc).__name__})
+                attempts.append({"engine":engine,"query":query_variant,"status":"FETCH_FAILED","error":type(exc).__name__})
                 continue
             seen=set()
             local=[]
@@ -2613,7 +2620,7 @@ def _goal_action(action):
                   "url":href,"host":host,"matched_authority_domains":matched,
                   "score":score,"engine":engine
                 })
-            attempts.append({"engine":engine,"status":"OK","candidate_count":len(local)})
+            attempts.append({"engine":engine,"query":query_variant,"status":"OK","candidate_count":len(local)})
             candidates.extend(local)
             if local:
                 break
