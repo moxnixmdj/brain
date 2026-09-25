@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T00:10:59.126404+00:00",
+  "mission_id": "ASTRA-RUNTIME-CORE-REGRESSION-005",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_CORE_REGRESSION_005.json",
+  "mission_sha256": "223908e59f01a2a30a1c82350320932ed7a650933b4679c8750de23f707d6b66",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "3bc57a5ce8e509c0acc69aa1d9aad67db2569824f71a54260af15fb9594da00d",
+  "status": "COMPLETE",
+  "steps_completed": 2
+}
