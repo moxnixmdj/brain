@@ -4132,6 +4132,13 @@ def _capability_problem_proposal(step,mission,goal):
     required_targets=step.get("required_target_effects")
     if required_targets is None and semantic_contract is not None:
         required_targets=semantic_contract.get("target_effects")
+    elif required_targets is not None and semantic_contract is not None:
+        raw_required=[
+            str(x).strip() for x in required_targets
+            if isinstance(x,str) and x.strip()
+        ] if isinstance(required_targets,list) else []
+        if sorted(set(raw_required))!=sorted(set(semantic_contract.get("target_effects") or [])):
+            raise Blocker("SEMANTIC_GOAL_CONTRACT_CONFLICTS_WITH_FROZEN_TARGETS")
     required_targets=required_targets or []
     if (
         not isinstance(verified_initial,list)
