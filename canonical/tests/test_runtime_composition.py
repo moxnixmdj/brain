@@ -40,9 +40,9 @@ class RuntimeCompositionTests(unittest.TestCase):
         p.parent.mkdir(parents=True,exist_ok=True)
         p.write_text(json.dumps({"a":"same","b":"same","verified":True}),encoding="utf-8")
         rel=str(p.relative_to(ROOT)).replace("\\","/")
-        try:
-            out=runtime._run_model_independent_goal(
-                {
+        mission={"mission_id":"TEST-RUNTIME-COMPOSITION-ASSERTIONS"}
+        step={
+                  "id":"verified-assertions",
                   "controller_actions":[
                     {
                       "type":"assert_json_fields_equal",
@@ -57,14 +57,20 @@ class RuntimeCompositionTests(unittest.TestCase):
                     {"type":"finish","args":{"summary":"ASSERTIONS_COMPLETE"}},
                   ],
                   "max_controller_actions":8,
-                },
-                {},
+                }
+        checkpoint=runtime._controller_checkpoint_path(step,mission)
+        checkpoint.unlink(missing_ok=True)
+        try:
+            out=runtime._run_model_independent_goal(
+                step,
+                mission,
                 "verify assertions",
             )
             self.assertEqual(out["final_summary"],"ASSERTIONS_COMPLETE")
             self.assertEqual(out["cycles"],3)
         finally:
             p.unlink(missing_ok=True)
+            checkpoint.unlink(missing_ok=True)
 
     def test_json_key_assertion_is_layout_insensitive(self):
         p=CANONICAL/"astra_runtime"/"tmp"/"COMPOSITION_KEYS_TEST.json"
