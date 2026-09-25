@@ -34,11 +34,11 @@
     }
   ],
   "mission_id": "ASTRA-RUNTIME-POST-NPM-REGRESSION-003",
-  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_POST_NPM_REGRESSION_003.json",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_POST_NPM_REGRESSION_003_RERUN2.json",
   "mission_sha256": "1e3fa2919caefc0376cb7be1b50c8a6976164987962a75310e63ab9bf5b7f765",
   "next_step": 0,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
   "status": "BLOCKED",
-  "updated_at_utc": "2026-09-25T19:49:20.357352+00:00"
+  "updated_at_utc": "2026-09-25T20:06:00+00:00"
 }
