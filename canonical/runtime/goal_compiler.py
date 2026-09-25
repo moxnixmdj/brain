@@ -2896,6 +2896,255 @@ def _compile_literal_json_records(subgoal, root):
     }
 
 
+def _generic_entity_forms(raw):
+    value=str(raw or "").strip().lower()
+    forms={value}
+    if value.endswith("ies") and len(value)>3:
+        forms.add(value[:-3]+"y")
+    elif value.endswith("s") and not value.endswith("ss"):
+        forms.add(value[:-1])
+    else:
+        forms.add(value+"s")
+    return {x for x in forms if x}
+
+
+def _context_json_for_entity(context_paths,entity):
+    forms=_generic_entity_forms(entity)
+    matches=[]
+    for raw in context_paths or []:
+        p=pathlib.Path(str(raw))
+        if p.suffix.lower()!=".json":
+            continue
+        name=re.sub(r"[^a-z0-9]+","",p.stem.lower())
+        if any(re.sub(r"[^a-z0-9]+","",form) in name for form in forms):
+            matches.append(str(raw))
+    return matches[-1] if matches else None
+
+
+def _parse_scalar_literal(raw):
+    text=str(raw or "").strip().strip(" .,:;")
+    lower=text.lower()
+    if lower=="true":
+        return True
+    if lower=="false":
+        return False
+    if lower in {"null","none"}:
+        return None
+    if re.fullmatch(r"-?\d+",text):
+        return int(text)
+    if re.fullmatch(r"-?(?:\d+\.\d*|\d*\.\d+)",text):
+        return float(text)
+    return text.strip("\"'")
+
+
+def _compile_generic_group_derive_ir(clause,context_paths,root):
+    text=str(clause or "").strip()
+    head=re.match(
+      r"^using\s+both\s+live\s+results,\s+create\s+([^\s]+\.json)\s+containing\s+"
+      r"exactly\s+one\s+record\s+per\s+live\s+([A-Za-z_][A-Za-z0-9_]*)\s+with\s+"
+      r"(.+?),\s+where\s+(.+)$",
+      text,re.IGNORECASE
+    )
+    if not head:
+        return None
+    output_path=head.group(1).strip(" .,:;")
+    dimension_entity=head.group(2).lower()
+    fields=[
+      x.strip(" .,:;").lower()
+      for x in re.sub(r"\s+and\s+",",",head.group(3),flags=re.IGNORECASE).split(",")
+      if x.strip(" .,:;")
+    ]
+    if not fields or len(set(fields))!=len(fields):
+        return None
+    relation=re.search(
+      r"\b([A-Za-z_][A-Za-z0-9_]*)\s+is\s+the\s+number\s+of\s+live\s+"
+      r"([A-Za-z_][A-Za-z0-9_]*)\s+whose\s+([A-Za-z_][A-Za-z0-9_]*)\s+equals\s+"
+      r"that\s+([A-Za-z_][A-Za-z0-9_]*)'s\s+([A-Za-z_][A-Za-z0-9_]*)",
+      head.group(4),re.IGNORECASE
+    )
+    filtered=re.search(
+      r"\b([A-Za-z_][A-Za-z0-9_]*)\s+is\s+the\s+number\s+of\s+those\s+"
+      r"([A-Za-z_][A-Za-z0-9_]*)\s+whose\s+([A-Za-z_][A-Za-z0-9_]*)\s+field\s+is\s+"
+      r"([^,]+?)(?=,\s+and\s+|,\s*[A-Za-z_][A-Za-z0-9_]*\s+is\s+|$)",
+      head.group(4),re.IGNORECASE
+    )
+    ratio=re.search(
+      r"\b([A-Za-z_][A-Za-z0-9_]*)\s+is\s+([A-Za-z_][A-Za-z0-9_]*)\s+divided\s+by\s+"
+      r"([A-Za-z_][A-Za-z0-9_]*)\b",
+      head.group(4),re.IGNORECASE
+    )
+    if not relation or not filtered or not ratio:
+        return None
+    count_all=relation.group(1).lower()
+    fact_entity=relation.group(2).lower()
+    fact_key=relation.group(3)
+    relation_dim=relation.group(4).lower()
+    dimension_key=relation.group(5)
+    count_filtered=filtered.group(1).lower()
+    filtered_entity=filtered.group(2).lower()
+    filter_field=filtered.group(3)
+    filter_value=_parse_scalar_literal(filtered.group(4))
+    ratio_name=ratio.group(1).lower()
+    ratio_num=ratio.group(2).lower()
+    ratio_den=ratio.group(3).lower()
+    if not (_generic_entity_forms(relation_dim)&_generic_entity_forms(dimension_entity)):
+        return None
+    if not (_generic_entity_forms(filtered_entity)&_generic_entity_forms(fact_entity)):
+        return None
+    if ratio_num!=count_filtered or ratio_den!=count_all:
+        return None
+    for required in (count_all,count_filtered,ratio_name):
+        if required not in fields:
+            return None
+    output_id_candidates=[
+      f for f in fields
+      if re.sub(r"[^a-z0-9]+","",f)==re.sub(r"[^a-z0-9]+","",dimension_entity+"id")
+    ]
+    if len(output_id_candidates)!=1:
+        return None
+    output_id_field=output_id_candidates[0]
+    dimension_path=_context_json_for_entity(context_paths,dimension_entity)
+    fact_path=_context_json_for_entity(context_paths,fact_entity)
+    if not dimension_path or not fact_path or dimension_path==fact_path:
+        return None
+    copy_fields=[
+      f for f in fields
+      if f not in {output_id_field,count_all,count_filtered,ratio_name}
+    ]
+    metrics=[
+      {"name":count_all,"op":"count"},
+      {"name":count_filtered,"op":"count_where","where":{filter_field:filter_value}},
+    ]
+    derived=[
+      {"name":ratio_name,"op":"divide","numerator":count_filtered,"denominator":count_all},
+    ]
+    return {
+      "action":{
+        "type":"derive_grouped_records",
+        "args":{
+          "dimension_path":dimension_path,
+          "fact_path":fact_path,
+          "dimension_key":dimension_key,
+          "fact_key":fact_key,
+          "output_path":output_path,
+          "output_id_field":output_id_field,
+          "copy_fields":copy_fields,
+          "metrics":metrics,
+          "derived":derived,
+        },
+        "expect":{"type":"field_equals","field":"output_verified","value":True},
+      },
+      "output_path":output_path,
+      "evidence":{
+        "dimension_path":dimension_path,"fact_path":fact_path,
+        "dimension_key":dimension_key,"fact_key":fact_key,
+        "output_path":output_path,"output_id_field":output_id_field,
+        "copy_fields":copy_fields,"metrics":metrics,"derived":derived,
+        "fields":fields,
+      }
+    }
+
+
+def _compile_generic_rank_select_ir(clause,context_paths,root):
+    text=str(clause or "").strip()
+    m=re.match(
+      r"^from\s+([^\s]+\.json)\s+select\s+exactly\s+one\s+"
+      r"([A-Za-z_][A-Za-z0-9_]*)\s+with\s+the\s+greatest\s+"
+      r"([A-Za-z_][A-Za-z0-9_]*),\s+breaking\s+ties\s+by\s+the\s+lowest\s+"
+      r"([A-Za-z_][A-Za-z0-9_]*),\s+and\s+save\s+([^\s]+\.json)\s+containing\s+(.+)$",
+      text,re.IGNORECASE
+    )
+    if not m:
+        return None
+    source_path=m.group(1).strip(" .,:;")
+    primary=m.group(3).lower()
+    tie=m.group(4).lower()
+    output_path=m.group(5).strip(" .,:;")
+    fields=[
+      x.strip(" .,:;").lower()
+      for x in re.sub(r"\s+and\s+",",",m.group(6),flags=re.IGNORECASE).split(",")
+      if x.strip(" .,:;")
+    ]
+    if source_path not in context_paths or not fields or primary not in fields or tie not in fields:
+        return None
+    order_by=[
+      {"field":primary,"direction":"desc"},
+      {"field":tie,"direction":"asc"},
+    ]
+    return {
+      "action":{
+        "type":"select_ranked_record",
+        "args":{
+          "source_path":source_path,
+          "output_path":output_path,
+          "order_by":order_by,
+          "output_fields":fields,
+        },
+        "expect":{"type":"field_equals","field":"output_verified","value":True},
+      },
+      "output_path":output_path,
+      "evidence":{
+        "source_path":source_path,"output_path":output_path,
+        "order_by":order_by,"output_fields":fields,
+      }
+    }
+
+
+def _compile_generic_dataflow_verification_ir(clause,compiled_parts):
+    lower=str(clause or "").strip().lower()
+    if not re.match(r"^finally\s+independently\s+(?:reopen|reread|verify|check)\b",lower):
+        return None
+    grouped=None
+    ranked=None
+    for part in compiled_parts or []:
+        if not isinstance(part,dict):
+            continue
+        if part.get("mode")=="GENERIC_GROUP_DERIVE_IR":
+            grouped=part
+        elif part.get("mode")=="GENERIC_RANK_SELECT_IR":
+            ranked=part
+    if grouped is None or ranked is None:
+        return None
+    if str(grouped.get("output_path") or "").lower() not in lower:
+        return None
+    if str(ranked.get("output_path") or "").lower() not in lower:
+        return None
+    return {
+      "actions":[
+        {
+          "type":"assert_grouped_derived_records",
+          "args":{
+            "dimension_path":grouped["dimension_path"],
+            "fact_path":grouped["fact_path"],
+            "summary_path":grouped["output_path"],
+            "dimension_key":grouped["dimension_key"],
+            "fact_key":grouped["fact_key"],
+            "output_id_field":grouped["output_id_field"],
+            "copy_fields":grouped["copy_fields"],
+            "metrics":grouped["metrics"],
+            "derived":grouped["derived"],
+          },
+          "expect":{"type":"field_equals","field":"verified","value":True},
+        },
+        {
+          "type":"assert_ranked_record",
+          "args":{
+            "source_path":ranked["source_path"],
+            "selected_path":ranked["output_path"],
+            "order_by":ranked["order_by"],
+            "output_fields":ranked["output_fields"],
+          },
+          "expect":{"type":"field_equals","field":"verified","value":True},
+        },
+      ],
+      "evidence":{
+        "summary_path":grouped["output_path"],
+        "selected_path":ranked["output_path"],
+        "verification_mode":"INDEPENDENT_RECOMPUTATION_FROM_LIVE_SOURCES",
+      }
+    }
+
+
 def _compile_compound_goal(goal, clauses, registry, root):
     actions=[]
     compiled_parts=[]
@@ -2996,6 +3245,38 @@ def _compile_compound_goal(goal, clauses, registry, root):
                 "index":index,"subgoal":clause,
                 "mode":"INDEPENDENT_RUNTIME_CONDITIONAL_VERIFICATION",
                 **live_verify["evidence"],
+            })
+            continue
+
+        grouped_ir=_compile_generic_group_derive_ir(clause,context_paths,root)
+        if grouped_ir is not None:
+            actions.append(grouped_ir["action"])
+            context_paths.append(grouped_ir["output_path"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"GENERIC_GROUP_DERIVE_IR",
+                **grouped_ir["evidence"],
+            })
+            continue
+
+        rank_ir=_compile_generic_rank_select_ir(clause,context_paths,root)
+        if rank_ir is not None:
+            actions.append(rank_ir["action"])
+            context_paths.append(rank_ir["output_path"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"GENERIC_RANK_SELECT_IR",
+                **rank_ir["evidence"],
+            })
+            continue
+
+        generic_verify=_compile_generic_dataflow_verification_ir(clause,compiled_parts)
+        if generic_verify is not None:
+            actions.extend(generic_verify["actions"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"INDEPENDENT_GENERIC_DATAFLOW_VERIFICATION",
+                **generic_verify["evidence"],
             })
             continue
 
