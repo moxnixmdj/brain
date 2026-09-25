@@ -122,6 +122,11 @@ def _resolve(module,name):
 def _infer_codec_contract(candidate,wheel,root):
     pairs=[("packb","unpackb"),("dumps","loads"),("encode","decode"),("serialize","deserialize")]
     fixture=[{"id":1,"text":"alpha"},{"id":2,"text":"beta"}]
+    envelope_key="__project_brain_payload__"
+    representations=[
+      ("direct",fixture,None),
+      ("mapping_envelope",{envelope_key:fixture},envelope_key),
+    ]
     attempts=[]
     with tempfile.TemporaryDirectory(prefix="brain-pypi-probe-") as td:
         site=pathlib.Path(td)/"site"; site.mkdir()
@@ -146,25 +151,32 @@ def _infer_codec_contract(candidate,wheel,root):
                         enc=_resolve(module,enc_name); dec=_resolve(module,dec_name)
                     except Exception:
                         continue
-                    for enc_kwargs in ({},{"use_bin_type":True}):
-                        try: payload=enc(fixture,**enc_kwargs)
-                        except Exception: continue
-                        if isinstance(payload,memoryview): payload=payload.tobytes()
-                        if isinstance(payload,bytearray): payload=bytes(payload)
-                        if not isinstance(payload,bytes) or not payload: continue
-                        for dec_kwargs in ({},{"raw":False}):
-                            try: observed=dec(payload,**dec_kwargs)
+                    for representation,probe_value,unwrap_key in representations:
+                        for enc_kwargs in ({},{"use_bin_type":True}):
+                            try: payload=enc(probe_value,**enc_kwargs)
                             except Exception: continue
-                            if observed==fixture:
-                                return {
-                                  "schema":"PROJECT_BRAIN_PYPI_CODEC_CONTRACT_V1",
-                                  "module":module_name,"encode_callable":enc_name,"decode_callable":dec_name,
-                                  "encode_kwargs":enc_kwargs,"decode_kwargs":dec_kwargs,"fixture":fixture,
-                                  "probe_output_sha256":hashlib.sha256(payload).hexdigest(),
-                                  "probe_output_bytes":len(payload),"wheel_filename":wheel["filename"],
-                                  "wheel_sha256":wheel["sha256"],"project":candidate.get("project") or candidate.get("name"),
-                                  "version":candidate.get("version"),
-                                }
+                            if isinstance(payload,memoryview): payload=payload.tobytes()
+                            if isinstance(payload,bytearray): payload=bytes(payload)
+                            if not isinstance(payload,bytes) or not payload: continue
+                            for dec_kwargs in ({},{"raw":False}):
+                                try: observed=dec(payload,**dec_kwargs)
+                                except Exception: continue
+                                semantic=observed
+                                if unwrap_key is not None:
+                                    if not isinstance(observed,dict) or unwrap_key not in observed:
+                                        continue
+                                    semantic=observed[unwrap_key]
+                                if semantic==fixture:
+                                    return {
+                                      "schema":"PROJECT_BRAIN_PYPI_CODEC_CONTRACT_V1",
+                                      "module":module_name,"encode_callable":enc_name,"decode_callable":dec_name,
+                                      "encode_kwargs":enc_kwargs,"decode_kwargs":dec_kwargs,"fixture":fixture,
+                                      "representation":representation,"envelope_key":unwrap_key,
+                                      "probe_output_sha256":hashlib.sha256(payload).hexdigest(),
+                                      "probe_output_bytes":len(payload),"wheel_filename":wheel["filename"],
+                                      "wheel_sha256":wheel["sha256"],"project":candidate.get("project") or candidate.get("name"),
+                                      "version":candidate.get("version"),
+                                    }
                     attempts.append({"module":module_name,"encode":enc_name,"decode":dec_name,"status":"ROUNDTRIP_REJECTED"})
         finally:
             try: sys.path.remove(str(site))
@@ -220,7 +232,8 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
       "action_template":{"type":"invoke_capability","args":{
           "capability_id":cap_id,"module":contract["module"],"encode_callable":contract["encode_callable"],
           "decode_callable":contract["decode_callable"],"encode_kwargs":contract["encode_kwargs"],
-          "decode_kwargs":contract["decode_kwargs"],"json_path":"${input.json_path}","output_path":"${input.output_path}"
+          "decode_kwargs":contract["decode_kwargs"],"envelope_key":contract.get("envelope_key"),
+          "json_path":"${input.json_path}","output_path":"${input.output_path}"
       },"expect":{"type":"field_equals","field":"output_verified","value":True}},
       "source":{"type":"pypi","project":project,"version":version,"metadata_url":str(selected.get("metadata_url")),
                 "wheel_filename":wheel["filename"],"wheel_sha256":wheel["sha256"],"license":selected.get("license")},
