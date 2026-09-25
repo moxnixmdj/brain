@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T21:42:47.359030+00:00",
+  "mission_id": "ASTRA-RUNTIME-POST-KNOWLEDGE-REGRESSION-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_POST_KNOWLEDGE_REGRESSION_001.json",
+  "mission_sha256": "8771bd3ca7ac33cc19723ede0ca4e3a810a1b40ce64080f560cbf0b01ee6d528",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "4ff16195afd12f7f1c775b37d14e506e906cf779ab2bcb7ca395815ae46f25b6",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

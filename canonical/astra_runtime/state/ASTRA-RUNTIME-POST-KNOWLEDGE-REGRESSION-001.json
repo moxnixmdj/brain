@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T21:42:47.358762+00:00",
+  "created_at_utc": "2026-09-25T21:42:46.576271+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T21:42:47.358458+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython -m py_compile canonical/runtime/astra_runtime.py canonical/runtime/goal_compiler.py\npython -m unittest discover -s canonical/tests -p 'test*.py'",
+        "duration_s": 0.782,
+        "returncode": 0,
+        "stderr": ".....................................................\n----------------------------------------------------------------------\nRan 53 tests in 0.257s\n\nOK\n",
+        "stdout": ""
+      },
+      "step_id": "run-canonical-regressions",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-RUNTIME-POST-KNOWLEDGE-REGRESSION-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_POST_KNOWLEDGE_REGRESSION_001.json",
+  "mission_sha256": "8771bd3ca7ac33cc19723ede0ca4e3a810a1b40ce64080f560cbf0b01ee6d528",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T21:42:47.358473+00:00"
+}
