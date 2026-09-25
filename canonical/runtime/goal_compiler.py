@@ -1111,17 +1111,20 @@ def _compile_json_record_selection(subgoal, context_paths, registry, root):
     # Generic nested-field equality phrasing: "source type is pypi",
     # "source type equals apt", etc. Keep this deliberately narrow and
     # deterministic rather than guessing arbitrary semantics.
-    m=re.search(r"\b([A-Za-z_][A-Za-z0-9_]*)\s+type\s+(?:is|equals?|=)\s+([A-Za-z0-9_.-]+)\b",lower)
+    m=re.search(
+        r"\b(source)\s+(type|project)\s+(?:is|equals?|=)\s+([A-Za-z0-9_.-]+)\b",
+        lower
+    )
     nested_field=None
     nested_value=None
     if m:
-        nested_field=[m.group(1),"type"]
-        nested_value=m.group(2)
+        nested_field=[m.group(1),m.group(2)]
+        nested_value=m.group(3)
     else:
-        m=re.search(r"\bsource\s+type\s+(?:is|equals?|=)\s+([A-Za-z0-9_.-]+)\b",lower)
+        m=re.search(r"\b([A-Za-z_][A-Za-z0-9_]*)\s+type\s+(?:is|equals?|=)\s+([A-Za-z0-9_.-]+)\b",lower)
         if m:
-            nested_field=["source","type"]
-            nested_value=m.group(1)
+            nested_field=[m.group(1),"type"]
+            nested_value=m.group(2)
     if nested_field is None:
         return None
 
@@ -2678,6 +2681,15 @@ def _compile_dynamic_fanout_goal(goal, clauses, registry, root):
 
 def _compile_runtime_fallback_goal(goal, clauses, registry, root):
     if len(clauses)!=4:
+        return None
+    # Recognize the control shape before compiling any clause. Specialized
+    # compilers must be pure probes on unrelated goals, not throw from an
+    # attempted partial interpretation.
+    if not re.match(
+        r"^if\s+the\s+rendered\s+primary\s+result\s+is\s+not\s+a\s+json\s+array\s+"
+        r"containing\s+at\s+least\s+one\s+item,\s+fall\s+back\s+to\s+",
+        str(clauses[1] or "").strip(),re.IGNORECASE
+    ):
         return None
 
     primary=_compile_single_goal(
