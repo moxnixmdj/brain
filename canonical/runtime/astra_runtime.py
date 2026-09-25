@@ -1,3 +1,4 @@
+import html
 #!/usr/bin/env python3
 import argparse, ast, gzip, hashlib, importlib.util, json, os, pathlib, re, shlex, shutil, subprocess, sys, tempfile, time, urllib.parse, urllib.request
 import importlib.metadata
@@ -2523,6 +2524,130 @@ def _goal_action(action):
           "missing_distinctive_query_tokens":missing_distinctive,
         }
 
+    if typ=="extract_labeled_fields_from_rendered_source":
+        source_path=_safe_repo_path(args.get("browser_result_path",""))
+        output_path=_safe_repo_path(args.get("output_path",""))
+        specs=args.get("fields") or []
+        if not source_path.is_file():
+            return {"type":typ,"verified":False,"error":"SEMANTIC_EXTRACTION_SOURCE_MISSING"}
+        if (
+            not isinstance(specs,list) or not specs or len(specs)>32
+            or any(
+                not isinstance(x,dict)
+                or not isinstance(x.get("label"),str) or not x.get("label").strip()
+                or not isinstance(x.get("output_field"),str)
+                or not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*",x.get("output_field",""))
+                for x in specs
+            )
+        ):
+            return {"type":typ,"verified":False,"error":"SEMANTIC_EXTRACTION_FIELD_SPEC_INVALID"}
+        try:
+            browser=json.loads(source_path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            return {"type":typ,"verified":False,"error":"SEMANTIC_EXTRACTION_BROWSER_RESULT_INVALID:"+type(exc).__name__}
+        text=str(browser.get("observed_text") or "")
+        if not text.strip():
+            return {"type":typ,"verified":False,"error":"SEMANTIC_EXTRACTION_TEXT_EMPTY"}
+
+        def extract_label_value(source_text,label):
+            lines=[re.sub(r"\s+"," ",x).strip() for x in str(source_text).splitlines()]
+            wanted=str(label).strip().rstrip(":").lower()
+            for i,line in enumerate(lines):
+                normalized=line.strip().rstrip(":").lower()
+                if normalized==wanted:
+                    for nxt in lines[i+1:i+8]:
+                        if nxt:
+                            return nxt
+                m=re.match(r"^\s*"+re.escape(str(label).strip().rstrip(":"))+r"\s*:\s*(.+?)\s*$",line,re.IGNORECASE)
+                if m and m.group(1).strip():
+                    return m.group(1).strip()
+            return None
+
+        record={}
+        missing=[]
+        for spec in specs:
+            value=extract_label_value(text,spec["label"])
+            if value is None:
+                missing.append(spec["label"])
+            else:
+                record[spec["output_field"]]=value
+        if missing:
+            return {"type":typ,"verified":False,"error":"SEMANTIC_EXTRACTION_LABELS_MISSING","missing_labels":missing}
+        output_path.parent.mkdir(parents=True,exist_ok=True)
+        output_path.write_text(json.dumps([record],indent=2,sort_keys=True)+"\n",encoding="utf-8")
+        return {
+          "type":typ,"verified":True,
+          "output_path":str(output_path.relative_to(ROOT)),
+          "record":record,
+          "field_count":len(record),
+          "source_url":browser.get("final_url") or browser.get("source_url"),
+        }
+
+    if typ=="assert_labeled_fields_against_fresh_source":
+        browser_result_path=_safe_repo_path(args.get("browser_result_path",""))
+        extracted_path=_safe_repo_path(args.get("extracted_path",""))
+        specs=args.get("fields") or []
+        if not browser_result_path.is_file() or not extracted_path.is_file():
+            return {"type":typ,"verified":False,"error":"SEMANTIC_FIELD_VERIFY_INPUT_MISSING"}
+        try:
+            browser=json.loads(browser_result_path.read_text(encoding="utf-8"))
+            rows=json.loads(extracted_path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            return {"type":typ,"verified":False,"error":"SEMANTIC_FIELD_VERIFY_JSON_INVALID:"+type(exc).__name__}
+        if not isinstance(rows,list) or len(rows)!=1 or not isinstance(rows[0],dict):
+            return {"type":typ,"verified":False,"error":"SEMANTIC_FIELD_VERIFY_RECORD_SHAPE_INVALID"}
+        url=str(browser.get("final_url") or browser.get("source_url") or "")
+        if not url.startswith(("https://","http://")):
+            return {"type":typ,"verified":False,"error":"SEMANTIC_FIELD_VERIFY_SOURCE_URL_INVALID"}
+        try:
+            req=urllib.request.Request(url,headers={"User-Agent":"ProjectBrain-IndependentFieldVerifier/1"})
+            with urllib.request.urlopen(req,timeout=int(args.get("timeout_s") or 20)) as resp:
+                raw=resp.read(int(args.get("max_bytes") or 2000000))
+                final_url=resp.geturl()
+            raw_text=raw.decode("utf-8","replace")
+            # Independent transport normalization: reduce markup to visible-ish
+            # line structure before matching labels.
+            plain=html.unescape(re.sub(r"(?is)<script.*?</script>|<style.*?</style>","\n",raw_text))
+            plain=re.sub(r"(?is)<[^>]+>","\n",plain)
+        except Exception as exc:
+            return {"type":typ,"verified":False,"error":"SEMANTIC_FIELD_VERIFY_FETCH_FAILED:"+type(exc).__name__}
+
+        def fresh_value(source_text,label):
+            clean_lines=[re.sub(r"\s+"," ",x).strip() for x in str(source_text).splitlines()]
+            wanted=str(label).strip().rstrip(":").lower()
+            for i,line in enumerate(clean_lines):
+                normalized=line.strip().rstrip(":").lower()
+                if normalized==wanted:
+                    for nxt in clean_lines[i+1:i+12]:
+                        if nxt:
+                            return nxt
+                m=re.match(r"^\s*"+re.escape(str(label).strip().rstrip(":"))+r"\s*:\s*(.+?)\s*$",line,re.IGNORECASE)
+                if m and m.group(1).strip():
+                    return m.group(1).strip()
+            return None
+
+        failures=[]
+        observed={}
+        for spec in specs:
+            label=str(spec.get("label") or "")
+            field=str(spec.get("output_field") or "")
+            value=fresh_value(plain,label)
+            observed[field]=value
+            if value is None:
+                failures.append({"field":field,"error":"LABEL_NOT_FOUND","label":label})
+            elif str(rows[0].get(field) or "").strip()!=str(value).strip():
+                failures.append({
+                  "field":field,"error":"VALUE_MISMATCH",
+                  "expected":rows[0].get(field),"observed":value
+                })
+        return {
+          "type":typ,"verified":not failures,
+          "fresh_url":final_url,
+          "observed":observed,
+          "failures":failures,
+          "source_sha256":hashlib.sha256(raw).hexdigest(),
+        }
+
     if typ=="resolve_authority_identity":
         entity_name=str(args.get("entity_name") or "").strip()
         output=_safe_repo_path(args.get("output_path",""))
@@ -3511,7 +3636,7 @@ def _run_model_independent_goal(step, mission, goal):
     if actions is None:
         return None
     allowed_types={
-      "read_file","list_tree","search_text","http_get","resolve_authority_identity","assert_authority_identity","discover_authoritative_web_source","assert_authoritative_source_discovery","fetch_json_knowledge","assert_json_knowledge","write_json_records","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback","invoke_capability_until","verify_with_independent_pypi_codec",
+      "read_file","list_tree","search_text","http_get","extract_labeled_fields_from_rendered_source","assert_labeled_fields_against_fresh_source","resolve_authority_identity","assert_authority_identity","discover_authoritative_web_source","assert_authoritative_source_discovery","fetch_json_knowledge","assert_json_knowledge","write_json_records","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback","invoke_capability_until","verify_with_independent_pypi_codec",
       "project_browser_result_json","join_runtime_json_arrays","assert_runtime_json_join","aggregate_runtime_json_arrays","assert_runtime_json_aggregate","derive_grouped_records","assert_grouped_derived_records","select_ranked_record","assert_ranked_record","assert_hex_prefix_bucket","assert_collection_length_bucket","assert_runtime_selected_code_decodes",
       "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal","assert_runtime_fanout_decodes","assert_runtime_fanout_artifacts_decode","assert_runtime_per_item_fallback_decodes","assert_runtime_fallback_decision","assert_runtime_bounded_loop_trace",
       "assert_workflow_audit_supported_by_source","assert_python_source_audit_supported_by_source",
