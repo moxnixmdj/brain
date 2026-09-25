@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-BROWSER-PLAIN-GOAL-COMPILE-DIAG-002",
+  "purpose": "Read-only compile the exact browser goal with compiled-prefix observability enabled.",
+  "steps": [
+    {
+      "id": "compile-browser-goal-with-prefix",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib,sys\nroot=pathlib.Path('.').resolve()\np=pathlib.Path('canonical/runtime/goal_compiler.py')\ns=importlib.util.spec_from_file_location('g2',p); g=importlib.util.module_from_spec(s); sys.modules[s.name]=g; s.loader.exec_module(g)\nreg=json.loads(pathlib.Path('canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=(\"Using a real rendered browser, open https://www.python.org/downloads/. Determine the latest stable Python 3 release shown on the page. \"\n\"Save a full-page screenshot to canonical/astra_runtime/tmp/PYTHON_DOWNLOADS.png and save canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_RESULT.json containing source_url, final_url, page_title, latest_stable_python3, and observed_text_evidence. \"\n\"Finally independently verify from the official Python downloads page, without trusting the browser extraction, that the claimed latest_stable_python3 string is present and corresponds to the current stable Python 3 release shown there.\")\ntry:\n print(json.dumps(g.compile_goal(goal,reg,root),sort_keys=True))\nexcept Exception as e:\n print(type(e).__name__+\":\"+str(e))\nprint(\"BROWSER_COMPILE_DIAG2_COMPLETE\")\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "BROWSER_COMPILE_DIAG2_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "read_only_diagnostic": true
+  }
+}
