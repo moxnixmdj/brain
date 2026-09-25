@@ -1,0 +1,17 @@
+{
+  "adapter": "shell",
+  "error": "VERIFICATION_FAILED",
+  "mission_id": "ASTRA-PYPI-BSON-DISCOVERY-DIAG-001",
+  "observed_at_utc": "2026-09-25T18:49:39.353657+00:00",
+  "result": {
+    "adapter": "shell",
+    "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,pathlib,json\np=pathlib.Path('canonical/runtime/capability_discovery.py')\ns=importlib.util.spec_from_file_location('cd',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\ngoal='Encode those exact records as BSON and save canonical/astra_runtime/tmp/BSON_RECORDS.bson'\nout=m.search_pypi_packages(goal,limit=20,timeout_s=20)\nnames=[str(x.get('name') or '') for x in out.get('candidates') or []]\nprint(json.dumps({'queries':out.get('queries'),'names':names},sort_keys=True))\nassert any('bson' in n.lower() for n in names),names\nprint('PYPI_BSON_DISCOVERY_VERIFIED')\nPY",
+    "duration_s": 0.592,
+    "returncode": 1,
+    "stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 8, in <module>\nAssertionError: ['Exact', 'records']\n",
+    "stdout": "{\"names\": [\"Exact\", \"records\"], \"queries\": [\"encode\", \"bson\", \"those\", \"exact\", \"records\", \"save\"]}\n"
+  },
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "discover-bson-candidates",
+  "step_index": 0
+}
