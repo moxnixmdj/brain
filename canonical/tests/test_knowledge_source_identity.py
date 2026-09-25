@@ -3,6 +3,7 @@ import importlib.util
 import json
 import pathlib
 import unittest
+from unittest import mock
 
 CANONICAL_ROOT = pathlib.Path(__file__).resolve().parents[1]
 RUNTIME_PATH = CANONICAL_ROOT / "runtime" / "astra_runtime.py"
@@ -92,6 +93,70 @@ class KnowledgeSourceIdentityTests(unittest.TestCase):
         assessment=json.loads(out.read_text(encoding="utf-8"))
         self.assertEqual(len(assessment["invalid"]),2)
         self.assertTrue(all(x["error"]=="EVIDENCE_SCHEMA_INVALID" for x in assessment["invalid"]))
+
+
+    class _FakeResponse:
+        def __init__(self,url,value):
+            self._url=url
+            self._raw=json.dumps({"args":{"claim":value}}).encode("utf-8")
+        def __enter__(self):
+            return self
+        def __exit__(self,exc_type,exc,tb):
+            return False
+        def read(self,max_bytes):
+            return self._raw[:max_bytes]
+        def geturl(self):
+            return self._url
+
+    def _supported_assessment(self,prefix="TEST_REVALIDATE"):
+        a=self._path(prefix+"_A.json")
+        b=self._path(prefix+"_B.json")
+        assessment=self._path(prefix+"_ASSESSMENT.json")
+        self._write_evidence(a,"https://source-a.example/data","https://source-a.example/data","alpha")
+        self._write_evidence(b,"https://source-b.example/data","https://source-b.example/data","alpha")
+        result=self._assess(a,b,assessment)
+        self.assertEqual(result["status"],"SUPPORTED")
+        return a,b,assessment
+
+    def test_materialization_revalidates_supported_sources(self):
+        _,_,assessment=self._supported_assessment("TEST_REVALIDATE_SUCCESS")
+        output=self._path("TEST_REVALIDATE_SUCCESS_FACT.json")
+        self.addCleanup(lambda: output.unlink(missing_ok=True))
+        def fake_urlopen(req,timeout=20):
+            return self._FakeResponse(req.full_url,"alpha")
+        with mock.patch.object(runtime.urllib.request,"urlopen",side_effect=fake_urlopen):
+            result=runtime._goal_action({
+                "type":"materialize_supported_knowledge",
+                "args":{
+                    "assessment_path":str(assessment.relative_to(runtime.ROOT)).replace("\\","/"),
+                    "field_name":"claim",
+                    "output_path":str(output.relative_to(runtime.ROOT)).replace("\\","/"),
+                },
+            })
+        self.assertTrue(result["output_verified"])
+        self.assertEqual(result["revalidated_evidence_count"],2)
+        self.assertEqual(result["distinct_revalidated_source_identities"],2)
+        self.assertEqual(json.loads(output.read_text(encoding="utf-8")),[{"claim":"alpha"}])
+
+    def test_materialization_refuses_when_revalidation_changes(self):
+        _,_,assessment=self._supported_assessment("TEST_REVALIDATE_CHANGE")
+        output=self._path("TEST_REVALIDATE_CHANGE_FACT.json")
+        self.addCleanup(lambda: output.unlink(missing_ok=True))
+        def fake_urlopen(req,timeout=20):
+            value="beta" if "source-b.example" in req.full_url else "alpha"
+            return self._FakeResponse(req.full_url,value)
+        with mock.patch.object(runtime.urllib.request,"urlopen",side_effect=fake_urlopen):
+            result=runtime._goal_action({
+                "type":"materialize_supported_knowledge",
+                "args":{
+                    "assessment_path":str(assessment.relative_to(runtime.ROOT)).replace("\\","/"),
+                    "field_name":"claim",
+                    "output_path":str(output.relative_to(runtime.ROOT)).replace("\\","/"),
+                },
+            })
+        self.assertFalse(result["output_verified"])
+        self.assertEqual(result["blocked_reason"],"KNOWLEDGE_REVALIDATION_FAILED")
+        self.assertFalse(output.exists())
 
 
 if __name__ == "__main__":
