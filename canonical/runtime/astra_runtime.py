@@ -620,6 +620,38 @@ def _goal_action(action):
           "audit_sha256":sha_file(audit_path),
           "source_sha256":sha_file(yaml_path),
         }
+    if typ=="assert_runtime_selected_code_decodes":
+        source=_safe_repo_path(args.get("source_path",""))
+        if not source.is_file():
+            return {"type":typ,"verified":False,"error":"RUNTIME_VALUE_SOURCE_MISSING"}
+        try:
+            wrapper=json.loads(source.read_text(encoding="utf-8"))
+            observed=json.loads(str(wrapper.get("observed_text") or ""))
+        except Exception as exc:
+            return {"type":typ,"verified":False,"error":"RUNTIME_VALUE_SOURCE_INVALID:"+type(exc).__name__}
+        value=str(observed.get(str(args.get("value_key") or "")) or "")
+        chars=set(str(args.get("match_chars") or "").lower())
+        match_path=str(args.get("match_path") or "")
+        other_path=str(args.get("other_path") or "")
+        if not value or not chars or not match_path or not other_path:
+            return {"type":typ,"verified":False,"error":"RUNTIME_VERIFY_SPEC_INVALID"}
+        branch="match" if value[0].lower() in chars else "other"
+        selected_path=match_path if branch=="match" else other_path
+        decoded=_invoke_bound_capability({
+          "capability_id":"image.code.decode.zbarimg",
+          "argv":["zbarimg","--quiet","--raw",selected_path],
+          "timeout_s":60,
+        })
+        observed_payload=str(decoded.get("stdout") or "").strip()
+        return {
+          "type":typ,
+          "verified":observed_payload==value,
+          "branch":branch,
+          "selected_path":selected_path,
+          "observed_value":value,
+          "decoded_value":observed_payload,
+          "decoder_capability":"image.code.decode.zbarimg",
+        }
     if typ=="assert_collection_length_bucket":
         source=_safe_repo_path(args.get("source_path",""))
         output=_safe_repo_path(args.get("output_path",""))
@@ -929,7 +961,7 @@ def _run_model_independent_goal(step, mission, goal):
         return None
     allowed_types={
       "read_file","list_tree","search_text","http_get","invoke_capability","invoke_capability_by_runtime_value",
-      "project_browser_result_json","assert_hex_prefix_bucket","assert_collection_length_bucket",
+      "project_browser_result_json","assert_hex_prefix_bucket","assert_collection_length_bucket","assert_runtime_selected_code_decodes",
       "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal",
       "assert_workflow_audit_supported_by_source","assert_python_source_audit_supported_by_source",
       "assert_python_test_audit_zero","assert_python_test_audit_supported_by_fresh_execution",
