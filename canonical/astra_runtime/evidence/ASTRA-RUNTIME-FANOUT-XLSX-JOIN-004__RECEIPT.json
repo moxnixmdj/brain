@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T16:26:22.043062+00:00",
+  "mission_id": "ASTRA-RUNTIME-FANOUT-XLSX-JOIN-004",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_FANOUT_XLSX_JOIN_004.json",
+  "mission_sha256": "ea84eb4e2ac8088898889ca5f7c863a56ec3945da61309356c17c5fc2caf4e97",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "fecf3090d2500cf1deee6b78ed4bd1d5a8346f773831e021bb1e5a604f494a6f",
+  "status": "COMPLETE",
+  "steps_completed": 3
+}
