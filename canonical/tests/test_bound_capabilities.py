@@ -61,9 +61,17 @@ class BoundCapabilityTests(unittest.TestCase):
             source=cap.get("source") or {}
             if source.get("type")!="python_stdlib":
                 continue
-            module=str(source.get("module") or "").strip()
-            self.assertTrue(module,cid)
-            self.assertIsNotNone(importlib.util.find_spec(module),cid)
+            raw=source.get("modules")
+            if raw is None:
+                modules=[str(source.get("module") or "").strip()]
+            else:
+                self.assertIsInstance(raw,list,cid)
+                modules=[str(x or "").strip() for x in raw]
+            self.assertTrue(modules,cid)
+            self.assertTrue(all(modules),cid)
+            self.assertEqual(len(modules),len(set(modules)),cid)
+            for module in modules:
+                self.assertIsNotNone(importlib.util.find_spec(module),cid)
 
     def test_unknown_bound_capability_rejected(self):
         with self.assertRaisesRegex(runtime.Blocker,"BOUND_CAPABILITY_UNKNOWN"):
