@@ -1449,6 +1449,40 @@ def _compile_runtime_dynamic_fanout(subgoal, context_paths, registry, future_cla
     }
 
 
+def _compile_runtime_dynamic_fanout_verification(subgoal, compiled_parts):
+    if not re.match(
+        r"^finally\s+independently\s+decode\s+every\s+generated\s+image\s+and\s+verify\s+each\s+decoded\s+value\s+equals\s+that\s+live\s+user's\s+username,\s*every\s+live\s+user\s+has\s+exactly\s+one\s+artifact,\s*and\s+no\s+extra\s+manifest\s+records\s+exist$",
+        str(subgoal or "").strip(),re.IGNORECASE
+    ):
+        return None
+    prior=None
+    for part in reversed(compiled_parts or []):
+        if isinstance(part,dict) and part.get("mode")=="RUNTIME_DYNAMIC_CAPABILITY_FANOUT":
+            prior=part
+            break
+    if prior is None:
+        return None
+    return {
+      "action":{
+        "type":"assert_runtime_fanout_decodes",
+        "args":{
+          "source_path":prior["source_path"],
+          "manifest_path":prior["manifest_path"],
+          "value_field":prior["value_field"],
+          "max_length":prior["max_length"],
+          "match_kind":prior["match_kind"],
+          "other_kind":prior["other_kind"],
+        },
+        "expect":{"type":"field_equals","field":"verified","value":True},
+      },
+      "evidence":{
+        "source_path":prior["source_path"],
+        "manifest_path":prior["manifest_path"],
+        "decoder_capability":"image.code.decode.zbarimg",
+      }
+    }
+
+
 def _compile_live_collection_read(subgoal, context_paths):
     if not re.match(r"^read\s+the\s+live\s+json\s+array\s+from\s+that\s+result$",str(subgoal or "").strip(),re.IGNORECASE):
         return None
