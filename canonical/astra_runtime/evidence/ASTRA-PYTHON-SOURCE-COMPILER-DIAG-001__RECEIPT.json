@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T01:05:39.530108+00:00",
+  "mission_id": "ASTRA-PYTHON-SOURCE-COMPILER-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_PYTHON_SOURCE_COMPILER_DIAG_001.json",
+  "mission_sha256": "3d7b1df717d017fca76b3e509dba27f53d709362f24b5ffdb75f184324da62d2",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "799f205450b29d18b2982a6c8fbc65a9a0fd20cd1413643711a1f9da8994abda",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

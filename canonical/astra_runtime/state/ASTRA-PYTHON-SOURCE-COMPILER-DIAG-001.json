@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T01:05:39.529781+00:00",
+  "created_at_utc": "2026-09-25T01:05:39.481465+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T01:05:39.529500+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\nroot=pathlib.Path('.').resolve()\np=root/'canonical/runtime/goal_compiler.py'\ns=importlib.util.spec_from_file_location('gc_py_audit',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads((root/'canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads((root/'canonical/astra_runtime/missions/ASTRA_RUNTIME_PYTHON_SOURCE_AUDIT_001.json').read_text())['goal']\ntry:\n out=m.compile_goal(goal,reg,root); print(json.dumps({'status':'COMPILED','mode':out.get('compiler_mode'),'parts':out.get('compiled_parts'),'actions':out.get('controller_actions')},sort_keys=True))\nexcept Exception as e:\n print(json.dumps({'status':'FAILED','type':type(e).__name__,'code':getattr(e,'code',None),'detail':getattr(e,'detail',None),'error':str(e)},sort_keys=True))\nprint('PYTHON_SOURCE_COMPILER_DIAG_COMPLETE')\nPY",
+        "duration_s": 0.048,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"code\": \"GOAL_COMPILATION_SUBGOAL_UNRESOLVED\", \"detail\": \"{\\\"cause\\\": \\\"GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH\\\", \\\"cause_detail\\\": null, \\\"clauses\\\": [\\\"Inspect every Python file under canonical/runtime\\\", \\\"Create canonical/astra_runtime/tmp/PYTHON_RUNTIME_AUDIT.json containing one record per .py file with its repository-relative path, SHA-256, top-level imported module names, top-level function names, and top-level class names\\\", \\\"Include totals for files, functions, classes, and distinct imported modules\\\", \\\"Finally independently verify against the raw Python source files that every reported file exists, every reported SHA-256 matches its exact bytes, every reported top-level function and class is actually defined in that file, and fail if any Python file under canonical/runtime is missing from the audit\\\"], \\\"index\\\": 0, \\\"subgoal\\\": \\\"Inspect every Python file under canonical/runtime\\\"}\", \"error\": \"GOAL_COMPILATION_SUBGOAL_UNRESOLVED:{\\\"cause\\\": \\\"GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH\\\", \\\"cause_detail\\\": null, \\\"clauses\\\": [\\\"Inspect every Python file under canonical/runtime\\\", \\\"Create canonical/astra_runtime/tmp/PYTHON_RUNTIME_AUDIT.json containing one record per .py file with its repository-relative path, SHA-256, top-level imported module names, top-level function names, and top-level class names\\\", \\\"Include totals for files, functions, classes, and distinct imported modules\\\", \\\"Finally independently verify against the raw Python source files that every reported file exists, every reported SHA-256 matches its exact bytes, every reported top-level function and class is actually defined in that file, and fail if any Python file under canonical/runtime is missing from the audit\\\"], \\\"index\\\": 0, \\\"subgoal\\\": \\\"Inspect every Python file under canonical/runtime\\\"}\", \"status\": \"FAILED\", \"type\": \"GoalCompilationFailure\"}\nPYTHON_SOURCE_COMPILER_DIAG_COMPLETE\n"
+      },
+      "step_id": "compile-python-audit-only",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-PYTHON-SOURCE-COMPILER-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_PYTHON_SOURCE_COMPILER_DIAG_001.json",
+  "mission_sha256": "3d7b1df717d017fca76b3e509dba27f53d709362f24b5ffdb75f184324da62d2",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T01:05:39.529514+00:00"
+}
