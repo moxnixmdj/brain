@@ -1,0 +1,20 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-POST-NPM-REGRESSION-002",
+  "purpose": "Fresh regression sweep after spec-safe helper loading, fallback recognition repair, and multi-PyPI selection invariant update.",
+  "steps": [
+    {
+      "id": "run-focused-regressions",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython -m py_compile canonical/runtime/astra_runtime.py canonical/runtime/goal_compiler.py canonical/runtime/auto_capability_acquisition.py canonical/runtime/auto_pypi_library_acquisition.py canonical/runtime/auto_npm_library_acquisition.py canonical/runtime/npm_package_utils.py canonical/runtime/verify_pending_cli_binding.py canonical/runtime/bound_capabilities/python_library_codec.py canonical/runtime/bound_capabilities/node_library_codec.py\nnode --check canonical/runtime/node_codec_runner.js\npython -m unittest discover -s canonical/tests -p 'test*.py'",
+      "verify": {
+        "type": "returncode_zero"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "regression_only": true
+  }
+}
