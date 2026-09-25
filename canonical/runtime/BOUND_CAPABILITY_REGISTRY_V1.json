@@ -1397,6 +1397,12 @@
           "title": "Project Brain Report",
           "paragraph": "Verified cross-tool composition",
           "table_rows": 3
+        },
+        "intent_sidecar_extension": {
+          "mission_id": "ASTRA-VERIFY-DOCX-INTENT-CHAIN-001",
+          "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DOCX-INTENT-CHAIN-001__RECEIPT.json",
+          "raw_intent_persisted": true,
+          "independently_reparsed": true
         }
       }
     },
@@ -1496,7 +1502,20 @@
           "xml.etree.ElementTree"
         ]
       },
-      "status": "BOUND_PENDING_INDEPENDENT_VERIFICATION"
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "mission_id": "ASTRA-VERIFY-DOCX-INTENT-CHAIN-001",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DOCX-INTENT-CHAIN-001__RECEIPT.json",
+        "independently_verified": true,
+        "observed_effect": {
+          "verified": true,
+          "title_ok": true,
+          "paragraphs_ok": true,
+          "table_ok": true,
+          "intent_path": "canonical/astra_runtime/tmp/DOCX_INTENT_VERIFY.docx.intent.json",
+          "docx_sha256": "e169aa79677b959917095989d5a7387da0d7b4c385f1ee296b5e09af295f5164"
+        }
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
