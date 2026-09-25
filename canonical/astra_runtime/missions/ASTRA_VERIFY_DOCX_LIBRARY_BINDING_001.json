@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-VERIFY-DOCX-LIBRARY-BINDING-001",
+  "purpose": "Fresh independent effect verification of the bounded python3-docx producer and stdlib OOXML verifier.",
+  "goal": "Create canonical/astra_runtime/tmp/DOCX_LIBRARY_VERIFY.docx with title Project Brain Report, paragraph Verified cross-tool composition, and a table with columns Capability and Status containing Browser interaction | VERIFIED and Browser-to-XLSX composition | VERIFIED.",
+  "steps": [
+    {
+      "id": "verify-docx-producer-and-independent-parser",
+      "adapter": "goal",
+      "controller_actions": [
+        {
+          "type": "invoke_capability",
+          "args": {
+            "capability_id": "docx.document.create.python_docx",
+            "goal": "Create canonical/astra_runtime/tmp/DOCX_LIBRARY_VERIFY.docx with title Project Brain Report, paragraph Verified cross-tool composition, and a table with columns Capability and Status containing Browser interaction | VERIFIED and Browser-to-XLSX composition | VERIFIED.",
+            "output_path": "canonical/astra_runtime/tmp/DOCX_LIBRARY_VERIFY.docx",
+            "module": "docx",
+            "factory": "Document"
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "output_verified",
+            "value": true
+          }
+        },
+        {
+          "type": "invoke_capability",
+          "args": {
+            "capability_id": "docx.document.verify.ooxml",
+            "path": "canonical/astra_runtime/tmp/DOCX_LIBRARY_VERIFY.docx",
+            "expected": {
+              "title": "Project Brain Report",
+              "paragraphs": [
+                "Verified cross-tool composition"
+              ],
+              "headers": [
+                "Capability",
+                "Status"
+              ],
+              "rows": [
+                [
+                  "Browser interaction",
+                  "VERIFIED"
+                ],
+                [
+                  "Browser-to-XLSX composition",
+                  "VERIFIED"
+                ]
+              ]
+            }
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "verified",
+            "value": true
+          }
+        },
+        {
+          "type": "finish",
+          "args": {
+            "summary": "DOCX_LIBRARY_BINDING_VERIFIED"
+          }
+        }
+      ],
+      "max_controller_actions": 4,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "DOCX_LIBRARY_BINDING_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "fresh_verification_invocation_required": true,
+    "producer_independent_verifier_required": true
+  }
+}
