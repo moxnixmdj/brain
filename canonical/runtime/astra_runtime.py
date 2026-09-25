@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import argparse, gzip, hashlib, importlib.util, json, os, pathlib, re, shlex, shutil, subprocess, sys, tempfile, time, urllib.parse, urllib.request
+import argparse, ast, gzip, hashlib, importlib.util, json, os, pathlib, re, shlex, shutil, subprocess, sys, tempfile, time, urllib.parse, urllib.request
 import importlib.metadata
 from datetime import datetime, timezone
 
