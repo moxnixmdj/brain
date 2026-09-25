@@ -1,0 +1,17 @@
+{
+  "adapter": "shell",
+  "error": "VERIFICATION_FAILED",
+  "mission_id": "ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001",
+  "observed_at_utc": "2026-09-25T02:06:56.859566+00:00",
+  "result": {
+    "adapter": "shell",
+    "command": "set -euo pipefail\npython canonical/runtime/verify_browser_python_release.py",
+    "duration_s": 13.891,
+    "returncode": 1,
+    "stderr": "Traceback (most recent call last):\n  File \"/home/runner/work/brain/brain/canonical/runtime/verify_browser_python_release.py\", line 79, in <module>\n    main()\n  File \"/home/runner/work/brain/brain/canonical/runtime/verify_browser_python_release.py\", line 41, in main\n    raise RuntimeError(\"INDEPENDENT_STABLE_RELEASE_NOT_FOUND\")\nRuntimeError: INDEPENDENT_STABLE_RELEASE_NOT_FOUND\n",
+    "stdout": ""
+  },
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "verify-rendered-browser-effect",
+  "step_index": 0
+}

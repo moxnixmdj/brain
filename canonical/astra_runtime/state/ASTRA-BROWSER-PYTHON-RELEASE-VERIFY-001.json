@@ -1,0 +1,44 @@
+{
+  "blocker": {
+    "adapter": "shell",
+    "error": "VERIFICATION_FAILED",
+    "mission_id": "ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001",
+    "observed_at_utc": "2026-09-25T02:06:56.859566+00:00",
+    "result": {
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/runtime/verify_browser_python_release.py",
+      "duration_s": 13.891,
+      "returncode": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/home/runner/work/brain/brain/canonical/runtime/verify_browser_python_release.py\", line 79, in <module>\n    main()\n  File \"/home/runner/work/brain/brain/canonical/runtime/verify_browser_python_release.py\", line 41, in main\n    raise RuntimeError(\"INDEPENDENT_STABLE_RELEASE_NOT_FOUND\")\nRuntimeError: INDEPENDENT_STABLE_RELEASE_NOT_FOUND\n",
+      "stdout": ""
+    },
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "verify-rendered-browser-effect",
+    "step_index": 0
+  },
+  "created_at_utc": "2026-09-25T02:06:42.968309+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T02:06:56.859553+00:00",
+      "ok": false,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython canonical/runtime/verify_browser_python_release.py",
+        "duration_s": 13.891,
+        "returncode": 1,
+        "stderr": "Traceback (most recent call last):\n  File \"/home/runner/work/brain/brain/canonical/runtime/verify_browser_python_release.py\", line 79, in <module>\n    main()\n  File \"/home/runner/work/brain/brain/canonical/runtime/verify_browser_python_release.py\", line 41, in main\n    raise RuntimeError(\"INDEPENDENT_STABLE_RELEASE_NOT_FOUND\")\nRuntimeError: INDEPENDENT_STABLE_RELEASE_NOT_FOUND\n",
+        "stdout": ""
+      },
+      "step_id": "verify-rendered-browser-effect",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_BROWSER_PYTHON_RELEASE_VERIFY_001.json",
+  "mission_sha256": "c222e8baaaf16412b6f973d14c904cb0018a237a5ad60616ef51337cc5a0e00d",
+  "next_step": 0,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-25T02:06:56.859901+00:00"
+}
