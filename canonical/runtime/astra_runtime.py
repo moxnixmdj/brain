@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import argparse, gzip, hashlib, importlib.util, json, os, pathlib, re, shlex, subprocess, sys, tempfile, time, urllib.parse, urllib.request
+import argparse, gzip, hashlib, importlib.util, json, os, pathlib, re, shlex, shutil, subprocess, sys, tempfile, time, urllib.parse, urllib.request
 import importlib.metadata
 from datetime import datetime, timezone
 
@@ -138,6 +138,40 @@ def _ensure_pypi_dependency(source):
         raise Blocker("BOUND_PYPI_INSTALLED_VERSION_MISMATCH:"+installed)
     return {"status":"INSTALLED_VERIFIED","project":name,"version":version,"wheel_sha256":actual}
 
+def _ensure_local_dependency(source):
+    typ=str(source.get("type") or "").strip()
+    if typ=="python_stdlib":
+        module=str(source.get("module") or "").strip()
+        if not module:
+            raise Blocker("BOUND_PYTHON_STDLIB_MODULE_REQUIRED")
+        try:
+            spec=importlib.util.find_spec(module)
+        except Exception as exc:
+            raise Blocker("BOUND_PYTHON_STDLIB_PROBE_FAILED:"+module+":"+type(exc).__name__) from exc
+        if spec is None:
+            raise Blocker("BOUND_PYTHON_STDLIB_MODULE_MISSING:"+module)
+        return {
+          "status":"LOCAL_VERIFIED",
+          "type":"python_stdlib",
+          "module":module,
+          "python_version":sys.version.split()[0],
+        }
+    if typ=="system_tool":
+        exe=str(source.get("executable") or "").strip()
+        if not exe or pathlib.Path(exe).name!=exe:
+            raise Blocker("BOUND_SYSTEM_TOOL_EXECUTABLE_INVALID")
+        resolved=shutil.which(exe)
+        if not resolved:
+            raise Blocker("BOUND_SYSTEM_TOOL_MISSING:"+exe)
+        return {
+          "status":"LOCAL_VERIFIED",
+          "type":"system_tool",
+          "executable":exe,
+          "resolved_path":resolved,
+        }
+    raise Blocker("BOUND_CAPABILITY_SOURCE_UNSUPPORTED:"+typ)
+
+
 def _ensure_apt_dependencies(source):
     if not sys.platform.startswith("linux"):
         raise Blocker("BOUND_APT_PLATFORM_UNSUPPORTED:"+sys.platform)
@@ -197,6 +231,8 @@ def _invoke_bound_capability(args):
         dependency=_ensure_pypi_dependency(source)
     elif source.get("type")=="apt":
         dependency=_ensure_apt_dependencies(source)
+    elif source.get("type") in {"python_stdlib","system_tool"}:
+        dependency=_ensure_local_dependency(source)
     elif source.get("type"):
         raise Blocker("BOUND_CAPABILITY_SOURCE_UNSUPPORTED:"+str(source.get("type")))
     module_name=str(entry.get("adapter_module") or "")
