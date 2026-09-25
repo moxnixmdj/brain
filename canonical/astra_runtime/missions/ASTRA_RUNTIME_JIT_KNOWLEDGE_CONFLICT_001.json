@@ -1,0 +1,98 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-CONFLICT-001",
+  "purpose": "Prove explicit epistemic conflict handling over two live external observations without collapsing disagreement into a single supported fact.",
+  "goal": "Fetch two external JSON observations of the same claim slot that disagree, preserve both evidence records, assess them together, and verify the epistemic status is CONFLICTED rather than SUPPORTED.",
+  "steps": [
+    {
+      "id": "run-conflict-assessment",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 8,
+      "controller_actions": [
+        {
+          "type": "fetch_json_knowledge",
+          "args": {
+            "url": "https://httpbin.org/get?claim=alpha",
+            "json_path": [
+              "args",
+              "claim"
+            ],
+            "output_path": "canonical/astra_runtime/tmp/JIT_CONFLICT_ALPHA.json",
+            "authoritative": false,
+            "timeout_s": 20,
+            "max_bytes": 500000
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "verified",
+            "value": true
+          }
+        },
+        {
+          "type": "fetch_json_knowledge",
+          "args": {
+            "url": "https://httpbin.org/get?claim=beta",
+            "json_path": [
+              "args",
+              "claim"
+            ],
+            "output_path": "canonical/astra_runtime/tmp/JIT_CONFLICT_BETA.json",
+            "authoritative": false,
+            "timeout_s": 20,
+            "max_bytes": 500000
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "verified",
+            "value": true
+          }
+        },
+        {
+          "type": "assess_knowledge_consistency",
+          "args": {
+            "evidence_paths": [
+              "canonical/astra_runtime/tmp/JIT_CONFLICT_ALPHA.json",
+              "canonical/astra_runtime/tmp/JIT_CONFLICT_BETA.json"
+            ],
+            "output_path": "canonical/astra_runtime/tmp/JIT_CONFLICT_ASSESSMENT.json"
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "status",
+            "value": "CONFLICTED"
+          }
+        },
+        {
+          "type": "assert_knowledge_status",
+          "args": {
+            "assessment_path": "canonical/astra_runtime/tmp/JIT_CONFLICT_ASSESSMENT.json",
+            "expected_status": "CONFLICTED"
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "verified",
+            "value": true
+          }
+        },
+        {
+          "type": "finish",
+          "args": {
+            "summary": "KNOWLEDGE_CONFLICT_DETECTED"
+          }
+        }
+      ],
+      "verify": {
+        "type": "stdout_contains",
+        "text": "KNOWLEDGE_CONFLICT_DETECTED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "disagreement_must_not_be_collapsed": true,
+    "explicit_epistemic_status_required": true,
+    "conflict_assessment_commit": "1c1243d478051b3309a333161aa1db38395fbbe3"
+  }
+}
