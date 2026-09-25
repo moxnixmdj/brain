@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-GENERIC-DATAFLOW-CHAIN-001",
+  "purpose": "Pressure-test recursive generic dataflow: three live sources, one derived grouped dataset feeding a second grouped derivation, deterministic ranking, and independent verification from the causal chain.",
+  "goal": "Using a real rendered browser, open https://jsonplaceholder.typicode.com/users, save a screenshot to canonical/astra_runtime/tmp/CHAIN_USERS.png, and save the rendered result to canonical/astra_runtime/tmp/CHAIN_USERS.json. Using a real rendered browser, open https://jsonplaceholder.typicode.com/posts, save a screenshot to canonical/astra_runtime/tmp/CHAIN_POSTS.png, and save the rendered result to canonical/astra_runtime/tmp/CHAIN_POSTS.json. Using a real rendered browser, open https://jsonplaceholder.typicode.com/comments, save a screenshot to canonical/astra_runtime/tmp/CHAIN_COMMENTS.png, and save the rendered result to canonical/astra_runtime/tmp/CHAIN_COMMENTS.json. Using both live results, create canonical/astra_runtime/tmp/CHAIN_POST_COMMENT_STATS.json containing exactly one record per live post with post_id, userId, comment_count, comment_id_sum, and average_comment_id, where comment_count is the number of live comments whose postId equals that post's id, comment_id_sum is the sum of those comments' id field, and average_comment_id is comment_id_sum divided by comment_count. Using both live results, create canonical/astra_runtime/tmp/CHAIN_USER_POST_STATS.json containing exactly one record per live user with user_id, username, post_count, comment_count_sum, and average_comments_per_post, where post_count is the number of live posts whose userId equals that user's id, comment_count_sum is the sum of those posts' comment_count field, and average_comments_per_post is comment_count_sum divided by post_count. From canonical/astra_runtime/tmp/CHAIN_USER_POST_STATS.json select exactly two winners with the greatest average_comments_per_post, breaking ties by the lowest user_id, and save canonical/astra_runtime/tmp/CHAIN_USER_TOP2.json containing user_id, username, post_count, comment_count_sum, and average_comments_per_post in ranked order. Finally independently reopen all three live source results, canonical/astra_runtime/tmp/CHAIN_POST_COMMENT_STATS.json, canonical/astra_runtime/tmp/CHAIN_USER_POST_STATS.json, and canonical/astra_runtime/tmp/CHAIN_USER_TOP2.json and verify both derived datasets are correct from their causal inputs, the selected two records are exactly the top two under the requested ordering, every live post and user appears exactly once in its derived dataset, and there are no extra records.",
+  "steps": [
+    {
+      "id": "run-chained-generic-dataflow",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 40,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "manual_controller_actions": false,
+    "manual_target_effects": false,
+    "three_live_sources_required": true,
+    "recursive_derived_state_required": true,
+    "independent_recursive_verification_required": true,
+    "capability_acquisition_for_transform_gap_forbidden": true
+  }
+}
