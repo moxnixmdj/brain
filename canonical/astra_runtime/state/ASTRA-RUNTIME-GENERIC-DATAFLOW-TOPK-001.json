@@ -1,0 +1,21 @@
+{
+  "blocker": {
+    "adapter": "goal",
+    "error": "Blocker:GOAL_COMPILATION_FAILED:GOAL_CAUSAL_COMPOSITION_UNSUPPORTED:{\"index\": 2, \"subgoal\": \"Using both live results, create canonical/astra_runtime/tmp/POST_COMMENT_AVERAGES.json containing exactly one record per live post with post_id, title, comment_count, comment_id_sum, and average_comment_id, where comment_count is the number of live comments whose postId equals that post's id, comment_id_sum is the sum of those comments' id field, and average_comment_id is comment_id_sum divided by comment_count\"}",
+    "mission_id": "ASTRA-RUNTIME-GENERIC-DATAFLOW-TOPK-001",
+    "observed_at_utc": "2026-09-25T20:14:31.734396+00:00",
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "run-generic-dataflow-topk",
+    "step_index": 0
+  },
+  "created_at_utc": "2026-09-25T20:14:31.653441+00:00",
+  "history": [],
+  "mission_id": "ASTRA-RUNTIME-GENERIC-DATAFLOW-TOPK-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_GENERIC_DATAFLOW_TOPK_001.json",
+  "mission_sha256": "743c03402112f7ca8036377d74303cf1955c1c1d7b70c9ea51ad09b3caa1288c",
+  "next_step": 0,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-25T20:14:31.734554+00:00"
+}
