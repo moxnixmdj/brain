@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T01:06:47.063947+00:00",
+  "mission_id": "ASTRA-VERIFY-PYTHON-SOURCE-AUDIT-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_PYTHON_SOURCE_AUDIT_001.json",
+  "mission_sha256": "0d4ba5102ef2ef8bc2420639ec766695cfe6d61bd9379afc7588110ae1276c70",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "b69345437b4d0164660146fabb22f4f25aef3f9ba599f4c8e62c6f09c9bbdace",
+  "status": "COMPLETE",
+  "steps_completed": 2
+}

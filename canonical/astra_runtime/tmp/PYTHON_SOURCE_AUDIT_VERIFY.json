@@ -1,0 +1,624 @@
+{
+  "distinct_imported_modules": [
+    "__future__",
+    "apt_cli_probe",
+    "argparse",
+    "ast",
+    "astra_runtime",
+    "asyncio",
+    "base64",
+    "bound_capabilities",
+    "capability_discovery",
+    "cli_contract_inference",
+    "csv",
+    "dataclasses",
+    "datetime",
+    "goal_compiler",
+    "gzip",
+    "hashlib",
+    "heapq",
+    "html",
+    "http",
+    "importlib",
+    "io",
+    "itertools",
+    "json",
+    "os",
+    "pathlib",
+    "re",
+    "secrets",
+    "shlex",
+    "shutil",
+    "signal",
+    "socketserver",
+    "sqlite3",
+    "stat",
+    "subprocess",
+    "sys",
+    "tarfile",
+    "tempfile",
+    "threading",
+    "time",
+    "urllib",
+    "websocket"
+  ],
+  "files": [
+    {
+      "classes": [
+        "ProbeFailure"
+      ],
+      "functions": [
+        "_run",
+        "main",
+        "probe"
+      ],
+      "imports": [
+        "__future__",
+        "json",
+        "pathlib",
+        "re",
+        "stat",
+        "subprocess",
+        "sys"
+      ],
+      "path": "canonical/runtime/apt_cli_probe.py",
+      "sha256": "fc35c7684a0e968eaf4dbe0ea671ba960ce6c03cfbb590aaa4c75c407b18dc0a"
+    },
+    {
+      "classes": [],
+      "functions": [
+        "read",
+        "sha"
+      ],
+      "imports": [
+        "hashlib",
+        "json",
+        "pathlib",
+        "re"
+      ],
+      "path": "canonical/runtime/astra_hidden_verifier.py",
+      "sha256": "b7ca0c1817f8bbb31a52714c14fd9c8a23a49de1c1a0631eae10549cdf12727c"
+    },
+    {
+      "classes": [
+        "Browser",
+        "CDP",
+        "VisualExecutor"
+      ],
+      "functions": [
+        "canary",
+        "canon",
+        "chrome_start",
+        "claim_and_arm",
+        "ev",
+        "init_db",
+        "norm",
+        "ocr",
+        "phrase_box",
+        "run_hidden",
+        "sha_file",
+        "sha_text",
+        "terminal",
+        "utc",
+        "writej"
+      ],
+      "imports": [
+        "argparse",
+        "base64",
+        "csv",
+        "datetime",
+        "hashlib",
+        "http",
+        "io",
+        "json",
+        "os",
+        "pathlib",
+        "re",
+        "secrets",
+        "socketserver",
+        "sqlite3",
+        "subprocess",
+        "threading",
+        "time",
+        "urllib",
+        "websocket"
+      ],
+      "path": "canonical/runtime/astra_hidden_visual_executor.py",
+      "sha256": "8f5bd92dc3085136b8a12c4175d9eecfdae83597c15ad7c6a7b2e22c1ab23ade"
+    },
+    {
+      "classes": [
+        "Blocker"
+      ],
+      "functions": [
+        "_capability_problem",
+        "_compile_plain_goal",
+        "_controller_actions",
+        "_discover_unreachable_effects",
+        "_ensure_apt_dependencies",
+        "_ensure_local_dependency",
+        "_ensure_pypi_dependency",
+        "_extract_json_object",
+        "_goal_action",
+        "_inherit_verified_capabilities",
+        "_invoke_bound_capability",
+        "_load_auto_apt_cli_acquisition",
+        "_load_bound_capability_registry",
+        "_load_capability_discovery",
+        "_load_capability_planner",
+        "_load_goal_compiler",
+        "_planner_post",
+        "_render_bound_template",
+        "_resolve_result_refs",
+        "_run_capability_planned_goal",
+        "_run_model_independent_goal",
+        "_safe_repo_path",
+        "_verify_action_expectation",
+        "context_results",
+        "execute_step",
+        "main",
+        "readj",
+        "run_goal",
+        "run_http",
+        "run_shell",
+        "sha_file",
+        "utc",
+        "verify",
+        "writej"
+      ],
+      "imports": [
+        "argparse",
+        "datetime",
+        "gzip",
+        "hashlib",
+        "importlib",
+        "json",
+        "os",
+        "pathlib",
+        "re",
+        "shlex",
+        "shutil",
+        "subprocess",
+        "sys",
+        "tempfile",
+        "time",
+        "urllib"
+      ],
+      "path": "canonical/runtime/astra_runtime.py",
+      "sha256": "42a3ec82e9e00aa9ff6367f2eb05517ea8ebe00854a4ea012b1aaec5b6bec58d"
+    },
+    {
+      "classes": [
+        "AutoAcquisitionFailure"
+      ],
+      "functions": [
+        "_bind_contract_inputs",
+        "_merge_role_conditioned_apt",
+        "_render",
+        "_slug",
+        "_viable_candidates",
+        "dispatch"
+      ],
+      "imports": [
+        "__future__",
+        "apt_cli_probe",
+        "capability_discovery",
+        "cli_contract_inference",
+        "goal_compiler",
+        "hashlib",
+        "json",
+        "pathlib",
+        "re"
+      ],
+      "path": "canonical/runtime/auto_apt_cli_acquisition.py",
+      "sha256": "f6ae02ee9f5c4346b1fb6629a8e78e992bf9a1ca688cc837896dddac7cacd166"
+    },
+    {
+      "classes": [],
+      "functions": [
+        "_manifest_paths",
+        "_safe",
+        "run"
+      ],
+      "imports": [
+        "__future__",
+        "hashlib",
+        "json",
+        "pathlib",
+        "tarfile"
+      ],
+      "path": "canonical/runtime/bound_capabilities/archive_tarfile.py",
+      "sha256": "6f05de15eed1d792525938fa90c940fcc3b3566b9504cddd47dbf8994dec11ab"
+    },
+    {
+      "classes": [],
+      "functions": [
+        "_manifest_paths",
+        "_safe",
+        "run"
+      ],
+      "imports": [
+        "__future__",
+        "hashlib",
+        "json",
+        "pathlib",
+        "subprocess",
+        "tempfile"
+      ],
+      "path": "canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py",
+      "sha256": "e9bb4c9c76ab6d418e1b63c08c76bf22617fb149739d5b9e6999950f71e33e5f"
+    },
+    {
+      "classes": [],
+      "functions": [
+        "_safe_path",
+        "run"
+      ],
+      "imports": [
+        "hashlib",
+        "pathlib",
+        "subprocess"
+      ],
+      "path": "canonical/runtime/bound_capabilities/cli_command.py",
+      "sha256": "aba049de16477836e57cd974ad50bb562da6a143f06cfda48e3d05aec0d35a34"
+    },
+    {
+      "classes": [],
+      "functions": [
+        "_find_key",
+        "_safe",
+        "run"
+      ],
+      "imports": [
+        "__future__",
+        "hashlib",
+        "json",
+        "pathlib",
+        "urllib"
+      ],
+      "path": "canonical/runtime/bound_capabilities/http_json_fetch.py",
+      "sha256": "90c7084bc695cbd7f5ef418cd747a760304bb945f530cca01d130a5bcbf4255e"
+    },
+    {
+      "classes": [],
+      "functions": [
+        "_safe_path",
+        "run"
+      ],
+      "imports": [
+        "__future__",
+        "hashlib",
+        "pathlib",
+        "re",
+        "subprocess"
+      ],
+      "path": "canonical/runtime/bound_capabilities/jq_query.py",
+      "sha256": "214ed15f81f2268dfe7f1f5092be65f82be93e9d197648aea0e2ca94dc673bf2"
+    },
+    {
+      "classes": [],
+      "functions": [
+        "_safe_path",
+        "run"
+      ],
+      "imports": [
+        "__future__",
+        "hashlib",
+        "pathlib",
+        "subprocess"
+      ],
+      "path": "canonical/runtime/bound_capabilities/pandoc_weasyprint.py",
+      "sha256": "e2aac635b583e5d2cae4208bb8f63af409858420aaef8f40c6b5ec9c7ab05e07"
+    },
+    {
+      "classes": [],
+      "functions": [
+        "_safe_path",
+        "run"
+      ],
+      "imports": [
+        "hashlib",
+        "pathlib",
+        "subprocess",
+        "tempfile"
+      ],
+      "path": "canonical/runtime/bound_capabilities/pdf_ocr_tesseract.py",
+      "sha256": "3b85d4a1358133643b59af7ece083b5715b47b946787828c2d2eb522e4f918c8"
+    },
+    {
+      "classes": [],
+      "functions": [
+        "_safe_path",
+        "run"
+      ],
+      "imports": [
+        "hashlib",
+        "pathlib"
+      ],
+      "path": "canonical/runtime/bound_capabilities/pdf_pypdf.py",
+      "sha256": "8d8811df2b10e05493964dd876e142bb3121c07501730f2a489d09b4e5baa962"
+    },
+    {
+      "classes": [],
+      "functions": [
+        "_https",
+        "_safe",
+        "run"
+      ],
+      "imports": [
+        "__future__",
+        "hashlib",
+        "json",
+        "pathlib",
+        "urllib"
+      ],
+      "path": "canonical/runtime/bound_capabilities/pypi_provenance_audit.py",
+      "sha256": "2c3202af5cea64547c1e26b865978dcca184151961bf6708498508658df3f069"
+    },
+    {
+      "classes": [],
+      "functions": [
+        "_imports",
+        "_safe_root",
+        "run"
+      ],
+      "imports": [
+        "__future__",
+        "ast",
+        "hashlib",
+        "json",
+        "pathlib"
+      ],
+      "path": "canonical/runtime/bound_capabilities/python_source_audit.py",
+      "sha256": "bffd2a429eec393798a03c3dcff3be3412103473ac23d0abb0541f273b8667d9"
+    },
+    {
+      "classes": [],
+      "functions": [
+        "_safe_path",
+        "run"
+      ],
+      "imports": [
+        "hashlib",
+        "pathlib",
+        "subprocess"
+      ],
+      "path": "canonical/runtime/bound_capabilities/qr_qrencode.py",
+      "sha256": "8e3ef80face60987922fe047128f1f1de6cacf2a16e16901e54d2c816c95e838"
+    },
+    {
+      "classes": [],
+      "functions": [
+        "_safe",
+        "run"
+      ],
+      "imports": [
+        "__future__",
+        "hashlib",
+        "json",
+        "pathlib",
+        "subprocess"
+      ],
+      "path": "canonical/runtime/bound_capabilities/yq_yaml_json.py",
+      "sha256": "1611e9566c979db543dfb9a34c04bf0a9279ce270c7e38b65d053472f2dd3837"
+    },
+    {
+      "classes": [
+        "DiscoveryFailure"
+      ],
+      "functions": [
+        "_apt_query_variants",
+        "_flatten_text",
+        "_lexical_variants",
+        "_semanticize_paths",
+        "effect_queries",
+        "normalize_server",
+        "search_all",
+        "search_apt_packages",
+        "search_mcp_registry"
+      ],
+      "imports": [
+        "__future__",
+        "json",
+        "re",
+        "shutil",
+        "subprocess",
+        "sys",
+        "urllib"
+      ],
+      "path": "canonical/runtime/capability_discovery.py",
+      "sha256": "7389bb2e6886ca326a107fb1aa9db44a129d0c5812db0dc3d5dcc1c673e79a21"
+    },
+    {
+      "classes": [
+        "Capability",
+        "PlanningFailure"
+      ],
+      "functions": [
+        "_normalize",
+        "_string_set",
+        "plan_actions",
+        "plan_capabilities",
+        "reachable_effects"
+      ],
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "heapq",
+        "itertools"
+      ],
+      "path": "canonical/runtime/capability_planner.py",
+      "sha256": "2c6147658ad5634550fd4ea8131e85e1682b44585087284a1ee9c9e733254990"
+    },
+    {
+      "classes": [],
+      "functions": [
+        "add",
+        "audit",
+        "load_json",
+        "main",
+        "render_html"
+      ],
+      "imports": [
+        "argparse",
+        "datetime",
+        "html",
+        "json",
+        "pathlib",
+        "sys"
+      ],
+      "path": "canonical/runtime/capability_reality_auditor.py",
+      "sha256": "95bcd2e20e2b28e0972472168caaec5fa1d1752bc5e072ad46c42400b954df63"
+    },
+    {
+      "classes": [
+        "ContractInferenceFailure"
+      ],
+      "functions": [
+        "_help_text",
+        "infer_contract",
+        "main"
+      ],
+      "imports": [
+        "__future__",
+        "json",
+        "pathlib",
+        "re",
+        "sys"
+      ],
+      "path": "canonical/runtime/cli_contract_inference.py",
+      "sha256": "a5e835ed66b2a407ed336c1665b30623960ba28a306caf146bb4f7c238a86ab2"
+    },
+    {
+      "classes": [
+        "GoalCompilationFailure"
+      ],
+      "functions": [
+        "_bind_inputs",
+        "_compile_compound_goal",
+        "_compile_context_url_json_fetch",
+        "_compile_existing_causal_artifact_assertion",
+        "_compile_github_workflow_audit",
+        "_compile_json_hash_equality_assertion",
+        "_compile_json_markdown_table",
+        "_compile_json_record_selection",
+        "_compile_json_status_manifest",
+        "_compile_pdf_json_key_verification",
+        "_compile_pypi_provenance_audit",
+        "_compile_single_goal",
+        "_compile_workflow_audit_raw_verification",
+        "_context_path_for_key",
+        "_extract_text_argument",
+        "_find_record_collection",
+        "_find_status_collection",
+        "_flatten",
+        "_jq_path",
+        "_placeholders",
+        "_render_template",
+        "_repo_paths",
+        "_score",
+        "_tokens",
+        "compile_goal",
+        "decompose_goal"
+      ],
+      "imports": [
+        "__future__",
+        "hashlib",
+        "json",
+        "pathlib",
+        "re"
+      ],
+      "path": "canonical/runtime/goal_compiler.py",
+      "sha256": "2d3f6fc4ae19decb665c56acb2b60db2ac563b42ec363c96ca6ac741026b82d3"
+    },
+    {
+      "classes": [],
+      "functions": [
+        "_dump_model",
+        "_format_exception",
+        "inspect_one",
+        "main",
+        "main_async"
+      ],
+      "imports": [
+        "argparse",
+        "asyncio",
+        "importlib",
+        "json"
+      ],
+      "path": "canonical/runtime/mcp_tool_inspector.py",
+      "sha256": "f806f2e924d6a1289cea4e6a9e4ef2af0e6e22c6b6e473c52d1351fb7add1200"
+    },
+    {
+      "classes": [],
+      "functions": [
+        "_inside",
+        "main"
+      ],
+      "imports": [
+        "__future__",
+        "json",
+        "pathlib",
+        "sys"
+      ],
+      "path": "canonical/runtime/promote_pending_binding.py",
+      "sha256": "b1921d7a9c281bbfcf9f877cf9b2c6c52156063a354a8c81ee357aa7e107c623"
+    },
+    {
+      "classes": [
+        "CDP"
+      ],
+      "functions": [
+        "main",
+        "wait_json"
+      ],
+      "imports": [
+        "base64",
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "signal",
+        "subprocess",
+        "time",
+        "urllib",
+        "websocket"
+      ],
+      "path": "canonical/runtime/raw_visual_cdp_preflight.py",
+      "sha256": "b145a4ba39e463c9e7f708afe7d66d2f0149a4bf90e665c83a8f11cd575aba38"
+    },
+    {
+      "classes": [],
+      "functions": [
+        "_acquire_and_run_semantic_verifier",
+        "_inside",
+        "_semantic_help_contract",
+        "_semantic_verifier_query",
+        "main"
+      ],
+      "imports": [
+        "__future__",
+        "apt_cli_probe",
+        "astra_runtime",
+        "bound_capabilities",
+        "capability_discovery",
+        "hashlib",
+        "json",
+        "pathlib",
+        "re",
+        "subprocess",
+        "sys"
+      ],
+      "path": "canonical/runtime/verify_pending_cli_binding.py",
+      "sha256": "b47e25bf1c9a7e4210283b3ee71dbfb43afd65322513d36bf52817cc61400e51"
+    }
+  ],
+  "schema": "PROJECT_BRAIN_PYTHON_SOURCE_AUDIT_V1",
+  "source_root": "canonical/runtime",
+  "totals": {
+    "classes": 12,
+    "distinct_imported_modules": 41,
+    "files": 26,
+    "functions": 151
+  }
+}

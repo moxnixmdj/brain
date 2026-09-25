@@ -1,0 +1,42 @@
+{
+  "completed_at_utc": "2026-09-25T01:06:47.063575+00:00",
+  "created_at_utc": "2026-09-25T01:06:46.802156+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T01:06:46.940612+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\nroot=pathlib.Path('.').resolve(); p=root/'canonical/runtime/bound_capabilities/python_source_audit.py'\ns=importlib.util.spec_from_file_location('psa',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nr=m.run({'source_root':'canonical/runtime','output_path':'canonical/astra_runtime/tmp/PYTHON_SOURCE_AUDIT_VERIFY.json'},root)\nprint(json.dumps(r,sort_keys=True)); print('PYTHON_SOURCE_AUDIT_ADAPTER_COMPLETE')\nPY",
+        "duration_s": 0.138,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"adapter\": \"python_source_audit\", \"class_count\": 12, \"distinct_imported_module_count\": 41, \"file_count\": 26, \"function_count\": 151, \"output_path\": \"canonical/astra_runtime/tmp/PYTHON_SOURCE_AUDIT_VERIFY.json\", \"output_sha256\": \"92999c84a20cb924b1fa8604eb1d253d956e5968d9071f54d217b3579cc60cca\", \"output_verified\": true}\nPYTHON_SOURCE_AUDIT_ADAPTER_COMPLETE\n"
+      },
+      "step_id": "run-python-source-audit-adapter",
+      "step_index": 0
+    },
+    {
+      "completed_at_utc": "2026-09-25T01:06:47.063234+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport ast,hashlib,json,pathlib\nroot=pathlib.Path('.').resolve(); source=root/'canonical/runtime'\nreport=json.loads((root/'canonical/astra_runtime/tmp/PYTHON_SOURCE_AUDIT_VERIFY.json').read_text())\nassert report['schema']=='PROJECT_BRAIN_PYTHON_SOURCE_AUDIT_V1'\nactual={}\nall_imports=set(); fn=cl=0\nfor p in sorted(source.rglob('*.py')):\n raw=p.read_bytes(); tree=ast.parse(raw.decode('utf-8'),filename=str(p))\n funcs=sorted(n.name for n in tree.body if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef)))\n classes=sorted(n.name for n in tree.body if isinstance(n,ast.ClassDef))\n mods=set()\n for n in tree.body:\n  if isinstance(n,ast.Import): mods.update(a.name.split('.')[0] for a in n.names)\n  elif isinstance(n,ast.ImportFrom) and n.module: mods.add(n.module.split('.')[0])\n key=str(p.relative_to(root)).replace('\\\\','/')\n actual[key]={'sha256':hashlib.sha256(raw).hexdigest(),'imports':sorted(mods),'functions':funcs,'classes':classes}\n all_imports.update(mods); fn+=len(funcs); cl+=len(classes)\nreported={x['path']:{k:x[k] for k in ('sha256','imports','functions','classes')} for x in report['files']}\nassert reported==actual, {'missing':sorted(set(actual)-set(reported)),'extra':sorted(set(reported)-set(actual))}\nassert report['totals']=={'files':len(actual),'functions':fn,'classes':cl,'distinct_imported_modules':len(all_imports)}\nassert report['distinct_imported_modules']==sorted(all_imports)\nprint(json.dumps({'verified':True,'files':len(actual),'functions':fn,'classes':cl,'distinct_imported_modules':len(all_imports)},sort_keys=True))\nprint('PYTHON_SOURCE_AUDIT_INDEPENDENTLY_VERIFIED')\nPY",
+        "duration_s": 0.122,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"classes\": 12, \"distinct_imported_modules\": 41, \"files\": 26, \"functions\": 151, \"verified\": true}\nPYTHON_SOURCE_AUDIT_INDEPENDENTLY_VERIFIED\n"
+      },
+      "step_id": "independently-verify-python-source-audit",
+      "step_index": 1
+    }
+  ],
+  "mission_id": "ASTRA-VERIFY-PYTHON-SOURCE-AUDIT-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_PYTHON_SOURCE_AUDIT_001.json",
+  "mission_sha256": "0d4ba5102ef2ef8bc2420639ec766695cfe6d61bd9379afc7588110ae1276c70",
+  "next_step": 2,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T01:06:47.063250+00:00"
+}
