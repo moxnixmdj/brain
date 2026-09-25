@@ -1,0 +1,82 @@
+[
+  {
+    "artifact_kind": "CODE128",
+    "artifact_path": "canonical/astra_runtime/tmp/ITEM_FALLBACK_CODES/1.png",
+    "email": "Sincere@april.biz",
+    "id": 1,
+    "used_fallback": true,
+    "username": "Bret"
+  },
+  {
+    "artifact_kind": "CODE128",
+    "artifact_path": "canonical/astra_runtime/tmp/ITEM_FALLBACK_CODES/2.png",
+    "email": "Shanna@melissa.tv",
+    "id": 2,
+    "used_fallback": true,
+    "username": "Antonette"
+  },
+  {
+    "artifact_kind": "CODE128",
+    "artifact_path": "canonical/astra_runtime/tmp/ITEM_FALLBACK_CODES/3.png",
+    "email": "Nathan@yesenia.net",
+    "id": 3,
+    "used_fallback": true,
+    "username": "Samantha"
+  },
+  {
+    "artifact_kind": "CODE128",
+    "artifact_path": "canonical/astra_runtime/tmp/ITEM_FALLBACK_CODES/4.png",
+    "email": "Julianne.OConner@kory.org",
+    "id": 4,
+    "used_fallback": true,
+    "username": "Karianne"
+  },
+  {
+    "artifact_kind": "CODE128",
+    "artifact_path": "canonical/astra_runtime/tmp/ITEM_FALLBACK_CODES/5.png",
+    "email": "Lucio_Hettinger@annie.ca",
+    "id": 5,
+    "used_fallback": true,
+    "username": "Kamren"
+  },
+  {
+    "artifact_kind": "CODE128",
+    "artifact_path": "canonical/astra_runtime/tmp/ITEM_FALLBACK_CODES/6.png",
+    "email": "Karley_Dach@jasper.info",
+    "id": 6,
+    "used_fallback": true,
+    "username": "Leopoldo_Corkery"
+  },
+  {
+    "artifact_kind": "CODE128",
+    "artifact_path": "canonical/astra_runtime/tmp/ITEM_FALLBACK_CODES/7.png",
+    "email": "Telly.Hoeger@billy.biz",
+    "id": 7,
+    "used_fallback": true,
+    "username": "Elwyn.Skiles"
+  },
+  {
+    "artifact_kind": "CODE128",
+    "artifact_path": "canonical/astra_runtime/tmp/ITEM_FALLBACK_CODES/8.png",
+    "email": "Sherwood@rosamond.me",
+    "id": 8,
+    "used_fallback": true,
+    "username": "Maxime_Nienow"
+  },
+  {
+    "artifact_kind": "CODE128",
+    "artifact_path": "canonical/astra_runtime/tmp/ITEM_FALLBACK_CODES/9.png",
+    "email": "Chaim_McDermott@dana.io",
+    "id": 9,
+    "used_fallback": true,
+    "username": "Delphine"
+  },
+  {
+    "artifact_kind": "CODE128",
+    "artifact_path": "canonical/astra_runtime/tmp/ITEM_FALLBACK_CODES/10.png",
+    "email": "Rey.Padberg@karina.biz",
+    "id": 10,
+    "used_fallback": true,
+    "username": "Moriah.Stanton"
+  }
+]

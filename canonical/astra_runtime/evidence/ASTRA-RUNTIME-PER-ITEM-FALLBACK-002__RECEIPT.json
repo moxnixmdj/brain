@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T16:46:15.938372+00:00",
+  "mission_id": "ASTRA-RUNTIME-PER-ITEM-FALLBACK-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_PER_ITEM_FALLBACK_002.json",
+  "mission_sha256": "4f812d744d507194ed15d28002e1f884a765cef3cbef40183af2580a95f528a4",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "9f70aafc603489a9563d300f59e34f69507a8bcab0d9b3439295fc6c7e076b8e",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
