@@ -1,0 +1,337 @@
+{
+  "completed_at_utc": "2026-09-25T03:13:36.854353+00:00",
+  "created_at_utc": "2026-09-25T03:13:23.931530+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T03:13:36.853727+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "goal",
+        "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+        "cycles": 5,
+        "final_summary": "COMPOUND_GOAL_COMPLETE",
+        "goal_compilation": {
+          "clauses": [
+            "Using a real rendered browser, open https://httpbin.org/forms/post, enter PROJECT BRAIN into the customer name field, choose Medium pizza size, check the Bacon topping, submit the form, save a full-page screenshot to canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_SUBMISSION.png, and save the rendered result to canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_SUBMISSION.json",
+            "Create canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_NORMALIZED.json containing a top-level submissions object with exactly one record named httpbin whose status is VERIFIED_BROWSER_SUBMISSION and whose customer_name, size, topping, and final_url values come from the browser result",
+            "Create canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_SUBMISSION.xlsx from that normalized JSON with columns submission_id, status, customer_name, size, topping, and final_url",
+            "Finally independently reopen the XLSX and verify it contains exactly the one normalized JSON record with every value identical"
+          ],
+          "compiled_parts": [
+            {
+              "actions": [
+                {
+                  "target": "customer name",
+                  "type": "set_text",
+                  "value": "PROJECT BRAIN"
+                },
+                {
+                  "target": "size",
+                  "type": "select_option",
+                  "value": "Medium"
+                },
+                {
+                  "target": "Bacon",
+                  "type": "check"
+                },
+                {
+                  "type": "submit"
+                }
+              ],
+              "index": 0,
+              "mode": "VERIFIED_BROWSER_INTERACTION",
+              "result_path": "canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_SUBMISSION.json",
+              "screenshot_path": "canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_SUBMISSION.png",
+              "selected_capability": "web.browser.rendered.capture.chromedriver",
+              "subgoal": "Using a real rendered browser, open https://httpbin.org/forms/post, enter PROJECT BRAIN into the customer name field, choose Medium pizza size, check the Bacon topping, submit the form, save a full-page screenshot to canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_SUBMISSION.png, and save the rendered result to canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_SUBMISSION.json",
+              "url": "https://httpbin.org/forms/post",
+              "verification_mission_id": "ASTRA-VERIFY-BROWSER-INTERACTION-001"
+            },
+            {
+              "collection": "submissions",
+              "constant_status": "VERIFIED_BROWSER_SUBMISSION",
+              "index": 1,
+              "mode": "NATIVE_TYPED_BROWSER_RESULT_PROJECTION",
+              "output_path": "canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_NORMALIZED.json",
+              "projected_fields": [
+                "customer_name",
+                "size",
+                "topping",
+                "final_url"
+              ],
+              "record_id": "httpbin",
+              "source_path": "canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_SUBMISSION.json",
+              "subgoal": "Create canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_NORMALIZED.json containing a top-level submissions object with exactly one record named httpbin whose status is VERIFIED_BROWSER_SUBMISSION and whose customer_name, size, topping, and final_url values come from the browser result"
+            },
+            {
+              "index": 2,
+              "inputs": {
+                "goal": "Create canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_SUBMISSION.xlsx from that normalized JSON with columns submission_id, status, customer_name, size, topping, and final_url",
+                "json_path": "canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_NORMALIZED.json",
+                "output_path": "canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_SUBMISSION.xlsx"
+              },
+              "mode": "VERIFIED_CAPABILITY",
+              "score": 33,
+              "selected_capability": "xlsx.table.create_from_json_records",
+              "subgoal": "Create canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_SUBMISSION.xlsx from that normalized JSON with columns submission_id, status, customer_name, size, topping, and final_url",
+              "target_effects": [
+                "xlsx.table.create_from_json_records"
+              ]
+            },
+            {
+              "index": 3,
+              "inputs": {
+                "goal": "Finally independently reopen the XLSX and verify it contains exactly the one normalized JSON record with every value identical",
+                "json_path": "canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_NORMALIZED.json",
+                "xlsx_path": "canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_SUBMISSION.xlsx"
+              },
+              "mode": "VERIFIED_CAPABILITY",
+              "score": 37,
+              "selected_capability": "xlsx.table.verify_against_json_records",
+              "subgoal": "Finally independently reopen the XLSX and verify it contains exactly the one normalized JSON record with every value identical",
+              "target_effects": [
+                "xlsx.table.verify_against_json_records"
+              ]
+            }
+          ],
+          "compiler_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN"
+        },
+        "planner_model_last": null,
+        "planner_source": null,
+        "planner_transport": null,
+        "planning_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN",
+        "returncode": 0,
+        "stdout": "COMPOUND_GOAL_COMPLETE",
+        "trace": [
+          {
+            "cycle": 0,
+            "plan": {
+              "args": {
+                "actions": [
+                  {
+                    "target": "customer name",
+                    "type": "set_text",
+                    "value": "PROJECT BRAIN"
+                  },
+                  {
+                    "target": "size",
+                    "type": "select_option",
+                    "value": "Medium"
+                  },
+                  {
+                    "target": "Bacon",
+                    "type": "check"
+                  },
+                  {
+                    "type": "submit"
+                  }
+                ],
+                "capability_id": "web.browser.rendered.capture.chromedriver",
+                "result_path": "canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_SUBMISSION.json",
+                "screenshot_path": "canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_SUBMISSION.png",
+                "url": "https://httpbin.org/forms/post"
+              },
+              "expect": {
+                "field": "interaction_verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "actions_completed": 4,
+              "adapter": "browser_chromedriver_interact",
+              "capability_id": "web.browser.rendered.capture.chromedriver",
+              "dependency": {
+                "executable": "chromedriver",
+                "resolved_path": "/usr/bin/chromedriver",
+                "status": "LOCAL_VERIFIED",
+                "type": "system_tool"
+              },
+              "final_url": "https://httpbin.org/post",
+              "interaction_verified": true,
+              "output_verified": true,
+              "page_title": "",
+              "rendered": true,
+              "result_path": "canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_SUBMISSION.json",
+              "screenshot_bytes": 81113,
+              "screenshot_path": "canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_SUBMISSION.png",
+              "screenshot_sha256": "75b75b7080a749f04c62a5b255e1195124f37f0ab2166908f9dd1568b36e939f",
+              "source_url": "https://httpbin.org/forms/post",
+              "text": "{\n  \"args\": {}, \n  \"data\": \"\", \n  \"files\": {}, \n  \"form\": {\n    \"comments\": \"\", \n    \"custemail\": \"\", \n    \"custname\": \"PROJECT BRAIN\", \n    \"custtel\": \"\", \n    \"delivery\": \"\", \n    \"size\": \"medium\", \n    \"topping\": \"bacon\"\n  }, \n  \"headers\": {\n    \"Accept\": \"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7\", \n    \"Accept-Encoding\": \"gzip, deflate, br, zstd\", \n    \"Accept-Language\": \"en-US,en;q=0.9\", \n    \"Cache-Control\": \"max-age=0\", \n    \"Content-Length\": \"88\", \n    \"Content-Type\": \"application/x-www-form-urlencoded\", \n    \"Host\": \"httpbin.org\", \n    \"Origin\": \"https://httpbin.org\", \n    \"Priority\": \"u=0, i\", \n    \"Referer\": \"https://httpbin.org/forms/post\", \n    \"Sec-Ch-Ua\": \"\\\"Google Chrome\\\";v=\\\"153\\\", \\\"Not_A Brand\\\";v=\\\"8\\\", \\\"Chromium\\\";v=\\\"153\\\"\", \n    \"Sec-Ch-Ua-Mobile\": \"?0\", \n    \"Sec-Ch-Ua-Platform\": \"\\\"Linux\\\"\", \n    \"Sec-Fetch-Dest\": \"document\", \n    \"Sec-Fetch-Mode\": \"navigate\", \n    \"Sec-Fetch-Site\": \"same-origin\", \n    \"Upgrade-Insecure-Requests\": \"1\", \n    \"User-Agent\": \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36\", \n    \"X-Amzn-Trace-Id\": \"Root=1-6ab5e6d6-5e63e42b1517c2eb0e17d10b\"\n  }, \n  \"json\": null, \n  \"origin\": \"52.225.25.102\", \n  \"url\": \"https://httpbin.org/post\"\n}\n"
+            }
+          },
+          {
+            "cycle": 1,
+            "plan": {
+              "args": {
+                "collection": "submissions",
+                "constants": {
+                  "status": "VERIFIED_BROWSER_SUBMISSION"
+                },
+                "fields": [
+                  "customer_name",
+                  "size",
+                  "topping",
+                  "final_url"
+                ],
+                "output_path": "canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_NORMALIZED.json",
+                "record_id": "httpbin",
+                "source_path": "canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_SUBMISSION.json"
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "project_browser_result_json"
+            },
+            "result": {
+              "collection": "submissions",
+              "fields": [
+                "customer_name",
+                "final_url",
+                "size",
+                "status",
+                "topping"
+              ],
+              "output_bytes": 233,
+              "output_path": "canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_NORMALIZED.json",
+              "output_sha256": "843498d4e1e2de6c93962b6a00fbd71e46212b5a08e429d70e5b0ab93a415392",
+              "record": {
+                "customer_name": "PROJECT BRAIN",
+                "final_url": "https://httpbin.org/post",
+                "size": "Medium",
+                "status": "VERIFIED_BROWSER_SUBMISSION",
+                "topping": "bacon"
+              },
+              "record_id": "httpbin",
+              "source_path": "canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_SUBMISSION.json",
+              "type": "project_browser_result_json",
+              "verified": true
+            }
+          },
+          {
+            "cycle": 2,
+            "plan": {
+              "args": {
+                "capability_id": "xlsx.table.create_from_json_records",
+                "goal": "Create canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_SUBMISSION.xlsx from that normalized JSON with columns submission_id, status, customer_name, size, topping, and final_url",
+                "json_path": "canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_NORMALIZED.json",
+                "output_path": "canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_SUBMISSION.xlsx"
+              },
+              "expect": {
+                "field": "output_verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "xlsx_table_xlsxwriter",
+              "capability_id": "xlsx.table.create_from_json_records",
+              "collection_path": [
+                "submissions"
+              ],
+              "column_count": 6,
+              "columns": [
+                "submission_id",
+                "status",
+                "customer_name",
+                "size",
+                "topping",
+                "final_url"
+              ],
+              "dependency": {
+                "origin": "Ubuntu",
+                "packages": [
+                  {
+                    "archive_sha256": "234db5c80ba8d2eaf9933a95566f81a86aa01bb15b884f2ee6c932847e58bfd2",
+                    "name": "python3-xlsxwriter",
+                    "version": "3.1.9-1"
+                  }
+                ],
+                "status": "INSTALLED_VERIFIED"
+              },
+              "output_bytes": 5929,
+              "output_path": "canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_SUBMISSION.xlsx",
+              "output_sha256": "6a33ea4707b7afe34ff7fbda37e8f0eebdc3ba8a20cae6a79f598014837c0997",
+              "output_verified": true,
+              "row_count": 1,
+              "status_value": "VERIFIED_BROWSER_SUBMISSION"
+            }
+          },
+          {
+            "cycle": 3,
+            "plan": {
+              "args": {
+                "capability_id": "xlsx.table.verify_against_json_records",
+                "goal": "Finally independently reopen the XLSX and verify it contains exactly the one normalized JSON record with every value identical",
+                "json_path": "canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_NORMALIZED.json",
+                "xlsx_path": "canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_SUBMISSION.xlsx"
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "xlsx_verify_openpyxl",
+              "capability_id": "xlsx.table.verify_against_json_records",
+              "columns": [
+                "submission_id",
+                "status",
+                "customer_name",
+                "size",
+                "topping",
+                "final_url"
+              ],
+              "dependency": {
+                "origin": "Ubuntu",
+                "packages": [
+                  {
+                    "archive_sha256": "0892bf202df1f56bb36530c3ba9ac9f24f6a5b115442e7aa602b12e46aa0433c",
+                    "name": "python3-openpyxl",
+                    "version": "3.1.2+dfsg-6"
+                  }
+                ],
+                "status": "INSTALLED_VERIFIED"
+              },
+              "producer_independent_verifier": true,
+              "status_value": "VERIFIED_BROWSER_SUBMISSION",
+              "verified": true,
+              "verified_rows": 1,
+              "xlsx_path": "canonical/astra_runtime/tmp/COMPOSED_HTTPBIN_SUBMISSION.xlsx",
+              "xlsx_sha256": "6a33ea4707b7afe34ff7fbda37e8f0eebdc3ba8a20cae6a79f598014837c0997"
+            }
+          },
+          {
+            "cycle": 4,
+            "plan": {
+              "args": {
+                "summary": "COMPOUND_GOAL_COMPLETE"
+              },
+              "type": "finish"
+            },
+            "result": {
+              "summary": "COMPOUND_GOAL_COMPLETE",
+              "type": "finish"
+            }
+          }
+        ]
+      },
+      "step_id": "execute-cross-tool-composition-goal",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-RUNTIME-BROWSER-XLSX-COMPOSITION-004",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_BROWSER_XLSX_COMPOSITION_004.json",
+  "mission_sha256": "62c5a2b331a45dcf0017dad9094aef01ed5385aadb39e5ee4d874bb32bee2070",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T03:13:36.853739+00:00"
+}

@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T03:13:36.854973+00:00",
+  "mission_id": "ASTRA-RUNTIME-BROWSER-XLSX-COMPOSITION-004",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_BROWSER_XLSX_COMPOSITION_004.json",
+  "mission_sha256": "62c5a2b331a45dcf0017dad9094aef01ed5385aadb39e5ee4d874bb32bee2070",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "ff40a9a9684c27d73977030d9dd0a0d4880e468a475bfdb37b8f093a70313d6c",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
