@@ -23,6 +23,17 @@ class GoalCompilerTests(unittest.TestCase):
     def registry(self):
         return json.loads((CANONICAL/"runtime"/"BOUND_CAPABILITY_REGISTRY_V1.json").read_text())["capabilities"]
 
+    def test_decompose_preserves_independent_reread_and_verify_tail(self):
+        goal=(
+            "Read the UUID from that live result. "
+            "Finally independently reread both files and verify the bucket is correct for the actual UUID."
+        )
+        clauses=compiler.decompose_goal(goal)
+        self.assertEqual(clauses,[
+            "Read the UUID from that live result",
+            "Finally independently reread both files and verify the bucket is correct for the actual UUID",
+        ])
+
     def test_plain_image_only_pdf_goal_selects_verified_ocr(self):
         goal="Extract the visible text from canonical/astra_runtime/tmp/IMAGE_ONLY_OCR_TEST.pdf, which is an image-only PDF."
         out=compiler.compile_goal(goal,self.registry(),ROOT)
