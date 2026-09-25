@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-LIVE-CONDITIONAL-GENERALIZATION-001",
+  "purpose": "Fresh generalization pressure for runtime-only conditional control using a different hexadecimal set and different output labels.",
+  "goal": "Using a real rendered browser, open https://httpbin.org/uuid, save a screenshot to canonical/astra_runtime/tmp/LIVE_UUID_GENERALIZED.png, and save the rendered result to canonical/astra_runtime/tmp/LIVE_UUID_GENERALIZED.json. Read the UUID from that live result. If its first hexadecimal character is one of a,b,c,d,e,f create canonical/astra_runtime/tmp/LIVE_UUID_GENERALIZED_CLASSIFICATION.json with uuid equal to the observed UUID and bucket equal to LETTER; otherwise create it with the same observed uuid and bucket equal to DIGIT. Finally independently reread both files and verify the bucket is correct for the actual UUID.",
+  "steps": [
+    {
+      "id": "run-generalized-live-conditional",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 16,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "fresh_mission_identity": true,
+    "prior_exact_low_high_rule_not_sufficient": true
+  }
+}
