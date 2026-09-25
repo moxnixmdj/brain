@@ -2493,11 +2493,25 @@ def _goal_action(action):
         def allowed(host):
             return bool(host and any(host==d or host.endswith("."+d) for d in domains))
         text=str(browser.get("observed_text") or "")
+        query=str(evidence.get("query") or "")
+        distinctive=[
+            t for t in re.findall(r"[a-z0-9_.-]+",query.lower())
+            if re.search(r"[._-]",t) and len(re.sub(r"[^a-z0-9]+","",t))>=5
+        ]
+        relevance_blob=re.sub(
+            r"[^a-z0-9]+","",
+            (chosen+" "+final_url+" "+text).lower()
+        )
+        missing_distinctive=[
+            token for token in distinctive
+            if re.sub(r"[^a-z0-9]+","",token) not in relevance_blob
+        ]
         verified=(
             evidence.get("schema")=="PROJECT_BRAIN_SOURCE_DISCOVERY_EVIDENCE_V1"
             and allowed(chosen_host)
             and allowed(final_host)
             and bool(text.strip())
+            and not missing_distinctive
         )
         return {
           "type":typ,"verified":verified,
@@ -2505,6 +2519,8 @@ def _goal_action(action):
           "final_url":final_url,"final_host":final_host,
           "authority_domains":domains,
           "rendered_text_nonempty":bool(text.strip()),
+          "distinctive_query_tokens":distinctive,
+          "missing_distinctive_query_tokens":missing_distinctive,
         }
 
     if typ=="discover_authoritative_web_source":
@@ -2529,15 +2545,21 @@ def _goal_action(action):
               "official","indicator","authoritative","source","world","bank","find","web"
             }
         ]
+        distinctive_query_tokens=[
+            t for t in query_tokens
+            if re.search(r"[._-]",t) and len(re.sub(r"[^a-z0-9]+","",t))>=5
+        ]
         def authority_match(host):
             host=str(host or "").lower()
             return [d for d in normalized_domains if host==d or host.endswith("."+d)]
         def discovery_score(url,base):
             low=str(url or "").lower()
+            normalized_low=re.sub(r"[^a-z0-9]+","",low)
             score=int(base)
             for token in query_tokens:
-                if token in low:
-                    score+=30 if "." in token or "-" in token else 8
+                normalized_token=re.sub(r"[^a-z0-9]+","",token)
+                if token in low or (normalized_token and normalized_token in normalized_low):
+                    score+=180 if token in distinctive_query_tokens else 8
                 for part in re.findall(r"[a-z0-9]+",token):
                     if len(part)>=3 and part in low:
                         score+=3
@@ -2662,10 +2684,16 @@ def _goal_action(action):
                     )
                     if looks_sitemap:
                         if loc not in sitemap_seen and loc not in sitemap_queue and len(sitemap_queue)<80:
-                            sitemap_queue.append(loc)
+                            sitemap_queue.insert(0,loc)
                             child_sitemaps+=1
                         continue
                     score=discovery_score(loc,260)
+                    normalized_loc=re.sub(r"[^a-z0-9]+","",loc.lower())
+                    if distinctive_query_tokens and not any(
+                        re.sub(r"[^a-z0-9]+","",token) in normalized_loc
+                        for token in distinctive_query_tokens
+                    ):
+                        continue
                     if score<=260:
                         continue
                     candidates.append({
