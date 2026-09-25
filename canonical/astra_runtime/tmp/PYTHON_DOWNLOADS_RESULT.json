@@ -1,9 +1,7 @@
 {
+  "source_url": "https://www.python.org/downloads/",
   "final_url": "https://www.python.org/downloads/",
-  "latest_stable_python3": "3.14.7",
-  "observed_text_evidence": "ocs\nPyPI\nJobs\nCommunity\nDonate\n \nSearch This Site\n GO\nSocialize\nAbout\n \nDownloads\n \nDocumentation\n \nCommunity\n \nSuccess Stories\n \nNews\n \nEvents\nDownload the latest source release\n\nDownload Python 3.14.7\n\nLooking for Python with a different OS? Python for Windows, Linux/Unix, macOS, Android, iOS, other\n\nWant to help test development versions of Python 3.15? Pre-releases, Docker images\n\nActive Python releases\n\nFor more i",
   "page_title": "Download Python | Python.org",
-  "screenshot_path": "canonical/astra_runtime/tmp/PYTHON_DOWNLOADS.png",
-  "screenshot_sha256": "f549568c9bcb3869e88c3b16f3d6f304e0ac0292be088fb4dcd67364c389101b",
-  "source_url": "https://www.python.org/downloads/"
+  "latest_stable_python3": "3.14.7",
+  "observed_text_evidence": "Download Python 3.14.7"
 }
