@@ -4029,6 +4029,19 @@ def _semantic_candidate_signature(goal,candidate,known_effects):
     }
 
 
+def _load_semantic_authorities():
+    path=pathlib.Path(__file__).resolve().with_name("semantic_authorities.py")
+    spec=importlib.util.spec_from_file_location(
+        "project_brain_semantic_authorities",path
+    )
+    if spec is None or spec.loader is None:
+        raise Blocker("SEMANTIC_AUTHORITY_MODULE_LOAD_FAILED")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    return module
+
+
 def _semantic_goal_contract(step,mission,goal):
     candidates=step.get("semantic_goal_proposals")
     ref=step.get("semantic_goal_proposals_ref")
