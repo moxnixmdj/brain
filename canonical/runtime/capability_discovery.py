@@ -536,10 +536,24 @@ def search_pypi_packages(effect, limit=12, timeout_s=12, opener=None):
             score=(50 if normalized_name==normalized_query else 0)+12*len(matched)
             format_tokens=_requested_output_format_tokens(effect)
             normalized_blob=re.sub(r"[-_.]+","",blob)
+            raw_name=str(name or "").lower()
+            name_segments=[x for x in re.split(r"[-_.]+",raw_name) if x]
             for fmt in format_tokens:
                 nfmt=re.sub(r"[-_.]+","",fmt.lower())
-                if nfmt and (nfmt in normalized_name or nfmt in normalized_blob):
-                    score+=80
+                if not nfmt:
+                    continue
+                if normalized_name==nfmt:
+                    score+=180
+                elif raw_name.startswith(fmt.lower()+"-") or raw_name.startswith(fmt.lower()+"_") or raw_name.startswith(fmt.lower()+"."):
+                    score+=150
+                elif fmt.lower() in name_segments:
+                    score+=130
+                elif normalized_name.startswith(nfmt):
+                    score+=110
+                elif nfmt in normalized_name:
+                    score+=45
+                elif nfmt in normalized_blob:
+                    score+=25
             requires_dist=info.get("requires_dist") or []
             dependency_count=len(requires_dist) if isinstance(requires_dist,list) else 0
             score-=4*dependency_count
