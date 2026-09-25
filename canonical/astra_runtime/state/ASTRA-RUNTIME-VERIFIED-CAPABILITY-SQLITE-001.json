@@ -1,0 +1,21 @@
+{
+  "blocker": {
+    "adapter": "goal",
+    "error": "Blocker:CAPABILITY_ACQUISITION_REQUIRED:{\"auto_acquisition_error\": \"AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"akonadi-backend-sqlite\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\\\", \\\"name\\\": \\\"bogofilter-sqlite\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"cl-sqlite\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"courier-authlib-sqlite\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"dovecot-sqlite\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"elpa-emacsql-sqlite\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"gnustep-dl2-sqlite-adaptor\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"kamailio-sqlite-modules\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\\\", \\\"name\\\": \\\"mutt-vc-query\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"node-p-finally\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"pike8.0-sqlite\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"postfix-sqlite\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}]\", \"evidence_path\": \"canonical/astra_runtime/evidence/ASTRA-RUNTIME-VERIFIED-CAPABILITY-SQLITE-001__PLAIN_GOAL_CAPABILITY_DISCOVERY.json\", \"targeted_acquisition_error\": \"AutoAcquisitionFailure:NO_LOW_FRICTION_APT_CLI_CANDIDATE\", \"top_candidates\": [{\"integration_friction\": 0, \"name\": \"akonadi-backend-sqlite\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"bogofilter-sqlite\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"cl-sqlite\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"courier-authlib-sqlite\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"dovecot-sqlite\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"elpa-emacsql-sqlite\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"gnustep-dl2-sqlite-adaptor\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"kamailio-sqlite-modules\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}]}",
+    "mission_id": "ASTRA-RUNTIME-VERIFIED-CAPABILITY-SQLITE-001",
+    "observed_at_utc": "2026-09-25T01:53:06.940501+00:00",
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "execute-verified-capability-sqlite",
+    "step_index": 0
+  },
+  "created_at_utc": "2026-09-25T01:51:02.353254+00:00",
+  "history": [],
+  "mission_id": "ASTRA-RUNTIME-VERIFIED-CAPABILITY-SQLITE-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_VERIFIED_CAPABILITY_SQLITE_001.json",
+  "mission_sha256": "8b3087ad8218e8cadbf00b8b86f102f597db5ed19e0c20ed59d80604e5c9f532",
+  "next_step": 0,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-25T01:53:06.940639+00:00"
+}

@@ -1,0 +1,2840 @@
+{
+  "auto_acquisition": {
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"akonadi-backend-sqlite\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"bogofilter-sqlite\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"cl-sqlite\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"courier-authlib-sqlite\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"dovecot-sqlite\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-emacsql-sqlite\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"gnustep-dl2-sqlite-adaptor\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"kamailio-sqlite-modules\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"mutt-vc-query\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-p-finally\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"pike8.0-sqlite\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"postfix-sqlite\", \"status\": \"CONTRACT_REJECTED\"}]",
+    "status": "NOT_DISPATCHED"
+  },
+  "binding_performed": false,
+  "goal": "Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json. Create a SQLite database at canonical/astra_runtime/tmp/VERIFIED_CAPABILITIES.sqlite with a table named verified_capabilities containing exactly one row for every VERIFIED_BOUND_CAPABILITY and columns capability_id, status, source_type, provides, and incremental_spend_usd. Finally independently query the SQLite database and verify that every VERIFIED_BOUND_CAPABILITY from the registry appears exactly once, that no non-verified capability appears, and that every stored value matches the canonical registry.",
+  "mission_id": "ASTRA-RUNTIME-VERIFIED-CAPABILITY-SQLITE-001",
+  "observed_at_utc": "2026-09-25T01:52:09.709422+00:00",
+  "result": {
+    "binding_performed": false,
+    "candidates": [
+      {
+        "archive_sha256": "74430e39e09ef45771c7ab827877ac59ef4eee2c6144dec2c2582cd77e2d72ed",
+        "binding_kind": "apt",
+        "description": "SQLite storage backend for Akonadi",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "akonadi-backend-sqlite",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "4:23.08.5-0ubuntu3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ee42ac0ab3105b4e6625938f01e6a2aa1de8df86e36e4fb48d528ff7cb49eee1",
+        "binding_kind": "apt",
+        "description": "fast Bayesian spam filter (sqlite)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "bogofilter-sqlite",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.2.5-1build4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "6228cfad7aaeb06fda55ada7736b5d286bd5288bbf3ab76c3e910a99de5dba1e",
+        "binding_kind": "apt",
+        "description": "Common Lisp interface to SQLite",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "cl-sqlite",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "20130615-2.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "3af3035e6bbbb37b7b1c39781fc239c5d441c326558f77833550fe6fb9a6a0cf",
+        "binding_kind": "apt",
+        "description": "SQLite 3 support for the Courier authentication library",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "courier-authlib-sqlite",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.71.4-1build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "99f77fcd48db4e42ebe1c4e1f1895bc997b4504b5b58b0b2de2fc6b9f084cbd2",
+        "binding_kind": "apt",
+        "description": "secure POP3/IMAP server - SQLite support",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "dovecot-sqlite",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:2.3.21+dfsg1-2ubuntu6.5",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "21923b4b9f0d0190fb33d852c6739c43f395bbbde38672c0744e4e6a79053a2e",
+        "binding_kind": "apt",
+        "description": "high level SQL database frontend for Emacs (SQLite backend)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "elpa-emacsql-sqlite",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.1.1+git20230417.6401226+ds-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "34bbf3ca44ce59a5b6a36e5046a2860aa188d1c32d1706d94b7fd47facd6c6d5",
+        "binding_kind": "apt",
+        "description": "gnustep-dl2 adaptor to connect to SQLite",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "gnustep-dl2-sqlite-adaptor",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.12.0-16build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "f6ee7ab5edbdb60a97efd4be88b723dba77e98700fd8b2dbd903d49a6eab20e2",
+        "binding_kind": "apt",
+        "description": "SQLite database connectivity module for the Kamailio SIP server",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "kamailio-sqlite-modules",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "5.7.4-1build7",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "1696afe4462d6590da0b9d63540a5ce0dc49f41fd4f59f141a0b1b34f301e5e4",
+        "binding_kind": "apt",
+        "description": "vCard query utility for mutt",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "query"
+        ],
+        "name": "mutt-vc-query",
+        "packages": [],
+        "query": "query",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "005-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "650e36951dedc048fe95f78d887e481b0354bb5846236760d5e9db6cf9097441",
+        "binding_kind": "apt",
+        "description": "Invoked when the promise is settled regardless of outcome",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "finally"
+        ],
+        "name": "node-p-finally",
+        "packages": [],
+        "query": "finally",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.0.1-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "5284fb966777c38d840dda90e76cbb18f4693f5f17b7545bdb2fe2c1593ca13b",
+        "binding_kind": "apt",
+        "description": "SQLite module for Pike",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "pike8.0-sqlite",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "8.0.1738-1.3ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "97ea7daf2e463f1044063265a570e6a178df891e8ce71da5817b5a0f65335b41",
+        "binding_kind": "apt",
+        "description": "SQLite map support for Postfix",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "postfix-sqlite",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.8.6-1ubuntu0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "6a15f11e20ab7dafd6e13817b6a3941c1c30a850dceefc8bde61da5dd7072829",
+        "binding_kind": "apt",
+        "description": "Versatile, virtual-hosting FTP daemon - SQLite3 module",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "proftpd-mod-sqlite",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.3.8.b+dfsg-1ubuntu0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ebd2f143629fe1c9cd35c01ae68d63fa381327bd38aa3d6e2e51e4acbef85dfe",
+        "binding_kind": "apt",
+        "description": "SQLite database backend for request-tracker4",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "rt4-db-sqlite",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "4.4.7+dfsg-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "748732cf2f31532bf7a22d61a59b13a62391886a45e821d994c2652be936fed3",
+        "binding_kind": "apt",
+        "description": "SQLite database backend for request-tracker5",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "rt5-db-sqlite",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "5.0.5+dfsg-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "b979ce9338caddfb88b4b98dbbca2bca30f8baf858f6f086d080ba184978bfe3",
+        "binding_kind": "apt",
+        "description": "SiSU dependencies for use with SQLite database",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "sisu-sqlite",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "7.3.0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "7b396304d4a8b7b20b0f7bb4205ab524f9652897b8a1c94b84c3fb9d92814468",
+        "binding_kind": "apt",
+        "description": "S-Lang bindings to the sqlite3 database library",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "slang-sqlite",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.6.4-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "a388afa6a8df75d16f2e86f92a2c232a91ccd5057552bfd014755b383bd22458",
+        "binding_kind": "apt",
+        "description": "CLI tool and Python utility functions for manipulating SQLite",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "sqlite-utils",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.35.2-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "302ec38aa35966559d5a27b97dba714f026f01c378b9226d28d34747ae4b9315",
+        "binding_kind": "apt",
+        "description": "Tree-sitter queries parser for Tree-sitter (source files)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "query"
+        ],
+        "name": "tree-sitter-query-src",
+        "packages": [],
+        "query": "query",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.1.0-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "9ac003f4553791ea967f5a60ca8bcbbc5faeb70615ce798f9e6e2a042e975663",
+        "binding_kind": "apt",
+        "description": "Data logger for 1-Wire weather sensors (SQLite plugin)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "w1retap-sqlite",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.4.6-1ubuntu4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "efc0bca2de73236e90ded743b0e9224b3ace4e7bea41067af93b0559066d6d55",
+        "binding_kind": "apt",
+        "description": "query and manipulate user account information",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "query"
+        ],
+        "name": "accountsservice",
+        "packages": [],
+        "query": "query",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "23.13.9-2ubuntu6.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "442dc692f644a9acd8cfd87272a34812398fd65c016e5225c8368b52fdce6fff",
+        "binding_kind": "apt",
+        "description": "network backup service - SQLite v3 common files",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "bacula-common-sqlite3",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "13.0.4-1build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "65938897f89814fa4d1b1a93b0af07c0e578f4d1f41b9f36e30680a0cbbd69ba",
+        "binding_kind": "apt",
+        "description": "network backup service - SQLite 3 storage for Director",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "bacula-director-sqlite3",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "13.0.4-1build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "2e010479d78c8eb4dc75812eedeaa0039309b76597c6bdf8b5a57ae556f567e0",
+        "binding_kind": "apt",
+        "description": "parallel construction, indexing and querying of de Bruijn graphs",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "query"
+        ],
+        "name": "bifrost",
+        "packages": [],
+        "query": "query",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.3.1-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "a8c6ca5cfaa0ebd3fbd9fc6b6b535de9b5259fdd4aac40bb94f878ad18de8feb",
+        "binding_kind": "apt",
+        "description": "Suite of tools to manipulate, validate and query mmCIF files",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "query"
+        ],
+        "name": "cif-tools",
+        "packages": [],
+        "query": "query",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.0.7-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d78b16ae5e914f0c8c91c70caadf07e9698fcbbf2b8babce6c97c8fcf599567b",
+        "binding_kind": "apt",
+        "description": "Common Lisp package to query Pubmed medical literature database",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "query"
+        ],
+        "name": "cl-pubmed",
+        "packages": [],
+        "query": "query",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.1.3-5.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d1375897a30ba98eafdaba5a00715c1b3f9e5797174d04377e39828b69b10fc9",
+        "binding_kind": "apt",
+        "description": "Query OpenCL system information",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "query"
+        ],
+        "name": "clinfo",
+        "packages": [],
+        "query": "query",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "3.0.23.01.25-1build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "a1db227b26b22328c963d9ef7212b21999cf10813cc40f404d828bc2d770333b",
+        "binding_kind": "apt",
+        "description": "Lint tool for the Cypher query language",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "query"
+        ],
+        "name": "cypher-lint",
+        "packages": [],
+        "query": "query",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.6.2-0.1build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "4598f926cff4989676bd759cf79e210cce33efa9ae4a8104e2f56c4cc45d5a82",
+        "binding_kind": "apt",
+        "description": "Query, update and convert data structures from the command line (program)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "query"
+        ],
+        "name": "dasel",
+        "packages": [],
+        "query": "query",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.6.0-1ubuntu0.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "cf3a366626977a0980d9c5bec5a66f0768391c87a99ed576448503ce5bbb07ff",
+        "binding_kind": "apt",
+        "description": "program to set and query settings of video4linux devices",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "query"
+        ],
+        "name": "dov4l",
+        "packages": [],
+        "query": "query",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.9+repack-1build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "A SnowLeopardAI-managed MCP server that provides access to Google BigQuery data.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.SnowLeopard-AI/bigquery-mcp",
+        "packages": [
+          {
+            "identifier": "sl-bigquery-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.9"
+          }
+        ],
+        "query": "query",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/SnowLeopard-AI/bigquery-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "CloudQuery MCP server for asset inventory data. Supports CLI, PostgreSQL, and Platform modes.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.cloudquery/mcp",
+        "packages": [
+          {
+            "identifier": "https://github.com/cloudquery/mcp-releases/releases/download/v1.9.1/cq-platform-mcp_1.9.1_darwin_arm64.mcpb",
+            "registry_type": "mcpb",
+            "required_environment": [],
+            "runtime_hint": "darwin-arm64",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.9.1"
+          },
+          {
+            "identifier": "https://github.com/cloudquery/mcp-releases/releases/download/v1.9.1/cq-platform-mcp_1.9.1_darwin_amd64.mcpb",
+            "registry_type": "mcpb",
+            "required_environment": [],
+            "runtime_hint": "darwin-amd64",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.9.1"
+          },
+          {
+            "identifier": "https://github.com/cloudquery/mcp-releases/releases/download/v1.9.1/cq-platform-mcp_1.9.1_linux_arm64.mcpb",
+            "registry_type": "mcpb",
+            "required_environment": [],
+            "runtime_hint": "linux-arm64",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.9.1"
+          },
+          {
+            "identifier": "https://github.com/cloudquery/mcp-releases/releases/download/v1.9.1/cq-platform-mcp_1.9.1_linux_amd64.mcpb",
+            "registry_type": "mcpb",
+            "required_environment": [],
+            "runtime_hint": "linux-amd64",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.9.1"
+          },
+          {
+            "identifier": "https://github.com/cloudquery/mcp-releases/releases/download/v1.9.1/cq-platform-mcp_1.9.1_windows_amd64.mcpb",
+            "registry_type": "mcpb",
+            "required_environment": [],
+            "runtime_hint": "windows-amd64",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.9.1"
+          }
+        ],
+        "query": "query",
+        "remotes": [],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.9.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "MCP server exposing sqlite3 library functionality",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.daedalus/mcp-sqlite3",
+        "packages": [
+          {
+            "identifier": "mcp-sqlite3",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.3"
+          }
+        ],
+        "query": "sqlite",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/daedalus/mcp-sqlite3"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.1.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Zero-dependency SQLite MCP on node:sqlite: queries, writes, tables, schemas.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.mrfentmen/sqlite-mcp",
+        "packages": [
+          {
+            "identifier": "@mrfentmen/sqlite-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.0"
+          }
+        ],
+        "query": "sqlite",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/mrfentmen/awesome-mcps"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "SQLite MCP server with 73 tools for JSONB, full-text search, geospatial, and analytics.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.neverinfamous/sqlite-mcp-server",
+        "packages": [
+          {
+            "identifier": "sqlite-mcp-server-enhanced",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "2.6.3"
+          },
+          {
+            "identifier": "docker.io/writenotenow/sqlite-mcp-server:v2.6.3",
+            "registry_type": "oci",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": null
+          }
+        ],
+        "query": "sqlite",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/neverinfamous/sqlite-mcp-server.git"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "2.6.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "SQLite MCP \u2014 query databases, inspect schemas, explain queries, export data.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.ofershap/sqlite",
+        "packages": [
+          {
+            "identifier": "mcp-sqlite-server",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.1"
+          }
+        ],
+        "query": "sqlite",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/ofershap/mcp-server-sqlite"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "MCP server for local SQLite database operations",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.spences10/mcp-sqlite-tools",
+        "packages": [
+          {
+            "identifier": "mcp-sqlite-tools",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.0.11"
+          }
+        ],
+        "query": "sqlite",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/spences10/mcp-sqlite-tools"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.0.11",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "MCP server for SQLite databases. Read-only by default, row caps, statement timeouts.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.arifulislamat/database-mcp-sqlite",
+        "packages": [
+          {
+            "identifier": "@database-mcp/sqlite",
+            "registry_type": "npm",
+            "required_environment": [
+              "SQLITE_PATH"
+            ],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.4.2"
+          },
+          {
+            "identifier": "database-mcp-sqlite",
+            "registry_type": "pypi",
+            "required_environment": [
+              "SQLITE_PATH"
+            ],
+            "runtime_hint": "uvx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.0"
+          }
+        ],
+        "query": "sqlite",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/arifulislamat/database-mcp"
+        },
+        "required_environment_count": 2,
+        "required_secret_count": 0,
+        "score": 16,
+        "status": "active",
+        "version": "0.4.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Explore your Messages SQLite database to browse tables and inspect schemas with ease. Run flexible\u2026",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.smithery/afgong-sqlite-mcp-server",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [
+          {
+            "required_headers": [
+              "Authorization"
+            ],
+            "type": "streamable-http",
+            "url": "https://server.smithery.ai/@afgong/sqlite-mcp-server/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "subfolder": "sqlite-explorer-fastmcp-mcp-server",
+          "url": "https://github.com/afgong/sqlite-mcp-server"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.16.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Explore, query, and inspect SQLite databases with ease. List tables, preview results, and view det\u2026",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.smithery/wgong-sqlite-mcp-server",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [
+          {
+            "required_headers": [
+              "Authorization"
+            ],
+            "type": "streamable-http",
+            "url": "https://server.smithery.ai/@wgong/sqlite-mcp-server/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "subfolder": "sqlite-explorer-fastmcp-mcp-server",
+          "url": "https://github.com/wgong/sqlite-mcp-server"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.16.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "License plate lookup for AI agents: plate messages and ALPR history via PlateQuery. OAuth 2.1.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.platequery/plate-api",
+        "packages": [],
+        "query": "query",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.platequery.com/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/Veilkrand/platequery-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Surplus lines market data, per query. U.S. E&S: premium, financials, litigation, catastrophe.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.querylines/mcp",
+        "packages": [],
+        "query": "query",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.querylines.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.3.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Query, browse, and automate OmegaAI workspaces from any MCP client. Streamable HTTP with OAuth 2.0.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.queryomega/omega",
+        "packages": [],
+        "query": "query",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.cloud.queryomega.com/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/The-Lambda-Group/query-omega-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "2.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Bitquery MCP \u2014 trade-level blockchain data (DEX trades, transfers, holders)",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.pipeworx-io/bitquery",
+        "packages": [],
+        "query": "query",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://gateway.pipeworx.io/bitquery/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/pipeworx-io/mcp-bitquery"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "IPQuery MCP.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.pipeworx-io/ipquery",
+        "packages": [],
+        "query": "query",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://gateway.pipeworx.io/ipquery/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/pipeworx-io/mcp-ipquery"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Query pair count, URL discarded",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.sadri-dridi/query-pair-count",
+        "packages": [],
+        "query": "query",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/query-pair-count/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Count characters in a search query. Query discarded.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.sadri-dridi/search-query-len",
+        "packages": [],
+        "query": "query",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/search-query-len/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "An MCP server for Text2SQL: transforms natural language into SQL using graph schema understanding.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.falkordb/QueryWeaver",
+        "packages": [
+          {
+            "identifier": "docker.io/falkordb/queryweaver:0.0.11",
+            "registry_type": "oci",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "streamable-http",
+              "url": "https://localhost:5000/mcp"
+            },
+            "version": null
+          }
+        ],
+        "query": "query",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/FalkorDB/QueryWeaver"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "0.0.11",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "RLS/tenant-aware Postgres for AI agents \u2014 schema, read-only SQL, NL\u2192SQL with safety rails.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.infoinlet-marketplace/mcp-postgres-nl-query",
+        "packages": [
+          {
+            "identifier": "@infoinlet/mcp-postgres-nl-query",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.1"
+          }
+        ],
+        "query": "query",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "subfolder": "services/postgres-nl-query",
+          "url": "https://github.com/infoinlet-marketplace/marketplace"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "0.1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "SQL over real-world data \u2014 FDA, SEC, blockchain, genomics, CVEs, and more. No config.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.microqueryhq/microquery-mcp",
+        "packages": [
+          {
+            "identifier": "microquery-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "uvx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.3"
+          }
+        ],
+        "query": "query",
+        "remotes": [],
+        "repository": {
+          "id": "microqueryhq/microquery-mcp",
+          "source": "github",
+          "url": "https://github.com/microqueryhq/microquery-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "1.0.3",
+        "zero_cost_eligible": true
+      }
+    ],
+    "effect": "Finally independently query the SQLite database",
+    "results": [
+      {
+        "binding_performed": false,
+        "candidate_count": 30,
+        "candidates": [
+          {
+            "archive_sha256": "74430e39e09ef45771c7ab827877ac59ef4eee2c6144dec2c2582cd77e2d72ed",
+            "binding_kind": "apt",
+            "description": "SQLite storage backend for Akonadi",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "sqlite"
+            ],
+            "name": "akonadi-backend-sqlite",
+            "packages": [],
+            "query": "sqlite",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "4:23.08.5-0ubuntu3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "ee42ac0ab3105b4e6625938f01e6a2aa1de8df86e36e4fb48d528ff7cb49eee1",
+            "binding_kind": "apt",
+            "description": "fast Bayesian spam filter (sqlite)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "sqlite"
+            ],
+            "name": "bogofilter-sqlite",
+            "packages": [],
+            "query": "sqlite",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.2.5-1build4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "6228cfad7aaeb06fda55ada7736b5d286bd5288bbf3ab76c3e910a99de5dba1e",
+            "binding_kind": "apt",
+            "description": "Common Lisp interface to SQLite",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "sqlite"
+            ],
+            "name": "cl-sqlite",
+            "packages": [],
+            "query": "sqlite",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "20130615-2.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "3af3035e6bbbb37b7b1c39781fc239c5d441c326558f77833550fe6fb9a6a0cf",
+            "binding_kind": "apt",
+            "description": "SQLite 3 support for the Courier authentication library",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "sqlite"
+            ],
+            "name": "courier-authlib-sqlite",
+            "packages": [],
+            "query": "sqlite",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.71.4-1build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "99f77fcd48db4e42ebe1c4e1f1895bc997b4504b5b58b0b2de2fc6b9f084cbd2",
+            "binding_kind": "apt",
+            "description": "secure POP3/IMAP server - SQLite support",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "sqlite"
+            ],
+            "name": "dovecot-sqlite",
+            "packages": [],
+            "query": "sqlite",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1:2.3.21+dfsg1-2ubuntu6.5",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "21923b4b9f0d0190fb33d852c6739c43f395bbbde38672c0744e4e6a79053a2e",
+            "binding_kind": "apt",
+            "description": "high level SQL database frontend for Emacs (SQLite backend)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "sqlite"
+            ],
+            "name": "elpa-emacsql-sqlite",
+            "packages": [],
+            "query": "sqlite",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.1.1+git20230417.6401226+ds-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "34bbf3ca44ce59a5b6a36e5046a2860aa188d1c32d1706d94b7fd47facd6c6d5",
+            "binding_kind": "apt",
+            "description": "gnustep-dl2 adaptor to connect to SQLite",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "sqlite"
+            ],
+            "name": "gnustep-dl2-sqlite-adaptor",
+            "packages": [],
+            "query": "sqlite",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.12.0-16build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "f6ee7ab5edbdb60a97efd4be88b723dba77e98700fd8b2dbd903d49a6eab20e2",
+            "binding_kind": "apt",
+            "description": "SQLite database connectivity module for the Kamailio SIP server",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "sqlite"
+            ],
+            "name": "kamailio-sqlite-modules",
+            "packages": [],
+            "query": "sqlite",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "5.7.4-1build7",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "1696afe4462d6590da0b9d63540a5ce0dc49f41fd4f59f141a0b1b34f301e5e4",
+            "binding_kind": "apt",
+            "description": "vCard query utility for mutt",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "query"
+            ],
+            "name": "mutt-vc-query",
+            "packages": [],
+            "query": "query",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "005-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "650e36951dedc048fe95f78d887e481b0354bb5846236760d5e9db6cf9097441",
+            "binding_kind": "apt",
+            "description": "Invoked when the promise is settled regardless of outcome",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "finally"
+            ],
+            "name": "node-p-finally",
+            "packages": [],
+            "query": "finally",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2.0.1-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "5284fb966777c38d840dda90e76cbb18f4693f5f17b7545bdb2fe2c1593ca13b",
+            "binding_kind": "apt",
+            "description": "SQLite module for Pike",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "sqlite"
+            ],
+            "name": "pike8.0-sqlite",
+            "packages": [],
+            "query": "sqlite",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "8.0.1738-1.3ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "97ea7daf2e463f1044063265a570e6a178df891e8ce71da5817b5a0f65335b41",
+            "binding_kind": "apt",
+            "description": "SQLite map support for Postfix",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "sqlite"
+            ],
+            "name": "postfix-sqlite",
+            "packages": [],
+            "query": "sqlite",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.8.6-1ubuntu0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "6a15f11e20ab7dafd6e13817b6a3941c1c30a850dceefc8bde61da5dd7072829",
+            "binding_kind": "apt",
+            "description": "Versatile, virtual-hosting FTP daemon - SQLite3 module",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "sqlite"
+            ],
+            "name": "proftpd-mod-sqlite",
+            "packages": [],
+            "query": "sqlite",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.3.8.b+dfsg-1ubuntu0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "ebd2f143629fe1c9cd35c01ae68d63fa381327bd38aa3d6e2e51e4acbef85dfe",
+            "binding_kind": "apt",
+            "description": "SQLite database backend for request-tracker4",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "sqlite"
+            ],
+            "name": "rt4-db-sqlite",
+            "packages": [],
+            "query": "sqlite",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "4.4.7+dfsg-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "748732cf2f31532bf7a22d61a59b13a62391886a45e821d994c2652be936fed3",
+            "binding_kind": "apt",
+            "description": "SQLite database backend for request-tracker5",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "sqlite"
+            ],
+            "name": "rt5-db-sqlite",
+            "packages": [],
+            "query": "sqlite",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "5.0.5+dfsg-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "b979ce9338caddfb88b4b98dbbca2bca30f8baf858f6f086d080ba184978bfe3",
+            "binding_kind": "apt",
+            "description": "SiSU dependencies for use with SQLite database",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "sqlite"
+            ],
+            "name": "sisu-sqlite",
+            "packages": [],
+            "query": "sqlite",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "7.3.0-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "7b396304d4a8b7b20b0f7bb4205ab524f9652897b8a1c94b84c3fb9d92814468",
+            "binding_kind": "apt",
+            "description": "S-Lang bindings to the sqlite3 database library",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "sqlite"
+            ],
+            "name": "slang-sqlite",
+            "packages": [],
+            "query": "sqlite",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.6.4-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "a388afa6a8df75d16f2e86f92a2c232a91ccd5057552bfd014755b383bd22458",
+            "binding_kind": "apt",
+            "description": "CLI tool and Python utility functions for manipulating SQLite",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "sqlite"
+            ],
+            "name": "sqlite-utils",
+            "packages": [],
+            "query": "sqlite",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.35.2-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "302ec38aa35966559d5a27b97dba714f026f01c378b9226d28d34747ae4b9315",
+            "binding_kind": "apt",
+            "description": "Tree-sitter queries parser for Tree-sitter (source files)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "query"
+            ],
+            "name": "tree-sitter-query-src",
+            "packages": [],
+            "query": "query",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.1.0-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "9ac003f4553791ea967f5a60ca8bcbbc5faeb70615ce798f9e6e2a042e975663",
+            "binding_kind": "apt",
+            "description": "Data logger for 1-Wire weather sensors (SQLite plugin)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "sqlite"
+            ],
+            "name": "w1retap-sqlite",
+            "packages": [],
+            "query": "sqlite",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.4.6-1ubuntu4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "efc0bca2de73236e90ded743b0e9224b3ace4e7bea41067af93b0559066d6d55",
+            "binding_kind": "apt",
+            "description": "query and manipulate user account information",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "query"
+            ],
+            "name": "accountsservice",
+            "packages": [],
+            "query": "query",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "23.13.9-2ubuntu6.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "442dc692f644a9acd8cfd87272a34812398fd65c016e5225c8368b52fdce6fff",
+            "binding_kind": "apt",
+            "description": "network backup service - SQLite v3 common files",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "sqlite"
+            ],
+            "name": "bacula-common-sqlite3",
+            "packages": [],
+            "query": "sqlite",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "13.0.4-1build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "65938897f89814fa4d1b1a93b0af07c0e578f4d1f41b9f36e30680a0cbbd69ba",
+            "binding_kind": "apt",
+            "description": "network backup service - SQLite 3 storage for Director",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "sqlite"
+            ],
+            "name": "bacula-director-sqlite3",
+            "packages": [],
+            "query": "sqlite",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "13.0.4-1build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "2e010479d78c8eb4dc75812eedeaa0039309b76597c6bdf8b5a57ae556f567e0",
+            "binding_kind": "apt",
+            "description": "parallel construction, indexing and querying of de Bruijn graphs",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "query"
+            ],
+            "name": "bifrost",
+            "packages": [],
+            "query": "query",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.3.1-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "a8c6ca5cfaa0ebd3fbd9fc6b6b535de9b5259fdd4aac40bb94f878ad18de8feb",
+            "binding_kind": "apt",
+            "description": "Suite of tools to manipulate, validate and query mmCIF files",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "query"
+            ],
+            "name": "cif-tools",
+            "packages": [],
+            "query": "query",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.0.7-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d78b16ae5e914f0c8c91c70caadf07e9698fcbbf2b8babce6c97c8fcf599567b",
+            "binding_kind": "apt",
+            "description": "Common Lisp package to query Pubmed medical literature database",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "query"
+            ],
+            "name": "cl-pubmed",
+            "packages": [],
+            "query": "query",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "2.1.3-5.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d1375897a30ba98eafdaba5a00715c1b3f9e5797174d04377e39828b69b10fc9",
+            "binding_kind": "apt",
+            "description": "Query OpenCL system information",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "query"
+            ],
+            "name": "clinfo",
+            "packages": [],
+            "query": "query",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "3.0.23.01.25-1build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "a1db227b26b22328c963d9ef7212b21999cf10813cc40f404d828bc2d770333b",
+            "binding_kind": "apt",
+            "description": "Lint tool for the Cypher query language",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "query"
+            ],
+            "name": "cypher-lint",
+            "packages": [],
+            "query": "query",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.6.2-0.1build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "4598f926cff4989676bd759cf79e210cce33efa9ae4a8104e2f56c4cc45d5a82",
+            "binding_kind": "apt",
+            "description": "Query, update and convert data structures from the command line (program)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "query"
+            ],
+            "name": "dasel",
+            "packages": [],
+            "query": "query",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "2.6.0-1ubuntu0.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "cf3a366626977a0980d9c5bec5a66f0768391c87a99ed576448503ce5bbb07ff",
+            "binding_kind": "apt",
+            "description": "program to set and query settings of video4linux devices",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "query"
+            ],
+            "name": "dov4l",
+            "packages": [],
+            "query": "query",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.9+repack-1build1",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Finally independently query the SQLite database",
+        "errors": [],
+        "queries": [
+          "finally",
+          "independently",
+          "query",
+          "sqlite"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "APT_CATALOG",
+        "source_url": null
+      },
+      {
+        "binding_performed": false,
+        "candidate_count": 42,
+        "candidates": [
+          {
+            "description": "A SnowLeopardAI-managed MCP server that provides access to Google BigQuery data.",
+            "is_latest": true,
+            "name": "io.github.SnowLeopard-AI/bigquery-mcp",
+            "packages": [
+              {
+                "identifier": "sl-bigquery-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.9"
+              }
+            ],
+            "query": "query",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/SnowLeopard-AI/bigquery-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "CloudQuery MCP server for asset inventory data. Supports CLI, PostgreSQL, and Platform modes.",
+            "is_latest": true,
+            "name": "io.github.cloudquery/mcp",
+            "packages": [
+              {
+                "identifier": "https://github.com/cloudquery/mcp-releases/releases/download/v1.9.1/cq-platform-mcp_1.9.1_darwin_arm64.mcpb",
+                "registry_type": "mcpb",
+                "required_environment": [],
+                "runtime_hint": "darwin-arm64",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.9.1"
+              },
+              {
+                "identifier": "https://github.com/cloudquery/mcp-releases/releases/download/v1.9.1/cq-platform-mcp_1.9.1_darwin_amd64.mcpb",
+                "registry_type": "mcpb",
+                "required_environment": [],
+                "runtime_hint": "darwin-amd64",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.9.1"
+              },
+              {
+                "identifier": "https://github.com/cloudquery/mcp-releases/releases/download/v1.9.1/cq-platform-mcp_1.9.1_linux_arm64.mcpb",
+                "registry_type": "mcpb",
+                "required_environment": [],
+                "runtime_hint": "linux-arm64",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.9.1"
+              },
+              {
+                "identifier": "https://github.com/cloudquery/mcp-releases/releases/download/v1.9.1/cq-platform-mcp_1.9.1_linux_amd64.mcpb",
+                "registry_type": "mcpb",
+                "required_environment": [],
+                "runtime_hint": "linux-amd64",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.9.1"
+              },
+              {
+                "identifier": "https://github.com/cloudquery/mcp-releases/releases/download/v1.9.1/cq-platform-mcp_1.9.1_windows_amd64.mcpb",
+                "registry_type": "mcpb",
+                "required_environment": [],
+                "runtime_hint": "windows-amd64",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.9.1"
+              }
+            ],
+            "query": "query",
+            "remotes": [],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.9.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP server exposing sqlite3 library functionality",
+            "is_latest": true,
+            "name": "io.github.daedalus/mcp-sqlite3",
+            "packages": [
+              {
+                "identifier": "mcp-sqlite3",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.3"
+              }
+            ],
+            "query": "sqlite",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/daedalus/mcp-sqlite3"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.1.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Zero-dependency SQLite MCP on node:sqlite: queries, writes, tables, schemas.",
+            "is_latest": true,
+            "name": "io.github.mrfentmen/sqlite-mcp",
+            "packages": [
+              {
+                "identifier": "@mrfentmen/sqlite-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.0"
+              }
+            ],
+            "query": "sqlite",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/mrfentmen/awesome-mcps"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "SQLite MCP server with 73 tools for JSONB, full-text search, geospatial, and analytics.",
+            "is_latest": true,
+            "name": "io.github.neverinfamous/sqlite-mcp-server",
+            "packages": [
+              {
+                "identifier": "sqlite-mcp-server-enhanced",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "2.6.3"
+              },
+              {
+                "identifier": "docker.io/writenotenow/sqlite-mcp-server:v2.6.3",
+                "registry_type": "oci",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": null
+              }
+            ],
+            "query": "sqlite",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/neverinfamous/sqlite-mcp-server.git"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "2.6.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "SQLite MCP \u2014 query databases, inspect schemas, explain queries, export data.",
+            "is_latest": true,
+            "name": "io.github.ofershap/sqlite",
+            "packages": [
+              {
+                "identifier": "mcp-sqlite-server",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.1"
+              }
+            ],
+            "query": "sqlite",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/ofershap/mcp-server-sqlite"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP server for local SQLite database operations",
+            "is_latest": true,
+            "name": "io.github.spences10/mcp-sqlite-tools",
+            "packages": [
+              {
+                "identifier": "mcp-sqlite-tools",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.0.11"
+              }
+            ],
+            "query": "sqlite",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/spences10/mcp-sqlite-tools"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.0.11",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP server for SQLite databases. Read-only by default, row caps, statement timeouts.",
+            "is_latest": true,
+            "name": "io.github.arifulislamat/database-mcp-sqlite",
+            "packages": [
+              {
+                "identifier": "@database-mcp/sqlite",
+                "registry_type": "npm",
+                "required_environment": [
+                  "SQLITE_PATH"
+                ],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.4.2"
+              },
+              {
+                "identifier": "database-mcp-sqlite",
+                "registry_type": "pypi",
+                "required_environment": [
+                  "SQLITE_PATH"
+                ],
+                "runtime_hint": "uvx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.0"
+              }
+            ],
+            "query": "sqlite",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/arifulislamat/database-mcp"
+            },
+            "required_environment_count": 2,
+            "required_secret_count": 0,
+            "score": 16,
+            "status": "active",
+            "version": "0.4.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Explore your Messages SQLite database to browse tables and inspect schemas with ease. Run flexible\u2026",
+            "is_latest": true,
+            "name": "ai.smithery/afgong-sqlite-mcp-server",
+            "packages": [],
+            "query": "sqlite",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@afgong/sqlite-mcp-server/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "subfolder": "sqlite-explorer-fastmcp-mcp-server",
+              "url": "https://github.com/afgong/sqlite-mcp-server"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.16.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Explore, query, and inspect SQLite databases with ease. List tables, preview results, and view det\u2026",
+            "is_latest": true,
+            "name": "ai.smithery/wgong-sqlite-mcp-server",
+            "packages": [],
+            "query": "sqlite",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@wgong/sqlite-mcp-server/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "subfolder": "sqlite-explorer-fastmcp-mcp-server",
+              "url": "https://github.com/wgong/sqlite-mcp-server"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.16.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "License plate lookup for AI agents: plate messages and ALPR history via PlateQuery. OAuth 2.1.",
+            "is_latest": true,
+            "name": "com.platequery/plate-api",
+            "packages": [],
+            "query": "query",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.platequery.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Veilkrand/platequery-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Surplus lines market data, per query. U.S. E&S: premium, financials, litigation, catastrophe.",
+            "is_latest": true,
+            "name": "com.querylines/mcp",
+            "packages": [],
+            "query": "query",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.querylines.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.3.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Query, browse, and automate OmegaAI workspaces from any MCP client. Streamable HTTP with OAuth 2.0.",
+            "is_latest": true,
+            "name": "com.queryomega/omega",
+            "packages": [],
+            "query": "query",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.cloud.queryomega.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/The-Lambda-Group/query-omega-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "2.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Bitquery MCP \u2014 trade-level blockchain data (DEX trades, transfers, holders)",
+            "is_latest": true,
+            "name": "io.github.pipeworx-io/bitquery",
+            "packages": [],
+            "query": "query",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://gateway.pipeworx.io/bitquery/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/pipeworx-io/mcp-bitquery"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "IPQuery MCP.",
+            "is_latest": true,
+            "name": "io.github.pipeworx-io/ipquery",
+            "packages": [],
+            "query": "query",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://gateway.pipeworx.io/ipquery/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/pipeworx-io/mcp-ipquery"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Query pair count, URL discarded",
+            "is_latest": true,
+            "name": "io.github.sadri-dridi/query-pair-count",
+            "packages": [],
+            "query": "query",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/query-pair-count/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Count characters in a search query. Query discarded.",
+            "is_latest": true,
+            "name": "io.github.sadri-dridi/search-query-len",
+            "packages": [],
+            "query": "query",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/search-query-len/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "An MCP server for Text2SQL: transforms natural language into SQL using graph schema understanding.",
+            "is_latest": true,
+            "name": "com.falkordb/QueryWeaver",
+            "packages": [
+              {
+                "identifier": "docker.io/falkordb/queryweaver:0.0.11",
+                "registry_type": "oci",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "streamable-http",
+                  "url": "https://localhost:5000/mcp"
+                },
+                "version": null
+              }
+            ],
+            "query": "query",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/FalkorDB/QueryWeaver"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.0.11",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "RLS/tenant-aware Postgres for AI agents \u2014 schema, read-only SQL, NL\u2192SQL with safety rails.",
+            "is_latest": true,
+            "name": "io.github.infoinlet-marketplace/mcp-postgres-nl-query",
+            "packages": [
+              {
+                "identifier": "@infoinlet/mcp-postgres-nl-query",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.1"
+              }
+            ],
+            "query": "query",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "subfolder": "services/postgres-nl-query",
+              "url": "https://github.com/infoinlet-marketplace/marketplace"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "SQL over real-world data \u2014 FDA, SEC, blockchain, genomics, CVEs, and more. No config.",
+            "is_latest": true,
+            "name": "io.github.microqueryhq/microquery-mcp",
+            "packages": [
+              {
+                "identifier": "microquery-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "uvx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.3"
+              }
+            ],
+            "query": "query",
+            "remotes": [],
+            "repository": {
+              "id": "microqueryhq/microquery-mcp",
+              "source": "github",
+              "url": "https://github.com/microqueryhq/microquery-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "1.0.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Read-only current weather lookup by place name using Open-Meteo.",
+            "is_latest": true,
+            "name": "io.github.wcnm8888/mcp1-weather-query",
+            "packages": [
+              {
+                "identifier": "mcp-weather-query",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "uvx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.0"
+              }
+            ],
+            "query": "query",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/wcnm8888/mcp1-weather-query"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Schema-aware read/write access to SQLite through Devart dotConnect ADO.NET data provider.",
+            "is_latest": true,
+            "name": "com.devart/mcp-sqlite",
+            "packages": [
+              {
+                "identifier": "Devart.Mcp.SQLite",
+                "registry_type": "nuget",
+                "required_environment": [
+                  "DEVART_MCP_SQLITE_CONNECTION"
+                ],
+                "runtime_hint": null,
+                "secret_environment": [
+                  "DEVART_MCP_SQLITE_CONNECTION"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.1.0"
+              }
+            ],
+            "query": "sqlite",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/devart-ai-connectivity/devart-mcp-server-sqlite"
+            },
+            "required_environment_count": 1,
+            "required_secret_count": 1,
+            "score": 14,
+            "status": "active",
+            "version": "1.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "FastMCP server for surgical queries against a vault knowledge graph (NetworkX node-link JSON).\u2026",
+            "is_latest": true,
+            "name": "io.github.adelaidasofia/graph-query-mcp",
+            "packages": [
+              {
+                "identifier": "https://github.com/adelaidasofia/graph-query-mcp/releases/download/v0.1.0/graph-query-mcp.mcpb",
+                "registry_type": "mcpb",
+                "required_environment": [
+                  "GRAPH_JSON_PATH"
+                ],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.0"
+              }
+            ],
+            "query": "query",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/adelaidasofia/graph-query-mcp"
+            },
+            "required_environment_count": 1,
+            "required_secret_count": 0,
+            "score": 13,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP server for encrypted SQLite databases (SQLCipher 4) - Works with MoneyMoney, KeePass and more",
+            "is_latest": true,
+            "name": "io.github.rosch100/mcp-encrypted-sqlite",
+            "packages": [
+              {
+                "identifier": "ghcr.io/rosch100/mcp-encrypted-sqlite:0.4.1",
+                "registry_type": "oci",
+                "required_environment": [
+                  "DB_PATH",
+                  "DB_PASSPHRASE"
+                ],
+                "runtime_hint": null,
+                "secret_environment": [
+                  "DB_PASSPHRASE"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": null
+              }
+            ],
+            "query": "sqlite",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/rosch100/mcp-encrypted-sqlite"
+            },
+            "required_environment_count": 2,
+            "required_secret_count": 1,
+            "score": 13,
+            "status": "active",
+            "version": "0.4.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP server for SQLCipher 4 encrypted SQLite databases with full CRUD operations and query support",
+            "is_latest": true,
+            "name": "io.github.rosch100/mcp-sqlite",
+            "packages": [
+              {
+                "identifier": "ghcr.io/rosch100/mcp-sqlite:0.2.4",
+                "registry_type": "oci",
+                "required_environment": [
+                  "DB_PATH",
+                  "DB_PASSPHRASE"
+                ],
+                "runtime_hint": null,
+                "secret_environment": [
+                  "DB_PASSPHRASE"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": null
+              }
+            ],
+            "query": "sqlite",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/rosch100/mcp-sqlite"
+            },
+            "required_environment_count": 2,
+            "required_secret_count": 1,
+            "score": 13,
+            "status": "active",
+            "version": "0.2.4",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Architecture-grounded query for AI agents. Governance constraints, evidence-linked answers.",
+            "is_latest": true,
+            "name": "com.ontoramp/graph-query",
+            "packages": [],
+            "query": "query",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://ontoramp-graph-query.fly.dev/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/MatthewDavisAIArchitect/ontoramp-graph-query"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "1.0.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Kotlin compile-time SQL library. Docs, code validation, and SQLite execution tools.",
+            "is_latest": true,
+            "name": "com.exoquery/mcp-server",
+            "packages": [],
+            "query": "query",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://backend.exoquery.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Human culture news, trends and search across sports, music, fashion and streetwear.",
+            "is_latest": true,
+            "name": "com.finallyoffline.www/culture",
+            "packages": [],
+            "query": "finally",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://www.finallyoffline.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "2.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Barber & cosmetology exam pass rates, booth rent with open chairs, and Texas licensee counts",
+            "is_latest": true,
+            "name": "com.innergcomplete/shearquery",
+            "packages": [],
+            "query": "query",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://shearquery.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/lamont703/Project_InnerG_Complete_Agency"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "0.2.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Double-blind talent marketplace: AIs search anonymous opted-in candidates; reveal on consent.",
+            "is_latest": true,
+            "name": "io.github.QueryQuarry/queryquarry",
+            "packages": [],
+            "query": "query",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://queryquarry.com/api/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/QueryQuarry/QueryQuarry"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Finally independently query the SQLite database",
+        "errors": [],
+        "queries": [
+          "finally",
+          "independently",
+          "query",
+          "sqlite"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "OFFICIAL_MCP_REGISTRY",
+        "source_url": "https://registry.modelcontextprotocol.io"
+      }
+    ],
+    "schema": "PROJECT_BRAIN_FEDERATED_CAPABILITY_DISCOVERY_V1",
+    "sources": [
+      "APT_CATALOG",
+      "OFFICIAL_MCP_REGISTRY"
+    ]
+  },
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
+  "source": "FEDERATED_CAPABILITY_DISCOVERY_FALLBACK",
+  "targeted_acquisition_error": "AutoAcquisitionFailure:NO_LOW_FRICTION_APT_CLI_CANDIDATE"
+}

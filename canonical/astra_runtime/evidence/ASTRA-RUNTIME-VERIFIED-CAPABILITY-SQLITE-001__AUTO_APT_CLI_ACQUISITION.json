@@ -1,0 +1,508 @@
+{
+  "attempts": [
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "74430e39e09ef45771c7ab827877ac59ef4eee2c6144dec2c2582cd77e2d72ed",
+        "executables": [],
+        "package": "akonadi-backend-sqlite",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "4:23.08.5-0ubuntu3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "74430e39e09ef45771c7ab827877ac59ef4eee2c6144dec2c2582cd77e2d72ed",
+        "binding_kind": "apt",
+        "description": "SQLite storage backend for Akonadi",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "akonadi-backend-sqlite",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "4:23.08.5-0ubuntu3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "ee42ac0ab3105b4e6625938f01e6a2aa1de8df86e36e4fb48d528ff7cb49eee1",
+        "executables": [
+          {
+            "executable": "/usr/bin/bf_compact-sqlite",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "--help must be a directory, not a file"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/bf_copy-sqlite",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "unknown option --help"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/bf_tar-sqlite",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "bf_tar-sqlite: unknown option --help"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/bogofilter-sqlite",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "bogofilter-sqlite version 1.2.5\n\nUsage:  bogofilter [options] < message\n\nhelp options:\n  -h, --help                - print this help message.\n  -V, --version             - print version information and exit.\n  -Q, --query               - query (display) base bogofilter configuration.\n  -QQ                       - display extended configuration info.\nclassification options:\n  -p, --passthrough         - passthrough.\n  -e, --ham-true            - in -p mode, exit with code 0 when the mail is not spam.\n  -u, --update-as-scored    - score message as spam or non-spam and register accordingly.\n  -M, --classify-mbox       - set mailbox mode.  Classify multiple messages in an mbox formatted file.\n  -b, --classify-stdin      - set streaming bulk mode. Process multiple messages (files or directories) read from STDIN.\n  -B, --classify-files=list - set bulk mode. Process multiple messages (files or directories) named on the command line.\n  -R, --dataframe           - print an R data frame.\nregistration options:\n  -s, --register-spam       - register message(s) as spam.\n  -n, --register-ham        - register message(s) as non-spam.\n  -S, --unregister-spam     - unregister message(s) from spam list.\n  -N, --unregister-nonspam  - unregister message(s) from non-spam list.\ngeneral options:\n  -c, --config-file=file    - read specified config file.\n  -C, --no-config-file      - don't read standard config files.\n  -d, --bogofilter-dir=path - specify directory for wordlists.\n  -H, --no-header-tags      - disables header line tagging.\n  -k, --db-cachesize=size   - set Berkeley DB cache size (MB).\n  -l, --use-syslog          - write messages to syslog.\n  -L, --syslog-tag=tag      - specify the tag value for log messages.\n  -I, --input-file=file     - read message from 'file' instead of stdin.\n  -O, --output-file=file    - save message to 'file' in passthrough mode.\nparameter options:\n  -mv1[,v2[,v3]]            - set user defined min_dev, robs, and robx values.\n      --min-dev=v1, --robs=v2, --robx=v3\n  -ov1[,v2]                 - set user defined spam and non-spam cutoff values.\n      --spam-cutoff=v1, --ham-cutoff=v2\ninfo options:\n  -t, --terse               - set terse output mode.\n  -T, --fixed-terse-format  - set invariant terse output mode.\n  -q, --quiet               - suppress token statistics.\n  -U, --report-unsure       - print statistics if spamicity is 'unsure'.\n  -v, --verbosity           - set debug verbosity level.\n  -y, --timestamp-date      - set date for token timestamps.\n  -D, --debug-to-stdout     - direct debug output to stdout.\n  -x, --debug-flags=list    - set flags to display debug information.\nconfig file options:\n  --option=value - can be used to set the value of a config file option.\n                   see bogofilter.cf.example for more info.\n  --block-on-subnets                return class addr tokens\n  --bogofilter-dir                  directory for wordlists\n  --charset-default                 default character set\n  --db-cachesize                    Berkeley db cache in Mb\n  --ham-cutoff                      nonspam if score below this\n  --header-format                   spam header format\n  --log-header-format               header written to log\n  --log-update-format               logged on update\n  --min-dev                         ignore if score near\n  --min-token-len                   min len for single tokens\n  --max-token-len                   max len for single tokens\n  --max-multi-token-len             max len for multi-word tokens\n  --multi-token-count               number of tokens per multi-word token\n  --ns-esf                          effective size factor for ham\n  --replace-nonascii-characters     substitute '?' if bit 8 is 1\n  --robs                            Robinson's s parameter\n  --robx                            Robinson's x parameter\n  --sp-esf                          effective size factor for spam\n  --spam-cutoff                     spam if score above this\n  --spam-header-name                passthrough adds/replaces\n  --spam-subject-tag                passthrough prepends Subject\n  --spamicity-formats               spamicity output format\n  --spamicity-tags                  spamicity tag format\n  --stats-in-header                 use header not body\n  --terse                           report in short form\n  --terse-format                    short form\n  --thresh-update                   no update if near 0 or 1\n  --timestamp                       enable/disable token timestamps\n  --token-count                     fixed token count for scoring\n  --token-count-min                 min token count for scoring\n  --token-count-max                 max token count for scoring\n  --unicode                         enable/disable unicode based wordlist\n  --unsure-subject-tag              like spam-subject-tag\n  --user-config-file                configuration file\n  --wordlist                        specify wordlist parameters\n\nbogofilter is a tool for classifying email as spam or non-spam.\n\nFor updates and additional information, see\nURL: http://bogofilter.sourceforge.net"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/bogolexer-sqlite",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: bogolexer [ -p | -q | -n | -h ]\n\n\t-p\t- print the tokens from stdin.\n\t-q\t- quiet mode, no tokens are printed.\n\t-h\t- help, this output.\n\t-n\t- map non-ascii characters to '?'.\n\t-v\t- set verbosity level.\n\t-c file\t- read specified config file.\n\t-C\t- don't read standard config files.\n\t-H\t- disables header line tagging.\n\t-I file\t- read message from file instead of stdin.\n\t-O file\t- write to file instead of stdout.\n\t-x list\t- set debug flags.\n\t-D\t- direct debug output to stdout.\n\nbogolexer (version 1.2.5) is part of the bogofilter package."
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/bogotune-sqlite",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 3,
+                "text": "Usage:  bogotune [options] { -c config } { -d directory } -n non-spam-file -s spam-file\n\t  -h      - print this help message.\n\t  -C      - don't read standard config files.\n\t  -c file - read specified config file.\n\t  -D      - don't read a wordlist file.\n\t  -d path - specify directory for wordlists.\n\t  -E      - disable ESF (effective size factor) tuning.\n\t  -M file - rewrite input file in message count format.\n\t  -r num  - specify robx value\n\t  -T num  - specify fp target value\n\t  -s file1 file2 ... - spam files\n\t  -n file1 file2 ... - non-spam files\n\t  -v      - increase level of verbose messages\n\t  -q      - quiet (suppress warnings)\n\nbogotune (version 1.2.5) is part of the bogofilter package."
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/bogoupgrade-sqlite",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage:\n     bogoupgrade [options] -d <bogofilter directory>\n     bogoupgrade [options] -i <input text file> -o <output db file>\n     bogoupgrade {-h|--help}\n\n     Options:\n            -b <path to bogoutil>\n\nOptions:\n    -d <directory>\n            Name of directory containing database files. Old files will be\n            read and new files will be written.\n\n    -i <input file>\n            Text file containing message count, and possibly wordlist data\n            records. If the file only contains a message count but no word\n            list records, there must be a database file, in the same\n            directory as the text file, which contains the word list data.\n\n    -o <output file>\n            Output database file. Use the appropriate file extension for\n            your version of bogofilter, i.e. '.db' for Berkeley DB and\n            SQLite3, or '.qdbm' for QDBM.\n\n    -b <path to bogoutil program>\n            Defaults to 'bogoutil', in the hopes that your shell will find\n            it.\n\n    -h | --help\n            Print the help - you are currently reading it."
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/bogoutil-sqlite",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: bogoutil {-h|-V}\n   or: bogoutil [OPTIONS] {-d|-l|-u|-m|-w|-p|--db-verify} file.db\n   or: bogoutil [OPTIONS] {-H|-r|-R} file\n   or: bogoutil [OPTIONS] {--db-print-leafpage-count} file.db\n   or: bogoutil [OPTIONS] {--db-print-pagesize} file.db\n\nOPTIONS are:\n  -C, --no-config-file        - don't read standard config files.\n  -D, --debug-to-stdout       - direct debug output to stdout.\n  -v, --verbosity             - set debug verbosity level.\n  -x, --debug-flags=list      - set flags to display debug information.\n  -y, --timestamp-date=date   - set default date (format YYYYMMDD).\n\nModes of operation are:\n  -h, --help                  - print this help message and exit.\n  -V, --version               - print version information and exit.\n\n  -d, --dump=file             - dump data from file to stdout.\n  -l, --load=file             - load data from stdin into file.\n  -u, --upgrade=file          - upgrade wordlist version.\n\ninfo options:\n  -w file                     - display counts for words from stdin.\n  -p file                     - display word counts and probabilities.\n  -I, --input-file=file       - read 'file' instead of standard input.\n  -H file                     - display histogram and statistics for wordlist.\n                                - use with -v  to exclude hapaxes.\n                                - use with -vv to exclude pure spam/ham.\n  -r file                     - compute Robinson's X for the specified file.\n  -R file                     - compute Robinson's X and save it in wordlist.\n\ndatabase maintenance, the \"-m file\" option is required in this group:\n  -m file                     - enable maintenance works (expiring tokens).\n  -n                          - replace non-ascii characters with '?'.\n  -a age                      - exclude tokens with older ages.\n  -c cnt                      - exclude tokens with lower counts.\n  -s l,h                      - exclude tokens with lengths between 'l' and 'h'\n                                (low and high).\n  --unicode=yes/no            - convert wordlist to/from unicode\n\ntoken parsing options:\n  --min-token-len             - min len for single tokens\n  --max-token-len             - max len for single tokens\n  --max-multi-token-len       - max len for multi-word tokens\n  --multi-token-count         - number of tokens per multi-word token\n\nbogoutil (version 1.2.5) is part of the bogofilter package."
+              }
+            ]
+          }
+        ],
+        "package": "bogofilter-sqlite",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.2.5-1build4"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "ee42ac0ab3105b4e6625938f01e6a2aa1de8df86e36e4fb48d528ff7cb49eee1",
+        "binding_kind": "apt",
+        "description": "fast Bayesian spam filter (sqlite)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "bogofilter-sqlite",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.2.5-1build4",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "6228cfad7aaeb06fda55ada7736b5d286bd5288bbf3ab76c3e910a99de5dba1e",
+        "executables": [],
+        "package": "cl-sqlite",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "20130615-2.1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "6228cfad7aaeb06fda55ada7736b5d286bd5288bbf3ab76c3e910a99de5dba1e",
+        "binding_kind": "apt",
+        "description": "Common Lisp interface to SQLite",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "cl-sqlite",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "20130615-2.1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "3af3035e6bbbb37b7b1c39781fc239c5d441c326558f77833550fe6fb9a6a0cf",
+        "executables": [],
+        "package": "courier-authlib-sqlite",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.71.4-1build3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "3af3035e6bbbb37b7b1c39781fc239c5d441c326558f77833550fe6fb9a6a0cf",
+        "binding_kind": "apt",
+        "description": "SQLite 3 support for the Courier authentication library",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "courier-authlib-sqlite",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.71.4-1build3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "99f77fcd48db4e42ebe1c4e1f1895bc997b4504b5b58b0b2de2fc6b9f084cbd2",
+        "executables": [],
+        "package": "dovecot-sqlite",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1:2.3.21+dfsg1-2ubuntu6.5"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "99f77fcd48db4e42ebe1c4e1f1895bc997b4504b5b58b0b2de2fc6b9f084cbd2",
+        "binding_kind": "apt",
+        "description": "secure POP3/IMAP server - SQLite support",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "dovecot-sqlite",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:2.3.21+dfsg1-2ubuntu6.5",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "21923b4b9f0d0190fb33d852c6739c43f395bbbde38672c0744e4e6a79053a2e",
+        "executables": [
+          {
+            "executable": "/usr/bin/emacsql-sqlite",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "#"
+              }
+            ]
+          }
+        ],
+        "package": "elpa-emacsql-sqlite",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "3.1.1+git20230417.6401226+ds-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "21923b4b9f0d0190fb33d852c6739c43f395bbbde38672c0744e4e6a79053a2e",
+        "binding_kind": "apt",
+        "description": "high level SQL database frontend for Emacs (SQLite backend)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "elpa-emacsql-sqlite",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.1.1+git20230417.6401226+ds-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "34bbf3ca44ce59a5b6a36e5046a2860aa188d1c32d1706d94b7fd47facd6c6d5",
+        "executables": [],
+        "package": "gnustep-dl2-sqlite-adaptor",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.12.0-16build2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "34bbf3ca44ce59a5b6a36e5046a2860aa188d1c32d1706d94b7fd47facd6c6d5",
+        "binding_kind": "apt",
+        "description": "gnustep-dl2 adaptor to connect to SQLite",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "gnustep-dl2-sqlite-adaptor",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.12.0-16build2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "f6ee7ab5edbdb60a97efd4be88b723dba77e98700fd8b2dbd903d49a6eab20e2",
+        "executables": [],
+        "package": "kamailio-sqlite-modules",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "5.7.4-1build7"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "f6ee7ab5edbdb60a97efd4be88b723dba77e98700fd8b2dbd903d49a6eab20e2",
+        "binding_kind": "apt",
+        "description": "SQLite database connectivity module for the Kamailio SIP server",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "kamailio-sqlite-modules",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "5.7.4-1build7",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "1696afe4462d6590da0b9d63540a5ce0dc49f41fd4f59f141a0b1b34f301e5e4",
+        "executables": [
+          {
+            "executable": "/usr/bin/mutt_vc_query",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "usage: /usr/bin/mutt_vc_query [-e|-m|-a] [-t <type>] [-f <file>] query_string\n       /usr/bin/mutt_vc_query -v\n       /usr/bin/mutt_vc_query -V\n       /usr/bin/mutt_vc_query -h\noptions:\n  -e            sort results by email\n  -m            sort results by misc\n  -a            output all emails instead of just preferred email\n  -f <file>     specify a data file to use\n  -t <type>     the type to use for the misc field\n  -v            display version\n  -V            display copyright and license\n  -h            this help message\n\n/usr/bin/mutt_vc_query: invalid option -- '-'"
+              }
+            ]
+          }
+        ],
+        "package": "mutt-vc-query",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "005-3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "1696afe4462d6590da0b9d63540a5ce0dc49f41fd4f59f141a0b1b34f301e5e4",
+        "binding_kind": "apt",
+        "description": "vCard query utility for mutt",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "query"
+        ],
+        "name": "mutt-vc-query",
+        "packages": [],
+        "query": "query",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "005-3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "650e36951dedc048fe95f78d887e481b0354bb5846236760d5e9db6cf9097441",
+        "executables": [],
+        "package": "node-p-finally",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "2.0.1-2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "650e36951dedc048fe95f78d887e481b0354bb5846236760d5e9db6cf9097441",
+        "binding_kind": "apt",
+        "description": "Invoked when the promise is settled regardless of outcome",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "finally"
+        ],
+        "name": "node-p-finally",
+        "packages": [],
+        "query": "finally",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.0.1-2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "5284fb966777c38d840dda90e76cbb18f4693f5f17b7545bdb2fe2c1593ca13b",
+        "executables": [],
+        "package": "pike8.0-sqlite",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "8.0.1738-1.3ubuntu1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "5284fb966777c38d840dda90e76cbb18f4693f5f17b7545bdb2fe2c1593ca13b",
+        "binding_kind": "apt",
+        "description": "SQLite module for Pike",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "pike8.0-sqlite",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "8.0.1738-1.3ubuntu1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "97ea7daf2e463f1044063265a570e6a178df891e8ce71da5817b5a0f65335b41",
+        "executables": [],
+        "package": "postfix-sqlite",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "3.8.6-1ubuntu0.1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "97ea7daf2e463f1044063265a570e6a178df891e8ce71da5817b5a0f65335b41",
+        "binding_kind": "apt",
+        "description": "SQLite map support for Postfix",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "sqlite"
+        ],
+        "name": "postfix-sqlite",
+        "packages": [],
+        "query": "sqlite",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.8.6-1ubuntu0.1",
+        "zero_cost_eligible": true
+      }
+    }
+  ],
+  "goal": "Finally independently query the SQLite database",
+  "mission_id": "ASTRA-RUNTIME-VERIFIED-CAPABILITY-SQLITE-001",
+  "role_conditioned_discovery": [],
+  "schema": "PROJECT_BRAIN_AUTO_APT_CLI_ACQUISITION_EVIDENCE_V1",
+  "status": "NO_COMPATIBLE_CONTRACT"
+}
