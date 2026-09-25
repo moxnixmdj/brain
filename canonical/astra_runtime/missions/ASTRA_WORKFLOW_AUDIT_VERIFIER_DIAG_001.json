@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-WORKFLOW-AUDIT-VERIFIER-DIAG-001",
+  "purpose": "Read-only diagnostic of the exact independent raw-source verifier mismatch for the generated workflow audit.",
+  "steps": [
+    {
+      "id": "diagnose-workflow-source-verifier",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/astra_runtime.py')\ns=importlib.util.spec_from_file_location('rt_diag',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nresult=m._goal_action({'type':'assert_workflow_audit_supported_by_source','args':{'audit_path':'canonical/astra_runtime/tmp/ASTRA_WORKFLOW_AUDIT.json','yaml_path':'.github/workflows/astra-shared-runtime.yml'}})\nprint(json.dumps(result,sort_keys=True))\nprint('WORKFLOW_VERIFIER_DIAG_COMPLETE')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "WORKFLOW_VERIFIER_DIAG_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "read_only_diagnostic": true,
+    "model_controller_required": false
+  }
+}
