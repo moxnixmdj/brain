@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-SEMANTIC-PARAPHRASE-COMPILER-DIAG-002",
+  "purpose": "Verify the previously failing paraphrase now compiles through semantic multi-source reduction extraction.",
+  "steps": [
+    {
+      "id": "compile-paraphrase",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/goal_compiler.py')\ns=importlib.util.spec_from_file_location('gc',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads(pathlib.Path('canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads(pathlib.Path('canonical/astra_runtime/missions/ASTRA_RUNTIME_SEMANTIC_PARAPHRASE_001.json').read_text())['goal']\ntry:\n out=m.compile_goal(goal,reg,pathlib.Path('.').resolve())\n print(json.dumps({'status':'COMPILED','mode':out.get('compiler_mode'),'clauses':out.get('clauses'),'parts':out.get('compiled_parts')},sort_keys=True))\n print('PARAPHRASE_COMPILER_COMPILED')\nexcept Exception as exc:\n print(json.dumps({'status':'BLOCKED','type':type(exc).__name__,'error':str(exc)},sort_keys=True))\n print('PARAPHRASE_COMPILER_BLOCKED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "PARAPHRASE_COMPILER_"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "read_only_diagnostic": true,
+    "semantic_reduce_generalization_commit": "52f1aa59381d651ad9876474725546769d08250d"
+  }
+}
