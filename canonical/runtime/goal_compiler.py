@@ -1509,6 +1509,88 @@ def _compile_bounded_loop_goal(goal,clauses,registry,root):
     }
 
 
+def _compile_multi_source_reduce_goal(goal,clauses,registry,root):
+    if len(clauses)!=5:
+        return None
+    browser=(registry or {}).get("web.browser.rendered.capture.chromedriver")
+    xcreate=(registry or {}).get("xlsx.table.create_from_json_records")
+    xverify=(registry or {}).get("xlsx.table.verify_against_json_records")
+    if any(not isinstance(x,dict) or x.get("status")!="VERIFIED_BOUND_CAPABILITY" for x in (browser,xcreate,xverify)):
+        return None
+
+    def source(clause):
+        urls=re.findall(r"https?://[^\s,]+",clause)
+        paths=[raw for raw,_ in _repo_paths(clause,root)]
+        png=[p for p in paths if pathlib.Path(p).suffix.lower()==".png"]
+        js=[p for p in paths if pathlib.Path(p).suffix.lower()==".json"]
+        if len(urls)!=1 or len(png)!=1 or len(js)!=1:
+            return None
+        url=urls[0].rstrip(".,;:!?")
+        tail=url.split("?",1)[0].rstrip("/").rsplit("/",1)[-1].lower()
+        entity=tail[:-1] if tail.endswith("s") and not tail.endswith("ss") else tail
+        action=_render_template(browser["action_template"],{"url":url,"screenshot_path":png[0],"result_path":js[0]})
+        return {"entity":entity,"url":url,"json":js[0],"action":action}
+
+    s0=source(clauses[0]); s1=source(clauses[1])
+    if s0 is None or s1 is None or s0["entity"]==s1["entity"]:
+        return None
+    by={s0["entity"]:s0,s1["entity"]:s1}
+
+    rm=re.match(
+      r"^using\s+both\s+live\s+results,\s+create\s+([^\s]+\.json)\s+containing\s+exactly\s+one\s+record\s+per\s+live\s+(\w+)\s+with\s+(.+?),\s+where\s+(\w+)\s+is\s+the\s+number\s+of\s+live\s+(\w+)\s+whose\s+(\w+)\s+equals\s+that\s+(\w+)'s\s+(\w+)$",
+      clauses[2],re.IGNORECASE)
+    xm=re.match(
+      r"^create\s+([^\s]+\.xlsx)\s+from\s+([^\s]+\.json)\s+with\s+columns\s+(.+)$",
+      clauses[3],re.IGNORECASE)
+    vm=re.match(r"^independently\s+reread\s+both\s+live\s+source\s+results,\s+the\s+summary\s+json,\s+and\s+the\s+xlsx\s+and\s+verify\b",clauses[4],re.IGNORECASE)
+    if not rm or not xm or not vm:
+        return None
+    summary=rm.group(1).strip(" .,:;")
+    dim_entity=rm.group(2).lower()
+    fields=[x.strip(" .,:;").lower() for x in re.sub(r"\s+and\s+",",",rm.group(3),flags=re.I).split(",") if x.strip(" .,:;")]
+    count_field=rm.group(4).lower()
+    fact_entity=rm.group(5).lower()
+    if fact_entity.endswith("s") and not fact_entity.endswith("ss"):
+        fact_entity=fact_entity[:-1]
+    fact_key=rm.group(6)
+    if rm.group(7).lower()!=dim_entity:
+        return None
+    dim_key=rm.group(8)
+    if dim_entity not in by or fact_entity not in by:
+        return None
+    output_id=dim_entity+"_id"
+    if output_id not in fields or count_field not in fields:
+        return None
+    copy_fields=[f for f in fields if f not in {output_id,count_field}]
+    xlsx=xm.group(1).strip(" .,:;")
+    cols=[x.strip(" .,:;").lower() for x in re.sub(r"\s+and\s+",",",xm.group(3),flags=re.I).split(",") if x.strip(" .,:;")]
+    if xm.group(2).strip(" .,:;")!=summary or cols!=fields:
+        return None
+
+    dim=by[dim_entity]; fact=by[fact_entity]
+    reduce_action={"type":"aggregate_runtime_json_arrays","args":{
+      "dimension_path":dim["json"],"fact_path":fact["json"],
+      "dimension_key":dim_key,"fact_key":fact_key,
+      "output_path":summary,"output_id_field":output_id,
+      "copy_fields":copy_fields,"count_field":count_field
+    },"expect":{"type":"field_equals","field":"output_verified","value":True}}
+    verify_reduce={"type":"assert_runtime_json_aggregate","args":{
+      "dimension_path":dim["json"],"fact_path":fact["json"],
+      "summary_path":summary,"dimension_key":dim_key,"fact_key":fact_key,
+      "output_id_field":output_id,"copy_fields":copy_fields,"count_field":count_field
+    },"expect":{"type":"field_equals","field":"verified","value":True}}
+    create=_render_template(xcreate["action_template"],{"goal":clauses[3],"json_path":summary,"output_path":xlsx})
+    verify_xlsx=_render_template(xverify["action_template"],{"goal":clauses[4],"json_path":summary,"xlsx_path":xlsx})
+    parts=[
+      {"index":0,"subgoal":clauses[0],"mode":"VERIFIED_CAPABILITY","selected_capability":"web.browser.rendered.capture.chromedriver"},
+      {"index":1,"subgoal":clauses[1],"mode":"VERIFIED_CAPABILITY","selected_capability":"web.browser.rendered.capture.chromedriver"},
+      {"index":2,"subgoal":clauses[2],"mode":"NATIVE_RUNTIME_GROUP_REDUCE","dimension_key":dim_key,"fact_key":fact_key,"output_path":summary},
+      {"index":3,"subgoal":clauses[3],"mode":"VERIFIED_CAPABILITY","selected_capability":"xlsx.table.create_from_json_records","inputs":{"json_path":summary,"output_path":xlsx}},
+      {"index":4,"subgoal":clauses[4],"mode":"INDEPENDENT_MULTI_SOURCE_REDUCE_AND_XLSX_VERIFICATION","summary_path":summary,"xlsx_path":xlsx}
+    ]
+    return {"schema":"PROJECT_BRAIN_COMPILED_COMPOUND_GOAL_V1","compiler_mode":"DETERMINISTIC_MULTI_SOURCE_REDUCE_PLAN","clauses":clauses,"compiled_parts":parts,"controller_actions":[s0["action"],s1["action"],reduce_action,create,verify_reduce,verify_xlsx,{"type":"finish","args":{"summary":"COMPOUND_GOAL_COMPLETE"}}],"finish_summary":"COMPOUND_GOAL_COMPLETE"}
+
+
 def _compile_multi_source_join_goal(goal,clauses,registry,root):
     if len(clauses)!=6:
         return None
@@ -2958,6 +3040,11 @@ def _compile_compound_goal(goal, clauses, registry, root):
                 "GOAL_CONTROL_FLOW_UNSUPPORTED",
                 json.dumps({"index":index,"subgoal":clause},sort_keys=True)
             )
+        if re.match(r"^using\s+both\s+live\s+results\b",lower):
+            raise GoalCompilationFailure(
+                "GOAL_CAUSAL_COMPOSITION_UNSUPPORTED",
+                json.dumps({"index":index,"subgoal":clause},sort_keys=True)
+            )
 
         try:
             part=_compile_single_goal(
@@ -3057,6 +3144,9 @@ def compile_goal(goal, registry, root):
     bounded_loop=_compile_bounded_loop_goal(goal,clauses,registry,root)
     if bounded_loop is not None:
         return _validate_compiled_clause_coverage(bounded_loop)
+    multi_source_reduce=_compile_multi_source_reduce_goal(goal,clauses,registry,root)
+    if multi_source_reduce is not None:
+        return _validate_compiled_clause_coverage(multi_source_reduce)
     multi_source_join=_compile_multi_source_join_goal(goal,clauses,registry,root)
     if multi_source_join is not None:
         return _validate_compiled_clause_coverage(multi_source_join)
