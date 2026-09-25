@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T04:26:15.076475+00:00",
+  "mission_id": "ASTRA-LIVE-CONDITIONAL-GENERALIZATION-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_LIVE_CONDITIONAL_GENERALIZATION_DIAG_001.json",
+  "mission_sha256": "636b42f369afbcf4c7c6695ea0fabe7cdee22050077f0b08d70f7a2fbe000697",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "8bd0349087600bcf2e40f879e7779081ce80185c94f58c2c0bb6f6b01a485cd4",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

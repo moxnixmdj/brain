@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T04:26:15.076171+00:00",
+  "created_at_utc": "2026-09-25T04:26:14.999274+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T04:26:15.075876+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/goal_compiler.py')\ns=importlib.util.spec_from_file_location('gc',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads(pathlib.Path('canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads(pathlib.Path('canonical/astra_runtime/missions/ASTRA_RUNTIME_LIVE_CONDITIONAL_GENERALIZATION_001.json').read_text())['goal']\nout=m.compile_goal(goal,reg,pathlib.Path('.').resolve())\nacts=out.get('controller_actions') or []\njq=[a for a in acts if a.get('type')=='invoke_capability' and (a.get('args') or {}).get('capability_id')=='json.query.jq']\nver=[a for a in acts if a.get('type')=='assert_hex_prefix_bucket']\nassert len(jq)==1 and '_branch' in jq[0]['args']['filter'], jq\nassert len(ver)==1 and ver[0]['args']['bucket_field']=='_branch', ver\nassert ver[0]['args']['low_chars']=='abcdef', ver\nprint('GENERALIZED_CONDITIONAL_COMPILER_COMPLETE')\nPY",
+        "duration_s": 0.076,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "GENERALIZED_CONDITIONAL_COMPILER_COMPLETE\n"
+      },
+      "step_id": "compile-generalized-conditional",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-LIVE-CONDITIONAL-GENERALIZATION-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_LIVE_CONDITIONAL_GENERALIZATION_DIAG_001.json",
+  "mission_sha256": "636b42f369afbcf4c7c6695ea0fabe7cdee22050077f0b08d70f7a2fbe000697",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T04:26:15.075890+00:00"
+}
