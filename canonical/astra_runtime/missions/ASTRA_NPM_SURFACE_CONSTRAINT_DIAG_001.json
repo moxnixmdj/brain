@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-NPM-SURFACE-CONSTRAINT-DIAG-001",
+  "purpose": "Prove explicit npm/Node requirements reject non-npm capabilities and reach the missing-supplier boundary.",
+  "steps": [
+    {
+      "id": "assert-npm-surface-fail-closed",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/goal_compiler.py')\ns=importlib.util.spec_from_file_location('gc',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads(pathlib.Path('canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads(pathlib.Path('canonical/astra_runtime/missions/ASTRA_RUNTIME_NPM_ACQUIRE_MSGPACKR_002.json').read_text())['goal']\nclauses=m.decompose_goal(goal)\nencode=clauses[1]\nscore,_,e=m._score(encode,'auto.pypi.msgpack',reg['auto.pypi.msgpack'])\nassert score==0,(score,e)\nassert (e.get('execution_surface_rejection') or {}).get('required_surface')=='npm_node',e\ntry:\n    m._compile_single_goal(encode,reg,pathlib.Path('.').resolve(),context_paths=['canonical/astra_runtime/tmp/NPM_MSGPACK_SOURCE.json'],future_clauses=clauses[2:])\nexcept m.GoalCompilationFailure as exc:\n    assert exc.code=='GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH',exc\nelse:\n    raise AssertionError('NPM_GOAL_ACCEPTED_NON_NPM_CAPABILITY')\nprint('NPM_EXECUTION_SURFACE_FAIL_CLOSED_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "NPM_EXECUTION_SURFACE_FAIL_CLOSED_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "read_only_diagnostic": true
+  }
+}
