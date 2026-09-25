@@ -16,6 +16,8 @@
   "constraints": {
     "incremental_spend_usd": 0,
     "model_controller_required": false,
-    "read_only_diagnostic": true
+    "read_only_diagnostic": true,
+    "replay_after_reread_merge_commit": "4eac594dc98f7bdfa4fd670476a98851937c51b1",
+    "replay_after_reread_regression_commit": "bfc0861f5f88ac257e01960e522cfd51aa3f4576"
   }
 }
