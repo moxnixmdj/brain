@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T00:33:47.861366+00:00",
+  "created_at_utc": "2026-09-25T00:33:47.804478+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T00:33:47.861058+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\nroot=pathlib.Path('.').resolve()\np=root/'canonical/runtime/goal_compiler.py'\ns=importlib.util.spec_from_file_location('gcprov',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads((root/'canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads((root/'canonical/astra_runtime/missions/ASTRA_RUNTIME_LIVE_PROVENANCE_AUDIT_001.json').read_text())['goal']\ntry:\n out=m.compile_goal(goal,reg,root); print(json.dumps({'status':'COMPILED','modes':[x['mode'] for x in out.get('compiled_parts',[])],'parts':out.get('compiled_parts')},sort_keys=True))\nexcept Exception as e:\n print(json.dumps({'status':'FAILED','type':type(e).__name__,'code':getattr(e,'code',None),'detail':getattr(e,'detail',None),'error':str(e)},sort_keys=True))\nprint('LIVE_PROVENANCE_COMPILER_DIAG_COMPLETE')\nPY",
+        "duration_s": 0.056,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"code\": \"GOAL_COMPILATION_SUBGOAL_UNRESOLVED\", \"detail\": \"{\\\"cause\\\": \\\"GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH\\\", \\\"cause_detail\\\": null, \\\"clauses\\\": [\\\"Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json\\\", \\\"Find the VERIFIED_BOUND_CAPABILITY whose source type is pypi\\\", \\\"Fetch that project's authoritative live PyPI metadata from the metadata URL recorded in the registry\\\", \\\"Verify that the pinned version and wheel filename still exist in that metadata, download that exact wheel, compute its SHA-256,\\\", \\\"verify it equals the wheel_sha256 recorded in the registry\\\", \\\"Create canonical/astra_runtime/tmp/LIVE_PYPI_PROVENANCE_AUDIT.json containing the capability ID, project, pinned version, wheel filename, recorded hash, live metadata hash, downloaded artifact hash, metadata URL, artifact URL, and a final verified boolean\\\", \\\"Finally independently read the report and fail unless all three hashes are identical and verified is true\\\"], \\\"index\\\": 1, \\\"subgoal\\\": \\\"Find the VERIFIED_BOUND_CAPABILITY whose source type is pypi\\\"}\", \"error\": \"GOAL_COMPILATION_SUBGOAL_UNRESOLVED:{\\\"cause\\\": \\\"GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH\\\", \\\"cause_detail\\\": null, \\\"clauses\\\": [\\\"Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json\\\", \\\"Find the VERIFIED_BOUND_CAPABILITY whose source type is pypi\\\", \\\"Fetch that project's authoritative live PyPI metadata from the metadata URL recorded in the registry\\\", \\\"Verify that the pinned version and wheel filename still exist in that metadata, download that exact wheel, compute its SHA-256,\\\", \\\"verify it equals the wheel_sha256 recorded in the registry\\\", \\\"Create canonical/astra_runtime/tmp/LIVE_PYPI_PROVENANCE_AUDIT.json containing the capability ID, project, pinned version, wheel filename, recorded hash, live metadata hash, downloaded artifact hash, metadata URL, artifact URL, and a final verified boolean\\\", \\\"Finally independently read the report and fail unless all three hashes are identical and verified is true\\\"], \\\"index\\\": 1, \\\"subgoal\\\": \\\"Find the VERIFIED_BOUND_CAPABILITY whose source type is pypi\\\"}\", \"status\": \"FAILED\", \"type\": \"GoalCompilationFailure\"}\nLIVE_PROVENANCE_COMPILER_DIAG_COMPLETE\n"
+      },
+      "step_id": "compile-only",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-LIVE-PROVENANCE-COMPILER-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_LIVE_PROVENANCE_COMPILER_DIAG_001.json",
+  "mission_sha256": "d708d4976296d0c4dcb9ee391b1bd63ee8ff861bb35f8b1c436491fca0cc708a",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T00:33:47.861072+00:00"
+}

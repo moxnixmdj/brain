@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T00:33:47.861637+00:00",
+  "mission_id": "ASTRA-LIVE-PROVENANCE-COMPILER-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_LIVE_PROVENANCE_COMPILER_DIAG_001.json",
+  "mission_sha256": "d708d4976296d0c4dcb9ee391b1bd63ee8ff861bb35f8b1c436491fca0cc708a",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "a9bb87576b26631d50b5be7bb8123f33c4a3bf88cd0ae68f51f928439c2edeef",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
