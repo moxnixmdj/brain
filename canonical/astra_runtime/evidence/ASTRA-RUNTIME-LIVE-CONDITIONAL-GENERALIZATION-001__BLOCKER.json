@@ -1,0 +1,9 @@
+{
+  "adapter": "goal",
+  "error": "Blocker:ACTION_EXPECTATION_FAILED:verified:OBSERVED=False",
+  "mission_id": "ASTRA-RUNTIME-LIVE-CONDITIONAL-GENERALIZATION-001",
+  "observed_at_utc": "2026-09-25T04:20:58.529222+00:00",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "run-generalized-live-conditional",
+  "step_index": 0
+}

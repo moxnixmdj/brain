@@ -1,0 +1,21 @@
+{
+  "blocker": {
+    "adapter": "goal",
+    "error": "Blocker:ACTION_EXPECTATION_FAILED:verified:OBSERVED=False",
+    "mission_id": "ASTRA-RUNTIME-LIVE-CONDITIONAL-GENERALIZATION-001",
+    "observed_at_utc": "2026-09-25T04:20:58.529222+00:00",
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "run-generalized-live-conditional",
+    "step_index": 0
+  },
+  "created_at_utc": "2026-09-25T04:20:46.401246+00:00",
+  "history": [],
+  "mission_id": "ASTRA-RUNTIME-LIVE-CONDITIONAL-GENERALIZATION-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_LIVE_CONDITIONAL_GENERALIZATION_001.json",
+  "mission_sha256": "307f5b93ddfdaa0c9bba621d9ba64c620399f6352ce820826676ce2d1fe97a8b",
+  "next_step": 0,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-25T04:20:58.529381+00:00"
+}
