@@ -1514,6 +1514,12 @@
           "table_ok": true,
           "intent_path": "canonical/astra_runtime/tmp/DOCX_INTENT_VERIFY.docx.intent.json",
           "docx_sha256": "e169aa79677b959917095989d5a7387da0d7b4c385f1ee296b5e09af295f5164"
+        },
+        "json_record_extension": {
+          "mission_id": "ASTRA-VERIFY-DOCX-JSON-ROUNDTRIP-001",
+          "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DOCX-JSON-ROUNDTRIP-001__RECEIPT.json",
+          "source_json_reopened": true,
+          "source_record_verified": true
         }
       }
     },
@@ -1572,7 +1578,19 @@
           }
         ]
       },
-      "status": "BOUND_PENDING_INDEPENDENT_VERIFICATION"
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "mission_id": "ASTRA-VERIFY-DOCX-JSON-ROUNDTRIP-001",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DOCX-JSON-ROUNDTRIP-001__RECEIPT.json",
+        "independently_verified_by": "docx.document.verify.intent_ooxml",
+        "source_record_verified": true,
+        "observed_effect": {
+          "output_path": "canonical/astra_runtime/tmp/DOCX_JSON_ROUNDTRIP_VERIFY.docx",
+          "output_sha256": "ebd1ca200e7aed9befb0cdd78ebb099014c289b8774d743e52b0a6e34543dc25",
+          "rows": 4,
+          "title": "Browser Submission Report"
+        }
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
