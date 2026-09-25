@@ -2956,46 +2956,76 @@ def _compile_generic_group_derive_ir(clause,context_paths,root):
     ]
     if not fields or len(set(fields))!=len(fields):
         return None
+    semantic=head.group(4)
     relation=re.search(
       r"\b([A-Za-z_][A-Za-z0-9_]*)\s+is\s+the\s+number\s+of\s+live\s+"
       r"([A-Za-z_][A-Za-z0-9_]*)\s+whose\s+([A-Za-z_][A-Za-z0-9_]*)\s+equals\s+"
       r"that\s+([A-Za-z_][A-Za-z0-9_]*)'s\s+([A-Za-z_][A-Za-z0-9_]*)",
-      head.group(4),re.IGNORECASE
+      semantic,re.IGNORECASE
     )
     filtered=re.search(
       r"\b([A-Za-z_][A-Za-z0-9_]*)\s+is\s+the\s+number\s+of\s+those\s+"
       r"([A-Za-z_][A-Za-z0-9_]*)\s+whose\s+([A-Za-z_][A-Za-z0-9_]*)\s+field\s+is\s+"
       r"([^,]+?)(?=,\s+and\s+|,\s*[A-Za-z_][A-Za-z0-9_]*\s+is\s+|$)",
-      head.group(4),re.IGNORECASE
+      semantic,re.IGNORECASE
+    )
+    summed=re.search(
+      r"\b([A-Za-z_][A-Za-z0-9_]*)\s+is\s+the\s+sum\s+of\s+those\s+"
+      r"([A-Za-z_][A-Za-z0-9_]*)['’]\s+([A-Za-z_][A-Za-z0-9_]*)\s+field\b",
+      semantic,re.IGNORECASE
     )
     ratio=re.search(
       r"\b([A-Za-z_][A-Za-z0-9_]*)\s+is\s+([A-Za-z_][A-Za-z0-9_]*)\s+divided\s+by\s+"
       r"([A-Za-z_][A-Za-z0-9_]*)\b",
-      head.group(4),re.IGNORECASE
+      semantic,re.IGNORECASE
     )
-    if not relation or not filtered or not ratio:
+    if not relation or not ratio:
         return None
+
     count_all=relation.group(1).lower()
     fact_entity=relation.group(2).lower()
     fact_key=relation.group(3)
     relation_dim=relation.group(4).lower()
     dimension_key=relation.group(5)
-    count_filtered=filtered.group(1).lower()
-    filtered_entity=filtered.group(2).lower()
-    filter_field=filtered.group(3)
-    filter_value=_parse_scalar_literal(filtered.group(4))
+    if not (_generic_entity_forms(relation_dim)&_generic_entity_forms(dimension_entity)):
+        return None
+
+    metrics=[{"name":count_all,"op":"count"}]
+    metric_names={count_all}
+
+    if filtered:
+        count_filtered=filtered.group(1).lower()
+        filtered_entity=filtered.group(2).lower()
+        if not (_generic_entity_forms(filtered_entity)&_generic_entity_forms(fact_entity)):
+            return None
+        metrics.append({
+          "name":count_filtered,
+          "op":"count_where",
+          "where":{filtered.group(3):_parse_scalar_literal(filtered.group(4))},
+        })
+        metric_names.add(count_filtered)
+
+    if summed:
+        sum_name=summed.group(1).lower()
+        sum_entity=summed.group(2).lower()
+        if not (_generic_entity_forms(sum_entity)&_generic_entity_forms(fact_entity)):
+            return None
+        metrics.append({
+          "name":sum_name,
+          "op":"sum",
+          "field":summed.group(3),
+        })
+        metric_names.add(sum_name)
+
     ratio_name=ratio.group(1).lower()
     ratio_num=ratio.group(2).lower()
     ratio_den=ratio.group(3).lower()
-    if not (_generic_entity_forms(relation_dim)&_generic_entity_forms(dimension_entity)):
+    if ratio_num not in metric_names or ratio_den not in metric_names:
         return None
-    if not (_generic_entity_forms(filtered_entity)&_generic_entity_forms(fact_entity)):
+    required=set(metric_names)|{ratio_name}
+    if not required.issubset(set(fields)):
         return None
-    if ratio_num!=count_filtered or ratio_den!=count_all:
-        return None
-    for required in (count_all,count_filtered,ratio_name):
-        if required not in fields:
-            return None
+
     output_id_candidates=[
       f for f in fields
       if re.sub(r"[^a-z0-9]+","",f)==re.sub(r"[^a-z0-9]+","",dimension_entity+"id")
@@ -3009,14 +3039,10 @@ def _compile_generic_group_derive_ir(clause,context_paths,root):
         return None
     copy_fields=[
       f for f in fields
-      if f not in {output_id_field,count_all,count_filtered,ratio_name}
-    ]
-    metrics=[
-      {"name":count_all,"op":"count"},
-      {"name":count_filtered,"op":"count_where","where":{filter_field:filter_value}},
+      if f not in ({output_id_field,ratio_name}|metric_names)
     ]
     derived=[
-      {"name":ratio_name,"op":"divide","numerator":count_filtered,"denominator":count_all},
+      {"name":ratio_name,"op":"divide","numerator":ratio_num,"denominator":ratio_den},
     ]
     return {
       "action":{
@@ -3045,10 +3071,25 @@ def _compile_generic_group_derive_ir(clause,context_paths,root):
     }
 
 
+def _parse_rank_limit(raw):
+    text=str(raw or "").strip().lower()
+    words={
+      "one":1,"two":2,"three":3,"four":4,"five":5,
+      "six":6,"seven":7,"eight":8,"nine":9,"ten":10,
+    }
+    if text in words:
+        return words[text]
+    if re.fullmatch(r"\d+",text):
+        value=int(text)
+        return value if 1<=value<=1000 else None
+    return None
+
+
 def _compile_generic_rank_select_ir(clause,context_paths,root):
     text=str(clause or "").strip()
     m=re.match(
-      r"^from\s+([^\s]+\.json)\s+select\s+exactly\s+one\s+"
+      r"^from\s+([^\s]+\.json)\s+select\s+exactly\s+"
+      r"(one|two|three|four|five|six|seven|eight|nine|ten|\d+)\s+"
       r"([A-Za-z_][A-Za-z0-9_]*)\s+with\s+the\s+greatest\s+"
       r"([A-Za-z_][A-Za-z0-9_]*),\s+breaking\s+ties\s+by\s+the\s+lowest\s+"
       r"([A-Za-z_][A-Za-z0-9_]*),\s+and\s+save\s+([^\s]+\.json)\s+containing\s+(.+)$",
@@ -3057,15 +3098,17 @@ def _compile_generic_rank_select_ir(clause,context_paths,root):
     if not m:
         return None
     source_path=m.group(1).strip(" .,:;")
-    primary=m.group(3).lower()
-    tie=m.group(4).lower()
-    output_path=m.group(5).strip(" .,:;")
+    limit=_parse_rank_limit(m.group(2))
+    primary=m.group(4).lower()
+    tie=m.group(5).lower()
+    output_path=m.group(6).strip(" .,:;")
+    field_text=re.sub(r"\s+in\s+ranked\s+order\s*$","",m.group(7),flags=re.IGNORECASE)
     fields=[
       x.strip(" .,:;").lower()
-      for x in re.sub(r"\s+and\s+",",",m.group(6),flags=re.IGNORECASE).split(",")
+      for x in re.sub(r"\s+and\s+",",",field_text,flags=re.IGNORECASE).split(",")
       if x.strip(" .,:;")
     ]
-    if source_path not in context_paths or not fields or primary not in fields or tie not in fields:
+    if limit is None or source_path not in context_paths or not fields or primary not in fields or tie not in fields:
         return None
     order_by=[
       {"field":primary,"direction":"desc"},
@@ -3079,13 +3122,14 @@ def _compile_generic_rank_select_ir(clause,context_paths,root):
           "output_path":output_path,
           "order_by":order_by,
           "output_fields":fields,
+          "limit":limit,
         },
         "expect":{"type":"field_equals","field":"output_verified","value":True},
       },
       "output_path":output_path,
       "evidence":{
         "source_path":source_path,"output_path":output_path,
-        "order_by":order_by,"output_fields":fields,
+        "order_by":order_by,"output_fields":fields,"limit":limit,
       }
     }
 
@@ -3133,6 +3177,7 @@ def _compile_generic_dataflow_verification_ir(clause,compiled_parts):
             "selected_path":ranked["output_path"],
             "order_by":ranked["order_by"],
             "output_fields":ranked["output_fields"],
+            "limit":ranked.get("limit",1),
           },
           "expect":{"type":"field_equals","field":"verified","value":True},
         },
