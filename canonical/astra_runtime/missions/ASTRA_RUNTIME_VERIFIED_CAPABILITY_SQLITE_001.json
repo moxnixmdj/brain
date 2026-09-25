@@ -27,6 +27,7 @@
     "final_effect_verification_required": true,
     "orthogonal_pressure_family": "sqlite_database_artifact_and_independent_query_verification",
     "fresh_mission_identity": true,
-    "replay_after_verified_sqlite_capabilities_commit": "7d17d51b98714166ef86a9e7cf53cc1b2ff9dfca"
+    "replay_after_verified_sqlite_capabilities_commit": "7d17d51b98714166ef86a9e7cf53cc1b2ff9dfca",
+    "replay_after_sqlite_verifier_reverification_commit": "b74f71c1d3d8a9ad024e4581fa38aab1fcf44d7e"
   }
 }
