@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-EVIDENCE-BUNDLE-001",
+  "purpose": "Orthogonal real professional-work pressure mission: produce a reproducible verified-evidence bundle from live Brain state, forcing structured extraction, multi-file packaging, and independent archive verification without hand-authored effects or controller actions.",
+  "goal": "Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json. Create canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_MANIFEST.json containing one record for every VERIFIED_BOUND_CAPABILITY with its capability ID, verification mission ID, repository-local verification evidence or receipt paths when present, and source dependency names, versions, and hashes. Then create canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_BUNDLE.tar.gz containing that manifest and every repository-local verification evidence or receipt file referenced by the manifest. Finally verify independently that the archive contains the manifest plus every referenced repository-local evidence file and that the archived bytes hash exactly to the source bytes.",
+  "steps": [
+    {
+      "id": "execute-evidence-bundle",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 24,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "mandatory_model_planner": false,
+    "manual_target_effects": false,
+    "manual_initial_facts": false,
+    "manual_controller_actions": false,
+    "manual_supplier": false,
+    "manual_binding": false,
+    "real_project_artifact": true,
+    "require_final_effect_verification": true,
+    "orthogonal_pressure_family": "structured_extraction_multi_file_archive_independent_hash_verification"
+  }
+}
