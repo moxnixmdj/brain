@@ -6,7 +6,7 @@ import hashlib,json,pathlib,re,subprocess,sys
 import apt_cli_probe
 import astra_runtime
 import capability_discovery
-from bound_capabilities import cli_command, python_library_codec
+from bound_capabilities import cli_command, python_library_codec, node_library_codec
 
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 
@@ -191,6 +191,67 @@ def _verify_pending_pypi(pending,result_path):
     print("PENDING_PYPI_BINDING_EFFECT_VERIFIED",json.dumps(result,sort_keys=True))
 
 
+def _verify_pending_npm(pending,result_path):
+    entry=pending["registry_entry"]
+    source=entry.get("source") or {}
+    dependency=astra_runtime._ensure_npm_dependency(source)
+    package_root=str(dependency.get("package_root") or "")
+    if not package_root:
+        raise RuntimeError("NPM_VERIFICATION_PACKAGE_ROOT_MISSING")
+    contract=pending.get("contract") or {}
+    fixture=pending.get("verification_fixture")
+    if not isinstance(fixture,(list,dict)):
+        raise RuntimeError("NPM_VERIFICATION_FIXTURE_INVALID")
+    fixture_path=ROOT/"canonical"/"astra_runtime"/"tmp"/(pending["verification_mission_id"]+"_SOURCE.json")
+    output_path=ROOT/"canonical"/"astra_runtime"/"tmp"/(pending["verification_mission_id"]+"_OUTPUT.bin")
+    fixture_path.parent.mkdir(parents=True,exist_ok=True)
+    fixture_path.write_text(json.dumps(fixture,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
+    common={
+      "_package_root":package_root,
+      "package":contract["package"],
+      "root_selector":contract["root_selector"],
+      "encode_export":contract["encode_export"],
+      "decode_export":contract["decode_export"],
+      "json_path":str(fixture_path.relative_to(ROOT)),
+    }
+    observed=node_library_codec.run({
+      **common,
+      "output_path":str(output_path.relative_to(ROOT)),
+    },ROOT)
+    if observed.get("output_verified") is not True:
+        raise RuntimeError("PENDING_NPM_PRODUCER_EFFECT_FAILED")
+    # Fresh decode verification is a separate Node process.
+    decoded=node_library_codec.run({
+      **common,
+      "mode":"decode_verify",
+      "binary_path":str(output_path.relative_to(ROOT)),
+    },ROOT)
+    if decoded.get("verified") is not True:
+        raise RuntimeError("PENDING_NPM_SEMANTIC_ROUNDTRIP_MISMATCH")
+    raw=output_path.read_bytes()
+    result={
+      "schema":"PROJECT_BRAIN_AUTO_BINDING_VERIFICATION_V1",
+      "capability_id":pending["capability_id"],
+      "verification_mission_id":pending["verification_mission_id"],
+      "dependency":dependency,
+      "adapter_result":observed,
+      "semantic_roundtrip":{
+        "verified":True,
+        "fresh_node_decode_invocation":True,
+        "implementation_independent":False,
+        "package":contract["package"],
+        "decode_export":contract["decode_export"],
+      },
+      "independent_output_sha256":hashlib.sha256(raw).hexdigest(),
+      "independent_output_bytes":len(raw),
+      "independent_verified":True,
+      "status":"VERIFIED",
+    }
+    result_path.parent.mkdir(parents=True,exist_ok=True)
+    result_path.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+    print("PENDING_NPM_BINDING_EFFECT_VERIFIED",json.dumps(result,sort_keys=True))
+
+
 def main():
     if len(sys.argv)!=3:
         raise SystemExit("usage: verify_pending_cli_binding.py PENDING_JSON RESULT_JSON")
@@ -203,6 +264,9 @@ def main():
     source=entry.get("source") or {}
     if source.get("type")=="pypi":
         _verify_pending_pypi(pending,result_path)
+        return
+    if source.get("type")=="npm":
+        _verify_pending_npm(pending,result_path)
         return
     if source.get("type")!="apt":
         raise RuntimeError("PENDING_BINDING_SOURCE_UNSUPPORTED")
