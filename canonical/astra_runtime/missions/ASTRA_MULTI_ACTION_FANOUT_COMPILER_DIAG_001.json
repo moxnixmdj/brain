@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-MULTI-ACTION-FANOUT-COMPILER-DIAG-001",
+  "purpose": "Compile-only diagnosis of the fresh multi-action fanout goal.",
+  "steps": [
+    {
+      "id": "compile-multi-action-fanout",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/goal_compiler.py')\ns=importlib.util.spec_from_file_location('gc',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads(pathlib.Path('canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads(pathlib.Path('canonical/astra_runtime/missions/ASTRA_RUNTIME_MULTI_ACTION_FANOUT_001.json').read_text())['goal']\ntry:\n    out=m.compile_goal(goal,reg,pathlib.Path('.').resolve())\nexcept m.GoalCompilationFailure as exc:\n    print(json.dumps({'status':'BLOCKED','code':exc.code,'detail':exc.detail},sort_keys=True))\n    print('MULTI_ACTION_FANOUT_COMPILER_BLOCKED')\nelse:\n    print(json.dumps({'status':'COMPILED','mode':out.get('compiler_mode'),'parts':out.get('compiled_parts'),'actions':out.get('controller_actions')},sort_keys=True))\n    print('MULTI_ACTION_FANOUT_COMPILER_COMPILED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "MULTI_ACTION_FANOUT_COMPILER_"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "read_only_diagnostic": true
+  }
+}
