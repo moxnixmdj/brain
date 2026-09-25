@@ -1,0 +1,152 @@
+{
+  "authority_domain": "worldbank.org",
+  "candidates": [
+    {
+      "aliases": [
+        "World Bank, WB",
+        "The World Bank",
+        "WB"
+      ],
+      "authority_domain": "worldbank.org",
+      "claim_rank": "preferred",
+      "description": "international financial institution",
+      "entity_id": "Q7164",
+      "final_url": "https://www.worldbank.org/ext/en/home",
+      "http_status": 200,
+      "label": "World Bank",
+      "official_url": "https://www.worldbank.org/",
+      "page_name_token_matches": 2,
+      "score": 271
+    },
+    {
+      "aliases": [
+        "World Bank, WB",
+        "The World Bank",
+        "WB"
+      ],
+      "authority_domain": "worldbank.org",
+      "claim_rank": "normal",
+      "description": "international financial institution",
+      "entity_id": "Q7164",
+      "final_url": "https://www.worldbank.org/ext/en/home",
+      "http_status": 200,
+      "label": "World Bank",
+      "official_url": "http://www.worldbank.org",
+      "page_name_token_matches": 2,
+      "score": 246
+    },
+    {
+      "aliases": [
+        "World Bank, WB",
+        "The World Bank",
+        "WB"
+      ],
+      "authority_domain": "albankaldawli.org",
+      "claim_rank": "normal",
+      "description": "international financial institution",
+      "entity_id": "Q7164",
+      "final_url": "https://www.albankaldawli.org/ext/ar/home",
+      "http_status": 200,
+      "label": "World Bank",
+      "official_url": "https://www.albankaldawli.org",
+      "page_name_token_matches": 2,
+      "score": 246
+    },
+    {
+      "aliases": [
+        "World Bank, WB",
+        "The World Bank",
+        "WB"
+      ],
+      "authority_domain": "banquemondiale.org",
+      "claim_rank": "normal",
+      "description": "international financial institution",
+      "entity_id": "Q7164",
+      "final_url": "https://www.banquemondiale.org/ext/fr/home",
+      "http_status": 200,
+      "label": "World Bank",
+      "official_url": "https://www.banquemondiale.org/",
+      "page_name_token_matches": 2,
+      "score": 246
+    },
+    {
+      "aliases": [
+        "World Bank, WB",
+        "The World Bank",
+        "WB"
+      ],
+      "authority_domain": "vsemirnyjbank.org",
+      "claim_rank": "normal",
+      "description": "international financial institution",
+      "entity_id": "Q7164",
+      "final_url": "https://www.vsemirnyjbank.org/ext/ru/home",
+      "http_status": 200,
+      "label": "World Bank",
+      "official_url": "https://www.vsemirnyjbank.org/",
+      "page_name_token_matches": 2,
+      "score": 246
+    },
+    {
+      "aliases": [
+        "World Bank database",
+        "data.worldbank.org",
+        "donnees.banquemondiale.org"
+      ],
+      "authority_domain": "donnees.banquemondiale.org",
+      "claim_rank": "normal",
+      "description": "World Bank open data portal",
+      "entity_id": "Q21540096",
+      "final_url": "https://donnees.banquemondiale.org/",
+      "http_status": 200,
+      "label": "World Bank Open Data",
+      "official_url": "http://donnees.banquemondiale.org/",
+      "page_name_token_matches": 2,
+      "score": 66
+    },
+    {
+      "aliases": [
+        "World Bank database",
+        "data.worldbank.org",
+        "donnees.banquemondiale.org"
+      ],
+      "authority_domain": "data.worldbank.org",
+      "claim_rank": "normal",
+      "description": "World Bank open data portal",
+      "entity_id": "Q21540096",
+      "final_url": "https://data.worldbank.org",
+      "http_status": 200,
+      "label": "World Bank Open Data",
+      "official_url": "https://data.worldbank.org",
+      "page_name_token_matches": 2,
+      "score": 66
+    },
+    {
+      "aliases": [
+        "WBG"
+      ],
+      "authority_domain": "worldbank.org",
+      "claim_rank": "normal",
+      "description": "group of five international organizations that make leveraged loans to developing countries",
+      "entity_id": "Q320863",
+      "final_url": "https://www.worldbank.org/ext/en/home",
+      "http_status": 200,
+      "label": "World Bank Group",
+      "official_url": "https://www.worldbank.org/en/home",
+      "page_name_token_matches": 2,
+      "score": 66
+    }
+  ],
+  "entity_description": "international financial institution",
+  "entity_id": "Q7164",
+  "entity_label": "World Bank",
+  "entity_name": "World Bank",
+  "final_url": "https://www.worldbank.org/ext/en/home",
+  "http_status": 200,
+  "official_url": "https://www.worldbank.org/",
+  "registry": "wikidata",
+  "registry_search_url": "https://www.wikidata.org/w/api.php?action=wbsearchentities&search=World+Bank&language=en&format=json&limit=8&type=item",
+  "resolved_at_utc": "2026-09-25T21:22:20.519984+00:00",
+  "schema": "PROJECT_BRAIN_AUTHORITY_IDENTITY_EVIDENCE_V1",
+  "status": "IDENTITY_CANDIDATE_RESOLVED",
+  "trust_claim": "STRUCTURED_ENTITY_REGISTRY_DISCOVERY_REQUIRES_INDEPENDENT_SITE_VERIFICATION"
+}
