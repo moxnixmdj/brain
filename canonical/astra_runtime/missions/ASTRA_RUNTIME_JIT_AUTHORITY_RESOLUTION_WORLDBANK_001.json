@@ -1,0 +1,134 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-JIT-AUTHORITY-RESOLUTION-WORLDBANK-001",
+  "purpose": "First domain-free open-world knowledge-source proof: resolve World Bank authority identity, independently verify its official site, discover the semantically relevant SP.POP.TOTL source from authority-native indexes, render it, and verify relevance.",
+  "goal": "Find the authoritative World Bank source for indicator SP.POP.TOTL without being given either the authority domain or the source URL.",
+  "steps": [
+    {
+      "id": "resolve-authority-and-source",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 12,
+      "controller_actions": [
+        {
+          "type": "resolve_authority_identity",
+          "args": {
+            "entity_name": "World Bank",
+            "output_path": "canonical/astra_runtime/tmp/JIT_AUTHORITY_WORLDBANK_IDENTITY.json",
+            "timeout_s": 20
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "verified",
+            "value": true
+          }
+        },
+        {
+          "type": "invoke_capability",
+          "args": {
+            "capability_id": "web.browser.rendered.capture.chromedriver",
+            "url": {
+              "$result": {
+                "cycle": 0,
+                "field": "official_url"
+              }
+            },
+            "screenshot_path": "canonical/astra_runtime/tmp/JIT_AUTHORITY_WORLDBANK_HOME.png",
+            "result_path": "canonical/astra_runtime/tmp/JIT_AUTHORITY_WORLDBANK_HOME_RENDER.json"
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "output_verified",
+            "value": true
+          }
+        },
+        {
+          "type": "assert_authority_identity",
+          "args": {
+            "evidence_path": "canonical/astra_runtime/tmp/JIT_AUTHORITY_WORLDBANK_IDENTITY.json",
+            "browser_result_path": "canonical/astra_runtime/tmp/JIT_AUTHORITY_WORLDBANK_HOME_RENDER.json"
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "verified",
+            "value": true
+          }
+        },
+        {
+          "type": "discover_authoritative_web_source",
+          "args": {
+            "query": "World Bank SP.POP.TOTL official indicator",
+            "authority_domains": [
+              {
+                "$result": {
+                  "cycle": 0,
+                  "field": "authority_domain"
+                }
+              }
+            ],
+            "output_path": "canonical/astra_runtime/tmp/JIT_AUTHORITY_WORLDBANK_SOURCE_DISCOVERY.json",
+            "timeout_s": 20,
+            "max_bytes": 1500000
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "verified",
+            "value": true
+          }
+        },
+        {
+          "type": "invoke_capability",
+          "args": {
+            "capability_id": "web.browser.rendered.capture.chromedriver",
+            "url": {
+              "$result": {
+                "cycle": 3,
+                "field": "chosen_url"
+              }
+            },
+            "screenshot_path": "canonical/astra_runtime/tmp/JIT_AUTHORITY_WORLDBANK_SOURCE.png",
+            "result_path": "canonical/astra_runtime/tmp/JIT_AUTHORITY_WORLDBANK_SOURCE_RENDER.json"
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "output_verified",
+            "value": true
+          }
+        },
+        {
+          "type": "assert_authoritative_source_discovery",
+          "args": {
+            "evidence_path": "canonical/astra_runtime/tmp/JIT_AUTHORITY_WORLDBANK_SOURCE_DISCOVERY.json",
+            "browser_result_path": "canonical/astra_runtime/tmp/JIT_AUTHORITY_WORLDBANK_SOURCE_RENDER.json"
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "verified",
+            "value": true
+          }
+        },
+        {
+          "type": "finish",
+          "args": {
+            "summary": "AUTHORITY_AND_SOURCE_DISCOVERY_COMPLETE"
+          }
+        }
+      ],
+      "verify": {
+        "type": "stdout_contains",
+        "text": "AUTHORITY_AND_SOURCE_DISCOVERY_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "direct_authority_domain_provided": false,
+    "direct_source_url_provided": false,
+    "structured_entity_registry_discovery_allowed": true,
+    "independent_authority_site_verification_required": true,
+    "authority_native_source_discovery_required": true,
+    "semantic_relevance_required": true,
+    "authority_resolution_commit": "23d4aeab10419f1be44051177b9657ada3583921"
+  }
+}
