@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-WORLDBANK-002",
+  "purpose": "Plain-goal proof that provenance-bearing JIT knowledge compiles without manual controller actions.",
+  "goal": "Using the authoritative JSON source https://api.worldbank.org/v2/indicator/SP.POP.TOTL?format=json, extract JSON path 1.0.sourceNote and save the knowledge evidence to canonical/astra_runtime/tmp/JIT_WORLDBANK_PLAIN_EVIDENCE.json. Create canonical/astra_runtime/tmp/JIT_WORLDBANK_PLAIN_USED.json with one record containing indicator_id SP.POP.TOTL and definition equal to the learned value. Finally independently re-fetch the authoritative source and verify the learned value is unchanged.",
+  "steps": [
+    {
+      "id": "plain-jit-knowledge",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 12,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "manual_controller_actions": false,
+    "authoritative_source_required": true,
+    "provenance_must_be_persisted": true,
+    "downstream_use_required": true,
+    "source_revalidation_required": true
+  }
+}
