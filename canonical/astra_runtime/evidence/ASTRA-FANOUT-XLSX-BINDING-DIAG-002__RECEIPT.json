@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T16:15:37.911567+00:00",
+  "mission_id": "ASTRA-FANOUT-XLSX-BINDING-DIAG-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_FANOUT_XLSX_BINDING_DIAG_002.json",
+  "mission_sha256": "654ee66d2ad3fed639e7f1fa29b6da8f0849530b9340ae852e8059b35914c938",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "504d9cb25698c197d26f8b0ce19213d076993be606ca5b7db6acebfdd02d657b",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
