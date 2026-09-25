@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-LIVE-PROVENANCE-COMPILER-DIAG-002",
+  "purpose": "Recompute live PyPI provenance compiler frontier after verified nested-record selection support.",
+  "steps": [
+    {
+      "id": "compile-only",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/tests/test_goal_compiler.py\npython - <<'PY'\nimport importlib.util,json,pathlib\nroot=pathlib.Path('.').resolve()\np=root/'canonical/runtime/goal_compiler.py'\ns=importlib.util.spec_from_file_location('gcprov2',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads((root/'canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads((root/'canonical/astra_runtime/missions/ASTRA_RUNTIME_LIVE_PROVENANCE_AUDIT_001.json').read_text())['goal']\ntry:\n out=m.compile_goal(goal,reg,root); print(json.dumps({'status':'COMPILED','modes':[x['mode'] for x in out.get('compiled_parts',[])],'parts':out.get('compiled_parts')},sort_keys=True))\nexcept Exception as e:\n print(json.dumps({'status':'FAILED','type':type(e).__name__,'code':getattr(e,'code',None),'detail':getattr(e,'detail',None),'error':str(e)},sort_keys=True))\nprint('LIVE_PROVENANCE_COMPILER_DIAG_2_COMPLETE')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "LIVE_PROVENANCE_COMPILER_DIAG_2_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "read_only_diagnostic": true,
+    "model_controller_required": false
+  }
+}
