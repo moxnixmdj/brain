@@ -1,626 +1,626 @@
 {
   "auto_acquisition": {
-    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-one-time\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"FileNotFoundError:[Errno 2] No such file or directory: '/usr/bin/rotate'\", \"name\": \"jigl\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fonts-kacst-one\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fonts-leckerli-one\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"four-in-a-row\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"TimeoutExpired:Command '['/usr/bin/keep-one-running', '--help']' timed out after 10 seconds\", \"name\": \"run-one\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"tryton-server-all-in-one\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.xlsx\", \"name\": \"apt-rollback\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.xlsx\", \"name\": \"athena-jot\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.xlsx\", \"name\": \"awit-dbackup\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"caja-share\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"caja-wallpaper\", \"status\": \"CONTRACT_REJECTED\"}]",
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"r-cran-openxlsx\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"r-cran-writexl\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"an\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"firefox-locale-an\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"hunspell-an\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"language-pack-an\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"language-pack-an-base\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"language-pack-gnome-an\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"language-pack-gnome-an-base\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.xlsx\", \"name\": \"2vcard\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.xlsx\", \"name\": \"abi-dumper\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.xlsx\", \"name\": \"adcli\", \"status\": \"CONTRACT_REJECTED\"}]",
     "status": "NOT_DISPATCHED"
   },
   "binding_performed": false,
-  "goal": "Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json. Create canonical/astra_runtime/tmp/VERIFIED_CAPABILITIES.xlsx containing exactly one row for every VERIFIED_BOUND_CAPABILITY with columns capability_id, status, source_type, provides, and incremental_spend_usd. Finally independently reopen the workbook and verify that every VERIFIED_BOUND_CAPABILITY from the registry appears exactly once, that no non-verified capability appears, and that every row's values match the canonical registry.",
+  "goal": "Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json. Create an XLSX spreadsheet workbook at canonical/astra_runtime/tmp/VERIFIED_CAPABILITIES.xlsx containing exactly one row for every VERIFIED_BOUND_CAPABILITY with columns capability_id, status, source_type, provides, and incremental_spend_usd. Finally independently reopen the workbook and verify that every VERIFIED_BOUND_CAPABILITY from the registry appears exactly once, that no non-verified capability appears, and that every row's values match the canonical registry.",
   "mission_id": "ASTRA-RUNTIME-VERIFIED-CAPABILITY-XLSX-001",
-  "observed_at_utc": "2026-09-25T01:34:27.372711+00:00",
+  "observed_at_utc": "2026-09-25T01:39:48.180287+00:00",
   "result": {
     "binding_performed": false,
     "candidates": [
       {
-        "archive_sha256": "cf862f0d707c35908d2b1da4541e42576698059e8e46027e80cadbaacdc57fc8",
+        "archive_sha256": "c10e1ab4e9e97dcb53bf7275ffbf9598c8edfc0e0859659420397e8731257127",
         "binding_kind": "apt",
-        "description": "Run the supplied Node.js function exactly once",
+        "description": "very fast anagram generator",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "exactly",
-          "one"
+          "an"
         ],
-        "name": "node-one-time",
+        "name": "an",
         "packages": [],
-        "query": "exactly",
+        "query": "an",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 62,
-        "version": "1.0.0-3",
+        "score": 40,
+        "version": "1.2-7build2",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "4f43af84645563b12c037fd312f53836d4ae395e8490db698fd549e3c614362a",
+        "archive_sha256": "8cd8a080c118d5917097362fe4c87f5e288127063f187a144747aea0fe4983dc",
         "binding_kind": "apt",
-        "description": "TrueType font designed for Arabic language",
+        "description": "Transitional package - firefox-locale-an -> firefox snap",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "one"
+          "an"
         ],
-        "name": "fonts-kacst-one",
+        "name": "firefox-locale-an",
         "packages": [],
-        "query": "one",
-        "remotes": [],
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 32,
-        "version": "5.0+svn11846-10",
-        "zero_cost_eligible": true
-      },
-      {
-        "archive_sha256": "5847cfb6e8ad70151a8bca2d701fc359e15b6512885e1f298e33695a8d7391a5",
-        "binding_kind": "apt",
-        "description": "fat display typeface with a handwritten feeling",
-        "discovery_source": "APT_CATALOG",
-        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-        "integration_friction": 0,
-        "matched_terms": [
-          "one"
-        ],
-        "name": "fonts-leckerli-one",
-        "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "20120409-1",
+        "version": "1:1snap1-0ubuntu5",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "9099c790b40ddf977a8c0e9d9271936525c5f6c17653e66d1c01f0b8b7769cdc",
+        "archive_sha256": "3d1c247d42e7c940e2183ca21c271023a617398efe14341dacfedcbadfdcda62",
         "binding_kind": "apt",
-        "description": "Four in a Row game for GNOME",
+        "description": "Aragonese dictionary for hunspell",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "row"
+          "an"
         ],
-        "name": "four-in-a-row",
+        "name": "hunspell-an",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "1:3.38.1-1build3",
+        "version": "1:24.2.1-1",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "fea035fbcb0b3212a9fe8681eddfe84b48e87d5bc2ccd0e4f0e652521906812e",
+        "archive_sha256": "c26b4976a5f1ec619726b88f7bff947c00a4520d091765724d8d889d4bd91743",
         "binding_kind": "apt",
-        "description": "run just one instance of a command and its args at a time",
+        "description": "translation updates for language Aragonese",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "one"
+          "an"
         ],
-        "name": "run-one",
+        "name": "language-pack-an",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "1.17-0ubuntu2",
+        "version": "1:24.04+20250130",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "00276b7ee367bdb886c4c79cde3da7975553438bdf70fe3a5831099f481f9f66",
+        "archive_sha256": "c8f943735354c913f9e739ddeebad8859f52aac66df921c252bd52f661918f3d",
         "binding_kind": "apt",
-        "description": "Tryton application platform - full installation",
+        "description": "translations for language Aragonese",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "one"
+          "an"
         ],
-        "name": "tryton-server-all-in-one",
+        "name": "language-pack-an-base",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 32,
-        "version": "6.0.39-1",
+        "version": "1:24.04+20250130",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "ccbd2437e309ad0a5a39410777b17c634f178e0dca66d368313584095ac513de",
+        "archive_sha256": "4df5a93e44f36f7b90a65515c02cf77373f08334b27738a62e5961caf7b47857",
         "binding_kind": "apt",
-        "description": "Undo the last APT commands or a specified one",
+        "description": "GNOME translation updates for language Aragonese",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "one"
+          "an"
         ],
-        "name": "apt-rollback",
+        "name": "language-pack-gnome-an",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "1.0.16-0ubuntu1",
+        "score": 32,
+        "version": "1:24.04+20250130",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "64d515a20db6f096c8db6b00904d41200d6951f739a783db8b364a0df7b0a979",
+        "archive_sha256": "95e18c0b25177b71f7117696c7d10fc2abd49bffa600a3e2b3b93535dab0f6c9",
         "binding_kind": "apt",
-        "description": "print out increasing, decreasing, random, or redundant data, one per line",
+        "description": "GNOME translations for language Aragonese",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "one"
+          "an"
         ],
-        "name": "athena-jot",
+        "name": "language-pack-gnome-an-base",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 18,
-        "version": "9.0-8",
+        "score": 32,
+        "version": "1:24.04+20250130",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "23cdf16c7b030197d1dd214aec2620f16811d04adb0aa65034487db4297615a5",
+        "archive_sha256": "5eae3a353745299315dd662153d80c437de2d240763df02672bc1f24a49f3964",
         "binding_kind": "apt",
-        "description": "Flexible one archive per directory backup tool",
+        "description": "convert an addressbook to VCARD file format",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "one"
+          "an"
         ],
-        "name": "awit-dbackup",
+        "name": "2vcard",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
-        "version": "0.0.22-1.1",
+        "version": "0.6-4",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "6add88f122257587b9a3343b2fd143f9469c585dd8f84a120c689a8035bc1573",
+        "archive_sha256": "55ba1e573aa6f7f9bc529ed0b332b438689fe00f283bb97cd2a44568c3852c4b",
         "binding_kind": "apt",
-        "description": "Allows one to quickly share a folder from the Caja file manager",
+        "description": "tool to dump ABI of an ELF object containing DWARF debug info",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "one"
+          "an"
         ],
-        "name": "caja-share",
+        "name": "abi-dumper",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
-        "version": "1.26.1-2",
+        "version": "1.2-3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "576a5fdf763a186f96895eff73e5d8afe675b72a06843f6f97d13f8702a308e8",
+        "archive_sha256": "aa5d0099167a9e70c7c25550f31c6fb85321e01c386eeea3518db9ad854471e5",
         "binding_kind": "apt",
-        "description": "Allows one to quickly set a wallpaper from folders",
+        "description": "Tool for performing actions on an Active Directory domain",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "one"
+          "an"
         ],
-        "name": "caja-wallpaper",
+        "name": "adcli",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
-        "version": "1.26.1-2",
+        "version": "0.9.2-1ubuntu2",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "1bb51c7de4ee861f8a6fa3d3d4b2b7299c596119214dab5a7577e00cc5d746da",
+        "archive_sha256": "703cd070aa8bdaf8350e03864cdb6849ec07ee74eeb6752e12612cdaf593e3f0",
         "binding_kind": "apt",
-        "description": "Allows one to view extended attributes",
+        "description": "tool for correcting bit errors in an AES key schedule",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "one"
+          "an"
         ],
-        "name": "caja-xattr-tags",
+        "name": "aesfix",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
-        "version": "1.26.1-2",
+        "version": "1.0.1-8",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "a887702f8bea51d161b1fd70c5142db4e9e58f2e830261d3ab7962081e243032",
+        "archive_sha256": "f0461b599a0d94d9b30acb69d08e92b302e088895a0b2f6a66514c3302755fcf",
         "binding_kind": "apt",
-        "description": "parse a string into one of the standard Common Lisp number types",
+        "description": "This package provides an English-language thesaurus (utility)",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "one"
+          "an"
         ],
-        "name": "cl-parse-number",
+        "name": "aiksaurus",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
-        "version": "1.7-1.1",
+        "version": "1.2.1+dev-0.12-7.2build1",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "ac43876455b6be0abf88e6946cade6a3b637b96d27a7bf1e9fd8fc33f9daeccd",
+        "archive_sha256": "c97498bcfa56433ad08bca752aed84f7d07a006888919ae9b24edb74dd122773",
         "binding_kind": "apt",
-        "description": "Little shoot-'em-up arcade game for one or two players",
+        "description": "Qur'an typesetting macros for TeX/LaTeX",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "one"
+          "an"
         ],
-        "name": "dodgindiamond2",
+        "name": "alqalam",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
-        "version": "0.2.2-4",
+        "version": "0.2-10",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "861ae1ffe62cccf2469681710e164e2dec41b48853380ea6582c7d0e1ec9565e",
+        "archive_sha256": "01b3c58dfca1d454855e2f54170d59017d0d37b18546f1647e0809f653a69ee1",
         "binding_kind": "apt",
-        "description": "One Time Password calculator",
+        "description": "Decompress flashfiles equipped with an AMI BIOS",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "one"
+          "an"
         ],
-        "name": "donkey",
+        "name": "amideco",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
-        "version": "1.2.0-6",
+        "version": "0.31e-3.3build1",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "ba2b565cbeac7b4ed9f6049a0ff817c0047745c5713a8f12833b0d3a5b99890e",
+        "archive_sha256": "d9c1a1220cf62904c38249fbb811b51b1f8c1c2d4cfb4708e15bcf45d58928cb",
         "binding_kind": "apt",
-        "description": "Four in a row game",
+        "description": "Tools for interacting with an Android platform",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "row"
+          "an"
         ],
-        "name": "explosive-c4",
+        "name": "android-sdk-platform-tools",
         "packages": [],
-        "query": "row",
+        "query": "an",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
-        "version": "1.2-3build2",
+        "version": "28.0.2+9",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "831039a14eba610dca9601ef384169475214d9e5489669a3e2a25b57dd9692e9",
+        "archive_sha256": "689be78d138e7f476f53e92b6326e1796cfff1af4e46920c24a2dc50efe697da",
         "binding_kind": "apt",
-        "description": "Ultra-fast all-in-one FASTQ preprocessor",
+        "description": "Tools for interacting with an Android platform - Common files",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "one"
+          "an"
         ],
-        "name": "fastp",
+        "name": "android-sdk-platform-tools-common",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
-        "version": "0.23.4+dfsg-1",
+        "version": "28.0.2+9",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "3b340070cc4d8e26a418e59100a9dc27a2fa8107406944e01df9afbc0151d6d5",
+        "archive_sha256": "f5cd5d1edb1206c15151edfed64d53ee05886968922fd24e267bed627773739b",
         "binding_kind": "apt",
-        "description": "all-in-one NES/Famicom Emulator",
+        "description": "an on screen display tool which uses libaosd",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "one"
+          "an"
         ],
-        "name": "fceux",
+        "name": "aosd-cat",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
-        "version": "2.6.5+dfsg1-2build3",
+        "version": "0.2.7-1.1ubuntu4",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "06caa99cfa037094ed2c2524906483220cfe2701e6b3fc28237e72a49b716b39",
+        "archive_sha256": "961e91b7f688926aeec26e4423d4785164af5d1168d6adbe2cab5830e55aef0a",
         "binding_kind": "apt",
-        "description": "Sans-serif font for decorative signs, one of the Warsaw Types",
+        "description": "Simple CLI script to display info about an APK file",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "one"
+          "an"
         ],
-        "name": "fonts-apropal",
+        "name": "apkinfo",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
-        "version": "1.0-2",
+        "version": "0.3.28-1",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "938725d9a731597b9e4999c271af87c660bb5d0aaecea14b2609156054c04104",
+        "archive_sha256": "bb045ced6fa20eaf97f86be57b3c390cfa27a5dfca782f67c24fe7459e3f97b3",
         "binding_kind": "apt",
-        "description": "The Emoji One Truetype Bitmap Font",
+        "description": "mounts an archive for access as a file system",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "one"
+          "an"
         ],
-        "name": "fonts-emojione",
+        "name": "archivemount",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
-        "version": "2.2.6+16.10.20160804-0ubuntu2",
+        "version": "0.8.7-1build3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "ca8ec7529141d9aa0d4337166b49e87da5ef76c42de7ebf5e8fc5631bf7cb329",
+        "archive_sha256": "ec94232138585c182a5003565ec70277e8fa389cdfef13a671f48e61fae460da",
         "binding_kind": "apt",
-        "description": "font similar to the one used for the Debian logo",
+        "description": "specificity control for read alignments using an artificial reference",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "one"
+          "an"
         ],
-        "name": "fonts-prociono",
+        "name": "arden",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
-        "version": "2.3-6",
+        "version": "1.0-5",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "dcef1ae45c4e32a25b771d655cc6079b3eb627ca928c5d79ff1833082c868ba7",
+        "archive_sha256": "f31f1f50dda28fb0be30d0508e5ca181b88b5d2f8d3440c00d17a21edebe06c3",
         "binding_kind": "apt",
-        "description": "mirrors a whole filesystem tree from one charset to another",
+        "description": "communicate with an Aurora Magnetek Photovoltaic (solar) Power Inverter",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "one"
+          "an"
         ],
-        "name": "fuse-convmvfs",
+        "name": "aurora",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
-        "version": "0.2.6-2build4",
+        "version": "1.9.4-0ubuntu1",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "3438115462281894d8bc2d0e92ad00fbb2c67d543369fa889683865f6c0e55e0",
+        "archive_sha256": "9ec25a11b6f65daff2685bf3478eeb679d9f238ab57dc6de3885512850bca03e",
         "binding_kind": "apt",
-        "description": "Gem Drop X is an interesting one-player puzzle game for X11",
+        "description": "Decompress flashfiles equipped with an AWARD BIOS",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "one"
+          "an"
         ],
-        "name": "gemdropx",
+        "name": "awardeco",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
-        "version": "0.9-9",
+        "version": "0.2-4",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "dc80fc7c3198d9b1769791e1faf2ab72e48f47b84744727dd13bce6949ca809f",
+        "archive_sha256": "f3ac090db893665f71c8e1183f4e530aa072209ed1da6b65653fd8833bf2e798",
         "binding_kind": "apt",
-        "description": "Manage git repositories in one place",
+        "description": "An user-space filesystem for interacting with Azure Storage",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "one"
+          "an"
         ],
-        "name": "gitbatch",
+        "name": "blobfuse2",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
-        "version": "0.5.0-4build1",
+        "version": "2.5.5",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "13f549683e2fd8510c9ea0e5e1d867bef0b405378c10e99229d26b02a0670a46",
+        "archive_sha256": "86e7a2d410060c5a5a1997fc63bdbabde905c52f97f41916f62fba138cd2041c",
         "binding_kind": "apt",
-        "description": "JVM Dynamic Attach utility all in one jmap jstack jcmd jinfo",
+        "description": "An user-space filesystem for interacting with Azure Storage",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "one"
+          "an"
         ],
-        "name": "jattach",
+        "name": "blobfuse2-preview",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
-        "version": "2.2-1",
+        "version": "2.6.0~preview.2",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "0be2ed7480267300ad90ae088082b1c8b41628e429ce0405294ccca94136078f",
+        "archive_sha256": "7fa952fec1608e9f71fcb5dc54ea466353555df974229b51e14dfbdeb00b647e",
         "binding_kind": "apt",
-        "description": "Generates a static html photo gallery from one or more directories of images",
+        "description": "try to find the password of an encrypted wallet file",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "one"
+          "an"
         ],
-        "name": "jigl",
+        "name": "bruteforce-wallet",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
-        "version": "2.0.1+20060126-7",
+        "version": "1.5.3-6build3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "9347f13dee7ccc553a5a40cf683156b78d6fff2072b78cb60d6026c97b5a6bcd",
+        "archive_sha256": "93da996e1f505dcc37cc89335147ad1561a0a1def7e78bbe9525707582bd1bc7",
         "binding_kind": "apt",
-        "description": "three-in-a-row game",
+        "description": "Applet to provide an alternative means to launch applications",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "row"
+          "an"
         ],
-        "name": "kdiamond",
+        "name": "budgie-app-launcher-applet",
         "packages": [],
-        "query": "row",
+        "query": "an",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
-        "version": "4:23.08.5-0ubuntu3",
+        "version": "1.8.0-1build3",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "6ec48398182a49fd70cffb7db7d2b648792be1e76795167f2d28b022025ad65c",
+        "archive_sha256": "93f5a36bed076014b66b8ffbc264164d5a8f34df10443178cb5660641a569f74",
         "binding_kind": "apt",
-        "description": "Split a giant yaml file into one file per Kubernetes resource",
+        "description": "Show byte statistics as an ASCII circle graph",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "one"
+          "an"
         ],
-        "name": "kubernetes-split-yaml",
+        "name": "bytes-circle",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
-        "version": "0.4.0-1ubuntu0.24.04.3",
+        "version": "3.1-1",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "f385712ec410b803d571337e86e3e939801516b82728ee63017f6638ec2e8f5b",
+        "archive_sha256": "8ba4bf34ee834a8ac525d30d4464fe9078dfa8c5497005b5fd86bc32f6247ac5",
         "binding_kind": "apt",
-        "description": "Aggregate logs from multiple Kubernetes pods into one stream",
+        "description": "spreadsheet for the Calligra Suite",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "one"
+          "spreadsheet"
         ],
-        "name": "kubetail",
+        "name": "calligrasheets",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
-        "version": "1.6.18-1",
+        "version": "1:3.2.1+dfsg-8build4",
         "zero_cost_eligible": true
       },
       {
-        "archive_sha256": "fb1d4b97087a49f6a729c54b6a9f4e58d6d773a285b9c8ce306147bbf9257024",
+        "archive_sha256": "624e86f4f8c95949e81d727b5cf107fe818065f54180465067e4402487cd76c4",
         "binding_kind": "apt",
-        "description": "tool to copy messages from one IMAP server to another",
+        "description": "data files for Sheets spreadsheet",
         "discovery_source": "APT_CATALOG",
         "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
         "integration_friction": 0,
         "matched_terms": [
-          "one"
+          "spreadsheet"
         ],
-        "name": "larch",
+        "name": "calligrasheets-data",
         "packages": [],
-        "query": "one",
+        "query": "spreadsheet",
         "remotes": [],
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
-        "version": "1.1.2-2.1",
+        "version": "1:3.2.1+dfsg-8build4",
         "zero_cost_eligible": true
       },
       {
-        "description": "Connect any AI agent to your Synchronex workspace \u2014 portable memory, decisions, and workers.",
+        "archive_sha256": "8bf2ddea0f7fa899ae7fc8fea28f7fa034f38a0b0f8dc37b7e1c865f1b9d9612",
+        "binding_kind": "apt",
+        "description": "module to create Excel spreadsheets in xlsx format",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 3,
+        "matched_terms": [
+          "spreadsheet",
+          "xlsx"
+        ],
+        "name": "libexcel-writer-xlsx-perl",
+        "packages": [],
+        "query": "an",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 42,
+        "version": "1.11-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "MCP server for Anki flashcards: adaptive review, notes, media, and deck management via AnkiConnect.",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "ai.synchronex/mcp-proxy",
+        "name": "ai.ankimcp/anki-mcp-server",
         "packages": [
           {
-            "identifier": "@synchronex/mcp-proxy",
+            "identifier": "@ankimcp/anki-mcp-server",
             "registry_type": "npm",
             "required_environment": [],
             "runtime_hint": null,
@@ -628,129 +628,219 @@
             "transport": {
               "type": "stdio"
             },
-            "version": "1.2.1"
+            "version": "0.26.0"
           }
         ],
-        "query": "one",
+        "query": "an",
         "remotes": [],
         "repository": {
           "source": "github",
-          "url": "https://github.com/kmdesle/synchronex"
+          "url": "https://github.com/ankimcp/anki-mcp-server"
         },
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
         "status": "active",
-        "version": "1.2.1",
+        "version": "0.26.0",
         "zero_cost_eligible": true
       },
       {
-        "description": "Bridge a live Chrome browser to your agent: 150 tools for capture, extraction, and observation.",
+        "description": "Let your AI read a whole spreadsheet as tab-separated text \u2014 Excel, ODS, SQLite and more",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "app.crawlio/crawlio-browser",
+        "name": "io.github.demos-ra/text-spreadsheet",
         "packages": [
           {
-            "identifier": "crawlio-browser",
-            "registry_type": "npm",
-            "required_environment": [],
-            "runtime_hint": null,
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": "1.11.0"
-          }
-        ],
-        "query": "row",
-        "remotes": [],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/Crawlio-app/crawlio-browser"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 18,
-        "status": "active",
-        "version": "1.11.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Control a real Chrome browser to complete any task: fill forms, extract data, book flights.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "com.browser-use/browser-use",
-        "packages": [
-          {
-            "identifier": "browser-use",
+            "identifier": "text-spreadsheet",
             "registry_type": "pypi",
             "required_environment": [],
-            "runtime_hint": "uvx",
+            "runtime_hint": null,
             "secret_environment": [],
             "transport": {
               "type": "stdio"
             },
-            "version": "0.13.5"
+            "version": "0.2.0"
           }
         ],
-        "query": "row",
+        "query": "spreadsheet",
+        "remotes": [],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.2.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "MCP server for spreadsheet files (.xlsx, .csv, .ods) - cell-level ops + DuckDB SQL engine.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.marekrost/mcp-server-spreadsheet",
+        "packages": [
+          {
+            "identifier": "mcp-server-spreadsheet",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.3.3"
+          }
+        ],
+        "query": "spreadsheet",
         "remotes": [],
         "repository": {
           "source": "github",
-          "url": "https://github.com/browser-use/browser-use"
+          "url": "https://github.com/marekrost/mcp-server-spreadsheet"
         },
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 18,
         "status": "active",
-        "version": "0.13.5",
+        "version": "0.3.3",
         "zero_cost_eligible": true
       },
       {
-        "description": "A free one-minute reset for people, delivered by AI, with no account or personal data.",
+        "description": "MCP server for accurate, structure-preserving read/write access to Excel (.xlsx) files",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "ai.ai-akari/one-minute-akari",
+        "name": "io.github.ruriazz/xlsx-tools-mcp",
+        "packages": [
+          {
+            "identifier": "xlsx-tools-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.1"
+          }
+        ],
+        "query": "xlsx",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/ruriazz/xlsx-tools-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "50 spreadsheet tools for .xlsx: recalc formulas, repair broken refs, read/write, diff, audit.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.senoff/xlsx-for-ai",
+        "packages": [
+          {
+            "identifier": "xlsx-for-ai",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "4.0.6"
+          }
+        ],
+        "query": "xlsx",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/senoff/xlsx-for-ai"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "4.0.6",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Remote MCP server for Tandem docs, install guides, SDKs, workflows, and agent setup help.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ac.tandem/docs-mcp",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [
           {
             "required_headers": [],
             "type": "streamable-http",
-            "url": "https://ai-akari.ai/mcp"
+            "url": "https://tandem.ac/mcp"
           }
         ],
         "repository": {
           "source": "github",
-          "url": "https://github.com/AInoAKARI/arigatou-kawaii-lp"
+          "url": "https://github.com/frumu-ai/tandem"
         },
         "required_environment_count": 0,
         "required_secret_count": 0,
         "score": 15,
         "status": "active",
-        "version": "1.0.3",
+        "version": "0.3.2",
         "zero_cost_eligible": true
       },
       {
-        "description": "Drone-sector market intelligence for AI agents: free briefings and profiles, licenced tracker data.",
+        "description": "Did this contractor's licence change? Observed lapses and reinstatements, not a snapshot.",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "ai.droneintelligence/drone-intelligence",
+        "name": "agency.ottobot/contractor-license-changes",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [
           {
             "required_headers": [],
             "type": "streamable-http",
-            "url": "https://droneintelligence.ai/api/mcp"
+            "url": "https://license-changes-mcp.ottobot2025.workers.dev/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/modelcontextprotocol/registry"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Google Ads reporting and campaign management. Everything it creates starts paused.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.adplane/google-ads",
+        "packages": [],
+        "query": "an",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.adplane.ai"
           }
         ],
         "repository": null,
@@ -758,47 +848,23 @@
         "required_secret_count": 0,
         "score": 15,
         "status": "active",
-        "version": "1.0.0",
+        "version": "1.29.1",
         "zero_cost_eligible": true
       },
       {
-        "description": "Versioned agent memory in your own Postgres: portable context, permissioned, audit trail.",
+        "description": "Resolve @handles to post-quantum-signed agent identities and transact with the brands behind them.",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "ai.onedroid/engram",
+        "name": "ai.anha/resolver",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [
           {
             "required_headers": [],
             "type": "streamable-http",
-            "url": "https://engram.onedroid.ai/mcp"
-          }
-        ],
-        "repository": null,
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "1.0.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Autonomous SEO + GEO growth: keyword research, audits, content, AI answer-engine visibility.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "ai.openhelm/seo-growth",
-        "packages": [],
-        "query": "row",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://mcp.openhelm.ai/seo/mcp"
+            "url": "https://resolver.anha.ai/mcp"
           }
         ],
         "repository": null,
@@ -810,960 +876,891 @@
         "zero_cost_eligible": true
       },
       {
-        "description": "Place real phone calls and hold spoken conversations on a user's behalf, billed per minute.",
+        "description": "Anki addon that exposes your flashcard collection to AI assistants via a local MCP server.",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "app.alterphone/phone-calls",
+        "name": "ai.ankimcp/anki-mcp-server-addon",
         "packages": [],
-        "query": "one",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://mcp.alterphone.app/mcp"
-          }
-        ],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/marius-bardan/alterphone-mcp"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "1.0.1",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "An agent records what it finished into a team's standup feed, one line at a time.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "app.donelane/donelane",
-        "packages": [],
-        "query": "one",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://donelane.app/mcp"
-          }
-        ],
-        "repository": null,
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "1.0.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Fakturownia.pl (Polish invoicing) via MCP: invoices, clients, products, warehouse. Full read-write.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "app.fakto/fakturownia",
-        "packages": [],
-        "query": "row",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://fakto.app/fakturownia/stream"
-          }
-        ],
-        "repository": null,
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "1.0.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "OneHaus household tools: tasks, calendar, contacts, pets, vehicles, documents and more.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "app.onehaus/haus",
-        "packages": [],
-        "query": "one",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://mcp.onehaus.app"
-          }
-        ],
-        "repository": {
-          "source": "github",
-          "subfolder": "backend/src/Haus.Mcp",
-          "url": "https://github.com/Im5tu/haus"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "1.3.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Indonesia shipping for AI agents via Biteship: courier rates, create orders, track waybills.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "app.wishpool/indonesia-logistics-mcp",
-        "packages": [],
-        "query": "one",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://logi-id.wishpool.app/mcp"
-          }
-        ],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/junter1989k-ai/indonesia-logistics-mcp"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "0.1.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "I do everything related to Browser Automation & Management",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "co.civai.nova/browsergpt-agent",
-        "packages": [],
-        "query": "row",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://nova.civai.co/mcp/agents/browsergpt-agent"
-          }
-        ],
-        "repository": null,
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "1.0.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Undetectable cloud browser sessions for AI agents and scrapers. Navigate, extract, click, captcha.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "com.browserforest/browser-forest",
-        "packages": [],
-        "query": "row",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://browserforest.com/api/mcp/bf"
-          }
-        ],
-        "repository": null,
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "1.0.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Approval receipts for AI browser purchases.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "com.clauxel.browserspendguard/browserspendguard-mcp",
-        "packages": [],
-        "query": "row",
-        "remotes": [
-          {
-            "required_headers": [
-              "Authorization"
-            ],
-            "type": "streamable-http",
-            "url": "https://browserspendguard.clauxel.com/mcp"
-          }
-        ],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/clauxel/browser-spend-guard-mcp"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "1.0.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Approve Nostr signatures with your own browser signer without exposing a private key.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "com.frontiercrown.signer/nostr-signer",
-        "packages": [],
-        "query": "row",
-        "remotes": [
-          {
-            "required_headers": [],
-            "type": "streamable-http",
-            "url": "https://signer.frontiercrown.com/mcp"
-          }
-        ],
-        "repository": {
-          "source": "github",
-          "url": "https://github.com/hudhaifahz/nostr-signer-chatgpt"
-        },
-        "required_environment_count": 0,
-        "required_secret_count": 0,
-        "score": 15,
-        "status": "active",
-        "version": "0.4.0",
-        "zero_cost_eligible": true
-      },
-      {
-        "description": "Living knowledge graph for your repo: query with citations, remember/link facts, fact-check claims.",
-        "discovery_source": "OFFICIAL_MCP_REGISTRY",
-        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
-        "is_latest": true,
-        "live_probe_required": true,
-        "name": "com.codician/growmos",
-        "packages": [
-          {
-            "identifier": "growmos",
-            "registry_type": "pypi",
-            "required_environment": [],
-            "runtime_hint": "growmos",
-            "secret_environment": [],
-            "transport": {
-              "type": "stdio"
-            },
-            "version": "0.1.5"
-          }
-        ],
-        "query": "row",
+        "query": "an",
         "remotes": [],
         "repository": {
           "source": "github",
-          "url": "https://github.com/codician-team/growmos"
+          "url": "https://github.com/ankimcp/anki-mcp-server-addon"
         },
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 14,
+        "score": 15,
         "status": "active",
-        "version": "0.1.5",
+        "version": "0.29.1",
         "zero_cost_eligible": true
       },
       {
-        "description": "Turn any recording or document into notes, flashcards and quizzes your agent can read and act on",
+        "description": "MCP server for Anzenna",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "ai.backrow/backrow",
+        "name": "ai.anzenna/anzenna",
         "packages": [],
-        "query": "row",
+        "query": "an",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "sse",
+            "url": "https://mcp.anzenna.ai/sse"
+          }
+        ],
+        "repository": {},
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "MCP registry: 138k servers crawled, handshake-validated, reliability-scored. 744 production-safe.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.arclan/registry",
+        "packages": [],
+        "query": "an",
         "remotes": [
           {
             "required_headers": [],
             "type": "streamable-http",
-            "url": "https://backrow.ai/mcp"
+            "url": "https://arclan.ai/mcp"
           }
         ],
         "repository": null,
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 11,
+        "score": 15,
         "status": "active",
-        "version": "1.0.0",
+        "version": "0.2.0",
         "zero_cost_eligible": true
       },
       {
-        "description": "Privacy-first work tracking with summaries, reports, coaching, and AI-ready long-term memory.",
+        "description": "Balan\u00e7os, DREs, DFPs e ITRs da CVM e IF.data do BCB. Brazilian companies' financial statements.",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "ai.donethat/donethat",
+        "name": "ai.balancos/mcp",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [
           {
             "required_headers": [],
             "type": "streamable-http",
-            "url": "https://mcp.donethat.ai/"
+            "url": "https://mcp.balancos.ai/mcp"
           }
         ],
         "repository": null,
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 11,
+        "score": 15,
         "status": "active",
-        "version": "1.0.0",
+        "version": "0.5.0",
         "zero_cost_eligible": true
       },
       {
-        "description": "Build zero-shot video models for object detection, and category and attribute classification.",
+        "description": "AI story development, screenplay editing, review, media, and export tools for BeatBandit projects.",
         "discovery_source": "OFFICIAL_MCP_REGISTRY",
         "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
         "is_latest": true,
         "live_probe_required": true,
-        "name": "ai.dragoneye/mcp",
+        "name": "ai.beatbandit/beatbandit",
         "packages": [],
-        "query": "one",
+        "query": "an",
         "remotes": [
           {
             "required_headers": [],
             "type": "streamable-http",
-            "url": "https://nexus.api.dragoneye.ai/mcp"
+            "url": "https://beatbandit.ai/api/mcp"
           }
         ],
         "repository": null,
         "required_environment_count": 0,
         "required_secret_count": 0,
-        "score": 11,
+        "score": 15,
         "status": "active",
         "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Live tech-stack scan of any public site \u2014 vendors, account IDs, scripts, JSON-LD. 2 tools.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.boolsai/scan",
+        "packages": [],
+        "query": "an",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://boolsai.ai/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/Boolsai-ai/mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Live status and health checks for AI coding providers: Claude, Cursor, Copilot, Codex and more.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.canivibe/status",
+        "packages": [],
+        "query": "an",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://canivibe.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Turn any idea, URL, doc, or PDF into on-brand visuals: 100+ formats, native in 150+ languages",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.canvora/canvora",
+        "packages": [],
+        "query": "an",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.canvora.ai/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/canvora/canvora-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.2.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Clinician-reviewed library on anxiety, OCD, and phobias in children ages 5\u201312.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.childanxiety/library",
+        "packages": [],
+        "query": "an",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://childanxiety.ai/api/mcp/v1"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Check bank marketing for FDIC, NCUA, TILA, Reg DD, Reg Z, UDAAP, and Equal Housing compliance.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.clarid/compliance",
+        "packages": [],
+        "query": "an",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.clarid.ai/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/clarid-ai/compliance-checker"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Financial and covenant data for public and private credit: statements, cap stacks, covenants.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.constellationfinance/constellation-finance-mcp",
+        "packages": [],
+        "query": "an",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.constellationfinance.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.2",
         "zero_cost_eligible": true
       }
     ],
-    "effect": "Create canonical/astra_runtime/tmp/VERIFIED_CAPABILITIES.xlsx containing exactly one row for every VERIFIED_BOUND_CAPABILITY with columns capability_id, status, source_type, provides, and incremental_spend_usd",
+    "effect": "Create an XLSX spreadsheet workbook at canonical/astra_runtime/tmp/VERIFIED_CAPABILITIES.xlsx containing exactly one row for every VERIFIED_BOUND_CAPABILITY with columns capability_id, status, source_type, provides, and incremental_spend_usd",
     "results": [
       {
         "binding_performed": false,
         "candidate_count": 30,
         "candidates": [
           {
-            "archive_sha256": "cf862f0d707c35908d2b1da4541e42576698059e8e46027e80cadbaacdc57fc8",
+            "archive_sha256": "8bf2ddea0f7fa899ae7fc8fea28f7fa034f38a0b0f8dc37b7e1c865f1b9d9612",
             "binding_kind": "apt",
-            "description": "Run the supplied Node.js function exactly once",
+            "description": "module to create Excel spreadsheets in xlsx format",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
+            "integration_friction": 3,
             "matched_terms": [
-              "exactly",
-              "one"
+              "spreadsheet",
+              "xlsx"
             ],
-            "name": "node-one-time",
+            "name": "libexcel-writer-xlsx-perl",
             "packages": [],
-            "query": "exactly",
+            "query": "an",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 62,
-            "version": "1.0.0-3",
+            "score": 42,
+            "version": "1.11-1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "4f43af84645563b12c037fd312f53836d4ae395e8490db698fd549e3c614362a",
+            "archive_sha256": "c10e1ab4e9e97dcb53bf7275ffbf9598c8edfc0e0859659420397e8731257127",
             "binding_kind": "apt",
-            "description": "TrueType font designed for Arabic language",
+            "description": "very fast anagram generator",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "one"
+              "an"
             ],
-            "name": "fonts-kacst-one",
+            "name": "an",
             "packages": [],
-            "query": "one",
+            "query": "an",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 40,
+            "version": "1.2-7build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "8cd8a080c118d5917097362fe4c87f5e288127063f187a144747aea0fe4983dc",
+            "binding_kind": "apt",
+            "description": "Transitional package - firefox-locale-an -> firefox snap",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "an"
+            ],
+            "name": "firefox-locale-an",
+            "packages": [],
+            "query": "an",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "5.0+svn11846-10",
+            "version": "1:1snap1-0ubuntu5",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "5847cfb6e8ad70151a8bca2d701fc359e15b6512885e1f298e33695a8d7391a5",
+            "archive_sha256": "3d1c247d42e7c940e2183ca21c271023a617398efe14341dacfedcbadfdcda62",
             "binding_kind": "apt",
-            "description": "fat display typeface with a handwritten feeling",
+            "description": "Aragonese dictionary for hunspell",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "one"
+              "an"
             ],
-            "name": "fonts-leckerli-one",
+            "name": "hunspell-an",
             "packages": [],
-            "query": "one",
+            "query": "an",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "20120409-1",
+            "version": "1:24.2.1-1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "9099c790b40ddf977a8c0e9d9271936525c5f6c17653e66d1c01f0b8b7769cdc",
+            "archive_sha256": "c26b4976a5f1ec619726b88f7bff947c00a4520d091765724d8d889d4bd91743",
             "binding_kind": "apt",
-            "description": "Four in a Row game for GNOME",
+            "description": "translation updates for language Aragonese",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "row"
+              "an"
             ],
-            "name": "four-in-a-row",
+            "name": "language-pack-an",
             "packages": [],
-            "query": "one",
+            "query": "an",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "1:3.38.1-1build3",
+            "version": "1:24.04+20250130",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "fea035fbcb0b3212a9fe8681eddfe84b48e87d5bc2ccd0e4f0e652521906812e",
+            "archive_sha256": "c8f943735354c913f9e739ddeebad8859f52aac66df921c252bd52f661918f3d",
             "binding_kind": "apt",
-            "description": "run just one instance of a command and its args at a time",
+            "description": "translations for language Aragonese",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "one"
+              "an"
             ],
-            "name": "run-one",
+            "name": "language-pack-an-base",
             "packages": [],
-            "query": "one",
+            "query": "an",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "1.17-0ubuntu2",
+            "version": "1:24.04+20250130",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "00276b7ee367bdb886c4c79cde3da7975553438bdf70fe3a5831099f481f9f66",
+            "archive_sha256": "4df5a93e44f36f7b90a65515c02cf77373f08334b27738a62e5961caf7b47857",
             "binding_kind": "apt",
-            "description": "Tryton application platform - full installation",
+            "description": "GNOME translation updates for language Aragonese",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "one"
+              "an"
             ],
-            "name": "tryton-server-all-in-one",
+            "name": "language-pack-gnome-an",
             "packages": [],
-            "query": "one",
+            "query": "an",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 32,
-            "version": "6.0.39-1",
+            "version": "1:24.04+20250130",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "ccbd2437e309ad0a5a39410777b17c634f178e0dca66d368313584095ac513de",
+            "archive_sha256": "95e18c0b25177b71f7117696c7d10fc2abd49bffa600a3e2b3b93535dab0f6c9",
             "binding_kind": "apt",
-            "description": "Undo the last APT commands or a specified one",
+            "description": "GNOME translations for language Aragonese",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "one"
+              "an"
             ],
-            "name": "apt-rollback",
+            "name": "language-pack-gnome-an-base",
             "packages": [],
-            "query": "one",
+            "query": "an",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
-            "score": 18,
-            "version": "1.0.16-0ubuntu1",
+            "score": 32,
+            "version": "1:24.04+20250130",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "64d515a20db6f096c8db6b00904d41200d6951f739a783db8b364a0df7b0a979",
+            "archive_sha256": "5eae3a353745299315dd662153d80c437de2d240763df02672bc1f24a49f3964",
             "binding_kind": "apt",
-            "description": "print out increasing, decreasing, random, or redundant data, one per line",
+            "description": "convert an addressbook to VCARD file format",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "one"
+              "an"
             ],
-            "name": "athena-jot",
+            "name": "2vcard",
             "packages": [],
-            "query": "one",
+            "query": "an",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
-            "version": "9.0-8",
+            "version": "0.6-4",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "23cdf16c7b030197d1dd214aec2620f16811d04adb0aa65034487db4297615a5",
+            "archive_sha256": "55ba1e573aa6f7f9bc529ed0b332b438689fe00f283bb97cd2a44568c3852c4b",
             "binding_kind": "apt",
-            "description": "Flexible one archive per directory backup tool",
+            "description": "tool to dump ABI of an ELF object containing DWARF debug info",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "one"
+              "an"
             ],
-            "name": "awit-dbackup",
+            "name": "abi-dumper",
             "packages": [],
-            "query": "one",
+            "query": "an",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
-            "version": "0.0.22-1.1",
+            "version": "1.2-3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "6add88f122257587b9a3343b2fd143f9469c585dd8f84a120c689a8035bc1573",
+            "archive_sha256": "aa5d0099167a9e70c7c25550f31c6fb85321e01c386eeea3518db9ad854471e5",
             "binding_kind": "apt",
-            "description": "Allows one to quickly share a folder from the Caja file manager",
+            "description": "Tool for performing actions on an Active Directory domain",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "one"
+              "an"
             ],
-            "name": "caja-share",
+            "name": "adcli",
             "packages": [],
-            "query": "one",
+            "query": "an",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
-            "version": "1.26.1-2",
+            "version": "0.9.2-1ubuntu2",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "576a5fdf763a186f96895eff73e5d8afe675b72a06843f6f97d13f8702a308e8",
+            "archive_sha256": "703cd070aa8bdaf8350e03864cdb6849ec07ee74eeb6752e12612cdaf593e3f0",
             "binding_kind": "apt",
-            "description": "Allows one to quickly set a wallpaper from folders",
+            "description": "tool for correcting bit errors in an AES key schedule",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "one"
+              "an"
             ],
-            "name": "caja-wallpaper",
+            "name": "aesfix",
             "packages": [],
-            "query": "one",
+            "query": "an",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
-            "version": "1.26.1-2",
+            "version": "1.0.1-8",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "1bb51c7de4ee861f8a6fa3d3d4b2b7299c596119214dab5a7577e00cc5d746da",
+            "archive_sha256": "f0461b599a0d94d9b30acb69d08e92b302e088895a0b2f6a66514c3302755fcf",
             "binding_kind": "apt",
-            "description": "Allows one to view extended attributes",
+            "description": "This package provides an English-language thesaurus (utility)",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "one"
+              "an"
             ],
-            "name": "caja-xattr-tags",
+            "name": "aiksaurus",
             "packages": [],
-            "query": "one",
+            "query": "an",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
-            "version": "1.26.1-2",
+            "version": "1.2.1+dev-0.12-7.2build1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "a887702f8bea51d161b1fd70c5142db4e9e58f2e830261d3ab7962081e243032",
+            "archive_sha256": "c97498bcfa56433ad08bca752aed84f7d07a006888919ae9b24edb74dd122773",
             "binding_kind": "apt",
-            "description": "parse a string into one of the standard Common Lisp number types",
+            "description": "Qur'an typesetting macros for TeX/LaTeX",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "one"
+              "an"
             ],
-            "name": "cl-parse-number",
+            "name": "alqalam",
             "packages": [],
-            "query": "one",
+            "query": "an",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
-            "version": "1.7-1.1",
+            "version": "0.2-10",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "ac43876455b6be0abf88e6946cade6a3b637b96d27a7bf1e9fd8fc33f9daeccd",
+            "archive_sha256": "01b3c58dfca1d454855e2f54170d59017d0d37b18546f1647e0809f653a69ee1",
             "binding_kind": "apt",
-            "description": "Little shoot-'em-up arcade game for one or two players",
+            "description": "Decompress flashfiles equipped with an AMI BIOS",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "one"
+              "an"
             ],
-            "name": "dodgindiamond2",
+            "name": "amideco",
             "packages": [],
-            "query": "one",
+            "query": "an",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
-            "version": "0.2.2-4",
+            "version": "0.31e-3.3build1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "861ae1ffe62cccf2469681710e164e2dec41b48853380ea6582c7d0e1ec9565e",
+            "archive_sha256": "d9c1a1220cf62904c38249fbb811b51b1f8c1c2d4cfb4708e15bcf45d58928cb",
             "binding_kind": "apt",
-            "description": "One Time Password calculator",
+            "description": "Tools for interacting with an Android platform",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "one"
+              "an"
             ],
-            "name": "donkey",
+            "name": "android-sdk-platform-tools",
             "packages": [],
-            "query": "one",
+            "query": "an",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
-            "version": "1.2.0-6",
+            "version": "28.0.2+9",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "ba2b565cbeac7b4ed9f6049a0ff817c0047745c5713a8f12833b0d3a5b99890e",
+            "archive_sha256": "689be78d138e7f476f53e92b6326e1796cfff1af4e46920c24a2dc50efe697da",
             "binding_kind": "apt",
-            "description": "Four in a row game",
+            "description": "Tools for interacting with an Android platform - Common files",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "row"
+              "an"
             ],
-            "name": "explosive-c4",
+            "name": "android-sdk-platform-tools-common",
             "packages": [],
-            "query": "row",
+            "query": "an",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
-            "version": "1.2-3build2",
+            "version": "28.0.2+9",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "831039a14eba610dca9601ef384169475214d9e5489669a3e2a25b57dd9692e9",
+            "archive_sha256": "f5cd5d1edb1206c15151edfed64d53ee05886968922fd24e267bed627773739b",
             "binding_kind": "apt",
-            "description": "Ultra-fast all-in-one FASTQ preprocessor",
+            "description": "an on screen display tool which uses libaosd",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "one"
+              "an"
             ],
-            "name": "fastp",
+            "name": "aosd-cat",
             "packages": [],
-            "query": "one",
+            "query": "an",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
-            "version": "0.23.4+dfsg-1",
+            "version": "0.2.7-1.1ubuntu4",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "3b340070cc4d8e26a418e59100a9dc27a2fa8107406944e01df9afbc0151d6d5",
+            "archive_sha256": "961e91b7f688926aeec26e4423d4785164af5d1168d6adbe2cab5830e55aef0a",
             "binding_kind": "apt",
-            "description": "all-in-one NES/Famicom Emulator",
+            "description": "Simple CLI script to display info about an APK file",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "one"
+              "an"
             ],
-            "name": "fceux",
+            "name": "apkinfo",
             "packages": [],
-            "query": "one",
+            "query": "an",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
-            "version": "2.6.5+dfsg1-2build3",
+            "version": "0.3.28-1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "06caa99cfa037094ed2c2524906483220cfe2701e6b3fc28237e72a49b716b39",
+            "archive_sha256": "bb045ced6fa20eaf97f86be57b3c390cfa27a5dfca782f67c24fe7459e3f97b3",
             "binding_kind": "apt",
-            "description": "Sans-serif font for decorative signs, one of the Warsaw Types",
+            "description": "mounts an archive for access as a file system",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "one"
+              "an"
             ],
-            "name": "fonts-apropal",
+            "name": "archivemount",
             "packages": [],
-            "query": "one",
+            "query": "an",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
-            "version": "1.0-2",
+            "version": "0.8.7-1build3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "938725d9a731597b9e4999c271af87c660bb5d0aaecea14b2609156054c04104",
+            "archive_sha256": "ec94232138585c182a5003565ec70277e8fa389cdfef13a671f48e61fae460da",
             "binding_kind": "apt",
-            "description": "The Emoji One Truetype Bitmap Font",
+            "description": "specificity control for read alignments using an artificial reference",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "one"
+              "an"
             ],
-            "name": "fonts-emojione",
+            "name": "arden",
             "packages": [],
-            "query": "one",
+            "query": "an",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
-            "version": "2.2.6+16.10.20160804-0ubuntu2",
+            "version": "1.0-5",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "ca8ec7529141d9aa0d4337166b49e87da5ef76c42de7ebf5e8fc5631bf7cb329",
+            "archive_sha256": "f31f1f50dda28fb0be30d0508e5ca181b88b5d2f8d3440c00d17a21edebe06c3",
             "binding_kind": "apt",
-            "description": "font similar to the one used for the Debian logo",
+            "description": "communicate with an Aurora Magnetek Photovoltaic (solar) Power Inverter",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "one"
+              "an"
             ],
-            "name": "fonts-prociono",
+            "name": "aurora",
             "packages": [],
-            "query": "one",
+            "query": "an",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
-            "version": "2.3-6",
+            "version": "1.9.4-0ubuntu1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "dcef1ae45c4e32a25b771d655cc6079b3eb627ca928c5d79ff1833082c868ba7",
+            "archive_sha256": "9ec25a11b6f65daff2685bf3478eeb679d9f238ab57dc6de3885512850bca03e",
             "binding_kind": "apt",
-            "description": "mirrors a whole filesystem tree from one charset to another",
+            "description": "Decompress flashfiles equipped with an AWARD BIOS",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "one"
+              "an"
             ],
-            "name": "fuse-convmvfs",
+            "name": "awardeco",
             "packages": [],
-            "query": "one",
+            "query": "an",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
-            "version": "0.2.6-2build4",
+            "version": "0.2-4",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "3438115462281894d8bc2d0e92ad00fbb2c67d543369fa889683865f6c0e55e0",
+            "archive_sha256": "f3ac090db893665f71c8e1183f4e530aa072209ed1da6b65653fd8833bf2e798",
             "binding_kind": "apt",
-            "description": "Gem Drop X is an interesting one-player puzzle game for X11",
+            "description": "An user-space filesystem for interacting with Azure Storage",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "one"
+              "an"
             ],
-            "name": "gemdropx",
+            "name": "blobfuse2",
             "packages": [],
-            "query": "one",
+            "query": "an",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
-            "version": "0.9-9",
+            "version": "2.5.5",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "dc80fc7c3198d9b1769791e1faf2ab72e48f47b84744727dd13bce6949ca809f",
+            "archive_sha256": "86e7a2d410060c5a5a1997fc63bdbabde905c52f97f41916f62fba138cd2041c",
             "binding_kind": "apt",
-            "description": "Manage git repositories in one place",
+            "description": "An user-space filesystem for interacting with Azure Storage",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "one"
+              "an"
             ],
-            "name": "gitbatch",
+            "name": "blobfuse2-preview",
             "packages": [],
-            "query": "one",
+            "query": "an",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
-            "version": "0.5.0-4build1",
+            "version": "2.6.0~preview.2",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "13f549683e2fd8510c9ea0e5e1d867bef0b405378c10e99229d26b02a0670a46",
+            "archive_sha256": "7fa952fec1608e9f71fcb5dc54ea466353555df974229b51e14dfbdeb00b647e",
             "binding_kind": "apt",
-            "description": "JVM Dynamic Attach utility all in one jmap jstack jcmd jinfo",
+            "description": "try to find the password of an encrypted wallet file",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "one"
+              "an"
             ],
-            "name": "jattach",
+            "name": "bruteforce-wallet",
             "packages": [],
-            "query": "one",
+            "query": "an",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
-            "version": "2.2-1",
+            "version": "1.5.3-6build3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "0be2ed7480267300ad90ae088082b1c8b41628e429ce0405294ccca94136078f",
+            "archive_sha256": "93da996e1f505dcc37cc89335147ad1561a0a1def7e78bbe9525707582bd1bc7",
             "binding_kind": "apt",
-            "description": "Generates a static html photo gallery from one or more directories of images",
+            "description": "Applet to provide an alternative means to launch applications",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "one"
+              "an"
             ],
-            "name": "jigl",
+            "name": "budgie-app-launcher-applet",
             "packages": [],
-            "query": "one",
+            "query": "an",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
-            "version": "2.0.1+20060126-7",
+            "version": "1.8.0-1build3",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "9347f13dee7ccc553a5a40cf683156b78d6fff2072b78cb60d6026c97b5a6bcd",
+            "archive_sha256": "93f5a36bed076014b66b8ffbc264164d5a8f34df10443178cb5660641a569f74",
             "binding_kind": "apt",
-            "description": "three-in-a-row game",
+            "description": "Show byte statistics as an ASCII circle graph",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "row"
+              "an"
             ],
-            "name": "kdiamond",
+            "name": "bytes-circle",
             "packages": [],
-            "query": "row",
+            "query": "an",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
-            "version": "4:23.08.5-0ubuntu3",
+            "version": "3.1-1",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "6ec48398182a49fd70cffb7db7d2b648792be1e76795167f2d28b022025ad65c",
+            "archive_sha256": "8ba4bf34ee834a8ac525d30d4464fe9078dfa8c5497005b5fd86bc32f6247ac5",
             "binding_kind": "apt",
-            "description": "Split a giant yaml file into one file per Kubernetes resource",
+            "description": "spreadsheet for the Calligra Suite",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "one"
+              "spreadsheet"
             ],
-            "name": "kubernetes-split-yaml",
+            "name": "calligrasheets",
             "packages": [],
-            "query": "one",
+            "query": "an",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
-            "version": "0.4.0-1ubuntu0.24.04.3",
+            "version": "1:3.2.1+dfsg-8build4",
             "zero_cost_eligible": true
           },
           {
-            "archive_sha256": "f385712ec410b803d571337e86e3e939801516b82728ee63017f6638ec2e8f5b",
+            "archive_sha256": "624e86f4f8c95949e81d727b5cf107fe818065f54180465067e4402487cd76c4",
             "binding_kind": "apt",
-            "description": "Aggregate logs from multiple Kubernetes pods into one stream",
+            "description": "data files for Sheets spreadsheet",
             "discovery_source": "APT_CATALOG",
             "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
             "integration_friction": 0,
             "matched_terms": [
-              "one"
+              "spreadsheet"
             ],
-            "name": "kubetail",
+            "name": "calligrasheets-data",
             "packages": [],
-            "query": "one",
+            "query": "spreadsheet",
             "remotes": [],
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
-            "version": "1.6.18-1",
-            "zero_cost_eligible": true
-          },
-          {
-            "archive_sha256": "fb1d4b97087a49f6a729c54b6a9f4e58d6d773a285b9c8ce306147bbf9257024",
-            "binding_kind": "apt",
-            "description": "tool to copy messages from one IMAP server to another",
-            "discovery_source": "APT_CATALOG",
-            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-            "integration_friction": 0,
-            "matched_terms": [
-              "one"
-            ],
-            "name": "larch",
-            "packages": [],
-            "query": "one",
-            "remotes": [],
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 18,
-            "version": "1.1.2-2.1",
+            "version": "1:3.2.1+dfsg-8build4",
             "zero_cost_eligible": true
           }
         ],
-        "effect": "Create canonical/astra_runtime/tmp/VERIFIED_CAPABILITIES.xlsx containing exactly one row for every VERIFIED_BOUND_CAPABILITY with columns capability_id, status, source_type, provides, and incremental_spend_usd",
+        "effect": "Create an XLSX spreadsheet workbook at canonical/astra_runtime/tmp/VERIFIED_CAPABILITIES.xlsx containing exactly one row for every VERIFIED_BOUND_CAPABILITY with columns capability_id, status, source_type, provides, and incremental_spend_usd",
         "errors": [],
         "queries": [
-          "exactly",
-          "one",
-          "row",
-          "verified"
+          "an",
+          "xlsx",
+          "spreadsheet",
+          "workbook"
         ],
         "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
         "source": "APT_CATALOG",
@@ -1771,15 +1768,15 @@
       },
       {
         "binding_performed": false,
-        "candidate_count": 60,
+        "candidate_count": 41,
         "candidates": [
           {
-            "description": "Connect any AI agent to your Synchronex workspace \u2014 portable memory, decisions, and workers.",
+            "description": "MCP server for Anki flashcards: adaptive review, notes, media, and deck management via AnkiConnect.",
             "is_latest": true,
-            "name": "ai.synchronex/mcp-proxy",
+            "name": "ai.ankimcp/anki-mcp-server",
             "packages": [
               {
-                "identifier": "@synchronex/mcp-proxy",
+                "identifier": "@ankimcp/anki-mcp-server",
                 "registry_type": "npm",
                 "required_environment": [],
                 "runtime_hint": null,
@@ -1787,29 +1784,116 @@
                 "transport": {
                   "type": "stdio"
                 },
-                "version": "1.2.1"
+                "version": "0.26.0"
               }
             ],
-            "query": "one",
+            "query": "an",
             "remotes": [],
             "repository": {
               "source": "github",
-              "url": "https://github.com/kmdesle/synchronex"
+              "url": "https://github.com/ankimcp/anki-mcp-server"
             },
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
             "status": "active",
-            "version": "1.2.1",
+            "version": "0.26.0",
             "zero_cost_eligible": true
           },
           {
-            "description": "Bridge a live Chrome browser to your agent: 150 tools for capture, extraction, and observation.",
+            "description": "Let your AI read a whole spreadsheet as tab-separated text \u2014 Excel, ODS, SQLite and more",
             "is_latest": true,
-            "name": "app.crawlio/crawlio-browser",
+            "name": "io.github.demos-ra/text-spreadsheet",
             "packages": [
               {
-                "identifier": "crawlio-browser",
+                "identifier": "text-spreadsheet",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.2.0"
+              }
+            ],
+            "query": "spreadsheet",
+            "remotes": [],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.2.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP server for spreadsheet files (.xlsx, .csv, .ods) - cell-level ops + DuckDB SQL engine.",
+            "is_latest": true,
+            "name": "io.github.marekrost/mcp-server-spreadsheet",
+            "packages": [
+              {
+                "identifier": "mcp-server-spreadsheet",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.3.3"
+              }
+            ],
+            "query": "spreadsheet",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/marekrost/mcp-server-spreadsheet"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.3.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP server for accurate, structure-preserving read/write access to Excel (.xlsx) files",
+            "is_latest": true,
+            "name": "io.github.ruriazz/xlsx-tools-mcp",
+            "packages": [
+              {
+                "identifier": "xlsx-tools-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.1"
+              }
+            ],
+            "query": "xlsx",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/ruriazz/xlsx-tools-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "50 spreadsheet tools for .xlsx: recalc formulas, repair broken refs, read/write, diff, audit.",
+            "is_latest": true,
+            "name": "io.github.senoff/xlsx-for-ai",
+            "packages": [
+              {
+                "identifier": "xlsx-for-ai",
                 "registry_type": "npm",
                 "required_environment": [],
                 "runtime_hint": null,
@@ -1817,723 +1901,666 @@
                 "transport": {
                   "type": "stdio"
                 },
-                "version": "1.11.0"
+                "version": "4.0.6"
               }
             ],
-            "query": "row",
+            "query": "xlsx",
             "remotes": [],
             "repository": {
               "source": "github",
-              "url": "https://github.com/Crawlio-app/crawlio-browser"
+              "url": "https://github.com/senoff/xlsx-for-ai"
             },
             "required_environment_count": 0,
             "required_secret_count": 0,
             "score": 18,
             "status": "active",
-            "version": "1.11.0",
+            "version": "4.0.6",
             "zero_cost_eligible": true
           },
           {
-            "description": "Control a real Chrome browser to complete any task: fill forms, extract data, book flights.",
+            "description": "Remote MCP server for Tandem docs, install guides, SDKs, workflows, and agent setup help.",
             "is_latest": true,
-            "name": "com.browser-use/browser-use",
+            "name": "ac.tandem/docs-mcp",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://tandem.ac/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/frumu-ai/tandem"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.3.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Did this contractor's licence change? Observed lapses and reinstatements, not a snapshot.",
+            "is_latest": true,
+            "name": "agency.ottobot/contractor-license-changes",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://license-changes-mcp.ottobot2025.workers.dev/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/modelcontextprotocol/registry"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Google Ads reporting and campaign management. Everything it creates starts paused.",
+            "is_latest": true,
+            "name": "ai.adplane/google-ads",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.adplane.ai"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.29.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Resolve @handles to post-quantum-signed agent identities and transact with the brands behind them.",
+            "is_latest": true,
+            "name": "ai.anha/resolver",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://resolver.anha.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Anki addon that exposes your flashcard collection to AI assistants via a local MCP server.",
+            "is_latest": true,
+            "name": "ai.ankimcp/anki-mcp-server-addon",
+            "packages": [],
+            "query": "an",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/ankimcp/anki-mcp-server-addon"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.29.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP server for Anzenna",
+            "is_latest": true,
+            "name": "ai.anzenna/anzenna",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "sse",
+                "url": "https://mcp.anzenna.ai/sse"
+              }
+            ],
+            "repository": {},
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP registry: 138k servers crawled, handshake-validated, reliability-scored. 744 production-safe.",
+            "is_latest": true,
+            "name": "ai.arclan/registry",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://arclan.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.2.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Balan\u00e7os, DREs, DFPs e ITRs da CVM e IF.data do BCB. Brazilian companies' financial statements.",
+            "is_latest": true,
+            "name": "ai.balancos/mcp",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.balancos.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.5.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "AI story development, screenplay editing, review, media, and export tools for BeatBandit projects.",
+            "is_latest": true,
+            "name": "ai.beatbandit/beatbandit",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://beatbandit.ai/api/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Live tech-stack scan of any public site \u2014 vendors, account IDs, scripts, JSON-LD. 2 tools.",
+            "is_latest": true,
+            "name": "ai.boolsai/scan",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://boolsai.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Boolsai-ai/mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Live status and health checks for AI coding providers: Claude, Cursor, Copilot, Codex and more.",
+            "is_latest": true,
+            "name": "ai.canivibe/status",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://canivibe.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Turn any idea, URL, doc, or PDF into on-brand visuals: 100+ formats, native in 150+ languages",
+            "is_latest": true,
+            "name": "ai.canvora/canvora",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.canvora.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/canvora/canvora-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.2.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Clinician-reviewed library on anxiety, OCD, and phobias in children ages 5\u201312.",
+            "is_latest": true,
+            "name": "ai.childanxiety/library",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://childanxiety.ai/api/mcp/v1"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Check bank marketing for FDIC, NCUA, TILA, Reg DD, Reg Z, UDAAP, and Equal Housing compliance.",
+            "is_latest": true,
+            "name": "ai.clarid/compliance",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.clarid.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/clarid-ai/compliance-checker"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Financial and covenant data for public and private credit: statements, cap stacks, covenants.",
+            "is_latest": true,
+            "name": "ai.constellationfinance/constellation-finance-mcp",
+            "packages": [],
+            "query": "an",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.constellationfinance.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Normalized US-GAAP financial statements & fundamentals from SEC EDGAR, as MCP tools for LLM agents.",
+            "is_latest": true,
+            "name": "ai.datavidence/datavidence-financials",
             "packages": [
               {
-                "identifier": "browser-use",
+                "identifier": "datavidence-financials",
                 "registry_type": "pypi",
                 "required_environment": [],
                 "runtime_hint": "uvx",
-                "secret_environment": [],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "0.13.5"
-              }
-            ],
-            "query": "row",
-            "remotes": [],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/browser-use/browser-use"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 18,
-            "status": "active",
-            "version": "0.13.5",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "A free one-minute reset for people, delivered by AI, with no account or personal data.",
-            "is_latest": true,
-            "name": "ai.ai-akari/one-minute-akari",
-            "packages": [],
-            "query": "one",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://ai-akari.ai/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/AInoAKARI/arigatou-kawaii-lp"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.3",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Drone-sector market intelligence for AI agents: free briefings and profiles, licenced tracker data.",
-            "is_latest": true,
-            "name": "ai.droneintelligence/drone-intelligence",
-            "packages": [],
-            "query": "one",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://droneintelligence.ai/api/mcp"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Versioned agent memory in your own Postgres: portable context, permissioned, audit trail.",
-            "is_latest": true,
-            "name": "ai.onedroid/engram",
-            "packages": [],
-            "query": "one",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://engram.onedroid.ai/mcp"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Autonomous SEO + GEO growth: keyword research, audits, content, AI answer-engine visibility.",
-            "is_latest": true,
-            "name": "ai.openhelm/seo-growth",
-            "packages": [],
-            "query": "row",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://mcp.openhelm.ai/seo/mcp"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "0.1.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Place real phone calls and hold spoken conversations on a user's behalf, billed per minute.",
-            "is_latest": true,
-            "name": "app.alterphone/phone-calls",
-            "packages": [],
-            "query": "one",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://mcp.alterphone.app/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/marius-bardan/alterphone-mcp"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.1",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "An agent records what it finished into a team's standup feed, one line at a time.",
-            "is_latest": true,
-            "name": "app.donelane/donelane",
-            "packages": [],
-            "query": "one",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://donelane.app/mcp"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Fakturownia.pl (Polish invoicing) via MCP: invoices, clients, products, warehouse. Full read-write.",
-            "is_latest": true,
-            "name": "app.fakto/fakturownia",
-            "packages": [],
-            "query": "row",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://fakto.app/fakturownia/stream"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "OneHaus household tools: tasks, calendar, contacts, pets, vehicles, documents and more.",
-            "is_latest": true,
-            "name": "app.onehaus/haus",
-            "packages": [],
-            "query": "one",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://mcp.onehaus.app"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "subfolder": "backend/src/Haus.Mcp",
-              "url": "https://github.com/Im5tu/haus"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.3.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Indonesia shipping for AI agents via Biteship: courier rates, create orders, track waybills.",
-            "is_latest": true,
-            "name": "app.wishpool/indonesia-logistics-mcp",
-            "packages": [],
-            "query": "one",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://logi-id.wishpool.app/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/junter1989k-ai/indonesia-logistics-mcp"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "0.1.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "I do everything related to Browser Automation & Management",
-            "is_latest": true,
-            "name": "co.civai.nova/browsergpt-agent",
-            "packages": [],
-            "query": "row",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://nova.civai.co/mcp/agents/browsergpt-agent"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Undetectable cloud browser sessions for AI agents and scrapers. Navigate, extract, click, captcha.",
-            "is_latest": true,
-            "name": "com.browserforest/browser-forest",
-            "packages": [],
-            "query": "row",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://browserforest.com/api/mcp/bf"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Approval receipts for AI browser purchases.",
-            "is_latest": true,
-            "name": "com.clauxel.browserspendguard/browserspendguard-mcp",
-            "packages": [],
-            "query": "row",
-            "remotes": [
-              {
-                "required_headers": [
-                  "Authorization"
-                ],
-                "type": "streamable-http",
-                "url": "https://browserspendguard.clauxel.com/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/clauxel/browser-spend-guard-mcp"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Approve Nostr signatures with your own browser signer without exposing a private key.",
-            "is_latest": true,
-            "name": "com.frontiercrown.signer/nostr-signer",
-            "packages": [],
-            "query": "row",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://signer.frontiercrown.com/mcp"
-              }
-            ],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/hudhaifahz/nostr-signer-chatgpt"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 15,
-            "status": "active",
-            "version": "0.4.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "One install that runs every sibling MCP server as a child process and merges their tools behind one ",
-            "is_latest": true,
-            "name": "com.bestremotetools/office-suite-all-servers-one-install",
-            "packages": [
-              {
-                "identifier": "https://github.com/theluckystrike/mcp-servers/releases/download/v0.21.0/office-suite.mcpb",
-                "registry_type": "mcpb",
-                "required_environment": [],
-                "runtime_hint": null,
                 "secret_environment": [
-                  "MCP_LICENSE_KEY"
+                  "FL_API_KEY"
                 ],
-                "transport": {
-                  "type": "stdio"
-                },
-                "version": "0.21.0"
-              }
-            ],
-            "query": "one",
-            "remotes": [],
-            "repository": {
-              "source": "github",
-              "url": "https://github.com/theluckystrike/mcp-office-suite"
-            },
-            "required_environment_count": 0,
-            "required_secret_count": 1,
-            "score": 15,
-            "status": "active",
-            "version": "0.21.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Living knowledge graph for your repo: query with citations, remember/link facts, fact-check claims.",
-            "is_latest": true,
-            "name": "com.codician/growmos",
-            "packages": [
-              {
-                "identifier": "growmos",
-                "registry_type": "pypi",
-                "required_environment": [],
-                "runtime_hint": "growmos",
-                "secret_environment": [],
                 "transport": {
                   "type": "stdio"
                 },
                 "version": "0.1.5"
               }
             ],
-            "query": "row",
+            "query": "an",
             "remotes": [],
             "repository": {
               "source": "github",
-              "url": "https://github.com/codician-team/growmos"
+              "url": "https://github.com/datavidence/datavidence-financials-mcp"
             },
             "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 14,
+            "required_secret_count": 1,
+            "score": 15,
             "status": "active",
             "version": "0.1.5",
             "zero_cost_eligible": true
           },
           {
-            "description": "Search, document and execute authenticated API calls across 700+ apps via one MCP server",
+            "description": "Agent-safe Excel workbook analysis, editing, recalc, and verification tools.",
             "is_latest": true,
-            "name": "ai.withone/mcp",
+            "name": "io.github.PSU3D0/agent-spreadsheet",
             "packages": [
               {
-                "identifier": "@withone/mcp",
+                "identifier": "ghcr.io/psu3d0/agent-spreadsheet:0.16.0-full",
+                "registry_type": "oci",
+                "required_environment": [],
+                "runtime_hint": "docker",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": null
+              }
+            ],
+            "query": "spreadsheet",
+            "remotes": [],
+            "repository": {
+              "id": "1059818445",
+              "source": "github",
+              "url": "https://github.com/PSU3D0/agent-spreadsheet"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.16.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Agent-safe Excel workbook analysis, editing, recalc, and verification tools.",
+            "is_latest": true,
+            "name": "io.github.PSU3D0/spreadsheet-mcp",
+            "packages": [
+              {
+                "identifier": "ghcr.io/psu3d0/spreadsheet-mcp:0.11.1-full",
+                "registry_type": "oci",
+                "required_environment": [],
+                "runtime_hint": "docker",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": null
+              }
+            ],
+            "query": "spreadsheet",
+            "remotes": [],
+            "repository": {
+              "id": "1059818445",
+              "source": "github",
+              "url": "https://github.com/PSU3D0/spreadsheet-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.11.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Audit Excel workbooks: formula dependency tracing, circular references, risk smells. Local only.",
+            "is_latest": true,
+            "name": "io.github.arose26/xlsx-audit-mcp",
+            "packages": [
+              {
+                "identifier": "xlsx-audit-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.0"
+              }
+            ],
+            "query": "xlsx",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/arose26/xlsx-audit-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Search and analyze Dimensions research data: publications, grants, researchers, patents, trials",
+            "is_latest": true,
+            "name": "ai.dimensions/analytics-mcp",
+            "packages": [
+              {
+                "identifier": "@digital-science-dsl/dimensions-analytics-mcp",
                 "registry_type": "npm",
                 "required_environment": [
-                  "ONE_SECRET"
+                  "DIMENSIONS_API_KEY"
                 ],
-                "runtime_hint": "npx",
+                "runtime_hint": null,
                 "secret_environment": [
-                  "ONE_SECRET"
+                  "DIMENSIONS_API_KEY"
                 ],
                 "transport": {
                   "type": "stdio"
                 },
-                "version": "1.4.0"
+                "version": "1.4.2"
               }
             ],
-            "query": "one",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://mcp.withone.ai/mcp"
-              }
-            ],
+            "query": "an",
+            "remotes": [],
             "repository": {
-              "id": "1187553569",
               "source": "github",
-              "url": "https://github.com/withoneai/mcp"
+              "subfolder": "apps/mcp",
+              "url": "https://github.com/digital-science/dimensions-analytics-mcp"
             },
             "required_environment_count": 1,
             "required_secret_count": 1,
             "score": 14,
             "status": "active",
-            "version": "1.4.0",
+            "version": "1.4.2",
             "zero_cost_eligible": true
           },
           {
-            "description": "Ask a company's DeskClone support agent from Claude, Cursor or any MCP client (API key needed).",
+            "description": "Rust MCP server and CLI for Arcane Docker and container management.",
             "is_latest": true,
-            "name": "ai.deskclone/deskclone",
-            "packages": [],
-            "query": "one",
-            "remotes": [
+            "name": "ai.dinglebear/arcane-rmcp",
+            "packages": [
               {
-                "required_headers": [
-                  "Authorization"
+                "identifier": "arcane-rmcp",
+                "registry_type": "npm",
+                "required_environment": [
+                  "RARCANE_API_URL",
+                  "RARCANE_API_KEY"
                 ],
-                "type": "streamable-http",
-                "url": "https://api.deskclone.ai/v1/mcp"
+                "runtime_hint": "npx",
+                "secret_environment": [
+                  "RARCANE_API_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.4.2"
               }
             ],
-            "repository": null,
-            "required_environment_count": 0,
+            "query": "an",
+            "remotes": [],
+            "repository": {
+              "id": "1247261735",
+              "source": "github",
+              "url": "https://github.com/jmagar/arcane-rmcp"
+            },
+            "required_environment_count": 2,
             "required_secret_count": 1,
-            "score": 12,
+            "score": 13,
             "status": "active",
-            "version": "1.0.0",
+            "version": "0.4.2",
             "zero_cost_eligible": true
           },
           {
-            "description": "Governed MCP gateway: one endpoint for your tools, with credential custody and audit log.",
+            "description": "Arcane Docker and Compose management over MCP and CLI with authenticated stdio and HTTP.",
             "is_latest": true,
-            "name": "ai.onedroid/synapse",
-            "packages": [],
-            "query": "one",
-            "remotes": [
+            "name": "ai.dinglebear/rarcane",
+            "packages": [
               {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://synapse.onedroid.ai/hub/{hub}/mcp"
-              },
-              {
-                "required_headers": [
-                  "Authorization"
+                "identifier": "@dinglebear/rarcane",
+                "registry_type": "npm",
+                "required_environment": [
+                  "RARCANE_API_URL",
+                  "RARCANE_API_KEY"
                 ],
-                "type": "streamable-http",
-                "url": "https://synapse.onedroid.ai/agent/mcp"
+                "runtime_hint": "npx",
+                "secret_environment": [
+                  "RARCANE_API_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.4.4"
               }
             ],
-            "repository": null,
-            "required_environment_count": 0,
+            "query": "an",
+            "remotes": [],
+            "repository": {
+              "id": "1247261735",
+              "source": "github",
+              "url": "https://github.com/dinglebear-ai/rarcane"
+            },
+            "required_environment_count": 2,
             "required_secret_count": 1,
-            "score": 12,
+            "score": 13,
             "status": "active",
-            "version": "1.0.3",
+            "version": "0.4.4",
             "zero_cost_eligible": true
           },
           {
-            "description": "Reddit growth toolkit \u2014 opportunities, replies, cold DMs, brand mentions, SEO, autopilot.",
+            "description": "Crypto backtest statistics: the server owns the trial count, so it cannot be understated.",
             "is_latest": true,
-            "name": "ai.redditgrow/mcp",
+            "name": "ai.avasis/quant-research",
             "packages": [],
-            "query": "row",
+            "query": "an",
             "remotes": [
               {
                 "required_headers": [
                   "Authorization"
                 ],
                 "type": "streamable-http",
-                "url": "https://redditgrow.ai/mcp"
+                "url": "https://quant-mcp.avasis.ai/mcp"
               }
             ],
             "repository": {
               "source": "github",
-              "url": "https://github.com/Vico86/redditreach"
+              "url": "https://github.com/abhayjnayakk/quant-integrity"
             },
             "required_environment_count": 0,
             "required_secret_count": 1,
             "score": 12,
             "status": "active",
-            "version": "3.10.0",
+            "version": "0.2.0",
             "zero_cost_eligible": true
           },
           {
-            "description": "Automate cloud browsers to navigate websites, interact with elements, and extract structured data.\u2026",
+            "description": "Loan & mortgage calculator, compound interest, ROI, crypto prices, FX conversion for AI agents.",
             "is_latest": true,
-            "name": "ai.smithery/ImRonAI-mcp-server-browserbase",
+            "name": "ai.bankee/inferventis-mcp",
             "packages": [],
-            "query": "row",
+            "query": "an",
             "remotes": [
               {
                 "required_headers": [
-                  "Authorization"
+                  "x-api-key"
                 ],
                 "type": "streamable-http",
-                "url": "https://server.smithery.ai/@ImRonAI/mcp-server-browserbase/mcp"
+                "url": "https://mcp-server-295985738387.europe-west1.run.app/mcp"
               }
             ],
             "repository": {
               "source": "github",
-              "url": "https://github.com/ImRonAI/mcp-server-browserbase"
+              "url": "https://github.com/Bankee-ai/inferventis"
             },
             "required_environment_count": 0,
             "required_secret_count": 1,
             "score": 12,
             "status": "active",
-            "version": "2.0.0",
+            "version": "1.0.2",
             "zero_cost_eligible": true
           },
           {
-            "description": "Provides cloud browser automation capabilities using Stagehand and Browserbase, enabling LLMs to i\u2026",
+            "description": "A flock of AI users tests your deployed app and reports where real people get stuck, with fixes.",
             "is_latest": true,
-            "name": "ai.smithery/browserbasehq-mcp-browserbase",
+            "name": "ai.canaryusers/canaryusers",
             "packages": [],
-            "query": "row",
+            "query": "an",
             "remotes": [
               {
                 "required_headers": [
                   "Authorization"
                 ],
                 "type": "streamable-http",
-                "url": "https://server.smithery.ai/@browserbasehq/mcp-browserbase/mcp"
+                "url": "https://www.canaryusers.ai/api/mcp"
               }
             ],
             "repository": {
               "source": "github",
-              "url": "https://github.com/browserbase/mcp-server-browserbase"
+              "url": "https://github.com/CanaryUsers-ai/canaryusers-mcp"
             },
             "required_environment_count": 0,
             "required_secret_count": 1,
             "score": 12,
             "status": "active",
-            "version": "2.2.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Create a shop program, hand customers a browser stamp card by QR poster, stamp it from a phone.",
-            "is_latest": true,
-            "name": "app.rowb.stampcard/cards",
-            "packages": [],
-            "query": "row",
-            "remotes": [
-              {
-                "required_headers": [
-                  "Authorization"
-                ],
-                "type": "streamable-http",
-                "url": "https://stampcard.rowb.app/mcp"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 1,
-            "score": 12,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "MCP server: 447 pay-as-you-go research tools (SEO, ads, SERP) + verified prowl_analyze reports",
-            "is_latest": true,
-            "name": "chat.prowl/prowl-mcp",
-            "packages": [],
-            "query": "row",
-            "remotes": [
-              {
-                "required_headers": [
-                  "Authorization"
-                ],
-                "type": "streamable-http",
-                "url": "https://prowl.chat/mcp"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 1,
-            "score": 12,
-            "status": "active",
-            "version": "1.6.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "MCP server that lets AI assistants use all OneSchema features exposed via the public API.",
-            "is_latest": true,
-            "name": "co.oneschema/mcp",
-            "packages": [],
-            "query": "one",
-            "remotes": [
-              {
-                "required_headers": [
-                  "X-Api-Key"
-                ],
-                "type": "streamable-http",
-                "url": "https://api.oneschema.co/mcp"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 1,
-            "score": 12,
-            "status": "active",
-            "version": "1.0.1",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Turn any recording or document into notes, flashcards and quizzes your agent can read and act on",
-            "is_latest": true,
-            "name": "ai.backrow/backrow",
-            "packages": [],
-            "query": "row",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://backrow.ai/mcp"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 11,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Privacy-first work tracking with summaries, reports, coaching, and AI-ready long-term memory.",
-            "is_latest": true,
-            "name": "ai.donethat/donethat",
-            "packages": [],
-            "query": "one",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://mcp.donethat.ai/"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 11,
-            "status": "active",
-            "version": "1.0.0",
-            "zero_cost_eligible": true
-          },
-          {
-            "description": "Build zero-shot video models for object detection, and category and attribute classification.",
-            "is_latest": true,
-            "name": "ai.dragoneye/mcp",
-            "packages": [],
-            "query": "one",
-            "remotes": [
-              {
-                "required_headers": [],
-                "type": "streamable-http",
-                "url": "https://nexus.api.dragoneye.ai/mcp"
-              }
-            ],
-            "repository": null,
-            "required_environment_count": 0,
-            "required_secret_count": 0,
-            "score": 11,
-            "status": "active",
-            "version": "1.0.0",
+            "version": "1.2.2",
             "zero_cost_eligible": true
           }
         ],
-        "effect": "Create canonical/astra_runtime/tmp/VERIFIED_CAPABILITIES.xlsx containing exactly one row for every VERIFIED_BOUND_CAPABILITY with columns capability_id, status, source_type, provides, and incremental_spend_usd",
-        "errors": [
-          {
-            "error": "TimeoutError:The read operation timed out",
-            "query": "verified"
-          }
-        ],
+        "effect": "Create an XLSX spreadsheet workbook at canonical/astra_runtime/tmp/VERIFIED_CAPABILITIES.xlsx containing exactly one row for every VERIFIED_BOUND_CAPABILITY with columns capability_id, status, source_type, provides, and incremental_spend_usd",
+        "errors": [],
         "queries": [
-          "exactly",
-          "one",
-          "row",
-          "verified"
+          "an",
+          "xlsx",
+          "spreadsheet",
+          "workbook"
         ],
         "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
         "source": "OFFICIAL_MCP_REGISTRY",
@@ -2548,5 +2575,5 @@
   },
   "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
   "source": "FEDERATED_CAPABILITY_DISCOVERY_FALLBACK",
-  "targeted_acquisition_error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-one-time\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"FileNotFoundError:[Errno 2] No such file or directory: '/usr/bin/rotate'\", \"name\": \"jigl\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fonts-kacst-one\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"fonts-leckerli-one\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"TimeoutExpired:Command '['/usr/bin/keep-one-running', '--help']' timed out after 10 seconds\", \"name\": \"run-one\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"tryton-server-all-in-one\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.xlsx\", \"name\": \"apt-rollback\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.xlsx\", \"name\": \"athena-jot\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.xlsx\", \"name\": \"awit-dbackup\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"caja-share\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"caja-wallpaper\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"caja-xattr-tags\", \"status\": \"CONTRACT_REJECTED\"}]"
+  "targeted_acquisition_error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"r-cran-openxlsx\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"r-cran-writexl\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"an\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"firefox-locale-an\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"hunspell-an\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"language-pack-an\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"language-pack-an-base\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"language-pack-gnome-an\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"language-pack-gnome-an-base\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.xlsx\", \"name\": \"2vcard\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.xlsx\", \"name\": \"abi-dumper\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.xlsx\", \"name\": \"adcli\", \"status\": \"CONTRACT_REJECTED\"}]"
 }
