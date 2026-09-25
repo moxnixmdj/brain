@@ -19,6 +19,7 @@
     "incremental_spend_usd": 0,
     "model_controller_required": false,
     "max_attempts": 8,
-    "manual_controller_actions": false
+    "manual_controller_actions": false,
+    "explicit_retrigger_after_join_frontier": "v1"
   }
 }
