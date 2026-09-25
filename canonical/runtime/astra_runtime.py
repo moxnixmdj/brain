@@ -657,6 +657,41 @@ def _goal_action(action):
         manifest_path.parent.mkdir(parents=True,exist_ok=True)
         manifest_path.write_text(json.dumps(manifest,indent=2,sort_keys=True)+"\n",encoding="utf-8")
         return {"type":typ,"output_verified":True,"item_count":len(manifest),"manifest_path":str(manifest_path.relative_to(ROOT))}
+    if typ=="assert_runtime_fanout_decodes":
+        source=_safe_repo_path(args.get("source_path",""))
+        manifest_path=_safe_repo_path(args.get("manifest_path",""))
+        if not source.is_file() or not manifest_path.is_file():
+            return {"type":typ,"verified":False,"error":"FANOUT_VERIFY_SOURCE_MISSING"}
+        wrapper=json.loads(source.read_text(encoding="utf-8"))
+        items=json.loads(str(wrapper.get("observed_text") or ""))
+        manifest=json.loads(manifest_path.read_text(encoding="utf-8"))
+        value_field=str(args.get("value_field") or "")
+        threshold=int(args.get("max_length") or 0)
+        match_kind=str(args.get("match_kind") or "")
+        other_kind=str(args.get("other_kind") or "")
+        if not isinstance(items,list) or not isinstance(manifest,list):
+            return {"type":typ,"verified":False,"error":"FANOUT_VERIFY_INVALID"}
+        by_id={str(x.get("id")):x for x in manifest if isinstance(x,dict) and "id" in x}
+        failures=[]
+        if len(items)!=len(manifest) or len(by_id)!=len(manifest):
+            failures.append({"error":"CARDINALITY_MISMATCH"})
+        for item in items:
+            item_id=str(item.get("id"))
+            value=str(item.get(value_field) or "")
+            rec=by_id.get(item_id)
+            expected_kind=match_kind if len(value)<=threshold else other_kind
+            if rec is None or rec.get("capability_kind")!=expected_kind or str(rec.get(value_field) or "")!=value:
+                failures.append({"id":item_id,"error":"MANIFEST_MISMATCH"})
+                continue
+            path=str(rec.get("artifact_path") or "")
+            decoded=_invoke_bound_capability({
+              "capability_id":"image.code.decode.zbarimg",
+              "argv":["zbarimg","--quiet","--raw",path],
+              "timeout_s":60,
+            })
+            if str(decoded.get("stdout") or "").strip()!=value:
+                failures.append({"id":item_id,"error":"DECODE_MISMATCH"})
+        return {"type":typ,"verified":not failures,"source_count":len(items),"manifest_count":len(manifest),"failures":failures[:20]}
     if typ=="assert_runtime_selected_code_decodes":
         source=_safe_repo_path(args.get("source_path",""))
         if not source.is_file():
