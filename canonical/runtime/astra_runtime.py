@@ -735,7 +735,18 @@ def _load_auto_apt_cli_acquisition():
         raise Blocker("AUTO_APT_CLI_ACQUISITION_LOAD_FAILED")
     module=importlib.util.module_from_spec(spec)
     sys.modules[spec.name]=module
-    spec.loader.exec_module(module)
+    runtime_dir=str(path.parent)
+    added=runtime_dir not in sys.path
+    if added:
+        sys.path.insert(0,runtime_dir)
+    try:
+        spec.loader.exec_module(module)
+    finally:
+        if added:
+            try:
+                sys.path.remove(runtime_dir)
+            except ValueError:
+                pass
     return module
 
 def _compile_plain_goal(goal):
