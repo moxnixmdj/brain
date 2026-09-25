@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T01:46:51.877157+00:00",
+  "mission_id": "ASTRA-XLSX-COMPILER-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_XLSX_COMPILER_DIAG_001.json",
+  "mission_sha256": "ea5d7d87210282354b49a018d47c7d2c9796b47497e896fec8dd8c8fa81fa260",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "e33b35baeaced95059a09ba503d77cceab312bc2208159aaaf143f4f492f39dc",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
