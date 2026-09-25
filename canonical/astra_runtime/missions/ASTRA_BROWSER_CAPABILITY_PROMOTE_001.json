@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-BROWSER-CAPABILITY-PROMOTE-001",
+  "purpose": "Promote the independently verified rendered-browser capability into the canonical shared registry and nothing else.",
+  "steps": [
+    {
+      "id": "promote-verified-rendered-browser",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/runtime/promote_browser_capability.py canonical/astra_runtime/evidence/ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001__RESULT.json",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "RENDERED_BROWSER_CAPABILITY_PROMOTED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "allow_registry_mutation": true,
+    "verification_result_required": "canonical/astra_runtime/evidence/ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001__RESULT.json"
+  }
+}
