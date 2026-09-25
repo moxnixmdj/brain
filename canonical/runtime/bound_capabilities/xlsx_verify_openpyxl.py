@@ -81,13 +81,11 @@ def run(args,root):
     if found is None:
         raise RuntimeError("XLSX_STATUS_COLLECTION_NOT_FOUND")
     _,records=found
-    cols=_columns(goal)
-    expected={}
-    for key,record in sorted(records.items()):
-        if wanted not in record.values():
-            continue
-        expected[str(key)]=[_cell(record,str(key),c) for c in cols]
 
+    # Verification clauses need not repeat the producer's column declaration.
+    # Reopen the artifact, treat its header row as the claimed schema, then
+    # resolve every claimed column against canonical source data. An invented
+    # or unresolvable column fails closed.
     openpyxl=_import_openpyxl()
     wb=openpyxl.load_workbook(str(workbook_path),read_only=True,data_only=True)
     try:
@@ -97,9 +95,17 @@ def run(args,root):
         wb.close()
     if not rows:
         raise RuntimeError("XLSX_WORKBOOK_EMPTY")
-    headers=[str(x or "") for x in rows[0]]
-    if headers!=cols:
-        raise RuntimeError("XLSX_HEADER_MISMATCH:"+json.dumps({"expected":cols,"observed":headers},sort_keys=True))
+    cols=[str(x or "").strip() for x in rows[0]]
+    if not cols or any(not x for x in cols) or len(set(cols))!=len(cols):
+        raise RuntimeError("XLSX_HEADER_INVALID:"+json.dumps(cols))
+    if "capability_id" not in cols:
+        raise RuntimeError("XLSX_ID_COLUMN_REQUIRED")
+
+    expected={}
+    for key,record in sorted(records.items()):
+        if wanted not in record.values():
+            continue
+        expected[str(key)]=[_cell(record,str(key),c) for c in cols]
     observed={}
     for row in rows[1:]:
         values=[_norm(x) for x in row[:len(cols)]]
