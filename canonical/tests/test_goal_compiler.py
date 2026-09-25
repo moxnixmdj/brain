@@ -234,6 +234,25 @@ class GoalCompilerTests(unittest.TestCase):
             "canonical/astra_runtime/tmp/VERIFIED_EVIDENCE_BUNDLE.tar.gz",
         )
 
+    def test_compound_test_audit_keeps_independent_execution_and_verification_together(self):
+        goal=(
+            "Execute every canonical/tests/test_*.py file. "
+            "Create canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT.json containing one record per test file with repository-relative path, exit code, passed test count, failed test count, error count, skipped count, and duration, plus totals across the corpus. "
+            "Fail if any test file exits nonzero. "
+            "Finally independently execute the same complete test corpus again and verify that every file in the report still exits zero, "
+            "that no canonical test file is missing from the report, and that the report totals are internally consistent."
+        )
+        out=compiler.compile_goal(goal,self.registry(),ROOT)
+        self.assertEqual(out["compiler_mode"],"DETERMINISTIC_COMPOUND_ACTION_PLAN")
+        self.assertEqual(len(out["clauses"]),4)
+        self.assertEqual([x["mode"] for x in out["compiled_parts"]],[
+            "NATIVE_TEST_CORPUS_DISCOVERY",
+            "VERIFIED_PYTHON_TEST_AUDIT",
+            "PYTHON_TEST_ZERO_FAILURE_ASSERTION",
+            "INDEPENDENT_PYTHON_TEST_CORPUS_VERIFICATION",
+        ])
+        self.assertIn("and verify that every file in the report still exits zero",out["clauses"][-1].lower())
+
     def test_plain_qr_goal_selects_verified_qr_and_binds_arguments(self):
         goal="Generate a QR code image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png."
         out=compiler.compile_goal(goal,self.registry(),ROOT)
