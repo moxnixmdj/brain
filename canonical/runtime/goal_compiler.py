@@ -2248,6 +2248,9 @@ def compile_goal(goal, registry, root):
     if browser_interaction is not None:
         return browser_interaction
     clauses=decompose_goal(goal)
+    dynamic_fanout=_compile_dynamic_fanout_goal(goal,clauses,registry,root)
+    if dynamic_fanout is not None:
+        return dynamic_fanout
     if len(clauses)>1:
         return _compile_compound_goal(goal,clauses,registry,root)
     return _compile_single_goal(goal,registry,root)
