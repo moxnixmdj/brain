@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T00:25:41.307866+00:00",
+  "mission_id": "ASTRA-EVIDENCE-BUNDLE-COMPILER-DIAG-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_EVIDENCE_BUNDLE_COMPILER_DIAG_002.json",
+  "mission_sha256": "4ac06bcae4fd4b869bf26f287f6e9909730a5d0d3fb38b3ba8bc2708db45cf84",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "c0c350411450d0725e201db512265f3ed7e333d624e81b8077ed9960b256b3e7",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
