@@ -23,43 +23,36 @@ def _import_openpyxl():
         import openpyxl
         return openpyxl
 
-def _find_collection(data,wanted,path=()):
-    if isinstance(data,dict):
-        if data and all(isinstance(v,dict) for v in data.values()):
-            if any(wanted in rec.values() for rec in data.values()):
-                return path,data
-        for k,v in data.items():
-            found=_find_collection(v,wanted,path+(str(k),))
-            if found is not None:
-                return found
+def _record_items(node):
+    if isinstance(node,list) and node and all(isinstance(v,dict) for v in node):
+        return [(str(i),v) for i,v in enumerate(node)]
+    if isinstance(node,dict) and node and all(isinstance(v,dict) for v in node.values()):
+        return [(str(k),v) for k,v in sorted(node.items(),key=lambda kv:str(kv[0]))]
     return None
 
-def _status_value(goal,data):
-    for token in re.findall(r"\b[A-Z][A-Z0-9_]{3,}\b",str(goal or "")):
-        if _find_collection(data,token) is not None:
-            return token
-    # If the clause does not repeat the status literal, infer it from the
-    # source records only when there is exactly one unambiguous non-empty
-    # status value. This preserves fail-closed behavior while allowing a
-    # causally produced normalized JSON artifact to carry its own semantics.
+def _candidate_collections(node,path=()):
+    out=[]
+    items=_record_items(node)
+    if items is not None:
+        out.append((path,node))
+    if isinstance(node,dict):
+        for k,v in node.items():
+            out.extend(_candidate_collections(v,path+(str(k),)))
+    elif isinstance(node,list):
+        for i,v in enumerate(node):
+            if isinstance(v,(dict,list)):
+                out.extend(_candidate_collections(v,path+(str(i),)))
+    return out
+
+def _status_value_from_records(records):
     values=set()
-    def walk(node):
-        if isinstance(node,dict):
-            if "status" in node and not isinstance(node.get("status"),(dict,list)):
-                value=str(node.get("status") or "").strip()
-                if value:
-                    values.add(value)
-            for value in node.values():
-                walk(value)
-        elif isinstance(node,list):
-            for value in node:
-                walk(value)
-    walk(data)
-    if len(values)==1:
-        candidate=next(iter(values))
-        if _find_collection(data,candidate) is not None:
-            return candidate
-    raise RuntimeError("XLSX_STATUS_VALUE_UNRESOLVED")
+    for _,record in _record_items(records) or []:
+        value=record.get("status")
+        if value is not None and not isinstance(value,(dict,list)):
+            text=str(value).strip()
+            if text:
+                values.add(text)
+    return next(iter(values)) if len(values)==1 else None
 
 def _columns(goal):
     m=re.search(r"\bcolumns?\s+(.+?)(?=\.\s|\bfinally\b|$)",str(goal or ""),flags=re.I)
@@ -89,6 +82,27 @@ def _cell(record,key,column):
         return ""
     return value
 
+def _select_collection(data,columns):
+    valid=[]
+    for path,node in _candidate_collections(data):
+        items=_record_items(node) or []
+        if not items:
+            continue
+        try:
+            for key,record in items:
+                for column in columns:
+                    _cell(record,key,column)
+        except RuntimeError:
+            continue
+        valid.append((path,node))
+    if not valid:
+        raise RuntimeError("XLSX_RECORD_COLLECTION_NOT_FOUND")
+    min_depth=min(len(path) for path,_ in valid)
+    best=[x for x in valid if len(x[0])==min_depth]
+    if len(best)!=1:
+        raise RuntimeError("XLSX_RECORD_COLLECTION_AMBIGUOUS:"+json.dumps([list(p) for p,_ in best]))
+    return best[0]
+
 def _norm(v):
     return "" if v is None else v
 
@@ -97,11 +111,6 @@ def run(args,root):
     workbook_path=_safe(root,args.get("xlsx_path"))
     data=json.loads(source.read_text(encoding="utf-8"))
     goal=str(args.get("goal") or "")
-    wanted=_status_value(goal,data)
-    found=_find_collection(data,wanted)
-    if found is None:
-        raise RuntimeError("XLSX_STATUS_COLLECTION_NOT_FOUND")
-    _,records=found
 
     # Verification clauses need not repeat the producer's column declaration.
     # Reopen the artifact, treat its header row as the claimed schema, then
@@ -119,14 +128,18 @@ def run(args,root):
     cols=[str(x or "").strip() for x in rows[0]]
     if not cols or any(not x for x in cols) or len(set(cols))!=len(cols):
         raise RuntimeError("XLSX_HEADER_INVALID:"+json.dumps(cols))
-    if not cols or not (cols[0]=="capability_id" or cols[0].endswith("_id")):
-        raise RuntimeError("XLSX_ID_COLUMN_REQUIRED")
 
+    _,records=_select_collection(data,cols)
+    wanted=_status_value_from_records(records)
     expected={}
-    for key,record in sorted(records.items()):
-        if wanted not in record.values():
-            continue
-        expected[str(key)]=[_cell(record,str(key),c) for c in cols]
+    for key,record in _record_items(records) or []:
+        row=[_cell(record,str(key),c) for c in cols]
+        identity=str(row[0])
+        if not identity:
+            raise RuntimeError("XLSX_EMPTY_ROW_ID")
+        if identity in expected:
+            raise RuntimeError("XLSX_DUPLICATE_SOURCE_ID:"+identity)
+        expected[identity]=row
     observed={}
     for row in rows[1:]:
         values=[_norm(x) for x in row[:len(cols)]]
