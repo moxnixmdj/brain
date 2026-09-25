@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T19:27:17.120106+00:00",
+  "mission_id": "ASTRA-RUNTIME-INDEPENDENT-CODEC-VERIFIER-BSON-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_INDEPENDENT_CODEC_VERIFIER_BSON_002.json",
+  "mission_sha256": "096984aed6f39f49e5f2612c6d7db6a0ccf454b0483fde29305c397d82a12a1a",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "93452aaf5fe0c44d48571ac70fa25bfc8990a1b92e3bc1c9f2fdaa24452f2241",
+  "status": "COMPLETE",
+  "steps_completed": 2
+}
