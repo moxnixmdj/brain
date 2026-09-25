@@ -1,0 +1,14 @@
+{
+  "document_ready_state": "complete",
+  "final_url": "https://jsonplaceholder.typicode.com/this-endpoint-does-not-exist",
+  "observed_text": "{}",
+  "page_title": "",
+  "screenshot_bytes": 6534,
+  "screenshot_path": "canonical/astra_runtime/tmp/FALLBACK_PRIMARY.png",
+  "screenshot_sha256": "4280ba8b003b501c00d8076e023528fb2cef01110760e33d762ae0c9545000f2",
+  "source_url": "https://jsonplaceholder.typicode.com/this-endpoint-does-not-exist",
+  "viewport": {
+    "height": 857,
+    "width": 1440
+  }
+}

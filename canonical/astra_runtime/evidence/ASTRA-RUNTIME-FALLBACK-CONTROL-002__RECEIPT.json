@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T16:41:49.761235+00:00",
+  "mission_id": "ASTRA-RUNTIME-FALLBACK-CONTROL-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_FALLBACK_CONTROL_002.json",
+  "mission_sha256": "cd859674358c1336aa3793783b5537c91a79f0b988163ef6ac5337d342d37ed3",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "4c6577ff639c79cf9663fcfd8f8155532c7a79e1322bf64cb28470e2a4989997",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

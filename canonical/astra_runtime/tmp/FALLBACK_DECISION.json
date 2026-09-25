@@ -1,0 +1,7 @@
+{
+  "fallback_url": "https://jsonplaceholder.typicode.com/users",
+  "final_url": "https://jsonplaceholder.typicode.com/users",
+  "item_count": 10,
+  "primary_url": "https://jsonplaceholder.typicode.com/this-endpoint-does-not-exist",
+  "used_fallback": true
+}

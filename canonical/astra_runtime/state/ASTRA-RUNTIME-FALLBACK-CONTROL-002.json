@@ -1,0 +1,200 @@
+{
+  "completed_at_utc": "2026-09-25T16:41:49.759982+00:00",
+  "created_at_utc": "2026-09-25T16:41:36.156330+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T16:41:49.759574+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "goal",
+        "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+        "cycles": 3,
+        "final_summary": "COMPOUND_GOAL_COMPLETE",
+        "goal_compilation": {
+          "clauses": [
+            "Using a real rendered browser, open https://jsonplaceholder.typicode.com/this-endpoint-does-not-exist, save a screenshot to canonical/astra_runtime/tmp/FALLBACK_PRIMARY.png, and save the rendered result to canonical/astra_runtime/tmp/FALLBACK_PRIMARY.json",
+            "If the rendered primary result is not a JSON array containing at least one item, fall back to https://jsonplaceholder.typicode.com/users, save a screenshot to canonical/astra_runtime/tmp/FALLBACK_SECONDARY.png, and save the rendered result to canonical/astra_runtime/tmp/FALLBACK_SECONDARY.json",
+            "Create canonical/astra_runtime/tmp/FALLBACK_DECISION.json containing primary_url, fallback_url, used_fallback, final_url, and item_count",
+            "Finally independently verify the primary result was not a nonempty JSON array, the fallback result was a nonempty JSON array, used_fallback is true, final_url is the fallback URL, and item_count equals the fallback array length"
+          ],
+          "compiled_parts": [
+            {
+              "index": 0,
+              "inputs": {
+                "result_path": "canonical/astra_runtime/tmp/FALLBACK_PRIMARY.json",
+                "screenshot_path": "canonical/astra_runtime/tmp/FALLBACK_PRIMARY.png",
+                "url": "https://jsonplaceholder.typicode.com/this-endpoint-does-not-exist"
+              },
+              "mode": "VERIFIED_PRIMARY_CAPABILITY",
+              "score": 30,
+              "selected_capability": "web.browser.rendered.capture.chromedriver",
+              "subgoal": "Using a real rendered browser, open https://jsonplaceholder.typicode.com/this-endpoint-does-not-exist, save a screenshot to canonical/astra_runtime/tmp/FALLBACK_PRIMARY.png, and save the rendered result to canonical/astra_runtime/tmp/FALLBACK_PRIMARY.json",
+              "target_effects": [
+                "web.browser.rendered.capture",
+                "web.browser.rendered.interact"
+              ]
+            },
+            {
+              "fallback_capability": "web.browser.rendered.capture.chromedriver",
+              "fallback_result_path": "canonical/astra_runtime/tmp/FALLBACK_SECONDARY.json",
+              "fallback_url": "https://jsonplaceholder.typicode.com/users",
+              "index": 1,
+              "mode": "RUNTIME_POSTCONDITION_FALLBACK",
+              "primary_result_path": "canonical/astra_runtime/tmp/FALLBACK_PRIMARY.json",
+              "primary_url": "https://jsonplaceholder.typicode.com/this-endpoint-does-not-exist",
+              "subgoal": "If the rendered primary result is not a JSON array containing at least one item, fall back to https://jsonplaceholder.typicode.com/users, save a screenshot to canonical/astra_runtime/tmp/FALLBACK_SECONDARY.png, and save the rendered result to canonical/astra_runtime/tmp/FALLBACK_SECONDARY.json"
+            },
+            {
+              "decision_path": "canonical/astra_runtime/tmp/FALLBACK_DECISION.json",
+              "fields": [
+                "primary_url",
+                "fallback_url",
+                "used_fallback",
+                "final_url",
+                "item_count"
+              ],
+              "index": 2,
+              "mode": "RUNTIME_FALLBACK_DECISION_SPEC",
+              "subgoal": "Create canonical/astra_runtime/tmp/FALLBACK_DECISION.json containing primary_url, fallback_url, used_fallback, final_url, and item_count"
+            },
+            {
+              "decision_path": "canonical/astra_runtime/tmp/FALLBACK_DECISION.json",
+              "fallback_path": "canonical/astra_runtime/tmp/FALLBACK_SECONDARY.json",
+              "index": 3,
+              "mode": "INDEPENDENT_RUNTIME_FALLBACK_VERIFICATION",
+              "primary_path": "canonical/astra_runtime/tmp/FALLBACK_PRIMARY.json",
+              "subgoal": "Finally independently verify the primary result was not a nonempty JSON array, the fallback result was a nonempty JSON array, used_fallback is true, final_url is the fallback URL, and item_count equals the fallback array length"
+            }
+          ],
+          "compiler_mode": "DETERMINISTIC_RUNTIME_FALLBACK_PLAN"
+        },
+        "planner_model_last": null,
+        "planner_source": null,
+        "planner_transport": null,
+        "planning_mode": "DETERMINISTIC_RUNTIME_FALLBACK_PLAN",
+        "returncode": 0,
+        "stdout": "COMPOUND_GOAL_COMPLETE",
+        "trace": [
+          {
+            "cycle": 0,
+            "plan": {
+              "args": {
+                "decision_path": "canonical/astra_runtime/tmp/FALLBACK_DECISION.json",
+                "fallback_action": {
+                  "args": {
+                    "capability_id": "web.browser.rendered.capture.chromedriver",
+                    "result_path": "canonical/astra_runtime/tmp/FALLBACK_SECONDARY.json",
+                    "screenshot_path": "canonical/astra_runtime/tmp/FALLBACK_SECONDARY.png",
+                    "url": "https://jsonplaceholder.typicode.com/users"
+                  },
+                  "expect": {
+                    "field": "output_verified",
+                    "type": "field_equals",
+                    "value": true
+                  },
+                  "type": "invoke_capability"
+                },
+                "fallback_postcondition": {
+                  "path": "canonical/astra_runtime/tmp/FALLBACK_SECONDARY.json",
+                  "type": "json_observed_text_nonempty_array"
+                },
+                "primary_action": {
+                  "args": {
+                    "capability_id": "web.browser.rendered.capture.chromedriver",
+                    "result_path": "canonical/astra_runtime/tmp/FALLBACK_PRIMARY.json",
+                    "screenshot_path": "canonical/astra_runtime/tmp/FALLBACK_PRIMARY.png",
+                    "url": "https://jsonplaceholder.typicode.com/this-endpoint-does-not-exist"
+                  },
+                  "expect": {
+                    "field": "output_verified",
+                    "type": "field_equals",
+                    "value": true
+                  },
+                  "type": "invoke_capability"
+                },
+                "primary_postcondition": {
+                  "path": "canonical/astra_runtime/tmp/FALLBACK_PRIMARY.json",
+                  "type": "json_observed_text_nonempty_array"
+                }
+              },
+              "expect": {
+                "field": "output_verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability_fallback"
+            },
+            "result": {
+              "decision_path": "canonical/astra_runtime/tmp/FALLBACK_DECISION.json",
+              "fallback_url": "https://jsonplaceholder.typicode.com/users",
+              "final_evaluation": {
+                "item_count": 10,
+                "ok": true
+              },
+              "final_url": "https://jsonplaceholder.typicode.com/users",
+              "item_count": 10,
+              "output_verified": true,
+              "primary_evaluation": {
+                "item_count": 0,
+                "ok": false
+              },
+              "primary_url": "https://jsonplaceholder.typicode.com/this-endpoint-does-not-exist",
+              "type": "invoke_capability_fallback",
+              "used_fallback": true
+            }
+          },
+          {
+            "cycle": 1,
+            "plan": {
+              "args": {
+                "decision_path": "canonical/astra_runtime/tmp/FALLBACK_DECISION.json",
+                "fallback_path": "canonical/astra_runtime/tmp/FALLBACK_SECONDARY.json",
+                "fallback_url": "https://jsonplaceholder.typicode.com/users",
+                "primary_path": "canonical/astra_runtime/tmp/FALLBACK_PRIMARY.json",
+                "primary_url": "https://jsonplaceholder.typicode.com/this-endpoint-does-not-exist"
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "assert_runtime_fallback_decision"
+            },
+            "result": {
+              "expected_item_count": 10,
+              "expected_used_fallback": true,
+              "failures": [],
+              "fallback_nonempty_array": true,
+              "primary_nonempty_array": false,
+              "type": "assert_runtime_fallback_decision",
+              "verified": true
+            }
+          },
+          {
+            "cycle": 2,
+            "plan": {
+              "args": {
+                "summary": "COMPOUND_GOAL_COMPLETE"
+              },
+              "type": "finish"
+            },
+            "result": {
+              "summary": "COMPOUND_GOAL_COMPLETE",
+              "type": "finish"
+            }
+          }
+        ]
+      },
+      "step_id": "run-runtime-fallback",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-RUNTIME-FALLBACK-CONTROL-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_FALLBACK_CONTROL_002.json",
+  "mission_sha256": "cd859674358c1336aa3793783b5537c91a79f0b988163ef6ac5337d342d37ed3",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T16:41:49.759590+00:00"
+}
