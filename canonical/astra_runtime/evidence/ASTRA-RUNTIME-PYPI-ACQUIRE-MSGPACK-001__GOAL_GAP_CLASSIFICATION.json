@@ -1,0 +1,10 @@
+{
+  "capability_acquisition_allowed": true,
+  "compile_error": "GOAL_COMPILATION_FAILED:GOAL_COMPILATION_SUBGOAL_UNRESOLVED:{\"cause\": \"GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH\", \"cause_detail\": null, \"clauses\": [\"Create canonical/astra_runtime/tmp/MSGPACK_SOURCE.json containing exactly three records with fields id and text: 1 alpha, 2 beta, 3 gamma\", \"Encode those exact records as MessagePack and save canonical/astra_runtime/tmp/MSGPACK_RECORDS.msgpack\", \"Independently decode the MessagePack artifact and verify the decoded records are exactly identical to canonical/astra_runtime/tmp/MSGPACK_SOURCE.json in values, order, field names, and record count\"], \"compiled_prefix\": [], \"context_paths\": [], \"index\": 0, \"subgoal\": \"Create canonical/astra_runtime/tmp/MSGPACK_SOURCE.json containing exactly three records with fields id and text: 1 alpha, 2 beta, 3 gamma\"}",
+  "gap_class": "CAPABILITY_CANDIDATE",
+  "mission_id": "ASTRA-RUNTIME-PYPI-ACQUIRE-MSGPACK-001",
+  "observed_at_utc": "2026-09-25T18:15:08.133682+00:00",
+  "policy": "ONLY_CAPABILITY_CANDIDATE_MAY_TRIGGER_EXTERNAL_CAPABILITY_ACQUISITION",
+  "schema": "PROJECT_BRAIN_GOAL_GAP_CLASSIFICATION_V1",
+  "subgoal": "Create canonical/astra_runtime/tmp/MSGPACK_SOURCE.json containing exactly three records with fields id and text: 1 alpha, 2 beta, 3 gamma"
+}
