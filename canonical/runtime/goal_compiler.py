@@ -1828,6 +1828,10 @@ def _compile_dynamic_fanout_goal(goal, clauses, registry, root):
        "source_path":context_paths[0]},
       {"index":2,"subgoal":clauses[2],"mode":"RUNTIME_DYNAMIC_CAPABILITY_FANOUT",
        **fanout["evidence"]},
+      {"index":3,"subgoal":clauses[3],"mode":"RUNTIME_FANOUT_OUTPUT_SPEC",
+       "output_dir":fanout["evidence"]["output_dir"]},
+      {"index":4,"subgoal":clauses[4],"mode":"RUNTIME_FANOUT_MANIFEST_SPEC",
+       "manifest_path":fanout["evidence"]["manifest_path"]},
     ]
 
     # Clauses 3 and 4 are consumed by the fanout operator as output-dir and
@@ -2293,17 +2297,53 @@ def _compile_compound_goal(goal, clauses, registry, root):
     }
 
 
+def _validate_compiled_clause_coverage(compiled):
+    if not isinstance(compiled,dict):
+        raise GoalCompilationFailure("COMPILED_PLAN_INVALID")
+    clauses=compiled.get("clauses")
+    parts=compiled.get("compiled_parts")
+    if clauses is None and parts is None:
+        return compiled
+    if not isinstance(clauses,list) or not isinstance(parts,list):
+        raise GoalCompilationFailure("COMPILED_CLAUSE_COVERAGE_METADATA_INVALID")
+    indexes=[]
+    for part in parts:
+        if not isinstance(part,dict) or not isinstance(part.get("index"),int):
+            raise GoalCompilationFailure("COMPILED_CLAUSE_INDEX_INVALID")
+        indexes.append(part["index"])
+    expected=list(range(len(clauses)))
+    if sorted(indexes)!=expected:
+        missing=sorted(set(expected)-set(indexes))
+        duplicate=sorted({x for x in indexes if indexes.count(x)>1})
+        extra=sorted(set(indexes)-set(expected))
+        raise GoalCompilationFailure(
+            "COMPILED_CLAUSE_COVERAGE_INCOMPLETE",
+            json.dumps({
+              "missing":missing,
+              "duplicate":duplicate,
+              "extra":extra,
+              "clause_count":len(clauses),
+              "compiler_mode":compiled.get("compiler_mode"),
+            },sort_keys=True)
+        )
+    compiled=dict(compiled)
+    compiled["clause_coverage_verified"]=True
+    return compiled
+
+
 def compile_goal(goal, registry, root):
     goal=str(goal or "").strip()
     if not goal:
         raise GoalCompilationFailure("GOAL_REQUIRED")
     browser_interaction=_compile_verified_browser_interaction(goal,registry,root)
     if browser_interaction is not None:
-        return browser_interaction
+        return _validate_compiled_clause_coverage(browser_interaction)
     clauses=decompose_goal(goal)
     dynamic_fanout=_compile_dynamic_fanout_goal(goal,clauses,registry,root)
     if dynamic_fanout is not None:
-        return dynamic_fanout
+        return _validate_compiled_clause_coverage(dynamic_fanout)
     if len(clauses)>1:
-        return _compile_compound_goal(goal,clauses,registry,root)
+        return _validate_compiled_clause_coverage(
+            _compile_compound_goal(goal,clauses,registry,root)
+        )
     return _compile_single_goal(goal,registry,root)
