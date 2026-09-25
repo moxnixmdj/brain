@@ -3954,29 +3954,60 @@ def _render_bound_template(value, inputs):
         return out
     return value
 
-def _validate_effect_aliases(raw_aliases, declared, field, instance_id):
-    aliases=raw_aliases or {}
-    if not isinstance(aliases,dict):
+def _validate_effect_aliases(
+    raw_aliases, declared, field, instance_id, allow_repeat_source=False
+):
+    if raw_aliases is None:
+        pairs=[]
+    elif isinstance(raw_aliases,dict):
+        pairs=list(raw_aliases.items())
+    elif isinstance(raw_aliases,list):
+        pairs=[]
+        for item in raw_aliases:
+            if not isinstance(item,dict) or set(item)!={"effect","as"}:
+                raise Blocker(
+                    "CAPABILITY_INSTANCE_"+field.upper()+"_ALIASES_INVALID:"+instance_id
+                )
+            pairs.append((item["effect"],item["as"]))
+    else:
         raise Blocker("CAPABILITY_INSTANCE_"+field.upper()+"_ALIASES_INVALID:"+instance_id)
     declared_set={str(x) for x in declared or []}
-    unknown=sorted(str(k) for k in aliases if str(k) not in declared_set)
-    if unknown:
-        raise Blocker(
-            "CAPABILITY_INSTANCE_"+field.upper()+"_ALIAS_SOURCE_UNKNOWN:"
-            +instance_id+":"+",".join(unknown)
-        )
-    out={}
-    for key,value in aliases.items():
+    out=[]
+    seen_sources=set()
+    seen_targets=set()
+    for key,value in pairs:
         src=str(key).strip()
         dst=str(value).strip()
-        if not src or not dst:
+        if src not in declared_set:
+            raise Blocker(
+                "CAPABILITY_INSTANCE_"+field.upper()+"_ALIAS_SOURCE_UNKNOWN:"
+                +instance_id+":"+src
+            )
+        if not src or not dst or dst in seen_targets:
             raise Blocker("CAPABILITY_INSTANCE_"+field.upper()+"_ALIAS_INVALID:"+instance_id)
-        out[src]=dst
+        if src in seen_sources and not allow_repeat_source:
+            raise Blocker(
+                "CAPABILITY_INSTANCE_"+field.upper()+"_ALIAS_SOURCE_DUPLICATE:"+instance_id+":"+src
+            )
+        seen_sources.add(src)
+        seen_targets.add(dst)
+        out.append((src,dst))
     return out
 
 
 def _alias_effects(effects,aliases):
-    return [aliases.get(str(effect),str(effect)) for effect in effects or []]
+    grouped={}
+    for src,dst in aliases:
+        grouped.setdefault(str(src),[]).append(str(dst))
+    out=[]
+    for effect in effects or []:
+        source=str(effect)
+        targets=grouped.get(source)
+        if targets:
+            out.extend(targets)
+        else:
+            out.append(source)
+    return out
 
 
 def _inherit_verified_capabilities(problem):
@@ -4021,10 +4052,12 @@ def _inherit_verified_capabilities(problem):
         except Blocker as exc:
             raise Blocker("CAPABILITY_INSTANCE_BINDING_FAILED:"+instance_id+":"+str(exc)) from exc
         require_aliases=_validate_effect_aliases(
-            raw.get("requires_as"),entry.get("requires") or [],"requires",instance_id
+            raw.get("requires_as"),entry.get("requires") or [],"requires",instance_id,
+            allow_repeat_source=True,
         )
         provide_aliases=_validate_effect_aliases(
-            raw.get("provides_as"),entry.get("provides") or [],"provides",instance_id
+            raw.get("provides_as"),entry.get("provides") or [],"provides",instance_id,
+            allow_repeat_source=False,
         )
         caps.append({
           "id":instance_id,
@@ -4039,8 +4072,8 @@ def _inherit_verified_capabilities(problem):
         instantiated.append({
           "instance_id":instance_id,
           "capability_id":cid,
-          "requires_as":require_aliases,
-          "provides_as":provide_aliases,
+          "requires_as":[{"effect":src,"as":dst} for src,dst in require_aliases],
+          "provides_as":[{"effect":src,"as":dst} for src,dst in provide_aliases],
         })
 
     for cid,entry in sorted(registry.items()):
