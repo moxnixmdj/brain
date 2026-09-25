@@ -62,7 +62,10 @@ def main():
     version,match=stable_release(browser.get("text") or "")
     if not version:
         raise RuntimeError("RENDERED_STABLE_RELEASE_NOT_FOUND")
-    req=urllib.request.Request(url,headers={"User-Agent":"ProjectBrain-IndependentVerifier/1"})
+    req=urllib.request.Request(url,headers={
+      "User-Agent":"ProjectBrain-IndependentVerifier/1",
+      "Accept-Encoding":"identity"
+    })
     with urllib.request.urlopen(req,timeout=30) as r:
         raw=r.read(2_000_000)
         final=r.geturl()
