@@ -68,7 +68,8 @@ def effect_queries(effect):
         if token not in target:
             target.append(token)
     out=[]
-    for token in distinctive+generic:
+    source=distinctive if distinctive else generic
+    for token in source:
         if token not in out:
             out.append(token)
     if not out:
