@@ -2220,6 +2220,8 @@ def _classify_plain_goal_gap(text):
         or "from the previous result" in lower
         or "from the live result" in lower
         or "using both live results" in lower
+        or "from these two live datasets" in lower
+        or "from both live datasets" in lower
         or (
             re.search(r"\b(?:join|merge|combine)\b",lower)
             and re.search(r"\b(?:live|result|source|collection|records?)\b",lower)
