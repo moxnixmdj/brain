@@ -32,5 +32,9 @@ class RuntimeVerificationTests(unittest.TestCase):
         result={"adapter":"shell","returncode":7,"stdout":"EXPECTED"}
         self.assertTrue(runtime.verify(step,result))
 
+    def test_python_source_verifier_has_ast_parser(self):
+        tree=runtime.ast.parse("def f():\n    return 1\n")
+        self.assertEqual(tree.body[0].name,"f")
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
