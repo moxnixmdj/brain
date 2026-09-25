@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-PYPI-BSON-DISCOVERY-DIAG-004",
+  "purpose": "Verify PyPI ranking prefers requested-format project names over incidental substring matches.",
+  "steps": [
+    {
+      "id": "discover-bson-candidates",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,pathlib,json\np=pathlib.Path('canonical/runtime/capability_discovery.py')\ns=importlib.util.spec_from_file_location('cd',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\ngoal='Encode those exact records as BSON and save canonical/astra_runtime/tmp/BSON_RECORDS.bson'\nout=m.search_pypi_packages(goal,limit=20,timeout_s=20)\nc=out.get('candidates') or []\nnames=[str(x.get('name') or '') for x in c]\nprint(json.dumps([{'name':x.get('name'),'score':x.get('score')} for x in c[:15]],sort_keys=True))\nassert any(n.lower().startswith('bson') for n in names[:12]),names[:12]\nprint('PYPI_BSON_FORMAT_RANKING_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "PYPI_BSON_FORMAT_RANKING_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "read_only_diagnostic": true
+  }
+}
