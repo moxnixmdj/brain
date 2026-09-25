@@ -16,6 +16,10 @@
   "constraints": {
     "incremental_spend_usd": 0,
     "model_controller_required": false,
-    "read_only_diagnostic": true
+    "read_only_diagnostic": true,
+    "replay_after_runtime_choice_action_commit": "561feef82be2235082ee0b91103f9c99b6a4d9f0",
+    "replay_after_zbar_decoder_commit": "c193dfd81e0e03a65c06564a493d576889399fc0",
+    "replay_after_choice_compiler_commit": "7f8796634203f98be8337dd186dc12ec602c2180",
+    "replay_after_choice_verifier_commit": "f31b837042cfb8745d3a9b447f201d1121253f8c"
   }
 }
