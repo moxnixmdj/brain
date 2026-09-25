@@ -79,5 +79,121 @@ class CapabilityPlannerTests(unittest.TestCase):
         self.assertEqual(out["actions"][-1]["args"]["summary"], "CAPABILITY_GRAPH_GOAL_COMPLETE")
 
 
+    def test_plan_actions_wires_prior_effect_result_into_consumer(self):
+        problem = {
+            "initial_facts": [],
+            "target_effects": ["record.written"],
+            "capabilities": [
+                {
+                    "id": "learn-value",
+                    "requires": [],
+                    "provides": ["knowledge.value.available"],
+                    "result_fields": ["value"],
+                    "cost": 1,
+                    "action": {"type": "fetch_json_knowledge", "args": {"url": "https://example.test/value"}}
+                },
+                {
+                    "id": "write-value",
+                    "requires": ["knowledge.value.available"],
+                    "provides": ["record.written"],
+                    "cost": 1,
+                    "action": {
+                        "type": "write_json_records",
+                        "args": {
+                            "value": {
+                                "$effect_result": {
+                                    "effect": "knowledge.value.available",
+                                    "field": "value"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+        out = planner.plan_actions(problem)
+        self.assertEqual(out["planning"]["plan"], ["learn-value", "write-value"])
+        self.assertEqual(
+            out["actions"][1]["args"]["value"],
+            {"$result": {"cycle": 0, "field": "value"}},
+        )
+
+    def test_effect_result_binding_rejects_undeclared_provider_field(self):
+        problem = {
+            "initial_facts": [],
+            "target_effects": ["record.written"],
+            "capabilities": [
+                {
+                    "id": "learn-value",
+                    "requires": [],
+                    "provides": ["knowledge.value.available"],
+                    "result_fields": [],
+                    "cost": 1,
+                    "action": {"type": "fetch_json_knowledge", "args": {}}
+                },
+                {
+                    "id": "write-value",
+                    "requires": ["knowledge.value.available"],
+                    "provides": ["record.written"],
+                    "cost": 1,
+                    "action": {
+                        "type": "write_json_records",
+                        "args": {
+                            "value": {
+                                "$effect_result": {
+                                    "effect": "knowledge.value.available",
+                                    "field": "value"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+        with self.assertRaisesRegex(
+            planner.PlanningFailure,
+            "BINDING_RESULT_FIELD_UNDECLARED:learn-value:value",
+        ):
+            planner.plan_actions(problem)
+
+    def test_effect_result_binding_must_correspond_to_required_effect(self):
+        problem = {
+            "initial_facts": [],
+            "target_effects": ["record.written"],
+            "capabilities": [
+                {
+                    "id": "learn-value",
+                    "requires": [],
+                    "provides": ["knowledge.value.available"],
+                    "result_fields": ["value"],
+                    "cost": 1,
+                    "action": {"type": "fetch_json_knowledge", "args": {}}
+                },
+                {
+                    "id": "write-value",
+                    "requires": ["knowledge.value.available"],
+                    "provides": ["record.written"],
+                    "cost": 1,
+                    "action": {
+                        "type": "write_json_records",
+                        "args": {
+                            "value": {
+                                "$effect_result": {
+                                    "effect": "unrelated.effect",
+                                    "field": "value"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+        with self.assertRaisesRegex(
+            planner.PlanningFailure,
+            "BINDING_EFFECT_NOT_REQUIRED:write-value:unrelated.effect",
+        ):
+            planner.plan_actions(problem)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
