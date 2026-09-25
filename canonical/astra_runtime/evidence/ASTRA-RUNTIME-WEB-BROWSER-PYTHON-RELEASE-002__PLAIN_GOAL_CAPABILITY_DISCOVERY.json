@@ -1,0 +1,2724 @@
+{
+  "auto_acquisition": {
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"armnn-latest-all\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"armnn-latest-ref\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:E: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/x/xdg-desktop-portal/xdg-desktop-portal_1.18.4-1ubuntu2.24.04.2_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\\n\", \"name\": \"cairo-dock-dbus-plug-in-interface-python\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"claws-mail-python-plugin\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"colortest-python\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"dh-python\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"dico-module-python\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-python-environment\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"eog-plugin-python-console\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"ironic-python-agent\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:E: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\\n\", \"name\": \"kdevelop-python\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"kdevelop-python-data\", \"status\": \"CONTRACT_REJECTED\"}]",
+    "status": "NOT_DISPATCHED"
+  },
+  "binding_performed": false,
+  "goal": "Using a real rendered browser, open https://www.python.org/downloads/. Determine the latest stable Python 3 release shown on the page. Save a full-page screenshot to canonical/astra_runtime/tmp/PYTHON_DOWNLOADS.png and save canonical/astra_runtime/tmp/PYTHON_DOWNLOADS_RESULT.json containing source_url, final_url, page_title, latest_stable_python3, and observed_text_evidence. Finally independently verify from the official Python downloads page, without trusting the browser extraction, that the claimed latest_stable_python3 string is present and corresponds to the current stable Python 3 release shown there.",
+  "mission_id": "ASTRA-RUNTIME-WEB-BROWSER-PYTHON-RELEASE-002",
+  "observed_at_utc": "2026-09-25T02:19:31.922306+00:00",
+  "result": {
+    "binding_performed": false,
+    "candidates": [
+      {
+        "archive_sha256": "b5b40edb9994939f44d7b61998d5e897bf3b8eaeb2565a5e09db4b40dce1e3fb",
+        "binding_kind": "apt",
+        "description": "Arm NN Core and all backends",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "latest"
+        ],
+        "name": "armnn-latest-all",
+        "packages": [],
+        "query": "latest",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "23.08-4.1build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "51ae5767c57aaa1689bfcf877268d813c6878ce3c559ca4a240dcba514795364",
+        "binding_kind": "apt",
+        "description": "Arm NN Core and Reference backend",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "latest"
+        ],
+        "name": "armnn-latest-ref",
+        "packages": [],
+        "query": "latest",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "23.08-4.1build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c7951529483042d42cc35f0d14b332f315e37f82092fb82a309db6c067803cf0",
+        "binding_kind": "apt",
+        "description": "library of D-Bus interface for Python of Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "cairo-dock-dbus-plug-in-interface-python",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "a600a70509759e09f0e04c6f0b2d510a0f3531b45092ee8f4c727b05beae9b95",
+        "binding_kind": "apt",
+        "description": "Python plugin and console for Claws Mail",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "claws-mail-python-plugin",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "4.2.0-2build7",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "5950fb9db8bb176d1f104299be602ae59c8da7eaad84fb429908033c9e37e33b",
+        "binding_kind": "apt",
+        "description": "utility to test color capabilities of terminal",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "colortest-python",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.0.2-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "cbe3ee89359a799c7ce21d374b8e0fb39f9a6d1b4a404481b4f1659a8a4cc8e8",
+        "binding_kind": "apt",
+        "description": "Debian helper tools for packaging Python libraries and applications",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "dh-python",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.20240401",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "7fb4a902f67d93c5a4dc1ffea201151b30dca4e9ebe3ed73d523c46fccfb65a2",
+        "binding_kind": "apt",
+        "description": "RFC 2229 compliant modular dictionary server (Python module)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "dico-module-python",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.11-4.1build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d865bb9515b41928ab792360724cd9ecfbd596671ce260c0a1111b84495de6b6",
+        "binding_kind": "apt",
+        "description": "virtualenv API for Emacs Lisp",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "elpa-python-environment",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.0.2-6",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "74eb3028c96572fa977456173728629def25cc7dbda6f46f98d9e1c680882d2a",
+        "binding_kind": "apt",
+        "description": "Python Console plugin for GNOME Image Viewer",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "eog-plugin-python-console",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "44.0-2build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": null,
+        "binding_kind": "apt",
+        "description": "The web browser from Google",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "stable"
+        ],
+        "name": "google-chrome-stable",
+        "packages": [],
+        "query": "stable",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "153.0.8010.52-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "0e2e78a5d0a1d15f6f966d5d8f7f3603b0cfd70f9d1578f742fcc139596424aa",
+        "binding_kind": "apt",
+        "description": "bare metal hypervisor API for OpenStack - Python Agent",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "ironic-python-agent",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "9.1.0-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c00a28811d34479677149b6bdb9616522d8cbf7b722fb220487af88342196133",
+        "binding_kind": "apt",
+        "description": "Python 3 plugin for KDevelop",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "kdevelop-python",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "23.08.5-0ubuntu4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "1463fc465281e5ddffa7a7421c07d37aca506221d4dae78814c7571c050dae84",
+        "binding_kind": "apt",
+        "description": "Python 3 plugin for KDevelop - data files",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "kdevelop-python-data",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "23.08.5-0ubuntu4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "2a2d40e8e4e9cd0376a7752006fddd289b7bec5a0e847570420da5c87bbd3f28",
+        "binding_kind": "apt",
+        "description": "localization files for KDevelop Python 3 plugin",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "kdevelop-python-l10n",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "23.08.5-0ubuntu4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "eaba4a4694675c74a6933476401f51b777fa10cbaf575e990189ce5a5c2612bd",
+        "binding_kind": "apt",
+        "description": "Open Source Home Theatre (Event Client Python package)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "kodi-eventclients-python",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2:20.5+dfsg-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": null,
+        "binding_kind": "apt",
+        "description": "The web browser from Microsoft",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "stable"
+        ],
+        "name": "microsoft-edge-stable",
+        "packages": [],
+        "query": "stable",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "153.0.4234.48-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "81af33f997dec78daaef96b3b3d261c667eecb007f38960cd4a763cff575d7f3",
+        "binding_kind": "apt",
+        "description": "Python handler for mkdocstrings",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "mkdocstrings-python-handlers",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.8.0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "b71427b2da95486eba92e46e16df9059d6345c28adcdde300c61fc2310667644",
+        "binding_kind": "apt",
+        "description": "Legacy Python handler for mkdocstrings",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "mkdocstrings-python-legacy",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.2.3-6",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "00d62d9b9b02d9301f7b4be99621b155e09b23745e71130fff3999f8265f88e0",
+        "binding_kind": "apt",
+        "description": "Python plugin for nbdkit",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "nbdkit-plugin-python",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.36.3-1ubuntu10",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "9018a1b7eae97693ad432370789ba047bfdb3bd779e7bcf0a552c32393201fd7",
+        "binding_kind": "apt",
+        "description": "Python bindings for nemo components",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "nemo-python",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.0.0+ds-1build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "11de2658672dbf7b8415488a948a6711c48ea2ba57ec52a7fb66fa6b894cbc96",
+        "binding_kind": "apt",
+        "description": "real-time performance monitoring (python plugins)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "netdata-plugins-python",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.43.2-1build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "0e42e0563516a21939cb970f4228e7743d34262508751e42470dba6439695538",
+        "binding_kind": "apt",
+        "description": "Python language support for the CodeMirror code editor",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "node-codemirror-lang-python",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.1.3~6.22.3+~cs119.52.50-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "214ade9cebcca2920caeba9a77f9cbeafabc1be9eb2bbfec54a35f6c778155c6",
+        "binding_kind": "apt",
+        "description": "Deterministic JSON.stringify()",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "stable"
+        ],
+        "name": "node-fast-json-stable-stringify",
+        "packages": [],
+        "query": "stable",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.1.0-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "901ca2a54760a0a33b45e698e6f057bd2786881033fbfbb852f32c4482729603",
+        "binding_kind": "apt",
+        "description": "deterministic JSON.stringify()",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "stable"
+        ],
+        "name": "node-json-stable-stringify",
+        "packages": [],
+        "query": "stable",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.0.2+repack1+~cs1.0.34-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "caa8028c260f1b516e5b184b7b70dfb427a41c6015d4046d62fd473b40e359df",
+        "binding_kind": "apt",
+        "description": "Get the latest version of an npm package",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "latest"
+        ],
+        "name": "node-latest-version",
+        "packages": [],
+        "query": "latest",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "7.0.0-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "5a9a74a0673fefad1a789e913e4f6013f35725778570b40fbb6eda09451d799b",
+        "binding_kind": "apt",
+        "description": "Node.js module to provide Python grammar for the lezer parser system",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "node-lezer-python",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.1.13~1.4.13+~cs14.24.45-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "571f9e636ffbbf42d403a63c5930004fca391ab5472be7fc9f39c7333219c018",
+        "binding_kind": "apt",
+        "description": "stable array sort, as Array#sort() is not guaranteed to be stable",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "stable"
+        ],
+        "name": "node-stable",
+        "packages": [],
+        "query": "stable",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.1.8-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "903f19ff0a74c5978bac3e958e0b1872a916ec06fd9007c640022d6cd4e5f30a",
+        "binding_kind": "apt",
+        "description": "ARC Resource-coupled EXecution service - Python LRMS backends",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "nordugrid-arc-arex-python-lrms",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.18.0-2.2ubuntu0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "9ffb9447b905d8a4a6490890f18c70a48b4e3660761ec8c2793e15bc83187608",
+        "binding_kind": "apt",
+        "description": "ARC Python dependent plugin",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "nordugrid-arc-plugins-python",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.18.0-2.2ubuntu0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "899e97bc466932b0bcfc07643ed4edcdb9a03ea3722621b7158ce7db16c044b7",
+        "binding_kind": "apt",
+        "description": "Open Lighting Architecture - Python Classes",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "ola-python",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.10.9.nojsmin-4.1build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Pare Python \u05d2\u20ac\u201d Structured Python tool output (ruff, mypy, pip, uv, black, pytest) as typed JSON.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.Dave-London/pare-python",
+        "packages": [
+          {
+            "identifier": "@paretools/python",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.8.1"
+          }
+        ],
+        "query": "python",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/Dave-London/Pare"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.8.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Structured Python tool output (ruff, mypy, pip-audit, pip-install) as typed JSON.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.Dave-London/python",
+        "packages": [
+          {
+            "identifier": "@paretools/python",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.8.0"
+          }
+        ],
+        "query": "python",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/Dave-London/Pare"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.8.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "The canonical Python stdlib oracle for AI coding agents \u2014 always free, always MIT, token-frugal.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.ayhammouda/python-docs-mcp-server",
+        "packages": [
+          {
+            "identifier": "python-docs-mcp-server",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "uvx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.3.1"
+          }
+        ],
+        "query": "python",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/ayhammouda/python-docs-mcp-server"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.3.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "An MCP server that exposes the python-bitcoinlib API",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.daedalus/mcp-python-bitcoinlib",
+        "packages": [
+          {
+            "identifier": "mcp-python-bitcoinlib",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.0"
+          }
+        ],
+        "query": "python",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/daedalus/mcp-python-bitcoinlib"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "LionScraper Python: MCP stdio + CLI + HTTP API bridging AI to LionScraper browser extension.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.dowant/lionscraper-python",
+        "packages": [
+          {
+            "identifier": "lionscraper",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.6"
+          }
+        ],
+        "query": "python",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "subfolder": "packages/python",
+          "url": "https://github.com/dowant/lionscraper-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.6",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Sandboxed Python execution for AI agents. PEP 723 inline deps, multi-version Python, zero pollution.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.lu-zhengda/mcp-python-exec-sandbox",
+        "packages": [
+          {
+            "identifier": "mcp-python-exec-sandbox",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.5"
+          }
+        ],
+        "query": "python",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/lu-zhengda/mcp-python-exec-sandbox"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.1.5",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "7-signal stablecoin risk scoring. 13 tools, 28+ tokens, SAFE/CAUTION/AVOID verdicts.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.feedoracle/stablecoin-risk",
+        "packages": [],
+        "query": "stable",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "sse",
+            "url": "https://feedoracle.io/mcp/risk/sse"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/feedoracle/-feedoracle-mcp-risk"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Run Python code from natural language prompts, with optional PyPI package install.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.hal9ai/run-python",
+        "packages": [],
+        "query": "python",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://next.hal9.ai/mcp/mcpbuild/run-python"
+          }
+        ],
+        "repository": {
+          "id": "1327233276",
+          "source": "github",
+          "subfolder": "run-python",
+          "url": "https://github.com/hal9ai/mcp.build"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Hosted Python sandbox for package runtime verification: pip install and usable-import evidence.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.ligafew/python-package-runtime-test",
+        "packages": [],
+        "query": "python",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://apcs-public-mcp-gateway.apcs-mcp.workers.dev/mcp/python-package-runtime-test"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Security + bug + perf + refactor audit for Python. Returns 0-10 score + MD report.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "org.duckdns.43-134-36-21/python-code-reviewer",
+        "packages": [],
+        "query": "python",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://43-134-36-21.duckdns.org/mcp/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.27.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "A sample MCP server for testing",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.elpadev/sample-mcp-server-python-package",
+        "packages": [
+          {
+            "identifier": "elias-mcp-server-elpadev",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.0.2"
+          }
+        ],
+        "query": "python",
+        "remotes": [],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "0.0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "An MCP server that provides weather information",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.lxchst/weather-server-python",
+        "packages": [
+          {
+            "identifier": "chst-weather",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.1"
+          }
+        ],
+        "query": "python",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/lxchst/weather-server-python"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "0.1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "MCP server for IT hardware parts research: normalize PNs, search listings, get subs/comps.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.partstable/partstable",
+        "packages": [],
+        "query": "stable",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.partstable.com/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/partstable/partstable"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "0.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Parametric should-cost: P50/P80/P90 estimates, 801 materials, 25 countries, quote review.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.1337mofo/costable",
+        "packages": [],
+        "query": "stable",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://costable.ai/api/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Real-time global news, crypto, weather & earthquakes from 27 free APIs. No API keys required.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.ebrunet001/mcp-server-latest-news",
+        "packages": [],
+        "query": "latest",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "sse",
+            "url": "https://mrbridge--latest-news-mcp-server.apify.actor/mcp"
+          }
+        ],
+        "repository": {
+          "id": "ebrunet001/mcp-server-latest-news",
+          "source": "github",
+          "url": "https://github.com/ebrunet001/mcp-server-latest-news"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "0.1.28",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Parts research for IT hardware brokers: PN normalization, validation, and pricing",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.partstable/partsiq",
+        "packages": [],
+        "query": "stable",
+        "remotes": [
+          {
+            "required_headers": [
+              "X-API-Key"
+            ],
+            "type": "streamable-http",
+            "url": "https://partstable-api.jadagnino.workers.dev/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/partstable/partsiq"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Description of my MCP server",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "live.alpic.mcp-server-template-7860f7d3/mcp-server-template-python",
+        "packages": [],
+        "query": "python",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp-server-template-7860f7d3.alpic.live"
+          },
+          {
+            "required_headers": [],
+            "type": "sse",
+            "url": "https://mcp-server-template-7860f7d3.alpic.live"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "0.0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Still WiP",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "live.alpic.staging.python-email-mcp-f5c8e0a7/python-email-mcp",
+        "packages": [],
+        "query": "python",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://python-email-mcp-f5c8e0a7.staging.alpic.live"
+          },
+          {
+            "required_headers": [],
+            "type": "sse",
+            "url": "https://python-email-mcp-f5c8e0a7.staging.alpic.live"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "0.0.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Local-only Python MCP server for the Files.com API.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.files/python-mcp",
+        "packages": [
+          {
+            "identifier": "files-com-mcp",
+            "registry_type": "pypi",
+            "required_environment": [
+              "FILES_COM_API_KEY"
+            ],
+            "runtime_hint": null,
+            "secret_environment": [
+              "FILES_COM_API_KEY"
+            ],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.90"
+          }
+        ],
+        "query": "python",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/Files-com/files-mcp"
+        },
+        "required_environment_count": 1,
+        "required_secret_count": 1,
+        "score": 14,
+        "status": "active",
+        "version": "1.0.90",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Syncline MCP Server (Python) - AI-powered meeting scheduling with intelligent auto-scheduling",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.kekwanu/syncline-mcp-server-python",
+        "packages": [
+          {
+            "identifier": "syncline-mcp-server",
+            "registry_type": "pypi",
+            "required_environment": [
+              "SYNCLINE_API_KEY"
+            ],
+            "runtime_hint": null,
+            "secret_environment": [
+              "SYNCLINE_API_KEY"
+            ],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.35"
+          }
+        ],
+        "query": "python",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "subfolder": "mcp-server-python",
+          "url": "https://github.com/KekwanuLabs/syncline"
+        },
+        "required_environment_count": 1,
+        "required_secret_count": 1,
+        "score": 14,
+        "status": "active",
+        "version": "1.0.35",
+        "zero_cost_eligible": true
+      }
+    ],
+    "effect": "Determine the latest stable Python 3 release shown on the page",
+    "results": [
+      {
+        "binding_performed": false,
+        "candidate_count": 30,
+        "candidates": [
+          {
+            "archive_sha256": "b5b40edb9994939f44d7b61998d5e897bf3b8eaeb2565a5e09db4b40dce1e3fb",
+            "binding_kind": "apt",
+            "description": "Arm NN Core and all backends",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "latest"
+            ],
+            "name": "armnn-latest-all",
+            "packages": [],
+            "query": "latest",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "23.08-4.1build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "51ae5767c57aaa1689bfcf877268d813c6878ce3c559ca4a240dcba514795364",
+            "binding_kind": "apt",
+            "description": "Arm NN Core and Reference backend",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "latest"
+            ],
+            "name": "armnn-latest-ref",
+            "packages": [],
+            "query": "latest",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "23.08-4.1build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c7951529483042d42cc35f0d14b332f315e37f82092fb82a309db6c067803cf0",
+            "binding_kind": "apt",
+            "description": "library of D-Bus interface for Python of Cairo-dock",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "python"
+            ],
+            "name": "cairo-dock-dbus-plug-in-interface-python",
+            "packages": [],
+            "query": "python",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "a600a70509759e09f0e04c6f0b2d510a0f3531b45092ee8f4c727b05beae9b95",
+            "binding_kind": "apt",
+            "description": "Python plugin and console for Claws Mail",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "python"
+            ],
+            "name": "claws-mail-python-plugin",
+            "packages": [],
+            "query": "python",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "4.2.0-2build7",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "5950fb9db8bb176d1f104299be602ae59c8da7eaad84fb429908033c9e37e33b",
+            "binding_kind": "apt",
+            "description": "utility to test color capabilities of terminal",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "python"
+            ],
+            "name": "colortest-python",
+            "packages": [],
+            "query": "python",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.0.2-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "cbe3ee89359a799c7ce21d374b8e0fb39f9a6d1b4a404481b4f1659a8a4cc8e8",
+            "binding_kind": "apt",
+            "description": "Debian helper tools for packaging Python libraries and applications",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "python"
+            ],
+            "name": "dh-python",
+            "packages": [],
+            "query": "python",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.20240401",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "7fb4a902f67d93c5a4dc1ffea201151b30dca4e9ebe3ed73d523c46fccfb65a2",
+            "binding_kind": "apt",
+            "description": "RFC 2229 compliant modular dictionary server (Python module)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "python"
+            ],
+            "name": "dico-module-python",
+            "packages": [],
+            "query": "python",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2.11-4.1build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d865bb9515b41928ab792360724cd9ecfbd596671ce260c0a1111b84495de6b6",
+            "binding_kind": "apt",
+            "description": "virtualenv API for Emacs Lisp",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "python"
+            ],
+            "name": "elpa-python-environment",
+            "packages": [],
+            "query": "python",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.0.2-6",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "74eb3028c96572fa977456173728629def25cc7dbda6f46f98d9e1c680882d2a",
+            "binding_kind": "apt",
+            "description": "Python Console plugin for GNOME Image Viewer",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "python"
+            ],
+            "name": "eog-plugin-python-console",
+            "packages": [],
+            "query": "python",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "44.0-2build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": null,
+            "binding_kind": "apt",
+            "description": "The web browser from Google",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "stable"
+            ],
+            "name": "google-chrome-stable",
+            "packages": [],
+            "query": "stable",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "153.0.8010.52-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "0e2e78a5d0a1d15f6f966d5d8f7f3603b0cfd70f9d1578f742fcc139596424aa",
+            "binding_kind": "apt",
+            "description": "bare metal hypervisor API for OpenStack - Python Agent",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "python"
+            ],
+            "name": "ironic-python-agent",
+            "packages": [],
+            "query": "python",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "9.1.0-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c00a28811d34479677149b6bdb9616522d8cbf7b722fb220487af88342196133",
+            "binding_kind": "apt",
+            "description": "Python 3 plugin for KDevelop",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "python"
+            ],
+            "name": "kdevelop-python",
+            "packages": [],
+            "query": "python",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "23.08.5-0ubuntu4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "1463fc465281e5ddffa7a7421c07d37aca506221d4dae78814c7571c050dae84",
+            "binding_kind": "apt",
+            "description": "Python 3 plugin for KDevelop - data files",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "python"
+            ],
+            "name": "kdevelop-python-data",
+            "packages": [],
+            "query": "python",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "23.08.5-0ubuntu4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "2a2d40e8e4e9cd0376a7752006fddd289b7bec5a0e847570420da5c87bbd3f28",
+            "binding_kind": "apt",
+            "description": "localization files for KDevelop Python 3 plugin",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "python"
+            ],
+            "name": "kdevelop-python-l10n",
+            "packages": [],
+            "query": "python",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "23.08.5-0ubuntu4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "eaba4a4694675c74a6933476401f51b777fa10cbaf575e990189ce5a5c2612bd",
+            "binding_kind": "apt",
+            "description": "Open Source Home Theatre (Event Client Python package)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "python"
+            ],
+            "name": "kodi-eventclients-python",
+            "packages": [],
+            "query": "python",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2:20.5+dfsg-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": null,
+            "binding_kind": "apt",
+            "description": "The web browser from Microsoft",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "stable"
+            ],
+            "name": "microsoft-edge-stable",
+            "packages": [],
+            "query": "stable",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "153.0.4234.48-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "81af33f997dec78daaef96b3b3d261c667eecb007f38960cd4a763cff575d7f3",
+            "binding_kind": "apt",
+            "description": "Python handler for mkdocstrings",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "python"
+            ],
+            "name": "mkdocstrings-python-handlers",
+            "packages": [],
+            "query": "python",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.8.0-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "b71427b2da95486eba92e46e16df9059d6345c28adcdde300c61fc2310667644",
+            "binding_kind": "apt",
+            "description": "Legacy Python handler for mkdocstrings",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "python"
+            ],
+            "name": "mkdocstrings-python-legacy",
+            "packages": [],
+            "query": "python",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.2.3-6",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "00d62d9b9b02d9301f7b4be99621b155e09b23745e71130fff3999f8265f88e0",
+            "binding_kind": "apt",
+            "description": "Python plugin for nbdkit",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "python"
+            ],
+            "name": "nbdkit-plugin-python",
+            "packages": [],
+            "query": "python",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.36.3-1ubuntu10",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "9018a1b7eae97693ad432370789ba047bfdb3bd779e7bcf0a552c32393201fd7",
+            "binding_kind": "apt",
+            "description": "Python bindings for nemo components",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "python"
+            ],
+            "name": "nemo-python",
+            "packages": [],
+            "query": "python",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.0.0+ds-1build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "11de2658672dbf7b8415488a948a6711c48ea2ba57ec52a7fb66fa6b894cbc96",
+            "binding_kind": "apt",
+            "description": "real-time performance monitoring (python plugins)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "python"
+            ],
+            "name": "netdata-plugins-python",
+            "packages": [],
+            "query": "python",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.43.2-1build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "0e42e0563516a21939cb970f4228e7743d34262508751e42470dba6439695538",
+            "binding_kind": "apt",
+            "description": "Python language support for the CodeMirror code editor",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "python"
+            ],
+            "name": "node-codemirror-lang-python",
+            "packages": [],
+            "query": "python",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.1.3~6.22.3+~cs119.52.50-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "214ade9cebcca2920caeba9a77f9cbeafabc1be9eb2bbfec54a35f6c778155c6",
+            "binding_kind": "apt",
+            "description": "Deterministic JSON.stringify()",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "stable"
+            ],
+            "name": "node-fast-json-stable-stringify",
+            "packages": [],
+            "query": "stable",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2.1.0-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "901ca2a54760a0a33b45e698e6f057bd2786881033fbfbb852f32c4482729603",
+            "binding_kind": "apt",
+            "description": "deterministic JSON.stringify()",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "stable"
+            ],
+            "name": "node-json-stable-stringify",
+            "packages": [],
+            "query": "stable",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.0.2+repack1+~cs1.0.34-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "caa8028c260f1b516e5b184b7b70dfb427a41c6015d4046d62fd473b40e359df",
+            "binding_kind": "apt",
+            "description": "Get the latest version of an npm package",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "latest"
+            ],
+            "name": "node-latest-version",
+            "packages": [],
+            "query": "latest",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "7.0.0-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "5a9a74a0673fefad1a789e913e4f6013f35725778570b40fbb6eda09451d799b",
+            "binding_kind": "apt",
+            "description": "Node.js module to provide Python grammar for the lezer parser system",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "python"
+            ],
+            "name": "node-lezer-python",
+            "packages": [],
+            "query": "python",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.1.13~1.4.13+~cs14.24.45-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "571f9e636ffbbf42d403a63c5930004fca391ab5472be7fc9f39c7333219c018",
+            "binding_kind": "apt",
+            "description": "stable array sort, as Array#sort() is not guaranteed to be stable",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "stable"
+            ],
+            "name": "node-stable",
+            "packages": [],
+            "query": "stable",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.1.8-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "903f19ff0a74c5978bac3e958e0b1872a916ec06fd9007c640022d6cd4e5f30a",
+            "binding_kind": "apt",
+            "description": "ARC Resource-coupled EXecution service - Python LRMS backends",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "python"
+            ],
+            "name": "nordugrid-arc-arex-python-lrms",
+            "packages": [],
+            "query": "python",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.18.0-2.2ubuntu0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "9ffb9447b905d8a4a6490890f18c70a48b4e3660761ec8c2793e15bc83187608",
+            "binding_kind": "apt",
+            "description": "ARC Python dependent plugin",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "python"
+            ],
+            "name": "nordugrid-arc-plugins-python",
+            "packages": [],
+            "query": "python",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.18.0-2.2ubuntu0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "899e97bc466932b0bcfc07643ed4edcdb9a03ea3722621b7158ce7db16c044b7",
+            "binding_kind": "apt",
+            "description": "Open Lighting Architecture - Python Classes",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "python"
+            ],
+            "name": "ola-python",
+            "packages": [],
+            "query": "python",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.10.9.nojsmin-4.1build2",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Determine the latest stable Python 3 release shown on the page",
+        "errors": [],
+        "queries": [
+          "determine",
+          "latest",
+          "stable",
+          "python"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "APT_CATALOG",
+        "source_url": null
+      },
+      {
+        "binding_performed": false,
+        "candidate_count": 40,
+        "candidates": [
+          {
+            "description": "Pare Python \u05d2\u20ac\u201d Structured Python tool output (ruff, mypy, pip, uv, black, pytest) as typed JSON.",
+            "is_latest": true,
+            "name": "io.github.Dave-London/pare-python",
+            "packages": [
+              {
+                "identifier": "@paretools/python",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.8.1"
+              }
+            ],
+            "query": "python",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Dave-London/Pare"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.8.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Structured Python tool output (ruff, mypy, pip-audit, pip-install) as typed JSON.",
+            "is_latest": true,
+            "name": "io.github.Dave-London/python",
+            "packages": [
+              {
+                "identifier": "@paretools/python",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.8.0"
+              }
+            ],
+            "query": "python",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Dave-London/Pare"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.8.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "The canonical Python stdlib oracle for AI coding agents \u2014 always free, always MIT, token-frugal.",
+            "is_latest": true,
+            "name": "io.github.ayhammouda/python-docs-mcp-server",
+            "packages": [
+              {
+                "identifier": "python-docs-mcp-server",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "uvx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.3.1"
+              }
+            ],
+            "query": "python",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/ayhammouda/python-docs-mcp-server"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.3.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "An MCP server that exposes the python-bitcoinlib API",
+            "is_latest": true,
+            "name": "io.github.daedalus/mcp-python-bitcoinlib",
+            "packages": [
+              {
+                "identifier": "mcp-python-bitcoinlib",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.0"
+              }
+            ],
+            "query": "python",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/daedalus/mcp-python-bitcoinlib"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "LionScraper Python: MCP stdio + CLI + HTTP API bridging AI to LionScraper browser extension.",
+            "is_latest": true,
+            "name": "io.github.dowant/lionscraper-python",
+            "packages": [
+              {
+                "identifier": "lionscraper",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.6"
+              }
+            ],
+            "query": "python",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "subfolder": "packages/python",
+              "url": "https://github.com/dowant/lionscraper-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.6",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Sandboxed Python execution for AI agents. PEP 723 inline deps, multi-version Python, zero pollution.",
+            "is_latest": true,
+            "name": "io.github.lu-zhengda/mcp-python-exec-sandbox",
+            "packages": [
+              {
+                "identifier": "mcp-python-exec-sandbox",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.5"
+              }
+            ],
+            "query": "python",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/lu-zhengda/mcp-python-exec-sandbox"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.1.5",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "7-signal stablecoin risk scoring. 13 tools, 28+ tokens, SAFE/CAUTION/AVOID verdicts.",
+            "is_latest": true,
+            "name": "io.github.feedoracle/stablecoin-risk",
+            "packages": [],
+            "query": "stable",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "sse",
+                "url": "https://feedoracle.io/mcp/risk/sse"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/feedoracle/-feedoracle-mcp-risk"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Run Python code from natural language prompts, with optional PyPI package install.",
+            "is_latest": true,
+            "name": "io.github.hal9ai/run-python",
+            "packages": [],
+            "query": "python",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://next.hal9.ai/mcp/mcpbuild/run-python"
+              }
+            ],
+            "repository": {
+              "id": "1327233276",
+              "source": "github",
+              "subfolder": "run-python",
+              "url": "https://github.com/hal9ai/mcp.build"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Hosted Python sandbox for package runtime verification: pip install and usable-import evidence.",
+            "is_latest": true,
+            "name": "io.github.ligafew/python-package-runtime-test",
+            "packages": [],
+            "query": "python",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://apcs-public-mcp-gateway.apcs-mcp.workers.dev/mcp/python-package-runtime-test"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Security + bug + perf + refactor audit for Python. Returns 0-10 score + MD report.",
+            "is_latest": true,
+            "name": "org.duckdns.43-134-36-21/python-code-reviewer",
+            "packages": [],
+            "query": "python",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://43-134-36-21.duckdns.org/mcp/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.27.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "A sample MCP server for testing",
+            "is_latest": true,
+            "name": "io.github.elpadev/sample-mcp-server-python-package",
+            "packages": [
+              {
+                "identifier": "elias-mcp-server-elpadev",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.0.2"
+              }
+            ],
+            "query": "python",
+            "remotes": [],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "An MCP server that provides weather information",
+            "is_latest": true,
+            "name": "io.github.lxchst/weather-server-python",
+            "packages": [
+              {
+                "identifier": "chst-weather",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.1"
+              }
+            ],
+            "query": "python",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/lxchst/weather-server-python"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Local-only Python MCP server for the Files.com API.",
+            "is_latest": true,
+            "name": "com.files/python-mcp",
+            "packages": [
+              {
+                "identifier": "files-com-mcp",
+                "registry_type": "pypi",
+                "required_environment": [
+                  "FILES_COM_API_KEY"
+                ],
+                "runtime_hint": null,
+                "secret_environment": [
+                  "FILES_COM_API_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.90"
+              }
+            ],
+            "query": "python",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Files-com/files-mcp"
+            },
+            "required_environment_count": 1,
+            "required_secret_count": 1,
+            "score": 14,
+            "status": "active",
+            "version": "1.0.90",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Syncline MCP Server (Python) - AI-powered meeting scheduling with intelligent auto-scheduling",
+            "is_latest": true,
+            "name": "com.kekwanu/syncline-mcp-server-python",
+            "packages": [
+              {
+                "identifier": "syncline-mcp-server",
+                "registry_type": "pypi",
+                "required_environment": [
+                  "SYNCLINE_API_KEY"
+                ],
+                "runtime_hint": null,
+                "secret_environment": [
+                  "SYNCLINE_API_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.35"
+              }
+            ],
+            "query": "python",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "subfolder": "mcp-server-python",
+              "url": "https://github.com/KekwanuLabs/syncline"
+            },
+            "required_environment_count": 1,
+            "required_secret_count": 1,
+            "score": 14,
+            "status": "active",
+            "version": "1.0.35",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "A simple MCP server built with FastMCP and python",
+            "is_latest": true,
+            "name": "ai.smithery/smithery-ai-cookbook-python-quickstart",
+            "packages": [],
+            "query": "python",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@smithery-ai/cookbook-python-quickstart/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "subfolder": "servers/python/quickstart",
+              "url": "https://github.com/smithery-ai/smithery-cookbook"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "1.13.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Proves AI-generated Python does what you asked: lint, types, security, sandbox run, exact fixes.",
+            "is_latest": true,
+            "name": "ai.statemind/python-code-validator",
+            "packages": [],
+            "query": "python",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://api.statemind.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/jkanselaar/python-code-validator"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "1.22.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP server for IT hardware parts research: normalize PNs, search listings, get subs/comps.",
+            "is_latest": true,
+            "name": "com.partstable/partstable",
+            "packages": [],
+            "query": "stable",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.partstable.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/partstable/partstable"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Parametric should-cost: P50/P80/P90 estimates, 801 materials, 25 countries, quote review.",
+            "is_latest": true,
+            "name": "io.github.1337mofo/costable",
+            "packages": [],
+            "query": "stable",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://costable.ai/api/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Real-time global news, crypto, weather & earthquakes from 27 free APIs. No API keys required.",
+            "is_latest": true,
+            "name": "io.github.ebrunet001/mcp-server-latest-news",
+            "packages": [],
+            "query": "latest",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "sse",
+                "url": "https://mrbridge--latest-news-mcp-server.apify.actor/mcp"
+              }
+            ],
+            "repository": {
+              "id": "ebrunet001/mcp-server-latest-news",
+              "source": "github",
+              "url": "https://github.com/ebrunet001/mcp-server-latest-news"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "0.1.28",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Parts research for IT hardware brokers: PN normalization, validation, and pricing",
+            "is_latest": true,
+            "name": "io.github.partstable/partsiq",
+            "packages": [],
+            "query": "stable",
+            "remotes": [
+              {
+                "required_headers": [
+                  "X-API-Key"
+                ],
+                "type": "streamable-http",
+                "url": "https://partstable-api.jadagnino.workers.dev/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/partstable/partsiq"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Description of my MCP server",
+            "is_latest": true,
+            "name": "live.alpic.mcp-server-template-7860f7d3/mcp-server-template-python",
+            "packages": [],
+            "query": "python",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp-server-template-7860f7d3.alpic.live"
+              },
+              {
+                "required_headers": [],
+                "type": "sse",
+                "url": "https://mcp-server-template-7860f7d3.alpic.live"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "0.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Still WiP",
+            "is_latest": true,
+            "name": "live.alpic.staging.python-email-mcp-f5c8e0a7/python-email-mcp",
+            "packages": [],
+            "query": "python",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://python-email-mcp-f5c8e0a7.staging.alpic.live"
+              },
+              {
+                "required_headers": [],
+                "type": "sse",
+                "url": "https://python-email-mcp-f5c8e0a7.staging.alpic.live"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "0.0.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Outside-in validation gate for AI-generated text; a separate model checks LLM output, fail-closed.",
+            "is_latest": true,
+            "name": "io.github.mrhpython/lens-mcp",
+            "packages": [
+              {
+                "identifier": "@soulfield/lens-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [
+                  "SOULFIELD_API_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.1.1"
+              }
+            ],
+            "query": "python",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/mrhpython/lens-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 11,
+            "status": "active",
+            "version": "1.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP server for current balance and state of EVM, UTXO, Solana, XRP, Kaspa addresses via Crypto APIs",
+            "is_latest": true,
+            "name": "io.github.CryptoAPIs-io/mcp-address-latest",
+            "packages": [
+              {
+                "identifier": "@cryptoapis-io/mcp-address-latest",
+                "registry_type": "npm",
+                "required_environment": [
+                  "CRYPTOAPIS_API_KEY"
+                ],
+                "runtime_hint": null,
+                "secret_environment": [
+                  "CRYPTOAPIS_API_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.4.0"
+              }
+            ],
+            "query": "latest",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/CryptoAPIs-io/cryptoapis-mcp-address-latest"
+            },
+            "required_environment_count": 1,
+            "required_secret_count": 1,
+            "score": 10,
+            "status": "active",
+            "version": "0.4.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Search horse boarding facilities and trainers across 44 US states.",
+            "is_latest": true,
+            "name": "io.github.kevindarstNBB/board-and-stable-mcp",
+            "packages": [
+              {
+                "identifier": "board-and-stable-mcp",
+                "registry_type": "npm",
+                "required_environment": [
+                  "DATABASE_URL"
+                ],
+                "runtime_hint": null,
+                "secret_environment": [
+                  "DATABASE_URL"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.1"
+              }
+            ],
+            "query": "stable",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/kevindarstNBB/board-and-stable-mcp"
+            },
+            "required_environment_count": 1,
+            "required_secret_count": 1,
+            "score": 10,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "An MCP server that provides [describe what your server does]",
+            "is_latest": true,
+            "name": "io.github.manoharanRajesh/python-version",
+            "packages": [
+              {
+                "identifier": "transactions-mcp",
+                "registry_type": "pypi",
+                "required_environment": [
+                  "YOUR_API_KEY"
+                ],
+                "runtime_hint": null,
+                "secret_environment": [
+                  "YOUR_API_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.0"
+              }
+            ],
+            "query": "python",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "subfolder": "python-version",
+              "url": "https://github.com/manoharanRajesh/mcp-sandbox"
+            },
+            "required_environment_count": 1,
+            "required_secret_count": 1,
+            "score": 10,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Multi-provider proxy infrastructure for AI/ML. Geo, sessions, cost-aware routing, usage tools.",
+            "is_latest": true,
+            "name": "io.github.tierproxy/python-sdk",
+            "packages": [
+              {
+                "identifier": "tierproxy",
+                "registry_type": "pypi",
+                "required_environment": [
+                  "TIERPROXY_API_KEY"
+                ],
+                "runtime_hint": "pipx",
+                "secret_environment": [
+                  "TIERPROXY_API_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.4.0"
+              }
+            ],
+            "query": "python",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/tierproxy/python-sdk"
+            },
+            "required_environment_count": 1,
+            "required_secret_count": 1,
+            "score": 10,
+            "status": "active",
+            "version": "0.4.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Search Ellen G. White\u2019s writings by keyword to surface relevant quotations. Retrieve exact passage\u2026",
+            "is_latest": true,
+            "name": "ai.smithery/pythondev-pro-egw_writings_mcp_server",
+            "packages": [],
+            "query": "python",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@pythondev-pro/egw_writings_mcp_server/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/pythondev-pro/egw_writings_mcp_server"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 8,
+            "status": "active",
+            "version": "1.12.4",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "End-to-end agent-managed company brain. Docs, diagrams, plans, Knowledge Graph. Lean & affordable.",
+            "is_latest": true,
+            "name": "io.stablebaseline/sb",
+            "packages": [],
+            "query": "stable",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://api.stablebaseline.io/functions/v1/cloud-serve/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/stablebaseline/mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 8,
+            "status": "active",
+            "version": "1.0.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Schedule a GitHub Projects backlog into Google Calendar, as a CLI or an MCP server.",
+            "is_latest": true,
+            "name": "io.github.danielsousaoliveira/cal-auto-python",
+            "packages": [
+              {
+                "identifier": "cal-auto-python",
+                "registry_type": "pypi",
+                "required_environment": [
+                  "GITHUB_TOKEN",
+                  "GITHUB_PROJECT_ID",
+                  "CAL_AUTO_TIMEZONE"
+                ],
+                "runtime_hint": null,
+                "secret_environment": [
+                  "GITHUB_TOKEN"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.0"
+              }
+            ],
+            "query": "python",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/danielsousaoliveira/auto-calendar-python"
+            },
+            "required_environment_count": 3,
+            "required_secret_count": 1,
+            "score": 8,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Determine the latest stable Python 3 release shown on the page",
+        "errors": [],
+        "queries": [
+          "determine",
+          "latest",
+          "stable",
+          "python"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "OFFICIAL_MCP_REGISTRY",
+        "source_url": "https://registry.modelcontextprotocol.io"
+      }
+    ],
+    "schema": "PROJECT_BRAIN_FEDERATED_CAPABILITY_DISCOVERY_V1",
+    "sources": [
+      "APT_CATALOG",
+      "OFFICIAL_MCP_REGISTRY"
+    ]
+  },
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
+  "source": "FEDERATED_CAPABILITY_DISCOVERY_FALLBACK",
+  "targeted_acquisition_error": "AutoAcquisitionFailure:NO_LOW_FRICTION_APT_CLI_CANDIDATE"
+}

@@ -1,0 +1,454 @@
+{
+  "attempts": [
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "b5b40edb9994939f44d7b61998d5e897bf3b8eaeb2565a5e09db4b40dce1e3fb",
+        "executables": [],
+        "package": "armnn-latest-all",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "23.08-4.1build1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "b5b40edb9994939f44d7b61998d5e897bf3b8eaeb2565a5e09db4b40dce1e3fb",
+        "binding_kind": "apt",
+        "description": "Arm NN Core and all backends",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "latest"
+        ],
+        "name": "armnn-latest-all",
+        "packages": [],
+        "query": "latest",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "23.08-4.1build1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "51ae5767c57aaa1689bfcf877268d813c6878ce3c559ca4a240dcba514795364",
+        "executables": [],
+        "package": "armnn-latest-ref",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "23.08-4.1build1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "51ae5767c57aaa1689bfcf877268d813c6878ce3c559ca4a240dcba514795364",
+        "binding_kind": "apt",
+        "description": "Arm NN Core and Reference backend",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "latest"
+        ],
+        "name": "armnn-latest-ref",
+        "packages": [],
+        "query": "latest",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "23.08-4.1build1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ProbeFailure:APT_INSTALL_FAILED:E: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/x/xdg-desktop-portal/xdg-desktop-portal_1.18.4-1ubuntu2.24.04.2_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\n",
+      "status": "PROBE_FAILED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "c7951529483042d42cc35f0d14b332f315e37f82092fb82a309db6c067803cf0",
+        "binding_kind": "apt",
+        "description": "library of D-Bus interface for Python of Cairo-dock",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "cairo-dock-dbus-plug-in-interface-python",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.4.1+git20201022.a0d3415c-1.1ubuntu2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "a600a70509759e09f0e04c6f0b2d510a0f3531b45092ee8f4c727b05beae9b95",
+        "executables": [],
+        "package": "claws-mail-python-plugin",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "4.2.0-2build7"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "a600a70509759e09f0e04c6f0b2d510a0f3531b45092ee8f4c727b05beae9b95",
+        "binding_kind": "apt",
+        "description": "Python plugin and console for Claws Mail",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "claws-mail-python-plugin",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "4.2.0-2build7",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "5950fb9db8bb176d1f104299be602ae59c8da7eaad84fb429908033c9e37e33b",
+        "executables": [
+          {
+            "executable": "/usr/bin/colortest-python",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: colortest-python [options]\n\nOptions:\n  -b, --block          Display as block format (vs cube) [default].\n  -c, --cube-slice     Display as cube slices (vs block).\n  -f, --foreground     Use color for foreground text.\n  -l, --rgb            Long format. RGB values as text.\n  -n, --numbers        Include color escape numbers on chart.\n  -o, --ansicodes      Display 16 color chart with SGR ANSI escape codes.\n  -p, --padding        Add extra padding (helps discern colors).\n  -t, --test           Run tests.\n  -v, --vertical       Display with vertical orientation [default].\n  -x, --hex            Include hex color numbers on chart.\n  -z, --horizontal     Display with horizontal orientation.\n  --version            show program's version number and exit\n  -h, --help           show this help message and exit\n\n  Conversion options:\n    -r N, --256to88=N  Convert (reduce) 256 color value N to an 88 color\n                       value.\n    -e N, --88to256=N  Convert (expand) 88 color value N to an 256 color\n                       value."
+              }
+            ]
+          }
+        ],
+        "package": "colortest-python",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "3.0.2-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "5950fb9db8bb176d1f104299be602ae59c8da7eaad84fb429908033c9e37e33b",
+        "binding_kind": "apt",
+        "description": "utility to test color capabilities of terminal",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "colortest-python",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.0.2-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "cbe3ee89359a799c7ce21d374b8e0fb39f9a6d1b4a404481b4f1659a8a4cc8e8",
+        "executables": [
+          {
+            "executable": "/usr/bin/dh_python3",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "usage: dh_python3 [-h] [--version] [--no-guessing-deps] [--skip-private] [-v]\n                  [-i] [-a] [-q] [-p PACKAGE] [-N PACKAGE]\n                  [--remaining-packages] [--compile-all] [-V [X.Y][-][A.B]]\n                  [-X REGEXPR] [--accept-upstream-versions] [--depends REQ]\n                  [--depends-section SECTION] [--recommends REQ]\n                  [--recommends-section SECTION] [--suggests REQ]\n                  [--suggests-section SECTION] [--requires FILE]\n                  [--shebang COMMAND] [--ignore-shebangs] [--no-dbg-cleaning]\n                  [--no-ext-rename] [--no-shebang-rewrite]\n                  [private_dir]\n\npositional arguments:\n  private_dir           Private directory containing Python modules (optional)\n\noptions:\n  -h, --help            show this help message and exit\n  --version             show program's version number and exit\n  --no-guessing-deps    disable guessing dependencies\n  --skip-private        don't check private directories\n  -v, --verbose         turn verbose mode on\n  -i, --indep           act on architecture independent packages\n  -a, -s, --arch        act on architecture dependent packages\n  -q, --quiet           be quiet\n  -p PACKAGE, --package PACKAGE\n                        act on the package named PACKAGE\n  -N PACKAGE, --no-package PACKAGE\n                        do not act on the specified package\n  --remaining-packages  Do not act on the packages which have already been\n                        acted on by this debhelper command earlier\n  --compile-all         compile all files from given private directory in\n                        postinst, not just the ones provided by the package\n  -V [X.Y][-][A.B]      specify list of supported Python versions. See\n                        py3compile(1) for examples\n  -X REGEXPR, --exclude REGEXPR\n                        exclude items that match given REGEXPR. You may use\n                        this option multiple times to build up a list of\n                        things to exclude.\n  --accept-upstream-versions\n                        accept upstream versions while translating Python\n                        dependencies into Debian ones\n  --depends REQ         translate given requirements into Debian dependencies\n                        and add them to ${python3:Depends}. Use it for missing\n                        items in requires.txt.\n  --depends-section SECTION\n                        translate requirements from given section into Debian\n                        dependencies and add them to ${python3:Depends}\n  --recommends REQ      translate given requirements into Debian dependencies\n                        and add them to ${python3:Recommends}\n  --recommends-section SECTION\n                        translate requirements from given section into Debian\n                        dependencies and add them to ${python3:Recommends}\n  --suggests REQ        translate given requirements into Debian dependencies\n                        and add them to ${python3:Suggests}\n  --suggests-section SECTION\n                        translate requirements from given section into Debian\n                        dependencies and add them to ${python3:Suggests}\n  --requires FILE       translate requirements from given file into Debian\n                        dependencies and add them to ${python3:Depends}\n  --shebang COMMAND     use given command as shebang in scripts\n  --ignore-shebangs     do not translate shebangs into Debian dependencies\n  --no-dbg-cleaning     do not remove files from debug packages\n  --no-ext-rename       do not add magic tags nor multiarch tuples to\n                        extension file names)\n  --no-shebang-rewrite  do not rewrite shebangs"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/pybuild",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "usage: pybuild [ACTION] [BUILD SYSTEM ARGS] [DIRECTORIES] [OPTIONS]\n\noptions:\n  -h, --help            show this help message and exit\n  -v, --verbose         turn verbose mode on\n  -q, --quiet           doesn't show external command's output\n  -qq, --really-quiet   be quiet\n  --version             show program's version number and exit\n\nACTION:\n  The default is to build, install and test the library using detected build\n  system version by version. Selecting one of following actions, will invoke\n  given action for all versions - one by one - which (contrary to the\n  default action) in some build systems can overwrite previous results.\n\n  --detect              return the name of detected build system\n  --clean               clean files using auto-detected build system specific\n                        methods\n  --configure           invoke configure step for all requested Python\n                        versions\n  --build               invoke build step for all requested Python versions\n  --install             invoke install step for all requested Python versions\n  --test                invoke tests for auto-detected build system\n  --autopkgtest         invoke autopkgtests for auto-detected build system\n  --list-systems        list available build systems and exit\n  --print PRINT_ARGS    print pybuild's internal parameters\n\nBUILD SYSTEM ARGS:\n  Additional arguments passed to the build system. --system=custom requires\n  complete command.\n\n  --before-clean CMD    invoked before the clean command\n  --clean-args ARGS\n  --after-clean CMD     invoked after the clean command\n  --before-configure CMD\n                        invoked before the configure command\n  --configure-args ARGS\n  --after-configure CMD\n                        invoked after the configure command\n  --before-build CMD    invoked before the build command\n  --build-args ARGS\n  --after-build CMD     invoked after the build command\n  --before-install CMD  invoked before the install command\n  --install-args ARGS\n  --after-install CMD   invoked after the install command\n  --before-test CMD     invoked before the test command\n  --test-args ARGS\n  --after-test CMD      invoked after the test command\n\nTESTS:\n  unittest's discover is used by default (if available)\n\n  --test-nose           use nose module in --test step\n  --test-nose2          use nose2 module in --test step\n  --test-pytest         use pytest module in --test step\n  --test-tox            use tox in --test step\n  --test-stestr         use stestr in --test step\n  --test-custom         use custom command in --test step\n\nDIRECTORIES:\n  -d DIR, --dir DIR     source files directory - base for other relative dirs\n                        [default: CWD]\n  --dest-dir DIR        destination directory [default: debian/tmp]\n  --ext-dest-dir DIR    destination directory for .so files\n  --ext-pattern PATTERN\n                        regular expression for files that should be moved if\n                        --ext-dest-dir is set [default: .so files]\n  --ext-sub-pattern PATTERN\n                        pattern to change --ext-pattern's filename or path\n  --ext-sub-repl PATTERN\n                        replacement for match from --ext-sub-pattern, empty\n                        string by default\n  --install-dir DIR     installation directory [default: .../dist-packages]\n  --name NAME           use this name to guess destination directories\n\nLIMITATIONS:\n  -s SYSTEM, --system SYSTEM\n                        select a build system [default: auto-detection]\n  -p VERSIONS, --pyver VERSIONS\n                        build for Python VERSION. This option can be used\n                        multiple times [default: all supported Python 3.X\n                        versions]\n  -i INTERPRETER, --interpreter INTERPRETER\n                        change interpreter [default: python{version}]\n  --disable ITEMS       disable action, interpreter or version"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/pybuild-autopkgtest",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 2,
+                "text": "Can't locate Debian/Debhelper/Dh_Lib.pm in @INC (you may need to install the Debian::Debhelper::Dh_Lib module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.38.2 /usr/local/share/perl/5.38.2 /usr/lib/x86_64-linux-gnu/perl5/5.38 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.38 /usr/share/perl/5.38 /usr/local/lib/site_perl) at /usr/share/perl5/Debian/Debhelper/Buildsystem/pybuild.pm line 13.\nBEGIN failed--compilation aborted at /usr/share/perl5/Debian/Debhelper/Buildsystem/pybuild.pm line 13.\nCompilation failed in require at /usr/bin/pybuild-autopkgtest line 27.\nBEGIN failed--compilation aborted at /usr/bin/pybuild-autopkgtest line 27."
+              }
+            ]
+          }
+        ],
+        "package": "dh-python",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "6.20240401"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "cbe3ee89359a799c7ce21d374b8e0fb39f9a6d1b4a404481b4f1659a8a4cc8e8",
+        "binding_kind": "apt",
+        "description": "Debian helper tools for packaging Python libraries and applications",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "dh-python",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.20240401",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "7fb4a902f67d93c5a4dc1ffea201151b30dca4e9ebe3ed73d523c46fccfb65a2",
+        "executables": [],
+        "package": "dico-module-python",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "2.11-4.1build2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "7fb4a902f67d93c5a4dc1ffea201151b30dca4e9ebe3ed73d523c46fccfb65a2",
+        "binding_kind": "apt",
+        "description": "RFC 2229 compliant modular dictionary server (Python module)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "dico-module-python",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.11-4.1build2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "d865bb9515b41928ab792360724cd9ecfbd596671ce260c0a1111b84495de6b6",
+        "executables": [],
+        "package": "elpa-python-environment",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.0.2-6"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "d865bb9515b41928ab792360724cd9ecfbd596671ce260c0a1111b84495de6b6",
+        "binding_kind": "apt",
+        "description": "virtualenv API for Emacs Lisp",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "elpa-python-environment",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.0.2-6",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "74eb3028c96572fa977456173728629def25cc7dbda6f46f98d9e1c680882d2a",
+        "executables": [],
+        "package": "eog-plugin-python-console",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "44.0-2build3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "74eb3028c96572fa977456173728629def25cc7dbda6f46f98d9e1c680882d2a",
+        "binding_kind": "apt",
+        "description": "Python Console plugin for GNOME Image Viewer",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "eog-plugin-python-console",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "44.0-2build3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "0e2e78a5d0a1d15f6f966d5d8f7f3603b0cfd70f9d1578f742fcc139596424aa",
+        "executables": [
+          {
+            "executable": "/usr/bin/ironic-collect-introspection-data",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "usage: ironic-collect-introspection-data [-h]\n                                         [--advertise_host ADVERTISE_HOST]\n                                         [--advertise_port ADVERTISE_PORT]\n                                         [--advertise_protocol ADVERTISE_PROTOCOL]\n                                         [--agent_token AGENT_TOKEN]\n                                         [--agent_token_required]\n                                         [--api_url API_URL]\n                                         [--auto_tls_allowed_clock_skew AUTO_TLS_ALLOWED_CLOCK_SKEW]\n                                         [--cafile CAFILE]\n                                         [--certfile CERTFILE]\n                                         [--collect_lldp] [--config-dir DIR]\n                                         [--config-file PATH] [--debug]\n                                         [--disk_wait_attempts DISK_WAIT_ATTEMPTS]\n                                         [--disk_wait_delay DISK_WAIT_DELAY]\n                                         [--enable_auto_tls]\n                                         [--enable_vlan_interfaces ENABLE_VLAN_INTERFACES]\n                                         [--fail_if_clock_not_set]\n                                         [--global_request_id GLOBAL_REQUEST_ID]\n                                         [--guard-special-filesystems]\n                                         [--hardware_initialization_delay HARDWARE_INITIALIZATION_DELAY]\n                                         [--ignore_bootloader_failure]\n                                         [--image_download_connection_retries IMAGE_DOWNLOAD_CONNECTION_RETRIES]\n                                         [--image_download_connection_retry_interval IMAGE_DOWNLOAD_CONNECTION_RETRY_INTERVAL]\n                                         [--image_download_connection_timeout IMAGE_DOWNLOAD_CONNECTION_TIMEOUT]\n                                         [--inject_files_priority INJECT_FILES_PRIORITY]\n                                         [--insecure]\n                                         [--inspection_callback_url INSPECTION_CALLBACK_URL]\n                                         [--inspection_collectors INSPECTION_COLLECTORS]\n                                         [--inspection_dhcp_all_interfaces]\n                                         [--inspection_dhcp_wait_timeout INSPECTION_DHCP_WAIT_TIMEOUT]\n                                         [--introspection_daemon]\n                                         [--introspection_daemon_post_interval INTROSPECTION_DAEMON_POST_INTERVAL]\n                                         [--ip_lookup_attempts IP_LOOKUP_ATTEMPTS]\n                                         [--ip_lookup_sleep IP_LOOKUP_SLEEP]\n                                         [--ironic_api_version IRONIC_API_VERSION]\n                                         [--keyfile KEYFILE]\n                                         [--listen_host LISTEN_HOST]\n                                         [--listen_port LISTEN_PORT]\n                                         [--listen_tls]\n                                         [--lldp_timeout LLDP_TIMEOUT]\n                                         [--log-config-append PATH]\n                                         [--log-date-format DATE_FORMAT]\n                                         [--log-dir LOG_DIR] [--log-file PATH]\n                                         [--lookup_interval LOOKUP_INTERVAL]\n                                         [--lookup_timeout LOOKUP_TIMEOUT]\n                                         [--network_interface NETWORK_INTERFACE]\n                                         [--noagent_token_required]\n                                         [--nocollect_lldp] [--nodebug]\n                                         [--noenable_auto_tls]\n                                         [--nofail_if_clock_not_set]\n                                         [--noguard-special-filesystems]\n                                         [--noignore_bootloader_failure]\n                                         [--noinsecure]\n                                         [--noinspection_dhcp_all_interfaces]\n                                         [--nointrospection_daemon]\n                                         [--nolisten_tls] [--nouse-journal]\n                                         [--nouse-json] [--nouse-syslog]\n                                         [--nowatch-log-file]\n                                         [--ntp_server NTP_SERVER]\n                                         [--syslog-log-facility SYSLOG_LOG_FACILITY]\n                                         [--use-journal] [--use-json]\n                                         [--use-syslog] [--watch-log-file]\n\noptions:\n  -h, --help            show this help message and exit\n  --advertise_host ADVERTISE_HOST\n                        The host to tell Ironic to reply and send commands to.\n                        Can be supplied as \"ipa-advertise-host\" kernel\n                        parameter.\n  --advertise_port ADVERTISE_PORT\n                        The port to tell Ironic to reply and send commands to.\n                        Can be supplied as \"ipa-advertise-port\" kernel\n                        parameter.\n  --advertise_protocol ADVERTISE_PROTOCOL\n                        Protocol to use for the callback URL. HTTP is used by\n                        default, set to \"https\" if you have HTTPS configured.\n                        Allowed values: http, https\n  --agent_token AGENT_TOKEN\n                        Pre-shared token to use when working with the ironic\n                        API. This value is typically supplied by ironic\n                        automatically.\n  --agent_token_required\n                        Control to enforce if API command requests should\n                        enforce token validation. The configuration provided\n                        by the conductor MAY override this and force this\n                        setting to be changed to True in memory.\n  --api_url API_URL     URL of the Ironic API. Can be supplied as \"ipa-api-\n                        url\" kernel parameter.The value must start with either\n                        http:// or https://. A special value \"mdns\" can be\n                        specified to fetch the URL using multicast DNS service\n                        discovery.\n  --auto_tls_allowed_clock_skew AUTO_TLS_ALLOWED_CLOCK_SKEW\n                        Clock skew (in seconds) allowed in the generated TLS\n                        certificate.\n  --cafile CAFILE       Path to PEM encoded Certificate Authority file to use\n                        when verifying HTTPS connections. Default is to use\n                        available system-wide configured CAs.\n  --certfile CERTFILE   Path to PEM encoded client certificate cert file. Must\n                        be provided together with \"keyfile\" option. Default is\n                        to not present any client certificates to the server.\n  --collect_lldp        Whether IPA should attempt to receive LLDP packets for\n                        each network interface it discovers in the inventory.\n                        Can be supplied as \"ipa-collect-lldp\" kernel\n                        parameter.\n  --config-dir DIR      Path to a config directory to pull `*.conf` files\n                        from. This file set is sorted, so as to provide a\n                        predictable parse order if individual options are\n                        over-ridden. The set is parsed after the file(s)\n                        specified via previous --config-file, arguments hence\n                        over-ridden options in the directory take precedence.\n                        This option must be set from the command-line.\n  --config-file PATH    Path to a config file to use. Multiple config files\n                        can be specified, with values in later files taking\n                        precedence. Defaults to None. This option must be set\n                        from the command-line.\n  --debug, -d           If set to true, the logging level will be set to DEBUG\n                        instead of the default INFO level.\n  --disk_wait_attempts DISK_WAIT_ATTEMPTS\n                        The number of times to try and check to see if at\n                        least one suitable disk has appeared in inventory\n                        before proceeding with any actions. Can be supplied as\n                        \"ipa-disk-wait-attempts\" kernel parameter.\n  --disk_wait_delay DISK_WAIT_DELAY\n                        How much time (in seconds) to wait between attempts to\n                        check if at least one suitable disk has appeared in\n                        inventory. Set to zero to disable. Can be supplied as\n                        \"ipa-disk-wait-delay\" kernel parameter.\n  --enable_auto_tls     Enables auto-generating TLS parameters when listen_tls\n                        is False and ironic API version indicates support for\n                        automatic agent TLS.\n  --enable_vlan_interfaces ENABLE_VLAN_INTERFACES\n                        Comma-separated list of VLAN interfaces to enable, in\n                        the format \"interface.vlan\". If only an interface is\n                        provided, then IPA should attempt to bring up all\n                        VLANs on that interface detected via lldp. If \"all\" is\n                        set then IPA should attempt to bring up all VLANs from\n                        lldp on all interfaces. By default, no VLANs will be\n                        brought up.\n  --fail_if_clock_not_set\n                        If operations should fail if the clock time sync fails\n                        to complete successfully.\n  --global_request_id GLOBAL_REQUEST_ID\n                        Global request ID header to provide to Ironic API. Can\n                        be supplied as \"ipa-global-request-id\" kernel\n                        parameter. The v"
+              }
+            ]
+          },
+          {
+            "executable": "/usr/bin/ironic-python-agent",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "usage: ironic-python-agent [-h] [--advertise_host ADVERTISE_HOST]\n                           [--advertise_port ADVERTISE_PORT]\n                           [--advertise_protocol ADVERTISE_PROTOCOL]\n                           [--agent_token AGENT_TOKEN]\n                           [--agent_token_required] [--api_url API_URL]\n                           [--auto_tls_allowed_clock_skew AUTO_TLS_ALLOWED_CLOCK_SKEW]\n                           [--cafile CAFILE] [--certfile CERTFILE]\n                           [--collect_lldp] [--config-dir DIR]\n                           [--config-file PATH] [--debug]\n                           [--disk_wait_attempts DISK_WAIT_ATTEMPTS]\n                           [--disk_wait_delay DISK_WAIT_DELAY]\n                           [--enable_auto_tls]\n                           [--enable_vlan_interfaces ENABLE_VLAN_INTERFACES]\n                           [--fail_if_clock_not_set]\n                           [--global_request_id GLOBAL_REQUEST_ID]\n                           [--guard-special-filesystems]\n                           [--hardware_initialization_delay HARDWARE_INITIALIZATION_DELAY]\n                           [--ignore_bootloader_failure]\n                           [--image_download_connection_retries IMAGE_DOWNLOAD_CONNECTION_RETRIES]\n                           [--image_download_connection_retry_interval IMAGE_DOWNLOAD_CONNECTION_RETRY_INTERVAL]\n                           [--image_download_connection_timeout IMAGE_DOWNLOAD_CONNECTION_TIMEOUT]\n                           [--inject_files_priority INJECT_FILES_PRIORITY]\n                           [--insecure]\n                           [--inspection_callback_url INSPECTION_CALLBACK_URL]\n                           [--inspection_collectors INSPECTION_COLLECTORS]\n                           [--inspection_dhcp_all_interfaces]\n                           [--inspection_dhcp_wait_timeout INSPECTION_DHCP_WAIT_TIMEOUT]\n                           [--introspection_daemon]\n                           [--introspection_daemon_post_interval INTROSPECTION_DAEMON_POST_INTERVAL]\n                           [--ip_lookup_attempts IP_LOOKUP_ATTEMPTS]\n                           [--ip_lookup_sleep IP_LOOKUP_SLEEP]\n                           [--ironic_api_version IRONIC_API_VERSION]\n                           [--keyfile KEYFILE] [--listen_host LISTEN_HOST]\n                           [--listen_port LISTEN_PORT] [--listen_tls]\n                           [--lldp_timeout LLDP_TIMEOUT]\n                           [--log-config-append PATH]\n                           [--log-date-format DATE_FORMAT] [--log-dir LOG_DIR]\n                           [--log-file PATH]\n                           [--lookup_interval LOOKUP_INTERVAL]\n                           [--lookup_timeout LOOKUP_TIMEOUT]\n                           [--network_interface NETWORK_INTERFACE]\n                           [--noagent_token_required] [--nocollect_lldp]\n                           [--nodebug] [--noenable_auto_tls]\n                           [--nofail_if_clock_not_set]\n                           [--noguard-special-filesystems]\n                           [--noignore_bootloader_failure] [--noinsecure]\n                           [--noinspection_dhcp_all_interfaces]\n                           [--nointrospection_daemon] [--nolisten_tls]\n                           [--nouse-journal] [--nouse-json] [--nouse-syslog]\n                           [--nowatch-log-file] [--ntp_server NTP_SERVER]\n                           [--syslog-log-facility SYSLOG_LOG_FACILITY]\n                           [--use-journal] [--use-json] [--use-syslog]\n                           [--watch-log-file]\n\noptions:\n  -h, --help            show this help message and exit\n  --advertise_host ADVERTISE_HOST\n                        The host to tell Ironic to reply and send commands to.\n                        Can be supplied as \"ipa-advertise-host\" kernel\n                        parameter.\n  --advertise_port ADVERTISE_PORT\n                        The port to tell Ironic to reply and send commands to.\n                        Can be supplied as \"ipa-advertise-port\" kernel\n                        parameter.\n  --advertise_protocol ADVERTISE_PROTOCOL\n                        Protocol to use for the callback URL. HTTP is used by\n                        default, set to \"https\" if you have HTTPS configured.\n                        Allowed values: http, https\n  --agent_token AGENT_TOKEN\n                        Pre-shared token to use when working with the ironic\n                        API. This value is typically supplied by ironic\n                        automatically.\n  --agent_token_required\n                        Control to enforce if API command requests should\n                        enforce token validation. The configuration provided\n                        by the conductor MAY override this and force this\n                        setting to be changed to True in memory.\n  --api_url API_URL     URL of the Ironic API. Can be supplied as \"ipa-api-\n                        url\" kernel parameter.The value must start with either\n                        http:// or https://. A special value \"mdns\" can be\n                        specified to fetch the URL using multicast DNS service\n                        discovery.\n  --auto_tls_allowed_clock_skew AUTO_TLS_ALLOWED_CLOCK_SKEW\n                        Clock skew (in seconds) allowed in the generated TLS\n                        certificate.\n  --cafile CAFILE       Path to PEM encoded Certificate Authority file to use\n                        when verifying HTTPS connections. Default is to use\n                        available system-wide configured CAs.\n  --certfile CERTFILE   Path to PEM encoded client certificate cert file. Must\n                        be provided together with \"keyfile\" option. Default is\n                        to not present any client certificates to the server.\n  --collect_lldp        Whether IPA should attempt to receive LLDP packets for\n                        each network interface it discovers in the inventory.\n                        Can be supplied as \"ipa-collect-lldp\" kernel\n                        parameter.\n  --config-dir DIR      Path to a config directory to pull `*.conf` files\n                        from. This file set is sorted, so as to provide a\n                        predictable parse order if individual options are\n                        over-ridden. The set is parsed after the file(s)\n                        specified via previous --config-file, arguments hence\n                        over-ridden options in the directory take precedence.\n                        This option must be set from the command-line.\n  --config-file PATH    Path to a config file to use. Multiple config files\n                        can be specified, with values in later files taking\n                        precedence. Defaults to None. This option must be set\n                        from the command-line.\n  --debug, -d           If set to true, the logging level will be set to DEBUG\n                        instead of the default INFO level.\n  --disk_wait_attempts DISK_WAIT_ATTEMPTS\n                        The number of times to try and check to see if at\n                        least one suitable disk has appeared in inventory\n                        before proceeding with any actions. Can be supplied as\n                        \"ipa-disk-wait-attempts\" kernel parameter.\n  --disk_wait_delay DISK_WAIT_DELAY\n                        How much time (in seconds) to wait between attempts to\n                        check if at least one suitable disk has appeared in\n                        inventory. Set to zero to disable. Can be supplied as\n                        \"ipa-disk-wait-delay\" kernel parameter.\n  --enable_auto_tls     Enables auto-generating TLS parameters when listen_tls\n                        is False and ironic API version indicates support for\n                        automatic agent TLS.\n  --enable_vlan_interfaces ENABLE_VLAN_INTERFACES\n                        Comma-separated list of VLAN interfaces to enable, in\n                        the format \"interface.vlan\". If only an interface is\n                        provided, then IPA should attempt to bring up all\n                        VLANs on that interface detected via lldp. If \"all\" is\n                        set then IPA should attempt to bring up all VLANs from\n                        lldp on all interfaces. By default, no VLANs will be\n                        brought up.\n  --fail_if_clock_not_set\n                        If operations should fail if the clock time sync fails\n                        to complete successfully.\n  --global_request_id GLOBAL_REQUEST_ID\n                        Global request ID header to provide to Ironic API. Can\n                        be supplied as \"ipa-global-request-id\" kernel\n                        parameter. The value must be in form \"req-<UUID>\".\n  --guard-special-filesystems\n                        Guard \"special\" shared device filesystems from\n                        cleaning by the stock hardware manager's cleaning\n                        methods. If one of these filesystems is detected\n                        during cleaning, the cleaning process will be aborted\n                        and infrastructure operator intervention may be\n                        required as this option is intended to prevent\n                        cleaning from inadvertently destroying a running\n                        cluster which may be visible over a storage fabric\n                        such as FibreChannel.\n  --hardware_initialization_delay HARDWARE_INITIALIZATION_DELAY\n                        How much time (in seconds) to wait for hardware to\n                        initialize before proceeding with any actions. Can be\n                        supplied as \"ipa-hardware-initialization-delay\" kernel\n                        parameter.\n  --ignore_bootloader_failure\n                        If the agent should ignore f"
+              }
+            ]
+          }
+        ],
+        "package": "ironic-python-agent",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "9.1.0-1ubuntu1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "0e2e78a5d0a1d15f6f966d5d8f7f3603b0cfd70f9d1578f742fcc139596424aa",
+        "binding_kind": "apt",
+        "description": "bare metal hypervisor API for OpenStack - Python Agent",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "ironic-python-agent",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "9.1.0-1ubuntu1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ProbeFailure:APT_INSTALL_FAILED:E: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.154.174.208 80]\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\n",
+      "status": "PROBE_FAILED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "c00a28811d34479677149b6bdb9616522d8cbf7b722fb220487af88342196133",
+        "binding_kind": "apt",
+        "description": "Python 3 plugin for KDevelop",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "kdevelop-python",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "23.08.5-0ubuntu4",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "1463fc465281e5ddffa7a7421c07d37aca506221d4dae78814c7571c050dae84",
+        "executables": [],
+        "package": "kdevelop-python-data",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "23.08.5-0ubuntu4"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "1463fc465281e5ddffa7a7421c07d37aca506221d4dae78814c7571c050dae84",
+        "binding_kind": "apt",
+        "description": "Python 3 plugin for KDevelop - data files",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "python"
+        ],
+        "name": "kdevelop-python-data",
+        "packages": [],
+        "query": "python",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "23.08.5-0ubuntu4",
+        "zero_cost_eligible": true
+      }
+    }
+  ],
+  "goal": "Determine the latest stable Python 3 release shown on the page",
+  "mission_id": "ASTRA-RUNTIME-WEB-BROWSER-PYTHON-RELEASE-002",
+  "role_conditioned_discovery": [],
+  "schema": "PROJECT_BRAIN_AUTO_APT_CLI_ACQUISITION_EVIDENCE_V1",
+  "status": "NO_COMPATIBLE_CONTRACT"
+}
