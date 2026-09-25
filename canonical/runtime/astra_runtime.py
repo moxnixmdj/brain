@@ -1034,7 +1034,7 @@ def _run_model_independent_goal(step, mission, goal):
     allowed_types={
       "read_file","list_tree","search_text","http_get","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout",
       "project_browser_result_json","assert_hex_prefix_bucket","assert_collection_length_bucket","assert_runtime_selected_code_decodes",
-      "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal",
+      "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal","assert_runtime_fanout_decodes",
       "assert_workflow_audit_supported_by_source","assert_python_source_audit_supported_by_source",
       "assert_python_test_audit_zero","assert_python_test_audit_supported_by_fresh_execution",
       "finish"
