@@ -1,0 +1,65 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "plan": {
+        "args": {
+          "argv": [
+            "qrencode",
+            "-o",
+            "canonical/astra_runtime/tmp/CHECKPOINT_REWIND_QR.png",
+            "CHECKPOINT-REWIND-PROOF"
+          ],
+          "capability_id": "image.qr.generate.qrencode",
+          "output_path": "canonical/astra_runtime/tmp/CHECKPOINT_REWIND_QR.png",
+          "output_prefix_hex": "89504e470d0a1a0a",
+          "timeout_s": 60
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "result": {
+        "adapter": "bound_capability_cli",
+        "argv": [
+          "qrencode",
+          "-o",
+          "canonical/astra_runtime/tmp/CHECKPOINT_REWIND_QR.png",
+          "CHECKPOINT-REWIND-PROOF"
+        ],
+        "capability_id": "image.qr.generate.qrencode",
+        "dependency": {
+          "origin": "Ubuntu",
+          "packages": [
+            {
+              "archive_sha256": "613c5a22316489ec6a9ce5d59190293df15dd4612b55432dde04c62f7c1a0e25",
+              "name": "qrencode",
+              "version": "4.1.1-1build2"
+            }
+          ],
+          "status": "INSTALLED_VERIFIED"
+        },
+        "output_bytes": 288,
+        "output_path": "canonical/astra_runtime/tmp/CHECKPOINT_REWIND_QR.png",
+        "output_sha256": "759a1c775e8d457e25567158e7b4077da334a36607abe0114649c39123b3f2de",
+        "output_verified": true,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": ""
+      }
+    }
+  ],
+  "created_at_utc": "2026-09-25T17:40:27.406524+00:00",
+  "mission_id": "ASTRA-RUNTIME-CHECKPOINT-REWIND-001",
+  "next_action_index": 1,
+  "plan_sha256": "19b381732e121fea451a562ad252ebe6007d129ad71736e36ea5abb04ab56a04",
+  "resume_count": 0,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "IN_PROGRESS",
+  "step_id": "checkpoint-rewind-controller",
+  "test_interrupt_injected": true,
+  "updated_at_utc": "2026-09-25T17:40:42.698154+00:00"
+}

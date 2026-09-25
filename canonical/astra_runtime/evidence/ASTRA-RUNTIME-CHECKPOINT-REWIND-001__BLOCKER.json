@@ -1,0 +1,9 @@
+{
+  "adapter": "goal",
+  "error": "Blocker:CONTROLLER_CHECKPOINT_TEST_INTERRUPTION",
+  "mission_id": "ASTRA-RUNTIME-CHECKPOINT-REWIND-001",
+  "observed_at_utc": "2026-09-25T17:40:42.698386+00:00",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "checkpoint-rewind-controller",
+  "step_index": 0
+}

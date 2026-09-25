@@ -1,0 +1,21 @@
+{
+  "blocker": {
+    "adapter": "goal",
+    "error": "Blocker:CONTROLLER_CHECKPOINT_TEST_INTERRUPTION",
+    "mission_id": "ASTRA-RUNTIME-CHECKPOINT-REWIND-001",
+    "observed_at_utc": "2026-09-25T17:40:42.698386+00:00",
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "checkpoint-rewind-controller",
+    "step_index": 0
+  },
+  "created_at_utc": "2026-09-25T17:40:27.406330+00:00",
+  "history": [],
+  "mission_id": "ASTRA-RUNTIME-CHECKPOINT-REWIND-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_CHECKPOINT_REWIND_001.json",
+  "mission_sha256": "f41d20a2d1ad5f49549a3cb0b269ce5e3a92e90c59aea715ee6ffc7a2af3c76e",
+  "next_step": 0,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-25T17:40:42.698550+00:00"
+}
