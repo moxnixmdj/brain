@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T01:57:42.167940+00:00",
+  "mission_id": "ASTRA-VERIFY-SQLITE-ROUNDTRIP-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_SQLITE_ROUNDTRIP_002.json",
+  "mission_sha256": "7cabbac85829ec5109045575674223a1cf473d2b08d7a018850cda0f91f71f01",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "31c8df5b76c90a176e257d22b437eb84a00eebf24be4e1a97df46ea6876be576",
+  "status": "COMPLETE",
+  "steps_completed": 2
+}

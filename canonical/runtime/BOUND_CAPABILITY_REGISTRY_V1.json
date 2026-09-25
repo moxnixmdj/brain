@@ -854,7 +854,7 @@
       "verification": {
         "independent_verifier_package": "sqlite3",
         "independently_verified": true,
-        "mission_id": "ASTRA-VERIFY-SQLITE-ROUNDTRIP-001",
+        "mission_id": "ASTRA-VERIFY-SQLITE-ROUNDTRIP-002",
         "observed_effect": {
           "adapter": "sqlite_table_stdlib",
           "collection_path": [
@@ -870,14 +870,14 @@
           ],
           "output_bytes": 8192,
           "output_path": "canonical/astra_runtime/tmp/SQLITE_ROUNDTRIP_VERIFY.sqlite",
-          "output_sha256": "4e008aa49ec7ddc240d10011f9fea881e783f9f268e48aeafb59ffd7d6823b52",
+          "output_sha256": "b67c1545d8e91b6da2e4cef13075f32083a6bdfd8231ad1454ecaf3eae48a27a",
           "output_verified": true,
-          "row_count": 15,
+          "row_count": 17,
           "sqlite_version": "3.45.1",
           "status_value": "VERIFIED_BOUND_CAPABILITY",
           "table_name": "verified_capabilities"
         },
-        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SQLITE-ROUNDTRIP-001__RESULT.json"
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SQLITE-ROUNDTRIP-002__RESULT.json"
       }
     },
     "sqlite.table.verify_against_json_records": {
@@ -930,7 +930,7 @@
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
         "independently_verified": true,
-        "mission_id": "ASTRA-VERIFY-SQLITE-ROUNDTRIP-001",
+        "mission_id": "ASTRA-VERIFY-SQLITE-ROUNDTRIP-002",
         "observed_effect": {
           "adapter": "sqlite_verify_cli",
           "columns": [
@@ -942,14 +942,14 @@
           ],
           "producer_independent_verifier": true,
           "sqlite_path": "canonical/astra_runtime/tmp/SQLITE_ROUNDTRIP_VERIFY.sqlite",
-          "sqlite_sha256": "4e008aa49ec7ddc240d10011f9fea881e783f9f268e48aeafb59ffd7d6823b52",
+          "sqlite_sha256": "b67c1545d8e91b6da2e4cef13075f32083a6bdfd8231ad1454ecaf3eae48a27a",
           "status_value": "VERIFIED_BOUND_CAPABILITY",
           "table_name": "verified_capabilities",
           "verified": true,
-          "verified_rows": 15
+          "verified_rows": 17
         },
         "producer_source": "python_stdlib:sqlite3",
-        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SQLITE-ROUNDTRIP-001__RESULT.json"
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SQLITE-ROUNDTRIP-002__RESULT.json"
       }
     },
     "xlsx.table.create_from_json_records": {
