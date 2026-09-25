@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T20:19:51.968823+00:00",
+  "mission_id": "ASTRA-RUNTIME-GENERIC-DATAFLOW-TOPK-HELDOUT-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_GENERIC_DATAFLOW_TOPK_HELDOUT_001.json",
+  "mission_sha256": "906fe26ca42cba0f9a14dd2eda7477cb5271c8dcb485e641e67f5cbbe2fc4b37",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "f33f079e4d4b25c5200357309341f0816f6fe746a9f2579f9fafd7832ca2ce6d",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

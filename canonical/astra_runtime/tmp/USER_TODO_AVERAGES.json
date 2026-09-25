@@ -1,0 +1,72 @@
+[
+  {
+    "average_todo_id": 10.5,
+    "todo_count": 20,
+    "todo_id_sum": 210,
+    "user_id": 1,
+    "username": "Bret"
+  },
+  {
+    "average_todo_id": 30.5,
+    "todo_count": 20,
+    "todo_id_sum": 610,
+    "user_id": 2,
+    "username": "Antonette"
+  },
+  {
+    "average_todo_id": 50.5,
+    "todo_count": 20,
+    "todo_id_sum": 1010,
+    "user_id": 3,
+    "username": "Samantha"
+  },
+  {
+    "average_todo_id": 70.5,
+    "todo_count": 20,
+    "todo_id_sum": 1410,
+    "user_id": 4,
+    "username": "Karianne"
+  },
+  {
+    "average_todo_id": 90.5,
+    "todo_count": 20,
+    "todo_id_sum": 1810,
+    "user_id": 5,
+    "username": "Kamren"
+  },
+  {
+    "average_todo_id": 110.5,
+    "todo_count": 20,
+    "todo_id_sum": 2210,
+    "user_id": 6,
+    "username": "Leopoldo_Corkery"
+  },
+  {
+    "average_todo_id": 130.5,
+    "todo_count": 20,
+    "todo_id_sum": 2610,
+    "user_id": 7,
+    "username": "Elwyn.Skiles"
+  },
+  {
+    "average_todo_id": 150.5,
+    "todo_count": 20,
+    "todo_id_sum": 3010,
+    "user_id": 8,
+    "username": "Maxime_Nienow"
+  },
+  {
+    "average_todo_id": 170.5,
+    "todo_count": 20,
+    "todo_id_sum": 3410,
+    "user_id": 9,
+    "username": "Delphine"
+  },
+  {
+    "average_todo_id": 190.5,
+    "todo_count": 20,
+    "todo_id_sum": 3810,
+    "user_id": 10,
+    "username": "Moriah.Stanton"
+  }
+]
