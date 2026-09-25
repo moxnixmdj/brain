@@ -36,6 +36,10 @@
     "replay_after_discovery_grammar_cleanup_commit": "ebe3a2de16038d91c71d0fa741978450e698459c",
     "replay_after_verified_jq_commit": "4ccfe0d842b860690936dd204c4840d517e0c6f8",
     "replay_after_jq_compiler_commit": "6eac4ce5e1c203e60094d39a1f3c47a358d1aa77",
-    "replay_after_jq_frontier_regression_commit": "b9b52b1a215013e1bde3e48533afc144a2cc4ded"
+    "replay_after_jq_frontier_regression_commit": "b9b52b1a215013e1bde3e48533afc144a2cc4ded",
+    "replay_after_verified_markdown_pdf_commit": "52e5ab944c47095cab4d993aed21f0ad52cff519",
+    "replay_after_context_binding_commit": "76bd77af3d1c12d370d4598826a2fbfbee63c341",
+    "replay_after_result_assertion_commit": "53cb1a1f196d1af2e511feaff3e4518ca9fd39dc",
+    "replay_after_full_composition_regression": "88ce8f955a57c6377e15a9a4f65dac1631d91f25"
   }
 }
