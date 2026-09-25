@@ -1,0 +1,68 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "plan": {
+        "args": {
+          "query": "MODEL_NON_DEPENDENCE_LAW_V1"
+        },
+        "type": "search_text"
+      },
+      "result": {
+        "hits": [
+          "canonical/CANONICAL_POINTER.json",
+          "canonical/astra_runtime/missions/ASTRA_RUNTIME_CAPABILITY_GRAPH_PLANNER_001.json",
+          "canonical/astra_runtime/missions/ASTRA_RUNTIME_MODEL_NONDEPENDENCE_REPAIR_001.json",
+          "canonical/astra_runtime/state/ASTRA-RUNTIME-CAPABILITY-GRAPH-PLANNER-001.json",
+          "canonical/astra_runtime/state/ASTRA-RUNTIME-MODEL-NONDEPENDENCE-REPAIR-001.json",
+          "canonical/astra_runtime/state/UNKNOWN__goal__CONTROLLER_CHECKPOINT.json",
+          "canonical/events/2026-09-21_MODEL_NON_DEPENDENCE_LAW.json",
+          "canonical/tests/test_astra_runtime_model_independence.py",
+          "canonical/tests/test_astra_runtime_verification.py",
+          "canonical/tests/test_capability_planner.py"
+        ],
+        "query": "MODEL_NON_DEPENDENCE_LAW_V1",
+        "truncated": false,
+        "type": "search_text"
+      }
+    },
+    {
+      "cycle": 1,
+      "plan": {
+        "args": {
+          "path": "canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md"
+        },
+        "type": "read_file"
+      },
+      "result": {
+        "content": "# Model Non-Dependence Law V1\n\nStatus: CANONICAL / MANDATORY\n\n## Core law\n\nProject Brain, Astra, Superheroes, and Super-Workers MUST NOT depend on any language model, frontier model, or pretrained model as the system's brain, cognition source, or mandatory decision loop.\n\nA model is only an optional external knowledge/action source, comparable to:\n- web search\n- GitHub\n- documentation\n- databases\n- APIs\n- Wolfram and solvers\n- local files\n- browsers and computers\n- experiments and simulators\n- connected applications\n- humans when genuinely necessary\n\nModels may be used only when they are the best available source/tool for the specific missing knowledge, transformation, prediction, or action according to the system's objective function.\n\n## Mandatory cognitive architecture\n\nThe persistent cognitive loop is model-independent:\n\nGOAL\n\u2192 RECONCILE CURRENT STATE\n\u2192 IDENTIFY CAUSAL FRONTIER\n\u2192 DECOMPOSE\n\u2192 DETECT MISSING KNOWLEDGE / CAPABILITY / ACTION\n\u2192 DISCOVER EXISTING SOURCES AND TOOLS FIRST\n\u2192 SELECT BEST ROUTE BY CORRECTNESS, VERIFIED WALL-CLOCK, COST, AND EVIDENCE QUALITY\n\u2192 EXECUTE / EXPERIMENT / RETRIEVE\n\u2192 VERIFY\n\u2192 UPDATE PROJECT BRAIN\n\u2192 RECOMPUTE FRONTIER\n\u2192 CONTINUE\n\nNo step above requires an LLM.\n\n## Knowledge law\n\nKnowledge belongs in Project Brain and durable evidence stores, not inside model weights or a model context window.\n\nIf a fact, method, capability, or decision matters, it must be externally recoverable, attributable, and verifiable.\n\n## Tool/source selection law\n\nFor every knowledge or action need, the system MUST search and compare available routes before selecting one.\n\nExamples:\n- current factual knowledge \u2192 web/search/database/API\n- exact computation \u2192 Wolfram/code/solver\n- software capability \u2192 repositories/packages/APIs/tools\n- UI action \u2192 browser/computer\n- uncertain hypothesis \u2192 experiment/simulation\n- synthesis/reasoning where a model is fastest/best \u2192 model\n- model unavailable/rate-limited \u2192 continue through other routes\n\nA model is never privileged merely because it is called AI.\n\n## Search-before-invention law\n\nSearch existing tools, repositories, papers, APIs, services, social sources, datasets, and prior Project Brain work before inventing a new mechanism.\n\nInvent only after the relevant search space has been explored to the level justified by expected value and wall-clock cost.\n\n## Persistence law\n\nThe Superhero identity, mission, state, causal frontier, evidence, leases, verification status, and continuation loop MUST survive the loss of any model invocation or model provider.\n\nA model call can terminate; the Superhero must continue.\n\n## Runtime implication\n\nAny runtime that places a model call inside the mandatory supervisor loop is architecturally non-compliant and MUST be repaired.\n\nThe supervisor is responsible for:\n- mission persistence\n- state reconciliation\n- frontier computation\n- source/tool discovery\n- route selection\n- execution dispatch\n- evidence collection\n- verification\n- Brain update\n- continuation\n\nModels are registered only as optional providers in the source/tool registry.\n\n## Promotion rule\n\nNo runtime may be promoted as a real Superhero/Super-Worker if its continued cognition depends on one model, one model provider, or one model context remaining available.\n\n## Objective\n\nUse every available source of knowledge and capability, including models when they are actually best, to reach the verified goal in minimum wall-clock time at hard $0 incremental spend while preserving correctness, evidence, recoverability, and provider independence.\n",
+        "path": "canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md",
+        "truncated": false,
+        "type": "read_file"
+      }
+    },
+    {
+      "cycle": 2,
+      "plan": {
+        "args": {
+          "summary": "MODEL_INDEPENDENT_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "MODEL_INDEPENDENT_GOAL_COMPLETE",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-09-25T20:06:29.991759+00:00",
+  "mission_id": null,
+  "next_action_index": 3,
+  "plan_sha256": "2e9ae57cecaaa16eb83df29ac97f96c7c507c0972677bb9f3d66fd8062d520e7",
+  "resume_count": 0,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "goal",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-09-25T20:06:30.051506+00:00"
+}
