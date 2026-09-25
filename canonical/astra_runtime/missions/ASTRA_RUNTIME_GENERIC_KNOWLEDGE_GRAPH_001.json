@@ -1,0 +1,128 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-GENERIC-KNOWLEDGE-GRAPH-001",
+  "purpose": "Prove the deterministic capability graph plus generic effect-result valueflow can execute a multi-source knowledge pipeline without the task-specific knowledge compiler.",
+  "goal": "Acquire two agreeing external observations, assess them, materialize the supported value, and independently verify the resulting fact artifact.",
+  "steps": [
+    {
+      "id": "plan-and-execute-generic-knowledge-graph",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 12,
+      "capability_problem": {
+        "initial_facts": [],
+        "target_effects": ["knowledge.fact.materialized"],
+        "finish_summary": "GENERIC_KNOWLEDGE_GRAPH_COMPLETE",
+        "max_expansions": 200,
+        "capabilities": [
+          {
+            "id": "observe-a",
+            "requires": [],
+            "provides": ["knowledge.observation.a.available"],
+            "result_fields": ["output_path", "value"],
+            "cost": 1,
+            "action": {
+              "type": "fetch_json_knowledge",
+              "args": {
+                "url": "https://httpbin.org/get?claim=alpha",
+                "json_path": ["args", "claim"],
+                "output_path": "canonical/astra_runtime/tmp/GENERIC_KNOWLEDGE_A.json",
+                "authoritative": false,
+                "timeout_s": 20,
+                "max_bytes": 500000
+              },
+              "expect": {"type":"field_equals","field":"verified","value":true}
+            }
+          },
+          {
+            "id": "observe-b",
+            "requires": [],
+            "provides": ["knowledge.observation.b.available"],
+            "result_fields": ["output_path", "value"],
+            "cost": 1,
+            "action": {
+              "type": "fetch_json_knowledge",
+              "args": {
+                "url": "https://httpbin.org/anything?claim=alpha",
+                "json_path": ["args", "claim"],
+                "output_path": "canonical/astra_runtime/tmp/GENERIC_KNOWLEDGE_B.json",
+                "authoritative": false,
+                "timeout_s": 20,
+                "max_bytes": 500000
+              },
+              "expect": {"type":"field_equals","field":"verified","value":true}
+            }
+          },
+          {
+            "id": "assess-observations",
+            "requires": [
+              "knowledge.observation.a.available",
+              "knowledge.observation.b.available"
+            ],
+            "provides": ["knowledge.assessment.supported"],
+            "result_fields": ["output_path", "status"],
+            "cost": 1,
+            "action": {
+              "type": "assess_knowledge_consistency",
+              "args": {
+                "evidence_paths": [
+                  {"$effect_result":{"effect":"knowledge.observation.a.available","field":"output_path"}},
+                  {"$effect_result":{"effect":"knowledge.observation.b.available","field":"output_path"}}
+                ],
+                "output_path": "canonical/astra_runtime/tmp/GENERIC_KNOWLEDGE_ASSESSMENT.json"
+              },
+              "expect": {"type":"field_equals","field":"status","value":"SUPPORTED"}
+            }
+          },
+          {
+            "id": "materialize-supported-fact",
+            "requires": ["knowledge.assessment.supported"],
+            "provides": ["knowledge.fact.materialized"],
+            "result_fields": ["output_path", "value"],
+            "cost": 1,
+            "action": {
+              "type": "materialize_supported_knowledge",
+              "args": {
+                "assessment_path": {
+                  "$effect_result": {
+                    "effect": "knowledge.assessment.supported",
+                    "field": "output_path"
+                  }
+                },
+                "field_name": "claim",
+                "output_path": "canonical/astra_runtime/tmp/GENERIC_KNOWLEDGE_FACT.json"
+              },
+              "expect": {"type":"field_equals","field":"output_verified","value":true}
+            }
+          }
+        ]
+      },
+      "verify": {
+        "type": "stdout_contains",
+        "text": "GENERIC_KNOWLEDGE_GRAPH_COMPLETE"
+      }
+    },
+    {
+      "id": "independently-verify-generic-knowledge-artifact",
+      "adapter": "shell",
+      "command": "python - <<'PY'\nimport json,pathlib\np=pathlib.Path('canonical/astra_runtime/tmp/GENERIC_KNOWLEDGE_FACT.json')\ndata=json.loads(p.read_text(encoding='utf-8'))\nassert data==[{'claim':'alpha'}],data\nprint('GENERIC_KNOWLEDGE_GRAPH_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "GENERIC_KNOWLEDGE_GRAPH_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "manual_controller_actions": false,
+    "task_specific_knowledge_compiler_forbidden": true,
+    "expected_selected_capabilities": [
+      "observe-a",
+      "observe-b",
+      "assess-observations",
+      "materialize-supported-fact"
+    ],
+    "effect_result_valueflow_required": true
+  }
+}
