@@ -22,6 +22,7 @@ class KnowledgeSourceIdentityTests(unittest.TestCase):
             "source_url": source_url,
             "final_url": final_url,
             "source_type": "external_json",
+            "http_status": 200,
             "retrieved_at_utc": runtime.utc(),
             "body_sha256": "0" * 64,
             "json_path": list(json_path or ["args", "claim"]),
@@ -74,6 +75,23 @@ class KnowledgeSourceIdentityTests(unittest.TestCase):
         result=self._assess(a,b,out)
         self.assertEqual(result["status"],"INSUFFICIENT")
         self.assertEqual(result["distinct_fresh_source_identities"],1)
+
+
+    def test_invalid_evidence_contract_cannot_create_support(self):
+        a=self._path("TEST_INVALID_EVIDENCE_A.json")
+        b=self._path("TEST_INVALID_EVIDENCE_B.json")
+        out=self._path("TEST_INVALID_EVIDENCE_ASSESSMENT.json")
+        a.parent.mkdir(parents=True,exist_ok=True)
+        a.write_text(json.dumps({"value":"alpha"})+"\n",encoding="utf-8")
+        b.write_text(json.dumps({"value":"alpha"})+"\n",encoding="utf-8")
+        self.addCleanup(lambda: a.unlink(missing_ok=True))
+        self.addCleanup(lambda: b.unlink(missing_ok=True))
+        result=self._assess(a,b,out)
+        self.assertEqual(result["status"],"INSUFFICIENT")
+        self.assertEqual(result["evidence_count"],0)
+        assessment=json.loads(out.read_text(encoding="utf-8"))
+        self.assertEqual(len(assessment["invalid"]),2)
+        self.assertTrue(all(x["error"]=="EVIDENCE_SCHEMA_INVALID" for x in assessment["invalid"]))
 
 
 if __name__ == "__main__":
