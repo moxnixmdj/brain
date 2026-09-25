@@ -58,10 +58,10 @@
   "mission_id": null,
   "next_action_index": 3,
   "plan_sha256": "2e9ae57cecaaa16eb83df29ac97f96c7c507c0972677bb9f3d66fd8062d520e7",
-  "resume_count": 0,
+  "resume_count": 1,
   "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
   "status": "COMPLETE",
   "step_id": "goal",
   "test_interrupt_injected": false,
-  "updated_at_utc": "2026-09-25T19:46:36.232925+00:00"
+  "updated_at_utc": "2026-09-25T19:49:20.215245+00:00"
 }
