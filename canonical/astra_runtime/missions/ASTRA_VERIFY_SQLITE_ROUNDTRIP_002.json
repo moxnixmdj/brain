@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-VERIFY-SQLITE-ROUNDTRIP-002",
+  "purpose": "Fresh re-verification of the modified SQLite independent verifier on the exact table-name-omitting clause that failed in the real mission.",
+  "goal": "Create with Python stdlib sqlite3, then independently query with hash-pinned sqlite3 CLI without repeating the table name; promote only if schema discovery, row/value matching, hash equality, and integrity all pass.",
+  "steps": [
+    {
+      "id": "reverify-independent-sqlite-roundtrip",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/runtime/verify_sqlite_roundtrip.py canonical/astra_runtime/evidence/ASTRA-VERIFY-SQLITE-ROUNDTRIP-002__RESULT.json ASTRA-VERIFY-SQLITE-ROUNDTRIP-002",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "SQLITE_ROUNDTRIP_VERIFIED"
+      }
+    },
+    {
+      "id": "refresh-promoted-sqlite-capabilities",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/runtime/promote_sqlite_capabilities.py canonical/astra_runtime/evidence/ASTRA-VERIFY-SQLITE-ROUNDTRIP-002__RESULT.json",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "SQLITE_CAPABILITIES_PROMOTED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "fresh_verification_invocation_required": true,
+    "producer_verifier_independence_required": true,
+    "allow_registry_mutation": true
+  }
+}
