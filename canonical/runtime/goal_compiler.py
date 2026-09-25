@@ -316,7 +316,7 @@ def _compile_json_markdown_table(subgoal, context_paths, registry, root):
       '| ($rows | map(.value | keys) | add | unique) as $cols '
       '| (["id"] + $cols) as $headers '
       '| ($headers | "| " + join(" | ") + " |"), '
-      '($headers | "| " + map("---") | join(" | ") + " |"), '
+      '("| " + ($headers | map("---") | join(" | ")) + " |"), '
       '($rows[] | . as $row '
       '| ([ $row.key ] + ($cols | map(($row.value[.] // "") '
       '| if type=="array" then map(tostring) | join(", ") '
