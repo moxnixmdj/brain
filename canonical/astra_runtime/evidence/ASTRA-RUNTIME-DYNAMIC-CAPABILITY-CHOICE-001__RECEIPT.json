@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T04:40:03.034361+00:00",
+  "mission_id": "ASTRA-RUNTIME-DYNAMIC-CAPABILITY-CHOICE-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_DYNAMIC_CAPABILITY_CHOICE_001.json",
+  "mission_sha256": "2e1a722293a07bdf03ed0094dc0a928b04f8f5b2c843e5073bbebf2db4344274",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "f331aa53dbc52c22a28167eb6954decc3637101cc05022bb0ab04622cf100f63",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

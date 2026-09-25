@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T04:40:03.077593+00:00",
+  "mission_id": "ASTRA-DYNAMIC-CAPABILITY-EXECUTION-HARNESS-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_DYNAMIC_CAPABILITY_EXECUTION_HARNESS_001.json",
+  "mission_sha256": "a2672f04daaeb71ff7e8b60a00e36f68c9a4ece352919c4f5256605147f22bf2",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "2dcca0627d7e0dc24615f7a7d54a4e2b7d22483f8722275fc945391a1a6aefa3",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

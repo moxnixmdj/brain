@@ -1,21 +1,262 @@
 {
-  "blocker": {
-    "adapter": "goal",
-    "error": "Blocker:CAPABILITY_ACQUISITION_REQUIRED:{\"auto_acquisition_error\": \"AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"r-cran-png\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\\\", \\\"name\\\": \\\"ccdiff\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"pngphoon\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\\\", \\\"name\\\": \\\"qrencode\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"famfamfam-flag-png\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"gap-character-tables\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"gedit-plugin-character-map\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"iso-flags-png-320x240\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"minetest-mod-character-creator\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"node-character-parser\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"node-first-chunk-stream\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"node-locate-character\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}]\", \"evidence_path\": \"canonical/astra_runtime/evidence/ASTRA-RUNTIME-DYNAMIC-CAPABILITY-CHOICE-001__PLAIN_GOAL_CAPABILITY_DISCOVERY.json\", \"targeted_acquisition_error\": \"AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"r-cran-png\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"pngphoon\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\\\", \\\"name\\\": \\\"qrencode\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"famfamfam-flag-png\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"iso-flags-png-320x240\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"node-first-chunk-stream\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"openclipart-png\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"png-definitive-guide\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"postgresql-16-first-last-agg\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"valgrind-if-available\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"alien-arena\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"ansilove\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}]\", \"top_candidates\": [{\"integration_friction\": 0, \"name\": \"gap-character-tables\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"gedit-plugin-character-map\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"minetest-mod-character-creator\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"node-character-parser\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"node-first-chunk-stream\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"node-locate-character\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"node-posix-character-classes\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"postgresql-16-first-last-agg\", \"required_secret_count\": 0, \"score\": 32, \"zero_cost_eligible\": true}]}",
-    "mission_id": "ASTRA-RUNTIME-DYNAMIC-CAPABILITY-CHOICE-001",
-    "observed_at_utc": "2026-09-25T04:34:46.593868+00:00",
-    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
-    "step_id": "run-dynamic-capability-choice",
-    "step_index": 0
-  },
+  "completed_at_utc": "2026-09-25T04:40:03.033737+00:00",
   "created_at_utc": "2026-09-25T04:31:22.700658+00:00",
-  "history": [],
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T04:40:03.032976+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "goal",
+        "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+        "cycles": 4,
+        "final_summary": "COMPOUND_GOAL_COMPLETE",
+        "goal_compilation": {
+          "clauses": [
+            "Using a real rendered browser, open https://httpbin.org/uuid, save a screenshot to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_UUID.png, and save the rendered result to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_UUID.json",
+            "Read the UUID from that live result",
+            "If its first hexadecimal character is one of a,b,c,d,e,f, generate a QR code image for the observed UUID and save it to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_QR.png; otherwise generate a Code 128 barcode image for the same observed UUID and save it to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_BARCODE.png",
+            "Finally independently verify that the artifact selected by the live branch decodes to the observed UUID"
+          ],
+          "compiled_parts": [
+            {
+              "index": 0,
+              "inputs": {
+                "result_path": "canonical/astra_runtime/tmp/DYNAMIC_CHOICE_UUID.json",
+                "screenshot_path": "canonical/astra_runtime/tmp/DYNAMIC_CHOICE_UUID.png",
+                "url": "https://httpbin.org/uuid"
+              },
+              "mode": "VERIFIED_CAPABILITY",
+              "score": 30,
+              "selected_capability": "web.browser.rendered.capture.chromedriver",
+              "subgoal": "Using a real rendered browser, open https://httpbin.org/uuid, save a screenshot to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_UUID.png, and save the rendered result to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_UUID.json",
+              "target_effects": [
+                "web.browser.rendered.capture",
+                "web.browser.rendered.interact"
+              ]
+            },
+            {
+              "index": 1,
+              "mode": "DEFERRED_RUNTIME_VALUE_READ",
+              "source_path": "canonical/astra_runtime/tmp/DYNAMIC_CHOICE_UUID.json",
+              "subgoal": "Read the UUID from that live result"
+            },
+            {
+              "index": 2,
+              "match_capability": "image.qr.generate.qrencode",
+              "match_chars": "abcdef",
+              "match_path": "canonical/astra_runtime/tmp/DYNAMIC_CHOICE_QR.png",
+              "mode": "RUNTIME_SELECTED_VERIFIED_CAPABILITY",
+              "other_capability": "auto.apt.zint",
+              "other_path": "canonical/astra_runtime/tmp/DYNAMIC_CHOICE_BARCODE.png",
+              "source_path": "canonical/astra_runtime/tmp/DYNAMIC_CHOICE_UUID.json",
+              "subgoal": "If its first hexadecimal character is one of a,b,c,d,e,f, generate a QR code image for the observed UUID and save it to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_QR.png; otherwise generate a Code 128 barcode image for the same observed UUID and save it to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_BARCODE.png",
+              "value_key": "uuid"
+            },
+            {
+              "decoder_capability": "image.code.decode.zbarimg",
+              "index": 3,
+              "match_chars": "abcdef",
+              "match_path": "canonical/astra_runtime/tmp/DYNAMIC_CHOICE_QR.png",
+              "mode": "INDEPENDENT_RUNTIME_CAPABILITY_CHOICE_VERIFICATION",
+              "other_path": "canonical/astra_runtime/tmp/DYNAMIC_CHOICE_BARCODE.png",
+              "source_path": "canonical/astra_runtime/tmp/DYNAMIC_CHOICE_UUID.json",
+              "subgoal": "Finally independently verify that the artifact selected by the live branch decodes to the observed UUID"
+            }
+          ],
+          "compiler_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN"
+        },
+        "planner_model_last": null,
+        "planner_source": null,
+        "planner_transport": null,
+        "planning_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN",
+        "returncode": 0,
+        "stdout": "COMPOUND_GOAL_COMPLETE",
+        "trace": [
+          {
+            "cycle": 0,
+            "plan": {
+              "args": {
+                "capability_id": "web.browser.rendered.capture.chromedriver",
+                "result_path": "canonical/astra_runtime/tmp/DYNAMIC_CHOICE_UUID.json",
+                "screenshot_path": "canonical/astra_runtime/tmp/DYNAMIC_CHOICE_UUID.png",
+                "url": "https://httpbin.org/uuid"
+              },
+              "expect": {
+                "field": "output_verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "browser_chromedriver",
+              "capability_id": "web.browser.rendered.capture.chromedriver",
+              "dependency": {
+                "executable": "chromedriver",
+                "resolved_path": "/usr/bin/chromedriver",
+                "status": "LOCAL_VERIFIED",
+                "type": "system_tool"
+              },
+              "final_url": "https://httpbin.org/uuid",
+              "output_verified": true,
+              "page_title": "",
+              "rendered": true,
+              "result_path": "canonical/astra_runtime/tmp/DYNAMIC_CHOICE_UUID.json",
+              "screenshot_bytes": 10986,
+              "screenshot_path": "canonical/astra_runtime/tmp/DYNAMIC_CHOICE_UUID.png",
+              "screenshot_sha256": "547d669876da695c2987745536ce8d0d8c88da897673cc9289baf295e65129bb",
+              "source_url": "https://httpbin.org/uuid",
+              "text": "{\n  \"uuid\": \"c970b035-ddf0-499b-9b9a-e6846af83894\"\n}\n",
+              "text_nonempty": true
+            }
+          },
+          {
+            "cycle": 1,
+            "plan": {
+              "args": {
+                "match_action": {
+                  "args": {
+                    "argv": [
+                      "qrencode",
+                      "-o",
+                      "canonical/astra_runtime/tmp/DYNAMIC_CHOICE_QR.png",
+                      "__RUNTIME_VALUE__"
+                    ],
+                    "capability_id": "image.qr.generate.qrencode",
+                    "output_path": "canonical/astra_runtime/tmp/DYNAMIC_CHOICE_QR.png",
+                    "output_prefix_hex": "89504e470d0a1a0a",
+                    "timeout_s": 60
+                  },
+                  "expect": {
+                    "field": "output_verified",
+                    "type": "field_equals",
+                    "value": true
+                  },
+                  "type": "invoke_capability"
+                },
+                "match_chars": "abcdef",
+                "other_action": {
+                  "args": {
+                    "argv": [
+                      "zint",
+                      "-b",
+                      "CODE128",
+                      "-o",
+                      "canonical/astra_runtime/tmp/DYNAMIC_CHOICE_BARCODE.png",
+                      "-d",
+                      "__RUNTIME_VALUE__"
+                    ],
+                    "capability_id": "auto.apt.zint",
+                    "output_path": "canonical/astra_runtime/tmp/DYNAMIC_CHOICE_BARCODE.png",
+                    "output_prefix_hex": "89504e470d0a1a0a",
+                    "timeout_s": 60
+                  },
+                  "expect": {
+                    "field": "output_verified",
+                    "type": "field_equals",
+                    "value": true
+                  },
+                  "type": "invoke_capability"
+                },
+                "source_path": "canonical/astra_runtime/tmp/DYNAMIC_CHOICE_UUID.json",
+                "value_key": "uuid"
+              },
+              "expect": {
+                "field": "output_verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability_by_runtime_value"
+            },
+            "result": {
+              "branch": "match",
+              "observed_value": "c970b035-ddf0-499b-9b9a-e6846af83894",
+              "output_verified": true,
+              "selected_capability": "image.qr.generate.qrencode",
+              "selected_output_path": "canonical/astra_runtime/tmp/DYNAMIC_CHOICE_QR.png",
+              "selected_result": {
+                "adapter": "bound_capability_cli",
+                "argv": [
+                  "qrencode",
+                  "-o",
+                  "canonical/astra_runtime/tmp/DYNAMIC_CHOICE_QR.png",
+                  "c970b035-ddf0-499b-9b9a-e6846af83894"
+                ],
+                "capability_id": "image.qr.generate.qrencode",
+                "dependency": {
+                  "origin": "Ubuntu",
+                  "packages": [
+                    {
+                      "archive_sha256": "613c5a22316489ec6a9ce5d59190293df15dd4612b55432dde04c62f7c1a0e25",
+                      "name": "qrencode",
+                      "version": "4.1.1-1build2"
+                    }
+                  ],
+                  "status": "INSTALLED_VERIFIED"
+                },
+                "output_bytes": 403,
+                "output_path": "canonical/astra_runtime/tmp/DYNAMIC_CHOICE_QR.png",
+                "output_sha256": "8161f61735caefca12c537348afaf4e87d989a881275a0f1d1a0a6ef4c9d7b84",
+                "output_verified": true,
+                "returncode": 0,
+                "stderr": "",
+                "stdout": ""
+              },
+              "type": "invoke_capability_by_runtime_value"
+            }
+          },
+          {
+            "cycle": 2,
+            "plan": {
+              "args": {
+                "match_chars": "abcdef",
+                "match_path": "canonical/astra_runtime/tmp/DYNAMIC_CHOICE_QR.png",
+                "other_path": "canonical/astra_runtime/tmp/DYNAMIC_CHOICE_BARCODE.png",
+                "source_path": "canonical/astra_runtime/tmp/DYNAMIC_CHOICE_UUID.json",
+                "value_key": "uuid"
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "assert_runtime_selected_code_decodes"
+            },
+            "result": {
+              "branch": "match",
+              "decoded_value": "c970b035-ddf0-499b-9b9a-e6846af83894",
+              "decoder_capability": "image.code.decode.zbarimg",
+              "observed_value": "c970b035-ddf0-499b-9b9a-e6846af83894",
+              "selected_path": "canonical/astra_runtime/tmp/DYNAMIC_CHOICE_QR.png",
+              "type": "assert_runtime_selected_code_decodes",
+              "verified": true
+            }
+          },
+          {
+            "cycle": 3,
+            "plan": {
+              "args": {
+                "summary": "COMPOUND_GOAL_COMPLETE"
+              },
+              "type": "finish"
+            },
+            "result": {
+              "summary": "COMPOUND_GOAL_COMPLETE",
+              "type": "finish"
+            }
+          }
+        ]
+      },
+      "step_id": "run-dynamic-capability-choice",
+      "step_index": 0
+    }
+  ],
   "mission_id": "ASTRA-RUNTIME-DYNAMIC-CAPABILITY-CHOICE-001",
   "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_DYNAMIC_CAPABILITY_CHOICE_001.json",
   "mission_sha256": "2e1a722293a07bdf03ed0094dc0a928b04f8f5b2c843e5073bbebf2db4344274",
-  "next_step": 0,
+  "next_step": 1,
   "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
-  "status": "BLOCKED",
-  "updated_at_utc": "2026-09-25T04:34:46.593990+00:00"
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T04:40:03.032999+00:00"
 }
