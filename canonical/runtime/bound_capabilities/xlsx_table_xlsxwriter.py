@@ -62,7 +62,7 @@ def _flatten_paths(record,path=()):
     return out
 
 def _cell(record,key,column):
-    if column=="capability_id":
+    if column=="capability_id" or (column.endswith("_id") and column not in record):
         return key
     if column in record:
         value=record[column]
