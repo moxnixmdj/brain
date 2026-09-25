@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-STALE-PLAIN-001",
+  "purpose": "Held-out plain-goal proof that epistemic freshness assessment compiles without manual controller actions.",
+  "goal": "Using external JSON source https://httpbin.org/get?claim=alpha, extract JSON path args.claim and save knowledge evidence to canonical/astra_runtime/tmp/JIT_PLAIN_STALE_A.json. Using external JSON source https://httpbin.org/anything?claim=alpha, extract JSON path args.claim and save knowledge evidence to canonical/astra_runtime/tmp/JIT_PLAIN_STALE_B.json. Assess the knowledge evidence canonical/astra_runtime/tmp/JIT_PLAIN_STALE_A.json and canonical/astra_runtime/tmp/JIT_PLAIN_STALE_B.json and save the assessment to canonical/astra_runtime/tmp/JIT_PLAIN_STALE_ASSESSMENT.json with freshness budget 0 seconds. Finally verify that the knowledge status is STALE.",
+  "steps": [
+    {
+      "id": "plain-stale-assessment",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 10,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "manual_controller_actions": false,
+    "held_out_epistemic_status": "STALE",
+    "plain_goal_epistemic_compiler_commit": "50b2b658001efa99773a63151980207699396ebd",
+    "stale_semantics_commit": "9b509d17246edcd54633d94ac8efcf3956776784"
+  }
+}
