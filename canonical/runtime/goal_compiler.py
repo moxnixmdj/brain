@@ -88,6 +88,8 @@ def _context_path_for_key(key, context_paths):
         "image":{".png",".jpg",".jpeg",".webp"},
         "archive":{".gz",".tgz",".zip",".tar"},
         "manifest":{".json"},
+        "yaml":{".yml",".yaml"},
+        "workflow":{".yml",".yaml"},
     }.get(stem,set())
     candidates=[]
     for raw in reversed(list(context_paths or [])):
@@ -524,6 +526,111 @@ def _compile_context_url_json_fetch(subgoal, context_paths, registry, root):
     }
 
 
+def _compile_github_workflow_audit(subgoal, context_paths, registry, root):
+    yq=(registry or {}).get("yaml.to_json.yq")
+    jq=(registry or {}).get("json.query.jq")
+    if not isinstance(yq,dict) or yq.get("status")!="VERIFIED_BOUND_CAPABILITY":
+        return None
+    if not isinstance(jq,dict) or jq.get("status")!="VERIFIED_BOUND_CAPABILITY":
+        return None
+    lower=subgoal.lower()
+    if not re.match(r"^(?:create|write|generate)\b",lower):
+        return None
+    if "workflow" not in lower or "job id" not in lower or "uses action" not in lower:
+        return None
+    out_paths=[raw for raw,_ in _repo_paths(subgoal,root) if pathlib.Path(raw).suffix.lower()==".json"]
+    if len(out_paths)!=1:
+        return None
+    yaml_paths=[str(p) for p in context_paths if pathlib.Path(str(p)).suffix.lower() in {".yml",".yaml"}]
+    if not yaml_paths:
+        return None
+    yaml_path=yaml_paths[-1]
+    digest=hashlib.sha256((yaml_path+"\n"+subgoal).encode("utf-8")).hexdigest()[:12]
+    normalized=f"canonical/astra_runtime/tmp/YAML_NORMALIZED_{digest}.json"
+    audit_path=out_paths[0]
+    yq_action={
+      "type":"invoke_capability",
+      "args":{
+        "capability_id":"yaml.to_json.yq",
+        "yaml_path":yaml_path,
+        "output_path":normalized,
+        "timeout_s":60,
+      },
+      "expect":{"type":"field_equals","field":"output_verified","value":True},
+    }
+    filt=(
+      '{'
+      'schema:"PROJECT_BRAIN_GITHUB_WORKFLOW_AUDIT_V1",'
+      'name:(.name // null),'
+      'trigger_names:((.["on"] // {}) | if type=="object" then keys else [] end),'
+      'push_branches:(.["on"].push.branches // []),'
+      'push_paths:(.["on"].push.paths // []),'
+      'workflow_dispatch_input_names:((.["on"].workflow_dispatch.inputs // {}) | keys),'
+      'permissions:(.permissions // {}),'
+      'jobs:((.jobs // {}) | to_entries | map({'
+      'id:.key,'
+      'runner_label:(.value["runs-on"] // null),'
+      'timeout_minutes:(.value["timeout-minutes"] // null),'
+      'step_names:[.value.steps[]? | .name // empty],'
+      'uses:[.value.steps[]? | .uses // empty]'
+      '}))'
+      '}'
+    )
+    jq_action={
+      "type":"invoke_capability",
+      "args":{
+        "capability_id":"json.query.jq",
+        "input_path":normalized,
+        "filter":filt,
+        "output_path":audit_path,
+        "raw_output":False,
+        "require_nonempty":True,
+        "timeout_s":60,
+      },
+      "expect":{"type":"field_equals","field":"output_verified","value":True},
+    }
+    return {
+      "actions":[yq_action,jq_action],
+      "output_path":audit_path,
+      "normalized_path":normalized,
+      "evidence":{
+        "yaml_path":yaml_path,
+        "normalized_path":normalized,
+        "output_path":audit_path,
+        "parser_capability":"yaml.to_json.yq",
+        "transform_capability":"json.query.jq",
+        "audit_schema":"PROJECT_BRAIN_GITHUB_WORKFLOW_AUDIT_V1",
+      }
+    }
+
+
+def _compile_workflow_audit_raw_verification(subgoal, context_paths, root):
+    lower=subgoal.lower()
+    if "independently verify" not in lower or "raw yaml" not in lower:
+        return None
+    yaml_paths=[str(p) for p in context_paths if pathlib.Path(str(p)).suffix.lower() in {".yml",".yaml"}]
+    json_paths=[str(p) for p in context_paths if pathlib.Path(str(p)).suffix.lower()==".json"]
+    audit_paths=[p for p in json_paths if "WORKFLOW_AUDIT" in pathlib.Path(p).name.upper()]
+    if not yaml_paths or not audit_paths:
+        return None
+    action={
+      "type":"assert_workflow_audit_supported_by_source",
+      "args":{
+        "audit_path":audit_paths[-1],
+        "yaml_path":yaml_paths[-1],
+      },
+      "expect":{"type":"field_equals","field":"verified","value":True},
+    }
+    return {
+      "action":action,
+      "evidence":{
+        "audit_path":audit_paths[-1],
+        "yaml_path":yaml_paths[-1],
+        "verification_action":"assert_workflow_audit_supported_by_source",
+      }
+    }
+
+
 def _compile_json_record_selection(subgoal, context_paths, registry, root):
     entry=(registry or {}).get("json.query.jq")
     if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
@@ -767,6 +874,28 @@ def _compile_compound_goal(goal, clauses, registry, root):
                     "path":existing[0][0],
                 })
                 continue
+
+        workflow_verify=_compile_workflow_audit_raw_verification(clause,context_paths,root)
+        if workflow_verify is not None:
+            actions.append(workflow_verify["action"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"INDEPENDENT_WORKFLOW_SOURCE_VERIFICATION",
+                **workflow_verify["evidence"],
+            })
+            continue
+
+        workflow_audit=_compile_github_workflow_audit(clause,context_paths,registry,root)
+        if workflow_audit is not None:
+            actions.extend(workflow_audit["actions"])
+            context_paths.append(workflow_audit["normalized_path"])
+            context_paths.append(workflow_audit["output_path"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"VERIFIED_YAML_WORKFLOW_AUDIT",
+                **workflow_audit["evidence"],
+            })
+            continue
 
         verification=_compile_pdf_json_key_verification(
             clause,context_paths,registry,root,len(actions)
