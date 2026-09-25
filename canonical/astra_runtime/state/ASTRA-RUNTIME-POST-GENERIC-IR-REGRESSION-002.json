@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T20:25:16.049629+00:00",
+  "created_at_utc": "2026-09-25T20:25:14.947553+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T20:25:16.049343+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython -m py_compile canonical/runtime/astra_runtime.py canonical/runtime/goal_compiler.py canonical/runtime/auto_capability_acquisition.py canonical/runtime/auto_pypi_library_acquisition.py canonical/runtime/auto_npm_library_acquisition.py canonical/runtime/npm_package_utils.py canonical/runtime/verify_pending_cli_binding.py canonical/runtime/bound_capabilities/python_library_codec.py canonical/runtime/bound_capabilities/node_library_codec.py\nnode --check canonical/runtime/node_codec_runner.js\npython -m unittest discover -s canonical/tests -p 'test*.py'",
+        "duration_s": 1.102,
+        "returncode": 0,
+        "stderr": ".....................................................\n----------------------------------------------------------------------\nRan 53 tests in 0.266s\n\nOK\n",
+        "stdout": ""
+      },
+      "step_id": "run-focused-regressions",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-RUNTIME-POST-GENERIC-IR-REGRESSION-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_POST_GENERIC_IR_REGRESSION_002.json",
+  "mission_sha256": "d2069a1fb03020ccdab41c1105520270c9a73b1e96ec934ccfd16bcb8433d833",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T20:25:16.049357+00:00"
+}

@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T20:25:16.049934+00:00",
+  "mission_id": "ASTRA-RUNTIME-POST-GENERIC-IR-REGRESSION-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_POST_GENERIC_IR_REGRESSION_002.json",
+  "mission_sha256": "d2069a1fb03020ccdab41c1105520270c9a73b1e96ec934ccfd16bcb8433d833",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "8add69f0674cdb1fb190ab77b9a40136e6d8efdcda8d22961f3cd3c67637692f",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

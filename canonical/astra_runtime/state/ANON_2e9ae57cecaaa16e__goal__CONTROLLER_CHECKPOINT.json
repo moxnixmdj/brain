@@ -13,6 +13,7 @@
           "canonical/CANONICAL_POINTER.json",
           "canonical/astra_runtime/missions/ASTRA_RUNTIME_CAPABILITY_GRAPH_PLANNER_001.json",
           "canonical/astra_runtime/missions/ASTRA_RUNTIME_MODEL_NONDEPENDENCE_REPAIR_001.json",
+          "canonical/astra_runtime/state/ANON_2e9ae57cecaaa16e__goal__CONTROLLER_CHECKPOINT.json",
           "canonical/astra_runtime/state/ASTRA-RUNTIME-CAPABILITY-GRAPH-PLANNER-001.json",
           "canonical/astra_runtime/state/ASTRA-RUNTIME-MODEL-NONDEPENDENCE-REPAIR-001.json",
           "canonical/astra_runtime/state/UNKNOWN__goal__CONTROLLER_CHECKPOINT.json",
@@ -55,14 +56,14 @@
       }
     }
   ],
-  "created_at_utc": "2026-09-25T20:06:29.991759+00:00",
+  "created_at_utc": "2026-09-25T20:25:15.763209+00:00",
   "mission_id": null,
   "next_action_index": 3,
   "plan_sha256": "2e9ae57cecaaa16eb83df29ac97f96c7c507c0972677bb9f3d66fd8062d520e7",
-  "resume_count": 1,
+  "resume_count": 0,
   "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
   "status": "COMPLETE",
   "step_id": "goal",
   "test_interrupt_injected": false,
-  "updated_at_utc": "2026-09-25T20:22:24.989264+00:00"
+  "updated_at_utc": "2026-09-25T20:25:15.844788+00:00"
 }
