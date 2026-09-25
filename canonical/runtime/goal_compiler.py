@@ -54,7 +54,10 @@ def _placeholders(value):
 
 def _repo_paths(goal, root):
     candidates=[]
-    for raw in re.findall(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+",goal):
+    # URL path components are not repository paths. Strip complete URLs before
+    # scanning for repository-local artifacts.
+    path_text=re.sub(r"https?://[^\s)\]}>]+"," ",str(goal or ""))
+    for raw in re.findall(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+",path_text):
         raw=raw.rstrip(".,;:!?)]}")
         p=(pathlib.Path(root)/raw).resolve()
         rr=pathlib.Path(root).resolve()
@@ -113,12 +116,14 @@ def _context_path_for_key(key, context_paths):
     return seen[0] if len(seen)>=1 else None
 
 
-def _bind_inputs(goal, root, entry, context_paths=None):
+def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
     template=entry.get("action_template") or {}
     keys=_placeholders(template)
     if not keys:
         return {}
     paths=_repo_paths(goal,root)
+    future_text=" ".join(str(x) for x in (future_clauses or []))
+    future_paths=_repo_paths(future_text,root) if future_text else []
     result={}
     for key in keys:
         if key=="text":
@@ -156,12 +161,19 @@ def _bind_inputs(goal, root, entry, context_paths=None):
                 wanted=suffix_map.get(stem)
                 if wanted:
                     matching=[raw for raw,p in paths if p.suffix.lower() in wanted]
+                    future_matching=[raw for raw,p in future_paths if p.suffix.lower() in wanted]
                 else:
                     matching=[raw for raw,p in paths if (not stem or stem in raw.lower())]
+                    future_matching=[raw for raw,p in future_paths if (not stem or stem in raw.lower())]
                 if len(matching)==1:
                     result[key]=matching[0]
                     continue
-                if len(paths)==1:
+                if not matching and len(future_matching)==1:
+                    result[key]=future_matching[0]
+                    continue
+                # Single-path fallback is safe only for an actual typed file,
+                # never for URL fragments or extensionless directory-like text.
+                if len(paths)==1 and pathlib.Path(paths[0][0]).suffix:
                     result[key]=paths[0][0]
                     continue
             else:
@@ -279,7 +291,7 @@ def decompose_goal(goal):
     return merged
 
 
-def _compile_single_goal(goal, registry, root, context_paths=None):
+def _compile_single_goal(goal, registry, root, context_paths=None, future_clauses=None):
     ranked=[]
     for cid,entry in sorted((registry or {}).items()):
         if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
@@ -290,7 +302,7 @@ def _compile_single_goal(goal, registry, root, context_paths=None):
         if score<=0:
             continue
         try:
-            inputs=_bind_inputs(goal,root,entry,context_paths=context_paths)
+            inputs=_bind_inputs(goal,root,entry,context_paths=context_paths,future_clauses=future_clauses)
         except GoalCompilationFailure:
             continue
         ranked.append((score,specificity,cid,entry,inputs,evidence))
@@ -1290,7 +1302,11 @@ def _compile_compound_goal(goal, clauses, registry, root):
             })
             continue
         try:
-            part=_compile_single_goal(clause,registry,root,context_paths=context_paths)
+            part=_compile_single_goal(
+                clause,registry,root,
+                context_paths=context_paths,
+                future_clauses=clauses[index+1:]
+            )
         except GoalCompilationFailure as exc:
             raise GoalCompilationFailure(
                 "GOAL_COMPILATION_SUBGOAL_UNRESOLVED",
