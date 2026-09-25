@@ -2038,6 +2038,35 @@ def _goal_action(action):
           "selected_result":result,
           "output_verified":bool(result.get("output_verified")),
         }
+    if typ=="verify_with_independent_pypi_codec":
+        fmt=str(args.get("format") or "").strip()
+        json_path=str(args.get("json_path") or "").strip()
+        binary_path=str(args.get("binary_path") or "").strip()
+        producer_project=str(args.get("producer_project") or "").strip()
+        producer_capability_id=str(args.get("producer_capability_id") or "").strip()
+        if not all((fmt,json_path,binary_path,producer_project,producer_capability_id)):
+            return {"type":typ,"verified":False,"error":"INDEPENDENT_CODEC_VERIFIER_ARGS_INCOMPLETE"}
+        import independent_pypi_codec_verifier
+        evidence=independent_pypi_codec_verifier.verify(
+            fmt,json_path,binary_path,producer_project,ROOT
+        )
+        return {
+          "type":typ,
+          "verified":bool(evidence.get("verified")),
+          "producer_capability_id":producer_capability_id,
+          "producer_project":producer_project,
+          "verifier_project":evidence.get("verifier_project"),
+          "verifier_version":evidence.get("verifier_version"),
+          "producer_independent":bool(evidence.get("producer_independent")),
+          "dependency_independent":bool(evidence.get("dependency_independent")),
+          "format":fmt,
+          "module":evidence.get("module"),
+          "decode_callable":evidence.get("decode_callable"),
+          "decode_kwargs":evidence.get("decode_kwargs"),
+          "unwrap_key":evidence.get("unwrap_key"),
+          "dependency_closure":evidence.get("dependency_closure"),
+          "attempt_count":evidence.get("attempt_count"),
+        }
     if typ=="invoke_capability":
         return _invoke_bound_capability(args)
     if typ=="assert_text_contains_json_keys":
@@ -2255,7 +2284,7 @@ def _run_model_independent_goal(step, mission, goal):
     if actions is None:
         return None
     allowed_types={
-      "read_file","list_tree","search_text","http_get","write_json_records","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback","invoke_capability_until",
+      "read_file","list_tree","search_text","http_get","write_json_records","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback","invoke_capability_until","verify_with_independent_pypi_codec",
       "project_browser_result_json","join_runtime_json_arrays","assert_runtime_json_join","aggregate_runtime_json_arrays","assert_runtime_json_aggregate","assert_hex_prefix_bucket","assert_collection_length_bucket","assert_runtime_selected_code_decodes",
       "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal","assert_runtime_fanout_decodes","assert_runtime_fanout_artifacts_decode","assert_runtime_per_item_fallback_decodes","assert_runtime_fallback_decision","assert_runtime_bounded_loop_trace",
       "assert_workflow_audit_supported_by_source","assert_python_source_audit_supported_by_source",
