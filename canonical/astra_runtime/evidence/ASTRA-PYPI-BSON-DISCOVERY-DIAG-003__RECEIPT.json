@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T18:51:49.891762+00:00",
+  "mission_id": "ASTRA-PYPI-BSON-DISCOVERY-DIAG-003",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_PYPI_BSON_DISCOVERY_DIAG_003.json",
+  "mission_sha256": "12f3b8fab47794c294ee29e253777458d22d66c5e143df96e03076d977751a1a",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "1fe7e17ba0e5577650c611ef015612f6e77b7854df7a2213a9e310d7f68f0027",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

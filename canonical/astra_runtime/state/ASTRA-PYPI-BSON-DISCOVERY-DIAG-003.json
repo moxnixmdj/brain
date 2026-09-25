@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T18:51:49.891445+00:00",
+  "created_at_utc": "2026-09-25T18:51:42.561283+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T18:51:49.891132+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,pathlib,json\np=pathlib.Path('canonical/runtime/capability_discovery.py')\ns=importlib.util.spec_from_file_location('cd',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\ngoal='Encode those exact records as BSON and save canonical/astra_runtime/tmp/BSON_RECORDS.bson'\nout=m.search_pypi_packages(goal,limit=30,timeout_s=20)\nnames=[str(x.get('name') or '') for x in out.get('candidates') or []]\nprint(json.dumps({'queries':out.get('queries'),'names':names},sort_keys=True))\nassert any('bson' in n.lower() for n in names),names\nassert not any('encoder' in n.lower() and 'bson' not in n.lower() for n in names[:10]),names[:10]\nprint('PYPI_BSON_FORMAT_FIRST_DISCOVERY_VERIFIED')\nPY",
+        "duration_s": 7.33,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"names\": [\"FluGibson\", \"adamdobson2048\", \"aiobsonrpc\", \"bson303\", \"bsonschema\", \"bsonsearch\", \"dbson\", \"example-pkg-jasongibsonufl\", \"gibson\", \"gibsondedup\", \"bson-modern\", \"bson-schema-to-pydantic\", \"bsonstream\", \"Flask-BSON\", \"bson-senao\", \"bson-tools\", \"bsondb\", \"json2bson\", \"EzyDB-bson\", \"bson-extra\", \"jendobson.greenbutton\", \"libsonata\", \"apis-bibsonomy\", \"jobson-xhs-mcp\", \"libsonare\", \"bson-timezone\", \"cvxbson\", \"lbson-py\", \"dobson\", \"gibson-cli\"], \"queries\": [\"encode\", \"bson\", \"adamdobson2048\", \"aiobsonrpc\", \"aiogibson\", \"anyconfig-bson-backend\", \"apis-bibsonomy\", \"bibsonomy\", \"bson303\", \"bsondb\", \"bson-extra\", \"bson_lazy\", \"bson-modern\", \"BSON-NumPy\", \"bson-py\", \"bsonrpc\", \"bson-rpc\", \"bsonschema\", \"bson-schema-to-pydantic\", \"bsonsearch\", \"bson-senao\", \"bsonstream\", \"bson-timezone\", \"bson-tools\", \"codigo-avulso-test-tutorial-robson\", \"cvxbson\", \"dbson\", \"django-gibson-sessions\", \"dobson\", \"example-pkg-jasongibsonufl\", \"EzyDB-bson\", \"fast_bson\", \"Flask-BSON\", \"FluGibson\", \"gibson\", \"gibson2\", \"gibson-cli\", \"gibson-dataset\", \"gibsondedup\", \"gibson-env-utilities\", \"hobson\", \"ibson\", \"igibson\", \"igibson-eval\", \"jendobson.greenbutton\", \"jobson-xhs-mcp\", \"json2bson\", \"lbson-py\", \"lens-bson\", \"libsonare\", \"libsonata\"]}\nPYPI_BSON_FORMAT_FIRST_DISCOVERY_VERIFIED\n"
+      },
+      "step_id": "discover-bson-candidates",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-PYPI-BSON-DISCOVERY-DIAG-003",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_PYPI_BSON_DISCOVERY_DIAG_003.json",
+  "mission_sha256": "12f3b8fab47794c294ee29e253777458d22d66c5e143df96e03076d977751a1a",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T18:51:49.891150+00:00"
+}
