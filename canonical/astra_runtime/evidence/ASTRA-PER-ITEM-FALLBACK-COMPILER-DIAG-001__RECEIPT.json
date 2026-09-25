@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T16:45:36.440192+00:00",
+  "mission_id": "ASTRA-PER-ITEM-FALLBACK-COMPILER-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_PER_ITEM_FALLBACK_COMPILER_DIAG_001.json",
+  "mission_sha256": "e07ba94b5ed2bc9c9c628225b9851f95419c2773592cd5c55ad449fa8ed56142",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "b785194016578c12ac4d733e28bc23552bbacb2904b598607e057cc2cd1ef99f",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
