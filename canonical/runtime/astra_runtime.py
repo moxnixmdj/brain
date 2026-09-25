@@ -365,14 +365,14 @@ def _goal_action(action):
         if audit.get("schema")!="PROJECT_BRAIN_GITHUB_WORKFLOW_AUDIT_V1":
             missing.append("schema")
         name=str(audit.get("name") or "")
-        if not name or not re.search(r"(?m)^name:\\s*"+re.escape(name)+r"\\s*$",raw):
+        if not name or not re.search(r"(?m)^name:\s*"+re.escape(name)+r"\s*$",raw):
             missing.append("name:"+name)
         triggers=list(audit.get("trigger_names") or [])
         if not triggers:
             missing.append("trigger_names:empty")
         for item in triggers:
             value=str(item)
-            if not re.search(r"(?m)^  "+re.escape(value)+r":(?:\\s*|\\s+.*)$",raw):
+            if not re.search(r"(?m)^  "+re.escape(value)+r":(?:\s*|\s+.*)$",raw):
                 missing.append("trigger:"+value)
         for value in audit.get("push_branches") or []:
             if str(value) not in raw:
@@ -381,7 +381,7 @@ def _goal_action(action):
             if str(value) not in raw:
                 missing.append("push_path:"+str(value))
         for value in audit.get("workflow_dispatch_input_names") or []:
-            if not re.search(r"(?m)^\\s{4,}"+re.escape(str(value))+r":\\s*$",raw):
+            if not re.search(r"(?m)^\s{4,}"+re.escape(str(value))+r":\s*$",raw):
                 missing.append("dispatch_input:"+str(value))
         permissions=audit.get("permissions") or {}
         if not isinstance(permissions,dict):
@@ -389,7 +389,7 @@ def _goal_action(action):
             permissions={}
         for key,value in permissions.items():
             if not re.search(
-                r"(?m)^\\s{2}"+re.escape(str(key))+r":\\s*"+re.escape(str(value))+r"\\s*$",raw
+                r"(?m)^\s{2}"+re.escape(str(key))+r":\s*"+re.escape(str(value))+r"\s*$",raw
             ):
                 missing.append("permission:"+str(key)+"="+str(value))
         jobs=list(audit.get("jobs") or [])
@@ -401,27 +401,27 @@ def _goal_action(action):
                 missing.append("job:not_object")
                 continue
             jid=str(job.get("id") or "")
-            if not jid or not re.search(r"(?m)^  "+re.escape(jid)+r":\\s*$",raw):
+            if not jid or not re.search(r"(?m)^  "+re.escape(jid)+r":\s*$",raw):
                 missing.append("job_id:"+jid)
             runner=job.get("runner_label")
             if runner is None or not re.search(
-                r"(?m)^\\s{4}runs-on:\\s*"+re.escape(str(runner))+r"\\s*$",raw
+                r"(?m)^\s{4}runs-on:\s*"+re.escape(str(runner))+r"\s*$",raw
             ):
                 missing.append("runner:"+jid+":"+str(runner))
             timeout=job.get("timeout_minutes")
             if timeout is not None and not re.search(
-                r"(?m)^\\s{4}timeout-minutes:\\s*"+re.escape(str(timeout))+r"\\s*$",raw
+                r"(?m)^\s{4}timeout-minutes:\s*"+re.escape(str(timeout))+r"\s*$",raw
             ):
                 missing.append("timeout:"+jid+":"+str(timeout))
             for step_name in job.get("step_names") or []:
                 if not re.search(
-                    r"(?m)^\\s*-\\s+name:\\s*"+re.escape(str(step_name))+r"\\s*$",raw
+                    r"(?m)^\s*-\s+name:\s*"+re.escape(str(step_name))+r"\s*$",raw
                 ):
                     missing.append("step_name:"+jid+":"+str(step_name))
             for ref in job.get("uses") or []:
                 uses_count+=1
                 if not re.search(
-                    r"(?m)^\\s*-?\\s*uses:\\s*"+re.escape(str(ref))+r"\\s*$",raw
+                    r"(?m)^\s*-?\s*uses:\s*"+re.escape(str(ref))+r"\s*$",raw
                 ):
                     missing.append("uses:"+jid+":"+str(ref))
         return {
