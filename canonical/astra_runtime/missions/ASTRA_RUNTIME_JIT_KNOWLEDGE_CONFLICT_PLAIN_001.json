@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-CONFLICT-PLAIN-001",
+  "purpose": "Plain-goal proof that epistemic conflict assessment compiles without manual controller actions.",
+  "goal": "Using external JSON source https://httpbin.org/get?claim=alpha, extract JSON path args.claim and save knowledge evidence to canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_ALPHA.json. Using external JSON source https://httpbin.org/get?claim=beta, extract JSON path args.claim and save knowledge evidence to canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_BETA.json. Assess the knowledge evidence canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_ALPHA.json and canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_BETA.json and save the assessment to canonical/astra_runtime/tmp/JIT_PLAIN_CONFLICT_ASSESSMENT.json. Finally verify that the knowledge status is CONFLICTED.",
+  "steps": [
+    {
+      "id": "plain-conflict-assessment",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 10,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "manual_controller_actions": false,
+    "plain_goal_epistemic_compiler_commit": "50b2b658001efa99773a63151980207699396ebd"
+  }
+}
