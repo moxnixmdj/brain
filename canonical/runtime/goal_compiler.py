@@ -1452,6 +1452,63 @@ def _fanout_kind_label(description):
     return label or "ARTIFACT"
 
 
+def _compile_bounded_loop_goal(goal,clauses,registry,root):
+    if len(clauses)!=5:
+        return None
+    browser=(registry or {}).get("web.browser.rendered.capture.chromedriver")
+    if not isinstance(browser,dict) or browser.get("status")!="VERIFIED_BOUND_CAPABILITY":
+        return None
+    m0=re.match(
+      r"^open\s+(https?://[^\s,]+)\s+in\s+a\s+rendered\s+browser\s+repeatedly,\s+no\s+more\s+than\s+(\d+)\s+times$",
+      clauses[0],re.IGNORECASE)
+    m1=re.match(r"^after\s+each\s+result,\s+inspect\s+the\s+([A-Za-z_][A-Za-z0-9_]*)$",clauses[1],re.IGNORECASE)
+    m2=re.match(
+      r"^finish\s+when\s+its\s+first\s+hexadecimal\s+character\s+is\s+in\s+([0-9a-fA-F,]+),\s+otherwise\s+continue\s+until\s+attempt\s+(\d+)$",
+      clauses[2],re.IGNORECASE)
+    m3=re.match(
+      r"^save\s+every\s+observed\s+result\s+under\s+([^\s]+)\s+and\s+save\s+([^\s]+\.json)\s+with\s+status,\s*attempts,\s*matched,\s*selected_uuid,\s*and\s*selected_attempt$",
+      clauses[3],re.IGNORECASE)
+    m4=re.match(r"^independently\s+verify\s+the\s+saved\s+trace\s+and\s+stopping\s+decision$",clauses[4],re.IGNORECASE)
+    if not m0 or not m1 or not m2 or not m3 or not m4:
+        return None
+    max_attempts=int(m0.group(2))
+    if max_attempts!=int(m2.group(2)) or max_attempts<1 or max_attempts>64:
+        return None
+    url=m0.group(1).rstrip(".,;:!?")
+    value_key=m1.group(1).lower()
+    match_chars="".join(x.strip().lower() for x in m2.group(1).split(",") if x.strip())
+    if not re.fullmatch(r"[0-9a-f]+",match_chars):
+        return None
+    attempts_dir=m3.group(1).strip(" .,:;")
+    result_path=m3.group(2).strip(" .,:;")
+    repeated=_render_template(
+      browser["action_template"],
+      {"url":url,"screenshot_path":"__ATTEMPT_SCREENSHOT_PATH__","result_path":"__ATTEMPT_RESULT_PATH__"}
+    )
+    loop={"type":"invoke_capability_until","args":{
+      "action":repeated,"attempts_dir":attempts_dir,"result_path":result_path,
+      "max_attempts":max_attempts,"value_key":value_key,"match_chars":match_chars
+    },"expect":{"type":"field_equals","field":"output_verified","value":True}}
+    verify={"type":"assert_runtime_bounded_loop_trace","args":{
+      "attempts_dir":attempts_dir,"result_path":result_path,
+      "max_attempts":max_attempts,"value_key":value_key,"match_chars":match_chars
+    },"expect":{"type":"field_equals","field":"verified","value":True}}
+    return {
+      "schema":"PROJECT_BRAIN_COMPILED_COMPOUND_GOAL_V1",
+      "compiler_mode":"DETERMINISTIC_BOUNDED_RUNTIME_LOOP_PLAN",
+      "clauses":clauses,
+      "compiled_parts":[
+        {"index":0,"subgoal":clauses[0],"mode":"BOUNDED_REPEATED_VERIFIED_CAPABILITY","selected_capability":"web.browser.rendered.capture.chromedriver","url":url,"max_attempts":max_attempts},
+        {"index":1,"subgoal":clauses[1],"mode":"DEFERRED_RUNTIME_VALUE_READ","value_key":value_key},
+        {"index":2,"subgoal":clauses[2],"mode":"RUNTIME_LOOP_STOP_CONDITION","match_chars":match_chars,"max_attempts":max_attempts},
+        {"index":3,"subgoal":clauses[3],"mode":"RUNTIME_LOOP_TRACE_AND_RESULT_SPEC","attempts_dir":attempts_dir,"result_path":result_path},
+        {"index":4,"subgoal":clauses[4],"mode":"INDEPENDENT_RUNTIME_LOOP_TRACE_VERIFICATION","attempts_dir":attempts_dir,"result_path":result_path}
+      ],
+      "controller_actions":[loop,verify,{"type":"finish","args":{"summary":"COMPOUND_GOAL_COMPLETE"}}],
+      "finish_summary":"COMPOUND_GOAL_COMPLETE"
+    }
+
+
 def _compile_multi_source_join_goal(goal,clauses,registry,root):
     if len(clauses)!=6:
         return None
