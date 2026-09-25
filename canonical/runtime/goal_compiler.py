@@ -1442,6 +1442,184 @@ def _select_text_artifact_capability(fragment, registry):
     }
 
 
+def _fanout_kind_label(description):
+    text=str(description or "").lower()
+    if "qr" in text:
+        return "QR"
+    if "128" in text:
+        return "CODE128"
+    label=re.sub(r"[^A-Za-z0-9]+","_",str(description or "")).strip("_").upper()
+    return label or "ARTIFACT"
+
+
+def _compile_per_item_fallback_goal(goal, clauses, registry, root):
+    if len(clauses)!=6:
+        return None
+    if not re.match(r"^read\s+the\s+live\s+json\s+array\s+from\s+that\s+result$",str(clauses[1] or ""),re.IGNORECASE):
+        return None
+
+    first=_compile_single_goal(
+        clauses[0],registry,root,
+        context_paths=None,future_clauses=clauses[1:]
+    )
+    if first.get("selected_capability")!="web.browser.rendered.capture.chromedriver":
+        return None
+    first_entry=registry[first["selected_capability"]]
+    first_action=_render_template(first_entry["action_template"],first["inputs"])
+    source_path=str(first["inputs"].get("result_path") or "")
+    if not source_path:
+        return None
+
+    control=re.match(
+        r"^for\s+every\s+user\s+returned\s+at\s+runtime,\s+first\s+generate\s+a\s+"
+        r"(.+?)\s+image\s+encoding\s+that\s+user's\s+([A-Za-z_][A-Za-z0-9_]*)\s+"
+        r"and\s+validate\s+the\s+decoded\s+.+?\s+against\s+that\s+user's\s+"
+        r"([A-Za-z_][A-Za-z0-9_]*);\s*if\s+that\s+validation\s+fails,\s+fall\s+back\s+"
+        r"for\s+only\s+that\s+user\s+to\s+a\s+(.+?)\s+image\s+encoding\s+that\s+"
+        r"user's\s+([A-Za-z_][A-Za-z0-9_]*)$",
+        str(clauses[2] or "").strip(),re.IGNORECASE
+    )
+    if not control:
+        return None
+    primary_description=control.group(1).strip()
+    primary_field=control.group(2).lower()
+    validation_field=control.group(3).lower()
+    fallback_description=control.group(4).strip()
+    fallback_field=control.group(5).lower()
+    if validation_field!=fallback_field:
+        return None
+
+    output_match=re.match(
+        r"^save\s+the\s+final\s+artifact\s+for\s+each\s+user\s+under\s+([^\s,]+)\s+"
+        r"using\s+the\s+user's\s+id\s+as\s+the\s+filename,?$",
+        str(clauses[3] or "").strip(),re.IGNORECASE
+    )
+    manifest_match=re.match(
+        r"^create\s+([^\s]+\.json)\s+with\s+exactly\s+one\s+record\s+per\s+live\s+"
+        r"user\s+containing\s+(.+)$",
+        str(clauses[4] or "").strip(),re.IGNORECASE
+    )
+    verify_match=re.match(
+        r"^finally\s+independently\s+decode\s+every\s+final\s+artifact\s+and\s+verify\s+"
+        r"it\s+equals\s+that\s+live\s+user's\s+([A-Za-z_][A-Za-z0-9_]*),\s*every\s+"
+        r"live\s+user\s+has\s+exactly\s+one\s+final\s+artifact,\s*every\s+primary\s+"
+        r".+?\s+validation\s+failed\s+as\s+expected\s+because\s+([A-Za-z_][A-Za-z0-9_]*)\s+"
+        r"differs\s+from\s+([A-Za-z_][A-Za-z0-9_]*),\s*used_fallback\s+is\s+true\s+for\s+"
+        r"every\s+record,\s*and\s+no\s+extra\s+manifest\s+records\s+exist$",
+        str(clauses[5] or "").strip(),re.IGNORECASE
+    )
+    if not output_match or not manifest_match or not verify_match:
+        return None
+    if (
+        verify_match.group(1).lower()!=validation_field
+        or verify_match.group(2).lower()!=primary_field
+        or verify_match.group(3).lower()!=validation_field
+    ):
+        return None
+
+    output_dir=output_match.group(1).strip(" .,:;")
+    manifest_path=manifest_match.group(1).strip(" .,:;")
+    raw_fields=re.sub(r"\s+and\s+",",",manifest_match.group(2),flags=re.IGNORECASE)
+    fields=[x.strip(" .,:;").lower() for x in raw_fields.split(",") if x.strip(" .,:;")]
+    required={"id",primary_field,validation_field,"used_fallback","artifact_kind","artifact_path"}
+    if set(fields)!=required:
+        return None
+
+    primary=_select_text_artifact_capability("generate a "+primary_description+" image",registry)
+    fallback=_select_text_artifact_capability("generate a "+fallback_description+" image",registry)
+    decoder=(registry or {}).get("image.code.decode.zbarimg")
+    if primary is None or fallback is None:
+        return None
+    if not isinstance(decoder,dict) or decoder.get("status")!="VERIFIED_BOUND_CAPABILITY":
+        return None
+
+    primary_action=_render_template(
+        primary["entry"]["action_template"],
+        {"output_path":"__ITEM_OUTPUT_PATH__","text":"__ITEM_FIELD_"+primary_field+"__"}
+    )
+    fallback_action=_render_template(
+        fallback["entry"]["action_template"],
+        {"output_path":"__ITEM_OUTPUT_PATH__","text":"__ITEM_FIELD_"+fallback_field+"__"}
+    )
+    primary_kind=_fanout_kind_label(primary_description)
+    fallback_kind=_fanout_kind_label(fallback_description)
+    copy_fields=["id",primary_field]
+    if validation_field not in copy_fields:
+        copy_fields.append(validation_field)
+
+    fanout_action={
+      "type":"invoke_capability_fanout",
+      "args":{
+        "source_path":source_path,
+        "manifest_path":manifest_path,
+        "copy_fields":copy_fields,
+        "output_dir":output_dir,
+        "artifact_field":"artifact_path",
+        "used_fallback_field":"used_fallback",
+        "artifact_kind_field":"artifact_kind",
+        "item_fallback":{
+          "primary_action":primary_action,
+          "fallback_action":fallback_action,
+          "primary_validation":{
+            "type":"decoded_equals_source_field",
+            "decoder_capability":"image.code.decode.zbarimg",
+            "expected_source_field":validation_field,
+          },
+          "primary_kind":primary_kind,
+          "fallback_kind":fallback_kind,
+        },
+      },
+      "expect":{"type":"field_equals","field":"output_verified","value":True},
+    }
+    verifier={
+      "type":"assert_runtime_per_item_fallback_decodes",
+      "args":{
+        "source_path":source_path,
+        "manifest_path":manifest_path,
+        "expected_source_field":validation_field,
+        "primary_source_field":primary_field,
+        "artifact_field":"artifact_path",
+        "used_fallback_field":"used_fallback",
+        "artifact_kind_field":"artifact_kind",
+        "fallback_kind":fallback_kind,
+        "decoder_capability":"image.code.decode.zbarimg",
+      },
+      "expect":{"type":"field_equals","field":"verified","value":True},
+    }
+    return {
+      "schema":"PROJECT_BRAIN_COMPILED_COMPOUND_GOAL_V1",
+      "compiler_mode":"DETERMINISTIC_PER_ITEM_FALLBACK_FANOUT_PLAN",
+      "clauses":clauses,
+      "compiled_parts":[
+        {"index":0,"subgoal":clauses[0],"mode":"VERIFIED_CAPABILITY",
+         "selected_capability":first["selected_capability"],"inputs":first["inputs"],
+         "target_effects":first["target_effects"],"score":first["score"]},
+        {"index":1,"subgoal":clauses[1],"mode":"DEFERRED_RUNTIME_COLLECTION_READ",
+         "source_path":source_path},
+        {"index":2,"subgoal":clauses[2],"mode":"RUNTIME_PER_ITEM_FALLBACK",
+         "source_path":source_path,"primary_field":primary_field,
+         "validation_field":validation_field,
+         "primary_capability":primary["capability_id"],
+         "fallback_capability":fallback["capability_id"],
+         "primary_kind":primary_kind,"fallback_kind":fallback_kind},
+        {"index":3,"subgoal":clauses[3],"mode":"RUNTIME_PER_ITEM_FINAL_ARTIFACT_SPEC",
+         "output_dir":output_dir},
+        {"index":4,"subgoal":clauses[4],"mode":"RUNTIME_PER_ITEM_FALLBACK_MANIFEST_SPEC",
+         "manifest_path":manifest_path,"fields":fields},
+        {"index":5,"subgoal":clauses[5],"mode":"INDEPENDENT_PER_ITEM_FALLBACK_VERIFICATION",
+         "source_path":source_path,"manifest_path":manifest_path,
+         "expected_source_field":validation_field,"primary_source_field":primary_field},
+      ],
+      "controller_actions":[
+        first_action,
+        fanout_action,
+        verifier,
+        {"type":"finish","args":{"summary":"COMPOUND_GOAL_COMPLETE"}},
+      ],
+      "finish_summary":"COMPOUND_GOAL_COMPLETE",
+    }
+
+
 def _compile_runtime_multi_action_fanout(subgoal, context_paths, registry, future_clauses):
     text=str(subgoal or "").strip()
     m=re.match(r"^for\s+every\s+user\s+returned\s+at\s+runtime,\s+(.+)$",text,re.IGNORECASE)
@@ -2742,6 +2920,9 @@ def compile_goal(goal, registry, root):
     if browser_interaction is not None:
         return _validate_compiled_clause_coverage(browser_interaction)
     clauses=decompose_goal(goal)
+    per_item_fallback=_compile_per_item_fallback_goal(goal,clauses,registry,root)
+    if per_item_fallback is not None:
+        return _validate_compiled_clause_coverage(per_item_fallback)
     multi_action_fanout=_compile_multi_action_fanout_goal(goal,clauses,registry,root)
     if multi_action_fanout is not None:
         return _validate_compiled_clause_coverage(multi_action_fanout)
