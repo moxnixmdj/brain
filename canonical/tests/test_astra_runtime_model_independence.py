@@ -28,6 +28,25 @@ class ModelIndependenceTests(unittest.TestCase):
         self.assertIsNone(result["planner_model_last"])
         self.assertIn("MODEL_INDEPENDENT_GOAL_COMPLETE", result["stdout"])
 
+    def test_anonymous_controller_checkpoints_are_isolated_by_plan_hash(self):
+        first=[
+            {"type":"read_file","args":{"path":"canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md"}},
+            {"type":"finish","args":{"summary":"FIRST"}},
+        ]
+        second=[
+            {"type":"search_text","args":{"query":"MODEL_NON_DEPENDENCE_LAW_V1"}},
+            {"type":"finish","args":{"summary":"SECOND"}},
+        ]
+        first_sha=runtime._controller_plan_sha256(first)
+        second_sha=runtime._controller_plan_sha256(second)
+        p1=runtime._controller_checkpoint_path({}, {}, plan_sha=first_sha)
+        p1_repeat=runtime._controller_checkpoint_path({}, {}, plan_sha=first_sha)
+        p2=runtime._controller_checkpoint_path({}, {}, plan_sha=second_sha)
+        self.assertEqual(p1,p1_repeat)
+        self.assertNotEqual(p1,p2)
+        self.assertIn(first_sha[:16],p1.name)
+        self.assertIn(second_sha[:16],p2.name)
+
     def test_unknown_goal_attempts_model_independent_acquisition_without_model_fallback(self):
         class EmptyAuto:
             def dispatch(self,*args,**kwargs):
