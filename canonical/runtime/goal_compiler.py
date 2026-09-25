@@ -321,7 +321,7 @@ def _compile_json_markdown_table(subgoal, context_paths, registry, root):
       '| ([ $row.key ] + ($cols | map(($row.value[.] // "") '
       '| if type=="array" then map(tostring) | join(", ") '
       'elif type=="object" then tojson else tostring end))) '
-      '| map(gsub("\\|"; "\\\\|") | gsub("[\\r\\n]+";" ")) '
+      '| map(gsub("[|]"; "&#124;") | gsub("[\\r\\n]+";" ")) '
       '| "| " + join(" | ") + " |")'
     )
     action={
