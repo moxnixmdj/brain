@@ -1707,6 +1707,15 @@ def _goal_action(action):
                 raise RuntimeError("GROUP_DERIVE_SOURCE_NOT_OBJECT_ARRAY")
             return data
 
+        def source_value(row,field):
+            if field in row:
+                return row[field]
+            wanted=re.sub(r"[^a-z0-9]+","",str(field).lower())
+            matches=[v for k,v in row.items() if re.sub(r"[^a-z0-9]+","",str(k).lower())==wanted]
+            if len(matches)!=1:
+                raise KeyError(field)
+            return matches[0]
+
         try:
             dimensions=observed_array(dimension_path)
             facts=observed_array(fact_path)
@@ -1716,21 +1725,25 @@ def _goal_action(action):
         dim_index={}
         groups={}
         for row in dimensions:
-            if dimension_key not in row:
+            try:
+                key=source_value(row,dimension_key)
+            except KeyError:
                 return {"type":typ,"output_verified":False,"error":"GROUP_DERIVE_DIMENSION_KEY_MISSING"}
-            token=json.dumps(row.get(dimension_key),sort_keys=True)
+            token=json.dumps(key,sort_keys=True)
             if token in dim_index:
-                return {"type":typ,"output_verified":False,"error":"GROUP_DERIVE_DIMENSION_KEY_DUPLICATE","key":row.get(dimension_key)}
+                return {"type":typ,"output_verified":False,"error":"GROUP_DERIVE_DIMENSION_KEY_DUPLICATE","key":key}
             dim_index[token]=row
             groups[token]=[]
 
         unmatched=[]
         for fact in facts:
-            if fact_key not in fact:
+            try:
+                fact_value=source_value(fact,fact_key)
+            except KeyError:
                 return {"type":typ,"output_verified":False,"error":"GROUP_DERIVE_FACT_KEY_MISSING"}
-            token=json.dumps(fact.get(fact_key),sort_keys=True)
+            token=json.dumps(fact_value,sort_keys=True)
             if token not in groups:
-                unmatched.append(fact.get(fact_key))
+                unmatched.append(fact_value)
                 continue
             groups[token].append(fact)
         if unmatched:
@@ -1747,16 +1760,17 @@ def _goal_action(action):
                 where=spec.get("where") or {}
                 if not isinstance(where,dict) or not where:
                     raise RuntimeError("GROUP_DERIVE_WHERE_INVALID")
-                return sum(1 for row in related if all(row.get(str(k))==v for k,v in where.items()))
+                return sum(1 for row in related if all(source_value(row,str(k))==v for k,v in where.items()))
             if op=="sum":
                 field=str(spec.get("field") or "")
                 if not re.fullmatch(field_re,field):
                     raise RuntimeError("GROUP_DERIVE_SUM_FIELD_INVALID")
                 total=0
                 for row in related:
-                    if field not in row:
+                    try:
+                        value=source_value(row,field)
+                    except KeyError:
                         raise RuntimeError("GROUP_DERIVE_SUM_FIELD_MISSING:"+field)
-                    value=row[field]
                     if isinstance(value,bool) or not isinstance(value,(int,float)):
                         raise RuntimeError("GROUP_DERIVE_SUM_VALUE_NONNUMERIC:"+field)
                     total+=value
@@ -1766,12 +1780,14 @@ def _goal_action(action):
         summary=[]
         try:
             for dim in dimensions:
-                token=json.dumps(dim.get(dimension_key),sort_keys=True)
-                rec={output_id_field:dim.get(dimension_key)}
+                dimension_value=source_value(dim,dimension_key)
+                token=json.dumps(dimension_value,sort_keys=True)
+                rec={output_id_field:dimension_value}
                 for field in copy_fields:
-                    if field not in dim:
+                    try:
+                        rec[field]=source_value(dim,field)
+                    except KeyError:
                         raise RuntimeError("GROUP_DERIVE_COPY_FIELD_MISSING:"+field)
-                    rec[field]=dim[field]
                 for spec in metrics:
                     rec[str(spec.get("name"))]=metric_value(spec,groups[token])
                 for spec in derived:
@@ -1786,10 +1802,10 @@ def _goal_action(action):
                     if numerator not in rec or denominator not in rec:
                         raise RuntimeError("GROUP_DERIVE_DERIVED_INPUT_MISSING")
                     den=rec[denominator]
-                    if not isinstance(den,(int,float)) or den==0:
+                    if not isinstance(den,(int,float)) or isinstance(den,bool) or den==0:
                         raise RuntimeError("GROUP_DERIVE_DIVIDE_BY_ZERO_OR_NONNUMERIC")
                     num=rec[numerator]
-                    if not isinstance(num,(int,float)):
+                    if not isinstance(num,(int,float)) or isinstance(num,bool):
                         raise RuntimeError("GROUP_DERIVE_NUMERATOR_NONNUMERIC")
                     rec[name]=num/den
                 summary.append(rec)
@@ -1827,6 +1843,16 @@ def _goal_action(action):
             return {"type":typ,"verified":False,"error":"GROUP_DERIVE_VERIFY_JSON_INVALID:"+type(exc).__name__}
         if not isinstance(dimensions,list) or not isinstance(facts,list) or not isinstance(summary,list):
             return {"type":typ,"verified":False,"error":"GROUP_DERIVE_VERIFY_NOT_ARRAY"}
+
+        def source_value(row,field):
+            if field in row:
+                return row[field]
+            wanted=re.sub(r"[^a-z0-9]+","",str(field).lower())
+            matches=[v for k,v in row.items() if re.sub(r"[^a-z0-9]+","",str(k).lower())==wanted]
+            if len(matches)!=1:
+                raise KeyError(field)
+            return matches[0]
+
         failures=[]
         by_id={}
         for rec in summary:
@@ -1841,29 +1867,48 @@ def _goal_action(action):
             failures.append("SUMMARY_CARDINALITY_MISMATCH")
         groups={}
         for dim in dimensions:
-            if not isinstance(dim,dict) or dimension_key not in dim:
+            if not isinstance(dim,dict):
                 failures.append("DIMENSION_KEY_MISSING")
                 continue
-            groups[json.dumps(dim.get(dimension_key),sort_keys=True)]=[]
+            try:
+                dim_value=source_value(dim,dimension_key)
+            except KeyError:
+                failures.append("DIMENSION_KEY_MISSING")
+                continue
+            groups[json.dumps(dim_value,sort_keys=True)]=[]
         for fact in facts:
-            if not isinstance(fact,dict) or fact_key not in fact:
+            if not isinstance(fact,dict):
                 failures.append("FACT_KEY_MISSING")
                 continue
-            token=json.dumps(fact.get(fact_key),sort_keys=True)
+            try:
+                fact_value=source_value(fact,fact_key)
+            except KeyError:
+                failures.append("FACT_KEY_MISSING")
+                continue
+            token=json.dumps(fact_value,sort_keys=True)
             if token not in groups:
                 failures.append("UNMATCHED_FACT")
                 continue
             groups[token].append(fact)
         for dim in dimensions:
-            if not isinstance(dim,dict) or dimension_key not in dim:
+            if not isinstance(dim,dict):
                 continue
-            token=json.dumps(dim.get(dimension_key),sort_keys=True)
+            try:
+                dim_value=source_value(dim,dimension_key)
+            except KeyError:
+                continue
+            token=json.dumps(dim_value,sort_keys=True)
             rec=by_id.get(token)
             if rec is None:
                 failures.append("SUMMARY_RECORD_MISSING")
                 continue
             for field in copy_fields:
-                if rec.get(field)!=dim.get(field):
+                try:
+                    expected_copy=source_value(dim,field)
+                except KeyError:
+                    failures.append("COPY_FIELD_SOURCE_MISSING:"+field)
+                    continue
+                if rec.get(field)!=expected_copy:
                     failures.append("COPY_FIELD_MISMATCH:"+field)
             expected={}
             for spec in metrics:
@@ -1874,17 +1919,21 @@ def _goal_action(action):
                     expected[name]=len(related)
                 elif op=="count_where":
                     where=spec.get("where") or {}
-                    expected[name]=sum(1 for row in related if all(row.get(str(k))==v for k,v in where.items()))
+                    try:
+                        expected[name]=sum(1 for row in related if all(source_value(row,str(k))==v for k,v in where.items()))
+                    except KeyError as exc:
+                        failures.append("FILTER_FIELD_MISSING:"+str(exc))
                 elif op=="sum":
                     field=str(spec.get("field") or "")
                     values=[]
                     invalid=False
                     for row in related:
-                        if field not in row:
+                        try:
+                            value=source_value(row,field)
+                        except KeyError:
                             failures.append("SUM_FIELD_MISSING:"+field)
                             invalid=True
                             break
-                        value=row[field]
                         if isinstance(value,bool) or not isinstance(value,(int,float)):
                             failures.append("SUM_VALUE_NONNUMERIC:"+field)
                             invalid=True
@@ -1901,7 +1950,7 @@ def _goal_action(action):
                     continue
                 num=expected.get(str(spec.get("numerator") or ""),rec.get(str(spec.get("numerator") or "")))
                 den=expected.get(str(spec.get("denominator") or ""),rec.get(str(spec.get("denominator") or "")))
-                if not isinstance(num,(int,float)) or not isinstance(den,(int,float)) or den==0:
+                if not isinstance(num,(int,float)) or isinstance(num,bool) or not isinstance(den,(int,float)) or isinstance(den,bool) or den==0:
                     failures.append("DERIVED_INPUT_INVALID")
                     continue
                 expected[name]=num/den
