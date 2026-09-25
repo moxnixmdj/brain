@@ -16,6 +16,7 @@
   "constraints": {
     "incremental_spend_usd": 0,
     "model_controller_required": false,
-    "read_only_verification": true
+    "read_only_verification": true,
+    "replay_after_jq_separator_precedence_commit": "74cc0276271c1102dd134db16bb83d0e27cb24ec"
   }
 }
