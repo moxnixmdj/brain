@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T21:46:18.608710+00:00",
+  "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-STALE-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_JIT_KNOWLEDGE_STALE_001.json",
+  "mission_sha256": "476fd1ddf0fd3a8fe588303ac6b5e4520bef5610468a398e72ce0f4eade9056e",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "76cc4b7bab32c515867ab8e0ac5deecd92775704bfecf37bcb7d0e12baf1fd31",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
