@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T19:27:07.816279+00:00",
+  "mission_id": "ASTRA-INDEPENDENT-CODEC-VERIFIER-COMPILER-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_INDEPENDENT_CODEC_VERIFIER_COMPILER_DIAG_001.json",
+  "mission_sha256": "84f7abeb10567fdf829b947a5070e2222f6e799d5d43131123e36b0c2fc38d1c",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "0ac9d33922e8075545e6ded559f1eb2b2bbb25ba3f08537316a5ecb78e8293ff",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T19:27:07.815987+00:00",
+  "created_at_utc": "2026-09-25T19:27:07.687730+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T19:27:07.815666+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/goal_compiler.py')\ns=importlib.util.spec_from_file_location('gc',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads(pathlib.Path('canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads(pathlib.Path('canonical/astra_runtime/missions/ASTRA_RUNTIME_INDEPENDENT_CODEC_VERIFIER_BSON_002.json').read_text())['goal']\nout=m.compile_goal(goal,reg,pathlib.Path('.').resolve())\nacts=out.get('controller_actions') or []\nv=[a for a in acts if a.get('type')=='verify_with_independent_pypi_codec']\nassert len(v)==1,acts\nassert v[0]['args']['producer_project']=='bson-modern',v\nassert v[0]['args']['format']=='bson',v\nassert not any((a.get('args') or {}).get('mode')=='decode_verify' for a in acts),acts\nprint('INDEPENDENT_CODEC_VERIFIER_COMPILER_VERIFIED')\nPY",
+        "duration_s": 0.128,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "INDEPENDENT_CODEC_VERIFIER_COMPILER_VERIFIED\n"
+      },
+      "step_id": "compile-and-assert-independent-verifier",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-INDEPENDENT-CODEC-VERIFIER-COMPILER-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_INDEPENDENT_CODEC_VERIFIER_COMPILER_DIAG_001.json",
+  "mission_sha256": "84f7abeb10567fdf829b947a5070e2222f6e799d5d43131123e36b0c2fc38d1c",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T19:27:07.815679+00:00"
+}
