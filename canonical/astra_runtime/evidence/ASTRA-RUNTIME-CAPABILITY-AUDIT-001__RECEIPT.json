@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T00:22:10.010181+00:00",
+  "mission_id": "ASTRA-RUNTIME-CAPABILITY-AUDIT-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_CAPABILITY_AUDIT_001.json",
+  "mission_sha256": "e82285137e042837d49a94686ee5c51f3595408e241ca18a8fc5e5c04891c9a8",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "9cc6928ea41036e7afa75630cd23111de36496b08bd49664cc50a04a5771bccc",
+  "status": "COMPLETE",
+  "steps_completed": 2
+}
