@@ -1,10 +1,21 @@
 #!/usr/bin/env python3
 import argparse, ast, gzip, hashlib, importlib.util, json, os, pathlib, re, shlex, shutil, subprocess, sys, tempfile, time, urllib.parse, urllib.request
 import importlib.metadata
-import npm_package_utils
 from datetime import datetime, timezone
 
 ROOT=pathlib.Path(__file__).resolve().parents[2]
+
+def _load_runtime_helper(module_name):
+    path=ROOT/"canonical"/"runtime"/(str(module_name)+".py")
+    if not path.is_file():
+        raise Blocker("RUNTIME_HELPER_MISSING:"+str(module_name))
+    spec=importlib.util.spec_from_file_location("project_brain_runtime_helper_"+str(module_name),path)
+    if spec is None or spec.loader is None:
+        raise Blocker("RUNTIME_HELPER_LOAD_FAILED:"+str(module_name))
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    return module
 STATE_DIR=ROOT/"canonical"/"astra_runtime"/"state"
 EVID_DIR=ROOT/"canonical"/"astra_runtime"/"evidence"
 
@@ -286,6 +297,7 @@ def _ensure_pypi_dependency(source):
 
 
 def _ensure_npm_dependency(source):
+    npm_package_utils=_load_runtime_helper("npm_package_utils")
     package=str(source.get("package") or "").strip()
     version=str(source.get("version") or "").strip()
     metadata_url=str(source.get("metadata_url") or "").strip()
