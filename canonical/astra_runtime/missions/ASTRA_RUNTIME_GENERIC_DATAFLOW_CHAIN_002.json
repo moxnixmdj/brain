@@ -31,6 +31,7 @@
     "fresh_mission_identity": true,
     "source_mission": "ASTRA-RUNTIME-GENERIC-DATAFLOW-CHAIN-001",
     "semantic_field_resolution_commit": "de24d7f47919128292c62886e212c83b05725d05",
-    "recursive_verification_commit": "64cafbed386b972190d11ff209be714860b29c4b"
+    "recursive_verification_commit": "64cafbed386b972190d11ff209be714860b29c4b",
+    "replay_after_live_wrapper_direct_artifact_fix": "4dc6a3255cb0aa0c4c456acddc2ab63b4751c92d"
   }
 }
