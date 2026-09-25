@@ -34,6 +34,34 @@ class GoalCompilerTests(unittest.TestCase):
         with self.assertRaisesRegex(compiler.GoalCompilationFailure,"GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"):
             compiler.compile_goal("Reticulate a quantum banana lattice",self.registry(),ROOT)
 
+    def test_browser_goal_binds_url_and_typed_future_outputs(self):
+        registry={
+          "web.browser.rendered.capture.test":{
+            "status":"VERIFIED_BOUND_CAPABILITY",
+            "provides":["web.browser.rendered.capture"],
+            "requires":[],
+            "keywords":["browser","rendered","web","screenshot","url"],
+            "action_template":{
+              "type":"invoke_capability",
+              "args":{
+                "capability_id":"web.browser.rendered.capture.test",
+                "url":"${input.url}",
+                "screenshot_path":"${input.screenshot_path}",
+                "result_path":"${input.result_path}"
+              },
+              "expect":{"type":"field_equals","field":"output_verified","value":True}
+            }
+          }
+        }
+        goal=("Using a rendered browser, open https://example.com and save a screenshot to "
+              "canonical/astra_runtime/tmp/EXAMPLE.png and save the result to "
+              "canonical/astra_runtime/tmp/EXAMPLE.json")
+        out=compiler.compile_goal(goal,registry,ROOT)
+        self.assertEqual(out["selected_capability"],"web.browser.rendered.capture.test")
+        self.assertEqual(out["inputs"]["url"],"https://example.com")
+        self.assertEqual(out["inputs"]["screenshot_path"],"canonical/astra_runtime/tmp/EXAMPLE.png")
+        self.assertEqual(out["inputs"]["result_path"],"canonical/astra_runtime/tmp/EXAMPLE.json")
+
     def test_barcode_goal_selects_verified_barcode_not_qr(self):
         goal="Generate a Code 128 barcode image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_BARCODE.png."
         out=compiler.compile_goal(goal,self.registry(),ROOT)
