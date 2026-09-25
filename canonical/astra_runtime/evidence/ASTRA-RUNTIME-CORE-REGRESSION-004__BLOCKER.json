@@ -1,0 +1,17 @@
+{
+  "adapter": "shell",
+  "error": "VERIFICATION_FAILED",
+  "mission_id": "ASTRA-RUNTIME-CORE-REGRESSION-004",
+  "observed_at_utc": "2026-09-25T00:06:00.730377+00:00",
+  "result": {
+    "adapter": "shell",
+    "command": "set -euo pipefail\npython canonical/tests/test_goal_compiler.py\npython canonical/tests/test_capability_discovery.py\npython canonical/tests/test_runtime_composition.py",
+    "duration_s": 0.531,
+    "returncode": 1,
+    "stderr": "test_barcode_goal_selects_verified_barcode_not_qr (__main__.GoalCompilerTests.test_barcode_goal_selects_verified_barcode_not_qr) ... ok\ntest_compound_goal_compiles_full_verified_audit_pipeline (__main__.GoalCompilerTests.test_compound_goal_compiles_full_verified_audit_pipeline) ... ok\ntest_plain_image_only_pdf_goal_selects_verified_ocr (__main__.GoalCompilerTests.test_plain_image_only_pdf_goal_selects_verified_ocr) ... ok\ntest_plain_qr_goal_selects_verified_qr_and_binds_arguments (__main__.GoalCompilerTests.test_plain_qr_goal_selects_verified_qr_and_binds_arguments) ... ok\ntest_unknown_goal_fails_closed (__main__.GoalCompilerTests.test_unknown_goal_fails_closed) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.005s\n\nOK\ntest_apt_discovery_keeps_late_split_compound_match (__main__.CapabilityDiscoveryTests.test_apt_discovery_keeps_late_split_compound_match) ... ok\ntest_discovery_never_binds_during_search (__main__.CapabilityDiscoveryTests.test_discovery_never_binds_during_search) ... ok\ntest_effect_queries_ignore_repo_path_noise_but_keep_file_type (__main__.CapabilityDiscoveryTests.test_effect_queries_ignore_repo_path_noise_but_keep_file_type) ... ok\ntest_effect_query_is_deterministic (__main__.CapabilityDiscoveryTests.test_effect_query_is_deterministic) ... ok\ntest_zero_cost_candidate_ranks_before_paid_candidate (__main__.CapabilityDiscoveryTests.test_zero_cost_candidate_ranks_before_paid_candidate) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.035s\n\nOK\ntest_json_key_assertion_is_layout_insensitive (__main__.RuntimeCompositionTests.test_json_key_assertion_is_layout_insensitive) ... ERROR\ntest_result_reference_resolves_prior_action_field (__main__.RuntimeCompositionTests.test_result_reference_resolves_prior_action_field) ... ok\n\n======================================================================\nERROR: test_json_key_assertion_is_layout_insensitive (__main__.RuntimeCompositionTests.test_json_key_assertion_is_layout_insensitive)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/brain/brain/canonical/tests/test_runtime_composition.py\", line 33, in test_json_key_assertion_is_layout_insensitive\n    out=runtime._goal_action({\n        ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/brain/brain/canonical/runtime/astra_runtime.py\", line 334, in _goal_action\n    observed=norm(text)\n             ^^^^^^^^^^\n  File \"/home/runner/work/brain/brain/canonical/runtime/astra_runtime.py\", line 333, in <lambda>\n    norm=lambda x: re.sub(r\"[^A-Z0-9]+\",\"\",str(x).upper())\n                   ^^\nNameError: name 're' is not defined. Did you forget to import 're'\n\n----------------------------------------------------------------------\nRan 2 tests in 0.002s\n\nFAILED (errors=1)\n",
+    "stdout": ""
+  },
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "run-current-regressions",
+  "step_index": 0
+}
