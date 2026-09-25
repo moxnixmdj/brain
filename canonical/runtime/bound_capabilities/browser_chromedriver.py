@@ -24,6 +24,21 @@ def _free_port():
 
 
 def run(args, root):
+    # Backward-compatible extension: passive capture remains the default.
+    # When an explicit declarative action list is supplied, delegate to the
+    # separately implemented interaction path. This keeps the verified
+    # capture behavior stable while letting fresh missions pressure the new
+    # effect before it is promoted in the capability registry.
+    if isinstance(args.get("actions"),list) and args.get("actions"):
+        import importlib.util, sys
+        path=pathlib.Path(__file__).resolve().with_name("browser_chromedriver_interact.py")
+        spec=importlib.util.spec_from_file_location("project_brain_browser_chromedriver_interact",path)
+        if spec is None or spec.loader is None:
+            raise RuntimeError("BROWSER_INTERACTION_ADAPTER_LOAD_FAILED")
+        module=importlib.util.module_from_spec(spec)
+        sys.modules[spec.name]=module
+        spec.loader.exec_module(module)
+        return module.run(args,root)
     url=str(args.get("url") or "").strip()
     if not url.startswith(("https://","http://")):
         raise RuntimeError("BROWSER_URL_INVALID")
