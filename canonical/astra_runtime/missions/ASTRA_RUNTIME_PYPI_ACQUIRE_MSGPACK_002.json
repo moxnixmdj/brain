@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-PYPI-ACQUIRE-MSGPACK-002",
+  "purpose": "Fresh replay after native literal JSON and supplier-independent acquisition routing; no manual supplier or package hint.",
+  "goal": "Create canonical/astra_runtime/tmp/MSGPACK_SOURCE.json containing exactly three records with fields id and text: 1 alpha, 2 beta, 3 gamma. Encode those exact records as MessagePack and save canonical/astra_runtime/tmp/MSGPACK_RECORDS.msgpack. Independently decode the MessagePack artifact and verify the decoded records are exactly identical to canonical/astra_runtime/tmp/MSGPACK_SOURCE.json in values, order, field names, and record count.",
+  "steps": [
+    {
+      "id": "run-pypi-acquisition-pressure",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 20,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "manual_supplier": false,
+    "manual_binding": false,
+    "external_python_library_acquisition_allowed": true,
+    "apt_cli_is_not_a_valid_substitute_for_python_library_binding": true,
+    "independent_semantic_verification_required": true,
+    "fresh_mission_identity": true,
+    "native_literal_json_commit": "dc77ad7c166350941c2696a82773f043d9e7fd74",
+    "supplier_router_commit": "7c58b33d3c124fbc933e4f01f0594e78aad98929",
+    "pypi_discovery_commit": "c81da1db8d14726aa6e80008f328402c8c871122",
+    "pypi_acquisition_commit": "d3f57f88625380c132072929b811aad73cad749c"
+  }
+}
