@@ -1,0 +1,11 @@
+{
+  "schema": "PROJECT_BRAIN_RUNTIME_RECEIPT_SUPERSESSION_V1",
+  "mission_id": "ASTRA-RUNTIME-PYPI-ACQUIRE-MSGPACK-002",
+  "supersedes_receipt": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-PYPI-ACQUIRE-MSGPACK-002__RECEIPT.json",
+  "status": "INVALIDATED_BY_POST_HOC_FALSE_POSITIVE_DISCOVERY",
+  "reason": "The final independent-decode verification clause was compiled to the producer capability auto.pypi.msgpack in encode mode. It overwrote MSGPACK_SOURCE.json with MessagePack bytes rather than decoding MSGPACK_RECORDS.msgpack and comparing semantics. Therefore the prior COMPLETE receipt does not establish end-to-end mission correctness.",
+  "defect_class": "VERIFICATION_INTENT_MISBOUND_TO_PRODUCER",
+  "repair_commit": "9a6f31e178acf31fc338189fbafb829c68edfc8f",
+  "preserved_fact": "Autonomous PyPI supplier discovery, hash-pinned wheel selection, packb/unpackb contract inference, pending-binding verification, and encoder promotion remain independently evidenced by ASTRA-AUTO-VERIFY-PYPI-MSGPACK-9F0974D98983.",
+  "observed_at_utc": "2026-09-25T18:37:24Z"
+}
