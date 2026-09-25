@@ -1,0 +1,42 @@
+{
+  "completed_at_utc": "2026-09-25T01:22:14.863205+00:00",
+  "created_at_utc": "2026-09-25T01:22:12.422858+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T01:22:13.932043+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\nroot=pathlib.Path('.').resolve()\np=root/'canonical/runtime/bound_capabilities/python_test_audit.py'\ns=importlib.util.spec_from_file_location('pta_verify',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nr=m.run({'source_root':'canonical/tests','pattern':'test_*.py','output_path':'canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT_VERIFY.json','timeout_s':180},root)\nprint(json.dumps(r,sort_keys=True)); print('PYTHON_TEST_AUDIT_ADAPTER_COMPLETE')\nPY",
+        "duration_s": 1.509,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"adapter\": \"python_test_audit\", \"error_count\": 0, \"failed_count\": 0, \"file_count\": 8, \"output_path\": \"canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT_VERIFY.json\", \"output_sha256\": \"4bbd5b2ef43ba8ce863dc7ca44bbac426b7b85cf0d0e1bde156ca08da2b7cb56\", \"output_verified\": true, \"passed_count\": 41, \"skipped_count\": 0, \"test_count\": 41}\nPYTHON_TEST_AUDIT_ADAPTER_COMPLETE\n"
+      },
+      "step_id": "run-pending-test-audit",
+      "step_index": 0
+    },
+    {
+      "completed_at_utc": "2026-09-25T01:22:14.836514+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport json,pathlib,re,subprocess,sys\nroot=pathlib.Path('.').resolve(); tests=root/'canonical/tests'\nreport=json.loads((root/'canonical/astra_runtime/tmp/CANONICAL_TEST_AUDIT_VERIFY.json').read_text())\nfiles=sorted(p for p in tests.glob('test_*.py') if p.is_file())\nrecords={x['path']:x for x in report['records']}\nassert set(records)=={str(p.relative_to(root)).replace('\\\\','/') for p in files}\ntot={'files':0,'tests':0,'passed':0,'failed':0,'errors':0,'skipped':0}\nfor p in files:\n proc=subprocess.run([sys.executable,str(p)],cwd=root,text=True,capture_output=True,timeout=180)\n combined=(proc.stdout or '')+'\\n'+(proc.stderr or '')\n assert proc.returncode==0,(str(p),combined[-2000:])\n m=re.search(r'Ran\\s+(\\d+)\\s+tests?\\s+in\\s+[0-9.]+s',combined); assert m,(str(p),combined[-1000:])\n ran=int(m.group(1)); skipped=0\n sm=re.search(r'OK\\s*\\(([^)]*)\\)',combined)\n if sm:\n  z=re.search(r'skipped=(\\d+)',sm.group(1)); skipped=int(z.group(1)) if z else 0\n rel=str(p.relative_to(root)).replace('\\\\','/'); rec=records[rel]\n assert rec['exit_code']==0 and rec['tests']==ran and rec['failed']==0 and rec['errors']==0 and rec['skipped']==skipped\n tot['files']+=1; tot['tests']+=ran; tot['skipped']+=skipped; tot['passed']+=ran-skipped\nassert report['totals']==tot,(report['totals'],tot)\nprint(json.dumps({'verified':True,'totals':tot},sort_keys=True)); print('PYTHON_TEST_AUDIT_INDEPENDENTLY_VERIFIED')\nPY",
+        "duration_s": 0.904,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"totals\": {\"errors\": 0, \"failed\": 0, \"files\": 8, \"passed\": 41, \"skipped\": 0, \"tests\": 41}, \"verified\": true}\nPYTHON_TEST_AUDIT_INDEPENDENTLY_VERIFIED\n"
+      },
+      "step_id": "freshly-rerun-and-verify-corpus",
+      "step_index": 1
+    }
+  ],
+  "mission_id": "ASTRA-VERIFY-PYTHON-TEST-AUDIT-005",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_PYTHON_TEST_AUDIT_005.json",
+  "mission_sha256": "adbb687935d5dbd0b17ab46310458e259e16047843c8d283a50fc73468929e7a",
+  "next_step": 2,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T01:22:14.836528+00:00"
+}

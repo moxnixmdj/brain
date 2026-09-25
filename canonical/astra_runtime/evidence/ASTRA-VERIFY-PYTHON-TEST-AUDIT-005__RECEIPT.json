@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T01:22:15.599857+00:00",
+  "mission_id": "ASTRA-VERIFY-PYTHON-TEST-AUDIT-005",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_PYTHON_TEST_AUDIT_005.json",
+  "mission_sha256": "adbb687935d5dbd0b17ab46310458e259e16047843c8d283a50fc73468929e7a",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "d4df9c55e99ac826a664e2fd629280ffe1eeb0a9541bd71c21cf90310d96f2bd",
+  "status": "COMPLETE",
+  "steps_completed": 2
+}
