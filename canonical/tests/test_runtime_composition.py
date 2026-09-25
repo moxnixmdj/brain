@@ -25,6 +25,16 @@ class RuntimeCompositionTests(unittest.TestCase):
             {"v":7},
         )
 
+    def test_verified_local_dependency_admission(self):
+        py=runtime._ensure_local_dependency({"type":"python_stdlib","module":"tarfile"})
+        self.assertEqual(py["status"],"LOCAL_VERIFIED")
+        self.assertEqual(py["module"],"tarfile")
+        tool=runtime._ensure_local_dependency({"type":"system_tool","executable":"tar"})
+        self.assertEqual(tool["status"],"LOCAL_VERIFIED")
+        self.assertEqual(tool["executable"],"tar")
+        with self.assertRaisesRegex(runtime.Blocker,"BOUND_CAPABILITY_SOURCE_UNSUPPORTED"):
+            runtime._ensure_local_dependency({"type":"mystery"})
+
     def test_json_key_assertion_is_layout_insensitive(self):
         p=CANONICAL/"astra_runtime"/"tmp"/"COMPOSITION_KEYS_TEST.json"
         p.parent.mkdir(parents=True,exist_ok=True)
