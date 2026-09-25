@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T16:41:37.516440+00:00",
+  "created_at_utc": "2026-09-25T16:41:37.429046+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T16:41:37.516119+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/goal_compiler.py')\ns=importlib.util.spec_from_file_location('gc',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads(pathlib.Path('canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads(pathlib.Path('canonical/astra_runtime/missions/ASTRA_RUNTIME_FALLBACK_CONTROL_002.json').read_text())['goal']\nout=m.compile_goal(goal,reg,pathlib.Path('.').resolve())\nassert out['compiler_mode']=='DETERMINISTIC_RUNTIME_FALLBACK_PLAN',out\nassert out.get('clause_coverage_verified') is True,out\nassert sorted(p['index'] for p in out['compiled_parts'])==[0,1,2,3],out['compiled_parts']\ntypes=[a.get('type') for a in out['controller_actions']]\nassert types==['invoke_capability_fallback','assert_runtime_fallback_decision','finish'],types\nfb=out['controller_actions'][0]\nassert fb['args']['primary_action']['args']['capability_id']=='web.browser.rendered.capture.chromedriver',fb\nassert fb['args']['fallback_action']['args']['capability_id']=='web.browser.rendered.capture.chromedriver',fb\nassert fb['args']['decision_path']=='canonical/astra_runtime/tmp/FALLBACK_DECISION.json',fb\nassert not any('docx' in json.dumps(x).lower() for x in out['compiled_parts']),out['compiled_parts']\nprint('RUNTIME_FALLBACK_COMPILER_VERIFIED')\nPY",
+        "duration_s": 0.087,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "RUNTIME_FALLBACK_COMPILER_VERIFIED\n"
+      },
+      "step_id": "compile-and-assert-fallback",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-RUNTIME-FALLBACK-COMPILER-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_FALLBACK_COMPILER_DIAG_001.json",
+  "mission_sha256": "6c3156c3373be7786cc022ca9e25de456d7f57a841bae15a50d2e93e85ee2ecc",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T16:41:37.516140+00:00"
+}
