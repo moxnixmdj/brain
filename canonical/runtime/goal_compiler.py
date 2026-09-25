@@ -8,6 +8,7 @@ observable instead of being guessed.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import pathlib
 import re
@@ -357,6 +358,95 @@ def _compile_json_markdown_table(subgoal, context_paths, registry, root):
     }
 
 
+def _compile_json_record_selection(subgoal, context_paths, registry, root):
+    entry=(registry or {}).get("json.query.jq")
+    if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
+        return None
+    lower=subgoal.lower()
+    if not re.match(r"^(?:find|select|identify|locate)\b",lower):
+        return None
+    json_paths=[p for p in context_paths if pathlib.Path(p).suffix.lower()==".json" and (pathlib.Path(root)/p).is_file()]
+    if not json_paths:
+        return None
+    input_path=json_paths[-1]
+    data=json.loads((pathlib.Path(root)/input_path).read_text(encoding="utf-8"))
+
+    # Detect an exact status token if the clause names one.
+    semantic=re.sub(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+"," ",subgoal)
+    constants=re.findall(r"\b[A-Z][A-Z0-9_]{3,}\b",semantic)
+    wanted_status=None
+    collection=None
+    for token in constants:
+        found=_find_status_collection(data,token)
+        if found is not None:
+            wanted_status=token
+            collection=found
+            break
+    if collection is None:
+        collection=_find_record_collection(data)
+    if collection is None:
+        return None
+
+    # Generic nested-field equality phrasing: "source type is pypi",
+    # "source type equals apt", etc. Keep this deliberately narrow and
+    # deterministic rather than guessing arbitrary semantics.
+    m=re.search(r"\b([A-Za-z_][A-Za-z0-9_]*)\s+type\s+(?:is|equals?|=)\s+([A-Za-z0-9_.-]+)\b",lower)
+    nested_field=None
+    nested_value=None
+    if m:
+        nested_field=[m.group(1),"type"]
+        nested_value=m.group(2)
+    else:
+        m=re.search(r"\bsource\s+type\s+(?:is|equals?|=)\s+([A-Za-z0-9_.-]+)\b",lower)
+        if m:
+            nested_field=["source","type"]
+            nested_value=m.group(1)
+    if nested_field is None:
+        return None
+
+    base=_jq_path(collection)
+    predicates=[]
+    if wanted_status is not None:
+        predicates.append(f'any(. == {json.dumps(wanted_status)})')
+    path_expr="".join("["+json.dumps(x)+"]" for x in nested_field)
+    predicates.append(f'(.{path_expr} == {json.dumps(nested_value)})'.replace('.[','[' ,1))
+    # The expression above intentionally starts from .value below.
+    pred=" and ".join(predicates)
+    filt=(
+      f'{base} | to_entries | map(select(.value | {pred})) '
+      '| if length==1 then .[0] | {id:.key, record:.value} '
+      'else error("SELECTION_NOT_UNIQUE:"+((length)|tostring)) end'
+    )
+    digest=hashlib.sha256(subgoal.encode("utf-8")).hexdigest()[:12]
+    output_path=f"canonical/astra_runtime/tmp/STRUCTURED_SELECTION_{digest}.json"
+    action={
+      "type":"invoke_capability",
+      "args":{
+        "capability_id":"json.query.jq",
+        "input_path":input_path,
+        "filter":filt,
+        "output_path":output_path,
+        "raw_output":False,
+        "require_nonempty":True,
+        "timeout_s":60,
+      },
+      "expect":{"type":"field_equals","field":"output_verified","value":True},
+    }
+    return {
+      "action":action,
+      "output_path":output_path,
+      "evidence":{
+        "input_path":input_path,
+        "output_path":output_path,
+        "collection_path":list(collection),
+        "status_value":wanted_status,
+        "nested_field":nested_field,
+        "nested_value":nested_value,
+        "capability_id":"json.query.jq",
+      }
+    }
+
+
 def _compile_json_status_manifest(subgoal, context_paths, registry, root):
     entry=(registry or {}).get("json.query.jq")
     if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
@@ -520,6 +610,17 @@ def _compile_compound_goal(goal, clauses, registry, root):
                 "index":index,"subgoal":clause,
                 "mode":"INDEPENDENT_CONTENT_VERIFICATION",
                 **verification["evidence"],
+            })
+            continue
+
+        selection=_compile_json_record_selection(clause,context_paths,registry,root)
+        if selection is not None:
+            actions.append(selection["action"])
+            context_paths.append(selection["output_path"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"VERIFIED_STRUCTURED_SELECTION",
+                **selection["evidence"],
             })
             continue
 
