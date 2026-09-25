@@ -159,6 +159,25 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                   "database":{".sqlite",".db",".sqlite3"},
                 }
                 wanted=suffix_map.get(stem)
+                if wanted is None and stem=="output":
+                    semantic_blob=" ".join(
+                        [str(x) for x in entry.get("provides",[])]
+                        +[str(x) for x in entry.get("keywords",[])]
+                        +[str(entry.get("adapter_module") or "")]
+                    ).lower()
+                    semantic_suffixes=[
+                      (("xlsx","spreadsheet","workbook"),{".xlsx"}),
+                      (("docx","word"),{".docx"}),
+                      (("pdf",),{".pdf"}),
+                      (("sqlite","database"),{".sqlite",".db",".sqlite3"}),
+                      (("json",),{".json"}),
+                      (("markdown",),{".md",".markdown"}),
+                      (("png","qr","barcode","image"),{".png",".jpg",".jpeg",".webp"}),
+                    ]
+                    for markers,suffix_set in semantic_suffixes:
+                        if any(marker in semantic_blob for marker in markers):
+                            wanted=suffix_set
+                            break
                 if wanted:
                     matching=[raw for raw,p in paths if p.suffix.lower() in wanted]
                     future_matching=[raw for raw,p in future_paths if p.suffix.lower() in wanted]
@@ -1795,32 +1814,58 @@ def _compile_dynamic_fanout_goal(goal, clauses, registry, root):
     if fanout is None:
         return None
     fanout_part={"mode":"RUNTIME_DYNAMIC_CAPABILITY_FANOUT",**fanout["evidence"]}
+    context_paths.append(fanout["manifest_path"])
+    actions=[first_action,fanout["action"]]
+    compiled_parts=[
+      {"index":0,"subgoal":clauses[0],"mode":"VERIFIED_CAPABILITY",
+       "selected_capability":first["selected_capability"],"inputs":first["inputs"],
+       "target_effects":first["target_effects"],"score":first["score"]},
+      {"index":1,"subgoal":clauses[1],"mode":"DEFERRED_RUNTIME_COLLECTION_READ",
+       "source_path":context_paths[0]},
+      {"index":2,"subgoal":clauses[2],"mode":"RUNTIME_DYNAMIC_CAPABILITY_FANOUT",
+       **fanout["evidence"]},
+    ]
+
+    # Clauses 3 and 4 are consumed by the fanout operator as output-dir and
+    # manifest specifications. Any clauses after those and before the final
+    # fanout verifier are real downstream work and must be compiled, never
+    # silently discarded.
+    for index in range(5,len(clauses)-1):
+        subgoal=clauses[index]
+        part=_compile_single_goal(
+            subgoal,registry,root,
+            context_paths=context_paths,
+            future_clauses=clauses[index+1:]
+        )
+        entry=registry[part["selected_capability"]]
+        action=_render_template(entry["action_template"],part["inputs"])
+        actions.append(action)
+        for value in part["inputs"].values():
+            if isinstance(value,str) and pathlib.Path(value).suffix and value not in context_paths:
+                context_paths.append(value)
+        compiled_parts.append({
+          "index":index,"subgoal":subgoal,"mode":"VERIFIED_CAPABILITY",
+          "selected_capability":part["selected_capability"],"inputs":part["inputs"],
+          "target_effects":part["target_effects"],"score":part["score"],
+        })
+
     verify=_compile_runtime_dynamic_fanout_verification(
         clauses[-1],[fanout_part]
     )
     if verify is None:
         return None
+    actions.append(verify["action"])
+    compiled_parts.append({
+      "index":len(clauses)-1,"subgoal":clauses[-1],
+      "mode":"INDEPENDENT_RUNTIME_FANOUT_VERIFICATION",**verify["evidence"],
+    })
+    actions.append({"type":"finish","args":{"summary":"COMPOUND_GOAL_COMPLETE"}})
     return {
       "schema":"PROJECT_BRAIN_COMPILED_COMPOUND_GOAL_V1",
       "compiler_mode":"DETERMINISTIC_DYNAMIC_FANOUT_PLAN",
       "clauses":clauses,
-      "compiled_parts":[
-        {"index":0,"subgoal":clauses[0],"mode":"VERIFIED_CAPABILITY",
-         "selected_capability":first["selected_capability"],"inputs":first["inputs"],
-         "target_effects":first["target_effects"],"score":first["score"]},
-        {"index":1,"subgoal":clauses[1],"mode":"DEFERRED_RUNTIME_COLLECTION_READ",
-         "source_path":context_paths[-1]},
-        {"index":2,"subgoal":clauses[2],"mode":"RUNTIME_DYNAMIC_CAPABILITY_FANOUT",
-         **fanout["evidence"]},
-        {"index":len(clauses)-1,"subgoal":clauses[-1],
-         "mode":"INDEPENDENT_RUNTIME_FANOUT_VERIFICATION",**verify["evidence"]},
-      ],
-      "controller_actions":[
-        first_action,
-        fanout["action"],
-        verify["action"],
-        {"type":"finish","args":{"summary":"COMPOUND_GOAL_COMPLETE"}},
-      ],
+      "compiled_parts":compiled_parts,
+      "controller_actions":actions,
       "finish_summary":"COMPOUND_GOAL_COMPLETE",
     }
 
