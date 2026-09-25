@@ -30,6 +30,7 @@
     "fresh_mission_identity": true,
     "orthogonal_pressure_family": "rendered_browser_web_navigation_and_independent_semantic_verification",
     "previous_blocked_state_reuse": false,
-    "compiler_regression_receipt": "canonical/astra_runtime/evidence/ASTRA-GOAL-COMPILER-REGRESSION-FULL-BROWSER-002__RECEIPT.json"
+    "compiler_regression_receipt": "canonical/astra_runtime/evidence/ASTRA-GOAL-COMPILER-REGRESSION-FULL-BROWSER-002__RECEIPT.json",
+    "replay_after_multimodule_stdlib_commit": "6bd64fbd1754a7c2a8836367c4861ad2e0c7148a"
   }
 }
