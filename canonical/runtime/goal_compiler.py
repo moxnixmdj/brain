@@ -291,6 +291,129 @@ def decompose_goal(goal):
     return merged
 
 
+def _compile_verified_browser_interaction(goal, registry, root):
+    """Compile a verified declarative browser-interaction goal.
+
+    This path is activated only after the existing Chromedriver capability has
+    explicit interaction verification evidence in the canonical registry.
+    It converts conservative natural-language form instructions into a bounded
+    action list; unsupported or ambiguous instructions fail closed.
+    """
+    entry=(registry or {}).get("web.browser.rendered.capture.chromedriver")
+    if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
+        return None
+    if "web.browser.rendered.interact" not in set(entry.get("provides") or []):
+        return None
+    verification=entry.get("verification") or {}
+    ext=verification.get("interaction_extension") if isinstance(verification,dict) else None
+    if not isinstance(ext,dict) or ext.get("mission_id")!="ASTRA-VERIFY-BROWSER-INTERACTION-001":
+        return None
+
+    lower=str(goal or "").lower()
+    if "browser" not in lower or "submit" not in lower:
+        return None
+    if not any(w in lower for w in ("enter ","type ","fill ","choose ","select ","check ","click ")):
+        return None
+
+    m=re.search(r"https?://[^\s,;]+",str(goal or ""),flags=re.IGNORECASE)
+    if not m:
+        return None
+    url=m.group(0).rstrip(".)]}>")
+
+    paths=[raw for raw,_ in _repo_paths(goal,root)]
+    screenshots=[p for p in paths if pathlib.Path(p).suffix.lower()==".png"]
+    results=[p for p in paths if pathlib.Path(p).suffix.lower()==".json"]
+    if len(screenshots)!=1 or len(results)!=1:
+        return None
+
+    actions=[]
+    text_match=re.search(
+        r"\b(?:enter|type|fill)\s+(.+?)\s+into\s+the\s+(.+?)\s+(?:field|input|box)\b",
+        str(goal or ""),flags=re.IGNORECASE
+    )
+    if text_match:
+        value=text_match.group(1).strip(" .,:;")
+        target=text_match.group(2).strip(" .,:;")
+        if value and target:
+            actions.append({"type":"set_text","target":target,"value":value})
+
+    choice_match=re.search(
+        r"\b(?:choose|select)\s+([^,.;]+?)\s+(?:pizza\s+)?size\b",
+        str(goal or ""),flags=re.IGNORECASE
+    )
+    if choice_match:
+        value=choice_match.group(1).strip(" .,:;")
+        if value:
+            actions.append({"type":"select_option","target":"size","value":value})
+    else:
+        generic_choice=re.search(
+            r"\b(?:choose|select)\s+(.+?)\s+(?:from|for)\s+the\s+(.+?)(?:\s+(?:field|dropdown|select))?(?=,|\.|;|$)",
+            str(goal or ""),flags=re.IGNORECASE
+        )
+        if generic_choice:
+            value=generic_choice.group(1).strip(" .,:;")
+            target=generic_choice.group(2).strip(" .,:;")
+            if value and target:
+                actions.append({"type":"select_option","target":target,"value":value})
+
+    check_match=re.search(
+        r"\b(?:check|tick)\s+(?:the\s+)?(.+?)\s+(?:topping|checkbox|option)\b",
+        str(goal or ""),flags=re.IGNORECASE
+    )
+    if check_match:
+        target=check_match.group(1).strip(" .,:;")
+        if target:
+            actions.append({"type":"check","target":target})
+
+    for click_match in re.finditer(
+        r"\bclick\s+(?:the\s+)?(.+?)\s+(?:button|link)\b",
+        str(goal or ""),flags=re.IGNORECASE
+    ):
+        target=click_match.group(1).strip(" .,:;")
+        if target:
+            actions.append({"type":"click","target":target})
+
+    if re.search(r"\bsubmit\b",str(goal or ""),flags=re.IGNORECASE):
+        actions.append({"type":"submit"})
+
+    mutating=[a for a in actions if a.get("type") in {"set_text","select_option","check","click","submit"}]
+    if len(mutating)<2 or not any(a.get("type")=="submit" for a in actions):
+        return None
+
+    invoke={
+      "type":"invoke_capability",
+      "args":{
+        "capability_id":"web.browser.rendered.capture.chromedriver",
+        "url":url,
+        "actions":actions,
+        "screenshot_path":screenshots[0],
+        "result_path":results[0],
+      },
+      "expect":{"type":"field_equals","field":"interaction_verified","value":True},
+    }
+    return {
+      "schema":"PROJECT_BRAIN_COMPILED_COMPOUND_GOAL_V1",
+      "compiler_mode":"DETERMINISTIC_COMPOUND_ACTION_PLAN",
+      "clauses":[str(goal or "").strip()],
+      "compiled_parts":[{
+        "index":0,
+        "subgoal":str(goal or "").strip(),
+        "mode":"VERIFIED_BROWSER_INTERACTION",
+        "selected_capability":"web.browser.rendered.capture.chromedriver",
+        "url":url,
+        "actions":actions,
+        "screenshot_path":screenshots[0],
+        "result_path":results[0],
+        "verification_mission_id":ext.get("mission_id"),
+      }],
+      "controller_actions":[
+        invoke,
+        {"type":"finish","args":{"summary":"PLAIN_GOAL_COMPLETE"}},
+      ],
+      "finish_summary":"PLAIN_GOAL_COMPLETE",
+    }
+
+
 def _compile_single_goal(goal, registry, root, context_paths=None, future_clauses=None):
     ranked=[]
     for cid,entry in sorted((registry or {}).items()):
@@ -1515,6 +1638,9 @@ def compile_goal(goal, registry, root):
     goal=str(goal or "").strip()
     if not goal:
         raise GoalCompilationFailure("GOAL_REQUIRED")
+    browser_interaction=_compile_verified_browser_interaction(goal,registry,root)
+    if browser_interaction is not None:
+        return browser_interaction
     clauses=decompose_goal(goal)
     if len(clauses)>1:
         return _compile_compound_goal(goal,clauses,registry,root)
