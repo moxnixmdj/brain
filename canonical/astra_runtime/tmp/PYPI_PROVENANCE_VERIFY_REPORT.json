@@ -1,0 +1,15 @@
+{
+  "artifact_bytes": 395480,
+  "artifact_url": "https://files.pythonhosted.org/packages/3c/2c/c43c03eaf630435f023f1dc61ec4a4a78951ad5530a62c71cc89bde307b7/pypdf-6.19.0-py3-none-any.whl",
+  "capability_id": "pdf.extract.text.pypdf",
+  "downloaded_artifact_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14",
+  "live_metadata_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14",
+  "metadata_response_hash": "9eca4c2315cec5fcb72f58ed96752dabd6711ba84603eb53160caa19eefe8c7f",
+  "metadata_url": "https://pypi.org/pypi/pypdf/6.19.0/json",
+  "pinned_version": "6.19.0",
+  "project": "pypdf",
+  "recorded_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14",
+  "schema": "PROJECT_BRAIN_PYPI_PROVENANCE_AUDIT_V1",
+  "verified": true,
+  "wheel_filename": "pypdf-6.19.0-py3-none-any.whl"
+}

@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T00:40:34.980985+00:00",
+  "mission_id": "ASTRA-VERIFY-PYPI-PROVENANCE-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_PYPI_PROVENANCE_001.json",
+  "mission_sha256": "be98f0288d3929fb33770ac55345b580720d78c4eb0e1a3c839cd77b6c1df016",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "2567227b1ff819134cf77a2edde36c26d793b0cc1c61e417f07ec90e34886c91",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

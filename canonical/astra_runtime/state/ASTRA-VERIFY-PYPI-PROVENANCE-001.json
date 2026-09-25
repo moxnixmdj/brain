@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T00:40:34.980753+00:00",
+  "created_at_utc": "2026-09-25T00:40:34.618052+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T00:40:34.980454+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport hashlib,importlib.util,json,pathlib,subprocess,sys\nroot=pathlib.Path('.').resolve()\ndef load(name,path):\n p=root/path; s=importlib.util.spec_from_file_location(name,p); m=importlib.util.module_from_spec(s); sys.modules[s.name]=m; s.loader.exec_module(m); return m\nreg=json.loads((root/'canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\nmatches=[(cid,e) for cid,e in reg.items() if e.get('status')=='VERIFIED_BOUND_CAPABILITY' and (e.get('source') or {}).get('type')=='pypi']\nassert len(matches)==1,matches\ncid,entry=matches[0]\nsel_rel='canonical/astra_runtime/tmp/PYPI_PROVENANCE_VERIFY_SELECTION.json'\nmeta_rel='canonical/astra_runtime/tmp/PYPI_PROVENANCE_VERIFY_METADATA.json'\nreport_rel='canonical/astra_runtime/tmp/PYPI_PROVENANCE_VERIFY_REPORT.json'\n(root/sel_rel).write_text(json.dumps({'id':cid,'record':entry},indent=2,sort_keys=True)+'\\n',encoding='utf-8')\nfetch=load('hf_verify','canonical/runtime/bound_capabilities/http_json_fetch.py')\naudit=load('pa_verify','canonical/runtime/bound_capabilities/pypi_provenance_audit.py')\nruntime=load('rt_verify','canonical/runtime/astra_runtime.py')\nfetch_res=fetch.run({'source_json_path':sel_rel,'url_key':'metadata_url','output_path':meta_rel},root)\naudit_res=audit.run({'selection_path':sel_rel,'metadata_path':meta_rel,'report_path':report_rel},root)\nreport=json.loads((root/report_rel).read_text(encoding='utf-8'))\ncurl=subprocess.run(['curl','-fsSL',report['artifact_url']],capture_output=True,timeout=120)\nassert curl.returncode==0,curl.stderr[-1000:]\ncurl_hash=hashlib.sha256(curl.stdout).hexdigest()\nassert curl_hash==report['recorded_hash']==report['live_metadata_hash']==report['downloaded_artifact_hash']\nassert_action=runtime._goal_action({'type':'assert_json_fields_equal','args':{'path':report_rel,'fields':['recorded_hash','live_metadata_hash','downloaded_artifact_hash'],'true_fields':['verified']}})\nassert assert_action['verified'] is True,assert_action\nprint(json.dumps({'fetch':fetch_res,'audit':audit_res,'curl_artifact_sha256':curl_hash,'independent_assertion':assert_action},sort_keys=True))\nprint('PYPI_PROVENANCE_INDEPENDENTLY_VERIFIED')\nPY",
+        "duration_s": 0.362,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"audit\": {\"adapter\": \"pypi_provenance_audit\", \"artifact_bytes\": 395480, \"capability_id\": \"pdf.extract.text.pypdf\", \"downloaded_artifact_hash\": \"7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14\", \"live_metadata_hash\": \"7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14\", \"project\": \"pypdf\", \"recorded_hash\": \"7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14\", \"report_path\": \"canonical/astra_runtime/tmp/PYPI_PROVENANCE_VERIFY_REPORT.json\", \"verified\": true}, \"curl_artifact_sha256\": \"7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14\", \"fetch\": {\"adapter\": \"http_json_fetch\", \"content_type\": \"application/json\", \"final_url\": \"https://pypi.org/pypi/pypdf/6.19.0/json\", \"json_top_level_type\": \"dict\", \"output_bytes\": 9248, \"output_path\": \"canonical/astra_runtime/tmp/PYPI_PROVENANCE_VERIFY_METADATA.json\", \"output_sha256\": \"9eca4c2315cec5fcb72f58ed96752dabd6711ba84603eb53160caa19eefe8c7f\", \"output_verified\": true, \"requested_url\": \"https://pypi.org/pypi/pypdf/6.19.0/json\", \"source_json_path\": \"canonical/astra_runtime/tmp/PYPI_PROVENANCE_VERIFY_SELECTION.json\", \"status\": 200, \"url_field_path\": [\"record\", \"source\", \"metadata_url\"], \"url_key\": \"metadata_url\"}, \"independent_assertion\": {\"all_equal\": true, \"all_nonempty\": true, \"all_true\": true, \"fields\": {\"downloaded_artifact_hash\": \"7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14\", \"live_metadata_hash\": \"7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14\", \"recorded_hash\": \"7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14\"}, \"path\": \"canonical/astra_runtime/tmp/PYPI_PROVENANCE_VERIFY_REPORT.json\", \"true_fields\": {\"verified\": true}, \"type\": \"assert_json_fields_equal\", \"verified\": true}}\nPYPI_PROVENANCE_INDEPENDENTLY_VERIFIED\n"
+      },
+      "step_id": "verify-live-pypi-provenance",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-VERIFY-PYPI-PROVENANCE-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_PYPI_PROVENANCE_001.json",
+  "mission_sha256": "be98f0288d3929fb33770ac55345b580720d78c4eb0e1a3c839cd77b6c1df016",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T00:40:34.980470+00:00"
+}
