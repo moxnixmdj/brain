@@ -17,6 +17,8 @@
   ],
   "constraints": {
     "incremental_spend_usd": 0,
-    "model_controller_required": false
+    "model_controller_required": false,
+    "replay_after_runtime_conditional_verifier_commit": "ab96f0bc2bddf67a3c4eed400ffd5ca7876f9f4f",
+    "replay_after_jq_conditional_compiler_commit": "812542cafdc0039a49f15a5756af195eccdf7911"
   }
 }
