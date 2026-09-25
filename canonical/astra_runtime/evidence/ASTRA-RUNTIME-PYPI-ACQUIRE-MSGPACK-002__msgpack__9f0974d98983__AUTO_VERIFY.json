@@ -1,0 +1,32 @@
+{
+  "adapter_result": {
+    "adapter": "python_library_codec",
+    "encode_callable": "packb",
+    "module": "msgpack",
+    "output_bytes": 32,
+    "output_path": "canonical/astra_runtime/tmp/ASTRA-AUTO-VERIFY-PYPI-MSGPACK-9F0974D98983_OUTPUT.bin",
+    "output_sha256": "9e0e4c4b36b56bfe36758b790eb035dd3fbf9a1b4f3f625999590dd228d4cb6e",
+    "output_verified": true,
+    "source_path": "canonical/astra_runtime/tmp/ASTRA-AUTO-VERIFY-PYPI-MSGPACK-9F0974D98983_SOURCE.json"
+  },
+  "capability_id": "auto.pypi.msgpack",
+  "dependency": {
+    "project": "msgpack",
+    "status": "INSTALLED_VERIFIED",
+    "version": "1.2.2",
+    "wheel_sha256": "77c2e018417dc1d66f235e383877ee885b60ade9d29e494dd581e08af2cb1923"
+  },
+  "independent_output_bytes": 32,
+  "independent_output_sha256": "9e0e4c4b36b56bfe36758b790eb035dd3fbf9a1b4f3f625999590dd228d4cb6e",
+  "independent_verified": true,
+  "schema": "PROJECT_BRAIN_AUTO_BINDING_VERIFICATION_V1",
+  "semantic_roundtrip": {
+    "decode_callable": "unpackb",
+    "implementation_independent": false,
+    "module": "msgpack",
+    "separate_decode_invocation": true,
+    "verified": true
+  },
+  "status": "VERIFIED",
+  "verification_mission_id": "ASTRA-AUTO-VERIFY-PYPI-MSGPACK-9F0974D98983"
+}

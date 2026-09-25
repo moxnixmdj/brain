@@ -1,0 +1,42 @@
+{
+  "completed_at_utc": "2026-09-25T18:37:08.504503+00:00",
+  "created_at_utc": "2026-09-25T18:37:07.193891+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T18:37:08.469018+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython canonical/runtime/verify_pending_cli_binding.py canonical/astra_runtime/pending_bindings/ASTRA-RUNTIME-PYPI-ACQUIRE-MSGPACK-002__msgpack__9f0974d98983.json canonical/astra_runtime/evidence/ASTRA-RUNTIME-PYPI-ACQUIRE-MSGPACK-002__msgpack__9f0974d98983__AUTO_VERIFY.json",
+        "duration_s": 1.275,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "PENDING_PYPI_BINDING_EFFECT_VERIFIED {\"adapter_result\": {\"adapter\": \"python_library_codec\", \"encode_callable\": \"packb\", \"module\": \"msgpack\", \"output_bytes\": 32, \"output_path\": \"canonical/astra_runtime/tmp/ASTRA-AUTO-VERIFY-PYPI-MSGPACK-9F0974D98983_OUTPUT.bin\", \"output_sha256\": \"9e0e4c4b36b56bfe36758b790eb035dd3fbf9a1b4f3f625999590dd228d4cb6e\", \"output_verified\": true, \"source_path\": \"canonical/astra_runtime/tmp/ASTRA-AUTO-VERIFY-PYPI-MSGPACK-9F0974D98983_SOURCE.json\"}, \"capability_id\": \"auto.pypi.msgpack\", \"dependency\": {\"project\": \"msgpack\", \"status\": \"INSTALLED_VERIFIED\", \"version\": \"1.2.2\", \"wheel_sha256\": \"77c2e018417dc1d66f235e383877ee885b60ade9d29e494dd581e08af2cb1923\"}, \"independent_output_bytes\": 32, \"independent_output_sha256\": \"9e0e4c4b36b56bfe36758b790eb035dd3fbf9a1b4f3f625999590dd228d4cb6e\", \"independent_verified\": true, \"schema\": \"PROJECT_BRAIN_AUTO_BINDING_VERIFICATION_V1\", \"semantic_roundtrip\": {\"decode_callable\": \"unpackb\", \"implementation_independent\": false, \"module\": \"msgpack\", \"separate_decode_invocation\": true, \"verified\": true}, \"status\": \"VERIFIED\", \"verification_mission_id\": \"ASTRA-AUTO-VERIFY-PYPI-MSGPACK-9F0974D98983\"}\n"
+      },
+      "step_id": "verify-pending-python-codec",
+      "step_index": 0
+    },
+    {
+      "completed_at_utc": "2026-09-25T18:37:08.504148+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython canonical/runtime/promote_pending_binding.py canonical/astra_runtime/pending_bindings/ASTRA-RUNTIME-PYPI-ACQUIRE-MSGPACK-002__msgpack__9f0974d98983.json canonical/astra_runtime/evidence/ASTRA-RUNTIME-PYPI-ACQUIRE-MSGPACK-002__msgpack__9f0974d98983__AUTO_VERIFY.json",
+        "duration_s": 0.035,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "PENDING_CAPABILITY_PROMOTED auto.pypi.msgpack RELATED \n"
+      },
+      "step_id": "promote-and-replay",
+      "step_index": 1
+    }
+  ],
+  "mission_id": "ASTRA-AUTO-VERIFY-PYPI-MSGPACK-9F0974D98983",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_AUTO_VERIFY_PYPI_MSGPACK_9F0974D98983.json",
+  "mission_sha256": "f2e381174d91f2120b111626a2a7803d2648eabf84ff7cc2bfbc658c5fbce0c3",
+  "next_step": 2,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T18:37:08.504164+00:00"
+}
