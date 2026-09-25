@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-BROWSER-DYNAMIC-DOCX-001",
+  "purpose": "Pressure dynamic cross-tool composition from verified browser state into a DOCX whose values are sourced from prior structured state rather than repeated literally in the goal.",
+  "goal": "Using a real rendered browser, open https://httpbin.org/forms/post, enter PROJECT BRAIN into the customer name field, choose Medium pizza size, check the Bacon topping, submit the form, save a screenshot to canonical/astra_runtime/tmp/DYNAMIC_DOCX_BROWSER.png, and save the result to canonical/astra_runtime/tmp/DYNAMIC_DOCX_BROWSER.json. Create canonical/astra_runtime/tmp/DYNAMIC_DOCX_NORMALIZED.json containing a top-level submissions object with exactly one record named httpbin whose status is VERIFIED_BROWSER_SUBMISSION and whose customer_name, size, topping, and final_url values come from the browser result. Create canonical/astra_runtime/tmp/DYNAMIC_BROWSER_REPORT.docx from that normalized JSON with title Browser Submission Report, paragraph Verified browser submission, and a two-column table with headers Field and Value containing one row for each of customer_name, size, topping, and final_url using their values from the normalized JSON. Finally independently reopen the DOCX and verify every requested value matches the normalized JSON.",
+  "steps": [
+    {
+      "id": "run-dynamic-browser-docx-goal",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 16,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false
+  }
+}
