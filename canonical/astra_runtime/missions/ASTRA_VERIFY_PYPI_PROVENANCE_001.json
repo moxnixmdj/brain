@@ -1,0 +1,23 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-VERIFY-PYPI-PROVENANCE-001",
+  "purpose": "Fresh live verification of PyPI provenance auditing with independent curl artifact hashing and runtime report assertions.",
+  "steps": [
+    {
+      "id": "verify-live-pypi-provenance",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport hashlib,importlib.util,json,pathlib,subprocess,sys\nroot=pathlib.Path('.').resolve()\ndef load(name,path):\n p=root/path; s=importlib.util.spec_from_file_location(name,p); m=importlib.util.module_from_spec(s); sys.modules[s.name]=m; s.loader.exec_module(m); return m\nreg=json.loads((root/'canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\nmatches=[(cid,e) for cid,e in reg.items() if e.get('status')=='VERIFIED_BOUND_CAPABILITY' and (e.get('source') or {}).get('type')=='pypi']\nassert len(matches)==1,matches\ncid,entry=matches[0]\nsel_rel='canonical/astra_runtime/tmp/PYPI_PROVENANCE_VERIFY_SELECTION.json'\nmeta_rel='canonical/astra_runtime/tmp/PYPI_PROVENANCE_VERIFY_METADATA.json'\nreport_rel='canonical/astra_runtime/tmp/PYPI_PROVENANCE_VERIFY_REPORT.json'\n(root/sel_rel).write_text(json.dumps({'id':cid,'record':entry},indent=2,sort_keys=True)+'\\n',encoding='utf-8')\nfetch=load('hf_verify','canonical/runtime/bound_capabilities/http_json_fetch.py')\naudit=load('pa_verify','canonical/runtime/bound_capabilities/pypi_provenance_audit.py')\nruntime=load('rt_verify','canonical/runtime/astra_runtime.py')\nfetch_res=fetch.run({'source_json_path':sel_rel,'url_key':'metadata_url','output_path':meta_rel},root)\naudit_res=audit.run({'selection_path':sel_rel,'metadata_path':meta_rel,'report_path':report_rel},root)\nreport=json.loads((root/report_rel).read_text(encoding='utf-8'))\ncurl=subprocess.run(['curl','-fsSL',report['artifact_url']],capture_output=True,timeout=120)\nassert curl.returncode==0,curl.stderr[-1000:]\ncurl_hash=hashlib.sha256(curl.stdout).hexdigest()\nassert curl_hash==report['recorded_hash']==report['live_metadata_hash']==report['downloaded_artifact_hash']\nassert_action=runtime._goal_action({'type':'assert_json_fields_equal','args':{'path':report_rel,'fields':['recorded_hash','live_metadata_hash','downloaded_artifact_hash'],'true_fields':['verified']}})\nassert assert_action['verified'] is True,assert_action\nprint(json.dumps({'fetch':fetch_res,'audit':audit_res,'curl_artifact_sha256':curl_hash,'independent_assertion':assert_action},sort_keys=True))\nprint('PYPI_PROVENANCE_INDEPENDENTLY_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "PYPI_PROVENANCE_INDEPENDENTLY_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "authoritative_live_source": true,
+    "independent_verifier": "curl",
+    "independent_report_assertion": true
+  }
+}
