@@ -1,0 +1,44 @@
+{
+  "blocker": {
+    "adapter": "shell",
+    "error": "VERIFICATION_FAILED",
+    "mission_id": "ASTRA-RUNTIME-POST-GENERIC-IR-REGRESSION-001",
+    "observed_at_utc": "2026-09-25T20:22:25.134361+00:00",
+    "result": {
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython -m py_compile canonical/runtime/astra_runtime.py canonical/runtime/goal_compiler.py canonical/runtime/auto_capability_acquisition.py canonical/runtime/auto_pypi_library_acquisition.py canonical/runtime/auto_npm_library_acquisition.py canonical/runtime/npm_package_utils.py canonical/runtime/verify_pending_cli_binding.py canonical/runtime/bound_capabilities/python_library_codec.py canonical/runtime/bound_capabilities/node_library_codec.py\nnode --check canonical/runtime/node_codec_runner.js\npython -m unittest discover -s canonical/tests -p 'test*.py'",
+      "duration_s": 0.895,
+      "returncode": 1,
+      "stderr": ".E..................................................\n======================================================================\nERROR: test_goal_completes_with_model_planner_forbidden (test_astra_runtime_model_independence.ModelIndependenceTests.test_goal_completes_with_model_planner_forbidden)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/brain/brain/canonical/tests/test_astra_runtime_model_independence.py\", line 25, in test_goal_completes_with_model_planner_forbidden\n    result = runtime.run_goal(step, mission)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/brain/brain/canonical/runtime/astra_runtime.py\", line 3037, in run_goal\n    direct=_run_model_independent_goal(step, mission, goal)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/brain/brain/canonical/runtime/astra_runtime.py\", line 2776, in _run_model_independent_goal\n    raise Blocker(\"MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH\")\nastra_runtime.Blocker: MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH\n\n----------------------------------------------------------------------\nRan 52 tests in 0.128s\n\nFAILED (errors=1)\n",
+      "stdout": ""
+    },
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "run-focused-regressions",
+    "step_index": 0
+  },
+  "created_at_utc": "2026-09-25T20:22:24.238789+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T20:22:25.134350+00:00",
+      "ok": false,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython -m py_compile canonical/runtime/astra_runtime.py canonical/runtime/goal_compiler.py canonical/runtime/auto_capability_acquisition.py canonical/runtime/auto_pypi_library_acquisition.py canonical/runtime/auto_npm_library_acquisition.py canonical/runtime/npm_package_utils.py canonical/runtime/verify_pending_cli_binding.py canonical/runtime/bound_capabilities/python_library_codec.py canonical/runtime/bound_capabilities/node_library_codec.py\nnode --check canonical/runtime/node_codec_runner.js\npython -m unittest discover -s canonical/tests -p 'test*.py'",
+        "duration_s": 0.895,
+        "returncode": 1,
+        "stderr": ".E..................................................\n======================================================================\nERROR: test_goal_completes_with_model_planner_forbidden (test_astra_runtime_model_independence.ModelIndependenceTests.test_goal_completes_with_model_planner_forbidden)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/brain/brain/canonical/tests/test_astra_runtime_model_independence.py\", line 25, in test_goal_completes_with_model_planner_forbidden\n    result = runtime.run_goal(step, mission)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/brain/brain/canonical/runtime/astra_runtime.py\", line 3037, in run_goal\n    direct=_run_model_independent_goal(step, mission, goal)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/brain/brain/canonical/runtime/astra_runtime.py\", line 2776, in _run_model_independent_goal\n    raise Blocker(\"MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH\")\nastra_runtime.Blocker: MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH\n\n----------------------------------------------------------------------\nRan 52 tests in 0.128s\n\nFAILED (errors=1)\n",
+        "stdout": ""
+      },
+      "step_id": "run-focused-regressions",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-RUNTIME-POST-GENERIC-IR-REGRESSION-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_POST_GENERIC_IR_REGRESSION_001.json",
+  "mission_sha256": "891da61b9fe6302ec64f224ea37c0c9aada70c43d7ffacc6008a4fb777e31692",
+  "next_step": 0,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-25T20:22:25.134600+00:00"
+}
