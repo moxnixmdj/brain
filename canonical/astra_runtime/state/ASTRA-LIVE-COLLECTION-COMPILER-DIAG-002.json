@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T04:29:38.461023+00:00",
+  "created_at_utc": "2026-09-25T04:29:38.395071+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T04:29:38.460747+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/goal_compiler.py')\ns=importlib.util.spec_from_file_location('gc',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads(pathlib.Path('canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads(pathlib.Path('canonical/astra_runtime/missions/ASTRA_RUNTIME_LIVE_COLLECTION_MAP_001.json').read_text())['goal']\nout=m.compile_goal(goal,reg,pathlib.Path('.').resolve())\nmodes=[x.get('mode') for x in out.get('compiled_parts',[])]\nassert 'DEFERRED_RUNTIME_COLLECTION_READ' in modes, modes\nassert 'VERIFIED_RUNTIME_COLLECTION_MAP' in modes, modes\nassert 'INDEPENDENT_RUNTIME_COLLECTION_VERIFICATION' in modes, modes\nacts=out.get('controller_actions') or []\nassert any(a.get('type')=='assert_collection_length_bucket' for a in acts), acts\nprint('LIVE_COLLECTION_COMPILER_V2_COMPLETE')\nPY",
+        "duration_s": 0.066,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "LIVE_COLLECTION_COMPILER_V2_COMPLETE\n"
+      },
+      "step_id": "compile-live-collection",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-LIVE-COLLECTION-COMPILER-DIAG-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_LIVE_COLLECTION_COMPILER_DIAG_002.json",
+  "mission_sha256": "f1cf4d0bfeb825ae0dd99ab0c3e1ff4260334f2a063216daeb6510833fdae781",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T04:29:38.460761+00:00"
+}
