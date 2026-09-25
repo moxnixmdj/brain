@@ -338,6 +338,50 @@ def _goal_action(action):
                 hits.append(str(p.relative_to(ROOT)))
                 if len(hits)>=80: break
         return {"type":typ,"query":q,"hits":hits,"truncated":len(hits)>=80}
+    if typ=="assert_file_exists":
+        p=_safe_repo_path(args.get("path",""))
+        return {
+          "type":typ,
+          "path":str(p.relative_to(ROOT)) if p.exists() else str(args.get("path","")),
+          "exists":p.is_file(),
+          "verified":p.is_file(),
+          "sha256":sha_file(p) if p.is_file() else None,
+        }
+    if typ=="assert_json_fields_equal":
+        p=_safe_repo_path(args.get("path",""))
+        if not p.is_file():
+            return {"type":typ,"verified":False,"error":"FILE_NOT_FOUND","path":str(args.get("path",""))}
+        try:
+            data=json.loads(p.read_text(encoding="utf-8"))
+        except Exception as exc:
+            return {"type":typ,"verified":False,"error":"JSON_PARSE_FAILED:"+type(exc).__name__}
+        def get_field(field):
+            cur=data
+            for part in str(field).split("."):
+                if not isinstance(cur,dict) or part not in cur:
+                    raise KeyError(field)
+                cur=cur[part]
+            return cur
+        fields=list(args.get("fields") or [])
+        true_fields=list(args.get("true_fields") or [])
+        try:
+            values={f:get_field(f) for f in fields}
+            true_values={f:get_field(f) for f in true_fields}
+        except KeyError as exc:
+            return {"type":typ,"verified":False,"error":"JSON_FIELD_MISSING:"+str(exc)}
+        nonempty=all(v not in (None,"") for v in values.values())
+        equal=(len(set(json.dumps(v,sort_keys=True) for v in values.values()))<=1) if values else True
+        truths=all(v is True for v in true_values.values())
+        return {
+          "type":typ,
+          "path":str(p.relative_to(ROOT)),
+          "fields":values,
+          "true_fields":true_values,
+          "all_equal":equal,
+          "all_nonempty":nonempty,
+          "all_true":truths,
+          "verified":bool(equal and nonempty and truths),
+        }
     if typ=="http_get":
         url=str(args.get("url",""))
         if not url.startswith(("https://","http://")): return {"type":typ,"error":"UNSUPPORTED_URL"}
