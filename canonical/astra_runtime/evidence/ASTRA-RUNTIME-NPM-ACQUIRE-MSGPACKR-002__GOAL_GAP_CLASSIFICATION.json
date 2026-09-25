@@ -1,0 +1,10 @@
+{
+  "capability_acquisition_allowed": true,
+  "compile_error": "GOAL_COMPILATION_FAILED:GOAL_COMPILATION_SUBGOAL_UNRESOLVED:{\"cause\": \"GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH\", \"cause_detail\": null, \"clauses\": [\"Create canonical/astra_runtime/tmp/NPM_MSGPACK_SOURCE.json containing exactly four records with fields id and text: 1 alpha, 2 beta, 3 gamma, 4 delta\", \"Using a zero-cost npm JavaScript library executed by Node.js, encode those exact records as MessagePack and save canonical/astra_runtime/tmp/NPM_MSGPACK_RECORDS.msgpack\", \"Independently decode the MessagePack artifact in a fresh Node.js process and verify the decoded records are exactly identical to canonical/astra_runtime/tmp/NPM_MSGPACK_SOURCE.json in values, order, field names, and record count\"], \"compiled_prefix\": [{\"fields\": [\"id\", \"text\"], \"index\": 0, \"mode\": \"NATIVE_LITERAL_JSON_RECORDS\", \"output_path\": \"canonical/astra_runtime/tmp/NPM_MSGPACK_SOURCE.json\", \"record_count\": 4, \"subgoal\": \"Create canonical/astra_runtime/tmp/NPM_MSGPACK_SOURCE.json containing exactly four records with fields id and text: 1 alpha, 2 beta, 3 gamma, 4 delta\"}], \"context_paths\": [\"canonical/astra_runtime/tmp/NPM_MSGPACK_SOURCE.json\"], \"index\": 1, \"subgoal\": \"Using a zero-cost npm JavaScript library executed by Node.js, encode those exact records as MessagePack and save canonical/astra_runtime/tmp/NPM_MSGPACK_RECORDS.msgpack\"}",
+  "gap_class": "CAPABILITY_CANDIDATE",
+  "mission_id": "ASTRA-RUNTIME-NPM-ACQUIRE-MSGPACKR-002",
+  "observed_at_utc": "2026-09-25T19:33:16.088877+00:00",
+  "policy": "ONLY_CAPABILITY_CANDIDATE_MAY_TRIGGER_EXTERNAL_CAPABILITY_ACQUISITION",
+  "schema": "PROJECT_BRAIN_GOAL_GAP_CLASSIFICATION_V1",
+  "subgoal": "Using a zero-cost npm JavaScript library executed by Node.js, encode those exact records as MessagePack and save canonical/astra_runtime/tmp/NPM_MSGPACK_RECORDS.msgpack"
+}

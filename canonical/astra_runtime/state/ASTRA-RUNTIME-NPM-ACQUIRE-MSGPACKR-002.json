@@ -1,0 +1,21 @@
+{
+  "blocker": {
+    "adapter": "goal",
+    "error": "Blocker:CAPABILITY_ACQUISITION_REQUIRED:{\"auto_acquisition_error\": \"AutoAcquisitionFailure:REQUIRED_SUPPLIER_CLASS_UNSUPPORTED:{\\\"required_supplier_class\\\": \\\"npm_javascript_library\\\"}\", \"evidence_path\": \"canonical/astra_runtime/evidence/ASTRA-RUNTIME-NPM-ACQUIRE-MSGPACKR-002__PLAIN_GOAL_CAPABILITY_DISCOVERY.json\", \"targeted_acquisition_error\": \"AutoAcquisitionFailure:REQUIRED_SUPPLIER_CLASS_UNSUPPORTED:{\\\"required_supplier_class\\\": \\\"npm_javascript_library\\\"}\", \"top_candidates\": [{\"integration_friction\": 0, \"name\": \"javascript-common\", \"required_secret_count\": 0, \"score\": 62, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"gir1.2-javascriptcoregtk-4.1\", \"required_secret_count\": 0, \"score\": 48, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"gir1.2-javascriptcoregtk-6.0\", \"required_secret_count\": 0, \"score\": 48, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"jmacro\", \"required_secret_count\": 0, \"score\": 48, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"node-assert\", \"required_secret_count\": 0, \"score\": 48, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"node-big-integer\", \"required_secret_count\": 0, \"score\": 48, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"node-blueimp-md5\", \"required_secret_count\": 0, \"score\": 48, \"zero_cost_eligible\": true}, {\"integration_friction\": 0, \"name\": \"node-chroma-js\", \"required_secret_count\": 0, \"score\": 48, \"zero_cost_eligible\": true}]}",
+    "mission_id": "ASTRA-RUNTIME-NPM-ACQUIRE-MSGPACKR-002",
+    "observed_at_utc": "2026-09-25T19:35:06.704511+00:00",
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "run-npm-acquisition-pressure",
+    "step_index": 0
+  },
+  "created_at_utc": "2026-09-25T19:33:16.014717+00:00",
+  "history": [],
+  "mission_id": "ASTRA-RUNTIME-NPM-ACQUIRE-MSGPACKR-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_NPM_ACQUIRE_MSGPACKR_002.json",
+  "mission_sha256": "8f9506b6a30b5d4d3a15f640f58952c41aaa656c0af9bb056fabb15b0075434e",
+  "next_step": 0,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-25T19:35:06.704657+00:00"
+}
