@@ -1416,8 +1416,11 @@ def _compile_live_uuid_conditional(subgoal, context_paths, registry):
         return None
     filt=(
       '(.observed_text | fromjson | .uuid) as $u '
-      '| {uuid:$u,bucket:(if ('+json.dumps(low_chars)+' | contains(($u[0:1]|ascii_downcase))) '
-      'then '+json.dumps(low_bucket)+' else '+json.dumps(high_bucket)+' end)}'
+      '| {uuid:$u,'
+      'bucket:(if ('+json.dumps(low_chars)+' | contains(($u[0:1]|ascii_downcase))) '
+      'then '+json.dumps(low_bucket)+' else '+json.dumps(high_bucket)+' end),'
+      '_branch:(if ('+json.dumps(low_chars)+' | contains(($u[0:1]|ascii_downcase))) '
+      'then "LOW" else "HIGH" end)}'
     )
     return {
       "action":{
