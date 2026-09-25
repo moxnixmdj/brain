@@ -93,6 +93,9 @@ def _context_path_for_key(key, context_paths):
         "xlsx":{".xlsx"},
         "spreadsheet":{".xlsx"},
         "workbook":{".xlsx"},
+        "sqlite":{".sqlite",".db",".sqlite3"},
+        "database":{".sqlite",".db",".sqlite3"},
+        "db":{".sqlite",".db",".sqlite3"},
     }.get(stem,set())
     candidates=[]
     for raw in reversed(list(context_paths or [])):
@@ -129,7 +132,7 @@ def _bind_inputs(goal, root, entry, context_paths=None):
             if key.startswith("output_"):
                 # Output paths are expected not to exist yet. Bind only a
                 # repository-safe path explicitly present in the goal.
-                matching=[raw for raw,p in paths if (not stem or stem in raw.lower() or p.suffix.lower() in {".png",".jpg",".jpeg",".pdf",".txt",".json",".csv",".md",".xlsx"})]
+                matching=[raw for raw,p in paths if (not stem or stem in raw.lower() or p.suffix.lower() in {".png",".jpg",".jpeg",".pdf",".txt",".json",".csv",".md",".xlsx",".sqlite",".db",".sqlite3"})]
                 if len(matching)==1:
                     result[key]=matching[0]
                     continue
@@ -240,7 +243,7 @@ def decompose_goal(goal):
         current=clauses[i]
         if (
             i+1 < len(clauses)
-            and re.search(r"\bindependently\s+(?:execute|run|reopen|read|inspect)\b",current,re.IGNORECASE)
+            and re.search(r"\bindependently\s+(?:execute|run|reopen|read|inspect|query)\b",current,re.IGNORECASE)
             and re.match(r"^(?:verify|check|assert)\b",clauses[i+1],re.IGNORECASE)
         ):
             merged.append(current+" and "+clauses[i+1])
