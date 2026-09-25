@@ -861,7 +861,8 @@
       },
       "source": {
         "type": "python_stdlib",
-        "version_family": "3.x"
+        "version_family": "3.x",
+        "module": "unittest"
       },
       "incremental_spend_usd": 0,
       "status": "VERIFIED_BOUND_CAPABILITY",
