@@ -620,6 +620,43 @@ def _goal_action(action):
           "audit_sha256":sha_file(audit_path),
           "source_sha256":sha_file(yaml_path),
         }
+    if typ=="invoke_capability_fanout":
+        source=_safe_repo_path(args.get("source_path",""))
+        output_dir=_safe_repo_path(args.get("output_dir",""))
+        manifest_path=_safe_repo_path(args.get("manifest_path",""))
+        if not source.is_file():
+            return {"type":typ,"output_verified":False,"error":"FANOUT_SOURCE_MISSING"}
+        wrapper=json.loads(source.read_text(encoding="utf-8"))
+        items=json.loads(str(wrapper.get("observed_text") or ""))
+        if not isinstance(items,list) or len(items)>100:
+            return {"type":typ,"output_verified":False,"error":"FANOUT_SOURCE_INVALID"}
+        value_field=str(args.get("value_field") or "")
+        threshold=int(args.get("max_length") or 0)
+        output_dir.mkdir(parents=True,exist_ok=True)
+        manifest=[]
+        for item in items:
+            item_id=str(item.get("id"))
+            value=str(item.get(value_field) or "")
+            use_match=len(value)<=threshold
+            template=args.get("match_action") if use_match else args.get("other_action")
+            kind=str(args.get("match_kind") if use_match else args.get("other_kind"))
+            out=str((output_dir/(item_id+".png")).relative_to(ROOT))
+            def subst(v):
+                if isinstance(v,str):
+                    if v=="__ITEM_VALUE__": return value
+                    if v=="__ITEM_OUTPUT_PATH__": return out
+                    return v
+                if isinstance(v,list): return [subst(x) for x in v]
+                if isinstance(v,dict): return {k:subst(x) for k,x in v.items()}
+                return v
+            inner=subst((template or {}).get("args") or {})
+            result=_invoke_bound_capability(inner)
+            if not result.get("output_verified"):
+                return {"type":typ,"output_verified":False,"error":"FANOUT_ITEM_FAILED","id":item_id}
+            manifest.append({"id":item.get("id"),value_field:item.get(value_field),"capability_kind":kind,"artifact_path":out})
+        manifest_path.parent.mkdir(parents=True,exist_ok=True)
+        manifest_path.write_text(json.dumps(manifest,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+        return {"type":typ,"output_verified":True,"item_count":len(manifest),"manifest_path":str(manifest_path.relative_to(ROOT))}
     if typ=="assert_runtime_selected_code_decodes":
         source=_safe_repo_path(args.get("source_path",""))
         if not source.is_file():
