@@ -42,6 +42,7 @@
     "replay_after_result_assertion_commit": "53cb1a1f196d1af2e511feaff3e4518ca9fd39dc",
     "replay_after_full_composition_regression": "88ce8f955a57c6377e15a9a4f65dac1631d91f25",
     "replay_after_executable_jq_regression_commit": "ab0f1c53f6302aa82187eaf7def21dc040c25cff",
-    "replay_after_wrapper_completion_contract_fix": true
+    "replay_after_wrapper_completion_contract_fix": true,
+    "replay_after_typed_causal_input_binding_commit": "221203b1e33957281b54fd7a6b40b5c62e06297f"
   }
 }
