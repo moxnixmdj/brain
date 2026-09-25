@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T19:43:54.305760+00:00",
+  "mission_id": "ASTRA-RUNTIME-NPM-ACQUIRE-CBOR-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_NPM_ACQUIRE_CBOR_001.json",
+  "mission_sha256": "08dc06c37b623fd60227e2a9ea160495ac7f4266c5d8edc6ad5f12d466fd95e2",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "92c6f734d16eb0d813cbe6845a25a8532ea7277037b6c1b433f2af760b18eab5",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
