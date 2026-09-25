@@ -2472,6 +2472,41 @@ def _goal_action(action):
           "verified":True,
         }
 
+    if typ=="assert_authoritative_source_discovery":
+        evidence_path=_safe_repo_path(args.get("evidence_path",""))
+        browser_result_path=_safe_repo_path(args.get("browser_result_path",""))
+        if not evidence_path.is_file() or not browser_result_path.is_file():
+            return {"type":typ,"verified":False,"error":"SOURCE_DISCOVERY_VERIFICATION_INPUT_MISSING"}
+        try:
+            evidence=json.loads(evidence_path.read_text(encoding="utf-8"))
+            browser=json.loads(browser_result_path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            return {"type":typ,"verified":False,"error":"SOURCE_DISCOVERY_VERIFICATION_JSON_INVALID:"+type(exc).__name__}
+        domains=[str(x).lower().strip().lstrip(".") for x in evidence.get("authority_domains") or []]
+        chosen=str(evidence.get("chosen_url") or "")
+        final_url=str(browser.get("final_url") or "")
+        try:
+            chosen_host=(urllib.parse.urlparse(chosen).hostname or "").lower()
+            final_host=(urllib.parse.urlparse(final_url).hostname or "").lower()
+        except Exception:
+            return {"type":typ,"verified":False,"error":"SOURCE_DISCOVERY_VERIFICATION_URL_INVALID"}
+        def allowed(host):
+            return bool(host and any(host==d or host.endswith("."+d) for d in domains))
+        text=str(browser.get("observed_text") or "")
+        verified=(
+            evidence.get("schema")=="PROJECT_BRAIN_SOURCE_DISCOVERY_EVIDENCE_V1"
+            and allowed(chosen_host)
+            and allowed(final_host)
+            and bool(text.strip())
+        )
+        return {
+          "type":typ,"verified":verified,
+          "chosen_url":chosen,"chosen_host":chosen_host,
+          "final_url":final_url,"final_host":final_host,
+          "authority_domains":domains,
+          "rendered_text_nonempty":bool(text.strip()),
+        }
+
     if typ=="discover_authoritative_web_source":
         query=str(args.get("query") or "").strip()
         output=_safe_repo_path(args.get("output_path",""))
@@ -2953,7 +2988,7 @@ def _run_model_independent_goal(step, mission, goal):
     if actions is None:
         return None
     allowed_types={
-      "read_file","list_tree","search_text","http_get","discover_authoritative_web_source","fetch_json_knowledge","assert_json_knowledge","write_json_records","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback","invoke_capability_until","verify_with_independent_pypi_codec",
+      "read_file","list_tree","search_text","http_get","discover_authoritative_web_source","assert_authoritative_source_discovery","fetch_json_knowledge","assert_json_knowledge","write_json_records","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback","invoke_capability_until","verify_with_independent_pypi_codec",
       "project_browser_result_json","join_runtime_json_arrays","assert_runtime_json_join","aggregate_runtime_json_arrays","assert_runtime_json_aggregate","derive_grouped_records","assert_grouped_derived_records","select_ranked_record","assert_ranked_record","assert_hex_prefix_bucket","assert_collection_length_bucket","assert_runtime_selected_code_decodes",
       "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal","assert_runtime_fanout_decodes","assert_runtime_fanout_artifacts_decode","assert_runtime_per_item_fallback_decodes","assert_runtime_fallback_decision","assert_runtime_bounded_loop_trace",
       "assert_workflow_audit_supported_by_source","assert_python_source_audit_supported_by_source",
