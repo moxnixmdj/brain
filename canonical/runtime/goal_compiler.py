@@ -3215,6 +3215,116 @@ def _compile_generic_dataflow_verification_ir(clause,compiled_parts):
     }
 
 
+def _parse_json_path_spec(raw_path):
+    path_spec=[]
+    for part in str(raw_path or "").strip().split("."):
+        if not part:
+            return None
+        if re.fullmatch(r"\d+",part):
+            path_spec.append(int(part))
+        elif re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*",part):
+            path_spec.append(part)
+        else:
+            return None
+    return path_spec
+
+
+def _compile_external_json_knowledge_fetch(clause,action_cycle):
+    text=str(clause or "").strip()
+    m=re.match(
+        r"^using\s+(?:an?\s+)?external\s+json\s+source\s+(https?://[^\s,]+),\s*"
+        r"extract\s+json\s+path\s+([^\s]+)\s+and\s+save\s+(?:the\s+)?knowledge\s+evidence\s+to\s+"
+        r"([^\s]+\.json)$",
+        text,re.IGNORECASE
+    )
+    if not m:
+        return None
+    url=m.group(1).rstrip(".,;:!?")
+    path_spec=_parse_json_path_spec(m.group(2))
+    if path_spec is None:
+        return None
+    output_path=m.group(3).strip(" .,:;")
+    return {
+      "action":{
+        "type":"fetch_json_knowledge",
+        "args":{
+          "url":url,
+          "json_path":path_spec,
+          "output_path":output_path,
+          "authoritative":False,
+          "timeout_s":20,
+          "max_bytes":1000000,
+        },
+        "expect":{"type":"field_equals","field":"verified","value":True},
+      },
+      "output_path":output_path,
+      "result_cycle":int(action_cycle),
+      "evidence":{
+        "source_url":url,
+        "json_path":path_spec,
+        "evidence_path":output_path,
+        "result_cycle":int(action_cycle),
+        "authoritative":False,
+      }
+    }
+
+
+def _compile_knowledge_consistency_assessment(clause,context_paths):
+    text=str(clause or "").strip()
+    m=re.match(
+        r"^assess\s+(?:the\s+)?knowledge\s+evidence\s+(.+?)\s+and\s+save\s+(?:the\s+)?assessment\s+to\s+"
+        r"([^\s]+\.json)(?:\s+with\s+freshness\s+budget\s+(\d+)\s+seconds?)?$",
+        text,re.IGNORECASE
+    )
+    if not m:
+        return None
+    blob=m.group(1)
+    output_path=m.group(2).strip(" .,:;")
+    max_age=int(m.group(3)) if m.group(3) is not None else None
+    paths=re.findall(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+\.json",blob)
+    if len(paths)<2:
+        return None
+    known={str(x) for x in context_paths or []}
+    if any(p not in known for p in paths):
+        return None
+    args={"evidence_paths":paths,"output_path":output_path}
+    if max_age is not None:
+        args["max_age_s"]=max_age
+    return {
+      "action":{
+        "type":"assess_knowledge_consistency",
+        "args":args,
+        "expect":{"type":"field_nonempty","field":"status"},
+      },
+      "output_path":output_path,
+      "evidence":{"evidence_paths":paths,"output_path":output_path,"max_age_s":max_age}
+    }
+
+
+def _compile_knowledge_status_assertion(clause,context_paths):
+    text=str(clause or "").strip()
+    m=re.match(
+        r"^(?:finally\s+)?verify\s+(?:that\s+)?(?:the\s+)?knowledge\s+status\s+is\s+"
+        r"(SUPPORTED|CONFLICTED|INSUFFICIENT|STALE)$",
+        text,re.IGNORECASE
+    )
+    if not m:
+        return None
+    status=m.group(1).upper()
+    json_paths=[str(x) for x in context_paths or [] if str(x).lower().endswith(".json")]
+    if not json_paths:
+        return None
+    assessment_path=json_paths[-1]
+    return {
+      "action":{
+        "type":"assert_knowledge_status",
+        "args":{"assessment_path":assessment_path,"expected_status":status},
+        "expect":{"type":"field_equals","field":"verified","value":True},
+      },
+      "evidence":{"assessment_path":assessment_path,"expected_status":status}
+    }
+
+
 def _compile_authoritative_json_knowledge_fetch(clause,action_cycle):
     text=str(clause or "").strip()
     m=re.match(
@@ -3228,16 +3338,9 @@ def _compile_authoritative_json_knowledge_fetch(clause,action_cycle):
     url=m.group(1).rstrip(".,;:!?")
     raw_path=m.group(2).strip(" .,:;")
     output_path=m.group(3).strip(" .,:;")
-    path_spec=[]
-    for part in raw_path.split("."):
-        if not part:
-            return None
-        if re.fullmatch(r"\d+",part):
-            path_spec.append(int(part))
-        elif re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*",part):
-            path_spec.append(part)
-        else:
-            return None
+    path_spec=_parse_json_path_spec(raw_path)
+    if path_spec is None:
+        return None
     return {
       "action":{
         "type":"fetch_json_knowledge",
@@ -3362,6 +3465,38 @@ def _compile_compound_goal(goal, clauses, registry, root):
         if index in consumed_indices:
             continue
         lower=clause.lower()
+
+        external_knowledge_fetch=_compile_external_json_knowledge_fetch(clause,len(actions))
+        if external_knowledge_fetch is not None:
+            actions.append(external_knowledge_fetch["action"])
+            context_paths.append(external_knowledge_fetch["output_path"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"EXTERNAL_JSON_KNOWLEDGE_FETCH",
+                **external_knowledge_fetch["evidence"],
+            })
+            continue
+
+        knowledge_assessment=_compile_knowledge_consistency_assessment(clause,context_paths)
+        if knowledge_assessment is not None:
+            actions.append(knowledge_assessment["action"])
+            context_paths.append(knowledge_assessment["output_path"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"KNOWLEDGE_CONSISTENCY_ASSESSMENT",
+                **knowledge_assessment["evidence"],
+            })
+            continue
+
+        knowledge_status=_compile_knowledge_status_assertion(clause,context_paths)
+        if knowledge_status is not None:
+            actions.append(knowledge_status["action"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"KNOWLEDGE_STATUS_ASSERTION",
+                **knowledge_status["evidence"],
+            })
+            continue
 
         knowledge_fetch=_compile_authoritative_json_knowledge_fetch(clause,len(actions))
         if knowledge_fetch is not None:
