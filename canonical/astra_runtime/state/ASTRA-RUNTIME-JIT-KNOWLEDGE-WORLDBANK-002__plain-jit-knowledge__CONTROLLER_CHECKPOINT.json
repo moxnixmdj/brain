@@ -1,0 +1,131 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "plan": {
+        "args": {
+          "authoritative": true,
+          "json_path": [
+            1,
+            0,
+            "sourceNote"
+          ],
+          "max_bytes": 1000000,
+          "output_path": "canonical/astra_runtime/tmp/JIT_WORLDBANK_PLAIN_EVIDENCE.json",
+          "timeout_s": 20,
+          "url": "https://api.worldbank.org/v2/indicator/SP.POP.TOTL?format=json"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "fetch_json_knowledge"
+      },
+      "result": {
+        "body_sha256": "2f8491efc00bf2c0995112ff8e87aba69e5e9d22d0880b22f7e3a4ec757ba05c",
+        "duration_s": 0.251,
+        "final_url": "https://api.worldbank.org/v2/indicator/SP.POP.TOTL?format=json",
+        "json_path": [
+          1,
+          0,
+          "sourceNote"
+        ],
+        "output_path": "canonical/astra_runtime/tmp/JIT_WORLDBANK_PLAIN_EVIDENCE.json",
+        "type": "fetch_json_knowledge",
+        "value": "Total population is based on the de facto definition of population, which counts all residents regardless of legal status or citizenship. The values shown are midyear estimates.",
+        "verified": true
+      }
+    },
+    {
+      "cycle": 1,
+      "plan": {
+        "args": {
+          "fields": [
+            "indicator_id",
+            "definition"
+          ],
+          "output_path": "canonical/astra_runtime/tmp/JIT_WORLDBANK_PLAIN_USED.json",
+          "records": [
+            {
+              "definition": "Total population is based on the de facto definition of population, which counts all residents regardless of legal status or citizenship. The values shown are midyear estimates.",
+              "indicator_id": "SP.POP.TOTL"
+            }
+          ]
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "write_json_records"
+      },
+      "result": {
+        "fields": [
+          "indicator_id",
+          "definition"
+        ],
+        "output_bytes": 245,
+        "output_path": "canonical/astra_runtime/tmp/JIT_WORLDBANK_PLAIN_USED.json",
+        "output_sha256": "c3c01b06360ddbabf8b5abbd74e01add239679cbc22527ee4b2657bcf776167a",
+        "record_count": 1,
+        "type": "write_json_records",
+        "verified": true
+      }
+    },
+    {
+      "cycle": 2,
+      "plan": {
+        "args": {
+          "evidence_path": "canonical/astra_runtime/tmp/JIT_WORLDBANK_PLAIN_EVIDENCE.json",
+          "max_bytes": 1000000,
+          "timeout_s": 20
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "assert_json_knowledge"
+      },
+      "result": {
+        "evidence_path": "canonical/astra_runtime/tmp/JIT_WORLDBANK_PLAIN_EVIDENCE.json",
+        "expected_value": "Total population is based on the de facto definition of population, which counts all residents regardless of legal status or citizenship. The values shown are midyear estimates.",
+        "fresh_body_sha256": "2f8491efc00bf2c0995112ff8e87aba69e5e9d22d0880b22f7e3a4ec757ba05c",
+        "json_path": [
+          1,
+          0,
+          "sourceNote"
+        ],
+        "observed_value": "Total population is based on the de facto definition of population, which counts all residents regardless of legal status or citizenship. The values shown are midyear estimates.",
+        "original_body_sha256": "2f8491efc00bf2c0995112ff8e87aba69e5e9d22d0880b22f7e3a4ec757ba05c",
+        "source_url": "https://api.worldbank.org/v2/indicator/SP.POP.TOTL?format=json",
+        "type": "assert_json_knowledge",
+        "verified": true
+      }
+    },
+    {
+      "cycle": 3,
+      "plan": {
+        "args": {
+          "summary": "COMPOUND_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "COMPOUND_GOAL_COMPLETE",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-09-25T20:53:11.633912+00:00",
+  "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-WORLDBANK-002",
+  "next_action_index": 4,
+  "plan_sha256": "af830ad2176452306543d1acfef58327485f7d5e1f1a257ed00bd2b45746b5fe",
+  "resume_count": 0,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "plain-jit-knowledge",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-09-25T20:53:11.979917+00:00"
+}
