@@ -1,0 +1,159 @@
+{
+  "completed_at_utc": "2026-09-25T20:48:52.932689+00:00",
+  "created_at_utc": "2026-09-25T20:48:52.703854+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T20:48:52.932115+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "goal",
+        "controller_checkpoint": {
+          "last_rewound_from_action_index": null,
+          "path": "canonical/astra_runtime/state/ASTRA-RUNTIME-JIT-KNOWLEDGE-WORLDBANK-001__jit-knowledge-proof__CONTROLLER_CHECKPOINT.json",
+          "plan_sha256": "1b0e0bbf64eeb29077abfa26d6c87948b7a525e7444a94208e426f37525719a9",
+          "resume_count": 0,
+          "resumed": false,
+          "resumed_from_action_index": 0,
+          "rewind_count": 0
+        },
+        "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+        "cycles": 4,
+        "final_summary": "JIT_KNOWLEDGE_COMPLETE",
+        "planner_model_last": null,
+        "planner_source": null,
+        "planner_transport": null,
+        "returncode": 0,
+        "stdout": "JIT_KNOWLEDGE_COMPLETE",
+        "trace": [
+          {
+            "cycle": 0,
+            "plan": {
+              "args": {
+                "authoritative": true,
+                "json_path": [
+                  1,
+                  0,
+                  "sourceNote"
+                ],
+                "max_bytes": 1000000,
+                "output_path": "canonical/astra_runtime/tmp/JIT_WORLDBANK_POPULATION_DEFINITION_EVIDENCE.json",
+                "timeout_s": 20,
+                "url": "https://api.worldbank.org/v2/indicator/SP.POP.TOTL?format=json"
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "fetch_json_knowledge"
+            },
+            "result": {
+              "body_sha256": "2f8491efc00bf2c0995112ff8e87aba69e5e9d22d0880b22f7e3a4ec757ba05c",
+              "duration_s": 0.142,
+              "final_url": "https://api.worldbank.org/v2/indicator/SP.POP.TOTL?format=json",
+              "json_path": [
+                1,
+                0,
+                "sourceNote"
+              ],
+              "output_path": "canonical/astra_runtime/tmp/JIT_WORLDBANK_POPULATION_DEFINITION_EVIDENCE.json",
+              "type": "fetch_json_knowledge",
+              "value": "Total population is based on the de facto definition of population, which counts all residents regardless of legal status or citizenship. The values shown are midyear estimates.",
+              "verified": true
+            }
+          },
+          {
+            "cycle": 1,
+            "plan": {
+              "args": {
+                "fields": [
+                  "indicator_id",
+                  "definition"
+                ],
+                "output_path": "canonical/astra_runtime/tmp/JIT_WORLDBANK_POPULATION_DEFINITION_USED.json",
+                "records": [
+                  {
+                    "definition": "Total population is based on the de facto definition of population, which counts all residents regardless of legal status or citizenship. The values shown are midyear estimates.",
+                    "indicator_id": "SP.POP.TOTL"
+                  }
+                ]
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "write_json_records"
+            },
+            "result": {
+              "fields": [
+                "indicator_id",
+                "definition"
+              ],
+              "output_bytes": 245,
+              "output_path": "canonical/astra_runtime/tmp/JIT_WORLDBANK_POPULATION_DEFINITION_USED.json",
+              "output_sha256": "c3c01b06360ddbabf8b5abbd74e01add239679cbc22527ee4b2657bcf776167a",
+              "record_count": 1,
+              "type": "write_json_records",
+              "verified": true
+            }
+          },
+          {
+            "cycle": 2,
+            "plan": {
+              "args": {
+                "evidence_path": "canonical/astra_runtime/tmp/JIT_WORLDBANK_POPULATION_DEFINITION_EVIDENCE.json",
+                "max_bytes": 1000000,
+                "timeout_s": 20
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "assert_json_knowledge"
+            },
+            "result": {
+              "evidence_path": "canonical/astra_runtime/tmp/JIT_WORLDBANK_POPULATION_DEFINITION_EVIDENCE.json",
+              "expected_value": "Total population is based on the de facto definition of population, which counts all residents regardless of legal status or citizenship. The values shown are midyear estimates.",
+              "fresh_body_sha256": "2f8491efc00bf2c0995112ff8e87aba69e5e9d22d0880b22f7e3a4ec757ba05c",
+              "json_path": [
+                1,
+                0,
+                "sourceNote"
+              ],
+              "observed_value": "Total population is based on the de facto definition of population, which counts all residents regardless of legal status or citizenship. The values shown are midyear estimates.",
+              "original_body_sha256": "2f8491efc00bf2c0995112ff8e87aba69e5e9d22d0880b22f7e3a4ec757ba05c",
+              "source_url": "https://api.worldbank.org/v2/indicator/SP.POP.TOTL?format=json",
+              "type": "assert_json_knowledge",
+              "verified": true
+            }
+          },
+          {
+            "cycle": 3,
+            "plan": {
+              "args": {
+                "summary": "JIT_KNOWLEDGE_COMPLETE"
+              },
+              "type": "finish"
+            },
+            "result": {
+              "summary": "JIT_KNOWLEDGE_COMPLETE",
+              "type": "finish"
+            }
+          }
+        ]
+      },
+      "step_id": "jit-knowledge-proof",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-WORLDBANK-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_JIT_KNOWLEDGE_WORLDBANK_001.json",
+  "mission_sha256": "bcab801136a38573a189a7e059ef56ff5c3311723c38f7b70716e4c674c76db3",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T20:48:52.932128+00:00"
+}
