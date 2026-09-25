@@ -1,0 +1,2582 @@
+{
+  "auto_acquisition": {
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"lua-json\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"r-cran-png\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"cookiecutter\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"pngphoon\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"qrencode\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-find-file-in-project\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-project\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"famfamfam-flag-png\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"gir1.2-json-1.0\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"gjh-asl-json\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"gpgme-json\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"guile-json\", \"status\": \"CONTRACT_REJECTED\"}]",
+    "status": "NOT_DISPATCHED"
+  },
+  "binding_performed": false,
+  "goal": "Using a real rendered browser, open https://httpbin.org/forms/post. Enter PROJECT BRAIN into the customer name field, choose Medium pizza size, check the Bacon topping, submit the form, and save a full-page screenshot to canonical/astra_runtime/tmp/HTTPBIN_FORM_SUBMITTED.png and a result JSON to canonical/astra_runtime/tmp/HTTPBIN_FORM_SUBMITTED.json. The final rendered page must independently show the submitted customer name PROJECT BRAIN, size Medium, and topping Bacon; do not count merely opening or screenshotting the form as success.",
+  "mission_id": "ASTRA-RUNTIME-BROWSER-INTERACTION-001",
+  "observed_at_utc": "2026-09-25T02:46:18.259695+00:00",
+  "result": {
+    "binding_performed": false,
+    "candidates": [
+      {
+        "archive_sha256": "23bb5365162dce84ddeb31c27bf62287ce802ee35639cbf72e0b8b58390f969b",
+        "binding_kind": "apt",
+        "description": "quick access to project files in Emacs",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "elpa-find-file-in-project",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.2.0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "2394bf199cdaea188afb8abf78227585ded9efe3f5f6bdb0866b52913a3fe304",
+        "binding_kind": "apt",
+        "description": "Emacs library for operations on the current project",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "elpa-project",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.10.0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "726829fd2dd0d807c997c744c509d9c80df41d63548a6c62ffc35cbd5eaffebf",
+        "binding_kind": "apt",
+        "description": "DVB demuxing tool",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "project-x",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.90.4dfsg-0ubuntu6",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "cf0d32289b48c120c025ba02cca01bfa6d8308535a619911a07c5ebba105762b",
+        "binding_kind": "apt",
+        "description": "Tryton application platform - project module",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "tryton-modules-project",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.0.0-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "76f9c558651e2307f2e2bfa8b4c687d1b175aa7a2b4d2be881ac715168362949",
+        "binding_kind": "apt",
+        "description": "Tryton application platform - project invoice module",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "tryton-modules-project-invoice",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.0.4-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ba5a155a80ad80a46b6249ba6020c3258f7425e67ba0db291186bb58276d924e",
+        "binding_kind": "apt",
+        "description": "Tryton application platform - project plan module",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "tryton-modules-project-plan",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.0.0-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "70a3e8a200ce4164b78f249a4d1e58a5f10d0e62c12e506c386c34054941555c",
+        "binding_kind": "apt",
+        "description": "Tryton application platform - project revenue module",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "tryton-modules-project-revenue",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.0.1-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "41596e57b3801ed9ba85d54fdb1309cd1d9437dd174d91aa769433a40f72d801",
+        "binding_kind": "apt",
+        "description": "Tryton application platform - sale product customer module",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "customer"
+        ],
+        "name": "tryton-modules-sale-product-customer",
+        "packages": [],
+        "query": "customer",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.0.3-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "0dda010275924afb48c3a2184d49267f48e9a4b0afa1c6aec18280357b50311c",
+        "binding_kind": "apt",
+        "description": "dark GTK+ theme from the Shimmer Project",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "blackbird-gtk-theme",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.4+20171213-4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "783ab0c2dd152dda9bbd1a8cd798af4ef7278e9893b79830133b70b54f0df936",
+        "binding_kind": "apt",
+        "description": "blue GTK+ theme from the Shimmer Project",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "bluebird-gtk-theme",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.3-4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "cbbb28d6388eb81978f8d7caa703285296a6eb76dccc8898e941d8b7e5bb821f",
+        "binding_kind": "apt",
+        "description": "A mind boggling (brain twisting) game of logic",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "brain"
+        ],
+        "name": "blupimania",
+        "packages": [],
+        "query": "brain",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.6.2-17-g5f6cf8b-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "6b73d506364e523ccc956582dd684e725fa6e61167484b75b0be4fa12ab275de",
+        "binding_kind": "apt",
+        "description": "A mind boggling (brain twisting) game of logic - data",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "brain"
+        ],
+        "name": "blupimania-common",
+        "packages": [],
+        "query": "brain",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.6.2-17-g5f6cf8b-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "17a043e720621347b163161fd21d85860d897bf10d8992c3e6193a0dd591d442",
+        "binding_kind": "apt",
+        "description": "metapackage for virtualbox-savvy projects",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "boinc-virtualbox",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "7.24.1+dfsg-4build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "384cb5cf9629d9951604d87d99aad0d26c580118e78531c293d5543053e8d82b",
+        "binding_kind": "apt",
+        "description": "toolset for the Buildstream project",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "buildstream",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.6.9-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "470fc3014a27f4b131d97b87da4a9911f44c5276b160535c3612b4f6d2a32141",
+        "binding_kind": "apt",
+        "description": "integrated project management and planning tool",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "calligraplan",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1:3.3.0-2build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "94ce7fc8f352fe8ffc5e1f53f7d288eccd764cc0e66093d2b41d9eadc8edc47d",
+        "binding_kind": "apt",
+        "description": "print dependency tree of a Rust project using Cargo",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "cargo-debstatus",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.5.2-2build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "add3c10e495fafdb25c296a7ee75b205450e181dc546961f3d0d20c15f6ecb86",
+        "binding_kind": "apt",
+        "description": "CMake utility modules needed for building Vala Panel (and related projects)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "cmake-vala",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "3-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "33539f7e5f74128959860e53616b8e33115c1e1744d1c843d809359d57fe2918",
+        "binding_kind": "apt",
+        "description": "brain visualization, analysis and discovery tool",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "brain"
+        ],
+        "name": "connectome-workbench",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.5.0-2build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "21a8594fb176fb4c865f211513f35488022b1b3ded756f090d0afb65e17bb1b5",
+        "binding_kind": "apt",
+        "description": "create projects from project templates",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "cookiecutter",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.6.0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "aac501a133606f3cdaf69ba350dd138929a0dffd717fc662e56add5200a4ae7d",
+        "binding_kind": "apt",
+        "description": "Tool for integrating rust with an existing CMake project",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "corrosion",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.4.7-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "57829e6f3b315a076ffae8befbe13f54d702cc144b313d0d9fd966f4f3d73c8b",
+        "binding_kind": "apt",
+        "description": "super-parallel Python port of the C-Reduce project",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "cvise",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.10.0-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "3169457b8dd7735b4f54f762dbebd468d50fb51a22e6df601ad5ef518e7c4e9f",
+        "binding_kind": "apt",
+        "description": "Short History of the Debian Project",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "debian-history",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.28",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "3000376a2faa1061cf02ef6d790ad6e04a9b58e67de278afd491f221ee780c66",
+        "binding_kind": "apt",
+        "description": "Web-based timeline of the Debian Project",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "debian-timeline",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "46",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c77b3c9624737bb2f47d6f502eb5ebdf27e10cf0c9fbe769d61471a7cb2a23ba",
+        "binding_kind": "apt",
+        "description": "Debhelper programs for CMake projects",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "dh-cmake",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.6.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c75956b49a07d5b162b518e9177a3969ea598b6a4280e4e5347f06b0180eebcb",
+        "binding_kind": "apt",
+        "description": "Collection of graphics tablet drivers by DIGImend project",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "digimend-dkms",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "12-1ubuntu0.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d820842b51c748fb090bfbe6bc29d1710831df61f527e668b3d490145efeabbe",
+        "binding_kind": "apt",
+        "description": "Debian Project documentation and other documents",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "doc-debian",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "11.3+nmu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "df8dec627b0a4267d02fd457e4bbfbea929ceef8944b6ef18d23d65f08e624e9",
+        "binding_kind": "apt",
+        "description": "TITAN TTCN-3 toolset from the Eclipse project",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "eclipse-titan",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "8.2.0-1build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "1f315c07a09df0c7eb9543445377e856e7945e80497734ee95c717dea610e5c1",
+        "binding_kind": "apt",
+        "description": "The Ubuntu Documentation Project - Edubuntu Documentation",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "edubuntu-docs",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "11.03.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "a7bb1f1085b1d6b77676d820984a4d4b03ff92f80e652a214965f96f4842169a",
+        "binding_kind": "apt",
+        "description": "assign files to Emacs projects, programmatically",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "elpa-eproject",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.5+git20180312.068218d-4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "cf136185ebc1c965bef73b9e8c128d2f6e0e26489e22dffdfb9421d05258ab34",
+        "binding_kind": "apt",
+        "description": "group buffers in ibuffer list by Projectile project",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "elpa-ibuffer-projectile",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.4-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Local-first agent memory. Source, date, bind/abstain. Permanent name: lbrain.ai/claim.html",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.lbrain/lbrain",
+        "packages": [
+          {
+            "identifier": "lbrain-coding-agents",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "uvx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.3"
+          }
+        ],
+        "query": "brain",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/metavolve-labs/lbrain-coding-agents"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.1.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Helper for brainCloud MCP that gives it local file access, enabling easy git sync of cloud code.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.braincloudservers/braincloud-mcp-helper",
+        "packages": [
+          {
+            "identifier": "@braincloud/mcp-helper",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "6.0.0"
+          }
+        ],
+        "query": "brain",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "subfolder": "packages/mcp-helper",
+          "url": "https://github.com/getbraincloud/braincloud-mcp-helper"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "6.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Track customer data, manage audience segments, and trigger personalized campaigns",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.mcparmory/customerio-journeys-track",
+        "packages": [
+          {
+            "identifier": "mcparmory-customerio-journeys-track",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "uvx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.5"
+          },
+          {
+            "identifier": "ghcr.io/mcparmory/customerio-journeys-track:1.0.5",
+            "registry_type": "oci",
+            "required_environment": [],
+            "runtime_hint": "docker",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": null
+          }
+        ],
+        "query": "customer",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/mcparmory/registry"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.5",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Customer Support Ai MCP Server by MEOK AI Labs",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.CSOAI-ORG/customer-support-ai-mcp",
+        "packages": [
+          {
+            "identifier": "customer-support-ai-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "python",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.10"
+          }
+        ],
+        "query": "customer",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/CSOAI-ORG/customer-support-ai-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.10",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "MEOK Enterprise Compliance Checker \u2014 EU AI Act, DORA, GDPR automated gap analysis. \u00a35K-15K audits",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.CSOAI-ORG/meok-enterprise-compliance-checker",
+        "packages": [
+          {
+            "identifier": "meok-enterprise-compliance-checker",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "python",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.7"
+          }
+        ],
+        "query": "enter",
+        "remotes": [],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.8",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "MEOK Enterprise Compliance Suite \u2014 End-to-end EU AI Act, GDPR, NIS2, DORA, ISO, SOC2, HIPAA, PCI",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.CSOAI-ORG/meok-enterprise-compliance-suite",
+        "packages": [
+          {
+            "identifier": "meok-enterprise-compliance-suite",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "python",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.5"
+          }
+        ],
+        "query": "enter",
+        "remotes": [],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.6",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Project Management Ai MCP Server by MEOK AI Labs",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.CSOAI-ORG/project-management-ai-mcp",
+        "packages": [
+          {
+            "identifier": "project-management-ai-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "python",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.9"
+          }
+        ],
+        "query": "project",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/CSOAI-ORG/project-management-ai-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.9",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Slack Enterprise MCP Server by MEOK AI Labs",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.CSOAI-ORG/slack-enterprise-mcp",
+        "packages": [
+          {
+            "identifier": "slack-enterprise-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "python",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.9"
+          }
+        ],
+        "query": "enter",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/CSOAI-ORG/slack-enterprise-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.9",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Audit, reschedule and author Microsoft Project schedules. No Java, no Project install.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.HorizunGroup/horizun-msproject-mcp",
+        "packages": [
+          {
+            "identifier": "HorizunMsProjectMcp",
+            "registry_type": "nuget",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.2.1"
+          }
+        ],
+        "query": "project",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/HorizunGroup/horizun-msproject-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.2.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Agent-updated work tracker for builders directing AI across multiple projects.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.atlier/project-desk",
+        "packages": [],
+        "query": "project",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://atlier.ai/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/Wildsdesign/Atlier"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "4.7.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Read, analyze, and safely edit Microsoft Project MPP files.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.projectdata/mpp-connector",
+        "packages": [],
+        "query": "project",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.projectdata.ai/"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/projectdata-io/mpp-poweautomate-connector"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Analyze customer data to make segmentation and predict which customer to focus on for more sales.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.saifs/customer-intelligence",
+        "packages": [],
+        "query": "customer",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://customer-tiering-mcp-latest.saifs.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Streamline field service and construction operations with CenterPoint Connect. Manage companies, o\u2026",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.smithery/RectiFlex-centerassist-mcp",
+        "packages": [],
+        "query": "enter",
+        "remotes": [
+          {
+            "required_headers": [
+              "Authorization"
+            ],
+            "type": "streamable-http",
+            "url": "https://server.smithery.ai/@RectiFlex/centerassist-mcp/mcp"
+          }
+        ],
+        "repository": {},
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Streamline property management, construction, and service workflows with CenterPoint Connect. Sear\u2026",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.smithery/RectiFlex-centerassist-mcp-cp",
+        "packages": [],
+        "query": "enter",
+        "remotes": [
+          {
+            "required_headers": [
+              "Authorization"
+            ],
+            "type": "streamable-http",
+            "url": "https://server.smithery.ai/@RectiFlex/centerassist-mcp-cp/mcp"
+          }
+        ],
+        "repository": {},
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Access and manage CenterPoint Connect data for property management, construction, and service oper\u2026",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.smithery/RectiFlex-centerassist-mcp-cp1",
+        "packages": [],
+        "query": "enter",
+        "remotes": [
+          {
+            "required_headers": [
+              "Authorization"
+            ],
+            "type": "streamable-http",
+            "url": "https://server.smithery.ai/@RectiFlex/centerassist-mcp-cp1/mcp"
+          }
+        ],
+        "repository": {},
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Manage CenterPoint Connect data across properties, companies, employees, invoices, materials, and\u2026",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.smithery/RectiFlex-centerassist-mcp1",
+        "packages": [],
+        "query": "enter",
+        "remotes": [
+          {
+            "required_headers": [
+              "Authorization"
+            ],
+            "type": "streamable-http",
+            "url": "https://server.smithery.ai/@RectiFlex/centerassist-mcp1/mcp"
+          }
+        ],
+        "repository": {},
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Plan a Virtual Delivery Center for any initiative: pods, roles, AI agents, Delivery Units.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.aidoos/virtual-delivery-center",
+        "packages": [],
+        "query": "enter",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://aidoos.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Manage brainCloud apps, cloud code, hooks and servers; API lookups to help generate client code.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.braincloudservers/braincloud-mcp",
+        "packages": [],
+        "query": "brain",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.braincloudservers.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "6.0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Read-only access to Cogram projects, meetings, emails, RFIs and drawings for AEC teams",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.cogram/project",
+        "packages": [],
+        "query": "project",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.cogram.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Manage customers, reviews, requests, and reputation for one More Good Reviews project.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.moregoodreviews/project",
+        "packages": [],
+        "query": "project",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.moregoodreviews.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.2",
+        "zero_cost_eligible": true
+      }
+    ],
+    "effect": "Enter PROJECT BRAIN into the customer name field, choose Medium pizza size, check the Bacon topping, submit the form, and save a full-page screenshot to canonical/astra_runtime/tmp/HTTPBIN_FORM_SUBMITTED.png and a result JSON to canonical/astra_runtime/tmp/HTTPBIN_FORM_SUBMITTED.json",
+    "results": [
+      {
+        "binding_performed": false,
+        "candidate_count": 30,
+        "candidates": [
+          {
+            "archive_sha256": "23bb5365162dce84ddeb31c27bf62287ce802ee35639cbf72e0b8b58390f969b",
+            "binding_kind": "apt",
+            "description": "quick access to project files in Emacs",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "elpa-find-file-in-project",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.2.0-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "2394bf199cdaea188afb8abf78227585ded9efe3f5f6bdb0866b52913a3fe304",
+            "binding_kind": "apt",
+            "description": "Emacs library for operations on the current project",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "elpa-project",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.10.0-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "726829fd2dd0d807c997c744c509d9c80df41d63548a6c62ffc35cbd5eaffebf",
+            "binding_kind": "apt",
+            "description": "DVB demuxing tool",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "project-x",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.90.4dfsg-0ubuntu6",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "cf0d32289b48c120c025ba02cca01bfa6d8308535a619911a07c5ebba105762b",
+            "binding_kind": "apt",
+            "description": "Tryton application platform - project module",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "tryton-modules-project",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.0.0-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "76f9c558651e2307f2e2bfa8b4c687d1b175aa7a2b4d2be881ac715168362949",
+            "binding_kind": "apt",
+            "description": "Tryton application platform - project invoice module",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "tryton-modules-project-invoice",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.0.4-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "ba5a155a80ad80a46b6249ba6020c3258f7425e67ba0db291186bb58276d924e",
+            "binding_kind": "apt",
+            "description": "Tryton application platform - project plan module",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "tryton-modules-project-plan",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.0.0-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "70a3e8a200ce4164b78f249a4d1e58a5f10d0e62c12e506c386c34054941555c",
+            "binding_kind": "apt",
+            "description": "Tryton application platform - project revenue module",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "tryton-modules-project-revenue",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.0.1-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "41596e57b3801ed9ba85d54fdb1309cd1d9437dd174d91aa769433a40f72d801",
+            "binding_kind": "apt",
+            "description": "Tryton application platform - sale product customer module",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "customer"
+            ],
+            "name": "tryton-modules-sale-product-customer",
+            "packages": [],
+            "query": "customer",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "6.0.3-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "0dda010275924afb48c3a2184d49267f48e9a4b0afa1c6aec18280357b50311c",
+            "binding_kind": "apt",
+            "description": "dark GTK+ theme from the Shimmer Project",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "blackbird-gtk-theme",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.4+20171213-4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "783ab0c2dd152dda9bbd1a8cd798af4ef7278e9893b79830133b70b54f0df936",
+            "binding_kind": "apt",
+            "description": "blue GTK+ theme from the Shimmer Project",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "bluebird-gtk-theme",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.3-4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "cbbb28d6388eb81978f8d7caa703285296a6eb76dccc8898e941d8b7e5bb821f",
+            "binding_kind": "apt",
+            "description": "A mind boggling (brain twisting) game of logic",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "brain"
+            ],
+            "name": "blupimania",
+            "packages": [],
+            "query": "brain",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.6.2-17-g5f6cf8b-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "6b73d506364e523ccc956582dd684e725fa6e61167484b75b0be4fa12ab275de",
+            "binding_kind": "apt",
+            "description": "A mind boggling (brain twisting) game of logic - data",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "brain"
+            ],
+            "name": "blupimania-common",
+            "packages": [],
+            "query": "brain",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.6.2-17-g5f6cf8b-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "17a043e720621347b163161fd21d85860d897bf10d8992c3e6193a0dd591d442",
+            "binding_kind": "apt",
+            "description": "metapackage for virtualbox-savvy projects",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "boinc-virtualbox",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "7.24.1+dfsg-4build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "384cb5cf9629d9951604d87d99aad0d26c580118e78531c293d5543053e8d82b",
+            "binding_kind": "apt",
+            "description": "toolset for the Buildstream project",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "buildstream",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.6.9-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "470fc3014a27f4b131d97b87da4a9911f44c5276b160535c3612b4f6d2a32141",
+            "binding_kind": "apt",
+            "description": "integrated project management and planning tool",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "calligraplan",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1:3.3.0-2build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "94ce7fc8f352fe8ffc5e1f53f7d288eccd764cc0e66093d2b41d9eadc8edc47d",
+            "binding_kind": "apt",
+            "description": "print dependency tree of a Rust project using Cargo",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "cargo-debstatus",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.5.2-2build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "add3c10e495fafdb25c296a7ee75b205450e181dc546961f3d0d20c15f6ecb86",
+            "binding_kind": "apt",
+            "description": "CMake utility modules needed for building Vala Panel (and related projects)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "cmake-vala",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "3-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "33539f7e5f74128959860e53616b8e33115c1e1744d1c843d809359d57fe2918",
+            "binding_kind": "apt",
+            "description": "brain visualization, analysis and discovery tool",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "brain"
+            ],
+            "name": "connectome-workbench",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.5.0-2build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "21a8594fb176fb4c865f211513f35488022b1b3ded756f090d0afb65e17bb1b5",
+            "binding_kind": "apt",
+            "description": "create projects from project templates",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "cookiecutter",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "2.6.0-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "aac501a133606f3cdaf69ba350dd138929a0dffd717fc662e56add5200a4ae7d",
+            "binding_kind": "apt",
+            "description": "Tool for integrating rust with an existing CMake project",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "corrosion",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.4.7-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "57829e6f3b315a076ffae8befbe13f54d702cc144b313d0d9fd966f4f3d73c8b",
+            "binding_kind": "apt",
+            "description": "super-parallel Python port of the C-Reduce project",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "cvise",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "2.10.0-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "3169457b8dd7735b4f54f762dbebd468d50fb51a22e6df601ad5ef518e7c4e9f",
+            "binding_kind": "apt",
+            "description": "Short History of the Debian Project",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "debian-history",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "2.28",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "3000376a2faa1061cf02ef6d790ad6e04a9b58e67de278afd491f221ee780c66",
+            "binding_kind": "apt",
+            "description": "Web-based timeline of the Debian Project",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "debian-timeline",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "46",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c77b3c9624737bb2f47d6f502eb5ebdf27e10cf0c9fbe769d61471a7cb2a23ba",
+            "binding_kind": "apt",
+            "description": "Debhelper programs for CMake projects",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "dh-cmake",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.6.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c75956b49a07d5b162b518e9177a3969ea598b6a4280e4e5347f06b0180eebcb",
+            "binding_kind": "apt",
+            "description": "Collection of graphics tablet drivers by DIGImend project",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "digimend-dkms",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "12-1ubuntu0.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d820842b51c748fb090bfbe6bc29d1710831df61f527e668b3d490145efeabbe",
+            "binding_kind": "apt",
+            "description": "Debian Project documentation and other documents",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "doc-debian",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "11.3+nmu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "df8dec627b0a4267d02fd457e4bbfbea929ceef8944b6ef18d23d65f08e624e9",
+            "binding_kind": "apt",
+            "description": "TITAN TTCN-3 toolset from the Eclipse project",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "eclipse-titan",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "8.2.0-1build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "1f315c07a09df0c7eb9543445377e856e7945e80497734ee95c717dea610e5c1",
+            "binding_kind": "apt",
+            "description": "The Ubuntu Documentation Project - Edubuntu Documentation",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "edubuntu-docs",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "11.03.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "a7bb1f1085b1d6b77676d820984a4d4b03ff92f80e652a214965f96f4842169a",
+            "binding_kind": "apt",
+            "description": "assign files to Emacs projects, programmatically",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "elpa-eproject",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.5+git20180312.068218d-4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "cf136185ebc1c965bef73b9e8c128d2f6e0e26489e22dffdfb9421d05258ab34",
+            "binding_kind": "apt",
+            "description": "group buffers in ibuffer list by Projectile project",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "project"
+            ],
+            "name": "elpa-ibuffer-projectile",
+            "packages": [],
+            "query": "project",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.4-1",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Enter PROJECT BRAIN into the customer name field, choose Medium pizza size, check the Bacon topping, submit the form, and save a full-page screenshot to canonical/astra_runtime/tmp/HTTPBIN_FORM_SUBMITTED.png and a result JSON to canonical/astra_runtime/tmp/HTTPBIN_FORM_SUBMITTED.json",
+        "errors": [],
+        "queries": [
+          "enter",
+          "project",
+          "brain",
+          "customer"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "APT_CATALOG",
+        "source_url": null
+      },
+      {
+        "binding_performed": false,
+        "candidate_count": 103,
+        "candidates": [
+          {
+            "description": "Local-first agent memory. Source, date, bind/abstain. Permanent name: lbrain.ai/claim.html",
+            "is_latest": true,
+            "name": "ai.lbrain/lbrain",
+            "packages": [
+              {
+                "identifier": "lbrain-coding-agents",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "uvx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.3"
+              }
+            ],
+            "query": "brain",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/metavolve-labs/lbrain-coding-agents"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.1.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Helper for brainCloud MCP that gives it local file access, enabling easy git sync of cloud code.",
+            "is_latest": true,
+            "name": "com.braincloudservers/braincloud-mcp-helper",
+            "packages": [
+              {
+                "identifier": "@braincloud/mcp-helper",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "6.0.0"
+              }
+            ],
+            "query": "brain",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "subfolder": "packages/mcp-helper",
+              "url": "https://github.com/getbraincloud/braincloud-mcp-helper"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "6.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Track customer data, manage audience segments, and trigger personalized campaigns",
+            "is_latest": true,
+            "name": "com.mcparmory/customerio-journeys-track",
+            "packages": [
+              {
+                "identifier": "mcparmory-customerio-journeys-track",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "uvx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.5"
+              },
+              {
+                "identifier": "ghcr.io/mcparmory/customerio-journeys-track:1.0.5",
+                "registry_type": "oci",
+                "required_environment": [],
+                "runtime_hint": "docker",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": null
+              }
+            ],
+            "query": "customer",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/mcparmory/registry"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.5",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Customer Support Ai MCP Server by MEOK AI Labs",
+            "is_latest": true,
+            "name": "io.github.CSOAI-ORG/customer-support-ai-mcp",
+            "packages": [
+              {
+                "identifier": "customer-support-ai-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "python",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.10"
+              }
+            ],
+            "query": "customer",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/CSOAI-ORG/customer-support-ai-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.10",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MEOK Enterprise Compliance Checker \u2014 EU AI Act, DORA, GDPR automated gap analysis. \u00a35K-15K audits",
+            "is_latest": true,
+            "name": "io.github.CSOAI-ORG/meok-enterprise-compliance-checker",
+            "packages": [
+              {
+                "identifier": "meok-enterprise-compliance-checker",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "python",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.7"
+              }
+            ],
+            "query": "enter",
+            "remotes": [],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.8",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MEOK Enterprise Compliance Suite \u2014 End-to-end EU AI Act, GDPR, NIS2, DORA, ISO, SOC2, HIPAA, PCI",
+            "is_latest": true,
+            "name": "io.github.CSOAI-ORG/meok-enterprise-compliance-suite",
+            "packages": [
+              {
+                "identifier": "meok-enterprise-compliance-suite",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "python",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.5"
+              }
+            ],
+            "query": "enter",
+            "remotes": [],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.6",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Project Management Ai MCP Server by MEOK AI Labs",
+            "is_latest": true,
+            "name": "io.github.CSOAI-ORG/project-management-ai-mcp",
+            "packages": [
+              {
+                "identifier": "project-management-ai-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "python",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.9"
+              }
+            ],
+            "query": "project",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/CSOAI-ORG/project-management-ai-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.9",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Slack Enterprise MCP Server by MEOK AI Labs",
+            "is_latest": true,
+            "name": "io.github.CSOAI-ORG/slack-enterprise-mcp",
+            "packages": [
+              {
+                "identifier": "slack-enterprise-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "python",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.9"
+              }
+            ],
+            "query": "enter",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/CSOAI-ORG/slack-enterprise-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.9",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Audit, reschedule and author Microsoft Project schedules. No Java, no Project install.",
+            "is_latest": true,
+            "name": "io.github.HorizunGroup/horizun-msproject-mcp",
+            "packages": [
+              {
+                "identifier": "HorizunMsProjectMcp",
+                "registry_type": "nuget",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.2.1"
+              }
+            ],
+            "query": "project",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/HorizunGroup/horizun-msproject-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.2.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Agent-updated work tracker for builders directing AI across multiple projects.",
+            "is_latest": true,
+            "name": "ai.atlier/project-desk",
+            "packages": [],
+            "query": "project",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://atlier.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Wildsdesign/Atlier"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "4.7.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Read, analyze, and safely edit Microsoft Project MPP files.",
+            "is_latest": true,
+            "name": "ai.projectdata/mpp-connector",
+            "packages": [],
+            "query": "project",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.projectdata.ai/"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/projectdata-io/mpp-poweautomate-connector"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Analyze customer data to make segmentation and predict which customer to focus on for more sales.",
+            "is_latest": true,
+            "name": "ai.saifs/customer-intelligence",
+            "packages": [],
+            "query": "customer",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://customer-tiering-mcp-latest.saifs.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Streamline field service and construction operations with CenterPoint Connect. Manage companies, o\u2026",
+            "is_latest": true,
+            "name": "ai.smithery/RectiFlex-centerassist-mcp",
+            "packages": [],
+            "query": "enter",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@RectiFlex/centerassist-mcp/mcp"
+              }
+            ],
+            "repository": {},
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Streamline property management, construction, and service workflows with CenterPoint Connect. Sear\u2026",
+            "is_latest": true,
+            "name": "ai.smithery/RectiFlex-centerassist-mcp-cp",
+            "packages": [],
+            "query": "enter",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@RectiFlex/centerassist-mcp-cp/mcp"
+              }
+            ],
+            "repository": {},
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Access and manage CenterPoint Connect data for property management, construction, and service oper\u2026",
+            "is_latest": true,
+            "name": "ai.smithery/RectiFlex-centerassist-mcp-cp1",
+            "packages": [],
+            "query": "enter",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@RectiFlex/centerassist-mcp-cp1/mcp"
+              }
+            ],
+            "repository": {},
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Manage CenterPoint Connect data across properties, companies, employees, invoices, materials, and\u2026",
+            "is_latest": true,
+            "name": "ai.smithery/RectiFlex-centerassist-mcp1",
+            "packages": [],
+            "query": "enter",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@RectiFlex/centerassist-mcp1/mcp"
+              }
+            ],
+            "repository": {},
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Plan a Virtual Delivery Center for any initiative: pods, roles, AI agents, Delivery Units.",
+            "is_latest": true,
+            "name": "com.aidoos/virtual-delivery-center",
+            "packages": [],
+            "query": "enter",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://aidoos.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Manage brainCloud apps, cloud code, hooks and servers; API lookups to help generate client code.",
+            "is_latest": true,
+            "name": "com.braincloudservers/braincloud-mcp",
+            "packages": [],
+            "query": "brain",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.braincloudservers.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "6.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Read-only access to Cogram projects, meetings, emails, RFIs and drawings for AEC teams",
+            "is_latest": true,
+            "name": "com.cogram/project",
+            "packages": [],
+            "query": "project",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.cogram.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Manage customers, reviews, requests, and reputation for one More Good Reviews project.",
+            "is_latest": true,
+            "name": "com.moregoodreviews/project",
+            "packages": [],
+            "query": "project",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.moregoodreviews.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "The official Planning Center MCP server for interacting with your ministry's data.",
+            "is_latest": true,
+            "name": "com.planningcenter/mcp",
+            "packages": [],
+            "query": "enter",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.planningcenteronline.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "AI project timelines & Gantt charts, plus enterprise resourcing, capacity & weekly status reporting.",
+            "is_latest": true,
+            "name": "com.projectpaced/timeline",
+            "packages": [],
+            "query": "project",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.projectpaced.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "subfolder": "mcp-server",
+              "url": "https://github.com/suleman-k/Project-Paced-v2"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.3.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Explore your Userbrain user test data, summarize feedback, and uncover actionable insights faster.",
+            "is_latest": true,
+            "name": "com.userbrain/mcp",
+            "packages": [],
+            "query": "brain",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.userbrain.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.5.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Personal project management with AI agents: numbered tickets, statuses, files, a thread per ticket.",
+            "is_latest": true,
+            "name": "com.verysimpleprojects/mcp",
+            "packages": [],
+            "query": "project",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://verysimpleprojects.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Wikimedia Enterprise API docs: search the guides, read every endpoint. Read-only, no account needed.",
+            "is_latest": true,
+            "name": "com.wikimedia.enterprise/docs",
+            "packages": [],
+            "query": "enter",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://enterprise.wikimedia.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Brainfile memory layer for Claude Code over MCP: free starter files + weekly freshness feed.",
+            "is_latest": true,
+            "name": "io.brainfile/brainfile",
+            "packages": [],
+            "query": "brain",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://brainfile.io/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Build dashboards on your own data, including multi-customer views with per-customer login.",
+            "is_latest": true,
+            "name": "io.customerdashboard/customerdashboard",
+            "packages": [],
+            "query": "customer",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://app.customerdashboard.io/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Prepare a customer record field",
+            "is_latest": true,
+            "name": "io.github.Wxt-ai/customer-record-field-prep",
+            "packages": [],
+            "query": "customer",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://openings-vote-drilling-initially.trycloudflare.com/mcp/customer-record-field-prep"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.7",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Explore Weav customer service pricing, features, comparisons, signup, and demos. No auth required.",
+            "is_latest": true,
+            "name": "io.github.dubdubdubco/weav-customer-service",
+            "packages": [],
+            "query": "customer",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://weav.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/dubdubdubco/weav-site-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP server for customer-io",
+            "is_latest": true,
+            "name": "io.github.pipeworx-io/customer-io",
+            "packages": [],
+            "query": "customer",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://gateway.pipeworx.io/customer-io/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/pipeworx-io/mcp-customer-io"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.1",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Enter PROJECT BRAIN into the customer name field, choose Medium pizza size, check the Bacon topping, submit the form, and save a full-page screenshot to canonical/astra_runtime/tmp/HTTPBIN_FORM_SUBMITTED.png and a result JSON to canonical/astra_runtime/tmp/HTTPBIN_FORM_SUBMITTED.json",
+        "errors": [],
+        "queries": [
+          "enter",
+          "project",
+          "brain",
+          "customer"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "OFFICIAL_MCP_REGISTRY",
+        "source_url": "https://registry.modelcontextprotocol.io"
+      }
+    ],
+    "schema": "PROJECT_BRAIN_FEDERATED_CAPABILITY_DISCOVERY_V1",
+    "sources": [
+      "APT_CATALOG",
+      "OFFICIAL_MCP_REGISTRY"
+    ]
+  },
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
+  "source": "FEDERATED_CAPABILITY_DISCOVERY_FALLBACK",
+  "targeted_acquisition_error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"lua-json\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"r-cran-png\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"cookiecutter\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"pngphoon\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"qrencode\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-find-file-in-project\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"elpa-project\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"famfamfam-flag-png\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"gir1.2-json-1.0\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"gjh-asl-json\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"gpgme-json\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"guile-json\", \"status\": \"CONTRACT_REJECTED\"}]"
+}

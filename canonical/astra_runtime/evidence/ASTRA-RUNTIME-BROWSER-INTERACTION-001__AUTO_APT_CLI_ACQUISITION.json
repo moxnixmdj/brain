@@ -1,0 +1,1944 @@
+{
+  "attempts": [
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "afd7b8168089f68003994131e8e89465566e614db8c672fd72fe83e5f9a9e3ce",
+        "executables": [],
+        "package": "lua-json",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.3.4-2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 88.0,
+        "archive_sha256": "afd7b8168089f68003994131e8e89465566e614db8c672fd72fe83e5f9a9e3ce",
+        "binding_kind": "apt",
+        "description": "JSON decoder/encoder for Lua",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "lua-json",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.3.4-2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "9a43a8ba7c2c9693ae985c3a88b4f43d47828fb53d0fc25c1656477e4463b0bd",
+        "executables": [],
+        "package": "r-cran-png",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.1-8-1build2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 88.0,
+        "archive_sha256": "9a43a8ba7c2c9693ae985c3a88b4f43d47828fb53d0fc25c1656477e4463b0bd",
+        "binding_kind": "apt",
+        "description": "GNU R package to read and write PNG images",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "png"
+        ],
+        "name": "r-cran-png",
+        "packages": [],
+        "query": "png",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.1-8-1build2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "21a8594fb176fb4c865f211513f35488022b1b3ded756f090d0afb65e17bb1b5",
+        "executables": [
+          {
+            "executable": "/usr/bin/cookiecutter",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "Usage: cookiecutter [OPTIONS] [TEMPLATE] [EXTRA_CONTEXT]...\n\n  Create a project from a Cookiecutter project template (TEMPLATE).\n\n  Cookiecutter is free and open source software, developed and managed by\n  volunteers. If you would like to help out or fund the project, please get in\n  touch at https://github.com/cookiecutter/cookiecutter.\n\nOptions:\n  -V, --version                Show the version and exit.\n  --no-input                   Do not prompt for parameters and only use\n                               cookiecutter.json file content. Defaults to\n                               deleting any cached resources and redownloading\n                               them. Cannot be combined with the --replay\n                               flag.\n  -c, --checkout TEXT          branch, tag or commit to checkout after git\n                               clone\n  --directory TEXT             Directory within repo that holds\n                               cookiecutter.json file for advanced\n                               repositories with multi templates in it\n  -v, --verbose                Print debug information\n  --replay                     Do not prompt for parameters and only use\n                               information entered previously. Cannot be\n                               combined with the --no-input flag or with extra\n                               configuration passed.\n  --replay-file PATH           Use this file for replay instead of the\n                               default.\n  -f, --overwrite-if-exists    Overwrite the contents of the output directory\n                               if it already exists\n  -s, --skip-if-file-exists    Skip the files in the corresponding directories\n                               if they already exist\n  -o, --output-dir PATH        Where to output the generated project dir into\n  --config-file PATH           User configuration file\n  --default-config             Do not load a config file. Use the defaults\n                               instead\n  --debug-file PATH            File to be used as a stream for DEBUG logging\n  --accept-hooks [yes|ask|no]  Accept pre/post hooks\n  -l, --list-installed         List currently installed templates.\n  --keep-project-on-failure    Do not delete project folder on failure\n  -h, --help                   Show this message and exit."
+              }
+            ]
+          }
+        ],
+        "package": "cookiecutter",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "2.6.0-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 74.0,
+        "archive_sha256": "21a8594fb176fb4c865f211513f35488022b1b3ded756f090d0afb65e17bb1b5",
+        "binding_kind": "apt",
+        "description": "create projects from project templates",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "cookiecutter",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.6.0-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "f2480a7867ce5cc52de00fa3058779568ff87ec320d2705d744bd6424dd114c5",
+        "executables": [
+          {
+            "executable": "/usr/bin/pngphoon",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "unknown option: '?'"
+              }
+            ]
+          }
+        ],
+        "package": "pngphoon",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.3-3build2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 74.0,
+        "archive_sha256": "f2480a7867ce5cc52de00fa3058779568ff87ec320d2705d744bd6424dd114c5",
+        "binding_kind": "apt",
+        "description": "Creates a png file with the current phase of the moon",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "png"
+        ],
+        "name": "pngphoon",
+        "packages": [],
+        "query": "png",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.3-3build2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "613c5a22316489ec6a9ce5d59190293df15dd4612b55432dde04c62f7c1a0e25",
+        "executables": [
+          {
+            "executable": "/usr/bin/qrencode",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "qrencode version 4.1.1\nCopyright (C) 2006-2017 Kentaro Fukuchi\nUsage: qrencode [-o FILENAME] [OPTION]... [STRING]\nEncode input data in a QR Code and save as a PNG or EPS image.\n\n  -h, --help   display the help message. -h displays only the help of short\n               options.\n\n  -o FILENAME, --output=FILENAME\n               write image to FILENAME. If '-' is specified, the result\n               will be output to standard output. If -S is given, structured\n               symbols are written to FILENAME-01.png, FILENAME-02.png, ...\n               (suffix is removed from FILENAME, if specified)\n\n  -r FILENAME, --read-from=FILENAME\n               read input data from FILENAME.\n\n  -s NUMBER, --size=NUMBER\n               specify module size in dots (pixels). (default=3)\n\n  -l {LMQH}, --level={LMQH}\n               specify error correction level from L (lowest) to H (highest).\n               (default=L)\n\n  -v NUMBER, --symversion=NUMBER\n               specify the minimum version of the symbol. See SYMBOL VERSIONS\n               for more information. (default=auto)\n\n  -m NUMBER, --margin=NUMBER\n               specify the width of the margins. (default=4 (2 for Micro QR)))\n\n  -d NUMBER, --dpi=NUMBER\n               specify the DPI of the generated PNG. (default=72)\n\n  -t {PNG,PNG32,EPS,SVG,XPM,ANSI,ANSI256,ASCII,ASCIIi,UTF8,UTF8i,ANSIUTF8,ANSIUTF8i,ANSI256UTF8},\n  --type={PNG,PNG32,EPS,SVG,XPM,ANSI,ANSI256,ASCII,ASCIIi,UTF8,UTF8i,ANSIUTF8,ANSIUTF8i,ANSI256UTF8}\n               specify the type of the generated image. (default=PNG)\n\n  -S, --structured\n               make structured symbols. Version must be specified with '-v'.\n\n  -k, --kanji  assume that the input text contains kanji (shift-jis).\n\n  -c, --casesensitive\n               encode lower-case alphabet characters in 8-bit mode. (default)\n\n  -i, --ignorecase\n               ignore case distinctions and use only upper-case characters.\n\n  -8, --8bit   encode entire data in 8-bit mode. -k, -c and -i will be ignored.\n\n  -M, --micro  encode in a Micro QR Code.\n\n      --rle    enable run-length encoding for SVG.\n\n      --svg-path\n               use single path to draw modules for SVG.\n\n      --inline only useful for SVG output, generates an SVG without the XML tag.\n\n      --foreground=RRGGBB[AA]\n      --background=RRGGBB[AA]\n               specify foreground/background color in hexadecimal notation.\n               6-digit (RGB) or 8-digit (RGBA) form are supported.\n               Color output support available only in PNG, EPS and SVG.\n\n      --strict-version\n               disable automatic version number adjustment. If the input data is\n               too large for the specified version, the program exits with the\n               code of 1.\n\n  -V, --version\n               display the version number and copyrights of the qrencode.\n\n      --verbose\n               display verbose information to stderr.\n\n  [STRING]     input data. If it is not specified, data will be taken from\n               standard input.\n\nSYMBOL VERSIONS\n               The symbol versions of QR Code range from Version 1 to Version\n               40. Each version has a different module configuration or number\n               of modules, ranging from Version 1 (21 x 21 modules) up to\n               Version 40 (177 x 177 modules). Each higher version number\n               comprises 4 additional modules per side by default. See\n               http://www.qrcode.com/en/about/version.html for a detailed\n               version list."
+              }
+            ]
+          }
+        ],
+        "package": "qrencode",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "4.1.1-1build2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 74.0,
+        "archive_sha256": "613c5a22316489ec6a9ce5d59190293df15dd4612b55432dde04c62f7c1a0e25",
+        "binding_kind": "apt",
+        "description": "QR Code encoder into PNG image",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "png"
+        ],
+        "name": "qrencode",
+        "packages": [],
+        "query": "png",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "4.1.1-1build2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "23bb5365162dce84ddeb31c27bf62287ce802ee35639cbf72e0b8b58390f969b",
+        "executables": [],
+        "package": "elpa-find-file-in-project",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "6.2.0-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "23bb5365162dce84ddeb31c27bf62287ce802ee35639cbf72e0b8b58390f969b",
+        "binding_kind": "apt",
+        "description": "quick access to project files in Emacs",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "elpa-find-file-in-project",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "6.2.0-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "2394bf199cdaea188afb8abf78227585ded9efe3f5f6bdb0866b52913a3fe304",
+        "executables": [],
+        "package": "elpa-project",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.10.0-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "2394bf199cdaea188afb8abf78227585ded9efe3f5f6bdb0866b52913a3fe304",
+        "binding_kind": "apt",
+        "description": "Emacs library for operations on the current project",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "project"
+        ],
+        "name": "elpa-project",
+        "packages": [],
+        "query": "project",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.10.0-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "a51637e49ffc35c41d7b153094e9b3e9459a083a594da6583d7ddf47c48cf535",
+        "executables": [],
+        "package": "famfamfam-flag-png",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.1-3.2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "a51637e49ffc35c41d7b153094e9b3e9459a083a594da6583d7ddf47c48cf535",
+        "binding_kind": "apt",
+        "description": "Free collection of countries' flags",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "png"
+        ],
+        "name": "famfamfam-flag-png",
+        "packages": [],
+        "query": "png",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.1-3.2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "39b9766a2fcacd2105318734478b5536172b740c50d9743a21e8869e62662f24",
+        "executables": [],
+        "package": "gir1.2-json-1.0",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.8.0-2build2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "39b9766a2fcacd2105318734478b5536172b740c50d9743a21e8869e62662f24",
+        "binding_kind": "apt",
+        "description": "GLib JSON manipulation library (introspection data)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "gir1.2-json-1.0",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.8.0-2build2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "95581ecd747961b82573f89cfedf6b4251477e1b4be80468559e99e25380da71",
+        "executables": [
+          {
+            "executable": "/usr/bin/gjh_asl_json",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "usage: gjh_asl_json [options] stub [-AMPL] [<assignment> ...]\n\nOptions:\n\t--  {end of options}\n\t-=  {show name= possibilities}\n\t-?  {show usage}\n\t-bf {read boundsfile f}\n\t-e  {suppress echoing of assignments}\n\t-of {write .sol file to file f}\n\t-s  {write .sol file (without -AMPL)}\n\t-v  {just show version}"
+              }
+            ]
+          }
+        ],
+        "package": "gjh-asl-json",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.0+git20210628.867c5da-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "95581ecd747961b82573f89cfedf6b4251477e1b4be80468559e99e25380da71",
+        "binding_kind": "apt",
+        "description": "gjh solver, like solver from AMPL Library",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "gjh-asl-json",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.0+git20210628.867c5da-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "a8d38ae2198798e4ef041e3b8bcb71b8f381cd40766d0e6b9607c92015ee5af0",
+        "executables": [
+          {
+            "executable": "/usr/bin/gpgme-json",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "gpgme-json 1.18.0\nCopyright (C) 2018 g10 Code GmbH\nLicense GNU LGPL-2.1-or-later <https://gnu.org/licenses/>\nThis is free software: you are free to change and redistribute it.\nThere is NO WARRANTY, to the extent permitted by law.\n\nNative messaging based GPGME operations.\n\nOptions:\n -i, --interactive   Interactive REPL\n -s, --single        Single request mode\n     --lib-version   Show library version\n     --debug         Flyswatter\n\nPlease report bugs to <https://bugs.gnupg.org>.\n\nUsage: gpgme-json [OPTIONS]"
+              }
+            ]
+          }
+        ],
+        "package": "gpgme-json",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.18.0-4.1ubuntu4"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "a8d38ae2198798e4ef041e3b8bcb71b8f381cd40766d0e6b9607c92015ee5af0",
+        "binding_kind": "apt",
+        "description": "json interface to the GPGME GnuPG encryption library",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "gpgme-json",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.18.0-4.1ubuntu4",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "c7757245e712d960048c41d7baa109f48e7db8bef0720be9775ce833fa46e543",
+        "executables": [],
+        "package": "guile-json",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "4.7.3-2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 64.0,
+        "archive_sha256": "c7757245e712d960048c41d7baa109f48e7db8bef0720be9775ce833fa46e543",
+        "binding_kind": "apt",
+        "description": "JSON module for Guile",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "guile-json",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "4.7.3-2",
+        "zero_cost_eligible": true
+      }
+    }
+  ],
+  "goal": "Enter PROJECT BRAIN into the customer name field, choose Medium pizza size, check the Bacon topping, submit the form, and save a full-page screenshot to canonical/astra_runtime/tmp/HTTPBIN_FORM_SUBMITTED.png and a result JSON to canonical/astra_runtime/tmp/HTTPBIN_FORM_SUBMITTED.json",
+  "mission_id": "ASTRA-RUNTIME-BROWSER-INTERACTION-001",
+  "role_conditioned_discovery": [
+    {
+      "binding_performed": false,
+      "candidate_count": 24,
+      "candidates": [
+        {
+          "archive_sha256": "a51637e49ffc35c41d7b153094e9b3e9459a083a594da6583d7ddf47c48cf535",
+          "binding_kind": "apt",
+          "description": "Free collection of countries' flags",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "famfamfam-flag-png",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.1-3.2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "bb7d5f37ebb091bde0b96bdb0da4c525d4b7be8d761b900980b9e716c70e84df",
+          "binding_kind": "apt",
+          "description": "ISO country flags in PNG format (320x240)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "iso-flags-png-320x240",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.0.2-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "6cc284be9f51e2f973a1cc56b57e3be817840983a33333270770022f88acebca",
+          "binding_kind": "apt",
+          "description": "clip art in PNG format",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "openclipart-png",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1:0.18+dfsg-19ubuntu2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "fd87d4e2cd86ea63d4f548c7203763bcc5139444a335e038d5942e235d8bfebc",
+          "binding_kind": "apt",
+          "description": "PNG: The Definitive Guide",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "png-definitive-guide",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "20060430-4",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "9a43a8ba7c2c9693ae985c3a88b4f43d47828fb53d0fc25c1656477e4463b0bd",
+          "binding_kind": "apt",
+          "description": "GNU R package to read and write PNG images",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "r-cran-png",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.1-8-1build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "ad7f808a4478ad7b8ecdbba98d3b47a6da4cdea4044a94f10e8cb5ae3a37cc5d",
+          "binding_kind": "apt",
+          "description": "ANSI and ASCII art to PNG converter",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "ansilove",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "4.2.0-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "0cbbd1d73bd29e5476a1332f2705275d1425742598ecdeba231082f941c9c703",
+          "binding_kind": "apt",
+          "description": "assemble APNG animation from PNG/TGA image sequence",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "apngasm",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.91-5build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "a3b6b684f6b071f49ea4782544be00d2f60919e0d0713ec03655c69ec6b0b63c",
+          "binding_kind": "apt",
+          "description": "deconstruct APNG file into a sequence of PNG frames",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "apngdis",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.9-6build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "9b74bb20afa41c42c52027aa9240cb2a0d9075c0c8ecf536f9ae669df34a6036",
+          "binding_kind": "apt",
+          "description": "SVG to PDF/PS/PNG converter based on Cairo",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "cairosvg",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.7.1-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "1983103def3dec971da6c57b19ec54f0c2fe646c18c532573b067090c7781a12",
+          "binding_kind": "apt",
+          "description": "convert DVI files to PNG graphics",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "dvipng",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.15-1.1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "8a9234072c70a4dfc264c197ad261f169839c58641040c47069142279588f823",
+          "binding_kind": "apt",
+          "description": "FITS to PNG converter",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "fitspng",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.0-2build3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "e5fa2a359728ad905747730928c2ca801653deab361318a670ca7888f7ecfa38",
+          "binding_kind": "apt",
+          "description": "converts jpg and png images to ascii",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "jp2a",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.1.1-2ubuntu2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "826b9be722f02eaa983e6d0f6c31ee12cf7cf53ef963f95fb963e704c5954027",
+          "binding_kind": "apt",
+          "description": "advanced PNG (Portable Network Graphics) optimizer",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "optipng",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.7.8+ds-1build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "15dbb7c871313ba1a4d691a9d0b3a27cbb9a773d1a85b78cea4100dc85487d59",
+          "binding_kind": "apt",
+          "description": "Converts PNG images into three dimensional representations.",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "png23d",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.10-1.3build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "0cd18fb658c39a154bc8fb9566f06f1cf8aafd6f1ef08639e55d4ded85ffbe97",
+          "binding_kind": "apt",
+          "description": "transforms a PNG image to a web page",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "png2html",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.1-9",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "4c678e1dba13f61ff0d73d20fb622c810e7853bee6981b51eede8dee9bed7d2a",
+          "binding_kind": "apt",
+          "description": "CLI utility for converting small PNG images to SVG Tiny 1.2",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "png2svg",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.5.4-1ubuntu0.3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "9cd9d382a3c6c27c482b0997401391273e9f2716c6c29f038ce841c37fbc5e43",
+          "binding_kind": "apt",
+          "description": "print info and check PNG, JNG and MNG files",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "pngcheck",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "3.0.3-3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "78807cc9628680bf5a668a722b388a1a13e72eaf88c9a9fd88ed88e4cc9506c3",
+          "binding_kind": "apt",
+          "description": "optimizes PNG (Portable Network Graphics) files",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "pngcrush",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.8.13-1build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "101114bdfaa1b2acd9178465a515f6ffbc214a71a75ae191d28047bbf57215a0",
+          "binding_kind": "apt",
+          "description": "Display metadata information from PNG images",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "pngmeta",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.11-10build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "30a840c7336368e327e7b9d8f3f7d506cfe805aa81cc600aa9369a66165430cb",
+          "binding_kind": "apt",
+          "description": "tool for optimizing PNG (Portable Network Graphics) images",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "pngnq",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.1+ds-3build1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "f2480a7867ce5cc52de00fa3058779568ff87ec320d2705d744bd6424dd114c5",
+          "binding_kind": "apt",
+          "description": "Creates a png file with the current phase of the moon",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "pngphoon",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.3-3build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "924fe4b18c86e9314b5667ea4945916f320e8c785f14a5e99edd2d370441164c",
+          "binding_kind": "apt",
+          "description": "PNG (Portable Network Graphics) image optimising utility",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "pngquant",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.18.0-1build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "6bf527d83d97fb1dfdc72f216f6019da8c6e06827ffbcfd1af40a6be36173607",
+          "binding_kind": "apt",
+          "description": "series of tools for PNG (Portable Network Graphics) images",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "pngtools",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.5~git20220314.1ccca3a-2ubuntu3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "613c5a22316489ec6a9ce5d59190293df15dd4612b55432dde04c62f7c1a0e25",
+          "binding_kind": "apt",
+          "description": "QR Code encoder into PNG image",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "png"
+          ],
+          "name": "qrencode",
+          "packages": [],
+          "query": "png",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "4.1.1-1build2",
+          "zero_cost_eligible": true
+        }
+      ],
+      "effect": "png",
+      "errors": [],
+      "queries": [
+        "png"
+      ],
+      "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+      "source": "APT_CATALOG",
+      "source_url": null
+    },
+    {
+      "binding_performed": false,
+      "candidate_count": 24,
+      "candidates": [
+        {
+          "archive_sha256": "39b9766a2fcacd2105318734478b5536172b740c50d9743a21e8869e62662f24",
+          "binding_kind": "apt",
+          "description": "GLib JSON manipulation library (introspection data)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "gir1.2-json-1.0",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.8.0-2build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "95581ecd747961b82573f89cfedf6b4251477e1b4be80468559e99e25380da71",
+          "binding_kind": "apt",
+          "description": "gjh solver, like solver from AMPL Library",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "gjh-asl-json",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.0+git20210628.867c5da-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "a8d38ae2198798e4ef041e3b8bcb71b8f381cd40766d0e6b9607c92015ee5af0",
+          "binding_kind": "apt",
+          "description": "json interface to the GPGME GnuPG encryption library",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "gpgme-json",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.18.0-4.1ubuntu4",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c7757245e712d960048c41d7baa109f48e7db8bef0720be9775ce833fa46e543",
+          "binding_kind": "apt",
+          "description": "JSON module for Guile",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "guile-json",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "4.7.3-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "ae249dfbd4c2d70c201b145310309462f7a3d32bb79c7c4daed2cdf22465090d",
+          "binding_kind": "apt",
+          "description": "INDI driver for the WeeWX Weather Station",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "indi-weewx-json",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.0-1build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "b77a447f3c6a1eeb1486606865f1bf20ab504b6d8579a150e27b7652406d564c",
+          "binding_kind": "apt",
+          "description": "GLib JSON manipulation library (tools)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "json-glib-tools",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.8.0-2build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "0cc9ca2ac64ab3ed3287b234310020581ddd914a72664a744335354db0434284",
+          "binding_kind": "apt",
+          "description": "Language agnostic test suite for the JSON Schema specifications",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "json-schema-test-suite",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "2.0.0-1.1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "147e274a8ccc4a7b34433ef248ef0a417530e39bddc6a4a8bae4e8fca1356e23",
+          "binding_kind": "apt",
+          "description": "Json parser and Json-RPC modules for the Kamailio SIP server",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "kamailio-json-modules",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "5.7.4-1build7",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "afd7b8168089f68003994131e8e89465566e614db8c672fd72fe83e5f9a9e3ce",
+          "binding_kind": "apt",
+          "description": "JSON decoder/encoder for Lua",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "lua-json",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.3.4-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c434726fba31a641aa23899c221faaa90d4ce79baa0a2849e0fea2844ee0c6ac",
+          "binding_kind": "apt",
+          "description": "Utility to verify Puppet metadata.json files",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "metadata-json-lint",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "3.0.0-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c6e919c50b86c29ea876a876e73091beda6b78c574327e98d2ccca0d83bce183",
+          "binding_kind": "apt",
+          "description": "compiled XML documentation for Json.NET",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "monodoc-newtonsoft-json-manual",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.0.8+dfsg-1.2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "667178c7efe0fed05c931721e008f15a39c6ad57aa7f9a64127e2d8b22c169cf",
+          "binding_kind": "apt",
+          "description": "JSON language support for the CodeMirror code editor",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-codemirror-lang-json",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.0.1~6.22.3+~cs119.52.50-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "88b813b1e2706d4777cde72d3a4eeeba576efc1f4e22fb93eb17f7df2551b511",
+          "binding_kind": "apt",
+          "description": "Node.js implementation of JSON-Patch",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-fast-json-patch",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "3.1.1+ds-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "214ade9cebcca2920caeba9a77f9cbeafabc1be9eb2bbfec54a35f6c778155c6",
+          "binding_kind": "apt",
+          "description": "Deterministic JSON.stringify()",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-fast-json-stable-stringify",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "2.1.0-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "75ce76531996c74cb52addaab0df1abc589afd9b9338021ee898ae06b2e057e5",
+          "binding_kind": "apt",
+          "description": "JSON functions that can convert buffers.",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-buffer",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "3.0.1+~3.0.0-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "895924cd995281ac0b8696b85e657ae5ecda76ab89cd72cd6edf4a03dec769d8",
+          "binding_kind": "apt",
+          "description": "json loader for webpack",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-loader",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.5.7-5",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "d1969a32dfae90ed791a636a71837c4c728219c6e56f8a670ea70a3b287e84ed",
+          "binding_kind": "apt",
+          "description": "Utility to localize a json object",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-localizer",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.0.3-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "489d3493f12c0c56f6420f862212c646b1af02194293d4a5a6d50288cd6c2d3b",
+          "binding_kind": "apt",
+          "description": "JSON.parse() with context information on error",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-parse-better-errors",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.0.2+~cs3.3.1-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "949b5b9328f88b3068c6c70aa56e91c584a62fedde75347680e1d79808639b66",
+          "binding_kind": "apt",
+          "description": "drop-in replacement for JSON.parse that uses `jju`",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-parse-helpfulerror",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.0.3-4",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "21fb4a3552acaed37dcaccb4fb1b7df3ad222f9204b2b3c4cbbf98215df7ae40",
+          "binding_kind": "apt",
+          "description": "JSON Schema validation and specifications",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-schema",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.4.0+~7.0.11-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "634d66e0a3b8a54b2444056129dd38d79928fe985357fdf8ea743c6a22f85662",
+          "binding_kind": "apt",
+          "description": "Node.js module to merge schemas combined using allOf",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-schema-merge-allof",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.8.1+~cs9.16.23-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c040f9d26ec19b7f2fb7d18adced2006c0094fd13158b0d74091173f5e4778e1",
+          "binding_kind": "apt",
+          "description": "Json schema traversal package",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-schema-traverse",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.0.0-3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "901ca2a54760a0a33b45e698e6f057bd2786881033fbfbb852f32c4482729603",
+          "binding_kind": "apt",
+          "description": "deterministic JSON.stringify()",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-stable-stringify",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "1.0.2+repack1+~cs1.0.34-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c620a27381ee77cfaf27a3b018bbe090e8b65278ea9eea8630da2fde2bb128e2",
+          "binding_kind": "apt",
+          "description": "JSON.stringify with circular references module for Node.js",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "json"
+          ],
+          "name": "node-json-stringify-safe",
+          "packages": [],
+          "query": "json",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "5.0.1+repack-6",
+          "zero_cost_eligible": true
+        }
+      ],
+      "effect": "json",
+      "errors": [],
+      "queries": [
+        "json"
+      ],
+      "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+      "source": "APT_CATALOG",
+      "source_url": null
+    },
+    {
+      "binding_performed": false,
+      "candidate_count": 24,
+      "candidates": [
+        {
+          "archive_sha256": "23bb5365162dce84ddeb31c27bf62287ce802ee35639cbf72e0b8b58390f969b",
+          "binding_kind": "apt",
+          "description": "quick access to project files in Emacs",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "elpa-find-file-in-project",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.2.0-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "2394bf199cdaea188afb8abf78227585ded9efe3f5f6bdb0866b52913a3fe304",
+          "binding_kind": "apt",
+          "description": "Emacs library for operations on the current project",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "elpa-project",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.10.0-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "726829fd2dd0d807c997c744c509d9c80df41d63548a6c62ffc35cbd5eaffebf",
+          "binding_kind": "apt",
+          "description": "DVB demuxing tool",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "project-x",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "0.90.4dfsg-0ubuntu6",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "cf0d32289b48c120c025ba02cca01bfa6d8308535a619911a07c5ebba105762b",
+          "binding_kind": "apt",
+          "description": "Tryton application platform - project module",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "tryton-modules-project",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.0.0-3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "76f9c558651e2307f2e2bfa8b4c687d1b175aa7a2b4d2be881ac715168362949",
+          "binding_kind": "apt",
+          "description": "Tryton application platform - project invoice module",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "tryton-modules-project-invoice",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.0.4-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "ba5a155a80ad80a46b6249ba6020c3258f7425e67ba0db291186bb58276d924e",
+          "binding_kind": "apt",
+          "description": "Tryton application platform - project plan module",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "tryton-modules-project-plan",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.0.0-3",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "70a3e8a200ce4164b78f249a4d1e58a5f10d0e62c12e506c386c34054941555c",
+          "binding_kind": "apt",
+          "description": "Tryton application platform - project revenue module",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "tryton-modules-project-revenue",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 32,
+          "version": "6.0.1-2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "0dda010275924afb48c3a2184d49267f48e9a4b0afa1c6aec18280357b50311c",
+          "binding_kind": "apt",
+          "description": "dark GTK+ theme from the Shimmer Project",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "blackbird-gtk-theme",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.4+20171213-4",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "783ab0c2dd152dda9bbd1a8cd798af4ef7278e9893b79830133b70b54f0df936",
+          "binding_kind": "apt",
+          "description": "blue GTK+ theme from the Shimmer Project",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "bluebird-gtk-theme",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.3-4",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "17a043e720621347b163161fd21d85860d897bf10d8992c3e6193a0dd591d442",
+          "binding_kind": "apt",
+          "description": "metapackage for virtualbox-savvy projects",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "boinc-virtualbox",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "7.24.1+dfsg-4build1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "384cb5cf9629d9951604d87d99aad0d26c580118e78531c293d5543053e8d82b",
+          "binding_kind": "apt",
+          "description": "toolset for the Buildstream project",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "buildstream",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1.6.9-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "470fc3014a27f4b131d97b87da4a9911f44c5276b160535c3612b4f6d2a32141",
+          "binding_kind": "apt",
+          "description": "integrated project management and planning tool",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "calligraplan",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "1:3.3.0-2build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "94ce7fc8f352fe8ffc5e1f53f7d288eccd764cc0e66093d2b41d9eadc8edc47d",
+          "binding_kind": "apt",
+          "description": "print dependency tree of a Rust project using Cargo",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "cargo-debstatus",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.5.2-2build1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "add3c10e495fafdb25c296a7ee75b205450e181dc546961f3d0d20c15f6ecb86",
+          "binding_kind": "apt",
+          "description": "CMake utility modules needed for building Vala Panel (and related projects)",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "cmake-vala",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "3-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "21a8594fb176fb4c865f211513f35488022b1b3ded756f090d0afb65e17bb1b5",
+          "binding_kind": "apt",
+          "description": "create projects from project templates",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "cookiecutter",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.6.0-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "aac501a133606f3cdaf69ba350dd138929a0dffd717fc662e56add5200a4ae7d",
+          "binding_kind": "apt",
+          "description": "Tool for integrating rust with an existing CMake project",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "corrosion",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.4.7-1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "57829e6f3b315a076ffae8befbe13f54d702cc144b313d0d9fd966f4f3d73c8b",
+          "binding_kind": "apt",
+          "description": "super-parallel Python port of the C-Reduce project",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "cvise",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.10.0-1ubuntu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "3169457b8dd7735b4f54f762dbebd468d50fb51a22e6df601ad5ef518e7c4e9f",
+          "binding_kind": "apt",
+          "description": "Short History of the Debian Project",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "debian-history",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "2.28",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "3000376a2faa1061cf02ef6d790ad6e04a9b58e67de278afd491f221ee780c66",
+          "binding_kind": "apt",
+          "description": "Web-based timeline of the Debian Project",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "debian-timeline",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "46",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c77b3c9624737bb2f47d6f502eb5ebdf27e10cf0c9fbe769d61471a7cb2a23ba",
+          "binding_kind": "apt",
+          "description": "Debhelper programs for CMake projects",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "dh-cmake",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "0.6.2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "c75956b49a07d5b162b518e9177a3969ea598b6a4280e4e5347f06b0180eebcb",
+          "binding_kind": "apt",
+          "description": "Collection of graphics tablet drivers by DIGImend project",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "digimend-dkms",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "12-1ubuntu0.2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "d820842b51c748fb090bfbe6bc29d1710831df61f527e668b3d490145efeabbe",
+          "binding_kind": "apt",
+          "description": "Debian Project documentation and other documents",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "doc-debian",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "11.3+nmu1",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "df8dec627b0a4267d02fd457e4bbfbea929ceef8944b6ef18d23d65f08e624e9",
+          "binding_kind": "apt",
+          "description": "TITAN TTCN-3 toolset from the Eclipse project",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "eclipse-titan",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "8.2.0-1build2",
+          "zero_cost_eligible": true
+        },
+        {
+          "archive_sha256": "1f315c07a09df0c7eb9543445377e856e7945e80497734ee95c717dea610e5c1",
+          "binding_kind": "apt",
+          "description": "The Ubuntu Documentation Project - Edubuntu Documentation",
+          "discovery_source": "APT_CATALOG",
+          "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+          "integration_friction": 0,
+          "matched_terms": [
+            "project"
+          ],
+          "name": "edubuntu-docs",
+          "packages": [],
+          "query": "project",
+          "remotes": [],
+          "required_environment_count": 0,
+          "required_secret_count": 0,
+          "score": 18,
+          "version": "11.03.3",
+          "zero_cost_eligible": true
+        }
+      ],
+      "effect": "enter project",
+      "errors": [],
+      "queries": [
+        "enter",
+        "project"
+      ],
+      "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+      "source": "APT_CATALOG",
+      "source_url": null
+    }
+  ],
+  "schema": "PROJECT_BRAIN_AUTO_APT_CLI_ACQUISITION_EVIDENCE_V1",
+  "status": "NO_COMPATIBLE_CONTRACT"
+}
