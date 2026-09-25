@@ -3,6 +3,7 @@ import importlib.util
 import json
 import pathlib
 import sys
+import subprocess
 import unittest
 
 CANONICAL=pathlib.Path(__file__).resolve().parents[1]
@@ -77,6 +78,15 @@ class GoalCompilerTests(unittest.TestCase):
         ])
         ref=actions[4]["args"]["text"]["$result"]
         self.assertEqual(ref,{"cycle":3,"field":"text"})
+        jq_action=actions[1]
+        proc=subprocess.run(
+            ["jq","-r",jq_action["args"]["filter"],
+             str(ROOT/jq_action["args"]["input_path"])],
+            text=True,capture_output=True,timeout=20,
+        )
+        self.assertEqual(proc.returncode,0,proc.stderr)
+        self.assertIn("auto.apt.zint",proc.stdout)
+        self.assertIn("| id |",proc.stdout)
 
     def test_plain_qr_goal_selects_verified_qr_and_binds_arguments(self):
         goal="Generate a QR code image for the text PROJECT BRAIN and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_QR.png."
