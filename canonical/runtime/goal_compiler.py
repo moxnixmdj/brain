@@ -3054,6 +3054,9 @@ def compile_goal(goal, registry, root):
     if browser_interaction is not None:
         return _validate_compiled_clause_coverage(browser_interaction)
     clauses=decompose_goal(goal)
+    bounded_loop=_compile_bounded_loop_goal(goal,clauses,registry,root)
+    if bounded_loop is not None:
+        return _validate_compiled_clause_coverage(bounded_loop)
     multi_source_join=_compile_multi_source_join_goal(goal,clauses,registry,root)
     if multi_source_join is not None:
         return _validate_compiled_clause_coverage(multi_source_join)
