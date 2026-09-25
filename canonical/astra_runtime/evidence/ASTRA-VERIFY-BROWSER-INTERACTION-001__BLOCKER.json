@@ -1,0 +1,9 @@
+{
+  "adapter": "goal",
+  "error": "RuntimeError:BROWSER_ACTION_FAILED:1:{\"action\": {\"target\": \"size\", \"type\": \"select_option\", \"value\": \"Medium\"}, \"error\": \"SELECT_TARGET_NOT_FOUND\", \"ok\": false}",
+  "mission_id": "ASTRA-VERIFY-BROWSER-INTERACTION-001",
+  "observed_at_utc": "2026-09-25T02:47:14.928307+00:00",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "execute-browser-interaction",
+  "step_index": 0
+}

@@ -1,0 +1,21 @@
+{
+  "blocker": {
+    "adapter": "goal",
+    "error": "RuntimeError:BROWSER_ACTION_FAILED:1:{\"action\": {\"target\": \"size\", \"type\": \"select_option\", \"value\": \"Medium\"}, \"error\": \"SELECT_TARGET_NOT_FOUND\", \"ok\": false}",
+    "mission_id": "ASTRA-VERIFY-BROWSER-INTERACTION-001",
+    "observed_at_utc": "2026-09-25T02:47:14.928307+00:00",
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "execute-browser-interaction",
+    "step_index": 0
+  },
+  "created_at_utc": "2026-09-25T02:47:12.688763+00:00",
+  "history": [],
+  "mission_id": "ASTRA-VERIFY-BROWSER-INTERACTION-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_VERIFY_BROWSER_INTERACTION_001.json",
+  "mission_sha256": "9f36f80f6b1deb6b7e7a4ddb3b3bd4e77189cfca387f35f93c9981e6b2e22c37",
+  "next_step": 0,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-25T02:47:14.928574+00:00"
+}
