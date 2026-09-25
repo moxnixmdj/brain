@@ -168,6 +168,7 @@
       ],
       "imports": [
         "argparse",
+        "ast",
         "datetime",
         "gzip",
         "hashlib",
@@ -185,7 +186,7 @@
         "urllib"
       ],
       "path": "canonical/runtime/astra_runtime.py",
-      "sha256": "da35fb63c9c367e3777e535ba1a7349381cf6e14651814df26b061f9d4ea13e3"
+      "sha256": "53438127e1d0aecf2f2b787d4aa83b613e7c2d912bf54fc63b588945f08c4b0c"
     },
     {
       "classes": [
