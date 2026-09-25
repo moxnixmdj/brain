@@ -33,9 +33,7 @@ def _status_value(goal,data):
 
 def _table_name(goal):
     m=re.search(r"\btable\s+named\s+([A-Za-z_][A-Za-z0-9_]*)\b",str(goal or ""),flags=re.I)
-    if not m:
-        raise RuntimeError("SQLITE_TABLE_NAME_UNRESOLVED")
-    return m.group(1)
+    return m.group(1) if m else None
 
 def _flatten_paths(record,path=()):
     out={}
@@ -82,6 +80,16 @@ def run(args,root):
         raise RuntimeError("SQLITE_STATUS_COLLECTION_NOT_FOUND")
     _,records=found
     table=_table_name(goal)
+    if table is None:
+        tables=_run_json(
+            db,
+            "SELECT name FROM sqlite_master "
+            "WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name"
+        )
+        names=[str(x.get("name") or "") for x in tables if str(x.get("name") or "")]
+        if len(names)!=1:
+            raise RuntimeError("SQLITE_TABLE_NAME_AMBIGUOUS:"+json.dumps(names,sort_keys=True))
+        table=names[0]
     if not IDENT.fullmatch(table):
         raise RuntimeError("SQLITE_TABLE_NAME_INVALID")
 
