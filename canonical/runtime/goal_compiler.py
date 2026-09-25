@@ -3111,6 +3111,7 @@ def _compile_compound_goal(goal, clauses, registry, root):
         if (
             re.match(r"^using\s+both\s+live\s+results\b",lower)
             or re.match(r"^from\s+(?:these\s+two|both)\s+live\s+datasets\b",lower)
+            or re.match(r"^take\s+(?:those\s+two|both)\s+observed\s+datasets\b",lower)
         ):
             raise GoalCompilationFailure(
                 "GOAL_CAUSAL_COMPOSITION_UNSUPPORTED",
