@@ -355,6 +355,77 @@ def _compile_json_markdown_table(subgoal, context_paths, registry, root):
     }
 
 
+def _compile_json_status_manifest(subgoal, context_paths, registry, root):
+    entry=(registry or {}).get("json.query.jq")
+    if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
+        return None
+    lower=subgoal.lower()
+    if "manifest" not in lower and "one record" not in lower:
+        return None
+    out_paths=[raw for raw,_ in _repo_paths(subgoal,root) if pathlib.Path(raw).suffix.lower()==".json"]
+    if len(out_paths)!=1:
+        return None
+    json_paths=[p for p in context_paths if pathlib.Path(p).suffix.lower()==".json" and (pathlib.Path(root)/p).is_file()]
+    if not json_paths:
+        return None
+
+    input_path=json_paths[-1]
+    data=json.loads((pathlib.Path(root)/input_path).read_text(encoding="utf-8"))
+    semantic=re.sub(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+"," ",subgoal)
+    constants=re.findall(r"\b[A-Z][A-Z0-9_]{3,}\b",semantic)
+    wanted=None
+    collection=None
+    for token in constants:
+        found=_find_status_collection(data,token)
+        if found is not None:
+            wanted=token
+            collection=found
+            break
+    if wanted is None or collection is None:
+        return None
+
+    base=_jq_path(collection)
+    wanted_json=json.dumps(wanted)
+    schema_json=json.dumps("PROJECT_BRAIN_STATUS_MANIFEST_V1")
+    filt=(
+      f'{base} | to_entries '
+      f'| map(select(.value | any(. == {wanted_json})) '
+      '| {'
+      'capability_id:.key, '
+      'verification_mission_id:(.value.verification.mission_id // null), '
+      'verification_paths:([.value.verification | .. | strings '
+      '| select(startswith("canonical/"))] | unique), '
+      'source:(.value.source // {})'
+      '}) '
+      f'| {{schema:{schema_json},status_value:{wanted_json},records:.}}'
+    )
+    action={
+      "type":"invoke_capability",
+      "args":{
+        "capability_id":"json.query.jq",
+        "input_path":input_path,
+        "filter":filt,
+        "output_path":out_paths[0],
+        "raw_output":False,
+        "require_nonempty":True,
+        "timeout_s":60,
+      },
+      "expect":{"type":"field_equals","field":"output_verified","value":True},
+    }
+    return {
+      "action":action,
+      "output_path":out_paths[0],
+      "evidence":{
+        "input_path":input_path,
+        "output_path":out_paths[0],
+        "status_value":wanted,
+        "collection_path":list(collection),
+        "capability_id":"json.query.jq",
+        "manifest_schema":"PROJECT_BRAIN_STATUS_MANIFEST_V1",
+      }
+    }
+
+
 def _find_record_collection(data, prefix=()):
     if isinstance(data,dict):
         if data and all(isinstance(v,dict) for v in data.values()):
@@ -455,6 +526,17 @@ def _compile_compound_goal(goal, clauses, registry, root):
                 "index":index,"subgoal":clause,
                 "mode":"VERIFIED_STRUCTURED_TRANSFORM",
                 **structured["evidence"],
+            })
+            continue
+
+        manifest=_compile_json_status_manifest(clause,context_paths,registry,root)
+        if manifest is not None:
+            actions.append(manifest["action"])
+            context_paths.append(manifest["output_path"])
+            compiled_parts.append({
+                "index":index,"subgoal":clause,
+                "mode":"VERIFIED_STRUCTURED_MANIFEST",
+                **manifest["evidence"],
             })
             continue
         try:
