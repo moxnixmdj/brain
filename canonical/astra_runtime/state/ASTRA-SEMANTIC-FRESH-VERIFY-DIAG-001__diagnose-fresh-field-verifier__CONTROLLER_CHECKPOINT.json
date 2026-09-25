@@ -1,0 +1,73 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "plan": {
+        "args": {
+          "browser_result_path": "canonical/astra_runtime/tmp/AUTHORITY_SOURCE_63A3628DA34E_SOURCE_RENDER.json",
+          "extracted_path": "canonical/astra_runtime/tmp/JIT_PEP703_METADATA.json",
+          "fields": [
+            {
+              "label": "Status",
+              "output_field": "status"
+            },
+            {
+              "label": "Python-Version",
+              "output_field": "python_version"
+            }
+          ],
+          "max_bytes": 2000000,
+          "timeout_s": 20
+        },
+        "type": "assert_labeled_fields_against_fresh_source"
+      },
+      "result": {
+        "failures": [
+          {
+            "error": "VALUE_MISMATCH",
+            "expected": "Final",
+            "field": "status",
+            "observed": ":"
+          },
+          {
+            "error": "VALUE_MISMATCH",
+            "expected": "3.13",
+            "field": "python_version",
+            "observed": ":"
+          }
+        ],
+        "fresh_url": "https://peps.python.org/pep-0703/",
+        "observed": {
+          "python_version": ":",
+          "status": ":"
+        },
+        "source_sha256": "cc906017094af5fef81e45369ae4a62bcad867a9d4e627e863202f8550835f42",
+        "type": "assert_labeled_fields_against_fresh_source",
+        "verified": false
+      }
+    },
+    {
+      "cycle": 1,
+      "plan": {
+        "args": {
+          "summary": "SEMANTIC_FRESH_VERIFY_DIAG_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "SEMANTIC_FRESH_VERIFY_DIAG_COMPLETE",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-09-25T21:36:08.631171+00:00",
+  "mission_id": "ASTRA-SEMANTIC-FRESH-VERIFY-DIAG-001",
+  "next_action_index": 2,
+  "plan_sha256": "e307816c558f254cd88718e6ae06956c27b071ef0c46fde9761b25767a2999ad",
+  "resume_count": 0,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "diagnose-fresh-field-verifier",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-09-25T21:36:09.765501+00:00"
+}

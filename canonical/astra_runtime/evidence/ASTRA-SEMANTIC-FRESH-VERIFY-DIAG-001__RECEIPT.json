@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T21:36:09.766623+00:00",
+  "mission_id": "ASTRA-SEMANTIC-FRESH-VERIFY-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_SEMANTIC_FRESH_VERIFY_DIAG_001.json",
+  "mission_sha256": "2f2e4ab38550f2b7aa60848cd2509cae13832bc9af3e6cf17a87760077727d36",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "e714e1a2b27abb2f56ac18d4eb9331d9e75a431ce67cfb5b7408af77c02f2685",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
