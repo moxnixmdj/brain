@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse, ast, gzip, hashlib, importlib.util, json, os, pathlib, re, shlex, shutil, subprocess, sys, tempfile, time, urllib.parse, urllib.request
 import importlib.metadata
+import npm_package_utils
 from datetime import datetime, timezone
 
 ROOT=pathlib.Path(__file__).resolve().parents[2]
@@ -284,6 +285,65 @@ def _ensure_pypi_dependency(source):
     }
 
 
+def _ensure_npm_dependency(source):
+    package=str(source.get("package") or "").strip()
+    version=str(source.get("version") or "").strip()
+    metadata_url=str(source.get("metadata_url") or "").strip()
+    tarball_url=str(source.get("tarball_url") or "").strip()
+    integrity=str(source.get("integrity") or "").strip()
+    if not all((package,version,metadata_url,tarball_url,integrity)):
+        raise Blocker("BOUND_NPM_SOURCE_INCOMPLETE")
+    if int(source.get("dependency_count") or 0)!=0:
+        raise Blocker("BOUND_NPM_DEPENDENCY_CLOSURE_UNSUPPORTED")
+    if not shutil.which("node"):
+        raise Blocker("BOUND_NPM_NODE_RUNTIME_MISSING")
+    try:
+        fetched=npm_package_utils.fetch_verified_tarball(
+            package,version,tarball_url,integrity,timeout_s=30,max_bytes=30_000_000
+        )
+    except Exception as exc:
+        raise Blocker("BOUND_NPM_TARBALL_VERIFICATION_FAILED:"+type(exc).__name__+":"+str(exc)) from exc
+    if str(fetched.get("metadata_url") or "")!=metadata_url:
+        raise Blocker("BOUND_NPM_METADATA_URL_MISMATCH")
+    expected_digest=str(source.get("integrity_digest_hex") or "").lower()
+    if expected_digest and str(fetched.get("digest_hex") or "").lower()!=expected_digest:
+        raise Blocker("BOUND_NPM_INTEGRITY_DIGEST_MISMATCH")
+    cache=ROOT/"canonical"/"astra_runtime"/"tmp"/"npm_bound"/npm_package_utils.cache_key(package,version,integrity)
+    package_root=cache/"package"
+    marker=cache/"BOUND_NPM_PACKAGE.json"
+    expected_marker={
+      "package":package,"version":version,"integrity":integrity,
+      "digest_hex":fetched.get("digest_hex"),"algorithm":fetched.get("algorithm"),
+    }
+    if marker.is_file() and package_root.is_dir():
+        try:
+            observed=json.loads(marker.read_text(encoding="utf-8"))
+        except Exception:
+            observed=None
+        if observed==expected_marker and (package_root/"package.json").is_file():
+            return {
+              "status":"ALREADY_MATERIALIZED","package":package,"version":version,
+              "package_root":str(package_root),"integrity":integrity,
+              "digest_hex":fetched.get("digest_hex"),
+            }
+    if cache.exists():
+        shutil.rmtree(cache)
+    package_root.mkdir(parents=True,exist_ok=True)
+    try:
+        extracted=npm_package_utils.safe_extract_package(fetched["raw"],package_root)
+        npm_package_utils.validate_zero_dependency_package(extracted["package_json"])
+    except Exception as exc:
+        if cache.exists(): shutil.rmtree(cache)
+        raise Blocker("BOUND_NPM_EXTRACTION_FAILED:"+type(exc).__name__+":"+str(exc)) from exc
+    marker.parent.mkdir(parents=True,exist_ok=True)
+    marker.write_text(json.dumps(expected_marker,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+    return {
+      "status":"MATERIALIZED_VERIFIED","package":package,"version":version,
+      "package_root":str(package_root),"integrity":integrity,
+      "digest_hex":fetched.get("digest_hex"),
+    }
+
+
 def _ensure_local_dependency(source):
     typ=str(source.get("type") or "").strip()
     if typ=="python_stdlib":
@@ -393,6 +453,9 @@ def _invoke_bound_capability(args):
     dependency=None
     if source.get("type")=="pypi":
         dependency=_ensure_pypi_dependency(source)
+    elif source.get("type")=="npm":
+        dependency=_ensure_npm_dependency(source)
+        call_args["_package_root"]=dependency.get("package_root")
     elif source.get("type")=="apt":
         dependency=_ensure_apt_dependencies(source)
     elif source.get("type") in {"python_stdlib","system_tool"}:
