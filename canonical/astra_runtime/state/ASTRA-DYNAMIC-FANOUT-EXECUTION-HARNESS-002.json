@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T16:05:37.555701+00:00",
+  "created_at_utc": "2026-09-25T16:05:02.435197+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T16:05:37.555396+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython canonical/runtime/astra_runtime.py canonical/astra_runtime/missions/ASTRA_RUNTIME_LIVE_DYNAMIC_FANOUT_001.json\npython - <<'PY'\nimport json,pathlib\np=pathlib.Path('canonical/astra_runtime/state/ASTRA-RUNTIME-LIVE-DYNAMIC-FANOUT-001.json')\nx=json.loads(p.read_text(encoding='utf-8'))\nassert x.get('status')=='COMPLETE', x\nhist=x.get('history') or []\nassert hist and (hist[-1].get('result') or {}).get('planning_mode')=='DETERMINISTIC_DYNAMIC_FANOUT_PLAN', hist\nprint('DYNAMIC_FANOUT_UNIVERSAL_DISPATCH_COMPLETE')\nPY",
+        "duration_s": 35.12,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"schema\": \"PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1\", \"mission_id\": \"ASTRA-RUNTIME-LIVE-DYNAMIC-FANOUT-001\", \"mission_path\": \"canonical/astra_runtime/missions/ASTRA_RUNTIME_LIVE_DYNAMIC_FANOUT_001.json\", \"mission_sha256\": \"0d2c98a9997d68d16fbdd457265cf2205ce23f2a90ad3dcf7b35a364ac12b219\", \"runtime_id\": \"ASTRA_RUNTIME_V1_SHARED\", \"status\": \"COMPLETE\", \"steps_completed\": 1, \"state_sha256\": \"c7bd4cec26c42f39dee36e8b93df3d2e4f2fd6e7d7c24213b0ca6b54492772b4\", \"completed_at_utc\": \"2026-09-25T16:05:37.512530+00:00\"}\nDYNAMIC_FANOUT_UNIVERSAL_DISPATCH_COMPLETE\n"
+      },
+      "step_id": "execute-unchanged-dynamic-fanout",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-DYNAMIC-FANOUT-EXECUTION-HARNESS-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_DYNAMIC_FANOUT_EXECUTION_HARNESS_002.json",
+  "mission_sha256": "91ec6e48dac58112426d7e867bfa02bbfda831fc8954078f76645b8e5004129b",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T16:05:37.555420+00:00"
+}

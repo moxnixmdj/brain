@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T16:05:37.512530+00:00",
+  "mission_id": "ASTRA-RUNTIME-LIVE-DYNAMIC-FANOUT-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_LIVE_DYNAMIC_FANOUT_001.json",
+  "mission_sha256": "0d2c98a9997d68d16fbdd457265cf2205ce23f2a90ad3dcf7b35a364ac12b219",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "c7bd4cec26c42f39dee36e8b93df3d2e4f2fd6e7d7c24213b0ca6b54492772b4",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

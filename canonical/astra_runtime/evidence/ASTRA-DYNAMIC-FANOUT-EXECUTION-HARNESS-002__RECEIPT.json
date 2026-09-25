@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T16:05:37.556252+00:00",
+  "mission_id": "ASTRA-DYNAMIC-FANOUT-EXECUTION-HARNESS-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_DYNAMIC_FANOUT_EXECUTION_HARNESS_002.json",
+  "mission_sha256": "91ec6e48dac58112426d7e867bfa02bbfda831fc8954078f76645b8e5004129b",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "a9e43c6bcbbfe736eeaff76fdd0cf9c3d7940ea9dfa4afee0e676cc497d9bb10",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
