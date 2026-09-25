@@ -1413,6 +1413,263 @@ def _compile_browser_result_record_projection(subgoal, context_paths, root):
     }
 
 
+def _select_text_artifact_capability(fragment, registry):
+    ranked=[]
+    for cid,entry in sorted((registry or {}).items()):
+        if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
+            continue
+        template=entry.get("action_template")
+        if not isinstance(template,dict):
+            continue
+        placeholders=set(_placeholders(template))
+        if not {"text","output_path"}.issubset(placeholders):
+            continue
+        score,specificity,evidence=_score(fragment,cid,entry)
+        if score>0:
+            ranked.append((score,specificity,cid,entry,evidence))
+    ranked.sort(key=lambda x:(-x[0],-x[1],x[2]))
+    if not ranked:
+        return None
+    best=ranked[0]
+    if len(ranked)>1 and ranked[1][0]==best[0] and ranked[1][1]==best[1]:
+        return None
+    return {
+      "capability_id":best[2],
+      "entry":best[3],
+      "score":best[0],
+      "specificity":best[1],
+      "match_evidence":best[4],
+    }
+
+
+def _compile_runtime_multi_action_fanout(subgoal, context_paths, registry, future_clauses):
+    text=str(subgoal or "").strip()
+    m=re.match(r"^for\s+every\s+user\s+returned\s+at\s+runtime,\s+(.+)$",text,re.IGNORECASE)
+    if not m or len(future_clauses)<2:
+        return None
+    action_text=m.group(1).strip()
+    action_matches=re.findall(
+        r"generate\s+a\s+(.+?)\s+image\s+encoding\s+that\s+user's\s+"
+        r"([A-Za-z_][A-Za-z0-9_]*)(?=\s+and\s+also\s+generate|$)",
+        action_text,re.IGNORECASE
+    )
+    if len(action_matches)<2 or len(action_matches)>8:
+        return None
+
+    output_clause=str(future_clauses[0] or "").strip()
+    output_matches=re.findall(
+        r"save\s+each\s+(.+?)\s+image\s+under\s+([^\s,]+)\s+using\s+the\s+"
+        r"user's\s+id\s+as\s+the\s+filename",
+        output_clause,re.IGNORECASE
+    )
+    if len(output_matches)!=len(action_matches):
+        return None
+
+    manifest_clause=str(future_clauses[1] or "").strip()
+    mm=re.match(
+        r"^create\s+([^\s]+\.json)\s+with\s+exactly\s+one\s+record\s+per\s+"
+        r"live\s+user\s+containing\s+(.+)$",
+        manifest_clause,re.IGNORECASE
+    )
+    if not mm:
+        return None
+    manifest_path=mm.group(1).strip(" .,:;")
+    raw_fields=re.sub(r"\s+and\s+",",",mm.group(2),flags=re.IGNORECASE)
+    manifest_fields=[x.strip(" .,:;").lower() for x in raw_fields.split(",") if x.strip(" .,:;")]
+    if not manifest_fields or len(manifest_fields)>40 or len(set(manifest_fields))!=len(manifest_fields):
+        return None
+    if any(not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*",x) for x in manifest_fields):
+        return None
+
+    json_paths=[str(p) for p in context_paths if pathlib.Path(str(p)).suffix.lower()==".json"]
+    if not json_paths:
+        return None
+    source_path=json_paths[-1]
+
+    item_actions=[]
+    checks=[]
+    selected=[]
+    artifact_fields=[]
+    for index,((description,source_field),(output_description,output_dir)) in enumerate(zip(action_matches,output_matches)):
+        fragment="generate a "+description+" image"
+        chosen=_select_text_artifact_capability(fragment,registry)
+        if chosen is None:
+            return None
+        normalized=re.sub(r"[^a-z0-9]+","",output_description.lower())
+        artifact_field=normalized+"_path"
+        if artifact_field not in manifest_fields:
+            # Prefer a unique manifest *_path field sharing a meaningful token.
+            candidates=[
+              f for f in manifest_fields if f.endswith("_path")
+              and (
+                normalized in re.sub(r"[^a-z0-9]+","",f.lower())
+                or re.sub(r"[^a-z0-9]+","",f.lower().replace("_path","")) in normalized
+              )
+            ]
+            if len(candidates)!=1:
+                return None
+            artifact_field=candidates[0]
+        if artifact_field in artifact_fields:
+            return None
+        artifact_fields.append(artifact_field)
+        rendered=_render_template(
+            chosen["entry"]["action_template"],
+            {
+              "output_path":"__ITEM_OUTPUT_PATH__",
+              "text":"__ITEM_FIELD_"+source_field.lower()+"__",
+            }
+        )
+        item_actions.append({
+          "name":re.sub(r"[^A-Za-z0-9_]+","_",output_description).strip("_") or ("action_"+str(index)),
+          "source_field":source_field.lower(),
+          "artifact_field":artifact_field,
+          "output_dir":output_dir.strip(" .,:;"),
+          "extension":".png",
+          "action":rendered,
+        })
+        checks.append({
+          "source_field":source_field.lower(),
+          "artifact_field":artifact_field,
+        })
+        selected.append({
+          "description":description,
+          "source_field":source_field.lower(),
+          "capability_id":chosen["capability_id"],
+          "artifact_field":artifact_field,
+          "output_dir":output_dir.strip(" .,:;"),
+          "score":chosen["score"],
+        })
+
+    copy_fields=[f for f in manifest_fields if f not in artifact_fields]
+    if "id" not in copy_fields:
+        return None
+    source_fields={x["source_field"] for x in item_actions}
+    if not source_fields.issubset(set(copy_fields)):
+        return None
+
+    return {
+      "action":{
+        "type":"invoke_capability_fanout",
+        "args":{
+          "source_path":source_path,
+          "manifest_path":manifest_path,
+          "copy_fields":copy_fields,
+          "item_actions":item_actions,
+        },
+        "expect":{"type":"field_equals","field":"output_verified","value":True},
+      },
+      "manifest_path":manifest_path,
+      "consume_future":2,
+      "evidence":{
+        "source_path":source_path,
+        "manifest_path":manifest_path,
+        "copy_fields":copy_fields,
+        "item_actions":[
+          {
+            "name":x["name"],
+            "source_field":x["source_field"],
+            "artifact_field":x["artifact_field"],
+            "output_dir":x["output_dir"],
+          } for x in item_actions
+        ],
+        "checks":checks,
+        "selected_capabilities":selected,
+      }
+    }
+
+
+def _compile_runtime_multi_action_fanout_verification(subgoal, compiled_parts):
+    text=str(subgoal or "").strip()
+    if not re.match(
+        r"^finally\s+independently\s+decode\s+every\s+generated\b",
+        text,re.IGNORECASE
+    ):
+        return None
+    prior=None
+    for part in reversed(compiled_parts or []):
+        if isinstance(part,dict) and part.get("mode")=="RUNTIME_MULTI_ACTION_FANOUT":
+            prior=part
+            break
+    if prior is None:
+        return None
+    return {
+      "action":{
+        "type":"assert_runtime_fanout_artifacts_decode",
+        "args":{
+          "source_path":prior["source_path"],
+          "manifest_path":prior["manifest_path"],
+          "copy_fields":prior["copy_fields"],
+          "checks":prior["checks"],
+          "decoder_capability":"image.code.decode.zbarimg",
+        },
+        "expect":{"type":"field_equals","field":"verified","value":True},
+      },
+      "evidence":{
+        "source_path":prior["source_path"],
+        "manifest_path":prior["manifest_path"],
+        "copy_fields":prior["copy_fields"],
+        "checks":prior["checks"],
+        "decoder_capability":"image.code.decode.zbarimg",
+      }
+    }
+
+
+def _compile_multi_action_fanout_goal(goal, clauses, registry, root):
+    if len(clauses)!=6:
+        return None
+    if not re.match(r"^read\s+the\s+live\s+json\s+array\s+from\s+that\s+result$",clauses[1],re.IGNORECASE):
+        return None
+    first=_compile_single_goal(
+        clauses[0],registry,root,
+        context_paths=None,future_clauses=clauses[1:]
+    )
+    first_entry=registry[first["selected_capability"]]
+    first_action=_render_template(first_entry["action_template"],first["inputs"])
+    context_paths=[
+        str(v) for k,v in first["inputs"].items()
+        if isinstance(k,str) and k.endswith("_path")
+        and isinstance(v,str) and pathlib.Path(v).suffix
+    ]
+    fanout=_compile_runtime_multi_action_fanout(
+        clauses[2],context_paths,registry,clauses[3:]
+    )
+    if fanout is None:
+        return None
+    fanout_part={"mode":"RUNTIME_MULTI_ACTION_FANOUT",**fanout["evidence"]}
+    verify=_compile_runtime_multi_action_fanout_verification(
+        clauses[-1],[fanout_part]
+    )
+    if verify is None:
+        return None
+    return {
+      "schema":"PROJECT_BRAIN_COMPILED_COMPOUND_GOAL_V1",
+      "compiler_mode":"DETERMINISTIC_MULTI_ACTION_FANOUT_PLAN",
+      "clauses":clauses,
+      "compiled_parts":[
+        {"index":0,"subgoal":clauses[0],"mode":"VERIFIED_CAPABILITY",
+         "selected_capability":first["selected_capability"],"inputs":first["inputs"],
+         "target_effects":first["target_effects"],"score":first["score"]},
+        {"index":1,"subgoal":clauses[1],"mode":"DEFERRED_RUNTIME_COLLECTION_READ",
+         "source_path":fanout["evidence"]["source_path"]},
+        {"index":2,"subgoal":clauses[2],"mode":"RUNTIME_MULTI_ACTION_FANOUT",
+         **fanout["evidence"]},
+        {"index":3,"subgoal":clauses[3],"mode":"RUNTIME_MULTI_ACTION_OUTPUT_SPEC",
+         "item_actions":fanout["evidence"]["item_actions"]},
+        {"index":4,"subgoal":clauses[4],"mode":"RUNTIME_MULTI_ACTION_MANIFEST_SPEC",
+         "manifest_path":fanout["manifest_path"],"copy_fields":fanout["evidence"]["copy_fields"]},
+        {"index":5,"subgoal":clauses[5],"mode":"INDEPENDENT_RUNTIME_MULTI_ACTION_FANOUT_VERIFICATION",
+         **verify["evidence"]},
+      ],
+      "controller_actions":[
+        first_action,
+        fanout["action"],
+        verify["action"],
+        {"type":"finish","args":{"summary":"COMPOUND_GOAL_COMPLETE"}},
+      ],
+      "finish_summary":"COMPOUND_GOAL_COMPLETE",
+    }
+
+
 def _compile_runtime_dynamic_fanout(subgoal, context_paths, registry, future_clauses):
     text=str(subgoal or "").strip()
     m=re.match(
@@ -2339,6 +2596,9 @@ def compile_goal(goal, registry, root):
     if browser_interaction is not None:
         return _validate_compiled_clause_coverage(browser_interaction)
     clauses=decompose_goal(goal)
+    multi_action_fanout=_compile_multi_action_fanout_goal(goal,clauses,registry,root)
+    if multi_action_fanout is not None:
+        return _validate_compiled_clause_coverage(multi_action_fanout)
     dynamic_fanout=_compile_dynamic_fanout_goal(goal,clauses,registry,root)
     if dynamic_fanout is not None:
         return _validate_compiled_clause_coverage(dynamic_fanout)
