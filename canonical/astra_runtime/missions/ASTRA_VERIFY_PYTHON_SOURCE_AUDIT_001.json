@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-VERIFY-PYTHON-SOURCE-AUDIT-001",
+  "purpose": "Fresh independent effect verification of the pending repository-local Python source structural audit capability.",
+  "steps": [
+    {
+      "id": "run-python-source-audit-adapter",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\nroot=pathlib.Path('.').resolve(); p=root/'canonical/runtime/bound_capabilities/python_source_audit.py'\ns=importlib.util.spec_from_file_location('psa',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nr=m.run({'source_root':'canonical/runtime','output_path':'canonical/astra_runtime/tmp/PYTHON_SOURCE_AUDIT_VERIFY.json'},root)\nprint(json.dumps(r,sort_keys=True)); print('PYTHON_SOURCE_AUDIT_ADAPTER_COMPLETE')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "PYTHON_SOURCE_AUDIT_ADAPTER_COMPLETE"
+      }
+    },
+    {
+      "id": "independently-verify-python-source-audit",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport ast,hashlib,json,pathlib\nroot=pathlib.Path('.').resolve(); source=root/'canonical/runtime'\nreport=json.loads((root/'canonical/astra_runtime/tmp/PYTHON_SOURCE_AUDIT_VERIFY.json').read_text())\nassert report['schema']=='PROJECT_BRAIN_PYTHON_SOURCE_AUDIT_V1'\nactual={}\nall_imports=set(); fn=cl=0\nfor p in sorted(source.rglob('*.py')):\n raw=p.read_bytes(); tree=ast.parse(raw.decode('utf-8'),filename=str(p))\n funcs=sorted(n.name for n in tree.body if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef)))\n classes=sorted(n.name for n in tree.body if isinstance(n,ast.ClassDef))\n mods=set()\n for n in tree.body:\n  if isinstance(n,ast.Import): mods.update(a.name.split('.')[0] for a in n.names)\n  elif isinstance(n,ast.ImportFrom) and n.module: mods.add(n.module.split('.')[0])\n key=str(p.relative_to(root)).replace('\\\\','/')\n actual[key]={'sha256':hashlib.sha256(raw).hexdigest(),'imports':sorted(mods),'functions':funcs,'classes':classes}\n all_imports.update(mods); fn+=len(funcs); cl+=len(classes)\nreported={x['path']:{k:x[k] for k in ('sha256','imports','functions','classes')} for x in report['files']}\nassert reported==actual, {'missing':sorted(set(actual)-set(reported)),'extra':sorted(set(reported)-set(actual))}\nassert report['totals']=={'files':len(actual),'functions':fn,'classes':cl,'distinct_imported_modules':len(all_imports)}\nassert report['distinct_imported_modules']==sorted(all_imports)\nprint(json.dumps({'verified':True,'files':len(actual),'functions':fn,'classes':cl,'distinct_imported_modules':len(all_imports)},sort_keys=True))\nprint('PYTHON_SOURCE_AUDIT_INDEPENDENTLY_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "PYTHON_SOURCE_AUDIT_INDEPENDENTLY_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "independent_verification_required": true
+  }
+}
