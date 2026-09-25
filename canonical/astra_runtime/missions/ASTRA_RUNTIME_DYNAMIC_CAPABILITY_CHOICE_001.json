@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-DYNAMIC-CAPABILITY-CHOICE-001",
+  "purpose": "Pressure-test runtime evidence choosing which already-verified capability executes.",
+  "goal": "Using a real rendered browser, open https://httpbin.org/uuid, save a screenshot to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_UUID.png, and save the rendered result to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_UUID.json. Read the UUID from that live result. If its first hexadecimal character is one of a,b,c,d,e,f, generate a QR code image for the observed UUID and save it to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_QR.png; otherwise generate a Code 128 barcode image for the same observed UUID and save it to canonical/astra_runtime/tmp/DYNAMIC_CHOICE_BARCODE.png. Finally independently verify that the artifact selected by the live branch decodes to the observed UUID.",
+  "steps": [
+    {
+      "id": "run-dynamic-capability-choice",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 20,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "manual_controller_actions": false,
+    "branch_value_unknown_before_execution": true
+  }
+}
