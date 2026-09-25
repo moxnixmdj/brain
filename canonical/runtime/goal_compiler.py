@@ -1444,11 +1444,18 @@ def _compile_live_uuid_conditional(subgoal, context_paths, registry):
     }
 
 
-def _compile_live_uuid_verification(subgoal, context_paths):
+def _compile_live_uuid_verification(subgoal, context_paths, compiled_parts):
     if not re.match(r"^finally\s+independently\s+reread\s+both\s+files\s+and\s+verify\b",str(subgoal or ""),re.IGNORECASE):
         return None
     json_paths=[str(p) for p in context_paths if pathlib.Path(str(p)).suffix.lower()==".json"]
     if len(json_paths)<2:
+        return None
+    prior=None
+    for part in reversed(compiled_parts or []):
+        if isinstance(part,dict) and part.get("mode")=="VERIFIED_RUNTIME_CONDITIONAL":
+            prior=part
+            break
+    if prior is None or not prior.get("low_chars"):
         return None
     return {
       "action":{
@@ -1458,8 +1465,8 @@ def _compile_live_uuid_verification(subgoal, context_paths):
           "classification_path":json_paths[-1],
           "source_key":"uuid",
           "output_value_field":"uuid",
-          "bucket_field":"bucket",
-          "low_chars":"01234567",
+          "bucket_field":"_branch",
+          "low_chars":str(prior.get("low_chars")),
         },
         "expect":{"type":"field_equals","field":"verified","value":True},
       },
@@ -1496,7 +1503,7 @@ def _compile_compound_goal(goal, clauses, registry, root):
             })
             continue
 
-        live_verify=_compile_live_uuid_verification(clause,context_paths)
+        live_verify=_compile_live_uuid_verification(clause,context_paths,compiled_parts)
         if live_verify is not None:
             actions.append(live_verify["action"])
             compiled_parts.append({
