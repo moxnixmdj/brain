@@ -147,6 +147,7 @@ def _verify_pending_pypi(pending,result_path):
       "module":contract["module"],
       "encode_callable":contract["encode_callable"],
       "encode_kwargs":contract.get("encode_kwargs") or {},
+      "envelope_key":contract.get("envelope_key"),
       "json_path":str(fixture_path.relative_to(ROOT)),
       "output_path":str(output_path.relative_to(ROOT)),
     },ROOT)
@@ -157,6 +158,12 @@ def _verify_pending_pypi(pending,result_path):
     module=importlib.import_module(contract["module"])
     decoder=_resolve_callable(module,contract["decode_callable"])
     decoded=decoder(output_path.read_bytes(),**(contract.get("decode_kwargs") or {}))
+    envelope_key=contract.get("envelope_key")
+    if envelope_key is not None:
+        key=str(envelope_key)
+        if not isinstance(decoded,dict) or key not in decoded:
+            raise RuntimeError("PENDING_PYPI_ENVELOPE_MISSING:"+key)
+        decoded=decoded[key]
     expected=json.loads(fixture_path.read_text(encoding="utf-8"))
     if decoded!=expected:
         raise RuntimeError("PENDING_PYPI_SEMANTIC_ROUNDTRIP_MISMATCH")
