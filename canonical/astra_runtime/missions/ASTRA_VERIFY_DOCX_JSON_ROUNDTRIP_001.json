@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-VERIFY-DOCX-JSON-ROUNDTRIP-001",
+  "purpose": "Fresh independent verification of structured JSON record to DOCX composition.",
+  "goal": "Create canonical/astra_runtime/tmp/DOCX_JSON_ROUNDTRIP_VERIFY.docx from that normalized JSON with title Browser Submission Report, paragraph Verified browser submission, and a two-column table with headers Field and Value containing one row for each of customer_name, size, topping, and final_url using their values from the normalized JSON.",
+  "steps": [
+    {
+      "id": "create-verification-source-json",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport json,pathlib\np=pathlib.Path('canonical/astra_runtime/tmp/DOCX_JSON_ROUNDTRIP_SOURCE.json')\np.parent.mkdir(parents=True,exist_ok=True)\np.write_text(json.dumps({'submissions':{'httpbin':{'customer_name':'PROJECT BRAIN','size':'Medium','topping':'bacon','final_url':'https://httpbin.org/post','status':'VERIFIED_BROWSER_SUBMISSION'}}},indent=2,sort_keys=True)+'\\n',encoding='utf-8')\nprint('DOCX_JSON_SOURCE_READY')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "DOCX_JSON_SOURCE_READY"
+      }
+    },
+    {
+      "id": "produce-and-independently-verify-docx",
+      "adapter": "goal",
+      "controller_actions": [
+        {
+          "type": "invoke_capability",
+          "args": {
+            "capability_id": "docx.document.create_from_json_record",
+            "goal": "Create canonical/astra_runtime/tmp/DOCX_JSON_ROUNDTRIP_VERIFY.docx from that normalized JSON with title Browser Submission Report, paragraph Verified browser submission, and a two-column table with headers Field and Value containing one row for each of customer_name, size, topping, and final_url using their values from the normalized JSON.",
+            "json_path": "canonical/astra_runtime/tmp/DOCX_JSON_ROUNDTRIP_SOURCE.json",
+            "output_path": "canonical/astra_runtime/tmp/DOCX_JSON_ROUNDTRIP_VERIFY.docx"
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "output_verified",
+            "value": true
+          }
+        },
+        {
+          "type": "invoke_capability",
+          "args": {
+            "capability_id": "docx.document.verify.intent_ooxml",
+            "path": "canonical/astra_runtime/tmp/DOCX_JSON_ROUNDTRIP_VERIFY.docx"
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "verified",
+            "value": true
+          }
+        },
+        {
+          "type": "finish",
+          "args": {
+            "summary": "DOCX_JSON_ROUNDTRIP_VERIFIED"
+          }
+        }
+      ],
+      "max_controller_actions": 4,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "DOCX_JSON_ROUNDTRIP_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "producer_independent_verifier_required": true
+  }
+}
