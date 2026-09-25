@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T17:30:28.557493+00:00",
+  "mission_id": "ASTRA-SEMANTIC-PARAPHRASE-COMPILER-DIAG-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_SEMANTIC_PARAPHRASE_COMPILER_DIAG_002.json",
+  "mission_sha256": "a5f51e7a310d6d79312dc3d9313e7f6ec7e0f47c2b50d39de48aec975137e37c",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "644ac742a846f42ddf5775d990d2dc2819647ac7ff0377bdc283e58df1173ab8",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
