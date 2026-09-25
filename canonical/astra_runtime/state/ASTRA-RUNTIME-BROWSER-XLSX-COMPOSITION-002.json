@@ -1,0 +1,21 @@
+{
+  "blocker": {
+    "adapter": "goal",
+    "error": "RuntimeError:XLSX_STATUS_VALUE_UNRESOLVED",
+    "mission_id": "ASTRA-RUNTIME-BROWSER-XLSX-COMPOSITION-002",
+    "observed_at_utc": "2026-09-25T03:10:46.459923+00:00",
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "execute-cross-tool-composition-goal",
+    "step_index": 0
+  },
+  "created_at_utc": "2026-09-25T03:10:37.711280+00:00",
+  "history": [],
+  "mission_id": "ASTRA-RUNTIME-BROWSER-XLSX-COMPOSITION-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_BROWSER_XLSX_COMPOSITION_002.json",
+  "mission_sha256": "1b8fc6f28881b6fb7fba7384733c480351bc91487187b121115e7bf8b84d3003",
+  "next_step": 0,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-25T03:10:46.460090+00:00"
+}

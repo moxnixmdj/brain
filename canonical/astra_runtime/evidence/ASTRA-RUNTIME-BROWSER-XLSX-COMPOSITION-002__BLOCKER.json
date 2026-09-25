@@ -1,0 +1,9 @@
+{
+  "adapter": "goal",
+  "error": "RuntimeError:XLSX_STATUS_VALUE_UNRESOLVED",
+  "mission_id": "ASTRA-RUNTIME-BROWSER-XLSX-COMPOSITION-002",
+  "observed_at_utc": "2026-09-25T03:10:46.459923+00:00",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "execute-cross-tool-composition-goal",
+  "step_index": 0
+}

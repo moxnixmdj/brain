@@ -1,0 +1,11 @@
+{
+  "submissions": {
+    "httpbin": {
+      "customer_name": "PROJECT BRAIN",
+      "final_url": "https://httpbin.org/post",
+      "size": "Medium",
+      "status": "VERIFIED_BROWSER_SUBMISSION",
+      "topping": "bacon"
+    }
+  }
+}
