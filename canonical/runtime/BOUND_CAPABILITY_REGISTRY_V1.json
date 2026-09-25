@@ -1516,6 +1516,63 @@
           "docx_sha256": "e169aa79677b959917095989d5a7387da0d7b4c385f1ee296b5e09af295f5164"
         }
       }
+    },
+    "docx.document.create_from_json_record": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "docx.document.create_from_json_record",
+          "goal": "${input.goal}",
+          "json_path": "${input.json_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "docx_report_from_json",
+      "cost": 2,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "docx",
+        "document",
+        "report",
+        "json",
+        "record",
+        "normalized",
+        "field",
+        "value",
+        "table",
+        "create"
+      ],
+      "limitations": [
+        "Consumes exactly one unambiguous structured JSON record containing all requested fields.",
+        "Builds a two-column field/value report by composing the independently verified DOCX producer."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "docx.document.create_from_json_record"
+      ],
+      "requires": [
+        "structured.json.available"
+      ],
+      "source": {
+        "type": "apt",
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "python3-docx",
+            "version": "1.1.0+dfsg-2",
+            "sha256": "8dec367f86be44b86bb3c7329ccc6af165854008fd23e185f44500ece39bdb80"
+          }
+        ]
+      },
+      "status": "BOUND_PENDING_INDEPENDENT_VERIFICATION"
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
