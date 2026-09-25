@@ -2523,10 +2523,50 @@ def _goal_action(action):
         engines=[
           ("bing","https://www.bing.com/search?"+urllib.parse.urlencode({"q":query,"count":"20"})),
           ("duckduckgo","https://html.duckduckgo.com/html/?"+urllib.parse.urlencode({"q":query})),
+          ("google","https://www.google.com/search?"+urllib.parse.urlencode({"q":query,"num":"20"})),
         ]
         attempts=[]
         candidates=[]
-        href_re=re.compile(r'''href=["'](https?://[^"'<>\s]+)["']''',re.IGNORECASE)
+        href_re=re.compile(r'''href=["']([^"'<>\s]+)["']''',re.IGNORECASE)
+        def normalize_result_href(engine,href):
+            raw=str(href or "").replace("&amp;","&").strip()
+            if not raw:
+                return None
+            if raw.startswith("//"):
+                raw="https:"+raw
+            if raw.startswith("/"):
+                if engine=="google" and raw.startswith("/url?"):
+                    q=urllib.parse.parse_qs(urllib.parse.urlparse(raw).query).get("q") or []
+                    raw=q[0] if q else ""
+                elif engine=="duckduckgo":
+                    absolute=urllib.parse.urljoin("https://html.duckduckgo.com/",raw)
+                    qs=urllib.parse.parse_qs(urllib.parse.urlparse(absolute).query)
+                    uddg=qs.get("uddg") or []
+                    raw=urllib.parse.unquote(uddg[0]) if uddg else ""
+                else:
+                    return None
+            try:
+                parsed=urllib.parse.urlparse(raw)
+            except Exception:
+                return None
+            host=(parsed.hostname or "").lower()
+            if host.endswith("duckduckgo.com"):
+                qs=urllib.parse.parse_qs(parsed.query)
+                uddg=qs.get("uddg") or []
+                if uddg:
+                    raw=urllib.parse.unquote(uddg[0])
+            elif host.endswith("google.com"):
+                qs=urllib.parse.parse_qs(parsed.query)
+                q=qs.get("q") or []
+                if q and str(q[0]).startswith(("https://","http://")):
+                    raw=q[0]
+            try:
+                parsed=urllib.parse.urlparse(raw)
+            except Exception:
+                return None
+            if parsed.scheme not in {"https","http"} or not parsed.hostname:
+                return None
+            return raw
         for engine,search_url in engines:
             req=urllib.request.Request(search_url,headers={
               "User-Agent":"Mozilla/5.0 ProjectBrain-SourceDiscovery/1"
@@ -2540,8 +2580,10 @@ def _goal_action(action):
                 continue
             seen=set()
             local=[]
-            for href in href_re.findall(text):
-                href=href.replace("&amp;","&")
+            for raw_href in href_re.findall(text):
+                href=normalize_result_href(engine,raw_href)
+                if not href:
+                    continue
                 try:
                     parsed=urllib.parse.urlparse(href)
                 except Exception:
@@ -2574,9 +2616,23 @@ def _goal_action(action):
                 dedup[cand["url"]]=cand
         candidates=sorted(dedup.values(),key=lambda x:(-x["score"],x["url"]))[:25]
         if not candidates:
+            evidence={
+              "schema":"PROJECT_BRAIN_SOURCE_DISCOVERY_EVIDENCE_V1",
+              "query":query,
+              "authority_domains":normalized_domains,
+              "chosen_url":None,
+              "chosen_host":None,
+              "candidates":[],
+              "attempts":attempts,
+              "discovered_at_utc":utc(),
+              "status":"NO_AUTHORITATIVE_CANDIDATE",
+              "trust_claim":"DOMAIN_FILTERED_SEARCH_DISCOVERY_ONLY_NOT_FACT_VERIFICATION",
+            }
+            output.parent.mkdir(parents=True,exist_ok=True)
+            output.write_text(json.dumps(evidence,indent=2,sort_keys=True)+"\n",encoding="utf-8")
             return {
               "type":typ,"verified":False,"error":"AUTHORITATIVE_SOURCE_NOT_DISCOVERED",
-              "attempts":attempts
+              "attempts":attempts,"output_path":str(output.relative_to(ROOT))
             }
         chosen=candidates[0]
         evidence={
