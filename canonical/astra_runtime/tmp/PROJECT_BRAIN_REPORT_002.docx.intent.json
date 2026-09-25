@@ -1,0 +1,5 @@
+{
+  "output_path": "canonical/astra_runtime/tmp/PROJECT_BRAIN_REPORT_002.docx",
+  "schema": "PROJECT_BRAIN_DOCUMENT_INTENT_V1",
+  "source_goal": "Create canonical/astra_runtime/tmp/PROJECT_BRAIN_REPORT_002.docx with title Project Brain Report, paragraph Verified cross-tool composition, and a table with columns Capability and Status containing Browser interaction | VERIFIED and Browser-to-XLSX composition | VERIFIED"
+}

@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T03:31:09.334362+00:00",
+  "mission_id": "ASTRA-RUNTIME-DOCX-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_DOCX_002.json",
+  "mission_sha256": "689b3292371ed5c7081aecdedd4cdff8c269ddbe7179983ff33a0f157c3d4529",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "dc912de1cc4025fd3f982e65150db49988ae184270f287602274d32e69792b75",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
