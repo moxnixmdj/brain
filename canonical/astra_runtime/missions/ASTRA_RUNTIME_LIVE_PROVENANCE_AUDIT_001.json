@@ -27,6 +27,7 @@
     "authoritative_source_required": true,
     "final_effect_verification_required": true,
     "orthogonal_pressure_family": "live_network_metadata_binary_hash_provenance",
-    "replay_after_full_live_provenance_composition_commit": "3a5cb998a297e623d7b17bac9ccb85c67263d8fa"
+    "replay_after_full_live_provenance_composition_commit": "3a5cb998a297e623d7b17bac9ccb85c67263d8fa",
+    "replay_after_assertion_whitelist_commit": "2062fa4e51dd2ee6d1b454ade5d38e5fbb709918"
   }
 }
