@@ -128,7 +128,7 @@ def _bind_inputs(goal, root, entry, context_paths=None):
             result[key]=str(goal)
             continue
         if key=="url":
-            urls=re.findall(r"https?://[^\\s)\\]}>]+",goal)
+            urls=re.findall(r"https?://[^\s)\]}>]+",goal)
             urls=[u.rstrip(".,;:!?") for u in urls]
             if len(urls)==1:
                 result[key]=urls[0]
