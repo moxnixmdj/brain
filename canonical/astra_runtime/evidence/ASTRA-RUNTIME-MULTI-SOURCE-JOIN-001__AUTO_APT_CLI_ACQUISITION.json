@@ -1,0 +1,384 @@
+{
+  "attempts": [
+    {
+      "error": "ProbeFailure:APT_INSTALL_FAILED:ot Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/libgstreamer-plugins-good1.0-0_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/gstreamer1.0-plugins-good_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-gl1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch https://security.ubuntu.com/ubuntu/pool/main/g/gnome-shell/gnome-shell-common_46.0-0ubuntu6%7e24.04.14_all.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch https://security.ubuntu.com/ubuntu/pool/main/g/gnome-shell/gnome-shell_46.0-0ubuntu6%7e24.04.14_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\n",
+      "status": "PROBE_FAILED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "3a5d1ce9bd4e03683f0c5ca8563fd3185b7df4a42f588b2125d84e854c2e02c2",
+        "binding_kind": "apt",
+        "description": "Configuration for the Ubuntu Budgie Live .iso Image",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "live"
+        ],
+        "name": "budgie-live-settings",
+        "packages": [],
+        "query": "live",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.20.13",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "8d5ebe2c55469751ac95ef46751d7625bc055b7cb3886d10017331fddf98805b",
+        "executables": [],
+        "package": "dracut-live",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "060+5-1ubuntu3.3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "8d5ebe2c55469751ac95ef46751d7625bc055b7cb3886d10017331fddf98805b",
+        "binding_kind": "apt",
+        "description": "dracut is an event driven initramfs infrastructure (live image modules)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "live"
+        ],
+        "name": "dracut-live",
+        "packages": [],
+        "query": "live",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "060+5-1ubuntu3.3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "TimeoutExpired:Command '['/usr/bin/edubuntu-langpack-installer', '--help']' timed out after 10 seconds",
+      "status": "PROBE_FAILED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "e8155e2a4011eea6dd8d5c1a9b1696d51b3e0f46b5c2963ca53af3c76fb3d6dd",
+        "binding_kind": "apt",
+        "description": "Edubuntu live media support",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "live"
+        ],
+        "name": "edubuntu-live",
+        "packages": [],
+        "query": "live",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "14.04.2build2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ProbeFailure:APT_INSTALL_FAILED: 404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/gstreamer1.0-plugins-good_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-gl1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch https://security.ubuntu.com/ubuntu/pool/main/g/gnome-shell/gnome-shell-common_46.0-0ubuntu6%7e24.04.14_all.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch https://security.ubuntu.com/ubuntu/pool/main/g/gnome-shell/gnome-shell_46.0-0ubuntu6%7e24.04.14_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/x/xdg-desktop-portal/xdg-desktop-portal_1.18.4-1ubuntu2.24.04.2_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\n",
+      "status": "PROBE_FAILED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "6f74a785b5cd214d8e82c70ae921468540019a0fdc077d391d8b3137f7ae8e1a",
+        "binding_kind": "apt",
+        "description": "Configuration for the Edubuntu .iso Image",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "live"
+        ],
+        "name": "edubuntu-live-settings",
+        "packages": [],
+        "query": "live",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "24.04.26.1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "dd84825165577e6841320a4335274786e7ad863d7bffad6e8918125e10041aa1",
+        "executables": [],
+        "package": "gcc-10-test-results",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "10.5.0-4ubuntu2.1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "dd84825165577e6841320a4335274786e7ad863d7bffad6e8918125e10041aa1",
+        "binding_kind": "apt",
+        "description": "Test results for the GCC test suite",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "results"
+        ],
+        "name": "gcc-10-test-results",
+        "packages": [],
+        "query": "results",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "10.5.0-4ubuntu2.1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "ffb196e38e876574e4145c4b9d848809b2fa7e78c8e23abe9031ca67f26a95b7",
+        "executables": [],
+        "package": "gcc-11-test-results",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "11.5.0-1ubuntu1~24.04.1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "ffb196e38e876574e4145c4b9d848809b2fa7e78c8e23abe9031ca67f26a95b7",
+        "binding_kind": "apt",
+        "description": "Test results for the GCC test suite",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "results"
+        ],
+        "name": "gcc-11-test-results",
+        "packages": [],
+        "query": "results",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "11.5.0-1ubuntu1~24.04.1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "41ddfd96bd27da2368423849c9906ad44686127e6f341aeeb2b0c5d2375eeca7",
+        "executables": [],
+        "package": "gcc-12-test-results",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "12.4.0-2ubuntu1~24.04.1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "41ddfd96bd27da2368423849c9906ad44686127e6f341aeeb2b0c5d2375eeca7",
+        "binding_kind": "apt",
+        "description": "Test results for the GCC test suite",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "results"
+        ],
+        "name": "gcc-12-test-results",
+        "packages": [],
+        "query": "results",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "12.4.0-2ubuntu1~24.04.1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "b166cced7ddecca8fab3c51967ea55e69a59eb12c7c240dfef0bc9809b885584",
+        "executables": [],
+        "package": "gcc-13-test-results",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "13.3.0-6ubuntu2~24.04.1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "b166cced7ddecca8fab3c51967ea55e69a59eb12c7c240dfef0bc9809b885584",
+        "binding_kind": "apt",
+        "description": "Test results for the GCC test suite",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "results"
+        ],
+        "name": "gcc-13-test-results",
+        "packages": [],
+        "query": "results",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "13.3.0-6ubuntu2~24.04.1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "c04862a96bb4920ad69e53f8631e93ab3f1544e3719d9e74673706f3a13afbe9",
+        "executables": [],
+        "package": "gcc-14-test-results",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "14.2.0-4ubuntu2~24.04.1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "c04862a96bb4920ad69e53f8631e93ab3f1544e3719d9e74673706f3a13afbe9",
+        "binding_kind": "apt",
+        "description": "Test results for the GCC test suite",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "results"
+        ],
+        "name": "gcc-14-test-results",
+        "packages": [],
+        "query": "results",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "14.2.0-4ubuntu2~24.04.1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "bf6107975dfd2d4091c34512e3633dfeb0beee0aa323449e857923630a0cde1d",
+        "executables": [],
+        "package": "gcc-9-test-results",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "9.5.0-6ubuntu2.1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "bf6107975dfd2d4091c34512e3633dfeb0beee0aa323449e857923630a0cde1d",
+        "binding_kind": "apt",
+        "description": "Test results for the GCC test suite",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "results"
+        ],
+        "name": "gcc-9-test-results",
+        "packages": [],
+        "query": "results",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "9.5.0-6ubuntu2.1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "11fed46cae5ee0fad97d044335bebeac97dccd8e9e4192de291ac4a28a914fa4",
+        "executables": [],
+        "package": "gedit-plugin-join-lines",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "46.0-2build3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "11fed46cae5ee0fad97d044335bebeac97dccd8e9e4192de291ac4a28a914fa4",
+        "binding_kind": "apt",
+        "description": "Join/Split Lines plugin for gedit",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "join"
+        ],
+        "name": "gedit-plugin-join-lines",
+        "packages": [],
+        "query": "join",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-2build3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "a5dcd71880816022d5555b0844b3a1990ff1f290823e60311063d3990636ddcd",
+        "executables": [],
+        "package": "kiwi-dracut-live",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "9.25.22-1ubuntu1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "a5dcd71880816022d5555b0844b3a1990ff1f290823e60311063d3990636ddcd",
+        "binding_kind": "apt",
+        "description": "KIWI - Dracut module for iso(live) image type",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "live"
+        ],
+        "name": "kiwi-dracut-live",
+        "packages": [],
+        "query": "live",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "9.25.22-1ubuntu1",
+        "zero_cost_eligible": true
+      }
+    }
+  ],
+  "goal": "Using both live results, join every live post to exactly one live user where post userId equals user id,",
+  "mission_id": "ASTRA-RUNTIME-MULTI-SOURCE-JOIN-001",
+  "role_conditioned_discovery": [],
+  "schema": "PROJECT_BRAIN_AUTO_APT_CLI_ACQUISITION_EVIDENCE_V1",
+  "status": "NO_COMPATIBLE_CONTRACT"
+}

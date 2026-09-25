@@ -1,0 +1,2539 @@
+{
+  "auto_acquisition": {
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ProbeFailure:APT_INSTALL_FAILED:ot Found [IP: 20.106.104.242 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/libgstreamer-plugins-good1.0-0_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/gstreamer1.0-plugins-good_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-gl1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Failed to fetch https://security.ubuntu.com/ubuntu/pool/main/g/gnome-shell/gnome-shell-common_46.0-0ubuntu6%7e24.04.14_all.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Failed to fetch https://security.ubuntu.com/ubuntu/pool/main/g/gnome-shell/gnome-shell_46.0-0ubuntu6%7e24.04.14_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\\n\", \"name\": \"budgie-live-settings\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"dracut-live\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"TimeoutExpired:Command '['/usr/bin/edubuntu-langpack-installer', '--help']' timed out after 10 seconds\", \"name\": \"edubuntu-live\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED: 404  Not Found [IP: 20.106.104.242 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/gstreamer1.0-plugins-good_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-gl1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Failed to fetch https://security.ubuntu.com/ubuntu/pool/main/g/gnome-shell/gnome-shell-common_46.0-0ubuntu6%7e24.04.14_all.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Failed to fetch https://security.ubuntu.com/ubuntu/pool/main/g/gnome-shell/gnome-shell_46.0-0ubuntu6%7e24.04.14_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/x/xdg-desktop-portal/xdg-desktop-portal_1.18.4-1ubuntu2.24.04.2_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\\n\", \"name\": \"edubuntu-live-settings\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"gcc-10-test-results\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"gcc-11-test-results\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"gcc-12-test-results\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"gc",
+    "status": "NOT_DISPATCHED"
+  },
+  "binding_performed": false,
+  "goal": "Using a real rendered browser, open https://jsonplaceholder.typicode.com/users, save a screenshot to canonical/astra_runtime/tmp/JOIN_USERS.png, and save the rendered result to canonical/astra_runtime/tmp/JOIN_USERS.json. Using a real rendered browser, open https://jsonplaceholder.typicode.com/posts, save a screenshot to canonical/astra_runtime/tmp/JOIN_POSTS.png, and save the rendered result to canonical/astra_runtime/tmp/JOIN_POSTS.json. Using both live results, join every live post to exactly one live user where post userId equals user id, and create canonical/astra_runtime/tmp/JOINED_POSTS.json containing exactly one record per live post with post_id, user_id, username, and title. Create canonical/astra_runtime/tmp/JOINED_POSTS.xlsx from canonical/astra_runtime/tmp/JOINED_POSTS.json with columns post_id, user_id, username, and title. Independently reopen both live source results, the joined JSON, and the XLSX and verify every post appears exactly once, every joined username matches the user with the same id, every title matches its source post, there are no unmatched or extra records, and the XLSX is identical to the joined JSON.",
+  "mission_id": "ASTRA-RUNTIME-MULTI-SOURCE-JOIN-001",
+  "observed_at_utc": "2026-09-25T16:48:34.391736+00:00",
+  "result": {
+    "binding_performed": false,
+    "candidates": [
+      {
+        "archive_sha256": "3a5d1ce9bd4e03683f0c5ca8563fd3185b7df4a42f588b2125d84e854c2e02c2",
+        "binding_kind": "apt",
+        "description": "Configuration for the Ubuntu Budgie Live .iso Image",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "live"
+        ],
+        "name": "budgie-live-settings",
+        "packages": [],
+        "query": "live",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.20.13",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "8d5ebe2c55469751ac95ef46751d7625bc055b7cb3886d10017331fddf98805b",
+        "binding_kind": "apt",
+        "description": "dracut is an event driven initramfs infrastructure (live image modules)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "live"
+        ],
+        "name": "dracut-live",
+        "packages": [],
+        "query": "live",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "060+5-1ubuntu3.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "e8155e2a4011eea6dd8d5c1a9b1696d51b3e0f46b5c2963ca53af3c76fb3d6dd",
+        "binding_kind": "apt",
+        "description": "Edubuntu live media support",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "live"
+        ],
+        "name": "edubuntu-live",
+        "packages": [],
+        "query": "live",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "14.04.2build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "6f74a785b5cd214d8e82c70ae921468540019a0fdc077d391d8b3137f7ae8e1a",
+        "binding_kind": "apt",
+        "description": "Configuration for the Edubuntu .iso Image",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "live"
+        ],
+        "name": "edubuntu-live-settings",
+        "packages": [],
+        "query": "live",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "24.04.26.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "dd84825165577e6841320a4335274786e7ad863d7bffad6e8918125e10041aa1",
+        "binding_kind": "apt",
+        "description": "Test results for the GCC test suite",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "results"
+        ],
+        "name": "gcc-10-test-results",
+        "packages": [],
+        "query": "results",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "10.5.0-4ubuntu2.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ffb196e38e876574e4145c4b9d848809b2fa7e78c8e23abe9031ca67f26a95b7",
+        "binding_kind": "apt",
+        "description": "Test results for the GCC test suite",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "results"
+        ],
+        "name": "gcc-11-test-results",
+        "packages": [],
+        "query": "results",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "11.5.0-1ubuntu1~24.04.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "41ddfd96bd27da2368423849c9906ad44686127e6f341aeeb2b0c5d2375eeca7",
+        "binding_kind": "apt",
+        "description": "Test results for the GCC test suite",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "results"
+        ],
+        "name": "gcc-12-test-results",
+        "packages": [],
+        "query": "results",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "12.4.0-2ubuntu1~24.04.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "b166cced7ddecca8fab3c51967ea55e69a59eb12c7c240dfef0bc9809b885584",
+        "binding_kind": "apt",
+        "description": "Test results for the GCC test suite",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "results"
+        ],
+        "name": "gcc-13-test-results",
+        "packages": [],
+        "query": "results",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "13.3.0-6ubuntu2~24.04.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c04862a96bb4920ad69e53f8631e93ab3f1544e3719d9e74673706f3a13afbe9",
+        "binding_kind": "apt",
+        "description": "Test results for the GCC test suite",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "results"
+        ],
+        "name": "gcc-14-test-results",
+        "packages": [],
+        "query": "results",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "14.2.0-4ubuntu2~24.04.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "bf6107975dfd2d4091c34512e3633dfeb0beee0aa323449e857923630a0cde1d",
+        "binding_kind": "apt",
+        "description": "Test results for the GCC test suite",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "results"
+        ],
+        "name": "gcc-9-test-results",
+        "packages": [],
+        "query": "results",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "9.5.0-6ubuntu2.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "11fed46cae5ee0fad97d044335bebeac97dccd8e9e4192de291ac4a28a914fa4",
+        "binding_kind": "apt",
+        "description": "Join/Split Lines plugin for gedit",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "join"
+        ],
+        "name": "gedit-plugin-join-lines",
+        "packages": [],
+        "query": "join",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-2build3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "a5dcd71880816022d5555b0844b3a1990ff1f290823e60311063d3990636ddcd",
+        "binding_kind": "apt",
+        "description": "KIWI - Dracut module for iso(live) image type",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "live"
+        ],
+        "name": "kiwi-dracut-live",
+        "packages": [],
+        "query": "live",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "9.25.22-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "1f72ac3dbd8c98502d1c387a3a755ec949de5d4866d517cdd33d7da82916c1a4",
+        "binding_kind": "apt",
+        "description": "Live System Boot Components",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "live"
+        ],
+        "name": "live-boot",
+        "packages": [],
+        "query": "live",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:20230131",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "0c040ff86a5e522d602af08f59011e817677fbe0602118270ee2cf624e395f34",
+        "binding_kind": "apt",
+        "description": "Live System Boot Components (initramfs-tools backend)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "live"
+        ],
+        "name": "live-boot-initramfs-tools",
+        "packages": [],
+        "query": "live",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:20230131",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "29fdb5b25138533c614c5d148df37a634010d40414ba98e0ee7153f026d5dd7a",
+        "binding_kind": "apt",
+        "description": "Debian Live - System build scripts",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "live"
+        ],
+        "name": "live-build",
+        "packages": [],
+        "query": "live",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.0~a57-1ubuntu49.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "a03a1fcb84176a9364116e7fd045e513a30f93f5da48d094fe1c911142d87d2f",
+        "binding_kind": "apt",
+        "description": "Debian Live - System build scripts (CGI frontend)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "live"
+        ],
+        "name": "live-build-cgi",
+        "packages": [],
+        "query": "live",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.0~a57-1ubuntu49.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "6aef47f7c83493f8ef6c596409fde080abf816ff615cf65665252cc63b0016a7",
+        "binding_kind": "apt",
+        "description": "GUI to clone and manage Live-Build USB sticks",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "live"
+        ],
+        "name": "live-clone",
+        "packages": [],
+        "query": "live",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.1-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c94f4773ca5f1a54c35adcbdf86233579ae90a595042b356f74a58bc6d5f5fd9",
+        "binding_kind": "apt",
+        "description": "Live System Configuration Components",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "live"
+        ],
+        "name": "live-config",
+        "packages": [],
+        "query": "live",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "11.0.4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d732051d9604f27a15d4d1f09a0b66fc2761b1e7d5efde81430cb2d05291a965",
+        "binding_kind": "apt",
+        "description": "Live System Configuration Components (systemd backend)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "live"
+        ],
+        "name": "live-config-systemd",
+        "packages": [],
+        "query": "live",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "11.0.4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "cc9240adf8b7f52dedfeb923c76c39925f6f2421c280e42d061c2222e89951a4",
+        "binding_kind": "apt",
+        "description": "Live Systems Documentation (metapackage)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "live"
+        ],
+        "name": "live-manual",
+        "packages": [],
+        "query": "live",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2:20151217.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "06dc26008e9976c2d590020af8c9eaa11394f1232c6825bc3605645af74f6d4c",
+        "binding_kind": "apt",
+        "description": "Live Systems Documentation (epub)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "live"
+        ],
+        "name": "live-manual-epub",
+        "packages": [],
+        "query": "live",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2:20151217.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "506bd970c9900074a18d5b6ef0f91abf2385ea11eeedf739523d9a3707c7741b",
+        "binding_kind": "apt",
+        "description": "Live Systems Documentation (html)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "live"
+        ],
+        "name": "live-manual-html",
+        "packages": [],
+        "query": "live",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2:20151217.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "66b87c59f7bb6dd1454375bb9fe28b33fb19b05fa2d088584e1e8eeb0ae14774",
+        "binding_kind": "apt",
+        "description": "Live Systems Documentation (odf)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "live"
+        ],
+        "name": "live-manual-odf",
+        "packages": [],
+        "query": "live",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2:20151217.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "999f9fdbeaacc55f3029ece4aef4f52c12feb60e56b02005fe61b2deca56a64a",
+        "binding_kind": "apt",
+        "description": "Live Systems Documentation (pdf)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "live"
+        ],
+        "name": "live-manual-pdf",
+        "packages": [],
+        "query": "live",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2:20151217.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "99ba19f3aa07cc051e83824995082df4a2fb1b7c9a7a4cca7cb1ea46bf207eda",
+        "binding_kind": "apt",
+        "description": "Live Systems Documentation (txt)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "live"
+        ],
+        "name": "live-manual-txt",
+        "packages": [],
+        "query": "live",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2:20151217.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "cb23626500a6d554b40065c352e6081c646b3c22ddbaec89d41b9062d47b7d48",
+        "binding_kind": "apt",
+        "description": "selection of oft-used non-free-firmware shipped on live systems",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "live"
+        ],
+        "name": "live-task-non-free-firmware-pc",
+        "packages": [],
+        "query": "live",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "12.0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "4e842a5e781c8c4d9bbd9c8358dee8334048ba4fc3dde64153670917fe88fafa",
+        "binding_kind": "apt",
+        "description": "provides firmware for server network and storage devices",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "live"
+        ],
+        "name": "live-task-non-free-firmware-server",
+        "packages": [],
+        "query": "live",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "12.0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "911727605f504e858b71a04d67175d064ff4c0881f81762772b4cb6fced5a03c",
+        "binding_kind": "apt",
+        "description": "Live System Extra Components",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "live"
+        ],
+        "name": "live-tools",
+        "packages": [],
+        "query": "live",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:20190831.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "38f33319656616466b4305cc9cfde29598465a4eb7cfbe7c511b9e846108f032",
+        "binding_kind": "apt",
+        "description": "Join urls and normalize as in path.join",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "join"
+        ],
+        "name": "node-url-join",
+        "packages": [],
+        "query": "join",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "5.0.0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "95f3d7e24ee526263bd5243c5972a7e804ce25c27886dad8cb5df75d18230792",
+        "binding_kind": "apt",
+        "description": "Default settings for Ubuntu MATE live CD",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "live"
+        ],
+        "name": "ubuntu-mate-live-settings",
+        "packages": [],
+        "query": "live",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "24.04.4",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Unofficial read-only client for the mein-aldi.de (ALDI S\u00fcd) grocery-delivery catalog.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.RayNCooper/grocery-delivery-mcp",
+        "packages": [
+          {
+            "identifier": "grocery-delivery-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.2.0"
+          }
+        ],
+        "query": "live",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/RayNCooper/grocery-delivery-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.2.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Live chess tournament results and up-to-date player ratings in chat.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.b77/chess-results",
+        "packages": [],
+        "query": "results",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://chess-results.b77.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Typed, deterministic tools on a live Salesforce or HubSpot copy, every write audited and reversible.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.livecrm/livecrm",
+        "packages": [],
+        "query": "live",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.livecrm.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Live verified resort snow, forecasts, powder search, trip planning & grounded Q&A for 430+ resorts.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.snowdata/live-snow",
+        "packages": [],
+        "query": "live",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.snowdata.ai"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Operate secure JoinLayer data pipelines through delegated OAuth.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "app.joinlayer/mcp",
+        "packages": [],
+        "query": "join",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.joinlayer.app/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/joinlayer/agent-toolkit"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Plan a Virtual Delivery Center for any initiative: pods, roles, AI agents, Delivery Units.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.aidoos/virtual-delivery-center",
+        "packages": [],
+        "query": "live",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://aidoos.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Live data: weather, air quality, FX, CN/HK/US stocks, IP geo, domain, SSL, China reachability.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.ainetcafe/netcafe-live-data",
+        "packages": [],
+        "query": "live",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://ainetcafe.com/mcp/data?s=registry"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/mario03690/ai-netcafe"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.2.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Search and read the public Applivery docs (MDM & app distribution). Read-only, no auth.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.applivery.docs/mcp",
+        "packages": [],
+        "query": "live",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://docs.applivery.com/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/applivery/docs-front"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "2.4.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "joinBudget MCP: Manage personal finances, budget spaces, transactions, and categories.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.joinbudget/mcp",
+        "packages": [],
+        "query": "join",
+        "remotes": [],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.7.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Live audience engagement: run Q&A, polls, liveblogs and chat for webinars and town halls.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.reactlive/reactlive",
+        "packages": [],
+        "query": "live",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://www.reactlive.com/api/v2/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Live GPS sports tracking + per-sport analysis of GPX/IGC/FIT files: thermals, wind, phases, laps",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.sportstracklive/mcp",
+        "packages": [],
+        "query": "live",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.sportstracklive.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Ask runboth.dev in plain language: what RunBoth does, how to install it, and its limits.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "dev.runboth/agent",
+        "packages": [],
+        "query": "both",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://runboth-agent-mgbxvs4loq-uc.a.run.app/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "GingerLive livestream ad formats, network reach stats, campaign case studies, and streamer program.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.gingerlive/mcp",
+        "packages": [],
+        "query": "live",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.gingerlive.io/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/gingerlive-io/gingerlive-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.2.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "UK livestock welfare, feed, health, and movement rules \u2014 8 species, DEFRA codes",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.Ansvar-Systems/uk-livestock",
+        "packages": [],
+        "query": "live",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.ansvar.eu/uk-livestock/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/Ansvar-Systems/uk-livestock-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Connects AI assistants to a live ChemDraw window on Windows via COM automation.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.MALeitch/live-chemdraw-mcp",
+        "packages": [],
+        "query": "live",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/MALeitch/live-chemdraw-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.2.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Join two lists of JSON rows on a key, like SQL or VLOOKUP: left, inner, full, anti joins, union.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.Nero-Engine/dataset-join-merge",
+        "packages": [],
+        "query": "join",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://dataset-join-merge.nerolabs.workers.dev/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/Nero-Engine/dataset-join-merge-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Prefeitura SC Joinville: Clearance Certificate (Debts), official-source lookup. Platform-hosted, pay",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.mcp-dir/pref_sc_joinville_cnd-mcp",
+        "packages": [],
+        "query": "join",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.mcp.ai/p_pref_sc_joinville_cnd"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/mcp-dir/pref_sc_joinville_cnd-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Current medical research on joint pain, osteoarthritis, and relief options.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.usliberty/joint-genesis-mcp",
+        "packages": [],
+        "query": "join",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.usliberty.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Search current public UK company metadata from the official Companies House Public Data API.\u2026",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.macaroonnetwork/companies-house-live-search-v1",
+        "packages": [
+          {
+            "identifier": "macaroonnetwork-mcp-companies-house-live-search-v1",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": "uvx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.1.0"
+          }
+        ],
+        "query": "live",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/kevmoz/macaroonnetwork-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "1.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Give your AI coding agent an architecture canvas to design and evolve diagrams.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.OliverGrabner/composer",
+        "packages": [
+          {
+            "identifier": "@usecomposer/mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.7"
+          }
+        ],
+        "query": "live",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/olivergrabner/composer-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "0.1.7",
+        "zero_cost_eligible": true
+      }
+    ],
+    "effect": "Using both live results, join every live post to exactly one live user where post userId equals user id,",
+    "results": [
+      {
+        "binding_performed": false,
+        "candidate_count": 30,
+        "candidates": [
+          {
+            "archive_sha256": "3a5d1ce9bd4e03683f0c5ca8563fd3185b7df4a42f588b2125d84e854c2e02c2",
+            "binding_kind": "apt",
+            "description": "Configuration for the Ubuntu Budgie Live .iso Image",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "live"
+            ],
+            "name": "budgie-live-settings",
+            "packages": [],
+            "query": "live",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.20.13",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "8d5ebe2c55469751ac95ef46751d7625bc055b7cb3886d10017331fddf98805b",
+            "binding_kind": "apt",
+            "description": "dracut is an event driven initramfs infrastructure (live image modules)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "live"
+            ],
+            "name": "dracut-live",
+            "packages": [],
+            "query": "live",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "060+5-1ubuntu3.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "e8155e2a4011eea6dd8d5c1a9b1696d51b3e0f46b5c2963ca53af3c76fb3d6dd",
+            "binding_kind": "apt",
+            "description": "Edubuntu live media support",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "live"
+            ],
+            "name": "edubuntu-live",
+            "packages": [],
+            "query": "live",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "14.04.2build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "6f74a785b5cd214d8e82c70ae921468540019a0fdc077d391d8b3137f7ae8e1a",
+            "binding_kind": "apt",
+            "description": "Configuration for the Edubuntu .iso Image",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "live"
+            ],
+            "name": "edubuntu-live-settings",
+            "packages": [],
+            "query": "live",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "24.04.26.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "dd84825165577e6841320a4335274786e7ad863d7bffad6e8918125e10041aa1",
+            "binding_kind": "apt",
+            "description": "Test results for the GCC test suite",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "results"
+            ],
+            "name": "gcc-10-test-results",
+            "packages": [],
+            "query": "results",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "10.5.0-4ubuntu2.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "ffb196e38e876574e4145c4b9d848809b2fa7e78c8e23abe9031ca67f26a95b7",
+            "binding_kind": "apt",
+            "description": "Test results for the GCC test suite",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "results"
+            ],
+            "name": "gcc-11-test-results",
+            "packages": [],
+            "query": "results",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "11.5.0-1ubuntu1~24.04.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "41ddfd96bd27da2368423849c9906ad44686127e6f341aeeb2b0c5d2375eeca7",
+            "binding_kind": "apt",
+            "description": "Test results for the GCC test suite",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "results"
+            ],
+            "name": "gcc-12-test-results",
+            "packages": [],
+            "query": "results",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "12.4.0-2ubuntu1~24.04.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "b166cced7ddecca8fab3c51967ea55e69a59eb12c7c240dfef0bc9809b885584",
+            "binding_kind": "apt",
+            "description": "Test results for the GCC test suite",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "results"
+            ],
+            "name": "gcc-13-test-results",
+            "packages": [],
+            "query": "results",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "13.3.0-6ubuntu2~24.04.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c04862a96bb4920ad69e53f8631e93ab3f1544e3719d9e74673706f3a13afbe9",
+            "binding_kind": "apt",
+            "description": "Test results for the GCC test suite",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "results"
+            ],
+            "name": "gcc-14-test-results",
+            "packages": [],
+            "query": "results",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "14.2.0-4ubuntu2~24.04.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "bf6107975dfd2d4091c34512e3633dfeb0beee0aa323449e857923630a0cde1d",
+            "binding_kind": "apt",
+            "description": "Test results for the GCC test suite",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "results"
+            ],
+            "name": "gcc-9-test-results",
+            "packages": [],
+            "query": "results",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "9.5.0-6ubuntu2.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "11fed46cae5ee0fad97d044335bebeac97dccd8e9e4192de291ac4a28a914fa4",
+            "binding_kind": "apt",
+            "description": "Join/Split Lines plugin for gedit",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "join"
+            ],
+            "name": "gedit-plugin-join-lines",
+            "packages": [],
+            "query": "join",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.0-2build3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "a5dcd71880816022d5555b0844b3a1990ff1f290823e60311063d3990636ddcd",
+            "binding_kind": "apt",
+            "description": "KIWI - Dracut module for iso(live) image type",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "live"
+            ],
+            "name": "kiwi-dracut-live",
+            "packages": [],
+            "query": "live",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "9.25.22-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "1f72ac3dbd8c98502d1c387a3a755ec949de5d4866d517cdd33d7da82916c1a4",
+            "binding_kind": "apt",
+            "description": "Live System Boot Components",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "live"
+            ],
+            "name": "live-boot",
+            "packages": [],
+            "query": "live",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1:20230131",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "0c040ff86a5e522d602af08f59011e817677fbe0602118270ee2cf624e395f34",
+            "binding_kind": "apt",
+            "description": "Live System Boot Components (initramfs-tools backend)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "live"
+            ],
+            "name": "live-boot-initramfs-tools",
+            "packages": [],
+            "query": "live",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1:20230131",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "29fdb5b25138533c614c5d148df37a634010d40414ba98e0ee7153f026d5dd7a",
+            "binding_kind": "apt",
+            "description": "Debian Live - System build scripts",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "live"
+            ],
+            "name": "live-build",
+            "packages": [],
+            "query": "live",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.0~a57-1ubuntu49.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "a03a1fcb84176a9364116e7fd045e513a30f93f5da48d094fe1c911142d87d2f",
+            "binding_kind": "apt",
+            "description": "Debian Live - System build scripts (CGI frontend)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "live"
+            ],
+            "name": "live-build-cgi",
+            "packages": [],
+            "query": "live",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.0~a57-1ubuntu49.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "6aef47f7c83493f8ef6c596409fde080abf816ff615cf65665252cc63b0016a7",
+            "binding_kind": "apt",
+            "description": "GUI to clone and manage Live-Build USB sticks",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "live"
+            ],
+            "name": "live-clone",
+            "packages": [],
+            "query": "live",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.1-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c94f4773ca5f1a54c35adcbdf86233579ae90a595042b356f74a58bc6d5f5fd9",
+            "binding_kind": "apt",
+            "description": "Live System Configuration Components",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "live"
+            ],
+            "name": "live-config",
+            "packages": [],
+            "query": "live",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "11.0.4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d732051d9604f27a15d4d1f09a0b66fc2761b1e7d5efde81430cb2d05291a965",
+            "binding_kind": "apt",
+            "description": "Live System Configuration Components (systemd backend)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "live"
+            ],
+            "name": "live-config-systemd",
+            "packages": [],
+            "query": "live",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "11.0.4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "cc9240adf8b7f52dedfeb923c76c39925f6f2421c280e42d061c2222e89951a4",
+            "binding_kind": "apt",
+            "description": "Live Systems Documentation (metapackage)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "live"
+            ],
+            "name": "live-manual",
+            "packages": [],
+            "query": "live",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2:20151217.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "06dc26008e9976c2d590020af8c9eaa11394f1232c6825bc3605645af74f6d4c",
+            "binding_kind": "apt",
+            "description": "Live Systems Documentation (epub)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "live"
+            ],
+            "name": "live-manual-epub",
+            "packages": [],
+            "query": "live",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2:20151217.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "506bd970c9900074a18d5b6ef0f91abf2385ea11eeedf739523d9a3707c7741b",
+            "binding_kind": "apt",
+            "description": "Live Systems Documentation (html)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "live"
+            ],
+            "name": "live-manual-html",
+            "packages": [],
+            "query": "live",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2:20151217.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "66b87c59f7bb6dd1454375bb9fe28b33fb19b05fa2d088584e1e8eeb0ae14774",
+            "binding_kind": "apt",
+            "description": "Live Systems Documentation (odf)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "live"
+            ],
+            "name": "live-manual-odf",
+            "packages": [],
+            "query": "live",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2:20151217.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "999f9fdbeaacc55f3029ece4aef4f52c12feb60e56b02005fe61b2deca56a64a",
+            "binding_kind": "apt",
+            "description": "Live Systems Documentation (pdf)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "live"
+            ],
+            "name": "live-manual-pdf",
+            "packages": [],
+            "query": "live",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2:20151217.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "99ba19f3aa07cc051e83824995082df4a2fb1b7c9a7a4cca7cb1ea46bf207eda",
+            "binding_kind": "apt",
+            "description": "Live Systems Documentation (txt)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "live"
+            ],
+            "name": "live-manual-txt",
+            "packages": [],
+            "query": "live",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2:20151217.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "cb23626500a6d554b40065c352e6081c646b3c22ddbaec89d41b9062d47b7d48",
+            "binding_kind": "apt",
+            "description": "selection of oft-used non-free-firmware shipped on live systems",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "live"
+            ],
+            "name": "live-task-non-free-firmware-pc",
+            "packages": [],
+            "query": "live",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "12.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "4e842a5e781c8c4d9bbd9c8358dee8334048ba4fc3dde64153670917fe88fafa",
+            "binding_kind": "apt",
+            "description": "provides firmware for server network and storage devices",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "live"
+            ],
+            "name": "live-task-non-free-firmware-server",
+            "packages": [],
+            "query": "live",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "12.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "911727605f504e858b71a04d67175d064ff4c0881f81762772b4cb6fced5a03c",
+            "binding_kind": "apt",
+            "description": "Live System Extra Components",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "live"
+            ],
+            "name": "live-tools",
+            "packages": [],
+            "query": "live",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1:20190831.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "38f33319656616466b4305cc9cfde29598465a4eb7cfbe7c511b9e846108f032",
+            "binding_kind": "apt",
+            "description": "Join urls and normalize as in path.join",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "join"
+            ],
+            "name": "node-url-join",
+            "packages": [],
+            "query": "join",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "5.0.0-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "95f3d7e24ee526263bd5243c5972a7e804ce25c27886dad8cb5df75d18230792",
+            "binding_kind": "apt",
+            "description": "Default settings for Ubuntu MATE live CD",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "live"
+            ],
+            "name": "ubuntu-mate-live-settings",
+            "packages": [],
+            "query": "live",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "24.04.4",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Using both live results, join every live post to exactly one live user where post userId equals user id,",
+        "errors": [],
+        "queries": [
+          "both",
+          "live",
+          "results",
+          "join"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "APT_CATALOG",
+        "source_url": null
+      },
+      {
+        "binding_performed": false,
+        "candidate_count": 57,
+        "candidates": [
+          {
+            "description": "Unofficial read-only client for the mein-aldi.de (ALDI S\u00fcd) grocery-delivery catalog.",
+            "is_latest": true,
+            "name": "io.github.RayNCooper/grocery-delivery-mcp",
+            "packages": [
+              {
+                "identifier": "grocery-delivery-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.2.0"
+              }
+            ],
+            "query": "live",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/RayNCooper/grocery-delivery-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.2.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Live chess tournament results and up-to-date player ratings in chat.",
+            "is_latest": true,
+            "name": "ai.b77/chess-results",
+            "packages": [],
+            "query": "results",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://chess-results.b77.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Typed, deterministic tools on a live Salesforce or HubSpot copy, every write audited and reversible.",
+            "is_latest": true,
+            "name": "ai.livecrm/livecrm",
+            "packages": [],
+            "query": "live",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.livecrm.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Live verified resort snow, forecasts, powder search, trip planning & grounded Q&A for 430+ resorts.",
+            "is_latest": true,
+            "name": "ai.snowdata/live-snow",
+            "packages": [],
+            "query": "live",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.snowdata.ai"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Operate secure JoinLayer data pipelines through delegated OAuth.",
+            "is_latest": true,
+            "name": "app.joinlayer/mcp",
+            "packages": [],
+            "query": "join",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.joinlayer.app/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/joinlayer/agent-toolkit"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Plan a Virtual Delivery Center for any initiative: pods, roles, AI agents, Delivery Units.",
+            "is_latest": true,
+            "name": "com.aidoos/virtual-delivery-center",
+            "packages": [],
+            "query": "live",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://aidoos.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Live data: weather, air quality, FX, CN/HK/US stocks, IP geo, domain, SSL, China reachability.",
+            "is_latest": true,
+            "name": "com.ainetcafe/netcafe-live-data",
+            "packages": [],
+            "query": "live",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://ainetcafe.com/mcp/data?s=registry"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/mario03690/ai-netcafe"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.2.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Search and read the public Applivery docs (MDM & app distribution). Read-only, no auth.",
+            "is_latest": true,
+            "name": "com.applivery.docs/mcp",
+            "packages": [],
+            "query": "live",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://docs.applivery.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/applivery/docs-front"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "2.4.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "joinBudget MCP: Manage personal finances, budget spaces, transactions, and categories.",
+            "is_latest": true,
+            "name": "com.joinbudget/mcp",
+            "packages": [],
+            "query": "join",
+            "remotes": [],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.7.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Live audience engagement: run Q&A, polls, liveblogs and chat for webinars and town halls.",
+            "is_latest": true,
+            "name": "com.reactlive/reactlive",
+            "packages": [],
+            "query": "live",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://www.reactlive.com/api/v2/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Live GPS sports tracking + per-sport analysis of GPX/IGC/FIT files: thermals, wind, phases, laps",
+            "is_latest": true,
+            "name": "com.sportstracklive/mcp",
+            "packages": [],
+            "query": "live",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.sportstracklive.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Ask runboth.dev in plain language: what RunBoth does, how to install it, and its limits.",
+            "is_latest": true,
+            "name": "dev.runboth/agent",
+            "packages": [],
+            "query": "both",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://runboth-agent-mgbxvs4loq-uc.a.run.app/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "GingerLive livestream ad formats, network reach stats, campaign case studies, and streamer program.",
+            "is_latest": true,
+            "name": "io.gingerlive/mcp",
+            "packages": [],
+            "query": "live",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.gingerlive.io/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/gingerlive-io/gingerlive-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.2.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "UK livestock welfare, feed, health, and movement rules \u2014 8 species, DEFRA codes",
+            "is_latest": true,
+            "name": "io.github.Ansvar-Systems/uk-livestock",
+            "packages": [],
+            "query": "live",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.ansvar.eu/uk-livestock/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Ansvar-Systems/uk-livestock-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Connects AI assistants to a live ChemDraw window on Windows via COM automation.",
+            "is_latest": true,
+            "name": "io.github.MALeitch/live-chemdraw-mcp",
+            "packages": [],
+            "query": "live",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/MALeitch/live-chemdraw-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.2.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Join two lists of JSON rows on a key, like SQL or VLOOKUP: left, inner, full, anti joins, union.",
+            "is_latest": true,
+            "name": "io.github.Nero-Engine/dataset-join-merge",
+            "packages": [],
+            "query": "join",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://dataset-join-merge.nerolabs.workers.dev/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Nero-Engine/dataset-join-merge-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Prefeitura SC Joinville: Clearance Certificate (Debts), official-source lookup. Platform-hosted, pay",
+            "is_latest": true,
+            "name": "io.github.mcp-dir/pref_sc_joinville_cnd-mcp",
+            "packages": [],
+            "query": "join",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.mcp.ai/p_pref_sc_joinville_cnd"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/mcp-dir/pref_sc_joinville_cnd-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Current medical research on joint pain, osteoarthritis, and relief options.",
+            "is_latest": true,
+            "name": "io.github.usliberty/joint-genesis-mcp",
+            "packages": [],
+            "query": "join",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.usliberty.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Dated deliverables against a quote or work order. late_report says what has slipped as at any date y",
+            "is_latest": true,
+            "name": "com.bestremotetools/delivery-schedule-milestones-late-report",
+            "packages": [
+              {
+                "identifier": "https://github.com/theluckystrike/mcp-servers/releases/download/v0.21.0/delivery-schedule.mcpb",
+                "registry_type": "mcpb",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [
+                  "MCP_LICENSE_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.21.0"
+              }
+            ],
+            "query": "live",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "subfolder": "servers/delivery-schedule",
+              "url": "https://github.com/theluckystrike/mcp-servers"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 15,
+            "status": "active",
+            "version": "0.21.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Search current public UK company metadata from the official Companies House Public Data API.\u2026",
+            "is_latest": true,
+            "name": "com.macaroonnetwork/companies-house-live-search-v1",
+            "packages": [
+              {
+                "identifier": "macaroonnetwork-mcp-companies-house-live-search-v1",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "uvx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.1.0"
+              }
+            ],
+            "query": "live",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/kevmoz/macaroonnetwork-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "1.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Give your AI coding agent an architecture canvas to design and evolve diagrams.",
+            "is_latest": true,
+            "name": "io.github.OliverGrabner/composer",
+            "packages": [
+              {
+                "identifier": "@usecomposer/mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.7"
+              }
+            ],
+            "query": "live",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/olivergrabner/composer-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.1.7",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Durable tasks, reports, reviews and branch convergence for multi-agent teams over local files.",
+            "is_latest": true,
+            "name": "io.github.joinwell52-AI/fcop",
+            "packages": [
+              {
+                "identifier": "fcop-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "4.0.3"
+              }
+            ],
+            "query": "join",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "subfolder": "mcp",
+              "url": "https://github.com/joinwell52-AI/FCoP"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "4.0.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Audit a domain email deliverability via Apify: SPF, DKIM, DMARC, MX, blacklist, catch-all, age.",
+            "is_latest": true,
+            "name": "com.mambabuilt/mcp-domain-deliverability-checker",
+            "packages": [
+              {
+                "identifier": "@mambalabsdev/mcp-domain-deliverability-checker",
+                "registry_type": "npm",
+                "required_environment": [
+                  "APIFY_TOKEN"
+                ],
+                "runtime_hint": null,
+                "secret_environment": [
+                  "APIFY_TOKEN"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.1"
+              }
+            ],
+            "query": "live",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/mambalabsdev/mcp-domain-deliverability-checker"
+            },
+            "required_environment_count": 1,
+            "required_secret_count": 1,
+            "score": 14,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP server for the Yango Delivery claims B2B API: price checks, delivery claims, courier tracking.",
+            "is_latest": true,
+            "name": "io.github.A1-x-Tech/mcp-yango-delivery",
+            "packages": [
+              {
+                "identifier": "mcp-yango-delivery",
+                "registry_type": "npm",
+                "required_environment": [
+                  "YANGO_DELIVERY_TOKEN"
+                ],
+                "runtime_hint": null,
+                "secret_environment": [
+                  "YANGO_DELIVERY_TOKEN"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.1.0"
+              }
+            ],
+            "query": "live",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/A1-x-Tech/mcp-yango-delivery"
+            },
+            "required_environment_count": 1,
+            "required_secret_count": 1,
+            "score": 14,
+            "status": "active",
+            "version": "1.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Semantic code search and analysis from CodeAlive for AI assistants and agents.",
+            "is_latest": true,
+            "name": "io.github.CodeAlive-AI/codealive-mcp",
+            "packages": [
+              {
+                "identifier": "ghcr.io/codealive-ai/codealive-mcp:3.0.3",
+                "registry_type": "oci",
+                "required_environment": [
+                  "CODEALIVE_API_KEY"
+                ],
+                "runtime_hint": "docker",
+                "secret_environment": [
+                  "CODEALIVE_API_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": null
+              }
+            ],
+            "query": "live",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/CodeAlive-AI/codealive-mcp.git"
+            },
+            "required_environment_count": 1,
+            "required_secret_count": 1,
+            "score": 14,
+            "status": "active",
+            "version": "3.0.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Email deliverability for AI agents. 12 tools: verify, DNSBL, DMARC, spam-trap, finder.",
+            "is_latest": true,
+            "name": "io.github.Davison-Francis/deliveriq-mcp",
+            "packages": [
+              {
+                "identifier": "@deliveriq/mcp",
+                "registry_type": "npm",
+                "required_environment": [
+                  "DELIVERIQ_API_KEY"
+                ],
+                "runtime_hint": null,
+                "secret_environment": [
+                  "DELIVERIQ_API_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.1.1"
+              }
+            ],
+            "query": "live",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "subfolder": "deliveriq-mcp",
+              "url": "https://github.com/Davison-Francis/min8t-sdks"
+            },
+            "required_environment_count": 1,
+            "required_secret_count": 1,
+            "score": 14,
+            "status": "active",
+            "version": "1.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Collaboration rooms for AI agents. Real-time messaging + standard git.",
+            "is_latest": true,
+            "name": "io.github.kushneryk/join.cloud",
+            "packages": [
+              {
+                "identifier": "joincloud",
+                "registry_type": "npm",
+                "required_environment": [
+                  "DATABASE_URL"
+                ],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "streamable-http",
+                  "url": "https://join.cloud/mcp"
+                },
+                "version": "0.1.0"
+              }
+            ],
+            "query": "join",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/kushneryk/join.cloud"
+            },
+            "required_environment_count": 1,
+            "required_secret_count": 0,
+            "score": 13,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Coding agents read frozen requirements, report progress, and submit delivery evidence.",
+            "is_latest": true,
+            "name": "io.briefport/agent-delivery",
+            "packages": [],
+            "query": "live",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://briefport.io/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Historical football results, draws and no-draw streaks. 11 read-only tools, 6 need no API key.",
+            "is_latest": true,
+            "name": "io.fdb4/football-database-and-results",
+            "packages": [],
+            "query": "results",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://fdb4.io/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "1.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Event venue CRM \u2014 manage inquiries, quotes, events and availability from any AI agent",
+            "is_latest": true,
+            "name": "app.joinways/joinways",
+            "packages": [],
+            "query": "join",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.joinways.app/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Using both live results, join every live post to exactly one live user where post userId equals user id,",
+        "errors": [],
+        "queries": [
+          "both",
+          "live",
+          "results",
+          "join"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "OFFICIAL_MCP_REGISTRY",
+        "source_url": "https://registry.modelcontextprotocol.io"
+      }
+    ],
+    "schema": "PROJECT_BRAIN_FEDERATED_CAPABILITY_DISCOVERY_V1",
+    "sources": [
+      "APT_CATALOG",
+      "OFFICIAL_MCP_REGISTRY"
+    ]
+  },
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
+  "source": "FEDERATED_CAPABILITY_DISCOVERY_FALLBACK",
+  "targeted_acquisition_error": "AutoAcquisitionFailure:NO_LOW_FRICTION_APT_CLI_CANDIDATE"
+}
