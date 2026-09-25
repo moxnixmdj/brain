@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T16:34:05.985582+00:00",
+  "mission_id": "ASTRA-MULTI-ACTION-FANOUT-COMPILER-DIAG-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_MULTI_ACTION_FANOUT_COMPILER_DIAG_002.json",
+  "mission_sha256": "cf25d7f05a4cb8883b3c6f4b2a4131cc19da02ffdd608d980db1d9a97234f891",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "8d1ddd1ce40c59e15de5bafec4e9d0f775ecc6d6d307bcc59227d7ace3a02b5b",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
