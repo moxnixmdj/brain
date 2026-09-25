@@ -3875,7 +3875,71 @@ def _validate_proposal_value(value,path="proposal"):
     raise Blocker("CAPABILITY_PROPOSAL_VALUE_INVALID:"+path)
 
 
-def _capability_problem_proposal(step,mission):
+def _validate_proposal_goal_binding(goal,proposal,required_targets):
+    goal=str(goal or "")
+    if not goal.strip():
+        raise Blocker("CAPABILITY_PROPOSAL_GOAL_REQUIRED")
+    expected=str(proposal.get("goal_sha256") or "").lower()
+    actual=hashlib.sha256(goal.encode("utf-8")).hexdigest()
+    if expected!=actual:
+        raise Blocker("CAPABILITY_PROPOSAL_GOAL_HASH_MISMATCH")
+    clauses=proposal.get("clauses")
+    if not isinstance(clauses,list) or not clauses:
+        raise Blocker("CAPABILITY_PROPOSAL_CLAUSES_REQUIRED")
+    covered=[False]*len(goal)
+    represented=set()
+    allowed_clause_fields={"start","end","text","target_effects"}
+    for index,clause in enumerate(clauses):
+        if not isinstance(clause,dict):
+            raise Blocker("CAPABILITY_PROPOSAL_CLAUSE_INVALID:"+str(index))
+        extra=sorted(str(k) for k in clause if str(k) not in allowed_clause_fields)
+        if extra:
+            raise Blocker(
+                "CAPABILITY_PROPOSAL_CLAUSE_FIELD_REJECTED:"
+                +str(index)+":"+",".join(extra)
+            )
+        try:
+            start=int(clause.get("start"))
+            end=int(clause.get("end"))
+        except Exception as exc:
+            raise Blocker("CAPABILITY_PROPOSAL_CLAUSE_SPAN_INVALID:"+str(index)) from exc
+        if start<0 or end<=start or end>len(goal):
+            raise Blocker("CAPABILITY_PROPOSAL_CLAUSE_SPAN_INVALID:"+str(index))
+        text=str(clause.get("text") or "")
+        if goal[start:end]!=text:
+            raise Blocker("CAPABILITY_PROPOSAL_CLAUSE_TEXT_MISMATCH:"+str(index))
+        targets=clause.get("target_effects")
+        if (
+            not isinstance(targets,list) or not targets
+            or any(not isinstance(x,str) or not x.strip() for x in targets)
+        ):
+            raise Blocker("CAPABILITY_PROPOSAL_CLAUSE_TARGETS_INVALID:"+str(index))
+        normalized=[str(x).strip() for x in targets]
+        unknown=sorted(set(normalized)-set(required_targets))
+        if unknown:
+            raise Blocker(
+                "CAPABILITY_PROPOSAL_CLAUSE_TARGET_UNKNOWN:"
+                +str(index)+":"+",".join(unknown)
+            )
+        represented.update(normalized)
+        for pos in range(start,end):
+            covered[pos]=True
+    for pos,ch in enumerate(goal):
+        if not ch.isspace() and not covered[pos]:
+            raise Blocker("CAPABILITY_PROPOSAL_GOAL_TEXT_UNCOVERED:"+str(pos))
+    missing=sorted(set(required_targets)-represented)
+    if missing:
+        raise Blocker(
+            "CAPABILITY_PROPOSAL_REQUIRED_TARGET_UNCOVERED:"+",".join(missing)
+        )
+    return {
+      "goal_sha256":actual,
+      "clause_count":len(clauses),
+      "required_targets":list(required_targets),
+    }
+
+
+def _capability_problem_proposal(step,mission,goal):
     proposal=step.get("capability_problem_proposal")
     ref=step.get("capability_problem_proposal_ref")
     if proposal is None and ref:
@@ -3885,6 +3949,7 @@ def _capability_problem_proposal(step,mission):
     if not isinstance(proposal,dict):
         raise Blocker("CAPABILITY_PROPOSAL_INVALID")
     allowed_keys={
+      "goal_sha256","clauses",
       "capability_instances","inputs","finish_summary","max_expansions",
     }
     unknown=sorted(str(k) for k in proposal if str(k) not in allowed_keys)
@@ -3902,6 +3967,8 @@ def _capability_problem_proposal(step,mission):
         or any(not isinstance(x,str) or not x.strip() for x in required_targets)
     ):
         raise Blocker("CAPABILITY_PROPOSAL_REQUIRED_TARGET_EFFECTS_INVALID")
+    required_targets=[str(x).strip() for x in required_targets]
+    goal_binding=_validate_proposal_goal_binding(goal,proposal,required_targets)
     raw_instances=proposal.get("capability_instances") or []
     if (
         not isinstance(raw_instances,list) or not raw_instances
@@ -3962,12 +4029,13 @@ def _capability_problem_proposal(step,mission):
       "capability_instances":normalized,
       "finish_summary":finish_summary,
       "max_expansions":max_expansions,
-      "_proposal_contract":"VERIFIED_REGISTRY_REFERENCES_ONLY",
+      "_proposal_contract":"GOAL_BOUND__CLAUSE_COVERED__VERIFIED_REGISTRY_REFERENCES_ONLY",
+      "_goal_binding":goal_binding,
     }
 
 
 def _run_verified_capability_proposal(step,mission,goal):
-    problem=_capability_problem_proposal(step,mission)
+    problem=_capability_problem_proposal(step,mission,goal)
     if problem is None:
         return None
     derived=dict(step)
