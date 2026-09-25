@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T18:54:50.369224+00:00",
+  "created_at_utc": "2026-09-25T18:54:47.559327+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T18:54:50.368899+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,pathlib,json\np=pathlib.Path('canonical/runtime/capability_discovery.py')\ns=importlib.util.spec_from_file_location('cd',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\ngoal='Encode those exact records as BSON and save canonical/astra_runtime/tmp/BSON_RECORDS.bson'\nout=m.search_pypi_packages(goal,limit=20,timeout_s=20)\nc=out.get('candidates') or []\nnames=[str(x.get('name') or '') for x in c]\nprint(json.dumps([{'name':x.get('name'),'score':x.get('score')} for x in c[:15]],sort_keys=True))\nassert any(n.lower().startswith('bson') for n in names[:12]),names[:12]\nprint('PYPI_BSON_FORMAT_RANKING_VERIFIED')\nPY",
+        "duration_s": 2.809,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "[{\"name\": \"bson-modern\", \"score\": 208}, {\"name\": \"bson-schema-to-pydantic\", \"score\": 208}, {\"name\": \"bson-senao\", \"score\": 204}, {\"name\": \"bson-tools\", \"score\": 204}, {\"name\": \"bson-extra\", \"score\": 200}, {\"name\": \"bson-timezone\", \"score\": 192}, {\"name\": \"Flask-BSON\", \"score\": 184}, {\"name\": \"EzyDB-bson\", \"score\": 180}, {\"name\": \"bson303\", \"score\": 172}, {\"name\": \"bsonschema\", \"score\": 172}, {\"name\": \"bsonsearch\", \"score\": 172}, {\"name\": \"bsonstream\", \"score\": 168}, {\"name\": \"bsondb\", \"score\": 164}, {\"name\": \"FluGibson\", \"score\": 107}, {\"name\": \"adamdobson2048\", \"score\": 107}]\nPYPI_BSON_FORMAT_RANKING_VERIFIED\n"
+      },
+      "step_id": "discover-bson-candidates",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-PYPI-BSON-DISCOVERY-DIAG-004",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_PYPI_BSON_DISCOVERY_DIAG_004.json",
+  "mission_sha256": "39d49bcb37c44950e45b349bce6c24714d696667561ade42efd10d9d6907505e",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T18:54:50.368914+00:00"
+}
