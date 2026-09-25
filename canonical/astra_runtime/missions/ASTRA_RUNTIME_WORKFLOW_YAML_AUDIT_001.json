@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-WORKFLOW-YAML-AUDIT-001",
+  "purpose": "Orthogonal real project mission: understand and verify the live ASTRA GitHub Actions workflow from YAML without hand-authored parser/tool bindings.",
+  "goal": "Read .github/workflows/astra-shared-runtime.yml. Create canonical/astra_runtime/tmp/ASTRA_WORKFLOW_AUDIT.json containing the workflow name, trigger names, push branches, push path filters, workflow_dispatch input names, top-level permissions, every job ID, each job's runner label and timeout-minutes, and for each job the ordered list of step names plus every uses action reference. Finally independently verify against the raw YAML text that every reported job ID and every reported uses action reference really appears in the workflow, and fail if the audit is empty or any reported item is unsupported by the source.",
+  "steps": [
+    {
+      "id": "execute-workflow-yaml-audit",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 24,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "mandatory_model_planner": false,
+    "manual_target_effects": false,
+    "manual_initial_facts": false,
+    "manual_controller_actions": false,
+    "manual_supplier": false,
+    "manual_binding": false,
+    "real_project_artifact": true,
+    "final_effect_verification_required": true,
+    "orthogonal_pressure_family": "yaml_parsing_structured_audit_source_crosscheck"
+  }
+}
