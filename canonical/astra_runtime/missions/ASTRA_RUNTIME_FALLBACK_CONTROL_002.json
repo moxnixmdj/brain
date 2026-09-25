@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-FALLBACK-CONTROL-002",
+  "purpose": "Fresh clean proof of runtime postcondition fallback with no capability acquisition for control flow.",
+  "goal": "Using a real rendered browser, open https://jsonplaceholder.typicode.com/this-endpoint-does-not-exist, save a screenshot to canonical/astra_runtime/tmp/FALLBACK_PRIMARY.png, and save the rendered result to canonical/astra_runtime/tmp/FALLBACK_PRIMARY.json. If the rendered primary result is not a JSON array containing at least one item, fall back to https://jsonplaceholder.typicode.com/users, save a screenshot to canonical/astra_runtime/tmp/FALLBACK_SECONDARY.png, and save the rendered result to canonical/astra_runtime/tmp/FALLBACK_SECONDARY.json. Create canonical/astra_runtime/tmp/FALLBACK_DECISION.json containing primary_url, fallback_url, used_fallback, final_url, and item_count. Finally independently verify the primary result was not a nonempty JSON array, the fallback result was a nonempty JSON array, used_fallback is true, final_url is the fallback URL, and item_count equals the fallback array length.",
+  "steps": [
+    {
+      "id": "run-runtime-fallback",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 20,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "manual_controller_actions": false,
+    "fallback_decision_depends_on_runtime_observation": true,
+    "capability_acquisition_for_control_gap_forbidden": true,
+    "fresh_mission_identity": true,
+    "runtime_fallback_operator_commit": "1ed9971b089a54645dad65d616b47a2e94e2e86a",
+    "fallback_compiler_commit": "e3f3ea34ac0692fce5d60134297b5336be984697",
+    "gap_classifier_commit": "c1447d300fb5bbd02049bd198d6e121c0806708f",
+    "source_mission": "ASTRA-RUNTIME-FALLBACK-CONTROL-001"
+  }
+}
