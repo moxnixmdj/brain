@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-25T00:35:20.054699+00:00",
+  "created_at_utc": "2026-09-25T00:35:19.820232+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T00:35:20.054420+00:00",
+      "ok": true,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython canonical/tests/test_goal_compiler.py\npython - <<'PY'\nimport importlib.util,json,pathlib\nroot=pathlib.Path('.').resolve()\np=root/'canonical/runtime/goal_compiler.py'\ns=importlib.util.spec_from_file_location('gcprov2',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads((root/'canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads((root/'canonical/astra_runtime/missions/ASTRA_RUNTIME_LIVE_PROVENANCE_AUDIT_001.json').read_text())['goal']\ntry:\n out=m.compile_goal(goal,reg,root); print(json.dumps({'status':'COMPILED','modes':[x['mode'] for x in out.get('compiled_parts',[])],'parts':out.get('compiled_parts')},sort_keys=True))\nexcept Exception as e:\n print(json.dumps({'status':'FAILED','type':type(e).__name__,'code':getattr(e,'code',None),'detail':getattr(e,'detail',None),'error':str(e)},sort_keys=True))\nprint('LIVE_PROVENANCE_COMPILER_DIAG_2_COMPLETE')\nPY",
+        "duration_s": 0.234,
+        "returncode": 0,
+        "stderr": "test_barcode_goal_selects_verified_barcode_not_qr (__main__.GoalCompilerTests.test_barcode_goal_selects_verified_barcode_not_qr) ... ok\ntest_compound_evidence_bundle_compiles_manifest_archive_and_verifier (__main__.GoalCompilerTests.test_compound_evidence_bundle_compiles_manifest_archive_and_verifier) ... ok\ntest_compound_goal_compiles_full_verified_audit_pipeline (__main__.GoalCompilerTests.test_compound_goal_compiles_full_verified_audit_pipeline) ... ok\ntest_json_status_manifest_compiles_and_executes (__main__.GoalCompilerTests.test_json_status_manifest_compiles_and_executes) ... ok\ntest_plain_image_only_pdf_goal_selects_verified_ocr (__main__.GoalCompilerTests.test_plain_image_only_pdf_goal_selects_verified_ocr) ... ok\ntest_plain_qr_goal_selects_verified_qr_and_binds_arguments (__main__.GoalCompilerTests.test_plain_qr_goal_selects_verified_qr_and_binds_arguments) ... ok\ntest_replay_prefers_typed_context_over_stale_later_output (__main__.GoalCompilerTests.test_replay_prefers_typed_context_over_stale_later_output) ... ok\ntest_structured_nested_record_selection_compiles_and_executes (__main__.GoalCompilerTests.test_structured_nested_record_selection_compiles_and_executes) ... ok\ntest_unknown_goal_fails_closed (__main__.GoalCompilerTests.test_unknown_goal_fails_closed) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 0.025s\n\nOK\n",
+        "stdout": "{\"code\": \"GOAL_COMPILATION_SUBGOAL_UNRESOLVED\", \"detail\": \"{\\\"cause\\\": \\\"GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH\\\", \\\"cause_detail\\\": null, \\\"clauses\\\": [\\\"Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json\\\", \\\"Find the VERIFIED_BOUND_CAPABILITY whose source type is pypi\\\", \\\"Fetch that project's authoritative live PyPI metadata from the metadata URL recorded in the registry\\\", \\\"Verify that the pinned version and wheel filename still exist in that metadata, download that exact wheel, compute its SHA-256,\\\", \\\"verify it equals the wheel_sha256 recorded in the registry\\\", \\\"Create canonical/astra_runtime/tmp/LIVE_PYPI_PROVENANCE_AUDIT.json containing the capability ID, project, pinned version, wheel filename, recorded hash, live metadata hash, downloaded artifact hash, metadata URL, artifact URL, and a final verified boolean\\\", \\\"Finally independently read the report and fail unless all three hashes are identical and verified is true\\\"], \\\"index\\\": 2, \\\"subgoal\\\": \\\"Fetch that project's authoritative live PyPI metadata from the metadata URL recorded in the registry\\\"}\", \"error\": \"GOAL_COMPILATION_SUBGOAL_UNRESOLVED:{\\\"cause\\\": \\\"GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH\\\", \\\"cause_detail\\\": null, \\\"clauses\\\": [\\\"Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json\\\", \\\"Find the VERIFIED_BOUND_CAPABILITY whose source type is pypi\\\", \\\"Fetch that project's authoritative live PyPI metadata from the metadata URL recorded in the registry\\\", \\\"Verify that the pinned version and wheel filename still exist in that metadata, download that exact wheel, compute its SHA-256,\\\", \\\"verify it equals the wheel_sha256 recorded in the registry\\\", \\\"Create canonical/astra_runtime/tmp/LIVE_PYPI_PROVENANCE_AUDIT.json containing the capability ID, project, pinned version, wheel filename, recorded hash, live metadata hash, downloaded artifact hash, metadata URL, artifact URL, and a final verified boolean\\\", \\\"Finally independently read the report and fail unless all three hashes are identical and verified is true\\\"], \\\"index\\\": 2, \\\"subgoal\\\": \\\"Fetch that project's authoritative live PyPI metadata from the metadata URL recorded in the registry\\\"}\", \"status\": \"FAILED\", \"type\": \"GoalCompilationFailure\"}\nLIVE_PROVENANCE_COMPILER_DIAG_2_COMPLETE\n"
+      },
+      "step_id": "compile-only",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-LIVE-PROVENANCE-COMPILER-DIAG-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_LIVE_PROVENANCE_COMPILER_DIAG_002.json",
+  "mission_sha256": "d333cc229b263b0e042f284a6780d9c5c21c07cef2af8170ec2396c222b52318",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "updated_at_utc": "2026-09-25T00:35:20.054433+00:00"
+}
