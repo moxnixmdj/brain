@@ -108,6 +108,47 @@ class ModelIndependenceTests(unittest.TestCase):
             {"observe-a","observe-b"},
         )
 
+    def test_capability_instance_can_require_multiple_instances_of_one_declared_effect(self):
+        fake_registry={
+            "test.assess":{
+                "status":"VERIFIED_BOUND_CAPABILITY",
+                "requires":["knowledge.observation.available"],
+                "provides":["knowledge.assessment.available"],
+                "cost":1,
+                "result_fields":["status","output_path"],
+                "action_template":{
+                    "type":"assess_knowledge_consistency",
+                    "args":{"evidence_paths":"${input.evidence_paths}","output_path":"${input.output_path}"},
+                },
+            }
+        }
+        problem={
+            "initial_facts":[],
+            "target_effects":["knowledge.assessment.available"],
+            "capabilities":[],
+            "capability_instances":[{
+                "instance_id":"assess-two",
+                "capability_id":"test.assess",
+                "inputs":{
+                    "evidence_paths":["a.json","b.json"],
+                    "output_path":"assessment.json",
+                },
+                "requires_as":[
+                    {"effect":"knowledge.observation.available","as":"knowledge.observation.a.available"},
+                    {"effect":"knowledge.observation.available","as":"knowledge.observation.b.available"},
+                ],
+            }],
+        }
+        with mock.patch.object(runtime,"_load_bound_capability_registry",return_value=fake_registry):
+            enriched=runtime._inherit_verified_capabilities(problem)
+        cap=next(x for x in enriched["capabilities"] if x["id"]=="assess-two")
+        self.assertEqual(
+            cap["requires"],
+            ["knowledge.observation.a.available","knowledge.observation.b.available"],
+        )
+        self.assertEqual(cap["action"]["args"]["evidence_paths"],["a.json","b.json"])
+
+
     def test_capability_instance_cannot_alias_undeclared_effect(self):
         fake_registry={
             "test.fetch":{
