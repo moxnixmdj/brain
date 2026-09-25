@@ -3,9 +3,18 @@
 from __future__ import annotations
 import hashlib
 import pathlib
+import re
 import subprocess
 
-FORBIDDEN_FILTER_TERMS=("import ","include ","module ","input(","inputs","env.","$ENV")
+FORBIDDEN_FILTER_PATTERNS=(
+    r"(?<![A-Za-z0-9_.])import\s+",
+    r"(?<![A-Za-z0-9_.])include\s+",
+    r"(?<![A-Za-z0-9_.])module\s+",
+    r"(?<![A-Za-z0-9_.])input\s*\(",
+    r"(?<![A-Za-z0-9_.])inputs\b",
+    r"(?<![A-Za-z0-9_])env\.",
+    r"\$ENV\b",
+)
 
 def _safe_path(root, raw):
     root=pathlib.Path(root).resolve()
@@ -21,8 +30,7 @@ def run(args, root):
     filt=str(args.get("filter") or "").strip()
     if not filt or len(filt)>8000:
         raise RuntimeError("JQ_FILTER_REQUIRED")
-    lower=filt.lower()
-    if any(term.lower() in lower for term in FORBIDDEN_FILTER_TERMS):
+    if any(re.search(pattern,filt,flags=re.IGNORECASE) for pattern in FORBIDDEN_FILTER_PATTERNS):
         raise RuntimeError("JQ_FILTER_FORBIDDEN")
     out=_safe_path(root,args.get("output_path"))
     out.parent.mkdir(parents=True,exist_ok=True)
