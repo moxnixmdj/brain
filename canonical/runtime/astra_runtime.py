@@ -2556,7 +2556,7 @@ def _goal_action(action):
                 normalized=line.strip().rstrip(":").lower()
                 if normalized==wanted:
                     for nxt in lines[i+1:i+8]:
-                        if nxt:
+                        if nxt and re.search(r"[A-Za-z0-9]",nxt):
                             return nxt
                 m=re.match(r"^\s*"+re.escape(str(label).strip().rstrip(":"))+r"\s*:\s*(.+?)\s*$",line,re.IGNORECASE)
                 if m and m.group(1).strip():
@@ -2619,7 +2619,7 @@ def _goal_action(action):
                 normalized=line.strip().rstrip(":").lower()
                 if normalized==wanted:
                     for nxt in clean_lines[i+1:i+12]:
-                        if nxt:
+                        if nxt and re.search(r"[A-Za-z0-9]",nxt):
                             return nxt
                 m=re.match(r"^\s*"+re.escape(str(label).strip().rstrip(":"))+r"\s*:\s*(.+?)\s*$",line,re.IGNORECASE)
                 if m and m.group(1).strip():
