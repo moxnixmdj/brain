@@ -1,1 +1,14 @@
-“‚¢id¤text¥alpha‚¢id¤text¤beta‚¢id¤text¥gamma
+[
+  {
+    "id": 1,
+    "text": "alpha"
+  },
+  {
+    "id": 2,
+    "text": "beta"
+  },
+  {
+    "id": 3,
+    "text": "gamma"
+  }
+]

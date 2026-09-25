@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T18:40:20.967237+00:00",
+  "mission_id": "ASTRA-RUNTIME-PYPI-ACQUIRE-MSGPACK-003",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_PYPI_ACQUIRE_MSGPACK_003.json",
+  "mission_sha256": "a98e3081e8ca7375a28b4f880a05f1ab85bd8a9cbd46aa4ae93cbe071d9c7b53",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "2889394d470e0c6a5ae366c16b654138d110ada7e501587ac6da77bbb6a5f0fc",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
