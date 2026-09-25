@@ -1,0 +1,9 @@
+{
+  "adapter": "goal",
+  "error": "Blocker:GOAL_ARCHITECTURAL_GAP:{\"capability_acquisition_attempted\": false, \"evidence_path\": \"canonical/astra_runtime/evidence/ASTRA-RUNTIME-FALLBACK-CONTROL-001__GOAL_GAP_CLASSIFICATION.json\", \"gap_class\": \"VERIFICATION\", \"subgoal\": \"Finally independently verify the primary result was not a nonempty JSON array, the fallback result was a nonempty JSON array, used_fallback is true, final_url is the fallback URL, and item_count equals the fallback array length\"}",
+  "mission_id": "ASTRA-RUNTIME-FALLBACK-CONTROL-001",
+  "observed_at_utc": "2026-09-25T16:36:59.485633+00:00",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "run-runtime-fallback",
+  "step_index": 0
+}
