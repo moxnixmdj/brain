@@ -3301,6 +3301,101 @@ def _goal_action(action):
           "final_url":final_url,"duration_s":round(time.monotonic()-t,3),
         }
 
+    if typ=="assess_knowledge_consistency":
+        evidence_paths=args.get("evidence_paths") or []
+        output=_safe_repo_path(args.get("output_path",""))
+        max_age_s=args.get("max_age_s")
+        if (
+            not isinstance(evidence_paths,list) or not evidence_paths
+            or len(evidence_paths)>32
+            or any(not isinstance(x,str) or not x.strip() for x in evidence_paths)
+        ):
+            return {"type":typ,"verified":False,"error":"KNOWLEDGE_ASSESSMENT_INPUT_INVALID"}
+        records=[]
+        invalid=[]
+        now=datetime.datetime.now(datetime.timezone.utc)
+        for raw_path in evidence_paths:
+            p=_safe_repo_path(raw_path)
+            if not p.is_file():
+                invalid.append({"path":raw_path,"error":"MISSING"})
+                continue
+            try:
+                item=json.loads(p.read_text(encoding="utf-8"))
+            except Exception as exc:
+                invalid.append({"path":raw_path,"error":"INVALID_JSON:"+type(exc).__name__})
+                continue
+            value=item.get("value")
+            retrieved=str(item.get("retrieved_at_utc") or "")
+            stale=False
+            age_s=None
+            if max_age_s is not None:
+                try:
+                    ts=datetime.datetime.fromisoformat(retrieved.replace("Z","+00:00"))
+                    age_s=max(0.0,(now-ts).total_seconds())
+                    stale=age_s>float(max_age_s)
+                except Exception:
+                    stale=True
+            records.append({
+              "path":raw_path,
+              "source_url":item.get("source_url"),
+              "source_type":item.get("source_type"),
+              "retrieved_at_utc":retrieved,
+              "value":value,
+              "body_sha256":item.get("body_sha256"),
+              "stale":stale,
+              "age_s":age_s,
+            })
+        fresh=[x for x in records if not x.get("stale")]
+        canonical={}
+        for rec in fresh:
+            key=json.dumps(rec.get("value"),sort_keys=True,separators=(",",":"),ensure_ascii=False)
+            canonical.setdefault(key,[]).append(rec["path"])
+        if len(fresh)<2:
+            status="INSUFFICIENT"
+        elif len(canonical)==1:
+            status="SUPPORTED"
+        else:
+            status="CONFLICTED"
+        assessment={
+          "schema":"PROJECT_BRAIN_KNOWLEDGE_ASSESSMENT_V1",
+          "status":status,
+          "evidence_count":len(records),
+          "fresh_evidence_count":len(fresh),
+          "distinct_fresh_values":len(canonical),
+          "records":records,
+          "invalid":invalid,
+          "assessed_at_utc":utc(),
+        }
+        output.parent.mkdir(parents=True,exist_ok=True)
+        output.write_text(json.dumps(assessment,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+        return {
+          "type":typ,"verified":True,
+          "status":status,
+          "evidence_count":len(records),
+          "fresh_evidence_count":len(fresh),
+          "distinct_fresh_values":len(canonical),
+          "output_path":str(output.relative_to(ROOT)),
+        }
+
+    if typ=="assert_knowledge_status":
+        assessment_path=_safe_repo_path(args.get("assessment_path",""))
+        expected=str(args.get("expected_status") or "").strip().upper()
+        if expected not in {"SUPPORTED","CONFLICTED","INSUFFICIENT","STALE"}:
+            return {"type":typ,"verified":False,"error":"KNOWLEDGE_STATUS_INVALID"}
+        if not assessment_path.is_file():
+            return {"type":typ,"verified":False,"error":"KNOWLEDGE_ASSESSMENT_MISSING"}
+        try:
+            assessment=json.loads(assessment_path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            return {"type":typ,"verified":False,"error":"KNOWLEDGE_ASSESSMENT_INVALID:"+type(exc).__name__}
+        observed=str(assessment.get("status") or "").upper()
+        return {
+          "type":typ,"verified":observed==expected,
+          "observed_status":observed,
+          "expected_status":expected,
+          "assessment_path":str(assessment_path.relative_to(ROOT)),
+        }
+
     if typ=="assert_json_knowledge":
         evidence_path=_safe_repo_path(args.get("evidence_path",""))
         if not evidence_path.is_file():
@@ -3636,7 +3731,7 @@ def _run_model_independent_goal(step, mission, goal):
     if actions is None:
         return None
     allowed_types={
-      "read_file","list_tree","search_text","http_get","extract_labeled_fields_from_rendered_source","assert_labeled_fields_against_fresh_source","resolve_authority_identity","assert_authority_identity","discover_authoritative_web_source","assert_authoritative_source_discovery","fetch_json_knowledge","assert_json_knowledge","write_json_records","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback","invoke_capability_until","verify_with_independent_pypi_codec",
+      "read_file","list_tree","search_text","http_get","extract_labeled_fields_from_rendered_source","assert_labeled_fields_against_fresh_source","resolve_authority_identity","assert_authority_identity","discover_authoritative_web_source","assert_authoritative_source_discovery","fetch_json_knowledge","assess_knowledge_consistency","assert_knowledge_status","assert_json_knowledge","write_json_records","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback","invoke_capability_until","verify_with_independent_pypi_codec",
       "project_browser_result_json","join_runtime_json_arrays","assert_runtime_json_join","aggregate_runtime_json_arrays","assert_runtime_json_aggregate","derive_grouped_records","assert_grouped_derived_records","select_ranked_record","assert_ranked_record","assert_hex_prefix_bucket","assert_collection_length_bucket","assert_runtime_selected_code_decodes",
       "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal","assert_runtime_fanout_decodes","assert_runtime_fanout_artifacts_decode","assert_runtime_per_item_fallback_decodes","assert_runtime_fallback_decision","assert_runtime_bounded_loop_trace",
       "assert_workflow_audit_supported_by_source","assert_python_source_audit_supported_by_source",
