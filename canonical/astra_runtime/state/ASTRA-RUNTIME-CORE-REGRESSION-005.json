@@ -1,0 +1,44 @@
+{
+  "blocker": {
+    "adapter": "shell",
+    "error": "VERIFICATION_FAILED",
+    "mission_id": "ASTRA-RUNTIME-CORE-REGRESSION-005",
+    "observed_at_utc": "2026-09-25T00:08:34.312435+00:00",
+    "result": {
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython canonical/tests/test_goal_compiler.py\npython canonical/tests/test_capability_discovery.py\npython canonical/tests/test_runtime_composition.py",
+      "duration_s": 0.224,
+      "returncode": 1,
+      "stderr": "test_barcode_goal_selects_verified_barcode_not_qr (__main__.GoalCompilerTests.test_barcode_goal_selects_verified_barcode_not_qr) ... ok\ntest_compound_goal_compiles_full_verified_audit_pipeline (__main__.GoalCompilerTests.test_compound_goal_compiles_full_verified_audit_pipeline) ... FAIL\ntest_plain_image_only_pdf_goal_selects_verified_ocr (__main__.GoalCompilerTests.test_plain_image_only_pdf_goal_selects_verified_ocr) ... ok\ntest_plain_qr_goal_selects_verified_qr_and_binds_arguments (__main__.GoalCompilerTests.test_plain_qr_goal_selects_verified_qr_and_binds_arguments) ... ok\ntest_unknown_goal_fails_closed (__main__.GoalCompilerTests.test_unknown_goal_fails_closed) ... ok\n\n======================================================================\nFAIL: test_compound_goal_compiles_full_verified_audit_pipeline (__main__.GoalCompilerTests.test_compound_goal_compiles_full_verified_audit_pipeline)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/brain/brain/canonical/tests/test_goal_compiler.py\", line 87, in test_compound_goal_compiles_full_verified_audit_pipeline\n    self.assertEqual(proc.returncode,0,proc.stderr)\nAssertionError: 5 != 0 : jq: error (at /home/runner/work/brain/brain/canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json:451): string (\"| \") and array ([\"---\",\"---...) cannot be added\n\n\n----------------------------------------------------------------------\nRan 5 tests in 0.011s\n\nFAILED (failures=1)\n",
+      "stdout": ""
+    },
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "run-current-regressions",
+    "step_index": 0
+  },
+  "created_at_utc": "2026-09-25T00:08:34.087943+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-09-25T00:08:34.312420+00:00",
+      "ok": false,
+      "result": {
+        "adapter": "shell",
+        "command": "set -euo pipefail\npython canonical/tests/test_goal_compiler.py\npython canonical/tests/test_capability_discovery.py\npython canonical/tests/test_runtime_composition.py",
+        "duration_s": 0.224,
+        "returncode": 1,
+        "stderr": "test_barcode_goal_selects_verified_barcode_not_qr (__main__.GoalCompilerTests.test_barcode_goal_selects_verified_barcode_not_qr) ... ok\ntest_compound_goal_compiles_full_verified_audit_pipeline (__main__.GoalCompilerTests.test_compound_goal_compiles_full_verified_audit_pipeline) ... FAIL\ntest_plain_image_only_pdf_goal_selects_verified_ocr (__main__.GoalCompilerTests.test_plain_image_only_pdf_goal_selects_verified_ocr) ... ok\ntest_plain_qr_goal_selects_verified_qr_and_binds_arguments (__main__.GoalCompilerTests.test_plain_qr_goal_selects_verified_qr_and_binds_arguments) ... ok\ntest_unknown_goal_fails_closed (__main__.GoalCompilerTests.test_unknown_goal_fails_closed) ... ok\n\n======================================================================\nFAIL: test_compound_goal_compiles_full_verified_audit_pipeline (__main__.GoalCompilerTests.test_compound_goal_compiles_full_verified_audit_pipeline)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/brain/brain/canonical/tests/test_goal_compiler.py\", line 87, in test_compound_goal_compiles_full_verified_audit_pipeline\n    self.assertEqual(proc.returncode,0,proc.stderr)\nAssertionError: 5 != 0 : jq: error (at /home/runner/work/brain/brain/canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json:451): string (\"| \") and array ([\"---\",\"---...) cannot be added\n\n\n----------------------------------------------------------------------\nRan 5 tests in 0.011s\n\nFAILED (failures=1)\n",
+        "stdout": ""
+      },
+      "step_id": "run-current-regressions",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-RUNTIME-CORE-REGRESSION-005",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_CORE_REGRESSION_005.json",
+  "mission_sha256": "9bbe06dc3f271467c29e3ea0e7d8329ab33a3a595fa8ac65fe98ec8c49b56a21",
+  "next_step": 0,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-25T00:08:34.312717+00:00"
+}
