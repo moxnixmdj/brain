@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T04:28:14.094158+00:00",
+  "mission_id": "ASTRA-LIVE-COLLECTION-COMPILER-DIAG-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_LIVE_COLLECTION_COMPILER_DIAG_001.json",
+  "mission_sha256": "ea2c34bdf5cec7ada53b7366af8497ef84dfb3b456ed45bb4e0084c29e189e11",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "7b04e683d488dc80260235ae22b9e7e217d76cd91b449de5c5466918e3c32051",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}
