@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-LIVE-CONDITIONAL-001",
+  "purpose": "Pressure-test runtime conditional control using a value unavailable before execution.",
+  "goal": "Using a real rendered browser, open https://httpbin.org/uuid, save a screenshot to canonical/astra_runtime/tmp/LIVE_UUID.png, and save the rendered result to canonical/astra_runtime/tmp/LIVE_UUID.json. Read the UUID from that live result. If its first hexadecimal character is one of 0,1,2,3,4,5,6,7 create canonical/astra_runtime/tmp/LIVE_UUID_CLASSIFICATION.json with uuid equal to the observed UUID and bucket equal to LOW; otherwise create it with the same observed uuid and bucket equal to HIGH. Finally independently reread both files and verify the bucket is correct for the actual UUID.",
+  "steps": [
+    {
+      "id": "run-live-conditional-goal",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 16,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false
+  }
+}
