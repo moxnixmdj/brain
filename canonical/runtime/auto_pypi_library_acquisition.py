@@ -62,42 +62,158 @@ def _candidate_pool(goal,discovery=None):
     for cand in candidates:
         if not cand.get("zero_cost_eligible",False): continue
         if int(cand.get("required_secret_count",0))!=0: continue
-        if int(cand.get("dependency_count",0))!=0: continue
+        dependency_count=int(cand.get("dependency_count",0))
+        if dependency_count<0 or dependency_count>24: continue
         if float(cand.get("score",0))<20: continue
         viable.append(cand)
-    viable.sort(key=lambda x:(-float(x.get("score",0)),str(x.get("name",""))))
+    viable.sort(key=lambda x:(
+        -float(x.get("score",0)),
+        int(x.get("dependency_count",0)),
+        str(x.get("name",""))
+    ))
     if not viable:
-        raise AutoPyPIAcquisitionFailure("NO_ZERO_DEPENDENCY_PYPI_CANDIDATE")
+        raise AutoPyPIAcquisitionFailure("NO_BOUNDED_PYPI_CANDIDATE")
     return viable[:16]
 
 
-def _download_compatible_wheel(candidate,root):
+def _wheel_identity(wheel_path):
+    with zipfile.ZipFile(wheel_path,"r") as z:
+        metadata_names=[n for n in z.namelist() if n.endswith(".dist-info/METADATA")]
+        if len(metadata_names)!=1:
+            raise AutoPyPIAcquisitionFailure("PYPI_WHEEL_METADATA_FILE_NOT_UNIQUE",wheel_path.name)
+        text=z.read(metadata_names[0]).decode("utf-8","replace")
+    name=version=None
+    for line in text.splitlines():
+        if line.startswith("Name:") and name is None:
+            name=line.split(":",1)[1].strip()
+        elif line.startswith("Version:") and version is None:
+            version=line.split(":",1)[1].strip()
+        if name and version:
+            break
+    if not name or not version:
+        raise AutoPyPIAcquisitionFailure("PYPI_WHEEL_IDENTITY_MISSING",wheel_path.name)
+    return name,version
+
+
+def _pypi_release_metadata(name,version,timeout_s=20):
+    url="https://pypi.org/pypi/"+urllib.parse.quote(str(name),safe="")+"/"+urllib.parse.quote(str(version),safe="")+"/json"
+    req=urllib.request.Request(url,headers={"User-Agent":"ProjectBrain-PyPIDependencyClosure/1"})
+    try:
+        with urllib.request.urlopen(req,timeout=timeout_s) as resp:
+            raw=resp.read(3000000)
+        payload=json.loads(raw.decode("utf-8"))
+    except Exception as exc:
+        raise AutoPyPIAcquisitionFailure(
+            "PYPI_DEPENDENCY_METADATA_FETCH_FAILED",
+            str(name)+"=="+str(version)+":"+type(exc).__name__+":"+str(exc)
+        ) from exc
+    return url,payload
+
+
+def _verify_wheel_against_official_metadata(wheel_path):
+    name,version=_wheel_identity(wheel_path)
+    metadata_url,payload=_pypi_release_metadata(name,version)
+    raw=wheel_path.read_bytes()
+    digest=hashlib.sha256(raw).hexdigest()
+    matches=[
+        item for item in (payload.get("urls") or [])
+        if str(item.get("filename") or "")==wheel_path.name
+    ]
+    if len(matches)!=1:
+        raise AutoPyPIAcquisitionFailure(
+            "PYPI_DEPENDENCY_WHEEL_NOT_IN_OFFICIAL_METADATA",
+            name+"=="+version+":"+wheel_path.name
+        )
+    artifact=matches[0]
+    expected=str((artifact.get("digests") or {}).get("sha256") or "").lower()
+    if not re.fullmatch(r"[0-9a-f]{64}",expected) or expected!=digest:
+        raise AutoPyPIAcquisitionFailure(
+            "PYPI_DEPENDENCY_WHEEL_HASH_MISMATCH",
+            name+"=="+version+":"+wheel_path.name
+        )
+    url=str(artifact.get("url") or "")
+    if not url.startswith("https://"):
+        raise AutoPyPIAcquisitionFailure("PYPI_DEPENDENCY_WHEEL_URL_INVALID",wheel_path.name)
+    return {
+      "project":name,
+      "version":version,
+      "filename":wheel_path.name,
+      "sha256":digest,
+      "bytes":len(raw),
+      "url":url,
+      "metadata_url":metadata_url,
+    }
+
+
+def _download_compatible_wheel_closure(candidate,root):
     name=str(candidate.get("project") or candidate.get("name") or "")
     version=str(candidate.get("version") or "")
     if not name or not version:
         raise AutoPyPIAcquisitionFailure("PYPI_CANDIDATE_METADATA_INCOMPLETE")
-    with tempfile.TemporaryDirectory(prefix="brain-pypi-wheel-") as td:
+    target=pathlib.Path(root)/"canonical"/"astra_runtime"/"tmp"/"pypi_probe_wheels"
+    target.mkdir(parents=True,exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix="brain-pypi-wheel-closure-") as td:
         proc=subprocess.run(
-            [sys.executable,"-m","pip","download","--disable-pip-version-check","--no-deps",
-             "--only-binary=:all:","--dest",td,f"{name}=={version}"],
-            cwd=root,text=True,capture_output=True,timeout=120
+            [
+              sys.executable,"-m","pip","download",
+              "--disable-pip-version-check",
+              "--only-binary=:all:",
+              "--dest",td,
+              f"{name}=={version}",
+            ],
+            cwd=root,text=True,capture_output=True,timeout=180
         )
         if proc.returncode!=0:
-            raise AutoPyPIAcquisitionFailure("PYPI_WHEEL_DOWNLOAD_FAILED",proc.stderr[-1200:])
-        wheels=list(pathlib.Path(td).glob("*.whl"))
-        if len(wheels)!=1:
-            raise AutoPyPIAcquisitionFailure("PYPI_COMPATIBLE_WHEEL_NOT_UNIQUE",str(len(wheels)))
-        wheel=wheels[0]
-        raw=wheel.read_bytes()
-        digest=hashlib.sha256(raw).hexdigest()
-        metadata_matches=[x for x in candidate.get("wheels") or [] if x.get("filename")==wheel.name and x.get("sha256")==digest]
-        if len(metadata_matches)!=1:
-            raise AutoPyPIAcquisitionFailure("PYPI_WHEEL_METADATA_HASH_MISMATCH",wheel.name)
-        target=pathlib.Path(root)/"canonical"/"astra_runtime"/"tmp"/"pypi_probe_wheels"
-        target.mkdir(parents=True,exist_ok=True)
-        stable=target/wheel.name
-        stable.write_bytes(raw)
-        return {"path":str(stable),"filename":wheel.name,"sha256":digest,"bytes":len(raw),"url":metadata_matches[0].get("url")}
+            raise AutoPyPIAcquisitionFailure(
+                "PYPI_WHEEL_CLOSURE_RESOLUTION_FAILED",
+                proc.stderr[-1800:]
+            )
+        wheels=sorted(pathlib.Path(td).glob("*.whl"))
+        if not wheels:
+            raise AutoPyPIAcquisitionFailure("PYPI_WHEEL_CLOSURE_EMPTY")
+        if len(wheels)>32:
+            raise AutoPyPIAcquisitionFailure("PYPI_WHEEL_CLOSURE_TOO_LARGE",str(len(wheels)))
+        verified=[]
+        for wheel in wheels:
+            record=_verify_wheel_against_official_metadata(wheel)
+            stable=target/wheel.name
+            stable.write_bytes(wheel.read_bytes())
+            record["path"]=str(stable)
+            verified.append(record)
+        normalized_root=re.sub(r"[-_.]+","-",name).lower()
+        roots=[
+            x for x in verified
+            if re.sub(r"[-_.]+","-",x["project"]).lower()==normalized_root
+            and x["version"]==version
+        ]
+        if len(roots)!=1:
+            raise AutoPyPIAcquisitionFailure(
+                "PYPI_ROOT_WHEEL_NOT_UNIQUE",
+                json.dumps([{"project":x["project"],"version":x["version"],"filename":x["filename"]} for x in roots],sort_keys=True)
+            )
+        closure=sorted(
+            [{k:v for k,v in x.items() if k!="path"} for x in verified],
+            key=lambda x:(re.sub(r"[-_.]+","-",x["project"]).lower(),x["version"],x["filename"])
+        )
+        lock={
+          "schema":"PROJECT_BRAIN_PYPI_WHEEL_CLOSURE_V1",
+          "root_project":roots[0]["project"],
+          "root_version":roots[0]["version"],
+          "root_filename":roots[0]["filename"],
+          "wheel_count":len(closure),
+          "wheels":closure,
+          "source_only_artifacts_allowed":False,
+          "resolver":"pip-download-only-binary",
+          "network_required_for_install":False,
+        }
+        lock_sha=hashlib.sha256(json.dumps(lock,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+        lock["closure_sha256"]=lock_sha
+        return {
+          "root":roots[0],
+          "wheels":verified,
+          "lock":lock,
+        }
+
 
 
 def _module_candidates(wheel_path):
@@ -131,7 +247,7 @@ def _resolve(module,name):
     return current
 
 
-def _infer_codec_contract(candidate,wheel,root):
+def _infer_codec_contract(candidate,wheel_closure,root):
     pairs=[("packb","unpackb"),("dumps","loads"),("encode","decode"),("serialize","deserialize")]
     fixture=[{"id":1,"text":"alpha"},{"id":2,"text":"beta"}]
     envelope_key="__project_brain_payload__"
@@ -140,15 +256,27 @@ def _infer_codec_contract(candidate,wheel,root):
       ("mapping_envelope",{envelope_key:fixture},envelope_key),
     ]
     attempts=[]
+    root_wheel=wheel_closure["root"]
+    closure_wheels=wheel_closure["wheels"]
     with tempfile.TemporaryDirectory(prefix="brain-pypi-probe-") as td:
         site=pathlib.Path(td)/"site"; site.mkdir()
+        wheelhouse=pathlib.Path(td)/"wheelhouse"; wheelhouse.mkdir()
+        for item in closure_wheels:
+            src=pathlib.Path(item["path"])
+            (wheelhouse/src.name).write_bytes(src.read_bytes())
         proc=subprocess.run(
-            [sys.executable,"-m","pip","install","--disable-pip-version-check","--quiet","--no-deps","--target",str(site),wheel["path"]],
-            cwd=root,text=True,capture_output=True,timeout=120
+            [
+              sys.executable,"-m","pip","install",
+              "--disable-pip-version-check","--quiet",
+              "--no-index","--find-links",str(wheelhouse),
+              "--target",str(site),
+              str(wheelhouse/root_wheel["filename"]),
+            ],
+            cwd=root,text=True,capture_output=True,timeout=180
         )
         if proc.returncode!=0:
             raise AutoPyPIAcquisitionFailure("PYPI_PROBE_INSTALL_FAILED",proc.stderr[-1200:])
-        modules=_module_candidates(wheel["path"])
+        modules=_module_candidates(root_wheel["path"])
         sys.path.insert(0,str(site))
         try:
             for module_name in modules:
@@ -185,8 +313,10 @@ def _infer_codec_contract(candidate,wheel,root):
                                       "encode_kwargs":enc_kwargs,"decode_kwargs":dec_kwargs,"fixture":fixture,
                                       "representation":representation,"envelope_key":unwrap_key,
                                       "probe_output_sha256":hashlib.sha256(payload).hexdigest(),
-                                      "probe_output_bytes":len(payload),"wheel_filename":wheel["filename"],
-                                      "wheel_sha256":wheel["sha256"],"project":candidate.get("project") or candidate.get("name"),
+                                      "probe_output_bytes":len(payload),"wheel_filename":root_wheel["filename"],
+                                      "wheel_sha256":root_wheel["sha256"],
+                                      "dependency_closure_sha256":wheel_closure["lock"]["closure_sha256"],
+                                      "dependency_wheel_count":wheel_closure["lock"]["wheel_count"],"project":candidate.get("project") or candidate.get("name"),
                                       "version":candidate.get("version"),
                                     }
                     attempts.append({"module":module_name,"encode":enc_name,"decode":dec_name,"status":"ROUNDTRIP_REJECTED"})
@@ -204,15 +334,15 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
     diag_path=root/diag_rel; diag_path.parent.mkdir(parents=True,exist_ok=True)
     diagnostic={"schema":"PROJECT_BRAIN_AUTO_PYPI_LIBRARY_ACQUISITION_V1","mission_id":mission_id,
                 "goal":goal,"status":"SUPPLIER_CONTRACT_RACE","attempts":[]}
-    selected=wheel=contract=None
+    selected=wheel_closure=contract=None
     for candidate in candidates:
         attempt={"supplier":candidate}
         try:
-            wh=_download_compatible_wheel(candidate,root)
-            attempt["wheel"]={k:v for k,v in wh.items() if k!="path"}
-            ct=_infer_codec_contract(candidate,wh,root)
+            whc=_download_compatible_wheel_closure(candidate,root)
+            attempt["dependency_closure"]=whc["lock"]
+            ct=_infer_codec_contract(candidate,whc,root)
             attempt["contract"]=ct; attempt["status"]="CONTRACT_ACCEPTED"
-            selected,wheel,contract=candidate,wh,ct
+            selected,wheel_closure,contract=candidate,whc,ct
             diagnostic["attempts"].append(attempt); break
         except Exception as exc:
             attempt["status"]="CONTRACT_REJECTED"; attempt["error"]=type(exc).__name__+":"+str(exc)
@@ -224,8 +354,12 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
         raise AutoPyPIAcquisitionFailure("NO_COMPATIBLE_PYPI_LIBRARY_CONTRACT",
             json.dumps([{"name":(x.get("supplier") or {}).get("name"),"error":x.get("error")} for x in diagnostic["attempts"]],sort_keys=True)[:3000])
 
+    root_wheel=wheel_closure["root"]
+    dependency_lock=wheel_closure["lock"]
     diagnostic.update({"status":"CONTRACT_INFERRED","selected_supplier":selected,
-                       "wheel":{k:v for k,v in wheel.items() if k!="path"},"contract":contract})
+                       "wheel":{k:v for k,v in root_wheel.items() if k!="path"},
+                       "dependency_closure":dependency_lock,
+                       "contract":contract})
     diag_path.write_text(json.dumps(diagnostic,indent=2,sort_keys=True)+"\n",encoding="utf-8")
     project=str(selected.get("project") or selected.get("name")); version=str(selected.get("version")); slug=_slug(project)
     cap_id="auto.pypi."+slug
@@ -238,7 +372,7 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
     provides=["structured.binary.encode"]+["structured.binary.encode."+x for x in format_terms]
     entry={
       "provides":provides,"requires":["json.file.available"],"keywords":keywords,"cost":1,"platforms":["linux"],
-      "limitations":["Automatically acquired from a hash-pinned dependency-free PyPI wheel.",
+      "limitations":["Automatically acquired from a hash-pinned wheel-only PyPI dependency closure.",
                      "Initial generic contract class is structured JSON value to binary bytes with semantic round-trip decoding."],
       "adapter_module":"python_library_codec","entrypoint":"run",
       "action_template":{"type":"invoke_capability","args":{
@@ -248,7 +382,8 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
           "json_path":"${input.json_path}","output_path":"${input.output_path}"
       },"expect":{"type":"field_equals","field":"output_verified","value":True}},
       "source":{"type":"pypi","project":project,"version":version,"metadata_url":str(selected.get("metadata_url")),
-                "wheel_filename":wheel["filename"],"wheel_sha256":wheel["sha256"],"license":selected.get("license")},
+                "wheel_filename":root_wheel["filename"],"wheel_sha256":root_wheel["sha256"],
+                "dependency_closure":dependency_lock,"license":selected.get("license")},
       "incremental_spend_usd":0,"status":"BOUND_PENDING_INDEPENDENT_VERIFICATION",
       "autogenerated":{"schema":"PROJECT_BRAIN_AUTO_PYPI_CODEC_BINDING_V1","origin_mission_id":mission_id,
                        "origin_goal":goal,"supplier_score":selected.get("score"),"contract":contract}
