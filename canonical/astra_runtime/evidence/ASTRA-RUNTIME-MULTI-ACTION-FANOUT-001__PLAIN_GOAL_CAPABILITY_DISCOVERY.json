@@ -1,0 +1,2565 @@
+{
+  "auto_acquisition": {
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"qml-module-org-kde-runnermodel\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"charliecloud-runtime\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"airspyhf\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"netplan.io\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"node-type-check\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"standardskriver\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"dbus-user-session\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"dh-user-session-migration\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"game-data-packager-runtime\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.161.185.214 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/gstreamer1.0-plugins-base_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.161.185.214 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/libgstreamer-plugins-good1.0-0_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 52.161.185.214 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/gstreamer1.0-plugins-good_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 52.161.185.214 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-gl1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.161.185.214 80]\\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\\n\", \"name\": \"gnome-user-docs-ca\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.161.185.214 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/gstreamer1.0-plugins-base_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.161.185.214 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/libgstreamer-plugins-good1.0-0_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 52.161.185.214 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/gstreamer",
+    "status": "NOT_DISPATCHED"
+  },
+  "binding_performed": false,
+  "goal": "Using a real rendered browser, open https://jsonplaceholder.typicode.com/users, save a screenshot to canonical/astra_runtime/tmp/MULTI_FANOUT_USERS.png, and save the rendered result to canonical/astra_runtime/tmp/MULTI_FANOUT_USERS.json. Read the live JSON array from that result. For every user returned at runtime, generate a QR code image encoding that user's username and also generate a Code 128 barcode image encoding that user's email. Save each QR image under canonical/astra_runtime/tmp/MULTI_FANOUT_QR using the user's id as the filename, save each Code 128 image under canonical/astra_runtime/tmp/MULTI_FANOUT_CODE128 using the user's id as the filename, and create canonical/astra_runtime/tmp/MULTI_FANOUT_MANIFEST.json with exactly one record per live user containing id, username, email, qr_path, and code128_path. Finally independently decode every generated QR and Code 128 image and verify each decoded QR equals that live user's username, each decoded Code 128 equals that live user's email, every live user has both artifacts, and no extra manifest records exist.",
+  "mission_id": "ASTRA-RUNTIME-MULTI-ACTION-FANOUT-001",
+  "observed_at_utc": "2026-09-25T16:30:33.726166+00:00",
+  "result": {
+    "binding_performed": false,
+    "candidates": [
+      {
+        "archive_sha256": "dc7b74c21d606e26366ff3e7261a0d49672f340db64a59c0dcc013cea67e3814",
+        "binding_kind": "apt",
+        "description": "user-defined software stacks (UDSS) for HPC centers (runtime tools)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime",
+          "user"
+        ],
+        "name": "charliecloud-runtime",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 62,
+        "version": "0.37-1build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ac94388249d6f2af9a89bad8317a966b0d34151adb11bf02ecaa068f9d4041c0",
+        "binding_kind": "apt",
+        "description": "HF+VHF software defined radio receiver - user runtime",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime",
+          "user"
+        ],
+        "name": "airspyhf",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "1.6.8-4build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "e390b66584704aff3596094994186c684474a148d876694337af39634664cbaf",
+        "binding_kind": "apt",
+        "description": "Declarative network configuration for various backends at runtime",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "at",
+          "runtime"
+        ],
+        "name": "netplan.io",
+        "packages": [],
+        "query": "at",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "1.1.2-8ubuntu1~24.04.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "7a7aa225f02284c954c8940417a875fb65d38fc1f6220190220f18dfdc374027",
+        "binding_kind": "apt",
+        "description": "Check the types of JavaScript values at runtime",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "at",
+          "runtime"
+        ],
+        "name": "node-type-check",
+        "packages": [],
+        "query": "at",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "0.4.0+dfsg-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "918432b16c96e61d9bca9215e751c2b720eeab42579ca11a551e6bb78e24d2d8",
+        "binding_kind": "apt",
+        "description": "Used to write plugins loaded at runtime called \"Runners\".",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "at",
+          "runtime"
+        ],
+        "name": "qml-module-org-kde-runnermodel",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "5.115.0-0ubuntu4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "cf7bb9b2fe33257c69cc4123a0f13ea5e41f92eb5d136ee2403ab72ae180cad6",
+        "binding_kind": "apt",
+        "description": "Tool for dynamically setting a user's default printer at desktop session logon",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "at",
+          "user"
+        ],
+        "name": "standardskriver",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 48,
+        "version": "0.0.4-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "55179f1ee3899635b0d418bfe9135a049aa5ad6902b6b717ca4ba4b7aa1f31b2",
+        "binding_kind": "apt",
+        "description": "Delayed job execution and batch processing",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "at"
+        ],
+        "name": "at",
+        "packages": [],
+        "query": "at",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 40,
+        "version": "3.2.5-2.1ubuntu3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "315a0aa88c5bae3061e5bb376cb744f52a91ae5230ed56a0f85a41ab3fce271c",
+        "binding_kind": "apt",
+        "description": "ASP.NET Core runtime",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "aspnetcore-runtime-10.0",
+        "packages": [],
+        "query": "at",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "10.0.12-0ubuntu1~24.04.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "eded079d030876ca9428f555b0b4b5c3a9f5ccab3c701907bb640b01de2e4961",
+        "binding_kind": "apt",
+        "description": "ASP.NET Core runtime",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "aspnetcore-runtime-8.0",
+        "packages": [],
+        "query": "at",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "8.0.31-0ubuntu1~24.04.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "3f86479547f42388360b7527b4682ab356d06f7f7dda7e9217aacb777dacae39",
+        "binding_kind": "apt",
+        "description": "ASP.NET Runtime debug symbols.",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "aspnetcore-runtime-dbg-10.0",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "10.0.12-0ubuntu1~24.04.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ffeef0e6d29f69eb3d300c73715b22e5872e902de01659b257e4303379460953",
+        "binding_kind": "apt",
+        "description": "ASP.NET Runtime debug symbols.",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "aspnetcore-runtime-dbg-8.0",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "8.0.31-0ubuntu1~24.04.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "7e05959b067031468f21ae46c6653a6813f1dccd994ef12a0b5f75de0ed346b6",
+        "binding_kind": "apt",
+        "description": "Assistive Technology Service Provider Interface (common files)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "at"
+        ],
+        "name": "at-spi2-common",
+        "packages": [],
+        "query": "at",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.52.0-1build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ea2d24a3219ba639f72dadf92b896fe31dd2ffd8659432e0cee2362726b63ff4",
+        "binding_kind": "apt",
+        "description": "Assistive Technology Service Provider Interface (D-Bus core)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "at"
+        ],
+        "name": "at-spi2-core",
+        "packages": [],
+        "query": "at",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.52.0-1build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "f3f1051bf8cb77c632ea23796da8c9cf0007a5218bd698ad2ae78ebf292a6441",
+        "binding_kind": "apt",
+        "description": "runtime support for password checker library cracklib2",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "cracklib-runtime",
+        "packages": [],
+        "query": "at",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.9.6-5.1build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "e585b1694b854c3b75bfb39cc4022cafe7b14e44fd435433b613b8fb9919cb41",
+        "binding_kind": "apt",
+        "description": "simple interprocess messaging system (systemd --user integration)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "dbus-user-session",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.14.10-4ubuntu4.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d02c7eca01652497ba2dd753c71de31913fa4be2825883b138270fc1d53722ae",
+        "binding_kind": "apt",
+        "description": "debhelper extension for user-session-migration support",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "dh-user-session-migration",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.4.1ubuntu3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "4eb92415faafca5c4d72800c37c0d42eea2907058e10d23bdb4a2ce1cbc5fc77",
+        "binding_kind": "apt",
+        "description": ".NET runtime",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "dotnet-runtime-10.0",
+        "packages": [],
+        "query": "at",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "10.0.12-0ubuntu1~24.04.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "be69e4eb8206b98527164599a946d52f71bbe62aee3c0b9492a3027a69740319",
+        "binding_kind": "apt",
+        "description": ".NET runtime",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "dotnet-runtime-8.0",
+        "packages": [],
+        "query": "at",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "8.0.31-0ubuntu1~24.04.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "460601eca2d9e8b2b3eeee420be9587e6c3ef7c63d1563b9f95b632a66613a3b",
+        "binding_kind": "apt",
+        "description": ".NET Runtime debug symbols.",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "dotnet-runtime-dbg-10.0",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "10.0.12-0ubuntu1~24.04.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "41c2ca6fcd262e1b7a5ec2d7f4ba8176a5829aa53ac71d308b2608b6c10d80e6",
+        "binding_kind": "apt",
+        "description": ".NET Runtime debug symbols.",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "dotnet-runtime-dbg-8.0",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "8.0.31-0ubuntu1~24.04.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "831d39302722ccced7e9321b01f2607cb4222707574ece462c9a92a514610b8e",
+        "binding_kind": "apt",
+        "description": "Erlang/OTP runtime tracing/debugging tools",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "erlang-runtime-tools",
+        "packages": [],
+        "query": "runtime",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1:25.3.2.8+dfsg-1ubuntu4.6",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c8ae17c7e8d2ff4066049e39f3ec7caf2e91e544479d35a3b094ef93d5690cfa",
+        "binding_kind": "apt",
+        "description": "Firmware Test Suite UEFI Runtime Service kernel driver",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "fwts-efi-runtime-dkms",
+        "packages": [],
+        "query": "at",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "24.01.00-0ubuntu4.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "4a3ffe8fe4b2be9400fb788ed71d27b29f2975e6fa7d5207f71aea68bbae674c",
+        "binding_kind": "apt",
+        "description": "Gambas runtime interpreter",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "gambas3-runtime",
+        "packages": [],
+        "query": "at",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "3.19.0-2ubuntu10",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "fcf40e17ab33ebf78ccf2c94a9ea65782afbfb4249fb457cd2483897dcef398e",
+        "binding_kind": "apt",
+        "description": "Launcher for proprietary games",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "game-data-packager-runtime",
+        "packages": [],
+        "query": "at",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "77ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "650bcd76e0c56c713428950aec8823fd517f911eaad80406907379a69d36ad0a",
+        "binding_kind": "apt",
+        "description": "GNU Compiler Collection for MinGW-w64, i686/POSIX",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "gcc-mingw-w64-i686-posix-runtime",
+        "packages": [],
+        "query": "at",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "13.2.0-6ubuntu1+26.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "34fe47512cb203ff0cfb52f1ca157c3b1d257b105913cf17875d6d72556de50e",
+        "binding_kind": "apt",
+        "description": "GNU Compiler Collection for MinGW-w64, i686/Win32",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "gcc-mingw-w64-i686-win32-runtime",
+        "packages": [],
+        "query": "at",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "13.2.0-6ubuntu1+26.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "aca6b438e0b55b11cedcf1170a1ee26e7979e34192e34f6e6389e560908a5bfc",
+        "binding_kind": "apt",
+        "description": "GNU Compiler Collection for MinGW-w64, x86-64/POSIX",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "gcc-mingw-w64-x86-64-posix-runtime",
+        "packages": [],
+        "query": "at",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "13.2.0-6ubuntu1+26.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "7ac09bc7f283f1148c8e1697373db069c1d4364a9f5fa58bb66c8a93760b8b65",
+        "binding_kind": "apt",
+        "description": "GNU Compiler Collection for MinGW-w64, x86-64/Win32",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "runtime"
+        ],
+        "name": "gcc-mingw-w64-x86-64-win32-runtime",
+        "packages": [],
+        "query": "at",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "13.2.0-6ubuntu1+26.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ce6c4907acf695d28bbb900ddf98c232cd1bda7142edcc1d13fd1984c66491b1",
+        "binding_kind": "apt",
+        "description": "GNOME Help",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "22909bfc747a76c5a952478dbaea05544ef298e8649c0b4b8ea0a4653016c911",
+        "binding_kind": "apt",
+        "description": "module to enable taint checking at runtime",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 3,
+        "matched_terms": [
+          "at",
+          "runtime"
+        ],
+        "name": "libtaint-runtime-perl",
+        "packages": [],
+        "query": "at",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 42,
+        "version": "0.3-4build5",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Affiliate network reporting in your AI client. Bring your own keys. Most adapters experimental.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.agenticaffiliate/affiliate-networks-mcp",
+        "packages": [
+          {
+            "identifier": "affiliate-networks-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": "npx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.19.0"
+          }
+        ],
+        "query": "at",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.agenticaffiliate.ai/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/bobberrisford/affiliatemcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.19.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "HPE GreenLake users MCP Server",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.HewlettPackard/greenlake-users-mcp",
+        "packages": [
+          {
+            "identifier": "greenlake-users-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.1.2"
+          }
+        ],
+        "query": "user",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/HewlettPackard/gl-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.1.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "An MCP server that enables AI agents to ask users clarifying questions via pop-up terminal windows.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.Jacob-J-Thomas/user-prompt",
+        "packages": [
+          {
+            "identifier": "UserPrompt",
+            "registry_type": "nuget",
+            "required_environment": [],
+            "runtime_hint": "dnx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.2"
+          }
+        ],
+        "query": "user",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/Jacob-J-Thomas/user-context-retrieval-mcp-server"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Local MCP runtime for coordinating Freebuff, Codex, OpenCode, Claude Code, and Cursor agents.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.Praket7/agent-interop-runtime",
+        "packages": [
+          {
+            "identifier": "agent-interop-runtime",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.3.2"
+          }
+        ],
+        "query": "runtime",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/Praket7/agent-interop-runtime"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.3.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Verify whether a local Agent or MCP runtime matches an approved artifact.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.fantasyce/agent-runtime-proof",
+        "packages": [
+          {
+            "identifier": "https://github.com/fantasyce/agent-runtime-proof/releases/download/v1.1.0/agent-runtime-proof_1.1.0.mcpb",
+            "registry_type": "mcpb",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.1.0"
+          }
+        ],
+        "query": "runtime",
+        "remotes": [],
+        "repository": {
+          "id": "1345289397",
+          "source": "github",
+          "url": "https://github.com/fantasyce/agent-runtime-proof"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Finds the end-of-life runtimes an AI assistant still writes for you \u2014 node:20, python3.9, ubuntu-22",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.jmshinhwa/runtime-eol-deploy-block-audit",
+        "packages": [
+          {
+            "identifier": "@readystack/runtime-eol-deploy-block-audit",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": "npx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.1.3"
+          }
+        ],
+        "query": "runtime",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/jmshinhwa/readystack-themes"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.1.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "RandomUser profile generation.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.mrfentmen/randomuser-mcp",
+        "packages": [
+          {
+            "identifier": "randomuser-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.0"
+          }
+        ],
+        "query": "user",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/mrfentmen/awesome-mcps"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Summarize runtime declarations across local manifests and CI files without returning versions,...",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.mrfentmen/runtime-support-mcp",
+        "packages": [
+          {
+            "identifier": "runtime-support-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.0"
+          }
+        ],
+        "query": "runtime",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/mrfentmen/runtime-support-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Crypto market signals, technical indicators, and sentiment analysis for AI agents.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.aarna/atars-mcp",
+        "packages": [],
+        "query": "at",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.aarna.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Actwise Ideation helps founders benchmark startup and product ideas before they build.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.actwise/ideation",
+        "packages": [],
+        "query": "at",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://actwise.ai/ideation/mcp/v1"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Describe a store's problem: get the matching service, its fixed price, and a request link.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.advisorsai/service-navigator",
+        "packages": [],
+        "query": "at",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://advisorsai.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Cross-vendor B2B catalog for AI agents: search, compare, find equivalents, request a quote.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.airshelf/catalog",
+        "packages": [],
+        "query": "at",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.airshelf.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "SEC filings, financial statements, metrics, insider and institutional holdings as structured data",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.akkrudata/akkrudata",
+        "packages": [],
+        "query": "at",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.akkrudata.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "AI image and video generation, talking avatars, consistent characters and photo packs from Claude.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.apatero/studio",
+        "packages": [],
+        "query": "at",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.apatero.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.2.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Search Argus HQ public FDA enforcement data: warning letters, recalls, approvals, 483s.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.argushq/enforcement-database",
+        "packages": [],
+        "query": "at",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://argushq.ai/api/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/andrewjgaber-commits/empire-distribution"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Miles' public credit-card catalog: facts, transfer partners, valuations. Keyless, read-only.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.askmiles/catalog",
+        "packages": [],
+        "query": "at",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.askmiles.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "AI-powered organic supply chain verification: certification, OFAC, FDA import checks.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.atlasverified/atlas-mcp",
+        "packages": [],
+        "query": "at",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.atlasverified.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Agent-updated work tracker for builders directing AI across multiple projects.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.atlier/project-desk",
+        "packages": [],
+        "query": "at",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://atlier.ai/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/Wildsdesign/Atlier"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "4.7.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Protein analysis: ESM-2/ESMC embeddings, mutation scoring, landscape scans, ESMFold structure.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.axonagentic/neuroautomata",
+        "packages": [],
+        "query": "at",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.neuroautomata.axonagentic.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.29.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "AI story development, screenplay editing, review, media, and export tools for BeatBandit projects.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.beatbandit/beatbandit",
+        "packages": [],
+        "query": "at",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://beatbandit.ai/api/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      }
+    ],
+    "effect": "For every user returned at runtime, generate a QR code image encoding that user's username and also generate a Code 128 barcode image encoding that user's email",
+    "results": [
+      {
+        "binding_performed": false,
+        "candidate_count": 30,
+        "candidates": [
+          {
+            "archive_sha256": "dc7b74c21d606e26366ff3e7261a0d49672f340db64a59c0dcc013cea67e3814",
+            "binding_kind": "apt",
+            "description": "user-defined software stacks (UDSS) for HPC centers (runtime tools)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime",
+              "user"
+            ],
+            "name": "charliecloud-runtime",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 62,
+            "version": "0.37-1build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "ac94388249d6f2af9a89bad8317a966b0d34151adb11bf02ecaa068f9d4041c0",
+            "binding_kind": "apt",
+            "description": "HF+VHF software defined radio receiver - user runtime",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime",
+              "user"
+            ],
+            "name": "airspyhf",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 48,
+            "version": "1.6.8-4build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "e390b66584704aff3596094994186c684474a148d876694337af39634664cbaf",
+            "binding_kind": "apt",
+            "description": "Declarative network configuration for various backends at runtime",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "at",
+              "runtime"
+            ],
+            "name": "netplan.io",
+            "packages": [],
+            "query": "at",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 48,
+            "version": "1.1.2-8ubuntu1~24.04.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "7a7aa225f02284c954c8940417a875fb65d38fc1f6220190220f18dfdc374027",
+            "binding_kind": "apt",
+            "description": "Check the types of JavaScript values at runtime",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "at",
+              "runtime"
+            ],
+            "name": "node-type-check",
+            "packages": [],
+            "query": "at",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 48,
+            "version": "0.4.0+dfsg-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "918432b16c96e61d9bca9215e751c2b720eeab42579ca11a551e6bb78e24d2d8",
+            "binding_kind": "apt",
+            "description": "Used to write plugins loaded at runtime called \"Runners\".",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "at",
+              "runtime"
+            ],
+            "name": "qml-module-org-kde-runnermodel",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 48,
+            "version": "5.115.0-0ubuntu4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "cf7bb9b2fe33257c69cc4123a0f13ea5e41f92eb5d136ee2403ab72ae180cad6",
+            "binding_kind": "apt",
+            "description": "Tool for dynamically setting a user's default printer at desktop session logon",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "at",
+              "user"
+            ],
+            "name": "standardskriver",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 48,
+            "version": "0.0.4-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "22909bfc747a76c5a952478dbaea05544ef298e8649c0b4b8ea0a4653016c911",
+            "binding_kind": "apt",
+            "description": "module to enable taint checking at runtime",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 3,
+            "matched_terms": [
+              "at",
+              "runtime"
+            ],
+            "name": "libtaint-runtime-perl",
+            "packages": [],
+            "query": "at",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 42,
+            "version": "0.3-4build5",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "55179f1ee3899635b0d418bfe9135a049aa5ad6902b6b717ca4ba4b7aa1f31b2",
+            "binding_kind": "apt",
+            "description": "Delayed job execution and batch processing",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "at"
+            ],
+            "name": "at",
+            "packages": [],
+            "query": "at",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 40,
+            "version": "3.2.5-2.1ubuntu3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "315a0aa88c5bae3061e5bb376cb744f52a91ae5230ed56a0f85a41ab3fce271c",
+            "binding_kind": "apt",
+            "description": "ASP.NET Core runtime",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "aspnetcore-runtime-10.0",
+            "packages": [],
+            "query": "at",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "10.0.12-0ubuntu1~24.04.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "eded079d030876ca9428f555b0b4b5c3a9f5ccab3c701907bb640b01de2e4961",
+            "binding_kind": "apt",
+            "description": "ASP.NET Core runtime",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "aspnetcore-runtime-8.0",
+            "packages": [],
+            "query": "at",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "8.0.31-0ubuntu1~24.04.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "3f86479547f42388360b7527b4682ab356d06f7f7dda7e9217aacb777dacae39",
+            "binding_kind": "apt",
+            "description": "ASP.NET Runtime debug symbols.",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "aspnetcore-runtime-dbg-10.0",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "10.0.12-0ubuntu1~24.04.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "ffeef0e6d29f69eb3d300c73715b22e5872e902de01659b257e4303379460953",
+            "binding_kind": "apt",
+            "description": "ASP.NET Runtime debug symbols.",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "aspnetcore-runtime-dbg-8.0",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "8.0.31-0ubuntu1~24.04.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "7e05959b067031468f21ae46c6653a6813f1dccd994ef12a0b5f75de0ed346b6",
+            "binding_kind": "apt",
+            "description": "Assistive Technology Service Provider Interface (common files)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "at"
+            ],
+            "name": "at-spi2-common",
+            "packages": [],
+            "query": "at",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2.52.0-1build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "ea2d24a3219ba639f72dadf92b896fe31dd2ffd8659432e0cee2362726b63ff4",
+            "binding_kind": "apt",
+            "description": "Assistive Technology Service Provider Interface (D-Bus core)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "at"
+            ],
+            "name": "at-spi2-core",
+            "packages": [],
+            "query": "at",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2.52.0-1build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "f3f1051bf8cb77c632ea23796da8c9cf0007a5218bd698ad2ae78ebf292a6441",
+            "binding_kind": "apt",
+            "description": "runtime support for password checker library cracklib2",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "cracklib-runtime",
+            "packages": [],
+            "query": "at",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2.9.6-5.1build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "e585b1694b854c3b75bfb39cc4022cafe7b14e44fd435433b613b8fb9919cb41",
+            "binding_kind": "apt",
+            "description": "simple interprocess messaging system (systemd --user integration)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "dbus-user-session",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.14.10-4ubuntu4.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d02c7eca01652497ba2dd753c71de31913fa4be2825883b138270fc1d53722ae",
+            "binding_kind": "apt",
+            "description": "debhelper extension for user-session-migration support",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "dh-user-session-migration",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.4.1ubuntu3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "4eb92415faafca5c4d72800c37c0d42eea2907058e10d23bdb4a2ce1cbc5fc77",
+            "binding_kind": "apt",
+            "description": ".NET runtime",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "dotnet-runtime-10.0",
+            "packages": [],
+            "query": "at",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "10.0.12-0ubuntu1~24.04.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "be69e4eb8206b98527164599a946d52f71bbe62aee3c0b9492a3027a69740319",
+            "binding_kind": "apt",
+            "description": ".NET runtime",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "dotnet-runtime-8.0",
+            "packages": [],
+            "query": "at",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "8.0.31-0ubuntu1~24.04.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "460601eca2d9e8b2b3eeee420be9587e6c3ef7c63d1563b9f95b632a66613a3b",
+            "binding_kind": "apt",
+            "description": ".NET Runtime debug symbols.",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "dotnet-runtime-dbg-10.0",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "10.0.12-0ubuntu1~24.04.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "41c2ca6fcd262e1b7a5ec2d7f4ba8176a5829aa53ac71d308b2608b6c10d80e6",
+            "binding_kind": "apt",
+            "description": ".NET Runtime debug symbols.",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "dotnet-runtime-dbg-8.0",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "8.0.31-0ubuntu1~24.04.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "831d39302722ccced7e9321b01f2607cb4222707574ece462c9a92a514610b8e",
+            "binding_kind": "apt",
+            "description": "Erlang/OTP runtime tracing/debugging tools",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "erlang-runtime-tools",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1:25.3.2.8+dfsg-1ubuntu4.6",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c8ae17c7e8d2ff4066049e39f3ec7caf2e91e544479d35a3b094ef93d5690cfa",
+            "binding_kind": "apt",
+            "description": "Firmware Test Suite UEFI Runtime Service kernel driver",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "fwts-efi-runtime-dkms",
+            "packages": [],
+            "query": "at",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "24.01.00-0ubuntu4.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "4a3ffe8fe4b2be9400fb788ed71d27b29f2975e6fa7d5207f71aea68bbae674c",
+            "binding_kind": "apt",
+            "description": "Gambas runtime interpreter",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "gambas3-runtime",
+            "packages": [],
+            "query": "at",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "3.19.0-2ubuntu10",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "fcf40e17ab33ebf78ccf2c94a9ea65782afbfb4249fb457cd2483897dcef398e",
+            "binding_kind": "apt",
+            "description": "Launcher for proprietary games",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "game-data-packager-runtime",
+            "packages": [],
+            "query": "at",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "77ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "650bcd76e0c56c713428950aec8823fd517f911eaad80406907379a69d36ad0a",
+            "binding_kind": "apt",
+            "description": "GNU Compiler Collection for MinGW-w64, i686/POSIX",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "gcc-mingw-w64-i686-posix-runtime",
+            "packages": [],
+            "query": "at",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "13.2.0-6ubuntu1+26.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "34fe47512cb203ff0cfb52f1ca157c3b1d257b105913cf17875d6d72556de50e",
+            "binding_kind": "apt",
+            "description": "GNU Compiler Collection for MinGW-w64, i686/Win32",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "gcc-mingw-w64-i686-win32-runtime",
+            "packages": [],
+            "query": "at",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "13.2.0-6ubuntu1+26.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "aca6b438e0b55b11cedcf1170a1ee26e7979e34192e34f6e6389e560908a5bfc",
+            "binding_kind": "apt",
+            "description": "GNU Compiler Collection for MinGW-w64, x86-64/POSIX",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "gcc-mingw-w64-x86-64-posix-runtime",
+            "packages": [],
+            "query": "at",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "13.2.0-6ubuntu1+26.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "7ac09bc7f283f1148c8e1697373db069c1d4364a9f5fa58bb66c8a93760b8b65",
+            "binding_kind": "apt",
+            "description": "GNU Compiler Collection for MinGW-w64, x86-64/Win32",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "runtime"
+            ],
+            "name": "gcc-mingw-w64-x86-64-win32-runtime",
+            "packages": [],
+            "query": "at",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "13.2.0-6ubuntu1+26.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "ce6c4907acf695d28bbb900ddf98c232cd1bda7142edcc1d13fd1984c66491b1",
+            "binding_kind": "apt",
+            "description": "GNOME Help",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "gnome-user-docs",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.0-1ubuntu1",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "For every user returned at runtime, generate a QR code image encoding that user's username and also generate a Code 128 barcode image encoding that user's email",
+        "errors": [],
+        "queries": [
+          "user",
+          "returned",
+          "at",
+          "runtime"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "APT_CATALOG",
+        "source_url": null
+      },
+      {
+        "binding_performed": false,
+        "candidate_count": 79,
+        "candidates": [
+          {
+            "description": "Affiliate network reporting in your AI client. Bring your own keys. Most adapters experimental.",
+            "is_latest": true,
+            "name": "ai.agenticaffiliate/affiliate-networks-mcp",
+            "packages": [
+              {
+                "identifier": "affiliate-networks-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": "npx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.19.0"
+              }
+            ],
+            "query": "at",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.agenticaffiliate.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/bobberrisford/affiliatemcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.19.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "HPE GreenLake users MCP Server",
+            "is_latest": true,
+            "name": "io.github.HewlettPackard/greenlake-users-mcp",
+            "packages": [
+              {
+                "identifier": "greenlake-users-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.1.2"
+              }
+            ],
+            "query": "user",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/HewlettPackard/gl-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.1.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "An MCP server that enables AI agents to ask users clarifying questions via pop-up terminal windows.",
+            "is_latest": true,
+            "name": "io.github.Jacob-J-Thomas/user-prompt",
+            "packages": [
+              {
+                "identifier": "UserPrompt",
+                "registry_type": "nuget",
+                "required_environment": [],
+                "runtime_hint": "dnx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.2"
+              }
+            ],
+            "query": "user",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Jacob-J-Thomas/user-context-retrieval-mcp-server"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Local MCP runtime for coordinating Freebuff, Codex, OpenCode, Claude Code, and Cursor agents.",
+            "is_latest": true,
+            "name": "io.github.Praket7/agent-interop-runtime",
+            "packages": [
+              {
+                "identifier": "agent-interop-runtime",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.3.2"
+              }
+            ],
+            "query": "runtime",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Praket7/agent-interop-runtime"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.3.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Verify whether a local Agent or MCP runtime matches an approved artifact.",
+            "is_latest": true,
+            "name": "io.github.fantasyce/agent-runtime-proof",
+            "packages": [
+              {
+                "identifier": "https://github.com/fantasyce/agent-runtime-proof/releases/download/v1.1.0/agent-runtime-proof_1.1.0.mcpb",
+                "registry_type": "mcpb",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.1.0"
+              }
+            ],
+            "query": "runtime",
+            "remotes": [],
+            "repository": {
+              "id": "1345289397",
+              "source": "github",
+              "url": "https://github.com/fantasyce/agent-runtime-proof"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Finds the end-of-life runtimes an AI assistant still writes for you \u2014 node:20, python3.9, ubuntu-22",
+            "is_latest": true,
+            "name": "io.github.jmshinhwa/runtime-eol-deploy-block-audit",
+            "packages": [
+              {
+                "identifier": "@readystack/runtime-eol-deploy-block-audit",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": "npx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.3"
+              }
+            ],
+            "query": "runtime",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/jmshinhwa/readystack-themes"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.1.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "RandomUser profile generation.",
+            "is_latest": true,
+            "name": "io.github.mrfentmen/randomuser-mcp",
+            "packages": [
+              {
+                "identifier": "randomuser-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.0"
+              }
+            ],
+            "query": "user",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/mrfentmen/awesome-mcps"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Summarize runtime declarations across local manifests and CI files without returning versions,...",
+            "is_latest": true,
+            "name": "io.github.mrfentmen/runtime-support-mcp",
+            "packages": [
+              {
+                "identifier": "runtime-support-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.0"
+              }
+            ],
+            "query": "runtime",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/mrfentmen/runtime-support-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Crypto market signals, technical indicators, and sentiment analysis for AI agents.",
+            "is_latest": true,
+            "name": "ai.aarna/atars-mcp",
+            "packages": [],
+            "query": "at",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.aarna.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Actwise Ideation helps founders benchmark startup and product ideas before they build.",
+            "is_latest": true,
+            "name": "ai.actwise/ideation",
+            "packages": [],
+            "query": "at",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://actwise.ai/ideation/mcp/v1"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Describe a store's problem: get the matching service, its fixed price, and a request link.",
+            "is_latest": true,
+            "name": "ai.advisorsai/service-navigator",
+            "packages": [],
+            "query": "at",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://advisorsai.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Cross-vendor B2B catalog for AI agents: search, compare, find equivalents, request a quote.",
+            "is_latest": true,
+            "name": "ai.airshelf/catalog",
+            "packages": [],
+            "query": "at",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.airshelf.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "SEC filings, financial statements, metrics, insider and institutional holdings as structured data",
+            "is_latest": true,
+            "name": "ai.akkrudata/akkrudata",
+            "packages": [],
+            "query": "at",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.akkrudata.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "AI image and video generation, talking avatars, consistent characters and photo packs from Claude.",
+            "is_latest": true,
+            "name": "ai.apatero/studio",
+            "packages": [],
+            "query": "at",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.apatero.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.2.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Search Argus HQ public FDA enforcement data: warning letters, recalls, approvals, 483s.",
+            "is_latest": true,
+            "name": "ai.argushq/enforcement-database",
+            "packages": [],
+            "query": "at",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://argushq.ai/api/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/andrewjgaber-commits/empire-distribution"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Miles' public credit-card catalog: facts, transfer partners, valuations. Keyless, read-only.",
+            "is_latest": true,
+            "name": "ai.askmiles/catalog",
+            "packages": [],
+            "query": "at",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.askmiles.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "AI-powered organic supply chain verification: certification, OFAC, FDA import checks.",
+            "is_latest": true,
+            "name": "ai.atlasverified/atlas-mcp",
+            "packages": [],
+            "query": "at",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.atlasverified.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Agent-updated work tracker for builders directing AI across multiple projects.",
+            "is_latest": true,
+            "name": "ai.atlier/project-desk",
+            "packages": [],
+            "query": "at",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://atlier.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Wildsdesign/Atlier"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "4.7.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Protein analysis: ESM-2/ESMC embeddings, mutation scoring, landscape scans, ESMFold structure.",
+            "is_latest": true,
+            "name": "ai.axonagentic/neuroautomata",
+            "packages": [],
+            "query": "at",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.neuroautomata.axonagentic.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.29.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "AI story development, screenplay editing, review, media, and export tools for BeatBandit projects.",
+            "is_latest": true,
+            "name": "ai.beatbandit/beatbandit",
+            "packages": [],
+            "query": "at",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://beatbandit.ai/api/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Live US federal and state regulatory changes and grant programs, every result cited.",
+            "is_latest": true,
+            "name": "ai.bizmoon/regulatory",
+            "packages": [],
+            "query": "at",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://bizmoon.ai/api/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/uofuonye/bizmoon-plugins"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Checkout-verified prices, stock, US FCC status and buy routes for humanoid and quadruped robots",
+            "is_latest": true,
+            "name": "ai.botinfo/robot-market-data",
+            "packages": [],
+            "query": "at",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.botinfo.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Live status and health checks for AI coding providers: Claude, Cursor, Copilot, Codex and more.",
+            "is_latest": true,
+            "name": "ai.canivibe/status",
+            "packages": [],
+            "query": "at",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://canivibe.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Build and manage AI-native customer support agents from Claude or any MCP client.",
+            "is_latest": true,
+            "name": "ai.chatthing/chat-thing",
+            "packages": [],
+            "query": "at",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://app.chatthing.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Generate synthetic random user data for testing, demos, and development without using real persona.",
+            "is_latest": true,
+            "name": "ai.saifs/synthetic-data-random-user",
+            "packages": [],
+            "query": "user",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://synthetic-mint-mcp.saifs.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Enrich user data by adding social network links based on provided personal information. Integrate\u2026",
+            "is_latest": true,
+            "name": "ai.smithery/jekakos-mcp-user-data-enrichment",
+            "packages": [],
+            "query": "user",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@jekakos/mcp-user-data-enrichment/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/jekakos/mcp-user-data-enrichment"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Create and edit surveys, read responses, and reply to users \u2014 from your AI assistant.",
+            "is_latest": true,
+            "name": "com.getuserfeedback/mcp",
+            "packages": [],
+            "query": "user",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.getuserfeedback.com/"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.64",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Explore your Userbrain user test data, summarize feedback, and uncover actionable insights faster.",
+            "is_latest": true,
+            "name": "com.userbrain/mcp",
+            "packages": [],
+            "query": "user",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.userbrain.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.5.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Self-hosted MCP runtime for ChatGPT to edit files, run commands, and test local projects.",
+            "is_latest": true,
+            "name": "io.github.flytohub/flyto-runtime",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://{runtime_host}/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/flytohub/flyto-runtime"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.8",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Hosted Python sandbox for package runtime verification: pip install and usable-import evidence.",
+            "is_latest": true,
+            "name": "io.github.ligafew/python-package-runtime-test",
+            "packages": [],
+            "query": "runtime",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://apcs-public-mcp-gateway.apcs-mcp.workers.dev/mcp/python-package-runtime-test"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.2",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "For every user returned at runtime, generate a QR code image encoding that user's username and also generate a Code 128 barcode image encoding that user's email",
+        "errors": [],
+        "queries": [
+          "user",
+          "returned",
+          "at",
+          "runtime"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "OFFICIAL_MCP_REGISTRY",
+        "source_url": "https://registry.modelcontextprotocol.io"
+      }
+    ],
+    "schema": "PROJECT_BRAIN_FEDERATED_CAPABILITY_DISCOVERY_V1",
+    "sources": [
+      "APT_CATALOG",
+      "OFFICIAL_MCP_REGISTRY"
+    ]
+  },
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
+  "source": "FEDERATED_CAPABILITY_DISCOVERY_FALLBACK",
+  "targeted_acquisition_error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"dbus-user-session\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"dh-user-session-migration\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.161.185.214 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/gstreamer1.0-plugins-base_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.161.185.214 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/libgstreamer-plugins-good1.0-0_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 52.161.185.214 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/gstreamer1.0-plugins-good_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 52.161.185.214 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-gl1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.161.185.214 80]\\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\\n\", \"name\": \"gnome-user-docs-ca\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.161.185.214 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/gstreamer1.0-plugins-base_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.161.185.214 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/libgstreamer-plugins-good1.0-0_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 52.161.185.214 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/gstreamer1.0-plugins-good_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 52.161.185.214 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-gl1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.161.185.214 80]\\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\\n\", \"name\": \"gnome-user-docs-gu\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.161.185.214 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/gstreamer1.0-plugins-base_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 52.161.185.214 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/libgstream"
+}
