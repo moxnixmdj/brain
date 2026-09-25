@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-WORLDBANK-001",
+  "purpose": "First provenance-bearing JIT knowledge proof: obtain an unfamiliar domain definition from an authoritative external JSON source, preserve evidence, consume the learned value downstream, and independently revalidate it.",
+  "goal": "Learn the authoritative definition note for World Bank indicator SP.POP.TOTL at runtime, preserve its source provenance, use the learned definition in a downstream JSON artifact, and independently revalidate the source before completion.",
+  "steps": [
+    {
+      "id": "jit-knowledge-proof",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 8,
+      "controller_actions": [
+        {
+          "type": "fetch_json_knowledge",
+          "args": {
+            "url": "https://api.worldbank.org/v2/indicator/SP.POP.TOTL?format=json",
+            "json_path": [
+              1,
+              0,
+              "sourceNote"
+            ],
+            "output_path": "canonical/astra_runtime/tmp/JIT_WORLDBANK_POPULATION_DEFINITION_EVIDENCE.json",
+            "authoritative": true,
+            "timeout_s": 20,
+            "max_bytes": 1000000
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "verified",
+            "value": true
+          }
+        },
+        {
+          "type": "write_json_records",
+          "args": {
+            "output_path": "canonical/astra_runtime/tmp/JIT_WORLDBANK_POPULATION_DEFINITION_USED.json",
+            "fields": [
+              "indicator_id",
+              "definition"
+            ],
+            "records": [
+              {
+                "indicator_id": "SP.POP.TOTL",
+                "definition": {
+                  "$result": {
+                    "cycle": 0,
+                    "field": "value"
+                  }
+                }
+              }
+            ]
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "verified",
+            "value": true
+          }
+        },
+        {
+          "type": "assert_json_knowledge",
+          "args": {
+            "evidence_path": "canonical/astra_runtime/tmp/JIT_WORLDBANK_POPULATION_DEFINITION_EVIDENCE.json",
+            "timeout_s": 20,
+            "max_bytes": 1000000
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "verified",
+            "value": true
+          }
+        },
+        {
+          "type": "finish",
+          "args": {
+            "summary": "JIT_KNOWLEDGE_COMPLETE"
+          }
+        }
+      ],
+      "verify": {
+        "type": "stdout_contains",
+        "text": "JIT_KNOWLEDGE_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "knowledge_must_be_obtained_at_runtime": true,
+    "authoritative_source_required": true,
+    "provenance_must_be_persisted": true,
+    "downstream_use_required": true,
+    "source_revalidation_required": true,
+    "manual_domain_fact_injection": false,
+    "knowledge_action_commit": "1fcde653a003a2f69b0158b1e877dd81fd0b544e"
+  }
+}
