@@ -1,0 +1,9 @@
+{
+  "adapter": "goal",
+  "error": "RuntimeError:DOCUMENT_TABLE_ROW_WIDTH_MISMATCH",
+  "mission_id": "ASTRA-RUNTIME-BROWSER-DYNAMIC-DOCX-001",
+  "observed_at_utc": "2026-09-25T03:34:34.161302+00:00",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+  "step_id": "run-dynamic-browser-docx-goal",
+  "step_index": 0
+}

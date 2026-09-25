@@ -1,0 +1,21 @@
+{
+  "blocker": {
+    "adapter": "goal",
+    "error": "RuntimeError:DOCUMENT_TABLE_ROW_WIDTH_MISMATCH",
+    "mission_id": "ASTRA-RUNTIME-BROWSER-DYNAMIC-DOCX-001",
+    "observed_at_utc": "2026-09-25T03:34:34.161302+00:00",
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_BLOCKER_V1",
+    "step_id": "run-dynamic-browser-docx-goal",
+    "step_index": 0
+  },
+  "created_at_utc": "2026-09-25T03:34:11.875778+00:00",
+  "history": [],
+  "mission_id": "ASTRA-RUNTIME-BROWSER-DYNAMIC-DOCX-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_BROWSER_DYNAMIC_DOCX_001.json",
+  "mission_sha256": "561cf1b3cbcf9822259885d22a65fe0c5a192889108fcde7ec1e005719b27755",
+  "next_step": 0,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "BLOCKED",
+  "updated_at_utc": "2026-09-25T03:34:34.161559+00:00"
+}
