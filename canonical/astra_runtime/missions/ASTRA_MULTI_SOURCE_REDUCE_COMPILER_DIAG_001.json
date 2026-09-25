@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-MULTI-SOURCE-REDUCE-COMPILER-DIAG-001",
+  "purpose": "Inspect exact compiled plan for the multi-source reduction pressure goal before any repair.",
+  "steps": [
+    {
+      "id": "compile-and-print",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport importlib.util,json,pathlib\np=pathlib.Path('canonical/runtime/goal_compiler.py')\ns=importlib.util.spec_from_file_location('gc',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)\nreg=json.loads(pathlib.Path('canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']\ngoal=json.loads(pathlib.Path('canonical/astra_runtime/missions/ASTRA_RUNTIME_MULTI_SOURCE_REDUCE_001.json').read_text())['goal']\ntry:\n out=m.compile_goal(goal,reg,pathlib.Path('.').resolve())\n print(json.dumps(out,sort_keys=True))\n print('REDUCE_COMPILER_COMPILED')\nexcept Exception as exc:\n print(type(exc).__name__+':'+str(exc))\n print('REDUCE_COMPILER_BLOCKED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "REDUCE_COMPILER_"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "read_only_diagnostic": true
+  }
+}
