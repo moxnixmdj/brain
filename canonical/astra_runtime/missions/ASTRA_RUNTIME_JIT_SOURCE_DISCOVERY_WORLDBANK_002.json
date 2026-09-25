@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-JIT-SOURCE-DISCOVERY-WORLDBANK-002",
+  "purpose": "Fresh proof that authority-native discovery finds the semantically relevant World Bank SP.POP.TOTL source, not merely any page on the authority domain.",
+  "goal": "Find an authoritative World Bank web source for indicator SP.POP.TOTL without being given the page URL, preserve discovery evidence, render the discovered source, and verify it remains within the World Bank authority domain.",
+  "steps": [
+    {
+      "id": "discover-and-verify-authoritative-source",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 8,
+      "controller_actions": [
+        {
+          "type": "discover_authoritative_web_source",
+          "args": {
+            "query": "World Bank SP.POP.TOTL official indicator",
+            "authority_domains": [
+              "worldbank.org"
+            ],
+            "output_path": "canonical/astra_runtime/tmp/JIT_SOURCE_DISCOVERY_WORLDBANK.json",
+            "timeout_s": 20,
+            "max_bytes": 1500000
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "verified",
+            "value": true
+          }
+        },
+        {
+          "type": "invoke_capability",
+          "args": {
+            "capability_id": "web.browser.rendered.capture.chromedriver",
+            "url": {
+              "$result": {
+                "cycle": 0,
+                "field": "chosen_url"
+              }
+            },
+            "screenshot_path": "canonical/astra_runtime/tmp/JIT_SOURCE_DISCOVERY_WORLDBANK.png",
+            "result_path": "canonical/astra_runtime/tmp/JIT_SOURCE_DISCOVERY_WORLDBANK_RENDER.json"
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "output_verified",
+            "value": true
+          }
+        },
+        {
+          "type": "assert_authoritative_source_discovery",
+          "args": {
+            "evidence_path": "canonical/astra_runtime/tmp/JIT_SOURCE_DISCOVERY_WORLDBANK.json",
+            "browser_result_path": "canonical/astra_runtime/tmp/JIT_SOURCE_DISCOVERY_WORLDBANK_RENDER.json"
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "verified",
+            "value": true
+          }
+        },
+        {
+          "type": "finish",
+          "args": {
+            "summary": "AUTHORITATIVE_SOURCE_DISCOVERY_COMPLETE"
+          }
+        }
+      ],
+      "verify": {
+        "type": "stdout_contains",
+        "text": "AUTHORITATIVE_SOURCE_DISCOVERY_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "direct_source_url_provided": false,
+    "authority_domain_provided": true,
+    "discovered_source_must_be_rendered": true,
+    "discovery_is_not_fact_verification": true,
+    "independent_authority_boundary_check_required": true,
+    "source_discovery_commit": "5594367ba5f4ff27534f6884d44c3cb00931b26f",
+    "source_verifier_commit": "41a948c5267b1f280de05cd319f0d7a46a1e106f",
+    "replay_after_search_redirect_normalization_commit": "c0a436b3cc1e1971b1c35e0c6baddde6bf5e55b0",
+    "replay_after_bing_rss_discovery_commit": "df236f67c9f27c42f6e796f1e392792bb0a4f785",
+    "replay_after_site_scoped_discovery_commit": "99168189f97d02de632ef66ce316769c3637b6f2",
+    "replay_after_authority_native_discovery_commit": "58db1f1e551b032f9a0aae88f12fbd43a0873bcc",
+    "fresh_mission_identity": true,
+    "semantic_relevance_required": true,
+    "semantic_relevance_commit": "5173e7a40b45e6b3c52268645a51f263c72552d1",
+    "source_mission": "ASTRA-RUNTIME-JIT-SOURCE-DISCOVERY-WORLDBANK-001"
+  }
+}
