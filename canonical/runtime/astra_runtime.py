@@ -3379,6 +3379,49 @@ def _goal_action(action):
           "output_path":str(output.relative_to(ROOT)),
         }
 
+    if typ=="materialize_supported_knowledge":
+        assessment_path=_safe_repo_path(args.get("assessment_path",""))
+        output=_safe_repo_path(args.get("output_path",""))
+        field_name=str(args.get("field_name") or "value").strip()
+        if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*",field_name):
+            return {"type":typ,"output_verified":False,"error":"KNOWLEDGE_MATERIALIZE_FIELD_INVALID"}
+        if not assessment_path.is_file():
+            return {"type":typ,"output_verified":False,"error":"KNOWLEDGE_ASSESSMENT_MISSING"}
+        try:
+            assessment=json.loads(assessment_path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            return {"type":typ,"output_verified":False,"error":"KNOWLEDGE_ASSESSMENT_INVALID:"+type(exc).__name__}
+        status=str(assessment.get("status") or "").upper()
+        if status!="SUPPORTED":
+            return {
+              "type":typ,"output_verified":False,
+              "error":"KNOWLEDGE_NOT_ACTIONABLE:"+status,
+              "status":status,
+              "assessment_path":str(assessment_path.relative_to(ROOT)),
+            }
+        fresh=[x for x in assessment.get("records") or [] if isinstance(x,dict) and not x.get("stale")]
+        canonical={}
+        for rec in fresh:
+            key=json.dumps(rec.get("value"),sort_keys=True,separators=(",",":"),ensure_ascii=False)
+            canonical.setdefault(key,rec.get("value"))
+        if len(canonical)!=1:
+            return {
+              "type":typ,"output_verified":False,
+              "error":"SUPPORTED_KNOWLEDGE_VALUE_NOT_UNIQUE",
+              "status":status,
+            }
+        value=next(iter(canonical.values()))
+        payload=[{field_name:value}]
+        output.parent.mkdir(parents=True,exist_ok=True)
+        output.write_text(json.dumps(payload,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+        return {
+          "type":typ,"output_verified":True,
+          "status":status,
+          "value":value,
+          "field_name":field_name,
+          "output_path":str(output.relative_to(ROOT)),
+        }
+
     if typ=="assert_knowledge_status":
         assessment_path=_safe_repo_path(args.get("assessment_path",""))
         expected=str(args.get("expected_status") or "").strip().upper()
@@ -3733,7 +3776,7 @@ def _run_model_independent_goal(step, mission, goal):
     if actions is None:
         return None
     allowed_types={
-      "read_file","list_tree","search_text","http_get","extract_labeled_fields_from_rendered_source","assert_labeled_fields_against_fresh_source","resolve_authority_identity","assert_authority_identity","discover_authoritative_web_source","assert_authoritative_source_discovery","fetch_json_knowledge","assess_knowledge_consistency","assert_knowledge_status","assert_json_knowledge","write_json_records","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback","invoke_capability_until","verify_with_independent_pypi_codec",
+      "read_file","list_tree","search_text","http_get","extract_labeled_fields_from_rendered_source","assert_labeled_fields_against_fresh_source","resolve_authority_identity","assert_authority_identity","discover_authoritative_web_source","assert_authoritative_source_discovery","fetch_json_knowledge","assess_knowledge_consistency","materialize_supported_knowledge","assert_knowledge_status","assert_json_knowledge","write_json_records","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback","invoke_capability_until","verify_with_independent_pypi_codec",
       "project_browser_result_json","join_runtime_json_arrays","assert_runtime_json_join","aggregate_runtime_json_arrays","assert_runtime_json_aggregate","derive_grouped_records","assert_grouped_derived_records","select_ranked_record","assert_ranked_record","assert_hex_prefix_bucket","assert_collection_length_bucket","assert_runtime_selected_code_decodes",
       "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal","assert_runtime_fanout_decodes","assert_runtime_fanout_artifacts_decode","assert_runtime_per_item_fallback_decodes","assert_runtime_fallback_decision","assert_runtime_bounded_loop_trace",
       "assert_workflow_audit_supported_by_source","assert_python_source_audit_supported_by_source",
