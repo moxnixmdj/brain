@@ -2472,6 +2472,98 @@ def _goal_action(action):
           "verified":True,
         }
 
+    if typ=="fetch_json_knowledge":
+        url=str(args.get("url") or "").strip()
+        output=_safe_repo_path(args.get("output_path",""))
+        path_spec=args.get("json_path") or []
+        if not url.startswith(("https://","http://")):
+            return {"type":typ,"verified":False,"error":"KNOWLEDGE_URL_INVALID"}
+        if not isinstance(path_spec,list) or len(path_spec)>32:
+            return {"type":typ,"verified":False,"error":"KNOWLEDGE_JSON_PATH_INVALID"}
+        req=urllib.request.Request(url,headers={"User-Agent":"ProjectBrain-Knowledge/1"})
+        t=time.monotonic()
+        try:
+            with urllib.request.urlopen(req,timeout=int(args.get("timeout_s") or 20)) as resp:
+                raw=resp.read(int(args.get("max_bytes") or 1000000))
+                final_url=resp.geturl()
+                status=int(resp.status)
+        except Exception as exc:
+            return {"type":typ,"verified":False,"error":"KNOWLEDGE_FETCH_FAILED:"+type(exc).__name__}
+        try:
+            payload=json.loads(raw.decode("utf-8"))
+        except Exception as exc:
+            return {"type":typ,"verified":False,"error":"KNOWLEDGE_JSON_INVALID:"+type(exc).__name__}
+        selected=payload
+        try:
+            for part in path_spec:
+                if isinstance(selected,list):
+                    selected=selected[int(part)]
+                elif isinstance(selected,dict):
+                    selected=selected[str(part)]
+                else:
+                    raise KeyError(part)
+        except Exception:
+            return {"type":typ,"verified":False,"error":"KNOWLEDGE_JSON_PATH_NOT_FOUND"}
+        record={
+          "schema":"PROJECT_BRAIN_KNOWLEDGE_EVIDENCE_V1",
+          "source_url":url,
+          "final_url":final_url,
+          "http_status":status,
+          "retrieved_at_utc":utc(),
+          "body_sha256":hashlib.sha256(raw).hexdigest(),
+          "json_path":path_spec,
+          "value":selected,
+          "source_type":"authoritative_external_json" if bool(args.get("authoritative")) else "external_json",
+        }
+        output.parent.mkdir(parents=True,exist_ok=True)
+        output.write_text(json.dumps(record,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+        return {
+          "type":typ,"verified":True,
+          "output_path":str(output.relative_to(ROOT)),
+          "body_sha256":record["body_sha256"],
+          "json_path":path_spec,"value":selected,
+          "final_url":final_url,"duration_s":round(time.monotonic()-t,3),
+        }
+
+    if typ=="assert_json_knowledge":
+        evidence_path=_safe_repo_path(args.get("evidence_path",""))
+        if not evidence_path.is_file():
+            return {"type":typ,"verified":False,"error":"KNOWLEDGE_EVIDENCE_MISSING"}
+        try:
+            evidence=json.loads(evidence_path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            return {"type":typ,"verified":False,"error":"KNOWLEDGE_EVIDENCE_INVALID:"+type(exc).__name__}
+        url=str(evidence.get("source_url") or "")
+        path_spec=evidence.get("json_path") or []
+        if not url.startswith(("https://","http://")) or not isinstance(path_spec,list):
+            return {"type":typ,"verified":False,"error":"KNOWLEDGE_EVIDENCE_CONTRACT_INVALID"}
+        req=urllib.request.Request(url,headers={"User-Agent":"ProjectBrain-KnowledgeVerifier/1"})
+        try:
+            with urllib.request.urlopen(req,timeout=int(args.get("timeout_s") or 20)) as resp:
+                raw=resp.read(int(args.get("max_bytes") or 1000000))
+            payload=json.loads(raw.decode("utf-8"))
+            selected=payload
+            for part in path_spec:
+                if isinstance(selected,list):
+                    selected=selected[int(part)]
+                elif isinstance(selected,dict):
+                    selected=selected[str(part)]
+                else:
+                    raise KeyError(part)
+        except Exception as exc:
+            return {"type":typ,"verified":False,"error":"KNOWLEDGE_REVALIDATION_FAILED:"+type(exc).__name__}
+        same=selected==evidence.get("value")
+        return {
+          "type":typ,"verified":same,
+          "evidence_path":str(evidence_path.relative_to(ROOT)),
+          "source_url":url,
+          "json_path":path_spec,
+          "observed_value":selected,
+          "expected_value":evidence.get("value"),
+          "fresh_body_sha256":hashlib.sha256(raw).hexdigest(),
+          "original_body_sha256":evidence.get("body_sha256"),
+        }
+
     if typ=="http_get":
         url=str(args.get("url",""))
         if not url.startswith(("https://","http://")): return {"type":typ,"error":"UNSUPPORTED_URL"}
@@ -2768,7 +2860,7 @@ def _run_model_independent_goal(step, mission, goal):
     if actions is None:
         return None
     allowed_types={
-      "read_file","list_tree","search_text","http_get","write_json_records","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback","invoke_capability_until","verify_with_independent_pypi_codec",
+      "read_file","list_tree","search_text","http_get","fetch_json_knowledge","assert_json_knowledge","write_json_records","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback","invoke_capability_until","verify_with_independent_pypi_codec",
       "project_browser_result_json","join_runtime_json_arrays","assert_runtime_json_join","aggregate_runtime_json_arrays","assert_runtime_json_aggregate","derive_grouped_records","assert_grouped_derived_records","select_ranked_record","assert_ranked_record","assert_hex_prefix_bucket","assert_collection_length_bucket","assert_runtime_selected_code_decodes",
       "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal","assert_runtime_fanout_decodes","assert_runtime_fanout_artifacts_decode","assert_runtime_per_item_fallback_decodes","assert_runtime_fallback_decision","assert_runtime_bounded_loop_trace",
       "assert_workflow_audit_supported_by_source","assert_python_source_audit_supported_by_source",
