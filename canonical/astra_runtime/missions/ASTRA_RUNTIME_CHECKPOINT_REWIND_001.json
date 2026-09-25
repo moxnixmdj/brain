@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-CHECKPOINT-REWIND-001",
+  "purpose": "Prove checkpoint resume rewinds to the earliest invalid durable effect when a checkpointed artifact disappears.",
+  "goal": "Prove checkpoint integrity revalidation and automatic rewind.",
+  "steps": [
+    {
+      "id": "checkpoint-rewind-controller",
+      "adapter": "goal",
+      "controller_actions": [
+        {
+          "type": "invoke_capability",
+          "args": {
+            "capability_id": "image.qr.generate.qrencode",
+            "output_path": "canonical/astra_runtime/tmp/CHECKPOINT_REWIND_QR.png",
+            "argv": [
+              "qrencode",
+              "-o",
+              "canonical/astra_runtime/tmp/CHECKPOINT_REWIND_QR.png",
+              "CHECKPOINT-REWIND-PROOF"
+            ],
+            "output_prefix_hex": "89504e470d0a1a0a",
+            "timeout_s": 60
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "output_verified",
+            "value": true
+          }
+        },
+        {
+          "type": "assert_file_exists",
+          "args": {
+            "path": "canonical/astra_runtime/tmp/CHECKPOINT_REWIND_QR.png"
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "verified",
+            "value": true
+          }
+        },
+        {
+          "type": "finish",
+          "args": {
+            "summary": "CONTROLLER_CHECKPOINT_REWIND_COMPLETE"
+          }
+        }
+      ],
+      "interrupt_after_controller_actions_once": 1,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "CONTROLLER_CHECKPOINT_REWIND_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "intentional_one_shot_interrupt": true,
+    "artifact_will_be_removed_between_runs": true,
+    "checkpoint_revalidation_commit": "4595ab2e0b9603792d1d9ecbca4ffd300d6033db"
+  }
+}
