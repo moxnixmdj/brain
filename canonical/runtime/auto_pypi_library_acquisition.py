@@ -244,7 +244,7 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
       "goal":"Verify the pending Python-library codec effect in a fresh process, promote only after semantic round-trip equality, then replay the originating mission.",
       "steps":[
         {"id":"verify-pending-python-codec","adapter":"shell",
-         "command":f"set -euo pipefail\npython canonical/runtime/verify_pending_python_codec_binding.py {pending_rel} {verify_rel}",
+         "command":f"set -euo pipefail\npython canonical/runtime/verify_pending_cli_binding.py {pending_rel} {verify_rel}",
          "verify":{"type":"stdout_contains","text":"PENDING_PYPI_BINDING_EFFECT_VERIFIED"}},
         {"id":"promote-and-replay","adapter":"shell",
          "command":f"set -euo pipefail\npython canonical/runtime/promote_pending_binding.py {pending_rel} {verify_rel}",
