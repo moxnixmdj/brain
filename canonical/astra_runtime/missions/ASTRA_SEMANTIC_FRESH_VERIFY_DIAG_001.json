@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-SEMANTIC-FRESH-VERIFY-DIAG-001",
+  "purpose": "Read-only diagnosis of the fresh-source labeled-field verifier against the already persisted PEP 703 extraction artifact.",
+  "steps": [
+    {
+      "id": "diagnose-fresh-field-verifier",
+      "adapter": "goal",
+      "max_controller_actions": 3,
+      "controller_actions": [
+        {
+          "type": "assert_labeled_fields_against_fresh_source",
+          "args": {
+            "browser_result_path": "canonical/astra_runtime/tmp/AUTHORITY_SOURCE_63A3628DA34E_SOURCE_RENDER.json",
+            "extracted_path": "canonical/astra_runtime/tmp/JIT_PEP703_METADATA.json",
+            "fields": [
+              {
+                "label": "Status",
+                "output_field": "status"
+              },
+              {
+                "label": "Python-Version",
+                "output_field": "python_version"
+              }
+            ],
+            "timeout_s": 20,
+            "max_bytes": 2000000
+          }
+        },
+        {
+          "type": "finish",
+          "args": {
+            "summary": "SEMANTIC_FRESH_VERIFY_DIAG_COMPLETE"
+          }
+        }
+      ],
+      "verify": {
+        "type": "stdout_contains",
+        "text": "SEMANTIC_FRESH_VERIFY_DIAG_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "read_only_diagnostic": true
+  }
+}
