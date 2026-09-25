@@ -1,0 +1,2678 @@
+{
+  "auto_acquisition": {
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"raku-json-unmarshal\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"dbus-user-session\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"dh-user-session-migration\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\", \"name\": \"gir1.2-json-1.0\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:\", \"name\": \"gjh-asl-json\", \"status\": \"CONTRACT_REJECTED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/gstreamer1.0-plugins-base_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/libgstreamer-plugins-good1.0-0_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/gstreamer1.0-plugins-good_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-gl1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\\n\", \"name\": \"gnome-user-docs\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/gstreamer1.0-plugins-base_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/libgstreamer-plugins-good1.0-0_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/gstreamer1.0-plugins-good_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-gl1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\\n\", \"name\": \"gnome-user-docs-as\", \"status\": \"PROBE_FAILED\"}, {\"error\": \"ProbeFailure:APT_INSTALL_FAILED:: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base",
+    "status": "NOT_DISPATCHED"
+  },
+  "binding_performed": false,
+  "goal": "Using a real rendered browser, open https://jsonplaceholder.typicode.com/users, save a screenshot to canonical/astra_runtime/tmp/PARA_USERS.png, and save the rendered result to canonical/astra_runtime/tmp/PARA_USERS.json. Using a real rendered browser, open https://jsonplaceholder.typicode.com/posts, save a screenshot to canonical/astra_runtime/tmp/PARA_POSTS.png, and save the rendered result to canonical/astra_runtime/tmp/PARA_POSTS.json. From these two live datasets, summarize posting activity by user into canonical/astra_runtime/tmp/PARA_POST_COUNTS.json: produce one row for each observed user, carrying user_id and username, plus post_count equal to how many observed posts belong to that user through posts.userId = users.id. Turn canonical/astra_runtime/tmp/PARA_POST_COUNTS.json into canonical/astra_runtime/tmp/PARA_POST_COUNTS.xlsx using the columns user_id, username, and post_count. Cross-check the two captured datasets against the JSON summary and the workbook: every user must occur once, usernames must agree with the user source, every post must contribute to exactly one user's count, the counts must sum to the number of observed posts, no extra rows may exist, and the workbook must reproduce the JSON summary exactly.",
+  "mission_id": "ASTRA-RUNTIME-SEMANTIC-PARAPHRASE-001",
+  "observed_at_utc": "2026-09-25T17:27:41.192248+00:00",
+  "result": {
+    "binding_performed": false,
+    "candidates": [
+      {
+        "archive_sha256": "7457f7b22bb6aa8f5acfb20bf7c317856fea2b5bef010327010a1884c31797a5",
+        "binding_kind": "apt",
+        "description": "Raku module to turn JSON into objects",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json",
+          "turn"
+        ],
+        "name": "raku-json-unmarshal",
+        "packages": [],
+        "query": "turn",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 62,
+        "version": "0.15-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "e585b1694b854c3b75bfb39cc4022cafe7b14e44fd435433b613b8fb9919cb41",
+        "binding_kind": "apt",
+        "description": "simple interprocess messaging system (systemd --user integration)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "dbus-user-session",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.14.10-4ubuntu4.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d02c7eca01652497ba2dd753c71de31913fa4be2825883b138270fc1d53722ae",
+        "binding_kind": "apt",
+        "description": "debhelper extension for user-session-migration support",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "dh-user-session-migration",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.4.1ubuntu3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "39b9766a2fcacd2105318734478b5536172b740c50d9743a21e8869e62662f24",
+        "binding_kind": "apt",
+        "description": "GLib JSON manipulation library (introspection data)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "gir1.2-json-1.0",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.8.0-2build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "95581ecd747961b82573f89cfedf6b4251477e1b4be80468559e99e25380da71",
+        "binding_kind": "apt",
+        "description": "gjh solver, like solver from AMPL Library",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "gjh-asl-json",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.0+git20210628.867c5da-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "ce6c4907acf695d28bbb900ddf98c232cd1bda7142edcc1d13fd1984c66491b1",
+        "binding_kind": "apt",
+        "description": "GNOME Help",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "da541d3ad7557a81fb343979996852625831989b4dab4dbfe447a06c3f26f6b8",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Assamese)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-as",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "9fadb9ed9e8e2ca10d8566f6cb5a8c4e9367931ba22e4bba1a0a320d066bb470",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Catalan)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-ca",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "aaaf8c6054906afdd0fa7f9c5b5ca9f9be66ae55b95d8e6092eb79541042ca75",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Czech)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-cs",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d15d0240eb401e5364394f6c187b7ab5ee427203c270120fbdf5930772eedac2",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Danish)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-da",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d6bb084067d9aded3681bb7160046c4d2d0165bfb27d7bb111f8931dbbbb4a8c",
+        "binding_kind": "apt",
+        "description": "GNOME Help (German)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-de",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "6da00bfb239d208bb577654b3d51cda119ede23e638ef1c567e532a29534ba31",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Greek)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-el",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "8baa25c420b713f12ebe69f8207dee00b0e21c03c8d064d4824f3f1de0ef2274",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Spanish)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-es",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "945a2fb946931fa42aa360c3608f1de07ee2bf84d16877735d213ac82b3b7ec5",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Basque)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-eu",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "8dedd42e4eb6e984263d3122543693561f149a31bea0ac36cd4d5252877cb10a",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Farsi)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-fa",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "045a34dd87819e02832d0e17faef8ad3cb5d76a61c5e647bc659e7bbfabe2f3e",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Finnish)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-fi",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "3bcbcb9fe608b790b4a495b604f8a0d93419af3d7ea0d5c782a66b298df4709b",
+        "binding_kind": "apt",
+        "description": "GNOME Help (French)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-fr",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "6a5bef9bedd32960f5e22fc027c9b44ec8a3c95b9f998e7570eb8af85ad10d74",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Galician)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-gl",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "fd2edb8a0ab3f2a93f6eae5583f357ed1815aa675f8fa45bf5a9734dec8f18c1",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Gujarati)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-gu",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "32246b7e540513f1503ae1bdc14a0ba1887151a3ef9789bafd6805dbb5510920",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Hebrew)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-he",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "1567292bd065fe8876c475f64a635f5ff19db5a6899a379023db1abd98ef31b0",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Hindi)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-hi",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "24dbf37a172416688a59c73f87e69094c734ece800f488ab38e8cdcd58cbebe5",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Croatian)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-hr",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c2a82e383992649cd559d31ceb3b1755595c2dcceda2f826c5e4bd08f61f5ca3",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Hungarian)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-hu",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "2b7423416ba12fb21d1c67a4e5683a16474a9db62156ab9728e32de12f5b6c51",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Indonesian)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-id",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "8cf66f1f2a01af232e0246a5cbf54779eaf61ab51f7a0c044d56708062d209f6",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Italian)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-it",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "094907e5652c132efce5863730d7c5843e67095d2a5c52262647a67dede77fa1",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Japanese)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-ja",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "4e48a2981a949f5cf59a889cb59469b95494c3197629dd356962447d6d23e1a6",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Kannada)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-kn",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "99efdd06a6770687689cb4e005000bcc75950a43734ea18658d415c7266294fc",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Korean)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-ko",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "26c27ba788a088e21c65c895d90f30cc188c4b8458874e10d0c2874bc5d418f7",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Lithuanian)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-lt",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "82d793aeb9942f278048542277215353fd87e11868ca9c0752760ef9a857e18c",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Latvian)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-lv",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "HPE GreenLake users MCP Server",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.HewlettPackard/greenlake-users-mcp",
+        "packages": [
+          {
+            "identifier": "greenlake-users-mcp",
+            "registry_type": "pypi",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.1.2"
+          }
+        ],
+        "query": "user",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/HewlettPackard/gl-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.1.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "An MCP server that enables AI agents to ask users clarifying questions via pop-up terminal windows.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.Jacob-J-Thomas/user-prompt",
+        "packages": [
+          {
+            "identifier": "UserPrompt",
+            "registry_type": "nuget",
+            "required_environment": [],
+            "runtime_hint": "dnx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.2"
+          }
+        ],
+        "query": "user",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/Jacob-J-Thomas/user-context-retrieval-mcp-server"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "RandomUser profile generation.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.mrfentmen/randomuser-mcp",
+        "packages": [
+          {
+            "identifier": "randomuser-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.0"
+          }
+        ],
+        "query": "user",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/mrfentmen/awesome-mcps"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Generate synthetic random user data for testing, demos, and development without using real persona.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.saifs/synthetic-data-random-user",
+        "packages": [],
+        "query": "user",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://synthetic-mint-mcp.saifs.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Enrich user data by adding social network links based on provided personal information. Integrate\u2026",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.smithery/jekakos-mcp-user-data-enrichment",
+        "packages": [],
+        "query": "user",
+        "remotes": [
+          {
+            "required_headers": [
+              "Authorization"
+            ],
+            "type": "streamable-http",
+            "url": "https://server.smithery.ai/@jekakos/mcp-user-data-enrichment/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/jekakos/mcp-user-data-enrichment"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Create and edit surveys, read responses, and reply to users \u2014 from your AI assistant.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.getuserfeedback/mcp",
+        "packages": [],
+        "query": "user",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.getuserfeedback.com/"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1.64",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Explore your Userbrain user test data, summarize feedback, and uncover actionable insights faster.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.userbrain/mcp",
+        "packages": [],
+        "query": "user",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.userbrain.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.5.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Random User MCP \u2014 wraps randomuser.me (free, no auth)",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.pipeworx-io/randomuser",
+        "packages": [],
+        "query": "user",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://gateway.pipeworx.io/randomuser/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/pipeworx-io/mcp-randomuser"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "User-Agent parser MCP.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.pipeworx-io/useragent",
+        "packages": [],
+        "query": "user",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://gateway.pipeworx.io/useragent/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/pipeworx-io/mcp-useragent"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Manage Airtable bases: schema, field CRUD, views, formula validation, extensions",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.Automations-Project/airtable-user-mcp",
+        "packages": [
+          {
+            "identifier": "airtable-user-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": "npx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "2.1.1"
+          }
+        ],
+        "query": "user",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/Automations-Project/VSCode-Airtable-Formula"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "2.1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Screenshot, extract content, and render web pages. PNG/JPEG/WebP/PDF, batch, signed URLs.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.User0856/snaprender",
+        "packages": [
+          {
+            "identifier": "snaprender-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.5.4"
+          }
+        ],
+        "query": "user",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/User0856/snaprender-integrations"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "1.5.4",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Tells you how you and your Claude agent actually work together. Local-only, no API keys.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.bleedmode/dearuser",
+        "packages": [
+          {
+            "identifier": "@poisedhq/dearuser-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": "npx",
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "1.0.20"
+          }
+        ],
+        "query": "user",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/bleedmode/dearuser"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "1.0.20",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Semantic code graph for AI-assisted code understanding via tree-sitter and MCP.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.userFRM/rpg-encoder",
+        "packages": [
+          {
+            "identifier": "rpg-encoder",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.6.7"
+          }
+        ],
+        "query": "user",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/userFRM/rpg-encoder"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 14,
+        "status": "active",
+        "version": "0.6.7",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Design and run AI-moderated voice, chat and video research studies, recruit panels, get results.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.userintuition/research",
+        "packages": [],
+        "query": "user",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.userintuition.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "1.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Run in-product voice interviews with AI agents and analyze source-linked evidence.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.usertold/usertold-mcp",
+        "packages": [],
+        "query": "user",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.usertold.ai/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "1.25.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Qimen Dunjia & Da Liu Ren divination: complete nine-palace charts and four-lesson analysis.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.139user/tword-divination",
+        "packages": [],
+        "query": "user",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://profound.fate-craft.com/api/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/139user/twords"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "1.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Browser-backed QA with evidence and fix-ready reports for coding agents.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.bhuman-ai/beforeusersdo",
+        "packages": [],
+        "query": "user",
+        "remotes": [
+          {
+            "required_headers": [
+              "Authorization"
+            ],
+            "type": "streamable-http",
+            "url": "https://mcp.beforeusersdo.com/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/bhuman-ai/QAbro"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Schedule and publish social content across nine destinations with human guardrails.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.deanfankhauser/postdom",
+        "packages": [],
+        "query": "user",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.postdom.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 11,
+        "status": "active",
+        "version": "0.4.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "A flock of AI users tests your deployed app and reports where real people get stuck, with fixes.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.canaryusers/canaryusers",
+        "packages": [],
+        "query": "user",
+        "remotes": [
+          {
+            "required_headers": [
+              "Authorization"
+            ],
+            "type": "streamable-http",
+            "url": "https://www.canaryusers.ai/api/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/CanaryUsers-ai/canaryusers-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 1,
+        "score": 12,
+        "status": "active",
+        "version": "1.2.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Browse and manage Reddit posts, comments, and threads. Fetch user activity, explore hot/new/rising\u2026",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "ai.smithery/BigVik193-reddit-user-mcp",
+        "packages": [],
+        "query": "user",
+        "remotes": [
+          {
+            "required_headers": [
+              "Authorization"
+            ],
+            "type": "streamable-http",
+            "url": "https://server.smithery.ai/@BigVik193/reddit-user-mcp/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/BigVik193/reddit-user-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 1,
+        "score": 12,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      }
+    ],
+    "effect": "Turn canonical/astra_runtime/tmp/PARA_POST_COUNTS.json into canonical/astra_runtime/tmp/PARA_POST_COUNTS.xlsx using the columns user_id, username, and post_count",
+    "results": [
+      {
+        "binding_performed": false,
+        "candidate_count": 30,
+        "candidates": [
+          {
+            "archive_sha256": "7457f7b22bb6aa8f5acfb20bf7c317856fea2b5bef010327010a1884c31797a5",
+            "binding_kind": "apt",
+            "description": "Raku module to turn JSON into objects",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json",
+              "turn"
+            ],
+            "name": "raku-json-unmarshal",
+            "packages": [],
+            "query": "turn",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 62,
+            "version": "0.15-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "e585b1694b854c3b75bfb39cc4022cafe7b14e44fd435433b613b8fb9919cb41",
+            "binding_kind": "apt",
+            "description": "simple interprocess messaging system (systemd --user integration)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "dbus-user-session",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.14.10-4ubuntu4.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d02c7eca01652497ba2dd753c71de31913fa4be2825883b138270fc1d53722ae",
+            "binding_kind": "apt",
+            "description": "debhelper extension for user-session-migration support",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "dh-user-session-migration",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.4.1ubuntu3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "39b9766a2fcacd2105318734478b5536172b740c50d9743a21e8869e62662f24",
+            "binding_kind": "apt",
+            "description": "GLib JSON manipulation library (introspection data)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "gir1.2-json-1.0",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "1.8.0-2build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "95581ecd747961b82573f89cfedf6b4251477e1b4be80468559e99e25380da71",
+            "binding_kind": "apt",
+            "description": "gjh solver, like solver from AMPL Library",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "json"
+            ],
+            "name": "gjh-asl-json",
+            "packages": [],
+            "query": "json",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "0.0+git20210628.867c5da-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "ce6c4907acf695d28bbb900ddf98c232cd1bda7142edcc1d13fd1984c66491b1",
+            "binding_kind": "apt",
+            "description": "GNOME Help",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "gnome-user-docs",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.0-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "da541d3ad7557a81fb343979996852625831989b4dab4dbfe447a06c3f26f6b8",
+            "binding_kind": "apt",
+            "description": "GNOME Help (Assamese)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "gnome-user-docs-as",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.0-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "9fadb9ed9e8e2ca10d8566f6cb5a8c4e9367931ba22e4bba1a0a320d066bb470",
+            "binding_kind": "apt",
+            "description": "GNOME Help (Catalan)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "gnome-user-docs-ca",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.0-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "aaaf8c6054906afdd0fa7f9c5b5ca9f9be66ae55b95d8e6092eb79541042ca75",
+            "binding_kind": "apt",
+            "description": "GNOME Help (Czech)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "gnome-user-docs-cs",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.0-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d15d0240eb401e5364394f6c187b7ab5ee427203c270120fbdf5930772eedac2",
+            "binding_kind": "apt",
+            "description": "GNOME Help (Danish)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "gnome-user-docs-da",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.0-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d6bb084067d9aded3681bb7160046c4d2d0165bfb27d7bb111f8931dbbbb4a8c",
+            "binding_kind": "apt",
+            "description": "GNOME Help (German)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "gnome-user-docs-de",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.0-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "6da00bfb239d208bb577654b3d51cda119ede23e638ef1c567e532a29534ba31",
+            "binding_kind": "apt",
+            "description": "GNOME Help (Greek)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "gnome-user-docs-el",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.0-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "8baa25c420b713f12ebe69f8207dee00b0e21c03c8d064d4824f3f1de0ef2274",
+            "binding_kind": "apt",
+            "description": "GNOME Help (Spanish)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "gnome-user-docs-es",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.0-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "945a2fb946931fa42aa360c3608f1de07ee2bf84d16877735d213ac82b3b7ec5",
+            "binding_kind": "apt",
+            "description": "GNOME Help (Basque)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "gnome-user-docs-eu",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.0-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "8dedd42e4eb6e984263d3122543693561f149a31bea0ac36cd4d5252877cb10a",
+            "binding_kind": "apt",
+            "description": "GNOME Help (Farsi)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "gnome-user-docs-fa",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.0-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "045a34dd87819e02832d0e17faef8ad3cb5d76a61c5e647bc659e7bbfabe2f3e",
+            "binding_kind": "apt",
+            "description": "GNOME Help (Finnish)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "gnome-user-docs-fi",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.0-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "3bcbcb9fe608b790b4a495b604f8a0d93419af3d7ea0d5c782a66b298df4709b",
+            "binding_kind": "apt",
+            "description": "GNOME Help (French)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "gnome-user-docs-fr",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.0-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "6a5bef9bedd32960f5e22fc027c9b44ec8a3c95b9f998e7570eb8af85ad10d74",
+            "binding_kind": "apt",
+            "description": "GNOME Help (Galician)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "gnome-user-docs-gl",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.0-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "fd2edb8a0ab3f2a93f6eae5583f357ed1815aa675f8fa45bf5a9734dec8f18c1",
+            "binding_kind": "apt",
+            "description": "GNOME Help (Gujarati)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "gnome-user-docs-gu",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.0-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "32246b7e540513f1503ae1bdc14a0ba1887151a3ef9789bafd6805dbb5510920",
+            "binding_kind": "apt",
+            "description": "GNOME Help (Hebrew)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "gnome-user-docs-he",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.0-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "1567292bd065fe8876c475f64a635f5ff19db5a6899a379023db1abd98ef31b0",
+            "binding_kind": "apt",
+            "description": "GNOME Help (Hindi)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "gnome-user-docs-hi",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.0-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "24dbf37a172416688a59c73f87e69094c734ece800f488ab38e8cdcd58cbebe5",
+            "binding_kind": "apt",
+            "description": "GNOME Help (Croatian)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "gnome-user-docs-hr",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.0-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c2a82e383992649cd559d31ceb3b1755595c2dcceda2f826c5e4bd08f61f5ca3",
+            "binding_kind": "apt",
+            "description": "GNOME Help (Hungarian)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "gnome-user-docs-hu",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.0-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "2b7423416ba12fb21d1c67a4e5683a16474a9db62156ab9728e32de12f5b6c51",
+            "binding_kind": "apt",
+            "description": "GNOME Help (Indonesian)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "gnome-user-docs-id",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.0-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "8cf66f1f2a01af232e0246a5cbf54779eaf61ab51f7a0c044d56708062d209f6",
+            "binding_kind": "apt",
+            "description": "GNOME Help (Italian)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "gnome-user-docs-it",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.0-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "094907e5652c132efce5863730d7c5843e67095d2a5c52262647a67dede77fa1",
+            "binding_kind": "apt",
+            "description": "GNOME Help (Japanese)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "gnome-user-docs-ja",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.0-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "4e48a2981a949f5cf59a889cb59469b95494c3197629dd356962447d6d23e1a6",
+            "binding_kind": "apt",
+            "description": "GNOME Help (Kannada)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "gnome-user-docs-kn",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.0-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "99efdd06a6770687689cb4e005000bcc75950a43734ea18658d415c7266294fc",
+            "binding_kind": "apt",
+            "description": "GNOME Help (Korean)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "gnome-user-docs-ko",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.0-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "26c27ba788a088e21c65c895d90f30cc188c4b8458874e10d0c2874bc5d418f7",
+            "binding_kind": "apt",
+            "description": "GNOME Help (Lithuanian)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "gnome-user-docs-lt",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.0-1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "82d793aeb9942f278048542277215353fd87e11868ca9c0752760ef9a857e18c",
+            "binding_kind": "apt",
+            "description": "GNOME Help (Latvian)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "user"
+            ],
+            "name": "gnome-user-docs-lv",
+            "packages": [],
+            "query": "user",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "46.0-1ubuntu1",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Turn canonical/astra_runtime/tmp/PARA_POST_COUNTS.json into canonical/astra_runtime/tmp/PARA_POST_COUNTS.xlsx using the columns user_id, username, and post_count",
+        "errors": [],
+        "queries": [
+          "turn",
+          "json",
+          "columns",
+          "user"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "APT_CATALOG",
+        "source_url": null
+      },
+      {
+        "binding_performed": false,
+        "candidate_count": 30,
+        "candidates": [
+          {
+            "description": "HPE GreenLake users MCP Server",
+            "is_latest": true,
+            "name": "io.github.HewlettPackard/greenlake-users-mcp",
+            "packages": [
+              {
+                "identifier": "greenlake-users-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.1.2"
+              }
+            ],
+            "query": "user",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/HewlettPackard/gl-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.1.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "An MCP server that enables AI agents to ask users clarifying questions via pop-up terminal windows.",
+            "is_latest": true,
+            "name": "io.github.Jacob-J-Thomas/user-prompt",
+            "packages": [
+              {
+                "identifier": "UserPrompt",
+                "registry_type": "nuget",
+                "required_environment": [],
+                "runtime_hint": "dnx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.2"
+              }
+            ],
+            "query": "user",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Jacob-J-Thomas/user-context-retrieval-mcp-server"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "RandomUser profile generation.",
+            "is_latest": true,
+            "name": "io.github.mrfentmen/randomuser-mcp",
+            "packages": [
+              {
+                "identifier": "randomuser-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.0"
+              }
+            ],
+            "query": "user",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/mrfentmen/awesome-mcps"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Generate synthetic random user data for testing, demos, and development without using real persona.",
+            "is_latest": true,
+            "name": "ai.saifs/synthetic-data-random-user",
+            "packages": [],
+            "query": "user",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://synthetic-mint-mcp.saifs.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Enrich user data by adding social network links based on provided personal information. Integrate\u2026",
+            "is_latest": true,
+            "name": "ai.smithery/jekakos-mcp-user-data-enrichment",
+            "packages": [],
+            "query": "user",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@jekakos/mcp-user-data-enrichment/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/jekakos/mcp-user-data-enrichment"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Create and edit surveys, read responses, and reply to users \u2014 from your AI assistant.",
+            "is_latest": true,
+            "name": "com.getuserfeedback/mcp",
+            "packages": [],
+            "query": "user",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.getuserfeedback.com/"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.64",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Explore your Userbrain user test data, summarize feedback, and uncover actionable insights faster.",
+            "is_latest": true,
+            "name": "com.userbrain/mcp",
+            "packages": [],
+            "query": "user",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.userbrain.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.5.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Random User MCP \u2014 wraps randomuser.me (free, no auth)",
+            "is_latest": true,
+            "name": "io.github.pipeworx-io/randomuser",
+            "packages": [],
+            "query": "user",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://gateway.pipeworx.io/randomuser/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/pipeworx-io/mcp-randomuser"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "User-Agent parser MCP.",
+            "is_latest": true,
+            "name": "io.github.pipeworx-io/useragent",
+            "packages": [],
+            "query": "user",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://gateway.pipeworx.io/useragent/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/pipeworx-io/mcp-useragent"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Manage Airtable bases: schema, field CRUD, views, formula validation, extensions",
+            "is_latest": true,
+            "name": "io.github.Automations-Project/airtable-user-mcp",
+            "packages": [
+              {
+                "identifier": "airtable-user-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": "npx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "2.1.1"
+              }
+            ],
+            "query": "user",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Automations-Project/VSCode-Airtable-Formula"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "2.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Screenshot, extract content, and render web pages. PNG/JPEG/WebP/PDF, batch, signed URLs.",
+            "is_latest": true,
+            "name": "io.github.User0856/snaprender",
+            "packages": [
+              {
+                "identifier": "snaprender-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.5.4"
+              }
+            ],
+            "query": "user",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/User0856/snaprender-integrations"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "1.5.4",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Tells you how you and your Claude agent actually work together. Local-only, no API keys.",
+            "is_latest": true,
+            "name": "io.github.bleedmode/dearuser",
+            "packages": [
+              {
+                "identifier": "@poisedhq/dearuser-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": "npx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.20"
+              }
+            ],
+            "query": "user",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/bleedmode/dearuser"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "1.0.20",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Semantic code graph for AI-assisted code understanding via tree-sitter and MCP.",
+            "is_latest": true,
+            "name": "io.github.userFRM/rpg-encoder",
+            "packages": [
+              {
+                "identifier": "rpg-encoder",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.6.7"
+              }
+            ],
+            "query": "user",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/userFRM/rpg-encoder"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.6.7",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "A flock of AI users tests your deployed app and reports where real people get stuck, with fixes.",
+            "is_latest": true,
+            "name": "ai.canaryusers/canaryusers",
+            "packages": [],
+            "query": "user",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://www.canaryusers.ai/api/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/CanaryUsers-ai/canaryusers-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "1.2.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Browse and manage Reddit posts, comments, and threads. Fetch user activity, explore hot/new/rising\u2026",
+            "is_latest": true,
+            "name": "ai.smithery/BigVik193-reddit-user-mcp",
+            "packages": [],
+            "query": "user",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://server.smithery.ai/@BigVik193/reddit-user-mcp/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/BigVik193/reddit-user-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Query NPS, CSAT, CES, and PMF survey results, responses, and links for your UserVane project.",
+            "is_latest": true,
+            "name": "com.uservane/mcp",
+            "packages": [],
+            "query": "user",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://mcp.uservane.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Query real user session replay data: tapes, transcripts, error/rage-click filters, alerts.",
+            "is_latest": true,
+            "name": "io.github.mcdca/usertapes-mcp",
+            "packages": [],
+            "query": "user",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://usertapes.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/mcdca/usertapes-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 12,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Design and run AI-moderated voice, chat and video research studies, recruit panels, get results.",
+            "is_latest": true,
+            "name": "ai.userintuition/research",
+            "packages": [],
+            "query": "user",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.userintuition.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Run in-product voice interviews with AI agents and analyze source-linked evidence.",
+            "is_latest": true,
+            "name": "ai.usertold/usertold-mcp",
+            "packages": [],
+            "query": "user",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.usertold.ai/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.25.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Qimen Dunjia & Da Liu Ren divination: complete nine-palace charts and four-lesson analysis.",
+            "is_latest": true,
+            "name": "io.github.139user/tword-divination",
+            "packages": [],
+            "query": "user",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://profound.fate-craft.com/api/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/139user/twords"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Browser-backed QA with evidence and fix-ready reports for coding agents.",
+            "is_latest": true,
+            "name": "io.github.bhuman-ai/beforeusersdo",
+            "packages": [],
+            "query": "user",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://mcp.beforeusersdo.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/bhuman-ai/QAbro"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Schedule and publish social content across nine destinations with human guardrails.",
+            "is_latest": true,
+            "name": "io.github.deanfankhauser/postdom",
+            "packages": [],
+            "query": "user",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.postdom.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 11,
+            "status": "active",
+            "version": "0.4.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "MCP server for LeaseClear lease Q&A.",
+            "is_latest": true,
+            "name": "io.github.amadeuserras/leaseclear-mcp",
+            "packages": [
+              {
+                "identifier": "leaseclear-mcp",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [
+                  "LEASECLEAR_API_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.3"
+              }
+            ],
+            "query": "user",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/amadeuserras/leaseclear-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 11,
+            "status": "active",
+            "version": "0.1.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Monitor services, manage incidents and status pages in Statuser.cloud from your AI assistant.",
+            "is_latest": true,
+            "name": "io.github.statuser-cloud/mcp",
+            "packages": [
+              {
+                "identifier": "@statuser/mcp",
+                "registry_type": "npm",
+                "required_environment": [
+                  "STATUSER_API_KEY"
+                ],
+                "runtime_hint": null,
+                "secret_environment": [
+                  "STATUSER_API_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.4.5"
+              }
+            ],
+            "query": "user",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://mcp.statuser.cloud"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/statuser-cloud/mcp"
+            },
+            "required_environment_count": 1,
+            "required_secret_count": 2,
+            "score": 11,
+            "status": "active",
+            "version": "0.4.5",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Identity resolution MCP server for phone/email lookups across 31+ services. Global + India coverage.",
+            "is_latest": true,
+            "name": "io.github.outris-dev-user/outris-identity-mcp",
+            "packages": [],
+            "query": "user",
+            "remotes": [
+              {
+                "required_headers": [
+                  "Authorization"
+                ],
+                "type": "streamable-http",
+                "url": "https://mcp-server.outris.com/http"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/outris-dev-user/outris-identity-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": 8,
+            "status": "active",
+            "version": "2.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Feishu/Lark MCP server + CLI tool. 85 tools, 3 auth layers. Send as user via cookie+protobuf.",
+            "is_latest": true,
+            "name": "io.github.EthanQC/feishu-user-plugin",
+            "packages": [
+              {
+                "identifier": "feishu-user-plugin",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [
+                  "LARK_COOKIE",
+                  "LARK_APP_SECRET",
+                  "LARK_USER_ACCESS_TOKEN",
+                  "LARK_USER_REFRESH_TOKEN"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.3.14"
+              }
+            ],
+            "query": "user",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/EthanQC/feishu-user-plugin"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 4,
+            "score": 6,
+            "status": "active",
+            "version": "1.3.14",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Parse user agents \u00e2\u20ac\u201d browser, OS, device, bot detection. x402 micropayment.",
+            "is_latest": true,
+            "name": "io.github.Br0ski777/user-agent-parser",
+            "packages": [],
+            "query": "user",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "sse",
+                "url": "https://user-agent-parser.api.klymax402.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Br0ski777/user-agent-parser-x402"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": -85,
+            "status": "active",
+            "version": "1.1.0",
+            "zero_cost_eligible": false
+          },
+          {
+            "description": "No-signup validation planner MCP for tiny paid offers.",
+            "is_latest": true,
+            "name": "io.github.AndreuSerraSastre/fivecoins-validation-plan",
+            "packages": [
+              {
+                "identifier": "https://github.com/AndreuSerraSastre/fivecoins-ai-profit-experiment/releases/download/v0.6.1/fivecoins-validation-plan-v0.6.1.mcpb",
+                "registry_type": "mcpb",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": null
+              }
+            ],
+            "query": "user",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://fivecoins.app.tipdata.es/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": -86,
+            "status": "active",
+            "version": "0.6.1",
+            "zero_cost_eligible": false
+          },
+          {
+            "description": "Schedule webhook calls, pay per run in USDC on Base via x402. Ten tools, built for small models.",
+            "is_latest": true,
+            "name": "io.github.userdefault13/cron402-mcp",
+            "packages": [
+              {
+                "identifier": "cron402-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": "npx",
+                "secret_environment": [
+                  "CRON402_PRIVATE_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.1.1"
+              }
+            ],
+            "query": "user",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "subfolder": "packages/mcp",
+              "url": "https://github.com/userdefault13/ai-cron-site"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 1,
+            "score": -89,
+            "status": "active",
+            "version": "1.1.1",
+            "zero_cost_eligible": false
+          },
+          {
+            "description": "Default trust layer for agentic payments: authorize agent spend, evidence, receipts, settlement.",
+            "is_latest": true,
+            "name": "io.github.nonameuserd/paybond",
+            "packages": [
+              {
+                "identifier": "@paybond/kit",
+                "registry_type": "npm",
+                "required_environment": [
+                  "PAYBOND_API_KEY"
+                ],
+                "runtime_hint": null,
+                "secret_environment": [
+                  "PAYBOND_API_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.12.16"
+              },
+              {
+                "identifier": "paybond-kit",
+                "registry_type": "pypi",
+                "required_environment": [
+                  "PAYBOND_API_KEY"
+                ],
+                "runtime_hint": null,
+                "secret_environment": [
+                  "PAYBOND_API_KEY"
+                ],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.12.16"
+              }
+            ],
+            "query": "user",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/nonameuserd/paybond-kit"
+            },
+            "required_environment_count": 2,
+            "required_secret_count": 2,
+            "score": -94,
+            "status": "active",
+            "version": "0.12.16",
+            "zero_cost_eligible": false
+          }
+        ],
+        "effect": "Turn canonical/astra_runtime/tmp/PARA_POST_COUNTS.json into canonical/astra_runtime/tmp/PARA_POST_COUNTS.xlsx using the columns user_id, username, and post_count",
+        "errors": [
+          {
+            "error": "TimeoutError:The read operation timed out",
+            "query": "turn"
+          },
+          {
+            "error": "TimeoutError:The read operation timed out",
+            "query": "json"
+          }
+        ],
+        "queries": [
+          "turn",
+          "json",
+          "columns",
+          "user"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "OFFICIAL_MCP_REGISTRY",
+        "source_url": "https://registry.modelcontextprotocol.io"
+      }
+    ],
+    "schema": "PROJECT_BRAIN_FEDERATED_CAPABILITY_DISCOVERY_V1",
+    "sources": [
+      "APT_CATALOG",
+      "OFFICIAL_MCP_REGISTRY"
+    ]
+  },
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
+  "source": "FEDERATED_CAPABILITY_DISCOVERY_FALLBACK",
+  "targeted_acquisition_error": "AutoAcquisitionFailure:NO_LOW_FRICTION_APT_CLI_CANDIDATE"
+}

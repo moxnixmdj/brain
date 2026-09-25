@@ -1,0 +1,379 @@
+{
+  "attempts": [
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "7457f7b22bb6aa8f5acfb20bf7c317856fea2b5bef010327010a1884c31797a5",
+        "executables": [],
+        "package": "raku-json-unmarshal",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.15-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 2,
+        "_acquisition_role_score": 62.0,
+        "archive_sha256": "7457f7b22bb6aa8f5acfb20bf7c317856fea2b5bef010327010a1884c31797a5",
+        "binding_kind": "apt",
+        "description": "Raku module to turn JSON into objects",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json",
+          "turn"
+        ],
+        "name": "raku-json-unmarshal",
+        "packages": [],
+        "query": "turn",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 62,
+        "version": "0.15-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "e585b1694b854c3b75bfb39cc4022cafe7b14e44fd435433b613b8fb9919cb41",
+        "executables": [],
+        "package": "dbus-user-session",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.14.10-4ubuntu4.1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "e585b1694b854c3b75bfb39cc4022cafe7b14e44fd435433b613b8fb9919cb41",
+        "binding_kind": "apt",
+        "description": "simple interprocess messaging system (systemd --user integration)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "dbus-user-session",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.14.10-4ubuntu4.1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "d02c7eca01652497ba2dd753c71de31913fa4be2825883b138270fc1d53722ae",
+        "executables": [
+          {
+            "executable": "/usr/bin/dh_user-session-migration",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 1,
+                "text": "Usage: dh_user-session-migration [options]\n\n  dh_user-session-migration is a part of debhelper. See debhelper(7)\n  and dh_user-session-migration(1) for complete usage instructions."
+              }
+            ]
+          }
+        ],
+        "package": "dh-user-session-migration",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.4.1ubuntu3"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "d02c7eca01652497ba2dd753c71de31913fa4be2825883b138270fc1d53722ae",
+        "binding_kind": "apt",
+        "description": "debhelper extension for user-session-migration support",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "dh-user-session-migration",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.4.1ubuntu3",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED",
+      "probe": {
+        "archive_sha256": "39b9766a2fcacd2105318734478b5536172b740c50d9743a21e8869e62662f24",
+        "executables": [],
+        "package": "gir1.2-json-1.0",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "1.8.0-2build2"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "39b9766a2fcacd2105318734478b5536172b740c50d9743a21e8869e62662f24",
+        "binding_kind": "apt",
+        "description": "GLib JSON manipulation library (introspection data)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "gir1.2-json-1.0",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "1.8.0-2build2",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:",
+      "probe": {
+        "archive_sha256": "95581ecd747961b82573f89cfedf6b4251477e1b4be80468559e99e25380da71",
+        "executables": [
+          {
+            "executable": "/usr/bin/gjh_asl_json",
+            "help_attempts": [
+              {
+                "flag": "--help",
+                "returncode": 0,
+                "text": "usage: gjh_asl_json [options] stub [-AMPL] [<assignment> ...]\n\nOptions:\n\t--  {end of options}\n\t-=  {show name= possibilities}\n\t-?  {show usage}\n\t-bf {read boundsfile f}\n\t-e  {suppress echoing of assignments}\n\t-of {write .sol file to file f}\n\t-s  {write .sol file (without -AMPL)}\n\t-v  {just show version}"
+              }
+            ]
+          }
+        ],
+        "package": "gjh-asl-json",
+        "schema": "PROJECT_BRAIN_APT_CLI_PROBE_V1",
+        "version": "0.0+git20210628.867c5da-1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "95581ecd747961b82573f89cfedf6b4251477e1b4be80468559e99e25380da71",
+        "binding_kind": "apt",
+        "description": "gjh solver, like solver from AMPL Library",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "json"
+        ],
+        "name": "gjh-asl-json",
+        "packages": [],
+        "query": "json",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "0.0+git20210628.867c5da-1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ProbeFailure:APT_INSTALL_FAILED:: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/gstreamer1.0-plugins-base_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/libgstreamer-plugins-good1.0-0_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/gstreamer1.0-plugins-good_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-gl1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\n",
+      "status": "PROBE_FAILED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "ce6c4907acf695d28bbb900ddf98c232cd1bda7142edcc1d13fd1984c66491b1",
+        "binding_kind": "apt",
+        "description": "GNOME Help",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ProbeFailure:APT_INSTALL_FAILED:: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/gstreamer1.0-plugins-base_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/libgstreamer-plugins-good1.0-0_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/gstreamer1.0-plugins-good_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-gl1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\n",
+      "status": "PROBE_FAILED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "da541d3ad7557a81fb343979996852625831989b4dab4dbfe447a06c3f26f6b8",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Assamese)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-as",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ProbeFailure:APT_INSTALL_FAILED:: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/gstreamer1.0-plugins-base_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/libgstreamer-plugins-good1.0-0_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/gstreamer1.0-plugins-good_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-gl1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\n",
+      "status": "PROBE_FAILED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "9fadb9ed9e8e2ca10d8566f6cb5a8c4e9367931ba22e4bba1a0a320d066bb470",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Catalan)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-ca",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ProbeFailure:APT_INSTALL_FAILED:: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/gstreamer1.0-plugins-base_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/libgstreamer-plugins-good1.0-0_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/gstreamer1.0-plugins-good_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-gl1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\n",
+      "status": "PROBE_FAILED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "aaaf8c6054906afdd0fa7f9c5b5ca9f9be66ae55b95d8e6092eb79541042ca75",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Czech)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-cs",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ProbeFailure:APT_INSTALL_FAILED:: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/gstreamer1.0-plugins-base_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/libgstreamer-plugins-good1.0-0_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/gstreamer1.0-plugins-good_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-gl1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\n",
+      "status": "PROBE_FAILED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "d15d0240eb401e5364394f6c187b7ab5ee427203c270120fbdf5930772eedac2",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Danish)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-da",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ProbeFailure:APT_INSTALL_FAILED:: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/gstreamer1.0-plugins-base_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/libgstreamer-plugins-good1.0-0_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/gstreamer1.0-plugins-good_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-gl1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\n",
+      "status": "PROBE_FAILED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "d6bb084067d9aded3681bb7160046c4d2d0165bfb27d7bb111f8931dbbbb4a8c",
+        "binding_kind": "apt",
+        "description": "GNOME Help (German)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-de",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      }
+    },
+    {
+      "error": "ProbeFailure:APT_INSTALL_FAILED:: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/gstreamer1.0-plugins-base_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/libgstreamer-plugins-good1.0-0_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-good1.0/gstreamer1.0-plugins-good_1.24.2-1ubuntu1.6_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Failed to fetch mirror+file:/etc/apt/apt-mirrors.txt/pool/main/g/gst-plugins-base1.0/libgstreamer-gl1.0-0_1.24.2-1ubuntu0.4_amd64.deb  404  Not Found [IP: 20.106.104.242 80]\nE: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?\n",
+      "status": "PROBE_FAILED",
+      "supplier": {
+        "_acquisition_object_matches": 1,
+        "_acquisition_role_score": 32.0,
+        "archive_sha256": "6da00bfb239d208bb577654b3d51cda119ede23e638ef1c567e532a29534ba31",
+        "binding_kind": "apt",
+        "description": "GNOME Help (Greek)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "user"
+        ],
+        "name": "gnome-user-docs-el",
+        "packages": [],
+        "query": "user",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "46.0-1ubuntu1",
+        "zero_cost_eligible": true
+      }
+    }
+  ],
+  "goal": "Turn canonical/astra_runtime/tmp/PARA_POST_COUNTS.json into canonical/astra_runtime/tmp/PARA_POST_COUNTS.xlsx using the columns user_id, username, and post_count",
+  "mission_id": "ASTRA-RUNTIME-SEMANTIC-PARAPHRASE-001",
+  "role_conditioned_discovery": [],
+  "schema": "PROJECT_BRAIN_AUTO_APT_CLI_ACQUISITION_EVIDENCE_V1",
+  "status": "NO_COMPATIBLE_CONTRACT"
+}
