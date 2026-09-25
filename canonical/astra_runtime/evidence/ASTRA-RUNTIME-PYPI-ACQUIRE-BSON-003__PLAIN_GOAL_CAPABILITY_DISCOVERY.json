@@ -1,0 +1,2798 @@
+{
+  "auto_acquisition": {
+    "error": "AutoAcquisitionFailure:NO_COMPATIBLE_SUPPLIER_CONTRACT:[{\"error\": \"AutoPyPIAcquisitionFailure:NO_COMPATIBLE_PYPI_LIBRARY_CONTRACT:[{\\\"error\\\": \\\"AutoPyPIAcquisitionFailure:NO_COMPATIBLE_PYPI_CODEC_CONTRACT:[{\\\\\\\"error\\\\\\\": \\\\\\\"ImportError\\\\\\\", \\\\\\\"module\\\\\\\": \\\\\\\"exact\\\\\\\", \\\\\\\"status\\\\\\\": \\\\\\\"IMPORT_FAILED\\\\\\\"}]\\\", \\\"name\\\": \\\"Exact\\\"}]\", \"supplier_class\": \"pypi_python_library\"}, {\"error\": \"AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"node-strict-uri-encode\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.bson\\\", \\\"name\\\": \\\"tablet-encode\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.bson\\\", \\\"name\\\": \\\"abcde\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.bson\\\", \\\"name\\\": \\\"aften\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"asunder\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.bson\\\", \\\"name\\\": \\\"base16384\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.bson\\\", \\\"name\\\": \\\"base58\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.bson\\\", \\\"name\\\": \\\"basez\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.bson\\\", \\\"name\\\": \\\"catcodec\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"cl-base64\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"cl-yason\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.bson\\\", \\\"name\\\": \\\"crip\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}]\", \"supplier_class\": \"apt_cli\"}]",
+    "status": "NOT_DISPATCHED"
+  },
+  "binding_performed": false,
+  "goal": "Create canonical/astra_runtime/tmp/BSON_SOURCE.json containing exactly four records with fields id and text: 1 alpha, 2 beta, 3 gamma, 4 delta. Encode those exact records as BSON and save canonical/astra_runtime/tmp/BSON_RECORDS.bson. Independently decode the BSON artifact and verify the decoded records are exactly identical to canonical/astra_runtime/tmp/BSON_SOURCE.json in values, order, field names, and record count.",
+  "mission_id": "ASTRA-RUNTIME-PYPI-ACQUIRE-BSON-003",
+  "observed_at_utc": "2026-09-25T18:52:50.938192+00:00",
+  "result": {
+    "binding_performed": false,
+    "candidates": [
+      {
+        "archive_sha256": "e1e4e607012985ceb365434dd8ec1c6df23e40b8023cc6bc2acddd878d6954c4",
+        "binding_kind": "apt",
+        "description": "stricter URI encode adhering to RFC 3986",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "node-strict-uri-encode",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.0.0+~2.0.0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "dcb264b165247d13d4beffc166ecade3ca32ba823d2b2f8c717db64adea00b5e",
+        "binding_kind": "apt",
+        "description": "video converter for Nokia Internet Tablets",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "tablet-encode",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 32,
+        "version": "2.30-0.1ubuntu2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "b08728497d67f09c8554b1a52759e90421a573d7aee1b9d497badbc42e401d14",
+        "binding_kind": "apt",
+        "description": "A Better CD Encoder",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "abcde",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.9.3-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "5d3fbfcb655619d4c87d07720350af0b3affb1474cce2d5682ec3399747ef149",
+        "binding_kind": "apt",
+        "description": "tools for working with a log of Architecture Decision Records",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "records"
+        ],
+        "name": "adr-tools",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "3.0.0-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "b2f35b2bf364d0a01075094efd1299dee79ecd65787cddcb93b82ca796edfd5c",
+        "binding_kind": "apt",
+        "description": "audio AC3 encoder",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "aften",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.0.8+git20100105-0ubuntu4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "71c80a100d42ae2cfbdeb7ebcbc5cb341afe8ee6b8678452aa3dea696766f1e3",
+        "binding_kind": "apt",
+        "description": "ARA Records Ansible - Client",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "records"
+        ],
+        "name": "ara-client",
+        "packages": [],
+        "query": "records",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.5.8-1.1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d792ff6358c5652df9757034da26358ce60cd95e987624ae7b01efa5941f207c",
+        "binding_kind": "apt",
+        "description": "ARA Records Ansible - Server",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "records"
+        ],
+        "name": "ara-server",
+        "packages": [],
+        "query": "records",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.5.8-1.1ubuntu1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "13650fd102318335c35d0464cb445ec105c74d27ba2684574e9c1c0282adbb24",
+        "binding_kind": "apt",
+        "description": "Graphical audio CD ripper and encoder",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "asunder",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "3.0.1+ds-1build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "720c6de3151b20729695991dc9977eab65565349f1710c8929a6202d1fa17c5f",
+        "binding_kind": "apt",
+        "description": "Encode binary files to printable utf16be",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "base16384",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.2.5-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "38e1e65759a10db447fa682c7726c26a134c490c11cf9313d9035eaf76869196",
+        "binding_kind": "apt",
+        "description": "Command line encoder and decoder for Base58 format",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "base58",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.0.3-2",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "db107d7652eb37680788a6567a58c9a6db10fcad8df05db4009464cb405122de",
+        "binding_kind": "apt",
+        "description": "base 16/32/64 encode/decode data to standard output",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "basez",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.6.2-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d7b31f464429add360d8f0cb938466d76abc3ca224306a78cf15ff37e7cba5ff",
+        "binding_kind": "apt",
+        "description": "tool to decode/encode the sample catalogue for OpenTTD",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "catcodec",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.0.5-4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "dd633a905356a862fd8334374f2215cd8347d57edacc6b2029501940bff35be6",
+        "binding_kind": "apt",
+        "description": "records CDs in Disk-At-Once (DAO) mode",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "records"
+        ],
+        "name": "cdrdao",
+        "packages": [],
+        "query": "records",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1:1.2.4-3build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "76dcb71604dfd21859aa8f6b94c8ff14c349340cc86cd3d87e95a63c53adf8d2",
+        "binding_kind": "apt",
+        "description": "Common Lisp package to encode and decode base64 with URI support",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "cl-base64",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "3.4.0-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "3b9a68f5b2a497cf80c350e2e8b512e7b28a057a9ba6082d3f7faa7bc30a3495",
+        "binding_kind": "apt",
+        "description": "JSON encoder/decoder for Common Lisp",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "cl-yason",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.7.6-1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d889a996fbc3d02809fe473b64d1f13fa94bc0673fa2e3a25289e13b0d6f1040",
+        "binding_kind": "apt",
+        "description": "filename encoding conversion tool",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "convmv",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.05-1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "680f5fd1717566e03cc06af0da7ca20fa2829e40d4fe870a1b47189c0eb73f5e",
+        "binding_kind": "apt",
+        "description": "terminal-based ripper/encoder/tagger tool",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "crip",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "3.9-3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "55d27feaaf8d5c2ea4f69f7ebfbcaaf0e29093a04d15ea3599196893c350b5db",
+        "binding_kind": "apt",
+        "description": "Encoder and decoder for 3D geometric meshes and point clouds",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "draco",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.5.6+dfsg-3build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "6adf382d77cd92f43c61432d6b9012bae536e5182b937851785f9265ab5f1892",
+        "binding_kind": "apt",
+        "description": "Efficient computation of Maximal Exact Matches for very large genomes",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "exact"
+        ],
+        "name": "e-mem",
+        "packages": [],
+        "query": "exact",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.0.1-5",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "6eb22d07c81e86257cb9ee3a7a78d0246f8485554ae5984d871d32199290a375",
+        "binding_kind": "apt",
+        "description": "YAML parser and encoder for Elisp",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "elpa-yaml",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.5.5-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "8a9d329f1ccdd398ba84fe8393600b0747aa6dbae64237365b05b41702326553",
+        "binding_kind": "apt",
+        "description": "MIME mail encoding and decoding package for Go (program)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "enmime",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.9.3-5ubuntu0.24.04.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "3b011097b07e9e3de2b08bcd2babf28a82d8948f6b09549ef15196bfff73ec1a",
+        "binding_kind": "apt",
+        "description": "AAC audio encoder (frontend)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "faac",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.30-1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "d286ed21e510c3af09f1e895fc80368474748ae866e17064b1d56c91d73a5868",
+        "binding_kind": "apt",
+        "description": "command line encoder frontend for libfdk-aac",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "fdkaac",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.0.0-1build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "350f8ee4f504cf48aa0009bf0164caced35e1580a8ca9a4fdc64b3fd62a73b78",
+        "binding_kind": "apt",
+        "description": "Alternative encoder for the Free Lossless Audio Codec",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "flake",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.11-4",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "e4e7a5c7faa1e635953d780aba492ddf6d40188fcecf7f2280f07f014a757838",
+        "binding_kind": "apt",
+        "description": "minimalist audio encoder for generating live streams",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "glasscoder",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.0.1-2build5",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "e4b834081f17a92e9933e961566f1077251326810d1e0c945f8a8155524d0a95",
+        "binding_kind": "apt",
+        "description": "minimalist audio encoder GUI for generating live streams",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "glassgui",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "2.0.1-2build5",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "10b8e63a940fc890582663aaab1413a97d7c0296e7611d9c39b746f3cc75ee4e",
+        "binding_kind": "apt",
+        "description": "QR Code encoder (Go program)",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "go-qrcode",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "0.0~git20200617.da1b656-4ubuntu0.24.04.3",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "dbc4d9fba4c1441e7c69079fbe1bccc50acb88dc1a1ee67e1d4dca5533c9b483",
+        "binding_kind": "apt",
+        "description": "transfer sound from gramophone records to CD",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "records"
+        ],
+        "name": "gramofile",
+        "packages": [],
+        "query": "records",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "1.6-12",
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "c6f72cc1e374646e76e77aca8aeedbe85c66141d0a5fe08d04af7ccb84366fc7",
+        "binding_kind": "apt",
+        "description": "Graphical audio CD ripper and encoder",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 0,
+        "matched_terms": [
+          "encode"
+        ],
+        "name": "grimripper",
+        "packages": [],
+        "query": "encode",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "version": "3.0.2-3build2",
+        "zero_cost_eligible": true
+      },
+      {
+        "binding_kind": "pypi",
+        "dependency_count": 0,
+        "description": "Python bindings for Exact",
+        "discovery_source": "PYPI",
+        "eligibility_status": "PYPI_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 1,
+        "license": "AGPL-3.0-only",
+        "matched_terms": [
+          "exact"
+        ],
+        "metadata_url": "https://pypi.org/pypi/Exact/2.2.1/json",
+        "name": "Exact",
+        "project": "Exact",
+        "query": "exact",
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "requires_python": ">=3.10",
+        "score": 62,
+        "version": "2.2.1",
+        "wheels": [
+          {
+            "filename": "exact-2.2.1-cp310-cp310-manylinux_2_34_x86_64.whl",
+            "python_version": "cp310",
+            "sha256": "f217303e599a785951478e4570e17449645913d2d6f20309c15a32e6c592160c",
+            "size": 1334589,
+            "url": "https://files.pythonhosted.org/packages/94/d7/68d3869b3c185e7e0447865efb6453a7e8fdaadd083a434fd90d113c9d16/exact-2.2.1-cp310-cp310-manylinux_2_34_x86_64.whl"
+          },
+          {
+            "filename": "exact-2.2.1-cp310-cp310-win_amd64.whl",
+            "python_version": "cp310",
+            "sha256": "cd2d9803cfa2dabea06932e351d30004ce2792b3d6e3b5c22ab2eaa89078baf3",
+            "size": 911356,
+            "url": "https://files.pythonhosted.org/packages/6f/d8/ff5bd2ff900a8be941ae6a71c1708f0a592d5cae101c22556f6a2bcad781/exact-2.2.1-cp310-cp310-win_amd64.whl"
+          },
+          {
+            "filename": "exact-2.2.1-cp311-cp311-manylinux_2_34_x86_64.whl",
+            "python_version": "cp311",
+            "sha256": "5ebde005153ccd9dce4be444928db44cc40e869d181bacb2e1ca5b8bc859b039",
+            "size": 1335478,
+            "url": "https://files.pythonhosted.org/packages/31/21/dae42e0b4b214e7bd03f24049faefc4f90fdcb9eabc30d288246696872c7/exact-2.2.1-cp311-cp311-manylinux_2_34_x86_64.whl"
+          },
+          {
+            "filename": "exact-2.2.1-cp311-cp311-win_amd64.whl",
+            "python_version": "cp311",
+            "sha256": "91aa45bc51079b79ec37328539303a45ec768553cc7d7cae413871943c4517f9",
+            "size": 912173,
+            "url": "https://files.pythonhosted.org/packages/f8/09/99d3022d1631cb81ce10b92fd87e36be4633b0eea2d358a2197a24331d88/exact-2.2.1-cp311-cp311-win_amd64.whl"
+          },
+          {
+            "filename": "exact-2.2.1-cp312-cp312-manylinux_2_34_x86_64.whl",
+            "python_version": "cp312",
+            "sha256": "c8c5622cc0c219324ee5882d07dc850a6ef73b94051a0d0dd9968f615a327a72",
+            "size": 1336715,
+            "url": "https://files.pythonhosted.org/packages/cf/3e/f7a98e7ad01c2ebc6161830b6fba0c359883aa605a6051f46abce45f92ab/exact-2.2.1-cp312-cp312-manylinux_2_34_x86_64.whl"
+          },
+          {
+            "filename": "exact-2.2.1-cp312-cp312-win_amd64.whl",
+            "python_version": "cp312",
+            "sha256": "732ff1276dcbef456274f0d8411596ed10200ce34ee76bea44026026ba0d1531",
+            "size": 912542,
+            "url": "https://files.pythonhosted.org/packages/77/13/021175e9e3fe9211db246633efddec64b718089087ec6745bced0b42c3df/exact-2.2.1-cp312-cp312-win_amd64.whl"
+          },
+          {
+            "filename": "exact-2.2.1-cp313-cp313-manylinux_2_34_x86_64.whl",
+            "python_version": "cp313",
+            "sha256": "6605e445d97063fc7ec5691df64949e1a418efaa43fe3870708f24904a1a4ab2",
+            "size": 1337021,
+            "url": "https://files.pythonhosted.org/packages/16/a7/0d158306bcc8bd1f529c817ae8851c822b69793eceff5f1dba883b0575fc/exact-2.2.1-cp313-cp313-manylinux_2_34_x86_64.whl"
+          },
+          {
+            "filename": "exact-2.2.1-cp313-cp313-win_amd64.whl",
+            "python_version": "cp313",
+            "sha256": "8ed9b16af2ce61247f3d5e7284ee40fd7766ffa3d13d975b7ab358e895bb9111",
+            "size": 912525,
+            "url": "https://files.pythonhosted.org/packages/cb/c4/e296ccb98ad1b0fe2471f067ecc5605c764c6edd8808e44388a42417bf49/exact-2.2.1-cp313-cp313-win_amd64.whl"
+          }
+        ],
+        "zero_cost_eligible": true
+      },
+      {
+        "archive_sha256": "f24e507b509603456126ebe0832962a532e3c31b8017ec1319ddc583fb84a749",
+        "binding_kind": "apt",
+        "description": "Encoding and decoding support for BSON in Rust - Rust source code",
+        "discovery_source": "APT_CATALOG",
+        "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 4,
+        "matched_terms": [
+          "bson",
+          "encode"
+        ],
+        "name": "librust-bson-dev",
+        "packages": [],
+        "query": "bson",
+        "remotes": [],
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 34,
+        "version": "2.9.0-1build1",
+        "zero_cost_eligible": true
+      },
+      {
+        "binding_kind": "pypi",
+        "dependency_count": 8,
+        "description": "SQL for Humans",
+        "discovery_source": "PYPI",
+        "eligibility_status": "PYPI_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 9,
+        "license": "ISC",
+        "matched_terms": [
+          "records"
+        ],
+        "metadata_url": "https://pypi.org/pypi/records/0.6.0/json",
+        "name": "records",
+        "project": "records",
+        "query": "records",
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "requires_python": null,
+        "score": 30,
+        "version": "0.6.0",
+        "wheels": [
+          {
+            "filename": "records-0.6.0-py2.py3-none-any.whl",
+            "python_version": "py2.py3",
+            "sha256": "078acc32ef0ebf28e14374e4914cfcc37ec7a9bbbd6eaff9a4a315537cf9465b",
+            "size": 9964,
+            "url": "https://files.pythonhosted.org/packages/fa/9f/12ef0f5a187d3f653018f1de03e004570521e574d24a33bd9af27014babf/records-0.6.0-py2.py3-none-any.whl"
+          }
+        ],
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "MCP server that offloads routine coding tasks to local LLM (Ollama) to save Claude API tokens",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.BlackFoil/claude-token-saver-mcp",
+        "packages": [
+          {
+            "identifier": "claude-token-saver-mcp",
+            "registry_type": "npm",
+            "required_environment": [],
+            "runtime_hint": null,
+            "secret_environment": [],
+            "transport": {
+              "type": "stdio"
+            },
+            "version": "0.3.2"
+          }
+        ],
+        "query": "save",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/BlackFoil/claude-token-saver-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 18,
+        "status": "active",
+        "version": "0.3.2",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Search your saved videos by what was said. YouTube, Reels, and TikTok transcripts. Read-only.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "app.savedthat/savedthat",
+        "packages": [],
+        "query": "save",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://savedthat.app/api/mcp"
+          }
+        ],
+        "repository": {},
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Consent-scoped vault access and free verification of family-issued learning records.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.eformogi/records-vault",
+        "packages": [],
+        "query": "records",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://eformogi.com/api/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "GibsonAI MCP server: manage your databases with natural language",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.gibsonai/mcp",
+        "packages": [],
+        "query": "bson",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.gibsonai.com/"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/gibsonai/mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Exact AI Connect: hosted MCP server for Exact Online.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.iwebdevelopment/exact-online",
+        "packages": [],
+        "query": "exact",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp-exactonline.iwebdevelopment.com"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Read your Savee saves, boards and home feed, and search its public library. Read-only.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.savee/savee",
+        "packages": [],
+        "query": "save",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.savee.com/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/saveeit/savee-mcp-server"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Dated motor-carrier records with receipts, verification, and specimens, from a records custodian.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "com.substradium/carrier-records",
+        "packages": [],
+        "query": "records",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://substradium.com/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Savecraft serves real save game data and expert game knowledge to AI assistants.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "gg.savecraft/savecraft",
+        "packages": [],
+        "query": "save",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.savecraft.gg/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/joshsymonds/savecraft.gg"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Read-only public CVE records, capability metadata, and agent instructions from Hacker Bob.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.bobnetsec/hacker-bob-public-records",
+        "packages": [],
+        "query": "records",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://hackerbob.ai/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/bobnetsec/www"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Federal court records and PACER case data. 4 MCP tools for legal research.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.martc03/court-records",
+        "packages": [],
+        "query": "records",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://court-records-mcp.apify.actor/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/martc03/gov-mcp-servers"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Property Records MCP \u2014 address-level US property records (sales history,",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.pipeworx-io/property-records",
+        "packages": [],
+        "query": "records",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://gateway.pipeworx.io/property-records/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/pipeworx-io/mcp-property-records"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1.1",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Inspect Palworld save files locally, compare snapshots, create a recognition receipt, and export",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.rocnubie/palsaveeditor-mcp",
+        "packages": [],
+        "query": "save",
+        "remotes": [],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/rocnubie/palsaveeditor-mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.1.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "BSON document-length band, body discarded",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.sadri-dridi/bson-ok",
+        "packages": [],
+        "query": "bson",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/bson-ok/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Buy, sell & extend TRON ENERGY/BANDWIDTH on the TronSave market via typed MCP tools.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.github.tronsave/mcp",
+        "packages": [],
+        "query": "save",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.tronsave.io/mcp"
+          },
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.tronsave.io/testnet/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/tronsave/mcp"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Verified fight records for AI assistants: look up a fighter or fight card, cite the pxl8.io page.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "io.pxl8/records",
+        "packages": [],
+        "query": "records",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.pxl8.io/sports-data/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Search US federal and state court records through CourtListener and the RECAP archive",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "net.nexlab/court-records",
+        "packages": [],
+        "query": "records",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://mcp.nexlab.net/mcp/court-records"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.0.0",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Connect Exact Online to your AI assistant via MCP. Manage Exact Online with natural language.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "nl.ledgerbotje/exact-online",
+        "packages": [],
+        "query": "exact",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://www.ledgerbotje.nl/app/mcp"
+          }
+        ],
+        "repository": null,
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "1.1.4",
+        "zero_cost_eligible": true
+      },
+      {
+        "description": "Connect Exact Online accounting to Claude, ChatGPT and Copilot. 114 tools, OAuth 2.1, EU-hosted.",
+        "discovery_source": "OFFICIAL_MCP_REGISTRY",
+        "eligibility_status": "REMOTE_REGISTRY_METADATA_CANDIDATE_UNVERIFIED",
+        "is_latest": true,
+        "live_probe_required": true,
+        "name": "nl.praatmetjeboekhouding/exact-online",
+        "packages": [],
+        "query": "exact",
+        "remotes": [
+          {
+            "required_headers": [],
+            "type": "streamable-http",
+            "url": "https://api.praatmetjeboekhouding.nl/mcp"
+          }
+        ],
+        "repository": {
+          "source": "github",
+          "url": "https://github.com/werkenmetai/Exact-online-MCP"
+        },
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "score": 15,
+        "status": "active",
+        "version": "0.3.0",
+        "zero_cost_eligible": true
+      }
+    ],
+    "effect": "Encode those exact records as BSON and save canonical/astra_runtime/tmp/BSON_RECORDS.bson",
+    "results": [
+      {
+        "binding_performed": false,
+        "candidate_count": 30,
+        "candidates": [
+          {
+            "archive_sha256": "f24e507b509603456126ebe0832962a532e3c31b8017ec1319ddc583fb84a749",
+            "binding_kind": "apt",
+            "description": "Encoding and decoding support for BSON in Rust - Rust source code",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 4,
+            "matched_terms": [
+              "bson",
+              "encode"
+            ],
+            "name": "librust-bson-dev",
+            "packages": [],
+            "query": "bson",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 34,
+            "version": "2.9.0-1build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "e1e4e607012985ceb365434dd8ec1c6df23e40b8023cc6bc2acddd878d6954c4",
+            "binding_kind": "apt",
+            "description": "stricter URI encode adhering to RFC 3986",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "encode"
+            ],
+            "name": "node-strict-uri-encode",
+            "packages": [],
+            "query": "encode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2.0.0+~2.0.0-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "dcb264b165247d13d4beffc166ecade3ca32ba823d2b2f8c717db64adea00b5e",
+            "binding_kind": "apt",
+            "description": "video converter for Nokia Internet Tablets",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "encode"
+            ],
+            "name": "tablet-encode",
+            "packages": [],
+            "query": "encode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 32,
+            "version": "2.30-0.1ubuntu2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "b08728497d67f09c8554b1a52759e90421a573d7aee1b9d497badbc42e401d14",
+            "binding_kind": "apt",
+            "description": "A Better CD Encoder",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "encode"
+            ],
+            "name": "abcde",
+            "packages": [],
+            "query": "encode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "2.9.3-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "5d3fbfcb655619d4c87d07720350af0b3affb1474cce2d5682ec3399747ef149",
+            "binding_kind": "apt",
+            "description": "tools for working with a log of Architecture Decision Records",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "records"
+            ],
+            "name": "adr-tools",
+            "packages": [],
+            "query": "encode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "3.0.0-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "b2f35b2bf364d0a01075094efd1299dee79ecd65787cddcb93b82ca796edfd5c",
+            "binding_kind": "apt",
+            "description": "audio AC3 encoder",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "encode"
+            ],
+            "name": "aften",
+            "packages": [],
+            "query": "encode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.0.8+git20100105-0ubuntu4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "71c80a100d42ae2cfbdeb7ebcbc5cb341afe8ee6b8678452aa3dea696766f1e3",
+            "binding_kind": "apt",
+            "description": "ARA Records Ansible - Client",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "records"
+            ],
+            "name": "ara-client",
+            "packages": [],
+            "query": "records",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.5.8-1.1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d792ff6358c5652df9757034da26358ce60cd95e987624ae7b01efa5941f207c",
+            "binding_kind": "apt",
+            "description": "ARA Records Ansible - Server",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "records"
+            ],
+            "name": "ara-server",
+            "packages": [],
+            "query": "records",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.5.8-1.1ubuntu1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "13650fd102318335c35d0464cb445ec105c74d27ba2684574e9c1c0282adbb24",
+            "binding_kind": "apt",
+            "description": "Graphical audio CD ripper and encoder",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "encode"
+            ],
+            "name": "asunder",
+            "packages": [],
+            "query": "encode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "3.0.1+ds-1build2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "720c6de3151b20729695991dc9977eab65565349f1710c8929a6202d1fa17c5f",
+            "binding_kind": "apt",
+            "description": "Encode binary files to printable utf16be",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "encode"
+            ],
+            "name": "base16384",
+            "packages": [],
+            "query": "encode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "2.2.5-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "38e1e65759a10db447fa682c7726c26a134c490c11cf9313d9035eaf76869196",
+            "binding_kind": "apt",
+            "description": "Command line encoder and decoder for Base58 format",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "encode"
+            ],
+            "name": "base58",
+            "packages": [],
+            "query": "encode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.0.3-2",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "db107d7652eb37680788a6567a58c9a6db10fcad8df05db4009464cb405122de",
+            "binding_kind": "apt",
+            "description": "base 16/32/64 encode/decode data to standard output",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "encode"
+            ],
+            "name": "basez",
+            "packages": [],
+            "query": "encode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.6.2-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d7b31f464429add360d8f0cb938466d76abc3ca224306a78cf15ff37e7cba5ff",
+            "binding_kind": "apt",
+            "description": "tool to decode/encode the sample catalogue for OpenTTD",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "encode"
+            ],
+            "name": "catcodec",
+            "packages": [],
+            "query": "encode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.0.5-4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "dd633a905356a862fd8334374f2215cd8347d57edacc6b2029501940bff35be6",
+            "binding_kind": "apt",
+            "description": "records CDs in Disk-At-Once (DAO) mode",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "records"
+            ],
+            "name": "cdrdao",
+            "packages": [],
+            "query": "records",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1:1.2.4-3build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "76dcb71604dfd21859aa8f6b94c8ff14c349340cc86cd3d87e95a63c53adf8d2",
+            "binding_kind": "apt",
+            "description": "Common Lisp package to encode and decode base64 with URI support",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "encode"
+            ],
+            "name": "cl-base64",
+            "packages": [],
+            "query": "encode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "3.4.0-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "3b9a68f5b2a497cf80c350e2e8b512e7b28a057a9ba6082d3f7faa7bc30a3495",
+            "binding_kind": "apt",
+            "description": "JSON encoder/decoder for Common Lisp",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "encode"
+            ],
+            "name": "cl-yason",
+            "packages": [],
+            "query": "encode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.7.6-1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d889a996fbc3d02809fe473b64d1f13fa94bc0673fa2e3a25289e13b0d6f1040",
+            "binding_kind": "apt",
+            "description": "filename encoding conversion tool",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "encode"
+            ],
+            "name": "convmv",
+            "packages": [],
+            "query": "encode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "2.05-1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "680f5fd1717566e03cc06af0da7ca20fa2829e40d4fe870a1b47189c0eb73f5e",
+            "binding_kind": "apt",
+            "description": "terminal-based ripper/encoder/tagger tool",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "encode"
+            ],
+            "name": "crip",
+            "packages": [],
+            "query": "encode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "3.9-3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "55d27feaaf8d5c2ea4f69f7ebfbcaaf0e29093a04d15ea3599196893c350b5db",
+            "binding_kind": "apt",
+            "description": "Encoder and decoder for 3D geometric meshes and point clouds",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "encode"
+            ],
+            "name": "draco",
+            "packages": [],
+            "query": "encode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.5.6+dfsg-3build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "6adf382d77cd92f43c61432d6b9012bae536e5182b937851785f9265ab5f1892",
+            "binding_kind": "apt",
+            "description": "Efficient computation of Maximal Exact Matches for very large genomes",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "exact"
+            ],
+            "name": "e-mem",
+            "packages": [],
+            "query": "exact",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.0.1-5",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "6eb22d07c81e86257cb9ee3a7a78d0246f8485554ae5984d871d32199290a375",
+            "binding_kind": "apt",
+            "description": "YAML parser and encoder for Elisp",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "encode"
+            ],
+            "name": "elpa-yaml",
+            "packages": [],
+            "query": "encode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.5.5-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "8a9d329f1ccdd398ba84fe8393600b0747aa6dbae64237365b05b41702326553",
+            "binding_kind": "apt",
+            "description": "MIME mail encoding and decoding package for Go (program)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "encode"
+            ],
+            "name": "enmime",
+            "packages": [],
+            "query": "encode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.9.3-5ubuntu0.24.04.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "3b011097b07e9e3de2b08bcd2babf28a82d8948f6b09549ef15196bfff73ec1a",
+            "binding_kind": "apt",
+            "description": "AAC audio encoder (frontend)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "encode"
+            ],
+            "name": "faac",
+            "packages": [],
+            "query": "encode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.30-1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "d286ed21e510c3af09f1e895fc80368474748ae866e17064b1d56c91d73a5868",
+            "binding_kind": "apt",
+            "description": "command line encoder frontend for libfdk-aac",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "encode"
+            ],
+            "name": "fdkaac",
+            "packages": [],
+            "query": "encode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.0.0-1build1",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "350f8ee4f504cf48aa0009bf0164caced35e1580a8ca9a4fdc64b3fd62a73b78",
+            "binding_kind": "apt",
+            "description": "Alternative encoder for the Free Lossless Audio Codec",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "encode"
+            ],
+            "name": "flake",
+            "packages": [],
+            "query": "encode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.11-4",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "e4e7a5c7faa1e635953d780aba492ddf6d40188fcecf7f2280f07f014a757838",
+            "binding_kind": "apt",
+            "description": "minimalist audio encoder for generating live streams",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "encode"
+            ],
+            "name": "glasscoder",
+            "packages": [],
+            "query": "encode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "2.0.1-2build5",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "e4b834081f17a92e9933e961566f1077251326810d1e0c945f8a8155524d0a95",
+            "binding_kind": "apt",
+            "description": "minimalist audio encoder GUI for generating live streams",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "encode"
+            ],
+            "name": "glassgui",
+            "packages": [],
+            "query": "encode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "2.0.1-2build5",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "10b8e63a940fc890582663aaab1413a97d7c0296e7611d9c39b746f3cc75ee4e",
+            "binding_kind": "apt",
+            "description": "QR Code encoder (Go program)",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "encode"
+            ],
+            "name": "go-qrcode",
+            "packages": [],
+            "query": "encode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "0.0~git20200617.da1b656-4ubuntu0.24.04.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "dbc4d9fba4c1441e7c69079fbe1bccc50acb88dc1a1ee67e1d4dca5533c9b483",
+            "binding_kind": "apt",
+            "description": "transfer sound from gramophone records to CD",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "records"
+            ],
+            "name": "gramofile",
+            "packages": [],
+            "query": "records",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "1.6-12",
+            "zero_cost_eligible": true
+          },
+          {
+            "archive_sha256": "c6f72cc1e374646e76e77aca8aeedbe85c66141d0a5fe08d04af7ccb84366fc7",
+            "binding_kind": "apt",
+            "description": "Graphical audio CD ripper and encoder",
+            "discovery_source": "APT_CATALOG",
+            "eligibility_status": "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 0,
+            "matched_terms": [
+              "encode"
+            ],
+            "name": "grimripper",
+            "packages": [],
+            "query": "encode",
+            "remotes": [],
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "version": "3.0.2-3build2",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Encode those exact records as BSON and save canonical/astra_runtime/tmp/BSON_RECORDS.bson",
+        "errors": [],
+        "queries": [
+          "encode",
+          "bson",
+          "those",
+          "exact",
+          "records",
+          "save"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "APT_CATALOG",
+        "source_url": null
+      },
+      {
+        "binding_performed": false,
+        "candidate_count": 2,
+        "candidates": [
+          {
+            "binding_kind": "pypi",
+            "dependency_count": 0,
+            "description": "Python bindings for Exact",
+            "discovery_source": "PYPI",
+            "eligibility_status": "PYPI_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 1,
+            "license": "AGPL-3.0-only",
+            "matched_terms": [
+              "exact"
+            ],
+            "metadata_url": "https://pypi.org/pypi/Exact/2.2.1/json",
+            "name": "Exact",
+            "project": "Exact",
+            "query": "exact",
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "requires_python": ">=3.10",
+            "score": 62,
+            "version": "2.2.1",
+            "wheels": [
+              {
+                "filename": "exact-2.2.1-cp310-cp310-manylinux_2_34_x86_64.whl",
+                "python_version": "cp310",
+                "sha256": "f217303e599a785951478e4570e17449645913d2d6f20309c15a32e6c592160c",
+                "size": 1334589,
+                "url": "https://files.pythonhosted.org/packages/94/d7/68d3869b3c185e7e0447865efb6453a7e8fdaadd083a434fd90d113c9d16/exact-2.2.1-cp310-cp310-manylinux_2_34_x86_64.whl"
+              },
+              {
+                "filename": "exact-2.2.1-cp310-cp310-win_amd64.whl",
+                "python_version": "cp310",
+                "sha256": "cd2d9803cfa2dabea06932e351d30004ce2792b3d6e3b5c22ab2eaa89078baf3",
+                "size": 911356,
+                "url": "https://files.pythonhosted.org/packages/6f/d8/ff5bd2ff900a8be941ae6a71c1708f0a592d5cae101c22556f6a2bcad781/exact-2.2.1-cp310-cp310-win_amd64.whl"
+              },
+              {
+                "filename": "exact-2.2.1-cp311-cp311-manylinux_2_34_x86_64.whl",
+                "python_version": "cp311",
+                "sha256": "5ebde005153ccd9dce4be444928db44cc40e869d181bacb2e1ca5b8bc859b039",
+                "size": 1335478,
+                "url": "https://files.pythonhosted.org/packages/31/21/dae42e0b4b214e7bd03f24049faefc4f90fdcb9eabc30d288246696872c7/exact-2.2.1-cp311-cp311-manylinux_2_34_x86_64.whl"
+              },
+              {
+                "filename": "exact-2.2.1-cp311-cp311-win_amd64.whl",
+                "python_version": "cp311",
+                "sha256": "91aa45bc51079b79ec37328539303a45ec768553cc7d7cae413871943c4517f9",
+                "size": 912173,
+                "url": "https://files.pythonhosted.org/packages/f8/09/99d3022d1631cb81ce10b92fd87e36be4633b0eea2d358a2197a24331d88/exact-2.2.1-cp311-cp311-win_amd64.whl"
+              },
+              {
+                "filename": "exact-2.2.1-cp312-cp312-manylinux_2_34_x86_64.whl",
+                "python_version": "cp312",
+                "sha256": "c8c5622cc0c219324ee5882d07dc850a6ef73b94051a0d0dd9968f615a327a72",
+                "size": 1336715,
+                "url": "https://files.pythonhosted.org/packages/cf/3e/f7a98e7ad01c2ebc6161830b6fba0c359883aa605a6051f46abce45f92ab/exact-2.2.1-cp312-cp312-manylinux_2_34_x86_64.whl"
+              },
+              {
+                "filename": "exact-2.2.1-cp312-cp312-win_amd64.whl",
+                "python_version": "cp312",
+                "sha256": "732ff1276dcbef456274f0d8411596ed10200ce34ee76bea44026026ba0d1531",
+                "size": 912542,
+                "url": "https://files.pythonhosted.org/packages/77/13/021175e9e3fe9211db246633efddec64b718089087ec6745bced0b42c3df/exact-2.2.1-cp312-cp312-win_amd64.whl"
+              },
+              {
+                "filename": "exact-2.2.1-cp313-cp313-manylinux_2_34_x86_64.whl",
+                "python_version": "cp313",
+                "sha256": "6605e445d97063fc7ec5691df64949e1a418efaa43fe3870708f24904a1a4ab2",
+                "size": 1337021,
+                "url": "https://files.pythonhosted.org/packages/16/a7/0d158306bcc8bd1f529c817ae8851c822b69793eceff5f1dba883b0575fc/exact-2.2.1-cp313-cp313-manylinux_2_34_x86_64.whl"
+              },
+              {
+                "filename": "exact-2.2.1-cp313-cp313-win_amd64.whl",
+                "python_version": "cp313",
+                "sha256": "8ed9b16af2ce61247f3d5e7284ee40fd7766ffa3d13d975b7ab358e895bb9111",
+                "size": 912525,
+                "url": "https://files.pythonhosted.org/packages/cb/c4/e296ccb98ad1b0fe2471f067ecc5605c764c6edd8808e44388a42417bf49/exact-2.2.1-cp313-cp313-win_amd64.whl"
+              }
+            ],
+            "zero_cost_eligible": true
+          },
+          {
+            "binding_kind": "pypi",
+            "dependency_count": 8,
+            "description": "SQL for Humans",
+            "discovery_source": "PYPI",
+            "eligibility_status": "PYPI_METADATA_CANDIDATE_UNVERIFIED",
+            "integration_friction": 9,
+            "license": "ISC",
+            "matched_terms": [
+              "records"
+            ],
+            "metadata_url": "https://pypi.org/pypi/records/0.6.0/json",
+            "name": "records",
+            "project": "records",
+            "query": "records",
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "requires_python": null,
+            "score": 30,
+            "version": "0.6.0",
+            "wheels": [
+              {
+                "filename": "records-0.6.0-py2.py3-none-any.whl",
+                "python_version": "py2.py3",
+                "sha256": "078acc32ef0ebf28e14374e4914cfcc37ec7a9bbbd6eaff9a4a315537cf9465b",
+                "size": 9964,
+                "url": "https://files.pythonhosted.org/packages/fa/9f/12ef0f5a187d3f653018f1de03e004570521e574d24a33bd9af27014babf/records-0.6.0-py2.py3-none-any.whl"
+              }
+            ],
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Encode those exact records as BSON and save canonical/astra_runtime/tmp/BSON_RECORDS.bson",
+        "errors": [
+          {
+            "error": "HTTPError:HTTP Error 404: Not Found",
+            "query": "those"
+          }
+        ],
+        "queries": [
+          "encode",
+          "bson",
+          "those",
+          "exact",
+          "records",
+          "save"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "PYPI",
+        "source_url": "https://pypi.org/"
+      },
+      {
+        "binding_performed": false,
+        "candidate_count": 47,
+        "candidates": [
+          {
+            "description": "MCP server that offloads routine coding tasks to local LLM (Ollama) to save Claude API tokens",
+            "is_latest": true,
+            "name": "io.github.BlackFoil/claude-token-saver-mcp",
+            "packages": [
+              {
+                "identifier": "claude-token-saver-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.3.2"
+              }
+            ],
+            "query": "save",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/BlackFoil/claude-token-saver-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 18,
+            "status": "active",
+            "version": "0.3.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Search your saved videos by what was said. YouTube, Reels, and TikTok transcripts. Read-only.",
+            "is_latest": true,
+            "name": "app.savedthat/savedthat",
+            "packages": [],
+            "query": "save",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://savedthat.app/api/mcp"
+              }
+            ],
+            "repository": {},
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Consent-scoped vault access and free verification of family-issued learning records.",
+            "is_latest": true,
+            "name": "com.eformogi/records-vault",
+            "packages": [],
+            "query": "records",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://eformogi.com/api/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "GibsonAI MCP server: manage your databases with natural language",
+            "is_latest": true,
+            "name": "com.gibsonai/mcp",
+            "packages": [],
+            "query": "bson",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.gibsonai.com/"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/gibsonai/mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Exact AI Connect: hosted MCP server for Exact Online.",
+            "is_latest": true,
+            "name": "com.iwebdevelopment/exact-online",
+            "packages": [],
+            "query": "exact",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp-exactonline.iwebdevelopment.com"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Read your Savee saves, boards and home feed, and search its public library. Read-only.",
+            "is_latest": true,
+            "name": "com.savee/savee",
+            "packages": [],
+            "query": "save",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.savee.com/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/saveeit/savee-mcp-server"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Dated motor-carrier records with receipts, verification, and specimens, from a records custodian.",
+            "is_latest": true,
+            "name": "com.substradium/carrier-records",
+            "packages": [],
+            "query": "records",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://substradium.com/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Savecraft serves real save game data and expert game knowledge to AI assistants.",
+            "is_latest": true,
+            "name": "gg.savecraft/savecraft",
+            "packages": [],
+            "query": "save",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.savecraft.gg/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/joshsymonds/savecraft.gg"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Read-only public CVE records, capability metadata, and agent instructions from Hacker Bob.",
+            "is_latest": true,
+            "name": "io.github.bobnetsec/hacker-bob-public-records",
+            "packages": [],
+            "query": "records",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://hackerbob.ai/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/bobnetsec/www"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Federal court records and PACER case data. 4 MCP tools for legal research.",
+            "is_latest": true,
+            "name": "io.github.martc03/court-records",
+            "packages": [],
+            "query": "records",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://court-records-mcp.apify.actor/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/martc03/gov-mcp-servers"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Property Records MCP \u2014 address-level US property records (sales history,",
+            "is_latest": true,
+            "name": "io.github.pipeworx-io/property-records",
+            "packages": [],
+            "query": "records",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://gateway.pipeworx.io/property-records/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/pipeworx-io/mcp-property-records"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Inspect Palworld save files locally, compare snapshots, create a recognition receipt, and export",
+            "is_latest": true,
+            "name": "io.github.rocnubie/palsaveeditor-mcp",
+            "packages": [],
+            "query": "save",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/rocnubie/palsaveeditor-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "BSON document-length band, body discarded",
+            "is_latest": true,
+            "name": "io.github.sadri-dridi/bson-ok",
+            "packages": [],
+            "query": "bson",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://agent-observatory-sensor.nolimit-observatory.workers.dev/s/bson-ok/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/sadri-dridi/named-mcp-utilities"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Buy, sell & extend TRON ENERGY/BANDWIDTH on the TronSave market via typed MCP tools.",
+            "is_latest": true,
+            "name": "io.github.tronsave/mcp",
+            "packages": [],
+            "query": "save",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.tronsave.io/mcp"
+              },
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.tronsave.io/testnet/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/tronsave/mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Verified fight records for AI assistants: look up a fighter or fight card, cite the pxl8.io page.",
+            "is_latest": true,
+            "name": "io.pxl8/records",
+            "packages": [],
+            "query": "records",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.pxl8.io/sports-data/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Search US federal and state court records through CourtListener and the RECAP archive",
+            "is_latest": true,
+            "name": "net.nexlab/court-records",
+            "packages": [],
+            "query": "records",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://mcp.nexlab.net/mcp/court-records"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.0.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Connect Exact Online to your AI assistant via MCP. Manage Exact Online with natural language.",
+            "is_latest": true,
+            "name": "nl.ledgerbotje/exact-online",
+            "packages": [],
+            "query": "exact",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://www.ledgerbotje.nl/app/mcp"
+              }
+            ],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "1.1.4",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Connect Exact Online accounting to Claude, ChatGPT and Copilot. 114 tools, OAuth 2.1, EU-hosted.",
+            "is_latest": true,
+            "name": "nl.praatmetjeboekhouding/exact-online",
+            "packages": [],
+            "query": "exact",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "streamable-http",
+                "url": "https://api.praatmetjeboekhouding.nl/mcp"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/werkenmetai/Exact-online-MCP"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 15,
+            "status": "active",
+            "version": "0.3.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Agent-facing PDF API: merge, split, rotate, compress, images, metadata, text, and Markdown.",
+            "is_latest": true,
+            "name": "com.exactpdf/mcp",
+            "packages": [
+              {
+                "identifier": "@exactpdf/mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.2.3"
+              }
+            ],
+            "query": "exact",
+            "remotes": [],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.2.3",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "US tax sale dates & rules: 51 states, ~3,140 counties. Every record cites its official source.",
+            "is_latest": true,
+            "name": "com.ustaxrecords/tax-sales",
+            "packages": [
+              {
+                "identifier": "ustaxrecords-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.0"
+              }
+            ],
+            "query": "records",
+            "remotes": [],
+            "repository": null,
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Compiler-backed Angular template answers, component contracts and version facts for AI agents",
+            "is_latest": true,
+            "name": "io.github.Alex88Ryabov/ng-token-saver",
+            "packages": [
+              {
+                "identifier": "@alex-apps/ng-token-saver",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": "npx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.2.0"
+              }
+            ],
+            "query": "save",
+            "remotes": [],
+            "repository": {
+              "id": "1325202820",
+              "source": "github",
+              "url": "https://github.com/Alex88Ryabov/alex-apps-ng-token-saver"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.2.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Structural warm start for AI coding agents in .NET: cheap Roslyn signature maps of C#/.NET files.",
+            "is_latest": true,
+            "name": "io.github.Byggarepop/tokensaver",
+            "packages": [
+              {
+                "identifier": "TokenSaver.Mcp",
+                "registry_type": "nuget",
+                "required_environment": [],
+                "runtime_hint": "dnx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.15.5"
+              }
+            ],
+            "query": "save",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/Byggarepop/TokenSaver"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "1.15.5",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Code intelligence for 15+ languages: semantic graph queries instead of file reads. 37 MCP tools.",
+            "is_latest": true,
+            "name": "io.github.aovestdipaperino/tokensave",
+            "packages": [
+              {
+                "identifier": "https://github.com/aovestdipaperino/tokensave/releases/download/v4.0.2/tokensave-v4.0.2-aarch64-macos.mcp.tar.gz",
+                "registry_type": "mcpb",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "4.0.2"
+              },
+              {
+                "identifier": "https://github.com/aovestdipaperino/tokensave/releases/download/v4.0.2/tokensave-v4.0.2-x86_64-linux.mcp.tar.gz",
+                "registry_type": "mcpb",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "4.0.2"
+              },
+              {
+                "identifier": "https://github.com/aovestdipaperino/tokensave/releases/download/v4.0.2/tokensave-v4.0.2-aarch64-linux.mcp.tar.gz",
+                "registry_type": "mcpb",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "4.0.2"
+              },
+              {
+                "identifier": "https://github.com/aovestdipaperino/tokensave/releases/download/v4.0.2/tokensave-v4.0.2-x86_64-windows.mcp.zip",
+                "registry_type": "mcpb",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "4.0.2"
+              }
+            ],
+            "query": "save",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/aovestdipaperino/tokensave"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "4.0.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Machine-native listening platform for CWA's Straight Outta Crompton. Your agent can listen. For real",
+            "is_latest": true,
+            "name": "io.github.clanker-records/crompton-network",
+            "packages": [
+              {
+                "identifier": "@clanker-records/crompton-network",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.5.2"
+              }
+            ],
+            "query": "records",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/clanker-records/crompton-network"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "1.5.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Parse, validate, classify, and normalize Pinterest URLs locally without network requests.",
+            "is_latest": true,
+            "name": "io.github.jiankn/savepinner",
+            "packages": [
+              {
+                "identifier": "savepinner-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": "npx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.1"
+              }
+            ],
+            "query": "save",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/jiankn/savepinner-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Search published US court opinions from the Caselaw Access Project. No key required.",
+            "is_latest": true,
+            "name": "io.github.mrfentmen/court-records-mcp",
+            "packages": [
+              {
+                "identifier": "@mrfentmen/court-records-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.1"
+              }
+            ],
+            "query": "records",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/mrfentmen/court-records-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "1.0.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Offline MCP: predict LLM call cost and pick the cheapest capable model. No keys, no network.",
+            "is_latest": true,
+            "name": "io.github.sachinuppal/modelcostsaver",
+            "packages": [
+              {
+                "identifier": "@workswarm/modelcostsaver",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.1"
+              }
+            ],
+            "query": "save",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/sachinuppal/modelcostsaver"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.1.1",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Verified ephemeris & WMM2025 geomagnetic compute: the physical numbers LLMs hallucinate, done right.",
+            "is_latest": true,
+            "name": "io.github.savecharlie/almanac",
+            "packages": [
+              {
+                "identifier": "almanac-compute",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": "uvx",
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.2"
+              }
+            ],
+            "query": "save",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/savecharlie/almanac"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.1.2",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Verifiable text/code/measurement tools for agents, each reproducing a named authority.",
+            "is_latest": true,
+            "name": "io.github.savecharlie/touchstone",
+            "packages": [
+              {
+                "identifier": "touchstone-compute",
+                "registry_type": "pypi",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "0.1.0"
+              }
+            ],
+            "query": "save",
+            "remotes": [],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/savecharlie/touchstone"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "0.1.0",
+            "zero_cost_eligible": true
+          },
+          {
+            "description": "Twitter/X analysis without token waste. Fetch tweets, download media. No API key.",
+            "is_latest": true,
+            "name": "io.github.zezeron/tweetsave-mcp",
+            "packages": [
+              {
+                "identifier": "tweetsave-mcp",
+                "registry_type": "npm",
+                "required_environment": [],
+                "runtime_hint": null,
+                "secret_environment": [],
+                "transport": {
+                  "type": "stdio"
+                },
+                "version": "1.0.3"
+              }
+            ],
+            "query": "save",
+            "remotes": [
+              {
+                "required_headers": [],
+                "type": "sse",
+                "url": "https://mcp.tweetsave.org/sse"
+              }
+            ],
+            "repository": {
+              "source": "github",
+              "url": "https://github.com/zezeron/tweetsave-mcp"
+            },
+            "required_environment_count": 0,
+            "required_secret_count": 0,
+            "score": 14,
+            "status": "active",
+            "version": "1.0.3",
+            "zero_cost_eligible": true
+          }
+        ],
+        "effect": "Encode those exact records as BSON and save canonical/astra_runtime/tmp/BSON_RECORDS.bson",
+        "errors": [
+          {
+            "error": "TimeoutError:The read operation timed out",
+            "query": "encode"
+          }
+        ],
+        "queries": [
+          "encode",
+          "bson",
+          "those",
+          "exact",
+          "records",
+          "save"
+        ],
+        "schema": "PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "source": "OFFICIAL_MCP_REGISTRY",
+        "source_url": "https://registry.modelcontextprotocol.io"
+      }
+    ],
+    "schema": "PROJECT_BRAIN_FEDERATED_CAPABILITY_DISCOVERY_V1",
+    "sources": [
+      "APT_CATALOG",
+      "PYPI",
+      "OFFICIAL_MCP_REGISTRY"
+    ]
+  },
+  "schema": "PROJECT_BRAIN_PLAIN_GOAL_CAPABILITY_DISCOVERY_V1",
+  "source": "FEDERATED_CAPABILITY_DISCOVERY_FALLBACK",
+  "targeted_acquisition_error": "AutoAcquisitionFailure:NO_COMPATIBLE_SUPPLIER_CONTRACT:[{\"error\": \"AutoPyPIAcquisitionFailure:NO_COMPATIBLE_PYPI_LIBRARY_CONTRACT:[{\\\"error\\\": \\\"AutoPyPIAcquisitionFailure:NO_COMPATIBLE_PYPI_CODEC_CONTRACT:[]\\\", \\\"name\\\": \\\"Exact\\\"}]\", \"supplier_class\": \"pypi_python_library\"}, {\"error\": \"AutoAcquisitionFailure:NO_COMPATIBLE_APT_CLI_CONTRACT:[{\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"node-strict-uri-encode\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.bson\\\", \\\"name\\\": \\\"tablet-encode\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.bson\\\", \\\"name\\\": \\\"abcde\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.bson\\\", \\\"name\\\": \\\"aften\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"asunder\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.bson\\\", \\\"name\\\": \\\"base16384\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.bson\\\", \\\"name\\\": \\\"base58\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.bson\\\", \\\"name\\\": \\\"basez\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.bson\\\", \\\"name\\\": \\\"catcodec\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"cl-base64\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_HELP_CONTRACT_TEXT_REQUIRED\\\", \\\"name\\\": \\\"cl-yason\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}, {\\\"error\\\": \\\"ContractInferenceFailure:CLI_OUTPUT_FORMAT_UNVERIFIABLE:.bson\\\", \\\"name\\\": \\\"crip\\\", \\\"status\\\": \\\"CONTRACT_REJECTED\\\"}]\", \"supplier_class\": \"apt_cli\"}]"
+}

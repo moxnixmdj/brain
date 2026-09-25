@@ -1,0 +1,98 @@
+{
+  "attempts": [
+    {
+      "error": "AutoPyPIAcquisitionFailure:NO_COMPATIBLE_PYPI_CODEC_CONTRACT:[{\"error\": \"ImportError\", \"module\": \"exact\", \"status\": \"IMPORT_FAILED\"}]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "binding_kind": "pypi",
+        "dependency_count": 0,
+        "description": "Python bindings for Exact",
+        "discovery_source": "PYPI",
+        "eligibility_status": "PYPI_METADATA_CANDIDATE_UNVERIFIED",
+        "integration_friction": 1,
+        "license": "AGPL-3.0-only",
+        "matched_terms": [
+          "exact"
+        ],
+        "metadata_url": "https://pypi.org/pypi/Exact/2.2.1/json",
+        "name": "Exact",
+        "project": "Exact",
+        "query": "exact",
+        "required_environment_count": 0,
+        "required_secret_count": 0,
+        "requires_python": ">=3.10",
+        "score": 62,
+        "version": "2.2.1",
+        "wheels": [
+          {
+            "filename": "exact-2.2.1-cp310-cp310-manylinux_2_34_x86_64.whl",
+            "python_version": "cp310",
+            "sha256": "f217303e599a785951478e4570e17449645913d2d6f20309c15a32e6c592160c",
+            "size": 1334589,
+            "url": "https://files.pythonhosted.org/packages/94/d7/68d3869b3c185e7e0447865efb6453a7e8fdaadd083a434fd90d113c9d16/exact-2.2.1-cp310-cp310-manylinux_2_34_x86_64.whl"
+          },
+          {
+            "filename": "exact-2.2.1-cp310-cp310-win_amd64.whl",
+            "python_version": "cp310",
+            "sha256": "cd2d9803cfa2dabea06932e351d30004ce2792b3d6e3b5c22ab2eaa89078baf3",
+            "size": 911356,
+            "url": "https://files.pythonhosted.org/packages/6f/d8/ff5bd2ff900a8be941ae6a71c1708f0a592d5cae101c22556f6a2bcad781/exact-2.2.1-cp310-cp310-win_amd64.whl"
+          },
+          {
+            "filename": "exact-2.2.1-cp311-cp311-manylinux_2_34_x86_64.whl",
+            "python_version": "cp311",
+            "sha256": "5ebde005153ccd9dce4be444928db44cc40e869d181bacb2e1ca5b8bc859b039",
+            "size": 1335478,
+            "url": "https://files.pythonhosted.org/packages/31/21/dae42e0b4b214e7bd03f24049faefc4f90fdcb9eabc30d288246696872c7/exact-2.2.1-cp311-cp311-manylinux_2_34_x86_64.whl"
+          },
+          {
+            "filename": "exact-2.2.1-cp311-cp311-win_amd64.whl",
+            "python_version": "cp311",
+            "sha256": "91aa45bc51079b79ec37328539303a45ec768553cc7d7cae413871943c4517f9",
+            "size": 912173,
+            "url": "https://files.pythonhosted.org/packages/f8/09/99d3022d1631cb81ce10b92fd87e36be4633b0eea2d358a2197a24331d88/exact-2.2.1-cp311-cp311-win_amd64.whl"
+          },
+          {
+            "filename": "exact-2.2.1-cp312-cp312-manylinux_2_34_x86_64.whl",
+            "python_version": "cp312",
+            "sha256": "c8c5622cc0c219324ee5882d07dc850a6ef73b94051a0d0dd9968f615a327a72",
+            "size": 1336715,
+            "url": "https://files.pythonhosted.org/packages/cf/3e/f7a98e7ad01c2ebc6161830b6fba0c359883aa605a6051f46abce45f92ab/exact-2.2.1-cp312-cp312-manylinux_2_34_x86_64.whl"
+          },
+          {
+            "filename": "exact-2.2.1-cp312-cp312-win_amd64.whl",
+            "python_version": "cp312",
+            "sha256": "732ff1276dcbef456274f0d8411596ed10200ce34ee76bea44026026ba0d1531",
+            "size": 912542,
+            "url": "https://files.pythonhosted.org/packages/77/13/021175e9e3fe9211db246633efddec64b718089087ec6745bced0b42c3df/exact-2.2.1-cp312-cp312-win_amd64.whl"
+          },
+          {
+            "filename": "exact-2.2.1-cp313-cp313-manylinux_2_34_x86_64.whl",
+            "python_version": "cp313",
+            "sha256": "6605e445d97063fc7ec5691df64949e1a418efaa43fe3870708f24904a1a4ab2",
+            "size": 1337021,
+            "url": "https://files.pythonhosted.org/packages/16/a7/0d158306bcc8bd1f529c817ae8851c822b69793eceff5f1dba883b0575fc/exact-2.2.1-cp313-cp313-manylinux_2_34_x86_64.whl"
+          },
+          {
+            "filename": "exact-2.2.1-cp313-cp313-win_amd64.whl",
+            "python_version": "cp313",
+            "sha256": "8ed9b16af2ce61247f3d5e7284ee40fd7766ffa3d13d975b7ab358e895bb9111",
+            "size": 912525,
+            "url": "https://files.pythonhosted.org/packages/cb/c4/e296ccb98ad1b0fe2471f067ecc5605c764c6edd8808e44388a42417bf49/exact-2.2.1-cp313-cp313-win_amd64.whl"
+          }
+        ],
+        "zero_cost_eligible": true
+      },
+      "wheel": {
+        "bytes": 1336715,
+        "filename": "exact-2.2.1-cp312-cp312-manylinux_2_34_x86_64.whl",
+        "sha256": "c8c5622cc0c219324ee5882d07dc850a6ef73b94051a0d0dd9968f615a327a72",
+        "url": "https://files.pythonhosted.org/packages/cf/3e/f7a98e7ad01c2ebc6161830b6fba0c359883aa605a6051f46abce45f92ab/exact-2.2.1-cp312-cp312-manylinux_2_34_x86_64.whl"
+      }
+    }
+  ],
+  "goal": "Encode those exact records as BSON and save canonical/astra_runtime/tmp/BSON_RECORDS.bson",
+  "mission_id": "ASTRA-RUNTIME-PYPI-ACQUIRE-BSON-003",
+  "schema": "PROJECT_BRAIN_AUTO_PYPI_LIBRARY_ACQUISITION_V1",
+  "status": "NO_COMPATIBLE_CONTRACT"
+}
