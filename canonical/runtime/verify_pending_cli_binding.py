@@ -6,7 +6,7 @@ import hashlib,json,pathlib,re,subprocess,sys
 import apt_cli_probe
 import astra_runtime
 import capability_discovery
-from bound_capabilities import cli_command
+from bound_capabilities import cli_command, python_library_codec
 
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 
@@ -122,6 +122,68 @@ def _acquire_and_run_semantic_verifier(pending, output_path):
     ],sort_keys=True)[:3000])
 
 
+def _resolve_callable(module,name):
+    current=module
+    for part in str(name or "").split("."):
+        current=getattr(current,part)
+    if not callable(current):
+        raise RuntimeError("PYPI_CODEC_CALLABLE_INVALID")
+    return current
+
+
+def _verify_pending_pypi(pending,result_path):
+    entry=pending["registry_entry"]
+    source=entry.get("source") or {}
+    dependency=astra_runtime._ensure_pypi_dependency(source)
+    contract=pending.get("contract") or {}
+    fixture=pending.get("verification_fixture")
+    if not isinstance(fixture,(list,dict)):
+        raise RuntimeError("PYPI_VERIFICATION_FIXTURE_INVALID")
+    fixture_path=ROOT/"canonical"/"astra_runtime"/"tmp"/(pending["verification_mission_id"]+"_SOURCE.json")
+    output_path=ROOT/"canonical"/"astra_runtime"/"tmp"/(pending["verification_mission_id"]+"_OUTPUT.bin")
+    fixture_path.parent.mkdir(parents=True,exist_ok=True)
+    fixture_path.write_text(json.dumps(fixture,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
+    observed=python_library_codec.run({
+      "module":contract["module"],
+      "encode_callable":contract["encode_callable"],
+      "encode_kwargs":contract.get("encode_kwargs") or {},
+      "json_path":str(fixture_path.relative_to(ROOT)),
+      "output_path":str(output_path.relative_to(ROOT)),
+    },ROOT)
+    if observed.get("output_verified") is not True:
+        raise RuntimeError("PENDING_PYPI_PRODUCER_EFFECT_FAILED")
+    import importlib
+    importlib.invalidate_caches()
+    module=importlib.import_module(contract["module"])
+    decoder=_resolve_callable(module,contract["decode_callable"])
+    decoded=decoder(output_path.read_bytes(),**(contract.get("decode_kwargs") or {}))
+    expected=json.loads(fixture_path.read_text(encoding="utf-8"))
+    if decoded!=expected:
+        raise RuntimeError("PENDING_PYPI_SEMANTIC_ROUNDTRIP_MISMATCH")
+    raw=output_path.read_bytes()
+    result={
+      "schema":"PROJECT_BRAIN_AUTO_BINDING_VERIFICATION_V1",
+      "capability_id":pending["capability_id"],
+      "verification_mission_id":pending["verification_mission_id"],
+      "dependency":dependency,
+      "adapter_result":observed,
+      "semantic_roundtrip":{
+        "verified":True,
+        "separate_decode_invocation":True,
+        "implementation_independent":False,
+        "module":contract["module"],
+        "decode_callable":contract["decode_callable"],
+      },
+      "independent_output_sha256":hashlib.sha256(raw).hexdigest(),
+      "independent_output_bytes":len(raw),
+      "independent_verified":True,
+      "status":"VERIFIED",
+    }
+    result_path.parent.mkdir(parents=True,exist_ok=True)
+    result_path.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+    print("PENDING_PYPI_BINDING_EFFECT_VERIFIED",json.dumps(result,sort_keys=True))
+
+
 def main():
     if len(sys.argv)!=3:
         raise SystemExit("usage: verify_pending_cli_binding.py PENDING_JSON RESULT_JSON")
@@ -132,8 +194,11 @@ def main():
         raise RuntimeError("PENDING_BINDING_SCHEMA_INVALID")
     entry=pending["registry_entry"]
     source=entry.get("source") or {}
+    if source.get("type")=="pypi":
+        _verify_pending_pypi(pending,result_path)
+        return
     if source.get("type")!="apt":
-        raise RuntimeError("PENDING_BINDING_SOURCE_NOT_APT")
+        raise RuntimeError("PENDING_BINDING_SOURCE_UNSUPPORTED")
     dependency=astra_runtime._ensure_apt_dependencies(source)
     args=dict(pending["verification_args"])
     observed=cli_command.run(args,ROOT)
