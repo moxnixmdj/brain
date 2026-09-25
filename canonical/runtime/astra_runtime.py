@@ -620,6 +620,30 @@ def _goal_action(action):
           "audit_sha256":sha_file(audit_path),
           "source_sha256":sha_file(yaml_path),
         }
+    if typ=="assert_hex_prefix_bucket":
+        source=_safe_repo_path(args.get("source_path",""))
+        classified=_safe_repo_path(args.get("classification_path",""))
+        if not source.is_file() or not classified.is_file():
+            return {"type":typ,"verified":False,"error":"CONDITIONAL_SOURCE_MISSING"}
+        try:
+            src=json.loads(source.read_text(encoding="utf-8"))
+            out=json.loads(classified.read_text(encoding="utf-8"))
+            observed=json.loads(str(src.get("observed_text") or ""))
+        except Exception as exc:
+            return {"type":typ,"verified":False,"error":"CONDITIONAL_JSON_INVALID:"+type(exc).__name__}
+        value=str(observed.get(str(args.get("source_key") or "uuid")) or "")
+        claimed_value=str(out.get(str(args.get("output_value_field") or "uuid")) or "")
+        claimed_bucket=str(out.get(str(args.get("bucket_field") or "bucket")) or "")
+        low_chars=set(str(args.get("low_chars") or "01234567").lower())
+        expected="LOW" if value and value[0].lower() in low_chars else "HIGH"
+        return {
+          "type":typ,
+          "verified":bool(value and claimed_value==value and claimed_bucket==expected),
+          "observed_value":value,
+          "claimed_value":claimed_value,
+          "claimed_bucket":claimed_bucket,
+          "expected_bucket":expected,
+        }
     if typ=="assert_json_fields_equal":
         p=_safe_repo_path(args.get("path",""))
         if not p.is_file():
@@ -831,7 +855,7 @@ def _run_model_independent_goal(step, mission, goal):
         return None
     allowed_types={
       "read_file","list_tree","search_text","http_get","invoke_capability",
-      "project_browser_result_json",
+      "project_browser_result_json","assert_hex_prefix_bucket",
       "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal",
       "assert_workflow_audit_supported_by_source","assert_python_source_audit_supported_by_source",
       "assert_python_test_audit_zero","assert_python_test_audit_supported_by_fresh_execution",
