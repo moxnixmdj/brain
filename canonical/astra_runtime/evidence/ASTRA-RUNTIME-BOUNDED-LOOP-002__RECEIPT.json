@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T17:17:06.762581+00:00",
+  "mission_id": "ASTRA-RUNTIME-BOUNDED-LOOP-002",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_BOUNDED_LOOP_002.json",
+  "mission_sha256": "fcb8b96159d97e58d8ba91aeb0e19682ecec9081e08756c99815cc5273f7c868",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "ac2766b269363a396b0220240ae9ec44bc85802d48fb300daab7d788f1836e5f",
+  "status": "COMPLETE",
+  "steps_completed": 1
+}

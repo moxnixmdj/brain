@@ -1,0 +1,14 @@
+{
+  "document_ready_state": "complete",
+  "final_url": "https://httpbin.org/uuid",
+  "observed_text": "{\n  \"uuid\": \"f5d647a3-8433-4c27-860e-dfdabb503e99\"\n}\n",
+  "page_title": "",
+  "screenshot_bytes": 10867,
+  "screenshot_path": "canonical/astra_runtime/tmp/UUID_LOOP_ATTEMPTS/1.png",
+  "screenshot_sha256": "1d3d2cb1904f866500003f0f272c3d4f901f4575da2dd20e994be351f4f527e4",
+  "source_url": "https://httpbin.org/uuid",
+  "viewport": {
+    "height": 857,
+    "width": 1440
+  }
+}
