@@ -247,6 +247,29 @@ def _verify_action_expectation(action,result):
         observed=observed.replace("\\n"," ")[:800]
         raise Blocker("ACTION_EXPECTATION_FAILED:"+field+":OBSERVED="+observed)
 
+def _resolve_result_refs(value, trace):
+    if isinstance(value,dict):
+        if set(value.keys())=={"$result"}:
+            spec=value["$result"]
+            if not isinstance(spec,dict):
+                raise Blocker("RESULT_REFERENCE_INVALID")
+            cycle=int(spec.get("cycle",-1))
+            if cycle<0 or cycle>=len(trace):
+                raise Blocker("RESULT_REFERENCE_CYCLE_INVALID:"+str(cycle))
+            current=trace[cycle].get("result")
+            field=str(spec.get("field") or "").strip()
+            if field:
+                for part in field.split("."):
+                    if not isinstance(current,dict) or part not in current:
+                        raise Blocker("RESULT_REFERENCE_FIELD_MISSING:"+field)
+                    current=current[part]
+            return current
+        return {k:_resolve_result_refs(v,trace) for k,v in value.items()}
+    if isinstance(value,list):
+        return [_resolve_result_refs(v,trace) for v in value]
+    return value
+
+
 def _goal_action(action):
     typ=action.get("type")
     args=action.get("args") or {}
@@ -285,6 +308,44 @@ def _goal_action(action):
         return run_http({"url":url,"timeout_s":20,"max_bytes":60000})
     if typ=="invoke_capability":
         return _invoke_bound_capability(args)
+    if typ=="assert_text_contains_json_keys":
+        text=str(args.get("text") or "")
+        p=_safe_repo_path(args.get("json_path",""))
+        if not p.is_file():
+            return {"type":typ,"error":"JSON_SOURCE_NOT_FOUND"}
+        try:
+            data=json.loads(p.read_text(encoding="utf-8"))
+        except Exception as exc:
+            return {"type":typ,"error":"JSON_SOURCE_INVALID:"+type(exc).__name__}
+        current=data
+        collection_path=args.get("collection_path") or []
+        if not isinstance(collection_path,list):
+            return {"type":typ,"error":"COLLECTION_PATH_INVALID"}
+        for part in collection_path:
+            if not isinstance(current,dict) or str(part) not in current:
+                return {"type":typ,"error":"COLLECTION_PATH_NOT_FOUND"}
+            current=current[str(part)]
+        if not isinstance(current,dict):
+            return {"type":typ,"error":"JSON_KEY_COLLECTION_NOT_OBJECT"}
+        expected=sorted(str(k) for k in current.keys())
+        mode=str(args.get("normalization") or "exact")
+        if mode=="alnum_upper":
+            norm=lambda x: re.sub(r"[^A-Z0-9]+","",str(x).upper())
+            observed=norm(text)
+            missing=[key for key in expected if norm(key) not in observed]
+        elif mode=="exact":
+            missing=[key for key in expected if key not in text]
+        else:
+            return {"type":typ,"error":"NORMALIZATION_MODE_UNKNOWN"}
+        return {
+          "type":typ,
+          "verified":not missing,
+          "expected_key_count":len(expected),
+          "expected_keys":expected,
+          "missing_keys":missing,
+          "json_path":str(p.relative_to(ROOT)),
+          "normalization":mode,
+        }
     if typ=="finish":
         return {"type":typ,"summary":str(args.get("summary",""))[:12000]}
     raise Blocker("GOAL_ACTION_NOT_ALLOWED:"+str(typ))
@@ -342,12 +403,12 @@ def _run_model_independent_goal(step, mission, goal):
     actions=_controller_actions(step, mission)
     if actions is None:
         return None
-    allowed_types={"read_file","list_tree","search_text","http_get","invoke_capability","finish"}
+    allowed_types={"read_file","list_tree","search_text","http_get","invoke_capability","assert_text_contains_json_keys","finish"}
     trace=[]
     for cycle, raw_action in enumerate(actions):
         if not isinstance(raw_action,dict):
             raise Blocker("MODEL_INDEPENDENT_CONTROLLER_ACTION_NOT_OBJECT")
-        action=dict(raw_action)
+        action=_resolve_result_refs(dict(raw_action),trace)
         typ=action.get("type")
         if typ not in allowed_types:
             raise Blocker("MODEL_INDEPENDENT_CONTROLLER_ACTION_REJECTED:"+str(typ))
