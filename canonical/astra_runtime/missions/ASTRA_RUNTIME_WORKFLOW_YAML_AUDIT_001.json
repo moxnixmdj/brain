@@ -25,6 +25,7 @@
     "manual_binding": false,
     "real_project_artifact": true,
     "final_effect_verification_required": true,
-    "orthogonal_pressure_family": "yaml_parsing_structured_audit_source_crosscheck"
+    "orthogonal_pressure_family": "yaml_parsing_structured_audit_source_crosscheck",
+    "replay_after_yaml_audit_composition_commit": "c5216ee020c897ec07ee5c74108b5ad2d2045132"
   }
 }
