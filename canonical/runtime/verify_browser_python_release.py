@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import importlib.util, json, pathlib, re, sys, urllib.request
+import gzip, importlib.util, json, pathlib, re, sys, urllib.request
 from html.parser import HTMLParser
 
 ROOT=pathlib.Path(__file__).resolve().parents[2]
@@ -69,6 +69,11 @@ def main():
     with urllib.request.urlopen(req,timeout=30) as r:
         raw=r.read(2_000_000)
         final=r.geturl()
+        content_encoding=(r.headers.get("Content-Encoding") or "").lower()
+    if content_encoding=="gzip":
+        raw=gzip.decompress(raw)
+    elif content_encoding not in ("","identity"):
+        raise RuntimeError("INDEPENDENT_CONTENT_ENCODING_UNSUPPORTED:"+content_encoding)
     html=raw.decode("utf-8","replace")
     independent_text=html_text(html)
     independent,imatch=independent_stable_release(independent_text)
