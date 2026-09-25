@@ -18,6 +18,7 @@
     "model_controller_required": false,
     "rendered_browser_required": true,
     "screenshot_required": true,
-    "independent_semantic_verification_required": true
+    "independent_semantic_verification_required": true,
+    "replay_after_independent_html_parse_commit": "17588cb0d6be9f77bd135f774d04df546af2a66f"
   }
 }
