@@ -230,7 +230,7 @@ class AutoAcquisitionPlatformAttestationTests(unittest.TestCase):
         self.assertEqual(compiled["compiler_mode"],"DETERMINISTIC_COMPOUND_ACTION_PLAN")
         self.assertEqual(
             [a["type"] for a in compiled["controller_actions"]],
-            ["invoke_capability","verify_with_independent_pypi_codec","finish"],
+            ["invoke_capability","verify_with_independent_npm_codec","finish"],
         )
         producer=compiled["controller_actions"][0]["args"]
         self.assertEqual(
