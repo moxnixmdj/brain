@@ -1453,6 +1453,9 @@
         "output_path": {
           "type": "auto_path",
           "suffix": ".json"
+        },
+        "url": {
+          "type": "goal_url"
         }
       }
     },
