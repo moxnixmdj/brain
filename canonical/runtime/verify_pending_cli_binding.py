@@ -136,19 +136,38 @@ def _resolve_callable(module,name):
 
 
 def _pending_codec_format(pending):
+    goal=str(pending.get("goal") or "")
+    common={
+        "json","txt","md","markdown","csv","tsv","html","xml",
+        "png","jpg","jpeg","webp","pdf","docx","xlsx",
+        "zip","gz","tgz","tar","sqlite","db","sqlite3",
+    }
+    path_tokens=re.findall(
+        r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+",
+        re.sub(r"https?://[^\\s)\\]}>]+"," ",goal),
+    )
+    goal_formats=[]
+    for raw in path_tokens:
+        suffix=pathlib.PurePosixPath(raw.rstrip(".,;:!?)]}")).suffix.lower().lstrip(".")
+        if suffix and suffix not in common and suffix not in goal_formats:
+            goal_formats.append(suffix)
+
     entry=pending.get("registry_entry") or {}
-    specific=[
+    declared=sorted(set(
         str(effect)[len("structured.binary.encode."):]
         for effect in (entry.get("provides") or [])
         if str(effect).startswith("structured.binary.encode.")
         and str(effect)!="structured.binary.encode"
-    ]
-    specific=sorted(set(x for x in specific if x))
-    if len(specific)!=1:
-        raise RuntimeError(
-            "PENDING_CODEC_FORMAT_AMBIGUOUS:"+json.dumps(specific,sort_keys=True)
-        )
-    return specific[0]
+    ))
+    compatible=[fmt for fmt in goal_formats if fmt in declared]
+    if len(compatible)==1:
+        return compatible[0]
+    if not goal_formats and len(declared)==1:
+        return declared[0]
+    raise RuntimeError(
+        "PENDING_CODEC_FORMAT_AMBIGUOUS:"
+        +json.dumps({"goal_formats":goal_formats,"declared":declared},sort_keys=True)
+    )
 
 
 def _independent_npm_codec_verifier(pending,fixture_path,output_path):
