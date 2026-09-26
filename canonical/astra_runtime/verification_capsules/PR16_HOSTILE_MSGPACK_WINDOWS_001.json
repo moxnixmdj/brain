@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_VERIFICATION_CAPSULE_V1",
+  "capsule_id": "PR16-HOSTILE-MSGPACK-WINDOWS-001",
+  "repository": "moxnixmdj/brain",
+  "code_revision": "429c0483da8a76bb5886ecc55ab25fdf8c595319",
+  "base_revision": "bd41dcd8fb02fb624387a25e34f9d6b952f631db",
+  "branch": "research/pypi-native-probe-subprocess-20260926",
+  "incremental_spend_usd": 0,
+  "executor_policy": {
+    "required_platform": "windows",
+    "gpu_allowed": false,
+    "heavy_compute_allowed": false,
+    "safe_light_duty_only": true,
+    "billable_cloud_creation_allowed": false
+  },
+  "files": {
+    "canonical/runtime/astra_runtime.py": {
+      "blob_sha": "5a59e063ebbe72d83984eb261e37d5e445c0c94d",
+      "size": 258508
+    },
+    "canonical/runtime/auto_pypi_library_acquisition.py": {
+      "blob_sha": "613b8c815b4ab84863b0a36fb31e090a3725f9d9",
+      "size": 24416
+    },
+    "canonical/tests/test_astra_runtime_verification.py": {
+      "blob_sha": "10da8b94576ee18961de1aefa7bbcc3de0e5fae5",
+      "size": 3782
+    },
+    "canonical/tests/test_auto_acquisition_platform_attestation.py": {
+      "blob_sha": "e9070931282cc07f045076458a143317ed2fe746",
+      "size": 25165
+    }
+  },
+  "external_held_out": {
+    "path": "canonical/astra_runtime/missions/ASTRA_RUNTIME_BLIND_AUTO_ACQUIRE_MSGPACK_HOSTILE_001.json",
+    "required_sha256": "c87d016aa89bb5915c13e178bd54b4d31722bcb0fce82240e4273d885f502671",
+    "source": "preserved local pre-repair held-out mission",
+    "must_not_be_modified": true
+  },
+  "stages": [
+    {
+      "id": "syntax",
+      "command": "python -m py_compile canonical/runtime/auto_pypi_library_acquisition.py canonical/runtime/astra_runtime.py canonical/tests/test_astra_runtime_verification.py canonical/tests/test_auto_acquisition_platform_attestation.py"
+    },
+    {
+      "id": "targeted_regressions",
+      "command": "python -m unittest canonical.tests.test_astra_runtime_verification canonical.tests.test_auto_acquisition_platform_attestation -v"
+    },
+    {
+      "id": "hostile_replay",
+      "command": "python canonical/runtime/astra_runtime.py canonical/astra_runtime/missions/ASTRA_RUNTIME_BLIND_AUTO_ACQUIRE_MSGPACK_HOSTILE_001.json"
+    },
+    {
+      "id": "stacked_regressions",
+      "command": "python -m unittest canonical.tests.test_auto_acquisition_replan canonical.tests.test_auto_fanin_proposal canonical.tests.test_auto_multi_capability_proposal canonical.tests.test_auto_single_capability_proposal -v"
+    },
+    {
+      "id": "full_suite",
+      "command": "python -m unittest discover -s canonical/tests -p 'test_*.py'"
+    }
+  ],
+  "required_evidence": [
+    "held-out mission SHA matches frozen pre-repair SHA before replay",
+    "held-out mission bytes are unchanged after replay",
+    "PyPI candidate contract probing occurs in a fresh child Python interpreter",
+    "Windows native extension cleanup no longer raises WinError 5",
+    "durable recovery accepts equivalent slash styles for the same resolved mission",
+    "MessagePack capability acquisition completes or exposes the next first causal generic failure",
+    "if mission completes: promoted producer is Windows-valid and independently verified",
+    "incremental spend remains exactly $0"
+  ],
+  "fail_closed": true
+}
