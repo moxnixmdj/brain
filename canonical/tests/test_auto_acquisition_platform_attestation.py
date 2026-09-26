@@ -21,6 +21,7 @@ pypi=load("project_brain_test_platform_pypi",RUNTIME_DIR/"auto_pypi_library_acqu
 npm=load("project_brain_test_platform_npm",RUNTIME_DIR/"auto_npm_library_acquisition.py")
 compiler=load("project_brain_test_platform_compiler",RUNTIME_DIR/"goal_compiler.py")
 promoter=load("project_brain_test_platform_promoter",RUNTIME_DIR/"promote_pending_binding.py")
+npm_utils=load("project_brain_test_npm_utils",RUNTIME_DIR/"npm_package_utils.py")
 
 
 class AutoAcquisitionPlatformAttestationTests(unittest.TestCase):
@@ -243,6 +244,28 @@ class AutoAcquisitionPlatformAttestationTests(unittest.TestCase):
         verifier=compiled["controller_actions"][1]["args"]
         self.assertEqual(verifier["format"],"cbor")
         self.assertEqual(verifier["producer_capability_id"],"auto.pypi.fake-cbor")
+
+
+    def test_npm_zero_dependency_policy_rejects_hidden_runtime_surfaces(self):
+        bad_cases=(
+            {"optionalDependencies":{"native-addon":"1.0.0"}},
+            {"peerDependencies":{"peer-runtime":"1.0.0"}},
+            {"bundledDependencies":["vendored-runtime"]},
+            {"bundleDependencies":["vendored-runtime"]},
+        )
+        for meta in bad_cases:
+            with self.subTest(meta=meta):
+                with self.assertRaises(npm_utils.NpmPackageFailure):
+                    npm_utils.validate_zero_dependency_package(meta)
+
+    def test_npm_zero_dependency_policy_accepts_clean_package(self):
+        observed=npm_utils.validate_zero_dependency_package({
+            "dependencies":{},
+            "optionalDependencies":{},
+            "peerDependencies":{},
+            "scripts":{"test":"node test.js"},
+        })
+        self.assertEqual(observed["dependency_count"],0)
 
 
 if __name__=="__main__":
