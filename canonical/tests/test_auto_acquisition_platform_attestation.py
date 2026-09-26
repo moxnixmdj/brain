@@ -399,5 +399,25 @@ class AutoAcquisitionPlatformAttestationTests(unittest.TestCase):
             self.assertEqual(registry_path.read_bytes(),before)
 
 
+    def test_invalid_origin_mission_path_fails_before_supplier_discovery(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=pathlib.Path(td)
+            outside=root/"NOT_A_MISSION.json"
+            outside.write_text('{"goal":"invalid authority"}\n',encoding="utf-8")
+            pool=mock.Mock(return_value=[])
+            with mock.patch.object(pypi,"_candidate_pool",pool):
+                with self.assertRaisesRegex(
+                    pypi.AutoPyPIAcquisitionFailure,
+                    "PYPI_ORIGIN_MISSION_PATH_INVALID"
+                ):
+                    pypi.dispatch(
+                        "Encode canonical/astra_runtime/tmp/source.json as CBOR and save canonical/astra_runtime/tmp/out.cbor.",
+                        "TEST-INVALID-AUTHORITY",
+                        "NOT_A_MISSION.json",
+                        td,
+                    )
+            pool.assert_not_called()
+
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
