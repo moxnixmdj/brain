@@ -4555,7 +4555,9 @@ def _load_auto_capability_acquisition():
 def _compile_plain_goal(goal):
     compiler=_load_goal_compiler()
     try:
-        return compiler.compile_goal(goal,_load_bound_capability_registry(),ROOT)
+        registry=_load_bound_capability_registry()
+        registry=compiler._platform_admissible_registry(registry)
+        return compiler.compile_goal(goal,registry,ROOT)
     except Exception as e:
         code=getattr(e,"code",type(e).__name__)
         detail=str(getattr(e,"detail","") or "")
