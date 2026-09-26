@@ -44,7 +44,7 @@ def verify(format_name,json_path,binary_path,producer_project,root):
         "canonical/astra_runtime/tmp/INDEPENDENT_VERIFIER."+fmt
     )
     try:
-        candidates=npm_acq._search_registry(goal,limit=40)
+        candidates=npm_acq._search_registry(goal,limit=40,format_hint=fmt)
     except Exception as exc:
         raise IndependentNpmCodecVerifierFailure(
             "NPM_VERIFIER_DISCOVERY_FAILED:"+type(exc).__name__+":"+str(exc)
