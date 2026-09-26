@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """Fresh verification for an automatically synthesized pending CLI binding."""
 from __future__ import annotations
-import hashlib,json,pathlib,re,subprocess,sys
+import hashlib,importlib,json,pathlib,re,shutil,subprocess,sys
 
 import apt_cli_probe
 import astra_runtime
 import capability_discovery
+import auto_npm_library_acquisition
+import auto_pypi_library_acquisition
 from bound_capabilities import cli_command, python_library_codec, node_library_codec
 
 ROOT=pathlib.Path(__file__).resolve().parents[2]
@@ -131,6 +133,148 @@ def _resolve_callable(module,name):
     return current
 
 
+
+def _independent_npm_codec_verifier(pending,fixture_path,output_path):
+    if not shutil.which("node"):
+        raise RuntimeError("INDEPENDENT_NPM_VERIFIER_NODE_UNAVAILABLE")
+    goal=str(pending.get("goal") or "")
+    producer_source=(pending.get("registry_entry") or {}).get("source") or {}
+    attempts=[]
+    try:
+        raw_candidates=auto_npm_library_acquisition._search_registry(goal,limit=30)
+    except Exception as exc:
+        raise RuntimeError(
+            "INDEPENDENT_NPM_VERIFIER_DISCOVERY_FAILED:"
+            +type(exc).__name__+":"+str(exc)
+        ) from exc
+    for raw in raw_candidates[:16]:
+        attempt={"candidate":raw}
+        try:
+            candidate=auto_npm_library_acquisition._metadata(raw)
+            contract=auto_npm_library_acquisition._probe_contract(candidate,ROOT)
+            source={
+              "type":"npm",
+              "package":candidate["package"],
+              "version":candidate["version"],
+              "metadata_url":candidate["metadata_url"],
+              "tarball_url":candidate["tarball_url"],
+              "integrity":candidate["integrity"],
+              "integrity_algorithm":contract["integrity_algorithm"],
+              "integrity_digest_hex":contract["integrity_digest_hex"],
+              "dependency_count":0,
+              "license":candidate.get("license"),
+            }
+            dependency=astra_runtime._ensure_npm_dependency(source)
+            package_root=str(dependency.get("package_root") or "")
+            observed=node_library_codec.run({
+              "_package_root":package_root,
+              "package":contract["package"],
+              "root_selector":contract["root_selector"],
+              "encode_export":contract["encode_export"],
+              "decode_export":contract["decode_export"],
+              "json_path":str(fixture_path.relative_to(ROOT)),
+              "mode":"decode_verify",
+              "binary_path":str(output_path.relative_to(ROOT)),
+            },ROOT)
+            attempt["package"]=candidate["package"]
+            attempt["version"]=candidate["version"]
+            attempt["verified"]=observed.get("verified") is True
+            if observed.get("verified") is True:
+                return {
+                  "verified":True,
+                  "implementation_independent":True,
+                  "supplier_class_independent":producer_source.get("type")!="npm",
+                  "producer_source_type":producer_source.get("type"),
+                  "verifier_source_type":"npm",
+                  "verifier_package":candidate["package"],
+                  "verifier_version":candidate["version"],
+                  "verifier_integrity":candidate["integrity"],
+                  "verifier_contract":{
+                    "root_selector":contract["root_selector"],
+                    "decode_export":contract["decode_export"],
+                  },
+                  "attempts":attempts+[attempt],
+                }
+        except Exception as exc:
+            attempt["error"]=type(exc).__name__+":"+str(exc)
+        attempts.append(attempt)
+    raise RuntimeError(
+        "NO_INDEPENDENT_NPM_CODEC_VERIFIER:"
+        +json.dumps(attempts,sort_keys=True)[:4000]
+    )
+
+
+def _independent_pypi_codec_verifier(pending,fixture_path,output_path):
+    goal=str(pending.get("goal") or "")
+    producer_source=(pending.get("registry_entry") or {}).get("source") or {}
+    attempts=[]
+    try:
+        candidates=auto_pypi_library_acquisition._candidate_pool(goal,discovery=None)
+    except Exception as exc:
+        raise RuntimeError(
+            "INDEPENDENT_PYPI_VERIFIER_DISCOVERY_FAILED:"
+            +type(exc).__name__+":"+str(exc)
+        ) from exc
+    for candidate in candidates[:16]:
+        attempt={"candidate":candidate}
+        try:
+            closure=auto_pypi_library_acquisition._download_compatible_wheel_closure(candidate,ROOT)
+            contract=auto_pypi_library_acquisition._infer_codec_contract(candidate,closure,ROOT)
+            root_wheel=closure["root"]
+            source={
+              "type":"pypi",
+              "project":str(candidate.get("project") or candidate.get("name")),
+              "version":str(candidate.get("version")),
+              "metadata_url":str(candidate.get("metadata_url")),
+              "wheel_filename":root_wheel["filename"],
+              "wheel_sha256":root_wheel["sha256"],
+              "dependency_closure":closure["lock"],
+              "license":candidate.get("license"),
+            }
+            dependency=astra_runtime._ensure_pypi_dependency(source)
+            importlib.invalidate_caches()
+            module=importlib.import_module(contract["module"])
+            decoder=_resolve_callable(module,contract["decode_callable"])
+            observed=decoder(
+                output_path.read_bytes(),
+                **(contract.get("decode_kwargs") or {})
+            )
+            envelope_key=contract.get("envelope_key")
+            if envelope_key is not None:
+                key=str(envelope_key)
+                if not isinstance(observed,dict) or key not in observed:
+                    raise RuntimeError("INDEPENDENT_PYPI_VERIFIER_ENVELOPE_MISSING:"+key)
+                observed=observed[key]
+            expected=json.loads(fixture_path.read_text(encoding="utf-8"))
+            verified=observed==expected
+            attempt["project"]=source["project"]
+            attempt["version"]=source["version"]
+            attempt["verified"]=verified
+            if verified:
+                return {
+                  "verified":True,
+                  "implementation_independent":True,
+                  "supplier_class_independent":producer_source.get("type")!="pypi",
+                  "producer_source_type":producer_source.get("type"),
+                  "verifier_source_type":"pypi",
+                  "verifier_project":source["project"],
+                  "verifier_version":source["version"],
+                  "verifier_wheel_sha256":root_wheel["sha256"],
+                  "verifier_contract":{
+                    "module":contract["module"],
+                    "decode_callable":contract["decode_callable"],
+                  },
+                  "attempts":attempts+[attempt],
+                }
+        except Exception as exc:
+            attempt["error"]=type(exc).__name__+":"+str(exc)
+        attempts.append(attempt)
+    raise RuntimeError(
+        "NO_INDEPENDENT_PYPI_CODEC_VERIFIER:"
+        +json.dumps(attempts,sort_keys=True)[:4000]
+    )
+
+
 def _verify_pending_pypi(pending,result_path):
     entry=pending["registry_entry"]
     source=entry.get("source") or {}
@@ -167,6 +311,11 @@ def _verify_pending_pypi(pending,result_path):
     expected=json.loads(fixture_path.read_text(encoding="utf-8"))
     if decoded!=expected:
         raise RuntimeError("PENDING_PYPI_SEMANTIC_ROUNDTRIP_MISMATCH")
+    independent=_independent_npm_codec_verifier(
+        pending,fixture_path,output_path
+    )
+    if independent.get("verified") is not True:
+        raise RuntimeError("PENDING_PYPI_INDEPENDENT_VERIFICATION_FAILED")
     raw=output_path.read_bytes()
     result={
       "schema":"PROJECT_BRAIN_AUTO_BINDING_VERIFICATION_V1",
@@ -177,9 +326,11 @@ def _verify_pending_pypi(pending,result_path):
       "semantic_roundtrip":{
         "verified":True,
         "separate_decode_invocation":True,
-        "implementation_independent":False,
+        "producer_roundtrip_verified":True,
+        "implementation_independent":True,
         "module":contract["module"],
         "decode_callable":contract["decode_callable"],
+        "independent_verifier":independent,
       },
       "independent_output_sha256":hashlib.sha256(raw).hexdigest(),
       "independent_output_bytes":len(raw),
@@ -228,6 +379,11 @@ def _verify_pending_npm(pending,result_path):
     },ROOT)
     if decoded.get("verified") is not True:
         raise RuntimeError("PENDING_NPM_SEMANTIC_ROUNDTRIP_MISMATCH")
+    independent=_independent_pypi_codec_verifier(
+        pending,fixture_path,output_path
+    )
+    if independent.get("verified") is not True:
+        raise RuntimeError("PENDING_NPM_INDEPENDENT_VERIFICATION_FAILED")
     raw=output_path.read_bytes()
     result={
       "schema":"PROJECT_BRAIN_AUTO_BINDING_VERIFICATION_V1",
@@ -238,9 +394,11 @@ def _verify_pending_npm(pending,result_path):
       "semantic_roundtrip":{
         "verified":True,
         "fresh_node_decode_invocation":True,
-        "implementation_independent":False,
+        "producer_roundtrip_verified":True,
+        "implementation_independent":True,
         "package":contract["package"],
         "decode_export":contract["decode_export"],
+        "independent_verifier":independent,
       },
       "independent_output_sha256":hashlib.sha256(raw).hexdigest(),
       "independent_output_bytes":len(raw),
