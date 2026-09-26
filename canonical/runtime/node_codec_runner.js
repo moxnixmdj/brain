@@ -48,7 +48,24 @@ function toBuffer(value){
   if(ArrayBuffer.isView(value)) return Buffer.from(value.buffer,value.byteOffset,value.byteLength);
   throw new Error("ENCODER_DID_NOT_RETURN_BYTES");
 }
-function semanticallyEqual(a,b){ return JSON.stringify(a)===JSON.stringify(b); }
+function normalizeSemantic(value){
+  if(value instanceof Map){
+    const out={};
+    for(const [k,v] of value.entries()) out[String(k)]=normalizeSemantic(v);
+    return out;
+  }
+  if(Array.isArray(value)) return value.map(normalizeSemantic);
+  if(value && typeof value==="object"){
+    if(Buffer.isBuffer(value) || value instanceof ArrayBuffer || ArrayBuffer.isView(value)) return value;
+    const out={};
+    for(const [k,v] of Object.entries(value)) out[k]=normalizeSemantic(v);
+    return out;
+  }
+  return value;
+}
+function semanticallyEqual(a,b){
+  return JSON.stringify(normalizeSemantic(a))===JSON.stringify(normalizeSemantic(b));
+}
 
 async function main(){
   const cfg=JSON.parse(fs.readFileSync(0,"utf8"));
