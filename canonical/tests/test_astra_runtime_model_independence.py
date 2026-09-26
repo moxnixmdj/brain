@@ -50,6 +50,135 @@ class ModelIndependenceTests(unittest.TestCase):
         self.assertEqual(inherited["result_fields"],["value","output_path"])
 
 
+    def test_verified_capability_instances_bind_inputs_and_alias_effects(self):
+        fake_registry={
+            "test.fetch":{
+                "status":"VERIFIED_BOUND_CAPABILITY",
+                "requires":[],
+                "provides":["knowledge.observation.available"],
+                "cost":1,
+                "result_fields":["value","output_path"],
+                "action_template":{
+                    "type":"fetch_json_knowledge",
+                    "args":{
+                        "url":"${input.url}",
+                        "output_path":"${input.output_path}",
+                    },
+                },
+            }
+        }
+        problem={
+            "initial_facts":[],
+            "target_effects":[
+                "knowledge.observation.a.available",
+                "knowledge.observation.b.available",
+            ],
+            "inputs":{},
+            "capabilities":[],
+            "capability_instances":[
+                {
+                    "instance_id":"observe-a",
+                    "capability_id":"test.fetch",
+                    "inputs":{"url":"https://a.example/data","output_path":"a.json"},
+                    "provides_as":{
+                        "knowledge.observation.available":"knowledge.observation.a.available"
+                    },
+                },
+                {
+                    "instance_id":"observe-b",
+                    "capability_id":"test.fetch",
+                    "inputs":{"url":"https://b.example/data","output_path":"b.json"},
+                    "provides_as":{
+                        "knowledge.observation.available":"knowledge.observation.b.available"
+                    },
+                },
+            ],
+        }
+        with mock.patch.object(runtime,"_load_bound_capability_registry",return_value=fake_registry):
+            enriched=runtime._inherit_verified_capabilities(problem)
+        by_id={x["id"]:x for x in enriched["capabilities"]}
+        self.assertEqual(set(by_id),{"observe-a","observe-b"})
+        self.assertEqual(by_id["observe-a"]["source_capability_id"],"test.fetch")
+        self.assertEqual(by_id["observe-a"]["provides"],["knowledge.observation.a.available"])
+        self.assertEqual(by_id["observe-b"]["provides"],["knowledge.observation.b.available"])
+        self.assertEqual(by_id["observe-a"]["action"]["args"]["url"],"https://a.example/data")
+        self.assertEqual(by_id["observe-b"]["action"]["args"]["output_path"],"b.json")
+        self.assertEqual(
+            {x["instance_id"] for x in enriched["_instantiated_bound_capabilities"]},
+            {"observe-a","observe-b"},
+        )
+
+    def test_capability_instance_can_require_multiple_instances_of_one_declared_effect(self):
+        fake_registry={
+            "test.assess":{
+                "status":"VERIFIED_BOUND_CAPABILITY",
+                "requires":["knowledge.observation.available"],
+                "provides":["knowledge.assessment.available"],
+                "cost":1,
+                "result_fields":["status","output_path"],
+                "action_template":{
+                    "type":"assess_knowledge_consistency",
+                    "args":{"evidence_paths":"${input.evidence_paths}","output_path":"${input.output_path}"},
+                },
+            }
+        }
+        problem={
+            "initial_facts":[],
+            "target_effects":["knowledge.assessment.available"],
+            "capabilities":[],
+            "capability_instances":[{
+                "instance_id":"assess-two",
+                "capability_id":"test.assess",
+                "inputs":{
+                    "evidence_paths":["a.json","b.json"],
+                    "output_path":"assessment.json",
+                },
+                "requires_as":[
+                    {"effect":"knowledge.observation.available","as":"knowledge.observation.a.available"},
+                    {"effect":"knowledge.observation.available","as":"knowledge.observation.b.available"},
+                ],
+            }],
+        }
+        with mock.patch.object(runtime,"_load_bound_capability_registry",return_value=fake_registry):
+            enriched=runtime._inherit_verified_capabilities(problem)
+        cap=next(x for x in enriched["capabilities"] if x["id"]=="assess-two")
+        self.assertEqual(
+            cap["requires"],
+            ["knowledge.observation.a.available","knowledge.observation.b.available"],
+        )
+        self.assertEqual(cap["action"]["args"]["evidence_paths"],["a.json","b.json"])
+
+
+    def test_capability_instance_cannot_alias_undeclared_effect(self):
+        fake_registry={
+            "test.fetch":{
+                "status":"VERIFIED_BOUND_CAPABILITY",
+                "requires":[],
+                "provides":["knowledge.observation.available"],
+                "cost":1,
+                "result_fields":["value"],
+                "action_template":{"type":"list_tree","args":{"prefix":"canonical"}},
+            }
+        }
+        problem={
+            "initial_facts":[],
+            "target_effects":["invented.effect"],
+            "capabilities":[],
+            "capability_instances":[{
+                "instance_id":"bad-instance",
+                "capability_id":"test.fetch",
+                "inputs":{},
+                "provides_as":{"not.declared":"invented.effect"},
+            }],
+        }
+        with mock.patch.object(runtime,"_load_bound_capability_registry",return_value=fake_registry):
+            with self.assertRaisesRegex(
+                runtime.Blocker,
+                "CAPABILITY_INSTANCE_PROVIDES_ALIAS_SOURCE_UNKNOWN:bad-instance:not.declared",
+            ):
+                runtime._inherit_verified_capabilities(problem)
+
+
     def test_anonymous_controller_checkpoints_are_isolated_by_plan_hash(self):
         first=[
             {"type":"read_file","args":{"path":"canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md"}},
