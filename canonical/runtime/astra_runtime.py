@@ -4286,13 +4286,74 @@ def _semantic_goal_contract(step,mission,goal):
     }
 
 
+def _load_capability_proposal_generators():
+    path=pathlib.Path(__file__).resolve().with_name("capability_proposal_generators.py")
+    spec=importlib.util.spec_from_file_location(
+        "project_brain_capability_proposal_generators",path
+    )
+    if spec is None or spec.loader is None:
+        raise Blocker("CAPABILITY_PROPOSAL_GENERATOR_MODULE_LOAD_FAILED")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    return module
+
+
 def _capability_problem_proposal(step,mission,goal):
     proposal=step.get("capability_problem_proposal")
     ref=step.get("capability_problem_proposal_ref")
     if proposal is None and ref:
         proposal=mission.get(ref)
+    proposal_generation=None
     if proposal is None:
-        return None
+        generator_id=str(step.get("capability_proposal_generator") or "").strip()
+        if not generator_id:
+            return None
+        verified_initial_for_generation=step.get("verified_initial_facts") or []
+        if (
+            not isinstance(verified_initial_for_generation,list)
+            or any(
+                not isinstance(x,str) or not x.strip()
+                for x in verified_initial_for_generation
+            )
+        ):
+            raise Blocker("CAPABILITY_PROPOSAL_VERIFIED_INITIAL_FACTS_INVALID")
+        semantic_contract_for_generation=_semantic_goal_contract(step,mission,goal)
+        required_for_generation=step.get("required_target_effects")
+        if required_for_generation is None and semantic_contract_for_generation is not None:
+            required_for_generation=semantic_contract_for_generation.get("target_effects")
+        elif required_for_generation is not None and semantic_contract_for_generation is not None:
+            explicit_targets=sorted({
+                str(x).strip() for x in required_for_generation
+                if isinstance(x,str) and x.strip()
+            }) if isinstance(required_for_generation,list) else []
+            semantic_targets=sorted(set(
+                semantic_contract_for_generation.get("target_effects") or []
+            ))
+            if explicit_targets!=semantic_targets:
+                raise Blocker("SEMANTIC_GOAL_CONTRACT_CONFLICTS_WITH_FROZEN_TARGETS")
+        if (
+            not isinstance(required_for_generation,list)
+            or not required_for_generation
+            or any(not isinstance(x,str) or not x.strip() for x in required_for_generation)
+        ):
+            raise Blocker("CAPABILITY_PROPOSAL_REQUIRED_TARGET_EFFECTS_INVALID")
+        module=_load_capability_proposal_generators()
+        try:
+            proposal,proposal_generation=module.generate(
+                generator_id,
+                goal,
+                [str(x).strip() for x in required_for_generation],
+                [str(x).strip() for x in verified_initial_for_generation],
+                _load_bound_capability_registry(),
+                ROOT,
+                pathlib.Path(__file__).resolve().parent,
+            )
+        except Exception as exc:
+            raise Blocker(
+                "CAPABILITY_PROPOSAL_GENERATION_FAILED:"
+                +generator_id+":"+type(exc).__name__+":"+str(exc)
+            ) from exc
     if not isinstance(proposal,dict):
         raise Blocker("CAPABILITY_PROPOSAL_INVALID")
     allowed_keys={
@@ -4390,6 +4451,7 @@ def _capability_problem_proposal(step,mission,goal):
       "_proposal_contract":"GOAL_BOUND__CLAUSE_COVERED__VERIFIED_REGISTRY_REFERENCES_ONLY",
       "_goal_binding":goal_binding,
       "_semantic_goal_contract":semantic_contract,
+      "_proposal_generation":proposal_generation,
     }
 
 
@@ -4408,6 +4470,8 @@ def _run_verified_capability_proposal(step,mission,goal):
     result["goal_binding"]=problem["_goal_binding"]
     if problem.get("_semantic_goal_contract") is not None:
         result["semantic_goal_contract"]=problem["_semantic_goal_contract"]
+    if problem.get("_proposal_generation") is not None:
+        result["proposal_generation"]=problem["_proposal_generation"]
     return result
 
 def _load_capability_planner():

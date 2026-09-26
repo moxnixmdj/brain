@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-AUTO-SEMANTIC-PROPOSAL-CROSSPLATFORM-001",
+  "purpose": "Cross-platform architecture smoke test: derive the target effect and a constrained single-capability proposal from an ordinary goal with no mission-authored target, semantic proposal, capability proposal, or controller actions, then execute an already-independent stdlib verifier.",
+  "goal": "Verify canonical/astra_runtime/tmp/DOCX_INTENT_VERIFY.docx independently against its stored raw intent.",
+  "steps": [
+    {
+      "id": "execute-crossplatform-auto-semantic-auto-proposal",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "verified_initial_facts": [],
+      "semantic_goal_authority_generators": [
+        "registry-effect-lexical-v1",
+        "compiler-score-v1"
+      ],
+      "semantic_authority_policy": {
+        "min_distinct_authority_classes": 2,
+        "authorities": {
+          "registry-effect-lexical-v1": "independent-registry-effect-lexical",
+          "compiler-score-v1": "existing-goal-compiler-generic-score"
+        }
+      },
+      "capability_proposal_generator": "single-verified-capability-v1",
+      "max_controller_actions": 6,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "AUTO_VERIFIED_CAPABILITY_PROPOSAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "required_target_effects_supplied_by_mission": false,
+    "semantic_goal_proposals_supplied_by_mission": false,
+    "capability_problem_proposal_supplied_by_mission": false,
+    "controller_actions_supplied_by_mission": false,
+    "task_specific_compiler_forbidden": true,
+    "generated_executable_actions_forbidden": true,
+    "expected_target_effect": "docx.document.verify",
+    "expected_verified_capability": "docx.document.verify.intent_ooxml",
+    "expected_platforms": [
+      "linux",
+      "windows",
+      "darwin"
+    ],
+    "verifier_is_producer_independent": true,
+    "committed_input_artifact": "canonical/astra_runtime/tmp/DOCX_INTENT_VERIFY.docx"
+  }
+}
