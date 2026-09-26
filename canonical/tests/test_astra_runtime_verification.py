@@ -73,5 +73,43 @@ class RuntimeVerificationTests(unittest.TestCase):
                 with self.assertRaisesRegex(runtime.Blocker,"MISSION_PATH_OUTSIDE_ROOT"):
                     runtime._canonical_mission_path("../outside.json")
 
+
+    def test_supervisor_binding_attaches_only_to_fresh_state(self):
+        state={"history":[],"next_step":0}
+        out=runtime._bind_supervisor_identity(state,"AGENT-1","TASK-1")
+        self.assertEqual(out["supervisor_agent_id"],"AGENT-1")
+        self.assertEqual(out["supervisor_task_id"],"TASK-1")
+
+    def test_supervisor_bound_state_requires_same_identity(self):
+        state={
+            "history":[],"next_step":0,
+            "supervisor_agent_id":"AGENT-1",
+            "supervisor_task_id":"TASK-1",
+        }
+        with self.assertRaisesRegex(runtime.Blocker,"STATE_SUPERVISOR_AGENT_ID_MISMATCH"):
+            runtime._bind_supervisor_identity(dict(state),"AGENT-2","TASK-1")
+        with self.assertRaisesRegex(runtime.Blocker,"STATE_SUPERVISOR_TASK_ID_MISMATCH"):
+            runtime._bind_supervisor_identity(dict(state),"AGENT-1","TASK-2")
+        with self.assertRaisesRegex(runtime.Blocker,"SUPERVISOR_BINDING_REQUIRED_FOR_BOUND_STATE"):
+            runtime._bind_supervisor_identity(dict(state),None,None)
+
+    def test_nonfresh_unbound_state_cannot_be_retroactively_claimed(self):
+        state={"history":[{"step_index":0}],"next_step":1}
+        with self.assertRaisesRegex(runtime.Blocker,"STATE_SUPERVISOR_BINDING_MISSING_ON_NONFRESH_STATE"):
+            runtime._bind_supervisor_identity(state,"AGENT-1","TASK-1")
+
+    def test_supervisor_env_binding_requires_both_fields(self):
+        with mock.patch.dict(runtime.os.environ,{
+            "PROJECT_BRAIN_AGENT_ID":"AGENT-1",
+            "PROJECT_BRAIN_TASK_ID":"TASK-1",
+        },clear=False):
+            self.assertEqual(runtime._supervisor_binding_from_env(),("AGENT-1","TASK-1"))
+        with mock.patch.dict(runtime.os.environ,{
+            "PROJECT_BRAIN_AGENT_ID":"AGENT-1",
+            "PROJECT_BRAIN_TASK_ID":"",
+        },clear=False):
+            with self.assertRaisesRegex(runtime.Blocker,"SUPERVISOR_BINDING_INCOMPLETE"):
+                runtime._supervisor_binding_from_env()
+
 if __name__=="__main__":
     unittest.main(verbosity=2)

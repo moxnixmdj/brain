@@ -46,6 +46,34 @@ def sha_file(p):
 class Blocker(RuntimeError):
     pass
 
+
+def _supervisor_binding_from_env():
+    agent_id=str(os.environ.get("PROJECT_BRAIN_AGENT_ID") or "").strip() or None
+    task_id=str(os.environ.get("PROJECT_BRAIN_TASK_ID") or "").strip() or None
+    if (agent_id is None) != (task_id is None):
+        raise Blocker("SUPERVISOR_BINDING_INCOMPLETE")
+    return agent_id,task_id
+
+
+def _bind_supervisor_identity(state,agent_id,task_id):
+    prior_agent=state.get("supervisor_agent_id")
+    prior_task=state.get("supervisor_task_id")
+    if prior_agent is not None or prior_task is not None:
+        if not agent_id or not task_id:
+            raise Blocker("SUPERVISOR_BINDING_REQUIRED_FOR_BOUND_STATE")
+        if prior_agent!=agent_id:
+            raise Blocker("STATE_SUPERVISOR_AGENT_ID_MISMATCH")
+        if prior_task!=task_id:
+            raise Blocker("STATE_SUPERVISOR_TASK_ID_MISMATCH")
+        return state
+    if not agent_id and not task_id:
+        return state
+    if state.get("history") or int(state.get("next_step",0) or 0)>0:
+        raise Blocker("STATE_SUPERVISOR_BINDING_MISSING_ON_NONFRESH_STATE")
+    state["supervisor_agent_id"]=agent_id
+    state["supervisor_task_id"]=task_id
+    return state
+
 def _resolve_bash_executable():
     candidates=[shutil.which("bash")]
     if os.name=="nt":
@@ -5284,6 +5312,7 @@ def main():
     mid=mission["mission_id"]
     mission_sha256=sha_file(mission_path)
     mission["_runtime_mission_path"]=mission_rel
+    supervisor_agent_id,supervisor_task_id=_supervisor_binding_from_env()
     state_path=STATE_DIR/f"{mid}.json"
     state=readj(state_path) if state_path.exists() else {
       "schema":"PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
@@ -5293,6 +5322,7 @@ def main():
     }
     if state.get("mission_id") != mid:
         raise Blocker("STATE_MISSION_ID_MISMATCH")
+    state=_bind_supervisor_identity(state,supervisor_agent_id,supervisor_task_id)
     stored_mission_path=str(state.get("mission_path") or mission_rel)
     try:
         stored_mission_resolved,_stored_rel=_canonical_mission_path(stored_mission_path)
@@ -5410,6 +5440,8 @@ def main():
       "schema":"PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
       "mission_id":mid,"mission_path":a.mission,"mission_sha256":mission_sha256,
       "runtime_id":"ASTRA_RUNTIME_V1_SHARED",
+      "supervisor_agent_id":state.get("supervisor_agent_id"),
+      "supervisor_task_id":state.get("supervisor_task_id"),
       "status":"COMPLETE","steps_completed":len(state["history"]),
       "state_sha256":sha_file(state_path),"completed_at_utc":utc()
     }
