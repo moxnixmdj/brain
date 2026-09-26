@@ -1,0 +1,16 @@
+{
+  "schema": "PROJECT_BRAIN_EXECUTOR_POLICY_V1",
+  "authority": "provider_neutral",
+  "laws": [
+    "No executor identity, device, provider, or machine is canonical authority.",
+    "Executors are disposable transports for a content-addressed verification capsule.",
+    "Admission requires status AVAILABLE, exact platform compatibility when required, incremental_spend_usd == 0, and hard_zero_spend == true.",
+    "If no executor is admissible, terminalize as EXECUTOR_UNAVAILABLE; never silently create billable infrastructure.",
+    "Platform-specific proof is a scoped certification requirement and must not globally block platform-neutral work.",
+    "GPU and heavy-compute use are forbidden unless the capsule explicitly permits them."
+  ],
+  "laptop_policy": {
+    "canonical_dependency": false,
+    "named_devices_are_optional": true
+  }
+}
