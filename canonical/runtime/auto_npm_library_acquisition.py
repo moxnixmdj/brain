@@ -62,11 +62,16 @@ def _slug(value):
     return re.sub(r"[^a-z0-9._-]+","-",str(value).lower()).strip("-_.") or "package"
 
 
-def _search_registry(goal,limit=30,timeout_s=20):
-    formats=_format_tokens(goal)
-    if not formats:
-        raise AutoNpmAcquisitionFailure("NPM_OUTPUT_FORMAT_REQUIRED")
-    query=formats[0]
+def _search_registry(goal,limit=30,timeout_s=20,format_hint=None):
+    if format_hint is not None:
+        query=str(format_hint or "").strip().lower()
+        if not re.fullmatch(r"[a-z0-9][a-z0-9._+-]{0,40}",query):
+            raise AutoNpmAcquisitionFailure("NPM_OUTPUT_FORMAT_INVALID",query)
+    else:
+        formats=_format_tokens(goal)
+        if not formats:
+            raise AutoNpmAcquisitionFailure("NPM_OUTPUT_FORMAT_REQUIRED")
+        query=formats[0]
     url="https://registry.npmjs.org/-/v1/search?"+urllib.parse.urlencode({"text":query,"size":min(max(int(limit),1),100)})
     req=urllib.request.Request(url,headers={"User-Agent":"ProjectBrain-NpmAcquisition/1"})
     try:
