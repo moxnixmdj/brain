@@ -4056,6 +4056,178 @@ def _validate_proposal_goal_binding(goal,proposal,required_targets):
     }
 
 
+def _semantic_candidate_signature(goal,candidate,known_effects):
+    if not isinstance(candidate,dict):
+        raise Blocker("SEMANTIC_GOAL_CANDIDATE_INVALID")
+    allowed={"authority_id","goal_sha256","target_effects","clauses"}
+    extra=sorted(str(k) for k in candidate if str(k) not in allowed)
+    if extra:
+        raise Blocker("SEMANTIC_GOAL_CANDIDATE_FIELD_REJECTED:"+",".join(extra))
+    authority_id=str(candidate.get("authority_id") or "").strip()
+    if not authority_id:
+        raise Blocker("SEMANTIC_GOAL_AUTHORITY_ID_REQUIRED")
+    actual_sha=hashlib.sha256(goal.encode("utf-8")).hexdigest()
+    if str(candidate.get("goal_sha256") or "").lower()!=actual_sha:
+        raise Blocker("SEMANTIC_GOAL_HASH_MISMATCH:"+authority_id)
+    targets=candidate.get("target_effects")
+    if (
+        not isinstance(targets,list) or not targets
+        or any(not isinstance(x,str) or not x.strip() for x in targets)
+    ):
+        raise Blocker("SEMANTIC_GOAL_TARGETS_INVALID:"+authority_id)
+    targets=sorted(set(str(x).strip() for x in targets))
+    unknown=sorted(set(targets)-set(known_effects))
+    if unknown:
+        raise Blocker(
+            "SEMANTIC_GOAL_TARGET_UNKNOWN:"+authority_id+":"+",".join(unknown)
+        )
+    clauses=candidate.get("clauses")
+    if not isinstance(clauses,list) or not clauses:
+        raise Blocker("SEMANTIC_GOAL_CLAUSES_REQUIRED:"+authority_id)
+    covered=[False]*len(goal)
+    target_positions={target:set() for target in targets}
+    for index,clause in enumerate(clauses):
+        if not isinstance(clause,dict):
+            raise Blocker("SEMANTIC_GOAL_CLAUSE_INVALID:"+authority_id+":"+str(index))
+        if set(clause)-{"start","end","text","target_effects"}:
+            raise Blocker("SEMANTIC_GOAL_CLAUSE_FIELD_REJECTED:"+authority_id+":"+str(index))
+        try:
+            start=int(clause.get("start"))
+            end=int(clause.get("end"))
+        except Exception as exc:
+            raise Blocker("SEMANTIC_GOAL_CLAUSE_SPAN_INVALID:"+authority_id+":"+str(index)) from exc
+        if start<0 or end<=start or end>len(goal):
+            raise Blocker("SEMANTIC_GOAL_CLAUSE_SPAN_INVALID:"+authority_id+":"+str(index))
+        if goal[start:end]!=str(clause.get("text") or ""):
+            raise Blocker("SEMANTIC_GOAL_CLAUSE_TEXT_MISMATCH:"+authority_id+":"+str(index))
+        clause_targets=clause.get("target_effects")
+        if (
+            not isinstance(clause_targets,list) or not clause_targets
+            or any(not isinstance(x,str) or not x.strip() for x in clause_targets)
+        ):
+            raise Blocker("SEMANTIC_GOAL_CLAUSE_TARGETS_INVALID:"+authority_id+":"+str(index))
+        normalized=[str(x).strip() for x in clause_targets]
+        bad=sorted(set(normalized)-set(targets))
+        if bad:
+            raise Blocker(
+                "SEMANTIC_GOAL_CLAUSE_TARGET_UNKNOWN:"
+                +authority_id+":"+str(index)+":"+",".join(bad)
+            )
+        for pos in range(start,end):
+            covered[pos]=True
+            for target in normalized:
+                target_positions[target].add(pos)
+    for pos,ch in enumerate(goal):
+        if not ch.isspace() and not covered[pos]:
+            raise Blocker("SEMANTIC_GOAL_TEXT_UNCOVERED:"+authority_id+":"+str(pos))
+    missing=sorted(target for target,positions in target_positions.items() if not positions)
+    if missing:
+        raise Blocker(
+            "SEMANTIC_GOAL_TARGET_UNCOVERED:"+authority_id+":"+",".join(missing)
+        )
+    normalized_grounding={
+      target:[pos for pos in sorted(target_positions[target]) if not goal[pos].isspace()]
+      for target in targets
+    }
+    signature_payload={
+      "target_effects":targets,
+      "grounding":normalized_grounding,
+    }
+    signature=json.dumps(
+        signature_payload,sort_keys=True,separators=(",",":"),ensure_ascii=False
+    )
+    return {
+      "authority_id":authority_id,
+      "target_effects":targets,
+      "grounding":normalized_grounding,
+      "signature":signature,
+      "signature_sha256":hashlib.sha256(signature.encode("utf-8")).hexdigest(),
+      "goal_sha256":actual_sha,
+    }
+
+
+def _semantic_goal_contract(step,mission,goal):
+    candidates=step.get("semantic_goal_proposals")
+    ref=step.get("semantic_goal_proposals_ref")
+    if candidates is None and ref:
+        candidates=mission.get(ref)
+    if candidates is None:
+        return None
+    if not isinstance(candidates,list) or not candidates:
+        raise Blocker("SEMANTIC_GOAL_PROPOSALS_INVALID")
+    policy=step.get("semantic_authority_policy")
+    policy_ref=step.get("semantic_authority_policy_ref")
+    if policy is None and policy_ref:
+        policy=mission.get(policy_ref)
+    if not isinstance(policy,dict):
+        raise Blocker("SEMANTIC_GOAL_AUTHORITY_POLICY_REQUIRED")
+    authorities=policy.get("authorities")
+    if not isinstance(authorities,dict) or not authorities:
+        raise Blocker("SEMANTIC_GOAL_AUTHORITIES_INVALID")
+    normalized_authorities={}
+    for authority_id,authority_class in authorities.items():
+        aid=str(authority_id).strip()
+        aclass=str(authority_class).strip()
+        if not aid or not aclass:
+            raise Blocker("SEMANTIC_GOAL_AUTHORITY_INVALID")
+        normalized_authorities[aid]=aclass
+    try:
+        minimum=int(policy.get("min_distinct_authority_classes") or 2)
+    except Exception as exc:
+        raise Blocker("SEMANTIC_GOAL_QUORUM_INVALID") from exc
+    if minimum<2 or minimum>len(set(normalized_authorities.values())):
+        raise Blocker("SEMANTIC_GOAL_QUORUM_INVALID")
+    registry=_load_bound_capability_registry()
+    known_effects=set()
+    for entry in registry.values():
+        if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
+            continue
+        for effect in entry.get("provides") or []:
+            if isinstance(effect,str) and effect.strip():
+                known_effects.add(effect.strip())
+    if not known_effects:
+        raise Blocker("SEMANTIC_GOAL_EFFECT_VOCABULARY_EMPTY")
+    groups={}
+    seen_authorities=set()
+    for raw in candidates:
+        parsed=_semantic_candidate_signature(goal,raw,known_effects)
+        authority_id=parsed["authority_id"]
+        if authority_id in seen_authorities:
+            raise Blocker("SEMANTIC_GOAL_AUTHORITY_DUPLICATE:"+authority_id)
+        seen_authorities.add(authority_id)
+        if authority_id not in normalized_authorities:
+            raise Blocker("SEMANTIC_GOAL_AUTHORITY_NOT_ALLOWED:"+authority_id)
+        authority_class=normalized_authorities[authority_id]
+        group=groups.setdefault(parsed["signature"],{
+          "parsed":parsed,
+          "authority_ids":[],
+          "authority_classes":set(),
+        })
+        group["authority_ids"].append(authority_id)
+        group["authority_classes"].add(authority_class)
+    quorum=[
+        group for group in groups.values()
+        if len(group["authority_classes"])>=minimum
+    ]
+    if not quorum:
+        raise Blocker("SEMANTIC_GOAL_QUORUM_NOT_REACHED")
+    if len(quorum)>1:
+        raise Blocker("SEMANTIC_GOAL_QUORUM_AMBIGUOUS")
+    selected=quorum[0]
+    parsed=selected["parsed"]
+    return {
+      "schema":"PROJECT_BRAIN_SEMANTIC_GOAL_CONTRACT_V1",
+      "goal_sha256":parsed["goal_sha256"],
+      "target_effects":parsed["target_effects"],
+      "grounding":parsed["grounding"],
+      "signature_sha256":parsed["signature_sha256"],
+      "authority_ids":sorted(selected["authority_ids"]),
+      "authority_classes":sorted(selected["authority_classes"]),
+      "minimum_distinct_authority_classes":minimum,
+      "status":"QUORUM_VERIFIED",
+    }
+
+
 def _capability_problem_proposal(step,mission,goal):
     proposal=step.get("capability_problem_proposal")
     ref=step.get("capability_problem_proposal_ref")
@@ -4073,7 +4245,18 @@ def _capability_problem_proposal(step,mission,goal):
     if unknown:
         raise Blocker("CAPABILITY_PROPOSAL_TOP_LEVEL_FIELD_REJECTED:"+",".join(unknown))
     verified_initial=step.get("verified_initial_facts") or []
-    required_targets=step.get("required_target_effects") or []
+    semantic_contract=_semantic_goal_contract(step,mission,goal)
+    required_targets=step.get("required_target_effects")
+    if required_targets is None and semantic_contract is not None:
+        required_targets=semantic_contract.get("target_effects")
+    elif required_targets is not None and semantic_contract is not None:
+        raw_required=[
+            str(x).strip() for x in required_targets
+            if isinstance(x,str) and x.strip()
+        ] if isinstance(required_targets,list) else []
+        if sorted(set(raw_required))!=sorted(set(semantic_contract.get("target_effects") or [])):
+            raise Blocker("SEMANTIC_GOAL_CONTRACT_CONFLICTS_WITH_FROZEN_TARGETS")
+    required_targets=required_targets or []
     if (
         not isinstance(verified_initial,list)
         or any(not isinstance(x,str) or not x.strip() for x in verified_initial)
@@ -4148,6 +4331,7 @@ def _capability_problem_proposal(step,mission,goal):
       "max_expansions":max_expansions,
       "_proposal_contract":"GOAL_BOUND__CLAUSE_COVERED__VERIFIED_REGISTRY_REFERENCES_ONLY",
       "_goal_binding":goal_binding,
+      "_semantic_goal_contract":semantic_contract,
     }
 
 
@@ -4163,6 +4347,9 @@ def _run_verified_capability_proposal(step,mission,goal):
     if result is None:
         raise Blocker("CAPABILITY_PROPOSAL_EXECUTION_MISSING")
     result["proposal_contract"]=problem["_proposal_contract"]
+    result["goal_binding"]=problem["_goal_binding"]
+    if problem.get("_semantic_goal_contract") is not None:
+        result["semantic_goal_contract"]=problem["_semantic_goal_contract"]
     return result
 
 def _load_capability_planner():
