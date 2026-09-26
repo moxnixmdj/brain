@@ -4485,7 +4485,6 @@ def compile_goal(goal, registry, root):
     goal=str(goal or "").strip()
     if not goal:
         raise GoalCompilationFailure("GOAL_REQUIRED")
-    registry=_platform_admissible_registry(registry)
     browser_interaction=_compile_verified_browser_interaction(goal,registry,root)
     if browser_interaction is not None:
         return _validate_compiled_clause_coverage(browser_interaction)
