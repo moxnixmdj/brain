@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_PARTIAL_EXECUTION_RECEIPT_V1",
+  "receipt_id": "PR20-PARTIAL-FUNCTION-SLICE-EXECUTION-20260927",
+  "target_revision": "05eaaf0cab39e3e3c392cf57ef38af56cb36fde7",
+  "executor": {
+    "id": "chatgpt-session-container",
+    "platform": "linux",
+    "incremental_spend_usd": 0
+  },
+  "scope": "partial_function_slice_execution_only",
+  "pr_level_state_advance": false,
+  "executions": [
+    {
+      "source_file": "canonical/runtime/astra_runtime.py",
+      "source_blob_sha": "5a59e063ebbe72d83984eb261e37d5e445c0c94d",
+      "exercised_functions": [
+        "_canonical_mission_path",
+        "_resolve_bash_executable",
+        "run_shell",
+        "verify"
+      ],
+      "observed_checks": 6,
+      "passed": 6,
+      "stdout_sha256": "d16dc7a26b1f45127aa27120ced14782fd11307694a73b01713ed48684ea9057",
+      "claims": [
+        "nonzero shell exit cannot be hidden by stdout marker",
+        "zero exit plus marker passes",
+        "explicit nonzero override passes",
+        "AST parser availability",
+        "Windows/POSIX slash-equivalent mission identity",
+        "repository escape rejection"
+      ]
+    },
+    {
+      "source_file": "canonical/runtime/auto_pypi_library_acquisition.py",
+      "source_blob_sha": "613b8c815b4ab84863b0a36fb31e090a3725f9d9",
+      "exercised_functions": [
+        "_infer_codec_contract"
+      ],
+      "observed_checks": 3,
+      "passed": 3,
+      "stdout_sha256": "c018c6d1f85f40d8209bd20ea2b8c0a184bd36501140b59d589ff1a042b32817",
+      "claims": [
+        "candidate codec probe uses fresh child Python interpreter",
+        "parent receives only verified JSON contract",
+        "probe isolation attestation is fresh_child_python_process"
+      ]
+    }
+  ],
+  "limitations": [
+    "The full private repository was not materialized into this executor.",
+    "The exact PR20 verification capsule was not executed.",
+    "Stacked regressions and full canonical suite were not run.",
+    "This receipt must not advance the PR-level evidence ledger from IMPLEMENTED to EXECUTED."
+  ],
+  "fail_closed": true
+}
