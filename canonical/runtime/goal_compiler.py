@@ -196,24 +196,38 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                 }
                 wanted=suffix_map.get(stem)
                 if wanted is None and stem=="output":
-                    semantic_blob=" ".join(
-                        [str(x) for x in entry.get("provides",[])]
-                        +[str(x) for x in entry.get("keywords",[])]
-                        +[str(entry.get("adapter_module") or "")]
-                    ).lower()
-                    semantic_suffixes=[
-                      (("xlsx","spreadsheet","workbook"),{".xlsx"}),
-                      (("docx","word"),{".docx"}),
-                      (("pdf",),{".pdf"}),
-                      (("sqlite","database"),{".sqlite",".db",".sqlite3"}),
-                      (("json",),{".json"}),
-                      (("markdown",),{".md",".markdown"}),
-                      (("png","qr","barcode","image"),{".png",".jpg",".jpeg",".webp"}),
-                    ]
-                    for markers,suffix_set in semantic_suffixes:
-                        if any(marker in semantic_blob for marker in markers):
-                            wanted=suffix_set
-                            break
+                    declared_formats=sorted(set(
+                        str(effect)[len("structured.binary.encode."):]
+                        for effect in (entry.get("provides") or [])
+                        if str(effect).startswith("structured.binary.encode.")
+                        and str(effect)!="structured.binary.encode"
+                    ))
+                    if len(declared_formats)==1:
+                        wanted={"."+declared_formats[0].lower().lstrip(".")}
+                    elif len(declared_formats)>1:
+                        raise GoalCompilationFailure(
+                            "GOAL_OUTPUT_FORMAT_AMBIGUOUS",
+                            json.dumps(declared_formats,sort_keys=True)
+                        )
+                    else:
+                        semantic_blob=" ".join(
+                            [str(x) for x in entry.get("provides",[])]
+                            +[str(x) for x in entry.get("keywords",[])]
+                            +[str(entry.get("adapter_module") or "")]
+                        ).lower()
+                        semantic_suffixes=[
+                          (("xlsx","spreadsheet","workbook"),{".xlsx"}),
+                          (("docx","word"),{".docx"}),
+                          (("pdf",),{".pdf"}),
+                          (("sqlite","database"),{".sqlite",".db",".sqlite3"}),
+                          (("json",),{".json"}),
+                          (("markdown",),{".md",".markdown"}),
+                          (("png","qr","barcode","image"),{".png",".jpg",".jpeg",".webp"}),
+                        ]
+                        for markers,suffix_set in semantic_suffixes:
+                            if any(marker in semantic_blob for marker in markers):
+                                wanted=suffix_set
+                                break
                 if wanted:
                     matching=[raw for raw,p in paths if p.suffix.lower() in wanted]
                     future_matching=[raw for raw,p in future_paths if p.suffix.lower() in wanted]
