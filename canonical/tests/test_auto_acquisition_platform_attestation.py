@@ -19,6 +19,8 @@ def load(name,path):
 
 pypi=load("project_brain_test_platform_pypi",RUNTIME_DIR/"auto_pypi_library_acquisition.py")
 npm=load("project_brain_test_platform_npm",RUNTIME_DIR/"auto_npm_library_acquisition.py")
+compiler=load("project_brain_test_platform_compiler",RUNTIME_DIR/"goal_compiler.py")
+promoter=load("project_brain_test_platform_promoter",RUNTIME_DIR/"promote_pending_binding.py")
 
 
 class AutoAcquisitionPlatformAttestationTests(unittest.TestCase):
@@ -88,6 +90,82 @@ class AutoAcquisitionPlatformAttestationTests(unittest.TestCase):
             out=npm.dispatch(goal,"TEST-NPM-PLATFORM","canonical/astra_runtime/missions/TEST.json",td)
             pending=json.loads((pathlib.Path(td)/out["pending_binding_path"]).read_text(encoding="utf-8"))
         self.assertEqual(pending["registry_entry"]["platforms"],["windows"])
+
+
+    def test_compiler_excludes_explicitly_inapplicable_platforms(self):
+        registry={
+            "linux.only":{
+                "status":"VERIFIED_BOUND_CAPABILITY","platforms":["linux"],
+                "provides":["demo.effect"],"requires":[],"keywords":["demo"],
+                "action_template":{"type":"invoke_capability","args":{"capability_id":"linux.only"}},
+            },
+            "windows.ok":{
+                "status":"VERIFIED_BOUND_CAPABILITY","platforms":["windows"],
+                "provides":["demo.effect"],"requires":[],"keywords":["demo"],
+                "action_template":{"type":"invoke_capability","args":{"capability_id":"windows.ok"}},
+            },
+            "legacy.no.platform":{
+                "status":"VERIFIED_BOUND_CAPABILITY",
+                "provides":["legacy.effect"],"requires":[],"keywords":["legacy"],
+                "action_template":{"type":"invoke_capability","args":{"capability_id":"legacy.no.platform"}},
+            },
+        }
+        with mock.patch.object(compiler.sys,"platform","win32"):
+            filtered=compiler._platform_admissible_registry(registry)
+        self.assertNotIn("linux.only",filtered)
+        self.assertIn("windows.ok",filtered)
+        self.assertIn("legacy.no.platform",filtered)
+
+    def test_compiler_platform_normalization_fails_closed(self):
+        with mock.patch.object(compiler.sys,"platform","plan9"):
+            with self.assertRaisesRegex(compiler.GoalCompilationFailure,"GOAL_COMPILATION_PLATFORM_UNSUPPORTED"):
+                compiler._platform_admissible_registry({})
+
+    def test_promotion_rejects_same_implementation_roundtrip(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=pathlib.Path(td)
+            runtime_dir=root/"canonical"/"runtime"
+            mission_dir=root/"canonical"/"astra_runtime"/"missions"
+            evidence_dir=root/"canonical"/"astra_runtime"/"evidence"
+            pending_dir=root/"canonical"/"astra_runtime"/"pending_bindings"
+            for p in (runtime_dir,mission_dir,evidence_dir,pending_dir):
+                p.mkdir(parents=True,exist_ok=True)
+            registry_path=runtime_dir/"BOUND_CAPABILITY_REGISTRY_V1.json"
+            registry_path.write_text(json.dumps({"schema":"PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1","capabilities":{}}),encoding="utf-8")
+            mission_path=mission_dir/"ORIGIN.json"
+            mission_path.write_text('{"goal":"immutable"}\n',encoding="utf-8")
+            pending_path=pending_dir/"pending.json"
+            verify_path=evidence_dir/"verify.json"
+            pending={
+                "schema":"PROJECT_BRAIN_PENDING_AUTO_BINDING_V1",
+                "capability_id":"auto.test",
+                "origin_mission_path":"canonical/astra_runtime/missions/ORIGIN.json",
+                "verification_mission_id":"VERIFY-AUTO-TEST",
+                "registry_entry":{
+                    "status":"BOUND_PENDING_INDEPENDENT_VERIFICATION",
+                    "source":{"type":"pypi"},
+                    "action_template":{"type":"invoke_capability","args":{"capability_id":"auto.test"}},
+                },
+            }
+            verified={
+                "schema":"PROJECT_BRAIN_AUTO_BINDING_VERIFICATION_V1",
+                "capability_id":"auto.test",
+                "verification_mission_id":"VERIFY-AUTO-TEST",
+                "independent_verified":True,
+                "semantic_roundtrip":{"verified":True,"implementation_independent":False},
+            }
+            pending_path.write_text(json.dumps(pending),encoding="utf-8")
+            verify_path.write_text(json.dumps(verified),encoding="utf-8")
+            argv=["promote_pending_binding.py",
+                  "canonical/astra_runtime/pending_bindings/pending.json",
+                  "canonical/astra_runtime/evidence/verify.json"]
+            with (
+                mock.patch.object(promoter,"ROOT",root),
+                mock.patch.object(promoter,"REGISTRY",registry_path),
+                mock.patch.object(sys,"argv",argv),
+            ):
+                with self.assertRaisesRegex(RuntimeError,"VERIFICATION_IMPLEMENTATION_NOT_INDEPENDENT"):
+                    promoter.main()
 
 
 if __name__=="__main__":
