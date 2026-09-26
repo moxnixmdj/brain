@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import importlib.util
 import pathlib
+import sys
 import unittest
 
 ROOT=pathlib.Path(__file__).resolve().parents[1]
