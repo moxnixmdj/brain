@@ -1,0 +1,96 @@
+{
+  "schema": "PROJECT_BRAIN_VERIFICATION_CAPSULE_V1",
+  "capsule_id": "PR15-BLIND-AUTO-ACQUIRE-CBOR-WINDOWS-001",
+  "repository": "moxnixmdj/brain",
+  "code_revision": "e5e3fb17048a0bc0afdee0a04e7ef754edc2d725",
+  "base_revision": "fa8796f324ec029883e5dc861ab5ca5ca0a39864",
+  "branch": "research/auto-acquisition-platform-attestation-20260926",
+  "incremental_spend_usd": 0,
+  "executor_policy": {
+    "required_platform": "windows",
+    "gpu_allowed": false,
+    "heavy_compute_allowed": false,
+    "safe_light_duty_only": true,
+    "billable_cloud_creation_allowed": false
+  },
+  "files": {
+    "canonical/runtime/astra_runtime.py": {
+      "blob_sha": "0079b5cc2c72b6f74538deb1955fc251b5b09df3",
+      "size": 257887
+    },
+    "canonical/runtime/auto_npm_library_acquisition.py": {
+      "blob_sha": "588be797d0b461071c1f05c1de2eb20d19687d5d",
+      "size": 15250
+    },
+    "canonical/runtime/auto_pypi_library_acquisition.py": {
+      "blob_sha": "a7bef190730030603749feba7b928b2c97b33574",
+      "size": 22078
+    },
+    "canonical/runtime/goal_compiler.py": {
+      "blob_sha": "e0f9cc95f582f105d3c841de57eed44b138ebba7",
+      "size": 184467
+    },
+    "canonical/runtime/independent_npm_codec_verifier.py": {
+      "blob_sha": "2b0433e283f2ff4859700c30b0d7e8fe9418c258",
+      "size": 5100
+    },
+    "canonical/runtime/npm_package_utils.py": {
+      "blob_sha": "05fd0591083034df48c3ee426d6b3e11e0183555",
+      "size": 7055
+    },
+    "canonical/runtime/promote_pending_binding.py": {
+      "blob_sha": "9ac9eefcefeed122a798d6742b4c62d256ab29ca",
+      "size": 5732
+    },
+    "canonical/runtime/verify_pending_cli_binding.py": {
+      "blob_sha": "50eddbf07b71f6f43cca85c71d6642f31b383f4e",
+      "size": 19055
+    },
+    "canonical/tests/test_auto_acquisition_platform_attestation.py": {
+      "blob_sha": "77bfa75424fbbe46fb636010f6d068cf9bd6bea5",
+      "size": 16391
+    },
+    "canonical/astra_runtime/missions/ASTRA_RUNTIME_BLIND_AUTO_ACQUIRE_CBOR_001.json": {
+      "blob_sha": "3ef3517bcad2754ba991c7147ec8f88a6e20c36f",
+      "size": 1757
+    },
+    "canonical/astra_runtime/fixtures/AUTO_BLIND_CBOR_SOURCE.json": {
+      "blob_sha": "7c3a6877135504da58f7b1cf5e7fbff90212351d",
+      "size": 122
+    }
+  },
+  "stages": [
+    {
+      "id": "syntax",
+      "command": "python -m py_compile canonical/runtime/astra_runtime.py canonical/runtime/auto_npm_library_acquisition.py canonical/runtime/auto_pypi_library_acquisition.py canonical/runtime/goal_compiler.py canonical/runtime/independent_npm_codec_verifier.py canonical/runtime/npm_package_utils.py canonical/runtime/promote_pending_binding.py canonical/runtime/verify_pending_cli_binding.py canonical/tests/test_auto_acquisition_platform_attestation.py"
+    },
+    {
+      "id": "targeted_platform_independence",
+      "command": "python -m unittest canonical.tests.test_auto_acquisition_platform_attestation -v"
+    },
+    {
+      "id": "stacked_regressions",
+      "command": "python -m unittest canonical.tests.test_auto_acquisition_replan canonical.tests.test_auto_fanin_proposal canonical.tests.test_auto_multi_capability_proposal canonical.tests.test_auto_single_capability_proposal -v"
+    },
+    {
+      "id": "blind_mission",
+      "command": "python canonical/runtime/astra_runtime.py canonical/astra_runtime/missions/ASTRA_RUNTIME_BLIND_AUTO_ACQUIRE_CBOR_001.json"
+    },
+    {
+      "id": "full_suite",
+      "command": "python -m unittest discover -s canonical/tests -p 'test_*.py'"
+    }
+  ],
+  "required_evidence": [
+    "originating mission SHA remains byte-identical",
+    "producer capability absent before acquisition",
+    "Linux-only bindings excluded on Windows",
+    "promoted producer declares platforms=[windows]",
+    "promotion verifier uses distinct implementation and distinct supplier class",
+    "original unchanged goal replanned after promotion",
+    "terminal artifact verification uses a different implementation from producer",
+    "decoded records exactly equal committed source fixture",
+    "terminal mission status COMPLETE"
+  ],
+  "fail_closed": true
+}
