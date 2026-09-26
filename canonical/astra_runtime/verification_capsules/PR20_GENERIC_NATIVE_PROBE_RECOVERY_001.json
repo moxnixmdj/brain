@@ -5,7 +5,7 @@
   "executable_revision": "05eaaf0cab39e3e3c392cf57ef38af56cb36fde7",
   "canonical_base": "69b0d80b45c37763d0f661e6cc7ce3e1c21e3488",
   "branch": "research/generic-native-probe-recovery-main-20260926",
-  "epistemic_state": "IMPLEMENTED",
+  "epistemic_state": "VERIFIED",
   "incremental_spend_usd": 0,
   "executor_policy": {
     "required_platform": "platform_neutral",
@@ -42,13 +42,26 @@
     },
     {
       "id": "stacked",
-      "command": "python -m unittest canonical.tests.test_auto_acquisition_replan canonical.tests.test_auto_fanin_proposal canonical.tests.test_auto_multi_capability_proposal canonical.tests.test_auto_single_capability_proposal -v"
+      "command": "python -m unittest canonical.tests.test_auto_acquisition_replan canonical.tests.test_auto_fanin_capability_proposal canonical.tests.test_auto_multi_capability_proposal canonical.tests.test_auto_single_capability_proposal -v"
     },
     {
       "id": "full",
       "command": "python -m unittest discover -s canonical/tests -p 'test_*.py'"
     }
   ],
+  "observed_execution": {
+    "executor_id": "chatgpt-session-linux-private-github-drive-base64-bridge-20260926",
+    "platform": "linux",
+    "exit_code": 0,
+    "targeted_tests": 22,
+    "stacked_tests": 17,
+    "full_tests": 139,
+    "runtime_test_git_blobs_verified": 90,
+    "canonical_fixture_git_blobs_verified": 3,
+    "stdout_sha256": "085687ad765ca9e9a486dbe0b821eeaf4c7b4be591e3329abe0a59363727da88",
+    "stderr_sha256": "58c7871e0affae8f9ede8dd829cdee52184abcd01a7417cebca510647b8e58aa",
+    "verification_report": "canonical/astra_runtime/evidence/PR20_GENERIC_NATIVE_PROBE_RECOVERY_001__VERIFICATION.json"
+  },
   "evidence_requirements": [
     "verify every sealed blob matches before execution",
     "record exact executor_id and platform",
