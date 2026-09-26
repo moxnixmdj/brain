@@ -4829,6 +4829,101 @@ def _write_goal_gap_classification(mission, subgoal, gap_class, compile_error):
     return path,evidence
 
 
+def _run_compiled_plain_goal(step,mission,goal,compiled):
+    controller_actions=compiled.get("controller_actions")
+    if controller_actions is not None:
+        if (
+            not isinstance(controller_actions,list)
+            or not controller_actions
+            or not all(isinstance(action,dict) for action in controller_actions)
+        ):
+            raise Blocker("COMPILED_CONTROLLER_ACTIONS_INVALID")
+        derived=dict(step)
+        derived["controller_actions"]=controller_actions
+        derived["max_controller_actions"]=max(
+            int(step.get("max_controller_actions",16)),
+            len(controller_actions)
+        )
+        compiled_result=_run_model_independent_goal(derived,mission,goal)
+        if compiled_result is None:
+            raise Blocker("COMPILED_CONTROLLER_PLAN_EXECUTION_MISSING")
+        compiled_result["planning_mode"]=str(
+            compiled.get("compiler_mode") or "COMPILED_CONTROLLER_ACTION_PLAN"
+        )
+        compiled_result["goal_compilation"]={
+          "compiler_mode":compiled.get("compiler_mode"),
+          "clauses":compiled.get("clauses"),
+          "compiled_parts":compiled.get("compiled_parts"),
+        }
+        return compiled_result
+
+    derived=dict(step)
+    derived["capability_problem"]=compiled
+    capability_result=_run_capability_planned_goal(derived,mission,goal)
+    if capability_result is None:
+        raise Blocker("GOAL_COMPILER_PLAN_EXECUTION_MISSING")
+    capability_result["goal_compilation"]={
+      "compiler_mode":compiled.get("compiler_mode"),
+      "selected_capability":compiled.get("selected_capability"),
+      "score":compiled.get("score"),
+      "match_evidence":compiled.get("match_evidence"),
+      "inputs":compiled.get("inputs"),
+      "target_effects":compiled.get("target_effects"),
+    }
+    return capability_result
+
+
+def _verify_and_promote_acquisition(dispatch):
+    if not isinstance(dispatch,dict) or dispatch.get("status")!="ACQUISITION_DISPATCHED":
+        raise Blocker("CAPABILITY_ACQUISITION_DISPATCH_INVALID")
+    rel=str(dispatch.get("verification_mission_path") or "").strip()
+    mid=str(dispatch.get("verification_mission_id") or "").strip()
+    cid=str(dispatch.get("capability_id") or "").strip()
+    if not rel or not mid or not cid:
+        raise Blocker("CAPABILITY_ACQUISITION_DISPATCH_INCOMPLETE")
+    path=(ROOT/rel).resolve()
+    missions_dir=(ROOT/"canonical"/"astra_runtime"/"missions").resolve()
+    if path.parent!=missions_dir or not path.is_file():
+        raise Blocker("CAPABILITY_ACQUISITION_VERIFICATION_MISSION_INVALID:"+rel)
+    proc=subprocess.run(
+        [
+            sys.executable,
+            str(ROOT/"canonical"/"runtime"/"astra_runtime.py"),
+            str(path.relative_to(ROOT)),
+        ],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        timeout=600,
+        env=os.environ.copy(),
+    )
+    if proc.returncode!=0:
+        raise Blocker(
+            "CAPABILITY_ACQUISITION_VERIFICATION_FAILED:"
+            +mid+":STDOUT="+proc.stdout[-3000:].replace("\n"," ")
+            +":STDERR="+proc.stderr[-3000:].replace("\n"," ")
+        )
+    state_path=STATE_DIR/(mid+".json")
+    if not state_path.is_file():
+        raise Blocker("CAPABILITY_ACQUISITION_VERIFICATION_STATE_MISSING:"+mid)
+    verified_state=readj(state_path)
+    if verified_state.get("status")!="COMPLETE":
+        raise Blocker(
+            "CAPABILITY_ACQUISITION_VERIFICATION_NOT_COMPLETE:"
+            +mid+":"+str(verified_state.get("status"))
+        )
+    entry=_load_bound_capability_registry().get(cid)
+    if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
+        raise Blocker("CAPABILITY_ACQUISITION_PROMOTION_MISSING:"+cid)
+    return {
+      "status":"VERIFIED_AND_PROMOTED",
+      "capability_id":cid,
+      "verification_mission_id":mid,
+      "verification_mission_path":rel,
+      "verification_state_path":str(state_path.relative_to(ROOT)),
+    }
+
+
 def run_goal(step, mission):
     goal=mission.get(step.get("goal_ref","goal"), mission.get("goal"))
     if isinstance(goal,(dict,list)): goal=json.dumps(goal,sort_keys=True)
@@ -4907,7 +5002,14 @@ def run_goal(step, mission):
                   "observed_at_utc":utc()
                 }
                 writej(ep,evidence)
-                raise Blocker("CAPABILITY_ACQUISITION_DISPATCHED:"+json.dumps(dispatch,sort_keys=True)) from e
+                verified_acquisition=_verify_and_promote_acquisition(dispatch)
+                compiled_after_acquisition=_compile_plain_goal(goal)
+                acquired_result=_run_compiled_plain_goal(
+                    step,mission,goal,compiled_after_acquisition
+                )
+                acquired_result["auto_acquisition"]=verified_acquisition
+                acquired_result["acquisition_goal"]=acquisition_goal
+                return acquired_result
 
             # Fallback only after the targeted route fails.
             discovery=_load_capability_discovery()
@@ -4940,7 +5042,14 @@ def run_goal(step, mission):
                 evidence["status"]="AUTO_ACQUISITION_DISPATCHED"
             writej(ep,evidence)
             if dispatch is not None:
-                raise Blocker("CAPABILITY_ACQUISITION_DISPATCHED:"+json.dumps(dispatch,sort_keys=True)) from e
+                verified_acquisition=_verify_and_promote_acquisition(dispatch)
+                compiled_after_acquisition=_compile_plain_goal(goal)
+                acquired_result=_run_compiled_plain_goal(
+                    step,mission,goal,compiled_after_acquisition
+                )
+                acquired_result["auto_acquisition"]=verified_acquisition
+                acquired_result["acquisition_goal"]=acquisition_goal
+                return acquired_result
             top=[{
               "name":x.get("name"),"score":x.get("score"),
               "zero_cost_eligible":x.get("zero_cost_eligible"),
@@ -4956,47 +5065,7 @@ def run_goal(step, mission):
         if not step.get("allow_optional_model_planner",False):
             raise
     else:
-        controller_actions=compiled.get("controller_actions")
-        if controller_actions is not None:
-            if (
-                not isinstance(controller_actions,list)
-                or not controller_actions
-                or not all(isinstance(action,dict) for action in controller_actions)
-            ):
-                raise Blocker("COMPILED_CONTROLLER_ACTIONS_INVALID")
-            derived=dict(step)
-            derived["controller_actions"]=controller_actions
-            derived["max_controller_actions"]=max(
-                int(step.get("max_controller_actions",16)),
-                len(controller_actions)
-            )
-            compiled_result=_run_model_independent_goal(derived,mission,goal)
-            if compiled_result is None:
-                raise Blocker("COMPILED_CONTROLLER_PLAN_EXECUTION_MISSING")
-            compiled_result["planning_mode"]=str(
-                compiled.get("compiler_mode") or "COMPILED_CONTROLLER_ACTION_PLAN"
-            )
-            compiled_result["goal_compilation"]={
-              "compiler_mode":compiled.get("compiler_mode"),
-              "clauses":compiled.get("clauses"),
-              "compiled_parts":compiled.get("compiled_parts"),
-            }
-            return compiled_result
-
-        derived=dict(step)
-        derived["capability_problem"]=compiled
-        capability_result=_run_capability_planned_goal(derived, mission, goal)
-        if capability_result is None:
-            raise Blocker("GOAL_COMPILER_PLAN_EXECUTION_MISSING")
-        capability_result["goal_compilation"]={
-          "compiler_mode":compiled.get("compiler_mode"),
-          "selected_capability":compiled.get("selected_capability"),
-          "score":compiled.get("score"),
-          "match_evidence":compiled.get("match_evidence"),
-          "inputs":compiled.get("inputs"),
-          "target_effects":compiled.get("target_effects"),
-        }
-        return capability_result
+        return _run_compiled_plain_goal(step,mission,goal,compiled)
     if not step.get("allow_optional_model_planner",False):
         raise Blocker("MODEL_INDEPENDENT_CONTROLLER_PLAN_REQUIRED")
     observations=[]
