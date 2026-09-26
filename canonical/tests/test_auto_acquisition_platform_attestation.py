@@ -168,5 +168,82 @@ class AutoAcquisitionPlatformAttestationTests(unittest.TestCase):
                     promoter.main()
 
 
+    def test_blind_cbor_replan_shape_filters_linux_and_uses_distinct_verifier(self):
+        goal=(
+            "Encode canonical/astra_runtime/fixtures/AUTO_BLIND_CBOR_SOURCE.json as CBOR "
+            "and save canonical/astra_runtime/tmp/AUTO_BLIND_CBOR.cbor. "
+            "Independently decode the CBOR artifact using a different implementation than "
+            "the producer and verify the decoded records are exactly identical to "
+            "canonical/astra_runtime/fixtures/AUTO_BLIND_CBOR_SOURCE.json in values, "
+            "order, field names, and record count."
+        )
+        def entry(platforms,cid):
+            return {
+                "status":"VERIFIED_BOUND_CAPABILITY",
+                "platforms":platforms,
+                "provides":["structured.binary.encode","structured.binary.encode.cbor"],
+                "requires":["json.file.available"],
+                "keywords":["encode","cbor"],
+                "adapter_module":"python_library_codec",
+                "source":{"type":"pypi","project":cid,"version":"1.0.0"},
+                "action_template":{
+                    "type":"invoke_capability",
+                    "args":{
+                        "capability_id":cid,
+                        "module":"fake_cbor",
+                        "encode_callable":"dumps",
+                        "decode_callable":"loads",
+                        "encode_kwargs":{},
+                        "decode_kwargs":{},
+                        "envelope_key":None,
+                        "json_path":"${input.json_path}",
+                        "output_path":"${input.output_path}",
+                    },
+                    "expect":{"type":"field_equals","field":"output_verified","value":True},
+                },
+            }
+
+        with tempfile.TemporaryDirectory() as td:
+            root=pathlib.Path(td)
+            source=root/"canonical"/"astra_runtime"/"fixtures"/"AUTO_BLIND_CBOR_SOURCE.json"
+            source.parent.mkdir(parents=True,exist_ok=True)
+            source.write_text('[{"id":1,"text":"alpha"}]\n',encoding="utf-8")
+
+            with mock.patch.object(compiler.sys,"platform","win32"):
+                with self.assertRaises(compiler.GoalCompilationFailure):
+                    compiler.compile_goal(
+                        goal,
+                        {"linux.cbor":entry(["linux"],"linux.cbor")},
+                        root,
+                    )
+
+                compiled=compiler.compile_goal(
+                    goal,
+                    {
+                        "linux.cbor":entry(["linux"],"linux.cbor"),
+                        "auto.pypi.fake-cbor":entry(["windows"],"auto.pypi.fake-cbor"),
+                    },
+                    root,
+                )
+
+        self.assertEqual(compiled["compiler_mode"],"DETERMINISTIC_COMPOUND_ACTION_PLAN")
+        self.assertEqual(
+            [a["type"] for a in compiled["controller_actions"]],
+            ["invoke_capability","verify_with_independent_pypi_codec","finish"],
+        )
+        producer=compiled["controller_actions"][0]["args"]
+        self.assertEqual(
+            producer["json_path"],
+            "canonical/astra_runtime/fixtures/AUTO_BLIND_CBOR_SOURCE.json",
+        )
+        self.assertEqual(
+            producer["output_path"],
+            "canonical/astra_runtime/tmp/AUTO_BLIND_CBOR.cbor",
+        )
+        verifier=compiled["controller_actions"][1]["args"]
+        self.assertEqual(verifier["format"],"cbor")
+        self.assertEqual(verifier["producer_capability_id"],"auto.pypi.fake-cbor")
+
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
