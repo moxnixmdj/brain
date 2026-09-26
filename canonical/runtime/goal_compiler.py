@@ -4027,7 +4027,7 @@ def _compile_compound_goal(goal, clauses, registry, root):
                                     },sort_keys=True)
                                 )
                             actions.append({
-                              "type":"verify_with_independent_pypi_codec",
+                              "type":"verify_with_independent_npm_codec",
                               "args":{
                                 "format":fmt,
                                 "json_path":json_path,
@@ -4039,9 +4039,10 @@ def _compile_compound_goal(goal, clauses, registry, root):
                             })
                             compiled_parts.append({
                               "index":index,"subgoal":clause,
-                              "mode":"PRODUCER_INDEPENDENT_CODEC_VERIFIER_ACQUISITION",
+                              "mode":"CROSS_SUPPLIER_PRODUCER_INDEPENDENT_CODEC_VERIFICATION",
                               "producer_capability":item["selected_capability"],
                               "producer_project":producer_project,
+                              "verifier_supplier_class":"npm_javascript_library",
                               "format":fmt,
                               "json_path":json_path,
                               "binary_path":binary_path,
