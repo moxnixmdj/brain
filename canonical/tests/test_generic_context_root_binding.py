@@ -39,30 +39,49 @@ class GenericContextRootBindingTests(unittest.TestCase):
             "top-level imported module names, top-level function names, and top-level class names"
         )
 
-    def test_generic_single_capability_matches_specialized_python_audit_action(self):
+    def historical_goal(self):
+        return (
+            "Inspect every Python file under canonical/runtime. "
+            "Create canonical/astra_runtime/tmp/PYTHON_RUNTIME_AUDIT.json containing "
+            "one record per .py file with its repository-relative path, SHA-256, "
+            "top-level imported module names, top-level function names, and top-level class names. "
+            "Include totals for files, functions, classes, and distinct imported modules. "
+            "Finally independently verify against the raw Python source files that every reported "
+            "file exists, every reported SHA-256 matches its exact bytes, every reported top-level "
+            "function and class is actually defined in that file, and fail if any Python file under "
+            "canonical/runtime is missing from the audit."
+        )
+
+    def test_historical_python_audit_compiles_without_specialized_shim(self):
         with tempfile.TemporaryDirectory() as td:
             root=pathlib.Path(td)
-            (root/"canonical"/"runtime").mkdir(parents=True)
+            runtime_dir=root/"canonical"/"runtime"
+            runtime_dir.mkdir(parents=True)
+            (runtime_dir/"sample.py").write_text("def sample():\n    return 1\n",encoding="utf-8")
             registry={"python.source.audit.ast":self.entry()}
-            context=["canonical/runtime"]
 
-            generic=compiler._compile_single_goal(
-                self.clause(),registry,root,context_paths=context
-            )
-            self.assertEqual(generic["selected_capability"],"python.source.audit.ast")
-            self.assertEqual(generic["inputs"],{
+            compiled=compiler.compile_goal(self.historical_goal(),registry,root)
+            self.assertFalse(hasattr(compiler,"_compile_python_source_audit"))
+            self.assertEqual(compiled["compiler_mode"],"DETERMINISTIC_COMPOUND_ACTION_PLAN")
+            self.assertEqual(compiled["compiled_parts"][0]["mode"],"NATIVE_TREE_INSPECTION")
+            audit=compiled["compiled_parts"][1]
+            self.assertEqual(audit["mode"],"VERIFIED_CAPABILITY")
+            self.assertEqual(audit["selected_capability"],"python.source.audit.ast")
+            self.assertEqual(audit["inputs"],{
                 "source_root":"canonical/runtime",
                 "output_path":"canonical/astra_runtime/tmp/PYTHON_RUNTIME_AUDIT.json",
             })
-            generic_action=compiler._render_template(
-                registry["python.source.audit.ast"]["action_template"],
-                generic["inputs"],
-            )
-            specialized=compiler._compile_python_source_audit(
-                self.clause(),context,registry,root
-            )
-            self.assertIsNotNone(specialized)
-            self.assertEqual(generic_action,specialized["action"])
+            self.assertEqual(compiled["controller_actions"][1],{
+                "type":"invoke_capability",
+                "args":{
+                    "capability_id":"python.source.audit.ast",
+                    "source_root":"canonical/runtime",
+                    "output_path":"canonical/astra_runtime/tmp/PYTHON_RUNTIME_AUDIT.json",
+                },
+                "expect":{"type":"field_equals","field":"output_verified","value":True},
+            })
+            self.assertEqual(compiled["compiled_parts"][2]["mode"],"PYTHON_AUDIT_TOTALS_INCLUDED")
+            self.assertEqual(compiled["compiled_parts"][3]["mode"],"INDEPENDENT_PYTHON_SOURCE_VERIFICATION")
 
     def test_multiple_context_directories_fail_closed(self):
         with tempfile.TemporaryDirectory() as td:
