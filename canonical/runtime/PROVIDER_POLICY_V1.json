@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_PROVIDER_POLICY_V1",
+  "policy_id": "PROJECT-BRAIN-PROVIDER-POLICY-20260926",
+  "authority_scope": "Project Brain",
+  "rules": {
+    "val_town": {
+      "status": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
+      "use_for_boot": false,
+      "use_for_execution": false,
+      "use_for_recovery": false,
+      "use_for_verification": false,
+      "use_for_control_plane": false,
+      "use_for_provider_discovery": false,
+      "override_requires": "explicit future user instruction reversing this prohibition"
+    }
+  },
+  "rationale": [
+    "Val Town is superseded for Project Brain.",
+    "Canonical Project Brain authority is the private GitHub repository.",
+    "Stale Val Town bridges, redirects, controllers, or recovery paths must not be revived automatically."
+  ]
+}
