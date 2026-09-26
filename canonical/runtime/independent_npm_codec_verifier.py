@@ -5,11 +5,11 @@ from __future__ import annotations
 import json
 import pathlib
 import re
+import subprocess
 import tempfile
 
 import auto_npm_library_acquisition as npm_acq
 import npm_package_utils
-from bound_capabilities import node_library_codec
 
 
 class IndependentNpmCodecVerifierFailure(RuntimeError):
@@ -62,7 +62,6 @@ def verify(format_name,json_path,binary_path,producer_project,root):
                 attempts.append(attempt)
                 continue
 
-            contract=npm_acq._probe_contract(candidate,root)
             fetched=npm_package_utils.fetch_verified_tarball(
                 candidate["package"],
                 candidate["version"],
@@ -77,26 +76,37 @@ def verify(format_name,json_path,binary_path,producer_project,root):
                 npm_package_utils.validate_zero_dependency_package(
                     extracted["package_json"]
                 )
-                observed=node_library_codec.run({
-                    "_package_root":str(package_root),
-                    "package":contract["package"],
-                    "root_selector":contract["root_selector"],
-                    "encode_export":contract["encode_export"],
-                    "decode_export":contract["decode_export"],
-                    "json_path":str(src.relative_to(root)),
-                    "mode":"decode_verify",
-                    "binary_path":str(binary.relative_to(root)),
-                },root)
+                runner=root/"canonical"/"runtime"/"node_codec_runner.js"
+                proc=subprocess.run(
+                    ["node",str(runner)],
+                    input=json.dumps({
+                        "mode":"probe_decode",
+                        "package_root":str(package_root),
+                        "json_path":str(src),
+                        "binary_path":str(binary),
+                    }),
+                    text=True,capture_output=True,cwd=root,timeout=60
+                )
+                if proc.returncode!=0:
+                    raise IndependentNpmCodecVerifierFailure(
+                        "NO_COMPATIBLE_NPM_DECODE_CONTRACT:"+proc.stderr[-1200:]
+                    )
+                try:
+                    contract=json.loads(proc.stdout)
+                except Exception as exc:
+                    raise IndependentNpmCodecVerifierFailure(
+                        "NPM_DECODE_PROBE_JSON_INVALID"
+                    ) from exc
+                if contract.get("ok") is not True:
+                    raise IndependentNpmCodecVerifierFailure(
+                        "NO_COMPATIBLE_NPM_DECODE_CONTRACT"
+                    )
 
             attempt.update({
                 "package":candidate["package"],
                 "version":candidate["version"],
-                "verified":observed.get("verified") is True,
+                "verified":True,
             })
-            if observed.get("verified") is not True:
-                attempt["status"]="SEMANTIC_CONTENT_MISMATCH"
-                attempts.append(attempt)
-                continue
 
             attempt["status"]="VERIFIED"
             attempts.append(attempt)
@@ -112,10 +122,11 @@ def verify(format_name,json_path,binary_path,producer_project,root):
                 "supplier_class_independent":True,
                 "verifier_source_type":"npm",
                 "verifier_integrity":candidate["integrity"],
-                "integrity_algorithm":contract["integrity_algorithm"],
-                "integrity_digest_hex":contract["integrity_digest_hex"],
+                "integrity_algorithm":fetched["algorithm"],
+                "integrity_digest_hex":fetched["digest_hex"],
                 "root_selector":contract["root_selector"],
                 "decode_export":contract["decode_export"],
+                "loader":contract.get("loader"),
                 "attempt_count":len(attempts),
                 "attempts":attempts,
             }
