@@ -385,8 +385,19 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
     diag_path.write_text(json.dumps(diagnostic,indent=2,sort_keys=True)+"\n",encoding="utf-8")
     project=str(selected.get("project") or selected.get("name")); version=str(selected.get("version")); slug=_slug(project)
     cap_id="auto.pypi."+slug
-    suffixes=[pathlib.Path(x).suffix.lower().lstrip(".") for x in _repo_paths(goal)]
-    format_terms=[x for x in suffixes if x]
+    suffixes=[pathlib.Path(x).suffix.lower() for x in _repo_paths(goal)]
+    format_terms=[]
+    for suffix in suffixes:
+        if not suffix or suffix in COMMON_NON_CODEC_EXTENSIONS:
+            continue
+        token=suffix.lstrip(".")
+        if token and token not in format_terms:
+            format_terms.append(token)
+    if len(format_terms)!=1:
+        raise AutoPyPIAcquisitionFailure(
+            "PYPI_OUTPUT_FORMAT_AMBIGUOUS",
+            json.dumps(format_terms,sort_keys=True)
+        )
     keywords=[]
     for value in capability_discovery.effect_queries(goal)+format_terms+[project]:
         token=str(value).lower()
