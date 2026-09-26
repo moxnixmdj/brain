@@ -4146,15 +4146,38 @@ def _semantic_candidate_signature(goal,candidate,known_effects):
     }
 
 
+def _load_semantic_authorities():
+    path=pathlib.Path(__file__).resolve().with_name("semantic_authorities.py")
+    spec=importlib.util.spec_from_file_location(
+        "project_brain_semantic_authorities",path
+    )
+    if spec is None or spec.loader is None:
+        raise Blocker("SEMANTIC_AUTHORITY_MODULE_LOAD_FAILED")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    return module
+
+
 def _semantic_goal_contract(step,mission,goal):
-    candidates=step.get("semantic_goal_proposals")
+    explicit=step.get("semantic_goal_proposals")
     ref=step.get("semantic_goal_proposals_ref")
-    if candidates is None and ref:
-        candidates=mission.get(ref)
-    if candidates is None:
-        return None
-    if not isinstance(candidates,list) or not candidates:
+    if explicit is None and ref:
+        explicit=mission.get(ref)
+    if explicit is None:
+        explicit=[]
+    if not isinstance(explicit,list):
         raise Blocker("SEMANTIC_GOAL_PROPOSALS_INVALID")
+    generator_ids=step.get("semantic_goal_authority_generators") or []
+    if not isinstance(generator_ids,list) or any(
+        not isinstance(x,str) or not x.strip() for x in generator_ids
+    ):
+        raise Blocker("SEMANTIC_GOAL_AUTHORITY_GENERATORS_INVALID")
+    generator_ids=[str(x).strip() for x in generator_ids]
+    if len(generator_ids)!=len(set(generator_ids)):
+        raise Blocker("SEMANTIC_GOAL_AUTHORITY_GENERATOR_DUPLICATE")
+    if not explicit and not generator_ids:
+        return None
     policy=step.get("semantic_authority_policy")
     policy_ref=step.get("semantic_authority_policy_ref")
     if policy is None and policy_ref:
@@ -4187,6 +4210,32 @@ def _semantic_goal_contract(step,mission,goal):
                 known_effects.add(effect.strip())
     if not known_effects:
         raise Blocker("SEMANTIC_GOAL_EFFECT_VOCABULARY_EMPTY")
+    candidates=list(explicit)
+    authority_evidence={}
+    generator_failures={}
+    if generator_ids:
+        module=_load_semantic_authorities()
+        for authority_id in generator_ids:
+            try:
+                generated=module.generate(
+                    authority_id,goal,registry,
+                    runtime_dir=pathlib.Path(__file__).resolve().parent,
+                )
+            except Exception as exc:
+                generator_failures[authority_id]=type(exc).__name__+":"+str(exc)
+                continue
+            if not isinstance(generated,dict):
+                generator_failures[authority_id]="GENERATED_CANDIDATE_NOT_OBJECT"
+                continue
+            generated=dict(generated)
+            evidence=generated.pop("_authority_evidence",None)
+            if str(generated.get("authority_id") or "")!=authority_id:
+                raise Blocker("SEMANTIC_GOAL_GENERATOR_AUTHORITY_ID_MISMATCH:"+authority_id)
+            if evidence is not None:
+                authority_evidence[authority_id]=evidence
+            candidates.append(generated)
+    if not candidates:
+        raise Blocker("SEMANTIC_GOAL_QUORUM_NOT_REACHED")
     groups={}
     seen_authorities=set()
     for raw in candidates:
@@ -4224,6 +4273,15 @@ def _semantic_goal_contract(step,mission,goal):
       "authority_ids":sorted(selected["authority_ids"]),
       "authority_classes":sorted(selected["authority_classes"]),
       "minimum_distinct_authority_classes":minimum,
+      "generated_authorities":sorted(
+          x for x in selected["authority_ids"] if x in set(generator_ids)
+      ),
+      "authority_evidence":{
+          key:authority_evidence[key]
+          for key in sorted(selected["authority_ids"])
+          if key in authority_evidence
+      },
+      "generator_failures":generator_failures,
       "status":"QUORUM_VERIFIED",
     }
 
