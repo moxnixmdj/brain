@@ -3,6 +3,7 @@ import importlib.util
 import pathlib
 import sys
 import unittest
+from unittest import mock
 
 CANONICAL_ROOT = pathlib.Path(__file__).resolve().parents[1]
 RUNTIME_PATH = CANONICAL_ROOT / "runtime" / "astra_runtime.py"
@@ -35,6 +36,16 @@ class RuntimeVerificationTests(unittest.TestCase):
     def test_python_source_verifier_has_ast_parser(self):
         tree=runtime.ast.parse("def f():\n    return 1\n")
         self.assertEqual(tree.body[0].name,"f")
+
+    def test_shell_adapter_invokes_bash_as_argv_for_paths_with_spaces(self):
+        completed=mock.Mock(returncode=0,stdout="OK\n",stderr="")
+        with mock.patch.object(runtime,"_resolve_bash_executable",return_value="C:/Program Files/Git/bin/bash.exe"):
+            with mock.patch.object(runtime.subprocess,"run",return_value=completed) as run:
+                result=runtime.run_shell({"command":"echo OK"})
+        args,kwargs=run.call_args
+        self.assertEqual(args[0],["C:/Program Files/Git/bin/bash.exe","-lc","echo OK"])
+        self.assertNotIn("shell",kwargs)
+        self.assertEqual(result["returncode"],0)
 
 if __name__=="__main__":
     unittest.main(verbosity=2)

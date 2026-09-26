@@ -197,6 +197,31 @@ class SemanticGoalQuorumTests(unittest.TestCase):
             ):
                 runtime._capability_problem_proposal(step,{},self.GOAL)
 
+    def test_execution_result_preserves_semantic_contract_provenance(self):
+        proposal={
+            "goal_sha256":hashlib.sha256(self.GOAL.encode("utf-8")).hexdigest(),
+            "clauses":[{
+                "start":0,"end":len(self.GOAL),"text":self.GOAL,
+                "target_effects":[self.TARGET],
+            }],
+            "capability_instances":[{
+                "instance_id":"materialize","capability_id":"test.materialize","inputs":{},
+            }],
+        }
+        step={
+            "verified_initial_facts":[],
+            "semantic_goal_proposals":[self.candidate("semantic-a"),self.candidate("semantic-b")],
+            "semantic_authority_policy":self.policy(),
+            "capability_problem_proposal":proposal,
+        }
+        planned={"planning_mode":"DETERMINISTIC_CAPABILITY_GRAPH","capability_plan":{"plan":["materialize"]}}
+        with mock.patch.object(runtime,"_load_bound_capability_registry",return_value=self.registry()):
+            with mock.patch.object(runtime,"_run_capability_planned_goal",return_value=planned.copy()):
+                result=runtime._run_verified_capability_proposal(step,{},self.GOAL)
+        self.assertEqual(result["semantic_goal_contract"]["status"],"QUORUM_VERIFIED")
+        self.assertEqual(result["semantic_goal_contract"]["target_effects"],[self.TARGET])
+        self.assertEqual(result["goal_binding"]["goal_sha256"],hashlib.sha256(self.GOAL.encode("utf-8")).hexdigest())
+
 
 if __name__=="__main__":
     unittest.main(verbosity=2)
