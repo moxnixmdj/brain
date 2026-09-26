@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import importlib.util
+import hashlib
 import json
 import pathlib
 import sys
@@ -145,6 +146,7 @@ class AutoAcquisitionReplanTests(unittest.TestCase):
                 "schema":"PROJECT_BRAIN_PENDING_AUTO_BINDING_V1",
                 "capability_id":"auto.test",
                 "origin_mission_path":"canonical/astra_runtime/missions/ORIGIN.json",
+                "origin_mission_sha256_at_acquisition":hashlib.sha256(original).hexdigest(),
                 "verification_mission_id":"VERIFY-AUTO-TEST",
                 "registry_entry":{
                     "status":"BOUND_PENDING_INDEPENDENT_VERIFICATION",
@@ -181,9 +183,9 @@ class AutoAcquisitionReplanTests(unittest.TestCase):
             )
             pending_after=json.loads(pending_path.read_text(encoding="utf-8"))
             self.assertEqual(pending_after["status"],"PROMOTED_VERIFIED")
-            self.assertRegex(
-                pending_after["origin_mission_sha256"],
-                r"^[0-9a-f]{64}$",
+            self.assertEqual(
+                pending_after["origin_mission_sha256_verified_at_promotion"],
+                hashlib.sha256(original).hexdigest(),
             )
 
 

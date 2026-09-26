@@ -48,7 +48,24 @@ function toBuffer(value){
   if(ArrayBuffer.isView(value)) return Buffer.from(value.buffer,value.byteOffset,value.byteLength);
   throw new Error("ENCODER_DID_NOT_RETURN_BYTES");
 }
-function semanticallyEqual(a,b){ return JSON.stringify(a)===JSON.stringify(b); }
+function normalizeSemantic(value){
+  if(value instanceof Map){
+    const out={};
+    for(const [k,v] of value.entries()) out[String(k)]=normalizeSemantic(v);
+    return out;
+  }
+  if(Array.isArray(value)) return value.map(normalizeSemantic);
+  if(value && typeof value==="object"){
+    if(Buffer.isBuffer(value) || value instanceof ArrayBuffer || ArrayBuffer.isView(value)) return value;
+    const out={};
+    for(const [k,v] of Object.entries(value)) out[k]=normalizeSemantic(v);
+    return out;
+  }
+  return value;
+}
+function semanticallyEqual(a,b){
+  return JSON.stringify(normalizeSemantic(a))===JSON.stringify(normalizeSemantic(b));
+}
 
 async function main(){
   const cfg=JSON.parse(fs.readFileSync(0,"utf8"));
@@ -78,6 +95,27 @@ async function main(){
     throw new Error("NO_COMPATIBLE_NODE_CODEC_CONTRACT");
   }
   const obj=rootObject(loaded.module,cfg.root_selector||"module");
+  if(cfg.mode==="probe_decode"){
+    const expected=JSON.parse(fs.readFileSync(cfg.json_path,"utf8"));
+    const bytes=fs.readFileSync(cfg.binary_path);
+    const decodeNames=["decode","unpack","deserialize","loads","unpackb"];
+    for(const [selector,obj] of roots){
+      for(const decName of decodeNames){
+        try{
+          const dec=resolveExport(obj,decName);
+          const observed=await dec(bytes);
+          if(semanticallyEqual(observed,expected)){
+            process.stdout.write(JSON.stringify({
+              ok:true,root_selector:selector,decode_export:decName,
+              loader:loaded.loader
+            }));
+            return;
+          }
+        }catch(_){}
+      }
+    }
+    throw new Error("NO_COMPATIBLE_NODE_DECODE_CONTRACT");
+  }
   if(cfg.mode==="encode"){
     const fixture=JSON.parse(fs.readFileSync(cfg.json_path,"utf8"));
     const enc=resolveExport(obj,cfg.encode_export);

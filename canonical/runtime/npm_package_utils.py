@@ -139,11 +139,21 @@ def safe_extract_package(raw,destination,max_files=6000,max_unpacked_bytes=80_00
 
 
 def validate_zero_dependency_package(meta):
-    deps=meta.get("dependencies") or {}
-    if not isinstance(deps,dict):
-        raise NpmPackageFailure("NPM_DEPENDENCIES_INVALID")
-    if deps:
-        raise NpmPackageFailure("NPM_RUNTIME_DEPENDENCIES_UNSUPPORTED:"+json.dumps(sorted(deps))[:800])
+    dependency_fields=("dependencies","optionalDependencies","peerDependencies")
+    for field in dependency_fields:
+        deps=meta.get(field) or {}
+        if not isinstance(deps,dict):
+            raise NpmPackageFailure("NPM_"+field.upper()+"_INVALID")
+        if deps:
+            raise NpmPackageFailure(
+                "NPM_RUNTIME_DEPENDENCIES_UNSUPPORTED:"
+                +field+":"+json.dumps(sorted(deps))[:800]
+            )
+    bundled=meta.get("bundledDependencies")
+    if bundled is None:
+        bundled=meta.get("bundleDependencies")
+    if bundled not in (None,[],{}):
+        raise NpmPackageFailure("NPM_BUNDLED_DEPENDENCIES_UNSUPPORTED")
     scripts=meta.get("scripts") or {}
     if not isinstance(scripts,dict):
         scripts={}

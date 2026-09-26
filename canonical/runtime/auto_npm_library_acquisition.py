@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Autonomously acquire zero-dependency npm JavaScript codec capabilities."""
 from __future__ import annotations
-import hashlib,json,pathlib,re,subprocess,tempfile,urllib.parse,urllib.request
+import hashlib,json,pathlib,re,subprocess,sys,tempfile,urllib.parse,urllib.request
 
 import npm_package_utils
 
@@ -10,6 +10,27 @@ class AutoNpmAcquisitionFailure(RuntimeError):
     def __init__(self,code,detail=None):
         self.code=code; self.detail=detail
         super().__init__(code if detail is None else f"{code}:{detail}")
+
+
+def _verified_runtime_platform():
+    if sys.platform.startswith("linux"):
+        return "linux"
+    if sys.platform.startswith("win") or sys.platform in {"cygwin","msys"}:
+        return "windows"
+    if sys.platform=="darwin":
+        return "darwin"
+    raise AutoNpmAcquisitionFailure("NPM_VERIFICATION_PLATFORM_UNSUPPORTED",sys.platform)
+
+
+def _origin_mission_sha256(root,mission_path):
+    root=pathlib.Path(root).resolve()
+    missions_root=(root/"canonical"/"astra_runtime"/"missions").resolve()
+    mission=(root/str(mission_path)).resolve()
+    if mission.parent!=missions_root:
+        raise AutoNpmAcquisitionFailure("NPM_ORIGIN_MISSION_PATH_INVALID",str(mission_path))
+    if not mission.is_file():
+        raise AutoNpmAcquisitionFailure("NPM_ORIGIN_MISSION_MISSING",str(mission_path))
+    return hashlib.sha256(mission.read_bytes()).hexdigest()
 
 
 def supports(goal):
@@ -41,11 +62,16 @@ def _slug(value):
     return re.sub(r"[^a-z0-9._-]+","-",str(value).lower()).strip("-_.") or "package"
 
 
-def _search_registry(goal,limit=30,timeout_s=20):
-    formats=_format_tokens(goal)
-    if not formats:
-        raise AutoNpmAcquisitionFailure("NPM_OUTPUT_FORMAT_REQUIRED")
-    query=formats[0]
+def _search_registry(goal,limit=30,timeout_s=20,format_hint=None):
+    if format_hint is not None:
+        query=str(format_hint or "").strip().lower()
+        if not re.fullmatch(r"[a-z0-9][a-z0-9._+-]{0,40}",query):
+            raise AutoNpmAcquisitionFailure("NPM_OUTPUT_FORMAT_INVALID",query)
+    else:
+        formats=_format_tokens(goal)
+        if not formats:
+            raise AutoNpmAcquisitionFailure("NPM_OUTPUT_FORMAT_REQUIRED")
+        query=formats[0]
     url="https://registry.npmjs.org/-/v1/search?"+urllib.parse.urlencode({"text":query,"size":min(max(int(limit),1),100)})
     req=urllib.request.Request(url,headers={"User-Agent":"ProjectBrain-NpmAcquisition/1"})
     try:
@@ -96,9 +122,20 @@ def _metadata(candidate,timeout_s=20):
     integrity=str(dist.get("integrity") or "")
     if not tarball.startswith("https://") or not integrity:
         raise AutoNpmAcquisitionFailure("NPM_DIST_METADATA_INCOMPLETE",package)
-    deps=payload.get("dependencies") or {}
-    if not isinstance(deps,dict):
-        raise AutoNpmAcquisitionFailure("NPM_DEPENDENCIES_INVALID",package)
+    for field in ("dependencies","optionalDependencies","peerDependencies"):
+        deps=payload.get(field) or {}
+        if not isinstance(deps,dict):
+            raise AutoNpmAcquisitionFailure("NPM_"+field.upper()+"_INVALID",package)
+        if deps:
+            raise AutoNpmAcquisitionFailure(
+                "NPM_RUNTIME_DEPENDENCIES_UNSUPPORTED",
+                package+":"+field+":"+json.dumps(sorted(deps))[:600]
+            )
+    bundled=payload.get("bundledDependencies")
+    if bundled is None:
+        bundled=payload.get("bundleDependencies")
+    if bundled not in (None,[],{}):
+        raise AutoNpmAcquisitionFailure("NPM_BUNDLED_DEPENDENCIES_UNSUPPORTED",package)
     scripts=payload.get("scripts") or {}
     if not isinstance(scripts,dict): scripts={}
     forbidden=[k for k in ("preinstall","install","postinstall") if str(scripts.get(k) or "").strip()]
@@ -171,6 +208,7 @@ def _probe_contract(candidate,root):
 
 def dispatch(goal,mission_id,mission_path,root,discovery=None):
     root=pathlib.Path(root).resolve()
+    origin_mission_sha256=_origin_mission_sha256(root,mission_path)
     if not supports(goal):
         raise AutoNpmAcquisitionFailure("NPM_CONTRACT_CLASS_UNSUPPORTED")
     candidates=_search_registry(goal,limit=30)
@@ -223,7 +261,7 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
     }
     entry={
       "provides":provides,"requires":["json.file.available","node.runtime.available"],
-      "keywords":keywords,"cost":1,"platforms":["linux"],"incremental_spend_usd":0,
+      "keywords":keywords,"cost":1,"platforms":[_verified_runtime_platform()],"incremental_spend_usd":0,
       "limitations":[
         "Automatically acquired from an integrity-verified zero-runtime-dependency npm package.",
         "Lifecycle install hooks are rejected and package code is loaded only by isolated Node codec invocations."
@@ -250,6 +288,7 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
       "schema":"PROJECT_BRAIN_PENDING_AUTO_BINDING_V1","capability_id":cap_id,
       "effect":provides[0],"goal":goal,"origin_mission_id":mission_id,
       "origin_mission_path":mission_path,
+      "origin_mission_sha256_at_acquisition":origin_mission_sha256,
       "selected_supplier":{k:v for k,v in selected.items() if k!="package_json"},
       "contract":contract,"verification_fixture":contract["fixture"],
       "registry_entry":entry,"verification_mission_id":verify_mid,

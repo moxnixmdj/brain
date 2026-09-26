@@ -12,6 +12,27 @@ class AutoPyPIAcquisitionFailure(RuntimeError):
         super().__init__(code if detail is None else f"{code}:{detail}")
 
 
+def _verified_runtime_platform():
+    if sys.platform.startswith("linux"):
+        return "linux"
+    if sys.platform.startswith("win") or sys.platform in {"cygwin","msys"}:
+        return "windows"
+    if sys.platform=="darwin":
+        return "darwin"
+    raise AutoPyPIAcquisitionFailure("PYPI_VERIFICATION_PLATFORM_UNSUPPORTED",sys.platform)
+
+
+def _origin_mission_sha256(root,mission_path):
+    root=pathlib.Path(root).resolve()
+    missions_root=(root/"canonical"/"astra_runtime"/"missions").resolve()
+    mission=(root/str(mission_path)).resolve()
+    if mission.parent!=missions_root:
+        raise AutoPyPIAcquisitionFailure("PYPI_ORIGIN_MISSION_PATH_INVALID",str(mission_path))
+    if not mission.is_file():
+        raise AutoPyPIAcquisitionFailure("PYPI_ORIGIN_MISSION_MISSING",str(mission_path))
+    return hashlib.sha256(mission.read_bytes()).hexdigest()
+
+
 COMMON_NON_CODEC_EXTENSIONS={
     ".json",".txt",".md",".markdown",".csv",".tsv",".html",".xml",
     ".png",".jpg",".jpeg",".webp",".pdf",".docx",".xlsx",
@@ -328,6 +349,7 @@ def _infer_codec_contract(candidate,wheel_closure,root):
 
 def dispatch(goal,mission_id,mission_path,root,discovery=None):
     root=pathlib.Path(root).resolve()
+    origin_mission_sha256=_origin_mission_sha256(root,mission_path)
     if not supports(goal): raise AutoPyPIAcquisitionFailure("PYPI_CONTRACT_CLASS_UNSUPPORTED")
     candidates=_candidate_pool(goal,discovery)
     diag_rel=f"canonical/astra_runtime/evidence/{mission_id}__AUTO_PYPI_LIBRARY_ACQUISITION.json"
@@ -363,15 +385,26 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
     diag_path.write_text(json.dumps(diagnostic,indent=2,sort_keys=True)+"\n",encoding="utf-8")
     project=str(selected.get("project") or selected.get("name")); version=str(selected.get("version")); slug=_slug(project)
     cap_id="auto.pypi."+slug
-    suffixes=[pathlib.Path(x).suffix.lower().lstrip(".") for x in _repo_paths(goal)]
-    format_terms=[x for x in suffixes if x]
+    suffixes=[pathlib.Path(x).suffix.lower() for x in _repo_paths(goal)]
+    format_terms=[]
+    for suffix in suffixes:
+        if not suffix or suffix in COMMON_NON_CODEC_EXTENSIONS:
+            continue
+        token=suffix.lstrip(".")
+        if token and token not in format_terms:
+            format_terms.append(token)
+    if len(format_terms)!=1:
+        raise AutoPyPIAcquisitionFailure(
+            "PYPI_OUTPUT_FORMAT_AMBIGUOUS",
+            json.dumps(format_terms,sort_keys=True)
+        )
     keywords=[]
     for value in capability_discovery.effect_queries(goal)+format_terms+[project]:
         token=str(value).lower()
         if token and token not in keywords: keywords.append(token)
     provides=["structured.binary.encode"]+["structured.binary.encode."+x for x in format_terms]
     entry={
-      "provides":provides,"requires":["json.file.available"],"keywords":keywords,"cost":1,"platforms":["linux"],
+      "provides":provides,"requires":["json.file.available"],"keywords":keywords,"cost":1,"platforms":[_verified_runtime_platform()],
       "limitations":["Automatically acquired from a hash-pinned wheel-only PyPI dependency closure.",
                      "Initial generic contract class is structured JSON value to binary bytes with semantic round-trip decoding."],
       "adapter_module":"python_library_codec","entrypoint":"run",
@@ -393,7 +426,8 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
     verify_rel=f"canonical/astra_runtime/evidence/{mission_id}__{slug}__{fingerprint}__AUTO_VERIFY.json"
     verify_mid="ASTRA-AUTO-VERIFY-PYPI-"+slug.upper()+"-"+fingerprint.upper()
     pending={"schema":"PROJECT_BRAIN_PENDING_AUTO_BINDING_V1","capability_id":cap_id,"effect":provides[0],"goal":goal,
-             "origin_mission_id":mission_id,"origin_mission_path":mission_path,"selected_supplier":selected,
+             "origin_mission_id":mission_id,"origin_mission_path":mission_path,
+      "origin_mission_sha256_at_acquisition":origin_mission_sha256,"selected_supplier":selected,
              "contract":contract,"verification_fixture":contract["fixture"],"registry_entry":entry,
              "verification_mission_id":verify_mid,"verification_result_path":verify_rel,
              "status":"PENDING_INDEPENDENT_VERIFICATION"}

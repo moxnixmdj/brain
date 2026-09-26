@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 """Fresh verification for an automatically synthesized pending CLI binding."""
 from __future__ import annotations
-import hashlib,json,pathlib,re,subprocess,sys
+import hashlib,importlib,json,pathlib,re,shutil,subprocess,sys
 
 import apt_cli_probe
 import astra_runtime
 import capability_discovery
+import auto_npm_library_acquisition
+import auto_pypi_library_acquisition
+import independent_npm_codec_verifier
 from bound_capabilities import cli_command, python_library_codec, node_library_codec
 
 ROOT=pathlib.Path(__file__).resolve().parents[2]
@@ -131,6 +134,132 @@ def _resolve_callable(module,name):
     return current
 
 
+
+def _pending_codec_format(pending):
+    goal=str(pending.get("goal") or "")
+    common={
+        "json","txt","md","markdown","csv","tsv","html","xml",
+        "png","jpg","jpeg","webp","pdf","docx","xlsx",
+        "zip","gz","tgz","tar","sqlite","db","sqlite3",
+    }
+    path_tokens=re.findall(
+        r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+",
+        re.sub(r"https?://[^\\s)\\]}>]+"," ",goal),
+    )
+    goal_formats=[]
+    for raw in path_tokens:
+        suffix=pathlib.PurePosixPath(raw.rstrip(".,;:!?)]}")).suffix.lower().lstrip(".")
+        if suffix and suffix not in common and suffix not in goal_formats:
+            goal_formats.append(suffix)
+
+    entry=pending.get("registry_entry") or {}
+    declared=sorted(set(
+        str(effect)[len("structured.binary.encode."):]
+        for effect in (entry.get("provides") or [])
+        if str(effect).startswith("structured.binary.encode.")
+        and str(effect)!="structured.binary.encode"
+    ))
+    compatible=[fmt for fmt in goal_formats if fmt in declared]
+    if len(compatible)==1:
+        return compatible[0]
+    if not goal_formats and len(declared)==1:
+        return declared[0]
+    raise RuntimeError(
+        "PENDING_CODEC_FORMAT_AMBIGUOUS:"
+        +json.dumps({"goal_formats":goal_formats,"declared":declared},sort_keys=True)
+    )
+
+
+def _independent_npm_codec_verifier(pending,fixture_path,output_path):
+    producer_source=(pending.get("registry_entry") or {}).get("source") or {}
+    producer_project=str(
+        producer_source.get("project")
+        or producer_source.get("package")
+        or (pending.get("selected_supplier") or {}).get("name")
+        or ""
+    )
+    evidence=independent_npm_codec_verifier.verify(
+        _pending_codec_format(pending),
+        str(pathlib.Path(fixture_path).relative_to(ROOT)),
+        str(pathlib.Path(output_path).relative_to(ROOT)),
+        producer_project,
+        ROOT,
+    )
+    if evidence.get("verified") is not True:
+        raise RuntimeError("PENDING_PYPI_INDEPENDENT_VERIFICATION_FAILED")
+    return evidence
+
+def _independent_pypi_codec_verifier(pending,fixture_path,output_path):
+    goal=str(pending.get("goal") or "")
+    producer_source=(pending.get("registry_entry") or {}).get("source") or {}
+    attempts=[]
+    try:
+        candidates=auto_pypi_library_acquisition._candidate_pool(goal,discovery=None)
+    except Exception as exc:
+        raise RuntimeError(
+            "INDEPENDENT_PYPI_VERIFIER_DISCOVERY_FAILED:"
+            +type(exc).__name__+":"+str(exc)
+        ) from exc
+    for candidate in candidates[:16]:
+        attempt={"candidate":candidate}
+        try:
+            closure=auto_pypi_library_acquisition._download_compatible_wheel_closure(candidate,ROOT)
+            contract=auto_pypi_library_acquisition._infer_codec_contract(candidate,closure,ROOT)
+            root_wheel=closure["root"]
+            source={
+              "type":"pypi",
+              "project":str(candidate.get("project") or candidate.get("name")),
+              "version":str(candidate.get("version")),
+              "metadata_url":str(candidate.get("metadata_url")),
+              "wheel_filename":root_wheel["filename"],
+              "wheel_sha256":root_wheel["sha256"],
+              "dependency_closure":closure["lock"],
+              "license":candidate.get("license"),
+            }
+            dependency=astra_runtime._ensure_pypi_dependency(source)
+            importlib.invalidate_caches()
+            module=importlib.import_module(contract["module"])
+            decoder=_resolve_callable(module,contract["decode_callable"])
+            observed=decoder(
+                output_path.read_bytes(),
+                **(contract.get("decode_kwargs") or {})
+            )
+            envelope_key=contract.get("envelope_key")
+            if envelope_key is not None:
+                key=str(envelope_key)
+                if not isinstance(observed,dict) or key not in observed:
+                    raise RuntimeError("INDEPENDENT_PYPI_VERIFIER_ENVELOPE_MISSING:"+key)
+                observed=observed[key]
+            expected=json.loads(fixture_path.read_text(encoding="utf-8"))
+            verified=observed==expected
+            attempt["project"]=source["project"]
+            attempt["version"]=source["version"]
+            attempt["verified"]=verified
+            if verified:
+                return {
+                  "verified":True,
+                  "implementation_independent":True,
+                  "supplier_class_independent":producer_source.get("type")!="pypi",
+                  "producer_source_type":producer_source.get("type"),
+                  "verifier_source_type":"pypi",
+                  "verifier_project":source["project"],
+                  "verifier_version":source["version"],
+                  "verifier_wheel_sha256":root_wheel["sha256"],
+                  "verifier_contract":{
+                    "module":contract["module"],
+                    "decode_callable":contract["decode_callable"],
+                  },
+                  "attempts":attempts+[attempt],
+                }
+        except Exception as exc:
+            attempt["error"]=type(exc).__name__+":"+str(exc)
+        attempts.append(attempt)
+    raise RuntimeError(
+        "NO_INDEPENDENT_PYPI_CODEC_VERIFIER:"
+        +json.dumps(attempts,sort_keys=True)[:4000]
+    )
+
+
 def _verify_pending_pypi(pending,result_path):
     entry=pending["registry_entry"]
     source=entry.get("source") or {}
@@ -167,6 +296,11 @@ def _verify_pending_pypi(pending,result_path):
     expected=json.loads(fixture_path.read_text(encoding="utf-8"))
     if decoded!=expected:
         raise RuntimeError("PENDING_PYPI_SEMANTIC_ROUNDTRIP_MISMATCH")
+    independent=_independent_npm_codec_verifier(
+        pending,fixture_path,output_path
+    )
+    if independent.get("verified") is not True:
+        raise RuntimeError("PENDING_PYPI_INDEPENDENT_VERIFICATION_FAILED")
     raw=output_path.read_bytes()
     result={
       "schema":"PROJECT_BRAIN_AUTO_BINDING_VERIFICATION_V1",
@@ -177,9 +311,11 @@ def _verify_pending_pypi(pending,result_path):
       "semantic_roundtrip":{
         "verified":True,
         "separate_decode_invocation":True,
-        "implementation_independent":False,
+        "producer_roundtrip_verified":True,
+        "implementation_independent":True,
         "module":contract["module"],
         "decode_callable":contract["decode_callable"],
+        "independent_verifier":independent,
       },
       "independent_output_sha256":hashlib.sha256(raw).hexdigest(),
       "independent_output_bytes":len(raw),
@@ -228,6 +364,11 @@ def _verify_pending_npm(pending,result_path):
     },ROOT)
     if decoded.get("verified") is not True:
         raise RuntimeError("PENDING_NPM_SEMANTIC_ROUNDTRIP_MISMATCH")
+    independent=_independent_pypi_codec_verifier(
+        pending,fixture_path,output_path
+    )
+    if independent.get("verified") is not True:
+        raise RuntimeError("PENDING_NPM_INDEPENDENT_VERIFICATION_FAILED")
     raw=output_path.read_bytes()
     result={
       "schema":"PROJECT_BRAIN_AUTO_BINDING_VERIFICATION_V1",
@@ -238,9 +379,11 @@ def _verify_pending_npm(pending,result_path):
       "semantic_roundtrip":{
         "verified":True,
         "fresh_node_decode_invocation":True,
-        "implementation_independent":False,
+        "producer_roundtrip_verified":True,
+        "implementation_independent":True,
         "package":contract["package"],
         "decode_export":contract["decode_export"],
+        "independent_verifier":independent,
       },
       "independent_output_sha256":hashlib.sha256(raw).hexdigest(),
       "independent_output_bytes":len(raw),

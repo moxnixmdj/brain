@@ -3666,6 +3666,33 @@ def _goal_action(action):
           "dependency_closure":evidence.get("dependency_closure"),
           "attempt_count":evidence.get("attempt_count"),
         }
+    if typ=="verify_with_independent_npm_codec":
+        fmt=str(args.get("format") or "").strip()
+        json_path=str(args.get("json_path") or "").strip()
+        binary_path=str(args.get("binary_path") or "").strip()
+        producer_project=str(args.get("producer_project") or "").strip()
+        producer_capability_id=str(args.get("producer_capability_id") or "").strip()
+        if not all((fmt,json_path,binary_path,producer_project,producer_capability_id)):
+            return {"type":typ,"verified":False,"error":"INDEPENDENT_NPM_CODEC_VERIFIER_ARGS_INCOMPLETE"}
+        import independent_npm_codec_verifier
+        evidence=independent_npm_codec_verifier.verify(
+            fmt,json_path,binary_path,producer_project,ROOT
+        )
+        return {
+          "type":typ,
+          "verified":bool(evidence.get("verified")),
+          "producer_capability_id":producer_capability_id,
+          "producer_project":producer_project,
+          "verifier_package":evidence.get("verifier_package"),
+          "verifier_version":evidence.get("verifier_version"),
+          "producer_independent":bool(evidence.get("producer_independent")),
+          "implementation_independent":bool(evidence.get("implementation_independent")),
+          "supplier_class_independent":bool(evidence.get("supplier_class_independent")),
+          "format":fmt,
+          "decode_export":evidence.get("decode_export"),
+          "verifier_integrity":evidence.get("verifier_integrity"),
+          "attempt_count":evidence.get("attempt_count"),
+        }
     if typ=="invoke_capability":
         return _invoke_bound_capability(args)
     if typ=="assert_text_contains_json_keys":
@@ -3893,7 +3920,7 @@ def _run_model_independent_goal(step, mission, goal):
     if actions is None:
         return None
     allowed_types={
-      "read_file","list_tree","search_text","http_get","extract_labeled_fields_from_rendered_source","assert_labeled_fields_against_fresh_source","resolve_authority_identity","assert_authority_identity","discover_authoritative_web_source","assert_authoritative_source_discovery","fetch_json_knowledge","assess_knowledge_consistency","materialize_supported_knowledge","assert_knowledge_status","assert_json_knowledge","write_json_records","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback","invoke_capability_until","verify_with_independent_pypi_codec",
+      "read_file","list_tree","search_text","http_get","extract_labeled_fields_from_rendered_source","assert_labeled_fields_against_fresh_source","resolve_authority_identity","assert_authority_identity","discover_authoritative_web_source","assert_authoritative_source_discovery","fetch_json_knowledge","assess_knowledge_consistency","materialize_supported_knowledge","assert_knowledge_status","assert_json_knowledge","write_json_records","invoke_capability","invoke_capability_by_runtime_value","invoke_capability_fanout","invoke_capability_fallback","invoke_capability_until","verify_with_independent_pypi_codec","verify_with_independent_npm_codec",
       "project_browser_result_json","join_runtime_json_arrays","assert_runtime_json_join","aggregate_runtime_json_arrays","assert_runtime_json_aggregate","derive_grouped_records","assert_grouped_derived_records","select_ranked_record","assert_ranked_record","assert_hex_prefix_bucket","assert_collection_length_bucket","assert_runtime_selected_code_decodes",
       "assert_text_contains_json_keys","assert_file_exists","assert_json_fields_equal","assert_runtime_fanout_decodes","assert_runtime_fanout_artifacts_decode","assert_runtime_per_item_fallback_decodes","assert_runtime_fallback_decision","assert_runtime_bounded_loop_trace",
       "assert_workflow_audit_supported_by_source","assert_python_source_audit_supported_by_source",
@@ -4528,7 +4555,9 @@ def _load_auto_capability_acquisition():
 def _compile_plain_goal(goal):
     compiler=_load_goal_compiler()
     try:
-        return compiler.compile_goal(goal,_load_bound_capability_registry(),ROOT)
+        registry=_load_bound_capability_registry()
+        registry=compiler._platform_admissible_registry(registry)
+        return compiler.compile_goal(goal,registry,ROOT)
     except Exception as e:
         code=getattr(e,"code",type(e).__name__)
         detail=str(getattr(e,"detail","") or "")

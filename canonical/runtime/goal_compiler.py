@@ -12,6 +12,7 @@ import hashlib
 import json
 import pathlib
 import re
+import sys
 
 
 class GoalCompilationFailure(RuntimeError):
@@ -30,6 +31,37 @@ GENERIC_MATCH_TOKENS={
     "generate","image","text","extract","create","save","output","input",
     "file","read","write","convert","process","data"
 }
+
+
+
+def _current_runtime_platform():
+    value=str(sys.platform or "")
+    if value.startswith("linux"):
+        return "linux"
+    if value.startswith("win") or value in {"cygwin","msys"}:
+        return "windows"
+    if value=="darwin":
+        return "darwin"
+    raise GoalCompilationFailure("GOAL_COMPILATION_PLATFORM_UNSUPPORTED",value)
+
+
+def _platform_admissible_registry(registry):
+    current=_current_runtime_platform()
+    out={}
+    for cid,entry in (registry or {}).items():
+        if not isinstance(entry,dict):
+            continue
+        platforms=entry.get("platforms")
+        # Legacy verified entries without platform metadata remain visible until
+        # separately re-attested. Explicit platform claims are authoritative.
+        if platforms is None:
+            out[cid]=entry
+            continue
+        if not isinstance(platforms,list) or not platforms:
+            continue
+        if current in {str(x) for x in platforms}:
+            out[cid]=entry
+    return out
 
 
 def _tokens(value):
@@ -164,24 +196,38 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                 }
                 wanted=suffix_map.get(stem)
                 if wanted is None and stem=="output":
-                    semantic_blob=" ".join(
-                        [str(x) for x in entry.get("provides",[])]
-                        +[str(x) for x in entry.get("keywords",[])]
-                        +[str(entry.get("adapter_module") or "")]
-                    ).lower()
-                    semantic_suffixes=[
-                      (("xlsx","spreadsheet","workbook"),{".xlsx"}),
-                      (("docx","word"),{".docx"}),
-                      (("pdf",),{".pdf"}),
-                      (("sqlite","database"),{".sqlite",".db",".sqlite3"}),
-                      (("json",),{".json"}),
-                      (("markdown",),{".md",".markdown"}),
-                      (("png","qr","barcode","image"),{".png",".jpg",".jpeg",".webp"}),
-                    ]
-                    for markers,suffix_set in semantic_suffixes:
-                        if any(marker in semantic_blob for marker in markers):
-                            wanted=suffix_set
-                            break
+                    declared_formats=sorted(set(
+                        str(effect)[len("structured.binary.encode."):]
+                        for effect in (entry.get("provides") or [])
+                        if str(effect).startswith("structured.binary.encode.")
+                        and str(effect)!="structured.binary.encode"
+                    ))
+                    if len(declared_formats)==1:
+                        wanted={"."+declared_formats[0].lower().lstrip(".")}
+                    elif len(declared_formats)>1:
+                        raise GoalCompilationFailure(
+                            "GOAL_OUTPUT_FORMAT_AMBIGUOUS",
+                            json.dumps(declared_formats,sort_keys=True)
+                        )
+                    else:
+                        semantic_blob=" ".join(
+                            [str(x) for x in entry.get("provides",[])]
+                            +[str(x) for x in entry.get("keywords",[])]
+                            +[str(entry.get("adapter_module") or "")]
+                        ).lower()
+                        semantic_suffixes=[
+                          (("xlsx","spreadsheet","workbook"),{".xlsx"}),
+                          (("docx","word"),{".docx"}),
+                          (("pdf",),{".pdf"}),
+                          (("sqlite","database"),{".sqlite",".db",".sqlite3"}),
+                          (("json",),{".json"}),
+                          (("markdown",),{".md",".markdown"}),
+                          (("png","qr","barcode","image"),{".png",".jpg",".jpeg",".webp"}),
+                        ]
+                        for markers,suffix_set in semantic_suffixes:
+                            if any(marker in semantic_blob for marker in markers):
+                                wanted=suffix_set
+                                break
                 if wanted:
                     matching=[raw for raw,p in paths if p.suffix.lower() in wanted]
                     future_matching=[raw for raw,p in future_paths if p.suffix.lower() in wanted]
@@ -194,6 +240,20 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                 if not matching and len(future_matching)==1:
                     result[key]=future_matching[0]
                     continue
+                if wanted is None:
+                    # Generic output binding: when the clause names exactly one
+                    # repository file that does not exist yet, while other named
+                    # files already exist as inputs, that unique future artifact
+                    # is the only causally admissible output. Do not require its
+                    # filename to contain the word "output" or pre-enumerate its
+                    # extension.
+                    future_artifacts=[
+                        raw for raw,p in paths
+                        if pathlib.Path(raw).suffix and not p.exists()
+                    ]
+                    if len(future_artifacts)==1:
+                        result[key]=future_artifacts[0]
+                        continue
                 # Single-path fallback is safe only for an actual typed file,
                 # never for URL fragments or extensionless directory-like text.
                 if wanted is None and len(paths)==1 and pathlib.Path(paths[0][0]).suffix:
@@ -3981,7 +4041,7 @@ def _compile_compound_goal(goal, clauses, registry, root):
                                     },sort_keys=True)
                                 )
                             actions.append({
-                              "type":"verify_with_independent_pypi_codec",
+                              "type":"verify_with_independent_npm_codec",
                               "args":{
                                 "format":fmt,
                                 "json_path":json_path,
@@ -3993,9 +4053,10 @@ def _compile_compound_goal(goal, clauses, registry, root):
                             })
                             compiled_parts.append({
                               "index":index,"subgoal":clause,
-                              "mode":"PRODUCER_INDEPENDENT_CODEC_VERIFIER_ACQUISITION",
+                              "mode":"CROSS_SUPPLIER_PRODUCER_INDEPENDENT_CODEC_VERIFICATION",
                               "producer_capability":item["selected_capability"],
                               "producer_project":producer_project,
+                              "verifier_supplier_class":"npm_javascript_library",
                               "format":fmt,
                               "json_path":json_path,
                               "binary_path":binary_path,

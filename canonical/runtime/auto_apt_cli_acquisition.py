@@ -22,6 +22,17 @@ class AutoAcquisitionFailure(RuntimeError):
 
 GENERIC_KEYWORDS={"generate","image","text","save","output","input","code","file","create","make"}
 
+def _origin_mission_sha256(root,mission_path):
+    root=pathlib.Path(root).resolve()
+    missions_root=(root/"canonical"/"astra_runtime"/"missions").resolve()
+    mission=(root/str(mission_path)).resolve()
+    if mission.parent!=missions_root:
+        raise AutoAcquisitionFailure("APT_ORIGIN_MISSION_PATH_INVALID",str(mission_path))
+    if not mission.is_file():
+        raise AutoAcquisitionFailure("APT_ORIGIN_MISSION_MISSING",str(mission_path))
+    return hashlib.sha256(mission.read_bytes()).hexdigest()
+
+
 
 def _slug(value):
     out=re.sub(r"[^a-z0-9]+","-",str(value).lower()).strip("-")
@@ -154,6 +165,7 @@ def _merge_role_conditioned_apt(discovery,goal):
 
 def dispatch(goal,mission_id,mission_path,root,discovery=None):
     root=pathlib.Path(root).resolve()
+    origin_mission_sha256=_origin_mission_sha256(root,mission_path)
     # On the fast path, start from an empty pool and let the role-conditioned
     # APT search supply causally relevant candidates. Callers may pass a broad
     # discovery result only as a fallback after the targeted route fails.
@@ -278,6 +290,7 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
       "goal":goal,
       "origin_mission_id":mission_id,
       "origin_mission_path":mission_path,
+      "origin_mission_sha256_at_acquisition":origin_mission_sha256,
       "selected_supplier":candidate,
       "probe":probe,
       "contract":contract,
