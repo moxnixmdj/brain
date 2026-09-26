@@ -984,40 +984,6 @@ def _compile_python_test_fresh_verification(subgoal, context_paths, root):
     }
 
 
-def _compile_python_source_audit(subgoal, context_paths, registry, root):
-    cap=(registry or {}).get("python.source.audit.ast")
-    if not isinstance(cap,dict) or cap.get("status")!="VERIFIED_BOUND_CAPABILITY":
-        return None
-    lower=subgoal.lower()
-    if not re.match(r"^(?:create|write|generate)\b",lower):
-        return None
-    if "python" not in lower or "one record" not in lower or ".py" not in lower:
-        return None
-    outputs=[raw for raw,_ in _repo_paths(subgoal,root) if pathlib.Path(raw).suffix.lower()==".json"]
-    dirs=[str(p) for p in context_paths if (pathlib.Path(root)/str(p)).is_dir()]
-    if len(outputs)!=1 or not dirs:
-        return None
-    source_root=dirs[-1]
-    action={
-      "type":"invoke_capability",
-      "args":{
-        "capability_id":"python.source.audit.ast",
-        "source_root":source_root,
-        "output_path":outputs[0],
-      },
-      "expect":{"type":"field_equals","field":"output_verified","value":True},
-    }
-    return {
-      "action":action,
-      "output_path":outputs[0],
-      "evidence":{
-        "source_root":source_root,
-        "output_path":outputs[0],
-        "capability_id":"python.source.audit.ast",
-      }
-    }
-
-
 def _compile_python_audit_totals_assertion(subgoal, context_paths, root):
     lower=subgoal.lower()
     if not lower.startswith("include totals"):
@@ -3875,17 +3841,6 @@ def _compile_compound_goal(goal, clauses, registry, root):
                 "index":index,"subgoal":clause,
                 "mode":"PYTHON_AUDIT_TOTALS_INCLUDED",
                 **python_totals["evidence"],
-            })
-            continue
-
-        python_audit=_compile_python_source_audit(clause,context_paths,registry,root)
-        if python_audit is not None:
-            actions.append(python_audit["action"])
-            context_paths.append(python_audit["output_path"])
-            compiled_parts.append({
-                "index":index,"subgoal":clause,
-                "mode":"VERIFIED_PYTHON_SOURCE_AUDIT",
-                **python_audit["evidence"],
             })
             continue
 
