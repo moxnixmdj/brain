@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "SUPERWORKER-UNIFIED-MSGPACK-FRESHNESS-001",
+  "purpose": "Real device-independent same-identity mission: audit a live Project Brain dependency binding against authoritative current metadata, persist and revalidate the result, then force missing-capability acquisition through a useful binary recovery artifact.",
+  "goal": "Read canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json and identify the bound PyPI project and version for capability auto.pypi.msgpack. Fetch authoritative current metadata from https://pypi.org/pypi/msgpack/json, determine the current latest stable msgpack version, compare it with the bound version, and write canonical/astra_runtime/tmp/SUPERWORKER_UNIFIED_MSGPACK_FRESHNESS_001.json containing capability_id, project, bound_version, latest_version, is_current, and source_url. Independently re-fetch or revalidate the authoritative source and verify that record is correct. Then encode canonical/astra_runtime/tmp/SUPERWORKER_UNIFIED_MSGPACK_FRESHNESS_001.json as UBJSON to canonical/astra_runtime/tmp/SUPERWORKER_UNIFIED_MSGPACK_FRESHNESS_001.ubj using a zero-cost library. Finally independently decode the UBJSON artifact using a different implementation than the producer and verify that the decoded object is exactly identical to canonical/astra_runtime/tmp/SUPERWORKER_UNIFIED_MSGPACK_FRESHNESS_001.json in values, field names, nested structure, and record count, saving the verification result to canonical/astra_runtime/tmp/SUPERWORKER_UNIFIED_MSGPACK_FRESHNESS_001_VERIFIED.json.",
+  "steps": [
+    {
+      "id": "execute-msgpack-binding-freshness-audit",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 48,
+      "verify": {
+        "type": "file_exists",
+        "path": "canonical/astra_runtime/tmp/SUPERWORKER_UNIFIED_MSGPACK_FRESHNESS_001_VERIFIED.json"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "user_device_dependency": false,
+    "val_town_forbidden": true,
+    "ordinary_goal_only": true,
+    "manual_target_effects": false,
+    "manual_initial_facts": false,
+    "manual_controller_actions": false,
+    "manual_supplier": false,
+    "manual_binding": false,
+    "authoritative_live_metadata_required": true,
+    "independent_revalidation_required": true,
+    "dynamic_capability_acquisition_expected_for_ubjson": true,
+    "independent_binary_verification_required": true,
+    "fresh_mission_identity": true,
+    "no_self_promotion": true
+  }
+}
