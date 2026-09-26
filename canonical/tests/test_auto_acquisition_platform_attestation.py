@@ -22,6 +22,7 @@ npm=load("project_brain_test_platform_npm",RUNTIME_DIR/"auto_npm_library_acquisi
 compiler=load("project_brain_test_platform_compiler",RUNTIME_DIR/"goal_compiler.py")
 promoter=load("project_brain_test_platform_promoter",RUNTIME_DIR/"promote_pending_binding.py")
 npm_utils=load("project_brain_test_npm_utils",RUNTIME_DIR/"npm_package_utils.py")
+astra=load("project_brain_test_astra_runtime",RUNTIME_DIR/"astra_runtime.py")
 
 
 class AutoAcquisitionPlatformAttestationTests(unittest.TestCase):
@@ -266,6 +267,62 @@ class AutoAcquisitionPlatformAttestationTests(unittest.TestCase):
             "scripts":{"test":"node test.js"},
         })
         self.assertEqual(observed["dependency_count"],0)
+
+
+    def test_controller_accepts_cross_supplier_npm_verifier_action(self):
+        step={
+            "id":"goal",
+            "max_controller_actions":4,
+            "controller_actions":[
+                {
+                    "type":"verify_with_independent_npm_codec",
+                    "args":{
+                        "format":"cbor",
+                        "json_path":"canonical/astra_runtime/fixtures/AUTO_BLIND_CBOR_SOURCE.json",
+                        "binary_path":"canonical/astra_runtime/tmp/AUTO_BLIND_CBOR.cbor",
+                        "producer_project":"fake-cbor",
+                        "producer_capability_id":"auto.pypi.fake-cbor",
+                    },
+                    "expect":{"type":"field_equals","field":"verified","value":True},
+                },
+                {"type":"finish","args":{"summary":"DONE"}},
+            ],
+        }
+        mission={"mission_id":"TEST-CROSS-SUPPLIER-CONTROLLER"}
+        checkpoint={
+            "schema":"PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+            "mission_id":mission["mission_id"],
+            "step_id":"goal",
+            "plan_sha256":"x",
+            "status":"IN_PROGRESS",
+            "completed_actions":[],
+            "next_action_index":0,
+            "resume_count":0,
+        }
+        def fake_goal_action(action):
+            if action["type"]=="verify_with_independent_npm_codec":
+                return {"type":action["type"],"verified":True}
+            if action["type"]=="finish":
+                return {"type":"finish","summary":"DONE"}
+            raise AssertionError(action)
+        with (
+            mock.patch.object(
+                astra,"_load_controller_checkpoint",
+                return_value=(pathlib.Path("checkpoint.json"),checkpoint,False),
+            ),
+            mock.patch.object(
+                astra,"_write_controller_checkpoint",
+                side_effect=lambda path,data,trace,status="IN_PROGRESS": {
+                    **data,
+                    "completed_actions":list(trace),
+                    "status":status,
+                },
+            ),
+            mock.patch.object(astra,"_goal_action",side_effect=fake_goal_action),
+        ):
+            out=astra._run_model_independent_goal(step,mission,"demo")
+        self.assertEqual(out["final_summary"],"DONE")
+        self.assertEqual(out["trace"][0]["plan"]["type"],"verify_with_independent_npm_codec")
 
 
 if __name__=="__main__":
