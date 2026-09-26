@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-BLIND-AUTO-ACQUIRE-CBOR2-001",
+  "purpose": "Blind held-out proof that an ordinary goal with a missing Windows capability can trigger zero-cost supplier discovery, fresh independent verification, promotion, automatic replan, execution, and semantic verification without package or capability hints.",
+  "goal": "Encode canonical/astra_runtime/fixtures/AUTO_BLIND_CBOR2_SOURCE.json as CBOR2 and save canonical/astra_runtime/tmp/AUTO_BLIND_CBOR2.cbor2. Independently decode the CBOR2 artifact and verify the decoded records are exactly identical to canonical/astra_runtime/fixtures/AUTO_BLIND_CBOR2_SOURCE.json in values, order, field names, and record count.",
+  "steps": [
+    {
+      "id": "run-blind-auto-acquire-cbor2",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 24,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "fresh_mission_identity": true,
+    "manual_supplier": false,
+    "manual_package_name": false,
+    "manual_capability_id": false,
+    "required_target_effects_supplied_by_mission": false,
+    "semantic_goal_proposals_supplied_by_mission": false,
+    "capability_problem_proposal_supplied_by_mission": false,
+    "controller_actions_supplied_by_mission": false,
+    "originating_mission_must_remain_byte_identical": true,
+    "verified_acquisition_required_before_replan": true,
+    "current_platform_capability_required": true
+  }
+}
