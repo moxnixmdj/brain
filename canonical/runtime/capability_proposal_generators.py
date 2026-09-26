@@ -31,10 +31,29 @@ def _load_goal_compiler(runtime_dir):
     return module
 
 
+def _current_platform():
+    if sys.platform.startswith("linux"):
+        return "linux"
+    if sys.platform.startswith("win"):
+        return "windows"
+    if sys.platform=="darwin":
+        return "darwin"
+    return sys.platform
+
+
+def _platform_supported(entry):
+    platforms=entry.get("platforms")
+    if not isinstance(platforms,list) or not platforms:
+        return True
+    return _current_platform() in {str(x) for x in platforms}
+
+
 def _zero_spend_verified(entry):
     if not isinstance(entry,dict):
         return False
     if entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
+        return False
+    if not _platform_supported(entry):
         return False
     try:
         return float(entry.get("incremental_spend_usd",0) or 0)==0
