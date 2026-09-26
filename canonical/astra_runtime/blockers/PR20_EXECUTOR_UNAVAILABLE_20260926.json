@@ -4,7 +4,7 @@
   "artifact_id": "generic-native-probe-recovery-main",
   "target_revision": "05eaaf0cab39e3e3c392cf57ef38af56cb36fde7",
   "verification_capsule": "canonical/astra_runtime/verification_capsules/PR20_GENERIC_NATIVE_PROBE_RECOVERY_001.json",
-  "status": "EXECUTOR_UNAVAILABLE",
+  "status": "SUPERSEDED_BY_EXECUTION_EVIDENCE",
   "incremental_spend_usd": 0,
   "requirements": {
     "private_repo_access": true,
@@ -55,6 +55,16 @@
       "reason": "User explicitly required execution without their device and total replacement of that dependency."
     }
   ],
-  "next_admissible_event": "An already-authorized execution surface becomes available that can access the exact private revision and proves hard-zero incremental spend.",
-  "fail_closed": true
+  "next_admissible_event": null,
+  "fail_closed": true,
+  "superseded_by": {
+    "executor_id": "chatgpt-session-linux-private-github-drive-base64-bridge-20260926",
+    "method": "private GitHub connector -> Base64 -> private Google Drive scratch transport -> ChatGPT Linux container",
+    "exact_git_blob_verification": true,
+    "runtime_test_blob_count": 90,
+    "canonical_fixture_blob_count": 3,
+    "execution_exit_code": 0,
+    "executed_receipt_sha256": "5eb0633e0be1b2d80da8ebc32b831aafed635c4ca770e2237dc7557f090f3185",
+    "verified_receipt_sha256": "8868531be41ac6991a7e9eb88c306418906d26126df7994aed854733b62447b7"
+  }
 }
