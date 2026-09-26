@@ -38,7 +38,9 @@ class AutoAcquisitionReplanTests(unittest.TestCase):
             "verification_mission_id":mid,
             "verification_mission_path":rel,
         }
-        with tempfile.TemporaryDirectory() as td:
+        tmp_parent=CANONICAL_ROOT/"astra_runtime"/"tmp"
+        tmp_parent.mkdir(parents=True,exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=tmp_parent) as td:
             state_dir=pathlib.Path(td)
             (state_dir/(mid+".json")).write_text(
                 json.dumps({"status":"COMPLETE"}),encoding="utf-8"
