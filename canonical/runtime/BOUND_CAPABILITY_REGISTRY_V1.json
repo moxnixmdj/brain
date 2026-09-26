@@ -1373,6 +1373,27 @@
           "type": "literal",
           "value": null
         }
+      },
+      "input_bindings": {
+        "evidence_paths": {
+          "type": "referenced_context_paths",
+          "suffixes": [
+            ".json"
+          ],
+          "min_items": 2
+        },
+        "output_path": {
+          "type": "repo_output_path",
+          "suffixes": [
+            ".json"
+          ]
+        },
+        "max_age_s": {
+          "type": "integer_cue",
+          "cue": "freshness budget",
+          "default": 86400,
+          "minimum": 0
+        }
       }
     },
     "knowledge.json.fetch.external": {
@@ -1457,6 +1478,30 @@
         "url": {
           "type": "goal_url"
         }
+      },
+      "input_bindings": {
+        "url": {
+          "type": "single_url"
+        },
+        "json_path": {
+          "type": "json_path_cue",
+          "cue": "json path"
+        },
+        "output_path": {
+          "type": "repo_output_path",
+          "suffixes": [
+            ".json"
+          ]
+        },
+        "authoritative": {
+          "type": "boolean_keywords",
+          "true": [
+            "authoritative"
+          ],
+          "false": [
+            "external"
+          ]
+        }
       }
     },
     "knowledge.status.assert": {
@@ -1518,6 +1563,24 @@
           "verified_statuses": [
             "STALE",
             "CONFLICTED"
+          ]
+        }
+      },
+      "input_bindings": {
+        "assessment_path": {
+          "type": "latest_context_path",
+          "suffixes": [
+            ".json"
+          ]
+        },
+        "expected_status": {
+          "type": "enum_cue",
+          "cue": "knowledge status is",
+          "values": [
+            "SUPPORTED",
+            "CONFLICTED",
+            "INSUFFICIENT",
+            "STALE"
           ]
         }
       }

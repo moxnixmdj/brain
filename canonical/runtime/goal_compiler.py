@@ -152,6 +152,109 @@ def _context_path_for_key(key, context_paths):
     return seen[0] if len(seen)>=1 else None
 
 
+
+def _bind_declared_input(key, spec, goal, root, paths, context_paths):
+    """Resolve a placeholder from declarative, capability-owned binding metadata."""
+    if not isinstance(spec,dict):
+        raise GoalCompilationFailure("GOAL_INPUT_BINDING_SCHEMA_INVALID",key)
+    kind=str(spec.get("type") or "").strip()
+    text=str(goal or "")
+    lower=text.lower()
+
+    if kind=="single_url":
+        urls=[u.rstrip(".,;:!?") for u in re.findall(r"https?://[^\s)\]}>]+",text)]
+        if len(urls)==1:
+            return urls[0]
+        raise GoalCompilationFailure("GOAL_URL_BINDING_REQUIRED",str(len(urls)))
+
+    if kind=="json_path_cue":
+        cue=str(spec.get("cue") or "json path").strip()
+        m=re.search(re.escape(cue)+r"\s+([^\s,.;]+)",text,re.IGNORECASE)
+        if not m:
+            raise GoalCompilationFailure("GOAL_JSON_PATH_BINDING_REQUIRED",key)
+        parsed=_parse_json_path_spec(m.group(1))
+        if parsed is None:
+            raise GoalCompilationFailure("GOAL_JSON_PATH_BINDING_REQUIRED",m.group(1))
+        return parsed
+
+    if kind=="boolean_keywords":
+        true_terms=[str(x).lower() for x in (spec.get("true") or [])]
+        false_terms=[str(x).lower() for x in (spec.get("false") or [])]
+        t=any(term and term in lower for term in true_terms)
+        f=any(term and term in lower for term in false_terms)
+        if t==f:
+            raise GoalCompilationFailure("GOAL_BOOLEAN_BINDING_AMBIGUOUS",key)
+        return bool(t)
+
+    if kind=="referenced_context_paths":
+        suffixes={str(x).lower() for x in (spec.get("suffixes") or [])}
+        refs=[raw for raw,_ in paths if not suffixes or pathlib.Path(raw).suffix.lower() in suffixes]
+        known={str(x) for x in (context_paths or [])}
+        ordered=[]
+        for raw in refs:
+            if raw in known and raw not in ordered:
+                ordered.append(raw)
+        minimum=int(spec.get("min_items",1))
+        if len(ordered)<minimum:
+            raise GoalCompilationFailure("GOAL_CONTEXT_PATH_LIST_BINDING_REQUIRED",key)
+        return ordered
+
+    if kind=="latest_context_path":
+        suffixes={str(x).lower() for x in (spec.get("suffixes") or [])}
+        candidates=[
+            str(x) for x in (context_paths or [])
+            if not suffixes or pathlib.Path(str(x)).suffix.lower() in suffixes
+        ]
+        if not candidates:
+            raise GoalCompilationFailure("GOAL_CONTEXT_PATH_BINDING_REQUIRED",key)
+        return candidates[-1]
+
+    if kind=="integer_cue":
+        cue=str(spec.get("cue") or key).strip()
+        m=re.search(re.escape(cue)+r"\s+(\d+)",text,re.IGNORECASE)
+        if not m:
+            if "default" in spec:
+                return int(spec["default"])
+            raise GoalCompilationFailure("GOAL_INTEGER_BINDING_REQUIRED",key)
+        value=int(m.group(1))
+        if "minimum" in spec and value<int(spec["minimum"]):
+            raise GoalCompilationFailure("GOAL_INTEGER_BINDING_OUT_OF_RANGE",key)
+        if "maximum" in spec and value>int(spec["maximum"]):
+            raise GoalCompilationFailure("GOAL_INTEGER_BINDING_OUT_OF_RANGE",key)
+        return value
+
+    if kind=="enum_cue":
+        values=[str(x) for x in (spec.get("values") or [])]
+        cue=str(spec.get("cue") or "").strip()
+        segment=text
+        if cue:
+            m=re.search(re.escape(cue)+r"\s+([A-Za-z0-9_.-]+)",text,re.IGNORECASE)
+            if not m:
+                raise GoalCompilationFailure("GOAL_ENUM_BINDING_REQUIRED",key)
+            segment=m.group(1)
+        matches=[v for v in values if v.lower()==segment.strip(" .,:;").lower()]
+        if len(matches)!=1 and not cue:
+            matches=[v for v in values if re.search(r"\b"+re.escape(v)+r"\b",text,re.IGNORECASE)]
+        if len(matches)!=1:
+            raise GoalCompilationFailure("GOAL_ENUM_BINDING_REQUIRED",key)
+        return matches[0]
+
+    if kind=="repo_output_path":
+        suffixes={str(x).lower() for x in (spec.get("suffixes") or [])}
+        candidates=[
+            raw for raw,p in paths
+            if (not suffixes or p.suffix.lower() in suffixes)
+            and not p.exists()
+        ]
+        context={str(x) for x in (context_paths or [])}
+        candidates=[x for x in candidates if x not in context]
+        if len(candidates)==1:
+            return candidates[0]
+        raise GoalCompilationFailure("GOAL_OUTPUT_PATH_BINDING_REQUIRED",key)
+
+    raise GoalCompilationFailure("GOAL_INPUT_BINDING_SCHEMA_TYPE_UNSUPPORTED",kind)
+
+
 def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
     template=entry.get("action_template") or {}
     keys=_placeholders(template)
@@ -161,7 +264,13 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
     future_text=" ".join(str(x) for x in (future_clauses or []))
     future_paths=_repo_paths(future_text,root) if future_text else []
     result={}
+    declared_bindings=entry.get("input_bindings") or {}
     for key in keys:
+        if key in declared_bindings:
+            result[key]=_bind_declared_input(
+                key,declared_bindings[key],goal,root,paths,context_paths
+            )
+            continue
         if key=="text":
             result[key]=_extract_text_argument(goal)
             continue
@@ -3289,100 +3398,10 @@ def _parse_json_path_spec(raw_path):
     return path_spec
 
 
-def _compile_external_json_knowledge_fetch(clause,action_cycle):
-    text=str(clause or "").strip()
-    m=re.match(
-        r"^using\s+(?:an?\s+)?external\s+json\s+source\s+(https?://[^\s,]+),\s*"
-        r"extract\s+json\s+path\s+([^\s]+)\s+and\s+save\s+(?:the\s+)?knowledge\s+evidence\s+to\s+"
-        r"([^\s]+\.json)$",
-        text,re.IGNORECASE
-    )
-    if not m:
-        return None
-    url=m.group(1).rstrip(".,;:!?")
-    path_spec=_parse_json_path_spec(m.group(2))
-    if path_spec is None:
-        return None
-    output_path=m.group(3).strip(" .,:;")
-    return {
-      "action":{
-        "type":"fetch_json_knowledge",
-        "args":{
-          "url":url,
-          "json_path":path_spec,
-          "output_path":output_path,
-          "authoritative":False,
-          "timeout_s":20,
-          "max_bytes":1000000,
-        },
-        "expect":{"type":"field_equals","field":"verified","value":True},
-      },
-      "output_path":output_path,
-      "result_cycle":int(action_cycle),
-      "evidence":{
-        "source_url":url,
-        "json_path":path_spec,
-        "evidence_path":output_path,
-        "result_cycle":int(action_cycle),
-        "authoritative":False,
-      }
-    }
 
 
-def _compile_knowledge_consistency_assessment(clause,context_paths):
-    text=str(clause or "").strip()
-    m=re.match(
-        r"^assess\s+(?:the\s+)?knowledge\s+evidence\s+(.+?)\s+and\s+save\s+(?:the\s+)?assessment\s+to\s+"
-        r"([^\s]+\.json)(?:\s+with\s+freshness\s+budget\s+(\d+)\s+seconds?)?$",
-        text,re.IGNORECASE
-    )
-    if not m:
-        return None
-    blob=m.group(1)
-    output_path=m.group(2).strip(" .,:;")
-    max_age=int(m.group(3)) if m.group(3) is not None else None
-    paths=re.findall(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+\.json",blob)
-    if len(paths)<2:
-        return None
-    known={str(x) for x in context_paths or []}
-    if any(p not in known for p in paths):
-        return None
-    args={"evidence_paths":paths,"output_path":output_path}
-    if max_age is not None:
-        args["max_age_s"]=max_age
-    return {
-      "action":{
-        "type":"assess_knowledge_consistency",
-        "args":args,
-        "expect":{"type":"field_nonempty","field":"status"},
-      },
-      "output_path":output_path,
-      "evidence":{"evidence_paths":paths,"output_path":output_path,"max_age_s":max_age}
-    }
 
 
-def _compile_knowledge_status_assertion(clause,context_paths):
-    text=str(clause or "").strip()
-    m=re.match(
-        r"^(?:finally\s+)?verify\s+(?:that\s+)?(?:the\s+)?knowledge\s+status\s+is\s+"
-        r"(SUPPORTED|CONFLICTED|INSUFFICIENT|STALE)$",
-        text,re.IGNORECASE
-    )
-    if not m:
-        return None
-    status=m.group(1).upper()
-    json_paths=[str(x) for x in context_paths or [] if str(x).lower().endswith(".json")]
-    if not json_paths:
-        return None
-    assessment_path=json_paths[-1]
-    return {
-      "action":{
-        "type":"assert_knowledge_status",
-        "args":{"assessment_path":assessment_path,"expected_status":status},
-        "expect":{"type":"field_equals","field":"verified","value":True},
-      },
-      "evidence":{"assessment_path":assessment_path,"expected_status":status}
-    }
 
 
 def _compile_authoritative_json_knowledge_fetch(clause,action_cycle):
@@ -3526,37 +3545,8 @@ def _compile_compound_goal(goal, clauses, registry, root):
             continue
         lower=clause.lower()
 
-        external_knowledge_fetch=_compile_external_json_knowledge_fetch(clause,len(actions))
-        if external_knowledge_fetch is not None:
-            actions.append(external_knowledge_fetch["action"])
-            context_paths.append(external_knowledge_fetch["output_path"])
-            compiled_parts.append({
-                "index":index,"subgoal":clause,
-                "mode":"EXTERNAL_JSON_KNOWLEDGE_FETCH",
-                **external_knowledge_fetch["evidence"],
-            })
-            continue
 
-        knowledge_assessment=_compile_knowledge_consistency_assessment(clause,context_paths)
-        if knowledge_assessment is not None:
-            actions.append(knowledge_assessment["action"])
-            context_paths.append(knowledge_assessment["output_path"])
-            compiled_parts.append({
-                "index":index,"subgoal":clause,
-                "mode":"KNOWLEDGE_CONSISTENCY_ASSESSMENT",
-                **knowledge_assessment["evidence"],
-            })
-            continue
 
-        knowledge_status=_compile_knowledge_status_assertion(clause,context_paths)
-        if knowledge_status is not None:
-            actions.append(knowledge_status["action"])
-            compiled_parts.append({
-                "index":index,"subgoal":clause,
-                "mode":"KNOWLEDGE_STATUS_ASSERTION",
-                **knowledge_status["evidence"],
-            })
-            continue
 
         knowledge_fetch=_compile_authoritative_json_knowledge_fetch(clause,len(actions))
         if knowledge_fetch is not None:
