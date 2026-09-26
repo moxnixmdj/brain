@@ -86,6 +86,23 @@ class AutoSingleCapabilityProposalTests(unittest.TestCase):
         )
         self.assertEqual(evidence["selected_capability"],"image.qr.generate.qrencode")
 
+    def test_current_platform_mismatch_is_not_selected(self):
+        registry=self.qr_registry()
+        registry["image.qr.generate.qrencode"]["platforms"]=["definitely-not-this-platform"]
+        with self.assertRaisesRegex(
+            generator.CapabilityProposalFailure,
+            "NO_BINDABLE_VERIFIED_CAPABILITY",
+        ):
+            generator.generate(
+                "single-verified-capability-v1",
+                self.GOAL,
+                [self.TARGET],
+                [],
+                registry,
+                CANONICAL_ROOT.parent,
+                RUNTIME_DIR,
+            )
+
     def test_unsatisfied_requirement_is_not_assumed(self):
         registry=self.qr_registry()
         registry["test.needs.fact"]={
