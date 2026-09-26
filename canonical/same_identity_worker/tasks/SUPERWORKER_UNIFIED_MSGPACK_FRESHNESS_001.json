@@ -1,0 +1,11 @@
+{
+  "schema": "PROJECT_BRAIN_SAME_IDENTITY_TASK_V1",
+  "task_id": "SUPERWORKER-UNIFIED-MSGPACK-FRESHNESS-001",
+  "agent_id": "SUPERWORKER-UNIFIED-1",
+  "mission_path": "canonical/astra_runtime/missions/SUPERWORKER_UNIFIED_MSGPACK_FRESHNESS_001.json",
+  "mission_sha256": "1f4f0cfdea0a4d0d7fe73aeeaf5a2b4d666957d5e20753835b63dd56f01e013b",
+  "priority": 100,
+  "prerequisites": [],
+  "incremental_spend_usd": 0,
+  "checkpoint_before_runtime_once": true
+}
