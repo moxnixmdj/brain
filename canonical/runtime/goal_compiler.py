@@ -12,6 +12,7 @@ import hashlib
 import json
 import pathlib
 import re
+import sys
 
 
 class GoalCompilationFailure(RuntimeError):
@@ -30,6 +31,37 @@ GENERIC_MATCH_TOKENS={
     "generate","image","text","extract","create","save","output","input",
     "file","read","write","convert","process","data"
 }
+
+
+
+def _current_runtime_platform():
+    value=str(sys.platform or "")
+    if value.startswith("linux"):
+        return "linux"
+    if value.startswith("win") or value in {"cygwin","msys"}:
+        return "windows"
+    if value=="darwin":
+        return "darwin"
+    raise GoalCompilationFailure("GOAL_COMPILATION_PLATFORM_UNSUPPORTED",value)
+
+
+def _platform_admissible_registry(registry):
+    current=_current_runtime_platform()
+    out={}
+    for cid,entry in (registry or {}).items():
+        if not isinstance(entry,dict):
+            continue
+        platforms=entry.get("platforms")
+        # Legacy verified entries without platform metadata remain visible until
+        # separately re-attested. Explicit platform claims are authoritative.
+        if platforms is None:
+            out[cid]=entry
+            continue
+        if not isinstance(platforms,list) or not platforms:
+            continue
+        if current in {str(x) for x in platforms}:
+            out[cid]=entry
+    return out
 
 
 def _tokens(value):
@@ -4424,6 +4456,7 @@ def compile_goal(goal, registry, root):
     goal=str(goal or "").strip()
     if not goal:
         raise GoalCompilationFailure("GOAL_REQUIRED")
+    registry=_platform_admissible_registry(registry)
     browser_interaction=_compile_verified_browser_interaction(goal,registry,root)
     if browser_interaction is not None:
         return _validate_compiled_clause_coverage(browser_interaction)
