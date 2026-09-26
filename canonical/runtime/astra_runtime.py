@@ -94,6 +94,17 @@ def run_http(step):
           "duration_s":round(time.monotonic()-t,3)
         }
 
+def _canonical_mission_path(raw):
+    value=str(raw or "").strip().replace("\\","/")
+    if value.startswith("/"):
+        value=value.lstrip("/")
+    p=(ROOT/pathlib.PurePosixPath(value)).resolve()
+    root=ROOT.resolve()
+    if p==root or root not in p.parents:
+        raise Blocker("MISSION_PATH_OUTSIDE_ROOT")
+    return p,p.relative_to(root).as_posix()
+
+
 def _safe_repo_path(raw):
     value=str(raw or "").strip()
     # Planner sources sometimes express repository-root-relative paths as
@@ -5268,13 +5279,10 @@ def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("mission")
     a=ap.parse_args()
-    mission_path=(ROOT/a.mission).resolve()
-    if ROOT.resolve() not in mission_path.parents:
-        raise Blocker("MISSION_PATH_OUTSIDE_ROOT")
+    mission_path,mission_rel=_canonical_mission_path(a.mission)
     mission=readj(mission_path)
     mid=mission["mission_id"]
     mission_sha256=sha_file(mission_path)
-    mission_rel=mission_path.relative_to(ROOT.resolve()).as_posix()
     mission["_runtime_mission_path"]=mission_rel
     state_path=STATE_DIR/f"{mid}.json"
     state=readj(state_path) if state_path.exists() else {
@@ -5287,8 +5295,8 @@ def main():
         raise Blocker("STATE_MISSION_ID_MISMATCH")
     stored_mission_path=str(state.get("mission_path") or mission_rel)
     try:
-        stored_mission_resolved=(ROOT/stored_mission_path).resolve()
-    except Exception as exc:
+        stored_mission_resolved,_stored_rel=_canonical_mission_path(stored_mission_path)
+    except Blocker as exc:
         raise Blocker("STATE_MISSION_PATH_INVALID") from exc
     if stored_mission_resolved!=mission_path:
         raise Blocker("STATE_MISSION_PATH_MISMATCH")
