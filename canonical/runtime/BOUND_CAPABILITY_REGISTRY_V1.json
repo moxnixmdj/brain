@@ -751,6 +751,75 @@
         "verification_evidence": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MARKDOWN-PDF-001__INDEPENDENT.json"
       }
     },
+    "docx.document.create_from_json_record": {
+      "action_template": {
+        "args": {
+          "capability_id": "docx.document.create_from_json_record",
+          "goal": "${input.goal}",
+          "json_path": "${input.json_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "docx_report_from_json",
+      "cost": 2,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "docx",
+        "document",
+        "report",
+        "json",
+        "record",
+        "normalized",
+        "field",
+        "value",
+        "table",
+        "create"
+      ],
+      "limitations": [
+        "Consumes exactly one unambiguous structured JSON record containing all requested fields.",
+        "Builds a two-column field/value report by composing the independently verified DOCX producer."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "docx.document.create_from_json_record"
+      ],
+      "requires": [
+        "structured.json.available"
+      ],
+      "source": {
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "python3-docx",
+            "sha256": "8dec367f86be44b86bb3c7329ccc6af165854008fd23e185f44500ece39bdb80",
+            "version": "1.1.0+dfsg-2"
+          }
+        ],
+        "type": "apt"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "docx.document.verify.intent_ooxml",
+        "mission_id": "ASTRA-VERIFY-DOCX-JSON-ROUNDTRIP-001",
+        "observed_effect": {
+          "output_path": "canonical/astra_runtime/tmp/DOCX_JSON_ROUNDTRIP_VERIFY.docx",
+          "output_sha256": "ebd1ca200e7aed9befb0cdd78ebb099014c289b8774d743e52b0a6e34543dc25",
+          "rows": 4,
+          "title": "Browser Submission Report"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DOCX-JSON-ROUNDTRIP-001__RECEIPT.json",
+        "source_record_verified": true
+      }
+    },
     "docx.document.create.python_docx": {
       "acquisition_evidence": {
         "description": "library for creating and updating Microsoft Word files (Python 3)",
@@ -827,75 +896,6 @@
           "title": "Project Brain Report"
         },
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DOCX-LIBRARY-BINDING-001__RECEIPT.json"
-      }
-    },
-    "docx.document.create_from_json_record": {
-      "action_template": {
-        "args": {
-          "capability_id": "docx.document.create_from_json_record",
-          "goal": "${input.goal}",
-          "json_path": "${input.json_path}",
-          "output_path": "${input.output_path}"
-        },
-        "expect": {
-          "field": "output_verified",
-          "type": "field_equals",
-          "value": true
-        },
-        "type": "invoke_capability"
-      },
-      "adapter_module": "docx_report_from_json",
-      "cost": 2,
-      "entrypoint": "run",
-      "incremental_spend_usd": 0,
-      "keywords": [
-        "docx",
-        "document",
-        "report",
-        "json",
-        "record",
-        "normalized",
-        "field",
-        "value",
-        "table",
-        "create"
-      ],
-      "limitations": [
-        "Consumes exactly one unambiguous structured JSON record containing all requested fields.",
-        "Builds a two-column field/value report by composing the independently verified DOCX producer."
-      ],
-      "platforms": [
-        "linux"
-      ],
-      "provides": [
-        "docx.document.create_from_json_record"
-      ],
-      "requires": [
-        "structured.json.available"
-      ],
-      "source": {
-        "origin": "Ubuntu",
-        "packages": [
-          {
-            "name": "python3-docx",
-            "sha256": "8dec367f86be44b86bb3c7329ccc6af165854008fd23e185f44500ece39bdb80",
-            "version": "1.1.0+dfsg-2"
-          }
-        ],
-        "type": "apt"
-      },
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "verification": {
-        "independently_verified_by": "docx.document.verify.intent_ooxml",
-        "mission_id": "ASTRA-VERIFY-DOCX-JSON-ROUNDTRIP-001",
-        "observed_effect": {
-          "output_path": "canonical/astra_runtime/tmp/DOCX_JSON_ROUNDTRIP_VERIFY.docx",
-          "output_sha256": "ebd1ca200e7aed9befb0cdd78ebb099014c289b8774d743e52b0a6e34543dc25",
-          "rows": 4,
-          "title": "Browser Submission Report"
-        },
-        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DOCX-JSON-ROUNDTRIP-001__RECEIPT.json",
-        "source_record_verified": true
       }
     },
     "docx.document.verify.intent_ooxml": {
@@ -1288,6 +1288,266 @@
         "independent_verifier": "python-stdlib-json",
         "mission_id": "ASTRA-VERIFY-JQ-STRUCTURED-DATA-001",
         "verification_evidence": "canonical/astra_runtime/evidence/ASTRA-VERIFY-JQ-STRUCTURED-DATA-001__INDEPENDENT.json"
+      }
+    },
+    "knowledge.consistency.assess": {
+      "action_template": {
+        "type": "assess_knowledge_consistency",
+        "args": {
+          "evidence_paths": "${input.evidence_paths}",
+          "output_path": "${input.output_path}",
+          "max_age_s": "${input.max_age_s}"
+        },
+        "expect": {
+          "type": "field_nonempty",
+          "field": "status"
+        }
+      },
+      "adapter_module": "runtime_native_action",
+      "cost": 1,
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "knowledge",
+        "consistency",
+        "corroboration",
+        "conflict",
+        "freshness",
+        "assessment"
+      ],
+      "limitations": [
+        "Requires one or more provenance-bearing knowledge evidence artifacts.",
+        "A caller that needs multiple independent observations must instantiate repeated requirements explicitly."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "knowledge.assessment.available"
+      ],
+      "requires": [
+        "knowledge.observation.available"
+      ],
+      "result_fields": [
+        "verified",
+        "status",
+        "evidence_count",
+        "fresh_evidence_count",
+        "distinct_fresh_values",
+        "output_path"
+      ],
+      "source": {
+        "type": "runtime_native",
+        "runtime_path": "canonical/runtime/astra_runtime.py",
+        "action_type": "assess_knowledge_consistency"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-CONFLICT-001",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-JIT-KNOWLEDGE-CONFLICT-001__RECEIPT.json",
+        "additional_receipts": [
+          "canonical/astra_runtime/evidence/ASTRA-RUNTIME-JIT-KNOWLEDGE-SUPPORT-001__RECEIPT.json",
+          "canonical/astra_runtime/evidence/ASTRA-RUNTIME-JIT-KNOWLEDGE-STALE-PLAIN-001__RECEIPT.json"
+        ],
+        "observed_effect": {
+          "statuses": [
+            "SUPPORTED",
+            "CONFLICTED",
+            "STALE"
+          ]
+        }
+      }
+    },
+    "knowledge.json.fetch.external": {
+      "action_template": {
+        "type": "fetch_json_knowledge",
+        "args": {
+          "url": "${input.url}",
+          "json_path": "${input.json_path}",
+          "output_path": "${input.output_path}",
+          "authoritative": "${input.authoritative}",
+          "timeout_s": 20,
+          "max_bytes": 1000000
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "verified",
+          "value": true
+        }
+      },
+      "adapter_module": "runtime_native_action",
+      "cost": 1,
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "knowledge",
+        "json",
+        "fetch",
+        "external",
+        "evidence",
+        "observation"
+      ],
+      "limitations": [
+        "Source must be reachable over HTTP(S) and return JSON.",
+        "This capability records provenance but does not by itself establish corroboration."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "knowledge.observation.available"
+      ],
+      "requires": [
+        "network.http.available"
+      ],
+      "result_fields": [
+        "verified",
+        "output_path",
+        "body_sha256",
+        "json_path",
+        "value",
+        "final_url",
+        "duration_s"
+      ],
+      "source": {
+        "type": "runtime_native",
+        "runtime_path": "canonical/runtime/astra_runtime.py",
+        "action_type": "fetch_json_knowledge"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-SUPPORT-001",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-JIT-KNOWLEDGE-SUPPORT-001__RECEIPT.json",
+        "observed_effect": {
+          "live_external_observations": 2,
+          "assessment_status": "SUPPORTED"
+        }
+      }
+    },
+    "knowledge.status.assert": {
+      "action_template": {
+        "type": "assert_knowledge_status",
+        "args": {
+          "assessment_path": "${input.assessment_path}",
+          "expected_status": "${input.expected_status}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "verified",
+          "value": true
+        }
+      },
+      "adapter_module": "runtime_native_action",
+      "cost": 1,
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "knowledge",
+        "status",
+        "verify",
+        "assert",
+        "epistemic"
+      ],
+      "limitations": [
+        "Verifies an assessment status; it does not make unsupported knowledge actionable."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "knowledge.status.verified"
+      ],
+      "requires": [
+        "knowledge.assessment.available"
+      ],
+      "result_fields": [
+        "verified",
+        "observed_status",
+        "expected_status",
+        "assessment_path"
+      ],
+      "source": {
+        "type": "runtime_native",
+        "runtime_path": "canonical/runtime/astra_runtime.py",
+        "action_type": "assert_knowledge_status"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-STALE-PLAIN-001",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-JIT-KNOWLEDGE-STALE-PLAIN-001__RECEIPT.json",
+        "additional_receipts": [
+          "canonical/astra_runtime/evidence/ASTRA-RUNTIME-JIT-KNOWLEDGE-CONFLICT-001__RECEIPT.json"
+        ],
+        "observed_effect": {
+          "verified_statuses": [
+            "STALE",
+            "CONFLICTED"
+          ]
+        }
+      }
+    },
+    "knowledge.support.materialize": {
+      "action_template": {
+        "type": "materialize_supported_knowledge",
+        "args": {
+          "assessment_path": "${input.assessment_path}",
+          "field_name": "${input.field_name}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "runtime_native_action",
+      "cost": 1,
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "knowledge",
+        "supported",
+        "materialize",
+        "fact",
+        "actionable"
+      ],
+      "limitations": [
+        "Fails closed unless the assessment status is SUPPORTED.",
+        "On the epistemic-hardening branch, supporting evidence is revalidated immediately before materialization."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "knowledge.fact.materialized"
+      ],
+      "requires": [
+        "knowledge.assessment.available"
+      ],
+      "result_fields": [
+        "output_verified",
+        "status",
+        "value",
+        "field_name",
+        "output_path"
+      ],
+      "source": {
+        "type": "runtime_native",
+        "runtime_path": "canonical/runtime/astra_runtime.py",
+        "action_type": "materialize_supported_knowledge"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-ACTION-GATE-001",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-JIT-KNOWLEDGE-ACTION-GATE-001__RECEIPT.json",
+        "observed_effect": {
+          "supported_materialized": true,
+          "conflicted_materialized": false
+        }
       }
     },
     "pdf.extract.ocr.tesseract": {

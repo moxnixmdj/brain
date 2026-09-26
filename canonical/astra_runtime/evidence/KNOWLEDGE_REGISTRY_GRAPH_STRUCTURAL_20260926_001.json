@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_RESEARCH_STRUCTURAL_EVIDENCE_V1",
+  "evidence_id": "KNOWLEDGE-REGISTRY-GRAPH-STRUCTURAL-20260926-001",
+  "branch": "research/knowledge-registry-primitives-20260926",
+  "base_stack": [
+    "research/capability-valueflow-20260926",
+    "research/verified-capability-instances-20260926"
+  ],
+  "tested_components": [
+    "generic effect-to-runtime-result valueflow",
+    "verified capability instantiation",
+    "repeated semantic requirement instantiation",
+    "registry-native knowledge primitives"
+  ],
+  "isolated_harness": {
+    "status": "PASS",
+    "checks": 4,
+    "selected_plan": [
+      "observe-a",
+      "observe-b",
+      "assess-two",
+      "materialize-fact"
+    ],
+    "action_types": [
+      "fetch_json_knowledge",
+      "fetch_json_knowledge",
+      "assess_knowledge_consistency",
+      "materialize_supported_knowledge",
+      "finish"
+    ],
+    "verified_bindings": [
+      "observation.a.output_path -> assessment.evidence_paths[0]",
+      "observation.b.output_path -> assessment.evidence_paths[1]",
+      "assessment.output_path -> materialize.assessment_path"
+    ],
+    "adversarial_check": "undeclared effect alias rejected"
+  },
+  "evidence_class": "STRUCTURAL_ISOLATED_EXECUTION",
+  "promotion_status": "NOT_PROMOTED",
+  "canonical_regression_status": "NOT_RUN",
+  "live_runtime_mission_status": "NOT_RUN",
+  "blocker": "Authorized desktop executor offline; private GitHub-hosted runner zero-incremental-spend condition not provable from available account APIs.",
+  "required_before_promotion": [
+    "python compile checks on exact branch revision",
+    "full canonical unittest suite",
+    "ASTRA-RUNTIME-GENERIC-EFFECT-VALUEFLOW-001",
+    "ASTRA-RUNTIME-GENERIC-KNOWLEDGE-GRAPH-001",
+    "ASTRA-RUNTIME-REGISTRY-KNOWLEDGE-GRAPH-001",
+    "independent artifact verification",
+    "rebase/reconcile against then-current main"
+  ]
+}
