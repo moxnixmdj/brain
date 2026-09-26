@@ -26,6 +26,12 @@ def main():
     cid=pending["capability_id"]
     if verified.get("capability_id")!=cid or verified.get("independent_verified") is not True:
         raise RuntimeError("VERIFICATION_NOT_PROMOTABLE")
+    semantic_roundtrip=verified.get("semantic_roundtrip")
+    if (
+        isinstance(semantic_roundtrip,dict)
+        and semantic_roundtrip.get("implementation_independent") is False
+    ):
+        raise RuntimeError("VERIFICATION_IMPLEMENTATION_NOT_INDEPENDENT")
     if verified.get("verification_mission_id")!=pending.get("verification_mission_id"):
         raise RuntimeError("VERIFICATION_MISSION_MISMATCH")
     registry=json.loads(REGISTRY.read_text(encoding="utf-8"))
