@@ -269,14 +269,7 @@ def _resolve(module,name):
 
 
 def _infer_codec_contract(candidate,wheel_closure,root):
-    pairs=[("packb","unpackb"),("dumps","loads"),("encode","decode"),("serialize","deserialize")]
     fixture=[{"id":1,"text":"alpha"},{"id":2,"text":"beta"}]
-    envelope_key="__project_brain_payload__"
-    representations=[
-      ("direct",fixture,None),
-      ("mapping_envelope",{envelope_key:fixture},envelope_key),
-    ]
-    attempts=[]
     root_wheel=wheel_closure["root"]
     closure_wheels=wheel_closure["wheels"]
     with tempfile.TemporaryDirectory(prefix="brain-pypi-probe-") as td:
@@ -297,55 +290,117 @@ def _infer_codec_contract(candidate,wheel_closure,root):
         )
         if proc.returncode!=0:
             raise AutoPyPIAcquisitionFailure("PYPI_PROBE_INSTALL_FAILED",proc.stderr[-1200:])
+
         modules=_module_candidates(root_wheel["path"])
-        sys.path.insert(0,str(site))
+        probe_script=r"""
+import hashlib,importlib,json,pathlib,sys
+site=pathlib.Path(sys.argv[1]).resolve()
+modules=json.loads(sys.argv[2])
+fixture=[{"id":1,"text":"alpha"},{"id":2,"text":"beta"}]
+envelope_key="__project_brain_payload__"
+representations=[
+  ("direct",fixture,None),
+  ("mapping_envelope",{envelope_key:fixture},envelope_key),
+]
+pairs=[("packb","unpackb"),("dumps","loads"),("encode","decode"),("serialize","deserialize")]
+attempts=[]
+sys.path.insert(0,str(site))
+
+def resolve(module,name):
+    current=module
+    for part in str(name).split("."):
+        current=getattr(current,part)
+    if not callable(current):
+        raise TypeError(name)
+    return current
+
+for module_name in modules:
+    try:
+        module=importlib.import_module(module_name)
+    except Exception as exc:
+        attempts.append({"module":module_name,"status":"IMPORT_FAILED","error":type(exc).__name__+":"+str(exc)})
+        continue
+    for enc_name,dec_name in pairs:
         try:
-            for module_name in modules:
-                for key in list(sys.modules):
-                    if key==module_name or key.startswith(module_name+"."): sys.modules.pop(key,None)
+            enc=resolve(module,enc_name); dec=resolve(module,dec_name)
+        except Exception:
+            continue
+        for representation,probe_value,unwrap_key in representations:
+            for enc_kwargs in ({},{"use_bin_type":True}):
                 try:
-                    module=importlib.import_module(module_name)
-                except Exception as exc:
-                    attempts.append({"module":module_name,"status":"IMPORT_FAILED","error":type(exc).__name__}); continue
-                for enc_name,dec_name in pairs:
+                    payload=enc(probe_value,**enc_kwargs)
+                except Exception:
+                    continue
+                if isinstance(payload,memoryview): payload=payload.tobytes()
+                if isinstance(payload,bytearray): payload=bytes(payload)
+                if not isinstance(payload,bytes) or not payload:
+                    continue
+                for dec_kwargs in ({},{"raw":False}):
                     try:
-                        enc=_resolve(module,enc_name); dec=_resolve(module,dec_name)
+                        observed=dec(payload,**dec_kwargs)
                     except Exception:
                         continue
-                    for representation,probe_value,unwrap_key in representations:
-                        for enc_kwargs in ({},{"use_bin_type":True}):
-                            try: payload=enc(probe_value,**enc_kwargs)
-                            except Exception: continue
-                            if isinstance(payload,memoryview): payload=payload.tobytes()
-                            if isinstance(payload,bytearray): payload=bytes(payload)
-                            if not isinstance(payload,bytes) or not payload: continue
-                            for dec_kwargs in ({},{"raw":False}):
-                                try: observed=dec(payload,**dec_kwargs)
-                                except Exception: continue
-                                semantic=observed
-                                if unwrap_key is not None:
-                                    if not isinstance(observed,dict) or unwrap_key not in observed:
-                                        continue
-                                    semantic=observed[unwrap_key]
-                                if semantic==fixture:
-                                    return {
-                                      "schema":"PROJECT_BRAIN_PYPI_CODEC_CONTRACT_V1",
-                                      "module":module_name,"encode_callable":enc_name,"decode_callable":dec_name,
-                                      "encode_kwargs":enc_kwargs,"decode_kwargs":dec_kwargs,"fixture":fixture,
-                                      "representation":representation,"envelope_key":unwrap_key,
-                                      "probe_output_sha256":hashlib.sha256(payload).hexdigest(),
-                                      "probe_output_bytes":len(payload),"wheel_filename":root_wheel["filename"],
-                                      "wheel_sha256":root_wheel["sha256"],
-                                      "dependency_closure_sha256":wheel_closure["lock"]["closure_sha256"],
-                                      "dependency_wheel_count":wheel_closure["lock"]["wheel_count"],"project":candidate.get("project") or candidate.get("name"),
-                                      "version":candidate.get("version"),
-                                    }
-                    attempts.append({"module":module_name,"encode":enc_name,"decode":dec_name,"status":"ROUNDTRIP_REJECTED"})
-        finally:
-            try: sys.path.remove(str(site))
-            except ValueError: pass
-    raise AutoPyPIAcquisitionFailure("NO_COMPATIBLE_PYPI_CODEC_CONTRACT",json.dumps(attempts,sort_keys=True)[:2500])
+                    semantic=observed
+                    if unwrap_key is not None:
+                        if not isinstance(observed,dict) or unwrap_key not in observed:
+                            continue
+                        semantic=observed[unwrap_key]
+                    if semantic==fixture:
+                        print(json.dumps({
+                          "ok":True,
+                          "module":module_name,
+                          "encode_callable":enc_name,
+                          "decode_callable":dec_name,
+                          "encode_kwargs":enc_kwargs,
+                          "decode_kwargs":dec_kwargs,
+                          "fixture":fixture,
+                          "representation":representation,
+                          "envelope_key":unwrap_key,
+                          "probe_output_sha256":hashlib.sha256(payload).hexdigest(),
+                          "probe_output_bytes":len(payload),
+                        },sort_keys=True))
+                        raise SystemExit(0)
+        attempts.append({"module":module_name,"encode":enc_name,"decode":dec_name,"status":"ROUNDTRIP_REJECTED"})
+print(json.dumps({"ok":False,"attempts":attempts},sort_keys=True))
+raise SystemExit(3)
+"""
+        probe=subprocess.run(
+            [sys.executable,"-c",probe_script,str(site),json.dumps(modules)],
+            cwd=root,text=True,capture_output=True,timeout=90
+        )
+        try:
+            observed=json.loads((probe.stdout or "").strip().splitlines()[-1])
+        except Exception as exc:
+            raise AutoPyPIAcquisitionFailure(
+                "PYPI_PROBE_RESULT_INVALID",
+                (probe.stderr or probe.stdout or "")[-1200:]
+            ) from exc
+        if probe.returncode!=0 or observed.get("ok") is not True:
+            raise AutoPyPIAcquisitionFailure(
+                "NO_COMPATIBLE_PYPI_CODEC_CONTRACT",
+                json.dumps(observed.get("attempts") or [],sort_keys=True)[:2500]
+            )
 
+        return {
+          "schema":"PROJECT_BRAIN_PYPI_CODEC_CONTRACT_V1",
+          "module":observed["module"],
+          "encode_callable":observed["encode_callable"],
+          "decode_callable":observed["decode_callable"],
+          "encode_kwargs":observed.get("encode_kwargs") or {},
+          "decode_kwargs":observed.get("decode_kwargs") or {},
+          "fixture":observed["fixture"],
+          "representation":observed["representation"],
+          "envelope_key":observed.get("envelope_key"),
+          "probe_output_sha256":observed["probe_output_sha256"],
+          "probe_output_bytes":observed["probe_output_bytes"],
+          "wheel_filename":root_wheel["filename"],
+          "wheel_sha256":root_wheel["sha256"],
+          "dependency_closure_sha256":wheel_closure["lock"]["closure_sha256"],
+          "dependency_wheel_count":wheel_closure["lock"]["wheel_count"],
+          "project":candidate.get("project") or candidate.get("name"),
+          "version":candidate.get("version"),
+          "probe_isolation":"fresh_child_python_process",
+        }
 
 def dispatch(goal,mission_id,mission_path,root,discovery=None):
     root=pathlib.Path(root).resolve()

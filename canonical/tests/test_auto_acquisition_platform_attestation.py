@@ -444,5 +444,63 @@ class AutoAcquisitionPlatformAttestationTests(unittest.TestCase):
             npm._search_registry("",format_hint="../cbor")
 
 
+    def test_pypi_codec_probe_runs_candidate_import_in_child_python(self):
+        candidate={"project":"fakecodec","name":"fakecodec","version":"1.0.0"}
+        with tempfile.TemporaryDirectory() as td:
+            root=pathlib.Path(td)
+            wheel=root/"fakecodec-1.0.0-py3-none-any.whl"
+            wheel.write_bytes(b"fake-wheel")
+            closure={
+                "root":{
+                    "filename":wheel.name,
+                    "sha256":"a"*64,
+                    "path":str(wheel),
+                },
+                "wheels":[{
+                    "filename":wheel.name,
+                    "sha256":"a"*64,
+                    "path":str(wheel),
+                }],
+                "lock":{
+                    "closure_sha256":"b"*64,
+                    "wheel_count":1,
+                },
+            }
+            calls=[]
+            def fake_run(argv,**kwargs):
+                calls.append(list(argv))
+                if "-m" in argv and "pip" in argv:
+                    return mock.Mock(returncode=0,stdout="",stderr="")
+                self.assertEqual(argv[0],pypi.sys.executable)
+                self.assertEqual(argv[1],"-c")
+                return mock.Mock(
+                    returncode=0,
+                    stdout=json.dumps({
+                        "ok":True,
+                        "module":"fakecodec",
+                        "encode_callable":"dumps",
+                        "decode_callable":"loads",
+                        "encode_kwargs":{},
+                        "decode_kwargs":{},
+                        "fixture":[{"id":1,"text":"alpha"},{"id":2,"text":"beta"}],
+                        "representation":"direct",
+                        "envelope_key":None,
+                        "probe_output_sha256":"c"*64,
+                        "probe_output_bytes":12,
+                    })+"\n",
+                    stderr="",
+                )
+            with (
+                mock.patch.object(pypi,"_module_candidates",return_value=["fakecodec"]),
+                mock.patch.object(pypi.subprocess,"run",side_effect=fake_run),
+            ):
+                observed=pypi._infer_codec_contract(candidate,closure,root)
+
+        self.assertEqual(observed["probe_isolation"],"fresh_child_python_process")
+        self.assertEqual(observed["module"],"fakecodec")
+        self.assertEqual(len(calls),2)
+        self.assertEqual(calls[1][0:2],[pypi.sys.executable,"-c"])
+
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
