@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-AUTO-MULTI-CAPABILITY-PROPOSAL-001",
+  "purpose": "Prove an ordinary goal can derive a terminal effect, synthesize a verified multi-capability graph, wire producer output into consumer input through declared effect-result metadata, execute the graph, and independently verify the resulting artifact without mission-authored target effects, semantic proposals, capability proposal, controller actions, or valueflow links.",
+  "goal": "Assess the knowledge consistency of the observation available from https://httpbin.org/get?claim=alpha.",
+  "steps": [
+    {
+      "id": "execute-auto-semantic-auto-multi-proposal",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "verified_initial_facts": [
+        "network.http.available"
+      ],
+      "semantic_goal_authority_generators": [
+        "registry-effect-lexical-v1",
+        "compiler-score-v1"
+      ],
+      "semantic_authority_policy": {
+        "min_distinct_authority_classes": 2,
+        "authorities": {
+          "registry-effect-lexical-v1": "independent-registry-effect-lexical",
+          "compiler-score-v1": "existing-goal-compiler-generic-score"
+        }
+      },
+      "capability_proposal_generator": "multi-verified-capability-v1",
+      "max_controller_actions": 8,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "AUTO_MULTI_VERIFIED_CAPABILITY_PROPOSAL_COMPLETE"
+      }
+    },
+    {
+      "id": "independent-assessment-and-provenance-check",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport json,pathlib\nroot=pathlib.Path('canonical/astra_runtime')\nmission=json.loads((root/'missions/ASTRA_RUNTIME_AUTO_MULTI_CAPABILITY_PROPOSAL_001.json').read_text())\nstep=mission['steps'][0]\nfor forbidden in ('required_target_effects','semantic_goal_proposals','capability_problem_proposal','controller_actions'):\n    assert forbidden not in step, forbidden\nstate=json.loads((root/'state/ASTRA-RUNTIME-AUTO-MULTI-CAPABILITY-PROPOSAL-001.json').read_text())\nresult=state['history'][0]['result']\nsemantic=result['semantic_goal_contract']\ngeneration=result['proposal_generation']\nassert semantic['status']=='QUORUM_VERIFIED', semantic\nassert semantic['target_effects']==['knowledge.assessment.available'], semantic\nassert set(semantic['generated_authorities'])=={'registry-effect-lexical-v1','compiler-score-v1'}, semantic\nassert generation['generator']=='multi-verified-capability-v1', generation\nassert generation['capability_plan']==['knowledge.json.fetch.external','knowledge.consistency.assess'], generation\nbindings=generation['bindings']['auto-knowledge-consistency-assess']['evidence_paths']\nassert bindings['type']=='effect_result', bindings\nassert bindings['effect']=='knowledge.observation.available', bindings\nassert bindings['field']=='output_path', bindings\nassessment=json.loads(pathlib.Path('canonical/astra_runtime/tmp/auto_proposal/a2dea4426d0a1217_knowledge-consistency-assess_output-path.json').read_text())\nassert assessment['schema']=='PROJECT_BRAIN_KNOWLEDGE_ASSESSMENT_V1', assessment\nassert assessment['status']=='INSUFFICIENT', assessment\nassert assessment['evidence_count']==1, assessment\nassert assessment['fresh_evidence_count']==1, assessment\nassert assessment['invalid']==[], assessment\nprint('AUTO_MULTI_CAPABILITY_PROPOSAL_INDEPENDENTLY_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "AUTO_MULTI_CAPABILITY_PROPOSAL_INDEPENDENTLY_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "required_target_effects_supplied_by_mission": false,
+    "semantic_goal_proposals_supplied_by_mission": false,
+    "capability_problem_proposal_supplied_by_mission": false,
+    "controller_actions_supplied_by_mission": false,
+    "valueflow_links_supplied_by_mission": false,
+    "task_specific_compiler_forbidden": true,
+    "generated_executable_actions_forbidden": true,
+    "expected_target_effect": "knowledge.assessment.available",
+    "expected_capability_plan": [
+      "knowledge.json.fetch.external",
+      "knowledge.consistency.assess"
+    ],
+    "expected_valueflow": {
+      "producer_effect": "knowledge.observation.available",
+      "producer_result_field": "output_path",
+      "consumer_input": "evidence_paths"
+    },
+    "expected_terminal_assessment_status": "INSUFFICIENT",
+    "independent_artifact_verification_required": true
+  }
+}
