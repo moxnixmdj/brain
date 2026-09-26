@@ -12,6 +12,16 @@ class AutoPyPIAcquisitionFailure(RuntimeError):
         super().__init__(code if detail is None else f"{code}:{detail}")
 
 
+def _verified_runtime_platform():
+    if sys.platform.startswith("linux"):
+        return "linux"
+    if sys.platform.startswith("win"):
+        return "windows"
+    if sys.platform=="darwin":
+        return "darwin"
+    raise AutoPyPIAcquisitionFailure("PYPI_VERIFICATION_PLATFORM_UNSUPPORTED",sys.platform)
+
+
 COMMON_NON_CODEC_EXTENSIONS={
     ".json",".txt",".md",".markdown",".csv",".tsv",".html",".xml",
     ".png",".jpg",".jpeg",".webp",".pdf",".docx",".xlsx",
@@ -371,7 +381,7 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
         if token and token not in keywords: keywords.append(token)
     provides=["structured.binary.encode"]+["structured.binary.encode."+x for x in format_terms]
     entry={
-      "provides":provides,"requires":["json.file.available"],"keywords":keywords,"cost":1,"platforms":["linux"],
+      "provides":provides,"requires":["json.file.available"],"keywords":keywords,"cost":1,"platforms":[_verified_runtime_platform()],
       "limitations":["Automatically acquired from a hash-pinned wheel-only PyPI dependency closure.",
                      "Initial generic contract class is structured JSON value to binary bytes with semantic round-trip decoding."],
       "adapter_module":"python_library_codec","entrypoint":"run",
