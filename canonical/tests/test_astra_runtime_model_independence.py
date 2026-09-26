@@ -28,6 +28,28 @@ class ModelIndependenceTests(unittest.TestCase):
         self.assertIsNone(result["planner_model_last"])
         self.assertIn("MODEL_INDEPENDENT_GOAL_COMPLETE", result["stdout"])
 
+    def test_registry_inheritance_preserves_declared_result_fields(self):
+        fake_registry={
+            "test.producer":{
+                "status":"VERIFIED_BOUND_CAPABILITY",
+                "requires":[],
+                "provides":["test.value.available"],
+                "cost":1,
+                "result_fields":["value","output_path"],
+                "action_template":{"type":"list_tree","args":{"prefix":"canonical"}},
+            }
+        }
+        with mock.patch.object(runtime,"_load_bound_capability_registry",return_value=fake_registry):
+            enriched=runtime._inherit_verified_capabilities({
+                "initial_facts":[],
+                "target_effects":["test.value.available"],
+                "inputs":{},
+                "capabilities":[],
+            })
+        inherited=next(x for x in enriched["capabilities"] if x["id"]=="test.producer")
+        self.assertEqual(inherited["result_fields"],["value","output_path"])
+
+
     def test_anonymous_controller_checkpoints_are_isolated_by_plan_hash(self):
         first=[
             {"type":"read_file","args":{"path":"canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md"}},

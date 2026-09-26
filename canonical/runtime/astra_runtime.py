@@ -46,6 +46,23 @@ def sha_file(p):
 class Blocker(RuntimeError):
     pass
 
+def _resolve_bash_executable():
+    candidates=[shutil.which("bash")]
+    if os.name=="nt":
+        program_files=os.environ.get("ProgramFiles")
+        if program_files:
+            git_root=pathlib.Path(program_files)/"Git"
+            candidates.extend([
+                str(git_root/"bin"/"bash.exe"),
+                str(git_root/"usr"/"bin"/"bash.exe"),
+            ])
+    else:
+        candidates.extend(["/bin/bash","/usr/bin/bash"])
+    for candidate in candidates:
+        if candidate and pathlib.Path(candidate).is_file():
+            return str(candidate)
+    raise Blocker("BASH_EXECUTABLE_UNAVAILABLE")
+
 def run_shell(step, prior_results=None):
     cmd=step["command"]
     env=os.environ.copy()
@@ -57,7 +74,7 @@ def run_shell(step, prior_results=None):
         if "stdout" in result:
             env[prefix+"STDOUT"]=result["stdout"]
     t=time.monotonic()
-    p=subprocess.run(cmd,shell=True,executable="/bin/bash",cwd=ROOT,text=True,capture_output=True,env=env)
+    p=subprocess.run([_resolve_bash_executable(),"-lc",cmd],cwd=ROOT,text=True,capture_output=True,env=env)
     return {
       "adapter":"shell","command":cmd,"returncode":p.returncode,
       "stdout":p.stdout[-12000:],"stderr":p.stderr[-12000:],
@@ -4086,7 +4103,8 @@ def _inherit_verified_capabilities(problem):
           "requires":list(entry.get("requires") or []),
           "provides":list(entry.get("provides") or []),
           "cost":float(entry.get("cost",1)),
-          "action":action
+          "action":action,
+          "result_fields":list(entry.get("result_fields") or []),
         }
         caps.append(cap)
         inherited.append(cid)

@@ -1,0 +1,125 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-GENERIC-EFFECT-VALUEFLOW-001",
+  "purpose": "Prove the deterministic capability graph can wire a runtime result from one verified action into a later action through declared effect/result metadata, without a task-specific compiler.",
+  "goal": "Fetch a live claim value and carry that runtime value through the capability graph into a JSON record.",
+  "steps": [
+    {
+      "id": "run-valueflow-planner-regressions",
+      "adapter": "shell",
+      "command": "python canonical/tests/test_capability_planner.py",
+      "verify": {
+        "type": "returncode_zero"
+      }
+    },
+    {
+      "id": "plan-and-execute-generic-valueflow",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 8,
+      "capability_problem": {
+        "initial_facts": [],
+        "target_effects": [
+          "record.written"
+        ],
+        "finish_summary": "GENERIC_EFFECT_VALUEFLOW_COMPLETE",
+        "max_expansions": 100,
+        "capabilities": [
+          {
+            "id": "learn-live-value",
+            "requires": [],
+            "provides": [
+              "knowledge.value.available"
+            ],
+            "result_fields": [
+              "value",
+              "output_path",
+              "final_url"
+            ],
+            "cost": 1,
+            "action": {
+              "type": "fetch_json_knowledge",
+              "args": {
+                "url": "https://httpbin.org/get?claim=alpha",
+                "json_path": [
+                  "args",
+                  "claim"
+                ],
+                "output_path": "canonical/astra_runtime/tmp/GENERIC_VALUEFLOW_EVIDENCE.json",
+                "authoritative": false,
+                "timeout_s": 20,
+                "max_bytes": 500000
+              },
+              "expect": {
+                "type": "field_equals",
+                "field": "verified",
+                "value": true
+              }
+            }
+          },
+          {
+            "id": "materialize-live-value",
+            "requires": [
+              "knowledge.value.available"
+            ],
+            "provides": [
+              "record.written"
+            ],
+            "result_fields": [
+              "output_path"
+            ],
+            "cost": 1,
+            "action": {
+              "type": "write_json_records",
+              "args": {
+                "output_path": "canonical/astra_runtime/tmp/GENERIC_VALUEFLOW_OUTPUT.json",
+                "fields": [
+                  "claim"
+                ],
+                "records": [
+                  {
+                    "claim": {
+                      "$effect_result": {
+                        "effect": "knowledge.value.available",
+                        "field": "value"
+                      }
+                    }
+                  }
+                ]
+              },
+              "expect": {
+                "type": "field_equals",
+                "field": "verified",
+                "value": true
+              }
+            }
+          }
+        ]
+      },
+      "verify": {
+        "type": "stdout_contains",
+        "text": "GENERIC_EFFECT_VALUEFLOW_COMPLETE"
+      }
+    },
+    {
+      "id": "independently-verify-valueflow-artifact",
+      "adapter": "shell",
+      "command": "python - <<'PY'\nimport json, pathlib\np=pathlib.Path('canonical/astra_runtime/tmp/GENERIC_VALUEFLOW_OUTPUT.json')\ndata=json.loads(p.read_text(encoding='utf-8'))\nassert data == [{'claim':'alpha'}], data\nprint('GENERIC_EFFECT_VALUEFLOW_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "GENERIC_EFFECT_VALUEFLOW_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "manual_controller_actions": false,
+    "task_specific_compiler_forbidden": true,
+    "expected_selected_plan": [
+      "learn-live-value",
+      "materialize-live-value"
+    ],
+    "effect_result_binding_commit": "70c3c9c270a421bf21fe11d1e94e0a5d5f5178b7"
+  }
+}
