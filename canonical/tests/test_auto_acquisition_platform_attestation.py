@@ -423,5 +423,30 @@ class AutoAcquisitionPlatformAttestationTests(unittest.TestCase):
             pool.assert_not_called()
 
 
+    def test_npm_search_accepts_explicit_verifier_format_hint(self):
+        class FakeResponse:
+            def __enter__(self):
+                return self
+            def __exit__(self,*args):
+                return False
+            def read(self,*args):
+                return json.dumps({
+                    "objects":[{
+                        "package":{
+                            "name":"cbor-test",
+                            "version":"1.0.0",
+                            "description":"CBOR codec",
+                            "keywords":["cbor"],
+                        }
+                    }]
+                }).encode("utf-8")
+        with mock.patch.object(npm.urllib.request,"urlopen",return_value=FakeResponse()) as urlopen:
+            candidates=npm._search_registry("",limit=5,format_hint="cbor")
+        self.assertEqual(candidates[0]["format"],"cbor")
+        self.assertIn("text=cbor",urlopen.call_args.args[0].full_url)
+        with self.assertRaisesRegex(npm.AutoNpmAcquisitionFailure,"NPM_OUTPUT_FORMAT_INVALID"):
+            npm._search_registry("",format_hint="../cbor")
+
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
