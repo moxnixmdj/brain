@@ -1,0 +1,18 @@
+{
+  "schema": "PROJECT_BRAIN_POST_PR20_CANONICAL_RECONCILIATION_VERIFY_V1",
+  "bound_main_sha": "86258402402550a543716615b188648f61ea42fd",
+  "branch": "reconcile/post-pr20-canonical-frontier-20260927",
+  "predicates": {
+    "generation_lock": true,
+    "pointer_blocker_updated": true,
+    "pointer_device_independent_execution_bound_to_promoted_pr20": true,
+    "val_town_remains_forbidden": true,
+    "portfolio_status_reconciled_post_pr20": true,
+    "portfolio_no_device_wait": true,
+    "remote_desktop_not_required_runtime_component": true,
+    "portfolio_forbids_val_town": true
+  },
+  "all_pass": true,
+  "capability_promotion_claimed": false,
+  "purpose": "Canonical state reconciliation only; does not alter whole-Superworker gate truth."
+}
