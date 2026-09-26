@@ -200,7 +200,7 @@ class AutoAcquisitionPlatformAttestationTests(unittest.TestCase):
                 "platforms":platforms,
                 "provides":["structured.binary.encode","structured.binary.encode.cbor"],
                 "requires":["json.file.available"],
-                "keywords":["encode","cbor"],
+                "keywords":["encode","json","cbor"],
                 "adapter_module":"python_library_codec",
                 "source":{"type":"pypi","project":cid,"version":"1.0.0"},
                 "action_template":{
