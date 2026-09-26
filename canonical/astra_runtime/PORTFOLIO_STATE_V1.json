@@ -55,14 +55,13 @@
     }
   ],
   "uncovered_pressure_dimensions": [
-    "same durable worker identity completing observe -> reason -> research -> act -> verify -> checkpoint -> continue across fresh invocations",
-    "survival across context/model/provider loss via durable checkpoint and lawful relaunch",
-    "causally ready task acquisition with leases/ownership/deduplication/provenance",
-    "dynamic knowledge/tool/capability discovery and acquisition inside one shared runtime",
+    "same durable cognitive identity owns task acquisition, lease, provenance, shared-runtime execution, verification, checkpoint, and resume",
+    "same identity performs dynamic capability discovery/acquisition during a real consequential mission rather than consuming another worker's result",
+    "same identity survives executor/context loss and resumes from durable state",
     "generic unseen-goal closure without new task-specific compiler handlers",
     "platform-specific certification only when a real mission actually requires that platform"
   ],
-  "next_action": "Readjudicate the seven previously failed whole-Superworker gates using primary post-PR18/PR20 evidence. Implement only gates still genuinely false, then run the smallest device-independent orthogonal real-mission portfolio through one shared runtime. Freeze the first generic blocker, repair it, replay the identical failed action, and resume.",
+  "next_action": "Adapt the already-proven provider-neutral executor/evidence machinery, shared ASTRA runtime, and recovered 2.6 task/lease/dedupe logic into one durable identity. Run one real device-independent consequential mission through that exact identity, force a checkpoint/relaunch boundary, resume, and independently adjudicate the complete chain. Do not rerun the seven component mechanisms separately.",
   "anti_waste": [
     "no qualification before operational portfolio closure",
     "no provider hunt without an observed blocker",

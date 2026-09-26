@@ -121,11 +121,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 0,
-    "next_step": "READJUDICATE_SEVEN_FAILED_GATES_FROM_PRIMARY_POST_PR18_PR20_EVIDENCE__SELECT_ONLY_GENUINELY_UNRESOLVED_MECHANISMS__RUN_MINIMAL_DEVICE_INDEPENDENT_ORTHOGONAL_REAL_MISSION_PORTFOLIO__FREEZE_FIRST_GENERIC_BLOCKER__REPAIR_REPLAY_RESUME",
+    "next_step": "IMPLEMENT_MINIMAL_PROVIDER_NEUTRAL_SAME_IDENTITY_SUPERVISOR_BY_REUSING_PR18_PR20_ASTRA_RUNTIME_AND_RECOVERED_2_6_TASK_LEASE_LOGIC__RUN_ONE_REAL_DEVICE_INDEPENDENT_CONSEQUENTIAL_MISSION__CHECKPOINT_RELAUNCH_RESUME__INDEPENDENTLY_ADJUDICATE",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "POST_PR20_WHOLE_DEFINITION_GATE_RECONCILIATION_REQUIRED",
+    "critical_blocker": "SAME_DURABLE_COGNITIVE_IDENTITY_HAS_NOT_YET_EXECUTED_THE_FULL_SHARED_RUNTIME_LOOP_END_TO_END",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -202,7 +202,7 @@
     "superworker_truth_scope": "NO_SINGLE_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "POST_PR20_WHOLE_DEFINITION_GATE_RECONCILIATION_REQUIRED",
+    "highest_leverage_capability_gap": "SAME_DURABLE_COGNITIVE_IDENTITY_HAS_NOT_YET_EXECUTED_THE_FULL_SHARED_RUNTIME_LOOP_END_TO_END",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/ASTRA_TARGET_CAPABILITY_MAP_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -246,6 +246,13 @@
       "evidence_path": "canonical/reconciliation/POST_PR20_CANONICAL_FRONTIER_20260927_V1.json",
       "bound_main_sha": "86258402402550a543716615b188648f61ea42fd",
       "previous_portfolio_reconciliation_blocker": "SUPERSEDED_BY_NEWER_CANONICAL_STATE"
+    },
+    "whole_definition_gate_reconciliation": {
+      "status": "COMPONENT_MECHANISMS_PROVEN__SAME_IDENTITY_INTEGRATION_UNPROVEN",
+      "evidence_path": "canonical/reconciliation/SAME_IDENTITY_INTEGRATION_FRONTIER_20260927_V1.json",
+      "component_gate_count": 7,
+      "mechanisms_to_rebuild": 0,
+      "integration_proof_required": true
     }
   },
   "provider_rules": {
@@ -270,14 +277,13 @@
     "infrastructure_freeze_when_next_real_mission_executable": true,
     "forbid_relabeling_bounded_executor_as_superworker": true,
     "only_current_allowed_frontier_actions": [
-      "readjudicate the seven previously failed whole-Superworker gates against primary post-PR18 and post-PR20 evidence",
-      "implement only mechanisms that remain genuinely unproven after that readjudication",
-      "run the smallest device-independent orthogonal real-mission portfolio against one shared runtime",
-      "freeze the first causal generic blocker observed by real mission pressure",
-      "race reuse composition adaptation and invention only beneath that observed blocker",
-      "integrate independently verified winning repairs globally into the shared runtime",
-      "replay the identical failed action and resume the interrupted mission",
-      "defer formal whole-definition qualification until operational mission closure"
+      "adapt already-proven task acquisition/lease/dedupe/provenance mechanisms into one provider-neutral durable worker identity",
+      "bind that same identity directly to the shared ASTRA runtime rather than to a precomputed cognitive result",
+      "run one real device-independent consequential mission through that exact identity",
+      "checkpoint and relaunch the same identity after an execution/context boundary",
+      "freeze and repair only the first generic blocker exposed by that mission",
+      "independently adjudicate the complete same-identity chain",
+      "do not rebuild or reprove the seven mechanisms independently"
     ],
     "truth_first_law": "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
     "live_canonical_refresh_before_consequential_action": true,

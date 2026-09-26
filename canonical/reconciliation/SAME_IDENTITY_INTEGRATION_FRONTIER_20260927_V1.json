@@ -1,0 +1,106 @@
+{
+  "schema": "PROJECT_BRAIN_POST_PR20_WHOLE_DEFINITION_GATE_RECONCILIATION_V1",
+  "reconciliation_id": "SAME-IDENTITY-INTEGRATION-FRONTIER-20260927",
+  "bound_main_sha": "276811d7ff70c86666366fe4cb08b3a0f23f1f01",
+  "promotion_authorized": false,
+  "p_real": 0,
+  "governing_correction": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
+  "historical_failed_gate_source": "canonical/qualification/RECOVERY_SUPERWORKER_V6_WOLFRAM_WHOLE_DEFINITION_ADJUDICATION_V1.json",
+  "evidence_presence_classification": "CAPABILITY_PROVEN_EVIDENCE_PRESENT__INTEGRATION_NOT_PROVEN",
+  "gate_reconciliation": {
+    "CAUSALLY_READY_TASK_ACQUISITION": {
+      "component_mechanism_proven": true,
+      "same_integrated_cognitive_identity_proven": false,
+      "evidence": [
+        "canonical/qualification/SUPERWORKER_EXISTING_ASSET_COVERAGE_ADJUDICATION_V1.json",
+        "canonical/qualification/SUPERWORKER_GITHUB_1_WHOLE_DEFINITION_ADJUDICATION.json",
+        "Drive:PROJECT_BRAIN_PERMANENT_SUPERWORKER_2_6.zip"
+      ]
+    },
+    "LEASES_OWNERSHIP_DEDUPE_PROVENANCE_VERIFICATION": {
+      "component_mechanism_proven": true,
+      "same_integrated_cognitive_identity_proven": false,
+      "evidence": [
+        "canonical/qualification/SUPERWORKER_EXISTING_ASSET_COVERAGE_ADJUDICATION_V1.json",
+        "canonical/qualification/SUPERWORKER_GITHUB_1_WHOLE_DEFINITION_ADJUDICATION.json",
+        "Drive:PROJECT_BRAIN_PERMANENT_SUPERWORKER_2_6.zip"
+      ]
+    },
+    "DURABLE_IDENTITY_AND_MISSION_BEYOND_CHAT_MODEL_INVOCATION": {
+      "component_mechanism_proven": true,
+      "same_integrated_cognitive_identity_proven": false,
+      "evidence": [
+        "canonical/icw/ICW-CHATGPT-SOL-1/RESUME_RECEIPT_V1.json",
+        "canonical/icw/ICW-CHATGPT-SOL-1/V2_AUTONOMOUS_WAKE_RECEIPT.json",
+        "canonical/qualification/SUPERWORKER_EXISTING_ASSET_COVERAGE_ADJUDICATION_V1.json"
+      ]
+    },
+    "SURVIVES_CONTEXT_MODEL_PROVIDER_LOSS_VIA_CHECKPOINT_RELAUNCH": {
+      "component_mechanism_proven": true,
+      "same_integrated_cognitive_identity_proven": false,
+      "evidence": [
+        "canonical/superworker_evidence/SUPERWORKER_INTEGRATED_1_EVIDENCE_MANIFEST_V1.json",
+        "canonical/astra_runtime/evidence/ASTRA-RUNTIME-CONTROLLER-RESUME-001__RECEIPT.json",
+        "canonical/astra_runtime/evidence/ASTRA-RUNTIME-CHECKPOINT-REWIND-001__RECEIPT.json"
+      ]
+    },
+    "OBSERVE_REASON_RESEARCH_ACT_VERIFY_CHECKPOINT_CONTINUE": {
+      "component_mechanism_proven": true,
+      "same_integrated_cognitive_identity_proven": false,
+      "evidence": [
+        "canonical/icw/ICW-CHATGPT-SOL-1/INDEPENDENT_PROMOTION_ADJUDICATION_V2.json",
+        "canonical/superworker_evidence/SUPERWORKER_INTEGRATED_1_EVIDENCE_MANIFEST_V1.json"
+      ]
+    },
+    "DYNAMIC_KNOWLEDGE_TOOL_CAPABILITY_DISCOVERY_ACQUISITION": {
+      "component_mechanism_proven": true,
+      "same_integrated_cognitive_identity_proven": false,
+      "evidence": [
+        "canonical/astra_runtime/evidence/ASTRA-RUNTIME-DYNAMIC-CAPABILITY-CHOICE-001__RECEIPT.json",
+        "canonical/astra_runtime/evidence/ASTRA-RUNTIME-NPM-ACQUIRE-CBOR-001__RECEIPT.json",
+        "canonical/astra_runtime/evidence/ASTRA-RUNTIME-PYPI-ACQUIRE-MSGPACK-002__RECEIPT.json",
+        "canonical/superworker_evidence/SUPERWORKER_INTEGRATED_1_EVIDENCE_MANIFEST_V1.json"
+      ]
+    },
+    "INDEPENDENT_PERSISTENT_EXECUTION_SYSTEM": {
+      "component_mechanism_proven": true,
+      "same_integrated_cognitive_identity_proven": false,
+      "evidence": [
+        "canonical/astra_runtime/evidence_ledgers/EXECUTOR_EVIDENCE_GATE_MAIN_001.jsonl",
+        "canonical/astra_runtime/evidence_ledgers/GENERIC_NATIVE_PROBE_RECOVERY_MAIN_001.jsonl",
+        "canonical/superworker_evidence/SUPERWORKER_INTEGRATED_1_EVIDENCE_MANIFEST_V1.json"
+      ]
+    }
+  },
+  "recovered_original_artifacts": [
+    {
+      "file": "SUPERWORKER_INTEGRATED_1_PROOF_2026-09-22.zip",
+      "sha256": "0dff5b7a00788bb8ee731a18ce68889434689da4ee68397b5a9689397cfbfecf",
+      "finding": "Persistent supervisor performed checkpoint/relaunch and tool discovery but consumed a precomputed V6 cognitive result; therefore it cannot establish same-identity broad cognition."
+    },
+    {
+      "file": "PROJECT_BRAIN_PERMANENT_SUPERWORKER_2_6.zip",
+      "sha256": "5c5e1d1e79862e71eca9217e3a34d2b1343cb3c7b03d4826fe0f4a56d3400072",
+      "finding": "Recovered model-independent task acquisition, single-owner lease, command dedupe, provenance, failover, and durable mission-state mechanisms. Cloudflare deployment route itself is not required and is not selected."
+    }
+  ],
+  "exact_remaining_blocker": "SAME_DURABLE_COGNITIVE_IDENTITY_HAS_NOT_YET_EXECUTED_THE_FULL_SHARED_RUNTIME_LOOP_END_TO_END",
+  "implementation_strategy": "ADAPT_EXISTING_PROVEN_COMPONENTS_INTO_ONE_PROVIDER_NEUTRAL_SUPERVISOR__DO_NOT_REBUILD_SEVEN_MECHANISMS",
+  "required_next_proof": [
+    "one frozen durable worker identity owns task acquisition and lease",
+    "that same identity invokes the shared ASTRA runtime for a real consequential mission",
+    "that same identity dynamically discovers/acquires any missing capability encountered by the mission",
+    "that same identity acts, verifies, checkpoints, and resumes from durable state",
+    "executor/context loss is survived without changing worker identity",
+    "all evidence/provenance/dedupe belongs to that same identity",
+    "fresh independent verifier adjudicates the complete chain without component stitching"
+  ],
+  "next_action": "IMPLEMENT_MINIMAL_PROVIDER_NEUTRAL_SAME_IDENTITY_SUPERVISOR_BY_REUSING_PR18_PR20_ASTRA_RUNTIME_AND_RECOVERED_2_6_TASK_LEASE_LOGIC__RUN_ONE_REAL_DEVICE_INDEPENDENT_CONSEQUENTIAL_MISSION__CHECKPOINT_RELAUNCH_RESUME__INDEPENDENTLY_ADJUDICATE",
+  "hard_constraints": {
+    "incremental_spend_usd": 0,
+    "user_device_dependency_forbidden": true,
+    "val_town_forbidden": true,
+    "no_component_evidence_stitching": true,
+    "no_self_certification": true
+  }
+}
