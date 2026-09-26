@@ -1,0 +1,110 @@
+{
+  "schema": "PROJECT_BRAIN_SAME_IDENTITY_SUPERVISOR_VERIFICATION_V1",
+  "tested_revision": "80545407cfb14054e5d602b9b605d8960db57767",
+  "executor_id": "chatgpt-session-linux-private-github-drive-base64-bridge-20260927",
+  "platform": "linux",
+  "incremental_spend_usd": 0,
+  "user_device_used": false,
+  "val_town_used": false,
+  "source_integrity": {
+    "promoted_pr20_closure_reused": true,
+    "compare_base": "e97231bdb899c467a3ca3f4719b442ecb6be7b95",
+    "historical_bundle_embedded_blob_checks": 77,
+    "historical_bundle_mismatches": 0,
+    "only_python_runtime_test_deltas": [
+      {
+        "path": "canonical/runtime/astra_runtime.py",
+        "blob_sha": "81b115422887aa9e7fabdd414cfc7a272717d9d3"
+      },
+      {
+        "path": "canonical/runtime/same_identity_supervisor.py",
+        "blob_sha": "6c655dccedfdb8337f8c16cb5df93d9622689e21"
+      },
+      {
+        "path": "canonical/tests/test_astra_runtime_verification.py",
+        "blob_sha": "5570ff5a7c8363fdf017d77660279f91906871a9"
+      },
+      {
+        "path": "canonical/tests/test_same_identity_supervisor.py",
+        "blob_sha": "6b18723797d814fd185cdde187b9fa27edb5c299"
+      }
+    ],
+    "all_four_delta_blobs_exact": true
+  },
+  "test_counts": {
+    "supervisor": 7,
+    "runtime_identity_binding": 12,
+    "platform_acquisition": 14,
+    "stacked": 17,
+    "full": 150
+  },
+  "stages": [
+    {
+      "id": "syntax",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "supervisor",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "855798990fe42648e01e484a4ce9b75b1cfe0d9c5000336ca4237b93500a405b"
+    },
+    {
+      "id": "runtime",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "45f5cc44d45ef942865fadcaba5de49369eb946a6da9eaacb5366b069734aa83"
+    },
+    {
+      "id": "platform",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "0aa1e070313cf977dfc20113351a5a08d4aa263aa79dd8dca1716aac30cf2792"
+    },
+    {
+      "id": "stacked",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "b3292f052d1d532d20f9c870376425aaaabb9c64e6afce79879acf3eaa9cb52c"
+    },
+    {
+      "id": "full",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "b0bd7390582f2d494630d906c7d090e3e262c651b00dd3651a3067df40806857"
+    },
+    {
+      "id": "seam_checkpoint",
+      "exit_code": 75,
+      "stdout_sha256": "465a5700e14be250ee4224714c7acd28a04516945c493f20b22598b252475622",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "seam_resume",
+      "exit_code": 0,
+      "stdout_sha256": "3bdb1a74e1c62a12471d1305dfd55b89f68bb3562e4636424409991cff558c49",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "seam_integration": {
+    "first_invocation_exit_code": 75,
+    "second_invocation_exit_code": 0,
+    "checkpoint_once": true,
+    "fresh_resume_same_agent": true,
+    "real_astra_subprocess_invoked": true,
+    "runtime_state_bound_agent": "SUPERWORKER-UNIFIED-1",
+    "runtime_state_bound_task": "SI1-SEAM-001",
+    "runtime_receipt_bound_agent": "SUPERWORKER-UNIFIED-1",
+    "runtime_receipt_bound_task": "SI1-SEAM-001",
+    "promotion_claim": false,
+    "p_real_claim": 0,
+    "all_10_predicates_pass": true
+  },
+  "aggregate_stdout_sha256": "642b70ea69419a4d563170fca2c65285db2f1fb0fc57307c818056d168503d2f",
+  "aggregate_stderr_sha256": "87b75401f099283a262adf0a329db596b5459fdd551aec593a79c3747c219eea",
+  "verified": true,
+  "verifier_id": "git-blob-crosscheck+unittest-log+subprocess-seam-adjudicator-v1",
+  "promotion_scope": "CODE_MECHANISM_ONLY__NOT_SUPERWORKER_POPULATION"
+}
