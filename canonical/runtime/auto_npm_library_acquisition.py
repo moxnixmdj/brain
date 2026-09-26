@@ -106,9 +106,20 @@ def _metadata(candidate,timeout_s=20):
     integrity=str(dist.get("integrity") or "")
     if not tarball.startswith("https://") or not integrity:
         raise AutoNpmAcquisitionFailure("NPM_DIST_METADATA_INCOMPLETE",package)
-    deps=payload.get("dependencies") or {}
-    if not isinstance(deps,dict):
-        raise AutoNpmAcquisitionFailure("NPM_DEPENDENCIES_INVALID",package)
+    for field in ("dependencies","optionalDependencies","peerDependencies"):
+        deps=payload.get(field) or {}
+        if not isinstance(deps,dict):
+            raise AutoNpmAcquisitionFailure("NPM_"+field.upper()+"_INVALID",package)
+        if deps:
+            raise AutoNpmAcquisitionFailure(
+                "NPM_RUNTIME_DEPENDENCIES_UNSUPPORTED",
+                package+":"+field+":"+json.dumps(sorted(deps))[:600]
+            )
+    bundled=payload.get("bundledDependencies")
+    if bundled is None:
+        bundled=payload.get("bundleDependencies")
+    if bundled not in (None,[],{}):
+        raise AutoNpmAcquisitionFailure("NPM_BUNDLED_DEPENDENCIES_UNSUPPORTED",package)
     scripts=payload.get("scripts") or {}
     if not isinstance(scripts,dict): scripts={}
     forbidden=[k for k in ("preinstall","install","postinstall") if str(scripts.get(k) or "").strip()]
