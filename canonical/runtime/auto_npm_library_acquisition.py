@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Autonomously acquire zero-dependency npm JavaScript codec capabilities."""
 from __future__ import annotations
-import hashlib,json,pathlib,re,subprocess,tempfile,urllib.parse,urllib.request
+import hashlib,json,pathlib,re,subprocess,sys,tempfile,urllib.parse,urllib.request
 
 import npm_package_utils
 
@@ -10,6 +10,16 @@ class AutoNpmAcquisitionFailure(RuntimeError):
     def __init__(self,code,detail=None):
         self.code=code; self.detail=detail
         super().__init__(code if detail is None else f"{code}:{detail}")
+
+
+def _verified_runtime_platform():
+    if sys.platform.startswith("linux"):
+        return "linux"
+    if sys.platform.startswith("win"):
+        return "windows"
+    if sys.platform=="darwin":
+        return "darwin"
+    raise AutoNpmAcquisitionFailure("NPM_VERIFICATION_PLATFORM_UNSUPPORTED",sys.platform)
 
 
 def supports(goal):
@@ -223,7 +233,7 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
     }
     entry={
       "provides":provides,"requires":["json.file.available","node.runtime.available"],
-      "keywords":keywords,"cost":1,"platforms":["linux"],"incremental_spend_usd":0,
+      "keywords":keywords,"cost":1,"platforms":[_verified_runtime_platform()],"incremental_spend_usd":0,
       "limitations":[
         "Automatically acquired from an integrity-verified zero-runtime-dependency npm package.",
         "Lifecycle install hooks are rejected and package code is loaded only by isolated Node codec invocations."
