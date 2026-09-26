@@ -227,21 +227,17 @@ class AutoAcquisitionPlatformAttestationTests(unittest.TestCase):
             source.write_text('[{"id":1,"text":"alpha"}]\n',encoding="utf-8")
 
             with mock.patch.object(compiler.sys,"platform","win32"):
-                with self.assertRaises(compiler.GoalCompilationFailure):
-                    compiler.compile_goal(
-                        goal,
-                        {"linux.cbor":entry(["linux"],"linux.cbor")},
-                        root,
-                    )
-
-                compiled=compiler.compile_goal(
-                    goal,
-                    {
-                        "linux.cbor":entry(["linux"],"linux.cbor"),
-                        "auto.pypi.fake-cbor":entry(["windows"],"auto.pypi.fake-cbor"),
-                    },
-                    root,
+                linux_only=compiler._platform_admissible_registry(
+                    {"linux.cbor":entry(["linux"],"linux.cbor")}
                 )
+                with self.assertRaises(compiler.GoalCompilationFailure):
+                    compiler.compile_goal(goal,linux_only,root)
+
+                filtered=compiler._platform_admissible_registry({
+                    "linux.cbor":entry(["linux"],"linux.cbor"),
+                    "auto.pypi.fake-cbor":entry(["windows"],"auto.pypi.fake-cbor"),
+                })
+                compiled=compiler.compile_goal(goal,filtered,root)
 
         self.assertEqual(compiled["compiler_mode"],"DETERMINISTIC_COMPOUND_ACTION_PLAN")
         self.assertEqual(
