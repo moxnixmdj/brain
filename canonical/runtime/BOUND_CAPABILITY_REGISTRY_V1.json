@@ -1357,6 +1357,22 @@
             "STALE"
           ]
         }
+      },
+      "proposal_bindings": {
+        "evidence_paths": {
+          "type": "effect_result",
+          "effect": "knowledge.observation.available",
+          "field": "output_path",
+          "container": "list"
+        },
+        "output_path": {
+          "type": "auto_path",
+          "suffix": ".json"
+        },
+        "max_age_s": {
+          "type": "literal",
+          "value": null
+        }
       }
     },
     "knowledge.json.fetch.external": {
@@ -1423,6 +1439,20 @@
         "observed_effect": {
           "live_external_observations": 2,
           "assessment_status": "SUPPORTED"
+        }
+      },
+      "proposal_bindings": {
+        "json_path": {
+          "type": "literal",
+          "value": []
+        },
+        "authoritative": {
+          "type": "literal",
+          "value": false
+        },
+        "output_path": {
+          "type": "auto_path",
+          "suffix": ".json"
         }
       }
     },
