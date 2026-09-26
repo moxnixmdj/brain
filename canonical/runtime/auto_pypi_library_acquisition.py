@@ -403,7 +403,10 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
     verify_rel=f"canonical/astra_runtime/evidence/{mission_id}__{slug}__{fingerprint}__AUTO_VERIFY.json"
     verify_mid="ASTRA-AUTO-VERIFY-PYPI-"+slug.upper()+"-"+fingerprint.upper()
     pending={"schema":"PROJECT_BRAIN_PENDING_AUTO_BINDING_V1","capability_id":cap_id,"effect":provides[0],"goal":goal,
-             "origin_mission_id":mission_id,"origin_mission_path":mission_path,"selected_supplier":selected,
+             "origin_mission_id":mission_id,"origin_mission_path":mission_path,
+      "origin_mission_sha256_at_acquisition":hashlib.sha256(
+          (root/mission_path).read_bytes()
+      ).hexdigest(),"selected_supplier":selected,
              "contract":contract,"verification_fixture":contract["fixture"],"registry_entry":entry,
              "verification_mission_id":verify_mid,"verification_result_path":verify_rel,
              "status":"PENDING_INDEPENDENT_VERIFICATION"}
