@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_DETERMINISTIC_VERIFICATION_REPORT_V1",
+  "report_id": "DECLARATIVE-KNOWLEDGE-BINDING-DELETE3-20260926",
+  "executable_revision": "31bc5e9e406dfdb4899b8d5b4d46529aefe08193",
+  "base_revision": "86258402402550a543716615b188648f61ea42fd",
+  "branch": "research/declarative-knowledge-binding-delete3-20260926",
+  "incremental_spend_usd": 0,
+  "executor": {
+    "id": "chatgpt-session-linux-reconstructed-private-github-substrate",
+    "platform": "linux",
+    "user_device_used": false,
+    "val_town_used": false
+  },
+  "exact_blobs": {
+    "canonical/runtime/goal_compiler.py": "9ef7df6502295202cdfae509fe88adab54b99bbc",
+    "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json": "9e8de87e49b7ee59e53ef2cad07416231b63779c",
+    "canonical/tests/test_declarative_knowledge_bindings.py": "b718591dfb0a03208a872aa457ef779411f0f3e2"
+  },
+  "observed": {
+    "syntax": {
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "d3b8e374c1930542a30e2f6a7ae41c900ea83c9a669afc3e5ee9576da1386b3d"
+    },
+    "dedicated": {
+      "exit_code": 0,
+      "tests_run": 6,
+      "tests_passed": 6,
+      "stderr_sha256": "aaf80b1569705f552a26d2d594a47fe180b13ed4209b831c4ea034ccd7d6a475"
+    },
+    "full_suite": {
+      "exit_code": 0,
+      "tests_run": 145,
+      "tests_passed": 145,
+      "stderr_sha256": "d58209af81704f5af1aa5a2ba95e5aeb5efa7621e6118c4b92179fa5d665c79c"
+    },
+    "semantic_heldout": {
+      "passed": true,
+      "mode": "DETERMINISTIC_MULTI_SOURCE_REDUCE_PLAN",
+      "compiled_parts": 5
+    },
+    "specialized_compile_handlers_before": 51,
+    "specialized_compile_handlers_after": 48,
+    "removed_handlers": [
+      "_compile_external_json_knowledge_fetch",
+      "_compile_knowledge_consistency_assessment",
+      "_compile_knowledge_status_assertion"
+    ],
+    "fail_closed": {
+      "single_source_consistency_rejected": true,
+      "unknown_status_rejected": true
+    },
+    "diff_files_exactly": [
+      "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+      "canonical/runtime/goal_compiler.py",
+      "canonical/tests/test_declarative_knowledge_bindings.py"
+    ]
+  },
+  "predicates": {
+    "exact_blob_identity": true,
+    "syntax_pass": true,
+    "dedicated_regressions_pass": true,
+    "full_suite_pass": true,
+    "semantic_heldout_pass": true,
+    "fail_closed_adversarial_pass": true,
+    "handler_count_reduced_by_three": true,
+    "no_unrelated_files": true
+  },
+  "verified": true,
+  "epistemic_state": "VERIFIED",
+  "promote_only_by_merge": true
+}
