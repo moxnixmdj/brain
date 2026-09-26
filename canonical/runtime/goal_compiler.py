@@ -226,6 +226,20 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                 if not matching and len(future_matching)==1:
                     result[key]=future_matching[0]
                     continue
+                if wanted is None:
+                    # Generic output binding: when the clause names exactly one
+                    # repository file that does not exist yet, while other named
+                    # files already exist as inputs, that unique future artifact
+                    # is the only causally admissible output. Do not require its
+                    # filename to contain the word "output" or pre-enumerate its
+                    # extension.
+                    future_artifacts=[
+                        raw for raw,p in paths
+                        if pathlib.Path(raw).suffix and not p.exists()
+                    ]
+                    if len(future_artifacts)==1:
+                        result[key]=future_artifacts[0]
+                        continue
                 # Single-path fallback is safe only for an actual typed file,
                 # never for URL fragments or extensionless directory-like text.
                 if wanted is None and len(paths)==1 and pathlib.Path(paths[0][0]).suffix:
