@@ -1,0 +1,22 @@
+{
+  "errors": [],
+  "extra_blob_count": 3,
+  "predicates": {
+    "all_stage_marker": true,
+    "exact_extra_blobs_3": true,
+    "exact_runtime_test_blobs_90": true,
+    "full_139": true,
+    "no_failure_marker": true,
+    "stacked_17": true,
+    "stderr_sha_matches": true,
+    "stdout_sha_matches": true,
+    "targeted_22": true
+  },
+  "runtime_test_blob_count": 90,
+  "schema": "PROJECT_BRAIN_PR20_DETERMINISTIC_VERIFICATION_V1",
+  "stderr_sha256": "58c7871e0affae8f9ede8dd829cdee52184abcd01a7417cebca510647b8e58aa",
+  "stdout_sha256": "085687ad765ca9e9a486dbe0b821eeaf4c7b4be591e3329abe0a59363727da88",
+  "target_revision": "05eaaf0cab39e3e3c392cf57ef38af56cb36fde7",
+  "verified": true,
+  "verifier_id": "git-blob-crosscheck+unittest-log-adjudicator-v1"
+}
