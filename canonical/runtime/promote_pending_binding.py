@@ -73,14 +73,12 @@ def main():
     original=_inside(pending["origin_mission_path"])
     if original.parent!=(ROOT/"canonical"/"astra_runtime"/"missions").resolve():
         raise RuntimeError("ORIGIN_MISSION_PATH_INVALID")
-    mission=json.loads(original.read_text(encoding="utf-8"))
-    constraints=mission.setdefault("constraints",{})
-    constraints["auto_acquisition_promoted"]={
-      "capability_id":cid,
-      "verification_mission_id":pending["verification_mission_id"],
-      "verification_result_path":str(verify_path.relative_to(ROOT))
-    }
-    original.write_text(json.dumps(mission,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+    # Mission authority is immutable. Promotion records evidence in the
+    # registry/pending record only; it must never rewrite the originating
+    # mission merely to annotate progress, because that creates mission drift.
+    pending["origin_mission_sha256"]=__import__("hashlib").sha256(
+        original.read_bytes()
+    ).hexdigest()
     pending["status"]="PROMOTED_VERIFIED"
     pending["verification_result_path"]=str(verify_path.relative_to(ROOT))
     pending_path.write_text(json.dumps(pending,indent=2,sort_keys=True)+"\n",encoding="utf-8")
