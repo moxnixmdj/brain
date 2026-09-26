@@ -47,5 +47,31 @@ class RuntimeVerificationTests(unittest.TestCase):
         self.assertNotIn("shell",kwargs)
         self.assertEqual(result["returncode"],0)
 
+
+    def test_mission_identity_normalizes_windows_and_posix_slashes(self):
+        with __import__("tempfile").TemporaryDirectory() as td:
+            root=pathlib.Path(td)
+            mission=root/"canonical"/"astra_runtime"/"missions"/"M.json"
+            mission.parent.mkdir(parents=True,exist_ok=True)
+            mission.write_text('{"mission_id":"M","steps":[]}\n',encoding="utf-8")
+            with mock.patch.object(runtime,"ROOT",root):
+                posix_path,posix_rel=runtime._canonical_mission_path(
+                    "canonical/astra_runtime/missions/M.json"
+                )
+                windows_path,windows_rel=runtime._canonical_mission_path(
+                    "canonical\\astra_runtime\\missions\\M.json"
+                )
+            self.assertEqual(posix_path,mission.resolve())
+            self.assertEqual(windows_path,mission.resolve())
+            self.assertEqual(posix_rel,"canonical/astra_runtime/missions/M.json")
+            self.assertEqual(windows_rel,posix_rel)
+
+    def test_mission_identity_rejects_repository_escape(self):
+        with __import__("tempfile").TemporaryDirectory() as td:
+            root=pathlib.Path(td)
+            with mock.patch.object(runtime,"ROOT",root):
+                with self.assertRaisesRegex(runtime.Blocker,"MISSION_PATH_OUTSIDE_ROOT"):
+                    runtime._canonical_mission_path("../outside.json")
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
