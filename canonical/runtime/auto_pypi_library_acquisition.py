@@ -15,7 +15,7 @@ class AutoPyPIAcquisitionFailure(RuntimeError):
 def _verified_runtime_platform():
     if sys.platform.startswith("linux"):
         return "linux"
-    if sys.platform.startswith("win"):
+    if sys.platform.startswith("win") or sys.platform in {"cygwin","msys"}:
         return "windows"
     if sys.platform=="darwin":
         return "darwin"
