@@ -1,15 +1,15 @@
 {
   "schema": "PROJECT_BRAIN_ASTRA_SHARED_RUNTIME_PORTFOLIO_STATE_V1",
   "canonical_generation": "2026-09-22-astra-shared-runtime-portfolio-restored",
-  "status": "RECONCILED_ACTIVE",
+  "status": "RECONCILED_ACTIVE_POST_PR20",
   "optimization_target": "MINIMIZE_TIME_UNTIL_ALL_TARGET_CAPABILITIES_WORK_TOGETHER_IN_ONE_SHARED_RUNTIME",
   "runtime_components_in_use": [
-    "GPT-5.6 Sol cognition",
     "GitHub canonical Brain",
     "GitHub connector",
-    "Remote Desktop Commander",
-    "web research",
-    "scheduled ChatGPT continuation"
+    "provider-neutral executor admission",
+    "tamper-evident epistemic evidence ledger",
+    "private GitHub -> private Google Drive -> ChatGPT Linux exact-source execution bridge",
+    "web research"
   ],
   "lanes": [
     {
@@ -55,17 +55,24 @@
     }
   ],
   "uncovered_pressure_dimensions": [
-    "direct Windows GUI/browser delivery from a real source artifact when an authorized host is available",
-    "autonomous continuation without a user-triggered invocation, only if it becomes naturally necessary to complete consequential work"
+    "same durable worker identity completing observe -> reason -> research -> act -> verify -> checkpoint -> continue across fresh invocations",
+    "survival across context/model/provider loss via durable checkpoint and lawful relaunch",
+    "causally ready task acquisition with leases/ownership/deduplication/provenance",
+    "dynamic knowledge/tool/capability discovery and acquisition inside one shared runtime",
+    "generic unseen-goal closure without new task-specific compiler handlers",
+    "platform-specific certification only when a real mission actually requires that platform"
   ],
-  "next_action": "Recompute T_ASTRA_REAL from live state. The only current blocker on this lane is an offline Windows source host for direct GUI/browser replay; do not wait idly if another independent real mission offers greater expected closure-time reduction. When Mo is online, replay exact source-artifact delivery only if that remains the frontier.",
+  "next_action": "Readjudicate the seven previously failed whole-Superworker gates using primary post-PR18/PR20 evidence. Implement only gates still genuinely false, then run the smallest device-independent orthogonal real-mission portfolio through one shared runtime. Freeze the first generic blocker, repair it, replay the identical failed action, and resume.",
   "anti_waste": [
     "no qualification before operational portfolio closure",
     "no provider hunt without an observed blocker",
     "no speculative infrastructure",
     "no duplicate proof or rerun",
     "blocker-local search/reuse before invention",
-    "no critical checkpoint may depend solely on an unmirrored local artifact; mirror required continuation artifacts off-host with hash and canonical reference"
+    "no critical checkpoint may depend solely on an unmirrored local artifact; mirror required continuation artifacts off-host with hash and canonical reference",
+    "do not wait for or depend on the user's device",
+    "do not use Val Town",
+    "do not treat a promoted executor transport as proof of whole-Superworker autonomy"
   ],
   "incremental_spend_usd": 0,
   "val_town_used": false,

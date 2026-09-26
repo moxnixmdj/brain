@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_POST_PR20_CANONICAL_RECONCILIATION_V1",
+  "reconciliation_id": "POST-PR20-CANONICAL-FRONTIER-20260927",
+  "bound_main_sha": "86258402402550a543716615b188648f61ea42fd",
+  "evidence_presence_classification": "SUPERSEDED_BY_NEWER_CANONICAL_STATE",
+  "terminal_objective": "MAKE_THE_ACTUAL_TARGET_CAPABILITIES_REAL_IN_ONE_SHARED_PROJECT_BRAIN_RUNTIME",
+  "prior_stale_frontier": {
+    "critical_blocker": "CURRENT_MINIMAL_ORTHOGONAL_MISSION_PORTFOLIO_AND_SHARED_RUNTIME_STATE_NOT_RECONCILED_FROM_LIVE_EVIDENCE",
+    "status": "SUPERSEDED_BY_NEWER_CANONICAL_STATE"
+  },
+  "primary_evidence": {
+    "pr18": {
+      "merge_commit_sha": "158aced78b1c1266869a6563775ae0e589e694cd",
+      "executable_revision": "50cd49bc4d3128591baf33f7478375d934b0706e",
+      "result": "PROMOTED_PROVIDER_NEUTRAL_EXECUTOR_ADMISSION_AND_EPISTEMIC_LEDGER"
+    },
+    "pr20": {
+      "merge_commit_sha": "e97231bdb899c467a3ca3f4719b442ecb6be7b95",
+      "executable_revision": "05eaaf0cab39e3e3c392cf57ef38af56cb36fde7",
+      "result": "PROMOTED_DEVICE_INDEPENDENT_PRIVATE_REPO_EXECUTION_AND_GENERIC_RECOVERY_FIXES",
+      "executor_id": "chatgpt-session-linux-private-github-drive-base64-bridge-20260926",
+      "source_git_blobs_verified": 90,
+      "canonical_fixture_blobs_verified": 3,
+      "targeted_tests_passed": 22,
+      "stacked_tests_passed": 17,
+      "full_tests_passed": 139,
+      "incremental_spend_usd": 0,
+      "user_device_used": false,
+      "val_town_used": false
+    },
+    "pr21": {
+      "merge_commit_sha": "5cdb64c43612bf5b42f5cdc28f2243947bc15d27",
+      "result": "VAL_TOWN_CANONICALLY_FORBIDDEN"
+    }
+  },
+  "canonical_conclusions": [
+    "The old executor-unavailable blocker is superseded by verified device-independent execution evidence.",
+    "The shared-runtime portfolio is not blocked on the user's Windows device.",
+    "Val Town is forbidden and cannot be used for boot, execution, recovery, verification, control plane, or provider discovery.",
+    "PR18 and PR20 do not by themselves prove the seven failed whole-Superworker gates from the latest independent whole-definition adjudication.",
+    "The next causal frontier is to readjudicate those seven failed gates against post-PR18/PR20 evidence, then implement only mechanisms that remain genuinely unproven.",
+    "Formal qualification remains subordinate to real operational mission closure."
+  ],
+  "latest_whole_definition_failed_gates": [
+    "INDEPENDENT_PERSISTENT_EXECUTION_SYSTEM",
+    "DURABLE_IDENTITY_AND_MISSION_BEYOND_CHAT_MODEL_INVOCATION",
+    "OBSERVE_REASON_RESEARCH_ACT_VERIFY_CHECKPOINT_CONTINUE",
+    "SURVIVES_CONTEXT_MODEL_PROVIDER_LOSS_VIA_CHECKPOINT_RELAUNCH",
+    "CAUSALLY_READY_TASK_ACQUISITION",
+    "DYNAMIC_KNOWLEDGE_TOOL_CAPABILITY_DISCOVERY_ACQUISITION",
+    "LEASES_OWNERSHIP_DEDUPE_PROVENANCE_VERIFICATION"
+  ],
+  "new_critical_blocker": "POST_PR20_WHOLE_DEFINITION_GATE_RECONCILIATION_REQUIRED",
+  "next_action": "READJUDICATE_SEVEN_FAILED_GATES_FROM_PRIMARY_POST_PR18_PR20_EVIDENCE__SELECT_ONLY_GENUINELY_UNRESOLVED_MECHANISMS__RUN_MINIMAL_DEVICE_INDEPENDENT_ORTHOGONAL_REAL_MISSION_PORTFOLIO__FREEZE_FIRST_GENERIC_BLOCKER__REPAIR_REPLAY_RESUME",
+  "hard_constraints": {
+    "incremental_spend_usd": 0,
+    "user_device_dependency_forbidden": true,
+    "val_town_forbidden": true,
+    "no_self_certification": true,
+    "no_duplicate_capability_rerun": true
+  }
+}

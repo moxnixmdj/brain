@@ -121,11 +121,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 0,
-    "next_step": "RECONSTRUCT_CURRENT_SHARED_ASTRA_RUNTIME__CHOOSE_SMALLEST_ORTHOGONAL_REAL_MISSION_PORTFOLIO_BY_CAPABILITY_EXPOSURE_PER_WALL_CLOCK_TIME__RUN_PORTFOLIO_CONCURRENTLY__FREEZE_EXACT_OBSERVED_BLOCKERS__LAUNCH_MAXIMUM_USEFUL_LOCAL_ACQUISITION_SWARMS__INTEGRATE_VERIFIED_WINNERS_GLOBALLY__REPLAY_AND_RESUME",
+    "next_step": "READJUDICATE_SEVEN_FAILED_GATES_FROM_PRIMARY_POST_PR18_PR20_EVIDENCE__SELECT_ONLY_GENUINELY_UNRESOLVED_MECHANISMS__RUN_MINIMAL_DEVICE_INDEPENDENT_ORTHOGONAL_REAL_MISSION_PORTFOLIO__FREEZE_FIRST_GENERIC_BLOCKER__REPAIR_REPLAY_RESUME",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "CURRENT_MINIMAL_ORTHOGONAL_MISSION_PORTFOLIO_AND_SHARED_RUNTIME_STATE_NOT_RECONCILED_FROM_LIVE_EVIDENCE",
+    "critical_blocker": "POST_PR20_WHOLE_DEFINITION_GATE_RECONCILIATION_REQUIRED",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -202,11 +202,11 @@
     "superworker_truth_scope": "NO_SINGLE_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "CURRENT_MINIMAL_ORTHOGONAL_MISSION_PORTFOLIO_AND_SHARED_RUNTIME_STATE_NOT_RECONCILED_FROM_LIVE_EVIDENCE",
+    "highest_leverage_capability_gap": "POST_PR20_WHOLE_DEFINITION_GATE_RECONCILIATION_REQUIRED",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/ASTRA_TARGET_CAPABILITY_MAP_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
-    "execution_surface": "CHATGPT_WORK_WITH_GPT_6_ASTRA_IF_AVAILABLE_IN_EXISTING_PLAN",
+    "execution_surface": "PROVIDER_NEUTRAL_VERIFICATION_CAPSULE_EXECUTION",
     "user_boundary": "NONE_FOR_CAPABILITY_WORK_USING_CURRENT_CONNECTED_TOOLS",
     "integrated_cognitive_worker_candidate": "ICW-CHATGPT-SOL-1",
     "integrated_cognitive_worker_checkpoint_path": "canonical/icw/ICW-CHATGPT-SOL-1/CHECKPOINT_V1.json",
@@ -231,6 +231,21 @@
       "historical_gap": "GENERAL_REASONING_AND_GENERIC_TOOL_USE_INSIDE_PERSISTENT_CONTROLLER",
       "top_level_frontier_superseded_by_commit": "71a4c714a8528f839699a2d81c7b66c96096f6ab",
       "current_authority": "canonical/laws/ASTRA_SHARED_RUNTIME_PORTFOLIO_V1.md"
+    },
+    "device_independent_execution": {
+      "status": "VERIFIED_PROMOTED",
+      "evidence_path": "canonical/reconciliation/POST_PR20_CANONICAL_FRONTIER_20260927_V1.json",
+      "executor_id": "chatgpt-session-linux-private-github-drive-base64-bridge-20260926",
+      "pr20_merge_commit_sha": "e97231bdb899c467a3ca3f4719b442ecb6be7b95",
+      "exact_private_repo_execution": true,
+      "user_device_used": false,
+      "incremental_spend_usd": 0
+    },
+    "post_pr20_reconciliation": {
+      "status": "RECONCILED_FROM_PRIMARY_EVIDENCE",
+      "evidence_path": "canonical/reconciliation/POST_PR20_CANONICAL_FRONTIER_20260927_V1.json",
+      "bound_main_sha": "86258402402550a543716615b188648f61ea42fd",
+      "previous_portfolio_reconciliation_blocker": "SUPERSEDED_BY_NEWER_CANONICAL_STATE"
     }
   },
   "provider_rules": {
@@ -255,15 +270,14 @@
     "infrastructure_freeze_when_next_real_mission_executable": true,
     "forbid_relabeling_bounded_executor_as_superworker": true,
     "only_current_allowed_frontier_actions": [
-      "reconstruct current shared ASTRA_RUNTIME from valid existing capability components",
-      "select the smallest orthogonal real mission portfolio maximizing capability and interaction exposure per wall clock time",
-      "run portfolio missions concurrently against the same runtime",
-      "freeze exact observed blockers and attack only those blockers with maximum useful parallelism",
-      "race reuse composition adaptation and invention only beneath a real blocker",
+      "readjudicate the seven previously failed whole-Superworker gates against primary post-PR18 and post-PR20 evidence",
+      "implement only mechanisms that remain genuinely unproven after that readjudication",
+      "run the smallest device-independent orthogonal real-mission portfolio against one shared runtime",
+      "freeze the first causal generic blocker observed by real mission pressure",
+      "race reuse composition adaptation and invention only beneath that observed blocker",
       "integrate independently verified winning repairs globally into the shared runtime",
-      "replay failed actions and resume missions immediately",
-      "expand legitimate zero cost execution capacity only as a parallel multiplier",
-      "defer formal qualification until the operational portfolio closes"
+      "replay the identical failed action and resume the interrupted mission",
+      "defer formal whole-definition qualification until operational mission closure"
     ],
     "truth_first_law": "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
     "live_canonical_refresh_before_consequential_action": true,
