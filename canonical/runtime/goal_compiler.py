@@ -153,7 +153,7 @@ def _context_path_for_key(key, context_paths):
 
 
 
-def _bind_declared_input(key, spec, goal, root, paths, context_paths):
+def _bind_declared_input(key, spec, goal, root, paths, context_paths, prior_parts=None, action_cycle=None):
     """Resolve a placeholder from declarative, capability-owned binding metadata."""
     if not isinstance(spec,dict):
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_SCHEMA_INVALID",key)
@@ -169,10 +169,11 @@ def _bind_declared_input(key, spec, goal, root, paths, context_paths):
 
     if kind=="json_path_cue":
         cue=str(spec.get("cue") or "json path").strip()
-        m=re.search(re.escape(cue)+r"\s+([^\s,.;]+)",text,re.IGNORECASE)
+        m=re.search(re.escape(cue)+r"\s+([^\s,;]+)",text,re.IGNORECASE)
         if not m:
             raise GoalCompilationFailure("GOAL_JSON_PATH_BINDING_REQUIRED",key)
-        parsed=_parse_json_path_spec(m.group(1))
+        raw_path=m.group(1).rstrip(".,;:")
+        parsed=_parse_json_path_spec(raw_path)
         if parsed is None:
             raise GoalCompilationFailure("GOAL_JSON_PATH_BINDING_REQUIRED",m.group(1))
         return parsed
@@ -252,10 +253,48 @@ def _bind_declared_input(key, spec, goal, root, paths, context_paths):
             return candidates[0]
         raise GoalCompilationFailure("GOAL_OUTPUT_PATH_BINDING_REQUIRED",key)
 
+    if kind=="regex_capture":
+        pattern=str(spec.get("pattern") or "")
+        group=int(spec.get("group",1))
+        flags=re.IGNORECASE if spec.get("ignore_case",True) else 0
+        m=re.search(pattern,text,flags)
+        if not m:
+            raise GoalCompilationFailure("GOAL_REGEX_BINDING_REQUIRED",key)
+        try:
+            return m.group(group).strip(" .,:;")
+        except Exception as exc:
+            raise GoalCompilationFailure("GOAL_REGEX_BINDING_GROUP_INVALID",key) from exc
+
+    if kind in {"prior_effect_input","prior_effect_result_ref"}:
+        effect=str(spec.get("effect") or "").strip()
+        if not effect:
+            raise GoalCompilationFailure("GOAL_PRIOR_EFFECT_BINDING_INVALID",key)
+        prior=None
+        for part in reversed(list(prior_parts or [])):
+            if not isinstance(part,dict):
+                continue
+            effects=[str(x) for x in (part.get("target_effects") or [])]
+            if effect in effects:
+                prior=part
+                break
+        if prior is None:
+            raise GoalCompilationFailure("GOAL_PRIOR_EFFECT_BINDING_REQUIRED",effect)
+        if kind=="prior_effect_input":
+            input_key=str(spec.get("input") or "").strip()
+            inputs=prior.get("inputs") or {}
+            if not input_key or input_key not in inputs:
+                raise GoalCompilationFailure("GOAL_PRIOR_EFFECT_INPUT_MISSING",input_key)
+            return inputs[input_key]
+        cycle=prior.get("result_cycle")
+        field=str(spec.get("field") or "").strip()
+        if not isinstance(cycle,int) or cycle<0 or not field:
+            raise GoalCompilationFailure("GOAL_PRIOR_EFFECT_RESULT_BINDING_INVALID",effect)
+        return {"$result":{"cycle":cycle,"field":field}}
+
     raise GoalCompilationFailure("GOAL_INPUT_BINDING_SCHEMA_TYPE_UNSUPPORTED",kind)
 
 
-def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
+def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None, prior_parts=None, action_cycle=None):
     template=entry.get("action_template") or {}
     keys=_placeholders(template)
     if not keys:
@@ -268,7 +307,8 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
     for key in keys:
         if key in declared_bindings:
             result[key]=_bind_declared_input(
-                key,declared_bindings[key],goal,root,paths,context_paths
+                key,declared_bindings[key],goal,root,paths,context_paths,
+                prior_parts=prior_parts,action_cycle=action_cycle
             )
             continue
         if key=="text":
@@ -445,7 +485,50 @@ def _structured_binary_format_match(goal,entry):
     }
 
 
+def _goal_match_constraints(goal, entry):
+    spec=(entry or {}).get("goal_match")
+    if spec is None:
+        return True,None
+    if not isinstance(spec,dict):
+        return False,{"reason":"goal_match_not_object"}
+    lower=" ".join(str(goal or "").lower().split())
+    require_any=[
+        " ".join(str(x).lower().split())
+        for x in (spec.get("require_any_phrases") or [])
+        if str(x).strip()
+    ]
+    require_all=[
+        " ".join(str(x).lower().split())
+        for x in (spec.get("require_all_phrases") or [])
+        if str(x).strip()
+    ]
+    forbid_any=[
+        " ".join(str(x).lower().split())
+        for x in (spec.get("forbid_any_phrases") or [])
+        if str(x).strip()
+    ]
+    if require_any and not any(x in lower for x in require_any):
+        return False,{"reason":"required_any_phrase_missing","phrases":require_any}
+    missing=[x for x in require_all if x not in lower]
+    if missing:
+        return False,{"reason":"required_all_phrase_missing","phrases":missing}
+    forbidden=[x for x in forbid_any if x in lower]
+    if forbidden:
+        return False,{"reason":"forbidden_phrase_present","phrases":forbidden}
+    return True,None
+
+
 def _score(goal, cid, entry):
+    goal_ok,goal_evidence=_goal_match_constraints(goal,entry)
+    if not goal_ok:
+        return 0,0,{
+          "goal_tokens":sorted(_tokens(goal)),
+          "matched_provides":[],
+          "matched_requires":[],
+          "matched_identity":[],
+          "matched_keywords":[],
+          "goal_match_rejection":goal_evidence,
+        }
     surface_ok,surface_evidence=_execution_surface_constraint_match(goal,entry)
     if not surface_ok:
         return 0,0,{
@@ -500,10 +583,22 @@ def _score(goal, cid, entry):
 
 def _render_template(value, inputs):
     if isinstance(value,dict):
-        return {k:_render_template(v,inputs) for k,v in value.items()}
+        rendered={}
+        for k,v in value.items():
+            rk=_render_template(k,inputs) if isinstance(k,str) else k
+            if not isinstance(rk,(str,int,float,bool)):
+                raise GoalCompilationFailure("GOAL_TEMPLATE_KEY_INVALID",str(rk))
+            rendered[rk]=_render_template(v,inputs)
+        return rendered
     if isinstance(value,list):
         return [_render_template(v,inputs) for v in value]
     if isinstance(value,str):
+        exact=re.fullmatch(r"\$\{input\.([A-Za-z0-9_]+)\}",value)
+        if exact:
+            key=exact.group(1)
+            if key not in inputs:
+                raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED",key)
+            return inputs[key]
         out=value
         for key,val in inputs.items():
             out=out.replace("${input."+str(key)+"}",str(val))
@@ -547,7 +642,7 @@ def decompose_goal(goal):
         current=clauses[i]
         if (
             i+1 < len(clauses)
-            and re.search(r"\bindependently\s+(?:execute|run|reopen|read|reread|inspect|query|decode)\b",current,re.IGNORECASE)
+            and re.search(r"\bindependently\s+(?:execute|run|reopen|read|reread|inspect|query|decode|fetch|re-fetch|refetch)\b",current,re.IGNORECASE)
             and re.match(r"^(?:verify|check|assert)\b",clauses[i+1],re.IGNORECASE)
         ):
             merged.append(current+" and "+clauses[i+1])
@@ -681,7 +776,7 @@ def _compile_verified_browser_interaction(goal, registry, root):
     }
 
 
-def _compile_single_goal(goal, registry, root, context_paths=None, future_clauses=None):
+def _compile_single_goal(goal, registry, root, context_paths=None, future_clauses=None, prior_parts=None, action_cycle=None):
     ranked=[]
     for cid,entry in sorted((registry or {}).items()):
         if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
@@ -692,7 +787,7 @@ def _compile_single_goal(goal, registry, root, context_paths=None, future_clause
         if score<=0:
             continue
         try:
-            inputs=_bind_inputs(goal,root,entry,context_paths=context_paths,future_clauses=future_clauses)
+            inputs=_bind_inputs(goal,root,entry,context_paths=context_paths,future_clauses=future_clauses,prior_parts=prior_parts,action_cycle=action_cycle)
         except GoalCompilationFailure:
             continue
         ranked.append((score,specificity,cid,entry,inputs,evidence))
@@ -3404,135 +3499,10 @@ def _parse_json_path_spec(raw_path):
 
 
 
-def _compile_authoritative_json_knowledge_fetch(clause,action_cycle):
-    text=str(clause or "").strip()
-    m=re.match(
-        r"^using\s+the\s+authoritative\s+json\s+source\s+(https?://[^\s,]+),\s*"
-        r"extract\s+json\s+path\s+([^\s]+)\s+and\s+save\s+the\s+knowledge\s+evidence\s+to\s+"
-        r"([^\s]+\.json)$",
-        text,re.IGNORECASE
-    )
-    if not m:
-        return None
-    url=m.group(1).rstrip(".,;:!?")
-    raw_path=m.group(2).strip(" .,:;")
-    output_path=m.group(3).strip(" .,:;")
-    path_spec=_parse_json_path_spec(raw_path)
-    if path_spec is None:
-        return None
-    return {
-      "action":{
-        "type":"fetch_json_knowledge",
-        "args":{
-          "url":url,
-          "json_path":path_spec,
-          "output_path":output_path,
-          "authoritative":True,
-          "timeout_s":20,
-          "max_bytes":1000000,
-        },
-        "expect":{"type":"field_equals","field":"verified","value":True},
-      },
-      "output_path":output_path,
-      "result_cycle":int(action_cycle),
-      "evidence":{
-        "source_url":url,
-        "json_path":path_spec,
-        "evidence_path":output_path,
-        "result_cycle":int(action_cycle),
-      }
-    }
 
 
-def _compile_learned_value_record(clause,compiled_parts):
-    text=str(clause or "").strip()
-    m=re.match(
-        r"^create\s+([^\s]+\.json)\s+with\s+one\s+record\s+containing\s+"
-        r"([A-Za-z_][A-Za-z0-9_]*)\s+([^\s,]+)\s+and\s+"
-        r"([A-Za-z_][A-Za-z0-9_]*)\s+equal\s+to\s+the\s+learned\s+value$",
-        text,re.IGNORECASE
-    )
-    if not m:
-        return None
-    prior=None
-    for part in reversed(compiled_parts or []):
-        if isinstance(part,dict) and part.get("mode")=="AUTHORITATIVE_JSON_KNOWLEDGE_FETCH":
-            prior=part
-            break
-    if prior is None:
-        return None
-    output_path=m.group(1).strip(" .,:;")
-    literal_field=m.group(2)
-    literal_value=m.group(3).strip(" .,:;")
-    learned_field=m.group(4)
-    return {
-      "action":{
-        "type":"write_json_records",
-        "args":{
-          "output_path":output_path,
-          "fields":[literal_field,learned_field],
-          "records":[{
-            literal_field:literal_value,
-            learned_field:{"$result":{"cycle":int(prior["result_cycle"]),"field":"value"}},
-          }],
-        },
-        "expect":{"type":"field_equals","field":"verified","value":True},
-      },
-      "output_path":output_path,
-      "evidence":{
-        "output_path":output_path,
-        "literal_field":literal_field,
-        "learned_field":learned_field,
-        "knowledge_evidence_path":prior["evidence_path"],
-      }
-    }
 
 
-def _compile_knowledge_revalidation(clause,compiled_parts,future_clauses=None):
-    text=str(clause or "").strip()
-    consume_future=0
-    whole=re.match(
-        r"^finally\s+independently\s+re-fetch\s+the\s+authoritative\s+source\s+and\s+"
-        r"verify\s+the\s+learned\s+value\s+is\s+unchanged$",
-        text,re.IGNORECASE
-    )
-    if not whole:
-        first=re.match(
-            r"^finally\s+independently\s+re-fetch\s+the\s+authoritative\s+source$",
-            text,re.IGNORECASE
-        )
-        next_clause=str((future_clauses or [""])[0] or "").strip() if (future_clauses or []) else ""
-        second=re.match(
-            r"^verify\s+the\s+learned\s+value\s+is\s+unchanged$",
-            next_clause,re.IGNORECASE
-        )
-        if not first or not second:
-            return None
-        consume_future=1
-    prior=None
-    for part in reversed(compiled_parts or []):
-        if isinstance(part,dict) and part.get("mode")=="AUTHORITATIVE_JSON_KNOWLEDGE_FETCH":
-            prior=part
-            break
-    if prior is None:
-        return None
-    return {
-      "action":{
-        "type":"assert_json_knowledge",
-        "args":{
-          "evidence_path":prior["evidence_path"],
-          "timeout_s":20,
-          "max_bytes":1000000,
-        },
-        "expect":{"type":"field_equals","field":"verified","value":True},
-      },
-      "consume_future":consume_future,
-      "evidence":{
-        "evidence_path":prior["evidence_path"],
-        "source_url":prior["source_url"],
-        "json_path":prior["json_path"],
-      }
-    }
 
 
 def _compile_compound_goal(goal, clauses, registry, root):
@@ -3547,50 +3517,6 @@ def _compile_compound_goal(goal, clauses, registry, root):
 
 
 
-
-        knowledge_fetch=_compile_authoritative_json_knowledge_fetch(clause,len(actions))
-        if knowledge_fetch is not None:
-            actions.append(knowledge_fetch["action"])
-            context_paths.append(knowledge_fetch["output_path"])
-            compiled_parts.append({
-                "index":index,"subgoal":clause,
-                "mode":"AUTHORITATIVE_JSON_KNOWLEDGE_FETCH",
-                **knowledge_fetch["evidence"],
-            })
-            continue
-
-        learned_record=_compile_learned_value_record(clause,compiled_parts)
-        if learned_record is not None:
-            actions.append(learned_record["action"])
-            context_paths.append(learned_record["output_path"])
-            compiled_parts.append({
-                "index":index,"subgoal":clause,
-                "mode":"KNOWLEDGE_VALUE_DOWNSTREAM_MATERIALIZATION",
-                **learned_record["evidence"],
-            })
-            continue
-
-        knowledge_revalidation=_compile_knowledge_revalidation(
-            clause,compiled_parts,clauses[index+1:]
-        )
-        if knowledge_revalidation is not None:
-            actions.append(knowledge_revalidation["action"])
-            consume=int(knowledge_revalidation.get("consume_future") or 0)
-            for offset in range(1,consume+1):
-                consumed_indices.add(index+offset)
-            compiled_parts.append({
-                "index":index,"subgoal":clause,
-                "mode":"INDEPENDENT_KNOWLEDGE_REVALIDATION",
-                **knowledge_revalidation["evidence"],
-            })
-            for offset in range(1,consume+1):
-                compiled_parts.append({
-                    "index":index+offset,
-                    "subgoal":clauses[index+offset],
-                    "mode":"KNOWLEDGE_REVALIDATION_CONTINUATION",
-                    **knowledge_revalidation["evidence"],
-                })
-            continue
 
         literal_json=_compile_literal_json_records(clause,root)
         if literal_json is not None:
@@ -4163,7 +4089,9 @@ def _compile_compound_goal(goal, clauses, registry, root):
             part=_compile_single_goal(
                 clause,registry,root,
                 context_paths=context_paths,
-                future_clauses=clauses[index+1:]
+                future_clauses=clauses[index+1:],
+                prior_parts=compiled_parts,
+                action_cycle=len(actions)
             )
         except GoalCompilationFailure as exc:
             raise GoalCompilationFailure(
@@ -4208,6 +4136,7 @@ def _compile_compound_goal(goal, clauses, registry, root):
             "inputs":part["inputs"],
             "target_effects":part["target_effects"],
             "score":part["score"],
+            "result_cycle":len(actions)-1,
         })
     actions.append({
         "type":"finish",

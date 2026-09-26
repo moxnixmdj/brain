@@ -40,6 +40,9 @@ class DeclarativeKnowledgeBindingTests(unittest.TestCase):
             "_compile_external_json_knowledge_fetch",
             "_compile_knowledge_consistency_assessment",
             "_compile_knowledge_status_assertion",
+            "_compile_authoritative_json_knowledge_fetch",
+            "_compile_learned_value_record",
+            "_compile_knowledge_revalidation",
         ):
             self.assertFalse(hasattr(gc,name),name)
 
@@ -80,6 +83,61 @@ class DeclarativeKnowledgeBindingTests(unittest.TestCase):
     def test_unknown_status_fails_closed(self):
         with self.assertRaises(gc.GoalCompilationFailure):
             gc.compile_goal(compound(status="MAGICAL"),REG,CANONICAL_ROOT.parent)
+
+
+    def test_worldbank_plain_goal_preserves_canonical_causal_contract(self):
+        goal=(
+            "Using the authoritative JSON source https://api.worldbank.org/v2/indicator/SP.POP.TOTL?format=json, "
+            "extract JSON path 1.0.sourceNote and save the knowledge evidence to "
+            "canonical/astra_runtime/tmp/JIT_WORLDBANK_PLAIN_EVIDENCE.json. "
+            "Create canonical/astra_runtime/tmp/JIT_WORLDBANK_PLAIN_USED.json with one record containing "
+            "indicator_id SP.POP.TOTL and definition equal to the learned value. "
+            "Finally independently re-fetch the authoritative source and verify the learned value is unchanged."
+        )
+        out=gc.compile_goal(goal,REG,CANONICAL_ROOT.parent)
+        self.assertEqual(len(out["controller_actions"]),4)
+        fetch,write,revalidate,finish=out["controller_actions"]
+        self.assertEqual(fetch["type"],"fetch_json_knowledge")
+        self.assertEqual(fetch["args"]["json_path"],[1,0,"sourceNote"])
+        self.assertIs(fetch["args"]["authoritative"],True)
+        self.assertEqual(write["type"],"write_json_records")
+        self.assertEqual(write["args"]["fields"],["indicator_id","definition"])
+        self.assertEqual(
+            write["args"]["records"],
+            [{
+                "indicator_id":"SP.POP.TOTL",
+                "definition":{"$result":{"cycle":0,"field":"value"}},
+            }],
+        )
+        self.assertEqual(revalidate["type"],"assert_json_knowledge")
+        self.assertEqual(
+            revalidate["args"]["evidence_path"],
+            "canonical/astra_runtime/tmp/JIT_WORLDBANK_PLAIN_EVIDENCE.json",
+        )
+        self.assertEqual(finish["type"],"finish")
+
+    def test_independent_refetch_and_verify_is_one_clause(self):
+        goal=(
+            "Using the authoritative JSON source https://example.com/a.json, "
+            "extract JSON path a.b and save the knowledge evidence to canonical/astra_runtime/tmp/K.json. "
+            "Finally independently re-fetch the authoritative source and verify the learned value is unchanged."
+        )
+        clauses=gc.decompose_goal(goal)
+        self.assertEqual(len(clauses),2)
+        self.assertIn("and verify the learned value is unchanged",clauses[1])
+
+    def test_result_reference_binding_requires_prior_effect(self):
+        goal=(
+            "Create canonical/astra_runtime/tmp/USED.json with one record containing "
+            "indicator_id X and definition equal to the learned value."
+        )
+        with self.assertRaises(gc.GoalCompilationFailure):
+            gc.compile_goal(goal,REG,CANONICAL_ROOT.parent)
+
+    def test_revalidation_binding_requires_prior_observation(self):
+        goal="Finally independently re-fetch the authoritative source and verify the learned value is unchanged."
+        with self.assertRaises(gc.GoalCompilationFailure):
+            gc.compile_goal(goal,REG,CANONICAL_ROOT.parent)
 
 
 if __name__=="__main__":

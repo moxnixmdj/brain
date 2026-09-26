@@ -2482,6 +2482,162 @@
         },
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-YAML-JSON-YQ-001__RECEIPT.json"
       }
+    },
+    "json.records.write_from_prior_effect": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "cost": 1,
+      "incremental_spend_usd": 0,
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "json.records.available"
+      ],
+      "requires": [
+        "knowledge.observation.available"
+      ],
+      "keywords": [
+        "create",
+        "json",
+        "record",
+        "records",
+        "learned",
+        "value",
+        "containing"
+      ],
+      "adapter_module": "runtime_native_action",
+      "action_template": {
+        "type": "write_json_records",
+        "args": {
+          "output_path": "${input.output_path}",
+          "fields": [
+            "${input.literal_field}",
+            "${input.learned_field}"
+          ],
+          "records": [
+            {
+              "${input.literal_field}": "${input.literal_value}",
+              "${input.learned_field}": "${input.learned_value_ref}"
+            }
+          ]
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "verified",
+          "value": true
+        }
+      },
+      "input_bindings": {
+        "output_path": {
+          "type": "repo_output_path",
+          "suffixes": [
+            ".json"
+          ]
+        },
+        "literal_field": {
+          "type": "regex_capture",
+          "pattern": "with\\s+one\\s+record\\s+containing\\s+([A-Za-z_][A-Za-z0-9_]*)\\s+([^\\s,]+)\\s+and\\s+([A-Za-z_][A-Za-z0-9_]*)\\s+equal\\s+to\\s+the\\s+learned\\s+value",
+          "group": 1
+        },
+        "literal_value": {
+          "type": "regex_capture",
+          "pattern": "with\\s+one\\s+record\\s+containing\\s+([A-Za-z_][A-Za-z0-9_]*)\\s+([^\\s,]+)\\s+and\\s+([A-Za-z_][A-Za-z0-9_]*)\\s+equal\\s+to\\s+the\\s+learned\\s+value",
+          "group": 2
+        },
+        "learned_field": {
+          "type": "regex_capture",
+          "pattern": "with\\s+one\\s+record\\s+containing\\s+([A-Za-z_][A-Za-z0-9_]*)\\s+([^\\s,]+)\\s+and\\s+([A-Za-z_][A-Za-z0-9_]*)\\s+equal\\s+to\\s+the\\s+learned\\s+value",
+          "group": 3
+        },
+        "learned_value_ref": {
+          "type": "prior_effect_result_ref",
+          "effect": "knowledge.observation.available",
+          "field": "value"
+        }
+      },
+      "source": {
+        "type": "runtime_native",
+        "runtime_path": "canonical/runtime/astra_runtime.py",
+        "action_type": "write_json_records"
+      },
+      "verification": {
+        "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-WORLDBANK-001",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-JIT-KNOWLEDGE-WORLDBANK-001__RECEIPT.json",
+        "observed_effect": {
+          "downstream_result_reference_consumed": true
+        }
+      }
+    },
+    "knowledge.json.revalidate": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "cost": 1,
+      "incremental_spend_usd": 0,
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "knowledge.revalidation.verified"
+      ],
+      "requires": [
+        "knowledge.observation.available"
+      ],
+      "keywords": [
+        "knowledge",
+        "independently",
+        "re-fetch",
+        "authoritative",
+        "source",
+        "verify",
+        "learned",
+        "value",
+        "unchanged",
+        "revalidate"
+      ],
+      "adapter_module": "runtime_native_action",
+      "action_template": {
+        "type": "assert_json_knowledge",
+        "args": {
+          "evidence_path": "${input.evidence_path}",
+          "timeout_s": 20,
+          "max_bytes": 1000000
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "verified",
+          "value": true
+        }
+      },
+      "input_bindings": {
+        "evidence_path": {
+          "type": "prior_effect_input",
+          "effect": "knowledge.observation.available",
+          "input": "output_path"
+        }
+      },
+      "source": {
+        "type": "runtime_native",
+        "runtime_path": "canonical/runtime/astra_runtime.py",
+        "action_type": "assert_json_knowledge"
+      },
+      "verification": {
+        "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-WORLDBANK-001",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-JIT-KNOWLEDGE-WORLDBANK-001__RECEIPT.json",
+        "observed_effect": {
+          "source_revalidation_required": true
+        }
+      },
+      "goal_match": {
+        "require_any_phrases": [
+          "re-fetch",
+          "refetch",
+          "revalidate",
+          "learned value is unchanged"
+        ]
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
