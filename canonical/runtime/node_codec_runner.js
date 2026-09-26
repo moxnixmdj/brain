@@ -78,6 +78,27 @@ async function main(){
     throw new Error("NO_COMPATIBLE_NODE_CODEC_CONTRACT");
   }
   const obj=rootObject(loaded.module,cfg.root_selector||"module");
+  if(cfg.mode==="probe_decode"){
+    const expected=JSON.parse(fs.readFileSync(cfg.json_path,"utf8"));
+    const bytes=fs.readFileSync(cfg.binary_path);
+    const decodeNames=["decode","unpack","deserialize","loads","unpackb"];
+    for(const [selector,obj] of roots){
+      for(const decName of decodeNames){
+        try{
+          const dec=resolveExport(obj,decName);
+          const observed=await dec(bytes);
+          if(semanticallyEqual(observed,expected)){
+            process.stdout.write(JSON.stringify({
+              ok:true,root_selector:selector,decode_export:decName,
+              loader:loaded.loader
+            }));
+            return;
+          }
+        }catch(_){}
+      }
+    }
+    throw new Error("NO_COMPATIBLE_NODE_DECODE_CONTRACT");
+  }
   if(cfg.mode==="encode"){
     const fixture=JSON.parse(fs.readFileSync(cfg.json_path,"utf8"));
     const enc=resolveExport(obj,cfg.encode_export);
