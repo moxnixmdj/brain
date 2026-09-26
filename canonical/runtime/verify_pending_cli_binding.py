@@ -8,6 +8,7 @@ import astra_runtime
 import capability_discovery
 import auto_npm_library_acquisition
 import auto_pypi_library_acquisition
+import independent_npm_codec_verifier
 from bound_capabilities import cli_command, python_library_codec, node_library_codec
 
 ROOT=pathlib.Path(__file__).resolve().parents[2]
@@ -135,74 +136,23 @@ def _resolve_callable(module,name):
 
 
 def _independent_npm_codec_verifier(pending,fixture_path,output_path):
-    if not shutil.which("node"):
-        raise RuntimeError("INDEPENDENT_NPM_VERIFIER_NODE_UNAVAILABLE")
-    goal=str(pending.get("goal") or "")
     producer_source=(pending.get("registry_entry") or {}).get("source") or {}
-    attempts=[]
-    try:
-        raw_candidates=auto_npm_library_acquisition._search_registry(goal,limit=30)
-    except Exception as exc:
-        raise RuntimeError(
-            "INDEPENDENT_NPM_VERIFIER_DISCOVERY_FAILED:"
-            +type(exc).__name__+":"+str(exc)
-        ) from exc
-    for raw in raw_candidates[:16]:
-        attempt={"candidate":raw}
-        try:
-            candidate=auto_npm_library_acquisition._metadata(raw)
-            contract=auto_npm_library_acquisition._probe_contract(candidate,ROOT)
-            source={
-              "type":"npm",
-              "package":candidate["package"],
-              "version":candidate["version"],
-              "metadata_url":candidate["metadata_url"],
-              "tarball_url":candidate["tarball_url"],
-              "integrity":candidate["integrity"],
-              "integrity_algorithm":contract["integrity_algorithm"],
-              "integrity_digest_hex":contract["integrity_digest_hex"],
-              "dependency_count":0,
-              "license":candidate.get("license"),
-            }
-            dependency=astra_runtime._ensure_npm_dependency(source)
-            package_root=str(dependency.get("package_root") or "")
-            observed=node_library_codec.run({
-              "_package_root":package_root,
-              "package":contract["package"],
-              "root_selector":contract["root_selector"],
-              "encode_export":contract["encode_export"],
-              "decode_export":contract["decode_export"],
-              "json_path":str(fixture_path.relative_to(ROOT)),
-              "mode":"decode_verify",
-              "binary_path":str(output_path.relative_to(ROOT)),
-            },ROOT)
-            attempt["package"]=candidate["package"]
-            attempt["version"]=candidate["version"]
-            attempt["verified"]=observed.get("verified") is True
-            if observed.get("verified") is True:
-                return {
-                  "verified":True,
-                  "implementation_independent":True,
-                  "supplier_class_independent":producer_source.get("type")!="npm",
-                  "producer_source_type":producer_source.get("type"),
-                  "verifier_source_type":"npm",
-                  "verifier_package":candidate["package"],
-                  "verifier_version":candidate["version"],
-                  "verifier_integrity":candidate["integrity"],
-                  "verifier_contract":{
-                    "root_selector":contract["root_selector"],
-                    "decode_export":contract["decode_export"],
-                  },
-                  "attempts":attempts+[attempt],
-                }
-        except Exception as exc:
-            attempt["error"]=type(exc).__name__+":"+str(exc)
-        attempts.append(attempt)
-    raise RuntimeError(
-        "NO_INDEPENDENT_NPM_CODEC_VERIFIER:"
-        +json.dumps(attempts,sort_keys=True)[:4000]
+    producer_project=str(
+        producer_source.get("project")
+        or producer_source.get("package")
+        or (pending.get("selected_supplier") or {}).get("name")
+        or ""
     )
-
+    evidence=independent_npm_codec_verifier.verify(
+        str(pathlib.Path(str(output_path)).suffix).lower().lstrip("."),
+        str(pathlib.Path(fixture_path).relative_to(ROOT)),
+        str(pathlib.Path(output_path).relative_to(ROOT)),
+        producer_project,
+        ROOT,
+    )
+    if evidence.get("verified") is not True:
+        raise RuntimeError("PENDING_PYPI_INDEPENDENT_VERIFICATION_FAILED")
+    return evidence
 
 def _independent_pypi_codec_verifier(pending,fixture_path,output_path):
     goal=str(pending.get("goal") or "")
