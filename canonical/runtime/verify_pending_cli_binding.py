@@ -135,6 +135,22 @@ def _resolve_callable(module,name):
 
 
 
+def _pending_codec_format(pending):
+    entry=pending.get("registry_entry") or {}
+    specific=[
+        str(effect)[len("structured.binary.encode."):]
+        for effect in (entry.get("provides") or [])
+        if str(effect).startswith("structured.binary.encode.")
+        and str(effect)!="structured.binary.encode"
+    ]
+    specific=sorted(set(x for x in specific if x))
+    if len(specific)!=1:
+        raise RuntimeError(
+            "PENDING_CODEC_FORMAT_AMBIGUOUS:"+json.dumps(specific,sort_keys=True)
+        )
+    return specific[0]
+
+
 def _independent_npm_codec_verifier(pending,fixture_path,output_path):
     producer_source=(pending.get("registry_entry") or {}).get("source") or {}
     producer_project=str(
@@ -144,7 +160,7 @@ def _independent_npm_codec_verifier(pending,fixture_path,output_path):
         or ""
     )
     evidence=independent_npm_codec_verifier.verify(
-        str(pathlib.Path(str(output_path)).suffix).lower().lstrip("."),
+        _pending_codec_format(pending),
         str(pathlib.Path(fixture_path).relative_to(ROOT)),
         str(pathlib.Path(output_path).relative_to(ROOT)),
         producer_project,
