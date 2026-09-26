@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_EXECUTOR_BLOCKER_V1",
+  "blocker_id": "PR20-EXECUTOR-UNAVAILABLE-20260926",
+  "artifact_id": "generic-native-probe-recovery-main",
+  "target_revision": "05eaaf0cab39e3e3c392cf57ef38af56cb36fde7",
+  "verification_capsule": "canonical/astra_runtime/verification_capsules/PR20_GENERIC_NATIVE_PROBE_RECOVERY_001.json",
+  "status": "EXECUTOR_UNAVAILABLE",
+  "incremental_spend_usd": 0,
+  "requirements": {
+    "private_repo_access": true,
+    "exact_revision_execution": true,
+    "hard_zero_spend": true,
+    "user_device_required": false,
+    "val_town_allowed": false
+  },
+  "observed_routes": [
+    {
+      "route": "chatgpt_session_container",
+      "status": "REJECTED_FOR_FULL_PR20_EXECUTION",
+      "reason": "No authenticated transport for the private repository; partial/truncated source materialization is insufficient for exact revision execution."
+    },
+    {
+      "route": "github_actions",
+      "status": "REJECTED",
+      "reason": "No workflow run exists for PR20 head and account-specific hard-zero paid-overage protection is not proven."
+    },
+    {
+      "route": "render",
+      "status": "REJECTED",
+      "reason": "Connected workspace exists, but account-specific hard-zero overage protection is not proven and no service was created."
+    },
+    {
+      "route": "vercel",
+      "status": "REJECTED",
+      "reason": "Connected Vercel context exposes no team/project capable of building the private repository."
+    },
+    {
+      "route": "sprites",
+      "status": "REJECTED",
+      "reason": "Required user approval/login path was declined; do not retry that path automatically."
+    },
+    {
+      "route": "camber",
+      "status": "REJECTED",
+      "reason": "Camber MCP documentation states its CLI execution occurs on the user's machine, violating device-independent execution."
+    },
+    {
+      "route": "val_town",
+      "status": "FORBIDDEN",
+      "reason": "Explicit user instruction: forget/do not use Val Town for Project Brain."
+    },
+    {
+      "route": "remote_device_Mo",
+      "status": "FORBIDDEN_FOR_THIS_GOAL",
+      "reason": "User explicitly required execution without their device and total replacement of that dependency."
+    }
+  ],
+  "next_admissible_event": "An already-authorized execution surface becomes available that can access the exact private revision and proves hard-zero incremental spend.",
+  "fail_closed": true
+}
