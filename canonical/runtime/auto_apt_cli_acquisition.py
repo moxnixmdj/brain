@@ -278,6 +278,9 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
       "goal":goal,
       "origin_mission_id":mission_id,
       "origin_mission_path":mission_path,
+      "origin_mission_sha256_at_acquisition":hashlib.sha256(
+          (root/mission_path).read_bytes()
+      ).hexdigest(),
       "selected_supplier":candidate,
       "probe":probe,
       "contract":contract,
