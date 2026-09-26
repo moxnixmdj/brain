@@ -175,6 +175,30 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                 result[key]=urls[0]
                 continue
             raise GoalCompilationFailure("GOAL_URL_BINDING_REQUIRED",str(len(urls)))
+        if key.endswith("_root") or key.endswith("_dir") or key in {"root","directory"}:
+            rr=pathlib.Path(root).resolve()
+            context_dirs=[]
+            for value in (context_paths or []):
+                raw=str(value)
+                p=(pathlib.Path(root)/raw).resolve()
+                if (p==rr or rr in p.parents) and p.is_dir():
+                    context_dirs.append(raw)
+            context_dirs=list(dict.fromkeys(context_dirs))
+            stem=key.rsplit("_",1)[0].lower() if "_" in key else ""
+            matching=[
+                raw for raw in context_dirs
+                if not stem or stem in pathlib.Path(raw).name.lower() or stem in raw.lower()
+            ]
+            if len(matching)==1:
+                result[key]=matching[0]
+                continue
+            if not matching and len(context_dirs)==1:
+                result[key]=context_dirs[0]
+                continue
+            raise GoalCompilationFailure(
+                "GOAL_DIRECTORY_BINDING_REQUIRED",
+                json.dumps({"key":key,"candidates":context_dirs},sort_keys=True)
+            )
         if key.endswith("_path"):
             stem=key[:-5].lower()
             output_stems={"output","result","report","screenshot","image","artifact","destination","dest"}
