@@ -27,7 +27,20 @@ def main():
     if verified.get("capability_id")!=cid or verified.get("independent_verified") is not True:
         raise RuntimeError("VERIFICATION_NOT_PROMOTABLE")
     semantic_roundtrip=verified.get("semantic_roundtrip")
-    if (
+    source_type=str(((pending.get("registry_entry") or {}).get("source") or {}).get("type") or "")
+    if source_type in {"pypi","npm"}:
+        if not isinstance(semantic_roundtrip,dict):
+            raise RuntimeError("VERIFICATION_INDEPENDENCE_EVIDENCE_MISSING")
+        independent_verifier=semantic_roundtrip.get("independent_verifier")
+        if (
+            semantic_roundtrip.get("implementation_independent") is not True
+            or not isinstance(independent_verifier,dict)
+            or independent_verifier.get("verified") is not True
+            or independent_verifier.get("implementation_independent") is not True
+            or independent_verifier.get("supplier_class_independent") is not True
+        ):
+            raise RuntimeError("VERIFICATION_IMPLEMENTATION_NOT_INDEPENDENT")
+    elif (
         isinstance(semantic_roundtrip,dict)
         and semantic_roundtrip.get("implementation_independent") is False
     ):
