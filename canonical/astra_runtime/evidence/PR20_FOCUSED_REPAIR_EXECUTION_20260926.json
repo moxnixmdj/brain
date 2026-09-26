@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_PARTIAL_EXECUTION_EVIDENCE_V1",
+  "evidence_id": "PR20-FOCUSED-REPAIR-EXECUTION-20260926",
+  "artifact_id": "generic-native-probe-recovery-main",
+  "target_revision": "05eaaf0cab39e3e3c392cf57ef38af56cb36fde7",
+  "execution_surface": "ChatGPT session Python container",
+  "platform": "linux",
+  "incremental_spend_usd": 0,
+  "scope": "FOCUSED_REPAIR_FUNCTIONS_AND_REGRESSIONS_ONLY",
+  "full_pr_executed": false,
+  "full_pr_verified": false,
+  "source_binding": {
+    "canonical/runtime/astra_runtime.py": "5a59e063ebbe72d83984eb261e37d5e445c0c94d",
+    "canonical/runtime/auto_pypi_library_acquisition.py": "613b8c815b4ab84863b0a36fb31e090a3725f9d9",
+    "canonical/tests/test_astra_runtime_verification.py": "10da8b94576ee18961de1aefa7bbcc3de0e5fae5",
+    "canonical/tests/test_auto_acquisition_platform_attestation.py": "e9070931282cc07f045076458a143317ed2fe746"
+  },
+  "observed": {
+    "all_focused_regressions_passed": true,
+    "mission_path_regression": {
+      "same_resolved_file": true,
+      "same_canonical_relative": true,
+      "repository_escape_blocked": true
+    },
+    "child_process_probe_regression": {
+      "passed": true,
+      "module": "fakecodec",
+      "probe_isolation": "fresh_child_python_process",
+      "subprocess_call_count": 2,
+      "probe_argv_prefix": [
+        "/opt/pyvenv/bin/python",
+        "-c"
+      ]
+    }
+  },
+  "normalized_observed_sha256": "197bf87421995109abea9db40423217bee5980d257abfdd06765dfb49bcf29dd",
+  "epistemic_effect": "PARTIAL_EXECUTION_EVIDENCE_ONLY__DO_NOT_ADVANCE_MAIN_LEDGER_TO_EXECUTED",
+  "remaining_requirement": "Execute the complete sealed PR20 verification capsule against the exact private-repository revision before advancing the artifact state to EXECUTED/VERIFIED."
+}
