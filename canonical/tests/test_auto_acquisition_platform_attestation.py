@@ -321,7 +321,7 @@ class AutoAcquisitionPlatformAttestationTests(unittest.TestCase):
         with (
             mock.patch.object(
                 astra,"_load_controller_checkpoint",
-                return_value=(pathlib.Path("checkpoint.json"),checkpoint,False),
+                return_value=(astra.ROOT/"canonical"/"astra_runtime"/"state"/"TEST_CONTROLLER_CHECKPOINT.json",checkpoint,False),
             ),
             mock.patch.object(
                 astra,"_write_controller_checkpoint",
