@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-AUTO-SEMANTIC-PROPOSAL-QR-001",
+  "purpose": "Prove an ordinary goal can derive its target effect from deterministic semantic authorities, synthesize a constrained single-capability proposal from the verified zero-spend registry, execute it without the plain-goal compiler path, then independently decode the artifact.",
+  "goal": "Generate a QR code for the text \"AUTO-SEMANTIC-QR\" and save it as canonical/astra_runtime/tmp/AUTO_SEMANTIC_QR.png.",
+  "verification_goal": "Decode canonical/astra_runtime/tmp/AUTO_SEMANTIC_QR.png using the independently verified decoder capability.",
+  "steps": [
+    {
+      "id": "execute-auto-semantic-auto-proposal-qr",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "verified_initial_facts": [],
+      "semantic_goal_authority_generators": [
+        "registry-effect-lexical-v1",
+        "compiler-score-v1"
+      ],
+      "semantic_authority_policy": {
+        "min_distinct_authority_classes": 2,
+        "authorities": {
+          "registry-effect-lexical-v1": "independent-registry-effect-lexical",
+          "compiler-score-v1": "existing-goal-compiler-generic-score"
+        }
+      },
+      "capability_proposal_generator": "single-verified-capability-v1",
+      "max_controller_actions": 8,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "AUTO_VERIFIED_CAPABILITY_PROPOSAL_COMPLETE"
+      }
+    },
+    {
+      "id": "rehydrate-and-run-independent-qr-decoder",
+      "adapter": "goal",
+      "goal_ref": "verification_goal",
+      "max_controller_actions": 6,
+      "capability_problem": {
+        "initial_facts": [],
+        "target_effects": [
+          "image.code.decode"
+        ],
+        "capabilities": [],
+        "capability_instances": [
+          {
+            "instance_id": "independent-zbar-decode",
+            "capability_id": "image.code.decode.zbarimg",
+            "inputs": {
+              "path": "canonical/astra_runtime/tmp/AUTO_SEMANTIC_QR.png"
+            }
+          }
+        ],
+        "finish_summary": "AUTO_SEMANTIC_QR_DECODER_COMPLETE"
+      },
+      "verify": {
+        "type": "stdout_contains",
+        "text": "AUTO_SEMANTIC_QR_DECODER_COMPLETE"
+      }
+    },
+    {
+      "id": "assert-decoded-payload-exactly",
+      "adapter": "shell",
+      "command": "set -euo pipefail\nvalue=\"$(zbarimg --quiet --raw canonical/astra_runtime/tmp/AUTO_SEMANTIC_QR.png)\"\n[ \"$value\" = 'AUTO-SEMANTIC-QR' ]\nprintf 'AUTO_SEMANTIC_QR_INDEPENDENTLY_VERIFIED\\n'",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "AUTO_SEMANTIC_QR_INDEPENDENTLY_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "required_target_effects_supplied_by_mission": false,
+    "semantic_goal_proposals_supplied_by_mission": false,
+    "capability_problem_proposal_supplied_by_mission": false,
+    "controller_actions_supplied_by_mission": false,
+    "deterministic_semantic_authority_generators_required": [
+      "registry-effect-lexical-v1",
+      "compiler-score-v1"
+    ],
+    "constrained_capability_proposal_generator_required": "single-verified-capability-v1",
+    "task_specific_compiler_forbidden": true,
+    "generated_executable_actions_forbidden": true,
+    "verified_registry_capability_required": "image.qr.generate.qrencode",
+    "producer_independent_verifier_required": "image.code.decode.zbarimg",
+    "exact_payload": "AUTO-SEMANTIC-QR"
+  }
+}
