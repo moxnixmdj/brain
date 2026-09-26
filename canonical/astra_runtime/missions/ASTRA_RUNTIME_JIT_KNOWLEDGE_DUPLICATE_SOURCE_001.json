@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-DUPLICATE-SOURCE-001",
+  "purpose": "Held-out proof that duplicate retrievals from one source identity cannot manufacture corroboration.",
+  "goal": "Using external JSON source https://httpbin.org/get?claim=alpha, extract JSON path args.claim and save knowledge evidence to canonical/astra_runtime/tmp/JIT_DUPLICATE_SOURCE_A.json. Using external JSON source https://httpbin.org/get?claim=alpha, extract JSON path args.claim and save knowledge evidence to canonical/astra_runtime/tmp/JIT_DUPLICATE_SOURCE_B.json. Assess the knowledge evidence canonical/astra_runtime/tmp/JIT_DUPLICATE_SOURCE_A.json and canonical/astra_runtime/tmp/JIT_DUPLICATE_SOURCE_B.json and save the assessment to canonical/astra_runtime/tmp/JIT_DUPLICATE_SOURCE_ASSESSMENT.json. Finally verify that the knowledge status is INSUFFICIENT.",
+  "steps": [
+    {
+      "id": "plain-duplicate-source-assessment",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 10,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_controller_required": false,
+    "manual_controller_actions": false,
+    "held_out_epistemic_status": "INSUFFICIENT",
+    "duplicate_source_must_not_create_corroboration": true,
+    "source_identity_gate_commit": "e7a8cc055fdd4ab7f16494e44290c589751b0111"
+  }
+}

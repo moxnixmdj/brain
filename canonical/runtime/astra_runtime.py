@@ -546,6 +546,32 @@ def _resolve_result_refs(value, trace):
     return value
 
 
+def _knowledge_source_identity(url,json_path):
+    raw_url=str(url or "")
+    try:
+        parsed=urllib.parse.urlsplit(raw_url)
+        scheme=parsed.scheme.lower()
+        host=(parsed.hostname or "").lower()
+        port=parsed.port
+        netloc=host
+        if port is not None and not (
+            (scheme=="http" and port==80) or (scheme=="https" and port==443)
+        ):
+            netloc=f"{host}:{port}"
+        canonical_url=urllib.parse.urlunsplit(
+            (scheme,netloc,parsed.path or "/",parsed.query,"")
+        )
+    except Exception:
+        canonical_url=raw_url
+    path_spec=json_path if isinstance(json_path,list) else []
+    return hashlib.sha256(
+        json.dumps(
+            {"url":canonical_url,"json_path":path_spec},
+            sort_keys=True,separators=(",",":"),ensure_ascii=False
+        ).encode("utf-8")
+    ).hexdigest()
+
+
 def _goal_action(action):
     typ=action.get("type")
     args=action.get("args") or {}
@@ -3324,21 +3350,46 @@ def _goal_action(action):
             except Exception as exc:
                 invalid.append({"path":raw_path,"error":"INVALID_JSON:"+type(exc).__name__})
                 continue
+            if item.get("schema")!="PROJECT_BRAIN_KNOWLEDGE_EVIDENCE_V1":
+                invalid.append({"path":raw_path,"error":"EVIDENCE_SCHEMA_INVALID"})
+                continue
+            source_url=str(item.get("source_url") or "")
+            final_url=str(item.get("final_url") or source_url)
+            json_path=item.get("json_path") if isinstance(item.get("json_path"),list) else None
+            body_sha=str(item.get("body_sha256") or "").lower()
+            source_type=str(item.get("source_type") or "")
+            status_code=item.get("http_status")
+            if (
+                not source_url.startswith(("https://","http://"))
+                or not final_url.startswith(("https://","http://"))
+                or json_path is None
+                or not re.fullmatch(r"[0-9a-f]{64}",body_sha)
+                or source_type not in {"external_json","authoritative_external_json"}
+                or not isinstance(status_code,int) or not (200<=status_code<300)
+            ):
+                invalid.append({"path":raw_path,"error":"EVIDENCE_CONTRACT_INVALID"})
+                continue
             value=item.get("value")
             retrieved=str(item.get("retrieved_at_utc") or "")
+            try:
+                ts=datetime.fromisoformat(retrieved.replace("Z","+00:00"))
+                if ts.tzinfo is None:
+                    raise ValueError("naive_timestamp")
+            except Exception:
+                invalid.append({"path":raw_path,"error":"EVIDENCE_TIMESTAMP_INVALID"})
+                continue
             stale=False
-            age_s=None
+            age_s=max(0.0,(now-ts).total_seconds())
             if max_age_s is not None:
-                try:
-                    ts=datetime.fromisoformat(retrieved.replace("Z","+00:00"))
-                    age_s=max(0.0,(now-ts).total_seconds())
-                    stale=age_s>float(max_age_s)
-                except Exception:
-                    stale=True
+                stale=age_s>float(max_age_s)
+            source_identity=_knowledge_source_identity(final_url,json_path)
             records.append({
               "path":raw_path,
-              "source_url":item.get("source_url"),
+              "source_url":source_url,
+              "final_url":final_url,
               "source_type":item.get("source_type"),
+              "json_path":json_path,
+              "source_identity":source_identity,
               "retrieved_at_utc":retrieved,
               "value":value,
               "body_sha256":item.get("body_sha256"),
@@ -3346,6 +3397,9 @@ def _goal_action(action):
               "age_s":age_s,
             })
         fresh=[x for x in records if not x.get("stale")]
+        fresh_source_identities={
+            str(x.get("source_identity") or "") for x in fresh if x.get("source_identity")
+        }
         canonical={}
         for rec in fresh:
             key=json.dumps(rec.get("value"),sort_keys=True,separators=(",",":"),ensure_ascii=False)
@@ -3354,16 +3408,19 @@ def _goal_action(action):
             status="STALE"
         elif len(fresh)<2:
             status="INSUFFICIENT"
-        elif len(canonical)==1:
-            status="SUPPORTED"
-        else:
+        elif len(canonical)>1:
             status="CONFLICTED"
+        elif len(fresh_source_identities)<2:
+            status="INSUFFICIENT"
+        else:
+            status="SUPPORTED"
         assessment={
           "schema":"PROJECT_BRAIN_KNOWLEDGE_ASSESSMENT_V1",
           "status":status,
           "evidence_count":len(records),
           "fresh_evidence_count":len(fresh),
           "distinct_fresh_values":len(canonical),
+          "distinct_fresh_source_identities":len(fresh_source_identities),
           "records":records,
           "invalid":invalid,
           "assessed_at_utc":utc(),
@@ -3376,6 +3433,7 @@ def _goal_action(action):
           "evidence_count":len(records),
           "fresh_evidence_count":len(fresh),
           "distinct_fresh_values":len(canonical),
+          "distinct_fresh_source_identities":len(fresh_source_identities),
           "output_path":str(output.relative_to(ROOT)),
         }
 
@@ -3404,11 +3462,45 @@ def _goal_action(action):
         for rec in fresh:
             key=json.dumps(rec.get("value"),sort_keys=True,separators=(",",":"),ensure_ascii=False)
             canonical.setdefault(key,rec.get("value"))
-        if len(canonical)!=1:
+        if len(fresh)<2 or len(canonical)!=1:
             return {
               "type":typ,"output_verified":False,
-              "error":"SUPPORTED_KNOWLEDGE_VALUE_NOT_UNIQUE",
+              "blocked_reason":"KNOWLEDGE_SUPPORT_NOT_REPRODUCIBLE",
               "status":status,
+            }
+        revalidated=[]
+        identities=set()
+        for rec in fresh:
+            evidence_path=str(rec.get("path") or "")
+            if not evidence_path:
+                return {
+                  "type":typ,"output_verified":False,
+                  "blocked_reason":"KNOWLEDGE_EVIDENCE_PATH_MISSING",
+                  "status":status,
+                }
+            validation=_goal_action({
+              "type":"assert_json_knowledge",
+              "args":{"evidence_path":evidence_path,"timeout_s":20,"max_bytes":1000000},
+            })
+            revalidated.append(validation)
+            if not validation.get("verified"):
+                return {
+                  "type":typ,"output_verified":False,
+                  "blocked_reason":"KNOWLEDGE_REVALIDATION_FAILED",
+                  "status":status,
+                  "failed_evidence_path":evidence_path,
+                  "revalidation":validation,
+                }
+            identities.add(_knowledge_source_identity(
+                validation.get("final_url") or validation.get("source_url"),
+                validation.get("json_path") or [],
+            ))
+        if len(identities)<2:
+            return {
+              "type":typ,"output_verified":False,
+              "blocked_reason":"KNOWLEDGE_SOURCE_IDENTITY_INSUFFICIENT",
+              "status":status,
+              "distinct_revalidated_source_identities":len(identities),
             }
         value=next(iter(canonical.values()))
         payload=[{field_name:value}]
@@ -3419,6 +3511,8 @@ def _goal_action(action):
           "status":status,
           "value":value,
           "field_name":field_name,
+          "distinct_revalidated_source_identities":len(identities),
+          "revalidated_evidence_count":len(revalidated),
           "output_path":str(output.relative_to(ROOT)),
         }
 
@@ -3451,12 +3545,17 @@ def _goal_action(action):
             return {"type":typ,"verified":False,"error":"KNOWLEDGE_EVIDENCE_INVALID:"+type(exc).__name__}
         url=str(evidence.get("source_url") or "")
         path_spec=evidence.get("json_path") or []
-        if not url.startswith(("https://","http://")) or not isinstance(path_spec,list):
+        if (
+            evidence.get("schema")!="PROJECT_BRAIN_KNOWLEDGE_EVIDENCE_V1"
+            or not url.startswith(("https://","http://"))
+            or not isinstance(path_spec,list)
+        ):
             return {"type":typ,"verified":False,"error":"KNOWLEDGE_EVIDENCE_CONTRACT_INVALID"}
         req=urllib.request.Request(url,headers={"User-Agent":"ProjectBrain-KnowledgeVerifier/1"})
         try:
             with urllib.request.urlopen(req,timeout=int(args.get("timeout_s") or 20)) as resp:
                 raw=resp.read(int(args.get("max_bytes") or 1000000))
+                final_url=resp.geturl()
             payload=json.loads(raw.decode("utf-8"))
             selected=payload
             for part in path_spec:
@@ -3473,6 +3572,7 @@ def _goal_action(action):
           "type":typ,"verified":same,
           "evidence_path":str(evidence_path.relative_to(ROOT)),
           "source_url":url,
+          "final_url":final_url,
           "json_path":path_spec,
           "observed_value":selected,
           "expected_value":evidence.get("value"),
