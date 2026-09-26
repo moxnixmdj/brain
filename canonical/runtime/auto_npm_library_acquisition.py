@@ -22,6 +22,17 @@ def _verified_runtime_platform():
     raise AutoNpmAcquisitionFailure("NPM_VERIFICATION_PLATFORM_UNSUPPORTED",sys.platform)
 
 
+def _origin_mission_sha256(root,mission_path):
+    root=pathlib.Path(root).resolve()
+    missions_root=(root/"canonical"/"astra_runtime"/"missions").resolve()
+    mission=(root/str(mission_path)).resolve()
+    if mission.parent!=missions_root:
+        raise AutoNpmAcquisitionFailure("NPM_ORIGIN_MISSION_PATH_INVALID",str(mission_path))
+    if not mission.is_file():
+        raise AutoNpmAcquisitionFailure("NPM_ORIGIN_MISSION_MISSING",str(mission_path))
+    return hashlib.sha256(mission.read_bytes()).hexdigest()
+
+
 def supports(goal):
     lower=str(goal or "").lower()
     supplier=(
@@ -192,6 +203,7 @@ def _probe_contract(candidate,root):
 
 def dispatch(goal,mission_id,mission_path,root,discovery=None):
     root=pathlib.Path(root).resolve()
+    origin_mission_sha256=_origin_mission_sha256(root,mission_path)
     if not supports(goal):
         raise AutoNpmAcquisitionFailure("NPM_CONTRACT_CLASS_UNSUPPORTED")
     candidates=_search_registry(goal,limit=30)
@@ -271,9 +283,7 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
       "schema":"PROJECT_BRAIN_PENDING_AUTO_BINDING_V1","capability_id":cap_id,
       "effect":provides[0],"goal":goal,"origin_mission_id":mission_id,
       "origin_mission_path":mission_path,
-      "origin_mission_sha256_at_acquisition":hashlib.sha256(
-          (root/mission_path).read_bytes()
-      ).hexdigest(),
+      "origin_mission_sha256_at_acquisition":origin_mission_sha256,
       "selected_supplier":{k:v for k,v in selected.items() if k!="package_json"},
       "contract":contract,"verification_fixture":contract["fixture"],
       "registry_entry":entry,"verification_mission_id":verify_mid,
