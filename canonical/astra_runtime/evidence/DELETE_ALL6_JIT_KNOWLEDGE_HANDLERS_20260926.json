@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_DETERMINISTIC_VERIFICATION_REPORT_V1",
+  "report_id": "DELETE-ALL6-JIT-KNOWLEDGE-HANDLERS-20260926",
+  "executable_revision": "a29deeabe81c04ee838e00ca8fd7a634b1ede956",
+  "parent_revision": "ec8b0c8ca64eeabbcec7201313e3fe451cd876a8",
+  "stacked_on_pr": 22,
+  "branch": "research/delete-all6-knowledge-handlers-20260926",
+  "incremental_spend_usd": 0,
+  "executor": {
+    "id": "chatgpt-session-linux-reconstructed-private-github-substrate",
+    "platform": "linux",
+    "user_device_used": false,
+    "val_town_used": false
+  },
+  "exact_blobs": {
+    "canonical/runtime/goal_compiler.py": "7bb69416e861d2a7e4080251529b69bee2102450",
+    "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json": "7f12702a5f893d9f93925c49356e8b64158e655e",
+    "canonical/tests/test_declarative_knowledge_bindings.py": "88e65ad542c6cea015887a9ab1b432ff741f243a"
+  },
+  "architecture": {
+    "specialized_compile_handlers_original": 51,
+    "specialized_compile_handlers_parent_pr22": 48,
+    "specialized_compile_handlers_candidate": 45,
+    "knowledge_compile_handlers_remaining": 0,
+    "removed_in_full_cluster": [
+      "_compile_external_json_knowledge_fetch",
+      "_compile_knowledge_consistency_assessment",
+      "_compile_knowledge_status_assertion",
+      "_compile_authoritative_json_knowledge_fetch",
+      "_compile_learned_value_record",
+      "_compile_knowledge_revalidation"
+    ],
+    "generic_mechanisms_added": [
+      "declarative capability input bindings",
+      "declarative goal-match constraints",
+      "prior-effect input binding",
+      "prior-effect result references",
+      "structured exact-placeholder template rendering",
+      "independent re-fetch plus verify clause coalescing"
+    ]
+  },
+  "canonical_contract_replay": {
+    "mission": "ASTRA_RUNTIME_JIT_KNOWLEDGE_WORLDBANK_002",
+    "controller_action_types": [
+      "fetch_json_knowledge",
+      "write_json_records",
+      "assert_json_knowledge",
+      "finish"
+    ],
+    "fetch_json_path": [
+      1,
+      0,
+      "sourceNote"
+    ],
+    "downstream_result_reference": {
+      "cycle": 0,
+      "field": "value"
+    },
+    "duplicate_revalidation_actions": 0,
+    "preserved": true
+  },
+  "falsification_history": [
+    {
+      "stage": "first all-six replay",
+      "failure": "dotted JSON path was truncated and independent re-fetch plus verify split into duplicate verifier actions",
+      "repaired_generically": true
+    },
+    {
+      "stage": "first adversarial regression run",
+      "failure": "revalidation capability token score hijacked single-source assessment and unknown-status clauses",
+      "repaired_with_declarative_goal_match": true
+    }
+  ],
+  "observed": {
+    "syntax_exit_code": 0,
+    "dedicated_tests_run": 10,
+    "dedicated_tests_passed": 10,
+    "dedicated_stderr_sha256": "ba4397ff7ef7b49c1bde898bf8cbc5a3223de75b75120ddc1c1d215662811b8c",
+    "full_tests_run": 149,
+    "full_tests_passed": 149,
+    "full_stderr_sha256": "3f6506e25f5375d31a1ecb510d5f094de5ca654ac418d3b523f32127337a3d14",
+    "semantic_heldout_mode": "DETERMINISTIC_MULTI_SOURCE_REDUCE_PLAN",
+    "semantic_heldout_parts": 5,
+    "fail_closed": {
+      "single_source_consistency_rejected": true,
+      "unknown_status_rejected": true,
+      "result_reference_without_prior_effect_rejected": true,
+      "revalidation_without_prior_observation_rejected": true
+    }
+  },
+  "verified": true,
+  "epistemic_state": "VERIFIED",
+  "promotion_status": "BLOCKED_PENDING_PARENT_PR22_PROMOTION_OR_SAFE_STACK_INTEGRATION"
+}
