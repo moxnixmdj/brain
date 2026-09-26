@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-RUNTIME-AUTO-FANIN-CAPABILITY-PROPOSAL-001",
+  "purpose": "Prove an ordinary two-source goal can automatically expand a repeated verified provider into distinct aliased instances, wire both producer results into one list-valued consumer input, execute the resulting deterministic graph, and independently verify source multiplicity and the terminal artifact without mission-authored graph or valueflow.",
+  "goal": "Assess the knowledge consistency of the observations available from https://httpbin.org/get?claim=alpha and https://httpbin.org/anything?claim=beta.",
+  "steps": [
+    {
+      "id": "execute-auto-semantic-auto-fanin-proposal",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "verified_initial_facts": [
+        "network.http.available"
+      ],
+      "semantic_goal_authority_generators": [
+        "registry-effect-lexical-v1",
+        "compiler-score-v1"
+      ],
+      "semantic_authority_policy": {
+        "min_distinct_authority_classes": 2,
+        "authorities": {
+          "registry-effect-lexical-v1": "independent-registry-effect-lexical",
+          "compiler-score-v1": "existing-goal-compiler-generic-score"
+        }
+      },
+      "capability_proposal_generator": "multi-verified-capability-v1",
+      "max_controller_actions": 10,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "AUTO_MULTI_VERIFIED_CAPABILITY_PROPOSAL_COMPLETE"
+      }
+    },
+    {
+      "id": "independent-fanin-artifact-check",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport json,pathlib\nroot=pathlib.Path('canonical/astra_runtime')\nmission=json.loads((root/'missions/ASTRA_RUNTIME_AUTO_FANIN_CAPABILITY_PROPOSAL_001.json').read_text())\nstep=mission['steps'][0]\nfor forbidden in ('required_target_effects','semantic_goal_proposals','capability_problem_proposal','controller_actions'):\n    assert forbidden not in step, forbidden\nstate=json.loads((root/'state/ASTRA-RUNTIME-AUTO-FANIN-CAPABILITY-PROPOSAL-001.json').read_text())\nresult=state['history'][0]['result']\nsemantic=result['semantic_goal_contract']\ngeneration=result['proposal_generation']\nassert semantic['status']=='QUORUM_VERIFIED', semantic\nassert semantic['target_effects']==['knowledge.assessment.available'], semantic\nassert set(semantic['generated_authorities'])=={'registry-effect-lexical-v1','compiler-score-v1'}, semantic\nassert generation['generator']=='multi-verified-capability-v1', generation\nassert generation['capability_plan']==['knowledge.json.fetch.external','knowledge.consistency.assess'], generation\nexpanded=generation['expanded_instance_plan']\nassert expanded==[\n  'auto-knowledge-json-fetch-external-1',\n  'auto-knowledge-json-fetch-external-2',\n  'auto-knowledge-consistency-assess',\n], expanded\nfanin=generation['fan_in']['knowledge.json.fetch.external']['knowledge.observation.available']\nassert fanin==[\n  'knowledge.observation.available.fanin.1',\n  'knowledge.observation.available.fanin.2',\n], fanin\nbinding=generation['bindings']['auto-knowledge-consistency-assess']['evidence_paths']\nassert binding['bound_effects']==fanin, binding\nassert len(binding['providers'])==2 and len(set(binding['providers']))==2, binding\nruntime_plan=result['capability_plan']['plan']\nassert runtime_plan==expanded, runtime_plan\nassessment_path=generation['bindings']['auto-knowledge-consistency-assess']['output_path']['value']\nassessment=json.loads(pathlib.Path(assessment_path).read_text())\nassert assessment['schema']=='PROJECT_BRAIN_KNOWLEDGE_ASSESSMENT_V1', assessment\nassert assessment['evidence_count']==2, assessment\nassert assessment['fresh_evidence_count']==2, assessment\nassert assessment['distinct_fresh_source_identities']==2, assessment\nassert assessment['status']=='CONFLICTED', assessment\nassert assessment['invalid']==[], assessment\nprint('AUTO_FANIN_CAPABILITY_PROPOSAL_INDEPENDENTLY_VERIFIED')\nPY",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "AUTO_FANIN_CAPABILITY_PROPOSAL_INDEPENDENTLY_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "required_target_effects_supplied_by_mission": false,
+    "semantic_goal_proposals_supplied_by_mission": false,
+    "capability_problem_proposal_supplied_by_mission": false,
+    "controller_actions_supplied_by_mission": false,
+    "valueflow_links_supplied_by_mission": false,
+    "repeated_provider_instances_supplied_by_mission": false,
+    "effect_aliases_supplied_by_mission": false,
+    "distinct_goal_urls_required": 2,
+    "expected_target_effect": "knowledge.assessment.available",
+    "expected_base_capability_plan": [
+      "knowledge.json.fetch.external",
+      "knowledge.consistency.assess"
+    ],
+    "expected_provider_instance_count": 2,
+    "expected_distinct_source_identities": 2,
+    "expected_terminal_assessment_status": "CONFLICTED",
+    "independent_artifact_verification_required": true
+  }
+}
