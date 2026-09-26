@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Promote a pending auto binding after a fresh verification result."""
 from __future__ import annotations
-import json,pathlib,sys
+import hashlib,json,pathlib,re,sys
 
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 REGISTRY=ROOT/"canonical"/"runtime"/"BOUND_CAPABILITY_REGISTRY_V1.json"
@@ -47,6 +47,19 @@ def main():
         raise RuntimeError("VERIFICATION_IMPLEMENTATION_NOT_INDEPENDENT")
     if verified.get("verification_mission_id")!=pending.get("verification_mission_id"):
         raise RuntimeError("VERIFICATION_MISSION_MISMATCH")
+
+    original=_inside(pending["origin_mission_path"])
+    missions_root=(ROOT/"canonical"/"astra_runtime"/"missions").resolve()
+    if original.parent!=missions_root:
+        raise RuntimeError("ORIGIN_MISSION_PATH_INVALID")
+    if not original.is_file():
+        raise RuntimeError("ORIGIN_MISSION_MISSING")
+    frozen_sha=str(pending.get("origin_mission_sha256_at_acquisition") or "")
+    if not re.fullmatch(r"[0-9a-f]{64}",frozen_sha):
+        raise RuntimeError("ORIGIN_MISSION_ACQUISITION_HASH_MISSING")
+    current_sha=hashlib.sha256(original.read_bytes()).hexdigest()
+    if current_sha!=frozen_sha:
+        raise RuntimeError("ORIGIN_MISSION_DRIFT_BEFORE_PROMOTION")
     registry=json.loads(REGISTRY.read_text(encoding="utf-8"))
     caps=registry.setdefault("capabilities",{})
     prior=caps.get(cid)
@@ -89,15 +102,10 @@ def main():
         caps[related_id]=related
         promoted_related.append(related_id)
     REGISTRY.write_text(json.dumps(registry,indent=2,sort_keys=True)+"\n",encoding="utf-8")
-    original=_inside(pending["origin_mission_path"])
-    if original.parent!=(ROOT/"canonical"/"astra_runtime"/"missions").resolve():
-        raise RuntimeError("ORIGIN_MISSION_PATH_INVALID")
-    # Mission authority is immutable. Promotion records evidence in the
-    # registry/pending record only; it must never rewrite the originating
-    # mission merely to annotate progress, because that creates mission drift.
-    pending["origin_mission_sha256"]=__import__("hashlib").sha256(
-        original.read_bytes()
-    ).hexdigest()
+    # Mission authority was frozen before verification and rechecked before
+    # any registry mutation. Preserve the verified promotion-time hash as
+    # evidence; never rewrite the originating mission.
+    pending["origin_mission_sha256_verified_at_promotion"]=current_sha
     pending["status"]="PROMOTED_VERIFIED"
     pending["verification_result_path"]=str(verify_path.relative_to(ROOT))
     pending_path.write_text(json.dumps(pending,indent=2,sort_keys=True)+"\n",encoding="utf-8")
