@@ -74,7 +74,7 @@ class AutoAcquisitionPlatformAttestationTests(unittest.TestCase):
                 out=pypi.dispatch(goal,"TEST-PYPI-PLATFORM","canonical/astra_runtime/missions/TEST.json",td)
                 pending=json.loads((pathlib.Path(td)/out["pending_binding_path"]).read_text(encoding="utf-8"))
         self.assertEqual(pending["registry_entry"]["platforms"],["windows"])
-        self.assertIn("structured.binary.encode.ubjson",pending["registry_entry"]["provides"])
+        self.assertIn("structured.binary.encode.ubj",pending["registry_entry"]["provides"])
         self.assertNotIn("structured.binary.encode.json",pending["registry_entry"]["provides"])
 
     def test_npm_pending_binding_attests_observed_windows_platform(self):
