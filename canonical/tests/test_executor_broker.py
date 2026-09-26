@@ -7,6 +7,7 @@ ROOT=pathlib.Path(__file__).resolve().parents[1]
 PATH=ROOT/"runtime"/"executor_broker.py"
 spec=importlib.util.spec_from_file_location("executor_broker_test_target",PATH)
 broker=importlib.util.module_from_spec(spec)
+sys.modules[spec.name]=broker
 spec.loader.exec_module(broker)
 
 
