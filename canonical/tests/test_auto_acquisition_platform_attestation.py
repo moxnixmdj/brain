@@ -58,15 +58,19 @@ class AutoAcquisitionPlatformAttestationTests(unittest.TestCase):
             "root":{"filename":"fake_ubjson-1.0.0-py3-none-any.whl","sha256":"a"*64,"path":"unused.whl"},
             "lock":{"schema":"PROJECT_BRAIN_PYPI_WHEEL_CLOSURE_V1","closure_sha256":"b"*64,"wheel_count":1},
         }
-        with tempfile.TemporaryDirectory() as td, (
-            mock.patch.object(pypi,"_candidate_pool",return_value=[candidate]),
+        with tempfile.TemporaryDirectory() as td:
+            mission=pathlib.Path(td)/"canonical"/"astra_runtime"/"missions"/"TEST.json"
+            mission.parent.mkdir(parents=True,exist_ok=True)
+            mission.write_text('{"goal":"immutable"}\n',encoding="utf-8")
+            with (
+                mock.patch.object(pypi,"_candidate_pool",return_value=[candidate]),
             mock.patch.object(pypi,"_download_compatible_wheel_closure",return_value=closure),
             mock.patch.object(pypi,"_infer_codec_contract",return_value=contract),
             mock.patch.object(pypi.capability_discovery,"effect_queries",return_value=["encode","ubjson"]),
-            mock.patch.object(pypi.sys,"platform","win32"),
-        ):
-            out=pypi.dispatch(goal,"TEST-PYPI-PLATFORM","canonical/astra_runtime/missions/TEST.json",td)
-            pending=json.loads((pathlib.Path(td)/out["pending_binding_path"]).read_text(encoding="utf-8"))
+                mock.patch.object(pypi.sys,"platform","win32"),
+            ):
+                out=pypi.dispatch(goal,"TEST-PYPI-PLATFORM","canonical/astra_runtime/missions/TEST.json",td)
+                pending=json.loads((pathlib.Path(td)/out["pending_binding_path"]).read_text(encoding="utf-8"))
         self.assertEqual(pending["registry_entry"]["platforms"],["windows"])
 
     def test_npm_pending_binding_attests_observed_windows_platform(self):
@@ -83,14 +87,18 @@ class AutoAcquisitionPlatformAttestationTests(unittest.TestCase):
             "root_selector":"module","encode_export":"encode","decode_export":"decode",
             "integrity_algorithm":"sha512","integrity_digest_hex":"00",
         }
-        with tempfile.TemporaryDirectory() as td, (
-            mock.patch.object(npm,"_search_registry",return_value=[raw]),
+        with tempfile.TemporaryDirectory() as td:
+            mission=pathlib.Path(td)/"canonical"/"astra_runtime"/"missions"/"TEST.json"
+            mission.parent.mkdir(parents=True,exist_ok=True)
+            mission.write_text('{"goal":"immutable"}\n',encoding="utf-8")
+            with (
+                mock.patch.object(npm,"_search_registry",return_value=[raw]),
             mock.patch.object(npm,"_metadata",return_value=selected),
             mock.patch.object(npm,"_probe_contract",return_value=contract),
-            mock.patch.object(npm.sys,"platform","win32"),
-        ):
-            out=npm.dispatch(goal,"TEST-NPM-PLATFORM","canonical/astra_runtime/missions/TEST.json",td)
-            pending=json.loads((pathlib.Path(td)/out["pending_binding_path"]).read_text(encoding="utf-8"))
+                mock.patch.object(npm.sys,"platform","win32"),
+            ):
+                out=npm.dispatch(goal,"TEST-NPM-PLATFORM","canonical/astra_runtime/missions/TEST.json",td)
+                pending=json.loads((pathlib.Path(td)/out["pending_binding_path"]).read_text(encoding="utf-8"))
         self.assertEqual(pending["registry_entry"]["platforms"],["windows"])
 
 
@@ -142,6 +150,9 @@ class AutoAcquisitionPlatformAttestationTests(unittest.TestCase):
                 "schema":"PROJECT_BRAIN_PENDING_AUTO_BINDING_V1",
                 "capability_id":"auto.test",
                 "origin_mission_path":"canonical/astra_runtime/missions/ORIGIN.json",
+                "origin_mission_sha256_at_acquisition":__import__("hashlib").sha256(
+                    mission_path.read_bytes()
+                ).hexdigest(),
                 "verification_mission_id":"VERIFY-AUTO-TEST",
                 "registry_entry":{
                     "status":"BOUND_PENDING_INDEPENDENT_VERIFICATION",
@@ -323,6 +334,69 @@ class AutoAcquisitionPlatformAttestationTests(unittest.TestCase):
             out=astra._run_model_independent_goal(step,mission,"demo")
         self.assertEqual(out["final_summary"],"DONE")
         self.assertEqual(out["trace"][0]["plan"]["type"],"verify_with_independent_npm_codec")
+
+
+    def test_promotion_rejects_origin_mission_drift_before_registry_mutation(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=pathlib.Path(td)
+            runtime_dir=root/"canonical"/"runtime"
+            mission_dir=root/"canonical"/"astra_runtime"/"missions"
+            evidence_dir=root/"canonical"/"astra_runtime"/"evidence"
+            pending_dir=root/"canonical"/"astra_runtime"/"pending_bindings"
+            for p in (runtime_dir,mission_dir,evidence_dir,pending_dir):
+                p.mkdir(parents=True,exist_ok=True)
+            registry_path=runtime_dir/"BOUND_CAPABILITY_REGISTRY_V1.json"
+            original_registry={"schema":"PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1","capabilities":{}}
+            registry_path.write_text(json.dumps(original_registry,sort_keys=True)+"\n",encoding="utf-8")
+            before=registry_path.read_bytes()
+
+            mission_path=mission_dir/"ORIGIN.json"
+            mission_path.write_text('{"goal":"original"}\n',encoding="utf-8")
+            frozen=__import__("hashlib").sha256(mission_path.read_bytes()).hexdigest()
+            mission_path.write_text('{"goal":"tampered"}\n',encoding="utf-8")
+
+            pending_path=pending_dir/"pending.json"
+            verify_path=evidence_dir/"verify.json"
+            pending={
+                "schema":"PROJECT_BRAIN_PENDING_AUTO_BINDING_V1",
+                "capability_id":"auto.test",
+                "origin_mission_path":"canonical/astra_runtime/missions/ORIGIN.json",
+                "origin_mission_sha256_at_acquisition":frozen,
+                "verification_mission_id":"VERIFY-AUTO-TEST",
+                "registry_entry":{
+                    "status":"BOUND_PENDING_INDEPENDENT_VERIFICATION",
+                    "source":{"type":"pypi"},
+                    "action_template":{"type":"invoke_capability","args":{"capability_id":"auto.test"}},
+                },
+            }
+            verified={
+                "schema":"PROJECT_BRAIN_AUTO_BINDING_VERIFICATION_V1",
+                "capability_id":"auto.test",
+                "verification_mission_id":"VERIFY-AUTO-TEST",
+                "independent_verified":True,
+                "semantic_roundtrip":{
+                    "verified":True,
+                    "implementation_independent":True,
+                    "independent_verifier":{
+                        "verified":True,
+                        "implementation_independent":True,
+                        "supplier_class_independent":True,
+                    },
+                },
+            }
+            pending_path.write_text(json.dumps(pending),encoding="utf-8")
+            verify_path.write_text(json.dumps(verified),encoding="utf-8")
+            argv=["promote_pending_binding.py",
+                  "canonical/astra_runtime/pending_bindings/pending.json",
+                  "canonical/astra_runtime/evidence/verify.json"]
+            with (
+                mock.patch.object(promoter,"ROOT",root),
+                mock.patch.object(promoter,"REGISTRY",registry_path),
+                mock.patch.object(sys,"argv",argv),
+            ):
+                with self.assertRaisesRegex(RuntimeError,"ORIGIN_MISSION_DRIFT_BEFORE_PROMOTION"):
+                    promoter.main()
+            self.assertEqual(registry_path.read_bytes(),before)
 
 
 if __name__=="__main__":
