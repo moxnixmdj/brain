@@ -1,0 +1,19 @@
+{
+  "schema": "PROJECT_BRAIN_EPISTEMIC_POLICY_V1",
+  "states": [
+    "DESIGNED",
+    "IMPLEMENTED",
+    "EXECUTED",
+    "VERIFIED",
+    "PROMOTED"
+  ],
+  "transition_rule": "adjacent_only",
+  "laws": [
+    "A design claim is not an implementation claim.",
+    "A Git revision proves implementation only, not execution.",
+    "Execution requires an observed executor receipt including exact command, exit code, output hashes, platform, and zero incremental spend.",
+    "Verification requires predicates over a specific executed receipt.",
+    "Promotion requires a specific verified receipt and canonical merge commit.",
+    "Assistant prose, PR descriptions, summaries, and self-certification are never promotion evidence."
+  ]
+}
