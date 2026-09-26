@@ -37,7 +37,7 @@ class AutoSingleCapabilityProposalTests(unittest.TestCase):
                 "requires":[],
                 "provides":[self.TARGET],
                 "keywords":[],
-                "platforms":["linux"],
+                "platforms":["linux","windows","darwin"],
                 "cost":1,
                 "action_template":{
                     "type":"invoke_capability",
