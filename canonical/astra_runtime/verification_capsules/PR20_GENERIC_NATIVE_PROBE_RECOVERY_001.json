@@ -5,7 +5,7 @@
   "executable_revision": "05eaaf0cab39e3e3c392cf57ef38af56cb36fde7",
   "canonical_base": "69b0d80b45c37763d0f661e6cc7ce3e1c21e3488",
   "branch": "research/generic-native-probe-recovery-main-20260926",
-  "epistemic_state": "VERIFIED",
+  "epistemic_state": "PROMOTED",
   "incremental_spend_usd": 0,
   "executor_policy": {
     "required_platform": "platform_neutral",
@@ -71,5 +71,10 @@
     "stop at first failing stage and preserve the first causal failure",
     "do not mark VERIFIED unless all required predicates over observed execution are true"
   ],
-  "fail_closed": true
+  "fail_closed": true,
+  "promotion": {
+    "merge_commit_sha": "e97231bdb899c467a3ca3f4719b442ecb6be7b95",
+    "canonical_ref": "refs/heads/main",
+    "promoted_receipt_sha256": "3ff76f37aac497704b0ac66b3d622a4ab50c90085454a52e484d65f426999aed"
+  }
 }
