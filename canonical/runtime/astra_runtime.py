@@ -3666,6 +3666,33 @@ def _goal_action(action):
           "dependency_closure":evidence.get("dependency_closure"),
           "attempt_count":evidence.get("attempt_count"),
         }
+    if typ=="verify_with_independent_npm_codec":
+        fmt=str(args.get("format") or "").strip()
+        json_path=str(args.get("json_path") or "").strip()
+        binary_path=str(args.get("binary_path") or "").strip()
+        producer_project=str(args.get("producer_project") or "").strip()
+        producer_capability_id=str(args.get("producer_capability_id") or "").strip()
+        if not all((fmt,json_path,binary_path,producer_project,producer_capability_id)):
+            return {"type":typ,"verified":False,"error":"INDEPENDENT_NPM_CODEC_VERIFIER_ARGS_INCOMPLETE"}
+        import independent_npm_codec_verifier
+        evidence=independent_npm_codec_verifier.verify(
+            fmt,json_path,binary_path,producer_project,ROOT
+        )
+        return {
+          "type":typ,
+          "verified":bool(evidence.get("verified")),
+          "producer_capability_id":producer_capability_id,
+          "producer_project":producer_project,
+          "verifier_package":evidence.get("verifier_package"),
+          "verifier_version":evidence.get("verifier_version"),
+          "producer_independent":bool(evidence.get("producer_independent")),
+          "implementation_independent":bool(evidence.get("implementation_independent")),
+          "supplier_class_independent":bool(evidence.get("supplier_class_independent")),
+          "format":fmt,
+          "decode_export":evidence.get("decode_export"),
+          "verifier_integrity":evidence.get("verifier_integrity"),
+          "attempt_count":evidence.get("attempt_count"),
+        }
     if typ=="invoke_capability":
         return _invoke_bound_capability(args)
     if typ=="assert_text_contains_json_keys":
