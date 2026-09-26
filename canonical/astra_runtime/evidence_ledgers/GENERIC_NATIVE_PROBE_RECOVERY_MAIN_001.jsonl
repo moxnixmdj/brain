@@ -1,0 +1,2 @@
+{"artifact_id":"generic-native-probe-recovery-main","schema":"PROJECT_BRAIN_EVIDENCE_RECEIPT_V1","state":"DESIGNED"}
+{"artifact_id":"generic-native-probe-recovery-main","previous_receipt_sha256":"5dc21a7ec1f35a8672b89d2f016bd6f6a53a8902da0ea9920ed98979a78b9a5e","revision_sha":"05eaaf0cab39e3e3c392cf57ef38af56cb36fde7","schema":"PROJECT_BRAIN_EVIDENCE_RECEIPT_V1","state":"IMPLEMENTED"}
