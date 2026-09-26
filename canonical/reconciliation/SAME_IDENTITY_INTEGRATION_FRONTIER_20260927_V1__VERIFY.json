@@ -1,0 +1,16 @@
+{
+  "schema": "PROJECT_BRAIN_SAME_IDENTITY_INTEGRATION_RECONCILIATION_VERIFY_V1",
+  "bound_main_sha": "276811d7ff70c86666366fe4cb08b3a0f23f1f01",
+  "predicates": {
+    "generation_lock": true,
+    "seven_component_mechanisms_preserved": true,
+    "seven_independent_rebuilds_not_required": true,
+    "same_identity_integration_is_single_blocker": true,
+    "promotion_remains_false": true,
+    "p_real_remains_zero": true,
+    "user_device_not_required": true,
+    "val_town_forbidden": true,
+    "component_stitching_forbidden": true
+  },
+  "all_pass": true
+}
