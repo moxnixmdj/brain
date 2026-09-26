@@ -9,6 +9,8 @@ from unittest import mock
 
 CANONICAL_ROOT=pathlib.Path(__file__).resolve().parents[1]
 RUNTIME_DIR=CANONICAL_ROOT/"runtime"
+if str(RUNTIME_DIR) not in sys.path:
+    sys.path.insert(0,str(RUNTIME_DIR))
 
 def load(name,path):
     spec=importlib.util.spec_from_file_location(name,path)
