@@ -39,7 +39,7 @@ jobs:
           TASK="canonical/same_identity_worker/tasks/SI_REAL_UBJSON_SNAPSHOT_001.json"
           TASK_ID="SI-REAL-UBJSON-SNAPSHOT-001"
           AGENT_ID="SUPERWORKER-UNIFIED-1"
-          BRIDGE="canonical/same_identity_worker/external_tool_bridge/\${TASK_ID}"
+          BRIDGE="canonical/same_identity_worker/external_tool_bridge/${TASK_ID}"
           mkdir -p execution_logs "$BRIDGE"
 
           complete=0
@@ -48,10 +48,10 @@ jobs:
             set +e
             python canonical/runtime/same_identity_supervisor.py \
               --task "$TASK" \
-              > "execution_logs/supervisor_\${cycle}.log" 2>&1
+              > "execution_logs/supervisor_${cycle}.log" 2>&1
             rc=$?
             set -e
-            cat "execution_logs/supervisor_\${cycle}.log"
+            cat "execution_logs/supervisor_${cycle}.log"
 
             if [ "$rc" -eq 0 ]; then
               complete=1
@@ -70,10 +70,10 @@ jobs:
               --allowed-host registry.npmjs.org \
               --max-requests 16 \
               --max-bytes 25000000 \
-              > "execution_logs/relay_\${cycle}.json"
-            cat "execution_logs/relay_\${cycle}.json"
+              > "execution_logs/relay_${cycle}.json"
+            cat "execution_logs/relay_${cycle}.json"
 
-            serviced=$(python -c 'import json,sys; print(json.load(open(sys.argv[1]))["serviced_count"])' "execution_logs/relay_\${cycle}.json")
+            serviced=$(python -c 'import json,sys; print(json.load(open(sys.argv[1]))["serviced_count"])' "execution_logs/relay_${cycle}.json")
             if [ "$serviced" -eq 0 ]; then
               echo "No serviceable external request exists for runtime rc=$rc" >&2
               exit "$rc"
