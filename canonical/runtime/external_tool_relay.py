@@ -16,6 +16,7 @@ import json
 import pathlib
 import re
 import tarfile
+import urllib.error
 import urllib.parse
 import urllib.request
 
