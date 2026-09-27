@@ -29,9 +29,34 @@ def supports(goal):
 def _git_blob_sha(raw):
     return hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()
 
+COMMON_NON_CODEC_EXTENSIONS={
+    ".json",".txt",".md",".markdown",".csv",".tsv",".html",".xml",
+    ".png",".jpg",".jpeg",".webp",".pdf",".docx",".xlsx",
+    ".zip",".gz",".tgz",".tar",".sqlite",".db",".sqlite3",
+}
+
 def _slug(value):
     out=re.sub(r"[^a-z0-9]+","-",str(value).lower()).strip("-")
     return out[:80] or "source"
+
+def _repo_paths(goal):
+    text=re.sub(r"https?://[^\\s)\\]}>]+"," ",str(goal or ""))
+    return [raw.rstrip(".,;:!?)]}") for raw in re.findall(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+",text)]
+
+def _format_terms(goal):
+    suffixes=[pathlib.Path(x).suffix.lower() for x in _repo_paths(goal)]
+    out=[]
+    for suffix in suffixes:
+        if not suffix or suffix in COMMON_NON_CODEC_EXTENSIONS:
+            continue
+        token=suffix.lstrip(".")
+        if token and token not in out:
+            out.append(token)
+    if len(out)!=1:
+        raise AutoPythonSourceCodecFailure(
+            "SOURCE_OUTPUT_FORMAT_AMBIGUOUS",json.dumps(out,sort_keys=True)
+        )
+    return out
 
 def _safe_rel(raw):
     text=str(raw or "").strip().replace("\\","/")
@@ -155,6 +180,10 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
                   "source_tree":manifest,
                 }
                 repository=manifest["repository"]; revision=manifest["revision"]
+                format_terms=_format_terms(goal)
+                provides=["structured.binary.encode"]+[
+                    "structured.binary.encode."+x for x in format_terms
+                ]
                 cap_id="auto.source."+_slug(repository.split("/")[-1])
                 pending_rel=f"canonical/astra_runtime/pending_bindings/{mission_id}__{_slug(repository)}__{manifest['tree_sha256'][:12]}.json"
                 verify_rel=f"canonical/astra_runtime/evidence/{mission_id}__{_slug(repository)}__{manifest['tree_sha256'][:12]}__AUTO_VERIFY.json"
@@ -162,9 +191,9 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
                 entry={
                   "status":"BOUND_PENDING_INDEPENDENT_VERIFICATION",
                   "platforms":["linux","windows","darwin"],
-                  "provides":["structured.binary.encode"],
+                  "provides":provides,
                   "requires":["json.file.available"],
-                  "keywords":["encode","binary",repository.lower()],
+                  "keywords":["encode","binary",*format_terms,repository.lower()],
                   "adapter_module":"python_source_tree_codec",
                   "source":{
                     "type":"git_source_tree",
@@ -184,7 +213,7 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
                 }
                 pending={
                   "schema":"PROJECT_BRAIN_PENDING_AUTO_BINDING_V1",
-                  "capability_id":cap_id,"effect":"structured.binary.encode","goal":goal,
+                  "capability_id":cap_id,"effect":provides[0],"goal":goal,
                   "origin_mission_id":mission_id,"origin_mission_path":mission_path,
                   "origin_mission_sha256_at_acquisition":origin_sha,
                   "selected_supplier":{"repository":repository,"revision":revision},
@@ -200,11 +229,40 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
                 }
                 pp=root/pending_rel; pp.parent.mkdir(parents=True,exist_ok=True)
                 pp.write_text(json.dumps(pending,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+                verifier={
+                  "schema":"PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+                  "mission_id":verify_mid,
+                  "purpose":"Fresh semantic round-trip verification and supplier-independent verification of an automatically acquired content-addressed Python source-tree codec.",
+                  "goal":"Verify the pending source-tree codec in a fresh process, require a different supplier-class verifier, promote only after exact semantic equality, then replay the originating mission.",
+                  "steps":[
+                    {"id":"verify-pending-source-codec","adapter":"shell",
+                     "command":f"set -euo pipefail\\npython canonical/runtime/verify_pending_cli_binding.py {pending_rel} {verify_rel}",
+                     "verify":{"type":"stdout_contains","text":"PENDING_SOURCE_BINDING_EFFECT_VERIFIED"}},
+                    {"id":"promote-and-replay","adapter":"shell",
+                     "command":f"set -euo pipefail\\npython canonical/runtime/promote_pending_binding.py {pending_rel} {verify_rel}",
+                     "verify":{"type":"stdout_contains","text":"PENDING_CAPABILITY_PROMOTED"}}
+                  ],
+                  "constraints":{
+                    "incremental_spend_usd":0,
+                    "model_controller_required":False,
+                    "fresh_verification_invocation_required":True,
+                    "allow_registry_mutation":True,
+                    "auto_generated_from_mission":mission_id,
+                    "supplier_class":"content_addressed_python_source_tree",
+                    "independent_verifier_supplier_class_required":True,
+                  }
+                }
+                vm_rel=f"canonical/astra_runtime/missions/{verify_mid.replace('-','_')}.json"
+                vp=root/vm_rel
+                if vp.exists():
+                    raise AutoPythonSourceCodecFailure("VERIFICATION_MISSION_ALREADY_EXISTS",vm_rel)
+                vp.write_text(json.dumps(verifier,indent=2,sort_keys=True)+"\n",encoding="utf-8")
                 return {
                   "status":"ACQUISITION_DISPATCHED",
                   "supplier_class":"content_addressed_python_source_tree",
                   "capability_id":cap_id,"supplier":repository+"@"+revision,
                   "pending_binding_path":pending_rel,
+                  "verification_mission_path":vm_rel,
                   "verification_mission_id":verify_mid,
                   "verification_result_path":verify_rel,
                   "source_tree_sha256":manifest["tree_sha256"],
