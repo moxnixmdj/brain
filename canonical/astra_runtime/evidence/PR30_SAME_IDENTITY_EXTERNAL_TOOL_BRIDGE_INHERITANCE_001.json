@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_GENERIC_REPAIR_VERIFICATION_V1",
+  "repair_id": "SAME_IDENTITY_EXTERNAL_TOOL_BRIDGE_INHERITANCE_20260927",
+  "base_main_sha": "66b1ee864d7be41572a8893b5809bdbda7678d60",
+  "exact_blobs": {
+    "canonical/runtime/same_identity_supervisor.py": "47c461f502e840def0c38728e1bfd7c6401cb804",
+    "canonical/tests/test_same_identity_supervisor.py": "6f7c0b7ead075034f6930cde739d3c3a27815b67"
+  },
+  "observed_execution": {
+    "platform": "linux",
+    "executor_id": "chatgpt-session-linux-private-github-drive-content-addressed-bridge-20260927",
+    "incremental_spend_usd": 0,
+    "syntax_pass": true,
+    "test_command": "python -m unittest canonical.tests.test_same_identity_supervisor -v",
+    "tests_passed": 7,
+    "tests_failed": 0
+  },
+  "causal_replay": {
+    "mission_id": "ASTRA-REAL-SAME-IDENTITY-UBJSON-CANONICAL-SNAPSHOT-001",
+    "agent_id": "SUPERWORKER-UNIFIED-1",
+    "task_id": "SI-REAL-UBJSON-SNAPSHOT-001",
+    "before": "direct network discovery failed with DNS resolution errors because supervisor omitted PROJECT_BRAIN_EXTERNAL_TOOL_BRIDGE_DIR",
+    "after": "same mission emitted identity-bound external-tool requests under task-scoped bridge directory",
+    "same_identity_preserved": true,
+    "checkpoint_count": 1,
+    "runtime_attempt_after_replay": 2,
+    "p_real_claim": 0,
+    "promotion_claim": false
+  },
+  "verified": true,
+  "promotion_scope": "generic supervisor-to-runtime external-tool bridge inheritance only"
+}
