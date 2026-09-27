@@ -4685,6 +4685,27 @@ def _external_package_name_searcher(effect,ecosystem,tokens,limit,timeout_s):
         raise Blocker("EXTERNAL_PACKAGE_SEARCH_RESPONSE_INVALID")
     return [str(x) for x in names]
 
+def _external_pypi_wheel_closure_provider(candidate,root):
+    wheels=[]
+    for item in candidate.get("wheels") or []:
+        if not isinstance(item,dict):
+            continue
+        wheels.append({
+          "filename":item.get("filename"),
+          "sha256":item.get("sha256"),
+          "url":item.get("url"),
+          "size":item.get("size"),
+          "python_version":item.get("python_version"),
+        })
+    return _external_tool_bridge("pypi_wheel_closure",{
+      "project":str(candidate.get("project") or candidate.get("name") or ""),
+      "version":str(candidate.get("version") or ""),
+      "metadata_url":str(candidate.get("metadata_url") or ""),
+      "candidate_wheels":wheels,
+      "max_wheels":32,
+      "max_total_bytes":160000000,
+    })
+
 def _load_capability_discovery():
     _activate_external_http_bridge()
     path=pathlib.Path(__file__).resolve().with_name("capability_discovery.py")
@@ -4725,6 +4746,9 @@ def _load_auto_capability_acquisition():
         discovery_module=getattr(module.auto_pypi_library_acquisition,"capability_discovery",None)
         if discovery_module is not None and hasattr(discovery_module,"set_external_package_name_searcher"):
             discovery_module.set_external_package_name_searcher(_external_package_name_searcher)
+        pypi_module=getattr(module,"auto_pypi_library_acquisition",None)
+        if pypi_module is not None and hasattr(pypi_module,"set_external_wheel_closure_provider"):
+            pypi_module.set_external_wheel_closure_provider(_external_pypi_wheel_closure_provider)
     finally:
         if added:
             try:

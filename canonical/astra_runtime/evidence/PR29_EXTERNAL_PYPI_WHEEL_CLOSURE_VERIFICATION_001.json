@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_PR29_EXTERNAL_PYPI_WHEEL_CLOSURE_VERIFICATION_V1",
+  "executable_revision": "3bef9b1055a3e4f5f97baf024877bcb4010d7963",
+  "base_revision": "37f2b0c2eef077172984a1bf229a976a877db4c9",
+  "exact_delta_blobs": {
+    "canonical/runtime/auto_pypi_library_acquisition.py": "3447462bfe55cf3f38a1b973a4a64126fd821584",
+    "canonical/runtime/astra_runtime.py": "433497beffbfa2c4e01d0d8967fae36014f75a1a",
+    "canonical/tests/test_external_pypi_artifact_bridge.py": "b3e3544a138f86c7dfed4281011ab6d54a07fa06"
+  },
+  "execution": {
+    "platform": "linux",
+    "incremental_spend_usd": 0,
+    "user_device_used": false,
+    "val_town_used": false,
+    "syntax_pass": true,
+    "focused_and_integration": {
+      "passed": 15,
+      "total": 15
+    },
+    "full_suite": {
+      "passed": 158,
+      "total": 158
+    },
+    "exit_code": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4e8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "c95774e89d86fc45eee5e43d7fe445bd53bda0b5cdbb93b2d585d8bb7ccfa428"
+  },
+  "verified_properties": [
+    "external wheel closure bypasses executor networked pip download",
+    "artifact bytes are SHA-256 checked before materialization",
+    "wheel count and total bytes are bounded",
+    "official PyPI metadata verification remains required for every supplied wheel",
+    "offline local install/probe semantics are preserved",
+    "tampered artifact content fails closed"
+  ],
+  "verifier_id": "git-blob-crosscheck+unittest-log-adjudicator-v1",
+  "verified": true,
+  "promotion_scope": "GENERIC_PYPI_ARTIFACT_TRANSPORT_ONLY__NO_REAL_MISSION_COMPLETION_CLAIM",
+  "p_real_claim": 0
+}

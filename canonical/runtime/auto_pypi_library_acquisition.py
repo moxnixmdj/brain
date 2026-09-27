@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Autonomously acquire a zero-cost Python-library structured codec from PyPI."""
 from __future__ import annotations
-import hashlib,importlib,json,pathlib,re,subprocess,sys,tempfile,urllib.parse,urllib.request,zipfile
+import base64,hashlib,importlib,json,pathlib,re,subprocess,sys,tempfile,urllib.parse,urllib.request,zipfile
 
 import capability_discovery
 
@@ -10,6 +10,13 @@ class AutoPyPIAcquisitionFailure(RuntimeError):
     def __init__(self,code,detail=None):
         self.code=code; self.detail=detail
         super().__init__(code if detail is None else f"{code}:{detail}")
+
+
+_EXTERNAL_WHEEL_CLOSURE_PROVIDER=None
+
+def set_external_wheel_closure_provider(provider):
+    global _EXTERNAL_WHEEL_CLOSURE_PROVIDER
+    _EXTERNAL_WHEEL_CLOSURE_PROVIDER=provider
 
 
 def _verified_runtime_platform():
@@ -166,6 +173,97 @@ def _verify_wheel_against_official_metadata(wheel_path):
     }
 
 
+def _finalize_wheel_closure(wheels,target,name,version,resolver):
+    if not wheels:
+        raise AutoPyPIAcquisitionFailure("PYPI_WHEEL_CLOSURE_EMPTY")
+    if len(wheels)>32:
+        raise AutoPyPIAcquisitionFailure("PYPI_WHEEL_CLOSURE_TOO_LARGE",str(len(wheels)))
+    verified=[]
+    total_bytes=0
+    for wheel in wheels:
+        total_bytes+=wheel.stat().st_size
+        if total_bytes>160000000:
+            raise AutoPyPIAcquisitionFailure("PYPI_WHEEL_CLOSURE_BYTES_LIMIT")
+        record=_verify_wheel_against_official_metadata(wheel)
+        stable=target/wheel.name
+        stable.write_bytes(wheel.read_bytes())
+        record["path"]=str(stable)
+        verified.append(record)
+    normalized_root=re.sub(r"[-_.]+","-",name).lower()
+    roots=[
+        x for x in verified
+        if re.sub(r"[-_.]+","-",x["project"]).lower()==normalized_root
+        and x["version"]==version
+    ]
+    if len(roots)!=1:
+        raise AutoPyPIAcquisitionFailure(
+            "PYPI_ROOT_WHEEL_NOT_UNIQUE",
+            json.dumps([{"project":x["project"],"version":x["version"],"filename":x["filename"]} for x in roots],sort_keys=True)
+        )
+    closure=sorted(
+        [{k:v for k,v in x.items() if k!="path"} for x in verified],
+        key=lambda x:(re.sub(r"[-_.]+","-",x["project"]).lower(),x["version"],x["filename"])
+    )
+    lock={
+      "schema":"PROJECT_BRAIN_PYPI_WHEEL_CLOSURE_V1",
+      "root_project":roots[0]["project"],
+      "root_version":roots[0]["version"],
+      "root_filename":roots[0]["filename"],
+      "wheel_count":len(closure),
+      "wheels":closure,
+      "source_only_artifacts_allowed":False,
+      "resolver":resolver,
+      "network_required_for_install":False,
+    }
+    lock_sha=hashlib.sha256(json.dumps(lock,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+    lock["closure_sha256"]=lock_sha
+    return {"root":roots[0],"wheels":verified,"lock":lock}
+
+
+def _materialize_external_wheel_closure(candidate,root,target):
+    provider=_EXTERNAL_WHEEL_CLOSURE_PROVIDER
+    if not callable(provider):
+        return None
+    response=provider(candidate=candidate,root=str(root))
+    if response is None:
+        return None
+    artifacts=response.get("artifacts") if isinstance(response,dict) else None
+    if not isinstance(artifacts,list) or not artifacts:
+        raise AutoPyPIAcquisitionFailure("PYPI_EXTERNAL_WHEEL_CLOSURE_INVALID")
+    if len(artifacts)>32:
+        raise AutoPyPIAcquisitionFailure("PYPI_WHEEL_CLOSURE_TOO_LARGE",str(len(artifacts)))
+    with tempfile.TemporaryDirectory(prefix="brain-pypi-external-closure-") as td:
+        wheels=[]; total=0
+        for item in artifacts:
+            if not isinstance(item,dict):
+                raise AutoPyPIAcquisitionFailure("PYPI_EXTERNAL_WHEEL_RECORD_INVALID")
+            filename=str(item.get("filename") or "").strip()
+            expected=str(item.get("sha256") or "").strip().lower()
+            encoded=str(item.get("content_b64") or "")
+            if pathlib.PurePath(filename).name!=filename or not filename.endswith(".whl"):
+                raise AutoPyPIAcquisitionFailure("PYPI_EXTERNAL_WHEEL_FILENAME_INVALID",filename)
+            if not re.fullmatch(r"[0-9a-f]{64}",expected):
+                raise AutoPyPIAcquisitionFailure("PYPI_EXTERNAL_WHEEL_HASH_INVALID",filename)
+            try:
+                raw=base64.b64decode(encoded,validate=True)
+            except Exception as exc:
+                raise AutoPyPIAcquisitionFailure("PYPI_EXTERNAL_WHEEL_BASE64_INVALID",filename) from exc
+            total+=len(raw)
+            if total>160000000:
+                raise AutoPyPIAcquisitionFailure("PYPI_WHEEL_CLOSURE_BYTES_LIMIT")
+            actual=hashlib.sha256(raw).hexdigest()
+            if actual!=expected:
+                raise AutoPyPIAcquisitionFailure("PYPI_EXTERNAL_WHEEL_HASH_MISMATCH",filename)
+            wheel=pathlib.Path(td)/filename
+            wheel.write_bytes(raw); wheels.append(wheel)
+        return _finalize_wheel_closure(
+            wheels,target,
+            str(candidate.get("project") or candidate.get("name") or ""),
+            str(candidate.get("version") or ""),
+            "external-content-addressed-wheel-closure",
+        )
+
+
 def _download_compatible_wheel_closure(candidate,root):
     name=str(candidate.get("project") or candidate.get("name") or "")
     version=str(candidate.get("version") or "")
@@ -173,6 +271,9 @@ def _download_compatible_wheel_closure(candidate,root):
         raise AutoPyPIAcquisitionFailure("PYPI_CANDIDATE_METADATA_INCOMPLETE")
     target=pathlib.Path(root)/"canonical"/"astra_runtime"/"tmp"/"pypi_probe_wheels"
     target.mkdir(parents=True,exist_ok=True)
+    external=_materialize_external_wheel_closure(candidate,root,target)
+    if external is not None:
+        return external
     with tempfile.TemporaryDirectory(prefix="brain-pypi-wheel-closure-") as td:
         proc=subprocess.run(
             [
@@ -190,50 +291,7 @@ def _download_compatible_wheel_closure(candidate,root):
                 proc.stderr[-1800:]
             )
         wheels=sorted(pathlib.Path(td).glob("*.whl"))
-        if not wheels:
-            raise AutoPyPIAcquisitionFailure("PYPI_WHEEL_CLOSURE_EMPTY")
-        if len(wheels)>32:
-            raise AutoPyPIAcquisitionFailure("PYPI_WHEEL_CLOSURE_TOO_LARGE",str(len(wheels)))
-        verified=[]
-        for wheel in wheels:
-            record=_verify_wheel_against_official_metadata(wheel)
-            stable=target/wheel.name
-            stable.write_bytes(wheel.read_bytes())
-            record["path"]=str(stable)
-            verified.append(record)
-        normalized_root=re.sub(r"[-_.]+","-",name).lower()
-        roots=[
-            x for x in verified
-            if re.sub(r"[-_.]+","-",x["project"]).lower()==normalized_root
-            and x["version"]==version
-        ]
-        if len(roots)!=1:
-            raise AutoPyPIAcquisitionFailure(
-                "PYPI_ROOT_WHEEL_NOT_UNIQUE",
-                json.dumps([{"project":x["project"],"version":x["version"],"filename":x["filename"]} for x in roots],sort_keys=True)
-            )
-        closure=sorted(
-            [{k:v for k,v in x.items() if k!="path"} for x in verified],
-            key=lambda x:(re.sub(r"[-_.]+","-",x["project"]).lower(),x["version"],x["filename"])
-        )
-        lock={
-          "schema":"PROJECT_BRAIN_PYPI_WHEEL_CLOSURE_V1",
-          "root_project":roots[0]["project"],
-          "root_version":roots[0]["version"],
-          "root_filename":roots[0]["filename"],
-          "wheel_count":len(closure),
-          "wheels":closure,
-          "source_only_artifacts_allowed":False,
-          "resolver":"pip-download-only-binary",
-          "network_required_for_install":False,
-        }
-        lock_sha=hashlib.sha256(json.dumps(lock,sort_keys=True,separators=(",",":")).encode()).hexdigest()
-        lock["closure_sha256"]=lock_sha
-        return {
-          "root":roots[0],
-          "wheels":verified,
-          "lock":lock,
-        }
+        return _finalize_wheel_closure(wheels,target,name,version,"pip-download-only-binary")
 
 
 
