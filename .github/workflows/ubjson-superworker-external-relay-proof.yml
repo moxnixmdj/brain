@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - execution/ubjson-external-relay-superworker2-20260927
+  pull_request:
+    branches:
+      - mission/same-identity-ubjson-snapshot-20260927
   workflow_dispatch:
 
 permissions:
