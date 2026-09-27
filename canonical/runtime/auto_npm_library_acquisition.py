@@ -119,7 +119,7 @@ def _search_registry(goal,limit=30,timeout_s=20,format_hint=None):
     return candidates[:min(limit,30)]
 
 
-def _metadata(candidate,timeout_s=20):
+def _metadata(candidate,timeout_s=20,allow_runtime_dependencies=False):
     package=candidate["package"]; version=candidate["version"]
     url,payload=npm_package_utils.fetch_version_metadata(package,version,timeout_s=timeout_s)
     dist=payload.get("dist") or {}
@@ -131,7 +131,7 @@ def _metadata(candidate,timeout_s=20):
         deps=payload.get(field) or {}
         if not isinstance(deps,dict):
             raise AutoNpmAcquisitionFailure("NPM_"+field.upper()+"_INVALID",package)
-        if deps:
+        if deps and not allow_runtime_dependencies:
             raise AutoNpmAcquisitionFailure(
                 "NPM_RUNTIME_DEPENDENCIES_UNSUPPORTED",
                 package+":"+field+":"+json.dumps(sorted(deps))[:600]
@@ -146,14 +146,16 @@ def _metadata(candidate,timeout_s=20):
     forbidden=[k for k in ("preinstall","install","postinstall") if str(scripts.get(k) or "").strip()]
     if forbidden:
         raise AutoNpmAcquisitionFailure("NPM_LIFECYCLE_SCRIPTS_REJECTED",package+":"+",".join(forbidden))
-    if deps:
-        raise AutoNpmAcquisitionFailure("NPM_RUNTIME_DEPENDENCIES_UNSUPPORTED",package+":"+json.dumps(sorted(deps))[:600])
+    runtime_dependencies={}
+    for field in ("dependencies","optionalDependencies","peerDependencies"):
+        runtime_dependencies.update(payload.get(field) or {})
     return {
       **candidate,
       "metadata_url":url,
       "tarball_url":tarball,
       "integrity":integrity,
-      "dependency_count":0,
+      "dependency_count":len(runtime_dependencies),
+      "runtime_dependencies":runtime_dependencies,
       "license":payload.get("license"),
       "engines":payload.get("engines"),
       "package_json":payload,
