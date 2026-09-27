@@ -7,6 +7,7 @@ import re
 import auto_apt_cli_acquisition
 import auto_pypi_library_acquisition
 import auto_npm_library_acquisition
+import auto_python_source_codec_acquisition
 
 
 class AutoAcquisitionFailure(RuntimeError):
@@ -34,6 +35,7 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
       "pypi_python_library": auto_pypi_library_acquisition,
       "npm_javascript_library": auto_npm_library_acquisition,
       "apt_cli": auto_apt_cli_acquisition,
+      "content_addressed_python_source_tree": auto_python_source_codec_acquisition,
     }
     if required is not None:
         module=suppliers[required]
@@ -68,6 +70,17 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
         except Exception as exc:
             attempts.append({
               "supplier_class":"npm_javascript_library",
+              "error":type(exc).__name__+":"+str(exc),
+            })
+
+    if auto_python_source_codec_acquisition.supports(goal):
+        try:
+            return auto_python_source_codec_acquisition.dispatch(
+                goal,mission_id,mission_path,root,discovery=discovery
+            )
+        except Exception as exc:
+            attempts.append({
+              "supplier_class":"content_addressed_python_source_tree",
               "error":type(exc).__name__+":"+str(exc),
             })
 
