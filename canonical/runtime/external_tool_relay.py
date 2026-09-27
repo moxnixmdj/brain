@@ -23,7 +23,7 @@ import urllib.request
 
 REQUEST_SCHEMA = "PROJECT_BRAIN_EXTERNAL_TOOL_REQUEST_V1"
 RESPONSE_SCHEMA = "PROJECT_BRAIN_EXTERNAL_TOOL_RESPONSE_V1"
-ALLOWED_HOSTS = {"registry.npmjs.org", "pypi.org", "registry.modelcontextprotocol.io"}
+ALLOWED_HOSTS = {"registry.npmjs.org", "pypi.org", "registry.modelcontextprotocol.io", "api.github.com"}
 ALLOWED_METHODS = {"GET", "HEAD"}
 ALLOWED_HEADERS = {"accept", "accept-encoding", "user-agent"}
 MAX_BODY_BYTES = 50_000_000
@@ -58,7 +58,7 @@ def _safe_headers(raw) -> dict[str, str]:
     return headers
 
 
-SUPPORTED_KINDS = {"urlopen", "package_name_search", "pypi_wheel_closure"}
+SUPPORTED_KINDS = {"urlopen", "package_name_search", "python_source_tree", "pypi_wheel_closure"}
 
 def validate_request(request: dict, agent_id: str, task_id: str) -> tuple[str, str, dict]:
     if request.get("schema") != REQUEST_SCHEMA:
@@ -208,6 +208,185 @@ def execute_pypi_wheel_closure(payload: dict) -> dict:
             })
     return {"artifacts": artifacts}
 
+def _distinctive_goal_terms(goal: str) -> list[str]:
+    words = re.findall(r"[A-Za-z][A-Za-z0-9+_.-]{2,40}", str(goal or ""))
+    stop = {
+        "encode", "decode", "binary", "data", "file", "save", "create", "verify",
+        "verified", "independently", "different", "implementation", "canonical",
+        "snapshot", "json", "exactly", "identical", "using", "with", "from",
+        "into", "same", "keys", "values", "nesting", "arrays", "strings",
+        "numbers", "booleans", "nulls", "artifact", "artifacts",
+    }
+    out = []
+    for raw in words:
+        token = raw.strip("._-").lower()
+        if not token or token in stop or token in out:
+            continue
+        out.append(token)
+    out.sort(key=lambda x: (0 if any(tag in x for tag in ("ubj", "codec", "pack")) else 1, len(x), x))
+    return out[:12]
+
+
+def _github_api_json(url: str) -> dict:
+    result = execute_urlopen({
+        "url": url,
+        "method": "GET",
+        "headers": {
+            "Accept": "application/vnd.github+json",
+            "User-Agent": "ProjectBrain-ExternalRelay/1",
+        },
+        "timeout_s": 20,
+        "data_b64": None,
+    })
+    if int(result.get("status", 0)) != 200:
+        raise RelayError("GITHUB_API_HTTP_" + str(result.get("status")))
+    try:
+        raw = base64.b64decode(str(result["body_b64"]), validate=True)
+        value = json.loads(raw.decode("utf-8"))
+    except Exception as exc:
+        raise RelayError("GITHUB_API_JSON_INVALID") from exc
+    if not isinstance(value, dict):
+        raise RelayError("GITHUB_API_JSON_INVALID")
+    return value
+
+
+def _source_tree_from_repo(
+    full_name: str,
+    goal: str,
+    max_files: int,
+    max_total_bytes: int,
+) -> dict:
+    if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", full_name):
+        raise RelayError("GITHUB_REPOSITORY_ID_INVALID")
+    with tempfile.TemporaryDirectory(prefix="brain-external-source-") as td:
+        dest = pathlib.Path(td) / "repo"
+        proc = subprocess.run(
+            ["git", "clone", "--depth", "1", "--quiet",
+             "https://github.com/" + full_name + ".git", str(dest)],
+            text=True, capture_output=True, timeout=60,
+        )
+        if proc.returncode != 0:
+            raise RelayError("GIT_CLONE_FAILED:" + proc.stderr[-800:])
+        rev = subprocess.run(
+            ["git", "-C", str(dest), "rev-parse", "HEAD"],
+            text=True, capture_output=True, timeout=10, check=True,
+        ).stdout.strip()
+        if not re.fullmatch(r"[0-9a-f]{40}", rev):
+            raise RelayError("GIT_REVISION_INVALID")
+
+        package_dirs = []
+        for init in list(dest.glob("*/__init__.py")) + list(dest.glob("src/*/__init__.py")):
+            if init.parent.name.lower() in {
+                "tests", "test", "docs", "doc", "examples", "example", "benchmarks"
+            }:
+                continue
+            if init.parent not in package_dirs:
+                package_dirs.append(init.parent)
+        if not package_dirs:
+            raise RelayError("NO_TOP_LEVEL_PYTHON_PACKAGE")
+
+        terms = _distinctive_goal_terms(goal)
+        best = None
+        best_score = -1
+        for package in package_dirs:
+            files = sorted(p for p in package.rglob("*.py") if p.is_file())
+            if not files or len(files) > max_files:
+                continue
+            score = 0
+            haystack = (full_name + " " + package.name).lower()
+            for term in terms:
+                if term in haystack:
+                    score += 5
+            for p in files[:40]:
+                lname = p.name.lower()
+                if any(x in lname for x in (
+                    "codec", "encode", "decode", "dump", "load", "pack", "ubj", "json"
+                )):
+                    score += 2
+            if score > best_score:
+                best_score, best = score, (package, files)
+        if best is None:
+            raise RelayError("NO_BOUNDED_PYTHON_PACKAGE")
+
+        package, files = best
+        records = []
+        total = 0
+        for p in files:
+            raw = p.read_bytes()
+            try:
+                content = raw.decode("utf-8")
+            except UnicodeDecodeError:
+                continue
+            total += len(raw)
+            if total > max_total_bytes:
+                raise RelayError("SOURCE_TREE_BYTES_LIMIT")
+            rel = pathlib.PurePosixPath(package.name) / p.relative_to(package).as_posix()
+            git_blob_sha = hashlib.sha1(
+                b"blob " + str(len(raw)).encode("ascii") + b"\0" + raw
+            ).hexdigest()
+            records.append({
+                "path": rel.as_posix(),
+                "git_blob_sha": git_blob_sha,
+                "content": content,
+            })
+        if not records or not any(x["path"].endswith("/__init__.py") for x in records):
+            raise RelayError("SOURCE_TREE_EMPTY")
+        return {
+            "schema": "PROJECT_BRAIN_EXTERNAL_SOURCE_TREE_V1",
+            "repository": full_name,
+            "revision": rev,
+            "files": records,
+        }
+
+
+def execute_python_source_tree(payload: dict) -> dict:
+    goal = str(payload.get("goal") or "")
+    if not goal or len(goal) > 20_000:
+        raise RelayError("SOURCE_TREE_GOAL_INVALID")
+    allowed_suffixes = list(payload.get("allowed_suffixes") or [".py"])
+    if allowed_suffixes != [".py"]:
+        raise RelayError("SOURCE_TREE_SUFFIXES_UNSUPPORTED")
+    if payload.get("require_git_blob_sha") is not True:
+        raise RelayError("SOURCE_TREE_GIT_BLOB_SHA_REQUIRED")
+    max_trees = min(max(int(payload.get("max_trees") or 12), 1), 12)
+    max_files = min(max(int(payload.get("max_files_per_tree") or 128), 1), 128)
+    max_total = min(max(int(payload.get("max_total_bytes_per_tree") or 2_000_000), 1), 2_000_000)
+    terms = _distinctive_goal_terms(goal)
+    if not terms:
+        raise RelayError("SOURCE_TREE_SEARCH_TERMS_EMPTY")
+
+    queries = [f"{term} language:Python" for term in terms[:4]]
+    if len(terms) > 1:
+        queries.append(" ".join(terms[:4]) + " language:Python")
+
+    repositories = []
+    for query in queries[:5]:
+        url = "https://api.github.com/search/repositories?" + urllib.parse.urlencode({
+            "q": query, "sort": "stars", "order": "desc", "per_page": 5
+        })
+        try:
+            data = _github_api_json(url)
+        except Exception:
+            continue
+        for item in data.get("items") or []:
+            full_name = str(item.get("full_name") or "")
+            if full_name and full_name not in repositories:
+                repositories.append(full_name)
+        if len(repositories) >= 8:
+            break
+
+    trees = []
+    for full_name in repositories[:8]:
+        try:
+            tree = _source_tree_from_repo(full_name, goal, max_files, max_total)
+            trees.append(tree)
+        except Exception:
+            continue
+        if len(trees) >= min(max_trees, 4):
+            break
+    return {"trees": trees}
+
+
 def _write_json_atomic(path: pathlib.Path, value: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     fd, temp_name = tempfile.mkstemp(prefix=path.name + ".", dir=path.parent)
@@ -233,6 +412,8 @@ def service_request(path: pathlib.Path, agent_id: str, task_id: str) -> pathlib.
         result = execute_urlopen(payload)
     elif kind == "package_name_search":
         result = execute_package_name_search(payload)
+    elif kind == "python_source_tree":
+        result = execute_python_source_tree(payload)
     elif kind == "pypi_wheel_closure":
         result = execute_pypi_wheel_closure(payload)
     else:
