@@ -66,12 +66,17 @@ class SourceCodecAcquisitionTests(unittest.TestCase):
               "M","canonical/astra_runtime/missions/M.json",root,
             )
             pending=json.loads((root/out["pending_binding_path"]).read_text())
+            verifier_path=root/out["verification_mission_path"]
+            self.assertTrue(verifier_path.is_file())
+            verifier=json.loads(verifier_path.read_text())
         self.assertEqual(out["status"],"ACQUISITION_DISPATCHED")
         self.assertEqual(out["supplier_class"],"content_addressed_python_source_tree")
         self.assertEqual(pending["contract"]["encode_callable"],"dumpb")
         self.assertEqual(pending["contract"]["decode_callable"],"loadb")
         self.assertEqual(pending["status"],"PENDING_INDEPENDENT_VERIFICATION")
         self.assertEqual(pending["registry_entry"]["source"]["type"],"git_source_tree")
+        self.assertIn("structured.binary.encode.ubj",pending["registry_entry"]["provides"])
+        self.assertEqual(verifier["steps"][0]["verify"]["text"],"PENDING_SOURCE_BINDING_EFFECT_VERIFIED")
 
 if __name__=="__main__":
     unittest.main(verbosity=2)
