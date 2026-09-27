@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "SI-REAL-MISSION-002",
+  "goal": "Using a zero-cost Python library, encode canonical/astra_runtime/fixtures/SI_REAL_MISSION_002_SOURCE.json as UBJSON and save canonical/astra_runtime/tmp/SI_REAL_MISSION_002.ubj. Independently decode the UBJSON artifact using a different implementation than the producer and verify the decoded records are exactly identical to canonical/astra_runtime/fixtures/SI_REAL_MISSION_002_SOURCE.json in values, order, field names, and record count.",
+  "steps": [
+    {
+      "id": "blind-acquire-and-verify-ubjson",
+      "adapter": "goal",
+      "verify": {
+        "type": "stdout_contains",
+        "text": "VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "user_device_used": false,
+    "val_town_used": false,
+    "same_identity_required": true
+  }
+}
