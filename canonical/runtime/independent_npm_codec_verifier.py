@@ -28,6 +28,29 @@ def _inside(root,raw):
         raise IndependentNpmCodecVerifierFailure("PATH_OUTSIDE_REPOSITORY")
     return p
 
+def _discovery_terms(format_name,producer_project):
+    """Prefer longer format-like tokens already present in producer identity."""
+    fmt=str(format_name or "").strip().lower()
+    terms=[]
+    tokens=[
+        x.lower()
+        for x in re.findall(r"[A-Za-z0-9][A-Za-z0-9._+-]{1,80}",str(producer_project or ""))
+    ]
+    generic={"py","python","js","javascript","node","nodejs","lib","library","codec","package"}
+    expanded=[]
+    for token in tokens:
+        normalized=re.sub(r"[-_.]+","",token)
+        if token in generic or not normalized:
+            continue
+        if fmt and fmt in normalized and normalized!=fmt:
+            expanded.append(normalized)
+    for term in sorted(set(expanded),key=lambda x:(-len(x),x)):
+        if re.fullmatch(r"[a-z0-9][a-z0-9._+-]{0,40}",term) and term not in terms:
+            terms.append(term)
+    if fmt and fmt not in terms:
+        terms.append(fmt)
+    return terms
+
 
 def verify(format_name,json_path,binary_path,producer_project,root):
     # Independent verification is a fresh subprocess and must explicitly inherit
@@ -47,12 +70,32 @@ def verify(format_name,json_path,binary_path,producer_project,root):
         "Independently decode "+fmt+" binary data from "
         "canonical/astra_runtime/tmp/INDEPENDENT_VERIFIER."+fmt
     )
-    try:
-        candidates=npm_acq._search_registry(goal,limit=40,format_hint=fmt)
-    except Exception as exc:
+    candidates=[]
+    seen=set()
+    search_errors=[]
+    search_terms=_discovery_terms(fmt,producer_project)
+    for term in search_terms:
+        try:
+            discovered=npm_acq._search_registry(goal,limit=40,format_hint=term)
+        except Exception as exc:
+            search_errors.append({
+                "term":term,
+                "error":type(exc).__name__+":"+str(exc),
+            })
+            continue
+        for candidate in discovered:
+            key=(_norm(candidate.get("package")),str(candidate.get("version") or ""))
+            if key in seen:
+                continue
+            seen.add(key)
+            enriched=dict(candidate)
+            enriched["discovery_term"]=term
+            candidates.append(enriched)
+    if not candidates:
         raise IndependentNpmCodecVerifierFailure(
-            "NPM_VERIFIER_DISCOVERY_FAILED:"+type(exc).__name__+":"+str(exc)
-        ) from exc
+            "NPM_VERIFIER_DISCOVERY_FAILED:"
+            +json.dumps({"terms":search_terms,"errors":search_errors},sort_keys=True)[:3000]
+        )
 
     producer=_norm(producer_project)
     attempts=[]

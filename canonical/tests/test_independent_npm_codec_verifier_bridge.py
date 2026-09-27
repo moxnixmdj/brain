@@ -19,6 +19,16 @@ sys.modules[spec.name]=verifier
 spec.loader.exec_module(verifier)
 
 class IndependentNpmVerifierBridgeTests(unittest.TestCase):
+    def test_discovery_terms_expand_from_producer_identity_without_package_hardcoding(self):
+        self.assertEqual(
+            verifier._discovery_terms("ubj","Iotic-Labs/py-ubjson"),
+            ["ubjson","ubj"],
+        )
+        self.assertEqual(
+            verifier._discovery_terms("msgpack","example/python-msgpack"),
+            ["msgpack"],
+        )
+
     def test_network_constrained_verifier_emits_bridge_request(self):
         with tempfile.TemporaryDirectory() as td:
             root=pathlib.Path(td)
