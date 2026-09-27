@@ -1,0 +1,76 @@
+name: Same-Identity UBJSON Relay Proof
+
+on:
+  pull_request:
+    branches:
+      - mission/same-identity-ubjson-snapshot-20260927
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ubjson_same_identity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Verify relay and PR39 transport seam
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check --quiet pytest==8.3.5
+          python -m compileall -q             canonical/runtime/external_tool_relay.py             canonical/runtime/run_same_identity_with_relay.py             canonical/runtime/independent_npm_codec_verifier.py
+          python -m pytest -q             canonical/tests/test_external_tool_relay.py             canonical/tests/test_independent_npm_codec_verifier_bridge.py
+
+      - name: Execute frozen mission through bounded relay
+        shell: bash
+        run: |
+          set -euo pipefail
+          python canonical/runtime/run_same_identity_with_relay.py             --task canonical/same_identity_worker/tasks/SI_REAL_UBJSON_SNAPSHOT_001.json             --agent-id SUPERWORKER-UNIFIED-1             --task-id SI-REAL-UBJSON-SNAPSHOT-001             --allow-host registry.npmjs.org             --allow-host pypi.org             --allow-host files.pythonhosted.org             --allow-host api.github.com             --allow-host github.com             --allow-host raw.githubusercontent.com             --allow-host codeload.github.com             --max-rounds 24             --max-body-bytes 50000000             --summary canonical/same_identity_worker/evidence/SI_REAL_UBJSON_RELAY_LOOP_001.json
+
+      - name: Verify immutable mission and completed state
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, pathlib
+          mission=pathlib.Path("canonical/astra_runtime/missions/ASTRA_REAL_SAME_IDENTITY_UBJSON_CANONICAL_SNAPSHOT_001.json")
+          task=pathlib.Path("canonical/same_identity_worker/tasks/SI_REAL_UBJSON_SNAPSHOT_001.json")
+          state=pathlib.Path("canonical/same_identity_worker/state/SI-REAL-UBJSON-SNAPSHOT-001.json")
+          summary=pathlib.Path("canonical/same_identity_worker/evidence/SI_REAL_UBJSON_RELAY_LOOP_001.json")
+          t=json.loads(task.read_text())
+          s=json.loads(state.read_text())
+          r=json.loads(summary.read_text())
+          assert hashlib.sha256(mission.read_bytes()).hexdigest()==t["mission_sha256"]
+          assert s["agent_id"]=="SUPERWORKER-UNIFIED-1"
+          assert s["task_id"]=="SI-REAL-UBJSON-SNAPSHOT-001"
+          assert s["status"]=="COMPLETE"
+          assert int(s.get("checkpoint_count",0)) >= 1
+          assert int(s.get("runtime_attempt_count",0)) >= 1
+          assert r["status"]=="COMPLETE"
+          assert r["agent_id"]==s["agent_id"] and r["task_id"]==s["task_id"]
+          print(json.dumps({
+            "mission_sha256": t["mission_sha256"],
+            "checkpoint_count": s["checkpoint_count"],
+            "runtime_attempt_count": s["runtime_attempt_count"],
+            "relay_events": len(r["relay_events"]),
+            "status": r["status"],
+          }, sort_keys=True))
+          PY
+
+      - name: Upload execution evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: same-identity-ubjson-relay-evidence
+          if-no-files-found: warn
+          path: |
+            canonical/same_identity_worker/evidence/
+            canonical/same_identity_worker/state/
+            canonical/same_identity_worker/external_tool_bridge/
+            canonical/astra_runtime/evidence/
+            canonical/astra_runtime/artifacts/
+            canonical/astra_runtime/state/
