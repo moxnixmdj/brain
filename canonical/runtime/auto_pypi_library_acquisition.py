@@ -350,80 +350,11 @@ def _infer_codec_contract(candidate,wheel_closure,root):
             raise AutoPyPIAcquisitionFailure("PYPI_PROBE_INSTALL_FAILED",proc.stderr[-1200:])
 
         modules=_module_candidates(root_wheel["path"])
-        probe_script=r"""
-import hashlib,importlib,json,pathlib,sys
-site=pathlib.Path(sys.argv[1]).resolve()
-modules=json.loads(sys.argv[2])
-fixture=[{"id":1,"text":"alpha"},{"id":2,"text":"beta"}]
-envelope_key="__project_brain_payload__"
-representations=[
-  ("direct",fixture,None),
-  ("mapping_envelope",{envelope_key:fixture},envelope_key),
-]
-pairs=[("packb","unpackb"),("dumps","loads"),("encode","decode"),("serialize","deserialize")]
-attempts=[]
-sys.path.insert(0,str(site))
-
-def resolve(module,name):
-    current=module
-    for part in str(name).split("."):
-        current=getattr(current,part)
-    if not callable(current):
-        raise TypeError(name)
-    return current
-
-for module_name in modules:
-    try:
-        module=importlib.import_module(module_name)
-    except Exception as exc:
-        attempts.append({"module":module_name,"status":"IMPORT_FAILED","error":type(exc).__name__+":"+str(exc)})
-        continue
-    for enc_name,dec_name in pairs:
-        try:
-            enc=resolve(module,enc_name); dec=resolve(module,dec_name)
-        except Exception:
-            continue
-        for representation,probe_value,unwrap_key in representations:
-            for enc_kwargs in ({},{"use_bin_type":True}):
-                try:
-                    payload=enc(probe_value,**enc_kwargs)
-                except Exception:
-                    continue
-                if isinstance(payload,memoryview): payload=payload.tobytes()
-                if isinstance(payload,bytearray): payload=bytes(payload)
-                if not isinstance(payload,bytes) or not payload:
-                    continue
-                for dec_kwargs in ({},{"raw":False}):
-                    try:
-                        observed=dec(payload,**dec_kwargs)
-                    except Exception:
-                        continue
-                    semantic=observed
-                    if unwrap_key is not None:
-                        if not isinstance(observed,dict) or unwrap_key not in observed:
-                            continue
-                        semantic=observed[unwrap_key]
-                    if semantic==fixture:
-                        print(json.dumps({
-                          "ok":True,
-                          "module":module_name,
-                          "encode_callable":enc_name,
-                          "decode_callable":dec_name,
-                          "encode_kwargs":enc_kwargs,
-                          "decode_kwargs":dec_kwargs,
-                          "fixture":fixture,
-                          "representation":representation,
-                          "envelope_key":unwrap_key,
-                          "probe_output_sha256":hashlib.sha256(payload).hexdigest(),
-                          "probe_output_bytes":len(payload),
-                        },sort_keys=True))
-                        raise SystemExit(0)
-        attempts.append({"module":module_name,"encode":enc_name,"decode":dec_name,"status":"ROUNDTRIP_REJECTED"})
-print(json.dumps({"ok":False,"attempts":attempts},sort_keys=True))
-raise SystemExit(3)
-"""
+        probe_helper=(pathlib.Path(root)/"canonical"/"runtime"/"python_codec_probe.py").resolve()
+        if not probe_helper.is_file():
+            raise AutoPyPIAcquisitionFailure("PYPI_PROBE_HELPER_MISSING",str(probe_helper))
         probe=subprocess.run(
-            [sys.executable,"-c",probe_script,str(site),json.dumps(modules)],
+            [sys.executable,str(probe_helper),str(site),json.dumps(modules)],
             cwd=root,text=True,capture_output=True,timeout=90
         )
         try:
@@ -458,6 +389,7 @@ raise SystemExit(3)
           "project":candidate.get("project") or candidate.get("name"),
           "version":candidate.get("version"),
           "probe_isolation":"fresh_child_python_process",
+          "pair_discovery":observed.get("pair_discovery","legacy_baseline"),
         }
 
 def dispatch(goal,mission_id,mission_path,root,discovery=None):
