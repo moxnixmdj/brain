@@ -9,9 +9,14 @@ class AutoGitHubSourceAcquisitionFailure(RuntimeError):
 
 def supports(goal):
     lower=str(goal or "").lower()
-    explicit=("github-hosted source" in lower or "github source library" in lower or "github-hosted python source" in lower)
     effect=any(x in lower for x in ("encode","serialize","pack"))
-    return bool(explicit and effect)
+    if not effect:
+        return False
+    try:
+        _format(goal)
+    except AutoGitHubSourceAcquisitionFailure:
+        return False
+    return True
 
 def _repo_paths(text):
     return re.findall(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+",str(text or ""))
