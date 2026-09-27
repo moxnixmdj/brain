@@ -9,6 +9,7 @@ import subprocess
 import tempfile
 
 import auto_npm_library_acquisition as npm_acq
+import astra_runtime
 import npm_package_utils
 
 
@@ -29,6 +30,9 @@ def _inside(root,raw):
 
 
 def verify(format_name,json_path,binary_path,producer_project,root):
+    # Independent verification is a fresh subprocess and must explicitly inherit
+    # the provider-neutral external-tool transport when its executor has no direct network.
+    astra_runtime._activate_external_http_bridge()
     root=pathlib.Path(root).resolve()
     src=_inside(root,json_path)
     binary=_inside(root,binary_path)
