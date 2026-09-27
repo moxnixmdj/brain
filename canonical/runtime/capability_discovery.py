@@ -414,6 +414,12 @@ def _pypi_candidate_names(effect):
     return names[:12]
 
 
+_EXTERNAL_PACKAGE_NAME_SEARCHER=None
+
+def set_external_package_name_searcher(searcher):
+    global _EXTERNAL_PACKAGE_NAME_SEARCHER
+    _EXTERNAL_PACKAGE_NAME_SEARCHER=searcher
+
 def _pypi_simple_related_names(effect,timeout_s=12,opener=None,limit=24):
     """Discover related PyPI project names from the official Simple index.
 
@@ -433,6 +439,22 @@ def _pypi_simple_related_names(effect,timeout_s=12,opener=None,limit=24):
     ]
     if not distinctive:
         return []
+    if callable(_EXTERNAL_PACKAGE_NAME_SEARCHER):
+        try:
+            names=_EXTERNAL_PACKAGE_NAME_SEARCHER(
+                effect=effect, ecosystem="pypi", tokens=distinctive,
+                limit=max(1,min(int(limit),50)), timeout_s=timeout_s
+            )
+            if isinstance(names,list):
+                out=[]
+                for raw in names:
+                    project=str(raw or "").strip()
+                    if re.fullmatch(r"[a-zA-Z0-9][a-zA-Z0-9._-]{0,120}",project) and project.lower() not in [x.lower() for x in out]:
+                        out.append(project)
+                if out:
+                    return out[:max(1,min(int(limit),50))]
+        except Exception:
+            pass
     req=urllib.request.Request(
         "https://pypi.org/simple/",
         headers={"User-Agent":"ProjectBrain-CapabilityDiscovery/1"}

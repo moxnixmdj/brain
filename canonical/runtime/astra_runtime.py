@@ -1,6 +1,6 @@
 import html
 #!/usr/bin/env python3
-import argparse, ast, gzip, hashlib, importlib.util, json, os, pathlib, re, shlex, shutil, subprocess, sys, tempfile, time, urllib.parse, urllib.request
+import argparse, ast, base64, gzip, hashlib, importlib.util, io, json, os, pathlib, re, shlex, shutil, subprocess, sys, tempfile, time, urllib.error, urllib.parse, urllib.request
 import importlib.metadata
 from datetime import datetime, timezone
 
@@ -149,6 +149,55 @@ def _external_tool_bridge(kind,payload):
         raise Blocker("EXTERNAL_TOOL_RESPONSE_FAILED:"+request_sha256)
     return response["result"]
 
+
+class _ExternalBridgeHTTPResponse:
+    def __init__(self, raw, status, final_url, headers=None):
+        self._raw=io.BytesIO(raw)
+        self.status=int(status)
+        self._final_url=str(final_url)
+        self.headers=dict(headers or {})
+    def read(self, n=-1): return self._raw.read(n)
+    def geturl(self): return self._final_url
+    def __enter__(self): return self
+    def __exit__(self, exc_type, exc, tb): return False
+
+_ORIGINAL_URLOPEN=urllib.request.urlopen
+
+def _bridge_aware_urlopen(request, timeout=20, *args, **kwargs):
+    if isinstance(request, urllib.request.Request):
+        url=request.full_url
+        method=request.get_method()
+        headers=dict(request.header_items())
+        data=request.data
+    else:
+        url=str(request)
+        method='GET'
+        headers={}
+        data=None
+    bridged=_external_tool_bridge('urlopen',{
+      'url':url,'method':method,'headers':headers,
+      'timeout_s':timeout,
+      'data_b64':base64.b64encode(data).decode('ascii') if data is not None else None,
+    })
+    if bridged is None:
+        return _ORIGINAL_URLOPEN(request, timeout=timeout, *args, **kwargs)
+    for key in ('status','final_url','body_b64'):
+        if key not in bridged:
+            raise Blocker('EXTERNAL_URLOPEN_RESPONSE_INCOMPLETE:'+key)
+    try:
+        raw=base64.b64decode(str(bridged['body_b64']),validate=True)
+    except Exception as exc:
+        raise Blocker('EXTERNAL_URLOPEN_BODY_INVALID') from exc
+    status=int(bridged['status'])
+    final_url=str(bridged['final_url'])
+    headers=bridged.get('headers') or {}
+    if status >= 400:
+        raise urllib.error.HTTPError(final_url,status,'external bridge HTTP error',headers,io.BytesIO(raw))
+    return _ExternalBridgeHTTPResponse(raw,status,final_url,headers)
+
+def _activate_external_http_bridge():
+    if os.environ.get('PROJECT_BRAIN_EXTERNAL_TOOL_BRIDGE_DIR','').strip():
+        urllib.request.urlopen=_bridge_aware_urlopen
 
 def run_http(step):
     bridged=_external_tool_bridge("http_get",{
@@ -4624,7 +4673,20 @@ def _load_capability_planner():
     spec.loader.exec_module(module)
     return module
 
+def _external_package_name_searcher(effect,ecosystem,tokens,limit,timeout_s):
+    bridged=_external_tool_bridge("package_name_search",{
+      "effect":str(effect),"ecosystem":str(ecosystem),
+      "tokens":[str(x) for x in tokens],"limit":int(limit),"timeout_s":int(timeout_s),
+    })
+    if bridged is None:
+        return []
+    names=bridged.get("names")
+    if not isinstance(names,list):
+        raise Blocker("EXTERNAL_PACKAGE_SEARCH_RESPONSE_INVALID")
+    return [str(x) for x in names]
+
 def _load_capability_discovery():
+    _activate_external_http_bridge()
     path=pathlib.Path(__file__).resolve().with_name("capability_discovery.py")
     spec=importlib.util.spec_from_file_location("project_brain_capability_discovery",path)
     if spec is None or spec.loader is None:
@@ -4632,6 +4694,8 @@ def _load_capability_discovery():
     module=importlib.util.module_from_spec(spec)
     sys.modules[spec.name]=module
     spec.loader.exec_module(module)
+    if hasattr(module,"set_external_package_name_searcher"):
+        module.set_external_package_name_searcher(_external_package_name_searcher)
     return module
 
 def _load_goal_compiler():
@@ -4645,6 +4709,7 @@ def _load_goal_compiler():
     return module
 
 def _load_auto_capability_acquisition():
+    _activate_external_http_bridge()
     path=pathlib.Path(__file__).resolve().with_name("auto_capability_acquisition.py")
     spec=importlib.util.spec_from_file_location("project_brain_auto_capability_acquisition",path)
     if spec is None or spec.loader is None:
@@ -4657,6 +4722,9 @@ def _load_auto_capability_acquisition():
         sys.path.insert(0,runtime_dir)
     try:
         spec.loader.exec_module(module)
+        discovery_module=getattr(module.auto_pypi_library_acquisition,"capability_discovery",None)
+        if discovery_module is not None and hasattr(discovery_module,"set_external_package_name_searcher"):
+            discovery_module.set_external_package_name_searcher(_external_package_name_searcher)
     finally:
         if added:
             try:
