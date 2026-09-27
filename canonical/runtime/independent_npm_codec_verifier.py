@@ -34,7 +34,7 @@ def _discovery_terms(format_name,producer_project):
     terms=[]
     tokens=[
         x.lower()
-        for x in re.findall(r"[A-Za-z0-9][A-Za-z0-9._+-]{1,80}",str(producer_project or ""))
+        for x in re.findall(r"[A-Za-z0-9]+",str(producer_project or ""))
     ]
     generic={"py","python","js","javascript","node","nodejs","lib","library","codec","package"}
     expanded=[]
