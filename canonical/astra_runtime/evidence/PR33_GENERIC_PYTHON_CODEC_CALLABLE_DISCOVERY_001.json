@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_PR33_GENERIC_PYTHON_CODEC_CALLABLE_DISCOVERY_VERIFICATION_V1",
+  "base_revision": "6f7ce7702b45f5952a53fcd3b2ae2d64b02b4e65",
+  "branch": "research/generic-python-codec-callable-discovery-20260927",
+  "exact_branch_blobs": {
+    "canonical/runtime/python_codec_probe.py": "fc8b5005a9888422e3cb61f6cf0bd147c740ec84",
+    "canonical/tests/test_python_codec_probe.py": "f531e9fda2660fd03d2639c697b630c6e46259a9",
+    "canonical/runtime/auto_pypi_library_acquisition.py": "6387bd7b8f1dba8bb9f66240e3ebb2627085dd2f"
+  },
+  "execution": {
+    "platform": "linux",
+    "incremental_spend_usd": 0,
+    "user_device_used": false,
+    "val_town_used": false,
+    "syntax_pass": true,
+    "focused_regressions": {
+      "passed": 3,
+      "total": 3
+    },
+    "first_attempt_environment_failure": {
+      "code": "PYCACHE_PERMISSION_DENIED",
+      "classification": "EXECUTION_ENVIRONMENT_ONLY",
+      "code_assertions_executed": false
+    },
+    "rerun_with_external_pycache": {
+      "exit_code": 0
+    }
+  },
+  "real_candidate_replay": {
+    "source_repository": "NeuroJSON/pybj",
+    "revision": "554def000aa473c4d0e5eaa3406287cea69c73a1",
+    "source_files": 6,
+    "git_blob_mismatches": 0,
+    "module": "bjdata",
+    "discovered_encode_callable": "dumpb",
+    "discovered_decode_callable": "loadb",
+    "pair_discovery": "bounded_public_semantic_callables",
+    "semantic_roundtrip": true,
+    "probe_output_bytes": 45,
+    "probe_output_sha256": "ac964da082805ae196664d94905c9b869278dd916af49af886bba88bcb3599e6"
+  },
+  "verified_properties": [
+    "codec callable discovery is not package-name specific",
+    "public unrelated callables are excluded",
+    "dump/load byte-style APIs are discovered generically",
+    "semantic round-trip remains the acceptance authority",
+    "candidate import and probing remain in a fresh child Python process",
+    "real BJData source tree is byte-bound to preserved Git blob identities"
+  ],
+  "promotion_scope": "GENERIC_PYTHON_CODEC_CALLABLE_DISCOVERY_ONLY__NO_P_REAL_CLAIM",
+  "p_real_claim": 0
+}
