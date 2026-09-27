@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_RECONCILIATION_V1",
+  "reconciliation_id": "POST-PR20-FRONTIER-20260927",
+  "base_main": "86258402402550a543716615b188648f61ea42fd",
+  "evidence_presence_class": "SUPERSEDED_BY_NEWER_CANONICAL_STATE",
+  "superseded_claim": "CURRENT_MINIMAL_ORTHOGONAL_MISSION_PORTFOLIO_AND_SHARED_RUNTIME_STATE_NOT_RECONCILED_FROM_LIVE_EVIDENCE",
+  "primary_evidence": [
+    {
+      "path": "canonical/astra_runtime/evidence_ledgers/GENERIC_NATIVE_PROBE_RECOVERY_MAIN_001.jsonl",
+      "finding": "PR20 progressed through EXECUTED, VERIFIED, and PROMOTED."
+    },
+    {
+      "path": "canonical/astra_runtime/evidence/PR20_GENERIC_NATIVE_PROBE_RECOVERY_001__VERIFICATION.json",
+      "finding": "Exact private-repo reconstruction and full canonical suite verified at zero incremental spend without the user device."
+    },
+    {
+      "path": "canonical/runtime/EXECUTOR_POLICY_V1.json",
+      "finding": "Executor authority is provider-neutral and named devices are optional."
+    },
+    {
+      "path": "canonical/astra_runtime/PORTFOLIO_STATE_V1.json",
+      "finding": "Portfolio was already RECONCILED_ACTIVE before the later PR20 executor proof."
+    }
+  ],
+  "preserved_truth": {
+    "superworker_real": 0,
+    "whole_definition_failed_gate_count": 7,
+    "failed_gates_upgraded_by_this_reconciliation": [],
+    "windows_gui_global_blocker": false,
+    "val_town_allowed": false
+  },
+  "new_frontier": "MINIMAL_ORTHOGONAL_REAL_MISSION_PORTFOLIO_NOT_YET_EXECUTED_ON_CURRENT_SHARED_RUNTIME",
+  "next_action": "Execute the smallest fresh orthogonal mission portfolio and repair only observed generic blockers.",
+  "incremental_spend_usd": 0
+}
