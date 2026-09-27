@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_PR34_SOURCE_CODEC_VERIFICATION_V1",
+  "pr": 34,
+  "executable_revision": "f5f7ee0780e0ff90ae79d85677814380a9a69389",
+  "base_revision": "d7c96c14317484d4fcd0ef6448c122d2fb2cf524",
+  "status": "VERIFIED_WITHIN_PROMOTION_SCOPE",
+  "incremental_spend_usd": 0,
+  "user_device_used": false,
+  "val_town_used": false,
+  "exact_branch_blobs": {
+    "canonical/runtime/auto_python_source_codec_acquisition.py": "2dded11a5e81950607e22a846b2bbab0747cc5de",
+    "canonical/runtime/python_codec_probe.py": "fc8b5005a9888422e3cb61f6cf0bd147c740ec84",
+    "canonical/tests/test_auto_python_source_codec_acquisition.py": "d4570bfce6a00d4b8f09d540cbef44f5f9d0dfd6",
+    "canonical/runtime/auto_capability_acquisition.py": "69dc341169d18cf6733e5c0e24718996e1124e64",
+    "canonical/runtime/bound_capabilities/python_source_tree_codec.py": "8f452c01b2c88a9bd7663f8dc753b24b2e7f7f05",
+    "canonical/runtime/github_source_codec_runner.py": "d7fc51bbb9bab851dd0ba2349f3438cb928299f0"
+  },
+  "focused_execution": {
+    "syntax": "PASS",
+    "tests_passed": 3,
+    "tests_failed": 0,
+    "exact_git_blob_match": true
+  },
+  "routing_execution": {
+    "exact_router_git_blob_match": true,
+    "observed_call_order": [
+      "pypi",
+      "npm",
+      "source"
+    ],
+    "apt_called": false,
+    "result_supplier": "source",
+    "pass": true
+  },
+  "real_supplier_execution": {
+    "repository": "NeuroJSON/pybj",
+    "revision": "554def000aa473c4d0e5eaa3406287cea69c73a1",
+    "source_files": 6,
+    "source_git_blob_mismatches": 0,
+    "content_addressed_tree_sha256": "ae3772f35f25a48022e404dcc27e461f8b0eb2c62e9ef86f0ff54ac78e1ca5a6",
+    "total_source_bytes": 83841,
+    "dispatch_status": "ACQUISITION_DISPATCHED",
+    "supplier": "NeuroJSON/pybj@554def000aa473c4d0e5eaa3406287cea69c73a1",
+    "capability_id": "auto.source.pybj",
+    "encode_callable": "dumpb",
+    "decode_callable": "loadb",
+    "pair_discovery": "bounded_public_semantic_callables",
+    "probe_isolation": "fresh_child_python_process",
+    "probe_output_bytes": 45,
+    "probe_output_sha256": "ac964da082805ae196664d94905c9b869278dd916af49af886bba88bcb3599e6",
+    "pending_status": "PENDING_INDEPENDENT_VERIFICATION",
+    "source_type": "git_source_tree",
+    "independent_verifier_source_tree_count": 0
+  },
+  "bound_adapter_execution": {
+    "exact_adapter_git_blob_match": true,
+    "exact_runner_git_blob_match": true,
+    "encode_output_verified": true,
+    "encode_output_bytes": 45,
+    "encode_output_sha256": "ac964da082805ae196664d94905c9b869278dd916af49af886bba88bcb3599e6",
+    "decode_verify": true
+  },
+  "deterministic_adjudication": {
+    "verifier_id": "git-blob-crosscheck+focused-regression+real-source-tree-adjudicator-v1",
+    "predicates": {
+      "exact_private_branch_files": true,
+      "unsafe_build_hooks_not_executed": true,
+      "source_tree_git_blobs_verified": true,
+      "semantic_contract_discovered": true,
+      "pending_binding_only": true,
+      "bound_adapter_real_encode": true,
+      "bound_adapter_roundtrip": true,
+      "supplier_routing_reaches_source_tree": true,
+      "zero_incremental_spend": true
+    },
+    "verified": true
+  },
+  "promotion_scope": [
+    "content-addressed Python source-tree codec acquisition",
+    "generic supplier routing to the source-tree supplier",
+    "bound source-tree codec encode/decode adapter"
+  ],
+  "not_claimed": [
+    "independent verifier acquisition from a distinct implementation",
+    "completion of SI-REAL-UBJSON-SNAPSHOT-001",
+    "Superworker P_real"
+  ],
+  "next_observed_blocker": "INDEPENDENT_VERIFIER_SOURCE_TREE_UNAVAILABLE_FOR_CURRENT_SUPPLIER_RESPONSE"
+}
