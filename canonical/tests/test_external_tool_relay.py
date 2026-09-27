@@ -242,6 +242,41 @@ class ExternalToolRelayTests(unittest.TestCase):
             self.assertTrue((root / f"{search_sha}.response.json").exists())
             self.assertFalse((root / f"{simple_sha}.response.json").exists())
 
+    def test_services_bounded_pypi_wheel_closure(self):
+        with tempfile.TemporaryDirectory() as td:
+            fake_wheel = pathlib.Path(td) / "demo-1.0-py3-none-any.whl"
+            fake_wheel.write_bytes(b"wheel-bytes")
+
+            class Result:
+                returncode = 0
+                stdout = ""
+                stderr = ""
+
+            def runner(argv, text, capture_output, timeout):
+                dest = pathlib.Path(argv[argv.index("--dest") + 1])
+                (dest / fake_wheel.name).write_bytes(fake_wheel.read_bytes())
+                return Result()
+
+            observed = relay._service_pypi_wheel_closure(
+                {
+                    "payload": {
+                        "project": "demo",
+                        "version": "1.0",
+                        "max_wheels": 32,
+                        "max_total_bytes": 160000000,
+                    }
+                },
+                runner=runner,
+            )
+            self.assertEqual(observed["wheel_count"], 1)
+            artifact = observed["artifacts"][0]
+            self.assertEqual(artifact["filename"], fake_wheel.name)
+            self.assertEqual(
+                artifact["sha256"],
+                hashlib.sha256(b"wheel-bytes").hexdigest(),
+            )
+            self.assertEqual(base64.b64decode(artifact["content_b64"]), b"wheel-bytes")
+
 
 if __name__ == "__main__":
     unittest.main()
