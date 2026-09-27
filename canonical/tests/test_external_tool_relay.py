@@ -68,5 +68,33 @@ class RelayTests(unittest.TestCase):
             relay.execute_urlopen(payload)
 
 
+    @mock.patch.object(relay, "_source_tree_from_repo")
+    @mock.patch.object(relay, "_github_api_json")
+    def test_services_bounded_python_source_tree_request(self, github_json, source_tree):
+        github_json.return_value = {"items": [{"full_name": "NeuroJSON/pybj"}]}
+        source_tree.return_value = {
+            "schema": "PROJECT_BRAIN_EXTERNAL_SOURCE_TREE_V1",
+            "repository": "NeuroJSON/pybj",
+            "revision": "a" * 40,
+            "files": [{
+                "path": "bjdata/__init__.py",
+                "git_blob_sha": "b" * 40,
+                "content": "def dumpb(x): return b'x'\n",
+            }],
+        }
+        result = relay.execute_python_source_tree({
+            "goal": "Encode input as UBJSON and save output.ubj",
+            "allowed_suffixes": [".py"],
+            "max_files_per_tree": 128,
+            "max_total_bytes_per_tree": 2000000,
+            "max_trees": 12,
+            "require_git_blob_sha": True,
+        })
+        self.assertEqual(len(result["trees"]), 1)
+        self.assertEqual(result["trees"][0]["repository"], "NeuroJSON/pybj")
+        source_tree.assert_called_once()
+
+
+
 if __name__ == "__main__":
     unittest.main()
