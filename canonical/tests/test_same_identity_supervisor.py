@@ -134,6 +134,7 @@ class SameIdentitySupervisorTests(unittest.TestCase):
                 seen["cwd"] = cwd
                 seen["agent"] = env.get("PROJECT_BRAIN_AGENT_ID")
                 seen["task"] = env.get("PROJECT_BRAIN_TASK_ID")
+                seen["bridge"] = env.get("PROJECT_BRAIN_EXTERNAL_TOOL_BRIDGE_DIR")
                 return supervisor.RuntimeResult(0, "runtime ok\n", "")
 
             code2, receipt2 = supervisor.run_once(
@@ -145,6 +146,11 @@ class SameIdentitySupervisorTests(unittest.TestCase):
             self.assertEqual(receipt2["checkpoint_count"], 1)
             self.assertEqual(seen["agent"], self.AGENT)
             self.assertEqual(seen["task"], "TASK-1")
+            self.assertEqual(
+                pathlib.Path(seen["bridge"]),
+                root/"canonical"/"same_identity_worker"/"external_tool_bridge"/"TASK-1",
+            )
+            self.assertTrue(pathlib.Path(seen["bridge"]).is_dir())
             persisted = json.loads((state/"TASK-1.json").read_text())
             self.assertEqual(persisted["agent_id"], self.AGENT)
             self.assertEqual(persisted["status"], "COMPLETE")
