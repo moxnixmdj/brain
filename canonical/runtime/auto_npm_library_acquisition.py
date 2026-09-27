@@ -214,7 +214,7 @@ def _probe_contract(candidate,root):
 def dispatch(goal,mission_id,mission_path,root,discovery=None):
     root=pathlib.Path(root).resolve()
     origin_mission_sha256=_origin_mission_sha256(root,mission_path)
-    if not supports(goal):
+    if not supports_effect(goal):
         raise AutoNpmAcquisitionFailure("NPM_CONTRACT_CLASS_UNSUPPORTED")
     candidates=_search_registry(goal,limit=30)
     diag_rel=f"canonical/astra_runtime/evidence/{mission_id}__AUTO_NPM_LIBRARY_ACQUISITION.json"
