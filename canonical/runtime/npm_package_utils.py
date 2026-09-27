@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Safe npm registry artifact verification and materialization helpers."""
 from __future__ import annotations
-import base64,hashlib,io,json,pathlib,re,tarfile,urllib.parse,urllib.request
+import base64,hashlib,io,json,pathlib,re,subprocess,tarfile,urllib.parse,urllib.request
 
 
 class NpmPackageFailure(RuntimeError):
@@ -135,6 +135,92 @@ def safe_extract_package(raw,destination,max_files=6000,max_unpacked_bytes=80_00
       "file_count":count,
       "unpacked_bytes":total,
       "package_json":json.loads(package_json.read_text(encoding="utf-8")),
+    }
+
+
+_NODE_BUILTINS_CACHE=None
+
+def node_builtin_modules():
+    """Return runtime-proven Node builtins, normalized without the node: prefix."""
+    global _NODE_BUILTINS_CACHE
+    if _NODE_BUILTINS_CACHE is not None:
+        return set(_NODE_BUILTINS_CACHE)
+    try:
+        proc=subprocess.run(
+            ["node","-e",
+             "const {builtinModules}=require('module');"
+             "console.log(JSON.stringify(builtinModules))"],
+            text=True,capture_output=True,timeout=15
+        )
+    except Exception as exc:
+        raise NpmPackageFailure(
+            "NODE_BUILTIN_MODULE_DISCOVERY_FAILED:"+type(exc).__name__+":"+str(exc)
+        ) from exc
+    if proc.returncode!=0:
+        raise NpmPackageFailure(
+            "NODE_BUILTIN_MODULE_DISCOVERY_FAILED:"+proc.stderr[-800:]
+        )
+    try:
+        values=json.loads(proc.stdout)
+    except Exception as exc:
+        raise NpmPackageFailure("NODE_BUILTIN_MODULE_DISCOVERY_JSON_INVALID") from exc
+    if not isinstance(values,list):
+        raise NpmPackageFailure("NODE_BUILTIN_MODULE_DISCOVERY_JSON_INVALID")
+    builtins=set()
+    for raw in values:
+        name=str(raw or "").strip()
+        if name.startswith("node:"):
+            name=name[5:]
+        if name:
+            builtins.add(name)
+            builtins.add(name.split("/",1)[0])
+    _NODE_BUILTINS_CACHE=frozenset(builtins)
+    return set(_NODE_BUILTINS_CACHE)
+
+
+def validate_builtin_only_runtime_dependencies(meta,max_declared=24):
+    """Accept declared runtime deps only when this Node runtime proves them builtin."""
+    dependency_fields=("dependencies","optionalDependencies","peerDependencies")
+    builtins=node_builtin_modules()
+    declared=[]
+    external=[]
+    for field in dependency_fields:
+        deps=meta.get(field) or {}
+        if not isinstance(deps,dict):
+            raise NpmPackageFailure("NPM_"+field.upper()+"_INVALID")
+        for raw_name,raw_spec in deps.items():
+            name=str(raw_name or "").strip()
+            if not name:
+                raise NpmPackageFailure("NPM_RUNTIME_DEPENDENCY_NAME_INVALID")
+            normalized=name[5:] if name.startswith("node:") else name
+            root=normalized.split("/",1)[0]
+            rec={"field":field,"name":name,"spec":str(raw_spec or "")}
+            declared.append(rec)
+            if normalized not in builtins and root not in builtins:
+                external.append(rec)
+    if len(declared)>int(max_declared):
+        raise NpmPackageFailure("NPM_RUNTIME_DEPENDENCY_COUNT_LIMIT")
+    if external:
+        raise NpmPackageFailure(
+            "NPM_EXTERNAL_RUNTIME_DEPENDENCIES_UNSUPPORTED:"
+            +json.dumps(external,sort_keys=True)[:1200]
+        )
+    bundled=meta.get("bundledDependencies")
+    if bundled is None:
+        bundled=meta.get("bundleDependencies")
+    if bundled not in (None,[],{}):
+        raise NpmPackageFailure("NPM_BUNDLED_DEPENDENCIES_UNSUPPORTED")
+    scripts=meta.get("scripts") or {}
+    if not isinstance(scripts,dict):
+        scripts={}
+    forbidden=[k for k in ("preinstall","install","postinstall") if str(scripts.get(k) or "").strip()]
+    if forbidden:
+        raise NpmPackageFailure("NPM_LIFECYCLE_SCRIPTS_REJECTED:"+",".join(forbidden))
+    return {
+      "declared_dependency_count":len(declared),
+      "external_runtime_dependency_count":0,
+      "builtin_runtime_dependencies":sorted({x["name"] for x in declared}),
+      "lifecycle_scripts_rejected":False,
     }
 
 
