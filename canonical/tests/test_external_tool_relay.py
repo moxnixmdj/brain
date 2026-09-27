@@ -116,6 +116,30 @@ class ExternalToolRelayTests(unittest.TestCase):
             observed = json.loads(response.read_text(encoding="utf-8"))
             self.assertEqual(observed["result"]["names"], ["ubjson-x", "xubj"])
 
+    def test_unavailable_pypi_wheel_candidate_is_domain_negative(self):
+        with tempfile.TemporaryDirectory() as td:
+            bridge = pathlib.Path(td)
+            req = make_request("pypi_wheel_closure", {
+                "project": "missing-package",
+                "version": "1.0.0",
+                "metadata_url": "https://pypi.org/pypi/missing-package/1.0.0/json",
+                "candidate_wheels": [],
+                "max_wheels": 32,
+                "max_total_bytes": 160000000,
+            })
+            path = self._write(bridge, req)
+            class Proc:
+                returncode = 1
+                stderr = "ERROR: Could not find a version that satisfies the requirement missing-package==1.0.0\nERROR: No matching distribution found for missing-package==1.0.0"
+                stdout = ""
+            import unittest.mock as mock
+            with mock.patch.object(relay.subprocess, "run", return_value=Proc()):
+                response = relay.service_request(path)
+            observed = json.loads(response.read_text(encoding="utf-8"))
+            self.assertEqual(observed["status"], "ok")
+            self.assertEqual(observed["result"]["artifacts"], [])
+            self.assertEqual(observed["result"]["resolution_status"], "NO_COMPATIBLE_WHEEL_CLOSURE")
+
     def test_accepts_bounded_pypi_wheel_closure_contract(self):
         with tempfile.TemporaryDirectory() as td:
             bridge = pathlib.Path(td)
