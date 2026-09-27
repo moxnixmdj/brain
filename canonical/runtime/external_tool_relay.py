@@ -14,6 +14,7 @@ import json
 import os
 import pathlib
 import tempfile
+import urllib.error
 import urllib.parse
 import urllib.request
 from typing import Any
@@ -113,14 +114,24 @@ def _service_urlopen(
         if str(k).lower() in {"accept", "user-agent", "accept-encoding"}
     }
     req = urllib.request.Request(url, method=method, headers=safe_headers)
-    with opener(req, timeout=timeout) as response:
+    try:
+        response = opener(req, timeout=timeout)
+    except urllib.error.HTTPError as exc:
+        # HTTP errors are valid external observations. Return them through the
+        # bridge so the network-isolated worker sees the same urllib semantics.
+        response = exc
+    try:
         raw = response.read(max_body_bytes + 1)
         if len(raw) > max_body_bytes:
             raise RelayError("RESPONSE_TOO_LARGE")
-        status = int(getattr(response, "status", 200))
+        status = int(getattr(response, "status", getattr(response, "code", 200)))
         final_url = str(response.geturl())
         _allowed_url(final_url, allowed_hosts)
         response_headers = dict(getattr(response, "headers", {}) or {})
+    finally:
+        close = getattr(response, "close", None)
+        if callable(close):
+            close()
     return {
         "status": status,
         "final_url": final_url,
@@ -200,6 +211,11 @@ def service_pending(
             request_path.name.replace(".request.json", ".response.json")
         )
         if response_path.exists():
+            continue
+        request = _read_json(request_path)
+        # Service only relay kinds implemented here. Leave other pending kinds
+        # untouched so the mission can prove whether they are actually causal.
+        if request.get("kind") != "urlopen":
             continue
         serviced.append(
             service_request(
