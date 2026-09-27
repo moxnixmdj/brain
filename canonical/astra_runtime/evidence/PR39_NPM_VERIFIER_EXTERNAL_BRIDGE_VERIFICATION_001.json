@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_PR39_NPM_VERIFIER_EXTERNAL_BRIDGE_VERIFICATION_V1",
+  "observed_execution": {
+    "syntax_pass": true,
+    "focused_bridge_tests": {
+      "passed": 1,
+      "total": 1
+    },
+    "combined_source_and_bridge_tests": {
+      "passed": 6,
+      "total": 6
+    },
+    "real_mission": {
+      "mission_id": "ASTRA-REAL-SAME-IDENTITY-UBJSON-CANONICAL-SNAPSHOT-001",
+      "task_id": "SI-REAL-UBJSON-SNAPSHOT-001",
+      "agent_id": "SUPERWORKER-UNIFIED-1",
+      "runtime_attempt_count": 4,
+      "checkpoint_count": 1,
+      "same_identity_bound": true,
+      "prior_failure_class": "direct DNS resolution in independent npm verifier subprocess",
+      "observed_after_repair": "EXTERNAL_TOOL_REQUEST_PENDING:39b295c92b74628a002b70ee4b1966e0dacd8d01e71e840eddb0ef906ad7eff6",
+      "bridge_request_kind": "urlopen",
+      "bridge_request_url": "https://registry.npmjs.org/-/v1/search?text=ubj&size=40",
+      "transport_outcome": "identity-bound provider-neutral bridge request emitted",
+      "mission_complete": false
+    },
+    "incremental_spend_usd": 0,
+    "user_device_used": false,
+    "val_town_used": false
+  },
+  "verified": true,
+  "promotion_scope": "independent npm verifier external-tool transport inheritance only",
+  "next_blocker": "external npm evidence/tarball fulfillment",
+  "no_superworker_claim": true
+}
