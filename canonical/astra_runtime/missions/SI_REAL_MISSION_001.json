@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "SI-REAL-MISSION-001",
+  "goal": "Inspect the live canonical Project Brain state using repository evidence. Read canonical/CANONICAL_POINTER.json and canonical/reconciliation/SAME_IDENTITY_INTEGRATION_FRONTIER_20260927_V1.json. Determine the exact current Superworker reality value, exact remaining causal blocker, and the next allowed causal action without inventing or repairing anything. Finish with a single JSON object containing schema PROJECT_BRAIN_CONSISTENCY_REPORT_V1, superworker_real, critical_blocker, next_action, and evidence_paths.",
+  "steps": [
+    {
+      "id": "reason-over-live-canonical-state",
+      "adapter": "goal",
+      "allow_optional_model_planner": true,
+      "max_cycles": 4,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "PROJECT_BRAIN_CONSISTENCY_REPORT_V1"
+      }
+    },
+    {
+      "id": "persist-consistency-report",
+      "adapter": "shell",
+      "command": "set -euo pipefail\npython - <<'PY'\nimport json,os,pathlib\nraw=os.environ['ASTRA_STEP_0_STDOUT']\nobj=json.loads(raw)\nassert obj['schema']=='PROJECT_BRAIN_CONSISTENCY_REPORT_V1'\nassert obj['superworker_real']==0\nassert obj['critical_blocker']=='SAME_DURABLE_COGNITIVE_IDENTITY_HAS_NOT_YET_EXECUTED_THE_FULL_SHARED_RUNTIME_LOOP_END_TO_END'\nobj['worker_id']=os.environ.get('PROJECT_BRAIN_AGENT_ID')\nobj['task_id']=os.environ.get('PROJECT_BRAIN_TASK_ID')\np=pathlib.Path('canonical/same_identity_worker/evidence/SI_REAL_MISSION_001__CONSISTENCY_REPORT.json')\np.parent.mkdir(parents=True,exist_ok=True)\np.write_text(json.dumps(obj,indent=2,sort_keys=True)+'\\n',encoding='utf-8')\nprint('CONSISTENCY_REPORT_PERSISTED')\nPY",
+      "verify": {
+        "type": "json_field_equals",
+        "path": "canonical/same_identity_worker/evidence/SI_REAL_MISSION_001__CONSISTENCY_REPORT.json",
+        "field": "worker_id",
+        "value": "SUPERWORKER-UNIFIED-1"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "user_device_used": false,
+    "val_town_used": false,
+    "same_identity_required": true
+  }
+}
