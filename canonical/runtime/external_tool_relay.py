@@ -13,6 +13,7 @@ import hashlib
 import json
 import os
 import pathlib
+import re
 import tempfile
 import urllib.error
 import urllib.parse
@@ -140,6 +141,94 @@ def _service_urlopen(
     }
 
 
+def _service_package_name_search(
+    request: dict[str, Any],
+    *,
+    opener=urllib.request.urlopen,
+) -> dict[str, Any]:
+    payload = request.get("payload")
+    if not isinstance(payload, dict):
+        raise RelayError("PAYLOAD_INVALID")
+    ecosystem = str(payload.get("ecosystem") or "").strip().lower()
+    tokens = [
+        str(x).strip().lower()
+        for x in (payload.get("tokens") or [])
+        if str(x).strip()
+    ]
+    limit = int(payload.get("limit", 32))
+    timeout = float(payload.get("timeout_s", 20))
+    if not tokens or limit < 1 or limit > 100 or not (0 < timeout <= 60):
+        raise RelayError("PACKAGE_SEARCH_INPUT_INVALID")
+
+    if ecosystem == "npm":
+        query = urllib.parse.quote(" ".join(tokens), safe="")
+        url = f"https://registry.npmjs.org/-/v1/search?text={query}&size={min(limit, 100)}"
+        req = urllib.request.Request(url, headers={"User-Agent": "ProjectBrain-ExternalRelay/1"})
+        with opener(req, timeout=timeout) as response:
+            raw = response.read(2_000_001)
+        if len(raw) > 2_000_000:
+            raise RelayError("PACKAGE_SEARCH_RESPONSE_TOO_LARGE")
+        payload_json = json.loads(raw.decode("utf-8"))
+        names = []
+        for item in payload_json.get("objects") or []:
+            package = (item or {}).get("package") or {}
+            name = str(package.get("name") or "").strip()
+            if name and name not in names:
+                names.append(name)
+        return {"names": names[:limit], "source": "NPM_REGISTRY_SEARCH"}
+
+    if ecosystem != "pypi":
+        raise RelayError("PACKAGE_SEARCH_ECOSYSTEM_UNSUPPORTED:" + ecosystem)
+
+    query = urllib.parse.quote(" ".join(tokens), safe="")
+    search_url = f"https://pypi.org/search/?q={query}"
+    req = urllib.request.Request(
+        search_url,
+        headers={"User-Agent": "ProjectBrain-ExternalRelay/1", "Accept-Encoding": "identity"},
+    )
+    try:
+        with opener(req, timeout=timeout) as response:
+            raw = response.read(2_000_001)
+    except urllib.error.HTTPError as exc:
+        raw = exc.read(2_000_001)
+    if len(raw) > 2_000_000:
+        raise RelayError("PACKAGE_SEARCH_RESPONSE_TOO_LARGE")
+    text = raw.decode("utf-8", "replace")
+    names = []
+    for match in re.finditer(r'href=["\\\']/project/([^/"\\\']+)/', text, re.I):
+        name = urllib.parse.unquote(match.group(1)).strip()
+        if name and name not in names:
+            names.append(name)
+    if names:
+        return {"names": names[:limit], "source": "PYPI_SEARCH"}
+
+    # PyPI search may present an anti-bot page. Fall back to a bounded scan of
+    # the authoritative Simple index, but return only the tiny matched name set.
+    req = urllib.request.Request(
+        "https://pypi.org/simple/",
+        headers={"User-Agent": "ProjectBrain-ExternalRelay/1", "Accept-Encoding": "identity"},
+    )
+    with opener(req, timeout=min(timeout, 60)) as response:
+        raw = response.read(64 * 1024 * 1024 + 1)
+    if len(raw) > 64 * 1024 * 1024:
+        raise RelayError("PYPI_SIMPLE_INDEX_TOO_LARGE")
+    text = raw.decode("utf-8", "replace")
+    candidates = []
+    for match in re.finditer(r">([^<>]+)</a>", text, re.I):
+        name = match.group(1).strip()
+        low = name.lower()
+        score = max((len(t) for t in tokens if t in low), default=0)
+        if score:
+            candidates.append((-score, len(name), low, name))
+    candidates.sort()
+    for _score, _length, _low, name in candidates:
+        if name not in names:
+            names.append(name)
+        if len(names) >= limit:
+            break
+    return {"names": names, "source": "PYPI_SIMPLE_BOUNDED_MATCH"}
+
+
 def service_request(
     request_path: pathlib.Path,
     *,
@@ -160,7 +249,7 @@ def service_request(
     if not isinstance(task_id, str) or not task_id:
         raise RelayError("TASK_ID_MISSING")
     kind = str(request.get("kind") or "")
-    if kind != "urlopen":
+    if kind not in {"urlopen", "package_name_search"}:
         raise RelayError("KIND_FORBIDDEN:" + kind)
 
     response_path = request_path.with_name(request_sha + ".response.json")
@@ -176,12 +265,15 @@ def service_request(
             raise RelayError("EXISTING_RESPONSE_BINDING_INVALID")
         return response_path
 
-    result = _service_urlopen(
-        request,
-        allowed_hosts=allowed_hosts,
-        opener=opener,
-        max_body_bytes=max_body_bytes,
-    )
+    if kind == "urlopen":
+        result = _service_urlopen(
+            request,
+            allowed_hosts=allowed_hosts,
+            opener=opener,
+            max_body_bytes=max_body_bytes,
+        )
+    else:
+        result = _service_package_name_search(request, opener=opener)
     response = {
         "schema": RESPONSE_SCHEMA,
         "request_sha256": request_sha,
@@ -215,7 +307,7 @@ def service_pending(
         request = _read_json(request_path)
         # Service only relay kinds implemented here. Leave other pending kinds
         # untouched so the mission can prove whether they are actually causal.
-        if request.get("kind") != "urlopen":
+        if request.get("kind") not in {"urlopen", "package_name_search"}:
             continue
         serviced.append(
             service_request(
