@@ -1,0 +1,14 @@
+{
+  "schema": "PROJECT_BRAIN_SAME_IDENTITY_TASK_V1",
+  "task_id": "SI-REAL-MISSION-001",
+  "agent_id": "SUPERWORKER-UNIFIED-1",
+  "mission_path": "canonical/astra_runtime/missions/SI_REAL_MISSION_001.json",
+  "mission_sha256": "fc7f08854695c958456e12843fde1351fb4a28f1f1db1ce510956bff8176aef6",
+  "priority": 100,
+  "prerequisites": [
+    "canonical/CANONICAL_POINTER.json",
+    "canonical/reconciliation/SAME_IDENTITY_INTEGRATION_FRONTIER_20260927_V1.json"
+  ],
+  "incremental_spend_usd": 0,
+  "checkpoint_before_runtime_once": true
+}
