@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ASTRA_SHARED_RUNTIME_PORTFOLIO_STATE_V1",
   "canonical_generation": "2026-09-22-astra-shared-runtime-portfolio-restored",
-  "status": "RECONCILED_ACTIVE",
+  "status": "RECONCILED_ACTIVE_POST_PR20",
   "optimization_target": "MINIMIZE_TIME_UNTIL_ALL_TARGET_CAPABILITIES_WORK_TOGETHER_IN_ONE_SHARED_RUNTIME",
   "runtime_components_in_use": [
     "GPT-5.6 Sol cognition",
@@ -55,19 +55,28 @@
     }
   ],
   "uncovered_pressure_dimensions": [
-    "direct Windows GUI/browser delivery from a real source artifact when an authorized host is available",
-    "autonomous continuation without a user-triggered invocation, only if it becomes naturally necessary to complete consequential work"
+    "same cognitive worker dynamically discovers and acquires a capability absent at mission start",
+    "same durable cognitive identity survives context/executor loss via checkpoint and relaunch without replaying completed work",
+    "same worker completes observe→reason→research→act→verify→checkpoint→continue end-to-end",
+    "one independent persistent execution system carries that same cognitive worker through the whole mission"
   ],
-  "next_action": "Recompute T_ASTRA_REAL from live state. The only current blocker on this lane is an offline Windows source host for direct GUI/browser replay; do not wait idly if another independent real mission offers greater expected closure-time reduction. When Mo is online, replay exact source-artifact delivery only if that remains the frontier.",
+  "next_action": "Run one consequential single-identity mission against the shared runtime that simultaneously requires JIT capability acquisition, durable checkpointing, context/executor replacement, same-identity relaunch without replay, completion, and distinct whole-chain verification. Freeze only the first observed blocker and repair it generically.",
   "anti_waste": [
-    "no qualification before operational portfolio closure",
+    "no qualification ceremony before the one integrated mission closes",
     "no provider hunt without an observed blocker",
     "no speculative infrastructure",
     "no duplicate proof or rerun",
     "blocker-local search/reuse before invention",
-    "no critical checkpoint may depend solely on an unmirrored local artifact; mirror required continuation artifacts off-host with hash and canonical reference"
+    "no critical checkpoint may depend solely on an unmirrored local artifact; mirror required continuation artifacts off-host with hash and canonical reference",
+    "no Val Town",
+    "no user-device dependency for this frontier"
   ],
   "incremental_spend_usd": 0,
   "val_town_used": false,
-  "sprites_used": false
+  "sprites_used": false,
+  "post_pr20_reconciliation": {
+    "path": "canonical/qualification/POST_PR20_SUPERWORKER_GATE_RECONCILIATION_V1.json",
+    "proven_by_existing_assets": 3,
+    "remaining_integrated_gates": 4
+  }
 }
