@@ -1,4 +1,5 @@
 name: Real Same-Identity UBJSON Mission
+# synchronize-event trigger after workflow creation
 
 on:
   pull_request:
