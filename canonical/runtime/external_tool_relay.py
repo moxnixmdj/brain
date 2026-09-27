@@ -22,6 +22,7 @@ REQUEST_SCHEMA = "PROJECT_BRAIN_EXTERNAL_TOOL_REQUEST_V1"
 RESPONSE_SCHEMA = "PROJECT_BRAIN_EXTERNAL_TOOL_RESPONSE_V1"
 DEFAULT_ALLOWED_HOSTS = (
     "registry.npmjs.org",
+    "registry.modelcontextprotocol.io",
     "pypi.org",
     "files.pythonhosted.org",
     "github.com",
