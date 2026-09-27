@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Safe npm registry artifact verification and materialization helpers."""
 from __future__ import annotations
-import base64,hashlib,io,json,pathlib,re,tarfile,urllib.parse,urllib.request
+import base64,hashlib,io,json,pathlib,re,subprocess,tarfile,urllib.parse,urllib.request
 
 
 class NpmPackageFailure(RuntimeError):
@@ -162,6 +162,65 @@ def validate_zero_dependency_package(meta):
         raise NpmPackageFailure("NPM_LIFECYCLE_SCRIPTS_REJECTED:"+",".join(forbidden))
     return {
       "dependency_count":0,
+      "lifecycle_scripts_rejected":False,
+    }
+
+
+
+def validate_builtin_only_runtime_dependencies(meta,node_executable="node"):
+    """Allow runtime dependencies only when Node itself provides them.
+
+    This is deliberately narrower than a general npm dependency installer:
+    no dependency package is downloaded or executed, lifecycle scripts remain
+    forbidden, and every declared runtime dependency must be a Node built-in.
+    """
+    scripts=meta.get("scripts") or {}
+    if not isinstance(scripts,dict):
+        scripts={}
+    forbidden=[k for k in ("preinstall","install","postinstall") if str(scripts.get(k) or "").strip()]
+    if forbidden:
+        raise NpmPackageFailure("NPM_LIFECYCLE_SCRIPTS_REJECTED:"+",".join(forbidden))
+    bundled=meta.get("bundledDependencies")
+    if bundled is None:
+        bundled=meta.get("bundleDependencies")
+    if bundled not in (None,[],{}):
+        raise NpmPackageFailure("NPM_BUNDLED_DEPENDENCIES_UNSUPPORTED")
+
+    deps={}
+    for field in ("dependencies","optionalDependencies","peerDependencies"):
+        value=meta.get(field) or {}
+        if not isinstance(value,dict):
+            raise NpmPackageFailure("NPM_"+field.upper()+"_INVALID")
+        deps.update({str(k):str(v) for k,v in value.items()})
+
+    try:
+        proc=subprocess.run(
+            [node_executable,"-e",
+             "process.stdout.write(JSON.stringify(require('module').builtinModules))"],
+            text=True,capture_output=True,timeout=15,check=False,
+        )
+    except Exception as exc:
+        raise NpmPackageFailure("NODE_BUILTIN_DISCOVERY_FAILED:"+type(exc).__name__) from exc
+    if proc.returncode!=0:
+        raise NpmPackageFailure("NODE_BUILTIN_DISCOVERY_FAILED:"+proc.stderr[-500:])
+    try:
+        builtins={str(x).removeprefix("node:") for x in json.loads(proc.stdout)}
+    except Exception as exc:
+        raise NpmPackageFailure("NODE_BUILTIN_DISCOVERY_INVALID") from exc
+
+    unsupported=sorted(
+        name for name in deps
+        if name.removeprefix("node:") not in builtins
+    )
+    if unsupported:
+        raise NpmPackageFailure(
+            "NPM_EXTERNAL_RUNTIME_DEPENDENCIES_UNSUPPORTED:"
+            +json.dumps(unsupported)[:800]
+        )
+    return {
+      "dependency_count":len(deps),
+      "builtin_dependency_count":len(deps),
+      "builtin_dependencies":sorted(deps),
       "lifecycle_scripts_rejected":False,
     }
 
