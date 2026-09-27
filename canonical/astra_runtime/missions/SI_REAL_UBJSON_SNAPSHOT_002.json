@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "SI-REAL-UBJSON-SNAPSHOT-002",
+  "purpose": "Fresh real same-identity mission proving an ordinary UBJSON goal can discover and acquire a missing codec without package hints, execute the transformation, independently verify it with a distinct implementation, and survive a supervisor checkpoint/relaunch.",
+  "goal": "Encode canonical/astra_runtime/fixtures/SI_REAL_UBJSON_SOURCE_002.json as UBJSON and save canonical/astra_runtime/tmp/SI_REAL_UBJSON_002.ubj. Independently decode the UBJSON artifact using a different implementation than the producer and verify the decoded records are exactly identical to canonical/astra_runtime/fixtures/SI_REAL_UBJSON_SOURCE_002.json in values, order, field names, and record count.",
+  "steps": [
+    {
+      "id": "run-real-same-identity-ubjson",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 32,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "fresh_mission_identity": true,
+    "manual_supplier": false,
+    "manual_package_name": false,
+    "manual_capability_id": false,
+    "required_target_effects_supplied_by_mission": false,
+    "semantic_goal_proposals_supplied_by_mission": false,
+    "capability_problem_proposal_supplied_by_mission": false,
+    "controller_actions_supplied_by_mission": false,
+    "originating_mission_must_remain_byte_identical": true,
+    "verified_acquisition_required_before_replan": true,
+    "implementation_independent_verifier_required": true,
+    "current_platform_capability_required": true,
+    "terminal_verifier_must_use_distinct_implementation": true
+  }
+}
