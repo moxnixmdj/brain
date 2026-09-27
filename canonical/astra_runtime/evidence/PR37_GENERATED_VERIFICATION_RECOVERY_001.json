@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_PR37_GENERATED_VERIFICATION_RECOVERY_V1",
+  "executed_revision": "99e4ea52a57d0318ce7252eb9f0528e0c43e5024",
+  "status": "VERIFIED_WITHIN_PROMOTION_SCOPE",
+  "observed_failure": {
+    "mission_id": "ASTRA-REAL-SAME-IDENTITY-UBJSON-CANONICAL-SNAPSHOT-001",
+    "error": "VERIFICATION_MISSION_ALREADY_EXISTS",
+    "prior_verification_mission_id": "ASTRA-AUTO-VERIFY-SOURCE-NEUROJSON-PYBJ-AE3772F35F25",
+    "prior_state": "BLOCKED"
+  },
+  "exact_changed_blobs": {
+    "canonical/runtime/auto_python_source_codec_acquisition.py": "65453b2eed5e678def3f0ab1c4d44182fb0b9a78",
+    "canonical/tests/test_auto_python_source_codec_acquisition.py": "72d39325b177a036aa497979de55998f555e22e5"
+  },
+  "execution": {
+    "git_blob_mismatches": 0,
+    "py_compile_exit": 0,
+    "focused_tests_passed": 5,
+    "focused_tests_failed": 0,
+    "blocked_same_origin_generated_mission_repaired": true,
+    "recovery_receipt_created": true,
+    "complete_generated_mission_rewrite_rejected": true
+  },
+  "policy": "ONLY_SAME_ORIGIN_AUTO_GENERATED_BLOCKED_OR_UNEXECUTED_MISSION_MAY_BE_REPLACED",
+  "incremental_spend_usd": 0,
+  "user_device_used": false,
+  "val_town_used": false,
+  "not_claimed": [
+    "UBJSON mission completed",
+    "real npm verifier succeeded",
+    "P_real > 0"
+  ]
+}
