@@ -28,7 +28,7 @@ def main():
         raise RuntimeError("VERIFICATION_NOT_PROMOTABLE")
     semantic_roundtrip=verified.get("semantic_roundtrip")
     source_type=str(((pending.get("registry_entry") or {}).get("source") or {}).get("type") or "")
-    if source_type in {"pypi","npm"}:
+    if source_type in {"pypi","npm","git_source_tree"}:
         if not isinstance(semantic_roundtrip,dict):
             raise RuntimeError("VERIFICATION_INDEPENDENCE_EVIDENCE_MISSING")
         independent_verifier=semantic_roundtrip.get("independent_verifier")
