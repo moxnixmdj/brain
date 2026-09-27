@@ -4,9 +4,7 @@ import argparse, ast, base64, gzip, hashlib, importlib.util, io, json, os, pathl
 import importlib.metadata
 from datetime import datetime, timezone
 
-
 ROOT=pathlib.Path(__file__).resolve().parents[2]
-
 
 def _load_runtime_helper(module_name):
     path=ROOT/"canonical"/"runtime"/(str(module_name)+".py")
@@ -22,13 +20,11 @@ def _load_runtime_helper(module_name):
 STATE_DIR=ROOT/"canonical"/"astra_runtime"/"state"
 EVID_DIR=ROOT/"canonical"/"astra_runtime"/"evidence"
 
-
 def utc(): return datetime.now(timezone.utc).isoformat()
 def writej(p,x):
     p=pathlib.Path(p); p.parent.mkdir(parents=True,exist_ok=True)
     p.write_text(json.dumps(x,indent=2,sort_keys=True)+"\n",encoding="utf-8")
 def readj(p): return json.loads(pathlib.Path(p).read_text(encoding="utf-8"))
-
 
 def context_results(state):
     latest={}
@@ -41,18 +37,14 @@ def context_results(state):
                 latest[rec["step_index"]]=rec["result"]
     return [latest[i] for i in sorted(latest)]
 
-
 def sha_file(p):
     h=hashlib.sha256()
     with open(p,"rb") as f:
         for b in iter(lambda:f.read(1024*1024),b""): h.update(b)
     return h.hexdigest()
 
-
 class Blocker(RuntimeError):
     pass
-
-
 
 
 def _supervisor_binding_from_env():
@@ -61,8 +53,6 @@ def _supervisor_binding_from_env():
     if (agent_id is None) != (task_id is None):
         raise Blocker("SUPERVISOR_BINDING_INCOMPLETE")
     return agent_id,task_id
-
-
 
 
 def _bind_supervisor_identity(state,agent_id,task_id):
@@ -84,7 +74,6 @@ def _bind_supervisor_identity(state,agent_id,task_id):
     state["supervisor_task_id"]=task_id
     return state
 
-
 def _resolve_bash_executable():
     candidates=[shutil.which("bash")]
     if os.name=="nt":
@@ -101,7 +90,6 @@ def _resolve_bash_executable():
         if candidate and pathlib.Path(candidate).is_file():
             return str(candidate)
     raise Blocker("BASH_EXECUTABLE_UNAVAILABLE")
-
 
 def run_shell(step, prior_results=None):
     cmd=step["command"]
@@ -120,7 +108,6 @@ def run_shell(step, prior_results=None):
       "stdout":p.stdout[-12000:],"stderr":p.stderr[-12000:],
       "duration_s":round(time.monotonic()-t,3)
     }
-
 
 def _external_tool_bridge(kind,payload):
     raw_dir=os.environ.get("PROJECT_BRAIN_EXTERNAL_TOOL_BRIDGE_DIR","").strip()
@@ -163,8 +150,6 @@ def _external_tool_bridge(kind,payload):
     return response["result"]
 
 
-
-
 class _ExternalBridgeHTTPResponse:
     def __init__(self, raw, status, final_url, headers=None):
         self._raw=io.BytesIO(raw)
@@ -176,9 +161,7 @@ class _ExternalBridgeHTTPResponse:
     def __enter__(self): return self
     def __exit__(self, exc_type, exc, tb): return False
 
-
 _ORIGINAL_URLOPEN=urllib.request.urlopen
-
 
 def _bridge_aware_urlopen(request, timeout=20, *args, **kwargs):
     if isinstance(request, urllib.request.Request):
@@ -212,11 +195,9 @@ def _bridge_aware_urlopen(request, timeout=20, *args, **kwargs):
         raise urllib.error.HTTPError(final_url,status,'external bridge HTTP error',headers,io.BytesIO(raw))
     return _ExternalBridgeHTTPResponse(raw,status,final_url,headers)
 
-
 def _activate_external_http_bridge():
     if os.environ.get('PROJECT_BRAIN_EXTERNAL_TOOL_BRIDGE_DIR','').strip():
         urllib.request.urlopen=_bridge_aware_urlopen
-
 
 def run_http(step):
     bridged=_external_tool_bridge("http_get",{
@@ -247,7 +228,6 @@ def run_http(step):
           "duration_s":round(time.monotonic()-t,3)
         }
 
-
 def _canonical_mission_path(raw):
     value=str(raw or "").strip().replace("\\","/")
     if value.startswith("/"):
@@ -257,8 +237,6 @@ def _canonical_mission_path(raw):
     if p==root or root not in p.parents:
         raise Blocker("MISSION_PATH_OUTSIDE_ROOT")
     return p,p.relative_to(root).as_posix()
-
-
 
 
 def _safe_repo_path(raw):
@@ -274,7 +252,6 @@ def _safe_repo_path(raw):
         raise Blocker("PATH_OUTSIDE_REPOSITORY")
     return p
 
-
 def _load_bound_capability_registry():
     path=ROOT/"canonical"/"runtime"/"BOUND_CAPABILITY_REGISTRY_V1.json"
     data=readj(path)
@@ -285,11 +262,8 @@ def _load_bound_capability_registry():
         raise Blocker("BOUND_CAPABILITY_REGISTRY_INVALID")
     return caps
 
-
 def _normalized_project_name(value):
     return re.sub(r"[-_.]+","-",str(value or "").strip()).lower()
-
-
 
 
 def _verified_pypi_wheel_bytes(record):
@@ -327,14 +301,11 @@ def _verified_pypi_wheel_bytes(record):
     return raw
 
 
-
-
 def _ensure_pypi_dependency(source):
     name=str(source.get("project") or "").strip()
     version=str(source.get("version") or "").strip()
     if not name or not version:
         raise Blocker("BOUND_PYPI_SOURCE_INCOMPLETE")
-
 
     closure=source.get("dependency_closure")
     if closure is None:
@@ -387,7 +358,6 @@ def _ensure_pypi_dependency(source):
             raise Blocker("BOUND_PYPI_INSTALLED_VERSION_MISMATCH:"+installed)
         return {"status":"INSTALLED_VERIFIED","project":name,"version":version,"wheel_sha256":actual}
 
-
     if not isinstance(closure,dict) or closure.get("schema")!="PROJECT_BRAIN_PYPI_WHEEL_CLOSURE_V1":
         raise Blocker("BOUND_PYPI_CLOSURE_INVALID")
     wheels=closure.get("wheels")
@@ -406,7 +376,6 @@ def _ensure_pypi_dependency(source):
     if not re.fullmatch(r"[0-9a-f]{64}",supplied_sha) or supplied_sha!=computed_sha:
         raise Blocker("BOUND_PYPI_CLOSURE_LOCK_HASH_MISMATCH")
 
-
     expected_versions={}
     for record in wheels:
         if not isinstance(record,dict):
@@ -419,7 +388,6 @@ def _ensure_pypi_dependency(source):
         if key in expected_versions and expected_versions[key]!=wheel_version:
             raise Blocker("BOUND_PYPI_CLOSURE_VERSION_CONFLICT:"+project)
         expected_versions[key]=wheel_version
-
 
     already=True
     for record in wheels:
@@ -440,7 +408,6 @@ def _ensure_pypi_dependency(source):
           "dependency_wheel_count":len(wheels),
           "closure_sha256":supplied_sha,
         }
-
 
     with tempfile.TemporaryDirectory(prefix="project-brain-pypi-closure-") as td:
         wheelhouse=pathlib.Path(td)/"wheelhouse"
@@ -467,7 +434,6 @@ def _ensure_pypi_dependency(source):
         if proc.returncode!=0:
             raise Blocker("BOUND_PYPI_CLOSURE_INSTALL_FAILED:"+proc.stderr[-1800:])
 
-
     mismatches=[]
     for record in wheels:
         project=str(record.get("project") or "")
@@ -491,8 +457,6 @@ def _ensure_pypi_dependency(source):
         for x in wheels
       ],
     }
-
-
 
 
 def _ensure_npm_dependency(source):
@@ -555,8 +519,6 @@ def _ensure_npm_dependency(source):
     }
 
 
-
-
 def _ensure_local_dependency(source):
     typ=str(source.get("type") or "").strip()
     if typ=="python_stdlib":
@@ -609,8 +571,6 @@ def _ensure_local_dependency(source):
     raise Blocker("BOUND_CAPABILITY_SOURCE_UNSUPPORTED:"+typ)
 
 
-
-
 def _ensure_apt_dependencies(source):
     if not sys.platform.startswith("linux"):
         raise Blocker("BOUND_APT_PLATFORM_UNSUPPORTED:"+sys.platform)
@@ -654,7 +614,6 @@ def _ensure_apt_dependencies(source):
         if q.returncode!=0 or q.stdout.strip()!=version:
             raise Blocker("BOUND_APT_INSTALLED_VERSION_MISMATCH:"+name+":"+q.stdout.strip())
     return {"status":"INSTALLED_VERIFIED","origin":source.get("origin"),"packages":evidence}
-
 
 def _invoke_bound_capability(args):
     cid=str(args.get("capability_id") or "").strip()
@@ -702,7 +661,6 @@ def _invoke_bound_capability(args):
     result["dependency"]=dependency
     return result
 
-
 def _verify_action_expectation(action,result):
     expect=action.get("expect")
     if expect is None:
@@ -727,7 +685,6 @@ def _verify_action_expectation(action,result):
         observed=observed.replace("\\n"," ")[:800]
         raise Blocker("ACTION_EXPECTATION_FAILED:"+field+":OBSERVED="+observed)
 
-
 def _resolve_result_refs(value, trace):
     if isinstance(value,dict):
         if set(value.keys())=={"$result"}:
@@ -749,8 +706,6 @@ def _resolve_result_refs(value, trace):
     if isinstance(value,list):
         return [_resolve_result_refs(v,trace) for v in value]
     return value
-
-
 
 
 def _knowledge_source_identity(url,json_path):
@@ -777,8 +732,6 @@ def _knowledge_source_identity(url,json_path):
             sort_keys=True,separators=(",",":"),ensure_ascii=False
         ).encode("utf-8")
     ).hexdigest()
-
-
 
 
 def _goal_action(action):
@@ -844,7 +797,6 @@ def _goal_action(action):
           "output_sha256":hashlib.sha256(raw).hexdigest(),
           "output_bytes":len(raw),
         }
-
 
     if typ=="assert_file_exists":
         p=_safe_repo_path(args.get("path",""))
@@ -1130,7 +1082,6 @@ def _goal_action(action):
         selected_uuid=None
         selected_attempt=None
 
-
         def subst(v,attempt_json,attempt_png):
             if isinstance(v,str):
                 if v=="__ATTEMPT_RESULT_PATH__": return attempt_json
@@ -1139,7 +1090,6 @@ def _goal_action(action):
             if isinstance(v,list): return [subst(x,attempt_json,attempt_png) for x in v]
             if isinstance(v,dict): return {k:subst(x,attempt_json,attempt_png) for k,x in v.items()}
             return v
-
 
         for attempt in range(1,max_attempts+1):
             attempt_json=str((attempts_dir/(str(attempt)+".json")).relative_to(ROOT))
@@ -1165,7 +1115,6 @@ def _goal_action(action):
                 selected_attempt=attempt
                 break
 
-
         summary={
           "status":"MATCHED" if matched else "EXHAUSTED",
           "attempts":len(trace),
@@ -1182,7 +1131,6 @@ def _goal_action(action):
           "attempts_dir":str(attempts_dir.relative_to(ROOT)),
           "trace":trace,
         }
-
 
     if typ=="assert_runtime_bounded_loop_trace":
         attempts_dir=_safe_repo_path(args.get("attempts_dir",""))
@@ -1251,7 +1199,6 @@ def _goal_action(action):
           "expected_attempts":expected_attempts,
         }
 
-
     if typ=="invoke_capability_fallback":
         primary=args.get("primary_action")
         fallback=args.get("fallback_action")
@@ -1266,12 +1213,10 @@ def _goal_action(action):
         ):
             return {"type":typ,"output_verified":False,"error":"FALLBACK_SPEC_INVALID"}
 
-
         def run_nested(action):
             result=_invoke_bound_capability((action.get("args") or {}))
             _verify_action_expectation(action,result)
             return result
-
 
         def eval_condition(spec):
             ctype=str(spec.get("type") or "")
@@ -1288,7 +1233,6 @@ def _goal_action(action):
             ok=isinstance(payload,list) and len(payload)>0
             return {"ok":ok,"item_count":len(payload) if isinstance(payload,list) else 0}
 
-
         primary_result=None
         primary_error=None
         try:
@@ -1297,7 +1241,6 @@ def _goal_action(action):
         except Exception as exc:
             primary_error=type(exc).__name__+":"+str(exc)
             primary_eval={"ok":False,"item_count":0,"error":"PRIMARY_ACTION_FAILED"}
-
 
         used_fallback=not bool(primary_eval.get("ok"))
         fallback_result=None
@@ -1317,7 +1260,6 @@ def _goal_action(action):
             final_eval=primary_eval
             final_result=primary_result
 
-
         if not final_eval.get("ok"):
             return {
               "type":typ,"output_verified":False,
@@ -1326,7 +1268,6 @@ def _goal_action(action):
               "primary_evaluation":primary_eval,
               "final_evaluation":final_eval,
             }
-
 
         primary_url=str((primary.get("args") or {}).get("url") or "")
         fallback_url=str((fallback.get("args") or {}).get("url") or "")
@@ -1347,7 +1288,6 @@ def _goal_action(action):
           "primary_evaluation":primary_eval,
           "final_evaluation":final_eval,
         }
-
 
     if typ=="assert_runtime_fallback_decision":
         primary_path=_safe_repo_path(args.get("primary_path",""))
@@ -1393,7 +1333,6 @@ def _goal_action(action):
           "expected_item_count":expected_count,
         }
 
-
     if typ=="invoke_capability_fanout":
         source=_safe_repo_path(args.get("source_path",""))
         manifest_path=_safe_repo_path(args.get("manifest_path",""))
@@ -1403,7 +1342,6 @@ def _goal_action(action):
         items=json.loads(str(wrapper.get("observed_text") or ""))
         if not isinstance(items,list) or len(items)>100 or any(not isinstance(x,dict) for x in items):
             return {"type":typ,"output_verified":False,"error":"FANOUT_SOURCE_INVALID"}
-
 
         # Per-item fallback mode: each runtime item owns its primary attempt,
         # semantic validation, fallback, and final record. One failed primary
@@ -1442,12 +1380,10 @@ def _goal_action(action):
             if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*",expected_field):
                 return {"type":typ,"output_verified":False,"error":"FANOUT_ITEM_FALLBACK_EXPECTED_FIELD_INVALID"}
 
-
             output_dir=_safe_repo_path(output_dir_raw)
             attempt_dir=output_dir/".primary_attempts"
             output_dir.mkdir(parents=True,exist_ok=True)
             attempt_dir.mkdir(parents=True,exist_ok=True)
-
 
             def subst_item(v,item,item_id,out):
                 if isinstance(v,str):
@@ -1465,13 +1401,11 @@ def _goal_action(action):
                     return {k:subst_item(x,item,item_id,out) for k,x in v.items()}
                 return v
 
-
             def invoke_nested(template,item,item_id,out):
                 rendered=subst_item(template,item,item_id,out)
                 result=_invoke_bound_capability(rendered.get("args") or {})
                 _verify_action_expectation(rendered,result)
                 return result
-
 
             manifest=[]
             fallback_count=0
@@ -1496,7 +1430,6 @@ def _goal_action(action):
                 except Exception as exc:
                     primary_error=type(exc).__name__+":"+str(exc)
                     primary_valid=False
-
 
                 if primary_valid:
                     primary_valid_count+=1
@@ -1536,13 +1469,11 @@ def _goal_action(action):
                     used_fallback=True
                     kind=fallback_kind
 
-
                 rec={field:item.get(field) for field in copy_fields}
                 rec[used_field]=used_fallback
                 rec[kind_field]=kind
                 rec[artifact_field]=final_out
                 manifest.append(rec)
-
 
             manifest_path.parent.mkdir(parents=True,exist_ok=True)
             manifest_path.write_text(json.dumps(manifest,indent=2,sort_keys=True)+"\n",encoding="utf-8")
@@ -1553,7 +1484,6 @@ def _goal_action(action):
               "primary_valid_count":primary_valid_count,
               "manifest_path":str(manifest_path.relative_to(ROOT)),
             }
-
 
         # Generic mode: execute an arbitrary bounded list of already-verified
         # capability action templates for every runtime-discovered item.
@@ -1631,7 +1561,6 @@ def _goal_action(action):
               "actions_per_item":len(item_actions),
               "manifest_path":str(manifest_path.relative_to(ROOT)),
             }
-
 
         # Legacy conditional mode remains supported for already-verified plans.
         output_dir=_safe_repo_path(args.get("output_dir",""))
@@ -1722,7 +1651,6 @@ def _goal_action(action):
           "source_count":len(items),"manifest_count":len(manifest),
           "failures":failures[:20],
         }
-
 
     if typ=="assert_runtime_fanout_artifacts_decode":
         source=_safe_repo_path(args.get("source_path",""))
@@ -1961,7 +1889,6 @@ def _goal_action(action):
         ):
             return {"type":typ,"output_verified":False,"error":"GROUP_DERIVE_SPEC_INVALID"}
 
-
         def observed_array(path):
             payload=json.loads(path.read_text(encoding="utf-8"))
             if isinstance(payload,dict) and isinstance(payload.get("observed_text"),str):
@@ -1972,7 +1899,6 @@ def _goal_action(action):
                 raise RuntimeError("GROUP_DERIVE_SOURCE_NOT_OBJECT_ARRAY")
             return data
 
-
         def source_value(row,field):
             if field in row:
                 return row[field]
@@ -1982,13 +1908,11 @@ def _goal_action(action):
                 raise KeyError(field)
             return matches[0]
 
-
         try:
             dimensions=observed_array(dimension_path)
             facts=observed_array(fact_path)
         except Exception as exc:
             return {"type":typ,"output_verified":False,"error":"GROUP_DERIVE_SOURCE_INVALID:"+type(exc).__name__+":"+str(exc)}
-
 
         dim_index={}
         groups={}
@@ -2003,7 +1927,6 @@ def _goal_action(action):
             dim_index[token]=row
             groups[token]=[]
 
-
         unmatched=[]
         for fact in facts:
             try:
@@ -2017,7 +1940,6 @@ def _goal_action(action):
             groups[token].append(fact)
         if unmatched:
             return {"type":typ,"output_verified":False,"error":"GROUP_DERIVE_UNMATCHED_FACTS","keys":unmatched[:20]}
-
 
         def metric_value(spec,related):
             name=str(spec.get("name") or "")
@@ -2046,7 +1968,6 @@ def _goal_action(action):
                     total+=value
                 return total
             raise RuntimeError("GROUP_DERIVE_METRIC_OP_UNSUPPORTED:"+op)
-
 
         summary=[]
         try:
@@ -2083,7 +2004,6 @@ def _goal_action(action):
         except Exception as exc:
             return {"type":typ,"output_verified":False,"error":type(exc).__name__+":"+str(exc)}
 
-
         output_path.parent.mkdir(parents=True,exist_ok=True)
         output_path.write_text(json.dumps(summary,indent=2,sort_keys=True)+"\n",encoding="utf-8")
         return {
@@ -2092,7 +2012,6 @@ def _goal_action(action):
           "summary_count":len(summary),
           "output_path":str(output_path.relative_to(ROOT)),
         }
-
 
     if typ=="assert_grouped_derived_records":
         dimension_path=_safe_repo_path(args.get("dimension_path",""))
@@ -2117,7 +2036,6 @@ def _goal_action(action):
         if not isinstance(dimensions,list) or not isinstance(facts,list) or not isinstance(summary,list):
             return {"type":typ,"verified":False,"error":"GROUP_DERIVE_VERIFY_NOT_ARRAY"}
 
-
         def source_value(row,field):
             if field in row:
                 return row[field]
@@ -2126,7 +2044,6 @@ def _goal_action(action):
             if len(matches)!=1:
                 raise KeyError(field)
             return matches[0]
-
 
         failures=[]
         by_id={}
@@ -2238,7 +2155,6 @@ def _goal_action(action):
           "failures":failures[:40],
         }
 
-
     if typ=="select_ranked_record":
         source_path=_safe_repo_path(args.get("source_path",""))
         output_path=_safe_repo_path(args.get("output_path",""))
@@ -2297,7 +2213,6 @@ def _goal_action(action):
             result["records"]=payload
         return result
 
-
     if typ=="assert_ranked_record":
         source_path=_safe_repo_path(args.get("source_path",""))
         selected_path=_safe_repo_path(args.get("selected_path",""))
@@ -2353,7 +2268,6 @@ def _goal_action(action):
           "source_count":len(rows),"limit":limit,"expected":expected,"observed":selected,
         }
 
-
     if typ=="aggregate_runtime_json_arrays":
         dimension_path=_safe_repo_path(args.get("dimension_path",""))
         fact_path=_safe_repo_path(args.get("fact_path",""))
@@ -2370,7 +2284,6 @@ def _goal_action(action):
         ):
             return {"type":typ,"output_verified":False,"error":"RUNTIME_REDUCE_SPEC_INVALID"}
 
-
         def observed_array(path):
             wrapper=json.loads(path.read_text(encoding="utf-8"))
             data=json.loads(str(wrapper.get("observed_text") or ""))
@@ -2378,13 +2291,11 @@ def _goal_action(action):
                 raise RuntimeError("RUNTIME_REDUCE_SOURCE_NOT_OBJECT_ARRAY")
             return data
 
-
         try:
             dimensions=observed_array(dimension_path)
             facts=observed_array(fact_path)
         except Exception as exc:
             return {"type":typ,"output_verified":False,"error":"RUNTIME_REDUCE_SOURCE_INVALID:"+type(exc).__name__+":"+str(exc)}
-
 
         index={}
         counts={}
@@ -2398,7 +2309,6 @@ def _goal_action(action):
             index[token]=row
             counts[token]=0
 
-
         unmatched=[]
         for row in facts:
             if fact_key not in row:
@@ -2411,7 +2321,6 @@ def _goal_action(action):
         if unmatched:
             return {"type":typ,"output_verified":False,"error":"RUNTIME_REDUCE_UNMATCHED_FACTS","keys":unmatched[:20]}
 
-
         summary=[]
         for row in dimensions:
             token=json.dumps(row.get(dimension_key),sort_keys=True)
@@ -2423,7 +2332,6 @@ def _goal_action(action):
             rec[count_field]=counts[token]
             summary.append(rec)
 
-
         if sum(counts.values())!=len(facts):
             return {"type":typ,"output_verified":False,"error":"RUNTIME_REDUCE_COUNT_SUM_MISMATCH"}
         output_path.parent.mkdir(parents=True,exist_ok=True)
@@ -2434,7 +2342,6 @@ def _goal_action(action):
           "summary_count":len(summary),"count_sum":sum(counts.values()),
           "output_path":str(output_path.relative_to(ROOT)),
         }
-
 
     if typ=="assert_runtime_json_aggregate":
         dimension_path=_safe_repo_path(args.get("dimension_path",""))
@@ -2504,7 +2411,6 @@ def _goal_action(action):
           "failures":failures[:30],
         }
 
-
     if typ=="join_runtime_json_arrays":
         left_path=_safe_repo_path(args.get("left_path",""))
         right_path=_safe_repo_path(args.get("right_path",""))
@@ -2522,7 +2428,6 @@ def _goal_action(action):
         ):
             return {"type":typ,"output_verified":False,"error":"RUNTIME_JOIN_SPEC_INVALID"}
 
-
         def observed_array(path):
             wrapper=json.loads(path.read_text(encoding="utf-8"))
             data=json.loads(str(wrapper.get("observed_text") or ""))
@@ -2530,13 +2435,11 @@ def _goal_action(action):
                 raise RuntimeError("RUNTIME_JOIN_SOURCE_NOT_OBJECT_ARRAY")
             return data
 
-
         try:
             left=observed_array(left_path)
             right=observed_array(right_path)
         except Exception as exc:
             return {"type":typ,"output_verified":False,"error":"RUNTIME_JOIN_SOURCE_INVALID:"+type(exc).__name__+":"+str(exc)}
-
 
         index={}
         for row in left:
@@ -2548,10 +2451,8 @@ def _goal_action(action):
                 return {"type":typ,"output_verified":False,"error":"RUNTIME_JOIN_LEFT_KEY_NOT_UNIQUE","key":key}
             index[token]=row
 
-
         def norm(x):
             return re.sub(r"[^a-z0-9]+","",str(x).lower())
-
 
         def value_for(out,left_row,right_row):
             n=norm(out)
@@ -2574,7 +2475,6 @@ def _goal_action(action):
                 raise KeyError(out)
             return candidates[0][2]
 
-
         joined=[]
         unmatched=[]
         try:
@@ -2594,7 +2494,6 @@ def _goal_action(action):
         if len(joined)!=len(right):
             return {"type":typ,"output_verified":False,"error":"RUNTIME_JOIN_CARDINALITY_MISMATCH"}
 
-
         output_path.parent.mkdir(parents=True,exist_ok=True)
         output_path.write_text(json.dumps(joined,indent=2,sort_keys=True)+"\n",encoding="utf-8")
         raw=output_path.read_bytes()
@@ -2606,7 +2505,6 @@ def _goal_action(action):
           "left_key":left_key,"right_key":right_key,
           "output_fields":output_fields,
         }
-
 
     if typ=="assert_runtime_json_join":
         left_path=_safe_repo_path(args.get("left_path",""))
@@ -2620,7 +2518,6 @@ def _goal_action(action):
         if not left_path.is_file() or not right_path.is_file() or not joined_path.is_file():
             return {"type":typ,"verified":False,"error":"RUNTIME_JOIN_VERIFY_SOURCE_MISSING"}
 
-
         def arr(path,wrapped=False):
             obj=json.loads(path.read_text(encoding="utf-8"))
             if wrapped:
@@ -2629,14 +2526,12 @@ def _goal_action(action):
                 raise RuntimeError("NOT_OBJECT_ARRAY")
             return obj
 
-
         try:
             left=arr(left_path,True)
             right=arr(right_path,True)
             joined=arr(joined_path,False)
         except Exception as exc:
             return {"type":typ,"verified":False,"error":"RUNTIME_JOIN_VERIFY_JSON_INVALID:"+type(exc).__name__}
-
 
         failures=[]
         left_index={}
@@ -2649,14 +2544,11 @@ def _goal_action(action):
                 failures.append({"error":"LEFT_KEY_DUPLICATE","key":row[left_key]})
             left_index[token]=row
 
-
         if len(joined)!=len(right):
             failures.append({"error":"JOINED_CARDINALITY_MISMATCH","right":len(right),"joined":len(joined)})
 
-
         def norm(x):
             return re.sub(r"[^a-z0-9]+","",str(x).lower())
-
 
         for idx,right_row in enumerate(right):
             if idx>=len(joined):
@@ -2696,7 +2588,6 @@ def _goal_action(action):
           "failures":failures[:30],
         }
 
-
     if typ=="project_browser_result_json":
         source=_safe_repo_path(args.get("source_path",""))
         output=_safe_repo_path(args.get("output_path",""))
@@ -2714,7 +2605,6 @@ def _goal_action(action):
         fields=args.get("fields") or []
         if not isinstance(constants,dict) or not isinstance(fields,list) or not fields:
             return {"type":typ,"error":"PROJECTION_SPEC_INVALID"}
-
 
         bag={}
         final_url=data.get("final_url")
@@ -2741,7 +2631,6 @@ def _goal_action(action):
                     aliases.append(key)
             for key in aliases:
                 bag[key]=value
-
 
         record=dict(constants)
         missing=[]
@@ -2771,7 +2660,6 @@ def _goal_action(action):
           "output_bytes":len(raw),
           "verified":True,
         }
-
 
     if typ=="assert_authoritative_source_discovery":
         evidence_path=_safe_repo_path(args.get("evidence_path",""))
@@ -2824,7 +2712,6 @@ def _goal_action(action):
           "missing_distinctive_query_tokens":missing_distinctive,
         }
 
-
     if typ=="extract_labeled_fields_from_rendered_source":
         source_path=_safe_repo_path(args.get("browser_result_path",""))
         output_path=_safe_repo_path(args.get("output_path",""))
@@ -2850,7 +2737,6 @@ def _goal_action(action):
         if not text.strip():
             return {"type":typ,"verified":False,"error":"SEMANTIC_EXTRACTION_TEXT_EMPTY"}
 
-
         def extract_label_value(source_text,label):
             lines=[re.sub(r"\s+"," ",x).strip() for x in str(source_text).splitlines()]
             wanted=str(label).strip().rstrip(":").lower()
@@ -2864,7 +2750,6 @@ def _goal_action(action):
                 if m and m.group(1).strip():
                     return m.group(1).strip()
             return None
-
 
         record={}
         missing=[]
@@ -2885,7 +2770,6 @@ def _goal_action(action):
           "field_count":len(record),
           "source_url":browser.get("final_url") or browser.get("source_url"),
         }
-
 
     if typ=="assert_labeled_fields_against_fresh_source":
         browser_result_path=_safe_repo_path(args.get("browser_result_path",""))
@@ -2916,7 +2800,6 @@ def _goal_action(action):
         except Exception as exc:
             return {"type":typ,"verified":False,"error":"SEMANTIC_FIELD_VERIFY_FETCH_FAILED:"+type(exc).__name__}
 
-
         def fresh_value(source_text,label):
             clean_lines=[re.sub(r"\s+"," ",x).strip() for x in str(source_text).splitlines()]
             wanted=str(label).strip().rstrip(":").lower()
@@ -2930,7 +2813,6 @@ def _goal_action(action):
                 if m and m.group(1).strip():
                     return m.group(1).strip()
             return None
-
 
         failures=[]
         observed={}
@@ -2953,7 +2835,6 @@ def _goal_action(action):
           "failures":failures,
           "source_sha256":hashlib.sha256(raw).hexdigest(),
         }
-
 
     if typ=="resolve_authority_identity":
         entity_name=str(args.get("entity_name") or "").strip()
@@ -3075,7 +2956,6 @@ def _goal_action(action):
           "output_path":str(output.relative_to(ROOT)),
         }
 
-
     if typ=="assert_authority_identity":
         evidence_path=_safe_repo_path(args.get("evidence_path",""))
         browser_result_path=_safe_repo_path(args.get("browser_result_path",""))
@@ -3107,7 +2987,6 @@ def _goal_action(action):
           "final_host":final_host,"matched_entity_tokens":matched,
           "required_entity_token_matches":0 if not tokens else max(1,min(2,len(tokens))),
         }
-
 
     if typ=="discover_authoritative_web_source":
         query=str(args.get("query") or "").strip()
@@ -3161,7 +3040,6 @@ def _goal_action(action):
                 if len(raw)>int(max_bytes)*8:
                     raise RuntimeError("DISCOVERY_DECOMPRESSED_BYTES_LIMIT")
             return raw,final_url
-
 
         # First-party discovery comes first. Discover same-authority hosts from
         # official root pages, then honor robots.txt sitemap declarations and
@@ -3227,7 +3105,6 @@ def _goal_action(action):
                 })
             except Exception as exc:
                 attempts.append({"engine":"authority_root","url":root_url,"status":"FETCH_FAILED","error":type(exc).__name__})
-
 
         # Shallow bounded internal crawl. This bridges authority home pages to
         # structured/index pages when no sitemap exists, without turning source
@@ -3310,7 +3187,6 @@ def _goal_action(action):
                   "status":"FETCH_FAILED","error":type(exc).__name__
                 })
 
-
         sitemap_queue=[]
         sitemap_seen=set()
         for host in authority_hosts[:24]:
@@ -3339,7 +3215,6 @@ def _goal_action(action):
             ]:
                 if sm not in sitemap_seen and len(sitemap_queue)<80:
                     sitemap_queue.append(sm)
-
 
         sitemap_docs=0
         sitemap_urls_seen=0
@@ -3405,7 +3280,6 @@ def _goal_action(action):
                 })
             except Exception as exc:
                 attempts.append({"engine":"authority_sitemap","url":sitemap_url,"status":"FETCH_FAILED","error":type(exc).__name__})
-
 
         query_variants=[query]
         for domain in normalized_domains:
@@ -3562,7 +3436,6 @@ def _goal_action(action):
           "output_path":str(output.relative_to(ROOT)),
         }
 
-
     if typ=="fetch_json_knowledge":
         url=str(args.get("url") or "").strip()
         output=_safe_repo_path(args.get("output_path",""))
@@ -3615,7 +3488,6 @@ def _goal_action(action):
           "json_path":path_spec,"value":selected,
           "final_url":final_url,"duration_s":round(time.monotonic()-t,3),
         }
-
 
     if typ=="assess_knowledge_consistency":
         evidence_paths=args.get("evidence_paths") or []
@@ -3727,7 +3599,6 @@ def _goal_action(action):
           "output_path":str(output.relative_to(ROOT)),
         }
 
-
     if typ=="materialize_supported_knowledge":
         assessment_path=_safe_repo_path(args.get("assessment_path",""))
         output=_safe_repo_path(args.get("output_path",""))
@@ -3807,7 +3678,6 @@ def _goal_action(action):
           "output_path":str(output.relative_to(ROOT)),
         }
 
-
     if typ=="assert_knowledge_status":
         assessment_path=_safe_repo_path(args.get("assessment_path",""))
         expected=str(args.get("expected_status") or "").strip().upper()
@@ -3826,7 +3696,6 @@ def _goal_action(action):
           "expected_status":expected,
           "assessment_path":str(assessment_path.relative_to(ROOT)),
         }
-
 
     if typ=="assert_json_knowledge":
         evidence_path=_safe_repo_path(args.get("evidence_path",""))
@@ -3872,7 +3741,6 @@ def _goal_action(action):
           "fresh_body_sha256":hashlib.sha256(raw).hexdigest(),
           "original_body_sha256":evidence.get("body_sha256"),
         }
-
 
     if typ=="http_get":
         url=str(args.get("url",""))
@@ -4014,7 +3882,6 @@ def _goal_action(action):
         return {"type":typ,"summary":str(args.get("summary",""))[:12000]}
     raise Blocker("GOAL_ACTION_NOT_ALLOWED:"+str(typ))
 
-
 def _extract_json_object(text):
     text=str(text).strip()
     try: return json.loads(text)
@@ -4022,7 +3889,6 @@ def _extract_json_object(text):
     a=text.find("{"); b=text.rfind("}")
     if a<0 or b<a: raise Blocker("PLANNER_NO_JSON")
     return json.loads(text[a:b+1])
-
 
 def _planner_post(prompt, timeout_s=20):
     if os.environ.get("ASTRA_DISABLE_MODEL_PLANNER","").strip().lower() in {"1","true","yes","on"}:
@@ -4068,7 +3934,6 @@ def _planner_post(prompt, timeout_s=20):
             errors.append({"model":model,"error":type(e).__name__+":"+str(e),"duration_s":round(time.monotonic()-t,3)})
     raise Blocker("PLANNER_ALL_ROUTES_FAILED:"+json.dumps(errors,sort_keys=True)[:1800])
 
-
 def _controller_actions(step, mission):
     actions=step.get("controller_actions")
     ref=step.get("controller_actions_ref")
@@ -4083,7 +3948,6 @@ def _controller_actions(step, mission):
         raise Blocker("MODEL_INDEPENDENT_CONTROLLER_ACTION_LIMIT")
     return actions
 
-
 def _controller_checkpoint_path(step,mission,plan_sha=None):
     raw_mid=mission.get("mission_id")
     if raw_mid:
@@ -4097,13 +3961,9 @@ def _controller_checkpoint_path(step,mission,plan_sha=None):
     return STATE_DIR/f"{mid}__{sid}__CONTROLLER_CHECKPOINT.json"
 
 
-
-
 def _controller_plan_sha256(actions):
     raw=json.dumps(actions,sort_keys=True,separators=(",",":"),ensure_ascii=False).encode("utf-8")
     return hashlib.sha256(raw).hexdigest()
-
-
 
 
 def _controller_checkpoint_record_valid(record):
@@ -4117,7 +3977,6 @@ def _controller_checkpoint_record_valid(record):
     if typ=="finish":
         return True
 
-
     checks=[]
     for path_key,hash_key in (
         ("output_path","output_sha256"),
@@ -4128,7 +3987,6 @@ def _controller_checkpoint_record_valid(record):
         if isinstance(raw,str) and raw:
             checks.append((raw,result.get(hash_key)))
 
-
     # Some adapters report durable paths without hashes. Existence is still
     # required before trusting a checkpointed effect.
     for path_key in ("result_path","manifest_path","decision_path"):
@@ -4136,12 +3994,10 @@ def _controller_checkpoint_record_valid(record):
         if isinstance(raw,str) and raw and not any(x[0]==raw for x in checks):
             checks.append((raw,None))
 
-
     if typ=="assert_file_exists":
         raw=(action.get("args") or {}).get("path")
         if isinstance(raw,str) and raw:
             checks.append((raw,result.get("sha256")))
-
 
     for raw,expected_hash in checks:
         try:
@@ -4159,15 +4015,11 @@ def _controller_checkpoint_record_valid(record):
     return True
 
 
-
-
 def _validated_checkpoint_prefix(completed):
     for index,record in enumerate(completed):
         if not _controller_checkpoint_record_valid(record):
             return completed[:index],index
     return completed,None
-
-
 
 
 def _load_controller_checkpoint(step,mission,actions):
@@ -4215,8 +4067,6 @@ def _load_controller_checkpoint(step,mission,actions):
     return path,data,True
 
 
-
-
 def _write_controller_checkpoint(path,data,trace,status="IN_PROGRESS"):
     data=dict(data)
     data["completed_actions"]=trace
@@ -4225,8 +4075,6 @@ def _write_controller_checkpoint(path,data,trace,status="IN_PROGRESS"):
     data["updated_at_utc"]=utc()
     writej(path,data)
     return data
-
-
 
 
 def _run_model_independent_goal(step, mission, goal):
@@ -4296,7 +4144,6 @@ def _run_model_independent_goal(step, mission, goal):
             }
     raise Blocker("MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH")
 
-
 def _capability_problem(step, mission):
     problem=step.get("capability_problem")
     ref=step.get("capability_problem_ref")
@@ -4307,7 +4154,6 @@ def _capability_problem(step, mission):
     if not isinstance(problem,dict):
         raise Blocker("CAPABILITY_PROBLEM_INVALID")
     return problem
-
 
 def _validate_proposal_value(value,path="proposal"):
     if isinstance(value,dict):
@@ -4333,8 +4179,6 @@ def _validate_proposal_value(value,path="proposal"):
     if value is None or isinstance(value,(str,int,float,bool)):
         return
     raise Blocker("CAPABILITY_PROPOSAL_VALUE_INVALID:"+path)
-
-
 
 
 def _validate_proposal_goal_binding(goal,proposal,required_targets):
@@ -4399,8 +4243,6 @@ def _validate_proposal_goal_binding(goal,proposal,required_targets):
       "clause_count":len(clauses),
       "required_targets":list(required_targets),
     }
-
-
 
 
 def _semantic_candidate_signature(goal,candidate,known_effects):
@@ -4493,8 +4335,6 @@ def _semantic_candidate_signature(goal,candidate,known_effects):
     }
 
 
-
-
 def _load_semantic_authorities():
     path=pathlib.Path(__file__).resolve().with_name("semantic_authorities.py")
     spec=importlib.util.spec_from_file_location(
@@ -4506,8 +4346,6 @@ def _load_semantic_authorities():
     sys.modules[spec.name]=module
     spec.loader.exec_module(module)
     return module
-
-
 
 
 def _semantic_goal_contract(step,mission,goal):
@@ -4637,8 +4475,6 @@ def _semantic_goal_contract(step,mission,goal):
     }
 
 
-
-
 def _load_capability_proposal_generators():
     path=pathlib.Path(__file__).resolve().with_name("capability_proposal_generators.py")
     spec=importlib.util.spec_from_file_location(
@@ -4650,8 +4486,6 @@ def _load_capability_proposal_generators():
     sys.modules[spec.name]=module
     spec.loader.exec_module(module)
     return module
-
-
 
 
 def _capability_problem_proposal(step,mission,goal):
@@ -4810,8 +4644,6 @@ def _capability_problem_proposal(step,mission,goal):
     }
 
 
-
-
 def _run_verified_capability_proposal(step,mission,goal):
     problem=_capability_problem_proposal(step,mission,goal)
     if problem is None:
@@ -4831,7 +4663,6 @@ def _run_verified_capability_proposal(step,mission,goal):
         result["proposal_generation"]=problem["_proposal_generation"]
     return result
 
-
 def _load_capability_planner():
     path=pathlib.Path(__file__).resolve().with_name("capability_planner.py")
     spec=importlib.util.spec_from_file_location("project_brain_capability_planner",path)
@@ -4841,7 +4672,6 @@ def _load_capability_planner():
     sys.modules[spec.name]=module
     spec.loader.exec_module(module)
     return module
-
 
 def _external_package_name_searcher(effect,ecosystem,tokens,limit,timeout_s):
     bridged=_external_tool_bridge("package_name_search",{
@@ -4854,7 +4684,6 @@ def _external_package_name_searcher(effect,ecosystem,tokens,limit,timeout_s):
     if not isinstance(names,list):
         raise Blocker("EXTERNAL_PACKAGE_SEARCH_RESPONSE_INVALID")
     return [str(x) for x in names]
-
 
 def _load_capability_discovery():
     _activate_external_http_bridge()
@@ -4869,7 +4698,6 @@ def _load_capability_discovery():
         module.set_external_package_name_searcher(_external_package_name_searcher)
     return module
 
-
 def _load_goal_compiler():
     path=pathlib.Path(__file__).resolve().with_name("goal_compiler.py")
     spec=importlib.util.spec_from_file_location("project_brain_goal_compiler",path)
@@ -4879,7 +4707,6 @@ def _load_goal_compiler():
     sys.modules[spec.name]=module
     spec.loader.exec_module(module)
     return module
-
 
 def _load_auto_capability_acquisition():
     _activate_external_http_bridge()
@@ -4906,7 +4733,6 @@ def _load_auto_capability_acquisition():
                 pass
     return module
 
-
 def _compile_plain_goal(goal):
     compiler=_load_goal_compiler()
     try:
@@ -4918,7 +4744,6 @@ def _compile_plain_goal(goal):
         detail=str(getattr(e,"detail","") or "")
         suffix=(":"+detail) if detail else ""
         raise Blocker("GOAL_COMPILATION_FAILED:"+str(code)+suffix) from e
-
 
 def _discover_unreachable_effects(mission, error):
     detail=str(getattr(error,"detail","") or "")
@@ -4945,7 +4770,6 @@ def _discover_unreachable_effects(mission, error):
     writej(path,evidence)
     return path,evidence
 
-
 def _render_bound_template(value, inputs):
     if isinstance(value,dict):
         return {k:_render_bound_template(v,inputs) for k,v in value.items()}
@@ -4964,7 +4788,6 @@ def _render_bound_template(value, inputs):
             raise Blocker("BOUND_CAPABILITY_INPUT_MISSING")
         return out
     return value
-
 
 def _validate_effect_aliases(
     raw_aliases, declared, field, instance_id, allow_repeat_source=False
@@ -5007,8 +4830,6 @@ def _validate_effect_aliases(
     return out
 
 
-
-
 def _alias_effects(effects,aliases):
     grouped={}
     for src,dst in aliases:
@@ -5024,8 +4845,6 @@ def _alias_effects(effects,aliases):
     return out
 
 
-
-
 def _inherit_verified_capabilities(problem):
     enriched=json.loads(json.dumps(problem))
     caps=enriched.setdefault("capabilities",[])
@@ -5038,7 +4857,6 @@ def _inherit_verified_capabilities(problem):
     registry=_load_bound_capability_registry()
     inherited=[]
     instantiated=[]
-
 
     raw_instances=enriched.get("capability_instances") or []
     if not isinstance(raw_instances,list):
@@ -5093,7 +4911,6 @@ def _inherit_verified_capabilities(problem):
           "provides_as":[{"effect":src,"as":dst} for src,dst in provide_aliases],
         })
 
-
     for cid,entry in sorted(registry.items()):
         if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
             continue
@@ -5125,7 +4942,6 @@ def _inherit_verified_capabilities(problem):
     enriched["_inherited_bound_capabilities"]=inherited
     enriched["_instantiated_bound_capabilities"]=instantiated
     return enriched
-
 
 def _run_capability_planned_goal(step, mission, goal):
     problem=_capability_problem(step, mission)
@@ -5168,7 +4984,6 @@ def _run_capability_planned_goal(step, mission, goal):
     result["inherited_bound_capabilities"]=problem.get("_inherited_bound_capabilities",[])
     return result
 
-
 def _classify_plain_goal_gap(text):
     value=str(text or "").strip()
     lower=value.lower()
@@ -5207,8 +5022,6 @@ def _classify_plain_goal_gap(text):
     return "CAPABILITY_CANDIDATE"
 
 
-
-
 def _write_goal_gap_classification(mission, subgoal, gap_class, compile_error):
     mid=str(mission.get("mission_id") or "UNKNOWN")
     path=EVID_DIR/f"{mid}__GOAL_GAP_CLASSIFICATION.json"
@@ -5224,8 +5037,6 @@ def _write_goal_gap_classification(mission, subgoal, gap_class, compile_error):
     }
     writej(path,evidence)
     return path,evidence
-
-
 
 
 def _run_compiled_plain_goal(step,mission,goal,compiled):
@@ -5256,7 +5067,6 @@ def _run_compiled_plain_goal(step,mission,goal,compiled):
         }
         return compiled_result
 
-
     derived=dict(step)
     derived["capability_problem"]=compiled
     capability_result=_run_capability_planned_goal(derived,mission,goal)
@@ -5271,8 +5081,6 @@ def _run_compiled_plain_goal(step,mission,goal,compiled):
       "target_effects":compiled.get("target_effects"),
     }
     return capability_result
-
-
 
 
 def _verify_and_promote_acquisition(dispatch):
@@ -5324,8 +5132,6 @@ def _verify_and_promote_acquisition(dispatch):
       "verification_mission_path":rel,
       "verification_state_path":str(state_path.relative_to(ROOT)),
     }
-
-
 
 
 def run_goal(step, mission):
@@ -5380,7 +5186,6 @@ def run_goal(step, mission):
             ep=EVID_DIR/f"{mid}__PLAIN_GOAL_CAPABILITY_DISCOVERY.json"
             auto=_load_auto_capability_acquisition()
 
-
             # Fast path: try a bounded role-conditioned supplier acquisition
             # before paying for broad federated discovery.
             targeted_error=None
@@ -5415,7 +5220,6 @@ def run_goal(step, mission):
                 acquired_result["auto_acquisition"]=verified_acquisition
                 acquired_result["acquisition_goal"]=acquisition_goal
                 return acquired_result
-
 
             # Fallback only after the targeted route fails.
             discovery=_load_capability_discovery()
@@ -5606,7 +5410,6 @@ def run_goal(step, mission):
         observations.append({"action":action,"result":result})
     raise Blocker("GOAL_MAX_CYCLES_WITHOUT_FINISH")
 
-
 def execute_step(step, prior_results=None, mission=None):
     adapter=step["adapter"]
     if adapter=="shell":
@@ -5616,7 +5419,6 @@ def execute_step(step, prior_results=None, mission=None):
     if adapter=="goal":
         return run_goal(step, mission or {})
     raise Blocker("MISSING_ADAPTER:"+adapter)
-
 
 def verify(step,result):
     v=step.get("verify",{})
@@ -5640,7 +5442,6 @@ def verify(step,result):
     if typ=="http_status":
         return result.get("status")==v["value"]
     raise Blocker("UNKNOWN_VERIFIER:"+typ)
-
 
 def main():
     STATE_DIR.mkdir(parents=True,exist_ok=True)
@@ -5736,7 +5537,6 @@ def main():
             state["updated_at_utc"]=utc()
             writej(state_path,state)
 
-
     for i in range(state["next_step"],len(mission["steps"])):
         step=mission["steps"][i]
         adapter=step["adapter"]
@@ -5789,7 +5589,6 @@ def main():
     }
     writej(EVID_DIR/f"{mid}__RECEIPT.json",receipt)
     print(json.dumps(receipt)); return 0
-
 
 if __name__=="__main__":
     raise SystemExit(main())
