@@ -201,6 +201,47 @@ class ExternalToolRelayTests(unittest.TestCase):
         self.assertEqual(observed["source"], "PYPI_SEARCH")
         self.assertEqual(observed["names"], ["py-ubjson", "another-ubj"])
 
+    def test_skips_stale_pypi_simple_when_compact_search_exists(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = pathlib.Path(td)
+
+            package_search = {
+                "schema": relay.REQUEST_SCHEMA,
+                "kind": "package_name_search",
+                "agent_id": "SUPERWORKER-UNIFIED-1",
+                "task_id": "SI-REAL-UBJSON-SNAPSHOT-001",
+                "payload": {
+                    "effect": "encode UBJSON",
+                    "ecosystem": "pypi",
+                    "tokens": ["ubj"],
+                    "limit": 10,
+                    "timeout_s": 12,
+                },
+            }
+            canonical = json.dumps(package_search, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+            search_sha = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+            package_search["request_sha256"] = search_sha
+            (root / f"{search_sha}.request.json").write_text(json.dumps(package_search), encoding="utf-8")
+
+            simple_path, simple_sha = make_request(root, url="https://pypi.org/simple/")
+
+            def opener(req, timeout):
+                if req.full_url.startswith("https://pypi.org/search/"):
+                    return FakeResponse(
+                        raw=b'<a href="/project/py-ubjson/">py-ubjson</a>',
+                        url=req.full_url,
+                    )
+                raise AssertionError("stale full-index request must not be fetched")
+
+            serviced = relay.service_pending(
+                root,
+                allowed_hosts={"pypi.org"},
+                opener=opener,
+            )
+            self.assertEqual(len(serviced), 1)
+            self.assertTrue((root / f"{search_sha}.response.json").exists())
+            self.assertFalse((root / f"{simple_sha}.response.json").exists())
+
 
 if __name__ == "__main__":
     unittest.main()
