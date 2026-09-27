@@ -8,9 +8,11 @@ on:
       - 'canonical/runtime/astra_runtime.py'
       - 'canonical/runtime/external_tool_relay.py'
       - 'canonical/runtime/independent_npm_codec_verifier.py'
+      - 'canonical/runtime/node_codec_runner.js'
       - 'canonical/tests/test_external_tool_relay.py'
       - 'canonical/tests/test_external_tool_bridge_wait.py'
       - 'canonical/tests/test_independent_npm_codec_verifier_bridge.py'
+      - 'canonical/tests/test_node_codec_runner_projection.py'
       - 'canonical/astra_runtime/missions/ASTRA_REAL_SAME_IDENTITY_UBJSON_CANONICAL_SNAPSHOT_001.json'
       - 'canonical/same_identity_worker/tasks/SI_REAL_UBJSON_SNAPSHOT_001.json'
       - '.github/workflows/real-same-identity-ubjson.yml'
@@ -39,7 +41,8 @@ jobs:
           python -m unittest \
             canonical.tests.test_external_tool_relay \
             canonical.tests.test_external_tool_bridge_wait \
-            canonical.tests.test_independent_npm_codec_verifier_bridge
+            canonical.tests.test_independent_npm_codec_verifier_bridge \
+            canonical.tests.test_node_codec_runner_projection
           python - <<'PY'
           import hashlib, pathlib
           mission=pathlib.Path('canonical/astra_runtime/missions/ASTRA_REAL_SAME_IDENTITY_UBJSON_CANONICAL_SNAPSHOT_001.json')
