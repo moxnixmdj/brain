@@ -72,6 +72,7 @@ jobs:
             python canonical/runtime/external_tool_relay.py \
               --bridge-dir "$BRIDGE" \
               --allow-host registry.npmjs.org \
+              --allow-host registry.modelcontextprotocol.io \
               --allow-host pypi.org \
               --allow-host files.pythonhosted.org \
               --allow-host github.com \
