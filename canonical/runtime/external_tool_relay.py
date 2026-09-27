@@ -544,27 +544,38 @@ def service_request(path: pathlib.Path, agent_id: str, task_id: str) -> pathlib.
     response_path = path.with_name(request_sha + ".response.json")
     if response_path.exists():
         return None
-    if kind == "urlopen":
-        result = execute_urlopen(payload)
-    elif kind == "package_name_search":
-        result = execute_package_name_search(payload)
-    elif kind == "python_source_tree":
-        result = execute_python_source_tree(payload)
-    elif kind == "pypi_wheel_closure":
-        result = execute_pypi_wheel_closure(payload)
-    elif kind == "npm_package_closure":
-        result = execute_npm_package_closure(payload)
-    else:
-        raise RelayError("REQUEST_KIND_NOT_ALLOWED")
-    response = {
-        "schema": RESPONSE_SCHEMA,
-        "request_sha256": request_sha,
-        "kind": kind,
-        "agent_id": agent_id,
-        "task_id": task_id,
-        "status": "ok",
-        "result": result,
-    }
+    try:
+        if kind == "urlopen":
+            result = execute_urlopen(payload)
+        elif kind == "package_name_search":
+            result = execute_package_name_search(payload)
+        elif kind == "python_source_tree":
+            result = execute_python_source_tree(payload)
+        elif kind == "pypi_wheel_closure":
+            result = execute_pypi_wheel_closure(payload)
+        elif kind == "npm_package_closure":
+            result = execute_npm_package_closure(payload)
+        else:
+            raise RelayError("REQUEST_KIND_NOT_ALLOWED")
+        response = {
+            "schema": RESPONSE_SCHEMA,
+            "request_sha256": request_sha,
+            "kind": kind,
+            "agent_id": agent_id,
+            "task_id": task_id,
+            "status": "ok",
+            "result": result,
+        }
+    except Exception as exc:
+        response = {
+            "schema": RESPONSE_SCHEMA,
+            "request_sha256": request_sha,
+            "kind": kind,
+            "agent_id": agent_id,
+            "task_id": task_id,
+            "status": "error",
+            "error": type(exc).__name__ + ":" + str(exc)[:3000],
+        }
     _write_json_atomic(response_path, response)
     return response_path
 
