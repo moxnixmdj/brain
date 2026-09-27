@@ -45,6 +45,60 @@ class GoalCompilerTests(unittest.TestCase):
         with self.assertRaisesRegex(compiler.GoalCompilationFailure,"GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"):
             compiler.compile_goal("Reticulate a quantum banana lattice",self.registry(),ROOT)
 
+    def test_source_tree_codec_compiles_cross_supplier_independent_decode(self):
+        registry={
+          "auto.source.py-ubjson":{
+            "status":"VERIFIED_BOUND_CAPABILITY",
+            "adapter_module":"python_source_tree_codec",
+            "provides":["structured.binary.encode","structured.binary.encode.ubj"],
+            "requires":["json.file.available"],
+            "keywords":["encode","binary","ubj","iotic-labs/py-ubjson"],
+            "platforms":["linux","windows","darwin"],
+            "source":{
+              "type":"git_source_tree",
+              "repository":"Iotic-Labs/py-ubjson",
+              "revision":"3d8e8a24d5cd4c3c09da76aea580a0032e120a36",
+            },
+            "action_template":{
+              "type":"invoke_capability",
+              "args":{
+                "capability_id":"auto.source.py-ubjson",
+                "module":"ubjson",
+                "encode_callable":"dumpb",
+                "decode_callable":"loadb",
+                "encode_kwargs":{},
+                "decode_kwargs":{},
+                "envelope_key":None,
+                "json_path":"${input.json_path}",
+                "output_path":"${input.output_path}",
+              },
+              "expect":{"type":"field_equals","field":"output_verified","value":True},
+            },
+          }
+        }
+        goal=(
+            "Encode canonical/CANONICAL_POINTER.json as UBJSON and save "
+            "canonical/astra_runtime/artifacts/CANONICAL_POINTER_20260927.ubj. "
+            "Independently decode the UBJSON artifact using a different implementation "
+            "than the producer and verify the decoded JSON object is exactly identical "
+            "to canonical/CANONICAL_POINTER.json in keys, values, nesting, arrays, "
+            "strings, numbers, booleans, and nulls."
+        )
+        out=compiler.compile_goal(goal,registry,ROOT)
+        self.assertEqual(out["compiler_mode"],"DETERMINISTIC_COMPOUND_ACTION_PLAN")
+        modes=[x["mode"] for x in out["compiled_parts"]]
+        self.assertIn("CROSS_SUPPLIER_PRODUCER_INDEPENDENT_CODEC_VERIFICATION",modes)
+        verify_actions=[
+            x for x in out["controller_actions"]
+            if x.get("type")=="verify_with_independent_npm_codec"
+        ]
+        self.assertEqual(len(verify_actions),1)
+        self.assertEqual(
+            verify_actions[0]["args"]["producer_project"],
+            "Iotic-Labs/py-ubjson",
+        )
+        self.assertEqual(verify_actions[0]["args"]["format"],"ubj")
+
     def test_browser_goal_binds_url_and_typed_future_outputs(self):
         registry={
           "web.browser.rendered.capture.test":{
