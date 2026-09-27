@@ -2,6 +2,7 @@
 import base64
 import importlib.util
 import json
+import io
 import pathlib
 import tempfile
 import unittest
@@ -123,13 +124,9 @@ class RelayTests(unittest.TestCase):
             body = b'{"message":"Not Found"}'
             headers = _Headers({"Content-Length": str(len(body)), "Content-Type": "application/json"})
             error = urllib.error.HTTPError(
-                request_path.as_uri(), 404, "Not Found", headers, None
+                "https://pypi.org/pypi/definitely-not-a-real-project/json",
+                404, "Not Found", headers, io.BytesIO(body)
             )
-            error.fp = __import__("io").BytesIO(body)
-            error.url = "https://pypi.org/pypi/definitely-not-a-real-project/json"
-            error.geturl = lambda: error.url
-            error.__enter__ = lambda self=error: self
-            error.__exit__ = lambda *args: False
             with mock.patch.object(relay, "_validate_public_host", return_value=None):
                 response = relay.service_request(
                     request_path,
