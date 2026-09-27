@@ -1,0 +1,25 @@
+{
+  "schema": "PROJECT_BRAIN_EXTERNAL_TOOL_BRIDGE_PARTIAL_EXECUTION_V1",
+  "pr": 27,
+  "branch": "research/external-tool-bridge-20260927-r1",
+  "status": "PARTIAL_EXECUTION_ONLY",
+  "executable_commit": "08716fb513c9d533c333d48317f436f487a1c78d",
+  "observed_checks": [
+    {
+      "check": "content-addressed request blocks until exact bound response exists",
+      "result": "PASS"
+    },
+    {
+      "check": "response bound to wrong durable worker identity is rejected",
+      "result": "PASS"
+    }
+  ],
+  "observed_executor": "chatgpt-session-linux-container",
+  "incremental_spend_usd": 0,
+  "user_device_used": false,
+  "val_town_used": false,
+  "full_branch_tests_run": false,
+  "verified": false,
+  "promoted": false,
+  "remaining_requirement": "Materialize exact PR27 branch source closure into an executor and run syntax, bridge regressions, same-identity supervisor regressions, identity-binding regressions, acquisition regressions, and full canonical discovery before promotion."
+}

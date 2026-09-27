@@ -109,7 +109,64 @@ def run_shell(step, prior_results=None):
       "duration_s":round(time.monotonic()-t,3)
     }
 
+def _external_tool_bridge(kind,payload):
+    raw_dir=os.environ.get("PROJECT_BRAIN_EXTERNAL_TOOL_BRIDGE_DIR","").strip()
+    if not raw_dir:
+        return None
+    bridge=pathlib.Path(raw_dir)
+    if not bridge.is_absolute():
+        bridge=(ROOT/bridge).resolve()
+    bridge.mkdir(parents=True,exist_ok=True)
+    request={
+      "schema":"PROJECT_BRAIN_EXTERNAL_TOOL_REQUEST_V1",
+      "kind":str(kind),
+      "agent_id":os.environ.get("PROJECT_BRAIN_AGENT_ID"),
+      "task_id":os.environ.get("PROJECT_BRAIN_TASK_ID"),
+      "payload":payload,
+    }
+    canonical=json.dumps(request,sort_keys=True,separators=(",",":"),ensure_ascii=False)
+    request_sha256=hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+    request["request_sha256"]=request_sha256
+    request_path=bridge/(request_sha256+".request.json")
+    response_path=bridge/(request_sha256+".response.json")
+    if request_path.exists():
+        if readj(request_path)!=request:
+            raise Blocker("EXTERNAL_TOOL_REQUEST_COLLISION:"+request_sha256)
+    else:
+        writej(request_path,request)
+    if not response_path.exists():
+        raise Blocker("EXTERNAL_TOOL_REQUEST_PENDING:"+request_sha256)
+    response=readj(response_path)
+    if response.get("schema")!="PROJECT_BRAIN_EXTERNAL_TOOL_RESPONSE_V1":
+        raise Blocker("EXTERNAL_TOOL_RESPONSE_SCHEMA_INVALID:"+request_sha256)
+    if response.get("request_sha256")!=request_sha256:
+        raise Blocker("EXTERNAL_TOOL_RESPONSE_REQUEST_MISMATCH:"+request_sha256)
+    if response.get("kind")!=str(kind):
+        raise Blocker("EXTERNAL_TOOL_RESPONSE_KIND_MISMATCH:"+request_sha256)
+    if response.get("agent_id")!=request.get("agent_id") or response.get("task_id")!=request.get("task_id"):
+        raise Blocker("EXTERNAL_TOOL_RESPONSE_IDENTITY_MISMATCH:"+request_sha256)
+    if response.get("status")!="ok" or not isinstance(response.get("result"),dict):
+        raise Blocker("EXTERNAL_TOOL_RESPONSE_FAILED:"+request_sha256)
+    return response["result"]
+
+
 def run_http(step):
+    bridged=_external_tool_bridge("http_get",{
+      "url":step["url"],
+      "timeout_s":step.get("timeout_s",20),
+      "max_bytes":step.get("max_bytes",200000),
+    })
+    if bridged is not None:
+        for key in ("url","status","body_sha256","body_excerpt"):
+            if key not in bridged:
+                raise Blocker("EXTERNAL_HTTP_RESPONSE_INCOMPLETE:"+key)
+        return {
+          "adapter":"http","url":str(bridged["url"]),"status":int(bridged["status"]),
+          "body_sha256":str(bridged["body_sha256"]),
+          "body_excerpt":str(bridged["body_excerpt"])[:12000],
+          "duration_s":float(bridged.get("duration_s",0)),
+          "transport":"EXTERNAL_TOOL_BRIDGE",
+        }
     req=urllib.request.Request(step["url"],headers={"User-Agent":"ProjectBrain-ASTRA_RUNTIME/1"})
     t=time.monotonic()
     with urllib.request.urlopen(req,timeout=step.get("timeout_s",20)) as r:
@@ -3787,8 +3844,25 @@ def _extract_json_object(text):
 def _planner_post(prompt, timeout_s=20):
     if os.environ.get("ASTRA_DISABLE_MODEL_PLANNER","").strip().lower() in {"1","true","yes","on"}:
         raise Blocker("MODEL_PLANNER_DISABLED_BY_POLICY")
-    endpoint="https://text.pollinations.ai/"
     models=("openai-fast","openai","mistral")
+    bridged=_external_tool_bridge("planner",{
+      "prompt":str(prompt),
+      "models":list(models),
+      "timeout_s":timeout_s,
+      "response_contract":"JSON_TEXT_ONLY_UNTRUSTED_PROPOSAL",
+    })
+    if bridged is not None:
+        text_value=bridged.get("text")
+        if not isinstance(text_value,str) or not text_value.strip():
+            raise Blocker("EXTERNAL_PLANNER_RESPONSE_EMPTY")
+        return {
+          "text":text_value,
+          "model":str(bridged.get("model") or "external-authorized-planner"),
+          "duration_s":float(bridged.get("duration_s",0)),
+          "errors":list(bridged.get("errors") or []),
+          "transport":"EXTERNAL_TOOL_BRIDGE",
+        }
+    endpoint="https://text.pollinations.ai/"
     errors=[]
     for model in models:
         body=json.dumps({

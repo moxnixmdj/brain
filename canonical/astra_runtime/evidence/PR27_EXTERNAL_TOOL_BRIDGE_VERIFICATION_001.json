@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_PR27_EXTERNAL_TOOL_BRIDGE_VERIFICATION_V1",
+  "pr": 27,
+  "executable_revision": "08716fb513c9d533c333d48317f436f487a1c78d",
+  "exact_blobs": {
+    "canonical/runtime/astra_runtime.py": "3dd255bc4826c8570319d6ee3f6c92168e2f210d",
+    "canonical/tests/test_external_tool_bridge.py": "19d69b0ab7c211713753e744777de83a3f0f7471"
+  },
+  "source_closure": {
+    "base": "verified PR26 full materialization",
+    "canonical_file_count": 154,
+    "prior_full_suite_count": 150,
+    "delta_files": [
+      "canonical/runtime/astra_runtime.py",
+      "canonical/tests/test_external_tool_bridge.py"
+    ]
+  },
+  "execution": {
+    "syntax_pass": true,
+    "relevant_regressions": {
+      "passed": 21,
+      "total": 21
+    },
+    "full_suite": {
+      "passed": 152,
+      "total": 152
+    },
+    "exit_code": 0,
+    "platform": "linux",
+    "python": "3.13.5",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "67b36fce15fb7b61e6da4a2a2a33af76994b9447f2350e96e6c629960eb39deb",
+    "incremental_spend_usd": 0,
+    "user_device_used": false,
+    "val_town_used": false
+  },
+  "predicates": {
+    "exact_runtime_blob": true,
+    "exact_bridge_test_blob": true,
+    "pending_request_fails_closed": true,
+    "exact_response_accepted": true,
+    "identity_mismatch_rejected": true,
+    "supervisor_regressions_preserved": true,
+    "astra_identity_binding_preserved": true,
+    "full_suite_green": true
+  },
+  "verified": true,
+  "promotion_claim": false,
+  "p_real_claim": 0
+}
