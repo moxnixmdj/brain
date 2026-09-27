@@ -236,10 +236,10 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
                   "goal":"Verify the pending source-tree codec in a fresh process, require a different supplier-class verifier, promote only after exact semantic equality, then replay the originating mission.",
                   "steps":[
                     {"id":"verify-pending-source-codec","adapter":"shell",
-                     "command":f"set -euo pipefail\\npython canonical/runtime/verify_pending_cli_binding.py {pending_rel} {verify_rel}",
+                     "command":f"set -euo pipefail\npython canonical/runtime/verify_pending_cli_binding.py {pending_rel} {verify_rel}",
                      "verify":{"type":"stdout_contains","text":"PENDING_SOURCE_BINDING_EFFECT_VERIFIED"}},
                     {"id":"promote-and-replay","adapter":"shell",
-                     "command":f"set -euo pipefail\\npython canonical/runtime/promote_pending_binding.py {pending_rel} {verify_rel}",
+                     "command":f"set -euo pipefail\npython canonical/runtime/promote_pending_binding.py {pending_rel} {verify_rel}",
                      "verify":{"type":"stdout_contains","text":"PENDING_CAPABILITY_PROMOTED"}}
                   ],
                   "constraints":{
