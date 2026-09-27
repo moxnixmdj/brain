@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_PR28_EXTERNAL_ACQUISITION_BRIDGE_VERIFICATION_V1",
+  "pr": 28,
+  "executable_revision": "c025f51e5ceade10ee7230bd8387042d7af0c9dd",
+  "base_revision": "bacf227bfd2edf278af57cbbc8e34ec8103d2da4",
+  "exact_delta_blobs": {
+    "canonical/runtime/astra_runtime.py": "f5f7c1941da21e80987a541bfcceacb9b6d4da7d",
+    "canonical/runtime/capability_discovery.py": "2b8109a2eaf3740e62a5f079cd9a60bc7a3713d4",
+    "canonical/tests/test_external_acquisition_bridge.py": "257100e17d3bf19f1d7b9cd0ad5e6b1cf4b81c21"
+  },
+  "source_closure": {
+    "base": "verified PR27 full source closure",
+    "reconstructed_ubjson_bundle_parts": 8,
+    "reconstructed_ubjson_bundle_files": 75,
+    "reconstructed_bundle_git_blob_mismatches": 0,
+    "pr28_delta_git_blob_matches": 3
+  },
+  "execution": {
+    "platform": "linux",
+    "incremental_spend_usd": 0,
+    "user_device_used": false,
+    "val_town_used": false,
+    "syntax_pass": true,
+    "focused_regressions": {
+      "passed": 4,
+      "total": 4
+    },
+    "relevant_integration_regressions": {
+      "passed": 35,
+      "total": 35
+    },
+    "full_suite": {
+      "passed": 156,
+      "total": 156
+    },
+    "exit_code": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "4deecc38542133350ab0e28bbe170ae496391b97876b5f37757c2f2ffbc09a87"
+  },
+  "real_mission_observation": {
+    "task_id": "SI-REAL-UBJSON-SNAPSHOT-001",
+    "agent_id": "SUPERWORKER-UNIFIED-1",
+    "first_invocation_checkpoint_exit_code": 75,
+    "fresh_resume_same_identity": true,
+    "runtime_attempt_1_returncode": 3,
+    "runtime_attempt_2_returncode": 3,
+    "package_name_search_request_fulfilled": true,
+    "related_package_names": [
+      "py-ubjson",
+      "jdata",
+      "bjdata"
+    ],
+    "subsequent_metadata_requests_emitted": true,
+    "next_generic_blocker": "PACKAGE_ARTIFACT_ACQUISITION_VIA_NETWORKED_PIP_DOWNLOAD",
+    "mission_complete": false
+  },
+  "independent_adjudication": {
+    "verifier_id": "git-blob-crosscheck+regression-log+real-mission-request-trace-adjudicator-v1",
+    "predicates": {
+      "exact_pr28_delta_blobs": true,
+      "base_closure_preserved": true,
+      "focused_bridge_tests_pass": true,
+      "same_identity_and_external_bridge_regressions_pass": true,
+      "full_suite_pass": true,
+      "content_addressed_identity_binding_preserved": true,
+      "simple_index_fallback_avoided_when_external_search_returns_names": true,
+      "real_mission_reaches_post_discovery_metadata_requests": true,
+      "zero_incremental_spend": true,
+      "no_user_device": true,
+      "no_val_town": true
+    },
+    "verified": true
+  },
+  "promotion_scope": "GENERIC_EXTERNAL_DISCOVERY_AND_ACQUISITION_NETWORK_SEAMS_ONLY__REAL_UBJSON_MISSION_NOT_COMPLETE",
+  "p_real_claim": 0
+}
