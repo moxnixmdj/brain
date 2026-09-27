@@ -117,7 +117,12 @@ def _service_urlopen(payload: dict, *, allowed_hosts: set[str], max_bytes: int, 
     }
     timeout = max(1, min(int(payload.get("timeout_s") or 20), 60))
     request = urllib.request.Request(url, headers=headers, method="GET")
-    with opener(request, timeout=timeout) as response:
+    try:
+        response = opener(request, timeout=timeout)
+    except urllib.error.HTTPError as exc:
+        response = exc
+
+    with response:
         final_url = str(response.geturl())
         final = urllib.parse.urlsplit(final_url)
         final_host = (final.hostname or "").lower()
@@ -125,8 +130,9 @@ def _service_urlopen(payload: dict, *, allowed_hosts: set[str], max_bytes: int, 
             raise RelayError("REDIRECT_DESTINATION_NOT_ALLOWED")
         _validate_public_host(final_host)
         raw = _read_bounded(response, max_bytes)
+        status = int(getattr(response, "status", getattr(response, "code", 200)))
         return {
-            "status": int(getattr(response, "status", 200)),
+            "status": status,
             "final_url": final_url,
             "headers": {str(k): str(v) for k, v in response.headers.items()},
             "body_b64": base64.b64encode(raw).decode("ascii"),
