@@ -96,5 +96,39 @@ class RelayTests(unittest.TestCase):
 
 
 
+    @mock.patch.object(
+        relay,
+        "execute_npm_package_closure",
+        side_effect=relay.RelayError("NPM_CLOSURE_PACKAGE_COUNT_LIMIT"),
+    )
+    def test_candidate_level_relay_failure_becomes_bound_error_response(self, _mocked):
+        with tempfile.TemporaryDirectory() as td:
+            root = pathlib.Path(td)
+            request = {
+                "schema": relay.REQUEST_SCHEMA,
+                "kind": "npm_package_closure",
+                "agent_id": "SUPERWORKER-UNIFIED-1",
+                "task_id": "SI-REAL-UBJSON-SNAPSHOT-001",
+                "payload": {
+                    "package": "jda",
+                    "version": "0.4.0",
+                    "max_packages": 32,
+                    "max_total_bytes": 80000000,
+                },
+            }
+            request["request_sha256"] = relay.canonical_request_sha(request)
+            path = root / (request["request_sha256"] + ".request.json")
+            path.write_text(json.dumps(request), encoding="utf-8")
+            response_path = relay.service_request(
+                path, request["agent_id"], request["task_id"]
+            )
+            self.assertIsNotNone(response_path)
+            response = json.loads(response_path.read_text(encoding="utf-8"))
+            self.assertEqual(response["status"], "error")
+            self.assertEqual(response["request_sha256"], request["request_sha256"])
+            self.assertIn("NPM_CLOSURE_PACKAGE_COUNT_LIMIT", response["error"])
+
+
+
 if __name__ == "__main__":
     unittest.main()
