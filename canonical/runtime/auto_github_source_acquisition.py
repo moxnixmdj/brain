@@ -64,7 +64,10 @@ def _materialize_candidate(cand,root):
     if tree.get("truncated") is True: raise AutoGitHubSourceAcquisitionFailure("GITHUB_SOURCE_TREE_TRUNCATED",repo)
     py=[x for x in tree.get("tree") or [] if x.get("type")=="blob" and str(x.get("path") or "").endswith(".py") and int(x.get("size") or 0)<=120000]
     def source_file_allowed(item):
-        parts=[p.lower() for p in pathlib.PurePosixPath(str(item.get("path") or "")).parts]
+        pure=pathlib.PurePosixPath(str(item.get("path") or ""))
+        parts=[p.lower() for p in pure.parts]
+        if len(parts)==1 and pure.name.lower() in {"setup.py","ez_setup.py","conftest.py"}:
+            return False
         return not any(p in {"test","tests","vendor","vendored","site-packages"} for p in parts)
     py=[x for x in py if source_file_allowed(x)]
     if not py or len(py)>40: raise AutoGitHubSourceAcquisitionFailure("GITHUB_SOURCE_PYTHON_SURFACE_INVALID",repo)

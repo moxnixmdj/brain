@@ -25,7 +25,10 @@ class GitHubSourcePackageCodecTests(unittest.TestCase):
         ]
         allowed=[x for x in tree if x["path"].endswith(".py")]
         def is_allowed(item):
-            parts=[p.lower() for p in pathlib.PurePosixPath(item["path"]).parts]
+            pure=pathlib.PurePosixPath(item["path"])
+            parts=[p.lower() for p in pure.parts]
+            if len(parts)==1 and pure.name.lower() in {"setup.py","ez_setup.py","conftest.py"}:
+                return False
             return not any(p in {"test","tests","vendor","vendored","site-packages"} for p in parts)
         allowed=[x for x in allowed if is_allowed(x)]
         modules=[]
@@ -39,6 +42,8 @@ class GitHubSourcePackageCodecTests(unittest.TestCase):
                     modules.append(".".join(package_parts))
         self.assertEqual(modules,["ubjson"])
         self.assertNotIn("test/test_codec.py",[x["path"] for x in allowed])
+        self.assertNotIn("setup.py",[x["path"] for x in allowed])
+        self.assertNotIn("ez_setup.py",[x["path"] for x in allowed])
 
     def test_runner_probes_dumpb_loadb_package_pair(self):
         with tempfile.TemporaryDirectory() as td:
