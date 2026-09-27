@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_INDEPENDENT_CODEC_VERIFIER_SOURCE_V1",
+  "verifier_id": "nlohmann-json-3.11.3-debian-source-mirror",
+  "implementation": "nlohmann/json",
+  "upstream_repository": "nlohmann/json",
+  "upstream_tag": "v3.11.3",
+  "upstream_git_blob_sha": "8b72ea6539f40e4e3f7762d17e30c67f2a8308ed",
+  "vendored_path": "canonical/runtime/vendor/nlohmann_json_3_11_3/json.hpp",
+  "expected_sha256": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6",
+  "provenance_claim": "Exact SHA-256 must match the Debian Sources nlohmann-json3 3.11.3-2.1 single_include/nlohmann/json.hpp digest before execution.",
+  "supplier_class": "debian_source_package_mirrored_from_upstream",
+  "language": "cpp",
+  "supported_formats": [
+    "ubj",
+    "ubjson",
+    "cbor",
+    "msgpack",
+    "messagepack",
+    "bson",
+    "bjdata"
+  ],
+  "incremental_spend_usd": 0,
+  "fail_closed": true
+}
