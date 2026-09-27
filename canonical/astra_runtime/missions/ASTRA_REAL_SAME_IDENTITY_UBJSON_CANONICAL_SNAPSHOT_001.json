@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-REAL-SAME-IDENTITY-UBJSON-CANONICAL-SNAPSHOT-001",
+  "purpose": "Real Project Brain maintenance mission: create a compact cross-language UBJSON snapshot of the live canonical pointer, with independent semantic round-trip verification, while forcing same-identity JIT capability acquisition and checkpoint/relaunch.",
+  "goal": "Encode canonical/CANONICAL_POINTER.json as UBJSON and save canonical/astra_runtime/artifacts/CANONICAL_POINTER_20260927.ubj. Independently decode the UBJSON artifact using a different implementation than the producer and verify the decoded JSON object is exactly identical to canonical/CANONICAL_POINTER.json in keys, values, nesting, arrays, strings, numbers, booleans, and nulls.",
+  "steps": [
+    {
+      "id": "create-and-verify-canonical-ubjson-snapshot",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "max_controller_actions": 32,
+      "verify": {
+        "type": "stdout_contains",
+        "text": "COMPOUND_GOAL_COMPLETE"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "fresh_mission_identity": true,
+    "manual_supplier": false,
+    "manual_package_name": false,
+    "manual_capability_id": false,
+    "required_target_effects_supplied_by_mission": false,
+    "semantic_goal_proposals_supplied_by_mission": false,
+    "capability_problem_proposal_supplied_by_mission": false,
+    "controller_actions_supplied_by_mission": false,
+    "originating_mission_must_remain_byte_identical": true,
+    "verified_acquisition_required_before_replan": true,
+    "implementation_independent_verifier_required": true,
+    "current_platform_capability_required": true,
+    "terminal_verifier_must_use_distinct_implementation": true,
+    "user_device_required": false,
+    "val_town_forbidden": true
+  }
+}
