@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_PR35_GIT_SOURCE_INDEPENDENT_VERIFIER_VERIFICATION_V1",
+  "pr_candidate": 35,
+  "branch": "research/git-source-independent-verifier-20260927",
+  "executed_revision": "2539c525e298e7ca7faa3211922850ee31327ca5",
+  "status": "VERIFIED_WITHIN_PROMOTION_SCOPE",
+  "incremental_spend_usd": 0,
+  "user_device_used": false,
+  "val_town_used": false,
+  "exact_branch_bundle": {
+    "file_count": 7,
+    "git_blob_mismatches": 0,
+    "blobs": {
+      "canonical/runtime/auto_python_source_codec_acquisition.py": "3c3567ad700150a1efc8030d6b9bf39306acf532",
+      "canonical/runtime/verify_pending_cli_binding.py": "8ec4da92080e885a15266389c0318688e6408d43",
+      "canonical/runtime/promote_pending_binding.py": "f100c0d1ce5a4b07af0175035c3122d816459b0b",
+      "canonical/tests/test_auto_python_source_codec_acquisition.py": "0e37af4ef087e360c342219b232ee0a7496d8923",
+      "canonical/runtime/bound_capabilities/python_source_tree_codec.py": "8f452c01b2c88a9bd7663f8dc753b24b2e7f7f05",
+      "canonical/runtime/github_source_codec_runner.py": "d7fc51bbb9bab851dd0ba2349f3438cb928299f0",
+      "canonical/runtime/python_codec_probe.py": "fc8b5005a9888422e3cb61f6cf0bd147c740ec84"
+    }
+  },
+  "observed_execution": {
+    "py_compile_exit": 0,
+    "focused_source_tree_tests": {
+      "passed": 3,
+      "failed": 0,
+      "exit_code": 0
+    },
+    "source_tree_verification_boundary": {
+      "producer_repository": "NeuroJSON/pybj",
+      "producer_revision": "554def000aa473c4d0e5eaa3406287cea69c73a1",
+      "producer_source_git_blobs_verified": 6,
+      "producer_source_git_blob_mismatches": 0,
+      "producer_tree_sha256": "ae3772f35f25a48022e404dcc27e461f8b0eb2c62e9ef86f0ff54ac78e1ca5a6",
+      "producer_output_bytes": 45,
+      "producer_output_sha256": "ac964da082805ae196664d94905c9b869278dd916af49af886bba88bcb3599e6",
+      "producer_output_verified": true,
+      "semantic_roundtrip_verified": true,
+      "independent_verifier_receipt_injected_for_boundary_test": true,
+      "injected_verifier_source_type": "npm",
+      "injected_receipt_implementation_independent": true,
+      "injected_receipt_supplier_class_independent": true,
+      "result_independent_verified": true
+    },
+    "promotion_gate": {
+      "negative_without_independence": {
+        "outcome": "REJECTED",
+        "error": "VERIFICATION_IMPLEMENTATION_NOT_INDEPENDENT",
+        "registry_mutated": false
+      },
+      "positive_with_strict_independence": {
+        "outcome": "PROMOTED",
+        "registry_mutated": true
+      },
+      "pass": true
+    }
+  },
+  "verified_mechanisms": [
+    "source-tree acquisition generates a real verification mission path",
+    "source-tree verification materializes and hash-checks the producer tree",
+    "source-tree producer is executed through the bound adapter and separately decoded",
+    "source-tree producer verification delegates the independent check to the existing npm verifier boundary",
+    "git_source_tree promotion is held to the same strict implementation- and supplier-class-independence gate as PyPI/npm"
+  ],
+  "not_claimed": [
+    "real npm verifier discovery succeeded for UBJSON",
+    "SI-REAL-UBJSON-SNAPSHOT-001 completed",
+    "SUPERWORKER-UNIFIED-1 is a real Superworker",
+    "P_real > 0"
+  ],
+  "next_real_test": "Resume SI-REAL-UBJSON-SNAPSHOT-001 and execute the real independent npm verifier acquisition. Freeze its first causal failure if any."
+}
