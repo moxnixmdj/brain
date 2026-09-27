@@ -298,16 +298,33 @@ def service_pending(
     if not bridge_dir.is_dir():
         return []
     serviced: list[pathlib.Path] = []
-    for request_path in sorted(bridge_dir.glob("*.request.json")):
+    requests = [
+        (path, _read_json(path))
+        for path in sorted(bridge_dir.glob("*.request.json"))
+    ]
+    has_package_search = any(
+        request.get("kind") == "package_name_search"
+        for _path, request in requests
+    )
+    for request_path, request in requests:
         response_path = request_path.with_name(
             request_path.name.replace(".request.json", ".response.json")
         )
         if response_path.exists():
             continue
-        request = _read_json(request_path)
         # Service only relay kinds implemented here. Leave other pending kinds
         # untouched so the mission can prove whether they are actually causal.
         if request.get("kind") not in {"urlopen", "package_name_search"}:
+            continue
+        if (
+            request.get("kind") == "urlopen"
+            and str((request.get("payload") or {}).get("url") or "").rstrip("/")
+                == "https://pypi.org/simple"
+            and has_package_search
+        ):
+            # This is the legacy huge-index fallback. Once compact external
+            # package-name search exists for the same task, do not materialize
+            # tens of MiB merely because an earlier attempt emitted it.
             continue
         serviced.append(
             service_request(
