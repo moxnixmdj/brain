@@ -61,7 +61,12 @@ def main():
     dec=_resolve(module,cfg.get("decode_callable")) if cfg.get("decode_callable") else None
     if mode=="encode":
         source=json.loads(pathlib.Path(cfg["json_path"]).read_text(encoding="utf-8"))
-        payload=enc(source)
+        envelope_key=cfg.get("envelope_key")
+        if envelope_key is not None:
+            source={str(envelope_key):source}
+        kwargs=cfg.get("encode_kwargs") or {}
+        if not isinstance(kwargs,dict): raise RuntimeError("SOURCE_CODEC_ENCODE_KWARGS_INVALID")
+        payload=enc(source,**kwargs)
         if isinstance(payload,memoryview): payload=payload.tobytes()
         if isinstance(payload,bytearray): payload=bytes(payload)
         if isinstance(payload,str): payload=payload.encode("utf-8")
@@ -69,7 +74,15 @@ def main():
         pathlib.Path(cfg["output_path"]).write_bytes(payload)
         print(json.dumps({"ok":True,"bytes":len(payload)})); return
     if mode=="decode":
-        observed=_norm(dec(pathlib.Path(cfg["binary_path"]).read_bytes()))
+        kwargs=cfg.get("decode_kwargs") or {}
+        if not isinstance(kwargs,dict): raise RuntimeError("SOURCE_CODEC_DECODE_KWARGS_INVALID")
+        observed=_norm(dec(pathlib.Path(cfg["binary_path"]).read_bytes(),**kwargs))
+        envelope_key=cfg.get("envelope_key")
+        if envelope_key is not None:
+            key=str(envelope_key)
+            if not isinstance(observed,dict) or key not in observed:
+                raise RuntimeError("SOURCE_CODEC_ENVELOPE_MISSING:"+key)
+            observed=observed[key]
         print(json.dumps({"ok":True,"observed":observed})); return
     raise RuntimeError("SOURCE_CODEC_MODE_UNSUPPORTED:"+mode)
 
