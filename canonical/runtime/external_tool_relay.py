@@ -1,24 +1,34 @@
 #!/usr/bin/env python3
 """Bounded external-tool relay for Project Brain.
 
-This process is intentionally separate from ASTRA. It services only already
-materialized, content-addressed bridge requests and never interprets goals.
+The relay is a replaceable actuator, not a planner. It services only exact,
+content-addressed requests already emitted by ASTRA and returns typed results.
 """
 from __future__ import annotations
 
 import argparse
 import base64
 import hashlib
+import html
+import io
 import ipaddress
 import json
 import pathlib
+import re
+import tarfile
 import urllib.parse
 import urllib.request
 
 REQUEST_SCHEMA = "PROJECT_BRAIN_EXTERNAL_TOOL_REQUEST_V1"
 RESPONSE_SCHEMA = "PROJECT_BRAIN_EXTERNAL_TOOL_RESPONSE_V1"
-ALLOWED_KIND = "urlopen"
-ALLOWED_HOSTS = {"registry.npmjs.org"}
+ALLOWED_KINDS = {"urlopen", "package_name_search", "python_source_tree"}
+ASTRA_HTTPS_HOSTS = {
+    "registry.npmjs.org",
+    "pypi.org",
+    "files.pythonhosted.org",
+    "registry.modelcontextprotocol.io",
+}
+RELAY_GITHUB_HOSTS = {"api.github.com", "codeload.github.com"}
 MAX_RESPONSE_BYTES = 64 * 1024 * 1024
 FORBIDDEN_REQUEST_HEADERS = {"authorization", "cookie", "proxy-authorization"}
 
@@ -36,14 +46,14 @@ def _canonical_request_sha(request: dict) -> str:
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
-def _safe_https_url(raw: str) -> str:
+def _safe_https_url(raw: str, allowed_hosts: set[str]) -> str:
     parsed = urllib.parse.urlsplit(str(raw or ""))
     if parsed.scheme.lower() != "https":
         raise RelayError("URL_SCHEME_FORBIDDEN")
     if parsed.username or parsed.password:
         raise RelayError("URL_CREDENTIALS_FORBIDDEN")
     host = (parsed.hostname or "").lower().rstrip(".")
-    if host not in ALLOWED_HOSTS:
+    if host not in allowed_hosts:
         raise RelayError("URL_HOST_FORBIDDEN:" + host)
     try:
         ipaddress.ip_address(host)
@@ -58,8 +68,9 @@ def _validate_request(path: pathlib.Path) -> dict:
     request = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(request, dict) or request.get("schema") != REQUEST_SCHEMA:
         raise RelayError("REQUEST_SCHEMA_INVALID")
-    if request.get("kind") != ALLOWED_KIND:
-        raise RelayError("REQUEST_KIND_FORBIDDEN")
+    kind = str(request.get("kind") or "")
+    if kind not in ALLOWED_KINDS:
+        raise RelayError("REQUEST_KIND_FORBIDDEN:" + kind)
     supplied = str(request.get("request_sha256") or "")
     computed = _canonical_request_sha(request)
     if supplied != computed or path.name != supplied + ".request.json":
@@ -69,32 +80,71 @@ def _validate_request(path: pathlib.Path) -> dict:
     payload = request.get("payload")
     if not isinstance(payload, dict):
         raise RelayError("REQUEST_PAYLOAD_INVALID")
-    method = str(payload.get("method") or "GET").upper()
-    if method not in {"GET", "HEAD"}:
-        raise RelayError("METHOD_FORBIDDEN:" + method)
-    if payload.get("data_b64") not in {None, ""}:
-        raise RelayError("REQUEST_BODY_FORBIDDEN")
-    _safe_https_url(payload.get("url"))
-    headers = payload.get("headers") or {}
-    if not isinstance(headers, dict):
-        raise RelayError("REQUEST_HEADERS_INVALID")
-    if any(str(k).lower() in FORBIDDEN_REQUEST_HEADERS for k in headers):
-        raise RelayError("CREDENTIAL_HEADER_FORBIDDEN")
-    timeout = float(payload.get("timeout_s") or 20)
-    if timeout <= 0 or timeout > 60:
-        raise RelayError("TIMEOUT_OUT_OF_RANGE")
+    if kind == "urlopen":
+        method = str(payload.get("method") or "GET").upper()
+        if method not in {"GET", "HEAD"}:
+            raise RelayError("METHOD_FORBIDDEN:" + method)
+        if payload.get("data_b64") not in {None, ""}:
+            raise RelayError("REQUEST_BODY_FORBIDDEN")
+        _safe_https_url(payload.get("url"), ASTRA_HTTPS_HOSTS)
+        headers = payload.get("headers") or {}
+        if not isinstance(headers, dict):
+            raise RelayError("REQUEST_HEADERS_INVALID")
+        if any(str(k).lower() in FORBIDDEN_REQUEST_HEADERS for k in headers):
+            raise RelayError("CREDENTIAL_HEADER_FORBIDDEN")
+        timeout = float(payload.get("timeout_s") or 20)
+        if timeout <= 0 or timeout > 60:
+            raise RelayError("TIMEOUT_OUT_OF_RANGE")
+    elif kind == "package_name_search":
+        ecosystem = str(payload.get("ecosystem") or "").lower()
+        if ecosystem not in {"pypi", "npm"}:
+            raise RelayError("PACKAGE_ECOSYSTEM_FORBIDDEN:" + ecosystem)
+        tokens = payload.get("tokens")
+        if not isinstance(tokens, list) or not tokens or len(tokens) > 12:
+            raise RelayError("PACKAGE_SEARCH_TOKENS_INVALID")
+        limit = int(payload.get("limit") or 20)
+        if limit < 1 or limit > 100:
+            raise RelayError("PACKAGE_SEARCH_LIMIT_INVALID")
+    elif kind == "python_source_tree":
+        if int(payload.get("max_trees") or 0) < 1 or int(payload.get("max_trees") or 0) > 12:
+            raise RelayError("SOURCE_TREE_LIMIT_INVALID")
+        if payload.get("allowed_suffixes") != [".py"]:
+            raise RelayError("SOURCE_TREE_SUFFIX_POLICY_INVALID")
+        if payload.get("require_git_blob_sha") is not True:
+            raise RelayError("SOURCE_TREE_GIT_BLOB_REQUIRED")
     return request
 
 
-def _fetch(request: dict, opener=urllib.request.urlopen) -> dict:
+def _read_http(
+    url: str,
+    *,
+    allowed_hosts: set[str],
+    headers: dict[str, str] | None = None,
+    timeout: float = 20,
+    max_bytes: int = MAX_RESPONSE_BYTES,
+    opener=urllib.request.urlopen,
+):
+    safe = _safe_https_url(url, allowed_hosts)
+    req = urllib.request.Request(safe, headers=headers or {}, method="GET")
+    with opener(req, timeout=timeout) as response:
+        final_url = _safe_https_url(response.geturl(), allowed_hosts)
+        status = int(getattr(response, "status", 200))
+        raw = response.read(max_bytes + 1)
+        if len(raw) > max_bytes:
+            raise RelayError("RESPONSE_TOO_LARGE")
+        response_headers = dict(getattr(response, "headers", {}) or {})
+    return status, final_url, response_headers, raw
+
+
+def _service_urlopen(request: dict, opener=urllib.request.urlopen) -> dict:
     payload = request["payload"]
-    url = _safe_https_url(payload["url"])
+    url = _safe_https_url(payload["url"], ASTRA_HTTPS_HOSTS)
     method = str(payload.get("method") or "GET").upper()
     headers = {str(k): str(v) for k, v in (payload.get("headers") or {}).items()}
     req = urllib.request.Request(url, headers=headers, method=method)
     timeout = min(float(payload.get("timeout_s") or 20), 60.0)
     with opener(req, timeout=timeout) as response:
-        final_url = _safe_https_url(response.geturl())
+        final_url = _safe_https_url(response.geturl(), ASTRA_HTTPS_HOSTS)
         status = int(getattr(response, "status", 200))
         raw = response.read(MAX_RESPONSE_BYTES + 1)
         if len(raw) > MAX_RESPONSE_BYTES:
@@ -108,13 +158,235 @@ def _fetch(request: dict, opener=urllib.request.urlopen) -> dict:
     }
 
 
+def _normalized_search_tokens(payload: dict) -> list[str]:
+    out = []
+    for raw in payload.get("tokens") or []:
+        token = re.sub(r"[^a-z0-9._+-]+", "", str(raw).lower())
+        if token and token not in out:
+            out.append(token)
+    return out[:12]
+
+
+def _service_package_name_search(request: dict, opener=urllib.request.urlopen) -> dict:
+    payload = request["payload"]
+    ecosystem = str(payload["ecosystem"]).lower()
+    tokens = _normalized_search_tokens(payload)
+    limit = int(payload.get("limit") or 20)
+    headers = {"User-Agent": "ProjectBrain-ExternalRelay/1"}
+    if ecosystem == "npm":
+        query = urllib.parse.quote(" ".join(tokens))
+        url = "https://registry.npmjs.org/-/v1/search?text=" + query + "&size=" + str(limit)
+        _status, _final, _headers, raw = _read_http(
+            url, allowed_hosts={"registry.npmjs.org"}, headers=headers, opener=opener
+        )
+        data = json.loads(raw.decode("utf-8"))
+        names = [
+            str((item.get("package") or {}).get("name") or "")
+            for item in data.get("objects") or []
+            if isinstance(item, dict)
+        ]
+        return {"names": [x for x in names if x][:limit]}
+
+    _status, _final, _headers, raw = _read_http(
+        "https://pypi.org/simple/",
+        allowed_hosts={"pypi.org"},
+        headers=headers,
+        max_bytes=MAX_RESPONSE_BYTES,
+        opener=opener,
+    )
+    text = raw.decode("utf-8", "replace")
+    names = [html.unescape(x) for x in re.findall(r">([^<>]+)</a>", text, flags=re.I)]
+    scored = []
+    for name in names:
+        lower = name.lower()
+        hits = sum(1 for token in tokens if token in lower)
+        if not hits:
+            continue
+        exact = 0 if lower in tokens else 1
+        prefix = 0 if any(lower.startswith(t) for t in tokens) else 1
+        scored.append((exact, prefix, -hits, len(name), lower, name))
+    scored.sort()
+    return {"names": [x[-1] for x in scored[:limit]]}
+
+
+def _goal_terms(goal: str) -> list[str]:
+    raw = str(goal or "").lower()
+    terms = []
+    for match in re.findall(r"\b[a-z][a-z0-9+_.-]{2,30}\b", raw):
+        if match in {
+            "canonical", "json", "save", "encode", "binary", "file", "using",
+            "verify", "different", "implementation", "exactly", "identical",
+        }:
+            continue
+        if match not in terms:
+            terms.append(match)
+    for ext in re.findall(r"\.([a-z0-9]{2,10})\b", raw):
+        if ext not in terms:
+            terms.insert(0, ext)
+    return terms[:6]
+
+
+def _github_json(url: str, opener=urllib.request.urlopen):
+    _status, _final, _headers, raw = _read_http(
+        url,
+        allowed_hosts={"api.github.com"},
+        headers={
+            "User-Agent": "ProjectBrain-ExternalRelay/1",
+            "Accept": "application/vnd.github+json",
+        },
+        max_bytes=16 * 1024 * 1024,
+        opener=opener,
+    )
+    return json.loads(raw.decode("utf-8"))
+
+
+def _repo_source_tree(repo: dict, payload: dict, opener=urllib.request.urlopen):
+    full_name = str(repo.get("full_name") or "")
+    if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", full_name):
+        return None
+    default_branch = str(repo.get("default_branch") or "main")
+    commit = _github_json(
+        "https://api.github.com/repos/" + full_name + "/commits/" + urllib.parse.quote(default_branch, safe=""),
+        opener=opener,
+    )
+    revision = str(commit.get("sha") or "")
+    if not re.fullmatch(r"[0-9a-f]{40}", revision):
+        return None
+    tree = _github_json(
+        "https://api.github.com/repos/" + full_name + "/git/trees/" + revision + "?recursive=1",
+        opener=opener,
+    )
+    entries = tree.get("tree") or []
+    blob_shas = {
+        str(x.get("path")): str(x.get("sha"))
+        for x in entries
+        if isinstance(x, dict)
+        and x.get("type") == "blob"
+        and str(x.get("path") or "").endswith(".py")
+        and re.fullmatch(r"[0-9a-f]{40}", str(x.get("sha") or ""))
+    }
+    if not blob_shas:
+        return None
+
+    init_paths = [
+        p for p in blob_shas
+        if p.endswith("/__init__.py")
+        and len(pathlib.PurePosixPath(p).parts) <= 5
+        and not any(seg.lower() in {"tests", "test", "examples", "example", "docs"} for seg in pathlib.PurePosixPath(p).parts)
+    ]
+    if not init_paths:
+        return None
+
+    archive_url = "https://codeload.github.com/" + full_name + "/tar.gz/" + revision
+    _status, _final, _headers, archive = _read_http(
+        archive_url,
+        allowed_hosts={"codeload.github.com"},
+        headers={"User-Agent": "ProjectBrain-ExternalRelay/1"},
+        max_bytes=32 * 1024 * 1024,
+        opener=opener,
+    )
+    with tarfile.open(fileobj=io.BytesIO(archive), mode="r:gz") as tf:
+        archive_files = {}
+        for member in tf.getmembers():
+            if not member.isfile():
+                continue
+            parts = pathlib.PurePosixPath(member.name).parts
+            if len(parts) < 2:
+                continue
+            rel = pathlib.PurePosixPath(*parts[1:]).as_posix()
+            if rel in blob_shas:
+                fh = tf.extractfile(member)
+                if fh is not None:
+                    archive_files[rel] = fh.read()
+
+    max_files = min(int(payload.get("max_files_per_tree") or 128), 128)
+    max_total = min(int(payload.get("max_total_bytes_per_tree") or 2_000_000), 2_000_000)
+    candidates = []
+    for init_path in sorted(init_paths, key=lambda p: (len(pathlib.PurePosixPath(p).parts), p)):
+        package_dir = pathlib.PurePosixPath(init_path).parent.as_posix()
+        package_name = pathlib.PurePosixPath(package_dir).name
+        selected = []
+        total = 0
+        for repo_path in sorted(blob_shas):
+            if repo_path != package_dir + "/__init__.py" and not repo_path.startswith(package_dir + "/"):
+                continue
+            raw = archive_files.get(repo_path)
+            if raw is None:
+                continue
+            try:
+                content = raw.decode("utf-8")
+            except UnicodeDecodeError:
+                continue
+            actual = hashlib.sha1(b"blob " + str(len(raw)).encode() + b"\0" + raw).hexdigest()
+            if actual != blob_shas[repo_path]:
+                raise RelayError("GITHUB_BLOB_VERIFICATION_FAILED:" + repo_path)
+            suffix = pathlib.PurePosixPath(repo_path).relative_to(pathlib.PurePosixPath(package_dir).parent)
+            total += len(raw)
+            if total > max_total or len(selected) >= max_files:
+                break
+            selected.append({
+                "path": suffix.as_posix(),
+                "git_blob_sha": actual,
+                "content": content,
+            })
+        if selected and any(x["path"] == package_name + "/__init__.py" for x in selected):
+            candidates.append({
+                "schema": "PROJECT_BRAIN_EXTERNAL_SOURCE_TREE_V1",
+                "repository": full_name,
+                "revision": revision,
+                "files": selected,
+            })
+    return candidates[0] if candidates else None
+
+
+def _service_python_source_tree(request: dict, opener=urllib.request.urlopen) -> dict:
+    payload = request["payload"]
+    terms = _goal_terms(payload.get("goal"))
+    max_trees = min(int(payload.get("max_trees") or 12), 12)
+    seen = set()
+    trees = []
+    for term in terms[:4]:
+        query = urllib.parse.urlencode({
+            "q": term + " language:Python",
+            "sort": "stars",
+            "order": "desc",
+            "per_page": "5",
+        })
+        data = _github_json("https://api.github.com/search/repositories?" + query, opener=opener)
+        for repo in data.get("items") or []:
+            full_name = str(repo.get("full_name") or "")
+            if not full_name or full_name in seen:
+                continue
+            seen.add(full_name)
+            try:
+                tree = _repo_source_tree(repo, payload, opener=opener)
+            except Exception:
+                tree = None
+            if tree is not None:
+                trees.append(tree)
+            if len(trees) >= max_trees:
+                return {"trees": trees}
+    return {"trees": trees}
+
+
+def _dispatch(request: dict, opener=urllib.request.urlopen) -> dict:
+    kind = request["kind"]
+    if kind == "urlopen":
+        return _service_urlopen(request, opener=opener)
+    if kind == "package_name_search":
+        return _service_package_name_search(request, opener=opener)
+    if kind == "python_source_tree":
+        return _service_python_source_tree(request, opener=opener)
+    raise RelayError("REQUEST_KIND_FORBIDDEN:" + str(kind))
+
+
 def service_request(path: pathlib.Path, opener=urllib.request.urlopen) -> pathlib.Path:
     request = _validate_request(path)
     request_sha = request["request_sha256"]
     response_path = path.with_name(request_sha + ".response.json")
     if response_path.exists():
         return response_path
-    result = _fetch(request, opener=opener)
+    result = _dispatch(request, opener=opener)
     response = {
         "schema": RESPONSE_SCHEMA,
         "request_sha256": request_sha,
