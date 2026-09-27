@@ -1,15 +1,16 @@
 {
   "schema": "PROJECT_BRAIN_ASTRA_SHARED_RUNTIME_PORTFOLIO_STATE_V1",
-  "canonical_generation": "2026-09-22-astra-shared-runtime-portfolio-restored",
-  "status": "RECONCILED_ACTIVE",
+  "canonical_generation": "2026-09-27-post-pr20-device-independent-execution-reconciled",
+  "status": "RECONCILED_ACTIVE_POST_PR20",
   "optimization_target": "MINIMIZE_TIME_UNTIL_ALL_TARGET_CAPABILITIES_WORK_TOGETHER_IN_ONE_SHARED_RUNTIME",
   "runtime_components_in_use": [
     "GPT-5.6 Sol cognition",
     "GitHub canonical Brain",
     "GitHub connector",
-    "Remote Desktop Commander",
+    "private Google Drive scratch transport for exact private-repo materialization",
+    "ChatGPT Linux execution container",
     "web research",
-    "scheduled ChatGPT continuation"
+    "scheduled ChatGPT continuation when causally required"
   ],
   "lanes": [
     {
@@ -55,17 +56,20 @@
     }
   ],
   "uncovered_pressure_dimensions": [
-    "direct Windows GUI/browser delivery from a real source artifact when an authorized host is available",
-    "autonomous continuation without a user-triggered invocation, only if it becomes naturally necessary to complete consequential work"
+    "fresh real mission requiring dynamic knowledge/tool/capability acquisition absent at mission start",
+    "fresh interrupted mission requiring durable checkpoint and later-context continuation",
+    "direct Windows GUI/browser delivery remains a scoped platform certification and is not on the platform-neutral critical path"
   ],
-  "next_action": "Recompute T_ASTRA_REAL from live state. The only current blocker on this lane is an offline Windows source host for direct GUI/browser replay; do not wait idly if another independent real mission offers greater expected closure-time reduction. When Mo is online, replay exact source-artifact delivery only if that remains the frontier.",
+  "next_action": "Select and execute the smallest orthogonal portfolio of fresh consequential missions on the same shared runtime. Freeze only the first observed causal blocker in each lane, repair the smallest generic mechanism, replay the identical failed action, and resume. Do not wait for Mo and do not hunt providers unless a real mission exposes an execution-surface blocker.",
   "anti_waste": [
     "no qualification before operational portfolio closure",
     "no provider hunt without an observed blocker",
     "no speculative infrastructure",
     "no duplicate proof or rerun",
     "blocker-local search/reuse before invention",
-    "no critical checkpoint may depend solely on an unmirrored local artifact; mirror required continuation artifacts off-host with hash and canonical reference"
+    "no critical checkpoint may depend solely on an unmirrored local artifact; mirror required continuation artifacts off-host with hash and canonical reference",
+    "do not treat platform-specific Windows certification as a global blocker",
+    "do not repeat executor discovery while the verified PR20 device-independent route is adequate"
   ],
   "incremental_spend_usd": 0,
   "val_town_used": false,
