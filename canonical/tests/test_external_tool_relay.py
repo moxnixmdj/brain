@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 import hashlib
+import io
 import importlib.util
 import json
 import pathlib
 import tempfile
 import unittest
+import urllib.error
 
 CANONICAL_ROOT = pathlib.Path(__file__).resolve().parents[1]
 RUNTIME = CANONICAL_ROOT / "runtime"
@@ -72,6 +74,28 @@ class ExternalToolRelayTests(unittest.TestCase):
             self.assertEqual(observed["task_id"], "SI-REAL-UBJSON-SNAPSHOT-002")
             self.assertEqual(observed["status"], "ok")
             self.assertEqual(observed["result"]["status"], 200)
+
+    def test_preserves_http_404_as_response_evidence(self):
+        with tempfile.TemporaryDirectory() as td:
+            bridge = pathlib.Path(td)
+            url = "https://pypi.org/pypi/not-a-real-package/json"
+            req = make_request("urlopen", {
+                "url": url, "method": "GET", "headers": {},
+                "timeout_s": 20, "data_b64": None,
+            })
+            path = self._write(bridge, req)
+
+            def opener(request, **_kwargs):
+                raise urllib.error.HTTPError(
+                    request.full_url, 404, "Not Found",
+                    {"content-type": "application/json"},
+                    io.BytesIO(b'{"message":"Not Found"}'),
+                )
+
+            response = relay.service_request(path, opener=opener)
+            observed = json.loads(response.read_text(encoding="utf-8"))
+            self.assertEqual(observed["result"]["status"], 404)
+            self.assertEqual(observed["result"]["final_url"], url)
 
     def test_services_generic_pypi_name_search_without_hardcoded_package(self):
         with tempfile.TemporaryDirectory() as td:
