@@ -3,11 +3,10 @@
   "task_id": "SI-REAL-MISSION-001",
   "agent_id": "SUPERWORKER-UNIFIED-1",
   "mission_path": "canonical/astra_runtime/missions/SI_REAL_MISSION_001.json",
-  "mission_sha256": "fc7f08854695c958456e12843fde1351fb4a28f1f1db1ce510956bff8176aef6",
+  "mission_sha256": "00282b52dc51a80d6d0c6747fd66a75d4c34d84b2e35d6d545a49a98e581ef6e",
   "priority": 100,
   "prerequisites": [
-    "canonical/CANONICAL_POINTER.json",
-    "canonical/reconciliation/SAME_IDENTITY_INTEGRATION_FRONTIER_20260927_V1.json"
+    "canonical/astra_runtime/fixtures/SI_REAL_MISSION_001_CANONICAL_PROJECTION.json"
   ],
   "incremental_spend_usd": 0,
   "checkpoint_before_runtime_once": true
