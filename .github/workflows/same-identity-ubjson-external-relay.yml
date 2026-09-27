@@ -1,0 +1,135 @@
+name: Same-Identity UBJSON External Relay Recovery
+
+on:
+  push:
+    branches:
+      - 'repair/external-tool-relay-20260927'
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  recover_real_ubjson_mission:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+
+      - name: Verify frozen mission and relay regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          MISSION=canonical/astra_runtime/missions/ASTRA_REAL_SAME_IDENTITY_UBJSON_CANONICAL_SNAPSHOT_001.json
+          test "$(sha256sum "$MISSION" | awk '{print $1}')" = "f0773c75d92335e35b7b91d6d0eb8b72b5ea1f8cc3fbd9ea7ff13d0af8856166"
+          python -m py_compile \
+            canonical/runtime/external_tool_relay.py \
+            canonical/runtime/independent_npm_codec_verifier.py \
+            canonical/runtime/same_identity_supervisor.py \
+            canonical/runtime/astra_runtime.py
+          python -m unittest canonical.tests.test_external_tool_relay -v
+          python -m unittest canonical.tests.test_independent_npm_codec_verifier_bridge -v
+          python -m unittest canonical.tests.test_same_identity_supervisor -v
+
+      - name: Drive same worker through pending external requests
+        shell: bash
+        run: |
+          set -euo pipefail
+          TASK=canonical/same_identity_worker/tasks/SI_REAL_UBJSON_SNAPSHOT_001.json
+          BRIDGE=canonical/same_identity_worker/external_tool_bridge/SI-REAL-UBJSON-SNAPSHOT-001
+          mkdir -p mission-run-logs "$BRIDGE"
+          completed=0
+
+          for cycle in $(seq 1 32); do
+            echo "=== SUPERVISOR CYCLE $cycle ===" | tee "mission-run-logs/cycle_${cycle}.marker"
+            set +e
+            python canonical/runtime/same_identity_supervisor.py --task "$TASK" \
+              >"mission-run-logs/supervisor_${cycle}.log" 2>&1
+            rc=$?
+            set -e
+            cat "mission-run-logs/supervisor_${cycle}.log"
+
+            if [ "$rc" -eq 0 ]; then
+              completed=1
+              echo "$cycle" > mission-run-logs/completed_cycle.txt
+              break
+            fi
+
+            if [ "$rc" -eq 75 ]; then
+              echo "checkpoint/relaunch requested"
+              continue
+            fi
+
+            before=$(find "$BRIDGE" -maxdepth 1 -name '*.response.json' -type f | wc -l)
+            set +e
+            python canonical/runtime/external_tool_relay.py \
+              --bridge-dir "$BRIDGE" \
+              --allow-host registry.npmjs.org \
+              --allow-host pypi.org \
+              --allow-host files.pythonhosted.org \
+              --allow-host github.com \
+              --allow-host api.github.com \
+              --allow-host raw.githubusercontent.com \
+              --allow-host codeload.github.com \
+              | tee "mission-run-logs/relay_${cycle}.log"
+            relay_rc=${PIPESTATUS[0]}
+            set -e
+            if [ "$relay_rc" -ne 0 ]; then
+              echo "relay refused a request; this is the next causal blocker"
+              exit "$relay_rc"
+            fi
+            after=$(find "$BRIDGE" -maxdepth 1 -name '*.response.json' -type f | wc -l)
+
+            if [ "$after" -le "$before" ]; then
+              echo "No new external response was produced; runtime blocker is not relay-serviceable."
+              exit "$rc"
+            fi
+          done
+
+          if [ "$completed" -ne 1 ]; then
+            echo "Mission did not complete inside the bounded 32-cycle loop."
+            exit 99
+          fi
+
+          test -f canonical/astra_runtime/artifacts/CANONICAL_POINTER_20260927.ubj
+          python - <<'PY'
+          import json, pathlib
+          state = json.loads(pathlib.Path(
+              "canonical/same_identity_worker/state/SI-REAL-UBJSON-SNAPSHOT-001.json"
+          ).read_text())
+          assert state["agent_id"] == "SUPERWORKER-UNIFIED-1"
+          assert state["task_id"] == "SI-REAL-UBJSON-SNAPSHOT-001"
+          assert state["status"] == "COMPLETE"
+          assert state["checkpoint_count"] >= 1
+          assert state["runtime_attempt_count"] >= 1
+          print(json.dumps({
+              "schema": "PROJECT_BRAIN_REAL_UBJSON_RELAY_RUN_V1",
+              "mission_complete": True,
+              "agent_id": state["agent_id"],
+              "task_id": state["task_id"],
+              "checkpoint_count": state["checkpoint_count"],
+              "runtime_attempt_count": state["runtime_attempt_count"],
+          }, sort_keys=True))
+          PY
+
+      - name: Upload exact execution evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: same-identity-ubjson-relay-evidence
+          if-no-files-found: warn
+          path: |
+            mission-run-logs/
+            canonical/same_identity_worker/state/
+            canonical/same_identity_worker/evidence/
+            canonical/same_identity_worker/external_tool_bridge/SI-REAL-UBJSON-SNAPSHOT-001/
+            canonical/astra_runtime/state/
+            canonical/astra_runtime/evidence/
+            canonical/astra_runtime/artifacts/CANONICAL_POINTER_20260927.ubj
