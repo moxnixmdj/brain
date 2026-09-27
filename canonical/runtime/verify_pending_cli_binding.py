@@ -8,8 +8,9 @@ import astra_runtime
 import capability_discovery
 import auto_npm_library_acquisition
 import auto_pypi_library_acquisition
+import auto_github_source_acquisition
 import independent_npm_codec_verifier
-from bound_capabilities import cli_command, python_library_codec, node_library_codec
+from bound_capabilities import cli_command, python_library_codec, node_library_codec, github_source_codec
 
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 
@@ -395,6 +396,123 @@ def _verify_pending_npm(pending,result_path):
     print("PENDING_NPM_BINDING_EFFECT_VERIFIED",json.dumps(result,sort_keys=True))
 
 
+
+def _github_runner_decode(source_root,contract,output_path):
+    runner=ROOT/"canonical"/"runtime"/"github_source_codec_runner.py"
+    cfg={
+      "mode":"decode",
+      "source_root":str(source_root),
+      "module":contract["module"],
+      "decode_callable":contract["decode_callable"],
+      "binary_path":str(output_path),
+    }
+    proc=subprocess.run(
+        [sys.executable,str(runner)],
+        input=json.dumps(cfg),text=True,capture_output=True,cwd=ROOT,timeout=60
+    )
+    if proc.returncode!=0:
+        raise RuntimeError("GITHUB_SOURCE_INDEPENDENT_DECODE_FAILED:"+proc.stderr[-1200:])
+    out=json.loads(proc.stdout)
+    if out.get("ok") is not True:
+        raise RuntimeError("GITHUB_SOURCE_INDEPENDENT_DECODE_INVALID")
+    return out.get("observed")
+
+
+def _independent_github_source_verifier(pending,fixture_path,output_path):
+    producer=str(((pending.get("registry_entry") or {}).get("source") or {}).get("repository") or "")
+    goal=str(pending.get("goal") or "")
+    expected=json.loads(fixture_path.read_text(encoding="utf-8"))
+    attempts=[]
+    for cand in auto_github_source_acquisition._search(goal,limit=20):
+        repo=str(cand.get("repo") or "")
+        if not repo or repo.lower()==producer.lower():
+            continue
+        attempt={"repository":repo}
+        try:
+            mat=auto_github_source_acquisition._materialize_candidate(cand,ROOT)
+            contract=auto_github_source_acquisition._probe(mat,ROOT)
+            observed=_github_runner_decode(mat["source_root"],contract,output_path)
+            verified=observed==expected
+            attempt.update({"commit_sha":mat["commit_sha"],"verified":verified})
+            if verified:
+                return {
+                  "verified":True,
+                  "implementation_independent":True,
+                  "supplier_class_independent":True,
+                  "producer_source_type":"github_source",
+                  "verifier_source_type":"github_source",
+                  "producer_repository":producer,
+                  "verifier_repository":repo,
+                  "verifier_commit_sha":mat["commit_sha"],
+                  "verifier_contract":{
+                    "module":contract["module"],
+                    "decode_callable":contract["decode_callable"],
+                  },
+                  "attempts":attempts+[attempt],
+                }
+        except Exception as exc:
+            attempt["error"]=type(exc).__name__+":"+str(exc)
+        attempts.append(attempt)
+    raise RuntimeError("NO_INDEPENDENT_GITHUB_SOURCE_CODEC_VERIFIER:"+json.dumps(attempts,sort_keys=True)[:4000])
+
+
+def _verify_pending_github_source(pending,result_path):
+    astra_runtime._activate_external_http_bridge()
+    entry=pending["registry_entry"]
+    source=entry.get("source") or {}
+    dependency=astra_runtime._ensure_github_source_dependency(source)
+    contract=pending.get("contract") or {}
+    fixture=pending.get("verification_fixture")
+    if not isinstance(fixture,(list,dict)):
+        raise RuntimeError("GITHUB_SOURCE_VERIFICATION_FIXTURE_INVALID")
+    fixture_path=ROOT/"canonical"/"astra_runtime"/"tmp"/(pending["verification_mission_id"]+"_SOURCE.json")
+    output_path=ROOT/"canonical"/"astra_runtime"/"tmp"/(pending["verification_mission_id"]+"_OUTPUT.bin")
+    fixture_path.parent.mkdir(parents=True,exist_ok=True)
+    fixture_path.write_text(json.dumps(fixture,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
+    observed=github_source_codec.run({
+      "_source_root":dependency["source_root"],
+      "module":contract["module"],
+      "encode_callable":contract["encode_callable"],
+      "decode_callable":contract["decode_callable"],
+      "json_path":str(fixture_path.relative_to(ROOT)),
+      "output_path":str(output_path.relative_to(ROOT)),
+    },ROOT)
+    if observed.get("output_verified") is not True:
+        raise RuntimeError("PENDING_GITHUB_SOURCE_PRODUCER_EFFECT_FAILED")
+    fresh=github_source_codec.run({
+      "_source_root":dependency["source_root"],
+      "module":contract["module"],
+      "encode_callable":contract["encode_callable"],
+      "decode_callable":contract["decode_callable"],
+      "mode":"decode_verify",
+      "binary_path":str(output_path.relative_to(ROOT)),
+    },ROOT)
+    if fresh.get("verified") is not True or fresh.get("observed")!=fixture:
+        raise RuntimeError("PENDING_GITHUB_SOURCE_SEMANTIC_ROUNDTRIP_MISMATCH")
+    independent=_independent_github_source_verifier(pending,fixture_path,output_path)
+    raw=output_path.read_bytes()
+    result={
+      "schema":"PROJECT_BRAIN_AUTO_BINDING_VERIFICATION_V1",
+      "capability_id":pending["capability_id"],
+      "verification_mission_id":pending["verification_mission_id"],
+      "dependency":dependency,
+      "adapter_result":observed,
+      "semantic_roundtrip":{
+        "verified":True,
+        "fresh_decode_invocation":True,
+        "producer_roundtrip_verified":True,
+        "implementation_independent":True,
+        "independent_verifier":independent,
+      },
+      "independent_output_sha256":hashlib.sha256(raw).hexdigest(),
+      "independent_output_bytes":len(raw),
+      "independent_verified":True,
+      "status":"VERIFIED",
+    }
+    result_path.parent.mkdir(parents=True,exist_ok=True)
+    result_path.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+    print("PENDING_GITHUB_SOURCE_BINDING_EFFECT_VERIFIED",json.dumps(result,sort_keys=True))
+
 def main():
     if len(sys.argv)!=3:
         raise SystemExit("usage: verify_pending_cli_binding.py PENDING_JSON RESULT_JSON")
@@ -410,6 +528,9 @@ def main():
         return
     if source.get("type")=="npm":
         _verify_pending_npm(pending,result_path)
+        return
+    if source.get("type")=="github_source":
+        _verify_pending_github_source(pending,result_path)
         return
     if source.get("type")!="apt":
         raise RuntimeError("PENDING_BINDING_SOURCE_UNSUPPORTED")
