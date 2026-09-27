@@ -77,6 +77,10 @@ class SourceCodecAcquisitionTests(unittest.TestCase):
         self.assertEqual(pending["registry_entry"]["source"]["type"],"git_source_tree")
         self.assertIn("structured.binary.encode.ubj",pending["registry_entry"]["provides"])
         self.assertEqual(verifier["steps"][0]["verify"]["text"],"PENDING_SOURCE_BINDING_EFFECT_VERIFIED")
+        self.assertEqual(verifier["steps"][0]["command"].splitlines()[0],"set -euo pipefail")
+        self.assertTrue(verifier["steps"][0]["command"].splitlines()[1].startswith("python canonical/runtime/verify_pending_cli_binding.py "))
+        self.assertEqual(verifier["steps"][1]["command"].splitlines()[0],"set -euo pipefail")
+        self.assertTrue(verifier["steps"][1]["command"].splitlines()[1].startswith("python canonical/runtime/promote_pending_binding.py "))
 
 if __name__=="__main__":
     unittest.main(verbosity=2)
