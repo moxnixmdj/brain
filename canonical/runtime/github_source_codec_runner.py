@@ -28,7 +28,7 @@ def main():
     modules=cfg.get("modules") or []
     if mode=="probe":
         fixture=cfg.get("fixture")
-        pairs=[("encode","decode"),("dumps","loads"),("serialize","deserialize"),("pack","unpack")]
+        pairs=[("dumpb","loadb"),("packb","unpackb"),("encode","decode"),("dumps","loads"),("serialize","deserialize"),("pack","unpack")]
         attempts=[]
         for module_name in modules:
             try:

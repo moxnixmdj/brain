@@ -63,7 +63,10 @@ def _materialize_candidate(cand,root):
     tree=_json("https://api.github.com/repos/"+repo+"/git/trees/"+sha+"?recursive=1",limit=8_000_000)
     if tree.get("truncated") is True: raise AutoGitHubSourceAcquisitionFailure("GITHUB_SOURCE_TREE_TRUNCATED",repo)
     py=[x for x in tree.get("tree") or [] if x.get("type")=="blob" and str(x.get("path") or "").endswith(".py") and int(x.get("size") or 0)<=120000]
-    py=[x for x in py if not any(seg in str(x.get("path") or "").lower() for seg in ("/test","tests/","/vendor","vendored/","site-packages/"))]
+    def source_file_allowed(item):
+        parts=[p.lower() for p in pathlib.PurePosixPath(str(item.get("path") or "")).parts]
+        return not any(p in {"test","tests","vendor","vendored","site-packages"} for p in parts)
+    py=[x for x in py if source_file_allowed(x)]
     if not py or len(py)>40: raise AutoGitHubSourceAcquisitionFailure("GITHUB_SOURCE_PYTHON_SURFACE_INVALID",repo)
     total=sum(int(x.get("size") or 0) for x in py)
     if total>800000: raise AutoGitHubSourceAcquisitionFailure("GITHUB_SOURCE_BYTES_LIMIT",str(total))
@@ -79,8 +82,14 @@ def _materialize_candidate(cand,root):
         if _git_blob_sha1(raw)!=str(item.get("sha") or ""): raise AutoGitHubSourceAcquisitionFailure("GITHUB_SOURCE_BLOB_SHA1_MISMATCH",path)
         dst=stable/path; dst.parent.mkdir(parents=True,exist_ok=True); dst.write_bytes(raw)
         records.append({"path":path,"git_blob_sha1":str(item.get("sha")),"sha256":hashlib.sha256(raw).hexdigest(),"size":len(raw),"raw_url":raw_url})
-        if "/" not in path and path.endswith(".py") and pathlib.Path(path).stem!="__init__":
-            modules.append(pathlib.Path(path).stem)
+        pure=pathlib.PurePosixPath(path)
+        if len(pure.parts)==1 and pure.suffix==".py" and pure.stem not in {"__init__","setup","ez_setup","conftest"}:
+            modules.append(pure.stem)
+        elif pure.name=="__init__.py" and len(pure.parts)>1:
+            package_parts=pure.parts[:-1]
+            if all(re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*",part) for part in package_parts):
+                modules.append(".".join(package_parts))
+    modules=list(dict.fromkeys(modules))
     return {"repo":repo,"commit_sha":sha,"source_root":stable,"files":records,"modules":modules[:20],"license":cand.get("license"),"html_url":cand.get("html_url")}
 
 def _probe(mat,root):
