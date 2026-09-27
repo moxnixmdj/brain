@@ -59,7 +59,7 @@ def verify(format_name,json_path,binary_path,producer_project,root):
     for raw in candidates[:24]:
         attempt={"candidate":raw}
         try:
-            candidate=npm_acq._metadata(raw)
+            candidate=npm_acq._metadata(raw,allow_runtime_dependencies=True)
             package=str(candidate.get("package") or "")
             if not package or _norm(package)==producer:
                 attempt["status"]="REJECTED_PRODUCER_IDENTITY"
@@ -77,7 +77,7 @@ def verify(format_name,json_path,binary_path,producer_project,root):
                 extracted=npm_package_utils.safe_extract_package(
                     fetched["raw"],package_root
                 )
-                npm_package_utils.validate_zero_dependency_package(
+                dependency_policy=npm_package_utils.validate_builtin_only_runtime_dependencies(
                     extracted["package_json"]
                 )
                 runner=root/"canonical"/"runtime"/"node_codec_runner.js"
@@ -131,6 +131,7 @@ def verify(format_name,json_path,binary_path,producer_project,root):
                 "root_selector":contract["root_selector"],
                 "decode_export":contract["decode_export"],
                 "loader":contract.get("loader"),
+                "dependency_policy":dependency_policy,
                 "attempt_count":len(attempts),
                 "attempts":attempts,
             }
