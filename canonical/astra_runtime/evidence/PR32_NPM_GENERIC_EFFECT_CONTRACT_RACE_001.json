@@ -1,0 +1,18 @@
+{
+  "schema": "PROJECT_BRAIN_GENERIC_REPAIR_VERIFICATION_V1",
+  "repair_id": "NPM_GENERIC_EFFECT_CONTRACT_RACE_20260927",
+  "base_main_sha": "d0f38609026077bac7e9a1d41c9d1eee6ecf76b9",
+  "exact_blobs": {
+    "canonical/runtime/auto_npm_library_acquisition.py": "b74cdf34a96fc2d591b902e1d582e0381a8a8d08",
+    "canonical/tests/test_supplier_neutral_acquisition.py": "18786ff1cfd2d013cb3267099c095b41fe3a0da5"
+  },
+  "observed_execution": {
+    "platform": "linux",
+    "incremental_spend_usd": 0,
+    "syntax_pass": true,
+    "tests_passed": 4,
+    "tests_failed": 0
+  },
+  "causal_repair": "npm dispatch now accepts generic effect-compatible codec goals after supplier-neutral router selection",
+  "verified": true
+}

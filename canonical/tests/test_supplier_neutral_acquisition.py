@@ -35,6 +35,12 @@ class SupplierNeutralAcquisitionTests(unittest.TestCase):
         self.assertIs(out,expected)
         npm_dispatch.assert_called_once()
 
+    def test_generic_codec_goal_enters_npm_contract_race(self):
+        goal="Encode canonical/CANONICAL_POINTER.json as UBJSON and save canonical/astra_runtime/artifacts/out.ubj."
+        with mock.patch.object(npm,"_origin_mission_sha256",return_value="a"*64), mock.patch.object(npm,"_search_registry",return_value=[]):
+            with self.assertRaisesRegex(npm.AutoNpmAcquisitionFailure,"NO_COMPATIBLE_NPM_LIBRARY_CONTRACT"):
+                npm.dispatch(goal,"M","canonical/astra_runtime/missions/M.json","/tmp")
+
     def test_explicit_pypi_request_does_not_fall_through(self):
         goal="Using a PyPI Python library, encode source.json as UBJSON and save out.ubj."
         with (
