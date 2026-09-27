@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Autonomously acquire zero-dependency npm JavaScript codec capabilities."""
+"""Autonomously acquire bounded npm JavaScript codec capabilities."""
 from __future__ import annotations
 import hashlib,json,pathlib,re,subprocess,sys,tempfile,urllib.parse,urllib.request
 
@@ -127,33 +127,21 @@ def _metadata(candidate,timeout_s=20):
     integrity=str(dist.get("integrity") or "")
     if not tarball.startswith("https://") or not integrity:
         raise AutoNpmAcquisitionFailure("NPM_DIST_METADATA_INCOMPLETE",package)
-    for field in ("dependencies","optionalDependencies","peerDependencies"):
-        deps=payload.get(field) or {}
-        if not isinstance(deps,dict):
-            raise AutoNpmAcquisitionFailure("NPM_"+field.upper()+"_INVALID",package)
-        if deps:
-            raise AutoNpmAcquisitionFailure(
-                "NPM_RUNTIME_DEPENDENCIES_UNSUPPORTED",
-                package+":"+field+":"+json.dumps(sorted(deps))[:600]
-            )
-    bundled=payload.get("bundledDependencies")
-    if bundled is None:
-        bundled=payload.get("bundleDependencies")
-    if bundled not in (None,[],{}):
-        raise AutoNpmAcquisitionFailure("NPM_BUNDLED_DEPENDENCIES_UNSUPPORTED",package)
-    scripts=payload.get("scripts") or {}
-    if not isinstance(scripts,dict): scripts={}
-    forbidden=[k for k in ("preinstall","install","postinstall") if str(scripts.get(k) or "").strip()]
-    if forbidden:
-        raise AutoNpmAcquisitionFailure("NPM_LIFECYCLE_SCRIPTS_REJECTED",package+":"+",".join(forbidden))
-    if deps:
-        raise AutoNpmAcquisitionFailure("NPM_RUNTIME_DEPENDENCIES_UNSUPPORTED",package+":"+json.dumps(sorted(deps))[:600])
+    try:
+        dependency_boundary=npm_package_utils.validate_builtin_only_runtime_dependencies(payload)
+    except npm_package_utils.NpmPackageFailure as exc:
+        raise AutoNpmAcquisitionFailure(
+            "NPM_RUNTIME_DEPENDENCY_BOUNDARY_REJECTED",
+            package+":"+str(exc)
+        ) from exc
     return {
       **candidate,
       "metadata_url":url,
       "tarball_url":tarball,
       "integrity":integrity,
-      "dependency_count":0,
+      "dependency_count":dependency_boundary["declared_dependency_count"],
+      "external_runtime_dependency_count":dependency_boundary["external_runtime_dependency_count"],
+      "builtin_runtime_dependencies":dependency_boundary["builtin_runtime_dependencies"],
       "license":payload.get("license"),
       "engines":payload.get("engines"),
       "package_json":payload,
@@ -171,7 +159,7 @@ def _probe_contract(candidate,root):
     with tempfile.TemporaryDirectory(prefix="brain-npm-probe-") as td:
         package_root=pathlib.Path(td)/"package"
         extracted=npm_package_utils.safe_extract_package(fetched["raw"],package_root)
-        npm_package_utils.validate_zero_dependency_package(extracted["package_json"])
+        npm_package_utils.validate_builtin_only_runtime_dependencies(extracted["package_json"])
         fixture=[{"id":1,"text":"alpha"},{"id":2,"text":"beta"}]
         fixture_path=pathlib.Path(td)/"fixture.json"
         fixture_path.write_text(json.dumps(fixture),encoding="utf-8")
@@ -207,7 +195,9 @@ def _probe_contract(candidate,root):
       "tarball_bytes":fetched["bytes"],
       "tarball_path":str(stable.relative_to(root)),
       "metadata_url":candidate["metadata_url"],
-      "dependency_count":0,
+      "dependency_count":candidate.get("dependency_count",0),
+      "external_runtime_dependency_count":candidate.get("external_runtime_dependency_count",0),
+      "builtin_runtime_dependencies":candidate.get("builtin_runtime_dependencies",[]),
     }
 
 
@@ -262,13 +252,16 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
       "metadata_url":selected["metadata_url"],"tarball_url":selected["tarball_url"],
       "integrity":selected["integrity"],"integrity_algorithm":contract["integrity_algorithm"],
       "integrity_digest_hex":contract["integrity_digest_hex"],
-      "dependency_count":0,"license":selected.get("license"),
+      "dependency_count":selected.get("dependency_count",0),
+      "external_runtime_dependency_count":selected.get("external_runtime_dependency_count",0),
+      "builtin_runtime_dependencies":selected.get("builtin_runtime_dependencies",[]),
+      "license":selected.get("license"),
     }
     entry={
       "provides":provides,"requires":["json.file.available","node.runtime.available"],
       "keywords":keywords,"cost":1,"platforms":[_verified_runtime_platform()],"incremental_spend_usd":0,
       "limitations":[
-        "Automatically acquired from an integrity-verified zero-runtime-dependency npm package.",
+        "Automatically acquired from an integrity-verified npm package with zero external runtime dependencies; runtime-proven Node builtins are allowed.",
         "Lifecycle install hooks are rejected and package code is loaded only by isolated Node codec invocations."
       ],
       "adapter_module":"node_library_codec","entrypoint":"run",
