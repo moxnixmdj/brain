@@ -36,6 +36,8 @@ jobs:
 
       - name: Execute frozen same-identity UBJSON mission
         shell: bash
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
 
@@ -71,6 +73,8 @@ jobs:
               --agent-id "$AGENT_ID" \
               --task-id "$TASK_ID" \
               --allowed-host registry.npmjs.org \
+              --allowed-host pypi.org \
+              --allowed-host registry.modelcontextprotocol.io \
               --max-requests 16 \
               --max-bytes 25000000 \
               > "execution_logs/relay_${cycle}.json"
