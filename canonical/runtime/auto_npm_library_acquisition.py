@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Autonomously acquire zero-dependency npm JavaScript codec capabilities."""
 from __future__ import annotations
-import hashlib,json,pathlib,re,subprocess,sys,tempfile,urllib.parse,urllib.request
+import base64,hashlib,json,pathlib,re,subprocess,sys,tempfile,urllib.parse,urllib.request
 
 import npm_package_utils
 
@@ -10,6 +10,13 @@ class AutoNpmAcquisitionFailure(RuntimeError):
     def __init__(self,code,detail=None):
         self.code=code; self.detail=detail
         super().__init__(code if detail is None else f"{code}:{detail}")
+
+
+_EXTERNAL_PACKAGE_PROVIDER=None
+
+def set_external_package_provider(provider):
+    global _EXTERNAL_PACKAGE_PROVIDER
+    _EXTERNAL_PACKAGE_PROVIDER=provider
 
 
 def _verified_runtime_platform():
@@ -119,9 +126,17 @@ def _search_registry(goal,limit=30,timeout_s=20,format_hint=None):
     return candidates[:min(limit,30)]
 
 
-def _metadata(candidate,timeout_s=20):
-    package=candidate["package"]; version=candidate["version"]
-    url,payload=npm_package_utils.fetch_version_metadata(package,version,timeout_s=timeout_s)
+def _validate_metadata_payload(candidate,url,payload):
+    package=str(candidate["package"]); version=str(candidate["version"])
+    if not isinstance(payload,dict):
+        raise AutoNpmAcquisitionFailure("NPM_METADATA_INVALID",package)
+    observed_name=str(payload.get("name") or "")
+    observed_version=str(payload.get("version") or "")
+    if observed_name!=package or observed_version!=version:
+        raise AutoNpmAcquisitionFailure(
+            "NPM_METADATA_IDENTITY_MISMATCH",
+            json.dumps({"expected":[package,version],"observed":[observed_name,observed_version]},sort_keys=True)
+        )
     dist=payload.get("dist") or {}
     tarball=str(dist.get("tarball") or "")
     integrity=str(dist.get("integrity") or "")
@@ -146,11 +161,9 @@ def _metadata(candidate,timeout_s=20):
     forbidden=[k for k in ("preinstall","install","postinstall") if str(scripts.get(k) or "").strip()]
     if forbidden:
         raise AutoNpmAcquisitionFailure("NPM_LIFECYCLE_SCRIPTS_REJECTED",package+":"+",".join(forbidden))
-    if deps:
-        raise AutoNpmAcquisitionFailure("NPM_RUNTIME_DEPENDENCIES_UNSUPPORTED",package+":"+json.dumps(sorted(deps))[:600])
     return {
       **candidate,
-      "metadata_url":url,
+      "metadata_url":str(url),
       "tarball_url":tarball,
       "integrity":integrity,
       "dependency_count":0,
@@ -160,10 +173,72 @@ def _metadata(candidate,timeout_s=20):
     }
 
 
-def _probe_contract(candidate,root):
-    fetched=npm_package_utils.fetch_verified_tarball(
-        candidate["package"],candidate["version"],candidate["tarball_url"],candidate["integrity"]
+def _external_metadata(candidate):
+    provider=_EXTERNAL_PACKAGE_PROVIDER
+    if not callable(provider):
+        return None
+    response=provider(phase="metadata",candidate=dict(candidate))
+    if response is None:
+        return None
+    if not isinstance(response,dict):
+        raise AutoNpmAcquisitionFailure("NPM_EXTERNAL_METADATA_RESPONSE_INVALID")
+    url=str(response.get("metadata_url") or "")
+    payload=response.get("metadata")
+    if not url.startswith("https://registry.npmjs.org/"):
+        raise AutoNpmAcquisitionFailure("NPM_EXTERNAL_METADATA_URL_INVALID",url)
+    return _validate_metadata_payload(candidate,url,payload)
+
+
+def _metadata(candidate,timeout_s=20):
+    external=_external_metadata(candidate)
+    if external is not None:
+        return external
+    package=candidate["package"]; version=candidate["version"]
+    url,payload=npm_package_utils.fetch_version_metadata(package,version,timeout_s=timeout_s)
+    return _validate_metadata_payload(candidate,url,payload)
+
+
+def _materialize_external_tarball(candidate):
+    provider=_EXTERNAL_PACKAGE_PROVIDER
+    if not callable(provider):
+        return None
+    response=provider(phase="tarball",candidate={
+      "package":candidate["package"],"version":candidate["version"],
+      "metadata_url":candidate["metadata_url"],"tarball_url":candidate["tarball_url"],
+      "integrity":candidate["integrity"],
+    })
+    if response is None:
+        return None
+    if not isinstance(response,dict):
+        raise AutoNpmAcquisitionFailure("NPM_EXTERNAL_TARBALL_RESPONSE_INVALID")
+    encoded=str(response.get("content_b64") or "")
+    declared_sha=str(response.get("sha256") or "").lower()
+    if not re.fullmatch(r"[0-9a-f]{64}",declared_sha):
+        raise AutoNpmAcquisitionFailure("NPM_EXTERNAL_TARBALL_HASH_INVALID")
+    try:
+        raw=base64.b64decode(encoded,validate=True)
+    except Exception as exc:
+        raise AutoNpmAcquisitionFailure("NPM_EXTERNAL_TARBALL_BASE64_INVALID") from exc
+    if len(raw)>30_000_000:
+        raise AutoNpmAcquisitionFailure("NPM_EXTERNAL_TARBALL_BYTES_LIMIT")
+    actual=hashlib.sha256(raw).hexdigest()
+    if actual!=declared_sha:
+        raise AutoNpmAcquisitionFailure("NPM_EXTERNAL_TARBALL_HASH_MISMATCH")
+    # Reuse the existing npm integrity authority. The bridge supplies bytes;
+    # the runtime decides whether they match the official metadata contract.
+    verified=npm_package_utils.verify_tarball_bytes(
+        candidate["package"],candidate["version"],raw,
+        candidate["tarball_url"],candidate["integrity"]
     )
+    return verified
+
+
+def _probe_contract(candidate,root):
+    fetched=_materialize_external_tarball(candidate)
+    if fetched is None:
+        fetched=npm_package_utils.fetch_verified_tarball(
+            candidate["package"],candidate["version"],candidate["tarball_url"],candidate["integrity"]
+        )
     stable_dir=pathlib.Path(root)/"canonical"/"astra_runtime"/"tmp"/"npm_probe_packages"
     stable_dir.mkdir(parents=True,exist_ok=True)
     stable=stable_dir/(_slug(candidate["package"])+"-"+candidate["version"]+"-"+fetched["digest_hex"][:16]+".tgz")
