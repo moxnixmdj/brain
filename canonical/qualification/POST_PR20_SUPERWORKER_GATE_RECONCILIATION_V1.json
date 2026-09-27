@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_POST_PR20_SUPERWORKER_GATE_RECONCILIATION_V1",
+  "canonical_base": "86258402402550a543716615b188648f61ea42fd",
+  "evidence_presence_classification": "SUPERSEDED_BY_NEWER_CANONICAL_STATE",
+  "prior_adjudication": {
+    "path": "canonical/qualification/RECOVERY_SUPERWORKER_V6_WOLFRAM_WHOLE_DEFINITION_ADJUDICATION_V1.json",
+    "failed_gate_count": 7
+  },
+  "newer_authoritative_evidence": [
+    "canonical/qualification/SUPERWORKER_EXISTING_ASSET_COVERAGE_ADJUDICATION_V1.json",
+    "canonical/icw/ICW-CHATGPT-SOL-1/RESUME_RECEIPT_V1.json",
+    "canonical/icw/ICW-CHATGPT-SOL-1/V2_AUTONOMOUS_WAKE_RECEIPT.json",
+    "canonical/icw/ICW-CHATGPT-SOL-1/INDEPENDENT_PROMOTION_ADJUDICATION_V2.json",
+    "canonical/runtime/EPISTEMIC_POLICY_V1.json",
+    "canonical/runtime/executor_broker.py",
+    "canonical/astra_runtime/evidence_ledgers/GENERIC_NATIVE_PROBE_RECOVERY_MAIN_001.jsonl"
+  ],
+  "gate_results": {
+    "CAUSALLY_READY_TASK_ACQUISITION": {
+      "status": "PROVEN_BY_EXISTING_ASSETS",
+      "authority": "canonical/qualification/SUPERWORKER_EXISTING_ASSET_COVERAGE_ADJUDICATION_V1.json"
+    },
+    "LEASES_OWNERSHIP_DEDUPE_PROVENANCE_VERIFICATION": {
+      "status": "PROVEN_BY_EXISTING_ASSETS",
+      "authority": "canonical/qualification/SUPERWORKER_EXISTING_ASSET_COVERAGE_ADJUDICATION_V1.json"
+    },
+    "DURABLE_IDENTITY_AND_MISSION_BEYOND_CHAT_MODEL_INVOCATION": {
+      "status": "PROVEN_BY_EXISTING_ASSETS",
+      "authority": "canonical/qualification/SUPERWORKER_EXISTING_ASSET_COVERAGE_ADJUDICATION_V1.json"
+    },
+    "SURVIVES_CONTEXT_MODEL_PROVIDER_LOSS_VIA_CHECKPOINT_RELAUNCH": {
+      "status": "UNPROVEN_IN_ONE_INTEGRATED_COGNITIVE_WORKER"
+    },
+    "OBSERVE_REASON_RESEARCH_ACT_VERIFY_CHECKPOINT_CONTINUE": {
+      "status": "UNPROVEN_IN_ONE_INTEGRATED_COGNITIVE_WORKER",
+      "note": "ICW evidence materially supports later-context resume and autonomous wake, but existing independent promotion adjudication did not authorize the whole integrated claim."
+    },
+    "DYNAMIC_KNOWLEDGE_TOOL_CAPABILITY_DISCOVERY_ACQUISITION": {
+      "status": "UNPROVEN_IN_ONE_INTEGRATED_COGNITIVE_WORKER",
+      "note": "Generic acquisition mechanisms exist and are verified, but same-worker integrated use remains to be demonstrated."
+    },
+    "INDEPENDENT_PERSISTENT_EXECUTION_SYSTEM": {
+      "status": "UNPROVEN_IN_ONE_INTEGRATED_COGNITIVE_WORKER"
+    }
+  },
+  "proven_gate_count": 3,
+  "remaining_gate_count": 4,
+  "remaining_gates": [
+    "SURVIVES_CONTEXT_MODEL_PROVIDER_LOSS_VIA_CHECKPOINT_RELAUNCH",
+    "OBSERVE_REASON_RESEARCH_ACT_VERIFY_CHECKPOINT_CONTINUE",
+    "DYNAMIC_KNOWLEDGE_TOOL_CAPABILITY_DISCOVERY_ACQUISITION",
+    "INDEPENDENT_PERSISTENT_EXECUTION_SYSTEM"
+  ],
+  "shortest_next_experiment": {
+    "type": "ONE_INTEGRATED_REAL_MISSION",
+    "requirements": [
+      "single durable worker identity",
+      "fresh consequential goal with at least one capability absent at mission start",
+      "worker itself discovers and binds the missing capability",
+      "worker executes and independently verifies a real effect",
+      "worker checkpoints before completion",
+      "execution context is deliberately replaced or lost",
+      "same durable identity relaunches from checkpoint without replaying completed work",
+      "mission completes through the persistent execution system",
+      "distinct verifier adjudicates the whole same-identity chain"
+    ],
+    "rationale": "One mission can simultaneously expose all four remaining gates, minimizing wall-clock time versus four separate demonstrations."
+  },
+  "forbidden_shortcuts": [
+    "boolean composition across different worker identities",
+    "rerunning already-proven acquisition/task/dedupe mechanisms merely for ceremony",
+    "using internal Astra 61/61 as promotion proof",
+    "Val Town",
+    "user-device dependency"
+  ],
+  "incremental_spend_usd": 0
+}
