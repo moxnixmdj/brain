@@ -58,7 +58,7 @@ def _safe_headers(raw) -> dict[str, str]:
     return headers
 
 
-SUPPORTED_KINDS = {"urlopen", "package_name_search", "python_source_tree", "pypi_wheel_closure"}
+SUPPORTED_KINDS = {"urlopen", "package_name_search", "python_source_tree", "pypi_wheel_closure", "npm_package_closure"}
 
 def validate_request(request: dict, agent_id: str, task_id: str) -> tuple[str, str, dict]:
     if request.get("schema") != REQUEST_SCHEMA:
@@ -207,6 +207,142 @@ def execute_pypi_wheel_closure(payload: dict) -> dict:
                 "content_b64": base64.b64encode(raw).decode("ascii"),
             })
     return {"artifacts": artifacts}
+
+def _npm_name_from_install_path(raw: str) -> str:
+    path = pathlib.PurePosixPath(str(raw or ""))
+    parts = list(path.parts)
+    indexes = [i for i, part in enumerate(parts) if part == "node_modules"]
+    if not indexes:
+        raise RelayError("NPM_CLOSURE_INSTALL_PATH_INVALID")
+    i = indexes[-1] + 1
+    if i >= len(parts):
+        raise RelayError("NPM_CLOSURE_INSTALL_PATH_INVALID")
+    if parts[i].startswith("@"):
+        if i + 1 >= len(parts):
+            raise RelayError("NPM_CLOSURE_INSTALL_PATH_INVALID")
+        return parts[i] + "/" + parts[i + 1]
+    return parts[i]
+
+
+def _verify_npm_sri(raw: bytes, integrity: str) -> tuple[str, str]:
+    choices = []
+    order = {"sha512": 3, "sha384": 2, "sha256": 1}
+    for token in str(integrity or "").split():
+        if "-" not in token:
+            continue
+        alg, encoded = token.split("-", 1)
+        if alg not in order:
+            continue
+        try:
+            expected = base64.b64decode(encoded, validate=True)
+        except Exception:
+            continue
+        choices.append((order[alg], alg, expected))
+    if not choices:
+        raise RelayError("NPM_CLOSURE_STRONG_INTEGRITY_REQUIRED")
+    _, alg, expected = max(choices)
+    actual = hashlib.new(alg, raw).digest()
+    if actual != expected:
+        raise RelayError("NPM_CLOSURE_TARBALL_INTEGRITY_MISMATCH")
+    return alg, actual.hex()
+
+
+def execute_npm_package_closure(payload: dict) -> dict:
+    package = str(payload.get("package") or "").strip()
+    version = str(payload.get("version") or "").strip()
+    if not re.fullmatch(r"(?:@[A-Za-z0-9_.-]+/)?[A-Za-z0-9_.-]{1,160}", package):
+        raise RelayError("NPM_CLOSURE_PACKAGE_INVALID")
+    if not version or len(version) > 100:
+        raise RelayError("NPM_CLOSURE_VERSION_INVALID")
+    max_packages = min(max(int(payload.get("max_packages") or 32), 1), 32)
+    max_total = min(max(int(payload.get("max_total_bytes") or 80_000_000), 1), 80_000_000)
+
+    with tempfile.TemporaryDirectory(prefix="brain-npm-closure-") as td:
+        work = pathlib.Path(td)
+        (work / "package.json").write_text(json.dumps({
+            "name": "project-brain-closure",
+            "private": True,
+            "version": "0.0.0",
+            "dependencies": {package: version},
+        }, sort_keys=True), encoding="utf-8")
+        env = {
+            **os.environ,
+            "npm_config_ignore_scripts": "true",
+            "npm_config_audit": "false",
+            "npm_config_fund": "false",
+        }
+        proc = subprocess.run(
+            [
+                "npm", "install", "--package-lock-only", "--ignore-scripts",
+                "--no-audit", "--no-fund", "--omit=dev",
+            ],
+            cwd=work, text=True, capture_output=True, timeout=180, env=env,
+        )
+        if proc.returncode != 0:
+            raise RelayError("NPM_CLOSURE_RESOLUTION_FAILED:" + proc.stderr[-1200:])
+        lock = json.loads((work / "package-lock.json").read_text(encoding="utf-8"))
+        packages = lock.get("packages")
+        if not isinstance(packages, dict):
+            raise RelayError("NPM_CLOSURE_LOCK_INVALID")
+
+        rows = []
+        total = 0
+        for install_path, meta in sorted(packages.items()):
+            if not install_path:
+                continue
+            if not isinstance(meta, dict):
+                raise RelayError("NPM_CLOSURE_LOCK_RECORD_INVALID")
+            posix = pathlib.PurePosixPath(str(install_path))
+            if posix.is_absolute() or ".." in posix.parts or "node_modules" not in posix.parts:
+                raise RelayError("NPM_CLOSURE_INSTALL_PATH_INVALID")
+            name = _npm_name_from_install_path(install_path)
+            resolved_version = str(meta.get("version") or "")
+            resolved_url = _validate_url(meta.get("resolved"))
+            integrity = str(meta.get("integrity") or "")
+            if not resolved_version or not integrity:
+                raise RelayError("NPM_CLOSURE_LOCK_RECORD_INCOMPLETE")
+            req = urllib.request.Request(
+                resolved_url,
+                headers={"User-Agent": "ProjectBrain-ExternalRelay/1"},
+            )
+            with urllib.request.urlopen(req, timeout=60) as response:
+                raw = response.read(MAX_BODY_BYTES + 1)
+            if len(raw) > MAX_BODY_BYTES:
+                raise RelayError("NPM_CLOSURE_TARBALL_TOO_LARGE")
+            total += len(raw)
+            if total > max_total:
+                raise RelayError("NPM_CLOSURE_TOTAL_BYTES_LIMIT")
+            alg, digest_hex = _verify_npm_sri(raw, integrity)
+            rows.append({
+                "install_path": posix.as_posix(),
+                "package": name,
+                "version": resolved_version,
+                "resolved_url": resolved_url,
+                "integrity": integrity,
+                "integrity_algorithm": alg,
+                "integrity_digest_hex": digest_hex,
+                "sha256": hashlib.sha256(raw).hexdigest(),
+                "content_b64": base64.b64encode(raw).decode("ascii"),
+                "bytes": len(raw),
+            })
+            if len(rows) > max_packages:
+                raise RelayError("NPM_CLOSURE_PACKAGE_COUNT_LIMIT")
+
+    root_matches = [
+        row for row in rows
+        if row["install_path"] == "node_modules/" + package
+    ]
+    if len(root_matches) != 1 or root_matches[0]["version"] != version:
+        raise RelayError("NPM_CLOSURE_ROOT_IDENTITY_MISMATCH")
+    return {
+        "schema": "PROJECT_BRAIN_EXTERNAL_NPM_PACKAGE_CLOSURE_V1",
+        "root_package": package,
+        "root_version": version,
+        "package_count": len(rows),
+        "total_bytes": total,
+        "packages": rows,
+    }
+
 
 def _distinctive_goal_terms(goal: str) -> list[str]:
     words = re.findall(r"[A-Za-z][A-Za-z0-9+_.-]{2,40}", str(goal or ""))
@@ -416,6 +552,8 @@ def service_request(path: pathlib.Path, agent_id: str, task_id: str) -> pathlib.
         result = execute_python_source_tree(payload)
     elif kind == "pypi_wheel_closure":
         result = execute_pypi_wheel_closure(payload)
+    elif kind == "npm_package_closure":
+        result = execute_npm_package_closure(payload)
     else:
         raise RelayError("REQUEST_KIND_NOT_ALLOWED")
     response = {
