@@ -116,6 +116,21 @@ class ExternalToolRelayTests(unittest.TestCase):
             observed = json.loads(response.read_text(encoding="utf-8"))
             self.assertEqual(observed["result"]["names"], ["ubjson-x", "xubj"])
 
+    def test_accepts_bounded_pypi_wheel_closure_contract(self):
+        with tempfile.TemporaryDirectory() as td:
+            bridge = pathlib.Path(td)
+            req = make_request("pypi_wheel_closure", {
+                "project": "example-package",
+                "version": "1.2.3",
+                "metadata_url": "https://pypi.org/pypi/example-package/1.2.3/json",
+                "candidate_wheels": [],
+                "max_wheels": 32,
+                "max_total_bytes": 160000000,
+            })
+            path = self._write(bridge, req)
+            observed = relay._validate_request(path)
+            self.assertEqual(observed["kind"], "pypi_wheel_closure")
+
     def test_source_tree_request_requires_git_blob_evidence(self):
         with tempfile.TemporaryDirectory() as td:
             bridge = pathlib.Path(td)
