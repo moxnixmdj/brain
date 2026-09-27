@@ -99,6 +99,7 @@ jobs:
         run: |
           python - <<'PY'
           import hashlib,json,pathlib
+          pathlib.Path("execution_logs").mkdir(parents=True, exist_ok=True)
           task_id="SI-REAL-UBJSON-SNAPSHOT-001"
           state=pathlib.Path("canonical/same_identity_worker/state")/(task_id+".json")
           artifact=pathlib.Path("canonical/astra_runtime/artifacts/CANONICAL_POINTER_20260927.ubj")
