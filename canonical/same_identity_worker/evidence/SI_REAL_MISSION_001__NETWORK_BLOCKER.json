@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_SAME_IDENTITY_REAL_MISSION_BLOCKER_V1",
+  "blocker_id": "SI-REAL-MISSION-001__NETWORK_ACQUISITION_UNAVAILABLE",
+  "worker_id": "SUPERWORKER-UNIFIED-1",
+  "observed_executor": "chatgpt-session-linux-private-github-drive-base64-bridge-20260926",
+  "observed_at_utc": "2026-09-27T00:22:00Z",
+  "phase": "REAL_MISSION_PREFLIGHT",
+  "first_generic_blocker": "EXECUTOR_NETWORK_RESOLUTION_UNAVAILABLE",
+  "evidence": {
+    "text_pollinations_ai": "URLError:[Errno -3] Temporary failure in name resolution",
+    "pypi_org": "URLError:[Errno -3] Temporary failure in name resolution"
+  },
+  "causal_effect": [
+    "shared ASTRA runtime cannot perform live advisory-model calls from this executor",
+    "shared ASTRA runtime cannot perform live PyPI discovery/acquisition from this executor",
+    "same-identity real mission requiring dynamic knowledge/capability acquisition cannot be truthfully completed on this executor yet"
+  ],
+  "not_claimed": [
+    "no mission success",
+    "no dynamic acquisition success",
+    "no P_real credit",
+    "no Superworker promotion"
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "user_device_forbidden": true,
+    "val_town_forbidden": true
+  },
+  "next_action": "BIND_EXISTING_NETWORK_CAPABLE_ZERO_INCREMENTAL_SPEND_TOOL_SURFACE_TO_SAME_DURABLE_WORKER_IDENTITY__DO_NOT_REBUILD_SUPERVISOR"
+}
