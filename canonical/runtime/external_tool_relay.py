@@ -20,7 +20,7 @@ import urllib.request
 
 REQUEST_SCHEMA = "PROJECT_BRAIN_EXTERNAL_TOOL_REQUEST_V1"
 RESPONSE_SCHEMA = "PROJECT_BRAIN_EXTERNAL_TOOL_RESPONSE_V1"
-ALLOWED_HOSTS = {"registry.npmjs.org"}
+ALLOWED_HOSTS = {"registry.npmjs.org", "pypi.org", "registry.modelcontextprotocol.io"}
 ALLOWED_METHODS = {"GET", "HEAD"}
 ALLOWED_HEADERS = {"accept", "accept-encoding", "user-agent"}
 MAX_BODY_BYTES = 50_000_000
@@ -152,6 +152,11 @@ def service_pending(bridge_dir: pathlib.Path, agent_id: str, task_id: str) -> li
     bridge_dir.mkdir(parents=True, exist_ok=True)
     written = []
     for path in sorted(bridge_dir.glob("*.request.json")):
+        request = json.loads(path.read_text(encoding="utf-8"))
+        # Leave unknown/custom kinds pending. They are separate authority surfaces
+        # and must be implemented only if a resumed real mission proves them causal.
+        if request.get("kind") != "urlopen":
+            continue
         response = service_request(path, agent_id, task_id)
         if response is not None:
             written.append(response.name)
