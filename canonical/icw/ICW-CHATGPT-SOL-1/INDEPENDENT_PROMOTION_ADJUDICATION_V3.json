@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_ICW_INDEPENDENT_PROMOTION_ADJUDICATION_V3",
+  "verifier_role": "FRESH_INDEPENDENT_EVIDENCE_ONLY_READJUDICATOR",
+  "candidate_identity": "ICW-CHATGPT-SOL-1",
+  "mission_id": "ICW-PROMOTION-CLOSURE-V2-20260922",
+  "canonical_base_commit": "bacf227bfd2edf278af57cbbc8e34ec8103d2da4",
+  "evidence_classification": "CAPABILITY_PROVEN_EVIDENCE_PRESENT",
+  "rerun_performed": false,
+  "passed": true,
+  "integrated_cognitive_worker_whole_loop_verified": true,
+  "project_brain_full_superworker_promotion_authorized": false,
+  "project_brain_p_real": 0,
+  "reason_full_superworker_not_promoted": "The V2 closure proves the frozen ICW same-identity loop, but the current broader Project Brain Superworker definition additionally requires same-worker dynamic knowledge/tool/capability acquisition, causally ready task acquisition, provider-loss recovery, and leases/ownership/dedupe/provenance/verification. Those are not all proven by this ICW evidence chain.",
+  "gate_results": {
+    "V2_FROZEN_MISSION_PROSPECTIVE_IDENTITY": "PASS",
+    "V2_CHRONOLOGY_MISSION_BEFORE_EXECUTION_EVIDENCE": "PASS",
+    "EXACT_WORKER_IDENTITY_STABLE_IN_REVIEWED_V2_RECORD": "PASS",
+    "CANONICAL_RAW_GUI_ACTION_EVIDENCE": "PASS",
+    "CANONICAL_RAW_UIAUTOMATION_EVIDENCE": "PASS",
+    "FRESH_INDEPENDENT_LIVE_UIAUTOMATION_READBACK": "PASS",
+    "V2_AUTONOMOUS_WAKE_AFTER_CHECKPOINT": "PASS",
+    "GUI_ACTION_NOT_REPEATED_ON_WAKE": "PASS",
+    "NO_SELF_CERTIFICATION": "PASS",
+    "WHOLE_SAME_IDENTITY_INTEGRATED_COGNITIVE_WORKER": "PASS"
+  },
+  "chronology": {
+    "frozen_v2_mission_commit": "7effcaa03a36a64e411da9979f0e06064aa14512",
+    "candidate_completion_commit": "65174a9adfa4faa7f9f6ba63c83498c190456fd4",
+    "failed_v2_adjudication_commit": "2f49794683541fc67e2c2807cbc6f77888482642",
+    "independent_live_readback_commit": "173e2a4829280b8876053195eb988becb44808a2",
+    "finding": "The exact reconsideration evidence was added after the fail-closed V2 adjudication and without modifying prior candidate evidence."
+  },
+  "live_gui_readback": {
+    "path": "canonical/icw/ICW-CHATGPT-SOL-1/V2_INDEPENDENT_LIVE_GUI_READBACK.json",
+    "pass": true,
+    "observed_exact_text": "ICW-CHATGPT-SOL-1|ICW-PROMOTION-CLOSURE-V2-20260922|GUI-EFFECT",
+    "method": "TextPattern",
+    "mutation_performed": false
+  },
+  "reconsideration_finding": "INDEPENDENT_PROMOTION_ADJUDICATION_V2 identified one smallest exact missing gate: fresh independent live UIAutomation readback. V2_INDEPENDENT_LIVE_GUI_READBACK.json later satisfies that exact gate. Under the mandatory recovery ladder, evidence-only readjudication is therefore the correct action; candidate work is not rerun.",
+  "current_broader_superworker_gate_reconciliation": {
+    "INDEPENDENT_PERSISTENT_EXECUTION_SYSTEM": "PARTIAL__scheduled continuation and durable checkpoint proven, but no claim of fully independent provider-neutral persistent cognition",
+    "DURABLE_IDENTITY_AND_MISSION_BEYOND_CHAT_MODEL_INVOCATION": "PASS",
+    "OBSERVE_REASON_RESEARCH_ACT_VERIFY_CHECKPOINT_CONTINUE": "PASS",
+    "SURVIVES_CONTEXT_MODEL_PROVIDER_LOSS_VIA_CHECKPOINT_RELAUNCH": "PARTIAL__context/session boundary proven; model/provider loss not proven for same worker",
+    "CAUSALLY_READY_TASK_ACQUISITION": "NOT_PROVEN_IN_SAME_WORKER",
+    "DYNAMIC_KNOWLEDGE_TOOL_CAPABILITY_DISCOVERY_ACQUISITION": "NOT_PROVEN_IN_SAME_WORKER",
+    "CONSEQUENTIAL_MISSION_EXECUTION": "PASS",
+    "DURABLE_EVIDENCE_INCORPORATION": "PASS",
+    "LEASES_OWNERSHIP_DEDUPE_PROVENANCE_VERIFICATION": "NOT_PROVEN_IN_SAME_WORKER",
+    "NO_SELF_CERTIFIED_PROMOTION": "PASS"
+  },
+  "evidence_paths": [
+    "canonical/icw/ICW-CHATGPT-SOL-1/PROMOTION_CLOSURE_MISSION_V2.json",
+    "canonical/icw/ICW-CHATGPT-SOL-1/V2_CANDIDATE_COMPLETION_RECEIPT.json",
+    "canonical/icw/ICW-CHATGPT-SOL-1/V2_AUTONOMOUS_WAKE_RECEIPT.json",
+    "canonical/icw/ICW-CHATGPT-SOL-1/INDEPENDENT_PROMOTION_ADJUDICATION_V2.json",
+    "canonical/icw/ICW-CHATGPT-SOL-1/V2_INDEPENDENT_LIVE_GUI_READBACK.json",
+    "canonical/icw/ICW-CHATGPT-SOL-1/RESUME_RECEIPT_V1.json",
+    "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json"
+  ],
+  "val_town_used": false,
+  "incremental_spend_usd": 0,
+  "no_self_certification": true
+}
