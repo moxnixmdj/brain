@@ -1,0 +1,131 @@
+name: Real Same-Identity UBJSON Mission
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/runtime/external_tool_relay.py'
+      - 'canonical/tests/test_external_tool_relay.py'
+      - 'canonical/astra_runtime/missions/ASTRA_REAL_SAME_IDENTITY_UBJSON_CANONICAL_SNAPSHOT_001.json'
+      - 'canonical/same_identity_worker/tasks/SI_REAL_UBJSON_SNAPSHOT_001.json'
+      - '.github/workflows/real-same-identity-ubjson.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  real_ubjson:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+
+      - name: Verify relay and immutable mission bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m unittest canonical.tests.test_external_tool_relay
+          python - <<'PY'
+          import hashlib, pathlib
+          mission=pathlib.Path('canonical/astra_runtime/missions/ASTRA_REAL_SAME_IDENTITY_UBJSON_CANONICAL_SNAPSHOT_001.json')
+          expected='f0773c75d92335e35b7b91d6d0eb8b72b5ea1f8cc3fbd9ea7ff13d0af8856166'
+          actual=hashlib.sha256(mission.read_bytes()).hexdigest()
+          print({'mission_sha256':actual})
+          assert actual==expected
+          PY
+
+      - name: Run blocker-extinction loop
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, pathlib, subprocess, sys
+
+          agent='SUPERWORKER-UNIFIED-1'
+          task_id='SI-REAL-UBJSON-SNAPSHOT-001'
+          task='canonical/same_identity_worker/tasks/SI_REAL_UBJSON_SNAPSHOT_001.json'
+          bridge=pathlib.Path('canonical/same_identity_worker/external_tool_bridge')/task_id
+          transcript=[]
+
+          for iteration in range(1, 25):
+              proc=subprocess.run(
+                  [sys.executable,'canonical/runtime/same_identity_supervisor.py','--task',task],
+                  text=True,capture_output=True
+              )
+              record={
+                  'iteration':iteration,
+                  'returncode':proc.returncode,
+                  'stdout':proc.stdout[-12000:],
+                  'stderr':proc.stderr[-12000:],
+              }
+              transcript.append(record)
+              print(json.dumps(record,sort_keys=True))
+
+              if proc.returncode==0:
+                  pathlib.Path('REAL_UBJSON_LOOP_TRANSCRIPT.json').write_text(
+                      json.dumps(transcript,indent=2,sort_keys=True)+'\n'
+                  )
+                  print('REAL_UBJSON_MISSION_COMPLETE')
+                  raise SystemExit(0)
+
+              if proc.returncode not in {3,4,5,75}:
+                  break
+
+              relay=subprocess.run(
+                  [
+                      sys.executable,'canonical/runtime/external_tool_relay.py',
+                      '--bridge-dir',str(bridge),
+                      '--agent-id',agent,
+                      '--task-id',task_id,
+                  ],
+                  text=True,capture_output=True
+              )
+              record['relay_returncode']=relay.returncode
+              record['relay_stdout']=relay.stdout[-12000:]
+              record['relay_stderr']=relay.stderr[-12000:]
+              print(json.dumps({
+                  'iteration':iteration,
+                  'relay_returncode':relay.returncode,
+                  'relay_stdout':relay.stdout[-12000:],
+                  'relay_stderr':relay.stderr[-12000:],
+              },sort_keys=True))
+              if relay.returncode!=0:
+                  break
+
+              try:
+                  serviced=int(json.loads(relay.stdout).get('serviced',0))
+              except Exception:
+                  serviced=0
+
+              if proc.returncode!=75 and serviced==0:
+                  # This is a genuine non-external blocker. Stop instead of spinning.
+                  break
+
+          pathlib.Path('REAL_UBJSON_LOOP_TRANSCRIPT.json').write_text(
+              json.dumps(transcript,indent=2,sort_keys=True)+'\n'
+          )
+          print('REAL_UBJSON_MISSION_NOT_COMPLETE', file=sys.stderr)
+          raise SystemExit(1)
+          PY
+
+      - name: Upload exact evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: real-same-identity-ubjson-evidence
+          if-no-files-found: warn
+          path: |
+            REAL_UBJSON_LOOP_TRANSCRIPT.json
+            canonical/same_identity_worker/state/
+            canonical/same_identity_worker/evidence/
+            canonical/same_identity_worker/external_tool_bridge/
+            canonical/astra_runtime/state/
+            canonical/astra_runtime/evidence/
+            canonical/astra_runtime/artifacts/CANONICAL_POINTER_20260927.ubj
