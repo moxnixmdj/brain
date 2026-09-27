@@ -143,13 +143,19 @@ def _service_urlopen(request: dict, opener=urllib.request.urlopen) -> dict:
     headers = {str(k): str(v) for k, v in (payload.get("headers") or {}).items()}
     req = urllib.request.Request(url, headers=headers, method=method)
     timeout = min(float(payload.get("timeout_s") or 20), 60.0)
-    with opener(req, timeout=timeout) as response:
-        final_url = _safe_https_url(response.geturl(), ASTRA_HTTPS_HOSTS)
-        status = int(getattr(response, "status", 200))
-        raw = response.read(MAX_RESPONSE_BYTES + 1)
-        if len(raw) > MAX_RESPONSE_BYTES:
-            raise RelayError("RESPONSE_TOO_LARGE")
-        response_headers = dict(getattr(response, "headers", {}) or {})
+    try:
+        with opener(req, timeout=timeout) as response:
+            final_url = _safe_https_url(response.geturl(), ASTRA_HTTPS_HOSTS)
+            status = int(getattr(response, "status", 200))
+            raw = response.read(MAX_RESPONSE_BYTES + 1)
+            response_headers = dict(getattr(response, "headers", {}) or {})
+    except urllib.error.HTTPError as exc:
+        final_url = _safe_https_url(exc.geturl(), ASTRA_HTTPS_HOSTS)
+        status = int(exc.code)
+        raw = exc.read(MAX_RESPONSE_BYTES + 1)
+        response_headers = dict(getattr(exc, "headers", {}) or {})
+    if len(raw) > MAX_RESPONSE_BYTES:
+        raise RelayError("RESPONSE_TOO_LARGE")
     return {
         "status": status,
         "final_url": final_url,
