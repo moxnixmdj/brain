@@ -8,8 +8,11 @@ import astra_runtime
 import capability_discovery
 import auto_npm_library_acquisition
 import auto_pypi_library_acquisition
+import auto_python_source_codec_acquisition
 import independent_npm_codec_verifier
-from bound_capabilities import cli_command, python_library_codec, node_library_codec
+from bound_capabilities import (
+    cli_command, python_library_codec, node_library_codec, python_source_tree_codec
+)
 
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 
@@ -175,7 +178,9 @@ def _independent_npm_codec_verifier(pending,fixture_path,output_path):
     producer_project=str(
         producer_source.get("project")
         or producer_source.get("package")
+        or producer_source.get("repository")
         or (pending.get("selected_supplier") or {}).get("name")
+        or (pending.get("selected_supplier") or {}).get("repository")
         or ""
     )
     evidence=independent_npm_codec_verifier.verify(
@@ -327,6 +332,82 @@ def _verify_pending_pypi(pending,result_path):
     print("PENDING_PYPI_BINDING_EFFECT_VERIFIED",json.dumps(result,sort_keys=True))
 
 
+def _verify_pending_source_tree(pending,result_path):
+    entry=pending["registry_entry"]
+    source=entry.get("source") or {}
+    supplied=source.get("tree")
+    expected_tree_sha=str(source.get("tree_sha256") or "")
+    contract=pending.get("contract") or {}
+    fixture=pending.get("verification_fixture")
+    if not isinstance(fixture,(list,dict)):
+        raise RuntimeError("SOURCE_TREE_VERIFICATION_FIXTURE_INVALID")
+    fixture_path=ROOT/"canonical"/"astra_runtime"/"tmp"/(pending["verification_mission_id"]+"_SOURCE.json")
+    output_path=ROOT/"canonical"/"astra_runtime"/"tmp"/(pending["verification_mission_id"]+"_OUTPUT.bin")
+    fixture_path.parent.mkdir(parents=True,exist_ok=True)
+    fixture_path.write_text(json.dumps(fixture,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
+    import tempfile
+    with tempfile.TemporaryDirectory(prefix="brain-source-tree-verify-") as td:
+        source_root=pathlib.Path(td)/"site"
+        manifest=auto_python_source_codec_acquisition._materialize(supplied,source_root)
+        if manifest.get("tree_sha256")!=expected_tree_sha:
+            raise RuntimeError("SOURCE_TREE_VERIFICATION_TREE_HASH_MISMATCH")
+        common={
+          "_source_root":str(source_root),
+          "module":contract["module"],
+          "encode_callable":contract["encode_callable"],
+          "decode_callable":contract["decode_callable"],
+          "encode_kwargs":contract.get("encode_kwargs") or {},
+          "decode_kwargs":contract.get("decode_kwargs") or {},
+          "envelope_key":contract.get("envelope_key"),
+          "json_path":str(fixture_path.relative_to(ROOT)),
+        }
+        observed=python_source_tree_codec.run({
+          **common,
+          "output_path":str(output_path.relative_to(ROOT)),
+        },ROOT)
+        if observed.get("output_verified") is not True:
+            raise RuntimeError("PENDING_SOURCE_TREE_PRODUCER_EFFECT_FAILED")
+        decoded=python_source_tree_codec.run({
+          **common,
+          "mode":"decode_verify",
+          "binary_path":str(output_path.relative_to(ROOT)),
+        },ROOT)
+        if decoded.get("verified") is not True:
+            raise RuntimeError("PENDING_SOURCE_TREE_SEMANTIC_ROUNDTRIP_MISMATCH")
+        independent=_independent_npm_codec_verifier(
+            pending,fixture_path,output_path
+        )
+        if (
+            independent.get("verified") is not True
+            or independent.get("implementation_independent") is not True
+            or independent.get("supplier_class_independent") is not True
+        ):
+            raise RuntimeError("PENDING_SOURCE_TREE_INDEPENDENT_VERIFICATION_FAILED")
+    raw=output_path.read_bytes()
+    result={
+      "schema":"PROJECT_BRAIN_AUTO_BINDING_VERIFICATION_V1",
+      "capability_id":pending["capability_id"],
+      "verification_mission_id":pending["verification_mission_id"],
+      "source_tree_manifest":manifest,
+      "adapter_result":observed,
+      "semantic_roundtrip":{
+        "verified":True,
+        "producer_roundtrip_verified":True,
+        "implementation_independent":True,
+        "module":contract["module"],
+        "decode_callable":contract["decode_callable"],
+        "independent_verifier":independent,
+      },
+      "independent_output_sha256":hashlib.sha256(raw).hexdigest(),
+      "independent_output_bytes":len(raw),
+      "independent_verified":True,
+      "status":"VERIFIED",
+    }
+    result_path.parent.mkdir(parents=True,exist_ok=True)
+    result_path.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+    print("PENDING_SOURCE_BINDING_EFFECT_VERIFIED",json.dumps(result,sort_keys=True))
+
+
 def _verify_pending_npm(pending,result_path):
     entry=pending["registry_entry"]
     source=entry.get("source") or {}
@@ -410,6 +491,9 @@ def main():
         return
     if source.get("type")=="npm":
         _verify_pending_npm(pending,result_path)
+        return
+    if source.get("type")=="git_source_tree":
+        _verify_pending_source_tree(pending,result_path)
         return
     if source.get("type")!="apt":
         raise RuntimeError("PENDING_BINDING_SOURCE_UNSUPPORTED")
