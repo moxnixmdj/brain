@@ -390,6 +390,15 @@ def execute_claimed_task(
     env = os.environ.copy()
     env["PROJECT_BRAIN_AGENT_ID"] = agent_id
     env["PROJECT_BRAIN_TASK_ID"] = task["task_id"]
+    bridge_dir = (
+        root
+        / "canonical"
+        / "same_identity_worker"
+        / "external_tool_bridge"
+        / task["task_id"]
+    )
+    bridge_dir.mkdir(parents=True, exist_ok=True)
+    env["PROJECT_BRAIN_EXTERNAL_TOOL_BRIDGE_DIR"] = str(bridge_dir)
     argv = [sys.executable, "canonical/runtime/astra_runtime.py", task["mission_path"]]
     result = executor(argv, root, env)
 
