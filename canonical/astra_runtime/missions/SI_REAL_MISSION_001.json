@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
   "mission_id": "SI-REAL-MISSION-001",
-  "goal": "Inspect the live canonical Project Brain state using repository evidence. Read canonical/CANONICAL_POINTER.json and canonical/reconciliation/SAME_IDENTITY_INTEGRATION_FRONTIER_20260927_V1.json. Determine the exact current Superworker reality value, exact remaining causal blocker, and the next allowed causal action without inventing or repairing anything. Finish with a single JSON object containing schema PROJECT_BRAIN_CONSISTENCY_REPORT_V1, superworker_real, critical_blocker, next_action, and evidence_paths.",
+  "goal": "Inspect canonical/astra_runtime/fixtures/SI_REAL_MISSION_001_CANONICAL_PROJECTION.json. Using only that frozen repository evidence, determine the exact current Superworker reality value, exact remaining causal blocker, and the next allowed causal action. Finish with a single JSON object containing schema PROJECT_BRAIN_CONSISTENCY_REPORT_V1, superworker_real, critical_blocker, next_action, and evidence_paths.",
   "steps": [
     {
       "id": "reason-over-live-canonical-state",
