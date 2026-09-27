@@ -15,14 +15,17 @@ import ipaddress
 import json
 import pathlib
 import re
+import subprocess
+import sys
 import tarfile
+import tempfile
 import urllib.error
 import urllib.parse
 import urllib.request
 
 REQUEST_SCHEMA = "PROJECT_BRAIN_EXTERNAL_TOOL_REQUEST_V1"
 RESPONSE_SCHEMA = "PROJECT_BRAIN_EXTERNAL_TOOL_RESPONSE_V1"
-ALLOWED_KINDS = {"urlopen", "package_name_search", "python_source_tree"}
+ALLOWED_KINDS = {"urlopen", "package_name_search", "python_source_tree", "pypi_wheel_closure"}
 ASTRA_HTTPS_HOSTS = {
     "registry.npmjs.org",
     "pypi.org",
@@ -113,6 +116,19 @@ def _validate_request(path: pathlib.Path) -> dict:
             raise RelayError("SOURCE_TREE_SUFFIX_POLICY_INVALID")
         if payload.get("require_git_blob_sha") is not True:
             raise RelayError("SOURCE_TREE_GIT_BLOB_REQUIRED")
+    elif kind == "pypi_wheel_closure":
+        project = str(payload.get("project") or "").strip()
+        version = str(payload.get("version") or "").strip()
+        metadata_url = str(payload.get("metadata_url") or "").strip()
+        if not project or len(project) > 200 or not version or len(version) > 200:
+            raise RelayError("PYPI_CLOSURE_IDENTITY_INVALID")
+        _safe_https_url(metadata_url, {"pypi.org"})
+        max_wheels = int(payload.get("max_wheels") or 0)
+        max_total = int(payload.get("max_total_bytes") or 0)
+        if max_wheels < 1 or max_wheels > 32:
+            raise RelayError("PYPI_CLOSURE_WHEEL_LIMIT_INVALID")
+        if max_total < 1 or max_total > 160_000_000:
+            raise RelayError("PYPI_CLOSURE_BYTE_LIMIT_INVALID")
     return request
 
 
@@ -376,6 +392,48 @@ def _service_python_source_tree(request: dict, opener=urllib.request.urlopen) ->
     return {"trees": trees}
 
 
+def _service_pypi_wheel_closure(request: dict) -> dict:
+    payload = request["payload"]
+    project = str(payload["project"]).strip()
+    version = str(payload["version"]).strip()
+    max_wheels = min(int(payload.get("max_wheels") or 32), 32)
+    max_total = min(int(payload.get("max_total_bytes") or 160_000_000), 160_000_000)
+
+    with tempfile.TemporaryDirectory(prefix="brain-external-pypi-closure-") as td:
+        proc = subprocess.run(
+            [
+                sys.executable, "-m", "pip", "download",
+                "--disable-pip-version-check",
+                "--only-binary=:all:",
+                "--dest", td,
+                project + "==" + version,
+            ],
+            text=True,
+            capture_output=True,
+            timeout=180,
+        )
+        if proc.returncode != 0:
+            raise RelayError(
+                "PYPI_CLOSURE_RESOLUTION_FAILED:" + (proc.stderr or proc.stdout or "")[-1800:]
+            )
+        wheels = sorted(pathlib.Path(td).glob("*.whl"))
+        if not wheels or len(wheels) > max_wheels:
+            raise RelayError("PYPI_CLOSURE_WHEEL_COUNT_INVALID:" + str(len(wheels)))
+        artifacts = []
+        total = 0
+        for wheel in wheels:
+            raw = wheel.read_bytes()
+            total += len(raw)
+            if total > max_total:
+                raise RelayError("PYPI_CLOSURE_BYTES_LIMIT")
+            artifacts.append({
+                "filename": wheel.name,
+                "sha256": hashlib.sha256(raw).hexdigest(),
+                "content_b64": base64.b64encode(raw).decode("ascii"),
+            })
+    return {"artifacts": artifacts}
+
+
 def _dispatch(request: dict, opener=urllib.request.urlopen) -> dict:
     kind = request["kind"]
     if kind == "urlopen":
@@ -384,6 +442,8 @@ def _dispatch(request: dict, opener=urllib.request.urlopen) -> dict:
         return _service_package_name_search(request, opener=opener)
     if kind == "python_source_tree":
         return _service_python_source_tree(request, opener=opener)
+    if kind == "pypi_wheel_closure":
+        return _service_pypi_wheel_closure(request)
     raise RelayError("REQUEST_KIND_FORBIDDEN:" + str(kind))
 
 
