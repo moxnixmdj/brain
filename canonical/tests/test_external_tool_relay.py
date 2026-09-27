@@ -90,7 +90,7 @@ class ExternalToolRelayTests(unittest.TestCase):
                 opener=lambda request, **_kwargs: FakeResponse(request.full_url, body),
             )
             observed = json.loads(response.read_text(encoding="utf-8"))
-            self.assertEqual(observed["result"]["names"], ["xubj", "ubjson-x"])
+            self.assertEqual(observed["result"]["names"], ["ubjson-x", "xubj"])
 
     def test_source_tree_request_requires_git_blob_evidence(self):
         with tempfile.TemporaryDirectory() as td:
