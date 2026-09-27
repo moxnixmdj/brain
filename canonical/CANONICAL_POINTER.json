@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_POINTER_V1",
-  "canonical_generation": "2026-09-22-astra-shared-runtime-portfolio-restored",
+  "canonical_generation": "2026-09-27-post-pr20-superworker-frontier-reconciled",
   "control_plane": {
     "provider": "GitHub",
     "repository": "moxnixmdj/brain",
@@ -121,11 +121,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 0,
-    "next_step": "RECONSTRUCT_CURRENT_SHARED_ASTRA_RUNTIME__CHOOSE_SMALLEST_ORTHOGONAL_REAL_MISSION_PORTFOLIO_BY_CAPABILITY_EXPOSURE_PER_WALL_CLOCK_TIME__RUN_PORTFOLIO_CONCURRENTLY__FREEZE_EXACT_OBSERVED_BLOCKERS__LAUNCH_MAXIMUM_USEFUL_LOCAL_ACQUISITION_SWARMS__INTEGRATE_VERIFIED_WINNERS_GLOBALLY__REPLAY_AND_RESUME",
+    "next_step": "RUN_ONE_SINGLE_IDENTITY_CONSEQUENTIAL_MISSION_THAT_REQUIRES_JIT_CAPABILITY_ACQUISITION__CHECKPOINTS_BEFORE_COMPLETION__LOSES_OR_REPLACES_EXECUTION_CONTEXT__RELAUNCHES_SAME_DURABLE_IDENTITY_WITHOUT_REPLAY__COMPLETES__THEN_DISTINCTLY_VERIFY_ALL_FOUR_REMAINING_GATES",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "CURRENT_MINIMAL_ORTHOGONAL_MISSION_PORTFOLIO_AND_SHARED_RUNTIME_STATE_NOT_RECONCILED_FROM_LIVE_EVIDENCE",
+    "critical_blocker": "FOUR_REMAINING_INTEGRATED_SUPERWORKER_GATES_NOT_YET_PROVEN_IN_ONE_COGNITIVE_WORKER",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -159,7 +159,12 @@
         "LEASES_OWNERSHIP_DEDUPE_PROVENANCE_VERIFICATION"
       ]
     },
-    "superworker_remaining_integrated_gates": [],
+    "superworker_remaining_integrated_gates": [
+      "SURVIVES_CONTEXT_MODEL_PROVIDER_LOSS_VIA_CHECKPOINT_RELAUNCH",
+      "OBSERVE_REASON_RESEARCH_ACT_VERIFY_CHECKPOINT_CONTINUE",
+      "DYNAMIC_KNOWLEDGE_TOOL_CAPABILITY_DISCOVERY_ACQUISITION",
+      "INDEPENDENT_PERSISTENT_EXECUTION_SYSTEM"
+    ],
     "superworker_integrated_1_status": "COMPONENT_EVIDENCE_ONLY__REAL_STATUS_REVOKED",
     "superworker_integrated_1_identity_path": "canonical/agents/SUPERWORKER_INTEGRATED_1.json",
     "superworker_integrated_1_final_adjudication_path": "canonical/qualification/SUPERWORKER_INTEGRATED_1_FINAL_WHOLE_DEFINITION_ADJUDICATION_V1.json",
@@ -202,15 +207,15 @@
     "superworker_truth_scope": "NO_SINGLE_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "CURRENT_MINIMAL_ORTHOGONAL_MISSION_PORTFOLIO_AND_SHARED_RUNTIME_STATE_NOT_RECONCILED_FROM_LIVE_EVIDENCE",
+    "highest_leverage_capability_gap": "FOUR_REMAINING_INTEGRATED_SUPERWORKER_GATES_NOT_YET_PROVEN_IN_ONE_COGNITIVE_WORKER",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/ASTRA_TARGET_CAPABILITY_MAP_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
-    "execution_surface": "CHATGPT_WORK_WITH_GPT_6_ASTRA_IF_AVAILABLE_IN_EXISTING_PLAN",
+    "execution_surface": "GITHUB_CANONICAL_BRAIN_PLUS_DEVICE_INDEPENDENT_CHATGPT_LINUX_PRIVATE_REPO_EXECUTION_BRIDGE_WHEN_EXACT_SOURCE_CAN_BE_MATERIALIZED",
     "user_boundary": "NONE_FOR_CAPABILITY_WORK_USING_CURRENT_CONNECTED_TOOLS",
     "integrated_cognitive_worker_candidate": "ICW-CHATGPT-SOL-1",
     "integrated_cognitive_worker_checkpoint_path": "canonical/icw/ICW-CHATGPT-SOL-1/CHECKPOINT_V1.json",
-    "integrated_cognitive_worker_mission_progress": "AUDITOR_REAL_MISSION_COMPLETE__RESUME_AND_AUTONOMOUS_WAKE_NOT_YET_PROVEN",
+    "integrated_cognitive_worker_mission_progress": "CHECKPOINT_RESUME_AND_PLATFORM_NATIVE_AUTONOMOUS_WAKE_EVIDENCE_PRESENT__WHOLE_PROMOTION_NOT_AUTHORIZED__FOUR_INTEGRATED_GATES_REMAIN",
     "capability_realization_strategy_path": "canonical/capabilities/CAPABILITY_REALIZATION_STRATEGY_V2.json",
     "capability_acquisition_loop": [
       "DISCOVER",
@@ -231,6 +236,13 @@
       "historical_gap": "GENERAL_REASONING_AND_GENERIC_TOOL_USE_INSIDE_PERSISTENT_CONTROLLER",
       "top_level_frontier_superseded_by_commit": "71a4c714a8528f839699a2d81c7b66c96096f6ab",
       "current_authority": "canonical/laws/ASTRA_SHARED_RUNTIME_PORTFOLIO_V1.md"
+    },
+    "superworker_gate_reconciliation_path": "canonical/qualification/POST_PR20_SUPERWORKER_GATE_RECONCILIATION_V1.json",
+    "superworker_gate_reconciliation": {
+      "proven_by_existing_assets": 3,
+      "remaining_integrated": 4,
+      "prior_failed_gate_count": 7,
+      "evidence_presence_classification": "SUPERSEDED_BY_NEWER_CANONICAL_STATE"
     }
   },
   "provider_rules": {
@@ -255,15 +267,14 @@
     "infrastructure_freeze_when_next_real_mission_executable": true,
     "forbid_relabeling_bounded_executor_as_superworker": true,
     "only_current_allowed_frontier_actions": [
-      "reconstruct current shared ASTRA_RUNTIME from valid existing capability components",
-      "select the smallest orthogonal real mission portfolio maximizing capability and interaction exposure per wall clock time",
-      "run portfolio missions concurrently against the same runtime",
-      "freeze exact observed blockers and attack only those blockers with maximum useful parallelism",
-      "race reuse composition adaptation and invention only beneath a real blocker",
+      "recover and reconcile existing evidence before any fresh proof",
+      "run one single-identity consequential mission that simultaneously pressures all four remaining integrated Superworker gates",
+      "freeze the first exact observed blocker from that mission",
+      "race reuse composition adaptation and invention only beneath that blocker",
       "integrate independently verified winning repairs globally into the shared runtime",
-      "replay failed actions and resume missions immediately",
-      "expand legitimate zero cost execution capacity only as a parallel multiplier",
-      "defer formal qualification until the operational portfolio closes"
+      "replay the exact failed action and resume the same mission",
+      "defer compiler-handler deletion until generic mechanisms have displaced a handler family under real mission pressure",
+      "defer scaling until one integrated cognitive Superworker is independently proven"
     ],
     "truth_first_law": "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
     "live_canonical_refresh_before_consequential_action": true,
