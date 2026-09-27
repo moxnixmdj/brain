@@ -166,7 +166,13 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
                   "requires":["json.file.available"],
                   "keywords":["encode","binary",repository.lower()],
                   "adapter_module":"python_source_tree_codec",
-                  "source":{"type":"git_source_tree","repository":repository,"revision":revision,"tree":manifest},
+                  "source":{
+                    "type":"git_source_tree",
+                    "repository":repository,
+                    "revision":revision,
+                    "tree_sha256":manifest["tree_sha256"],
+                    "tree":supplied,
+                  },
                   "action_template":{"type":"invoke_capability","args":{
                     "capability_id":cap_id,"module":contract["module"],
                     "encode_callable":contract["encode_callable"],"decode_callable":contract["decode_callable"],
@@ -183,6 +189,11 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
                   "origin_mission_sha256_at_acquisition":origin_sha,
                   "selected_supplier":{"repository":repository,"revision":revision},
                   "contract":contract,"verification_fixture":contract["fixture"],
+                  "independent_verifier_source_trees":[
+                    other for other in trees[:8]
+                    if isinstance(other,dict)
+                    and str(other.get("repository") or "").strip()!=repository
+                  ][:4],
                   "registry_entry":entry,"verification_mission_id":verify_mid,
                   "verification_result_path":verify_rel,
                   "status":"PENDING_INDEPENDENT_VERIFICATION",
