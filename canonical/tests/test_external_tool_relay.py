@@ -5,6 +5,7 @@ import json
 import pathlib
 import tempfile
 import unittest
+import urllib.error
 from unittest import mock
 
 CANONICAL_ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -111,6 +112,36 @@ class RelayTests(unittest.TestCase):
                     expected_task="SI-REAL-UBJSON-SNAPSHOT-001",
                     opener=lambda request, timeout: _Response(),
                 )
+
+
+    def test_preserves_http_404_as_bridged_response(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = pathlib.Path(td)
+            request_path = _write_request(
+                root, "https://pypi.org/pypi/definitely-not-a-real-project/json"
+            )
+            body = b'{"message":"Not Found"}'
+            headers = _Headers({"Content-Length": str(len(body)), "Content-Type": "application/json"})
+            error = urllib.error.HTTPError(
+                request_path.as_uri(), 404, "Not Found", headers, None
+            )
+            error.fp = __import__("io").BytesIO(body)
+            error.url = "https://pypi.org/pypi/definitely-not-a-real-project/json"
+            error.geturl = lambda: error.url
+            error.__enter__ = lambda self=error: self
+            error.__exit__ = lambda *args: False
+            with mock.patch.object(relay, "_validate_public_host", return_value=None):
+                response = relay.service_request(
+                    request_path,
+                    allowed_hosts={"pypi.org"},
+                    expected_agent="SUPERWORKER-UNIFIED-1",
+                    expected_task="SI-REAL-UBJSON-SNAPSHOT-001",
+                    opener=lambda request, timeout: (_ for _ in ()).throw(error),
+                )
+            self.assertEqual(response["status"], "ok")
+            self.assertEqual(response["result"]["status"], 404)
+            self.assertEqual(base64.b64decode(response["result"]["body_b64"]), body)
+
 
 
 if __name__ == "__main__":
