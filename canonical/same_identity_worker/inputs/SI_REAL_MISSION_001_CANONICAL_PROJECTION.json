@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_SI_REAL_MISSION_CANONICAL_PROJECTION_V1",
+  "captured_from": {
+    "canonical_pointer": {
+      "path": "canonical/CANONICAL_POINTER.json",
+      "git_blob_sha": "b79203df3bf5dceb120867c0a3bac150d61e7838"
+    },
+    "same_identity_frontier": {
+      "path": "canonical/reconciliation/SAME_IDENTITY_INTEGRATION_FRONTIER_20260927_V1.json",
+      "git_blob_sha": "03d5b00a9f01500f58cc8dfc2f6c3b4a6f31501a"
+    }
+  },
+  "facts": {
+    "superworker_real": 0,
+    "critical_blocker": "SAME_DURABLE_COGNITIVE_IDENTITY_HAS_NOT_YET_EXECUTED_THE_FULL_SHARED_RUNTIME_LOOP_END_TO_END",
+    "implementation_strategy": "ADAPT_EXISTING_PROVEN_COMPONENTS_INTO_ONE_PROVIDER_NEUTRAL_SUPERVISOR__DO_NOT_REBUILD_SEVEN_MECHANISMS",
+    "required_next_proof": [
+      "one frozen durable worker identity owns task acquisition and lease",
+      "that same identity invokes the shared ASTRA runtime for a real consequential mission",
+      "that same identity dynamically discovers/acquires any missing capability encountered by the mission",
+      "that same identity acts, verifies, checkpoints, and resumes from durable state",
+      "executor/context loss is survived without changing worker identity",
+      "all evidence/provenance/dedupe belongs to that same identity",
+      "fresh independent verifier adjudicates the complete chain without component stitching"
+    ]
+  }
+}
