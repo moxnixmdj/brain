@@ -4685,6 +4685,17 @@ def _external_package_name_searcher(effect,ecosystem,tokens,limit,timeout_s):
         raise Blocker("EXTERNAL_PACKAGE_SEARCH_RESPONSE_INVALID")
     return [str(x) for x in names]
 
+def _external_python_source_tree_provider(goal,mission_id):
+    return _external_tool_bridge("python_source_tree",{
+      "goal":str(goal),
+      "mission_id":str(mission_id),
+      "max_trees":12,
+      "max_files_per_tree":128,
+      "max_total_bytes_per_tree":2000000,
+      "allowed_suffixes":[".py"],
+      "require_git_blob_sha":True,
+    })
+
 def _external_pypi_wheel_closure_provider(candidate,root):
     wheels=[]
     for item in candidate.get("wheels") or []:
@@ -4749,6 +4760,9 @@ def _load_auto_capability_acquisition():
         pypi_module=getattr(module,"auto_pypi_library_acquisition",None)
         if pypi_module is not None and hasattr(pypi_module,"set_external_wheel_closure_provider"):
             pypi_module.set_external_wheel_closure_provider(_external_pypi_wheel_closure_provider)
+        source_module=getattr(module,"auto_python_source_codec_acquisition",None)
+        if source_module is not None and hasattr(source_module,"set_external_source_tree_provider"):
+            source_module.set_external_source_tree_provider(_external_python_source_tree_provider)
     finally:
         if added:
             try:
