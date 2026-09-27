@@ -10,6 +10,7 @@ import auto_npm_library_acquisition
 import auto_pypi_library_acquisition
 import auto_python_source_codec_acquisition
 import independent_npm_codec_verifier
+import independent_system_codec_verifier
 from bound_capabilities import (
     cli_command, python_library_codec, node_library_codec, python_source_tree_codec
 )
@@ -194,6 +195,64 @@ def _independent_npm_codec_verifier(pending,fixture_path,output_path):
         raise RuntimeError("PENDING_PYPI_INDEPENDENT_VERIFICATION_FAILED")
     return evidence
 
+def _independent_codec_verifier(pending,fixture_path,output_path):
+    """Race independent verifier supplier classes, fail closed if all reject."""
+    producer_source=(pending.get("registry_entry") or {}).get("source") or {}
+    producer_project=str(
+        producer_source.get("project")
+        or producer_source.get("package")
+        or producer_source.get("repository")
+        or (pending.get("selected_supplier") or {}).get("name")
+        or (pending.get("selected_supplier") or {}).get("repository")
+        or ""
+    )
+    fmt=_pending_codec_format(pending)
+    attempts=[]
+    try:
+        evidence=_independent_npm_codec_verifier(pending,fixture_path,output_path)
+        attempts.append({"supplier_class":"npm","status":"VERIFIED"})
+        evidence=dict(evidence)
+        evidence["supplier_race_attempts"]=attempts
+        return evidence
+    except Exception as exc:
+        attempts.append({
+            "supplier_class":"npm",
+            "status":"REJECTED",
+            "error":type(exc).__name__+":"+str(exc),
+        })
+    try:
+        evidence=independent_system_codec_verifier.verify(
+            fmt,
+            str(pathlib.Path(fixture_path).relative_to(ROOT)),
+            str(pathlib.Path(output_path).relative_to(ROOT)),
+            producer_project,
+            ROOT,
+        )
+        if (
+            evidence.get("verified") is not True
+            or evidence.get("implementation_independent") is not True
+            or evidence.get("supplier_class_independent") is not True
+        ):
+            raise RuntimeError("SYSTEM_VERIFIER_INDEPENDENCE_PREDICATES_FAILED")
+        attempts.append({
+            "supplier_class":"debian_source_package_mirror",
+            "status":"VERIFIED",
+        })
+        evidence=dict(evidence)
+        evidence["supplier_race_attempts"]=attempts
+        return evidence
+    except Exception as exc:
+        attempts.append({
+            "supplier_class":"debian_source_package_mirror",
+            "status":"REJECTED",
+            "error":type(exc).__name__+":"+str(exc),
+        })
+    raise RuntimeError(
+        "NO_INDEPENDENT_CODEC_VERIFIER:"
+        +json.dumps(attempts,sort_keys=True)[:5000]
+    )
+
+
 def _independent_pypi_codec_verifier(pending,fixture_path,output_path):
     goal=str(pending.get("goal") or "")
     producer_source=(pending.get("registry_entry") or {}).get("source") or {}
@@ -301,7 +360,7 @@ def _verify_pending_pypi(pending,result_path):
     expected=json.loads(fixture_path.read_text(encoding="utf-8"))
     if decoded!=expected:
         raise RuntimeError("PENDING_PYPI_SEMANTIC_ROUNDTRIP_MISMATCH")
-    independent=_independent_npm_codec_verifier(
+    independent=_independent_codec_verifier(
         pending,fixture_path,output_path
     )
     if independent.get("verified") is not True:
