@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_PR37_GENERATED_VERIFICATION_MISSION_RECOVERY_VERIFICATION_V1",
+  "executable_revision": "99e4ea52a57d0318ce7252eb9f0528e0c43e5024",
+  "exact_changed_blobs": {
+    "canonical/runtime/auto_python_source_codec_acquisition.py": "65453b2eed5e678def3f0ab1c4d44182fb0b9a78",
+    "canonical/tests/test_auto_python_source_codec_acquisition.py": "72d39325b177a036aa497979de55998f555e22e5"
+  },
+  "observed_execution": {
+    "exact_private_bundle_materialized": true,
+    "git_blob_matches": 3,
+    "syntax_pass": true,
+    "unit_module": "canonical.tests.test_auto_python_source_codec_acquisition",
+    "unit_tests_passed": 5,
+    "unit_tests_total": 5,
+    "authority_critical_predicates": [
+      "BLOCKED same-origin generated verification mission may be replaced with hash-bound recovery evidence",
+      "COMPLETE/non-BLOCKED generated mission cannot be rewritten",
+      "authority mismatch fails closed",
+      "Git blob mismatch fails closed",
+      "unsafe/non-Python source tree fails closed"
+    ],
+    "incremental_spend_usd": 0,
+    "user_device_used": false,
+    "val_town_used": false
+  },
+  "verified": true,
+  "promotion_scope": "generated verification mission recovery policy only",
+  "no_superworker_claim": true
+}

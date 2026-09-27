@@ -82,5 +82,87 @@ class SourceCodecAcquisitionTests(unittest.TestCase):
         self.assertEqual(verifier["steps"][1]["command"].splitlines()[0],"set -euo pipefail")
         self.assertTrue(verifier["steps"][1]["command"].splitlines()[1].startswith("python canonical/runtime/promote_pending_binding.py "))
 
+    def test_blocked_generated_verification_mission_is_repaired(self):
+        module=(
+          "import json\n"
+          "def dumpb(value): return json.dumps(value,separators=(',',':')).encode()\n"
+          "def loadb(payload): return json.loads(payload.decode())\n"
+        )
+        supplied=tree({"codec/__init__.py":module})
+        src.set_external_source_tree_provider(lambda **kw: {"trees":[supplied]})
+        with tempfile.TemporaryDirectory() as td:
+            root=pathlib.Path(td)
+            mission=root/"canonical"/"astra_runtime"/"missions"/"M.json"
+            mission.parent.mkdir(parents=True)
+            mission.write_text('{"mission_id":"M","steps":[]}\n')
+            runtime=root/"canonical"/"runtime"; runtime.mkdir(parents=True)
+            (runtime/"python_codec_probe.py").write_text((RUNTIME/"python_codec_probe.py").read_text())
+            first=src.dispatch(
+              "Encode canonical/input.json as UBJSON and save canonical/output.ubj",
+              "M","canonical/astra_runtime/missions/M.json",root,
+            )
+            vp=root/first["verification_mission_path"]
+            broken=json.loads(vp.read_text())
+            broken["steps"][0]["command"]="set -euo pipefail\\\\npython broken.py"
+            vp.write_text(json.dumps(broken,indent=2,sort_keys=True)+"\n")
+            state=root/"canonical"/"astra_runtime"/"state"/(first["verification_mission_id"]+".json")
+            state.parent.mkdir(parents=True)
+            state.write_text(json.dumps({
+              "mission_id":first["verification_mission_id"],
+              "status":"BLOCKED",
+            }))
+            second=src.dispatch(
+              "Encode canonical/input.json as UBJSON and save canonical/output.ubj",
+              "M","canonical/astra_runtime/missions/M.json",root,
+            )
+            repaired=json.loads(vp.read_text())
+            recovery=root/"canonical"/"astra_runtime"/"evidence"/(
+                first["verification_mission_id"]+"__GENERATED_MISSION_RECOVERY.json"
+            )
+            self.assertEqual(second["verification_mission_recovery"],"REPLACED_BLOCKED")
+            self.assertTrue(recovery.is_file())
+            self.assertEqual(repaired["steps"][0]["command"].splitlines()[0],"set -euo pipefail")
+            self.assertTrue(repaired["steps"][0]["command"].splitlines()[1].startswith(
+                "python canonical/runtime/verify_pending_cli_binding.py "
+            ))
+
+    def test_complete_generated_verification_mission_cannot_be_rewritten(self):
+        module=(
+          "import json\n"
+          "def dumpb(value): return json.dumps(value,separators=(',',':')).encode()\n"
+          "def loadb(payload): return json.loads(payload.decode())\n"
+        )
+        supplied=tree({"codec/__init__.py":module})
+        src.set_external_source_tree_provider(lambda **kw: {"trees":[supplied]})
+        with tempfile.TemporaryDirectory() as td:
+            root=pathlib.Path(td)
+            mission=root/"canonical"/"astra_runtime"/"missions"/"M.json"
+            mission.parent.mkdir(parents=True)
+            mission.write_text('{"mission_id":"M","steps":[]}\n')
+            runtime=root/"canonical"/"runtime"; runtime.mkdir(parents=True)
+            (runtime/"python_codec_probe.py").write_text((RUNTIME/"python_codec_probe.py").read_text())
+            first=src.dispatch(
+              "Encode canonical/input.json as UBJSON and save canonical/output.ubj",
+              "M","canonical/astra_runtime/missions/M.json",root,
+            )
+            vp=root/first["verification_mission_path"]
+            altered=json.loads(vp.read_text())
+            altered["steps"][0]["command"]="set -euo pipefail\\\\npython historical.py"
+            vp.write_text(json.dumps(altered,indent=2,sort_keys=True)+"\n")
+            state=root/"canonical"/"astra_runtime"/"state"/(first["verification_mission_id"]+".json")
+            state.parent.mkdir(parents=True)
+            state.write_text(json.dumps({
+              "mission_id":first["verification_mission_id"],
+              "status":"COMPLETE",
+            }))
+            with self.assertRaisesRegex(
+                src.AutoPythonSourceCodecFailure,
+                "NO_COMPATIBLE_SOURCE_CODEC_CONTRACT.*VERIFICATION_MISSION_NONBLOCKED_CONFLICT"
+            ):
+                src.dispatch(
+                  "Encode canonical/input.json as UBJSON and save canonical/output.ubj",
+                  "M","canonical/astra_runtime/missions/M.json",root,
+                )
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
