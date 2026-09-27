@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_POINTER_V1",
-  "canonical_generation": "2026-09-22-astra-shared-runtime-portfolio-restored",
+  "canonical_generation": "2026-09-27-post-pr20-device-independent-execution-reconciled",
   "control_plane": {
     "provider": "GitHub",
     "repository": "moxnixmdj/brain",
@@ -121,11 +121,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 0,
-    "next_step": "RECONSTRUCT_CURRENT_SHARED_ASTRA_RUNTIME__CHOOSE_SMALLEST_ORTHOGONAL_REAL_MISSION_PORTFOLIO_BY_CAPABILITY_EXPOSURE_PER_WALL_CLOCK_TIME__RUN_PORTFOLIO_CONCURRENTLY__FREEZE_EXACT_OBSERVED_BLOCKERS__LAUNCH_MAXIMUM_USEFUL_LOCAL_ACQUISITION_SWARMS__INTEGRATE_VERIFIED_WINNERS_GLOBALLY__REPLAY_AND_RESUME",
+    "next_step": "SELECT_SMALLEST_ORTHOGONAL_REAL_MISSION_PORTFOLIO__EXECUTE_ON_ONE_SHARED_RUNTIME__FREEZE_FIRST_CAUSAL_BLOCKERS__REPAIR_GENERIC_MECHANISMS__REPLAY__RESUME",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "CURRENT_MINIMAL_ORTHOGONAL_MISSION_PORTFOLIO_AND_SHARED_RUNTIME_STATE_NOT_RECONCILED_FROM_LIVE_EVIDENCE",
+    "critical_blocker": "MINIMAL_ORTHOGONAL_REAL_MISSION_PORTFOLIO_NOT_YET_EXECUTED_ON_CURRENT_SHARED_RUNTIME",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -202,12 +202,12 @@
     "superworker_truth_scope": "NO_SINGLE_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "CURRENT_MINIMAL_ORTHOGONAL_MISSION_PORTFOLIO_AND_SHARED_RUNTIME_STATE_NOT_RECONCILED_FROM_LIVE_EVIDENCE",
+    "highest_leverage_capability_gap": "MINIMAL_ORTHOGONAL_REAL_MISSION_PORTFOLIO_NOT_YET_EXECUTED_ON_CURRENT_SHARED_RUNTIME",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/ASTRA_TARGET_CAPABILITY_MAP_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
-    "execution_surface": "CHATGPT_WORK_WITH_GPT_6_ASTRA_IF_AVAILABLE_IN_EXISTING_PLAN",
-    "user_boundary": "NONE_FOR_CAPABILITY_WORK_USING_CURRENT_CONNECTED_TOOLS",
+    "execution_surface": "PROVIDER_NEUTRAL_CHATGPT_EXECUTION__PRIVATE_GITHUB_TO_PRIVATE_DRIVE_TO_CHATGPT_LINUX_BRIDGE_WHEN_EXACT_PRIVATE_REPO_EXECUTION_IS_REQUIRED",
+    "user_boundary": "NONE_FOR_PLATFORM_NEUTRAL_CAPABILITY_WORK_USING_CURRENT_CONNECTED_TOOLS",
     "integrated_cognitive_worker_candidate": "ICW-CHATGPT-SOL-1",
     "integrated_cognitive_worker_checkpoint_path": "canonical/icw/ICW-CHATGPT-SOL-1/CHECKPOINT_V1.json",
     "integrated_cognitive_worker_mission_progress": "AUDITOR_REAL_MISSION_COMPLETE__RESUME_AND_AUTONOMOUS_WAKE_NOT_YET_PROVEN",
@@ -231,6 +231,22 @@
       "historical_gap": "GENERAL_REASONING_AND_GENERIC_TOOL_USE_INSIDE_PERSISTENT_CONTROLLER",
       "top_level_frontier_superseded_by_commit": "71a4c714a8528f839699a2d81c7b66c96096f6ab",
       "current_authority": "canonical/laws/ASTRA_SHARED_RUNTIME_PORTFOLIO_V1.md"
+    },
+    "device_independent_execution": {
+      "status": "VERIFIED",
+      "evidence_pr": 20,
+      "executable_revision": "05eaaf0cab39e3e3c392cf57ef38af56cb36fde7",
+      "executor_id": "chatgpt-session-linux-private-github-drive-base64-bridge-20260926",
+      "exact_git_blob_verification": true,
+      "full_suite_tests_passed": 139,
+      "incremental_spend_usd": 0,
+      "user_device_used": false
+    },
+    "superworker_gate_reconciliation": {
+      "source": "canonical/qualification/RECOVERY_SUPERWORKER_V6_WOLFRAM_WHOLE_DEFINITION_ADJUDICATION_V1.json",
+      "failed_gate_count": 7,
+      "status": "UNCHANGED_PENDING_NEW_PRIMARY_EVIDENCE",
+      "note": "Post-PR20 executor evidence removes the stale executor blocker but does not by itself prove any of the seven failed whole-definition gates."
     }
   },
   "provider_rules": {
