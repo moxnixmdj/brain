@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_GENERIC_REPAIR_VERIFICATION_V1",
+  "repair_id": "SUPPLIER_NEUTRAL_ACQUISITION_ROUTING_20260927",
+  "base_main_sha": "fc8b287403c918b49b3d102b42faec61d8375d93",
+  "exact_blobs": {
+    "canonical/runtime/auto_capability_acquisition.py": "3e07a4878f63278ee241c612e0f9a92bae68489b",
+    "canonical/runtime/auto_npm_library_acquisition.py": "3f77b767ab67fe528537524b4d46e3e934ada332",
+    "canonical/tests/test_supplier_neutral_acquisition.py": "80c6980eeaa7cd67aa5dc74b21dd717906d6182d"
+  },
+  "observed_execution": {
+    "platform": "linux",
+    "incremental_spend_usd": 0,
+    "syntax_pass": true,
+    "tests_passed": 3,
+    "tests_failed": 0
+  },
+  "law": {
+    "explicit_supplier_is_forced": true,
+    "unspecified_supplier_races": [
+      "pypi_python_library",
+      "npm_javascript_library",
+      "apt_cli"
+    ]
+  },
+  "verified": true
+}

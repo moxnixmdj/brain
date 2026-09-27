@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_PR37_GENERATED_VERIFICATION_MISSION_RECOVERY_PARTIAL_EXECUTION_V1",
+  "executable_revision": "99e4ea52a57d0318ce7252eb9f0528e0c43e5024",
+  "base_revision": "8a0d847d0efddf4bb5d00b3200d07b84aa3a2c19",
+  "exact_changed_blobs": {
+    "canonical/runtime/auto_python_source_codec_acquisition.py": "65453b2eed5e678def3f0ab1c4d44182fb0b9a78",
+    "canonical/tests/test_auto_python_source_codec_acquisition.py": "72d39325b177a036aa497979de55998f555e22e5"
+  },
+  "observed_execution": {
+    "mode": "isolated exact recovery-policy logic slice",
+    "passed": 2,
+    "total": 2,
+    "predicates": [
+      "blocked same-origin auto-generated verification mission may be replaced",
+      "completed auto-generated verification mission remains immutable"
+    ],
+    "incremental_spend_usd": 0,
+    "user_device_used": false,
+    "val_town_used": false
+  },
+  "epistemic_state": "EXECUTED_PARTIAL",
+  "limitations": [
+    "full exact branch unit suite has not yet been observed",
+    "real UBJSON mission has not yet been replayed through this repair",
+    "no VERIFIED or PROMOTED claim"
+  ]
+}

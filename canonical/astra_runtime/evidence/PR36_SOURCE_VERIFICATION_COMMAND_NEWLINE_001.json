@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_PR36_SOURCE_VERIFICATION_COMMAND_NEWLINE_V1",
+  "executed_revision": "27964e8d8fa817f4939647924139be5a92adc63a",
+  "status": "VERIFIED_WITHIN_PROMOTION_SCOPE",
+  "observed_failure": {
+    "mission_id": "ASTRA-REAL-SAME-IDENTITY-UBJSON-CANONICAL-SNAPSHOT-001",
+    "verification_mission_id": "ASTRA-AUTO-VERIFY-SOURCE-NEUROJSON-PYBJ-AE3772F35F25",
+    "error": "/usr/bin/bash: line 1: set: pipefailnpython: invalid option name",
+    "cause": "Generated source-verification commands contained literal backslash+n instead of a newline."
+  },
+  "exact_changed_blobs": {
+    "canonical/runtime/auto_python_source_codec_acquisition.py": "9b9f16e99d7779e164aaa7a2e11769c3e72971f2",
+    "canonical/tests/test_auto_python_source_codec_acquisition.py": "cb244a684ef596c2760b5d0ada26ece2b704385f"
+  },
+  "execution": {
+    "git_blob_mismatches": 0,
+    "py_compile_exit": 0,
+    "focused_tests_passed": 3,
+    "focused_tests_failed": 0,
+    "generated_verify_command_two_lines": true,
+    "generated_promote_command_two_lines": true
+  },
+  "incremental_spend_usd": 0,
+  "user_device_used": false,
+  "val_town_used": false,
+  "not_claimed": [
+    "real independent npm verifier succeeded",
+    "UBJSON mission completed",
+    "P_real > 0"
+  ]
+}
