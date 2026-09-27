@@ -48,5 +48,25 @@ class IndependentNpmVerifierBridgeTests(unittest.TestCase):
             self.assertEqual(req["task_id"],"SI-REAL-UBJSON-SNAPSHOT-001")
             self.assertIn("registry.npmjs.org/-/v1/search",req["payload"]["url"])
 
+
+    def test_builtin_runtime_dependency_is_accepted_without_install(self):
+        policy=verifier.npm_package_utils.validate_builtin_only_runtime_dependencies({
+            "dependencies":{"buffer":"^5.0.0"},
+            "scripts":{},
+        })
+        self.assertEqual(policy["builtin_dependencies"],["buffer"])
+        self.assertEqual(policy["dependency_count"],1)
+
+    def test_external_runtime_dependency_remains_rejected(self):
+        with self.assertRaisesRegex(
+            verifier.npm_package_utils.NpmPackageFailure,
+            "NPM_EXTERNAL_RUNTIME_DEPENDENCIES_UNSUPPORTED"
+        ):
+            verifier.npm_package_utils.validate_builtin_only_runtime_dependencies({
+                "dependencies":{"left-pad":"^1.0.0"},
+                "scripts":{},
+            })
+
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
