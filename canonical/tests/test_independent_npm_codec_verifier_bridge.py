@@ -40,13 +40,17 @@ class IndependentNpmVerifierBridgeTests(unittest.TestCase):
                         "NeuroJSON/pybj",root
                     )
             requests=list(bridge.glob("*.request.json"))
-            self.assertEqual(len(requests),1)
-            req=json.loads(requests[0].read_text(encoding="utf-8"))
-            self.assertEqual(req["schema"],"PROJECT_BRAIN_EXTERNAL_TOOL_REQUEST_V1")
-            self.assertEqual(req["kind"],"urlopen")
-            self.assertEqual(req["agent_id"],"SUPERWORKER-UNIFIED-1")
-            self.assertEqual(req["task_id"],"SI-REAL-UBJSON-SNAPSHOT-001")
-            self.assertIn("registry.npmjs.org/-/v1/search",req["payload"]["url"])
+            self.assertEqual(len(requests),2)
+            reqs=[json.loads(p.read_text(encoding="utf-8")) for p in requests]
+            for req in reqs:
+                self.assertEqual(req["schema"],"PROJECT_BRAIN_EXTERNAL_TOOL_REQUEST_V1")
+                self.assertEqual(req["kind"],"urlopen")
+                self.assertEqual(req["agent_id"],"SUPERWORKER-UNIFIED-1")
+                self.assertEqual(req["task_id"],"SI-REAL-UBJSON-SNAPSHOT-001")
+                self.assertIn("registry.npmjs.org/-/v1/search",req["payload"]["url"])
+            urls=[req["payload"]["url"] for req in reqs]
+            self.assertTrue(any("text=ubj&" in u for u in urls))
+            self.assertTrue(any("text=ubjson&" in u for u in urls))
 
 
     def test_builtin_runtime_dependency_is_accepted_without_install(self):
