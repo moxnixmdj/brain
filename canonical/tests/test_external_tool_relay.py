@@ -7,6 +7,7 @@ import json
 import pathlib
 import tempfile
 import unittest
+import urllib.error
 from unittest import mock
 
 import canonical.runtime.external_tool_relay as relay
@@ -127,6 +128,56 @@ class ExternalToolRelayTests(unittest.TestCase):
             self.assertEqual(observed, response_path)
             self.assertEqual(json.loads(response_path.read_text()), existing)
             opener.assert_not_called()
+
+    def test_http_404_is_returned_as_bridge_observation(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = pathlib.Path(td)
+            request_path, _ = make_request(root, url="https://pypi.org/pypi/definitely-missing-project/json")
+
+            def opener(req, timeout):
+                raise urllib.error.HTTPError(
+                    req.full_url,
+                    404,
+                    "Not Found",
+                    {"content-type": "application/json"},
+                    io.BytesIO(b'{"message":"Not Found"}'),
+                )
+
+            response_path = relay.service_request(
+                request_path,
+                allowed_hosts={"pypi.org"},
+                opener=opener,
+            )
+            response = json.loads(response_path.read_text())
+            self.assertEqual(response["status"], "ok")
+            self.assertEqual(response["result"]["status"], 404)
+            self.assertEqual(
+                base64.b64decode(response["result"]["body_b64"]),
+                b'{"message":"Not Found"}',
+            )
+
+    def test_pending_unsupported_kind_is_left_for_next_causal_frontier(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = pathlib.Path(td)
+            request = {
+                "schema": relay.REQUEST_SCHEMA,
+                "kind": "package_name_search",
+                "agent_id": "SUPERWORKER-UNIFIED-1",
+                "task_id": "SI-REAL-UBJSON-SNAPSHOT-001",
+                "payload": {"effect": "structured.binary.encode", "ecosystem": "pypi"},
+            }
+            canonical = json.dumps(request, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+            sha = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+            request["request_sha256"] = sha
+            path = root / f"{sha}.request.json"
+            path.write_text(json.dumps(request), encoding="utf-8")
+            observed = relay.service_pending(
+                root,
+                allowed_hosts={"pypi.org"},
+                opener=mock.Mock(side_effect=AssertionError("network should not be called")),
+            )
+            self.assertEqual(observed, [])
+            self.assertFalse((root / f"{sha}.response.json").exists())
 
 
 if __name__ == "__main__":
