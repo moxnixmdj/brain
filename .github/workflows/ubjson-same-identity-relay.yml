@@ -1,0 +1,128 @@
+name: UBJSON Same-Identity External Relay
+
+on:
+  push:
+    branches:
+      - execute/ubjson-external-relay-20260927
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live_ubjson_mission:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+
+      - name: Verify relay and PR39 bridge regressions
+        run: |
+          set -euo pipefail
+          python canonical/tests/test_external_tool_relay.py
+          python canonical/tests/test_independent_npm_codec_verifier_bridge.py
+          python -m py_compile \
+            canonical/runtime/external_tool_relay.py \
+            canonical/runtime/independent_npm_codec_verifier.py \
+            canonical/runtime/same_identity_supervisor.py \
+            canonical/runtime/astra_runtime.py
+
+      - name: Execute frozen same-identity UBJSON mission
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          TASK="canonical/same_identity_worker/tasks/SI_REAL_UBJSON_SNAPSHOT_001.json"
+          TASK_ID="SI-REAL-UBJSON-SNAPSHOT-001"
+          AGENT_ID="SUPERWORKER-UNIFIED-1"
+          BRIDGE="canonical/same_identity_worker/external_tool_bridge/\${TASK_ID}"
+          mkdir -p execution_logs "$BRIDGE"
+
+          complete=0
+          for cycle in $(seq 1 32); do
+            echo "=== SAME-IDENTITY CYCLE $cycle ==="
+            set +e
+            python canonical/runtime/same_identity_supervisor.py \
+              --task "$TASK" \
+              > "execution_logs/supervisor_\${cycle}.log" 2>&1
+            rc=$?
+            set -e
+            cat "execution_logs/supervisor_\${cycle}.log"
+
+            if [ "$rc" -eq 0 ]; then
+              complete=1
+              echo "$cycle" > execution_logs/completed_cycle.txt
+              break
+            fi
+
+            if [ "$rc" -eq 75 ]; then
+              continue
+            fi
+
+            python canonical/runtime/external_tool_relay.py \
+              --bridge-dir "$BRIDGE" \
+              --agent-id "$AGENT_ID" \
+              --task-id "$TASK_ID" \
+              --allowed-host registry.npmjs.org \
+              --max-requests 16 \
+              --max-bytes 25000000 \
+              > "execution_logs/relay_\${cycle}.json"
+            cat "execution_logs/relay_\${cycle}.json"
+
+            serviced=$(python -c 'import json,sys; print(json.load(open(sys.argv[1]))["serviced_count"])' "execution_logs/relay_\${cycle}.json")
+            if [ "$serviced" -eq 0 ]; then
+              echo "No serviceable external request exists for runtime rc=$rc" >&2
+              exit "$rc"
+            fi
+          done
+
+          if [ "$complete" -ne 1 ]; then
+            echo "Mission did not complete inside bounded 32-cycle execution." >&2
+            exit 90
+          fi
+
+          test -s canonical/astra_runtime/artifacts/CANONICAL_POINTER_20260927.ubj
+
+      - name: Seal execution summary
+        if: always()
+        run: |
+          python - <<'PY'
+          import hashlib,json,pathlib
+          task_id="SI-REAL-UBJSON-SNAPSHOT-001"
+          state=pathlib.Path("canonical/same_identity_worker/state")/(task_id+".json")
+          artifact=pathlib.Path("canonical/astra_runtime/artifacts/CANONICAL_POINTER_20260927.ubj")
+          requests=sorted(pathlib.Path("canonical/same_identity_worker/external_tool_bridge",task_id).glob("*.request.json"))
+          responses=sorted(pathlib.Path("canonical/same_identity_worker/external_tool_bridge",task_id).glob("*.response.json"))
+          summary={
+            "schema":"PROJECT_BRAIN_LIVE_UBJSON_RELAY_EXECUTION_V1",
+            "agent_id":"SUPERWORKER-UNIFIED-1",
+            "task_id":task_id,
+            "state":json.loads(state.read_text()) if state.is_file() else None,
+            "artifact_exists":artifact.is_file(),
+            "artifact_sha256":hashlib.sha256(artifact.read_bytes()).hexdigest() if artifact.is_file() else None,
+            "external_request_count":len(requests),
+            "external_response_count":len(responses),
+            "request_sha256":[p.name.removesuffix(".request.json") for p in requests],
+          }
+          pathlib.Path("execution_logs/EXECUTION_SUMMARY.json").write_text(json.dumps(summary,indent=2,sort_keys=True)+"\n")
+          print(json.dumps(summary,indent=2,sort_keys=True))
+          PY
+
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ubjson-same-identity-relay-evidence
+          if-no-files-found: warn
+          path: |
+            execution_logs/
+            canonical/same_identity_worker/state/
+            canonical/same_identity_worker/evidence/
+            canonical/same_identity_worker/external_tool_bridge/
+            canonical/astra_runtime/state/
+            canonical/astra_runtime/evidence/
+            canonical/astra_runtime/artifacts/CANONICAL_POINTER_20260927.ubj
