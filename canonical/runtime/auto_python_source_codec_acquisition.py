@@ -131,6 +131,66 @@ def _origin_mission_sha256(root,mission_path):
         raise AutoPythonSourceCodecFailure("SOURCE_ORIGIN_MISSION_INVALID",str(mission_path))
     return hashlib.sha256(mission.read_bytes()).hexdigest()
 
+def _write_generated_verification_mission(root,vm_rel,verifier,origin_mission_id):
+    root=pathlib.Path(root).resolve()
+    vp=root/vm_rel
+    encoded=json.dumps(verifier,indent=2,sort_keys=True)+"\n"
+    if not vp.exists():
+        vp.parent.mkdir(parents=True,exist_ok=True)
+        vp.write_text(encoded,encoding="utf-8")
+        return "CREATED"
+
+    try:
+        existing=json.loads(vp.read_text(encoding="utf-8"))
+    except Exception as exc:
+        raise AutoPythonSourceCodecFailure("VERIFICATION_MISSION_EXISTING_INVALID",vm_rel) from exc
+    if existing==verifier:
+        return "REUSED_IDENTICAL"
+    constraints=existing.get("constraints") if isinstance(existing,dict) else None
+    if (
+        not isinstance(existing,dict)
+        or existing.get("schema")!="PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1"
+        or existing.get("mission_id")!=verifier.get("mission_id")
+        or not isinstance(constraints,dict)
+        or constraints.get("auto_generated_from_mission")!=origin_mission_id
+    ):
+        raise AutoPythonSourceCodecFailure("VERIFICATION_MISSION_AUTHORITY_CONFLICT",vm_rel)
+
+    state_path=root/"canonical"/"astra_runtime"/"state"/(str(verifier.get("mission_id"))+".json")
+    prior_status=None
+    if state_path.is_file():
+        try:
+            prior_state=json.loads(state_path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            raise AutoPythonSourceCodecFailure("VERIFICATION_MISSION_STATE_INVALID",str(state_path)) from exc
+        prior_status=str(prior_state.get("status") or "")
+        if prior_status!="BLOCKED":
+            raise AutoPythonSourceCodecFailure(
+                "VERIFICATION_MISSION_NONBLOCKED_CONFLICT",
+                str(prior_status or "UNKNOWN")
+            )
+
+    old_raw=vp.read_bytes()
+    old_sha=hashlib.sha256(old_raw).hexdigest()
+    new_raw=encoded.encode("utf-8")
+    new_sha=hashlib.sha256(new_raw).hexdigest()
+    vp.write_bytes(new_raw)
+    evidence_path=root/"canonical"/"astra_runtime"/"evidence"/(
+        str(verifier.get("mission_id"))+"__GENERATED_MISSION_RECOVERY.json"
+    )
+    evidence_path.parent.mkdir(parents=True,exist_ok=True)
+    evidence_path.write_text(json.dumps({
+      "schema":"PROJECT_BRAIN_GENERATED_VERIFICATION_MISSION_RECOVERY_V1",
+      "verification_mission_id":verifier.get("mission_id"),
+      "origin_mission_id":origin_mission_id,
+      "prior_status":prior_status or "UNEXECUTED",
+      "prior_mission_sha256":old_sha,
+      "replacement_mission_sha256":new_sha,
+      "policy":"ONLY_SAME_ORIGIN_AUTO_GENERATED_BLOCKED_OR_UNEXECUTED_MISSION_MAY_BE_REPLACED",
+    },indent=2,sort_keys=True)+"\n",encoding="utf-8")
+    return "REPLACED_BLOCKED" if prior_status=="BLOCKED" else "REPLACED_UNEXECUTED"
+
+
 def dispatch(goal,mission_id,mission_path,root,discovery=None):
     if not supports(goal):
         raise AutoPythonSourceCodecFailure("SOURCE_CODEC_CONTRACT_UNSUPPORTED")
@@ -253,10 +313,9 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
                   }
                 }
                 vm_rel=f"canonical/astra_runtime/missions/{verify_mid.replace('-','_')}.json"
-                vp=root/vm_rel
-                if vp.exists():
-                    raise AutoPythonSourceCodecFailure("VERIFICATION_MISSION_ALREADY_EXISTS",vm_rel)
-                vp.write_text(json.dumps(verifier,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+                verification_mission_recovery=_write_generated_verification_mission(
+                    root,vm_rel,verifier,mission_id
+                )
                 return {
                   "status":"ACQUISITION_DISPATCHED",
                   "supplier_class":"content_addressed_python_source_tree",
@@ -265,6 +324,7 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
                   "verification_mission_path":vm_rel,
                   "verification_mission_id":verify_mid,
                   "verification_result_path":verify_rel,
+                  "verification_mission_recovery":verification_mission_recovery,
                   "source_tree_sha256":manifest["tree_sha256"],
                   "incremental_spend_usd":0,
                 }
