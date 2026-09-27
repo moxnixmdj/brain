@@ -7,6 +7,7 @@ import re
 import auto_apt_cli_acquisition
 import auto_pypi_library_acquisition
 import auto_npm_library_acquisition
+import auto_github_source_acquisition
 
 
 class AutoAcquisitionFailure(RuntimeError):
@@ -62,6 +63,16 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
           "supplier_class":"apt_cli",
           "error":type(exc).__name__+":"+str(exc),
         })
+    if auto_github_source_acquisition.supports(goal):
+        try:
+            return auto_github_source_acquisition.dispatch(
+                goal,mission_id,mission_path,root,discovery=discovery
+            )
+        except Exception as exc:
+            attempts.append({
+              "supplier_class":"github_source_python",
+              "error":type(exc).__name__+":"+str(exc),
+            })
     raise AutoAcquisitionFailure(
         "NO_COMPATIBLE_SUPPLIER_CONTRACT",
         json.dumps(attempts,sort_keys=True)[:4000]
