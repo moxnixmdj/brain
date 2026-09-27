@@ -14,6 +14,8 @@ import json
 import os
 import pathlib
 import re
+import subprocess
+import sys
 import tempfile
 import urllib.error
 import urllib.parse
@@ -229,6 +231,81 @@ def _service_package_name_search(
     return {"names": names, "source": "PYPI_SIMPLE_BOUNDED_MATCH"}
 
 
+def _service_pypi_wheel_closure(
+    request: dict[str, Any],
+    *,
+    runner=subprocess.run,
+) -> dict[str, Any]:
+    payload = request.get("payload")
+    if not isinstance(payload, dict):
+        raise RelayError("PAYLOAD_INVALID")
+    project = str(payload.get("project") or "").strip()
+    version = str(payload.get("version") or "").strip()
+    max_wheels = int(payload.get("max_wheels", 32))
+    max_total_bytes = int(payload.get("max_total_bytes", 160_000_000))
+    if (
+        not project
+        or not version
+        or max_wheels < 1
+        or max_wheels > 32
+        or max_total_bytes < 1
+        or max_total_bytes > 160_000_000
+    ):
+        raise RelayError("PYPI_WHEEL_CLOSURE_INPUT_INVALID")
+
+    with tempfile.TemporaryDirectory(prefix="brain-relay-pypi-") as td:
+        proc = runner(
+            [
+                sys.executable,
+                "-m",
+                "pip",
+                "download",
+                "--disable-pip-version-check",
+                "--only-binary=:all:",
+                "--dest",
+                td,
+                f"{project}=={version}",
+            ],
+            text=True,
+            capture_output=True,
+            timeout=180,
+        )
+        if proc.returncode != 0:
+            return {
+                "artifacts": [],
+                "resolver": "pip-download-only-binary",
+                "resolver_error": (proc.stderr or proc.stdout or "")[-2000:],
+            }
+
+        wheels = sorted(pathlib.Path(td).glob("*.whl"))
+        if not wheels or len(wheels) > max_wheels:
+            return {
+                "artifacts": [],
+                "resolver": "pip-download-only-binary",
+                "resolver_error": "WHEEL_COUNT_INVALID",
+            }
+        artifacts = []
+        total = 0
+        for wheel in wheels:
+            raw = wheel.read_bytes()
+            total += len(raw)
+            if total > max_total_bytes:
+                raise RelayError("PYPI_WHEEL_CLOSURE_BYTES_LIMIT")
+            artifacts.append(
+                {
+                    "filename": wheel.name,
+                    "sha256": hashlib.sha256(raw).hexdigest(),
+                    "content_b64": base64.b64encode(raw).decode("ascii"),
+                }
+            )
+        return {
+            "artifacts": artifacts,
+            "resolver": "pip-download-only-binary",
+            "wheel_count": len(artifacts),
+            "total_bytes": total,
+        }
+
+
 def service_request(
     request_path: pathlib.Path,
     *,
@@ -249,7 +326,7 @@ def service_request(
     if not isinstance(task_id, str) or not task_id:
         raise RelayError("TASK_ID_MISSING")
     kind = str(request.get("kind") or "")
-    if kind not in {"urlopen", "package_name_search"}:
+    if kind not in {"urlopen", "package_name_search", "pypi_wheel_closure"}:
         raise RelayError("KIND_FORBIDDEN:" + kind)
 
     response_path = request_path.with_name(request_sha + ".response.json")
@@ -272,8 +349,10 @@ def service_request(
             opener=opener,
             max_body_bytes=max_body_bytes,
         )
-    else:
+    elif kind == "package_name_search":
         result = _service_package_name_search(request, opener=opener)
+    else:
+        result = _service_pypi_wheel_closure(request)
     response = {
         "schema": RESPONSE_SCHEMA,
         "request_sha256": request_sha,
@@ -314,7 +393,7 @@ def service_pending(
             continue
         # Service only relay kinds implemented here. Leave other pending kinds
         # untouched so the mission can prove whether they are actually causal.
-        if request.get("kind") not in {"urlopen", "package_name_search"}:
+        if request.get("kind") not in {"urlopen", "package_name_search", "pypi_wheel_closure"}:
             continue
         if (
             request.get("kind") == "urlopen"
