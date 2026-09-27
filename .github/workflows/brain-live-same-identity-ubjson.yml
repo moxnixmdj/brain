@@ -57,6 +57,7 @@ jobs:
             canonical.tests.test_external_acquisition_bridge \
             canonical.tests.test_external_pypi_artifact_bridge \
             canonical.tests.test_independent_npm_codec_verifier_bridge \
+            canonical.tests.test_npm_builtin_dependency_boundary \
             canonical.tests.test_same_identity_supervisor
 
       - name: Execute frozen mission through bounded relay
