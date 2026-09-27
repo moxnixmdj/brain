@@ -13,6 +13,9 @@ import hashlib
 import json
 import os
 import pathlib
+import re
+import subprocess
+import sys
 import tempfile
 import urllib.error
 import urllib.parse
@@ -55,7 +58,9 @@ def _safe_headers(raw) -> dict[str, str]:
     return headers
 
 
-def validate_request(request: dict, agent_id: str, task_id: str) -> tuple[str, dict]:
+SUPPORTED_KINDS = {"urlopen", "package_name_search", "pypi_wheel_closure"}
+
+def validate_request(request: dict, agent_id: str, task_id: str) -> tuple[str, str, dict]:
     if request.get("schema") != REQUEST_SCHEMA:
         raise RelayError("REQUEST_SCHEMA_INVALID")
     if request.get("agent_id") != agent_id or request.get("task_id") != task_id:
@@ -65,12 +70,12 @@ def validate_request(request: dict, agent_id: str, task_id: str) -> tuple[str, d
     if supplied != expected:
         raise RelayError("REQUEST_HASH_MISMATCH")
     kind = str(request.get("kind") or "")
-    if kind != "urlopen":
+    if kind not in SUPPORTED_KINDS:
         raise RelayError("REQUEST_KIND_NOT_ALLOWED")
     payload = request.get("payload")
     if not isinstance(payload, dict):
         raise RelayError("REQUEST_PAYLOAD_INVALID")
-    return supplied, payload
+    return supplied, kind, payload
 
 
 def execute_urlopen(payload: dict) -> dict:
@@ -112,6 +117,92 @@ def execute_urlopen(payload: dict) -> dict:
     }
 
 
+
+def execute_package_name_search(payload: dict) -> dict:
+    if str(payload.get("ecosystem") or "") != "pypi":
+        raise RelayError("PACKAGE_ECOSYSTEM_NOT_ALLOWED")
+    tokens = [
+        re.sub(r"[-_.]+", "-", str(x).strip().lower())
+        for x in (payload.get("tokens") or [])
+        if str(x).strip()
+    ]
+    if not tokens or len(tokens) > 8:
+        raise RelayError("PACKAGE_SEARCH_TOKENS_INVALID")
+    limit = min(max(int(payload.get("limit") or 50), 1), 100)
+    req = urllib.request.Request(
+        "https://pypi.org/simple/",
+        headers={"User-Agent": "ProjectBrain-ExternalRelay/1", "Accept": "text/html"},
+    )
+    with urllib.request.urlopen(req, timeout=30) as response:
+        raw = response.read(MAX_BODY_BYTES + 1)
+    if len(raw) > MAX_BODY_BYTES:
+        raise RelayError("PACKAGE_INDEX_TOO_LARGE")
+    text = raw.decode("utf-8", "replace")
+    names = re.findall(r">([^<>]+)</a>", text, flags=re.I)
+    scored = []
+    for name in names:
+        norm = re.sub(r"[-_.]+", "-", name.strip().lower())
+        if not all(token in norm for token in tokens):
+            continue
+        score = (
+            0 if norm in tokens else
+            1 if any(norm == token for token in tokens) else
+            2 if any(norm.startswith(token) or token in norm.split("-") for token in tokens) else
+            3
+        )
+        scored.append((score, len(norm), norm, name.strip()))
+    scored.sort()
+    out = []
+    seen = set()
+    for _score, _length, norm, name in scored:
+        if norm in seen:
+            continue
+        seen.add(norm)
+        out.append(name)
+        if len(out) >= limit:
+            break
+    return {"names": out}
+
+
+def execute_pypi_wheel_closure(payload: dict) -> dict:
+    project = str(payload.get("project") or "").strip()
+    version = str(payload.get("version") or "").strip()
+    if not project or not version or not re.fullmatch(r"[A-Za-z0-9_.-]{1,160}", project):
+        raise RelayError("PYPI_IDENTITY_INVALID")
+    max_wheels = min(max(int(payload.get("max_wheels") or 32), 1), 32)
+    max_total = min(max(int(payload.get("max_total_bytes") or 160000000), 1), 160000000)
+    with tempfile.TemporaryDirectory(prefix="brain-external-wheel-closure-") as td:
+        proc = subprocess.run(
+            [
+                sys.executable, "-m", "pip", "download",
+                "--disable-pip-version-check",
+                "--only-binary=:all:",
+                "--dest", td,
+                f"{project}=={version}",
+            ],
+            text=True,
+            capture_output=True,
+            timeout=180,
+        )
+        if proc.returncode != 0:
+            raise RelayError("PYPI_WHEEL_CLOSURE_RESOLUTION_FAILED:" + proc.stderr[-1200:])
+        wheels = sorted(pathlib.Path(td).glob("*.whl"))
+        if not wheels or len(wheels) > max_wheels:
+            raise RelayError("PYPI_WHEEL_CLOSURE_COUNT_INVALID")
+        artifacts = []
+        total = 0
+        for wheel in wheels:
+            raw = wheel.read_bytes()
+            total += len(raw)
+            if total > max_total:
+                raise RelayError("PYPI_WHEEL_CLOSURE_BYTES_LIMIT")
+            artifacts.append({
+                "filename": wheel.name,
+                "sha256": hashlib.sha256(raw).hexdigest(),
+                "content_b64": base64.b64encode(raw).decode("ascii"),
+            })
+    return {"artifacts": artifacts}
+
 def _write_json_atomic(path: pathlib.Path, value: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     fd, temp_name = tempfile.mkstemp(prefix=path.name + ".", dir=path.parent)
@@ -129,15 +220,22 @@ def _write_json_atomic(path: pathlib.Path, value: dict) -> None:
 
 def service_request(path: pathlib.Path, agent_id: str, task_id: str) -> pathlib.Path | None:
     request = json.loads(path.read_text(encoding="utf-8"))
-    request_sha, payload = validate_request(request, agent_id, task_id)
+    request_sha, kind, payload = validate_request(request, agent_id, task_id)
     response_path = path.with_name(request_sha + ".response.json")
     if response_path.exists():
         return None
-    result = execute_urlopen(payload)
+    if kind == "urlopen":
+        result = execute_urlopen(payload)
+    elif kind == "package_name_search":
+        result = execute_package_name_search(payload)
+    elif kind == "pypi_wheel_closure":
+        result = execute_pypi_wheel_closure(payload)
+    else:
+        raise RelayError("REQUEST_KIND_NOT_ALLOWED")
     response = {
         "schema": RESPONSE_SCHEMA,
         "request_sha256": request_sha,
-        "kind": "urlopen",
+        "kind": kind,
         "agent_id": agent_id,
         "task_id": task_id,
         "status": "ok",
@@ -155,7 +253,7 @@ def service_pending(bridge_dir: pathlib.Path, agent_id: str, task_id: str) -> li
         request = json.loads(path.read_text(encoding="utf-8"))
         # Leave unknown/custom kinds pending. They are separate authority surfaces
         # and must be implemented only if a resumed real mission proves them causal.
-        if request.get("kind") != "urlopen":
+        if request.get("kind") not in SUPPORTED_KINDS:
             continue
         response = service_request(path, agent_id, task_id)
         if response is not None:
