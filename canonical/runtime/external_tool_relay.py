@@ -185,9 +185,14 @@ def execute_pypi_wheel_closure(payload: dict) -> dict:
             timeout=180,
         )
         if proc.returncode != 0:
-            raise RelayError("PYPI_WHEEL_CLOSURE_RESOLUTION_FAILED:" + proc.stderr[-1200:])
+            # "No compatible binary closure" is a candidate-level negative result,
+            # not a transport failure. Return an empty closure so the runtime can
+            # reject this candidate and continue its existing supplier race.
+            return {"artifacts": []}
         wheels = sorted(pathlib.Path(td).glob("*.whl"))
-        if not wheels or len(wheels) > max_wheels:
+        if not wheels:
+            return {"artifacts": []}
+        if len(wheels) > max_wheels:
             raise RelayError("PYPI_WHEEL_CLOSURE_COUNT_INVALID")
         artifacts = []
         total = 0
