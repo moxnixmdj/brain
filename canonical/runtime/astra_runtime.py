@@ -4706,6 +4706,19 @@ def _external_pypi_wheel_closure_provider(candidate,root):
       "max_total_bytes":160000000,
     })
 
+
+def _external_npm_package_provider(phase,candidate):
+    payload={
+      "phase":str(phase),
+      "package":str(candidate.get("package") or candidate.get("name") or ""),
+      "version":str(candidate.get("version") or ""),
+    }
+    for key in ("metadata_url","tarball_url","integrity"):
+        if candidate.get(key) is not None:
+            payload[key]=candidate.get(key)
+    payload["max_bytes"]=30_000_000
+    return _external_tool_bridge("npm_package_artifact",payload)
+
 def _load_capability_discovery():
     _activate_external_http_bridge()
     path=pathlib.Path(__file__).resolve().with_name("capability_discovery.py")
@@ -4749,6 +4762,9 @@ def _load_auto_capability_acquisition():
         pypi_module=getattr(module,"auto_pypi_library_acquisition",None)
         if pypi_module is not None and hasattr(pypi_module,"set_external_wheel_closure_provider"):
             pypi_module.set_external_wheel_closure_provider(_external_pypi_wheel_closure_provider)
+        npm_module=getattr(module,"auto_npm_library_acquisition",None)
+        if npm_module is not None and hasattr(npm_module,"set_external_package_provider"):
+            npm_module.set_external_package_provider(_external_npm_package_provider)
     finally:
         if added:
             try:
