@@ -1,0 +1,117 @@
+name: UBJSON Superworker External Relay Proof
+
+on:
+  push:
+    branches:
+      - execution/ubjson-external-relay-superworker2-20260927
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  prove:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: execution/ubjson-external-relay-superworker2-20260927
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+
+      - name: Verify frozen mission bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(sha256sum canonical/astra_runtime/missions/ASTRA_REAL_SAME_IDENTITY_UBJSON_CANONICAL_SNAPSHOT_001.json | awk '{print $1}')" = "f0773c75d92335e35b7b91d6d0eb8b72b5ea1f8cc3fbd9ea7ff13d0af8856166"
+
+      - name: Run focused regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest -v             canonical.tests.test_external_tool_relay             canonical.tests.test_independent_npm_codec_verifier_bridge             canonical.tests.test_same_identity_supervisor             canonical.tests.test_auto_python_source_codec_acquisition
+
+      - name: Execute same-identity mission with bounded relay
+        shell: bash
+        run: |
+          set -euo pipefail
+          TASK="canonical/same_identity_worker/tasks/SI_REAL_UBJSON_SNAPSHOT_002.json"
+          BRIDGE="canonical/same_identity_worker/external_tool_bridge/SI-REAL-UBJSON-SNAPSHOT-002"
+          mkdir -p "$BRIDGE"
+          completed=0
+          : > LIVE_EXECUTION.log
+
+          for round in $(seq 1 32); do
+            echo "=== ROUND $round ===" | tee -a LIVE_EXECUTION.log
+            set +e
+            python3 canonical/runtime/same_identity_supervisor.py               --agent-id SUPERWORKER-UNIFIED-2               --task "$TASK" 2>&1 | tee -a LIVE_EXECUTION.log
+            code=${PIPESTATUS[0]}
+            set -e
+            echo "supervisor_exit=$code" | tee -a LIVE_EXECUTION.log
+
+            if [ "$code" -eq 0 ]; then
+              completed=1
+              break
+            fi
+
+            if [ "$code" -ne 75 ] && [ "$code" -ne 3 ] && [ "$code" -ne 4 ] && [ "$code" -ne 5 ]; then
+              echo "Unexpected supervisor/runtime exit $code" >&2
+              exit "$code"
+            fi
+
+            python3 canonical/runtime/external_tool_relay.py --bridge-dir "$BRIDGE" | tee -a LIVE_EXECUTION.log
+          done
+
+          if [ "$completed" -ne 1 ]; then
+            echo "Mission did not complete within bounded 32-round loop" >&2
+            exit 90
+          fi
+
+      - name: Produce non-promotional execution summary
+        if: always()
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,pathlib
+          root=pathlib.Path(".")
+          state_path=root/"canonical/same_identity_worker/state/SI-REAL-UBJSON-SNAPSHOT-002.json"
+          state=json.loads(state_path.read_text()) if state_path.exists() else None
+          bridge=root/"canonical/same_identity_worker/external_tool_bridge/SI-REAL-UBJSON-SNAPSHOT-002"
+          artifact=root/"canonical/astra_runtime/artifacts/CANONICAL_POINTER_20260927.ubj"
+          summary={
+            "schema":"PROJECT_BRAIN_SUPERWORKER2_LIVE_EXECUTION_SUMMARY_V1",
+            "agent_id":"SUPERWORKER-UNIFIED-2",
+            "task_id":"SI-REAL-UBJSON-SNAPSHOT-002",
+            "mission_sha256":"f0773c75d92335e35b7b91d6d0eb8b72b5ea1f8cc3fbd9ea7ff13d0af8856166",
+            "supervisor_state":state,
+            "bridge_request_count":len(list(bridge.glob("*.request.json"))) if bridge.exists() else 0,
+            "bridge_response_count":len(list(bridge.glob("*.response.json"))) if bridge.exists() else 0,
+            "artifact_exists":artifact.is_file(),
+            "artifact_sha256":hashlib.sha256(artifact.read_bytes()).hexdigest() if artifact.is_file() else None,
+            "promotion_claim":False,
+            "p_real_claim":0
+          }
+          pathlib.Path("LIVE_EXECUTION_SUMMARY.json").write_text(json.dumps(summary,indent=2,sort_keys=True)+"\n")
+          print(json.dumps(summary,indent=2,sort_keys=True))
+          PY
+
+      - name: Upload complete live evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: superworker2-ubjson-live-evidence
+          if-no-files-found: warn
+          path: |
+            LIVE_EXECUTION.log
+            LIVE_EXECUTION_SUMMARY.json
+            canonical/same_identity_worker/state/
+            canonical/same_identity_worker/evidence/
+            canonical/same_identity_worker/external_tool_bridge/
+            canonical/astra_runtime/state/
+            canonical/astra_runtime/evidence/
+            canonical/astra_runtime/evidence_ledgers/
+            canonical/astra_runtime/artifacts/
+            canonical/astra_runtime/tmp/
