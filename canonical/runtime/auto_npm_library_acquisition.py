@@ -33,6 +33,12 @@ def _origin_mission_sha256(root,mission_path):
     return hashlib.sha256(mission.read_bytes()).hexdigest()
 
 
+def supports_effect(goal):
+    lower=str(goal or "").lower()
+    effect=any(x in lower for x in ("encode","serialize","pack"))
+    return bool(effect and _format_tokens(goal))
+
+
 def supports(goal):
     lower=str(goal or "").lower()
     supplier=(
@@ -40,8 +46,7 @@ def supports(goal):
         or re.search(r"\bnode(?:\.js|js)?\b",lower)
         or "javascript library" in lower
     )
-    effect=any(x in lower for x in ("encode","serialize","pack"))
-    return bool(supplier and effect)
+    return bool(supplier and supports_effect(goal))
 
 
 def _repo_paths(text):
