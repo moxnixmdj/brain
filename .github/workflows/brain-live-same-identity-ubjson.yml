@@ -1,0 +1,242 @@
+name: Brain Live Same-Identity UBJSON Proof
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/brain-live-same-identity-ubjson.yml'
+      - 'canonical/runtime/external_tool_relay.py'
+      - 'canonical/tests/test_external_tool_relay.py'
+      - 'canonical/astra_runtime/missions/ASTRA_REAL_SAME_IDENTITY_UBJSON_CANONICAL_SNAPSHOT_001.json'
+      - 'canonical/same_identity_worker/tasks/SI_REAL_UBJSON_SNAPSHOT_001.json'
+      - 'canonical/runtime/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live-proof:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Verify frozen mission identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,json,pathlib
+          mission=pathlib.Path("canonical/astra_runtime/missions/ASTRA_REAL_SAME_IDENTITY_UBJSON_CANONICAL_SNAPSHOT_001.json")
+          task=pathlib.Path("canonical/same_identity_worker/tasks/SI_REAL_UBJSON_SNAPSHOT_001.json")
+          msha=hashlib.sha256(mission.read_bytes()).hexdigest()
+          tsha=hashlib.sha256(task.read_bytes()).hexdigest()
+          t=json.loads(task.read_text())
+          assert msha=="f0773c75d92335e35b7b91d6d0eb8b72b5ea1f8cc3fbd9ea7ff13d0af8856166",msha
+          assert t["mission_sha256"]==msha
+          assert t["agent_id"]=="SUPERWORKER-UNIFIED-1"
+          assert t["task_id"]=="SI-REAL-UBJSON-SNAPSHOT-001"
+          assert t["checkpoint_before_runtime_once"] is True
+          assert float(t["incremental_spend_usd"])==0.0
+          print("FROZEN_MISSION_OK",msha,tsha)
+          PY
+
+      - name: Relay and bridge regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile \
+            canonical/runtime/external_tool_relay.py \
+            canonical/runtime/astra_runtime.py \
+            canonical/runtime/same_identity_supervisor.py \
+            canonical/runtime/independent_npm_codec_verifier.py
+          python3 -m unittest -v \
+            canonical.tests.test_external_tool_relay \
+            canonical.tests.test_external_acquisition_bridge \
+            canonical.tests.test_external_pypi_artifact_bridge \
+            canonical.tests.test_independent_npm_codec_verifier_bridge \
+            canonical.tests.test_same_identity_supervisor
+
+      - name: Execute frozen mission through bounded relay
+        id: live
+        shell: bash
+        run: |
+          set -euo pipefail
+          TASK="canonical/same_identity_worker/tasks/SI_REAL_UBJSON_SNAPSHOT_001.json"
+          BRIDGE="canonical/same_identity_worker/external_tool_bridge/SI-REAL-UBJSON-SNAPSHOT-001"
+          mkdir -p live-proof-logs "$BRIDGE"
+          success=0
+          : > live-proof-logs/cycles.tsv
+
+          for cycle in $(seq 1 48); do
+            echo "=== supervisor cycle ${cycle} ==="
+            set +e
+            python3 canonical/runtime/same_identity_supervisor.py --task "$TASK" \
+              > >(tee "live-proof-logs/supervisor-${cycle}.stdout.log") \
+              2> >(tee "live-proof-logs/supervisor-${cycle}.stderr.log" >&2)
+            code=$?
+            set -e
+            printf '%s\t%s\t' "$cycle" "$code" >> live-proof-logs/cycles.tsv
+
+            if [ "$code" -eq 0 ]; then
+              printf 'COMPLETE\n' >> live-proof-logs/cycles.tsv
+              success=1
+              break
+            fi
+
+            if [ "$code" -eq 75 ]; then
+              printf 'CHECKPOINT_RELAUNCH\n' >> live-proof-logs/cycles.tsv
+              continue
+            fi
+
+            echo "=== relay cycle ${cycle} ==="
+            python3 canonical/runtime/external_tool_relay.py \
+              --bridge-dir "$BRIDGE" \
+              --expected-agent "SUPERWORKER-UNIFIED-1" \
+              --expected-task "SI-REAL-UBJSON-SNAPSHOT-001" \
+              --max-requests 8 | tee "live-proof-logs/relay-${cycle}.json"
+
+            serviced=$(python3 - "$cycle" <<'PY'
+          import json,pathlib,sys
+          p=pathlib.Path("live-proof-logs")/f"relay-{sys.argv[1]}.json"
+          print(int(json.loads(p.read_text())["serviced_count"]))
+          PY
+            )
+            printf 'RELAY_%s\n' "$serviced" >> live-proof-logs/cycles.tsv
+            if [ "$serviced" -eq 0 ]; then
+              echo "No pending external request was serviceable; causal frontier is not the relay."
+              break
+            fi
+          done
+
+          echo "success=$success" >> "$GITHUB_OUTPUT"
+          if [ "$success" -ne 1 ]; then
+            echo "Frozen mission did not complete inside bounded continuation loop."
+            exit 1
+          fi
+
+      - name: Deterministic proof gate
+        if: ${{ steps.live.outputs.success == '1' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,json,pathlib
+
+          root=pathlib.Path(".")
+          sid="SI-REAL-UBJSON-SNAPSHOT-001"
+          mid="ASTRA-REAL-SAME-IDENTITY-UBJSON-CANONICAL-SNAPSHOT-001"
+          s_path=root/"canonical/same_identity_worker/state"/f"{sid}.json"
+          a_path=root/"canonical/astra_runtime/state"/f"{mid}.json"
+          receipt_path=root/"canonical/astra_runtime/evidence"/f"{mid}__RECEIPT.json"
+          artifact=root/"canonical/astra_runtime/artifacts/CANONICAL_POINTER_20260927.ubj"
+          source=root/"canonical/CANONICAL_POINTER.json"
+
+          supervisor=json.loads(s_path.read_text())
+          astra=json.loads(a_path.read_text())
+          receipt=json.loads(receipt_path.read_text())
+
+          assert supervisor["status"]=="COMPLETE",supervisor.get("status")
+          assert supervisor["agent_id"]=="SUPERWORKER-UNIFIED-1"
+          assert supervisor["task_id"]==sid
+          assert int(supervisor.get("checkpoint_count",0))>=1
+          assert int(supervisor.get("runtime_attempt_count",0))>=1
+          assert astra["status"]=="COMPLETE",astra.get("status")
+          assert astra.get("supervisor_agent_id")=="SUPERWORKER-UNIFIED-1"
+          assert astra.get("supervisor_task_id")==sid
+          assert receipt["status"]=="COMPLETE"
+          assert receipt.get("supervisor_agent_id")=="SUPERWORKER-UNIFIED-1"
+          assert receipt.get("supervisor_task_id")==sid
+          assert artifact.is_file() and artifact.stat().st_size>0
+          assert source.is_file()
+
+          def visit(value):
+              if isinstance(value,dict):
+                  yield value
+                  for child in value.values():
+                      yield from visit(child)
+              elif isinstance(value,list):
+                  for child in value:
+                      yield from visit(child)
+
+          independent=[]
+          scan_roots=[
+              root/"canonical/astra_runtime/state",
+              root/"canonical/astra_runtime/evidence",
+              root/"canonical/astra_runtime/pending_bindings",
+          ]
+          for directory in scan_roots:
+              if not directory.exists():
+                  continue
+              for path in directory.rglob("*.json"):
+                  try:
+                      value=json.loads(path.read_text())
+                  except Exception:
+                      continue
+                  for node in visit(value):
+                      if node.get("schema")=="PROJECT_BRAIN_INDEPENDENT_NPM_CODEC_VERIFICATION_V1":
+                          independent.append((path,node))
+
+          valid=[
+              (p,n) for p,n in independent
+              if n.get("verified") is True
+              and n.get("producer_independent") is True
+              and n.get("implementation_independent") is True
+              and n.get("supplier_class_independent") is True
+              and n.get("verifier_source_type")=="npm"
+          ]
+          assert valid,"NO_STRICT_INDEPENDENT_NPM_VERIFICATION_RECORD"
+
+          verdict={
+              "schema":"PROJECT_BRAIN_LIVE_SAME_IDENTITY_UBJSON_PROOF_V1",
+              "proof_candidate":True,
+              "p_real_claim":0,
+              "promotion_claim":False,
+              "agent_id":"SUPERWORKER-UNIFIED-1",
+              "task_id":sid,
+              "mission_id":mid,
+              "checkpoint_count":supervisor["checkpoint_count"],
+              "runtime_attempt_count":supervisor["runtime_attempt_count"],
+              "mission_status":astra["status"],
+              "artifact_bytes":artifact.stat().st_size,
+              "artifact_sha256":hashlib.sha256(artifact.read_bytes()).hexdigest(),
+              "source_sha256":hashlib.sha256(source.read_bytes()).hexdigest(),
+              "runtime_receipt_sha256":hashlib.sha256(receipt_path.read_bytes()).hexdigest(),
+              "independent_verifier_records":[
+                  {
+                      "path":str(p),
+                      "verifier_package":n.get("verifier_package"),
+                      "verifier_version":n.get("verifier_version"),
+                      "verifier_integrity":n.get("verifier_integrity"),
+                  }
+                  for p,n in valid
+              ],
+              "incremental_spend_usd":0,
+              "user_device_used":False,
+              "val_town_used":False,
+              "truth_scope":"LIVE_EXECUTION_CANDIDATE__REQUIRES_INDEPENDENT_ADJUDICATION_BEFORE_P_REAL_PROMOTION",
+          }
+          out=root/"LIVE_PROOF_VERDICT.json"
+          out.write_text(json.dumps(verdict,indent=2,sort_keys=True)+"\n")
+          print(json.dumps(verdict,indent=2,sort_keys=True))
+          PY
+
+      - name: Upload live proof evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: brain-live-same-identity-ubjson-proof
+          if-no-files-found: warn
+          path: |
+            LIVE_PROOF_VERDICT.json
+            live-proof-logs/
+            canonical/same_identity_worker/state/SI-REAL-UBJSON-SNAPSHOT-001.json
+            canonical/same_identity_worker/evidence/
+            canonical/same_identity_worker/external_tool_bridge/SI-REAL-UBJSON-SNAPSHOT-001/
+            canonical/astra_runtime/state/
+            canonical/astra_runtime/evidence/
+            canonical/astra_runtime/pending_bindings/
+            canonical/astra_runtime/missions/
+            canonical/astra_runtime/artifacts/CANONICAL_POINTER_20260927.ubj
