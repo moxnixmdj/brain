@@ -4689,6 +4689,8 @@ def _external_python_source_tree_provider(goal,mission_id):
     return _external_tool_bridge("python_source_tree",{
       "goal":str(goal),
       "mission_id":str(mission_id),
+      "request_contract_version":2,
+      "strict_wire_format_admission_required":True,
       "max_trees":12,
       "max_files_per_tree":128,
       "max_total_bytes_per_tree":2000000,
