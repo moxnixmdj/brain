@@ -413,9 +413,17 @@ def _service_pypi_wheel_closure(request: dict) -> dict:
             timeout=180,
         )
         if proc.returncode != 0:
-            raise RelayError(
-                "PYPI_CLOSURE_RESOLUTION_FAILED:" + (proc.stderr or proc.stdout or "")[-1800:]
-            )
+            detail = (proc.stderr or proc.stdout or "")[-1800:]
+            if (
+                "No matching distribution found" in detail
+                or "Could not find a version that satisfies the requirement" in detail
+            ):
+                return {
+                    "artifacts": [],
+                    "resolution_status": "NO_COMPATIBLE_WHEEL_CLOSURE",
+                    "resolver_detail": detail,
+                }
+            raise RelayError("PYPI_CLOSURE_RESOLUTION_FAILED:" + detail)
         wheels = sorted(pathlib.Path(td).glob("*.whl"))
         if not wheels or len(wheels) > max_wheels:
             raise RelayError("PYPI_CLOSURE_WHEEL_COUNT_INVALID:" + str(len(wheels)))
