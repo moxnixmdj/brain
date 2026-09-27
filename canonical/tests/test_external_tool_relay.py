@@ -161,7 +161,7 @@ class ExternalToolRelayTests(unittest.TestCase):
             root = pathlib.Path(td)
             request = {
                 "schema": relay.REQUEST_SCHEMA,
-                "kind": "package_name_search",
+                "kind": "python_source_tree",
                 "agent_id": "SUPERWORKER-UNIFIED-1",
                 "task_id": "SI-REAL-UBJSON-SNAPSHOT-001",
                 "payload": {"effect": "structured.binary.encode", "ecosystem": "pypi"},
@@ -178,6 +178,28 @@ class ExternalToolRelayTests(unittest.TestCase):
             )
             self.assertEqual(observed, [])
             self.assertFalse((root / f"{sha}.response.json").exists())
+
+    def test_services_pypi_package_name_search_without_returning_simple_index(self):
+        request = {
+            "payload": {
+                "ecosystem": "pypi",
+                "tokens": ["ubj"],
+                "limit": 10,
+                "timeout_s": 12,
+            }
+        }
+
+        def opener(req, timeout):
+            self.assertEqual(req.full_url, "https://pypi.org/search/?q=ubj")
+            self.assertEqual(timeout, 12)
+            return FakeResponse(
+                raw=b'<a href="/project/py-ubjson/">py-ubjson</a><a href="/project/another-ubj/">another-ubj</a>',
+                url=req.full_url,
+            )
+
+        observed = relay._service_package_name_search(request, opener=opener)
+        self.assertEqual(observed["source"], "PYPI_SEARCH")
+        self.assertEqual(observed["names"], ["py-ubjson", "another-ubj"])
 
 
 if __name__ == "__main__":
