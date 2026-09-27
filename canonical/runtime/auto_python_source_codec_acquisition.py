@@ -11,6 +11,9 @@ Safety boundary:
 from __future__ import annotations
 import hashlib,json,pathlib,re,subprocess,sys,tempfile
 
+import independent_system_codec_verifier
+from bound_capabilities import python_source_tree_codec
+
 class AutoPythonSourceCodecFailure(RuntimeError):
     def __init__(self,code,detail=None):
         self.code=code; self.detail=detail
@@ -122,6 +125,74 @@ def _materialize(tree,destination):
         json.dumps(manifest,sort_keys=True,separators=(",",":")).encode()
     ).hexdigest()
     return manifest
+
+def _strict_wire_format_admission(root,mission_id,manifest,contract,source_root,format_terms):
+    """Reject a producer that round-trips itself but does not emit the requested wire format."""
+    if len(format_terms)!=1:
+        raise AutoPythonSourceCodecFailure(
+            "SOURCE_OUTPUT_FORMAT_AMBIGUOUS",json.dumps(format_terms,sort_keys=True)
+        )
+    fmt=str(format_terms[0]).strip().lower()
+    supported={"ubj","ubjson","cbor","msgpack","messagepack","bson","bjdata"}
+    if fmt not in supported:
+        return {"status":"NO_INDEPENDENT_SYSTEM_ASSAY_FOR_FORMAT","format":fmt}
+    token=_slug(mission_id)+"-"+manifest["tree_sha256"][:12]
+    tmp=root/"canonical"/"astra_runtime"/"tmp"/"source_format_admission"
+    tmp.mkdir(parents=True,exist_ok=True)
+    fixture_path=tmp/(token+".json")
+    output_path=tmp/(token+"."+fmt)
+    fixture=contract.get("fixture")
+    if not isinstance(fixture,(list,dict)):
+        raise AutoPythonSourceCodecFailure("SOURCE_FORMAT_ADMISSION_FIXTURE_INVALID")
+    fixture_path.write_text(
+        json.dumps(fixture,indent=2,ensure_ascii=False)+"\n",encoding="utf-8"
+    )
+    try:
+        observed=python_source_tree_codec.run({
+          "_source_root":str(source_root),
+          "module":contract["module"],
+          "encode_callable":contract["encode_callable"],
+          "decode_callable":contract["decode_callable"],
+          "encode_kwargs":contract.get("encode_kwargs") or {},
+          "decode_kwargs":contract.get("decode_kwargs") or {},
+          "envelope_key":contract.get("envelope_key"),
+          "json_path":str(fixture_path.relative_to(root)),
+          "output_path":str(output_path.relative_to(root)),
+        },root)
+        if observed.get("output_verified") is not True:
+            raise AutoPythonSourceCodecFailure("SOURCE_FORMAT_ADMISSION_PRODUCER_FAILED")
+        try:
+            independent=independent_system_codec_verifier.verify(
+                fmt,
+                str(fixture_path.relative_to(root)),
+                str(output_path.relative_to(root)),
+                manifest.get("repository"),
+                root,
+            )
+        except Exception as exc:
+            raise AutoPythonSourceCodecFailure(
+                "SOURCE_WIRE_FORMAT_INDEPENDENT_REJECTED",
+                type(exc).__name__+":"+str(exc)
+            ) from exc
+        if (
+            independent.get("verified") is not True
+            or independent.get("implementation_independent") is not True
+            or independent.get("supplier_class_independent") is not True
+        ):
+            raise AutoPythonSourceCodecFailure("SOURCE_WIRE_FORMAT_INDEPENDENCE_FAILED")
+        return {
+          "status":"STRICT_WIRE_FORMAT_VERIFIED",
+          "format":fmt,
+          "producer_output_sha256":observed.get("output_sha256"),
+          "producer_output_bytes":observed.get("output_bytes"),
+          "independent_verifier":independent,
+        }
+    finally:
+        try: fixture_path.unlink()
+        except FileNotFoundError: pass
+        try: output_path.unlink()
+        except FileNotFoundError: pass
+
 
 def _origin_mission_sha256(root,mission_path):
     root=pathlib.Path(root).resolve()
@@ -241,6 +312,9 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
                 }
                 repository=manifest["repository"]; revision=manifest["revision"]
                 format_terms=_format_terms(goal)
+                wire_format_admission=_strict_wire_format_admission(
+                    root,mission_id,manifest,contract,site,format_terms
+                )
                 provides=["structured.binary.encode"]+[
                     "structured.binary.encode."+x for x in format_terms
                 ]
@@ -278,6 +352,7 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
                   "origin_mission_sha256_at_acquisition":origin_sha,
                   "selected_supplier":{"repository":repository,"revision":revision},
                   "contract":contract,"verification_fixture":contract["fixture"],
+                  "wire_format_admission":wire_format_admission,
                   "independent_verifier_source_trees":[
                     other for other in trees[:8]
                     if isinstance(other,dict)
