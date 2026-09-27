@@ -47,12 +47,33 @@ def verify(format_name,json_path,binary_path,producer_project,root):
         "Independently decode "+fmt+" binary data from "
         "canonical/astra_runtime/tmp/INDEPENDENT_VERIFIER."+fmt
     )
-    try:
-        candidates=npm_acq._search_registry(goal,limit=40,format_hint=fmt)
-    except Exception as exc:
+    aliases={
+        "ubj":["ubjson"],
+        "msgpack":["messagepack"],
+        "messagepack":["msgpack"],
+    }
+    search_terms=[fmt]+[x for x in aliases.get(fmt,[]) if x!=fmt]
+    candidates=[]
+    discovery_errors=[]
+    seen=set()
+    for term in search_terms:
+        try:
+            found=npm_acq._search_registry(goal,limit=40,format_hint=term)
+        except Exception as exc:
+            discovery_errors.append(term+":"+type(exc).__name__+":"+str(exc))
+            continue
+        for candidate in found:
+            key=(_norm(candidate.get("package")),str(candidate.get("version") or ""))
+            if key in seen:
+                continue
+            seen.add(key)
+            enriched=dict(candidate)
+            enriched["verifier_search_term"]=term
+            candidates.append(enriched)
+    if not candidates and discovery_errors:
         raise IndependentNpmCodecVerifierFailure(
-            "NPM_VERIFIER_DISCOVERY_FAILED:"+type(exc).__name__+":"+str(exc)
-        ) from exc
+            "NPM_VERIFIER_DISCOVERY_FAILED:"+"|".join(discovery_errors)[:1800]
+        )
 
     producer=_norm(producer_project)
     attempts=[]
@@ -118,6 +139,7 @@ def verify(format_name,json_path,binary_path,producer_project,root):
                 "schema":"PROJECT_BRAIN_INDEPENDENT_NPM_CODEC_VERIFICATION_V1",
                 "verified":True,
                 "format":fmt,
+                "verifier_search_terms":search_terms,
                 "producer_project":producer_project,
                 "verifier_package":candidate["package"],
                 "verifier_version":candidate["version"],
