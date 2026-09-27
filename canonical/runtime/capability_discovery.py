@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 """Deterministic external capability discovery for Project Brain.
 
-
 Current source: official public MCP Registry. The registry is an optional
 metadata source, never canonical authority. Discovery does not execute or
 install third-party code. Binding is a separate verified step.
 """
 from __future__ import annotations
-
 
 import json
 import pathlib
@@ -17,8 +15,6 @@ import subprocess
 import sys
 import urllib.parse
 import urllib.request
-
-
 
 
 MCP_REGISTRY_BASE = "https://registry.modelcontextprotocol.io"
@@ -35,12 +31,8 @@ GENERIC_DISCOVERY_TOKENS={
 PAID_MARKERS = ("payment", "usdc", "x402", "$", "paid", "billing")
 
 
-
-
 class DiscoveryFailure(RuntimeError):
     pass
-
-
 
 
 def _semanticize_paths(text):
@@ -56,8 +48,6 @@ def _semanticize_paths(text):
         ext=leaf.rsplit(".",1)[-1].lower() if "." in leaf else ""
         return " "+ext_words.get(ext,ext)+" "
     return re.sub(pattern,repl,str(text or ""))
-
-
 
 
 def effect_queries(effect):
@@ -90,16 +80,12 @@ def effect_queries(effect):
     return out[:6]
 
 
-
-
 def _flatten_text(value):
     if isinstance(value, dict):
         return " ".join(_flatten_text(v) for v in value.values())
     if isinstance(value, list):
         return " ".join(_flatten_text(v) for v in value)
     return str(value or "")
-
-
 
 
 def _lexical_variants(token):
@@ -119,8 +105,6 @@ def _lexical_variants(token):
     return out
 
 
-
-
 def normalize_server(entry, query):
     server = entry.get("server", entry) if isinstance(entry, dict) else {}
     meta = entry.get("_meta", {}) if isinstance(entry, dict) else {}
@@ -130,7 +114,6 @@ def normalize_server(entry, query):
     blob = _flatten_text(server).lower()
     packages = server.get("packages") if isinstance(server.get("packages"), list) else []
     remotes = server.get("remotes") if isinstance(server.get("remotes"), list) else []
-
 
     required_env = 0
     required_secrets = 0
@@ -154,7 +137,6 @@ def normalize_server(entry, query):
             ],
         })
 
-
     remote_summaries = []
     for remote in remotes:
         headers = remote.get("headers") if isinstance(remote, dict) else []
@@ -168,7 +150,6 @@ def normalize_server(entry, query):
             ],
         })
 
-
     paid = any(marker in blob for marker in PAID_MARKERS)
     status = official.get("status", "unknown")
     is_latest = bool(official.get("isLatest", False))
@@ -180,7 +161,6 @@ def normalize_server(entry, query):
     friction = required_env + 3 * required_secrets
     paid_penalty = 100 if paid else 0
     score = lexical + local_package_bonus + active_bonus + latest_bonus - friction - paid_penalty
-
 
     return {
         "name": name,
@@ -197,8 +177,6 @@ def normalize_server(entry, query):
         "score": score,
         "query": query,
     }
-
-
 
 
 def search_mcp_registry(effect, limit=8, timeout_s=12, opener=None):
@@ -229,7 +207,6 @@ def search_mcp_registry(effect, limit=8, timeout_s=12, opener=None):
             if prior is None or candidate["score"] > prior["score"]:
                 seen[candidate["name"]] = candidate
 
-
     candidates = sorted(
         seen.values(),
         key=lambda c: (
@@ -253,8 +230,6 @@ def search_mcp_registry(effect, limit=8, timeout_s=12, opener=None):
     }
 
 
-
-
 def _apt_query_variants(queries):
     out=[]
     for query in queries:
@@ -270,8 +245,6 @@ def _apt_query_variants(queries):
                 if variant not in out:
                     out.append(variant)
     return out
-
-
 
 
 def search_apt_packages(effect, limit=12):
@@ -414,8 +387,6 @@ def search_apt_packages(effect, limit=12):
     }
 
 
-
-
 def _requested_output_format_tokens(effect):
     text=re.sub(r"https?://[^\s)\]}>]+"," ",str(effect or ""))
     paths=re.findall(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+",text)
@@ -426,8 +397,6 @@ def _requested_output_format_tokens(effect):
         if suffix and suffix not in common and suffix not in out:
             out.append(suffix)
     return out
-
-
 
 
 def _pypi_candidate_names(effect):
@@ -445,19 +414,14 @@ def _pypi_candidate_names(effect):
     return names[:12]
 
 
-
-
 _EXTERNAL_PACKAGE_NAME_SEARCHER=None
-
 
 def set_external_package_name_searcher(searcher):
     global _EXTERNAL_PACKAGE_NAME_SEARCHER
     _EXTERNAL_PACKAGE_NAME_SEARCHER=searcher
 
-
 def _pypi_simple_related_names(effect,timeout_s=12,opener=None,limit=24):
     """Discover related PyPI project names from the official Simple index.
-
 
     PyPI does not expose a supported full-text search API. The Simple index is
     authoritative project-name metadata, so use it only to widen exact-name
@@ -539,11 +503,8 @@ def _pypi_simple_related_names(effect,timeout_s=12,opener=None,limit=24):
     return found
 
 
-
-
 def search_pypi_packages(effect, limit=12, timeout_s=12, opener=None):
     """Probe exact PyPI project candidates derived from the effect contract.
-
 
     PyPI has no supported full-text search API, so this stays conservative:
     semantic/effect tokens and output extensions become exact project probes.
@@ -555,7 +516,6 @@ def search_pypi_packages(effect, limit=12, timeout_s=12, opener=None):
     candidates=[]
     errors=[]
     effect_tokens=set(effect_queries(effect))
-
 
     def probe_queries(query_values):
         local=[]
@@ -642,11 +602,9 @@ def search_pypi_packages(effect, limit=12, timeout_s=12, opener=None):
             })
         return local,local_errors
 
-
     exact_candidates,exact_errors=probe_queries(exact_queries)
     candidates.extend(exact_candidates)
     errors.extend(exact_errors)
-
 
     # Exact-name probing misses common relationships such as a format token
     # being embedded in a longer project name. Widen unless an exact probe
@@ -663,7 +621,6 @@ def search_pypi_packages(effect, limit=12, timeout_s=12, opener=None):
         normalized=re.sub(r"[-_.]+","",blob)
         return any(re.sub(r"[-_.]+","",fmt.lower()) in normalized for fmt in format_tokens)
 
-
     if not any(matches_requested_format(x) for x in candidates):
         related=_pypi_simple_related_names(effect,timeout_s=timeout_s,opener=opener,limit=max(12,int(limit)*2))
         related=[x for x in related if x.lower() not in {q.lower() for q in queries}]
@@ -671,7 +628,6 @@ def search_pypi_packages(effect, limit=12, timeout_s=12, opener=None):
         widened,widened_errors=probe_queries(related)
         candidates.extend(widened)
         errors.extend(widened_errors)
-
 
     # Deduplicate projects while preserving the best-scoring metadata record.
     by_project={}
@@ -681,7 +637,6 @@ def search_pypi_packages(effect, limit=12, timeout_s=12, opener=None):
         if prior is None or float(cand.get("score",0))>float(prior.get("score",0)):
             by_project[key]=cand
     candidates=list(by_project.values())
-
 
     candidates.sort(key=lambda x:(-float(x.get("score",0)),int(x.get("dependency_count",0)),str(x.get("name",""))))
     return {
@@ -695,8 +650,6 @@ def search_pypi_packages(effect, limit=12, timeout_s=12, opener=None):
       "errors":errors,
       "binding_performed":False,
     }
-
-
 
 
 def search_all(effect, limit_per_source=12):
