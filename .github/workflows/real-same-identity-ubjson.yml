@@ -1,12 +1,14 @@
 name: Real Same-Identity UBJSON Mission
-# synchronize-event trigger after workflow creation
+# concurrent bridge relay: same runtime waits for identity-bound responses
 
 on:
   pull_request:
     branches: [main]
     paths:
+      - 'canonical/runtime/astra_runtime.py'
       - 'canonical/runtime/external_tool_relay.py'
       - 'canonical/tests/test_external_tool_relay.py'
+      - 'canonical/tests/test_external_tool_bridge_wait.py'
       - 'canonical/astra_runtime/missions/ASTRA_REAL_SAME_IDENTITY_UBJSON_CANONICAL_SNAPSHOT_001.json'
       - 'canonical/same_identity_worker/tasks/SI_REAL_UBJSON_SNAPSHOT_001.json'
       - '.github/workflows/real-same-identity-ubjson.yml'
@@ -18,7 +20,7 @@ permissions:
 jobs:
   real_ubjson:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
@@ -28,11 +30,13 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Verify relay and immutable mission bytes
+      - name: Verify relay, wait semantics, and immutable mission bytes
         shell: bash
         run: |
           set -euo pipefail
-          python -m unittest canonical.tests.test_external_tool_relay
+          python -m unittest \
+            canonical.tests.test_external_tool_relay \
+            canonical.tests.test_external_tool_bridge_wait
           python - <<'PY'
           import hashlib, pathlib
           mission=pathlib.Path('canonical/astra_runtime/missions/ASTRA_REAL_SAME_IDENTITY_UBJSON_CANONICAL_SNAPSHOT_001.json')
@@ -42,78 +46,117 @@ jobs:
           assert actual==expected
           PY
 
-      - name: Run blocker-extinction loop
+      - name: Run same worker with concurrent bounded relay
         shell: bash
         run: |
           set -euo pipefail
           python - <<'PY'
-          import json, pathlib, subprocess, sys
+          import json
+          import multiprocessing
+          import os
+          import pathlib
+          import subprocess
+          import sys
+          import time
+          import traceback
 
           agent='SUPERWORKER-UNIFIED-1'
           task_id='SI-REAL-UBJSON-SNAPSHOT-001'
           task='canonical/same_identity_worker/tasks/SI_REAL_UBJSON_SNAPSHOT_001.json'
           bridge=pathlib.Path('canonical/same_identity_worker/external_tool_bridge')/task_id
+          bridge.mkdir(parents=True,exist_ok=True)
+          relay_log=pathlib.Path('REAL_UBJSON_RELAY.jsonl')
           transcript=[]
+          completed=False
 
-          for iteration in range(1, 25):
-              proc=subprocess.run(
-                  [sys.executable,'canonical/runtime/same_identity_supervisor.py','--task',task],
-                  text=True,capture_output=True
-              )
-              record={
-                  'iteration':iteration,
-                  'returncode':proc.returncode,
-                  'stdout':proc.stdout[-12000:],
-                  'stderr':proc.stderr[-12000:],
-              }
-              transcript.append(record)
-              print(json.dumps(record,sort_keys=True))
-
-              if proc.returncode==0:
-                  pathlib.Path('REAL_UBJSON_LOOP_TRANSCRIPT.json').write_text(
-                      json.dumps(transcript,indent=2,sort_keys=True)+'\n'
-                  )
-                  print('REAL_UBJSON_MISSION_COMPLETE')
-                  raise SystemExit(0)
-
-              if proc.returncode not in {3,4,5,75}:
-                  break
-
-              relay=subprocess.run(
-                  [
-                      sys.executable,'canonical/runtime/external_tool_relay.py',
-                      '--bridge-dir',str(bridge),
-                      '--agent-id',agent,
-                      '--task-id',task_id,
-                  ],
-                  text=True,capture_output=True
-              )
-              record['relay_returncode']=relay.returncode
-              record['relay_stdout']=relay.stdout[-12000:]
-              record['relay_stderr']=relay.stderr[-12000:]
-              print(json.dumps({
-                  'iteration':iteration,
-                  'relay_returncode':relay.returncode,
-                  'relay_stdout':relay.stdout[-12000:],
-                  'relay_stderr':relay.stderr[-12000:],
-              },sort_keys=True))
-              if relay.returncode!=0:
-                  break
-
+          def relay_loop():
+              from canonical.runtime import external_tool_relay as relay
               try:
-                  serviced=int(json.loads(relay.stdout).get('serviced',0))
-              except Exception:
-                  serviced=0
+                  while True:
+                      written=relay.service_pending(bridge,agent,task_id)
+                      if written:
+                          with relay_log.open('a',encoding='utf-8') as fh:
+                              fh.write(json.dumps({
+                                  'epoch':time.time(),
+                                  'responses':written,
+                                  'serviced':len(written),
+                              },sort_keys=True)+'\n')
+                              fh.flush()
+                      time.sleep(0.02)
+              except BaseException as exc:
+                  with relay_log.open('a',encoding='utf-8') as fh:
+                      fh.write(json.dumps({
+                          'epoch':time.time(),
+                          'fatal':type(exc).__name__+':'+str(exc),
+                          'traceback':traceback.format_exc()[-6000:],
+                      },sort_keys=True)+'\n')
+                      fh.flush()
+                  raise
 
-              if proc.returncode!=75 and serviced==0:
-                  # This is a genuine non-external blocker. Stop instead of spinning.
+          relay_proc=multiprocessing.Process(target=relay_loop,daemon=True)
+          relay_proc.start()
+
+          try:
+              # First invocation may intentionally checkpoint and request a fresh
+              # invocation. External requests after that are fulfilled in-process,
+              # not by repeatedly restarting ASTRA.
+              for iteration in range(1,5):
+                  env=os.environ.copy()
+                  env['PROJECT_BRAIN_EXTERNAL_TOOL_WAIT_SECONDS']='90'
+                  worker=subprocess.Popen(
+                      [sys.executable,'canonical/runtime/same_identity_supervisor.py','--task',task],
+                      text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,env=env
+                  )
+                  killed_for_relay=False
+                  deadline=time.monotonic()+1200
+                  while worker.poll() is None:
+                      if not relay_proc.is_alive():
+                          worker.terminate()
+                          killed_for_relay=True
+                          break
+                      if time.monotonic()>=deadline:
+                          worker.terminate()
+                          break
+                      time.sleep(0.1)
+                  try:
+                      stdout,stderr=worker.communicate(timeout=10)
+                  except subprocess.TimeoutExpired:
+                      worker.kill()
+                      stdout,stderr=worker.communicate()
+
+                  record={
+                      'iteration':iteration,
+                      'returncode':worker.returncode,
+                      'stdout':stdout[-12000:],
+                      'stderr':stderr[-12000:],
+                      'relay_alive':relay_proc.is_alive(),
+                      'relay_exitcode':relay_proc.exitcode,
+                      'killed_for_relay_failure':killed_for_relay,
+                  }
+                  transcript.append(record)
+                  print(json.dumps(record,sort_keys=True))
+
+                  if worker.returncode==0:
+                      completed=True
+                      print('REAL_UBJSON_MISSION_COMPLETE')
+                      break
+                  if worker.returncode==75:
+                      continue
+
+                  # With a concurrent relay, any ordinary BLOCKED return is now
+                  # evidence of the next causal frontier rather than a cue to spin.
                   break
+          finally:
+              if relay_proc.is_alive():
+                  relay_proc.terminate()
+              relay_proc.join(timeout=5)
+              pathlib.Path('REAL_UBJSON_LOOP_TRANSCRIPT.json').write_text(
+                  json.dumps(transcript,indent=2,sort_keys=True)+'\n'
+              )
 
-          pathlib.Path('REAL_UBJSON_LOOP_TRANSCRIPT.json').write_text(
-              json.dumps(transcript,indent=2,sort_keys=True)+'\n'
-          )
-          print('REAL_UBJSON_MISSION_NOT_COMPLETE', file=sys.stderr)
-          raise SystemExit(1)
+          if not completed:
+              print('REAL_UBJSON_MISSION_NOT_COMPLETE',file=sys.stderr)
+              raise SystemExit(1)
           PY
 
       - name: Upload exact evidence
@@ -124,6 +167,7 @@ jobs:
           if-no-files-found: warn
           path: |
             REAL_UBJSON_LOOP_TRANSCRIPT.json
+            REAL_UBJSON_RELAY.jsonl
             canonical/same_identity_worker/state/
             canonical/same_identity_worker/evidence/
             canonical/same_identity_worker/external_tool_bridge/
