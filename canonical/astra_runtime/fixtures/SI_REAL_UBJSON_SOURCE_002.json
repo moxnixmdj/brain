@@ -1,0 +1,22 @@
+[
+  {
+    "id": 101,
+    "text": "mercury",
+    "active": true
+  },
+  {
+    "id": 102,
+    "text": "venus",
+    "active": false
+  },
+  {
+    "id": 103,
+    "text": "earth",
+    "active": true
+  },
+  {
+    "id": 104,
+    "text": "mars",
+    "active": true
+  }
+]
