@@ -135,7 +135,22 @@ def _external_tool_bridge(kind,payload):
     else:
         writej(request_path,request)
     if not response_path.exists():
-        raise Blocker("EXTERNAL_TOOL_REQUEST_PENDING:"+request_sha256)
+        raw_wait=str(os.environ.get("PROJECT_BRAIN_EXTERNAL_TOOL_WAIT_SECONDS") or "0").strip()
+        try:
+            wait_s=float(raw_wait)
+        except ValueError as exc:
+            raise Blocker("EXTERNAL_TOOL_WAIT_SECONDS_INVALID") from exc
+        if wait_s < 0 or wait_s > 300:
+            raise Blocker("EXTERNAL_TOOL_WAIT_SECONDS_INVALID")
+        if wait_s > 0:
+            deadline=time.monotonic()+wait_s
+            while not response_path.exists():
+                remaining=deadline-time.monotonic()
+                if remaining <= 0:
+                    break
+                time.sleep(min(0.05,max(0.005,remaining)))
+        if not response_path.exists():
+            raise Blocker("EXTERNAL_TOOL_REQUEST_PENDING:"+request_sha256)
     response=readj(response_path)
     if response.get("schema")!="PROJECT_BRAIN_EXTERNAL_TOOL_RESPONSE_V1":
         raise Blocker("EXTERNAL_TOOL_RESPONSE_SCHEMA_INVALID:"+request_sha256)
