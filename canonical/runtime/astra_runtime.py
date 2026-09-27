@@ -459,6 +459,80 @@ def _ensure_pypi_dependency(source):
     }
 
 
+
+def _ensure_github_source_dependency(source):
+    repository=str(source.get("repository") or "").strip()
+    commit_sha=str(source.get("commit_sha") or "").strip().lower()
+    files=source.get("files")
+    if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+",repository):
+        raise Blocker("BOUND_GITHUB_SOURCE_REPOSITORY_INVALID")
+    if not re.fullmatch(r"[0-9a-f]{40}",commit_sha):
+        raise Blocker("BOUND_GITHUB_SOURCE_COMMIT_INVALID")
+    if not isinstance(files,list) or not files or len(files)>40:
+        raise Blocker("BOUND_GITHUB_SOURCE_FILES_INVALID")
+    stable=ROOT/"canonical"/"astra_runtime"/"tmp"/"github_source_bound"/(
+        re.sub(r"[^A-Za-z0-9_.-]+","_",repository)+"__"+commit_sha[:12]
+    )
+    if stable.exists():
+        shutil.rmtree(stable)
+    stable.mkdir(parents=True,exist_ok=True)
+    total=0
+    verified=[]
+    for item in files:
+        if not isinstance(item,dict):
+            raise Blocker("BOUND_GITHUB_SOURCE_RECORD_INVALID")
+        path=str(item.get("path") or "")
+        git_sha=str(item.get("git_blob_sha1") or "").lower()
+        sha256=str(item.get("sha256") or "").lower()
+        size=int(item.get("size") or 0)
+        raw_url=str(item.get("raw_url") or "")
+        if (
+            not path.endswith(".py")
+            or pathlib.PurePosixPath(path).is_absolute()
+            or ".." in pathlib.PurePosixPath(path).parts
+            or not re.fullmatch(r"[0-9a-f]{40}",git_sha)
+            or not re.fullmatch(r"[0-9a-f]{64}",sha256)
+            or size<0 or size>120000
+        ):
+            raise Blocker("BOUND_GITHUB_SOURCE_RECORD_INVALID:"+path)
+        expected_prefix="https://raw.githubusercontent.com/"+repository+"/"+commit_sha+"/"
+        if raw_url!=expected_prefix+path:
+            raise Blocker("BOUND_GITHUB_SOURCE_URL_MISMATCH:"+path)
+        try:
+            with urllib.request.urlopen(
+                urllib.request.Request(raw_url,headers={"User-Agent":"ProjectBrain-BoundGitHubSource/1"}),
+                timeout=20
+            ) as resp:
+                raw=resp.read(150000)
+        except Exception as exc:
+            raise Blocker("BOUND_GITHUB_SOURCE_FETCH_FAILED:"+path+":"+type(exc).__name__) from exc
+        if len(raw)!=size:
+            raise Blocker("BOUND_GITHUB_SOURCE_SIZE_MISMATCH:"+path)
+        actual_git=hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()
+        actual_sha=hashlib.sha256(raw).hexdigest()
+        if actual_git!=git_sha:
+            raise Blocker("BOUND_GITHUB_SOURCE_GIT_BLOB_MISMATCH:"+path)
+        if actual_sha!=sha256:
+            raise Blocker("BOUND_GITHUB_SOURCE_SHA256_MISMATCH:"+path)
+        total+=len(raw)
+        if total>800000:
+            raise Blocker("BOUND_GITHUB_SOURCE_BYTES_LIMIT")
+        dst=stable/path
+        dst.parent.mkdir(parents=True,exist_ok=True)
+        dst.write_bytes(raw)
+        verified.append({"path":path,"sha256":actual_sha,"git_blob_sha1":actual_git})
+    return {
+      "status":"MATERIALIZED_VERIFIED",
+      "type":"github_source",
+      "repository":repository,
+      "commit_sha":commit_sha,
+      "source_root":str(stable),
+      "file_count":len(verified),
+      "total_bytes":total,
+      "files":verified,
+    }
+
+
 def _ensure_npm_dependency(source):
     npm_package_utils=_load_runtime_helper("npm_package_utils")
     package=str(source.get("package") or "").strip()
@@ -633,6 +707,9 @@ def _invoke_bound_capability(args):
     elif source.get("type")=="npm":
         dependency=_ensure_npm_dependency(source)
         call_args["_package_root"]=dependency.get("package_root")
+    elif source.get("type")=="github_source":
+        dependency=_ensure_github_source_dependency(source)
+        call_args["_source_root"]=dependency.get("source_root")
     elif source.get("type")=="apt":
         dependency=_ensure_apt_dependencies(source)
     elif source.get("type") in {"python_stdlib","system_tool"}:
