@@ -2,6 +2,8 @@
 """Acquire and execute a producer-independent npm codec verifier."""
 from __future__ import annotations
 
+import base64
+import hashlib
 import json
 import pathlib
 import re
@@ -27,6 +29,114 @@ def _inside(root,raw):
     if p!=root and root not in p.parents:
         raise IndependentNpmCodecVerifierFailure("PATH_OUTSIDE_REPOSITORY")
     return p
+
+
+def _metadata_allow_dependencies(raw):
+    package=str(raw.get("package") or raw.get("name") or "").strip()
+    version=str(raw.get("version") or "").strip()
+    if not package or not version:
+        raise IndependentNpmCodecVerifierFailure("NPM_VERIFIER_CANDIDATE_IDENTITY_INVALID")
+    metadata_url,payload=npm_package_utils.fetch_version_metadata(package,version)
+    dist=payload.get("dist") or {}
+    tarball=str(dist.get("tarball") or "")
+    integrity=str(dist.get("integrity") or "")
+    if not tarball.startswith("https://") or not integrity:
+        raise IndependentNpmCodecVerifierFailure("NPM_VERIFIER_DIST_METADATA_INCOMPLETE")
+    dependencies={}
+    for field in ("dependencies","optionalDependencies","peerDependencies"):
+        value=payload.get(field) or {}
+        if not isinstance(value,dict):
+            raise IndependentNpmCodecVerifierFailure("NPM_VERIFIER_DEPENDENCY_METADATA_INVALID:"+field)
+        dependencies[field]=value
+    bundled=payload.get("bundledDependencies")
+    if bundled is None:
+        bundled=payload.get("bundleDependencies")
+    if bundled not in (None,[],{}):
+        raise IndependentNpmCodecVerifierFailure("NPM_VERIFIER_BUNDLED_DEPENDENCIES_UNSUPPORTED")
+    dependency_count=sum(len(x) for x in dependencies.values())
+    return {
+        **raw,
+        "package":package,
+        "version":version,
+        "metadata_url":metadata_url,
+        "tarball_url":tarball,
+        "integrity":integrity,
+        "package_json":payload,
+        "runtime_dependencies":dependencies,
+        "dependency_count":dependency_count,
+    }
+
+
+def _safe_install_path(site,raw):
+    text=str(raw or "").strip().replace("\\","/")
+    rel=pathlib.PurePosixPath(text)
+    if not text or rel.is_absolute() or ".." in rel.parts:
+        raise IndependentNpmCodecVerifierFailure("NPM_CLOSURE_INSTALL_PATH_INVALID")
+    if not rel.parts or rel.parts[0]!="node_modules":
+        raise IndependentNpmCodecVerifierFailure("NPM_CLOSURE_INSTALL_PATH_INVALID")
+    site=pathlib.Path(site).resolve()
+    out=(site/pathlib.Path(*rel.parts)).resolve()
+    if site not in out.parents:
+        raise IndependentNpmCodecVerifierFailure("NPM_CLOSURE_INSTALL_PATH_ESCAPE")
+    return out
+
+
+def _materialize_npm_closure(closure,site,candidate):
+    if not isinstance(closure,dict) or closure.get("schema")!="PROJECT_BRAIN_EXTERNAL_NPM_PACKAGE_CLOSURE_V1":
+        raise IndependentNpmCodecVerifierFailure("NPM_CLOSURE_SCHEMA_INVALID")
+    package=str(candidate.get("package") or "")
+    version=str(candidate.get("version") or "")
+    if closure.get("root_package")!=package or str(closure.get("root_version") or "")!=version:
+        raise IndependentNpmCodecVerifierFailure("NPM_CLOSURE_ROOT_IDENTITY_MISMATCH")
+    rows=closure.get("packages")
+    if not isinstance(rows,list) or not rows or len(rows)>32:
+        raise IndependentNpmCodecVerifierFailure("NPM_CLOSURE_PACKAGE_COUNT_INVALID")
+    if int(closure.get("package_count") or -1)!=len(rows):
+        raise IndependentNpmCodecVerifierFailure("NPM_CLOSURE_PACKAGE_COUNT_MISMATCH")
+    site=pathlib.Path(site).resolve()
+    site.mkdir(parents=True,exist_ok=True)
+    root_record=None
+    total=0
+    seen=set()
+    for row in rows:
+        if not isinstance(row,dict):
+            raise IndependentNpmCodecVerifierFailure("NPM_CLOSURE_RECORD_INVALID")
+        install_path=str(row.get("install_path") or "")
+        if install_path in seen:
+            raise IndependentNpmCodecVerifierFailure("NPM_CLOSURE_INSTALL_PATH_DUPLICATE")
+        seen.add(install_path)
+        try:
+            raw=base64.b64decode(str(row.get("content_b64") or ""),validate=True)
+        except Exception as exc:
+            raise IndependentNpmCodecVerifierFailure("NPM_CLOSURE_TARBALL_BASE64_INVALID") from exc
+        total+=len(raw)
+        if total>80_000_000:
+            raise IndependentNpmCodecVerifierFailure("NPM_CLOSURE_TOTAL_BYTES_LIMIT")
+        if int(row.get("bytes") or -1)!=len(raw):
+            raise IndependentNpmCodecVerifierFailure("NPM_CLOSURE_TARBALL_BYTES_MISMATCH")
+        if hashlib.sha256(raw).hexdigest()!=str(row.get("sha256") or ""):
+            raise IndependentNpmCodecVerifierFailure("NPM_CLOSURE_TARBALL_SHA256_MISMATCH")
+        verified=npm_package_utils.verify_integrity(raw,row.get("integrity"))
+        if verified["algorithm"]!=row.get("integrity_algorithm"):
+            raise IndependentNpmCodecVerifierFailure("NPM_CLOSURE_INTEGRITY_ALGORITHM_MISMATCH")
+        if verified["digest_hex"]!=row.get("integrity_digest_hex"):
+            raise IndependentNpmCodecVerifierFailure("NPM_CLOSURE_INTEGRITY_DIGEST_MISMATCH")
+        destination=_safe_install_path(site,install_path)
+        extracted=npm_package_utils.safe_extract_package(raw,destination)
+        package_json=extracted["package_json"]
+        if str(package_json.get("name") or "")!=str(row.get("package") or ""):
+            raise IndependentNpmCodecVerifierFailure("NPM_CLOSURE_PACKAGE_NAME_MISMATCH")
+        if str(package_json.get("version") or "")!=str(row.get("version") or ""):
+            raise IndependentNpmCodecVerifierFailure("NPM_CLOSURE_PACKAGE_VERSION_MISMATCH")
+        if install_path=="node_modules/"+package:
+            root_record={**row,"verified":verified}
+    if int(closure.get("total_bytes") or -1)!=total:
+        raise IndependentNpmCodecVerifierFailure("NPM_CLOSURE_TOTAL_BYTES_MISMATCH")
+    if root_record is None:
+        raise IndependentNpmCodecVerifierFailure("NPM_CLOSURE_ROOT_MISSING")
+    if root_record["version"]!=version or root_record["integrity"]!=candidate["integrity"]:
+        raise IndependentNpmCodecVerifierFailure("NPM_CLOSURE_ROOT_METADATA_MISMATCH")
+    return site/pathlib.Path(*pathlib.PurePosixPath("node_modules/"+package).parts),root_record
 
 
 def verify(format_name,json_path,binary_path,producer_project,root):
@@ -59,27 +169,58 @@ def verify(format_name,json_path,binary_path,producer_project,root):
     for raw in candidates[:24]:
         attempt={"candidate":raw}
         try:
-            candidate=npm_acq._metadata(raw)
+            candidate=_metadata_allow_dependencies(raw)
             package=str(candidate.get("package") or "")
             if not package or _norm(package)==producer:
                 attempt["status"]="REJECTED_PRODUCER_IDENTITY"
                 attempts.append(attempt)
                 continue
 
-            fetched=npm_package_utils.fetch_verified_tarball(
-                candidate["package"],
-                candidate["version"],
-                candidate["tarball_url"],
-                candidate["integrity"],
-            )
             with tempfile.TemporaryDirectory(prefix="brain-independent-npm-codec-") as td:
-                package_root=pathlib.Path(td)/"package"
-                extracted=npm_package_utils.safe_extract_package(
-                    fetched["raw"],package_root
-                )
-                npm_package_utils.validate_zero_dependency_package(
-                    extracted["package_json"]
-                )
+                td_path=pathlib.Path(td)
+                if int(candidate.get("dependency_count") or 0)==0:
+                    fetched=npm_package_utils.fetch_verified_tarball(
+                        candidate["package"],
+                        candidate["version"],
+                        candidate["tarball_url"],
+                        candidate["integrity"],
+                    )
+                    package_root=td_path/"package"
+                    extracted=npm_package_utils.safe_extract_package(
+                        fetched["raw"],package_root
+                    )
+                    npm_package_utils.validate_zero_dependency_package(
+                        extracted["package_json"]
+                    )
+                    root_evidence={
+                        "integrity":candidate["integrity"],
+                        "integrity_algorithm":fetched["algorithm"],
+                        "integrity_digest_hex":fetched["digest_hex"],
+                        "dependency_package_count":1,
+                    }
+                else:
+                    closure=astra_runtime._external_tool_bridge(
+                        "npm_package_closure",
+                        {
+                            "package":candidate["package"],
+                            "version":candidate["version"],
+                            "max_packages":32,
+                            "max_total_bytes":80_000_000,
+                        },
+                    )
+                    if closure is None:
+                        raise IndependentNpmCodecVerifierFailure(
+                            "NPM_DEPENDENCY_CLOSURE_EXTERNAL_TOOL_REQUIRED"
+                        )
+                    package_root,root_record=_materialize_npm_closure(
+                        closure,td_path/"site",candidate
+                    )
+                    root_evidence={
+                        "integrity":root_record["integrity"],
+                        "integrity_algorithm":root_record["integrity_algorithm"],
+                        "integrity_digest_hex":root_record["integrity_digest_hex"],
+                        "dependency_package_count":int(closure["package_count"]),
+                    }
                 runner=root/"canonical"/"runtime"/"node_codec_runner.js"
                 proc=subprocess.run(
                     ["node",str(runner)],
@@ -125,9 +266,10 @@ def verify(format_name,json_path,binary_path,producer_project,root):
                 "implementation_independent":True,
                 "supplier_class_independent":True,
                 "verifier_source_type":"npm",
-                "verifier_integrity":candidate["integrity"],
-                "integrity_algorithm":fetched["algorithm"],
-                "integrity_digest_hex":fetched["digest_hex"],
+                "verifier_integrity":root_evidence["integrity"],
+                "integrity_algorithm":root_evidence["integrity_algorithm"],
+                "integrity_digest_hex":root_evidence["integrity_digest_hex"],
+                "dependency_package_count":root_evidence["dependency_package_count"],
                 "root_selector":contract["root_selector"],
                 "decode_export":contract["decode_export"],
                 "loader":contract.get("loader"),
