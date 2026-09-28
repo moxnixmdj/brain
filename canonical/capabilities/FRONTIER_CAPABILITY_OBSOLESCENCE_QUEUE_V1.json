@@ -70,12 +70,12 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Make one generic repair to the invocation-contract pipeline for the repeated cross-domain contract-inference failure, then replay only the frozen SQLite and XML probes once and reconcile.",
+    "objective": "Determine whether the current acquisition system reliably surfaces and prioritizes viable executable capability suppliers before contract learning, without installing or executing candidates and while checking inherited verified capabilities first.",
     "selection_metric": "CROSS_CAPABILITY_MULTIPLIER_TIMES_EXPECTED_OBSOLESCENCE_GAIN_PER_WALL_CLOCK_TIME",
-    "exact_blocker": "GENERIC_TOOL_INVOCATION_CONTRACT_PIPELINE_TOO_NARROW__REPEATED_SQLITE_AND_XML",
-    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_ORTHOGONAL_PORTFOLIO_001_RECONCILIATION.json",
-    "recurrence_count": 2,
-    "prohibition": "NO_GZIP_REPAIR__NO_SECOND_REPAIR_BEFORE_REPLAY_RECONCILIATION__NO_TASK_SPECIFIC_LITERALS"
+    "exact_blocker": "VIABLE_EXECUTABLE_CAPABILITY_CANDIDATE_DISCOVERY_AND_ROLE_RANKING_NOT_YET_PROVEN",
+    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_CONTRACT_IR_FALSIFICATION_RECONCILIATION_V1.json",
+    "repair_status": "GENERIC_CLI_CONTRACT_IR_FALSIFIED_AS_SUFFICIENT_CURRENT_CAUSAL_REPAIR",
+    "prohibition": "NO_SECOND_RUNTIME_REPAIR_UNTIL_NO_MUTATION_DISCOVERY_DIAGNOSTIC_LOCALIZES_REPEATED_UPSTREAM_FAILURE"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
