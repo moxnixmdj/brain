@@ -43,6 +43,7 @@ jobs:
           python -m unittest \
             canonical.tests.test_external_tool_relay \
             canonical.tests.test_external_tool_bridge_wait \
+            canonical.tests.test_bound_git_source_tree_dependency \
             canonical.tests.test_independent_npm_codec_verifier_bridge \
             canonical.tests.test_node_codec_runner_projection \
             canonical.tests.test_goal_compiler_source_tree_independent_verification
