@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "SELECT-BATCHED-EXECUTABLE-EVIDENCE-FRESH-VALIDATION-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "BATCHED-EXECUTABLE-EVIDENCE-FRESH-VALIDATION-001",
+  "causal_blocker": "EVIDENCE_ACQUISITION_USES_REPEATED_SLOW_APT_FILE_REGEX_SCANS_AND_EXCESSIVE_REMOTE_MANPAGE_FANOUT__BATCH_LITERAL_MULTI_PATTERN_ACQUISITION_AND_PROGRESSIVE_CACHED_ENRICHMENT_NOT_YET_INTEGRATED",
+  "action_kind": "ORTHOGONAL_PROBE_SELECTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::EVIDENCE_ACQUISITION_USES_REPEATED_SLOW_APT_FILE_REGEX_SCANS_AND_EXCESSIVE_REMOTE_MANPAGE_FANOUT__BATCH_LITERAL_MULTI_PATTERN_ACQUISITION_AND_PROGRESSIVE_CACHED_ENRICHMENT_NOT_YET_INTEGRATED::ORTHOGONAL_PROBE_SELECTION",
+  "expected_parent_frontier_change": "Arm one fresh unseen generalization gate for the already-authorized generic batched literal executable-evidence acquisition plus bounded progressive enrichment repair, so the repair can be validated without using known package hints or old-case tuning.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR79",
+    "PR82",
+    "PR83"
+  ],
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "The fresh validation probe is canonically armed exactly once; the next frontier action is the single authorized generic repair followed by this frozen unseen gate and immediate reconciliation.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
