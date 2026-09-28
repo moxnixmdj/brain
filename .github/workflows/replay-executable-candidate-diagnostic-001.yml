@@ -1,0 +1,36 @@
+name: Replay Executable Candidate Diagnostic 001
+
+on:
+  push:
+    branches:
+      - repair/semantic-executable-ranking-v1-20260928
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run focused discovery regressions
+        run: |
+          set -euo pipefail
+          python canonical/tests/test_semantic_executable_ranking_repair.py
+          python canonical/tests/test_capability_discovery.py
+      - name: Replay frozen diagnostic once
+        run: python canonical/experiments/run_executable_candidate_diagnostic_001.py
+      - name: Upload replay evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: executable-candidate-diagnostic-001-replay
+          path: canonical/astra_runtime/evidence/EXECUTABLE_CANDIDATE_DIAGNOSTIC_001__RESULT.json
+          if-no-files-found: warn
