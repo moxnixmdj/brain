@@ -262,11 +262,15 @@ def _effect_semantic_terms(effect):
 def _ubuntu_codename():
     try:
         text=pathlib.Path("/etc/os-release").read_text(encoding="utf-8")
-        m=re.search(r"^VERSION_CODENAME=([A-Za-z0-9._-]+)$",text,re.MULTILINE)
-        if m:
-            return m.group(1).lower()
+        id_match=re.search(r"^ID=([A-Za-z0-9._-]+)$",text,re.MULTILINE)
+        codename_match=re.search(r"^VERSION_CODENAME=([A-Za-z0-9._-]+)$",text,re.MULTILINE)
+        distro=(id_match.group(1).lower() if id_match else "")
+        if distro=="ubuntu" and codename_match:
+            return codename_match.group(1).lower()
     except Exception:
         pass
+    # The enrichment source is Ubuntu manpages even when the execution host is
+    # another Debian-family distribution, so never feed Debian codenames into it.
     return "noble"
 
 
@@ -278,22 +282,29 @@ def _fetch_ubuntu_manpage_text(command,timeout_s=4,opener=None):
     if key in _MANPAGE_TEXT_CACHE:
         return _MANPAGE_TEXT_CACHE[key]
     opener=opener or urllib.request.urlopen
-    url=(
+    base=(
         "https://manpages.ubuntu.com/manpages/"
         +urllib.parse.quote(key[0],safe="")
-        +"/man1/"+urllib.parse.quote(command,safe="")+".1.html"
+        +"/man1/"+urllib.parse.quote(command,safe="")
     )
-    req=urllib.request.Request(url,headers={"User-Agent":"ProjectBrain-CapabilityDiscovery/1"})
-    try:
-        with opener(req,timeout=timeout_s) as resp:
-            raw=resp.read(120000)
-        text=raw.decode("utf-8","replace")
-        text=re.sub(r"<script\b[^>]*>.*?</script>"," ",text,flags=re.I|re.S)
-        text=re.sub(r"<style\b[^>]*>.*?</style>"," ",text,flags=re.I|re.S)
-        text=re.sub(r"<[^>]+>"," ",text)
-        text=html.unescape(re.sub(r"\s+"," ",text)).strip()
-    except Exception:
-        text=""
+    text=""
+    # Section 1 covers normal commands; 1p catches packaged Perl CLIs such as
+    # exiftool. The two-attempt ceiling keeps enrichment bounded.
+    for suffix in (".1.html",".1p.html"):
+        url=base+suffix
+        req=urllib.request.Request(url,headers={"User-Agent":"ProjectBrain-CapabilityDiscovery/1"})
+        try:
+            with opener(req,timeout=timeout_s) as resp:
+                raw=resp.read(120000)
+            page=raw.decode("utf-8","replace")
+            page=re.sub(r"<script\b[^>]*>.*?</script>"," ",page,flags=re.I|re.S)
+            page=re.sub(r"<style\b[^>]*>.*?</style>"," ",page,flags=re.I|re.S)
+            page=re.sub(r"<[^>]+>"," ",page)
+            text=html.unescape(re.sub(r"\s+"," ",page)).strip()
+            if text:
+                break
+        except Exception:
+            continue
     _MANPAGE_TEXT_CACHE[key]=text
     return text
 
