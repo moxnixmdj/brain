@@ -1,6 +1,8 @@
 # Capability Arbitrage Runtime Strategy V1
 
-Status: CANONICAL / MANDATORY / CAPABILITY-REALIZATION STRATEGY
+> Superseded on 2026-09-28. V1 correctly introduced capability arbitrage but still framed the terminal program as acquiring Astra capabilities. V2 keeps the arbitrage machinery and changes the terminal objective to capability obsolescence.
+
+Status: SUPERSEDED AS ACTIVE STRATEGY BY CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V2 / RETAINED AS HISTORICAL PRECURSOR
 
 ## Mission
 
