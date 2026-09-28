@@ -1,0 +1,26 @@
+name: Verify discovery-driven supplier routing
+
+on:
+  push:
+    branches:
+      - capability/discovery-driven-supplier-routing-20260928
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run focused acquisition regressions
+        run: |
+          set -euo pipefail
+          python canonical/tests/test_discovery_driven_supplier_routing.py
+          python canonical/tests/test_supplier_neutral_acquisition.py
+          python canonical/tests/test_auto_acquisition_replan.py
