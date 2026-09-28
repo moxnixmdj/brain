@@ -8,7 +8,7 @@
     {
       "surface": "GitHub Actions on moxnixmdj/brain",
       "status": "REJECTED_CURRENTLY_UNUSABLE",
-      "evidence": "Current PR85 head 137e8ba442cf7fbbe2c68dd16e8eacd18b7fd0b5 produced workflow run 36489791123; its only job 109162850774 failed with steps=null and logs_url=null. The pre-step failure class therefore has not changed.",
+      "evidence": "Observed PR85 evidence-only head d785e4a4a1af84584b9f9d341e038cfe9be7f69c produced workflow run 36493564481; its only job 109167750628 completed failure with steps=null and logs_url=null. The quarantined pre-step runner-allocation failure class therefore remains unchanged.",
       "retry_forbidden": true
     },
     {
@@ -36,6 +36,12 @@
       "surface": "Camber",
       "status": "REJECTED_ZERO_SPEND_UNVERIFIABLE",
       "evidence": "Available MCP surface exposes no billing/credit state; launching a run would violate hard-$0 fail-closed governance."
+    },
+    {
+      "surface": "Brainbase managed Daytona agent",
+      "status": "REJECTED_ACCOUNT_CREDITS_EXHAUSTED",
+      "evidence": "A pre-existing Project Brain qualification agent is configured on machine_kind=daytona, but read-only task event inspection for task baa68296-ca94-5389-b4aa-b98c5c5baeda records HTTP 402 CREDITS_EXHAUSTED with used=0 and allocated=0. Brainbase task execution is explicitly billable, so no new run was started.",
+      "retry_forbidden": true
     },
     {
       "surface": "DigitalOcean",
@@ -73,6 +79,7 @@
   "only_remaining_truth_transition": "Execute the frozen 3-case gate on exact PR85 bytes with a live apt-file Contents cache at $0; then reconcile PASS/FAIL before any further repair.",
   "anti_drift": [
     "Do not retry GitHub Actions until its pre-step failure class changes.",
+    "Do not retry Brainbase task execution while account allocation remains zero.",
     "Do not substitute public web search for apt-file top-K evidence.",
     "Do not create billable infrastructure to satisfy the gate.",
     "Do not merge PR85 based on unit tests, source reachability, or source prechecks alone.",
