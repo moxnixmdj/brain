@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "RUN-ORTHOGONAL-TOOL-LEARNING-PORTFOLIO-001",
-  "status": "PROPOSED",
+  "status": "COMPLETE_RECONCILED",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
@@ -18,5 +18,11 @@
   "probe_specific_literals": [],
   "stop_condition": "After all three frozen probes reach their first terminal result, perform frontier reconciliation. No runtime repair is permitted on this branch before that reconciliation.",
   "governance_change": false,
-  "weakens_existing_guard": false
+  "weakens_existing_guard": false,
+  "observed_parent_frontier_change": "Three unchanged-runtime orthogonal probes completed. GENERIC_CONTRACT_INFERENCE_SHAPE recurred in SQLite and XML (2/3), making one generic repair eligible. Gzip produced a different blocker and is excluded from the repair.",
+  "evidence": {
+    "workflow_run_id": 36384882607,
+    "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_ORTHOGONAL_PORTFOLIO_001_RECONCILIATION.json"
+  },
+  "stop_condition_satisfied": true
 }
