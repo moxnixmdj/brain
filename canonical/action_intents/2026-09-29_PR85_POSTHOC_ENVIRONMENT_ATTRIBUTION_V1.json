@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "PR85-POSTHOC-ENVIRONMENT-ATTRIBUTION-V1",
-  "status": "PROPOSED",
+  "status": "EXECUTED_RECONCILED",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
@@ -25,5 +25,10 @@
   "probe_specific_literals": [],
   "stop_condition": "Run one no-runtime-mutation attribution study only. Do not replay the spent frozen validation as acceptance evidence. Reconcile attribution; then freeze a new held-out acceptance gate before any second algorithmic repair.",
   "governance_change": false,
-  "weakens_existing_guard": false
+  "weakens_existing_guard": false,
+  "result": "MIXED_ENVIRONMENT_CAUSALITY__NEW_HELD_OUT_GATE_REQUIRED_BEFORE_ANY_SECOND_REPAIR",
+  "result_paths": [
+    "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_PR85_POSTHOC_ENVIRONMENT_ATTRIBUTION_001_V1.json",
+    "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_PR85_POSTHOC_ENVIRONMENT_ATTRIBUTION_001_RECONCILIATION_V1.json"
+  ]
 }
