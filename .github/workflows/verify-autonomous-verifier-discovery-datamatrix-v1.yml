@@ -1,0 +1,47 @@
+name: Verify autonomous semantic verifier discovery
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - research/obsolescence-tool-learning-datamatrix-20260928
+    paths:
+      - canonical/experiments/run_autonomous_verifier_discovery_datamatrix_001.py
+      - canonical/runtime/verify_pending_cli_binding.py
+      - .github/workflows/verify-autonomous-verifier-discovery-datamatrix-v1.yml
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Download previously verified producer artifact
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: 36378255352
+          name: obsolescence-tool-learning-datamatrix-001
+          path: /tmp/prior-proof
+      - name: Verify pinned prior artifact digest anchor
+        run: |
+          set -euo pipefail
+          test -f /tmp/prior-proof/tmp/PROJECT_BRAIN_DATAMATRIX.png || find /tmp/prior-proof -maxdepth 5 -type f -print
+      - name: Run hint-free autonomous verifier discovery
+        run: |
+          set -euo pipefail
+          python canonical/experiments/run_autonomous_verifier_discovery_datamatrix_001.py /tmp/prior-proof/tmp/PROJECT_BRAIN_DATAMATRIX.png
+      - name: Upload adjudication evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: autonomous-verifier-discovery-datamatrix-001
+          path: canonical/astra_runtime/evidence/OBSOLESCENCE-TOOL-LEARNING-DATAMATRIX-001__AUTONOMOUS_VERIFIER_DISCOVERY.json
+          if-no-files-found: warn
