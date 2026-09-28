@@ -145,11 +145,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "IMPLEMENT_ONE_MINIMAL_GENERIC_SEMANTIC_ROLE_IR_FOR_EFFECT_QUERY_AND_CANDIDATE_TOOL_ROLE__REPLAY_FROZEN_SEMANTIC_ROLE_DIAGNOSTIC_ONCE__RECONCILE",
+    "next_step": "IMPLEMENT_ONE_GENERIC_TASK_SEMANTIC_SEGMENTATION_AND_CONJUNCTIVE_ROLE_COMPATIBILITY_REPAIR__VALIDATE_ON_FRESH_ORTHOGONAL_UNSEEN_EFFECTS__RECONCILE",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "STRUCTURED_EFFECT_AND_CANDIDATE_TOOL_ROLE_REPRESENTATION_MISSING",
+    "critical_blocker": "TASK_INSTRUCTION_VS_PAYLOAD_SCHEMA_SEGMENTATION_AND_CONJUNCTIVE_ROLE_COMPATIBILITY_NOT_YET_PROVEN",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -226,7 +226,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "TOOL_DISCOVERY_SELECTION_AND_LEARNING__SEMANTIC_ROLE_IR_FOR_OPERATION_DOMAIN_FORMAT_CONSTRAINT_AND_EXECUTABLE_SUPPLIER_ROLE",
+    "highest_leverage_capability_gap": "TOOL_DISCOVERY_SELECTION_AND_LEARNING__TASK_SEMANTIC_SEGMENTATION_AND_CONJUNCTIVE_ROLE_COMPATIBILITY",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -355,6 +355,22 @@
       "repeated_domain_role_drop_count": 2,
       "repeated_auxiliary_role_competition_count": 2,
       "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_SEMANTIC_ROLE_DIAGNOSTIC_001_RECONCILIATION.json"
+    },
+    "semantic_role_ir_repair_v1": {
+      "status": "FALSIFIED_ON_SINGLE_ALLOWED_REPLAY__NOT_MERGED",
+      "pr": 64,
+      "workflow_run_id": 36458524232,
+      "artifact_id": 10985949339,
+      "artifact_digest": "sha256:cc7d8118ec15f30e91b32586a6853dc902d1b5f57f5ee410dd51f597e87a2341",
+      "focused_preflight": "PASS",
+      "frozen_replay_gate": "FAIL",
+      "exact_oracle_top12_recall": 0.25,
+      "partial_gains": [
+        "SYNTAX_NOISE_REMOVED",
+        "TOP1_AUXILIARY_ROLE_ELIMINATED",
+        "GRAPHVIZ_EXACT_RANK_1"
+      ],
+      "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_SEMANTIC_ROLE_IR_V1_FALSIFICATION_RECONCILIATION.json"
     }
   },
   "provider_rules": {
