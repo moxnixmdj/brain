@@ -7,6 +7,8 @@ install third-party code. Binding is a separate verified step.
 """
 from __future__ import annotations
 
+import concurrent.futures
+import html
 import json
 import pathlib
 import re
@@ -230,6 +232,200 @@ def search_mcp_registry(effect, limit=8, timeout_s=12, opener=None):
     }
 
 
+
+_EXTERNAL_APT_EXECUTABLE_EVIDENCE_SEARCHER=None
+_MANPAGE_TEXT_CACHE={}
+
+def set_external_apt_executable_evidence_searcher(searcher):
+    """Inject a provider-neutral executable evidence supplier for verification/tests."""
+    global _EXTERNAL_APT_EXECUTABLE_EVIDENCE_SEARCHER
+    _EXTERNAL_APT_EXECUTABLE_EVIDENCE_SEARCHER=searcher
+
+
+def _effect_semantic_terms(effect):
+    semantic=_semanticize_paths(effect)
+    low_information=set(GENERIC_DISCOVERY_TOKENS) | {
+        "those","these","exact","records","record","fields","field",
+        "values","value","same","identical","order","count","save",
+        "plain","document","file","using","report"
+    }
+    out=[]
+    for token in re.split(r"[^A-Za-z0-9]+",semantic):
+        t=token.lower()
+        if len(t)<3 or t in STOPWORDS or t in low_information or t.isdigit():
+            continue
+        if t not in out:
+            out.append(t)
+    return out[:8]
+
+
+def _ubuntu_codename():
+    try:
+        text=pathlib.Path("/etc/os-release").read_text(encoding="utf-8")
+        m=re.search(r"^VERSION_CODENAME=([A-Za-z0-9._-]+)$",text,re.MULTILINE)
+        if m:
+            return m.group(1).lower()
+    except Exception:
+        pass
+    return "noble"
+
+
+def _fetch_ubuntu_manpage_text(command,timeout_s=4,opener=None):
+    command=str(command or "").strip()
+    if not re.fullmatch(r"[A-Za-z0-9_.+-]{1,120}",command):
+        return ""
+    key=(_ubuntu_codename(),command)
+    if key in _MANPAGE_TEXT_CACHE:
+        return _MANPAGE_TEXT_CACHE[key]
+    opener=opener or urllib.request.urlopen
+    url=(
+        "https://manpages.ubuntu.com/manpages/"
+        +urllib.parse.quote(key[0],safe="")
+        +"/man1/"+urllib.parse.quote(command,safe="")+".1.html"
+    )
+    req=urllib.request.Request(url,headers={"User-Agent":"ProjectBrain-CapabilityDiscovery/1"})
+    try:
+        with opener(req,timeout=timeout_s) as resp:
+            raw=resp.read(120000)
+        text=raw.decode("utf-8","replace")
+        text=re.sub(r"<script\b[^>]*>.*?</script>"," ",text,flags=re.I|re.S)
+        text=re.sub(r"<style\b[^>]*>.*?</style>"," ",text,flags=re.I|re.S)
+        text=re.sub(r"<[^>]+>"," ",text)
+        text=html.unescape(re.sub(r"\s+"," ",text)).strip()
+    except Exception:
+        text=""
+    _MANPAGE_TEXT_CACHE[key]=text
+    return text
+
+
+def _local_apt_executable_evidence(effect,limit=36):
+    """Acquire executable-path evidence in one literal multi-pattern apt-file scan.
+
+    This deliberately avoids one regex scan per semantic term. apt-file's
+    --from-file path performs one multi-pattern search. Returned rows are then
+    filtered to executable paths and scored in-process. Only a small leading
+    set receives remote manpage enrichment.
+    """
+    if shutil.which("apt-file") is None:
+        return []
+    terms=_effect_semantic_terms(effect)
+    if not terms:
+        return []
+    pattern_blob="\n".join(terms)+"\n"
+    try:
+        p=subprocess.run(
+            ["apt-file","--from-file","--stream-results","search","-"],
+            input=pattern_blob,text=True,capture_output=True,timeout=45
+        )
+    except Exception:
+        return []
+    if p.returncode not in (0,1):
+        return []
+
+    evidence={}
+    for line in p.stdout.splitlines():
+        if ": " not in line:
+            continue
+        package,path=line.split(": ",1)
+        package=package.strip(); path=path.strip()
+        normalized=path.lstrip("/")
+        if not package or not normalized.startswith("usr/bin/"):
+            continue
+        command=normalized.rsplit("/",1)[-1].lower()
+        compact=re.sub(r"[^a-z0-9]+","",command)
+        hits=[]
+        for term in terms:
+            tc=re.sub(r"[^a-z0-9]+","",term)
+            if term in command or (tc and tc in compact):
+                hits.append(term)
+        if not hits:
+            continue
+        ev=evidence.setdefault(package,{"command_paths":set(),"command_terms":set()})
+        ev["command_paths"].add("/"+normalized)
+        ev["command_terms"].update(hits)
+
+    prelim=[]
+    for package,ev in evidence.items():
+        paths=sorted(ev["command_paths"])
+        hits=sorted(ev["command_terms"])
+        score=100*len(hits)+20*len(paths)
+        for path in paths:
+            cmd=path.rsplit("/",1)[-1].lower()
+            for term in hits:
+                if cmd==term:
+                    score+=80
+                elif cmd.startswith(term) or cmd.endswith(term):
+                    score+=30
+        prelim.append((score,package,paths,hits))
+    prelim.sort(key=lambda x:(-x[0],x[1]))
+    prelim=prelim[:max(1,min(int(limit),50))]
+
+    # Semantic enrichment is deliberately bounded. Direct executable evidence
+    # narrows the field first; remote text is fetched only where it can still
+    # change the final ranking.
+    enrich_limit=min(12,len(prelim))
+    jobs=[]
+    for _,package,paths,_ in prelim[:enrich_limit]:
+        if paths:
+            jobs.append((package,paths[0].rsplit("/",1)[-1]))
+
+    man_by_package={}
+    if jobs:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=min(8,len(jobs))) as pool:
+            future_map={
+                pool.submit(_fetch_ubuntu_manpage_text,command): (package,command)
+                for package,command in jobs
+            }
+            for future in concurrent.futures.as_completed(future_map):
+                package,command=future_map[future]
+                try:
+                    text=future.result()
+                except Exception:
+                    text=""
+                if text:
+                    man_by_package[package]={"command":command,"text":text[:16000]}
+
+    out=[]
+    for _,package,paths,command_hits in prelim:
+        page=man_by_package.get(package)
+        combined=" ".join(path.rsplit("/",1)[-1] for path in paths)
+        if page:
+            combined+=" "+page["text"]
+        low=combined.lower()
+        compact=re.sub(r"[^a-z0-9]+","",low)
+        semantic_hits=[]
+        for term in terms:
+            tc=re.sub(r"[^a-z0-9]+","",term)
+            if term in low or (tc and tc in compact):
+                semantic_hits.append(term)
+        out.append({
+            "name":package,
+            "command_paths":paths,
+            "command_terms":command_hits,
+            "manpage_commands":[page["command"]] if page else [],
+            "semantic_terms":terms,
+            "semantic_hits":sorted(set(semantic_hits)),
+            "semantic_coverage":len(set(semantic_hits))/len(terms) if terms else 0.0,
+            "acquisition_mode":"APT_FILE_FROM_FILE_LITERAL_BATCH",
+        })
+    return out
+
+
+def _apt_executable_evidence(effect,limit=36):
+    if callable(_EXTERNAL_APT_EXECUTABLE_EVIDENCE_SEARCHER):
+        try:
+            value=_EXTERNAL_APT_EXECUTABLE_EVIDENCE_SEARCHER(
+                effect=effect,
+                semantic_terms=_effect_semantic_terms(effect),
+                limit=max(1,min(int(limit),50)),
+            )
+            if isinstance(value,list):
+                return value
+        except Exception:
+            pass
+    return _local_apt_executable_evidence(effect,limit=limit)
+
+
 def _apt_query_variants(queries):
     out=[]
     for query in queries:
@@ -350,7 +546,88 @@ def search_apt_packages(effect, limit=12):
             }
             if prior is None or cand["score"]>prior["score"]:
                 seen[name]=cand
-    ranked=sorted(seen.values(),key=lambda x:(-x["score"],x["name"]))[:max(1,min(int(limit),50))]
+    executable_evidence=_apt_executable_evidence(
+        effect,limit=max(24,min(50,max(1,int(limit))*3))
+    )
+    for ev in executable_evidence:
+        name=str(ev.get("name") or "").strip()
+        if not name:
+            continue
+        command_paths=sorted(set(ev.get("command_paths") or []))
+        command_terms=sorted(set(str(x).lower() for x in ev.get("command_terms") or []))
+        semantic_hits=sorted(set(str(x).lower() for x in ev.get("semantic_hits") or []))
+        coverage=float(ev.get("semantic_coverage") or 0.0)
+        if not command_paths or not command_terms:
+            continue
+        prior=seen.get(name)
+        if prior is None:
+            lname=name.lower()
+            integration_friction=0
+            if lname.startswith(("python3-","ruby-","golang-","php-","php")):
+                integration_friction=2
+            if lname.startswith(("lib","librust-","libghc-")):
+                integration_friction=3
+            if name.endswith(("-dev","-doc","-dbg","-prof")):
+                integration_friction=max(integration_friction,4)
+            prior={
+                "discovery_source":"APT_CATALOG",
+                "name":name,
+                "description":"",
+                "query":"BATCHED_EXECUTABLE_EVIDENCE",
+                "matched_terms":[],
+                "score":0,
+                "integration_friction":integration_friction,
+                "required_secret_count":0,
+                "required_environment_count":0,
+                "zero_cost_eligible":True,
+                "eligibility_status":"LOCAL_EXECUTABLE_METADATA_CANDIDATE_UNVERIFIED",
+                "binding_kind":"apt",
+                "packages":[],
+                "remotes":[],
+            }
+        cand=dict(prior)
+        cand["matched_terms"]=sorted(
+            set(cand.get("matched_terms") or [])|set(command_terms)|set(semantic_hits)
+        )
+        evidence_bonus=120*len(command_terms)+80*coverage+12*len(semantic_hits)
+        cand["score"]=float(cand.get("score",0))+evidence_bonus
+        cand["executable_semantic_evidence"]={
+            "command_paths":command_paths,
+            "command_terms":command_terms,
+            "manpage_commands":ev.get("manpage_commands") or [],
+            "semantic_terms":ev.get("semantic_terms") or [],
+            "semantic_hits":semantic_hits,
+            "semantic_coverage":coverage,
+            "acquisition_mode":ev.get("acquisition_mode"),
+        }
+        cand["evidence_tier"]=(
+            "DIRECT_EXECUTABLE_SEMANTIC"
+            if semantic_hits else "DIRECT_EXECUTABLE_PATH"
+        )
+        seen[name]=cand
+
+    def _apt_rank_key(x):
+        ev=x.get("executable_semantic_evidence") or {}
+        paths=ev.get("command_paths") or []
+        terms=ev.get("command_terms") or []
+        semantic=ev.get("semantic_hits") or []
+        if paths and semantic:
+            tier=0
+        elif paths and terms:
+            tier=1
+        else:
+            tier=2
+        return (
+            tier,
+            -float(ev.get("semantic_coverage") or 0.0),
+            -len(semantic),
+            -len(terms),
+            int(x.get("integration_friction",0)),
+            -float(x.get("score",0)),
+            str(x.get("name","")),
+        )
+
+    ranked=sorted(seen.values(),key=_apt_rank_key)[:max(1,min(int(limit),50))]
     enriched=[]
     for cand in ranked:
         name=cand["name"]
