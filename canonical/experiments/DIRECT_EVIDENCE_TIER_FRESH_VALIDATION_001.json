@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_DIRECT_EVIDENCE_TIER_FRESH_VALIDATION_V1",
+  "validation_id": "DIRECT-EVIDENCE-TIER-FRESH-VALIDATION-001",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "status": "FROZEN",
+  "cases": [
+    {
+      "effect_id": "FRESH-EXIF-001",
+      "goal": "Extract EXIF camera metadata from a JPEG image.",
+      "oracle_families": [
+        "libimage-exiftool-perl"
+      ]
+    },
+    {
+      "effect_id": "FRESH-XML-LINT-001",
+      "goal": "Validate an XML document and report syntax errors.",
+      "oracle_families": [
+        "libxml2-utils"
+      ]
+    },
+    {
+      "effect_id": "FRESH-JPEG-TRANSFORM-001",
+      "goal": "Perform a lossless JPEG transformation without recompressing image data.",
+      "oracle_families": [
+        "libjpeg-turbo-progs"
+      ]
+    }
+  ],
+  "old_four_regression_only": true,
+  "acceptance": {
+    "fresh_oracle_family_recall_min": 0.6666666667,
+    "fresh_top20_oracle_recall_min": 0.6666666667,
+    "lexical_only_top1_max": 1,
+    "package_hints_forbidden": true,
+    "task_specific_literals_forbidden": true
+  },
+  "promotion_authorized": false
+}
