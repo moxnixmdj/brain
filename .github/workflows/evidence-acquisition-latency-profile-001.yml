@@ -1,9 +1,9 @@
 name: Evidence Acquisition Latency Profile 001
 
 on:
-  push:
+  pull_request:
     branches:
-      - diagnostic/evidence-acquisition-latency-001-20260928
+      - main
     paths:
       - canonical/experiments/EVIDENCE_ACQUISITION_LATENCY_PROFILE_001.json
       - canonical/experiments/run_evidence_acquisition_latency_profile_001.py
