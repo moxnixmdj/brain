@@ -23,6 +23,19 @@ def _norm(value):
     return re.sub(r"[-_.@/]+","-",str(value or "").strip()).strip("-").lower()
 
 
+def _format_search_hints(fmt):
+    aliases={
+        "ubj": ["ubjson", "ubj"],
+    }
+    raw=aliases.get(str(fmt or "").strip().lower(), [str(fmt or "").strip().lower()])
+    out=[]
+    for value in raw:
+        value=str(value or "").strip().lower()
+        if value and value not in out:
+            out.append(value)
+    return out
+
+
 def _inside(root,raw):
     root=pathlib.Path(root).resolve()
     p=(root/str(raw)).resolve()
@@ -157,12 +170,24 @@ def verify(format_name,json_path,binary_path,producer_project,root):
         "Independently decode "+fmt+" binary data from "
         "canonical/astra_runtime/tmp/INDEPENDENT_VERIFIER."+fmt
     )
-    try:
-        candidates=npm_acq._search_registry(goal,limit=40,format_hint=fmt)
-    except Exception as exc:
+    candidates=[]
+    seen_packages=set()
+    discovery_errors=[]
+    for hint in _format_search_hints(fmt):
+        try:
+            found=npm_acq._search_registry(goal,limit=40,format_hint=hint)
+        except Exception as exc:
+            discovery_errors.append(type(exc).__name__+":"+str(exc))
+            continue
+        for candidate in found:
+            key=_norm(candidate.get("package") or candidate.get("name"))
+            if key and key not in seen_packages:
+                seen_packages.add(key)
+                candidates.append(candidate)
+    if not candidates and discovery_errors:
         raise IndependentNpmCodecVerifierFailure(
-            "NPM_VERIFIER_DISCOVERY_FAILED:"+type(exc).__name__+":"+str(exc)
-        ) from exc
+            "NPM_VERIFIER_DISCOVERY_FAILED:"+json.dumps(discovery_errors,sort_keys=True)[:3000]
+        )
 
     producer=_norm(producer_project)
     attempts=[]
