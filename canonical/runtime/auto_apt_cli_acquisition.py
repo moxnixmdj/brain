@@ -241,6 +241,11 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
             except Exception as primary_exc:
                 alternates=list(ct.get("alternate_input_transports") or [])
                 raced=False
+                attempt["transport_race_attempts"]=[{
+                  "transport":"STDIN_TEXT",
+                  "status":"FAILED",
+                  "error":type(primary_exc).__name__+":"+str(primary_exc)
+                }]
                 for alt in alternates:
                     if alt.get("type")!="POSITIONAL_TEXT_FILE":
                         continue
@@ -250,8 +255,19 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
                     alt_args["argv"]=list(preflight_args["argv"])+[str(alt.get("arg_token") or "__PB_TEXT_FILE__")]
                     try:
                         observed=cli_command.run(alt_args,root)
-                    except Exception:
+                    except Exception as alt_exc:
+                        attempt["transport_race_attempts"].append({
+                          "transport":str(alt.get("type") or "UNKNOWN"),
+                          "status":"FAILED",
+                          "error":type(alt_exc).__name__+":"+str(alt_exc),
+                          "argv":alt_args.get("argv")
+                        })
                         continue
+                    attempt["transport_race_attempts"].append({
+                      "transport":str(alt.get("type") or "UNKNOWN"),
+                      "status":"VERIFIED",
+                      "argv":alt_args.get("argv")
+                    })
                     ct=dict(ct)
                     ct["argv_template"]=list(ct["argv_template"])+[str(alt.get("arg_token") or "__PB_TEXT_FILE__")]
                     ct["stdin_text_template"]=None
