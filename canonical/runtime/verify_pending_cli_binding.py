@@ -307,7 +307,8 @@ def _acquire_and_run_semantic_verifier(pending, output_path):
             continue
         if int(cand.get("integration_friction",99))!=0:
             continue
-        if len(cand.get("matched_terms") or [])<2:
+        externally_hinted=(cand.get("discovery_source")=="EXTERNAL_SEMANTIC_PACKAGE_HINT")
+        if not externally_hinted and len(cand.get("matched_terms") or [])<2:
             continue
         version=str(cand.get("version") or "")
         sha=str(cand.get("archive_sha256") or "").lower()
