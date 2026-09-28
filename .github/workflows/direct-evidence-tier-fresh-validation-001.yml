@@ -1,0 +1,38 @@
+name: Direct Evidence Tier Fresh Validation 001
+
+on:
+  push:
+    branches:
+      - repair/direct-evidence-tier-ranking-v1-20260928
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install metadata index
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y apt-file
+          sudo apt-file update
+      - name: Focused regression
+        run: |
+          python -m py_compile canonical/runtime/capability_discovery.py
+          python canonical/tests/test_direct_evidence_tier_ranking.py
+      - name: Fresh unseen validation exactly once
+        run: python canonical/experiments/run_direct_evidence_tier_fresh_validation_001.py
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: direct-evidence-tier-fresh-validation-001
+          path: canonical/astra_runtime/evidence/DIRECT_EVIDENCE_TIER_FRESH_VALIDATION_001__RESULT.json
+          if-no-files-found: warn
