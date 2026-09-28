@@ -1,9 +1,6 @@
 name: Direct Generator Integration Delta Diagnostic 001
 
 on:
-  push:
-    branches:
-      - diagnostic/direct-generator-integration-delta-v1-20260928
   workflow_dispatch:
 
 permissions:
