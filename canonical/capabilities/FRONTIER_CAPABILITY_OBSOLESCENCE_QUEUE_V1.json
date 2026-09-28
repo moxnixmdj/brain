@@ -70,12 +70,12 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Repair semantic query construction and executable-role ranking so known viable suppliers are recalled and prioritized across orthogonal effects before contract learning.",
-    "selection_metric": "KNOWN_VIABLE_SUPPLIER_RECALL_AND_RANK_IMPROVEMENT_PER_WALL_CLOCK_TIME",
-    "exact_blocker": "SEMANTIC_QUERY_CONSTRUCTION_AND_EXECUTABLE_ROLE_RANKING_RECALL_FAILURE",
-    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EXECUTABLE_CANDIDATE_DIAGNOSTIC_001_RECONCILIATION.json",
-    "repair_status": "ONE_GENERIC_DISCOVERY_RANKING_REPAIR_AUTHORIZED",
-    "prohibition": "NO_PACKAGE_NAME_HINTS__NO_CONTRACT_PARSER_CHANGES__NO_SECOND_REPAIR_BEFORE_ONE_REPLAY_AND_RECONCILIATION"
+    "objective": "Determine the minimum generic semantic role representation needed to separate requested operation/domain/format/constraints from candidate tool roles before any further ranking repair.",
+    "selection_metric": "EXPLAIN_ORACLE_MISRANKING_WITH_MINIMUM_NEW_REPRESENTATION_PER_WALL_CLOCK_TIME",
+    "exact_blocker": "CAPABILITY_QUERY_AND_CANDIDATE_EVIDENCE_LACK_EXPLICIT_SEMANTIC_ROLES",
+    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_SEMANTIC_RANKING_REPAIR_FALSIFICATION_V1.json",
+    "repair_status": "PR60_FLAT_LEXICAL_REPAIR_FALSIFIED_AT_PREFLIGHT__NO_RUNTIME_REPAIR_AUTHORIZED",
+    "prohibition": "NO_SECOND_LEXICAL_WEIGHT_TWEAK__NO_PACKAGE_HINTS__NO_RUNTIME_MUTATION_UNTIL_SEMANTIC_ROLE_DIAGNOSTIC_RECONCILES"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [

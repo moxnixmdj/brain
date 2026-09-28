@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_SEMANTIC_RANKING_REPAIR_FALSIFICATION_V1",
+  "status": "COMPLETE_RECONCILED",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "source_pr": 60,
+  "workflow_run_id": 36454688524,
+  "repair_branch": "repair/semantic-executable-ranking-v1-20260928",
+  "repair_merged": false,
+  "frozen_external_replay_executed": false,
+  "reason_replay_not_executed": "FOCUSED_REPAIR_PREFLIGHT_FAILED",
+  "focused_regressions": {
+    "pass_count": 2,
+    "fail_count": 2,
+    "passes": [
+      "SQLITE_CLI_OUTRANKS_BACKENDS_AND_BINDINGS",
+      "GRAPHVIZ_OUTRANKS_EDITOR_MODE"
+    ],
+    "failures": [
+      {
+        "test": "QUERY_STRIPS_SYNTAX_NOISE_AND_KEEPS_DOMAIN_NOUN",
+        "observed_queries": [
+          "resize",
+          "png",
+          "pixels",
+          "image",
+          "exactly",
+          "64"
+        ],
+        "failure": "LOW_INFORMATION_MODIFIER_EXACTLY_REENTERED_QUERY_TAIL"
+      },
+      {
+        "test": "IMAGE_DOMAIN_NOUN_SURFACES_IMAGEMAGICK",
+        "failure": "INCIDENTAL_PNG_CONTENT_PACKAGE_STILL_OUTRANKED_IMAGE_MANIPULATION_SUPPLIER",
+        "observed_relative_order": [
+          "famfamfam-flag-png",
+          "imagemagick"
+        ]
+      }
+    ]
+  },
+  "falsified_hypothesis": "FLAT_LEXICAL_TOKEN_FILTERING_PLUS_NAME_WEIGHTING_IS_SUFFICIENT_TO_REPAIR_EXECUTABLE_SUPPLIER_RECALL_AND_RANKING",
+  "refined_blocker": "CAPABILITY_QUERY_AND_CANDIDATE_EVIDENCE_LACK_EXPLICIT_SEMANTIC_ROLES__OPERATION_DOMAIN_FORMAT_CONSTRAINT_AND_TOOL_ROLE_ARE_COLLAPSED_INTO_FLAT_TOKENS",
+  "causal_rationale": [
+    "Low-information constraints can re-enter once generic tokens are appended after distinctive tokens.",
+    "Output-format overlap can dominate a candidate even when the candidate does not perform the requested operation.",
+    "Package-name and description lexical overlap cannot by itself distinguish producer tools from modes, data packages, bindings, backends, or format assets.",
+    "A second weight tweak would optimize the same falsified representation rather than repair the missing representation."
+  ],
+  "current_truth_boundary": {
+    "supplier_recall_problem_still_proven": true,
+    "flat_token_reweighting_sufficient": false,
+    "semantic_role_representation_needed_to_test": true,
+    "inherited_sqlite_composition_gap_preserved": true
+  },
+  "next_required_action": "NO_MUTATION_SEMANTIC_ROLE_DIAGNOSTIC__DECOMPOSE_FROZEN_EFFECTS_INTO_OPERATION_DOMAIN_FORMAT_CONSTRAINT_AND_CANDIDATE_TOOL_ROLE__MEASURE_WHICH_ROLE_MISMATCH_EXPLAINS_ORACLE_MISRANKING__THEN_RECONCILE",
+  "runtime_repair_authorized": false,
+  "promotion_authorized": false
+}

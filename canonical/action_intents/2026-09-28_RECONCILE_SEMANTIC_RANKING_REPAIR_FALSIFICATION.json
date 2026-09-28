@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-SEMANTIC-RANKING-REPAIR-FALSIFICATION-20260928",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": null,
+  "causal_blocker": "SEMANTIC_QUERY_CONSTRUCTION_AND_EXECUTABLE_ROLE_RANKING_RECALL_FAILURE",
+  "action_kind": "RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Reject the insufficient flat-token lexical repair and refine the causal blocker to missing semantic role representation in capability queries and candidate evidence.",
+  "highest_leverage_now": true,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Canonical pointer, queue, hierarchy, and falsification record all require a no-mutation semantic-role diagnostic before any further discovery/ranking repair.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
