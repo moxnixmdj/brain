@@ -51,11 +51,16 @@ for exe in (data.get("probe") or {}).get("executables",[]) or []:
         continue
     selected_help="\n".join(str(att.get("text") or "") for att in (exe.get("help_attempts") or []))
 explicit_selector=("datamatrix" in joined)
-intrinsic_tool_semantics=("data matrix" in selected_help.lower())
-mode_bound=explicit_selector or intrinsic_tool_semantics
+intrinsic_tool_semantics=("data matrix" in selected_help.lower() or "iso/iec 16022" in selected_help.lower())
+supplier_description=str((data.get("selected_supplier") or {}).get("description") or "")
+discovery_semantics=("data matrix" in supplier_description.lower() or "iso/iec 16022" in supplier_description.lower())
+mode_bound=explicit_selector or intrinsic_tool_semantics or discovery_semantics
 binding_basis=(
     "EXPLICIT_ARGV_SELECTOR" if explicit_selector
-    else ("SELECTED_EXECUTABLE_HELP_DECLARATION" if intrinsic_tool_semantics else None)
+    else (
+      "SELECTED_EXECUTABLE_HELP_DECLARATION" if intrinsic_tool_semantics
+      else ("DISCOVERY_SUPPLIER_SEMANTIC_DECLARATION" if discovery_semantics else None)
+    )
 )
 result={
   "status":"CONTRACT_INFERRED",
@@ -67,6 +72,8 @@ result={
   "semantic_binding_basis":binding_basis,
   "selected_executable":selected_executable,
   "selected_help_declares_data_matrix":intrinsic_tool_semantics,
+  "supplier_description":supplier_description,
+  "discovery_description_declares_data_matrix":discovery_semantics,
   "verification_mission_path":out["verification_mission_path"],
   "promotion_allowed":False
 }
