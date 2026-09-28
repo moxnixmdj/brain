@@ -4,16 +4,16 @@
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "active_capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-  "active_probe": null,
-  "probe_state": "EXECUTABLE_CANDIDATE_DIAGNOSTIC_COMPLETE_RECONCILED",
+  "active_probe": "EXECUTABLE-CANDIDATE-DIAGNOSTIC-001-REPLAY",
+  "probe_state": "ONE_AUTHORIZED_GENERIC_DISCOVERY_RANKING_REPAIR__ONE_REPLAY",
   "current_parent_blocker": "SEMANTIC_QUERY_CONSTRUCTION_AND_EXECUTABLE_ROLE_RANKING_RECALL_FAILURE",
-  "next_required_action_class": "ONE_GENERIC_SEMANTIC_QUERY_AND_ROLE_RANKING_REPAIR__REPLAY_DIAGNOSTIC_ONCE__THEN_RECONCILE",
-  "forbidden_local_frontier": "CONTRACT_PARSER_POLISHING__PACKAGE_NAME_HINTING__SQLITE_ONLY_COMPOSITION_PATCH__SECOND_DISCOVERY_REPAIR_BEFORE_REPLAY",
+  "next_required_action_class": "APPLY_ONE_GENERIC_DISCOVERY_RANKING_REPAIR__REPLAY_DIAGNOSTIC_ONCE__THEN_RECONCILE",
+  "forbidden_local_frontier": "PACKAGE_NAME_HINTS__CONTRACT_PARSER_CHANGES__SQLITE_ONLY_COMPOSITION_PATCH__SECOND_DISCOVERY_REPAIR",
   "progress_level_minimum": "CAPABILITY_TARGET",
   "probe_budget": {
-    "repairs_used_on_active_probe": 0,
+    "repairs_used_on_active_probe": 1,
     "max_repairs_from_single_probe": 1,
-    "same_probe_replays_used": 0,
+    "same_probe_replays_used": 1,
     "max_same_probe_replays": 1,
     "orthogonal_recurrence_required_for_second_repair": 2
   },
@@ -26,7 +26,7 @@
       "may_define_frontier": false
     }
   ],
-  "active_probe_manifest": "canonical/experiments/ORTHO_TOOL_LEARNING_PORTFOLIO_001.json",
+  "active_probe_manifest": "canonical/experiments/EXECUTABLE_CANDIDATE_DIAGNOSTIC_001.json",
   "completed_probe_portfolio": {
     "portfolio_id": "ORTHO-TOOL-LEARNING-PORTFOLIO-001",
     "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_ORTHOGONAL_PORTFOLIO_001_RECONCILIATION.json",
