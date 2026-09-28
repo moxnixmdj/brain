@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_RAW_TO_RANKED_CANDIDATE_TRACE_RECONCILIATION_V1",
+  "status": "COMPLETE_RECONCILED",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "diagnostic_id": "RAW-TO-RANKED-CANDIDATE-TRACE-001",
+  "workflow_run_id": 36462691370,
+  "drift_guard_run_id": 36462714424,
+  "runtime_mutated": false,
+  "artifact": {
+    "id": 10988184731,
+    "digest": "sha256:f67646465fb8bd0ae9676c649b6141a94d84f1fdf41ec97a5537741117e22c9b"
+  },
+  "measured": {
+    "raw_catalog_oracle_recall": 1,
+    "returned_candidate_oracle_recall": 0.25,
+    "top12_oracle_recall": 0.25,
+    "repeated_loss_stage": "RAW_PRESENT_BUT_NOT_ADMITTED_OR_RETAINED",
+    "recurrence_count": 3
+  },
+  "probe_summary": [
+    {
+      "effect_id": "TRACE-PDF-TEXT-001",
+      "raw_oracle_present": true,
+      "returned_oracle_rank": null,
+      "loss_stage": "RAW_PRESENT_BUT_NOT_ADMITTED_OR_RETAINED"
+    },
+    {
+      "effect_id": "TRACE-SVG-RASTER-001",
+      "raw_oracle_present": true,
+      "returned_oracle_rank": null,
+      "loss_stage": "RAW_PRESENT_BUT_NOT_ADMITTED_OR_RETAINED"
+    },
+    {
+      "effect_id": "TRACE-BZIP2-001",
+      "raw_oracle_present": true,
+      "returned_oracle_rank": 12,
+      "loss_stage": "PRESENT_TOP12"
+    },
+    {
+      "effect_id": "TRACE-MEDIA-METADATA-001",
+      "raw_oracle_present": true,
+      "returned_oracle_rank": null,
+      "loss_stage": "RAW_PRESENT_BUT_NOT_ADMITTED_OR_RETAINED"
+    }
+  ],
+  "inherited_route_observation": "Inherited verified capability lookup produced only weak lexical overlaps for these effects and no clearly equivalent route; inherited lookup remains first in the pipeline but did not close these probes.",
+  "causal_conclusion": "The APT catalog already contains viable suppliers for all four fresh effects. The dominant current loss occurs after raw search and before the returned top-50 candidate set. A repair to external source coverage is therefore not justified.",
+  "unresolved_boundary": "Current evidence does not yet distinguish candidate-admission rejection from low pre-truncation rank because search_apt_packages exposes only the final truncated set.",
+  "next_action": {
+    "type": "NO_MUTATION_PRETRUNCATION_RANK_TRACE",
+    "objective": "Reconstruct the current candidate admission/scoring logic without modifying runtime, record each known viable supplier's admission status, exact pre-truncation rank and score, and identify the repeated reason it falls below retention.",
+    "runtime_mutation_forbidden": true
+  },
+  "promotion_authorized": false
+}
