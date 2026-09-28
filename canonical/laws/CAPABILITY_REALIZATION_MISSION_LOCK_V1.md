@@ -1,6 +1,8 @@
 # CAPABILITY REALIZATION MISSION LOCK V1
 
-Status: CANONICAL / MANDATORY / FAIL-CLOSED
+> Superseded on 2026-09-28 after independent verification of the first real same-identity Superworker (P_real = 1). Current authority: `canonical/laws/FRONTIER_CAPABILITY_SUPERWORKER_MISSION_LOCK_V2.md`.
+
+Status: SUPERSEDED AS TOP-LEVEL OBJECTIVE BY FRONTIER_CAPABILITY_SUPERWORKER_MISSION_LOCK_V2 / RETAINED AS HISTORICAL LAW
 
 ## Terminal objective
 
