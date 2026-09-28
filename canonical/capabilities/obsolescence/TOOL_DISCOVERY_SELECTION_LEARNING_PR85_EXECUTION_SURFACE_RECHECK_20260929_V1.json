@@ -1,0 +1,108 @@
+{
+  "schema": "PROJECT_BRAIN_PR85_EXECUTION_SURFACE_RECHECK_V1",
+  "status": "FROZEN_GATE_STILL_EXTERNAL_REQUIRED__NO_SAFE_ZERO_INCREMENTAL_SPEND_EXECUTOR_CURRENTLY_CALLABLE",
+  "checked_on": "2026-09-29",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "canonical_main_sha": "33d607338ebf300b00465ddb40a911bf87c3bc02",
+  "repair_pr": 85,
+  "repair_head_sha_before_recheck_receipt": "137e8ba442cf7fbbe2c68dd16e8eacd18b7fd0b5",
+  "target_gate": "BATCHED-EXECUTABLE-EVIDENCE-FRESH-VALIDATION-001",
+  "required_environment": "Exact PR85 branch bytes on a reliable Debian/Ubuntu-like Linux surface with live apt-file Contents indices, hard $0 incremental spend, and <=600 second frozen validation.",
+  "rechecks": [
+    {
+      "surface": "GitHub Actions private repository",
+      "status": "REJECTED_FAILURE_CLASS_UNCHANGED",
+      "evidence": {
+        "latest_observed_run_id": 36489791123,
+        "workflow": "Obsolescence Exact Symbolic V1",
+        "conclusion": "failure",
+        "job_id": 109162850774,
+        "reported_steps": 0
+      },
+      "reason": "The newest observed PR85-hosted run still failed without any recorded workflow steps, so the previously quarantined pre-step failure class has not changed. Same-class retry remains forbidden."
+    },
+    {
+      "surface": "Authorized Remote Desktop device Mo",
+      "status": "UNAVAILABLE_DEVICE_OFFLINE",
+      "evidence": {
+        "device_status": "offline",
+        "last_seen_utc": "2026-09-26T11:19:12.304+00:00",
+        "auth_token_state": "valid"
+      }
+    },
+    {
+      "surface": "Current ChatGPT Linux container",
+      "status": "REJECTED_NO_LIVE_APT_CONTENTS_PATH",
+      "evidence": {
+        "os": "Debian GNU/Linux 13 (trixie)",
+        "uid": 0,
+        "apt_get_present": true,
+        "apt_cache_present": true,
+        "apt_file_present": false,
+        "apt_list_file_count": 0,
+        "deb_debian_org_dns_probe": "COULD_NOT_RESOLVE_HOST"
+      },
+      "reason": "This session container cannot obtain the live APT/Contents state required by the frozen gate."
+    },
+    {
+      "surface": "Render connected workspace",
+      "status": "REJECTED_HARD_ZERO_NOT_PROVABLE",
+      "evidence": {
+        "workspace_reachable": true,
+        "current_services_result": null,
+        "free_compute_documented": true,
+        "pipeline_minutes_metered_with_possible_overage": true,
+        "remaining_included_pipeline_usage_observable_via_connector": false
+      },
+      "source_urls": [
+        "https://render.com/docs/free",
+        "https://render.com/docs/faq",
+        "https://render.com/docs/build-pipeline"
+      ],
+      "reason": "A Free service is nominally $0 compute, but deploy/build pipeline usage can incur overage when included usage is exhausted and a payment method exists. The connected tool surface does not expose remaining included usage or payment state, so creation fails the hard-$0 gate."
+    },
+    {
+      "surface": "Vercel connected workspace",
+      "status": "REJECTED_NO_CALLABLE_TEAM_CONTEXT",
+      "evidence": {
+        "connected_teams_count": 0
+      }
+    },
+    {
+      "surface": "TinyFish browser automation",
+      "status": "REJECTED_METERED_BALANCE",
+      "evidence": {
+        "wallet_balance_usd": "4.28",
+        "auto_reload": "unconfigured",
+        "agent_rate_usd_per_step": "0.016",
+        "browser_rate_usd_per_minute": "0.002"
+      },
+      "reason": "Automation is explicitly metered and the available balance provenance is not established as free credit; consuming it would violate fail-closed hard-$0 execution."
+    },
+    {
+      "surface": "Camber",
+      "status": "REJECTED_ZERO_SPEND_UNVERIFIABLE",
+      "evidence": {
+        "session_authenticated": true,
+        "billing_or_credit_state_exposed": false
+      }
+    }
+  ],
+  "external_semantics_check": {
+    "apt_file_from_file_verified": true,
+    "source": "https://manpages.debian.org/trixie/apt-file/apt-file.1.en.html",
+    "finding": "--from-file reads one pattern per line and is documented as much faster than invoking apt-file repeatedly; --stream-results emits matches as discovered and reduces deduplication overhead."
+  },
+  "truth_transition": "UNCHANGED",
+  "only_remaining_truth_transition": "Execute the frozen 3-case gate on exact PR85 bytes with a live apt-file Contents cache at hard $0; then reconcile PASS or FAIL before any second repair or merge.",
+  "forbidden_next_moves": [
+    "retry the unchanged GitHub Actions pre-step failure class",
+    "create billable or not-provably-free infrastructure",
+    "consume metered browser/agent wallet balance of unknown free-credit provenance",
+    "substitute web package search for the frozen apt-file gate",
+    "implement a second repair",
+    "merge or promote PR85 before the frozen gate"
+  ],
+  "promotion_authorized": false,
+  "repair_merge_authorized": false
+}
