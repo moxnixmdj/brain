@@ -22,7 +22,36 @@ TEXT_FORMAT_NAMES={
     ".tsv":"tsv",".json":"json",".html":"html",".htm":"html",".xml":"xml"
 }
 
-def _help_text(probe):
+def _goal_role(goal):
+    lower=str(goal or "").lower()
+    produce=any(x in lower for x in ("generate","create","make","render","encode","save","write","export"))
+    consume=any(x in lower for x in ("decode","read","extract","inspect","scan","parse"))
+    if produce and not consume:
+        return "PRODUCE"
+    if consume and not produce:
+        return "CONSUME"
+    return "NEUTRAL"
+
+def _role_score(text, goal):
+    lower=str(text or "").lower()
+    role=_goal_role(goal)
+    if role=="PRODUCE":
+        positive=("encode","write","generate","create","output","save","render","export")
+        negative=("decode","read","scan","extract")
+    elif role=="CONSUME":
+        positive=("decode","read","scan","extract","parse")
+        negative=("encode","write","generate","create","output file")
+    else:
+        positive=()
+        negative=()
+    score=sum(2 for x in positive if x in lower)-sum(2 for x in negative if x in lower)
+    if role=="PRODUCE" and any(x in lower for x in ("--output","output file","write image to","write data to")):
+        score+=4
+    if role=="CONSUME" and any(x in lower for x in ("standard output","stdout","decoded","scan image")):
+        score+=3
+    return score
+
+def _help_text(probe, goal):
     choices=[]
     for exe in probe.get("executables",[]):
         for att in exe.get("help_attempts",[]):
@@ -31,7 +60,7 @@ def _help_text(probe):
             if text:
                 if "usage:" in lower or "options:" in lower:
                     quality=3 if "usage:" in lower else 2
-                    choices.append((quality,len(text),exe.get("executable"),text))
+                    choices.append((_role_score(text,goal),quality,len(text),exe.get("executable"),text))
                     continue
                 # Some mature CLIs (for example option-table style tools)
                 # provide complete help without literal "Usage:"/"Options:"
@@ -46,15 +75,15 @@ def _help_text(probe):
                     len(option_lines)>=4
                     and any(k in lower for k in ("--output","output file","--data","data content","input data"))
                 ):
-                    choices.append((1,len(text),exe.get("executable"),text))
+                    choices.append((_role_score(text,goal),1,len(text),exe.get("executable"),text))
     if not choices:
         raise ContractInferenceFailure("CLI_HELP_CONTRACT_TEXT_REQUIRED")
     choices.sort(reverse=True)
-    _,_,exe,text=choices[0]
+    _,_,_,exe,text=choices[0]
     return str(exe),text
 
 def infer_contract(probe, goal):
-    exe,help_text=_help_text(probe)
+    exe,help_text=_help_text(probe,goal)
     lines=help_text.splitlines()
     usage_line=next((x.strip() for x in lines if x.strip().lower().startswith("usage:")),None)
     lower_help=help_text.lower()
