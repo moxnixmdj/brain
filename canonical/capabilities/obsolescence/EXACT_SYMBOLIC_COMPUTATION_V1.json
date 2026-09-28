@@ -40,7 +40,31 @@
   "suite_path": "canonical/obsolescence/suites/EXACT_SYMBOLIC_COMPUTATION_SUITE_V1.json",
   "runner_path": "canonical/obsolescence/run_exact_symbolic_v1.py",
   "workflow_path": ".github/workflows/obsolescence-exact-symbolic-v1.yml",
-  "status": "OBSOLESCENCE_TEST_RUNNING",
+  "status": "OBSOLETE_VERIFIED",
   "promotion_rule": "Promote to OBSOLETE_VERIFIED only if the frozen suite passes 12/12 exactly at $0 and independent Wolfram expected values are consistent with the producer outputs. Scope must remain bounded to the tested exact-symbolic operation classes.",
-  "anti_overclaim": "This record does not claim that mathematical reasoning, scientific reasoning, theorem proving, word-problem reasoning, or all symbolic mathematics are obsolete."
+  "anti_overclaim": "This record does not claim that mathematical reasoning, scientific reasoning, theorem proving, word-problem reasoning, or all symbolic mathematics are obsolete.",
+  "execution": {
+    "github_actions_run_id": 36368073756,
+    "job_id": 108758378747,
+    "suite_sha256": "38460d8e0a4886575743a50829e19b8aee02911962b3b668f38867883338e76f",
+    "pass_count": 12,
+    "fail_count": 0,
+    "exact_correctness": 1,
+    "total_eval_s": 0.260120682,
+    "capability_route_process_wall_s": 0.59,
+    "incremental_spend_usd": 0,
+    "artifact_id": 10948120971,
+    "artifact_digest": "sha256:7dfd97510c004c171d84dc1513774f01101c433dbf57fa8eb074ae1e6c9e0401"
+  },
+  "independent_adjudication": {
+    "verifier": "Wolfram Language kernel",
+    "pass_count": 12,
+    "fail_count": 0,
+    "all_pass": true,
+    "path": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json"
+  },
+  "inherited_route": {
+    "supplier": "SymPy 1.14.0",
+    "routing_rule": "Prefer deterministic SymPy execution for tasks within this verified envelope before frontier-model internal reasoning."
+  }
 }
