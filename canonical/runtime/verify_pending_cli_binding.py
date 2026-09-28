@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fresh verification for an automatically synthesized pending CLI binding."""
 from __future__ import annotations
-import hashlib,importlib,json,pathlib,re,shutil,subprocess,sys
+import hashlib,importlib,json,pathlib,re,shutil,subprocess,sys,urllib.parse,urllib.request
 
 import apt_cli_probe
 import astra_runtime
@@ -22,37 +22,583 @@ def _inside(raw):
         raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
     return p
 
-def _semantic_verifier_query(goal):
-    tokens=[
+def _resolve_apt_candidate_name(name):
+    """Resolve an externally discovered APT package name to pinned local metadata."""
+    name=str(name or "").strip()
+    if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9+._-]{0,127}",name):
+        return None
+    try:
+        policy=subprocess.run(
+            ["apt-cache","policy",name],text=True,capture_output=True,timeout=10
+        )
+        version=None
+        for line in policy.stdout.splitlines():
+            s=line.strip()
+            if s.startswith("Candidate:"):
+                version=s.split(":",1)[1].strip()
+                break
+        if not version or version=="(none)":
+            return None
+        show=subprocess.run(
+            ["apt-cache","show",f"{name}={version}"],
+            text=True,capture_output=True,timeout=15
+        )
+        sha=None
+        description=""
+        for line in show.stdout.splitlines():
+            if line.startswith("SHA256:") and sha is None:
+                sha=line.split(":",1)[1].strip().lower()
+            elif line.startswith("Description:") and not description:
+                description=line.split(":",1)[1].strip()
+        if not re.fullmatch(r"[0-9a-f]{64}",str(sha or "")):
+            return None
+        return {
+          "name":name,
+          "version":version,
+          "archive_sha256":sha,
+          "description":description,
+          "binding_kind":"apt",
+          "discovery_source":"EXTERNAL_SEMANTIC_PACKAGE_HINT",
+          "zero_cost_eligible":True,
+          "integration_friction":0,
+          "required_secret_count":0,
+          "required_environment_count":0,
+          "matched_terms":[],
+          "score":1000,
+        }
+    except Exception:
+        return None
+
+
+def _semantic_verifier_terms(goal, expected_text=""):
+    """Return target-effect terms while excluding payload/content tokens."""
+    payload_tokens=set(capability_discovery.effect_queries(expected_text or ""))
+    raw=[
         t for t in capability_discovery.effect_queries(goal)
         if t not in capability_discovery.GENERIC_DISCOVERY_TOKENS
+        and t not in payload_tokens
         and not t.isdigit()
     ]
-    distinctive=" ".join(tokens[:3]).strip()
-    return ("decode "+distinctive+" image").strip()
+    producer_words={
+        "generate","create","make","render","encode","write","save","output",
+        "png","jpg","jpeg","webp","file","image"
+    }
+    distinctive=[t for t in raw if t not in producer_words]
+    if not distinctive:
+        distinctive=list(raw)
+    return distinctive[:4]
+
+
+def _semantic_verifier_queries(goal, expected_text=""):
+    """Compatibility/evidence view of the bounded verifier search."""
+    nouns=_semantic_verifier_terms(goal,expected_text)
+    joined=" ".join(nouns)
+    out=[]
+    for role in ("decode","read","scan","verify"):
+        q=(role+" "+joined).strip()
+        if q and q not in out:
+            out.append(q)
+    return out
+
+
+def _semantic_verifier_query(goal, expected_text=""):
+    queries=_semantic_verifier_queries(goal,expected_text)
+    return queries[0] if queries else "decode image"
+
+
+def _package_family_tokens(name):
+    """Derive conservative ecosystem-family tokens from a package name.
+
+    This lets a semantic library hit reveal sibling CLI packages without any
+    task- or vendor-specific package table.
+    """
+    value=str(name or "").strip().lower()
+    if not value:
+        return []
+    parts=[p for p in re.split(r"[-_.]+",value) if p]
+    noise={
+        "lib","libs","library","libraries","dev","devel","doc","docs","dbg",
+        "common","utils","tools","tool","cli","bin","java","python","python3",
+        "ruby","perl","php","golang","rust","node","js","core","runtime"
+    }
+    out=[]
+    # Strip common glued prefixes such as libFOO and python3FOO.
+    glued=re.sub(r"^(?:lib|python3|python|ruby|perl|nodejs?)","",value)
+    glued=re.split(r"[-_.0-9]+",glued)[0]
+    if len(glued)>=3 and glued not in noise:
+        out.append(glued)
+    for p in parts:
+        p=re.sub(r"\d+$","",p)
+        if len(p)>=3 and p not in noise and p not in out:
+            out.append(p)
+    return out[:3]
+
+
+def _ubuntu_web_family_seeds(tokens, timeout_s=12, per_token_limit=80):
+    """Search official Ubuntu package web metadata for semantic family clues.
+
+    This is metadata-only discovery. It does not install or execute anything.
+    Returned names are still pinned/validated through the local APT catalog
+    before they can become executable candidates.
+    """
+    out=[]
+    seen=set()
+    for token in tokens[:4]:
+        params=urllib.parse.urlencode({
+          "keywords":str(token),
+          "searchon":"all",
+          "suite":"noble",
+          "section":"all",
+        })
+        req=urllib.request.Request(
+            "https://packages.ubuntu.com/search?"+params,
+            headers={"User-Agent":"ProjectBrain-CapabilityDiscovery/1"}
+        )
+        try:
+            with urllib.request.urlopen(req,timeout=timeout_s) as resp:
+                html=resp.read(1500000).decode("utf-8","replace")
+        except Exception:
+            continue
+        # Result pages link binary package details under /<suite>/<package>
+        # or /<suite>/<section>/<package>. Keep only package-like terminal
+        # path components and let local APT metadata validate them later.
+        count=0
+        for href,label in re.findall(
+            r'href="(/[^"]+)"[^>]*>([^<]+)</a>',html,re.I
+        ):
+            parts=[urllib.parse.unquote(x) for x in href.split("/") if x]
+            if len(parts)<2 or parts[0]!="noble":
+                continue
+            name=parts[-1].strip()
+            if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9+._-]{0,127}",name):
+                continue
+            if name in seen:
+                continue
+            seen.add(name)
+            out.append({
+              "name":name,
+              "description":re.sub(r"\s+"," ",str(label)).strip(),
+              "seed_token":str(token),
+              "source":"UBUNTU_PACKAGES_WEB_METADATA",
+            })
+            count+=1
+            if count>=per_token_limit:
+                break
+    return out
+
+
+def _raw_apt_family_seeds(tokens, per_token_limit=120):
+    """Cheaply scan package names/descriptions without pinning/installing candidates.
+
+    This preserves low-friction family evidence that may be buried below the
+    enriched/ranked search cutoff. It never executes package code.
+    """
+    out=[]
+    seen=set()
+    if not shutil.which("apt-cache"):
+        return out
+    for token in tokens[:4]:
+        try:
+            p=subprocess.run(
+                ["apt-cache","search",str(token)],
+                text=True,capture_output=True,timeout=20
+            )
+        except Exception:
+            continue
+        if p.returncode!=0:
+            continue
+        count=0
+        for line in p.stdout.splitlines():
+            if " - " not in line:
+                continue
+            name,description=line.split(" - ",1)
+            name=name.strip()
+            if not name or name in seen:
+                continue
+            seen.add(name)
+            out.append({"name":name,"description":description.strip(),"seed_token":token})
+            count+=1
+            if count>=per_token_limit:
+                break
+    return out
+
+
+def _merge_verifier_discovery(goal, expected_text="", limit_per_query=40):
+    """Search once by semantic roles, then cheaply widen through package families.
+
+    The previous implementation reran a full APT search/enrichment cycle for
+    many near-duplicate queries. That is correct but catastrophically slow.
+    This implementation performs one aggregated semantic scan, then uses the
+    strongest metadata hits to discover sibling packages in the same ecosystem
+    family.
+    """
+    nouns=_semantic_verifier_terms(goal,expected_text)
+    seed_effect=" ".join(nouns).strip()
+    seed=capability_discovery.search_apt_packages(
+        seed_effect,limit=max(24,min(int(limit_per_query),50))
+    ) if seed_effect else {"candidate_count":0,"candidates":[],"errors":[]}
+    if not (seed.get("candidates") or []):
+        fallback_effect=" ".join(["decode","read","scan","verify"]+nouns).strip()
+        seed=capability_discovery.search_apt_packages(
+            fallback_effect,limit=max(24,min(int(limit_per_query),50))
+        )
+        seed_effect=fallback_effect
+    merged={}
+    searches=[{
+      "stage":"SEMANTIC_ROLE_SCAN",
+      "query":seed_effect,
+      "candidate_count":seed.get("candidate_count",0),
+      "errors":seed.get("errors",[]),
+    }]
+
+    def add(cand, stage, family=None):
+        name=str(cand.get("name") or "")
+        if not name:
+            return
+        x=dict(cand)
+        x["verifier_discovery_stage"]=stage
+        if family:
+            x["verifier_package_family"]=family
+        prior=merged.get(name)
+        if prior is None or float(x.get("score",0))>float(prior.get("score",0)):
+            merged[name]=x
+
+    seed_candidates=seed.get("candidates",[]) or []
+    for cand in seed_candidates:
+        add(cand,"SEMANTIC_ROLE_SCAN")
+
+    # Preserve cheap metadata-only family clues beyond the enriched candidate
+    # cutoff. A semantic library/binding hit can reveal a separately packaged
+    # CLI sibling even when the library itself is too high-friction to execute.
+    raw_family_seeds=_raw_apt_family_seeds(nouns)
+    web_family_seeds=_ubuntu_web_family_seeds(nouns)
+    raw_family_seeds.extend(
+        x for x in web_family_seeds
+        if x.get("name") not in {y.get("name") for y in raw_family_seeds}
+    )
+    searches.append({
+      "stage":"RAW_METADATA_FAMILY_SEED_SCAN",
+      "query":" | ".join(nouns),
+      "candidate_count":len(raw_family_seeds),
+      "local_seed_count":len(raw_family_seeds)-len(web_family_seeds),
+      "ubuntu_web_seed_count":len(web_family_seeds),
+      "errors":[],
+    })
+
+    # Do not throw away exact package names discovered by semantic metadata.
+    # Strong CLI-looking hits are cheap enough to validate directly through
+    # local APT metadata before any install/probe. This remains supplier-generic
+    # within APT and contains no task/vendor name table.
+    direct_cli=[]
+    cli_words={"tool","tools","utility","utilities","command","line","cli","scanner","reader","decoder","decode","scan","read"}
+    for raw in raw_family_seeds:
+        name=str(raw.get("name") or "")
+        desc=str(raw.get("description") or "").lower()
+        name_low=name.lower()
+        desc_tokens=set(re.findall(r"[a-z0-9]+",desc))
+        cli_likelihood=(
+            name_low.endswith(("-tools","-utils","-cli"))
+            or bool(desc_tokens & cli_words)
+            or "command line" in desc
+            or "command-line" in desc
+        )
+        if not cli_likelihood:
+            continue
+        pinned=_resolve_apt_candidate_name(name)
+        if pinned is None:
+            continue
+        pinned["matched_terms"]=[str(raw.get("seed_token") or "")]
+        pinned["score"]=80 + (30 if name_low.endswith(("-tools","-utils","-cli")) else 0)
+        pinned["verifier_discovery_stage"]="RAW_METADATA_DIRECT_CLI_CANDIDATE"
+        pinned["raw_metadata_description"]=raw.get("description")
+        direct_cli.append(pinned)
+        if len(direct_cli)>=24:
+            break
+    for cand in direct_cli:
+        add(cand,"RAW_METADATA_DIRECT_CLI_CANDIDATE")
+    searches.append({
+      "stage":"RAW_METADATA_DIRECT_CLI_CANDIDATE",
+      "query":" | ".join(nouns),
+      "candidate_count":len(direct_cli),
+      "errors":[],
+    })
+
+    # Expand only the strongest semantic package families. Libraries and
+    # bindings are useful discovery evidence even when they are not executable
+    # themselves. Rank families by target-term + verifier-role support instead
+    # of whichever package name happened to appear first.
+    family_support={}
+    family_sources=list(seed_candidates)+[
+        {
+          "name":x["name"],
+          "description":x.get("description",""),
+          "score":12,
+          "matched_terms":[x.get("seed_token")],
+        }
+        for x in raw_family_seeds
+    ]
+    verifier_roles={"decode","decoder","decoding","read","reader","scan","scanner","scanning","verify","verifier"}
+    target_terms=set(nouns)
+    for cand in family_sources:
+        blob=(str(cand.get("name") or "")+" "+str(cand.get("description") or "")).lower()
+        blob_tokens=set(re.findall(r"[a-z0-9]+",blob))
+        semantic_support=len(set(cand.get("matched_terms") or []) & target_terms)
+        role_support=len(blob_tokens & verifier_roles)
+        for token in _package_family_tokens(cand.get("name")):
+            prior=family_support.get(token)
+            record={
+              "parent_package":str(cand.get("name") or ""),
+              "semantic_support_terms":semantic_support,
+              "verifier_role_support_terms":role_support,
+              "parent_matched_terms":list(cand.get("matched_terms") or []),
+              "parent_score":float(cand.get("score",0)),
+              "family_rank_score":(
+                  100*semantic_support
+                  +40*role_support
+                  +float(cand.get("score",0))
+              ),
+            }
+            if prior is None or (
+                record["family_rank_score"],record["parent_score"]
+            ) > (
+                prior["family_rank_score"],prior["parent_score"]
+            ):
+                family_support[token]=record
+    families=[
+        token for token,_ in sorted(
+            family_support.items(),
+            key=lambda kv:(
+                -float(kv[1].get("family_rank_score",0)),
+                -float(kv[1].get("parent_score",0)),
+                kv[0],
+            )
+        )[:8]
+    ]
+
+    for family in families:
+        result=capability_discovery.search_apt_packages(family,limit=16)
+        searches.append({
+          "stage":"PACKAGE_FAMILY_EXPANSION",
+          "query":family,
+          "candidate_count":result.get("candidate_count",0),
+          "errors":result.get("errors",[]),
+        })
+        for cand in result.get("candidates",[]) or []:
+            enriched=dict(cand)
+            support=family_support.get(family) or {}
+            enriched["verifier_family_parent_package"]=support.get("parent_package")
+            enriched["verifier_family_semantic_support_terms"]=int(
+                support.get("semantic_support_terms") or 0
+            )
+            enriched["verifier_family_parent_matched_terms"]=list(
+                support.get("parent_matched_terms") or []
+            )
+            add(enriched,"PACKAGE_FAMILY_EXPANSION",family)
+
+    candidates=sorted(
+        merged.values(),
+        key=lambda x:(
+            int(x.get("integration_friction",99)),
+            -float(x.get("score",0)),
+            0 if x.get("verifier_discovery_stage")=="PACKAGE_FAMILY_EXPANSION" else 1,
+            str(x.get("name","")),
+        )
+    )
+    return {"queries":searches,"candidates":candidates}
+
+
+def _png_dimensions(path):
+    try:
+        raw=pathlib.Path(path).read_bytes()[:24]
+        if len(raw)<24 or raw[:8]!=b"\x89PNG\r\n\x1a\n":
+            return None
+        width=int.from_bytes(raw[16:20],"big")
+        height=int.from_bytes(raw[20:24],"big")
+        if width<1 or height<1 or width>4096 or height>4096:
+            return None
+        return width,height
+    except Exception:
+        return None
+
+
+def _help_symbol_size_candidates(contract, output_path):
+    text=str(contract.get("help_excerpt") or "")
+    if "symbol-size" not in text.lower():
+        return []
+    if "row" not in text.lower() or "column" not in text.lower():
+        return []
+    flag=None
+    for line in text.splitlines():
+        m=re.match(r"\s*(-[A-Za-z0-9]),\s*--symbol-size",line,re.I)
+        if m:
+            flag=m.group(1)
+            break
+    dims=_png_dimensions(output_path)
+    if not flag or dims is None:
+        return []
+    width,height=dims
+    return [
+      {"flag":flag,"value":f"{height}x{width}"},
+      {"flag":flag,"value":f"{width}x{height}"},
+    ]
+
+
+def _semantic_execution_variants(contract, output_path):
+    """Build bounded execution variants only from options declared in help."""
+    base=[output_path if x=="__OUTPUT_PATH__" else x for x in contract["argv"]]
+    out=[{"basis":"PRIMARY_CONTRACT","argv":base}]
+    if contract.get("inference_basis")!="POSITIONAL_FILE_TO_STDOUT":
+        return out
+    help_text=str(contract.get("help_excerpt") or "")
+    path=str(contract.get("executable") or "")
+    for line in help_text.splitlines():
+        m=re.match(
+            r"\s*(-[A-Za-z0-9]),\s*--([A-Za-z0-9-]*minimum[A-Za-z0-9-]*)=N\b",
+            line,
+            re.I,
+        )
+        if not m:
+            continue
+        short=m.group(1)
+        argv=[path,short,"1",output_path]
+        if argv!=base:
+            out.append({
+              "basis":"HELP_DECLARED_MINIMUM_NUMERIC_RELAXATION",
+              "argv":argv,
+              "help_line":line.strip()[:500],
+            })
+        break
+    help_text=str(contract.get("help_excerpt") or "")
+    path=str(contract.get("executable") or "")
+    for line in help_text.splitlines():
+        low=line.lower()
+        if "pure" not in low and "perfect" not in low:
+            continue
+        if not any(w in low for w in ("assume","image","code","symbol")):
+            continue
+        m=re.match(r"\s*(-[^\s,=]+)",line)
+        if not m:
+            continue
+        flag=m.group(1)
+        if "=" in flag or flag in {"-h","--help"}:
+            continue
+        base_argv=list(base)
+        insert_at=max(1,len(base_argv)-1)
+        variant=base_argv[:insert_at]+[flag]+base_argv[insert_at:]
+        if variant!=base and all(v["argv"]!=variant for v in out):
+            out.append({
+              "basis":"HELP_DECLARED_PURE_INPUT_MODE",
+              "argv":variant,
+              "help_line":line.strip()[:500],
+            })
+        break
+    prior_variants=list(out)
+    for item in _help_symbol_size_candidates(contract,output_path):
+        argv=list(base[:-1])+[item["flag"],item["value"],base[-1]]
+        if all(v["argv"]!=argv for v in out):
+            out.append({
+              "basis":"HELP_DECLARED_SYMBOL_SIZE_FROM_RASTER_DIMENSIONS",
+              "argv":argv,
+              "symbol_size":item["value"],
+            })
+        for prior in prior_variants:
+            if prior.get("basis")!="HELP_DECLARED_MINIMUM_NUMERIC_RELAXATION":
+                continue
+            prior_argv=list(prior["argv"])
+            combo=list(prior_argv[:-1])+[item["flag"],item["value"],prior_argv[-1]]
+            if all(v["argv"]!=combo for v in out):
+                out.append({
+                  "basis":"HELP_DECLARED_MINIMUM_EDGE_PLUS_SYMBOL_SIZE",
+                  "argv":combo,
+                  "symbol_size":item["value"],
+                })
+    return out
 
 
 def _semantic_help_contract(probe):
+    """Infer a bounded image-to-text decoder contract from observed CLI help.
+
+    This deliberately learns transport shape from help instead of naming a
+    specific barcode family or verifier implementation.
+    """
     candidates=[]
     for exe in probe.get("executables",[]):
         path=str(exe.get("executable") or "")
         for att in exe.get("help_attempts",[]):
             text=str(att.get("text") or "")
+            if not text:
+                continue
             lower=text.lower()
             normalized=re.sub(r"[^a-z0-9]+","",lower)
-            if (
-                text
-                and "decode" in lower
-                and "image" in lower
-                and ("barcode" in normalized or "qrcode" in normalized)
-                and "--raw" in lower
-            ):
-                candidates.append((len(text),path,text))
+            role_score=0
+            if any(w in lower for w in ("decode","read","scan")):
+                role_score+=4
+            if any(w in lower for w in ("image","png","barcode","matrix","code")):
+                role_score+=3
+            if any(w in lower for w in ("stdout","standard output","print")):
+                role_score+=2
+            if "encode" in lower or "write barcode" in lower:
+                role_score-=4
+            if role_score<5:
+                continue
+
+            # Explicit raw-output decoder contract, e.g. zbarimg.
+            if "--raw" in lower:
+                argv=[path]
+                if "--quiet" in lower:
+                    argv.append("--quiet")
+                argv.extend(["--raw","__OUTPUT_PATH__"])
+                candidates.append((role_score,2,len(text),path,text,argv,"RAW_FLAG"))
+                continue
+
+            # Generic positional input contract. Accept only when observed
+            # usage/help declares a file/image positional operand and no
+            # separate required output-file option is evident.
+            usage_lines=[
+                line.strip() for line in text.splitlines()
+                if line.strip().lower().startswith(("usage:","usage "))
+            ]
+            positional_declared=any(
+                re.search(r"(?:\[|<)?(?:file|image|filename|input)(?:\]|>)?",line,re.I)
+                for line in usage_lines
+            )
+            writes_stdout=(
+                any(w in lower for w in ("stdout","standard output"))
+                or any(w in lower for w in ("decode","read","scan"))
+            )
+            if positional_declared and writes_stdout:
+                argv=[path]
+                raw_flag=None
+                for line in text.splitlines():
+                    low=line.lower()
+                    if "stdout" not in low:
+                        continue
+                    if not (
+                        ("bytes" in low and "content" in low)
+                        or ("raw" in low and "content" in low)
+                    ):
+                        continue
+                    m=re.match(r"\s*(-[^\s,=]+)",line)
+                    if m:
+                        token=m.group(1)
+                        if token not in {"-h","--help"}:
+                            raw_flag=token
+                            break
+                if raw_flag:
+                    argv.append(raw_flag)
+                argv.append("__OUTPUT_PATH__")
+                candidates.append((role_score,1,len(text),path,text,argv,"POSITIONAL_FILE_TO_STDOUT"))
+
     if not candidates:
         return None
     candidates.sort(reverse=True)
-    _,path,text=candidates[0]
-    return {"executable":path,"help_excerpt":text[:4000],"argv":[path,"--quiet","--raw","__OUTPUT_PATH__"]}
+    _,_,_,path,text,argv,basis=candidates[0]
+    return {
+      "executable":path,
+      "help_excerpt":text[:4000],
+      "argv":argv,
+      "inference_basis":basis
+    }
 
 
 def _acquire_and_run_semantic_verifier(pending, output_path):
@@ -61,11 +607,28 @@ def _acquire_and_run_semantic_verifier(pending, output_path):
     if not expected:
         raise RuntimeError("SEMANTIC_EXPECTED_TEXT_REQUIRED")
     goal=str(semantic.get("goal") or pending.get("goal") or "")
-    query=_semantic_verifier_query(goal)
-    discovery=capability_discovery.search_apt_packages(query,limit=24)
+    query=_semantic_verifier_query(goal,expected)
+    discovery=_merge_verifier_discovery(goal,expected_text=expected,limit_per_query=24)
     producer=str((pending.get("selected_supplier") or {}).get("name") or "")
+    hinted=[]
+    for raw in semantic.get("verifier_package_hints") or []:
+        name=raw.get("name") if isinstance(raw,dict) else raw
+        cand=_resolve_apt_candidate_name(name)
+        if cand is not None and cand.get("name")!=producer:
+            hinted.append(cand)
+    candidates=[]
+    seen=set()
+    # Autonomous role-conditioned discovery is authoritative. Explicit hints
+    # remain only as a final diagnostic fallback and are never required for
+    # the normal acceptance path.
+    for cand in (discovery.get("candidates",[]) or [])+hinted:
+        name=str(cand.get("name") or "")
+        if not name or name in seen:
+            continue
+        seen.add(name)
+        candidates.append(cand)
     attempts=[]
-    for cand in discovery.get("candidates",[]):
+    for cand in candidates[:24]:
         name=str(cand.get("name") or "")
         if not name or name==producer:
             continue
@@ -73,7 +636,16 @@ def _acquire_and_run_semantic_verifier(pending, output_path):
             continue
         if int(cand.get("integration_friction",99))!=0:
             continue
-        if len(cand.get("matched_terms") or [])<2:
+        externally_hinted=(cand.get("discovery_source")=="EXTERNAL_SEMANTIC_PACKAGE_HINT")
+        family_supported=(
+            cand.get("verifier_discovery_stage")=="PACKAGE_FAMILY_EXPANSION"
+            and int(cand.get("verifier_family_semantic_support_terms") or 0)>=1
+        )
+        if (
+            not externally_hinted
+            and not family_supported
+            and len(cand.get("matched_terms") or [])<2
+        ):
             continue
         version=str(cand.get("version") or "")
         sha=str(cand.get("archive_sha256") or "").lower()
@@ -88,17 +660,37 @@ def _acquire_and_run_semantic_verifier(pending, output_path):
                 attempt["status"]="VERIFIER_CONTRACT_REJECTED"
                 attempts.append(attempt)
                 continue
-            argv=[output_path if x=="__OUTPUT_PATH__" else x for x in contract["argv"]]
-            proc=subprocess.run(argv,text=True,capture_output=True,timeout=60,cwd=ROOT)
-            observed=proc.stdout.strip()
             attempt["contract"]=contract
-            attempt["returncode"]=proc.returncode
-            attempt["stdout"]=proc.stdout[-4000:]
-            attempt["stderr"]=proc.stderr[-4000:]
-            if proc.returncode!=0:
+            attempt["execution_variants"]=[]
+            proc=None
+            observed=""
+            for variant in _semantic_execution_variants(contract,output_path):
+                current=subprocess.run(
+                    variant["argv"],text=True,capture_output=True,timeout=60,cwd=ROOT
+                )
+                record={
+                  **variant,
+                  "returncode":current.returncode,
+                  "stdout":current.stdout[-4000:],
+                  "stderr":current.stderr[-4000:],
+                }
+                attempt["execution_variants"].append(record)
+                if current.returncode==0:
+                    proc=current
+                    observed=current.stdout.strip()
+                    attempt["selected_execution_variant"]=record
+                    break
+            if proc is None:
+                last=attempt["execution_variants"][-1] if attempt["execution_variants"] else {}
+                attempt["returncode"]=last.get("returncode")
+                attempt["stdout"]=last.get("stdout")
+                attempt["stderr"]=last.get("stderr")
                 attempt["status"]="VERIFIER_EXECUTION_FAILED"
                 attempts.append(attempt)
                 continue
+            attempt["returncode"]=proc.returncode
+            attempt["stdout"]=proc.stdout[-4000:]
+            attempt["stderr"]=proc.stderr[-4000:]
             verified=observed==expected
             evidence={
               "verified":verified,
@@ -109,23 +701,41 @@ def _acquire_and_run_semantic_verifier(pending, output_path):
               "verifier_archive_sha256":sha,
               "verifier_executable":contract["executable"],
               "query":query,
+              "autonomous_discovery_queries":discovery.get("queries",[]),
               "producer_package":producer,
               "producer_independent":name!=producer,
               "attempt_count":len(attempts)+1
             }
             attempt["status"]="VERIFIED" if verified else "SEMANTIC_CONTENT_MISMATCH"
+            attempt["observed_text"]=observed
             attempts.append(attempt)
-            evidence["attempts"]=attempts
-            return evidence
+            if verified:
+                evidence["attempts"]=attempts
+                return evidence
+            # A syntactically executable verifier is not enough. Continue the
+            # route race until one independently observes the exact semantic
+            # effect or every candidate is falsified.
+            continue
         except Exception as exc:
             attempt["status"]="VERIFIER_PROBE_FAILED"
             attempt["error"]=type(exc).__name__+":"+str(exc)
             attempts.append(attempt)
             continue
     raise RuntimeError("SEMANTIC_VERIFIER_ACQUISITION_FAILED:"+json.dumps([
-        {"name":(a.get("candidate") or {}).get("name"),"status":a.get("status"),"error":a.get("error")}
+        {
+          "name":(a.get("candidate") or {}).get("name"),
+          "status":a.get("status"),
+          "error":a.get("error"),
+          "argv":(a.get("contract") or {}).get("argv"),
+          "returncode":a.get("returncode"),
+          "stdout":a.get("stdout"),
+          "stderr":a.get("stderr"),
+          "inference_basis":(a.get("contract") or {}).get("inference_basis"),
+          "execution_variants":a.get("execution_variants"),
+          "selected_execution_variant":a.get("selected_execution_variant"),
+        }
         for a in attempts
-    ],sort_keys=True)[:3000])
+    ],sort_keys=True,default=str)[:20000])
 
 
 def _resolve_callable(module,name):
