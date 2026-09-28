@@ -173,11 +173,26 @@ def _merge_verifier_discovery(goal, limit_per_query=40):
     # Expand only a few high-signal families. Libraries and bindings are useful
     # discovery evidence even when they are not themselves executable verifiers.
     families=[]
+    family_support={}
     for cand in sorted(
         seed_candidates,
         key=lambda x:(-float(x.get("score",0)),str(x.get("name","")))
     )[:16]:
+        semantic_support=len(cand.get("matched_terms") or [])
         for token in _package_family_tokens(cand.get("name")):
+            prior=family_support.get(token)
+            record={
+              "parent_package":str(cand.get("name") or ""),
+              "semantic_support_terms":semantic_support,
+              "parent_matched_terms":list(cand.get("matched_terms") or []),
+              "parent_score":float(cand.get("score",0)),
+            }
+            if prior is None or (
+                record["semantic_support_terms"],record["parent_score"]
+            ) > (
+                prior["semantic_support_terms"],prior["parent_score"]
+            ):
+                family_support[token]=record
             if token not in families:
                 families.append(token)
             if len(families)>=6:
@@ -194,7 +209,16 @@ def _merge_verifier_discovery(goal, limit_per_query=40):
           "errors":result.get("errors",[]),
         })
         for cand in result.get("candidates",[]) or []:
-            add(cand,"PACKAGE_FAMILY_EXPANSION",family)
+            enriched=dict(cand)
+            support=family_support.get(family) or {}
+            enriched["verifier_family_parent_package"]=support.get("parent_package")
+            enriched["verifier_family_semantic_support_terms"]=int(
+                support.get("semantic_support_terms") or 0
+            )
+            enriched["verifier_family_parent_matched_terms"]=list(
+                support.get("parent_matched_terms") or []
+            )
+            add(enriched,"PACKAGE_FAMILY_EXPANSION",family)
 
     candidates=sorted(
         merged.values(),
@@ -429,7 +453,7 @@ def _acquire_and_run_semantic_verifier(pending, output_path):
         seen.add(name)
         candidates.append(cand)
     attempts=[]
-    for cand in candidates:
+    for cand in candidates[:24]:
         name=str(cand.get("name") or "")
         if not name or name==producer:
             continue
@@ -438,7 +462,15 @@ def _acquire_and_run_semantic_verifier(pending, output_path):
         if int(cand.get("integration_friction",99))!=0:
             continue
         externally_hinted=(cand.get("discovery_source")=="EXTERNAL_SEMANTIC_PACKAGE_HINT")
-        if not externally_hinted and len(cand.get("matched_terms") or [])<2:
+        family_supported=(
+            cand.get("verifier_discovery_stage")=="PACKAGE_FAMILY_EXPANSION"
+            and int(cand.get("verifier_family_semantic_support_terms") or 0)>=1
+        )
+        if (
+            not externally_hinted
+            and not family_supported
+            and len(cand.get("matched_terms") or [])<2
+        ):
             continue
         version=str(cand.get("version") or "")
         sha=str(cand.get("archive_sha256") or "").lower()
