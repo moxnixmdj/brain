@@ -48,5 +48,7 @@ jobs:
             canonical/astra_runtime/pending_bindings/OBSOLESCENCE-TOOL-LEARNING-DATAMATRIX-001__*.json
             canonical/astra_runtime/evidence/ASTRA-AUTO-VERIFY-DMTX-UTILS-*.json
             canonical/astra_runtime/state/ASTRA-AUTO-VERIFY-DMTX-UTILS-*.json
+            canonical/astra_runtime/evidence/ASTRA-AUTO-VERIFY-IEC16022-*.json
+            canonical/astra_runtime/state/ASTRA-AUTO-VERIFY-IEC16022-*.json
             canonical/astra_runtime/tmp/PROJECT_BRAIN_DATAMATRIX.png
           if-no-files-found: warn
