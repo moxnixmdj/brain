@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_GENERIC_REPAIR_REPLAY_V1",
+  "replay_id": "ORTHO-CONTRACT-IR-REPLAY-001",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "repair_basis": "GENERIC_CONTRACT_INFERENCE_SHAPE_RECURRED_IN_2_OF_3_ORTHOGONAL_PROBES",
+  "evidence_basis": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_ORTHOGONAL_PORTFOLIO_001_RECONCILIATION.json",
+  "repair_scope": "GENERIC_CLI_IO_CONTRACT_IR_ONLY",
+  "forbidden": [
+    "TASK_SPECIFIC_SQLITE_LOGIC",
+    "TASK_SPECIFIC_XML_LOGIC",
+    "GZIP_REPAIR",
+    "SECOND_RUNTIME_REPAIR_BEFORE_RECONCILIATION"
+  ],
+  "replays": [
+    {
+      "probe_id": "ORTHO-SQLITE-001",
+      "mission_path": "canonical/astra_runtime/missions/ORTHO_SQLITE_001.json"
+    },
+    {
+      "probe_id": "ORTHO-XML-001",
+      "mission_path": "canonical/astra_runtime/missions/ORTHO_XML_001.json"
+    }
+  ],
+  "max_replays_per_probe": 1,
+  "promotion_authorized": false,
+  "terminal_rule": "RECONCILE_AFTER_BOTH_REPLAYS_REGARDLESS_OF_OUTCOME"
+}
