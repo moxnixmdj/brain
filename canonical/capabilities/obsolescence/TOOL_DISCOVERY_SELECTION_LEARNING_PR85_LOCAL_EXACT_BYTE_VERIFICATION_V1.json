@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_PR85_LOCAL_EXACT_BYTE_VERIFICATION_V1",
+  "status": "PASS_SAME_CONTROLLER_REGRESSION_ONLY__NOT_PROMOTION",
+  "verified_on": "2026-09-28",
+  "execution_surface": "CHATGPT_SESSION_LINUX_PRIVATE_CONTAINER",
+  "environment": {
+    "os": "Linux x86_64",
+    "kernel": "6.18.44",
+    "python": "3.13.5"
+  },
+  "exact_git_blobs": {
+    "canonical/runtime/capability_discovery.py": {
+      "git_blob_sha1": "eddddaa84dacda5d679c22d34f101aeb1d431678",
+      "sha256": "40bb62bf05ed315356f428f6c6d7ed2aaef788d6b8c715cf4c833106b46d07d0"
+    },
+    "canonical/tests/test_batched_executable_evidence_acquisition.py": {
+      "git_blob_sha1": "a7d335e0dba71ea04ede6a6137f129c9d382a421",
+      "sha256": "8c3634ce28b88d1494cb23d24b654f39045c10b110ced91e15b9186af088dba3"
+    },
+    "canonical/experiments/run_batched_executable_evidence_fresh_validation_001.py": {
+      "git_blob_sha1": "a5c32e63916b6f5940dd02ffd78c60d90644ab7b",
+      "sha256": "da59add8a6ddaff4e97271a7ae7e4b77dfd22827a432b0ca4af502f5fb2b14c1"
+    },
+    "canonical/experiments/BATCHED_EXECUTABLE_EVIDENCE_FRESH_VALIDATION_001.json": {
+      "git_blob_sha1": "d29bc8b64cd13c9074b4d35d86b46e52607aca0c",
+      "sha256": "f8dd361e5134c51f70908b7c3735973624ca5da3636d62098ca32699a977d4e6"
+    }
+  },
+  "verification": [
+    {
+      "check": "python_compile_runtime",
+      "result": "PASS"
+    },
+    {
+      "check": "python_compile_regression_tests",
+      "result": "PASS"
+    },
+    {
+      "check": "python_compile_frozen_gate_runner",
+      "result": "PASS"
+    },
+    {
+      "check": "parse_frozen_gate_spec",
+      "result": "PASS",
+      "cases": 3,
+      "hard_validation_wall_s": 600
+    },
+    {
+      "check": "test_local_acquisition_uses_one_literal_from_file_scan",
+      "result": "PASS"
+    },
+    {
+      "check": "test_direct_executable_evidence_beats_large_lexical_score",
+      "result": "PASS"
+    },
+    {
+      "check": "test_manpage_enrichment_fanout_is_bounded",
+      "result": "PASS"
+    }
+  ],
+  "unit_test_summary": {
+    "run": 3,
+    "passed": 3,
+    "failed": 0,
+    "wall_s": 0.009
+  },
+  "transfer_integrity": "ALL_MATERIALIZED_GIT_BLOB_SHA1_VALUES_MATCHED_GITHUB_BEFORE_EXECUTION",
+  "explicitly_unproven": [
+    "apt-file behavior against a live Ubuntu Contents cache on exact branch bytes",
+    "frozen fresh unseen oracle-family recall",
+    "frozen fresh unseen top20 recall",
+    "frozen fresh unseen wall-clock <= 600 seconds"
+  ],
+  "promotion_authorized": false,
+  "required_next_action": "RUN_FROZEN_FRESH_UNSEEN_GATE_ON_RELIABLE_ZERO_COST_UBUNTU_APT_FILE_SURFACE__THEN_RECONCILE"
+}
