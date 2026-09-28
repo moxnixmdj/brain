@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_EXECUTABLE_CANDIDATE_DIAGNOSTIC_V1",
+  "diagnostic_id": "EXECUTABLE-CANDIDATE-DIAGNOSTIC-001",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "status": "FROZEN_READY",
+  "mutation_policy": "NO_RUNTIME_MUTATION__NO_PACKAGE_INSTALLATION__NO_CANDIDATE_EXECUTION",
+  "inherited_route_check_required": true,
+  "metrics": [
+    "INHERITED_ROUTE_TOP_MATCH_AND_RANK",
+    "KNOWN_VIABLE_SUPPLIER_RECALL_AT_1_3_5_10_20",
+    "FIRST_KNOWN_VIABLE_SUPPLIER_RANK",
+    "TOP_K_EXECUTABLE_ROLE_PRECISION",
+    "SUPPLIER_SOURCE_DISTRIBUTION",
+    "LIBRARY_DOC_BINDING_NOISE_RATE"
+  ],
+  "evaluation_oracles_are_scoring_only": true,
+  "evaluation_oracles_must_not_enter_search_queries": true,
+  "probes": [
+    {
+      "id": "DISCOVERY-SQLITE-001",
+      "domain": "STRUCTURED_DATABASE_STATE",
+      "goal": "Create a SQLite database at canonical/astra_runtime/tmp/DIAG_SQLITE.sqlite containing a table named probe with two rows alpha=7 and beta=11.",
+      "inherited_oracle_capabilities": [
+        "sqlite.table.create_from_json_records"
+      ],
+      "external_oracle_names": [
+        "sqlite3"
+      ]
+    },
+    {
+      "id": "DISCOVERY-GZIP-001",
+      "domain": "ARCHIVE_COMPRESSION",
+      "goal": "Create a gzip-compressed file at canonical/astra_runtime/tmp/DIAG_GZIP.gz whose decompressed UTF-8 content is exactly PROJECT BRAIN DIAGNOSTIC.",
+      "inherited_oracle_capabilities": [],
+      "external_oracle_names": [
+        "gzip"
+      ]
+    },
+    {
+      "id": "DISCOVERY-IMAGE-RESIZE-001",
+      "domain": "IMAGE_PROCESSING",
+      "goal": "Resize a PNG image to exactly 64 by 64 pixels and save the result at canonical/astra_runtime/tmp/DIAG_RESIZED.png.",
+      "inherited_oracle_capabilities": [],
+      "external_oracle_names": [
+        "imagemagick",
+        "graphicsmagick",
+        "graphicsmagick-imagemagick-compat"
+      ]
+    },
+    {
+      "id": "DISCOVERY-GRAPH-RENDER-001",
+      "domain": "GRAPH_RENDERING",
+      "goal": "Render a Graphviz DOT graph into a PNG image at canonical/astra_runtime/tmp/DIAG_GRAPH.png.",
+      "inherited_oracle_capabilities": [],
+      "external_oracle_names": [
+        "graphviz"
+      ]
+    }
+  ],
+  "promotion_authorized": false,
+  "required_next_action": "RECONCILE_ONLY"
+}
