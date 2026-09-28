@@ -70,11 +70,13 @@ def _resolve_apt_candidate_name(name):
         return None
 
 
-def _semantic_verifier_terms(goal):
-    """Return bounded verifier-role terms derived only from the target effect."""
+def _semantic_verifier_terms(goal, expected_text=""):
+    """Return target-effect terms while excluding payload/content tokens."""
+    payload_tokens=set(capability_discovery.effect_queries(expected_text or ""))
     raw=[
         t for t in capability_discovery.effect_queries(goal)
         if t not in capability_discovery.GENERIC_DISCOVERY_TOKENS
+        and t not in payload_tokens
         and not t.isdigit()
     ]
     producer_words={
@@ -87,9 +89,9 @@ def _semantic_verifier_terms(goal):
     return distinctive[:4]
 
 
-def _semantic_verifier_queries(goal):
-    """Compatibility/evidence view of the bounded role-conditioned search."""
-    nouns=_semantic_verifier_terms(goal)
+def _semantic_verifier_queries(goal, expected_text=""):
+    """Compatibility/evidence view of the bounded verifier search."""
+    nouns=_semantic_verifier_terms(goal,expected_text)
     joined=" ".join(nouns)
     out=[]
     for role in ("decode","read","scan","verify"):
@@ -99,8 +101,8 @@ def _semantic_verifier_queries(goal):
     return out
 
 
-def _semantic_verifier_query(goal):
-    queries=_semantic_verifier_queries(goal)
+def _semantic_verifier_query(goal, expected_text=""):
+    queries=_semantic_verifier_queries(goal,expected_text)
     return queries[0] if queries else "decode image"
 
 
@@ -132,7 +134,7 @@ def _package_family_tokens(name):
     return out[:3]
 
 
-def _merge_verifier_discovery(goal, limit_per_query=40):
+def _merge_verifier_discovery(goal, expected_text="", limit_per_query=40):
     """Search once by semantic roles, then cheaply widen through package families.
 
     The previous implementation reran a full APT search/enrichment cycle for
@@ -141,11 +143,17 @@ def _merge_verifier_discovery(goal, limit_per_query=40):
     strongest metadata hits to discover sibling packages in the same ecosystem
     family.
     """
-    nouns=_semantic_verifier_terms(goal)
-    seed_effect=" ".join(["decode","read","scan","verify"]+nouns)
+    nouns=_semantic_verifier_terms(goal,expected_text)
+    seed_effect=" ".join(nouns).strip()
     seed=capability_discovery.search_apt_packages(
         seed_effect,limit=max(24,min(int(limit_per_query),50))
-    )
+    ) if seed_effect else {"candidate_count":0,"candidates":[],"errors":[]}
+    if not (seed.get("candidates") or []):
+        fallback_effect=" ".join(["decode","read","scan","verify"]+nouns).strip()
+        seed=capability_discovery.search_apt_packages(
+            fallback_effect,limit=max(24,min(int(limit_per_query),50))
+        )
+        seed_effect=fallback_effect
     merged={}
     searches=[{
       "stage":"SEMANTIC_ROLE_SCAN",
@@ -432,8 +440,8 @@ def _acquire_and_run_semantic_verifier(pending, output_path):
     if not expected:
         raise RuntimeError("SEMANTIC_EXPECTED_TEXT_REQUIRED")
     goal=str(semantic.get("goal") or pending.get("goal") or "")
-    query=_semantic_verifier_query(goal)
-    discovery=_merge_verifier_discovery(goal,limit_per_query=24)
+    query=_semantic_verifier_query(goal,expected)
+    discovery=_merge_verifier_discovery(goal,expected_text=expected,limit_per_query=24)
     producer=str((pending.get("selected_supplier") or {}).get("name") or "")
     hinted=[]
     for raw in semantic.get("verifier_package_hints") or []:
