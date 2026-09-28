@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_OBSOLESCENCE_RECORD_V1",
+  "capability_id": "EXACT_SYMBOLIC_COMPUTATION_V1",
+  "parent_family": "TECHNICAL_SCIENTIFIC_REASONING",
+  "scope": "Bounded exact symbolic computation: exact rational arithmetic, polynomial factorization/coefficient extraction, algebraic roots, symbolic differentiation, exact definite integration, exact determinant, finite combinatorial sum, exact limit, rational linear system, and series coefficient.",
+  "selection_reason": "First V4 cycle chosen for maximum proof velocity: exact ground truth gives a hard 100% capability ceiling, a deterministic zero-dollar supplier exists, and success establishes the full obsolescence machinery without subjective frontier-model judging.",
+  "frontier_bar": {
+    "type": "THEORETICAL_CAPABILITY_CEILING",
+    "value": "100_PERCENT_EXACT_CORRECTNESS_ON_FROZEN_SUITE",
+    "rationale": "For tasks with unique exact mathematical ground truth, no system can exceed 100% exact correctness. Reaching 100% therefore reaches the frontier ceiling for the bounded task class.",
+    "external_frontier_context": [
+      {
+        "system": "Claude Opus 5.5",
+        "source": "https://www.anthropic.com/claude-opus-5-5",
+        "note": "Frontier model advertised for multidisciplinary reasoning and tool use; not used as ground-truth producer."
+      },
+      {
+        "system": "GPT-5.6 Sol",
+        "source": "https://openai.com/index/gpt-5-6/",
+        "note": "Frontier reasoning model with reported math/science benchmarks; not used as ground-truth producer."
+      }
+    ]
+  },
+  "candidate_routes": [
+    {
+      "route": "SymPy 1.14.0 local deterministic CAS",
+      "status": "SELECTED_PRODUCER",
+      "incremental_spend_usd": 0
+    },
+    {
+      "route": "Wolfram Language",
+      "status": "INDEPENDENT_EXPECTED_RESULT_SUPPLIER",
+      "incremental_spend_usd": 0
+    },
+    {
+      "route": "frontier model internal math reasoning",
+      "status": "REFERENCE_IMPLEMENTATION_NOT_REQUIRED_IF_CEILING_REACHED"
+    }
+  ],
+  "suite_path": "canonical/obsolescence/suites/EXACT_SYMBOLIC_COMPUTATION_SUITE_V1.json",
+  "runner_path": "canonical/obsolescence/run_exact_symbolic_v1.py",
+  "workflow_path": ".github/workflows/obsolescence-exact-symbolic-v1.yml",
+  "status": "OBSOLESCENCE_TEST_RUNNING",
+  "promotion_rule": "Promote to OBSOLETE_VERIFIED only if the frozen suite passes 12/12 exactly at $0 and independent Wolfram expected values are consistent with the producer outputs. Scope must remain bounded to the tested exact-symbolic operation classes.",
+  "anti_overclaim": "This record does not claim that mathematical reasoning, scientific reasoning, theorem proving, word-problem reasoning, or all symbolic mathematics are obsolete."
+}
