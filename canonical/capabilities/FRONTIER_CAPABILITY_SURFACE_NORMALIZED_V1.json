@@ -1,0 +1,127 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_SURFACE_NORMALIZED_V1",
+  "observed_on": "2026-09-28",
+  "purpose": "Normalize current frontier-model capability evidence into real effect classes for obsolescence. This is not an implementation checklist.",
+  "sources": [
+    {
+      "system": "Claude Opus 5.5",
+      "url": "https://www.anthropic.com/claude-opus-5-5",
+      "official_claims_used": [
+        "agentic coding",
+        "complex multi-tool agents",
+        "professional knowledge work",
+        "financial analysis",
+        "vision and computer use",
+        "long-running autonomous work",
+        "memory across sessions",
+        "planning and subagent coordination"
+      ],
+      "reported_bars": {
+        "Terminal-Bench 4.0": "66.4%",
+        "FrontierCode v1.1 Main": "54.4%",
+        "GDPval-AA v2.1": "1846",
+        "AutomationBench": "40.0%",
+        "Humanity's Last Exam with tools": "67.7%",
+        "Terminal-Bench-Science 0.1": "58.7%",
+        "OSWorld 2.0 partial": "81.8%",
+        "Chartography with tools": "89.0%"
+      }
+    },
+    {
+      "system": "GPT-5.6 Sol",
+      "url": "https://openai.com/index/gpt-5-6/",
+      "official_claims_used": [
+        "coding",
+        "knowledge work",
+        "science",
+        "tool use",
+        "multimodal reasoning",
+        "long context",
+        "abstract reasoning",
+        "multi-agent parallel work"
+      ],
+      "reported_bars": {
+        "GPQA Diamond": "94.6%",
+        "FrontierMath Tier 1-3 v2": "89%",
+        "FrontierMath Tier 4 v2": "83%",
+        "Toolathlon": "58%",
+        "MRCR v2 8-needle 256K-512K": "91.5%",
+        "ARC-AGI-3": "7.78%"
+      }
+    }
+  ],
+  "normalized_effect_classes": [
+    {
+      "id": "EXACT_AND_FORMAL_COMPUTATION",
+      "real_effect": "Produce objectively exact mathematical/computational results when a formal solver or deterministic algorithm can define ground truth.",
+      "status": "ACTIVE_OBSOLESCENCE_CYCLE",
+      "first_subcapability": "EXACT_SYMBOLIC_COMPUTATION_V1"
+    },
+    {
+      "id": "GENERAL_TECHNICAL_REASONING",
+      "real_effect": "Solve difficult unfamiliar math/science/technical problems where the path is not already reducible to one known deterministic operator.",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "SOFTWARE_ENGINEERING",
+      "real_effect": "Diagnose and change unfamiliar software systems end-to-end, including root cause, implementation, tests, and regression control.",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "RESEARCH_AND_EVIDENCE_SYNTHESIS",
+      "real_effect": "Turn an underspecified question into current, source-grounded, decision-useful conclusions with provenance and contradiction handling.",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "real_effect": "Recognize a missing capability, discover candidate tools, learn their contracts, choose the best route, and use it correctly.",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "MULTI_TOOL_ORCHESTRATION_AND_PLANNING",
+      "real_effect": "Coordinate dependent tools/subtasks across long horizons while preserving state, scope, and causal ordering.",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "COMPUTER_AND_BROWSER_OPERATION",
+      "real_effect": "Perceive and act through rendered interfaces and arbitrary applications when structured APIs are insufficient.",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "VISION_DOCUMENT_AND_CHART_REASONING",
+      "real_effect": "Extract, relate, and reason over dense screenshots, documents, charts, diagrams, and mixed visual/text artifacts.",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "LONG_CONTEXT_AND_EXTERNAL_MEMORY_USE",
+      "real_effect": "Recover the right facts/state from very large histories or stores and apply them correctly without losing causal context.",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "LONG_HORIZON_AUTONOMY_AND_RECOVERY",
+      "real_effect": "Continue consequential work for long periods across interruption/failure while preserving identity, goals, evidence, and progress.",
+      "status": "PARTIALLY_PROVEN_BY_SUPERWORKER_UNIFIED_1__NOT_FRONTIER_OBSOLESCENCE_VERIFIED"
+    },
+    {
+      "id": "JUDGMENT_SCOPE_AND_AMBIGUITY",
+      "real_effect": "Interpret underspecified goals, stay within scope, notice material ambiguity, and request human input only when necessary.",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "SELF_CRITIQUE_FALSIFICATION_AND_VERIFICATION",
+      "real_effect": "Detect likely errors, construct independent checks, falsify hypotheses, and verify actual external outcomes.",
+      "status": "PARTIALLY_PROVEN_AS_ARCHITECTURAL_MECHANISM__NOT_FRONTIER_OBSOLESCENCE_VERIFIED"
+    },
+    {
+      "id": "BUSINESS_AND_PROFESSIONAL_ARTIFACT_WORK",
+      "real_effect": "Produce correct, usable spreadsheets, documents, presentations, analyses, and workflow outputs under professional constraints.",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "ABSTRACT_NOVEL_PROBLEM_SOLVING",
+      "real_effect": "Infer structure and solve unfamiliar tasks where no known domain procedure or direct tool mapping is given.",
+      "status": "UNMAPPED"
+    }
+  ],
+  "anti_claim": "Presence in this surface means the behavior is a frontier-obsolescence target. It does not imply that Project Brain lacks it completely or that a named frontier model uniquely owns it."
+}

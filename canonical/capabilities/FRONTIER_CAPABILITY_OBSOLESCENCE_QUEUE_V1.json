@@ -69,9 +69,25 @@
     "REOPENED_BY_REGRESSION"
   ],
   "immediate_frontier": {
-    "objective": "Recover and normalize the strongest existing Astra/frontier capability evidence, select the highest-leverage capability, establish its real frontier bar, and complete one end-to-end obsolescence cycle.",
-    "selection_metric": "VERIFIED_CAPABILITY_GAIN_TIMES_OBSOLESCENCE_LEVERAGE_PER_WALL_CLOCK_TIME",
-    "prohibition": "DO_NOT_TREAT_CAPABILITY_BREADTH_ACCUMULATION_OR_PARITY_CHECKLIST_COMPLETION_AS_THE_TERMINAL_GOAL"
+    "objective": "Obsolete TOOL_DISCOVERY_SELECTION_AND_LEARNING as the first multiplier capability: given an unfamiliar required effect, discover serious candidate implementations, learn their invocation contracts, select the fastest/cheapest route that can meet the capability bar, execute a real task, and verify the outcome.",
+    "selection_metric": "CROSS_CAPABILITY_MULTIPLIER_TIMES_EXPECTED_OBSOLESCENCE_GAIN_PER_WALL_CLOCK_TIME",
+    "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "rationale": "This capability is upstream of most remaining obsolescence work. Improving it accelerates software engineering, research, computer use, scientific reasoning, artifact production, and future capability acquisition.",
+    "prohibition": "DO_NOT_REPLACE_THIS_WITH_A_STATIC_TOOL_LIST_OR_MODEL-ONLY_ROUTER"
   },
-  "promotion_claim": false
+  "promotion_claim": false,
+  "completed_obsolescence_records": [
+    {
+      "capability_id": "EXACT_SYMBOLIC_COMPUTATION_V1",
+      "parent_family": "TECHNICAL_SCIENTIFIC_REASONING",
+      "status": "OBSOLETE_VERIFIED",
+      "adjudication_path": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json",
+      "scope": "BOUNDED_EXACT_SYMBOLIC_OPERATION_CLASSES",
+      "exact_correctness": 1,
+      "producer": "SymPy 1.14.0",
+      "independent_verifier": "Wolfram Language",
+      "capability_route_process_wall_s": 0.59,
+      "incremental_spend_usd": 0
+    }
+  ]
 }

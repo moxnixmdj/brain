@@ -134,11 +134,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "RECOVER_AND_NORMALIZE_FRONTIER_CAPABILITY_SURFACE__CONVERT_TO_OBSOLESCENCE_QUEUE__SELECT_HIGHEST_LEVERAGE_CAPABILITY__ESTABLISH_REAL_FRONTIER_BAR__RACE_FASTEST_CHEAPEST_GREATER_THAN_OR_EQUAL_ROUTES__VERIFY__INHERIT__REPEAT",
+    "next_step": "OBSOLETE_TOOL_DISCOVERY_SELECTION_AND_LEARNING__FREEZE_REAL_UNFAMILIAR_EFFECT__DISCOVER_CANDIDATE_IMPLEMENTATIONS__LEARN_CONTRACTS__RACE_ROUTES__EXECUTE__INDEPENDENTLY_VERIFY__INHERIT",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "FIRST_END_TO_END_FRONTIER_CAPABILITY_OBSOLESCENCE_CYCLE_NOT_YET_COMPLETED_UNDER_V4",
+    "critical_blocker": "GENERAL_TOOL_DISCOVERY_SELECTION_AND_LEARNING_NOT_YET_OBSOLETED_TO_FRONTIER_BAR",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -215,7 +215,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "SELECT_AND_OBSOLETE_THE_HIGHEST_LEVERAGE_FRONTIER_CAPABILITY_USING_EQUAL_OR_BETTER_REAL_CAPABILITY_WITH_MINIMUM_WALL_CLOCK_AND_COST",
+    "highest_leverage_capability_gap": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -275,7 +275,15 @@
     "active_research_side": "CAPABILITIES",
     "obsolescence_definition": "VERIFIED_EQUAL_OR_BETTER_USEFUL_CAPABILITY_VIA_A_FASTEST_CHEAPEST_REALIZABLE_ROUTE_MAKES_THE_FRONTIER_IMPLEMENTATION_UNNECESSARY_FOR_PROJECT_BRAIN",
     "capability_obsolescence_strategy_path": "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V2.md",
-    "capability_obsolescence_queue_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json"
+    "capability_obsolescence_queue_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
+    "first_v4_obsolescence_win": {
+      "capability_id": "EXACT_SYMBOLIC_COMPUTATION_V1",
+      "status": "OBSOLETE_VERIFIED",
+      "adjudication_path": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json",
+      "exact_correctness": 1,
+      "process_wall_s": 0.59,
+      "incremental_spend_usd": 0
+    }
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",

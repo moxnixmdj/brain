@@ -1,0 +1,38 @@
+name: Obsolescence Exact Symbolic V1
+
+on:
+  push:
+    branches:
+      - research/obsolescence-exact-symbolic-v1-20260928
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-symbolic-obsolescence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install frozen capability supplier
+        run: python -m pip install --disable-pip-version-check 'sympy==1.14.0'
+      - name: Execute frozen exact-symbolic suite
+        run: |
+          /usr/bin/time -f 'CAPABILITY_ROUTE_PROCESS_WALL_S=%e' \
+            python canonical/obsolescence/run_exact_symbolic_v1.py \
+              --suite canonical/obsolescence/suites/EXACT_SYMBOLIC_COMPUTATION_SUITE_V1.json \
+              --report /tmp/exact-symbolic-report.json
+      - name: Upload proof report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: exact-symbolic-obsolescence-report
+          path: /tmp/exact-symbolic-report.json
+          if-no-files-found: error
