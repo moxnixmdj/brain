@@ -95,6 +95,28 @@ def _png_dimensions(path):
         return None
 
 
+def _help_symbol_size_candidates(contract, output_path):
+    text=str(contract.get("help_excerpt") or "")
+    if "symbol-size" not in text.lower():
+        return []
+    if "row" not in text.lower() or "column" not in text.lower():
+        return []
+    flag=None
+    for line in text.splitlines():
+        m=re.match(r"\s*(-[A-Za-z0-9]),\s*--symbol-size",line,re.I)
+        if m:
+            flag=m.group(1)
+            break
+    dims=_png_dimensions(output_path)
+    if not flag or dims is None:
+        return []
+    width,height=dims
+    return [
+      {"flag":flag,"value":f"{height}x{width}"},
+      {"flag":flag,"value":f"{width}x{height}"},
+    ]
+
+
 def _semantic_execution_variants(contract, output_path):
     """Build bounded execution variants only from options declared in help."""
     base=[output_path if x=="__OUTPUT_PATH__" else x for x in contract["argv"]]
