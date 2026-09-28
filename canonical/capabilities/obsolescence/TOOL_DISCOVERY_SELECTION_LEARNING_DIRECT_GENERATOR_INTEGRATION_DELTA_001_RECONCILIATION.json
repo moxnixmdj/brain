@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_DIRECT_GENERATOR_INTEGRATION_DELTA_RECONCILIATION_V1",
+  "status": "COMPLETE_RECONCILED_PENDING_MERGE",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "diagnostic_id": "DIRECT-GENERATOR-INTEGRATION-DELTA-DIAGNOSTIC-001",
+  "workflow_run_id": 36474588105,
+  "artifact": {
+    "id": 10992813288,
+    "digest": "sha256:62067bfbc6e300a81724030fca3d733b836d66835653c4a2f30ec395cd83a450"
+  },
+  "runtime_mutated": false,
+  "candidate_packages_installed": false,
+  "candidate_binaries_executed": false,
+  "measured": {
+    "diagnostic_wall_s": 554.21218,
+    "loss_stage_counts": {
+      "ORACLE_SURVIVES_GENERATOR_AND_TOP100": 4
+    },
+    "repeated_loss_stages": {},
+    "cases": {
+      "PDF_TEXT": {
+        "baseline_rank": 2,
+        "integrated_prelim_rank": 3,
+        "integrated_prelim_survives_top100": true
+      },
+      "SVG_RASTER": {
+        "baseline_rank": 79,
+        "integrated_prelim_rank": 31,
+        "integrated_prelim_survives_top100": true
+      },
+      "BZIP2": {
+        "baseline_rank": 1,
+        "integrated_prelim_rank": 10,
+        "integrated_prelim_survives_top100": true
+      },
+      "MEDIA_METADATA": {
+        "baseline_rank": 17,
+        "integrated_prelim_rank": 36,
+        "integrated_prelim_survives_top100": true
+      }
+    }
+  },
+  "falsified_hypothesis": "BROADENED_INTEGRATED_TERMS_CAUSE_ORACLES_TO_BE_LOST_BEFORE_OR_AT_PRELIM_TOP100",
+  "code_path_deduction": [
+    "The direct executable-evidence generator returns all four evaluator oracle families inside its preliminary candidate set.",
+    "The PR72 integration inserts every nonempty executable-evidence candidate into the shared `seen` map; that merge operation does not discard an inserted package key.",
+    "After that insertion, the remaining filtering step before the returned APT candidate list is the global score sort followed by final top-K truncation.",
+    "Therefore the previously observed PR72 disappearance of mediainfo, and the insufficient top-K rank of librsvg2-bin, occur in the post-generator evidence-fusion/global-ranking stage rather than in candidate generation."
+  ],
+  "exact_residual": "DIRECT_EXECUTABLE_EVIDENCE_CANDIDATES_SURVIVE_GENERATION__GLOBAL_LEXICAL_PLUS_EXECUTABLE_SCORE_FUSION_AND_FINAL_TOP_K_RANKING_REMAINS_CAUSAL_RECALL_BOTTLENECK",
+  "repeated_cross_effect_topk_failure_evidence": [
+    "SVG_RASTER: direct generator rank improved to 31 but PR72 final rank was 23, still outside the precommitted top20 bar.",
+    "MEDIA_METADATA: direct generator rank 36 survived preliminary top100 but PR72 final returned list omitted mediainfo entirely."
+  ],
+  "next_frontier": {
+    "next_action": "ONE_GENERIC_EVIDENCE_TIER_RANKING_REPAIR_WITH_FRESH_UNSEEN_GENERALIZATION_GATE__NO_ADDITIVE_WEIGHT_TUNING__THEN_RECONCILE",
+    "repair_principle": "Treat direct executable-plus-semantic evidence as a qualitatively stronger evidence tier than lexical-only package coincidence; use lexical evidence as secondary support rather than allowing flat additive scores to dominate.",
+    "frozen_regression_gate": "Existing four-effect set is regression-only, not sufficient for promotion.",
+    "fresh_validation_required": true
+  },
+  "promotion_authorized": false
+}

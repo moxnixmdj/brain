@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RUN-DIRECT-GENERATOR-INTEGRATION-DELTA-DIAGNOSTIC-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "DIRECT-GENERATOR-INTEGRATION-DELTA-DIAGNOSTIC-001",
+  "causal_blocker": "PROVEN_DIRECT_EXECUTABLE_GENERATOR_LOSES_RECALL_DURING_RUNTIME_INTEGRATION__LOSS_STAGE_NOT_YET_LOCALIZED",
+  "action_kind": "ORTHOGONAL_PROBE_SELECTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::PROVEN_DIRECT_EXECUTABLE_GENERATOR_LOSES_RECALL_DURING_RUNTIME_INTEGRATION__LOSS_STAGE_NOT_YET_LOCALIZED::ORTHOGONAL_PROBE_SELECTION",
+  "expected_parent_frontier_change": "Localize the exact stage where the proven direct executable-path candidate generator loses viable supplier recall when transformed into the integrated runtime evidence path, without changing runtime code.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR70",
+    "PR71",
+    "PR72",
+    "PR73",
+    "PR74",
+    "PR77"
+  ],
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Produce one stage-by-stage delta matrix and reconcile. No runtime repair is allowed on this branch.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
