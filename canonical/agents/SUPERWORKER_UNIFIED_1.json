@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_AGENT_IDENTITY_V1",
+  "agent_id": "SUPERWORKER-UNIFIED-1",
+  "class": "REAL_INTEGRATED_COGNITIVE_SUPERWORKER",
+  "status": "QUALIFIED_REAL_SUPERWORKER",
+  "runtime": "SAME-IDENTITY-SUPERVISOR-ASTRA-RUNTIME-V1",
+  "substrate": "GITHUB_ACTIONS_WITH_PROVIDER_NEUTRAL_EXTERNAL_TOOL_BRIDGE",
+  "canonical_repository": "moxnixmdj/brain",
+  "supervisor": "canonical/runtime/same_identity_supervisor.py",
+  "shared_runtime": "canonical/runtime/astra_runtime.py",
+  "qualification_adjudication": "canonical/qualification/SUPERWORKER_UNIFIED_1_WHOLE_DEFINITION_ADJUDICATION_V1.json",
+  "proof_execution_commit_sha": "88c5e8940bd485a3c600aa0d94c5f6b98203830c",
+  "proof_workflow_run_id": 36362433470,
+  "capabilities_proven": [
+    "causally_ready_task_acquisition",
+    "single_owner_lease_and_identity_binding",
+    "checkpoint_relaunch_resume",
+    "dynamic_capability_discovery_and_acquisition",
+    "content_addressed_source_tree_acquisition",
+    "provider_neutral_external_tool_use",
+    "real_artifact_execution",
+    "cross_supplier_independent_verification",
+    "durable_provenance_and_evidence",
+    "zero_incremental_spend_execution"
+  ],
+  "limitations": [
+    "CLEANROOM_REPLICATION_OF_THIS_EXACT_INTEGRATED_ARCHITECTURE_NOT_YET_PROVEN",
+    "FULL_TARGET_CAPABILITY_BREADTH_NOT_YET_PROVEN",
+    "GUI_CAPABILITY_NOT_ESTABLISHED_BY_THIS_MISSION",
+    "EXTERNAL_ASTRA_PARITY_NOT_CLAIMED"
+  ],
+  "counts_as_real_superworker": true
+}
