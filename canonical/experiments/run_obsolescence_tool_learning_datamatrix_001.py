@@ -78,6 +78,27 @@ result={
   "promotion_allowed":False
 }
 (EVID/(MISSION_ID+"__RESULT.json")).write_text(json.dumps(result,indent=2,sort_keys=True)+"\n")
+import subprocess
+
+diag=[]
+output_path=ROOT/"canonical"/"astra_runtime"/"tmp"/"PROJECT_BRAIN_DATAMATRIX.png"
+for label,argv in [
+    ("default",["dmtxread",str(output_path)]),
+    ("edge1",["dmtxread","-e","1",str(output_path)]),
+]:
+    try:
+        proc=subprocess.run(argv,text=True,capture_output=True,timeout=30,cwd=ROOT)
+        diag.append({
+          "label":label,
+          "argv":argv,
+          "returncode":proc.returncode,
+          "stdout":proc.stdout,
+          "stderr":proc.stderr,
+        })
+    except Exception as exc:
+        diag.append({"label":label,"argv":argv,"error":type(exc).__name__+":"+str(exc)})
+result["decoder_edge_diagnostic"]=diag
+(EVID/(MISSION_ID+"__RESULT.json")).write_text(json.dumps(result,indent=2,sort_keys=True)+"\n")
 print("CONTRACT_RESULT",json.dumps(result,sort_keys=True))
 if not mode_bound:
     raise SystemExit("REQUESTED_SYMBOLOGY_NOT_BOUND_IN_LEARNED_CONTRACT")
