@@ -22,7 +22,36 @@ TEXT_FORMAT_NAMES={
     ".tsv":"tsv",".json":"json",".html":"html",".htm":"html",".xml":"xml"
 }
 
-def _help_text(probe):
+def _goal_role(goal):
+    lower=str(goal or "").lower()
+    produce=any(x in lower for x in ("generate","create","make","render","encode","save","write","export"))
+    consume=any(x in lower for x in ("decode","read","extract","inspect","scan","parse"))
+    if produce and not consume:
+        return "PRODUCE"
+    if consume and not produce:
+        return "CONSUME"
+    return "NEUTRAL"
+
+def _role_score(text, goal):
+    lower=str(text or "").lower()
+    role=_goal_role(goal)
+    if role=="PRODUCE":
+        positive=("encode","write","generate","create","output","save","render","export")
+        negative=("decode","read","scan","extract")
+    elif role=="CONSUME":
+        positive=("decode","read","scan","extract","parse")
+        negative=("encode","write","generate","create","output file")
+    else:
+        positive=()
+        negative=()
+    score=sum(2 for x in positive if x in lower)-sum(2 for x in negative if x in lower)
+    if role=="PRODUCE" and any(x in lower for x in ("--output","output file","write image to","write data to")):
+        score+=4
+    if role=="CONSUME" and any(x in lower for x in ("standard output","stdout","decoded","scan image")):
+        score+=3
+    return score
+
+def _help_text(probe, goal):
     choices=[]
     for exe in probe.get("executables",[]):
         for att in exe.get("help_attempts",[]):
@@ -31,7 +60,7 @@ def _help_text(probe):
             if text:
                 if "usage:" in lower or "options:" in lower:
                     quality=3 if "usage:" in lower else 2
-                    choices.append((quality,len(text),exe.get("executable"),text))
+                    choices.append((_role_score(text,goal),quality,len(text),exe.get("executable"),text))
                     continue
                 # Some mature CLIs (for example option-table style tools)
                 # provide complete help without literal "Usage:"/"Options:"
@@ -46,15 +75,22 @@ def _help_text(probe):
                     len(option_lines)>=4
                     and any(k in lower for k in ("--output","output file","--data","data content","input data"))
                 ):
-                    choices.append((1,len(text),exe.get("executable"),text))
+                    choices.append((_role_score(text,goal),1,len(text),exe.get("executable"),text))
     if not choices:
         raise ContractInferenceFailure("CLI_HELP_CONTRACT_TEXT_REQUIRED")
     choices.sort(reverse=True)
-    _,_,exe,text=choices[0]
+    _,_,_,exe,text=choices[0]
     return str(exe),text
 
+def _option_flag(line):
+    m=re.search(r"(?:^|\s)(-[A-Za-z0-9])(?:\s|,)",line)
+    if m:
+        return m.group(1)
+    m=re.search(r"(?:^|\s)(--[A-Za-z0-9][A-Za-z0-9-]*)",line)
+    return m.group(1) if m else None
+
 def infer_contract(probe, goal):
-    exe,help_text=_help_text(probe)
+    exe,help_text=_help_text(probe,goal)
     lines=help_text.splitlines()
     usage_line=next((x.strip() for x in lines if x.strip().lower().startswith("usage:")),None)
     lower_help=help_text.lower()
@@ -77,15 +113,20 @@ def infer_contract(probe, goal):
     output_line=None
     for line in lines:
         ll=line.lower()
-        if "--output" in ll or "output file" in ll or "write image to" in ll:
-            m=re.search(r"(?:^|\s)(-[A-Za-z0-9])(?:\s|,)",line)
-            if m:
-                output_flag=m.group(1); output_line=line.strip(); break
+        if (
+            "--output" in ll or "--outfile" in ll
+            or "output file" in ll or "output filename" in ll
+            or "write image to" in ll or "write data to" in ll
+        ):
+            flag=_option_flag(line)
+            if flag:
+                output_flag=flag; output_line=line.strip(); break
     if output_flag is None:
         raise ContractInferenceFailure("CLI_OUTPUT_FLAG_UNRESOLVED")
 
     input_flag=None
     positional=None
+    stdin_text=False
     if usage_line:
         for token in ("STRING","TEXT","DATA"):
             if f"[{token}]" in usage_line:
@@ -93,14 +134,41 @@ def infer_contract(probe, goal):
     if positional is None:
         for line in lines:
             ll=line.lower()
-            if "--data" in ll or "string to encode" in ll or "data to encode" in ll:
-                m=re.search(r"(?:^|\s)(-[A-Za-z0-9])(?:\s|,)",line)
-                if m:
-                    input_flag=m.group(1); break
+            if (
+                "--data" in ll or "--text" in ll or "--message" in ll
+                or "--content" in ll or "--barcode" in ll
+                or "string to encode" in ll or "data to encode" in ll
+                or "input data" in ll or "message text" in ll
+                or "barcode text" in ll
+            ):
+                flag=_option_flag(line)
+                if flag:
+                    input_flag=flag; break
+    positional_file_supported=bool(
+        usage_line and re.search(r"(?:\\[|<)?FILE(?:\\]|>)?",usage_line,re.I)
+    )
     if positional is None and input_flag is None:
-        raise ContractInferenceFailure("CLI_TEXT_INPUT_UNRESOLVED")
+        if "standard input" in lower_help or "stdin" in lower_help:
+            stdin_text=True
+        elif positional_file_supported:
+            positional="file"
+        else:
+            raise ContractInferenceFailure("CLI_TEXT_INPUT_UNRESOLVED")
 
     selector=[]
+    # If the selected CLI exposes a generic output-format selector, bind the
+    # requested file suffix explicitly. This is supplier-neutral and avoids
+    # silently relying on a tool's default format.
+    format_line=None
+    for line in lines:
+        ll=line.lower()
+        if "--format" in ll and wanted and wanted in ll:
+            flag=_option_flag(line)
+            if flag:
+                selector.extend([flag,wanted.upper()])
+                format_line=line.strip()
+                break
+
     normalized_goal=re.sub(r"[^a-z0-9]+","",str(goal).lower())
     if "code128" in normalized_goal:
         barcode_flag=None
@@ -121,11 +189,20 @@ def infer_contract(probe, goal):
 
     command=pathlib.Path(exe).name
     argv=[command,*selector,output_flag,"__OUT_PLACEHOLDER__"]
+    text_file_transport=False
     if input_flag:
         argv.extend([input_flag,"__TEXT_PLACEHOLDER__"])
-    else:
+    elif positional=="file":
+        argv.append("__TEXT_FILE_PLACEHOLDER__")
+        text_file_transport=True
+    elif positional:
         argv.append("__TEXT_PLACEHOLDER__")
-    argv=[x.replace("__OUT_PLACEHOLDER__","$"+"{input.output_path}").replace("__TEXT_PLACEHOLDER__","$"+"{input.text}") for x in argv]
+    argv=[
+        x.replace("__OUT_PLACEHOLDER__","$"+"{input.output_path}")
+         .replace("__TEXT_PLACEHOLDER__","$"+"{input.text}")
+         .replace("__TEXT_FILE_PLACEHOLDER__","__PB_TEXT_FILE__")
+        for x in argv
+    ]
     return {
       "schema":"PROJECT_BRAIN_CLI_CONTRACT_CANDIDATE_V1",
       "status":"CANDIDATE_REQUIRES_EFFECT_VERIFICATION",
@@ -134,6 +211,12 @@ def infer_contract(probe, goal):
       "required_inputs":["text","output_path"],
       "argv_template":argv,
       "output_path_template":"$"+"{input.output_path}",
+      "stdin_text_template":("$"+"{input.text}") if stdin_text else None,
+      "text_file_text_template":("$"+"{input.text}") if text_file_transport else None,
+      "alternate_input_transports":(
+        [{"type":"POSITIONAL_TEXT_FILE","arg_token":"__PB_TEXT_FILE__"}]
+        if (stdin_text and positional_file_supported) else []
+      ),
       "output_prefix_hex":magic or "",
       "output_text_utf8":bool(text_output),
       "timeout_s":60,
@@ -143,7 +226,14 @@ def infer_contract(probe, goal):
         "output_flag":output_flag,
         "input_flag":input_flag,
         "positional_input":positional,
+        "stdin_text":stdin_text,
+        "input_transport":(
+            "STDIN_TEXT" if stdin_text else
+            ("POSITIONAL_TEXT_FILE" if text_file_transport else ("FLAG" if input_flag else "POSITIONAL"))
+        ),
+        "positional_file_supported":positional_file_supported,
         "selector":selector,
+        "format_selector_line":format_line,
         "requested_suffix":suffix,
         "probe_package":probe.get("package"),
         "probe_version":probe.get("version"),
