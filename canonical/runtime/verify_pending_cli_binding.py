@@ -32,6 +32,35 @@ def _semantic_verifier_query(goal):
     return ("decode "+distinctive+" image").strip()
 
 
+
+def _semantic_execution_variants(contract, output_path):
+    """Build bounded execution variants only from options declared in help."""
+    base=[output_path if x=="__OUTPUT_PATH__" else x for x in contract["argv"]]
+    out=[{"basis":"PRIMARY_CONTRACT","argv":base}]
+    if contract.get("inference_basis")!="POSITIONAL_FILE_TO_STDOUT":
+        return out
+    help_text=str(contract.get("help_excerpt") or "")
+    path=str(contract.get("executable") or "")
+    for line in help_text.splitlines():
+        m=re.match(
+            r"\s*(-[A-Za-z0-9]),\s*--([A-Za-z0-9-]*minimum[A-Za-z0-9-]*)=N\b",
+            line,
+            re.I,
+        )
+        if not m:
+            continue
+        short=m.group(1)
+        argv=[path,short,"1",output_path]
+        if argv!=base:
+            out.append({
+              "basis":"HELP_DECLARED_MINIMUM_NUMERIC_RELAXATION",
+              "argv":argv,
+              "help_line":line.strip()[:500],
+            })
+        break
+    return out
+
+
 def _semantic_help_contract(probe):
     """Infer a bounded image-to-text decoder contract from observed CLI help.
 
@@ -132,17 +161,37 @@ def _acquire_and_run_semantic_verifier(pending, output_path):
                 attempt["status"]="VERIFIER_CONTRACT_REJECTED"
                 attempts.append(attempt)
                 continue
-            argv=[output_path if x=="__OUTPUT_PATH__" else x for x in contract["argv"]]
-            proc=subprocess.run(argv,text=True,capture_output=True,timeout=60,cwd=ROOT)
-            observed=proc.stdout.strip()
             attempt["contract"]=contract
-            attempt["returncode"]=proc.returncode
-            attempt["stdout"]=proc.stdout[-4000:]
-            attempt["stderr"]=proc.stderr[-4000:]
-            if proc.returncode!=0:
+            attempt["execution_variants"]=[]
+            proc=None
+            observed=""
+            for variant in _semantic_execution_variants(contract,output_path):
+                current=subprocess.run(
+                    variant["argv"],text=True,capture_output=True,timeout=60,cwd=ROOT
+                )
+                record={
+                  **variant,
+                  "returncode":current.returncode,
+                  "stdout":current.stdout[-4000:],
+                  "stderr":current.stderr[-4000:],
+                }
+                attempt["execution_variants"].append(record)
+                if current.returncode==0:
+                    proc=current
+                    observed=current.stdout.strip()
+                    attempt["selected_execution_variant"]=record
+                    break
+            if proc is None:
+                last=attempt["execution_variants"][-1] if attempt["execution_variants"] else {}
+                attempt["returncode"]=last.get("returncode")
+                attempt["stdout"]=last.get("stdout")
+                attempt["stderr"]=last.get("stderr")
                 attempt["status"]="VERIFIER_EXECUTION_FAILED"
                 attempts.append(attempt)
                 continue
+            attempt["returncode"]=proc.returncode
+            attempt["stdout"]=proc.stdout[-4000:]
+            attempt["stderr"]=proc.stderr[-4000:]
             verified=observed==expected
             evidence={
               "verified":verified,
