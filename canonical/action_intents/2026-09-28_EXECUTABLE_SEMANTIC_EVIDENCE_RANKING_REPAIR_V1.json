@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "EXECUTABLE-SEMANTIC-EVIDENCE-RANKING-REPAIR-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "PRETRUNCATION-CANDIDATE-RANK-TRACE-001",
+  "causal_blocker": "EXECUTABLE_AND_MANPAGE_OPERATION_EVIDENCE_PROVEN__CURRENT_RUNTIME_DOES_NOT_CONSUME_IT_FOR_CANDIDATE_RANKING",
+  "action_kind": "GENERIC_REPAIR",
+  "expected_parent_frontier_change": "Improve viable executable supplier recall/ranking across the frozen four-effect set by generically consuming executable-path and manpage operation semantics before candidate truncation.",
+  "highest_leverage_now": true,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 4,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Run exactly one frozen four-effect replay. Reconcile immediately. Merge runtime change only if oracle family recall is 1, top20 recall >= 0.75, bzip2 does not regress, and no task-specific literals are introduced.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
