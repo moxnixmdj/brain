@@ -5,10 +5,10 @@
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "active_capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
   "active_probe": null,
-  "probe_state": "NO_ACTIVE_PROBE__DATAMATRIX_QUARANTINED_AS_SINGLE_PROBE_EVIDENCE",
-  "current_parent_blocker": "GENERICITY_OF_AUTONOMOUS_TOOL_DISCOVERY_SELECTION_LEARNING_NOT_YET_ESTABLISHED_ACROSS_ORTHOGONAL_UNSEEN_MISSIONS",
-  "next_required_action_class": "ORTHOGONAL_PROBE_PORTFOLIO_OR_FRONTIER_RECONCILIATION",
-  "forbidden_local_frontier": "DATAMATRIX_PACKAGE_OR_VERIFIER_OPTIMIZATION",
+  "probe_state": "ORTHO_TOOL_LEARNING_PORTFOLIO_001_COMPLETE_RECONCILED",
+  "current_parent_blocker": "GENERIC_TOOL_INVOCATION_CONTRACT_PIPELINE_TOO_NARROW__REPEATED_IN_2_OF_3_ORTHOGONAL_PROBES",
+  "next_required_action_class": "ONE_GENERIC_REPAIR_ON_FRESH_BRANCH__REPLAY_ONLY_SQLITE_AND_XML_ONCE__THEN_RECONCILE",
+  "forbidden_local_frontier": "ANY_SINGLE_PROBE_PACKAGE_TOOL_OR_VERIFIER_OPTIMIZATION",
   "progress_level_minimum": "CAPABILITY_TARGET",
   "probe_budget": {
     "repairs_used_on_active_probe": 0,
@@ -25,5 +25,12 @@
       "evidence_preserved": true,
       "may_define_frontier": false
     }
-  ]
+  ],
+  "active_probe_manifest": "canonical/experiments/ORTHO_TOOL_LEARNING_PORTFOLIO_001.json",
+  "completed_probe_portfolio": {
+    "portfolio_id": "ORTHO-TOOL-LEARNING-PORTFOLIO-001",
+    "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_ORTHOGONAL_PORTFOLIO_001_RECONCILIATION.json",
+    "repeated_blocker": "GENERIC_CONTRACT_INFERENCE_SHAPE",
+    "recurrence_count": 2
+  }
 }

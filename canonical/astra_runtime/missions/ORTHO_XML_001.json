@@ -1,0 +1,19 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ORTHO-XML-001",
+  "purpose": "Orthogonal unseen probe for generic tool discovery, selection, contract learning, execution, and verification.",
+  "goal": "Transform the JSON text {\"name\":\"brain\",\"value\":23} into an XML file at canonical/astra_runtime/tmp/ORTHO_XML_001.xml with root element record and child elements name and value preserving the same values",
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "tool_name_hints_forbidden": true,
+    "runtime_changes_forbidden": true
+  },
+  "acceptance": {
+    "output_path": "canonical/astra_runtime/tmp/ORTHO_XML_001.xml",
+    "root": "record",
+    "children": {
+      "name": "brain",
+      "value": "23"
+    }
+  }
+}

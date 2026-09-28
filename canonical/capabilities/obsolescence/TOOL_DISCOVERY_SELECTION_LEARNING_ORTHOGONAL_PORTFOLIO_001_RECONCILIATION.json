@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_ORTHOGONAL_TOOL_LEARNING_RECONCILIATION_V1",
+  "portfolio_id": "ORTHO-TOOL-LEARNING-PORTFOLIO-001",
+  "status": "COMPLETE_RECONCILED",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "workflow_run_id": 36384882607,
+  "workflow_head_sha": "92d995d50fd4682ca8491ab7e034181544c54f6f",
+  "drift_guard_run_id": 36384897728,
+  "runtime_unchanged_from_main": true,
+  "first_results": [
+    {
+      "probe_id": "ORTHO-GZIP-001",
+      "status": "TERMINAL_FAIL",
+      "first_blocker_class": "GENERIC_CONTRACT_OUTPUT_FORMAT_COVERAGE",
+      "wall_s": 215.287018,
+      "artifact_id": 10954750102,
+      "artifact_digest": "sha256:2c83badd0b327846a4fd08d19c0823cc4c25b515fa4a3db6e8a45de9fc57ff11"
+    },
+    {
+      "probe_id": "ORTHO-SQLITE-001",
+      "status": "TERMINAL_FAIL",
+      "first_blocker_class": "GENERIC_CONTRACT_INFERENCE_SHAPE",
+      "wall_s": 227.789791,
+      "artifact_id": 10954560914,
+      "artifact_digest": "sha256:a5d5c8b7cbab9e6f15732b9a75b8035dcad80e2ae404a71521568ddfc3968e4d"
+    },
+    {
+      "probe_id": "ORTHO-XML-001",
+      "status": "TERMINAL_FAIL",
+      "first_blocker_class": "GENERIC_CONTRACT_INFERENCE_SHAPE",
+      "wall_s": 108.07068,
+      "artifact_id": 10953244911,
+      "artifact_digest": "sha256:5616a641609e7db8d9af8ead0dfef9b10b9a87cefc0c138ffcc94b72409b8476"
+    }
+  ],
+  "matrix_artifact": {
+    "artifact_id": 10954067605,
+    "digest": "sha256:37e7f227b4949c9616d59e73e96ba093a5ab36dfec33e3136ad46352fdfa7507"
+  },
+  "repeated_first_blockers": {
+    "GENERIC_CONTRACT_INFERENCE_SHAPE": 2
+  },
+  "generic_repair_eligible": true,
+  "eligible_repair_scope": "GENERALIZE_THE_TOOL_INVOCATION_CONTRACT_PIPELINE_BEYOND_THE_CURRENT_NARROW_TEXT_TO_OUTPUT_FILE_CLASS__WITHOUT_TASK_SPECIFIC_LITERALS",
+  "not_repair_eligible": [
+    "GENERIC_CONTRACT_OUTPUT_FORMAT_COVERAGE"
+  ],
+  "diagnosis_boundary": "The evidence proves repeated inability to derive a compatible invocation contract across SQLite and XML. It does not prove that every downstream semantic-planning or supplier-discovery issue is solved by a contract repair.",
+  "promotion_authorized": false,
+  "required_next_action": "ONE_GENERIC_REPAIR_ON_FRESH_BRANCH__REPLAY_ONLY_AFFECTED_FROZEN_SQLITE_AND_XML_PROBES_ONCE__THEN_RECONCILE"
+}

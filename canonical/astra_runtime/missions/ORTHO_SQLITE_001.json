@@ -1,0 +1,25 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ORTHO-SQLITE-001",
+  "purpose": "Orthogonal unseen probe for generic tool discovery, selection, contract learning, execution, and verification.",
+  "goal": "Create a SQLite database at canonical/astra_runtime/tmp/ORTHO_SQLITE_001.sqlite containing a table named probe with columns k TEXT PRIMARY KEY and v INTEGER, and exactly two rows: alpha with value 7, and beta with value 11",
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "tool_name_hints_forbidden": true,
+    "runtime_changes_forbidden": true
+  },
+  "acceptance": {
+    "output_path": "canonical/astra_runtime/tmp/ORTHO_SQLITE_001.sqlite",
+    "table": "probe",
+    "rows": [
+      [
+        "alpha",
+        7
+      ],
+      [
+        "beta",
+        11
+      ]
+    ]
+  }
+}

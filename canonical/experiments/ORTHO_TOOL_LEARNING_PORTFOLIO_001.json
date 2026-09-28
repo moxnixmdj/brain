@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_ORTHOGONAL_PROBE_PORTFOLIO_V1",
+  "portfolio_id": "ORTHO-TOOL-LEARNING-PORTFOLIO-001",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "status": "FROZEN_READY_FIRST_EXECUTION",
+  "runtime_policy": "USE_CURRENT_MAIN_RUNTIME_UNCHANGED__NO_REPAIRS_BEFORE_ALL_FIRST_RESULTS",
+  "terminal_rule": "RECONCILE_AFTER_THREE_FIRST_TERMINAL_RESULTS",
+  "probes": [
+    {
+      "probe_id": "ORTHO-GZIP-001",
+      "mission_path": "canonical/astra_runtime/missions/ORTHO_GZIP_001.json",
+      "domain": "ARCHIVE_COMPRESSION",
+      "output_type": "GZIP_BINARY",
+      "verification_mechanism": "PYTHON_STDLIB_GZIP_EXACT_DECOMPRESSION",
+      "execution_surface": "DISCOVERED_LOCAL_OR_REMOTE_CAPABILITY_ROUTE"
+    },
+    {
+      "probe_id": "ORTHO-SQLITE-001",
+      "mission_path": "canonical/astra_runtime/missions/ORTHO_SQLITE_001.json",
+      "domain": "STRUCTURED_DATABASE_STATE",
+      "output_type": "SQLITE_DATABASE",
+      "verification_mechanism": "PYTHON_STDLIB_SQLITE3_SCHEMA_AND_ROW_QUERY",
+      "execution_surface": "DISCOVERED_LOCAL_OR_REMOTE_CAPABILITY_ROUTE"
+    },
+    {
+      "probe_id": "ORTHO-XML-001",
+      "mission_path": "canonical/astra_runtime/missions/ORTHO_XML_001.json",
+      "domain": "STRUCTURED_DATA_TRANSFORMATION",
+      "output_type": "XML_TEXT",
+      "verification_mechanism": "PYTHON_STDLIB_ELEMENTTREE_SEMANTIC_PARSE",
+      "execution_surface": "DISCOVERED_LOCAL_OR_REMOTE_CAPABILITY_ROUTE"
+    }
+  ],
+  "orthogonality_claim": "Each pair differs in domain and output structure; verification mechanisms are independent and materially different.",
+  "promotion_forbidden": true
+}

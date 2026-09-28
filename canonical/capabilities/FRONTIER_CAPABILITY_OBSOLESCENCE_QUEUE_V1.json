@@ -69,11 +69,13 @@
     "REOPENED_BY_REGRESSION"
   ],
   "immediate_frontier": {
-    "objective": "Obsolete TOOL_DISCOVERY_SELECTION_AND_LEARNING as the first multiplier capability: given an unfamiliar required effect, discover serious candidate implementations, learn their invocation contracts, select the fastest/cheapest route that can meet the capability bar, execute a real task, and verify the outcome.",
-    "selection_metric": "CROSS_CAPABILITY_MULTIPLIER_TIMES_EXPECTED_OBSOLESCENCE_GAIN_PER_WALL_CLOCK_TIME",
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "rationale": "This capability is upstream of most remaining obsolescence work. Improving it accelerates software engineering, research, computer use, scientific reasoning, artifact production, and future capability acquisition.",
-    "prohibition": "DO_NOT_REPLACE_THIS_WITH_A_STATIC_TOOL_LIST_OR_MODEL-ONLY_ROUTER"
+    "objective": "Make one generic repair to the invocation-contract pipeline for the repeated cross-domain contract-inference failure, then replay only the frozen SQLite and XML probes once and reconcile.",
+    "selection_metric": "CROSS_CAPABILITY_MULTIPLIER_TIMES_EXPECTED_OBSOLESCENCE_GAIN_PER_WALL_CLOCK_TIME",
+    "exact_blocker": "GENERIC_TOOL_INVOCATION_CONTRACT_PIPELINE_TOO_NARROW__REPEATED_SQLITE_AND_XML",
+    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_ORTHOGONAL_PORTFOLIO_001_RECONCILIATION.json",
+    "recurrence_count": 2,
+    "prohibition": "NO_GZIP_REPAIR__NO_SECOND_REPAIR_BEFORE_REPLAY_RECONCILIATION__NO_TASK_SPECIFIC_LITERALS"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
