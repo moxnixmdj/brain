@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_EVIDENCE_ACQUISITION_LATENCY_PROFILE_V1",
+  "profile_id": "EVIDENCE-ACQUISITION-LATENCY-PROFILE-001",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "status": "FROZEN_NO_MUTATION",
+  "objective": "Attribute direct executable/manpage evidence wall-clock cost and measure batching, repeat/cache behavior, concurrency, and minimum sufficient evidence without modifying runtime code.",
+  "cases": [
+    {
+      "effect_id": "EXIF_METADATA",
+      "goal": "Extract EXIF camera metadata from a JPEG image.",
+      "oracle_families": [
+        "libimage-exiftool-perl"
+      ]
+    },
+    {
+      "effect_id": "XML_LINT",
+      "goal": "Validate an XML document and report syntax errors.",
+      "oracle_families": [
+        "libxml2-utils"
+      ]
+    },
+    {
+      "effect_id": "BZIP2",
+      "goal": "Compress a text file using bzip2 compression.",
+      "oracle_families": [
+        "bzip2"
+      ]
+    }
+  ],
+  "constraints": {
+    "runtime_mutation_forbidden": true,
+    "package_hints_forbidden": true,
+    "candidate_installation_forbidden": true,
+    "candidate_execution_forbidden": true,
+    "max_semantic_terms_per_case": 3,
+    "apt_file_query_timeout_s": 12,
+    "manpage_fetch_timeout_s": 4,
+    "max_manpage_commands_per_case": 4,
+    "workflow_hard_gate_minutes": 10,
+    "incremental_spend_usd": 0
+  },
+  "required_measurements": [
+    "apt_file_index_update_wall_s",
+    "per_term_apt_file_query_wall_s",
+    "repeat_same_query_wall_s",
+    "batched_regex_query_wall_s",
+    "sequential_vs_batched_package_overlap",
+    "sequential_vs_batched_speedup",
+    "direct_evidence_oracle_rank_without_manpages",
+    "minimum_term_prefix_for_top20_oracle",
+    "manpage_sequential_wall_s",
+    "manpage_parallel_wall_s",
+    "manpage_repeat_wall_s",
+    "naive_vs_unique_manpage_fetch_count",
+    "projected_current_vs_batched_parallel_wall_s"
+  ],
+  "promotion_authorized": false,
+  "required_next_action": "RECONCILE_PARENT_FRONTIER__NO_RUNTIME_REPAIR_ON_THIS_BRANCH"
+}
