@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_EXECUTABLE_EVIDENCE_SOURCE_DIAGNOSTIC_V1",
+  "diagnostic_id": "EXECUTABLE-EVIDENCE-SOURCE-DIAGNOSTIC-001",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "source_type": "APT_FILE_PACKAGE_CONTENTS_INDEX",
+  "status": "FROZEN_NO_MUTATION",
+  "effects": [
+    {
+      "effect_id": "PDF_TEXT",
+      "goal": "Extract plain text from a PDF document.",
+      "oracle_families": [
+        "poppler-utils"
+      ]
+    },
+    {
+      "effect_id": "SVG_RASTER",
+      "goal": "Convert an SVG vector image into a PNG raster image.",
+      "oracle_families": [
+        "librsvg2-bin",
+        "inkscape",
+        "imagemagick"
+      ]
+    },
+    {
+      "effect_id": "BZIP2",
+      "goal": "Compress a text file using bzip2 compression.",
+      "oracle_families": [
+        "bzip2"
+      ]
+    },
+    {
+      "effect_id": "MEDIA_METADATA",
+      "goal": "Inspect a multimedia file and report its technical media metadata.",
+      "oracle_families": [
+        "mediainfo"
+      ]
+    }
+  ],
+  "constraints": {
+    "runtime_mutation_forbidden": true,
+    "package_installation_for_execution_forbidden": true,
+    "diagnostic_dependency_install_allowed": true,
+    "oracle_names_evaluator_only": true,
+    "candidate_execution_forbidden": true,
+    "incremental_spend_usd": 0
+  },
+  "measurement": "Generate command-name regexes only from current effect queries (length>=3, generic stopwords removed), query package contents for /usr/bin paths, and measure whether known viable supplier families surface.",
+  "promotion_authorized": false
+}
