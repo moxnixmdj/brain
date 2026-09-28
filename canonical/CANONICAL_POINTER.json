@@ -134,11 +134,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "OBSOLETE_TOOL_DISCOVERY_SELECTION_AND_LEARNING__FREEZE_REAL_UNFAMILIAR_EFFECT__DISCOVER_CANDIDATE_IMPLEMENTATIONS__LEARN_CONTRACTS__RACE_ROUTES__EXECUTE__INDEPENDENTLY_VERIFY__INHERIT",
+    "next_step": "REMOVE_EXTERNAL_VERIFIER_NAME_DISCOVERY_DEPENDENCY__REPLAY_SAME_FROZEN_DATAMATRIX_MISSION_WITHOUT_PACKAGE_HINT__THEN_PROMOTE_TOOL_DISCOVERY_SELECTION_LEARNING_ONLY_IF_FULL_LOOP_IS_AUTONOMOUS_AND_INDEPENDENTLY_VERIFIED",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "GENERAL_TOOL_DISCOVERY_SELECTION_AND_LEARNING_NOT_YET_OBSOLETED_TO_FRONTIER_BAR",
+    "critical_blocker": "AUTONOMOUS_INDEPENDENT_VERIFIER_NAME_DISCOVERY",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -215,7 +215,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "highest_leverage_capability_gap": "TOOL_DISCOVERY_SELECTION_AND_LEARNING__ONLY_VERIFIER_SUPPLIER_NAME_DISCOVERY_REMAINS_EXTERNALLY_ASSISTED_IN_LATEST_SUCCESSFUL_DATAMATRIX_RUN",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -283,6 +283,13 @@
       "exact_correctness": 1,
       "process_wall_s": 0.59,
       "incremental_spend_usd": 0
+    },
+    "tool_learning_datamatrix": {
+      "status": "PARTIAL_VERIFIED__WHOLE_FAMILY_NOT_PROMOTED",
+      "adjudication_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_APT_CLI_V1_ADJUDICATION.json",
+      "successful_run_id": 36378255352,
+      "artifact_id": 10951897583,
+      "residual_gap": "AUTONOMOUS_INDEPENDENT_VERIFIER_NAME_DISCOVERY"
     }
   },
   "provider_rules": {
