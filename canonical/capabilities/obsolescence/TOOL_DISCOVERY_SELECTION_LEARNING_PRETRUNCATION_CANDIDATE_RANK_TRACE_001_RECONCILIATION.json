@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_PRETRUNCATION_CANDIDATE_RANK_TRACE_RECONCILIATION_V1",
+  "status": "COMPLETE_RECONCILED",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "diagnostic_id": "PRETRUNCATION-CANDIDATE-RANK-TRACE-001",
+  "workflow_run_id": 36464100471,
+  "drift_guard_run_id": 36464118790,
+  "runtime_mutated": false,
+  "artifact": {
+    "id": 10989000984,
+    "digest": "sha256:a3f69db720a84ca5a781f91bcf6f58d601259951bb7d226be17c983c570c7240"
+  },
+  "measured": {
+    "loss_class_counts": {
+      "ADMITTED_BELOW_TOP50": 2,
+      "ADMITTED_TOP50": 1,
+      "NOT_ADMITTED_TO_SEEN": 1
+    },
+    "repeated_loss_class": "ADMITTED_BELOW_TOP50",
+    "recurrence_count": 2,
+    "examples": [
+      {
+        "effect_id": "TRACE-PDF-TEXT-001",
+        "oracle": "poppler-utils",
+        "admitted": true,
+        "pretruncation_rank": 236,
+        "score": 18,
+        "rank50_score_threshold": 32,
+        "matched_terms": [
+          "pdf"
+        ],
+        "candidate_pool_size": 759
+      },
+      {
+        "effect_id": "TRACE-SVG-RASTER-001",
+        "oracle": "inkscape",
+        "admitted": true,
+        "pretruncation_rank": 188,
+        "score": 18,
+        "rank50_score_threshold": 32,
+        "matched_terms": [
+          "vector"
+        ],
+        "candidate_pool_size": 1014
+      },
+      {
+        "effect_id": "TRACE-BZIP2-001",
+        "oracle": "bzip2",
+        "admitted": true,
+        "pretruncation_rank": 12,
+        "score": 40,
+        "matched_terms": [
+          "bzip2"
+        ],
+        "candidate_pool_size": 525
+      },
+      {
+        "effect_id": "TRACE-MEDIA-METADATA-001",
+        "oracle": "mediainfo",
+        "admitted": false,
+        "pretruncation_rank": null,
+        "candidate_pool_size": 693
+      }
+    ]
+  },
+  "causal_conclusion": [
+    "Raw external supply is not the dominant blocker.",
+    "Two independent viable executable suppliers are admitted but buried below the top-50 cutoff because they carry only one domain/format lexical match while unrelated or auxiliary candidates accumulate multiple generic matches.",
+    "One viable supplier is absent from the admitted pool even though raw apt-cache search returns it, proving exact token admission can also discard capability-relevant packages whose metadata uses different wording.",
+    "The common structural weakness is that package-name/short-description lexical overlap is being treated as capability evidence even when it does not encode the executable's actual operation."
+  ],
+  "repair_eligibility": {
+    "repeated_generic_failure": "ADMITTED_BELOW_TOP50",
+    "repair_eligible": true,
+    "scope_boundary": "A generic retention/ranking repair may address repeated below-cutoff loss. The single mediainfo non-admission event is evidence but does not alone authorize a separate task-specific admission repair."
+  },
+  "next_action": {
+    "type": "NO_MUTATION_EXECUTABLE_EVIDENCE_SOURCE_DIAGNOSTIC",
+    "objective": "Search existing zero-cost metadata sources that expose package executable names/capabilities (for example package contents/manpage/command metadata) and measure whether they recover operation-level evidence for the known buried/missed suppliers before inventing a new ranking algorithm.",
+    "rationale": "The winning repair should enrich capability evidence rather than merely retune lexical weights.",
+    "runtime_mutation_forbidden": true
+  },
+  "promotion_authorized": false
+}

@@ -145,11 +145,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "RUN_NO_MUTATION_PRETRUNCATION_CANDIDATE_RANK_TRACE__MEASURE_ORACLE_ADMISSION_SCORE_AND_EXACT_PRETRUNCATION_RANK__RECONCILE",
+    "next_step": "RUN_NO_MUTATION_EXECUTABLE_EVIDENCE_SOURCE_DIAGNOSTIC__SEARCH_EXISTING_ZERO_COST_PACKAGE_CONTENT_COMMAND_MANPAGE_METADATA__MEASURE_OPERATION_EVIDENCE_RECOVERY__RECONCILE",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "PRETRUNCATION_CANDIDATE_ADMISSION_AND_RANK_LOSS_NOT_YET_LOCALIZED",
+    "critical_blocker": "PACKAGE_LEXICAL_METADATA_INSUFFICIENT_FOR_OPERATION_LEVEL_EXECUTABLE_CAPABILITY_EVIDENCE",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -226,7 +226,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "TOOL_DISCOVERY_SELECTION_AND_LEARNING__CANDIDATE_RETENTION_AND_PRETRUNCATION_RANKING",
+    "highest_leverage_capability_gap": "TOOL_DISCOVERY_SELECTION_AND_LEARNING__EXECUTABLE_LEVEL_CAPABILITY_EVIDENCE",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -394,6 +394,19 @@
       "repeated_loss_stage": "RAW_PRESENT_BUT_NOT_ADMITTED_OR_RETAINED",
       "recurrence_count": 3,
       "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_RAW_TO_RANKED_CANDIDATE_TRACE_001_RECONCILIATION.json"
+    },
+    "pretruncation_candidate_rank_trace_001": {
+      "status": "COMPLETE_RECONCILED",
+      "workflow_run_id": 36464100471,
+      "artifact_id": 10989000984,
+      "artifact_digest": "sha256:a3f69db720a84ca5a781f91bcf6f58d601259951bb7d226be17c983c570c7240",
+      "repeated_loss": "ADMITTED_BELOW_TOP50",
+      "recurrence_count": 2,
+      "pdf_oracle_rank": 236,
+      "svg_oracle_rank": 188,
+      "bzip2_oracle_rank": 12,
+      "mediainfo_admitted": false,
+      "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_PRETRUNCATION_CANDIDATE_RANK_TRACE_001_RECONCILIATION.json"
     }
   },
   "provider_rules": {
