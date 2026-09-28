@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_PR85_POSTHOC_ENVIRONMENT_ATTRIBUTION_V1",
+  "diagnostic_id": "PR85-POSTHOC-ENVIRONMENT-ATTRIBUTION-001",
+  "status": "COMPLETED_NO_RUNTIME_MUTATION",
+  "checked_on": "2026-09-29",
+  "source_pr": 85,
+  "source_spent_validation": "BATCHED-EXECUTABLE-EVIDENCE-FRESH-VALIDATION-001",
+  "source_spent_result": {
+    "oracle_family_recall": 0.6666666666666666,
+    "top20_oracle_recall": 0,
+    "total_wall_s": 96.824453,
+    "freshness": "SPENT__NOT_REUSED_AS_ACCEPTANCE_EVIDENCE"
+  },
+  "diagnostic_rule": "Attribute the already-observed degraded-surface failures using public authoritative package/index/manpage evidence only. Do not replay the spent gate, mutate runtime, add package hints, or claim counterfactual acceptance ranks.",
+  "runtime_mutated": false,
+  "acceptance_claim_made": false,
+  "findings": [
+    {
+      "case": "FRESH-EXIF-001",
+      "oracle_family": "libimage-exiftool-perl",
+      "observed_spent_result": "ORACLE_NOT_FOUND",
+      "attribution": "INDEX_COVERAGE_ARTIFACT_PROVEN",
+      "evidence": [
+        "The spent execution surface imported only Debian trixie main/Contents-amd64.gz.",
+        "The Debian trixie archive publishes Contents-all.gz separately from Contents-amd64.gz.",
+        "libimage-exiftool-perl is Architecture: all and its package file list contains /usr/bin/exiftool.",
+        "Therefore an apt-file cache constructed only from Contents-amd64.gz omits the oracle executable for an architecture-all package."
+      ],
+      "implication": "The EXIF miss is not admissible evidence of an intrinsic PR85 discovery failure. A faithful cache must include architecture-all Contents data."
+    },
+    {
+      "case": "FRESH-JPEG-TRANSFORM-001",
+      "oracle_family": "libjpeg-turbo-progs",
+      "observed_spent_result": "ORACLE_FOUND_RANK_23",
+      "attribution": "MISSING_REMOTE_MANPAGE_ENRICHMENT_MATERIALLY_DEGRADED_SEMANTIC_EVIDENCE__EXACT_COUNTERFACTUAL_RANK_UNPROVEN",
+      "evidence": [
+        "PR85 sorts matched command paths and enriches the first path only; for libjpeg-turbo-progs this selects cjpeg rather than jpegtran.",
+        "Ubuntu Noble's cjpeg manpage contains the requested goal token JPEG and additional semantic terms used by the generic matcher, including perform and without.",
+        "The spent runtime had no outbound network, so none of that bounded manpage enrichment was available.",
+        "A separate jpegtran manpage is strongly aligned with lossless transformation, but PR85 does not select it under the current first-sorted-path enrichment rule."
+      ],
+      "implication": "Missing manpage enrichment can improve this oracle's semantic coverage and rank, but the exact top-20 counterfactual cannot be claimed without a complete normal surface."
+    },
+    {
+      "case": "FRESH-XML-LINT-001",
+      "oracle_family": "libxml2-utils",
+      "observed_spent_result": "ORACLE_FOUND_RANK_49",
+      "attribution": "ENVIRONMENT_LOSS_PRESENT_BUT_INTRINSIC_ENRICHMENT_TARGET_RESIDUAL_PRESERVED",
+      "evidence": [
+        "libxml2-utils exposes /usr/bin/xmlcatalog and /usr/bin/xmllint; PR85 sorts paths and enriches the first path, xmlcatalog.",
+        "Ubuntu Noble's xmlcatalog manpage describes parsing/manipulating XML or SGML catalogs and diagnostics, not XML document validation/syntax checking.",
+        "Therefore restoring network access would enrich xmlcatalog, not the semantically better xmllint command.",
+        "Normal APT Packages metadata was also absent in the spent run and can alter metadata score/tie-breaking, so an exact top-20 counterfactual remains unresolved."
+      ],
+      "implication": "The degraded environment cannot fully explain the XML semantic mismatch. A generic command-selection/ranking residual remains plausible and must be tested only on a newly frozen held-out gate before any second repair."
+    }
+  ],
+  "cross_case_conclusion": "SURFACE_INCOMPLETENESS_CAUSED_AT_LEAST_ONE_FALSE_NEGATIVE_AND_REMOVED_USEFUL_SEMANTIC_EVIDENCE__BUT_ENVIRONMENT_ONLY_EXPLANATION_IS_INSUFFICIENT_TO_DISMISS_AN_INTRINSIC_RANKING_RESIDUAL",
+  "wall_clock_conclusion": "The original evidence-acquisition latency blocker is materially improved because the exact three-case runner completed in 96.824453 seconds under the degraded surface, well below the 600 second gate.",
+  "sources": [
+    {
+      "url": "https://deb.debian.org/debian/dists/trixie/main/",
+      "finding": "Debian publishes Contents-all.gz separately from Contents-amd64.gz."
+    },
+    {
+      "url": "https://packages.debian.org/trixie/all/libimage-exiftool-perl/filelist",
+      "finding": "Architecture-all libimage-exiftool-perl contains /usr/bin/exiftool."
+    },
+    {
+      "url": "https://manpages.ubuntu.com/manpages/noble/man1/exiftool.1p.html",
+      "finding": "ExifTool is semantically aligned with EXIF/camera/JPEG metadata extraction."
+    },
+    {
+      "url": "https://manpages.ubuntu.com/manpages/noble/man1/xmlcatalog.1.html",
+      "finding": "xmlcatalog is a catalog manipulation command; it is the path PR85 would enrich before xmllint."
+    },
+    {
+      "url": "https://manpages.ubuntu.com/manpages/noble/man1/cjpeg.1.html",
+      "finding": "cjpeg manpage provides additional generic semantic evidence beyond its executable name."
+    }
+  ],
+  "prohibited_inference": [
+    "Do not treat this post-hoc attribution as a fresh acceptance run.",
+    "Do not infer exact counterfactual oracle ranks without a complete normal APT surface.",
+    "Do not authorize merge/promotion of PR85 from this diagnostic.",
+    "Do not implement a second repair before attribution reconciliation and a new held-out gate are frozen."
+  ]
+}
