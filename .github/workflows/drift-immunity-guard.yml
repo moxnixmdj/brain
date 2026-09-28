@@ -39,6 +39,10 @@ jobs:
             echo "base=$BASE" >> "$GITHUB_OUTPUT"
             echo "head=HEAD" >> "$GITHUB_OUTPUT"
           fi
-      - name: Enforce terminal-goal hierarchy
+      - name: Enforce terminal-goal hierarchy and blocker lease
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          CURRENT_PR_NUMBER: ${{ github.event.pull_request.number || 0 }}
         run: |
-          python /tmp/trusted_drift_guard.py             --base "${{ steps.refs.outputs.base }}"             --head "${{ steps.refs.outputs.head }}"
+          python /tmp/trusted_drift_guard.py --base "${{ steps.refs.outputs.base }}" --head "${{ steps.refs.outputs.head }}"
