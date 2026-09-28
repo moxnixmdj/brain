@@ -1,0 +1,90 @@
+name: Semantic Role IR Repair V1
+
+on:
+  push:
+    branches:
+      - repair/semantic-role-ir-v1-20260928
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Focused preflight
+        run: |
+          set -euo pipefail
+          python -m py_compile canonical/runtime/capability_discovery.py
+          python canonical/tests/test_capability_discovery.py
+          python canonical/tests/test_semantic_role_capability_discovery.py
+      - name: Single frozen semantic-role replay
+        run: python canonical/experiments/run_semantic_role_diagnostic_001.py
+      - name: Evaluate exact executable recall and role precision
+        run: |
+          python - <<'PY'
+          import json,pathlib,sys
+          p=pathlib.Path("canonical/astra_runtime/evidence/SEMANTIC_ROLE_DIAGNOSTIC_001__RESULT.json")
+          r=json.loads(p.read_text())
+          expected={
+            "ROLE-SQLITE-001":{"sqlite3"},
+            "ROLE-GZIP-001":{"gzip"},
+            "ROLE-IMAGE-RESIZE-001":{"imagemagick","graphicsmagick"},
+            "ROLE-GRAPH-RENDER-001":{"graphviz"},
+          }
+          per={}
+          exact_hits=0
+          top1_aux=0
+          syntax_noise=0
+          missing_domain=0
+          for e in r["effects"]:
+            names=[str(x.get("name") or "").lower() for x in e.get("top12",[])]
+            want=expected[e["id"]]
+            hit=next((i+1 for i,n in enumerate(names) if n in want),None)
+            if hit is not None:
+              exact_hits+=1
+            aux=bool(e.get("top1_auxiliary_or_ambiguous"))
+            top1_aux+=int(aux)
+            q=set(e.get("queries") or [])
+            syntax_noise+=int(bool(q & {"at","exactly","whose","result"}))
+            missing_domain+=int("domain" in (e.get("missing_query_roles") or []))
+            per[e["id"]]={
+              "exact_oracle_top12_rank":hit,
+              "top1_auxiliary_or_ambiguous":aux,
+              "queries":e.get("queries"),
+              "missing_query_roles":e.get("missing_query_roles"),
+            }
+          summary={
+            "schema":"PROJECT_BRAIN_SEMANTIC_ROLE_IR_REPLAY_GATE_V1",
+            "exact_oracle_top12_recall":exact_hits/4,
+            "exact_oracle_top12_hit_count":exact_hits,
+            "top1_auxiliary_or_ambiguous_count":top1_aux,
+            "syntax_noise_probe_count":syntax_noise,
+            "missing_domain_role_probe_count":missing_domain,
+            "per_probe":per,
+            "baseline_exact_top50_recall":0.5,
+            "gate_pass": exact_hits==4 and top1_aux==0 and syntax_noise==0 and missing_domain==0,
+          }
+          out=pathlib.Path("canonical/astra_runtime/evidence/SEMANTIC_ROLE_IR_REPAIR_V1__REPLAY_GATE.json")
+          out.write_text(json.dumps(summary,indent=2,sort_keys=True)+"\n")
+          print(json.dumps(summary,indent=2,sort_keys=True))
+          if not summary["gate_pass"]:
+            raise SystemExit("SEMANTIC_ROLE_IR_REPLAY_GATE_FAILED")
+          PY
+      - name: Upload repair evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: semantic-role-ir-repair-v1
+          path: |
+            canonical/astra_runtime/evidence/SEMANTIC_ROLE_DIAGNOSTIC_001__RESULT.json
+            canonical/astra_runtime/evidence/SEMANTIC_ROLE_IR_REPAIR_V1__REPLAY_GATE.json
+          if-no-files-found: warn
