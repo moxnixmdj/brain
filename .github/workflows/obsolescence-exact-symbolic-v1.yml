@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - research/obsolescence-exact-symbolic-v1-20260928
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
