@@ -69,11 +69,12 @@
     "REOPENED_BY_REGRESSION"
   ],
   "immediate_frontier": {
-    "objective": "Obsolete TOOL_DISCOVERY_SELECTION_AND_LEARNING as the first multiplier capability: given an unfamiliar required effect, discover serious candidate implementations, learn their invocation contracts, select the fastest/cheapest route that can meet the capability bar, execute a real task, and verify the outcome.",
-    "selection_metric": "CROSS_CAPABILITY_MULTIPLIER_TIMES_EXPECTED_OBSOLESCENCE_GAIN_PER_WALL_CLOCK_TIME",
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "rationale": "This capability is upstream of most remaining obsolescence work. Improving it accelerates software engineering, research, computer use, scientific reasoning, artifact production, and future capability acquisition.",
-    "prohibition": "DO_NOT_REPLACE_THIS_WITH_A_STATIC_TOOL_LIST_OR_MODEL-ONLY_ROUTER"
+    "selected_subfrontier": "CROSS_SUPPLIER_TOOL_DISCOVERY_SELECTION_LEARNING_GENERALIZATION",
+    "objective": "Replay the fully autonomous discover-select-learn-execute-independent-verify loop on a distinct unfamiliar real effect whose winning route is not APT CLI.",
+    "selection_metric": "CROSS_CAPABILITY_MULTIPLIER_TIMES_EXPECTED_OBSOLESCENCE_GAIN_PER_WALL_CLOCK_TIME",
+    "exact_blocker": "CROSS_SUPPLIER_GENERALIZATION_NOT_YET_PROVEN",
+    "prohibition": "DO_NOT_INFER_GENERAL_TOOL_LEARNING_FROM_THE_VERIFIED_APT_CLI_SUBCAPABILITY"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -88,6 +89,21 @@
       "independent_verifier": "Wolfram Language",
       "capability_route_process_wall_s": 0.59,
       "incremental_spend_usd": 0
+    },
+    {
+      "capability_id": "TOOL_DISCOVERY_SELECTION_LEARNING_APT_CLI_V1",
+      "parent_family": "TOOL_SELECTION_AND_TOOL_LEARNING",
+      "status": "OBSOLETE_VERIFIED",
+      "adjudication_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_APT_CLI_V1_ADJUDICATION.json",
+      "scope": "UNFAMILIAR_ZERO_COST_APT_CLI_PRODUCER_AND_INDEPENDENT_VERIFIER_DISCOVERY_SELECTION_CONTRACT_LEARNING_EXECUTION_AND_SEMANTIC_VERIFICATION_WITHOUT_PACKAGE_NAME_HINTS",
+      "producer": "iec16022 0.2.7-1",
+      "independent_verifier": "zxing-cpp-tools 2.2.1-3",
+      "autonomous_verifier_discovery_run_id": 36384545818,
+      "autonomous_verifier_artifact_id": 10954595070,
+      "autonomous_verifier_artifact_digest": "sha256:58fad38ad61c292bf51fd4299a6c324a427d412f5adf49db5a434d171152bb74",
+      "exact_payload_verified": true,
+      "incremental_spend_usd": 0
     }
-  ]
+  ],
+  "partial_obsolescence_records": []
 }
