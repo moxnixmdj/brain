@@ -70,12 +70,12 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Localize exactly where the already-proven direct executable-path candidate generator loses viable supplier recall when integrated into the runtime discovery path, without changing runtime code.",
-    "selection_metric": "STAGE_BY_STAGE_ORACLE_FAMILY_RECALL_DELTA_PER_WALL_CLOCK",
-    "exact_blocker": "PROVEN_DIRECT_EXECUTABLE_GENERATOR_LOSES_RECALL_DURING_RUNTIME_INTEGRATION__LOSS_STAGE_NOT_YET_LOCALIZED",
-    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_DIRECT_GENERATOR_EXISTING_EVIDENCE_RECONCILIATION_V1.json",
-    "repair_status": "NO_RUNTIME_REPAIR_AUTHORIZED__DELTA_DIAGNOSTIC_REQUIRED",
-    "prohibition": "NO_RERUN_OF_PR70_PROOF__NO_RANKING_TWEAKS__NO_PACKAGE_HINTS__NO_RUNTIME_MUTATION_BEFORE_DELTA_LOCALIZATION"
+    "objective": "Prevent strong direct executable-plus-semantic supplier evidence from being buried by lexical-only package candidates, using a generic evidence-tier ranking rule validated on fresh unseen effects.",
+    "selection_metric": "FRESH_UNSEEN_VIABLE_SUPPLIER_TOP_K_RECALL_AND_ROLE_PRECISION_PER_WALL_CLOCK_WITH_ZERO_HINTS",
+    "exact_blocker": "DIRECT_EXECUTABLE_EVIDENCE_CANDIDATES_SURVIVE_GENERATION__GLOBAL_LEXICAL_PLUS_EXECUTABLE_SCORE_FUSION_AND_FINAL_TOP_K_RANKING_REMAINS_CAUSAL_RECALL_BOTTLENECK",
+    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_DIRECT_GENERATOR_INTEGRATION_DELTA_001_RECONCILIATION.json",
+    "repair_status": "ONE_GENERIC_QUALITATIVE_EVIDENCE_TIER_REPAIR_AUTHORIZABLE_AFTER_RECONCILIATION",
+    "prohibition": "NO_OLD_CASE_WEIGHT_TUNING__NO_PACKAGE_HINTS__NO_TASK_SPECIFIC_LITERALS__FRESH_UNSEEN_GATE_REQUIRED"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -137,5 +137,12 @@
     "workflow_run_id": 36466410064,
     "oracle_family_recall": 1,
     "recall_at_20": 0.75
+  },
+  "direct_generator_integration_delta_001": {
+    "status": "COMPLETE_RECONCILED_PENDING_MERGE",
+    "workflow_run_id": 36474588105,
+    "artifact_id": 10992813288,
+    "artifact_digest": "sha256:62067bfbc6e300a81724030fca3d733b836d66835653c4a2f30ec395cd83a450",
+    "all_oracles_survive_generator_and_top100": true
   }
 }
