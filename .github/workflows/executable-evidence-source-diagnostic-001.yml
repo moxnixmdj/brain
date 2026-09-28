@@ -1,0 +1,41 @@
+name: Executable Evidence Source Diagnostic 001
+
+on:
+  push:
+    branches:
+      - diagnostic/executable-evidence-source-v1-20260928
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Prove canonical runtime unchanged
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          test -z "$(git diff --name-only origin/main...HEAD -- canonical/runtime/)"
+      - name: Install metadata-only diagnostic index client
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y apt-file
+          sudo apt-file update
+      - name: Run no-execution executable evidence diagnostic
+        run: python canonical/experiments/run_executable_evidence_source_diagnostic_001.py
+      - name: Upload diagnostic evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: executable-evidence-source-diagnostic-001
+          path: canonical/astra_runtime/evidence/EXECUTABLE_EVIDENCE_SOURCE_DIAGNOSTIC_001__RESULT.json
+          if-no-files-found: error
