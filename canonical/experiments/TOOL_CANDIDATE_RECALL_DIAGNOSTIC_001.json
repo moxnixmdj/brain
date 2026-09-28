@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_CANDIDATE_RECALL_DIAGNOSTIC_V1",
+  "diagnostic_id": "TOOL-CANDIDATE-RECALL-DIAGNOSTIC-001",
+  "status": "FROZEN_READY",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "mutation_policy": "METADATA_ONLY__NO_INSTALL__NO_EXECUTE__NO_RUNTIME_CHANGE",
+  "leakage_rule": "verified_supplier and expected_bound_capability fields are evaluator-only ground truth and MUST NOT be appended to discovery goals",
+  "cases": [
+    {
+      "id": "QR_IMAGE",
+      "goal": "Generate a QR code image from a text payload and save it as a PNG image.",
+      "expected_bound_capability": "image.qr.generate.qrencode",
+      "verified_supplier": "qrencode",
+      "effect_class": "IMAGE_CODE_GENERATION"
+    },
+    {
+      "id": "CODE128_IMAGE",
+      "goal": "Generate a Code 128 barcode image from a text payload and save it as a PNG image.",
+      "expected_bound_capability": "auto.apt.zint",
+      "verified_supplier": "zint",
+      "effect_class": "IMAGE_BARCODE_GENERATION"
+    },
+    {
+      "id": "JSON_QUERY",
+      "goal": "Query a local JSON document, select matching records, transform structured fields, and save structured output.",
+      "expected_bound_capability": "json.query.jq",
+      "verified_supplier": "jq",
+      "effect_class": "STRUCTURED_DATA_QUERY"
+    },
+    {
+      "id": "SQLITE_VERIFY",
+      "goal": "Independently verify table columns and row values in a local SQLite database against structured JSON records.",
+      "expected_bound_capability": "sqlite.table.verify_against_json_records",
+      "verified_supplier": "sqlite3",
+      "effect_class": "DATABASE_VERIFICATION"
+    },
+    {
+      "id": "YAML_TO_JSON",
+      "goal": "Convert a local YAML document into deterministic JSON while preserving its structured values.",
+      "expected_bound_capability": "yaml.to_json.yq",
+      "verified_supplier": "yq",
+      "effect_class": "STRUCTURED_DATA_CONVERSION"
+    }
+  ],
+  "metrics": [
+    "expected_bound_capability_rank",
+    "verified_supplier_rank",
+    "supplier_recall_at_1_5_10_20",
+    "obvious_non_cli_role_noise_top10"
+  ],
+  "terminal_rule": "RECONCILE_AFTER_ONE_RUN__NO_REPAIR_ON_THIS_BRANCH"
+}
