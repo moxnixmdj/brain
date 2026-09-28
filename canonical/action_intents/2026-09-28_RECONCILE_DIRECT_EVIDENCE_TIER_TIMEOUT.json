@@ -18,5 +18,6 @@
   "probe_specific_literals": [],
   "stop_condition": "Timeout reconciliation is merged; PR79 remains closed/unmerged; next action is a no-mutation latency profile, not another ranking repair.",
   "governance_change": false,
-  "weakens_existing_guard": false
+  "weakens_existing_guard": false,
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::DIRECT_EXECUTABLE_EVIDENCE_ACQUISITION_PATH_EXCEEDS_WALL_CLOCK_GATE__REPEATED_APT_FILE_AND_REMOTE_MANPAGE_SCANS_PREVENT_FAST_RANKING_ADJUDICATION::RECONCILE_FRONTIER"
 }
