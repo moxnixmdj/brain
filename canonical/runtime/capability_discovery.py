@@ -74,6 +74,7 @@ DOMAIN_FAMILIES={
     "archive_compression":{"archive","compression","compressed","gzip","zip","tar","gz"},
     "graph_diagram":{"graph","graphs","diagram","diagrams","dot"},
     "video_multimedia":{"video","multimedia","movie","media"},
+    "barcode_symbology":{"barcode","barcodes","symbology","qrcode","qr","code128"},
 }
 DOMAIN_TOKENS=set().union(*DOMAIN_FAMILIES.values())
 PAID_MARKERS = ("payment", "usdc", "x402", "$", "paid", "billing")
@@ -164,13 +165,26 @@ def effect_semantic_roles(effect):
 
 
 def effect_queries(effect):
+    # Preserve compact dotted capability identifiers such as filesystem.read:
+    # the namespace is the discovery subject while the suffix is the action.
+    raw_effect=str(effect or "").strip()
+    m=re.fullmatch(r"([A-Za-z0-9_-]+)\.([A-Za-z0-9_-]+)",raw_effect)
+    if m and (
+        m.group(2).lower() in OPERATION_TOKENS
+        or _family_for_token(m.group(2).lower(),OPERATION_FAMILIES)
+    ):
+        return [m.group(1).lower()]
+
     roles=effect_semantic_roles(effect)
     out=[]
-    # Operation first prevents literal payload/domain trivia from consuming the
-    # query budget. Domain and format then constrain what kind of executable is
-    # actually useful.
-    for role in ("operation","domain","format"):
+    weak_operations={"create","generate","build","export","import","download","upload"}
+    # Preserve legacy high-signal ordering: concrete format/domain first.
+    # Strong operations still enter the bounded query set, while weak generic
+    # creation verbs cannot crowd out what is being operated on.
+    for role in ("format","domain","operation"):
         for token in roles[role]:
+            if role=="operation" and token in weak_operations and out:
+                continue
             if token not in out:
                 out.append(token)
             if len(out)>=8:
