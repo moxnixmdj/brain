@@ -58,13 +58,24 @@ def _render(value,inputs):
 
 def _bind_contract_inputs(goal,root,contract):
     required=list(contract.get("required_inputs") or [])
-    if set(required)!={"text","output_path"}:
-        raise AutoAcquisitionFailure("ACQUISITION_CONTRACT_CLASS_UNSUPPORTED",",".join(required))
-    text=goal_compiler._extract_text_argument(goal)
+    allowed={"text","output_path"}
+    if not required or "output_path" not in required or not set(required).issubset(allowed):
+        raise AutoAcquisitionFailure(
+            "ACQUISITION_CONTRACT_CLASS_UNSUPPORTED",",".join(required)
+        )
     paths=goal_compiler._repo_paths(goal,root)
     if len(paths)!=1:
         raise AutoAcquisitionFailure("ACQUISITION_OUTPUT_PATH_AMBIGUOUS",str(len(paths)))
-    return {"text":text,"output_path":paths[0][0]}
+    out={"output_path":paths[0][0]}
+    if "text" in required:
+        try:
+            out["text"]=goal_compiler._extract_text_argument(goal)
+        except Exception as exc:
+            raise AutoAcquisitionFailure(
+                "ACQUISITION_SEMANTIC_TEXT_BINDING_UNRESOLVED",
+                type(exc).__name__+":"+str(exc)
+            ) from exc
+    return out
 
 
 def _format_terms(goal):
@@ -226,11 +237,15 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
     sha=str(candidate["archive_sha256"]).lower()
     inputs=_bind_contract_inputs(goal,root,contract)
     argv=_render(contract["argv_template"],inputs)
+    stdin_template=contract.get("stdin_template")
+    stdin_text=_render(stdin_template,inputs) if isinstance(stdin_template,str) else None
     verification_args={
       "argv":argv,
       "output_path":_render(contract["output_path_template"],inputs),
       "output_prefix_hex":contract["output_prefix_hex"],
       "output_text_utf8":bool(contract.get("output_text_utf8",False)),
+      "stdin_text":stdin_text,
+      "capture_stdout_to_output":bool(contract.get("capture_stdout_to_output",False)),
       "timeout_s":int(contract.get("timeout_s",60))
     }
     slug=_slug(package)
@@ -260,6 +275,8 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
           "output_path":contract["output_path_template"],
           "output_prefix_hex":contract["output_prefix_hex"],
           "output_text_utf8":bool(contract.get("output_text_utf8",False)),
+          "stdin_text":contract.get("stdin_template"),
+          "capture_stdout_to_output":bool(contract.get("capture_stdout_to_output",False)),
           "timeout_s":int(contract.get("timeout_s",60))
         },
         "expect":{"type":"field_equals","field":"output_verified","value":True}
@@ -298,10 +315,14 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
       "verification_args":verification_args,
       "semantic_verification":{
         "required":True,
-        "reason":"Auto-synthesized text-to-binary-file capability must prove semantic content independently of the producer.",
+        "reason":"Auto-synthesized CLI capability must prove the requested semantic effect independently of producer bytes.",
         "expected_text":inputs.get("text"),
         "goal":goal,
-        "status":"PENDING_VERIFIER_ACQUISITION"
+        "status":(
+          "PENDING_VERIFIER_ACQUISITION"
+          if inputs.get("text") is not None
+          else "PENDING_GENERIC_SEMANTIC_VERIFIER"
+        )
       },
       "registry_entry":entry,
       "verification_mission_id":verify_mid,
