@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_PRETRUNCATION_CANDIDATE_RANK_TRACE_V1",
+  "diagnostic_id": "PRETRUNCATION-CANDIDATE-RANK-TRACE-001",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "status": "FROZEN_NO_MUTATION",
+  "source_evidence": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_RAW_TO_RANKED_CANDIDATE_TRACE_001_RECONCILIATION.json",
+  "effects": [
+    {
+      "effect_id": "TRACE-PDF-TEXT-001",
+      "goal": "Extract plain text from a PDF document and save the text to canonical/astra_runtime/tmp/TRACE_PDF_TEXT_001.txt.",
+      "oracle_families": [
+        "poppler-utils"
+      ]
+    },
+    {
+      "effect_id": "TRACE-SVG-RASTER-001",
+      "goal": "Convert an SVG vector image into a PNG raster image and save it at canonical/astra_runtime/tmp/TRACE_SVG_RASTER_001.png.",
+      "oracle_families": [
+        "librsvg2-bin",
+        "inkscape",
+        "imagemagick"
+      ]
+    },
+    {
+      "effect_id": "TRACE-BZIP2-001",
+      "goal": "Compress a text file using bzip2 compression and save the compressed result at canonical/astra_runtime/tmp/TRACE_BZIP2_001.bz2.",
+      "oracle_families": [
+        "bzip2"
+      ]
+    },
+    {
+      "effect_id": "TRACE-MEDIA-METADATA-001",
+      "goal": "Inspect a multimedia file and report its technical media metadata.",
+      "oracle_families": [
+        "mediainfo"
+      ]
+    }
+  ],
+  "constraints": {
+    "runtime_mutation_forbidden": true,
+    "oracle_names_evaluator_only": true,
+    "candidate_install_or_execution_forbidden": true
+  },
+  "required_measurements": [
+    "oracle_admitted_to_seen",
+    "oracle_pretruncation_rank",
+    "oracle_score",
+    "oracle_matched_terms",
+    "candidate_pool_size",
+    "count_outranking_oracle",
+    "score_threshold_rank_50",
+    "top_outranking_candidates"
+  ],
+  "promotion_authorized": false
+}
