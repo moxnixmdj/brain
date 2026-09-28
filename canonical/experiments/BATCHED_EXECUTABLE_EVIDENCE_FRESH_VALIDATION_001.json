@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_BATCHED_EXECUTABLE_EVIDENCE_FRESH_VALIDATION_V1",
+  "validation_id": "BATCHED-EXECUTABLE-EVIDENCE-FRESH-VALIDATION-001",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "status": "FROZEN_BEFORE_REPAIR",
+  "provenance": {
+    "recovered_from_pr": 79,
+    "prior_validation_id": "DIRECT-EVIDENCE-TIER-FRESH-VALIDATION-001",
+    "prior_run_id": 36478244388,
+    "prior_result": "NO_RESULT__CANCELLED_AT_HARD_WALL_CLOCK_GATE",
+    "rationale": "Reuse the exact previously frozen unseen cases rather than inventing a new gate after observing the repair."
+  },
+  "cases": [
+    {
+      "effect_id": "FRESH-EXIF-001",
+      "goal": "Extract EXIF camera metadata from a JPEG image.",
+      "oracle_families": [
+        "libimage-exiftool-perl"
+      ]
+    },
+    {
+      "effect_id": "FRESH-XML-LINT-001",
+      "goal": "Validate an XML document and report syntax errors.",
+      "oracle_families": [
+        "libxml2-utils"
+      ]
+    },
+    {
+      "effect_id": "FRESH-JPEG-TRANSFORM-001",
+      "goal": "Perform a lossless JPEG transformation without recompressing image data.",
+      "oracle_families": [
+        "libjpeg-turbo-progs"
+      ]
+    }
+  ],
+  "acceptance": {
+    "fresh_oracle_family_recall_min": 0.6666666667,
+    "fresh_top20_oracle_recall_min": 0.6666666667,
+    "package_hints_forbidden": true,
+    "task_specific_literals_forbidden": true,
+    "hard_validation_wall_s": 600,
+    "incremental_spend_usd": 0
+  },
+  "old_four_regression_only": true,
+  "promotion_authorized": false
+}
