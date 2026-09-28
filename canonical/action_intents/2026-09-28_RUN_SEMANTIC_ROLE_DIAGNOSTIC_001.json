@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RUN-SEMANTIC-ROLE-DIAGNOSTIC-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "SEMANTIC-ROLE-DIAGNOSTIC-001",
+  "causal_blocker": "CAPABILITY_QUERY_AND_CANDIDATE_EVIDENCE_LACK_EXPLICIT_SEMANTIC_ROLES",
+  "action_kind": "CANDIDATE_DISCOVERY_DIAGNOSTIC",
+  "expected_parent_frontier_change": "Determine whether explicit operation/domain/format/constraint and candidate producer-role separation explains the frozen supplier misrankings better than flat lexical overlap, without changing runtime code.",
+  "highest_leverage_now": true,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Role diagnostic completes on all frozen cases and records whether a minimal role representation explains the observed misrankings. Then reconcile; no runtime repair on this branch.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
