@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_COMMAND_MANPAGE_SEMANTICS_DIAGNOSTIC_V1",
+  "diagnostic_id": "COMMAND-MANPAGE-SEMANTICS-DIAGNOSTIC-001",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "status": "FROZEN_NO_MUTATION",
+  "source_type": "APT_PACKAGE_MANPAGE_METADATA",
+  "cases": [
+    {
+      "effect_id": "PDF_TEXT",
+      "goal": "Extract plain text from a PDF document.",
+      "package": "poppler-utils",
+      "expected_command": "pdftotext",
+      "semantic_terms": [
+        "pdf",
+        "text",
+        "extract"
+      ]
+    },
+    {
+      "effect_id": "SVG_RASTER",
+      "goal": "Convert an SVG vector image into a PNG raster image.",
+      "package": "librsvg2-bin",
+      "expected_command": "rsvg-convert",
+      "semantic_terms": [
+        "svg",
+        "png",
+        "raster",
+        "convert"
+      ]
+    },
+    {
+      "effect_id": "BZIP2",
+      "goal": "Compress a text file using bzip2 compression.",
+      "package": "bzip2",
+      "expected_command": "bzip2",
+      "semantic_terms": [
+        "bzip2",
+        "compress",
+        "compression"
+      ]
+    },
+    {
+      "effect_id": "MEDIA_METADATA",
+      "goal": "Inspect a multimedia file and report its technical media metadata.",
+      "package": "mediainfo",
+      "expected_command": "mediainfo",
+      "semantic_terms": [
+        "media",
+        "metadata",
+        "technical",
+        "information"
+      ]
+    }
+  ],
+  "constraints": {
+    "runtime_mutation_forbidden": true,
+    "candidate_installation_for_execution_forbidden": true,
+    "package_download_for_metadata_extraction_allowed": true,
+    "candidate_execution_forbidden": true,
+    "package_names_evaluator_only_from_prior_reconciled_evidence": true,
+    "incremental_spend_usd": 0
+  },
+  "measurement": "Compare semantic-term coverage in executable basename alone versus packaged manpage NAME/SYNOPSIS/DESCRIPTION text. Measure added directional/role evidence.",
+  "promotion_authorized": false
+}
