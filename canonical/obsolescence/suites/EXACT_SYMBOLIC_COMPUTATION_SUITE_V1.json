@@ -1,0 +1,168 @@
+{
+  "schema": "PROJECT_BRAIN_EXACT_SYMBOLIC_OBSOLESCENCE_SUITE_V1",
+  "suite_id": "OBS-EXACT-SYMBOLIC-001",
+  "capability_id": "EXACT_SYMBOLIC_COMPUTATION_V1",
+  "parent_family": "TECHNICAL_SCIENTIFIC_REASONING",
+  "frozen_on": "2026-09-28",
+  "purpose": "Bounded exact symbolic-computation capability test with objectively exact ground truth. 100% exact correctness is the mathematical ceiling for this frozen task class.",
+  "producer_route": "SymPy 1.14.0",
+  "independent_expected_source": {
+    "supplier": "Wolfram Language kernel",
+    "method": "Independent exact evaluation before producer execution",
+    "date": "2026-09-28",
+    "note": "Expected values were independently generated with Wolfram Language exact arithmetic/symbolics. The producer implementation is SymPy and does not call Wolfram."
+  },
+  "tasks": [
+    {
+      "id": "T01_EXACT_RATIONAL",
+      "operation": "rational_sum",
+      "args": {
+        "a_num": "12345678901234567890",
+        "a_den": "37",
+        "b_num": "98765432109876543210",
+        "b_den": "41"
+      },
+      "expected": "4160493823016049382260/1517",
+      "wolfram_input": "12345678901234567890/37 + 98765432109876543210/41"
+    },
+    {
+      "id": "T02_FACTOR_POLYNOMIAL",
+      "operation": "factor",
+      "args": {
+        "expr": "x**8 - 1",
+        "vars": [
+          "x"
+        ]
+      },
+      "expected": "(x - 1)*(x + 1)*(x**2 + 1)*(x**4 + 1)",
+      "wolfram_input": "Factor[x^8 - 1]"
+    },
+    {
+      "id": "T03_POLYNOMIAL_COEFFICIENT",
+      "operation": "coefficient",
+      "args": {
+        "expr": "(x + 1)**12",
+        "var": "x",
+        "power": 4
+      },
+      "expected": "495",
+      "wolfram_input": "Coefficient[Expand[(x+1)^12],x,4]"
+    },
+    {
+      "id": "T04_QUADRATIC_ROOTS",
+      "operation": "roots",
+      "args": {
+        "expr": "x**2 - 2",
+        "var": "x"
+      },
+      "expected": [
+        "-sqrt(2)",
+        "sqrt(2)"
+      ],
+      "wolfram_input": "Sort[x /. Solve[x^2-2==0,x,Reals]]"
+    },
+    {
+      "id": "T05_CUBIC_ROOTS",
+      "operation": "roots",
+      "args": {
+        "expr": "x**3 - 6*x**2 + 11*x - 6",
+        "var": "x"
+      },
+      "expected": [
+        "1",
+        "2",
+        "3"
+      ],
+      "wolfram_input": "Sort[x /. Solve[x^3-6 x^2+11 x-6==0,x,Reals]]"
+    },
+    {
+      "id": "T06_SYMBOLIC_DERIVATIVE",
+      "operation": "differentiate",
+      "args": {
+        "expr": "x**x",
+        "var": "x"
+      },
+      "expected": "x**x*(log(x) + 1)",
+      "wolfram_input": "D[x^x,x]"
+    },
+    {
+      "id": "T07_EXACT_DEFINITE_INTEGRAL",
+      "operation": "integrate_definite",
+      "args": {
+        "expr": "sin(x)**6",
+        "var": "x",
+        "lower": "0",
+        "upper": "pi"
+      },
+      "expected": "5*pi/16",
+      "wolfram_input": "Integrate[Sin[x]^6,{x,0,Pi}]"
+    },
+    {
+      "id": "T08_HILBERT_DETERMINANT",
+      "operation": "hilbert_determinant",
+      "args": {
+        "n": 5
+      },
+      "expected": "1/266716800000",
+      "wolfram_input": "Det[Table[1/(i+j-1),{i,1,5},{j,1,5}]]"
+    },
+    {
+      "id": "T09_BINOMIAL_SQUARE_SUM",
+      "operation": "binomial_square_sum",
+      "args": {
+        "n": 100
+      },
+      "expected": "90548514656103281165404177077484163874504589675413336841320",
+      "wolfram_input": "Sum[Binomial[100,k]^2,{k,0,100}]"
+    },
+    {
+      "id": "T10_CLASSIC_LIMIT",
+      "operation": "limit",
+      "args": {
+        "expr": "sin(x)/x",
+        "var": "x",
+        "point": "0"
+      },
+      "expected": "1",
+      "wolfram_input": "Limit[Sin[x]/x,x->0]"
+    },
+    {
+      "id": "T11_EXACT_LINEAR_SYSTEM",
+      "operation": "linear_system",
+      "args": {
+        "equations": [
+          "2*x + 3*y - 7",
+          "5*x - 2*y - 4"
+        ],
+        "vars": [
+          "x",
+          "y"
+        ]
+      },
+      "expected": {
+        "x": "26/19",
+        "y": "27/19"
+      },
+      "wolfram_input": "Solve[{2 x + 3 y == 7,5 x - 2 y == 4},{x,y},Rationals]"
+    },
+    {
+      "id": "T12_SERIES_COEFFICIENT",
+      "operation": "series_coefficient",
+      "args": {
+        "expr": "exp(x)*sin(x)",
+        "var": "x",
+        "power": 9
+      },
+      "expected": "1/22680",
+      "wolfram_input": "SeriesCoefficient[Exp[x] Sin[x],{x,0,9}]"
+    }
+  ],
+  "acceptance": {
+    "pass_count_required": 12,
+    "fail_count_required": 0,
+    "exact_comparison_required": true,
+    "numerical_tolerance_forbidden": true,
+    "incremental_spend_usd": 0,
+    "scope_warning": "Passing this suite obsoletes only the bounded exact-symbolic-computation subcapability represented by these operation classes. It does NOT prove all mathematical or scientific reasoning obsolete."
+  }
+}
