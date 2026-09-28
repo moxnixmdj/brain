@@ -707,9 +707,15 @@ def _acquire_and_run_semantic_verifier(pending, output_path):
               "attempt_count":len(attempts)+1
             }
             attempt["status"]="VERIFIED" if verified else "SEMANTIC_CONTENT_MISMATCH"
+            attempt["observed_text"]=observed
             attempts.append(attempt)
-            evidence["attempts"]=attempts
-            return evidence
+            if verified:
+                evidence["attempts"]=attempts
+                return evidence
+            # A syntactically executable verifier is not enough. Continue the
+            # route race until one independently observes the exact semantic
+            # effect or every candidate is falsified.
+            continue
         except Exception as exc:
             attempt["status"]="VERIFIER_PROBE_FAILED"
             attempt["error"]=type(exc).__name__+":"+str(exc)
