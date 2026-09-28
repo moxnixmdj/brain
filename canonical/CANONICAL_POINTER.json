@@ -148,11 +148,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "NO_MUTATION_DIRECT_EXECUTABLE_MANPAGE_CANDIDATE_GENERATION_DIAGNOSTIC__THEN_RECONCILE",
+    "next_step": "NO_MUTATION_DIRECT_GENERATOR_INTEGRATION_DELTA_DIAGNOSTIC__THEN_RECONCILE",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "DIRECT_EXECUTABLE_MANPAGE_CANDIDATE_GENERATION_NOT_YET_PROVEN__POST_ADMISSION_ENRICHMENT_FALSIFIED",
+    "critical_blocker": "PROVEN_DIRECT_EXECUTABLE_GENERATOR_LOSES_RECALL_DURING_RUNTIME_INTEGRATION__LOSS_STAGE_NOT_YET_LOCALIZED",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -229,7 +229,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "TOOL_DISCOVERY_SELECTION_AND_LEARNING__DIRECT_EXECUTABLE_MANPAGE_CANDIDATE_GENERATION",
+    "highest_leverage_capability_gap": "TOOL_DISCOVERY_SELECTION_AND_LEARNING__DIRECT_GENERATOR_INTEGRATION_FIDELITY",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -451,6 +451,19 @@
       ],
       "status": "RECONCILED__STRUCTURAL_BLOCKER_LEASE_GUARD_REQUIRED",
       "law": "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md"
+    },
+    "direct_executable_generator_existing_evidence": {
+      "status": "PROVEN_RECOVERED_FROM_PR70",
+      "workflow_run_id": 36466410064,
+      "oracle_family_recall": 1,
+      "recall_at_20": 0.75,
+      "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_DIRECT_GENERATOR_EXISTING_EVIDENCE_RECONCILIATION_V1.json"
+    },
+    "blocker_lease_guard": {
+      "status": "VERIFIED_BY_NEGATIVE_CANARY",
+      "holder_pr": 75,
+      "rejected_duplicate_pr": 76,
+      "guard_run_id": 36473916109
     }
   },
   "provider_rules": {
