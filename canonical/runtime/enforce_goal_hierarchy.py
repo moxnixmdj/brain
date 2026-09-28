@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fail-closed anti-drift validator for frontier-sensitive changes."""
 from __future__ import annotations
-import argparse, hashlib, json, os, pathlib, subprocess, sys
+import argparse, base64, hashlib, json, os, pathlib, subprocess, sys, urllib.parse, urllib.request
 
 ROOT=pathlib.Path(os.environ.get("GITHUB_WORKSPACE") or pathlib.Path.cwd()).resolve()
 
@@ -19,6 +19,7 @@ SENSITIVE_PREFIXES=(
 SENSITIVE_EXACT={"canonical/CANONICAL_POINTER.json"}
 PROTECTED_GUARD_PATHS={
     "canonical/laws/GOAL_HIERARCHY_AND_DRIFT_IMMUNITY_LAW_V1.md",
+    "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
     "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V1.json",
     "canonical/runtime/enforce_goal_hierarchy.py",
     ".github/workflows/drift-immunity-guard.yml",
@@ -53,6 +54,86 @@ def added_diff(base,head,path):
 def is_sensitive(path):
     return path in SENSITIVE_EXACT or any(path.startswith(p) for p in SENSITIVE_PREFIXES)
 
+
+def blocker_lease_key(intent):
+    parts=[
+        str(intent.get("canonical_generation") or ""),
+        str(intent.get("capability_target") or ""),
+        str(intent.get("causal_blocker") or ""),
+        str(intent.get("action_kind") or ""),
+    ]
+    return "::".join(parts)
+
+def _github_json(path):
+    token=os.environ.get("GITHUB_TOKEN")
+    repo=os.environ.get("GITHUB_REPOSITORY")
+    if not token or not repo:
+        raise RuntimeError("GITHUB_DEDUPE_CONTEXT_MISSING")
+    req=urllib.request.Request(
+        "https://api.github.com"+path,
+        headers={
+            "Authorization":"Bearer "+token,
+            "Accept":"application/vnd.github+json",
+            "X-GitHub-Api-Version":"2022-11-28",
+            "User-Agent":"ProjectBrain-DriftGuard/1",
+        },
+    )
+    with urllib.request.urlopen(req,timeout=20) as resp:
+        return json.loads(resp.read().decode("utf-8"))
+
+def _open_pr_intents():
+    repo=os.environ.get("GITHUB_REPOSITORY")
+    current=int(os.environ.get("CURRENT_PR_NUMBER") or "0")
+    if not repo or not os.environ.get("GITHUB_TOKEN") or current<=0:
+        return []
+    prs=_github_json(f"/repos/{repo}/pulls?state=open&per_page=100")
+    out=[]
+    for pr in prs:
+        number=int(pr.get("number") or 0)
+        if number==current:
+            continue
+        files=_github_json(f"/repos/{repo}/pulls/{number}/files?per_page=100")
+        for item in files:
+            path=str(item.get("filename") or "")
+            if not (path.startswith("canonical/action_intents/") and path.endswith(".json")):
+                continue
+            if item.get("status")=="removed":
+                continue
+            ref=str((pr.get("head") or {}).get("sha") or "")
+            encoded=urllib.parse.quote(path,safe="/")
+            try:
+                payload=_github_json(f"/repos/{repo}/contents/{encoded}?ref={urllib.parse.quote(ref,safe='')}")
+                raw=base64.b64decode(payload.get("content") or b"")
+                intent=json.loads(raw.decode("utf-8"))
+            except Exception as exc:
+                raise RuntimeError(f"OPEN_PR_INTENT_READ_FAILED:{number}:{path}:{type(exc).__name__}") from exc
+            out.append({"pr":number,"path":path,"intent":intent})
+    return out
+
+def enforce_blocker_lease(intent):
+    expected=blocker_lease_key(intent)
+    actual=str(intent.get("blocker_lease_key") or "")
+    if actual!=expected:
+        fail("BLOCKER_LEASE_KEY_MISSING_OR_MISMATCH")
+        return
+    try:
+        peers=_open_pr_intents()
+    except Exception as exc:
+        fail("BLOCKER_LEASE_DEDUPE_CHECK_FAILED:"+str(exc))
+        return
+    for peer in peers:
+        other=peer["intent"]
+        if blocker_lease_key(other)!=expected:
+            continue
+        if str(other.get("blocker_lease_key") or "")!=expected:
+            continue
+        if bool(intent.get("intentional_route_race")) and bool(other.get("intentional_route_race")):
+            race_a=str(intent.get("route_race_id") or "")
+            race_b=str(other.get("route_race_id") or "")
+            if race_a and race_a==race_b:
+                continue
+        fail(f"DUPLICATE_BLOCKER_LEASE_OPEN_PR:{peer['pr']}")
+
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--base",required=True)
@@ -79,6 +160,9 @@ def main():
     if len(intents)>1:
         fail("MULTIPLE_ACTION_INTENTS_IN_ONE_PR")
     intent=load(intents[0]) if intents else {}
+
+    if intent:
+        enforce_blocker_lease(intent)
 
     terminal=str(pointer.get("mission_lock",{}).get("terminal_objective") or "")
     if hierarchy.get("terminal_objective")!=terminal:

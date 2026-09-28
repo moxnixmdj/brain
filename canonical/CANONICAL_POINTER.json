@@ -91,7 +91,10 @@
     "frontier_sensitive_action_intent_required": true,
     "frontier_sensitive_pr_drift_guard_required": true,
     "drift_guard_validator_path": "canonical/runtime/enforce_goal_hierarchy.py",
-    "drift_guard_workflow_path": ".github/workflows/drift-immunity-guard.yml"
+    "drift_guard_workflow_path": ".github/workflows/drift-immunity-guard.yml",
+    "blocker_lease_required": true,
+    "blocker_lease_open_pr_dedupe_required": true,
+    "expensive_frontier_execution_requires_guarded_pr_first": true
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
@@ -145,11 +148,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "ONE_GENERIC_EXECUTABLE_SEMANTIC_EVIDENCE_REPAIR__ENRICH_APT_CANDIDATES_WITH_EXECUTABLE_PATH_AND_MANPAGE_SEMANTICS__REPLAY_FROZEN_FOUR_EFFECT_RANKING_SET_ONCE__RECONCILE",
+    "next_step": "NO_MUTATION_DIRECT_EXECUTABLE_MANPAGE_CANDIDATE_GENERATION_DIAGNOSTIC__THEN_RECONCILE",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "EXECUTABLE_AND_MANPAGE_OPERATION_EVIDENCE_PROVEN__CURRENT_RUNTIME_DOES_NOT_CONSUME_IT_FOR_CANDIDATE_RANKING",
+    "critical_blocker": "DIRECT_EXECUTABLE_MANPAGE_CANDIDATE_GENERATION_NOT_YET_PROVEN__POST_ADMISSION_ENRICHMENT_FALSIFIED",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -226,7 +229,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "TOOL_DISCOVERY_SELECTION_AND_LEARNING__EXECUTABLE_SEMANTIC_EVIDENCE_INTEGRATION",
+    "highest_leverage_capability_gap": "TOOL_DISCOVERY_SELECTION_AND_LEARNING__DIRECT_EXECUTABLE_MANPAGE_CANDIDATE_GENERATION",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -428,6 +431,26 @@
       "high_semantic_coverage_fraction": 0.75,
       "one_generic_repair_authorized": true,
       "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_COMMAND_MANPAGE_SEMANTICS_DIAGNOSTIC_001_RECONCILIATION.json"
+    },
+    "executable_semantic_post_admission_repairs": {
+      "status": "FALSIFIED_BOTH_IMPLEMENTATIONS__NOT_MERGED",
+      "prs": [
+        72,
+        73
+      ],
+      "workflow_run_ids": [
+        36468338181,
+        36471956894
+      ],
+      "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EXECUTABLE_SEMANTIC_REPAIRS_FALSIFICATION_RECONCILIATION_V1.json"
+    },
+    "duplicate_execution_incident": {
+      "prs": [
+        72,
+        73
+      ],
+      "status": "RECONCILED__STRUCTURAL_BLOCKER_LEASE_GUARD_REQUIRED",
+      "law": "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md"
     }
   },
   "provider_rules": {
@@ -514,7 +537,20 @@
     "second_repair_requires_orthogonal_recurrence_count": 2,
     "post_probe_frontier_reconciliation_required": true,
     "quarantined_probe_cannot_define_frontier": true,
-    "drifted_branch_policy": "QUARANTINE_PRESERVE_EVIDENCE_RECOMPUTE_PARENT_FRONTIER_EXTRACT_ONLY_GENERIC_VALUE_VIA_FRESH_COMPLIANT_PR"
+    "drifted_branch_policy": "QUARANTINE_PRESERVE_EVIDENCE_RECOMPUTE_PARENT_FRONTIER_EXTRACT_ONLY_GENERIC_VALUE_VIA_FRESH_COMPLIANT_PR",
+    "blocker_lease_key_fields": [
+      "canonical_generation",
+      "capability_target",
+      "causal_blocker",
+      "action_kind"
+    ],
+    "open_pr_intent_dedupe_required": true,
+    "expensive_execution_sequence": [
+      "COMMIT_ACTION_INTENT",
+      "OPEN_PR",
+      "PASS_TRUSTED_LEASE_GUARD",
+      "ADD_OR_TRIGGER_EXPENSIVE_WORKFLOW"
+    ]
   },
   "standby_runtime": {
     "runtime_id": "SUPERHERO-RUNTIME-2.6.0-DIRECT-SIGNED-PERMANENT",

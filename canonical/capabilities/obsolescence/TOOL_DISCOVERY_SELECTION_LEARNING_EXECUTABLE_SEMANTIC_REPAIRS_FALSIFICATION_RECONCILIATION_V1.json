@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_EXECUTABLE_SEMANTIC_REPAIRS_FALSIFICATION_RECONCILIATION_V1",
+  "status": "COMPLETE_RECONCILED_PENDING_MERGE",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "source_diagnostic": "COMMAND-MANPAGE-SEMANTICS-DIAGNOSTIC-001",
+  "failed_repairs": [
+    {
+      "pr": 72,
+      "workflow_run_id": 36468338181,
+      "artifact_id": 10989974725,
+      "artifact_digest": "sha256:a24c0cca342274164266ce4255f28348c1e8c7478265b9422e301baff492368f",
+      "oracle_family_recall": 0.75,
+      "top20_oracle_recall": 0.5,
+      "bzip2_no_regression": true,
+      "notable_residuals": ["MEDIAINFO_FAMILY_NOT_SURFACED", "LIBRSVG2_BIN_RANK_23"],
+      "merge_authorized": false
+    },
+    {
+      "pr": 73,
+      "workflow_run_id": 36471956894,
+      "artifact_id": 10992731451,
+      "artifact_digest": "sha256:83f1574eaa3b3bd0b4d3a819429e3b266a3d0450404882bb7c381109bf7180cd",
+      "oracle_family_recall": 0.25,
+      "top20_oracle_recall": 0.25,
+      "bzip2_no_regression": true,
+      "notable_residuals": ["MEDIAINFO_FAMILY_NOT_SURFACED", "POST_ADMISSION_ENRICHMENT_FAILED_TO_RESCUE_MOST_ORACLES"],
+      "merge_authorized": false
+    }
+  ],
+  "causal_conclusion": [
+    "Executable-path and manpage semantics are useful evidence once a supplier candidate is already surfaced.",
+    "Using that evidence only as post-admission enrichment or reranking is insufficient to reliably recover viable supplier families.",
+    "The next upstream question is whether operation semantics can directly generate a compact executable or manpage-derived candidate set before lexical package admission.",
+    "PR73 duplicated the same active blocker and action class already being executed by PR72, proving the existing no-duplicate law lacked structural open-PR enforcement."
+  ],
+  "rejected_action_class": "SECOND_POST_ADMISSION_RANKING_REPAIR",
+  "next_frontier": {
+    "exact_blocker": "DIRECT_EXECUTABLE_MANPAGE_CANDIDATE_GENERATION_NOT_YET_PROVEN__POST_ADMISSION_ENRICHMENT_FALSIFIED",
+    "next_action": "NO_MUTATION_DIRECT_EXECUTABLE_MANPAGE_CANDIDATE_GENERATION_DIAGNOSTIC__THEN_RECONCILE",
+    "runtime_mutation_before_diagnostic": false
+  },
+  "duplicate_execution_incident": {
+    "duplicate_prs": [72, 73],
+    "required_control": "BLOCKER_LEASE_KEY_PLUS_OPEN_PR_INTENT_DEDUPE",
+    "lease_tuple": ["canonical_generation", "capability_target", "causal_blocker", "action_kind"]
+  },
+  "promotion_authorized": false
+}

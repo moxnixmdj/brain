@@ -107,3 +107,33 @@ Any future plan matching these patterns MUST fail closed before execution.
 This law is mandatory at boot and before every consequential frontier transition.
 
 Violation invalidates any claim that the resulting work was optimal, fastest, or canonical, regardless of whether the local action technically succeeded.
+
+
+## 13. Blocker lease and open-PR deduplication
+Before any consequential frontier action is allowed to execute, it MUST possess a unique blocker lease derived from:
+- canonical generation;
+- capability target;
+- causal blocker;
+- action kind.
+
+The canonical lease key is the exact tuple serialized as:
+`canonical_generation::capability_target::causal_blocker::action_kind`.
+
+Every frontier action intent MUST contain this `blocker_lease_key`.
+
+Before expensive execution, the control plane MUST search open pull requests for other action intents with the same lease key. If one exists, the new action MUST:
+- join/reuse the existing action;
+- wait for its reconciliation; or
+- prove that the actions are intentionally independent route-race competitors under a predeclared shared race.
+
+Absent that explicit route-race declaration, equivalent concurrent execution is forbidden.
+
+A frontier workflow MUST NOT begin expensive execution before its pull request exists and the trusted guard has checked the blocker lease. The sequence is:
+1. create branch;
+2. commit action intent only;
+3. open PR;
+4. pass trusted blocker-lease/drift guard;
+5. only then add/trigger expensive experiment work.
+
+The PR #72 / PR #73 duplicate executable-semantic repair incident is a permanent regression case. Any future equivalent duplicate MUST fail closed.
+
