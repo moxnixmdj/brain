@@ -144,9 +144,14 @@ def infer_contract(probe, goal):
                 flag=_option_flag(line)
                 if flag:
                     input_flag=flag; break
+    positional_file_supported=bool(
+        usage_line and re.search(r"(?:\\[|<)?FILE(?:\\]|>)?",usage_line,re.I)
+    )
     if positional is None and input_flag is None:
         if "standard input" in lower_help or "stdin" in lower_help:
             stdin_text=True
+        elif positional_file_supported:
+            positional="file"
         else:
             raise ContractInferenceFailure("CLI_TEXT_INPUT_UNRESOLVED")
 
@@ -184,11 +189,20 @@ def infer_contract(probe, goal):
 
     command=pathlib.Path(exe).name
     argv=[command,*selector,output_flag,"__OUT_PLACEHOLDER__"]
+    text_file_transport=False
     if input_flag:
         argv.extend([input_flag,"__TEXT_PLACEHOLDER__"])
+    elif positional=="file":
+        argv.append("__TEXT_FILE_PLACEHOLDER__")
+        text_file_transport=True
     elif positional:
         argv.append("__TEXT_PLACEHOLDER__")
-    argv=[x.replace("__OUT_PLACEHOLDER__","$"+"{input.output_path}").replace("__TEXT_PLACEHOLDER__","$"+"{input.text}") for x in argv]
+    argv=[
+        x.replace("__OUT_PLACEHOLDER__","$"+"{input.output_path}")
+         .replace("__TEXT_PLACEHOLDER__","$"+"{input.text}")
+         .replace("__TEXT_FILE_PLACEHOLDER__","__PB_TEXT_FILE__")
+        for x in argv
+    ]
     return {
       "schema":"PROJECT_BRAIN_CLI_CONTRACT_CANDIDATE_V1",
       "status":"CANDIDATE_REQUIRES_EFFECT_VERIFICATION",
@@ -198,6 +212,11 @@ def infer_contract(probe, goal):
       "argv_template":argv,
       "output_path_template":"$"+"{input.output_path}",
       "stdin_text_template":("$"+"{input.text}") if stdin_text else None,
+      "text_file_text_template":("$"+"{input.text}") if text_file_transport else None,
+      "alternate_input_transports":(
+        [{"type":"POSITIONAL_TEXT_FILE","arg_token":"__PB_TEXT_FILE__"}]
+        if (stdin_text and positional_file_supported) else []
+      ),
       "output_prefix_hex":magic or "",
       "output_text_utf8":bool(text_output),
       "timeout_s":60,
@@ -208,7 +227,11 @@ def infer_contract(probe, goal):
         "input_flag":input_flag,
         "positional_input":positional,
         "stdin_text":stdin_text,
-        "input_transport":("STDIN_TEXT" if stdin_text else ("FLAG" if input_flag else "POSITIONAL")),
+        "input_transport":(
+            "STDIN_TEXT" if stdin_text else
+            ("POSITIONAL_TEXT_FILE" if text_file_transport else ("FLAG" if input_flag else "POSITIONAL"))
+        ),
+        "positional_file_supported":positional_file_supported,
         "selector":selector,
         "format_selector_line":format_line,
         "requested_suffix":suffix,
