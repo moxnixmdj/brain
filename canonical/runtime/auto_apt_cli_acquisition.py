@@ -236,7 +236,38 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
             preflight_path=(root/preflight_rel).resolve()
             if preflight_path.is_file():
                 preflight_path.unlink()
-            observed=cli_command.run(preflight_args,root)
+            try:
+                observed=cli_command.run(preflight_args,root)
+            except Exception as primary_exc:
+                alternates=list(ct.get("alternate_input_transports") or [])
+                raced=False
+                for alt in alternates:
+                    if alt.get("type")!="POSITIONAL_TEXT_FILE":
+                        continue
+                    alt_args=dict(preflight_args)
+                    alt_args.pop("stdin_text",None)
+                    alt_args["text_file_text"]=bound_inputs["text"]
+                    alt_args["argv"]=list(preflight_args["argv"])+[str(alt.get("arg_token") or "__PB_TEXT_FILE__")]
+                    try:
+                        observed=cli_command.run(alt_args,root)
+                    except Exception:
+                        continue
+                    ct=dict(ct)
+                    ct["argv_template"]=list(ct["argv_template"])+[str(alt.get("arg_token") or "__PB_TEXT_FILE__")]
+                    ct["stdin_text_template"]=None
+                    ct["text_file_text_template"]="$"+"{input.text}"
+                    ct["evidence"]=dict(ct.get("evidence") or {})
+                    ct["evidence"]["input_transport"]="POSITIONAL_TEXT_FILE"
+                    ct["evidence"]["transport_race_fallback_from"]="STDIN_TEXT"
+                    attempt["transport_race"]={
+                      "primary":"STDIN_TEXT",
+                      "winner":"POSITIONAL_TEXT_FILE",
+                      "primary_error":type(primary_exc).__name__+":"+str(primary_exc)
+                    }
+                    raced=True
+                    break
+                if not raced:
+                    raise
             attempt["producer_preflight"]=observed
             attempt["status"]="EFFECT_PREFLIGHT_VERIFIED"
             selected_preflight=observed
@@ -278,6 +309,8 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
     }
     if contract.get("stdin_text_template") is not None:
         verification_args["stdin_text"]=_render(contract["stdin_text_template"],inputs)
+    if contract.get("text_file_text_template") is not None:
+        verification_args["text_file_text"]=_render(contract["text_file_text_template"],inputs)
     slug=_slug(package)
     cap_id="auto.apt."+slug
     effect="auto.effect."+slug
@@ -326,6 +359,8 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
     }
     if contract.get("stdin_text_template") is not None:
         entry["action_template"]["args"]["stdin_text"]=contract["stdin_text_template"]
+    if contract.get("text_file_text_template") is not None:
+        entry["action_template"]["args"]["text_file_text"]=contract["text_file_text_template"]
     fingerprint=hashlib.sha256((mission_id+"\n"+cap_id+"\n"+json.dumps(verification_args,sort_keys=True)).encode()).hexdigest()[:12]
     pending_rel=f"canonical/astra_runtime/pending_bindings/{mission_id}__{slug}__{fingerprint}.json"
     verify_rel=f"canonical/astra_runtime/evidence/{mission_id}__{slug}__{fingerprint}__AUTO_VERIFY.json"
