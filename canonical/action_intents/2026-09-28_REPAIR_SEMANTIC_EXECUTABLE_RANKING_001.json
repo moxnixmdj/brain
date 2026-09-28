@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-SEMANTIC-EXECUTABLE-RANKING-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "EXECUTABLE-CANDIDATE-DIAGNOSTIC-001-REPLAY",
+  "causal_blocker": "SEMANTIC_QUERY_CONSTRUCTION_AND_EXECUTABLE_ROLE_RANKING_RECALL_FAILURE",
+  "action_kind": "GENERIC_REPAIR",
+  "expected_parent_frontier_change": "Increase known viable executable supplier recall and ranking across the frozen orthogonal diagnostic by repairing generic semantic query construction and package-role ranking, without package-specific hints or contract changes.",
+  "highest_leverage_now": true,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Focused discovery regressions pass and EXECUTABLE-CANDIDATE-DIAGNOSTIC-001 is replayed exactly once. Then no further runtime repair is permitted before frontier reconciliation.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
