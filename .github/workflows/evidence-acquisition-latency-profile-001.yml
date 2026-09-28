@@ -26,35 +26,104 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Install and index apt-file with timing
+
+      - name: Capture setup timing and failures
         shell: bash
         run: |
-          set -euo pipefail
-          /usr/bin/time -f '%e' -o /tmp/apt-get-update-wall.txt sudo apt-get update
-          /usr/bin/time -f '%e' -o /tmp/apt-file-install-wall.txt sudo apt-get install -y apt-file
-          /usr/bin/time -f '%e' -o /tmp/apt-file-update-wall.txt sudo apt-file update
+          set +e
+          mkdir -p /tmp/profile-debug
+          /usr/bin/time -f '%e' -o /tmp/profile-debug/apt-get-update.wall \
+            sudo apt-get update > /tmp/profile-debug/apt-get-update.log 2>&1
+          UPDATE_RC=$?
+          /usr/bin/time -f '%e' -o /tmp/profile-debug/apt-file-install.wall \
+            sudo apt-get install -y apt-file > /tmp/profile-debug/apt-file-install.log 2>&1
+          INSTALL_RC=$?
+          /usr/bin/time -f '%e' -o /tmp/profile-debug/apt-file-update.wall \
+            sudo apt-file update > /tmp/profile-debug/apt-file-update.log 2>&1
+          INDEX_RC=$?
           python - <<'PY'
           import json
           from pathlib import Path
-          def read(name):
+          def val(path):
               try:
-                  return float(Path(name).read_text().strip())
+                  return float(Path(path).read_text().strip())
               except Exception:
                   return None
           out={
-              "apt_get_update_wall_s":read("/tmp/apt-get-update-wall.txt"),
-              "apt_file_install_wall_s":read("/tmp/apt-file-install-wall.txt"),
-              "apt_file_update_wall_s":read("/tmp/apt-file-update-wall.txt"),
+              "apt_get_update_wall_s":val("/tmp/profile-debug/apt-get-update.wall"),
+              "apt_file_install_wall_s":val("/tmp/profile-debug/apt-file-install.wall"),
+              "apt_file_update_wall_s":val("/tmp/profile-debug/apt-file-update.wall"),
           }
           Path("/tmp/apt_file_setup_wall.json").write_text(json.dumps(out,sort_keys=True)+"\n")
-          print(json.dumps(out,sort_keys=True))
           PY
-      - name: Run one no-mutation latency profile
-        run: python canonical/experiments/run_evidence_acquisition_latency_profile_001.py
-      - name: Upload evidence
+          printf '{"apt_get_update_rc":%s,"apt_file_install_rc":%s,"apt_file_update_rc":%s}\n' \
+            "$UPDATE_RC" "$INSTALL_RC" "$INDEX_RC" > /tmp/profile-debug/setup-status.json
+          which apt-file > /tmp/profile-debug/apt-file-path.txt 2>&1
+          apt-file --version > /tmp/profile-debug/apt-file-version.txt 2>&1
+          exit 0
+
+      - name: Run profiler and preserve diagnostics
+        shell: bash
+        run: |
+          set +e
+          mkdir -p /tmp/profile-debug
+          python -m py_compile canonical/experiments/run_evidence_acquisition_latency_profile_001.py \
+            > /tmp/profile-debug/pycompile.log 2>&1
+          COMPILE_RC=$?
+          if command -v apt-file >/dev/null 2>&1 && [ "$COMPILE_RC" -eq 0 ]; then
+            timeout 430s python canonical/experiments/run_evidence_acquisition_latency_profile_001.py \
+              > /tmp/profile-debug/profiler.log 2>&1
+            PROFILE_RC=$?
+          else
+            PROFILE_RC=127
+          fi
+          printf '%s\n' "$COMPILE_RC" > /tmp/profile-debug/pycompile.rc
+          printf '%s\n' "$PROFILE_RC" > /tmp/profile-debug/profiler.rc
+          if [ ! -f canonical/astra_runtime/evidence/EVIDENCE_ACQUISITION_LATENCY_PROFILE_001__RESULT.json ]; then
+            python - <<'PY'
+          import json
+          from pathlib import Path
+          def read(path,default=""):
+              try: return Path(path).read_text(errors="replace")[-4000:]
+              except Exception: return default
+          def read_int(path,default=-1):
+              try: return int(Path(path).read_text().strip())
+              except Exception: return default
+          out={
+            "schema":"PROJECT_BRAIN_EVIDENCE_ACQUISITION_LATENCY_PROFILE_FAILURE_V1",
+            "profile_id":"EVIDENCE-ACQUISITION-LATENCY-PROFILE-001",
+            "runtime_mutated":False,
+            "promotion_authorized":False,
+            "pycompile_rc":read_int("/tmp/profile-debug/pycompile.rc"),
+            "profiler_rc":read_int("/tmp/profile-debug/profiler.rc"),
+            "setup_status":read("/tmp/profile-debug/setup-status.json"),
+            "apt_get_update_tail":read("/tmp/profile-debug/apt-get-update.log"),
+            "apt_file_install_tail":read("/tmp/profile-debug/apt-file-install.log"),
+            "apt_file_update_tail":read("/tmp/profile-debug/apt-file-update.log"),
+            "profiler_tail":read("/tmp/profile-debug/profiler.log"),
+            "required_next_action":"RECONCILE_PARENT_FRONTIER__NO_SECOND_PROFILE_REPLAY",
+          }
+          p=Path("canonical/astra_runtime/evidence/EVIDENCE_ACQUISITION_LATENCY_PROFILE_001__RESULT.json")
+          p.parent.mkdir(parents=True,exist_ok=True)
+          p.write_text(json.dumps(out,indent=2,sort_keys=True)+"\n")
+          PY
+          fi
+          exit 0
+
+      - name: Upload profile evidence and diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: evidence-acquisition-latency-profile-001
-          path: canonical/astra_runtime/evidence/EVIDENCE_ACQUISITION_LATENCY_PROFILE_001__RESULT.json
+          path: |
+            canonical/astra_runtime/evidence/EVIDENCE_ACQUISITION_LATENCY_PROFILE_001__RESULT.json
+            /tmp/profile-debug
+            /tmp/apt_file_setup_wall.json
           if-no-files-found: error
+
+      - name: Preserve truthful job conclusion
+        if: always()
+        shell: bash
+        run: |
+          test -f /tmp/profile-debug/profiler.rc
+          test "$(cat /tmp/profile-debug/profiler.rc)" = "0"
