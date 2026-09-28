@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Infer a narrow, auditable CLI invocation contract from probe evidence.
+"""Infer a bounded, auditable CLI invocation contract from probe evidence.
 
-Conservative supported shape:
-  COMMAND [output-option FILE] ... [STRING|TEXT|DATA]
-Unsupported or ambiguous help fails closed.
+The contract describes I/O shape rather than a task recipe. Supported
+structural modes are deliberately small: output option, positional artifact,
+stdout capture; and flagged, positional, or stdin text input. Semantic
+translation into tool-specific languages is outside this layer and fails
+closed when it cannot be bound literally.
 """
 from __future__ import annotations
 import json,pathlib,re,sys
@@ -15,12 +17,17 @@ MAGIC_BY_SUFFIX={
     ".jpg":"ffd8ff",
     ".jpeg":"ffd8ff",
     ".pdf":"25504446",
+    ".sqlite":"53514c69746520666f726d6174203300",
+    ".sqlite3":"53514c69746520666f726d6174203300",
+    ".db":"53514c69746520666f726d6174203300",
 }
 TEXT_SUFFIXES={".md",".markdown",".txt",".csv",".tsv",".json",".html",".htm",".xml"}
 TEXT_FORMAT_NAMES={
     ".md":"markdown",".markdown":"markdown",".txt":"text",".csv":"csv",
-    ".tsv":"tsv",".json":"json",".html":"html",".htm":"html",".xml":"xml"
+    ".tsv":"tsv",".json":"json",".html":"html",".htm":"html",".xml":"xml",
 }
+FILE_TOKENS=("FILE","FILENAME","PATH","DATABASE","DB","OUTPUT","OUTFILE")
+TEXT_TOKENS=("STRING","TEXT","DATA","SQL","QUERY","EXPRESSION","COMMAND")
 
 def _help_text(probe):
     choices=[]
@@ -28,77 +35,149 @@ def _help_text(probe):
         for att in exe.get("help_attempts",[]):
             text=str(att.get("text") or "")
             lower=text.lower()
-            if text:
-                if "usage:" in lower or "options:" in lower:
-                    quality=3 if "usage:" in lower else 2
-                    choices.append((quality,len(text),exe.get("executable"),text))
-                    continue
-                # Some mature CLIs (for example option-table style tools)
-                # provide complete help without literal "Usage:"/"Options:"
-                # headings. Accept only clearly structured help with several
-                # option declarations and action-bearing flags, otherwise fail
-                # closed as before.
-                option_lines=[
-                    line for line in text.splitlines()
-                    if re.search(r"(?:^|\s)-[A-Za-z0-9](?:,|\s)|--[A-Za-z0-9]",line)
-                ]
-                if (
-                    len(option_lines)>=4
-                    and any(k in lower for k in ("--output","output file","--data","data content","input data"))
-                ):
-                    choices.append((1,len(text),exe.get("executable"),text))
+            if not text:
+                continue
+            if "usage:" in lower or "options:" in lower:
+                quality=4 if "usage:" in lower else 3
+                choices.append((quality,len(text),exe.get("executable"),text))
+                continue
+            option_lines=[
+                line for line in text.splitlines()
+                if re.search(r"(?:^|\s)-[A-Za-z0-9](?:,|\s)|--[A-Za-z0-9]",line)
+            ]
+            io_markers=("output","write","file","stdin","stdout","input","convert","query","database","expression","data")
+            if len(option_lines)>=3 and any(k in lower for k in io_markers):
+                choices.append((2,len(text),exe.get("executable"),text))
     if not choices:
         raise ContractInferenceFailure("CLI_HELP_CONTRACT_TEXT_REQUIRED")
     choices.sort(reverse=True)
     _,_,exe,text=choices[0]
     return str(exe),text
 
+def _goal_output(goal):
+    paths=re.findall(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+",str(goal or ""))
+    paths=[x.rstrip(".,;:!?)]}") for x in paths]
+    if len(paths)!=1:
+        raise ContractInferenceFailure("CLI_OUTPUT_PATH_UNRESOLVED:"+str(len(paths)))
+    output_path=paths[0]
+    suffix=pathlib.Path(output_path).suffix.lower()
+    magic=MAGIC_BY_SUFFIX.get(suffix)
+    text_output=suffix in TEXT_SUFFIXES
+    if not magic and not text_output:
+        raise ContractInferenceFailure("CLI_OUTPUT_FORMAT_UNVERIFIABLE:"+suffix)
+    return output_path,suffix,magic,text_output
+
+def _short_or_long_flag(line):
+    m=re.search(r"(?:^|\s)(-[A-Za-z0-9])(?:\s|,)",line)
+    if m:
+        return m.group(1)
+    m=re.search(r"(?<!\w)(--[A-Za-z0-9][A-Za-z0-9-]*)",line)
+    return m.group(1) if m else None
+
+def _output_flag(lines):
+    for line in lines:
+        ll=line.lower()
+        if any(x in ll for x in ("--output","output file","write image to","write output to","save to file")):
+            flag=_short_or_long_flag(line)
+            if flag:
+                return flag,line.strip()
+    return None,None
+
+def _usage_payload_role(usage_line):
+    if not usage_line:
+        return None,None
+    upper=usage_line.upper()
+    for token in TEXT_TOKENS:
+        if re.search(r"(?:\[|<)?"+re.escape(token)+r"(?:\]|>)?",upper):
+            return "POSITIONAL_TEXT",token.lower()
+    return None,None
+
+def _input_flag(lines):
+    for line in lines:
+        ll=line.lower()
+        if any(x in ll for x in ("--data","string to encode","data to encode","--query","--expression","query to execute","expression to evaluate")):
+            flag=_short_or_long_flag(line)
+            if flag:
+                return flag
+    return None
+
+def _stdin_supported(help_text,usage_line):
+    low=(help_text+"\n"+str(usage_line or "")).lower()
+    return any(x in low for x in ("standard input","stdin","read from -","read input from standard"))
+
+def _positional_artifact_supported(usage_line,command,suffix,help_text):
+    if not usage_line:
+        return None
+    upper=usage_line.upper()
+    candidates=[]
+    for token in FILE_TOKENS:
+        if re.search(r"(?:\[|<)?"+re.escape(token)+r"(?:\]|>)?",upper):
+            candidates.append(token)
+    unique=list(dict.fromkeys(candidates))
+    if len(unique)!=1:
+        return None
+    fmt=suffix.lstrip(".").lower()
+    aliases={
+      "sqlite3":{"sqlite","sqlite3","database"},
+      "sqlite":{"sqlite","sqlite3","database"},
+      "db":{"database","sqlite","db"},
+    }
+    signals=aliases.get(fmt,{fmt})
+    identity=(command+" "+help_text).lower()
+    if not any(sig and sig in identity for sig in signals):
+        return None
+    return unique[0]
+
+def _stdout_supported(help_text,usage_line,text_output):
+    if not text_output:
+        return False
+    low=(help_text+"\n"+str(usage_line or "")).lower()
+    return any(x in low for x in ("stdout","standard output","print","writes result","write result","output to standard"))
+
 def infer_contract(probe, goal):
     exe,help_text=_help_text(probe)
     lines=help_text.splitlines()
     usage_line=next((x.strip() for x in lines if x.strip().lower().startswith("usage:")),None)
     lower_help=help_text.lower()
+    command=pathlib.Path(exe).name
 
-    paths=re.findall(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+",str(goal or ""))
-    paths=[x.rstrip(".,;:!?)]}") for x in paths]
-    output_path=paths[-1] if len(paths)==1 else None
-    suffix=pathlib.Path(output_path).suffix.lower() if output_path else ""
-    magic=MAGIC_BY_SUFFIX.get(suffix)
-    text_output=suffix in TEXT_SUFFIXES
-    if not magic and not text_output:
-        raise ContractInferenceFailure("CLI_OUTPUT_FORMAT_UNVERIFIABLE:"+suffix)
+    _,suffix,magic,text_output=_goal_output(goal)
     format_name=suffix.lstrip(".")
-    aliases={"jpg":"jpeg"}
+    aliases={"jpg":"jpeg","sqlite3":"sqlite","db":"database"}
     wanted=TEXT_FORMAT_NAMES.get(suffix,aliases.get(format_name,format_name))
-    if wanted and wanted not in lower_help:
+    identity=(command+" "+help_text).lower()
+    signals={wanted,format_name}
+    if format_name in {"sqlite","sqlite3","db"}:
+        signals.update({"sqlite","database"})
+    if wanted and not any(x and x in identity for x in signals):
         raise ContractInferenceFailure("CLI_OUTPUT_FORMAT_UNSUPPORTED:"+suffix)
 
-    output_flag=None
-    output_line=None
-    for line in lines:
-        ll=line.lower()
-        if "--output" in ll or "output file" in ll or "write image to" in ll:
-            m=re.search(r"(?:^|\s)(-[A-Za-z0-9])(?:\s|,)",line)
-            if m:
-                output_flag=m.group(1); output_line=line.strip(); break
-    if output_flag is None:
-        raise ContractInferenceFailure("CLI_OUTPUT_FLAG_UNRESOLVED")
+    out_flag,out_line=_output_flag(lines)
+    positional_output=None
+    stdout_capture=False
+    if out_flag:
+        output_mode="OUTPUT_FLAG"
+    else:
+        positional_output=_positional_artifact_supported(usage_line,command,suffix,help_text)
+        if positional_output:
+            output_mode="POSITIONAL_ARTIFACT"
+        elif _stdout_supported(help_text,usage_line,text_output):
+            output_mode="STDOUT_CAPTURE"
+            stdout_capture=True
+        else:
+            raise ContractInferenceFailure("CLI_OUTPUT_BINDING_UNRESOLVED")
 
-    input_flag=None
-    positional=None
-    if usage_line:
-        for token in ("STRING","TEXT","DATA"):
-            if f"[{token}]" in usage_line:
-                positional=token.lower(); break
-    if positional is None:
-        for line in lines:
-            ll=line.lower()
-            if "--data" in ll or "string to encode" in ll or "data to encode" in ll:
-                m=re.search(r"(?:^|\s)(-[A-Za-z0-9])(?:\s|,)",line)
-                if m:
-                    input_flag=m.group(1); break
-    if positional is None and input_flag is None:
-        raise ContractInferenceFailure("CLI_TEXT_INPUT_UNRESOLVED")
+    input_flag=_input_flag(lines)
+    positional_role,positional_name=_usage_payload_role(usage_line)
+    stdin_supported=_stdin_supported(help_text,usage_line)
+    if input_flag:
+        input_mode="INPUT_FLAG"
+    elif positional_role:
+        input_mode="POSITIONAL_TEXT"
+    elif stdin_supported:
+        input_mode="STDIN_TEXT"
+    else:
+        input_mode="NONE"
 
     selector=[]
     normalized_goal=re.sub(r"[^a-z0-9]+","",str(goal).lower())
@@ -107,42 +186,67 @@ def infer_contract(probe, goal):
         for line in lines:
             ll=line.lower()
             if "--barcode" in ll and ("type" in ll or "symbolog" in ll):
-                m=re.search(r"(?:^|\s)(-[A-Za-z0-9])(?:\s|,)",line)
-                if m:
-                    barcode_flag=m.group(1); break
+                barcode_flag=_short_or_long_flag(line)
+                if barcode_flag:
+                    break
         if barcode_flag:
             selector=[barcode_flag,"CODE128"]
         elif "code128" in lower_help or "code 128" in lower_help:
             for line in lines:
                 if "encoding type" in line.lower():
-                    m=re.search(r"(?:^|\s)(-[A-Za-z0-9])(?:\s|,)",line)
-                    if m:
-                        selector=[m.group(1),"code128"]; break
+                    flag=_short_or_long_flag(line)
+                    if flag:
+                        selector=[flag,"code128"]
+                        break
 
-    command=pathlib.Path(exe).name
-    argv=[command,*selector,output_flag,"__OUT_PLACEHOLDER__"]
-    if input_flag:
+    required_inputs=["output_path"]
+    argv=[command,*selector]
+    if output_mode=="OUTPUT_FLAG":
+        argv.extend([out_flag,"__OUTPUT_PLACEHOLDER__"])
+    elif output_mode=="POSITIONAL_ARTIFACT":
+        argv.append("__OUTPUT_PLACEHOLDER__")
+
+    stdin_template=None
+    if input_mode=="INPUT_FLAG":
+        required_inputs.insert(0,"text")
         argv.extend([input_flag,"__TEXT_PLACEHOLDER__"])
-    else:
+    elif input_mode=="POSITIONAL_TEXT":
+        required_inputs.insert(0,"text")
         argv.append("__TEXT_PLACEHOLDER__")
-    argv=[x.replace("__OUT_PLACEHOLDER__","$"+"{input.output_path}").replace("__TEXT_PLACEHOLDER__","$"+"{input.text}") for x in argv]
+    elif input_mode=="STDIN_TEXT":
+        required_inputs.insert(0,"text")
+        stdin_template="__TEXT_PLACEHOLDER__"
+
+    argv=[x.replace("__OUTPUT_PLACEHOLDER__","$"+"{input.output_path}").replace("__TEXT_PLACEHOLDER__","$"+"{input.text}") for x in argv]
+    if stdin_template is not None:
+        stdin_template=stdin_template.replace("__TEXT_PLACEHOLDER__","$"+"{input.text}")
+
     return {
-      "schema":"PROJECT_BRAIN_CLI_CONTRACT_CANDIDATE_V1",
+      "schema":"PROJECT_BRAIN_CLI_CONTRACT_CANDIDATE_V2",
       "status":"CANDIDATE_REQUIRES_EFFECT_VERIFICATION",
       "executable":exe,
       "command":command,
-      "required_inputs":["text","output_path"],
+      "required_inputs":required_inputs,
+      "io_contract":{
+        "input_mode":input_mode,
+        "output_mode":output_mode,
+        "positional_output_token":positional_output,
+        "positional_input_token":positional_name,
+      },
       "argv_template":argv,
+      "stdin_template":stdin_template,
       "output_path_template":"$"+"{input.output_path}",
+      "capture_stdout_to_output":bool(stdout_capture),
       "output_prefix_hex":magic or "",
       "output_text_utf8":bool(text_output),
       "timeout_s":60,
       "evidence":{
         "usage_line":usage_line,
-        "output_line":output_line,
-        "output_flag":output_flag,
+        "output_line":out_line,
+        "output_flag":out_flag,
         "input_flag":input_flag,
-        "positional_input":positional,
+        "input_mode":input_mode,
+        "output_mode":output_mode,
         "selector":selector,
         "requested_suffix":suffix,
         "probe_package":probe.get("package"),
