@@ -177,7 +177,12 @@ def verify(format_name,json_path,binary_path,producer_project,root):
         try:
             found=npm_acq._search_registry(goal,limit=40,format_hint=hint)
         except Exception as exc:
-            discovery_errors.append(type(exc).__name__+":"+str(exc))
+            detail=type(exc).__name__+":"+str(exc)
+            if "EXTERNAL_TOOL_REQUEST_PENDING:" in detail:
+                raise IndependentNpmCodecVerifierFailure(
+                    "NPM_VERIFIER_DISCOVERY_FAILED:"+detail
+                ) from exc
+            discovery_errors.append(detail)
             continue
         for candidate in found:
             key=_norm(candidate.get("package") or candidate.get("name"))
