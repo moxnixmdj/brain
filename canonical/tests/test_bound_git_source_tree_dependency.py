@@ -19,7 +19,7 @@ class BoundGitSourceTreeTests(unittest.TestCase):
         )
         raw = source.encode("utf-8")
         blob_sha = hashlib.sha1(
-            b"blob " + str(len(raw)).encode("ascii") + b"\\0" + raw
+            b"blob " + str(len(raw)).encode("ascii") + b"\0" + raw
         ).hexdigest()
         repository = "Project-Brain-Test/fakecodec"
         revision = "a" * 40
