@@ -76,17 +76,9 @@ except Exception as exc:
 pending=ROOT/out["pending_binding_path"]
 data=json.loads(pending.read_text())
 semantic=data.get("semantic_verification") or {}
-hints=list(semantic.get("verifier_package_hints") or [])
-external_hint={
-  "name":"zxing-cpp-tools",
-  "discovery_basis":"EXTERNAL_PACKAGE_SEARCH",
-  "reason":"Independent multi-format barcode reader package discovered during blocker extinction; candidate must still be pinned, probed, contract-learned, executed, and semantically verified before acceptance."
-}
-if not any((x.get("name") if isinstance(x,dict) else x)=="zxing-cpp-tools" for x in hints):
-    hints.insert(0,external_hint)
-semantic["verifier_package_hints"]=hints
+semantic.pop("verifier_package_hints",None)
 data["semantic_verification"]=semantic
-pending.write_text(json.dumps(data,indent=2,sort_keys=True)+"\n")
+pending.write_text(json.dumps(data,indent=2,sort_keys=True)+"\\n")
 contract=data.get("contract") or {}
 argv=[str(x) for x in (contract.get("argv_template") or [])]
 joined=" ".join(argv).lower().replace("-","").replace("_","").replace(" ","")
