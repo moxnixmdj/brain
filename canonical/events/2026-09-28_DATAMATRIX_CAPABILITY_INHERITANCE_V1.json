@@ -1,0 +1,11 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_INHERITANCE_RECEIPT_V1",
+  "capability_id": "auto.apt.iec16022",
+  "source_experiment": "OBSOLESCENCE-TOOL-LEARNING-DATAMATRIX-001",
+  "registry_commit_sha": "026a5fdce65d501f09385be537fc8a3989152040",
+  "successful_verification_run_id": 36378255352,
+  "verification_artifact_id": 10951897583,
+  "verification_artifact_digest": "sha256:608507257e1df1ad4a38cce5c022056226b738f62a643c9c13b5a88a809d8795",
+  "status": "VERIFIED_BOUND_CAPABILITY_INHERITED",
+  "scope_boundary": "Producer capability inherited. Whole TOOL_SELECTION_AND_TOOL_LEARNING family remains unpromoted because verifier package-name discovery was externally assisted."
+}
