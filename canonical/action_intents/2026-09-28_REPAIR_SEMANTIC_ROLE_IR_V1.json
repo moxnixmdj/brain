@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-SEMANTIC-ROLE-IR-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "SEMANTIC-ROLE-IR-REPAIR-V1",
+  "causal_blocker": "STRUCTURED_EFFECT_AND_CANDIDATE_TOOL_ROLE_REPRESENTATION_MISSING",
+  "action_kind": "GENERIC_REPAIR",
+  "expected_parent_frontier_change": "Increase exact executable supplier top-K recall and direct-tool role precision across the frozen semantic-role diagnostic without package hints or contract changes.",
+  "highest_leverage_now": true,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 4,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Run focused regressions and exactly one frozen semantic-role diagnostic replay. Reconcile regardless of pass/fail; no second repair on this branch.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
