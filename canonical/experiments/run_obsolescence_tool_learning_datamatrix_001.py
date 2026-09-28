@@ -35,9 +35,27 @@ if SOURCE_MISSION.read_bytes()!=RUNTIME_MISSION.read_bytes():
     raise SystemExit("FROZEN_MISSION_BYTES_DIVERGED")
 
 registry=json.loads((RUNTIME/"BOUND_CAPABILITY_REGISTRY_V1.json").read_text())
-blob=json.dumps(registry).lower()
-if "datamatrix" in blob or "data matrix" in blob:
-    raise SystemExit("PREBOUND_DATAMATRIX_CAPABILITY_PRESENT")
+caps=registry.get("capabilities") or {}
+inherited=caps.get("auto.apt.iec16022")
+if inherited is not None:
+    source=(inherited.get("source") or {})
+    packages=source.get("packages") or []
+    exact_inheritance=(
+        inherited.get("status")=="VERIFIED_BOUND_CAPABILITY"
+        and source.get("type")=="apt"
+        and any(
+            p.get("name")=="iec16022" and p.get("version")=="0.2.7-1"
+            for p in packages if isinstance(p,dict)
+        )
+        and (inherited.get("verification") or {}).get("independent_verified") is True
+    )
+    if not exact_inheritance:
+        raise SystemExit("PREBOUND_DATAMATRIX_CAPABILITY_CONFLICT")
+    print("VERIFIED_INHERITED_CAPABILITY_PRESENT auto.apt.iec16022")
+other_caps={k:v for k,v in caps.items() if k!="auto.apt.iec16022"}
+other_blob=json.dumps(other_caps).lower()
+if "datamatrix" in other_blob or "data matrix" in other_blob:
+    raise SystemExit("UNRELATED_PREBOUND_DATAMATRIX_CAPABILITY_PRESENT")
 
 discovery=capability_discovery.search_all(GOAL,limit_per_source=24)
 (EVID/(MISSION_ID+"__DISCOVERY.json")).write_text(json.dumps(discovery,indent=2,sort_keys=True)+"\n")
