@@ -20,58 +20,81 @@ This directory is the provider-independent canonical control plane for Project B
 - Provider-neutral external-tool bridge: **VERIFIED on the proof mission**.
 - Cross-supplier independent verification: **VERIFIED on the proof mission**.
 - Hard incremental spend: **$0**.
-- Full frontier capability breadth: **NOT YET PROVEN**.
-- Same-identity clean-room reproduction of the verified architecture: **NOT YET PROVEN**.
 
-See:
-- `canonical/agents/SUPERWORKER_UNIFIED_1.json`
-- `canonical/qualification/SUPERWORKER_UNIFIED_1_WHOLE_DEFINITION_ADJUDICATION_V1.json`
-- `canonical/CANONICAL_POINTER.json`
+## Core theory
+
+Project Brain uses this operational decomposition:
+
+`FRONTIER INTELLIGENCE = KNOWLEDGE + CAPABILITIES`
+
+### Knowledge
+
+The knowledge-side architecture is treated as solved for the current program unless falsified:
+
+`need knowledge -> acquire the strongest relevant external/JIT knowledge -> verify -> preserve`
+
+The project does not try to reproduce a frontier model's giant permanent knowledge warehouse inside another parameter store.
+
+### Capabilities
+
+Capabilities are now the active research frontier.
+
+For each useful frontier capability:
+
+`frontier capability -> define real useful effect -> establish frontier bar -> search/race all legitimate routes -> verify equal or better capability -> inherit winning route -> frontier implementation becomes unnecessary`
+
+The objective is **not** to copy or accumulate the frontier capability inventory.
+
+The objective is to obtain the **maximum useful capability, at least equal to the frontier bar, through the fastest and cheapest verified realizable route**.
 
 ## Active terminal objective
 
-The existence phase is complete.
+Systematically obsolete the useful capabilities of frontier models by finding verified equal-or-better capability routes with minimum wall-clock time and incremental cost.
 
-Project Brain now exists to turn the proven Superworker architecture into a **reproducible, model-independent frontier-capability system** that can match and then exceed the useful real-world capability surface demonstrated by frontier agents/models.
+Frontier models and agents are:
+- sources of capability bars;
+- challenge generators;
+- optional capability suppliers.
 
-Frontier systems are capability references only. They are not implementation blueprints, required providers, naming targets, or proof authorities.
-
-The canonical phase order is:
-
-1. clean-room reproduction;
-2. capability breadth;
-3. frontier comparability on the same real tasks and outcome criteria;
-4. capability superset through verified composition;
-5. efficiency;
-6. population scaling.
-
-Population scaling is intentionally deferred until same-identity clean-room reproduction and minimum cross-domain breadth are verified.
+They are not implementation blueprints or terminal architectures.
 
 Authoritative goal:
-- `canonical/laws/FRONTIER_CAPABILITY_SUPERWORKER_MISSION_LOCK_V2.md`
+- `canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_OBSOLESCENCE_MISSION_LOCK_V4.md`
 
-Canonical capability map:
-- `canonical/capabilities/FRONTIER_CAPABILITY_TARGET_MAP_V1.json`
+Active execution strategy:
+- `canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V2.md`
 
-## Immediate frontier
+Canonical capability queue:
+- `canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json`
 
-Run a **fresh clean-room worker from canonical state on a distinct consequential mission**, without copying hidden mutable execution state from the first worker.
+## Active loop
 
-Independently adjudicate that result.
-
-If reproduction succeeds, use the smallest orthogonal portfolio of unseen consequential missions to expose missing frontier capability classes. Every failure should drive the same blocker-extinction loop:
-
-`real mission → first causal blocker → search/reuse before invention → minimal generic repair → falsify/verify → replay → inherit → continue`
+1. recover and normalize the frontier capability surface;
+2. choose the highest-leverage capability;
+3. define its real useful behavior;
+4. establish the strongest defensible frontier bar;
+5. search the hidden warehouse;
+6. race reuse, composition, JIT acquisition, deterministic/specialized systems, model suppliers, adaptation, and only then invention;
+7. run consequential real work;
+8. independently verify equal-or-better capability;
+9. mark the frontier implementation obsolete or preserve the exact residual gap;
+10. inherit the winner and repeat.
 
 ## Progress metric
 
-The project no longer treats existence, predicate completion, benchmark completion, infrastructure, or worker count as the target.
+Primary:
 
-Before scaling, progress means **verified increase in reproducible real capability**.
+`verified useful capability strength / wall-clock time / incremental cost`
 
-After the capability/reproducibility gates, the primary scaling metric becomes:
+with correctness first and a hard $0 incremental-spend constraint unless the user changes it.
 
-`verified consequential outcomes / wall-clock time`
+Capability count, parameter count, benchmark count, worker count, and infrastructure count are not progress by themselves.
+
+## Relationship to Superworkers
+
+The verified Superworker is the execution substrate for capability obsolescence, not the final product.
+
+Clean-room reproduction, persistence, recovery, provenance, and verification remain mandatory architectural properties, but they are subordinate to the terminal capability-obsolescence mission.
 
 ## Non-negotiable law
 

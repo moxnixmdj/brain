@@ -1,6 +1,8 @@
 # ASTRA CLOSURE RACE STRATEGY V1
 
-Status: CANONICAL / MANDATORY / TERMINAL CAPABILITY PROGRAM
+> Superseded on 2026-09-28. Its route-race machinery remains reusable locally, but Astra capability-family closure is no longer the terminal program. Frontier capabilities are now targets to obsolete by finding equal-or-better capability through faster/cheaper verified routes.
+
+Status: SUPERSEDED AS TERMINAL PROGRAM BY FRONTIER_KNOWLEDGE_CAPABILITY_OBSOLESCENCE_MISSION_LOCK_V4 / RETAINED AS HISTORICAL ROUTE-RACE MECHANISM
 
 ## Mission
 
