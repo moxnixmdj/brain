@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1",
+  "status": "CANONICAL_OBSOLESCENCE_QUEUE",
+  "phase": "POST_KNOWLEDGE_OBSOLESCENCE__CAPABILITY_OBSOLESCENCE",
+  "p_real": 1,
+  "theory": {
+    "operational_decomposition": "FRONTIER_INTELLIGENCE = KNOWLEDGE + CAPABILITIES",
+    "knowledge_side": "ARCHITECTURALLY_SOLVED_FOR_CURRENT_PROGRAM_UNLESS_FALSIFIED",
+    "knowledge_solution": "OBTAIN_MAXIMUM_RELEVANT_KNOWLEDGE_JIT_FROM_EXTERNAL_VERIFIABLE_SOURCES_INSTEAD_OF_REPLICATING_A_GIANT_PERMANENT_PARAMETER_STORE",
+    "active_side": "CAPABILITIES",
+    "capability_question": "FOR_EACH_FRONTIER_CAPABILITY_FIND_THE_FASTEST_AND_CHEAPEST_REALIZABLE_ROUTE_TO_EQUAL_OR_BETTER_USEFUL_CAPABILITY",
+    "obsolete_definition": "FRONTIER_IMPLEMENTATION_NO_LONGER_NECESSARY_BECAUSE_A_VERIFIED_ROUTE_PROVIDES_EQUAL_OR_BETTER_USEFUL_CAPABILITY_UNDER_REQUIRED_CONDITIONS"
+  },
+  "optimization": {
+    "priority": [
+      "CORRECTNESS_AND_REAL_CAPABILITY_STRENGTH",
+      "MINIMUM_WALL_CLOCK_TIME",
+      "MINIMUM_INCREMENTAL_COST",
+      "MINIMUM_COMPUTE_AND_COMPLEXITY"
+    ],
+    "hard_incremental_spend_usd": 0,
+    "preferred_outcome": "CAPABILITY_GREATER_THAN_OR_EQUAL_TO_FRONTIER",
+    "parity_role": "MINIMUM_ACCEPTANCE_BAR_NOT_TERMINAL_GOAL"
+  },
+  "queue_semantics": "CAPABILITIES_TO_OBSOLETE__NOT_CAPABILITIES_TO_COPY_OR_ACCUMULATE",
+  "capability_families_seed": [
+    "GOAL_DECOMPOSITION_AND_PLANNING",
+    "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
+    "SOFTWARE_ENGINEERING",
+    "TECHNICAL_SCIENTIFIC_REASONING",
+    "UNKNOWN_DOMAIN_ADAPTATION",
+    "TOOL_SELECTION_AND_TOOL_LEARNING",
+    "VISION_AND_PERCEPTION",
+    "COMPUTER_AND_BROWSER_USE",
+    "DATA_ANALYSIS_AND_ARTIFACT_CREATION",
+    "LONG_HORIZON_CONTINUATION_AND_RECOVERY",
+    "JUDGMENT_UNDER_AMBIGUITY",
+    "MULTI_CAPABILITY_COMPOSITION",
+    "SELF_CRITIQUE_FALSIFICATION_AND_VERIFICATION",
+    "MEMORY_RETRIEVAL_AND_REUSE",
+    "COORDINATION_AND_PARALLEL_WORK",
+    "CREATIVE_AND_NOVEL_PROBLEM_SOLVING"
+  ],
+  "per_capability_record_schema": [
+    "capability_id",
+    "real_useful_behavior",
+    "frontier_reference_evidence",
+    "frontier_bar",
+    "current_brain_route",
+    "candidate_routes",
+    "winning_route",
+    "capability_strength_result",
+    "wall_clock_result",
+    "incremental_cost_result",
+    "compute_result",
+    "independent_verification",
+    "obsolescence_status",
+    "residual_gap",
+    "inheritance_path"
+  ],
+  "allowed_statuses": [
+    "UNMAPPED",
+    "FRONTIER_BAR_UNCERTAIN",
+    "ROUTE_DISCOVERY",
+    "ROUTE_RACE",
+    "CANDIDATE_MATCH",
+    "OBSOLETE_VERIFIED",
+    "RESIDUAL_GAP_VERIFIED",
+    "REOPENED_BY_REGRESSION"
+  ],
+  "immediate_frontier": {
+    "objective": "Recover and normalize the strongest existing Astra/frontier capability evidence, select the highest-leverage capability, establish its real frontier bar, and complete one end-to-end obsolescence cycle.",
+    "selection_metric": "VERIFIED_CAPABILITY_GAIN_TIMES_OBSOLESCENCE_LEVERAGE_PER_WALL_CLOCK_TIME",
+    "prohibition": "DO_NOT_TREAT_CAPABILITY_BREADTH_ACCUMULATION_OR_PARITY_CHECKLIST_COMPLETION_AS_THE_TERMINAL_GOAL"
+  },
+  "promotion_claim": false
+}
