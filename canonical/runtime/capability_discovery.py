@@ -7,12 +7,15 @@ install third-party code. Binding is a separate verified step.
 """
 from __future__ import annotations
 
+import concurrent.futures
+import gzip
 import json
 import pathlib
 import re
 import shutil
 import subprocess
 import sys
+import tempfile
 import urllib.parse
 import urllib.request
 
@@ -247,6 +250,117 @@ def _apt_query_variants(queries):
     return out
 
 
+
+def _apt_candidate_semantic_evidence(candidate, effect_tokens, max_archive_bytes=12000000):
+    """Extract executable-path + manpage semantics from a package archive.
+
+    Metadata-only: downloads the exact APT archive, does not install the package,
+    and never executes candidate binaries.
+    """
+    name=str(candidate.get("name") or "")
+    version=str(candidate.get("version") or "")
+    if not name or not version or version=="(none)":
+        return {}
+    try:
+        show=subprocess.run(
+            ["apt-cache","show",f"{name}={version}"],
+            text=True,capture_output=True,timeout=15
+        )
+        size=None
+        for line in show.stdout.splitlines():
+            if line.startswith("Size:"):
+                try:size=int(line.split(":",1)[1].strip())
+                except Exception:size=None
+                break
+        if size is not None and size>max_archive_bytes:
+            return {"semantic_evidence_skipped":"ARCHIVE_TOO_LARGE","archive_size":size}
+        with tempfile.TemporaryDirectory(prefix="pb-apt-sem-") as td:
+            td=pathlib.Path(td)
+            dl=subprocess.run(
+                ["apt-get","download",f"{name}={version}"],
+                cwd=td,text=True,capture_output=True,timeout=90
+            )
+            debs=sorted(td.glob("*.deb"))
+            if dl.returncode!=0 or not debs:
+                return {"semantic_evidence_error":"APT_DOWNLOAD_FAILED"}
+            root=td/"x"; root.mkdir()
+            x=subprocess.run(
+                ["dpkg-deb","-x",str(debs[0]),str(root)],
+                text=True,capture_output=True,timeout=60
+            )
+            if x.returncode!=0:
+                return {"semantic_evidence_error":"DPKG_DEB_EXTRACT_FAILED"}
+            executable_paths=[]
+            command_tokens=set()
+            for prefix in ("usr/bin","bin","usr/sbin","sbin"):
+                base=root/prefix
+                if not base.exists(): continue
+                for p in base.iterdir():
+                    if p.is_file() or p.is_symlink():
+                        executable_paths.append("/"+str(p.relative_to(root)))
+                        command_tokens.update(re.findall(r"[a-z0-9]+",p.name.lower()))
+            man_tokens=set()
+            manpages=[]
+            for p in root.rglob("*.1*"):
+                try:
+                    raw=p.read_bytes()
+                    if p.suffix==".gz":
+                        raw=gzip.decompress(raw)
+                    text=raw.decode("utf-8","replace").lower()
+                except Exception:
+                    continue
+                toks=set(re.findall(r"[a-z0-9]+",text))
+                man_tokens |= toks
+                if len(manpages)<8:
+                    manpages.append(str(p.relative_to(root)))
+            semantic_hits=sorted(t for t in effect_tokens if t in command_tokens or t in man_tokens)
+            return {
+                "executable_paths":sorted(executable_paths)[:32],
+                "command_semantic_hits":sorted(t for t in effect_tokens if t in command_tokens),
+                "manpage_semantic_hits":sorted(t for t in effect_tokens if t in man_tokens),
+                "semantic_hits":semantic_hits,
+                "semantic_coverage":(len(semantic_hits)/len(effect_tokens)) if effect_tokens else 0,
+                "manpage_paths":manpages,
+                "archive_size":size,
+            }
+    except Exception as exc:
+        return {"semantic_evidence_error":type(exc).__name__+":"+str(exc)}
+
+def _enrich_apt_semantics(candidates, effect_tokens, max_candidates=260):
+    # Enrich a bounded set before top-K truncation. Prefer executable-looking,
+    # low-friction packages but retain enough depth to rescue semantically
+    # correct suppliers previously buried far below rank 50.
+    ordered=sorted(
+        candidates,
+        key=lambda x:(int(x.get("integration_friction",0)), -float(x.get("score",0)), str(x.get("name","")))
+    )[:max_candidates]
+    by_name={x["name"]:x for x in candidates}
+    with concurrent.futures.ThreadPoolExecutor(max_workers=12) as ex:
+        futures={
+            ex.submit(_apt_candidate_semantic_evidence,c,set(effect_tokens)):c["name"]
+            for c in ordered
+        }
+        for fut,name in futures.items():
+            evidence=fut.result()
+            cand=by_name[name]
+            cand["executable_semantic_evidence"]=evidence
+            paths=evidence.get("executable_paths") or []
+            hits=set(evidence.get("semantic_hits") or [])
+            cmd_hits=set(evidence.get("command_semantic_hits") or [])
+            man_hits=set(evidence.get("manpage_semantic_hits") or [])
+            # Generic ranking signal: real executable presence plus semantic
+            # evidence about the requested operation. Manpage evidence is
+            # stronger than package-description coincidence.
+            if paths:
+                cand["score"]+=18
+            cand["score"]+=18*len(cmd_hits)
+            cand["score"]+=24*len(man_hits)
+            if len(hits)>1:
+                cand["score"]+=16*(len(hits)-1)
+            cand["executable_role_evidence"]=bool(paths)
+            cand["effect_semantic_coverage"]=evidence.get("semantic_coverage",0)
+    return candidates
+
 def search_apt_packages(effect, limit=12):
     """Search the local Ubuntu/Debian package catalog without installing anything."""
     if not sys.platform.startswith("linux") or shutil.which("apt-cache") is None:
@@ -350,7 +464,13 @@ def search_apt_packages(effect, limit=12):
             }
             if prior is None or cand["score"]>prior["score"]:
                 seen[name]=cand
-    ranked=sorted(seen.values(),key=lambda x:(-x["score"],x["name"]))[:max(1,min(int(limit),50))]
+    pre_rank=list(seen.values())
+    # Fetch exact version/hash before semantic archive inspection.
+    for cand in pre_rank:
+        name=cand["name"]
+
+    pre_rank=_enrich_apt_semantics(pre_rank,effect_tokens,max_candidates=260)
+    ranked=sorted(pre_rank,key=lambda x:(-x["score"],x["name"]))[:max(1,min(int(limit),50))]
     enriched=[]
     for cand in ranked:
         name=cand["name"]
