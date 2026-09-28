@@ -87,6 +87,56 @@ def _acquisition_terms(goal):
     return out
 
 
+def _input_representation_terms(goal):
+    """Extract explicit source-representation words without naming suppliers.
+
+    Examples: "from the DOT text", "from CSV data", "using JSON input".
+    This is intentionally syntactic. The terms become discovery evidence only;
+    they never select a package directly.
+    """
+    text=str(goal or "")
+    out=[]
+    patterns=(
+        r"\bfrom\s+(?:the\s+)?([A-Za-z0-9][A-Za-z0-9+._-]{1,24})\s+(?:text|file|document|data|input)\b",
+        r"\busing\s+(?:the\s+)?([A-Za-z0-9][A-Za-z0-9+._-]{1,24})\s+(?:text|file|document|data|input)\b",
+    )
+    for pattern in patterns:
+        for raw in re.findall(pattern,text,flags=re.IGNORECASE):
+            token=str(raw).lower().strip(" .,:;")
+            if token and token not in GENERIC_KEYWORDS and token not in out:
+                out.append(token)
+    return out[:2]
+
+
+def _producer_role_terms(goal):
+    """Generic supplier-language terms for a goal that asks to create output.
+
+    Package catalogs often describe the *role* ("drawing", "renderer",
+    "converter") rather than repeat the user's imperative verb ("create").
+    These are generic producer descriptors, not domain or supplier names.
+    """
+    lower=str(goal or "").lower()
+    if not any(w in lower for w in ("generate","create","make","render","encode","save","write","produce","convert","draw")):
+        return []
+    return ["render","drawing","convert","generate"]
+
+
+def _role_query_terms(goal):
+    inputs=_input_representation_terms(goal)
+    outputs=_format_terms(goal)
+    raw=_acquisition_terms(goal)
+    excluded=set(inputs)|set(outputs)|set(_producer_role_terms(goal))
+    objects=[t for t in raw if t not in excluded and t not in GENERIC_KEYWORDS]
+    # Preserve source and destination representation first, then the first two
+    # semantic object terms, then producer-role descriptors. effect_queries()
+    # caps at six terms, so order matters for bounded discovery.
+    terms=[]
+    for token in inputs[:1]+outputs[:1]+objects[:2]+_producer_role_terms(goal):
+        if token and token not in terms:
+            terms.append(token)
+    return terms[:6]
+
+
 def _viable_candidates(discovery, goal=""):
     viable=[]
     goal_lower=str(goal or "").lower()
@@ -133,15 +183,16 @@ def _merge_role_conditioned_apt(discovery,goal):
     merged=json.loads(json.dumps(discovery))
     candidates=list(merged.get("candidates") or [])
     goal_lower=str(goal or "").lower()
-    producer_intent=any(w in goal_lower for w in ("generate","create","make","render","encode","save"))
-    goal_terms=_acquisition_terms(goal)
+    producer_intent=any(w in goal_lower for w in ("generate","create","make","render","encode","save","write","produce","convert","draw"))
     role_queries=[]
     if producer_intent:
-        # Output suffixes are direct evidence of the requested capability class
-        # and survive even when prose contains low-information scaffolding.
-        role_queries.extend(_format_terms(goal)[:2])
-        if goal_terms:
-            role_queries.append(" ".join(goal_terms[:2]))
+        # Search one bounded role-rich query instead of isolated output/object
+        # nouns. search_apt_packages() splits this into catalog searches but
+        # scores candidates by joint term coverage, so a real transformer can
+        # outrank packages that merely mention "graph", "svg", etc.
+        role_terms=_role_query_terms(goal)
+        if role_terms:
+            role_queries.append(" ".join(role_terms))
     role_queries=list(dict.fromkeys(q for q in role_queries if q.strip()))
 
     role_results=[]
@@ -150,7 +201,10 @@ def _merge_role_conditioned_apt(discovery,goal):
         key=(str(item.get("discovery_source") or ""),str(item.get("name") or ""),str(item.get("version") or ""))
         by_key[key]=item
     for role_query in role_queries:
-        result=capability_discovery.search_apt_packages(role_query,limit=24)
+        # Keep a wider *discovery* pool, then let _viable_candidates apply the
+        # stricter execution/role filter. This avoids alphabetical/tie truncation
+        # hiding a strong supplier before role scoring can inspect it.
+        result=capability_discovery.search_apt_packages(role_query,limit=50)
         role_results.append(result)
         for item in result.get("candidates") or []:
             key=(str(item.get("discovery_source") or ""),str(item.get("name") or ""),str(item.get("version") or ""))
@@ -160,6 +214,7 @@ def _merge_role_conditioned_apt(discovery,goal):
     merged["candidates"]=list(by_key.values())
     merged["_role_conditioned_apt_discovery"]=role_results
     merged["_role_conditioned_queries"]=role_queries
+    merged["_role_conditioned_terms"]=_role_query_terms(goal)
     return merged
 
 
