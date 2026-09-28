@@ -1,6 +1,8 @@
 # ASTRA SHARED RUNTIME PORTFOLIO V1
 
-Status: CANONICAL / MANDATORY / SUPERSEDES ASTRA_CLOSURE_RACE_STRATEGY_V1 AS TOP-LEVEL PROGRAM
+> Superseded as the top-level program on 2026-09-28. Its blocker-local and shared-runtime ideas remain historical design evidence, but the active terminal objective is the frontier-capability Superworker mission lock V2.
+
+Status: SUPERSEDED AS TOP-LEVEL PROGRAM BY FRONTIER_CAPABILITY_SUPERWORKER_MISSION_LOCK_V2 / RETAINED AS HISTORICAL STRATEGY
 
 ## Terminal objective
 
