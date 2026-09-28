@@ -22,6 +22,54 @@ def _inside(raw):
         raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
     return p
 
+def _resolve_apt_candidate_name(name):
+    """Resolve an externally discovered APT package name to pinned local metadata."""
+    name=str(name or "").strip()
+    if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9+._-]{0,127}",name):
+        return None
+    try:
+        policy=subprocess.run(
+            ["apt-cache","policy",name],text=True,capture_output=True,timeout=10
+        )
+        version=None
+        for line in policy.stdout.splitlines():
+            s=line.strip()
+            if s.startswith("Candidate:"):
+                version=s.split(":",1)[1].strip()
+                break
+        if not version or version=="(none)":
+            return None
+        show=subprocess.run(
+            ["apt-cache","show",f"{name}={version}"],
+            text=True,capture_output=True,timeout=15
+        )
+        sha=None
+        description=""
+        for line in show.stdout.splitlines():
+            if line.startswith("SHA256:") and sha is None:
+                sha=line.split(":",1)[1].strip().lower()
+            elif line.startswith("Description:") and not description:
+                description=line.split(":",1)[1].strip()
+        if not re.fullmatch(r"[0-9a-f]{64}",str(sha or "")):
+            return None
+        return {
+          "name":name,
+          "version":version,
+          "archive_sha256":sha,
+          "description":description,
+          "binding_kind":"apt",
+          "discovery_source":"EXTERNAL_SEMANTIC_PACKAGE_HINT",
+          "zero_cost_eligible":True,
+          "integration_friction":0,
+          "required_secret_count":0,
+          "required_environment_count":0,
+          "matched_terms":[],
+          "score":1000,
+        }
+    except Exception:
+        return None
+
+
 def _semantic_verifier_query(goal):
     tokens=[
         t for t in capability_discovery.effect_queries(goal)
@@ -55,6 +103,30 @@ def _semantic_execution_variants(contract, output_path):
             out.append({
               "basis":"HELP_DECLARED_MINIMUM_NUMERIC_RELAXATION",
               "argv":argv,
+              "help_line":line.strip()[:500],
+            })
+        break
+    help_text=str(contract.get("help_excerpt") or "")
+    path=str(contract.get("executable") or "")
+    for line in help_text.splitlines():
+        low=line.lower()
+        if "pure" not in low and "perfect" not in low:
+            continue
+        if not any(w in low for w in ("assume","image","code","symbol")):
+            continue
+        m=re.match(r"\s*(-[^\s,=]+)",line)
+        if not m:
+            continue
+        flag=m.group(1)
+        if "=" in flag or flag in {"-h","--help"}:
+            continue
+        base_argv=list(base)
+        insert_at=max(1,len(base_argv)-1)
+        variant=base_argv[:insert_at]+[flag]+base_argv[insert_at:]
+        if variant!=base and all(v["argv"]!=variant for v in out):
+            out.append({
+              "basis":"HELP_DECLARED_PURE_INPUT_MODE",
+              "argv":variant,
               "help_line":line.strip()[:500],
             })
         break
@@ -113,7 +185,26 @@ def _semantic_help_contract(probe):
                 or any(w in lower for w in ("decode","read","scan"))
             )
             if positional_declared and writes_stdout:
-                argv=[path,"__OUTPUT_PATH__"]
+                argv=[path]
+                raw_flag=None
+                for line in text.splitlines():
+                    low=line.lower()
+                    if "stdout" not in low:
+                        continue
+                    if not (
+                        ("bytes" in low and "content" in low)
+                        or ("raw" in low and "content" in low)
+                    ):
+                        continue
+                    m=re.match(r"\s*(-[^\s,=]+)",line)
+                    if m:
+                        token=m.group(1)
+                        if token not in {"-h","--help"}:
+                            raw_flag=token
+                            break
+                if raw_flag:
+                    argv.append(raw_flag)
+                argv.append("__OUTPUT_PATH__")
                 candidates.append((role_score,1,len(text),path,text,argv,"POSITIONAL_FILE_TO_STDOUT"))
 
     if not candidates:
@@ -137,8 +228,22 @@ def _acquire_and_run_semantic_verifier(pending, output_path):
     query=_semantic_verifier_query(goal)
     discovery=capability_discovery.search_apt_packages(query,limit=24)
     producer=str((pending.get("selected_supplier") or {}).get("name") or "")
+    hinted=[]
+    for raw in semantic.get("verifier_package_hints") or []:
+        name=raw.get("name") if isinstance(raw,dict) else raw
+        cand=_resolve_apt_candidate_name(name)
+        if cand is not None and cand.get("name")!=producer:
+            hinted.append(cand)
+    candidates=[]
+    seen=set()
+    for cand in hinted+(discovery.get("candidates",[]) or []):
+        name=str(cand.get("name") or "")
+        if not name or name in seen:
+            continue
+        seen.add(name)
+        candidates.append(cand)
     attempts=[]
-    for cand in discovery.get("candidates",[]):
+    for cand in candidates:
         name=str(cand.get("name") or "")
         if not name or name==producer:
             continue
