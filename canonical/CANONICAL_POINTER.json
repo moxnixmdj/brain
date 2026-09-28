@@ -145,11 +145,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "RUN_NO_MUTATION_COMMAND_MANPAGE_SEMANTICS_DIAGNOSTIC__MEASURE_DIRECTIONAL_OPERATION_EVIDENCE_FOR_SURFACED_EXECUTABLES__RECONCILE",
+    "next_step": "ONE_GENERIC_EXECUTABLE_SEMANTIC_EVIDENCE_REPAIR__ENRICH_APT_CANDIDATES_WITH_EXECUTABLE_PATH_AND_MANPAGE_SEMANTICS__REPLAY_FROZEN_FOUR_EFFECT_RANKING_SET_ONCE__RECONCILE",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "EXECUTABLE_PATH_EVIDENCE_RECALL_PROVEN__DIRECTIONAL_OPERATION_ROLE_RANKING_NOT_YET_PROVEN",
+    "critical_blocker": "EXECUTABLE_AND_MANPAGE_OPERATION_EVIDENCE_PROVEN__CURRENT_RUNTIME_DOES_NOT_CONSUME_IT_FOR_CANDIDATE_RANKING",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -226,7 +226,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "TOOL_DISCOVERY_SELECTION_AND_LEARNING__DIRECTIONAL_EXECUTABLE_OPERATION_EVIDENCE",
+    "highest_leverage_capability_gap": "TOOL_DISCOVERY_SELECTION_AND_LEARNING__EXECUTABLE_SEMANTIC_EVIDENCE_INTEGRATION",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -418,6 +418,16 @@
       "recall_at_20": 0.75,
       "all_supplier_families_surfaced": true,
       "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EXECUTABLE_EVIDENCE_SOURCE_DIAGNOSTIC_001_RECONCILIATION.json"
+    },
+    "command_manpage_semantics_diagnostic_001": {
+      "status": "COMPLETE_RECONCILED",
+      "workflow_run_id": 36467319278,
+      "artifact_id": 10989509842,
+      "artifact_digest": "sha256:92a87f2e5ba9b402a02a0071efdd6af4ee333c9c2f17c717561a619c7fec168d",
+      "coverage_improved_fraction": 1,
+      "high_semantic_coverage_fraction": 0.75,
+      "one_generic_repair_authorized": true,
+      "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_COMMAND_MANPAGE_SEMANTICS_DIAGNOSTIC_001_RECONCILIATION.json"
     }
   },
   "provider_rules": {

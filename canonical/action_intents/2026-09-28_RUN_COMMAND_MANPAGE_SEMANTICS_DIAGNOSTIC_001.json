@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RUN-COMMAND-MANPAGE-SEMANTICS-DIAGNOSTIC-001",
+  "status": "COMPLETE_RECONCILED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "COMMAND-MANPAGE-SEMANTICS-DIAGNOSTIC-001",
+  "causal_blocker": "EXECUTABLE_PATH_EVIDENCE_RECALL_PROVEN__DIRECTIONAL_OPERATION_ROLE_RANKING_NOT_YET_PROVEN",
+  "action_kind": "ORTHOGONAL_PROBE_SELECTION",
+  "expected_parent_frontier_change": "Determine whether zero-cost packaged manpage semantics add operation/action/output evidence beyond executable names for viable suppliers, without changing runtime ranking.",
+  "highest_leverage_now": true,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Measure command-name versus manpage semantic coverage for four already-surfaced viable supplier families, then reconcile. No runtime mutation or candidate execution.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "observed_result": {
+    "workflow_run_id": 36467319278,
+    "coverage_improved_fraction": 1,
+    "high_semantic_coverage_fraction": 0.75,
+    "artifact_id": 10989509842,
+    "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_COMMAND_MANPAGE_SEMANTICS_DIAGNOSTIC_001_RECONCILIATION.json"
+  }
+}
