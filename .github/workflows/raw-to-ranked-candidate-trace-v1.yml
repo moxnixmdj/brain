@@ -1,0 +1,36 @@
+name: Raw to Ranked Candidate Trace V1
+
+on:
+  push:
+    branches:
+      - diagnostic/raw-to-ranked-candidate-trace-v1-20260928
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  trace:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Prove runtime unchanged from canonical main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          test -z "$(git diff --name-only origin/main...HEAD -- canonical/runtime/)"
+      - name: Trace raw catalog to ranked candidates
+        run: python canonical/experiments/run_raw_to_ranked_candidate_trace_001.py
+      - name: Upload trace evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: raw-to-ranked-candidate-trace-001
+          path: canonical/astra_runtime/evidence/RAW_TO_RANKED_CANDIDATE_TRACE_001__RESULT.json
+          if-no-files-found: error
