@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "DIRECT-EVIDENCE-TIER-RANKING-REPAIR-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "DIRECT-EVIDENCE-TIER-RANKING-REPAIR-V1",
+  "causal_blocker": "DIRECT_EXECUTABLE_EVIDENCE_CANDIDATES_SURVIVE_GENERATION__GLOBAL_LEXICAL_PLUS_EXECUTABLE_SCORE_FUSION_AND_FINAL_TOP_K_RANKING_REMAINS_CAUSAL_RECALL_BOTTLENECK",
+  "action_kind": "GENERIC_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::DIRECT_EXECUTABLE_EVIDENCE_CANDIDATES_SURVIVE_GENERATION__GLOBAL_LEXICAL_PLUS_EXECUTABLE_SCORE_FUSION_AND_FINAL_TOP_K_RANKING_REMAINS_CAUSAL_RECALL_BOTTLENECK::GENERIC_REPAIR",
+  "expected_parent_frontier_change": "Make proven direct executable supplier evidence a primary qualitative ranking tier so viable executable candidates cannot be buried by lexical-only package coincidences; validate generalization on fresh unseen effects.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR70",
+    "PR71",
+    "PR72",
+    "PR73",
+    "PR78"
+  ],
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Exactly one repair implementation is tested. Existing four effects are regression-only; fresh unseen effects determine generalization. Reconcile after first validation result regardless of outcome.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
