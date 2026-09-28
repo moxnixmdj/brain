@@ -1,0 +1,33 @@
+name: Executable Semantic Evidence Ranking Repair V1
+
+on:
+  push:
+    branches:
+      - repair/executable-semantic-evidence-ranking-v1-20260928
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Syntax check repaired discovery
+        run: python -m py_compile canonical/runtime/capability_discovery.py
+      - name: Frozen four-effect replay once
+        run: python canonical/experiments/run_executable_semantic_evidence_ranking_replay_v1.py
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: executable-semantic-evidence-ranking-replay-v1
+          path: canonical/astra_runtime/evidence/EXECUTABLE_SEMANTIC_EVIDENCE_RANKING_REPLAY_V1.json
+          if-no-files-found: warn
