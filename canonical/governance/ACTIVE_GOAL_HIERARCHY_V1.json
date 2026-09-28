@@ -5,10 +5,10 @@
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "active_capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
   "active_probe": null,
-  "probe_state": "ORTHO_TOOL_LEARNING_PORTFOLIO_001_COMPLETE_RECONCILED",
-  "current_parent_blocker": "GENERIC_TOOL_INVOCATION_CONTRACT_PIPELINE_TOO_NARROW__REPEATED_IN_2_OF_3_ORTHOGONAL_PROBES",
-  "next_required_action_class": "ONE_GENERIC_REPAIR_ON_FRESH_BRANCH__REPLAY_ONLY_SQLITE_AND_XML_ONCE__THEN_RECONCILE",
-  "forbidden_local_frontier": "ANY_SINGLE_PROBE_PACKAGE_TOOL_OR_VERIFIER_OPTIMIZATION",
+  "probe_state": "CONTRACT_IR_REPAIR_FALSIFIED_AS_SUFFICIENT__RECONCILED",
+  "current_parent_blocker": "VIABLE_EXECUTABLE_CAPABILITY_CANDIDATE_DISCOVERY_AND_ROLE_RANKING_NOT_YET_PROVEN",
+  "next_required_action_class": "NO_MUTATION_CANDIDATE_DISCOVERY_DIAGNOSTIC__CHECK_INHERITED_ROUTE_FIRST__MEASURE_TOP_K_EXECUTABLE_RECALL_AND_ROLE_PRECISION__THEN_RECONCILE",
+  "forbidden_local_frontier": "SECOND_RUNTIME_REPAIR_FROM_SQLITE_XML__CONTRACT_PARSER_POLISHING__PACKAGE_NAME_HINTING",
   "progress_level_minimum": "CAPABILITY_TARGET",
   "probe_budget": {
     "repairs_used_on_active_probe": 0,
@@ -32,5 +32,12 @@
     "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_ORTHOGONAL_PORTFOLIO_001_RECONCILIATION.json",
     "repeated_blocker": "GENERIC_CONTRACT_INFERENCE_SHAPE",
     "recurrence_count": 2
+  },
+  "last_falsified_repair": {
+    "repair_id": "GENERIC-CLI-CONTRACT-IR-REPAIR-FALSIFICATION-20260928",
+    "source_pr": 56,
+    "merged": false,
+    "workflow_run_id": 36386645467,
+    "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_CONTRACT_IR_FALSIFICATION_RECONCILIATION_V1.json"
   }
 }

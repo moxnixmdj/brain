@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_CAUSAL_REPAIR_FALSIFICATION_RECONCILIATION_V1",
+  "reconciliation_id": "GENERIC-CLI-CONTRACT-IR-REPAIR-FALSIFICATION-20260928",
+  "status": "RECONCILED__REPAIR_FALSIFIED_AS_SUFFICIENT",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "source_pr": 56,
+  "source_pr_merged": false,
+  "repair_branch": "repair/generic-cli-contract-ir-v1-20260928",
+  "repair_head_sha": "374cae05c2470ef4c380c30eed276d363194f9fb",
+  "workflow_run_id": 36386645467,
+  "workflow_conclusion": "success_as_experiment_harness__NOT_CAPABILITY_SUCCESS",
+  "trusted_drift_guard_passed": true,
+  "repair_scope": "GENERIC_CLI_IO_CONTRACT_IR",
+  "regression_result": "PASS",
+  "real_replay_result": {
+    "full_loop_pass_count": 0,
+    "original_blocker_remaining_count": 2,
+    "probes": [
+      {
+        "probe_id": "ORTHO-SQLITE-001",
+        "status": "TERMINAL_FAIL",
+        "first_blocker_class": "GENERIC_CONTRACT_INFERENCE_SHAPE",
+        "wall_s": 220.957676,
+        "artifact_id": 10954956922,
+        "artifact_digest": "sha256:bfeef67137e2fa4e12a8dad43c45241659ee9baf79b4b6e24b316c79d89ca298",
+        "observed_candidate_pattern": [
+          "elpa-emacsql-sqlite",
+          "kamailio-sqlite-modules",
+          "rt4-db-sqlite",
+          "rt5-db-sqlite",
+          "sisu-sqlite",
+          "slang-sqlite",
+          "sqlitebrowser"
+        ],
+        "causal_note": "The discovered/ranked candidates were mostly bindings, modules, libraries, GUI tools, or packages whose probes produced no usable CLI help contract. The direct sqlite3 CLI supplier was not surfaced in the attempted candidate set."
+      },
+      {
+        "probe_id": "ORTHO-XML-001",
+        "status": "TERMINAL_FAIL",
+        "first_blocker_class": "GENERIC_CONTRACT_INFERENCE_SHAPE",
+        "wall_s": 90.396069,
+        "artifact_id": 10954154725,
+        "artifact_digest": "sha256:621c3dd0b9b81e3971e440d9f8049b35d71e3d2c069624c4c74c7ef419e66bbc",
+        "observed_candidate_pattern": [
+          "raku-json-name",
+          "monodoc-newtonsoft-json-manual",
+          "ejabberd-mod-logxml",
+          "gron",
+          "ipe5toxml",
+          "node-json2module",
+          "r-cran-xmlparsedata"
+        ],
+        "causal_note": "The discovered/ranked set was semantically noisy and mostly never reached a viable generic CLI contract. Several later APT probes were additionally affected by package-manager state after failed installs."
+      }
+    ]
+  },
+  "aggregate_artifact": {
+    "id": 10955086491,
+    "digest": "sha256:9b77cea700feba932152cfa0fc633fcc710df8f6c24101d1730c9d0a500d73da"
+  },
+  "falsified_hypothesis": "THE_SHARED_CAUSAL_BLOCKER_IS_PRIMARILY_THE_CLI_INVOCATION_CONTRACT_SHAPE",
+  "surviving_evidence": [
+    "The generalized contract IR passes focused and legacy regressions.",
+    "Neither real frozen replay improved.",
+    "On both real probes, viable effect-producing executable candidates were not established before contract inference.",
+    "The previous first_blocker classifier grouped all no-compatible-supplier-contract failures under a coarse contract-inference label."
+  ],
+  "reclassified_candidate_blocker": "VIABLE_EXECUTABLE_CAPABILITY_CANDIDATE_DISCOVERY_AND_ROLE_RANKING_NOT_YET_PROVEN",
+  "confidence": "HIGH_ENOUGH_FOR_DIAGNOSTIC__NOT_YET_HIGH_ENOUGH_FOR_SECOND_RUNTIME_REPAIR",
+  "confounders": [
+    "The probe runner directly invoked auto-acquisition rather than first proving that no inherited bound capability or composition could satisfy the effect.",
+    "APT probing mutates a shared runner package state; failed installs can contaminate later candidate probes.",
+    "SQLite already has specialized verified bound capabilities, although they do not directly satisfy the frozen arbitrary inline-table mission without adaptation."
+  ],
+  "prohibited_next_actions": [
+    "MERGE_PR_56_RUNTIME_CHANGES",
+    "SECOND_CONTRACT_IR_REPAIR",
+    "TASK_SPECIFIC_SQLITE_OR_XML_PATCH",
+    "PACKAGE_NAME_HINTING"
+  ],
+  "required_next_action": "RUN_CHEAP_NO_MUTATION_CANDIDATE_DISCOVERY_DIAGNOSTIC_ACROSS_ORTHOGONAL_EFFECTS__MEASURE_TOP_K_EXECUTABLE_ROUTE_RECALL_AND_ROLE_PRECISION__CHECK_INHERITED_CAPABILITY_FIRST__THEN_RECONCILE",
+  "promotion_authorized": false
+}

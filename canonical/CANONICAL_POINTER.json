@@ -145,11 +145,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "ONE_GENERIC_CONTRACT_PIPELINE_REPAIR_ON_FRESH_BRANCH__REPLAY_FROZEN_SQLITE_AND_XML_PROBES_ONCE__RECONCILE__NO_GZIP_REPAIR",
+    "next_step": "RUN_NO_MUTATION_CANDIDATE_DISCOVERY_DIAGNOSTIC_ACROSS_ORTHOGONAL_EFFECTS__CHECK_INHERITED_ROUTE_FIRST__MEASURE_TOP_K_EXECUTABLE_RECALL_AND_ROLE_PRECISION__RECONCILE",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "GENERIC_TOOL_INVOCATION_CONTRACT_PIPELINE_TOO_NARROW__REPEATED_IN_SQLITE_AND_XML_ORTHOGONAL_PROBES",
+    "critical_blocker": "VIABLE_EXECUTABLE_CAPABILITY_CANDIDATE_DISCOVERY_AND_ROLE_RANKING_NOT_YET_PROVEN",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -226,7 +226,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "TOOL_DISCOVERY_SELECTION_AND_LEARNING__GENERIC_CONTRACT_INFERENCE_SHAPE",
+    "highest_leverage_capability_gap": "TOOL_DISCOVERY_SELECTION_AND_LEARNING__EXECUTABLE_CANDIDATE_DISCOVERY_AND_ROLE_RANKING",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -308,6 +308,14 @@
       "repeated_blocker": "GENERIC_CONTRACT_INFERENCE_SHAPE",
       "recurrence_count": 2,
       "generic_repair_eligible": true
+    },
+    "generic_cli_contract_ir_repair": {
+      "status": "FALSIFIED_AS_SUFFICIENT_CURRENT_CAUSAL_REPAIR__NOT_MERGED",
+      "pr": 56,
+      "workflow_run_id": 36386645467,
+      "full_loop_pass_count": 0,
+      "original_blocker_remaining_count": 2,
+      "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_CONTRACT_IR_FALSIFICATION_RECONCILIATION_V1.json"
     }
   },
   "provider_rules": {
