@@ -1,0 +1,11 @@
+{
+  "schema": "PROJECT_BRAIN_SAME_IDENTITY_TASK_V1",
+  "task_id": "SI-OBSOLESCENCE-TOOL-DISCOVERY-GRAPH-001",
+  "agent_id": "SUPERWORKER-OBSOLESCENCE-1",
+  "priority": 100,
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_OBSOLESCENCE_TOOL_DISCOVERY_GRAPH_001.json",
+  "mission_sha256": "cd60aeb5a8c37bee88efc964dc619ac9d77b80fdaedb8ff7e257ffcd495fba08",
+  "prerequisites": [],
+  "checkpoint_before_runtime_once": true,
+  "incremental_spend_usd": 0
+}
