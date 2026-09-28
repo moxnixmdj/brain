@@ -1,0 +1,18 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_OBSOLESCENCE_EXPERIMENT_V1",
+  "experiment_id": "OBSOLESCENCE-TOOL-LEARNING-DATAMATRIX-001",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "frozen_goal": "Generate a Data Matrix barcode image for the text PROJECT BRAIN V4 and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_DATAMATRIX.png.",
+  "real_effect": {
+    "output": "PNG image",
+    "symbology": "Data Matrix",
+    "payload": "PROJECT BRAIN V4"
+  },
+  "acceptance": {
+    "discovery_required": true,
+    "no_prebound_datamatrix_capability": true,
+    "learned_contract_must_explicitly_bind_requested_symbology": true,
+    "incremental_spend_usd": 0,
+    "promotion_forbidden_until_independent_semantic_verification": true
+  }
+}
