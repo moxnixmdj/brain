@@ -2419,6 +2419,70 @@
         },
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-YAML-JSON-YQ-001__RECEIPT.json"
       }
+    },
+    "auto.apt.iec16022": {
+      "provides": [
+        "auto.effect.iec16022"
+      ],
+      "requires": [],
+      "keywords": [
+        "matrix",
+        "barcode"
+      ],
+      "cost": 1,
+      "platforms": [
+        "linux"
+      ],
+      "limitations": [
+        "Verified on the frozen Data Matrix text-to-PNG mission; broader behavior is not implied."
+      ],
+      "adapter_module": "cli_command",
+      "entrypoint": "run",
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "auto.apt.iec16022",
+          "argv": [
+            "iec16022",
+            "-f",
+            "PNG",
+            "-o",
+            "${input.output_path}",
+            "-c",
+            "${input.text}"
+          ],
+          "output_path": "${input.output_path}",
+          "output_prefix_hex": "89504e470d0a1a0a",
+          "output_text_utf8": false,
+          "timeout_s": 60
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "source": {
+        "type": "apt",
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "iec16022",
+            "version": "0.2.7-1",
+            "sha256": "b3cba02f7d4400bf8c38daf37139f9ba9c12f0e70ef49f035305a6ef27ce0f79"
+          }
+        ]
+      },
+      "incremental_spend_usd": 0,
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "mission_id": "ASTRA-AUTO-VERIFY-IEC16022-A7A34B725533",
+        "workflow_run_id": 36378255352,
+        "artifact_digest": "sha256:608507257e1df1ad4a38cce5c022056226b738f62a643c9c13b5a88a809d8795",
+        "independent_verified": true,
+        "semantic_verifier": "zxing-cpp-tools 2.2.1-3",
+        "verifier_discovery_scope": "EXTERNAL_NAME_ASSISTED__PINNING_CONTRACT_LEARNING_EXECUTION_AUTONOMOUS"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
