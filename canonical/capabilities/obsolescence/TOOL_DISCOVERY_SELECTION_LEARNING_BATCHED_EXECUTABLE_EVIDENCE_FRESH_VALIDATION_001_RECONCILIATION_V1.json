@@ -1,0 +1,117 @@
+{
+  "schema": "PROJECT_BRAIN_BATCHED_EXECUTABLE_EVIDENCE_FRESH_VALIDATION_RECONCILIATION_V1",
+  "status": "EXECUTED_ONCE__OBSERVED_FAIL__ACCEPTANCE_INADMISSIBLE_DUE_INCOMPLETE_RUNTIME_SURFACE__FRESH_CASES_SPENT",
+  "checked_on": "2026-09-29",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "source_pr": 85,
+  "branch": "repair/batched-executable-evidence-acquisition-v1-20260928",
+  "critical_candidate_identity": {
+    "pr_head_sha": "1563c67507b07084d673b984b131a5a7a3fa99c3",
+    "runtime_blob_sha": "eddddaa84dacda5d679c22d34f101aeb1d431678",
+    "runner_blob_sha": "a5c32e63916b6f5940dd02ffd78c60d90644ab7b",
+    "spec_blob_sha": "d29bc8b64cd13c9074b4d35d86b46e52607aca0c"
+  },
+  "validation_id": "BATCHED-EXECUTABLE-EVIDENCE-FRESH-VALIDATION-001",
+  "replay_budget": {
+    "frozen_gate_executions_observed": 1,
+    "frozen_cases_freshness": "SPENT_BY_EXECUTION",
+    "same_case_replay_allowed": false,
+    "reason": "The frozen cases and oracle outcomes have now been observed. Reusing them cannot provide fresh acceptance evidence even if a more faithful surface becomes available."
+  },
+  "execution_surface": {
+    "os": "Debian GNU/Linux 13 (trixie) amd64",
+    "uid": 0,
+    "python": "3.13.5",
+    "apt": "3.0.3",
+    "apt_file": "3.3",
+    "apt_file_dependencies": {
+      "libapt-pkg-perl": "0.1.42",
+      "libregexp-assemble-perl": "0.38-2"
+    },
+    "contents_index": {
+      "source": "https://deb.debian.org/debian/dists/trixie/main/Contents-amd64.gz",
+      "bytes": 12698511,
+      "sha256": "3d3e6930908db0b53f780dd7397b9589e27db88b59205c331a76d76d6726e419",
+      "recognized_by_apt_file": true,
+      "transfer_integrity": "SOURCE_FETCH_HASH_MATCHED_RECONSTRUCTED_LOCAL_BYTES"
+    },
+    "source_transport": "Official Debian bytes were fetched on a connected networked computation surface, losslessly encoded into image pixels, imported by Google Slides, exported into the ChatGPT container, reconstructed, and hash-verified before use.",
+    "incremental_monetary_spend_observed_usd": 0,
+    "new_billable_resource_created": false,
+    "normal_apt_packages_catalog_present": false,
+    "outbound_network_available_to_runtime": false,
+    "ubuntu_manpage_enrichment_available": false
+  },
+  "exact_observed_result": {
+    "acceptance_gate_pass": false,
+    "fresh_oracle_family_recall": 0.6666666666666666,
+    "fresh_top20_oracle_recall": 0,
+    "total_wall_s": 96.824453,
+    "hard_validation_wall_s": 600,
+    "runtime_mutated_by_validator": false,
+    "candidate_packages_installed": false,
+    "candidate_binaries_executed": false,
+    "package_hints_used_by_runtime": false,
+    "promotion_authorized": false,
+    "cases": [
+      {
+        "effect_id": "FRESH-EXIF-001",
+        "oracle_family": "libimage-exiftool-perl",
+        "oracle_found": false,
+        "oracle_rank": null,
+        "wall_s": 33.146115
+      },
+      {
+        "effect_id": "FRESH-XML-LINT-001",
+        "oracle_family": "libxml2-utils",
+        "oracle_found": true,
+        "oracle_rank": 49,
+        "wall_s": 30.63222
+      },
+      {
+        "effect_id": "FRESH-JPEG-TRANSFORM-001",
+        "oracle_family": "libjpeg-turbo-progs",
+        "oracle_found": true,
+        "oracle_rank": 23,
+        "wall_s": 33.045819
+      }
+    ]
+  },
+  "gate_arithmetic_note": "The spec threshold 0.6666666667 is slightly above exact 2/3. The observed 0.6666666666666666 plus the runner's 1e-12 tolerance remains below that decimal threshold; therefore family recall also fails the literal gate, independently of top20 recall.",
+  "admissibility_reconciliation": {
+    "intended_surface_requirement": "Exact PR85 bytes on reliable Debian/Ubuntu-like Linux with live apt-file Contents indices, hard $0 incremental spend, <=600 seconds.",
+    "satisfied": [
+      "exact candidate runtime/runner/spec blob identities",
+      "real Debian-family Linux",
+      "genuine apt-file implementation",
+      "fresh official Debian Contents bytes with end-to-end hash verification",
+      "hard wall-clock",
+      "no package hints or task-specific literals",
+      "no candidate installation or execution",
+      "no new billable resource"
+    ],
+    "unsatisfied_or_materially_degraded": [
+      "normal APT Packages metadata was absent, so apt-cache search contributed no package-description candidates",
+      "runtime outbound network was unavailable, so bounded Ubuntu-manpage semantic enrichment could not execute"
+    ],
+    "classification": "REAL_DEGRADED_SURFACE_OBSERVATION__NOT_VALID_PROMOTION_OR_CLEAN_ALGORITHM_FALSIFICATION",
+    "implication": "The result proves the batched apt-file acquisition path runs quickly on genuine Contents data and exposes poor ranks under degraded metadata/enrichment. It does not isolate whether the intended full PR85 algorithm would pass on a normal connected Debian/Ubuntu APT surface."
+  },
+  "preserved_gain": [
+    "The prior wall-clock blocker was materially reduced: the exact three-case runner completed in 96.824453 seconds rather than timing out.",
+    "Genuine batched apt-file executable evidence reached two of three oracle families without package hints.",
+    "The transfer/execution blocker is no longer the only frontier; environment fidelity and semantic ranking attribution are now measurable."
+  ],
+  "exact_residual": "ATTRIBUTION_UNRESOLVED_BETWEEN_MISSING_NORMAL_APT_PACKAGE_METADATA__MISSING_REMOTE_MANPAGE_ENRICHMENT__AND_INTRINSIC_EXECUTABLE_ROLE_RANKING_QUALITY",
+  "next_action": "ONE_NO_MUTATION_POSTHOC_ENVIRONMENT_ATTRIBUTION_DIAGNOSTIC__RESTORE_NORMAL_APT_PACKAGES_METADATA_AND_NETWORK_EQUIVALENT_SEMANTIC_EVIDENCE_WITHOUT_CHANGING_PR85_RUNTIME__DO_NOT_TREAT_OLD_CASES_AS_FRESH__THEN_RECONCILE_AND_FREEZE_A_NEW_HELD_OUT_GATE_BEFORE_ANY_SECOND_REPAIR",
+  "prohibitions": [
+    "NO_SECOND_REPAIR_BEFORE_ATTRIBUTION_RECONCILIATION",
+    "NO_REPLAY_OF_THE_SPENT_FROZEN_CASES_AS_FRESH_ACCEPTANCE_EVIDENCE",
+    "NO_MERGE_OR_PROMOTION_FROM_THIS DEGRADED-SURFACE RESULT",
+    "NO_PACKAGE_HINTS_OR_TASK_SPECIFIC_LITERALS",
+    "NO_TIMEOUT_INCREASE",
+    "NO_BILLABLE_INFRASTRUCTURE"
+  ],
+  "promotion_authorized": false,
+  "repair_merge_authorized": false
+}
