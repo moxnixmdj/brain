@@ -1,0 +1,153 @@
+{
+  "schema": "PROJECT_BRAIN_EXECUTABLE_CANDIDATE_DIAGNOSTIC_RECONCILIATION_V1",
+  "diagnostic_id": "EXECUTABLE-CANDIDATE-DIAGNOSTIC-001",
+  "status": "COMPLETE_RECONCILED",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "workflow_run_id": 36452301655,
+  "workflow_head_sha": "d8fd1a7304db37a1d498b3691add8153ad3b6b93",
+  "drift_guard_run_id": 36452328166,
+  "artifact": {
+    "id": 10984191489,
+    "digest": "sha256:2bc1fa978d4bae263ab6a6d3a4c7db39d787e41d42b4f76d713f7366cb4ef0fa"
+  },
+  "constraints_observed": {
+    "runtime_mutation_performed": false,
+    "package_installation_performed": false,
+    "candidate_execution_performed": false,
+    "oracle_used_for_search": false
+  },
+  "aggregate": {
+    "diagnostic_wall_s": 534.510523,
+    "known_external_oracle_count": 4,
+    "known_external_oracles_found": 2,
+    "known_external_recall": 0.5,
+    "found_oracle_ranks": {
+      "gzip": 3,
+      "graphviz": 2
+    },
+    "missing_from_top50": [
+      "sqlite3",
+      "imagemagick/graphicsmagick family"
+    ],
+    "inherited_sqlite_oracle_rank": 1,
+    "inherited_sqlite_compile_result": "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"
+  },
+  "repeated_evidence": [
+    {
+      "class": "SEMANTIC_QUERY_CONTAMINATION",
+      "recurrence_count": 4,
+      "evidence": "The token `at`, originating from ordinary goal syntax around output paths, entered APT/PyPI/MCP search queries in all four orthogonal probes and produced irrelevant high-ranked packages."
+    },
+    {
+      "class": "KNOWN_VIABLE_SUPPLIER_RECALL_OR_RANK_FAILURE",
+      "recurrence_count": 2,
+      "evidence": "sqlite3 and ImageMagick/GraphicsMagick known viable supplier families were absent from the top-50 merged candidate set, while unrelated lexical matches occupied top ranks."
+    }
+  ],
+  "examples": [
+    {
+      "probe": "DISCOVERY-SQLITE-001",
+      "queries": [
+        "sqlite",
+        "database",
+        "at",
+        "table",
+        "named",
+        "probe"
+      ],
+      "oracle": "sqlite3",
+      "oracle_rank": null,
+      "top5": [
+        "elpa-emacsql-sqlite",
+        "kamailio-sqlite-modules",
+        "rt4-db-sqlite",
+        "rt5-db-sqlite",
+        "sisu-sqlite"
+      ],
+      "inherited_capability": "sqlite.table.create_from_json_records",
+      "inherited_rank": 1,
+      "compile_error": "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"
+    },
+    {
+      "probe": "DISCOVERY-GZIP-001",
+      "queries": [
+        "gzip",
+        "compressed",
+        "at",
+        "gz",
+        "whose",
+        "decompressed"
+      ],
+      "oracle": "gzip",
+      "oracle_rank": 3,
+      "top5": [
+        "gztool",
+        "at",
+        "gzip",
+        "at-spi2-common",
+        "at-spi2-core"
+      ]
+    },
+    {
+      "probe": "DISCOVERY-IMAGE-RESIZE-001",
+      "queries": [
+        "resize",
+        "png",
+        "exactly",
+        "pixels",
+        "result",
+        "at"
+      ],
+      "oracle": "imagemagick/graphicsmagick family",
+      "oracle_rank": null,
+      "top5": [
+        "at",
+        "at-spi2-common",
+        "at-spi2-core",
+        "famfamfam-flag-png",
+        "hunspell-de-at"
+      ]
+    },
+    {
+      "probe": "DISCOVERY-GRAPH-RENDER-001",
+      "queries": [
+        "render",
+        "graphviz",
+        "dot",
+        "graph",
+        "png",
+        "at"
+      ],
+      "oracle": "graphviz",
+      "oracle_rank": 2,
+      "top5": [
+        "elpa-graphviz-dot-mode",
+        "graphviz",
+        "braillegraph",
+        "codecgraph",
+        "r-cran-rsvg"
+      ]
+    }
+  ],
+  "measurement_correction": {
+    "prior_metric": "mean_top5_executable_role_precision=1.0",
+    "status": "INVALID_AS_SEMANTIC_ROLE_PRECISION",
+    "reason": "The diagnostic heuristic labeled friction-0 APT packages as executable-role-likely even when examples were Emacs modes, backend modules, dictionaries, data packages, or other non-solution roles.",
+    "implication": "Do not use that 1.0 value as evidence that role classification is solved."
+  },
+  "exact_primary_blocker": "SEMANTIC_QUERY_CONSTRUCTION_AND_EXECUTABLE_ROLE_RANKING_RECALL_FAILURE",
+  "secondary_preserved_gap": "INHERITED_ROUTE_VISIBLE_BUT_NOT_DIRECTLY_COMPILABLE__SQLITE_INPUT_COMPOSITION",
+  "repair_authorization": {
+    "count": 1,
+    "scope": "GENERIC_SEMANTIC_QUERY_CONSTRUCTION_AND_EXECUTABLE_ROLE_RANKING_ONLY",
+    "required_properties": [
+      "remove syntactic/path relation noise from capability queries",
+      "preserve causally useful domain/effect terms rather than dropping them as generic",
+      "rank package-name semantic closeness and tool-role evidence above incidental description matches",
+      "no package-name hints or probe-specific literals",
+      "no contract-parser changes"
+    ],
+    "replay": "REPLAY_EXECUTABLE_CANDIDATE_DIAGNOSTIC_001_ONCE_THEN_RECONCILE"
+  },
+  "promotion_authorized": false
+}

@@ -70,12 +70,12 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Determine whether the current acquisition system reliably surfaces and prioritizes viable executable capability suppliers before contract learning, without installing or executing candidates and while checking inherited verified capabilities first.",
-    "selection_metric": "CROSS_CAPABILITY_MULTIPLIER_TIMES_EXPECTED_OBSOLESCENCE_GAIN_PER_WALL_CLOCK_TIME",
-    "exact_blocker": "VIABLE_EXECUTABLE_CAPABILITY_CANDIDATE_DISCOVERY_AND_ROLE_RANKING_NOT_YET_PROVEN",
-    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_CONTRACT_IR_FALSIFICATION_RECONCILIATION_V1.json",
-    "repair_status": "GENERIC_CLI_CONTRACT_IR_FALSIFIED_AS_SUFFICIENT_CURRENT_CAUSAL_REPAIR",
-    "prohibition": "NO_SECOND_RUNTIME_REPAIR_UNTIL_NO_MUTATION_DISCOVERY_DIAGNOSTIC_LOCALIZES_REPEATED_UPSTREAM_FAILURE"
+    "objective": "Repair semantic query construction and executable-role ranking so known viable suppliers are recalled and prioritized across orthogonal effects before contract learning.",
+    "selection_metric": "KNOWN_VIABLE_SUPPLIER_RECALL_AND_RANK_IMPROVEMENT_PER_WALL_CLOCK_TIME",
+    "exact_blocker": "SEMANTIC_QUERY_CONSTRUCTION_AND_EXECUTABLE_ROLE_RANKING_RECALL_FAILURE",
+    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EXECUTABLE_CANDIDATE_DIAGNOSTIC_001_RECONCILIATION.json",
+    "repair_status": "ONE_GENERIC_DISCOVERY_RANKING_REPAIR_AUTHORIZED",
+    "prohibition": "NO_PACKAGE_NAME_HINTS__NO_CONTRACT_PARSER_CHANGES__NO_SECOND_REPAIR_BEFORE_ONE_REPLAY_AND_RECONCILIATION"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
