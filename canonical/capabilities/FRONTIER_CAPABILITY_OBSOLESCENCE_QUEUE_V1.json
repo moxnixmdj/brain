@@ -70,12 +70,12 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Make direct executable/manpage supplier evidence cheap enough to support fast capability discovery before evaluating another ranking repair.",
-    "selection_metric": "VERIFIED_EXECUTABLE_SUPPLIER_EVIDENCE_PER_WALL_CLOCK_WITH_ZERO_HINTS_AND_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "DIRECT_EXECUTABLE_EVIDENCE_ACQUISITION_PATH_EXCEEDS_WALL_CLOCK_GATE__REPEATED_APT_FILE_AND_REMOTE_MANPAGE_SCANS_PREVENT_FAST_RANKING_ADJUDICATION",
-    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_DIRECT_EVIDENCE_TIER_TIMEOUT_RECONCILIATION_V1.json",
-    "repair_status": "NO_REPAIR_AUTHORIZED__NO_MUTATION_LATENCY_PROFILE_REQUIRED",
-    "prohibition": "NO_TIMEOUT_INCREASE__NO_SECOND_RANKING_REPAIR__NO_PACKAGE_HINTS__NO_TASK_SPECIFIC_LITERALS"
+    "objective": "Replace repeated regex index scans and blanket remote manpage fanout with one batched literal multi-pattern executable-evidence acquisition pass plus bounded progressive cached enrichment, preserving supplier recall on fresh unseen work.",
+    "selection_metric": "FRESH_UNSEEN_VIABLE_SUPPLIER_TOP_K_RECALL_AND_ROLE_PRECISION_PER_WALL_CLOCK_WITH_ZERO_HINTS_AND_ZERO_INCREMENTAL_SPEND",
+    "exact_blocker": "EVIDENCE_ACQUISITION_USES_REPEATED_SLOW_APT_FILE_REGEX_SCANS_AND_EXCESSIVE_REMOTE_MANPAGE_FANOUT__BATCH_LITERAL_MULTI_PATTERN_ACQUISITION_AND_PROGRESSIVE_CACHED_ENRICHMENT_NOT_YET_INTEGRATED",
+    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EVIDENCE_ACQUISITION_STRUCTURAL_CAUSE_RECONCILIATION_V1.json",
+    "repair_status": "ONE_GENERIC_BATCHED_LITERAL_ACQUISITION_REPAIR_AUTHORIZED",
+    "prohibition": "NO_PER_TERM_REGEX_APT_FILE_LOOPS__NO_UNBOUNDED_MANPAGE_FANOUT__NO_TIMEOUT_INCREASE__NO_PACKAGE_HINTS__NO_TASK_SPECIFIC_LITERALS__FRESH_UNSEEN_GATE_REQUIRED"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -144,5 +144,14 @@
     "artifact_id": 10992813288,
     "artifact_digest": "sha256:62067bfbc6e300a81724030fca3d733b836d66835653c4a2f30ec395cd83a450",
     "all_oracles_survive_generator_and_top100": true
+  },
+  "evidence_acquisition_latency_profile_001": {
+    "status": "EXECUTION_SURFACE_QUARANTINED__STRUCTURAL_CAUSE_RECONCILED_PENDING_MERGE",
+    "source_pr": 82,
+    "profile_runs": [
+      36486220580,
+      36486527162
+    ],
+    "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EVIDENCE_ACQUISITION_STRUCTURAL_CAUSE_RECONCILIATION_V1.json"
   }
 }
