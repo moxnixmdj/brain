@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "RUN-RAW-TO-RANKED-CANDIDATE-TRACE-001",
-  "status": "PROPOSED",
+  "status": "COMPLETE_RECONCILED",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
@@ -18,5 +18,7 @@
   "probe_specific_literals": [],
   "stop_condition": "Trace four fresh effects through inherited capability lookup, raw APT catalog presence, current candidate admission and ranking; then reconcile. No runtime mutation on this branch.",
   "governance_change": false,
-  "weakens_existing_guard": false
+  "weakens_existing_guard": false,
+  "observed_parent_frontier_change": "Raw catalog recall was 1.0 while returned/top12 oracle recall was 0.25; three of four viable suppliers were lost after raw search.",
+  "stop_condition_satisfied": true
 }
