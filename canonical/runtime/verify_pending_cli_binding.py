@@ -522,7 +522,7 @@ def _acquire_and_run_semantic_verifier(pending, output_path):
           "selected_execution_variant":a.get("selected_execution_variant"),
         }
         for a in attempts
-    ],sort_keys=True)[:20000])
+    ],sort_keys=True,default=str)[:20000])
 
 
 def _resolve_callable(module,name):
