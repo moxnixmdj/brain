@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_COMMAND_MANPAGE_SEMANTICS_DIAGNOSTIC_RECONCILIATION_V1",
+  "status": "COMPLETE_RECONCILED",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "diagnostic_id": "COMMAND-MANPAGE-SEMANTICS-DIAGNOSTIC-001",
+  "workflow_run_id": 36467319278,
+  "drift_guard_run_id": 36467338939,
+  "runtime_mutated": false,
+  "candidate_packages_installed": false,
+  "candidate_binaries_executed": false,
+  "artifact": {
+    "id": 10989509842,
+    "digest": "sha256:92a87f2e5ba9b402a02a0071efdd6af4ee333c9c2f17c717561a619c7fec168d"
+  },
+  "measured": {
+    "coverage_improved_cases": 4,
+    "coverage_improved_fraction": 1,
+    "high_semantic_coverage_cases": 3,
+    "high_semantic_coverage_fraction": 0.75,
+    "combined_command_plus_manpage_coverage": {
+      "PDF_TEXT": 1,
+      "SVG_RASTER": 1,
+      "BZIP2": 1,
+      "MEDIA_METADATA": 0.75
+    },
+    "diagnostic_wall_s": 11.411143
+  },
+  "causal_conclusion": [
+    "Packaged manpage semantics materially enrich executable names with operation/action/output evidence in all four evaluated viable supplier families.",
+    "PDF text extraction gained the missing extract action; SVG rasterization gained png and raster semantics; bzip2 gained compress/compression; media inspection gained technical/information semantics.",
+    "Executable-path discovery plus manpage semantics together provide the missing evidence substrate that package lexical metadata lacked.",
+    "The remaining blocker is integration and ranking: the current runtime does not consume this evidence when constructing and ranking APT capability candidates."
+  ],
+  "repair_eligibility": {
+    "repeated_cross_effect_support_count": 4,
+    "one_generic_repair_authorized": true,
+    "authorized_scope": "ENRICH_APT_DISCOVERY_CANDIDATES_WITH_EXECUTABLE_PATH_AND_MANPAGE_OPERATION_EVIDENCE__RANK_BY_EFFECT_SEMANTIC_COVERAGE__NO_TASK_SPECIFIC_LITERALS",
+    "frozen_replay": "PRETRUNCATION-CANDIDATE-RANK-TRACE-001 effects",
+    "acceptance_gate": {
+      "oracle_family_recall": 1,
+      "top20_oracle_recall_min": 0.75,
+      "no_regression_bzip2": true,
+      "runtime_generalization_only": true
+    }
+  },
+  "next_action": {
+    "type": "ONE_GENERIC_EXECUTABLE_SEMANTIC_EVIDENCE_REPAIR",
+    "objective": "Integrate executable-path and manpage semantic evidence into APT candidate construction/ranking without package hints, then replay the frozen four-effect ranking diagnostic once and reconcile.",
+    "replay_once_then_reconcile": true
+  },
+  "promotion_authorized": false
+}
