@@ -5,10 +5,10 @@
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "active_capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
   "active_probe": null,
-  "probe_state": "SEMANTIC_ROLE_DIAGNOSTIC_COMPLETE_RECONCILED",
-  "current_parent_blocker": "STRUCTURED_EFFECT_AND_CANDIDATE_TOOL_ROLE_REPRESENTATION_MISSING",
-  "next_required_action_class": "ONE_GENERIC_SEMANTIC_ROLE_IR_REPAIR__ONE_FROZEN_REPLAY__THEN_RECONCILE",
-  "forbidden_local_frontier": "SECOND_FLAT_LEXICAL_TWEAK__PACKAGE_HINTING__CONTRACT_PARSER_CHANGES__PROBE_SPECIFIC_RANKING_EXCEPTIONS",
+  "probe_state": "SEMANTIC_ROLE_IR_V1_FALSIFIED_ON_ALLOWED_REPLAY__RECONCILED",
+  "current_parent_blocker": "TASK_INSTRUCTION_VS_PAYLOAD_SCHEMA_SEGMENTATION_AND_CONJUNCTIVE_ROLE_COMPATIBILITY_NOT_YET_PROVEN",
+  "next_required_action_class": "ONE_GENERIC_TASK_SEMANTIC_SEGMENTATION_AND_CONJUNCTIVE_ROLE_REPAIR__FRESH_ORTHOGONAL_VALIDATION__THEN_RECONCILE",
+  "forbidden_local_frontier": "REPLAY_SEMANTIC_ROLE_DIAGNOSTIC_001_AGAIN__PACKAGE_HINTING__CONTRACT_PARSER_CHANGES__FLAT_WEIGHT_TWEAK",
   "progress_level_minimum": "CAPABILITY_TARGET",
   "probe_budget": {
     "repairs_used_on_active_probe": 0,
@@ -34,12 +34,11 @@
     "recurrence_count": 2
   },
   "last_falsified_repair": {
-    "repair_id": "SEMANTIC-EXECUTABLE-RANKING-REPAIR-V1",
-    "source_pr": 60,
+    "repair_id": "SEMANTIC-ROLE-IR-V1",
+    "source_pr": 64,
     "merged": false,
-    "workflow_run_id": 36454688524,
-    "replay_executed": false,
-    "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_SEMANTIC_RANKING_REPAIR_FALSIFICATION_V1.json"
+    "workflow_run_id": 36458524232,
+    "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_SEMANTIC_ROLE_IR_V1_FALSIFICATION_RECONCILIATION.json"
   },
   "completed_candidate_diagnostic": {
     "diagnostic_id": "EXECUTABLE-CANDIDATE-DIAGNOSTIC-001",
