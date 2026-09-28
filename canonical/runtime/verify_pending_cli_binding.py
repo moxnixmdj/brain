@@ -70,14 +70,89 @@ def _resolve_apt_candidate_name(name):
         return None
 
 
-def _semantic_verifier_query(goal):
-    tokens=[
+def _semantic_verifier_queries(goal):
+    """Generate bounded verifier-role queries from the requested effect.
+
+    The verifier should be discovered by what it must *do*, not by a package
+    name. Progressively broaden while preserving the distinctive target nouns.
+    """
+    raw=[
         t for t in capability_discovery.effect_queries(goal)
         if t not in capability_discovery.GENERIC_DISCOVERY_TOKENS
         and not t.isdigit()
     ]
-    distinctive=" ".join(tokens[:3]).strip()
-    return ("decode "+distinctive+" image").strip()
+    producer_words={
+        "generate","create","make","render","encode","write","save","output",
+        "png","jpg","jpeg","webp","file","image"
+    }
+    distinctive=[t for t in raw if t not in producer_words]
+    if not distinctive:
+        distinctive=list(raw)
+    nouns=distinctive[:4]
+    queries=[]
+    def add(text):
+        text=" ".join(str(text).split()).strip()
+        if text and text not in queries:
+            queries.append(text)
+    joined=" ".join(nouns)
+    for role in ("decode","read","scan"):
+        add((role+" "+joined+" image").strip())
+    # Broaden one layer at a time. This is intentionally role-based rather
+    # than domain/package-name based.
+    if len(nouns)>2:
+        shorter=" ".join(nouns[:2])
+        for role in ("decode","read","scan"):
+            add((role+" "+shorter).strip())
+    for generic in (
+        "decode machine readable code",
+        "read machine readable code",
+        "scan barcode image",
+        "barcode decoder",
+        "barcode reader",
+    ):
+        add(generic)
+    return queries[:12]
+
+
+def _semantic_verifier_query(goal):
+    # Compatibility helper for evidence fields/tests.
+    queries=_semantic_verifier_queries(goal)
+    return queries[0] if queries else "decode image"
+
+
+def _merge_verifier_discovery(goal, limit_per_query=24):
+    merged={}
+    searches=[]
+    for rank,query in enumerate(_semantic_verifier_queries(goal)):
+        result=capability_discovery.search_apt_packages(query,limit=limit_per_query)
+        searches.append({
+          "query":query,
+          "candidate_count":result.get("candidate_count",0),
+          "errors":result.get("errors",[]),
+        })
+        for cand in result.get("candidates",[]) or []:
+            name=str(cand.get("name") or "")
+            if not name:
+                continue
+            x=dict(cand)
+            x["verifier_role_query"]=query
+            x["verifier_role_query_rank"]=rank
+            # Earlier, more specific queries should win when package metadata
+            # quality is otherwise comparable.
+            x["score"]=float(x.get("score",0)) + max(0,20-rank)
+            prior=merged.get(name)
+            if prior is None or float(x.get("score",0))>float(prior.get("score",0)):
+                merged[name]=x
+    candidates=sorted(
+        merged.values(),
+        key=lambda x:(
+            int(x.get("integration_friction",99)),
+            -float(x.get("score",0)),
+            int(x.get("verifier_role_query_rank",999)),
+            str(x.get("name","")),
+        )
+    )
+    return {"queries":searches,"candidates":candidates}
 
 
 
@@ -282,7 +357,7 @@ def _acquire_and_run_semantic_verifier(pending, output_path):
         raise RuntimeError("SEMANTIC_EXPECTED_TEXT_REQUIRED")
     goal=str(semantic.get("goal") or pending.get("goal") or "")
     query=_semantic_verifier_query(goal)
-    discovery=capability_discovery.search_apt_packages(query,limit=24)
+    discovery=_merge_verifier_discovery(goal,limit_per_query=24)
     producer=str((pending.get("selected_supplier") or {}).get("name") or "")
     hinted=[]
     for raw in semantic.get("verifier_package_hints") or []:
@@ -292,7 +367,10 @@ def _acquire_and_run_semantic_verifier(pending, output_path):
             hinted.append(cand)
     candidates=[]
     seen=set()
-    for cand in hinted+(discovery.get("candidates",[]) or []):
+    # Autonomous role-conditioned discovery is authoritative. Explicit hints
+    # remain only as a final diagnostic fallback and are never required for
+    # the normal acceptance path.
+    for cand in (discovery.get("candidates",[]) or [])+hinted:
         name=str(cand.get("name") or "")
         if not name or name in seen:
             continue
@@ -364,6 +442,7 @@ def _acquire_and_run_semantic_verifier(pending, output_path):
               "verifier_archive_sha256":sha,
               "verifier_executable":contract["executable"],
               "query":query,
+              "autonomous_discovery_queries":discovery.get("queries",[]),
               "producer_package":producer,
               "producer_independent":name!=producer,
               "attempt_count":len(attempts)+1
