@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_OBSOLESCENCE_MAP_V1",
+  "status": "CANONICAL_OBSOLESCENCE_QUEUE",
+  "p_real": 1,
+  "purpose": "Track useful frontier behaviors as dependencies to test for removal, not capabilities to accumulate.",
+  "terminal_direction": "REQUIRED_FRONTIER_MODEL_CAPABILITY_DEPENDENCY_TO_ZERO",
+  "primary_metric": "VERIFIED_REDUCTION_IN_REQUIRED_FRONTIER_MODEL_CAPABILITY_DEPENDENCY",
+  "frontier_reference_policy": "OBSERVED_BEHAVIORS_AND_CHALLENGES_ONLY",
+  "obsolescence_rule": "PRESERVE_OR_IMPROVE_THE_SAME_REAL_OUTCOME_WHILE_REMOVING_FRONTIER_MODEL_INTERNAL_DEPENDENCY",
+  "initial_dependency_classes": [
+    "GOAL_DECOMPOSITION_AND_PLANNING",
+    "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
+    "SOFTWARE_ENGINEERING",
+    "TECHNICAL_SCIENTIFIC_REASONING",
+    "UNKNOWN_DOMAIN_ADAPTATION",
+    "TOOL_SELECTION_AND_TOOL_LEARNING",
+    "COMPUTER_AND_BROWSER_USE",
+    "DATA_ANALYSIS_AND_ARTIFACT_CREATION",
+    "LONG_HORIZON_CONTINUATION_AND_RECOVERY",
+    "JUDGMENT_UNDER_AMBIGUITY",
+    "MULTI_CAPABILITY_COMPOSITION",
+    "SELF_CRITIQUE_FALSIFICATION_AND_VERIFICATION",
+    "MEMORY_RETRIEVAL_AND_REUSE",
+    "COORDINATION_AND_PARALLEL_WORK"
+  ],
+  "per_dependency_required_fields": [
+    "observed_useful_effect",
+    "current_frontier_model_contribution",
+    "candidate_substitutes",
+    "falsification_test",
+    "real_task_evidence",
+    "independent_verification",
+    "status",
+    "remaining_irreducible_reason_if_any"
+  ],
+  "statuses": [
+    "UNTESTED_DEPENDENCY",
+    "SUBSTITUTE_CANDIDATE",
+    "OBSOLESCENCE_TEST_RUNNING",
+    "OBSOLETE_VERIFIED",
+    "IRREDUCIBLE_WITH_CURRENT_EVIDENCE"
+  ],
+  "immediate_frontier": {
+    "objective": "Recover the strongest prior Astra/frontier capability dependency evidence, choose the dependency with maximum expected dependency-reduction leverage, and run one real obsolescence experiment.",
+    "constraint": "Do not treat frontier capability breadth accumulation as the goal."
+  },
+  "scaling_gate": "DEFER_UNTIL_OBSOLESCENCE_CORE_IS_REPRODUCIBLE_AND_GENERAL_ENOUGH",
+  "parity_role": "DIAGNOSTIC_ONLY",
+  "capability_superset_role": "POSSIBLE_OUTCOME_NOT_TERMINAL_GOAL"
+}
