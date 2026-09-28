@@ -6,6 +6,22 @@ RUNTIME=ROOT/"canonical"/"runtime"
 sys.path.insert(0,str(RUNTIME))
 import capability_discovery
 import auto_capability_acquisition
+import verify_pending_cli_binding
+
+_test_contract={
+  "executable":"/usr/bin/generic-reader",
+  "argv":["/usr/bin/generic-reader","__OUTPUT_PATH__"],
+  "inference_basis":"POSITIONAL_FILE_TO_STDOUT",
+  "help_excerpt":"  -e, --minimum-edge=N        smallest expected edge\n",
+}
+_test_variants=verify_pending_cli_binding._semantic_execution_variants(
+    _test_contract,"canonical/astra_runtime/tmp/example.png"
+)
+assert _test_variants[0]["basis"]=="PRIMARY_CONTRACT"
+assert _test_variants[1]["basis"]=="HELP_DECLARED_MINIMUM_NUMERIC_RELAXATION"
+assert _test_variants[1]["argv"]==[
+    "/usr/bin/generic-reader","-e","1","canonical/astra_runtime/tmp/example.png"
+]
 
 MISSION_REL="canonical/astra_runtime/missions/OBSOLESCENCE_TOOL_LEARNING_DATAMATRIX_001.json"
 MISSION_ID="OBSOLESCENCE-TOOL-LEARNING-DATAMATRIX-001"
