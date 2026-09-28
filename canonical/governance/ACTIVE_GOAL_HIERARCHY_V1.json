@@ -5,10 +5,10 @@
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "active_capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
   "active_probe": null,
-  "probe_state": "EXECUTABLE_CANDIDATE_DIAGNOSTIC_COMPLETE_RECONCILED",
-  "current_parent_blocker": "SEMANTIC_QUERY_CONSTRUCTION_AND_EXECUTABLE_ROLE_RANKING_RECALL_FAILURE",
-  "next_required_action_class": "ONE_GENERIC_SEMANTIC_QUERY_AND_ROLE_RANKING_REPAIR__REPLAY_DIAGNOSTIC_ONCE__THEN_RECONCILE",
-  "forbidden_local_frontier": "CONTRACT_PARSER_POLISHING__PACKAGE_NAME_HINTING__SQLITE_ONLY_COMPOSITION_PATCH__SECOND_DISCOVERY_REPAIR_BEFORE_REPLAY",
+  "probe_state": "SEMANTIC_EXECUTABLE_RANKING_REPAIR_FALSIFIED_AT_PREFLIGHT__RECONCILED",
+  "current_parent_blocker": "CAPABILITY_QUERY_AND_CANDIDATE_EVIDENCE_LACK_EXPLICIT_SEMANTIC_ROLES",
+  "next_required_action_class": "NO_MUTATION_SEMANTIC_ROLE_DIAGNOSTIC__THEN_RECONCILE",
+  "forbidden_local_frontier": "SECOND_LEXICAL_WEIGHT_TWEAK__PACKAGE_NAME_HINTING__CONTRACT_PARSER_CHANGES__SQLITE_ONLY_COMPOSITION_PATCH",
   "progress_level_minimum": "CAPABILITY_TARGET",
   "probe_budget": {
     "repairs_used_on_active_probe": 0,
@@ -34,11 +34,12 @@
     "recurrence_count": 2
   },
   "last_falsified_repair": {
-    "repair_id": "GENERIC-CLI-CONTRACT-IR-REPAIR-FALSIFICATION-20260928",
-    "source_pr": 56,
+    "repair_id": "SEMANTIC-EXECUTABLE-RANKING-REPAIR-V1",
+    "source_pr": 60,
     "merged": false,
-    "workflow_run_id": 36386645467,
-    "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_CONTRACT_IR_FALSIFICATION_RECONCILIATION_V1.json"
+    "workflow_run_id": 36454688524,
+    "replay_executed": false,
+    "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_SEMANTIC_RANKING_REPAIR_FALSIFICATION_V1.json"
   },
   "completed_candidate_diagnostic": {
     "diagnostic_id": "EXECUTABLE-CANDIDATE-DIAGNOSTIC-001",
