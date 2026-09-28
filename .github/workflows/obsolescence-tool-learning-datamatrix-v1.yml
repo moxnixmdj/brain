@@ -1,0 +1,33 @@
+name: Obsolescence tool learning Data Matrix
+
+on:
+  push:
+    branches:
+      - research/obsolescence-tool-learning-datamatrix-20260928
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  experiment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run frozen tool discovery and contract-learning experiment
+        run: |
+          set -euo pipefail
+          python canonical/experiments/run_obsolescence_tool_learning_datamatrix_001.py
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: obsolescence-tool-learning-datamatrix-001
+          path: |
+            canonical/astra_runtime/evidence/OBSOLESCENCE-TOOL-LEARNING-DATAMATRIX-001__*.json
+            canonical/astra_runtime/pending_bindings/OBSOLESCENCE-TOOL-LEARNING-DATAMATRIX-001__*.json
+          if-no-files-found: warn
