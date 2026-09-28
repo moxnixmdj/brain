@@ -1,0 +1,34 @@
+name: Semantic Role Diagnostic 001
+
+on:
+  push:
+    branches:
+      - research/semantic-role-diagnostic-001-20260928
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Prove runtime unchanged from canonical main
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          test -z "$(git diff --name-only origin/main...HEAD -- canonical/runtime/)"
+      - name: Run no-mutation semantic role diagnostic
+        run: python canonical/experiments/run_semantic_role_diagnostic_001.py
+      - name: Upload diagnostic evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: semantic-role-diagnostic-001
+          path: canonical/astra_runtime/evidence/SEMANTIC_ROLE_DIAGNOSTIC_001__RESULT.json

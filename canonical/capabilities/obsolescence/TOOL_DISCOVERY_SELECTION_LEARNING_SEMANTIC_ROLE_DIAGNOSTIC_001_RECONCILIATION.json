@@ -1,0 +1,104 @@
+{
+  "schema": "PROJECT_BRAIN_SEMANTIC_ROLE_DIAGNOSTIC_RECONCILIATION_V1",
+  "diagnostic_id": "SEMANTIC-ROLE-DIAGNOSTIC-001",
+  "status": "COMPLETE_RECONCILED",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "workflow_run_id": 36456913075,
+  "drift_guard_run_id": 36456940737,
+  "workflow_head_sha": "03d5aa4b22f810bb88ac1460ccdaaac538ef12a1",
+  "artifact": {
+    "id": 10985702393,
+    "digest": "sha256:36fa15c2a20bd9d6f570127aba7ea1fa7bdf1695aae9bf3dd8b7e3c639e9968c"
+  },
+  "constraints_observed": {
+    "runtime_mutation_performed": false,
+    "package_installation_performed": false,
+    "candidate_execution_performed": false,
+    "oracle_used_for_query_construction": false
+  },
+  "exact_package_posthoc_audit": {
+    "sqlite3": {
+      "raw_search_retrieved": true,
+      "top50_rank": null
+    },
+    "gzip": {
+      "raw_search_retrieved": true,
+      "top50_rank": 4
+    },
+    "imagemagick_or_graphicsmagick": {
+      "raw_search_retrieved": true,
+      "top50_rank": null
+    },
+    "graphviz": {
+      "raw_search_retrieved": true,
+      "top50_rank": 3
+    }
+  },
+  "diagnostic_measurement_correction": {
+    "issue": "The experiment's broad oracle-family matcher treated substring-related packages as oracle hits, e.g. graphviz editor modes and gzip Perl libraries.",
+    "correction": "Canonical adjudication uses exact executable package-family audit above, while retaining the raw diagnostic output as immutable evidence.",
+    "exact_top50_recall": 0.5
+  },
+  "repeated_findings": [
+    {
+      "class": "DOMAIN_ROLE_DROPPED_FROM_QUERY",
+      "recurrence_count": 2,
+      "probes": [
+        "ROLE-GZIP-001",
+        "ROLE-IMAGE-RESIZE-001"
+      ],
+      "evidence": "Current flat-token query selection omitted the explicit domain role: archive/compression for gzip and image/graphics for resize."
+    },
+    {
+      "class": "AUXILIARY_OR_NON_SOLUTION_ROLE_COMPETES_AS_IF_EXECUTABLE_SUPPLIER",
+      "recurrence_count": 2,
+      "probes": [
+        "ROLE-SQLITE-001",
+        "ROLE-GRAPH-RENDER-001"
+      ],
+      "evidence": "SQLite backend/editor/binding packages and Graphviz editor-mode packages received equal or higher lexical ranking than the direct executable supplier."
+    },
+    {
+      "class": "RAW_RETRIEVAL_SUCCEEDS_BUT_SEMANTIC_RANKING_DROPS_VALID_EXECUTABLE",
+      "recurrence_count": 2,
+      "probes": [
+        "ROLE-SQLITE-001",
+        "ROLE-IMAGE-RESIZE-001"
+      ],
+      "evidence": "Exact viable package families exist in raw APT search results but are absent from the top-50 ranked candidates."
+    },
+    {
+      "class": "SYNTACTIC_OR_LOW_INFORMATION_TOKEN_CONTAMINATION",
+      "recurrence_count": 4,
+      "probes": [
+        "ROLE-SQLITE-001",
+        "ROLE-GZIP-001",
+        "ROLE-IMAGE-RESIZE-001",
+        "ROLE-GRAPH-RENDER-001"
+      ],
+      "evidence": "The relation token `at` survives current query construction across all four effects; `exactly` also survives on image resize."
+    }
+  ],
+  "causal_conclusion": "The current blocker is not package-catalog coverage. The catalog can retrieve all four known executable families. The minimum missing representation is structured semantic roles for the requested effect and candidate role: operation, domain, format, constraints, and executable-vs-auxiliary supplier role. Flat lexical weighting cannot reliably preserve these distinctions.",
+  "authorized_repair": {
+    "count": 1,
+    "scope": "ADD_MINIMAL_GENERIC_SEMANTIC_ROLE_IR_FOR_EFFECT_QUERY_AND_CANDIDATE_ROLE_EVIDENCE__THEN_USE_ROLE_COMPATIBILITY_BEFORE_FLAT_LEXICAL_SCORE",
+    "required_properties": [
+      "represent operation, domain, format, and constraints separately",
+      "represent candidate supplier role separately from topical lexical overlap",
+      "prefer direct executable/application suppliers over editor modes, backends, bindings, data assets, docs, and dev packages when the requested effect requires execution",
+      "drop syntactic/path relation noise instead of treating it as semantic evidence",
+      "preserve raw catalog retrieval and avoid package-name hints",
+      "no contract-parser changes",
+      "no probe-specific package literals"
+    ],
+    "forbidden_shortcuts": [
+      "another flat token weight tweak",
+      "hard-code sqlite3, gzip, imagemagick, graphicsmagick, graphviz, or any probe package name",
+      "add task-specific ranking exceptions",
+      "change contract inference before candidate ranking is repaired"
+    ],
+    "replay": "REPLAY_FROZEN_SEMANTIC_ROLE_DIAGNOSTIC_ONCE__REQUIRE_EXACT_EXECUTABLE_TOP_K_RECALL_AND_ROLE_PRECISION_IMPROVEMENT__THEN_RECONCILE"
+  },
+  "promotion_authorized": false
+}

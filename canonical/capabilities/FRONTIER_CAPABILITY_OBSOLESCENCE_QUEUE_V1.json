@@ -70,12 +70,12 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Determine the minimum generic semantic role representation needed to separate requested operation/domain/format/constraints from candidate tool roles before any further ranking repair.",
-    "selection_metric": "EXPLAIN_ORACLE_MISRANKING_WITH_MINIMUM_NEW_REPRESENTATION_PER_WALL_CLOCK_TIME",
-    "exact_blocker": "CAPABILITY_QUERY_AND_CANDIDATE_EVIDENCE_LACK_EXPLICIT_SEMANTIC_ROLES",
-    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_SEMANTIC_RANKING_REPAIR_FALSIFICATION_V1.json",
-    "repair_status": "PR60_FLAT_LEXICAL_REPAIR_FALSIFIED_AT_PREFLIGHT__NO_RUNTIME_REPAIR_AUTHORIZED",
-    "prohibition": "NO_SECOND_LEXICAL_WEIGHT_TWEAK__NO_PACKAGE_HINTS__NO_RUNTIME_MUTATION_UNTIL_SEMANTIC_ROLE_DIAGNOSTIC_RECONCILES"
+    "objective": "Add the minimum generic structured semantic-role representation needed to distinguish requested operation/domain/format/constraints and direct executable supplier role from auxiliary topical matches, then replay the frozen diagnostic once.",
+    "selection_metric": "EXACT_EXECUTABLE_TOP_K_RECALL_AND_ROLE_PRECISION_GAIN_PER_WALL_CLOCK_TIME",
+    "exact_blocker": "STRUCTURED_EFFECT_AND_CANDIDATE_TOOL_ROLE_REPRESENTATION_MISSING",
+    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_SEMANTIC_ROLE_DIAGNOSTIC_001_RECONCILIATION.json",
+    "repair_status": "ONE_GENERIC_SEMANTIC_ROLE_IR_REPAIR_AUTHORIZED",
+    "prohibition": "NO_FLAT_WEIGHT_TWEAK__NO_PACKAGE_HINTS__NO_CONTRACT_PARSER_CHANGES__NO_PROBE_SPECIFIC_EXCEPTIONS"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [

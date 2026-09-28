@@ -1,0 +1,113 @@
+{
+  "schema": "PROJECT_BRAIN_SEMANTIC_ROLE_DIAGNOSTIC_V1",
+  "diagnostic_id": "SEMANTIC-ROLE-DIAGNOSTIC-001",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "status": "FROZEN_READY",
+  "runtime_policy": "NO_RUNTIME_MUTATION__NO_PACKAGE_INSTALL__NO_CANDIDATE_EXECUTION",
+  "oracle_policy": "ORACLE_NAMES_USED_ONLY_AFTER_DISCOVERY_FOR_ADJUDICATION__NEVER_FOR_QUERY_CONSTRUCTION",
+  "dimensions": [
+    "operation",
+    "domain",
+    "format",
+    "constraints",
+    "candidate_tool_role"
+  ],
+  "effects": [
+    {
+      "id": "ROLE-SQLITE-001",
+      "goal": "Create a SQLite database at canonical/astra_runtime/tmp/ROLE_SQLITE_001.sqlite containing a table named probe with columns k TEXT PRIMARY KEY and v INTEGER, and exactly two rows alpha=7 and beta=11.",
+      "oracle_families": [
+        "sqlite3"
+      ],
+      "expected_roles": {
+        "operation": [
+          "create",
+          "database",
+          "table",
+          "insert"
+        ],
+        "domain": [
+          "sqlite",
+          "database"
+        ],
+        "format": [
+          "sqlite"
+        ],
+        "constraints": [
+          "table schema",
+          "primary key",
+          "exact rows"
+        ]
+      }
+    },
+    {
+      "id": "ROLE-GZIP-001",
+      "goal": "Create a gzip-compressed file at canonical/astra_runtime/tmp/ROLE_GZIP_001.gz whose decompressed UTF-8 content is exactly PROJECT BRAIN ROLE GZIP V1.",
+      "oracle_families": [
+        "gzip"
+      ],
+      "expected_roles": {
+        "operation": [
+          "compress",
+          "create"
+        ],
+        "domain": [
+          "archive",
+          "compression"
+        ],
+        "format": [
+          "gzip",
+          "gz"
+        ],
+        "constraints": [
+          "exact decompressed content"
+        ]
+      }
+    },
+    {
+      "id": "ROLE-IMAGE-RESIZE-001",
+      "goal": "Resize a PNG image to exactly 64 by 64 pixels and save the result at canonical/astra_runtime/tmp/ROLE_IMAGE_RESIZE_001.png.",
+      "oracle_families": [
+        "imagemagick",
+        "graphicsmagick"
+      ],
+      "expected_roles": {
+        "operation": [
+          "resize"
+        ],
+        "domain": [
+          "image",
+          "graphics"
+        ],
+        "format": [
+          "png"
+        ],
+        "constraints": [
+          "64x64 pixels"
+        ]
+      }
+    },
+    {
+      "id": "ROLE-GRAPH-RENDER-001",
+      "goal": "Render a Graphviz DOT graph to a PNG image at canonical/astra_runtime/tmp/ROLE_GRAPH_RENDER_001.png.",
+      "oracle_families": [
+        "graphviz"
+      ],
+      "expected_roles": {
+        "operation": [
+          "render"
+        ],
+        "domain": [
+          "graph",
+          "graphviz",
+          "dot"
+        ],
+        "format": [
+          "png"
+        ],
+        "constraints": []
+      }
+    }
+  ],
+  "promotion_authorized": false
+}
