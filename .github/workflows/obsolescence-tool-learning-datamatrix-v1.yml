@@ -1,9 +1,6 @@
 name: Obsolescence tool learning Data Matrix
 
 on:
-  push:
-    branches:
-      - research/obsolescence-tool-learning-datamatrix-20260928
   workflow_dispatch:
 
 permissions:
