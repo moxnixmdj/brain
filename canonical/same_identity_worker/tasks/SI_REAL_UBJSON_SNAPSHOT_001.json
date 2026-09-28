@@ -1,0 +1,11 @@
+{
+  "schema": "PROJECT_BRAIN_SAME_IDENTITY_TASK_V1",
+  "task_id": "SI-REAL-UBJSON-SNAPSHOT-001",
+  "agent_id": "SUPERWORKER-UNIFIED-1",
+  "priority": 100,
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_REAL_SAME_IDENTITY_UBJSON_CANONICAL_SNAPSHOT_001.json",
+  "mission_sha256": "f0773c75d92335e35b7b91d6d0eb8b72b5ea1f8cc3fbd9ea7ff13d0af8856166",
+  "prerequisites": [],
+  "checkpoint_before_runtime_once": true,
+  "incremental_spend_usd": 0
+}

@@ -81,28 +81,28 @@
     "correction_path": "canonical/astra/ASTRA_EXTERNAL_PARITY_CORRECTION_V1.json"
   },
   "active_runtime": {
-    "runtime_id": "SUPERHERO-RUNTIME-2.7-GITHUB-ACTIONS-PERSISTENT",
-    "agent_id": "SUPERWORKER-GITHUB-1",
-    "identity_path": "canonical/agents/SUPERWORKER_GITHUB_1.json",
-    "promotion_adjudication_path": "canonical/qualification/SUPERWORKER_GITHUB_1_WHOLE_DEFINITION_ADJUDICATION.json",
-    "deployment_mode": "PERMANENT_GITHUB_ACTIONS_BOUNDED_EXECUTOR",
-    "workflow": ".github/workflows/superworker-github-qualification.yml",
-    "kernel": "MODEL_INDEPENDENT",
+    "runtime_id": "SAME-IDENTITY-SUPERVISOR-ASTRA-RUNTIME-V1",
+    "agent_id": "SUPERWORKER-UNIFIED-1",
+    "identity_path": "canonical/agents/SUPERWORKER_UNIFIED_1.json",
+    "promotion_adjudication_path": "canonical/qualification/SUPERWORKER_UNIFIED_1_WHOLE_DEFINITION_ADJUDICATION_V1.json",
+    "deployment_mode": "VERIFIED_GITHUB_ACTIONS_SAME_IDENTITY_EXECUTION_PATH__NOT_YET_AUTOSCALED",
+    "workflow": ".github/workflows/real-same-identity-ubjson.yml",
+    "kernel": "MODEL_INDEPENDENT_SHARED_ASTRA_RUNTIME",
     "hosted": true,
-    "promotion_authorized": false,
+    "promotion_authorized": true,
     "persistent_identity": true,
     "task_deduplication": true,
     "capability_scope": [
-      "retrieve_url",
-      "assert_text",
-      "canonical_commit_state",
-      "persistent_fresh_runner_continuation",
-      "provider_failover"
+      "causally_ready_task_acquisition",
+      "checkpoint_relaunch_resume",
+      "dynamic_capability_discovery_acquisition",
+      "content_addressed_source_execution",
+      "provider_neutral_external_tool_use",
+      "cross_supplier_independent_verification",
+      "durable_evidence_and_provenance"
     ],
-    "gui_capability_proven": false,
-    "arbitrary_tool_discovery_proven": false,
     "full_astra_claim": false,
-    "counts_as_real_superworker": false
+    "counts_as_real_superworker": true
   },
   "superseded_runtime": {
     "runtime_id": "SUPERHERO-RUNTIME-2.3-DO-ALARM",
@@ -120,12 +120,12 @@
     },
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
-    "superworker_real": 0,
-    "next_step": "IMPLEMENT_MINIMAL_PROVIDER_NEUTRAL_SAME_IDENTITY_SUPERVISOR_BY_REUSING_PR18_PR20_ASTRA_RUNTIME_AND_RECOVERED_2_6_TASK_LEASE_LOGIC__RUN_ONE_REAL_DEVICE_INDEPENDENT_CONSEQUENTIAL_MISSION__CHECKPOINT_RELAUNCH_RESUME__INDEPENDENTLY_ADJUDICATE",
+    "superworker_real": 1,
+    "next_step": "RUN_FRESH_CLEANROOM_REPRODUCTION_FROM_CANONICAL_STATE_ON_A_DISTINCT_CONSEQUENTIAL_MISSION__INDEPENDENTLY_ADJUDICATE__THEN_EXPAND_CAPABILITY_BREADTH_BEFORE_POPULATION_SCALING",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "SAME_DURABLE_COGNITIVE_IDENTITY_HAS_NOT_YET_EXECUTED_THE_FULL_SHARED_RUNTIME_LOOP_END_TO_END",
+    "critical_blocker": "FIRST_REAL_INTEGRATED_SUPERWORKER_PROVEN__CLEANROOM_REPLICATION_ON_DISTINCT_CONSEQUENTIAL_MISSION_NOT_YET_PROVEN",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -198,11 +198,11 @@
     "astra_external_parity": "NOT_THE_TERMINAL_OBJECTIVE__COMPARABILITY_OPTIONAL_DIAGNOSTIC",
     "astra_external_distance": "UNKNOWN_AND_NOT_A_SUCCESS_METRIC_BY_ITSELF",
     "astra_common_external_benchmarks_run": false,
-    "scaling_status": "NOT_ON_CRITICAL_PATH_UNTIL_CAPABILITY_STRENGTH_IS_REAL",
-    "superworker_truth_scope": "NO_SINGLE_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN",
+    "scaling_status": "DEFERRED_UNTIL_CLEANROOM_REPLICATION_AND_MINIMUM_BREADTH_EVIDENCE",
+    "superworker_truth_scope": "ONE_SINGLE_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__REPLICATION_AND_BREADTH_NEXT",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "SAME_DURABLE_COGNITIVE_IDENTITY_HAS_NOT_YET_EXECUTED_THE_FULL_SHARED_RUNTIME_LOOP_END_TO_END",
+    "highest_leverage_capability_gap": "CLEANROOM_REPLICATION_AND_CROSS_DOMAIN_BREADTH_OF_SUPERWORKER_UNIFIED_1",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/ASTRA_TARGET_CAPABILITY_MAP_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -225,7 +225,7 @@
     "worker_role": "WIDTH_BENEATH_OBSERVED_BLOCKERS",
     "capacity_expansion": "PARALLEL_NOT_PREREQUISITE",
     "closure_race_role": "SUBORDINATE_LOCAL_BLOCKER_MECHANISM",
-    "qualification_status": "OFF_CRITICAL_PATH_UNTIL_OPERATIONAL_PORTFOLIO_CLOSURE",
+    "qualification_status": "FIRST_REAL_INTEGRATED_SUPERWORKER_VERIFIED__CLEANROOM_REPLICATION_NEXT",
     "legacy_capability_reconciliation_note": {
       "source": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
       "historical_gap": "GENERAL_REASONING_AND_GENERIC_TOOL_USE_INSIDE_PERSISTENT_CONTROLLER",
@@ -248,11 +248,10 @@
       "previous_portfolio_reconciliation_blocker": "SUPERSEDED_BY_NEWER_CANONICAL_STATE"
     },
     "whole_definition_gate_reconciliation": {
-      "status": "COMPONENT_MECHANISMS_PROVEN__SAME_IDENTITY_INTEGRATION_UNPROVEN",
-      "evidence_path": "canonical/reconciliation/SAME_IDENTITY_INTEGRATION_FRONTIER_20260927_V1.json",
-      "component_gate_count": 7,
-      "mechanisms_to_rebuild": 0,
-      "integration_proof_required": true
+      "status": "CLOSED_ALL_10_GATES_PASS__PROMOTION_AUTHORIZED",
+      "evidence_path": "canonical/qualification/SUPERWORKER_UNIFIED_1_WHOLE_DEFINITION_ADJUDICATION_V1.json",
+      "prior_frontier_path": "canonical/reconciliation/SAME_IDENTITY_INTEGRATION_FRONTIER_20260927_V1.json",
+      "integration_proof_required": false
     }
   },
   "provider_rules": {
@@ -266,7 +265,8 @@
     "SUPERHERO-RUNTIME-2@0.2.1": "PRIOR_MODEL_INDEPENDENT_PROOF_BASE",
     "SUPERHERO-RUNTIME-2.3-DO-ALARM": "SUPERSEDED_FOR_PERMANENT_DEPLOYMENT",
     "SUPERHERO-RUNTIME-2.6.0-DIRECT-SIGNED-PERMANENT": "ACTIVE_DEPLOYMENT_CANDIDATE_PREFLIGHT_PASS__NOT_HOSTED__NOT_PROMOTED",
-    "SUPERHERO-RUNTIME-2.7-GITHUB-ACTIONS-PERSISTENT": "BOUNDED_EXECUTOR__NOT_REAL_SUPERWORKER"
+    "SUPERHERO-RUNTIME-2.7-GITHUB-ACTIONS-PERSISTENT": "BOUNDED_EXECUTOR__NOT_REAL_SUPERWORKER",
+    "SAME-IDENTITY-SUPERVISOR-ASTRA-RUNTIME-V1": "VERIFIED_REAL_SUPERWORKER__P_REAL_1"
   },
   "execution_governance": {
     "anti_drift_law": "canonical/laws/EXECUTION_LEVERAGE_AND_ANTI_DRIFT_LAW_V1.md",
@@ -327,8 +327,26 @@
     "source_root": "superworker-production",
     "cloudflare_authorization_required": true
   },
-  "active_superworker": null,
-  "active_superworkers": [],
+  "active_superworker": {
+    "agent_id": "SUPERWORKER-UNIFIED-1",
+    "status": "QUALIFIED_REAL_SUPERWORKER",
+    "identity_path": "canonical/agents/SUPERWORKER_UNIFIED_1.json",
+    "qualification_adjudication_path": "canonical/qualification/SUPERWORKER_UNIFIED_1_WHOLE_DEFINITION_ADJUDICATION_V1.json",
+    "proof_execution_commit_sha": "88c5e8940bd485a3c600aa0d94c5f6b98203830c",
+    "proof_workflow_run_id": 36362433470,
+    "counts_as_real_superworker": true
+  },
+  "active_superworkers": [
+    {
+      "agent_id": "SUPERWORKER-UNIFIED-1",
+      "status": "QUALIFIED_REAL_SUPERWORKER",
+      "identity_path": "canonical/agents/SUPERWORKER_UNIFIED_1.json",
+      "qualification_adjudication_path": "canonical/qualification/SUPERWORKER_UNIFIED_1_WHOLE_DEFINITION_ADJUDICATION_V1.json",
+      "proof_execution_commit_sha": "88c5e8940bd485a3c600aa0d94c5f6b98203830c",
+      "proof_workflow_run_id": 36362433470,
+      "counts_as_real_superworker": true
+    }
+  ],
   "mission_lock": {
     "terminal_objective": "MAKE_THE_ACTUAL_TARGET_CAPABILITIES_DEMONSTRATED_BY_ASTRA_REAL_IN_OUR_OWN_SYSTEM_USING_ONLY_THE_RIGHT_ROUTE",
     "success_definition": "REAL_CAPABILITY_EXISTS_AND_WORKS_IN_REAL_USE__NOT_PREDICATE_OR_BENCHMARK_COMPLETION",

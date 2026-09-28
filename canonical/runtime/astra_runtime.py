@@ -135,7 +135,22 @@ def _external_tool_bridge(kind,payload):
     else:
         writej(request_path,request)
     if not response_path.exists():
-        raise Blocker("EXTERNAL_TOOL_REQUEST_PENDING:"+request_sha256)
+        raw_wait=str(os.environ.get("PROJECT_BRAIN_EXTERNAL_TOOL_WAIT_SECONDS") or "0").strip()
+        try:
+            wait_s=float(raw_wait)
+        except ValueError as exc:
+            raise Blocker("EXTERNAL_TOOL_WAIT_SECONDS_INVALID") from exc
+        if wait_s < 0 or wait_s > 300:
+            raise Blocker("EXTERNAL_TOOL_WAIT_SECONDS_INVALID")
+        if wait_s > 0:
+            deadline=time.monotonic()+wait_s
+            while not response_path.exists():
+                remaining=deadline-time.monotonic()
+                if remaining <= 0:
+                    break
+                time.sleep(min(0.05,max(0.005,remaining)))
+        if not response_path.exists():
+            raise Blocker("EXTERNAL_TOOL_REQUEST_PENDING:"+request_sha256)
     response=readj(response_path)
     if response.get("schema")!="PROJECT_BRAIN_EXTERNAL_TOOL_RESPONSE_V1":
         raise Blocker("EXTERNAL_TOOL_RESPONSE_SCHEMA_INVALID:"+request_sha256)
@@ -519,6 +534,85 @@ def _ensure_npm_dependency(source):
     }
 
 
+
+def _ensure_git_source_tree_dependency(source):
+    helper=_load_runtime_helper("auto_python_source_codec_acquisition")
+    repository=str(source.get("repository") or "").strip()
+    revision=str(source.get("revision") or "").strip().lower()
+    expected_tree_sha=str(source.get("tree_sha256") or "").strip().lower()
+    tree=source.get("tree")
+    if (
+        not repository
+        or not re.fullmatch(r"[0-9a-f]{40}",revision)
+        or not re.fullmatch(r"[0-9a-f]{64}",expected_tree_sha)
+        or not isinstance(tree,dict)
+    ):
+        raise Blocker("BOUND_GIT_SOURCE_TREE_INCOMPLETE")
+    if str(tree.get("repository") or "").strip()!=repository:
+        raise Blocker("BOUND_GIT_SOURCE_TREE_REPOSITORY_MISMATCH")
+    if str(tree.get("revision") or "").strip().lower()!=revision:
+        raise Blocker("BOUND_GIT_SOURCE_TREE_REVISION_MISMATCH")
+
+    cache=ROOT/"canonical"/"astra_runtime"/"tmp"/"git_source_bound"/expected_tree_sha
+    source_root=cache/"site"
+    marker=cache/"BOUND_GIT_SOURCE_TREE.json"
+    expected_marker={
+      "repository":repository,
+      "revision":revision,
+      "tree_sha256":expected_tree_sha,
+    }
+    if marker.is_file() and source_root.is_dir():
+        try:
+            observed=json.loads(marker.read_text(encoding="utf-8"))
+        except Exception:
+            observed=None
+        if observed==expected_marker:
+            return {
+              "status":"ALREADY_MATERIALIZED",
+              "type":"git_source_tree",
+              "repository":repository,
+              "revision":revision,
+              "tree_sha256":expected_tree_sha,
+              "source_root":str(source_root),
+            }
+
+    if cache.exists():
+        shutil.rmtree(cache)
+    source_root.mkdir(parents=True,exist_ok=True)
+    try:
+        manifest=helper._materialize(tree,source_root)
+    except Exception as exc:
+        if cache.exists():
+            shutil.rmtree(cache)
+        raise Blocker(
+            "BOUND_GIT_SOURCE_TREE_MATERIALIZATION_FAILED:"
+            +type(exc).__name__+":"+str(exc)
+        ) from exc
+
+    if str(manifest.get("repository") or "")!=repository:
+        raise Blocker("BOUND_GIT_SOURCE_TREE_MANIFEST_REPOSITORY_MISMATCH")
+    if str(manifest.get("revision") or "").lower()!=revision:
+        raise Blocker("BOUND_GIT_SOURCE_TREE_MANIFEST_REVISION_MISMATCH")
+    if str(manifest.get("tree_sha256") or "").lower()!=expected_tree_sha:
+        if cache.exists():
+            shutil.rmtree(cache)
+        raise Blocker("BOUND_GIT_SOURCE_TREE_HASH_MISMATCH")
+
+    marker.write_text(
+        json.dumps(expected_marker,indent=2,sort_keys=True)+"\n",
+        encoding="utf-8"
+    )
+    return {
+      "status":"MATERIALIZED_VERIFIED",
+      "type":"git_source_tree",
+      "repository":repository,
+      "revision":revision,
+      "tree_sha256":expected_tree_sha,
+      "source_root":str(source_root),
+      "file_count":len(manifest.get("files") or []),
+      "total_bytes":int(manifest.get("total_bytes") or 0),
+    }
+
 def _ensure_local_dependency(source):
     typ=str(source.get("type") or "").strip()
     if typ=="python_stdlib":
@@ -635,6 +729,9 @@ def _invoke_bound_capability(args):
         call_args["_package_root"]=dependency.get("package_root")
     elif source.get("type")=="apt":
         dependency=_ensure_apt_dependencies(source)
+    elif source.get("type")=="git_source_tree":
+        dependency=_ensure_git_source_tree_dependency(source)
+        call_args["_source_root"]=dependency.get("source_root")
     elif source.get("type") in {"python_stdlib","system_tool"}:
         dependency=_ensure_local_dependency(source)
     elif source.get("type"):

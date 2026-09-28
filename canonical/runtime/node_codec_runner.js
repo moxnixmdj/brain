@@ -66,6 +66,17 @@ function normalizeSemantic(value){
 function semanticallyEqual(a,b){
   return JSON.stringify(normalizeSemantic(a))===JSON.stringify(normalizeSemantic(b));
 }
+function semanticDecodeProjection(observed,expected,byteLength){
+  if(semanticallyEqual(observed,expected)) return "direct";
+  if(
+    Array.isArray(observed) &&
+    observed.length===2 &&
+    Number.isInteger(observed[1]) &&
+    observed[1]===byteLength &&
+    semanticallyEqual(observed[0],expected)
+  ) return "tuple_value_full_consumption";
+  return null;
+}
 
 async function main(){
   const cfg=JSON.parse(fs.readFileSync(0,"utf8"));
@@ -82,10 +93,12 @@ async function main(){
           const bytes=toBuffer(await enc(fixture));
           if(!bytes.length) continue;
           const observed=await dec(bytes);
-          if(semanticallyEqual(observed,fixture)){
+          const decodeProjection=semanticDecodeProjection(observed,fixture,bytes.length);
+          if(decodeProjection){
             process.stdout.write(JSON.stringify({
               ok:true,root_selector:selector,encode_export:encName,decode_export:decName,
-              loader:loaded.loader,probe_output_bytes:bytes.length
+              loader:loaded.loader,probe_output_bytes:bytes.length,
+              decode_projection:decodeProjection
             }));
             return;
           }
@@ -104,10 +117,11 @@ async function main(){
         try{
           const dec=resolveExport(obj,decName);
           const observed=await dec(bytes);
-          if(semanticallyEqual(observed,expected)){
+          const decodeProjection=semanticDecodeProjection(observed,expected,bytes.length);
+          if(decodeProjection){
             process.stdout.write(JSON.stringify({
               ok:true,root_selector:selector,decode_export:decName,
-              loader:loaded.loader
+              loader:loaded.loader,decode_projection:decodeProjection
             }));
             return;
           }

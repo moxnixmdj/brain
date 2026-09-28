@@ -4006,7 +4006,7 @@ def _compile_compound_goal(goal, clauses, registry, root):
             for item in reversed(compiled_parts):
                 cid=item.get("selected_capability") if isinstance(item,dict) else None
                 entry=(registry or {}).get(cid) if cid else None
-                if isinstance(entry,dict) and entry.get("adapter_module") in {"python_library_codec","node_library_codec"}:
+                if isinstance(entry,dict) and entry.get("adapter_module") in {"python_library_codec","python_source_tree_codec","node_library_codec"}:
                     if _execution_surface_constraint_match(clause,entry)[0]:
                         prior=(item,entry)
                         break
@@ -4021,7 +4021,7 @@ def _compile_compound_goal(goal, clauses, registry, root):
                     r"(?:implementation\s+that\s+is\s+not\s+provided\s+by|different\s+implementation|not\s+provided\s+by\s+the\s+.+?producer|producer-independent)",
                     lower,re.IGNORECASE
                 ))
-                if adapter=="python_library_codec":
+                if adapter in {"python_library_codec","python_source_tree_codec"}:
                     module=template_args.get("module")
                     decode_callable=template_args.get("decode_callable")
                     decode_kwargs=template_args.get("decode_kwargs") or {}
@@ -4029,7 +4029,7 @@ def _compile_compound_goal(goal, clauses, registry, root):
                     if all(isinstance(x,str) and x for x in (json_path,binary_path,module,decode_callable)):
                         if requires_distinct_implementation:
                             source=entry.get("source") or {}
-                            producer_project=str(source.get("project") or "")
+                            producer_project=str(source.get("project") or source.get("repository") or "")
                             fmt=pathlib.Path(str(binary_path)).suffix.lower().lstrip(".")
                             if not producer_project or not fmt:
                                 raise GoalCompilationFailure(
@@ -4061,7 +4061,7 @@ def _compile_compound_goal(goal, clauses, registry, root):
                               "json_path":json_path,
                               "binary_path":binary_path,
                             })
-                        else:
+                        elif adapter=="python_library_codec":
                             actions.append({
                               "type":"invoke_capability",
                               "args":{
