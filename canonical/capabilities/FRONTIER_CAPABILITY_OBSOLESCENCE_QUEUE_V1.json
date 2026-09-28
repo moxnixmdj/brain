@@ -70,12 +70,12 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Trace candidate discovery from raw catalog presence through candidate admission, semantic evidence propagation, ranking and truncation without runtime mutation.",
-    "selection_metric": "LOCALIZED_EXECUTABLE_RECALL_LOSS_PER_WALL_CLOCK_TIME",
-    "exact_blocker": "CANDIDATE_SEMANTIC_EVIDENCE_PROPAGATION_AND_RAW_TO_RANKED_EXECUTABLE_RECALL_PATH_NOT_YET_LOCALIZED",
-    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_TASK_SEMANTIC_CONJUNCTIVE_ROLE_V1_FALSIFICATION_RECONCILIATION.json",
-    "repair_status": "NO_RUNTIME_REPAIR_AUTHORIZED_UNTIL_TRACE_COMPLETES",
-    "prohibition": "NO_SECOND_RUNTIME_REPAIR__NO_PACKAGE_HINTS__NO_CONTRACT_PARSER_CHANGES"
+    "objective": "Localize the repeated loss of viable executable suppliers inside candidate admission/scoring/truncation by measuring exact pre-truncation admission, score and rank with no runtime mutation.",
+    "selection_metric": "ORACLE_PRETRUNCATION_RANK_AND_RETENTION_CAUSALITY_PER_WALL_CLOCK_TIME",
+    "exact_blocker": "PRETRUNCATION_CANDIDATE_ADMISSION_AND_RANK_LOSS_NOT_YET_LOCALIZED",
+    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_RAW_TO_RANKED_CANDIDATE_TRACE_001_RECONCILIATION.json",
+    "repair_status": "NO_RUNTIME_REPAIR_AUTHORIZED_UNTIL_PRETRUNCATION_TRACE_COMPLETES",
+    "prohibition": "NO_SOURCE_COVERAGE_EXPANSION__NO_PACKAGE_HINTS__NO_CONTRACT_PARSER_CHANGES"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
