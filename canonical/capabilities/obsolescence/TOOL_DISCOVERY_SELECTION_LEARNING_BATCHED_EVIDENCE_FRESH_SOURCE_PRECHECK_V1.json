@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_BATCHED_EXECUTABLE_EVIDENCE_FRESH_SOURCE_PRECHECK_V1",
+  "status": "SOURCE_REACHABILITY_CONFIRMED__NOT_ACCEPTANCE_GATE",
+  "validation_id": "BATCHED-EXECUTABLE-EVIDENCE-FRESH-VALIDATION-001",
+  "checked_on": "2026-09-28",
+  "scope": "Independent public package/manpage evidence that each frozen oracle family exposes an executable whose name contains at least one generic semantic term from its task and whose documented behavior matches the requested effect.",
+  "cases": [
+    {
+      "effect_id": "FRESH-EXIF-001",
+      "oracle_family": "libimage-exiftool-perl",
+      "executable": "/usr/bin/exiftool",
+      "literal_bridge_term": "exif",
+      "package_evidence_url": "https://packages.debian.org/trixie/all/libimage-exiftool-perl/filelist",
+      "semantic_evidence_url": "https://manpages.ubuntu.com/manpages/noble/man1/exiftool.1p.html",
+      "source_reachable": true
+    },
+    {
+      "effect_id": "FRESH-XML-LINT-001",
+      "oracle_family": "libxml2-utils",
+      "executable": "/usr/bin/xmllint",
+      "literal_bridge_term": "xml",
+      "package_evidence_url": "https://packages.debian.org/trixie/libxml2-utils",
+      "semantic_evidence_url": "https://manpages.ubuntu.com/manpages/stonking/man1/xmllint.1.html",
+      "source_reachable": true
+    },
+    {
+      "effect_id": "FRESH-JPEG-TRANSFORM-001",
+      "oracle_family": "libjpeg-turbo-progs",
+      "executable": "/usr/bin/jpegtran",
+      "literal_bridge_term": "jpeg",
+      "package_evidence_url": "https://packages.debian.org/trixie/amd64/libjpeg-turbo-progs/filelist",
+      "semantic_evidence_url": "https://manpages.ubuntu.com/manpages/questing/man1/jpegtran.1.html",
+      "source_reachable": true
+    }
+  ],
+  "source_reachability_fraction": 1,
+  "explicitly_unproven": [
+    "fresh_top20_oracle_recall",
+    "fresh_end_to_end_oracle_family_recall_on_the_branch_runtime",
+    "fresh_validation_wall_clock",
+    "runtime_syntax_and_integration_tests_on_exact_branch_bytes"
+  ],
+  "promotion_authorized": false,
+  "required_next_action": "EXECUTE_EXACT_BRANCH_TESTS_AND_FROZEN_FRESH_GATE_ON_RELIABLE_ZERO_COST_LINUX_SURFACE__THEN_RECONCILE"
+}
