@@ -134,6 +134,42 @@ def _package_family_tokens(name):
     return out[:3]
 
 
+def _raw_apt_family_seeds(tokens, per_token_limit=120):
+    """Cheaply scan package names/descriptions without pinning/installing candidates.
+
+    This preserves low-friction family evidence that may be buried below the
+    enriched/ranked search cutoff. It never executes package code.
+    """
+    out=[]
+    seen=set()
+    if not shutil.which("apt-cache"):
+        return out
+    for token in tokens[:4]:
+        try:
+            p=subprocess.run(
+                ["apt-cache","search",str(token)],
+                text=True,capture_output=True,timeout=20
+            )
+        except Exception:
+            continue
+        if p.returncode!=0:
+            continue
+        count=0
+        for line in p.stdout.splitlines():
+            if " - " not in line:
+                continue
+            name,description=line.split(" - ",1)
+            name=name.strip()
+            if not name or name in seen:
+                continue
+            seen.add(name)
+            out.append({"name":name,"description":description.strip(),"seed_token":token})
+            count+=1
+            if count>=per_token_limit:
+                break
+    return out
+
+
 def _merge_verifier_discovery(goal, expected_text="", limit_per_query=40):
     """Search once by semantic roles, then cheaply widen through package families.
 
@@ -178,14 +214,34 @@ def _merge_verifier_discovery(goal, expected_text="", limit_per_query=40):
     for cand in seed_candidates:
         add(cand,"SEMANTIC_ROLE_SCAN")
 
+    # Preserve cheap metadata-only family clues beyond the enriched candidate
+    # cutoff. A semantic library/binding hit can reveal a separately packaged
+    # CLI sibling even when the library itself is too high-friction to execute.
+    raw_family_seeds=_raw_apt_family_seeds(nouns)
+    searches.append({
+      "stage":"RAW_METADATA_FAMILY_SEED_SCAN",
+      "query":" | ".join(nouns),
+      "candidate_count":len(raw_family_seeds),
+      "errors":[],
+    })
+
     # Expand only a few high-signal families. Libraries and bindings are useful
     # discovery evidence even when they are not themselves executable verifiers.
     families=[]
     family_support={}
+    family_sources=list(seed_candidates)+[
+        {
+          "name":x["name"],
+          "description":x.get("description",""),
+          "score":12,
+          "matched_terms":[x.get("seed_token")],
+        }
+        for x in raw_family_seeds
+    ]
     for cand in sorted(
-        seed_candidates,
+        family_sources,
         key=lambda x:(-float(x.get("score",0)),str(x.get("name","")))
-    )[:16]:
+    )[:120]:
         semantic_support=len(cand.get("matched_terms") or [])
         for token in _package_family_tokens(cand.get("name")):
             prior=family_support.get(token)
