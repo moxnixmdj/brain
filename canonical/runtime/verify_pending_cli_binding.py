@@ -285,6 +285,44 @@ def _merge_verifier_discovery(goal, expected_text="", limit_per_query=40):
       "errors":[],
     })
 
+    # Do not throw away exact package names discovered by semantic metadata.
+    # Strong CLI-looking hits are cheap enough to validate directly through
+    # local APT metadata before any install/probe. This remains supplier-generic
+    # within APT and contains no task/vendor name table.
+    direct_cli=[]
+    cli_words={"tool","tools","utility","utilities","command","line","cli","scanner","reader","decoder","decode","scan","read"}
+    for raw in raw_family_seeds:
+        name=str(raw.get("name") or "")
+        desc=str(raw.get("description") or "").lower()
+        name_low=name.lower()
+        desc_tokens=set(re.findall(r"[a-z0-9]+",desc))
+        cli_likelihood=(
+            name_low.endswith(("-tools","-utils","-cli"))
+            or bool(desc_tokens & cli_words)
+            or "command line" in desc
+            or "command-line" in desc
+        )
+        if not cli_likelihood:
+            continue
+        pinned=_resolve_apt_candidate_name(name)
+        if pinned is None:
+            continue
+        pinned["matched_terms"]=[str(raw.get("seed_token") or "")]
+        pinned["score"]=80 + (30 if name_low.endswith(("-tools","-utils","-cli")) else 0)
+        pinned["verifier_discovery_stage"]="RAW_METADATA_DIRECT_CLI_CANDIDATE"
+        pinned["raw_metadata_description"]=raw.get("description")
+        direct_cli.append(pinned)
+        if len(direct_cli)>=24:
+            break
+    for cand in direct_cli:
+        add(cand,"RAW_METADATA_DIRECT_CLI_CANDIDATE")
+    searches.append({
+      "stage":"RAW_METADATA_DIRECT_CLI_CANDIDATE",
+      "query":" | ".join(nouns),
+      "candidate_count":len(direct_cli),
+      "errors":[],
+    })
+
     # Expand only the strongest semantic package families. Libraries and
     # bindings are useful discovery evidence even when they are not executable
     # themselves. Rank families by target-term + verifier-role support instead
