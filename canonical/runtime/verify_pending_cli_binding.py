@@ -225,9 +225,10 @@ def _merge_verifier_discovery(goal, expected_text="", limit_per_query=40):
       "errors":[],
     })
 
-    # Expand only a few high-signal families. Libraries and bindings are useful
-    # discovery evidence even when they are not themselves executable verifiers.
-    families=[]
+    # Expand only the strongest semantic package families. Libraries and
+    # bindings are useful discovery evidence even when they are not executable
+    # themselves. Rank families by target-term + verifier-role support instead
+    # of whichever package name happened to appear first.
     family_support={}
     family_sources=list(seed_candidates)+[
         {
@@ -238,31 +239,43 @@ def _merge_verifier_discovery(goal, expected_text="", limit_per_query=40):
         }
         for x in raw_family_seeds
     ]
-    for cand in sorted(
-        family_sources,
-        key=lambda x:(-float(x.get("score",0)),str(x.get("name","")))
-    )[:120]:
-        semantic_support=len(cand.get("matched_terms") or [])
+    verifier_roles={"decode","decoder","decoding","read","reader","scan","scanner","scanning","verify","verifier"}
+    target_terms=set(nouns)
+    for cand in family_sources:
+        blob=(str(cand.get("name") or "")+" "+str(cand.get("description") or "")).lower()
+        blob_tokens=set(re.findall(r"[a-z0-9]+",blob))
+        semantic_support=len(set(cand.get("matched_terms") or []) & target_terms)
+        role_support=len(blob_tokens & verifier_roles)
         for token in _package_family_tokens(cand.get("name")):
             prior=family_support.get(token)
             record={
               "parent_package":str(cand.get("name") or ""),
               "semantic_support_terms":semantic_support,
+              "verifier_role_support_terms":role_support,
               "parent_matched_terms":list(cand.get("matched_terms") or []),
               "parent_score":float(cand.get("score",0)),
+              "family_rank_score":(
+                  100*semantic_support
+                  +40*role_support
+                  +float(cand.get("score",0))
+              ),
             }
             if prior is None or (
-                record["semantic_support_terms"],record["parent_score"]
+                record["family_rank_score"],record["parent_score"]
             ) > (
-                prior["semantic_support_terms"],prior["parent_score"]
+                prior["family_rank_score"],prior["parent_score"]
             ):
                 family_support[token]=record
-            if token not in families:
-                families.append(token)
-            if len(families)>=6:
-                break
-        if len(families)>=6:
-            break
+    families=[
+        token for token,_ in sorted(
+            family_support.items(),
+            key=lambda kv:(
+                -float(kv[1].get("family_rank_score",0)),
+                -float(kv[1].get("parent_score",0)),
+                kv[0],
+            )
+        )[:8]
+    ]
 
     for family in families:
         result=capability_discovery.search_apt_packages(family,limit=16)
