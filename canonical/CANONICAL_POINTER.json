@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_CANONICAL_POINTER_V1",
-  "canonical_generation": "2026-09-22-astra-shared-runtime-portfolio-restored",
+  "canonical_generation": "2026-09-28-frontier-capability-superworker-phase",
   "control_plane": {
     "provider": "GitHub",
     "repository": "moxnixmdj/brain",
@@ -26,10 +26,9 @@
     "canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md",
     "canonical/laws/EXECUTION_LEVERAGE_AND_ANTI_DRIFT_LAW_V1.md",
     "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
-    "canonical/laws/CAPABILITY_REALIZATION_MISSION_LOCK_V1.md",
+    "canonical/laws/FRONTIER_CAPABILITY_SUPERWORKER_MISSION_LOCK_V2.md",
     "canonical/laws/CAPABILITY_ARBITRAGE_RUNTIME_STRATEGY_V1.md",
-    "canonical/laws/ASTRA_CLOSURE_RACE_STRATEGY_V1.md",
-    "canonical/laws/ASTRA_SHARED_RUNTIME_PORTFOLIO_V1.md"
+    "canonical/laws/ASTRA_CLOSURE_RACE_STRATEGY_V1.md"
   ],
   "boot_requirements": {
     "read_mandatory_laws_before_execution": true,
@@ -56,7 +55,7 @@
     "truth_first_law_path": "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
     "truth_first_regression_path": "canonical/regressions/2026-09-22_STALE_STATE_DUPLICATE_EXECUTION.json",
     "capability_realization_mission_lock_required": true,
-    "capability_realization_law_path": "canonical/laws/CAPABILITY_REALIZATION_MISSION_LOCK_V1.md",
+    "capability_realization_law_path": "canonical/laws/FRONTIER_CAPABILITY_SUPERWORKER_MISSION_LOCK_V2.md",
     "forbid_proxy_goal_substitution": true,
     "predicates_must_be_subordinate_to_live_capability_question": true,
     "benchmarks_must_be_subordinate_to_live_capability_question": true,
@@ -66,8 +65,13 @@
     "exhaust_existing_solution_space_before_invention": true,
     "astra_closure_race_strategy_required": true,
     "astra_closure_race_strategy_path": "canonical/laws/ASTRA_CLOSURE_RACE_STRATEGY_V1.md",
-    "astra_shared_runtime_portfolio_required": true,
-    "astra_shared_runtime_portfolio_path": "canonical/laws/ASTRA_SHARED_RUNTIME_PORTFOLIO_V1.md"
+    "astra_shared_runtime_portfolio_required": false,
+    "astra_shared_runtime_portfolio_path": "canonical/laws/ASTRA_SHARED_RUNTIME_PORTFOLIO_V1.md",
+    "frontier_capability_mission_lock_required": true,
+    "frontier_capability_mission_lock_path": "canonical/laws/FRONTIER_CAPABILITY_SUPERWORKER_MISSION_LOCK_V2.md",
+    "frontier_capability_target_map_required": true,
+    "frontier_capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_TARGET_MAP_V1.json",
+    "astra_shared_runtime_portfolio_status": "SUPERSEDED_AS_TOP_LEVEL_PROGRAM_BY_FRONTIER_CAPABILITY_SUPERWORKER_MISSION_LOCK_V2"
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
@@ -121,11 +125,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "RUN_FRESH_CLEANROOM_REPRODUCTION_FROM_CANONICAL_STATE_ON_A_DISTINCT_CONSEQUENTIAL_MISSION__INDEPENDENTLY_ADJUDICATE__THEN_EXPAND_CAPABILITY_BREADTH_BEFORE_POPULATION_SCALING",
+    "next_step": "RUN_FRESH_CLEANROOM_REPRODUCTION_FROM_CANONICAL_STATE_ON_A_DISTINCT_CONSEQUENTIAL_MISSION__INDEPENDENTLY_ADJUDICATE__THEN_USE_MINIMAL_ORTHOGONAL_UNSEEN_MISSION_PORTFOLIO_TO_EXPAND_FRONTIER_CAPABILITY_BREADTH",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "FIRST_REAL_INTEGRATED_SUPERWORKER_PROVEN__CLEANROOM_REPLICATION_ON_DISTINCT_CONSEQUENTIAL_MISSION_NOT_YET_PROVEN",
+    "critical_blocker": "REPRODUCIBLE_BROAD_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -198,13 +202,13 @@
     "astra_external_parity": "NOT_THE_TERMINAL_OBJECTIVE__COMPARABILITY_OPTIONAL_DIAGNOSTIC",
     "astra_external_distance": "UNKNOWN_AND_NOT_A_SUCCESS_METRIC_BY_ITSELF",
     "astra_common_external_benchmarks_run": false,
-    "scaling_status": "DEFERRED_UNTIL_CLEANROOM_REPLICATION_AND_MINIMUM_BREADTH_EVIDENCE",
-    "superworker_truth_scope": "ONE_SINGLE_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__REPLICATION_AND_BREADTH_NEXT",
+    "scaling_status": "DEFERRED_UNTIL_SAME_IDENTITY_CLEANROOM_REPRODUCTION_AND_MINIMUM_CROSS_DOMAIN_BREADTH_EVIDENCE",
+    "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "CLEANROOM_REPLICATION_AND_CROSS_DOMAIN_BREADTH_OF_SUPERWORKER_UNIFIED_1",
+    "highest_leverage_capability_gap": "CLEANROOM_REPRODUCTION_OF_THE_VERIFIED_SAME_IDENTITY_SUPERWORKER_ARCHITECTURE__THEN_CROSS_DOMAIN_FRONTIER_CAPABILITY_BREADTH",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
-    "capability_target_map_path": "canonical/capabilities/ASTRA_TARGET_CAPABILITY_MAP_V1.json",
+    "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_TARGET_MAP_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
     "execution_surface": "PROVIDER_NEUTRAL_VERIFICATION_CAPSULE_EXECUTION",
     "user_boundary": "NONE_FOR_CAPABILITY_WORK_USING_CURRENT_CONNECTED_TOOLS",
@@ -220,12 +224,12 @@
       "INHERIT"
     ],
     "worker_packaging": "DEFERRED_UNTIL_SHARED_RUNTIME_CAPABILITY_IS_STRONG",
-    "program": "ASTRA_SHARED_RUNTIME_PORTFOLIO",
-    "optimization_target": "MIN_MAX_T_I_AND_T_INTEGRATION",
-    "worker_role": "WIDTH_BENEATH_OBSERVED_BLOCKERS",
-    "capacity_expansion": "PARALLEL_NOT_PREREQUISITE",
+    "program": "FRONTIER_CAPABILITY_SUPERWORKER",
+    "optimization_target": "MINIMIZE_TIME_TO_REPRODUCIBLE_BROAD_FRONTIER_CAPABILITY_IN_ONE_SHARED_SUPERWORKER_RUNTIME",
+    "worker_role": "WIDTH_BENEATH_OBSERVED_REAL_MISSION_BLOCKERS",
+    "capacity_expansion": "DEFER_POPULATION_SCALING_UNTIL_REPRODUCIBILITY_AND_MINIMUM_BREADTH_GATES",
     "closure_race_role": "SUBORDINATE_LOCAL_BLOCKER_MECHANISM",
-    "qualification_status": "FIRST_REAL_INTEGRATED_SUPERWORKER_VERIFIED__CLEANROOM_REPLICATION_NEXT",
+    "qualification_status": "P_REAL_1_VERIFIED__POST_EXISTENCE_FRONTIER_CAPABILITY_PHASE_ACTIVE",
     "legacy_capability_reconciliation_note": {
       "source": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
       "historical_gap": "GENERAL_REASONING_AND_GENERIC_TOOL_USE_INSIDE_PERSISTENT_CONTROLLER",
@@ -252,7 +256,12 @@
       "evidence_path": "canonical/qualification/SUPERWORKER_UNIFIED_1_WHOLE_DEFINITION_ADJUDICATION_V1.json",
       "prior_frontier_path": "canonical/reconciliation/SAME_IDENTITY_INTEGRATION_FRONTIER_20260927_V1.json",
       "integration_proof_required": false
-    }
+    },
+    "same_identity_superworker_cleanroom_reproduction_verified": false,
+    "frontier_capability_parity": "UNPROVEN",
+    "frontier_capability_superset": "UNPROVEN",
+    "frontier_capability_mission_lock_path": "canonical/laws/FRONTIER_CAPABILITY_SUPERWORKER_MISSION_LOCK_V2.md",
+    "frontier_capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_TARGET_MAP_V1.json"
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
@@ -277,13 +286,15 @@
     "infrastructure_freeze_when_next_real_mission_executable": true,
     "forbid_relabeling_bounded_executor_as_superworker": true,
     "only_current_allowed_frontier_actions": [
-      "adapt already-proven task acquisition/lease/dedupe/provenance mechanisms into one provider-neutral durable worker identity",
-      "bind that same identity directly to the shared ASTRA runtime rather than to a precomputed cognitive result",
-      "run one real device-independent consequential mission through that exact identity",
-      "checkpoint and relaunch the same identity after an execution/context boundary",
-      "freeze and repair only the first generic blocker exposed by that mission",
-      "independently adjudicate the complete same-identity chain",
-      "do not rebuild or reprove the seven mechanisms independently"
+      "instantiate a fresh worker from canonical state without copying hidden mutable execution state from SUPERWORKER-UNIFIED-1",
+      "run a distinct consequential mission that forces dynamic capability discovery acquisition execution recovery and independent verification",
+      "independently adjudicate the clean-room reproduction before treating the architecture as reproducible",
+      "after reproduction use the smallest orthogonal portfolio of unseen consequential missions to expose frontier capability gaps",
+      "freeze and repair only the first generic causal blocker exposed by a real mission",
+      "search and reuse existing capabilities tools research models software and algorithms before invention",
+      "compile every verified reusable capability back into canonical Brain state and regression evidence",
+      "compare against frontier reference systems only on comparable real tasks and outcome criteria",
+      "defer population scaling until same-identity clean-room reproduction and minimum cross-domain breadth are verified"
     ],
     "truth_first_law": "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
     "live_canonical_refresh_before_consequential_action": true,
@@ -307,17 +318,21 @@
     "forbid_internal_suite_to_external_parity_inference": true,
     "common_benchmark_required_before_external_parity_claim": true,
     "superworker_external_capability_breadth_requires_independent_benchmarking": true,
-    "capability_realization_mission_lock": "canonical/laws/CAPABILITY_REALIZATION_MISSION_LOCK_V1.md",
+    "capability_realization_mission_lock": "canonical/laws/FRONTIER_CAPABILITY_SUPERWORKER_MISSION_LOCK_V2.md",
     "proxy_goal_substitution_forbidden": true,
     "predicates_are_not_progress_unless_they_change_a_capability_decision": true,
     "benchmarks_are_not_progress_unless_they_change_a_capability_decision": true,
     "worker_count_is_not_progress_unless_it_increases_real_useful_capability_or_capacity": true,
     "infrastructure_is_not_progress_unless_it_removes_a_current_capability_blocker": true,
-    "pre_action_capability_question": "Does this action directly make a target Astra capability more real, stronger, broader, more reliable, more autonomous, or remove the current blocker to doing so?",
+    "pre_action_capability_question": "Does this action directly make the reproducible Superworker capability surface broader, stronger, more frontier-comparable, more autonomous, faster, more reliable, more reusable, or remove the current causal blocker to doing so?",
     "capability_arbitrage_strategy": "canonical/laws/CAPABILITY_ARBITRAGE_RUNTIME_STRATEGY_V1.md",
-    "optimization_target": "MINIMIZE_TIME_UNTIL_ALL_TARGET_CAPABILITIES_WORK_TOGETHER_IN_ONE_SHARED_RUNTIME",
+    "optimization_target": "MINIMIZE_TIME_TO_REPRODUCIBLE_BROAD_FRONTIER_CAPABILITY_IN_ONE_SHARED_SUPERWORKER_RUNTIME",
     "astra_closure_race_strategy": "canonical/laws/ASTRA_CLOSURE_RACE_STRATEGY_V1.md",
-    "astra_shared_runtime_portfolio": "canonical/laws/ASTRA_SHARED_RUNTIME_PORTFOLIO_V1.md"
+    "astra_shared_runtime_portfolio": "canonical/laws/ASTRA_SHARED_RUNTIME_PORTFOLIO_V1.md",
+    "frontier_capability_mission_lock": "canonical/laws/FRONTIER_CAPABILITY_SUPERWORKER_MISSION_LOCK_V2.md",
+    "frontier_capability_target_map": "canonical/capabilities/FRONTIER_CAPABILITY_TARGET_MAP_V1.json",
+    "frontier_comparison_rule": "SAME_REAL_TASK__OUTCOME_BASED__CORRECTNESS_EXTERNAL_EFFECT_AUTONOMY_ROBUSTNESS_GENERALIZATION_LATENCY_COST_VERIFIABILITY",
+    "scaling_gate": "ONLY_AFTER_SAME_IDENTITY_CLEANROOM_REPRODUCTION_AND_MINIMUM_CROSS_DOMAIN_BREADTH"
   },
   "standby_runtime": {
     "runtime_id": "SUPERHERO-RUNTIME-2.6.0-DIRECT-SIGNED-PERMANENT",
@@ -348,15 +363,38 @@
     }
   ],
   "mission_lock": {
-    "terminal_objective": "MAKE_THE_ACTUAL_TARGET_CAPABILITIES_DEMONSTRATED_BY_ASTRA_REAL_IN_OUR_OWN_SYSTEM_USING_ONLY_THE_RIGHT_ROUTE",
-    "success_definition": "REAL_CAPABILITY_EXISTS_AND_WORKS_IN_REAL_USE__NOT_PREDICATE_OR_BENCHMARK_COMPLETION",
-    "astra_role": "CAPABILITY_REFERENCE_NOT_IMPLEMENTATION_BLUEPRINT_OR_LABEL_TARGET",
+    "terminal_objective": "TURN_THE_PROVEN_SUPERWORKER_ARCHITECTURE_INTO_A_REPRODUCIBLE_MODEL_INDEPENDENT_FRONTIER_CAPABILITY_SYSTEM_THAT_MATCHES_THEN_EXCEEDS_USEFUL_REAL_WORLD_FRONTIER_CAPABILITY",
+    "success_definition": "BROAD_REPRODUCIBLE_REAL_CAPABILITY_ON_CONSEQUENTIAL_UNSEEN_WORK__INDEPENDENTLY_VERIFIED__NOT_MODEL_LABEL_PREDICATE_BENCHMARK_OR_WORKER_COUNT",
+    "current_phase": "POST_EXISTENCE_CAPABILITY_EXPANSION",
+    "p_real": 1,
+    "reference_system_role": "CAPABILITY_REFERENCE_ONLY__NOT_IMPLEMENTATION_BLUEPRINT_PROVIDER_REQUIREMENT_OR_PROOF_AUTHORITY",
+    "comparison_basis": [
+      "correctness_and_task_completion",
+      "real_external_effect_quality",
+      "autonomy_and_human_intervention",
+      "robustness_and_recovery",
+      "breadth_and_generalization",
+      "wall_clock_latency",
+      "incremental_cost",
+      "evidence_quality_and_verifiability"
+    ],
+    "phase_order": [
+      "CLEANROOM_REPRODUCTION",
+      "CAPABILITY_BREADTH",
+      "FRONTIER_COMPARABILITY",
+      "CAPABILITY_SUPERSET",
+      "EFFICIENCY",
+      "POPULATION_SCALING"
+    ],
     "predicates_role": "SUBORDINATE_EVIDENCE_ONLY",
     "benchmarks_role": "SUBORDINATE_DIAGNOSTIC_ONLY",
-    "infrastructure_role": "ONLY_IF_CAUSALLY_REQUIRED_TO_REALIZE_OR_OPERATE_CAPABILITY",
-    "priority": "CORRECT_ROUTE_FIRST__THEN_MINIMUM_WALL_CLOCK_TIME_TO_REAL_VERIFIED_CAPABILITY",
-    "method": "ONE_SHARED_ASTRA_RUNTIME__MINIMAL_ORTHOGONAL_MISSION_PORTFOLIO__BLOCKER_LOCAL_SWARMS__GLOBAL_INHERITANCE",
-    "optimization_target": "MINIMIZE_TIME_UNTIL_ALL_TARGET_CAPABILITIES_WORK_TOGETHER_IN_ONE_RUNTIME"
+    "infrastructure_role": "ONLY_IF_CAUSALLY_REQUIRED_TO_REMOVE_A_CURRENT_REAL_MISSION_BLOCKER",
+    "scaling_role": "DEFERRED_UNTIL_REPRODUCIBILITY_AND_MINIMUM_BREADTH_GATES",
+    "priority": "CORRECTNESS_FIRST__THEN_MINIMUM_WALL_CLOCK_TIME_TO_REAL_VERIFIED_CAPABILITY__THEN_MINIMUM_COMPUTE_COST_CONTEXT_ENERGY",
+    "method": "CLEANROOM_REPRODUCTION__MINIMAL_ORTHOGONAL_UNSEEN_MISSION_PORTFOLIO__FIRST_CAUSAL_BLOCKER_EXTINCTION__GLOBAL_CAPABILITY_COMPILATION_AND_INHERITANCE",
+    "optimization_target": "MINIMIZE_TIME_TO_REPRODUCIBLE_BROAD_FRONTIER_CAPABILITY_AND_THEN_MAXIMIZE_VERIFIED_CONSEQUENTIAL_OUTCOMES_PER_WALL_CLOCK_TIME",
+    "authority_path": "canonical/laws/FRONTIER_CAPABILITY_SUPERWORKER_MISSION_LOCK_V2.md",
+    "target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_TARGET_MAP_V1.json"
   },
   "active_persistent_controllers": [
     {
