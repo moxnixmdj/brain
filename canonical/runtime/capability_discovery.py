@@ -686,3 +686,5 @@ def search_all(effect, limit_per_source=12):
         "candidates":merged[:max(1,min(int(limit_per_source)*2,50))],
         "binding_performed":False,
     }
+
+# DRIFT_IMMUNITY_CANARY: intentionally noncompliant frontier-sensitive change.
