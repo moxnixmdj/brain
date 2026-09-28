@@ -1,0 +1,38 @@
+name: Executable Semantic Evidence Repair V1
+
+on:
+  push:
+    branches:
+      - repair/executable-semantic-evidence-v1-20260928
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  repair-replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install metadata evidence index client
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y apt-file
+          sudo apt-file update
+      - name: Focused provider-neutral regression
+        run: |
+          python -m py_compile canonical/runtime/capability_discovery.py
+          python canonical/tests/test_executable_semantic_evidence.py
+      - name: One frozen four-effect replay
+        run: python canonical/experiments/run_executable_semantic_evidence_repair_v1_replay.py
+      - name: Upload replay evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: executable-semantic-evidence-repair-v1
+          path: canonical/astra_runtime/evidence/EXECUTABLE_SEMANTIC_EVIDENCE_REPAIR_V1__REPLAY.json
+          if-no-files-found: warn
