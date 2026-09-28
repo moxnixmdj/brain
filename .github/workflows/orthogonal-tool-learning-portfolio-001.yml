@@ -1,0 +1,67 @@
+name: Orthogonal Tool Learning Portfolio 001
+
+on:
+  push:
+    branches:
+      - research/orthogonal-tool-learning-portfolio-001-20260928
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    strategy:
+      fail-fast: false
+      matrix:
+        probe:
+          - ORTHO-GZIP-001
+          - ORTHO-SQLITE-001
+          - ORTHO-XML-001
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Prove runtime unchanged from canonical main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          test -z "$(git diff --name-only origin/main...HEAD -- canonical/runtime/)"
+      - name: Run frozen first probe without repairs
+        run: python canonical/experiments/run_orthogonal_tool_learning_probe.py "${{ matrix.probe }}"
+      - name: Upload probe evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ortho-${{ matrix.probe }}
+          path: |
+            canonical/astra_runtime/evidence/${{ matrix.probe }}__*.json
+            canonical/astra_runtime/pending_bindings/${{ matrix.probe }}__*.json
+          if-no-files-found: warn
+
+  reconcile-matrix:
+    needs: probe
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: ortho-*
+          path: /tmp/ortho-results
+          merge-multiple: true
+      - name: Aggregate repeated first blockers only
+        run: |
+          python canonical/experiments/aggregate_orthogonal_tool_learning.py             /tmp/ortho-results             canonical/astra_runtime/evidence/ORTHO_TOOL_LEARNING_PORTFOLIO_001__MATRIX.json
+      - name: Upload reconciliation matrix
+        uses: actions/upload-artifact@v4
+        with:
+          name: ortho-tool-learning-portfolio-001-matrix
+          path: canonical/astra_runtime/evidence/ORTHO_TOOL_LEARNING_PORTFOLIO_001__MATRIX.json
