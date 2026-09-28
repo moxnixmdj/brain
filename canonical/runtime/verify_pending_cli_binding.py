@@ -225,9 +225,11 @@ def _acquire_and_run_semantic_verifier(pending, output_path):
           "stdout":a.get("stdout"),
           "stderr":a.get("stderr"),
           "inference_basis":(a.get("contract") or {}).get("inference_basis"),
+          "execution_variants":a.get("execution_variants"),
+          "selected_execution_variant":a.get("selected_execution_variant"),
         }
         for a in attempts
-    ],sort_keys=True)[:12000])
+    ],sort_keys=True)[:20000])
 
 
 def _resolve_callable(module,name):
