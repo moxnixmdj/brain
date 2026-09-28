@@ -70,12 +70,12 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Prevent strong direct executable-plus-semantic supplier evidence from being buried by lexical-only package candidates, using a generic evidence-tier ranking rule validated on fresh unseen effects.",
-    "selection_metric": "FRESH_UNSEEN_VIABLE_SUPPLIER_TOP_K_RECALL_AND_ROLE_PRECISION_PER_WALL_CLOCK_WITH_ZERO_HINTS",
-    "exact_blocker": "DIRECT_EXECUTABLE_EVIDENCE_CANDIDATES_SURVIVE_GENERATION__GLOBAL_LEXICAL_PLUS_EXECUTABLE_SCORE_FUSION_AND_FINAL_TOP_K_RANKING_REMAINS_CAUSAL_RECALL_BOTTLENECK",
-    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_DIRECT_GENERATOR_INTEGRATION_DELTA_001_RECONCILIATION.json",
-    "repair_status": "ONE_GENERIC_QUALITATIVE_EVIDENCE_TIER_REPAIR_AUTHORIZABLE_AFTER_RECONCILIATION",
-    "prohibition": "NO_OLD_CASE_WEIGHT_TUNING__NO_PACKAGE_HINTS__NO_TASK_SPECIFIC_LITERALS__FRESH_UNSEEN_GATE_REQUIRED"
+    "objective": "Make direct executable/manpage supplier evidence cheap enough to support fast capability discovery before evaluating another ranking repair.",
+    "selection_metric": "VERIFIED_EXECUTABLE_SUPPLIER_EVIDENCE_PER_WALL_CLOCK_WITH_ZERO_HINTS_AND_ZERO_INCREMENTAL_SPEND",
+    "exact_blocker": "DIRECT_EXECUTABLE_EVIDENCE_ACQUISITION_PATH_EXCEEDS_WALL_CLOCK_GATE__REPEATED_APT_FILE_AND_REMOTE_MANPAGE_SCANS_PREVENT_FAST_RANKING_ADJUDICATION",
+    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_DIRECT_EVIDENCE_TIER_TIMEOUT_RECONCILIATION_V1.json",
+    "repair_status": "NO_REPAIR_AUTHORIZED__NO_MUTATION_LATENCY_PROFILE_REQUIRED",
+    "prohibition": "NO_TIMEOUT_INCREASE__NO_SECOND_RANKING_REPAIR__NO_PACKAGE_HINTS__NO_TASK_SPECIFIC_LITERALS"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [

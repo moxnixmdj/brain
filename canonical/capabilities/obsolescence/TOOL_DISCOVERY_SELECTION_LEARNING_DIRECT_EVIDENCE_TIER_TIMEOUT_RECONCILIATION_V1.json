@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_DIRECT_EVIDENCE_TIER_TIMEOUT_RECONCILIATION_V1",
+  "status": "COMPLETE_RECONCILED_PENDING_MERGE",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "source_pr": 79,
+  "validation_run_id": 36478244388,
+  "validation_head_sha": "247fb33d55b86268b3554afff24bba674f4315f9",
+  "focused_regression": "PASS",
+  "fresh_validation": "CANCELLED_AT_HARD_WALL_CLOCK_GATE",
+  "job_timeout_minutes": 20,
+  "validation_step_started_at": "2026-09-28T20:20:16Z",
+  "validation_step_cancelled_at": "2026-09-28T20:39:51Z",
+  "approximate_validation_step_wall_s": 1175,
+  "result_artifact_emitted": false,
+  "observed_live_processes_at_cleanup": [
+    "python",
+    "apt-file",
+    "apt-file"
+  ],
+  "runtime_promoted": false,
+  "falsified_claim": "CURRENT_EXECUTABLE_PLUS_MANPAGE_EVIDENCE_IMPLEMENTATION_IS_FAST_ENOUGH_FOR_RECURSIVE_CAPABILITY_DISCOVERY",
+  "preserved_gain": "QUALITATIVE_DIRECT_EXECUTABLE_SEMANTIC_TIER_PASSED_FOCUSED_SYNTHETIC_REGRESSION",
+  "exact_residual": "DIRECT_EXECUTABLE_EVIDENCE_ACQUISITION_PATH_EXCEEDS_WALL_CLOCK_GATE__REPEATED_APT_FILE_AND_REMOTE_MANPAGE_SCANS_PREVENT_FAST_RANKING_ADJUDICATION",
+  "causal_basis": [
+    "The fresh validation never reached a result within the hard 20-minute job gate.",
+    "Focused ranking regression passed before the expensive validation began.",
+    "The evidence implementation performs repeated apt-file searches per semantic term and remote manpage fetches per candidate/effect.",
+    "Job cleanup terminated still-running apt-file processes, proving evidence acquisition remained active at timeout.",
+    "Therefore ranking quality cannot be promoted and the next blocker is evidence-acquisition wall-clock efficiency."
+  ],
+  "next_action": "NO_MUTATION_EVIDENCE_ACQUISITION_LATENCY_PROFILE__MEASURE_APT_FILE_QUERY_COST_MANPAGE_FETCH_COST_CACHEABILITY_AND_MINIMUM_SUFFICIENT_EVIDENCE__THEN_RECONCILE",
+  "prohibition": "NO_TIMEOUT_INCREASE__NO_SECOND_RANKING_REPAIR__NO_OLD_CASE_WEIGHT_TUNING__NO_PACKAGE_HINTS",
+  "promotion_authorized": false
+}
