@@ -18,6 +18,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Run generic contract regressions
+        run: |
+          set -euo pipefail
+          python canonical/tests/test_cli_contract_role_selection.py
+          python canonical/tests/test_cli_stdin_contract.py
       - name: Run frozen tool discovery and contract-learning experiment
         run: |
           set -euo pipefail
