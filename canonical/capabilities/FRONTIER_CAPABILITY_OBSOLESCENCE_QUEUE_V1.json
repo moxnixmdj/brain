@@ -70,12 +70,12 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Separate task/control semantics from payload/schema/example content and require essential operation/domain compatibility before relevance scoring, then validate on fresh orthogonal unseen effects.",
-    "selection_metric": "FRESH_UNSEEN_EXECUTABLE_SUPPLIER_RECALL_AND_ESSENTIAL_ROLE_PRECISION_PER_WALL_CLOCK_TIME",
-    "exact_blocker": "TASK_INSTRUCTION_VS_PAYLOAD_SCHEMA_SEGMENTATION_AND_CONJUNCTIVE_ROLE_COMPATIBILITY_NOT_YET_PROVEN",
-    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_SEMANTIC_ROLE_IR_V1_FALSIFICATION_RECONCILIATION.json",
-    "repair_status": "ONE_REFINED_GENERIC_REPAIR_ELIGIBLE_FROM_CROSS_PROBE_RECURRENCE",
-    "prohibition": "NO_REUSE_OF_EXHAUSTED_FROZEN_REPLAY__NO_PACKAGE_HINTS__NO_CONTRACT_PARSER_CHANGES__NO_FLAT_WEIGHT_TWEAK"
+    "objective": "Trace candidate discovery from raw catalog presence through candidate admission, semantic evidence propagation, ranking and truncation without runtime mutation.",
+    "selection_metric": "LOCALIZED_EXECUTABLE_RECALL_LOSS_PER_WALL_CLOCK_TIME",
+    "exact_blocker": "CANDIDATE_SEMANTIC_EVIDENCE_PROPAGATION_AND_RAW_TO_RANKED_EXECUTABLE_RECALL_PATH_NOT_YET_LOCALIZED",
+    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_TASK_SEMANTIC_CONJUNCTIVE_ROLE_V1_FALSIFICATION_RECONCILIATION.json",
+    "repair_status": "NO_RUNTIME_REPAIR_AUTHORIZED_UNTIL_TRACE_COMPLETES",
+    "prohibition": "NO_SECOND_RUNTIME_REPAIR__NO_PACKAGE_HINTS__NO_CONTRACT_PARSER_CHANGES"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -91,5 +91,13 @@
       "capability_route_process_wall_s": 0.59,
       "incremental_spend_usd": 0
     }
-  ]
+  ],
+  "task_semantic_conjunctive_role_v1": {
+    "status": "FALSIFIED_AS_IMPLEMENTED__NOT_MERGED",
+    "source_pr": 66,
+    "workflow_run_id": 36461774649,
+    "exact_oracle_top12_recall": 0.6666666666666666,
+    "payload_noise_removed": true,
+    "compatibility_gate_validly_exercised": false
+  }
 }

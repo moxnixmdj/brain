@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_TASK_SEMANTIC_CONJUNCTIVE_ROLE_V1_FALSIFICATION_RECONCILIATION",
+  "status": "COMPLETE_RECONCILED",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "source_pr": 66,
+  "repair_merged": false,
+  "workflow_run_id": 36461774649,
+  "artifact": {
+    "id": 10988107731,
+    "digest": "sha256:15d6b71aa9f81f24f2bcf72b9a6d45b6951dec8d720fb6a8f5170c36580df603"
+  },
+  "focused_preflight": {
+    "status": "PASS_AFTER_BACKWARD_COMPATIBILITY_CORRECTION",
+    "synthetic_task_semantic_tests": "5_OF_5_PASS",
+    "legacy_discovery_tests": "5_OF_5_PASS"
+  },
+  "fresh_validation": {
+    "status": "FAIL",
+    "exact_oracle_top12_recall": 0.6666666666666666,
+    "payload_schema_noise_query_count": 0,
+    "top1_direct_count": 3,
+    "top1_essential_compatible_count": 0,
+    "oracle_ranks": {
+      "audio_transcode_ffmpeg": 2,
+      "markdown_to_html_pandoc": null,
+      "png_optimize_optipng": 1
+    }
+  },
+  "verified_partial_gains": [
+    "literal payload/schema query noise was eliminated on all three fresh effects",
+    "two of three known viable executable supplier families appeared in top-12",
+    "all three top-1 candidates were classified as direct executable candidates"
+  ],
+  "implementation_falsification": {
+    "class": "SEMANTIC_COMPATIBILITY_EVIDENCE_NOT_PROPAGATED_TO_CANDIDATE_RECORD",
+    "evidence": [
+      "search_apt_packages computed semantic_role_alignment but stored it under `semantic_role_alignment` while the fresh validator read `semantic_alignment`",
+      "essential_role_compatibility was not stored on candidate records",
+      "the ranking key therefore treated every candidate as not essential-compatible"
+    ],
+    "consequence": "The fresh run did not validly test conjunctive compatibility ordering; the intended hard gate was absent from emitted/ranked candidate evidence."
+  },
+  "independent_residual": {
+    "class": "VIABLE_SUPPLIER_RETRIEVAL_COVERAGE_OR_FILTERING_GAP",
+    "evidence": "The known Markdown-to-HTML supplier family `pandoc` was absent from the returned candidate set despite relevant semantic queries.",
+    "scope_boundary": "This does not prove raw catalog absence. It may be lost in raw query coverage, candidate filtering, deduplication, truncation, or ranking."
+  },
+  "falsified_claim": "PR_66_AS_IMPLEMENTED_IS_SUFFICIENT_TO_VALIDATE_AND_CLOSE_TASK_SEMANTIC_SEGMENTATION_PLUS_CONJUNCTIVE_ROLE_COMPATIBILITY",
+  "refined_blocker": "CANDIDATE_SEMANTIC_EVIDENCE_PROPAGATION_AND_RAW_TO_RANKED_EXECUTABLE_RECALL_PATH_NOT_YET_LOCALIZED",
+  "next_action": {
+    "type": "NO_MUTATION_DIAGNOSTIC",
+    "objective": "On fresh/main runtime, trace selected unseen effects through raw catalog hits -> candidate admission -> semantic evidence fields -> ranking/truncation; check inherited routes first; do not install or execute candidates.",
+    "required_measurements": [
+      "raw catalog presence of known viable supplier families",
+      "candidate-admission presence before ranking",
+      "semantic alignment and compatibility field presence",
+      "rank before and after each filtering/truncation stage",
+      "top-K exact executable recall"
+    ],
+    "runtime_mutation_forbidden": true
+  },
+  "promotion_authorized": false
+}
