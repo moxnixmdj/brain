@@ -7,11 +7,16 @@ sys.path.insert(0,str(RUNTIME))
 import capability_discovery
 import auto_capability_acquisition
 
-MISSION_REL="canonical/experiments/OBSOLESCENCE_TOOL_LEARNING_DATAMATRIX_001.json"
+MISSION_REL="canonical/astra_runtime/missions/OBSOLESCENCE_TOOL_LEARNING_DATAMATRIX_001.json"
 MISSION_ID="OBSOLESCENCE-TOOL-LEARNING-DATAMATRIX-001"
 GOAL="Generate a Data Matrix barcode image for the text PROJECT BRAIN V4 and save it as canonical/astra_runtime/tmp/PROJECT_BRAIN_DATAMATRIX.png."
 EVID=ROOT/"canonical"/"astra_runtime"/"evidence"
 EVID.mkdir(parents=True,exist_ok=True)
+
+SOURCE_MISSION=ROOT/"canonical"/"experiments"/"OBSOLESCENCE_TOOL_LEARNING_DATAMATRIX_001.json"
+RUNTIME_MISSION=ROOT/MISSION_REL
+if SOURCE_MISSION.read_bytes()!=RUNTIME_MISSION.read_bytes():
+    raise SystemExit("FROZEN_MISSION_BYTES_DIVERGED")
 
 registry=json.loads((RUNTIME/"BOUND_CAPABILITY_REGISTRY_V1.json").read_text())
 blob=json.dumps(registry).lower()
