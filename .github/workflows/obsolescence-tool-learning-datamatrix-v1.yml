@@ -1,0 +1,63 @@
+name: Obsolescence tool learning Data Matrix
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  experiment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run generic contract regressions
+        run: |
+          set -euo pipefail
+          python canonical/tests/test_cli_contract_role_selection.py
+          python canonical/tests/test_cli_stdin_contract.py
+          python canonical/tests/test_cli_route_race.py
+          python canonical/tests/test_external_semantic_verifier_hint.py
+          python - <<'PY'
+          import pathlib,sys
+          sys.path.insert(0,str(pathlib.Path('canonical/runtime').resolve()))
+          import verify_pending_cli_binding as v
+          probe={'executables':[{'executable':'/usr/bin/generic-reader','help_attempts':[{'text':'Usage: generic-reader [OPTIONS] IMAGE\nRead and decode symbols from an image file.\nDecoded content is written to standard output.\n'}]}]}
+          out=v._semantic_help_contract(probe)
+          assert out is not None, out
+          assert out['argv']==['/usr/bin/generic-reader','__OUTPUT_PATH__'], out
+          assert out['inference_basis']=='POSITIONAL_FILE_TO_STDOUT', out
+          print('GENERIC_SEMANTIC_VERIFIER_CONTRACT_PASS')
+          PY
+      - name: Run frozen tool discovery and contract-learning experiment
+        run: |
+          set -euo pipefail
+          python canonical/experiments/run_obsolescence_tool_learning_datamatrix_001.py
+      - name: Execute generated independent verification mission
+        run: |
+          set -euo pipefail
+          VERIFY_PATH="$(python - <<'PY'
+          import json
+          p='canonical/astra_runtime/evidence/OBSOLESCENCE-TOOL-LEARNING-DATAMATRIX-001__RESULT.json'
+          print(json.load(open(p))['verification_mission_path'])
+          PY
+          )"
+          python canonical/runtime/astra_runtime.py "$VERIFY_PATH"
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: obsolescence-tool-learning-datamatrix-001
+          path: |
+            canonical/astra_runtime/evidence/OBSOLESCENCE-TOOL-LEARNING-DATAMATRIX-001__*.json
+            canonical/astra_runtime/pending_bindings/OBSOLESCENCE-TOOL-LEARNING-DATAMATRIX-001__*.json
+            canonical/astra_runtime/evidence/ASTRA-AUTO-VERIFY-DMTX-UTILS-*.json
+            canonical/astra_runtime/state/ASTRA-AUTO-VERIFY-DMTX-UTILS-*.json
+            canonical/astra_runtime/evidence/ASTRA-AUTO-VERIFY-IEC16022-*.json
+            canonical/astra_runtime/state/ASTRA-AUTO-VERIFY-IEC16022-*.json
+            canonical/astra_runtime/tmp/PROJECT_BRAIN_DATAMATRIX.png
+          if-no-files-found: warn
