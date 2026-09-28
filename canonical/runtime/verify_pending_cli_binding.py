@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fresh verification for an automatically synthesized pending CLI binding."""
 from __future__ import annotations
-import hashlib,importlib,json,pathlib,re,shutil,subprocess,sys
+import hashlib,importlib,json,pathlib,re,shutil,subprocess,sys,urllib.parse,urllib.request
 
 import apt_cli_probe
 import astra_runtime
@@ -134,6 +134,59 @@ def _package_family_tokens(name):
     return out[:3]
 
 
+def _ubuntu_web_family_seeds(tokens, timeout_s=12, per_token_limit=80):
+    """Search official Ubuntu package web metadata for semantic family clues.
+
+    This is metadata-only discovery. It does not install or execute anything.
+    Returned names are still pinned/validated through the local APT catalog
+    before they can become executable candidates.
+    """
+    out=[]
+    seen=set()
+    for token in tokens[:4]:
+        params=urllib.parse.urlencode({
+          "keywords":str(token),
+          "searchon":"all",
+          "suite":"noble",
+          "section":"all",
+        })
+        req=urllib.request.Request(
+            "https://packages.ubuntu.com/search?"+params,
+            headers={"User-Agent":"ProjectBrain-CapabilityDiscovery/1"}
+        )
+        try:
+            with urllib.request.urlopen(req,timeout=timeout_s) as resp:
+                html=resp.read(1500000).decode("utf-8","replace")
+        except Exception:
+            continue
+        # Result pages link binary package details under /<suite>/<package>
+        # or /<suite>/<section>/<package>. Keep only package-like terminal
+        # path components and let local APT metadata validate them later.
+        count=0
+        for href,label in re.findall(
+            r'href="(/[^"]+)"[^>]*>([^<]+)</a>',html,re.I
+        ):
+            parts=[urllib.parse.unquote(x) for x in href.split("/") if x]
+            if len(parts)<2 or parts[0]!="noble":
+                continue
+            name=parts[-1].strip()
+            if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9+._-]{0,127}",name):
+                continue
+            if name in seen:
+                continue
+            seen.add(name)
+            out.append({
+              "name":name,
+              "description":re.sub(r"\s+"," ",str(label)).strip(),
+              "seed_token":str(token),
+              "source":"UBUNTU_PACKAGES_WEB_METADATA",
+            })
+            count+=1
+            if count>=per_token_limit:
+                break
+    return out
+
+
 def _raw_apt_family_seeds(tokens, per_token_limit=120):
     """Cheaply scan package names/descriptions without pinning/installing candidates.
 
@@ -218,10 +271,17 @@ def _merge_verifier_discovery(goal, expected_text="", limit_per_query=40):
     # cutoff. A semantic library/binding hit can reveal a separately packaged
     # CLI sibling even when the library itself is too high-friction to execute.
     raw_family_seeds=_raw_apt_family_seeds(nouns)
+    web_family_seeds=_ubuntu_web_family_seeds(nouns)
+    raw_family_seeds.extend(
+        x for x in web_family_seeds
+        if x.get("name") not in {y.get("name") for y in raw_family_seeds}
+    )
     searches.append({
       "stage":"RAW_METADATA_FAMILY_SEED_SCAN",
       "query":" | ".join(nouns),
       "candidate_count":len(raw_family_seeds),
+      "local_seed_count":len(raw_family_seeds)-len(web_family_seeds),
+      "ubuntu_web_seed_count":len(web_family_seeds),
       "errors":[],
     })
 
