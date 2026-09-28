@@ -115,6 +115,7 @@ def infer_contract(probe, goal):
 
     input_flag=None
     positional=None
+    stdin_text=False
     if usage_line:
         for token in ("STRING","TEXT","DATA"):
             if f"[{token}]" in usage_line:
@@ -127,7 +128,10 @@ def infer_contract(probe, goal):
                 if m:
                     input_flag=m.group(1); break
     if positional is None and input_flag is None:
-        raise ContractInferenceFailure("CLI_TEXT_INPUT_UNRESOLVED")
+        if "standard input" in lower_help or "stdin" in lower_help:
+            stdin_text=True
+        else:
+            raise ContractInferenceFailure("CLI_TEXT_INPUT_UNRESOLVED")
 
     selector=[]
     normalized_goal=re.sub(r"[^a-z0-9]+","",str(goal).lower())
@@ -152,7 +156,7 @@ def infer_contract(probe, goal):
     argv=[command,*selector,output_flag,"__OUT_PLACEHOLDER__"]
     if input_flag:
         argv.extend([input_flag,"__TEXT_PLACEHOLDER__"])
-    else:
+    elif positional:
         argv.append("__TEXT_PLACEHOLDER__")
     argv=[x.replace("__OUT_PLACEHOLDER__","$"+"{input.output_path}").replace("__TEXT_PLACEHOLDER__","$"+"{input.text}") for x in argv]
     return {
@@ -163,6 +167,7 @@ def infer_contract(probe, goal):
       "required_inputs":["text","output_path"],
       "argv_template":argv,
       "output_path_template":"$"+"{input.output_path}",
+      "stdin_text_template":("$"+"{input.text}") if stdin_text else None,
       "output_prefix_hex":magic or "",
       "output_text_utf8":bool(text_output),
       "timeout_s":60,
@@ -172,6 +177,8 @@ def infer_contract(probe, goal):
         "output_flag":output_flag,
         "input_flag":input_flag,
         "positional_input":positional,
+        "stdin_text":stdin_text,
+        "input_transport":("STDIN_TEXT" if stdin_text else ("FLAG" if input_flag else "POSITIONAL")),
         "selector":selector,
         "requested_suffix":suffix,
         "probe_package":probe.get("package"),
