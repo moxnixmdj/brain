@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_EVIDENCE_ACQUISITION_STRUCTURAL_CAUSE_RECONCILIATION_V1",
+  "status": "COMPLETE_RECONCILED_PENDING_MERGE",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "source_profile_pr": 82,
+  "source_profile_runs": [
+    36486220580,
+    36486527162
+  ],
+  "source_profile_outcome": "EXECUTION_SURFACE_BLOCKED__NO_STEPS_LOGS_OR_ARTIFACTS__NO_RUNTIME_PROMOTION",
+  "profile_replay_budget_exhausted": true,
+  "actions_surface_observation": {
+    "unrelated_exact_symbolic_jobs_same_failure_class": true,
+    "repeated_profile_job_failure_without_steps_or_artifacts": true,
+    "classification": "GITHUB_ACTIONS_CURRENTLY_UNRELIABLE_FOR_THIS_FRONTIER_MEASUREMENT"
+  },
+  "source_code_evidence": {
+    "source_pr": 79,
+    "implementation": "DIRECT_EVIDENCE_TIER_RANKING_REPAIR_V1_UNMERGED",
+    "semantic_terms_per_effect_max": 8,
+    "apt_file_invocation_shape": "ONE_SUBPROCESS_PER_TERM__apt-file search -x REGEX",
+    "apt_file_query_timeout_s": 30,
+    "preliminary_package_limit": 100,
+    "manpage_paths_per_package_max": 3,
+    "manpage_thread_workers": 12,
+    "validation_case_count": 7,
+    "theoretical_upper_bound_apt_file_invocations": 56,
+    "theoretical_upper_bound_manpage_fetch_jobs": 2100,
+    "note": "Upper bounds are code-path maxima, not claims that every case reached the maximum."
+  },
+  "authoritative_supplier_documentation": {
+    "source": "Debian apt-file(1) testing manpage",
+    "url": "https://manpages.debian.org/testing/apt-file/apt-file.1.en.html",
+    "retrieved_on": "2026-09-28",
+    "findings": [
+      "`-f/--from-file` reads multiple patterns and is documented as much faster than invoking apt-file many times.",
+      "`-x/--regexp` is documented as potentially rather slow; the manpage recommends non-regex matching plus downstream filtering when performance matters.",
+      "`--stream-results` can reduce memory use and time to first result when automated consumers can tolerate duplicate matches."
+    ]
+  },
+  "causal_reconciliation": [
+    "The timed-out PR79 implementation repeatedly rescans the apt Contents indices through separate regex subprocesses.",
+    "The same implementation can launch a very large remote manpage enrichment fanout after preliminary candidate generation.",
+    "The apt-file supplier itself exposes a purpose-built multi-pattern path specifically to avoid repeated invocations and documents regex mode as a performance risk.",
+    "Therefore a numeric micro-profile is not required to justify replacing the structurally dominated acquisition mechanism; the failed profile surface is quarantined rather than retried."
+  ],
+  "exact_residual": "EVIDENCE_ACQUISITION_USES_REPEATED_SLOW_APT_FILE_REGEX_SCANS_AND_EXCESSIVE_REMOTE_MANPAGE_FANOUT__BATCH_LITERAL_MULTI_PATTERN_ACQUISITION_AND_PROGRESSIVE_CACHED_ENRICHMENT_NOT_YET_INTEGRATED",
+  "next_frontier": {
+    "next_action": "ONE_GENERIC_BATCHED_LITERAL_APT_FILE_ACQUISITION_REPAIR__USE_FROM_FILE_SINGLE_SCAN__POSTFILTER_EXECUTABLE_PATHS__BOUND_CACHE_AND_PROGRESSIVELY_REQUEST_MANPAGES__FRESH_UNSEEN_GATE__THEN_RECONCILE",
+    "repair_principles": [
+      "Use one apt-file multi-pattern invocation per effect rather than one regex process per semantic term.",
+      "Prefer literal/substr matching and post-filter executable paths/command names in-process.",
+      "Treat manpage retrieval as bounded progressive enrichment, not a blanket fanout over the full preliminary set.",
+      "Cache command/manpage evidence by stable command/distribution identity inside the process and across repeated tasks when durable cache is available.",
+      "Preserve zero package hints and task-specific literals."
+    ],
+    "fresh_validation_required": true
+  },
+  "promotion_authorized": false
+}
