@@ -23,6 +23,7 @@ jobs:
           set -euo pipefail
           python canonical/tests/test_cli_contract_role_selection.py
           python canonical/tests/test_cli_stdin_contract.py
+          python canonical/tests/test_cli_route_race.py
       - name: Run frozen tool discovery and contract-learning experiment
         run: |
           set -euo pipefail
