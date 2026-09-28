@@ -88,7 +88,7 @@ def _usage_payload_role(usage_line):
         return None,None
     upper=usage_line.upper()
     for token in TEXT_TOKENS:
-        if re.search(r"(?<![A-Z])(?:\\[|<)?"+re.escape(token)+r"(?:\\]|>)?(?![A-Z])",upper):
+        if re.search(r"(?<![A-Z])(?:\[|<)?"+re.escape(token)+r"(?:\]|>)?(?![A-Z])",upper):
             return "POSITIONAL_TEXT",token.lower()
     return None,None
 
@@ -111,7 +111,7 @@ def _positional_artifact_supported(usage_line,command,suffix,help_text):
     upper=usage_line.upper()
     candidates=[]
     for token in FILE_TOKENS:
-        if re.search(r"(?<![A-Z])(?:\\[|<)?"+re.escape(token)+r"(?:\\]|>)?(?![A-Z])",upper):
+        if re.search(r"(?<![A-Z])(?:\[|<)?"+re.escape(token)+r"(?:\]|>)?(?![A-Z])",upper):
             candidates.append(token)
     unique=list(dict.fromkeys(candidates))
     if len(unique)!=1:
