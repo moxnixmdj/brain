@@ -41,9 +41,22 @@ except Exception as exc:
 
 pending=ROOT/out["pending_binding_path"]
 data=json.loads(pending.read_text())
-argv=[str(x) for x in ((data.get("contract") or {}).get("argv_template") or [])]
+contract=data.get("contract") or {}
+argv=[str(x) for x in (contract.get("argv_template") or [])]
 joined=" ".join(argv).lower().replace("-","").replace("_","").replace(" ","")
-mode_bound=("datamatrix" in joined)
+selected_executable=str(contract.get("executable") or "")
+selected_help=""
+for exe in (data.get("probe") or {}).get("executables",[]) or []:
+    if str(exe.get("executable") or "")!=selected_executable:
+        continue
+    selected_help="\n".join(str(att.get("text") or "") for att in (exe.get("help_attempts") or []))
+explicit_selector=("datamatrix" in joined)
+intrinsic_tool_semantics=("data matrix" in selected_help.lower())
+mode_bound=explicit_selector or intrinsic_tool_semantics
+binding_basis=(
+    "EXPLICIT_ARGV_SELECTOR" if explicit_selector
+    else ("SELECTED_EXECUTABLE_HELP_DECLARATION" if intrinsic_tool_semantics else None)
+)
 result={
   "status":"CONTRACT_INFERRED",
   "dispatch":out,
@@ -51,6 +64,10 @@ result={
   "argv_template":argv,
   "requested_symbology":"Data Matrix",
   "requested_symbology_explicitly_bound":mode_bound,
+  "semantic_binding_basis":binding_basis,
+  "selected_executable":selected_executable,
+  "selected_help_declares_data_matrix":intrinsic_tool_semantics,
+  "verification_mission_path":out["verification_mission_path"],
   "promotion_allowed":False
 }
 (EVID/(MISSION_ID+"__RESULT.json")).write_text(json.dumps(result,indent=2,sort_keys=True)+"\n")
