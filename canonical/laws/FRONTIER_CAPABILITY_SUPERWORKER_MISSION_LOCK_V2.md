@@ -1,6 +1,8 @@
 # FRONTIER CAPABILITY SUPERWORKER MISSION LOCK V2
 
-Status: CANONICAL / MANDATORY / FAIL-CLOSED
+> Superseded on 2026-09-28 after clarification of the capability-obsolescence theory. V2 treated frontier capability breadth/parity as the active destination; V4 treats frontier capabilities as an obsolescence queue and optimizes for equal-or-better capability via the fastest and cheapest verified route.
+
+Status: SUPERSEDED AS TOP-LEVEL OBJECTIVE BY FRONTIER_KNOWLEDGE_CAPABILITY_OBSOLESCENCE_MISSION_LOCK_V4 / RETAINED AS HISTORICAL PHASE LAW
 
 Supersedes as top-level objective:
 - canonical/laws/CAPABILITY_REALIZATION_MISSION_LOCK_V1.md
