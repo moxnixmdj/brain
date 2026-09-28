@@ -81,6 +81,20 @@ def _semantic_verifier_query(goal):
 
 
 
+def _png_dimensions(path):
+    try:
+        raw=pathlib.Path(path).read_bytes()[:24]
+        if len(raw)<24 or raw[:8]!=b"\x89PNG\r\n\x1a\n":
+            return None
+        width=int.from_bytes(raw[16:20],"big")
+        height=int.from_bytes(raw[20:24],"big")
+        if width<1 or height<1 or width>4096 or height>4096:
+            return None
+        return width,height
+    except Exception:
+        return None
+
+
 def _semantic_execution_variants(contract, output_path):
     """Build bounded execution variants only from options declared in help."""
     base=[output_path if x=="__OUTPUT_PATH__" else x for x in contract["argv"]]
