@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-DIRECT-EVIDENCE-TIER-TIMEOUT-20260928",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": null,
+  "causal_blocker": "DIRECT_EXECUTABLE_EVIDENCE_ACQUISITION_PATH_EXCEEDS_WALL_CLOCK_GATE__REPEATED_APT_FILE_AND_REMOTE_MANPAGE_SCANS_PREVENT_FAST_RANKING_ADJUDICATION",
+  "action_kind": "RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Reject the timed-out evidence-tier implementation, preserve its focused regression gain, and move the parent capability frontier to evidence-acquisition wall-clock efficiency before any further ranking repair.",
+  "highest_leverage_now": true,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Timeout reconciliation is merged; PR79 remains closed/unmerged; next action is a no-mutation latency profile, not another ranking repair.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
