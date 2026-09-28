@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "RUN-EXECUTABLE-EVIDENCE-SOURCE-DIAGNOSTIC-001",
-  "status": "PROPOSED",
+  "status": "COMPLETE_RECONCILED",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
@@ -18,5 +18,13 @@
   "probe_specific_literals": [],
   "stop_condition": "Measure command-path evidence recall across the four localized effects using package-contents metadata only, then reconcile. No runtime mutation or candidate execution.",
   "governance_change": false,
-  "weakens_existing_guard": false
+  "weakens_existing_guard": false,
+  "observed_result": {
+    "workflow_run_id": 36466410064,
+    "oracle_family_recall": 1,
+    "oracle_hits": 4,
+    "oracle_total": 4,
+    "artifact_id": 10989174357,
+    "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EXECUTABLE_EVIDENCE_SOURCE_DIAGNOSTIC_001_RECONCILIATION.json"
+  }
 }
