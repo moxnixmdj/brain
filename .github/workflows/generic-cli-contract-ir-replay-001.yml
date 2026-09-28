@@ -1,0 +1,80 @@
+name: Generic CLI Contract IR Replay 001
+
+on:
+  push:
+    branches:
+      - repair/generic-cli-contract-ir-v1-20260928
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  regressions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run generic contract regressions
+        run: |
+          set -euo pipefail
+          python canonical/tests/test_generic_cli_contract_ir.py
+          python canonical/tests/test_supplier_neutral_acquisition.py
+          python canonical/tests/test_auto_acquisition_replan.py
+
+  replay:
+    needs: regressions
+    strategy:
+      fail-fast: false
+      matrix:
+        probe:
+          - ORTHO-SQLITE-001
+          - ORTHO-XML-001
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Assert no forbidden task literals in generic repair
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          ADDED="$(git diff --unified=0 origin/main...HEAD -- canonical/runtime/ | grep '^+' | grep -v '^+++' || true)"
+          ! printf '%s\n' "$ADDED" | grep -Eiq 'ORTHO-SQLITE|ORTHO-XML|alpha|beta|PROJECT BRAIN ORTHO|record.*brain.*23'
+      - name: Replay frozen affected probe exactly once
+        run: python canonical/experiments/run_orthogonal_tool_learning_probe.py "${{ matrix.probe }}"
+      - name: Upload replay evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-ir-replay-${{ matrix.probe }}
+          path: |
+            canonical/astra_runtime/evidence/${{ matrix.probe }}__*.json
+            canonical/astra_runtime/pending_bindings/${{ matrix.probe }}__*.json
+          if-no-files-found: warn
+
+  reconcile:
+    needs: replay
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: contract-ir-replay-*
+          path: /tmp/contract-replay
+          merge-multiple: true
+      - name: Aggregate one-shot replay
+        run: |
+          python canonical/experiments/aggregate_contract_ir_replay.py             /tmp/contract-replay             canonical/astra_runtime/evidence/ORTHO_CONTRACT_IR_REPLAY_001__RESULT.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ortho-contract-ir-replay-001-result
+          path: canonical/astra_runtime/evidence/ORTHO_CONTRACT_IR_REPLAY_001__RESULT.json
