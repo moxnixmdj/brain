@@ -33,26 +33,70 @@ def _semantic_verifier_query(goal):
 
 
 def _semantic_help_contract(probe):
+    """Infer a bounded image-to-text decoder contract from observed CLI help.
+
+    This deliberately learns transport shape from help instead of naming a
+    specific barcode family or verifier implementation.
+    """
     candidates=[]
     for exe in probe.get("executables",[]):
         path=str(exe.get("executable") or "")
         for att in exe.get("help_attempts",[]):
             text=str(att.get("text") or "")
+            if not text:
+                continue
             lower=text.lower()
             normalized=re.sub(r"[^a-z0-9]+","",lower)
-            if (
-                text
-                and "decode" in lower
-                and "image" in lower
-                and ("barcode" in normalized or "qrcode" in normalized)
-                and "--raw" in lower
-            ):
-                candidates.append((len(text),path,text))
+            role_score=0
+            if any(w in lower for w in ("decode","read","scan")):
+                role_score+=4
+            if any(w in lower for w in ("image","png","barcode","matrix","code")):
+                role_score+=3
+            if any(w in lower for w in ("stdout","standard output","print")):
+                role_score+=2
+            if "encode" in lower or "write barcode" in lower:
+                role_score-=4
+            if role_score<5:
+                continue
+
+            # Explicit raw-output decoder contract, e.g. zbarimg.
+            if "--raw" in lower:
+                argv=[path]
+                if "--quiet" in lower:
+                    argv.append("--quiet")
+                argv.extend(["--raw","__OUTPUT_PATH__"])
+                candidates.append((role_score,2,len(text),path,text,argv,"RAW_FLAG"))
+                continue
+
+            # Generic positional input contract. Accept only when observed
+            # usage/help declares a file/image positional operand and no
+            # separate required output-file option is evident.
+            usage_lines=[
+                line.strip() for line in text.splitlines()
+                if line.strip().lower().startswith(("usage:","usage "))
+            ]
+            positional_declared=any(
+                re.search(r"(?:\[|<)?(?:file|image|filename|input)(?:\]|>)?",line,re.I)
+                for line in usage_lines
+            )
+            writes_stdout=(
+                any(w in lower for w in ("stdout","standard output"))
+                or any(w in lower for w in ("decode","read","scan"))
+            )
+            if positional_declared and writes_stdout:
+                argv=[path,"__OUTPUT_PATH__"]
+                candidates.append((role_score,1,len(text),path,text,argv,"POSITIONAL_FILE_TO_STDOUT"))
+
     if not candidates:
         return None
     candidates.sort(reverse=True)
-    _,path,text=candidates[0]
-    return {"executable":path,"help_excerpt":text[:4000],"argv":[path,"--quiet","--raw","__OUTPUT_PATH__"]}
+    _,_,_,path,text,argv,basis=candidates[0]
+    return {
+      "executable":path,
+      "help_excerpt":text[:4000],
+      "argv":argv,
+      "inference_basis":basis
+    }
 
 
 def _acquire_and_run_semantic_verifier(pending, output_path):
