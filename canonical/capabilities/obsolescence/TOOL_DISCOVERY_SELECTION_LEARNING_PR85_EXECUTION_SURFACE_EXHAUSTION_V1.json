@@ -6,9 +6,9 @@
   "required_environment": "Reliable Linux/Ubuntu-like environment with live apt-file Contents indices, exact PR85 branch bytes, zero incremental spend, and <=600 second validation gate.",
   "surfaces": [
     {
-      "surface": "GitHub Actions on moxnixmdj/brain",
-      "status": "REJECTED_CURRENTLY_UNUSABLE",
-      "evidence": "Observed PR85 evidence-only head d785e4a4a1af84584b9f9d341e038cfe9be7f69c produced workflow run 36493564481; its only job 109167750628 completed failure with steps=null and logs_url=null. The quarantined pre-step runner-allocation failure class therefore remains unchanged.",
+      "surface": "GitHub-hosted Actions across account repositories",
+      "status": "REJECTED_ACCOUNT_LEVEL_PRE_STEP_FAILURE_REPRODUCED",
+      "evidence": "Brain PR85 run 36489791123 failed before steps/logs. Independent isolated executor branch brain-validator/pr85-frozen-gate-20260929 in moxnixmdj/rabitto copied exact PR85 blobs and armed a fresh ubuntu-24.04 workflow; run 36494753034 job 109171589424 also completed failure with steps=[] and no retrievable log blob. The failure therefore reproduces outside the Brain repository before validator code executes.",
       "retry_forbidden": true
     },
     {
@@ -45,8 +45,8 @@
     },
     {
       "surface": "DigitalOcean",
-      "status": "REJECTED_NO_VERIFIED_FREE_CREDIT",
-      "evidence": "Previously verified account state had no promotional/free credit sufficient to make droplet creation fail-closed at $0; no new zero-cost entitlement was established in this continuation."
+      "status": "REJECTED_VERIFIED_ZERO_CREDIT_ZERO_BALANCE",
+      "evidence": "DigitalOcean account read on 2026-09-29 returned account_balance=0.00, month_to_date_balance=0.00, month_to_date_usage=0.00, and zero droplets. Creating a droplet would introduce billable infrastructure."
     },
     {
       "surface": "Render",
@@ -60,13 +60,18 @@
     },
     {
       "surface": "Sprites",
-      "status": "UNAVAILABLE_PLUGIN_TOOLS_NOT_LOADED",
-      "evidence": "A Sprites skill is present, but no Sprites MCP execution tools are loaded in the current session. Per the skill contract, no shell-side workaround is admissible."
+      "status": "CALLABLE_BUT_ZERO_SPEND_CREDIT_STATE_UNVERIFIED",
+      "evidence": "Sprites MCP execution tools are now loaded and the authenticated org has running_limit=10, warm_limit=10, with zero current sprites. Public Fly pricing advertises trial credits but the connected Sprites API exposes no account-specific credit/billing state, so executing a sprite would not be fail-closed at verified $0."
     },
     {
       "surface": "Vercel",
       "status": "REJECTED_NO_CALLABLE_SANDBOX_ACTION",
       "evidence": "The connected Vercel surface exposes Sandbox documentation but no Sandbox creation/execution action callable from this session."
+    },
+    {
+      "surface": "GitHub Codespaces",
+      "status": "PRODUCT_HAS_INCLUDED_FREE_QUOTA__NO_CALLABLE_CODESPACE_ACTION_IN_CONNECTED_GITHUB_SURFACE",
+      "evidence": "GitHub documents included monthly Codespaces quota for personal Free/Pro accounts, but the connected GitHub MCP exposes no Codespaces create/exec action. Browser automation would consume a separately metered wallet and therefore is not a verified $0 route."
     }
   ],
   "preserved_progress": {
@@ -76,7 +81,7 @@
     "runtime_promotion_authorized": false,
     "repair_merge_authorized": false
   },
-  "only_remaining_truth_transition": "Execute the frozen 3-case gate on exact PR85 bytes with a live apt-file Contents cache at $0; then reconcile PASS/FAIL before any further repair.",
+  "only_remaining_truth_transition": "Execute the frozen 3-case gate on exact PR85 bytes with a live apt-file Contents cache at verified $0; then reconcile PASS/FAIL before any further repair. GitHub-hosted Actions is now rejected as an account-level pre-step failure class.",
   "anti_drift": [
     "Do not retry GitHub Actions until its pre-step failure class changes.",
     "Do not retry Brainbase task execution while account allocation remains zero.",
