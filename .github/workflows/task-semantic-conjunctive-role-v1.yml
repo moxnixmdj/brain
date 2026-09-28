@@ -1,0 +1,37 @@
+name: Task Semantic Conjunctive Role V1
+
+on:
+  push:
+    branches:
+      - repair/task-semantic-conjunctive-role-v1-20260928
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Focused semantic segmentation regressions
+        run: |
+          set -euo pipefail
+          python canonical/tests/test_task_semantic_conjunctive_role.py
+          python canonical/tests/test_capability_discovery.py
+      - name: Fresh unseen semantic-role validation
+        run: |
+          python canonical/experiments/run_task_semantic_conjunctive_role_validation_001.py
+      - name: Upload validation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: task-semantic-conjunctive-role-validation-001
+          path: canonical/astra_runtime/evidence/TASK_SEMANTIC_CONJUNCTIVE_ROLE_VALIDATION_001__RESULT.json
+          if-no-files-found: error
