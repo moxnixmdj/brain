@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_DIRECT_GENERATOR_EXISTING_EVIDENCE_RECONCILIATION_V1",
+  "status": "COMPLETE_RECONCILED_PENDING_MERGE",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "recovered_existing_evidence": {
+    "source_pr": 70,
+    "diagnostic_id": "EXECUTABLE-EVIDENCE-SOURCE-DIAGNOSTIC-001",
+    "workflow_run_id": 36466410064,
+    "artifact_id": 10989174357,
+    "artifact_digest": "sha256:1351ff10bd0e5bc00a1c893eae9a81311025ecdfa138f3f274c7a20769f765ae",
+    "oracle_family_recall": 1,
+    "recall_at_10": 0.5,
+    "recall_at_20": 0.75,
+    "all_supplier_families_surfaced": true,
+    "ranks": {
+      "PDF_TEXT": 2,
+      "SVG_RASTER": 79,
+      "BZIP2": 1,
+      "MEDIA_METADATA": 17
+    }
+  },
+  "falsified_integrations": [
+    {
+      "pr": 72,
+      "workflow_run_id": 36468338181,
+      "oracle_family_recall": 0.75,
+      "top20_oracle_recall": 0.5
+    },
+    {
+      "pr": 73,
+      "workflow_run_id": 36471956894,
+      "oracle_family_recall": 0.25,
+      "top20_oracle_recall": 0.25
+    }
+  ],
+  "truth_correction": [
+    "Direct executable-path candidate generation is already proven on the frozen four-effect evidence set; rerunning that proof would be duplicate execution.",
+    "The unresolved gap is faithful integration: the runtime repair variants lost recall relative to the preserved direct-source diagnostic.",
+    "The next action must compare the proven diagnostic generator against the integrated generator stage-by-stage without changing runtime code."
+  ],
+  "next_frontier": {
+    "exact_blocker": "PROVEN_DIRECT_EXECUTABLE_GENERATOR_LOSES_RECALL_DURING_RUNTIME_INTEGRATION__LOSS_STAGE_NOT_YET_LOCALIZED",
+    "next_action": "NO_MUTATION_DIRECT_GENERATOR_INTEGRATION_DELTA_DIAGNOSTIC__THEN_RECONCILE",
+    "runtime_mutation_before_diagnostic": false
+  },
+  "duplicate_control_verification": {
+    "canary_holder_pr": 75,
+    "duplicate_pr": 76,
+    "duplicate_guard_run_id": 36473916109,
+    "observed_failure": "DUPLICATE_BLOCKER_LEASE_OPEN_PR:75",
+    "blocker_lease_guard_verified": true
+  },
+  "promotion_authorized": false
+}

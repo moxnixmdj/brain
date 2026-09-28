@@ -70,12 +70,12 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Determine whether effect semantics can directly generate a compact viable executable/manpage-derived supplier candidate set before lexical package admission, with no runtime mutation and no oracle package hints.",
-    "selection_metric": "VIABLE_SUPPLIER_FAMILY_RECALL_AND_TOP_K_PRECISION_PER_WALL_CLOCK_WITH_ZERO_HINTS",
-    "exact_blocker": "DIRECT_EXECUTABLE_MANPAGE_CANDIDATE_GENERATION_NOT_YET_PROVEN__POST_ADMISSION_ENRICHMENT_FALSIFIED",
-    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EXECUTABLE_SEMANTIC_REPAIRS_FALSIFICATION_RECONCILIATION_V1.json",
-    "repair_status": "NO_RUNTIME_REPAIR_AUTHORIZED__DIAGNOSTIC_REQUIRED",
-    "prohibition": "NO_POST_ADMISSION_RANKING_TWEAKS__NO_PACKAGE_HINTS__NO_RUNTIME_MUTATION_BEFORE_DIAGNOSTIC__BLOCKER_LEASE_REQUIRED"
+    "objective": "Localize exactly where the already-proven direct executable-path candidate generator loses viable supplier recall when integrated into the runtime discovery path, without changing runtime code.",
+    "selection_metric": "STAGE_BY_STAGE_ORACLE_FAMILY_RECALL_DELTA_PER_WALL_CLOCK",
+    "exact_blocker": "PROVEN_DIRECT_EXECUTABLE_GENERATOR_LOSES_RECALL_DURING_RUNTIME_INTEGRATION__LOSS_STAGE_NOT_YET_LOCALIZED",
+    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_DIRECT_GENERATOR_EXISTING_EVIDENCE_RECONCILIATION_V1.json",
+    "repair_status": "NO_RUNTIME_REPAIR_AUTHORIZED__DELTA_DIAGNOSTIC_REQUIRED",
+    "prohibition": "NO_RERUN_OF_PR70_PROOF__NO_RANKING_TWEAKS__NO_PACKAGE_HINTS__NO_RUNTIME_MUTATION_BEFORE_DELTA_LOCALIZATION"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -130,5 +130,12 @@
       "top20_oracle_recall": 0.25
     },
     "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EXECUTABLE_SEMANTIC_REPAIRS_FALSIFICATION_RECONCILIATION_V1.json"
+  },
+  "direct_generator_existing_evidence_v1": {
+    "status": "PROVEN_EXISTING_EVIDENCE_RECOVERED",
+    "source_pr": 70,
+    "workflow_run_id": 36466410064,
+    "oracle_family_recall": 1,
+    "recall_at_20": 0.75
   }
 }
