@@ -78,7 +78,7 @@ data=json.loads(pending.read_text())
 semantic=data.get("semantic_verification") or {}
 semantic.pop("verifier_package_hints",None)
 data["semantic_verification"]=semantic
-pending.write_text(json.dumps(data,indent=2,sort_keys=True)+"\\n")
+pending.write_text(json.dumps(data,indent=2,sort_keys=True)+"\n")
 contract=data.get("contract") or {}
 argv=[str(x) for x in (contract.get("argv_template") or [])]
 joined=" ".join(argv).lower().replace("-","").replace("_","").replace(" ","")
