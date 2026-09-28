@@ -22,7 +22,8 @@ STOPWORDS = {
     "capability","tool","action","do","use","get","make","create","read","write",
     "data","file","service","external","target","effect",
     "containing","contains","every","its","that","final",
-    "the","and","or","with","for","from","into","of","by","using","as","to"
+    "the","and","or","with","for","from","into","of","by","using","as","to",
+    "at","whose"
 }
 GENERIC_DISCOVERY_TOKENS={
     "generate","code","image","text","save","output","input","convert",
@@ -59,8 +60,8 @@ def effect_queries(effect):
         if len(t) >= 2 and t.lower() not in STOPWORDS
     ]
     low_information=set(GENERIC_DISCOVERY_TOKENS) | {
-        "those","these","exact","records","record","fields","field",
-        "values","value","same","identical","order","count","save"
+        "those","these","exact","exactly","records","record","fields","field",
+        "values","value","same","identical","order","count","save","result","named"
     }
     distinctive=[]
     generic=[]
@@ -69,7 +70,10 @@ def effect_queries(effect):
         if token not in target:
             target.append(token)
     out=[]
-    source=distinctive if distinctive else generic
+    # Keep high-information terms first, but retain a bounded tail of generic
+    # domain nouns. Dropping every generic noun made "resize PNG image" lose
+    # the crucial "image" concept while syntactic leftovers could dominate.
+    source=(distinctive+generic) if distinctive else generic
     for token in source:
         if token not in out:
             out.append(token)
@@ -247,6 +251,54 @@ def _apt_query_variants(queries):
     return out
 
 
+def _package_name_relation(token, name):
+    """Classify a goal token's lexical relation to a package name.
+
+    Whole-package identity/prefix matches are stronger evidence than incidental
+    description matches. Prefix matching is bounded to tokens of length >= 4
+    so short syntax fragments cannot hijack ranking.
+    """
+    token=re.sub(r"[^a-z0-9]+","",str(token or "").lower())
+    raw=str(name or "").lower()
+    compact=re.sub(r"[^a-z0-9]+","",raw)
+    segments=[x for x in re.split(r"[-_.]+",raw) if x]
+    if not token:
+        return None
+    if compact==token:
+        return "EXACT_NAME"
+    if len(token)>=4 and compact.startswith(token):
+        return "NAME_PREFIX"
+    if token in segments:
+        return "EXACT_SEGMENT"
+    if len(token)>=4 and any(seg.startswith(token) for seg in segments):
+        return "SEGMENT_PREFIX"
+    return None
+
+
+def _apt_role_noise(name, description):
+    """Return a generic non-tool-role penalty from package metadata only."""
+    lname=str(name or "").lower()
+    desc=str(description or "").lower()
+    penalty=0
+    friction=0
+    if lname.startswith(("lib","librust-","libghc-","python3-","ruby-","golang-","php-","elpa-","r-cran-","node-")):
+        penalty+=16
+        friction=max(friction,2)
+    if lname.endswith(("-dev","-doc","-dbg","-prof","-data","-common")):
+        penalty+=14
+        friction=max(friction,3)
+    phrases=(
+        "bindings for","binding for"," backend for"," backend ",
+        "module for"," module ","emacs mode","dictionary for",
+        "test data","data files","development files","documentation",
+        "library for"," library ",
+    )
+    if any(p in desc for p in phrases):
+        penalty+=14
+        friction=max(friction,2)
+    return penalty,friction
+
+
 def search_apt_packages(effect, limit=12):
     """Search the local Ubuntu/Debian package catalog without installing anything."""
     if not sys.platform.startswith("linux") or shutil.which("apt-cache") is None:
@@ -291,9 +343,11 @@ def search_apt_packages(effect, limit=12):
                 if len(ordered_blob_tokens[i])>=2 and len(ordered_blob_tokens[i+1])>=2
             }
             lexical_tokens=blob_tokens | compound_tokens
+            relations={t:_package_name_relation(t,name) for t in effect_tokens}
             matched={
                 t for t in effect_tokens
-                if any(v in lexical_tokens for v in _lexical_variants(t))
+                if relations.get(t)
+                or any(v in lexical_tokens for v in _lexical_variants(t))
             }
             if not matched:
                 continue
@@ -305,23 +359,25 @@ def search_apt_packages(effect, limit=12):
             }
             for t in matched:
                 distinctive=t not in GENERIC_DISCOVERY_TOKENS
-                if t in name_tokens:
+                relation=relations.get(t)
+                if relation=="EXACT_NAME":
+                    score += 64 if distinctive else 28
+                elif relation=="NAME_PREFIX":
+                    score += 46 if distinctive else 22
+                elif relation=="EXACT_SEGMENT":
+                    score += 24 if distinctive else 7
+                elif relation=="SEGMENT_PREFIX":
+                    score += 18 if distinctive else 6
+                elif t in name_tokens:
                     score += 24 if distinctive else 6
                 else:
                     score += 10 if distinctive else 2
             # Integration friction matters more than word count. Standalone
             # executables are usually cheaper to bind than language libraries.
             lname=name.lower()
-            integration_friction=0
-            if lname.startswith(("python3-","ruby-","golang-","php-","php")):
-                integration_friction=2
-                score-=10
-            if lname.startswith(("lib","librust-","libghc-")):
-                integration_friction=3
-                score-=12
-            if name.endswith(("-dev","-doc","-dbg","-prof")):
-                integration_friction=max(integration_friction,4)
-                score-=8
+            role_penalty,role_friction=_apt_role_noise(name,description)
+            integration_friction=role_friction
+            score-=role_penalty
             if integration_friction==0:
                 score+=8
             # Reward candidates that jointly cover multiple distinct pieces
