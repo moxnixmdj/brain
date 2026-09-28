@@ -1,0 +1,93 @@
+{
+  "schema": "PROJECT_BRAIN_SUPERWORKER_WHOLE_DEFINITION_ADJUDICATION_V1",
+  "adjudication_id": "SUPERWORKER-UNIFIED-1-WHOLE-DEFINITION-20260928-V1",
+  "candidate": {
+    "agent_id": "SUPERWORKER-UNIFIED-1",
+    "runtime": "SAME-IDENTITY-SUPERVISOR-ASTRA-RUNTIME-V1",
+    "execution_substrate": "GITHUB_ACTIONS_WITH_PROVIDER_NEUTRAL_EXTERNAL_TOOL_BRIDGE",
+    "canonical_repository": "moxnixmdj/brain",
+    "workflow": ".github/workflows/real-same-identity-ubjson.yml"
+  },
+  "proof_execution": {
+    "executable_commit_sha": "88c5e8940bd485a3c600aa0d94c5f6b98203830c",
+    "workflow_run_id": 36362433470,
+    "workflow_job_id": 108742136809,
+    "workflow_conclusion": "success",
+    "github_artifact_id": 10946381447,
+    "github_artifact_name": "real-same-identity-ubjson-evidence",
+    "github_artifact_digest": "sha256:11e6f771c2aaf4735810ae83ee40d1aa5c47c86668d755754a1aaae2d75de58c",
+    "mission_id": "ASTRA-REAL-SAME-IDENTITY-UBJSON-CANONICAL-SNAPSHOT-001",
+    "task_id": "SI-REAL-UBJSON-SNAPSHOT-001",
+    "mission_sha256": "f0773c75d92335e35b7b91d6d0eb8b72b5ea1f8cc3fbd9ea7ff13d0af8856166",
+    "task_sha256": "418cd22fca5fc75c432e5f6b15884835140f6620e92a39a7a39a6389725473ee",
+    "checkpoint_returncode": 75,
+    "final_returncode": 0,
+    "terminal_state": "COMPLETE",
+    "checkpoint_count": 1,
+    "claim_count": 2,
+    "runtime_attempt_count": 1,
+    "same_identity_bound": true,
+    "incremental_spend_usd": 0,
+    "user_device_used": false,
+    "val_town_used": false
+  },
+  "real_mission_result": {
+    "producer_project": "Iotic-Labs/py-ubjson",
+    "producer_revision": "3d8e8a24d5cd4c3c09da76aea580a0032e120a36",
+    "producer_source_type": "git_source_tree",
+    "producer_tree_sha256": "1d792be6d62111b8ca0ebd9d5f6eb502afcb09e300a4f126fbe77fa11e4d1403",
+    "artifact_path": "canonical/astra_runtime/artifacts/CANONICAL_POINTER_20260927.ubj",
+    "artifact_bytes": 17143,
+    "artifact_sha256": "77f7debda61ae6eeb1cbf70d0631aaae5907cf9b3fab403126f9b3911239029b",
+    "independent_verifier_package": "@cloudpss/ubjson",
+    "independent_verifier_version": "0.6.41",
+    "verifier_source_type": "npm",
+    "verifier_integrity": "sha512-5K38wqouOyZpTW+Px5wkEHugVGMUO6Kf2yeGn3nECUYLcUMVU1u0lCR92fE2C2zw3vdDqkHXsiRRb6mMIy9XIw==",
+    "producer_independent": true,
+    "implementation_independent": true,
+    "supplier_class_independent": true
+  },
+  "post_run_independent_replay": {
+    "method": "REBUILD_CAPTURED_NPM_CLOSURE_FROM_RAW_TARBALL_BYTES__VERIFY_SHA256_AND_SRI__LOAD_CLOUDPSS_UBJSON_DIRECTLY__DECODE_REAL_ARTIFACT__COMPARE_RECONSTRUCTED_JSON_GIT_BLOB_SHA_TO_EXACT_CANONICAL_SOURCE_BLOB",
+    "npm_closure_package_count": 3,
+    "npm_closure_total_bytes": 833602,
+    "all_npm_tarball_sha256_verified": true,
+    "all_npm_sri_verified": true,
+    "decoded_json_git_blob_sha1": "b79203df3bf5dceb120867c0a3bac150d61e7838",
+    "canonical_source_git_blob_sha1": "b79203df3bf5dceb120867c0a3bac150d61e7838",
+    "semantic_identity_verified": true,
+    "bridge_requests": 164,
+    "bridge_responses": 164,
+    "bridge_binding_errors": 0,
+    "relay_fatal_errors": 0
+  },
+  "independent_adjudicator": {
+    "verifier_id": "WOLFRAM-REMOTE-KERNEL-20260928-SAME-IDENTITY-UBJSON-V2",
+    "fail_closed": true,
+    "result": "ALL_10_GATES_PASS__PROMOTION_AUTHORIZED"
+  },
+  "gate_results": {
+    "INDEPENDENT_PERSISTENT_EXECUTION_SYSTEM": true,
+    "DURABLE_IDENTITY_AND_MISSION_BEYOND_CHAT_MODEL_INVOCATION": true,
+    "OBSERVE_REASON_RESEARCH_ACT_VERIFY_CHECKPOINT_CONTINUE": true,
+    "SURVIVES_CONTEXT_MODEL_PROVIDER_LOSS_VIA_CHECKPOINT_RELAUNCH": true,
+    "CAUSALLY_READY_TASK_ACQUISITION": true,
+    "DYNAMIC_KNOWLEDGE_TOOL_CAPABILITY_DISCOVERY_ACQUISITION": true,
+    "CONSEQUENTIAL_MISSION_EXECUTION": true,
+    "DURABLE_EVIDENCE_INCORPORATION": true,
+    "LEASES_OWNERSHIP_DEDUPE_PROVENANCE_VERIFICATION": true,
+    "NO_SELF_CERTIFIED_PROMOTION": true
+  },
+  "all_gates_pass": true,
+  "promotion_authorized": true,
+  "p_real_before": 0,
+  "p_real_after": 1,
+  "worker_self_promotion_claim": false,
+  "scope_limits": [
+    "This promotion proves one integrated same-identity cognitive Superworker under the canonical whole-definition gate set.",
+    "It does not claim external Astra parity.",
+    "It does not prove every target capability family or GUI breadth.",
+    "Clean-room reproduction of this exact integrated architecture on a distinct consequential mission remains the next frontier before population scaling."
+  ],
+  "supersedes_frontier": "canonical/reconciliation/SAME_IDENTITY_INTEGRATION_FRONTIER_20260927_V1.json"
+}
