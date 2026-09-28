@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_MAP_V1",
-  "status": "CANONICAL_TARGET_REFERENCE",
+  "status": "SUPERSEDED_AS_ACTIVE_TARGET__RETAINED_AS_HISTORICAL_CAPABILITY_SURFACE_SEED",
   "phase": "POST_EXISTENCE_CAPABILITY_EXPANSION",
   "p_real": 1,
   "purpose": "Define the capability surface to expand after the first real Superworker proof. This is not a benchmark suite and not a parity claim.",
@@ -102,5 +102,7 @@
   },
   "parity_status": "UNPROVEN",
   "superset_status": "UNPROVEN",
-  "promotion_claim": false
+  "promotion_claim": false,
+  "superseded_by": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
+  "supersession_reason": "Capability breadth/parity is not the terminal goal. Frontier capabilities are now processed as obsolescence targets: find verified equal-or-better capability through the fastest and cheapest realizable route."
 }
