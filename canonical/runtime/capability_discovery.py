@@ -28,6 +28,33 @@ GENERIC_DISCOVERY_TOKENS={
     "generate","code","image","text","save","output","input","convert",
     "process","program","utility","tool","data"
 }
+OPERATION_TOKENS={
+    "create","generate","render","resize","compress","compressed","decompress","decompressed",
+    "convert","transform","encode","decode","extract","archive","query","insert","update",
+    "delete","parse","scan","verify","validate","compare","calculate","compute","compile",
+    "build","export","import","merge","split","transcode","download","upload","search"
+}
+FORMAT_TOKENS={
+    "json","xml","csv","tsv","yaml","yml","html","pdf","png","jpg","jpeg","webp",
+    "gif","svg","zip","gzip","gz","tgz","tar","sqlite","sqlite3","db","dot","markdown","md"
+}
+CONSTRAINT_TOKENS={
+    "exact","exactly","primary","key","rows","row","columns","column","pixels","pixel",
+    "named","name","same","identical","order","count","utf","utf8","width","height"
+}
+RELATION_NOISE={
+    "at","whose","result","results","containing","contains","every","its","that","final",
+    "those","these","with","for","from","into","onto","of","by","using","as","to","and","or"
+}
+FORMAT_DOMAIN_HINTS={
+    "png":["image","graphics"],"jpg":["image","graphics"],"jpeg":["image","graphics"],
+    "webp":["image","graphics"],"gif":["image","graphics"],"svg":["image","graphics"],
+    "gzip":["compression","archive"],"gz":["compression","archive"],"tgz":["compression","archive"],
+    "zip":["compression","archive"],"tar":["archive"],
+    "sqlite":["database"],"sqlite3":["database"],"db":["database"],
+    "dot":["graph"],"json":["structured","data"],"xml":["structured","data"],
+    "csv":["tabular","data"],"tsv":["tabular","data"],"pdf":["document"]
+}
 PAID_MARKERS = ("payment", "usdc", "x402", "$", "paid", "billing")
 
 
@@ -50,34 +77,80 @@ def _semanticize_paths(text):
     return re.sub(pattern,repl,str(text or ""))
 
 
-def effect_queries(effect):
-    if not isinstance(effect, str) or not effect.strip():
+def effect_semantic_roles(effect):
+    """Extract a minimal role-separated effect representation.
+
+    This is intentionally small: it preserves distinctions that flat lexical
+    ranking destroyed without naming any supplier or benchmark.
+    """
+    if not isinstance(effect,str) or not effect.strip():
         raise DiscoveryFailure("EFFECT_REQUIRED")
     semantic=_semanticize_paths(effect)
-    tokens = [
-        t.lower() for t in re.split(r"[^A-Za-z0-9]+", semantic)
-        if len(t) >= 2 and t.lower() not in STOPWORDS
+    raw=[
+        t.lower() for t in re.split(r"[^A-Za-z0-9]+",semantic)
+        if len(t)>=2
     ]
-    low_information=set(GENERIC_DISCOVERY_TOKENS) | {
-        "those","these","exact","records","record","fields","field",
-        "values","value","same","identical","order","count","save"
+    operation=[]
+    fmt=[]
+    constraints=[]
+    domain=[]
+
+    def add(bucket,value):
+        value=str(value or "").lower()
+        if value and value not in bucket:
+            bucket.append(value)
+
+    for token in raw:
+        if token in OPERATION_TOKENS:
+            add(operation,token)
+        if token in FORMAT_TOKENS:
+            add(fmt,token)
+        if token in CONSTRAINT_TOKENS or token.isdigit():
+            add(constraints,token)
+
+    # Preserve domain nouns even when they were historically classed as
+    # "generic" (for example image). Exclude syntax, operations, formats and
+    # constraint vocabulary.
+    for token in raw:
+        if (
+            token in STOPWORDS or token in RELATION_NOISE
+            or token in OPERATION_TOKENS or token in FORMAT_TOKENS
+            or token in CONSTRAINT_TOKENS or token.isdigit()
+        ):
+            continue
+        add(domain,token)
+
+    # Format names carry domain knowledge that should not need package-name
+    # hints: a PNG is an image, gzip is compression/archive, SQLite is a DB.
+    for token in fmt:
+        for hint in FORMAT_DOMAIN_HINTS.get(token,[]):
+            add(domain,hint)
+
+    return {
+      "operation":operation[:4],
+      "domain":domain[:6],
+      "format":fmt[:4],
+      "constraints":constraints[:8],
     }
-    distinctive=[]
-    generic=[]
-    for token in tokens:
-        target=generic if token in low_information or token.isdigit() else distinctive
-        if token not in target:
-            target.append(token)
+
+
+def effect_queries(effect):
+    roles=effect_semantic_roles(effect)
     out=[]
-    source=distinctive if distinctive else generic
-    for token in source:
-        if token not in out:
-            out.append(token)
+    # Search intent is ordered by causal role. Constraints are retained in the
+    # IR but are not allowed to crowd operation/domain/format out of top-K
+    # catalog queries.
+    for role in ("operation","domain","format"):
+        for token in roles[role]:
+            if token not in out:
+                out.append(token)
+            if len(out)>=8:
+                return out
     if not out:
-        compact = re.sub(r"[^A-Za-z0-9]+", "", effect).lower()
+        compact=re.sub(r"[^A-Za-z0-9]+","",str(effect)).lower()
         if compact:
             out.append(compact)
-    return out[:6]
+    return out[:8]
 
 
 def _flatten_text(value):
@@ -103,6 +176,86 @@ def _lexical_variants(token):
             out.add(token+"ner")        # scan -> scanner
             out.add(token+"ning")       # scan -> scanning
     return out
+
+
+def _apt_supplier_role(name,description):
+    name=str(name or "").lower()
+    desc=str(description or "").lower()
+    blob=name+" "+desc
+    evidence=[]
+
+    if name.startswith(("lib","python3-","python-","ruby-","golang-","php-","php")):
+        evidence.append("LANGUAGE_LIBRARY_OR_BINDING")
+    if name.endswith(("-dev","-doc","-dbg","-prof")) or "documentation" in desc:
+        evidence.append("DEV_OR_DOCUMENTATION")
+    if any(x in blob for x in (" emacs","emacs "," vim"," editor mode"," major mode")):
+        evidence.append("EDITOR_EXTENSION")
+    if any(x in desc for x in (" backend","backend "," connectivity module"," plugin"," bindings"," binding ")):
+        evidence.append("BACKEND_PLUGIN_OR_BINDING")
+    if any(x in desc for x in (" dictionary"," fonts"," icons"," flags"," data files"," examples")):
+        evidence.append("DATA_ASSET")
+
+    if evidence:
+        return {"role":"AUXILIARY_OR_NON_DIRECT","evidence":sorted(set(evidence))}
+    return {"role":"DIRECT_EXECUTABLE_CANDIDATE","evidence":[]}
+
+
+def _candidate_role_alignment(name,description,roles):
+    blob=(str(name or "")+" "+str(description or "")).lower()
+    ordered=re.findall(r"[a-z0-9]+",blob)
+    tokens=set(ordered) | {
+        ordered[i]+ordered[i+1]
+        for i in range(len(ordered)-1)
+        if len(ordered[i])>=2 and len(ordered[i+1])>=2
+    }
+    out={}
+    for role in ("operation","domain","format"):
+        hits=[]
+        for term in roles.get(role,[]):
+            if any(v in tokens for v in _lexical_variants(term)):
+                hits.append(term)
+        out[role]=hits
+    return out
+
+
+def _score_apt_candidate(name,description,matched,roles):
+    ordered_name_tokens=re.findall(r"[a-z0-9]+",str(name or "").lower())
+    name_tokens=set(ordered_name_tokens) | {
+        ordered_name_tokens[i]+ordered_name_tokens[i+1]
+        for i in range(len(ordered_name_tokens)-1)
+    }
+    alignment=_candidate_role_alignment(name,description,roles)
+    supplier_role=_apt_supplier_role(name,description)
+
+    score=0
+    weights={"operation":26,"domain":30,"format":14}
+    for role,weight in weights.items():
+        for term in alignment[role]:
+            score += weight
+            if any(v in name_tokens for v in _lexical_variants(term)):
+                score += weight//2
+
+    # Keep lexical overlap as subordinate evidence, not the representation.
+    for term in matched:
+        if not any(term in roles.get(role,[]) for role in ("operation","domain","format")):
+            score += 2
+
+    if supplier_role["role"]=="DIRECT_EXECUTABLE_CANDIDATE":
+        score += 28
+        integration_friction=0
+    else:
+        score -= 48
+        integration_friction=3
+
+    lname=str(name or "").lower()
+    if lname.startswith(("python3-","python-","ruby-","golang-","php-","php")):
+        integration_friction=max(integration_friction,2)
+    if lname.startswith(("lib","librust-","libghc-")):
+        integration_friction=max(integration_friction,3)
+    if lname.endswith(("-dev","-doc","-dbg","-prof")):
+        integration_friction=max(integration_friction,4)
+
+    return score,integration_friction,supplier_role,alignment
 
 
 def normalize_server(entry, query):
@@ -256,6 +409,7 @@ def search_apt_packages(effect, limit=12):
             "queries":effect_queries(effect),"candidate_count":0,"candidates":[],
             "errors":[{"error":"APT_CACHE_UNAVAILABLE"}],"binding_performed":False,
         }
+    roles=effect_semantic_roles(effect)
     queries=effect_queries(effect)
     apt_queries=_apt_query_variants(queries)
     seen={}
@@ -297,40 +451,9 @@ def search_apt_packages(effect, limit=12):
             }
             if not matched:
                 continue
-            score=0
-            ordered_name_tokens=re.findall(r"[a-z0-9]+",name.lower())
-            name_tokens=set(ordered_name_tokens) | {
-                ordered_name_tokens[i]+ordered_name_tokens[i+1]
-                for i in range(len(ordered_name_tokens)-1)
-            }
-            for t in matched:
-                distinctive=t not in GENERIC_DISCOVERY_TOKENS
-                if t in name_tokens:
-                    score += 24 if distinctive else 6
-                else:
-                    score += 10 if distinctive else 2
-            # Integration friction matters more than word count. Standalone
-            # executables are usually cheaper to bind than language libraries.
-            lname=name.lower()
-            integration_friction=0
-            if lname.startswith(("python3-","ruby-","golang-","php-","php")):
-                integration_friction=2
-                score-=10
-            if lname.startswith(("lib","librust-","libghc-")):
-                integration_friction=3
-                score-=12
-            if name.endswith(("-dev","-doc","-dbg","-prof")):
-                integration_friction=max(integration_friction,4)
-                score-=8
-            if integration_friction==0:
-                score+=8
-            # Reward candidates that jointly cover multiple distinct pieces
-            # of the requested effect. A package matching both "decode" and
-            # "barcode" is more useful than one that merely mentions barcode.
-            if len(matched)>1:
-                score += 20*(len(matched)-1)
-            if lname in effect.lower():
-                score+=8
+            score,integration_friction,supplier_role,semantic_alignment=_score_apt_candidate(
+                name,description,matched,roles
+            )
             prior=seen.get(name)
             cand={
                 "discovery_source":"APT_CATALOG",
@@ -340,6 +463,9 @@ def search_apt_packages(effect, limit=12):
                 "matched_terms":sorted(matched),
                 "score":score,
                 "integration_friction":integration_friction,
+                "effect_semantic_roles":roles,
+                "supplier_role":supplier_role,
+                "semantic_role_alignment":semantic_alignment,
                 "required_secret_count":0,
                 "required_environment_count":0,
                 "zero_cost_eligible":True,
@@ -380,6 +506,7 @@ def search_apt_packages(effect, limit=12):
         "source":"APT_CATALOG",
         "source_url":None,
         "queries":queries,
+        "effect_semantic_roles":roles,
         "candidate_count":len(enriched),
         "candidates":enriched,
         "errors":errors,
