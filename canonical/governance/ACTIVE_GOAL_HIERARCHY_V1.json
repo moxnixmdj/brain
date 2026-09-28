@@ -5,10 +5,10 @@
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "active_capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
   "active_probe": null,
-  "probe_state": "COMMAND_MANPAGE_SEMANTICS_DIAGNOSTIC_COMPLETE_RECONCILED",
-  "current_parent_blocker": "EXECUTABLE_AND_MANPAGE_OPERATION_EVIDENCE_PROVEN__CURRENT_RUNTIME_DOES_NOT_CONSUME_IT_FOR_CANDIDATE_RANKING",
-  "next_required_action_class": "ONE_GENERIC_EXECUTABLE_SEMANTIC_EVIDENCE_REPAIR__ONE_FROZEN_REPLAY__THEN_RECONCILE",
-  "forbidden_local_frontier": "PACKAGE_HINTING__TASK_SPECIFIC_LITERALS__CONTRACT_PARSER_CHANGES__SECOND_REPAIR_WITHOUT_RECONCILIATION",
+  "probe_state": "FAILED_EXECUTABLE_SEMANTIC_REPAIRS_RECONCILED__BLOCKER_LEASE_GUARD_INSTALLING",
+  "current_parent_blocker": "DIRECT_EXECUTABLE_MANPAGE_CANDIDATE_GENERATION_NOT_YET_PROVEN__POST_ADMISSION_ENRICHMENT_FALSIFIED",
+  "next_required_action_class": "NO_MUTATION_DIRECT_EXECUTABLE_MANPAGE_CANDIDATE_GENERATION_DIAGNOSTIC__THEN_RECONCILE",
+  "forbidden_local_frontier": "POST_ADMISSION_RANKING_TWEAKS__PACKAGE_HINTING__TASK_SPECIFIC_LITERALS__SECOND_REPAIR_WITHOUT_NEW_DIAGNOSTIC",
   "progress_level_minimum": "CAPABILITY_TARGET",
   "probe_budget": {
     "repairs_used_on_active_probe": 0,
@@ -34,11 +34,17 @@
     "recurrence_count": 2
   },
   "last_falsified_repair": {
-    "repair_id": "TASK-SEMANTIC-CONJUNCTIVE-ROLE-V1",
-    "source_pr": 66,
+    "repair_id": "EXECUTABLE-SEMANTIC-EVIDENCE-POST-ADMISSION-REPAIRS",
+    "source_prs": [
+      72,
+      73
+    ],
     "merged": false,
-    "workflow_run_id": 36461774649,
-    "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_TASK_SEMANTIC_CONJUNCTIVE_ROLE_V1_FALSIFICATION_RECONCILIATION.json"
+    "workflow_run_ids": [
+      36468338181,
+      36471956894
+    ],
+    "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EXECUTABLE_SEMANTIC_REPAIRS_FALSIFICATION_RECONCILIATION_V1.json"
   },
   "completed_candidate_diagnostic": {
     "diagnostic_id": "EXECUTABLE-CANDIDATE-DIAGNOSTIC-001",
@@ -54,5 +60,18 @@
     "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_COMMAND_MANPAGE_SEMANTICS_DIAGNOSTIC_001_RECONCILIATION.json",
     "coverage_improved_fraction": 1,
     "generic_repair_authorized": true
+  },
+  "duplicate_execution_control": {
+    "status": "INSTALLING",
+    "regression_prs": [
+      72,
+      73
+    ],
+    "lease_key_fields": [
+      "canonical_generation",
+      "capability_target",
+      "causal_blocker",
+      "action_kind"
+    ]
   }
 }
