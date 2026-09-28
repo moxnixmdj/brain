@@ -34,7 +34,8 @@ jobs:
             echo "head=pr-head" >> "$GITHUB_OUTPUT"
             git checkout --detach pr-head
           else
-            BASE="$(git rev-parse HEAD^)"
+            git fetch origin main
+            BASE="$(git merge-base origin/main HEAD)"
             echo "base=$BASE" >> "$GITHUB_OUTPUT"
             echo "head=HEAD" >> "$GITHUB_OUTPUT"
           fi
