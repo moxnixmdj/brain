@@ -70,12 +70,12 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Add the minimum generic structured semantic-role representation needed to distinguish requested operation/domain/format/constraints and direct executable supplier role from auxiliary topical matches, then replay the frozen diagnostic once.",
-    "selection_metric": "EXACT_EXECUTABLE_TOP_K_RECALL_AND_ROLE_PRECISION_GAIN_PER_WALL_CLOCK_TIME",
-    "exact_blocker": "STRUCTURED_EFFECT_AND_CANDIDATE_TOOL_ROLE_REPRESENTATION_MISSING",
-    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_SEMANTIC_ROLE_DIAGNOSTIC_001_RECONCILIATION.json",
-    "repair_status": "ONE_GENERIC_SEMANTIC_ROLE_IR_REPAIR_AUTHORIZED",
-    "prohibition": "NO_FLAT_WEIGHT_TWEAK__NO_PACKAGE_HINTS__NO_CONTRACT_PARSER_CHANGES__NO_PROBE_SPECIFIC_EXCEPTIONS"
+    "objective": "Separate task/control semantics from payload/schema/example content and require essential operation/domain compatibility before relevance scoring, then validate on fresh orthogonal unseen effects.",
+    "selection_metric": "FRESH_UNSEEN_EXECUTABLE_SUPPLIER_RECALL_AND_ESSENTIAL_ROLE_PRECISION_PER_WALL_CLOCK_TIME",
+    "exact_blocker": "TASK_INSTRUCTION_VS_PAYLOAD_SCHEMA_SEGMENTATION_AND_CONJUNCTIVE_ROLE_COMPATIBILITY_NOT_YET_PROVEN",
+    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_SEMANTIC_ROLE_IR_V1_FALSIFICATION_RECONCILIATION.json",
+    "repair_status": "ONE_REFINED_GENERIC_REPAIR_ELIGIBLE_FROM_CROSS_PROBE_RECURRENCE",
+    "prohibition": "NO_REUSE_OF_EXHAUSTED_FROZEN_REPLAY__NO_PACKAGE_HINTS__NO_CONTRACT_PARSER_CHANGES__NO_FLAT_WEIGHT_TWEAK"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
