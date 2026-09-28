@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "RUN-COMMAND-MANPAGE-SEMANTICS-DIAGNOSTIC-001",
-  "status": "PROPOSED",
+  "status": "COMPLETE_RECONCILED",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
@@ -18,5 +18,12 @@
   "probe_specific_literals": [],
   "stop_condition": "Measure command-name versus manpage semantic coverage for four already-surfaced viable supplier families, then reconcile. No runtime mutation or candidate execution.",
   "governance_change": false,
-  "weakens_existing_guard": false
+  "weakens_existing_guard": false,
+  "observed_result": {
+    "workflow_run_id": 36467319278,
+    "coverage_improved_fraction": 1,
+    "high_semantic_coverage_fraction": 0.75,
+    "artifact_id": 10989509842,
+    "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_COMMAND_MANPAGE_SEMANTICS_DIAGNOSTIC_001_RECONCILIATION.json"
+  }
 }
