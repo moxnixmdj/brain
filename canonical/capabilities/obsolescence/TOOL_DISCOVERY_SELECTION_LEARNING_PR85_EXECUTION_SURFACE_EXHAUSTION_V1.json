@@ -50,8 +50,8 @@
     },
     {
       "surface": "Render",
-      "status": "REJECTED_WRITE_FORBIDDEN_BEFORE_RESOURCE_CREATION",
-      "evidence": "Current API schema explicitly exposes plan=free and the sole workspace has no existing services. An explicit plan=free web-service creation attempt against the PR85 branch was rejected HTTP 403 before any resource was created. Incremental spend remained $0."
+      "status": "REJECTED_PAYMENT_INFORMATION_REQUIRED_BEFORE_FREE_RESOURCE_CREATION",
+      "evidence": "Fresh failure-class-changing attempt used Render's explicit plan=free against public seed repo render-examples/flask-hello-world, with exact PR85 bytes intended for hash-verified injection at build time. Render rejected creation with HTTP 402: Payment information is required. No service/resource was created and incremental spend remained $0."
     },
     {
       "surface": "Railway anonymous VM",
@@ -81,7 +81,7 @@
     "runtime_promotion_authorized": false,
     "repair_merge_authorized": false
   },
-  "only_remaining_truth_transition": "Execute the frozen 3-case gate on exact PR85 bytes with a live apt-file Contents cache at verified $0; then reconcile PASS/FAIL before any further repair. GitHub-hosted Actions is now rejected as an account-level pre-step failure class.",
+  "only_remaining_truth_transition": "Execute the frozen 3-case gate on exact PR85 bytes with a live apt-file Contents cache at verified $0; then reconcile PASS/FAIL before any further repair. GitHub-hosted Actions has account-level pre-step failure; Render requires payment information before even a free resource.",
   "anti_drift": [
     "Do not retry GitHub Actions until its pre-step failure class changes.",
     "Do not retry Brainbase task execution while account allocation remains zero.",
