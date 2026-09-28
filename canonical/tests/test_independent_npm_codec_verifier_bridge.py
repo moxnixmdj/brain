@@ -51,6 +51,7 @@ class IndependentNpmVerifierBridgeTests(unittest.TestCase):
             self.assertEqual(req["agent_id"],"SUPERWORKER-UNIFIED-1")
             self.assertEqual(req["task_id"],"SI-REAL-UBJSON-SNAPSHOT-001")
             self.assertIn("registry.npmjs.org/-/v1/search",req["payload"]["url"])
+            self.assertIn("text=ubjson",req["payload"]["url"])
 
 
     def test_materializes_integrity_verified_dependency_closure(self):
