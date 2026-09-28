@@ -70,12 +70,8 @@ def _resolve_apt_candidate_name(name):
         return None
 
 
-def _semantic_verifier_queries(goal):
-    """Generate bounded verifier-role queries from the requested effect.
-
-    The verifier should be discovered by what it must *do*, not by a package
-    name. Progressively broaden while preserving the distinctive target nouns.
-    """
+def _semantic_verifier_terms(goal):
+    """Return bounded verifier-role terms derived only from the target effect."""
     raw=[
         t for t in capability_discovery.effect_queries(goal)
         if t not in capability_discovery.GENERIC_DISCOVERY_TOKENS
@@ -88,69 +84,128 @@ def _semantic_verifier_queries(goal):
     distinctive=[t for t in raw if t not in producer_words]
     if not distinctive:
         distinctive=list(raw)
-    nouns=distinctive[:4]
-    queries=[]
-    def add(text):
-        text=" ".join(str(text).split()).strip()
-        if text and text not in queries:
-            queries.append(text)
+    return distinctive[:4]
+
+
+def _semantic_verifier_queries(goal):
+    """Compatibility/evidence view of the bounded role-conditioned search."""
+    nouns=_semantic_verifier_terms(goal)
     joined=" ".join(nouns)
-    roles=("decode","read","scan","verify")
-    for role in roles:
-        add((role+" "+joined).strip())
-    # Broaden one layer at a time using only terms derived from the goal.
-    if len(nouns)>1:
-        shorter=" ".join(nouns[:2])
-        for role in roles:
-            add((role+" "+shorter).strip())
-    for noun in nouns[:3]:
-        for role in ("decode","read","scan"):
-            add((role+" "+noun).strip())
-        for agent in ("decoder","reader","scanner"):
-            add((noun+" "+agent).strip())
-    return queries[:18]
+    out=[]
+    for role in ("decode","read","scan","verify"):
+        q=(role+" "+joined).strip()
+        if q and q not in out:
+            out.append(q)
+    return out
 
 
 def _semantic_verifier_query(goal):
-    # Compatibility helper for evidence fields/tests.
     queries=_semantic_verifier_queries(goal)
     return queries[0] if queries else "decode image"
 
 
-def _merge_verifier_discovery(goal, limit_per_query=24):
+def _package_family_tokens(name):
+    """Derive conservative ecosystem-family tokens from a package name.
+
+    This lets a semantic library hit reveal sibling CLI packages without any
+    task- or vendor-specific package table.
+    """
+    value=str(name or "").strip().lower()
+    if not value:
+        return []
+    parts=[p for p in re.split(r"[-_.]+",value) if p]
+    noise={
+        "lib","libs","library","libraries","dev","devel","doc","docs","dbg",
+        "common","utils","tools","tool","cli","bin","java","python","python3",
+        "ruby","perl","php","golang","rust","node","js","core","runtime"
+    }
+    out=[]
+    # Strip common glued prefixes such as libFOO and python3FOO.
+    glued=re.sub(r"^(?:lib|python3|python|ruby|perl|nodejs?)","",value)
+    glued=re.split(r"[-_.0-9]+",glued)[0]
+    if len(glued)>=3 and glued not in noise:
+        out.append(glued)
+    for p in parts:
+        p=re.sub(r"\d+$","",p)
+        if len(p)>=3 and p not in noise and p not in out:
+            out.append(p)
+    return out[:3]
+
+
+def _merge_verifier_discovery(goal, limit_per_query=40):
+    """Search once by semantic roles, then cheaply widen through package families.
+
+    The previous implementation reran a full APT search/enrichment cycle for
+    many near-duplicate queries. That is correct but catastrophically slow.
+    This implementation performs one aggregated semantic scan, then uses the
+    strongest metadata hits to discover sibling packages in the same ecosystem
+    family.
+    """
+    nouns=_semantic_verifier_terms(goal)
+    seed_effect=" ".join(["decode","read","scan","verify"]+nouns)
+    seed=capability_discovery.search_apt_packages(
+        seed_effect,limit=max(24,min(int(limit_per_query),50))
+    )
     merged={}
-    searches=[]
-    for rank,query in enumerate(_semantic_verifier_queries(goal)):
-        result=capability_discovery.search_apt_packages(query,limit=limit_per_query)
+    searches=[{
+      "stage":"SEMANTIC_ROLE_SCAN",
+      "query":seed_effect,
+      "candidate_count":seed.get("candidate_count",0),
+      "errors":seed.get("errors",[]),
+    }]
+
+    def add(cand, stage, family=None):
+        name=str(cand.get("name") or "")
+        if not name:
+            return
+        x=dict(cand)
+        x["verifier_discovery_stage"]=stage
+        if family:
+            x["verifier_package_family"]=family
+        prior=merged.get(name)
+        if prior is None or float(x.get("score",0))>float(prior.get("score",0)):
+            merged[name]=x
+
+    seed_candidates=seed.get("candidates",[]) or []
+    for cand in seed_candidates:
+        add(cand,"SEMANTIC_ROLE_SCAN")
+
+    # Expand only a few high-signal families. Libraries and bindings are useful
+    # discovery evidence even when they are not themselves executable verifiers.
+    families=[]
+    for cand in sorted(
+        seed_candidates,
+        key=lambda x:(-float(x.get("score",0)),str(x.get("name","")))
+    )[:16]:
+        for token in _package_family_tokens(cand.get("name")):
+            if token not in families:
+                families.append(token)
+            if len(families)>=6:
+                break
+        if len(families)>=6:
+            break
+
+    for family in families:
+        result=capability_discovery.search_apt_packages(family,limit=16)
         searches.append({
-          "query":query,
+          "stage":"PACKAGE_FAMILY_EXPANSION",
+          "query":family,
           "candidate_count":result.get("candidate_count",0),
           "errors":result.get("errors",[]),
         })
         for cand in result.get("candidates",[]) or []:
-            name=str(cand.get("name") or "")
-            if not name:
-                continue
-            x=dict(cand)
-            x["verifier_role_query"]=query
-            x["verifier_role_query_rank"]=rank
-            # Earlier, more specific queries should win when package metadata
-            # quality is otherwise comparable.
-            x["score"]=float(x.get("score",0)) + max(0,20-rank)
-            prior=merged.get(name)
-            if prior is None or float(x.get("score",0))>float(prior.get("score",0)):
-                merged[name]=x
+            add(cand,"PACKAGE_FAMILY_EXPANSION",family)
+
     candidates=sorted(
         merged.values(),
         key=lambda x:(
             int(x.get("integration_friction",99)),
             -float(x.get("score",0)),
-            int(x.get("verifier_role_query_rank",999)),
+            0 if x.get("verifier_discovery_stage")=="PACKAGE_FAMILY_EXPANSION" else 1,
             str(x.get("name","")),
         )
     )
     return {"queries":searches,"candidates":candidates}
-
 
 
 def _png_dimensions(path):
