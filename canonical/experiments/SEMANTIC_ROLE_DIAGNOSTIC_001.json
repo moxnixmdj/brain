@@ -1,0 +1,144 @@
+{
+  "schema": "PROJECT_BRAIN_SEMANTIC_ROLE_DIAGNOSTIC_V1",
+  "diagnostic_id": "SEMANTIC-ROLE-DIAGNOSTIC-001",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "status": "FROZEN_READY",
+  "source_evidence": {
+    "workflow_run_id": 36452301655,
+    "artifact_id": 10984191489,
+    "artifact_digest": "sha256:2bc1fa978d4bae263ab6a6d3a4c7db39d787e41d42b4f76d713f7366cb4ef0fa"
+  },
+  "mutation_policy": "NO_RUNTIME_MUTATION__NO_INSTALL__NO_EXECUTION",
+  "role_schema": [
+    "OPERATION",
+    "DOMAIN",
+    "FORMAT",
+    "CONSTRAINT",
+    "CANDIDATE_ROLE"
+  ],
+  "hypotheses": [
+    "OPERATION_AND_DOMAIN_SHOULD_DOMINATE_FORMAT_ONLY_OVERLAP",
+    "CANDIDATE_PRODUCER_ROLE_SHOULD_OUTRANK_MODE_BINDING_BACKEND_DATA_OR_DOC_ROLES",
+    "CONSTRAINT_TOKENS_SHOULD_NOT_CREATE_DISCOVERY_RELEVANCE_BY_THEMSELVES"
+  ],
+  "cases": [
+    {
+      "id": "SQLITE",
+      "requested_roles": {
+        "OPERATION": [
+          "create"
+        ],
+        "DOMAIN": [
+          "sqlite",
+          "database"
+        ],
+        "FORMAT": [
+          "sqlite"
+        ],
+        "CONSTRAINT": [
+          "table",
+          "rows"
+        ]
+      },
+      "viable_candidate": {
+        "name": "sqlite3",
+        "metadata": "Command line interface for SQLite 3",
+        "CANDIDATE_ROLE": "PRODUCER_TOOL"
+      },
+      "misleading_top_candidate": {
+        "name": "elpa-emacsql-sqlite",
+        "metadata": "high level SQL database frontend for Emacs (SQLite backend)",
+        "CANDIDATE_ROLE": "MODE_BINDING_BACKEND"
+      }
+    },
+    {
+      "id": "IMAGE_RESIZE",
+      "requested_roles": {
+        "OPERATION": [
+          "resize"
+        ],
+        "DOMAIN": [
+          "image"
+        ],
+        "FORMAT": [
+          "png"
+        ],
+        "CONSTRAINT": [
+          "64",
+          "pixels"
+        ]
+      },
+      "viable_candidate": {
+        "name": "imagemagick",
+        "metadata": "image manipulation programs -- binaries",
+        "CANDIDATE_ROLE": "PRODUCER_TOOL"
+      },
+      "misleading_top_candidate": {
+        "name": "famfamfam-flag-png",
+        "metadata": "Free collection of countries' flags",
+        "CANDIDATE_ROLE": "DATA_ASSET"
+      }
+    },
+    {
+      "id": "GRAPH_RENDER",
+      "requested_roles": {
+        "OPERATION": [
+          "render",
+          "draw"
+        ],
+        "DOMAIN": [
+          "graph",
+          "graphviz"
+        ],
+        "FORMAT": [
+          "dot",
+          "png"
+        ],
+        "CONSTRAINT": []
+      },
+      "viable_candidate": {
+        "name": "graphviz",
+        "metadata": "rich set of graph drawing tools",
+        "CANDIDATE_ROLE": "PRODUCER_TOOL"
+      },
+      "misleading_top_candidate": {
+        "name": "elpa-graphviz-dot-mode",
+        "metadata": "Emacs mode for the dot-language used by graphviz.",
+        "CANDIDATE_ROLE": "EDITOR_MODE"
+      }
+    },
+    {
+      "id": "GZIP",
+      "requested_roles": {
+        "OPERATION": [
+          "compress",
+          "compressed"
+        ],
+        "DOMAIN": [
+          "compression"
+        ],
+        "FORMAT": [
+          "gzip",
+          "gz"
+        ],
+        "CONSTRAINT": [
+          "decompressed",
+          "exact"
+        ]
+      },
+      "viable_candidate": {
+        "name": "gzip",
+        "metadata": "GNU compression utilities",
+        "CANDIDATE_ROLE": "PRODUCER_TOOL"
+      },
+      "misleading_top_candidate": {
+        "name": "at",
+        "metadata": "Delayed job execution and batch processing",
+        "CANDIDATE_ROLE": "UNRELATED_TOOL"
+      },
+      "note": "Original rank 1 was gztool and may itself be a viable producer; this case tests only the syntactic-noise candidate `at`, not whether gzip must rank first."
+    }
+  ],
+  "promotion_authorized": false,
+  "required_next_action": "RECONCILE_ONLY"
+}
