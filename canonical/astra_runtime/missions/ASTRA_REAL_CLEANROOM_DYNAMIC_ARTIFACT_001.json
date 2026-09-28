@@ -1,0 +1,27 @@
+{
+  "constraints": {
+    "branch_value_unknown_before_execution": true,
+    "fresh_mission_identity": true,
+    "incremental_spend_usd": 0,
+    "manual_controller_actions": false,
+    "originating_mission_must_remain_byte_identical": true,
+    "user_device_required": false,
+    "val_town_forbidden": true
+  },
+  "goal": "Using a real rendered browser, open https://httpbin.org/uuid, save a screenshot to canonical/astra_runtime/tmp/CLEANROOM2_UUID.png, and save the rendered result to canonical/astra_runtime/tmp/CLEANROOM2_UUID.json. Read the UUID from that live result. If its first hexadecimal character is one of a,b,c,d,e,f, generate a QR code image for the observed UUID and save it to canonical/astra_runtime/artifacts/CLEANROOM2_UUID_QR.png; otherwise generate a Code 128 barcode image for the same observed UUID and save it to canonical/astra_runtime/artifacts/CLEANROOM2_UUID_BARCODE.png. Finally independently verify that the artifact selected by the live branch decodes to the observed UUID.",
+  "mission_id": "ASTRA-REAL-CLEANROOM-DYNAMIC-ARTIFACT-001",
+  "purpose": "Fresh clean-room reproduction mission for a second integrated worker identity: observe an unpredictable live UUID in a rendered browser, select a verified image-generation capability at runtime, create the selected artifact, and independently decode it back to the observed value.",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "steps": [
+    {
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "id": "execute-cleanroom-runtime-choice",
+      "max_controller_actions": 20,
+      "verify": {
+        "text": "COMPOUND_GOAL_COMPLETE",
+        "type": "stdout_contains"
+      }
+    }
+  ]
+}
