@@ -140,8 +140,11 @@ def effect_queries(effect):
     # Search intent is ordered by causal role. Constraints are retained in the
     # IR but are not allowed to crowd operation/domain/format out of top-K
     # catalog queries.
-    for role in ("operation","domain","format"):
+    weak_operations={"create","generate","build","export","import","download","upload"}
+    for role in ("format","domain","operation"):
         for token in roles[role]:
+            if role=="operation" and token in weak_operations and out:
+                continue
             if token not in out:
                 out.append(token)
             if len(out)>=8:
