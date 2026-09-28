@@ -82,6 +82,13 @@ def _help_text(probe, goal):
     _,_,_,exe,text=choices[0]
     return str(exe),text
 
+def _option_flag(line):
+    m=re.search(r"(?:^|\s)(-[A-Za-z0-9])(?:\s|,)",line)
+    if m:
+        return m.group(1)
+    m=re.search(r"(?:^|\s)(--[A-Za-z0-9][A-Za-z0-9-]*)",line)
+    return m.group(1) if m else None
+
 def infer_contract(probe, goal):
     exe,help_text=_help_text(probe,goal)
     lines=help_text.splitlines()
@@ -106,10 +113,14 @@ def infer_contract(probe, goal):
     output_line=None
     for line in lines:
         ll=line.lower()
-        if "--output" in ll or "output file" in ll or "write image to" in ll:
-            m=re.search(r"(?:^|\s)(-[A-Za-z0-9])(?:\s|,)",line)
-            if m:
-                output_flag=m.group(1); output_line=line.strip(); break
+        if (
+            "--output" in ll or "--outfile" in ll
+            or "output file" in ll or "output filename" in ll
+            or "write image to" in ll or "write data to" in ll
+        ):
+            flag=_option_flag(line)
+            if flag:
+                output_flag=flag; output_line=line.strip(); break
     if output_flag is None:
         raise ContractInferenceFailure("CLI_OUTPUT_FLAG_UNRESOLVED")
 
@@ -123,10 +134,16 @@ def infer_contract(probe, goal):
     if positional is None:
         for line in lines:
             ll=line.lower()
-            if "--data" in ll or "string to encode" in ll or "data to encode" in ll:
-                m=re.search(r"(?:^|\s)(-[A-Za-z0-9])(?:\s|,)",line)
-                if m:
-                    input_flag=m.group(1); break
+            if (
+                "--data" in ll or "--text" in ll or "--message" in ll
+                or "--content" in ll or "--barcode" in ll
+                or "string to encode" in ll or "data to encode" in ll
+                or "input data" in ll or "message text" in ll
+                or "barcode text" in ll
+            ):
+                flag=_option_flag(line)
+                if flag:
+                    input_flag=flag; break
     if positional is None and input_flag is None:
         if "standard input" in lower_help or "stdin" in lower_help:
             stdin_text=True
@@ -134,6 +151,19 @@ def infer_contract(probe, goal):
             raise ContractInferenceFailure("CLI_TEXT_INPUT_UNRESOLVED")
 
     selector=[]
+    # If the selected CLI exposes a generic output-format selector, bind the
+    # requested file suffix explicitly. This is supplier-neutral and avoids
+    # silently relying on a tool's default format.
+    format_line=None
+    for line in lines:
+        ll=line.lower()
+        if "--format" in ll and wanted and wanted in ll:
+            flag=_option_flag(line)
+            if flag:
+                selector.extend([flag,wanted.upper()])
+                format_line=line.strip()
+                break
+
     normalized_goal=re.sub(r"[^a-z0-9]+","",str(goal).lower())
     if "code128" in normalized_goal:
         barcode_flag=None
@@ -180,6 +210,7 @@ def infer_contract(probe, goal):
         "stdin_text":stdin_text,
         "input_transport":("STDIN_TEXT" if stdin_text else ("FLAG" if input_flag else "POSITIONAL")),
         "selector":selector,
+        "format_selector_line":format_line,
         "requested_suffix":suffix,
         "probe_package":probe.get("package"),
         "probe_version":probe.get("version"),
