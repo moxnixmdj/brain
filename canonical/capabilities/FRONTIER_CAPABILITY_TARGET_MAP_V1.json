@@ -1,0 +1,106 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_MAP_V1",
+  "status": "CANONICAL_TARGET_REFERENCE",
+  "phase": "POST_EXISTENCE_CAPABILITY_EXPANSION",
+  "p_real": 1,
+  "purpose": "Define the capability surface to expand after the first real Superworker proof. This is not a benchmark suite and not a parity claim.",
+  "terminal_goal": "Build a reproducible model-independent Superworker system that matches and then exceeds the useful real-world capability surface of frontier agents/models through verified composition of models, tools, search, software, solvers, experiments, memory, and execution.",
+  "reference_policy": {
+    "frontier_systems_are": "CAPABILITY_REFERENCES_ONLY",
+    "implementation_similarity_required": false,
+    "specific_provider_required": false,
+    "comparison_basis": [
+      "correctness",
+      "real_external_effect_quality",
+      "autonomy",
+      "robustness_and_recovery",
+      "generalization",
+      "latency",
+      "incremental_cost",
+      "verifiability"
+    ]
+  },
+  "phase_order": [
+    "CLEANROOM_REPRODUCTION",
+    "CAPABILITY_BREADTH",
+    "FRONTIER_COMPARABILITY",
+    "CAPABILITY_SUPERSET",
+    "EFFICIENCY",
+    "POPULATION_SCALING"
+  ],
+  "immediate_frontier": {
+    "id": "CLEANROOM_REPRODUCTION_ON_DISTINCT_CONSEQUENTIAL_MISSION",
+    "objective": "Instantiate a fresh worker from canonical state, without hidden mutable execution state from SUPERWORKER-UNIFIED-1, and independently verify completion of a distinct consequential mission.",
+    "reason": "This distinguishes a reproducible architecture from one successful specimen."
+  },
+  "capability_families": [
+    {
+      "id": "END_TO_END_AUTONOMY",
+      "target": "Take consequential unfamiliar goals from intent to verified external completion with minimal human intervention."
+    },
+    {
+      "id": "SOFTWARE_ENGINEERING",
+      "target": "Understand unfamiliar codebases, diagnose defects, implement changes, test realistically, and iterate to verified working software."
+    },
+    {
+      "id": "RESEARCH_AND_KNOWLEDGE_ACQUISITION",
+      "target": "Detect knowledge gaps, retrieve authoritative/current information, judge sources, synthesize supported conclusions, and use them during execution."
+    },
+    {
+      "id": "SCIENCE_MATH_AND_TECHNICAL_REASONING",
+      "target": "Solve difficult technical/scientific problems using reasoning, computation, tools, experiments, and verification."
+    },
+    {
+      "id": "UNKNOWN_DOMAIN_ADAPTATION",
+      "target": "Enter an unfamiliar domain, learn its ontology and tools, and become effective without a human teaching the domain first."
+    },
+    {
+      "id": "DYNAMIC_TOOL_DISCOVERY_AND_LEARNING",
+      "target": "Discover, select, learn, and correctly use the best available library, API, application, solver, model, or tool at runtime."
+    },
+    {
+      "id": "COMPUTER_BROWSER_AND_GUI_ACTION",
+      "target": "Operate rendered interfaces, browsers, files, dialogs, and arbitrary software when structured APIs are absent or insufficient."
+    },
+    {
+      "id": "DATA_ANALYSIS_AND_ARTIFACT_PRODUCTION",
+      "target": "Analyze data and produce immediately usable code, documents, spreadsheets, presentations, reports, or other artifacts with verified correctness."
+    },
+    {
+      "id": "LONG_HORIZON_CONTINUITY_AND_RECOVERY",
+      "target": "Preserve goals, evidence, state, failed hypotheses, and progress across interruption, context loss, process death, and provider loss."
+    },
+    {
+      "id": "JUDGMENT_SCOPE_AND_AMBIGUITY",
+      "target": "Resolve routine ambiguity, respect boundaries, avoid unsupported assumptions, and ask for human input only when outcome-critical."
+    },
+    {
+      "id": "MULTI_CAPABILITY_COMPOSITION",
+      "target": "Compose reasoning, research, tools, software, memory, external actions, and verification into one causal machine."
+    },
+    {
+      "id": "INDEPENDENT_VERIFICATION_AND_SELF_CORRECTION",
+      "target": "Actively falsify hypotheses, verify actual external effects, use independent checks where needed, and correct course from evidence."
+    },
+    {
+      "id": "MEMORY_SKILL_COMPILATION_AND_REUSE",
+      "target": "Turn verified discoveries and successful procedures into reusable canonical capability that reduces future work without becoming brittle."
+    },
+    {
+      "id": "EFFICIENCY",
+      "target": "Minimize wall-clock latency and compute/cost while preserving correctness and verification."
+    }
+  ],
+  "blocker_policy": "REAL_MISSION_FIRST__FIRST_CAUSAL_BLOCKER__SEARCH_REUSE_BEFORE_INVENTION__MINIMAL_GENERIC_REPAIR__REPLAY__VERIFY__INHERIT",
+  "scaling_gate": {
+    "allowed_after": [
+      "CLEANROOM_REPRODUCTION_VERIFIED",
+      "MINIMUM_CROSS_DOMAIN_BREADTH_VERIFIED"
+    ],
+    "primary_metric": "VERIFIED_CONSEQUENTIAL_OUTCOMES_PER_WALL_CLOCK_TIME",
+    "worker_count_is_progress": false
+  },
+  "parity_status": "UNPROVEN",
+  "superset_status": "UNPROVEN",
+  "promotion_claim": false
+}
