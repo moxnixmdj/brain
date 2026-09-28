@@ -1,0 +1,11 @@
+{
+  "agent_id": "SUPERWORKER-UNIFIED-2",
+  "checkpoint_before_runtime_once": true,
+  "incremental_spend_usd": 0,
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_REAL_CLEANROOM_DYNAMIC_ARTIFACT_001.json",
+  "mission_sha256": "b1f0e76d8571895d68c069e0c417c560bd05eb6e79e9bc4eca9982c6a6513c52",
+  "prerequisites": [],
+  "priority": 100,
+  "schema": "PROJECT_BRAIN_SAME_IDENTITY_TASK_V1",
+  "task_id": "SI-REAL-CLEANROOM-DYNAMIC-ARTIFACT-001"
+}
