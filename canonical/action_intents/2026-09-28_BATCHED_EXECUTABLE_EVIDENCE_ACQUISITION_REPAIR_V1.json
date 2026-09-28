@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "BATCHED-EXECUTABLE-EVIDENCE-ACQUISITION-REPAIR-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "BATCHED-EXECUTABLE-EVIDENCE-FRESH-VALIDATION-001",
+  "causal_blocker": "EVIDENCE_ACQUISITION_USES_REPEATED_SLOW_APT_FILE_REGEX_SCANS_AND_EXCESSIVE_REMOTE_MANPAGE_FANOUT__BATCH_LITERAL_MULTI_PATTERN_ACQUISITION_AND_PROGRESSIVE_CACHED_ENRICHMENT_NOT_YET_INTEGRATED",
+  "action_kind": "GENERIC_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::EVIDENCE_ACQUISITION_USES_REPEATED_SLOW_APT_FILE_REGEX_SCANS_AND_EXCESSIVE_REMOTE_MANPAGE_FANOUT__BATCH_LITERAL_MULTI_PATTERN_ACQUISITION_AND_PROGRESSIVE_CACHED_ENRICHMENT_NOT_YET_INTEGRATED::GENERIC_REPAIR",
+  "expected_parent_frontier_change": "Replace repeated regex apt-file scans and blanket manpage fanout with one multi-pattern literal apt-file scan, in-process executable filtering, and bounded cached semantic enrichment; then test the frozen fresh unseen gate exactly once.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR70",
+    "PR79",
+    "PR82",
+    "PR83",
+    "PR84"
+  ],
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": true,
+  "probe_specific_literals": [],
+  "stop_condition": "Exactly one generic repair is implemented. The frozen fresh gate is run once when a reliable zero-cost execution surface is available; regardless of result, reconcile before any second repair.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
