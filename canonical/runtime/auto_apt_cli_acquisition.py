@@ -12,6 +12,7 @@ import apt_cli_probe
 import capability_discovery
 import cli_contract_inference
 import goal_compiler
+from bound_capabilities import cli_command
 
 
 class AutoAcquisitionFailure(RuntimeError):
@@ -184,6 +185,7 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
       "attempts":[]
     }
     candidate=probe=contract=None
+    selected_preflight=None
     for cand in candidates:
         attempt={"supplier":cand}
         try:
@@ -206,8 +208,48 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
             diagnostic["attempts"].append(attempt)
             diag_path.write_text(json.dumps(diagnostic,indent=2,sort_keys=True)+"\n",encoding="utf-8")
             continue
-        attempt["status"]="CONTRACT_ACCEPTED"
         attempt["contract"]=ct
+        # A syntactically plausible contract is not enough to win the race.
+        # Execute the candidate once against a disposable output path. A
+        # crashing or non-effectful producer is falsified and the next
+        # discovered candidate is tried automatically.
+        try:
+            bound_inputs=_bind_contract_inputs(goal,root,ct)
+            target=pathlib.PurePosixPath(bound_inputs["output_path"])
+            suffix=target.suffix
+            preflight_rel=(
+                "canonical/astra_runtime/tmp/"
+                +_slug(mission_id)+"__"+_slug(str(cand.get("name") or "candidate"))
+                +"__PREFLIGHT"+suffix
+            )
+            preflight_inputs=dict(bound_inputs)
+            preflight_inputs["output_path"]=preflight_rel
+            preflight_args={
+              "argv":_render(ct["argv_template"],preflight_inputs),
+              "output_path":_render(ct["output_path_template"],preflight_inputs),
+              "output_prefix_hex":ct["output_prefix_hex"],
+              "output_text_utf8":bool(ct.get("output_text_utf8",False)),
+              "timeout_s":int(ct.get("timeout_s",60)),
+            }
+            if ct.get("stdin_text_template") is not None:
+                preflight_args["stdin_text"]=_render(ct["stdin_text_template"],preflight_inputs)
+            preflight_path=(root/preflight_rel).resolve()
+            if preflight_path.is_file():
+                preflight_path.unlink()
+            observed=cli_command.run(preflight_args,root)
+            attempt["producer_preflight"]=observed
+            attempt["status"]="EFFECT_PREFLIGHT_VERIFIED"
+            selected_preflight=observed
+            try:
+                preflight_path.unlink()
+            except FileNotFoundError:
+                pass
+        except Exception as exc:
+            attempt["status"]="EFFECT_PREFLIGHT_FAILED"
+            attempt["error"]=type(exc).__name__+":"+str(exc)
+            diagnostic["attempts"].append(attempt)
+            diag_path.write_text(json.dumps(diagnostic,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+            continue
         diagnostic["attempts"].append(attempt)
         candidate,probe,contract=cand,pr,ct
         break
@@ -216,10 +258,11 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
         diag_path.write_text(json.dumps(diagnostic,indent=2,sort_keys=True)+"\n",encoding="utf-8")
         summary=[{"name":a.get("supplier",{}).get("name"),"status":a.get("status"),"error":a.get("error")} for a in diagnostic["attempts"]]
         raise AutoAcquisitionFailure("NO_COMPATIBLE_APT_CLI_CONTRACT",json.dumps(summary,sort_keys=True)[:3000])
-    diagnostic["status"]="CONTRACT_INFERRED"
+    diagnostic["status"]="EFFECT_PREFLIGHT_VERIFIED"
     diagnostic["selected_supplier"]=candidate
     diagnostic["probe"]=probe
     diagnostic["contract"]=contract
+    diagnostic["selected_producer_preflight"]=selected_preflight
     diag_path.write_text(json.dumps(diagnostic,indent=2,sort_keys=True)+"\n",encoding="utf-8")
     package=str(candidate["name"])
     version=str(candidate["version"])
