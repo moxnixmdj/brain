@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_SEMANTIC_ROLE_IR_REPAIR_FALSIFICATION_RECONCILIATION_V1",
+  "status": "COMPLETE_RECONCILED",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "source_pr": 64,
+  "repair_merged": false,
+  "workflow_run_id": 36458524232,
+  "artifact": {
+    "id": 10985949339,
+    "digest": "sha256:cc7d8118ec15f30e91b32586a6853dc902d1b5f57f5ee410dd51f597e87a2341"
+  },
+  "focused_preflight": {
+    "status": "PASS",
+    "existing_discovery_tests": "PASS",
+    "synthetic_semantic_role_tests": "PASS"
+  },
+  "frozen_replay": {
+    "status": "FAIL",
+    "replay_consumed": true,
+    "exact_oracle_top12_recall": 0.25,
+    "baseline_exact_top50_recall": 0.5,
+    "top1_auxiliary_or_ambiguous_count": 0,
+    "syntax_noise_probe_count": 0,
+    "missing_domain_role_probe_count": 1,
+    "exact_oracle_top12": {
+      "sqlite3": null,
+      "gzip": null,
+      "imagemagick_or_graphicsmagick": null,
+      "graphviz": 1
+    }
+  },
+  "verified_partial_gains": [
+    "syntactic relation noise such as `at` was removed from all four frozen queries",
+    "auxiliary-or-ambiguous top-1 package count fell to zero in the frozen replay",
+    "the direct Graphviz executable reached exact rank 1"
+  ],
+  "repeated_failures": [
+    {
+      "class": "TASK_PAYLOAD_OR_SCHEMA_TOKENS_MISCLASSIFIED_AS_CAPABILITY_DOMAIN",
+      "recurrence_count": 2,
+      "probes": [
+        "ROLE-SQLITE-001",
+        "ROLE-GZIP-001"
+      ],
+      "evidence": [
+        "SQLite query admitted schema/payload terms such as probe, text, integer, and two, allowing unrelated text/table packages to dominate.",
+        "Gzip query admitted payload terms such as content, project, brain, role, and v1, crowding operation/domain semantics out of the query budget."
+      ]
+    },
+    {
+      "class": "ADDITIVE_ROLE_SCORE_DOES_NOT_REQUIRE_ESSENTIAL_OPERATION_DOMAIN_CONJUNCTION",
+      "recurrence_count": 3,
+      "probes": [
+        "ROLE-SQLITE-001",
+        "ROLE-GZIP-001",
+        "ROLE-IMAGE-RESIZE-001"
+      ],
+      "evidence": [
+        "SQLite top candidate matched table/text but not the requested SQLite capability.",
+        "Gzip top candidates matched payload/content words while missing compression semantics.",
+        "Image-resize top candidates matched PNG/image/graphics but not resize."
+      ]
+    }
+  ],
+  "falsified_hypothesis": "ROLE_BUCKETS_PLUS_ADDITIVE_ROLE_WEIGHTING_ARE_SUFFICIENT_TO_RECOVER_AND_RANK_DIRECT_EXECUTABLE_CAPABILITY_SUPPLIERS",
+  "refined_blocker": "TASK_INSTRUCTION_VS_PAYLOAD_SCHEMA_SEGMENTATION_AND_CONJUNCTIVE_ROLE_COMPATIBILITY_NOT_YET_PROVEN",
+  "causal_conclusion": "The catalog contains viable suppliers and explicit role buckets reduce obvious noise, but useful retrieval still requires separating task/control semantics from payload/schema/example content and requiring candidates to satisfy essential operation+domain compatibility rather than winning by additive topical overlap.",
+  "next_repair_authorization": {
+    "eligible": true,
+    "recurrence_basis": "same refined failure recurs across at least two orthogonal probes",
+    "scope": "GENERIC_TASK_SEMANTIC_SEGMENTATION_PLUS_CONJUNCTIVE_ESSENTIAL_ROLE_COMPATIBILITY",
+    "required_properties": [
+      "separate instruction/control semantics from literal payload, schema values, examples, and output-path metadata",
+      "mark essential operation/domain/format roles independently",
+      "require essential-role compatibility before additive relevance scoring",
+      "retain direct-vs-auxiliary supplier role evidence from the partial repair",
+      "no package-name hints",
+      "no contract-parser changes",
+      "no probe-specific literals"
+    ],
+    "validation": "USE_FRESH_ORTHOGONAL_UNSEEN_EFFECTS__DO_NOT_REPLAY_SEMANTIC_ROLE_DIAGNOSTIC_001_AGAIN"
+  },
+  "promotion_authorized": false
+}
