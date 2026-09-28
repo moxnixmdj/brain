@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-EVIDENCE-ACQUISITION-STRUCTURAL-CAUSE-20260928",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": null,
+  "causal_blocker": "DIRECT_EXECUTABLE_EVIDENCE_ACQUISITION_PATH_EXCEEDS_WALL_CLOCK_GATE__REPEATED_APT_FILE_AND_REMOTE_MANPAGE_SCANS_PREVENT_FAST_RANKING_ADJUDICATION",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::DIRECT_EXECUTABLE_EVIDENCE_ACQUISITION_PATH_EXCEEDS_WALL_CLOCK_GATE__REPEATED_APT_FILE_AND_REMOTE_MANPAGE_SCANS_PREVENT_FAST_RANKING_ADJUDICATION::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Quarantine the failed latency-profile execution surface, preserve source-level and authoritative apt-file evidence, and refine the blocker to repeated regex index scans plus excessive remote manpage fanout, authorizing one generic batched literal acquisition/progressive enrichment repair.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR70",
+    "PR78",
+    "PR79",
+    "PR81",
+    "PR82"
+  ],
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Structural-cause reconciliation is merged; PR82 remains closed/unmerged; next action is one generic batched literal acquisition plus bounded/progressive manpage enrichment repair with fresh unseen validation.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
