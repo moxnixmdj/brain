@@ -95,23 +95,20 @@ def _semantic_verifier_queries(goal):
         if text and text not in queries:
             queries.append(text)
     joined=" ".join(nouns)
-    for role in ("decode","read","scan"):
-        add((role+" "+joined+" image").strip())
-    # Broaden one layer at a time. This is intentionally role-based rather
-    # than domain/package-name based.
-    if len(nouns)>2:
+    roles=("decode","read","scan","verify")
+    for role in roles:
+        add((role+" "+joined).strip())
+    # Broaden one layer at a time using only terms derived from the goal.
+    if len(nouns)>1:
         shorter=" ".join(nouns[:2])
-        for role in ("decode","read","scan"):
+        for role in roles:
             add((role+" "+shorter).strip())
-    for generic in (
-        "decode machine readable code",
-        "read machine readable code",
-        "scan barcode image",
-        "barcode decoder",
-        "barcode reader",
-    ):
-        add(generic)
-    return queries[:12]
+    for noun in nouns[:3]:
+        for role in ("decode","read","scan"):
+            add((role+" "+noun).strip())
+        for agent in ("decoder","reader","scanner"):
+            add((noun+" "+agent).strip())
+    return queries[:18]
 
 
 def _semantic_verifier_query(goal):
