@@ -1,0 +1,60 @@
+name: Evidence Acquisition Latency Profile 001
+
+on:
+  push:
+    branches:
+      - diagnostic/evidence-acquisition-latency-001-20260928
+    paths:
+      - canonical/experiments/EVIDENCE_ACQUISITION_LATENCY_PROFILE_001.json
+      - canonical/experiments/run_evidence_acquisition_latency_profile_001.py
+      - .github/workflows/evidence-acquisition-latency-profile-001.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: evidence-acquisition-latency-profile-001
+  cancel-in-progress: true
+
+jobs:
+  profile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install and index apt-file with timing
+        shell: bash
+        run: |
+          set -euo pipefail
+          /usr/bin/time -f '%e' -o /tmp/apt-get-update-wall.txt sudo apt-get update
+          /usr/bin/time -f '%e' -o /tmp/apt-file-install-wall.txt sudo apt-get install -y apt-file
+          /usr/bin/time -f '%e' -o /tmp/apt-file-update-wall.txt sudo apt-file update
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          def read(name):
+              try:
+                  return float(Path(name).read_text().strip())
+              except Exception:
+                  return None
+          out={
+              "apt_get_update_wall_s":read("/tmp/apt-get-update-wall.txt"),
+              "apt_file_install_wall_s":read("/tmp/apt-file-install-wall.txt"),
+              "apt_file_update_wall_s":read("/tmp/apt-file-update-wall.txt"),
+          }
+          Path("/tmp/apt_file_setup_wall.json").write_text(json.dumps(out,sort_keys=True)+"\n")
+          print(json.dumps(out,sort_keys=True))
+          PY
+      - name: Run one no-mutation latency profile
+        run: python canonical/experiments/run_evidence_acquisition_latency_profile_001.py
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidence-acquisition-latency-profile-001
+          path: canonical/astra_runtime/evidence/EVIDENCE_ACQUISITION_LATENCY_PROFILE_001__RESULT.json
+          if-no-files-found: error
