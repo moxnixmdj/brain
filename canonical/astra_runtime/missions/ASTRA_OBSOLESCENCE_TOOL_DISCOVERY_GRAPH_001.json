@@ -1,0 +1,28 @@
+{
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "manual_controller_actions": false,
+    "originating_mission_must_remain_byte_identical": true,
+    "prebound_graph_tool_capability_forbidden": true,
+    "search_existing_implementations_before_invention": true,
+    "supplier_name_not_present_in_goal": true,
+    "user_device_required": false,
+    "val_town_forbidden": true
+  },
+  "goal": "Create a directed graph SVG from the DOT text 'digraph G { start -> discover; discover -> verify; verify -> inherit; }' and save it to canonical/astra_runtime/artifacts/OBSOLESCENCE_TOOL_DISCOVERY_GRAPH.svg.",
+  "mission_id": "ASTRA-OBSOLESCENCE-TOOL-DISCOVERY-GRAPH-001",
+  "purpose": "First multiplier-capability obsolescence mission: from an unfamiliar real effect, discover a zero-dollar tool supplier, learn its invocation contract from evidence, execute it, and produce a semantically verifiable directed-graph artifact without a prebound domain tool.",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "steps": [
+    {
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "id": "discover-learn-execute-graph-tool",
+      "max_controller_actions": 20,
+      "verify": {
+        "text": "COMPOUND_GOAL_COMPLETE",
+        "type": "stdout_contains"
+      }
+    }
+  ]
+}
