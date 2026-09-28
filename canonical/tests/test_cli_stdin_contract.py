@@ -57,5 +57,28 @@ class CliStdinContractTests(unittest.TestCase):
             self.assertTrue(out["stdin_text_supplied"])
             self.assertEqual((root/"out.txt").read_text(),"HELLO STDIN")
 
+
+    def test_inference_exposes_positional_file_fallback_when_stdin_and_file_are_declared(self):
+        probe={
+          "package":"writer","version":"1","archive_sha256":"a"*64,
+          "executables":[{
+            "executable":"/usr/bin/writer",
+            "help_attempts":[{"text":
+              "Usage: writer [OPTION]... [FILE]\n"
+              "Encode FILE or standard input and write image\n"
+              "  -o, --output=FILE output filename\n"
+              "  -f, --format=FORMAT PNG [default]\n"
+            }]
+          }]
+        }
+        out=infer.infer_contract(
+          probe,
+          "Generate image for the text HELLO and save it as canonical/astra_runtime/tmp/out.png."
+        )
+        self.assertEqual(out["evidence"]["input_transport"],"STDIN_TEXT")
+        self.assertEqual(out["alternate_input_transports"],[
+          {"type":"POSITIONAL_TEXT_FILE","arg_token":"__PB_TEXT_FILE__"}
+        ])
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
