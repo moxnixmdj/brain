@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Fail-closed anti-drift validator for frontier-sensitive changes."""
 from __future__ import annotations
-import argparse, hashlib, json, pathlib, subprocess, sys
+import argparse, hashlib, json, os, pathlib, subprocess, sys
 
-ROOT=pathlib.Path(__file__).resolve().parents[2]
+ROOT=pathlib.Path(os.environ.get("GITHUB_WORKSPACE") or pathlib.Path.cwd()).resolve()
 
 SENSITIVE_PREFIXES=(
     "canonical/runtime/",
