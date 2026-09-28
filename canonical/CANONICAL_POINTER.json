@@ -224,7 +224,7 @@
     "integrated_cognitive_worker_candidate": "ICW-CHATGPT-SOL-1",
     "integrated_cognitive_worker_checkpoint_path": "canonical/icw/ICW-CHATGPT-SOL-1/CHECKPOINT_V1.json",
     "integrated_cognitive_worker_mission_progress": "AUDITOR_REAL_MISSION_COMPLETE__RESUME_AND_AUTONOMOUS_WAKE_NOT_YET_PROVEN",
-    "capability_realization_strategy_path": "canonical/capabilities/CAPABILITY_REALIZATION_STRATEGY_V2.json",
+    "capability_realization_strategy_path": "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V2.md",
     "capability_acquisition_loop": [
       "DISCOVER",
       "BIND",
@@ -273,7 +273,9 @@
     "frontier_capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "knowledge_side_status": "ARCHITECTURALLY_SOLVED_FOR_CURRENT_PROGRAM_UNLESS_FALSIFIED__JIT_EXTERNAL_VERIFIABLE_KNOWLEDGE_INSTEAD_OF_GIANT_PARAMETER_WAREHOUSE",
     "active_research_side": "CAPABILITIES",
-    "obsolescence_definition": "VERIFIED_EQUAL_OR_BETTER_USEFUL_CAPABILITY_VIA_A_FASTEST_CHEAPEST_REALIZABLE_ROUTE_MAKES_THE_FRONTIER_IMPLEMENTATION_UNNECESSARY_FOR_PROJECT_BRAIN"
+    "obsolescence_definition": "VERIFIED_EQUAL_OR_BETTER_USEFUL_CAPABILITY_VIA_A_FASTEST_CHEAPEST_REALIZABLE_ROUTE_MAKES_THE_FRONTIER_IMPLEMENTATION_UNNECESSARY_FOR_PROJECT_BRAIN",
+    "capability_obsolescence_strategy_path": "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V2.md",
+    "capability_obsolescence_queue_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json"
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
