@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_PR85_EXECUTION_SURFACE_EXHAUSTION_V1",
+  "status": "EXTERNAL_REQUIRED_FOR_FROZEN_LIVE_APT_FILE_GATE__NO_SAFE_ZERO_SPEND_EXECUTOR_CURRENTLY_CALLABLE",
+  "checked_on": "2026-09-28",
+  "target_gate": "BATCHED-EXECUTABLE-EVIDENCE-FRESH-VALIDATION-001",
+  "required_environment": "Reliable Linux/Ubuntu-like environment with live apt-file Contents indices, exact PR85 branch bytes, zero incremental spend, and <=600 second validation gate.",
+  "surfaces": [
+    {
+      "surface": "GitHub Actions on moxnixmdj/brain",
+      "status": "REJECTED_CURRENTLY_UNUSABLE",
+      "evidence": "Profile runs 36486220580 and 36486527162 failed without usable steps/artifacts; unrelated exact-symbolic jobs exhibit the same pre-step failure class.",
+      "retry_forbidden": true
+    },
+    {
+      "surface": "ChatGPT private Linux container",
+      "status": "PARTIAL_ONLY",
+      "evidence": "Exact PR85 Git blob bytes materialized and hash-verified; Python compilation PASS; 3/3 repair regressions PASS; apt-file absent and APT index refresh unavailable.",
+      "valid_for": "syntax_and_regression_logic_only"
+    },
+    {
+      "surface": "Authorized Remote Desktop device Mo",
+      "status": "UNAVAILABLE_DEVICE_OFFLINE"
+    },
+    {
+      "surface": "Wolfram kernel",
+      "status": "REJECTED_NO_EXTERNAL_PROCESS_APT_SURFACE",
+      "evidence": "RunProcess-based apt-file and apt-list checks returned failure."
+    },
+    {
+      "surface": "Public Debian/Ubuntu package web Contents search",
+      "status": "REJECTED_NOT_EXECUTOR_EQUIVALENT",
+      "evidence": "Generic filename searches omitted source-confirmed executable suppliers; unsuitable for frozen top-K/wall-clock acceptance."
+    },
+    {
+      "surface": "Camber",
+      "status": "REJECTED_ZERO_SPEND_UNVERIFIABLE",
+      "evidence": "Available MCP surface exposes no billing/credit state; launching a run would violate hard-$0 fail-closed rule."
+    },
+    {
+      "surface": "DigitalOcean",
+      "status": "REJECTED_NO_VERIFIED_FREE_CREDIT",
+      "evidence": "Month-to-date usage 0.00, account balance 0.00, billing history empty, no droplets; creating a droplet would introduce billable usage without verified promotional credit."
+    },
+    {
+      "surface": "Render",
+      "status": "REJECTED_NO_EXISTING_EXECUTOR",
+      "evidence": "Connected workspace contains no existing service; creating infrastructure was not proven zero incremental spend."
+    },
+    {
+      "surface": "Vercel",
+      "status": "REJECTED_NO_CALLABLE_SANDBOX_ACTION",
+      "evidence": "Public documentation describes Sandbox, but connected MCP surface exposes no Sandbox creation/execution action; no executable route from this session."
+    }
+  ],
+  "preserved_progress": {
+    "repair_pr": 85,
+    "exact_byte_verification_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_PR85_LOCAL_EXACT_BYTE_VERIFICATION_V1.json",
+    "fresh_source_precheck_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_BATCHED_EVIDENCE_FRESH_SOURCE_PRECHECK_V1.json",
+    "runtime_promotion_authorized": false,
+    "repair_merge_authorized": false
+  },
+  "only_remaining_truth_transition": "Execute the frozen 3-case gate on exact PR85 bytes with a live apt-file Contents cache at $0; then reconcile PASS/FAIL before any further repair.",
+  "anti_drift": [
+    "Do not retry GitHub Actions until its pre-step failure class changes.",
+    "Do not substitute public web search for apt-file top-K evidence.",
+    "Do not create billable infrastructure to satisfy the gate.",
+    "Do not merge PR85 based on unit tests or source reachability alone.",
+    "Do not implement a second repair before the frozen gate is executed and reconciled."
+  ]
+}
