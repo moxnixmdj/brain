@@ -233,6 +233,8 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
       "output_text_utf8":bool(contract.get("output_text_utf8",False)),
       "timeout_s":int(contract.get("timeout_s",60))
     }
+    if contract.get("stdin_text_template") is not None:
+        verification_args["stdin_text"]=_render(contract["stdin_text_template"],inputs)
     slug=_slug(package)
     cap_id="auto.apt."+slug
     effect="auto.effect."+slug
@@ -279,6 +281,8 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
         "contract_evidence":contract.get("evidence")
       }
     }
+    if contract.get("stdin_text_template") is not None:
+        entry["action_template"]["args"]["stdin_text"]=contract["stdin_text_template"]
     fingerprint=hashlib.sha256((mission_id+"\n"+cap_id+"\n"+json.dumps(verification_args,sort_keys=True)).encode()).hexdigest()[:12]
     pending_rel=f"canonical/astra_runtime/pending_bindings/{mission_id}__{slug}__{fingerprint}.json"
     verify_rel=f"canonical/astra_runtime/evidence/{mission_id}__{slug}__{fingerprint}__AUTO_VERIFY.json"
