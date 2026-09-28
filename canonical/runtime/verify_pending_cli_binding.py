@@ -166,6 +166,7 @@ def _semantic_execution_variants(contract, output_path):
               "help_line":line.strip()[:500],
             })
         break
+    prior_variants=list(out)
     for item in _help_symbol_size_candidates(contract,output_path):
         argv=list(base[:-1])+[item["flag"],item["value"],base[-1]]
         if all(v["argv"]!=argv for v in out):
@@ -174,6 +175,17 @@ def _semantic_execution_variants(contract, output_path):
               "argv":argv,
               "symbol_size":item["value"],
             })
+        for prior in prior_variants:
+            if prior.get("basis")!="HELP_DECLARED_MINIMUM_NUMERIC_RELAXATION":
+                continue
+            prior_argv=list(prior["argv"])
+            combo=list(prior_argv[:-1])+[item["flag"],item["value"],prior_argv[-1]]
+            if all(v["argv"]!=combo for v in out):
+                out.append({
+                  "basis":"HELP_DECLARED_MINIMUM_EDGE_PLUS_SYMBOL_SIZE",
+                  "argv":combo,
+                  "symbol_size":item["value"],
+                })
     return out
 
 
