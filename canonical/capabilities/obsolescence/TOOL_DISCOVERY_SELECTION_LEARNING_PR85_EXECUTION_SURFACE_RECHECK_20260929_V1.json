@@ -81,11 +81,43 @@
     },
     {
       "surface": "Camber",
-      "status": "REJECTED_ZERO_SPEND_UNVERIFIABLE",
+      "status": "REJECTED_START_BOUNDARY_NO_EXECUTION",
       "evidence": {
         "session_authenticated": true,
-        "billing_or_credit_state_exposed": false
-      }
+        "selected_personal_workspace": true,
+        "existing_probe_agents_tested": [
+          "@wgrgmgr.camber-recovery-probe",
+          "@wgrgmgr.capacity-probe"
+        ],
+        "start_attempt_result": "FAILED_BEFORE_AGENT_RUN",
+        "billing_or_credit_state_exposed_by_connector": false
+      },
+      "reason": "Two independent existing-agent starts failed before an agent run began. No execution evidence was produced, so Camber is not currently a callable gate executor."
+    },
+    {
+      "surface": "Notion server-side Debian binary transport probe",
+      "status": "REJECTED_NOT_A_GATE_EXECUTOR_OR_PORTABLE_BINARY_BRIDGE",
+      "evidence": {
+        "small_official_debian_gzip_import": "PASS",
+        "small_import_bytes": 40695,
+        "full_contents_amd64_gzip_import": "VALIDATION_ERROR",
+        "full_import_failure_cause": "UNKNOWN",
+        "attached_file_reference_portable_to_google_drive": false,
+        "cross_connector_handoff_result": "REJECTED_FILE_URI_TYPE"
+      },
+      "reason": "Notion can fetch at least a small official Debian gzip server-side, but the required full Contents index did not import and the resulting private attachment reference could not be handed to another connector or the local executor. This does not satisfy the live apt-file gate."
+    },
+    {
+      "surface": "Replit connected workspace",
+      "status": "REJECTED_NO_RAW_SHELL_OR_HARD_ZERO_ATTESTATION_ON_EXPOSED_SURFACE",
+      "evidence": {
+        "connector_authenticated": true,
+        "existing_apps_present": true,
+        "raw_shell_action_exposed": false,
+        "account_billing_or_hard_zero_state_exposed": false,
+        "existing_apps_mutated": false
+      },
+      "reason": "The connected surface exposes app-agent operations rather than a raw Linux shell and does not expose account-specific hard-$0 state. Repurposing an existing app would not be an admissible executor proof."
     }
   ],
   "external_semantics_check": {
@@ -104,5 +136,6 @@
     "merge or promote PR85 before the frozen gate"
   ],
   "promotion_authorized": false,
-  "repair_merge_authorized": false
+  "repair_merge_authorized": false,
+  "latest_observed_repair_head_sha": "d785e4a4a1af84584b9f9d341e038cfe9be7f69c"
 }
