@@ -1,0 +1,330 @@
+name: Cleanroom Superworker Unified 2 Proof
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/astra_runtime/missions/ASTRA_REAL_CLEANROOM_DYNAMIC_ARTIFACT_001.json'
+      - 'canonical/same_identity_worker/tasks/SI_REAL_CLEANROOM_DYNAMIC_ARTIFACT_001.json'
+      - '.github/workflows/cleanroom-superworker-unified-2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checkpoint:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+
+      - name: Verify frozen bytes, fresh state, and generic plan
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e canonical/same_identity_worker/state/SI-REAL-CLEANROOM-DYNAMIC-ARTIFACT-001.json
+          test ! -e canonical/astra_runtime/state/ASTRA-REAL-CLEANROOM-DYNAMIC-ARTIFACT-001.json
+          python - <<'PY'
+          import hashlib, importlib.util, json, pathlib
+          root=pathlib.Path('.').resolve()
+          mission=root/'canonical/astra_runtime/missions/ASTRA_REAL_CLEANROOM_DYNAMIC_ARTIFACT_001.json'
+          task=root/'canonical/same_identity_worker/tasks/SI_REAL_CLEANROOM_DYNAMIC_ARTIFACT_001.json'
+          assert hashlib.sha256(mission.read_bytes()).hexdigest()=='b1f0e76d8571895d68c069e0c417c560bd05eb6e79e9bc4eca9982c6a6513c52'
+          assert hashlib.sha256(task.read_bytes()).hexdigest()=='0ab121d9923c5d48a690712b870c1105d5edc5f53e891f891068a5a1baec2ce7'
+          m=json.loads(mission.read_text())
+          reg=json.loads((root/'canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json').read_text())['capabilities']
+          p=root/'canonical/runtime/goal_compiler.py'
+          spec=importlib.util.spec_from_file_location('cleanroom_goal_compiler',p)
+          gc=importlib.util.module_from_spec(spec); spec.loader.exec_module(gc)
+          plan=gc.compile_goal(m['goal'],reg,root)
+          types=[a.get('type') for a in plan.get('controller_actions',[])]
+          modes=[p.get('mode') for p in plan.get('compiled_parts',[])]
+          assert 'invoke_capability_by_runtime_value' in types, types
+          assert 'assert_runtime_selected_code_decodes' in types, types
+          assert 'RUNTIME_SELECTED_VERIFIED_CAPABILITY' in modes, modes
+          assert 'INDEPENDENT_RUNTIME_CAPABILITY_CHOICE_VERIFICATION' in modes, modes
+          assert m['constraints']['manual_controller_actions'] is False
+          print(json.dumps({'compiler_mode':plan.get('compiler_mode'),'action_types':types,'modes':modes},sort_keys=True))
+          PY
+
+      - name: Create durable checkpoint on runner A
+        shell: bash
+        run: |
+          set -euo pipefail
+          set +e
+          python canonical/runtime/same_identity_supervisor.py \
+            --agent-id SUPERWORKER-UNIFIED-2 \
+            --task canonical/same_identity_worker/tasks/SI_REAL_CLEANROOM_DYNAMIC_ARTIFACT_001.json \
+            > CLEANROOM2_CHECKPOINT_STDOUT.json \
+            2> CLEANROOM2_CHECKPOINT_STDERR.txt
+          rc=$?
+          set -e
+          cat CLEANROOM2_CHECKPOINT_STDOUT.json
+          cat CLEANROOM2_CHECKPOINT_STDERR.txt >&2 || true
+          test "$rc" -eq 75
+          python - <<'PY'
+          import json, pathlib
+          state=json.loads(pathlib.Path('canonical/same_identity_worker/state/SI-REAL-CLEANROOM-DYNAMIC-ARTIFACT-001.json').read_text())
+          assert state['agent_id']=='SUPERWORKER-UNIFIED-2'
+          assert state['task_id']=='SI-REAL-CLEANROOM-DYNAMIC-ARTIFACT-001'
+          assert state['status']=='CHECKPOINTED_RELAUNCH_REQUIRED'
+          assert state['checkpoint_count']==1
+          assert state['runtime_attempt_count']==0
+          print(json.dumps({'status':state['status'],'checkpoint_count':state['checkpoint_count'],'claim_count':state['claim_count']},sort_keys=True))
+          PY
+          tar -czf CLEANROOM2_CHECKPOINT_TRANSFER.tar.gz \
+            canonical/same_identity_worker/state/SI-REAL-CLEANROOM-DYNAMIC-ARTIFACT-001.json \
+            canonical/same_identity_worker/evidence/SI-REAL-CLEANROOM-DYNAMIC-ARTIFACT-001__CHECKPOINT.json
+          sha256sum CLEANROOM2_CHECKPOINT_TRANSFER.tar.gz > CLEANROOM2_CHECKPOINT_TRANSFER.sha256
+          printf '%s\n' "$RUNNER_NAME" > CLEANROOM2_RUNNER_A.txt
+
+      - name: Upload checkpoint transfer
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: cleanroom2-checkpoint-transfer
+          path: |
+            CLEANROOM2_CHECKPOINT_TRANSFER.tar.gz
+            CLEANROOM2_CHECKPOINT_TRANSFER.sha256
+            CLEANROOM2_CHECKPOINT_STDOUT.json
+            CLEANROOM2_CHECKPOINT_STDERR.txt
+            CLEANROOM2_RUNNER_A.txt
+
+  resume:
+    needs: checkpoint
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: cleanroom2-checkpoint-transfer
+          path: checkpoint-transfer
+
+      - name: Restore only durable checkpoint on fresh runner B
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e canonical/same_identity_worker/state/SI-REAL-CLEANROOM-DYNAMIC-ARTIFACT-001.json
+          test ! -e canonical/astra_runtime/state/ASTRA-REAL-CLEANROOM-DYNAMIC-ARTIFACT-001.json
+          (cd checkpoint-transfer && sha256sum -c CLEANROOM2_CHECKPOINT_TRANSFER.sha256)
+          tar -xzf checkpoint-transfer/CLEANROOM2_CHECKPOINT_TRANSFER.tar.gz
+          printf '%s\n' "$RUNNER_NAME" > CLEANROOM2_RUNNER_B.txt
+          python - <<'PY'
+          import json,pathlib
+          s=json.loads(pathlib.Path('canonical/same_identity_worker/state/SI-REAL-CLEANROOM-DYNAMIC-ARTIFACT-001.json').read_text())
+          assert s['agent_id']=='SUPERWORKER-UNIFIED-2'
+          assert s['status']=='CHECKPOINTED_RELAUNCH_REQUIRED'
+          assert s['checkpoint_count']==1
+          assert s['runtime_attempt_count']==0
+          PY
+
+      - name: Resume same identity and execute distinct live mission
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,multiprocessing,os,pathlib,subprocess,sys,time,traceback
+          agent='SUPERWORKER-UNIFIED-2'
+          task_id='SI-REAL-CLEANROOM-DYNAMIC-ARTIFACT-001'
+          task='canonical/same_identity_worker/tasks/SI_REAL_CLEANROOM_DYNAMIC_ARTIFACT_001.json'
+          bridge=pathlib.Path('canonical/same_identity_worker/external_tool_bridge')/task_id
+          bridge.mkdir(parents=True,exist_ok=True)
+          relay_log=pathlib.Path('CLEANROOM2_RELAY.jsonl')
+
+          def relay_loop():
+              from canonical.runtime import external_tool_relay as relay
+              try:
+                  while True:
+                      written=relay.service_pending(bridge,agent,task_id)
+                      if written:
+                          with relay_log.open('a',encoding='utf-8') as fh:
+                              fh.write(json.dumps({'epoch':time.time(),'responses':written,'serviced':len(written)},sort_keys=True)+'\n')
+                      time.sleep(0.02)
+              except BaseException as exc:
+                  with relay_log.open('a',encoding='utf-8') as fh:
+                      fh.write(json.dumps({'epoch':time.time(),'fatal':type(exc).__name__+':'+str(exc),'traceback':traceback.format_exc()[-6000:]},sort_keys=True)+'\n')
+                  raise
+
+          relay=multiprocessing.Process(target=relay_loop,daemon=True)
+          relay.start()
+          env=os.environ.copy()
+          env['PROJECT_BRAIN_EXTERNAL_TOOL_WAIT_SECONDS']='90'
+          try:
+              worker=subprocess.Popen(
+                  [sys.executable,'canonical/runtime/same_identity_supervisor.py',
+                   '--agent-id',agent,'--task',task],
+                  text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,env=env
+              )
+              deadline=time.monotonic()+1200
+              while worker.poll() is None:
+                  if not relay.is_alive():
+                      worker.terminate()
+                      break
+                  if time.monotonic()>=deadline:
+                      worker.terminate()
+                      break
+                  time.sleep(0.1)
+              try:
+                  stdout,stderr=worker.communicate(timeout=10)
+              except subprocess.TimeoutExpired:
+                  worker.kill()
+                  stdout,stderr=worker.communicate()
+          finally:
+              if relay.is_alive(): relay.terminate()
+              relay.join(timeout=5)
+          pathlib.Path('CLEANROOM2_RESUME_STDOUT.json').write_text(stdout,encoding='utf-8')
+          pathlib.Path('CLEANROOM2_RESUME_STDERR.txt').write_text(stderr,encoding='utf-8')
+          print(stdout)
+          if stderr: print(stderr,file=sys.stderr)
+          if worker.returncode!=0:
+              raise SystemExit(worker.returncode if worker.returncode is not None else 1)
+          PY
+
+      - name: Seal execution transfer
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,pathlib
+          sp=pathlib.Path('canonical/same_identity_worker/state/SI-REAL-CLEANROOM-DYNAMIC-ARTIFACT-001.json')
+          if sp.exists():
+              s=json.loads(sp.read_text())
+              print(json.dumps({'agent_id':s.get('agent_id'),'task_id':s.get('task_id'),'status':s.get('status'),'claim_count':s.get('claim_count'),'checkpoint_count':s.get('checkpoint_count'),'runtime_attempt_count':s.get('runtime_attempt_count')},sort_keys=True))
+          PY
+          paths=(
+            CLEANROOM2_RUNNER_B.txt
+            CLEANROOM2_RESUME_STDOUT.json
+            CLEANROOM2_RESUME_STDERR.txt
+            CLEANROOM2_RELAY.jsonl
+            canonical/same_identity_worker/state/SI-REAL-CLEANROOM-DYNAMIC-ARTIFACT-001.json
+            canonical/same_identity_worker/evidence
+            canonical/same_identity_worker/external_tool_bridge/SI-REAL-CLEANROOM-DYNAMIC-ARTIFACT-001
+            canonical/astra_runtime/state/ASTRA-REAL-CLEANROOM-DYNAMIC-ARTIFACT-001.json
+            canonical/astra_runtime/evidence
+            canonical/astra_runtime/tmp/CLEANROOM2_UUID.json
+            canonical/astra_runtime/tmp/CLEANROOM2_UUID.png
+            canonical/astra_runtime/artifacts
+          )
+          existing=()
+          for p in "${paths[@]}"; do
+            if [ -e "$p" ]; then existing+=("$p"); fi
+          done
+          tar -czf CLEANROOM2_EXECUTION_TRANSFER.tar.gz "${existing[@]}"
+          sha256sum CLEANROOM2_EXECUTION_TRANSFER.tar.gz > CLEANROOM2_EXECUTION_TRANSFER.sha256
+
+      - name: Upload execution evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: cleanroom2-execution-evidence
+          path: |
+            CLEANROOM2_EXECUTION_TRANSFER.tar.gz
+            CLEANROOM2_EXECUTION_TRANSFER.sha256
+            CLEANROOM2_RUNNER_B.txt
+            CLEANROOM2_RESUME_STDOUT.json
+            CLEANROOM2_RESUME_STDERR.txt
+            CLEANROOM2_RELAY.jsonl
+
+  adjudicate:
+    needs: [checkpoint, resume]
+    if: ${{ always() && needs.checkpoint.result == 'success' && needs.resume.result == 'success' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: cleanroom2-checkpoint-transfer
+          path: checkpoint-transfer
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: cleanroom2-execution-evidence
+          path: execution-transfer
+
+      - name: Independent fresh-runner adjudication
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf '%s\n' "$RUNNER_NAME" > CLEANROOM2_RUNNER_C.txt
+          (cd execution-transfer && sha256sum -c CLEANROOM2_EXECUTION_TRANSFER.sha256)
+          mkdir adjudication-input
+          tar -xzf execution-transfer/CLEANROOM2_EXECUTION_TRANSFER.tar.gz -C adjudication-input
+          sudo apt-get update -qq
+          expected="$(apt-cache show zbar-tools=0.23.93-4build3 | awk '/^SHA256:/{print $2; exit}')"
+          test "$expected" = "9e718d34a9650263aca2dd85e56d9de42ca24ff82254f90f5e4270d1e5d00422"
+          sudo apt-get install -y --no-install-recommends zbar-tools=0.23.93-4build3 >/dev/null
+          python - <<'PY'
+          import hashlib,json,pathlib,subprocess
+          root=pathlib.Path('adjudication-input')
+          state=json.loads((root/'canonical/same_identity_worker/state/SI-REAL-CLEANROOM-DYNAMIC-ARTIFACT-001.json').read_text())
+          astra=json.loads((root/'canonical/astra_runtime/state/ASTRA-REAL-CLEANROOM-DYNAMIC-ARTIFACT-001.json').read_text())
+          source=json.loads((root/'canonical/astra_runtime/tmp/CLEANROOM2_UUID.json').read_text())
+          observed=json.loads(str(source.get('observed_text') or ''))
+          uuid=str(observed.get('uuid') or '')
+          assert uuid
+          branch='QR' if uuid[0].lower() in set('abcdef') else 'CODE128'
+          rel=('canonical/astra_runtime/artifacts/CLEANROOM2_UUID_QR.png'
+               if branch=='QR' else
+               'canonical/astra_runtime/artifacts/CLEANROOM2_UUID_BARCODE.png')
+          artifact=root/rel
+          assert artifact.is_file(), rel
+          proc=subprocess.run(['zbarimg','--quiet','--raw',str(artifact)],text=True,capture_output=True,timeout=60)
+          assert proc.returncode==0, proc.stderr
+          decoded=proc.stdout.strip()
+          assert decoded==uuid, (decoded,uuid)
+          assert state['agent_id']=='SUPERWORKER-UNIFIED-2'
+          assert state['task_id']=='SI-REAL-CLEANROOM-DYNAMIC-ARTIFACT-001'
+          assert state['status']=='COMPLETE'
+          assert state['checkpoint_count']==1
+          assert state['claim_count']>=2
+          assert state['runtime_attempt_count']==1
+          assert astra['status']=='COMPLETE'
+          assert astra.get('supervisor_agent_id')=='SUPERWORKER-UNIFIED-2'
+          assert astra.get('supervisor_task_id')=='SI-REAL-CLEANROOM-DYNAMIC-ARTIFACT-001'
+          verdict={
+            'schema':'PROJECT_BRAIN_CLEANROOM_SUPERWORKER_REPLICATION_ADJUDICATION_V1',
+            'agent_id':'SUPERWORKER-UNIFIED-2',
+            'task_id':'SI-REAL-CLEANROOM-DYNAMIC-ARTIFACT-001',
+            'mission_sha256':'b1f0e76d8571895d68c069e0c417c560bd05eb6e79e9bc4eca9982c6a6513c52',
+            'task_sha256':'0ab121d9923c5d48a690712b870c1105d5edc5f53e891f891068a5a1baec2ce7',
+            'fresh_runner_boundary':True,
+            'same_identity_checkpoint_resume':True,
+            'runtime_branch':branch,
+            'observed_uuid':uuid,
+            'decoded_uuid':decoded,
+            'artifact_path':rel,
+            'artifact_sha256':hashlib.sha256(artifact.read_bytes()).hexdigest(),
+            'independent_decoder':'zbarimg',
+            'producer_independent_verification':True,
+            'terminal_complete':True,
+            'incremental_spend_usd':0,
+            'user_device_used':False,
+            'val_town_used':False,
+            'promotion_claim':False,
+            'p_real_claim':0
+          }
+          pathlib.Path('CLEANROOM2_INDEPENDENT_ADJUDICATION.json').write_text(json.dumps(verdict,indent=2,sort_keys=True)+'\n')
+          print(json.dumps(verdict,indent=2,sort_keys=True))
+          PY
+
+      - name: Upload independent adjudication
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: cleanroom2-independent-adjudication
+          path: |
+            CLEANROOM2_INDEPENDENT_ADJUDICATION.json
+            CLEANROOM2_RUNNER_C.txt
