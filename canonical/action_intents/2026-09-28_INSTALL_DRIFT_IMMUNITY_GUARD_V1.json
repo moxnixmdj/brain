@@ -1,0 +1,23 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "INSTALL-DRIFT-IMMUNITY-GUARD-20260928",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": null,
+  "causal_blocker": "PROJECT_CAN_DRIFT_FROM_PARENT_CAPABILITY_TO_LOCAL_PROBE_OPTIMIZATION",
+  "action_kind": "GOVERNANCE_GUARD",
+  "expected_parent_frontier_change": "Future frontier-sensitive actions fail closed when they substitute probe completion for capability-obsolescence progress.",
+  "highest_leverage_now": true,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Guard law, hierarchy gate, validator, CI workflow, and canonical pointer are merged and validated.",
+  "governance_change": true,
+  "weakens_existing_guard": false,
+  "explicit_user_authorization": "User explicitly requested: Make it impossible to drift."
+}
