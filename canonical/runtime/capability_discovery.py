@@ -28,6 +28,54 @@ GENERIC_DISCOVERY_TOKENS={
     "generate","code","image","text","save","output","input","convert",
     "process","program","utility","tool","data"
 }
+OPERATION_TOKENS={
+    "create","generate","render","resize","compress","compressed","decompress","decompressed",
+    "convert","transform","encode","decode","extract","archive","query","insert","update",
+    "delete","parse","scan","verify","validate","compare","calculate","compute","compile",
+    "build","export","import","merge","split","transcode","optimize","optimise","download","upload","search"
+}
+FORMAT_TOKENS={
+    "json","xml","csv","tsv","yaml","yml","html","pdf","png","jpg","jpeg","webp",
+    "gif","svg","zip","gzip","gz","tgz","tar","sqlite","sqlite3","db","dot","markdown","md"
+}
+CONSTRAINT_TOKENS={
+    "exact","exactly","primary","key","rows","row","columns","column","pixels","pixel",
+    "named","name","same","identical","order","count","utf","utf8","width","height"
+}
+RELATION_NOISE={
+    "at","whose","result","results","containing","contains","every","its","that","final",
+    "those","these","with","for","from","into","onto","of","by","using","as","to","and","or"
+}
+FORMAT_DOMAIN_HINTS={
+    "png":["image","graphics"],"jpg":["image","graphics"],"jpeg":["image","graphics"],
+    "webp":["image","graphics"],"gif":["image","graphics"],"svg":["image","graphics"],
+    "gzip":["compression","archive"],"gz":["compression","archive"],"tgz":["compression","archive"],
+    "zip":["compression","archive"],"tar":["archive"],
+    "sqlite":["database"],"sqlite3":["database"],"db":["database"],
+    "dot":["graph"],"json":["structured","data"],"xml":["structured","data"],
+    "csv":["tabular","data"],"tsv":["tabular","data"],"pdf":["document"]
+}
+OPERATION_FAMILIES={
+    "convert_transform_transcode":{"convert","converter","transform","transformation","transcode","transcoder","transcoding"},
+    "compress_archive":{"compress","compression","compressed","archive","archiver","pack"},
+    "decompress_extract":{"decompress","decompression","decompressed","extract","extractor","unpack"},
+    "render_generate":{"render","renderer","rendering","generate","generator","create","build"},
+    "resize_scale":{"resize","resizer","resizing","scale","scaler","scaling"},
+    "optimize":{"optimize","optimizer","optimise","optimiser","optimization","optimisation"},
+    "decode_parse_read":{"decode","decoder","decoding","parse","parser","read","reader"},
+    "encode_write":{"encode","encoder","encoding","write","writer"},
+    "query_search":{"query","search","find","lookup"},
+}
+DOMAIN_FAMILIES={
+    "audio_multimedia":{"audio","sound","multimedia","music"},
+    "document_markup":{"document","documents","markup","markdown","html","text"},
+    "image_graphics":{"image","images","graphics","graphic","picture","photo","png","jpeg","jpg","webp","gif"},
+    "database_structured":{"database","databases","sqlite","sql","db","table","relational"},
+    "archive_compression":{"archive","compression","compressed","gzip","zip","tar","gz"},
+    "graph_diagram":{"graph","graphs","diagram","diagrams","dot"},
+    "video_multimedia":{"video","multimedia","movie","media"},
+}
+DOMAIN_TOKENS=set().union(*DOMAIN_FAMILIES.values())
 PAID_MARKERS = ("payment", "usdc", "x402", "$", "paid", "billing")
 
 
@@ -50,34 +98,88 @@ def _semanticize_paths(text):
     return re.sub(pattern,repl,str(text or ""))
 
 
-def effect_queries(effect):
-    if not isinstance(effect, str) or not effect.strip():
+def _strip_literal_payload(text):
+    """Remove literal/example payload while preserving task/control language."""
+    text=str(text or "")
+    # Quoted/backticked literals are data examples, not capability semantics.
+    text=re.sub(r"```[\s\S]*?```"," ",text)
+    text=re.sub(r"`[^`]*`"," ",text)
+    text=re.sub(r'"(?:\\.|[^"\\])*"'," ",text)
+    text=re.sub(r"'(?:\\.|[^'\\])*'"," ",text)
+    # Inline JSON-like examples are payload/schema evidence, not search intent.
+    text=re.sub(r"\{[^{}]{0,600}\}"," ",text)
+    text=re.sub(r"\[[^\[\]]{0,600}\]"," ",text)
+    return text
+
+
+def _family_for_token(token,families):
+    token=str(token or "").lower()
+    for family,aliases in families.items():
+        if token in aliases:
+            return family
+    return None
+
+
+def effect_semantic_roles(effect):
+    """Separate executable task semantics from literal payload/schema noise."""
+    if not isinstance(effect,str) or not effect.strip():
         raise DiscoveryFailure("EFFECT_REQUIRED")
-    semantic=_semanticize_paths(effect)
-    tokens = [
-        t.lower() for t in re.split(r"[^A-Za-z0-9]+", semantic)
-        if len(t) >= 2 and t.lower() not in STOPWORDS
+    semantic=_semanticize_paths(_strip_literal_payload(effect))
+    raw=[
+        t.lower() for t in re.split(r"[^A-Za-z0-9]+",semantic)
+        if len(t)>=2
     ]
-    low_information=set(GENERIC_DISCOVERY_TOKENS) | {
-        "those","these","exact","records","record","fields","field",
-        "values","value","same","identical","order","count","save"
+    operation=[]; fmt=[]; constraints=[]; domain=[]
+
+    def add(bucket,value):
+        value=str(value or "").lower()
+        if value and value not in bucket:
+            bucket.append(value)
+
+    for token in raw:
+        if token in OPERATION_TOKENS or _family_for_token(token,OPERATION_FAMILIES):
+            add(operation,token)
+        if token in FORMAT_TOKENS:
+            add(fmt,token)
+        if token in CONSTRAINT_TOKENS or token.isdigit():
+            add(constraints,token)
+        if token in DOMAIN_TOKENS:
+            add(domain,token)
+
+    # Formats imply broad domains without using package names or probe literals.
+    for token in fmt:
+        for hint in FORMAT_DOMAIN_HINTS.get(token,[]):
+            add(domain,hint)
+
+    return {
+      "operation":operation[:4],
+      "domain":domain[:6],
+      "format":fmt[:4],
+      "constraints":constraints[:8],
+      "essential":{
+        "operation_required":bool(operation),
+        "domain_or_format_required":bool(domain or fmt),
+      },
     }
-    distinctive=[]
-    generic=[]
-    for token in tokens:
-        target=generic if token in low_information or token.isdigit() else distinctive
-        if token not in target:
-            target.append(token)
+
+
+def effect_queries(effect):
+    roles=effect_semantic_roles(effect)
     out=[]
-    source=distinctive if distinctive else generic
-    for token in source:
-        if token not in out:
-            out.append(token)
+    # Operation first prevents literal payload/domain trivia from consuming the
+    # query budget. Domain and format then constrain what kind of executable is
+    # actually useful.
+    for role in ("operation","domain","format"):
+        for token in roles[role]:
+            if token not in out:
+                out.append(token)
+            if len(out)>=8:
+                return out
     if not out:
-        compact = re.sub(r"[^A-Za-z0-9]+", "", effect).lower()
+        compact=re.sub(r"[^A-Za-z0-9]+","",_strip_literal_payload(str(effect))).lower()
         if compact:
             out.append(compact)
-    return out[:6]
+    return out[:8]
 
 
 def _flatten_text(value):
@@ -103,6 +205,129 @@ def _lexical_variants(token):
             out.add(token+"ner")        # scan -> scanner
             out.add(token+"ning")       # scan -> scanning
     return out
+
+
+def _apt_supplier_role(name,description):
+    name=str(name or "").lower()
+    desc=str(description or "").lower()
+    blob=name+" "+desc
+    evidence=[]
+
+    if name.startswith(("lib","python3-","python-","ruby-","golang-","php-","php")):
+        evidence.append("LANGUAGE_LIBRARY_OR_BINDING")
+    if name.endswith(("-dev","-doc","-dbg","-prof")) or "documentation" in desc:
+        evidence.append("DEV_OR_DOCUMENTATION")
+    if any(x in blob for x in (" emacs","emacs "," vim"," editor mode"," major mode")):
+        evidence.append("EDITOR_EXTENSION")
+    if any(x in desc for x in (" backend","backend "," connectivity module"," plugin"," bindings"," binding ")):
+        evidence.append("BACKEND_PLUGIN_OR_BINDING")
+    if any(x in desc for x in (" dictionary"," fonts"," icons"," flags"," data files"," examples")):
+        evidence.append("DATA_ASSET")
+
+    if evidence:
+        return {"role":"AUXILIARY_OR_NON_DIRECT","evidence":sorted(set(evidence))}
+    return {"role":"DIRECT_EXECUTABLE_CANDIDATE","evidence":[]}
+
+
+def _candidate_tokens(name,description):
+    ordered=re.findall(r"[a-z0-9]+",(str(name or "")+" "+str(description or "")).lower())
+    tokens=set(ordered)
+    tokens |= {
+        ordered[i]+ordered[i+1]
+        for i in range(len(ordered)-1)
+        if len(ordered[i])>=2 and len(ordered[i+1])>=2
+    }
+    return tokens
+
+
+def _family_match(requested,tokens,families):
+    hits=[]
+    for term in requested:
+        family=_family_for_token(term,families)
+        aliases=families.get(family,{term}) if family else {term}
+        matched=False
+        for alias in aliases:
+            if any(v in tokens for v in _lexical_variants(alias)):
+                matched=True
+                break
+        if matched and term not in hits:
+            hits.append(term)
+    return hits
+
+
+def _candidate_role_alignment(name,description,roles):
+    tokens=_candidate_tokens(name,description)
+    operation=_family_match(roles.get("operation",[]),tokens,OPERATION_FAMILIES)
+    domain=_family_match(roles.get("domain",[]),tokens,DOMAIN_FAMILIES)
+    fmt=[]
+    for term in roles.get("format",[]):
+        if any(v in tokens for v in _lexical_variants(term)):
+            fmt.append(term)
+    return {"operation":operation,"domain":domain,"format":fmt}
+
+
+def _essential_role_compatibility(alignment,roles):
+    essential=roles.get("essential") or {}
+    op_required=bool(essential.get("operation_required",bool(roles.get("operation"))))
+    domain_required=bool(essential.get("domain_or_format_required",bool(roles.get("domain") or roles.get("format"))))
+    op_ok=(not op_required) or bool(alignment.get("operation"))
+    domain_ok=(not domain_required) or bool(alignment.get("domain") or alignment.get("format"))
+    return {
+      "operation_required":op_required,
+      "domain_or_format_required":domain_required,
+      "operation_match":op_ok,
+      "domain_or_format_match":domain_ok,
+      "compatible":bool(op_ok and domain_ok),
+    }
+
+
+def _score_apt_candidate(name,description,matched,roles):
+    ordered_name_tokens=re.findall(r"[a-z0-9]+",str(name or "").lower())
+    name_tokens=set(ordered_name_tokens) | {
+        ordered_name_tokens[i]+ordered_name_tokens[i+1]
+        for i in range(len(ordered_name_tokens)-1)
+    }
+    alignment=_candidate_role_alignment(name,description,roles)
+    compatibility=_essential_role_compatibility(alignment,roles)
+    supplier_role=_apt_supplier_role(name,description)
+
+    score=0
+    weights={"operation":34,"domain":30,"format":20}
+    for role,weight in weights.items():
+        for term in alignment[role]:
+            score += weight
+            family = OPERATION_FAMILIES if role=="operation" else DOMAIN_FAMILIES if role=="domain" else None
+            aliases=family.get(_family_for_token(term,family),{term}) if family else {term}
+            if any(any(v in name_tokens for v in _lexical_variants(alias)) for alias in aliases):
+                score += weight//2
+
+    for term in matched:
+        if not any(term in roles.get(role,[]) for role in ("operation","domain","format")):
+            score += 1
+
+    if supplier_role["role"]=="DIRECT_EXECUTABLE_CANDIDATE":
+        score += 28
+        integration_friction=0
+    else:
+        score -= 48
+        integration_friction=3
+
+    # Hard semantic gate: topical overlap cannot compensate for missing an
+    # essential operation or domain/format role.
+    if compatibility["compatible"]:
+        score += 80
+    else:
+        score -= 500
+
+    lname=str(name or "").lower()
+    if lname.startswith(("python3-","python-","ruby-","golang-","php-","php")):
+        integration_friction=max(integration_friction,2)
+    if lname.startswith(("lib","librust-","libghc-")):
+        integration_friction=max(integration_friction,3)
+    if lname.endswith(("-dev","-doc","-dbg","-prof")):
+        integration_friction=max(integration_friction,4)
+
+    return score,integration_friction,supplier_role,alignment,compatibility
 
 
 def normalize_server(entry, query):
@@ -256,6 +481,7 @@ def search_apt_packages(effect, limit=12):
             "queries":effect_queries(effect),"candidate_count":0,"candidates":[],
             "errors":[{"error":"APT_CACHE_UNAVAILABLE"}],"binding_performed":False,
         }
+    roles=effect_semantic_roles(effect)
     queries=effect_queries(effect)
     apt_queries=_apt_query_variants(queries)
     seen={}
@@ -297,40 +523,9 @@ def search_apt_packages(effect, limit=12):
             }
             if not matched:
                 continue
-            score=0
-            ordered_name_tokens=re.findall(r"[a-z0-9]+",name.lower())
-            name_tokens=set(ordered_name_tokens) | {
-                ordered_name_tokens[i]+ordered_name_tokens[i+1]
-                for i in range(len(ordered_name_tokens)-1)
-            }
-            for t in matched:
-                distinctive=t not in GENERIC_DISCOVERY_TOKENS
-                if t in name_tokens:
-                    score += 24 if distinctive else 6
-                else:
-                    score += 10 if distinctive else 2
-            # Integration friction matters more than word count. Standalone
-            # executables are usually cheaper to bind than language libraries.
-            lname=name.lower()
-            integration_friction=0
-            if lname.startswith(("python3-","ruby-","golang-","php-","php")):
-                integration_friction=2
-                score-=10
-            if lname.startswith(("lib","librust-","libghc-")):
-                integration_friction=3
-                score-=12
-            if name.endswith(("-dev","-doc","-dbg","-prof")):
-                integration_friction=max(integration_friction,4)
-                score-=8
-            if integration_friction==0:
-                score+=8
-            # Reward candidates that jointly cover multiple distinct pieces
-            # of the requested effect. A package matching both "decode" and
-            # "barcode" is more useful than one that merely mentions barcode.
-            if len(matched)>1:
-                score += 20*(len(matched)-1)
-            if lname in effect.lower():
-                score+=8
+            score,integration_friction,supplier_role,semantic_alignment,essential_compatibility=_score_apt_candidate(
+                name,description,matched,roles
+            )
             prior=seen.get(name)
             cand={
                 "discovery_source":"APT_CATALOG",
@@ -340,6 +535,9 @@ def search_apt_packages(effect, limit=12):
                 "matched_terms":sorted(matched),
                 "score":score,
                 "integration_friction":integration_friction,
+                "effect_semantic_roles":roles,
+                "supplier_role":supplier_role,
+                "semantic_role_alignment":semantic_alignment,
                 "required_secret_count":0,
                 "required_environment_count":0,
                 "zero_cost_eligible":True,
@@ -350,7 +548,15 @@ def search_apt_packages(effect, limit=12):
             }
             if prior is None or cand["score"]>prior["score"]:
                 seen[name]=cand
-    ranked=sorted(seen.values(),key=lambda x:(-x["score"],x["name"]))[:max(1,min(int(limit),50))]
+    ranked=sorted(
+        seen.values(),
+        key=lambda x:(
+            not bool((x.get("essential_role_compatibility") or {}).get("compatible")),
+            (x.get("supplier_role") or {}).get("role")!="DIRECT_EXECUTABLE_CANDIDATE",
+            -float(x.get("score",0)),
+            str(x.get("name","")),
+        )
+    )[:max(1,min(int(limit),50))]
     enriched=[]
     for cand in ranked:
         name=cand["name"]
@@ -380,6 +586,7 @@ def search_apt_packages(effect, limit=12):
         "source":"APT_CATALOG",
         "source_url":None,
         "queries":queries,
+        "effect_semantic_roles":roles,
         "candidate_count":len(enriched),
         "candidates":enriched,
         "errors":errors,
@@ -671,6 +878,7 @@ def search_all(effect, limit_per_source=12):
             merged.append(x)
     # Prefer local zero-secret supply when capability relevance is comparable.
     merged.sort(key=lambda x:(
+        not bool((x.get("essential_role_compatibility") or {}).get("compatible",True)),
         not bool(x.get("zero_cost_eligible")),
         x.get("required_secret_count",0)>0,
         0 if x.get("discovery_source") in {"APT_CATALOG","PYPI"} else 1,
