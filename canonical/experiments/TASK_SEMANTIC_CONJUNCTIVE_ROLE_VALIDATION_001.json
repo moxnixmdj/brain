@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_FRESH_SEMANTIC_ROLE_VALIDATION_V1",
+  "validation_id": "TASK-SEMANTIC-CONJUNCTIVE-ROLE-VALIDATION-001",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "status": "FROZEN_BEFORE_REPAIR",
+  "repair_scope": "GENERIC_TASK_SEMANTIC_SEGMENTATION_PLUS_CONJUNCTIVE_ESSENTIAL_ROLE_COMPATIBILITY",
+  "runtime_constraints": [
+    "NO_PACKAGE_NAME_HINTS_IN_DISCOVERY_RUNTIME",
+    "NO_CONTRACT_PARSER_CHANGES",
+    "NO_PROBE_SPECIFIC_RANKING_EXCEPTIONS",
+    "NO_REUSE_OF_EXHAUSTED_SEMANTIC_ROLE_DIAGNOSTIC_001"
+  ],
+  "effects": [
+    {
+      "effect_id": "FRESH-AUDIO-TRANSCODE-001",
+      "goal": "Transcode a WAV audio recording into a FLAC audio file and save the result at canonical/astra_runtime/tmp/FRESH_AUDIO_TRANSCODE_001.flac.",
+      "oracle_families": [
+        "ffmpeg",
+        "sox"
+      ],
+      "required_operation_family": "convert_transform_transcode",
+      "required_domain_family": "audio_multimedia"
+    },
+    {
+      "effect_id": "FRESH-MARKUP-CONVERT-001",
+      "goal": "Convert a Markdown document into an HTML document and save the result at canonical/astra_runtime/tmp/FRESH_MARKUP_CONVERT_001.html.",
+      "oracle_families": [
+        "pandoc"
+      ],
+      "required_operation_family": "convert_transform_transcode",
+      "required_domain_family": "document_markup"
+    },
+    {
+      "effect_id": "FRESH-PNG-OPTIMIZE-001",
+      "goal": "Optimize a PNG image losslessly and save the result at canonical/astra_runtime/tmp/FRESH_PNG_OPTIMIZE_001.png.",
+      "oracle_families": [
+        "optipng"
+      ],
+      "required_operation_family": "optimize",
+      "required_domain_family": "image_graphics"
+    }
+  ],
+  "acceptance": {
+    "exact_oracle_top12_recall_min": 1,
+    "top1_essential_compatible_count_min": 3,
+    "top1_auxiliary_or_non_direct_count_max": 0,
+    "payload_schema_noise_query_count_max": 0,
+    "promotion_authorized": false
+  }
+}
