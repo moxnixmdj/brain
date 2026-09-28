@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_ACTIVE_GOAL_HIERARCHY_V1",
+  "status": "CANONICAL_FAIL_CLOSED",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "active_capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "active_probe": null,
+  "probe_state": "NO_ACTIVE_PROBE__DATAMATRIX_QUARANTINED_AS_SINGLE_PROBE_EVIDENCE",
+  "current_parent_blocker": "GENERICITY_OF_AUTONOMOUS_TOOL_DISCOVERY_SELECTION_LEARNING_NOT_YET_ESTABLISHED_ACROSS_ORTHOGONAL_UNSEEN_MISSIONS",
+  "next_required_action_class": "ORTHOGONAL_PROBE_PORTFOLIO_OR_FRONTIER_RECONCILIATION",
+  "forbidden_local_frontier": "DATAMATRIX_PACKAGE_OR_VERIFIER_OPTIMIZATION",
+  "progress_level_minimum": "CAPABILITY_TARGET",
+  "probe_budget": {
+    "repairs_used_on_active_probe": 0,
+    "max_repairs_from_single_probe": 1,
+    "same_probe_replays_used": 0,
+    "max_same_probe_replays": 1,
+    "orthogonal_recurrence_required_for_second_repair": 2
+  },
+  "quarantined_probes": [
+    {
+      "probe_id": "OBSOLESCENCE-TOOL-LEARNING-DATAMATRIX-001",
+      "pr": 51,
+      "reason": "SINGLE_PROBE_ALREADY_USED_TO_EXPOSE_GENERIC_TOOL_DISCOVERY_AND_VERIFICATION_FAILURES__FURTHER_LOCAL_OPTIMIZATION_RISKS_DRIFT",
+      "evidence_preserved": true,
+      "may_define_frontier": false
+    }
+  ]
+}

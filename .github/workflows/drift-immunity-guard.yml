@@ -1,0 +1,44 @@
+name: Drift Immunity Guard
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, ready_for_review]
+  push:
+    branches:
+      - governance/drift-immunity-v1-20260928
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout trusted base
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Preserve trusted validator
+        run: cp canonical/runtime/enforce_goal_hierarchy.py /tmp/trusted_drift_guard.py
+      - name: Resolve comparison
+        id: refs
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "pull_request_target" ]; then
+            git fetch origin "pull/${{ github.event.pull_request.number }}/head:pr-head"
+            echo "base=${{ github.event.pull_request.base.sha }}" >> "$GITHUB_OUTPUT"
+            echo "head=pr-head" >> "$GITHUB_OUTPUT"
+            git checkout --detach pr-head
+          else
+            git fetch origin main
+            BASE="$(git merge-base origin/main HEAD)"
+            echo "base=$BASE" >> "$GITHUB_OUTPUT"
+            echo "head=HEAD" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Enforce terminal-goal hierarchy
+        run: |
+          python /tmp/trusted_drift_guard.py             --base "${{ steps.refs.outputs.base }}"             --head "${{ steps.refs.outputs.head }}"
