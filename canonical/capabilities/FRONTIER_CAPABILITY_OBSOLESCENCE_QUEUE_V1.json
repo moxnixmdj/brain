@@ -70,12 +70,12 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Integrate proven executable-path plus manpage operation evidence into APT candidate ranking generically, then replay the frozen four-effect ranking diagnostic exactly once.",
-    "selection_metric": "ORACLE_FAMILY_RECALL_AND_TOP20_RECALL_WITH_ZERO_TASK_SPECIFIC_HINTS_PER_WALL_CLOCK",
-    "exact_blocker": "EXECUTABLE_AND_MANPAGE_OPERATION_EVIDENCE_PROVEN__CURRENT_RUNTIME_DOES_NOT_CONSUME_IT_FOR_CANDIDATE_RANKING",
-    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_COMMAND_MANPAGE_SEMANTICS_DIAGNOSTIC_001_RECONCILIATION.json",
-    "repair_status": "ONE_GENERIC_REPAIR_AUTHORIZED",
-    "prohibition": "ONE_REPAIR_ONLY__ONE_FROZEN_REPLAY__NO_PACKAGE_HINTS__NO_TASK_SPECIFIC_LITERALS__THEN_RECONCILE"
+    "objective": "Determine whether effect semantics can directly generate a compact viable executable/manpage-derived supplier candidate set before lexical package admission, with no runtime mutation and no oracle package hints.",
+    "selection_metric": "VIABLE_SUPPLIER_FAMILY_RECALL_AND_TOP_K_PRECISION_PER_WALL_CLOCK_WITH_ZERO_HINTS",
+    "exact_blocker": "DIRECT_EXECUTABLE_MANPAGE_CANDIDATE_GENERATION_NOT_YET_PROVEN__POST_ADMISSION_ENRICHMENT_FALSIFIED",
+    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EXECUTABLE_SEMANTIC_REPAIRS_FALSIFICATION_RECONCILIATION_V1.json",
+    "repair_status": "NO_RUNTIME_REPAIR_AUTHORIZED__DIAGNOSTIC_REQUIRED",
+    "prohibition": "NO_POST_ADMISSION_RANKING_TWEAKS__NO_PACKAGE_HINTS__NO_RUNTIME_MUTATION_BEFORE_DIAGNOSTIC__BLOCKER_LEASE_REQUIRED"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -112,5 +112,23 @@
     "coverage_improved_fraction": 1,
     "high_semantic_coverage_fraction": 0.75,
     "one_generic_repair_authorized": true
+  },
+  "executable_semantic_repair_reconciliation_v1": {
+    "status": "FALSIFIED_BOTH_IMPLEMENTATIONS__NOT_MERGED",
+    "prs": [
+      72,
+      73
+    ],
+    "run72": {
+      "workflow_run_id": 36468338181,
+      "oracle_family_recall": 0.75,
+      "top20_oracle_recall": 0.5
+    },
+    "run73": {
+      "workflow_run_id": 36471956894,
+      "oracle_family_recall": 0.25,
+      "top20_oracle_recall": 0.25
+    },
+    "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EXECUTABLE_SEMANTIC_REPAIRS_FALSIFICATION_RECONCILIATION_V1.json"
   }
 }
