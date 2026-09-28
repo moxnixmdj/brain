@@ -166,6 +166,14 @@ def _semantic_execution_variants(contract, output_path):
               "help_line":line.strip()[:500],
             })
         break
+    for item in _help_symbol_size_candidates(contract,output_path):
+        argv=list(base[:-1])+[item["flag"],item["value"],base[-1]]
+        if all(v["argv"]!=argv for v in out):
+            out.append({
+              "basis":"HELP_DECLARED_SYMBOL_SIZE_FROM_RASTER_DIMENSIONS",
+              "argv":argv,
+              "symbol_size":item["value"],
+            })
     return out
 
 
