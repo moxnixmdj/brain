@@ -167,9 +167,18 @@ def _acquire_and_run_semantic_verifier(pending, output_path):
             attempts.append(attempt)
             continue
     raise RuntimeError("SEMANTIC_VERIFIER_ACQUISITION_FAILED:"+json.dumps([
-        {"name":(a.get("candidate") or {}).get("name"),"status":a.get("status"),"error":a.get("error")}
+        {
+          "name":(a.get("candidate") or {}).get("name"),
+          "status":a.get("status"),
+          "error":a.get("error"),
+          "argv":(a.get("contract") or {}).get("argv"),
+          "returncode":a.get("returncode"),
+          "stdout":a.get("stdout"),
+          "stderr":a.get("stderr"),
+          "inference_basis":(a.get("contract") or {}).get("inference_basis"),
+        }
         for a in attempts
-    ],sort_keys=True)[:3000])
+    ],sort_keys=True)[:12000])
 
 
 def _resolve_callable(module,name):
