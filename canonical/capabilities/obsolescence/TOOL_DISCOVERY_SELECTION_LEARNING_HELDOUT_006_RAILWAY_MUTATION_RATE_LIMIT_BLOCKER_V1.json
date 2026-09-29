@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_EXECUTION_SURFACE_MUTATION_BLOCKER_V1",
+  "recorded_on": "2026-09-29",
+  "validation_id": "TOOL-DISCOVERY-LATENCY-RECALL-HELDOUT-VALIDATION-006",
+  "gate_state": {
+    "execution_count": 0,
+    "freshness": "UNSPENT",
+    "replay_authorized": false,
+    "runtime_blob": "97f4c61691afc6b4d9cb3ed54ee0fc85531ca977",
+    "manifest_blob": "3439e26ef4c650098db50f745105eed9b68be776",
+    "runner_blob": "cbae7e4d1a0de5ddf5df67f7a869bab7a3f66317"
+  },
+  "repair": {
+    "id": "SEMANTIC_INDEX_FAST_DISCOVERY_DEFER_EXPENSIVE_BINDING_V1",
+    "synthetic_verification": "PASS",
+    "expensive_common_path_calls_observed_in_synthetic_test": 0,
+    "heldout_literals_in_runtime": false
+  },
+  "execution_surface": {
+    "provider": "Railway",
+    "project_id": "9d2e8ee8-0eb8-414c-b7e0-a93d90eed54d",
+    "environment_id": "256bcc63-cebd-4079-9a61-c0e9cdbbeeb8",
+    "service_id": "851b6f16-2e12-4a68-b49c-04f81056fa5f",
+    "previously_qualified_hard_zero_surface": true
+  },
+  "blocker": {
+    "classification": "RAILWAY_PLATFORM_MUTATION_RATE_LIMIT",
+    "observed_write_failures": [
+      {
+        "operation": "set_variables",
+        "error": "You are sending tool calls too quickly. Try again in 2954s."
+      },
+      {
+        "operation": "update_service",
+        "error": "You are sending tool calls too quickly. Try again in 2764s."
+      },
+      {
+        "operation": "get_service_config_after_rate_limit",
+        "error": "You are sending tool calls too quickly. Try again in 2746s."
+      }
+    ],
+    "gate_started": false,
+    "gate_spent": false,
+    "runtime_mutated_after_freeze": false
+  },
+  "already_prepared_next_execution_route": {
+    "strategy": "REUSE_EXISTING_SERVICE_AND_EXISTING_PB005_RUNTIME_CHUNKS__RECONSTRUCT_OLD_RUNTIME__APPLY_EXACT_GENERIC_PATCH_IN_CARRIER__VERIFY_GIT_BLOB_97F4C616__EMBED_FROZEN_006_RUNNER_AND_MANIFEST__REQUALIFY_SURFACE__START_ONCE",
+    "requires_new_provider": false,
+    "requires_user_laptop": false,
+    "requires_new_resource": false,
+    "requires_runtime_change": false
+  },
+  "non_actions": [
+    "DO_NOT_RETRY_RAILWAY_MUTATIONS_DURING_ACTIVE_COOLDOWN",
+    "DO_NOT_SEARCH_NEW_PROVIDER_WHILE_EXISTING_QUALIFIED_SURFACE_IS_TEMPORARILY_THROTTLED",
+    "DO_NOT_PREVIEW_OR_EXECUTE_GATE_006_ELSEWHERE",
+    "DO_NOT_MUTATE_RUNTIME",
+    "DO_NOT_USE_USER_LAPTOP",
+    "DO_NOT_INCREASE_TIMEOUT"
+  ],
+  "next_action": "AFTER_RAILWAY_MUTATION_THROTTLE_CLEARS__STAGE_PREPARED_EXACT_BLOB_VERIFIED_CARRIER_ON_EXISTING_QUALIFIED_SERVICE__EXECUTE_GATE_006_EXACTLY_ONCE__RECONCILE"
+}
