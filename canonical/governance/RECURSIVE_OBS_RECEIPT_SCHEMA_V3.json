@@ -63,6 +63,8 @@
     "challenger_item_required_fields": [
       "route",
       "evidence",
+      "qualification_evidence",
+      "qualification_evidence_classes",
       "resolution",
       "comparison"
     ],
@@ -71,7 +73,14 @@
       "NON_DOMINATING",
       "DISQUALIFIED"
     ],
-    "no_challenger_rule": "EMPTY_CHALLENGER_LIST_REQUIRES_NONEMPTY_NEGATIVE_SEARCH_SUMMARY"
+    "no_challenger_rule": "EMPTY_CHALLENGER_LIST_REQUIRES_NONEMPTY_NEGATIVE_SEARCH_SUMMARY",
+    "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY",
+      "CODE_OR_PACKAGE_REGISTRY",
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER"
+    ],
+    "community_or_social_role": "DISCOVERY_SENSOR_ONLY__CANNOT_ALONE_QUALIFY_OR_DISQUALIFY_ROUTE"
   },
   "route_frontier_types": {
     "discovery_required": "BOOLEAN",
