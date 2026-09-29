@@ -1,0 +1,151 @@
+{
+  "schema": "PROJECT_BRAIN_TYPED_EVIDENCE_DECISION_TASK_V1",
+  "task_id": "SPACE_CARGO_FINAL_DESIGN_PROMOTION_001",
+  "question": "Is the preserved 100 t payload / 115 t gross reference search region sufficiently supported to promote from a promising first-order search region to a final design?",
+  "decision_id": "PROMOTE_SPACE_CARGO_REFERENCE_REGION_TO_FINAL_DESIGN",
+  "evidence": [
+    {
+      "id": "orbit_envelope",
+      "probability": 1,
+      "statement": "The preserved first-order model places the reference search region at about 409.62 km apogee for a 400 km target.",
+      "provenance": {
+        "path": "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json",
+        "field": "reference_search_region.derived.apogee_altitude_km"
+      }
+    },
+    {
+      "id": "two_body_crosscheck",
+      "probability": 1,
+      "statement": "Independent Wolfram recalculation passed the two-body and throughput reference calculation.",
+      "provenance": {
+        "path": "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json",
+        "field": "independent_checks.wolfram_two_body_and_throughput_recalculation.result"
+      }
+    },
+    {
+      "id": "ideal_lane_cadence",
+      "probability": 1,
+      "statement": "At 100 million payload tonnes/year, the ideal reference cadence has average pods in the accelerator below one.",
+      "provenance": {
+        "path": "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json",
+        "field": "throughput_scaling_for_reference_search_region[2].average_pods_in_accelerator"
+      }
+    },
+    {
+      "id": "tps_gap",
+      "probability": 1,
+      "statement": "The reference point predicts about 7050 W/cm^2 convective peak while cited demonstrated PICA context is below about 1800 W/cm^2; reusable low-maintenance TPS at required cadence remains unproven.",
+      "provenance": {
+        "path": "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json",
+        "field": "technology_reality_check.tps_context"
+      }
+    },
+    {
+      "id": "em_scale_gap",
+      "probability": 1,
+      "statement": "The 4.555 TJ reference pod shot is about 428062 times the cited 10.64 MJ railgun shot, and mass × velocity × repetition × reliability together remain unproven.",
+      "provenance": {
+        "path": "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json",
+        "field": "technology_reality_check.localized_gap"
+      }
+    },
+    {
+      "id": "cd_unverified",
+      "probability": 1,
+      "statement": "Cd=0.05 is explicitly a search assumption rather than a demonstrated aerodynamic property.",
+      "provenance": {
+        "path": "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json",
+        "field": "reference_search_region.sensitivity_warning"
+      }
+    },
+    {
+      "id": "failure_containment_unproven",
+      "probability": 1,
+      "statement": "System availability and failure containment at 100 Mt/year remains a ranked unresolved residual.",
+      "provenance": {
+        "path": "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json",
+        "field": "surviving_residuals_ranked"
+      }
+    }
+  ],
+  "rules": [
+    {
+      "id": "support_orbit_target",
+      "antecedents": [
+        "orbit_envelope",
+        "two_body_crosscheck"
+      ],
+      "strength": 1,
+      "stance": "SUPPORT",
+      "description": "The first-order trajectory envelope and independent recalculation support continued design viability."
+    },
+    {
+      "id": "support_ideal_throughput",
+      "antecedents": [
+        "ideal_lane_cadence"
+      ],
+      "strength": 1,
+      "stance": "SUPPORT",
+      "description": "Ideal cadence arithmetic does not by itself require multiple simultaneous pods in one accelerator."
+    },
+    {
+      "id": "oppose_tps_readiness",
+      "antecedents": [
+        "tps_gap"
+      ],
+      "strength": 1,
+      "stance": "OPPOSE",
+      "description": "The reusable thermal-protection lifecycle needed for final-design promotion is not demonstrated."
+    },
+    {
+      "id": "oppose_em_readiness",
+      "antecedents": [
+        "em_scale_gap"
+      ],
+      "strength": 1,
+      "stance": "OPPOSE",
+      "description": "Electromagnetic acceleration at the combined required scale and repetition is not demonstrated."
+    },
+    {
+      "id": "oppose_aero_readiness",
+      "antecedents": [
+        "cd_unverified"
+      ],
+      "strength": 1,
+      "stance": "OPPOSE",
+      "description": "A decisive aerodynamic parameter is still an explicit search assumption."
+    },
+    {
+      "id": "oppose_reliability_readiness",
+      "antecedents": [
+        "failure_containment_unproven"
+      ],
+      "strength": 1,
+      "stance": "OPPOSE",
+      "description": "System availability and failure containment remain unresolved."
+    }
+  ],
+  "hard_constraints": [
+    {
+      "id": "final_design_requires_tps_lifecycle",
+      "ref": "tps_gap",
+      "trigger_probability": 0.999,
+      "decision": "REJECT",
+      "reason": "A final design cannot be promoted while the required repetitive TPS/cooling lifecycle remains unproven."
+    },
+    {
+      "id": "final_design_requires_em_system_readiness",
+      "ref": "em_scale_gap",
+      "trigger_probability": 0.999,
+      "decision": "REJECT",
+      "reason": "A final design cannot be promoted while the core launcher mass×velocity×repetition×reliability capability remains unproven."
+    }
+  ],
+  "policy": {
+    "accept_threshold": 0.75,
+    "reject_threshold": 0.75,
+    "min_margin": 0.2,
+    "conflict_threshold": 0.35,
+    "evidence_floor": 0.6
+  }
+}
