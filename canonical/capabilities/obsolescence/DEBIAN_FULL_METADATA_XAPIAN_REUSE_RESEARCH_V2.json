@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_DEBIAN_FULL_METADATA_XAPIAN_REUSE_RESEARCH_V2",
+  "status": "RECONCILED_REUSE_ROUTE_FOUND",
+  "checked_on": "2026-09-29",
+  "source_gate": "SPENT_HELDOUT_003_AND_004_DIAGNOSTICS_ONLY",
+  "findings": {
+    "apt_xapian_index_in_trixie": false,
+    "python3_xapian_in_trixie": true,
+    "docker_default_discards_translation_en": true,
+    "translation_en_restorable": true,
+    "translation_join_key": "Description-md5",
+    "debian_package_tags_available": true,
+    "direct_contents_indexes_available": true
+  },
+  "spent_diagnostics": {
+    "short_description_xapian": {
+      "qrencode_rank": 2,
+      "jq_rank": 9,
+      "sox_rank": null,
+      "qpdf_rank": null
+    },
+    "full_translation_xapian": {
+      "qrencode_rank": 1,
+      "jq_rank": 1,
+      "qpdf_rank": 1,
+      "sox_rank": 61
+    },
+    "full_translation_plus_tags_weight4_xapian": {
+      "qrencode_rank": 1,
+      "jq_rank": 1,
+      "qpdf_rank": 3,
+      "sox_rank": 10
+    }
+  },
+  "selected_design": [
+    "DEBIAN_TRANSLATION_EN_JOIN_BY_DESCRIPTION_MD5",
+    "PACKAGE_NAME_WEIGHT_5",
+    "FULL_DESCRIPTION_WEIGHT_1",
+    "NORMALIZED_DEBIAN_TAG_WEIGHT_4",
+    "XAPIAN_BM25_ENGLISH_STEMMING",
+    "ONE_STREAMING_PASS_OVER_APT_CONTENTS_FOR_EXECUTABLE_OWNERSHIP",
+    "NO_REMOTE_MANPAGE_HOT_PATH",
+    "NO_REPEATED_APT_FILE_LIST_SUBPROCESSES",
+    "LEGACY_APT_SEARCH_FALLBACK_ONLY_WHEN_FULL_METADATA_ROUTE_UNAVAILABLE"
+  ]
+}
