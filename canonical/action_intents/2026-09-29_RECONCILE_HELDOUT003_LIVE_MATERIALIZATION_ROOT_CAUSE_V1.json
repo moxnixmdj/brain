@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-HELDOUT003-LIVE-MATERIALIZATION-ROOT-CAUSE-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "causal_blocker": "HELDOUT_004_FROZEN_UNSPENT__LIVE_CARRIER_IMPORT_FAILURE_ROOT_CAUSE_UNPROVEN__HARD_ZERO_REMOTE_CARRIER_NOT_YET_QUALIFIED",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::HELDOUT_004_FROZEN_UNSPENT__LIVE_CARRIER_IMPORT_FAILURE_ROOT_CAUSE_UNPROVEN__HARD_ZERO_REMOTE_CARRIER_NOT_YET_QUALIFIED::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Promote the directly observed HELDOUT-003 carrier root cause from unproven to proven materialization omission: the preserved live Sprite /work tree is not a Git checkout and its bound_capabilities directory lacks python_library_codec.py and python_source_tree_codec.py although the qualified source branch contained both. Preserve this as carrier evidence, then move the parent frontier to the minimum generic correction: materialize the exact required repository closure or full exact source tree with a pre-START file/hash preflight, qualify hard-zero executor admission, and only then execute HELDOUT-004 once.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR167 evidence-boundary reconciliation",
+    "merged PR170 frozen HELDOUT-004 gate",
+    "live Sprite brain-heldout003-one-shot filesystem inspection after PR170",
+    "canonical HELDOUT-003 terminal result ImportError for python_library_codec",
+    "qualified source branch evidence proving both missing modules existed in source"
+  ],
+  "evidence_presence_classification": "DIRECT_LIVE_CARRIER_FILESYSTEM_EVIDENCE__ROOT_CAUSE_PROVEN__NO_HELDOUT_REPLAY",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Preserve the live carrier filesystem observation and reconcile only the root-cause/frontier descriptors. Do not execute HELDOUT-004, replay HELDOUT-003, mutate capability runtime, change the evaluator, use Val Town, use the user laptop, or incur paid spend in this reconciliation PR.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
