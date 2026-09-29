@@ -1,0 +1,108 @@
+{
+  "schema": "PROJECT_BRAIN_HELDOUT_CAUSAL_ATTRIBUTION_AND_ROUTE_COMPARISON_V1",
+  "status": "NO_MUTATION_ATTRIBUTION_COMPLETE__REUSE_REPLACEMENT_SELECTED__NEW_UNSEEN_GATE_REQUIRED_BEFORE_RUNTIME_MUTATION",
+  "checked_on": "2026-09-29",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "source_pr": 85,
+  "source_gate": "BATCHED-EXECUTABLE-EVIDENCE-HELDOUT-VALIDATION-002",
+  "source_reconciliation": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_BATCHED_EXECUTABLE_EVIDENCE_HELDOUT_VALIDATION_002_RECONCILIATION_V1.json",
+  "observed_gate": {
+    "qualified_surface": true,
+    "family_recall": 0.25,
+    "top20_recall": 0.25,
+    "required_family_recall": 0.75,
+    "required_top20_recall": 0.75,
+    "total_wall_s": 358.370173
+  },
+  "observed_case_pattern": {
+    "heldout_ocr_002": "oracle tesseract-ocr absent; returned executable-evidence neighborhood was dominated by PNG-name matches",
+    "heldout_png_optimize_002": "oracle optipng absent despite package metadata containing direct PNG-optimizer semantics",
+    "heldout_iso_image_002": "oracle genisoimage found at rank 3; its executable/package name lexically overlaps the goal",
+    "heldout_audio_transcode_002": "oracle ffmpeg absent; returned neighborhood contained lexically transparent mp3/ogg/vorbis utilities"
+  },
+  "source_code_causal_chain": [
+    "_local_apt_executable_evidence first requires a goal term to appear in an /usr/bin command filename before a package can enter executable evidence.",
+    "Remote manpage semantic enrichment is applied only after that filename-gated preliminary set is built and truncated.",
+    "search_apt_packages separately creates package-description candidates, but final _apt_rank_key gives all direct executable semantic/path evidence categorical priority over catalog-only candidates.",
+    "Therefore semantic package metadata can be present yet unable to rescue semantically opaque executable names, while incidental filename matches dominate final recall."
+  ],
+  "corroborating_prior_brain_evidence": {
+    "direct_generator_delta": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_DIRECT_GENERATOR_INTEGRATION_DELTA_001_RECONCILIATION.json",
+    "prior_conclusion": "DIRECT_EXECUTABLE_EVIDENCE_CANDIDATES_SURVIVE_GENERATION__GLOBAL_LEXICAL_PLUS_EXECUTABLE_SCORE_FUSION_AND_FINAL_TOP_K_RANKING_REMAINS_CAUSAL_RECALL_BOTTLENECK",
+    "executable_candidate_diagnostic": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EXECUTABLE_CANDIDATE_DIAGNOSTIC_001_RECONCILIATION.json"
+  },
+  "external_existing_mechanism_evidence": [
+    {
+      "mechanism": "apt-xapian-index / axi-cache",
+      "evidence": "Ubuntu 24.04 Noble ships apt-xapian-index 0.54ubuntu1. It indexes Debian/Ubuntu package information for relevance-ranked search.",
+      "url": "https://packages.ubuntu.com/noble/apt-xapian-index"
+    },
+    {
+      "mechanism": "Xapian QueryParser in axi-cache",
+      "evidence": "Existing axi-cache uses English stemming, spelling correction, AUTO_SYNONYMS, boolean query parsing, and relevance ordering.",
+      "url": "https://sources.debian.org/src/apt-xapian-index/0.52/axi-cache"
+    },
+    {
+      "mechanism": "Debian package semantic metadata",
+      "evidence": "Package descriptions/tags directly encode task semantics and command-line/program role for examples such as tesseract-ocr and optipng.",
+      "urls": [
+        "https://packages.debian.org/trixie/amd64/tesseract-ocr",
+        "https://packages.debian.org/trixie/optipng"
+      ]
+    },
+    {
+      "mechanism": "apt-file batched package-content verification",
+      "evidence": "apt-file supports list/show package and --from-file batching, so executable presence can be verified after semantic retrieval instead of used as the semantic generator.",
+      "url": "https://manpages.debian.org/bookworm/apt-file/apt-file.1.en.html"
+    }
+  ],
+  "exact_generic_cause": "SEMANTIC_RETRIEVAL_CAUSAL_INVERSION__EXECUTABLE_FILENAME_LEXICAL_GATING_PRECEDES_SEMANTIC_RELEVANCE_AND_DIRECT_EVIDENCE_TIER_DOMINANCE_SUPPRESSES_SEMANTIC_PACKAGE_CANDIDATES",
+  "route_comparison": [
+    {
+      "route": "ADD_SYNONYMS_OR_TASK_TERM_RULES",
+      "disposition": "REJECT",
+      "reason": "adds permanent heuristics, risks task leakage, and preserves the causal inversion"
+    },
+    {
+      "route": "RETUNE_CURRENT_ADDITIVE_SCORES_OR_ONLY_REMOVE_TIER_KEY",
+      "disposition": "REJECT_AS_PRIMARY_ROUTE",
+      "reason": "small diff but preserves custom semantic fusion, filename-gated enrichment, remote manpage dependency, and incompatible score scales"
+    },
+    {
+      "route": "EMBEDDING_OR_LLM_PACKAGE_RERANKER",
+      "disposition": "REJECT",
+      "reason": "adds model/runtime/dependency/cost complexity before exhausting an existing local semantic search engine"
+    },
+    {
+      "route": "APT_XAPIAN_RELEVANCE_FIRST__APT_FILE_EXECUTABLE_VERIFICATION_SECOND",
+      "disposition": "SELECTED_BEST_SUPPORTED_ROUTE",
+      "reason": "reuses maintained Ubuntu/Debian semantic retrieval, moves semantics before executable verification, and permits deletion of per-term apt-cache ranking, global filename-first apt-file candidate generation, remote manpage enrichment, and custom categorical fusion"
+    }
+  ],
+  "selected_repair_principle": {
+    "description": "Replace, do not add: use relevance-ranked package metadata retrieval first; then batch-verify executable presence for only the semantic candidates.",
+    "intended_minimal_flow": [
+      "generic goal terms",
+      "Xapian relevance-ranked package candidates using package descriptions/tags",
+      "one batched apt-file package-content verification for /usr/bin",
+      "preserve Xapian relevance order among verified executable providers"
+    ],
+    "parts_targeted_for_deletion": [
+      "per-query apt-cache search/fusion as the primary ranker",
+      "global executable-filename lexical candidate generation",
+      "remote Ubuntu manpage enrichment",
+      "direct-evidence categorical tier dominance",
+      "large additive cross-evidence score fusion"
+    ],
+    "task_specific_literals_forbidden": true,
+    "package_name_hints_forbidden": true
+  },
+  "unresolved_risks": [
+    "cold apt-xapian index preparation cost must be treated as execution-surface preparation and verified under the same hard-zero-spend environment",
+    "new unseen validation must be frozen before any runtime implementation mutation",
+    "selected route remains falsifiable; if a smaller existing route is discovered before mutation, replacement selection may be superseded"
+  ],
+  "next_action": "FREEZE_NEW_UNSEEN_HELDOUT_GATE_003_BEFORE_ANY_RUNTIME_MUTATION__THEN_IMPLEMENT_AT_MOST_ONE_GENERIC_REPLACEMENT_REPAIR__VALIDATE_ONCE",
+  "runtime_mutated": false,
+  "promotion_authorized": false
+}
