@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-H004-CHATGPT-CARRIER-READONLY-REJECTION-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "causal_blocker": "PR178_QUARANTINED_READ_ONLY_SCOPE_OVERRUN__H004_STILL_FROZEN_UNSPENT__SAFE_PRE_OVERRUN_CHATGPT_CARRIER_REJECTION_NOT_YET_CANONICAL",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::PR178_QUARANTINED_READ_ONLY_SCOPE_OVERRUN__H004_STILL_FROZEN_UNSPENT__SAFE_PRE_OVERRUN_CHATGPT_CARRIER_REJECTION_NOT_YET_CANONICAL::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Reconcile quarantined PR178 without adopting its post-guard apt-update action. Preserve only the safe pre-overrun conclusion needed for routing: the built-in ChatGPT Debian container did not already provide the faithful H004 APT/Xapian/QR execution surface (APT list metadata absent, python xapian unavailable, zbarimg unavailable), so that existing carrier is rejected for a read-only reuse-first qualification. Keep H004 frozen/unspent. Advance to qualifying one already-discovered accountless/cardless hard-zero connected remote Linux route, preferring Railway anonymous VM, under a separate guarded qualification lane with exact source-closure/path/hash/import preflight and no H004 START.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR176 current canonical carrier-fidelity boundary",
+    "quarantined PR178 immutable intent and quarantine comment",
+    "PR178 pre-overrun read-only facts: Debian 13/root surface, zero APT list files, python xapian unavailable, zbarimg unavailable",
+    "PR178 post-guard apt-get update attempt is excluded from canonical qualification evidence",
+    "closed duplicate PR179-PR182 lanes",
+    "Railway official anonymous VM public hard-zero claim discovered but not yet live-qualified"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "After exact intent-head guard, add one reconciliation evidence record and update pointer/hierarchy/queue only. Do not rerun any carrier diagnostic, execute apt-get update, provision any carrier, create H004 START/RESULT, invoke evaluator/dispatch, access Sprite, use Val, use user laptop, or incur paid/unproven spend. Final-head guard then merge.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
