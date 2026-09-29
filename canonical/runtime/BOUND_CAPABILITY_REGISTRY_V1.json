@@ -2421,7 +2421,7 @@
       }
     },
     "decision.synthesis.typed.stdlib": {
-      "status": "CANDIDATE_PENDING_INDEPENDENT_VERIFICATION",
+      "status": "VERIFIED_BOUND_CAPABILITY",
       "incremental_spend_usd": 0,
       "cost": 1,
       "requires": [
@@ -2494,11 +2494,16 @@
           "REAL-TASK-A-ZERO-SPEND-CARRIER-20260930",
           "REAL-TASK-B-CLICK-REPAIR-ROUTE-20260930"
         ],
-        "status": "CANDIDATE_PENDING_EXACT_BRANCH_EXECUTION"
+        "status": "INDEPENDENT_REMOTE_VERIFICATION_PASS",
+        "public_run_id": 36642428325,
+        "public_job_id": 109657545598,
+        "public_head_sha": "c96efa66a27a32169a074993b2a39f4ebf6e2d4a",
+        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REMOTE_VERIFICATION_20260930_V1.json",
+        "producer_git_blob": "7690b26800b2701dac9e187a92c5561d79d831dd"
       }
     },
     "decision.synthesis.verify.stdlib": {
-      "status": "CANDIDATE_PENDING_INDEPENDENT_VERIFICATION",
+      "status": "VERIFIED_BOUND_CAPABILITY",
       "incremental_spend_usd": 0,
       "cost": 1,
       "requires": [
@@ -2560,7 +2565,12 @@
         "producer_independent": true,
         "mission_id": "ASTRA-MODEL-INDEPENDENT-EVIDENCE-DECISION-REAL-TASKS-001",
         "model_dependency_count": 0,
-        "status": "CANDIDATE_PENDING_EXACT_BRANCH_EXECUTION"
+        "status": "INDEPENDENT_REMOTE_VERIFICATION_PASS",
+        "public_run_id": 36642428325,
+        "public_job_id": 109657545598,
+        "public_head_sha": "c96efa66a27a32169a074993b2a39f4ebf6e2d4a",
+        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REMOTE_VERIFICATION_20260930_V1.json",
+        "verifier_git_blob": "63cf325320c7b91bf48ea2f2769c999c5a090929"
       }
     }
   },
