@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_HELDOUT_LITERAL_CONTAMINATION_AND_CLEAN_SUCCESSOR_FREEZE_V1",
+  "recorded_on": "2026-09-29",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "contaminated_gate": {
+    "validation_id": "SEMANTIC-PACKAGE-DISCOVERY-COMPOSITE-HELDOUT-VALIDATION-004",
+    "execution_count": 0,
+    "freshness_before_quarantine": "UNSPENT",
+    "reason": "FROZEN_RUNTIME_CONTAINS_ORACLE_LITERAL_WEBP__BLINDNESS_PRECHECK_FAILED_BEFORE_EXECUTION",
+    "exposed_oracle_family": "webp",
+    "executed": false,
+    "verdict": "QUARANTINED_WITHOUT_EXECUTION__DO_NOT_SPEND"
+  },
+  "clean_successor": {
+    "validation_id": "SEMANTIC-PACKAGE-DISCOVERY-CLEAN-HELDOUT-VALIDATION-005",
+    "construction_rule": "USE_ONLY_CASES_ALREADY_FROZEN_BEFORE_REPAIR_AND_UNEXPOSED_BY_CONCURRENT_003_EXECUTION_AND_ABSENT_AS_ORACLE_LITERALS_FROM_FROZEN_RUNTIME",
+    "no_new_case_invention": true,
+    "cases": [
+      {
+        "effect_id": "HELDOUT-MARKDOWN-EPUB-005",
+        "source_effect_id": "HELDOUT-MARKDOWN-EPUB-004",
+        "oracle_family": "pandoc",
+        "source_freeze": "89569377a6facbacdc959ef114c40514c4a413e4"
+      },
+      {
+        "effect_id": "HELDOUT-WAV-FLAC-005",
+        "source_effect_id": "HELDOUT-WAV-FLAC-004",
+        "oracle_family": "flac",
+        "source_freeze": "89569377a6facbacdc959ef114c40514c4a413e4"
+      },
+      {
+        "effect_id": "HELDOUT-RAR-EXTRACT-005",
+        "source_effect_id": "HELDOUT-RAR-EXTRACT-004",
+        "oracle_family": "unar",
+        "source_freeze": "89569377a6facbacdc959ef114c40514c4a413e4"
+      }
+    ],
+    "frozen_repair_commit": "aa49d81446e5d042f8cf1cffb3bada9c887fc014",
+    "frozen_runtime_blob": "dbd2b4026149a7a2e731eb3152ca398e30ca625f",
+    "runtime_oracle_literal_precheck": {
+      "pandoc": false,
+      "flac": false,
+      "unar": false,
+      "pass": true
+    },
+    "execution_count": 0,
+    "freshness": "UNSPENT"
+  },
+  "invariants": [
+    "NO_HELDOUT_003_EXECUTION_AS_FRESH",
+    "NO_HELDOUT_004_EXECUTION",
+    "NO_NEW_TEST_CASE_INVENTION_AFTER_REPAIR",
+    "NO_SECOND_RUNTIME_REPAIR_BEFORE_005_RECONCILIATION",
+    "NO_USER_LAPTOP",
+    "NO_BILLABLE_OR_UNPROVEN_METERED_EXECUTION",
+    "NO_PREVIEW_OR_REPLAY"
+  ]
+}
