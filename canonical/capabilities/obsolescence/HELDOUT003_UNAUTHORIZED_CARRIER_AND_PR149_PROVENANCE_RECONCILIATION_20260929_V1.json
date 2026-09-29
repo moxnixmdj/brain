@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_HELDOUT_INCIDENT_AND_PROVENANCE_RECONCILIATION_V1",
   "reconciliation_id": "HELDOUT003_UNAUTHORIZED_CARRIER_AND_PR149_PROVENANCE_20260929",
-  "status": "RECONCILED_PENDING_MERGE",
+  "status": "RECONCILED",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
   "pr149_transition_provenance": {
