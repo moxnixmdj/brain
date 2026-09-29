@@ -70,7 +70,7 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Keep HELDOUT-004 frozen/unspent. The built-in ChatGPT Linux carrier is rejected at the first ordered required surface predicate, NORMAL_APT_PACKAGES_METADATA_REQUIRED, because zero usable APT Packages metadata files are present. Later carrier predicates are not used for this adjudication. Reuse the already-proven PR20/PR35/PR45 exact-source mechanisms only after qualifying one already-discovered hard-zero remote Linux route with callable command transport and a faithful APT surface.",
+    "objective": "Keep HELDOUT-004 frozen/unspent. The built-in ChatGPT Linux carrier is rejected by clean read-only evidence at the first required surface predicate: normal APT package metadata is absent. Reuse the already-proven PR20/PR35/PR45 exact-source mechanisms only after qualifying one already-discovered remote Linux carrier with callable command transport, a faithful required APT/Xapian/QR surface, and independently supportable hard-zero spend.",
     "selection_metric": "CORRECTNESS_FIRST__THEN_VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK_WITH_ZERO_INCREMENTAL_SPEND",
     "exact_blocker": "HELDOUT_004_FROZEN_UNSPENT__EXISTING_CHATGPT_LINUX_CARRIER_REJECTED__NORMAL_APT_PACKAGES_METADATA_REQUIRED_FAILED__EXACT_CLOSURE_PREFLIGHT_PENDING__HARD_ZERO_REMOTE_CARRIER_UNQUALIFIED",
     "evidence_path": "canonical/capabilities/obsolescence/H004_CHATGPT_LINUX_READONLY_CARRIER_QUALIFICATION_CLEAN_20260929_V1.json",
