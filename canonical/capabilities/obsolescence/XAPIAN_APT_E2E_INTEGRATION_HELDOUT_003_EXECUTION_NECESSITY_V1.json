@@ -1,0 +1,25 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_EXECUTION_NECESSITY_V1",
+  "validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
+  "bound_main_sha": "5fa5571d05c5ed86682921b9226de5b2ebcf73c3",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "execution_lease_pr": 133,
+  "execution_intent": "canonical/action_intents/2026-09-29_EXECUTE_XAPIAN_APT_E2E_HELDOUT_003_ONCE_V1.json",
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "unresolved_predicate": "The merged provider-neutral APT admission route has not yet been exercised end-to-end on the already-frozen unseen HELDOUT-003 mission through discovery, acquisition, real effect, independent verification, and external semantic oracle.",
+  "guard_trigger_reason": "The canonical drift validator only enters frontier validation when at least one changed path is frontier-sensitive. This non-runtime capability record intentionally makes the execution-only lease visible to that existing guard without weakening or modifying the guard.",
+  "current_canonical_evidence": [
+    "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json marks XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003 active and FROZEN_UNSPENT",
+    "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_003.json fixes the one-shot execution contract and makes the first terminal result authoritative",
+    "merged PR129 supplies the single provider-neutral APT admission repair"
+  ],
+  "execution_constraints": {
+    "exactly_one_remote_carrier": true,
+    "user_laptop_forbidden": true,
+    "val_town_forbidden": true,
+    "incremental_spend_usd": 0,
+    "same_case_replay_allowed": false,
+    "second_repair_before_reconciliation_forbidden": true
+  },
+  "status": "LEASE_GUARD_TRIGGER_ONLY__NO_EXECUTION_STARTED"
+}
