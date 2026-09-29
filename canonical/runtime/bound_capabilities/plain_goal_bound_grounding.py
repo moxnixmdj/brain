@@ -99,7 +99,7 @@ def decompose(goal):
     parts=re.split(r"(?<=[.!?])\s+(?=[A-Z])|\b[Tt]hen\b",text)
     clauses=[]
     connector=re.compile(
-        r"\s+and\s+(?=(?:"+ACTION_CONNECTOR+r")\b)",re.IGNORECASE
+        r"\s+and\s+(?=(?:independently\s+)?(?:"+ACTION_CONNECTOR+r")\b)",re.IGNORECASE
     )
     cursor=0
     for part in parts:
