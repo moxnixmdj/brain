@@ -134,6 +134,49 @@ def enforce_blocker_lease(intent):
                 continue
         fail(f"DUPLICATE_BLOCKER_LEASE_OPEN_PR:{peer['pr']}")
 
+
+def enforce_one_shot_heldout_claim_contract(files):
+    """New/changed HELDOUT manifests must declare the atomic one-shot claim contract."""
+    expected_fields=["validation_id","manifest_git_blob"]
+    expected_serialization="validation_id\\nmanifest_git_blob_lowercase"
+    expected_template="execution-claims/v1/<sha256(validation_id\\nmanifest_git_blob_lowercase)>"
+    for path in files:
+        if not (path.startswith("canonical/experiments/") and path.endswith(".json")):
+            continue
+        if "HELDOUT" not in pathlib.PurePosixPath(path).name.upper():
+            continue
+        try:
+            spec=load(path)
+        except Exception as exc:
+            fail(f"HELDOUT_MANIFEST_READ_FAILED:{path}:{type(exc).__name__}")
+            continue
+        validation_id=str(spec.get("validation_id") or "")
+        if "HELDOUT" not in validation_id.upper():
+            continue
+        claim=spec.get("one_shot_execution_claim")
+        if not isinstance(claim,dict):
+            fail(f"HELDOUT_ONE_SHOT_CLAIM_MISSING:{path}")
+            continue
+        if claim.get("required") is not True:
+            fail(f"HELDOUT_ONE_SHOT_CLAIM_NOT_REQUIRED:{path}")
+        if claim.get("claim_key_fields")!=expected_fields:
+            fail(f"HELDOUT_ONE_SHOT_CLAIM_KEY_FIELDS_INVALID:{path}")
+        if str(claim.get("claim_key_serialization") or "")!=expected_serialization:
+            fail(f"HELDOUT_ONE_SHOT_CLAIM_SERIALIZATION_INVALID:{path}")
+        if str(claim.get("claim_ref_template") or "")!=expected_template:
+            fail(f"HELDOUT_ONE_SHOT_CLAIM_REF_TEMPLATE_INVALID:{path}")
+        if str(claim.get("atomic_create_primitive") or "")!="GITHUB_CREATE_REF":
+            fail(f"HELDOUT_ONE_SHOT_CLAIM_PRIMITIVE_INVALID:{path}")
+        if claim.get("preflight_before_claim_required") is not True:
+            fail(f"HELDOUT_ONE_SHOT_PREFLIGHT_ORDER_INVALID:{path}")
+        if claim.get("claim_creation_is_spend_boundary") is not True:
+            fail(f"HELDOUT_ONE_SHOT_SPEND_BOUNDARY_INVALID:{path}")
+        if str(claim.get("claim_conflict_action") or "")!="ABORT_NO_EXECUTION":
+            fail(f"HELDOUT_ONE_SHOT_CONFLICT_ACTION_INVALID:{path}")
+        if claim.get("claim_ref_mutation_forbidden") is not True:
+            fail(f"HELDOUT_ONE_SHOT_CLAIM_MUTABILITY_INVALID:{path}")
+
+
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--base",required=True)
@@ -163,6 +206,7 @@ def main():
 
     if intent:
         enforce_blocker_lease(intent)
+    enforce_one_shot_heldout_claim_contract(files)
 
     terminal=str(pointer.get("mission_lock",{}).get("terminal_objective") or "")
     if hierarchy.get("terminal_objective")!=terminal:
