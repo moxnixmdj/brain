@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FULL-APT-DESCRIPTION-SEMANTIC-REPAIR-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "FULL-APT-DESCRIPTION-HELDOUT-VALIDATION-005",
+  "causal_blocker": "LOCAL_APT_EXPOSES_RICH_LONG_DESCRIPTIONS_FOR_MISSED_CAPABILITIES_BUT_RUNTIME_RANKING_USES_A_TRUNCATED_PACKAGE_METADATA_VIEW",
+  "action_kind": "GENERIC_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::TRUNCATED_APT_PACKAGE_SEMANTICS::GENERIC_REPAIR",
+  "expected_parent_frontier_change": "Use APT's already-local full package descriptions as candidate-generation semantics while preserving executable ownership verification, with no package hints, task-specific synonym tables, remote manpage dependency, or new model dependency.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "HELDOUT-002",
+    "HELDOUT-003",
+    "HELDOUT-004",
+    "PR85",
+    "PR86",
+    "PR87",
+    "local apt-cache show long-description evidence"
+  ],
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 3,
+  "precommitted_acceptance_gate_exception": true,
+  "probe_specific_literals": [],
+  "stop_condition": "Freeze HELDOUT-005 before runtime mutation; implement exactly one generic local full-description repair; run HELDOUT-005 exactly once; reconcile before any further repair.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
