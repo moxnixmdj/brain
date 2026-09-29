@@ -16,12 +16,12 @@ PNG_MAGIC=bytes.fromhex("89504e470d0a1a0a")
 
 def git_blob_sha(path: pathlib.Path) -> str:
     raw=path.read_bytes()
-    return hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\\0"+raw).hexdigest()
+    return hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()
 
 
 def terminal_result(payload, rc):
     EVID.mkdir(parents=True,exist_ok=True)
-    RESULT.write_text(json.dumps(payload,indent=2,sort_keys=True)+"\\n",encoding="utf-8")
+    RESULT.write_text(json.dumps(payload,indent=2,sort_keys=True)+"\n",encoding="utf-8")
     print(json.dumps(payload,indent=2,sort_keys=True))
     raise SystemExit(rc)
 
@@ -43,7 +43,7 @@ def main():
         raise SystemExit("EXECUTION_START_ALREADY_EXISTS")
     with os.fdopen(fd,"w",encoding="utf-8") as fh:
         json.dump({"validation_id":vid,"pid":os.getpid(),"started_unix_ns":time.time_ns()},fh,sort_keys=True)
-        fh.write("\\n")
+        fh.write("\n")
 
     t0=time.monotonic()
     observed_runtime={}
