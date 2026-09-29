@@ -35,12 +35,12 @@
     "qualified source branch contained and preflighted python_library_codec.py and python_source_tree_codec.py",
     "HELDOUT-003 terminal verifier could not import python_library_codec from the import-visible bound_capabilities namespace",
     "a later unauthorized read-only observation found /work non-Git and bound_capabilities containing only cli_command.py and node_library_codec.py",
-    "therefore the execution surface did not faithfully preserve the qualified source-tree/import-visible closure across the relevant lifecycle",
-    "the preserved evidence does not distinguish partial initial materialization from later deletion, replacement, mount/path transition, or an equivalent fidelity failure"
+    "the evidence establishes execution-surface/source-tree fidelity divergence across the relevant lifecycle",
+    "the preserved record does not distinguish partial initial materialization from later deletion, replacement, mount/path transition, or an equivalent fidelity transition"
   ],
   "minimum_generic_correction": {
     "class": "CARRIER_SOURCE_TREE_AND_IMPORT_PATH_FIDELITY",
-    "requirement": "Before any fresh held-out START, materialize one content-addressed exact repository tree or deterministic required closure, attest source identity, required paths and content hashes, and prove the verifier's imports resolve from that exact tree immediately before START.",
+    "requirement": "Before any fresh held-out START, materialize one content-addressed exact repository tree or deterministic required runtime closure, attest source identity and required path hashes, and prove the verifier imports resolve from that exact tree immediately before START.",
     "capability_runtime_change_required": false,
     "evaluator_change_required": false,
     "probe_specific_change_required": false
@@ -61,6 +61,6 @@
     "The later Sprite observation occurred after HELDOUT-003 START and is diagnostic-only because hard-zero-spend admission was never established.",
     "No exact live pre-START materialization transcript was preserved.",
     "No exact pre-START sys.path/import-path snapshot was preserved.",
-    "Do not classify the historical mechanism specifically as initial file-copy omission."
+    "Do not classify the historical mechanism specifically as initial materialization omission."
   ]
 }
