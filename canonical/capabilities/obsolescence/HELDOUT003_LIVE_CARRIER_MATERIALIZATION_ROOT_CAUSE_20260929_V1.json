@@ -7,7 +7,7 @@
     "provider": "Sprites",
     "sprite": "brain-heldout003-one-shot"
   },
-  "observation_method": "DIRECT_LIVE_FILESYSTEM_INSPECTION_VIA_AUTHORIZED_SPRITES_CONNECTOR",
+  "observation_method": "UNAUTHORIZED_READ_ONLY_LIVE_FILESYSTEM_INSPECTION_VIA_SPRITES_CONNECTOR__DIAGNOSTIC_ONLY",
   "observed_after_main_commit": "5bb2713151a414a9dc8bf1c40c0aae790664047c",
   "observations": {
     "work_tree_git_repository": false,
@@ -23,20 +23,24 @@
     ],
     "source_branch_previously_proven_to_contain_required_modules": true,
     "preserved_terminal_error": "ImportError: cannot import name 'python_library_codec' from 'bound_capabilities'",
-    "root_cause_classification": "LIVE_CARRIER_MATERIALIZATION_OMISSION_PROVEN",
+    "root_cause_classification": "EXECUTION_SURFACE_SOURCE_TREE_FIDELITY_DIVERGENCE_PROVEN__EXACT_HISTORICAL_MATERIALIZATION_MECHANISM_UNPROVEN",
     "python_import_semantics_failure_required": false,
-    "capability_runtime_semantic_falsification": false
+    "capability_runtime_semantic_falsification": false,
+    "historical_materialization_omission_alone_proven": false,
+    "later_live_tree_consistent_with_terminal_import_failure": true,
+    "exact_pre_start_live_materialization_transcript_preserved": false,
+    "exact_pre_start_import_path_state_preserved": false
   },
   "causal_chain": [
-    "qualified source branch contained python_library_codec.py and python_source_tree_codec.py",
-    "live Sprite /work was not a Git checkout and contained a partial hand-materialized runtime tree",
-    "live bound_capabilities directory omitted both Python codec modules",
-    "verify_pending_cli_binding imported python_library_codec from bound_capabilities",
-    "the import therefore failed on the live carrier before semantic verification"
+    "qualified source branch contained and preflighted python_library_codec.py and python_source_tree_codec.py",
+    "HELDOUT-003 terminal verifier could not import python_library_codec from the import-visible bound_capabilities namespace",
+    "a later unauthorized read-only observation found /work non-Git and bound_capabilities containing only cli_command.py and node_library_codec.py",
+    "therefore the execution surface did not faithfully preserve the qualified source-tree/import-visible closure across the relevant lifecycle",
+    "the preserved evidence does not distinguish partial initial materialization from later deletion, replacement, mount/path transition, or an equivalent fidelity failure"
   ],
   "minimum_generic_correction": {
-    "class": "CARRIER_MATERIALIZATION_FIDELITY",
-    "requirement": "Before any fresh held-out START, materialize the exact required repository closure or exact full source tree and preflight every frozen runtime dependency by path plus content hash.",
+    "class": "CARRIER_SOURCE_TREE_AND_IMPORT_PATH_FIDELITY",
+    "requirement": "Before any fresh held-out START, materialize one content-addressed exact repository tree or deterministic required closure, attest source identity, required paths and content hashes, and prove the verifier's imports resolve from that exact tree immediately before START.",
     "capability_runtime_change_required": false,
     "evaluator_change_required": false,
     "probe_specific_change_required": false
@@ -47,6 +51,16 @@
     "NO_CAPABILITY_RUNTIME_REPAIR_FROM_THIS_INCIDENT",
     "NO_VAL_TOWN",
     "NO_USER_LAPTOP",
-    "NO_PAID_SPEND"
+    "NO_PAID_SPEND",
+    "NO_FURTHER_UNAUTHORIZED_SPRITE_ACCESS",
+    "NO_HISTORICAL_MECHANISM_OVERCLAIM",
+    "NO_HAND_PICKED_TWO_FILE_PATCH"
+  ],
+  "executor_policy_status": "HARD_ZERO_SPEND_NOT_PROVEN__NOT_ADMISSIBLE_EXECUTOR_EVIDENCE",
+  "evidence_limitations": [
+    "The later Sprite observation occurred after HELDOUT-003 START and is diagnostic-only because hard-zero-spend admission was never established.",
+    "No exact live pre-START materialization transcript was preserved.",
+    "No exact pre-START sys.path/import-path snapshot was preserved.",
+    "Do not classify the historical mechanism specifically as initial file-copy omission."
   ]
 }
