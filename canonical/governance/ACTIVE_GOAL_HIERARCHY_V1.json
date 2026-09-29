@@ -5,17 +5,17 @@
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "active_capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
   "active_probe": "BATCHED-EXECUTABLE-EVIDENCE-HELDOUT-VALIDATION-002",
-  "probe_state": "NEW_HELD_OUT_GATE_FROZEN_BEFORE_SECOND_REPAIR__READY_FOR_ONE_FAITHFUL_FIRST_EXECUTION",
-  "current_parent_blocker": "NEW_HELD_OUT_GATE_REQUIRES_ONE_COMPLETE_FAITHFUL_ZERO_SPEND_APT_SURFACE_EXECUTION__NO_SECOND_REPAIR_AUTHORIZED",
-  "next_required_action_class": "RUN_HELDOUT_VALIDATION_002_EXACTLY_ONCE_ON_A_COMPLETE_FAITHFUL_ZERO_SPEND_SURFACE__THEN_RECONCILE_PASS_OR_FAIL_BEFORE_ANY_SECOND_REPAIR",
-  "forbidden_local_frontier": "SECOND_REPAIR__PREVIEW_OR_REPLAY_OF_HELDOUT_002_RESULTS__MERGE_OR_PROMOTION_BEFORE_RECONCILIATION__BILLABLE_INFRASTRUCTURE__LAPTOP_EXECUTION__PACKAGE_HINTS__TASK_SPECIFIC_LITERALS__TIMEOUT_INCREASE",
+  "probe_state": "HELDOUT_002_EXECUTION_STARTED__FRESHNESS_SPENT__AWAITING_TERMINAL_RESULT_RECONCILIATION",
+  "current_parent_blocker": "HELDOUT_002_HAS_CROSSED_THE_ONE_SHOT_EXECUTION_BOUNDARY__EXACT_RAILWAY_DEPLOYMENT_TERMINAL_RESULT_NOT_YET_CANONICALLY_RECONCILED",
+  "next_required_action_class": "READ_ONLY_CAPTURE_EXACT_HELDOUT_002_DEPLOYMENT_TERMINAL_RESULT__RECONCILE_PASS_FAIL_OR_INFRA_OUTCOME__RELEASE_EXECUTION_LEASE",
+  "forbidden_local_frontier": "REPLAY_OR_REEXECUTION_OF_HELDOUT_002__SECOND_REPAIR__MERGE_OR_PROMOTION_BEFORE_TERMINAL_RECONCILIATION__BILLABLE_INFRASTRUCTURE__LAPTOP_EXECUTION__PACKAGE_HINTS__TASK_SPECIFIC_LITERALS__TIMEOUT_INCREASE",
   "progress_level_minimum": "CAPABILITY_TARGET",
   "probe_budget": {
     "repairs_used_on_active_probe": 0,
     "max_repairs_from_single_probe": 1,
     "same_probe_replays_used": 0,
     "max_same_probe_replays": 0,
-    "first_execution_required": true
+    "first_execution_required": false
   },
   "quarantined_probes": [
     {
@@ -118,7 +118,29 @@
     "top20_oracle_recall_min": 0.75,
     "hard_validation_wall_s": 600,
     "second_repair_precedes_freeze": false,
-    "execution_count": 0
+    "execution_count": 1,
+    "freshness": "SPENT",
+    "execution_started_at": "2026-09-29T01:13:06.870928592Z",
+    "execution_surface": {
+      "provider": "Railway",
+      "project_id": "9d2e8ee8-0eb8-414c-b7e0-a93d90eed54d",
+      "environment_id": "256bcc63-cebd-4079-9a61-c0e9cdbbeeb8",
+      "service_id": "851b6f16-2e12-4a68-b49c-04f81056fa5f",
+      "deployment_id": "aa411a03-2a63-4708-bf1a-758acae7f72c"
+    },
+    "execution_boundary_evidence": {
+      "pr_head": "95c3b910b474233b75396f92b2f704a0f3fca916",
+      "runtime_blob": "eddddaa84dacda5d679c22d34f101aeb1d431678",
+      "runner_blob": "42ddd8958134fb27974346889937434b4477fe03",
+      "manifest_blob": "acd44dc94c900a16bd09ec88b0d51025c0cab58b",
+      "apt_packages_index_count": 3,
+      "contents_amd64_index_count": 2,
+      "contents_all_index_count": 2,
+      "manpage_https": "PASS",
+      "execution_start_marker": "PB_HELDOUT_002_EXECUTION_START=1"
+    },
+    "terminal_result_state": "AWAITING_READ_ONLY_CAPTURE",
+    "replay_authorized": false
   },
   "antidrift_interlock": {
     "schema": "PROJECT_BRAIN_ANTIDRIFT_EXECUTION_INTERLOCK_V2",
@@ -146,5 +168,12 @@
       "active_probe"
     ],
     "policy_goal": "No runnable task or runtime action may execute unless content-bound to the exact current canonical frontier and explicitly allowlisted."
+  },
+  "monotonic_spend_barrier": {
+    "validation_id": "BATCHED-EXECUTABLE-EVIDENCE-HELDOUT-VALIDATION-002",
+    "effective_execution_count": 1,
+    "state": "SPENT_FROM_EXECUTION_START_MARKER",
+    "rule": "NEVER_DECREMENT_OR_RESET_EXECUTION_COUNT__NO_RETRY_REGARDLESS_OF_PASS_FAIL_TIMEOUT_OR_PLATFORM_OUTCOME",
+    "source": "Railway deployment aa411a03-2a63-4708-bf1a-758acae7f72c direct logs"
   }
 }
