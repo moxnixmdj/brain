@@ -70,12 +70,12 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Bridge the already-verified Debian full-metadata/Xapian discovery result into the existing conservative APT CLI acquisition path, then test the existing downstream probe/contract machinery end to end before inventing anything new.",
-    "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK_WITH_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "AUTO_APT_CLI_ACQUISITION_REJECTS_APT_FULL_METADATA_XAPIAN_SOURCE_BEFORE_PROBE_AND_CONTRACT_INFERENCE",
-    "evidence_path": "canonical/runtime/auto_apt_cli_acquisition.py::_viable_candidates",
-    "repair_status": "GENERIC_DISCOVERY_TO_ACQUISITION_ADMISSION_REPAIR_SELECTED__NOT_IMPLEMENTED",
-    "prohibition": "NO_HELDOUT005_REPLAY__NO_TASK_SPECIFIC_TUNING__NO_NEW_CONTRACT_LEARNER_BEFORE_EXISTING_DOWNSTREAM_PATH_IS_REACHED_AND_FALSIFIED"
+    "objective": "Bridge the already-verified Debian full-metadata/Xapian discovery route into the already-built APT acquisition, contract-learning, execution, and independent-verification stack using a source-neutral candidate contract; freeze a fresh orthogonal end-to-end gate before runtime mutation.",
+    "selection_metric": "FRESH_ORTHOGONAL_END_TO_END_TOOL_ACQUISITION_SUCCESS_PER_WALL_CLOCK_WITH_ZERO_HINTS_AND_ZERO_INCREMENTAL_SPEND",
+    "exact_blocker": "APT_FULL_METADATA_XAPIAN_CANDIDATES_REACH_APT_ROUTING_BUT_ARE_DROPPED_BY_LEGACY_APT_CATALOG_ONLY_ADMISSION__LEGACY_ABSOLUTE_SCORE_THRESHOLD_NOT_PORTABLE_TO_XAPIAN",
+    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_POST_PR96_INTERFACE_RECOMPUTATION_V1.json",
+    "repair_status": "RESIDUAL_GAP_VERIFIED__FRESH_GATE_FREEZE_THEN_ONE_GENERIC_ADMISSION_INTERFACE_REPAIR_AUTHORIZED",
+    "prohibition": "NO_HELDOUT_005_REPLAY__NO_TUNING_TO_SPENT_CASES__NO_PACKAGE_HINTS__NO_TASK_SPECIFIC_LITERALS__NO_SOURCE_NAME_WHITELIST_ONLY_PATCH__NO_BLIND_LEGACY_SCORE_THRESHOLD_ON_XAPIAN__NO_NEW_CONTRACT_PARSER_BEFORE_EXISTING_STACK_RETEST"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -155,7 +155,7 @@
     "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EVIDENCE_ACQUISITION_STRUCTURAL_CAUSE_RECONCILIATION_V1.json"
   },
   "tool_discovery_selection_learning_full_metadata_xapian_v1": {
-    "status": "VERIFIED_ROUTE_INHERITED_ON_MAIN",
+    "status": "VERIFIED_ROUTE_INHERITED",
     "source_pr": 89,
     "authoritative_deployment": "805a36d4-04cf-4938-bfac-74d29418081f",
     "runtime_git_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
@@ -165,11 +165,11 @@
     "incremental_spend_usd": 0,
     "terminal_reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
     "parent_capability_obsolescence_claim": false,
-    "next_action": "BRIDGE_DISCOVERY_RESULT_INTO_EXISTING_APT_ACQUISITION_ADMISSION__THEN_RETEST_EXISTING_DOWNSTREAM_CONTRACT_PATH",
+    "next_action": "FREEZE_FRESH_ORTHOGONAL_DISCOVERY_TO_EXECUTION_GATE__THEN_ONE_GENERIC_SOURCE_NEUTRAL_APT_CANDIDATE_ADMISSION_REPAIR__REUSE_EXISTING_CONTRACT_BIND_VERIFY_STACK__EXECUTE_ONCE__RECONCILE",
     "residual_recomputation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_POST_XAPIAN_INTERFACE_RECOMPUTATION_V1.json",
     "residual_reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_DISCOVERY_TO_APT_ADMISSION_RECONCILIATION_V1.json",
     "merge_commit": "db298bb4363266ef9e91ec9ec114b5f1c7bcf1fd",
-    "residual_gap": "DISCOVERY_TO_APT_ACQUISITION_SOURCE_ADMISSION_SCHEMA_MISMATCH"
+    "residual_gap": "Discovery output is verified, but current auto_apt_cli_acquisition rejects the new source at candidate admission before existing probe/contract/verify machinery can run."
   },
   "tool_discovery_selection_learning_post_xapian_interface_v1": {
     "status": "RESIDUAL_CAUSAL_BLOCKER_LOCALIZED",
@@ -194,6 +194,16 @@
     "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_APT_XAPIAN_ACQUISITION_INTEGRATION_RECONCILIATION_V1.json",
     "manifest_path": "canonical/experiments/APT_XAPIAN_ACQUISITION_INTEGRATION_DELTA_001.json",
     "runtime_mutated": false,
+    "incremental_spend_usd": 0
+  },
+  "apt_xapian_acquisition_interface_v1": {
+    "capability_id": "APT_XAPIAN_TO_AUTO_APT_ACQUISITION_INTERFACE_V1",
+    "parent_family": "TOOL_SELECTION_AND_TOOL_LEARNING",
+    "status": "RESIDUAL_GAP_VERIFIED",
+    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_POST_PR96_INTERFACE_RECOMPUTATION_V1.json",
+    "current_brain_route": "APT_FULL_METADATA_XAPIAN -> binding_kind=apt -> apt_cli router -> auto_apt_cli_acquisition",
+    "residual_gap": "auto_apt_cli_acquisition._viable_candidates hardcodes APT_CATALOG and a legacy absolute score threshold, so verified Xapian candidates do not enter the existing downstream learning/execution path.",
+    "inheritance_path": "canonical/runtime/capability_discovery.py",
     "incremental_spend_usd": 0
   }
 }
