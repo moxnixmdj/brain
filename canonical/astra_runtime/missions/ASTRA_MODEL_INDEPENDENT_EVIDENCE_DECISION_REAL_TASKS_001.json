@@ -1,0 +1,99 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "ASTRA-MODEL-INDEPENDENT-EVIDENCE-DECISION-REAL-TASKS-001",
+  "purpose": "Prove the same model-independent typed evidence-to-decision route on two materially distinct real decisions with independent verification.",
+  "goal": "Synthesize and independently verify the current zero-spend carrier decision and the Click repair-route decision from typed evidence without any model dependency.",
+  "steps": [
+    {
+      "id": "real-task-a-carrier-decision",
+      "adapter": "goal",
+      "controller_actions": [
+        {
+          "type": "invoke_capability",
+          "args": {
+            "capability_id": "decision.synthesis.typed.stdlib",
+            "input_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REAL_TASK_A_CARRIER_20260930_INPUT.json",
+            "output_path": "canonical/astra_runtime/tmp/MODEL_INDEPENDENT_EVIDENCE_DECISION_REAL_TASK_A_RESULT.json"
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "output_verified",
+            "value": true
+          }
+        },
+        {
+          "type": "invoke_capability",
+          "args": {
+            "capability_id": "decision.synthesis.verify.stdlib",
+            "input_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REAL_TASK_A_CARRIER_20260930_INPUT.json",
+            "result_path": "canonical/astra_runtime/tmp/MODEL_INDEPENDENT_EVIDENCE_DECISION_REAL_TASK_A_RESULT.json"
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "verified",
+            "value": true
+          }
+        },
+        {
+          "type": "finish",
+          "args": {
+            "summary": "REAL_TASK_A_EVIDENCE_DECISION_VERIFIED"
+          }
+        }
+      ],
+      "verify": {
+        "type": "stdout_contains",
+        "text": "REAL_TASK_A_EVIDENCE_DECISION_VERIFIED"
+      }
+    },
+    {
+      "id": "real-task-b-click-repair-decision",
+      "adapter": "goal",
+      "controller_actions": [
+        {
+          "type": "invoke_capability",
+          "args": {
+            "capability_id": "decision.synthesis.typed.stdlib",
+            "input_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REAL_TASK_B_CLICK_REPAIR_20260930_INPUT.json",
+            "output_path": "canonical/astra_runtime/tmp/MODEL_INDEPENDENT_EVIDENCE_DECISION_REAL_TASK_B_RESULT.json"
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "output_verified",
+            "value": true
+          }
+        },
+        {
+          "type": "invoke_capability",
+          "args": {
+            "capability_id": "decision.synthesis.verify.stdlib",
+            "input_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REAL_TASK_B_CLICK_REPAIR_20260930_INPUT.json",
+            "result_path": "canonical/astra_runtime/tmp/MODEL_INDEPENDENT_EVIDENCE_DECISION_REAL_TASK_B_RESULT.json"
+          },
+          "expect": {
+            "type": "field_equals",
+            "field": "verified",
+            "value": true
+          }
+        },
+        {
+          "type": "finish",
+          "args": {
+            "summary": "REAL_TASK_B_EVIDENCE_DECISION_VERIFIED"
+          }
+        }
+      ],
+      "verify": {
+        "type": "stdout_contains",
+        "text": "REAL_TASK_B_EVIDENCE_DECISION_VERIFIED"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "same_synthesis_route_required": true,
+    "independent_verification_required": true,
+    "materially_distinct_real_tasks_required": true
+  }
+}

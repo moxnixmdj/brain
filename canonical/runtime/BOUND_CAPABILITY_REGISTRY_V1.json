@@ -2419,6 +2419,159 @@
         },
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-YAML-JSON-YQ-001__RECEIPT.json"
       }
+    },
+    "decision.synthesis.typed.stdlib": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [
+        "structured.decision_evidence.available"
+      ],
+      "provides": [
+        "decision.synthesis.typed"
+      ],
+      "result_fields": [
+        "status",
+        "selected_alternative",
+        "decision_confidence",
+        "output_path",
+        "output_sha256"
+      ],
+      "keywords": [
+        "decision",
+        "evidence",
+        "synthesis",
+        "support",
+        "contradiction",
+        "constraint",
+        "uncertainty",
+        "conflict",
+        "provenance",
+        "trace",
+        "terminal",
+        "rank"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "decision.synthesis.typed.stdlib",
+          "input_path": "${input.input_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "output_verified",
+          "value": true
+        }
+      },
+      "adapter_module": "evidence_decision_synthesis",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Consumes already-typed decision evidence; it does not interpret arbitrary natural language.",
+        "Hard constraints must be explicitly represented as SATISFIED, VIOLATED, or UNKNOWN.",
+        "Evidence relations are explicit SUPPORTS or CONTRADICTS and duplicate independence groups are not double-counted."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "json",
+          "hashlib",
+          "math",
+          "pathlib"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/evidence_decision_synthesis.py"
+      },
+      "verification": {
+        "independently_verified_by": "decision.synthesis.verify.stdlib",
+        "mission_id": "ASTRA-MODEL-INDEPENDENT-EVIDENCE-DECISION-REAL-TASKS-001",
+        "model_dependency_count": 0,
+        "real_tasks": [
+          "REAL-TASK-A-ZERO-SPEND-CARRIER-20260930",
+          "REAL-TASK-B-CLICK-REPAIR-ROUTE-20260930"
+        ],
+        "status": "INDEPENDENT_REMOTE_VERIFICATION_PASS",
+        "public_run_id": 36642428325,
+        "public_job_id": 109657545598,
+        "public_head_sha": "c96efa66a27a32169a074993b2a39f4ebf6e2d4a",
+        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REMOTE_VERIFICATION_20260930_V1.json",
+        "producer_git_blob": "7690b26800b2701dac9e187a92c5561d79d831dd"
+      }
+    },
+    "decision.synthesis.verify.stdlib": {
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "incremental_spend_usd": 0,
+      "cost": 1,
+      "requires": [
+        "decision.synthesis.typed"
+      ],
+      "provides": [
+        "decision.synthesis.verified"
+      ],
+      "result_fields": [
+        "verified",
+        "reason",
+        "status",
+        "selected_alternative"
+      ],
+      "keywords": [
+        "decision",
+        "verify",
+        "independent",
+        "evidence",
+        "synthesis",
+        "audit",
+        "trace"
+      ],
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "decision.synthesis.verify.stdlib",
+          "input_path": "${input.input_path}",
+          "result_path": "${input.result_path}"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "verified",
+          "value": true
+        }
+      },
+      "adapter_module": "evidence_decision_verify",
+      "entrypoint": "run",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "limitations": [
+        "Verifies the typed-decision result by recomputing decision-relevant values without importing the producer module.",
+        "Input and result must be repository-local JSON."
+      ],
+      "source": {
+        "type": "python_stdlib",
+        "modules": [
+          "json",
+          "hashlib",
+          "math",
+          "pathlib"
+        ],
+        "adapter_path": "canonical/runtime/bound_capabilities/evidence_decision_verify.py"
+      },
+      "verification": {
+        "producer_independent": true,
+        "mission_id": "ASTRA-MODEL-INDEPENDENT-EVIDENCE-DECISION-REAL-TASKS-001",
+        "model_dependency_count": 0,
+        "status": "INDEPENDENT_REMOTE_VERIFICATION_PASS",
+        "public_run_id": 36642428325,
+        "public_job_id": 109657545598,
+        "public_head_sha": "c96efa66a27a32169a074993b2a39f4ebf6e2d4a",
+        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REMOTE_VERIFICATION_20260930_V1.json",
+        "verifier_git_blob": "63cf325320c7b91bf48ea2f2769c999c5a090929"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"

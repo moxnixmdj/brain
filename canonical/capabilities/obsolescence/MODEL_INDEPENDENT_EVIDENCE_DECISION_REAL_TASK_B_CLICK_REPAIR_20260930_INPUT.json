@@ -1,0 +1,169 @@
+{
+  "schema": "PROJECT_BRAIN_TYPED_DECISION_PROBLEM_V1",
+  "decision_id": "REAL-TASK-B-CLICK-REPAIR-ROUTE-20260930",
+  "question": "Which route should repair the Click late KeyboardInterrupt race while preserving Project Brain's model-independent cognition rule and search-before-invention strategy?",
+  "alternatives": [
+    {
+      "id": "UPSTREAM_HISTORY_REUSE",
+      "label": "Discover and reuse the existing upstream Click fix, then verify it locally"
+    },
+    {
+      "id": "NARROW_PYTHON_APR",
+      "label": "Use a non-LLM mutation-based Python automated repair tool"
+    },
+    {
+      "id": "MODEL_PATCH",
+      "label": "Use a language model to synthesize the patch"
+    }
+  ],
+  "constraints": [
+    {
+      "id": "reuse-model-independent",
+      "alternative": "UPSTREAM_HISTORY_REUSE",
+      "required": true,
+      "state": "SATISFIED",
+      "description": "Credited cognition must contain no model dependency.",
+      "provenance": [
+        {
+          "source": "Brain law",
+          "ref": "MODEL_NON_DEPENDENCE_LAW_V1"
+        }
+      ]
+    },
+    {
+      "id": "reuse-existing-solution",
+      "alternative": "UPSTREAM_HISTORY_REUSE",
+      "required": true,
+      "state": "SATISFIED",
+      "description": "Search-before-invention prefers an existing correct upstream solution when one exists.",
+      "provenance": [
+        {
+          "source": "Official upstream commit",
+          "ref": "pallets/click 00f257bb8e714064bea16425007543bbc0800445"
+        }
+      ]
+    },
+    {
+      "id": "apr-model-independent",
+      "alternative": "NARROW_PYTHON_APR",
+      "required": true,
+      "state": "SATISFIED",
+      "description": "The candidate APR engine must not require a model.",
+      "provenance": [
+        {
+          "source": "APR repository",
+          "ref": "HOWLYYY/automated-program-repair uses mutation search and pytest fitness."
+        }
+      ]
+    },
+    {
+      "id": "apr-scope-fit",
+      "alternative": "NARROW_PYTHON_APR",
+      "required": true,
+      "state": "UNKNOWN",
+      "description": "The repair route must be adequate for the real multi-location semantic race fix, not only single-file line mutations.",
+      "provenance": [
+        {
+          "source": "APR repository limitations",
+          "ref": "Tool documents single-file programs and line-level mutation limitations."
+        }
+      ]
+    },
+    {
+      "id": "model-independent-model-patch",
+      "alternative": "MODEL_PATCH",
+      "required": true,
+      "state": "VIOLATED",
+      "description": "A model cannot appear in the credited cognition execution path.",
+      "provenance": [
+        {
+          "source": "Brain trusted gate",
+          "ref": "MODEL_INDEPENDENT_COGNITION / MODEL_NON_DEPENDENCE_LAW_V1"
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "upstream-fix-exists",
+      "alternative": "UPSTREAM_HISTORY_REUSE",
+      "relation": "SUPPORTS",
+      "confidence": 1,
+      "strength": 1,
+      "independence_group": "official-click-history",
+      "claim": "The exact upstream race fix exists as commit 00f257bb... with code, docs, and tests.",
+      "provenance": [
+        {
+          "source": "pallets/click",
+          "ref": "commit 00f257bb8e714064bea16425007543bbc0800445"
+        }
+      ]
+    },
+    {
+      "id": "git-public-history-route",
+      "alternative": "UPSTREAM_HISTORY_REUSE",
+      "relation": "SUPPORTS",
+      "confidence": 0.95,
+      "strength": 1,
+      "independence_group": "git-history-mechanism",
+      "claim": "Git can retrieve commit history and defer blobs with partial clone, making upstream discovery cheap and deterministic.",
+      "provenance": [
+        {
+          "source": "Git documentation",
+          "ref": "git-clone --filter=blob:none / partial clone"
+        }
+      ]
+    },
+    {
+      "id": "apr-can-search",
+      "alternative": "NARROW_PYTHON_APR",
+      "relation": "SUPPORTS",
+      "confidence": 0.9,
+      "strength": 0.7,
+      "independence_group": "apr-repository",
+      "claim": "The APR tool performs mutation search with pytest-based fitness.",
+      "provenance": [
+        {
+          "source": "HOWLYYY/automated-program-repair",
+          "ref": "README overview"
+        }
+      ]
+    },
+    {
+      "id": "apr-scope-limited",
+      "alternative": "NARROW_PYTHON_APR",
+      "relation": "CONTRADICTS",
+      "confidence": 0.95,
+      "strength": 1,
+      "independence_group": "apr-limitations",
+      "claim": "The APR tool is limited to single-file programs and line-level mutations.",
+      "provenance": [
+        {
+          "source": "HOWLYYY/automated-program-repair",
+          "ref": "README limitations"
+        }
+      ]
+    },
+    {
+      "id": "model-patch-capable",
+      "alternative": "MODEL_PATCH",
+      "relation": "SUPPORTS",
+      "confidence": 0.9,
+      "strength": 0.8,
+      "independence_group": "model-supplier-evidence",
+      "claim": "A language model can propose software patches.",
+      "provenance": [
+        {
+          "source": "Prior Brain model-backed runs",
+          "ref": "Qwen planner supplier evidence"
+        }
+      ]
+    }
+  ],
+  "policy": {
+    "minimum_support_ratio": 0.65,
+    "maximum_conflict_ratio": 0.45,
+    "minimum_independent_support_groups": 2,
+    "minimum_net_margin": 0.25
+  }
+}
