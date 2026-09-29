@@ -138,7 +138,9 @@ The preflight MUST:
 
 - bind to the exact selected route;
 - be checked no more than 2 hours before trusted validation;
-- enumerate the execution-critical dependencies of the selected route;
+- enumerate **all** execution-critical dependencies of the selected route and assert the inventory complete;
+- use controlled dependency kinds so carriers and entitlement/capacity surfaces cannot be renamed into a static-looking category;
+- include at least one execution substrate dependency: carrier, local runtime, model API, or remote service;
 - classify each dependency as STATIC or VOLATILE;
 - mark every required dependency READY;
 - carry current evidence for every required dependency;
@@ -152,7 +154,7 @@ Documentation, pricing pages, changelogs, model cards, and public provider statu
 
 For a required VOLATILE dependency, qualification MUST include at least one direct non-destructive probe of the exact dependency or one independent verifier observation of the exact dependency.
 
-For ACCOUNT_SPECIFIC scope, direct or independent account-scoped evidence is mandatory. Generic public status is insufficient.
+For ACCOUNT_SPECIFIC or REGION_SPECIFIC scope, direct or independent evidence is mandatory and the evidence scope MUST exactly match the dependency scope. Generic public status is insufficient.
 
 A failed current probe immediately invalidates the selected route even when the route-frontier lease itself is fresh.
 
