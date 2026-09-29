@@ -2,8 +2,8 @@
   "schema": "PROJECT_BRAIN_REAL_CAPABILITY_ACQUISITION_MISSION_V1",
   "mission_id": "REAL-CAPABILITY-ACQUISITION-EPOCH-1",
   "status": "READY_FOR_REAL_TASK_SELECTION",
-  "operating_mode": "REAL_CAPABILITY_ACQUISITION_ENGINE",
-  "objective": "Acquire one reusable missing capability while completing a real consequential task from active user or project work, independently verify the result, inherit the winning route, and demonstrate fresh reuse when practical.",
+  "operating_mode": "REAL_CAPABILITY_ACQUISITION_WITH_RECURSIVE_OBS",
+  "objective": "Acquire one reusable missing capability while completing a real consequential task. Before consequential implementation, run generation-bound recursive OBS over the goal, capability, blocker, solution, verification method, inherited system, and OBS process itself; execute only the fastest sufficient surviving route; independently verify, inherit, delete newly obsolete work, and demonstrate fresh reuse when practical.",
   "task_selection": {
     "must_be_real_consequential_work": true,
     "must_not_be_created_only_to_test_brain": true,
@@ -23,14 +23,15 @@
     "ranking": "EXPECTED_VERIFIED_REUSABLE_CAPABILITY_GAIN_PER_WALL_CLOCK"
   },
   "acquisition_loop": [
-    "IDENTIFY_MISSING_CAPABILITY_FROM_REAL_TASK",
-    "SEARCH_INHERITED_BRAIN_CAPABILITIES",
-    "SEARCH_CONNECTED_TOOLS_AND_EXISTING_SOFTWARE",
-    "SEARCH_PUBLIC_IMPLEMENTATIONS_AND_DOCUMENTATION",
-    "COMPOSE_OR_ACQUIRE_FASTEST_ADEQUATE_ROUTE",
-    "EXECUTE_REAL_TASK",
-    "INDEPENDENTLY_VERIFY_REAL_RESULT",
+    "SELECT_REAL_CONSEQUENTIAL_TASK",
+    "RUN_GENERATION_BOUND_RECURSIVE_OBS",
+    "IDENTIFY_SURVIVING_MISSING_CAPABILITY",
+    "SEARCH_INHERITED_AND_EXISTING_ROUTES",
+    "APPLY_DELETE_BYPASS_REUSE_SUBSTITUTE_COMPOSE_REPAIR_BUILD_ORDER",
+    "EXECUTE_FASTEST_SUFFICIENT_SURVIVING_ROUTE",
+    "INDEPENDENTLY_VERIFY_REAL_EFFECT",
     "INHERIT_CAPABILITY_PACKAGE",
+    "OBS_INHERITED_SYSTEM_AND_DELETE_REDUNDANT_WORK",
     "REUSE_ON_FRESH_WORK_WHEN_PRACTICAL",
     "UPDATE_REAL_OUTPUT_SCOREBOARD",
     "RECOMPUTE_FRONTIER"
@@ -52,9 +53,17 @@
   "hard_incremental_spend_usd": 0,
   "scorecard": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
   "authority": [
-    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V1.md",
-    "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V3.md",
-    "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V2.json",
-    "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V3.json"
-  ]
+    "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
+    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
+    "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V4.md",
+    "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V3.json",
+    "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V4.json"
+  ],
+  "recursive_obs": {
+    "required_before_consequential_implementation": true,
+    "law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
+    "receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V1.json",
+    "material_state_change_invalidates_receipt": true,
+    "rerun_only_affected_layers": true
+  }
 }
