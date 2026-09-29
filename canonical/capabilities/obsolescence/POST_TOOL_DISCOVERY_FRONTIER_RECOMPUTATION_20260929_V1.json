@@ -88,5 +88,48 @@
   ],
   "immediate_residual": "Existing route has substantial real-work evidence but has not been adjudicated as a fresh frontier-obsolescence subcapability on unseen compound work.",
   "next_action": "DEFINE_SMALLEST_HIGH_LEVERAGE_SUBCAPABILITY__ESTABLISH_FRONTIER_BAR__FREEZE_UNSEEN_GATE__TEST_EXISTING_ROUTE_FIRST",
-  "runtime_mutation_authorized": false
+  "runtime_mutation_authorized": false,
+  "existing_receipt_summary": {
+    "ASTRA-RUNTIME-CAPABILITY-GRAPH-PLANNER-001": {
+      "status": "COMPLETE",
+      "planning_mode": "DETERMINISTIC_CAPABILITY_GRAPH",
+      "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+      "final_summary": "CAPABILITY_GRAPH_GOAL_COMPLETE",
+      "model_planner_used": false
+    },
+    "ASTRA-RUNTIME-LIVE-DYNAMIC-FANOUT-001": {
+      "status": "COMPLETE",
+      "planning_mode": "DETERMINISTIC_DYNAMIC_FANOUT_PLAN",
+      "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+      "final_summary": "COMPOUND_GOAL_COMPLETE",
+      "model_planner_used": false
+    },
+    "ASTRA-RUNTIME-LIVE-CONDITIONAL-GENERALIZATION-001": {
+      "status": "COMPLETE",
+      "planning_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN",
+      "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+      "final_summary": "COMPOUND_GOAL_COMPLETE",
+      "model_planner_used": false
+    },
+    "ASTRA-RUNTIME-MULTI-SOURCE-JOIN-002": {
+      "status": "COMPLETE",
+      "planning_mode": "DETERMINISTIC_MULTI_SOURCE_JOIN_PLAN",
+      "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+      "final_summary": "COMPOUND_GOAL_COMPLETE",
+      "model_planner_used": false
+    },
+    "ASTRA-RUNTIME-BROWSER-XLSX-COMPOSITION-004": {
+      "status": "COMPLETE",
+      "planning_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN",
+      "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+      "final_summary": "COMPOUND_GOAL_COMPLETE",
+      "model_planner_used": false
+    }
+  },
+  "dominance_reason": [
+    "MULTI_TOOL_ORCHESTRATION_AND_PLANNING has five completed real-work receipts spanning graph planning, runtime-dependent fanout, conditionals, multi-source joins, browser interaction, artifact production, and independent verification.",
+    "Those receipts provide an evidence-first route: the next legal step is frontier-bar definition plus a fresh unseen adjudication of existing machinery, with no runtime repair authorized or required first.",
+    "The residual TOOL_DISCOVERY_SELECTION_AND_LEARNING path is preserved but currently has a deterministic integration defect: auto_apt_cli_acquisition._viable_candidates rejects the inherited APT_FULL_METADATA_XAPIAN source before probe/contract/execution/verification. Advancing that residual therefore requires a repair before comparable end-to-end evidence.",
+    "Under search/reuse-before-invention and minimum-wall-clock laws, adjudicating the already-working multi-tool route dominates repairing the lower-level APT seam now. This does not claim the tool-discovery parent capability obsolete."
+  ]
 }
