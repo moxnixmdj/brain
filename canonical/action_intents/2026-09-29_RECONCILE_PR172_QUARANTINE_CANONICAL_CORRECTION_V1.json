@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-PR172-QUARANTINE-CANONICAL-CORRECTION-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "causal_blocker": "MERGED_PR172_QUARANTINED_PRE_GUARD_OVERCLAIM_CONTAMINATES_CANONICAL_FRONTIER__HELDOUT_004_FROZEN_UNSPENT",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::MERGED_PR172_QUARANTINED_PRE_GUARD_OVERCLAIM_CONTAMINATES_CANONICAL_FRONTIER__HELDOUT_004_FROZEN_UNSPENT::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Remove PR172's unsupported claim that the exact historical HELDOUT-003 failure mechanism is PROVEN_MATERIALIZATION_OMISSION and correct the unauthorized Sprite observation classification. Preserve only the evidence-supported boundary: qualified source contained and preflighted both Python codec modules; the HELDOUT-003 verifier later could not import python_library_codec; a later unauthorized read-only inspection found /work non-git and both Python codec modules absent. Canonicalize the generic carrier-fidelity divergence while leaving the exact historical transition mechanism unproven. Keep HELDOUT-004 frozen UNSPENT and advance only to the minimum generic carrier-fidelity correction plus hard-zero qualification before its single execution.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR167 evidence-boundary reconciliation",
+    "merged PR170 frozen HELDOUT-004 gate",
+    "stale PR171 narrower carrier-fidelity localization intent",
+    "merged PR172 plus its explicit QUARANTINE / DO NOT MERGE review comment",
+    "current main 33f84ff34488a65fe0f45402b4b91ffee19cb249",
+    "preserved HELDOUT-003 raw RESULT and qualified carrier source/preflight evidence"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "After a trusted guard PASS on this exact immutable intent head, change only PR172-derived evidence/frontier descriptors necessary to restore the narrower evidence boundary. Do not change capability runtime, evaluator, gate, workflow, law, guard, raw START/RESULT/acquisition evidence, or carrier bytes. Do not execute HELDOUT-004, replay HELDOUT-003, use Val Town, use the user laptop, or incur paid/unproven spend. Revalidate the exact final head before merge.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
