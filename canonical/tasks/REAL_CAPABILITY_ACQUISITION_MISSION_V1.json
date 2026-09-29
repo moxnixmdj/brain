@@ -56,14 +56,15 @@
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
     "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V4.md",
-    "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V3.json",
-    "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V4.json"
+    "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V4.json",
+    "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V5.json"
   ],
   "recursive_obs": {
     "required_before_consequential_implementation": true,
     "law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
-    "receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V1.json",
+    "receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V2.json",
     "material_state_change_invalidates_receipt": true,
-    "rerun_only_affected_layers": true
+    "rerun_only_affected_layers": true,
+    "exact_base_commit_binding_required": true
   }
 }

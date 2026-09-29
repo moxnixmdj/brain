@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_REGRESSION_CASE_V1",
+  "id": "2026-09-29_STALE_OR_HOLLOW_RECURSIVE_OBS_RECEIPT",
+  "status": "PERMANENT_FAIL_CLOSED_REGRESSION",
+  "incident": [
+    "Recursive OBS became canonical and mandatory.",
+    "The trusted validator initially accepted any nonempty object for each OBS layer.",
+    "The receipt bound only to the broad canonical generation label, not the exact base commit.",
+    "A frontier change inside the same generation could therefore leave a stale or structurally hollow OBS decision looking admissible."
+  ],
+  "prohibited_patterns": [
+    "CONSEQUENTIAL_ACTION_WITHOUT_EXACT_BASE_BOUND_OBS_RECEIPT",
+    "OBS_LAYER_AS_EMPTY_OR_ARBITRARY_NONEMPTY_OBJECT",
+    "OBS_TEMPLATE_PLACEHOLDER_LEFT_IN_ACTION_INTENT",
+    "BLOCKER_REPAIR_WITHOUT_DELETE_BYPASS_REUSE_SUBSTITUTE_COMPOSE_ORDER",
+    "SYNTHETIC_VERIFICATION_WITHOUT_DIRECT_REAL_EFFECT_VERIFICATION_CONSIDERATION",
+    "CONTINUE_EXECUTION_AFTER_PR_BASE_CHANGES_WITHOUT_OBS_REVALIDATION"
+  ],
+  "required_prevention": [
+    "RECURSIVE_OBS_RECEIPT_SCHEMA_V2",
+    "EXACT_PR_BASE_COMMIT_BINDING",
+    "SEVEN_LAYER_REQUIRED_SUBFIELD_VALIDATION",
+    "DELETION_FIRST_ORDER_EXACT_MATCH",
+    "DIRECT_REAL_EFFECT_VERIFICATION_CONSIDERED",
+    "EXISTING_ORACLE_CONSIDERED",
+    "ACTION_INTENT_PARENT_CHANGE_AND_STOP_CONDITION_MATCH_RECEIPT",
+    "FAIL_ON_AUTHORING_TEMPLATE_PLACEHOLDERS",
+    "INVALIDATE_STALE_RECEIPT_ON_BASE_CHANGE"
+  ],
+  "passing_condition": "A future consequential PR with a stale base commit, missing layer field, placeholder, wrong deletion order, or mismatched parent change/stop condition must fail closed before execution; a complete exact-base-bound receipt may proceed.",
+  "canonical_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
+  "receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V2.json",
+  "mandatory_goal_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V4.json",
+  "mandatory_pre_action_gate": "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V5.json",
+  "trusted_validator": "canonical/runtime/enforce_goal_hierarchy.py"
+}

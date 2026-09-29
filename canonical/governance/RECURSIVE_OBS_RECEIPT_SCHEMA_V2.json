@@ -1,0 +1,120 @@
+{
+  "schema": "PROJECT_BRAIN_RECURSIVE_OBS_RECEIPT_V2",
+  "status": "SCHEMA_TEMPLATE__NOT_PROGRESS_ARTIFACT",
+  "supersedes": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V1.json",
+  "required_fields": [
+    "canonical_generation_or_commit",
+    "canonical_base_commit",
+    "real_outcome",
+    "required_capability",
+    "obs_goal",
+    "obs_capability",
+    "obs_blocker",
+    "obs_solution",
+    "obs_verification",
+    "obs_inherited_system",
+    "obs_obs",
+    "routes_considered",
+    "deleted_or_bypassed_paths",
+    "selected_surviving_route",
+    "why_selected_route_is_fastest_sufficient",
+    "expected_parent_level_state_change",
+    "stop_condition"
+  ],
+  "exact_base_binding": {
+    "required": true,
+    "field": "canonical_base_commit",
+    "rule": "MUST_EQUAL_EXACT_PR_BASE_COMMIT_EVALUATED_BY_TRUSTED_GUARD",
+    "purpose": "Invalidate OBS decisions when canonical state changes inside the same broad generation."
+  },
+  "top_level_types": {
+    "canonical_generation_or_commit": "NONEMPTY_STRING",
+    "canonical_base_commit": "40_HEX_GIT_COMMIT",
+    "real_outcome": "NONEMPTY_STRING",
+    "required_capability": "NONEMPTY_STRING",
+    "routes_considered": "NONEMPTY_LIST",
+    "deleted_or_bypassed_paths": "LIST",
+    "selected_surviving_route": "NONEMPTY_STRING",
+    "why_selected_route_is_fastest_sufficient": "NONEMPTY_STRING",
+    "expected_parent_level_state_change": "NONEMPTY_STRING",
+    "stop_condition": "NONEMPTY_STRING"
+  },
+  "layer_requirements": {
+    "obs_goal": [
+      "real_outcome",
+      "proxy_goals_deleted",
+      "surviving_necessity"
+    ],
+    "obs_capability": [
+      "existing_inherited_routes_checked",
+      "external_existing_routes_checked",
+      "capability_work_deleted",
+      "surviving_gap"
+    ],
+    "obs_blocker": [
+      "intrinsic_or_path_specific",
+      "delete_bypass_substitute_options",
+      "surviving_causal_blocker"
+    ],
+    "obs_solution": [
+      "deletion_first_order_applied",
+      "routes_ranked",
+      "losing_routes_reason",
+      "implementation_still_necessary"
+    ],
+    "obs_verification": [
+      "direct_real_effect_verification_considered",
+      "existing_oracle_considered",
+      "synthetic_verification_necessity"
+    ],
+    "obs_inherited_system": [
+      "downstream_work_to_delete_or_supersede",
+      "adjacent_capabilities_absorbed",
+      "fresh_reuse_plan"
+    ],
+    "obs_obs": [
+      "analysis_steps_deleted_or_cached",
+      "search_stop_decision",
+      "affected_layers_only_on_revalidation"
+    ]
+  },
+  "semantic_requirements": {
+    "obs_solution.deletion_first_order_applied": [
+      "DELETE",
+      "BYPASS",
+      "REUSE",
+      "SUBSTITUTE",
+      "COMPOSE",
+      "REPAIR",
+      "BUILD"
+    ],
+    "obs_solution.routes_ranked": "NONEMPTY_LIST",
+    "obs_solution.implementation_still_necessary": "BOOLEAN",
+    "obs_verification.direct_real_effect_verification_considered": true,
+    "obs_verification.existing_oracle_considered": true,
+    "obs_obs.affected_layers_only_on_revalidation": true,
+    "expected_parent_level_state_change_matches_action_intent": true,
+    "stop_condition_matches_action_intent": true
+  },
+  "deletion_first_order": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "COMPOSE",
+    "REPAIR",
+    "BUILD"
+  ],
+  "invalidation_triggers": [
+    "CANONICAL_BASE_COMMIT_CHANGED",
+    "CANONICAL_GENERATION_CHANGED",
+    "REAL_TASK_MATERIALLY_CHANGED",
+    "CAPABILITY_STATE_MATERIALLY_CHANGED",
+    "NEW_ADEQUATE_ROUTE_DISCOVERED",
+    "SELECTED_ROUTE_FALSIFIED",
+    "VERIFICATION_REQUIREMENT_MATERIALLY_CHANGED"
+  ],
+  "revalidation_rule": "INVALIDATE_ONLY_AFFECTED_LAYERS_WHEN_BASE_COMMIT_UNCHANGED_AND_MATERIAL_CHANGE_IS_LOCALIZED__OTHERWISE_REISSUE_FULL_RECEIPT",
+  "reuse_rule": "MAY_BE_EMBEDDED_IN_ACTION_INTENT__SEPARATE_FILE_NOT_REQUIRED",
+  "progress_credit": false
+}

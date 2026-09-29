@@ -76,10 +76,10 @@
     "evidence_path": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "repair_status": "USER_AUTHORIZED_RECURSIVE_OBS_PROMOTION",
     "prohibition": "NO_CONSEQUENTIAL_IMPLEMENTATION_WITHOUT_CURRENT_OBS_RECEIPT__NO_BLOCKER_REPAIR_BEFORE_DELETE_BYPASS_REUSE_SUBSTITUTE_COMPOSE__NO_SYNTHETIC_VERIFIER_IF_DIRECT_REAL_EFFECT_VERIFICATION_SUFFICES__NO_ACTIVITY_PROGRESS_CREDIT",
-    "next_action": "SELECT_REAL_TASK__RUN_RECURSIVE_OBS__EXECUTE_SURVIVING_ROUTE__VERIFY__INHERIT__DELETE_REDUNDANT_WORK__FRESH_REUSE",
+    "next_action": "SELECT_REAL_TASK__ISSUE_EXACT_BASE_BOUND_RECURSIVE_OBS_V2__EXECUTE_SURVIVING_ROUTE__VERIFY__INHERIT__DELETE_REDUNDANT_WORK__FRESH_REUSE",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
     "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
-    "recursive_obs_receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V1.json"
+    "recursive_obs_receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V2.json"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -277,9 +277,9 @@
     "real_output_scoreboard": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
     "recursive_obs_required": true,
     "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
-    "recursive_obs_receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V1.json",
-    "goal_hierarchy_action_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V3.json",
-    "critical_path_pre_action_gate": "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V4.json",
+    "recursive_obs_receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V2.json",
+    "goal_hierarchy_action_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V4.json",
+    "critical_path_pre_action_gate": "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V5.json",
     "deletion_first_order": [
       "DELETE",
       "BYPASS",
@@ -288,6 +288,7 @@
       "COMPOSE",
       "REPAIR",
       "BUILD"
-    ]
+    ],
+    "recursive_obs_exact_base_commit_binding_required": true
   }
 }
