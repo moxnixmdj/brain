@@ -1,0 +1,23 @@
+{
+  "schema": "PROJECT_BRAIN_HELDOUT_VALIDATION_TERMINAL_RECONCILIATION_V1",
+  "validation_id": "BATCHED-EXECUTABLE-EVIDENCE-HELDOUT-VALIDATION-002",
+  "status": "EXECUTED_ONCE__TERMINAL_FAIL__SPENT__NO_REPLAY",
+  "checked_on": "2026-09-29",
+  "fresh_acceptance_execution_count": 1,
+  "freshness": "SPENT",
+  "same_case_replay_allowed": false,
+  "authoritative_deployment_id": "aa411a03-2a63-4708-bf1a-758acae7f72c",
+  "terminal_result": {
+    "validator_exit_code": 2,
+    "validator_timeout": false,
+    "total_wall_s": 358.370173,
+    "heldout_oracle_family_recall": 0.25,
+    "heldout_top20_oracle_recall": 0.25,
+    "acceptance_gate_pass": false,
+    "promotion_authorized": false,
+    "stdout_sha256": "3efeb85183481c6ffe65e6138fd4b88627f7d0900959b1008a5b6efbde25b9b9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "classification": "FAITHFUL_SURFACE_ALGORITHM_FALSIFICATION",
+  "required_next_action": "SUPERSEDED_BY_RECONCILED_SUCCESSOR_RESEARCH"
+}

@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_ONE_SHOT_COORDINATION_INCIDENT_V1",
+  "incident_id": "RAILWAY_ONE_SHOT_REPLAY_AND_DUPLICATE_EXECUTION_20260929",
+  "status": "RECONCILED__FRESH_EXECUTIONS_DISTINGUISHED_FROM_CONTAMINATED_DUPLICATES",
+  "checked_on": "2026-09-29",
+  "incidents": [
+    {
+      "validation_id": "BATCHED-EXECUTABLE-EVIDENCE-HELDOUT-VALIDATION-002",
+      "authoritative_fresh_deployment": "aa411a03-2a63-4708-bf1a-758acae7f72c",
+      "contaminated_duplicate_deployments": [
+        "772683f4-d3ae-4f39-aa62-608dccbec74b"
+      ],
+      "root_cause": "RAILWAY_REDEPLOY_REPLAYED_HISTORICAL_DEPLOYMENT_SNAPSHOT_WITH_OLD_PREDEPLOY_GATE"
+    },
+    {
+      "validation_id": "SEMANTIC-APT-CAPABILITY-HELDOUT-VALIDATION-003",
+      "authoritative_fresh_deployment": "9e1c5735-6572-468e-85a8-377317ad1a6d",
+      "contaminated_duplicate_deployments": [
+        "6a941b93-71b0-47ab-878e-3c46c6993e22"
+      ],
+      "root_cause": "CONCURRENT_WORKER_TRIGGERED_SECOND_DEPLOYMENT_AFTER_FIRST_EXECUTION_ALREADY_SPENT_GATE"
+    }
+  ],
+  "mitigations": [
+    "DISABLE_OBSOLETE_RESUME_AUTOMATION",
+    "NEVER_USE_RAILWAY_REDEPLOY_FOR_FROZEN_ONE_SHOT_GATES",
+    "REQUIRE_LIVE_SERVICE_CONFIG_READBACK_IMMEDIATELY_BEFORE_TRIGGER",
+    "TRIGGER_WITH_NEW_NORMAL_DEPLOYMENT_ONLY",
+    "REQUIRE_UNIQUE_EXECUTION_TOKEN_AND_GATE_ID",
+    "REQUIRE_GLOBAL_CANONICAL_EXECUTION_CLAIM_BEFORE_TRIGGER"
+  ],
+  "obsolete_automation_disabled": true,
+  "obsolete_automation_last_run_time": "2026-09-29T01:47:49.955176+00:00"
+}

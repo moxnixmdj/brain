@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_HELDOUT_VALIDATION_TERMINAL_RECONCILIATION_V1",
+  "validation_id": "SEMANTIC-APT-CAPABILITY-HELDOUT-VALIDATION-003",
+  "status": "EXECUTED_ONCE__TERMINAL_FAIL__SPENT__NO_REPLAY",
+  "checked_on": "2026-09-29",
+  "fresh_acceptance_execution_count": 1,
+  "freshness": "SPENT",
+  "same_case_replay_allowed": false,
+  "authoritative_deployment_id": "9e1c5735-6572-468e-85a8-377317ad1a6d",
+  "tested_head_sha": "ab2f44153163028c850dee50e30c38b6287a9456",
+  "terminal_result": {
+    "validator_exit_code": 2,
+    "validator_timeout": false,
+    "total_wall_s": 236.059785,
+    "heldout_oracle_family_recall": 0.5,
+    "heldout_top20_oracle_recall": 0.5,
+    "acceptance_gate_pass": false,
+    "promotion_authorized": false,
+    "stdout_sha256": "a97b923db9b3aa796db5fbd30e35faf314adc25c3625dc7b059a143c42592273",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cases": [
+      {
+        "effect_id": "HELDOUT-QR-003",
+        "oracle_family": "qrencode",
+        "oracle_found": true,
+        "oracle_rank": 1
+      },
+      {
+        "effect_id": "HELDOUT-AUDIO-CONVERT-003",
+        "oracle_family": "sox",
+        "oracle_found": false,
+        "oracle_rank": null
+      },
+      {
+        "effect_id": "HELDOUT-JSON-TRANSFORM-003",
+        "oracle_family": "jq",
+        "oracle_found": true,
+        "oracle_rank": 4
+      },
+      {
+        "effect_id": "HELDOUT-PDF-LINEARIZE-003",
+        "oracle_family": "qpdf",
+        "oracle_found": false,
+        "oracle_rank": null
+      }
+    ]
+  },
+  "classification": "PARTIAL_STRUCTURAL_GAIN__SEMANTIC_EVIDENCE_AND_ROLE_RETRIEVAL_RESIDUAL",
+  "required_next_action": "SEARCH_REUSE_EXISTING_DEBIAN_METADATA_AND_RELEVANCE_ENGINE_BEFORE_SECOND_REPAIR"
+}

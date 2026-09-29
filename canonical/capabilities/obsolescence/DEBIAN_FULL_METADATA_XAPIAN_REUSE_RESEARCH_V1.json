@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_DEBIAN_SEMANTIC_METADATA_REUSE_RESEARCH_V1",
+  "status": "RECONCILED_REUSE_ROUTE_FOUND",
+  "checked_on": "2026-09-29",
+  "conclusion": "DO_NOT_INVENT_ANOTHER_LEXICAL_SCORER__REUSE_DEBIAN_FULL_METADATA_PLUS_XAPIAN",
+  "live_trixie_findings": {
+    "apt_xapian_index_available": false,
+    "debtags_cli_available": false,
+    "python3_xapian_available": true,
+    "docker_no_languages_default": true,
+    "translation_en_recoverable": true
+  },
+  "spent_gate_diagnostic_only": {
+    "note": "All ranks below are diagnostics on already-spent HELDOUT-003 and are not acceptance evidence.",
+    "short_description_xapian": {
+      "qrencode_rank": 2,
+      "jq_rank": 9,
+      "sox_rank": null,
+      "qpdf_rank": null
+    },
+    "full_translation_join_xapian": {
+      "qrencode_rank": 1,
+      "jq_rank": 1,
+      "qpdf_rank": 1,
+      "sox_rank": 61
+    },
+    "full_translation_plus_tags_xapian_weight4": {
+      "qrencode_rank": 1,
+      "jq_rank": 1,
+      "qpdf_rank": 3,
+      "sox_rank": 10
+    }
+  },
+  "selected_generic_design": [
+    "JOIN_TRANSLATION_EN_TO_PACKAGES_BY_DESCRIPTION_MD5",
+    "INDEX_PACKAGE_NAME_WEIGHT5",
+    "INDEX_FULL_DESCRIPTION_WEIGHT1",
+    "INDEX_NORMALIZED_DEBIAN_TAGS_WEIGHT4",
+    "USE_XAPIAN_BM25_AND_ENGLISH_STEMMING",
+    "PROVE_EXECUTABLE_OWNERSHIP_FROM_APT_CONTENTS_IN_ONE_STREAMING_PASS",
+    "NO_REMOTE_MANPAGE_HOT_PATH",
+    "NO_TASK_SPECIFIC_SYNONYMS",
+    "NO_PACKAGE_HINTS"
+  ]
+}

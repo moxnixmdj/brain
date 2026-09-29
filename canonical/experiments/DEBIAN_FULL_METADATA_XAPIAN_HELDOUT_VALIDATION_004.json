@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_DEBIAN_FULL_METADATA_XAPIAN_HELDOUT_VALIDATION_V1",
+  "validation_id": "DEBIAN-FULL-METADATA-XAPIAN-HELDOUT-VALIDATION-004",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "status": "FROZEN_BEFORE_DEBIAN_FULL_METADATA_XAPIAN_RUNTIME_MUTATION",
+  "provenance": {
+    "selected_after": "HELDOUT-003_TERMINAL_FAIL_RECONCILIATION",
+    "selected_before_any_successor_runtime_mutation": true,
+    "repository_search_precheck": "No prior Brain references found for ripgrep, zstd, pandoc, or aria2 before freeze.",
+    "spent_and_prior_diagnostic_families_excluded": true
+  },
+  "cases": [
+    {
+      "effect_id": "HELDOUT-RECURSIVE-REGEX-004",
+      "goal": "Recursively search a directory tree for lines matching a regular expression while respecting ignore files.",
+      "oracle_families": [
+        "ripgrep"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-ZSTD-COMPRESS-004",
+      "goal": "Compress a file losslessly with a fast modern compressor and be able to decompress it later.",
+      "oracle_families": [
+        "zstd"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-DOCUMENT-CONVERT-004",
+      "goal": "Convert a Markdown document into an HTML document from the command line.",
+      "oracle_families": [
+        "pandoc"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-SEGMENTED-DOWNLOAD-004",
+      "goal": "Download a large file over HTTPS using multiple segments and resume an interrupted transfer.",
+      "oracle_families": [
+        "aria2"
+      ]
+    }
+  ],
+  "acceptance": {
+    "heldout_oracle_family_recall_min": 0.75,
+    "heldout_top20_oracle_recall_min": 0.75,
+    "package_hints_forbidden": true,
+    "task_specific_literals_forbidden": true,
+    "hard_validation_wall_s": 180,
+    "incremental_spend_usd": 0
+  },
+  "execution_surface_requirements": {
+    "linux_family": "Debian trixie / equivalent Debian-family APT surface.",
+    "normal_apt_packages_metadata_required": true,
+    "english_translation_index_required": true,
+    "package_tag_metadata_required": true,
+    "architecture_all_contents_required": true,
+    "architecture_specific_contents_required": true,
+    "python3_xapian_required": true,
+    "exact_runtime_bytes_required": true,
+    "runtime_remote_manpage_enrichment_required": false
+  },
+  "promotion_authorized": false
+}
