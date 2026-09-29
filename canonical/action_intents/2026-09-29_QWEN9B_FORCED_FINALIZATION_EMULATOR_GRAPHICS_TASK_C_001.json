@@ -1,0 +1,270 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "QWEN9B-FORCED-FINALIZATION-EMULATOR-GRAPHICS-TASK-C-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "FORCED_FINALIZATION_COMPOSITION_MERGED__FRESH_DEPENDENCY_FREE_REAL_TASK_C_UNSPENT",
+  "action_kind": "FRESH_REUSE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::FORCED_FINALIZATION_COMPOSITION_MERGED__FRESH_DEPENDENCY_FREE_REAL_TASK_C_UNSPENT::FRESH_REUSE",
+  "expected_parent_frontier_change": "Execute a fresh dependency-free real software-systems Task C using local Qwen3.5-9B plus the merged forced-finalization composition: diagnose an Android-emulator render freeze from evidence, derive the smallest non-destructive falsification probe, and independently verify the decision against Android graphics architecture without replaying prior tasks.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Merged PR222 forced-finalization repair",
+    "9B one-shot closure and prior evidence",
+    "AOSP SurfaceFlinger/BufferQueue diagnostics"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after exactly one fresh Task C execution and independent adjudication. Do not replay the task, tune on its result, or promote the frontier capability unless the real output passes and the remaining frontier-evidence requirements are separately satisfied.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "cd6c117b160a9fd5dda66af4b9795b7642ec39ab",
+    "real_outcome": "Execute a fresh dependency-free real software-systems Task C using local Qwen3.5-9B plus the merged forced-finalization composition: diagnose an Android-emulator render freeze from evidence, derive the smallest non-destructive falsification probe, and independently verify the decision against Android graphics architecture without replaying prior tasks.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Prove or falsify the repaired non-frontier research/problem-solving route on a fresh real software-systems diagnosis.",
+      "proxy_goals_deleted": [
+        "Replay 4B AI task",
+        "Replay 9B biophysics task",
+        "Use a synthetic benchmark",
+        "Use the user's laptop as execution carrier"
+      ],
+      "surviving_necessity": "One fresh real Task C is required to test the generic repair."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Merged ASTRA forced-finalization composition",
+        "Pinned Qwen3.5-9B public-runner closure",
+        "Prior 9B source-selection evidence"
+      ],
+      "external_existing_routes_checked": [
+        "Android AOSP graphics/BufferQueue/SurfaceFlinger documentation",
+        "Qwen3.8-27B challenger",
+        "AgentScope/smolagents termination pattern"
+      ],
+      "capability_work_deleted": [
+        "No new model",
+        "No new framework",
+        "No new workflow architecture",
+        "No laptop execution"
+      ],
+      "surviving_gap": "Fresh end-to-end dependency-free real task proof remains unspent."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Proof gap only: generic repair is merged but untested on a fresh real task.",
+      "delete_bypass_substitute_options": [
+        "Cannot delete real proof requirement",
+        "Reuse existing 9B supplier/runtime/carrier",
+        "Substitute 27B loses on carrier fit/wall-clock and does not improve proof isolation"
+      ],
+      "surviving_causal_blocker": "Fresh one-shot Task C has not executed."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "ASTRA_FORCED_FINALIZATION_PLUS_LOCAL_QWEN3_5_9B_PUBLIC_RUNNER",
+        "QWEN3_8_27B_LOCAL",
+        "AGENTSCOPE_OR_SMOLAGENTS_FRAMEWORK_REPLACEMENT"
+      ],
+      "losing_routes_reason": "Current route directly tests the just-localized seam with the already-proven 9B research supplier; larger model/framework replacement adds confounds and wall-clock.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Directly verify the task answer against public Android graphics architecture plus logical exclusion constraints; no benchmark score."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Further termination-seam work if Task C passes",
+        "Model-size escalation if current route passes"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Software root-cause localization",
+        "evidence-backed discriminating probe selection",
+        "bounded final synthesis"
+      ],
+      "fresh_reuse_plan": "This Task C is the fresh cross-domain dependency-free reuse; any capability promotion still requires separate adjudication of full frontier evidence."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse current 9B closure",
+        "Reuse public runner",
+        "Reuse current challenger frontier where unaffected"
+      ],
+      "search_stop_decision": "Android authoritative sources define the diagnostic oracle and no new supplier challenger beats the repaired 9B route for this proof.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Refreshed immediately before Task C staging after the forced-finalization merge; no unresolved plausible dominator remains."
+    },
+    "routes_considered": [
+      "ASTRA_FORCED_FINALIZATION_PLUS_LOCAL_QWEN3_5_9B_PUBLIC_RUNNER",
+      "QWEN3_8_27B_LOCAL",
+      "AGENTSCOPE_OR_SMOLAGENTS_FRAMEWORK_REPLACEMENT"
+    ],
+    "deleted_or_bypassed_paths": [
+      "SPENT_TASK_REPLAY",
+      "SYNTHETIC_BENCHMARK",
+      "USER_LAPTOP_AS_EXECUTION_CARRIER",
+      "MODEL_ESCALATION_BEFORE_FRESH_REPAIR_PROOF"
+    ],
+    "selected_surviving_route": "ASTRA_FORCED_FINALIZATION_PLUS_LOCAL_QWEN3_5_9B_PUBLIC_RUNNER",
+    "why_selected_route_is_fastest_sufficient": "It isolates the repaired composition on a genuinely different real task using the same already-qualified $0 local supplier and carrier, while avoiding new confounds.",
+    "expected_parent_level_state_change": "Execute a fresh dependency-free real software-systems Task C using local Qwen3.5-9B plus the merged forced-finalization composition: diagnose an Android-emulator render freeze from evidence, derive the smallest non-destructive falsification probe, and independently verify the decision against Android graphics architecture without replaying prior tasks.",
+    "stop_condition": "Stop after exactly one fresh Task C execution and independent adjudication. Do not replay the task, tune on its result, or promote the frontier capability unless the real output passes and the remaining frontier-evidence requirements are separately satisfied.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-29T21:24:32Z",
+      "max_age_hours": 24,
+      "incumbent_route": "ASTRA_FORCED_FINALIZATION_PLUS_LOCAL_QWEN3_5_9B_PUBLIC_RUNNER",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/astra_runtime.py",
+          "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_9B_BIOPHYSICS_TASK_B_FALSIFICATION_20260929_V1.json"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://source.android.com/docs/core/graphics",
+          "https://source.android.com/docs/core/graphics/winscope/capture/adb",
+          "https://developer.android.com/topic/performance/issues/slow-session",
+          "https://huggingface.co/Qwen/Qwen3.8-27B"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/agentscope-ai/agentscope/blob/main/src/agentscope/agent/_agent.py",
+          "https://github.com/huggingface/smolagents/blob/main/src/smolagents/agents.py"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "https://www.reddit.com/r/LocalLLaMA/comments/1sdhvc5/qwen_35_tool_calling_fixes_for_agentic_use_whats/"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "software root cause diagnosis bounded evidence final answer"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Qwen3.5 9B versus Qwen3.8 27B local agentic research"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "SurfaceFlinger BufferQueue read-only diagnostic no frames"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 Qwen3.8 local agentic model latest"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "ASTRA_FORCED_FINALIZATION_PLUS_LOCAL_QWEN3_5_9B_PUBLIC_RUNNER",
+          "evidence": [
+            "9B already selected authoritative sources on prior fresh task",
+            "forced-finalization seam now merged",
+            "public runner closure already hash-pinned"
+          ],
+          "qualification_evidence": [
+            "canonical/runtime/astra_runtime.py",
+            "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_9B_BIOPHYSICS_TASK_B_FALSIFICATION_20260929_V1.json"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED",
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Preserves direct Android-source verification and isolates the repaired seam.",
+            "CAPABILITY_STRENGTH": "9B already demonstrated useful research action selection; repair adds missing terminal synthesis.",
+            "WALL_CLOCK": "Reuses existing 5 GB closure and public runner.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Exact supplier/runtime hashes already proven; only finalization seam changed.",
+            "VERIFIABILITY": "Fresh task has public architecture oracle and explicit preservation/falsification contract."
+          }
+        },
+        {
+          "route": "QWEN3_8_27B_LOCAL",
+          "evidence": [
+            "Stronger current model but normal quants approach/exceed current 16 GB RAM / 14 GB SSD runner limits."
+          ],
+          "qualification_evidence": [
+            "https://huggingface.co/Qwen/Qwen3.8-27B",
+            "https://docs.github.com/en/actions/reference/runners/github-hosted-runners"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Potentially stronger model but adds supplier-size confound.",
+            "CAPABILITY_STRENGTH": "Stronger raw model.",
+            "WALL_CLOCK": "Much slower download/inference.",
+            "INCREMENTAL_COST": "$0 in principle.",
+            "RELIABILITY": "Tight carrier headroom.",
+            "VERIFIABILITY": "Would not isolate whether the repaired seam works."
+          }
+        },
+        {
+          "route": "AGENTSCOPE_OR_SMOLAGENTS_FRAMEWORK_REPLACEMENT",
+          "evidence": [
+            "Both implement forced finalization, but the same pattern is now already composed into ASTRA."
+          ],
+          "qualification_evidence": [
+            "https://github.com/agentscope-ai/agentscope/blob/main/src/agentscope/agent/_agent.py",
+            "https://github.com/huggingface/smolagents/blob/main/src/smolagents/agents.py"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Mature patterns.",
+            "CAPABILITY_STRENGTH": "Broader frameworks than needed.",
+            "WALL_CLOCK": "Migration slower than testing merged repair.",
+            "INCREMENTAL_COST": "$0 software but more integration cost.",
+            "RELIABILITY": "Adds dependency surface.",
+            "VERIFIABILITY": "Fresh Task C on current runtime is cleaner causal proof."
+          }
+        }
+      ],
+      "negative_search_summary": "No unresolved route beats the repaired 9B composition for a causal fresh proof on this $0 carrier.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "ASTRA_FORCED_FINALIZATION_PLUS_LOCAL_QWEN3_5_9B_PUBLIC_RUNNER",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ]
+    }
+  }
+}
