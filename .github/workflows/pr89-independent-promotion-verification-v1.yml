@@ -26,18 +26,32 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y -qq --no-install-recommends python3-pytest python3-xapian >/dev/null
 
-      - name: Verify protected identities and promotion scope
+      - name: Run verifier and preserve report
         shell: bash
         run: |
-          set -euo pipefail
-          test "$(git hash-object canonical/runtime/capability_discovery.py)" = "b9e7423ab24bf2da98869b02d782e791a779892a"
-          test "$(git hash-object canonical/tests/test_debian_full_metadata_xapian.py)" = "4e8c43ddf32a10947462e36198ec957c2f23094f"
-          test "$(git hash-object canonical/tests/test_capability_discovery.py)" = "0b9bcd25cf4cea2ad1a410efd43f8f8b2f618f0a"
-          test "$(git hash-object canonical/experiments/DEBIAN_FULL_METADATA_XAPIAN_HELDOUT_VALIDATION_005.json)" = "82854b92b2253ba607ff5c521102c50ae49fd47d"
-          test "$(git hash-object canonical/experiments/run_debian_full_metadata_xapian_heldout_validation_005.py)" = "3ab3a57ad1b428e2a5a65cdbe2279c7db2332781"
+          set +e
+          REPORT=/tmp/pr89-verification.log
+          : > "$REPORT"
+          STATUS=0
+          stage() {
+            name="$1"; shift
+            echo "=== $name ===" | tee -a "$REPORT"
+            "$@" >>"$REPORT" 2>&1
+            rc=$?
+            echo "RC=$rc" | tee -a "$REPORT"
+            if [ "$rc" -ne 0 ]; then STATUS=1; fi
+          }
 
-          python3 - <<'PY'
-          import json, pathlib, re
+          stage protected_blobs bash -lc '
+            test "$(git hash-object canonical/runtime/capability_discovery.py)" = "b9e7423ab24bf2da98869b02d782e791a779892a" &&
+            test "$(git hash-object canonical/tests/test_debian_full_metadata_xapian.py)" = "4e8c43ddf32a10947462e36198ec957c2f23094f" &&
+            test "$(git hash-object canonical/tests/test_capability_discovery.py)" = "0b9bcd25cf4cea2ad1a410efd43f8f8b2f618f0a" &&
+            test "$(git hash-object canonical/experiments/DEBIAN_FULL_METADATA_XAPIAN_HELDOUT_VALIDATION_005.json)" = "82854b92b2253ba607ff5c521102c50ae49fd47d" &&
+            test "$(git hash-object canonical/experiments/run_debian_full_metadata_xapian_heldout_validation_005.py)" = "3ab3a57ad1b428e2a5a65cdbe2279c7db2332781"
+          '
+
+          cat >/tmp/pr89_static.py <<'PY'
+          import json, pathlib, re, subprocess
           root=pathlib.Path(".")
           rec=json.loads((root/"canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json").read_text())
           intent=json.loads((root/"canonical/action_intents/2026-09-29_DEBIAN_FULL_METADATA_XAPIAN_BATCH_CONTENTS_REPAIR_V1.json").read_text())
@@ -63,16 +77,9 @@ jobs:
           assert intent["governance_change"] is False
           assert intent["weakens_existing_guard"] is False
           runtime=(root/"canonical/runtime/capability_discovery.py").read_text().lower()
-          assert "yq" not in runtime
-          assert "hyperfine" not in runtime
           tokens=set(re.findall(r"[a-z0-9_]+", runtime))
-          assert "parallel" not in tokens
-          assert "rsync" not in tokens
-          print("PR89_STATIC_VERIFICATION=PASS")
-          PY
-
-          python3 - <<'PY'
-          import subprocess
+          for heldout_literal in ("yq","parallel","rsync","hyperfine"):
+              assert heldout_literal not in tokens
           base="33d607338ebf300b00465ddb40a911bf87c3bc02"
           target="63c8c38baf56c9cb0a34566ecaeaeb1dc5d5d002"
           expected={
@@ -89,17 +96,27 @@ jobs:
           got=set(subprocess.check_output(["git","diff","--name-only",base,target],text=True).splitlines())
           assert got == expected, (sorted(got-expected), sorted(expected-got))
           assert not any(p.startswith("canonical/governance/") for p in got)
-          print("PR89_SCOPE_VERIFICATION=PASS")
+          print("PR89_STATIC_AND_SCOPE_VERIFICATION=PASS")
           PY
+          stage static_scope python3 /tmp/pr89_static.py
+          stage compile python3 -m py_compile canonical/runtime/capability_discovery.py canonical/experiments/run_debian_full_metadata_xapian_heldout_validation_005.py
+          stage focused_pytest python3 -m pytest -q canonical/tests/test_capability_discovery.py canonical/tests/test_debian_full_metadata_xapian.py
+          stage canonical_unittest python3 -m unittest discover -s canonical/tests -p 'test_*.py'
 
-      - name: Compile exact candidate and runner
-        run: |
-          python3 -m py_compile             canonical/runtime/capability_discovery.py             canonical/experiments/run_debian_full_metadata_xapian_heldout_validation_005.py
+          echo "$STATUS" >/tmp/pr89-verification.rc
+          echo "FINAL_STATUS=$STATUS" | tee -a "$REPORT"
+          exit 0
 
-      - name: Run focused regressions
-        run: |
-          python3 -m pytest -q             canonical/tests/test_capability_discovery.py             canonical/tests/test_debian_full_metadata_xapian.py
+      - name: Upload verifier report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr89-independent-verification-report
+          path: |
+            /tmp/pr89-verification.log
+            /tmp/pr89-verification.rc
+          if-no-files-found: error
 
-      - name: Run canonical unittest discovery
-        run: |
-          python3 -m unittest discover -s canonical/tests -p 'test_*.py'
+      - name: Enforce verifier result
+        if: always()
+        run: exit "$(cat /tmp/pr89-verification.rc)"
