@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_SUBCAPABILITY_TARGET_V1",
   "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
-  "status": "ACTIVE_ACQUISITION_TARGET__UNPROVEN",
+  "status": "VERIFIED_ACQUIRED__INHERITED__FRESH_REUSE_PASS",
   "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "real_frontier_role": "SUBCAPABILITY_REQUIRED_FOR_PARENT_COMPOSITION",
   "useful_behavior": "Given a typed set of evidence items with provenance, claims, constraints, conflicts, confidence/uncertainty metadata, and a target question or decision, deterministically derive a terminal answer or decision, preserve unresolved conflicts and uncertainty, and emit an auditable inference/decision trace without any model dependency.",
@@ -50,6 +50,27 @@
     "parent_capability_credit": "ONLY_AFTER_COMPOSITION_WITH_OTHER_REQUIRED_SUBCAPABILITIES"
   },
   "promotion_bar": "Two materially distinct real tasks must use the same model-independent synthesis route without rediscovery; outputs must be independently verified and the trace must make the decision reproducible.",
-  "current_status": "UNPROVEN",
-  "residual_after_success": "Arbitrary-language-to-structured-evidence interpretation and any other parent subcapabilities not yet independently acquired remain separate gaps."
+  "current_status": "VERIFIED_ACQUIRED",
+  "residual_after_success": "Subcapability acquired. Parent OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1 still requires fresh end-to-end composition with existing model-independent planning, discovery, execution and verification machinery. Do not name another missing subcapability until a fresh parent task localizes it.",
+  "promotion_bar_status": "PASS",
+  "winning_route": {
+    "route": "COMPOSE_EXISTING_BRAIN_EVIDENCE_MACHINERY_WITH_MINIMAL_STDLIB_TYPED_DECISION_SYNTHESIS",
+    "producer_capability": "decision.synthesis.typed.stdlib",
+    "independent_verifier_capability": "decision.synthesis.verify.stdlib",
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "acquisition_evidence": {
+    "merge_commit_sha": "2f4f3d7042f055003daf85a93e01e2f78678cec6",
+    "independent_component_run_id": 36642428325,
+    "astra_integration_run_id": 36642601675,
+    "producer_git_blob": "7690b26800b2701dac9e187a92c5561d79d831dd",
+    "verifier_git_blob": "63cf325320c7b91bf48ea2f2769c999c5a090929",
+    "remote_verification_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REMOTE_VERIFICATION_20260930_V1.json",
+    "astra_integration_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_ASTRA_INTEGRATION_20260930_V1.json",
+    "materially_distinct_real_tasks": 2,
+    "fresh_reuse_passed": true,
+    "producer_independent_recomputation_verifier": true,
+    "astra_controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN"
+  }
 }
