@@ -5,13 +5,13 @@
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "active_capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
   "active_probe": "TOOL-DISCOVERY-LATENCY-RECALL-HELDOUT-VALIDATION-006",
-  "probe_state": "HELDOUT_006_FROZEN_UNSPENT__ONE_DELETION_FIRST_LATENCY_REPAIR_AUTHORIZED_NOT_YET_IMPLEMENTED",
-  "current_parent_blocker": "TOOL_DISCOVERY_COMMON_PATH_PERFORMS_EXPENSIVE_EXECUTABLE_AND_REMOTE_EVIDENCE_ACQUISITION_BEFORE_PACKAGE_SELECTION__HARD_WALL_EXCEEDED",
-  "next_required_action_class": "IMPLEMENT_EXACTLY_ONE_GENERIC_DELETION_FIRST_FAST_DISCOVERY_REPAIR__SYNTHETIC_VERIFY_WITHOUT_006_CASES__FREEZE_BYTES__THEN_QUALIFY_AND_EXECUTE_006_ONCE",
+  "probe_state": "HELDOUT_006_FROZEN_UNSPENT__ONE_DELETION_FIRST_LATENCY_REPAIR_IMPLEMENTED_AND_BYTES_FROZEN",
+  "current_parent_blocker": "HELDOUT_006_REQUIRES_ONE_QUALIFIED_HARD_ZERO_EXECUTION_OF_EXACT_FROZEN_FAST_DISCOVERY_BYTES",
+  "next_required_action_class": "QUALIFY_OR_REUSE_HARD_ZERO_RAILWAY_SURFACE_FOR_EXACT_RUNTIME_97F4C616__STAGE_EXACT_006_RUNNER_AND_MANIFEST__EXECUTE_006_EXACTLY_ONCE__RECONCILE",
   "forbidden_local_frontier": "REPLAY_003_004_OR_005__SECOND_REPAIR_UNDER_005_PROBE__RUNTIME_MUTATION_BEFORE_NEW_UNSEEN_GATE_FREEZE_AND_NEW_CAUSAL_FRONTIER_AUTHORITY__TASK_SPECIFIC_LITERALS__PACKAGE_HINTS__TIMEOUT_INCREASE__BILLABLE_OR_UNPROVEN_METERED_INFRASTRUCTURE__LAPTOP_EXECUTION__PROMOTION_FROM_FAILED_GATE",
   "progress_level_minimum": "CAPABILITY_TARGET",
   "probe_budget": {
-    "repairs_used_on_active_probe": 0,
+    "repairs_used_on_active_probe": 1,
     "max_repairs_from_single_probe": 1,
     "same_probe_replays_used": 0,
     "max_same_probe_replays": 0,
@@ -120,7 +120,11 @@
     "execution_count": 0,
     "freshness": "UNSPENT",
     "replay_authorized": false,
-    "promotion_authorized": false
+    "promotion_authorized": false,
+    "repair_runtime_blob_sha": "97f4c61691afc6b4d9cb3ed54ee0fc85531ca977",
+    "repair_test_blob_sha": "7eafd6aa598d6295b8ee5260a689bae01be36adf",
+    "manifest_blob_sha": "3439e26ef4c650098db50f745105eed9b68be776",
+    "runner_blob_sha": "cbae7e4d1a0de5ddf5df67f7a869bab7a3f66317"
   },
   "antidrift_interlock": {
     "schema": "PROJECT_BRAIN_ANTIDRIFT_EXECUTION_INTERLOCK_V2",
@@ -176,12 +180,11 @@
     "prior_gate_002_replay_forbidden": true
   },
   "last_completed_generic_repair": {
-    "repair_id": "RELEVANCE_FIRST_PACKAGE_CANDIDATE_GENERATION_WITH_BOUNDED_EXECUTABLE_ENUMERATION_V1",
-    "commit": "aa49d81446e5d042f8cf1cffb3bada9c887fc014",
-    "runtime_blob": "dbd2b4026149a7a2e731eb3152ca398e30ca625f",
-    "synthetic_verification": "PASS__OPAQUE_EXECUTABLE_ADMITTED_BY_PACKAGE_RELEVANCE__SINGLE_BATCH_ENUMERATION__NON_TIERED_RANK",
-    "heldout_literals_in_runtime": false,
-    "freeze_commit": "86406b1254b3b8eb290795a76661b7e57dcacf67"
+    "repair_id": "SEMANTIC_INDEX_FAST_DISCOVERY_DEFER_EXPENSIVE_BINDING_V1",
+    "path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_LATENCY_FRONTIER_006_REPAIR_V1.json",
+    "runtime_blob": "97f4c61691afc6b4d9cb3ed54ee0fc85531ca977",
+    "synthetic_verification": "PASS__XAPIAN_FAST_PATH_RETURNED_WITH_ZERO_EXPENSIVE_EVIDENCE_CALLS",
+    "heldout_literals_in_runtime": false
   },
   "heldout_003_concurrency_contamination": {
     "receipt_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_003_CONCURRENCY_CONTAMINATION_AND_004_COMPOSITE_FREEZE_V1.json",
