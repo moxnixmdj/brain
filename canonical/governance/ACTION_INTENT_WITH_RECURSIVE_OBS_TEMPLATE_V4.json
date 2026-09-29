@@ -21,7 +21,8 @@
     "Declare exactly every non-intent frontier-sensitive path expected to change; the trusted guard compares the set to the exact PR head.",
     "For capability promotion, frontier dependency removal, or frontier fresh-reuse credit, provide a complete explicit supplier manifest. Unknown suppliers and opaque aliases fail closed.",
     "The target frontier supplier may be a comparator/reference but cannot be in the producer or verifier path of a claim that it has been made unnecessary.",
-    "Declare deterministic postconditions that the trusted guard can evaluate on the exact PR head."
+    "Declare deterministic postconditions that the trusted guard can evaluate on the exact PR head.",
+    "Declare a stable adversarial_error_control.semantic_execution_key for the real task/action identity. Changing blocker wording must never create a second one-shot lease."
   ],
   "action_intent": {
     "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
@@ -243,7 +244,8 @@
         "ACTIVITY_AS_PROGRESS",
         "POST_STATE_MISMATCH",
         "HIDDEN_DEPENDENCY",
-        "FALSIFIED_ROUTE_REPLAY"
+        "FALSIFIED_ROUTE_REPLAY",
+        "SEMANTIC_DUPLICATE_EXECUTION"
       ],
       "unresolved_material_risks": [],
       "abort_if_any_unresolved": true,
@@ -269,7 +271,8 @@
           "type": "file_exists",
           "path": "__REQUIRED_EXACT_HEAD_PATH__"
         }
-      ]
+      ],
+      "semantic_execution_key": "__REQUIRED_STABLE_SEMANTIC_EXECUTION_KEY__"
     }
   }
 }

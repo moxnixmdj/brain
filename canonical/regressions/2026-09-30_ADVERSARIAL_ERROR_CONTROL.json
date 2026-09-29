@@ -7,7 +7,8 @@
     "A same-domain parameter variation was initially at risk of being counted as frontier fresh reuse.",
     "A GPT-5.6-executed Task B was recognized as circular evidence for replacing GPT-5.6-class capability.",
     "Opaque model aliases can hide target-frontier suppliers inside an apparently non-frontier route.",
-    "PR branch mutation previously demonstrated that intended corrections can fail to persist unless exact-head state is checked."
+    "PR branch mutation previously demonstrated that intended corrections can fail to persist unless exact-head state is checked.",
+    "Two Click/Qwen9B Task C intents were simultaneously open under different blocker wording and briefly produced duplicate one-shot workflow runs before cancellation."
   ],
   "prohibited_patterns": [
     "CIRCULAR_FRONTIER_PROOF",
@@ -18,7 +19,8 @@
     "PROXY_TARGET_SUBSTITUTION",
     "UNEXPECTED_FRONTIER_SENSITIVE_PATH",
     "DECLARED_POSTCONDITION_FALSE_ON_EXACT_HEAD",
-    "UNRESOLVED_MATERIAL_RISK_AT_AUTHORIZATION"
+    "UNRESOLVED_MATERIAL_RISK_AT_AUTHORIZATION",
+    "SEMANTICALLY_DUPLICATE_ONE_SHOT_INTENTS_WITH_DIFFERENT_BLOCKER_WORDING"
   ],
   "required_prevention": [
     "ADVERSARIAL_ERROR_CONTROL_REQUIRED",
@@ -28,7 +30,8 @@
     "EXACT_SENSITIVE_PATH_SET",
     "EXACT_HEAD_POSTCONDITIONS",
     "KNOWN_FAILURE_CLASS_SWEEP",
-    "STRONG_DISCONFIRMING_HYPOTHESES"
+    "STRONG_DISCONFIRMING_HYPOTHESES",
+    "SEMANTIC_EXECUTION_KEY_OPEN_PR_DEDUPE"
   ],
   "passing_condition": "Trusted guard rejects any consequential intent that omits the adversarial contract, leaves material risks unresolved, substitutes targets, changes unexpected sensitive paths, fails declared exact-head postconditions, or attempts promotion/removal with circular or supplier-ambiguous proof.",
   "authority": "canonical/laws/ADVERSARIAL_ERROR_CONTROL_LAW_V1.md",

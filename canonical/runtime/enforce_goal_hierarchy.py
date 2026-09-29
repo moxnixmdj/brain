@@ -114,7 +114,7 @@ ADVERSARIAL_REQUIRED_FAILURE_CLASSES={
     "STALE_STATE","TARGET_SUBSTITUTION","PROXY_GOAL","CIRCULAR_PROOF","SELF_CERTIFICATION",
     "NARROW_CAPABILITY_INFLATION","SAME_DOMAIN_REUSE_INFLATION","ROUTE_READINESS",
     "DUPLICATE_EXECUTION","ACTIVITY_AS_PROGRESS","POST_STATE_MISMATCH","HIDDEN_DEPENDENCY",
-    "FALSIFIED_ROUTE_REPLAY",
+    "FALSIFIED_ROUTE_REPLAY","SEMANTIC_DUPLICATE_EXECUTION",
 }
 ADVERSARIAL_CLAIM_LEVELS={
     "GOVERNANCE_ONLY","SUPPORT_ONLY","TASK_EVIDENCE","FRESH_REUSE_PROOF",
@@ -600,6 +600,27 @@ def enforce_adversarial_error_control(intent,files,base):
             fail("CIRCULAR_FRONTIER_PROOF_FORBIDDEN:PRODUCER_VERIFIER_NOT_INDEPENDENT")
         if proof.get("independent_verifier_present") is not True:
             fail("CIRCULAR_FRONTIER_PROOF_FORBIDDEN:INDEPENDENT_VERIFIER_MISSING")
+
+    semantic_key=ctrl.get("semantic_execution_key")
+    if not _nonempty_string(semantic_key):
+        fail("SEMANTIC_EXECUTION_KEY_MISSING")
+    else:
+        try:
+            semantic_peers=_open_pr_intents()
+        except Exception as exc:
+            fail("SEMANTIC_EXECUTION_DEDUPE_CHECK_FAILED:"+str(exc))
+            semantic_peers=[]
+        for peer in semantic_peers:
+            other=peer.get("intent") or {}
+            other_ctrl=other.get("adversarial_error_control") or {}
+            if other_ctrl.get("semantic_execution_key")!=semantic_key:
+                continue
+            if bool(intent.get("intentional_route_race")) and bool(other.get("intentional_route_race")):
+                race_a=str(intent.get("route_race_id") or "")
+                race_b=str(other.get("route_race_id") or "")
+                if race_a and race_a==race_b:
+                    continue
+            fail(f"SEMANTIC_DUPLICATE_EXECUTION_OPEN_PR:{peer['pr']}")
 
     expected=ctrl.get("expected_sensitive_paths")
     actual=sorted(x for x in files if is_sensitive(x) and not x.startswith("canonical/action_intents/"))

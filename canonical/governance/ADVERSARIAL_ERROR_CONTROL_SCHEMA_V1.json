@@ -11,6 +11,7 @@
     "abort_if_any_unresolved",
     "target_fidelity",
     "proof_claim",
+    "semantic_execution_key",
     "expected_sensitive_paths",
     "postconditions"
   ],
@@ -27,7 +28,8 @@
     "ACTIVITY_AS_PROGRESS",
     "POST_STATE_MISMATCH",
     "HIDDEN_DEPENDENCY",
-    "FALSIFIED_ROUTE_REPLAY"
+    "FALSIFIED_ROUTE_REPLAY",
+    "SEMANTIC_DUPLICATE_EXECUTION"
   ],
   "target_fidelity": {
     "required_fields": [
@@ -76,5 +78,12 @@
     "json_field_equals",
     "text_contains"
   ],
-  "progress_credit": false
+  "progress_credit": false,
+  "semantic_execution_dedupe": {
+    "required": true,
+    "semantic_execution_key": "NONEMPTY_STABLE_STRING",
+    "duplicate_scope": "OPEN_PULL_REQUEST_ACTION_INTENTS",
+    "blocker_wording_does_not_define_uniqueness": true,
+    "intentional_route_race_exception": "BOTH_INTENTS_DECLARE_TRUE_AND_SAME_NONEMPTY_ROUTE_RACE_ID"
+  }
 }

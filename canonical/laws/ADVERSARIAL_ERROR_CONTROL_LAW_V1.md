@@ -21,8 +21,9 @@ Every frontier-sensitive action intent MUST contain `adversarial_error_control` 
 7. forbid unknown or opaque supplier identities in capability-promotion, fresh-reuse-proof, or frontier-dependency-removal evidence;
 8. forbid the target frontier supplier from the producer or verifier path of any claim that says that supplier is no longer necessary;
 9. require producer/verifier independence for promotion/removal claims;
-10. declare the exact non-intent sensitive paths expected to change;
-11. declare machine-checkable postconditions evaluated on the exact PR head.
+10. declare a stable semantic execution key; another open intent with the same semantic key is forbidden unless both explicitly declare the same intentional route race;
+11. declare the exact non-intent sensitive paths expected to change;
+12. declare machine-checkable postconditions evaluated on the exact PR head.
 
 ## Canonical known-failure classes
 
@@ -40,6 +41,7 @@ At minimum:
 - POST_STATE_MISMATCH
 - HIDDEN_DEPENDENCY
 - FALSIFIED_ROUTE_REPLAY
+- SEMANTIC_DUPLICATE_EXECUTION
 
 A newly observed generic failure class MUST be added to the canonical regression set rather than handled only by operator memory.
 
@@ -79,3 +81,7 @@ Adversarial analysis, guard changes, regressions and postcondition checks receiv
 ## Stop rule
 
 Once this compact contract is machine-enforced, stop governance work. Return to the current real frontier capability blocker.
+
+## Semantic execution dedupe
+
+Blocker wording is not task identity. Every consequential intent MUST declare a stable `semantic_execution_key` for the real task/support/governance action being attempted. Two open intents with the same semantic key fail closed even if blocker text, action IDs, or branch names differ. The only exception is an explicit intentional route race where both intents declare the same nonempty route-race ID.

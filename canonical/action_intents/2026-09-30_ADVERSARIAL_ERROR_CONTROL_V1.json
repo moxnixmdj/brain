@@ -158,7 +158,8 @@
       "ACTIVITY_AS_PROGRESS",
       "POST_STATE_MISMATCH",
       "HIDDEN_DEPENDENCY",
-      "FALSIFIED_ROUTE_REPLAY"
+      "FALSIFIED_ROUTE_REPLAY",
+      "SEMANTIC_DUPLICATE_EXECUTION"
     ],
     "unresolved_material_risks": [],
     "abort_if_any_unresolved": true,
@@ -209,6 +210,7 @@
         "path": "canonical/runtime/enforce_goal_hierarchy.py",
         "text": "CIRCULAR_FRONTIER_PROOF_FORBIDDEN"
       }
-    ]
+    ],
+    "semantic_execution_key": "GOVERNANCE::ADVERSARIAL_ERROR_CONTROL_V1"
   }
 }
