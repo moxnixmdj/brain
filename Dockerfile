@@ -19,4 +19,4 @@ RUN rm -f /etc/apt/apt.conf.d/docker-no-languages \
 WORKDIR /work
 COPY . /work
 
-CMD ["/bin/sh","-lc","echo HELDOUT003_CARRIER_READY; exec sleep infinity"]
+CMD ["/bin/sh","-lc","echo HELDOUT003_CARRIER_READY; exec python3 -m http.server ${PORT:-10000} --bind 0.0.0.0"]
