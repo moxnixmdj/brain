@@ -34,12 +34,12 @@
     "recurrence_count": 2
   },
   "last_falsified_repair": {
-    "repair_id": "GENERIC_SEMANTIC_VERIFIER_EVIDENCE_ADMISSION_V1",
-    "source_pr": 204,
+    "repair_id": "DIRECT-EVIDENCE-TIER-RANKING-REPAIR-V1",
+    "source_pr": 79,
     "merged": false,
-    "workflow_run_id": 36603922229,
-    "reason": "REPAIR_VERIFIED_NON_HELDOUT__AWAITING_NEW_ORTHOGONAL_GATE",
-    "reconciliation_path": "canonical/capabilities/obsolescence/GENERIC_SEMANTIC_VERIFIER_EVIDENCE_ADMISSION_REPAIR_20260929_V1.json"
+    "workflow_run_id": 36478244388,
+    "reason": "FRESH_VALIDATION_EXCEEDED_HARD_WALL_CLOCK_GATE",
+    "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_DIRECT_EVIDENCE_TIER_TIMEOUT_RECONCILIATION_V1.json"
   },
   "completed_candidate_diagnostic": {
     "diagnostic_id": "EXECUTABLE-CANDIDATE-DIAGNOSTIC-001",
@@ -131,5 +131,15 @@
     "evidence_path": "canonical/capabilities/obsolescence/H004_PUBLIC_V4_PRESTART_APT_CONFIG_FAILURE_20260929_V1.json",
     "first_failed_predicate": "APT_LANGUAGE_CONFIG_PRINTF_ESCAPING",
     "heldout_004_state": "UNSPENT"
+  },
+  "last_verified_generic_repair": {
+    "repair_id": "GENERIC_SEMANTIC_VERIFIER_EVIDENCE_ADMISSION_V1",
+    "source_pr": 204,
+    "merge_status": "PENDING",
+    "workflow_run_id": 36603922229,
+    "tests_passed": 6,
+    "heldout_executions": 0,
+    "evidence_path": "canonical/capabilities/obsolescence/GENERIC_SEMANTIC_VERIFIER_EVIDENCE_ADMISSION_REPAIR_20260929_V1.json",
+    "next_action": "FREEZE_NEW_ORTHOGONAL_FRESH_GATE_BEFORE_ANY_EXECUTION"
   }
 }
