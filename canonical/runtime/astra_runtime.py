@@ -3,6 +3,7 @@ import html
 import argparse, ast, base64, gzip, hashlib, importlib.util, io, json, os, pathlib, re, shlex, shutil, subprocess, sys, tempfile, time, urllib.error, urllib.parse, urllib.request
 import importlib.metadata
 from datetime import datetime, timezone
+from anti_drift_interlock import authorize_action_from_env, authorize_step_from_env, require_runtime_context
 
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 
