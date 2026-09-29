@@ -1,0 +1,105 @@
+{
+  "schema": "PROJECT_BRAIN_TYPED_EVIDENCE_DECISION_TASK_V1",
+  "task_id": "QWEN_COGNITIVE_CREDIT_ELIGIBILITY_001",
+  "question": "May a Qwen-backed hidden-oracle task run be credited as Project Brain's own cognitive reasoning capability evidence?",
+  "decision_id": "GRANT_BRAIN_COGNITIVE_CAPABILITY_CREDIT_TO_QWEN_BACKED_RUN",
+  "evidence": [
+    {
+      "id": "real_task_structure",
+      "probability": 1,
+      "statement": "The Click task was designed as a real hidden-oracle source-debugging task with behavioral verification.",
+      "provenance": {
+        "ref": "brain PR230 and verification-capsule-runner run 36637782165"
+      }
+    },
+    {
+      "id": "exact_supplier_provenance",
+      "probability": 1,
+      "statement": "The route pinned and verified a specific local Qwen3.5-9B model artifact and llama.cpp runtime.",
+      "provenance": {
+        "ref": "brain PR230 execution contract"
+      }
+    },
+    {
+      "id": "cognitive_target",
+      "probability": 1,
+      "statement": "The credited target includes technical reasoning, synthesis, planning, falsification, and adaptive tool selection.",
+      "provenance": {
+        "path": "canonical/capabilities/frontier/OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1.json",
+        "field": "parent_families/useful_behavior"
+      }
+    },
+    {
+      "id": "model_in_cognition_path",
+      "probability": 1,
+      "statement": "Local Qwen3.5-9B was the planner/reasoning source inside the credited task execution path.",
+      "provenance": {
+        "ref": "brain PR230 and public Task C workflow"
+      }
+    },
+    {
+      "id": "model_independence_law",
+      "probability": 1,
+      "statement": "Canonical Model Non-Dependence law forbids any model from supplying the credited cognition execution path for a Brain cognitive capability.",
+      "provenance": {
+        "path": "canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md"
+      }
+    },
+    {
+      "id": "trusted_gate_regression",
+      "probability": 1,
+      "statement": "Canonical regression records model-backed cognition as ineligible for Brain reasoning acquisition, fresh cognitive reuse, or frontier-dependency removal.",
+      "provenance": {
+        "path": "canonical/regressions/2026-09-30_MODEL_BACKED_COGNITION_MISCLASSIFICATION.json"
+      }
+    }
+  ],
+  "rules": [
+    {
+      "id": "support_real_task_quality",
+      "antecedents": [
+        "real_task_structure",
+        "exact_supplier_provenance"
+      ],
+      "strength": 1,
+      "stance": "SUPPORT",
+      "description": "A real hidden-oracle task with exact provenance is useful component evidence."
+    },
+    {
+      "id": "oppose_credit_model_dependency",
+      "antecedents": [
+        "cognitive_target",
+        "model_in_cognition_path",
+        "model_independence_law"
+      ],
+      "strength": 1,
+      "stance": "OPPOSE",
+      "description": "A model in the cognition path invalidates Brain cognitive-credit eligibility."
+    },
+    {
+      "id": "oppose_credit_regression",
+      "antecedents": [
+        "trusted_gate_regression"
+      ],
+      "strength": 1,
+      "stance": "OPPOSE",
+      "description": "The trusted regression explicitly preserves this failure class as non-promotable."
+    }
+  ],
+  "hard_constraints": [
+    {
+      "id": "zero_model_cognition_required",
+      "ref": "oppose_credit_model_dependency",
+      "trigger_probability": 0.999,
+      "decision": "REJECT",
+      "reason": "Cognitive capability credit requires zero model dependencies in the credited cognition path."
+    }
+  ],
+  "policy": {
+    "accept_threshold": 0.75,
+    "reject_threshold": 0.75,
+    "min_margin": 0.2,
+    "conflict_threshold": 0.35,
+    "evidence_floor": 0.6
+  }
+}
