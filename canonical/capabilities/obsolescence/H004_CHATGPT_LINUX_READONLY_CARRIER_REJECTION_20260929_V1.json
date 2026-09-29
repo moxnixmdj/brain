@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_H004_CHATGPT_LINUX_READONLY_CARRIER_REJECTION_V1",
+  "evidence_id": "H004_CHATGPT_LINUX_READONLY_CARRIER_REJECTION_20260929_V1",
+  "bound_main_sha": "c37a4e479b4cc571d74535790696c9f4d17dc32f",
+  "action_intent": "canonical/action_intents/2026-09-29_RECONCILE_H004_CHATGPT_LINUX_CARRIER_READONLY_QUALIFICATION_V1.json",
+  "snapshot_sha256": "e7f1aab2529a5171d2c798e50805933fa7128bae2206d38f8f9c5a425fd7bd1f",
+  "method": "POST_GUARD_READ_ONLY_NON_HELDOUT_CARRIER_SNAPSHOT",
+  "heldout_004": {
+    "freshness": "UNSPENT",
+    "execution_count": 0,
+    "start_created": false,
+    "dispatch_invoked": false,
+    "evaluator_invoked": false
+  },
+  "carrier": {
+    "class": "CHATGPT_BUILTIN_LINUX_CONTAINER",
+    "os": "Debian GNU/Linux 13 (trixie)",
+    "uid": 0,
+    "gid": 0,
+    "configured_apt_sources": [
+      "http://deb.debian.org/debian trixie trixie-updates main",
+      "http://deb.debian.org/debian-security trixie-security main"
+    ],
+    "apt_list_regular_file_count": 0,
+    "apt_file_path": null,
+    "python_xapian": "ModuleNotFoundError: No module named 'xapian'",
+    "zbarimg_path": null,
+    "dns_deb_debian_org": {
+      "rc": 2,
+      "output": ""
+    },
+    "http_head_deb_debian_org": {
+      "rc": 6,
+      "output": "curl: (6) Could not resolve host: deb.debian.org"
+    }
+  },
+  "adjudication": {
+    "debian_family_identity": "PASS",
+    "faithful_required_apt_surface_now": "FAIL",
+    "configured_debian_mirror_reachable_read_only": "FAIL",
+    "carrier_admissible_for_h004": false,
+    "first_decisive_failure": "NO_USABLE_APT_LIST_METADATA_AND_CONFIGURED_DEBIAN_MIRROR_UNREACHABLE",
+    "current_carrier_hard_zero_spend": "NOT_ADJUDICATED__EARLIER_SURFACE_FAILURE",
+    "source_materialization_preflight": "NOT_RUN__EARLIER_SURFACE_FAILURE",
+    "classification": "CARRIER_REJECTED_BEFORE_HELDOUT_START__PARENT_CAPABILITY_REMAINS_UNPROVEN"
+  },
+  "reusable_existing_mechanisms": [
+    "PR20 exact Git-blob private-repo reconstruction",
+    "PR35 content-addressed source-tree materialization and hash checking",
+    "PR45 content-addressed exact-source execution"
+  ],
+  "excluded_non_authoritative_history": [
+    "PR178 post-guard apt-get update attempt",
+    "PR178 duplicate/conflicting evidence labels"
+  ],
+  "prohibitions_preserved": [
+    "NO_APT_UPDATE_OR_INSTALL",
+    "NO_PROJECT_SOURCE_TRANSPORT",
+    "NO_HELDOUT_004_START",
+    "NO_HELDOUT_003_REPLAY",
+    "NO_SPRITE_ACCESS",
+    "NO_RAILWAY_OR_OTHER_HOST_PROVISIONING",
+    "NO_VAL_TOWN",
+    "NO_USER_LAPTOP",
+    "NO_PAID_OR_UNPROVEN_COST_INFRASTRUCTURE"
+  ],
+  "next_action": "QUALIFY_ONE_ALREADY_DISCOVERED_HARD_ZERO_CONNECTED_REMOTE_LINUX_ROUTE__PROVE_CALLABLE_COMMAND_TRANSPORT_AND_ZERO_SPEND__THEN_PREFLIGHT_EXACT_SOURCE_CLOSURE_PATHS_HASHES_AND_IMPORTS__SEPARATE_H004_ONE_SHOT_EXECUTION_LEASE"
+}
