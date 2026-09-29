@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_MISSION_LOCK_STEP7_RESIDUAL_RECONCILIATION_V1",
+  "reconciliation_id": "MISSION-LOCK-STEP7-TOOL-RESIDUAL-20260929",
+  "status": "RECONCILED__NO_RUNTIME_MUTATION",
+  "checked_on": "2026-09-29",
+  "base_main": "d22f5012df9a32e073e0bed8fe7da7af4a60441b",
+  "authority": {
+    "mission_lock": "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_OBSOLESCENCE_MISSION_LOCK_V4.md",
+    "exact_rule": "Step 7: if the substitute does not provide equal-or-better capability, record the exact residual capability gap and continue only on that residual. Step 9 recomputation follows terminal obsolete-or-retain adjudication and inheritance.",
+    "strategy": "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V2.md"
+  },
+  "prior_frontier_pr": 111,
+  "prior_frontier_recorded_parent_obsolete": false,
+  "corrected_active_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "preserved_next_capability_candidate": "MULTI_TOOL_ORCHESTRATION_AND_PLANNING",
+  "exact_residual": "DISCOVERY_TO_APT_ACQUISITION_CANDIDATE_CONTRACT_COMPATIBILITY__VERIFIED_APT_FULL_METADATA_XAPIAN_CANDIDATES_ARE_REJECTED_BY_LEGACY_APT_CATALOG_SOURCE_ADMISSION_BEFORE_PROBE_CONTRACT_EXECUTE_VERIFY",
+  "static_causal_trace": {
+    "producer": {
+      "path": "canonical/runtime/capability_discovery.py",
+      "blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
+      "emits": {
+        "discovery_source": "APT_FULL_METADATA_XAPIAN",
+        "binding_kind": "apt",
+        "matched_terms": [],
+        "score_semantics": "XAPIAN_RAW_MATCH_WEIGHT"
+      }
+    },
+    "router": {
+      "path": "canonical/runtime/auto_capability_acquisition.py",
+      "blob": "fc80ede8225cc51dac77be6d41aa2a1c757c6ee8",
+      "finding": "binding_kind=apt already routes correctly to apt_cli"
+    },
+    "first_hard_drop": {
+      "path": "canonical/runtime/auto_apt_cli_acquisition.py",
+      "blob": "786f7de7df853cfaec2826f9471942b001e7eadc",
+      "predicate": "discovery_source == APT_CATALOG",
+      "effect": "APT_FULL_METADATA_XAPIAN candidates are rejected before probe, contract inference, execution, or verification",
+      "classification": "FIRST_CAUSAL_BLOCKER"
+    },
+    "same_interface_legacy_score_assumption": {
+      "predicate": "score >= 12",
+      "finding": "consumer applies a legacy absolute threshold to a raw Xapian weight from a different scorer; evaluate as part of the candidate-contract repair rather than assuming numeric portability"
+    },
+    "known_downstream_residual": {
+      "path": "canonical/runtime/verify_pending_cli_binding.py",
+      "blob": "8ec4da92080e885a15266389c0318688e6408d43",
+      "predicate": "len(matched_terms) >= 2",
+      "producer_value": "[]",
+      "classification": "PRESERVED_DOWNSTREAM__NOT_FIRST_REPAIR"
+    }
+  },
+  "route_design_constraint": "Prefer the already-stable binding_kind=apt plus verified zero-cost/executable eligibility evidence over adding a new discovery-source literal special case.",
+  "next_action": "FREEZE_FRESH_ORTHOGONAL_END_TO_END_TOOL_LEARNING_INTEGRATION_GATE__THEN_APPLY_ONLY_THE_SMALLEST_GENERIC_DISCOVERY_TO_APT_ACQUISITION_CONTRACT_REPAIR__EXECUTE_ONCE__RECONCILE_PARENT_TO_OBSOLETE_OR_RETAIN",
+  "runtime_mutation": false,
+  "heldout005_replay_allowed": false,
+  "orchestration_gate_spend_allowed_before_terminal_parent_adjudication": false,
+  "incremental_spend_usd": 0
+}
