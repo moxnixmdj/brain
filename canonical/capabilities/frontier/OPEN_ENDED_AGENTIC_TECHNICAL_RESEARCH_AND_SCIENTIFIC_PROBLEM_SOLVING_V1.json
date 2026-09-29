@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
   "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "status": "FRONTIER_BAR_DEFINED__MODEL_INDEPENDENT_SYNTHESIS_SUBCAPABILITY_VERIFIED__FRESH_PARENT_COMPOSITION_REQUIRED",
+  "status": "FRONTIER_BAR_DEFINED__MODEL_INDEPENDENT_SYNTHESIS_ACQUIRED__FRESH_PARENT_TASK_LOCALIZED_GROUNDING_GAP",
   "real_capability": true,
   "parent_families": [
     "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
@@ -50,31 +50,17 @@
     "evidence_path": "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json"
   },
   "evidence_B": {
-    "status": "FRESH_PARENT_REAL_TASK_REQUIRED_AFTER_MODEL_INDEPENDENT_SYNTHESIS_ACQUISITION",
-    "failed_routes": [
-      {
-        "route": "ANONYMOUS_POLLINATIONS_LEGACY_PLANNER",
-        "evidence": "canonical/capabilities/obsolescence/NONFRONTIER_AGENTIC_TASK_B_POLLINATIONS_ROUTE_FALSIFICATION_20260929_V1.json"
-      },
-      {
-        "route": "PUBLIC_GITHUB_ACTIONS_LOCAL_QWEN3_5_4B_GGUF",
-        "evidence": "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_4B_TASK_B_FALSIFICATION_20260929_V1.json",
-        "task_completed": false,
-        "blocker": "GOAL_MAX_CYCLES_WITHOUT_FINISH"
-      },
-      {
-        "route": "PUBLIC_GITHUB_ACTIONS_LOCAL_QWEN3_5_9B_GGUF",
-        "evidence": "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_9B_BIOPHYSICS_TASK_B_FALSIFICATION_20260929_V1.json",
-        "task_completed": false,
-        "blocker": "GOAL_MAX_CYCLES_WITHOUT_FINISH",
-        "useful_partial_behavior": "Selected and fetched three authoritative NCBI sources through the local planner bridge."
-      }
-    ],
-    "next_candidate": "COMPOSE_INHERITED_MODEL_INDEPENDENT_PARENT_STACK_WITH_VERIFIED_EVIDENCE_DECISION_SYNTHESIS",
-    "requirement": "Execute one fresh materially different consequential technical/scientific task through the composed model-independent planner/discovery/execution/verification/synthesis stack. Do not replay prior model-backed Task B. The first causal failure defines any next subcapability."
+    "status": "FRESH_PARENT_TASK_EXECUTED__FAIL_FIRST_CAUSAL_GAP_LOCALIZED",
+    "task": "FRESH_PARENT_SERIALIZATION_DECISION_20260930_001",
+    "evidence_path": "canonical/capabilities/obsolescence/FRESH_PARENT_SERIALIZATION_DECISION_TERMINAL_RECONCILIATION_20260930_V1.json",
+    "public_run_id": 36644374149,
+    "task_completed": false,
+    "model_free_execution": true,
+    "first_causal_gap": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+    "same_task_replay_allowed": false
   },
-  "obsolescence_status": "NOT_YET_PROVEN__MODEL_INDEPENDENT_SYNTHESIS_SUBCAPABILITY_ACQUIRED",
-  "residual_gap": "PARENT_COMPOSITION_NOT_FRESHLY_REVALIDATED_AFTER_MODEL_INDEPENDENT_SYNTHESIS_ACQUISITION",
+  "obsolescence_status": "NOT_YET_PROVEN__FIRST_CAUSAL_GAP_LOCALIZED",
+  "residual_gap": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
   "verified_subcapabilities": [
     {
       "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -84,5 +70,5 @@
       "merge_commit_sha": "2f4f3d7042f055003daf85a93e01e2f78678cec6"
     }
   ],
-  "next_action": "SELECT_ONE_FRESH_REAL_PARENT_TASK__RUN_CURRENT_MODEL_INDEPENDENT_COMPOSED_STACK__VERIFY_END_TO_END__LOCALIZE_ONLY_FIRST_CAUSAL_GAP"
+  "next_action": "ACQUIRE_MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1_ON_FRESH_REAL_TASK__NO_SERIALIZATION_REPLAY__THEN_RETRY_PARENT_ONLY_ON_DIFFERENT_FRESH_TASK"
 }

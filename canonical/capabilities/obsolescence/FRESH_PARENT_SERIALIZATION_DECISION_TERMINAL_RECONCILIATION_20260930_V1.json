@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_COMPOSITION_FALSIFICATION_V1",
+  "evidence_id": "FRESH_PARENT_SERIALIZATION_DECISION_20260930_TERMINAL_RECONCILIATION_V1",
+  "status": "TERMINAL_FAIL_RECONCILED__NO_REPLAY",
+  "parent_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "real_task": "Choose the best already-verified zero-cost binary serialization route for Project Brain evidence capsules among CBOR, MessagePack, and BSON from a plain technical goal.",
+  "execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "frontier/fresh-parent-serialization-decision-20260930",
+    "run_id": 36644374149,
+    "job_id": 109663801776,
+    "head_sha": "26860c2783bcb9dd80ab6a8081051af6fabc9ad9",
+    "workflow": "Fresh Parent Serialization Decision",
+    "workflow_conclusion": "success",
+    "task_exit_code": 3,
+    "task_terminal_classification": "PARENT_FRESH_TASK_FAIL_FIRST_CAUSAL_GAP_PRESERVED",
+    "artifact_id": 11067706810,
+    "artifact_digest": "sha256:57c6a188f8027c2788f4e2c6991fa8066799a55fb40771f17be6072a819e71d7",
+    "incremental_spend_usd": 0
+  },
+  "exact_bytes": {
+    "runtime_git_blob": "1e8252415c60a553bad8a05fae2d98217d0f5833",
+    "goal_compiler_git_blob": "195d5dd5f4fabb8a897fb6407433e691a8fdaf26",
+    "registry_git_blob": "1b4a05c1b24070a7d2125713af11231214021a97",
+    "mission_git_blob": "ead58b94d7eea8e308d7234b5a1c5d12ebc44b6f",
+    "fixture_git_blob": "ccd85c0ccc38cc55fb167030d871d70321bcf46d"
+  },
+  "constraints_observed": {
+    "model_planner_disabled": true,
+    "model_free_evidence_path": true,
+    "hand_authored_controller_actions": false,
+    "hand_authored_typed_decision_input": false,
+    "rerun_authorized": false
+  },
+  "first_causal_failure": {
+    "phase": "PLAIN_GOAL_CAPABILITY_GROUNDING_AND_DISCOVERY",
+    "runtime_error_prefix": "CAPABILITY_ACQUISITION_REQUIRED",
+    "evidence_path": "canonical/astra_runtime/evidence/FRESH-PARENT-SERIALIZATION-DECISION-20260930-001__PLAIN_GOAL_CAPABILITY_DISCOVERY.json",
+    "observed_behavior": "The plain-goal path failed to map the task onto already-bound CBOR/MessagePack/BSON serialization capabilities and instead ranked irrelevant generic supplier candidates from APT/PyPI/source-tree discovery.",
+    "examples_of_irrelevant_top_candidates": [
+      "leela-zero",
+      "openjdk-11-jre-zero",
+      "openjdk-17-jre-zero",
+      "tryton-modules-account-stock-landed-cost"
+    ],
+    "existing_capabilities_that_should_have_been_semantically_grounded": [
+      "already-bound CBOR route",
+      "already-bound MessagePack route",
+      "already-bound BSON route"
+    ]
+  },
+  "localized_missing_subcapability": {
+    "capability_id": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+    "useful_behavior": "Given a plain consequential goal, deterministically map the goal's required operations, entities, constraints, and output contract onto semantically compatible capabilities already present in Brain's bound capability registry before invoking external supplier discovery; preserve ambiguity and fail closed when no binding is justified.",
+    "scope_boundary": "This is grounding/routing to existing capabilities only. It is not evidence-to-decision synthesis, supplier acquisition, arbitrary model reasoning, or a task-specific serialization rule.",
+    "why_first_causal_gap": "The task never reached serialization execution or decision synthesis. Failure occurred while trying to identify/acquire capabilities despite the relevant capabilities already being bound."
+  },
+  "prohibited_followups": [
+    "NO_SAME_TASK_REPLAY",
+    "NO_SERIALIZATION_LITERAL_PATCH",
+    "NO_HAND_AUTHORED_CONTROLLER_ACTIONS",
+    "NO_MODEL_BACKED_COGNITION",
+    "NO_REPAIR_BEFORE_FRESH_OBS_AND_LIVE_CHALLENGER_RACE"
+  ],
+  "parent_capability_verdict": "NOT_YET_PROVEN",
+  "parent_fresh_reuse_credit": false,
+  "capability_credit": false,
+  "residual_gap_credit": true
+}

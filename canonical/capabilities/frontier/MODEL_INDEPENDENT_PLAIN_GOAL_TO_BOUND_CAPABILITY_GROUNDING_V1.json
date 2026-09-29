@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_SUBCAPABILITY_TARGET_V1",
+  "capability_id": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+  "status": "ACTIVE_ACQUISITION_TARGET__UNPROVEN__LOCALIZED_FROM_FRESH_PARENT_REAL_TASK",
+  "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "real_frontier_role": "SUBCAPABILITY_REQUIRED_FOR_PARENT_COMPOSITION",
+  "useful_behavior": "Given a plain consequential goal, deterministically map the goal's required operations, entities, constraints, and output contract onto semantically compatible capabilities already present in Brain's bound capability registry before invoking external supplier discovery; preserve ambiguity and fail closed when no binding is justified.",
+  "scope_boundaries": [
+    "Existing bound capabilities only; supplier acquisition is downstream and separate.",
+    "No task-specific literals or serialization-specific special cases.",
+    "No model API, local model, or model artifact in the credited cognition path.",
+    "Must preserve ambiguity rather than force a binding.",
+    "Must expose auditable grounding evidence explaining why each bound capability matched or did not match."
+  ],
+  "discovery_evidence": {
+    "source_real_task": "canonical/capabilities/obsolescence/FRESH_PARENT_SERIALIZATION_DECISION_TERMINAL_RECONCILIATION_20260930_V1.json",
+    "public_run_id": 36644374149,
+    "first_causal_failure": "PLAIN_GOAL_CAPABILITY_GROUNDING_AND_DISCOVERY",
+    "observed_miss": "Relevant CBOR/MessagePack/BSON capabilities were already bound, but plain-goal discovery instead attempted irrelevant external APT/PyPI/source-tree candidates.",
+    "same_task_replay_forbidden": true
+  },
+  "acquisition_bar": {
+    "real_task_required": true,
+    "fresh_task_not_serialization_replay": true,
+    "generic_semantic_grounding_required": true,
+    "existing_capability_reuse_before_external_discovery_required": true,
+    "independent_verification_required": true,
+    "fresh_reuse_on_materially_distinct_real_task_required": true,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "current_status": "UNPROVEN",
+  "next_action": "RUN_FRESH_OBS_V3_V4_LIVE_CHALLENGER_RACE__SEARCH_BRAIN_AND_EXISTING_DETERMINISTIC_GROUNDING_ROUTING_ROUTES__ACQUIRE_SMALLEST_SUFFICIENT_GENERIC_ROUTE__PROVE_ON_FRESH_REAL_TASK__NO_SERIALIZATION_REPLAY"
+}
