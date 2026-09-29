@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-PR129-HELDOUT003-STATE-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
+  "causal_blocker": "CANONICAL_FRONTIER_STATE_STALE_AFTER_PR129_REPAIR_MERGE__EXECUTION_FORBIDDEN_BY_ABORT_ON_FRONTIER_CONTRADICTION",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::CANONICAL_FRONTIER_STATE_STALE_AFTER_PR129_REPAIR_MERGE__EXECUTION_FORBIDDEN_BY_ABORT_ON_FRONTIER_CONTRADICTION::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Reconcile canonical pointer, active goal hierarchy, and capability queue with merged PR129 truth: the sole provider-neutral score-scale-safe APT admission repair is consumed, HELDOUT-003 remains UNSPENT with execution_count 0, no further repair is authorized before reconciliation, and the next capability-changing action is exactly one fresh HELDOUT-003 execution followed by immediate frontier reconciliation.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR128 froze XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003 UNSPENT",
+    "merged PR129 changed canonical/runtime/auto_apt_cli_acquisition.py to blob 0b7c67a2680a3aaa1aa5cf1a8bc8d41d69eee271",
+    "current main ACTIVE_GOAL_HIERARCHY_V1 still records repairs_used_on_active_probe=0 and repair-first next action",
+    "current main FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1 still records repair authorized and repair-first next action",
+    "current main CANONICAL_POINTER current_frontier still names the removed admission seam as critical blocker",
+    "CANONICAL_POINTER boot requirement abort_on_frontier_contradiction=true",
+    "PR133 execution lease is preserved but HELDOUT-003 remains unspent"
+  ],
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Pointer, hierarchy, and queue agree that PR129 consumed the one permitted repair, HELDOUT-003 is still UNSPENT, and exactly one fresh held-out execution is the next action. No runtime/spec/evaluator/carrier mutation, held-out execution, replay, second repair, Val use, user-laptop execution, or paid spend occurs in this reconciliation.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
