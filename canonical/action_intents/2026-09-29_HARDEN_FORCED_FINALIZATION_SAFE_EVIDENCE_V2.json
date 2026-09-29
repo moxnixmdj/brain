@@ -1,0 +1,329 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "HARDEN-FORCED-FINALIZATION-SAFE-EVIDENCE-V2",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "FORCED_FINALIZATION_CAN_DROP_EARLY_EVIDENCE_RAW_TRUNCATE_SERIALIZED_JSON_AND_LACK_EXPLICIT_UNTRUSTED_EVIDENCE_BOUNDARY",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::FORCED_FINALIZATION_CAN_DROP_EARLY_EVIDENCE_RAW_TRUNCATE_SERIALIZED_JSON_AND_LACK_EXPLICIT_UNTRUSTED_EVIDENCE_BOUNDARY::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Remove the known controller-side correctness blocker that invalidated fresh Task C by making forced finalization preserve the full observation sequence through structural bounded compaction, never cut serialized JSON mid-value, and treat fetched/tool evidence as untrusted data rather than instructions.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR222 merged forced-finalization implementation and exact current main runtime",
+    "PR223 supersession evidence identifying first-observation loss, raw 5000-character JSON truncation, and missing untrusted-evidence boundary",
+    "PR225 merged current selected-route execution preflight enforcement",
+    "Hugging Face smolagents provide_final_answer/max_steps pattern",
+    "OpenAI agent safety guidance on structured data flow and untrusted tool/web content",
+    "Current Vireonix and Murakumo anonymous inference routes discovered as planner challengers"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Change only the minimum ASTRA finalizer evidence-packing and regression tests needed to preserve every observation structurally, bound size without malformed JSON, and mark external/tool observations untrusted; validate exact candidate bytes on the current public hard-zero carrier; then stop repair work and issue one fresh Task C under a newly refreshed supplier frontier.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "4262602c1451a6b6a248950d434e24335b03ae4a",
+    "real_outcome": "Make the already-merged bounded-finalization route safe enough to spend one fresh real Task C without silently dropping or corrupting evidence.",
+    "required_capability": "Deterministic, structurally valid, bounded finalization context that preserves the complete observation sequence and isolates untrusted evidence from controller instructions.",
+    "obs_goal": {
+      "real_outcome": "Spend the next fresh real Task C only after the controller can synthesize from all admitted evidence without evidence loss, malformed serialization, or instruction confusion.",
+      "proxy_goals_deleted": [
+        "Polish the whole ASTRA runtime",
+        "Add another benchmark framework",
+        "Finish the stale mistake-presumption governance PR before capability work",
+        "Tune the same Task B again"
+      ],
+      "surviving_necessity": "Repair the exact finalization context defect that directly invalidated Task C readiness."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/astra_runtime.py forced-finalization block from merged PR222",
+        "canonical/tests/test_astra_runtime_model_independence.py",
+        "PR223 static correctness review",
+        "PR225 selected-route execution preflight guard",
+        "public verification-capsule-runner"
+      ],
+      "external_existing_routes_checked": [
+        "Hugging Face smolagents bounded max_steps plus provide_final_answer from agent memory",
+        "OpenAI agent safety guidance: structured outputs and isolate untrusted external/tool data",
+        "Murakumo anonymous OpenAI-compatible inference/tool-call route",
+        "Vireonix anonymous OpenAI-compatible inference route"
+      ],
+      "capability_work_deleted": [
+        "No new controller",
+        "No new scheduler",
+        "No local-model download",
+        "No Task B replay",
+        "No new benchmark",
+        "No provider-specific finalization fork"
+      ],
+      "surviving_gap": "Current ASTRA finalizer slices observations[-6:], then slices the serialized JSON to 5000 characters, and does not explicitly mark evidence as untrusted data."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic controller-side correctness defect independent of planner supplier; it can affect any route that exhausts the bounded action phase.",
+      "delete_bypass_substitute_options": [
+        "DELETE forced finalization and fail on budget exhaustion: rejected because two different real tasks already localized useful evidence followed by termination failure.",
+        "BYPASS by assuming a stronger supplier always finishes before max_cycles: rejected because this is not a correctness guarantee and leaves a known latent failure path.",
+        "SUBSTITUTE the entire controller with smolagents/AgentScope: correctness-plausible but slower integration and larger change surface.",
+        "REPAIR existing ASTRA finalizer with whole-record bounded compaction and explicit untrusted-data framing: survives."
+      ],
+      "surviving_causal_blocker": "Evidence packing in the existing finalization-only phase is structurally unsafe and incomplete."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REPAIR_EXISTING_ASTRA_FINALIZER_SAFE_EVIDENCE_PACKING",
+        "SUBSTITUTE_FULL_EXTERNAL_AGENT_RUNTIME",
+        "DELETE_FORCED_FINALIZATION_AND_REQUIRE_EARLY_FINISH"
+      ],
+      "losing_routes_reason": "Full runtime substitution adds integration and verification latency; deleting finalization restores the already-falsified termination failure. The local repair is smaller, supplier-independent, and directly closes the known defect.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use deterministic regression cases on exact candidate bytes to prove all observations remain represented, the final evidence envelope parses as valid JSON under size pressure, omission/truncation is explicit rather than silent, and the finalizer prompt labels evidence as untrusted data. Then the real proof is one fresh Task C."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "PR223 stale Task C intent",
+        "Any plan to debug local Qwen termination before retesting the generic repaired controller",
+        "Any assumption that switching planner suppliers alone fixes finalization context integrity"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "bounded evidence packaging",
+        "structural serialization integrity",
+        "untrusted tool/web evidence isolation"
+      ],
+      "fresh_reuse_plan": "After exact-byte regression passes, reissue a materially different fresh Task C and select the fastest current supplier only after live route refresh and current dependency preflight."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse PR223 defect localization instead of rediscovering the failure",
+        "Reuse PR222 bounded-finalization design instead of redesigning termination",
+        "Reuse PR225 public-carrier readiness contract",
+        "Reuse public verification-capsule-runner instead of building a carrier"
+      ],
+      "search_stop_decision": "Fresh discovery found no route that removes the generic controller defect more cheaply than a local bounded-pack repair; further supplier search cannot change the need to make the fallback path structurally correct.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Refreshed after PR223 invalidation and PR225 merge; current external planner alternatives and finalization patterns were rechecked on 2026-09-29 before this branch."
+    },
+    "routes_considered": [
+      "REPAIR_EXISTING_ASTRA_FINALIZER_SAFE_EVIDENCE_PACKING",
+      "SUBSTITUTE_FULL_EXTERNAL_AGENT_RUNTIME",
+      "DELETE_FORCED_FINALIZATION_AND_REQUIRE_EARLY_FINISH",
+      "SWITCH_PLANNER_SUPPLIER_ONLY"
+    ],
+    "deleted_or_bypassed_paths": [
+      "DELETE_FORCED_FINALIZATION_AND_REQUIRE_EARLY_FINISH",
+      "SWITCH_PLANNER_SUPPLIER_ONLY"
+    ],
+    "selected_surviving_route": "REPAIR_EXISTING_ASTRA_FINALIZER_SAFE_EVIDENCE_PACKING",
+    "why_selected_route_is_fastest_sufficient": "It is the smallest supplier-independent correction to the exact known blocker, needs no new infrastructure or paid resource, can be regression-tested deterministically on exact bytes, and unlocks immediate fresh Task C execution.",
+    "expected_parent_level_state_change": "Remove the known controller-side correctness blocker that invalidated fresh Task C by making forced finalization preserve the full observation sequence through structural bounded compaction, never cut serialized JSON mid-value, and treat fetched/tool evidence as untrusted data rather than instructions.",
+    "stop_condition": "Change only the minimum ASTRA finalizer evidence-packing and regression tests needed to preserve every observation structurally, bound size without malformed JSON, and mark external/tool observations untrusted; validate exact candidate bytes on the current public hard-zero carrier; then stop repair work and issue one fresh Task C under a newly refreshed supplier frontier.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-29T21:34:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "MERGED_PR222_FORCED_FINALIZATION_WITH_UNSAFE_EVIDENCE_PACKING",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "https://github.com/moxnixmdj/brain/pull/223#issuecomment-5899309721",
+          "canonical/runtime/astra_runtime.py",
+          "https://github.com/moxnixmdj/brain/pull/225"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://huggingface.co/docs/smolagents/main/reference/agents",
+          "https://developers.openai.com/api/docs/guides/agent-builder-safety",
+          "https://murakumo.cloud/docs",
+          "https://vireonix.ai/docs"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/huggingface/smolagents",
+          "https://github.com/modelscope/agentscope"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "fresh web discovery 2026-09-29: bounded agent final answer patterns and anonymous inference challenger search"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "bounded agent final answer from accumulated tool observations preserve evidence structurally"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "current zero-key anonymous reasoning tool-call inference API Murakumo Vireonix"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "agent max steps forced final answer memory compaction structured evidence implementation"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 agent finalization compaction prompt injection untrusted tool output current guidance"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "SUBSTITUTE_FULL_EXTERNAL_AGENT_RUNTIME_SMOLAGENTS_OR_AGENTSCOPE",
+          "evidence": [
+            "Hugging Face smolagents current agent docs",
+            "prior PR222 AgentScope/smolagents qualification"
+          ],
+          "qualification_evidence": [
+            "https://huggingface.co/docs/smolagents/main/reference/agents"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Has bounded-step/final-answer machinery, but integrating a new runtime does not remove the need to validate evidence transfer semantics.",
+            "CAPABILITY_STRENGTH": "Comparable generic agent-control capability.",
+            "WALL_CLOCK": "Slower because it replaces/integrates controller machinery instead of changing one local seam.",
+            "INCREMENTAL_COST": "$0 possible.",
+            "RELIABILITY": "Mature external library, but introduces new dependency surface.",
+            "VERIFIABILITY": "Verifiable, with larger integration surface."
+          }
+        },
+        {
+          "route": "SWITCH_PLANNER_TO_MURAKUMO_OR_VIREONIX_ONLY",
+          "evidence": [
+            "https://murakumo.cloud/docs",
+            "https://vireonix.ai/docs",
+            "PR223 direct-probe evidence"
+          ],
+          "qualification_evidence": [
+            "https://murakumo.cloud/docs",
+            "https://vireonix.ai/docs",
+            "https://github.com/moxnixmdj/brain/pull/223#issuecomment-5899309721"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Does not fix the known unsafe fallback evidence packing if any selected planner exhausts the action budget.",
+            "CAPABILITY_STRENGTH": "Potentially stronger/faster planners than local Qwen.",
+            "WALL_CLOCK": "Very fast supplier substitution, but insufficient as a correctness repair.",
+            "INCREMENTAL_COST": "Documented anonymous/free routes.",
+            "RELIABILITY": "External volatile services require per-run preflight.",
+            "VERIFIABILITY": "Directly probeable, but cannot prove the controller defect absent."
+          }
+        },
+        {
+          "route": "REPAIR_EXISTING_ASTRA_FINALIZER_SAFE_EVIDENCE_PACKING",
+          "evidence": [
+            "canonical/runtime/astra_runtime.py",
+            "PR223 defect localization",
+            "current deterministic test suite"
+          ],
+          "qualification_evidence": [
+            "direct code inspection on current main",
+            "exact-byte public carrier regression planned"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "INDEPENDENT_VERIFIER"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Directly removes all three known finalizer-context defects without changing the research/action budget.",
+            "CAPABILITY_STRENGTH": "Preserves current ASTRA behavior while making the fallback trustworthy enough for a real fresh task.",
+            "WALL_CLOCK": "Smallest code/test delta; no model download or new framework.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Supplier-independent and deterministic.",
+            "VERIFIABILITY": "Exact-byte unit/regression tests plus subsequent fresh Task C."
+          }
+        }
+      ],
+      "negative_search_summary": "No discovered route both removes the generic finalizer defect and reaches verified Task C faster than the local repair. Supplier substitution remains useful for Task C after this repair, not as a replacement for it.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REPAIR_EXISTING_ASTRA_FINALIZER_SAFE_EVIDENCE_PACKING",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-29T21:34:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REPAIR_EXISTING_ASTRA_FINALIZER_SAFE_EVIDENCE_PACKING",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "GITHUB_CONNECTED_PRIVATE_REPO_MUTATION",
+            "kind": "REMOTE_SERVICE",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T21:34:00Z",
+            "evidence": [
+              "DIRECT_PROBE: create_branch succeeded for repair/forced-finalization-safe-evidence-v2-20260929 from exact main 4262602c1451a6b6a248950d434e24335b03ae4a"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T20:52:52Z",
+            "evidence": [
+              "DIRECT_PROBE: public workflow run 36627371993 received a runner and executed through terminal task logic; failure was application-level GOAL_MAX_CYCLES_WITHOUT_FINISH, not pre-run carrier failure"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
