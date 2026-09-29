@@ -1,0 +1,140 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "LOCAL-QWEN-NONFRONTIER-AGENTIC-RESEARCH-TASK-B-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "RELIABLE_ZERO_COST_NONFRONTIER_OPEN_ENDED_PLANNER_FOR_REAL_PROMPT_UNPROVEN__POLLINATIONS_REJECTED",
+  "action_kind": "FRESH_REUSE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::RELIABLE_ZERO_COST_NONFRONTIER_OPEN_ENDED_PLANNER_FOR_REAL_PROMPT_UNPROVEN__POLLINATIONS_REJECTED::FRESH_REUSE",
+  "expected_parent_frontier_change": "Execute one real cross-domain AI-systems research Task B through the public $0 ASTRA runtime with a pinned local Qwen3.5-4B supplier, independently verify supplier/runtime provenance and the real research decision, and localize any remaining frontier-capability gap without promoting the capability unless the evidence supports it.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Pollinations route falsification PR215 and runs 36622236168/36622510442",
+    "ASTRA external planner bridge implementation",
+    "public runner exact ASTRA runtime blob dae3f042da75ec5289063bcf74f913f7f31bebbc",
+    "llama.cpp v0.5.0 commit 7fe450e19305b828c199d602c23a8337aaa1f03b",
+    "Qwen3.5-4B Q4_K_M pinned GGUF SHA256 13c16f426047e2de38cd075bdade4a7bcbc8c774384876f677740cda65f8a983"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after exactly one fresh local-Qwen Task-B execution reaches a terminal result and is reconciled. No same-task replay unless one exact implementation/closure defect is proven and the support budget permits it. If Task B passes, preserve it as dependency-free evidence and require a dependency-free Task A or replacement before any frontier-capability obsolescence claim.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "3c216b578b345820c85fa7ad4c969f3df85db89e",
+    "real_outcome": "Produce dependency-free real Task-B evidence for the active frontier capability using only public zero-cost compute, Brain's exact runtime, deterministic verification, and a local open non-frontier model supplier.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Real non-frontier cross-domain research execution, not another planner benchmark.",
+      "proxy_goals_deleted": [
+        "repair Pollinations",
+        "create API accounts",
+        "invent planner",
+        "benchmark Qwen in isolation"
+      ],
+      "surviving_necessity": "Run the actual project research task once with a local open supplier and verify the useful result."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "exact ASTRA runtime and goal loop",
+        "external planner bridge protocol",
+        "public verification-capsule-runner",
+        "bound capability registry",
+        "Pollinations route falsification evidence"
+      ],
+      "external_existing_routes_checked": [
+        "llama.cpp v0.5.0 local inference",
+        "Qwen3.5-4B GGUF Q4_K_M",
+        "Mistral free API fallback requiring account/key",
+        "other free hosted routes rejected before local route because they add account/billing dependencies"
+      ],
+      "capability_work_deleted": [
+        "No ASTRA runtime modification",
+        "No private runner repair",
+        "No API account/key",
+        "No hosted inference dependency"
+      ],
+      "surviving_gap": "Whether a small local open model can supply sufficient open-ended planning for a real Brain research task."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Supplier quality/reliability is the surviving blocker; execution, persistence, tool loop, public compute, provenance, and verification already exist.",
+      "delete_bypass_substitute_options": [
+        "Pollinations deleted after real 402 failure",
+        "API-key providers bypassed while local route remains viable",
+        "runtime rewrite deleted because external planner bridge already exists"
+      ],
+      "surviving_causal_blocker": "Local open-model planner has not yet completed the real cross-domain task."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "PUBLIC_GITHUB_ACTIONS + EXACT_ASTRA + EXTERNAL_BRIDGE + LOCAL_QWEN3_5_4B",
+        "MISTRAL_FREE_API_WITH_USER_ACCOUNT",
+        "NEW_PLANNER_IMPLEMENTATION"
+      ],
+      "losing_routes_reason": "The local route removes provider/account/billing dependencies and reuses all existing Brain machinery; alternatives add intervention or implementation before falsification.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic benchmark. Verify the real Task-B decision from independent deterministic checks of runtime/model hashes, local planner provenance, action trace, live evidence gathered, and the final decision contract."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Pollinations anonymous planner route",
+        "assumption that a hosted planner is required",
+        "any planned ASTRA planner-runtime patch if external bridge works"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "local non-frontier model supplier binding",
+        "zero-account planner execution",
+        "reproducible model/runtime provenance"
+      ],
+      "fresh_reuse_plan": "If Task B passes, the next proof must rerun or replace Task A through a dependency-free route; Task B alone cannot promote the broad frontier capability."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused Pollinations falsification",
+        "reused exact public runtime",
+        "reused existing external bridge",
+        "stopped hosted-provider search once a viable local route was pinned"
+      ],
+      "search_stop_decision": "A fully local, pinned, public-runner-compatible candidate is available and avoids all surviving provider dependencies; additional supplier search cannot justify delaying one decisive real execution.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "PUBLIC_ASTRA_LOCAL_QWEN3_5_4B",
+      "MISTRAL_FREE_API",
+      "NEW_PLANNER_IMPLEMENTATION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "POLLINATIONS_REPLAY",
+      "PRIVATE_ACTIONS_REPAIR",
+      "HOSTED_API_ACCOUNT_PROVISIONING",
+      "ASTRA_RUNTIME_PLANNER_PATCH",
+      "SYNTHETIC_QWEN_BENCHMARK"
+    ],
+    "selected_surviving_route": "PUBLIC_ASTRA_LOCAL_QWEN3_5_4B",
+    "why_selected_route_is_fastest_sufficient": "All orchestration and verification machinery already exists. The external bridge lets a pinned local open model replace the failed hosted supplier without changing ASTRA. One real public-runner execution directly resolves supplier sufficiency at zero incremental spend.",
+    "expected_parent_level_state_change": "Execute one real cross-domain AI-systems research Task B through the public $0 ASTRA runtime with a pinned local Qwen3.5-4B supplier, independently verify supplier/runtime provenance and the real research decision, and localize any remaining frontier-capability gap without promoting the capability unless the evidence supports it.",
+    "stop_condition": "Stop after exactly one fresh local-Qwen Task-B execution reaches a terminal result and is reconciled. No same-task replay unless one exact implementation/closure defect is proven and the support budget permits it. If Task B passes, preserve it as dependency-free evidence and require a dependency-free Task A or replacement before any frontier-capability obsolescence claim."
+  }
+}
