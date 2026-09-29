@@ -70,12 +70,12 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Replace repeated regex index scans and blanket remote manpage fanout with one batched literal multi-pattern executable-evidence acquisition pass plus bounded progressive cached enrichment, preserving supplier recall on fresh unseen work.",
+    "objective": "Inherit the verified Debian full-metadata + Xapian + direct-Contents discovery route, then recompute the next highest-leverage frontier capability gap.",
     "selection_metric": "FRESH_UNSEEN_VIABLE_SUPPLIER_TOP_K_RECALL_AND_ROLE_PRECISION_PER_WALL_CLOCK_WITH_ZERO_HINTS_AND_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "EVIDENCE_ACQUISITION_USES_REPEATED_SLOW_APT_FILE_REGEX_SCANS_AND_EXCESSIVE_REMOTE_MANPAGE_FANOUT__BATCH_LITERAL_MULTI_PATTERN_ACQUISITION_AND_PROGRESSIVE_CACHED_ENRICHMENT_NOT_YET_INTEGRATED",
-    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EVIDENCE_ACQUISITION_STRUCTURAL_CAUSE_RECONCILIATION_V1.json",
-    "repair_status": "ONE_GENERIC_BATCHED_LITERAL_ACQUISITION_REPAIR_AUTHORIZED",
-    "prohibition": "NO_PER_TERM_REGEX_APT_FILE_LOOPS__NO_UNBOUNDED_MANPAGE_FANOUT__NO_TIMEOUT_INCREASE__NO_PACKAGE_HINTS__NO_TASK_SPECIFIC_LITERALS__FRESH_UNSEEN_GATE_REQUIRED"
+    "exact_blocker": "RESOLVED__FRESH_HELDOUT_005_PASSED_RECALL_TOP20_AND_WALL_CLOCK_GATES",
+    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
+    "repair_status": "FRESH_HELDOUT_005_PASS__PROMOTION_READY",
+    "prohibition": "NO_HELDOUT_005_REPLAY__NO_POST_HOC_TUNING__NO_SECOND_REPAIR__PROMOTE_AND_RECOMPUTE_FRONTIER"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -153,5 +153,15 @@
       36486527162
     ],
     "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EVIDENCE_ACQUISITION_STRUCTURAL_CAUSE_RECONCILIATION_V1.json"
+  },
+  "tool_discovery_selection_learning_xapian_v1": {
+    "status": "CANDIDATE_MATCH__FRESH_GATE_PASS",
+    "source_pr": 89,
+    "runtime_path": "canonical/runtime/capability_discovery.py",
+    "adjudication_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
+    "heldout_oracle_family_recall": 1,
+    "heldout_top20_oracle_recall": 1,
+    "wall_s": 16.233238,
+    "incremental_spend_usd": 0
   }
 }
