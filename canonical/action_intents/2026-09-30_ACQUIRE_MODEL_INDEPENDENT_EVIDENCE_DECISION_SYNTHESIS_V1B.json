@@ -61,7 +61,8 @@
         "NHS GAVEL rule engine",
         "ERTool evidential reasoning",
         "zeroSteiner rule-engine",
-        "OpenDecision semantic decision engine"
+        "OpenDecision semantic decision engine",
+        "ProbLog 2.3.0 official manylinux wheel + unchanged Brain typed-evidence adapter; fresh B+C public run 36642420312 PASS after earlier packaging failures."
       ],
       "capability_work_deleted": [
         "No natural-language parser",
@@ -97,11 +98,12 @@
       ],
       "routes_ranked": [
         "COMPOSE_EXISTING_BRAIN_EVIDENCE_MACHINERY_WITH_MINIMAL_STDLIB_TYPED_DECISION_SYNTHESIS",
+        "PROBLOG_2_3_0_PINNED_WHEEL_PLUS_THIN_BRAIN_ADAPTER",
         "BIND_EXTERNAL_ERTool_PLUS_RULE_ENGINE",
         "BIND_MCDA_LIBRARY",
         "BUILD_GENERAL_RULE_DSL"
       ],
-      "losing_routes_reason": "External libraries each solve only a slice of the required contract and add dependencies/integration friction; the missing behavior is small enough to express directly over already-typed evidence using Python stdlib while reusing Brain provenance and verification machinery.",
+      "losing_routes_reason": "ProbLog fresh B+C passed and adds weighted derived-rule inference, but it requires a pinned third-party binary wheel, suffered prior substrate failures, lacks the stdlib route's producer-independent exact recomputation and ASTRA bound-capability integration, and does not dominate the active target's required multi-alternative typed decision contract. Other external routes cover only slices of the contract or add more machinery.",
       "implementation_still_necessary": true
     },
     "obs_verification": {
@@ -129,13 +131,15 @@
         "Reuse current frontier decomposition",
         "Reuse existing knowledge evidence schema concepts",
         "Reuse capability graph/runtime/registry",
-        "Stop searching once external candidates were shown not to dominate the exact contract"
+        "Stop searching once external candidates were shown not to dominate the exact contract",
+        "Reuse fresh ProbLog B+C run 36642420312 as challenger evidence; do not rerun it."
       ],
-      "search_stop_decision": "The candidate space has been challenged across MCDA, rule engines, evidential reasoning, and semantic decision engines; none eliminates the small missing primitive without adding a model or more integration surface.",
+      "search_stop_decision": "The live challenger set now includes the independently successful ProbLog route. It does not dominate the verified stdlib core on the active target because the stdlib route already satisfies the promotion bar with fewer dependencies, exact producer-independent recomputation, multi-alternative decisions, and ASTRA integration; no unresolved plausible dominator remains.",
       "affected_layers_only_on_revalidation": true
     },
     "routes_considered": [
       "COMPOSE_EXISTING_BRAIN_EVIDENCE_MACHINERY_WITH_MINIMAL_STDLIB_TYPED_DECISION_SYNTHESIS",
+      "PROBLOG_2_3_0_PINNED_WHEEL_PLUS_THIN_BRAIN_ADAPTER",
       "BIND_EXTERNAL_ERTool_PLUS_RULE_ENGINE",
       "BIND_MCDA_LIBRARY",
       "BUILD_GENERAL_RULE_DSL"
@@ -152,7 +156,7 @@
     "stop_condition": "Stop after the smallest deterministic typed decision primitive is implemented, two materially distinct real decision tasks pass through the same route, outputs preserve conflicts/uncertainty and auditable trace, independent verification passes, and no model appears in the credited execution path; then reconcile and fresh-reuse into the parent frontier.",
     "route_frontier": {
       "discovery_required": true,
-      "checked_at_utc": "2026-09-29T22:45:29Z",
+      "checked_at_utc": "2026-09-29T22:59:30Z",
       "max_age_hours": 24,
       "incumbent_route": "EXISTING_BRAIN_KNOWLEDGE_CONSISTENCY_PLUS_MATERIALIZATION",
       "source_classes_checked": [
@@ -167,7 +171,8 @@
           "canonical/runtime/capability_planner.py",
           "canonical/runtime/goal_compiler.py",
           "canonical/runtime/semantic_authorities.py",
-          "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+          "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+          "PUBLIC_RUN_36642420312_PROBLOG_FRESH_BC_PASS__ADAPTER_BLOB_99c8bd0ab0b0f5b4e6c517d189c06165a954bc5c"
         ],
         "OFFICIAL_PRIMARY": [
           "https://docs.github.com/en/actions/reference/runners/github-hosted-runners",
@@ -226,6 +231,31 @@
             "INCREMENTAL_COST": "$0 and Python stdlib only.",
             "RELIABILITY": "No external runtime dependency beyond the already-qualified execution substrate.",
             "VERIFIABILITY": "Deterministic output can be independently recomputed and checked against exact typed inputs."
+          }
+        },
+        {
+          "route": "PROBLOG_2_3_0_PINNED_WHEEL_PLUS_THIN_BRAIN_ADAPTER",
+          "evidence": [
+            "Public run 36642420312 PASS on fresh Task B and fresh Task C with identical adapter blob 99c8bd0ab0b0f5b4e6c517d189c06165a954bc5c.",
+            "Provides weighted rule derivation, hard constraints, conflict/ignorance metrics and auditable generated ProbLog.",
+            "Earlier source-install and PySDD attempts failed on execution substrate before the pinned official wheel route passed."
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: verification-capsule-runner run 36642420312",
+            "CODE_OR_PACKAGE_REGISTRY: problog==2.3.0 manylinux wheel SHA256 8d18beae480bce9f54037dfa9cf8c058da874524c118d8ffae96fd210b68e71e"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Fresh B+C and negative canaries passed against independent canonical decision oracles.",
+            "CAPABILITY_STRENGTH": "Adds weighted derived-rule inference, but the active target does not require a probabilistic rule engine and the route is single-claim ACCEPT/REJECT/INSUFFICIENT rather than the stdlib core's direct multi-alternative ranking contract.",
+            "WALL_CLOCK": "Operational now, but requires wheel retrieval/install and had two earlier substrate failures; stdlib route runs immediately with no install.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Pinned wheel route is now proven, but remains a third-party binary dependency; stdlib core has no external execution dependency.",
+            "VERIFIABILITY": "Uses independent canonical outcome oracles and exact adapter hashes, while the stdlib route additionally has a separate producer-independent recomputation verifier and exact ASTRA bound-capability integration pass."
           }
         },
         {
@@ -312,7 +342,7 @@
         "BEFORE_SCARCE_GATE_SPEND"
       ],
       "selected_route_preflight": {
-        "checked_at_utc": "2026-09-29T22:45:29Z",
+        "checked_at_utc": "2026-09-29T22:59:30Z",
         "max_age_hours": 2,
         "selected_route": "COMPOSE_EXISTING_BRAIN_EVIDENCE_MACHINERY_WITH_MINIMAL_STDLIB_TYPED_DECISION_SYNTHESIS",
         "status": "READY",
