@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_LIVE_CARRIER_ROOT_CAUSE_EVIDENCE_V1",
+  "evidence_id": "HELDOUT003_LIVE_SPRITE_MATERIALIZATION_ROOT_CAUSE_20260929_V1",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "reference_validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
+  "carrier": {
+    "provider": "Sprites",
+    "sprite": "brain-heldout003-one-shot"
+  },
+  "observation_method": "DIRECT_LIVE_FILESYSTEM_INSPECTION_VIA_AUTHORIZED_SPRITES_CONNECTOR",
+  "observed_after_main_commit": "5bb2713151a414a9dc8bf1c40c0aae790664047c",
+  "observations": {
+    "work_tree_git_repository": false,
+    "work_tree_path": "/work",
+    "actual_bound_capabilities_directory": "/work/canonical/runtime/bound_capabilities",
+    "actual_regular_files": [
+      "cli_command.py",
+      "node_library_codec.py"
+    ],
+    "required_but_absent": [
+      "python_library_codec.py",
+      "python_source_tree_codec.py"
+    ],
+    "source_branch_previously_proven_to_contain_required_modules": true,
+    "preserved_terminal_error": "ImportError: cannot import name 'python_library_codec' from 'bound_capabilities'",
+    "root_cause_classification": "LIVE_CARRIER_MATERIALIZATION_OMISSION_PROVEN",
+    "python_import_semantics_failure_required": false,
+    "capability_runtime_semantic_falsification": false
+  },
+  "causal_chain": [
+    "qualified source branch contained python_library_codec.py and python_source_tree_codec.py",
+    "live Sprite /work was not a Git checkout and contained a partial hand-materialized runtime tree",
+    "live bound_capabilities directory omitted both Python codec modules",
+    "verify_pending_cli_binding imported python_library_codec from bound_capabilities",
+    "the import therefore failed on the live carrier before semantic verification"
+  ],
+  "minimum_generic_correction": {
+    "class": "CARRIER_MATERIALIZATION_FIDELITY",
+    "requirement": "Before any fresh held-out START, materialize the exact required repository closure or exact full source tree and preflight every frozen runtime dependency by path plus content hash.",
+    "capability_runtime_change_required": false,
+    "evaluator_change_required": false,
+    "probe_specific_change_required": false
+  },
+  "prohibitions": [
+    "NO_HELDOUT_003_REPLAY",
+    "NO_HELDOUT_004_EXECUTION_IN_THIS_RECONCILIATION",
+    "NO_CAPABILITY_RUNTIME_REPAIR_FROM_THIS_INCIDENT",
+    "NO_VAL_TOWN",
+    "NO_USER_LAPTOP",
+    "NO_PAID_SPEND"
+  ]
+}
