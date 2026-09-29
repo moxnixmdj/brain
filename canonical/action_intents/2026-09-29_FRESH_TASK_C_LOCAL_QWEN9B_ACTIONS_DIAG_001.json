@@ -1,0 +1,415 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FRESH-TASK-C-LOCAL-QWEN9B-ACTIONS-DIAG-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "FRESH_REAL_CROSS_DOMAIN_TASK_C_END_TO_END_PROOF_REQUIRED_AFTER_GENERIC_SAFE_FINALIZATION_REPAIR",
+  "action_kind": "REAL_TASK_EXECUTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::FRESH_REAL_CROSS_DOMAIN_TASK_C_END_TO_END_PROOF_REQUIRED_AFTER_GENERIC_SAFE_FINALIZATION_REPAIR::REAL_TASK_EXECUTION",
+  "expected_parent_frontier_change": "Execute exactly one fresh real software-systems Task C end-to-end with the repaired ASTRA controller and a pinned non-frontier local Qwen3.5-9B planner; if independently verified, record a real cross-domain completion event but do not claim full frontier obsolescence until a subsequent fresh reuse under the inherited route also passes.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR227 merged safe evidence-preserving forced finalization; runtime blob 1e8252415c60a553bad8a05fae2d98217d0f5833",
+    "Public exact-byte repair validation run 36635838394 PASS",
+    "Local Qwen3.5-9B real Task B run 36627371993 proved exact model download/hash, exact llama.cpp build, live public carrier, and useful source selection but failed only at the now-repaired evidence-to-finalization seam",
+    "Murakumo run 36636391863 falsified qwen3.8-27b-throughput-5090 identity: request returned murakumo-main and selector was absent from live catalogue",
+    "Murakumo run 36636539401 falsified the live-listed qwen3.8-27b-uncensored current execution route by 420-second read timeout",
+    "Vireonix public auto route rejected for frontier-independence proof because supplier identity is unpinned and documented pool can include GPT-family models",
+    "Current GitHub Docs source commit e4859a83ac13c5715b723b3d17e273beba5c4572 for Actions billing, hosted runners, included usage, and execution-time semantics"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Freeze Task C and its verifier before execution; execute the fresh task exactly once on the selected hard-zero public carrier with exact repaired ASTRA and exact pinned Qwen3.5-9B; independently adjudicate the terminal result; never replay Task C or tune on its answer; if PASS, reconcile the real completion and immediately attempt one materially different fresh reuse under the inherited route before any full obsolescence claim; if FAIL, preserve the first causal failure and return to Recursive OBS.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "e4f115ef6f3b86cb51b0206edf1f53f16c46f6e8",
+    "real_outcome": "Obtain the first post-repair end-to-end proof that Brain can complete a fresh consequential cross-domain technical research task without GPT-5.6/ChatGPT execution.",
+    "required_capability": "Autonomous technical research across live authoritative sources, evidence selection, uncertainty handling, synthesis, completion, and independently verifiable decision output.",
+    "obs_goal": {
+      "real_outcome": "Complete one fresh real software-systems research task end-to-end and preserve enough evidence to decide whether the repaired general route actually works.",
+      "proxy_goals_deleted": [
+        "Another synthetic benchmark",
+        "Another same-task Qwen biophysics replay",
+        "Another governance hardening cycle before real output",
+        "A provider demo that does not complete a consequential task"
+      ],
+      "surviving_necessity": "One fresh materially different real Task C must complete once under the repaired route and independent verifier."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Merged ASTRA runtime after PR227 safe finalization repair",
+        "Public verification-capsule-runner hard-zero execution path",
+        "Pinned local Qwen3.5-9B + exact llama.cpp route from run 36627371993",
+        "Existing external bridge protocol and independent verifier pattern"
+      ],
+      "external_existing_routes_checked": [
+        "Murakumo public Chat Completions and live model catalogue",
+        "Vireonix anonymous OpenAI-compatible auto route",
+        "Qwen3.8-27B official/open model evidence",
+        "Hugging Face exact Qwen3.5-9B artifact route",
+        "ggml-org llama.cpp exact source route"
+      ],
+      "capability_work_deleted": [
+        "No new controller",
+        "No new model training",
+        "No paid API",
+        "No user laptop",
+        "No second finalization repair",
+        "No same-task replay"
+      ],
+      "surviving_gap": "The repaired controller has not yet completed a fresh real cross-domain task end-to-end."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "The remaining blocker is empirical capability proof, not another known controller defect. A fresh task is now the shortest valid test.",
+      "delete_bypass_substitute_options": [
+        "DELETE Task C and infer success from regression tests: rejected because regression is not real capability evidence.",
+        "BYPASS with Vireonix auto: rejected because underlying supplier can be GPT-family and is not pin-able.",
+        "SUBSTITUTE Murakumo qwen3.8-27b-throughput-5090: rejected by live identity probe.",
+        "SUBSTITUTE Murakumo live-listed qwen3.8-27b-uncensored: rejected by full 420-second timeout.",
+        "REUSE pinned local Qwen3.5-9B on the currently working public carrier with repaired ASTRA: survives."
+      ],
+      "surviving_causal_blocker": "Fresh end-to-end real-task completion has not yet been demonstrated after the repair."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "PUBLIC_GITHUB_ACTIONS_LOCAL_QWEN3_5_9B_WITH_REPAIRED_ASTRA",
+        "MURAKUMO_LIVE_LISTED_QWEN3_8_27B",
+        "MURAKUMO_STALE_5090_SELECTOR",
+        "VIREONIX_AUTO_UNPINNED"
+      ],
+      "losing_routes_reason": "Murakumo exact routes failed live identity/readiness predicates and Vireonix cannot prove non-frontier supplier identity; the local 9B route is slower but already executed exact model/runtime bytes successfully and its only observed end-to-end blocker was repaired generically.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic benchmark. Freeze a task-specific independent verifier that checks source use, model identity, route provenance, controller completion, factual GitHub billing semantics, calibrated uncertainty, and the final decision contract."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Closed PR229 Murakumo 5090 Task C route",
+        "Unarmed public Murakumo Task C capsule",
+        "Any further Murakumo retries for this frontier action"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "public-source technical research",
+        "software-systems diagnosis",
+        "evidence-to-finalization composition",
+        "uncertainty calibration",
+        "hard-zero execution routing"
+      ],
+      "fresh_reuse_plan": "If Task C passes, the next capability action must reuse the same repaired ASTRA + pinned local Qwen9B route on a materially different fresh Task D without reopening supplier discovery unless a current readiness predicate fails."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse PR227 repair verification instead of re-proving finalization",
+        "Reuse run 36627371993 model/runtime provenance instead of re-qualifying Qwen9B from scratch",
+        "Use current public runner executions as carrier readiness evidence",
+        "Treat the two direct Murakumo failures as terminal challenger evidence rather than retrying"
+      ],
+      "search_stop_decision": "Stop supplier discovery now: every plausible faster zero-key route has either failed current direct execution/identity or cannot prove frontier independence, while the local Qwen9B route is currently realizable and sufficient to spend the fresh real-task gate.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Live challenger race refreshed immediately before Task C using current official docs and direct public-carrier probes; selected route changed from Murakumo candidate back to local Qwen9B after those probes failed."
+    },
+    "routes_considered": [
+      "PUBLIC_GITHUB_ACTIONS_LOCAL_QWEN3_5_9B_WITH_REPAIRED_ASTRA",
+      "MURAKUMO_LIVE_LISTED_QWEN3_8_27B",
+      "MURAKUMO_STALE_5090_SELECTOR",
+      "VIREONIX_AUTO_UNPINNED"
+    ],
+    "deleted_or_bypassed_paths": [
+      "MURAKUMO_LIVE_LISTED_QWEN3_8_27B",
+      "MURAKUMO_STALE_5090_SELECTOR",
+      "VIREONIX_AUTO_UNPINNED"
+    ],
+    "selected_surviving_route": "PUBLIC_GITHUB_ACTIONS_LOCAL_QWEN3_5_9B_WITH_REPAIRED_ASTRA",
+    "why_selected_route_is_fastest_sufficient": "It is the only current hard-zero route with proven exact non-frontier model identity, proven public-carrier execution, proven useful research action selection, and no surviving known controller defect after PR227. Faster anonymous remote routes failed current admissibility.",
+    "expected_parent_level_state_change": "Execute exactly one fresh real software-systems Task C end-to-end with the repaired ASTRA controller and a pinned non-frontier local Qwen3.5-9B planner; if independently verified, record a real cross-domain completion event but do not claim full frontier obsolescence until a subsequent fresh reuse under the inherited route also passes.",
+    "stop_condition": "Freeze Task C and its verifier before execution; execute the fresh task exactly once on the selected hard-zero public carrier with exact repaired ASTRA and exact pinned Qwen3.5-9B; independently adjudicate the terminal result; never replay Task C or tune on its answer; if PASS, reconcile the real completion and immediately attempt one materially different fresh reuse under the inherited route before any full obsolescence claim; if FAIL, preserve the first causal failure and return to Recursive OBS.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-29T22:04:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "PUBLIC_GITHUB_ACTIONS_LOCAL_QWEN3_5_9B_WITH_REPAIRED_ASTRA",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "PR227 safe-finalization repair merged at e4f115ef6f3b86cb51b0206edf1f53f16c46f6e8",
+          "Public exact-byte repair validation run 36635838394",
+          "Local Qwen3.5-9B Task B run 36627371993",
+          "Murakumo direct falsification runs 36636391863 and 36636539401"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://murakumo.cloud/docs",
+          "https://vireonix.ai/docs",
+          "https://huggingface.co/Qwen/Qwen3.8-27B",
+          "https://docs.github.com/en/billing/concepts/product-billing/github-actions"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/ggml-org/llama.cpp",
+          "https://huggingface.co/TheStageAI/Qwen3.5-9B-GGUF",
+          "https://github.com/QwenLM/Qwen3.5"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "2026-09-29 fresh anonymous inference and agent-route discovery across current provider/docs/search surfaces"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "zero-cost non-frontier open-ended technical research planner with long-horizon completion"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "current anonymous no-key inference provider pin exact open model Qwen 27B 9B"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "public GitHub Actions local GGUF llama.cpp external planner bridge repaired ASTRA"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "September 2026 current Murakumo Vireonix Qwen3.8 model availability anonymous API"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "PUBLIC_GITHUB_ACTIONS_LOCAL_QWEN3_5_9B_WITH_REPAIRED_ASTRA",
+          "evidence": [
+            "run 36627371993 exact model/runtime execution",
+            "PR227 safe-finalization repair",
+            "run 36635838394 exact repair validation"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE run 36627371993",
+            "INDEPENDENT_VERIFIER run 36635838394"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "INDEPENDENT_VERIFIER"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Exact model hash and exact llama.cpp commit are verifiable; repaired ASTRA closes the only recurrent observed termination seam.",
+            "CAPABILITY_STRENGTH": "9B route already selected and fetched multiple authoritative sources on a real cross-domain task; adequate to test repaired completion.",
+            "WALL_CLOCK": "Slower than a healthy remote endpoint because model/build/download occur on the runner, but current remote dominators failed.",
+            "INCREMENTAL_COST": "$0 on standard public GitHub-hosted runner.",
+            "RELIABILITY": "Previously executed end-to-end through multiple planner calls; carrier is currently assigning runners.",
+            "VERIFIABILITY": "Strong: exact model hash, code commit, runtime blob, bridge log, state, and independent verifier."
+          }
+        },
+        {
+          "route": "MURAKUMO_STALE_5090_SELECTOR",
+          "evidence": [
+            "public run 36636391863"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE run 36636391863"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Requested selector was absent from live catalogue and response silently identified murakumo-main, so supplier identity was not preserved.",
+            "CAPABILITY_STRENGTH": "Unusable for independence proof because exact implementation identity failed.",
+            "WALL_CLOCK": "Fast response but wrong execution identity.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Gateway responded, but requested route contract failed.",
+            "VERIFIABILITY": "Directly falsified by returned model id and live catalogue."
+          }
+        },
+        {
+          "route": "MURAKUMO_LIVE_LISTED_QWEN3_8_27B",
+          "evidence": [
+            "public run 36636539401"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE run 36636539401"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Exact model was live-listed but produced no terminal response within the provider's 420-second cold-start window.",
+            "CAPABILITY_STRENGTH": "Official Qwen3.8-27B is a strong open model, but unavailable execution is zero useful capability.",
+            "WALL_CLOCK": "Timed out at 420 seconds before one answer.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Failed current readiness/execution predicate.",
+            "VERIFIABILITY": "Direct timeout on current public carrier."
+          }
+        },
+        {
+          "route": "VIREONIX_AUTO_UNPINNED",
+          "evidence": [
+            "https://vireonix.ai/docs"
+          ],
+          "qualification_evidence": [
+            "https://vireonix.ai/docs"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Public API exposes only auto; the underlying model is not pre-pin-able and the documented pool can include GPT-family models, making frontier-independence proof circular or unverifiable.",
+            "CAPABILITY_STRENGTH": "Potentially strong router, but identity ambiguity invalidates this proof use.",
+            "WALL_CLOCK": "Likely fast.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Service may be available, but supplier identity is route-dependent.",
+            "VERIFIABILITY": "Cannot prove target frontier implementation was excluded before execution."
+          }
+        }
+      ],
+      "negative_search_summary": "No current faster hard-zero challenger both executes now and preserves exact non-frontier supplier identity. Local Qwen3.5-9B is therefore the shortest admissible route to a real Task C result.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "PUBLIC_GITHUB_ACTIONS_LOCAL_QWEN3_5_9B_WITH_REPAIRED_ASTRA",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-29T22:04:00Z",
+        "max_age_hours": 2,
+        "selected_route": "PUBLIC_GITHUB_ACTIONS_LOCAL_QWEN3_5_9B_WITH_REPAIRED_ASTRA",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_STANDARD_UBUNTU_RUNNER",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T22:03:48Z",
+            "evidence": [
+              "DIRECT_PROBE: run 36636539401 received runner_id 1000002086 and executed continuously for the full provider-call window"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "HUGGINGFACE_QWEN3_5_9B_GGUF_DOWNLOAD_ENDPOINT",
+            "kind": "NETWORK_ENDPOINT",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T20:52:52Z",
+            "evidence": [
+              "DIRECT_PROBE: run 36627371993 downloaded 5,060,174,144-byte model and verified SHA256 f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "GITHUB_GGML_LLAMA_CPP_SOURCE_ROUTE",
+            "kind": "NETWORK_ENDPOINT",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T20:52:52Z",
+            "evidence": [
+              "DIRECT_PROBE: run 36627371993 fetched and built llama.cpp commit bec4772f6a2527d371557b5d2032641e5ff7619c on the selected carrier"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "QWEN3_5_9B_M_TS_Q4_K_M_MODEL_ARTIFACT",
+            "kind": "MODEL_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T20:52:52Z",
+            "evidence": [
+              "DIRECT_PROBE exact artifact SHA256 f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c and exact bytes 5060174144"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "LLAMA_CPP_INFERENCE_RUNTIME_COMMIT",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T20:52:52Z",
+            "evidence": [
+              "DIRECT_PROBE exact commit bec4772f6a2527d371557b5d2032641e5ff7619c executed in run 36627371993"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "REPAIRED_ASTRA_RUNTIME",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T21:50:01Z",
+            "evidence": [
+              "INDEPENDENT_VERIFIER run 36635838394 PASS on exact runtime blob 1e8252415c60a553bad8a05fae2d98217d0f5833"
+            ],
+            "evidence_classes": [
+              "INDEPENDENT_VERIFIER"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
