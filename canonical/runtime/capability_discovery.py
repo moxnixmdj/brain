@@ -419,7 +419,9 @@ def _apt_file_list_executables(package,timeout_s=8):
     paths=[]
     prefix=package+": "
     for line in p.stdout.splitlines():
-        value=line[len(prefix):] if line.startswith(prefix) else line.split(": ",1)[-1]
+        if not line.startswith(prefix):
+            continue
+        value=line[len(prefix):]
         normalized=str(value or "").strip().lstrip("/")
         if normalized.startswith("usr/bin/"):
             path="/"+normalized
