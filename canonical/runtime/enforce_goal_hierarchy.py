@@ -6,6 +6,7 @@ import argparse, base64, hashlib, json, os, pathlib, subprocess, sys, urllib.par
 ROOT=pathlib.Path(os.environ.get("GITHUB_WORKSPACE") or pathlib.Path.cwd()).resolve()
 
 SENSITIVE_PREFIXES=(
+    "canonical/action_intents/",
     "canonical/runtime/",
     "canonical/experiments/",
     "canonical/capabilities/",
