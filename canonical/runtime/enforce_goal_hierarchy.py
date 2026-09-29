@@ -25,6 +25,9 @@ PROTECTED_GUARD_PATHS={
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
     "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V3.json",
     "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V4.json",
+    "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V4.json",
+    "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V5.json",
+    "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V2.json",
     "canonical/runtime/enforce_goal_hierarchy.py",
     ".github/workflows/drift-immunity-guard.yml",
 }
