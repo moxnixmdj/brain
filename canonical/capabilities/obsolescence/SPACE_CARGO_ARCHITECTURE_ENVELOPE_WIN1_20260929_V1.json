@@ -1,0 +1,193 @@
+{
+  "schema": "PROJECT_BRAIN_REAL_CAPABILITY_EVIDENCE_V1",
+  "evidence_id": "SPACE-CARGO-ARCHITECTURE-ENVELOPE-WIN1-20260929-V1",
+  "status": "REAL_TASK_A_COMPLETED__DIRECT_VERIFICATION_PASS__FRONTIER_CAPABILITY_CANDIDATE_EVIDENCE_ONLY",
+  "real_task": {
+    "project": "HIGH_THROUGHPUT_EARTH_TO_LEO_CARGO",
+    "outcome": "Quantify the first-order architecture envelope for 1M, 10M, and 100M payload tonnes/year to approximately 400 km LEO, test prior electromagnetic-launch assumptions, and localize the true scaling residuals.",
+    "target_orbit_km": 400,
+    "throughput_targets_payload_tonnes_year": [
+      1000000,
+      10000000,
+      100000000
+    ],
+    "incremental_spend_usd": 0
+  },
+  "implementation": {
+    "runtime_path": "canonical/runtime/space_cargo_architecture_envelope.py",
+    "model": "2D equatorial inertial point mass + rotating atmosphere + US Standard Atmosphere 1976 + constant ballistic-coefficient drag + Sutton-Graves convective heating + closed-form accelerator/throughput scaling",
+    "scope_warning": "Architecture envelope only; not CFD, TPS certification, guidance design, detailed electromagnetic launcher design, or demonstrated system performance."
+  },
+  "provenance": {
+    "prior_user_project_artifacts": [
+      "Space Cargo Transport Research Roadmap.png",
+      "Space Launch Architectures: Research Pass 1.png",
+      "Research Pass 3: Space Launch Architecture.png",
+      "Electromagnetic Space Launch Accelerator Infographic.png",
+      "Orbital Launch Architecture Infographic.png",
+      "Rocketless Orbital Cargo System Infographic.png"
+    ],
+    "authoritative_sources": [
+      {
+        "source": "NASA/NOAA/USAF U.S. Standard Atmosphere 1976",
+        "url": "https://ntrs.nasa.gov/citations/19770009539",
+        "use": "atmospheric density/pressure/temperature model basis"
+      },
+      {
+        "source": "NASA Sutton-Graves stagnation-point convective heating relation",
+        "url": "https://ntrs.nasa.gov/api/citations/20060004824/downloads/20060004824.pdf",
+        "use": "qdot = k*sqrt(rho/r_n)*V^3; Earth k=1.74153e-4"
+      },
+      {
+        "source": "NASA PICA tested envelope expansion",
+        "url": "https://ntrs.nasa.gov/citations/20230007390",
+        "use": "demonstrated PICA heating-rate context"
+      },
+      {
+        "source": "U.S. Fleet Forces EMALS dead-load testing",
+        "url": "https://www.usff.navy.mil/Press-Room/News-Stories/Article/3736404/team-starts-test-launches-for-future-aircraft-carrier/",
+        "use": "demonstrated heavy electromagnetic launch mass context: deadloads to 80,000 lb"
+      },
+      {
+        "source": "NAVSEA electromagnetic railgun record firing",
+        "url": "https://www.navsea.navy.mil/Media/Images/igphoto/2002572121/",
+        "use": "demonstrated high-speed electromagnetic launch context: 10.64 MJ, 2520 m/s"
+      },
+      {
+        "source": "Powell, Maise, Rather — StarTram 2010 concept paper",
+        "url": "https://startram.com/wp-content/uploads/2020/12/StarTram2010.pdf",
+        "use": "concept-reference comparison only, not authority for demonstrated performance"
+      }
+    ]
+  },
+  "independent_checks": {
+    "wolfram_two_body_and_throughput_recalculation": {
+      "result": "PASS",
+      "values": {
+        "release_altitude_km": 6,
+        "target_apogee_km": 400,
+        "perigee_inertial_speed_km_s": 8.02365481,
+        "equatorial_rotation_km_s": 0.465018231,
+        "ideal_ground_relative_tangential_speed_km_s": 7.558636579,
+        "ideal_circularization_delta_v_m_s": 115.834991,
+        "track_length_at_25g_km": 116.518866,
+        "acceleration_time_at_25g_s": 30.830657
+      }
+    },
+    "startram_reference_shape_reproduction": {
+      "assumptions": {
+        "gross_mass_t": 40,
+        "diameter_m": 2,
+        "cd": 0.09,
+        "exit_altitude_km": 6,
+        "exit_speed_km_s": 8.78,
+        "launch_angle_deg": 10,
+        "effective_nose_radius_m": 0.1
+      },
+      "model_values": {
+        "ballistic_coefficient_kg_m2": 141471.06,
+        "peak_drag_g": 18.34,
+        "peak_convective_heat_kW_cm2": 30.28
+      },
+      "published_reference_values": {
+        "reference_design_peak_drag_g": 18,
+        "reference_design_peak_nose_heating_kW_cm2": 30
+      },
+      "result": "PASS_ORDER_AND_REFERENCE_MAGNITUDE"
+    }
+  },
+  "corrected_prior_assumptions": [
+    {
+      "prior": "15–20 t payload / ~17.8 t gross / ~4 m diameter was the active Pass-4 pod search region.",
+      "correction": "For a 6 km near-orbital atmospheric exit, this geometry has poor mass per frontal area. Reaching ballistic coefficient 150,000 kg/m^2 at 17.8 t gross and 4 m diameter would require Cd≈0.0094, far below the 0.05–0.12 drag-coefficient range explored in the StarTram concept study.",
+      "action": "DEMOTE_AS_DEFAULT_SEARCH_REGION"
+    },
+    {
+      "prior": "Very high throughput implies many parallel accelerator lanes by cadence alone.",
+      "correction": "Lane count is not set by launch count alone. It depends on pod transit time divided by launch interval. Larger payload pods radically reduce cadence.",
+      "action": "DELETE_RAW_LAUNCH_COUNT_AS_LANE_COUNT_PROXY"
+    },
+    {
+      "prior": "~100 m/s insertion can be assumed after a near-orbital mountain launch.",
+      "correction": "~116 m/s is only the ideal tangential no-drag two-body reference from 6 km to 400 km apogee. Atmospheric loss and flight-path angle materially change insertion delta-v.",
+      "action": "REQUIRE_TRAJECTORY_SPECIFIC_INSERTION_DELTA_V"
+    }
+  ],
+  "reference_search_region": {
+    "classification": "PROMISING_FIRST_ORDER_SEARCH_REGION__NOT_FINAL_DESIGN",
+    "assumptions": {
+      "payload_t": 100,
+      "gross_t": 115,
+      "diameter_m": 4,
+      "cd": 0.05,
+      "nose_radius_m": 2,
+      "exit_altitude_km": 6,
+      "ground_relative_exit_speed_km_s": 8.9,
+      "launch_angle_deg": 4,
+      "accelerator_acceleration_g": 30,
+      "accelerator_electrical_efficiency": 0.7
+    },
+    "derived": {
+      "ballistic_coefficient_kg_m2": 183028.18,
+      "apogee_altitude_km": 409.62,
+      "apogee_circularization_delta_v_m_s": 276.25,
+      "peak_dynamic_pressure_MPa": 26.14,
+      "peak_drag_g": 14.57,
+      "peak_convective_heat_kW_cm2": 7.05,
+      "integrated_convective_heat_MJ_cm2": 0.12,
+      "track_length_km": 134.62,
+      "acceleration_time_s": 30.25,
+      "pod_force_MN": 33.83,
+      "mechanical_energy_per_shot_TJ": 4.555,
+      "peak_mechanical_power_GW": 301.11
+    },
+    "sensitivity_warning": "Cd, lift/shape, nose geometry, real-gas/radiative heating, angle, and guidance are decisive. Cd=0.05 is an explicit search assumption, not a demonstrated property."
+  },
+  "throughput_scaling_for_reference_search_region": [
+    {
+      "payload_tonnes_year": 1000000,
+      "shots_per_day": 27.38,
+      "launch_interval_s": 3155.76,
+      "average_pods_in_accelerator": 0.0096,
+      "average_mechanical_power_GW": 1.443,
+      "average_electrical_power_at_70pct_GW": 2.062
+    },
+    {
+      "payload_tonnes_year": 10000000,
+      "shots_per_day": 273.79,
+      "launch_interval_s": 315.576,
+      "average_pods_in_accelerator": 0.0959,
+      "average_mechanical_power_GW": 14.433,
+      "average_electrical_power_at_70pct_GW": 20.618
+    },
+    {
+      "payload_tonnes_year": 100000000,
+      "shots_per_day": 2737.85,
+      "launch_interval_s": 31.5576,
+      "average_pods_in_accelerator": 0.9586,
+      "average_mechanical_power_GW": 144.326,
+      "average_electrical_power_at_70pct_GW": 206.18
+    }
+  ],
+  "technology_reality_check": {
+    "demonstrated_heavy_em_launch": "EMALS dead-load testing has used carts up to 80,000 lb, but at aircraft-launch velocities.",
+    "demonstrated_high_speed_em_launch": "NAVSEA records a 10.64 MJ electromagnetic railgun firing at 2520 m/s, but at projectile scale.",
+    "reference_pod_energy_per_shot_TJ": 4.555,
+    "ratio_reference_pod_energy_to_10_64MJ_railgun_shot": 428062,
+    "localized_gap": "The critical electromagnetic-launch gap is mass × velocity × repetition × reliability together, not proof that any one ingredient exists.",
+    "tps_context": "NASA reports PICA demonstrated capability below 1800 W/cm^2; the reference search point's Sutton-Graves convective peak is about 7050 W/cm^2, so routine reusable/low-maintenance TPS at the required cadence remains unproven and requires a different material/cooling/lifecycle solution."
+  },
+  "surviving_residuals_ranked": [
+    "REAL_AERODYNAMIC_SHAPE_AND_EFFECTIVE_CD_AT_6KM_HYPERSONIC_EXIT",
+    "REPETITIVE_TPS_OR_ACTIVE_COOLING_LIFECYCLE_AT_THOUSANDS_OF_LAUNCHES_PER_DAY",
+    "115T_CLASS_ELECTROMAGNETIC_ACCELERATION_TO_NEAR_9KM_S_WITH_REPETITIVE_FAULT_TOLERANCE",
+    "CARGO_SCALE_VACUUM_MUZZLE_OR_EQUIVALENT_EXIT_ISOLATION",
+    "ORBIT_INSERTION_SYSTEM_FOR_HUNDREDS_OF_M_S_WITH_MINIMUM_ONBOARD_EXPENDABLE_MASS",
+    "SYSTEM_AVAILABILITY_AND_FAILURE_CONTAINMENT_AT_100MT_YEAR"
+  ],
+  "real_task_verdict": "PASS__USEFUL_PROJECT_STATE_CHANGED__COUNTS_AS_REAL_TASK_A_ONLY",
+  "next": "SELECT_MATERIALLY_DIFFERENT_REAL_TECHNICAL_OR_SCIENTIFIC_TASK_B__REUSE_GENERAL_ROUTE__VERIFY_END_TO_END__THEN_ADJUDICATE_FRONTIER_CAPABILITY",
+  "frontier_capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "frontier_capability_acquired": false,
+  "frontier_capability_note": "One real domain plus same-domain parameter reuse cannot prove broad cross-domain frontier capability."
+}

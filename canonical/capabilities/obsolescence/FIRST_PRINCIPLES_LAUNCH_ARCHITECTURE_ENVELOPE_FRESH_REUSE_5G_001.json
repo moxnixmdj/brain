@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_FRESH_REUSE_EVIDENCE_V1",
+  "reuse_id": "FIRST-PRINCIPLES-LAUNCH-ARCHITECTURE-ENVELOPE-FRESH-REUSE-5G-001",
+  "status": "PASS_SUPPORTING_TOOL_REUSE__NOT_FRONTIER_FRESH_REUSE",
+  "capability_id": "FIRST_PRINCIPLES_LAUNCH_ARCHITECTURE_ENVELOPE_V1",
+  "rediscovery_performed": false,
+  "external_research_performed": false,
+  "real_project_case": "FRAGILE_OR_LOW_G_CARGO_AT_100M_PAYLOAD_TONNES_YEAR",
+  "inherited_inputs_reused": {
+    "payload_t": 100,
+    "gross_t": 115,
+    "diameter_m": 4,
+    "cd": 0.05,
+    "nose_radius_m": 2,
+    "exit_alt_km": 6,
+    "ground_relative_exit_speed_km_s": 8.9,
+    "launch_angle_deg": 4,
+    "throughput_payload_tonnes_year": 100000000,
+    "electrical_efficiency": 0.7
+  },
+  "changed_constraint": {
+    "accelerator_acceleration_g_from": 30,
+    "accelerator_acceleration_g_to": 5
+  },
+  "output": {
+    "track_length_km": 807.717,
+    "acceleration_time_s": 181.509,
+    "pod_force_MN": 5.639,
+    "peak_mechanical_power_GW": 50.186,
+    "shots_per_day": 2737.851,
+    "launch_interval_s": 31.5576,
+    "average_pods_in_accelerator": 5.7517,
+    "average_mechanical_power_GW": 144.326,
+    "average_electrical_power_at_70pct_GW": 206.18
+  },
+  "independent_check": {
+    "verifier": "WOLFRAM_LANGUAGE_EVALUATOR",
+    "result": "PASS_EXACT_NUMERIC_MATCH_WITH_DETERMINISTIC_FORMULAS",
+    "matched_values": [
+      "track_length_km",
+      "acceleration_time_s",
+      "pod_force_MN",
+      "peak_mechanical_power_GW",
+      "shots_per_day",
+      "launch_interval_s",
+      "average_pods_in_accelerator",
+      "average_mechanical_power_GW",
+      "average_electrical_power_at_70pct_GW"
+    ]
+  },
+  "interpretation": [
+    "Average kinetic-energy throughput is unchanged by accelerator g-load for fixed mass flow and exit speed.",
+    "Reducing 30 g to 5 g multiplies guideway length and transit time by 6.",
+    "At 100 Mt/year the 5 g case has about 5.75 pods simultaneously in the guideway, so low-g cargo creates a materially different sequencing/fault-containment problem.",
+    "A single universal accelerator optimized for both rugged 30 g cargo and fragile 5 g cargo is not automatically the best architecture; separate lanes/classes remain a live design option.",
+    "This changed-parameter launch case remains in the same domain and therefore cannot count as fresh reuse of the broader frontier capability."
+  ],
+  "fresh_reuse_verdict": "PASS_SAME_DOMAIN_TOOL_REUSE_ONLY__DOES_NOT_SATISFY_CROSS_DOMAIN_FRONTIER_CAPABILITY_REUSE",
+  "incremental_spend_usd": 0,
+  "frontier_capability_credit": false,
+  "frontier_capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1"
+}

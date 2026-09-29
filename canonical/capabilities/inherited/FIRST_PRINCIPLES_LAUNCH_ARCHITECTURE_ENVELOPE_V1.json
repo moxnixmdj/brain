@@ -1,0 +1,97 @@
+{
+  "schema": "PROJECT_BRAIN_INHERITED_CAPABILITY_PACKAGE_V1",
+  "capability_id": "FIRST_PRINCIPLES_LAUNCH_ARCHITECTURE_ENVELOPE_V1",
+  "status": "VERIFIED_SUPPORTING_DOMAIN_TOOL__NOT_FRONTIER_CAPABILITY_ACQUISITION",
+  "useful_behavior": "Given payload/gross mass, pod geometry/aerodynamic assumptions, exit altitude/speed/angle, accelerator g-load, throughput, and electrical efficiency, compute a deterministic first-order Earth-to-LEO architecture envelope: ballistic coefficient, atmosphere/trajectory loads, apogee, circularization delta-v, accelerator length/time/force/energy/power, launch cadence, and simultaneous pod occupancy.",
+  "source_real_task": "SPACE-CARGO-ARCHITECTURE-ENVELOPE-WIN1-20260929-V1",
+  "implementation": {
+    "type": "DETERMINISTIC_PYTHON_STANDARD_LIBRARY",
+    "path": "canonical/runtime/space_cargo_architecture_envelope.py",
+    "external_runtime_dependencies": [],
+    "invocation_example": "python canonical/runtime/space_cargo_architecture_envelope.py --payload-t 100 --gross-t 115 --diameter-m 4 --cd 0.05 --nose-radius-m 2 --exit-alt-km 6 --exit-speed-kms 8.9 --angle-deg 4 --accel-g 30 --throughput-mtpy 100 --electrical-efficiency 0.70",
+    "output": "JSON to stdout"
+  },
+  "input_contract": {
+    "payload_t": "positive payload metric tonnes",
+    "gross_t": "positive gross metric tonnes and >= payload_t",
+    "diameter_m": "positive reference frontal diameter",
+    "cd": "positive constant effective drag coefficient",
+    "nose_radius_m": "positive Sutton-Graves effective nose radius",
+    "exit_alt_km": "geometric exit altitude",
+    "exit_speed_kms": "ground/atmosphere-relative speed at tube exit",
+    "angle_deg": "flight-path angle above local horizontal",
+    "accel_g": "constant accelerator g-load",
+    "throughput_mtpy": "million payload tonnes/year",
+    "electrical_efficiency": "0 < efficiency <= 1"
+  },
+  "physics_scope": [
+    "two-body spherical Earth gravity",
+    "Earth rotation and co-rotating atmosphere",
+    "US Standard Atmosphere 1976 layer model",
+    "constant ballistic coefficient",
+    "drag opposite atmosphere-relative velocity",
+    "Sutton-Graves cold-wall stagnation-point convective heating",
+    "closed-form constant-acceleration guideway sizing",
+    "steady-average throughput and energy/power scaling"
+  ],
+  "explicitly_not_claimed": [
+    "CFD accuracy",
+    "real-gas/radiative heating closure",
+    "lift/guidance optimization",
+    "TPS life/certification",
+    "electromagnetic launcher electromagnetic/structural detailed design",
+    "vacuum muzzle feasibility",
+    "demonstrated system performance",
+    "cost estimate"
+  ],
+  "verification": {
+    "methods": [
+      {
+        "verifier": "WOLFRAM_LANGUAGE_INDEPENDENT_CALCULATION",
+        "scope": "two-body orbit speed, Earth rotation, circularization delta-v, accelerator kinematics, throughput power",
+        "result": "PASS"
+      },
+      {
+        "verifier": "NASA_US_STANDARD_ATMOSPHERE_1976",
+        "scope": "atmosphere model basis",
+        "result": "SOURCE_BOUND"
+      },
+      {
+        "verifier": "NASA_SUTTON_GRAVES_RELATION",
+        "scope": "convective heat-rate equation and Earth coefficient",
+        "result": "SOURCE_BOUND"
+      },
+      {
+        "verifier": "STARTRAM_REFERENCE_CASE_REPRODUCTION",
+        "scope": "40 t / 2 m / Cd 0.09 / 6 km / 8.78 km/s / 10 deg order-of-magnitude drag and heating",
+        "result": "PASS_REFERENCE_MAGNITUDE"
+      }
+    ],
+    "evidence_path": "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json"
+  },
+  "provenance_urls": [
+    "https://ntrs.nasa.gov/citations/19770009539",
+    "https://ntrs.nasa.gov/api/citations/20060004824/downloads/20060004824.pdf",
+    "https://ntrs.nasa.gov/citations/20230007390",
+    "https://www.usff.navy.mil/Press-Room/News-Stories/Article/3736404/team-starts-test-launches-for-future-aircraft-carrier/",
+    "https://www.navsea.navy.mil/Media/Images/igphoto/2002572121/",
+    "https://startram.com/wp-content/uploads/2020/12/StarTram2010.pdf"
+  ],
+  "incremental_spend_usd": 0,
+  "latency_class": "SECONDS_TO_MINUTES_PER_SCENARIO",
+  "failure_modes": [
+    "Cd or ballistic coefficient assumption dominates low-altitude atmospheric results",
+    "constant-Cd/no-lift model can misestimate trajectory",
+    "Sutton-Graves excludes radiative heating and detailed TPS response",
+    "standard atmosphere excludes weather variability",
+    "average power does not size pulsed electrical hardware or fault tolerance",
+    "point-mass trajectory cannot certify structural or control loads"
+  ],
+  "inheritance_rule": "Reuse this capability before any new launch-architecture simulator, benchmark, or MDO framework. Escalate only when an exact residual requires higher fidelity.",
+  "fresh_reuse_status": "PASS_SUPPORTING_TOOL_REUSE__NOT_FRONTIER_FRESH_REUSE",
+  "fresh_reuse_evidence_path": "canonical/capabilities/obsolescence/FIRST_PRINCIPLES_LAUNCH_ARCHITECTURE_ENVELOPE_FRESH_REUSE_5G_001.json",
+  "fresh_reuse_summary": "The 5 g case proves same-domain deterministic reuse only and does not prove cross-domain frontier capability transfer.",
+  "frontier_capability_credit": false,
+  "frontier_capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "classification_note": "Useful inherited launch-domain machinery only; narrower than the real documented frontier capability."
+}

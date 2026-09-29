@@ -69,17 +69,18 @@
     "REOPENED_BY_REGRESSION"
   ],
   "immediate_frontier": {
-    "selected_capability": "REAL_WORLD_CAPABILITY_ACQUISITION_AND_REUSE",
-    "objective": "Select one high-leverage real consequential task, run generation-bound recursive OBS across goal/capability/blocker/solution/verification/inherited-system/OBS itself, execute the fastest sufficient surviving route, independently verify the real effect, inherit the capability, delete/supersede work made unnecessary, and attempt fresh reuse.",
-    "selection_metric": "VERIFIED_REUSABLE_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "FIRST_NEW_EPOCH_REAL_OUTPUT_NOT_YET_PRODUCED__RECURSIVE_OBS_NOW_MANDATORY_BEFORE_IMPLEMENTATION",
-    "evidence_path": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
-    "repair_status": "USER_AUTHORIZED_RECURSIVE_OBS_PROMOTION",
-    "prohibition": "NO_CONSEQUENTIAL_IMPLEMENTATION_WITHOUT_CURRENT_OBS_RECEIPT__NO_BLOCKER_REPAIR_BEFORE_DELETE_BYPASS_REUSE_SUBSTITUTE_COMPOSE__NO_SYNTHETIC_VERIFIER_IF_DIRECT_REAL_EFFECT_VERIFICATION_SUFFICES__NO_ACTIVITY_PROGRESS_CREDIT",
-    "next_action": "SELECT_REAL_TASK__ISSUE_EXACT_BASE_BOUND_RECURSIVE_OBS_V2__EXECUTE_SURVIVING_ROUTE__VERIFY__INHERIT__DELETE_REDUNDANT_WORK__FRESH_REUSE",
+    "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "objective": "Acquire the documented real frontier capability of open-ended agentic technical research and scientific problem-solving. Space cargo is Evidence Task A only; complete a materially different real Task B before any acquisition claim.",
+    "selection_metric": "VERIFIED_FRONTIER_CAPABILITY_STRENGTH_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
+    "exact_blocker": "CROSS_DOMAIN_GENERAL_TRANSFER_AND_FRONTIER_DEPENDENCY_REMOVAL_REMAIN_UNPROVEN",
+    "evidence_path": "canonical/capabilities/frontier/OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1.json",
+    "repair_status": "CANDIDATE_EVIDENCE_A_ONLY__NO_FRONTIER_CAPABILITY_PROMOTION",
+    "prohibition": "DO_NOT_COUNT_NARROW_DOMAIN_TOOL_AS_FRONTIER_CAPABILITY__DO_NOT_COUNT_SAME_DOMAIN_PARAMETER_VARIATION_AS_FRONTIER_FRESH_REUSE__NO_SYNTHETIC_BENCHMARK_SUBSTITUTE_FOR_REAL_TASK_B",
+    "next_action": "SELECT_MATERIALLY_DIFFERENT_REAL_TECHNICAL_OR_SCIENTIFIC_TASK_B__RUN_EXACT_BASE_OBS__REUSE_GENERAL_ROUTE__VERIFY_REAL_RESULT__ADJUDICATE_FRONTIER_CAPABILITY",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
-    "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
-    "recursive_obs_receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V2.json"
+    "frontier_target_record": "canonical/capabilities/frontier/OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1.json",
+    "evidence_A": "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json",
+    "supporting_domain_tool": "canonical/capabilities/inherited/FIRST_PRINCIPLES_LAUNCH_ARCHITECTURE_ENVELOPE_V1.json"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [

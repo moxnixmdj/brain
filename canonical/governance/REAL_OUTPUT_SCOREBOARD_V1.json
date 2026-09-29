@@ -7,10 +7,10 @@
   "progress_currency": "VERIFIED_REUSABLE_CAPABILITY_OUTPUT",
   "counters_since_epoch_start": {
     "reusable_capabilities_inherited": 0,
-    "verified_real_tasks_completed": 0,
+    "verified_real_tasks_completed": 1,
     "fresh_reuse_passes": 0,
     "frontier_dependencies_removed": 0,
-    "residual_gaps_localized": 0
+    "residual_gaps_localized": 1
   },
   "efficiency_since_epoch_start": {
     "capability_acquisition_wall_s_samples": [],
@@ -36,7 +36,10 @@
     "direct_real_effect_verification_preferred": true,
     "material_state_change_invalidates_obs_receipt": true,
     "recursive_obs_exact_base_commit_binding_required": true,
-    "recursive_obs_schema_v2_structural_validation_required": true
+    "recursive_obs_schema_v2_structural_validation_required": true,
+    "frontier_capability_credit_requires_documented_frontier_reference": true,
+    "same_domain_parameter_variation_is_not_frontier_fresh_reuse": true,
+    "narrow_domain_tool_is_not_frontier_capability": true
   },
   "progress_event_requirements": {
     "reusable_capability_inherited": [
@@ -72,7 +75,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "ONE_REUSABLE_CAPABILITY_ACQUIRED_ON_A_REAL_TASK_AND_INHERITED",
+  "next_progress_event_target": "COMPLETE_MATERIALLY_DIFFERENT_REAL_TECHNICAL_OR_SCIENTIFIC_TASK_B__THEN_ADJUDICATE_FRONTIER_CAPABILITY_ACQUISITION",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -93,5 +96,21 @@
     ],
     "exact_base_commit_binding_required": true,
     "placeholder_receipts_allowed": false
-  }
+  },
+  "progress_events": [
+    {
+      "event_id": "FRONTIER_CAPABILITY_EVIDENCE_A_SPACE_CARGO_20260929",
+      "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+      "status": "CANDIDATE_EVIDENCE_A__FRONTIER_CAPABILITY_NOT_YET_ACQUIRED",
+      "real_task_evidence": "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json",
+      "supporting_domain_tool": "canonical/capabilities/inherited/FIRST_PRINCIPLES_LAUNCH_ARCHITECTURE_ENVELOPE_V1.json",
+      "same_domain_reuse_counts_as_frontier_fresh_reuse": false,
+      "parent_level_changes": [
+        "VERIFIED_REAL_TASK_COMPLETED",
+        "RESIDUAL_GAP_LOCALIZED"
+      ],
+      "residual_gap": "CROSS_DOMAIN_REAL_TASK_B_REQUIRED_TO_PROVE_GENERAL_FRONTIER_CAPABILITY_TRANSFER_AND_REMOVE_FRONTIER_DEPENDENCE",
+      "incremental_spend_usd": 0
+    }
+  ]
 }

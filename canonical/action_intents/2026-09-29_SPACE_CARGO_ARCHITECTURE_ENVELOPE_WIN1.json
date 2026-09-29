@@ -1,0 +1,135 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FRONTIER-AGENTIC-TECHNICAL-RESEARCH-EVIDENCE-A-SPACE-CARGO",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "DOCUMENTED_FRONTIER_CAPABILITY_HAS_REAL_EVIDENCE_TASK_A_BUT_CROSS_DOMAIN_TRANSFER_TASK_B_IS_UNSPENT",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::DOCUMENTED_FRONTIER_CAPABILITY_HAS_REAL_EVIDENCE_TASK_A_BUT_CROSS_DOMAIN_TRANSFER_TASK_B_IS_UNSPENT::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Produce verified Evidence Task A for the documented frontier capability of open-ended agentic technical research and scientific problem-solving, preserve the launch model only as a supporting domain tool, and localize the remaining acquisition gap to cross-domain real Task B without falsely promoting the capability.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Space Cargo Transport Research Roadmap.png",
+    "Space Launch Architectures: Research Pass 1.png",
+    "Research Pass 3: Space Launch Architecture.png",
+    "Electromagnetic Space Launch Accelerator Infographic.png",
+    "Orbital Launch Architecture Infographic.png",
+    "Rocketless Orbital Cargo System Infographic.png"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop this PR with frontier capability status CANDIDATE_EVIDENCE_A_ONLY: preserve the verified space-cargo result and supporting tool, roll back false capability/fresh-reuse credit, and require a materially different real Task B before any frontier capability acquisition or dependency-removal claim.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "6f7684eceebee035c9332a09ef0496a774b22acc",
+    "real_outcome": "Use space cargo as Evidence Task A toward the documented frontier capability without confusing a narrow domain tool with the capability.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Verified real-task evidence toward a real documented frontier capability.",
+      "proxy_goals_deleted": [
+        "WTM spreadsheet benchmark as Win #1",
+        "generic solver benchmark",
+        "new heldout gate",
+        "carrier qualification"
+      ],
+      "surviving_necessity": "Preserve Task A evidence, correct accounting, and require cross-domain Task B."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Prior Space Cargo Transport Research Roadmap",
+        "Research Pass 1/3/4 space-launch architecture artifacts",
+        "Brain exact symbolic/deterministic computation capability",
+        "ChatGPT web research and Python numerical analysis"
+      ],
+      "external_existing_routes_checked": [
+        "Authoritative orbital mechanics references",
+        "standard atmosphere / aerothermodynamics references",
+        "existing multidisciplinary optimization/numerical libraries where useful"
+      ],
+      "capability_work_deleted": [
+        "No bespoke trajectory engine unless existing numerical tools prove insufficient",
+        "No benchmark harness",
+        "No remote Linux carrier"
+      ],
+      "surviving_gap": "Cross-domain transfer of the general agentic research/scientific problem-solving behavior is unproven."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Intrinsic acquisition gap: one real domain cannot establish broad cross-domain frontier capability.",
+      "delete_bypass_substitute_options": [
+        "Same-domain parameter rerun rejected",
+        "Synthetic benchmark rejected",
+        "Materially different real Task B survives"
+      ],
+      "surviving_causal_blocker": "Need one materially different real technical/scientific Task B."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Real Task A plus cross-domain real Task B",
+        "Same-domain reuse only",
+        "Synthetic benchmark"
+      ],
+      "losing_routes_reason": "Same-domain reuse cannot prove transfer; synthetic benchmarks cannot substitute for real capability.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic gate; verify both real tasks directly."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any prior cargo architecture assumption contradicted by the verified envelope",
+        "Unnecessary tether-first or single-insertion assumptions",
+        "Any later custom-model work made unnecessary by the reusable envelope model"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Throughput scaling",
+        "accelerator length/time/power sizing",
+        "orbital insertion closure",
+        "first-order lane-count sizing"
+      ],
+      "fresh_reuse_plan": "Materially different real technical/scientific Task B."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse existing project artifacts rather than restart research",
+        "Search only sources that can change the architecture decision",
+        "Use simple physics before specialized software"
+      ],
+      "search_stop_decision": "Official frontier documentation defines the behavior well enough; the missing evidence is real cross-domain transfer.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "REAL_TASK_A_PLUS_CROSS_DOMAIN_REAL_TASK_B",
+      "SAME_DOMAIN_PARAMETER_REUSE",
+      "SYNTHETIC_BENCHMARK"
+    ],
+    "deleted_or_bypassed_paths": [
+      "SAME_DOMAIN_PARAMETER_REUSE_AS_FRONTIER_PROOF",
+      "SYNTHETIC_BENCHMARK_AS_FRONTIER_PROOF"
+    ],
+    "selected_surviving_route": "REAL_TASK_A_PLUS_CROSS_DOMAIN_REAL_TASK_B",
+    "why_selected_route_is_fastest_sufficient": "Directly tests the broad documented frontier behavior on real work.",
+    "expected_parent_level_state_change": "Produce verified Evidence Task A for the documented frontier capability of open-ended agentic technical research and scientific problem-solving, preserve the launch model only as a supporting domain tool, and localize the remaining acquisition gap to cross-domain real Task B without falsely promoting the capability.",
+    "stop_condition": "Stop this PR with frontier capability status CANDIDATE_EVIDENCE_A_ONLY: preserve the verified space-cargo result and supporting tool, roll back false capability/fresh-reuse credit, and require a materially different real Task B before any frontier capability acquisition or dependency-removal claim."
+  }
+}
