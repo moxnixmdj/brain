@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_BAR_V1",
+  "capability_id": "ADAPTIVE_DEPENDENCY_AWARE_MULTI_TOOL_COMPOSITION_V1",
+  "parent_capability": "MULTI_TOOL_ORCHESTRATION_AND_PLANNING",
+  "status": "FROZEN_BEFORE_UNSEEN_GATE",
+  "defined_on": "2026-09-29",
+  "real_useful_behavior": "From one high-level goal, construct and execute a causally correct tool DAG whose downstream actions depend on live upstream results, including multi-source state propagation, runtime branching or fan-out, durable synthesis, and independent end-state verification.",
+  "why_this_is_the_smallest_high_leverage_slice": [
+    "Single-tool execution does not test orchestration.",
+    "A fixed linear chain does not test runtime-dependent planning.",
+    "Fan-out alone, conditional execution alone, and multi-source joins alone are already separately proven in canonical Brain evidence.",
+    "The first unproven integration boundary is composing those already-proven operators into one causal DAG without hand-authored controller actions."
+  ],
+  "frontier_reference_evidence": [
+    {
+      "source": "canonical/capabilities/FRONTIER_CAPABILITY_SURFACE_NORMALIZED_V1.json",
+      "systems": [
+        "GPT-5.6 Sol",
+        "Claude Opus 5.5"
+      ],
+      "role": "Canonical normalized external frontier evidence already recovered by Brain; frontier behavior is the bar, not provider implementation."
+    },
+    {
+      "source": "OpenAI GPT-5.6 official capability evidence",
+      "url": "https://openai.com/index/gpt-5-6/",
+      "behavior_used": "Tool orchestration with intermediate-result processing, chaining/parallelism, conditions, loops, and next-action selection."
+    },
+    {
+      "source": "Anthropic Claude Opus 5.5 official capability evidence",
+      "url": "https://www.anthropic.com/claude-opus-5-5",
+      "behavior_used": "Complex multi-tool agents, planning, coordination, and long-running autonomous work."
+    }
+  ],
+  "minimum_behavioral_bar": {
+    "high_level_goal_only": true,
+    "hand_authored_controller_actions_forbidden": true,
+    "optional_model_planner_forbidden": true,
+    "supplier_or_capability_ids_in_goal_forbidden": true,
+    "runtime_source_count_min": 2,
+    "multi_source_dependency_required": true,
+    "runtime_collection_cardinality_not_known_before_execution": true,
+    "runtime_dependent_branch_or_fanout_required": true,
+    "downstream_state_must_derive_from_upstream_live_results": true,
+    "durable_synthesis_required": true,
+    "independent_end_state_verification_required": true,
+    "omitted_goal_clause_is_failure": true,
+    "incremental_spend_usd": 0
+  },
+  "comparison_policy": {
+    "this_gate_role": "EXISTING_ROUTE_GENERALIZATION_FALSIFICATION",
+    "full_frontier_obsolescence_claim_from_this_gate_alone": false,
+    "common_task_or_common_benchmark_required_before_external_parity_claim": true,
+    "provider_specific_architecture_not_required": true
+  },
+  "existing_route_evidence_reused": [
+    "ASTRA-RUNTIME-CAPABILITY-GRAPH-PLANNER-001",
+    "ASTRA-RUNTIME-LIVE-DYNAMIC-FANOUT-001",
+    "ASTRA-RUNTIME-LIVE-CONDITIONAL-GENERALIZATION-001",
+    "ASTRA-RUNTIME-MULTI-SOURCE-JOIN-002",
+    "ASTRA-RUNTIME-BROWSER-XLSX-COMPOSITION-004"
+  ]
+}
