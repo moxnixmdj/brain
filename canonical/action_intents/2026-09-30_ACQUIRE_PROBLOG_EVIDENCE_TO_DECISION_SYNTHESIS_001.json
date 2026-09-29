@@ -1,6 +1,6 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
-  "action_id": "ACQUIRE-PROBLOG-EVIDENCE-TO-DECISION-SYNTHESIS-001",
+  "action_id": "ACQUIRE-PROBLOG-2-3-0-EVIDENCE-TO-DECISION-SYNTHESIS-001",
   "status": "PROPOSED",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
@@ -21,7 +21,10 @@
     "pyAgrum current influence-diagram route",
     "waleedqk/subjective-logic MIT operator kernel",
     "ctoth/doxa and ctoth/argumentation semantic fit but no LICENSE file at inspected revisions",
-    "formal-argumentation==0.3.0 exact wheel 4b0a242b4bf006cd58c5cbfb313b5b20d2a2895a22ea2b4ddbc4706e8cd56bc8 passed public semantic preflight run 36640692648 but exact license probe run 36641473835 found no license metadata and no bundled license file"
+    "formal-argumentation==0.3.0 exact wheel 4b0a242b4bf006cd58c5cbfb313b5b20d2a2895a22ea2b4ddbc4706e8cd56bc8 passed public semantic preflight run 36640692648 but exact license probe run 36641473835 found no license metadata and no bundled license file",
+    "Direct source-checkout preflight run 36641463213 failed causally because dsharp is not present in source checkout",
+    "One OBS correction spent: official ProbLog 2.3.0 manylinux_2_28_x86_64 wheel SHA256 8d18beae480bce9f54037dfa9cf8c058da874524c118d8ffae96fd210b68e71e",
+    "Direct wheel preflight run 36641617082 PASS on ubuntu-24.04 / Python 3.12"
   ],
   "evidence_presence_classification": "CAPABILITY_UNPROVEN",
   "probe_specific": false,
@@ -58,6 +61,7 @@
         "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
       ],
       "external_existing_routes_checked": [
+        "ProbLog 2.3.0 official Linux release wheel",
         "ProbLog",
         "DriftNARS/OpenNARS",
         "pyAgrum influence diagrams",
@@ -88,7 +92,7 @@
         "REUSE ctoth argumentation/doxa: semantic fit but inspected revisions have no reusable license.",
         "REUSE formal-argumentation 0.3.0: technically closest and already preflighted, but exact wheel/repo provide no reusable license declaration, so legal reuse fails closed."
       ],
-      "surviving_causal_blocker": "No existing bound adapter maps Brain's structured evidence contract into a licensed exact inference/decision engine and emits a fail-closed auditable terminal decision."
+      "surviving_causal_blocker": "No bound Brain adapter and real-task proof yet exists for the now-directly-qualified ProbLog 2.3.0 release-wheel route."
     },
     "obs_solution": {
       "deletion_first_order_applied": [
@@ -101,13 +105,13 @@
         "BUILD"
       ],
       "routes_ranked": [
-        "PROBLOG_A294FA24_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
+        "PROBLOG_2_3_0_PINNED_LINUX_WHEEL_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
         "PYAGRUM_INFLUENCE_DIAGRAM_ADAPTER",
         "DRIFTNARS_REASONING_ADAPTER",
         "MIT_SUBJECTIVE_LOGIC_PLUS_CUSTOM_ARGUMENT_GRAPH",
         "BUILD_CUSTOM_EVIDENCE_REASONER"
       ],
-      "losing_routes_reason": "ProbLog is mature, Apache-2.0, Python-embeddable, dependency-light, and directly provides probabilistic logic, evidence, proof/explanation, and decision machinery. Other routes require broader integration or materially more custom reasoning code for this narrower target.",
+      "losing_routes_reason": "ProbLog's source-checkout default evaluator was falsified because it lacks packaged dsharp binaries. The one allowed correction to the official 2.3.0 Linux release wheel passed exact live inference and remains faster than broader solver or custom routes.",
       "implementation_still_necessary": true
     },
     "obs_verification": {
@@ -136,9 +140,10 @@
         "Reuse canonical model-independence law and Qwen execution provenance as real Task B source",
         "Reuse public GitHub Actions carrier",
         "Stop broad symbolic-architecture search once the target narrowed to structured evidence synthesis",
-        "Reuse exact public semantic preflight run 36640692648 and exact license probe run 36641473835 instead of requalifying formal-argumentation"
+        "Reuse exact public semantic preflight run 36640692648 and exact license probe run 36641473835 instead of requalifying formal-argumentation",
+        "Falsified source-checkout path cached; do not retry or build dsharp from source."
       ],
-      "search_stop_decision": "The strongest newly discovered technical challenger, formal-argumentation 0.3.0, was directly preflighted but fails the reusable-license requirement on the exact wheel. ProbLog remains the fastest correctness-sufficient licensed route; further broad search cannot currently justify delaying direct real-task execution.",
+      "search_stop_decision": "After the source-checkout failure, the one permitted correction to the official 2.3.0 release wheel passed live. No unresolved licensed challenger plausibly removes enough adapter work to justify further route search before real-task execution.",
       "affected_layers_only_on_revalidation": true,
       "challenger_refresh_decision": "Route frontier was refreshed after PR240 changed the target; prior DriftNARS selection was discarded rather than rebased."
     },
@@ -157,13 +162,13 @@
       "NO_LICENSE_CODE_REUSE",
       "CUSTOM_PROBABILISTIC_INFERENCE_ENGINE"
     ],
-    "selected_surviving_route": "PROBLOG_A294FA24_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
-    "why_selected_route_is_fastest_sufficient": "ProbLog remains the fastest legally reusable correctness-sufficient route after the strongest technical challenger, formal-argumentation 0.3.0, was directly disqualified by an exact-wheel license probe. ProbLog is Apache-2.0, Python-embeddable, active, model-free, and needs only a small deterministic adapter for Brain's typed schema, provenance trace, and stop policy.",
+    "selected_surviving_route": "PROBLOG_2_3_0_PINNED_LINUX_WHEEL_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
+    "why_selected_route_is_fastest_sufficient": "The official Apache-2.0 ProbLog 2.3.0 Linux wheel packages the required compiler, has no mandatory Python dependencies, passed exact-hash live inference and evidence-conditioning on the $0 public carrier, and needs only a small deterministic Brain adapter for typed evidence, provenance trace and stop policy.",
     "expected_parent_level_state_change": "Acquire and fresh-reuse one deterministic model-free evidence-to-decision synthesis route on two materially distinct real tasks, with explicit provenance, support/contradiction probabilities, hard constraints, unresolved uncertainty, terminal insufficient-evidence behavior, and auditable trace.",
     "stop_condition": "Implement only a thin typed-evidence-to-ProbLog adapter and execute two precommitted materially distinct real decisions with the exact same adapter bytes: (A) space-cargo reference-search-region final-design promotion adjudication from preserved verified evidence with verdict labels withheld; (B) fresh reuse on model-backed Qwen cognitive-credit eligibility from canonical policy/execution evidence. Independently verify each against pre-existing authoritative outcomes. Also require negative synthetic checks for unresolved conflict/insufficient evidence. On two real passes, bind the route and stop; on any failure, preserve evidence and recompute. No model, pretrained artifact, natural-language parser, new agent framework, or broad cognitive architecture.",
     "route_frontier": {
       "discovery_required": true,
-      "checked_at_utc": "2026-09-29T22:46:03Z",
+      "checked_at_utc": "2026-09-29T22:47:40Z",
       "max_age_hours": 24,
       "incumbent_route": "NO_VERIFIED_MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_ROUTE",
       "source_classes_checked": [
@@ -218,28 +223,28 @@
       ],
       "challenger_routes": [
         {
-          "route": "PROBLOG_A294FA24_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
+          "route": "PROBLOG_2_3_0_PINNED_LINUX_WHEEL_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
           "evidence": [
-            "ProbLog provides probabilistic facts/rules, evidence, exact inference, MPE, explain, DTProbLog, and Python embedding.",
-            "Current repository is active, Apache-2.0, and has zero mandatory Python runtime dependencies."
+            "ProbLog 2.3.0 official Linux release wheel packages the knowledge-compiler binary absent from source checkout.",
+            "Exact pinned manylinux_2_28_x86_64 wheel SHA256 8d18beae480bce9f54037dfa9cf8c058da874524c118d8ffae96fd210b68e71e.",
+            "Direct live preflight run 36641617082 passed weighted inference and evidence conditioning on Python 3.12."
           ],
           "qualification_evidence": [
-            "https://dtai.cs.kuleuven.be/problog/",
-            "https://problog.readthedocs.io/en/latest/cli.html",
-            "https://github.com/ML-KULeuven/problog/commit/a294fa24c3cfb4bae3a2acea3a128386113889f4"
+            "https://pypi.org/project/problog/2.3.0/",
+            "DIRECT_PROBE: https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36641617082"
           ],
           "qualification_evidence_classes": [
-            "OFFICIAL_PRIMARY",
-            "CODE_OR_PACKAGE_REGISTRY"
+            "CODE_OR_PACKAGE_REGISTRY",
+            "DIRECT_PROBE"
           ],
           "resolution": "SELECTED",
           "comparison": {
             "CORRECTNESS": "Formal probabilistic logic with exact weighted model counting; adapter preserves source provenance and explicit policy rather than asking the engine to interpret prose.",
             "CAPABILITY_STRENGTH": "Directly covers derived claims, weighted evidence, contradictory conclusions, queries, explanations, and decision-theoretic logic inside the target's structured-input boundary.",
-            "WALL_CLOCK": "Pure/Python-embeddable route with small adapter; no C bridge, model download, or broad framework integration.",
+            "WALL_CLOCK": "One ~1.0 MB pinned Linux wheel plus a thin adapter; exact live install/inference passed.",
             "INCREMENTAL_COST": "$0.",
-            "RELIABILITY": "Mature research system, active 2026 repository, Apache-2.0.",
-            "VERIFIABILITY": "Generated ProbLog program, exact input hash, query probabilities, decision policy, and independent real-task oracle can all be preserved."
+            "RELIABILITY": "Source checkout was rejected. Official release wheel is the surviving route and passed exact-hash live inference.",
+            "VERIFIABILITY": "Wheel identity, generated ProbLog program, query probabilities, policy and independent real-task oracle are all preservable."
           }
         },
         {
@@ -332,7 +337,7 @@
           }
         }
       ],
-      "negative_search_summary": "The strongest newly surfaced challenger, formal-argumentation 0.3.0, passed exact semantic preflight but is disqualified because its exact wheel contains no declared/bundled reusable license and the inspected repository also has no LICENSE. Other licensed challengers require more custom inference or broader integration than ProbLog.",
+      "negative_search_summary": "Source-checkout ProbLog was falsified by missing dsharp; official 2.3.0 wheel corrected that exact dependency and passed. Other licensed challengers still require materially more adapter/encoding work. formal-argumentation was not selected because the inspected repository/package did not expose a reusable license.",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -342,7 +347,7 @@
         "VERIFIABILITY"
       ],
       "unresolved_plausible_dominators": [],
-      "selected_route": "PROBLOG_A294FA24_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
+      "selected_route": "PROBLOG_2_3_0_PINNED_LINUX_WHEEL_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
       "refresh_triggers": [
         "BEFORE_EXPENSIVE_EXECUTION",
         "AFTER_MATERIAL_ROUTE_FAILURE",
@@ -350,9 +355,9 @@
         "BEFORE_SCARCE_GATE_SPEND"
       ],
       "selected_route_preflight": {
-        "checked_at_utc": "2026-09-29T22:36:00Z",
+        "checked_at_utc": "2026-09-29T22:47:40Z",
         "max_age_hours": 2,
-        "selected_route": "PROBLOG_A294FA24_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
+        "selected_route": "PROBLOG_2_3_0_PINNED_LINUX_WHEEL_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
         "status": "READY",
         "all_required_dependencies_ready": true,
         "failed_dependencies": [],
@@ -364,9 +369,9 @@
             "volatility": "VOLATILE",
             "scope": "ACCOUNT_SPECIFIC",
             "status": "READY",
-            "observed_at_utc": "2026-09-29T22:25:06Z",
+            "observed_at_utc": "2026-09-29T22:47:40Z",
             "evidence": [
-              "DIRECT_PROBE: public workflow run 36639442996 received a GitHub-hosted runner and executed on this account."
+              "DIRECT_PROBE: workflow run 36641617082 received ubuntu-24.04 runner and completed"
             ],
             "evidence_classes": [
               "DIRECT_PROBE"
@@ -374,19 +379,20 @@
             "evidence_scope": "ACCOUNT_SPECIFIC"
           },
           {
-            "dependency": "PROBLOG_SOURCE_A294FA24C3CFB4BAE3A2ACEA3A128386113889F4",
+            "dependency": "PROBLOG_2_3_0_MANYLINUX_2_28_X86_64_WHEEL",
             "kind": "CODE_ARTIFACT",
             "required": true,
             "volatility": "STATIC",
             "scope": "GLOBAL",
             "status": "READY",
-            "observed_at_utc": "2026-09-29T22:36:00Z",
+            "observed_at_utc": "2026-09-29T22:47:40Z",
             "evidence": [
-              "DIRECT_PROBE: GitHub API returned exact current ProbLog source commit, Apache-2.0 license, and pyproject metadata."
+              "CODE_OR_PACKAGE_REGISTRY: PyPI problog 2.3.0 wheel SHA256 8d18beae480bce9f54037dfa9cf8c058da874524c118d8ffae96fd210b68e71e",
+              "DIRECT_PROBE: workflow run 36641617082 exact hash/install/inference PASS"
             ],
             "evidence_classes": [
-              "DIRECT_PROBE",
-              "CODE_OR_PACKAGE_REGISTRY"
+              "CODE_OR_PACKAGE_REGISTRY",
+              "DIRECT_PROBE"
             ],
             "evidence_scope": "GLOBAL"
           },
@@ -394,12 +400,28 @@
             "dependency": "PYTHON_3_12_RUNTIME",
             "kind": "LOCAL_RUNTIME",
             "required": true,
-            "volatility": "STATIC",
+            "volatility": "VOLATILE",
             "scope": "GLOBAL",
             "status": "READY",
-            "observed_at_utc": "2026-09-29T22:25:06Z",
+            "observed_at_utc": "2026-09-29T22:47:40Z",
             "evidence": [
-              "DIRECT_PROBE: current public carrier workflows successfully execute Python 3.12 on ubuntu-24.04."
+              "DIRECT_PROBE: workflow run 36641617082 Python 3.12 inference PASS"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "PYPI_PUBLIC_PACKAGE_REGISTRY",
+            "kind": "PACKAGE_REGISTRY",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T22:47:40Z",
+            "evidence": [
+              "DIRECT_PROBE: workflow run 36641617082 downloaded exact wheel"
             ],
             "evidence_classes": [
               "DIRECT_PROBE"
