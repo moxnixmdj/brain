@@ -18,9 +18,9 @@
     "merged PR135 action-intent guard hardening",
     "current main a178254126ad7a09cdf48dee172a728ba27bccdc pointer/hierarchy/immediate frontier",
     "current canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json inherited Xapian route subrecord",
-    "open PR140 execution lease preserved but not authorized while this contradiction remains"
+    "closed PR140 execution lease preserved as pre-reconciliation evidence only"
   ],
-  "evidence_presence_classification": "CANONICAL_SUBRECORD_CONTRADICTION_CONFIRMED__NO_RUNTIME_EVIDENCE_REQUIRED",
+  "evidence_presence_classification": "SUPERSEDED_BY_NEWER_CANONICAL_STATE",
   "probe_specific": false,
   "generic_repair_from_single_probe": false,
   "orthogonal_recurrence_count": 0,
