@@ -4,17 +4,17 @@
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "active_capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-  "active_probe": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
-  "probe_state": "H004_SPENT_FAIL__GENERIC_CAUSAL_REPAIR_VERIFIED__NEW_ORTHOGONAL_GATE_NOT_YET_FROZEN",
-  "current_parent_blocker": "GENERIC_SEMANTIC_VERIFIER_EVIDENCE_ADMISSION_REPAIR_VERIFIED__H004_SPENT_NO_REPLAY__NEW_ORTHOGONAL_GATE_REQUIRED",
-  "next_required_action_class": "FREEZE_NEW_ORTHOGONAL_FRESH_TOOL_LEARNING_GATE_AGAINST_REPAIRED_RUNTIME__NO_H004_REPLAY__THEN_EXECUTE_NEW_GATE_EXACTLY_ONCE_ON_QUALIFIED_PUBLIC_CARRIER",
+  "active_probe": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-005",
+  "probe_state": "H005_FROZEN_UNSPENT__UBUNTU_SURFACE_UNQUALIFIED__NO_EXECUTION",
+  "current_parent_blocker": "H005_FROZEN_UNSPENT__DIRECT_UBUNTU_24_04_PUBLIC_CARRIER_REQUIRES_GENERIC_SURFACE_QUALIFICATION_BEFORE_START",
+  "next_required_action_class": "QUALIFY_DIRECT_UBUNTU_24_04_PUBLIC_GITHUB_SURFACE_GENERICALLY__REQUIRE_PACKAGES_TRANSLATION_TAGS_CONTENTS_XAPIAN_ZBAR_CODE39_SUPPORT_AND_EXACT_RUNTIME_CLOSURE__NO_H005_START__IF_PASS_EXECUTE_H005_EXACTLY_ONCE",
   "forbidden_local_frontier": "HELDOUT_003_REPLAY__SECOND_CARRIER_FOR_HELDOUT_003__PROMOTION_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CAPABILITY_RUNTIME_REPAIR_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CARRIER_CORRECTION_BEFORE_FRESH_ORTHOGONAL_GATE_FREEZE__HAND_PICKED_CARRIER_SUBSET__HELDOUT_005_REPLAY__HELDOUT_002_EXECUTION__SOURCE_NAME_WHITELIST_ONLY_PATCH__BLIND_ABSOLUTE_SCORE_THRESHOLD__CONTRACT_PARSER_REPAIR__DISCOVERY_RETUNING__PACKAGE_HINTS__TASK_SPECIFIC_LITERALS",
   "progress_level_minimum": "CAPABILITY_TARGET",
   "probe_budget": {
-    "repairs_used_on_active_probe": 1,
+    "repairs_used_on_active_probe": 0,
     "max_repairs_from_single_probe": 1,
     "same_probe_replays_used": 0,
-    "max_same_probe_replays": 1,
+    "max_same_probe_replays": 0,
     "orthogonal_recurrence_required_for_second_repair": 2
   },
   "quarantined_probes": [
@@ -26,7 +26,7 @@
       "may_define_frontier": false
     }
   ],
-  "active_probe_manifest": null,
+  "active_probe_manifest": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_005.json",
   "completed_probe_portfolio": {
     "portfolio_id": "ORTHO-TOOL-LEARNING-PORTFOLIO-001",
     "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_ORTHOGONAL_PORTFOLIO_001_RECONCILIATION.json",
@@ -111,19 +111,18 @@
     "reason": "A deterministic pre-probe interface break in the prior parent has lower wall-clock to decisive evidence than opening a new frontier; PR111 did not include it in its comparison."
   },
   "active_probe_freeze": {
-    "validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
-    "source_pr": 128,
-    "status": "SPENT_CONTAMINATED_BY_UNAUTHORIZED_CARRIER__NONPROMOTABLE__NO_REPLAY",
-    "execution_count": 1,
+    "validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-005",
+    "source_pr": 205,
+    "status": "FROZEN_UNSPENT__NO_EXECUTION",
+    "execution_count": 0,
     "allowed_repairs_before_execution": 0,
-    "required_repair_class": "PROVIDER_NEUTRAL_SCORE_SCALE_SAFE_APT_ADMISSION",
     "same_case_replay_allowed": false,
-    "repairs_consumed_before_execution": 1,
-    "repair_source_pr": 129,
-    "first_start_authoritative_for_freshness": true,
-    "result_authority": "DIAGNOSTIC_ONLY__NOT_ACCEPTANCE_OR_PROMOTION",
-    "carrier_authorized": false,
-    "incident_reconciliation_path": "canonical/capabilities/obsolescence/HELDOUT003_UNAUTHORIZED_CARRIER_AND_PR149_PROVENANCE_RECONCILIATION_20260929_V1.json"
+    "orthogonal_dimensions": [
+      "domain",
+      "execution_surface"
+    ],
+    "reference_spent_gate": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+    "frozen_after_repair_source_pr": 204
   },
   "last_carrier_qualification": {
     "carrier": "PUBLIC_GITHUB_ACTIONS_DEBIAN_TRIXIE",
@@ -135,7 +134,7 @@
   "last_verified_generic_repair": {
     "repair_id": "GENERIC_SEMANTIC_VERIFIER_EVIDENCE_ADMISSION_V1",
     "source_pr": 204,
-    "merge_status": "PENDING",
+    "merge_status": "MERGED_PR204",
     "workflow_run_id": 36603922229,
     "tests_passed": 6,
     "heldout_executions": 0,
