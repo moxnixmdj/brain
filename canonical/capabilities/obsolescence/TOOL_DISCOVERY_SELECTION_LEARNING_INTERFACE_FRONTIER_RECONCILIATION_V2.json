@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_LEARNING_INTERFACE_FRONTIER_RECONCILIATION_V2",
+  "reconciliation_id": "TOOL-DISCOVERY-SELECTION-LEARNING-INTERFACE-FRONTIER-V2",
+  "status": "RECONCILED_PENDING_MERGE",
+  "canonical_base": "d22f5012df9a32e073e0bed8fe7da7af4a60441b",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "selection_correction": {
+    "source_pr": 111,
+    "finding": "PREMATURE_TARGET_SWITCH",
+    "reason": "The inherited substitute did not obsolete the parent capability. Mission-lock V4 requires recording the exact residual and continuing only on that residual before selecting a new capability.",
+    "preserved_deferred_candidate": "MULTI_TOOL_ORCHESTRATION_AND_PLANNING"
+  },
+  "inherited_verified_route": {
+    "source_pr": 89,
+    "inherited_by_pr": 96,
+    "runtime_git_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
+    "validation_id": "DEBIAN-FULL-METADATA-XAPIAN-HELDOUT-VALIDATION-005",
+    "authoritative_deployment": "805a36d4-04cf-4938-bfac-74d29418081f",
+    "family_recall": 1,
+    "top20_recall": 1,
+    "wall_s": 16.233238,
+    "incremental_spend_usd": 0,
+    "scope": "SUPPLIER_DISCOVERY_AND_RANKING_ONLY__NOT_PARENT_CAPABILITY_OBSOLESCENCE"
+  },
+  "exact_source_identities": {
+    "capability_discovery_py": "b9e7423ab24bf2da98869b02d782e791a779892a",
+    "auto_capability_acquisition_py": "fc80ede8225cc51dac77be6d41aa2a1c757c6ee8",
+    "auto_apt_cli_acquisition_py": "786f7de7df853cfaec2826f9471942b001e7eadc",
+    "verify_pending_cli_binding_py": "8ec4da92080e885a15266389c0318688e6408d43"
+  },
+  "causal_trace": [
+    "The inherited discovery route emits binding_kind=apt and discovery_source=APT_FULL_METADATA_XAPIAN with zero-cost eligibility, version/archive identity, and executable-ownership evidence.",
+    "auto_capability_acquisition routes binding_kind=apt to the existing apt_cli acquisition supplier.",
+    "auto_apt_cli_acquisition._viable_candidates then rejects every candidate whose discovery_source is not the historical literal APT_CATALOG, so the verified route cannot reach apt_cli_probe or cli_contract_inference.",
+    "The same admission function also applies a legacy absolute score>=12 threshold to raw Xapian BM25 match.weight, which is not a portable cross-scorer contract.",
+    "Preserved downstream evidence indicates verify_pending_cli_binding also assumes at least two legacy matched_terms while the inherited route emits matched_terms=[], but this is downstream of the deterministic source-admission failure and is not permission to broaden the first repair."
+  ],
+  "first_causal_blocker": "DISCOVERY_TO_APT_ACQUISITION_CANDIDATE_CONTRACT_COMPATIBILITY__LEGACY_SOURCE_LITERAL_AND_SCORE_SCALE_ADMISSION",
+  "reuse_before_invention": {
+    "existing_stack": [
+      "canonical/runtime/auto_capability_acquisition.py",
+      "canonical/runtime/auto_apt_cli_acquisition.py",
+      "canonical/runtime/apt_cli_probe.py",
+      "canonical/runtime/cli_contract_inference.py",
+      "canonical/runtime/verify_pending_cli_binding.py",
+      "canonical/runtime/promote_pending_binding.py"
+    ],
+    "decision": "REUSE_EXISTING_STACK__NO_NEW_DISCOVERY_OR_CONTRACT_SYSTEM"
+  },
+  "next_action": "FREEZE_FRESH_ORTHOGONAL_DISCOVERY_TO_EXECUTION_GATE__TEST_EXISTING_ROUTE_UNCHANGED__THEN_IF_FAILURE_OCCURS_AT_THE_KNOWN_SEAM_AUTHORIZE_ONE_GENERIC_SOURCE_NEUTRAL_APT_CANDIDATE_ADMISSION_REPAIR__EXECUTE_ONCE__RECONCILE",
+  "repair_design_constraints": [
+    "Use stable binding/evidence properties rather than discovery_source name.",
+    "Do not compare Xapian BM25 raw weight to the legacy absolute lexical-score threshold as an admission contract.",
+    "Do not change the already-verified Xapian supplier-ranking route unless fresh evidence makes that necessary.",
+    "Do not repair the downstream matched_terms verifier assumption before the first causal blocker is removed and the fresh gate reaches it."
+  ],
+  "prohibitions": [
+    "NO_HELDOUT_005_REPLAY",
+    "NO_ORCHESTRATION_GATE_SPEND_BEFORE_PARENT_OBSOLETE_OR_RETAIN_ADJUDICATION",
+    "NO_RUNTIME_MUTATION_IN_THIS_RECONCILIATION",
+    "NO_SOURCE_NAME_WHITELIST_ONLY_PATCH",
+    "NO_PACKAGE_HINTS",
+    "NO_TASK_SPECIFIC_LITERALS"
+  ],
+  "promotion_claim": false,
+  "incremental_spend_usd": 0
+}
