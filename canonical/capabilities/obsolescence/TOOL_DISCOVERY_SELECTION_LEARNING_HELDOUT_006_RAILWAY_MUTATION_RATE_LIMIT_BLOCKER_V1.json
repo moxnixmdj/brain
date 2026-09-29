@@ -58,5 +58,12 @@
     "DO_NOT_USE_USER_LAPTOP",
     "DO_NOT_INCREASE_TIMEOUT"
   ],
-  "next_action": "AFTER_RAILWAY_MUTATION_THROTTLE_CLEARS__STAGE_PREPARED_EXACT_BLOB_VERIFIED_CARRIER_ON_EXISTING_QUALIFIED_SERVICE__EXECUTE_GATE_006_EXACTLY_ONCE__RECONCILE"
+  "next_action": "WHEN_RAILWAY_REMOTE_MCP_ACCESS_RESUMES__VERIFY_LEASE_AND_EXACT_BLOBS__EXECUTE_GATE_006_ONCE__CAPTURE__RECONCILE__RELEASE",
+  "last_observed_on": "2026-09-29",
+  "last_observed_remote_mcp_error": "You are sending tool calls too quickly. Try again in 2001s.",
+  "last_observed_cooldown_seconds": 2001,
+  "gate_spent": false,
+  "execution_count": 0,
+  "freshness": "UNSPENT",
+  "replay_authorized": false
 }
