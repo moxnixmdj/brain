@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ONE_SHOT_COORDINATION_INCIDENT_V1",
   "incident_id": "HELDOUT005_POST_SPEND_REPLAY_20260929",
-  "status": "QUARANTINED",
+  "status": "QUARANTINED__MULTIPLE_POST_SPEND_REPLAYS",
   "validation_id": "DEBIAN-FULL-METADATA-XAPIAN-HELDOUT-VALIDATION-005",
   "authoritative_first_execution": "805a36d4-04cf-4938-bfac-74d29418081f",
   "first_execution_started_at": "2026-09-29T02:52:21.958374122Z",
@@ -11,6 +11,22 @@
   "later_replay_started_at": "2026-09-29T02:52:52.828526746Z",
   "root_class": "CONCURRENT_WORKER_MUTATED_LEASED_RAILWAY_SERVICE_AFTER_SPEND",
   "invariant": "FULL_VALIDATION_ID_PLUS_MANIFEST_BLOB_IS_MONOTONIC_IDENTITY__FIRST_FRESH_EXECUTION_ONLY",
-  "corrective_rule": "AFTER_EXECUTION_START_ALL_SUBSEQUENT_DEPLOYMENTS_FOR_SAME_VALIDATION_ID_PLUS_MANIFEST_HASH_ARE_REPLAY_ONLY_AND_MUST_NEVER_AFFECT_ACCEPTANCE_EVIDENCE",
-  "no_candidate_change": true
+  "corrective_rule": "AFTER_FIRST_FRESH_EXECUTION_START_ALL_SUBSEQUENT_DEPLOYMENTS_FOR_SAME_VALIDATION_ID_PLUS_MANIFEST_HASH_ARE_REPLAY_ONLY_AND_MUST_NEVER_AFFECT_ACCEPTANCE_EVIDENCE__FUTURE_ONE_SHOT_GATES_REQUIRE_SHARED_ATOMIC_SINGLEFLIGHT_OR_EQUIVALENT_MONOTONIC_CLAIM_BEFORE_CARRIER_START",
+  "no_candidate_change": true,
+  "observed_minimum_count": 2,
+  "later_replays": [
+    {
+      "railway_deployment_id": "b7be260f-4e90-4a78-b227-2ae6f20bf7bc",
+      "execution_started_at": "2026-09-29T02:52:52.828526746Z",
+      "railway_meta_reason": "redeploy",
+      "admissibility": "EXCLUDED_POST_SPEND_REPLAY"
+    },
+    {
+      "railway_deployment_id": "a1a4464d-4278-4d2c-be44-0a8436158d82",
+      "execution_started_at": "2026-09-29T02:53:04.502909849Z",
+      "railway_meta_reason": "deploy",
+      "admissibility": "EXCLUDED_POST_SPEND_REPLAY"
+    }
+  ],
+  "acceptance_precedence": "FIRST_FRESH_EXECUTION_ONLY"
 }
