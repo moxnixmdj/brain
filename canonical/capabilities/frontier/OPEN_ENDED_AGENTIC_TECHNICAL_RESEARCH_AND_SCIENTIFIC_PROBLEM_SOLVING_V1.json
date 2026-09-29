@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
   "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "status": "FRONTIER_BAR_DEFINED__MODEL_INDEPENDENT_SYNTHESIS_ACQUIRED__FRESH_PARENT_TASK_LOCALIZED_GROUNDING_GAP",
+  "status": "FRONTIER_BAR_DEFINED__MODEL_INDEPENDENT_SYNTHESIS_AND_GROUNDING_ACQUIRED__FRESH_PARENT_TASK_REQUIRED",
   "real_capability": true,
   "parent_families": [
     "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
@@ -50,17 +50,19 @@
     "evidence_path": "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json"
   },
   "evidence_B": {
-    "status": "FRESH_PARENT_TASK_EXECUTED__FAIL_FIRST_CAUSAL_GAP_LOCALIZED",
+    "status": "PRIOR_FRESH_PARENT_TASK_SPENT__GROUNDING_GAP_RESOLVED__NEW_PARENT_TASK_REQUIRED",
     "task": "FRESH_PARENT_SERIALIZATION_DECISION_20260930_001",
     "evidence_path": "canonical/capabilities/obsolescence/FRESH_PARENT_SERIALIZATION_DECISION_TERMINAL_RECONCILIATION_20260930_V1.json",
     "public_run_id": 36644374149,
     "task_completed": false,
     "model_free_execution": true,
     "first_causal_gap": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
-    "same_task_replay_allowed": false
+    "same_task_replay_allowed": false,
+    "next_candidate": "FRESH_MODEL_INDEPENDENT_PARENT_END_TO_END_TASK",
+    "requirement": "Run a materially different fresh parent task. Do not replay the spent serialization objective. Let the first causal failure define any next subcapability."
   },
   "obsolescence_status": "NOT_YET_PROVEN__FIRST_CAUSAL_GAP_LOCALIZED",
-  "residual_gap": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+  "residual_gap": "PARENT_END_TO_END_CAPABILITY_NOT_YET_REPROVEN_AFTER_GROUNDING_AND_SYNTHESIS_ACQUISITION",
   "verified_subcapabilities": [
     {
       "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -68,7 +70,14 @@
       "route": "decision.synthesis.typed.stdlib + decision.synthesis.verify.stdlib",
       "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_ASTRA_INTEGRATION_20260930_V1.json",
       "merge_commit_sha": "2f4f3d7042f055003daf85a93e01e2f78678cec6"
+    },
+    {
+      "capability_id": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+      "status": "VERIFIED_ACQUIRED__REAL_TASK_AND_CROSS_DOMAIN_FRESH_REUSE_PASS",
+      "route": "plain_goal.bound_capability.grounding.stdlib + plain_goal.bound_capability.grounding.verify.stdlib",
+      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1.json",
+      "merge_commit_sha": "95543fe8591c2b490901143fb165ce6571b7140d"
     }
   ],
-  "next_action": "ACQUIRE_MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1_ON_FRESH_REAL_TASK__NO_SERIALIZATION_REPLAY__THEN_RETRY_PARENT_ONLY_ON_DIFFERENT_FRESH_TASK"
+  "next_action": "RUN_ONE_FRESH_MODEL_INDEPENDENT_PARENT_REAL_TASK__MATERIALLY_DIFFERENT_FROM_SPENT_SERIALIZATION__NO_MODEL_COGNITION__NO_HAND_AUTHORED_CONTROLLER_GRAPH__FIRST_CAUSAL_FAILURE_DEFINES_NEXT_SUBCAPABILITY"
 }
