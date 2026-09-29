@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_H005_UBUNTU_DIRECT_SURFACE_QUALIFICATION_V1",
+  "evidence_id": "H005-UBUNTU-DIRECT-SURFACE-QUALIFICATION-20260929-V1",
+  "validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-005",
+  "public_repo": "moxnixmdj/verification-capsule-runner",
+  "run_id": 36605313689,
+  "job_id": 109532719913,
+  "run_attempt": 1,
+  "conclusion": "REJECTED_BEFORE_H005_START",
+  "setup_step": "PASS",
+  "first_failed_predicate": "ARCHITECTURE_ALL_CONTENTS_REQUIRED",
+  "exact_error": "CONTENTS_ALL_METADATA_MISSING",
+  "observations": {
+    "ubuntu_release": "24.04",
+    "apt_file_fetched_architecture_contents": true,
+    "observed_architecture": "amd64",
+    "contents_all_target": false,
+    "h005_runner_invoked": false,
+    "h005_start_created": false,
+    "h005_result_created": false,
+    "heldout_payload_generated": false,
+    "producer_candidate_probed": false,
+    "candidate_binary_executed": false
+  },
+  "classification": "EXECUTION_SURFACE_INCOMPATIBLE_WITH_FROZEN_H005_REQUIREMENTS",
+  "h005_freshness": {
+    "state": "UNSPENT",
+    "execution_count": 0
+  },
+  "frozen_gate_mutation_authorized": false,
+  "required_next_action": "RECONCILE_H005_AS_BLOCKED_UNSPENT__DO_NOT_WEAKEN_OR_MUTATE_FROZEN_GATE__FREEZE_NEW_ORTHOGONAL_GATE_ON_REALIZABLE_SURFACE",
+  "incremental_spend_usd": 0
+}
