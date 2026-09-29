@@ -8,8 +8,8 @@
   "capability_target": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
   "probe_id": null,
   "causal_blocker": "PLAIN_GOAL_FAILED_TO_GROUND_EXISTING_BOUND_CAPABILITIES_AND_FELL_THROUGH_TO_IRRELEVANT_EXTERNAL_DISCOVERY",
-  "action_kind": "GENERIC_REPAIR",
-  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1::PLAIN_GOAL_FAILED_TO_GROUND_EXISTING_BOUND_CAPABILITIES_AND_FELL_THROUGH_TO_IRRELEVANT_EXTERNAL_DISCOVERY::GENERIC_REPAIR",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1::PLAIN_GOAL_FAILED_TO_GROUND_EXISTING_BOUND_CAPABILITIES_AND_FELL_THROUGH_TO_IRRELEVANT_EXTERNAL_DISCOVERY::REAL_CAPABILITY_ACQUISITION",
   "expected_parent_frontier_change": "Acquire a generic model-independent plain-goal grounding route that maps required operations, entities, constraints, and output contracts to semantically compatible already-bound Brain capabilities before external supplier discovery.",
   "highest_leverage_now": true,
   "prior_work_checked": [
@@ -21,8 +21,8 @@
   ],
   "evidence_presence_classification": "CAPABILITY_FAILED",
   "probe_specific": false,
-  "generic_repair_from_single_probe": true,
-  "orthogonal_recurrence_count": 1,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
   "precommitted_acceptance_gate_exception": false,
   "probe_specific_literals": [],
   "stop_condition": "Implement only the smallest generic existing-capability grounding repair; prove compiler behavior with deterministic regressions; then execute one fresh non-serialization real task and one materially distinct fresh-reuse task before any acquisition claim. Never replay spent serialization run 36644374149.",
@@ -66,7 +66,7 @@
       "surviving_gap": "Generic semantic grounding of plain-goal operations/entities/constraints/output contracts onto existing bound registry capabilities with ambiguity preservation."
     },
     "obs_blocker": {
-      "intrinsic_or_path_specific": "Generic compiler-routing omission proven by one fresh parent task; the exact supplier names are incidental.",
+      "intrinsic_or_path_specific": "Generic parent-capability grounding gap localized from a fresh real task; this action acquires the canonical subcapability rather than repairing a synthetic probe.",
       "delete_bypass_substitute_options": [
         "DELETE parent plain-goal compilation: invalid because parent capability requires ordinary goal intake.",
         "BYPASS with hand-authored controller actions or typed decision input: invalid because it hides the cognition gap.",
