@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "EXECUTE-XAPIAN-APT-E2E-HELDOUT-003-ONCE-POST136-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
+  "causal_blocker": "XAPIAN_APT_E2E_HELDOUT_003_REMAINS_UNSPENT_AFTER_MERGED_PR129_PROVIDER_NEUTRAL_ADMISSION_REPAIR__PARENT_CAPABILITY_INTEGRATION_NOT_YET_TERMINALLY_ADJUDICATED",
+  "action_kind": "FRESH_HELDOUT_EXECUTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::XAPIAN_APT_E2E_HELDOUT_003_REMAINS_UNSPENT_AFTER_MERGED_PR129_PROVIDER_NEUTRAL_ADMISSION_REPAIR__PARENT_CAPABILITY_INTEGRATION_NOT_YET_TERMINALLY_ADJUDICATED::FRESH_HELDOUT_EXECUTION",
+  "expected_parent_frontier_change": "Execute the already-frozen HELDOUT-003 exactly once on one qualified hard-zero-spend remote Debian-family carrier using exact frozen bytes and merged PR129 runtime, capture the first terminal result, and immediately reconcile the parent TOOL_DISCOVERY_SELECTION_AND_LEARNING frontier before any repair, replay, promotion, or new capability lane.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR128 frozen XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003 specification",
+    "merged PR129 provider-neutral score-scale-safe APT admission repair",
+    "merged PR135 action-intent lease-guard hardening",
+    "merged PR136 post-PR129 repair-consumption reconciliation",
+    "canonical ACTIVE_GOAL_HIERARCHY_V1 current execution-due state",
+    "canonical FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1 current execution-due frontier",
+    "canonical EXECUTOR_POLICY_V1",
+    "quarantined PR132/PR133 execution-lane evidence and stale-snapshot/redeploy incidents",
+    "prepared carrier branch carrier/heldout003-exact-5fa5571d-20260929 with effective diff limited to Dockerfile and heldout003_carrier.sh",
+    "quarantined PR139 temporary executor-unavailability overclaim"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": true,
+  "probe_specific_literals": [],
+  "probe_budget_usage": {
+    "generic_repairs_used_before_execution": 1,
+    "max_generic_repairs_from_single_probe": 1,
+    "fresh_execution_count": 0,
+    "same_case_replay_allowed": false
+  },
+  "stop_condition": "After trusted blocker-lease/drift guard PASS on this exact intent-only head, attest exactly one carrier against EXECUTOR_POLICY_V1 and frozen HELDOUT-003 preflight, execute once, capture the first terminal result, then RECONCILE_FRONTIER. Do not use Railway redeploy, create a second carrier, replay after start, make a second runtime repair, use Val Town, or use the user laptop.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "execution_constraints": {
+    "incremental_spend_usd": 0,
+    "hard_zero_spend": true,
+    "user_laptop_forbidden": true,
+    "val_town_forbidden": true,
+    "exact_one_remote_carrier": true,
+    "railway_redeploy_primitive_forbidden": true,
+    "replay_forbidden_after_start": true
+  }
+}
