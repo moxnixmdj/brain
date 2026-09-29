@@ -1,0 +1,90 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_FRONTIER_CORRECTION_RECONCILIATION_V1",
+  "reconciliation_id": "PR111-OMITTED-UPSTREAM-RESIDUAL-20260929",
+  "status": "CORRECTION_SUPPORTED__TOOL_LEARNING_RESELECTED__NO_RUNTIME_MUTATION",
+  "source_main": "d22f5012df9a32e073e0bed8fe7da7af4a60441b",
+  "superseded_selection": {
+    "capability": "MULTI_TOOL_ORCHESTRATION_AND_PLANNING",
+    "reason_selected": "high leverage and substantial existing planner/fanout/conditional/join/composition evidence",
+    "reason_deferred_now": "PR111 comparison omitted a concrete already-proven upstream integration break with lower apparent time-to-information and broad reuse leverage",
+    "evidence_preserved": true,
+    "deferred_gate": "RUNTIME_DEPENDENT_DAG_ORCHESTRATION_HELDOUT_DESIGN__UNSPENT"
+  },
+  "reselected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "exact_blocker": "DISCOVERY_TO_APT_ACQUISITION_CANDIDATE_CONTRACT_COMPATIBILITY__VERIFIED_XAPIAN_APT_CANDIDATES_ARE_DROPPED_BY_LEGACY_SOURCE_AND_SCORE_ASSUMPTIONS__DOWNSTREAM_MATCHED_TERMS_VERIFIER_ADMISSION_IS_ALSO_INCOMPATIBLE",
+  "exact_source_evidence": {
+    "discovery_runtime": {
+      "path": "canonical/runtime/capability_discovery.py",
+      "git_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
+      "producer_contract": {
+        "discovery_source": "APT_FULL_METADATA_XAPIAN",
+        "binding_kind": "apt",
+        "matched_terms": []
+      }
+    },
+    "supplier_router": {
+      "path": "canonical/runtime/auto_capability_acquisition.py",
+      "git_blob": "fc80ede8225cc51dac77be6d41aa2a1c757c6ee8",
+      "fact": "already routes binding_kind=apt to apt_cli"
+    },
+    "apt_acquisition": {
+      "path": "canonical/runtime/auto_apt_cli_acquisition.py",
+      "git_blob": "786f7de7df853cfaec2826f9471942b001e7eadc",
+      "first_hard_drop": "requires discovery_source == APT_CATALOG",
+      "additional_contract_risk": "requires legacy absolute score >= 12 although Xapian exposes a different raw relevance-weight scale"
+    },
+    "independent_verifier": {
+      "path": "canonical/runtime/verify_pending_cli_binding.py",
+      "git_blob": "8ec4da92080e885a15266389c0318688e6408d43",
+      "downstream_drop": "requires len(matched_terms) >= 2 while inherited full-metadata candidates emit []"
+    }
+  },
+  "prior_verified_win": {
+    "validation_id": "DEBIAN-FULL-METADATA-XAPIAN-HELDOUT-VALIDATION-005",
+    "authoritative_deployment": "805a36d4-04cf-4938-bfac-74d29418081f",
+    "supplier_recall": 1,
+    "top20_recall": 1,
+    "wall_s": 16.233238,
+    "freshness": "SPENT__NO_REPLAY",
+    "scope_limit": "proves supplier retrieval on frozen gate; does not prove acquisition, contract inference, producer execution, or independent semantic verification"
+  },
+  "leverage_comparison": {
+    "upstream_integration_residual": {
+      "observed_failure": "DETERMINISTIC_STATIC_PRODUCER_CONSUMER_CONTRACT_BREAK",
+      "capability_gain_if_closed": "HIGH__turns verified supplier discovery into input for already-built probe/contract/execute/verify pipeline",
+      "time_to_information": "LOW__first failure is a local interface admission rule; downstream incompatibility already localized",
+      "reuse_leverage": "VERY_HIGH__prerequisite for open-ended acquisition of newly discovered APT CLI capabilities"
+    },
+    "orchestration_fresh_adjudication": {
+      "observed_failure": "NONE_YET__fresh composed proof missing",
+      "capability_gain_if_passed": "HIGH__promotes an already demonstrated multi-tool composition route",
+      "time_to_information": "LOW_TO_MEDIUM__requires freezing and spending a fresh compound execution gate",
+      "reuse_leverage": "VERY_HIGH"
+    },
+    "decision": "RESELECT_UPSTREAM_TOOL_LEARNING_RESIDUAL_FIRST",
+    "rationale": "Known deterministic broken prerequisite plus smaller repair surface yields higher expected verified capability gain per wall-clock than spending a fresh gate to adjudicate a route whose component behaviors already have multiple successful real-work traces."
+  },
+  "repair_authority": {
+    "authorized": true,
+    "scope": "ONE_MINIMAL_GENERIC_INTERFACE_REPAIR",
+    "requirements": [
+      "preserve provenance rather than relabel APT_FULL_METADATA_XAPIAN as APT_CATALOG",
+      "use stable binding_kind=apt and verified executable/package evidence instead of source-name special cases",
+      "do not apply a legacy absolute lexical-score threshold to Xapian raw weights without a source-independent calibrated contract",
+      "preserve independent-verifier selection requirements without fabricating matched_terms",
+      "test on fresh orthogonal end-to-end tool-learning work after focused non-held-out regression"
+    ],
+    "forbidden": [
+      "HELDOUT-005 replay",
+      "package hints",
+      "task-specific literals",
+      "new discovery/ranking tuning before this interface seam is tested",
+      "orchestration fresh-gate spend before this upstream residual is terminally reconciled"
+    ]
+  },
+  "runtime_mutations": 0,
+  "incremental_spend_usd": 0,
+  "user_laptop_used": false,
+  "val_town_used": false,
+  "next_action": "ONE_MINIMAL_GENERIC_DISCOVERY_TO_ACQUISITION_INTERFACE_REPAIR__CONSUME_BINDING_KIND_AND_VERIFIED_EVIDENCE_WITHOUT_LEGACY_SOURCE_OR_SCORE_SCALE_COUPLING__PRESERVE_DOWNSTREAM_VERIFIER_CONTRACT__THEN_FRESH_ORTHOGONAL_END_TO_END_GATE__RECONCILE"
+}
