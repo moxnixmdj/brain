@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - verify/pr89-independent-promotion-v1-20260929
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -34,7 +37,7 @@ jobs:
           test "$(git hash-object canonical/experiments/run_debian_full_metadata_xapian_heldout_validation_005.py)" = "3ab3a57ad1b428e2a5a65cdbe2279c7db2332781"
 
           python3 - <<'PY'
-          import json, pathlib
+          import json, pathlib, re
           root=pathlib.Path(".")
           rec=json.loads((root/"canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json").read_text())
           intent=json.loads((root/"canonical/action_intents/2026-09-29_DEBIAN_FULL_METADATA_XAPIAN_BATCH_CONTENTS_REPAIR_V1.json").read_text())
@@ -60,10 +63,8 @@ jobs:
           assert intent["governance_change"] is False
           assert intent["weakens_existing_guard"] is False
           runtime=(root/"canonical/runtime/capability_discovery.py").read_text().lower()
-          for heldout_literal in ("yq","hyperfine"):
-              assert heldout_literal not in runtime
-          # Avoid substring false positives for "parallel"/"rsync" by checking tokenized source.
-          import re
+          assert "yq" not in runtime
+          assert "hyperfine" not in runtime
           tokens=set(re.findall(r"[a-z0-9_]+", runtime))
           assert "parallel" not in tokens
           assert "rsync" not in tokens
