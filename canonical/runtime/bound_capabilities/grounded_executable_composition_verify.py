@@ -48,6 +48,8 @@ def verify(goal,composition,grounding,registry):
         return False,"CLAUSE_COUNT_MISMATCH"
     if not isinstance(problem,dict) or problem.get("schema")!="PROJECT_BRAIN_GROUNDED_CAPABILITY_PROBLEM_V1":
         return False,"PROBLEM_INVALID"
+    if problem.get("restrict_inherited_bound_capabilities") is not True:
+        return False,"GROUNDING_SCOPE_NOT_RESTRICTED"
 
     caps=problem.get("capabilities")
     if not isinstance(caps,list) or not caps:
