@@ -53,12 +53,31 @@ Description-en: long capability description
 def test_xapian_tags_rescue_opaque_capability_role():
     pytest.importorskip("xapian")
     d=load_module()
-    records=[{"name":"opaque-role-tool","description":"general sound processing utility that converts, transforms, and processes audio data through a command-line workflow","short_description":"general sound processing utility","tags":"interface::commandline, role::program, use::converting, works-with::audio, works-with-format::wav, works-with-format::flac","version":"1","archive_sha256":None}]
+    records=[
+        {
+            "name":"opaque-role-tool",
+            "description":"general sound processing utility that converts, transforms, and processes audio data through a command-line workflow",
+            "short_description":"general sound processing utility",
+            "tags":"interface::commandline, role::program, use::converting, works-with::audio, works-with-format::wav, works-with-format::flac",
+            "version":"1","archive_sha256":None,
+        }
+    ]
     for i in range(30):
-        records.append({"name":f"audio-decoy-{i}","description":"audio FLAC WAV playback files and recordings","short_description":"audio FLAC WAV playback files and recordings","tags":"role::program, use::playing, works-with::audio","version":"1","archive_sha256":None})
+        records.append({
+            "name":f"audio-decoy-{i}",
+            "description":"audio FLAC WAV playback files and recordings",
+            "short_description":"audio FLAC WAV playback files and recordings",
+            "tags":"role::program, use::playing, works-with::audio",
+            "version":"1","archive_sha256":None,
+        })
     d._APT_FULL_METADATA_CACHE=records
-    d._APT_EXECUTABLE_OWNERS_CACHE={x["name"]:[f"/usr/bin/{x['name']}"] for x in records}
-    out=d._search_apt_packages_full_metadata("Convert a WAV audio recording into FLAC audio.",limit=20)
+    d._APT_EXECUTABLE_OWNERS_CACHE={
+        x["name"]:[f"/usr/bin/{x['name']}"] for x in records
+    }
+    out=d._search_apt_packages_full_metadata(
+        "Convert a WAV audio recording into FLAC audio.",
+        limit=20,
+    )
     names=[x["name"] for x in out["candidates"]]
     assert "opaque-role-tool" in names[:20]
     cand=next(x for x in out["candidates"] if x["name"]=="opaque-role-tool")
