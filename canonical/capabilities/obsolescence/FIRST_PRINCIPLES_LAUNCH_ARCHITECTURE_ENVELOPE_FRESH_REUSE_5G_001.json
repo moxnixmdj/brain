@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRESH_REUSE_EVIDENCE_V1",
   "reuse_id": "FIRST-PRINCIPLES-LAUNCH-ARCHITECTURE-ENVELOPE-FRESH-REUSE-5G-001",
-  "status": "PASS",
+  "status": "PASS_SUPPORTING_TOOL_REUSE__NOT_FRONTIER_FRESH_REUSE",
   "capability_id": "FIRST_PRINCIPLES_LAUNCH_ARCHITECTURE_ENVELOPE_V1",
   "rediscovery_performed": false,
   "external_research_performed": false,
@@ -52,8 +52,11 @@
     "Average kinetic-energy throughput is unchanged by accelerator g-load for fixed mass flow and exit speed.",
     "Reducing 30 g to 5 g multiplies guideway length and transit time by 6.",
     "At 100 Mt/year the 5 g case has about 5.75 pods simultaneously in the guideway, so low-g cargo creates a materially different sequencing/fault-containment problem.",
-    "A single universal accelerator optimized for both rugged 30 g cargo and fragile 5 g cargo is not automatically the best architecture; separate lanes/classes remain a live design option."
+    "A single universal accelerator optimized for both rugged 30 g cargo and fragile 5 g cargo is not automatically the best architecture; separate lanes/classes remain a live design option.",
+    "This changed-parameter launch case remains in the same domain and therefore cannot count as fresh reuse of the broader frontier capability."
   ],
-  "fresh_reuse_verdict": "PASS__CAPABILITY_REUSED_ON_MATERIALLY_DIFFERENT_REAL_CONSTRAINT_WITHOUT_REDISCOVERY",
-  "incremental_spend_usd": 0
+  "fresh_reuse_verdict": "PASS_SAME_DOMAIN_TOOL_REUSE_ONLY__DOES_NOT_SATISFY_CROSS_DOMAIN_FRONTIER_CAPABILITY_REUSE",
+  "incremental_spend_usd": 0,
+  "frontier_capability_credit": false,
+  "frontier_capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1"
 }
