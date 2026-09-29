@@ -7,10 +7,10 @@
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
   "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
-  "causal_blocker": "XAPIAN_ROUTE_SUBRECORD_STILL_COMMANDS_ALREADY_MERGED_PR129_ADMISSION_REPAIR__ACTIVE_QUEUE_SUBRECORD_CONTRADICTS_EXECUTION_DUE_FRONTIER",
+  "causal_blocker": "POST_PR129_PRESENT_TENSE_FRONTIER_FIELDS_STILL_CLAIM_ADMISSION_REPAIR_PENDING__CONTRADICT_EXECUTION_DUE_CANONICAL_STATE",
   "action_kind": "RECONCILE_FRONTIER",
-  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::XAPIAN_ROUTE_SUBRECORD_STILL_COMMANDS_ALREADY_MERGED_PR129_ADMISSION_REPAIR__ACTIVE_QUEUE_SUBRECORD_CONTRADICTS_EXECUTION_DUE_FRONTIER::RECONCILE_FRONTIER",
-  "expected_parent_frontier_change": "Make the immediate-frontier objective and inherited Xapian-route next_action agree with merged PR129 and merged PR136: provider-neutral admission repair is complete, HELDOUT-003 remains UNSPENT, and exactly one fresh HELDOUT-003 execution followed by first-result reconciliation is the only next capability-changing action.",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::POST_PR129_PRESENT_TENSE_FRONTIER_FIELDS_STILL_CLAIM_ADMISSION_REPAIR_PENDING__CONTRADICT_EXECUTION_DUE_CANONICAL_STATE::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Make all three stale present-tense frontier fields agree with merged PR129 and merged PR136: inherited-route status records provider-neutral APT admission as merged; immediate-frontier objective requires exactly one frozen HELDOUT-003 execution; inherited-route next_action requires that same one-shot execution followed by first-result reconciliation.",
   "highest_leverage_now": true,
   "prior_work_checked": [
     "merged PR129 provider-neutral APT admission repair",
@@ -18,7 +18,8 @@
     "merged PR135 action-intent guard hardening",
     "current main a178254126ad7a09cdf48dee172a728ba27bccdc pointer/hierarchy/immediate frontier",
     "current canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json inherited Xapian route subrecord",
-    "closed PR140 execution lease preserved as pre-reconciliation evidence only"
+    "closed PR140 execution lease preserved as pre-reconciliation evidence only",
+    "current canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json inherited_route.status"
   ],
   "evidence_presence_classification": "SUPERSEDED_BY_NEWER_CANONICAL_STATE",
   "probe_specific": false,
@@ -26,7 +27,7 @@
   "orthogonal_recurrence_count": 0,
   "precommitted_acceptance_gate_exception": false,
   "probe_specific_literals": [],
-  "stop_condition": "After only the two stale queue strings are reconciled to the already-true post-PR129/post-PR136 state, stop. Do not mutate runtime, frozen gate, evaluator, carrier, or held-out evidence. Recreate one execution lease from exact final main and guard it before any HELDOUT-003 start.",
+  "stop_condition": "After exactly three stale present-tense fields are reconciled to the already-true post-PR129/post-PR136 state (hierarchy inherited_route.status, queue immediate_frontier.objective, queue inherited-route next_action), stop. Do not mutate runtime, frozen gate, evaluator, carrier, or held-out evidence. Recreate one execution lease from exact final main and guard it before any HELDOUT-003 start.",
   "governance_change": false,
   "weakens_existing_guard": false
 }
