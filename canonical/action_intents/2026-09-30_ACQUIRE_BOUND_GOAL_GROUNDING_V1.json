@@ -1,0 +1,334 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-MODEL-INDEPENDENT-BOUND-GOAL-GROUNDING-V1-20260930",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+  "probe_id": null,
+  "causal_blocker": "PLAIN_GOAL_FAILED_TO_GROUND_EXISTING_BOUND_CAPABILITIES_AND_FELL_THROUGH_TO_IRRELEVANT_EXTERNAL_DISCOVERY",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1::PLAIN_GOAL_FAILED_TO_GROUND_EXISTING_BOUND_CAPABILITIES_AND_FELL_THROUGH_TO_IRRELEVANT_EXTERNAL_DISCOVERY::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Acquire a reusable model-independent grounding capability that maps plain goals to all semantically justified already-bound Brain capabilities before external discovery, with auditable match evidence and fail-closed ambiguity handling.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Merged PR246 localized the current grounding subcapability from one spent fresh parent task; serialization replay is forbidden.",
+    "Closed stale PR249 completed a route race and selected repair/reuse of goal_compiler + semantic_authorities over Attempto APE, Lark, textX, or supplier-ranking repair.",
+    "Current goal_compiler already has conservative decompose_goal(), generic _score(), _compile_single_goal(), and _compile_compound_goal().",
+    "Current semantic_authorities already has independent registry_effect_lexical_v1 and compiler_score_v1.",
+    "Current external check: spaCy blank pipeline provides rule-based tokenizer/matcher without pretrained components; Unified Planning/HTN and Fast Downward require task/problem formulations; DriftNARS requires structured DriftScript/Narsese. None removes bound-registry semantic grounding faster than reusing existing Brain code."
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 1,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Implement only generic candidate-set grounding over the existing bound capability registry plus deterministic verification/tests. Do not replay or encode literals from the spent serialization task. Prove on one fresh real grounding task and fresh reuse on a materially distinct task; stop after capability package evidence is produced.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "f4abfcdd5e44f83e2c591b22817f39ec0e0800b3",
+    "real_outcome": "Let Brain recognize and justify all already-bound capabilities relevant to a plain goal before any supplier discovery, without using a model or prematurely choosing one capability.",
+    "required_capability": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+    "obs_goal": {
+      "real_outcome": "Acquire generic existing-registry grounding, not solve the spent serialization task.",
+      "proxy_goals_deleted": [
+        "Replay or tune against FRESH-PARENT-SERIALIZATION-DECISION-20260930-001",
+        "Build a general parser or reasoning engine",
+        "Repair external supplier ranking",
+        "Hand-author controller actions",
+        "Use a language model for semantic matching"
+      ],
+      "surviving_necessity": "A plain multi-capability objective currently falls through to external discovery even when relevant verified capabilities already exist in the bound registry."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/goal_compiler.py",
+        "canonical/runtime/semantic_authorities.py",
+        "canonical/runtime/capability_planner.py",
+        "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+        "existing compiler and semantic-authority tests"
+      ],
+      "external_existing_routes_checked": [
+        "Attempto APE controlled English",
+        "Lark",
+        "textX",
+        "spaCy blank rule-based Matcher",
+        "Unified Planning / HTN",
+        "Fast Downward",
+        "DriftNARS"
+      ],
+      "capability_work_deleted": [
+        "No new model or model artifact",
+        "No parser framework dependency",
+        "No new planner",
+        "No downstream supplier-ranking change",
+        "No serialization-specific handler"
+      ],
+      "surviving_gap": "Generic candidate-set semantic grounding of a whole plain goal against already verified bound capabilities, with enough evidence to distinguish legitimate multiple candidates from weak/no matches."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic single-winner semantic grounding limitation. Current _compile_single_goal chooses one winner or fails ambiguity; multi-alternative goals need a justified candidate set before decision/planning.",
+      "delete_bypass_substitute_options": [
+        "DELETE grounding: invalid because parent capability requires ordinary goal intake and existing-capability reuse.",
+        "BYPASS with explicit capability IDs/controller actions: invalid as capability proof.",
+        "SUBSTITUTE APE/Lark/textX/spaCy: syntax/token engines still need Brain registry semantics.",
+        "SUBSTITUTE Unified Planning/Fast Downward/DriftNARS: useful after structured task/belief formulation, not a replacement for grounding.",
+        "REUSE existing Brain tokenization/scoring/registry semantics and add a candidate-set grounding primitive: survives."
+      ],
+      "surviving_causal_blocker": "NO_GENERIC_BOUND_CAPABILITY_CANDIDATE_SET_GROUNDING_BEFORE_EXTERNAL_DISCOVERY"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_EXISTING_BRAIN_SCORE_AND_REGISTRY_TO_BUILD_FAIL_CLOSED_CANDIDATE_SET_GROUNDING",
+        "SPACY_BLANK_RULE_MATCHER_PLUS_BRAIN_REGISTRY",
+        "ATTEMPTO_OR_LARK_OR_TEXTX_CONTROLLED_GRAMMAR",
+        "HTN_PDDL_OR_NARS_AFTER_MANUAL_FORMULATION"
+      ],
+      "losing_routes_reason": "External alternatives add dependencies or require the same semantic mapping. Existing Brain already has deterministic tokenization, scoring, registry contracts, and two independent semantic authorities; the missing behavior is returning a justified set rather than forcing one winner.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Deterministic regressions are necessary for fail-closed semantics: multiple justified candidates must be preserved; weak/generic lexical overlap must not ground; unrelated goals must abstain; exact match evidence must be auditable. Real-task proof and fresh reuse are additionally required."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "External supplier discovery whenever existing-bound grounding produces a sufficient candidate set",
+        "Any parser-framework integration for this subcapability"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "bound-registry lexical/effect matching",
+        "multi-candidate preservation",
+        "grounding provenance"
+      ],
+      "fresh_reuse_plan": "Prove candidate-set grounding on one fresh real objective unrelated to serialization, then fresh-reuse the same route on a materially different objective. Do not use the spent serialization objective."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse PR249 route race rather than repeat it",
+        "Reuse current semantic_authorities and goal_compiler scoring",
+        "Reuse public GitHub Actions carrier qualified by run 36644374149",
+        "Stop external framework search because all surviving alternatives retain the semantic mapping boundary"
+      ],
+      "search_stop_decision": "Existing Brain candidate-set grounding is the smallest route and no discovered external alternative removes semantic mapping with less integration or stronger verification.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Refreshed after PR246 merge using inherited code inspection plus current official docs for rule-based spaCy, Unified Planning/HTN, Fast Downward, and DriftNARS."
+    },
+    "routes_considered": [
+      "REUSE_EXISTING_BRAIN_SCORE_AND_REGISTRY_TO_BUILD_FAIL_CLOSED_CANDIDATE_SET_GROUNDING",
+      "SPACY_BLANK_RULE_MATCHER_PLUS_BRAIN_REGISTRY",
+      "ATTEMPTO_OR_LARK_OR_TEXTX_CONTROLLED_GRAMMAR",
+      "HTN_PDDL_OR_NARS_AFTER_MANUAL_FORMULATION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "SPENT_SERIALIZATION_TASK_REPLAY",
+      "MODEL_BACKED_GROUNDING",
+      "NEW_PARSER_FRAMEWORK",
+      "SUPPLIER_RANKING_TUNING"
+    ],
+    "selected_surviving_route": "REUSE_EXISTING_BRAIN_SCORE_AND_REGISTRY_TO_BUILD_FAIL_CLOSED_CANDIDATE_SET_GROUNDING",
+    "why_selected_route_is_fastest_sufficient": "It adds no dependency, reuses already-tested deterministic semantics, targets the exact localized gap, and can be independently verified with transparent match evidence before any fresh parent execution.",
+    "expected_parent_level_state_change": "Acquire a reusable model-independent grounding capability that maps plain goals to all semantically justified already-bound Brain capabilities before external discovery, with auditable match evidence and fail-closed ambiguity handling.",
+    "stop_condition": "Implement only generic candidate-set grounding over the existing bound capability registry plus deterministic verification/tests. Do not replay or encode literals from the spent serialization task. Prove on one fresh real grounding task and fresh reuse on a materially distinct task; stop after capability package evidence is produced.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-29T23:25:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "EXISTING_GOAL_COMPILER_PLUS_SEMANTIC_AUTHORITIES",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "merged PR246 terminal reconciliation",
+          "closed PR249 route race",
+          "canonical/runtime/goal_compiler.py",
+          "canonical/runtime/semantic_authorities.py",
+          "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://spacy.io/usage/rule-based-matching/",
+          "https://unified-planning.readthedocs.io/en/latest/api/model/htn/index.html",
+          "https://www.fast-downward.org/latest/documentation/",
+          "https://github.com/seamus-brady/DriftNARS"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/explosion/spaCy",
+          "https://github.com/aiplan4eu/unified-planning",
+          "https://github.com/aibasel/downward",
+          "https://github.com/seamus-brady/DriftNARS"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Fresh 2026-09-29 search for model-independent rule-based grounding, HTN/planning, and symbolic goal reasoning"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "model-independent plain goal semantic grounding to existing capability registry multiple candidates"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "spaCy blank matcher Unified Planning Fast Downward DriftNARS deterministic grounding planning"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "rule based token matching candidate set capability grounding versus controlled grammar HTN"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 current deterministic semantic matching planning libraries without pretrained model"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "BRAIN_EXISTING_SCORE_REGISTRY_CANDIDATE_SET",
+          "evidence": [
+            "Existing _score/_tokens/provides/keywords semantics and independent semantic authorities already operate over verified bound registry."
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE code inspection current main",
+            "BRAIN_INHERITED prior compiler regressions"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "INDEPENDENT_VERIFIER"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Keeps existing fail-closed verified-registry semantics and can preserve multiple candidates instead of forcing a winner.",
+            "CAPABILITY_STRENGTH": "Directly solves existing-bound semantic grounding, the active target.",
+            "WALL_CLOCK": "Small local delta with no install or framework integration.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Reuses current deterministic registry and scorer contracts.",
+            "VERIFIABILITY": "Transparent token/effect evidence and independent regression oracle."
+          }
+        },
+        {
+          "route": "SPACY_BLANK_RULE_MATCHER",
+          "evidence": [
+            "spaCy supports blank language/tokenizer and rule-based Matcher/PhraseMatcher without pretrained components."
+          ],
+          "qualification_evidence": [
+            "https://spacy.io/usage/rule-based-matching/",
+            "https://spacy.io/usage/models"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Reliable token/pattern engine but rules still require Brain capability semantics.",
+            "CAPABILITY_STRENGTH": "Can improve token segmentation/matching, not semantic registry grounding by itself.",
+            "WALL_CLOCK": "Adds package integration before solving the same mapping problem.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Mature library.",
+            "VERIFIABILITY": "High for token patterns; grounding semantics still local."
+          }
+        },
+        {
+          "route": "HTN_PDDL_NARS_STRUCTURED_REASONERS",
+          "evidence": [
+            "Unified Planning/Fast Downward require tasks/PDDL; DriftNARS expects structured DriftScript/Narsese beliefs/goals."
+          ],
+          "qualification_evidence": [
+            "https://unified-planning.readthedocs.io/en/latest/api/model/htn/index.html",
+            "https://www.fast-downward.org/latest/documentation/",
+            "https://github.com/seamus-brady/DriftNARS"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Strong once a structured domain/task representation exists.",
+            "CAPABILITY_STRENGTH": "Adds planning/inference downstream, but does not map ordinary goal text to existing Brain capability records.",
+            "WALL_CLOCK": "Requires integration plus formulation schema.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Mature or directly inspectable symbolic systems.",
+            "VERIFIABILITY": "Excellent downstream; active grounding gap remains."
+          }
+        }
+      ],
+      "negative_search_summary": "No discovered model-free external route grounds ordinary technical goal text into Brain's existing verified capability registry faster or with less semantic machinery than reusing Brain's existing scorer and authorities.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_EXISTING_BRAIN_SCORE_AND_REGISTRY_TO_BUILD_FAIL_CLOSED_CANDIDATE_SET_GROUNDING",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-29T23:25:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_EXISTING_BRAIN_SCORE_AND_REGISTRY_TO_BUILD_FAIL_CLOSED_CANDIDATE_SET_GROUNDING",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "CURRENT_BRAIN_GOAL_COMPILER_SEMANTIC_AUTHORITIES_AND_BOUND_REGISTRY",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T23:25:00Z",
+            "evidence": [
+              "DIRECT_PROBE current main f4abfcdd5e44f83e2c591b22817f39ec0e0800b3 inspected through GitHub"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T23:19:18Z",
+            "evidence": [
+              "DIRECT_PROBE public run 36644374149 completed on hosted runner"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
