@@ -506,26 +506,12 @@
       "residual_recomputation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_POST_PR96_INTERFACE_RECOMPUTATION_V1.json"
     },
     "post_pr96_tool_learning_frontier_recompute": {
-      "status": "RESIDUAL_GAP_LOCALIZED__FOCUSED_STATIC_PROBE_FROZEN",
+      "status": "RESIDUAL_GAP_VERIFIED",
       "canonical_base": "db298bb4363266ef9e91ec9ec114b5f1c7bcf1fd",
       "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_POST_PR96_INTERFACE_RECOMPUTATION_V1.json",
-      "probe_id": "APT-XAPIAN-ACQUISITION-INTEGRATION-DELTA-001",
-      "probe_manifest": "canonical/experiments/APT_XAPIAN_ACQUISITION_INTEGRATION_DELTA_001.json",
       "inherited_discovery_runtime_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
-      "blocker": "VERIFIED_APT_FULL_METADATA_XAPIAN_CANDIDATES_ARE_DROPPED_BEFORE_APT_CLI_PROBE_BY_LEGACY_APT_CATALOG_ONLY_SOURCE_ADMISSION",
-      "next_action": "ONE_GENERIC_DISCOVERY_TO_APT_ACQUISITION_ADMISSION_REPAIR__ADMIT_BY_STABLE_APT_BINDING_CONTRACT__RUN_FOCUSED_INTEGRATION_DELTA_ONCE__RECONCILE",
-      "deferred_hypotheses": [
-        "XAPIAN_SCORE_SCALE_COMPATIBILITY__DO_NOT_CHANGE_UNLESS_CAUSALLY_OBSERVED_AFTER_SOURCE_ADMISSION"
-      ],
-      "heldout_005_replay_forbidden": true
-    },
-    "post_pr96_tool_learning_frontier": {
-      "status": "RESIDUAL_RECOMPUTED",
-      "pr96_merge_commit": "db298bb4363266ef9e91ec9ec114b5f1c7bcf1fd",
-      "inherited_runtime_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
-      "first_residual_code_path": "canonical/runtime/auto_apt_cli_acquisition.py::_viable_candidates",
-      "observed_contract_mismatch": "capability_discovery.search_apt_packages now returns APT_FULL_METADATA_XAPIAN, while _viable_candidates admits only APT_CATALOG",
-      "downstream_reuse": "apt_cli_probe.probe + cli_contract_inference.infer_contract remain downstream and have not yet been reached by the inherited route",
+      "blocker": "APT_FULL_METADATA_XAPIAN_CANDIDATES_REACH_APT_ROUTING_BUT_ARE_DROPPED_BY_LEGACY_APT_CATALOG_ONLY_ADMISSION__LEGACY_ABSOLUTE_SCORE_THRESHOLD_NOT_PORTABLE_TO_XAPIAN",
+      "next_action": "FREEZE_FRESH_ORTHOGONAL_DISCOVERY_TO_EXECUTION_GATE__THEN_ONE_GENERIC_SOURCE_NEUTRAL_APT_CANDIDATE_ADMISSION_REPAIR__REUSE_EXISTING_CONTRACT_BIND_VERIFY_STACK__EXECUTE_ONCE__RECONCILE",
       "heldout_005_replay_forbidden": true
     }
   },
