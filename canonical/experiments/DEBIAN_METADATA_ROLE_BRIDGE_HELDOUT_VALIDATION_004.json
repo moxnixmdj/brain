@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_DEBIAN_METADATA_ROLE_BRIDGE_HELDOUT_VALIDATION_V1",
+  "validation_id": "DEBIAN-METADATA-ROLE-BRIDGE-HELDOUT-VALIDATION-004",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "status": "FROZEN_BEFORE_SECOND_SUCCESSOR_RUNTIME_MUTATION",
+  "provenance": {
+    "selected_after": "SEMANTIC_APT_CAPABILITY_HELDOUT_VALIDATION_003_TERMINAL_RECONCILIATION",
+    "selected_before_runtime_mutation": true,
+    "repository_search_precheck": "No prior Brain references found for nmap, pandoc, rsync, or espeak before freeze.",
+    "prior_spent_families_excluded": [
+      "tesseract-ocr",
+      "optipng",
+      "genisoimage",
+      "ffmpeg",
+      "qrencode",
+      "jq",
+      "sox",
+      "qpdf"
+    ]
+  },
+  "cases": [
+    {
+      "effect_id": "HELDOUT-NETWORK-SCAN-004",
+      "goal": "Discover which TCP ports are open on a remote host and report the reachable services.",
+      "oracle_families": [
+        "nmap"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-MARKUP-CONVERT-004",
+      "goal": "Convert a Markdown document into HTML from the command line while preserving the document structure.",
+      "oracle_families": [
+        "pandoc"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-DIR-SYNC-004",
+      "goal": "Synchronize a directory tree to another machine efficiently by transferring only the changed data.",
+      "oracle_families": [
+        "rsync"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-TEXT-SPEECH-004",
+      "goal": "Read plain text aloud using synthesized speech from a command-line program.",
+      "oracle_families": [
+        "espeak"
+      ]
+    }
+  ],
+  "acceptance": {
+    "heldout_oracle_family_recall_min": 0.75,
+    "heldout_top20_oracle_recall_min": 0.75,
+    "package_hints_forbidden": true,
+    "task_specific_literals_forbidden": true,
+    "hard_validation_wall_s": 240,
+    "incremental_spend_usd": 0
+  },
+  "execution_surface_requirements": {
+    "linux_family": "Complete Debian-family APT surface",
+    "apt_file_required": true,
+    "normal_apt_packages_metadata_required": true,
+    "architecture_all_contents_required": true,
+    "exact_runtime_bytes_required": true
+  },
+  "promotion_authorized": false
+}
