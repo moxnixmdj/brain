@@ -10,7 +10,7 @@
     "verified_real_tasks_completed": 3,
     "fresh_reuse_passes": 1,
     "frontier_dependencies_removed": 1,
-    "residual_gaps_localized": 4
+    "residual_gaps_localized": 5
   },
   "efficiency_since_epoch_start": {
     "capability_acquisition_wall_s_samples": [],
@@ -75,7 +75,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "EXECUTE_ONE_FRESH_CONSEQUENTIAL_PARENT_TASK_THROUGH_MODEL_INDEPENDENT_COMPOSED_STACK__VERIFY_END_TO_END__IF_PASS_COUNT_PARENT_FRESH_REUSE__IF_FAIL_LOCALIZE_FIRST_CAUSAL_GAP_ONLY",
+  "next_progress_event_target": "ACQUIRE_MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1_ON_FRESH_REAL_TASK__NO_SERIALIZATION_REPLAY__THEN_FRESH_REUSE_ON_DISTINCT_REAL_TASK",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -172,6 +172,22 @@
         "FRESH_REUSE_PASS",
         "FRONTIER_DEPENDENCY_REMOVED"
       ]
+    },
+    {
+      "event_id": "FRESH_PARENT_SERIALIZATION_DECISION_FIRST_CAUSAL_GAP_20260930",
+      "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+      "status": "PARENT_FRESH_TASK_FAIL__FIRST_CAUSAL_GAP_LOCALIZED__NO_CAPABILITY_CREDIT",
+      "evidence_path": "canonical/capabilities/obsolescence/FRESH_PARENT_SERIALIZATION_DECISION_TERMINAL_RECONCILIATION_20260930_V1.json",
+      "public_run_id": 36644374149,
+      "artifact_id": 11067706810,
+      "artifact_digest": "sha256:57c6a188f8027c2788f4e2c6991fa8066799a55fb40771f17be6072a819e71d7",
+      "parent_level_changes": [
+        "RESIDUAL_GAP_LOCALIZED"
+      ],
+      "residual_gap": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+      "model_dependency_count": 0,
+      "incremental_spend_usd": 0,
+      "same_task_replay_allowed": false
     }
   ],
   "active_frontier_accounting": {
