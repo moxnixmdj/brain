@@ -13,6 +13,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
 import urllib.parse
 import urllib.request
 
@@ -247,7 +248,7 @@ def _apt_query_variants(queries):
     return out
 
 
-def search_apt_packages(effect, limit=12):
+def _legacy_search_apt_packages(effect, limit=12):
     """Search the local Ubuntu/Debian package catalog without installing anything."""
     if not sys.platform.startswith("linux") or shutil.which("apt-cache") is None:
         return {
@@ -385,6 +386,357 @@ def search_apt_packages(effect, limit=12):
         "errors":errors,
         "binding_performed":False,
     }
+
+
+
+_APT_FULL_METADATA_CACHE=None
+_APT_XAPIAN_CACHE=None
+_APT_EXECUTABLE_OWNERS_CACHE=None
+
+
+def _parse_deb822_records(text):
+    records=[]
+    current={}
+    last_key=None
+    for raw in str(text or "").splitlines()+[""]:
+        if not raw.strip():
+            if current:
+                records.append(current)
+            current={}
+            last_key=None
+            continue
+        if raw[:1].isspace() and last_key:
+            current[last_key]=str(current.get(last_key) or "")+"\n"+raw[1:]
+            continue
+        if ":" not in raw:
+            continue
+        key,value=raw.split(":",1)
+        last_key=key.strip()
+        current[last_key]=value.lstrip()
+    return records
+
+
+def _apt_index_target_files(identifier=None, language=None):
+    if shutil.which("apt-get") is None:
+        return []
+    argv=["apt-get","indextargets","--format","$(FILENAME)"]
+    if identifier:
+        argv.append("Identifier: "+str(identifier))
+    if language:
+        argv.append("Language: "+str(language))
+    try:
+        p=subprocess.run(argv,text=True,capture_output=True,timeout=20)
+    except Exception:
+        return []
+    if p.returncode!=0:
+        return []
+    out=[]
+    for line in p.stdout.splitlines():
+        path=line.strip()
+        if path and path not in out:
+            out.append(path)
+    return out
+
+
+def _read_apt_index(path,timeout_s=30):
+    helper="/usr/lib/apt/apt-helper"
+    if not pathlib.Path(helper).exists():
+        return ""
+    try:
+        p=subprocess.run(
+            [helper,"cat-file",str(path)],
+            text=True,capture_output=True,timeout=timeout_s
+        )
+    except Exception:
+        return ""
+    return p.stdout if p.returncode==0 else ""
+
+
+def _apt_full_metadata_records():
+    """Join Debian Packages + Translation-en by Description-md5.
+
+    Minimal container images commonly disable Translation indexes to save bytes.
+    A faithful execution surface must acquire Translation-en before this runs.
+    """
+    global _APT_FULL_METADATA_CACHE
+    if _APT_FULL_METADATA_CACHE is not None:
+        return _APT_FULL_METADATA_CACHE
+    if shutil.which("apt-cache") is None:
+        _APT_FULL_METADATA_CACHE=[]
+        return _APT_FULL_METADATA_CACHE
+    try:
+        p=subprocess.run(
+            ["apt-cache","dumpavail"],
+            text=True,capture_output=True,timeout=35
+        )
+    except Exception:
+        _APT_FULL_METADATA_CACHE=[]
+        return _APT_FULL_METADATA_CACHE
+    if p.returncode!=0:
+        _APT_FULL_METADATA_CACHE=[]
+        return _APT_FULL_METADATA_CACHE
+
+    packages=_parse_deb822_records(p.stdout)
+    translation_by_md5={}
+    for path in _apt_index_target_files(identifier="Translations",language="en"):
+        text=_read_apt_index(path,timeout_s=30)
+        for rec in _parse_deb822_records(text):
+            key=str(rec.get("Description-md5") or "").strip().lower()
+            desc=str(rec.get("Description-en") or "").strip()
+            if key and desc and key not in translation_by_md5:
+                translation_by_md5[key]=desc
+
+    by_name={}
+    for rec in packages:
+        name=str(rec.get("Package") or "").strip()
+        if not name:
+            continue
+        md5=str(rec.get("Description-md5") or "").strip().lower()
+        short=str(rec.get("Description") or "").strip()
+        full=translation_by_md5.get(md5,short)
+        candidate={
+            "name":name,
+            "description":full,
+            "short_description":short,
+            "tags":str(rec.get("Tag") or "").strip(),
+            "version":str(rec.get("Version") or "").strip() or None,
+            "archive_sha256":str(rec.get("SHA256") or "").strip().lower() or None,
+            "description_md5":md5 or None,
+        }
+        prior=by_name.get(name)
+        if prior is None or len(full)>len(str(prior.get("description") or "")):
+            by_name[name]=candidate
+    _APT_FULL_METADATA_CACHE=list(by_name.values())
+    return _APT_FULL_METADATA_CACHE
+
+
+def _apt_xapian_index():
+    """Build one local relevance index from authoritative Debian metadata."""
+    global _APT_XAPIAN_CACHE
+    if _APT_XAPIAN_CACHE is not None:
+        return _APT_XAPIAN_CACHE
+    try:
+        import xapian
+    except Exception:
+        return None
+
+    records=_apt_full_metadata_records()
+    if not records:
+        return None
+    # A full English Translation index is the point of this route. Fail closed
+    # to the legacy search when the container stripped it.
+    if not any(
+        len(str(r.get("description") or ""))>len(str(r.get("short_description") or ""))+20
+        for r in records
+    ):
+        return None
+
+    path=tempfile.mkdtemp(prefix="project-brain-apt-xapian-")
+    db=xapian.WritableDatabase(path,xapian.DB_CREATE_OR_OVERWRITE)
+    stemmer=xapian.Stem("english")
+    tg=xapian.TermGenerator()
+    tg.set_stemmer(stemmer)
+    tg.set_stemming_strategy(xapian.TermGenerator.STEM_SOME)
+    for rec in records:
+        doc=xapian.Document()
+        tg.set_document(doc)
+        tg.index_text(str(rec["name"]),5)
+        tg.index_text(str(rec.get("description") or ""),1)
+        tag_text=re.sub(r"[:,-]+"," ",str(rec.get("tags") or ""))
+        if tag_text:
+            # Debian Tags encode role/use/interface/format semantics. Weight 4
+            # is below exact package naming but above unconstrained prose.
+            tg.index_text(tag_text,4)
+        doc.set_data(str(rec["name"]))
+        db.add_document(doc)
+    db.commit()
+
+    qp=xapian.QueryParser()
+    qp.set_database(db)
+    qp.set_stemmer(stemmer)
+    qp.set_stemming_strategy(xapian.QueryParser.STEM_SOME)
+    _APT_XAPIAN_CACHE={
+        "module":xapian,
+        "db":db,
+        "query_parser":qp,
+        "records":{r["name"]:r for r in records},
+        "path":path,
+    }
+    return _APT_XAPIAN_CACHE
+
+
+def _apt_contents_executable_owners():
+    """Map packages to /usr/bin executables with one pass per APT Contents file."""
+    global _APT_EXECUTABLE_OWNERS_CACHE
+    if _APT_EXECUTABLE_OWNERS_CACHE is not None:
+        return _APT_EXECUTABLE_OWNERS_CACHE
+
+    helper="/usr/lib/apt/apt-helper"
+    owners={}
+    if not pathlib.Path(helper).exists() or shutil.which("apt-get") is None:
+        _APT_EXECUTABLE_OWNERS_CACHE=owners
+        return owners
+
+    try:
+        p=subprocess.run(
+            ["apt-get","indextargets","--format","$(IDENTIFIER)\t$(FILENAME)"],
+            text=True,capture_output=True,timeout=20
+        )
+    except Exception:
+        _APT_EXECUTABLE_OWNERS_CACHE=owners
+        return owners
+    if p.returncode!=0:
+        _APT_EXECUTABLE_OWNERS_CACHE=owners
+        return owners
+
+    files=[]
+    for line in p.stdout.splitlines():
+        if "\t" not in line:
+            continue
+        identifier,path=line.split("\t",1)
+        if not identifier.startswith("Contents"):
+            continue
+        path=path.strip()
+        if path and path not in files:
+            files.append(path)
+
+    for path in files:
+        try:
+            proc=subprocess.Popen(
+                [helper,"cat-file",path],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.DEVNULL,
+                text=True,
+                errors="replace",
+            )
+        except Exception:
+            continue
+        try:
+            for line in proc.stdout or []:
+                line=line.rstrip("\n")
+                if not line:
+                    continue
+                try:
+                    filename,raw_owners=line.rsplit(None,1)
+                except ValueError:
+                    continue
+                normalized=filename.lstrip("/")
+                if not normalized.startswith("usr/bin/"):
+                    continue
+                executable="/"+normalized
+                for raw_owner in raw_owners.split(","):
+                    owner=raw_owner.strip().rsplit("/",1)[-1]
+                    owner=owner.split(":",1)[0]
+                    if not owner:
+                        continue
+                    bucket=owners.setdefault(owner,[])
+                    if executable not in bucket:
+                        bucket.append(executable)
+        finally:
+            if proc.stdout:
+                proc.stdout.close()
+            try:
+                proc.wait(timeout=10)
+            except Exception:
+                proc.kill()
+    _APT_EXECUTABLE_OWNERS_CACHE=owners
+    return owners
+
+
+def _search_apt_packages_full_metadata(effect,limit=12):
+    state=_apt_xapian_index()
+    if state is None:
+        return None
+    owners=_apt_contents_executable_owners()
+    if not owners:
+        return None
+
+    xapian=state["module"]
+    qp=state["query_parser"]
+    try:
+        query=qp.parse_query(str(effect))
+    except Exception:
+        return None
+    enquire=xapian.Enquire(state["db"])
+    enquire.set_query(query)
+    pool_size=max(100,min(300,max(1,int(limit))*6))
+    matches=enquire.get_mset(0,pool_size)
+
+    verified=[]
+    unverified=[]
+    for semantic_rank,match in enumerate(matches,1):
+        raw=match.document.get_data()
+        name=raw.decode("utf-8","replace") if isinstance(raw,bytes) else str(raw)
+        rec=state["records"].get(name) or {"name":name}
+        paths=sorted(set(owners.get(name) or []))
+        cand={
+            "discovery_source":"APT_FULL_METADATA_XAPIAN",
+            "name":name,
+            "description":str(rec.get("description") or ""),
+            "query":"DEBIAN_TRANSLATION_TAG_XAPIAN",
+            "matched_terms":[],
+            "score":float(match.weight),
+            "semantic_rank":semantic_rank,
+            "integration_friction":0,
+            "required_secret_count":0,
+            "required_environment_count":0,
+            "zero_cost_eligible":True,
+            "eligibility_status":(
+                "LOCAL_EXECUTABLE_OWNERSHIP_VERIFIED"
+                if paths else "LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED"
+            ),
+            "binding_kind":"apt",
+            "packages":[],
+            "remotes":[],
+            "version":rec.get("version"),
+            "archive_sha256":rec.get("archive_sha256"),
+            "debian_tags":str(rec.get("tags") or ""),
+        }
+        if paths:
+            cand["executable_semantic_evidence"]={
+                "command_paths":paths,
+                "semantic_source":"DEBIAN_TRANSLATION_EN_PLUS_TAGS_XAPIAN",
+                "acquisition_mode":"APT_CONTENTS_DIRECT_STREAM",
+            }
+            cand["evidence_tier"]="SEMANTIC_PACKAGE_EXECUTABLE_OWNERSHIP"
+            verified.append(cand)
+        else:
+            unverified.append(cand)
+
+    # Capability routing wants callable tools. Preserve Xapian relevance order
+    # inside the verified tier, then fill any remaining slots with metadata-only
+    # candidates for diagnostics.
+    ranked=(verified+unverified)[:max(1,min(int(limit),50))]
+    return {
+        "schema":"PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
+        "effect":effect,
+        "source":"APT_FULL_METADATA_XAPIAN",
+        "source_url":None,
+        "queries":effect_queries(effect),
+        "candidate_count":len(ranked),
+        "candidates":ranked,
+        "errors":[],
+        "binding_performed":False,
+        "metadata_route":{
+            "translation_en":True,
+            "debian_tags":True,
+            "xapian_bm25":True,
+            "contents_direct_stream":True,
+            "remote_manpages":False,
+        },
+    }
+
+
+def search_apt_packages(effect, limit=12):
+    """Prefer full Debian semantic metadata; retain the old path as fallback."""
+    if sys.platform.startswith("linux") and shutil.which("apt-cache") is not None:
+        try:
+            full=_search_apt_packages_full_metadata(effect,limit=limit)
+            if full is not None:
+                return full
+        except Exception:
+            pass
+    return _legacy_search_apt_packages(effect,limit=limit)
 
 
 def _requested_output_format_tokens(effect):
