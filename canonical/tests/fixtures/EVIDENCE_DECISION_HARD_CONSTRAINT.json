@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_TYPED_EVIDENCE_DECISION_TASK_V1",
+  "task_id": "synthetic_hard_constraint_precedence",
+  "target_claim": "synthetic_claim",
+  "evidence": [
+    {
+      "id": "support_signal",
+      "probability": 0.99,
+      "provenance": [
+        "synthetic:positive"
+      ]
+    },
+    {
+      "id": "contradiction_signal",
+      "probability": 0.01,
+      "provenance": [
+        "synthetic:negative"
+      ]
+    }
+  ],
+  "support_rules": [
+    {
+      "id": "support_rule",
+      "all_of": [
+        "support_signal"
+      ]
+    }
+  ],
+  "contradiction_rules": [
+    {
+      "id": "contra_rule",
+      "all_of": [
+        "contradiction_signal"
+      ]
+    }
+  ],
+  "hard_constraints": [
+    {
+      "id": "mandatory_gate",
+      "satisfied": false,
+      "failure_outcome": "REJECT",
+      "provenance": [
+        "synthetic:mandatory"
+      ]
+    }
+  ],
+  "policy": {
+    "accept_support_min": 0.8,
+    "accept_contradiction_max": 0.2,
+    "reject_contradiction_min": 0.8,
+    "reject_support_max": 0.2,
+    "minimum_margin": 0.5
+  }
+}
