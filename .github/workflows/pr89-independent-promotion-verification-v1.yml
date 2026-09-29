@@ -1,0 +1,104 @@
+name: PR89 Independent Promotion Verification V1
+
+on:
+  push:
+    branches:
+      - verify/pr89-independent-promotion-v1-20260929
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pr89-independent-verification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install verifier dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends python3-pytest python3-xapian >/dev/null
+
+      - name: Verify protected identities and promotion scope
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object canonical/runtime/capability_discovery.py)" = "b9e7423ab24bf2da98869b02d782e791a779892a"
+          test "$(git hash-object canonical/tests/test_debian_full_metadata_xapian.py)" = "4e8c43ddf32a10947462e36198ec957c2f23094f"
+          test "$(git hash-object canonical/tests/test_capability_discovery.py)" = "0b9bcd25cf4cea2ad1a410efd43f8f8b2f618f0a"
+          test "$(git hash-object canonical/experiments/DEBIAN_FULL_METADATA_XAPIAN_HELDOUT_VALIDATION_005.json)" = "82854b92b2253ba607ff5c521102c50ae49fd47d"
+          test "$(git hash-object canonical/experiments/run_debian_full_metadata_xapian_heldout_validation_005.py)" = "3ab3a57ad1b428e2a5a65cdbe2279c7db2332781"
+
+          python3 - <<'PY'
+          import json, pathlib
+          root=pathlib.Path(".")
+          rec=json.loads((root/"canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json").read_text())
+          intent=json.loads((root/"canonical/action_intents/2026-09-29_DEBIAN_FULL_METADATA_XAPIAN_BATCH_CONTENTS_REPAIR_V1.json").read_text())
+          r=rec["authoritative_first_execution"]["result"]
+          assert rec["effective_fresh_execution_count"] == 1
+          assert rec["freshness"] == "SPENT"
+          assert rec["same_case_replay_allowed"] is False
+          assert rec["promotion_authorized_by_gate"] is True
+          assert r["acceptance_gate_pass"] is True
+          assert r["heldout_oracle_family_recall"] == 1
+          assert r["heldout_top20_oracle_recall"] == 1
+          assert r["total_wall_s"] <= r["hard_validation_wall_s"]
+          assert r["candidate_packages_installed"] is False
+          assert r["candidate_binaries_executed"] is False
+          assert r["package_hints_used_by_runtime"] is False
+          assert r["runtime_mutated_by_validator"] is False
+          assert rec["authoritative_first_execution"]["pr_head"] == "48c53d0f1b2474c334fcfbb87bd6946c1dc850bb"
+          starts=[rec["authoritative_first_execution"]["execution_started_at"]]
+          starts += [x["execution_started_at"] for x in rec["replay_incidents"]["deployments"]]
+          assert starts[0] < min(starts[1:])
+          assert intent["action_kind"] == "GENERIC_REPAIR"
+          assert intent["probe_specific"] is False
+          assert intent["governance_change"] is False
+          assert intent["weakens_existing_guard"] is False
+          runtime=(root/"canonical/runtime/capability_discovery.py").read_text().lower()
+          for heldout_literal in ("yq","hyperfine"):
+              assert heldout_literal not in runtime
+          # Avoid substring false positives for "parallel"/"rsync" by checking tokenized source.
+          import re
+          tokens=set(re.findall(r"[a-z0-9_]+", runtime))
+          assert "parallel" not in tokens
+          assert "rsync" not in tokens
+          print("PR89_STATIC_VERIFICATION=PASS")
+          PY
+
+          python3 - <<'PY'
+          import subprocess
+          base="33d607338ebf300b00465ddb40a911bf87c3bc02"
+          target="63c8c38baf56c9cb0a34566ecaeaeb1dc5d5d002"
+          expected={
+            "canonical/action_intents/2026-09-29_DEBIAN_FULL_METADATA_XAPIAN_BATCH_CONTENTS_REPAIR_V1.json",
+            "canonical/capabilities/obsolescence/DEBIAN_FULL_METADATA_XAPIAN_REUSE_RESEARCH_V2.json",
+            "canonical/capabilities/obsolescence/HELDOUT005_POST_SPEND_REPLAY_INCIDENT_20260929_V1.json",
+            "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_004_TERMINAL_RECONCILIATION_V1.json",
+            "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
+            "canonical/experiments/DEBIAN_FULL_METADATA_XAPIAN_HELDOUT_VALIDATION_005.json",
+            "canonical/experiments/run_debian_full_metadata_xapian_heldout_validation_005.py",
+            "canonical/runtime/capability_discovery.py",
+            "canonical/tests/test_debian_full_metadata_xapian.py",
+          }
+          got=set(subprocess.check_output(["git","diff","--name-only",base,target],text=True).splitlines())
+          assert got == expected, (sorted(got-expected), sorted(expected-got))
+          assert not any(p.startswith("canonical/governance/") for p in got)
+          print("PR89_SCOPE_VERIFICATION=PASS")
+          PY
+
+      - name: Compile exact candidate and runner
+        run: |
+          python3 -m py_compile             canonical/runtime/capability_discovery.py             canonical/experiments/run_debian_full_metadata_xapian_heldout_validation_005.py
+
+      - name: Run focused regressions
+        run: |
+          python3 -m pytest -q             canonical/tests/test_capability_discovery.py             canonical/tests/test_debian_full_metadata_xapian.py
+
+      - name: Run canonical unittest discovery
+        run: |
+          python3 -m unittest discover -s canonical/tests -p 'test_*.py'
