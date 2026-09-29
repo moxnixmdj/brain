@@ -1,0 +1,375 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-MODEL-INDEPENDENT-EVIDENCE-DECISION-SYNTHESIS-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+  "probe_id": null,
+  "causal_blocker": "EXISTING_KNOWLEDGE_ASSESSMENT_HANDLES_AGREEMENT_CONFLICT_BUT_NOT_TYPED_MULTI_ALTERNATIVE_CONSTRAINT_AWARE_TERMINAL_DECISION_SYNTHESIS_WITH_AUDITABLE_TRACE",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1::EXISTING_KNOWLEDGE_ASSESSMENT_HANDLES_AGREEMENT_CONFLICT_BUT_NOT_TYPED_MULTI_ALTERNATIVE_CONSTRAINT_AWARE_TERMINAL_DECISION_SYNTHESIS_WITH_AUDITABLE_TRACE::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Add one model-free typed evidence-to-decision synthesis primitive that composes with existing Brain evidence machinery, then prove it on two materially distinct real decisions with independent verification and an auditable trace.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "canonical/capabilities/frontier/MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1.json",
+    "canonical/runtime/astra_runtime.py knowledge.consistency.assess and knowledge.support.materialize actions",
+    "canonical/runtime/capability_planner.py",
+    "canonical/runtime/goal_compiler.py",
+    "canonical/runtime/semantic_authorities.py",
+    "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+    "ASTRA-RUNTIME-CAPABILITY-GRAPH-PLANNER-001 completed in MODEL_INDEPENDENT_ACTION_PLAN mode",
+    "External route race: pyrepo-mcda, GAVEL, ERTool, OpenDecision, rule-engine and existing Brain composition"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after the smallest deterministic typed decision primitive is implemented, two materially distinct real decision tasks pass through the same route, outputs preserve conflicts/uncertainty and auditable trace, independent verification passes, and no model appears in the credited execution path; then reconcile and fresh-reuse into the parent frontier.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "16e9c8896cafa0461f4c8d31a18200c08a947437",
+    "real_outcome": "Brain can deterministically turn already-typed evidence, provenance, hard constraints, support/contradiction, and uncertainty into a terminal decision or explicit abstention with a reproducible trace and no model dependency.",
+    "required_capability": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+    "obs_goal": {
+      "real_outcome": "Acquire the current decomposed frontier subcapability directly rather than continuing model qualification or broad open-ended-reasoning work.",
+      "proxy_goals_deleted": [
+        "Run Qwen Task C",
+        "Debug private GitHub Actions quota",
+        "Adopt a general agent framework",
+        "Build software-repair-specific cognition",
+        "Solve arbitrary natural-language interpretation inside this target"
+      ],
+      "surviving_necessity": "Typed evidence-to-terminal-decision synthesis is the active canonical blocker and is explicitly scoped away from arbitrary-language interpretation and discovery."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "knowledge.consistency.assess",
+        "knowledge.support.materialize",
+        "knowledge.status.assert",
+        "capability_planner.py",
+        "goal_compiler.py",
+        "semantic_authorities.py"
+      ],
+      "external_existing_routes_checked": [
+        "pyrepo-mcda / TOPSIS-family MCDA",
+        "NHS GAVEL rule engine",
+        "ERTool evidential reasoning",
+        "zeroSteiner rule-engine",
+        "OpenDecision semantic decision engine"
+      ],
+      "capability_work_deleted": [
+        "No natural-language parser",
+        "No model-backed classifier",
+        "No new scheduler",
+        "No new carrier",
+        "No general-purpose rule language",
+        "No dependency-heavy MCDA framework"
+      ],
+      "surviving_gap": "Existing Brain components classify agreement/conflict and materialize identical supported values, but do not rank typed alternatives under hard constraints while preserving contradiction, uncertainty, abstention, and a complete decision trace."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Intrinsic missing composition primitive in the active model-independent synthesis path.",
+      "delete_bypass_substitute_options": [
+        "DELETE synthesis: invalid because parent capability requires terminal decision/answer formation.",
+        "BYPASS with model: forbidden by MODEL_NON_DEPENDENCE_LAW_V1 and trusted gate.",
+        "SUBSTITUTE MCDA library: ranks matrices but does not cover evidence provenance/conflict/hard unresolved constraints/stop semantics.",
+        "SUBSTITUTE rule engine: handles declarative rules but not evidence fusion and terminal uncertainty contract.",
+        "SUBSTITUTE OpenDecision: default semantic backend is a pretrained model and cannot earn credited cognition.",
+        "COMPOSE existing Brain evidence assessment with a minimal deterministic typed decision primitive: survives."
+      ],
+      "surviving_causal_blocker": "No reusable deterministic function currently converts typed multi-alternative evidence plus hard constraints into DECIDED, CONFLICTED, INSUFFICIENT, or NO_ADMISSIBLE_ALTERNATIVE with an auditable trace."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "COMPOSE_EXISTING_BRAIN_EVIDENCE_MACHINERY_WITH_MINIMAL_STDLIB_TYPED_DECISION_SYNTHESIS",
+        "BIND_EXTERNAL_ERTool_PLUS_RULE_ENGINE",
+        "BIND_MCDA_LIBRARY",
+        "BUILD_GENERAL_RULE_DSL"
+      ],
+      "losing_routes_reason": "External libraries each solve only a slice of the required contract and add dependencies/integration friction; the missing behavior is small enough to express directly over already-typed evidence using Python stdlib while reusing Brain provenance and verification machinery.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Unit/property regressions verify fail-closed invariants, while two real current decisions provide direct capability evidence: zero-spend execution-carrier selection and Click repair-route selection. Each result is independently recomputed from the typed input by a separate verifier path."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any model-backed evidence-to-final-answer route for credited cognition",
+        "Any plan to use Qwen/Ministral/Murakumo/Vireonix as the Brain's decision synthesizer",
+        "Generic finalization work that exists only because terminal synthesis was missing"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "hard-constraint filtering",
+        "support/contradiction aggregation",
+        "uncertainty/conflict preservation",
+        "deterministic stop/abstain decision",
+        "auditable inference trace"
+      ],
+      "fresh_reuse_plan": "Use the same primitive without code changes on a second materially distinct real decision, then compose it with the existing model-independent planner and evidence acquisition stack."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse current frontier decomposition",
+        "Reuse existing knowledge evidence schema concepts",
+        "Reuse capability graph/runtime/registry",
+        "Stop searching once external candidates were shown not to dominate the exact contract"
+      ],
+      "search_stop_decision": "The candidate space has been challenged across MCDA, rule engines, evidential reasoning, and semantic decision engines; none eliminates the small missing primitive without adding a model or more integration surface.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "COMPOSE_EXISTING_BRAIN_EVIDENCE_MACHINERY_WITH_MINIMAL_STDLIB_TYPED_DECISION_SYNTHESIS",
+      "BIND_EXTERNAL_ERTool_PLUS_RULE_ENGINE",
+      "BIND_MCDA_LIBRARY",
+      "BUILD_GENERAL_RULE_DSL"
+    ],
+    "deleted_or_bypassed_paths": [
+      "MODEL_BACKED_SYNTHESIS",
+      "QWEN_TASK_C",
+      "GENERAL_AGENT_FRAMEWORK",
+      "SOFTWARE_REPAIR_SPECIFIC_COGNITION"
+    ],
+    "selected_surviving_route": "COMPOSE_EXISTING_BRAIN_EVIDENCE_MACHINERY_WITH_MINIMAL_STDLIB_TYPED_DECISION_SYNTHESIS",
+    "why_selected_route_is_fastest_sufficient": "The active target already assumes evidence is typed. Brain owns provenance, consistency assessment, planning, execution, and verification. A small stdlib synthesis primitive closes only the missing relation/constraint/stop layer and can be verified on two live decisions immediately, avoiding dependency integration and any model.",
+    "expected_parent_level_state_change": "Add one model-free typed evidence-to-decision synthesis primitive that composes with existing Brain evidence machinery, then prove it on two materially distinct real decisions with independent verification and an auditable trace.",
+    "stop_condition": "Stop after the smallest deterministic typed decision primitive is implemented, two materially distinct real decision tasks pass through the same route, outputs preserve conflicts/uncertainty and auditable trace, independent verification passes, and no model appears in the credited execution path; then reconcile and fresh-reuse into the parent frontier.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-29T22:42:58Z",
+      "max_age_hours": 24,
+      "incumbent_route": "EXISTING_BRAIN_KNOWLEDGE_CONSISTENCY_PLUS_MATERIALIZATION",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/astra_runtime.py",
+          "canonical/runtime/capability_planner.py",
+          "canonical/runtime/goal_compiler.py",
+          "canonical/runtime/semantic_authorities.py",
+          "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://docs.github.com/en/actions/reference/runners/github-hosted-runners",
+          "https://git-scm.com/docs/git-clone"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/energyinpython/pyrepo-mcda",
+          "https://github.com/nhsengland/gavel",
+          "https://github.com/STYAI/ERTool",
+          "https://github.com/zeroSteiner/rule-engine",
+          "https://github.com/deepanwadhwa/OpenDecision"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Fresh 2026-09-29 search across deterministic MCDA, rule engines, evidential reasoning, and semantic decision engines"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "deterministic typed evidence support contradiction constraints uncertainty terminal decision audit trace"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Python evidence fusion MCDA rule engine decision confidence provenance"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "stdlib deterministic decision synthesis versus MCDA rule engine evidential reasoning"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 open source deterministic decision engine evidence fusion constraints confidence"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "COMPOSE_EXISTING_BRAIN_EVIDENCE_MACHINERY_WITH_MINIMAL_STDLIB_TYPED_DECISION_SYNTHESIS",
+          "evidence": [
+            "Existing Brain model-independent planner mission completed successfully.",
+            "Existing knowledge.consistency.assess already preserves evidence records and conflict status.",
+            "Target explicitly excludes arbitrary natural-language interpretation, shrinking the missing contract to typed evidence synthesis."
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: ASTRA-RUNTIME-CAPABILITY-GRAPH-PLANNER-001 completed MODEL_INDEPENDENT_ACTION_PLAN with planner_model_last null.",
+            "INDEPENDENT_VERIFIER: existing model-independence regression suite passes the deterministic controller path."
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "INDEPENDENT_VERIFIER"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Exact contract can fail closed on hard constraints, unresolved evidence, conflict, and insufficient support without semantic guessing.",
+            "CAPABILITY_STRENGTH": "Covers the active target's typed evidence-to-terminal-decision scope while preserving audit trace and abstention.",
+            "WALL_CLOCK": "Smallest implementation and immediate reuse of existing runtime/registry/planner.",
+            "INCREMENTAL_COST": "$0 and Python stdlib only.",
+            "RELIABILITY": "No external runtime dependency beyond the already-qualified execution substrate.",
+            "VERIFIABILITY": "Deterministic output can be independently recomputed and checked against exact typed inputs."
+          }
+        },
+        {
+          "route": "BIND_EXTERNAL_ERTool_PLUS_RULE_ENGINE",
+          "evidence": [
+            "ERTool provides multi-source evidential reasoning.",
+            "Rule engines provide deterministic declarative constraint evaluation."
+          ],
+          "qualification_evidence": [
+            "CODE_OR_PACKAGE_REGISTRY: https://github.com/STYAI/ERTool",
+            "CODE_OR_PACKAGE_REGISTRY: https://github.com/zeroSteiner/rule-engine"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Useful components but their composition still needs a custom provenance/conflict/terminal-stop contract.",
+            "CAPABILITY_STRENGTH": "Covers parts of fusion and rules, not the exact full target contract.",
+            "WALL_CLOCK": "Dependency integration and adapter verification add more work than the missing primitive.",
+            "INCREMENTAL_COST": "$0 software, but higher integration cost.",
+            "RELIABILITY": "Adds third-party dependency surfaces.",
+            "VERIFIABILITY": "Deterministic but still requires Brain-specific wrapper and independent verifier."
+          }
+        },
+        {
+          "route": "BIND_MCDA_LIBRARY",
+          "evidence": [
+            "pyrepo-mcda and pyDecision provide deterministic alternative ranking over numeric matrices."
+          ],
+          "qualification_evidence": [
+            "CODE_OR_PACKAGE_REGISTRY: https://github.com/energyinpython/pyrepo-mcda"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Ranking alone does not encode unresolved hard constraints, support/contradiction provenance, or abstention semantics.",
+            "CAPABILITY_STRENGTH": "Partial target coverage only.",
+            "WALL_CLOCK": "Fast to install but still needs substantial Brain-specific semantics around it.",
+            "INCREMENTAL_COST": "$0 software.",
+            "RELIABILITY": "Mature numerical methods but not the required epistemic contract.",
+            "VERIFIABILITY": "Numeric ranking is verifiable but insufficient for the target."
+          }
+        },
+        {
+          "route": "OPENDECISION_SEMANTIC_ENGINE",
+          "evidence": [
+            "OpenDecision exposes supports/contradicts/unknown/conflicted relations but uses pretrained classifier models as its default semantic backend."
+          ],
+          "qualification_evidence": [
+            "CODE_OR_PACKAGE_REGISTRY: https://github.com/deepanwadhwa/OpenDecision"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Semantically appealing, but model-backed relation inference cannot appear in credited cognition for this target.",
+            "CAPABILITY_STRENGTH": "Strong semantic relation surface but outside admissible architecture.",
+            "WALL_CLOCK": "Integration would be wasted because promotion credit would fail.",
+            "INCREMENTAL_COST": "Potentially local/$0 but uses model artifacts.",
+            "RELIABILITY": "Depends on pretrained model artifacts.",
+            "VERIFIABILITY": "Would violate the trusted model-independence gate regardless of task success."
+          }
+        }
+      ],
+      "negative_search_summary": "No external candidate dominates a small stdlib composition on the exact active contract; each either covers only a partial slice, adds avoidable dependency/integration surface, or violates model-independence.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "COMPOSE_EXISTING_BRAIN_EVIDENCE_MACHINERY_WITH_MINIMAL_STDLIB_TYPED_DECISION_SYNTHESIS",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-29T22:42:58Z",
+        "max_age_hours": 2,
+        "selected_route": "COMPOSE_EXISTING_BRAIN_EVIDENCE_MACHINERY_WITH_MINIMAL_STDLIB_TYPED_DECISION_SYNTHESIS",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_STANDARD_UBUNTU",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T22:04:38Z",
+            "evidence": [
+              "DIRECT_PROBE: verification-capsule-runner run 36637357927 acquired a standard hosted runner and executed checkout/setup steps.",
+              "OFFICIAL_PRIMARY: GitHub documents standard hosted runners for public repositories as free and unlimited."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "OFFICIAL_PRIMARY"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "PYTHON_STDLIB_RUNTIME",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "evidence": [
+              "BRAIN_INHERITED: existing model-independent Brain runtime and tests execute on Python without a model dependency."
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "BRAIN_REPOSITORY_WORKTREE",
+            "kind": "LOCAL_STORAGE",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "status": "READY",
+            "evidence": [
+              "BRAIN_INHERITED: candidate implementation, registry and task fixtures are repository-local."
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
