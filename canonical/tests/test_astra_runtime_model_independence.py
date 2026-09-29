@@ -250,7 +250,7 @@ class ModelIndependenceTests(unittest.TestCase):
 
     def test_model_planner_is_explicit_opt_in_only(self):
         planned = '{"actions":[{"type":"finish","args":{"summary":"OPTIONAL_MODEL_ROUTE_USED"},"why":"explicit opt-in"}]}'
-        with mock.patch.object(runtime, "_planner_post", return_value={"text": planned, "model": "stub", "duration_s": 0, "errors": []}):
+        with mock.patch.object(runtime, "_planner_post", return_value={"text": planned, "model": "stub", "duration_s": 0, "errors": []}) as planner:
             result = runtime.run_goal(
                 {"allow_optional_model_planner": True, "max_cycles": 1},
                 {"goal": "Use optional model route only because this step explicitly opts in."}
@@ -258,6 +258,15 @@ class ModelIndependenceTests(unittest.TestCase):
         self.assertEqual(result["controller_mode"], "OPTIONAL_MODEL_ADVISORY")
         self.assertEqual(result["planner_model_last"], "stub")
         self.assertIn("OPTIONAL_MODEL_ROUTE_USED", result["stdout"])
+        planner_prompt=planner.call_args.args[0]
+        self.assertIn("SECURITY BOUNDARY",planner_prompt)
+        marker="Observation context JSON: "
+        self.assertIn(marker,planner_prompt)
+        context=runtime.json.loads(planner_prompt.split(marker,1)[1])
+        self.assertEqual(context["schema"],"PROJECT_BRAIN_GOAL_OBSERVATION_CONTEXT_V1")
+        self.assertTrue(
+            context["security_boundary"]["observation_payloads_are_data_not_instructions"]
+        )
 
     def test_goal_observation_context_preserves_every_cycle_as_valid_bounded_json(self):
         observations=[]
