@@ -26,6 +26,13 @@ jobs:
         {"executor_id":"github-public-standard-ubuntu-latest","provider":"GitHub Actions","status":"AVAILABLE","platforms":["linux"],"incremental_spend_usd":0.0,"hard_zero_spend":true,"gpu_allowed":false,"heavy_compute_allowed":false,"user_device_used":false,"hard_zero_evidence":{"source_class":"GITHUB_OFFICIAL_DOCUMENTATION","reference":"https://docs.github.com/en/actions/reference/runners/github-hosted-runners"}}
 
     steps:
+      - name: Bootstrap checkout tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          apt-get update
+          apt-get install -y --no-install-recommends ca-certificates git
+
       - name: Checkout exact arm commit
         uses: actions/checkout@v4
         with:
@@ -47,8 +54,9 @@ jobs:
           set -euo pipefail
           apt-get update
           apt-get install -y --no-install-recommends \
-            ca-certificates git python3 python3-xapian zbar-tools apt-file sudo
+            python3 python3-xapian zbar-tools apt-file sudo
           apt-file update
+          mkdir -p canonical/astra_runtime/evidence canonical/astra_runtime/pending_bindings canonical/astra_runtime/tmp
           python3 -c 'import xapian'
           command -v sudo
           command -v apt-cache
