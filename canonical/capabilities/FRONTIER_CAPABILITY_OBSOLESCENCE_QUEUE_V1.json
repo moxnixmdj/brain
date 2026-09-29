@@ -70,14 +70,14 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "H005 is frozen fresh after the verified generic semantic-verifier admission repair. It is orthogonal to H004 in domain and execution surface. Before START, qualify the direct Ubuntu 24.04 public GitHub runner generically for full APT metadata/Xapian/Contents, zbar Code39 decoding support, and exact repaired runtime closure. If and only if qualification passes, execute H005 exactly once and reconcile the first terminal result. H004 remains permanently no-replay.",
+    "objective": "H005 is terminal BLOCKED before START because the frozen direct Ubuntu surface lacks a distinct Contents-all target. Preserve H005 unspent and immutable; do not weaken its acceptance criteria. Freeze a new orthogonal gate using a realizable second dimension, preferably a different external verification mechanism on the already-qualified Debian carrier.",
     "selection_metric": "CORRECTNESS_FIRST__THEN_VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK_WITH_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "H005_FROZEN_UNSPENT__DIRECT_UBUNTU_24_04_PUBLIC_CARRIER_REQUIRES_GENERIC_SURFACE_QUALIFICATION_BEFORE_START",
-    "evidence_path": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_005.json",
+    "exact_blocker": "H005_BLOCKED_UNSPENT__UBUNTU_DIRECT_SURFACE_LACKS_REQUIRED_CONTENTS_ALL__FROZEN_GATE_MUST_NOT_BE_WEAKENED",
+    "evidence_path": "canonical/capabilities/obsolescence/H005_UBUNTU_DIRECT_SURFACE_QUALIFICATION_20260929_V1.json",
     "repair_status": "PR129_RUNTIME_REPAIR_PRESERVED__H004_EXACT_RUNNER_REUSED__PUBLIC_CAPSULE_22_FILES_SEALED__H003_IMPORT_CLOSURE_FAILURE_CLASS_CORRECTED__NO_RUNTIME_OR_EVALUATOR_REPAIR_REQUIRED",
-    "prohibition": "NO_H005_START_BEFORE_GENERIC_UBUNTU_SURFACE_QUALIFICATION__NO_H004_REPLAY__NO_PACKAGE_HINTS_TO_RUNTIME__NO_RUNTIME_MUTATION_AFTER_FREEZE__NO_DUPLICATE_H005_EXECUTION",
+    "prohibition": "NO_H005_START__NO_H005_GATE_MUTATION__NO_CONTENTS_ALL_REQUIREMENT_WEAKENING__NO_H004_REPLAY",
     "frozen_gate": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_004.json",
-    "next_action": "QUALIFY_DIRECT_UBUNTU_24_04_PUBLIC_GITHUB_SURFACE_GENERICALLY__REQUIRE_PACKAGES_TRANSLATION_TAGS_CONTENTS_XAPIAN_ZBAR_CODE39_SUPPORT_AND_EXACT_RUNTIME_CLOSURE__NO_H005_START__IF_PASS_EXECUTE_H005_EXACTLY_ONCE",
+    "next_action": "CLOSE_H005_AS_BLOCKED_UNSPENT__FREEZE_NEW_ORTHOGONAL_GATE_WITH_REALIZABLE_SECOND_DIMENSION__PREFER_DIFFERENT_EXTERNAL_VERIFICATION_MECHANISM_ON_ALREADY_QUALIFIED_DEBIAN_CARRIER",
     "merged_repair_source_pr": 129,
     "merged_repair_runtime_path": "canonical/runtime/auto_apt_cli_acquisition.py",
     "spent_gate": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_003.json",
@@ -262,7 +262,7 @@
     "next_action": "FREEZE_NEW_ORTHOGONAL_FRESH_TOOL_LEARNING_GATE_AGAINST_REPAIRED_RUNTIME__NO_H004_REPLAY__THEN_EXECUTE_NEW_GATE_EXACTLY_ONCE_ON_QUALIFIED_PUBLIC_CARRIER"
   },
   "h005_fresh_gate_v1": {
-    "status": "FROZEN_UNSPENT",
+    "status": "BLOCKED_UNSPENT__EXECUTION_SURFACE_INCOMPATIBLE",
     "mission_path": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_005.json",
     "runner_path": "canonical/experiments/run_xapian_apt_e2e_integration_heldout_005.py",
     "mission_blob": "d6690ec5839c1b7621be3ae113b60919b55e30c7",
@@ -272,6 +272,7 @@
       "execution_surface"
     ],
     "execution_count": 0,
-    "next_action": "QUALIFY_DIRECT_UBUNTU_24_04_PUBLIC_GITHUB_SURFACE_GENERICALLY__REQUIRE_PACKAGES_TRANSLATION_TAGS_CONTENTS_XAPIAN_ZBAR_CODE39_SUPPORT_AND_EXACT_RUNTIME_CLOSURE__NO_H005_START__IF_PASS_EXECUTE_H005_EXACTLY_ONCE"
+    "next_action": "CLOSE_H005_AS_BLOCKED_UNSPENT__FREEZE_NEW_ORTHOGONAL_GATE_WITH_REALIZABLE_SECOND_DIMENSION__PREFER_DIFFERENT_EXTERNAL_VERIFICATION_MECHANISM_ON_ALREADY_QUALIFIED_DEBIAN_CARRIER",
+    "blocker": "UBUNTU_DIRECT_SURFACE_LACKS_DISTINCT_CONTENTS_ALL_TARGET"
   }
 }
