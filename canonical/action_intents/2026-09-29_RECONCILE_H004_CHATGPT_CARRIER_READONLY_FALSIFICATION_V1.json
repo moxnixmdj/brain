@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-H004-CHATGPT-CARRIER-READONLY-FALSIFICATION-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "causal_blocker": "HELDOUT_004_FROZEN_UNSPENT__EXECUTION_SURFACE_SOURCE_TREE_FIDELITY_DIVERGENCE_PROVEN__EXACT_HISTORICAL_MECHANISM_UNPROVEN__GENERIC_CARRIER_FIDELITY_CORRECTION_AND_HARD_ZERO_QUALIFICATION_REQUIRED",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::HELDOUT_004_FROZEN_UNSPENT__EXECUTION_SURFACE_SOURCE_TREE_FIDELITY_DIVERGENCE_PROVEN__EXACT_HISTORICAL_MECHANISM_UNPROVEN__GENERIC_CARRIER_FIDELITY_CORRECTION_AND_HARD_ZERO_QUALIFICATION_REQUIRED::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Using only read-only observations on the current ChatGPT Linux execution surface, determine whether it can satisfy the frozen HELDOUT-004 Debian APT/Xapian/QR carrier surface now. If absent APT metadata/package tools plus read-only DNS resolution failure prove the required connected surface is unavailable, preserve exactly one carrier-falsification record, keep HELDOUT-004 UNSPENT, and advance the frontier to a separate guarded qualification of the strongest already-discovered accountless/cardless hard-zero connected Linux route. Do not provision or mutate any execution environment in this reconciliation.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR176 corrected carrier evidence boundary and preserved HELDOUT-004 UNSPENT",
+    "closed quarantined PR178, whose apt-get update attempt exceeded its read-only intent and is not admissible for merge",
+    "PR20 verified ChatGPT Linux exact private-repo transport at zero incremental spend but did not prove current connected APT surface",
+    "PR35 and PR45 content-addressed source materialization/execution mechanisms",
+    "Railway official free-vm page and 2026-09-25 changelog: ssh railway.new, no account/card, unclaimed compute free; discovered only, not provisioned"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Use read-only diagnostics only: OS/tool presence, filesystem listing/counts, Python import probe, and DNS resolution probe. Do not run apt-get update/install, curl/wget downloads, transport project source, provision Railway or any host, invoke HELDOUT-004 or create START/RESULT, replay HELDOUT-003, access Sprite, use Val Town or the user laptop, or incur paid/unproven spend. Preserve one evidence record and reconcile only the frontier descriptors supported by those observations.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
