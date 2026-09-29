@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-XAPIAN-ROUTE-POST-PR129-NEXT-ACTION-V2",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
+  "causal_blocker": "XAPIAN_ROUTE_SUBRECORD_STILL_COMMANDS_ALREADY_MERGED_PR129_ADMISSION_REPAIR__ACTIVE_QUEUE_SUBRECORD_CONTRADICTS_EXECUTION_DUE_FRONTIER",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::XAPIAN_ROUTE_SUBRECORD_STILL_COMMANDS_ALREADY_MERGED_PR129_ADMISSION_REPAIR__ACTIVE_QUEUE_SUBRECORD_CONTRADICTS_EXECUTION_DUE_FRONTIER::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Make the immediate-frontier objective and inherited Xapian-route next_action agree with merged PR129 and PR136: provider-neutral admission repair is complete, HELDOUT-003 remains UNSPENT, and exactly one fresh HELDOUT-003 execution followed by first-result reconciliation is the only next capability-changing action.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR129 provider-neutral APT admission repair",
+    "merged PR136 canonical repair-consumption reconciliation",
+    "merged PR135 action-intent guard hardening",
+    "current canonical pointer/hierarchy/immediate frontier on main a178254126ad7a09cdf48dee172a728ba27bccdc",
+    "quarantined PR147 preserved only as evidence of the stale two-string contradiction and an intent-mutation process failure"
+  ],
+  "evidence_presence_classification": "CANONICAL_SUBRECORD_CONTRADICTION_CONFIRMED__NO_RUNTIME_EVIDENCE_REQUIRED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "After changing only the stale immediate-frontier objective and inherited Xapian-route next_action to the already-true post-PR129/post-PR136 execution-due state, stop. Do not mutate this intent, runtime, frozen gate, evaluator, carrier, or held-out evidence. Recreate one execution lease from exact final main and guard it before any HELDOUT-003 start.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
