@@ -171,7 +171,7 @@
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "PROBE_CENTRIC_OPERATING_MODE_SUPERSEDED__REAL_CAPABILITY_ACQUISITION_MISSION_NOT_YET_SELECTED",
+    "critical_blocker": "FIRST_NEW_EPOCH_REAL_OUTPUT_NOT_YET_PRODUCED__RECURSIVE_OBS_MUST_SELECT_FASTEST_SUFFICIENT_REAL_TASK_ROUTE",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -547,7 +547,8 @@
     "critical_path_pre_action_gate": "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V4.json",
     "real_capability_acquisition_mission_path": "canonical/tasks/REAL_CAPABILITY_ACQUISITION_MISSION_V1.json",
     "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
-    "recursive_obs_receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V1.json"
+    "recursive_obs_receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V1.json",
+    "recursive_obs_status": "MANDATORY_PRE_ACTION_CONTROL_LOOP__GENERATION_BOUND__FAIL_CLOSED"
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
@@ -714,15 +715,16 @@
     ],
     "hard_incremental_spend_usd": 0,
     "process": [
-      "RECOVER_FRONTIER_CAPABILITY_SURFACE",
-      "DEFINE_REAL_USEFUL_CAPABILITY",
-      "ESTABLISH_FRONTIER_BAR",
-      "SEARCH_HIDDEN_WAREHOUSE",
-      "RACE_BEST_ROUTES",
-      "EXECUTE_REAL_WORK",
-      "VERIFY_EQUAL_OR_BETTER",
-      "OBSOLETE_OR_LOCALIZE_RESIDUAL_GAP",
+      "SELECT_REAL_CONSEQUENTIAL_TASK",
+      "RUN_GENERATION_BOUND_RECURSIVE_OBS",
+      "DEFINE_SURVIVING_REAL_USEFUL_CAPABILITY",
+      "SEARCH_HIDDEN_WAREHOUSE_AND_EXISTING_ROUTES",
+      "APPLY_DELETE_BYPASS_REUSE_SUBSTITUTE_COMPOSE_REPAIR_BUILD",
+      "EXECUTE_FASTEST_SUFFICIENT_SURVIVING_ROUTE",
+      "VERIFY_REAL_EFFECT_INDEPENDENTLY",
       "INHERIT_WINNER",
+      "OBS_INHERITED_SYSTEM_AND_DELETE_REDUNDANT_WORK",
+      "FRESH_REUSE",
       "RECOMPUTE_AND_REPEAT"
     ],
     "predicates_role": "SUBORDINATE_EVIDENCE_ONLY",
