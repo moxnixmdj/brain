@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-H004-CHATGPT-LINUX-CARRIER-READONLY-QUALIFICATION-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "causal_blocker": "HELDOUT_004_FROZEN_UNSPENT__EXECUTION_SURFACE_SOURCE_TREE_FIDELITY_DIVERGENCE_PROVEN__EXACT_HISTORICAL_MECHANISM_UNPROVEN__GENERIC_CARRIER_FIDELITY_CORRECTION_AND_HARD_ZERO_QUALIFICATION_REQUIRED",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::HELDOUT_004_FROZEN_UNSPENT__EXECUTION_SURFACE_SOURCE_TREE_FIDELITY_DIVERGENCE_PROVEN__EXACT_HISTORICAL_MECHANISM_UNPROVEN__GENERIC_CARRIER_FIDELITY_CORRECTION_AND_HARD_ZERO_QUALIFICATION_REQUIRED::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Preserve only the clean independently reproduced read-only carrier fact: the current built-in ChatGPT Debian 13/trixie Linux surface fails the first H004-required surface predicate because /var/lib/apt/lists has zero regular files; the same snapshot also lacks apt-file, python3-xapian/xapian tooling and zbarimg and cannot resolve deb.debian.org. Quarantine PR178 as non-authoritative history because it recorded conflicting first-failure labels and an apt-get update attempt despite its stop-on-first-failure/read-only intent. HELDOUT-004 remains frozen UNSPENT. Advance only to qualification of the next already-discovered connected remote Linux route with independently supportable hard-zero spend plus exact content-addressed source/path/hash/import preflight before any H004 START.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR176 corrected the carrier historical-mechanism overclaim and kept HELDOUT-004 UNSPENT",
+    "PR178 immutable intent receipt correctly required read-only diagnostics and stop on first failed carrier predicate",
+    "PR178 later history contains three overlapping carrier evidence files with inconsistent first-failure labels and one apt_update_attempted=true record",
+    "independent read-only ChatGPT Linux probe: Debian 13 trixie, uid 0, apt lists regular-file count 0, apt-file absent, xapian tooling/package absent, zbarimg absent, sudo -n true PASS, deb.debian.org DNS FAIL, HTTPS resolution FAIL",
+    "independent read-only probe text SHA-256 34947e62bee9248ac311c10979b79c25b6a3d5a1769523b816cc0d48cd5b13c3",
+    "PR20 exact Git-blob private-repo reconstruction route, PR35 content-addressed materialization, and PR45 content-addressed execution remain reusable designs",
+    "canonical executor policy requires AVAILABLE, compatible platform, incremental_spend_usd=0, and hard_zero_spend=true"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Reconcile truth only. Add one clean carrier-qualification evidence record from the independent read-only snapshot and update only pointer/hierarchy/queue authority needed to record this carrier rejection and the next carrier-qualification class. Do not execute HELDOUT-004, replay HELDOUT-003, run apt-get update/install, transport project source, mutate capability runtime/evaluator/frozen gate/executor policy, access Sprites, provision Railway or another host, use Val Town, use the user laptop, or incur paid/unproven-cost infrastructure in this lane.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
