@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-H004-CURRENT-CARRIER-SURFACE-EXHAUSTED-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "causal_blocker": "HELDOUT_004_FROZEN_UNSPENT__CURRENT_CONNECTED_AND_DIRECTLY_CALLABLE_HARD_ZERO_REMOTE_LINUX_CARRIER_SURFACE_EXHAUSTED__WAIT_FOR_MATERIAL_EXECUTOR_CAPABILITY_CHANGE_OR_NEW_HARD_ZERO_DIRECT_COMMAND_SURFACE",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::HELDOUT_004_FROZEN_UNSPENT__CURRENT_CONNECTED_AND_DIRECTLY_CALLABLE_HARD_ZERO_REMOTE_LINUX_CARRIER_SURFACE_EXHAUSTED__WAIT_FOR_MATERIAL_EXECUTOR_CAPABILITY_CHANGE_OR_NEW_HARD_ZERO_DIRECT_COMMAND_SURFACE::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Stop repeated provider search across unchanged connected surfaces; preserve H004 unspent and resume only when a directly callable executor or account-specific hard-zero predicate materially changes.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR190 Railway anonymous transport rejection",
+    "PR193 iximiuz access-path rejection",
+    "current connected plugin catalog",
+    "live account-state checks for DigitalOcean, Render, Sprites",
+    "built-in ChatGPT Linux transport qualification",
+    "Replit, Camber, Vercel command-surface inspection"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "No additional provider retry/search on unchanged surfaces. Preserve HELDOUT-004 UNSPENT. Resume only on material connected-tool capability, transport, billing-proof, or executor availability change.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
