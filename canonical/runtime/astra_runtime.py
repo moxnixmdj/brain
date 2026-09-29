@@ -832,6 +832,7 @@ def _knowledge_source_identity(url,json_path):
 
 
 def _goal_action(action):
+    authorize_action_from_env(ROOT, action)
     typ=action.get("type")
     args=action.get("args") or {}
     if typ=="list_tree":
@@ -5546,6 +5547,7 @@ def run_goal(step, mission):
     raise Blocker("GOAL_MAX_CYCLES_WITHOUT_FINISH")
 
 def execute_step(step, prior_results=None, mission=None):
+    authorize_step_from_env(ROOT, step)
     adapter=step["adapter"]
     if adapter=="shell":
         return run_shell(step, prior_results)
@@ -5584,6 +5586,7 @@ def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("mission")
     a=ap.parse_args()
+    require_runtime_context(ROOT)
     mission_path,mission_rel=_canonical_mission_path(a.mission)
     mission=readj(mission_path)
     mid=mission["mission_id"]
