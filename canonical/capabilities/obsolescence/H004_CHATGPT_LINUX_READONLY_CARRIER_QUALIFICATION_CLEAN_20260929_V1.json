@@ -70,5 +70,16 @@
     "NO_VAL_TOWN",
     "NO_USER_LAPTOP",
     "NO_PAID_OR_UNPROVEN_COST_INFRASTRUCTURE"
-  ]
+  ],
+  "source_guard": {
+    "pr": 178,
+    "guarded_intent_head": "657435e028636d3c895712aeebdd0569e9bbfd6c",
+    "authorization": "READ_ONLY_NON_HELDOUT_CARRIER_DIAGNOSTICS_ONLY__STOP_ON_FIRST_FAILED_PREDICATE",
+    "later_pr_history": "QUARANTINED__POST_SNAPSHOT_APT_UPDATE_SCOPE_OVERRUN_AND_DUPLICATE_LABELS_EXCLUDED"
+  },
+  "preserved_read_only_snapshot": {
+    "text_sha256": "34947e62bee9248ac311c10979b79c25b6a3d5a1769523b816cc0d48cd5b13c3",
+    "decisive_observation": "APT_PACKAGES_METADATA_FILES=0",
+    "authority_boundary": "ONLY_FIRST_REQUIRED_FAILURE_USED_FOR_ADJUDICATION"
+  }
 }
