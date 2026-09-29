@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "BOOTSTRAP-TRUSTED-GUARD-FOR-RECURSIVE-OBS-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "REAL_WORLD_CAPABILITY_ACQUISITION_AND_REUSE",
+  "probe_id": null,
+  "causal_blocker": "TRUSTED_BASE_VALIDATOR_CANNOT_AUTHORIZE_ITS_OWN_RECURSIVE_OBS_UPGRADE",
+  "action_kind": "GOVERNANCE_GUARD",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::REAL_WORLD_CAPABILITY_ACQUISITION_AND_REUSE::TRUSTED_BASE_VALIDATOR_CANNOT_AUTHORIZE_ITS_OWN_RECURSIVE_OBS_UPGRADE::GOVERNANCE_GUARD",
+  "expected_parent_frontier_change": "Upgrade only the trusted anti-drift validator so it can enforce generation-bound recursive OBS receipts after the recursive OBS law is introduced, while preserving the trusted-base pull_request_target architecture and existing blocker-lease, mission-lock, and anti-drift protections.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR209 trusted Drift Immunity Guard failed because pull_request_target correctly executes the validator copied from current main",
+    "current main validator supports GOVERNANCE_GUARD as a no-probe action",
+    "no change to workflow trust model is required"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Change only trusted validator logic required for recursive OBS governance bootstrap. Preserve pull_request_target trusted-base execution. Merge only if current trusted guard passes.",
+  "governance_change": true,
+  "weakens_existing_guard": false
+}
