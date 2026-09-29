@@ -4847,6 +4847,18 @@ def _load_plain_goal_bound_grounding():
     spec.loader.exec_module(module)
     return module
 
+def _load_grounded_capability_composition():
+    path=pathlib.Path(__file__).resolve().with_name("bound_capabilities")/"grounded_capability_composition.py"
+    spec=importlib.util.spec_from_file_location(
+        "project_brain_grounded_capability_composition",path
+    )
+    if spec is None or spec.loader is None:
+        raise Blocker("GROUNDED_CAPABILITY_COMPOSITION_LOAD_FAILED")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    return module
+
 def _ground_plain_goal_to_bound_capabilities(mission, goal):
     module=_load_plain_goal_bound_grounding()
     registry=_load_bound_capability_registry()
@@ -4861,6 +4873,87 @@ def _ground_plain_goal_to_bound_capabilities(mission, goal):
     path=EVID_DIR/f"{mid}__BOUND_CAPABILITY_GROUNDING.json"
     writej(path,result)
     return path,result
+
+def _compose_grounded_bound_capabilities(
+    step,mission,goal,grounding_path,grounding
+):
+    module=_load_grounded_capability_composition()
+    registry=_load_bound_capability_registry()
+    mid=str(mission.get("mission_id") or "UNKNOWN")
+    evidence_path=EVID_DIR/f"{mid}__GROUNDED_CAPABILITY_COMPOSITION.json"
+    try:
+        proposal,evidence=module.compose(
+            goal,
+            grounding,
+            step.get("verified_initial_facts") or [],
+            registry,
+            ROOT,
+            pathlib.Path(__file__).resolve().parent,
+        )
+    except Exception as exc:
+        failure={
+          "schema":"PROJECT_BRAIN_GROUNDED_CAPABILITY_COMPOSITION_FAILURE_V1",
+          "mission_id":mid,
+          "goal":goal,
+          "grounding_evidence_path":(
+              str(grounding_path.relative_to(ROOT))
+              if ROOT in grounding_path.parents else str(grounding_path)
+          ),
+          "error":type(exc).__name__+":"+str(exc),
+          "external_capability_acquisition_attempted":False,
+          "model_dependency_count":0,
+          "observed_at_utc":utc(),
+        }
+        writej(evidence_path,failure)
+        raise Blocker(
+            "BOUND_CAPABILITY_COMPOSITION_FAILED:"+json.dumps({
+              "evidence_path":(
+                  str(evidence_path.relative_to(ROOT))
+                  if ROOT in evidence_path.parents else str(evidence_path)
+              ),
+              "error":failure["error"],
+              "external_capability_acquisition_attempted":False,
+            },sort_keys=True)
+        ) from exc
+
+    record=dict(evidence)
+    record.update({
+      "mission_id":mid,
+      "goal":goal,
+      "grounding_evidence_path":(
+          str(grounding_path.relative_to(ROOT))
+          if ROOT in grounding_path.parents else str(grounding_path)
+      ),
+      "external_capability_acquisition_attempted":False,
+      "observed_at_utc":utc(),
+    })
+    writej(evidence_path,record)
+
+    derived=dict(step)
+    derived.pop("capability_problem",None)
+    derived.pop("capability_problem_ref",None)
+    derived.pop("capability_proposal_generator",None)
+    derived["capability_problem_proposal"]=proposal
+    derived["required_target_effects"]=list(evidence["target_effects"])
+    derived["verified_initial_facts"]=[
+        str(x).strip() for x in (step.get("verified_initial_facts") or [])
+        if isinstance(x,str) and x.strip()
+    ]
+    result=_run_verified_capability_proposal(derived,mission,goal)
+    if result is None:
+        raise Blocker("GROUNDED_CAPABILITY_COMPOSITION_EXECUTION_MISSING")
+    result["grounding_composition"]={
+      "evidence_path":(
+          str(evidence_path.relative_to(ROOT))
+          if ROOT in evidence_path.parents else str(evidence_path)
+      ),
+      "grounding_evidence_path":record["grounding_evidence_path"],
+      "route":evidence.get("route"),
+      "target_effects":evidence.get("target_effects"),
+      "model_dependency_count":0,
+      "external_capability_acquisition_attempted":False,
+    }
+    return result
 
 def _load_auto_capability_acquisition():
     _activate_external_http_bridge()
@@ -5461,16 +5554,9 @@ def run_goal(step, mission):
             )
             grounded_count=int(grounding.get("grounded_clause_count") or 0)
             if grounded_count>0:
-                raise Blocker(
-                    "BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_REQUIRED:"+json.dumps({
-                      "evidence_path":(str(grounding_path.relative_to(ROOT)) if ROOT in grounding_path.parents else str(grounding_path)),
-                      "candidate_capability_ids":grounding.get("candidate_capability_ids") or [],
-                      "unresolved_clause_indexes":grounding.get("unresolved_clause_indexes") or [],
-                      "grounded_clause_count":grounded_count,
-                      "external_capability_acquisition_attempted":False,
-                      "policy":"RESOLVE_EXISTING_BOUND_GROUNDING_BEFORE_EXTERNAL_DISCOVERY",
-                    },sort_keys=True)
-                ) from e
+                return _compose_grounded_bound_capabilities(
+                    step,mission,goal,grounding_path,grounding
+                )
 
             mid=str(mission.get("mission_id") or "UNKNOWN")
             ep=EVID_DIR/f"{mid}__PLAIN_GOAL_CAPABILITY_DISCOVERY.json"
