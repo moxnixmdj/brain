@@ -1,0 +1,321 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-PLAIN-GOAL-DECISION-WORKFLOW-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PLAIN_GOAL_MULTI_CAPABILITY_DECISION_WORKFLOW_NOT_COMPILED__WHOLE_GOAL_FALLS_TO_IRRELEVANT_SUPPLIER_DISCOVERY",
+  "action_kind": "GENERIC_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PLAIN_GOAL_MULTI_CAPABILITY_DECISION_WORKFLOW_NOT_COMPILED__WHOLE_GOAL_FALLS_TO_IRRELEVANT_SUPPLIER_DISCOVERY::GENERIC_REPAIR",
+  "expected_parent_frontier_change": "Make the model-independent plain-goal layer recognize and compile a generic decision workflow over already verified capabilities before external supplier discovery, so fresh parent tasks can reach existing execution, synthesis and independent verification machinery.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Fresh parent run 36644374149 spent once and failed before any serialization or synthesis action.",
+    "Terminal trace shows whole-goal supplier discovery ranked leela-zero/openjdk-*-zero and ended NO_COMPATIBLE_SUPPLIER_CONTRACT.",
+    "Existing capability_planner.py, goal_compiler.py, semantic_authorities.py, decision.synthesis.typed.stdlib, decision.synthesis.verify.stdlib are already model-independent and verified.",
+    "Existing decompose_goal only splits a narrow verb set and there is no generic decision-workflow compiler before supplier discovery.",
+    "External challenger search checked Attempto APE, Lark, and textX: all parse a supplied controlled language/grammar but do not remove arbitrary technical-goal semantic grounding."
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": true,
+  "orthogonal_recurrence_count": 1,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Implement only the generic decision-workflow semantic bridge and deterministic regressions. Do not replay spent run 36644374149. Verify the repair on synthetic compiler fixtures plus an orthogonal fresh real parent task only after the trusted guard admits the change.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "20259a493b8180d490e65448cbedd3ccf54ddaf0",
+    "real_outcome": "Allow a plain consequential multi-capability decision goal to reach Brain's already verified planning/execution/synthesis/verification stack without model cognition or whole-goal supplier-search drift.",
+    "required_capability": "GENERIC_PLAIN_GOAL_TO_VERIFIED_DECISION_WORKFLOW_COMPILATION",
+    "obs_goal": {
+      "real_outcome": "Delete the first causal gap exposed by the spent fresh parent task.",
+      "proxy_goals_deleted": [
+        "Replay the spent serialization task",
+        "Add another model or solver",
+        "Build a new parser framework",
+        "Repair capability discovery ranking for an input that should never reach supplier discovery"
+      ],
+      "surviving_necessity": "The model-independent parent stack cannot currently compile a common multi-step decision objective from plain text into existing verified capabilities."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "goal_compiler.py",
+        "semantic_authorities.py",
+        "capability_planner.py",
+        "BOUND_CAPABILITY_REGISTRY_V1.json",
+        "decision.synthesis.typed.stdlib",
+        "decision.synthesis.verify.stdlib"
+      ],
+      "external_existing_routes_checked": [
+        "Attempto APE",
+        "Lark",
+        "textX"
+      ],
+      "capability_work_deleted": [
+        "No new model",
+        "No new parser framework",
+        "No supplier ranking repair",
+        "No serialization-specific compiler handler"
+      ],
+      "surviving_gap": "Generic decision-workflow recognition and grounding over already verified registry effects before supplier discovery."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic compiler-routing omission proven by one fresh parent task; the exact supplier names are incidental.",
+      "delete_bypass_substitute_options": [
+        "DELETE parent plain-goal compilation: invalid because parent capability requires ordinary goal intake.",
+        "BYPASS with hand-authored controller actions or typed decision input: invalid because it hides the cognition gap.",
+        "SUBSTITUTE APE/Lark/textX: non-dominating because they require a predefined grammar/controlled language and do not supply domain grounding.",
+        "REUSE and repair existing deterministic compiler + semantic authority stack: survives."
+      ],
+      "surviving_causal_blocker": "No generic path maps decision-oriented clauses to a typed workflow over existing registry capabilities before external acquisition fallback."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REPAIR_EXISTING_GOAL_COMPILER_WITH_GENERIC_DECISION_WORKFLOW_BRIDGE",
+        "SUBSTITUTE_ATTEMPTO_CONTROLLED_ENGLISH",
+        "SUBSTITUTE_LARK_OR_TEXTX_DSL",
+        "REPAIR_CAPABILITY_DISCOVERY_RANKING"
+      ],
+      "losing_routes_reason": "External parsers require a grammar and do not eliminate semantic grounding; discovery ranking is downstream of the wrong branch. Existing compiler already owns clause decomposition, registry matching, runtime decision primitives, and fail-closed behavior.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Compiler regressions must prove generic decision verbs decompose and route to verified decision capabilities while unrelated ambiguous goals still fail closed. The spent parent task is not replayed."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Whole-goal supplier discovery for decision objectives when required verified capabilities already exist",
+        "Any planned parser-framework integration for this seam"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "decision-oriented clause decomposition",
+        "registry-grounded decision workflow composition"
+      ],
+      "fresh_reuse_plan": "After repair admission, execute one orthogonal fresh consequential parent task with no hand-authored controller plan and no model cognition."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse exact run 36644374149 terminal evidence",
+        "Reuse current compiler/semantic authority architecture",
+        "Reuse current verified decision synthesis and verifier",
+        "Stop external parser search after all challengers preserve the semantic-grounding boundary"
+      ],
+      "search_stop_decision": "The causal defect is localized inside the existing compiler, and no checked external parser removes it with less machinery.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Fresh challenger search completed immediately before this intent on 2026-09-29T23:20:00Z."
+    },
+    "routes_considered": [
+      "REPAIR_EXISTING_GOAL_COMPILER_WITH_GENERIC_DECISION_WORKFLOW_BRIDGE",
+      "SUBSTITUTE_ATTEMPTO_CONTROLLED_ENGLISH",
+      "SUBSTITUTE_LARK_OR_TEXTX_DSL",
+      "REPAIR_CAPABILITY_DISCOVERY_RANKING"
+    ],
+    "deleted_or_bypassed_paths": [
+      "SPENT_PARENT_TASK_REPLAY",
+      "MODEL_BACKED_SEMANTIC_PARSING",
+      "NEW_PARSER_FRAMEWORK",
+      "DOWNSTREAM_SUPPLIER_RANKING_TUNING"
+    ],
+    "selected_surviving_route": "REPAIR_EXISTING_GOAL_COMPILER_WITH_GENERIC_DECISION_WORKFLOW_BRIDGE",
+    "why_selected_route_is_fastest_sufficient": "The current compiler already decomposes goals, binds verified capabilities, and fails closed; the missing behavior is one upstream semantic workflow class. Repairing that branch reuses all downstream verified machinery and avoids new dependencies.",
+    "expected_parent_level_state_change": "Make the model-independent plain-goal layer recognize and compile a generic decision workflow over already verified capabilities before external supplier discovery, so fresh parent tasks can reach existing execution, synthesis and independent verification machinery.",
+    "stop_condition": "Implement only the generic decision-workflow semantic bridge and deterministic regressions. Do not replay spent run 36644374149. Verify the repair on synthetic compiler fixtures plus an orthogonal fresh real parent task only after the trusted guard admits the change.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-29T23:20:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "EXISTING_GOAL_COMPILER_PLUS_SEMANTIC_AUTHORITIES",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "run 36644374149 terminal trace",
+          "canonical/runtime/goal_compiler.py",
+          "canonical/runtime/semantic_authorities.py",
+          "canonical/runtime/capability_planner.py"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://github.com/Attempto/APE",
+          "https://lark-parser.readthedocs.io/en/latest/",
+          "https://textx.github.io/textX/"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/Attempto/APE",
+          "https://github.com/lark-parser/lark",
+          "https://github.com/textX/textX"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Fresh web search for rule-based semantic parsing and grammar/DSL alternatives on 2026-09-29"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "rule based semantic parsing plain technical goal to structured decision workflow without model"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Attempto APE Lark textX deterministic parser semantic representation"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "controlled English grammar DSL parser versus registry grounded goal compiler"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 current open source deterministic semantic parsing planning tools"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "EXISTING_GOAL_COMPILER_PLUS_SEMANTIC_AUTHORITIES_REPAIR",
+          "evidence": [
+            "Direct failure trace localizes misrouting before supplier execution",
+            "Existing compiler already owns generic clause and verified registry logic"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE run 36644374149",
+            "BRAIN_INHERITED canonical compiler and tests"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "INDEPENDENT_VERIFIER"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Preserves fail-closed verified-registry semantics.",
+            "CAPABILITY_STRENGTH": "Directly targets the missing plain-goal-to-existing-workflow seam.",
+            "WALL_CLOCK": "Smallest code delta; no new runtime dependency.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Existing compiler and downstream components already regression-tested.",
+            "VERIFIABILITY": "Can be deterministically unit-tested before any fresh parent task."
+          }
+        },
+        {
+          "route": "ATTEMPTO_APE_CONTROLLED_ENGLISH",
+          "evidence": [
+            "APE parses Attempto Controlled English and emits DRS/FOL/OWL/RuleML representations."
+          ],
+          "qualification_evidence": [
+            "OFFICIAL_PRIMARY https://github.com/Attempto/APE"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Strong within ACE grammar.",
+            "CAPABILITY_STRENGTH": "Does not accept arbitrary technical goals without controlled-language restriction and domain mapping.",
+            "WALL_CLOCK": "Requires Prolog dependency plus grammar/interface integration.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Mature controlled-language parser.",
+            "VERIFIABILITY": "Parser output is verifiable but semantic binding to Brain capabilities remains unsolved."
+          }
+        },
+        {
+          "route": "LARK_OR_TEXTX_DSL",
+          "evidence": [
+            "Both generate parsers from supplied grammars and produce structured syntax/meta-models."
+          ],
+          "qualification_evidence": [
+            "OFFICIAL_PRIMARY https://github.com/lark-parser/lark",
+            "OFFICIAL_PRIMARY https://github.com/textX/textX"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Reliable for defined grammars.",
+            "CAPABILITY_STRENGTH": "Grammar engine only; semantic grounding still must be authored.",
+            "WALL_CLOCK": "Adds dependency and grammar work before solving the observed routing defect.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Mature parser libraries.",
+            "VERIFIABILITY": "High for syntax, not sufficient for capability grounding."
+          }
+        }
+      ],
+      "negative_search_summary": "No checked external deterministic parser removes the semantic-grounding boundary faster than repairing Brain's existing compiler.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REPAIR_EXISTING_GOAL_COMPILER_WITH_GENERIC_DECISION_WORKFLOW_BRIDGE",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-29T23:20:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REPAIR_EXISTING_GOAL_COMPILER_WITH_GENERIC_DECISION_WORKFLOW_BRIDGE",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "CURRENT_BRAIN_GOAL_COMPILER_AND_TESTS",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T23:20:00Z",
+            "evidence": [
+              "BRAIN_INHERITED current main 20259a493b8180d490e65448cbedd3ccf54ddaf0"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T23:19:18Z",
+            "evidence": [
+              "DIRECT_PROBE run 36644374149 completed on hosted runner"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
