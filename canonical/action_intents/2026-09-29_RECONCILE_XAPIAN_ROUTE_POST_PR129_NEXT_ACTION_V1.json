@@ -7,19 +7,21 @@
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
   "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
-  "causal_blocker": "POST_PR129_PRESENT_TENSE_FRONTIER_FIELDS_STILL_CLAIM_ADMISSION_REPAIR_PENDING__CONTRADICT_EXECUTION_DUE_CANONICAL_STATE",
+  "causal_blocker": "POST_PR129_CANONICAL_PRESENT_TENSE_FIELDS_STILL_DESCRIBE_ADMISSION_REPAIR_AS_PENDING_WHILE_EXECUTION_IS_DUE__ABORT_ON_FRONTIER_CONTRADICTION_BLOCKS_HELDOUT_003",
   "action_kind": "RECONCILE_FRONTIER",
-  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::POST_PR129_PRESENT_TENSE_FRONTIER_FIELDS_STILL_CLAIM_ADMISSION_REPAIR_PENDING__CONTRADICT_EXECUTION_DUE_CANONICAL_STATE::RECONCILE_FRONTIER",
-  "expected_parent_frontier_change": "Make all three stale present-tense frontier fields agree with merged PR129 and merged PR136: inherited-route status records provider-neutral APT admission as merged; immediate-frontier objective requires exactly one frozen HELDOUT-003 execution; inherited-route next_action requires that same one-shot execution followed by first-result reconciliation.",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::POST_PR129_CANONICAL_PRESENT_TENSE_FIELDS_STILL_DESCRIBE_ADMISSION_REPAIR_AS_PENDING_WHILE_EXECUTION_IS_DUE__ABORT_ON_FRONTIER_CONTRADICTION_BLOCKS_HELDOUT_003::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Make all three stale present-tense authority descriptors agree with the already-merged PR129/post-PR136 truth: provider-neutral APT admission repair is complete, HELDOUT-003 remains UNSPENT, and exactly one guarded HELDOUT-003 execution followed by first-result reconciliation is the current frontier.",
   "highest_leverage_now": true,
   "prior_work_checked": [
     "merged PR129 provider-neutral APT admission repair",
     "merged PR136 canonical repair-consumption reconciliation",
     "merged PR135 action-intent guard hardening",
-    "current main a178254126ad7a09cdf48dee172a728ba27bccdc pointer/hierarchy/immediate frontier",
-    "current canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json inherited Xapian route subrecord",
+    "current main a178254126ad7a09cdf48dee172a728ba27bccdc pointer/hierarchy/queue",
+    "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json inherited_route.status stale admission descriptor",
+    "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json immediate_frontier.objective stale admission descriptor",
+    "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json inherited Xapian route next_action stale repair instruction",
     "closed PR140 execution lease preserved as pre-reconciliation evidence only",
-    "current canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json inherited_route.status"
+    "closed PR149 later reconciliation lane subsumed into PR147"
   ],
   "evidence_presence_classification": "SUPERSEDED_BY_NEWER_CANONICAL_STATE",
   "probe_specific": false,
@@ -27,7 +29,7 @@
   "orthogonal_recurrence_count": 0,
   "precommitted_acceptance_gate_exception": false,
   "probe_specific_literals": [],
-  "stop_condition": "After exactly three stale present-tense fields are reconciled to the already-true post-PR129/post-PR136 state (hierarchy inherited_route.status, queue immediate_frontier.objective, queue inherited-route next_action), stop. Do not mutate runtime, frozen gate, evaluator, carrier, or held-out evidence. Recreate one execution lease from exact final main and guard it before any HELDOUT-003 start.",
+  "stop_condition": "After only the three confirmed stale present-tense authority descriptors are reconciled to the already-true post-PR129/post-PR136 execution-due state, stop. Do not mutate runtime, frozen gate, evaluator, carrier, or held-out evidence. Recreate exactly one execution lease from exact final main and guard it before any HELDOUT-003 start.",
   "governance_change": false,
   "weakens_existing_guard": false
 }
