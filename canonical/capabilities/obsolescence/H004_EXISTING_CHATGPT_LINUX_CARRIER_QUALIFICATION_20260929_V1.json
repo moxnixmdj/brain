@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_H004_EXISTING_CHATGPT_LINUX_CARRIER_QUALIFICATION_V1",
+  "qualification_id": "H004-EXISTING-CHATGPT-LINUX-CARRIER-QUALIFICATION-20260929-V1",
+  "status": "FAILED_FIRST_REQUIRED_SURFACE_PREDICATE__NO_HELDOUT_EXECUTION",
+  "canonical_base_sha": "c37a4e479b4cc571d74535790696c9f4d17dc32f",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "protected_gate": {
+    "validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+    "freshness": "UNSPENT",
+    "execution_count": 0,
+    "start_created": false,
+    "result_created": false
+  },
+  "carrier": {
+    "class": "CHATGPT_LINUX_EXECUTION_SURFACE",
+    "incremental_spend_usd": 0,
+    "user_device_used": false,
+    "val_town_used": false,
+    "observed_os": "debian",
+    "observed_codename": "trixie",
+    "observed_uid": 0
+  },
+  "read_only_surface_observations": {
+    "apt_present": true,
+    "sudo_present": true,
+    "apt_file_present": false,
+    "zbarimg_present": false,
+    "python_xapian_present": false,
+    "apt_lists_regular_files": 0,
+    "apt_packages_files": 0,
+    "apt_contents_files": 0,
+    "apt_translation_en_files": 0,
+    "outbound_dns_to_deb_debian_org": false,
+    "dns_error": "gaierror: Temporary failure in name resolution"
+  },
+  "adjudication": {
+    "qualified": false,
+    "first_failed_requirement": "FAITHFUL_DEBIAN_APT_XAPIAN_QR_SURFACE",
+    "reason": "The current ChatGPT Linux surface lacks the APT indexes and packages required by the frozen H004 execution surface and cannot acquire them because outbound DNS is unavailable. Per immutable PR178 stop condition, qualification stops here rather than provisioning or mutating infrastructure in this lane.",
+    "exact_source_transport_capability_reused_but_not_sufficient": true,
+    "capability_runtime_failure": false,
+    "carrier_fidelity_correction_completed": false
+  },
+  "prior_reuse_evidence": [
+    "canonical/reconciliation/POST_PR20_CANONICAL_FRONTIER_20260927_V1.json",
+    "PR20 device-independent exact private-repository execution evidence",
+    "PR35 content-addressed source materialization evidence",
+    "PR45 content-addressed source execution evidence"
+  ],
+  "discovered_next_candidate": {
+    "provider": "Railway",
+    "surface": "anonymous unclaimed VM via ssh railway.new",
+    "public_hard_zero_claim": "Railway states unclaimed VMs are free, require no account or card, and nobody pays for their compute.",
+    "public_reference": "https://railway.com/free-vm",
+    "status": "DISCOVERED_NOT_YET_QUALIFIED_OR_PROVISIONED",
+    "qualification_requires_fresh_guarded_lane": true
+  },
+  "prohibitions": [
+    "NO_HELDOUT_004_START",
+    "NO_HELDOUT_004_RESULT",
+    "NO_HELDOUT_003_REPLAY",
+    "NO_CAPABILITY_RUNTIME_OR_EVALUATOR_MUTATION",
+    "NO_SPRITE",
+    "NO_VAL_TOWN",
+    "NO_USER_LAPTOP",
+    "NO_PAID_OR_UNPROVEN_COST_INFRASTRUCTURE"
+  ],
+  "required_next_action": "QUALIFY_ACCOUNTLESS_CARDLESS_HARD_ZERO_REMOTE_LINUX_CARRIER__PREFER_RAILWAY_ANONYMOUS_VM__MATERIALIZE_CONTENT_ADDRESSED_EXACT_CLOSURE__PREFLIGHT_PATHS_HASHES_IMPORTS_AND_APT_XAPIAN_QR_SURFACE__NO_HELDOUT_004_START"
+}
