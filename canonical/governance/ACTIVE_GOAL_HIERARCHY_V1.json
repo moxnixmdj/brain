@@ -5,9 +5,9 @@
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "active_capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
   "active_probe": "TOOL-DISCOVERY-LATENCY-RECALL-HELDOUT-VALIDATION-006",
-  "probe_state": "HELDOUT_006_FROZEN_UNSPENT__DELETION_FIRST_REPAIR_FROZEN_AND_SYNTHETIC_PASS__RAILWAY_MUTATION_THROTTLED",
-  "current_parent_blocker": "QUALIFIED_HARD_ZERO_RAILWAY_SURFACE_EXISTS_BUT_PLATFORM_CURRENTLY_REJECTS_REQUIRED_CONFIG_WRITES_DUE_MUTATION_RATE_LIMIT__GATE_006_UNSPENT",
-  "next_required_action_class": "AFTER_EXISTING_RAILWAY_MUTATION_THROTTLE_CLEARS__STAGE_PREPARED_EXACT_BLOB_VERIFIED_CARRIER_ON_EXISTING_SERVICE__EXECUTE_006_EXACTLY_ONCE__RECONCILE",
+  "probe_state": "HELDOUT_006_FROZEN_UNSPENT__DELETION_FIRST_REPAIR_IMPLEMENTED_AND_FROZEN__FAST_PATH_SYNTHETIC_INVARIANT_PASS__LEASE_CLAIMED",
+  "current_parent_blocker": "GATE_006_EXACT_FROZEN_BYTES_REQUIRE_ONE_QUALIFIED_HARD_ZERO_RAILWAY_EXECUTION__RAILWAY_REMOTE_MCP_CURRENTLY_RATE_LIMITED",
+  "next_required_action_class": "WHEN_RAILWAY_REMOTE_MCP_READ_WRITE_ACCESS_RESUMES__STAGE_AND_VERIFY_EXACT_GATE_006_BYTES_ON_EXISTING_HARD_ZERO_QUALIFIED_SURFACE__EXECUTE_EXACTLY_ONCE__CAPTURE__RECONCILE__RELEASE_LEASE",
   "forbidden_local_frontier": "REPLAY_003_004_OR_005__SECOND_REPAIR_UNDER_005_PROBE__RUNTIME_MUTATION_BEFORE_NEW_UNSEEN_GATE_FREEZE_AND_NEW_CAUSAL_FRONTIER_AUTHORITY__TASK_SPECIFIC_LITERALS__PACKAGE_HINTS__TIMEOUT_INCREASE__BILLABLE_OR_UNPROVEN_METERED_INFRASTRUCTURE__LAPTOP_EXECUTION__PROMOTION_FROM_FAILED_GATE",
   "progress_level_minimum": "CAPABILITY_TARGET",
   "probe_budget": {
@@ -125,7 +125,11 @@
     "repair_test_blob_sha": "7eafd6aa598d6295b8ee5260a689bae01be36adf",
     "manifest_blob_sha": "3439e26ef4c650098db50f745105eed9b68be776",
     "runner_blob_sha": "cbae7e4d1a0de5ddf5df67f7a869bab7a3f66317",
-    "execution_surface_blocker_receipt": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_006_RAILWAY_MUTATION_RATE_LIMIT_BLOCKER_V1.json"
+    "execution_surface_blocker_receipt": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_006_RAILWAY_MUTATION_RATE_LIMIT_BLOCKER_V1.json",
+    "repair_id": "SEMANTIC_INDEX_FAST_DISCOVERY_DEFER_EXPENSIVE_BINDING_V1",
+    "repair_commit_sha": "745e97c94b48cb1a4501ed6f06b18de7d7116628",
+    "repair_freeze_receipt": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_LATENCY_FRONTIER_006_REPAIR_FREEZE_V1.json",
+    "execution_lease_path": "canonical/execution_leases/TOOL_DISCOVERY_LATENCY_RECALL_HELDOUT_VALIDATION_006_EXECUTION_LEASE_V1.json"
   },
   "antidrift_interlock": {
     "schema": "PROJECT_BRAIN_ANTIDRIFT_EXECUTION_INTERLOCK_V2",
@@ -182,10 +186,13 @@
   },
   "last_completed_generic_repair": {
     "repair_id": "SEMANTIC_INDEX_FAST_DISCOVERY_DEFER_EXPENSIVE_BINDING_V1",
-    "path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_LATENCY_FRONTIER_006_REPAIR_V1.json",
+    "commit": "745e97c94b48cb1a4501ed6f06b18de7d7116628",
     "runtime_blob": "97f4c61691afc6b4d9cb3ed54ee0fc85531ca977",
-    "synthetic_verification": "PASS__XAPIAN_FAST_PATH_RETURNED_WITH_ZERO_EXPENSIVE_EVIDENCE_CALLS",
-    "heldout_literals_in_runtime": false
+    "regression_test_commit": "f79970a44254a1ffff77f415b4f2e22b5fbac907",
+    "regression_test_blob": "7eafd6aa598d6295b8ee5260a689bae01be36adf",
+    "synthetic_verification": "PASS_FAST_PATH_INVARIANT__EXPENSIVE_PRESELECTION_BINDING_PATHS_NOT_CALLED",
+    "heldout_006_literals_in_runtime_or_test": false,
+    "freeze_receipt": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_LATENCY_FRONTIER_006_REPAIR_FREEZE_V1.json"
   },
   "heldout_003_concurrency_contamination": {
     "receipt_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_003_CONCURRENCY_CONTAMINATION_AND_004_COMPOSITE_FREEZE_V1.json",
@@ -227,5 +234,10 @@
     "receipt": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_006_RAILWAY_MUTATION_RATE_LIMIT_BLOCKER_V1.json",
     "gate_spent": false,
     "provider_search_authorized": false
+  },
+  "active_execution_lease": {
+    "validation_id": "TOOL-DISCOVERY-LATENCY-RECALL-HELDOUT-VALIDATION-006",
+    "path": "canonical/execution_leases/TOOL_DISCOVERY_LATENCY_RECALL_HELDOUT_VALIDATION_006_EXECUTION_LEASE_V1.json",
+    "status": "CLAIMED_NOT_STARTED"
   }
 }
