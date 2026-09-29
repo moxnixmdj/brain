@@ -1,0 +1,131 @@
+name: Xapian APT E2E HELDOUT-003 One-Shot
+
+on:
+  pull_request_review:
+    types: [submitted]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: xapian-apt-e2e-heldout-003-global
+  cancel-in-progress: false
+
+jobs:
+  execute:
+    if: >-
+      github.event.pull_request.number == 133 &&
+      github.event.review.body == 'EXECUTE_XAPIAN_APT_E2E_HELDOUT_003_ONCE'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    container:
+      image: debian:trixie-slim
+    env:
+      EXPECTED_BASE_SHA: 5fa5571d05c5ed86682921b9226de5b2ebcf73c3
+      H3_CLAIM_TAG: pb-xapian-apt-e2e-heldout-003-execution-claim-v1
+    steps:
+      - name: Prepare faithful Debian surface in the execution container
+        shell: sh
+        run: |
+          set -eu
+          export DEBIAN_FRONTEND=noninteractive LC_ALL=C.UTF-8
+          rm -f /etc/apt/apt.conf.d/docker-no-languages || true
+          apt-get update -qq
+          apt-get install -y -qq --no-install-recommends             git python3 python3-xapian sudo apt-file zbar-tools ca-certificates xz-utils
+          apt-file update >/tmp/h3_aptfile.log 2>&1
+          python3 -c "import xapian"
+          echo H3_BASE_PACKAGES_READY=1
+
+      - name: Checkout exact PR133 head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify exact protected bytes and faithful metadata surface
+        shell: sh
+        run: |
+          set -eu
+          test "$(git merge-base "$EXPECTED_BASE_SHA" HEAD)" = "$EXPECTED_BASE_SHA"
+          test "$(git hash-object canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_003.json)" = "6ac72c26dacabf8c14e037a5a983e29d912c17e6"
+          test "$(git hash-object canonical/experiments/run_xapian_apt_e2e_integration_heldout_003.py)" = "ccd27d4dd46366c6fb7560378f6f9182f48fd6ae"
+          test "$(git hash-object canonical/runtime/capability_discovery.py)" = "b9e7423ab24bf2da98869b02d782e791a779892a"
+          test "$(git hash-object canonical/runtime/auto_capability_acquisition.py)" = "fc80ede8225cc51dac77be6d41aa2a1c757c6ee8"
+          test "$(git hash-object canonical/runtime/apt_cli_probe.py)" = "3f3a8f6a0154e1ed3f87fc97b99840598297b119"
+          test "$(git hash-object canonical/runtime/cli_contract_inference.py)" = "009c3c45040178844d84eaa15b0d47ca2e1f259f"
+          test "$(git hash-object canonical/runtime/verify_pending_cli_binding.py)" = "8ec4da92080e885a15266389c0318688e6408d43"
+          test "$(git hash-object canonical/runtime/auto_apt_cli_acquisition.py)" = "0b7c67a2680a3aaa1aa5cf1a8bc8d41d69eee271"
+          test "$(git hash-object canonical/tests/test_auto_apt_cli_provider_neutral_admission.py)" = "f810ef519964bdb746943fa71ea213feaf3f044a"
+
+          git diff --name-only "$EXPECTED_BASE_SHA"...HEAD --             canonical/runtime             canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_003.json             canonical/experiments/run_xapian_apt_e2e_integration_heldout_003.py             canonical/tests/test_auto_apt_cli_provider_neutral_admission.py             > /tmp/h3_protected_diff
+          test ! -s /tmp/h3_protected_diff
+
+          python3 -m py_compile             canonical/experiments/run_xapian_apt_e2e_integration_heldout_003.py             canonical/runtime/*.py             canonical/runtime/bound_capabilities/*.py
+
+          PKG=$(find /var/lib/apt/lists -maxdepth 1 -type f -name "*_Packages*" | wc -l | tr -d " ")
+          TR=$(find /var/lib/apt/lists -maxdepth 1 -type f -name "*Translation-en*" | wc -l | tr -d " ")
+          AMD=$(find /var/lib/apt/lists -maxdepth 1 -type f | grep -c "Contents-amd64" || true)
+          ALL=$(find /var/lib/apt/lists -maxdepth 1 -type f | grep -c "Contents-all" || true)
+          TAGS=$(apt-cache dumpavail | grep -c "^Tag:" || true)
+          printf 'H3_PACKAGES=%s\nH3_TRANSLATION_EN=%s\nH3_CONTENTS_AMD64=%s\nH3_CONTENTS_ALL=%s\nH3_TAG_RECORDS=%s\n' "$PKG" "$TR" "$AMD" "$ALL" "$TAGS"
+          test "$PKG" -ge 1
+          test "$TR" -ge 1
+          test "$AMD" -ge 1
+          test "$ALL" -ge 1
+          test "$TAGS" -ge 1
+
+          python3 canonical/tests/test_auto_apt_cli_provider_neutral_admission.py
+
+          test ! -e canonical/astra_runtime/evidence/XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003__EXECUTION_START.json
+          test ! -e canonical/astra_runtime/evidence/XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003__RESULT.json
+          echo H3_PREFLIGHT_PASS=1
+          echo H3_GATE_UNSPENT=1
+
+      - name: Acquire atomic global execution claim
+        shell: sh
+        run: |
+          set -eu
+          CLAIM_REF="refs/tags/$H3_CLAIM_TAG"
+          if git ls-remote --exit-code origin "$CLAIM_REF" >/dev/null 2>&1; then
+            echo H3_GLOBAL_CLAIM_ALREADY_EXISTS=1
+            exit 91
+          fi
+          git config user.name "project-brain-one-shot"
+          git config user.email "project-brain-one-shot@users.noreply.github.com"
+          git tag -a "$H3_CLAIM_TAG" -m "Atomic one-shot claim for XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003 on PR133"
+          git push origin "$CLAIM_REF"
+          echo H3_GLOBAL_CLAIM_ACQUIRED=1
+
+      - name: Execute frozen HELDOUT-003 exactly once
+        id: gate
+        shell: sh
+        run: |
+          set +e
+          python3 canonical/experiments/run_xapian_apt_e2e_integration_heldout_003.py > h3-heldout003.log 2>&1
+          RC=$?
+          cat h3-heldout003.log
+          printf '%s\n' "$RC" > h3-heldout003.rc
+          if [ -f canonical/astra_runtime/evidence/XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003__EXECUTION_START.json ]; then
+            echo H3_EXECUTION_START_PRESENT=1
+            cat canonical/astra_runtime/evidence/XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003__EXECUTION_START.json
+          fi
+          if [ -f canonical/astra_runtime/evidence/XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003__RESULT.json ]; then
+            echo H3_TERMINAL_RESULT_PRESENT=1
+            cat canonical/astra_runtime/evidence/XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003__RESULT.json
+          fi
+          exit "$RC"
+
+      - name: Upload one-shot evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: xapian-apt-e2e-heldout-003-one-shot-${{ github.run_id }}
+          if-no-files-found: warn
+          retention-days: 7
+          path: |
+            h3-heldout003.log
+            h3-heldout003.rc
+            canonical/astra_runtime/evidence/XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003__EXECUTION_START.json
+            canonical/astra_runtime/evidence/XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003__RESULT.json
+            canonical/astra_runtime/tmp/XAPIAN_APT_E2E_HELDOUT_003.png
