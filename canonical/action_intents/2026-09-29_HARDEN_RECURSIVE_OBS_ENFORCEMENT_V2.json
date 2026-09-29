@@ -1,0 +1,135 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "HARDEN-RECURSIVE-OBS-ENFORCEMENT-V2",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "PROGRAM_OPERATING_STRATEGY",
+  "probe_id": null,
+  "causal_blocker": "RECURSIVE_OBS_RECEIPTS_ARE_NOT_EXACT_BASE_BOUND_AND_STRUCTURAL_VALIDATION_IS_TOO_SHALLOW",
+  "action_kind": "USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::PROGRAM_OPERATING_STRATEGY::RECURSIVE_OBS_RECEIPTS_ARE_NOT_EXACT_BASE_BOUND_AND_STRUCTURAL_VALIDATION_IS_TOO_SHALLOW::USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "expected_parent_frontier_change": "All future consequential frontier PRs must present an exact-base-bound, structurally complete recursive OBS receipt; stale or hollow receipts fail closed; workers get one canonical template; live pointer no longer advertises the obsolete five-step loop.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Recursive OBS law V1 and V3/V4 gates are already canonical.",
+    "Trusted validator currently checks top-level receipt presence/nonempty layers but not schema subfields or exact base binding.",
+    "Pointer still contains old DISCOVER/BIND/REPLAY/VERIFY/INHERIT loop.",
+    "No canonical action-intent-with-OBS authoring template exists."
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 3,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Merge only the minimal enforcement/schema/template/pointer changes after trusted validation; then stop governance work and return to the first real capability-acquisition mission.",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "user_authorization_summary": "User instructed Brain to update everything that should be updated perfectly after explicitly identifying insufficient practical OBS use.",
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "a2cde9f9fd67ef377b23634c480b07b61adfe3fa",
+    "real_outcome": "Make recursive OBS reliably govern consequential Brain work in practice, not merely exist as policy.",
+    "required_capability": "Exact-base-bound recursive OBS authoring and fail-closed machine validation.",
+    "obs_goal": {
+      "real_outcome": "Future consequential Brain actions start from a current OBS decision that survives exact-base validation.",
+      "proxy_goals_deleted": [
+        "another governance rewrite",
+        "new scheduler",
+        "new workflow",
+        "new provider"
+      ],
+      "surviving_necessity": "Harden the existing trusted validator and canonical authoring contract only."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1",
+        "RECURSIVE_OBS_RECEIPT_SCHEMA_V1",
+        "trusted enforce_goal_hierarchy.py",
+        "GOAL_HIERARCHY_ACTION_GATE_V3",
+        "CRITICAL_PATH_PRE_ACTION_GATE_V4"
+      ],
+      "external_existing_routes_checked": [
+        "No external route is needed; this is canonical policy enforcement inside Brain."
+      ],
+      "capability_work_deleted": [
+        "No new scheduler",
+        "No new execution carrier",
+        "No new CI workflow",
+        "No standalone OBS service"
+      ],
+      "surviving_gap": "Current receipt is generation-label-bound rather than exact-base-bound, validation is shallow, and no canonical authoring template exists."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Intrinsic to current Brain governance path: stale or structurally hollow receipts can pass the trusted validator.",
+      "delete_bypass_substitute_options": [
+        "Delete enforcement: rejected because policy-only OBS already proved insufficient.",
+        "Bypass validator: rejected because it weakens truth-first governance.",
+        "Substitute external service: rejected as slower and unnecessary.",
+        "Harden existing trusted validator: survives."
+      ],
+      "surviving_causal_blocker": "Trusted validator must bind receipts to exact base state and validate required layer structure/semantics."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REPAIR existing trusted validator + evolve receipt schema + add canonical template",
+        "Build new OBS engine",
+        "Build new workflow/service"
+      ],
+      "losing_routes_reason": "New engines/workflows add machinery without improving the required decision guarantee.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No new synthetic verifier. Verify by exact trusted-validator predicates over malformed and valid receipt structures plus post-merge pointer/schema inspection."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Ad-hoc hand-authored OBS receipt conventions",
+        "Old five-step capability_acquisition_loop pointer representation"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Exact-base stale-plan invalidation",
+        "OBS authoring consistency",
+        "Structural deletion-first enforcement"
+      ],
+      "fresh_reuse_plan": "The next consequential real-task PR must use the new template/receipt schema and pass the trusted validator without governance exceptions."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused existing OBS law/gates instead of redesigning them",
+        "Skipped new infrastructure/provider research",
+        "Limited changes to validator/schema/template/pointer coherence"
+      ],
+      "search_stop_decision": "Stop after exact-base binding, structural validation, authoring template, and stale pointer correction because further governance work cannot improve the next real-task decision enough to justify delay.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "REPAIR_EXISTING_TRUSTED_VALIDATOR_AND_RECEIPT_CONTRACT",
+      "BUILD_NEW_OBS_ENGINE",
+      "BUILD_NEW_GOVERNANCE_WORKFLOW"
+    ],
+    "deleted_or_bypassed_paths": [
+      "BUILD_NEW_OBS_ENGINE",
+      "BUILD_NEW_GOVERNANCE_WORKFLOW",
+      "NEW_PROVIDER_OR_CARRIER"
+    ],
+    "selected_surviving_route": "REPAIR_EXISTING_TRUSTED_VALIDATOR_AND_RECEIPT_CONTRACT",
+    "why_selected_route_is_fastest_sufficient": "It reuses the already trusted control path, adds exact-state invalidation and strong structural checks, and avoids new infrastructure.",
+    "expected_parent_level_state_change": "All future consequential frontier PRs must present an exact-base-bound, structurally complete recursive OBS receipt; stale or hollow receipts fail closed; workers get one canonical template; live pointer no longer advertises the obsolete five-step loop.",
+    "stop_condition": "Merge only the minimal enforcement/schema/template/pointer changes after trusted validation; then stop governance work and return to the first real capability-acquisition mission."
+  }
+}
