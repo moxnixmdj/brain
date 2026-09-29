@@ -20,8 +20,11 @@ def eval_case(case):
         if fam(c.get("name"),case["oracle_families"]):
             rank=i; oracle=c; break
     return {
-      "effect_id":case["effect_id"],"oracle_families":case["oracle_families"],"oracle_found":rank is not None,
-      "oracle_rank":rank,"oracle_name":oracle.get("name") if oracle else None,
+      "effect_id":case["effect_id"],
+      "oracle_families":case["oracle_families"],
+      "oracle_found":rank is not None,
+      "oracle_rank":rank,
+      "oracle_name":oracle.get("name") if oracle else None,
       "oracle_evidence_tier":oracle.get("evidence_tier") if oracle else None,
       "top20":[{"rank":i,"name":c.get("name"),"tier":c.get("evidence_tier")} for i,c in enumerate(candidates[:20],1)],
       "wall_s":round(time.monotonic()-t0,6),
@@ -38,11 +41,19 @@ def main():
     gate=spec["acceptance"]
     passed=(recall+1e-12>=float(gate["heldout_oracle_family_recall_min"]) and top20+1e-12>=float(gate["heldout_top20_oracle_recall_min"]) and total<=float(gate["hard_validation_wall_s"]))
     result={
-      "schema":"PROJECT_BRAIN_DEBIAN_FULL_METADATA_XAPIAN_HELDOUT_VALIDATION_RESULT_V1","validation_id":spec["validation_id"],
-      "heldout_results":results,"heldout_oracle_family_recall":recall,"heldout_top20_oracle_recall":top20,
-      "total_wall_s":round(total,6),"hard_validation_wall_s":gate["hard_validation_wall_s"],"acceptance_gate_pass":passed,
-      "runtime_mutated_by_validator":False,"candidate_packages_installed":False,"candidate_binaries_executed":False,
-      "package_hints_used_by_runtime":False,"promotion_authorized":False,
+      "schema":"PROJECT_BRAIN_DEBIAN_FULL_METADATA_XAPIAN_HELDOUT_VALIDATION_RESULT_V1",
+      "validation_id":spec["validation_id"],
+      "heldout_results":results,
+      "heldout_oracle_family_recall":recall,
+      "heldout_top20_oracle_recall":top20,
+      "total_wall_s":round(total,6),
+      "hard_validation_wall_s":gate["hard_validation_wall_s"],
+      "acceptance_gate_pass":passed,
+      "runtime_mutated_by_validator":False,
+      "candidate_packages_installed":False,
+      "candidate_binaries_executed":False,
+      "package_hints_used_by_runtime":False,
+      "promotion_authorized":False,
       "required_next_action":"RECONCILE__NO_FURTHER_REPAIR_BEFORE_RECONCILIATION"
     }
     OUT.parent.mkdir(parents=True,exist_ok=True)
