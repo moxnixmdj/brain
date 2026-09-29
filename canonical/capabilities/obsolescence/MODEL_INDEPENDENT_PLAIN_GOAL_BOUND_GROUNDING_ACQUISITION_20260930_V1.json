@@ -8,7 +8,7 @@
   "exact_candidate_blobs": {
     "producer": "00f5d0c1c742f444ad876103f251bb4476017dc1",
     "verifier": "d4aa64dc995845fcf8045f14f476f84b7f1d9cb8",
-    "astra_runtime_integration": "7e45881ebfdfd6b2b0213c4500508e4ea83a7c38"
+    "astra_runtime_integration": "801d226ab589595f376da54833de6b925ff96f15"
   },
   "regression_evidence": {
     "public_repo": "moxnixmdj/verification-capsule-runner",
@@ -66,6 +66,14 @@
     "reusable_capabilities_inherited": 1,
     "verified_real_tasks_completed": 1,
     "fresh_reuse_passes": 1,
-    "frontier_dependencies_removed": 1
-  }
+    "frontier_dependencies_removed": 0
+  },
+  "exact_final_head_validation": {
+    "run_id": 36646452335,
+    "conclusion": "success",
+    "artifact_id": 11068728150,
+    "artifact_digest": "sha256:3969e625a3239fed6fc5abdf3f6d3992b1685202e20bc8ef402cab194b7963b9",
+    "note": "Validates the minimal single grounding-precedence gate runtime plus exact producer/verifier/tests."
+  },
+  "progress_credit_note": "The win removes erroneous external supplier discovery for already-bound capabilities; it does not itself remove a frontier-model dependency."
 }
