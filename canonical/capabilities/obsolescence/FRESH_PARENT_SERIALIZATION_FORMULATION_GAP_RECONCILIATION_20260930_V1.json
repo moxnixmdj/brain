@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_FRESH_PARENT_FORMULATION_GAP_RECONCILIATION_V1",
+  "status": "TERMINAL_RECONCILED__NO_PARENT_CAPABILITY_CREDIT",
+  "source_pr": 246,
+  "public_run_id": 36644374149,
+  "artifact_id": 11067706810,
+  "artifact_digest": "sha256:57c6a188f8027c2788f4e2c6991fa8066799a55fb40771f17be6072a819e71d",
+  "public_arm_sha": "26860c2783bcb9dd80ab6a8081051af6fabc9ad9",
+  "exact_runtime_blob": "1e8252415c60a553bad8a05fae2d98217d0f5833",
+  "exact_goal_compiler_blob": "195d5dd5f4fabb8a897fb6407433e691a8fdaf26",
+  "exact_registry_blob": "1b4a05c1b24070a7d2125713af11231214021a97",
+  "terminal_classification": "PARENT_FRESH_TASK_FAIL_FIRST_CAUSAL_GAP_PRESERVED",
+  "exit_code": 3,
+  "state_status": "BLOCKED",
+  "model_free_evidence_path": true,
+  "task_completed": false,
+  "parent_fresh_reuse_pass": false,
+  "capability_credit": 0,
+  "fresh_reuse_credit": 0,
+  "verified_real_task_credit": 0,
+  "residual_gap_localization_credit": 1,
+  "first_causal_gap": {
+    "capability_id": "MODEL_INDEPENDENT_GOAL_TO_TASK_GRAPH_FORMULATION_V1",
+    "blocker": "PLAIN_GOAL_MULTI_CAPABILITY_OBJECTIVE_NOT_FORMULATED_INTO_STRUCTURED_EXISTING_CAPABILITY_GRAPH_BEFORE_SUPPLIER_DISCOVERY",
+    "observed_behavior": "Deterministic plain-goal compilation failed to form a multi-capability composition. Fallback discovery treated the whole technical goal as a missing supplier capability and ranked lexical matches such as leela-zero and openjdk-*-zero despite required serialization and decision capabilities already being bound.",
+    "excluded_causes": [
+      "MODEL_COGNITION_DEPENDENCY",
+      "PUBLIC_CARRIER_UNAVAILABLE",
+      "RUNTIME_HASH_DRIFT",
+      "MISSING_BOUND_CBOR_MESSAGEPACK_BSON_CAPABILITY",
+      "MISSING_VERIFIED_EVIDENCE_TO_DECISION_SYNTHESIS"
+    ]
+  },
+  "spent_task_policy": {
+    "task": "FRESH-PARENT-SERIALIZATION-DECISION-20260930-001",
+    "spent": true,
+    "replay_authorized": false,
+    "tuning_against_task_forbidden": true,
+    "next_real_proof_must_be_materially_different": true
+  },
+  "incremental_spend_usd": 0
+}
