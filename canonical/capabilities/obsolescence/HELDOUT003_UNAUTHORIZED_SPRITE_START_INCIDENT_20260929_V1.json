@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_ONE_SHOT_COORDINATION_INCIDENT_V1",
+  "incident_id": "HELDOUT003_UNAUTHORIZED_SPRITE_START_20260929",
+  "status": "QUARANTINED",
+  "validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
+  "authoritative_first_execution_carrier": "brain-heldout003-one-shot",
+  "carrier_family": "SPRITE",
+  "first_start_authoritative_spend": true,
+  "first_terminal_result_authoritative": true,
+  "result_path": "canonical/astra_runtime/evidence/XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003__RESULT.json",
+  "root_class": "CONCURRENT_WORKER_STARTED_FROZEN_GATE_ON_UNAUTHORIZED_UNPROVEN_ZERO_SPEND_SPRITE_AFTER_EXECUTION_LEASE_WAS_SUPERSEDED",
+  "pre_start_authority_evidence": {
+    "execution_lease_pr": 140,
+    "lease_superseded_before_execution": true,
+    "supersession_comment_time_utc": "2026-09-29T04:47:56Z",
+    "supersession_instruction": "Do not execute HELDOUT-003 from PR140; reconcile canonical contradiction first.",
+    "last_known_prestart_surface_comment_time_utc": "2026-09-29T04:49:32Z",
+    "sprite_authorization_state": "NOT_AUTHORIZED_AS_HARD_ZERO_SPEND_FALLBACK",
+    "reason": "Sprite was metered and account credit/hard-zero-spend admission had not been proven.",
+    "heldout_start_or_result_observed_at_that_time": false
+  },
+  "observed_terminal_evidence": {
+    "first_result_observed_comment_time_utc": "2026-09-29T04:52:42Z",
+    "acceptance_gate_pass": false,
+    "total_wall_s": 140.213006,
+    "exact_first_blocker": "REMOTE_CARRIER_MATERIALIZATION_OMITTED_EXISTING_VERIFIER_DEPENDENCIES",
+    "upstream_acquisition_status": "CONTRACT_INFERRED",
+    "upstream_selected_supplier": "zint",
+    "upstream_discovery_source": "APT_FULL_METADATA_XAPIAN"
+  },
+  "compliance_classification": "EXECUTION_GOVERNANCE_VIOLATION__TERMINAL_EVIDENCE_STILL_MONOTONIC_AND_AUTHORITATIVE",
+  "qualified_carrier_claim": false,
+  "hard_zero_spend_proven_before_start": false,
+  "incremental_cash_spend_usd_verified": null,
+  "parent_runtime_semantic_falsification_claim": false,
+  "no_candidate_change": true,
+  "invariant": "FIRST_FRESH_START_PERMANENTLY_SPENDS_VALIDATION_ID__NO_REPLAY_EVEN_WHEN_START_WAS_NONCOMPLIANT",
+  "corrective_rule": "PRESERVE_FIRST_TERMINAL_RESULT_AND_QUARANTINE_EXECUTION_PROVENANCE__FREEZE_FRESH_ORTHOGONAL_GATE_BEFORE_ANY_GENERIC_CARRIER_CLOSURE_CORRECTION__FUTURE_START_REQUIRES_LIVE_LEASE_PLUS_PRESTART_HARD_ZERO_SPEND_AND_FULL_REPOSITORY_DEPENDENCY_CLOSURE_PROOF"
+}
