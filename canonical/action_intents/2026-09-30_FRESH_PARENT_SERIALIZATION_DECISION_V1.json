@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "FRESH-PARENT-SERIALIZATION-DECISION-20260930-V1",
-  "status": "PROPOSED",
+  "status": "TERMINAL_FAIL_RECONCILED__NO_REPLAY",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
@@ -351,5 +351,28 @@
         "execution_dependencies_complete": true
       }
     }
+  },
+  "execution_result": {
+    "public_run_id": 36644374149,
+    "public_job_id": 109663801776,
+    "public_head_sha": "26860c2783bcb9dd80ab6a8081051af6fabc9ad9",
+    "task_exit_code": 3,
+    "terminal_classification": "PARENT_FRESH_TASK_FAIL_FIRST_CAUSAL_GAP_PRESERVED",
+    "evidence_path": "canonical/capabilities/obsolescence/FRESH_PARENT_SERIALIZATION_DECISION_TERMINAL_RECONCILIATION_20260930_V1.json",
+    "artifact_id": 11067706810,
+    "artifact_digest": "sha256:57c6a188f8027c2788f4e2c6991fa8066799a55fb40771f17be6072a819e71d7",
+    "localized_first_causal_gap": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+    "same_task_replay_authorized": false,
+    "capability_credit": false,
+    "parent_fresh_reuse_credit": false
+  },
+  "post_execution_obs": {
+    "goal": "PRESERVE_TERMINAL_RESULT__DO_NOT_REPLAY",
+    "capability": "LOCALIZE_ONLY_FIRST_CAUSAL_GAP",
+    "blocker": "PLAIN_GOAL_TO_EXISTING_BOUND_CAPABILITY_GROUNDING_FAILED_BEFORE_EXECUTION_OR_SYNTHESIS",
+    "solution": "OPEN_FRESH_ACQUISITION_LANE_FOR_GENERIC_GROUNDING_ONLY_AFTER_LIVE_OBS_ROUTE_RACE",
+    "verification": "PUBLIC_RUN_TERMINAL_ARTIFACT_AND_EXACT_LOGS",
+    "inherited_system": "KEEP_VERIFIED_SYNTHESIS_AND_BOUND_SERIALIZATION_CAPABILITIES__DO_NOT_BLAME_OR_REBUILD_THEM",
+    "obs_obs": "STOP_THIS_TASK__NO_TUNING_AGAINST_SERIALIZATION_CASE"
   }
 }
