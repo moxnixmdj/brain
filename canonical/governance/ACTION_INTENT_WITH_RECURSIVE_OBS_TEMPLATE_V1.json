@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V1",
+  "status": "AUTHORING_TEMPLATE__COPY_AND_FILL__NEVER_EXECUTE_DIRECTLY",
+  "instructions": [
+    "Copy into canonical/action_intents/<date>_<ACTION>.json.",
+    "Replace every __REQUIRED_* placeholder before opening a PR.",
+    "Set recursive_obs.canonical_base_commit to the exact current main commit used to branch.",
+    "If main changes materially before execution, refresh canonical state and reissue affected OBS layers or the full receipt.",
+    "Do not create a separate OBS document unless needed; embed the receipt here.",
+    "OBS analysis and this template receive zero progress credit."
+  ],
+  "action_intent": {
+    "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+    "action_id": "__REQUIRED_ACTION_ID__",
+    "status": "PROPOSED",
+    "canonical_generation": "__REQUIRED_CANONICAL_GENERATION__",
+    "terminal_objective": "__REQUIRED_TERMINAL_OBJECTIVE__",
+    "active_program": "__REQUIRED_ACTIVE_PROGRAM__",
+    "capability_target": "__REQUIRED_CAPABILITY_TARGET__",
+    "probe_id": null,
+    "causal_blocker": "__REQUIRED_CAUSAL_BLOCKER_OR_DIRECT_ROUTE__",
+    "action_kind": "__REQUIRED_ACTION_KIND__",
+    "blocker_lease_key": "__REQUIRED_GENERATION::CAPABILITY::BLOCKER::ACTION_KIND__",
+    "expected_parent_frontier_change": "__REQUIRED_PARENT_LEVEL_CHANGE__",
+    "highest_leverage_now": true,
+    "prior_work_checked": [
+      "__REQUIRED_SEARCH_AND_REUSE_EVIDENCE__"
+    ],
+    "evidence_presence_classification": "__REQUIRED_CANONICAL_EVIDENCE_CLASS__",
+    "probe_specific": false,
+    "generic_repair_from_single_probe": false,
+    "orthogonal_recurrence_count": 0,
+    "precommitted_acceptance_gate_exception": false,
+    "probe_specific_literals": [],
+    "stop_condition": "__REQUIRED_STOP_CONDITION__",
+    "governance_change": false,
+    "weakens_existing_guard": false,
+    "recursive_obs": {
+      "canonical_generation_or_commit": "__REQUIRED_CANONICAL_GENERATION__",
+      "canonical_base_commit": "__REQUIRED_EXACT_40_HEX_BASE_COMMIT__",
+      "real_outcome": "__REQUIRED_REAL_USEFUL_OUTCOME__",
+      "required_capability": "__REQUIRED_CAPABILITY__",
+      "obs_goal": {
+        "real_outcome": "__REQUIRED_REAL_USEFUL_OUTCOME__",
+        "proxy_goals_deleted": [],
+        "surviving_necessity": "__REQUIRED_SURVIVING_NECESSITY__"
+      },
+      "obs_capability": {
+        "existing_inherited_routes_checked": [],
+        "external_existing_routes_checked": [],
+        "capability_work_deleted": [],
+        "surviving_gap": "__REQUIRED_SURVIVING_CAPABILITY_GAP__"
+      },
+      "obs_blocker": {
+        "intrinsic_or_path_specific": "__REQUIRED_CLASSIFICATION__",
+        "delete_bypass_substitute_options": [],
+        "surviving_causal_blocker": "__REQUIRED_SURVIVING_BLOCKER_OR_NONE__"
+      },
+      "obs_solution": {
+        "deletion_first_order_applied": [
+          "DELETE",
+          "BYPASS",
+          "REUSE",
+          "SUBSTITUTE",
+          "COMPOSE",
+          "REPAIR",
+          "BUILD"
+        ],
+        "routes_ranked": [
+          "__REQUIRED_AT_LEAST_ONE_ROUTE__"
+        ],
+        "losing_routes_reason": "__REQUIRED_WHY_ALTERNATIVES_LOST__",
+        "implementation_still_necessary": true
+      },
+      "obs_verification": {
+        "direct_real_effect_verification_considered": true,
+        "existing_oracle_considered": true,
+        "synthetic_verification_necessity": "__REQUIRED_DIRECT_OR_SYNTHETIC_JUSTIFICATION__"
+      },
+      "obs_inherited_system": {
+        "downstream_work_to_delete_or_supersede": [],
+        "adjacent_capabilities_absorbed": [],
+        "fresh_reuse_plan": "__REQUIRED_FRESH_REUSE_OR_JUSTIFIED_NOT_PRACTICAL__"
+      },
+      "obs_obs": {
+        "analysis_steps_deleted_or_cached": [],
+        "search_stop_decision": "__REQUIRED_REASON_SEARCH_CAN_STOP_NOW__",
+        "affected_layers_only_on_revalidation": true
+      },
+      "routes_considered": [
+        "__REQUIRED_AT_LEAST_ONE_ROUTE__"
+      ],
+      "deleted_or_bypassed_paths": [],
+      "selected_surviving_route": "__REQUIRED_SELECTED_ROUTE__",
+      "why_selected_route_is_fastest_sufficient": "__REQUIRED_CORRECTNESS_WALL_CLOCK_COST_JUSTIFICATION__",
+      "expected_parent_level_state_change": "__MUST_MATCH_ACTION_INTENT_EXPECTED_PARENT_FRONTIER_CHANGE__",
+      "stop_condition": "__MUST_MATCH_ACTION_INTENT_STOP_CONDITION__"
+    }
+  }
+}
