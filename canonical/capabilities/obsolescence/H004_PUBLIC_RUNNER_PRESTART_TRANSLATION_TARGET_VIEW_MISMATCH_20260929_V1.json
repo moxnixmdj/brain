@@ -1,0 +1,50 @@
+{
+  "schema": "PROJECT_BRAIN_H004_PUBLIC_RUNNER_PRESTART_TRANSLATION_TARGET_VIEW_MISMATCH_V1",
+  "evidence_id": "H004-PUBLIC-RUNNER-PRESTART-TRANSLATION-TARGET-VIEW-MISMATCH-20260929-V1",
+  "public_repository": "moxnixmdj/verification-capsule-runner",
+  "workflow_run_id": 36599477886,
+  "workflow_run_attempt": 1,
+  "arm_commit": "500b87aaff3d3b897dcd7bf73602077a67fca5a1",
+  "passed_steps": [
+    "one-shot event identity",
+    "faithful Debian surface package installation"
+  ],
+  "fetched_translation_evidence": [
+    "trixie/main Translation-en 6486 kB",
+    "trixie-updates/main Translation-en 2496 B",
+    "trixie-security/main Translation-en 161 kB"
+  ],
+  "fetched_contents_evidence": [
+    "trixie/main all Contents 38.2 MB",
+    "trixie/main amd64 Contents 12.7 MB",
+    "trixie-updates/main all Contents 25.5 kB",
+    "trixie-updates/main amd64 Contents 9760 B"
+  ],
+  "failed_predicate": "TRANSLATION_EN_METADATA_MISSING",
+  "root_cause": "The update command used an explicit Acquire::Languages=en override, but the later apt-get indextargets query did not. The Debian container's default language-suppression policy therefore hid translation targets from indextargets even though Translation-en files had been fetched.",
+  "strategy_change": "Stop iterating directly on H004 carrier lanes. First run a generic no-H004 carrier diagnostic under a persistent late-loading APT English policy and prove all carrier predicates in one run.",
+  "diagnostic_must_prove": [
+    "Packages metadata",
+    "Translation-en visible through indextargets",
+    "Debian Package Tags",
+    "Contents-all",
+    "architecture-specific Contents",
+    "python3-xapian import",
+    "APT_FULL_METADATA_XAPIAN route active on generic/spent input",
+    "contents_direct_stream metadata route true",
+    "zbarimg present",
+    "all sealed blob hashes exact",
+    "verify_pending_cli_binding import closure resolves",
+    "no H004 START or RESULT"
+  ],
+  "heldout_004": {
+    "freshness": "UNSPENT",
+    "execution_count": 0,
+    "start_created": false,
+    "result_created": false,
+    "dispatch_invoked": false,
+    "evaluator_invoked": false
+  },
+  "incremental_spend_usd": 0,
+  "required_next_action": "RUN_GENERIC_PUBLIC_CARRIER_DIAGNOSTIC_WITH_PERSISTENT_APT_ENGLISH_POLICY__VERIFY_FULL_METADATA_XAPIAN_CONTENTS_TAGS_ZBAR_HASHES_IMPORT_CLOSURE__NO_H004_START__ONLY_THEN_STAGE_NEW_ONE_SHOT_H004_LANE"
+}
