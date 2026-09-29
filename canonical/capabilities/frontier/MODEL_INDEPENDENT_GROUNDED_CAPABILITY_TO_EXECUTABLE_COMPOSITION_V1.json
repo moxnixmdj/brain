@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_SUBCAPABILITY_TARGET_V1",
+  "capability_id": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "status": "ACTIVE_ACQUISITION_TARGET__UNPROVEN__LOCALIZED_FROM_POST_GROUNDING_RUNTIME",
+  "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "real_frontier_role": "SUBCAPABILITY_REQUIRED_FOR_PARENT_COMPOSITION",
+  "useful_behavior": "Given one or more plain-goal clauses already grounded to verified bound Brain capabilities, deterministically compose those grounded capabilities into an executable controller plan with explicit data/effect dependencies, preserve bounded ambiguity, and fail closed when no justified composition exists.",
+  "scope_boundaries": [
+    "Input grounding must come from verified model-independent bound-capability grounding.",
+    "No model API, local model, or model artifact in the credited cognition path.",
+    "No hand-authored task-specific controller action sequence may substitute for composition.",
+    "Ambiguous grounded candidates must remain unresolved until deterministic constraints or evidence disambiguate them.",
+    "The spent serialization parent task may not be replayed to tune or prove this capability."
+  ],
+  "discovery_evidence": {
+    "source_acquisition": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1.json",
+    "grounding_merge_commit": "95543fe8591c2b490901143fb165ce6571b7140d",
+    "observed_post_grounding_state": "BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_REQUIRED",
+    "same_parent_task_replay_forbidden": true
+  },
+  "acquisition_bar": {
+    "generic_composition_required": true,
+    "fresh_real_task_required": true,
+    "fresh_reuse_on_materially_distinct_real_task_required": true,
+    "explicit_dependency_trace_required": true,
+    "independent_verification_required": true,
+    "no_hand_authored_task_actions": true,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "current_status": "UNPROVEN",
+  "next_action": "RUN_OBS_V3_V4_LIVE_CHALLENGER_RACE_FOR_MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION__SEARCH_EXISTING_BRAIN_PLANNER_AND_DETERMINISTIC_COMPOSITION_ROUTES_FIRST__NO_SPENT_PARENT_REPLAY",
+  "obsolescence_status": "NOT_YET_PROVEN",
+  "winning_route": null,
+  "capability_strength_result": null,
+  "incremental_cost_result_usd": null,
+  "model_dependency_count": 0,
+  "independent_verification": null,
+  "inheritance_path": [],
+  "residual_gap": "NO_VERIFIED_GENERIC_MODEL_INDEPENDENT_ROUTE_FROM_GROUNDED_BOUND_CAPABILITIES_TO_EXECUTABLE_MULTI_STEP_PLAN",
+  "evidence_path": null
+}

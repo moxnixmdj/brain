@@ -1,0 +1,131 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-POST-GROUNDING-COMPOSITION-FRONTIER-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "probe_id": null,
+  "causal_blocker": "POST_GROUNDING_RUNTIME_STOPS_AT_BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_REQUIRED",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1::POST_GROUNDING_RUNTIME_STOPS_AT_BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_REQUIRED::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Record merged grounding acquisition exactly once, delete the solved grounding blocker, and select the next narrow unproven model-independent subcapability: grounded bound capabilities to executable composition.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Merged PR250 / merge 95543fe8591c2b490901143fb165ce6571b7140d",
+    "Grounding acquisition evidence canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1.json",
+    "Exact public validation run 36646452335 and earlier real-task/fresh-reuse runs recorded by PR250",
+    "Current runtime first post-grounding state BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_REQUIRED",
+    "Current pointer/hierarchy/queue/scoreboard still name the solved grounding blocker"
+  ],
+  "evidence_presence_classification": "CAPABILITY_PROVEN_EVIDENCE_PRESENT",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Update only canonical frontier/accounting metadata. Add no runtime implementation, no synthetic gate, no model route, and no capability claim for composition. After reconciliation, run fresh OBS on the composition gap before implementation.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "95543fe8591c2b490901143fb165ce6571b7140d",
+    "real_outcome": "Make live canonical state reflect the verified grounding acquisition and the next smallest model-independent causal gap.",
+    "required_capability": "CANONICAL_FRONTIER_RECONCILIATION",
+    "obs_goal": {
+      "real_outcome": "Remove stale grounding-target state and expose only the surviving composition gap.",
+      "proxy_goals_deleted": [
+        "Implement composition now",
+        "Replay the spent serialization parent task",
+        "Add another model or parser",
+        "Award parent capability credit"
+      ],
+      "surviving_necessity": "Live authority is stale after PR250 and would otherwise direct work toward a solved target."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Merged PR250 target and acquisition records",
+        "ACTIVE_GOAL_HIERARCHY_V1",
+        "FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1",
+        "REAL_OUTPUT_SCOREBOARD_V1",
+        "CANONICAL_POINTER.json"
+      ],
+      "external_existing_routes_checked": [
+        "Not applicable: reconciliation-only action; no external supplier selected."
+      ],
+      "capability_work_deleted": [
+        "No runtime change",
+        "No provider search",
+        "No task execution",
+        "No new verifier"
+      ],
+      "surviving_gap": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Canonical-state drift after a verified subcapability acquisition.",
+      "delete_bypass_substitute_options": [
+        "Leave stale state: rejected because it causes duplicate work.",
+        "Jump directly to parent capability claim: rejected because composition remains unproven.",
+        "Minimal reconciliation to the observed post-grounding blocker: survives."
+      ],
+      "surviving_causal_blocker": "POST_GROUNDING_RUNTIME_STOPS_AT_BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_REQUIRED"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "MINIMAL_CANONICAL_RECONCILIATION_ONLY"
+      ],
+      "losing_routes_reason": "Any implementation or new search before canonical reconciliation risks duplicate/stale work and exceeds the action's purpose.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Verify exact consistency across pointer, hierarchy, queue, scoreboard, grounding target, and new composition target."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any queued acquisition of MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+        "Any external-discovery repair for already-bound capability misses"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Verified plain-goal-to-bound-capability grounding"
+      ],
+      "fresh_reuse_plan": "Composition acquisition must later be tested on a fresh model-independent real task and materially distinct reuse; this reconciliation does not execute either."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse PR250 exact acquisition evidence",
+        "Reuse its public validation and real-task/fresh-reuse receipts"
+      ],
+      "search_stop_decision": "No search can change a reconciliation action whose source of truth is merged canonical evidence.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "External route discovery not applicable to RECONCILE_FRONTIER."
+    },
+    "routes_considered": [
+      "MINIMAL_CANONICAL_RECONCILIATION_ONLY"
+    ],
+    "deleted_or_bypassed_paths": [
+      "GROUNDING_REACQUISITION",
+      "PARENT_REPLAY",
+      "MODEL_BACKED_COMPOSITION"
+    ],
+    "selected_surviving_route": "MINIMAL_CANONICAL_RECONCILIATION_ONLY",
+    "why_selected_route_is_fastest_sufficient": "All required evidence already exists in merged PR250; only stale authority surfaces need updating.",
+    "expected_parent_level_state_change": "Record merged grounding acquisition exactly once, delete the solved grounding blocker, and select the next narrow unproven model-independent subcapability: grounded bound capabilities to executable composition.",
+    "stop_condition": "Update only canonical frontier/accounting metadata. Add no runtime implementation, no synthetic gate, no model route, and no capability claim for composition. After reconciliation, run fresh OBS on the composition gap before implementation.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER action consumes existing canonical evidence only."
+    }
+  }
+}
