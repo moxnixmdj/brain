@@ -1,0 +1,140 @@
+{
+  "schema": "PROJECT_BRAIN_TYPED_EVIDENCE_DECISION_TASK_V1",
+  "task_id": "space_cargo_final_design_promotion_a",
+  "target_claim": "promote_reference_search_region_to_final_design",
+  "evidence": [
+    {
+      "id": "target_apogee_achieved",
+      "probability": 0.99,
+      "provenance": [
+        "SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1.reference_search_region.derived.apogee_altitude_km=409.62",
+        "target_orbit_km=400"
+      ]
+    },
+    {
+      "id": "throughput_scaling_quantified",
+      "probability": 0.99,
+      "provenance": [
+        "SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1.throughput_scaling_for_reference_search_region contains 1M/10M/100M t/year cases"
+      ]
+    },
+    {
+      "id": "reference_shape_reproduction_passed",
+      "probability": 0.98,
+      "provenance": [
+        "SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1.independent_checks.startram_reference_shape_reproduction.result=PASS_ORDER_AND_REFERENCE_MAGNITUDE"
+      ]
+    },
+    {
+      "id": "aerodynamic_cd_unvalidated",
+      "probability": 0.99,
+      "provenance": [
+        "reference_search_region assumes Cd=0.05",
+        "sensitivity_warning says Cd is an explicit search assumption, not demonstrated"
+      ]
+    },
+    {
+      "id": "tps_envelope_gap",
+      "probability": 0.99,
+      "provenance": [
+        "technology_reality_check: PICA demonstrated below 1800 W/cm^2",
+        "reference search point peak about 7050 W/cm^2"
+      ]
+    },
+    {
+      "id": "em_mass_velocity_repetition_gap",
+      "probability": 0.99,
+      "provenance": [
+        "reference pod mechanical energy 4.555 TJ",
+        "ratio to 10.64 MJ railgun shot=428062",
+        "localized gap is mass × velocity × repetition × reliability together"
+      ]
+    },
+    {
+      "id": "exit_isolation_unproven",
+      "probability": 0.95,
+      "provenance": [
+        "surviving_residuals_ranked includes CARGO_SCALE_VACUUM_MUZZLE_OR_EQUIVALENT_EXIT_ISOLATION"
+      ]
+    }
+  ],
+  "support_rules": [
+    {
+      "id": "support_orbit",
+      "all_of": [
+        "target_apogee_achieved"
+      ]
+    },
+    {
+      "id": "support_throughput",
+      "all_of": [
+        "throughput_scaling_quantified"
+      ]
+    },
+    {
+      "id": "support_reference_shape",
+      "all_of": [
+        "reference_shape_reproduction_passed"
+      ]
+    }
+  ],
+  "contradiction_rules": [
+    {
+      "id": "contra_aero",
+      "all_of": [
+        "aerodynamic_cd_unvalidated"
+      ]
+    },
+    {
+      "id": "contra_tps",
+      "all_of": [
+        "tps_envelope_gap"
+      ]
+    },
+    {
+      "id": "contra_em",
+      "all_of": [
+        "em_mass_velocity_repetition_gap"
+      ]
+    },
+    {
+      "id": "contra_exit",
+      "all_of": [
+        "exit_isolation_unproven"
+      ]
+    }
+  ],
+  "hard_constraints": [
+    {
+      "id": "real_aerodynamic_shape_and_cd_validated",
+      "satisfied": false,
+      "failure_outcome": "INSUFFICIENT_EVIDENCE",
+      "provenance": [
+        "surviving_residuals_ranked[0]=REAL_AERODYNAMIC_SHAPE_AND_EFFECTIVE_CD_AT_6KM_HYPERSONIC_EXIT"
+      ]
+    },
+    {
+      "id": "repetitive_tps_lifecycle_validated",
+      "satisfied": false,
+      "failure_outcome": "INSUFFICIENT_EVIDENCE",
+      "provenance": [
+        "surviving_residuals_ranked[1]=REPETITIVE_TPS_OR_ACTIVE_COOLING_LIFECYCLE_AT_THOUSANDS_OF_LAUNCHES_PER_DAY"
+      ]
+    },
+    {
+      "id": "em_acceleration_scaling_validated",
+      "satisfied": false,
+      "failure_outcome": "INSUFFICIENT_EVIDENCE",
+      "provenance": [
+        "surviving_residuals_ranked[2]=115T_CLASS_ELECTROMAGNETIC_ACCELERATION_TO_NEAR_9KM_S_WITH_REPETITIVE_FAULT_TOLERANCE"
+      ]
+    }
+  ],
+  "policy": {
+    "accept_support_min": 0.9,
+    "accept_contradiction_max": 0.2,
+    "reject_contradiction_min": 0.9,
+    "reject_support_max": 0.2,
+    "minimum_margin": 0.5
+  }
+}
