@@ -69,13 +69,13 @@
     "REOPENED_BY_REGRESSION"
   ],
   "immediate_frontier": {
-    "selected_capability": "MULTI_TOOL_ORCHESTRATION_AND_PLANNING",
-    "objective": "Coordinate dependent tools/subtasks across long horizons while preserving state, scope, causal ordering, runtime data dependencies, and verification.",
+    "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "objective": "Bridge the already-verified Debian full-metadata/Xapian discovery route into the existing APT acquisition, contract-learning, execution, and independent-verification stack using source-neutral candidate semantics; freeze a fresh orthogonal end-to-end gate before runtime mutation.",
     "selection_metric": "VERIFIED_CAPABILITY_GAIN_X_OBSOLESCENCE_LEVERAGE_PER_WALL_CLOCK_WITH_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "POST_TOOL_DISCOVERY_WIN_FRONTIER_NOT_RECOMPUTED__EXISTING_MULTI_TOOL_PLANNER_FANOUT_CONDITIONAL_JOIN_AND_ARTIFACT_COMPOSITION_ROUTE_NOT_YET_FRONTIER_OBSOLESCENCE_ADJUDICATED",
-    "evidence_path": "canonical/capabilities/obsolescence/POST_TOOL_DISCOVERY_FRONTIER_RECOMPUTATION_20260929_V1.json",
-    "repair_status": "ROUTE_RECOVERY_AND_FRONTIER_BAR_DEFINITION__NO_REPAIR_AUTHORIZED",
-    "prohibition": "TEST_EXISTING_ROUTE_FIRST__NO_RUNTIME_MUTATION_BEFORE_FRESH_UNSEEN_GATE__NO_PROXY_GOALS"
+    "exact_blocker": "APT_FULL_METADATA_XAPIAN_CANDIDATES_ROUTE_TO_APT_CLI_BUT_ARE_DROPPED_BY_LEGACY_APT_CATALOG_ONLY_ADMISSION__LEGACY_ABSOLUTE_SCORE_THRESHOLD_UNCALIBRATED_FOR_XAPIAN",
+    "evidence_path": "canonical/capabilities/obsolescence/POST_PR111_XAPIAN_APT_ADMISSION_FRONTIER_CORRECTION_V1.json",
+    "repair_status": "STATIC_CAUSAL_BLOCKER_PROVEN__NO_RUNTIME_MUTATION__FRESH_GATE_FREEZE_REQUIRED",
+    "prohibition": "NO_HELDOUT_005_REPLAY__NO_TUNING_TO_SPENT_CASES__NO_PACKAGE_HINTS__NO_TASK_SPECIFIC_LITERALS__NO_SOURCE_NAME_WHITELIST_ONLY_PATCH__NO_UNCALIBRATED_CROSS_SCORER_ABSOLUTE_THRESHOLD__NO_RUNTIME_REPAIR_BEFORE_FRESH_GATE_FREEZE"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -155,7 +155,7 @@
     "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EVIDENCE_ACQUISITION_STRUCTURAL_CAUSE_RECONCILIATION_V1.json"
   },
   "tool_discovery_selection_learning_full_metadata_xapian_v1": {
-    "status": "VERIFIED_SUBCAPABILITY_ROUTE_INHERITED__PARENT_RESIDUAL_DEMOTED",
+    "status": "VERIFIED_SUBCAPABILITY_ROUTE_INHERITED__PARENT_RESIDUAL_REOPENED_BY_INTEGRATION_FAILURE",
     "source_pr": 89,
     "authoritative_deployment": "805a36d4-04cf-4938-bfac-74d29418081f",
     "runtime_git_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
@@ -165,6 +165,12 @@
     "incremental_spend_usd": 0,
     "terminal_reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
     "parent_capability_obsolescence_claim": false,
-    "next_action": "PRESERVE_AND_REUSE__REOPEN_ONLY_IF_REAL_WORK_FALSIFIES"
+    "next_action": "FREEZE_FRESH_ORTHOGONAL_DISCOVERY_TO_EXECUTION_GATE__THEN_GENERIC_ADMISSION_INTERFACE_REPAIR"
+  },
+  "post_pr111_frontier_correction": {
+    "status": "STATIC_CAUSAL_BLOCKER_PROVEN__IMMEDIATE_FRONTIER_RESTORED",
+    "evidence_path": "canonical/capabilities/obsolescence/POST_PR111_XAPIAN_APT_ADMISSION_FRONTIER_CORRECTION_V1.json",
+    "superseded_immediate_frontier_from_pr": 111,
+    "preserved_historical_capability": "MULTI_TOOL_ORCHESTRATION_AND_PLANNING"
   }
 }
