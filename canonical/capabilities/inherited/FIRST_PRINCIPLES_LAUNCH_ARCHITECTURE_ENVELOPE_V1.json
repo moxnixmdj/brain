@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_INHERITED_CAPABILITY_PACKAGE_V1",
   "capability_id": "FIRST_PRINCIPLES_LAUNCH_ARCHITECTURE_ENVELOPE_V1",
-  "status": "VERIFIED_INHERITED",
+  "status": "VERIFIED_SUPPORTING_DOMAIN_TOOL__NOT_FRONTIER_CAPABILITY_ACQUISITION",
   "useful_behavior": "Given payload/gross mass, pod geometry/aerodynamic assumptions, exit altitude/speed/angle, accelerator g-load, throughput, and electrical efficiency, compute a deterministic first-order Earth-to-LEO architecture envelope: ballistic coefficient, atmosphere/trajectory loads, apogee, circularization delta-v, accelerator length/time/force/energy/power, launch cadence, and simultaneous pod occupancy.",
   "source_real_task": "SPACE-CARGO-ARCHITECTURE-ENVELOPE-WIN1-20260929-V1",
   "implementation": {
@@ -88,7 +88,10 @@
     "point-mass trajectory cannot certify structural or control loads"
   ],
   "inheritance_rule": "Reuse this capability before any new launch-architecture simulator, benchmark, or MDO framework. Escalate only when an exact residual requires higher fidelity.",
-  "fresh_reuse_status": "PASS",
+  "fresh_reuse_status": "PASS_SUPPORTING_TOOL_REUSE__NOT_FRONTIER_FRESH_REUSE",
   "fresh_reuse_evidence_path": "canonical/capabilities/obsolescence/FIRST_PRINCIPLES_LAUNCH_ARCHITECTURE_ENVELOPE_FRESH_REUSE_5G_001.json",
-  "fresh_reuse_summary": "Reused without rediscovery on 5 g fragile-cargo constraint at 100 Mt/year; deterministic result independently matched by Wolfram calculation."
+  "fresh_reuse_summary": "The 5 g case proves same-domain deterministic reuse only. It does not prove cross-domain transfer of the frontier-level agentic research/problem-solving capability.",
+  "frontier_capability_credit": false,
+  "frontier_capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "classification_note": "This deterministic launch-domain model is useful inherited machinery, but it is narrower than the documented frontier capability. It may support Evidence Task A but cannot itself satisfy frontier capability acquisition."
 }
