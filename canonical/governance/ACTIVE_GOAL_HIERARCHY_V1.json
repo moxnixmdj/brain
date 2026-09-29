@@ -100,6 +100,7 @@
     "runtime_path": "canonical/runtime/capability_discovery.py",
     "runtime_git_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
     "source_pr": 89,
-    "status": "VERIFIED_ROUTE_INHERITED_PENDING_MERGE"
+    "status": "VERIFIED_ROUTE_INHERITED_ON_MAIN",
+    "inherited_by_merge_commit": "db298bb4363266ef9e91ec9ec114b5f1c7bcf1fd"
   }
 }
