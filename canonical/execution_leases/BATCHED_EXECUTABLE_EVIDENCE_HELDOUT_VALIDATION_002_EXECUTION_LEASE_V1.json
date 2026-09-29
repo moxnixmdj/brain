@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_HELDOUT_EXECUTION_LEASE_V1",
   "validation_id": "BATCHED-EXECUTABLE-EVIDENCE-HELDOUT-VALIDATION-002",
-  "status": "EXECUTION_STARTED__SPENT__AWAITING_TERMINAL_RECONCILIATION",
+  "status": "EXECUTION_SPENT__TERMINAL_CAPTURE_BLOCKED_BY_RAILWAY_READ_LIMITS__LEASE_HELD",
   "holder": "chatgpt-directjoin-20260929-0307",
   "claimed_on": "2026-09-29T01:12:00Z",
   "source_pr": 85,
@@ -20,7 +20,7 @@
   },
   "concurrency_rule": "NO_WORKER_MAY_EXECUTE_OR_REPLAY_HELDOUT_002__ONLY_READ_ONLY_CAPTURE_OF_THE_EXACT_STARTED_DEPLOYMENT_AND_CANONICAL_RECONCILIATION_ARE_ALLOWED",
   "execution_budget_remaining": 0,
-  "next_action": "READ_ONLY_CAPTURE_EXACT_DEPLOYMENT_TERMINAL_RESULT__RECONCILE__THEN_RELEASE_LEASE",
+  "next_action": "READ_ONLY_CAPTURE_EXACT_EXISTING_DEPLOYMENT_TERMINAL_RESULT_WHEN_RAILWAY_READ_SURFACE_IS_AVAILABLE__RECONCILE__THEN_RELEASE_LEASE",
   "anti_drift": [
     "NO_SECOND_REPAIR",
     "NO_MERGE_OR_PROMOTION_BEFORE_RECONCILIATION",
@@ -36,5 +36,11 @@
     "service_id": "851b6f16-2e12-4a68-b49c-04f81056fa5f",
     "deployment_id": "aa411a03-2a63-4708-bf1a-758acae7f72c",
     "start_marker": "PB_HELDOUT_002_EXECUTION_START=1"
+  },
+  "terminal_capture": {
+    "observed": false,
+    "blocker_receipt": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_002_TERMINAL_CAPTURE_BLOCKER_20260929_V1.json",
+    "reason": "Railway Remote MCP read path is rate-limited and Railway Agent usage limit is reached; no repository or public terminal artifact is available.",
+    "no_verdict": true
   }
 }
