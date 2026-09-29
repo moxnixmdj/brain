@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_GENERIC_SEMANTIC_VERIFIER_EVIDENCE_ADMISSION_REPAIR_V1",
+  "evidence_id": "GENERIC-SEMANTIC-VERIFIER-EVIDENCE-ADMISSION-20260929-V1",
+  "causal_blocker": "HELDOUT_004_SPENT_FAIL__INDEPENDENT_SEMANTIC_VERIFIER_ACQUISITION_EMPTY__NO_REPLAY",
+  "repair": {
+    "path": "canonical/runtime/verify_pending_cli_binding.py",
+    "before_blob": "8ec4da92080e885a15266389c0318688e6408d43",
+    "candidate_blob": "a6b028c25d79d2dff59c87e3b3ad91d9fe934dae",
+    "change": "Replace matched_terms-only verifier candidate admission with a source-neutral evidence sufficiency predicate: preserve legacy >=2 matched_terms; alternatively accept LOCAL_EXECUTABLE_OWNERSHIP_VERIFIED + SEMANTIC_PACKAGE_EXECUTABLE_OWNERSHIP + nonempty command_paths + nonempty semantic_source.",
+    "source_name_whitelist": false,
+    "package_name_whitelist": false,
+    "heldout_literals": false,
+    "fabricated_matched_terms": false,
+    "discovery_retuning": false,
+    "contract_parser_change": false
+  },
+  "prior_evidence": {
+    "pr113_audit_blob": "b4dc176a30f78180cbfceaf7cd7c9d04791ebc14",
+    "reproduced_failure": "SEMANTIC_VERIFIER_ACQUISITION_FAILED:[]",
+    "probe_calls_before_control": 0,
+    "two_terms_control_probe_calls": 1,
+    "h004_terminal_run_id": 36602685401,
+    "h004_terminal_error_leaf": "SEMANTIC_VERIFIER_ACQUISITION_FAILED:[]"
+  },
+  "verification": {
+    "provider": "GitHub Actions public standard runner",
+    "public_repo": "moxnixmdj/verification-capsule-runner",
+    "run_id": 36603922229,
+    "job_id": 109527977535,
+    "run_attempt": 1,
+    "conclusion": "success",
+    "tests_run": 6,
+    "tests_passed": 6,
+    "test_path": "canonical/tests/test_semantic_verifier_evidence_admission.py",
+    "test_blob": "ff8cf553c3521d5f04254514950e26cc895c5b38",
+    "heldout_cases_executed": 0,
+    "package_installs_for_candidate_verification": 0,
+    "candidate_binaries_executed": 0,
+    "incremental_spend_usd": 0
+  },
+  "preserved_guards": [
+    "producer package exclusion",
+    "zero_cost_eligible required",
+    "integration_friction == 0 required",
+    "version required",
+    "archive SHA-256 required",
+    "fresh apt_cli_probe still required",
+    "semantic help contract still required",
+    "verifier execution still required",
+    "observed semantic output must equal expected text"
+  ],
+  "adjudication": {
+    "generic_repair_verified": true,
+    "h004_replay_authorized": false,
+    "next_action": "FREEZE_NEW_ORTHOGONAL_FRESH_GATE_BEFORE_ANY_EXECUTION"
+  }
+}
