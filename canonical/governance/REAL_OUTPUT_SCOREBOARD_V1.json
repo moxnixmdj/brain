@@ -29,7 +29,12 @@
     "synthetic_probe_is_progress_without_parent_state_change": false,
     "maximum_support_actions_before_frontier_recompute": 2,
     "default_real_task_first": true,
-    "inherited_capability_requires_real_task_evidence": true
+    "inherited_capability_requires_real_task_evidence": true,
+    "recursive_obs_required_before_consequential_implementation": true,
+    "obs_activity_is_progress": false,
+    "blocker_repair_requires_delete_bypass_reuse_substitute_compose_precheck": true,
+    "direct_real_effect_verification_preferred": true,
+    "material_state_change_invalidates_obs_receipt": true
   },
   "progress_event_requirements": {
     "reusable_capability_inherited": [
@@ -67,7 +72,22 @@
   },
   "next_progress_event_target": "ONE_REUSABLE_CAPABILITY_ACQUIRED_ON_A_REAL_TASK_AND_INHERITED",
   "authority": [
-    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V1.md",
-    "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V3.md"
-  ]
+    "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
+    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
+    "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V4.md"
+  ],
+  "compliance_state": {
+    "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
+    "receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V1.json",
+    "implementation_actions_without_current_obs_receipt_allowed": 0,
+    "deletion_first_order": [
+      "DELETE",
+      "BYPASS",
+      "REUSE",
+      "SUBSTITUTE",
+      "COMPOSE",
+      "REPAIR",
+      "BUILD"
+    ]
+  }
 }
