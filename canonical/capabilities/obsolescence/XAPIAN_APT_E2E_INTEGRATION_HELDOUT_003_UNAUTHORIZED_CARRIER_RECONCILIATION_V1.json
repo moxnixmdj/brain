@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_XAPIAN_APT_E2E_INTEGRATION_HELDOUT_003_UNAUTHORIZED_CARRIER_RECONCILIATION_V1",
+  "validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "source_main_before_reconciliation": "9ad4f8bca2c3d515a547e60762fd8b8108ab6089",
+  "freshness_state": "SPENT_CONTAMINATED__NO_REPLAY",
+  "execution_count": 1,
+  "execution_authorized": false,
+  "executor": "brain-heldout003-one-shot",
+  "executor_policy_violation": "HARD_ZERO_SPEND_NOT_PROVEN_BEFORE_START",
+  "admissible_capability_verdict": "NONE",
+  "promotion_authorized": false,
+  "raw_evidence": {
+    "execution_start_path": "canonical/astra_runtime/evidence/XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003__EXECUTION_START.json",
+    "execution_start_sha256": "6e67de16db94c5d9a01c0c22915888519191b5bc8bbe0a283d6bae1d50e70c07",
+    "result_path": "canonical/astra_runtime/evidence/XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003__RESULT.json",
+    "result_sha256": "49f687fcd3b6ec8bcac68aaf2c177a0b0b66385105e19c2c476069b07ca07497",
+    "acquisition_path": "canonical/astra_runtime/evidence/XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003__AUTO_APT_CLI_ACQUISITION.json",
+    "acquisition_sha256": "ad13c127f8cbced41b01dee92e880c67c039161edff6615ff0ca196626fb1726",
+    "evidence_role": "DIAGNOSTIC_INCIDENT_EVIDENCE_ONLY__NOT_ACCEPTANCE_OR_PROMOTION_AUTHORITY"
+  },
+  "diagnostic_observation": {
+    "evaluator_acceptance_gate_pass": false,
+    "total_wall_s": 140.213006,
+    "acquisition_status": "CONTRACT_INFERRED",
+    "discovery_source": "APT_FULL_METADATA_XAPIAN",
+    "selected_supplier": "zint",
+    "selected_supplier_binding_kind": "apt",
+    "package_hints_used_by_runtime": false,
+    "prebound_registry_route_used": false,
+    "immediate_terminal_error_class": "EXISTING_INDEPENDENT_VERIFIER_FAILED__IMPORT_ERROR",
+    "missing_carrier_dependency": "bound_capabilities.python_library_codec",
+    "diagnostic_correction_class": "MATERIALIZE_COMPLETE_EXACT_REPOSITORY_OR_VERIFIER_DEPENDENCY_CLOSURE__NO_HAND_PICKED_RUNTIME_SUBSET",
+    "parent_runtime_semantic_falsification_established": false
+  },
+  "pr149_provenance": {
+    "merge_commit": "9ad4f8bca2c3d515a547e60762fd8b8108ab6089",
+    "status": "QUARANTINED_TRANSITION_PROVENANCE__DESCRIPTOR_TRUTH_PRESERVED",
+    "defect": "ACTION_INTENT_MUTATED_AFTER_IMMUTABLE_INTENT_HEAD_GUARD",
+    "disposition": "Do not revert the three descriptor corrections because they are independently supported by merged PR129 and PR136 truth; do not use PR149 transition ordering as valid provenance for future execution authority."
+  },
+  "replay_policy": {
+    "heldout_003_replay_allowed": false,
+    "second_carrier_for_heldout_003_allowed": false,
+    "runtime_repair_from_this_unauthorized_result_authorized": false
+  },
+  "parent_capability_state": "UNPROVEN",
+  "next_frontier_sequence": [
+    "FREEZE_FRESH_ORTHOGONAL_XAPIAN_APT_E2E_GATE_BEFORE_CARRIER_CORRECTION",
+    "GENERIC_COMPLETE_REPOSITORY_OR_VERIFIER_DEPENDENCY_CLOSURE_CARRIER_CORRECTION",
+    "QUALIFY_ONE_HARD_ZERO_SPEND_FAITHFUL_REMOTE_CARRIER",
+    "EXECUTE_ONLY_THE_NEW_FRESH_GATE_EXACTLY_ONCE",
+    "RECONCILE_FIRST_TERMINAL_RESULT"
+  ],
+  "prohibitions": [
+    "NO_HELDOUT_003_REPLAY",
+    "NO_SECOND_HELDOUT_003_CARRIER",
+    "NO_PROMOTION_FROM_UNAUTHORIZED_RESULT",
+    "NO_CAPABILITY_RUNTIME_REPAIR_FROM_UNAUTHORIZED_RESULT",
+    "NO_VAL_TOWN",
+    "NO_USER_LAPTOP"
+  ]
+}
