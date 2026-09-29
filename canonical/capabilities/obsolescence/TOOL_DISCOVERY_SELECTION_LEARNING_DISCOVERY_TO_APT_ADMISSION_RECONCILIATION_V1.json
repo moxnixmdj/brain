@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_FRONTIER_RECONCILIATION_V1",
+  "reconciliation_id": "TOOL-DISCOVERY-SELECTION-LEARNING-DISCOVERY-TO-APT-ADMISSION-20260929-V1",
+  "status": "RECONCILED__DETERMINISTIC_INTERFACE_BLOCKER_LOCALIZED",
+  "canonical_base": "db298bb4363266ef9e91ec9ec114b5f1c7bcf1fd",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "verified_upstream_route": {
+    "route_id": "DEBIAN_FULL_METADATA_XAPIAN_DIRECT_CONTENTS_V1",
+    "runtime_git_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
+    "inherited_by_pr": 96,
+    "authoritative_heldout_deployment": "805a36d4-04cf-4938-bfac-74d29418081f",
+    "heldout_oracle_family_recall": 1,
+    "heldout_top20_oracle_recall": 1,
+    "wall_s": 16.233238
+  },
+  "source_inspection": {
+    "producer": {
+      "path": "canonical/runtime/capability_discovery.py",
+      "behavior": "_search_apt_packages_full_metadata emits discovery_source=APT_FULL_METADATA_XAPIAN and binding_kind=apt for Debian APT candidates"
+    },
+    "router": {
+      "path": "canonical/runtime/auto_capability_acquisition.py",
+      "behavior": "_discovery_supplier_order already prefers candidate.binding_kind before discovery_source and maps apt to apt_cli"
+    },
+    "consumer": {
+      "path": "canonical/runtime/auto_apt_cli_acquisition.py",
+      "behavior": "_viable_candidates rejects every candidate whose discovery_source is not exactly APT_CATALOG"
+    }
+  },
+  "causal_blocker": "STALE_SOURCE_NAME_ADMISSION_GATE_DROPS_VERIFIED_APT_FULL_METADATA_XAPIAN_CANDIDATES_BEFORE_CONTRACT_PROBING",
+  "consequence": "The verified supplier-discovery output cannot enter the existing APT CLI supplier/contract race through _viable_candidates, so downstream contract-learning evidence is not yet the first blocker.",
+  "minimal_generic_repair": "ADMIT_APT_CANDIDATES_BY_PROVIDER_NEUTRAL_BINDING_KIND_APT_SEMANTICS_INSTEAD_OF_HARDCODING_THE_LEGACY_APT_CATALOG_SOURCE_NAME",
+  "why_this_is_generic": "binding_kind is the existing cross-source routing abstraction and already drives top-level supplier selection; using it removes a stale implementation-source dependency rather than adding an Xapian special case.",
+  "next_action": "FREEZE_FRESH_ORTHOGONAL_END_TO_END_GATE__ONE_GENERIC_BINDING_KIND_APT_ADMISSION_REPAIR__FOCUSED_REGRESSION__EXECUTE_FRESH_GATE_ONCE__RECONCILE",
+  "invention_required": false,
+  "prohibitions": [
+    "NO_HELDOUT005_REPLAY",
+    "NO_XAPIAN_SPECIFIC_SPECIAL_CASE_WHEN_BINDING_KIND_ALREADY_EXISTS",
+    "NO_CONTRACT_PARSER_REPAIR_BEFORE_THE_ADMISSION_BRIDGE_IS_TESTED",
+    "NO_PACKAGE_HINTS",
+    "NO_TASK_SPECIFIC_LITERALS"
+  ],
+  "parent_obsolescence_claim": false
+}
