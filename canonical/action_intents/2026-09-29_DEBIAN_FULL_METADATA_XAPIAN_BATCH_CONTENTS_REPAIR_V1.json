@@ -38,6 +38,7 @@
   "heldout_freshness": "SPENT",
   "fresh_execution_count": 1,
   "promotion_authorized_by_gate": true,
-  "merge_authorized": false,
-  "required_next_action": "RUN_TRUSTED_GOVERNANCE_AND_REGRESSION_GATES__THEN_PROMOTE_CLEAN_ROUTE_IF_ALL_PASS"
+  "merge_authorized": true,
+  "required_next_action": "MERGE_PR89__INHERIT_VERIFIED_ROUTE__RECOMPUTE_NEXT_CAPABILITY_FRONTIER",
+  "guard_reconciliation_status": "READY_FOR_TRUSTED_GUARD"
 }
