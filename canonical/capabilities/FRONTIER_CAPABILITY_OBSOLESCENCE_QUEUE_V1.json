@@ -70,14 +70,14 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "H004 is permanently spent with one admissible failed result. Do not replay. Diagnose the zero-candidate independent semantic verifier failure against the preexisting matched_terms risk and prior generic evidence, then at most one causally justified generic repair followed by a new orthogonal fresh gate.",
+    "objective": "H004 remains permanently spent and nonreplayable. The exact causal verifier-admission seam is now repaired generically and verified 6/6 with no held-out execution. Freeze a new orthogonal fresh gate against the repaired runtime before any fresh execution, then execute that new gate exactly once on the already-qualified public carrier.",
     "selection_metric": "CORRECTNESS_FIRST__THEN_VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK_WITH_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "HELDOUT_004_SPENT_FAIL__INDEPENDENT_SEMANTIC_VERIFIER_ACQUISITION_EMPTY__NO_REPLAY",
-    "evidence_path": "canonical/capabilities/obsolescence/H004_FIRST_TERMINAL_RECONCILIATION_20260929_V1.json",
+    "exact_blocker": "GENERIC_SEMANTIC_VERIFIER_EVIDENCE_ADMISSION_REPAIR_VERIFIED__H004_SPENT_NO_REPLAY__NEW_ORTHOGONAL_GATE_REQUIRED",
+    "evidence_path": "canonical/capabilities/obsolescence/GENERIC_SEMANTIC_VERIFIER_EVIDENCE_ADMISSION_REPAIR_20260929_V1.json",
     "repair_status": "PR129_RUNTIME_REPAIR_PRESERVED__H004_EXACT_RUNNER_REUSED__PUBLIC_CAPSULE_22_FILES_SEALED__H003_IMPORT_CLOSURE_FAILURE_CLASS_CORRECTED__NO_RUNTIME_OR_EVALUATOR_REPAIR_REQUIRED",
-    "prohibition": "NO_H004_REPLAY__NO_SECOND_CARRIER_FOR_H004__NO_PROMOTION_FROM_FAILED_GATE__NO_REPAIR_BEFORE_TERMINAL_RECONCILIATION__NO_USER_LAPTOP__NO_VAL_TOWN",
+    "prohibition": "NO_H004_REPLAY__NO_SECOND_H004_CARRIER__NO_TASK_SPECIFIC_VERIFIER_PACKAGE_HINTS__NO_SOURCE_NAME_WHITELISTS__NO_HELDOUT_EXECUTION_BEFORE_NEW_GATE_FREEZE",
     "frozen_gate": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_004.json",
-    "next_action": "POST_RECONCILIATION_DIAGNOSE_ZERO_VERIFIER_CANDIDATES_AGAINST_PREEXISTING_MATCHED_TERMS_RISK__SEARCH_PRIOR_GENERIC_FIXES__AUTHORIZE_AT_MOST_ONE_GENERIC_REPAIR_IF_CAUSAL__THEN_FREEZE_NEW_ORTHOGONAL_GATE__NO_H004_REPLAY",
+    "next_action": "FREEZE_NEW_ORTHOGONAL_FRESH_TOOL_LEARNING_GATE_AGAINST_REPAIRED_RUNTIME__NO_H004_REPLAY__THEN_EXECUTE_NEW_GATE_EXACTLY_ONCE_ON_QUALIFIED_PUBLIC_CARRIER",
     "merged_repair_source_pr": 129,
     "merged_repair_runtime_path": "canonical/runtime/auto_apt_cli_acquisition.py",
     "spent_gate": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_003.json",
@@ -251,5 +251,14 @@
     "execution_count": 1,
     "same_gate_replay_allowed": false,
     "reconciliation_path": "canonical/capabilities/obsolescence/H004_FIRST_TERMINAL_RECONCILIATION_20260929_V1.json"
+  },
+  "generic_semantic_verifier_evidence_admission_repair_v1": {
+    "status": "VERIFIED_PENDING_MERGE",
+    "evidence_path": "canonical/capabilities/obsolescence/GENERIC_SEMANTIC_VERIFIER_EVIDENCE_ADMISSION_REPAIR_20260929_V1.json",
+    "runtime_blob": "a6b028c25d79d2dff59c87e3b3ad91d9fe934dae",
+    "regression_run_id": 36603922229,
+    "tests_passed": 6,
+    "heldout_executions": 0,
+    "next_action": "FREEZE_NEW_ORTHOGONAL_FRESH_TOOL_LEARNING_GATE_AGAINST_REPAIRED_RUNTIME__NO_H004_REPLAY__THEN_EXECUTE_NEW_GATE_EXACTLY_ONCE_ON_QUALIFIED_PUBLIC_CARRIER"
   }
 }
