@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_HELDOUT_VALIDATION_TERMINAL_RECONCILIATION_V1",
   "validation_id": "DEBIAN-FULL-METADATA-XAPIAN-HELDOUT-VALIDATION-005",
-  "status": "EXECUTED_ONCE_FRESH__PASS__SPENT__LATER_REPLAY_INCIDENT_QUARANTINED",
+  "status": "EXECUTED_ONCE_FRESH__PASS__SPENT__LATER_REPLAY_INCIDENTS_QUARANTINED",
   "checked_on": "2026-09-29",
   "authoritative_first_execution": {
     "railway_deployment_id": "805a36d4-04cf-4938-bfac-74d29418081f",
@@ -17,7 +17,7 @@
       "runner": "3ab3a57ad1b428e2a5a65cdbe2279c7db2332781"
     },
     "preflight": {
-      "generic_tests": "8/8 PASS",
+      "generic_tests": "8/8 PASS ON EXACT RUNTIME IN PRIOR LEASED GENERIC PREFLIGHT; NOT RERUN INSIDE AUTHORITATIVE H5 CARRIER",
       "translation_en_count": 3,
       "contents_amd64_count": 2,
       "contents_all_count": 2,
@@ -57,23 +57,46 @@
       ],
       "candidate_packages_installed": false,
       "candidate_binaries_executed": false,
-      "package_hints_used_by_runtime": false
+      "package_hints_used_by_runtime": false,
+      "runtime_mutated_by_validator": false
     }
   },
-  "replay_incident": {
-    "railway_deployment_id": "b7be260f-4e90-4a78-b227-2ae6f20bf7bc",
-    "execution_started_at": "2026-09-29T02:52:52.828526746Z",
-    "classification": "FORBIDDEN_POST_SPEND_REPLAY__DO_NOT_USE_AS_ACCEPTANCE_EVIDENCE",
-    "effect_on_authoritative_first_execution": "NONE__FIRST_FRESH_EXECUTION_COMPLETED_BEFORE_REPLAY_START"
+  "pre_spend_procedural_discrepancy": {
+    "classification": "CARRIER_DID_NOT_RERUN_PREVIOUSLY_PASSED_GENERIC_PYTEST_BEFORE_SPEND",
+    "frozen_gate_acceptance_condition": false,
+    "exact_runtime_previously_passed_generic_tests": true,
+    "effect_on_frozen_acceptance_result": "NONE",
+    "note": "A PRE-SPEND comment promised an in-carrier generic pytest rerun, but the authoritative H5 carrier crossed the spend marker after exact runtime/manifest/runner identity plus faithful Translation/Contents/Xapian checks without rerunning those tests. Record, do not erase, this operational discrepancy."
+  },
+  "replay_incidents": {
+    "classification": "FORBIDDEN_POST_SPEND_REPLAYS__DO_NOT_USE_AS_ACCEPTANCE_EVIDENCE",
+    "observed_minimum_count": 2,
+    "effect_on_authoritative_first_execution": "NONE__FIRST_FRESH_EXECUTION_COMPLETED_BEFORE_ALL_OBSERVED_REPLAY_STARTS",
+    "deployments": [
+      {
+        "railway_deployment_id": "b7be260f-4e90-4a78-b227-2ae6f20bf7bc",
+        "execution_started_at": "2026-09-29T02:52:52.828526746Z",
+        "railway_meta_reason": "redeploy",
+        "admissibility": "EXCLUDED_POST_SPEND_REPLAY"
+      },
+      {
+        "railway_deployment_id": "a1a4464d-4278-4d2c-be44-0a8436158d82",
+        "execution_started_at": "2026-09-29T02:53:04.502909849Z",
+        "railway_meta_reason": "deploy",
+        "admissibility": "EXCLUDED_POST_SPEND_REPLAY"
+      }
+    ]
   },
   "aborted_concurrent_deployment": {
     "railway_deployment_id": "825cf351-a1dd-4222-8f63-94fad7dac1c2",
-    "classification": "ABORTED_PRE_EXECUTION_HEAD_MISMATCH",
+    "classification": "NO_EXECUTION_START_MARKER_OBSERVED_IN_READBACK",
     "acceptance_evidence": false
   },
   "freshness": "SPENT",
   "effective_fresh_execution_count": 1,
+  "physical_post_spend_replays_observed_minimum": 2,
   "same_case_replay_allowed": false,
   "promotion_authorized_by_gate": true,
-  "required_next_action": "RUN_TRUSTED_GOVERNANCE_AND_REGRESSION_GATES__THEN_PROMOTE_CLEAN_ROUTE_IF_ALL_PASS"
+  "promotion_authorized_final": false,
+  "required_next_action": "REUSE_OR_IMPLEMENT_AN_ATOMIC_SINGLEFLIGHT_EXECUTION_GUARD_FOR_FUTURE_ONE_SHOT_GATES__RUN_TRUSTED_GOVERNANCE_AND_REGRESSION_GATES__THEN_MAKE_A_SEPARATE_PR89_PROMOTION_DECISION_USING_ONLY_THE_FIRST_FRESH_HELDOUT_005_RESULT__NEVER_RERUN_HELDOUT_005"
 }
