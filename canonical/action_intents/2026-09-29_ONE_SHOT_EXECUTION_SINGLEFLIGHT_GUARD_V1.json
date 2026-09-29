@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ONE-SHOT-EXECUTION-SINGLEFLIGHT-GUARD-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": null,
+  "causal_blocker": "CONCURRENT_WORKERS_CAN_TRIGGER_THE_SAME_ONE_SHOT_VALIDATION_AFTER_FIRST_SPEND_BECAUSE_BLOCKER_LEASES_DEDUPE_ACTION_PRS_BUT_DO_NOT_ATOMICALLY_CLAIM_VALIDATION_ID_PLUS_MANIFEST_AT_EXECUTION_BOUNDARY",
+  "action_kind": "GOVERNANCE_GUARD",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::CONCURRENT_WORKERS_CAN_TRIGGER_THE_SAME_ONE_SHOT_VALIDATION_AFTER_FIRST_SPEND_BECAUSE_BLOCKER_LEASES_DEDUPE_ACTION_PRS_BUT_DO_NOT_ATOMICALLY_CLAIM_VALIDATION_ID_PLUS_MANIFEST_AT_EXECUTION_BOUNDARY::GOVERNANCE_GUARD",
+  "expected_parent_frontier_change": "Make one-shot fresh-gate execution single-flight across concurrent workers by requiring one deterministic atomic GitHub execution claim keyed by validation_id plus manifest Git blob before any fresh-case carrier can be triggered; the successful claim is the monotonic spend boundary and all conflicting claim attempts fail closed.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR74 blocker lease and trusted open-PR dedupe",
+    "PR75/PR76 negative blocker-lease canary",
+    "PR85 execution lease evidence and anti-drift work",
+    "PR89 HELDOUT-005 first-spend PASS and post-spend replay incident",
+    "GitHub atomic branch/ref creation as existing control-plane primitive"
+  ],
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "governance_change": true,
+  "weakens_existing_guard": false,
+  "stop_condition": "Add the smallest fail-closed protocol and validator support for deterministic atomic execution claims, prove atomic collision behavior with a non-fresh canary, and stop. Do not modify capability runtime or execute any held-out validation."
+}
