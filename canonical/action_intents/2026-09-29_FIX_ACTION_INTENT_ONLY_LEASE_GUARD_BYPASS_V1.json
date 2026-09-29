@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FIX-ACTION-INTENT-ONLY-LEASE-GUARD-BYPASS-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": null,
+  "causal_blocker": "ACTION_INTENT_ONLY_PRS_ARE_NOT_FRONTIER_SENSITIVE__TRUSTED_GUARD_EXITS_BEFORE_BLOCKER_LEASE_VALIDATION",
+  "action_kind": "GOVERNANCE_GUARD",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::ACTION_INTENT_ONLY_PRS_ARE_NOT_FRONTIER_SENSITIVE__TRUSTED_GUARD_EXITS_BEFORE_BLOCKER_LEASE_VALIDATION::GOVERNANCE_GUARD",
+  "expected_parent_frontier_change": "Restore the mandatory guarded-PR execution precondition by making action-intent files frontier-sensitive, so the existing blocker-lease and drift checks actually execute on intent-only lease PRs before HELDOUT-003 or any later expensive frontier execution.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR74 blocker-lease guard",
+    "PR75/PR76 negative duplicate-lease canary",
+    "current canonical/runtime/enforce_goal_hierarchy.py",
+    "open PR133 execution-only HELDOUT-003 lease",
+    "current .github/workflows/drift-immunity-guard.yml"
+  ],
+  "evidence_presence_classification": "STRUCTURAL_GUARD_BYPASS_PROVEN_BY_CONTROL_FLOW",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "The trusted validator classifies canonical/action_intents/*.json as frontier-sensitive; an intent-only PR therefore reaches blocker-lease and hierarchy validation; a regression test proves the old early-pass path is impossible; no capability runtime or held-out case is executed.",
+  "governance_change": true,
+  "weakens_existing_guard": false
+}
