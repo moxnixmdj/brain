@@ -498,8 +498,8 @@
     "last_carrier_qualification": {
       "carrier": "CHATGPT_BUILTIN_LINUX_CONTAINER",
       "status": "REJECTED_BEFORE_HELDOUT_START",
-      "evidence_path": "canonical/capabilities/obsolescence/H004_CHATGPT_LINUX_READONLY_CARRIER_REJECTION_20260929_V1.json",
-      "decisive_failure": "NO_USABLE_APT_LIST_METADATA_AND_CONFIGURED_DEBIAN_MIRROR_UNREACHABLE",
+      "evidence_path": "canonical/capabilities/obsolescence/H004_CHATGPT_LINUX_READONLY_CARRIER_QUALIFICATION_CLEAN_20260929_V1.json",
+      "decisive_failure": "NORMAL_APT_PACKAGES_METADATA_REQUIRED",
       "heldout_004_freshness": "UNSPENT",
       "execution_count": 0
     }
