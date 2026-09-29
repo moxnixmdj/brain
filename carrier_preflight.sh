@@ -4,15 +4,17 @@ echo H3_PREFLIGHT_BEGIN=1
 export DEBIAN_FRONTEND=noninteractive LC_ALL=C.UTF-8
 rm -rf /work
 mkdir -p /work
+CARRIER_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 rm -f /etc/apt/apt.conf.d/docker-no-languages || true
 apt-get update -qq
 apt-get install -y -qq --no-install-recommends python3 python3-xapian sudo apt-file zbar-tools ca-certificates >/tmp/h3_install.log 2>&1
 apt-file update >/tmp/h3_aptfile.log 2>&1
-python3 /tmp/carrier_payload_1.py
-python3 /tmp/carrier_payload_2.py
-python3 /tmp/carrier_payload_3.py
+python3 "$CARRIER_DIR/carrier_payload_1.py"
+python3 "$CARRIER_DIR/carrier_payload_2.py"
+python3 "$CARRIER_DIR/carrier_payload_3.py"
 cd /work
 python3 -m py_compile canonical/experiments/run_xapian_apt_e2e_integration_heldout_003.py canonical/runtime/*.py canonical/runtime/bound_capabilities/*.py
+sudo -n true
 python3 - <<'PY'
 import xapian,sys
 sys.path.insert(0,"canonical/runtime")
