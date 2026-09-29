@@ -1,0 +1,336 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "COMPOSE-FORCED-FINALIZATION-PHASE-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "RECURRENT_GOAL_MAX_CYCLES_WITHOUT_FINISH_ACROSS_LOCAL_4B_AND_9B_ON_DIFFERENT_REAL_TASKS__GENERIC_EVIDENCE_TO_FINALIZATION_COMPOSITION_SEAM_UNRESOLVED",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::RECURRENT_GOAL_MAX_CYCLES_WITHOUT_FINISH_ACROSS_LOCAL_4B_AND_9B_ON_DIFFERENT_REAL_TASKS__GENERIC_EVIDENCE_TO_FINALIZATION_COMPOSITION_SEAM_UNRESOLVED::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Add one generic bounded forced-finalization phase to the existing ASTRA goal loop after evidence/action budget exhaustion, without increasing the evidence-action budget, changing supplier, replaying spent tasks, or granting capability credit; make the repaired composition eligible only for a fresh different real Task C.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "4B and 9B terminal route falsification evidence",
+    "ASTRA existing run_goal implementation",
+    "smolagents 1.26.0 source/package",
+    "AgentScope current ReAct source",
+    "Qwen-Agent 0.0.34 source/package",
+    "Qwen3.8-27B official model/quant/runner fit"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after the generic forced-finalization composition is implemented and regression-verified without replaying spent real tasks. Do not promote the frontier capability until a fresh materially different dependency-free real Task C completes and is independently verified.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "20f6f22d09b8628d854e0c53f2e345567e632265",
+    "real_outcome": "Add one generic bounded forced-finalization phase to the existing ASTRA goal loop after evidence/action budget exhaustion, without increasing the evidence-action budget, changing supplier, replaying spent tasks, or granting capability credit; make the repaired composition eligible only for a fresh different real Task C.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Close the generic transition from useful evidence gathering to a terminal decision-quality answer so dependency-free real research tasks can complete end-to-end.",
+      "proxy_goals_deleted": [
+        "Increase max_cycles until a pass",
+        "Replay Qwen3.5-4B task",
+        "Replay Qwen3.5-9B biophysics task",
+        "Replace the whole agent framework",
+        "Scale model size before fixing the recurrent composition seam"
+      ],
+      "surviving_necessity": "A generic bounded finalization transition is still missing after two orthogonal real-task failures."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/astra_runtime.py existing one-action-per-cycle goal loop",
+        "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_4B_TASK_B_FALSIFICATION_20260929_V1.json",
+        "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_9B_BIOPHYSICS_TASK_B_FALSIFICATION_20260929_V1.json"
+      ],
+      "external_existing_routes_checked": [
+        "Hugging Face smolagents 1.26.0 max-step final-answer path",
+        "AgentScope current ReAct forced finalization call",
+        "Qwen-Agent 0.0.34 agent framework",
+        "Qwen3.8-27B current open-weight model"
+      ],
+      "capability_work_deleted": [
+        "No new agent runtime",
+        "No model upgrade",
+        "No cycle-limit inflation",
+        "No same-task tuning"
+      ],
+      "surviving_gap": "ASTRA terminates with GOAL_MAX_CYCLES_WITHOUT_FINISH instead of reserving a distinct finalization-only phase after evidence collection."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic composition/control seam, supported by the same terminal blocker across Qwen3.5-4B and Qwen3.5-9B on different real tasks.",
+      "delete_bypass_substitute_options": [
+        "DELETE: deterministic synthesis alone rejected as insufficiently general for open-ended research outputs",
+        "BYPASS: separate finalization phase using same supplier survives",
+        "REUSE: reuse existing planner bridge and accumulated observations",
+        "SUBSTITUTE: smolagents/AgentScope/Qwen-Agent are broader replacements and slower to integrate",
+        "MODEL SUBSTITUTE: Qwen3.8-27B does not remove the harness seam and exceeds comfortable carrier headroom"
+      ],
+      "surviving_causal_blocker": "No bounded finalization-only transition after the normal research/action budget."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "COMPOSE_FORCED_FINALIZATION_PHASE_IN_EXISTING_ASTRA",
+        "ADOPT_SMOLAGENTS_1_26_0_AGENT_LOOP",
+        "ADOPT_AGENTSCOPE_REACT_LOOP",
+        "ADOPT_QWEN_AGENT_0_0_34",
+        "SUBSTITUTE_QWEN3_8_27B_LOCAL"
+      ],
+      "losing_routes_reason": "Existing frameworks independently validate the forced-finalization pattern but replacing ASTRA adds integration and provenance machinery. A larger model leaves the same bounded-loop semantics and is far heavier on the current carrier. The selected composition adds only one bounded finalizer call and reuses all existing execution/verification infrastructure.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use a deterministic regression that proves evidence-phase exhaustion causes exactly one finalization-only call and still fails closed on invalid finalization. This support test earns no capability credit; real proof requires a fresh different Task C."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Raw model-size escalation as default response to GOAL_MAX_CYCLES_WITHOUT_FINISH",
+        "Blind max_cycles increases",
+        "Framework replacement for this seam"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Bounded evidence collection",
+        "Forced answer synthesis from accumulated observations",
+        "Fail-closed final-answer validation"
+      ],
+      "fresh_reuse_plan": "Run the repaired dependency-free composition exactly once on a fresh materially different real Task C; never replay the 4B or 9B spent tasks."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused exact 4B/9B terminal evidence",
+        "Reused current framework implementations as design qualification",
+        "Stopped framework search after two independent implementations plus current Qwen-Agent and stronger-model challenger were resolved"
+      ],
+      "search_stop_decision": "The same forced-finalization pattern is independently implemented by smolagents and AgentScope; no unresolved challenger can beat the minimal in-place composition enough to justify delaying the fresh real-task test.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Fresh route frontier assembled after the 9B material route failure and before any repair continuation; no unresolved plausible dominator remains."
+    },
+    "routes_considered": [
+      "COMPOSE_FORCED_FINALIZATION_PHASE_IN_EXISTING_ASTRA",
+      "ADOPT_SMOLAGENTS_1_26_0_AGENT_LOOP",
+      "ADOPT_AGENTSCOPE_REACT_LOOP",
+      "ADOPT_QWEN_AGENT_0_0_34",
+      "SUBSTITUTE_QWEN3_8_27B_LOCAL"
+    ],
+    "deleted_or_bypassed_paths": [
+      "BLIND_MAX_CYCLES_INFLATION",
+      "QWEN3_5_4B_REPLAY",
+      "QWEN3_5_9B_REPLAY",
+      "FULL_AGENT_FRAMEWORK_REPLACEMENT",
+      "MODEL_SIZE_ESCALATION_BEFORE_SEAM_FIX"
+    ],
+    "selected_surviving_route": "COMPOSE_FORCED_FINALIZATION_PHASE_IN_EXISTING_ASTRA",
+    "why_selected_route_is_fastest_sufficient": "It changes only the recurrent missing transition, reuses the already-proven local planner bridge and evidence memory, costs $0, adds one bounded model call, preserves existing independent verification, and is supported by two independent agent-framework implementations of the same termination pattern.",
+    "expected_parent_level_state_change": "Add one generic bounded forced-finalization phase to the existing ASTRA goal loop after evidence/action budget exhaustion, without increasing the evidence-action budget, changing supplier, replaying spent tasks, or granting capability credit; make the repaired composition eligible only for a fresh different real Task C.",
+    "stop_condition": "Stop after the generic forced-finalization composition is implemented and regression-verified without replaying spent real tasks. Do not promote the frontier capability until a fresh materially different dependency-free real Task C completes and is independently verified.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-29T21:15:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "ASTRA_SINGLE_PHASE_OPTIONAL_PLANNER_WITH_LOCAL_QWEN3_5_9B",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/astra_runtime.py",
+          "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_4B_TASK_B_FALSIFICATION_20260929_V1.json",
+          "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_9B_BIOPHYSICS_TASK_B_FALSIFICATION_20260929_V1.json"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://huggingface.co/docs/smolagents/reference/agents",
+          "https://huggingface.co/Qwen/Qwen3.8-27B",
+          "https://docs.github.com/en/actions/reference/runners/github-hosted-runners"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://pypi.org/project/smolagents/ (1.26.0)",
+          "https://pypi.org/project/qwen-agent/ (0.0.34)",
+          "https://github.com/agentscope-ai/agentscope/blob/main/src/agentscope/agent/_agent.py",
+          "https://github.com/huggingface/smolagents/blob/main/src/smolagents/agents.py"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "https://www.reddit.com/r/LocalLLaMA/comments/1sdhvc5/qwen_35_tool_calling_fixes_for_agentic_use_whats/",
+          "https://www.reddit.com/r/LocalLLaMA/comments/1t1n6o8/we_are_finally_there_qwen3627b_agentic_search_957/",
+          "https://www.reddit.com/r/LocalLLaMA/comments/1vt78xd/qwen3827b_has_the_highest_level_of_agency_ive/"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "bounded agent evidence gathering final answer termination after max steps"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "smolagents AgentScope Qwen-Agent max iterations final answer"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "forced finalization call tools disabled ReAct max iterations source"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "latest 2026 Qwen3.8 local agentic model long horizon tool use"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "COMPOSE_FORCED_FINALIZATION_PHASE_IN_EXISTING_ASTRA",
+          "evidence": [
+            "Direct 4B+9B orthogonal recurrence shows the seam",
+            "AgentScope current source performs one forced tools-disabled finalization call at max iterations",
+            "smolagents current source calls provide_final_answer after max steps"
+          ],
+          "qualification_evidence": [
+            "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_9B_BIOPHYSICS_TASK_B_FALSIFICATION_20260929_V1.json",
+            "https://github.com/agentscope-ai/agentscope/blob/main/src/agentscope/agent/_agent.py",
+            "https://github.com/huggingface/smolagents/blob/main/src/smolagents/agents.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Preserves existing evidence/actions and requires final output to pass the same mission verifier; finalizer cannot gather new evidence.",
+            "CAPABILITY_STRENGTH": "Directly adds the missing research-to-answer transition without weakening evidence collection.",
+            "WALL_CLOCK": "One extra bounded local model call; no framework migration or larger-model download.",
+            "INCREMENTAL_COST": "$0 on existing public-runner/local-model route.",
+            "RELIABILITY": "Same pattern independently implemented by AgentScope and smolagents; recurrence identifies this seam across two models/tasks.",
+            "VERIFIABILITY": "Can be regression-tested deterministically and then adjudicated on a fresh real Task C."
+          }
+        },
+        {
+          "route": "ADOPT_SMOLAGENTS_1_26_0_AGENT_LOOP",
+          "evidence": [
+            "smolagents 1.26.0 current package and agent source include a separate max-step final-answer path and final_answer_checks."
+          ],
+          "qualification_evidence": [
+            "https://pypi.org/project/smolagents/",
+            "https://github.com/huggingface/smolagents/blob/main/src/smolagents/agents.py"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Mature pattern with explicit final-answer handling.",
+            "CAPABILITY_STRENGTH": "Broad agent framework exceeds the narrow missing seam.",
+            "WALL_CLOCK": "Migration of tools, state, provenance, and verifier bindings is slower than one in-place composition.",
+            "INCREMENTAL_COST": "Package is open source but integration compute/time is higher.",
+            "RELIABILITY": "Mature package, but introduces new dependency surface.",
+            "VERIFIABILITY": "Verifiable, but broader replacement increases regression scope."
+          }
+        },
+        {
+          "route": "ADOPT_AGENTSCOPE_REACT_LOOP",
+          "evidence": [
+            "Current AgentScope source reserves one forced finalization call after max_iters and disables tools for that call."
+          ],
+          "qualification_evidence": [
+            "https://github.com/agentscope-ai/agentscope/blob/main/src/agentscope/agent/_agent.py"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Directly implements the desired termination contract.",
+            "CAPABILITY_STRENGTH": "Broad framework has more machinery than required.",
+            "WALL_CLOCK": "Framework replacement is slower than reusing the same verified pattern in ASTRA.",
+            "INCREMENTAL_COST": "Open source but integration cost is nonzero in time/complexity.",
+            "RELIABILITY": "Strong independent design precedent.",
+            "VERIFIABILITY": "Source-visible and testable, but migration expands proof scope."
+          }
+        },
+        {
+          "route": "ADOPT_QWEN_AGENT_0_0_34",
+          "evidence": [
+            "Qwen official framework supports planning, memory, tools, MCP and Qwen3.5 agent demos."
+          ],
+          "qualification_evidence": [
+            "https://pypi.org/project/qwen-agent/",
+            "https://github.com/QwenLM/Qwen-Agent"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY",
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Model-native tool integration is relevant but no evidence found that it uniquely resolves the observed bounded-finalization seam.",
+            "CAPABILITY_STRENGTH": "Broad useful framework.",
+            "WALL_CLOCK": "Requires adapter/tool/provenance migration.",
+            "INCREMENTAL_COST": "Open source but more integration work.",
+            "RELIABILITY": "Official Qwen framework, yet still leaves fresh end-to-end proof necessary.",
+            "VERIFIABILITY": "Source-visible but broader than the exact causal repair."
+          }
+        },
+        {
+          "route": "SUBSTITUTE_QWEN3_8_27B_LOCAL",
+          "evidence": [
+            "Qwen3.8-27B official model card claims stronger autonomous planning/end-to-end completion; current GGUF quants span roughly 10.9–17.8 GB."
+          ],
+          "qualification_evidence": [
+            "https://huggingface.co/Qwen/Qwen3.8-27B",
+            "https://huggingface.co/Distillio/Qwen3.8-27B-GGUF",
+            "https://docs.github.com/en/actions/reference/runners/github-hosted-runners"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Potentially stronger supplier, but does not remove the controller's unconditional max-cycle failure semantics.",
+            "CAPABILITY_STRENGTH": "Stronger model and plausible future challenger.",
+            "WALL_CLOCK": "Large download/inference on 4 CPU is much slower than one 9B finalizer call.",
+            "INCREMENTAL_COST": "Still $0 on public runner in principle.",
+            "RELIABILITY": "Normal-quality quantizations exceed or nearly consume the 16 GB RAM/14 GB SSD carrier; ultra-low-bit variants trade quality and remain subject to same harness seam.",
+            "VERIFIABILITY": "Would require a fresh large-model execution and still would not isolate the generic termination defect."
+          }
+        }
+      ],
+      "negative_search_summary": "No additional qualified route was found that both deletes the recurrent termination seam and beats the in-place forced-finalization composition on correctness, wall-clock, $0 cost, integration risk and verifiability.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "COMPOSE_FORCED_FINALIZATION_PHASE_IN_EXISTING_ASTRA",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ]
+    }
+  }
+}
