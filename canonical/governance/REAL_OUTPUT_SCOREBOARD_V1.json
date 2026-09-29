@@ -6,11 +6,11 @@
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "progress_currency": "VERIFIED_REUSABLE_CAPABILITY_OUTPUT",
   "counters_since_epoch_start": {
-    "reusable_capabilities_inherited": 0,
-    "verified_real_tasks_completed": 0,
-    "fresh_reuse_passes": 0,
+    "reusable_capabilities_inherited": 1,
+    "verified_real_tasks_completed": 1,
+    "fresh_reuse_passes": 1,
     "frontier_dependencies_removed": 0,
-    "residual_gaps_localized": 0
+    "residual_gaps_localized": 1
   },
   "efficiency_since_epoch_start": {
     "capability_acquisition_wall_s_samples": [],
@@ -72,7 +72,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "ONE_REUSABLE_CAPABILITY_ACQUIRED_ON_A_REAL_TASK_AND_INHERITED",
+  "next_progress_event_target": "SECOND_REAL_CAPABILITY_ACQUISITION_OR_DIRECT_CLOSURE_OF_HIGHEST_LEVERAGE_SPACE_CARGO_RESIDUAL__RECURSIVE_OBS_REQUIRED",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -93,5 +93,22 @@
     ],
     "exact_base_commit_binding_required": true,
     "placeholder_receipts_allowed": false
-  }
+  },
+  "progress_events": [
+    {
+      "event_id": "CAPABILITY_ACQUISITION_WIN_1_SPACE_CARGO_20260929",
+      "capability_id": "FIRST_PRINCIPLES_LAUNCH_ARCHITECTURE_ENVELOPE_V1",
+      "real_task_evidence": "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json",
+      "fresh_reuse_evidence": "canonical/capabilities/obsolescence/FIRST_PRINCIPLES_LAUNCH_ARCHITECTURE_ENVELOPE_FRESH_REUSE_5G_001.json",
+      "capability_package": "canonical/capabilities/inherited/FIRST_PRINCIPLES_LAUNCH_ARCHITECTURE_ENVELOPE_V1.json",
+      "parent_level_changes": [
+        "REUSABLE_CAPABILITY_INHERITED",
+        "VERIFIED_REAL_TASK_COMPLETED",
+        "FRESH_REUSE_PASS",
+        "RESIDUAL_GAP_LOCALIZED"
+      ],
+      "residual_gap": "MASS_VELOCITY_REPETITION_RELIABILITY_PLUS_LOW_ALTITUDE_AEROTHERMAL_LIFECYCLE_REMAINS_UNPROVEN",
+      "incremental_spend_usd": 0
+    }
+  ]
 }
