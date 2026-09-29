@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_HELDOUT_EXECUTION_LEASE_V1",
   "validation_id": "SEMANTIC-PACKAGE-DISCOVERY-CLEAN-HELDOUT-VALIDATION-005",
-  "status": "EXECUTION_STARTED__SPENT__AWAITING_TERMINAL_RECONCILIATION",
+  "status": "EXECUTION_STARTED__FRESHNESS_SPENT__TERMINAL_CAPTURE_PENDING",
   "holder": "chatgpt-directjoin-20260929",
   "claimed_on": "2026-09-29",
   "source_branch": "repair/batched-executable-evidence-acquisition-v1-20260928",
@@ -20,7 +20,7 @@
   "execution_budget_remaining": 0,
   "freshness": "SPENT",
   "concurrency_rule": "NO_OTHER_WORKER_MAY_EXECUTE_PREVIEW_REPLAY_OR_SPEND_GATE_005_WHILE_THIS_LEASE_IS_OPEN",
-  "next_action": "READ_ONLY_CAPTURE_EXACT_STARTED_DEPLOYMENT_TERMINAL_RESULT__RECONCILE_ONCE__RELEASE_LEASE",
+  "next_action": "READ_ONLY_CAPTURE_TERMINAL_RESULT__RECONCILE_ONCE__RELEASE_LEASE",
   "execution_started_at": "2026-09-29T02:43:38.437956983Z",
   "observed_execution": {
     "provider": "Railway",
