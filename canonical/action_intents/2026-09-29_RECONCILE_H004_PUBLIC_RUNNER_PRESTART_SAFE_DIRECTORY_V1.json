@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-H004-PUBLIC-RUNNER-PRESTART-SAFE-DIRECTORY-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "causal_blocker": "HELDOUT_004_FROZEN_UNSPENT__PUBLIC_GITHUB_ACTIONS_RUN_36598630743_ATTEMPT_1_FAILED_PRESTART_ON_GIT_SAFE_DIRECTORY__NO_EXECUTION",
+  "action_kind": "PRESTART_CARRIER_FAILURE_RECONCILIATION_AND_MINIMAL_GUARD_FIX",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::HELDOUT_004_FROZEN_UNSPENT__PUBLIC_GITHUB_ACTIONS_RUN_36598630743_ATTEMPT_1_FAILED_PRESTART_ON_GIT_SAFE_DIRECTORY__NO_EXECUTION::PRESTART_CARRIER_FAILURE_RECONCILIATION_AND_MINIMAL_GUARD_FIX",
+  "expected_parent_frontier_change": "Record that public GitHub Actions run 36598630743 attempt 1 failed before START solely because the identity-guard git command hit Git dubious-ownership protection inside the Debian job container. H004 remains unspent. Authorize a new carrier lane with a new workflow and ARM filename that fixes only safe-directory handling before the git history check. Do not rerun attempt 1.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "public repo moxnixmdj/verification-capsule-runner is public and exact payload hashes matched before arming",
+    "run 36598630743 attempt 1 used exact ARM commit dd055b618a678bfeb7c1cc78c2481596d4691112",
+    "failed step was Enforce one-shot event identity",
+    "exact log error: fatal: detected dubious ownership in repository at /__w/verification-capsule-runner/verification-capsule-runner",
+    "Install faithful Debian surface, capsule preflight, and H004 execution steps were skipped",
+    "no H004 START or RESULT was emitted"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Reconcile first failed carrier predicate and authorize only a carrier guard fix. No runtime/evaluator/capsule payload change. No rerun of workflow run 36598630743. New lane must use a new ARM filename and must still fail closed before START.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
