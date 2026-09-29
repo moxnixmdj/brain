@@ -69,13 +69,13 @@
     "REOPENED_BY_REGRESSION"
   ],
   "immediate_frontier": {
-    "selected_capability": "MULTI_TOOL_ORCHESTRATION_AND_PLANNING",
-    "objective": "Coordinate dependent tools/subtasks across long horizons while preserving state, scope, causal ordering, runtime data dependencies, and verification.",
-    "selection_metric": "VERIFIED_CAPABILITY_GAIN_X_OBSOLESCENCE_LEVERAGE_PER_WALL_CLOCK_WITH_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "POST_TOOL_DISCOVERY_WIN_FRONTIER_NOT_RECOMPUTED__EXISTING_MULTI_TOOL_PLANNER_FANOUT_CONDITIONAL_JOIN_AND_ARTIFACT_COMPOSITION_ROUTE_NOT_YET_FRONTIER_OBSOLESCENCE_ADJUDICATED",
-    "evidence_path": "canonical/capabilities/obsolescence/POST_TOOL_DISCOVERY_FRONTIER_RECOMPUTATION_20260929_V1.json",
-    "repair_status": "ROUTE_RECOVERY_AND_FRONTIER_BAR_DEFINITION__NO_REPAIR_AUTHORIZED",
-    "prohibition": "TEST_EXISTING_ROUTE_FIRST__NO_RUNTIME_MUTATION_BEFORE_FRESH_UNSEEN_GATE__NO_PROXY_GOALS"
+    "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "objective": "Connect the verified Debian full-metadata/Xapian/direct-Contents supplier output to the existing autonomous APT probe → contract-learn → execute → independently-verify loop through a provider-neutral candidate contract.",
+    "selection_metric": "CORRECTNESS_FIRST__THEN_VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK_WITH_ZERO_INCREMENTAL_SPEND",
+    "exact_blocker": "DISCOVERY_TO_APT_ACQUISITION_CANDIDATE_CONTRACT_COMPATIBILITY__VERIFIED_XAPIAN_APT_CANDIDATES_CANNOT_ENTER_EXISTING_AUTONOMOUS_APT_LEARNING_LOOP",
+    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_POST_PR96_INTERFACE_RECOMPUTATION_V1.json",
+    "repair_status": "STATIC_CAUSAL_BREAK_PROVEN__FRESH_ORTHOGONAL_DISCOVERY_TO_EXECUTION_GATE_REQUIRED_BEFORE_RUNTIME_MUTATION",
+    "prohibition": "NO_HELDOUT_005_REPLAY__NO_SOURCE_NAME_WHITELIST_ONLY_PATCH__NO_BLIND_LEGACY_SCORE_THRESHOLD_ON_XAPIAN__NO_CONTRACT_PARSER_REPAIR_BEFORE_ADMISSION_BRIDGE_TEST__NO_PACKAGE_HINTS"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -155,7 +155,7 @@
     "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EVIDENCE_ACQUISITION_STRUCTURAL_CAUSE_RECONCILIATION_V1.json"
   },
   "tool_discovery_selection_learning_full_metadata_xapian_v1": {
-    "status": "VERIFIED_SUBCAPABILITY_ROUTE_INHERITED__PARENT_RESIDUAL_DEMOTED",
+    "status": "VERIFIED_DISCOVERY_ROUTE_INHERITED__END_TO_END_PARENT_RESIDUAL_REOPENED",
     "source_pr": 89,
     "authoritative_deployment": "805a36d4-04cf-4938-bfac-74d29418081f",
     "runtime_git_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
@@ -165,6 +165,13 @@
     "incremental_spend_usd": 0,
     "terminal_reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
     "parent_capability_obsolescence_claim": false,
-    "next_action": "PRESERVE_AND_REUSE__REOPEN_ONLY_IF_REAL_WORK_FALSIFIES"
+    "next_action": "FREEZE_FRESH_ORTHOGONAL_DISCOVERY_TO_EXECUTION_GATE__THEN_PROVIDER_NEUTRAL_AND_SCORE_SCALE_SAFE_APT_ADMISSION_REPAIR__RECONCILE"
+  },
+  "deferred_frontier_candidate": {
+    "capability": "MULTI_TOOL_ORCHESTRATION_AND_PLANNING",
+    "source_pr": 111,
+    "evidence_path": "canonical/capabilities/obsolescence/POST_TOOL_DISCOVERY_FRONTIER_RECOMPUTATION_20260929_V1.json",
+    "status": "DEFERRED_NOT_FALSIFIED",
+    "reopen_condition": "Recompute globally immediately after the current discovery-to-APT integration seam is verified closed or falsified."
   }
 }
