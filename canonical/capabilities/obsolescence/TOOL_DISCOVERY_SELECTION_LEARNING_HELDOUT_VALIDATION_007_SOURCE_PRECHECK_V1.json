@@ -1,0 +1,17 @@
+{
+  "schema": "PROJECT_BRAIN_HELDOUT_SOURCE_PRECHECK_V1",
+  "recorded_on": "2026-09-29",
+  "validation_id": "TOOL-DISCOVERY-SEMANTIC-RECALL-HELDOUT-VALIDATION-007",
+  "current_runtime_blob": "97f4c61691afc6b4d9cb3ed54ee0fc85531ca977",
+  "oracle_families": [
+    "inotify-tools",
+    "librsvg2-bin",
+    "rsync",
+    "nethogs"
+  ],
+  "runtime_literal_hits": [],
+  "repository_prior_reference_hits": [],
+  "debian_trixie_package_availability_confirmed": true,
+  "selected_before_next_runtime_mutation": true,
+  "pass": true
+}
