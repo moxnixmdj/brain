@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_OBS_INHERITED_SYSTEM_RECONCILIATION_V1",
+  "reconciliation_id": "SPACE-CARGO-WIN1-OBS6-DOWNSTREAM-DELETION-20260929-V1",
+  "status": "COMPLETE",
+  "source_capability": "FIRST_PRINCIPLES_LAUNCH_ARCHITECTURE_ENVELOPE_V1",
+  "source_real_task": "SPACE-CARGO-ARCHITECTURE-ENVELOPE-WIN1-20260929-V1",
+  "deleted_or_superseded": [
+    {
+      "item": "WTM_BENCHMARK_AS_CAPABILITY_ACQUISITION_WIN1",
+      "disposition": "DELETED_FROM_PRIMARY_MISSION_ROUTE",
+      "reason": "Benchmark-only task violates real-task-first default and provides less real-world leverage than the active cargo project."
+    },
+    {
+      "item": "15_TO_20T_PAYLOAD__17_8T_GROSS__4M_DIAMETER_AS_DEFAULT_POD_REGION",
+      "disposition": "DEMOTED",
+      "reason": "Insufficient ballistic coefficient for low-altitude near-orbital exit unless effective Cd is far below the prior concept-study range."
+    },
+    {
+      "item": "RAW_LAUNCH_COUNT_AS_ACCELERATOR_LANE_COUNT_PROXY",
+      "disposition": "DELETED",
+      "reason": "Required simultaneous guideway occupancy is acceleration_time / launch_interval; 100 t payload pods reduce 100 Mt/year to ~31.6 s cadence, roughly one 30 g pod in-guideway at a time."
+    },
+    {
+      "item": "UNIVERSAL_APPROX_100M_S_FINAL_INSERTION_ASSUMPTION",
+      "disposition": "DELETED",
+      "reason": "~116 m/s is only the ideal tangential no-drag two-body value for 6 km perigee and 400 km apogee. Real insertion is trajectory/aerodynamic-loss dependent."
+    },
+    {
+      "item": "CUSTOM_MDO_OR_TRAJECTORY_FRAMEWORK_BEFORE_FIRST_ORDER_RESIDUAL_CLOSURE",
+      "disposition": "BYPASSED",
+      "reason": "The inherited deterministic model is already sufficient to localize the governing next residuals."
+    },
+    {
+      "item": "SYNTHETIC_HELDOUT_GATE_FOR_THIS_CAPABILITY",
+      "disposition": "DELETED",
+      "reason": "Direct real-project verification plus independent calculations are available."
+    }
+  ],
+  "surviving_primary_residuals": [
+    "REAL_AERODYNAMIC_SHAPE_AND_EFFECTIVE_CD_AT_6KM_HYPERSONIC_EXIT",
+    "REPETITIVE_TPS_OR_ACTIVE_COOLING_LIFECYCLE_AT_HIGH_CADENCE",
+    "115T_CLASS_EM_ACCELERATION_TO_NEAR_9KM_S_WITH_REPETITIVE_FAULT_TOLERANCE",
+    "CARGO_SCALE_VACUUM_MUZZLE_OR_EQUIVALENT_EXIT_ISOLATION",
+    "ORBIT_INSERTION_SYSTEM",
+    "SYSTEM_AVAILABILITY_AND_FAILURE_CONTAINMENT"
+  ],
+  "next_frontier_recommendation": {
+    "capability_gap": "LOW_ALTITUDE_NEAR_ORBITAL_AERODYNAMIC_AND_AEROTHERMAL_CLOSURE",
+    "reason": "The inherited model shows candidate viability is highly sensitive to effective Cd/ballistic coefficient and thermal lifecycle; closing this uncertainty changes pod geometry, exit speed, energy, and infrastructure before detailed launcher design is worth doing.",
+    "default_route": "SEARCH_EXISTING_HYPERSONIC_BLUNT_BODY_DATA_AND_VALIDATED_OPEN_TOOLS__THEN_COMPOSE_LOWEST_FIDELITY_SUFFICIENT_AERO_THERMAL_MODEL__CFD_ONLY_IF_REQUIRED",
+    "synthetic_probe_required": false
+  },
+  "progress_credit": false
+}
