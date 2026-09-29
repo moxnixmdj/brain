@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "EXECUTE-XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003-ONCE",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
+  "action_kind": "ONE_SHOT_HELDOUT_EXECUTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003::ONE_SHOT_HELDOUT_EXECUTION",
+  "canonical_base_sha": "5fa5571d05c5ed86682921b9226de5b2ebcf73c3",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR128 frozen HELDOUT-003 UNSPENT",
+    "merged PR129 provider-neutral score-scale-safe APT admission repair",
+    "fresh open-PR audit: none before this lease",
+    "Railway Debian trixie carrier previously proved APT full metadata, python3-xapian, sudo/root-equivalent apt install, outbound network, and zero-incremental-cash trial execution",
+    "fresh Railway deployment audit: latest completed one-shot is TOOL-DISCOVERY-LATENCY-RECALL-HELDOUT-VALIDATION-006, not HELDOUT-003; two newer failed deployments have no execution logs"
+  ],
+  "execution_contract": {
+    "exact_carrier_count": 1,
+    "carrier": "RAILWAY_EXISTING_DEBIAN_TRIXIE_SERVICE",
+    "incremental_spend_usd": 0,
+    "user_laptop_forbidden": true,
+    "val_town_forbidden": true,
+    "prebound_registry_route_forbidden": true,
+    "package_hints_forbidden": true,
+    "same_case_replay_allowed": false,
+    "first_terminal_result_authoritative": true
+  },
+  "stop_condition": "Before spending the gate, verify exact current-main evaluator/runtime bytes and a faithful carrier preflight without invoking the held-out runner. Then execute HELDOUT-003 exactly once. Immediately reconcile the first terminal result before any runtime mutation, second repair, replay, or promotion.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
