@@ -7,10 +7,23 @@
   "first_execution_started_at": "2026-09-29T02:52:21.958374122Z",
   "first_execution_completed_before_replay": true,
   "first_result_observed_at": "2026-09-29T02:52:41.891761154Z",
-  "later_replay_deployment": "b7be260f-4e90-4a78-b227-2ae6f20bf7bc",
-  "later_replay_started_at": "2026-09-29T02:52:52.828526746Z",
   "root_class": "CONCURRENT_WORKER_MUTATED_LEASED_RAILWAY_SERVICE_AFTER_SPEND",
   "invariant": "FULL_VALIDATION_ID_PLUS_MANIFEST_BLOB_IS_MONOTONIC_IDENTITY__FIRST_FRESH_EXECUTION_ONLY",
   "corrective_rule": "AFTER_EXECUTION_START_ALL_SUBSEQUENT_DEPLOYMENTS_FOR_SAME_VALIDATION_ID_PLUS_MANIFEST_HASH_ARE_REPLAY_ONLY_AND_MUST_NEVER_AFFECT_ACCEPTANCE_EVIDENCE",
-  "no_candidate_change": true
+  "no_candidate_change": true,
+  "observed_minimum_count": 2,
+  "replay_deployments": [
+    {
+      "railway_deployment_id": "b7be260f-4e90-4a78-b227-2ae6f20bf7bc",
+      "execution_started_at": "2026-09-29T02:52:52.828526746Z",
+      "railway_meta_reason": "redeploy",
+      "admissibility": "EXCLUDED_POST_SPEND_REPLAY"
+    },
+    {
+      "railway_deployment_id": "a1a4464d-4278-4d2c-be44-0a8436158d82",
+      "execution_started_at": "2026-09-29T02:53:04.502909849Z",
+      "railway_meta_reason": "deploy",
+      "admissibility": "EXCLUDED_POST_SPEND_REPLAY"
+    }
+  ]
 }
