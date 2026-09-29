@@ -1,0 +1,332 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-GROUNDED-EXECUTABLE-COMPOSITION-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "probe_id": null,
+  "causal_blocker": "POST_GROUNDING_RUNTIME_STOPS_AT_BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_REQUIRED",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1::POST_GROUNDING_RUNTIME_STOPS_AT_BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_REQUIRED::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Acquire a generic model-independent bridge from verified grounded bound-capability candidates to an executable minimum-cost capability plan using Brain's existing graph planner and executor.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Merged PR250 model-independent plain-goal grounding and its independent verifier.",
+    "Merged PR251 canonical composition frontier.",
+    "canonical/runtime/capability_planner.py already plans over requires/provides/cost/action/result_fields without models.",
+    "canonical/runtime/goal_compiler.py already binds capability action-template inputs from plain clauses.",
+    "canonical/runtime/astra_runtime.py already supports capability_instances, provides_as/requires_as effect aliases, plan_actions, and model-independent execution.",
+    "Unified Planning, PythonPDDL, and SHOP3 checked as deterministic challenger planners; each still requires translating Brain registry semantics into a separate planning representation."
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Implement only the smallest generic grounding-to-capability-problem bridge and independent verifier. Prove it on one fresh real multi-step task plus a materially distinct fresh-reuse task, with no spent serialization replay, no model cognition, and no hand-authored task action sequence. Do not promote the parent capability.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "3198f1b18fe441ab86cb9c2b4141517e1d5bf6bb",
+    "real_outcome": "Convert model-independent grounded bound capabilities into executable multi-step plans through Brain-owned deterministic planning.",
+    "required_capability": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "obs_goal": {
+      "real_outcome": "Close the exact post-grounding composition seam without substituting another model, planner framework, or hand-authored task plan.",
+      "proxy_goals_deleted": [
+        "Replay the spent serialization parent task",
+        "Adopt a general PDDL framework before proving need",
+        "Add a model-based planner",
+        "Hand-write controller actions for acceptance cases"
+      ],
+      "surviving_necessity": "Merged grounding now identifies bound candidates but runtime deliberately stops at BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_REQUIRED."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "plain_goal_bound_grounding.py",
+        "goal_compiler.py _bind_inputs",
+        "capability_planner.py plan_actions",
+        "astra_runtime.py capability_instances/requires_as/provides_as",
+        "BOUND_CAPABILITY_REGISTRY_V1.json"
+      ],
+      "external_existing_routes_checked": [
+        "aiplan4eu/unified-planning",
+        "openplan-labs/PythonPDDL",
+        "shop-planner/shop3"
+      ],
+      "capability_work_deleted": [
+        "No PDDL translation layer",
+        "No HTN framework",
+        "No new planner",
+        "No model",
+        "No hand-authored task action list"
+      ],
+      "surviving_gap": "A generic deterministic compiler from grounding records to capability instances, clause target effects, input bindings, and an executable capability problem."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic composition seam between two already-verified Brain components: semantic grounding and graph planning.",
+      "delete_bypass_substitute_options": [
+        "DELETE composition: invalid because parent multi-step reasoning requires executable plans.",
+        "BYPASS with hand-authored actions: invalid because it hides the cognition gap.",
+        "SUBSTITUTE Unified Planning/PythonPDDL/SHOP3: non-dominating because each introduces another problem-representation translation layer.",
+        "COMPOSE existing grounding, binder, capability instances, graph planner, executor: survives."
+      ],
+      "surviving_causal_blocker": "No current route transforms grounded candidate sets into a planner-consumable executable capability problem."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "COMPOSE_EXISTING_GROUNDING_BINDER_CAPABILITY_INSTANCES_GRAPH_PLANNER_EXECUTOR",
+        "SUBSTITUTE_PYTHONPDDL",
+        "SUBSTITUTE_UNIFIED_PLANNING",
+        "SUBSTITUTE_SHOP3"
+      ],
+      "losing_routes_reason": "External planners are capable deterministic systems but Brain already owns the required graph representation and executable action contracts. They add translation/dependency work without removing the observed seam.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Focused deterministic regressions must prove alias construction, ambiguity preservation, input binding, dependency planning, and tamper rejection before spending fresh real tasks. Real-task proof remains mandatory."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_REQUIRED as a terminal blocker when all clauses are composition-ready",
+        "Any planned PDDL/HTN integration solely for this seam"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "grounded candidate effect normalization",
+        "capability-instance construction",
+        "minimum-cost grounded route selection",
+        "explicit dependency trace construction"
+      ],
+      "fresh_reuse_plan": "After deterministic proof, execute one fresh model-independent multi-step task and one materially distinct fresh reuse through the same bridge; never replay the spent serialization case."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse PR250 grounding evidence",
+        "Reuse existing registry semantics",
+        "Reuse existing input binder",
+        "Reuse existing graph planner and executor",
+        "Stop external planner search once all challengers require an extra formulation layer"
+      ],
+      "search_stop_decision": "Brain's incumbent composition route already contains every planning primitive needed except the small grounding-to-problem bridge; external planners cannot eliminate that formulation step and therefore cannot justify delaying implementation.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Fresh deterministic planner challenger race completed immediately before this intent against current main."
+    },
+    "routes_considered": [
+      "COMPOSE_EXISTING_GROUNDING_BINDER_CAPABILITY_INSTANCES_GRAPH_PLANNER_EXECUTOR",
+      "SUBSTITUTE_PYTHONPDDL",
+      "SUBSTITUTE_UNIFIED_PLANNING",
+      "SUBSTITUTE_SHOP3"
+    ],
+    "deleted_or_bypassed_paths": [
+      "SPENT_SERIALIZATION_REPLAY",
+      "MODEL_BACKED_PLANNING",
+      "HAND_AUTHORED_TASK_ACTIONS",
+      "NEW_PDDL_TRANSLATION_LAYER"
+    ],
+    "selected_surviving_route": "COMPOSE_EXISTING_GROUNDING_BINDER_CAPABILITY_INSTANCES_GRAPH_PLANNER_EXECUTOR",
+    "why_selected_route_is_fastest_sufficient": "Brain already owns verified grounding, action input binding, explicit capability preconditions/effects, costed graph planning, effect-result binding, and model-independent execution. A thin bridge is the only missing machinery.",
+    "expected_parent_level_state_change": "Acquire a generic model-independent bridge from verified grounded bound-capability candidates to an executable minimum-cost capability plan using Brain's existing graph planner and executor.",
+    "stop_condition": "Implement only the smallest generic grounding-to-capability-problem bridge and independent verifier. Prove it on one fresh real multi-step task plus a materially distinct fresh-reuse task, with no spent serialization replay, no model cognition, and no hand-authored task action sequence. Do not promote the parent capability.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-29T23:50:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "BRAIN_GROUNDING_PLUS_NATIVE_CAPABILITY_GRAPH_PLANNER",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/capability_planner.py",
+          "canonical/runtime/goal_compiler.py",
+          "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py",
+          "canonical/runtime/astra_runtime.py"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://github.com/aiplan4eu/unified-planning",
+          "https://github.com/openplan-labs/PythonPDDL",
+          "https://github.com/shop-planner/shop3"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/aiplan4eu/unified-planning",
+          "https://github.com/openplan-labs/PythonPDDL",
+          "https://github.com/shop-planner/shop3"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Fresh web/GitHub search on 2026-09-29 for deterministic classical/HTN/PDDL composition planners."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "deterministic grounded capability composition explicit preconditions effects executable actions no model"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Unified Planning PythonPDDL SHOP3 deterministic planner"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "capability graph planner versus PDDL HTN grounded action composition"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 current open source deterministic planning frameworks Python PDDL HTN"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "COMPOSE_EXISTING_GROUNDING_BINDER_CAPABILITY_INSTANCES_GRAPH_PLANNER_EXECUTOR",
+          "evidence": [
+            "Current Brain registry already declares requires/provides/cost/action/result_fields.",
+            "Existing planner already emits executable minimum-cost action sequences."
+          ],
+          "qualification_evidence": [
+            "BRAIN_INHERITED current main 3198f1b18fe441ab86cb9c2b4141517e1d5bf6bb",
+            "DIRECT_CODE_INSPECTION capability_planner.py and astra_runtime.py"
+          ],
+          "qualification_evidence_classes": [
+            "BRAIN_INHERITED",
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Reuses fail-closed verified registry contracts and existing planner semantics.",
+            "CAPABILITY_STRENGTH": "Directly represents the observed composition problem including dependencies, alternatives, costs, and executable actions.",
+            "WALL_CLOCK": "Only a thin bridge is missing; no new solver or representation layer.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "All downstream planner/executor components already exist in Brain and are deterministic.",
+            "VERIFIABILITY": "Bridge output and final plan can be independently structurally verified."
+          }
+        },
+        {
+          "route": "SUBSTITUTE_PYTHONPDDL",
+          "evidence": [
+            "Current public project provides dependency-free pure-Python PDDL parser, grounder and planners."
+          ],
+          "qualification_evidence": [
+            "https://github.com/openplan-labs/PythonPDDL"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Capable classical planning framework.",
+            "CAPABILITY_STRENGTH": "Broad PDDL feature set, beyond the current seam.",
+            "WALL_CLOCK": "Requires translating Brain registry capabilities and bindings into PDDL before planning.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Current open-source project.",
+            "VERIFIABILITY": "Strong planner outputs, but adds a new formulation adapter that must itself be verified."
+          }
+        },
+        {
+          "route": "SUBSTITUTE_UNIFIED_PLANNING",
+          "evidence": [
+            "Current project actively develops grounding/planning infrastructure."
+          ],
+          "qualification_evidence": [
+            "https://github.com/aiplan4eu/unified-planning"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Mature planning framework with multiple engines.",
+            "CAPABILITY_STRENGTH": "Much broader than needed.",
+            "WALL_CLOCK": "Adds dependency and problem translation before solving the same graph search Brain already owns.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Active maintained ecosystem.",
+            "VERIFIABILITY": "High, but integration surface is larger."
+          }
+        },
+        {
+          "route": "SUBSTITUTE_SHOP3",
+          "evidence": [
+            "Current SHOP3 release provides deterministic HTN planning."
+          ],
+          "qualification_evidence": [
+            "https://github.com/shop-planner/shop3"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Established HTN planner.",
+            "CAPABILITY_STRENGTH": "Supports richer hierarchical formulations than needed.",
+            "WALL_CLOCK": "Requires authored HTN/PDDL domain translation not present in grounding output.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Active release line.",
+            "VERIFIABILITY": "Planner is auditable, but new translation layer remains."
+          }
+        }
+      ],
+      "negative_search_summary": "No external deterministic planner removes the grounding-to-formulation work. Brain's existing graph planner already consumes the same semantics natively.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "COMPOSE_EXISTING_GROUNDING_BINDER_CAPABILITY_INSTANCES_GRAPH_PLANNER_EXECUTOR",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-29T23:50:00Z",
+        "max_age_hours": 2,
+        "selected_route": "COMPOSE_EXISTING_GROUNDING_BINDER_CAPABILITY_INSTANCES_GRAPH_PLANNER_EXECUTOR",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "CURRENT_BRAIN_GROUNDING_BINDER_GRAPH_PLANNER_EXECUTOR",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T23:50:00Z",
+            "evidence": [
+              "BRAIN_INHERITED exact main 3198f1b18fe441ab86cb9c2b4141517e1d5bf6bb"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
