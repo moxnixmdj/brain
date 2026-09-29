@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_LATENCY_RECALL_HELDOUT_VALIDATION_V1",
+  "validation_id": "TOOL-DISCOVERY-LATENCY-RECALL-HELDOUT-VALIDATION-006",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "causal_frontier": "STRUCTURAL_LATENCY_BUDGET_MISMATCH_AFTER_GATE_005",
+  "status": "FROZEN_BEFORE_ANY_LATENCY_FRONTIER_RUNTIME_MUTATION",
+  "frozen_on": "2026-09-29",
+  "provenance": {
+    "selected_after": "SEMANTIC-PACKAGE-DISCOVERY-CLEAN-HELDOUT-VALIDATION-005_RECONCILIATION_AND_TIMEOUT_ATTRIBUTION",
+    "selected_before_any_new_runtime_mutation": true,
+    "repository_precheck_no_prior_references_for_oracle_families": true,
+    "runtime_oracle_literal_precheck_pass": true,
+    "prior_gates_replay_forbidden": true
+  },
+  "cases": [
+    {
+      "effect_id": "HELDOUT-POSTSCRIPT-PDF-006",
+      "goal": "Convert a PostScript document into a PDF file.",
+      "oracle_families": [
+        "ghostscript"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-RECURSIVE-REGEX-006",
+      "goal": "Recursively search a source tree for lines matching a regular expression.",
+      "oracle_families": [
+        "ripgrep"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-CRLF-LF-006",
+      "goal": "Convert a text file from Windows CRLF line endings to Unix LF line endings.",
+      "oracle_families": [
+        "dos2unix"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-7ZIP-CREATE-006",
+      "goal": "Create a 7-Zip archive from the contents of a directory.",
+      "oracle_families": [
+        "7zip"
+      ]
+    }
+  ],
+  "acceptance": {
+    "heldout_oracle_family_recall_min": 0.75,
+    "heldout_top20_oracle_recall_min": 0.75,
+    "package_hints_forbidden": true,
+    "task_specific_literals_forbidden": true,
+    "hard_validation_wall_s": 300,
+    "incremental_spend_usd": 0
+  },
+  "execution_surface_requirements": {
+    "debian_family_complete_apt_surface_required": true,
+    "apt_file_required": true,
+    "apt_xapian_index_required": true,
+    "normal_apt_packages_metadata_required": true,
+    "architecture_all_contents_required": true,
+    "outbound_manpage_enrichment_if_runtime_uses_it": true,
+    "exact_runtime_bytes_required": true,
+    "hard_zero_incremental_spend_required": true
+  },
+  "execution_count": 0,
+  "freshness": "UNSPENT",
+  "replay_authorized": false,
+  "promotion_authorized": false
+}
