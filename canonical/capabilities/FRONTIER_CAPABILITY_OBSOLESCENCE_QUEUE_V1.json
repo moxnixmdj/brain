@@ -70,12 +70,12 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Recompute the residual tool-discovery, selection, and learning frontier after inheriting the verified Debian full-metadata + Xapian + direct-Contents route. Do not repeat the closed HELDOUT-005 gate.",
-    "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK_WITH_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "PRIOR_EVIDENCE_ACQUISITION_AND_SEMANTIC_RECALL_BLOCKER_VERIFIED_REMOVED__RESIDUAL_CAPABILITY_GAP_NOT_YET_RECOMPUTED",
-    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
-    "repair_status": "VERIFIED_ROUTE_INHERITED_PENDING_MERGE__FRONTIER_RECOMPUTE_REQUIRED",
-    "prohibition": "NO_HELDOUT005_REPLAY__NO_TUNING_TO_SPENT_CASES__NO_NEW_RUNTIME_REPAIR_BEFORE_PARENT_FRONTIER_RECOMPUTE"
+    "objective": "Make the already-verified Debian full-metadata/Xapian/direct-Contents discovery route usable by autonomous APT acquisition by removing the legacy source-label admission mismatch; then exercise a fresh orthogonal end-to-end discover→probe→contract→verify path.",
+    "selection_metric": "FRESH_ORTHOGONAL_END_TO_END_TOOL_ACQUISITION_SUCCESS_PER_WALL_CLOCK_WITH_ZERO_HINTS_AND_ZERO_INCREMENTAL_SPEND",
+    "exact_blocker": "VERIFIED_APT_FULL_METADATA_XAPIAN_CANDIDATES_ARE_DROPPED_BEFORE_CONTRACT_INFERENCE_BY_LEGACY_AUTO_APT_SOURCE_ADMISSION",
+    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_POST_XAPIAN_INTERFACE_RECOMPUTATION_V1.json",
+    "repair_status": "STATIC_INTERFACE_MISMATCH_PROVEN__ONE_MINIMAL_GENERIC_ADMISSION_REPAIR_AUTHORIZED",
+    "prohibition": "NO_HELDOUT005_REPLAY__NO_PACKAGE_HINTS__NO_TASK_SPECIFIC_LITERALS__NO_NEW_CONTRACT_LEARNER_BEFORE_INTERFACE_FIX__NO_SOURCE_SPECIFIC_XAPIAN_HARDCODE_WHEN_BINDING_KIND_APT_ALREADY_EXISTS"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -155,7 +155,7 @@
     "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EVIDENCE_ACQUISITION_STRUCTURAL_CAUSE_RECONCILIATION_V1.json"
   },
   "tool_discovery_selection_learning_full_metadata_xapian_v1": {
-    "status": "VERIFIED_ROUTE_INHERITED_PENDING_MERGE",
+    "status": "VERIFIED_ROUTE_INHERITED",
     "source_pr": 89,
     "authoritative_deployment": "805a36d4-04cf-4938-bfac-74d29418081f",
     "runtime_git_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
@@ -165,6 +165,24 @@
     "incremental_spend_usd": 0,
     "terminal_reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
     "parent_capability_obsolescence_claim": false,
-    "next_action": "RECOMPUTE_RESIDUAL_PARENT_CAPABILITY_FRONTIER"
+    "next_action": "ONE_MINIMAL_GENERIC_DISCOVERY_TO_APT_ACQUISITION_ADMISSION_REPAIR__ADMIT_APT_BY_BINDING_KIND_NOT_LEGACY_SOURCE_LABEL__FRESH_ORTHOGONAL_END_TO_END_GATE__THEN_RECONCILE",
+    "residual_recomputation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_POST_XAPIAN_INTERFACE_RECOMPUTATION_V1.json"
+  },
+  "tool_discovery_selection_learning_post_xapian_interface_v1": {
+    "status": "RESIDUAL_CAUSAL_BLOCKER_LOCALIZED",
+    "blocker": "VERIFIED_APT_FULL_METADATA_XAPIAN_CANDIDATES_ARE_DROPPED_BEFORE_CONTRACT_INFERENCE_BY_LEGACY_AUTO_APT_SOURCE_ADMISSION",
+    "producer": {
+      "path": "canonical/runtime/capability_discovery.py",
+      "discovery_source": "APT_FULL_METADATA_XAPIAN",
+      "binding_kind": "apt",
+      "evidence_tier": "SEMANTIC_PACKAGE_EXECUTABLE_OWNERSHIP"
+    },
+    "consumer": {
+      "path": "canonical/runtime/auto_apt_cli_acquisition.py",
+      "function": "_viable_candidates",
+      "current_admission": "discovery_source == APT_CATALOG",
+      "effect": "VERIFIED_XAPIAN_APT_CANDIDATES_DROPPED_BEFORE_PROBE_AND_CONTRACT_INFERENCE"
+    },
+    "next_action": "ONE_MINIMAL_GENERIC_DISCOVERY_TO_APT_ACQUISITION_ADMISSION_REPAIR__ADMIT_APT_BY_BINDING_KIND_NOT_LEGACY_SOURCE_LABEL__FRESH_ORTHOGONAL_END_TO_END_GATE__THEN_RECONCILE"
   }
 }
