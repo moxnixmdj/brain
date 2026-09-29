@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_LIVE_CHALLENGER_FRONTIER_REGRESSION_V1",
+  "status": "CANONICAL_REGRESSION_SPEC",
+  "authority": [
+    "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V2.md",
+    "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V3.json",
+    "canonical/runtime/enforce_goal_hierarchy.py"
+  ],
+  "failure_class": "STALE_OR_HOLLOW_EXTERNAL_ROUTE_UNIVERSE_CAN_PRESERVE_AN_OBSOLETE_INCUMBENT",
+  "incident_trigger": "A newly relevant external compute/service candidate was surfaced only after user prompting, demonstrating that a prior route set could remain locally optimized while the external capability frontier had changed.",
+  "required_rejections": [
+    {
+      "case": "STALE_25H_ROUTE_FRONTIER",
+      "expected_failure": "LIVE_CHALLENGER_FRONTIER_EXPIRED"
+    },
+    {
+      "case": "MISSING_OFFICIAL_OR_REGISTRY_OR_BROAD_SOURCE_CLASS",
+      "expected_failure": "LIVE_CHALLENGER_FRONTIER_SOURCE_DIVERSITY_INCOMPLETE"
+    },
+    {
+      "case": "FOUR_IDENTICAL_QUERY_WORDINGS",
+      "expected_failure": "LIVE_CHALLENGER_FRONTIER_QUERY_FAMILIES_NOT_DISTINCT"
+    },
+    {
+      "case": "UNRESOLVED_PLAUSIBLE_DOMINATOR",
+      "expected_failure": "LIVE_CHALLENGER_FRONTIER_UNRESOLVED_PLAUSIBLE_DOMINATOR"
+    },
+    {
+      "case": "NON_GOVERNANCE_DISCOVERY_EXEMPTION",
+      "expected_failure": "LIVE_CHALLENGER_FRONTIER_EXEMPTION_NOT_ALLOWED_FOR_ACTION_KIND"
+    },
+    {
+      "case": "SELECTED_ROUTE_MISMATCH",
+      "expected_failure": "LIVE_CHALLENGER_FRONTIER_SELECTED_ROUTE_MISMATCH"
+    }
+  ],
+  "required_acceptance": {
+    "case": "FRESH_DIVERSE_ROUTE_FRONTIER_WITH_ALL_MATERIAL_CHALLENGERS_RESOLVED",
+    "predicates": [
+      "checked_at_within_declared_lease_and_lease_lte_24h",
+      "all_required_source_classes_have_evidence",
+      "all_required_query_intents_present_and_distinct",
+      "all_material_challengers_resolved",
+      "unresolved_plausible_dominators_empty",
+      "selected_route_matches_recursive_obs_selected_surviving_route"
+    ]
+  },
+  "progress_credit": false
+}
