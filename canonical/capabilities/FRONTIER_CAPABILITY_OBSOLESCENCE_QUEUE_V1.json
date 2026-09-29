@@ -70,12 +70,12 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Replace repeated regex index scans and blanket remote manpage fanout with one batched literal multi-pattern executable-evidence acquisition pass plus bounded progressive cached enrichment, preserving supplier recall on fresh unseen work.",
-    "selection_metric": "FRESH_UNSEEN_VIABLE_SUPPLIER_TOP_K_RECALL_AND_ROLE_PRECISION_PER_WALL_CLOCK_WITH_ZERO_HINTS_AND_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "EVIDENCE_ACQUISITION_USES_REPEATED_SLOW_APT_FILE_REGEX_SCANS_AND_EXCESSIVE_REMOTE_MANPAGE_FANOUT__BATCH_LITERAL_MULTI_PATTERN_ACQUISITION_AND_PROGRESSIVE_CACHED_ENRICHMENT_NOT_YET_INTEGRATED",
-    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EVIDENCE_ACQUISITION_STRUCTURAL_CAUSE_RECONCILIATION_V1.json",
-    "repair_status": "ONE_GENERIC_BATCHED_LITERAL_ACQUISITION_REPAIR_AUTHORIZED",
-    "prohibition": "NO_PER_TERM_REGEX_APT_FILE_LOOPS__NO_UNBOUNDED_MANPAGE_FANOUT__NO_TIMEOUT_INCREASE__NO_PACKAGE_HINTS__NO_TASK_SPECIFIC_LITERALS__FRESH_UNSEEN_GATE_REQUIRED"
+    "objective": "Inherit the verified Debian APT full-metadata/Xapian/direct-Contents route and move immediately to one orthogonal non-APT tool-discovery or tool-learning probe; do not tune Debian further.",
+    "selection_metric": "VERIFIED_USEFUL_TOOL_DISCOVERY_AND_SELECTION_COVERAGE_PER_WALL_CLOCK_WITH_ZERO_HINTS_AND_ZERO_INCREMENTAL_SPEND",
+    "exact_blocker": "DEBIAN_APT_CLI_ROUTE_IS_VERIFIED__COVERAGE_AND_LEARNING_GENERALIZATION_BEYOND_DEBIAN_APT_IS_NOT_YET_VERIFIED",
+    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
+    "repair_status": "DEBIAN_FULL_METADATA_XAPIAN_DIRECT_CONTENTS_ROUTE_VERIFIED_ON_FRESH_UNSEEN_GATE__NO_MORE_DEBIAN_REPAIR_AUTHORIZED",
+    "prohibition": "NO_HELDOUT_005_REPLAY__NO_SECOND_DEBIAN_APT_REPAIR__NO_PACKAGE_HINTS__NO_TASK_SPECIFIC_LITERALS__SEARCH_AND_REUSE_BEFORE_NEW_IMPLEMENTATION"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -153,5 +153,25 @@
       36486527162
     ],
     "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EVIDENCE_ACQUISITION_STRUCTURAL_CAUSE_RECONCILIATION_V1.json"
+  },
+  "tool_discovery_debian_apt_route": {
+    "status": "VERIFIED_HELDOUT_PASS__EXACT_RUNTIME_PRESENT_ON_THIS_REVISION",
+    "runtime_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
+    "validation_id": "DEBIAN-FULL-METADATA-XAPIAN-HELDOUT-VALIDATION-005",
+    "oracle_family_recall": 1,
+    "top20_oracle_recall": 1,
+    "total_wall_s": 16.233238,
+    "incremental_spend_usd": 0,
+    "route": [
+      "Debian Translation-en",
+      "Description-md5 join",
+      "Debian Package Tags",
+      "python3-xapian BM25/stemming",
+      "direct APT Contents executable ownership"
+    ],
+    "terminal_reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
+    "scope": "DEBIAN_FAMILY_APT_DISCOVERABLE_CLI_TOOLS",
+    "whole_parent_capability_obsolete": false,
+    "residual_gap": "NON_APT_TOOL_ECOSYSTEMS_AND_TOOL_LEARNING_BEHAVIOR_NOT_YET_VERIFIED"
   }
 }
