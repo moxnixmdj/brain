@@ -1,0 +1,123 @@
+{
+  "schema": "PROJECT_BRAIN_EXECUTOR_BLOCKER_V1",
+  "blocker_id": "HELDOUT003-EXECUTOR-UNAVAILABLE-20260929",
+  "validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
+  "bound_main_sha": "5fa5571d05c5ed86682921b9226de5b2ebcf73c3",
+  "status": "EXECUTOR_UNAVAILABLE__HELDOUT_UNSPENT",
+  "checked_on": "2026-09-29",
+  "incremental_spend_usd": 0,
+  "freshness": {
+    "state": "UNSPENT",
+    "execution_count": 0,
+    "same_case_replay_allowed": false
+  },
+  "candidate_state": {
+    "source_pr": 129,
+    "repair": "PROVIDER_NEUTRAL_SCORE_SCALE_SAFE_APT_ADMISSION",
+    "repair_merged": true,
+    "repair_runtime_blob": "0b7c67a2680a3aaa1aa5cf1a8bc8d41d69eee271",
+    "second_runtime_repair_allowed_before_reconciliation": false
+  },
+  "executor_requirements": {
+    "status": "AVAILABLE",
+    "platform": "DEBIAN_FAMILY_LINUX",
+    "outbound_apt_network": true,
+    "private_exact_byte_ingress": true,
+    "incremental_spend_usd": 0,
+    "hard_zero_spend": true,
+    "user_device_required": false,
+    "val_town_allowed": false,
+    "single_flight": true
+  },
+  "observed_routes": [
+    {
+      "route": "github_actions_brain",
+      "status": "REJECTED",
+      "evidence": "Current PR127/PR130 and prior runs produce jobs with steps=null and no runner allocation.",
+      "reason": "HOSTED_RUNNER_EXECUTION_SURFACE_UNAVAILABLE_BEFORE_JOB_STEPS"
+    },
+    {
+      "route": "github_actions_rabitto",
+      "status": "REJECTED",
+      "workflow_runs": [36494753034, 36494307957],
+      "reason": "CROSS_REPOSITORY_CONFIRMATION__BOTH_JOBS_COMPLETED_FAILURE_WITH_STEPS_NULL"
+    },
+    {
+      "route": "railway",
+      "status": "TEMPORARILY_UNAVAILABLE",
+      "attempted_authoritative_deployment": "25a52df8-9398-4502-bdd7-22d93d6f5e11",
+      "attempt_result": "FAILED_BEFORE_CONTAINER__NO_BUILD_OR_DEPLOY_LOGS",
+      "control_plane_state": "WRITE_RATE_LIMIT_OBSERVED",
+      "additional_blockers": [
+        "FREE_PLAN_RESOURCE_PROVISION_LIMIT_EXCEEDED_FOR_NEW_SERVICE",
+        "FIRST_DEPLOY_NOT_AVAILABLE_THROUGH_REDEPLOY_ON_REPO_BACKED_ZERO_HISTORY_SERVICE",
+        "RAILWAY_AGENT_USAGE_LIMIT_REACHED",
+        "PARALLEL_WORKERS_MUTATED_SHARED_SERVICES"
+      ],
+      "heldout_execution_started": false
+    },
+    {
+      "route": "render",
+      "status": "REJECTED",
+      "reason": "CONNECTED_WORKSPACE_PRESENT_BUT_FREE_SERVICE_CREATION_RETURNED_HTTP_402_PAYMENT_INFORMATION_REQUIRED",
+      "resource_created": false
+    },
+    {
+      "route": "replit",
+      "status": "REJECTED",
+      "reason": "CONNECTED_ACCOUNT_APP_CREATION_RETURNED_FAILED_AUTHORIZATION_REQUIRES_ACTIVE_SUBSCRIPTION",
+      "resource_created": false
+    },
+    {
+      "route": "sprites",
+      "status": "REJECTED",
+      "reason": "METERED_SERVICE_AND_CONNECTED_ACCOUNT_SURFACE_EXPOSES_NO_CREDIT_BALANCE__HARD_ZERO_SPEND_CANNOT_BE_ATTESTED",
+      "resource_created": false
+    },
+    {
+      "route": "vercel",
+      "status": "REJECTED",
+      "reason": "CONNECTED_ACCOUNT_EXPOSES_NO_TEAMS_OR_EXISTING_PROJECT_CARRIER"
+    },
+    {
+      "route": "camber",
+      "status": "REJECTED",
+      "reason": "CAMBER_USAGE_GUIDE_STATES_CLI_EXECUTION_OCCURS_ON_USER_MACHINE__USER_DEVICE_FORBIDDEN"
+    },
+    {
+      "route": "chatgpt_session_container",
+      "status": "REJECTED_FOR_THIS_GATE",
+      "reason": "DEBIAN_TRIXIE_USERSPACE_PRESENT_BUT_OUTBOUND_DEBIAN_PACKAGE_ACQUISITION_UNAVAILABLE__CANNOT_SUPPORT_AUTONOMOUS_APT_INSTALL"
+    },
+    {
+      "route": "tinyfish_browser_automation",
+      "status": "REJECTED",
+      "reason": "METERED_WALLET_BALANCE_NEGATIVE__ZERO_SPEND_VIOLATION"
+    },
+    {
+      "route": "cloudflare_workers_builds",
+      "status": "REJECTED_FOR_THIS_GATE",
+      "reason": "HISTORICAL_CANONICAL_ROUTE_EXISTS_BUT_WORKERS_IS_NOT_THE_REQUIRED_DEBIAN_FAMILY_APT_EXECUTION_SURFACE"
+    },
+    {
+      "route": "val_town",
+      "status": "FORBIDDEN",
+      "reason": "PROJECT_BRAIN_PROVIDER_POLICY_V1"
+    },
+    {
+      "route": "user_laptop",
+      "status": "FORBIDDEN",
+      "reason": "USER_DEVICE_DEPENDENCY_FORBIDDEN"
+    }
+  ],
+  "safety_actions": [
+    "No HELDOUT-003 evaluator start marker was observed.",
+    "No HELDOUT-003 terminal result was observed.",
+    "No second capability-runtime repair was made.",
+    "Shared Railway service heldout-002-carrier was disarmed after concurrent redeploy races were observed.",
+    "No Sprite, Render service, or Replit app was successfully created.",
+    "No paid resource was provisioned."
+  ],
+  "next_admissible_event": "ONE_EXECUTOR_ATTESTATION_SATISFYING_EXECUTOR_POLICY_V1__THEN_EXECUTE_HELDOUT003_EXACTLY_ONCE__THEN_RECONCILE_FIRST_TERMINAL_RESULT",
+  "fail_closed": true
+}
