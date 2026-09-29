@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_DEBIAN_METADATA_ROLE_BRIDGE_HELDOUT_VALIDATION_RECONCILIATION_V1",
+  "status": "EXECUTED_ONCE__TERMINAL_TIMEOUT_FAIL__HELDOUT_004_SPENT",
+  "checked_on": "2026-09-29",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "action_id": "DEBIAN-METADATA-ROLE-BRIDGE-REPAIR-V1",
+  "validation_id": "DEBIAN-METADATA-ROLE-BRIDGE-HELDOUT-VALIDATION-004",
+  "tested_branch": "repair/debian-metadata-role-bridge-v1-20260929",
+  "tested_head_sha": "147ae6ac458ed61c891cd7a7753836f8c334b5be",
+  "execution_count": 1,
+  "freshness": "SPENT",
+  "exact_blobs": {
+    "runtime": "5ba38a88eb046caf71914f6dddc2d554f0d83ead",
+    "semantic_test": "1228ba50b4aade64489b2dfa50c1528676230f16",
+    "role_test": "992abf8f1b9d3ada7fde3dfda0540b6ba42f80ea",
+    "manifest": "ab675e28e392f36a7990abea1c8ae62ab8c926ce",
+    "runner": "c65286f0b86e1e8bb3cc42b24f692af178044ee9"
+  },
+  "execution_surface": {
+    "provider": "Railway",
+    "service_id": "d76be0c4-52b7-42c6-b389-4fd472c68c35",
+    "deployment_id": "23873604-180d-41a8-944c-3511a5725072",
+    "packages_indexes": 3,
+    "contents_amd64_indexes": 2,
+    "contents_all_indexes": 2,
+    "apt_tag_records": 25324,
+    "generic_tests": "7 passed in 0.05s",
+    "incremental_spend_usd": 0
+  },
+  "observed_result": {
+    "validator_exit_code": 124,
+    "validator_timeout": true,
+    "validator_wall_s": 240.044554012,
+    "hard_validation_wall_s": 240,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "input_sha256_file": "09da69615f6419108d0657de096971da3c0bceab22f695178c6e8e3c6a258744",
+    "result_json_present": false,
+    "acceptance_gate_pass": false,
+    "promotion_authorized": false
+  },
+  "classification": "FAITHFUL_SURFACE_TIMEOUT__QUALITY_UNOBSERVED__EXECUTABLE_OWNERSHIP_FANOUT_REMAINS_ON_CRITICAL_PATH",
+  "exact_residual": "PER_QUERY_EXECUTABLE_OWNERSHIP_VERIFICATION_RUNS_MANY_APT_FILE_LIST_SUBPROCESSES__OWNERSHIP_SHOULD_BE_INDEXED_ONCE_FROM_CONTENTS_AND_JOINED_IN_MEMORY",
+  "preserved_gain": [
+    "Debian Tag metadata is present at large scale (25324 tagged records).",
+    "All seven generic invariants passed before held-out execution.",
+    "Exact branch bytes and faithful Packages/Contents surface were verified.",
+    "Timeout is isolated to validator runtime after preflight, not infrastructure setup."
+  ],
+  "next_action": "FREEZE_HELDOUT_005_BEFORE_ANY_RUNTIME_MUTATION__THEN_REPLACE_PER_CANDIDATE_APT_FILE_LIST_FANOUT_WITH_ONE_CACHED_CONTENTS_EXECUTABLE_OWNERSHIP_INDEX__THEN_EXECUTE_005_ONCE",
+  "prohibitions": [
+    "NO_REPLAY_OF_HELDOUT_004",
+    "NO_PROMOTION_FROM_TIMEOUT",
+    "NO_TASK_SPECIFIC_LITERALS_OR_PACKAGE_HINTS",
+    "NO_USER_LAPTOP",
+    "NO_VAL_TOWN"
+  ]
+}
