@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_POST_OBSOLESCENCE_FRONTIER_RECOMPUTATION_V1",
+  "recomputation_id": "POST-TOOL-DISCOVERY-WIN-FRONTIER-RECOMPUTE-20260929",
+  "source_merge": "db298bb4363266ef9e91ec9ec114b5f1c7bcf1fd",
+  "previous_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "previous_result": {
+    "verified_subcapability_route": "DEBIAN_FULL_METADATA_XAPIAN_DIRECT_CONTENTS_V1",
+    "status": "VERIFIED_ROUTE_INHERITED",
+    "heldout_recall": 1,
+    "heldout_top20_recall": 1,
+    "wall_s": 16.233238,
+    "parent_capability_obsolete": false,
+    "residual": "Cross-ecosystem/open-ended tool learning remains broader than the verified Debian/APT CLI route; preserved but no longer the highest-leverage immediate blocker."
+  },
+  "selection_law": "verified capability gain × obsolescence leverage / wall-clock time",
+  "candidates": [
+    {
+      "capability": "MULTI_TOOL_ORCHESTRATION_AND_PLANNING",
+      "expected_gain": "HIGH",
+      "obsolescence_leverage": "VERY_HIGH",
+      "time_to_evidence": "LOW",
+      "existing_assets": [
+        "deterministic capability graph planner",
+        "dynamic fanout",
+        "conditional execution",
+        "multi-source join",
+        "browser capture/interact",
+        "verified artifact producers/verifiers"
+      ],
+      "decision": "SELECT"
+    },
+    {
+      "capability": "SELF_CRITIQUE_FALSIFICATION_AND_VERIFICATION",
+      "expected_gain": "HIGH",
+      "obsolescence_leverage": "HIGH",
+      "time_to_evidence": "MEDIUM",
+      "existing_assets": [
+        "independent verifiers",
+        "fail-closed gates"
+      ],
+      "decision": "DEFER"
+    },
+    {
+      "capability": "COMPUTER_AND_BROWSER_OPERATION",
+      "expected_gain": "HIGH",
+      "obsolescence_leverage": "HIGH",
+      "time_to_evidence": "MEDIUM_HIGH",
+      "existing_assets": [
+        "verified rendered browser capture/interact"
+      ],
+      "constraint": "arbitrary desktop surface is less available under no-laptop rule",
+      "decision": "DEFER"
+    },
+    {
+      "capability": "LONG_HORIZON_AUTONOMY_AND_RECOVERY",
+      "expected_gain": "HIGH",
+      "obsolescence_leverage": "HIGH",
+      "time_to_evidence": "HIGH",
+      "existing_assets": [
+        "checkpoint/relaunch",
+        "same-identity runtime"
+      ],
+      "decision": "DEFER"
+    },
+    {
+      "capability": "SOFTWARE_ENGINEERING",
+      "expected_gain": "VERY_HIGH",
+      "obsolescence_leverage": "HIGH",
+      "time_to_evidence": "MEDIUM_HIGH",
+      "decision": "DEFER"
+    },
+    {
+      "capability": "GENERAL_TECHNICAL_REASONING",
+      "expected_gain": "VERY_HIGH",
+      "obsolescence_leverage": "HIGH",
+      "time_to_evidence": "HIGH",
+      "decision": "DEFER"
+    }
+  ],
+  "selected_capability": "MULTI_TOOL_ORCHESTRATION_AND_PLANNING",
+  "selected_real_effect": "Coordinate dependent tools/subtasks across long horizons while preserving state, scope, causal ordering, runtime data dependencies, and verification.",
+  "existing_evidence": [
+    "canonical/astra_runtime/state/ASTRA-RUNTIME-CAPABILITY-GRAPH-PLANNER-001.json",
+    "canonical/astra_runtime/state/ASTRA-RUNTIME-LIVE-DYNAMIC-FANOUT-001.json",
+    "canonical/astra_runtime/state/ASTRA-RUNTIME-LIVE-CONDITIONAL-GENERALIZATION-001.json",
+    "canonical/astra_runtime/state/ASTRA-RUNTIME-MULTI-SOURCE-JOIN-002.json",
+    "canonical/astra_runtime/state/ASTRA-RUNTIME-BROWSER-XLSX-COMPOSITION-004.json"
+  ],
+  "immediate_residual": "Existing route has substantial real-work evidence but has not been adjudicated as a fresh frontier-obsolescence subcapability on unseen compound work.",
+  "next_action": "DEFINE_SMALLEST_HIGH_LEVERAGE_SUBCAPABILITY__ESTABLISH_FRONTIER_BAR__FREEZE_UNSEEN_GATE__TEST_EXISTING_ROUTE_FIRST",
+  "runtime_mutation_authorized": false
+}
