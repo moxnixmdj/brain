@@ -91,16 +91,19 @@ class PlainGoalGroundingRuntimePrecedenceTests(unittest.TestCase):
                     ):
                         with mock.patch.object(
                             runtime,
-                            "_load_auto_capability_acquisition",
-                            side_effect=AssertionError(
-                                "external acquisition must not be reached after bound grounding"
-                            ),
-                        ):
-                            with self.assertRaisesRegex(
-                                runtime.Blocker,
-                                "BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_REQUIRED",
+                            "_compose_grounded_bound_capabilities",
+                            return_value={"status":"COMPOSED_EXISTING_BOUND_ROUTE"},
+                        ) as compose:
+                            with mock.patch.object(
+                                runtime,
+                                "_load_auto_capability_acquisition",
+                                side_effect=AssertionError(
+                                    "external acquisition must not be reached after bound grounding"
+                                ),
                             ):
-                                runtime.run_goal(step,mission)
+                                result=runtime.run_goal(step,mission)
+        self.assertEqual(result["status"],"COMPOSED_EXISTING_BOUND_ROUTE")
+        compose.assert_called_once()
 
     def test_unmatched_goal_does_not_fake_bound_grounding(self):
         registry=self.real_registry()
