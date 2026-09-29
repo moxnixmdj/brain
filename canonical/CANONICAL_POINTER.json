@@ -94,7 +94,12 @@
     "drift_guard_workflow_path": ".github/workflows/drift-immunity-guard.yml",
     "blocker_lease_required": true,
     "blocker_lease_open_pr_dedupe_required": true,
-    "expensive_frontier_execution_requires_guarded_pr_first": true
+    "expensive_frontier_execution_requires_guarded_pr_first": true,
+    "one_shot_execution_singleflight_required": true,
+    "one_shot_execution_claim_key": "SHA256(validation_id\\nmanifest_git_blob_lowercase)",
+    "one_shot_execution_claim_ref_prefix": "execution-claims/v1/",
+    "one_shot_execution_claim_creation_is_spend_boundary": true,
+    "one_shot_execution_claim_ref_mutation_forbidden": true
   },
   "active_agent": {
     "agent_id": "ASTRA-OPERATIONAL-1",
