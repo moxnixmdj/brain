@@ -1,0 +1,128 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PROPAGATE-LATEST-OBS-CONTROLS-V2-20260930",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "LIVE_AUTHORITY_SURFACES_STILL_REFERENCE_SUPERSEDED_OBS_AND_ACQUISITION_CONTROLS_AFTER_V3_V4_V6_V7_PROMOTION",
+  "action_kind": "USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::LIVE_AUTHORITY_SURFACES_STILL_REFERENCE_SUPERSEDED_OBS_AND_ACQUISITION_CONTROLS_AFTER_V3_V4_V6_V7_PROMOTION::USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "expected_parent_frontier_change": "All live boot, hierarchy, frontier-queue, and scoreboard compliance surfaces point to OBS Law V3, Receipt V4, Action Template V3, Goal Gate V6, Critical Gate V7, and Capability Acquisition Law V4 before fresh model-independent Task C.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR225",
+    "PR227",
+    "PR236",
+    "live pointer/hierarchy/queue/scoreboard"
+  ],
+  "evidence_presence_classification": "CAPABILITY_PROVEN_EVIDENCE_PRESENT",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 4,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Merge only authority-reference propagation; add no new law, gate, workflow, supplier, or benchmark. Immediately proceed to fresh model-independent real Task C.",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "user_authorization_summary": "User explicitly ordered Brain and everything necessary to be updated perfectly and repeated that the fastest path to the real frontier-capability goal is mandatory.",
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "e2a23a5cd2bdd3bb741f33c3a664fe7bee39dc2b",
+    "real_outcome": "Prevent fresh workers from booting superseded control rules before real capability execution.",
+    "required_capability": "CURRENT_CANONICAL_CONTROL_PROPAGATION",
+    "obs_goal": {
+      "real_outcome": "One coherent live authority surface using newest already-canonical controls.",
+      "proxy_goals_deleted": [
+        "new law",
+        "new gate",
+        "new workflow"
+      ],
+      "surviving_necessity": "Repoint stale live references only."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "OBS Law V3",
+        "Receipt V4",
+        "Template V3",
+        "Goal Gate V6",
+        "Critical Gate V7",
+        "Acquisition Law V4"
+      ],
+      "external_existing_routes_checked": [
+        "Not applicable to internal governance propagation."
+      ],
+      "capability_work_deleted": [
+        "No new control mechanism"
+      ],
+      "surviving_gap": "Live surfaces cite superseded controls."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Intrinsic authority-reference drift.",
+      "delete_bypass_substitute_options": [
+        "Ignoring drift rejected",
+        "New governance rejected",
+        "Repoint existing controls survives"
+      ],
+      "surviving_causal_blocker": "Stale live references."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REPOINT_EXISTING_LIVE_AUTHORITY_REFERENCES"
+      ],
+      "losing_routes_reason": "Larger changes add governance without reducing capability gap.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Read live JSON after merge and verify exact versions."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any stale V1/V2/V4/V5 boot instruction"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Live frontier refresh and selected-route preflight"
+      ],
+      "fresh_reuse_plan": "Fresh Task C authored under V3/V4 controls."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse existing controls"
+      ],
+      "search_stop_decision": "Contradiction is explicit in canonical JSON; no external search needed.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Governance-only action is exempt from external challenger search."
+    },
+    "routes_considered": [
+      "REPOINT_EXISTING_LIVE_AUTHORITY_REFERENCES",
+      "IGNORE_STALE_REFERENCES",
+      "CREATE_NEW_GOVERNANCE_VERSION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "IGNORE_STALE_REFERENCES",
+      "CREATE_NEW_GOVERNANCE_VERSION"
+    ],
+    "selected_surviving_route": "REPOINT_EXISTING_LIVE_AUTHORITY_REFERENCES",
+    "why_selected_route_is_fastest_sufficient": "Minimal zero-cost correction to already-canonical controls.",
+    "expected_parent_level_state_change": "All live boot, hierarchy, frontier-queue, and scoreboard compliance surfaces point to OBS Law V3, Receipt V4, Action Template V3, Goal Gate V6, Critical Gate V7, and Capability Acquisition Law V4 before fresh model-independent Task C.",
+    "stop_condition": "Merge only authority-reference propagation; add no new law, gate, workflow, supplier, or benchmark. Immediately proceed to fresh model-independent real Task C.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "User-authorized governance-only propagation of already-canonical internal references."
+    }
+  }
+}
