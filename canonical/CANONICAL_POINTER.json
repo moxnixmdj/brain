@@ -170,11 +170,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "FRESH_EXACT_BASE_OBS__EXECUTE_REAL_TASK_B_ON_PUBLIC_RUNNER_WITH_LOCAL_QWEN3_5_4B_GGUF__VERIFY__THEN_RECOMPUTE",
+    "next_step": "MERGE_QWEN3_5_4B_TERMINAL_RECONCILIATION__THEN_FRESH_EXACT_BASE_OBS__RUN_FRESH_DIFFERENT_REAL_TASK_B_ON_PUBLIC_RUNNER_WITH_LOCAL_QWEN3_5_9B_GGUF__VERIFY__RECOMPUTE",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "RELIABLE_ZERO_COST_NONFRONTIER_OPEN_ENDED_PLANNER_FOR_REAL_PROMPT_UNPROVEN",
+    "critical_blocker": "DEPENDENCY_FREE_REAL_TASK_B_UNPROVEN__LOCAL_QWEN3_5_4B_FAILED_TO_TERMINATE_BOUNDED_REAL_TASK",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -251,7 +251,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1__DEPENDENCY_FREE_PLANNER_ROUTE__POLLINATIONS_REJECTED_402__LOCAL_QWEN_NEXT",
+    "highest_leverage_capability_gap": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1__DEPENDENCY_FREE_PLANNER_ROUTE__POLLINATIONS_REJECTED__LOCAL_4B_FALSIFIED__LOCAL_9B_NEXT",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -575,7 +575,21 @@
       "evidence_path": "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json",
       "frontier_target_path": "canonical/capabilities/frontier/OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1.json"
     },
-    "last_route_falsification": "canonical/capabilities/obsolescence/NONFRONTIER_AGENTIC_TASK_B_POLLINATIONS_ROUTE_FALSIFICATION_20260929_V1.json"
+    "last_route_falsification": "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_4B_TASK_B_FALSIFICATION_20260929_V1.json",
+    "next_nonfrontier_planner_candidate": {
+      "route": "PUBLIC_GITHUB_ACTIONS_LOCAL_QWEN3_5_9B_GGUF",
+      "base_model": "Qwen/Qwen3.5-9B",
+      "quantization_repo": "TheStageAI/Qwen3.5-9B-GGUF",
+      "quantization_file": "Qwen3.5-9B-M-TS-Q4_K_M.gguf",
+      "quantization_bytes": 5060174144,
+      "quantization_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+      "source_urls": [
+        "https://huggingface.co/Qwen/Qwen3.5-9B",
+        "https://huggingface.co/TheStageAI/Qwen3.5-9B-GGUF",
+        "https://huggingface.co/TheStageAI/Qwen3.5-9B-GGUF/blob/main/release-manifest.json"
+      ],
+      "task_rule": "FRESH_DIFFERENT_REAL_TASK_B__NO_AI_SYSTEMS_TASK_REPLAY"
+    }
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",

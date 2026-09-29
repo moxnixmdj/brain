@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_ROUTE_FALSIFICATION_V1",
+  "evidence_id": "LOCAL_QWEN3_5_4B_TASK_B_FALSIFICATION_20260929_V1",
+  "status": "TERMINAL_ROUTE_FAIL_RECONCILED__NO_SAME_TASK_REPLAY",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "attempted_role": "DEPENDENCY_FREE_ZERO_COST_NONFRONTIER_OPEN_ENDED_PLANNER_FOR_REAL_TASK_B",
+  "source_intent_pr": 216,
+  "execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "frontier-task-b-local-qwen-20260929",
+    "public_commit": "3a32e7ca9f76845db3f970a568571b626e813d05",
+    "workflow_run_id": 36624408059,
+    "artifact_id": 11060660812,
+    "artifact_digest": "sha256:ca693b1e8f6e566310302d8ac6737fc34c466c232623ae9ccdb2c263096ce0bc",
+    "execution_count": 1,
+    "incremental_spend_usd": 0
+  },
+  "exact_route": {
+    "astra_runtime_git_blob": "dae3f042da75ec5289063bcf74f913f7f31bebbc",
+    "bound_registry_git_blob": "8419623ab7ec7768f5a24f673d9f373646e87776",
+    "llama_cpp_release": "v0.5.0",
+    "llama_cpp_commit": "7fe450e19305b828c199d602c23a8337aaa1f03b",
+    "base_model": "Qwen/Qwen3.5-4B",
+    "quantization_repo": "bartowski/Qwen_Qwen3.5-4B-GGUF",
+    "quantization_revision": "ba06320255db2dbec194dad738d066be90dabf29",
+    "gguf": "Qwen_Qwen3.5-4B-Q4_K_M.gguf",
+    "gguf_bytes": 3013027808,
+    "gguf_sha256": "13c16f426047e2de38cd075bdade4a7bcbc8c774384876f677740cda65f8a983"
+  },
+  "verified_passes": {
+    "route_manifest_preflight": true,
+    "llama_cpp_build_and_commit_pin": true,
+    "model_download_and_sha256": true,
+    "model_server_health": true,
+    "local_external_planner_bridge": true,
+    "official_qwen_apache2_license_check": true,
+    "planner_responses_from_exact_local_model": 4,
+    "live_http_bridge_requests_observed": 2
+  },
+  "terminal_result": {
+    "runtime_state": "BLOCKED",
+    "exact_blocker": "GOAL_MAX_CYCLES_WITHOUT_FINISH",
+    "runtime_completed": false,
+    "planner_finish_observed": false,
+    "task_b_completed": false,
+    "frontier_capability_promoted": false
+  },
+  "interpretation": {
+    "transport_failure": false,
+    "model_load_failure": false,
+    "provenance_failure": false,
+    "supplier_behavior_failure": true,
+    "reason": "The exact local model repeatedly supplied planner responses and the bridge executed live evidence requests, but the bounded open-ended controller never received a terminating finish action. The real task therefore did not complete.",
+    "replay_policy": "NO_SAME_TASK_REPLAY__DO_NOT_INCREASE_CYCLE_LIMIT_OR_RETUNE_PROMPT_TO_FORCE_PASS",
+    "implementation_defect_proven": false
+  },
+  "progress_credit": {
+    "reusable_capability": false,
+    "verified_real_task": false,
+    "fresh_reuse": false,
+    "frontier_dependency_removed": false,
+    "residual_gap_localized": true
+  },
+  "localized_gap": "QWEN3_5_4B_LOCAL_PLANNER_INSUFFICIENT_TO_RELIABLY_TERMINATE_THIS_REAL_OPEN_ENDED_TASK_WITHIN_EXISTING_BOUNDED_CONTROLLER_POLICY",
+  "obs_recompute": {
+    "delete": [
+      "same-task Qwen3.5-4B replay",
+      "cycle-limit inflation to force completion",
+      "Pollinations replay"
+    ],
+    "reuse": [
+      "public GitHub Actions carrier",
+      "exact ASTRA runtime",
+      "external planner bridge",
+      "llama.cpp local inference route"
+    ],
+    "substitute_next_candidate": {
+      "model": "Qwen/Qwen3.5-9B",
+      "quantization": "TheStageAI/Qwen3.5-9B-GGUF M Q4_K_M",
+      "file": "Qwen3.5-9B-M-TS-Q4_K_M.gguf",
+      "file_bytes": 5060174144,
+      "sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+      "reason": "Materially stronger local supplier while preserving the same zero-account public carrier and sufficient RAM headroom."
+    },
+    "next_task_rule": "USE_A_FRESH_DIFFERENT_REAL_TASK_B__DO_NOT_REPLAY_THE_AI_SYSTEMS_TASK"
+  }
+}
