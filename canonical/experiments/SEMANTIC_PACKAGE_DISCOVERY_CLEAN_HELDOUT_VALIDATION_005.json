@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_SEMANTIC_PACKAGE_DISCOVERY_CLEAN_HELDOUT_VALIDATION_V1",
+  "validation_id": "SEMANTIC-PACKAGE-DISCOVERY-CLEAN-HELDOUT-VALIDATION-005",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "status": "FROZEN_FROM_PRE_REPAIR_UNEXPOSED_LITERAL_CLEAN_CASES_AFTER_003_AND_004_CONTAMINATION",
+  "frozen_on": "2026-09-29",
+  "provenance": {
+    "repair_commit": "aa49d81446e5d042f8cf1cffb3bada9c887fc014",
+    "repair_runtime_blob": "dbd2b4026149a7a2e731eb3152ca398e30ca625f",
+    "no_new_case_invention_after_repair": true,
+    "source_freeze": "89569377a6facbacdc959ef114c40514c4a413e4",
+    "predecessor_004": "SEMANTIC-PACKAGE-DISCOVERY-COMPOSITE-HELDOUT-VALIDATION-004",
+    "predecessor_004_quarantine_reason": "WEBP_ORACLE_LITERAL_PRESENT_IN_FROZEN_RUNTIME",
+    "predecessor_003_contamination_receipt": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_003_CONCURRENCY_CONTAMINATION_AND_004_COMPOSITE_FREEZE_V1.json",
+    "successor_freeze_receipt": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_004_LITERAL_CONTAMINATION_AND_005_CLEAN_FREEZE_V1.json",
+    "runtime_oracle_literal_precheck": {
+      "found": [],
+      "pass": true
+    }
+  },
+  "cases": [
+    {
+      "effect_id": "HELDOUT-MARKDOWN-EPUB-005",
+      "goal": "Convert a Markdown document into an EPUB ebook file.",
+      "oracle_families": [
+        "pandoc"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-WAV-FLAC-005",
+      "goal": "Convert a WAV audio file into lossless FLAC audio.",
+      "oracle_families": [
+        "flac"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-RAR-EXTRACT-005",
+      "goal": "Extract the contents of a RAR archive into a directory.",
+      "oracle_families": [
+        "unar"
+      ]
+    }
+  ],
+  "acceptance": {
+    "heldout_oracle_family_recall_min": 0.75,
+    "heldout_top20_oracle_recall_min": 0.75,
+    "effective_case_count": 3,
+    "effective_minimum_cases_passing": 3,
+    "package_hints_forbidden": true,
+    "task_specific_literals_forbidden": true,
+    "hard_validation_wall_s": 300,
+    "incremental_spend_usd": 0
+  },
+  "execution_surface_requirements": {
+    "linux_family": "Ubuntu 24.04/Noble preferred; equivalent complete Debian-family APT surface acceptable only with normal Packages metadata, all applicable Contents indexes, apt-file, apt-xapian-index/axi-cache, and outbound manpage access used by the frozen repair.",
+    "apt_file_required": true,
+    "apt_xapian_index_required": true,
+    "normal_apt_packages_metadata_required": true,
+    "architecture_all_contents_required": true,
+    "outbound_manpage_enrichment_required": true,
+    "exact_runtime_bytes_required": true,
+    "result_readback_canary_required": true,
+    "hard_zero_incremental_spend_required": true
+  },
+  "execution_count": 0,
+  "freshness": "UNSPENT",
+  "replay_authorized": false,
+  "promotion_authorized": false
+}
