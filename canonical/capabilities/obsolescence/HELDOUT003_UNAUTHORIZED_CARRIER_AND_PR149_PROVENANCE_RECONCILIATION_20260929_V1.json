@@ -53,7 +53,6 @@
       "prebound_registry_route_used": false,
       "terminal_error_class": "EXISTING_INDEPENDENT_VERIFIER_FAILED_IMPORT_ERROR",
       "missing_import": "python_library_codec",
-      "carrier_dependency_closure_defect_proven": true,
       "canonical_main_required_modules_present": [
         {
           "path": "canonical/runtime/bound_capabilities/python_library_codec.py",
@@ -64,11 +63,23 @@
           "git_blob": "8f452c01b2c88a9bd7663f8dc753b24b2e7f7f05"
         }
       ],
-      "carrier_modules_present": [
-        "canonical/runtime/bound_capabilities/cli_command.py",
-        "canonical/runtime/bound_capabilities/node_library_codec.py"
+      "interpretation": "EXECUTION_SURFACE_FIDELITY_OR_DEPENDENCY_AVAILABILITY_FAILURE__DIAGNOSTIC_ONLY__NOT_PARENT_RUNTIME_SEMANTIC_FALSIFICATION",
+      "live_execution_surface_import_failure_proven": true,
+      "qualified_carrier_source_contains_required_modules": [
+        {
+          "path": "canonical/runtime/bound_capabilities/python_library_codec.py",
+          "git_blob": "e9b9f5c4991ba1f11b9f377a275b3e17bad22886"
+        },
+        {
+          "path": "canonical/runtime/bound_capabilities/python_source_tree_codec.py",
+          "git_blob": "8f452c01b2c88a9bd7663f8dc753b24b2e7f7f05"
+        }
       ],
-      "interpretation": "REAL_CARRIER_MATERIALIZATION_DEFECT__NOT_PARENT_RUNTIME_SEMANTIC_FALSIFICATION"
+      "qualified_carrier_preflight_checked_required_module_blobs": true,
+      "source_branch_omission_proven": false,
+      "exact_live_sprite_materialization_transcript_preserved": false,
+      "exact_materialization_step_cause_proven": false,
+      "bounded_technical_classification": "LIVE_EXECUTION_SURFACE_DIVERGED_FROM_QUALIFIED_SOURCE_OR_REQUIRED_VERIFIER_DEPENDENCY_WAS_UNAVAILABLE_AT_IMPORT__EXACT_MATERIALIZATION_CAUSE_UNPROVEN"
     }
   },
   "parent_frontier": {
