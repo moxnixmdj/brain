@@ -1,0 +1,346 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-STRUCTURED-GOAL-OBSERVATION-CONTEXT-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "OPTIONAL_MODEL_PLANNER_AND_FORCED_FINALIZER_SHARE_LOSSY_LAST6_RAW_JSON_SLICE_CONTEXT__EARLY_EVIDENCE_CAN_DISAPPEAR__SERIALIZED_JSON_CAN_BE_CUT_INVALID__HTTP_CONTENT_HAS_NO_EXPLICIT_UNTRUSTED_DATA_BOUNDARY",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::OPTIONAL_MODEL_PLANNER_AND_FORCED_FINALIZER_SHARE_LOSSY_LAST6_RAW_JSON_SLICE_CONTEXT__EARLY_EVIDENCE_CAN_DISAPPEAR__SERIALIZED_JSON_CAN_BE_CUT_INVALID__HTTP_CONTENT_HAS_NO_EXPLICIT_UNTRUSTED_DATA_BOUNDARY::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Replace duplicated lossy observation-context construction in both optional planning and forced finalization with one bounded structured helper that preserves every admitted cycle's metadata, always emits parseable JSON, explicitly labels external HTTP text as untrusted data, and is regression-tested before any fresh real Task C is spent.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "current main canonical/runtime/astra_runtime.py at 4262602c1451a6b6a248950d434e24335b03ae4a",
+    "PR223 supersession evidence: last-six observation loss, raw serialized JSON truncation, missing untrusted external-content boundary",
+    "PR220/PR221 recurrent real-task termination evidence",
+    "PR222 forced-finalization composition",
+    "Python 3.14 json official documentation: https://docs.python.org/3/library/json.html",
+    "OWASP LLM Prompt Injection Prevention Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html",
+    "OWASP AI Agent Security Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/AI_Agent_Security_Cheat_Sheet.html",
+    "LangChain current short-term-memory implementation patterns: https://github.com/langchain-ai/docs/blob/main/src/oss/langchain/short-term-memory.mdx"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 3,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after the shared context helper replaces both duplicated lossy blocks and deterministic tests prove: all admitted cycle metadata remains represented, output is always valid JSON within its bound, untrusted HTTP content is explicitly data-only, planner and forced-finalizer both use the same helper, and existing finalization semantics still pass. Do not spend fresh Task C in this repair PR.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "4262602c1451a6b6a248950d434e24335b03ae4a",
+    "real_outcome": "Make the bounded optional-model controller able to carry admitted evidence into planning/finalization without silent early-evidence deletion, malformed JSON, or treating fetched web text as instructions.",
+    "required_capability": "A single deterministic bounded observation-context serializer shared by planning and finalization with explicit trust metadata.",
+    "obs_goal": {
+      "real_outcome": "Correct bounded evidence transfer into planner/finalizer before the next fresh real research task.",
+      "proxy_goals_deleted": [
+        "Increase max_cycles",
+        "Increase the 5000-character slice",
+        "Replay Task B",
+        "Spend Task C before repairing evidence context",
+        "Replace the whole ASTRA controller"
+      ],
+      "surviving_necessity": "Repair only the evidence-to-model context seam that is demonstrably lossy and unsafe."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "current duplicated context construction inside run_goal",
+        "merged forced-finalization path from PR222",
+        "existing _planner_post and _goal_action boundaries",
+        "existing model-independence tests"
+      ],
+      "external_existing_routes_checked": [
+        "Python stdlib json structured serialization",
+        "OWASP structured prompt/data separation guidance",
+        "LangChain context trimming patterns"
+      ],
+      "capability_work_deleted": [
+        "No new dependency",
+        "No new model provider",
+        "No new carrier",
+        "No new controller",
+        "No task-specific Task-C prompt logic"
+      ],
+      "surviving_gap": "One shared stdlib-only helper must compact all admitted observations structurally, not by dropping cycles or slicing serialized JSON, while marking external fetched text untrusted."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Intrinsic generic controller seam: the same lossy block exists in both planning and finalization.",
+      "delete_bypass_substitute_options": [
+        "Delete forced finalization: rejected because it restores the recurrent GOAL_MAX_CYCLES_WITHOUT_FINISH failure.",
+        "Bypass context compaction by raising limits: rejected because raw slicing and trust-boundary defects survive.",
+        "Reuse Python stdlib JSON plus one shared helper: survives.",
+        "Substitute LangChain trimming: non-dominating because it adds a dependency for a small deterministic transformation.",
+        "Build a second summarizer/model pass: rejected as extra machinery and new failure surface."
+      ],
+      "surviving_causal_blocker": "Duplicated last-six selection plus post-serialization character slicing plus undelimited external content."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "SHARED_STRUCTURED_OBSERVATION_CONTEXT_HELPER",
+        "RAISE_CONTEXT_LIMIT_ONLY",
+        "LANGCHAIN_TRIM_MESSAGES_DEPENDENCY",
+        "REMOVE_FORCED_FINALIZATION",
+        "SECOND_SUMMARIZER_PASS"
+      ],
+      "losing_routes_reason": "A shared stdlib helper deletes duplication and simultaneously fixes evidence loss, JSON validity, and trust labeling with less machinery than every alternative.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Deterministic unit tests can directly inspect the planner/finalizer prompt payload: all cycle markers represented; json.loads succeeds; bounded length; malicious HTTP instructions remain under an UNTRUSTED_EXTERNAL_DATA field; exactly one forced finalization call; no tool access added."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "both inline observation-compaction blocks in run_goal",
+        "any assumption that increasing context limit alone fixes finalization correctness"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "planner observation compaction",
+        "forced-finalizer observation compaction",
+        "external-content trust labeling",
+        "valid bounded JSON evidence serialization"
+      ],
+      "fresh_reuse_plan": "After merge, refresh the external supplier frontier and selected-route preflight, then issue a genuinely fresh Task C once on the surviving supplier/carrier composition."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Current finalizer code inspection is cached",
+        "PR223 defect discovery is preserved",
+        "External prompt-injection guidance is current",
+        "No need to research full agent-memory frameworks"
+      ],
+      "search_stop_decision": "The causal code seam is exact, stdlib is sufficient, and external alternatives add machinery without resolving more of the blocker.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "SHARED_STRUCTURED_OBSERVATION_CONTEXT_HELPER",
+      "RAISE_CONTEXT_LIMIT_ONLY",
+      "LANGCHAIN_TRIM_MESSAGES_DEPENDENCY",
+      "REMOVE_FORCED_FINALIZATION",
+      "SECOND_SUMMARIZER_PASS"
+    ],
+    "deleted_or_bypassed_paths": [
+      "RAISE_CONTEXT_LIMIT_ONLY",
+      "REMOVE_FORCED_FINALIZATION",
+      "SECOND_SUMMARIZER_PASS"
+    ],
+    "selected_surviving_route": "SHARED_STRUCTURED_OBSERVATION_CONTEXT_HELPER",
+    "why_selected_route_is_fastest_sufficient": "It reuses only Python stdlib and the existing controller, removes duplicate code, fixes all three observed defects in one local seam, and is fully testable without spending a fresh real task.",
+    "expected_parent_level_state_change": "Replace duplicated lossy observation-context construction in both optional planning and forced finalization with one bounded structured helper that preserves every admitted cycle's metadata, always emits parseable JSON, explicitly labels external HTTP text as untrusted data, and is regression-tested before any fresh real Task C is spent.",
+    "stop_condition": "Stop after the shared context helper replaces both duplicated lossy blocks and deterministic tests prove: all admitted cycle metadata remains represented, output is always valid JSON within its bound, untrusted HTTP content is explicitly data-only, planner and forced-finalizer both use the same helper, and existing finalization semantics still pass. Do not spend fresh Task C in this repair PR.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-29T21:45:11Z",
+      "max_age_hours": 24,
+      "incumbent_route": "DUPLICATED_LAST6_RAW_JSON_SLICE_CONTEXT",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/astra_runtime.py@4262602c1451a6b6a248950d434e24335b03ae4a",
+          "PR223 supersession comment 5899309721",
+          "PR220/PR221/PR222 termination and forced-finalization evidence"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://docs.python.org/3/library/json.html",
+          "https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html",
+          "https://cheatsheetseries.owasp.org/cheatsheets/AI_Agent_Security_Cheat_Sheet.html"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/python/cpython/blob/3.14/Lib/json/__init__.py",
+          "https://github.com/langchain-ai/docs/blob/main/src/oss/langchain/short-term-memory.mdx"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "OWASP retrieved-content structured-boundary guidance",
+          "LangChain context trimming documentation surfaced 2026-09-29"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "preserve every admitted observation metadata valid bounded JSON untrusted external data prompt boundary"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Python stdlib JSON bounded observation context compaction"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "shared structured observation serializer no post-serialization truncation"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 LLM agent indirect prompt injection retrieved content structured data boundary current guidance"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "SHARED_STRUCTURED_OBSERVATION_CONTEXT_HELPER",
+          "evidence": [
+            "current ASTRA duplicated code",
+            "Python json.dumps/json.loads",
+            "OWASP structured data boundary"
+          ],
+          "qualification_evidence": [
+            "https://docs.python.org/3/library/json.html",
+            "https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Fixes cycle loss, serialization validity, and trust labeling at the shared causal seam.",
+            "CAPABILITY_STRENGTH": "Preserves bounded planner/finalizer behavior without adding provider dependence.",
+            "WALL_CLOCK": "Small local helper plus deterministic tests.",
+            "INCREMENTAL_COST": "$0; Python stdlib only.",
+            "RELIABILITY": "Deterministic serialization and compaction; no network dependency.",
+            "VERIFIABILITY": "Direct prompt-payload and json.loads unit tests."
+          }
+        },
+        {
+          "route": "RAISE_CONTEXT_LIMIT_ONLY",
+          "evidence": [
+            "current raw [:5000] post-serialization slicing is structurally independent of the numeric limit"
+          ],
+          "qualification_evidence": [
+            "https://docs.python.org/3/library/json.html"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Does not guarantee valid JSON or external-content trust separation.",
+            "CAPABILITY_STRENGTH": "Only delays context loss.",
+            "WALL_CLOCK": "Fast but insufficient.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Failure recurs at the new threshold.",
+            "VERIFIABILITY": "Counterexample is any serialized record crossing the character boundary."
+          }
+        },
+        {
+          "route": "LANGCHAIN_TRIM_MESSAGES_DEPENDENCY",
+          "evidence": [
+            "https://github.com/langchain-ai/docs/blob/main/src/oss/langchain/short-term-memory.mdx"
+          ],
+          "qualification_evidence": [
+            "https://github.com/langchain-ai/docs/blob/main/src/oss/langchain/short-term-memory.mdx"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Can bound context but does not by itself encode Brain's observation/trust semantics.",
+            "CAPABILITY_STRENGTH": "General memory tooling exceeds this narrow need.",
+            "WALL_CLOCK": "Adds dependency integration and closure verification.",
+            "INCREMENTAL_COST": "Software may be free but integration cost is higher.",
+            "RELIABILITY": "Additional dependency surface.",
+            "VERIFIABILITY": "More moving parts than a stdlib helper."
+          }
+        },
+        {
+          "route": "REMOVE_FORCED_FINALIZATION",
+          "evidence": [
+            "PR220 and PR221 recurrent GOAL_MAX_CYCLES_WITHOUT_FINISH evidence"
+          ],
+          "qualification_evidence": [
+            "PR220/PR221 direct real execution receipts"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Restores a directly observed inability to terminate useful real tasks.",
+            "CAPABILITY_STRENGTH": "Weaker than current system.",
+            "WALL_CLOCK": "Deletes code but recreates blocker.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Known real-task failure mode.",
+            "VERIFIABILITY": "Already falsified by two materially different real tasks."
+          }
+        }
+      ],
+      "negative_search_summary": "No external library or provider dominates a single stdlib helper for this narrow deterministic context-construction seam.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "SHARED_STRUCTURED_OBSERVATION_CONTEXT_HELPER",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-29T21:45:11Z",
+        "max_age_hours": 2,
+        "selected_route": "SHARED_STRUCTURED_OBSERVATION_CONTEXT_HELPER",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "Python local deterministic test runtime",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T21:45:11Z",
+            "evidence": [
+              "Direct probe: Python 3.13.5; stdlib json round-trip true"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "GitHub repository mutation path",
+            "kind": "REMOTE_SERVICE",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "evidence_scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T21:45:11Z",
+            "evidence": [
+              "Direct probe: branch repair/structured-goal-observation-context-v1-20260929 created from exact main 4262602c1451a6b6a248950d434e24335b03ae4a"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
