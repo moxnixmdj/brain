@@ -17,7 +17,7 @@
   "promotion_authorized": false,
   "first_terminal_error": "RuntimeError:EXISTING_INDEPENDENT_VERIFIER_FAILED:Traceback (most recent call last):\n  File \"/work/canonical/runtime/verify_pending_cli_binding.py\", line 13, in <module>\n    from bound_capabilities import (\n        cli_command, python_library_codec, node_library_codec, python_source_tree_codec\n    )\nImportError: cannot import name 'python_library_codec' from 'bound_capabilities' (unknown location). Did you mean: 'node_library_codec'?\n",
   "first_causal_blocker": "REMOTE_CARRIER_MATERIALIZATION_OMITTED_EXISTING_VERIFIER_DEPENDENCIES__TOOL_DISCOVERY_PARENT_E2E_UNADJUDICATED",
-  "classification": "CARRIER_FIDELITY_FAILURE__NOT_PARENT_RUNTIME_SEMANTIC_FALSIFICATION",
+  "classification": "CARRIER_FIDELITY_FAILURE_ON_UNAUTHORIZED_EXECUTION_SURFACE__NOT_PARENT_RUNTIME_SEMANTIC_FALSIFICATION",
   "upstream_surviving_evidence": {
     "discovery_source": "APT_FULL_METADATA_XAPIAN",
     "acquisition_status": "CONTRACT_INFERRED",
@@ -37,7 +37,8 @@
       "canonical/runtime/bound_capabilities/node_library_codec.py"
     ],
     "missing_import_that_terminated_gate": "python_library_codec",
-    "generic_correction_class": "MATERIALIZE_COMPLETE_EXACT_REPOSITORY_OR_VERIFIER_DEPENDENCY_CLOSURE__NO_HAND_PICKED_RUNTIME_SUBSET"
+    "generic_correction_class": "MATERIALIZE_COMPLETE_EXACT_REPOSITORY_OR_VERIFIER_DEPENDENCY_CLOSURE__NO_HAND_PICKED_RUNTIME_SUBSET",
+    "interpretation_limit": "Missing verifier modules directly proves this execution surface materialized an incomplete repository/verifier dependency closure. Because the start was not a compliant qualified-carrier start, this terminal result does not prove a compliant carrier would fail and does not falsify the parent Xapian/APT runtime semantics."
   },
   "replay_policy": {
     "heldout_003_replay_allowed": false,
@@ -51,5 +52,15 @@
       "RECONCILE_FIRST_TERMINAL_RESULT"
     ],
     "runtime_repair_from_heldout_003_authorized": false
+  },
+  "execution_governance": {
+    "incident_path": "canonical/capabilities/obsolescence/HELDOUT003_UNAUTHORIZED_SPRITE_START_INCIDENT_20260929_V1.json",
+    "execution_lease_live_at_start": false,
+    "carrier_qualified_claim": false,
+    "hard_zero_spend_proven_before_start": false,
+    "incremental_cash_spend_usd_verified": null,
+    "first_start_still_spends_gate": true,
+    "first_terminal_result_still_authoritative": true,
+    "replay_allowed": false
   }
 }
