@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_REAL_CAPABILITY_EVIDENCE_V1",
   "evidence_id": "SPACE-CARGO-ARCHITECTURE-ENVELOPE-WIN1-20260929-V1",
-  "status": "REAL_TASK_COMPLETED__DIRECT_PHYSICS_VERIFICATION_PASS__CAPABILITY_PACKAGE_PENDING_FRESH_REUSE",
+  "status": "REAL_TASK_A_COMPLETED__DIRECT_VERIFICATION_PASS__FRONTIER_CAPABILITY_CANDIDATE_EVIDENCE_ONLY",
   "real_task": {
     "project": "HIGH_THROUGHPUT_EARTH_TO_LEO_CARGO",
     "outcome": "Quantify the first-order architecture envelope for 1M, 10M, and 100M payload tonnes/year to approximately 400 km LEO, test prior electromagnetic-launch assumptions, and localize the true scaling residuals.",
@@ -185,6 +185,9 @@
     "ORBIT_INSERTION_SYSTEM_FOR_HUNDREDS_OF_M_S_WITH_MINIMUM_ONBOARD_EXPENDABLE_MASS",
     "SYSTEM_AVAILABILITY_AND_FAILURE_CONTAINMENT_AT_100MT_YEAR"
   ],
-  "real_task_verdict": "PASS__USEFUL_PROJECT_STATE_CHANGED",
-  "next": "INHERIT_RUNTIME_AS_FIRST_PRINCIPLES_LAUNCH_ARCHITECTURE_ENVELOPE_V1__THEN_FRESH_REUSE_ON_5G_FRAGILE_CARGO_CONSTRAINT_WITHOUT_RESEARCH_OR_REDISCOVERY"
+  "real_task_verdict": "PASS__USEFUL_PROJECT_STATE_CHANGED__COUNTS_AS_REAL_TASK_A_ONLY",
+  "next": "SELECT_MATERIALLY_DIFFERENT_REAL_TECHNICAL_OR_SCIENTIFIC_TASK_B__REUSE_GENERAL_RESEARCH_PROBLEM_SOLVING_ROUTE__VERIFY_END_TO_END__THEN_ADJUDICATE_FRONTIER_CAPABILITY",
+  "frontier_capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "frontier_capability_acquired": false,
+  "frontier_capability_note": "This real task demonstrates useful components of the frontier behavior, but one domain plus a same-domain parameter reuse cannot prove broad cross-domain frontier capability."
 }
