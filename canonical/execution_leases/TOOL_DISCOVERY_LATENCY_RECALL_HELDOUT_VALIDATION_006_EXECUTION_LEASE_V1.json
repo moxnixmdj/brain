@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_HELDOUT_EXECUTION_LEASE_V1",
+  "validation_id": "TOOL-DISCOVERY-LATENCY-RECALL-HELDOUT-VALIDATION-006",
+  "status": "CLAIMED_NOT_STARTED",
+  "holder": "chatgpt-directjoin-20260929",
+  "claimed_on": "2026-09-29",
+  "source_branch": "repair/batched-executable-evidence-acquisition-v1-20260928",
+  "protected_candidate_blobs": {
+    "runtime": "97f4c61691afc6b4d9cb3ed54ee0fc85531ca977",
+    "runner": "cbae7e4d1a0de5ddf5df67f7a869bab7a3f66317",
+    "manifest": "3439e26ef4c650098db50f745105eed9b68be776"
+  },
+  "repair_freeze_receipt": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_LATENCY_FRONTIER_006_REPAIR_FREEZE_V1.json",
+  "carrier": {
+    "provider": "Railway",
+    "project_id": "9d2e8ee8-0eb8-414c-b7e0-a93d90eed54d",
+    "environment_id": "256bcc63-cebd-4079-9a61-c0e9cdbbeeb8",
+    "service_id": "851b6f16-2e12-4a68-b49c-04f81056fa5f"
+  },
+  "execution_budget_remaining": 1,
+  "freshness": "UNSPENT",
+  "concurrency_rule": "NO_OTHER_WORKER_MAY_EXECUTE_PREVIEW_REPLAY_OR_SPEND_GATE_006_WHILE_THIS_LEASE_IS_OPEN",
+  "next_action": "STAGE_EXACT_BYTES__VERIFY_GIT_BLOB_IDENTITIES_AND_SURFACE__EMIT_START_MARKER_ONCE__EXECUTE_GATE_006_ONCE__CAPTURE__RECONCILE__RELEASE"
+}
