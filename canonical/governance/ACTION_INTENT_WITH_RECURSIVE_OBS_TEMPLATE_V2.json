@@ -8,6 +8,7 @@
     "Bind recursive_obs.canonical_base_commit to the exact current main commit used to branch.",
     "For normal capability/support/repair/infrastructure actions, set route_frontier.discovery_required=true and refresh it within 24 hours of trusted validation.",
     "Search by capability vectors and alternate supplier/implementation/recency wording, not provider names alone.",
+    "Treat broad web/community/social/launch sources as discovery sensors only; every material challenger decision needs qualification-grade evidence.",
     "Do not continue while unresolved_plausible_dominators is non-empty.",
     "If main or the external route surface materially changes, refresh affected OBS layers before execution.",
     "OBS/discovery activity receives zero progress credit."
@@ -142,7 +143,29 @@
             "query": "__REQUIRED_QUERY__"
           }
         ],
-        "challenger_routes": [],
+        "challenger_routes": [
+          {
+            "route": "__REQUIRED_CHALLENGER_ROUTE__",
+            "evidence": [
+              "__REQUIRED_DISCOVERY_EVIDENCE_REFERENCE__"
+            ],
+            "qualification_evidence": [
+              "__REQUIRED_PRIMARY_DIRECT_OR_INDEPENDENT_EVIDENCE__"
+            ],
+            "qualification_evidence_classes": [
+              "OFFICIAL_PRIMARY"
+            ],
+            "resolution": "__REQUIRED_SELECTED_NON_DOMINATING_OR_DISQUALIFIED__",
+            "comparison": {
+              "CORRECTNESS": "__REQUIRED__",
+              "CAPABILITY_STRENGTH": "__REQUIRED__",
+              "WALL_CLOCK": "__REQUIRED__",
+              "INCREMENTAL_COST": "__REQUIRED__",
+              "RELIABILITY": "__REQUIRED__",
+              "VERIFIABILITY": "__REQUIRED__"
+            }
+          }
+        ],
         "negative_search_summary": "__REQUIRED_IF_NO_MATERIAL_CHALLENGER_FOUND__",
         "comparison_dimensions": [
           "CORRECTNESS",
