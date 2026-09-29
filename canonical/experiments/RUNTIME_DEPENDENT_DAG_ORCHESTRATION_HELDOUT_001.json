@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_RUNTIME_DEPENDENT_DAG_ORCHESTRATION_HELDOUT_V1",
+  "validation_id": "RUNTIME-DEPENDENT-DAG-ORCHESTRATION-HELDOUT-001",
+  "parent_capability": "MULTI_TOOL_ORCHESTRATION_AND_PLANNING",
+  "subcapability": "ADAPTIVE_DEPENDENCY_AWARE_MULTI_TOOL_COMPOSITION_V1",
+  "frontier_bar_path": "canonical/capabilities/obsolescence/MULTI_TOOL_ORCHESTRATION_ADAPTIVE_DAG_FRONTIER_BAR_V1.json",
+  "status": "FROZEN_BEFORE_EXISTING_ROUTE_TEST",
+  "frozen_on": "2026-09-29",
+  "runtime_policy": "TEST_CURRENT_CANONICAL_ROUTE_UNCHANGED_BEFORE_ANY_REPAIR",
+  "goal": "Using a real rendered browser, open https://jsonplaceholder.typicode.com/users, save a screenshot to canonical/astra_runtime/tmp/ORCH_DAG_001_USERS.png, and save the rendered result to canonical/astra_runtime/tmp/ORCH_DAG_001_USERS.json. Using a real rendered browser, open https://jsonplaceholder.typicode.com/posts, save a screenshot to canonical/astra_runtime/tmp/ORCH_DAG_001_POSTS.png, and save the rendered result to canonical/astra_runtime/tmp/ORCH_DAG_001_POSTS.json. Using both live results, join every live post to exactly one live user where post userId equals user id. Create canonical/astra_runtime/tmp/ORCH_DAG_001_JOINED.json containing exactly one record per live post with post_id, user_id, username, and title. Read the live JSON array from that joined result. For every post returned at runtime, if that post's title length is at most 40 characters generate a QR code image encoding that title; otherwise generate a Code 128 barcode image encoding that title. Save each selected image under canonical/astra_runtime/tmp/ORCH_DAG_001_CODES using the post's id as the filename. Create canonical/astra_runtime/tmp/ORCH_DAG_001_MANIFEST.json with exactly one record per live post containing post_id, user_id, username, title, selected capability kind, and artifact path. Finally independently decode every generated image and verify each decoded value equals that live post's title, every live post has exactly one artifact, every manifest identity and username matches the joined record, and no extra manifest records exist.",
+  "freshness": {
+    "execution_count": 0,
+    "compile_prefight_count": 0,
+    "unseen_relative_to_current_runtime": true,
+    "runtime_mutation_after_freeze_forbidden_until_first_existing_route_result": true
+  },
+  "staged_acceptance": {
+    "stage_a_compile_only": {
+      "required": true,
+      "purpose": "Fail as early and cheaply as possible if the unchanged controller/compiler cannot synthesize the required DAG.",
+      "exact_current_main_required": true,
+      "runtime_or_compiler_mutation_forbidden": true,
+      "high_level_goal_only": true,
+      "manual_controller_actions_forbidden": true,
+      "optional_model_planner_forbidden": true,
+      "capability_acquisition_forbidden": true,
+      "all_goal_clauses_must_be_covered": true,
+      "required_graph_semantics": [
+        "two independent live source acquisition nodes",
+        "join node consuming both live source results",
+        "runtime-dependent fanout node consuming the joined result",
+        "durable manifest synthesis",
+        "independent verifier consuming produced artifacts and causal source state"
+      ],
+      "on_failure": "STOP__PRESERVE_FRESH_LIVE_EXECUTION__RECONCILE_FIRST_CAUSAL_BLOCKER"
+    },
+    "stage_b_single_live_execution": {
+      "allowed_only_if_stage_a_passes": true,
+      "max_fresh_execution_count": 1,
+      "hard_wall_s": 600,
+      "incremental_spend_usd": 0,
+      "source_truth_required": true,
+      "exact_join_semantics_required": true,
+      "exact_artifact_coverage_required": true,
+      "independent_decode_semantic_match_fraction_min": 1,
+      "extra_manifest_record_count_max": 0,
+      "omitted_goal_clause_count_max": 0,
+      "no_manual_supplier_hints": true,
+      "no_candidate_runtime_mutation": true
+    }
+  },
+  "promotion_policy": {
+    "one_gate_is_not_full_parent_obsolescence": true,
+    "pass_effect": "AUTHORIZE_COMMON_TASK_FRONTIER_COMPARISON_OR_NEXT_MINIMAL_GENERALIZATION_CHECK",
+    "fail_effect": "LOCALIZE_FIRST_CAUSAL_ORCHESTRATION_BLOCKER__AUTHORIZE_AT_MOST_ONE_GENERIC_REPAIR_AFTER_RECONCILIATION"
+  }
+}
