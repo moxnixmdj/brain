@@ -4862,6 +4862,47 @@ def _ground_plain_goal_to_bound_capabilities(mission, goal):
     writej(path,result)
     return path,result
 
+
+def _load_grounded_executable_composition():
+    path=pathlib.Path(__file__).resolve().with_name("bound_capabilities")/"grounded_executable_composition.py"
+    spec=importlib.util.spec_from_file_location("project_brain_grounded_executable_composition",path)
+    if spec is None or spec.loader is None:
+        raise Blocker("GROUNDED_EXECUTABLE_COMPOSITION_LOAD_FAILED")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    return module
+
+def _load_grounded_executable_composition_verifier():
+    path=pathlib.Path(__file__).resolve().with_name("bound_capabilities")/"grounded_executable_composition_verify.py"
+    spec=importlib.util.spec_from_file_location("project_brain_grounded_executable_composition_verify",path)
+    if spec is None or spec.loader is None:
+        raise Blocker("GROUNDED_EXECUTABLE_COMPOSITION_VERIFIER_LOAD_FAILED")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    return module
+
+def _compose_grounding_to_capability_problem(mission, goal, grounding):
+    producer=_load_grounded_executable_composition()
+    verifier=_load_grounded_executable_composition_verifier()
+    compiler=_load_goal_compiler()
+    registry=compiler._platform_admissible_registry(_load_bound_capability_registry())
+    try:
+        composition=producer.compose(goal,grounding,registry,compiler,ROOT)
+    except Exception as exc:
+        raise Blocker(
+            "GROUNDED_EXECUTABLE_COMPOSITION_FAILED:"
+            +type(exc).__name__+":"+str(exc)
+        ) from exc
+    ok,reason=verifier.verify(goal,composition,grounding,registry)
+    if not ok:
+        raise Blocker("GROUNDED_EXECUTABLE_COMPOSITION_VERIFY_FAILED:"+str(reason))
+    mid=str(mission.get("mission_id") or "UNKNOWN")
+    path=EVID_DIR/f"{mid}__GROUNDED_EXECUTABLE_COMPOSITION.json"
+    writej(path,composition)
+    return path,composition
+
 def _load_auto_capability_acquisition():
     _activate_external_http_bridge()
     path=pathlib.Path(__file__).resolve().with_name("auto_capability_acquisition.py")
@@ -5070,6 +5111,11 @@ def _inherit_verified_capabilities(problem):
           "requires_as":[{"effect":src,"as":dst} for src,dst in require_aliases],
           "provides_as":[{"effect":src,"as":dst} for src,dst in provide_aliases],
         })
+
+    if enriched.get("restrict_inherited_bound_capabilities") is True:
+        enriched["_inherited_bound_capabilities"]=inherited
+        enriched["_instantiated_bound_capabilities"]=instantiated
+        return enriched
 
     for cid,entry in sorted(registry.items()):
         if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
@@ -5456,21 +5502,44 @@ def run_goal(step, mission):
                       "capability_acquisition_attempted":False,
                     },sort_keys=True)
                 ) from e
+            grounding_goal=goal
             grounding_path,grounding=_ground_plain_goal_to_bound_capabilities(
-                mission,acquisition_goal
+                mission,grounding_goal
             )
             grounded_count=int(grounding.get("grounded_clause_count") or 0)
             if grounded_count>0:
-                raise Blocker(
-                    "BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_REQUIRED:"+json.dumps({
-                      "evidence_path":(str(grounding_path.relative_to(ROOT)) if ROOT in grounding_path.parents else str(grounding_path)),
-                      "candidate_capability_ids":grounding.get("candidate_capability_ids") or [],
-                      "unresolved_clause_indexes":grounding.get("unresolved_clause_indexes") or [],
-                      "grounded_clause_count":grounded_count,
-                      "external_capability_acquisition_attempted":False,
-                      "policy":"RESOLVE_EXISTING_BOUND_GROUNDING_BEFORE_EXTERNAL_DISCOVERY",
-                    },sort_keys=True)
-                ) from e
+                try:
+                    composition_path,composition=_compose_grounding_to_capability_problem(
+                        mission,grounding_goal,grounding
+                    )
+                except Blocker as composition_error:
+                    raise Blocker(
+                        "BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_BLOCKED:"+json.dumps({
+                          "grounding_evidence_path":(str(grounding_path.relative_to(ROOT)) if ROOT in grounding_path.parents else str(grounding_path)),
+                          "candidate_capability_ids":grounding.get("candidate_capability_ids") or [],
+                          "unresolved_clause_indexes":grounding.get("unresolved_clause_indexes") or [],
+                          "grounded_clause_count":grounded_count,
+                          "composition_error":str(composition_error),
+                          "external_capability_acquisition_attempted":False,
+                          "policy":"RESOLVE_EXISTING_BOUND_GROUNDING_BEFORE_EXTERNAL_DISCOVERY",
+                        },sort_keys=True)
+                    ) from composition_error
+                derived=dict(step)
+                derived["capability_problem"]=composition["problem"]
+                composed_result=_run_capability_planned_goal(
+                    derived,mission,grounding_goal
+                )
+                if composed_result is None:
+                    raise Blocker("GROUNDED_EXECUTABLE_COMPOSITION_EXECUTION_MISSING")
+                composed_result["grounding_evidence_path"]=str(
+                    grounding_path.relative_to(ROOT)
+                )
+                composed_result["composition_evidence_path"]=str(
+                    composition_path.relative_to(ROOT)
+                )
+                composed_result["composition_mode"]="MODEL_INDEPENDENT_GROUNDED_CAPABILITY_GRAPH"
+                composed_result["model_dependency_count"]=0
+                return composed_result
 
             mid=str(mission.get("mission_id") or "UNKNOWN")
             ep=EVID_DIR/f"{mid}__PLAIN_GOAL_CAPABILITY_DISCOVERY.json"
