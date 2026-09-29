@@ -1,0 +1,90 @@
+{
+  "schema": "PROJECT_BRAIN_SEMANTIC_APT_CAPABILITY_HELDOUT_VALIDATION_RECONCILIATION_V1",
+  "status": "EXECUTED_ONCE__OBSERVED_FAIL__FAITHFUL_SURFACE__HELDOUT_003_SPENT",
+  "checked_on": "2026-09-29",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "action_id": "SEMANTIC-APT-CAPABILITY-INDEX-REPAIR-V1",
+  "validation_id": "SEMANTIC-APT-CAPABILITY-HELDOUT-VALIDATION-003",
+  "tested_branch": "repair/semantic-apt-capability-index-v1-20260929",
+  "tested_head_sha": "ab2f44153163028c850dee50e30c38b6287a9456",
+  "execution_count": 1,
+  "freshness": "SPENT",
+  "exact_blobs": {
+    "runtime": "f5f2330f6b08250b8d21f56c1bd8e71218609214",
+    "test": "1228ba50b4aade64489b2dfa50c1528676230f16",
+    "manifest": "e597bb1a290efa7b2cdd7a4270064eca08d20cef",
+    "runner": "c2bba52e549be6b083fcf3f5c9724d429762638a"
+  },
+  "execution_surface": {
+    "provider": "Railway",
+    "service_id": "50cd23d6-5b94-40fd-8763-1da99718b12e",
+    "deployment_id": "6a941b93-71b0-47ab-878e-3c46c6993e22",
+    "base_image": "debian:trixie-slim",
+    "packages_indexes": 3,
+    "contents_amd64_indexes": 2,
+    "contents_all_indexes": 2,
+    "generic_tests": "3 passed in 0.03s",
+    "incremental_spend_usd": 0
+  },
+  "observed_result": {
+    "validator_exit_code": 2,
+    "validator_timeout": false,
+    "validator_wall_s": 209.791591637,
+    "total_wall_s": 209.725702,
+    "heldout_oracle_family_recall": 0.5,
+    "heldout_top20_oracle_recall": 0.5,
+    "acceptance_gate_pass": false,
+    "promotion_authorized": false,
+    "acceptance_minimums": {
+      "family_recall": 0.75,
+      "top20_recall": 0.75,
+      "hard_wall_s": 300
+    }
+  },
+  "case_outcomes": [
+    {
+      "effect_id": "HELDOUT-QR-003",
+      "oracle_found": true,
+      "oracle_rank": 1,
+      "oracle_name": "qrencode"
+    },
+    {
+      "effect_id": "HELDOUT-AUDIO-CONVERT-003",
+      "oracle_found": false,
+      "oracle_rank": null,
+      "oracle_name": null
+    },
+    {
+      "effect_id": "HELDOUT-JSON-TRANSFORM-003",
+      "oracle_found": true,
+      "oracle_rank": 5,
+      "oracle_name": "jq"
+    },
+    {
+      "effect_id": "HELDOUT-PDF-LINEARIZE-003",
+      "oracle_found": false,
+      "oracle_rank": null,
+      "oracle_name": null
+    }
+  ],
+  "classification": "GENERIC_REPAIR_MATERIALLY_IMPROVED_RECALL_BUT_REMAINS_INSUFFICIENT__SEMANTIC_PACKAGE_INDEX_STILL_TOO_LEXICAL_FOR_PARAPHRASE_AND_ROLE_BRIDGING",
+  "preserved_gain": [
+    "Executable-name literal overlap is no longer an admission requirement.",
+    "Opaque executable naming is supported by semantic package metadata plus executable ownership.",
+    "Held-out recall improved from 0.25 on HELDOUT-002 to 0.50 on HELDOUT-003.",
+    "Generic synthetic invariants passed 3/3 before held-out execution.",
+    "Wall time remained inside the hard 300-second gate."
+  ],
+  "exact_residual": "SEMANTIC_CANDIDATE_GENERATION_REQUIRES_DIRECT_LEXICAL_TOKEN_OVERLAP__GOAL_PARAPHRASES_AND_CAPABILITY_ROLE_RELATIONS_DO_NOT_RELIABLY_BRIDGE_TO_PACKAGE_DESCRIPTIONS",
+  "next_action": "FREEZE_NEW_HELDOUT_004_BEFORE_ANY_SECOND_RUNTIME_MUTATION__THEN_IMPLEMENT_ONE_GENERIC_SEMANTIC_ROLE_AND_PARAPHRASE_BRIDGING_REPAIR_WITHOUT_TASK_SPECIFIC_LITERALS__THEN_EXECUTE_004_ONCE_AND_RECONCILE",
+  "prohibitions": [
+    "NO_REPLAY_OF_HELDOUT_003",
+    "NO_PROMOTION_FROM_THIS_RESULT",
+    "NO_TASK_SPECIFIC_LITERALS_OR_PACKAGE_HINTS",
+    "NO_SECOND_REPAIR_BEFORE_THIS_RECONCILIATION",
+    "NO_USER_LAPTOP",
+    "NO_VAL_TOWN"
+  ],
+  "operational_incident_note": "Two later HELDOUT-002 replays were accidentally triggered by Railway auto-deploy behavior while repurposing another service. They are contaminated duplicate executions and are inadmissible; they do not alter the authoritative first-run HELDOUT-002 result. Future pre-deploy hook has been fail-closed."
+}
