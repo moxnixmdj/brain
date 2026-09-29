@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_RECURSIVE_OBS_RECEIPT_V1",
+  "status": "SCHEMA_TEMPLATE__NOT_PROGRESS_ARTIFACT",
+  "required_fields": [
+    "canonical_generation_or_commit",
+    "real_outcome",
+    "required_capability",
+    "obs_goal",
+    "obs_capability",
+    "obs_blocker",
+    "obs_solution",
+    "obs_verification",
+    "obs_inherited_system",
+    "obs_obs",
+    "routes_considered",
+    "deleted_or_bypassed_paths",
+    "selected_surviving_route",
+    "why_selected_route_is_fastest_sufficient",
+    "expected_parent_level_state_change",
+    "stop_condition"
+  ],
+  "layer_requirements": {
+    "obs_goal": [
+      "real_outcome",
+      "proxy_goals_deleted",
+      "surviving_necessity"
+    ],
+    "obs_capability": [
+      "existing_inherited_routes_checked",
+      "external_existing_routes_checked",
+      "capability_work_deleted",
+      "surviving_gap"
+    ],
+    "obs_blocker": [
+      "intrinsic_or_path_specific",
+      "delete_bypass_substitute_options",
+      "surviving_causal_blocker"
+    ],
+    "obs_solution": [
+      "deletion_first_order_applied",
+      "routes_ranked",
+      "losing_routes_reason",
+      "implementation_still_necessary"
+    ],
+    "obs_verification": [
+      "direct_real_effect_verification_considered",
+      "existing_oracle_considered",
+      "synthetic_verification_necessity"
+    ],
+    "obs_inherited_system": [
+      "downstream_work_to_delete_or_supersede",
+      "adjacent_capabilities_absorbed",
+      "fresh_reuse_plan"
+    ],
+    "obs_obs": [
+      "analysis_steps_deleted_or_cached",
+      "search_stop_decision",
+      "affected_layers_only_on_revalidation"
+    ]
+  },
+  "deletion_first_order": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "COMPOSE",
+    "REPAIR",
+    "BUILD"
+  ],
+  "invalidation_triggers": [
+    "CANONICAL_GENERATION_CHANGED",
+    "REAL_TASK_MATERIALLY_CHANGED",
+    "CAPABILITY_STATE_MATERIALLY_CHANGED",
+    "NEW_ADEQUATE_ROUTE_DISCOVERED",
+    "SELECTED_ROUTE_FALSIFIED",
+    "VERIFICATION_REQUIREMENT_MATERIALLY_CHANGED"
+  ],
+  "reuse_rule": "MAY_BE_EMBEDDED_IN_ACTION_INTENT__SEPARATE_FILE_NOT_REQUIRED",
+  "progress_credit": false
+}
