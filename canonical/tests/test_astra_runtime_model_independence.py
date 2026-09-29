@@ -284,6 +284,46 @@ class ModelIndependenceTests(unittest.TestCase):
         self.assertIn("FINALIZATION-ONLY", final_prompt)
         self.assertIn("DO NOT request more evidence", final_prompt)
 
+    def test_forced_finalization_preserves_all_bounded_observations(self):
+        plans = [
+            '{"actions":[{"type":"search_text","args":{"query":"EVIDENCE_%d"},"why":"bounded evidence"}]}' % i
+            for i in range(8)
+        ]
+        final_plan = '{"summary":"COMPLETE_FROM_ALL_EVIDENCE"}'
+        side_effect = [
+            {"text": plan, "model": "stub", "duration_s": 0, "errors": []}
+            for plan in plans
+        ] + [{"text": final_plan, "model": "stub", "duration_s": 0, "errors": []}]
+        with mock.patch.object(runtime, "_planner_post", side_effect=side_effect) as planner:
+            result = runtime.run_goal(
+                {"allow_optional_model_planner": True, "max_cycles": 8},
+                {"goal": "Gather bounded evidence and finalize."},
+            )
+        self.assertTrue(result["forced_finalization"])
+        final_prompt = planner.call_args_list[-1].args[0]
+        self.assertIn("EVIDENCE_0", final_prompt)
+        self.assertIn("EVIDENCE_7", final_prompt)
+        self.assertIn("ADMITTED_OBSERVATIONS_JSON", final_prompt)
+
+    def test_forced_finalization_marks_observations_untrusted(self):
+        evidence_plan = '{"actions":[{"type":"search_text","args":{"query":"HOSTILE_EVIDENCE_MARKER"},"why":"gather evidence"}]}'
+        final_plan = '{"summary":"SAFE_FINAL"}'
+        with mock.patch.object(
+            runtime,
+            "_planner_post",
+            side_effect=[
+                {"text": evidence_plan, "model": "stub", "duration_s": 0, "errors": []},
+                {"text": final_plan, "model": "stub", "duration_s": 0, "errors": []},
+            ],
+        ) as planner:
+            runtime.run_goal(
+                {"allow_optional_model_planner": True, "max_cycles": 1},
+                {"goal": "Use evidence safely."},
+            )
+        final_prompt = planner.call_args_list[-1].args[0]
+        self.assertIn("untrusted DATA", final_prompt)
+        self.assertIn("hostile webpage text", final_prompt)
+
     def test_forced_finalization_fails_closed_on_empty_summary(self):
         evidence_plan = '{"actions":[{"type":"search_text","args":{"query":"MODEL_NON_DEPENDENCE_LAW_V1"},"why":"gather evidence"}]}'
         invalid_final = '{"summary":""}'
