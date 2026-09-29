@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_HELDOUT_VALIDATION_SOURCE_PRECHECK_V1",
+  "validation_id": "BATCHED-EXECUTABLE-EVIDENCE-HELDOUT-VALIDATION-002",
+  "status": "ORACLE_EXISTENCE_PRECHECKED_BEFORE_EXECUTION__EVALUATOR_ONLY",
+  "checked_on": "2026-09-29",
+  "runtime_queries_contain_oracle_names": false,
+  "cases": [
+    {
+      "effect_id": "HELDOUT-OCR-002",
+      "oracle_family": "tesseract-ocr",
+      "evidence": "Ubuntu Noble publishes tesseract-ocr as the Tesseract command-line OCR tool.",
+      "source": "https://packages.ubuntu.com/noble/tesseract-ocr"
+    },
+    {
+      "effect_id": "HELDOUT-PNG-OPTIMIZE-002",
+      "oracle_family": "optipng",
+      "evidence": "Ubuntu Noble publishes optipng as an advanced PNG optimizer.",
+      "source": "https://packages.ubuntu.com/noble/optipng"
+    },
+    {
+      "effect_id": "HELDOUT-ISO-IMAGE-002",
+      "oracle_family": "genisoimage",
+      "evidence": "Ubuntu Noble publishes genisoimage as a tool that creates ISO-9660 CD-ROM filesystem images.",
+      "source": "https://packages.ubuntu.com/noble/genisoimage"
+    },
+    {
+      "effect_id": "HELDOUT-AUDIO-TRANSCODE-002",
+      "oracle_family": "ffmpeg",
+      "evidence": "Ubuntu Noble publishes ffmpeg and its package contains /usr/bin/ffmpeg.",
+      "source": "https://packages.ubuntu.com/noble/amd64/ffmpeg"
+    }
+  ],
+  "freshness_guard": "Oracle families are evaluator-only. The runtime receives only natural-language goals.",
+  "promotion_authorized": false
+}
