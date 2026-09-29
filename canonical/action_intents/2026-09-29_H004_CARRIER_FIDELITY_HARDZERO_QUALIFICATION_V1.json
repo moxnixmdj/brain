@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "H004-CARRIER-FIDELITY-HARDZERO-QUALIFICATION-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "causal_blocker": "HELDOUT_004_FROZEN_UNSPENT__EXECUTION_SURFACE_SOURCE_TREE_FIDELITY_DIVERGENCE_PROVEN__EXACT_HISTORICAL_MECHANISM_UNPROVEN__GENERIC_CARRIER_FIDELITY_CORRECTION_AND_HARD_ZERO_QUALIFICATION_REQUIRED",
+  "action_kind": "CARRIER_FIDELITY_REPAIR_AND_EXECUTOR_QUALIFICATION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::HELDOUT_004_FROZEN_UNSPENT__EXECUTION_SURFACE_SOURCE_TREE_FIDELITY_DIVERGENCE_PROVEN__EXACT_HISTORICAL_MECHANISM_UNPROVEN__GENERIC_CARRIER_FIDELITY_CORRECTION_AND_HARD_ZERO_QUALIFICATION_REQUIRED::CARRIER_FIDELITY_REPAIR_AND_EXECUTOR_QUALIFICATION",
+  "expected_parent_frontier_change": "Reuse the already-verified zero-incremental-spend ChatGPT Linux private-repository execution route, add only the minimum generic content-addressed source-tree/import-path fidelity preflight needed to prevent the HELDOUT-003 carrier divergence class, and qualify or falsify the current remote Debian trixie carrier against HELDOUT-004 surface requirements without creating START or RESULT. If and only if exact live-tree identity, required paths/hashes/import resolution, faithful APT metadata, python3-xapian, sudo install capability, zbarimg, user-device=false, Val=false, and hard-zero evidence all pass may a later separately reconciled action execute HELDOUT-004 exactly once.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR176 canonical evidence-boundary correction",
+    "merged PR20 device-independent private-repository execution evidence using chatgpt-session-linux-private-github-drive-base64-bridge-20260926",
+    "canonical/reconciliation/POST_PR20_CANONICAL_FRONTIER_20260927_V1.json",
+    "carrier/heldout003-one-shot-20260929 commit 4dc82588193bd158f82af4a808ab39c467a87a43",
+    "frozen XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004 manifest and runner",
+    "current ChatGPT remote container read-only surface check: Debian 13 trixie present; APT tools and sudo present; APT indexes, xapian, apt-file, and zbarimg not yet provisioned"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after generic carrier-fidelity prevention is implemented and the current remote carrier is either qualified or falsified with preserved evidence. Do not invoke the HELDOUT-004 runner, create its START or RESULT, replay HELDOUT-003, mutate capability runtime or evaluator bytes, use Sprites or Val Town, use the user laptop, or incur paid/unproven-cost execution. Reconcile qualification evidence before any one-shot H004 execution action.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "execution_constraints": {
+    "incremental_spend_usd": 0,
+    "hard_zero_spend": true,
+    "user_device_used": false,
+    "val_town_forbidden": true,
+    "sprites_use_forbidden": true,
+    "heldout_004_start_forbidden": true,
+    "heldout_003_replay_forbidden": true
+  }
+}
