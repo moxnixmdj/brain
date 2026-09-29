@@ -1,0 +1,387 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "QUALIFY-DRIFTNARS-MODEL-INDEPENDENT-REASONING-COMPONENT-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "MODEL_INDEPENDENT_BRAIN_HAS_GOAL_COMPILATION_CAPABILITY_PLANNING_EXECUTION_AND_VERIFICATION_BUT_LACKS_VERIFIED_GENERAL_UNCERTAIN_GOAL_DIRECTED_REASONING_LAYER",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::MODEL_INDEPENDENT_BRAIN_HAS_GOAL_COMPILATION_CAPABILITY_PLANNING_EXECUTION_AND_VERIFICATION_BUT_LACKS_VERIFIED_GENERAL_UNCERTAIN_GOAL_DIRECTED_REASONING_LAYER::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Acquire and bind one verified model-independent symbolic reasoning component that supplies uncertain belief revision, temporal inference, goal-directed operation choice, learned multi-step procedures, and durable reasoning state for composition with Brain-owned goal compilation, capability planning, execution, and verification.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md and merged model-independent cognition enforcement",
+    "canonical/runtime/goal_compiler.py deterministic goal decomposition and compilation",
+    "canonical/runtime/capability_planner.py zero-dependency minimum-cost capability graph planning",
+    "canonical/runtime/semantic_authorities.py deterministic semantic proposal authorities",
+    "canonical/runtime/capability_proposal_generators.py verified-capability proposal generation",
+    "canonical/runtime/astra_runtime.py _run_model_independent_goal and capability-planned goal path",
+    "OpenNARS for Applications exact head dc4efd0abd520cdb79bf53bfa3c285ebb24f2e8a",
+    "DriftNARS exact commit 541f809c7a0a958a7dbe89e8fd59f1ffe33d58c3 forked from ONA dc4efd0 with Python callbacks and save/load",
+    "OpenCog Hyperon 0.2.10 current repository and pre-alpha integration state",
+    "Fast Downward, Unified Planning, clingo, and Z3 as specialist planning/constraint engines"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Run exactly one model-free DriftNARS qualification at pinned commit 541f809c7a0a958a7dbe89e8fd59f1ffe33d58c3. Require direct evidence for deduction, uncertainty propagation, temporal reasoning, goal-directed operation selection, learned multi-step procedure, and save/load continuation. If all pass, bind only this reusable component and immediately move to Brain-level composition on a fresh real task; if any fail, preserve evidence, reject the route, and recompute. Do not add an LLM, pretrained NLP model, new agent framework, or broad integration project.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "16e9c8896cafa0461f4c8d31a18200c08a947437",
+    "real_outcome": "Give Brain a reusable model-independent working-reasoning layer for uncertain beliefs, temporal cause/effect, goals, subgoals, learned procedures, and resumable reasoning state without outsourcing cognition to a pretrained model.",
+    "required_capability": "MODEL_INDEPENDENT_UNCERTAIN_GOAL_DIRECTED_SYMBOLIC_REASONING_COMPONENT_V1",
+    "obs_goal": {
+      "real_outcome": "Acquire the missing cognitive primitive that sits between Brain's existing deterministic goal/capability machinery and verified action execution.",
+      "proxy_goals_deleted": [
+        "Run another model-backed hidden-oracle task",
+        "Build a new general agent framework",
+        "Replace Brain with an external cognitive architecture",
+        "Benchmark symbolic systems without inheriting a usable component",
+        "Rewrite existing deterministic goal/compiler/planner machinery"
+      ],
+      "surviving_necessity": "Brain has deterministic goal compilation, capability graph planning, execution, verification, persistence, and provenance, but no verified general reasoning layer for uncertain evidence, temporal learning, goal-directed choice, and learned procedures."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "goal_compiler.py",
+        "capability_planner.py",
+        "semantic_authorities.py",
+        "capability_proposal_generators.py",
+        "astra_runtime.py _run_model_independent_goal",
+        "BOUND_CAPABILITY_REGISTRY_V1.json",
+        "EPISTEMIC_POLICY_V1.json"
+      ],
+      "external_existing_routes_checked": [
+        "DriftNARS",
+        "OpenNARS for Applications",
+        "OpenCog Hyperon/MeTTa",
+        "Fast Downward",
+        "Unified Planning",
+        "clingo",
+        "Z3"
+      ],
+      "capability_work_deleted": [
+        "No new LLM or local model",
+        "No pretrained NLP channel",
+        "No new scheduler",
+        "No replacement of Brain state/provenance/execution layers",
+        "No bespoke uncertain-reasoning engine before qualifying existing ones"
+      ],
+      "surviving_gap": "A directly embeddable, model-free, resource-bounded reasoning component that learns temporal procedures and chooses operations under uncertainty has not yet been verified and bound into Brain."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Component gap, not a carrier or model-strength gap.",
+      "delete_bypass_substitute_options": [
+        "DELETE uncertain/adaptive reasoning: rejected because the frontier target explicitly requires reasoning under novel evidence and plan revision.",
+        "BYPASS with fixed capability graph plans only: insufficient for uncertain beliefs, learned causal procedures, temporal inference, and replanning.",
+        "REUSE DriftNARS exact ONA-derived reasoning core with Python/runtime callbacks and persistence: survives.",
+        "REUSE ONA directly: technically capable but needs more adapter work than DriftNARS.",
+        "SUBSTITUTE Hyperon: broader but current repository describes active pre-alpha and larger integration surface.",
+        "COMPOSE only Fast Downward/clingo/Z3: excellent specialist engines but does not by itself provide learned uncertain temporal control."
+      ],
+      "surviving_causal_blocker": "No verified Brain-compatible model-independent uncertain goal-directed reasoning component is currently bound."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_DRIFTNARS_541F809_AS_BOUNDED_REASONING_COMPONENT",
+        "REUSE_ONA_DC4EFD0_WITH_CUSTOM_ADAPTER",
+        "COMPOSE_FAST_DOWNWARD_CLINGO_Z3_WITH_EXISTING_BRAIN_CONTROL",
+        "SUBSTITUTE_HYPERON_METTA",
+        "BUILD_NEW_REASONING_KERNEL"
+      ],
+      "losing_routes_reason": "DriftNARS preserves the inspected ONA reasoning core while already exposing Python callbacks, runtime operations, and state save/load, minimizing integration work. ONA needs a bridge; exact planners/SMT/ASP remain specialist sub-engines; Hyperon is larger and pre-alpha; invention is last.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "A one-shot component qualification is the smallest direct proof before binding a third-party reasoning engine into the real cognition path. It must execute the exact pinned source and independently assert six concrete reasoning behaviors; no model-generated grading is allowed."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "All Qwen/LLM planner routes for Brain cognitive capability proof",
+        "Any plan to build uncertain temporal goal reasoning from scratch before DriftNARS qualification",
+        "Broad cognitive-framework migration"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "uncertain belief revision",
+        "temporal inference",
+        "goal-directed operation choice",
+        "learned procedure induction",
+        "reasoning-state persistence"
+      ],
+      "fresh_reuse_plan": "On qualification pass, bind the component and immediately compose it with Brain's deterministic goal compiler, capability registry/planner, and verifier on one fresh real model-free task; only that composition can advance the parent frontier."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse prior inspection of Brain's deterministic cognition pieces",
+        "Reuse exact ONA head and DriftNARS fork provenance",
+        "Reuse current public GitHub Actions carrier",
+        "Stop broad architecture search once DriftNARS dominated integration cost while preserving required reasoning semantics"
+      ],
+      "search_stop_decision": "DriftNARS is an adequate existing route with exact ONA provenance and materially lower adapter cost; no unresolved candidate plausibly saves enough time to justify delaying one bounded qualification.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Reasoning-engine frontier refreshed immediately after model-backed cognition was invalidated; current code/docs and exact commits for DriftNARS, ONA, Hyperon, Fast Downward, Unified Planning, clingo, and Z3 were checked."
+    },
+    "routes_considered": [
+      "REUSE_DRIFTNARS_541F809_AS_BOUNDED_REASONING_COMPONENT",
+      "REUSE_ONA_DC4EFD0_WITH_CUSTOM_ADAPTER",
+      "COMPOSE_FAST_DOWNWARD_CLINGO_Z3_WITH_EXISTING_BRAIN_CONTROL",
+      "SUBSTITUTE_HYPERON_METTA",
+      "BUILD_NEW_REASONING_KERNEL"
+    ],
+    "deleted_or_bypassed_paths": [
+      "MODEL_BACKED_COGNITION",
+      "PRETRAINED_NLP_GROUNDING",
+      "FULL_HYPERON_MIGRATION",
+      "NEW_REASONER_FROM_SCRATCH"
+    ],
+    "selected_surviving_route": "REUSE_DRIFTNARS_541F809_AS_BOUNDED_REASONING_COMPONENT",
+    "why_selected_route_is_fastest_sufficient": "It is model-free, MIT licensed, directly derived from the already-inspected ONA reasoning core, exposes Python/runtime operation callbacks and persistence, and can be qualified on the existing $0 carrier without first writing a bespoke C adapter.",
+    "expected_parent_level_state_change": "Acquire and bind one verified model-independent symbolic reasoning component that supplies uncertain belief revision, temporal inference, goal-directed operation choice, learned multi-step procedures, and durable reasoning state for composition with Brain-owned goal compilation, capability planning, execution, and verification.",
+    "stop_condition": "Run exactly one model-free DriftNARS qualification at pinned commit 541f809c7a0a958a7dbe89e8fd59f1ffe33d58c3. Require direct evidence for deduction, uncertainty propagation, temporal reasoning, goal-directed operation selection, learned multi-step procedure, and save/load continuation. If all pass, bind only this reusable component and immediately move to Brain-level composition on a fresh real task; if any fail, preserve evidence, reject the route, and recompute. Do not add an LLM, pretrained NLP model, new agent framework, or broad integration project.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-29T22:32:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "BRAIN_DETERMINISTIC_GOAL_COMPILER_PLUS_CAPABILITY_GRAPH_PLANNER_WITHOUT_GENERAL_UNCERTAIN_REASONING_LAYER",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/goal_compiler.py",
+          "canonical/runtime/capability_planner.py",
+          "canonical/runtime/astra_runtime.py",
+          "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://github.com/seamus-brady/DriftNARS/blob/main/README.md",
+          "https://github.com/opennars/OpenNARS-for-Applications/blob/master/README.md",
+          "https://github.com/trueagi-io/hyperon-experimental/blob/main/README.md",
+          "https://www.fast-downward.org/",
+          "https://potassco.org/clingo/",
+          "https://github.com/Z3Prover/z3"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/seamus-brady/DriftNARS/commit/541f809c7a0a958a7dbe89e8fd59f1ffe33d58c3",
+          "https://github.com/opennars/OpenNARS-for-Applications/commit/dc4efd0abd520cdb79bf53bfa3c285ebb24f2e8a",
+          "https://github.com/trueagi-io/hyperon-experimental"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Fresh 2026-09-30 search across symbolic cognitive architectures, classical planning, ASP, SMT, NARS, Hyperon, and model-independent agent reasoning."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "model independent uncertain goal directed temporal reasoning learning procedures symbolic cognitive architecture"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "OpenNARS DriftNARS Hyperon Fast Downward clingo Z3 current maintained reasoning engine"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "embedded Python callbacks runtime operations save load symbolic reasoner versus planner solver composition"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 maintained non neural symbolic reasoning architecture release Python integration"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REUSE_DRIFTNARS_541F809_AS_BOUNDED_REASONING_COMPONENT",
+          "evidence": [
+            "DriftNARS README states ONA fork provenance at dc4efd0 and provides C/Python/HTTP APIs, operation callbacks, DriftScript, temporal reasoning, learning, goal-directed decision making, and state persistence.",
+            "GitHub commit history shows active 2026 maintenance."
+          ],
+          "qualification_evidence": [
+            "https://github.com/seamus-brady/DriftNARS/blob/541f809c7a0a958a7dbe89e8fd59f1ffe33d58c3/README.md",
+            "https://github.com/seamus-brady/DriftNARS/commit/541f809c7a0a958a7dbe89e8fd59f1ffe33d58c3"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Direct ONA-derived symbolic reasoning with explicit truth values and no pretrained model in the reasoning path; exact behavior still requires direct qualification.",
+            "CAPABILITY_STRENGTH": "Covers uncertainty, temporal inference, goals/actions, procedure learning, and persistence, complementing Brain's existing exact planners and verifiers.",
+            "WALL_CLOCK": "Lowest integration latency because Python bindings, callbacks, runtime operations, and state persistence already exist.",
+            "INCREMENTAL_COST": "$0 source and $0 public carrier.",
+            "RELIABILITY": "Newer fork than ONA, so qualification must pin exact commit and exercise required behaviors before inheritance.",
+            "VERIFIABILITY": "Deterministic source commit and concrete behavioral assertions make independent verification straightforward."
+          }
+        },
+        {
+          "route": "REUSE_ONA_DC4EFD0_WITH_CUSTOM_ADAPTER",
+          "evidence": [
+            "ONA exact head exposes NAR_INIT, NAR_Cycles, beliefs, goals, operations; system tests demonstrate procedure and multistep goal behavior."
+          ],
+          "qualification_evidence": [
+            "https://github.com/opennars/OpenNARS-for-Applications/blob/dc4efd0abd520cdb79bf53bfa3c285ebb24f2e8a/src/NAR.h",
+            "https://github.com/opennars/OpenNARS-for-Applications/blob/dc4efd0abd520cdb79bf53bfa3c285ebb24f2e8a/src/system_tests/Multistep_Test.h"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Mature inspected core and clean model-free semantics.",
+            "CAPABILITY_STRENGTH": "Matches the core reasoning behaviors we need.",
+            "WALL_CLOCK": "Slower because Brain would need to build its own stable C/Python operation and persistence integration.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Older and more battle-tested than DriftNARS.",
+            "VERIFIABILITY": "Strong, but extra adapter code increases proof surface."
+          }
+        },
+        {
+          "route": "COMPOSE_FAST_DOWNWARD_CLINGO_Z3_WITH_EXISTING_BRAIN_CONTROL",
+          "evidence": [
+            "Established domain-independent planning, answer-set solving, and SMT reasoning systems."
+          ],
+          "qualification_evidence": [
+            "https://www.fast-downward.org/",
+            "https://potassco.org/clingo/",
+            "https://github.com/Z3Prover/z3"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Excellent exact reasoning for explicit formal models.",
+            "CAPABILITY_STRENGTH": "Strong specialist search/proof but does not alone supply uncertain temporal belief revision and learned procedure control.",
+            "WALL_CLOCK": "Useful later as sub-engines but composing them into the missing layer takes more work than qualifying an existing integrated reasoner.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Mature and well-tested.",
+            "VERIFIABILITY": "Excellent."
+          }
+        },
+        {
+          "route": "SUBSTITUTE_HYPERON_METTA",
+          "evidence": [
+            "Hyperon provides a broad metagraph/MeTTa cognitive architecture and current 0.2.10 codebase."
+          ],
+          "qualification_evidence": [
+            "https://github.com/trueagi-io/hyperon-experimental/blob/main/README.md"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Model-independent symbolic/meta-language architecture.",
+            "CAPABILITY_STRENGTH": "Potentially broader than the immediate missing primitive.",
+            "WALL_CLOCK": "Larger Rust/C/Python integration and repository explicitly describes active pre-alpha experimentation.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Current but pre-alpha.",
+            "VERIFIABILITY": "Possible, with larger surface."
+          }
+        }
+      ],
+      "negative_search_summary": "No current challenger provides the same combination of uncertain temporal goal-directed reasoning, learned procedures, persistence, exact model-free provenance, and lower integration latency than the pinned DriftNARS fork.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_DRIFTNARS_541F809_AS_BOUNDED_REASONING_COMPONENT",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-29T22:32:00Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_DRIFTNARS_541F809_AS_BOUNDED_REASONING_COMPONENT",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T22:25:06Z",
+            "evidence": [
+              "DIRECT_PROBE: workflow run 36639442996 received and is executing on this account's public GitHub-hosted runner."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "DRIFTNARS_SOURCE_541F809C7A0A958A7DBE89E8FD59F1FFE33D58C3",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T22:32:00Z",
+            "evidence": [
+              "DIRECT_PROBE: GitHub API returned exact commit and source/README content for seamus-brady/DriftNARS."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "CODE_OR_PACKAGE_REGISTRY"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "UBUNTU_C99_PYTHON_BUILD_RUNTIME",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T22:25:06Z",
+            "evidence": [
+              "DIRECT_PROBE: current and prior public carrier jobs successfully reached native C/C++ build and Python execution steps on ubuntu-24.04."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
