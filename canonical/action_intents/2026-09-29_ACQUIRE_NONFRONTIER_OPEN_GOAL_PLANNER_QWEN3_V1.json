@@ -1,0 +1,143 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-NONFRONTIER-OPEN-GOAL-PLANNER-QWEN3-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "NON_FRONTIER_OPEN_ENDED_GOAL_TO_NEXT_ACTION_REASONING_UNBOUND",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::NON_FRONTIER_OPEN_ENDED_GOAL_TO_NEXT_ACTION_REASONING_UNBOUND::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Bind and directly execute a zero-incremental-cost non-frontier open-ended planner/reasoner inside the already-proven public GitHub Actions carrier, prove it can select and revise consequential next actions on the live cognition-supplier problem, and preserve the exact residuals before attempting broader research-capability promotion.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "SUPERWORKER_UNIFIED_1 qualification",
+    "ASTRA model-independence regression",
+    "ASTRA planner-quality evidence",
+    "public verification-capsule carrier",
+    "current official GitHub runner/Qwen/Cloudflare/Pollinations documentation"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after one real public-carrier execution yields either verified dynamic goal-to-next-action behavior from the non-frontier model or a precise terminal failure. Do not promote the parent frontier capability from this sub-capability alone.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "4520aec1f31baba438af5f30f9416a3eb53f5bfd",
+    "real_outcome": "Acquire the missing non-frontier goal-to-next-action reasoning primitive required by Brain's open-ended research capability.",
+    "required_capability": "NON_FRONTIER_OPEN_ENDED_GOAL_TO_NEXT_ACTION_REASONING_V1",
+    "obs_goal": {
+      "real_outcome": "A real non-frontier planner that can inspect state, choose consequential next actions, revise after observations, and terminate with an auditable decision.",
+      "proxy_goals_deleted": [
+        "full research parity in one jump",
+        "new orchestration framework",
+        "synthetic benchmark score"
+      ],
+      "surviving_necessity": "Bind one real reasoning supplier into the existing superworker architecture and exercise it on the current supplier-selection problem."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "SUPERWORKER-UNIFIED-1 persistent orchestration",
+        "ASTRA model-independent action-plan executor",
+        "capability graph planner",
+        "public verification-capsule GitHub Actions carrier"
+      ],
+      "external_existing_routes_checked": [
+        "GitHub Models",
+        "Cloudflare Workers AI",
+        "Pollinations",
+        "TypeSafe Jev",
+        "gpt-oss-20b local inference",
+        "Qwen3-8B official GGUF"
+      ],
+      "capability_work_deleted": [
+        "No new worker runtime",
+        "No Cloudflare deployment",
+        "No remote carrier discovery",
+        "No synthetic heldout benchmark"
+      ],
+      "surviving_gap": "Unknown natural-language goals still need a non-frontier generative policy for choosing/revising next actions."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Intrinsic capability gap in current runtime; deterministic planner handles declared effects but not unknown natural-language goal interpretation.",
+      "delete_bypass_substitute_options": [
+        "GitHub Models deleted because retired 2026-07-30",
+        "Cloudflare deferred because one-time OAuth remains external",
+        "Pollinations rejected because generation now requires auth",
+        "Jev rejected because it returns typed decisions rather than generative plans",
+        "gpt-oss-20b deferred because ~14.9 GB working set is too close to 16 GB carrier ceiling",
+        "Qwen3-8B Q4_K_M survives"
+      ],
+      "surviving_causal_blocker": "Need one non-frontier generative planner/reasoner that fits the free public carrier with enough headroom for the tool loop."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Official Qwen3-8B Q4_K_M via llama.cpp on public GitHub Actions",
+        "Cloudflare Workers AI free allocation after OAuth",
+        "gpt-oss-20b on public runner",
+        "authenticated hosted APIs"
+      ],
+      "losing_routes_reason": "Qwen3-8B reuses the proven public carrier, needs no account authorization, has official GGUF/tooling support, and fits materially below the 16 GB RAM ceiling.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No benchmark. Run the planner on the live cognition-supplier selection task, execute its chosen action loop, capture model/runtime hashes and trace, and independently inspect whether the actions are valid and causally useful."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Pollinations as implicit default planner dependency if Qwen route works",
+        "Cloudflare OAuth as immediate critical path if Qwen route works"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "structured next-action selection",
+        "bounded iterative replanning",
+        "JSON action contract"
+      ],
+      "fresh_reuse_plan": "After success, reuse the planner on a materially different real task before claiming the broader frontier capability."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Recovered prior model-independence evidence instead of rebuilding it",
+        "Reused public verification carrier",
+        "Stopped provider search after a no-auth model route with adequate hardware headroom survived"
+      ],
+      "search_stop_decision": "Qwen3-8B official Q4_K_M on the free public carrier is an adequate executable route; further provider search cannot justify delaying the direct real execution.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "QWEN3_8B_PUBLIC_GITHUB_ACTIONS",
+      "CLOUDFLARE_WORKERS_AI",
+      "GPT_OSS_20B_PUBLIC_GITHUB_ACTIONS",
+      "POLLINATIONS_HOSTED",
+      "JEV_DECISION_MODEL"
+    ],
+    "deleted_or_bypassed_paths": [
+      "GITHUB_MODELS_RETIRED",
+      "POLLINATIONS_AUTH_REQUIRED",
+      "JEV_NOT_GENERATIVE",
+      "NEW_CARRIER_DISCOVERY"
+    ],
+    "selected_surviving_route": "QWEN3_8B_PUBLIC_GITHUB_ACTIONS",
+    "why_selected_route_is_fastest_sufficient": "It is official open-weight, supports reasoning/tool use, fits the existing free 16 GB public runner with headroom, requires no new account authorization, and can be composed directly with Brain's existing action executor.",
+    "expected_parent_level_state_change": "Bind and directly execute a zero-incremental-cost non-frontier open-ended planner/reasoner inside the already-proven public GitHub Actions carrier, prove it can select and revise consequential next actions on the live cognition-supplier problem, and preserve the exact residuals before attempting broader research-capability promotion.",
+    "stop_condition": "Stop after one real public-carrier execution yields either verified dynamic goal-to-next-action behavior from the non-frontier model or a precise terminal failure. Do not promote the parent frontier capability from this sub-capability alone."
+  }
+}
