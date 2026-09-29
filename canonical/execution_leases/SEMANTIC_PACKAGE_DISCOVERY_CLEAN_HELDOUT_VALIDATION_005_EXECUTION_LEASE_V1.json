@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_HELDOUT_EXECUTION_LEASE_V1",
   "validation_id": "SEMANTIC-PACKAGE-DISCOVERY-CLEAN-HELDOUT-VALIDATION-005",
-  "status": "EXECUTION_STARTED__FRESHNESS_SPENT__TERMINAL_CAPTURE_PENDING",
+  "status": "RELEASED_AFTER_TERMINAL_RECONCILIATION__HARD_WALL_TIMEOUT",
   "holder": "chatgpt-directjoin-20260929",
   "claimed_on": "2026-09-29",
   "source_branch": "repair/batched-executable-evidence-acquisition-v1-20260928",
@@ -20,7 +20,7 @@
   "execution_budget_remaining": 0,
   "freshness": "SPENT",
   "concurrency_rule": "NO_OTHER_WORKER_MAY_EXECUTE_PREVIEW_REPLAY_OR_SPEND_GATE_005_WHILE_THIS_LEASE_IS_OPEN",
-  "next_action": "READ_ONLY_CAPTURE_TERMINAL_RESULT__RECONCILE_ONCE__RELEASE_LEASE",
+  "next_action": "LEASE_RELEASED__FOLLOW_CANONICAL_HIERARCHY",
   "execution_started_at": "2026-09-29T02:43:38.437956983Z",
   "observed_execution": {
     "provider": "Railway",
@@ -29,5 +29,17 @@
     "service_id": "851b6f16-2e12-4a68-b49c-04f81056fa5f",
     "deployment_id": "2e158cd3-4643-4c61-bbbc-b803be2a277e",
     "start_marker": "PB_HELDOUT_005_EXECUTION_START=1"
-  }
+  },
+  "terminal_capture": {
+    "observed": true,
+    "capture_path": "canonical/astra_runtime/evidence/SEMANTIC_PACKAGE_DISCOVERY_CLEAN_HELDOUT_VALIDATION_005__TERMINAL_CAPTURE.json",
+    "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_SEMANTIC_PACKAGE_DISCOVERY_CLEAN_HELDOUT_VALIDATION_005_RECONCILIATION_V1.json",
+    "deployment_status": "SUCCESS",
+    "validator_exit_code": 124,
+    "validator_timeout": true,
+    "result_json_present": false,
+    "acceptance_gate_pass": false,
+    "no_verdict": false
+  },
+  "released_on": "2026-09-29"
 }
