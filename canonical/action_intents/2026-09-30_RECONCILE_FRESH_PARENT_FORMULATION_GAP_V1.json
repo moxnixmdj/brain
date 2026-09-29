@@ -1,0 +1,143 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-FRESH-PARENT-FORMULATION-GAP-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "FRESH_PARENT_TASK_246_SPENT__PLAIN_GOAL_TO_STRUCTURED_TASK_EVIDENCE_GRAPH_FORMULATION_FAILED",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::FRESH_PARENT_TASK_246_SPENT__PLAIN_GOAL_TO_STRUCTURED_TASK_EVIDENCE_GRAPH_FORMULATION_FAILED::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Consume the spent model-independent parent run, add exactly one residual-gap localization with zero capability/task/reuse credit, and select MODEL_INDEPENDENT_GOAL_TO_TASK_GRAPH_FORMULATION_V1 as the smallest evidenced next subcapability.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR246 closed spent/falsified with no replay authorization",
+    "Public run 36644374149 terminal artifact 11067706810 digest sha256:57c6a188f8027c2788f4e2c6991fa8066799a55fb40771f17be6072a819e71d",
+    "Exact model-independent capsule hashes passed before execution",
+    "Terminal blocker CAPABILITY_ACQUISITION_REQUIRED after plain-goal compiler failed to form existing-capability composition",
+    "Fallback discovery ranked irrelevant zero/cost lexical suppliers despite CBOR/MessagePack/BSON already bound",
+    "Existing capability_planner, goal_compiler, semantic_authorities, capability_discovery and verified decision synthesis preserved"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 1,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Reconcile only the spent run and narrow frontier. Do not modify runtime or acquire the new subcapability in this PR. Preserve serialization Task C as spent forever; next action is fresh route discovery for the formulation subcapability.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "20259a493b8180d490e65448cbedd3ccf54ddaf0",
+    "real_outcome": "Turn the first clean model-independent parent failure into one precise next frontier without overclaiming capability or prematurely repairing against the spent task.",
+    "required_capability": "MODEL_INDEPENDENT_GOAL_TO_TASK_GRAPH_FORMULATION_V1",
+    "obs_goal": {
+      "real_outcome": "Record the exact failure and select the smallest missing cognitive primitive.",
+      "proxy_goals_deleted": [
+        "Replay serialization task",
+        "Patch lexical ranking against serialization words",
+        "Credit workflow success as parent task success",
+        "Build a general reasoning engine immediately"
+      ],
+      "surviving_necessity": "Live canonical state still says the fresh parent task is unspent although run 36644374149 is terminal."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "capability_planner.py",
+        "goal_compiler.py",
+        "semantic_authorities.py",
+        "capability_discovery.py",
+        "decision.synthesis.typed.stdlib",
+        "decision.synthesis.verify.stdlib"
+      ],
+      "external_existing_routes_checked": [
+        "Fast Downward",
+        "Unified Planning",
+        "pyperplan",
+        "Z3/pySMT",
+        "ProbLog",
+        "DriftNARS"
+      ],
+      "capability_work_deleted": [
+        "No runtime repair",
+        "No new planner",
+        "No model route",
+        "No replay"
+      ],
+      "surviving_gap": "Convert an open-ended plain technical objective into an auditable structured task/evidence/constraint graph, mapping leaves to existing bound capabilities before declaring supplier gaps."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic formulation/composition boundary exposed by a real task; serialization literals themselves are quarantined from any repair.",
+      "delete_bypass_substitute_options": [
+        "Delete formulation: impossible for open-ended parent capability.",
+        "Bypass with hand-authored controller actions: invalid because it hides the cognitive capability.",
+        "Use PDDL/SMT/ProbLog directly: insufficient until goal has already been formalized.",
+        "Use DriftNARS directly: still requires structured DriftScript/Narsese input.",
+        "Select formulation as the next subcapability and race existing routes: survives."
+      ],
+      "surviving_causal_blocker": "PLAIN_GOAL_MULTI_CAPABILITY_OBJECTIVE_NOT_FORMULATED_INTO_STRUCTURED_EXISTING_CAPABILITY_GRAPH_BEFORE_SUPPLIER_DISCOVERY"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RECONCILE_AND_SELECT_MODEL_INDEPENDENT_GOAL_TO_TASK_GRAPH_FORMULATION_V1"
+      ],
+      "losing_routes_reason": "Implementation before reconciliation would tune against a spent task and violate the fresh-reuse discipline.",
+      "implementation_still_necessary": false
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No new verification is required for reconciliation; consume preserved terminal primary evidence from the one-shot public run."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Fresh-parent-task-required state",
+        "Any serialization-task replay",
+        "Any whole-model planner continuation"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Verified evidence-to-decision synthesis remains inherited and is not reopened"
+      ],
+      "fresh_reuse_plan": "After acquiring the formulation primitive, test it on a materially different fresh parent task, never the spent serialization objective."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse terminal run classification",
+        "Reuse existing challenger search",
+        "Do not rediscover synthesis or carrier"
+      ],
+      "search_stop_decision": "Enough evidence exists to reconcile the frontier; route selection for the new subcapability occurs only after this state change.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Reconciliation action is exempt from live external route selection; current search informs the target definition but does not authorize implementation."
+    },
+    "routes_considered": [
+      "RECONCILE_FIRST",
+      "REPAIR_SERIALIZATION_TASK",
+      "BUILD_GENERAL_REASONER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "REPAIR_SERIALIZATION_TASK",
+      "BUILD_GENERAL_REASONER"
+    ],
+    "selected_surviving_route": "RECONCILE_FIRST",
+    "why_selected_route_is_fastest_sufficient": "It consumes already-terminal evidence and prevents stale state from causing duplicate or misdirected execution.",
+    "expected_parent_level_state_change": "Consume the spent model-independent parent run, add exactly one residual-gap localization with zero capability/task/reuse credit, and select MODEL_INDEPENDENT_GOAL_TO_TASK_GRAPH_FORMULATION_V1 as the smallest evidenced next subcapability.",
+    "stop_condition": "Reconcile only the spent run and narrow frontier. Do not modify runtime or acquire the new subcapability in this PR. Preserve serialization Task C as spent forever; next action is fresh route discovery for the formulation subcapability.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER consumes preserved primary evidence and does not select an executable external route."
+    }
+  }
+}
