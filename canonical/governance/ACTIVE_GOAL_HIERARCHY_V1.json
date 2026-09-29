@@ -4,14 +4,14 @@
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "active_capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-  "active_probe": "BATCHED-EXECUTABLE-EVIDENCE-FRESH-VALIDATION-001",
-  "probe_state": "FRESH_UNSEEN_GATE_FROZEN__GENERIC_BATCHED_EVIDENCE_REPAIR_AUTHORIZED",
-  "current_parent_blocker": "EVIDENCE_ACQUISITION_USES_REPEATED_SLOW_APT_FILE_REGEX_SCANS_AND_EXCESSIVE_REMOTE_MANPAGE_FANOUT__BATCH_LITERAL_MULTI_PATTERN_ACQUISITION_AND_PROGRESSIVE_CACHED_ENRICHMENT_NOT_YET_INTEGRATED",
-  "next_required_action_class": "ONE_GENERIC_BATCHED_LITERAL_APT_FILE_ACQUISITION_REPAIR__THEN_RUN_FROZEN_FRESH_GATE_ONCE__THEN_RECONCILE",
-  "forbidden_local_frontier": "PACKAGE_HINTS__TASK_SPECIFIC_LITERALS__PER_TERM_REGEX_APT_FILE_LOOPS__UNBOUNDED_MANPAGE_FANOUT__TIMEOUT_INCREASE__SECOND_REPAIR_BEFORE_RECONCILIATION",
+  "active_probe": "DEBIAN-FULL-METADATA-XAPIAN-HELDOUT-VALIDATION-005",
+  "probe_state": "EXECUTED_ONCE_FRESH__PASS__RECONCILED__SPENT",
+  "current_parent_blocker": "RESOLVED__FULL_DEBIAN_METADATA_XAPIAN_DIRECT_CONTENTS_ROUTE_PASSED_FRESH_HELDOUT_005",
+  "next_required_action_class": "RECOMPUTE_HIGHEST_LEVERAGE_UNRESOLVED_END_TO_END_TOOL_DISCOVERY_SELECTION_LEARNING_GAP",
+  "forbidden_local_frontier": "NO_HELDOUT_005_REPLAY__NO_RUNTIME_TUNING_AGAINST_SPENT_CASES__NO_SECOND_REPAIR_FROM_THIS_PROBE",
   "progress_level_minimum": "CAPABILITY_TARGET",
   "probe_budget": {
-    "repairs_used_on_active_probe": 0,
+    "repairs_used_on_active_probe": 1,
     "max_repairs_from_single_probe": 1,
     "same_probe_replays_used": 0,
     "max_same_probe_replays": 1,
@@ -26,7 +26,7 @@
       "may_define_frontier": false
     }
   ],
-  "active_probe_manifest": "canonical/experiments/BATCHED_EXECUTABLE_EVIDENCE_FRESH_VALIDATION_001.json",
+  "active_probe_manifest": "canonical/experiments/DEBIAN_FULL_METADATA_XAPIAN_HELDOUT_VALIDATION_005.json",
   "completed_probe_portfolio": {
     "portfolio_id": "ORTHO-TOOL-LEARNING-PORTFOLIO-001",
     "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_ORTHOGONAL_PORTFOLIO_001_RECONCILIATION.json",
@@ -82,5 +82,14 @@
     ],
     "outcome": "EXECUTION_SURFACE_QUARANTINED__STRUCTURAL_CAUSE_RECONCILED",
     "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EVIDENCE_ACQUISITION_STRUCTURAL_CAUSE_RECONCILIATION_V1.json"
+  },
+  "last_verified_route": {
+    "validation_id": "DEBIAN-FULL-METADATA-XAPIAN-HELDOUT-VALIDATION-005",
+    "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
+    "acceptance_gate_pass": true,
+    "heldout_oracle_family_recall": 1,
+    "heldout_top20_oracle_recall": 1,
+    "total_wall_s": 16.233238,
+    "status": "INHERITED_VERIFIED_ROUTE__PARENT_BLOCKER_RESOLVED__WHOLE_CAPABILITY_NOT_YET_OBSOLETE"
   }
 }
