@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-HELDOUT005-PASS-INTO-TOOL-DISCOVERY-FRONTIER-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": null,
+  "causal_blocker": "PR89_HELDOUT005_FRESH_PASS_EXISTS_BUT_PARENT_CAPABILITY_FRONTIER_AND_ACTIVE_GOAL_HIERARCHY_STILL_DESCRIBE_PREDECESSOR_BLOCKER",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::PR89_HELDOUT005_FRESH_PASS_EXISTS_BUT_PARENT_CAPABILITY_FRONTIER_AND_ACTIVE_GOAL_HIERARCHY_STILL_DESCRIBE_PREDECESSOR_BLOCKER::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Reconcile the first admissible HELDOUT-005 PASS into the parent TOOL_DISCOVERY_SELECTION_AND_LEARNING frontier, close the spent validation against replay, and authorize only clean inheritance of the exact tested PR89 route without mutating runtime bytes.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR89",
+    "HELDOUT-005 authoritative deployment 805a36d4-04cf-4938-bfac-74d29418081f",
+    "PR91 superseded unexecuted alternative",
+    "GOAL_HIERARCHY_AND_DRIFT_IMMUNITY_LAW_V1",
+    "trusted base enforce_goal_hierarchy.py"
+  ],
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 4,
+  "precommitted_acceptance_gate_exception": true,
+  "probe_specific_literals": [],
+  "stop_condition": "Canonical terminal reconciliation, replay quarantine, active goal hierarchy, and capability queue agree that HELDOUT-005 is spent/pass and only exact-byte clean inheritance remains; no runtime code changes in this reconciliation PR.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
