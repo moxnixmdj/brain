@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_H004_CURRENT_CARRIER_SURFACE_EXHAUSTION_V1",
+  "evidence_id": "H004-CURRENT-CARRIER-SURFACE-EXHAUSTION-20260929-V1",
+  "canonical_base_sha": "b40a10a2d7598bfeea36ced9dfd235f306a42b27",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "scope": "CURRENT_CONNECTED_AND_DIRECTLY_CALLABLE_SURFACES_ONLY__NOT_GLOBAL_PROVIDER_IMPOSSIBILITY_CLAIM",
+  "carrier_findings": [
+    {
+      "surface": "CHATGPT_BUILTIN_LINUX_CONTAINER",
+      "status": "REJECTED",
+      "reason": "Debian Trixie/root/apt-capable locally, but outbound DNS/TCP80/TCP443 unavailable and no sanctioned APT mirror/proxy found; faithful live APT/Xapian install surface unavailable."
+    },
+    {
+      "surface": "RAILWAY_ACCOUNT_CONTROL_PLANE",
+      "status": "REJECTED_UNCHANGED_CLASS",
+      "reason": "Workspace resource/provisioning constraints and fresh deploy pre-runtime failures; ordinary MCP exposes no shell. Anonymous railway.new hard-zero contract exists but current authorized surface cannot invoke SSH transport."
+    },
+    {
+      "surface": "IXIMIUZ_LABS_REMOTE_MCP",
+      "status": "REJECTED_FOR_CURRENT_SURFACE",
+      "reason": "Technically valid hard-zero candidate, but current authorized ChatGPT surface exposes neither curated iximiuz plugin nor arbitrary custom-MCP add action; current OpenAI custom-MCP developer-mode availability does not cover this Plus surface."
+    },
+    {
+      "surface": "SPRITES",
+      "status": "REJECTED_COST_PREDICATE",
+      "reason": "Direct shell exists and one cold sprite exists, but active execution is metered and connector exposes no account-specific unused-credit/hard-zero billing proof."
+    },
+    {
+      "surface": "DIGITALOCEAN",
+      "status": "REJECTED_COST_AND_LIMIT",
+      "reason": "Live account_balance=0.00, month_to_date_usage=0.00, no visible credit reserve; account status reports maximum Droplet count reached."
+    },
+    {
+      "surface": "RENDER",
+      "status": "REJECTED_COST_PREDICATE",
+      "reason": "Free service creation exists, but connector exposes no payment-method/spend-cap state; free-service bandwidth/build overage can be billable when payment method exists."
+    },
+    {
+      "surface": "REPLIT",
+      "status": "REJECTED_TRANSPORT",
+      "reason": "Connector provides app-agent operations, not direct controllable Debian shell/execution receipt surface."
+    },
+    {
+      "surface": "CAMBER",
+      "status": "REJECTED_USER_DEVICE",
+      "reason": "Official MCP usage guide states Camber CLI runs on user's machine; user device is forbidden for H004."
+    },
+    {
+      "surface": "VERCEL",
+      "status": "REJECTED_TRANSPORT",
+      "reason": "Current connector exposes no Sandbox create/exec/shell action."
+    },
+    {
+      "surface": "PLUGIN_CATALOG",
+      "status": "EXHAUSTED_FOR_CURRENT_QUERY",
+      "reason": "Searches for remote Linux shell/sandbox and E2B/Daytona/CodeSandbox/Gitpod/Modal found no new installable command surface beyond already-rejected providers."
+    }
+  ],
+  "adjudication": {
+    "current_connected_surface_exhausted": true,
+    "global_provider_impossibility_claim": false,
+    "capability_runtime_change_required": false,
+    "heldout_execution_required_now": false,
+    "next_action": "WAIT_FOR_MATERIAL_EXECUTOR_CAPABILITY_CHANGE_OR_NEW_HARD_ZERO_DIRECT_COMMAND_SURFACE__ON_CHANGE_QUALIFY_FAITHFUL_APT_XAPIAN_QR_AND_EXACT_RUNTIME_CLOSURE__NO_HELDOUT_004_START_BEFORE_PASS",
+    "resume_predicates": [
+      "NEW_DIRECT_COMMAND_EXECUTOR_CONNECTOR_AVAILABLE",
+      "EXISTING_EXECUTOR_TRANSPORT_FAILURE_CLASS_MATERIALLY_CHANGES",
+      "ACCOUNT_SPECIFIC_HARD_ZERO_BILLING_PROOF_BECOMES_AVAILABLE",
+      "GITHUB_HOSTED_RUNNER_ALLOCATION_RECOVERS_WITH_REAL_STEP_EXECUTION",
+      "CURRENT_CHATGPT_SURFACE_GAINS_CUSTOM_MCP_OR_SANDBOX_EXECUTION"
+    ]
+  },
+  "heldout_004": {
+    "freshness": "UNSPENT",
+    "execution_count": 0,
+    "start_created": false,
+    "result_created": false
+  },
+  "incremental_spend_usd": 0,
+  "user_device_used": false,
+  "val_town_used": false,
+  "required_next_action": "WAIT_FOR_MATERIAL_EXECUTOR_CAPABILITY_CHANGE_OR_NEW_HARD_ZERO_DIRECT_COMMAND_SURFACE__ON_CHANGE_QUALIFY_FAITHFUL_APT_XAPIAN_QR_AND_EXACT_RUNTIME_CLOSURE__NO_HELDOUT_004_START_BEFORE_PASS"
+}
