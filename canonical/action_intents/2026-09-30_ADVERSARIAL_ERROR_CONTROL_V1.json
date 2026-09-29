@@ -1,0 +1,211 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ADVERSARIAL-ERROR-CONTROL-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "PROGRAM_OPERATING_STRATEGY",
+  "probe_id": null,
+  "causal_blocker": "CONSEQUENTIAL_ACTIONS_CAN_STILL_PASS_WITHOUT_EXPLICIT_CIRCULAR_PROOF_TARGET_FIDELITY_AND_HEAD_POSTCONDITION_CHECKS",
+  "action_kind": "USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::PROGRAM_OPERATING_STRATEGY::CONSEQUENTIAL_ACTIONS_CAN_STILL_PASS_WITHOUT_EXPLICIT_CIRCULAR_PROOF_TARGET_FIDELITY_AND_HEAD_POSTCONDITION_CHECKS::USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "expected_parent_frontier_change": "Make every future consequential Brain action fail closed unless it assumes its plan may be wrong, tries to disconfirm itself, preserves target fidelity, excludes circular frontier proof for promotion/removal claims, declares the exact sensitive files it expects to change, and proves exact postconditions on the PR head.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Recursive OBS V3 / receipt V4 already covers stale routes and live readiness.",
+    "Truth-first guard already covers duplicate execution and exact-base binding.",
+    "Scoreboard already forbids narrow-domain capability inflation and same-domain fresh-reuse inflation.",
+    "Observed remaining generic gaps: circular frontier proof and missing exact head postcondition contract."
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 5,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Merge only the minimal adversarial-error law/schema/template/gates/validator/pointer/regression/scoreboard hardening, verify the exact head, then stop governance work and execute the already-existing forced-finalization repair on one fresh real Task C.",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "user_authorization_summary": "User explicitly ordered Brain to assume many mistakes by default, prevent these and other mistakes, and update the Brain perfectly while pursuing the goal by the cleverest fastest route.",
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "e4f115ef6f3b86cb51b0206edf1f53f16c46f6e8",
+    "real_outcome": "Eliminate the highest-leverage remaining classes of avoidable reasoning/governance error without creating a new bureaucracy layer.",
+    "required_capability": "Fail-closed adversarial self-error control for consequential actions.",
+    "obs_goal": {
+      "real_outcome": "Prevent circular proof, target substitution, self-certification and silent post-state mismatch before they can authorize consequential work.",
+      "proxy_goals_deleted": [
+        "Attempt to make literally every possible future mistake impossible",
+        "Add another planner/scheduler",
+        "Rewrite existing OBS"
+      ],
+      "surviving_necessity": "Add one compact machine-enforced error contract to the existing action-intent/guard path."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Recursive OBS V3/V4",
+        "Truth-first drift guard",
+        "Exact-base receipts",
+        "Live challenger frontier",
+        "Selected-route execution preflight",
+        "Real-output scoreboard"
+      ],
+      "external_existing_routes_checked": [
+        "Not applicable: this is internal governance enforcement."
+      ],
+      "capability_work_deleted": [
+        "No separate error service",
+        "No new CI workflow",
+        "No new execution carrier"
+      ],
+      "surviving_gap": "No machine-enforced circular-proof exclusion or exact-head postcondition contract exists."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Intrinsic to current governance semantics.",
+      "delete_bypass_substitute_options": [
+        "Do nothing rejected because the same class already caused false capability accounting",
+        "Human caution rejected because it is not fail-closed",
+        "Extend existing trusted validator survives"
+      ],
+      "surviving_causal_blocker": "Consequential intents can still omit explicit proof-independence and post-state assertions."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Extend existing action intent + trusted validator + gates",
+        "Create separate checker service",
+        "Rely on operator memory"
+      ],
+      "losing_routes_reason": "The existing trusted guard is already the narrowest authoritative choke point; a new service adds failure modes and wall-clock.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Directly validate exact PR-head contents and negative regression cases with the trusted validator; no benchmark."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Manual circularity checks",
+        "Manual changed-file completeness checks",
+        "Operator-memory-only postcondition checks"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Promotion proof independence",
+        "Target fidelity",
+        "Exact head postconditions",
+        "Known-error-class regression"
+      ],
+      "fresh_reuse_plan": "The next Task C intent must satisfy the new error contract without governance exception."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused existing OBS and guard architecture",
+        "No external search because governance discovery is inapplicable",
+        "Limited fix to recurrent observed error classes plus exact head assertions"
+      ],
+      "search_stop_decision": "The remaining known generic error classes map to one existing enforcement choke point; more governance discovery cannot beat this minimal repair enough to justify delay.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Governance action is explicitly exempt from external challenger discovery under OBS V4; live task route discovery remains unchanged."
+    },
+    "routes_considered": [
+      "EXTEND_TRUSTED_GUARD",
+      "SEPARATE_ERROR_SERVICE",
+      "OPERATOR_MEMORY_ONLY"
+    ],
+    "deleted_or_bypassed_paths": [
+      "SEPARATE_ERROR_SERVICE",
+      "OPERATOR_MEMORY_ONLY"
+    ],
+    "selected_surviving_route": "EXTEND_TRUSTED_GUARD",
+    "why_selected_route_is_fastest_sufficient": "It makes the known mistakes fail closed at the existing authorization choke point with no new runtime or provider.",
+    "expected_parent_level_state_change": "Make every future consequential Brain action fail closed unless it assumes its plan may be wrong, tries to disconfirm itself, preserves target fidelity, excludes circular frontier proof for promotion/removal claims, declares the exact sensitive files it expects to change, and proves exact postconditions on the PR head.",
+    "stop_condition": "Merge only the minimal adversarial-error law/schema/template/gates/validator/pointer/regression/scoreboard hardening, verify the exact head, then stop governance work and execute the already-existing forced-finalization repair on one fresh real Task C.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "This is a user-authorized governance hardening action; external route discovery is inapplicable and exempt under Recursive OBS V4."
+    }
+  },
+  "adversarial_error_control": {
+    "schema": "PROJECT_BRAIN_ADVERSARIAL_ERROR_CONTROL_V1",
+    "assume_action_wrong": true,
+    "strongest_disconfirming_hypotheses": [
+      "Existing OBS/gates already make this change redundant.",
+      "The new control could create more bureaucracy than error reduction.",
+      "Circular-proof checks may be too claim-specific for every action.",
+      "Postconditions could become ceremonial unless evaluated mechanically on exact head."
+    ],
+    "known_failure_classes_checked": [
+      "STALE_STATE",
+      "TARGET_SUBSTITUTION",
+      "PROXY_GOAL",
+      "CIRCULAR_PROOF",
+      "SELF_CERTIFICATION",
+      "NARROW_CAPABILITY_INFLATION",
+      "SAME_DOMAIN_REUSE_INFLATION",
+      "ROUTE_READINESS",
+      "DUPLICATE_EXECUTION",
+      "ACTIVITY_AS_PROGRESS",
+      "POST_STATE_MISMATCH",
+      "HIDDEN_DEPENDENCY",
+      "FALSIFIED_ROUTE_REPLAY"
+    ],
+    "unresolved_material_risks": [],
+    "abort_if_any_unresolved": true,
+    "target_fidelity": {
+      "intended_target": "PROGRAM_OPERATING_STRATEGY",
+      "proxy_substitution_detected": false
+    },
+    "proof_claim": {
+      "claim_level": "GOVERNANCE_ONLY",
+      "target_frontier_supplier_in_producer_path": false,
+      "target_frontier_supplier_in_verifier_path": false,
+      "producer_verifier_independent": true,
+      "independent_verifier_present": true
+    },
+    "expected_sensitive_paths": [
+      "canonical/CANONICAL_POINTER.json",
+      "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V8.json",
+      "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V7.json",
+      "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V4.json",
+      "canonical/governance/ADVERSARIAL_ERROR_CONTROL_SCHEMA_V1.json",
+      "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
+      "canonical/laws/ADVERSARIAL_ERROR_CONTROL_LAW_V1.md",
+      "canonical/regressions/2026-09-30_ADVERSARIAL_ERROR_CONTROL.json",
+      "canonical/runtime/enforce_goal_hierarchy.py"
+    ],
+    "postconditions": [
+      {
+        "type": "file_exists",
+        "path": "canonical/laws/ADVERSARIAL_ERROR_CONTROL_LAW_V1.md"
+      },
+      {
+        "type": "json_field_equals",
+        "path": "canonical/CANONICAL_POINTER.json",
+        "field": "boot_requirements.adversarial_error_control_required",
+        "value": true
+      },
+      {
+        "type": "json_field_equals",
+        "path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
+        "field": "hard_rules.circular_frontier_proof_forbidden",
+        "value": true
+      },
+      {
+        "type": "text_contains",
+        "path": "canonical/runtime/enforce_goal_hierarchy.py",
+        "text": "CIRCULAR_FRONTIER_PROOF_FORBIDDEN"
+      }
+    ]
+  }
+}
