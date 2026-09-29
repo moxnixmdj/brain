@@ -7,10 +7,10 @@
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
   "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
-  "causal_blocker": "HELDOUT_003_FRESHNESS_SPENT_BY_UNAUTHORIZED_SPRITE_START__HARD_ZERO_SPEND_ADMISSION_UNPROVEN__FIRST_TERMINAL_RESULT_EXPOSES_BOUND_CAPABILITIES_PYTHON_LIBRARY_CODEC_IMPORT_FAILURE__PR149_TRANSITION_PROVENANCE_UNCLEAN__CANONICAL_STATE_STILL_COMMANDS_EXECUTION",
+  "causal_blocker": "HELDOUT_003_FRESHNESS_SPENT_BY_UNAUTHORIZED_SPRITE_START__HARD_ZERO_SPEND_ADMISSION_UNPROVEN__FIRST_TERMINAL_RESULT_DIAGNOSTIC_ONLY__PR149_TRANSITION_PROVENANCE_UNCLEAN__CANONICAL_STATE_STILL_COMMANDS_EXECUTION",
   "action_kind": "RECONCILE_FRONTIER",
-  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::HELDOUT_003_FRESHNESS_SPENT_BY_UNAUTHORIZED_SPRITE_START__HARD_ZERO_SPEND_ADMISSION_UNPROVEN__FIRST_TERMINAL_RESULT_EXPOSES_BOUND_CAPABILITIES_PYTHON_LIBRARY_CODEC_IMPORT_FAILURE__PR149_TRANSITION_PROVENANCE_UNCLEAN__CANONICAL_STATE_STILL_COMMANDS_EXECUTION::RECONCILE_FRONTIER",
-  "expected_parent_frontier_change": "Preserve PR149's independently-correct post-PR129 authority values while recording its intent-after-guard provenance violation; mark HELDOUT-003 freshness spent/contaminated by the first real evaluator START; quarantine the unauthorized-carrier terminal output from acceptance/promotion while preserving its immediate technical blocker as diagnostic evidence; prohibit replay/second carrier; and replace stale execution-due authority with a lawful post-incident frontier. No capability-runtime repair in this action.",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::HELDOUT_003_FRESHNESS_SPENT_BY_UNAUTHORIZED_SPRITE_START__HARD_ZERO_SPEND_ADMISSION_UNPROVEN__FIRST_TERMINAL_RESULT_DIAGNOSTIC_ONLY__PR149_TRANSITION_PROVENANCE_UNCLEAN__CANONICAL_STATE_STILL_COMMANDS_EXECUTION::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Mark HELDOUT-003 freshness spent/contaminated by the first real evaluator START; quarantine the unauthorized-carrier RESULT from acceptance/promotion while preserving its technical blocker and upstream CONTRACT_INFERRED evidence as diagnostic-only; record PR149's post-guard action-intent mutation as a provenance incident without reverting its independently-correct three authority values; prohibit replay/second carrier; and replace stale execution-due authority with a fresh-orthogonal-gate-first frontier. No capability runtime repair in this action.",
   "highest_leverage_now": true,
   "prior_work_checked": [
     "merged PR129 provider-neutral APT admission repair",
@@ -37,7 +37,7 @@
   "orthogonal_recurrence_count": 0,
   "precommitted_acceptance_gate_exception": false,
   "probe_specific_literals": [],
-  "stop_condition": "After a trusted guard PASS on this exact immutable intent head, add only the bounded provenance/incident evidence and canonical pointer/hierarchy/queue corrections needed to agree that PR149's state values remain substantively valid, HELDOUT-003 freshness is spent/contaminated, its unauthorized-carrier result is diagnostic-only and non-promotable, and no HELDOUT-003 replay or second carrier is legal. Revalidate final head and merge only reconciliation. Do not mutate capability runtime, execute a held-out gate, or consume a second repair.",
+  "stop_condition": "After canonical incident evidence, pointer, hierarchy, and queue agree that HELDOUT-003 is freshness-spent/contaminated and non-promotable, PR149's transition-provenance violation is recorded without reverting its correct authority values, and the sole next frontier is to freeze a fresh orthogonal successor before any generic complete-repository carrier correction, merge only this reconciliation. Do not replay HELDOUT-003, start another carrier, mutate capability runtime, consume a second repair, or claim capability promotion in this action.",
   "governance_change": false,
   "weakens_existing_guard": false,
   "execution_constraints": {
