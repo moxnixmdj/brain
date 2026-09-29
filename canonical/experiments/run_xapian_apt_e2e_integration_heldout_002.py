@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import hashlib, json, os, pathlib, shutil, subprocess, sys, time, traceback
+import base64, hashlib, json, os, pathlib, shutil, signal, subprocess, sys, time, traceback
 
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 RUNTIME=ROOT/"canonical"/"runtime"
@@ -12,6 +12,9 @@ EVID=ROOT/"canonical"/"astra_runtime"/"evidence"
 RESULT=EVID/"XAPIAN-APT-E2E-INTEGRATION-HELDOUT-002__RESULT.json"
 START=EVID/"XAPIAN-APT-E2E-INTEGRATION-HELDOUT-002__EXECUTION_START.json"
 PNG_MAGIC=bytes.fromhex("89504e470d0a1a0a")
+WORKER_ENV="PROJECT_BRAIN_XAPIAN_APT_E2E_HELDOUT_002_WORKER"
+START_MONOTONIC_NS_ENV="PROJECT_BRAIN_XAPIAN_APT_E2E_HELDOUT_002_START_MONOTONIC_NS"
+RESULT_SENTINEL="PROJECT_BRAIN_XAPIAN_APT_E2E_HELDOUT_002_RESULT_B64="
 
 
 def git_blob_sha(path: pathlib.Path) -> str:
@@ -19,14 +22,28 @@ def git_blob_sha(path: pathlib.Path) -> str:
     return hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()
 
 
-def terminal_result(payload, rc):
+def _write_result_exclusive(payload):
     EVID.mkdir(parents=True,exist_ok=True)
-    RESULT.write_text(json.dumps(payload,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+    raw=(json.dumps(payload,indent=2,sort_keys=True)+"\n").encode("utf-8")
+    try:
+        fd=os.open(str(RESULT),os.O_CREAT|os.O_EXCL|os.O_WRONLY,0o644)
+    except FileExistsError:
+        raise SystemExit("TERMINAL_RESULT_ALREADY_EXISTS")
+    with os.fdopen(fd,"wb") as fh:
+        fh.write(raw)
+
+
+def terminal_result(payload, rc):
+    if os.environ.get(WORKER_ENV)=="1":
+        compact=json.dumps(payload,separators=(",",":"),sort_keys=True).encode("utf-8")
+        print(RESULT_SENTINEL+base64.b64encode(compact).decode("ascii"),flush=True)
+        raise SystemExit(rc)
+    _write_result_exclusive(payload)
     print(json.dumps(payload,indent=2,sort_keys=True))
     raise SystemExit(rc)
 
 
-def main():
+def _load_fresh_spec():
     spec=json.loads(SPEC.read_text(encoding="utf-8"))
     vid=spec["validation_id"]
     if vid!="XAPIAN-APT-E2E-INTEGRATION-HELDOUT-002":
@@ -34,18 +51,22 @@ def main():
     freshness=spec.get("freshness") or {}
     if freshness.get("state")!="UNSPENT" or int(freshness.get("execution_count") or 0)!=0:
         raise SystemExit("HELDOUT_NOT_FRESH")
-    if RESULT.exists():
-        raise SystemExit("TERMINAL_RESULT_ALREADY_EXISTS")
-    EVID.mkdir(parents=True,exist_ok=True)
-    try:
-        fd=os.open(str(START),os.O_CREAT|os.O_EXCL|os.O_WRONLY,0o644)
-    except FileExistsError:
-        raise SystemExit("EXECUTION_START_ALREADY_EXISTS")
-    with os.fdopen(fd,"w",encoding="utf-8") as fh:
-        json.dump({"validation_id":vid,"pid":os.getpid(),"started_unix_ns":time.time_ns()},fh,sort_keys=True)
-        fh.write("\n")
+    return spec,vid
 
-    t0=time.monotonic()
+
+def _start_t0():
+    raw=os.environ.get(START_MONOTONIC_NS_ENV)
+    if raw:
+        return int(raw)/1_000_000_000
+    return time.monotonic()
+
+
+def worker_main():
+    spec,vid=_load_fresh_spec()
+    if not START.exists():
+        raise SystemExit("EXECUTION_START_MISSING")
+
+    t0=_start_t0()
     observed_runtime={}
     try:
         integ=spec["runtime_integrity"]
@@ -159,6 +180,109 @@ def main():
             "required_next_action":"RECONCILE_EXACT_FIRST_TERMINAL_BLOCKER__NO_SECOND_REPAIR_BEFORE_RECONCILIATION",
         }
         terminal_result(failure,2)
+
+
+def _decode_worker_result(stdout):
+    for line in reversed(str(stdout or "").splitlines()):
+        if not line.startswith(RESULT_SENTINEL):
+            continue
+        raw=base64.b64decode(line[len(RESULT_SENTINEL):],validate=True)
+        return json.loads(raw.decode("utf-8"))
+    return None
+
+
+def supervisor_main():
+    spec,vid=_load_fresh_spec()
+    if RESULT.exists():
+        raise SystemExit("TERMINAL_RESULT_ALREADY_EXISTS")
+    EVID.mkdir(parents=True,exist_ok=True)
+    t0=time.monotonic()
+    t0_ns=time.monotonic_ns()
+    try:
+        fd=os.open(str(START),os.O_CREAT|os.O_EXCL|os.O_WRONLY,0o644)
+    except FileExistsError:
+        raise SystemExit("EXECUTION_START_ALREADY_EXISTS")
+    with os.fdopen(fd,"w",encoding="utf-8") as fh:
+        json.dump({
+            "validation_id":vid,
+            "supervisor_pid":os.getpid(),
+            "started_unix_ns":time.time_ns(),
+            "hard_validation_wall_s":spec["acceptance"]["hard_validation_wall_s"],
+        },fh,sort_keys=True)
+        fh.write("\n")
+
+    env=os.environ.copy()
+    env[WORKER_ENV]="1"
+    env[START_MONOTONIC_NS_ENV]=str(t0_ns)
+    proc=subprocess.Popen(
+        [sys.executable,str(pathlib.Path(__file__).resolve())],
+        cwd=ROOT,
+        env=env,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        start_new_session=True,
+    )
+    hard_s=float(spec["acceptance"]["hard_validation_wall_s"])
+    remaining=max(0.001,hard_s-(time.monotonic()-t0))
+    try:
+        stdout,stderr=proc.communicate(timeout=remaining)
+    except subprocess.TimeoutExpired:
+        try:
+            os.killpg(proc.pid,signal.SIGTERM)
+        except ProcessLookupError:
+            pass
+        try:
+            stdout,stderr=proc.communicate(timeout=2)
+        except subprocess.TimeoutExpired:
+            try:
+                os.killpg(proc.pid,signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+            stdout,stderr=proc.communicate()
+        total=time.monotonic()-t0
+        failure={
+            "schema":"PROJECT_BRAIN_XAPIAN_APT_E2E_INTEGRATION_HELDOUT_RESULT_V1",
+            "validation_id":vid,
+            "acceptance_gate_pass":False,
+            "error":"TimeoutError:HARD_VALIDATION_WALL_EXCEEDED",
+            "total_wall_s":round(total,6),
+            "hard_validation_wall_s":spec["acceptance"]["hard_validation_wall_s"],
+            "worker_process_group_killed":True,
+            "package_hints_used_by_runtime":False,
+            "prebound_registry_route_used":False,
+            "promotion_authorized":False,
+            "required_next_action":"RECONCILE_EXACT_FIRST_TERMINAL_BLOCKER__NO_SECOND_REPAIR_BEFORE_RECONCILIATION",
+        }
+        terminal_result(failure,2)
+
+    if stderr:
+        print(stderr,end="",file=sys.stderr)
+    payload=_decode_worker_result(stdout)
+    if payload is None:
+        total=time.monotonic()-t0
+        payload={
+            "schema":"PROJECT_BRAIN_XAPIAN_APT_E2E_INTEGRATION_HELDOUT_RESULT_V1",
+            "validation_id":vid,
+            "acceptance_gate_pass":False,
+            "error":"RuntimeError:WORKER_EXITED_WITHOUT_TERMINAL_RESULT",
+            "worker_returncode":proc.returncode,
+            "total_wall_s":round(total,6),
+            "hard_validation_wall_s":spec["acceptance"]["hard_validation_wall_s"],
+            "package_hints_used_by_runtime":False,
+            "prebound_registry_route_used":False,
+            "promotion_authorized":False,
+            "required_next_action":"RECONCILE_EXACT_FIRST_TERMINAL_BLOCKER__NO_SECOND_REPAIR_BEFORE_RECONCILIATION",
+        }
+        terminal_result(payload,2)
+    terminal_result(payload,0 if proc.returncode==0 and payload.get("acceptance_gate_pass") is True else 2)
+
+
+def main():
+    if os.environ.get(WORKER_ENV)=="1":
+        worker_main()
+    supervisor_main()
+
 
 if __name__=="__main__":
     main()
