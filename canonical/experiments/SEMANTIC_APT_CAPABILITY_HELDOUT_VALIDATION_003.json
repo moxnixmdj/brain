@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_SEMANTIC_APT_CAPABILITY_HELDOUT_VALIDATION_V1",
+  "validation_id": "SEMANTIC-APT-CAPABILITY-HELDOUT-VALIDATION-003",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "status": "FROZEN_BEFORE_SEMANTIC_APT_RUNTIME_REPAIR",
+  "provenance": {
+    "selected_after": "BATCHED-EXECUTABLE-EVIDENCE-HELDOUT-VALIDATION-002_TERMINAL_FAIL",
+    "selected_before_any_successor_runtime_mutation": true,
+    "repository_search_precheck": "No prior Brain references found for qrencode, sox, jq, or qpdf on the default branch before freeze.",
+    "spent_and_prior_diagnostic_families_excluded": true
+  },
+  "cases": [
+    {
+      "effect_id": "HELDOUT-QR-003",
+      "goal": "Create a QR Code image from arbitrary text and save it as a PNG.",
+      "oracle_families": [
+        "qrencode"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-AUDIO-CONVERT-003",
+      "goal": "Convert a WAV audio recording into FLAC audio while preserving the audio content.",
+      "oracle_families": [
+        "sox"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-JSON-TRANSFORM-003",
+      "goal": "Filter and transform JSON data from the command line.",
+      "oracle_families": [
+        "jq"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-PDF-LINEARIZE-003",
+      "goal": "Linearize a PDF file for faster web viewing without changing its page content.",
+      "oracle_families": [
+        "qpdf"
+      ]
+    }
+  ],
+  "acceptance": {
+    "heldout_oracle_family_recall_min": 0.75,
+    "heldout_top20_oracle_recall_min": 0.75,
+    "package_hints_forbidden": true,
+    "task_specific_literals_forbidden": true,
+    "hard_validation_wall_s": 300,
+    "incremental_spend_usd": 0
+  },
+  "execution_surface_requirements": {
+    "linux_family": "Ubuntu/Debian with complete normal APT package metadata and all applicable Contents indexes.",
+    "normal_apt_packages_metadata_required": true,
+    "architecture_all_contents_required": true,
+    "outbound_network_required": false,
+    "exact_runtime_bytes_required": true
+  },
+  "promotion_authorized": false
+}
