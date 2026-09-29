@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_INTEGRATION_DELTA_PROBE_V1",
+  "probe_id": "APT-XAPIAN-ACQUISITION-INTEGRATION-DELTA-001",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "status": "FROZEN_BEFORE_RUNTIME_REPAIR",
+  "provenance": "Selected from exact current-main static interface evidence after PR96 inheritance. No HELDOUT-005 case is reused.",
+  "protected_pre_repair_blobs": {
+    "capability_discovery": "b9e7423ab24bf2da98869b02d782e791a779892a",
+    "auto_capability_acquisition": "fc80ede8225cc51dac77be6d41aa2a1c757c6ee8",
+    "auto_apt_cli_acquisition": "786f7de7df853cfaec2826f9471942b001e7eadc"
+  },
+  "blocker": "APT_FULL_METADATA_XAPIAN_CANDIDATES_DROPPED_BEFORE_APT_PROBE_AND_CONTRACT_INFERENCE_BY_LEGACY_SOURCE_AND_SCORE_ADMISSION",
+  "repair_budget": {
+    "generic_repairs": 1,
+    "replays_after_repair": 1
+  },
+  "focused_acceptance": [
+    "A synthetic APT_FULL_METADATA_XAPIAN candidate with SEMANTIC_PACKAGE_EXECUTABLE_OWNERSHIP, zero cost/secrets/friction, pinned version and archive SHA survives APT acquisition admission.",
+    "The same source without executable-ownership verification does not gain privileged admission merely from its source label.",
+    "Legacy APT_CATALOG candidate admission behavior remains covered.",
+    "APT_FULL_METADATA_XAPIAN is classified as a local apt_cli route by federated selection.",
+    "No package hint, task-specific literal, HELDOUT-005 case, candidate installation, or candidate execution is required for this focused integration delta."
+  ],
+  "terminal_rule": "After exactly one generic admission repair, run only the focused integration delta, reconcile its first result, then decide whether a fresh unseen end-to-end tool-learning gate is warranted. Do not proceed directly to contract repair.",
+  "incremental_spend_usd": 0
+}
