@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_DEBIAN_FULL_METADATA_XAPIAN_HELDOUT_VALIDATION_V1",
+  "validation_id": "DEBIAN-FULL-METADATA-XAPIAN-HELDOUT-VALIDATION-005",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "status": "FROZEN_BEFORE_RUNTIME_MUTATION",
+  "provenance": {
+    "selected_after": "DEBTAGS-SEMANTIC-APT-HELDOUT-VALIDATION-004_TERMINAL_TIMEOUT",
+    "selected_before_any_successor_runtime_mutation": true,
+    "repository_search_precheck": "No prior Brain references found for yq, parallel, rsync, or hyperfine before freeze.",
+    "excluded_spent_or_exposed_families": true
+  },
+  "cases": [
+    {
+      "effect_id": "HELDOUT-YAML-PROCESS-005",
+      "goal": "Query and transform a YAML document from the command line using jq-style filter expressions.",
+      "oracle_families": [
+        "yq"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-PARALLEL-JOBS-005",
+      "goal": "Execute one shell command for each input line concurrently across available CPU cores while keeping each job's output grouped.",
+      "oracle_families": [
+        "parallel"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-DIRECTORY-SYNC-005",
+      "goal": "Synchronize a directory tree to a remote host efficiently, transferring only changed data while preserving file metadata.",
+      "oracle_families": [
+        "rsync"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-COMMAND-BENCHMARK-005",
+      "goal": "Benchmark a shell command repeatedly with warmup runs and report statistical timing results.",
+      "oracle_families": [
+        "hyperfine"
+      ]
+    }
+  ],
+  "acceptance": {
+    "heldout_oracle_family_recall_min": 0.75,
+    "heldout_top20_oracle_recall_min": 0.75,
+    "package_hints_forbidden": true,
+    "task_specific_literals_forbidden": true,
+    "hard_validation_wall_s": 120,
+    "incremental_spend_usd": 0
+  },
+  "execution_surface_requirements": {
+    "linux_family": "Debian trixie or equivalent faithful Debian-family APT surface",
+    "normal_apt_packages_metadata_required": true,
+    "english_translation_index_required": true,
+    "package_tag_metadata_required": true,
+    "architecture_all_contents_required": true,
+    "architecture_specific_contents_required": true,
+    "python3_xapian_required": true,
+    "exact_runtime_bytes_required": true,
+    "runtime_remote_manpage_enrichment_required": false
+  },
+  "promotion_authorized": false
+}

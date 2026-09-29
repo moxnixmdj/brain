@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_HELDOUT_VALIDATION_TERMINAL_RECONCILIATION_V1",
+  "validation_id": "DEBTAGS-SEMANTIC-APT-HELDOUT-VALIDATION-004",
+  "status": "EXECUTED_ONCE__FAITHFUL_SURFACE__TIMEOUT__SPENT__NO_REPLAY",
+  "checked_on": "2026-09-29",
+  "fresh_acceptance_execution_count": 1,
+  "freshness": "SPENT",
+  "same_case_replay_allowed": false,
+  "authoritative_deployment_id": "23873604-180d-41a8-944c-3511a5725072",
+  "execution_started_at": "2026-09-29T02:33:27.328334605Z",
+  "preflight": {
+    "generic_tests": "PASS",
+    "packages_indexes": 3,
+    "contents_amd64_indexes": 2,
+    "contents_all_indexes": 2,
+    "debian_tag_records": 25324
+  },
+  "protected_identity": {
+    "runtime_git_blob": "5ba38a88eb046caf71914f6dddc2d554f0d83ead",
+    "preserved_test_git_blob": "1228ba50b4aade64489b2dfa50c1528676230f16",
+    "new_test_git_blob": "992abf8f1b9d3ada7fde3dfda0540b6ba42f80ea",
+    "manifest_git_blob": "ab675e28e392f36a7990abea1c8ae62ab8c926ce",
+    "runner_git_blob": "c65286f0b86e1e8bb3cc42b24f692af178044ee9"
+  },
+  "terminal_result": {
+    "validator_exit_code": 124,
+    "validator_timeout": true,
+    "validator_wall_s": 240.044554012,
+    "acceptance_result_emitted": false,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "input_sha256_receipt": "09da69615f6419108d0657de096971da3c0bceab22f695178c6e8e3c6a258744"
+  },
+  "classification": "FAITHFUL_SURFACE_WALL_CLOCK_FAILURE_BEFORE_AGGREGATE_RESULT_COMPLETION",
+  "required_next_action": "REMOVE_REPEATED_PROCESS_FANOUT_AND_REUSE_FULL_DEBIAN_SEMANTIC_METADATA__FREEZE_NEW_UNSEEN_GATE_BEFORE_RUNTIME_MUTATION"
+}
