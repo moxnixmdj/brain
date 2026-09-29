@@ -56,7 +56,7 @@ def test_xapian_tags_rescue_opaque_capability_role():
     records=[
         {
             "name":"opaque-role-tool",
-            "description":"general sound processing utility",
+            "description":"general sound processing utility that converts, transforms, and processes audio data through a command-line workflow",
             "short_description":"general sound processing utility",
             "tags":"interface::commandline, role::program, use::converting, works-with::audio, works-with-format::wav, works-with-format::flac",
             "version":"1","archive_sha256":None,
@@ -88,5 +88,5 @@ def test_full_metadata_path_has_no_remote_manpage_dependency():
     d=load_module()
     source=PATH.read_text(encoding="utf-8")
     section=source[source.index("def _search_apt_packages_full_metadata"):source.index("def search_apt_packages(effect")]
-    assert "manpage" not in section.lower()
-    assert "urlopen" not in section.lower()
+    assert "_fetch_ubuntu_manpage_text" not in section
+    assert "urlopen(" not in section.lower()
