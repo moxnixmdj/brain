@@ -1,0 +1,139 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "HARDEN-VOLATILE-ROUTE-PREFLIGHT-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "PROGRAM_OPERATING_STRATEGY",
+  "probe_id": null,
+  "causal_blocker": "FRESH_ROUTE_FRONTIER_TIMESTAMP_CAN_LAUNDER_STALE_VOLATILE_EXECUTION_CAPABILITY__NO_CURRENT_SELECTED_ROUTE_PREFLIGHT_REQUIRED",
+  "action_kind": "USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::PROGRAM_OPERATING_STRATEGY::FRESH_ROUTE_FRONTIER_TIMESTAMP_CAN_LAUNDER_STALE_VOLATILE_EXECUTION_CAPABILITY__NO_CURRENT_SELECTED_ROUTE_PREFLIGHT_REQUIRED::USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "expected_parent_frontier_change": "Every consequential selected route must prove its execution-critical dependencies are currently ready before execution; volatile external dependencies require recent direct or independent preflight evidence and cannot be qualified by documentation, public status, or historical success alone.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Merged PR219 live challenger frontier enforcement",
+    "Open PR223 fresh Task C route frontier selecting GitHub public runner",
+    "Direct repository evidence that GitHub-hosted jobs are failing before Set up job while PR223 still describes the runner as reliable",
+    "GitHub billing docs explaining account quota can block hosted runners even while public Actions status is operational"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 3,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Merge only the minimum law/schema/template/gate/trusted-validator coherence that makes current execution preflight mandatory and rejects stale or generic-only availability evidence; then stop governance work and return to fresh Task C execution on a currently proven carrier.",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "user_authorization_summary": "User explicitly instructed the system to improve everything that should be improved perfectly after the discovery-system failure.",
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "cd6c117b160a9fd5dda66af4b9795b7642ec39ab",
+    "real_outcome": "Prevent fresh discovery paperwork from authorizing a route whose actual carrier, account entitlement, endpoint, or other runtime dependency is unavailable now.",
+    "required_capability": "Machine-enforced selected-route execution preflight with volatile dependency freshness and evidence-class requirements.",
+    "obs_goal": {
+      "real_outcome": "Consequential work starts only on a route that is both the best currently evidenced route and currently executable.",
+      "proxy_goals_deleted": [
+        "Special-case GitHub Actions",
+        "Special-case InstaCloud",
+        "Add another monitoring daemon"
+      ],
+      "surviving_necessity": "Extend the existing live challenger frontier with execution-readiness proof rather than another provider-specific rule."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V2",
+        "RECURSIVE_OBS_RECEIPT_SCHEMA_V3",
+        "ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V2",
+        "GOAL_HIERARCHY_ACTION_GATE_V5",
+        "CRITICAL_PATH_PRE_ACTION_GATE_V6",
+        "trusted enforce_goal_hierarchy.py"
+      ],
+      "external_existing_routes_checked": [
+        "Not applicable to the governance implementation itself; the trusted guard is already the canonical enforcement path."
+      ],
+      "capability_work_deleted": [
+        "No provider-specific carrier blacklist",
+        "No new scheduler",
+        "No background availability service",
+        "No duplicated trusted validator"
+      ],
+      "surviving_gap": "The route frontier validates discovery freshness but does not validate current selected-route execution readiness."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Intrinsic to the current V3 route-frontier contract.",
+      "delete_bypass_substitute_options": [
+        "Ignore availability and trust recent discovery timestamp: rejected by PR223 counterexample.",
+        "Use public service status only: rejected because account quota/capacity can fail while provider status is green.",
+        "Provider-specific exceptions: rejected as non-general.",
+        "Add generic selected-route preflight to existing trusted guard: survives."
+      ],
+      "surviving_causal_blocker": "No machine-required current preflight binds the selected route to its volatile execution dependencies."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REPAIR existing live frontier with selected-route execution preflight",
+        "Add provider-specific availability exceptions",
+        "Build separate availability monitoring service"
+      ],
+      "losing_routes_reason": "Provider exceptions do not generalize; a monitoring service adds machinery and latency while the trusted guard can enforce submitted current evidence directly.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use deterministic validator regressions: a fresh route frontier with a failed or stale volatile preflight must reject; current direct-ready preflight must pass; public-status-only evidence for account-specific carrier availability must reject."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any convention that treats route-frontier checked_at as proof the route can execute now",
+        "Historical-success evidence used as current carrier availability evidence"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Carrier readiness",
+        "Account entitlement readiness",
+        "Endpoint availability",
+        "Current runtime dependency qualification"
+      ],
+      "fresh_reuse_plan": "The next Task C intent must refresh its route frontier and attach current preflight evidence for the exact selected execution path before any run."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse V2 law architecture",
+        "Reuse V3 route frontier",
+        "Reuse current trusted validator and gates"
+      ],
+      "search_stop_decision": "The observed false-positive authorization has a localized generic cause and no new control plane is needed.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "REPAIR_EXISTING_ROUTE_FRONTIER_WITH_EXECUTION_PREFLIGHT",
+      "PROVIDER_SPECIFIC_AVAILABILITY_EXCEPTIONS",
+      "SEPARATE_AVAILABILITY_MONITOR"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PROVIDER_SPECIFIC_AVAILABILITY_EXCEPTIONS",
+      "SEPARATE_AVAILABILITY_MONITOR"
+    ],
+    "selected_surviving_route": "REPAIR_EXISTING_ROUTE_FRONTIER_WITH_EXECUTION_PREFLIGHT",
+    "why_selected_route_is_fastest_sufficient": "It reuses the mandatory trusted enforcement path, directly closes the observed false-positive class, and adds no always-on machinery.",
+    "expected_parent_level_state_change": "Every consequential selected route must prove its execution-critical dependencies are currently ready before execution; volatile external dependencies require recent direct or independent preflight evidence and cannot be qualified by documentation, public status, or historical success alone.",
+    "stop_condition": "Merge only the minimum law/schema/template/gate/trusted-validator coherence that makes current execution preflight mandatory and rejects stale or generic-only availability evidence; then stop governance work and return to fresh Task C execution on a currently proven carrier.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "This governance repair reuses Brain's existing trusted control path; no external supplier is being selected for the governance implementation itself."
+    }
+  }
+}
