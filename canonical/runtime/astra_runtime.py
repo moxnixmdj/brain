@@ -5496,7 +5496,7 @@ def run_goal(step, mission):
             if grounded_count>0:
                 raise Blocker(
                     "BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_REQUIRED:"+json.dumps({
-                      "evidence_path":str(grounding_path.relative_to(ROOT)),
+                      "evidence_path":(str(grounding_path.relative_to(ROOT)) if ROOT in grounding_path.parents else str(grounding_path)),
                       "candidate_capability_ids":grounding.get("candidate_capability_ids") or [],
                       "unresolved_clause_indexes":grounding.get("unresolved_clause_indexes") or [],
                       "grounded_clause_count":grounded_count,
