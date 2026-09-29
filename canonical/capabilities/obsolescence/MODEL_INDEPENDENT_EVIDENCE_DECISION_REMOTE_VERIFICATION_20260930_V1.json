@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_MODEL_INDEPENDENT_EVIDENCE_DECISION_REMOTE_VERIFICATION_V1",
+  "status": "VERIFIED",
+  "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+  "observed_at_utc": "2026-09-29T22:56:10Z",
+  "public_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify/evidence-decision-pr244-20260930",
+    "workflow": "Verify PR244 Model-Independent Evidence Decision",
+    "run_id": 36642428325,
+    "job_id": 109657545598,
+    "head_sha": "c96efa66a27a32169a074993b2a39f4ebf6e2d4a",
+    "conclusion": "success"
+  },
+  "exact_bytes": {
+    "producer_git_blob": "7690b26800b2701dac9e187a92c5561d79d831dd",
+    "verifier_git_blob": "63cf325320c7b91bf48ea2f2769c999c5a090929",
+    "regression_git_blob": "f8a586882f8f4198e0c8407f1cb7241ff93fe917",
+    "task_a_input_git_blob": "61522fe3e6af1517c2ea5ad2bbc853a957a251b1",
+    "task_b_input_git_blob": "a680bae7d1cb90b035e6048df5558c7cac1f7383"
+  },
+  "adversarial_regressions": {
+    "count": 8,
+    "status": "PASS"
+  },
+  "model_dependency_count": 0,
+  "producer_independent_verifier": true,
+  "real_tasks": [
+    {
+      "decision_id": "REAL-TASK-A-ZERO-SPEND-CARRIER-20260930",
+      "status": "DECIDED",
+      "selected_alternative": "PUBLIC_GITHUB_ACTIONS",
+      "decision_confidence": 1,
+      "input_sha256": "586f9fb580ecadb3ed742ee586dda71a6df7a61a9e08bd506bf1c59fad6181b2",
+      "result_sha256": "455a3d012c29ef9051f3c95c60276dc78e81e0b340738837495b9ebd41b927eb",
+      "independent_verifier_reason": "VERIFIED"
+    },
+    {
+      "decision_id": "REAL-TASK-B-CLICK-REPAIR-ROUTE-20260930",
+      "status": "DECIDED",
+      "selected_alternative": "UPSTREAM_HISTORY_REUSE",
+      "decision_confidence": 1,
+      "input_sha256": "c1058c0a17429c04600a91947cae31e99a77bd61b6a64c3e9a63a5940361cde7",
+      "result_sha256": "83d4262ccf1262da16d2a721fcf54ba05612c5f7a8dd4384461776a85c829ea0",
+      "independent_verifier_reason": "VERIFIED"
+    }
+  ],
+  "limitations": [
+    "The capability consumes already-typed evidence and does not claim arbitrary natural-language interpretation.",
+    "This receipt proves the producer/verifier contract and two real decisions; ASTRA bound-capability integration is verified separately."
+  ]
+}
