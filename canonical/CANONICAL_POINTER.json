@@ -148,11 +148,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "ONE_GENERIC_BATCHED_LITERAL_APT_FILE_ACQUISITION_REPAIR__USE_FROM_FILE_SINGLE_SCAN__POSTFILTER_EXECUTABLE_PATHS__BOUND_CACHE_AND_PROGRESSIVELY_REQUEST_MANPAGES__FRESH_UNSEEN_GATE__THEN_RECONCILE",
+    "next_step": "REUSE_PR56_GENERIC_CLI_CONTRACT_IR_EVIDENCE__FIRST_RUN_CHEAP_SPENT_PROBE_DIAGNOSTIC_ON_THE_VERIFIED_DISCOVERY_RUNTIME__IF_VIABLE_SUPPLIERS_NOW_REACH_CONTRACT_INFERENCE_THEN_FREEZE_A_NEW_ORTHOGONAL_END_TO_END_GATE_BEFORE_ANY_CONTRACT_RUNTIME_MUTATION",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "EVIDENCE_ACQUISITION_USES_REPEATED_SLOW_APT_FILE_REGEX_SCANS_AND_EXCESSIVE_REMOTE_MANPAGE_FANOUT__BATCH_LITERAL_MULTI_PATTERN_ACQUISITION_AND_PROGRESSIVE_CACHED_ENRICHMENT_NOT_YET_INTEGRATED",
+    "critical_blocker": "VIABLE_APT_SUPPLIER_DISCOVERY_AND_SELECTION_VERIFIED__GENERIC_CLI_CONTRACT_INFERENCE_AND_INVOCATION_NOT_YET_PROVEN_END_TO_END_AFTER_THE_UPSTREAM_DISCOVERY_FIX",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -229,7 +229,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "TOOL_DISCOVERY_SELECTION_AND_LEARNING__BATCHED_EXECUTABLE_EVIDENCE_ACQUISITION_AND_PROGRESSIVE_ENRICHMENT",
+    "highest_leverage_capability_gap": "TOOL_DISCOVERY_SELECTION_AND_LEARNING__GENERIC_CLI_CONTRACT_INFERENCE_AFTER_VERIFIED_SUPPLIER_DISCOVERY",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -490,6 +490,19 @@
         36486527162
       ],
       "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EVIDENCE_ACQUISITION_STRUCTURAL_CAUSE_RECONCILIATION_V1.json"
+    },
+    "tool_discovery_selection_reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
+    "apt_supplier_discovery_route": {
+      "status": "VERIFIED_INHERITED_ROUTE__PARENT_CAPABILITY_STILL_OPEN",
+      "route": "DEBIAN_TRANSLATION_EN_PLUS_TAGS_PLUS_XAPIAN_BM25_PLUS_DIRECT_CONTENTS_EXECUTABLE_OWNERSHIP",
+      "authoritative_validation": "DEBIAN-FULL-METADATA-XAPIAN-HELDOUT-VALIDATION-005",
+      "oracle_family_recall": 1,
+      "top20_oracle_recall": 1,
+      "total_wall_s": 16.233238,
+      "hard_wall_s": 120,
+      "incremental_spend_usd": 0,
+      "package_hints_used": false,
+      "accepted_execution_count": 1
     }
   },
   "provider_rules": {
