@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-PR89-HELDOUT005-PASS-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "causal_blocker": "HELDOUT_005_FRESH_PASS_EXISTS_ON_QUARANTINED_PR89_BUT_VERIFIED_DEBIAN_APT_CLI_DISCOVERY_ROUTE_IS_NOT_YET_INHERITED_IN_MAIN",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::HELDOUT_005_FRESH_PASS_EXISTS_ON_QUARANTINED_PR89_BUT_VERIFIED_DEBIAN_APT_CLI_DISCOVERY_ROUTE_IS_NOT_YET_INHERITED_IN_MAIN::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Preserve the sole admissible HELDOUT-005 PASS, inherit the exact verified Debian full-metadata/Xapian/direct-Contents runtime route into canonical main, remove the superseded repeated apt-file/manpage latency blocker for the verified Debian/APT CLI discovery scope, and force a fresh highest-leverage frontier recomputation without claiming the broader tool-learning family obsolete.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR85 HELDOUT-002 terminal failure",
+    "PR86 HELDOUT-003 terminal failure",
+    "PR87 HELDOUT-004 terminal failure",
+    "PR89 HELDOUT-005 sole authoritative PASS",
+    "PR89 post-spend replay quarantine",
+    "canonical laws and active queue",
+    "open pull requests"
+  ],
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 4,
+  "precommitted_acceptance_gate_exception": true,
+  "probe_specific_literals": [],
+  "stop_condition": "No new experiment or replay. Copy only exact already-verified PR89 route/evidence, reconcile canonical frontier state, pass the trusted drift guard and focused regressions, then merge if clean. HELDOUT-005 remains permanently spent.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
