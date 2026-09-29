@@ -28,7 +28,7 @@ CONSTRAINT_ONLY={
 GENERIC_ACTION={
     "choose","select","determine","save","create","make","write","read","inspect",
     "analyze","analyse","verify","check","convert","generate","extract","produce",
-    "compare","rank","evaluate","decide","decision","output","result","artifact",
+    "compare","rank","evaluate","decide","output","result","artifact",
 }
 ACTION_CONNECTOR=(
     "choose|select|determine|save|create|generate|convert|extract|verify|check|"
