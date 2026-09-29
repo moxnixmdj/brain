@@ -5287,6 +5287,13 @@ def _goal_observation_context(observations, max_chars=GOAL_OBSERVATION_CONTEXT_M
     if max_chars<2000 or max_chars>20000:
         raise Blocker("GOAL_OBSERVATION_CONTEXT_BUDGET_OUT_OF_RANGE")
 
+    def key_label(value):
+        text=str(value)
+        if len(text)<=120:
+            return text
+        digest=hashlib.sha256(text.encode("utf-8","replace")).hexdigest()[:12]
+        return text[:96]+"...[KEY_SHA256:"+digest+"]"
+
     def bounded(value,string_limit,list_limit,depth=0):
         if depth>=5:
             return {"__brain_compacted__":type(value).__name__}
@@ -5304,7 +5311,7 @@ def _goal_observation_context(observations, max_chars=GOAL_OBSERVATION_CONTEXT_M
         if isinstance(value,dict):
             keys=sorted(value,key=lambda x:str(x))
             selected=keys[:40]
-            out={str(k):bounded(value[k],string_limit,list_limit,depth+1) for k in selected}
+            out={key_label(k):bounded(value[k],string_limit,list_limit,depth+1) for k in selected}
             if len(keys)>40:
                 out["__brain_truncated_keys__"]=len(keys)-40
             return out
@@ -5328,7 +5335,7 @@ def _goal_observation_context(observations, max_chars=GOAL_OBSERVATION_CONTEXT_M
                 "trust_class":trust_class,
                 "action":bounded(action,string_limit,list_limit),
                 "result_data":bounded(result,string_limit,list_limit),
-                "result_keys":sorted(str(k) for k in result.keys())[:40],
+                "result_keys":sorted(key_label(k) for k in result.keys())[:40],
             })
         payload={
             "schema":"PROJECT_BRAIN_GOAL_OBSERVATION_CONTEXT_V1",
@@ -5379,7 +5386,7 @@ def _goal_observation_context(observations, max_chars=GOAL_OBSERVATION_CONTEXT_M
                     or ""
                 )[:80],
                 "result_keys":sorted(
-                    str(k) for k in (
+                    key_label(k) for k in (
                         (item.get("result") or {}).keys()
                         if isinstance(item,dict) and isinstance(item.get("result"),dict)
                         else []
