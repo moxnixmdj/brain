@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-H004-CHATGPT-LINUX-CARRIER-READONLY-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "causal_blocker": "HELDOUT_004_FROZEN_UNSPENT__EXECUTION_SURFACE_SOURCE_TREE_FIDELITY_DIVERGENCE_PROVEN__EXACT_HISTORICAL_MECHANISM_UNPROVEN__GENERIC_CARRIER_FIDELITY_CORRECTION_AND_HARD_ZERO_QUALIFICATION_REQUIRED",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::HELDOUT_004_FROZEN_UNSPENT__EXECUTION_SURFACE_SOURCE_TREE_FIDELITY_DIVERGENCE_PROVEN__EXACT_HISTORICAL_MECHANISM_UNPROVEN__GENERIC_CARRIER_FIDELITY_CORRECTION_AND_HARD_ZERO_QUALIFICATION_REQUIRED::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Reproduce only the minimum read-only carrier facts needed to adjudicate the already-present ChatGPT Linux surface without consuming HELDOUT-004: verify Debian-family identity, inspect whether usable APT list metadata exists, and perform one read-only DNS/HTTP reachability check to the configured Debian mirror. If the surface has no package metadata and cannot reach the configured Debian mirror, classify this carrier as rejected before HELDOUT START, preserve exactly one evidence record, and reconcile pointer/hierarchy/queue to qualification of the next already-discovered hard-zero remote Linux route. Do not repair this carrier, run apt-get update, transport project source, or provision infrastructure in this lane.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR176 corrected the historical carrier evidence boundary and kept HELDOUT-004 UNSPENT",
+    "PR20 proves exact Git-blob reconstruction on a ChatGPT Linux carrier class but not the current H004 APT surface",
+    "PR35 and PR45 prove reusable content-addressed exact-source materialization mechanisms",
+    "quarantined PR178 observed this current carrier lacked usable APT metadata and Debian mirror DNS, but exceeded its read-only scope by a later apt-get update attempt; it is diagnostic-only and not merge authority",
+    "closed PR181 and PR182 were duplicate/premature carrier lanes",
+    "no new infrastructure is necessary to decide whether the already-present carrier is currently usable"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "After the trusted intent-head guard, perform exactly one non-mutating carrier snapshot: read /etc/os-release and configured APT sources; count /var/lib/apt/lists entries; issue one read-only curl HEAD request to the configured Debian mirror with a short timeout. Do not run apt-get update/install, write APT state, transport repository bytes, start/dispatch/evaluate HELDOUT-004, replay HELDOUT-003, access Sprite, provision Railway/new hosts, use Val Town/user laptop, or incur paid/unproven-cost infrastructure. Preserve one evidence record and only the minimal pointer/hierarchy/queue reconciliation, then stop.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
