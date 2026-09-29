@@ -10,7 +10,7 @@
     "verified_real_tasks_completed": 1,
     "fresh_reuse_passes": 0,
     "frontier_dependencies_removed": 0,
-    "residual_gaps_localized": 1
+    "residual_gaps_localized": 2
   },
   "efficiency_since_epoch_start": {
     "capability_acquisition_wall_s_samples": [],
@@ -75,7 +75,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "COMPLETE_MATERIALLY_DIFFERENT_REAL_TECHNICAL_OR_SCIENTIFIC_TASK_B__THEN_ADJUDICATE_FRONTIER_CAPABILITY_ACQUISITION",
+  "next_progress_event_target": "EXECUTE_DEPENDENCY_FREE_REAL_TASK_B_USING_LOCAL_NONFRONTIER_QWEN3_5_4B_ROUTE__VERIFY_REAL_RESULT__NO_POLLINATIONS_REPLAY",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -110,6 +110,17 @@
         "RESIDUAL_GAP_LOCALIZED"
       ],
       "residual_gap": "CROSS_DOMAIN_REAL_TASK_B_REQUIRED_TO_PROVE_GENERAL_FRONTIER_CAPABILITY_TRANSFER_AND_REMOVE_FRONTIER_DEPENDENCE",
+      "incremental_spend_usd": 0
+    },
+    {
+      "event_id": "POLLINATIONS_NONFRONTIER_PLANNER_ROUTE_FALSIFIED_20260929",
+      "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+      "status": "ROUTE_FALSIFIED__RESIDUAL_GAP_LOCALIZED__NO_CAPABILITY_CREDIT",
+      "evidence_path": "canonical/capabilities/obsolescence/NONFRONTIER_AGENTIC_TASK_B_POLLINATIONS_ROUTE_FALSIFICATION_20260929_V1.json",
+      "parent_level_changes": [
+        "RESIDUAL_GAP_LOCALIZED"
+      ],
+      "residual_gap": "RELIABLE_ZERO_INCREMENTAL_COST_NONFRONTIER_OPEN_ENDED_PLANNER_SUPPLIER_FOR_REAL_PROMPT_LOAD",
       "incremental_spend_usd": 0
     }
   ]
