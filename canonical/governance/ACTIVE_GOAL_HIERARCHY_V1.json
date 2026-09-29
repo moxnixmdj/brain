@@ -121,8 +121,9 @@
     "replay_authorized": false,
     "promotion_authorized": false,
     "repair_runtime_blob_sha": "dbd2b4026149a7a2e731eb3152ca398e30ca625f",
-    "repair_commit_sha": "1802b2dc519d3176324f57d753e08cabc5d1b224",
-    "repair_id": "RELEVANCE_FIRST_PACKAGE_CANDIDATE_GENERATION_WITH_BOUNDED_EXECUTABLE_ENUMERATION_V1"
+    "repair_commit_sha": "aa49d81446e5d042f8cf1cffb3bada9c887fc014",
+    "repair_id": "RELEVANCE_FIRST_PACKAGE_CANDIDATE_GENERATION_WITH_BOUNDED_EXECUTABLE_ENUMERATION_V1",
+    "repair_freeze_commit_sha": "86406b1254b3b8eb290795a76661b7e57dcacf67"
   },
   "antidrift_interlock": {
     "schema": "PROJECT_BRAIN_ANTIDRIFT_EXECUTION_INTERLOCK_V2",
@@ -179,9 +180,10 @@
   },
   "last_completed_generic_repair": {
     "repair_id": "RELEVANCE_FIRST_PACKAGE_CANDIDATE_GENERATION_WITH_BOUNDED_EXECUTABLE_ENUMERATION_V1",
-    "commit": "1802b2dc519d3176324f57d753e08cabc5d1b224",
+    "commit": "aa49d81446e5d042f8cf1cffb3bada9c887fc014",
     "runtime_blob": "dbd2b4026149a7a2e731eb3152ca398e30ca625f",
     "synthetic_verification": "PASS__OPAQUE_EXECUTABLE_ADMITTED_BY_PACKAGE_RELEVANCE__SINGLE_BATCH_ENUMERATION__NON_TIERED_RANK",
-    "heldout_literals_in_runtime": false
+    "heldout_literals_in_runtime": false,
+    "freeze_commit": "86406b1254b3b8eb290795a76661b7e57dcacf67"
   }
 }
