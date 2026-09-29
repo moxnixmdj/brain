@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
   "action_id": "NONFRONTIER-AGENTIC-RESEARCH-TASK-B-AI-SYSTEMS-001",
-  "status": "PROPOSED",
+  "status": "TERMINAL_FAIL_RECONCILED",
   "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
@@ -136,5 +136,17 @@
     "why_selected_route_is_fastest_sufficient": "It is already live, anonymous, credential-free, public-runner compatible, zero incremental spend, and uses Brain's exact current ASTRA runtime. One real execution can decisively pass or expose the next causal gap.",
     "expected_parent_level_state_change": "Execute one real cross-domain AI-systems research task through the public $0 ASTRA runtime using a credential-free non-frontier GPT-OSS planner, independently verify the decision artifact and supplier/runtime identity, and localize any remaining gap without claiming frontier capability acquisition unless dependency-free breadth evidence is sufficient.",
     "stop_condition": "Stop after exactly one public-runner Task-B execution reaches a terminal result and is reconciled. If it passes, record dependency-free Task-B evidence and recompute whether Task A must be rerun without the frontier supplier. If it fails, preserve the first causal failure and acquire only that missing sub-capability. No replay of the same task without a documented root-cause change."
+  },
+  "execution_result": {
+    "route": "PUBLIC_GITHUB_ACTIONS_EXACT_ASTRA_ANONYMOUS_POLLINATIONS",
+    "public_runs": [
+      36622236168,
+      36622510442
+    ],
+    "verdict": "FAIL",
+    "first_terminal_route_failure": "PLANNER_ALL_ROUTES_FAILED_HTTP_402_ON_REAL_PROMPT",
+    "evidence_path": "canonical/capabilities/obsolescence/NONFRONTIER_AGENTIC_TASK_B_POLLINATIONS_ROUTE_FALSIFICATION_20260929_V1.json",
+    "capability_credit": false,
+    "residual_gap_credit": true
   }
 }
