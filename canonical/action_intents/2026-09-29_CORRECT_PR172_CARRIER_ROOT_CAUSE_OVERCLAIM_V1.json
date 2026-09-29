@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "CORRECT-PR172-CARRIER-ROOT-CAUSE-OVERCLAIM-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "causal_blocker": "HELDOUT_004_FROZEN_UNSPENT__LIVE_CARRIER_MATERIALIZATION_OMISSION_PROVEN__GENERIC_CARRIER_CORRECTION_AND_HARD_ZERO_QUALIFICATION_REQUIRED",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::HELDOUT_004_FROZEN_UNSPENT__LIVE_CARRIER_MATERIALIZATION_OMISSION_PROVEN__GENERIC_CARRIER_CORRECTION_AND_HARD_ZERO_QUALIFICATION_REQUIRED::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Correct merged PR172's quarantined provenance and overclaim. Preserve as diagnostic-only the unauthorized post-hoc Sprite observation that /work was non-git and later contained only cli_command.py and node_library_codec.py. Reclassify the proven causal boundary to live execution-surface/source-tree fidelity divergence; explicitly leave the exact historical mechanism (partial initial materialization vs later deletion/replacement vs equivalent path transition) unproven. Keep HELDOUT-004 UNSPENT. Advance only to a provider-neutral pre-START live dependency-closure/hash/import correction.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR170 HELDOUT-004 freeze",
+    "merged PR172 and its own QUARANTINE / DO NOT MERGE comment",
+    "PR171 immutable-intent receipt declaring the narrower evidence boundary",
+    "HELDOUT-003 preserved terminal ImportError",
+    "qualified source branch containing both Python codec modules",
+    "unauthorized post-hoc Sprite read-only observation"
+  ],
+  "evidence_presence_classification": "MERGED_OVERCLAIM_REQUIRES_TRUTH_FIRST_CORRECTION",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Reconcile truth only. No runtime/evaluator/carrier mutation, no held-out execution or replay, no further Sprite use, no Val Town, no user laptop, no paid or unproven-cost execution. Preserve PR172 evidence but mark its authorization/provenance and historical-cause claim as quarantined/superseded.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
