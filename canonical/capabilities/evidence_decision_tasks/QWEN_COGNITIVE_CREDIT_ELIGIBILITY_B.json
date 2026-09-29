@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_TYPED_EVIDENCE_DECISION_TASK_V1",
+  "task_id": "qwen_cognitive_credit_eligibility_b",
+  "target_claim": "grant_project_brain_cognitive_capability_credit_to_qwen_route",
+  "evidence": [
+    {
+      "id": "exact_model_identity_verified",
+      "probability": 0.999,
+      "provenance": [
+        "LOCAL_QWEN3_5_9B_BIOPHYSICS_TASK_B_FALSIFICATION.exact_route.base_model=Qwen/Qwen3.5-9B",
+        "exact GGUF SHA256 verified"
+      ]
+    },
+    {
+      "id": "useful_research_actions_observed",
+      "probability": 0.99,
+      "provenance": [
+        "verified_passes.authoritative_source_selection_observed=true",
+        "four local planner responses observed"
+      ]
+    },
+    {
+      "id": "model_is_in_cognition_path",
+      "probability": 1,
+      "provenance": [
+        "attempted_role=DEPENDENCY_FREE_ZERO_COST_NONFRONTIER_OPEN_ENDED_RESEARCH_PLANNER_FOR_FRESH_BIOPHYSICS_TASK_B",
+        "MODEL_NON_DEPENDENCE_LAW_V1 forbids any model in credited cognition path"
+      ]
+    },
+    {
+      "id": "real_task_not_completed",
+      "probability": 1,
+      "provenance": [
+        "terminal_result.runtime_state=BLOCKED",
+        "terminal_result.real_task_completed=false"
+      ]
+    }
+  ],
+  "support_rules": [
+    {
+      "id": "support_traceable_useful_behavior",
+      "all_of": [
+        "exact_model_identity_verified",
+        "useful_research_actions_observed"
+      ]
+    }
+  ],
+  "contradiction_rules": [
+    {
+      "id": "contra_model_dependency",
+      "all_of": [
+        "model_is_in_cognition_path"
+      ]
+    },
+    {
+      "id": "contra_no_terminal_result",
+      "all_of": [
+        "real_task_not_completed"
+      ]
+    }
+  ],
+  "hard_constraints": [
+    {
+      "id": "credited_cognition_model_dependency_count_zero",
+      "satisfied": false,
+      "failure_outcome": "REJECT",
+      "provenance": [
+        "MODEL_NON_DEPENDENCE_LAW_V1: credited execution path MUST contain no model provider or model artifact"
+      ]
+    },
+    {
+      "id": "credited_real_task_terminally_complete",
+      "satisfied": false,
+      "failure_outcome": "INSUFFICIENT_EVIDENCE",
+      "provenance": [
+        "LOCAL_QWEN3_5_9B_BIOPHYSICS_TASK_B_FALSIFICATION.terminal_result.real_task_completed=false"
+      ]
+    }
+  ],
+  "policy": {
+    "accept_support_min": 0.9,
+    "accept_contradiction_max": 0.2,
+    "reject_contradiction_min": 0.9,
+    "reject_support_max": 0.2,
+    "minimum_margin": 0.5
+  }
+}
