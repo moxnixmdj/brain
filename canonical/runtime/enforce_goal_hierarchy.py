@@ -21,16 +21,40 @@ SENSITIVE_EXACT={"canonical/CANONICAL_POINTER.json"}
 PROTECTED_GUARD_PATHS={
     "canonical/laws/GOAL_HIERARCHY_AND_DRIFT_IMMUNITY_LAW_V1.md",
     "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
-    "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V1.json",
+    "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
+    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
+    "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V3.json",
+    "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V4.json",
     "canonical/runtime/enforce_goal_hierarchy.py",
     ".github/workflows/drift-immunity-guard.yml",
 }
-ALLOWED_NO_PROBE_ACTIONS={
+GOVERNANCE_ACTIONS={
     "GOVERNANCE_GUARD",
+    "USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+}
+ALLOWED_NO_PROBE_ACTIONS=GOVERNANCE_ACTIONS|{
     "RECONCILE_FRONTIER",
     "ORTHOGONAL_PROBE_SELECTION",
     "EVIDENCE_PRESERVATION",
 }
+OBS_REQUIRED_FIELDS=(
+    "canonical_generation_or_commit",
+    "real_outcome",
+    "required_capability",
+    "obs_goal",
+    "obs_capability",
+    "obs_blocker",
+    "obs_solution",
+    "obs_verification",
+    "obs_inherited_system",
+    "obs_obs",
+    "routes_considered",
+    "deleted_or_bypassed_paths",
+    "selected_surviving_route",
+    "why_selected_route_is_fastest_sufficient",
+    "expected_parent_level_state_change",
+    "stop_condition",
+)
 FAIL=[]
 
 def load(path):
@@ -54,6 +78,51 @@ def added_diff(base,head,path):
 
 def is_sensitive(path):
     return path in SENSITIVE_EXACT or any(path.startswith(p) for p in SENSITIVE_PREFIXES)
+
+
+def path_exists_at_ref(ref,path):
+    proc=subprocess.run(
+        ["git","cat-file","-e",f"{ref}:{path}"],
+        cwd=ROOT,text=True,capture_output=True,
+    )
+    return proc.returncode==0
+
+
+def enforce_recursive_obs(intent,files,base):
+    bootstrap_path="canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md"
+    bootstrap=(
+        bool(intent.get("governance_change"))
+        and bool(intent.get("user_authorized_governance_change"))
+        and bootstrap_path in files
+        and not path_exists_at_ref(base,bootstrap_path)
+    )
+    if bootstrap:
+        return
+    obs=intent.get("recursive_obs")
+    if not isinstance(obs,dict):
+        fail("RECURSIVE_OBS_RECEIPT_MISSING")
+        return
+    missing=[k for k in OBS_REQUIRED_FIELDS if k not in obs]
+    if missing:
+        fail("RECURSIVE_OBS_RECEIPT_INCOMPLETE:"+",".join(missing))
+        return
+    bound=str(obs.get("canonical_generation_or_commit") or "")
+    intent_generation=str(intent.get("canonical_generation") or "")
+    if not bound or bound!=intent_generation:
+        fail("RECURSIVE_OBS_GENERATION_BINDING_MISMATCH")
+    route=str(obs.get("selected_surviving_route") or "").strip()
+    why=str(obs.get("why_selected_route_is_fastest_sufficient") or "").strip()
+    if not route or not why:
+        fail("RECURSIVE_OBS_SURVIVING_ROUTE_NOT_PROVEN")
+    considered=obs.get("routes_considered")
+    if not isinstance(considered,list) or not considered:
+        fail("RECURSIVE_OBS_ROUTE_RACE_MISSING")
+    for layer in (
+        "obs_goal","obs_capability","obs_blocker","obs_solution",
+        "obs_verification","obs_inherited_system","obs_obs",
+    ):
+        if not isinstance(obs.get(layer),dict) or not obs.get(layer):
+            fail("RECURSIVE_OBS_LAYER_MISSING:"+layer)
 
 
 def blocker_lease_key(intent):
@@ -164,6 +233,7 @@ def main():
 
     if intent:
         enforce_blocker_lease(intent)
+        enforce_recursive_obs(intent,files,ns.base)
 
     terminal=str(pointer.get("mission_lock",{}).get("terminal_objective") or "")
     if hierarchy.get("terminal_objective")!=terminal:
@@ -181,8 +251,12 @@ def main():
     htarget=hierarchy.get("active_capability_target")
     if selected and selected!=htarget:
         fail("QUEUE_HIERARCHY_CAPABILITY_TARGET_MISMATCH")
-    if intent.get("capability_target")!=htarget:
+    action_kind=str(intent.get("action_kind") or "")
+    governance_action=action_kind in GOVERNANCE_ACTIONS and bool(intent.get("governance_change"))
+    if not governance_action and intent.get("capability_target")!=htarget:
         fail("INTENT_CAPABILITY_TARGET_MISMATCH")
+    if governance_action and intent.get("user_authorized_governance_change") is not True:
+        fail("USER_AUTHORIZED_GOVERNANCE_CHANGE_REQUIRED")
 
     if not intent.get("expected_parent_frontier_change"):
         fail("PARENT_LEVEL_STATE_CHANGE_MISSING")
@@ -191,7 +265,6 @@ def main():
     if not intent.get("stop_condition"):
         fail("STOP_CONDITION_MISSING")
 
-    action_kind=str(intent.get("action_kind") or "")
     probe=intent.get("probe_id")
     active_probe=hierarchy.get("active_probe")
     quarantined={
@@ -199,14 +272,15 @@ def main():
         for x in hierarchy.get("quarantined_probes",[])
         if x.get("may_define_frontier") is False
     }
-    if probe and str(probe) in quarantined:
-        fail("QUARANTINED_PROBE_CANNOT_DEFINE_NEW_ACTION")
-    if probe and active_probe and probe!=active_probe:
-        fail("INTENT_PROBE_NOT_ACTIVE_PROBE")
-    if probe and active_probe is None and action_kind not in {"ORTHOGONAL_PROBE_SELECTION","RECONCILE_FRONTIER"}:
-        fail("NO_ACTIVE_PROBE_BUT_ACTION_TARGETS_PROBE")
-    if not probe and action_kind not in ALLOWED_NO_PROBE_ACTIONS:
-        fail("PROBE_REQUIRED_FOR_THIS_ACTION_KIND")
+    if not governance_action:
+        if probe and str(probe) in quarantined:
+            fail("QUARANTINED_PROBE_CANNOT_DEFINE_NEW_ACTION")
+        if probe and active_probe and probe!=active_probe:
+            fail("INTENT_PROBE_NOT_ACTIVE_PROBE")
+        if probe and active_probe is None and action_kind not in {"ORTHOGONAL_PROBE_SELECTION","RECONCILE_FRONTIER"}:
+            fail("NO_ACTIVE_PROBE_BUT_ACTION_TARGETS_PROBE")
+        if not probe and action_kind not in ALLOWED_NO_PROBE_ACTIONS:
+            fail("PROBE_REQUIRED_FOR_THIS_ACTION_KIND")
 
     probe_specific=bool(intent.get("probe_specific"))
     one_probe_repair=bool(intent.get("generic_repair_from_single_probe"))
