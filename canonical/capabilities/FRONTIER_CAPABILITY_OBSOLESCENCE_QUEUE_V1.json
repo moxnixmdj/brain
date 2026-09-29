@@ -69,33 +69,27 @@
     "REOPENED_BY_REGRESSION"
   ],
   "immediate_frontier": {
-    "selected_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "parent_frontier_capability": null,
-    "objective": "Freshly revalidate the parent open-ended agentic technical/scientific research capability by composing existing model-independent planning, discovery, execution and verification machinery with the newly verified evidence-to-decision synthesis route on one consequential fresh task.",
-    "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "PARENT_COMPOSITION_NOT_FRESHLY_REVALIDATED_AFTER_MODEL_INDEPENDENT_SYNTHESIS_ACQUISITION",
-    "evidence_path": "canonical/capabilities/frontier/OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1.json",
-    "repair_status": "SYNTHESIS_SUBCAPABILITY_VERIFIED_AND_INHERITED__PARENT_FRESH_COMPOSITION_REQUIRED",
-    "prohibition": "NO_MODEL_API__NO_LOCAL_MODEL__NO_MODEL_ARTIFACT_IN_CREDITED_COGNITION_PATH__NO_PRIOR_TASK_REPLAY__NO_PREDECLARED_NEXT_SUBCAPABILITY__NO_SYNTHETIC_BENCHMARK_AS_SUBSTITUTE_FOR_REAL_PARENT_TASK",
-    "next_action": "SELECT_ONE_FRESH_CONSEQUENTIAL_PARENT_TASK__RUN_EXISTING_MODEL_INDEPENDENT_COMPOSED_STACK_WITH_VERIFIED_SYNTHESIS__INDEPENDENTLY_VERIFY__IF_FAIL_LOCALIZE_FIRST_CAUSAL_GAP_ONLY__IF_PASS_COUNT_PARENT_FRESH_REUSE",
+    "selected_capability": "MODEL_INDEPENDENT_GOAL_TO_TASK_GRAPH_FORMULATION_V1",
+    "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "objective": "Acquire the smallest model-independent capability that converts a fresh plain technical objective into an auditable structured subgoal/evidence/constraint/action graph and maps solvable leaves to existing Brain capabilities before supplier discovery.",
+    "selection_metric": "VERIFIED_FORMULATION_CAPABILITY_STRENGTH_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
+    "exact_blocker": "PLAIN_GOAL_MULTI_CAPABILITY_OBJECTIVE_NOT_FORMULATED_INTO_STRUCTURED_EXISTING_CAPABILITY_GRAPH_BEFORE_SUPPLIER_DISCOVERY",
+    "evidence_path": "canonical/capabilities/frontier/MODEL_INDEPENDENT_GOAL_TO_TASK_GRAPH_FORMULATION_V1.json",
+    "repair_status": "FRESH_PARENT_TASK_SPENT__FIRST_CAUSAL_FORMULATION_GAP_LOCALIZED",
+    "prohibition": "NO_MODEL_COGNITION__NO_SERIALIZATION_TASK_REPLAY__NO_TASK_SPECIFIC_LITERAL_PATCH__NO_HAND_AUTHORED_CONTROLLER_GRAPH_AS_CAPABILITY_PROOF__NO_WHOLE_GOAL_SUPPLIER_DISCOVERY",
+    "next_action": "RUN_EXACT_BASE_OBS_V3_LIVE_ROUTE_RACE_FOR_FORMULATION_CAPABILITY__SEARCH_EXISTING_BRAIN_AND_EXTERNAL_NON_MODEL_ROUTES__SELECT_FASTEST_SUFFICIENT_ROUTE__NO_SERIALIZATION_TASK_REPLAY",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
-    "existing_components": [
+    "inherited_components": [
       "canonical/runtime/capability_planner.py",
-      "canonical/runtime/capability_discovery.py",
       "canonical/runtime/goal_compiler.py",
       "canonical/runtime/semantic_authorities.py",
-      "canonical/runtime/astra_runtime.py",
+      "canonical/runtime/capability_discovery.py",
       "decision.synthesis.typed.stdlib",
       "decision.synthesis.verify.stdlib"
     ],
+    "terminal_reconciliation_path": "canonical/capabilities/obsolescence/FRESH_PARENT_SERIALIZATION_FORMULATION_GAP_RECONCILIATION_20260930_V1.json",
     "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
-    "recursive_obs_receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json",
-    "last_verified_subcapability": {
-      "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
-      "status": "VERIFIED_ACQUIRED__FRESH_REUSE_PASS",
-      "merge_commit_sha": "2f4f3d7042f055003daf85a93e01e2f78678cec6",
-      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_ASTRA_INTEGRATION_20260930_V1.json"
-    }
+    "recursive_obs_receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
