@@ -1,0 +1,149 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-POST-OBS-V3-LIVE-FRONTIER-20260929-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "CANONICAL_POINTER_HIERARCHY_QUEUE_AND_SCOREBOARD_MIRRORS_STALE_AFTER_QWEN9B_FALSIFICATION_AND_OBS_V3_PROMOTION",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::CANONICAL_POINTER_HIERARCHY_QUEUE_AND_SCOREBOARD_MIRRORS_STALE_AFTER_QWEN9B_FALSIFICATION_AND_OBS_V3_PROMOTION::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Delete stale public-GitHub-Actions/Qwen-9B next-route authority, align all canonical OBS mirrors to V2/V3, and record directly proven anonymous Vireonix and Murakumo suppliers so the next real action targets the recurrent evidence-to-finalization composition seam rather than carrier or model-size work.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Merged PR #219 at ae02ed6d76f394888092bf64dde8c70522357ba0 promoted Recursive OBS V2, receipt V3, V5/V6 gates, and live challenger-frontier enforcement.",
+    "Canonical frontier target and obsolescence queue already record Qwen3.5-9B Task B terminal failure and localize the recurrent GOAL_MAX_CYCLES_WITHOUT_FINISH evidence-to-finalization seam.",
+    "CANONICAL_POINTER still advertises PUBLIC_GITHUB_ACTIONS_LOCAL_QWEN3_5_9B_GGUF as next candidate despite that route already failing and its PR being closed as superseded.",
+    "ACTIVE_GOAL_HIERARCHY, queue execution_governance mirror, and REAL_OUTPUT_SCOREBOARD still reference Recursive OBS V1 / receipt V2.",
+    "Fresh external discovery found keyless anonymous inference routes; direct Wolfram-carrier probes independently reached Vireonix and Murakumo with HTTP 200, including a valid Murakumo OpenAI tool_call."
+  ],
+  "evidence_presence_classification": "SUPERSEDED_BY_NEWER_CANONICAL_STATE",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Merge only evidence and canonical-state reconciliation; do not modify runtime/controller behavior in this PR; after merge run a fresh exact-base OBS V3 for the generic evidence-to-finalization composition route before any real Task C execution.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "ae02ed6d76f394888092bf64dde8c70522357ba0",
+    "real_outcome": "Make live canonical state accurately represent the current capability blocker and the strongest directly evidenced zero-cost supplier routes.",
+    "required_capability": "Canonical frontier reconciliation without executing or repairing the next capability route.",
+    "obs_goal": {
+      "real_outcome": "Remove stale route authority and align all canonical mirrors so the next action begins from the real recurrent composition seam.",
+      "proxy_goals_deleted": [
+        "Make GitHub Actions green",
+        "Replay Qwen 9B",
+        "Escalate model size",
+        "Build a new carrier",
+        "Select a provider before composition OBS"
+      ],
+      "surviving_necessity": "A narrow canonical reconciliation is required because multiple authoritative mirrors contradict newer primary evidence."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical/capabilities/frontier/OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1.json",
+        "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
+        "canonical/capabilities/obsolescence/LOCAL_QWEN3_5_9B_BIOPHYSICS_TASK_B_FALSIFICATION_20260929_V1.json",
+        "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V2.md",
+        "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V3.json"
+      ],
+      "external_existing_routes_checked": [
+        "Vireonix anonymous OpenAI-compatible inference: direct HTTP 200 nontrivial generation via Wolfram carrier.",
+        "Murakumo anonymous inference: direct HTTP 200 generation and valid OpenAI-style tool_call via Wolfram carrier.",
+        "LLMFaucet discovered but Wolfram transport CONNECT failed before endpoint response.",
+        "Peerwave discovered but current Wolfram transport could not connect.",
+        "Groq/OpenRouter/Cloudflare/Ficelle remain credential-bound from current Brain authority.",
+        "FreeInference new-account onboarding is paused."
+      ],
+      "capability_work_deleted": [
+        "Public GitHub Actions carrier repair",
+        "Qwen3.5-9B replay",
+        "Blind cycle inflation",
+        "Model-size escalation",
+        "New account/API-key acquisition before anonymous routes are exhausted"
+      ],
+      "surviving_gap": "Generic evidence-to-finalization composition/termination seam remains unresolved; supplier reachability and basic tool-call capability are no longer the first blockers."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Canonical-state inconsistency is path-specific bookkeeping, while the parent capability blocker is the recurrent evidence-to-finalization termination seam.",
+      "delete_bypass_substitute_options": [
+        "Ignore stale mirrors: rejected because workers consume CANONICAL_POINTER/hierarchy/scoreboard.",
+        "Repair runtime now: rejected because reconciliation must precede implementation under OBS V3.",
+        "Reconcile only the stale fields and preserve primary evidence: survives."
+      ],
+      "surviving_causal_blocker": "Canonical mirrors must be reconciled before a fresh implementation OBS can be trusted."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RECONCILE_STALE_CANONICAL_MIRRORS_AND_RECORD_PRIMARY_LIVE_FRONTIER_EVIDENCE",
+        "PATCH_RUNTIME_AND_POINTER_TOGETHER",
+        "REPLAY_OR_ESCALATE_LOCAL_MODEL",
+        "BUILD_NEW_CARRIER"
+      ],
+      "losing_routes_reason": "Runtime/model/carrier actions are premature; the current action only needs to make authoritative state truthful and delete superseded route authority.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic capability gate. Verify exact canonical fields against primary merged/falsification evidence and direct anonymous endpoint probe receipts."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "PUBLIC_GITHUB_ACTIONS_LOCAL_QWEN3_5_9B_GGUF as next candidate",
+        "Pointers claiming local 9B is next",
+        "OBS V1 / receipt V2 compliance mirrors"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Anonymous zero-key inference reachability through Wolfram transport",
+        "Murakumo native tool-call decision capability",
+        "Vireonix anonymous synthesis/finalization supplier reachability"
+      ],
+      "fresh_reuse_plan": "After reconciliation, issue a fresh exact-base OBS V3 for deterministic planner-tool-executor-finalizer composition and test only on a materially different fresh real Task C if that composition survives."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused merged OBS V2/V3 governance instead of modifying it again",
+        "Reused primary Qwen9B falsification instead of replaying",
+        "Used tiny anonymous direct probes rather than provisioning infrastructure"
+      ],
+      "search_stop_decision": "Stop reconciliation research because two anonymous suppliers are directly callable and the remaining parent blocker is composition/termination, not supplier discovery; further provider search cannot change this bookkeeping action.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "RECONCILE_STALE_CANONICAL_MIRRORS_AND_RECORD_PRIMARY_LIVE_FRONTIER_EVIDENCE",
+      "PATCH_RUNTIME_AND_POINTER_TOGETHER",
+      "REPLAY_OR_ESCALATE_LOCAL_MODEL",
+      "BUILD_NEW_CARRIER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PUBLIC_GITHUB_ACTIONS_LOCAL_QWEN3_5_9B_GGUF_NEXT_ROUTE",
+      "GITHUB_ACTIONS_CARRIER_REPAIR",
+      "QWEN3_5_9B_BIOPHYSICS_REPLAY",
+      "BLIND_MAX_CYCLES_INFLATION",
+      "MODEL_SIZE_ESCALATION"
+    ],
+    "selected_surviving_route": "RECONCILE_STALE_CANONICAL_MIRRORS_AND_RECORD_PRIMARY_LIVE_FRONTIER_EVIDENCE",
+    "why_selected_route_is_fastest_sufficient": "It changes only contradictory canonical state, preserves all primary evidence, requires no new execution infrastructure, and restores a truthful base for the next exact-base implementation decision.",
+    "expected_parent_level_state_change": "Delete stale public-GitHub-Actions/Qwen-9B next-route authority, align all canonical OBS mirrors to V2/V3, and record directly proven anonymous Vireonix and Murakumo suppliers so the next real action targets the recurrent evidence-to-finalization composition seam rather than carrier or model-size work.",
+    "stop_condition": "Merge only evidence and canonical-state reconciliation; do not modify runtime/controller behavior in this PR; after merge run a fresh exact-base OBS V3 for the generic evidence-to-finalization composition route before any real Task C execution.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER is explicitly exempt because this PR does not execute or select an external supplier route; external supplier discoveries and direct probes are preserved as evidence for the next exact-base implementation OBS."
+    }
+  }
+}
