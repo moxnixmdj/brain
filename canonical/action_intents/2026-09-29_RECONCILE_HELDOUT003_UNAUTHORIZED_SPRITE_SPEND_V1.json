@@ -22,9 +22,10 @@
     "merged PR129 provider-neutral APT admission repair",
     "HELDOUT005 post-spend replay incident and terminal reconciliation patterns",
     "current canonical pointer, active hierarchy, and capability queue on main 9ad4f8bca2c3d515a547e60762fd8b8108ab6089",
-    "hardened drift validator blob a10f5a4c379abc0461762fff282246a58b8f957d"
+    "hardened drift validator blob a10f5a4c379abc0461762fff282246a58b8f957d",
+    "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V2.json allowed evidence class CAPABILITY_UNPROVEN selected because the unauthorized carrier spends freshness but does not adjudicate the parent capability"
   ],
-  "evidence_presence_classification": "NEW_PRIMARY_EVIDENCE_FOUND",
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
   "probe_specific": false,
   "generic_repair_from_single_probe": false,
   "orthogonal_recurrence_count": 0,
