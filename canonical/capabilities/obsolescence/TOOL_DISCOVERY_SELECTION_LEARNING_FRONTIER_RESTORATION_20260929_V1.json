@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_SELECTION_LEARNING_FRONTIER_RESTORATION_RECONCILIATION_V1",
+  "reconciliation_id": "RESTORE-TOOL-INTEGRATION-FRONTIER-CLEAN-V1",
+  "status": "PARENT_RESIDUAL_RESTORED__NO_RUNTIME_MUTATION",
+  "bound_main_sha": "d22f5012df9a32e073e0bed8fe7da7af4a60441b",
+  "mandatory_law_basis": {
+    "mission_lock_path": "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_OBSOLESCENCE_MISSION_LOCK_V4.md",
+    "rule": "If the substitute does not provide equal-or-better useful capability, record the exact residual capability gap and continue only on that residual; recompute the next capability only after obsolete/retain and inheritance.",
+    "strategy_path": "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V2.md",
+    "ordered_loop": "VERIFY >= FRONTIER -> OBSOLETE -> INHERIT -> RECOMPUTE"
+  },
+  "prior_state_error": {
+    "source_pr": 111,
+    "source_recomputation_path": "canonical/capabilities/obsolescence/POST_TOOL_DISCOVERY_FRONTIER_RECOMPUTATION_20260929_V1.json",
+    "source_recorded_parent_capability_obsolete": false,
+    "source_recorded_residual": "Cross-ecosystem/open-ended tool learning remains broader than the verified Debian/APT CLI route.",
+    "invalid_transition": "A new capability was selected before terminal adjudication of the explicitly non-obsolete TOOL_DISCOVERY_SELECTION_AND_LEARNING parent."
+  },
+  "inherited_verified_gain": {
+    "route_id": "DEBIAN_FULL_METADATA_XAPIAN_DIRECT_CONTENTS_V1",
+    "source_pr": 89,
+    "inheritance_pr": 96,
+    "runtime_path": "canonical/runtime/capability_discovery.py",
+    "runtime_git_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
+    "heldout_validation": "DEBIAN-FULL-METADATA-XAPIAN-HELDOUT-VALIDATION-005",
+    "heldout_status": "PASS__SPENT",
+    "heldout_family_recall": 1,
+    "heldout_top20_recall": 1,
+    "wall_s": 16.233238,
+    "incremental_spend_usd": 0
+  },
+  "exact_residual": {
+    "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "residual_id": "DISCOVERY_TO_APT_ACQUISITION_CANDIDATE_CONTRACT_COMPATIBILITY",
+    "first_hard_drop": {
+      "producer": {
+        "path": "canonical/runtime/capability_discovery.py",
+        "git_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
+        "discovery_source": "APT_FULL_METADATA_XAPIAN",
+        "binding_kind": "apt"
+      },
+      "router": {
+        "path": "canonical/runtime/auto_capability_acquisition.py",
+        "git_blob": "fc80ede8225cc51dac77be6d41aa2a1c757c6ee8",
+        "behavior": "binding_kind apt maps to apt_cli"
+      },
+      "consumer": {
+        "path": "canonical/runtime/auto_apt_cli_acquisition.py",
+        "git_blob": "786f7de7df853cfaec2826f9471942b001e7eadc",
+        "rejecting_predicate": "discovery_source == APT_CATALOG",
+        "consequence": "Verified full-metadata/Xapian APT candidates are discarded before apt_cli_probe, cli_contract_inference, execution, and independent verification."
+      }
+    },
+    "repair_constraints": [
+      "Use the existing provider-neutral binding_kind=apt interface rather than special-casing APT_FULL_METADATA_XAPIAN.",
+      "Do not reuse the legacy absolute lexical score >=12 contract blindly on raw Xapian match.weight; score semantics must be source-scale-safe.",
+      "Preserve zero-cost, zero-secret, integration-friction, exact version, archive SHA256, role, and executable-ownership integrity gates."
+    ],
+    "known_downstream_risk": {
+      "path": "canonical/runtime/verify_pending_cli_binding.py",
+      "git_blob": "8ec4da92080e885a15266389c0318688e6408d43",
+      "condition": "semantic verifier candidate requires len(matched_terms) >= 2",
+      "inherited_route_behavior": "Xapian candidates currently emit matched_terms=[]",
+      "policy": "Preserve as downstream evidence; do not broaden the first repair until the earlier admission seam is removed and fresh evidence reaches this stage."
+    }
+  },
+  "fresh_gate_policy": {
+    "heldout005": "PERMANENTLY_SPENT__NEVER_REPLAY",
+    "next_gate": "NEW_ORTHOGONAL_DISCOVER_BIND_EXECUTE_VERIFY_GATE_REQUIRED",
+    "freeze_before_repair": true,
+    "execute_existing_or_repaired_route_once_under_single_flight": true,
+    "package_hints_forbidden": true,
+    "task_specific_literals_forbidden": true,
+    "user_laptop_forbidden": true,
+    "val_town_forbidden": true,
+    "hard_incremental_spend_usd": 0
+  },
+  "deferred_next_capability": {
+    "capability": "MULTI_TOOL_ORCHESTRATION_AND_PLANNING",
+    "status": "PRESERVED_AS_NEXT_CANDIDATE__NOT_FALSIFIED",
+    "reason": "Its existing planner/fanout/conditional/join/artifact evidence remains valid, but mandatory mission sequencing does not permit advancing while the current parent is explicitly non-obsolete with an exact residual."
+  },
+  "conclusion": "Restore TOOL_DISCOVERY_SELECTION_AND_LEARNING as the immediate frontier solely until the exact residual is terminally adjudicated; preserve the verified discovery win and the deferred orchestration candidate."
+}
