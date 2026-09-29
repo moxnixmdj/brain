@@ -26,7 +26,12 @@
     "NO_DUPLICATE_EXECUTION",
     "BLOCKER_LEASE_KEY_REQUIRED",
     "NO_EQUIVALENT_OPEN_PR_INTENT",
-    "EXPENSIVE_EXECUTION_REQUIRES_PR_AND_TRUSTED_LEASE_CHECK"
+    "EXPENSIVE_EXECUTION_REQUIRES_PR_AND_TRUSTED_LEASE_CHECK",
+    "ONE_SHOT_HELDOUT_REQUIRES_ATOMIC_EXECUTION_CLAIM",
+    "EXECUTION_CLAIM_KEY_IS_VALIDATION_ID_PLUS_MANIFEST_BLOB",
+    "ATOMIC_CLAIM_CREATION_IS_MONOTONIC_SPEND_BOUNDARY",
+    "CLAIM_CONFLICT_ABORTS_BEFORE_FRESH_CASE_EXECUTION",
+    "EXECUTION_CLAIM_REF_IS_IMMUTABLE"
   ],
   "probe_budget": {
     "generic_repairs_from_single_probe_max": 1,
@@ -45,7 +50,11 @@
     "DRIFT_GUARD_WEAKENED_WITHOUT_EXPLICIT_USER_AUTHORIZATION",
     "BLOCKER_LEASE_KEY_MISSING_OR_MISMATCH",
     "DUPLICATE_BLOCKER_LEASE_OPEN_PR",
-    "EXPENSIVE_FRONTIER_WORKFLOW_STARTED_BEFORE_PR_LEASE_CHECK"
+    "EXPENSIVE_FRONTIER_WORKFLOW_STARTED_BEFORE_PR_LEASE_CHECK",
+    "ONE_SHOT_CARRIER_TRIGGERED_WITHOUT_ATOMIC_EXECUTION_CLAIM",
+    "DUPLICATE_EXECUTION_CLAIM_REFERENCE_ALREADY_EXISTS",
+    "EXECUTION_CLAIM_REF_TARGET_MISMATCH",
+    "EXECUTION_CLAIM_REF_MUTATED_OR_DELETED"
   ],
   "on_abort": "QUARANTINE_BRANCH__PRESERVE_EVIDENCE__REFRESH_CANONICAL_STATE__RECOMPUTE_PARENT_FRONTIER__SELECT_HIGHEST_LEVERAGE_COMPLIANT_ACTION",
   "blocker_lease": {
@@ -64,5 +73,22 @@
       "PASS_TRUSTED_LEASE_GUARD",
       "ADD_OR_TRIGGER_EXPENSIVE_WORKFLOW"
     ]
+  },
+  "one_shot_execution_claim": {
+    "required_for": "FROZEN_HELDOUT_OR_OTHER_FRESHNESS_SENSITIVE_VALIDATION_WITH_REPLAY_FORBIDDEN",
+    "key_fields": [
+      "validation_id",
+      "manifest_git_blob"
+    ],
+    "key_serialization": "validation_id\\nmanifest_git_blob_lowercase",
+    "claim_digest": "SHA256_UTF8_KEY_SERIALIZATION",
+    "claim_ref_template": "execution-claims/v1/<claim_digest>",
+    "atomic_primitive": "GITHUB_CREATE_REF",
+    "ref_target": "EXACT_PROTECTED_CANDIDATE_COMMIT_SHA",
+    "preflight_before_claim_required": true,
+    "claim_creation_is_spend_boundary": true,
+    "claim_conflict_action": "ABORT_NO_EXECUTION",
+    "claim_ref_mutation_forbidden": true,
+    "extra_lock_service_forbidden_unless_this_primitive_is_falsified": true
   }
 }
