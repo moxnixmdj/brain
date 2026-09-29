@@ -27,6 +27,7 @@ import time
 import uuid
 from dataclasses import dataclass
 from typing import Any, Callable
+from anti_drift_interlock import DriftDenied, authorize_task, binding_environment
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 TASK_SCHEMA = "PROJECT_BRAIN_SAME_IDENTITY_TASK_V1"
@@ -277,6 +278,7 @@ def claim_task(
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     root = root.resolve()
     task = _validate_task(_read_json(task_path), agent_id)
+    authorize_task(root, task)
     if not _prerequisites_satisfied(root, task):
         raise NoCausallyReadyTask("PREREQUISITES_UNSATISFIED")
     mission = _repo_path(root, task["mission_path"])
@@ -305,7 +307,8 @@ def choose_causally_ready_task(
     for path in sorted(tasks_dir.glob("*.json")):
         try:
             task = _validate_task(_read_json(path), agent_id)
-        except SupervisorError:
+            authorize_task(root, task)
+        except (SupervisorError, DriftDenied):
             continue
         state = _load_state(state_dir, task["task_id"])
         if state and state.get("status") in {"COMPLETE", "FAILED"}:
@@ -345,6 +348,7 @@ def execute_claimed_task(
     agent_id: str = DEFAULT_AGENT_ID,
     executor: RuntimeExecutor = _default_executor,
 ) -> tuple[int, dict[str, Any]]:
+    binding = authorize_task(root, task)
     state_path = _state_path(state_dir, task["task_id"])
     state = _load_state(state_dir, task["task_id"])
     if state is None:
@@ -390,6 +394,7 @@ def execute_claimed_task(
     env = os.environ.copy()
     env["PROJECT_BRAIN_AGENT_ID"] = agent_id
     env["PROJECT_BRAIN_TASK_ID"] = task["task_id"]
+    env.update(binding_environment(binding))
     bridge_dir = (
         root
         / "canonical"
@@ -501,7 +506,7 @@ def main() -> int:
     except TaskAlreadyTerminal as exc:
         print(json.dumps({"status": "TASK_ALREADY_TERMINAL", "terminal_state": str(exc)}))
         return 21
-    except SupervisorError as exc:
+    except (SupervisorError, DriftDenied) as exc:
         print(json.dumps({"status": "SUPERVISOR_BLOCKED", "error": str(exc)}))
         return 22
     print(json.dumps(receipt, sort_keys=True))
