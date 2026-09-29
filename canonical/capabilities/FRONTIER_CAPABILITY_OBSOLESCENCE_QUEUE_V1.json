@@ -70,14 +70,14 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Keep HELDOUT-004 frozen/unspent. The built-in ChatGPT Linux carrier is rejected by a clean read-only snapshot because required normal APT metadata is absent; no package-manager mutation is used as evidence. Next qualify one accountless/cardless hard-zero connected remote Linux carrier, preferring Railway anonymous VM, and prove exact content-addressed source closure plus immediate path/hash/import preflight before any H004 START.",
+    "objective": "Keep HELDOUT-004 frozen/unspent. The existing ChatGPT Linux carrier failed the first required H004 execution-surface predicate because normal APT package metadata is absent; the same guarded read-only snapshot lacks apt-file, xapian tooling/packages and zbarimg and cannot resolve the configured Debian mirror. Qualify the next already-discovered connected remote Linux route only if hard-zero spend is independently supportable, then prove faithful APT/Xapian/QR surface plus content-addressed exact source closure and path/hash/import preflight before any H004 START.",
     "selection_metric": "CORRECTNESS_FIRST__THEN_VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK_WITH_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "HELDOUT_004_FROZEN_UNSPENT__BUILTIN_CHATGPT_LINUX_CARRIER_REJECTED_READ_ONLY__FAITHFUL_HARD_ZERO_CONNECTED_REMOTE_CARRIER_STILL_UNQUALIFIED",
-    "evidence_path": "canonical/capabilities/obsolescence/H004_CHATGPT_LINUX_READONLY_CARRIER_QUALIFICATION_20260929_V1.json",
-    "repair_status": "PR129_RUNTIME_REPAIR_PRESERVED__PR176_FIDELITY_BOUNDARY_PRESERVED__BUILTIN_CHATGPT_LINUX_CARRIER_REJECTED_READ_ONLY__NO_CAPABILITY_RUNTIME_REPAIR_REQUIRED",
-    "prohibition": "NO_HELDOUT_004_START_BEFORE_HARD_ZERO_CONNECTED_REMOTE_CARRIER_QUALIFICATION_AND_EXACT_CLOSURE_PREFLIGHT__NO_HELDOUT_003_REPLAY__NO_SPRITE__NO_VAL_TOWN__NO_USER_LAPTOP__NO_PAID_OR_UNPROVEN_SPEND",
+    "exact_blocker": "HELDOUT_004_FROZEN_UNSPENT__EXISTING_CHATGPT_LINUX_CARRIER_REJECTED_ON_MISSING_APT_METADATA__NEXT_HARD_ZERO_CONNECTED_REMOTE_CARRIER_QUALIFICATION_AND_EXACT_SOURCE_PREFLIGHT_REQUIRED",
+    "evidence_path": "canonical/capabilities/obsolescence/H004_CHATGPT_LINUX_READONLY_CARRIER_QUALIFICATION_CLEAN_20260929_V1.json",
+    "repair_status": "PR129_PROVIDER_NEUTRAL_APT_ADMISSION_REPAIR_PRESERVED__CHATGPT_LINUX_CARRIER_REJECTED_PRE_START__NO_CAPABILITY_RUNTIME_REPAIR_REQUIRED",
+    "prohibition": "NO_HELDOUT_004_START_BEFORE_HARD_ZERO_EXECUTOR_QUALIFICATION_AND_EXACT_SOURCE_PATH_HASH_IMPORT_PREFLIGHT__NO_HELDOUT_003_REPLAY__NO_SPRITE__NO_VAL_TOWN__NO_USER_LAPTOP__NO_PAID_OR_UNPROVEN_COST_INFRASTRUCTURE",
     "frozen_gate": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_004.json",
-    "next_action": "QUALIFY_ACCOUNTLESS_CARDLESS_HARD_ZERO_CONNECTED_REMOTE_LINUX__PREFER_RAILWAY_ANONYMOUS_VM__REQUIRE_EXACT_CONTENT_ADDRESSED_SOURCE_CLOSURE_PATH_HASH_IMPORT_PREFLIGHT__NO_HELDOUT_004_START",
+    "next_action": "QUALIFY_NEXT_ALREADY_DISCOVERED_HARD_ZERO_CONNECTED_REMOTE_LINUX__PROVE_HARD_ZERO_ATTESTATION__PROVE_FAITHFUL_APT_XAPIAN_QR_SURFACE__MATERIALIZE_CONTENT_ADDRESSED_EXACT_CLOSURE__PREFLIGHT_PATHS_HASHES_IMPORTS__NO_HELDOUT_004_START",
     "merged_repair_source_pr": 129,
     "merged_repair_runtime_path": "canonical/runtime/auto_apt_cli_acquisition.py",
     "spent_gate": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_003.json",
@@ -171,7 +171,7 @@
     "incremental_spend_usd": 0,
     "terminal_reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
     "parent_capability_obsolescence_claim": false,
-    "next_action": "QUALIFY_ACCOUNTLESS_CARDLESS_HARD_ZERO_CONNECTED_REMOTE_LINUX__PREFER_RAILWAY_ANONYMOUS_VM__REQUIRE_EXACT_CONTENT_ADDRESSED_SOURCE_CLOSURE_PATH_HASH_IMPORT_PREFLIGHT__NO_HELDOUT_004_START"
+    "next_action": "QUALIFY_NEXT_ALREADY_DISCOVERED_HARD_ZERO_CONNECTED_REMOTE_LINUX__PROVE_HARD_ZERO_ATTESTATION__PROVE_FAITHFUL_APT_XAPIAN_QR_SURFACE__MATERIALIZE_CONTENT_ADDRESSED_EXACT_CLOSURE__PREFLIGHT_PATHS_HASHES_IMPORTS__NO_HELDOUT_004_START"
   },
   "deferred_frontier_candidate": {
     "capability": "MULTI_TOOL_ORCHESTRATION_AND_PLANNING",
@@ -179,5 +179,14 @@
     "evidence_path": "canonical/capabilities/obsolescence/POST_TOOL_DISCOVERY_FRONTIER_RECOMPUTATION_20260929_V1.json",
     "status": "DEFERRED_NOT_FALSIFIED",
     "reopen_condition": "Recompute globally only after TOOL_DISCOVERY_SELECTION_AND_LEARNING reaches terminal OBSOLETE_OR_RETAIN adjudication under the mandatory mission sequence; closing one local seam is not sufficient while another verified residual remains."
+  },
+  "chatgpt_linux_h004_carrier_qualification_clean_v1": {
+    "status": "REJECTED_BEFORE_HELDOUT_START",
+    "evidence_path": "canonical/capabilities/obsolescence/H004_CHATGPT_LINUX_READONLY_CARRIER_QUALIFICATION_CLEAN_20260929_V1.json",
+    "carrier": "CHATGPT_BUILTIN_LINUX_CONTAINER",
+    "first_failed_predicate": "NORMAL_APT_PACKAGES_METADATA_REQUIRED",
+    "source_probe_sha256": "34947e62bee9248ac311c10979b79c25b6a3d5a1769523b816cc0d48cd5b13c3",
+    "heldout_004_freshness": "UNSPENT",
+    "next_action": "QUALIFY_NEXT_ALREADY_DISCOVERED_HARD_ZERO_CONNECTED_REMOTE_LINUX__PROVE_HARD_ZERO_ATTESTATION__PROVE_FAITHFUL_APT_XAPIAN_QR_SURFACE__MATERIALIZE_CONTENT_ADDRESSED_EXACT_CLOSURE__PREFLIGHT_PATHS_HASHES_IMPORTS__NO_HELDOUT_004_START"
   }
 }
