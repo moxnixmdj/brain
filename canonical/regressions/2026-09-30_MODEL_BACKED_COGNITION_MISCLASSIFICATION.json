@@ -10,16 +10,17 @@
     "violated_law": "canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md",
     "failure": "A required pretrained model was admitted as the planner/reasoning source for a capability whose substance is reasoning, planning, synthesis, falsification, adaptation, and tool selection."
   },
-  "invariant": "Brain may use models as optional external sources/tools, but a cognitive capability cannot be acquired, fresh-reused, promoted, or credited when successful cognition requires MODEL_API, LOCAL_MODEL, or MODEL_ARTIFACT.",
-  "trusted_guard_predicate": "MODEL_REQUIRED_AS_COGNITION_DEPENDENCY_FOR_COGNITIVE_CAPABILITY",
+  "invariant": "A run credited as Brain cognition must contain no MODEL_API, LOCAL_MODEL, or MODEL_ARTIFACT in its execution dependency path. Model-assisted outputs may be preserved only as supplier/reference/component evidence, never as Brain reasoning acquisition, fresh cognitive reuse, or cognitive frontier-dependency removal.",
+  "trusted_guard_predicate": "MODEL_PRESENT_IN_COGNITION_EXECUTION_PATH_FOR_COGNITIVE_CAPABILITY",
   "negative_case": {
     "action_kind": "FRESH_REUSE",
     "cognitive_parent_family": "TECHNICAL_SCIENTIFIC_REASONING",
     "execution_dependency": {
       "kind": "LOCAL_MODEL",
-      "required": true
+      "required": false
     },
-    "expected": "REJECT"
+    "expected": "REJECT",
+    "note": "Even an 'optional' model in the credited cognition execution path must reject; optional labeling cannot launder model reasoning into Brain reasoning."
   },
   "positive_case": {
     "action_kind": "FRESH_REUSE",
