@@ -70,12 +70,12 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Bridge the verified Debian/APT discovery route into the existing APT CLI acquisition race by admitting candidates through the existing provider-neutral `binding_kind=apt` abstraction rather than the legacy `APT_CATALOG` source label.",
-    "selection_metric": "FRESH_ORTHOGONAL_END_TO_END_TOOL_LEARNING_SUCCESS_PER_WALL_CLOCK_WITH_ZERO_HINTS_AND_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "STALE_SOURCE_NAME_ADMISSION_GATE_DROPS_VERIFIED_APT_FULL_METADATA_XAPIAN_CANDIDATES_BEFORE_CONTRACT_PROBING",
-    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_DISCOVERY_TO_APT_ADMISSION_RECONCILIATION_V1.json",
-    "repair_status": "ONE_GENERIC_BINDING_KIND_APT_ADMISSION_REPAIR_AUTHORIZED_AFTER_FRESH_GATE_FREEZE",
-    "prohibition": "NO_HELDOUT005_REPLAY__NO_XAPIAN_SPECIAL_CASE_WHEN_BINDING_KIND_EXISTS__NO_CONTRACT_PARSER_REPAIR_BEFORE_ADMISSION_BRIDGE_TEST__NO_PACKAGE_HINTS__NO_TASK_SPECIFIC_LITERALS"
+    "objective": "Connect the inherited verified Debian full-metadata/Xapian/direct-Contents discovery route to the existing autonomous APT CLI acquisition loop with the smallest provenance-aware admission repair, then reconcile before any fresh end-to-end gate.",
+    "selection_metric": "VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK_WITH_ZERO_INCREMENTAL_SPEND",
+    "exact_blocker": "APT_FULL_METADATA_XAPIAN_CANDIDATES_ARE_DROPPED_BEFORE_APT_PROBE_AND_CONTRACT_INFERENCE_BY_LEGACY_APT_CATALOG_SOURCE_AND_SCORE_ADMISSION",
+    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_APT_XAPIAN_ACQUISITION_INTEGRATION_RECONCILIATION_V1.json",
+    "repair_status": "ONE_GENERIC_PROVENANCE_AWARE_APT_ACQUISITION_ADMISSION_REPAIR_AUTHORIZED",
+    "prohibition": "NO_HELDOUT005_REPLAY__NO_PACKAGE_HINTS__NO_TASK_SPECIFIC_LITERALS__NO_LEGACY_SCORE_THRESHOLD_APPLIED_TO_XAPIAN_BM25__NO_CONTRACT_REPAIR_BEFORE_INTEGRATION_DELTA_RECONCILIATION"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -155,7 +155,7 @@
     "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EVIDENCE_ACQUISITION_STRUCTURAL_CAUSE_RECONCILIATION_V1.json"
   },
   "tool_discovery_selection_learning_full_metadata_xapian_v1": {
-    "status": "VERIFIED_ROUTE_INHERITED",
+    "status": "VERIFIED_ROUTE_INHERITED_MAIN",
     "source_pr": 89,
     "authoritative_deployment": "805a36d4-04cf-4938-bfac-74d29418081f",
     "runtime_git_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
@@ -165,7 +165,7 @@
     "incremental_spend_usd": 0,
     "terminal_reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
     "parent_capability_obsolescence_claim": false,
-    "next_action": "BRIDGE_TO_APT_CLI_ACQUISITION_BY_BINDING_KIND__FRESH_ORTHOGONAL_END_TO_END_GATE__THEN_RECONCILE",
+    "next_action": "CONNECT_VERIFIED_DISCOVERY_ROUTE_TO_APT_ACQUISITION_ADMISSION",
     "residual_recomputation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_POST_XAPIAN_INTERFACE_RECOMPUTATION_V1.json",
     "residual_reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_DISCOVERY_TO_APT_ADMISSION_RECONCILIATION_V1.json"
   },
@@ -185,5 +185,13 @@
       "effect": "VERIFIED_XAPIAN_APT_CANDIDATES_DROPPED_BEFORE_PROBE_AND_CONTRACT_INFERENCE"
     },
     "next_action": "ONE_MINIMAL_GENERIC_DISCOVERY_TO_APT_ACQUISITION_ADMISSION_REPAIR__ADMIT_APT_BY_BINDING_KIND_NOT_LEGACY_SOURCE_LABEL__FRESH_ORTHOGONAL_END_TO_END_GATE__THEN_RECONCILE"
+  },
+  "apt_xapian_acquisition_integration_delta_001": {
+    "status": "STATIC_CAUSAL_BLOCKER_PROVEN__PROBE_FROZEN_BEFORE_REPAIR",
+    "probe_id": "APT-XAPIAN-ACQUISITION-INTEGRATION-DELTA-001",
+    "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_APT_XAPIAN_ACQUISITION_INTEGRATION_RECONCILIATION_V1.json",
+    "manifest_path": "canonical/experiments/APT_XAPIAN_ACQUISITION_INTEGRATION_DELTA_001.json",
+    "runtime_mutated": false,
+    "incremental_spend_usd": 0
   }
 }
