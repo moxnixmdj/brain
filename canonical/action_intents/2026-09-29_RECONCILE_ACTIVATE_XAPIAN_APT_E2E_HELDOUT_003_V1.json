@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-ACTIVATE-XAPIAN-APT-E2E-HELDOUT-003-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
+  "causal_blocker": "HELDOUT003_FROZEN_ON_MAIN_BUT_ACTIVE_PROBE_POINTER_NOT_RECONCILED__AUTHORIZED_REPAIR_CANNOT_BE_EXPRESSED_FAIL_CLOSED",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::HELDOUT003_FROZEN_ON_MAIN_BUT_ACTIVE_PROBE_POINTER_NOT_RECONCILED__AUTHORIZED_REPAIR_CANNOT_BE_EXPRESSED_FAIL_CLOSED::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Reconcile the already-merged, still-unspent HELDOUT-003 gate into the canonical active-probe state so exactly one generic provider-neutral, score-scale-safe APT admission repair can be proposed under the existing guard without changing runtime code or spending the held-out case.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR128 corrected HELDOUT-003 freeze",
+    "PR128 canonical-validator carrier-failover PASS receipt on exact head",
+    "canonical ACTIVE_GOAL_HIERARCHY_V1 active_probe is still null",
+    "canonical FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1 still says fresh gate required",
+    "canonical runtime enforce_goal_hierarchy.py requires an active probe for repair actions"
+  ],
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Canonical hierarchy names XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003 as the active unspent probe, points to its merged manifest, and the queue marks exactly one generic admission repair as the next action. No runtime mutation and no held-out execution occur in this reconciliation.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
