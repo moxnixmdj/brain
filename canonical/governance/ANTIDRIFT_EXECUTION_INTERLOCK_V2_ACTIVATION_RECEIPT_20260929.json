@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_ANTIDRIFT_EXECUTION_INTERLOCK_ACTIVATION_RECEIPT_V2",
+  "activated_on": "2026-09-29",
+  "activated_pr": 85,
+  "activated_head_before_receipt": "ea136c45000efa4ae3f5d0192d37bae026b2ab01",
+  "scope": {
+    "same_identity_task_admission": "ENFORCED_FAIL_CLOSED",
+    "same_identity_task_resume": "ENFORCED_FAIL_CLOSED",
+    "astra_runtime_entrypoint": "REQUIRES_BOUND_CONTEXT",
+    "astra_goal_action_dispatch": "ENFORCED_ALLOWLIST_AND_SCOPE",
+    "astra_adapter_dispatch": "ENFORCED_ALLOWLIST_AND_SCOPE",
+    "shell_execution": "EXACT_COMMAND_SHA256_ALLOWLIST_ONLY",
+    "hierarchy_change": "INVALIDATES_EXISTING_BINDING_BY_FULL_FILE_SHA256",
+    "unknown_authority": "DENIED",
+    "wildcard_authority": "DENIED"
+  },
+  "validation": {
+    "independent_interlock_unit_tests": {
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "status": "PASS"
+    },
+    "integration_wiring_canaries": "PRESENT",
+    "frozen_heldout_002_execution_count": 0,
+    "frozen_capability_files_modified": false
+  },
+  "frozen_files_not_modified": [
+    "canonical/runtime/capability_discovery.py",
+    "canonical/experiments/run_batched_executable_evidence_heldout_validation_002.py",
+    "canonical/experiments/BATCHED_EXECUTABLE_EVIDENCE_HELDOUT_VALIDATION_002.json"
+  ],
+  "hard_boundary": {
+    "status": "EXTERNAL_OPERATOR_LAYER_NOT_INTERCEPTABLE_BY_REPOSITORY_CODE",
+    "detail": "Direct ChatGPT-host tool calls, including direct GitHub MCP mutations, occur outside the Project Brain runtime process. The repository interlock cannot technically prevent the host from issuing such a call. Absolute no-drift across that layer requires a host-level tool-call authorization hook or repository-side protected write policy that this GitHub connection cannot configure.",
+    "canonical_rule": "External operator actions outside the interlock may not be treated as canonical autonomous Brain execution."
+  },
+  "claim": "BRAIN_RUNTIME_DRIFT_IS_MECHANICALLY_FAIL_CLOSED_WITHIN_THE_ENFORCEABLE_RUNTIME_PERIMETER__ABSOLUTE_HOST_LEVEL_NONDRIFT_NOT_CLAIMED"
+}
