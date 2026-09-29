@@ -24,6 +24,7 @@ PROTECTED_GUARD_PATHS={
     "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V2.md",
+    "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V3.md",
     "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V3.json",
@@ -31,10 +32,14 @@ PROTECTED_GUARD_PATHS={
     "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V4.json",
     "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V5.json",
     "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V5.json",
+    "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V6.json",
     "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V6.json",
+    "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V7.json",
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V2.json",
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V3.json",
+    "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json",
     "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V2.json",
+    "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V3.json",
     "canonical/runtime/enforce_goal_hierarchy.py",
     ".github/workflows/drift-immunity-guard.yml",
 }
@@ -60,6 +65,12 @@ ROUTE_FRONTIER_QUERY_INTENTS={"CAPABILITY_VECTOR","SUPPLIER_OR_PRODUCT","IMPLEME
 ROUTE_FRONTIER_COMPARISON_DIMENSIONS={"CORRECTNESS","CAPABILITY_STRENGTH","WALL_CLOCK","INCREMENTAL_COST","RELIABILITY","VERIFIABILITY"}
 ROUTE_FRONTIER_REFRESH_TRIGGERS={"BEFORE_EXPENSIVE_EXECUTION","AFTER_MATERIAL_ROUTE_FAILURE","BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION","BEFORE_SCARCE_GATE_SPEND"}
 ROUTE_FRONTIER_QUALIFICATION_EVIDENCE_CLASSES={"OFFICIAL_PRIMARY","CODE_OR_PACKAGE_REGISTRY","DIRECT_PROBE","INDEPENDENT_VERIFIER"}
+ROUTE_PREFLIGHT_MAX_AGE_HOURS=2
+ROUTE_PREFLIGHT_VOLATILE_EVIDENCE_CLASSES={"DIRECT_PROBE","INDEPENDENT_VERIFIER"}
+ROUTE_PREFLIGHT_DEPENDENCY_EVIDENCE_CLASSES={"OFFICIAL_PRIMARY","CODE_OR_PACKAGE_REGISTRY","DIRECT_PROBE","INDEPENDENT_VERIFIER","BRAIN_INHERITED"}
+ROUTE_PREFLIGHT_VOLATILITY={"STATIC","VOLATILE"}
+ROUTE_PREFLIGHT_SCOPES={"GLOBAL","ACCOUNT_SPECIFIC","LOCAL","REGION_SPECIFIC"}
+ROUTE_PREFLIGHT_INTRINSIC_VOLATILE_KINDS={"CARRIER","ACCOUNT_ENTITLEMENT","MODEL_API","NETWORK_ENDPOINT","REMOTE_SERVICE","CAPACITY_POOL"}
 ROUTE_FRONTIER_DISCOVERY_EXEMPT_ACTIONS=GOVERNANCE_ACTIONS|{"RECONCILE_FRONTIER","EVIDENCE_PRESERVATION"}
 OBS_REQUIRED_FIELDS=(
     "canonical_generation_or_commit",
@@ -148,6 +159,110 @@ def _parse_utc_timestamp(value):
 
 def _nonempty_string_list(value):
     return isinstance(value,list) and bool(value) and all(_nonempty_string(x) for x in value)
+
+def enforce_selected_route_preflight(frontier,obs):
+    preflight=frontier.get("selected_route_preflight")
+    if not isinstance(preflight,dict):
+        fail("SELECTED_ROUTE_PREFLIGHT_MISSING")
+        return
+
+    try:
+        checked=_parse_utc_timestamp(preflight.get("checked_at_utc"))
+    except Exception:
+        fail("SELECTED_ROUTE_PREFLIGHT_CHECKED_AT_INVALID")
+        checked=None
+
+    max_age=preflight.get("max_age_hours")
+    if not isinstance(max_age,(int,float)) or isinstance(max_age,bool) or not (0 < float(max_age) <= ROUTE_PREFLIGHT_MAX_AGE_HOURS):
+        fail("SELECTED_ROUTE_PREFLIGHT_MAX_AGE_INVALID")
+        max_age=None
+
+    if checked is not None and max_age is not None:
+        age=datetime.now(timezone.utc)-checked
+        if age < timedelta(minutes=-5):
+            fail("SELECTED_ROUTE_PREFLIGHT_TIMESTAMP_IN_FUTURE")
+        elif age > timedelta(hours=float(max_age)):
+            fail("SELECTED_ROUTE_PREFLIGHT_EXPIRED")
+
+    selected=preflight.get("selected_route")
+    if not _nonempty_string(selected):
+        fail("SELECTED_ROUTE_PREFLIGHT_ROUTE_MISSING")
+    elif selected!=frontier.get("selected_route") or selected!=obs.get("selected_surviving_route"):
+        fail("SELECTED_ROUTE_PREFLIGHT_ROUTE_MISMATCH")
+
+    if preflight.get("status")!="READY":
+        fail("SELECTED_ROUTE_PREFLIGHT_NOT_READY")
+    if preflight.get("all_required_dependencies_ready") is not True:
+        fail("SELECTED_ROUTE_PREFLIGHT_REQUIRED_DEPENDENCIES_NOT_READY")
+
+    failed=preflight.get("failed_dependencies")
+    if not isinstance(failed,list):
+        fail("SELECTED_ROUTE_PREFLIGHT_FAILED_DEPENDENCIES_NOT_LIST")
+    elif failed:
+        fail("SELECTED_ROUTE_PREFLIGHT_FAILED_DEPENDENCY_PRESENT")
+
+    deps=preflight.get("execution_dependencies")
+    if not isinstance(deps,list) or not deps:
+        fail("SELECTED_ROUTE_PREFLIGHT_DEPENDENCY_INVENTORY_MISSING")
+        return
+
+    for i,dep in enumerate(deps):
+        if not isinstance(dep,dict):
+            fail(f"SELECTED_ROUTE_PREFLIGHT_DEPENDENCY_INVALID:{i}")
+            continue
+        if not _nonempty_string(dep.get("dependency")):
+            fail(f"SELECTED_ROUTE_PREFLIGHT_DEPENDENCY_NAME_MISSING:{i}")
+        kind=str(dep.get("kind") or "")
+        if not kind:
+            fail(f"SELECTED_ROUTE_PREFLIGHT_DEPENDENCY_KIND_MISSING:{i}")
+        required=dep.get("required")
+        if not isinstance(required,bool):
+            fail(f"SELECTED_ROUTE_PREFLIGHT_DEPENDENCY_REQUIRED_NOT_BOOLEAN:{i}")
+            required=False
+        volatility=str(dep.get("volatility") or "")
+        if volatility not in ROUTE_PREFLIGHT_VOLATILITY:
+            fail(f"SELECTED_ROUTE_PREFLIGHT_DEPENDENCY_VOLATILITY_INVALID:{i}")
+        scope=str(dep.get("scope") or "")
+        if scope not in ROUTE_PREFLIGHT_SCOPES:
+            fail(f"SELECTED_ROUTE_PREFLIGHT_DEPENDENCY_SCOPE_INVALID:{i}")
+        status=str(dep.get("status") or "")
+        if required and status!="READY":
+            fail(f"SELECTED_ROUTE_PREFLIGHT_REQUIRED_DEPENDENCY_NOT_READY:{i}")
+
+        evidence=dep.get("evidence")
+        if not _nonempty_string_list(evidence):
+            fail(f"SELECTED_ROUTE_PREFLIGHT_DEPENDENCY_EVIDENCE_MISSING:{i}")
+        classes=dep.get("evidence_classes")
+        if not isinstance(classes,list) or not classes:
+            fail(f"SELECTED_ROUTE_PREFLIGHT_DEPENDENCY_EVIDENCE_CLASSES_MISSING:{i}")
+            class_set=set()
+        else:
+            class_set=set(classes)
+            if not class_set.issubset(ROUTE_PREFLIGHT_DEPENDENCY_EVIDENCE_CLASSES):
+                fail(f"SELECTED_ROUTE_PREFLIGHT_DEPENDENCY_EVIDENCE_CLASS_INVALID:{i}")
+
+        if kind in ROUTE_PREFLIGHT_INTRINSIC_VOLATILE_KINDS and volatility!="VOLATILE":
+            fail(f"SELECTED_ROUTE_PREFLIGHT_INTRINSIC_VOLATILE_DEPENDENCY_MARKED_STATIC:{i}")
+
+        if required and volatility=="VOLATILE":
+            try:
+                observed=_parse_utc_timestamp(dep.get("observed_at_utc"))
+            except Exception:
+                fail(f"SELECTED_ROUTE_PREFLIGHT_VOLATILE_OBSERVED_AT_INVALID:{i}")
+                observed=None
+            if observed is not None and max_age is not None:
+                age=datetime.now(timezone.utc)-observed
+                if age < timedelta(minutes=-5):
+                    fail(f"SELECTED_ROUTE_PREFLIGHT_VOLATILE_TIMESTAMP_IN_FUTURE:{i}")
+                elif age > timedelta(hours=float(max_age)):
+                    fail(f"SELECTED_ROUTE_PREFLIGHT_VOLATILE_DEPENDENCY_STALE:{i}")
+            if not class_set.intersection(ROUTE_PREFLIGHT_VOLATILE_EVIDENCE_CLASSES):
+                fail(f"SELECTED_ROUTE_PREFLIGHT_VOLATILE_DEPENDENCY_LACKS_DIRECT_OR_INDEPENDENT_EVIDENCE:{i}")
+
+        if required and scope in {"ACCOUNT_SPECIFIC","REGION_SPECIFIC"}:
+            if not class_set.intersection(ROUTE_PREFLIGHT_VOLATILE_EVIDENCE_CLASSES):
+                fail(f"SELECTED_ROUTE_PREFLIGHT_SCOPED_DEPENDENCY_LACKS_DIRECT_OR_INDEPENDENT_EVIDENCE:{i}")
+
 
 def enforce_live_route_frontier(intent,obs):
     frontier=obs.get("route_frontier")
@@ -269,6 +384,9 @@ def enforce_live_route_frontier(intent,obs):
             missing=[d for d in ROUTE_FRONTIER_COMPARISON_DIMENSIONS if not _nonempty_string(comparison.get(d))]
             if missing:
                 fail(f"LIVE_CHALLENGER_FRONTIER_CHALLENGER_COMPARISON_INCOMPLETE:{i}:"+",".join(sorted(missing)))
+
+    enforce_selected_route_preflight(frontier,obs)
+
 
 def enforce_recursive_obs(intent,files,base):
     bootstrap_path="canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md"
