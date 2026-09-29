@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-PR149-TRANSITION-PROVENANCE-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
+  "causal_blocker": "PR149_INTENT_MUTATED_AFTER_INTENT_HEAD_GUARD__CURRENT_AUTHORITY_VALUES_ARE_CORRECT_BUT_TRANSITION_PROVENANCE_IS_UNCLEAN__HELDOUT_EXECUTION_LEASES_FAIL_CLOSED_UNTIL_RECONCILED",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::PR149_INTENT_MUTATED_AFTER_INTENT_HEAD_GUARD__CURRENT_AUTHORITY_VALUES_ARE_CORRECT_BUT_TRANSITION_PROVENANCE_IS_UNCLEAN__HELDOUT_EXECUTION_LEASES_FAIL_CLOSED_UNTIL_RECONCILED::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Preserve the independently-correct post-PR129 authority values already on main, record PR149's intent-after-guard ordering violation as a historical provenance incident, and add one explicit ACTIVE_GOAL_HIERARCHY provenance-reconciliation reference proving those three values were independently revalidated from merged PR129/PR136 evidence. No runtime/gate/evaluator/carrier change and no HELDOUT execution.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR129 provider-neutral APT admission repair",
+    "merged PR136 repair-consumption reconciliation",
+    "merged PR135 action-intent guard hardening",
+    "merged PR149 effective three-descriptor state correction",
+    "PR149 intent-head receipt bound to b3475695d670e7228bf22c35b14d696b92faa297",
+    "PR149 later intent mutation at 4d02c528c3c48b4645277485859d08c0177e889b",
+    "closed post-PR149 execution leases that correctly fail-closed on transition provenance"
+  ],
+  "evidence_presence_classification": "CORRECT_CANONICAL_VALUES__UNCLEAN_TRANSITION_PROVENANCE",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "After a trusted guard PASS on this exact immutable intent head, add exactly one provenance-incident record and one ACTIVE_GOAL_HIERARCHY reference to that record, without changing the current blocker, next action, repair budget, frozen-gate state, runtime, evaluator, or any held-out evidence. Revalidate the final head; merge; only then create one fresh HELDOUT-003 execution lease from exact new main.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "execution_constraints": {
+    "heldout_execution_forbidden": true,
+    "runtime_mutation_forbidden": true,
+    "incremental_spend_usd": 0,
+    "user_laptop_forbidden": true,
+    "val_town_forbidden": true
+  }
+}
