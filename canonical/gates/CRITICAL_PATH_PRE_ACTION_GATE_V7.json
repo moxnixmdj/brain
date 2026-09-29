@@ -122,6 +122,11 @@
       "required": true
     },
     {
+      "id": "MODEL_INDEPENDENT_COGNITION",
+      "question": "For a cognitive capability target, does the complete selected-route execution dependency inventory contain no MODEL_API, LOCAL_MODEL, or MODEL_ARTIFACT at all, so the credited cognition is produced by Brain rather than any model?",
+      "required": true
+    },
+    {
       "id": "FASTEST_SUFFICIENT_ROUTE",
       "question": "Among correctness-sufficient routes, is the selected route currently the fastest to verified reusable output, then cheapest?",
       "required": true
@@ -249,7 +254,8 @@
     "DUPLICATE_EXPERIMENT_WITHOUT_DOCUMENTED_INVALIDATION",
     "ACTION_HAS_NO_CURRENT_CANONICAL_NECESSITY_PROOF",
     "INFRASTRUCTURE_WORK_WHILE_EXISTING_ROUTE_CAN_EXECUTE_REAL_MISSION",
-    "ACTIVITY_METRIC_SUBSTITUTED_FOR_CAPABILITY_METRIC"
+    "ACTIVITY_METRIC_SUBSTITUTED_FOR_CAPABILITY_METRIC",
+    "COGNITIVE_CAPABILITY_EXECUTION_PATH_CONTAINS_MODEL_COGNITION"
   ],
   "on_abort": "REFRESH_LIVE_CANONICAL_STATE__INVALIDATE_AFFECTED_OBS_LAYERS__DELETE_OR_SWITCH_ROUTE__UPDATE_REAL_OUTPUT_SCOREBOARD__EXECUTE_SHORTEST_SURVIVING_PATH"
 }

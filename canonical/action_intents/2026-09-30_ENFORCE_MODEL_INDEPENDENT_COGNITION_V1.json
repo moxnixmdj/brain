@@ -1,0 +1,134 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ENFORCE-MODEL-INDEPENDENT-COGNITION-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "CANONICAL_MODEL_NON_DEPENDENCE_LAW_EXISTS_BUT_TRUSTED_GUARD_DID_NOT_REJECT_REQUIRED_MODEL_COGNITION_FOR_COGNITIVE_CAPABILITY",
+  "action_kind": "USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::CANONICAL_MODEL_NON_DEPENDENCE_LAW_EXISTS_BUT_TRUSTED_GUARD_DID_NOT_REJECT_REQUIRED_MODEL_COGNITION_FOR_COGNITIVE_CAPABILITY::USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "expected_parent_frontier_change": "Make model-independent cognition a machine-enforced admission condition so no model can appear in the credited execution path for Brain cognitive capability acquisition, reuse, or promotion.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md already forbids models as the Brain's cognition source or mandatory decision loop",
+    "canonical/runtime/enforce_goal_hierarchy.py currently validates route readiness but does not enforce model non-dependence for cognitive capability targets",
+    "PR230 demonstrated the concrete failure: local Qwen3.5-9B was admitted as the required planner for OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "canonical/capabilities/frontier/OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1.json explicitly includes reasoning, planning, synthesis, falsification, adaptation, and tool selection"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 1,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Clarify the existing Model Non-Dependence law, add only the smallest trusted-guard and pre-action-gate enforcement needed to reject any model in cognitive real-task proof paths, record the PR230 regression, validate positive and negative cases, then stop governance work and return to model-independent capability acquisition.",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "e4f115ef6f3b86cb51b0206edf1f53f16c46f6e8",
+    "real_outcome": "Prevent Project Brain from outsourcing the reasoning capability it is trying to acquire and then misclassifying supplier cognition as Brain cognition.",
+    "required_capability": "MODEL_INDEPENDENT_COGNITIVE_CAPABILITY_ADMISSION",
+    "obs_goal": {
+      "real_outcome": "Machine-reject any cognitive capability proof path containing a model, even if the model is labeled optional, so supplier cognition cannot be laundered into Brain cognition.",
+      "proxy_goals_deleted": [
+        "Rewrite the already-correct Model Non-Dependence law",
+        "Add a new reasoning architecture before enforcing the existing law",
+        "Build a new workflow or provider",
+        "Wait for PR230's model-generated answer"
+      ],
+      "surviving_necessity": "The existing canonical law is not enforced by the trusted guard, allowing invalid model-backed cognition routes to cross the execution boundary."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "MODEL_NON_DEPENDENCE_LAW_V1",
+        "CAPABILITY_ACQUISITION_ENGINE_LAW_V4",
+        "CRITICAL_PATH_PRE_ACTION_GATE_V7",
+        "enforce_goal_hierarchy.py",
+        "active frontier capability metadata"
+      ],
+      "external_existing_routes_checked": [
+        "Not needed for this governance correction because the missing capability is enforcement of an existing internal canonical law."
+      ],
+      "capability_work_deleted": [
+        "No new policy subsystem",
+        "No new scheduler",
+        "No new provider",
+        "No new cognition implementation"
+      ],
+      "surviving_gap": "Trusted admission does not currently connect the existing model-non-dependence law to route dependency validation for cognitive capability targets."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Path-specific enforcement omission in the trusted action gate.",
+      "delete_bypass_substitute_options": [
+        "DELETE model non-dependence: invalid because it destroys the user's architecture.",
+        "BYPASS trusted enforcement and rely on human memory: already falsified by PR230.",
+        "REUSE existing dependency inventory and target parent_families inside the current guard: survives as minimal fix.",
+        "BUILD a separate governance service: unnecessary."
+      ],
+      "surviving_causal_blocker": "The guard and law wording allowed a model to appear in a cognitive proof route without an automatic fail-closed rejection."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "CLARIFY_EXISTING_LAW_AND_REPAIR_EXISTING_TRUSTED_GUARD_USING_TARGET_METADATA_AND_PREFLIGHT_DEPENDENCY_INVENTORY"
+      ],
+      "losing_routes_reason": "All larger alternatives duplicate existing law, metadata, or guard machinery and add latency without improving the causal enforcement.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "A focused guard regression is necessary because the real effect is admission/rejection behavior: a cognitive task with required LOCAL_MODEL/MODEL_API/MODEL_ARTIFACT must reject, while an otherwise-valid model-independent cognitive route must pass this predicate."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any queued cognitive Task C whose planner/reasoner is a required model dependency",
+        "Any promotion logic that treats model-backed task success as Brain reasoning acquisition"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Model-role dependency policing for cognitive capability routes"
+      ],
+      "fresh_reuse_plan": "After enforcement, immediately recompute the open-ended reasoning target around Brain-owned model-independent cognition routes and execute the shortest real task that survives."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse existing canonical model-non-dependence law",
+        "Reuse existing target parent_families",
+        "Reuse existing selected-route execution dependency inventory"
+      ],
+      "search_stop_decision": "The causal defect is fully localized to missing enforcement; external search cannot improve the minimal fix.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Governance action is exempt from external route discovery; no provider or execution route is being selected."
+    },
+    "routes_considered": [
+      "REPAIR_EXISTING_TRUSTED_GUARD",
+      "RELY_ON_HUMAN_MEMORY",
+      "ADD_NEW_GOVERNANCE_SUBSYSTEM"
+    ],
+    "deleted_or_bypassed_paths": [
+      "RELY_ON_HUMAN_MEMORY",
+      "ADD_NEW_GOVERNANCE_SUBSYSTEM"
+    ],
+    "selected_surviving_route": "CLARIFY_EXISTING_LAW_AND_REPAIR_EXISTING_TRUSTED_GUARD",
+    "why_selected_route_is_fastest_sufficient": "The architecture, target metadata, and dependency inventory already exist; clarifying one ambiguous law sentence and enforcing one predicate closes both required-model and optional-model cognition laundering without new infrastructure.",
+    "expected_parent_level_state_change": "Make model-independent cognition a machine-enforced admission condition so no model can appear in the credited execution path for Brain cognitive capability acquisition, reuse, or promotion.",
+    "stop_condition": "Clarify the existing Model Non-Dependence law, add only the smallest trusted-guard and pre-action-gate enforcement needed to reject any model in cognitive real-task proof paths, record the PR230 regression, validate positive and negative cases, then stop governance work and return to model-independent capability acquisition.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "User-authorized governance repair of an already-localized internal enforcement omission; no external capability supplier is being selected."
+    }
+  }
+}
