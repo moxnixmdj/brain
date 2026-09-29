@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_H004_RAILWAY_ANONYMOUS_TRANSPORT_QUALIFICATION_V1",
+  "evidence_id": "H004-RAILWAY-ANONYMOUS-TRANSPORT-QUALIFICATION-20260929-V1",
+  "canonical_base_sha": "7a032ad79a001dca1945691f08f48de8625d2916",
+  "action_intent": "canonical/action_intents/2026-09-29_QUALIFY_H004_RAILWAY_ANONYMOUS_HARDZERO_V1.json",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "qualification_scope": "CARRIER_ONLY__STOP_BEFORE_VM_ALLOCATION_ON_FIRST_LIVE_TRANSPORT_FAILURE__NO_HELDOUT_START",
+  "public_hard_zero_contract": {
+    "result": "PASS",
+    "provider": "Railway",
+    "route": "ssh railway.new anonymous unclaimed VM",
+    "primary_sources": [
+      "https://railway.com/free-vm",
+      "https://railway.com/changelog/2026-09-25-free-vms-without-an-account",
+      "https://docs.railway.com/pricing/faqs"
+    ],
+    "attested_terms": [
+      "no account required",
+      "no card required",
+      "unclaimed VM compute has no payer charge",
+      "60 minute build window"
+    ],
+    "limitation": "PUBLIC_COST_CONTRACT_ONLY__DOES_NOT_PROVE_LIVE_EXECUTOR_CALLABILITY"
+  },
+  "recovered_prior_evidence": {
+    "source": "railway-carrier-v1 branch / PR85 execution-surface exhaustion records",
+    "finding": "Railway anonymous VM was previously the best known technical zero-cost route but was not callable because the ChatGPT Linux surface lacked outbound socket/SSH reachability",
+    "reuse_rule": "REQUALIFY_ONLY_IF_CURRENT_COMMAND_TRANSPORT_SURFACE_CHANGED"
+  },
+  "current_live_transport_preflight": {
+    "allocation_attempted": false,
+    "anonymous_vm_created": false,
+    "ssh_binary_present": false,
+    "railway_new_dns_resolution": "FAIL__TEMPORARY_FAILURE_IN_NAME_RESOLUTION",
+    "authoritative_first_failed_predicate": "CALLABLE_COMMAND_TRANSPORT_REQUIRED",
+    "tcp_probe_result": "NOT_ADJUDICATED__DISCARD_LOCAL_HELPER_FALSE_PASS_AFTER_DNS_OPEN_ERROR",
+    "railway_connector_status": "AVAILABLE_FOR_AUTHENTICATED_ACCOUNT_PROJECT_ACTIONS__NO_ANONYMOUS_SSH_VM_ACTION_EXPOSED"
+  },
+  "adjudication": {
+    "railway_anonymous_hard_zero_contract": true,
+    "railway_anonymous_route_callable_from_current_authorized_surface": false,
+    "carrier_vm_admission": "NOT_REACHED",
+    "exact_source_closure_preflight": "NOT_REACHED",
+    "parent_capability_verdict": "UNPROVEN",
+    "capability_runtime_failure": false,
+    "classification": "ZERO_COST_ROUTE_REAL_BUT_NOT_CALLABLE_FROM_CURRENT_AUTHORIZED_EXECUTION_SURFACE"
+  },
+  "heldout_004": {
+    "freshness": "UNSPENT",
+    "execution_count": 0,
+    "start_created": false,
+    "result_created": false,
+    "dispatch_invoked": false,
+    "evaluator_invoked": false
+  },
+  "incremental_spend_usd": 0,
+  "user_device_used": false,
+  "val_town_used": false,
+  "sprite_used": false,
+  "required_next_action": "DISCOVER_OR_RECOVER_NEXT_CALLABLE_VERIFIED_HARD_ZERO_REMOTE_LINUX_ROUTE__REUSE_EXISTING_SURFACE_EXHAUSTION_EVIDENCE__REQUIRE_RAW_COMMAND_TRANSPORT_AND_FAITHFUL_APT_SURFACE__NO_HELDOUT_004_START",
+  "prohibitions": [
+    "NO_SECOND_RAILWAY_ANONYMOUS_ALLOCATION_ATTEMPT_WITH_UNCHANGED_TRANSPORT_FAILURE_CLASS",
+    "NO_ACCOUNT_PAID_RAILWAY_SUBSTITUTION_WITHOUT_HARD_ZERO_ATTESTATION",
+    "NO_HELDOUT_004_START",
+    "NO_HELDOUT_003_REPLAY",
+    "NO_SPRITE",
+    "NO_VAL_TOWN",
+    "NO_USER_LAPTOP",
+    "NO_PAID_OR_UNPROVEN_COST_INFRASTRUCTURE"
+  ]
+}
