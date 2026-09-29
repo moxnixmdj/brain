@@ -5292,7 +5292,7 @@ def _goal_observation_context(observations, max_chars=GOAL_OBSERVATION_CONTEXT_M
         if len(text)<=120:
             return text
         digest=hashlib.sha256(text.encode("utf-8","replace")).hexdigest()[:12]
-        return text[:96]+"...[KEY_SHA256:"+digest+"]"
+        return text[:92]+"...[KEY_SHA256:"+digest+"]"
 
     def bounded(value,string_limit,list_limit,depth=0):
         if depth>=5:
