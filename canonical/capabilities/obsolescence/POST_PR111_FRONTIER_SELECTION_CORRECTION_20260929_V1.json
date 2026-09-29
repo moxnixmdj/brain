@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_SELECTION_CORRECTION_V1",
+  "correction_id": "POST-PR111-FRONTIER-SELECTION-CORRECTION-20260929",
+  "checked_on": "2026-09-29",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "source_main_after_pr111": "d22f5012df9a32e073e0bed8fe7da7af4a60441b",
+  "invalidated_frontier_selection": {
+    "source_pr": 111,
+    "selected_capability": "MULTI_TOOL_ORCHESTRATION_AND_PLANNING",
+    "reason": "The recomputation omitted a smaller deterministic residual on the still-unresolved TOOL_DISCOVERY_SELECTION_AND_LEARNING parent path and therefore did not establish that the pivot maximized verified capability gain per wall-clock.",
+    "omitted_blocker": "INHERITED_XAPIAN_DISCOVERY_ROUTE_EMITS_APT_FULL_METADATA_XAPIAN_BUT_AUTO_APT_ACQUISITION_ACCEPTS_ONLY_APT_CATALOG__VERIFIED_SUPPLIERS_CANNOT_ENTER_EXISTING_PROBE_CONTRACT_EXECUTE_VERIFY_LOOP",
+    "qualitative_selection_evidence": [
+      "expected_gain labels",
+      "obsolescence_leverage labels",
+      "time_to_evidence labels"
+    ],
+    "correction_comment_on_pr111": "Frontier recomputation correction posted after merge acknowledges the omitted source-admission blocker."
+  },
+  "exact_static_evidence": {
+    "discovery_runtime": "canonical/runtime/capability_discovery.py",
+    "discovery_runtime_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
+    "discovery_source_emitted": "APT_FULL_METADATA_XAPIAN",
+    "strong_evidence_tier": "SEMANTIC_PACKAGE_EXECUTABLE_OWNERSHIP",
+    "executable_ownership_status": "LOCAL_EXECUTABLE_OWNERSHIP_VERIFIED",
+    "acquisition_runtime": "canonical/runtime/auto_apt_cli_acquisition.py",
+    "acquisition_runtime_blob": "786f7de7df853cfaec2826f9471942b001e7eadc",
+    "first_rejection": "_viable_candidates skips every candidate whose discovery_source is not exactly APT_CATALOG",
+    "consequence": "The HELDOUT-005-verified supplier candidates cannot reach apt_cli_probe, cli_contract_inference, execution, or independent verification.",
+    "secondary_deferred_issue": "The legacy score >= 12 threshold is calibrated to APT_CATALOG lexical scoring and must not be assumed valid for Xapian BM25 weights until source admission is fixed."
+  },
+  "preserved_verified_win": {
+    "source_pr": 89,
+    "inheritance_pr": 96,
+    "heldout_validation": "DEBIAN-FULL-METADATA-XAPIAN-HELDOUT-VALIDATION-005",
+    "authoritative_deployment": "805a36d4-04cf-4938-bfac-74d29418081f",
+    "heldout_oracle_family_recall": 1,
+    "heldout_top20_oracle_recall": 1,
+    "total_wall_s": 16.233238,
+    "freshness": "SPENT",
+    "replay_allowed": false
+  },
+  "corrected_frontier": {
+    "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "causal_blocker": "INHERITED_XAPIAN_DISCOVERY_ROUTE_EMITS_APT_FULL_METADATA_XAPIAN_BUT_AUTO_APT_ACQUISITION_ACCEPTS_ONLY_APT_CATALOG__VERIFIED_SUPPLIERS_CANNOT_ENTER_EXISTING_PROBE_CONTRACT_EXECUTE_VERIFY_LOOP",
+    "next_action": "FREEZE_ONE_FRESH_UNSEEN_XAPIAN_TO_AUTO_APT_ACQUISITION_INTEGRATION_GATE_BEFORE_RUNTIME_MUTATION__THEN_AUTHORIZE_ONLY_THE_SMALLEST_GENERIC_SOURCE_ADMISSION_REPAIR_IF_STILL_CAUSAL",
+    "multi_tool_orchestration": "PRESERVED_AS_FUTURE_FRONTIER_CANDIDATE__NOT_DISCARDED"
+  },
+  "runtime_mutated": false,
+  "heldout_005_replayed": false,
+  "incremental_spend_usd": 0
+}
