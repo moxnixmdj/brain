@@ -1,0 +1,100 @@
+{
+  "schema": "PROJECT_BRAIN_PR85_EXECUTION_SURFACE_RECHECK_20260929_V2",
+  "status": "HELDOUT_002_REMAINS_UNSPENT__EXTERNAL_ZERO_SPEND_EXECUTOR_NOT_CALLABLE",
+  "checked_at_utc": "2026-09-29T00:40:06Z",
+  "bound_pr": 85,
+  "bound_pr_head_before_record": "6fdec217b4333d3dd4fec1f205851f6f80bc2766",
+  "target_gate": "BATCHED-EXECUTABLE-EVIDENCE-HELDOUT-VALIDATION-002",
+  "execution_count_observed": 0,
+  "hard_constraints": {
+    "incremental_spend_usd": 0,
+    "user_laptop_execution_forbidden": true,
+    "val_town_forbidden": true,
+    "exact_pr85_runtime_bytes_required": true,
+    "complete_debian_or_ubuntu_apt_packages_and_contents_required": true,
+    "outbound_manpage_enrichment_required": true,
+    "hard_validation_wall_s": 600
+  },
+  "fresh_findings": [
+    {
+      "surface": "ChatGPT isolated Linux container",
+      "status": "REJECTED_NO_PUBLIC_EGRESS",
+      "evidence": [
+        "/etc/resolv.conf nameserver exists and a default route exists.",
+        "Raw TCP probes to 1.1.1.1:443, 8.8.8.8:53, and 93.184.216.34:443 were immediately refused.",
+        "The separate container URL downloader also failed to fetch the Debian trixie Release file.",
+        "Therefore the prior DNS failure is not merely a resolver misconfiguration and the container cannot provide live apt/manpage retrieval."
+      ],
+      "retry_rule": "Do not retry equivalent DNS/ssh/package-install variations unless network policy changes."
+    },
+    {
+      "surface": "GitHub hosted execution",
+      "status": "NO_ZERO_COST_PUBLIC_REPO_ESCAPE",
+      "evidence": [
+        "All repositories writable through the connected GitHub installation were checked; none is public.",
+        "The connected GitHub tool surface exposes no repository-creation or visibility-change action.",
+        "Private Actions already has an account-level pre-step failure reproduced across independent repositories."
+      ],
+      "retry_rule": "Do not retry private Actions until the pre-step failure class changes."
+    },
+    {
+      "surface": "Vercel Sandbox",
+      "status": "TECHNICALLY_FIT__NOT_CALLABLE_FROM_CONNECTED_ACCOUNT",
+      "evidence": [
+        "Current Vercel documentation states Sandbox provides isolated Ubuntu microVMs with sudo/apt-get, network policy, and Hobby availability.",
+        "Current Vercel pricing states Hobby is $0, Sandbox has included monthly usage, and Hobby cannot purchase additional usage beyond caps.",
+        "The connected Vercel plugin exposes no direct Sandbox create/exec action.",
+        "list_teams returned zero teams, leaving no authenticated project/team scope from which to bootstrap an SDK-backed sandbox through the current connector."
+      ],
+      "retry_rule": "Reconsider only if a Vercel team/project or direct Sandbox action becomes callable."
+    },
+    {
+      "surface": "Railway anonymous VM",
+      "status": "BEST_KNOWN_TECHNICAL_ZERO_COST_ROUTE__NOT_CALLABLE",
+      "evidence": [
+        "Railway officially exposes ssh railway.new as an accountless/cardless 60-minute 2-vCPU/2-GB Linux VM and says unclaimed compute is free.",
+        "The current container has neither usable outbound sockets nor a usable direct SSH path.",
+        "Railway plugin remains unconnected in the current ChatGPT toolset."
+      ],
+      "retry_rule": "Immediately use if a callable Railway connector/SSH-capable execution surface appears; do not substitute metered infrastructure."
+    },
+    {
+      "surface": "Hopbox public microVM host",
+      "status": "DISCOVERED_PUBLIC_NO_SIGNUP_SSH__NOT_CALLABLE",
+      "evidence": [
+        "Public documentation advertises no-signup Ubuntu microVMs over SSH and a built-in MCP control plane.",
+        "Plugin directory search returned no Hopbox connector.",
+        "The current local container cannot make outbound SSH connections."
+      ],
+      "retry_rule": "Do not pursue unless an MCP/SSH path becomes callable from the active toolset."
+    },
+    {
+      "surface": "Authorized Remote Desktop device Mo",
+      "status": "ONLINE_BUT_FORBIDDEN_FOR_THIS_GATE",
+      "evidence": [
+        "The authorized device is currently online.",
+        "Canonical/user constraint forbids user-laptop execution for heldout-002, so it was not used as executor or network bridge."
+      ]
+    },
+    {
+      "surface": "Render",
+      "status": "STILL_REJECTED_ZERO_SPEND_NOT_FAIL_CLOSED",
+      "evidence": [
+        "Official documentation confirms free services may still incur supplementary pipeline or outbound-bandwidth charges when a payment method exists.",
+        "The connected API does not expose the workspace billing/spend-limit state needed to prove hard-zero before execution.",
+        "Prior PR85 evidence records an HTTP 402 payment-information requirement on an explicit free-service creation attempt."
+      ],
+      "retry_rule": "Do not mutate Render for this gate without verified account-level zero-spend enforcement."
+    }
+  ],
+  "authoritative_transition": "No execution occurred. Heldout-002 remains fresh and unspent. The next valid state change is still one exact run on a newly callable, verified-zero-spend, faithful Debian/Ubuntu APT+Contents+outbound-manpage surface, followed immediately by PASS/FAIL reconciliation.",
+  "anti_drift": [
+    "Do not preview or simulate heldout-002.",
+    "Do not use evaluator oracle families as runtime hints.",
+    "Do not implement a second runtime repair.",
+    "Do not merge or promote PR85 before heldout-002 execution and reconciliation.",
+    "Do not use the user's laptop.",
+    "Do not use Val Town.",
+    "Do not consume metered or unverifiably free compute."
+  ]
+}
