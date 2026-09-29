@@ -1,0 +1,164 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+import hashlib, json, os, pathlib, shutil, subprocess, sys, time, traceback
+
+ROOT=pathlib.Path(__file__).resolve().parents[2]
+RUNTIME=ROOT/"canonical"/"runtime"
+sys.path.insert(0,str(RUNTIME))
+import auto_apt_cli_acquisition
+
+SPEC=ROOT/"canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_002.json"
+EVID=ROOT/"canonical"/"astra_runtime"/"evidence"
+RESULT=EVID/"XAPIAN-APT-E2E-INTEGRATION-HELDOUT-002__RESULT.json"
+START=EVID/"XAPIAN-APT-E2E-INTEGRATION-HELDOUT-002__EXECUTION_START.json"
+PNG_MAGIC=bytes.fromhex("89504e470d0a1a0a")
+
+
+def git_blob_sha(path: pathlib.Path) -> str:
+    raw=path.read_bytes()
+    return hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\\0"+raw).hexdigest()
+
+
+def terminal_result(payload, rc):
+    EVID.mkdir(parents=True,exist_ok=True)
+    RESULT.write_text(json.dumps(payload,indent=2,sort_keys=True)+"\\n",encoding="utf-8")
+    print(json.dumps(payload,indent=2,sort_keys=True))
+    raise SystemExit(rc)
+
+
+def main():
+    spec=json.loads(SPEC.read_text(encoding="utf-8"))
+    vid=spec["validation_id"]
+    if vid!="XAPIAN-APT-E2E-INTEGRATION-HELDOUT-002":
+        raise SystemExit("VALIDATION_ID_MISMATCH")
+    freshness=spec.get("freshness") or {}
+    if freshness.get("state")!="UNSPENT" or int(freshness.get("execution_count") or 0)!=0:
+        raise SystemExit("HELDOUT_NOT_FRESH")
+    if RESULT.exists():
+        raise SystemExit("TERMINAL_RESULT_ALREADY_EXISTS")
+    EVID.mkdir(parents=True,exist_ok=True)
+    try:
+        fd=os.open(str(START),os.O_CREAT|os.O_EXCL|os.O_WRONLY,0o644)
+    except FileExistsError:
+        raise SystemExit("EXECUTION_START_ALREADY_EXISTS")
+    with os.fdopen(fd,"w",encoding="utf-8") as fh:
+        json.dump({"validation_id":vid,"pid":os.getpid(),"started_unix_ns":time.time_ns()},fh,sort_keys=True)
+        fh.write("\\n")
+
+    t0=time.monotonic()
+    observed_runtime={}
+    try:
+        integ=spec["runtime_integrity"]
+        for rel,expected in (integ.get("immutable_baseline_blobs") or {}).items():
+            actual=git_blob_sha(ROOT/rel)
+            observed_runtime[rel]=actual
+            if actual!=expected:
+                raise RuntimeError("IMMUTABLE_RUNTIME_BLOB_MISMATCH:"+rel+":"+actual)
+        repair_rel=integ["single_permitted_repair_path"]
+        repair_blob=git_blob_sha(ROOT/repair_rel)
+        observed_runtime[repair_rel]=repair_blob
+        if repair_blob==integ["pre_repair_blob_for_permitted_path"]:
+            raise RuntimeError("AUTHORIZED_ADMISSION_REPAIR_NOT_PRESENT")
+
+        if not shutil.which("apt-cache") or not shutil.which("sudo"):
+            raise RuntimeError("FAITHFUL_APT_EXECUTION_SURFACE_REQUIRED")
+        if not shutil.which("zbarimg"):
+            raise RuntimeError("EXTERNAL_EAN13_ORACLE_MISSING")
+
+        mission_rel=str(SPEC.relative_to(ROOT))
+        goal=spec["frozen_goal"]
+        dispatch=auto_apt_cli_acquisition.dispatch(
+            goal,vid,mission_rel,ROOT,discovery=None
+        )
+        pending_path=ROOT/dispatch["pending_binding_path"]
+        pending=json.loads(pending_path.read_text(encoding="utf-8"))
+        supplier=pending.get("selected_supplier") or {}
+        if dispatch.get("status")!="ACQUISITION_DISPATCHED":
+            raise RuntimeError("DISPATCH_NOT_COMPLETED")
+        if supplier.get("discovery_source")!="APT_FULL_METADATA_XAPIAN":
+            raise RuntimeError("WRONG_DISCOVERY_SOURCE:"+str(supplier.get("discovery_source")))
+        if supplier.get("binding_kind")!="apt":
+            raise RuntimeError("WRONG_BINDING_KIND:"+str(supplier.get("binding_kind")))
+        if supplier.get("zero_cost_eligible") is not True:
+            raise RuntimeError("SUPPLIER_NOT_ZERO_COST_ELIGIBLE")
+
+        verify_rel=str(pending["verification_result_path"])
+        verify_cmd=[
+            sys.executable,
+            str(ROOT/"canonical"/"runtime"/"verify_pending_cli_binding.py"),
+            str(pending_path.relative_to(ROOT)),
+            verify_rel,
+        ]
+        remaining=max(1,int(spec["acceptance"]["hard_validation_wall_s"]-(time.monotonic()-t0)))
+        proc=subprocess.run(verify_cmd,text=True,capture_output=True,cwd=ROOT,timeout=remaining)
+        verify_path=ROOT/verify_rel
+        verify=json.loads(verify_path.read_text(encoding="utf-8")) if verify_path.exists() else None
+        if proc.returncode!=0:
+            raise RuntimeError("EXISTING_INDEPENDENT_VERIFIER_FAILED:"+proc.stderr[-3000:])
+        if not isinstance(verify,dict) or verify.get("status")!="VERIFIED" or verify.get("independent_verified") is not True:
+            raise RuntimeError("EXISTING_INDEPENDENT_VERIFICATION_NOT_PROVEN")
+
+        output_path=ROOT/spec["real_effect"]["output_path"]
+        raw=output_path.read_bytes()
+        if not raw or not raw.startswith(PNG_MAGIC):
+            raise RuntimeError("OUTPUT_NOT_VALID_PNG")
+        oracle=subprocess.run(
+            ["zbarimg","--quiet",str(output_path)],
+            text=True,capture_output=True,cwd=ROOT,timeout=30
+        )
+        oracle_stdout=oracle.stdout.strip()
+        expected=spec["acceptance"]["external_semantic_oracle"]["expected_stdout_exact"]
+        if oracle.returncode!=0 or oracle_stdout!=expected:
+            raise RuntimeError("EXTERNAL_SEMANTIC_ORACLE_MISMATCH:"+json.dumps({
+                "returncode":oracle.returncode,
+                "stdout":oracle_stdout,
+                "stderr":oracle.stderr[-1000:],
+                "expected":expected,
+            },sort_keys=True))
+
+        total=time.monotonic()-t0
+        passed=total<=float(spec["acceptance"]["hard_validation_wall_s"])
+        result={
+            "schema":"PROJECT_BRAIN_XAPIAN_APT_E2E_INTEGRATION_HELDOUT_RESULT_V1",
+            "validation_id":vid,
+            "acceptance_gate_pass":passed,
+            "dispatch":dispatch,
+            "selected_supplier":supplier,
+            "verification_result":verify,
+            "external_semantic_oracle":{
+                "returncode":oracle.returncode,
+                "stdout":oracle_stdout,
+                "expected":expected,
+                "verified":oracle_stdout==expected and oracle.returncode==0,
+            },
+            "output_sha256":hashlib.sha256(raw).hexdigest(),
+            "output_bytes":len(raw),
+            "observed_runtime_blobs":observed_runtime,
+            "total_wall_s":round(total,6),
+            "hard_validation_wall_s":spec["acceptance"]["hard_validation_wall_s"],
+            "package_hints_used_by_runtime":False,
+            "prebound_registry_route_used":False,
+            "promotion_authorized":False,
+            "required_next_action":"RECONCILE__NO_SECOND_REPAIR_BEFORE_RECONCILIATION",
+        }
+        terminal_result(result,0 if passed else 2)
+    except Exception as exc:
+        total=time.monotonic()-t0
+        failure={
+            "schema":"PROJECT_BRAIN_XAPIAN_APT_E2E_INTEGRATION_HELDOUT_RESULT_V1",
+            "validation_id":vid,
+            "acceptance_gate_pass":False,
+            "error":type(exc).__name__+":"+str(exc),
+            "traceback":traceback.format_exc(),
+            "observed_runtime_blobs":observed_runtime,
+            "total_wall_s":round(total,6),
+            "hard_validation_wall_s":spec["acceptance"]["hard_validation_wall_s"],
+            "package_hints_used_by_runtime":False,
+            "prebound_registry_route_used":False,
+            "promotion_authorized":False,
+            "required_next_action":"RECONCILE_EXACT_FIRST_TERMINAL_BLOCKER__NO_SECOND_REPAIR_BEFORE_RECONCILIATION",
+        }
+        terminal_result(failure,2)
+
+if __name__=="__main__":
+    main()
