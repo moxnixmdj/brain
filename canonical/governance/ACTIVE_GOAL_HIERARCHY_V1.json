@@ -4,11 +4,11 @@
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "active_capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-  "active_probe": "SEMANTIC-PACKAGE-DISCOVERY-COMPOSITE-HELDOUT-VALIDATION-004",
-  "probe_state": "HELDOUT_003_FROZEN_UNSPENT__GENERIC_REPAIR_FROZEN__EXECUTION_SURFACE_BLOCKED",
-  "current_parent_blocker": "NO_CURRENT_CALLABLE_SURFACE_SATISFIES_EXACT_FROZEN_APT_EXECUTION_AND_PROVABLE_ZERO_INCREMENTAL_SPEND",
-  "next_required_action_class": "ESTABLISH_OR_DISCOVER_ONE_CALLABLE_FAITHFUL_HARD_ZERO_SPEND_REMOTE_APT_SURFACE__QUALIFY_WITH_UNRELATED_CANARIES__THEN_EXECUTE_HELDOUT_003_EXACTLY_ONCE",
-  "forbidden_local_frontier": "ANY_HELDOUT_003_EXECUTION__PREVIEW_OR_REPLAY__SECOND_RUNTIME_REPAIR__TASK_SPECIFIC_LITERALS__PACKAGE_HINTS__TIMEOUT_INCREASE__BILLABLE_INFRASTRUCTURE__LAPTOP_EXECUTION__MERGE_OR_PROMOTION_BEFORE_004_RECONCILIATION",
+  "active_probe": "SEMANTIC-PACKAGE-DISCOVERY-CLEAN-HELDOUT-VALIDATION-005",
+  "probe_state": "CLEAN_HELDOUT_005_FROZEN_UNSPENT__EXACT_REPAIR_BYTES_FROZEN__AWAITING_HARD_ZERO_SURFACE_QUALIFICATION",
+  "current_parent_blocker": "CLEAN_HELDOUT_005_REQUIRES_ONE_QUALIFIED_HARD_ZERO_SPEND_REMOTE_EXECUTION_OF_EXACT_FROZEN_REPAIR_BYTES",
+  "next_required_action_class": "QUALIFY_EXISTING_RAILWAY_TRIAL_SURFACE_WITH_UNRELATED_CANARY_FOR_HARD_ZERO_SPEND__APT_XAPIAN_INDEX__APT_FILE__COMPLETE_APT_METADATA__OUTBOUND_MANPAGES__RESULT_READBACK__THEN_EXECUTE_HELDOUT_005_EXACTLY_ONCE",
+  "forbidden_local_frontier": "ANY_HELDOUT_003_OR_004_EXECUTION__005_PREVIEW_OR_REPLAY__SECOND_RUNTIME_REPAIR__TASK_SPECIFIC_LITERALS__PACKAGE_HINTS__TIMEOUT_INCREASE__BILLABLE_OR_UNPROVEN_METERED_INFRASTRUCTURE__LAPTOP_EXECUTION__MERGE_OR_PROMOTION_BEFORE_005_RECONCILIATION",
   "progress_level_minimum": "CAPABILITY_TARGET",
   "probe_budget": {
     "repairs_used_on_active_probe": 1,
@@ -26,7 +26,7 @@
       "may_define_frontier": false
     }
   ],
-  "active_probe_manifest": "canonical/experiments/SEMANTIC_PACKAGE_DISCOVERY_COMPOSITE_HELDOUT_VALIDATION_004.json",
+  "active_probe_manifest": "canonical/experiments/SEMANTIC_PACKAGE_DISCOVERY_CLEAN_HELDOUT_VALIDATION_005.json",
   "completed_probe_portfolio": {
     "portfolio_id": "ORTHO-TOOL-LEARNING-PORTFOLIO-001",
     "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_ORTHOGONAL_PORTFOLIO_001_RECONCILIATION.json",
@@ -108,23 +108,22 @@
     "new_held_out_gate_required": true
   },
   "new_held_out_gate": {
-    "validation_id": "SEMANTIC-PACKAGE-DISCOVERY-COMPOSITE-HELDOUT-VALIDATION-004",
+    "validation_id": "SEMANTIC-PACKAGE-DISCOVERY-CLEAN-HELDOUT-VALIDATION-005",
     "frozen_date": "2026-09-29",
-    "manifest_path": "canonical/experiments/SEMANTIC_PACKAGE_DISCOVERY_COMPOSITE_HELDOUT_VALIDATION_004.json",
-    "runner_path": "canonical/experiments/run_semantic_package_discovery_composite_heldout_validation_004.py",
-    "contamination_receipt_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_003_CONCURRENCY_CONTAMINATION_AND_004_COMPOSITE_FREEZE_V1.json",
-    "cases": 4,
+    "manifest_path": "canonical/experiments/SEMANTIC_PACKAGE_DISCOVERY_CLEAN_HELDOUT_VALIDATION_005.json",
+    "runner_path": "canonical/experiments/run_semantic_package_discovery_clean_heldout_validation_005.py",
+    "contamination_receipt_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_004_LITERAL_CONTAMINATION_AND_005_CLEAN_FREEZE_V1.json",
+    "cases": 3,
     "oracle_family_recall_min": 0.75,
     "top20_oracle_recall_min": 0.75,
+    "effective_minimum_cases_passing": 3,
     "hard_validation_wall_s": 300,
     "execution_count": 0,
     "freshness": "UNSPENT",
     "repair_runtime_blob_sha": "dbd2b4026149a7a2e731eb3152ca398e30ca625f",
     "repair_commit_sha": "aa49d81446e5d042f8cf1cffb3bada9c887fc014",
-    "repair_freeze_commit_sha": "86406b1254b3b8eb290795a76661b7e57dcacf67",
     "replay_authorized": false,
-    "promotion_authorized": false,
-    "execution_surface_blocker_receipt": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_003_EXECUTION_SURFACE_QUALIFICATION_BLOCKER_V1.json"
+    "promotion_authorized": false
   },
   "antidrift_interlock": {
     "schema": "PROJECT_BRAIN_ANTIDRIFT_EXECUTION_INTERLOCK_V2",
@@ -197,5 +196,10 @@
     "receipt": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_003_EXECUTION_SURFACE_QUALIFICATION_BLOCKER_V1.json",
     "gate_spent": false,
     "runtime_mutated": false
+  },
+  "heldout_004_literal_contamination": {
+    "receipt_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_004_LITERAL_CONTAMINATION_AND_005_CLEAN_FREEZE_V1.json",
+    "status": "QUARANTINED__DO_NOT_EXECUTE_004",
+    "exposed_runtime_literal": "webp"
   }
 }
