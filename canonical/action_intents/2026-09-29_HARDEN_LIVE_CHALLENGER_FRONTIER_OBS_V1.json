@@ -1,0 +1,132 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "HARDEN-LIVE-CHALLENGER-FRONTIER-OBS-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "PROGRAM_OPERATING_STRATEGY",
+  "probe_id": null,
+  "causal_blocker": "OBS_CAN_PASS_WITH_A_STALE_EXTERNAL_ROUTE_SET__BEST_KNOWN_ROUTE_HAS_NO_EXPIRY__NO_MACHINE_ENFORCED_INCUMBENT_VS_CHALLENGER_REFRESH",
+  "action_kind": "USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::PROGRAM_OPERATING_STRATEGY::OBS_CAN_PASS_WITH_A_STALE_EXTERNAL_ROUTE_SET__BEST_KNOWN_ROUTE_HAS_NO_EXPIRY__NO_MACHINE_ENFORCED_INCUMBENT_VS_CHALLENGER_REFRESH::USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "expected_parent_frontier_change": "Every consequential action whose route can be supplied by a changing external ecosystem must carry a fresh machine-validated challenger frontier before expensive continuation, so stale incumbent routes cannot retain authority merely because they were previously selected.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1 already mandates search/reuse and invalidation on material new facts.",
+    "RECURSIVE_OBS_RECEIPT_SCHEMA_V2 validates exact-base binding and structural OBS layers but has no time-bound external challenger frontier.",
+    "enforce_goal_hierarchy.py validates search intent but does not validate external discovery freshness, source diversity, query diversity, or incumbent-vs-challenger evidence.",
+    "The InstaCloud miss exposed the exact failure class: a plausible incumbent route was worked while a newly capable external route was not surfaced."
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 3,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Merge only the minimal law/schema/template/gate/trusted-validator/pointer coherence needed to make fresh challenger discovery fail closed, verify malformed stale receipts are rejected, then stop governance work and return to real capability acquisition.",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "user_authorization_summary": "User explicitly instructed the system to improve everything that should be improved after identifying the failure to discover InstaCloud or the best current option.",
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "9f272f59523d6bf1023a539a3479a35f1f897fd4",
+    "real_outcome": "Prevent stale route sets from steering Brain into locally optimized but globally obsolete work.",
+    "required_capability": "Machine-enforced live challenger-frontier discovery, freshness expiry, and incumbent-vs-challenger route racing inside the existing trusted OBS guard.",
+    "obs_goal": {
+      "real_outcome": "Consequential Brain work uses the best currently evidenced sufficient route rather than the best route remembered from an earlier search.",
+      "proxy_goals_deleted": [
+        "Add InstaCloud as a special-case provider",
+        "Create another discovery service",
+        "Rewrite the entire governance stack"
+      ],
+      "surviving_necessity": "Repair the existing OBS contract and trusted validator so stale external route sets fail closed generically."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1",
+        "CAPABILITY_ACQUISITION_ENGINE_LAW_V2",
+        "RECURSIVE_OBS_RECEIPT_SCHEMA_V2",
+        "ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V1",
+        "GOAL_HIERARCHY_ACTION_GATE_V4",
+        "CRITICAL_PATH_PRE_ACTION_GATE_V5",
+        "trusted enforce_goal_hierarchy.py"
+      ],
+      "external_existing_routes_checked": [
+        "Not applicable to the governance implementation itself: the required enforcement authority already exists in Brain's trusted guard and replacing it would add machinery."
+      ],
+      "capability_work_deleted": [
+        "No provider-specific InstaCloud rule",
+        "No new scheduler",
+        "No new external discovery daemon",
+        "No second trusted guard"
+      ],
+      "surviving_gap": "The trusted guard cannot currently distinguish a genuinely fresh route race from an OBS receipt built on a stale external candidate universe."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Intrinsic to the current OBS enforcement contract.",
+      "delete_bypass_substitute_options": [
+        "Delete external discovery enforcement: rejected because that is the observed failure.",
+        "Rely on human memory: rejected because the miss already demonstrates it is not fail-closed.",
+        "Build a new service: rejected because the existing trusted guard can enforce the required evidence.",
+        "Repair existing schema/template/gates/validator: survives."
+      ],
+      "surviving_causal_blocker": "No required time-bound external challenger-frontier record is machine validated before consequential continuation."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": ["DELETE","BYPASS","REUSE","SUBSTITUTE","COMPOSE","REPAIR","BUILD"],
+      "routes_ranked": [
+        "REPAIR existing OBS contract and trusted validator with live challenger-frontier requirements",
+        "Add provider-specific discovery exceptions",
+        "Build a separate discovery control plane"
+      ],
+      "losing_routes_reason": "Provider-specific exceptions do not generalize; a new control plane adds latency and machinery while duplicating the trusted guard.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use the existing drift guard as the oracle and add deterministic regression cases proving stale, hollow, and under-diversified challenger frontiers fail while a valid fresh receipt passes."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any convention that treats a previously selected route as authoritative without freshness evidence",
+        "Manual reminders to re-search before expensive decisions"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Provider freshness invalidation",
+        "Adversarial challenger search",
+        "Route-set expiry",
+        "Discovery source/query diversity checks"
+      ],
+      "fresh_reuse_plan": "The next consequential real-task or support PR with an externally satisfiable capability gap must pass the new challenger-frontier contract before implementation or expensive execution."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse the current seven-layer OBS architecture",
+        "Reuse the existing trusted pull_request_target guard",
+        "Avoid any provider-specific machinery"
+      ],
+      "search_stop_decision": "Stop governance changes once the existing trusted guard can reject stale or hollow route frontiers and the canonical authoring/gates point to the same contract.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "REPAIR_EXISTING_TRUSTED_OBS_GUARD",
+      "PROVIDER_SPECIFIC_EXCEPTION_LIST",
+      "NEW_DISCOVERY_CONTROL_PLANE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "PROVIDER_SPECIFIC_EXCEPTION_LIST",
+      "NEW_DISCOVERY_CONTROL_PLANE"
+    ],
+    "selected_surviving_route": "REPAIR_EXISTING_TRUSTED_OBS_GUARD",
+    "why_selected_route_is_fastest_sufficient": "It reuses the existing mandatory trusted enforcement path, adds the missing evidence predicates directly, and avoids a second discovery system.",
+    "expected_parent_level_state_change": "Every consequential action whose route can be supplied by a changing external ecosystem must carry a fresh machine-validated challenger frontier before expensive continuation, so stale incumbent routes cannot retain authority merely because they were previously selected.",
+    "stop_condition": "Merge only the minimal law/schema/template/gate/trusted-validator/pointer coherence needed to make fresh challenger discovery fail closed, verify malformed stale receipts are rejected, then stop governance work and return to real capability acquisition.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "This governance change reuses Brain's already trusted internal enforcement path; the failure being repaired is external discovery for future capability actions, not selection of a new governance supplier."
+    }
+  }
+}
