@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_H004_PUBLIC_RUNNER_PRESTART_TRANSLATION_EN_FAILURE_V1",
+  "evidence_id": "H004-PUBLIC-RUNNER-PRESTART-TRANSLATION-EN-20260929-V1",
+  "public_repository": "moxnixmdj/verification-capsule-runner",
+  "workflow_run_id": 36599056622,
+  "workflow_run_attempt": 1,
+  "arm_commit": "8b74201e58c80d6998433de2c8dcab8211a07f67",
+  "passed_steps": [
+    "one-shot event identity",
+    "faithful Debian surface package installation"
+  ],
+  "observed_metadata_fetch": [
+    "trixie/main amd64 Contents",
+    "trixie/main all Contents",
+    "trixie-updates/main amd64 Contents",
+    "trixie-updates/main all Contents"
+  ],
+  "failed_predicate": "TRANSLATION_EN_METADATA_MISSING",
+  "skipped_after_failure": [
+    "H004 execution"
+  ],
+  "root_cause": "Debian job container default APT language policy did not fetch English Translation indexes. The public carrier itself had network and Contents metadata, so this is an APT acquisition-policy gap before START.",
+  "admissible_fix": "new workflow lane + new ARM filename; explicitly configure Acquire::Languages=en before apt-get update. Change no runtime/evaluator/sealed payload bytes. Do not rerun lanes 001 or 002.",
+  "heldout_004": {
+    "freshness": "UNSPENT",
+    "execution_count": 0,
+    "start_created": false,
+    "result_created": false,
+    "dispatch_invoked": false,
+    "evaluator_invoked": false
+  },
+  "incremental_spend_usd": 0,
+  "required_next_action": "STAGE_PUBLIC_WORKFLOW_AND_ARM_V3_WITH_EXPLICIT_APT_ENGLISH_TRANSLATIONS__DO_NOT_RERUN_PRIOR_LANES__REQUIRE_FULL_PRESTART_SURFACE__THEN_ALLOW_H004_START_EXACTLY_ONCE"
+}
