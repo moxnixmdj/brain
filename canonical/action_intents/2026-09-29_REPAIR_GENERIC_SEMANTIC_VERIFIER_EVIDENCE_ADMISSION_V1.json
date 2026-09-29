@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "REPAIR-GENERIC-SEMANTIC-VERIFIER-EVIDENCE-ADMISSION-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "causal_blocker": "HELDOUT_004_SPENT_FAIL__INDEPENDENT_SEMANTIC_VERIFIER_ACQUISITION_EMPTY__NO_REPLAY",
+  "action_kind": "GENERIC_SEMANTIC_VERIFIER_ADMISSION_REPAIR",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::HELDOUT_004_SPENT_FAIL__INDEPENDENT_SEMANTIC_VERIFIER_ACQUISITION_EMPTY__NO_REPLAY::GENERIC_SEMANTIC_VERIFIER_ADMISSION_REPAIR",
+  "expected_parent_frontier_change": "Replace the verifier's legacy matched_terms-only semantic admission assumption with a source-neutral evidence sufficiency predicate. Preserve legacy >=2 matched terms admission. Additionally admit candidates carrying verified executable semantic ownership evidence (eligibility_status LOCAL_EXECUTABLE_OWNERSHIP_VERIFIED, evidence_tier SEMANTIC_PACKAGE_EXECUTABLE_OWNERSHIP, nonempty command_paths, nonempty semantic_source). Preserve producer exclusion, zero-cost, zero-friction, version/hash, probe, help-contract, execution and exact semantic output checks. No held-out replay; after repair verification freeze a new orthogonal gate.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "H004 first terminal reconciliation merged in PR203",
+    "PR113 evidence-only Xapian downstream interface audit reproduced the exact empty-attempt failure before H004",
+    "PR128 pre-freeze static risk explicitly predicted empty matched_terms versus verifier threshold",
+    "PR129 repaired upstream APT admission but explicitly did not change verifier",
+    "canonical capability_discovery full-metadata candidates carry executable semantic ownership evidence but matched_terms=[]"
+  ],
+  "evidence_presence_classification": "CAPABILITY_PROVEN_BUT_INTEGRATION_BLOCKED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": true,
+  "orthogonal_recurrence_count": 2,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Implement only the generic verifier-admission boundary and focused non-held-out regressions. No H004 replay, no held-out execution, no package-name whitelist, no source-name whitelist, no fabricated matched_terms, no discovery retuning, no contract-parser change.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
