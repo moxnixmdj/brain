@@ -32,6 +32,10 @@
     {
       "case": "SELECTED_ROUTE_MISMATCH",
       "expected_failure": "LIVE_CHALLENGER_FRONTIER_SELECTED_ROUTE_MISMATCH"
+    },
+    {
+      "case": "COMMUNITY_ONLY_ROUTE_QUALIFICATION",
+      "expected_failure": "LIVE_CHALLENGER_FRONTIER_CHALLENGER_QUALIFICATION_SOURCE_INVALID"
     }
   ],
   "required_acceptance": {
@@ -42,7 +46,8 @@
       "all_required_query_intents_present_and_distinct",
       "all_material_challengers_resolved",
       "unresolved_plausible_dominators_empty",
-      "selected_route_matches_recursive_obs_selected_surviving_route"
+      "selected_route_matches_recursive_obs_selected_surviving_route",
+      "community_or_social_discovery_is_backed_by_qualification_grade_evidence_before_route_resolution"
     ]
   },
   "progress_credit": false
