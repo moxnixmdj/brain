@@ -19,7 +19,7 @@ A model is only an optional external knowledge/action source, comparable to:
 - connected applications
 - humans when genuinely necessary
 
-Models may be used only when they are the best available source/tool for the specific missing knowledge, transformation, prediction, or action according to the system's objective function.
+Models may be used only as external sources/tools for specific missing knowledge, transformation, prediction, or action according to the system's objective function. A model MUST NOT supply the planning, decomposition, reasoning, synthesis, judgment, verification, or continuation loop for a cognitive capability that Project Brain claims as its own.
 
 ## Mandatory cognitive architecture
 
@@ -56,7 +56,7 @@ Examples:
 - software capability → repositories/packages/APIs/tools
 - UI action → browser/computer
 - uncertain hypothesis → experiment/simulation
-- synthesis/reasoning where a model is fastest/best → model
+- synthesis/reasoning → Project Brain's model-independent cognitive loop; model outputs may be consulted only as untrusted external proposals/reference and cannot be part of the credited cognition execution path
 - model unavailable/rate-limited → continue through other routes
 
 A model is never privileged merely because it is called AI.
@@ -89,7 +89,7 @@ The supervisor is responsible for:
 - Brain update
 - continuation
 
-Models are registered only as optional providers in the source/tool registry.
+Models are registered only as optional providers in the source/tool registry. For evidence used to acquire or fresh-reuse a cognitive Brain capability, the credited execution path MUST contain no model provider or model artifact; model-assisted runs are component/supplier evidence only.
 
 ## Promotion rule
 
