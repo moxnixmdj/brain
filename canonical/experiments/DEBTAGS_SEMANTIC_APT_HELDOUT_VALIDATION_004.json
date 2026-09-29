@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_DEBTAGS_SEMANTIC_APT_HELDOUT_VALIDATION_V1",
+  "validation_id": "DEBTAGS-SEMANTIC-APT-HELDOUT-VALIDATION-004",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "status": "FROZEN_BEFORE_DEBTAGS_RUNTIME_REPAIR",
+  "provenance": {
+    "selected_after": "SEMANTIC-APT-CAPABILITY-HELDOUT-VALIDATION-003_TERMINAL_FAIL",
+    "selected_before_any_successor_runtime_mutation": true,
+    "repository_search_precheck": "No prior Brain references found on main for pandoc, gifsicle, aria2, or potrace before freeze.",
+    "spent_and_prior_diagnostic_families_excluded": true
+  },
+  "cases": [
+    {
+      "effect_id": "HELDOUT-DOC-CONVERT-004",
+      "goal": "Convert a Markdown document into a standalone HTML document from the command line.",
+      "oracle_families": [
+        "pandoc"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-GIF-OPTIMIZE-004",
+      "goal": "Optimize an animated GIF image to reduce its file size without changing its visual content.",
+      "oracle_families": [
+        "gifsicle"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-MULTI-DOWNLOAD-004",
+      "goal": "Download a remote file from HTTP using multiple parallel connections from the command line.",
+      "oracle_families": [
+        "aria2"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-BITMAP-VECTOR-004",
+      "goal": "Convert a monochrome bitmap image into scalable vector graphics paths.",
+      "oracle_families": [
+        "potrace"
+      ]
+    }
+  ],
+  "acceptance": {
+    "heldout_oracle_family_recall_min": 0.75,
+    "heldout_top20_oracle_recall_min": 0.75,
+    "package_hints_forbidden": true,
+    "task_specific_literals_forbidden": true,
+    "hard_validation_wall_s": 300,
+    "incremental_spend_usd": 0
+  },
+  "execution_surface_requirements": {
+    "linux_family": "Ubuntu/Debian with complete normal APT package metadata and all applicable Contents indexes.",
+    "normal_apt_packages_metadata_required": true,
+    "architecture_all_contents_required": true,
+    "outbound_network_required": false,
+    "exact_runtime_bytes_required": true
+  },
+  "promotion_authorized": false
+}
