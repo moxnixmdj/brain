@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
+  "mission_id": "FRONTIER-LOCAL-QWEN9B-ACTIONS-DIAG-TASK-C-001",
+  "purpose": "Fresh real software-systems Task C after the generic safe-finalization repair. Diagnose the live Brain private GitHub Actions pre-run failure and derive the minimum hard-zero execution architecture using the pinned local non-frontier Qwen3.5-9B planner, live official GitHub documentation, bounded research, explicit uncertainty, and independent verification.",
+  "goal": {
+    "objective": "Determine the narrowest defensible diagnosis for why multiple private-repository GitHub Actions jobs terminate before runner assignment while a public-repository standard GitHub-hosted job executes successfully, then recommend the minimum zero-incremental-spend path for Brain validation work without exposing private material.",
+    "observed_facts": [
+      "Private Brain run 36635941674 created job guard, but runner_id=0, steps=[], and the job terminated before any workflow step executed.",
+      "Private Brain run 36635941696 created job real_ubjson, but runner_id=0, steps=[], and the job terminated before any workflow step executed.",
+      "Private Brain run 36635941788 created job exact-symbolic-obsolescence, but runner_id=0, steps=[], and the job terminated before any workflow step executed.",
+      "Public verification-capsule-runner run 36635838394 received a standard GitHub-hosted Ubuntu runner and completed the exact-byte validation successfully in the same operational period.",
+      "Hard constraint: incremental spend must remain exactly $0. Do not recommend adding a payment method, raising a budget, or buying runner capacity.",
+      "Hard constraint: private Brain material must not be published merely to gain free public Actions execution. Public execution is allowed only for explicitly publication-safe capsules."
+    ],
+    "authoritative_urls": [
+      "https://raw.githubusercontent.com/github/docs/e4859a83ac13c5715b723b3d17e273beba5c4572/content/billing/concepts/product-billing/github-actions.md",
+      "https://raw.githubusercontent.com/github/docs/e4859a83ac13c5715b723b3d17e273beba5c4572/content/actions/reference/runners/github-hosted-runners.md",
+      "https://raw.githubusercontent.com/github/docs/e4859a83ac13c5715b723b3d17e273beba5c4572/content/billing/reference/product-usage-included.md",
+      "https://raw.githubusercontent.com/github/docs/e4859a83ac13c5715b723b3d17e273beba5c4572/content/actions/how-tos/monitor-workflows/view-job-execution-time.md"
+    ],
+    "instructions": [
+      "Do not assume the exact account-specific cause. Distinguish what the observed runner metadata proves from what requires billing/account/settings visibility.",
+      "Use at least three of the provided live official GitHub Docs source files.",
+      "Compare at least these hypotheses: workflow/job code failure, global GitHub-hosted-runner outage, private-repository runner entitlement/quota/billing gate, and repository/account Actions policy.",
+      "Explain what runner_id=0 and steps=[] does and does not localize.",
+      "Use current GitHub documentation to establish the public-vs-private standard-runner billing distinction.",
+      "Identify the smallest read-only checks that would distinguish remaining private-account causes.",
+      "Derive a hard-$0 continuation route that preserves the private/public publication boundary.",
+      "Do not recommend self-hosting on the user's laptop.",
+      "Do not use ChatGPT, GPT-5.6, OpenAI hosted models, paid APIs, or private Brain state beyond the observed facts explicitly supplied in this mission.",
+      "If the evidence does not prove an exact billing or policy setting, say so rather than inventing one."
+    ],
+    "final_summary_contract": "Finish with compact valid JSON only. Keys: research_task_completed (true), diagnosis_layer (must be PRE_RUN_PRIVATE_REPO_RUNNER_ELIGIBILITY_OR_BILLING_LAYER), exact_account_cause_proven (false), public_standard_runner_free (true), private_standard_runner_uses_quota (true), workflow_or_job_code_supported_as_first_failure (false), global_hosted_runner_outage_supported (false), evidence (array of at least 3 concise source-backed observations), minimum_read_only_checks (array of at least 2), zero_spend_route (must be PUBLIC_STANDARD_GITHUB_HOSTED_RUNNER_FOR_PUBLICATION_SAFE_CAPSULES), publication_boundary (string), residual_uncertainty (string), frontier_capability_promoted (must be false). No markdown."
+  },
+  "steps": [
+    {
+      "id": "diagnose-private-actions-prerun-failure",
+      "adapter": "goal",
+      "goal_ref": "goal",
+      "allow_optional_model_planner": true,
+      "max_cycles": 6,
+      "verify": {
+        "type": "returncode_zero"
+      }
+    }
+  ],
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "public_sources_only": true,
+    "private_brain_state_present": false,
+    "frontier_hosted_model_allowed": false,
+    "user_laptop_allowed": false,
+    "one_execution_before_reconciliation": true
+  }
+}
