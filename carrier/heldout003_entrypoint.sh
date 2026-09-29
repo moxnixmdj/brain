@@ -13,7 +13,7 @@ command -v zbarimg >/dev/null
 python3 -c 'import xapian'
 
 ARCH="$(dpkg --print-architecture)"
-TR="$(apt-get indextargets --format '\$(FILENAME)' 'Identifier: Translations' 'Language: en' | sed '/^$/d' | wc -l | tr -d ' ')"
+TR="$(apt-get indextargets --format '$(FILENAME)' 'Identifier: Translations' 'Language: en' | sed '/^$/d' | wc -l | tr -d ' ')"
 CA="$(find /var/lib/apt/lists -maxdepth 1 -type f -name "*Contents-${ARCH}*" | wc -l | tr -d ' ')"
 ALL="$(find /var/lib/apt/lists -maxdepth 1 -type f -name '*Contents-all*' | wc -l | tr -d ' ')"
 TAGS="$(apt-cache dumpavail | awk '/^Tag:/{n++} END{print n+0}')"
