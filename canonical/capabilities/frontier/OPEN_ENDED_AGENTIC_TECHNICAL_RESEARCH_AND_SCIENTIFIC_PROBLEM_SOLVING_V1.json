@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
+  "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "status": "FRONTIER_BAR_DEFINED__ACQUISITION_UNPROVEN",
+  "real_capability": true,
+  "parent_families": [
+    "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
+    "TECHNICAL_SCIENTIFIC_REASONING",
+    "TOOL_SELECTION_AND_TOOL_LEARNING",
+    "MULTI_CAPABILITY_COMPOSITION",
+    "SELF_CRITIQUE_FALSIFICATION_AND_VERIFICATION",
+    "UNKNOWN_DOMAIN_ADAPTATION"
+  ],
+  "useful_behavior": "Given a consequential, open-ended technical or scientific objective in a domain that may not be pre-mapped, autonomously decompose the problem, discover and evaluate relevant existing knowledge/tools, perform quantitative reasoning and computation, revise the plan when evidence falsifies assumptions, synthesize evidence across sources and modalities, independently verify consequential claims, and deliver a decision-quality real-world result while preserving provenance and reusable capability.",
+  "frontier_reference": {
+    "model_family": "GPT-5.6 Sol / ChatGPT Deep Research",
+    "evidence": [
+      {
+        "source": "OpenAI — GPT-5.6: Frontier intelligence that scales with your ambition",
+        "url": "https://openai.com/index/gpt-5-6/",
+        "observed_capabilities": [
+          "complex work across knowledge work and science",
+          "tool-heavy agentic work",
+          "write/run lightweight programs that coordinate tools, process intermediate results, monitor progress, and choose next action"
+        ]
+      },
+      {
+        "source": "OpenAI Help — Deep research in ChatGPT",
+        "url": "https://help.openai.com/en/articles/10500283-research-faq",
+        "observed_capabilities": [
+          "plan multi-step research",
+          "combine and analyze information from multiple sources",
+          "produce structured reports with citations/source links",
+          "allow iterative refinement as evidence changes"
+        ]
+      }
+    ],
+    "frontier_bar": "Brain must reproduce the useful end-to-end behavior on real consequential work without depending on the frontier implementation, with independent verification and provenance. A narrow deterministic domain calculator is insufficient."
+  },
+  "minimum_acquisition_evidence": {
+    "real_task_A": "One difficult real technical/scientific task completed end-to-end with documented search/reuse, quantitative analysis, falsification, tool use where useful, and independent verification.",
+    "real_task_B": "One materially different real task in a different technical/scientific domain completed using the inherited route without rediscovering the operating method.",
+    "cross_domain_transfer_required": true,
+    "frontier_model_dependency_removed_for_both_tasks": true,
+    "narrow_same_domain_parameter_variation_does_not_count_as_fresh_reuse": true,
+    "deterministic_subtools_may_be_inherited_but_do_not_by_themselves_satisfy_frontier_capability_acquisition": true
+  },
+  "evidence_A": {
+    "task": "HIGH_THROUGHPUT_EARTH_TO_LEO_CARGO",
+    "status": "CANDIDATE_EVIDENCE__REAL_TASK_COMPLETED_OR_PARTIALLY_COMPLETED__NOT_SUFFICIENT_ALONE",
+    "supporting_tool": "canonical/capabilities/inherited/FIRST_PRINCIPLES_LAUNCH_ARCHITECTURE_ENVELOPE_V1.json"
+  },
+  "evidence_B": {
+    "status": "REQUIRED__UNSPENT",
+    "requirement": "Materially different real technical/scientific domain; must reuse the general research/problem-solving route, not merely rerun the launch calculator."
+  },
+  "obsolescence_status": "NOT_YET_PROVEN",
+  "residual_gap": "Cross-domain transfer and frontier-equivalent end-to-end autonomy remain unproven."
+}
