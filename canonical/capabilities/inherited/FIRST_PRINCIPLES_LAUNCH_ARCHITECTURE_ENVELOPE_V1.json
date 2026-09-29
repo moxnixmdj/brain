@@ -88,5 +88,7 @@
     "point-mass trajectory cannot certify structural or control loads"
   ],
   "inheritance_rule": "Reuse this capability before any new launch-architecture simulator, benchmark, or MDO framework. Escalate only when an exact residual requires higher fidelity.",
-  "fresh_reuse_status": "PENDING_IMMEDIATE_5G_FRAGILE_CARGO_CASE"
+  "fresh_reuse_status": "PASS",
+  "fresh_reuse_evidence_path": "canonical/capabilities/obsolescence/FIRST_PRINCIPLES_LAUNCH_ARCHITECTURE_ENVELOPE_FRESH_REUSE_5G_001.json",
+  "fresh_reuse_summary": "Reused without rediscovery on 5 g fragile-cargo constraint at 100 Mt/year; deterministic result independently matched by Wolfram calculation."
 }
