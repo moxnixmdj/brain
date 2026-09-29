@@ -1,0 +1,70 @@
+{
+  "schema": "PROJECT_BRAIN_HELDOUT_VALIDATION_TERMINAL_RECONCILIATION_V1",
+  "validation_id": "DEBTAGS-SEMANTIC-APT-HELDOUT-VALIDATION-004",
+  "status": "EXECUTED_ONCE__FAITHFUL_SURFACE__FAIL__SPENT",
+  "source_pr": 87,
+  "railway_deployment_id": "e30d71f1-d5b3-4139-a12c-aa5238afffde",
+  "execution_count": 1,
+  "freshness": "SPENT",
+  "execution_binding": {
+    "pr_head": "531f5aac93126eb22e402d10024ebce0d4861654",
+    "runtime_blob": "8574005201933951262c3c9ffbb44ba2c5c6b50a",
+    "manifest_blob": "4d1dfc41e9647756cc44eb617c62c6eb4329be55",
+    "runner_blob": "5f144955dc70dc844bad6df31887162c5eb411b7"
+  },
+  "preflight": {
+    "generic_tests": "7/7 PASS",
+    "packages_indexes": 3,
+    "contents_amd64_indexes": 2,
+    "contents_all_indexes": 2
+  },
+  "result": {
+    "validator_exit_code": 2,
+    "timeout": false,
+    "validator_wall_s": 227.012932,
+    "runner_total_wall_s": 226.940568,
+    "heldout_oracle_family_recall": 0.5,
+    "heldout_top20_oracle_recall": 0.5,
+    "acceptance_gate_pass": false,
+    "promotion_authorized": false,
+    "cases": [
+      {
+        "effect_id": "HELDOUT-DOC-CONVERT-004",
+        "oracle_found": false,
+        "oracle_rank": null
+      },
+      {
+        "effect_id": "HELDOUT-GIF-OPTIMIZE-004",
+        "oracle_found": false,
+        "oracle_rank": null
+      },
+      {
+        "effect_id": "HELDOUT-MULTI-DOWNLOAD-004",
+        "oracle_found": true,
+        "oracle_rank": 8,
+        "oracle_name": "aria2"
+      },
+      {
+        "effect_id": "HELDOUT-BITMAP-VECTOR-004",
+        "oracle_found": true,
+        "oracle_rank": 1,
+        "oracle_name": "potrace"
+      }
+    ]
+  },
+  "evidence_sha256": {
+    "stdout": "66ae711b480695d01c27e293150beb621fd7922e6a75fb62c7b852fc8289015e",
+    "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "result": "66ae711b480695d01c27e293150beb621fd7922e6a75fb62c7b852fc8289015e"
+  },
+  "posthoc_localization": {
+    "local_apt_metadata_confirmed": true,
+    "missed_oracle_evidence": [
+      "pandoc full local APT description explicitly includes converting markup, Markdown, HTML, and command-line semantics",
+      "gifsicle full local APT description explicitly includes GIF animation optimization for space"
+    ],
+    "diagnosis": "RUNTIME_METADATA_VIEW_TRUNCATION__NOT_MISSING_APT_KNOWLEDGE"
+  },
+  "required_next_action": "FREEZE_HELDOUT_005__THEN_ONE_GENERIC_LOCAL_FULL_DESCRIPTION_REPAIR__NO_REPLAY_OF_004",
+  "monotonic_no_retry": true
+}
