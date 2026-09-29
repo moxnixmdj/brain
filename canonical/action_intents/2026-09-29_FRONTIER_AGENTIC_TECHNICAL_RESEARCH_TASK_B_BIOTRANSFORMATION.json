@@ -1,0 +1,131 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FRONTIER-AGENTIC-TECHNICAL-RESEARCH-TASK-B-BIOTRANSFORMATION",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "CROSS_DOMAIN_REAL_TASK_B_UNSPENT__GENERAL_FRONTIER_RESEARCH_TRANSFER_UNPROVEN",
+  "action_kind": "FRESH_REUSE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::CROSS_DOMAIN_REAL_TASK_B_UNSPENT__GENERAL_FRONTIER_RESEARCH_TRANSFER_UNPROVEN::FRESH_REUSE",
+  "expected_parent_frontier_change": "Complete materially different real scientific Task B on rapid engineered biological transformation using the same inherited general research/problem-solving route, independently verify the result, and produce admissible cross-domain transfer evidence for frontier-capability adjudication without promoting the capability unless the evidence supports it.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Task A: high-throughput Earth-to-LEO cargo evidence",
+    "Frontier target record for open-ended agentic technical research and scientific problem-solving",
+    "No existing Brain evidence proving cross-domain transfer"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop when the biotransformation Task B answer is quantitatively resolved enough to identify the binding physical/biological limits, key claims are independently source-checked or recalculated, provenance is recorded, and cross-domain transfer evidence is ready for capability adjudication; do not invent new infrastructure or benchmarks.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "4520aec1f31baba438af5f30f9416a3eb53f5bfd",
+    "real_outcome": "Answer the user's real scientific question: whether engineered 'super-cells' and massive parallelization could enable near-instant human-to-much-larger-organism transformation, and what the true matter/energy/heat/transport limits are.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Decision-quality scientific answer in a materially different domain from aerospace.",
+      "proxy_goals_deleted": [
+        "biology benchmark",
+        "toy cell-division simulation",
+        "new research workflow"
+      ],
+      "surviving_necessity": "Resolve the user's biotransformation idea using authoritative evidence and first principles."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Task A general route: problem decomposition, source discovery, quantitative modeling, falsification, independent verification",
+        "Brain exact symbolic/deterministic computation",
+        "Web literature search",
+        "Wolfram independent calculation"
+      ],
+      "external_existing_routes_checked": [
+        "Cell-cycle/growth-rate literature",
+        "mammalian metabolic power and heat limits",
+        "biomass composition and mass-balance references",
+        "oxygen/nutrient transport and diffusion constraints"
+      ],
+      "capability_work_deleted": [
+        "No bespoke cell simulator",
+        "No synthetic benchmark",
+        "No new solver stack"
+      ],
+      "surviving_gap": "Need quantitative cross-domain application of the inherited method to biology/biophysics."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Scientific uncertainty, not infrastructure.",
+      "delete_bypass_substitute_options": [
+        "Delete gene-only framing if mass/energy conservation dominates",
+        "Reuse published growth/metabolic constraints before modeling",
+        "Use order-of-magnitude bounds before detailed biology"
+      ],
+      "surviving_causal_blocker": "Need to quantify whether parallel cell creation can beat matter, power, heat, oxygen, and structural-organization limits."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Authoritative literature + first-principles mass/energy/heat/transport bounds + independent recalculation",
+        "Detailed cell-population simulation",
+        "Custom biological growth engine"
+      ],
+      "losing_routes_reason": "The governing impossibility or feasibility envelope can be established with conservation laws and measured biological rates before any detailed simulator.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic gate. Cross-check quantitative bounds with independent formulas/Wolfram and authoritative biological/biophysical literature."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any assumption that genes alone can create missing biomass instantly",
+        "Any need for custom simulation if first-order bounds already decide the question"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Mass-balance reasoning",
+        "power/heat budget reasoning",
+        "parallel-process scaling limits"
+      ],
+      "fresh_reuse_plan": "This task itself is the cross-domain fresh reuse test versus aerospace Task A."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse Task A research workflow exactly",
+        "Search only claims that can change the scientific conclusion",
+        "Stop before unnecessary microscopic detail"
+      ],
+      "search_stop_decision": "Stop when independent sources and first-principles bounds agree on the dominant rate limits and additional detail cannot change the high-level feasibility verdict.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "LITERATURE_PLUS_FIRST_PRINCIPLES_BOUNDS",
+      "DETAILED_CELL_SIMULATION",
+      "CUSTOM_BIO_GROWTH_ENGINE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "BIOLOGY_BENCHMARK",
+      "CUSTOM_CELL_SIMULATOR",
+      "GENE_ONLY_MASS_CREATION_ASSUMPTION"
+    ],
+    "selected_surviving_route": "LITERATURE_PLUS_FIRST_PRINCIPLES_BOUNDS",
+    "why_selected_route_is_fastest_sufficient": "It directly tests the user's claim with conservation laws and measured biological rates, transfers the same general research method across domains, and is independently verifiable at zero incremental spend.",
+    "expected_parent_level_state_change": "Complete materially different real scientific Task B on rapid engineered biological transformation using the same inherited general research/problem-solving route, independently verify the result, and produce admissible cross-domain transfer evidence for frontier-capability adjudication without promoting the capability unless the evidence supports it.",
+    "stop_condition": "Stop when the biotransformation Task B answer is quantitatively resolved enough to identify the binding physical/biological limits, key claims are independently source-checked or recalculated, provenance is recorded, and cross-domain transfer evidence is ready for capability adjudication; do not invent new infrastructure or benchmarks."
+  }
+}
