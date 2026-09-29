@@ -18,7 +18,8 @@
     "merged PR136 truthful post-PR129 canonical reconciliation",
     "merged PR135 action-intent guard hardening",
     "closed PR133 stale execution/carrier lane preserved as evidence only",
-    "existing Sprite brain-heldout003-one-shot read-only carrier preparation state"
+    "existing Sprite brain-heldout003-one-shot read-only carrier preparation state",
+    "canonical/runtime/EXECUTOR_POLICY_V1.json hard-zero-spend executor admission policy"
   ],
   "evidence_presence_classification": "CAPABILITY_UNPROVEN",
   "probe_specific": false,
@@ -32,7 +33,7 @@
     "fresh_execution_count": 0,
     "same_case_replay_allowed": false
   },
-  "stop_condition": "After trusted blocker-lease/drift guard PASS on this exact current-main successor, verify one carrier has exact frozen/runtime blobs, faithful Debian APT metadata including Contents-all, restart/replay controls, and no pre-existing authoritative START/RESULT. Then execute XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003 exactly once, capture the first terminal result, and reconcile before any replay, second repair, diagnosis-by-rerun, or promotion.",
+  "stop_condition": "After trusted blocker-lease/drift guard PASS on this exact current-main successor, admit exactly one carrier only if canonical EXECUTOR_POLICY_V1 passes: status AVAILABLE, exact required platform compatibility, incremental_spend_usd == 0, hard_zero_spend == true, exact frozen/runtime blobs, faithful Debian APT metadata including Contents-all, restart/replay controls, and no pre-existing authoritative START/RESULT. Then execute XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003 exactly once, capture the first terminal result, and reconcile before any replay, second repair, diagnosis-by-rerun, second carrier, or promotion.",
   "governance_change": false,
   "weakens_existing_guard": false,
   "execution_constraints": {
@@ -41,6 +42,8 @@
     "val_town_forbidden": true,
     "exactly_one_remote_carrier": true,
     "railway_redeploy_forbidden": true,
-    "replay_forbidden_after_start": true
+    "replay_forbidden_after_start": true,
+    "hard_zero_spend": true,
+    "second_carrier_forbidden": true
   }
 }
