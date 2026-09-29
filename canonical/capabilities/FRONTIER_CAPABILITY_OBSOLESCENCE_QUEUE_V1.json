@@ -70,14 +70,14 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Keep H004 frozen/unspent. V4 failed before START only because its APT language printf wrote a literal backslash-n. The generic public carrier diagnostic remains fully qualified. Stage V5 from V4 changing only that carrier quoting line to the exact already-proven diagnostic form; create ARM005 last; execute once; reconcile.",
+    "objective": "H004 is permanently spent with one admissible failed result. Do not replay. Diagnose the zero-candidate independent semantic verifier failure against the preexisting matched_terms risk and prior generic evidence, then at most one causally justified generic repair followed by a new orthogonal fresh gate.",
     "selection_metric": "CORRECTNESS_FIRST__THEN_VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK_WITH_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "HELDOUT_004_FROZEN_UNSPENT__PUBLIC_V4_PRESTART_APT_CONFIG_LITERAL_BACKSLASH_N_FAILURE__GENERIC_CARRIER_DIAGNOSTIC_STILL_VALID",
-    "evidence_path": "canonical/capabilities/obsolescence/H004_PUBLIC_V4_PRESTART_APT_CONFIG_FAILURE_20260929_V1.json",
+    "exact_blocker": "HELDOUT_004_SPENT_FAIL__INDEPENDENT_SEMANTIC_VERIFIER_ACQUISITION_EMPTY__NO_REPLAY",
+    "evidence_path": "canonical/capabilities/obsolescence/H004_FIRST_TERMINAL_RECONCILIATION_20260929_V1.json",
     "repair_status": "PR129_RUNTIME_REPAIR_PRESERVED__H004_EXACT_RUNNER_REUSED__PUBLIC_CAPSULE_22_FILES_SEALED__H003_IMPORT_CLOSURE_FAILURE_CLASS_CORRECTED__NO_RUNTIME_OR_EVALUATOR_REPAIR_REQUIRED",
-    "prohibition": "NO_H004_START_BEFORE_PUBLIC_REPOSITORY_EXISTS_AND_EXACT_CAPSULE_COPY_PREFLIGHT_PASSES__NO_PRIVATE_REPO_PUBLICATION__NO_PRIVATE_ACTIONS_OVERAGE__NO_SPRITE__NO_VAL_TOWN__NO_USER_LAPTOP__NO_METERED_BROWSER_OR_UNPROVEN_COST_INFRASTRUCTURE__NO_REPLAY",
+    "prohibition": "NO_H004_REPLAY__NO_SECOND_CARRIER_FOR_H004__NO_PROMOTION_FROM_FAILED_GATE__NO_REPAIR_BEFORE_TERMINAL_RECONCILIATION__NO_USER_LAPTOP__NO_VAL_TOWN",
     "frozen_gate": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_004.json",
-    "next_action": "STAGE_PUBLIC_H004_ONE_SHOT_V5_FROM_V4__CHANGE_ONLY_APT_LANGUAGE_PRINTF_TO_EXACT_DIAGNOSTIC_FORM__CREATE_ARM005_LAST__EXECUTE_ONCE__CAPTURE_FIRST_TERMINAL_RESULT__RECONCILE_NO_REPLAY",
+    "next_action": "POST_RECONCILIATION_DIAGNOSE_ZERO_VERIFIER_CANDIDATES_AGAINST_PREEXISTING_MATCHED_TERMS_RISK__SEARCH_PRIOR_GENERIC_FIXES__AUTHORIZE_AT_MOST_ONE_GENERIC_REPAIR_IF_CAUSAL__THEN_FREEZE_NEW_ORTHOGONAL_GATE__NO_H004_REPLAY",
     "merged_repair_source_pr": 129,
     "merged_repair_runtime_path": "canonical/runtime/auto_apt_cli_acquisition.py",
     "spent_gate": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_003.json",
@@ -240,5 +240,16 @@
     "next_action": "CREATE_ONE_EMPTY_PUBLIC_GITHUB_REPOSITORY__APP_ACCESS_EXPECTED_AUTOMATIC_FROM_ALL_REPOSITORIES_INSTALLATION__THEN_COPY_EXACT_SEALED_CAPSULE_AND_WORKFLOW__CREATE_ARM_FILE_LAST__CAPTURE_FIRST_TERMINAL_RESULT__RECONCILE_WITHOUT_REPLAY",
     "github_app_repository_selection": "all",
     "separate_app_grant_required": false
+  },
+  "h004_first_terminal_v1": {
+    "status": "SPENT_FAIL_ADMISSIBLE",
+    "run_id": 36602685401,
+    "arm_commit": "0119eb5350e313def53777a047294b7bae7e0f39",
+    "acceptance_gate_pass": false,
+    "error_leaf": "SEMANTIC_VERIFIER_ACQUISITION_FAILED:[]",
+    "total_wall_s": 50.223201,
+    "execution_count": 1,
+    "same_gate_replay_allowed": false,
+    "reconciliation_path": "canonical/capabilities/obsolescence/H004_FIRST_TERMINAL_RECONCILIATION_20260929_V1.json"
   }
 }
