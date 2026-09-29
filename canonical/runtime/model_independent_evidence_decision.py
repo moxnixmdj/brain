@@ -176,7 +176,7 @@ def evaluate_program(program: str) -> dict[str, float]:
             "PROBLOG_IMPORT_FAILED:" + type(exc).__name__ + ":" + str(exc)
         ) from exc
     try:
-        raw = get_evaluatable().create_from(PrologString(program)).evaluate()
+        raw = get_evaluatable(name="sdd").create_from(PrologString(program)).evaluate()
     except Exception as exc:
         raise ContractError(
             "PROBLOG_EVALUATION_FAILED:" + type(exc).__name__ + ":" + str(exc)
