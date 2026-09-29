@@ -17,7 +17,7 @@ import re
 import sys
 from typing import Any
 
-PROBLOG_COMMIT = "a294fa24c3cfb4bae3a2acea3a128386113889f4"
+PROBLOG_COMMIT = "1c0df586a1cb4e276b38bbf222d0578f3db58bde"\nPROBLOG_VERSION = "2.3.0"\nPROBLOG_WHEEL_SHA256 = "8d18beae480bce9f54037dfa9cf8c058da874524c118d8ffae96fd210b68e71e"
 SCHEMA = "PROJECT_BRAIN_TYPED_EVIDENCE_DECISION_TASK_V1"
 RESULT_SCHEMA = "PROJECT_BRAIN_TYPED_EVIDENCE_DECISION_RESULT_V1"
 ALLOWED_TERMINALS = {"ACCEPT", "REJECT", "INSUFFICIENT_EVIDENCE"}
@@ -176,7 +176,7 @@ def evaluate_program(program: str) -> dict[str, float]:
             "PROBLOG_IMPORT_FAILED:" + type(exc).__name__ + ":" + str(exc)
         ) from exc
     try:
-        raw = get_evaluatable(name="sdd").create_from(PrologString(program)).evaluate()
+        raw = get_evaluatable().create_from(PrologString(program)).evaluate()
     except Exception as exc:
         raise ContractError(
             "PROBLOG_EVALUATION_FAILED:" + type(exc).__name__ + ":" + str(exc)
@@ -254,7 +254,7 @@ def run(task: dict[str, Any]) -> dict[str, Any]:
         "schema": RESULT_SCHEMA,
         "status": "COMPLETE",
         "engine": "ProbLog",
-        "problog_commit": PROBLOG_COMMIT,
+        "problog_commit": PROBLOG_COMMIT,\n        "problog_version": PROBLOG_VERSION,\n        "problog_wheel_sha256": PROBLOG_WHEEL_SHA256,
         "model_dependency_count": 0,
         "task_id": task["task_id"],
         "target_claim": task["target_claim"],
