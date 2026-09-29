@@ -62,5 +62,23 @@
     "NO_VAL_TOWN",
     "NO_USER_LAPTOP",
     "NO_PAID_OR_UNPROVEN_SPEND"
-  ]
+  ],
+  "preferred_existing_route_evidence": {
+    "provider": "Railway",
+    "route": "ssh railway.new",
+    "retrieved_date": "2026-09-29",
+    "official_sources": [
+      "https://railway.com/free-vm",
+      "https://railway.com/changelog/2026-09-25-free-vms-without-an-account",
+      "https://docs.railway.com/pricing/faqs"
+    ],
+    "verified_public_claims": [
+      "free Linux VM available by ssh railway.new",
+      "no Railway account required",
+      "no payment card required",
+      "while the VM is unclaimed nobody pays for its compute",
+      "anonymous build window is 60 minutes"
+    ],
+    "qualification_status": "PUBLIC_HARD_ZERO_BILLING_ROUTE_VERIFIED__LIVE_APT_AND_SOURCE_FIDELITY_NOT_YET_QUALIFIED__NO_PROVISIONING_IN_PR178"
+  }
 }
