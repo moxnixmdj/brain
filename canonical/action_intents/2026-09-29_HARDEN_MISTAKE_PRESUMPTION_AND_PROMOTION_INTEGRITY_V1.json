@@ -1,0 +1,263 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "HARDEN-MISTAKE-PRESUMPTION-AND-PROMOTION-INTEGRITY-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "PROGRAM_OPERATING_STRATEGY",
+  "probe_id": null,
+  "causal_blocker": "CONSEQUENTIAL_ERRORS_CAN_STILL_PASS_AS_CANONICAL_WITHOUT_UNIVERSAL_FAILURE_PRESUMPTION_CIRCULARITY_ATOMIC_STATE_AND_PROMOTION_EVIDENCE_GUARDS",
+  "action_kind": "USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::PROGRAM_OPERATING_STRATEGY::CONSEQUENTIAL_ERRORS_CAN_STILL_PASS_AS_CANONICAL_WITHOUT_UNIVERSAL_FAILURE_PRESUMPTION_CIRCULARITY_ATOMIC_STATE_AND_PROMOTION_EVIDENCE_GUARDS::USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "expected_parent_frontier_change": "Make consequential Brain actions fail closed under an explicit failure-presumption contract: prohibit circular proof and self-certification, require claim-to-evidence mapping and independent verification, require atomic updates for coupled canonical state, and prevent scoreboard/frontier promotion unless exact-head evidence supports the claimed level.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
+    "canonical/laws/EXECUTION_LEVERAGE_AND_ANTI_DRIFT_LAW_V1.md",
+    "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V2.md",
+    "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V3.json",
+    "canonical/runtime/enforce_goal_hierarchy.py",
+    "canonical/regressions/2026-09-29_STALE_OR_HOLLOW_RECURSIVE_OBS_RECEIPT.json",
+    "PR213 partial branch-state correction incident",
+    "PR214 circular frontier-proof correction"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 4,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Merge only the minimal law/schema/template/gate/validator/live-pointer/regression changes needed to enforce mistake-presumption and promotion integrity; verify exact-head semantics and live-main references; then stop governance work and resume the active frontier capability mission.",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "user_authorization_summary": "User explicitly ordered Brain and all necessary systems to be updated so mistakes are presumed likely and prevented as completely as possible.",
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "cd6c117b160a9fd5dda66af4b9795b7642ec39ab",
+    "real_outcome": "Harden Brain so consequential mistakes are presumed likely and cannot silently promote themselves into canonical truth.",
+    "required_capability": "Machine-enforced adversarial mistake prevention across planning, execution, mutation, verification, and promotion.",
+    "obs_goal": {
+      "real_outcome": "Prevent silent consequential errors and false capability claims while preserving fast execution.",
+      "proxy_goals_deleted": [
+        "generic advice to be careful",
+        "another benchmark",
+        "another execution provider",
+        "more review ceremony without enforcement"
+      ],
+      "surviving_necessity": "Add only machine-enforced checks for failure classes not currently covered."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Truth-first law",
+        "anti-drift law",
+        "Recursive OBS V2/V3 receipt",
+        "trusted goal-hierarchy validator",
+        "blocker lease guard"
+      ],
+      "external_existing_routes_checked": [
+        "Not applicable to this internal governance hardening; existing Brain controls are the reusable route."
+      ],
+      "capability_work_deleted": [
+        "No new scheduler",
+        "No second guard workflow",
+        "No new provider",
+        "No external service"
+      ],
+      "surviving_gap": "No universal failure-presumption contract, circular-proof ban, atomic coupled-state mutation check, or automatic promotion-evidence gate."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Intrinsic governance gap exposed by repeated real mistakes across task selection, capability accounting, circular proof, and branch mutation.",
+      "delete_bypass_substitute_options": [
+        "Delete new governance entirely: rejected because existing controls did not catch these failure classes.",
+        "Reuse current validator and extend it: survives.",
+        "Build separate auditing service: rejected as slower and redundant."
+      ],
+      "surviving_causal_blocker": "Trusted validator lacks these exact semantic checks."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Extend existing trusted validator + one law/schema/template/gate update",
+        "Add separate audit workflow",
+        "Build independent governance service"
+      ],
+      "losing_routes_reason": "Existing trusted guard is already the correct enforcement choke point; additional machinery would create more failure surface.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use direct validator predicates and malformed negative cases; no benchmark or separate evaluator is required."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Ad-hoc manual capability-promotion sanity checks",
+        "Sequential updates of coupled canonical core state",
+        "Self-declared independent proof without explicit supplier exclusion"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "promotion integrity",
+        "circularity prevention",
+        "atomic state coherence",
+        "pre-mortem failure enumeration"
+      ],
+      "fresh_reuse_plan": "The next active frontier action must use the new mistake-prevention receipt and survive the hardened guard without governance exception."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused existing trusted guard and OBS receipt rather than designing a new control plane",
+        "Limited scope to known generic error classes with machine-checkable predicates"
+      ],
+      "search_stop_decision": "No external route discovery is needed for an internal governance change; current code inspection identifies the missing enforcement seam precisely.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "EXTEND_EXISTING_TRUSTED_GUARD",
+      "ADD_SECOND_AUDIT_WORKFLOW",
+      "BUILD_NEW_GOVERNANCE_SERVICE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "ADD_SECOND_AUDIT_WORKFLOW",
+      "BUILD_NEW_GOVERNANCE_SERVICE"
+    ],
+    "selected_surviving_route": "EXTEND_EXISTING_TRUSTED_GUARD",
+    "why_selected_route_is_fastest_sufficient": "It closes the uncovered error classes at the existing fail-closed choke point with minimum new machinery.",
+    "expected_parent_level_state_change": "Make consequential Brain actions fail closed under an explicit failure-presumption contract: prohibit circular proof and self-certification, require claim-to-evidence mapping and independent verification, require atomic updates for coupled canonical state, and prevent scoreboard/frontier promotion unless exact-head evidence supports the claimed level.",
+    "stop_condition": "Merge only the minimal law/schema/template/gate/validator/live-pointer/regression changes needed to enforce mistake-presumption and promotion integrity; verify exact-head semantics and live-main references; then stop governance work and resume the active frontier capability mission.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "User-authorized internal governance hardening reuses the existing trusted control path; external supplier discovery cannot improve the required invariant."
+    }
+  },
+  "mistake_prevention": {
+    "schema": "PROJECT_BRAIN_MISTAKE_PREVENTION_RECEIPT_V1",
+    "failure_default": "PRESUME_CONSEQUENTIAL_ACTION_WRONG_UNTIL_FALSIFIED",
+    "claim_scope": "GOVERNANCE_HARDENING_NO_CAPABILITY_PROMOTION",
+    "pre_mortem": [
+      {
+        "failure_mode": "POLICY_ONLY_NO_RUNTIME_ENFORCEMENT",
+        "detection": "New rule exists in prose but validator accepts an intent without it.",
+        "prevention": "Trusted guard must require and structurally validate the receipt.",
+        "abort_or_rollback": "Do not merge until negative malformed cases are rejected."
+      },
+      {
+        "failure_mode": "CIRCULAR_FRONTIER_PROOF",
+        "detection": "Target frontier implementation appears in execution or verification path of its own replacement.",
+        "prevention": "Machine-check target_supplier_in_execution_path=false and target_supplier_in_verification_path=false for frontier acquisition/dependency-removal claims.",
+        "abort_or_rollback": "Keep capability unproven and counters unchanged."
+      },
+      {
+        "failure_mode": "PARTIAL_MULTI_FILE_CANONICAL_UPDATE",
+        "detection": "Pointer/hierarchy/queue/scoreboard disagree or only a subset survives branch advancement.",
+        "prevention": "Coupled core-state mutations require one atomic Git tree commit and exact-head readback.",
+        "abort_or_rollback": "Reject PR; restore last coherent base."
+      },
+      {
+        "failure_mode": "UNSUPPORTED_SCORE_PROMOTION",
+        "detection": "Scoreboard counter increases without declared evidence paths and independent adjudication.",
+        "prevention": "Guard compares base/head scoreboard and requires promotion evidence contract.",
+        "abort_or_rollback": "Reject promotion and keep prior counters."
+      },
+      {
+        "failure_mode": "SELF_CERTIFIED_SUCCESS",
+        "detection": "Producer and verifier are the same supplier or promotion rests only on action output.",
+        "prevention": "self_certification_allowed=false and independent verifier required for promotion.",
+        "abort_or_rollback": "Downgrade to observation/task evidence only."
+      },
+      {
+        "failure_mode": "LOCAL_SUCCESS_MISLABELED_AS_PARENT_CAPABILITY_WIN",
+        "detection": "Claim scope exceeds evidence level, such as same-domain tool reuse counted as frontier fresh reuse.",
+        "prevention": "Explicit claim ladder and scope-specific requirements.",
+        "abort_or_rollback": "Rollback excess claim only; preserve valid lower-level evidence."
+      }
+    ],
+    "circularity_check": {
+      "target_frontier_implementation_in_execution_path": false,
+      "target_frontier_implementation_in_verification_path": false,
+      "proof_depends_on_claim_being_proven": false,
+      "note": "Governance hardening itself makes no frontier capability promotion claim."
+    },
+    "independence_check": {
+      "self_certification_allowed": false,
+      "producer_verifier_independent": true,
+      "verifier_identity": "Trusted base guard semantics plus exact-head structural validation",
+      "target_supplier_excluded_from_proof_path": true
+    },
+    "state_transition": {
+      "coupled_canonical_paths": [
+        "canonical/CANONICAL_POINTER.json",
+        "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+        "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
+        "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json"
+      ],
+      "atomic_update_required": true,
+      "strategy": "ATOMIC_SINGLE_TREE_COMMIT",
+      "exact_head_readback_required": true,
+      "expected_invariants": [
+        "terminal objective unchanged",
+        "active capability target unchanged",
+        "scoreboard counters unchanged",
+        "active frontier blocker unchanged except governance references",
+        "all new law/schema/gate/template references agree"
+      ],
+      "expected_deltas": [
+        "mistake prevention becomes mandatory boot/governance rule",
+        "validator rejects missing/hollow/circular mistake-prevention contracts",
+        "core-state coupled mutations require atomic final commit",
+        "scoreboard promotion is gated by evidence and independence"
+      ]
+    },
+    "evidence_claim_map": [
+      {
+        "claim": "Current guard lacks explicit mistake-presumption/circularity/atomic-state/promotion-integrity contract.",
+        "evidence": [
+          "canonical/runtime/enforce_goal_hierarchy.py",
+          "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V2.json"
+        ],
+        "strength": "DIRECT_CODE_INSPECTION"
+      },
+      {
+        "claim": "Prior branch mutation lost intended correction commits until an atomic tree commit was used.",
+        "evidence": [
+          "conversation execution history and PR213 correction sequence"
+        ],
+        "strength": "DIRECT_OBSERVED_INCIDENT"
+      },
+      {
+        "claim": "Frontier capability proof can become circular when GPT-5.6 executes the task meant to prove GPT-5.6 independence.",
+        "evidence": [
+          "PR214 closed unmerged after circularity correction"
+        ],
+        "strength": "DIRECT_OBSERVED_INCIDENT"
+      }
+    ],
+    "post_action_checks": [
+      "trusted base guard semantic pass on exact head",
+      "new validator accepts complete receipt",
+      "new validator rejects missing receipt",
+      "new validator rejects circular frontier promotion",
+      "new validator rejects unsupported scoreboard increase",
+      "new validator rejects non-atomic coupled core-state mutation",
+      "exact-head readback confirms all boot references and unchanged counters"
+    ],
+    "rollback_triggers": [
+      "any post-action invariant mismatch",
+      "any new guard path not protected",
+      "scoreboard counter changes",
+      "active capability target changes",
+      "new rule can be bypassed by omitting fields",
+      "atomic-state rule cannot be mechanically verified"
+    ],
+    "residual_uncertainty": "No finite guard can make all future mistakes impossible; the goal is to make consequential errors detectable, non-promotable, and reversible before they become canonical truth."
+  }
+}
