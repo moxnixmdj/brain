@@ -342,7 +342,7 @@
         "BEFORE_SCARCE_GATE_SPEND"
       ],
       "selected_route_preflight": {
-        "checked_at_utc": "2026-09-29T22:59:30Z",
+        "checked_at_utc": "2026-09-29T23:03:00Z",
         "max_age_hours": 2,
         "selected_route": "COMPOSE_EXISTING_BRAIN_EVIDENCE_MACHINERY_WITH_MINIMAL_STDLIB_TYPED_DECISION_SYNTHESIS",
         "status": "READY",
@@ -384,7 +384,7 @@
           },
           {
             "dependency": "BRAIN_REPOSITORY_WORKTREE",
-            "kind": "LOCAL_STORAGE",
+            "kind": "STORAGE",
             "required": true,
             "volatility": "STATIC",
             "scope": "LOCAL",
