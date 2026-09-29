@@ -29,8 +29,8 @@
     "model_dependency_count": 0,
     "incremental_spend_usd": 0
   },
-  "current_status": "UNPROVEN",
-  "next_action": "RUN_FRESH_OBS_V3_V4_LIVE_CHALLENGER_RACE__SEARCH_BRAIN_AND_EXISTING_DETERMINISTIC_GROUNDING_ROUTING_ROUTES__ACQUIRE_SMALLEST_SUFFICIENT_GENERIC_ROUTE__PROVE_ON_FRESH_REAL_TASK__NO_SERIALIZATION_REPLAY",
+  "current_status": "ACQUIRED_VERIFIED",
+  "next_action": "RECOMPUTE_PARENT_OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_FRONTIER__OBS_INHERITED_SYSTEM__SELECT_NEXT_SMALLEST_MODEL_INDEPENDENT_COMPOSITION_GAP",
   "obsolescence_status": "OBSOLETE_VERIFIED",
   "winning_route": "DETERMINISTIC_CLAUSE_GROUNDING_TO_EXISTING_VERIFIED_BOUND_REGISTRY_WITH_INDEPENDENT_STRUCTURAL_VERIFIER",
   "capability_strength_result": "REAL_TASK_A_SOFTWARE_TEST_AUDIT_PASS__FRESH_REUSE_B_VISUAL_QR_ARTIFACT_PASS",
@@ -53,6 +53,15 @@
       "independent_decoder": "zbarimg",
       "artifact_id": 11067819136,
       "artifact_digest": "sha256:4b12f80bb0cf68539ede066a66a9aa0a81310374f9bc03aaa52d379678772d48"
+    },
+    "exact_final_head_validation": {
+      "run_id": 36646452335,
+      "conclusion": "success",
+      "validated_runtime_blob": "801d226ab589595f376da54833de6b925ff96f15",
+      "producer_blob": "00f5d0c1c742f444ad876103f251bb4476017dc1",
+      "verifier_blob": "d4aa64dc995845fcf8045f14f476f84b7f1d9cb8",
+      "artifact_id": 11068728150,
+      "artifact_digest": "sha256:3969e625a3239fed6fc5abdf3f6d3992b1685202e20bc8ef402cab194b7963b9"
     }
   },
   "inheritance_path": [
