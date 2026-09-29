@@ -70,12 +70,12 @@
   ],
   "immediate_frontier": {
     "selected_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-    "objective": "Connect the exact already-verified Debian full-metadata + Xapian executable discovery output to the existing autonomous APT probe → contract-learn → execute → independently-verify loop without replaying HELDOUT-005.",
-    "selection_metric": "CORRECTNESS_FIRST__THEN_MAXIMUM_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK_WITH_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "VERIFIED_XAPIAN_DISCOVERY_OUTPUT_IS_REJECTED_BY_EXISTING_AUTO_APT_ACQUISITION_SOURCE_ADMISSION__APT_FULL_METADATA_XAPIAN_VS_APT_CATALOG__END_TO_END_TOOL_LEARNING_LOOP_CANNOT_START",
-    "evidence_path": "canonical/capabilities/obsolescence/PR111_OMITTED_TOOL_INTEGRATION_RESIDUAL_CORRECTION_20260929_V1.json",
-    "repair_status": "STATIC_INTERFACE_BREAK_VERIFIED__RECONCILIATION_ONLY__RUNTIME_REPAIR_REQUIRES_FRESH_SEPARATE_ACTION_INTENT",
-    "prohibition": "NO_HELDOUT005_REPLAY__NO_MULTI_TOOL_PROBE_EXECUTION_UNTIL_THIS_FRONTIER_CORRECTION_IS_RECONCILED__NO_TASK_SPECIFIC_TUNING"
+    "objective": "Carry the already-verified Debian full-metadata/Xapian supplier discovery route through autonomous APT probe, contract learning, execution, and independent verification, or terminally localize the exact residual.",
+    "selection_metric": "CORRECTNESS_AND_PARENT_CAPABILITY_CLOSURE__THEN_MINIMUM_WALL_CLOCK__THEN_ZERO_INCREMENTAL_SPEND",
+    "exact_blocker": "DISCOVERY_TO_APT_ACQUISITION_CANDIDATE_CONTRACT_COMPATIBILITY__VERIFIED_XAPIAN_APT_CANDIDATES_ARE_REJECTED_BEFORE_PROBE_CONTRACT_EXECUTE_VERIFY",
+    "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_FRONTIER_RESTORATION_20260929_V1.json",
+    "repair_status": "NO_RUNTIME_REPAIR_YET__NEW_ORTHOGONAL_END_TO_END_GATE_MUST_BE_FROZEN_FIRST",
+    "prohibition": "NO_HELDOUT005_REPLAY__NO_ORCHESTRATION_GATE_SPEND__NO_PACKAGE_HINTS__NO_TASK_SPECIFIC_LITERALS__NO_SOURCE_NAME_SPECIAL_CASE"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -155,7 +155,7 @@
     "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EVIDENCE_ACQUISITION_STRUCTURAL_CAUSE_RECONCILIATION_V1.json"
   },
   "tool_discovery_selection_learning_full_metadata_xapian_v1": {
-    "status": "VERIFIED_DISCOVERY_ROUTE_INHERITED__END_TO_END_PARENT_RESIDUAL_REOPENED",
+    "status": "VERIFIED_SUBCAPABILITY_ROUTE_INHERITED__PARENT_RESIDUAL_ACTIVE",
     "source_pr": 89,
     "authoritative_deployment": "805a36d4-04cf-4938-bfac-74d29418081f",
     "runtime_git_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
@@ -165,7 +165,7 @@
     "incremental_spend_usd": 0,
     "terminal_reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
     "parent_capability_obsolescence_claim": false,
-    "next_action": "OPEN_FRESH_GENERIC_REPAIR_INTENT__MAKE_APT_DISCOVERY_ADMISSION_SOURCE_CONTRACT_COMPATIBLE_AND_SCORE_SCALE_SAFE__TEST_EXISTING_PROBE_CONTRACT_EXECUTE_VERIFY_LOOP_ON_FRESH_NON_HELDOUT_WORK__THEN_RECONCILE",
+    "next_action": "FREEZE_FRESH_END_TO_END_GATE__GENERIC_CANDIDATE_CONTRACT_REPAIR__EXECUTE_ONCE__RECONCILE",
     "first_failing_integration_blocker": "VERIFIED_APT_FULL_METADATA_XAPIAN_CANDIDATES_ARE_REJECTED_BEFORE_AUTONOMOUS_ACQUISITION_BY_LEGACY_APT_CATALOG_SOURCE_ADMISSION",
     "known_downstream_residual": "SEMANTIC_VERIFIER_MATCHED_TERMS_ADMISSION__PRESERVED_NOT_YET_REPAIR_AUTHORITY",
     "residual_gap": "VERIFIED_XAPIAN_DISCOVERY_OUTPUT_IS_REJECTED_BY_EXISTING_AUTO_APT_ACQUISITION_SOURCE_ADMISSION__APT_FULL_METADATA_XAPIAN_VS_APT_CATALOG__END_TO_END_TOOL_LEARNING_LOOP_CANNOT_START"
@@ -189,5 +189,10 @@
     "status": "DEFERRED_NOT_FALSIFIED",
     "preserved_evidence_path": "canonical/capabilities/obsolescence/POST_TOOL_DISCOVERY_FRONTIER_RECOMPUTATION_20260929_V1.json",
     "reason": "PR111 candidate comparison omitted the deterministic inherited-route integration residual; multi-tool evidence remains useful but does not currently own the single writer frontier."
+  },
+  "deferred_next_frontier_candidate": {
+    "capability": "MULTI_TOOL_ORCHESTRATION_AND_PLANNING",
+    "status": "PRESERVED__WAITING_FOR_CURRENT_PARENT_TERMINAL_ADJUDICATION",
+    "source_pr": 111
   }
 }
