@@ -81,7 +81,9 @@ class PlainGoalGroundingRuntimePrecedenceTests(unittest.TestCase):
         compile_error=runtime.Blocker(
             "GOAL_COMPILATION_FAILED:GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH"
         )
-        with tempfile.TemporaryDirectory() as td:
+        evidence_root=CANONICAL_ROOT/"astra_runtime"/"evidence"
+        evidence_root.mkdir(parents=True,exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=evidence_root) as td:
             with mock.patch.object(runtime,"EVID_DIR",pathlib.Path(td)):
                 with mock.patch.object(runtime,"_compile_plain_goal",side_effect=compile_error):
                     with mock.patch.object(
