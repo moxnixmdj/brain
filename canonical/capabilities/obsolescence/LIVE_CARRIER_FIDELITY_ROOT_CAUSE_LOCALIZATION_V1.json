@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_LIVE_CARRIER_FIDELITY_ROOT_CAUSE_LOCALIZATION_V1",
+  "diagnostic_id": "LIVE-CARRIER-FIDELITY-ROOT-CAUSE-LOCALIZATION-V1",
+  "status": "CAUSAL_CLASS_PROVEN",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "protected_gate": {
+    "validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+    "freshness": "UNSPENT",
+    "execution_count": 0,
+    "executed_during_localization": false
+  },
+  "preserved_primary_evidence": {
+    "heldout003_result": "canonical/astra_runtime/evidence/XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003__RESULT.json",
+    "heldout003_acquisition": "canonical/astra_runtime/evidence/XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003__AUTO_APT_CLI_ACQUISITION.json",
+    "carrier_source_branch": "carrier/heldout003-one-shot-20260929",
+    "carrier_source_commit": "4dc82588193bd158f82af4a808ab39c467a87a43",
+    "source_blobs": {
+      "canonical/runtime/bound_capabilities/node_library_codec.py": "0babcf3adf7762b5e24d9c8be4f8ecb3a7b2e805",
+      "canonical/runtime/bound_capabilities/python_library_codec.py": "e9b9f5c4991ba1f11b9f377a275b3e17bad22886",
+      "canonical/runtime/bound_capabilities/python_source_tree_codec.py": "8f452c01b2c88a9bd7663f8dc753b24b2e7f7f05",
+      "canonical/runtime/bound_capabilities/cli_command.py": "6782773801cd8f2258e4368a4debbe6e66c4a393"
+    }
+  },
+  "observations": [
+    "The first HELDOUT-003 terminal verifier error is ImportError: cannot import name python_library_codec from bound_capabilities; the error itself reports node_library_codec as available.",
+    "The exact qualified carrier source commit contains both node_library_codec.py and python_library_codec.py, plus python_source_tree_codec.py and cli_command.py, at their preserved expected Git blobs.",
+    "Therefore the verifier process live import surface was not equivalent to the exact qualified source dependency closure.",
+    "The preserved evidence does not identify the lower-level Sprite-internal mechanism that caused this divergence, and no claim is made about that unpreserved detail."
+  ],
+  "causal_adjudication": {
+    "proven_root_cause_class": "LIVE_EXECUTOR_IMPORT_SURFACE_OR_MATERIALIZATION_DIVERGED_FROM_EXACT_QUALIFIED_SOURCE_DEPENDENCY_CLOSURE",
+    "capability_runtime_semantic_failure_proven": false,
+    "source_branch_dependency_omission_proven": false,
+    "provider_specific_low_level_mechanism_proven": false,
+    "low_level_mechanism_required_for_correction": false
+  },
+  "minimal_generic_correction_boundary": {
+    "location": "EXECUTOR_CARRIER_ADMISSION_BEFORE_EXCLUSIVE_HELDOUT_START",
+    "required_checks": [
+      "verify exact Git blob hashes for the complete runtime dependency closure in the live execution root",
+      "using the same interpreter and live root that will execute the gate, start a fresh process importing cli_command, node_library_codec, python_library_codec, and python_source_tree_codec from bound_capabilities",
+      "record resolved module file paths and require every path to be inside the exact live repository runtime root",
+      "abort before START on any missing module, hash mismatch, namespace-path divergence, or import failure"
+    ],
+    "provider_neutral": true,
+    "capability_runtime_change_required": false,
+    "heldout_execution_required_to_verify_correction": false
+  },
+  "forbidden": [
+    "HELDOUT_003_REPLAY",
+    "HELDOUT_004_EXECUTION_DURING_LOCALIZATION",
+    "WAKE_UNAUTHORIZED_COLD_SPRITE",
+    "VAL_TOWN",
+    "USER_LAPTOP",
+    "PAID_OR_UNPROVEN_COST_EXECUTOR"
+  ],
+  "next_required_action": "CORRECT_GENERIC_CARRIER_FIDELITY_WITH_PRE_START_LIVE_DEPENDENCY_CLOSURE_HASH_AND_FRESH_IMPORT_SMOKE__QUALIFY_HARD_ZERO_REMOTE_CARRIER__THEN_EXECUTE_HELDOUT_004_ONCE__RECONCILE",
+  "promotion_claim": false
+}
