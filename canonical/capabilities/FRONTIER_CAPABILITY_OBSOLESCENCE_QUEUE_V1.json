@@ -165,13 +165,13 @@
     "incremental_spend_usd": 0,
     "terminal_reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
     "parent_capability_obsolescence_claim": false,
-    "next_action": "FREEZE_FRESH_ORTHOGONAL_DISCOVERY_TO_EXECUTION_GATE__THEN_PROVIDER_NEUTRAL_AND_SCORE_SCALE_SAFE_APT_ADMISSION_REPAIR__RECONCILE"
+    "next_action": "FREEZE_FRESH_ORTHOGONAL_DISCOVERY_TO_EXECUTION_GATE__THEN_ONE_GENERIC_SOURCE_NEUTRAL_AND_SCORE_SCALE_SAFE_APT_ADMISSION_REPAIR__EXECUTE_ONCE__RECONCILE__CONTINUE_ONLY_ON_NEXT_EXACT_PARENT_RESIDUAL_UNTIL_TERMINAL_ADJUDICATION"
   },
   "deferred_frontier_candidate": {
     "capability": "MULTI_TOOL_ORCHESTRATION_AND_PLANNING",
     "source_pr": 111,
     "evidence_path": "canonical/capabilities/obsolescence/POST_TOOL_DISCOVERY_FRONTIER_RECOMPUTATION_20260929_V1.json",
     "status": "DEFERRED_NOT_FALSIFIED",
-    "reopen_condition": "Recompute globally immediately after the current tool-discovery integration seam is verified closed or falsified."
+    "reopen_condition": "Recompute globally only after TOOL_DISCOVERY_SELECTION_AND_LEARNING reaches terminal OBSOLETE_OR_RETAIN adjudication under the mandatory mission sequence; closing one local seam is not sufficient while another verified residual remains."
   }
 }
