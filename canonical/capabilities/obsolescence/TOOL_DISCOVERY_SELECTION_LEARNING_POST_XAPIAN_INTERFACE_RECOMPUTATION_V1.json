@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_PARENT_FRONTIER_RECOMPUTATION_V1",
+  "reconciliation_id": "TOOL-DISCOVERY-SELECTION-LEARNING-POST-XAPIAN-INTERFACE-RECOMPUTATION-V1",
+  "status": "RECOMPUTED__FIRST_RESIDUAL_INTERFACE_BLOCKER_LOCALIZED",
+  "canonical_base": "db298bb4363266ef9e91ec9ec114b5f1c7bcf1fd",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "closed_upstream_blocker": {
+    "route_id": "DEBIAN_FULL_METADATA_XAPIAN_DIRECT_CONTENTS_V1",
+    "source_pr": 89,
+    "inherited_by_pr": 96,
+    "runtime_git_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
+    "authoritative_deployment": "805a36d4-04cf-4938-bfac-74d29418081f",
+    "heldout_oracle_family_recall": 1,
+    "heldout_top20_oracle_recall": 1,
+    "total_wall_s": 16.233238,
+    "incremental_spend_usd": 0
+  },
+  "static_causal_trace": [
+    {
+      "stage": "PRODUCER",
+      "path": "canonical/runtime/capability_discovery.py",
+      "observation": "The inherited full-metadata path emits APT candidates with discovery_source=APT_FULL_METADATA_XAPIAN, binding_kind=apt, and executable ownership evidence."
+    },
+    {
+      "stage": "ROUTER",
+      "path": "canonical/runtime/auto_capability_acquisition.py",
+      "observation": "Supplier routing already recognizes binding_kind=apt, so the top-level supplier router is not the first failing stage."
+    },
+    {
+      "stage": "APT_ACQUISITION_MERGE",
+      "path": "canonical/runtime/auto_apt_cli_acquisition.py",
+      "observation": "_merge_role_conditioned_apt() calls capability_discovery.search_apt_packages(), so the inherited producer is reached."
+    },
+    {
+      "stage": "FIRST_FAILURE",
+      "path": "canonical/runtime/auto_apt_cli_acquisition.py",
+      "function": "_viable_candidates",
+      "observation": "The consumer continues only when discovery_source equals APT_CATALOG; therefore candidates from APT_FULL_METADATA_XAPIAN are dropped before apt_cli_probe or cli_contract_inference."
+    },
+    {
+      "stage": "TEST_COVERAGE",
+      "path": "canonical/tests/test_discovery_driven_supplier_routing.py",
+      "observation": "Existing routing coverage uses legacy APT_CATALOG examples and does not exercise the inherited APT_FULL_METADATA_XAPIAN handoff."
+    }
+  ],
+  "exact_blocker": "VERIFIED_APT_FULL_METADATA_XAPIAN_CANDIDATES_ARE_DROPPED_BEFORE_CONTRACT_INFERENCE_BY_LEGACY_AUTO_APT_SOURCE_ADMISSION",
+  "causal_ordering": {
+    "pr56_contract_ir_retest_now": "PREMATURE",
+    "reason": "The first failing interface occurs before CLI probing and contract inference, so contract-learning sufficiency cannot yet be measured on the inherited winner."
+  },
+  "decision": {
+    "next_action": "ONE_MINIMAL_GENERIC_DISCOVERY_TO_APT_ACQUISITION_ADMISSION_REPAIR__ADMIT_APT_BY_BINDING_KIND_NOT_LEGACY_SOURCE_LABEL__FRESH_ORTHOGONAL_END_TO_END_GATE__THEN_RECONCILE",
+    "repair_principle": "Remove the obsolete source-label coupling and use the already-present generic apt binding identity for admission; preserve all existing zero-cost, secret, friction, version, archive-digest, probe, contract, verification and promotion gates.",
+    "invention_required": false,
+    "new_diagnostic_required_before_repair": false,
+    "reason": "The mismatch is directly proven from current canonical producer/consumer code; another diagnostic would only rediscover the same deterministic branch condition."
+  },
+  "prohibitions": [
+    "NO_HELDOUT005_REPLAY",
+    "NO_TASK_SPECIFIC_PACKAGE_HINTS",
+    "NO_XAPIAN_ORACLE_TUNING",
+    "NO_NEW_CONTRACT_LEARNER_BEFORE_INTERFACE_FIX",
+    "NO_SOURCE_SPECIFIC_XAPIAN_HARDCODE_WHEN_BINDING_KIND_APT_ALREADY_EXISTS"
+  ],
+  "runtime_mutated": false,
+  "experiment_executed": false,
+  "incremental_spend_usd": 0
+}
