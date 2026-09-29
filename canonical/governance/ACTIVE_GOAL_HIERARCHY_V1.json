@@ -104,17 +104,12 @@
     "main_merge_commit_sha": "db298bb4363266ef9e91ec9ec114b5f1c7bcf1fd",
     "merge_commit": "db298bb4363266ef9e91ec9ec114b5f1c7bcf1fd"
   },
-  "residual_frontier_recomputation": {
-    "status": "COMPLETE__STATIC_CAUSAL_BLOCKER_PROVEN",
+  "post_pr96_interface_recomputation": {
+    "status": "RESIDUAL_GAP_VERIFIED",
     "bound_main_sha": "db298bb4363266ef9e91ec9ec114b5f1c7bcf1fd",
     "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_POST_PR96_INTERFACE_RECOMPUTATION_V1.json",
-    "first_hard_drop": {
-      "path": "canonical/runtime/auto_apt_cli_acquisition.py",
-      "function": "_viable_candidates",
-      "condition": "discovery_source == APT_CATALOG",
-      "inherited_source": "APT_FULL_METADATA_XAPIAN"
-    },
-    "first_repair_scope": "SOURCE_ADMISSION_ONLY__USE_STABLE_APT_BINDING_CONTRACT",
-    "deferred": "SCORE_CALIBRATION_AND_DOWNSTREAM_CONTRACT_BEHAVIOR_UNCLAIMED_UNTIL_SOURCE_GATE_IS_REMOVED"
+    "exact_blocker": "APT_FULL_METADATA_XAPIAN_CANDIDATES_REACH_APT_ROUTING_BUT_ARE_DROPPED_BY_LEGACY_APT_CATALOG_ONLY_ADMISSION__LEGACY_ABSOLUTE_SCORE_THRESHOLD_NOT_PORTABLE_TO_XAPIAN",
+    "downstream_stack": "PRESERVE_AND_REUSE_BEFORE_INVENTION",
+    "next_action": "FREEZE_FRESH_ORTHOGONAL_DISCOVERY_TO_EXECUTION_GATE__THEN_ONE_GENERIC_SOURCE_NEUTRAL_APT_CANDIDATE_ADMISSION_REPAIR__REUSE_EXISTING_CONTRACT_BIND_VERIFY_STACK__EXECUTE_ONCE__RECONCILE"
   }
 }
