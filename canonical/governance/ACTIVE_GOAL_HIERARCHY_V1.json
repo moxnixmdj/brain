@@ -145,8 +145,8 @@
   "real_task_first": true,
   "recursive_obs": {
     "required": true,
-    "law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
-    "receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V2.json",
+    "law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
+    "receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json",
     "deletion_first_order": [
       "DELETE",
       "BYPASS",
@@ -156,7 +156,12 @@
       "REPAIR",
       "BUILD"
     ],
-    "exact_base_commit_binding_required": true
+    "exact_base_commit_binding_required": true,
+    "action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V3.json",
+    "live_challenger_frontier_required": true,
+    "selected_route_execution_preflight_required": true,
+    "max_route_frontier_age_hours": 24,
+    "max_selected_route_preflight_age_hours": 2
   },
   "last_real_output_event": {
     "event_id": "FRONTIER_CAPABILITY_EVIDENCE_A_SPACE_CARGO_20260929",
