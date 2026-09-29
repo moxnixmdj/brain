@@ -166,35 +166,9 @@
     "terminal_reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
     "parent_capability_obsolescence_claim": false,
     "next_action": "FREEZE_FRESH_ORTHOGONAL_DISCOVERY_TO_EXECUTION_GATE__THEN_ONE_GENERIC_SOURCE_NEUTRAL_APT_CANDIDATE_ADMISSION_REPAIR__REUSE_EXISTING_CONTRACT_BIND_VERIFY_STACK__EXECUTE_ONCE__RECONCILE",
-    "residual_recomputation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_POST_XAPIAN_INTERFACE_RECOMPUTATION_V1.json",
-    "residual_reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_DISCOVERY_TO_APT_ADMISSION_RECONCILIATION_V1.json",
+    "residual_recomputation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_POST_PR96_INTERFACE_RECOMPUTATION_V1.json",
     "merge_commit": "db298bb4363266ef9e91ec9ec114b5f1c7bcf1fd",
     "residual_gap": "Discovery output is verified, but current auto_apt_cli_acquisition rejects the new source at candidate admission before existing probe/contract/verify machinery can run."
-  },
-  "tool_discovery_selection_learning_post_xapian_interface_v1": {
-    "status": "RESIDUAL_CAUSAL_BLOCKER_LOCALIZED",
-    "blocker": "VERIFIED_APT_FULL_METADATA_XAPIAN_CANDIDATES_ARE_DROPPED_BEFORE_CONTRACT_INFERENCE_BY_LEGACY_AUTO_APT_SOURCE_ADMISSION",
-    "producer": {
-      "path": "canonical/runtime/capability_discovery.py",
-      "discovery_source": "APT_FULL_METADATA_XAPIAN",
-      "binding_kind": "apt",
-      "evidence_tier": "SEMANTIC_PACKAGE_EXECUTABLE_OWNERSHIP"
-    },
-    "consumer": {
-      "path": "canonical/runtime/auto_apt_cli_acquisition.py",
-      "function": "_viable_candidates",
-      "current_admission": "discovery_source == APT_CATALOG",
-      "effect": "VERIFIED_XAPIAN_APT_CANDIDATES_DROPPED_BEFORE_PROBE_AND_CONTRACT_INFERENCE"
-    },
-    "next_action": "ONE_MINIMAL_GENERIC_DISCOVERY_TO_APT_ACQUISITION_ADMISSION_REPAIR__ADMIT_APT_BY_BINDING_KIND_NOT_LEGACY_SOURCE_LABEL__FRESH_ORTHOGONAL_END_TO_END_GATE__THEN_RECONCILE"
-  },
-  "apt_xapian_acquisition_integration_delta_001": {
-    "status": "STATIC_CAUSAL_BLOCKER_PROVEN__PROBE_FROZEN_BEFORE_REPAIR",
-    "probe_id": "APT-XAPIAN-ACQUISITION-INTEGRATION-DELTA-001",
-    "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_APT_XAPIAN_ACQUISITION_INTEGRATION_RECONCILIATION_V1.json",
-    "manifest_path": "canonical/experiments/APT_XAPIAN_ACQUISITION_INTEGRATION_DELTA_001.json",
-    "runtime_mutated": false,
-    "incremental_spend_usd": 0
   },
   "apt_xapian_acquisition_interface_v1": {
     "capability_id": "APT_XAPIAN_TO_AUTO_APT_ACQUISITION_INTERFACE_V1",
@@ -202,8 +176,8 @@
     "status": "RESIDUAL_GAP_VERIFIED",
     "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_POST_PR96_INTERFACE_RECOMPUTATION_V1.json",
     "current_brain_route": "APT_FULL_METADATA_XAPIAN -> binding_kind=apt -> apt_cli router -> auto_apt_cli_acquisition",
-    "residual_gap": "auto_apt_cli_acquisition._viable_candidates hardcodes APT_CATALOG and a legacy absolute score threshold, so verified Xapian candidates do not enter the existing downstream learning/execution path.",
-    "inheritance_path": "canonical/runtime/capability_discovery.py",
+    "residual_gap": "The APT acquisition admission layer still hardcodes legacy `APT_CATALOG` provenance and a legacy absolute lexical score threshold, so verified Xapian candidates cannot reach the existing probe/contract/bind/verify stack.",
+    "minimal_repair": "Use stable binding/evidence properties for APT candidate admission; keep source-native scores for within-source ordering instead of a cross-scorer absolute threshold.",
     "incremental_spend_usd": 0
   }
 }
