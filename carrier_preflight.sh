@@ -7,8 +7,8 @@ mkdir -p /work
 CARRIER_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 rm -f /etc/apt/apt.conf.d/docker-no-languages || true
 apt-get update -qq
-apt-get install -y -qq --no-install-recommends python3 python3-xapian sudo apt-file zbar-tools ca-certificates >/tmp/h3_install.log 2>&1
-apt-file update >/tmp/h3_aptfile.log 2>&1
+apt-get install -y -qq --no-install-recommends python3 python3-xapian sudo apt-file zbar-tools ca-certificates >/tmp/h3_install.log 2>&1 || { cat /tmp/h3_install.log; exit 1; }
+apt-file update >/tmp/h3_aptfile.log 2>&1 || { cat /tmp/h3_aptfile.log; exit 1; }
 python3 "$CARRIER_DIR/carrier_payload_1.py"
 python3 "$CARRIER_DIR/carrier_payload_2.py"
 python3 "$CARRIER_DIR/carrier_payload_3.py"
