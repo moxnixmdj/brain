@@ -24,7 +24,8 @@
     "formal-argumentation==0.3.0 exact wheel 4b0a242b4bf006cd58c5cbfb313b5b20d2a2895a22ea2b4ddbc4706e8cd56bc8 passed public semantic preflight run 36640692648 but exact license probe run 36641473835 found no license metadata and no bundled license file",
     "Direct source-checkout preflight run 36641463213 failed causally because dsharp is not present in source checkout",
     "One OBS correction spent: official ProbLog 2.3.0 manylinux_2_28_x86_64 wheel SHA256 8d18beae480bce9f54037dfa9cf8c058da874524c118d8ffae96fd210b68e71e",
-    "Direct wheel preflight run 36641617082 PASS on ubuntu-24.04 / Python 3.12"
+    "Direct wheel preflight run 36641617082 PASS on ubuntu-24.04 / Python 3.12",
+    "PySDD 1.0.6 original CPython-3.12 manylinux_2_17_x86_64 wheel, SHA-256 aadde250ea13375f67feabdb7963c2cbcaa2727c80e6ba6544cb07e579a7a019"
   ],
   "evidence_presence_classification": "CAPABILITY_UNPROVEN",
   "probe_specific": false,
@@ -68,7 +69,8 @@
         "Fast Downward/clingo/Z3",
         "waleedqk subjective-logic",
         "ctoth doxa/argumentation",
-        "formal-argumentation 0.3.0: technically strong and directly preflighted, but exact wheel has no declared or bundled reusable license; disqualified for Brain inheritance"
+        "formal-argumentation 0.3.0: technically strong and directly preflighted, but exact wheel has no declared or bundled reusable license; disqualified for Brain inheritance",
+        "PySDD 1.0.6 pinned SDD knowledge-compiler backend for exact ProbLog evaluation"
       ],
       "capability_work_deleted": [
         "No model supplier",
@@ -105,7 +107,7 @@
         "BUILD"
       ],
       "routes_ranked": [
-        "PROBLOG_2_3_0_PINNED_LINUX_WHEEL_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
+        "PROBLOG_A294FA24_PLUS_PINNED_PYSDD_1_0_6_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
         "PYAGRUM_INFLUENCE_DIAGRAM_ADAPTER",
         "DRIFTNARS_REASONING_ADAPTER",
         "MIT_SUBJECTIVE_LOGIC_PLUS_CUSTOM_ARGUMENT_GRAPH",
@@ -162,8 +164,8 @@
       "NO_LICENSE_CODE_REUSE",
       "CUSTOM_PROBABILISTIC_INFERENCE_ENGINE"
     ],
-    "selected_surviving_route": "PROBLOG_2_3_0_PINNED_LINUX_WHEEL_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
-    "why_selected_route_is_fastest_sufficient": "The official Apache-2.0 ProbLog 2.3.0 Linux wheel packages the required compiler, has no mandatory Python dependencies, passed exact-hash live inference and evidence-conditioning on the $0 public carrier, and needs only a small deterministic Brain adapter for typed evidence, provenance trace and stop policy.",
+    "selected_surviving_route": "PROBLOG_A294FA24_PLUS_PINNED_PYSDD_1_0_6_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
+    "why_selected_route_is_fastest_sufficient": "ProbLog directly consumes formal facts/rules and computes weighted logical consequences; the adapter pins its SDD evaluator to the original PySDD 1.0.6 CPython-3.12 Linux wheel by SHA-256, eliminating compiler discovery ambiguity while retaining a small deterministic model-free route.",
     "expected_parent_level_state_change": "Acquire and fresh-reuse one deterministic model-free evidence-to-decision synthesis route on two materially distinct real tasks, with explicit provenance, support/contradiction probabilities, hard constraints, unresolved uncertainty, terminal insufficient-evidence behavior, and auditable trace.",
     "stop_condition": "Implement only a thin typed-evidence-to-ProbLog adapter and execute two precommitted materially distinct real decisions with the exact same adapter bytes: (A) space-cargo reference-search-region final-design promotion adjudication from preserved verified evidence with verdict labels withheld; (B) fresh reuse on model-backed Qwen cognitive-credit eligibility from canonical policy/execution evidence. Independently verify each against pre-existing authoritative outcomes. Also require negative synthetic checks for unresolved conflict/insufficient evidence. On two real passes, bind the route and stop; on any failure, preserve evidence and recompute. No model, pretrained artifact, natural-language parser, new agent framework, or broad cognitive architecture.",
     "route_frontier": {
@@ -197,7 +199,8 @@
           "https://github.com/ML-KULeuven/problog/commit/a294fa24c3cfb4bae3a2acea3a128386113889f4",
           "https://github.com/waleedqk/subjective-logic/commit/8afba9de564c6165e4ba401d08b3dd7f5a78ded0",
           "https://github.com/seamus-brady/DriftNARS/commit/541f809c7a0a958a7dbe89e8fd59f1ffe33d58c3",
-          "https://pypi.org/project/formal-argumentation/0.3.0/"
+          "https://pypi.org/project/formal-argumentation/0.3.0/",
+          "https://pypi.org/project/PySDD/1.0.6/"
         ],
         "BROAD_WEB_OR_COMMUNITY": [
           "Fresh 2026-09-30 search across probabilistic logic, subjective logic, formal argumentation, influence diagrams, NARS, ASP, SMT, and planning engines."
@@ -223,27 +226,30 @@
       ],
       "challenger_routes": [
         {
-          "route": "PROBLOG_2_3_0_PINNED_LINUX_WHEEL_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
+          "route": "PROBLOG_A294FA24_PLUS_PINNED_PYSDD_1_0_6_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
           "evidence": [
             "ProbLog 2.3.0 official Linux release wheel packages the knowledge-compiler binary absent from source checkout.",
             "Exact pinned manylinux_2_28_x86_64 wheel SHA256 8d18beae480bce9f54037dfa9cf8c058da874524c118d8ffae96fd210b68e71e.",
-            "Direct live preflight run 36641617082 passed weighted inference and evidence conditioning on Python 3.12."
+            "Direct live preflight run 36641617082 passed weighted inference and evidence conditioning on Python 3.12.",
+            "PySDD 1.0.6 original CPython-3.12 Linux wheel selected explicitly for ProbLog SDD evaluation."
           ],
           "qualification_evidence": [
             "https://pypi.org/project/problog/2.3.0/",
-            "DIRECT_PROBE: https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36641617082"
+            "DIRECT_PROBE: https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36641617082",
+            "https://pypi.org/project/PySDD/1.0.6/"
           ],
           "qualification_evidence_classes": [
             "CODE_OR_PACKAGE_REGISTRY",
-            "DIRECT_PROBE"
+            "DIRECT_PROBE",
+            "CODE_OR_PACKAGE_REGISTRY"
           ],
           "resolution": "SELECTED",
           "comparison": {
             "CORRECTNESS": "Formal probabilistic logic with exact weighted model counting; adapter preserves source provenance and explicit policy rather than asking the engine to interpret prose.",
             "CAPABILITY_STRENGTH": "Directly covers derived claims, weighted evidence, contradictory conclusions, queries, explanations, and decision-theoretic logic inside the target's structured-input boundary.",
-            "WALL_CLOCK": "One ~1.0 MB pinned Linux wheel plus a thin adapter; exact live install/inference passed.",
+            "WALL_CLOCK": "Pinned prebuilt ~484 kB PySDD wheel plus pure-Python ProbLog source; no solver build, model download, or framework integration.",
             "INCREMENTAL_COST": "$0.",
-            "RELIABILITY": "Source checkout was rejected. Official release wheel is the surviving route and passed exact-hash live inference.",
+            "RELIABILITY": "ProbLog exact source plus explicit SDD backend; wheel identity is hash-verified before execution.",
             "VERIFIABILITY": "Wheel identity, generated ProbLog program, query probabilities, policy and independent real-task oracle are all preservable."
           }
         },
@@ -347,7 +353,7 @@
         "VERIFIABILITY"
       ],
       "unresolved_plausible_dominators": [],
-      "selected_route": "PROBLOG_2_3_0_PINNED_LINUX_WHEEL_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
+      "selected_route": "PROBLOG_A294FA24_PLUS_PINNED_PYSDD_1_0_6_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
       "refresh_triggers": [
         "BEFORE_EXPENSIVE_EXECUTION",
         "AFTER_MATERIAL_ROUTE_FAILURE",
@@ -357,7 +363,7 @@
       "selected_route_preflight": {
         "checked_at_utc": "2026-09-29T22:47:40Z",
         "max_age_hours": 2,
-        "selected_route": "PROBLOG_2_3_0_PINNED_LINUX_WHEEL_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
+        "selected_route": "PROBLOG_A294FA24_PLUS_PINNED_PYSDD_1_0_6_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
         "status": "READY",
         "all_required_dependencies_ready": true,
         "failed_dependencies": [],
@@ -425,6 +431,24 @@
             ],
             "evidence_classes": [
               "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "PYSDD_1_0_6_CP312_MANYLINUX_2_17_X86_64_WHEEL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T22:45:00Z",
+            "evidence": [
+              "OFFICIAL_PRIMARY/PYPI: PySDD 1.0.6 original CPython-3.12 manylinux_2_17_x86_64 wheel published 2025-11-13",
+              "SHA256:aadde250ea13375f67feabdb7963c2cbcaa2727c80e6ba6544cb07e579a7a019"
+            ],
+            "evidence_classes": [
+              "OFFICIAL_PRIMARY",
+              "CODE_OR_PACKAGE_REGISTRY"
             ],
             "evidence_scope": "GLOBAL"
           }
