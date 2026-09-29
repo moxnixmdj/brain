@@ -7,7 +7,9 @@ install third-party code. Binding is a separate verified step.
 """
 from __future__ import annotations
 
+import concurrent.futures
 import json
+import math
 import pathlib
 import re
 import shutil
@@ -230,25 +232,288 @@ def search_mcp_registry(effect, limit=8, timeout_s=12, opener=None):
     }
 
 
-def _apt_query_variants(queries):
+_APT_PACKAGE_METADATA_CACHE=None
+_APT_EXECUTABLE_PATHS_CACHE={}
+
+
+def _apt_package_records():
+    """Load the local APT package metadata once per process.
+
+    Package semantics are the discovery surface. Debian Tag ontology and package
+    descriptions provide role/format/purpose evidence; Contents/apt-file is
+    used later only to prove that a semantically relevant package actually
+    ships a normal executable.
+    """
+    global _APT_PACKAGE_METADATA_CACHE
+    if _APT_PACKAGE_METADATA_CACHE is not None:
+        return _APT_PACKAGE_METADATA_CACHE
+    try:
+        p=subprocess.run(
+            ["apt-cache","dumpavail"],
+            text=True,capture_output=True,timeout=35
+        )
+    except Exception:
+        _APT_PACKAGE_METADATA_CACHE=[]
+        return _APT_PACKAGE_METADATA_CACHE
+    if p.returncode!=0:
+        _APT_PACKAGE_METADATA_CACHE=[]
+        return _APT_PACKAGE_METADATA_CACHE
+
+    records={}
+    current={}
+    last=None
+
+    def flush():
+        if not current:
+            return
+        name=str(current.get("Package") or "").strip()
+        if not name:
+            return
+        description=str(current.get("Description") or "").strip()
+        tags=str(current.get("Tag") or "").strip()
+        section=str(current.get("Section") or "").strip()
+        prior=records.get(name)
+        value={
+            "name":name,
+            "description":description,
+            "tags":tags,
+            "section":section,
+        }
+        if prior is None or len(description)>len(str(prior.get("description") or "")):
+            records[name]=value
+
+    for raw in p.stdout.splitlines()+[""]:
+        if not raw.strip():
+            flush()
+            current={}
+            last=None
+            continue
+        if raw[:1].isspace() and last:
+            current[last]=str(current.get(last) or "")+" "+raw.strip()
+            continue
+        if ":" not in raw:
+            continue
+        key,value=raw.split(":",1)
+        last=key.strip()
+        current[last]=value.strip()
+
+    _APT_PACKAGE_METADATA_CACHE=list(records.values())
+    return _APT_PACKAGE_METADATA_CACHE
+
+
+def _semantic_term_variants(term):
+    term=str(term or "").lower()
+    out=set(_lexical_variants(term))
+    if term.endswith("e") and len(term)>=4:
+        out.add(term+"d")
+    if term.endswith("y") and len(term)>=4:
+        out.add(term[:-1]+"ies")
+    return {x for x in out if x}
+
+
+def _package_lexical_tokens(name,description,tags="",section=""):
+    # Debian Tag metadata is a maintained semantic ontology. Normalize its
+    # facet/value syntax into the same lexical space as package descriptions
+    # rather than inventing package-specific synonym tables.
+    tag_text=re.sub(r"[:/_-]+"," ",str(tags or ""))
+    section_text=re.sub(r"[:/_-]+"," ",str(section or ""))
+    ordered=re.findall(
+        r"[a-z0-9]+",
+        (str(name)+" "+str(description)+" "+tag_text+" "+section_text).lower()
+    )
+    tokens=set(ordered)
+    tokens.update(
+        ordered[i]+ordered[i+1]
+        for i in range(len(ordered)-1)
+        if len(ordered[i])>=2 and len(ordered[i+1])>=2
+    )
+    return tokens
+
+def _package_tag_tokens(tags):
+    tag_text=re.sub(r"[:/_-]+"," ",str(tags or "")).lower()
+    ordered=re.findall(r"[a-z0-9]+",tag_text)
+    out=set(ordered)
+    out.update(
+        ordered[i]+ordered[i+1]
+        for i in range(len(ordered)-1)
+        if len(ordered[i])>=2 and len(ordered[i+1])>=2
+    )
+    return out
+
+
+def _package_name_tokens(name):
+    ordered=re.findall(r"[a-z0-9]+",str(name or "").lower())
+    out=set(ordered)
+    out.update(
+        ordered[i]+ordered[i+1]
+        for i in range(len(ordered)-1)
+        if len(ordered[i])>=2 and len(ordered[i+1])>=2
+    )
+    return out
+
+
+def _apt_semantic_candidates(effect,limit=40):
+    records=_apt_package_records()
+    terms=effect_queries(effect)
+    if not records or not terms:
+        return []
+
+    term_variants={t:_semantic_term_variants(t) for t in terms}
+    document_tokens=[]
+    df={t:0 for t in terms}
+    for rec in records:
+        tokens=_package_lexical_tokens(
+            rec.get("name"),rec.get("description"),rec.get("tags"),rec.get("section")
+        )
+        document_tokens.append(tokens)
+        for term,variants in term_variants.items():
+            if any(v in tokens for v in variants):
+                df[term]+=1
+
+    n=max(1,len(records))
     out=[]
-    for query in queries:
-        if query not in out:
-            out.append(query)
-        # Package descriptions frequently spell lexical compounds with a
-        # separator while goals use a closed compound, e.g. barcode vs
-        # "bar code", qrcode vs "qr-code". apt-cache accepts regex queries,
-        # so add a bounded equivalent without introducing domain names.
-        if query.endswith("code") and len(query)>4:
-            stem=query[:-4]
-            for variant in (stem+" code", stem+"-code"):
-                if variant not in out:
-                    out.append(variant)
+    for rec,tokens in zip(records,document_tokens):
+        matched=[
+            term for term,variants in term_variants.items()
+            if any(v in tokens for v in variants)
+        ]
+        if not matched:
+            continue
+        name=str(rec.get("name") or "")
+        lname=name.lower()
+        name_tokens=_package_name_tokens(name)
+        tag_tokens=_package_tag_tokens(rec.get("tags"))
+        score=0.0
+        for term in matched:
+            idf=math.log((n+1)/(df.get(term,0)+1))+1.0
+            in_name=any(v in name_tokens for v in term_variants[term])
+            in_tags=any(v in tag_tokens for v in term_variants[term])
+            # Maintained semantic ontology evidence is stronger than incidental
+            # prose overlap but weaker than exact package-name identity.
+            weight=1.55 if in_tags else (1.35 if in_name else 1.0)
+            score+=idf*weight
+
+        # Joint semantic coverage is evidence. It is intentionally stronger
+        # than package/executable naming coincidence.
+        score+=0.55*max(0,len(matched)-1)
+
+        raw_tags=str(rec.get("tags") or "").lower()
+        friction=0
+        if lname.startswith(("python3-","ruby-","golang-","php-","php")):
+            friction=2
+        if lname.startswith(("lib","librust-","libghc-")):
+            friction=max(friction,3)
+        if lname.endswith(("-dev","-doc","-dbg","-prof")):
+            friction=max(friction,4)
+        if any(role in raw_tags for role in ("role::shared-lib","role::devel-lib","role::plugin")):
+            friction=max(friction,4)
+        if any(role in raw_tags for role in ("role::program","interface::commandline")):
+            score+=0.35
+        score-=0.35*friction
+
+        out.append({
+            "discovery_source":"APT_CATALOG",
+            "name":name,
+            "description":str(rec.get("description") or ""),
+            "debian_tags":str(rec.get("tags") or ""),
+            "section":str(rec.get("section") or ""),
+            "query":"SEMANTIC_APT_METADATA_INDEX",
+            "matched_terms":sorted(matched),
+            "score":round(score,8),
+            "integration_friction":friction,
+            "required_secret_count":0,
+            "required_environment_count":0,
+            "zero_cost_eligible":True,
+            "eligibility_status":"LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
+            "binding_kind":"apt",
+            "packages":[],
+            "remotes":[],
+        })
+
+    out.sort(key=lambda x:(
+        -float(x.get("score",0)),
+        int(x.get("integration_friction",0)),
+        str(x.get("name","")),
+    ))
+    return out[:max(1,min(int(limit),50))]
+
+
+def _apt_file_list_executables(package,timeout_s=8):
+    package=str(package or "").strip()
+    if not package:
+        return []
+    if package in _APT_EXECUTABLE_PATHS_CACHE:
+        return list(_APT_EXECUTABLE_PATHS_CACHE[package])
+    if shutil.which("apt-file") is None:
+        return []
+    try:
+        p=subprocess.run(
+            ["apt-file","list",package],
+            text=True,capture_output=True,timeout=timeout_s
+        )
+    except Exception:
+        _APT_EXECUTABLE_PATHS_CACHE[package]=[]
+        return []
+    if p.returncode not in (0,1):
+        _APT_EXECUTABLE_PATHS_CACHE[package]=[]
+        return []
+    paths=[]
+    prefix=package+": "
+    for line in p.stdout.splitlines():
+        if not line.startswith(prefix):
+            continue
+        value=line[len(prefix):]
+        normalized=str(value or "").strip().lstrip("/")
+        if normalized.startswith("usr/bin/"):
+            path="/"+normalized
+            if path not in paths:
+                paths.append(path)
+    _APT_EXECUTABLE_PATHS_CACHE[package]=paths
+    return list(paths)
+
+
+def _attach_executable_ownership(candidates):
+    if not candidates or shutil.which("apt-file") is None:
+        return candidates
+    workers=min(8,len(candidates))
+    results={}
+    with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as pool:
+        future_map={
+            pool.submit(_apt_file_list_executables,c["name"]):c["name"]
+            for c in candidates
+        }
+        for future in concurrent.futures.as_completed(future_map):
+            name=future_map[future]
+            try:
+                results[name]=future.result()
+            except Exception:
+                results[name]=[]
+    out=[]
+    for cand in candidates:
+        item=dict(cand)
+        paths=results.get(cand["name"],[])
+        if paths:
+            item["executable_semantic_evidence"]={
+                "command_paths":paths,
+                "command_terms":[],
+                "semantic_terms":effect_queries(item.get("description") or item.get("name") or ""),
+                "semantic_hits":item.get("matched_terms") or [],
+                "semantic_coverage":1.0,
+                "acquisition_mode":"SEMANTIC_PACKAGE_METADATA_PLUS_APT_FILE_OWNERSHIP",
+            }
+            item["evidence_tier"]="SEMANTIC_PACKAGE_EXECUTABLE_OWNERSHIP"
+            item["eligibility_status"]="LOCAL_EXECUTABLE_OWNERSHIP_VERIFIED"
+        out.append(item)
     return out
 
 
 def search_apt_packages(effect, limit=12):
-    """Search the local Ubuntu/Debian package catalog without installing anything."""
+    """Discover executable APT packages from semantics, then prove ownership.
+
+    Package/executable names are never an admission requirement. The local APT
+    metadata corpus generates semantically relevant candidates; apt-file only
+    verifies executable ownership for the leading candidates.
+    """
     if not sys.platform.startswith("linux") or shutil.which("apt-cache") is None:
         return {
             "schema":"PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
@@ -256,133 +521,47 @@ def search_apt_packages(effect, limit=12):
             "queries":effect_queries(effect),"candidate_count":0,"candidates":[],
             "errors":[{"error":"APT_CACHE_UNAVAILABLE"}],"binding_performed":False,
         }
-    queries=effect_queries(effect)
-    apt_queries=_apt_query_variants(queries)
-    seen={}
-    errors=[]
-    effect_tokens=set(queries)
-    for query in apt_queries:
-        try:
-            p=subprocess.run(
-                ["apt-cache","search",query],
-                text=True,capture_output=True,timeout=20
-            )
-        except Exception as exc:
-            errors.append({"query":query,"error":type(exc).__name__+":"+str(exc)})
-            continue
-        if p.returncode!=0:
-            errors.append({"query":query,"error":"APT_SEARCH_FAILED:"+p.stderr[-500:]})
-            continue
-        for line in p.stdout.splitlines():
-            if " - " not in line:
-                continue
-            name,description=line.split(" - ",1)
-            name=name.strip(); description=description.strip()
-            blob=(name+" "+description).lower()
-            ordered_blob_tokens=re.findall(r"[a-z0-9]+",blob)
-            blob_tokens=set(ordered_blob_tokens)
-            # Treat common lexical compounds equivalently across package
-            # metadata styles: "bar code" -> "barcode", "qr code" ->
-            # "qrcode", etc. This stays domain-independent and prevents a
-            # spacing convention from hiding the best supplier/verifier.
-            compound_tokens={
-                ordered_blob_tokens[i]+ordered_blob_tokens[i+1]
-                for i in range(len(ordered_blob_tokens)-1)
-                if len(ordered_blob_tokens[i])>=2 and len(ordered_blob_tokens[i+1])>=2
-            }
-            lexical_tokens=blob_tokens | compound_tokens
-            matched={
-                t for t in effect_tokens
-                if any(v in lexical_tokens for v in _lexical_variants(t))
-            }
-            if not matched:
-                continue
-            score=0
-            ordered_name_tokens=re.findall(r"[a-z0-9]+",name.lower())
-            name_tokens=set(ordered_name_tokens) | {
-                ordered_name_tokens[i]+ordered_name_tokens[i+1]
-                for i in range(len(ordered_name_tokens)-1)
-            }
-            for t in matched:
-                distinctive=t not in GENERIC_DISCOVERY_TOKENS
-                if t in name_tokens:
-                    score += 24 if distinctive else 6
-                else:
-                    score += 10 if distinctive else 2
-            # Integration friction matters more than word count. Standalone
-            # executables are usually cheaper to bind than language libraries.
-            lname=name.lower()
-            integration_friction=0
-            if lname.startswith(("python3-","ruby-","golang-","php-","php")):
-                integration_friction=2
-                score-=10
-            if lname.startswith(("lib","librust-","libghc-")):
-                integration_friction=3
-                score-=12
-            if name.endswith(("-dev","-doc","-dbg","-prof")):
-                integration_friction=max(integration_friction,4)
-                score-=8
-            if integration_friction==0:
-                score+=8
-            # Reward candidates that jointly cover multiple distinct pieces
-            # of the requested effect. A package matching both "decode" and
-            # "barcode" is more useful than one that merely mentions barcode.
-            if len(matched)>1:
-                score += 20*(len(matched)-1)
-            if lname in effect.lower():
-                score+=8
-            prior=seen.get(name)
-            cand={
-                "discovery_source":"APT_CATALOG",
-                "name":name,
-                "description":description,
-                "query":query,
-                "matched_terms":sorted(matched),
-                "score":score,
-                "integration_friction":integration_friction,
-                "required_secret_count":0,
-                "required_environment_count":0,
-                "zero_cost_eligible":True,
-                "eligibility_status":"LOCAL_PACKAGE_METADATA_CANDIDATE_UNVERIFIED",
-                "binding_kind":"apt",
-                "packages":[],
-                "remotes":[],
-            }
-            if prior is None or cand["score"]>prior["score"]:
-                seen[name]=cand
-    ranked=sorted(seen.values(),key=lambda x:(-x["score"],x["name"]))[:max(1,min(int(limit),50))]
-    enriched=[]
-    for cand in ranked:
+
+    pool_limit=max(24,min(50,max(1,int(limit))*2))
+    candidates=_apt_semantic_candidates(effect,limit=pool_limit)
+    candidates=_attach_executable_ownership(candidates)
+
+    # Verified executable ownership is the binding-confidence discriminator;
+    # semantic relevance remains the ranking signal inside each tier.
+    candidates.sort(key=lambda x:(
+        0 if x.get("evidence_tier")=="SEMANTIC_PACKAGE_EXECUTABLE_OWNERSHIP" else 1,
+        -float(x.get("score",0)),
+        int(x.get("integration_friction",0)),
+        str(x.get("name","")),
+    ))
+    candidates=candidates[:max(1,min(int(limit),50))]
+
+    for cand in candidates:
         name=cand["name"]
         try:
-            policy=subprocess.run(["apt-cache","policy",name],text=True,capture_output=True,timeout=10)
+            policy=subprocess.run(
+                ["apt-cache","policy",name],
+                text=True,capture_output=True,timeout=8
+            )
             version=None
             for line in policy.stdout.splitlines():
                 s=line.strip()
                 if s.startswith("Candidate:"):
                     version=s.split(":",1)[1].strip()
                     break
-            sha=None
-            if version and version!="(none)":
-                show=subprocess.run(["apt-cache","show",f"{name}={version}"],text=True,capture_output=True,timeout=15)
-                for line in show.stdout.splitlines():
-                    if line.startswith("SHA256:"):
-                        sha=line.split(":",1)[1].strip().lower()
-                        break
             cand["version"]=version
-            cand["archive_sha256"]=sha
         except Exception as exc:
             cand["metadata_error"]=type(exc).__name__+":"+str(exc)
-        enriched.append(cand)
+
     return {
         "schema":"PROJECT_BRAIN_CAPABILITY_DISCOVERY_RESULT_V1",
         "effect":effect,
         "source":"APT_CATALOG",
         "source_url":None,
-        "queries":queries,
-        "candidate_count":len(enriched),
-        "candidates":enriched,
-        "errors":errors,
+        "queries":effect_queries(effect),
+        "candidate_count":len(candidates),
+        "candidates":candidates,
+        "errors":[],
         "binding_performed":False,
     }
 
