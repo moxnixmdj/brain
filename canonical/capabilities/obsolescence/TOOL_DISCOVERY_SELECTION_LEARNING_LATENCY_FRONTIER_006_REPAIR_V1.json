@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_GENERIC_REPAIR_V1",
+  "repair_id": "SEMANTIC_INDEX_FAST_DISCOVERY_DEFER_EXPENSIVE_BINDING_V1",
+  "causal_frontier": "TOOL-DISCOVERY-LATENCY-CAUSAL-FRONTIER-006",
+  "recorded_on": "2026-09-29",
+  "runtime_blob": "97f4c61691afc6b4d9cb3ed54ee0fc85531ca977",
+  "regression_test_blob": "7eafd6aa598d6295b8ee5260a689bae01be36adf",
+  "heldout_manifest_blob": "3439e26ef4c650098db50f745105eed9b68be776",
+  "heldout_runner_blob": "cbae7e4d1a0de5ddf5df67f7a869bab7a3f66317",
+  "mutation": {
+    "type": "DELETE_EXPENSIVE_COMMON_PATH_WHEN_AXI_CACHE_RETURNS_CANDIDATES",
+    "description": "Package discovery returns Xapian relevance-ranked package candidates immediately and defers executable enumeration, remote manpage enrichment, and archive hashing to later binding/verification.",
+    "fallback_preserved": "Existing evidence path remains only when Xapian yields no candidates."
+  },
+  "synthetic_verification": {
+    "status": "PASS",
+    "method": "EXACT_PATCHED_SEARCH_APT_PACKAGES_FUNCTION_EXECUTED_IN_ISOLATED_CHATGPT_PYTHON_WITH_GENERIC_STUBS",
+    "xapian_candidates_returned": 2,
+    "expensive_path_calls": 0,
+    "binding_performed": false
+  },
+  "heldout_literal_precheck": {
+    "ghostscript": false,
+    "ripgrep": false,
+    "dos2unix": false,
+    "7zip": false,
+    "pass": true
+  },
+  "task_specific_literals": false,
+  "package_hints": false,
+  "timeout_increase": false,
+  "heldout_preview": false,
+  "promotion_authorized": false
+}
