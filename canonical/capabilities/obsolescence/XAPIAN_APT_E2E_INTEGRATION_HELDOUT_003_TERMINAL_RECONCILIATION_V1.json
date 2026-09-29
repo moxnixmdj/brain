@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_XAPIAN_APT_E2E_INTEGRATION_HELDOUT_003_TERMINAL_RECONCILIATION_V1",
+  "validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
+  "terminal_state": "SPENT_FAIL__NO_REPLAY",
+  "acceptance_gate_pass": false,
+  "total_wall_s": 140.213006,
+  "authoritative_result_path": "canonical/astra_runtime/evidence/XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003__RESULT.json",
+  "acquisition_evidence_path": "canonical/astra_runtime/evidence/XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003__AUTO_APT_CLI_ACQUISITION.json",
+  "observed_runtime_blobs": {
+    "canonical/runtime/apt_cli_probe.py": "3f3a8f6a0154e1ed3f87fc97b99840598297b119",
+    "canonical/runtime/auto_apt_cli_acquisition.py": "0b7c67a2680a3aaa1aa5cf1a8bc8d41d69eee271",
+    "canonical/runtime/auto_capability_acquisition.py": "fc80ede8225cc51dac77be6d41aa2a1c757c6ee8",
+    "canonical/runtime/capability_discovery.py": "b9e7423ab24bf2da98869b02d782e791a779892a",
+    "canonical/runtime/cli_contract_inference.py": "009c3c45040178844d84eaa15b0d47ca2e1f259f",
+    "canonical/runtime/verify_pending_cli_binding.py": "8ec4da92080e885a15266389c0318688e6408d43"
+  },
+  "promotion_authorized": false,
+  "first_terminal_error": "RuntimeError:EXISTING_INDEPENDENT_VERIFIER_FAILED:Traceback (most recent call last):\n  File \"/work/canonical/runtime/verify_pending_cli_binding.py\", line 13, in <module>\n    from bound_capabilities import (\n        cli_command, python_library_codec, node_library_codec, python_source_tree_codec\n    )\nImportError: cannot import name 'python_library_codec' from 'bound_capabilities' (unknown location). Did you mean: 'node_library_codec'?\n",
+  "first_causal_blocker": "REMOTE_CARRIER_MATERIALIZATION_OMITTED_EXISTING_VERIFIER_DEPENDENCIES__TOOL_DISCOVERY_PARENT_E2E_UNADJUDICATED",
+  "classification": "CARRIER_FIDELITY_FAILURE__NOT_PARENT_RUNTIME_SEMANTIC_FALSIFICATION",
+  "upstream_surviving_evidence": {
+    "discovery_source": "APT_FULL_METADATA_XAPIAN",
+    "acquisition_status": "CONTRACT_INFERRED",
+    "selected_supplier": "zint",
+    "selected_supplier_binding_kind": "apt",
+    "selected_supplier_zero_cost_eligible": true,
+    "package_hints_used_by_runtime": false,
+    "prebound_registry_route_used": false
+  },
+  "carrier_fidelity_evidence": {
+    "canonical_main_contains": [
+      "canonical/runtime/bound_capabilities/python_library_codec.py",
+      "canonical/runtime/bound_capabilities/python_source_tree_codec.py"
+    ],
+    "execution_carrier_bound_capabilities_present": [
+      "canonical/runtime/bound_capabilities/cli_command.py",
+      "canonical/runtime/bound_capabilities/node_library_codec.py"
+    ],
+    "missing_import_that_terminated_gate": "python_library_codec",
+    "generic_correction_class": "MATERIALIZE_COMPLETE_EXACT_REPOSITORY_OR_VERIFIER_DEPENDENCY_CLOSURE__NO_HAND_PICKED_RUNTIME_SUBSET"
+  },
+  "replay_policy": {
+    "heldout_003_replay_allowed": false,
+    "first_terminal_result_authoritative": true
+  },
+  "next_frontier": {
+    "sequence": [
+      "FREEZE_FRESH_ORTHOGONAL_XAPIAN_APT_E2E_GATE_BEFORE_CARRIER_CORRECTION",
+      "GENERIC_CARRIER_REPOSITORY_CLOSURE_CORRECTION",
+      "EXECUTE_NEW_FRESH_GATE_EXACTLY_ONCE",
+      "RECONCILE_FIRST_TERMINAL_RESULT"
+    ],
+    "runtime_repair_from_heldout_003_authorized": false
+  }
+}
