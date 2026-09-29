@@ -10,7 +10,7 @@
   "causal_blocker": "CANONICAL_MODEL_NON_DEPENDENCE_LAW_EXISTS_BUT_TRUSTED_GUARD_DID_NOT_REJECT_REQUIRED_MODEL_COGNITION_FOR_COGNITIVE_CAPABILITY",
   "action_kind": "USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
   "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::CANONICAL_MODEL_NON_DEPENDENCE_LAW_EXISTS_BUT_TRUSTED_GUARD_DID_NOT_REJECT_REQUIRED_MODEL_COGNITION_FOR_COGNITIVE_CAPABILITY::USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
-  "expected_parent_frontier_change": "Make model-independent cognition a machine-enforced admission condition so required model cognition cannot be executed or promoted as Brain reasoning for cognitive capability targets.",
+  "expected_parent_frontier_change": "Make model-independent cognition a machine-enforced admission condition so no model can appear in the credited execution path for Brain cognitive capability acquisition, reuse, or promotion.",
   "highest_leverage_now": true,
   "prior_work_checked": [
     "canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md already forbids models as the Brain's cognition source or mandatory decision loop",
@@ -24,7 +24,7 @@
   "orthogonal_recurrence_count": 1,
   "precommitted_acceptance_gate_exception": false,
   "probe_specific_literals": [],
-  "stop_condition": "Add only the smallest trusted-guard and pre-action-gate enforcement needed to reject required model dependencies for cognitive real-task capability routes; add a regression record for PR230; validate positive and negative cases; then stop governance work and return to model-independent capability acquisition.",
+  "stop_condition": "Clarify the existing Model Non-Dependence law, add only the smallest trusted-guard and pre-action-gate enforcement needed to reject any model in cognitive real-task proof paths, record the PR230 regression, validate positive and negative cases, then stop governance work and return to model-independent capability acquisition.",
   "governance_change": true,
   "user_authorized_governance_change": true,
   "weakens_existing_guard": false,
@@ -34,7 +34,7 @@
     "real_outcome": "Prevent Project Brain from outsourcing the reasoning capability it is trying to acquire and then misclassifying supplier cognition as Brain cognition.",
     "required_capability": "MODEL_INDEPENDENT_COGNITIVE_CAPABILITY_ADMISSION",
     "obs_goal": {
-      "real_outcome": "Machine-reject any cognitive capability route whose successful cognition requires a language/pretrained model.",
+      "real_outcome": "Machine-reject any cognitive capability proof path containing a model, even if the model is labeled optional, so supplier cognition cannot be laundered into Brain cognition.",
       "proxy_goals_deleted": [
         "Rewrite the already-correct Model Non-Dependence law",
         "Add a new reasoning architecture before enforcing the existing law",
@@ -70,7 +70,7 @@
         "REUSE existing dependency inventory and target parent_families inside the current guard: survives as minimal fix.",
         "BUILD a separate governance service: unnecessary."
       ],
-      "surviving_causal_blocker": "The guard does not fail when a cognitive real-task route declares a required model dependency."
+      "surviving_causal_blocker": "The guard and law wording allowed a model to appear in a cognitive proof route without an automatic fail-closed rejection."
     },
     "obs_solution": {
       "deletion_first_order_applied": [
@@ -83,7 +83,7 @@
         "BUILD"
       ],
       "routes_ranked": [
-        "REPAIR_EXISTING_TRUSTED_GUARD_USING_EXISTING_TARGET_METADATA_AND_PREFLIGHT_DEPENDENCY_INVENTORY"
+        "CLARIFY_EXISTING_LAW_AND_REPAIR_EXISTING_TRUSTED_GUARD_USING_TARGET_METADATA_AND_PREFLIGHT_DEPENDENCY_INVENTORY"
       ],
       "losing_routes_reason": "All larger alternatives duplicate existing law, metadata, or guard machinery and add latency without improving the causal enforcement.",
       "implementation_still_necessary": true
@@ -122,10 +122,10 @@
       "RELY_ON_HUMAN_MEMORY",
       "ADD_NEW_GOVERNANCE_SUBSYSTEM"
     ],
-    "selected_surviving_route": "REPAIR_EXISTING_TRUSTED_GUARD",
-    "why_selected_route_is_fastest_sufficient": "The law, cognitive target metadata, and route dependency inventory already exist; one local guard predicate can connect them with no new infrastructure or provider.",
-    "expected_parent_level_state_change": "Make model-independent cognition a machine-enforced admission condition so required model cognition cannot be executed or promoted as Brain reasoning for cognitive capability targets.",
-    "stop_condition": "Add only the smallest trusted-guard and pre-action-gate enforcement needed to reject required model dependencies for cognitive real-task capability routes; add a regression record for PR230; validate positive and negative cases; then stop governance work and return to model-independent capability acquisition.",
+    "selected_surviving_route": "CLARIFY_EXISTING_LAW_AND_REPAIR_EXISTING_TRUSTED_GUARD",
+    "why_selected_route_is_fastest_sufficient": "The architecture, target metadata, and dependency inventory already exist; clarifying one ambiguous law sentence and enforcing one predicate closes both required-model and optional-model cognition laundering without new infrastructure.",
+    "expected_parent_level_state_change": "Make model-independent cognition a machine-enforced admission condition so no model can appear in the credited execution path for Brain cognitive capability acquisition, reuse, or promotion.",
+    "stop_condition": "Clarify the existing Model Non-Dependence law, add only the smallest trusted-guard and pre-action-gate enforcement needed to reject any model in cognitive real-task proof paths, record the PR230 regression, validate positive and negative cases, then stop governance work and return to model-independent capability acquisition.",
     "route_frontier": {
       "discovery_required": false,
       "not_applicable_reason": "User-authorized governance repair of an already-localized internal enforcement omission; no external capability supplier is being selected."
