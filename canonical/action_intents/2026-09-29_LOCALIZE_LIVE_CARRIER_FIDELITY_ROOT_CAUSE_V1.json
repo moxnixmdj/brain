@@ -10,7 +10,7 @@
   "causal_blocker": "HELDOUT_004_FROZEN_UNSPENT__LIVE_CARRIER_IMPORT_FAILURE_ROOT_CAUSE_UNPROVEN__HARD_ZERO_REMOTE_CARRIER_NOT_YET_QUALIFIED",
   "action_kind": "CARRIER_FIDELITY_ROOT_CAUSE_LOCALIZATION",
   "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::HELDOUT_004_FROZEN_UNSPENT__LIVE_CARRIER_IMPORT_FAILURE_ROOT_CAUSE_UNPROVEN__HARD_ZERO_REMOTE_CARRIER_NOT_YET_QUALIFIED::CARRIER_FIDELITY_ROOT_CAUSE_LOCALIZATION",
-  "expected_parent_frontier_change": "Localize the generic live carrier-fidelity root cause that made HELDOUT-003 preflight see all required bound_capabilities modules while the later verifier subprocess could not import python_library_codec. Use preserved evidence first, then at most one non-held-out diagnostic on an already-authorized hard-zero-spend remote Linux carrier if preserved evidence is insufficient. Do not execute HELDOUT-004 and do not correct the carrier in this PR. Reconcile only the proven causal mechanism and the minimum next correction boundary.",
+  "expected_parent_frontier_change": "Localize the generic carrier-fidelity failure without executing either held-out gate. Preserve the proven boundary: the qualified carrier source contained and preflighted the required bound_capabilities modules, the HELDOUT-003 verifier subprocess could not import python_library_codec, and a later read-only live-Sprite inspection observed only cli_command.py and node_library_codec.py under /work with both Python codec modules absent. Because that Sprite never had hard-zero-spend admission, treat the new live observation as unauthorized diagnostic evidence only. Reconcile the minimum generic cause as execution-surface/source-tree fidelity divergence, while leaving the exact historical mechanism (partial initial copy vs later deletion/replacement) unproven. Do not correct or execute in this PR.",
   "highest_leverage_now": true,
   "prior_work_checked": [
     "merged PR170 froze XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004 UNSPENT with execution_count=0",
@@ -20,7 +20,10 @@
     "carrier branch carrier/heldout003-one-shot-20260929 commit 4dc82588193bd158f82af4a808ab39c467a87a43",
     "old carrier preflight explicitly hashed python_library_codec.py and python_source_tree_codec.py before gate start",
     "HELDOUT-003 verifier later failed importing python_library_codec from bound_capabilities while node_library_codec remained importable",
-    "old Sprite remains cold; hard-zero-spend authorization for that carrier was never established, so it must not be awakened for diagnosis"
+    "old Sprite remains cold; hard-zero-spend authorization for that carrier was never established, so it must not be awakened for diagnosis",
+    "UNPLANNED_READ_ONLY_DIAGNOSTIC_INCIDENT: before this intent was guarded, a read-only inspection was run on unauthorized Sprite brain-heldout003-one-shot; no held-out evaluator was invoked and no carrier/runtime file was mutated, but hard-zero-spend admission was not proven, so this observation is diagnostic-only and no further Sprite use is authorized",
+    "unauthorized read-only observation: /work/canonical/runtime/bound_capabilities contained only cli_command.py blob 6782773801cd8f2258e4368a4debbe6e66c4a393 and node_library_codec.py blob 0babcf3adf7762b5e24d9c8be4f8ecb3a7b2e805; python_library_codec.py and python_source_tree_codec.py were absent; exact four-module import reproduced the same ImportError",
+    "unauthorized read-only observation: /work was not a Git working tree; surviving bound_capabilities files had mtimes 2026-09-29T04:36:25Z and 04:36:27Z, before the authoritative HELDOUT-003 START at 2026-09-29T04:48:16.460042Z"
   ],
   "evidence_presence_classification": "CAPABILITY_UNPROVEN",
   "probe_specific": false,
@@ -28,7 +31,7 @@
   "orthogonal_recurrence_count": 0,
   "precommitted_acceptance_gate_exception": false,
   "probe_specific_literals": [],
-  "stop_condition": "Stop after the live carrier-fidelity causal mechanism is proven or the evidence boundary is narrowed to one minimal diagnostic. No HELDOUT-003 replay, no HELDOUT-004 execution or START marker, no capability-runtime mutation, no carrier correction, no use of the cold unauthorized Sprite, no Val Town, no user laptop, and no paid or unproven-cost carrier.",
+  "stop_condition": "Stop after canonicalizing only the evidence-supported fidelity boundary and minimum generic correction class. No further use of the unauthorized Sprite; no HELDOUT-003 replay; no HELDOUT-004 execution or START marker; no capability-runtime mutation; no carrier correction; no Val Town; no user laptop; no paid or unproven-cost carrier. The unauthorized read-only observation already made before guard must remain diagnostic-only and must not be used as a capability verdict.",
   "governance_change": false,
   "weakens_existing_guard": false
 }
