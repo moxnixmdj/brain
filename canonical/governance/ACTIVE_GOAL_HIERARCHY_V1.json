@@ -4,11 +4,11 @@
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "active_capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
-  "active_probe": "SEMANTIC-RELEVANCE-EXECUTABLE-VERIFICATION-HELDOUT-VALIDATION-003",
-  "probe_state": "HELDOUT_003_FROZEN_BEFORE_REPLACEMENT_RUNTIME_MUTATION__UNSPENT",
-  "current_parent_blocker": "SEMANTIC_RETRIEVAL_CAUSAL_INVERSION__REPLACEMENT_ROUTE_SELECTED__NEW_UNSEEN_GATE_003_NOW_FROZEN",
-  "next_required_action_class": "IMPLEMENT_AT_MOST_ONE_GENERIC_REPLACEMENT_REPAIR__SEMANTIC_RELEVANCE_FIRST_THEN_BATCH_EXECUTABLE_VERIFICATION__NO_HELDOUT_003_EXECUTION_UNTIL_SOURCE_AND_SURFACE_PRECHECK",
-  "forbidden_local_frontier": "PREVIEW_OR_EXECUTE_HELDOUT_003_BEFORE_REPAIR_AND_QUALIFIED_SURFACE__TASK_SPECIFIC_LITERALS__PACKAGE_HINTS__REPLAY_HELDOUT_002__ADDITIVE_SCORE_TUNING__REMOTE_MANPAGE_FANOUT_REPAIR__TIMEOUT_INCREASE__BILLABLE_INFRASTRUCTURE__LAPTOP_EXECUTION__SECOND_REPAIR__MERGE_OR_PROMOTION_BEFORE_FRESH_GATE_RECONCILIATION",
+  "active_probe": "SEMANTIC-PACKAGE-DISCOVERY-HELDOUT-VALIDATION-003",
+  "probe_state": "HELDOUT_003_FROZEN_UNSPENT__ONE_GENERIC_REPAIR_AUTHORIZED__NOT_YET_IMPLEMENTED",
+  "current_parent_blocker": "NAME_FIRST_EXECUTABLE_LITERAL_PREFILTER_AND_HARD_EVIDENCE_TIER_ORDERING_SUPPRESS_SEMANTICALLY_RELEVANT_OPAQUE_COMMAND_PACKAGES",
+  "next_required_action_class": "IMPLEMENT_EXACTLY_ONE_GENERIC_REPAIR__RELEVANCE_FIRST_PACKAGE_CANDIDATES_PLUS_BOUNDED_EXECUTABLE_ENUMERATION__NO_HELDOUT_003_EXECUTION_UNTIL_REPAIR_BYTES_AND_SURFACE_ARE_FROZEN",
+  "forbidden_local_frontier": "TASK_SPECIFIC_LITERALS__PACKAGE_HINTS__HELDOUT_002_REPLAY__MORE_THAN_ONE_GENERIC_REPAIR__HELDOUT_003_PREVIEW_OR_EXECUTION_BEFORE_REPAIR_FREEZE__BILLABLE_INFRASTRUCTURE__LAPTOP_EXECUTION__TIMEOUT_INCREASE",
   "progress_level_minimum": "CAPABILITY_TARGET",
   "probe_budget": {
     "repairs_used_on_active_probe": 0,
@@ -26,7 +26,7 @@
       "may_define_frontier": false
     }
   ],
-  "active_probe_manifest": "canonical/experiments/SEMANTIC_RELEVANCE_EXECUTABLE_VERIFICATION_HELDOUT_VALIDATION_003.json",
+  "active_probe_manifest": "canonical/experiments/SEMANTIC_PACKAGE_DISCOVERY_HELDOUT_VALIDATION_003.json",
   "completed_probe_portfolio": {
     "portfolio_id": "ORTHO-TOOL-LEARNING-PORTFOLIO-001",
     "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_ORTHOGONAL_PORTFOLIO_001_RECONCILIATION.json",
@@ -108,18 +108,16 @@
     "new_held_out_gate_required": true
   },
   "new_held_out_gate": {
-    "validation_id": "SEMANTIC-RELEVANCE-EXECUTABLE-VERIFICATION-HELDOUT-VALIDATION-003",
+    "validation_id": "SEMANTIC-PACKAGE-DISCOVERY-HELDOUT-VALIDATION-003",
     "frozen_date": "2026-09-29",
-    "manifest_path": "canonical/experiments/SEMANTIC_RELEVANCE_EXECUTABLE_VERIFICATION_HELDOUT_VALIDATION_003.json",
-    "runner_path": "canonical/experiments/run_semantic_relevance_executable_verification_heldout_validation_003.py",
-    "source_precheck_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_003_SOURCE_PRECHECK_V1.json",
+    "manifest_path": "canonical/experiments/SEMANTIC_PACKAGE_DISCOVERY_HELDOUT_VALIDATION_003.json",
+    "runner_path": "canonical/experiments/run_semantic_package_discovery_heldout_validation_003.py",
     "cases": 4,
     "oracle_family_recall_min": 0.75,
     "top20_oracle_recall_min": 0.75,
-    "hard_validation_wall_s": 300,
+    "hard_validation_wall_s": 600,
     "execution_count": 0,
     "freshness": "UNSPENT",
-    "second_repair_precedes_freeze": false,
     "replay_authorized": false,
     "promotion_authorized": false
   },
@@ -166,11 +164,10 @@
     "replay_authorized": false
   },
   "last_completed_causal_attribution": {
-    "attribution_id": "HELDOUT-002-CAUSAL-ATTRIBUTION-AND-ROUTE-COMPARISON-V1",
+    "diagnostic_id": "HELDOUT-002-CAUSAL-ATTRIBUTION-AND-ROUTE-COMPARISON-V1",
     "path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_002_CAUSAL_ATTRIBUTION_AND_ROUTE_COMPARISON_V1.json",
-    "exact_generic_cause": "SEMANTIC_RETRIEVAL_CAUSAL_INVERSION__EXECUTABLE_FILENAME_LEXICAL_GATING_PRECEDES_SEMANTIC_RELEVANCE_AND_DIRECT_EVIDENCE_TIER_DOMINANCE_SUPPRESSES_SEMANTIC_PACKAGE_CANDIDATES",
-    "selected_route": "APT_XAPIAN_RELEVANCE_FIRST__APT_FILE_EXECUTABLE_VERIFICATION_SECOND",
-    "runtime_mutated": false
+    "conclusion": "PROVEN_STRUCTURAL_RECALL_AND_RANKING_BOTTLENECK__SELECT_RELEVANCE_FIRST_EXISTING_INDEX_REUSE_PLUS_BOUNDED_EXECUTABLE_ENUMERATION",
+    "generic_repair_authorized": true
   },
   "new_held_out_gate_required": {
     "validation_id": "TO_BE_FROZEN_AS_HELDOUT_VALIDATION_003",
