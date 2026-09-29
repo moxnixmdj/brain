@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_DEBIAN_FULL_METADATA_XAPIAN_HELDOUT_VALIDATION_V1",
+  "validation_id": "DEBIAN-FULL-METADATA-XAPIAN-HELDOUT-VALIDATION-005",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "status": "FROZEN_BEFORE_DEBIAN_FULL_METADATA_XAPIAN_RUNTIME_COPY",
+  "provenance": {
+    "selected_after": "PR88_QUARANTINED_DUE_TO_CONCURRENT_GATE_CONTAMINATION",
+    "selected_before_any_successor_runtime_mutation": true,
+    "repository_and_pr_search_precheck": "No Brain code or PR references found for pigz, shellcheck, socat, or ncdu before freeze.",
+    "prior_spent_and_contaminated_families_excluded": true
+  },
+  "cases": [
+    {
+      "effect_id": "HELDOUT-PARALLEL-GZIP-005",
+      "goal": "Compress a file in gzip format while using multiple CPU cores to speed up compression.",
+      "oracle_families": [
+        "pigz"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-SHELL-LINT-005",
+      "goal": "Analyze shell scripts for common syntax, semantic, and portability problems without executing them.",
+      "oracle_families": [
+        "shellcheck"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-BIDIRECTIONAL-RELAY-005",
+      "goal": "Relay data bidirectionally between two sockets or byte streams from the command line.",
+      "oracle_families": [
+        "socat"
+      ]
+    },
+    {
+      "effect_id": "HELDOUT-DISK-USAGE-TUI-005",
+      "goal": "Interactively inspect directories in a terminal to find where disk space is being used.",
+      "oracle_families": [
+        "ncdu"
+      ]
+    }
+  ],
+  "acceptance": {
+    "heldout_oracle_family_recall_min": 0.75,
+    "heldout_top20_oracle_recall_min": 0.75,
+    "package_hints_forbidden": true,
+    "task_specific_literals_forbidden": true,
+    "hard_validation_wall_s": 180,
+    "incremental_spend_usd": 0
+  },
+  "execution_surface_requirements": {
+    "linux_family": "Debian trixie or equivalent Debian-family APT surface.",
+    "normal_apt_packages_metadata_required": true,
+    "english_translation_index_required": true,
+    "package_tag_metadata_required": true,
+    "architecture_all_contents_required": true,
+    "architecture_specific_contents_required": true,
+    "python3_xapian_required": true,
+    "exact_runtime_bytes_required": true,
+    "runtime_remote_manpage_enrichment_required": false
+  },
+  "promotion_authorized": false
+}
