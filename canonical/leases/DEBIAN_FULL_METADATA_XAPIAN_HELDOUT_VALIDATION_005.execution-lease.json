@@ -1,0 +1,16 @@
+{
+  "schema": "PROJECT_BRAIN_ONE_SHOT_EXECUTION_LEASE_V1",
+  "validation_id": "DEBIAN-FULL-METADATA-XAPIAN-HELDOUT-VALIDATION-005",
+  "status": "LEASED_NOT_STARTED",
+  "lease_branch": "lease/heldout-005-execution-20260929",
+  "candidate_head": "ba6aa9297618310aaa59aa4f1dd9d32f49a234c0",
+  "execution_token": "HELDOUT005-BA6AA929-LEASE1",
+  "fresh_acceptance_execution_count": 0,
+  "forbidden": [
+    "REDEPLOY",
+    "DUPLICATE_EXECUTION",
+    "VAL_TOWN",
+    "USER_LAPTOP"
+  ],
+  "next_action": "BUILD_FRESH_DEDICATED_CARRIER__PREFLIGHT__EXECUTE_EXACTLY_ONCE__RECONCILE"
+}
