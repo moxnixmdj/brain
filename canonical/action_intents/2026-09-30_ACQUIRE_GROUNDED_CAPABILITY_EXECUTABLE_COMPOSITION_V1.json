@@ -1,0 +1,329 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-GROUNDED-CAPABILITY-EXECUTABLE-COMPOSITION-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+  "probe_id": null,
+  "causal_blocker": "POST_GROUNDING_RUNTIME_STOPS_AT_BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_REQUIRED",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1::POST_GROUNDING_RUNTIME_STOPS_AT_BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_REQUIRED::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Acquire a generic model-independent route that converts verified bound-capability grounding into target effects and reuses Brain's existing multi-verified capability proposal generator and capability graph planner to produce executable dependency-resolved controller plans.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "canonical/runtime/capability_planner.py already performs minimum-cost requires/provides graph planning and result-field wiring.",
+    "canonical/runtime/capability_proposal_generators.py multi-verified-capability-v1 already expands verified zero-spend graph plans into executable instances, binds goal literals, effect results, fan-in, and fails closed.",
+    "canonical/tests/test_auto_multi_capability_proposal.py proves two-step observe->assess composition and effect-value flow.",
+    "canonical/tests/test_auto_fanin_capability_proposal.py proves repeated provider fan-in and alias wiring.",
+    "PR250 acquired model-independent plain-goal grounding and runtime now stops at BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_REQUIRED.",
+    "Fresh external challenger search checked Unified Planning and pyperplan/PDDL routes: they solve formal planning problems but still require the problem/action model to be formulated; they do not delete the grounding-to-target-effect translation seam."
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Implement only the smallest generic grounding-to-target-effects adapter plus runtime composition handoff and deterministic regressions. Prove on one fresh consequential non-serialization multi-step task and one materially distinct fresh-reuse task. Do not replay the spent serialization parent task and do not build a new planner.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "3198f1b18fe441ab86cb9c2b4141517e1d5bf6bb",
+    "real_outcome": "Turn verified plain-goal grounding into real executable multi-step bound-capability behavior without model cognition, hand-authored controller sequences, or unnecessary planner replacement.",
+    "required_capability": "MODEL_INDEPENDENT_GROUNDED_CAPABILITY_TO_EXECUTABLE_COMPOSITION_V1",
+    "obs_goal": {
+      "real_outcome": "Close the exact post-grounding composition seam with the minimum reusable machinery.",
+      "proxy_goals_deleted": [
+        "Build a new general planner",
+        "Adopt PDDL/HTN infrastructure before reusing Brain's planner",
+        "Replay the spent serialization task",
+        "Hand-author task controller actions",
+        "Tune external supplier discovery"
+      ],
+      "surviving_necessity": "Grounding currently identifies compatible verified capabilities but runtime intentionally stops before constructing an executable dependency-resolved plan."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "plain_goal.bound_capability.grounding.stdlib",
+        "plain_goal.bound_capability.grounding.verify.stdlib",
+        "capability_planner.py",
+        "multi-verified-capability-v1",
+        "single-verified-capability-v1",
+        "goal_compiler.py",
+        "capability_proposal_generators.py",
+        "astra_runtime.py constrained proposal validator"
+      ],
+      "external_existing_routes_checked": [
+        "Unified Planning",
+        "pyperplan",
+        "PDDL/HDDL planner ecosystem"
+      ],
+      "capability_work_deleted": [
+        "No new graph search algorithm",
+        "No PDDL parser/model layer",
+        "No model planner",
+        "No task-specific controller plan",
+        "No second capability registry"
+      ],
+      "surviving_gap": "A fail-closed adapter must derive one justified target effect per grounded clause (or preserve ambiguity) and feed those effects into the already verified multi-capability proposal/planning path."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Generic interface gap between acquired grounding output and existing deterministic composition machinery.",
+      "delete_bypass_substitute_options": [
+        "DELETE composition: invalid because grounding alone does not execute multi-step goals.",
+        "BYPASS with hand-authored actions: invalid because it hides the cognition seam.",
+        "REUSE existing multi-verified-capability-v1 and capability_planner with a thin target-effect adapter: survives.",
+        "SUBSTITUTE Unified Planning/pyperplan: non-dominating because they still require formal problem construction and add dependencies.",
+        "BUILD new planner: unnecessary."
+      ],
+      "surviving_causal_blocker": "GROUNDING_OUTPUT_HAS_NO_GENERIC_FAIL_CLOSED_TARGET_EFFECT_HANDOFF_TO_EXISTING_MULTI_CAPABILITY_PLANNER"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "THIN_GROUNDING_TO_TARGET_EFFECT_ADAPTER_PLUS_EXISTING_MULTI_VERIFIED_CAPABILITY_GENERATOR",
+        "DIRECT_GROUNDING_TO_CAPABILITY_PLANNER_WITH_DUPLICATED_BINDING_LOGIC",
+        "UNIFIED_PLANNING_OR_PYPERPLAN_FORMAL_MODEL_ADAPTER",
+        "NEW_COMPOSITION_ENGINE"
+      ],
+      "losing_routes_reason": "The existing multi-capability generator already owns graph planning, provider selection, input binding, fan-in, effect-result wiring, and constrained proposal validation. Calling it after deriving grounded target effects avoids duplicate logic and new dependencies.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Deterministic regressions are required for target-effect derivation, ambiguity preservation, unsupported clauses, and prevention of external acquisition. Real acquisition credit requires one fresh multi-step task plus materially distinct fresh reuse with independent effect verification."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_REQUIRED terminal blocker",
+        "Any plan to add a separate planner for this seam"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "minimum-cost capability graph planning",
+        "requires/provides dependency closure",
+        "effect-result value flow",
+        "fan-in composition",
+        "verified input binding"
+      ],
+      "fresh_reuse_plan": "After deterministic integration passes, execute a fresh real multi-step task whose dependencies are generated by the existing planner, then reuse the same adapter on a materially different composition task."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse PR250 grounding evidence",
+        "Reuse existing planner/generator tests as structural evidence",
+        "Stop planner-library search once all challengers preserve formal problem construction as a prerequisite"
+      ],
+      "search_stop_decision": "The existing Brain route already implements the expensive part of composition; no challenger deletes the remaining semantic target-effect handoff with less machinery.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "THIN_GROUNDING_TO_TARGET_EFFECT_ADAPTER_PLUS_EXISTING_MULTI_VERIFIED_CAPABILITY_GENERATOR",
+      "DIRECT_GROUNDING_TO_CAPABILITY_PLANNER_WITH_DUPLICATED_BINDING_LOGIC",
+      "UNIFIED_PLANNING_OR_PYPERPLAN_FORMAL_MODEL_ADAPTER",
+      "NEW_COMPOSITION_ENGINE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "SPENT_SERIALIZATION_REPLAY",
+      "HAND_AUTHORED_CONTROLLER_ACTIONS",
+      "MODEL_BACKED_PLANNING",
+      "NEW_PDDL_INFRASTRUCTURE",
+      "NEW_GRAPH_SEARCH_ENGINE"
+    ],
+    "selected_surviving_route": "THIN_GROUNDING_TO_TARGET_EFFECT_ADAPTER_PLUS_EXISTING_MULTI_VERIFIED_CAPABILITY_GENERATOR",
+    "why_selected_route_is_fastest_sufficient": "Brain already has a verified zero-dependency graph planner and a verified multi-capability proposal generator that handles dependency closure and value binding. Only target effects are missing after grounding; a narrow adapter reaches executable plans with the least new code and preserves existing fail-closed validation.",
+    "expected_parent_level_state_change": "Acquire a generic model-independent route that converts verified bound-capability grounding into target effects and reuses Brain's existing multi-verified capability proposal generator and capability graph planner to produce executable dependency-resolved controller plans.",
+    "stop_condition": "Implement only the smallest generic grounding-to-target-effects adapter plus runtime composition handoff and deterministic regressions. Prove on one fresh consequential non-serialization multi-step task and one materially distinct fresh-reuse task. Do not replay the spent serialization parent task and do not build a new planner.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-29T23:50:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "BRAIN_EXISTING_MULTI_VERIFIED_CAPABILITY_GENERATOR_PLUS_CAPABILITY_GRAPH_PLANNER",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/capability_planner.py",
+          "canonical/runtime/capability_proposal_generators.py",
+          "canonical/tests/test_auto_multi_capability_proposal.py",
+          "canonical/tests/test_auto_fanin_capability_proposal.py"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://unified-planning.readthedocs.io/en/latest/",
+          "https://unified-planning.readthedocs.io/en/latest/interoperability.html",
+          "https://github.com/aibasel/pyperplan"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/aiplan4eu/unified-planning",
+          "https://github.com/aibasel/pyperplan"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Fresh 2026-09-29 web search for current deterministic Python planning frameworks and PDDL/STRIPS planners"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "Python deterministic AI planning library STRIPS PDDL current"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Unified Planning pyperplan planner Python"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "capability graph requires provides planner versus PDDL formal problem adapter"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 current open source deterministic Python planner"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "BRAIN_EXISTING_MULTI_VERIFIED_CAPABILITY_GENERATOR_PLUS_CAPABILITY_GRAPH_PLANNER",
+          "evidence": [
+            "Existing tests prove two-step dependency planning, effect-result wiring, fan-in, paid-provider exclusion, and fail-closed missing prerequisites.",
+            "No new dependency or formal problem language is required because Brain registry already declares requires/provides/cost/actions."
+          ],
+          "qualification_evidence": [
+            "BRAIN_INHERITED canonical/tests/test_auto_multi_capability_proposal.py",
+            "BRAIN_INHERITED canonical/tests/test_auto_fanin_capability_proposal.py",
+            "BRAIN_INHERITED canonical/tests/test_capability_planner.py"
+          ],
+          "qualification_evidence_classes": [
+            "INDEPENDENT_VERIFIER"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Uses already verified bound-capability contracts and fail-closed graph planning.",
+            "CAPABILITY_STRENGTH": "Already supports multi-step dependencies, value flow and fan-in.",
+            "WALL_CLOCK": "Only a thin grounding adapter is missing.",
+            "INCREMENTAL_COST": "$0 and standard library.",
+            "RELIABILITY": "Inherited tests already cover core planner behavior.",
+            "VERIFIABILITY": "Deterministic plan/effect trace plus existing constrained proposal validator."
+          }
+        },
+        {
+          "route": "UNIFIED_PLANNING",
+          "evidence": [
+            "Official documentation provides planner-independent problem modeling, PDDL/HDDL I/O, transformation, solver invocation and plan validation."
+          ],
+          "qualification_evidence": [
+            "OFFICIAL_PRIMARY https://unified-planning.readthedocs.io/en/latest/"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Mature formal-planning abstraction.",
+            "CAPABILITY_STRENGTH": "Broader formal planning features than currently needed.",
+            "WALL_CLOCK": "Still requires translating Brain grounding/registry semantics into a formal Problem before solving.",
+            "INCREMENTAL_COST": "Open source, but adds package and engine integration.",
+            "RELIABILITY": "Actively maintained.",
+            "VERIFIABILITY": "Plans are formally representable and can be validated."
+          }
+        },
+        {
+          "route": "PYPERPLAN",
+          "evidence": [
+            "Current public repository describes a lightweight STRIPS planner written in Python."
+          ],
+          "qualification_evidence": [
+            "CODE_OR_PACKAGE_REGISTRY https://github.com/aibasel/pyperplan"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Appropriate for STRIPS-formalized tasks.",
+            "CAPABILITY_STRENGTH": "Classical planner only; Brain already has sufficient graph planning for declared capabilities.",
+            "WALL_CLOCK": "Requires PDDL/STRIPS formulation and integration before it can solve anything.",
+            "INCREMENTAL_COST": "$0 open source.",
+            "RELIABILITY": "Established planner.",
+            "VERIFIABILITY": "Formal plans can be checked, but semantic problem translation remains ours."
+          }
+        }
+      ],
+      "negative_search_summary": "No current external planner removes the required grounding-to-formal-target translation; Brain already owns the downstream graph-planning and binding machinery.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "THIN_GROUNDING_TO_TARGET_EFFECT_ADAPTER_PLUS_EXISTING_MULTI_VERIFIED_CAPABILITY_GENERATOR",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-29T23:50:00Z",
+        "max_age_hours": 2,
+        "selected_route": "THIN_GROUNDING_TO_TARGET_EFFECT_ADAPTER_PLUS_EXISTING_MULTI_VERIFIED_CAPABILITY_GENERATOR",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "CURRENT_BRAIN_GROUNDING_PLANNER_PROPOSAL_GENERATOR_RUNTIME",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T23:50:00Z",
+            "evidence": [
+              "BRAIN_INHERITED main 3198f1b18fe441ab86cb9c2b4141517e1d5bf6bb",
+              "INDEPENDENT_VERIFIER existing planner/proposal regression suite"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "INDEPENDENT_VERIFIER"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T23:43:31Z",
+            "evidence": [
+              "DIRECT_PROBE bound-registry integration run 36646710975 received hosted runner and passed exact execution"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
