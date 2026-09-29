@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_REAL_CAPABILITY_ACQUISITION_MISSION_V1",
+  "mission_id": "REAL-CAPABILITY-ACQUISITION-EPOCH-1",
+  "status": "READY_FOR_REAL_TASK_SELECTION",
+  "operating_mode": "REAL_CAPABILITY_ACQUISITION_ENGINE",
+  "objective": "Acquire one reusable missing capability while completing a real consequential task from active user or project work, independently verify the result, inherit the winning route, and demonstrate fresh reuse when practical.",
+  "task_selection": {
+    "must_be_real_consequential_work": true,
+    "must_not_be_created_only_to_test_brain": true,
+    "preferred_sources": [
+      "explicit active user request",
+      "active project deliverable with real downstream use",
+      "existing unresolved user/project task whose completion requires a missing capability"
+    ],
+    "forbidden_as_default": [
+      "synthetic barcode/image benchmark",
+      "new heldout gate",
+      "carrier qualification",
+      "infrastructure exercise",
+      "benchmark-only task",
+      "Brain self-maintenance with no external useful output"
+    ],
+    "ranking": "EXPECTED_VERIFIED_REUSABLE_CAPABILITY_GAIN_PER_WALL_CLOCK"
+  },
+  "acquisition_loop": [
+    "IDENTIFY_MISSING_CAPABILITY_FROM_REAL_TASK",
+    "SEARCH_INHERITED_BRAIN_CAPABILITIES",
+    "SEARCH_CONNECTED_TOOLS_AND_EXISTING_SOFTWARE",
+    "SEARCH_PUBLIC_IMPLEMENTATIONS_AND_DOCUMENTATION",
+    "COMPOSE_OR_ACQUIRE_FASTEST_ADEQUATE_ROUTE",
+    "EXECUTE_REAL_TASK",
+    "INDEPENDENTLY_VERIFY_REAL_RESULT",
+    "INHERIT_CAPABILITY_PACKAGE",
+    "REUSE_ON_FRESH_WORK_WHEN_PRACTICAL",
+    "UPDATE_REAL_OUTPUT_SCOREBOARD",
+    "RECOMPUTE_FRONTIER"
+  ],
+  "completion_requires": [
+    "real_task_completed",
+    "result_independently_verified",
+    "reusable_capability_route_identified",
+    "capability_package_inherited",
+    "provenance_cost_latency_failure_modes_recorded"
+  ],
+  "stretch_completion": "fresh_distinct_task_reuses_inherited_capability_without_rediscovery",
+  "support_budget": {
+    "synthetic_support_actions_without_real_output_max": 2,
+    "support_requires_exact_current_real_task_blocker": true,
+    "after_budget": "RECOMPUTE_TARGET"
+  },
+  "infrastructure_policy": "REUSE_EXISTING_QUALIFIED_INFRASTRUCTURE_UNLESS_REAL_TASK_PROVES_IT_INADEQUATE",
+  "hard_incremental_spend_usd": 0,
+  "scorecard": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
+  "authority": [
+    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V1.md",
+    "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V3.md",
+    "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V2.json",
+    "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V3.json"
+  ]
+}
