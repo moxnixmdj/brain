@@ -5,10 +5,10 @@
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "active_capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
   "active_probe": "SEMANTIC-PACKAGE-DISCOVERY-CLEAN-HELDOUT-VALIDATION-005",
-  "probe_state": "CLEAN_HELDOUT_005_SURFACE_QUALIFIED__LEASE_CLAIMED__EXACT_BYTES_STAGED__ARMED_NOT_STARTED",
-  "current_parent_blocker": "ONE_SHOT_GATE_005_EXECUTION_ARMED_ON_QUALIFIED_HARD_ZERO_RAILWAY_SURFACE__START_MARKER_NOT_YET_OBSERVED",
-  "next_required_action_class": "TRIGGER_EXACTLY_ONE_GATE_005_DEPLOYMENT__ON_START_MARKER_MARK_FRESHNESS_SPENT__CAPTURE_TERMINAL_RESULT__RECONCILE__RELEASE_LEASE",
-  "forbidden_local_frontier": "ANY_HELDOUT_003_OR_004_EXECUTION__005_PREVIEW_OR_REPLAY__SECOND_RUNTIME_REPAIR__TASK_SPECIFIC_LITERALS__PACKAGE_HINTS__TIMEOUT_INCREASE__BILLABLE_OR_UNPROVEN_METERED_INFRASTRUCTURE__LAPTOP_EXECUTION__MERGE_OR_PROMOTION_BEFORE_005_RECONCILIATION",
+  "probe_state": "CLEAN_HELDOUT_005_EXECUTION_STARTED__FRESHNESS_SPENT__AWAITING_TERMINAL_RESULT_RECONCILIATION",
+  "current_parent_blocker": "HELDOUT_005_HAS_CROSSED_THE_ONE_SHOT_EXECUTION_BOUNDARY__EXACT_RAILWAY_DEPLOYMENT_TERMINAL_RESULT_NOT_YET_RECONCILED",
+  "next_required_action_class": "READ_ONLY_CAPTURE_EXACT_HELDOUT_005_TERMINAL_RESULT__RECONCILE_PASS_FAIL_OR_INFRA_OUTCOME__RELEASE_EXECUTION_LEASE",
+  "forbidden_local_frontier": "REPLAY_OR_REEXECUTION_OF_HELDOUT_005__SECOND_RUNTIME_REPAIR__MERGE_OR_PROMOTION_BEFORE_TERMINAL_RECONCILIATION__BILLABLE_INFRASTRUCTURE__LAPTOP_EXECUTION__PACKAGE_HINTS__TASK_SPECIFIC_LITERALS__TIMEOUT_INCREASE",
   "progress_level_minimum": "CAPABILITY_TARGET",
   "probe_budget": {
     "repairs_used_on_active_probe": 1,
@@ -118,14 +118,32 @@
     "top20_oracle_recall_min": 0.75,
     "effective_minimum_cases_passing": 3,
     "hard_validation_wall_s": 300,
-    "execution_count": 0,
-    "freshness": "UNSPENT",
+    "execution_count": 1,
+    "freshness": "SPENT",
     "repair_runtime_blob_sha": "dbd2b4026149a7a2e731eb3152ca398e30ca625f",
     "repair_commit_sha": "aa49d81446e5d042f8cf1cffb3bada9c887fc014",
     "replay_authorized": false,
     "promotion_authorized": false,
     "execution_surface_qualification_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_005_EXECUTION_SURFACE_QUALIFICATION_V1.json",
-    "execution_lease_path": "canonical/execution_leases/SEMANTIC_PACKAGE_DISCOVERY_CLEAN_HELDOUT_VALIDATION_005_EXECUTION_LEASE_V1.json"
+    "execution_lease_path": "canonical/execution_leases/SEMANTIC_PACKAGE_DISCOVERY_CLEAN_HELDOUT_VALIDATION_005_EXECUTION_LEASE_V1.json",
+    "execution_started_at": "2026-09-29T02:43:38.437956983Z",
+    "execution_surface": {
+      "provider": "Railway",
+      "project_id": "9d2e8ee8-0eb8-414c-b7e0-a93d90eed54d",
+      "environment_id": "256bcc63-cebd-4079-9a61-c0e9cdbbeeb8",
+      "service_id": "851b6f16-2e12-4a68-b49c-04f81056fa5f",
+      "deployment_id": "2e158cd3-4643-4c61-bbbc-b803be2a277e"
+    },
+    "execution_boundary_evidence": {
+      "runtime_blob": "dbd2b4026149a7a2e731eb3152ca398e30ca625f",
+      "runner_blob": "3cdcbd427676f6b1324d1b1c7e11cec805211327",
+      "manifest_blob": "312a2dac7ec2d0acf0def049d36533729cd80103",
+      "apt_packages_index_count": 3,
+      "contents_all_index_count": 2,
+      "contents_total_index_count": 4,
+      "surface_requalified": "PASS",
+      "execution_start_marker": "PB_HELDOUT_005_EXECUTION_START=1"
+    }
   },
   "antidrift_interlock": {
     "schema": "PROJECT_BRAIN_ANTIDRIFT_EXECUTION_INTERLOCK_V2",
@@ -155,11 +173,11 @@
     "policy_goal": "No runnable task or runtime action may execute unless content-bound to the exact current canonical frontier and explicitly allowlisted."
   },
   "monotonic_spend_barrier": {
-    "validation_id": "BATCHED-EXECUTABLE-EVIDENCE-HELDOUT-VALIDATION-002",
+    "validation_id": "SEMANTIC-PACKAGE-DISCOVERY-CLEAN-HELDOUT-VALIDATION-005",
     "effective_execution_count": 1,
     "state": "SPENT_FROM_EXECUTION_START_MARKER",
     "rule": "NEVER_DECREMENT_OR_RESET_EXECUTION_COUNT__NO_RETRY_REGARDLESS_OF_PASS_FAIL_TIMEOUT_OR_PLATFORM_OUTCOME",
-    "source": "Railway deployment aa411a03-2a63-4708-bf1a-758acae7f72c direct logs"
+    "source": "Railway deployment 2e158cd3-4643-4c61-bbbc-b803be2a277e direct logs"
   },
   "last_reconciled_heldout_gate": {
     "validation_id": "BATCHED-EXECUTABLE-EVIDENCE-HELDOUT-VALIDATION-002",
