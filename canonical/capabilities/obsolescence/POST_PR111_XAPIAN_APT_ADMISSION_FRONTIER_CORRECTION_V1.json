@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_POST_FRONTIER_SELECTION_CORRECTION_V1",
+  "reconciliation_id": "POST-PR111-XAPIAN-APT-ADMISSION-FRONTIER-CORRECTION-V1",
+  "checked_on": "2026-09-29",
+  "canonical_base_commit": "d22f5012df9a32e073e0bed8fe7da7af4a60441b",
+  "superseded_selection": {
+    "source_pr": 111,
+    "selected_capability": "MULTI_TOOL_ORCHESTRATION_AND_PLANNING",
+    "disposition": "PRESERVED_AS_HISTORICAL_RECOMPUTATION__SUPERSEDED_AS_IMMEDIATE_FRONTIER",
+    "reason": "A smaller foundational integration gap with direct static causal evidence was not included in the comparative leverage decision."
+  },
+  "verified_upstream_route": {
+    "capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+    "route_id": "DEBIAN_FULL_METADATA_XAPIAN_DIRECT_CONTENTS_V1",
+    "inherited_by_pr": 96,
+    "capability_discovery_git_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
+    "authoritative_heldout_deployment": "805a36d4-04cf-4938-bfac-74d29418081f",
+    "heldout_oracle_family_recall": 1,
+    "heldout_top20_oracle_recall": 1,
+    "wall_s": 16.233238,
+    "heldout_005_freshness": "SPENT__NEVER_REPLAY"
+  },
+  "exact_main_code_identities": {
+    "auto_capability_acquisition_git_blob": "fc80ede8225cc51dac77be6d41aa2a1c757c6ee8",
+    "auto_apt_cli_acquisition_git_blob": "786f7de7df853cfaec2826f9471942b001e7eadc"
+  },
+  "static_causal_chain": [
+    "capability_discovery full-metadata route emits binding_kind=apt and discovery_source=APT_FULL_METADATA_XAPIAN.",
+    "auto_capability_acquisition._discovery_supplier_order reads binding_kind before discovery_source and maps apt to apt_cli, so the verified candidates reach the APT supplier class.",
+    "auto_apt_cli_acquisition._viable_candidates discards every candidate whose discovery_source is not exactly APT_CATALOG.",
+    "Therefore APT_FULL_METADATA_XAPIAN candidates are deterministically removed before apt_cli_probe or cli_contract_inference can run on the faithful full-metadata route."
+  ],
+  "first_failing_interface": "AUTO_APT_CLI_ACQUISITION_CANDIDATE_ADMISSION",
+  "sufficient_failure_proof": "SOURCE_NAME_REJECTION_ALONE",
+  "secondary_uncertainty": {
+    "legacy_rule": "candidate score must be >= 12",
+    "new_score_semantics": "Xapian BM25 match.weight",
+    "finding": "No preserved calibration evidence justifies transferring the legacy handcrafted-score absolute threshold to Xapian BM25 weights. Treat the threshold as unvalidated for the new source, not as a proven portable contract."
+  },
+  "leverage_reconciliation": {
+    "canonical_selection_metric": "VERIFIED_CAPABILITY_GAIN_X_OBSOLESCENCE_LEVERAGE_PER_WALL_CLOCK_TIME",
+    "why_this_precedes_multi_tool_orchestration": [
+      "The defect is a narrow interface seam between two already-built generic components, so time to a decisive fix/test is low.",
+      "It blocks the existing autonomous discover-to-acquire-to-contract-to-execute path, so capability gain is direct rather than speculative.",
+      "Dynamic tool acquisition is an upstream enabler for later multi-tool orchestration, giving the repair multi-capability leverage.",
+      "PR111 requires a new frontier bar and fresh compound-work adjudication; this seam is already causally localized."
+    ]
+  },
+  "minimum_repair_shape": [
+    "Use stable APT binding/evidence properties for candidate admission rather than a discovery-source-name whitelist.",
+    "Preserve legacy APT_CATALOG behavior.",
+    "Do not apply an uncalibrated legacy absolute score threshold to Xapian candidates; retain source-native ordering/provenance.",
+    "Reuse the existing apt probe, CLI contract inference, binding, verification, and promotion stack.",
+    "Add no package hints or task-specific literals."
+  ],
+  "execution_sequence": [
+    "MERGE_THIS_RECONCILIATION_WITH_NO_RUNTIME_MUTATION",
+    "FREEZE_ONE_FRESH_ORTHOGONAL_DISCOVERY_TO_EXECUTION_GATE",
+    "IMPLEMENT_ONE_GENERIC_SOURCE_NEUTRAL_APT_ADMISSION_REPAIR",
+    "RUN_FOCUSED_REGRESSION",
+    "EXECUTE_THE_FRESH_GATE_EXACTLY_ONCE",
+    "RECONCILE_PARENT_FRONTIER"
+  ],
+  "runtime_mutated": false,
+  "external_execution_performed": false,
+  "incremental_spend_usd": 0
+}
