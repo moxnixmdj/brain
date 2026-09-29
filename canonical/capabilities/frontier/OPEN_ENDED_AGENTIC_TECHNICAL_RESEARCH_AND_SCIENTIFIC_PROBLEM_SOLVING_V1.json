@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
   "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "status": "FRONTIER_BAR_DEFINED__EVIDENCE_A_ONLY__DEPENDENCY_FREE_TASK_B_FAILED_AFTER_9B_RESEARCH_ACTIONS__TERMINATION_SEAM_LOCALIZED",
+  "status": "FRONTIER_BAR_DEFINED__MODEL_INDEPENDENT_SYNTHESIS_SUBCAPABILITY_VERIFIED__FRESH_PARENT_COMPOSITION_REQUIRED",
   "real_capability": true,
   "parent_families": [
     "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
@@ -50,7 +50,7 @@
     "evidence_path": "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json"
   },
   "evidence_B": {
-    "status": "UNSPENT_AFTER_THREE_ROUTE_FAILURES__9B_PARTIAL_RESEARCH_BEHAVIOR_PRESENT_BUT_REAL_TASK_NOT_COMPLETED",
+    "status": "FRESH_PARENT_REAL_TASK_REQUIRED_AFTER_MODEL_INDEPENDENT_SYNTHESIS_ACQUISITION",
     "failed_routes": [
       {
         "route": "ANONYMOUS_POLLINATIONS_LEGACY_PLANNER",
@@ -70,9 +70,19 @@
         "useful_partial_behavior": "Selected and fetched three authoritative NCBI sources through the local planner bridge."
       }
     ],
-    "next_candidate": "GENERIC_EVIDENCE_TO_FINALIZATION_COMPOSITION_OBS_V3",
-    "requirement": "Resolve the recurrent termination/composition seam under a fresh live challenger frontier, then complete a fresh dependency-free real Task C without frontier-model execution or same-task tuning."
+    "next_candidate": "COMPOSE_INHERITED_MODEL_INDEPENDENT_PARENT_STACK_WITH_VERIFIED_EVIDENCE_DECISION_SYNTHESIS",
+    "requirement": "Execute one fresh materially different consequential technical/scientific task through the composed model-independent planner/discovery/execution/verification/synthesis stack. Do not replay prior model-backed Task B. The first causal failure defines any next subcapability."
   },
-  "obsolescence_status": "NOT_YET_PROVEN",
-  "residual_gap": "Dependency-free open-ended research action selection is partially demonstrated, but end-to-end completion remains unproven because 4B and 9B hit the same evidence-to-finish termination seam."
+  "obsolescence_status": "NOT_YET_PROVEN__MODEL_INDEPENDENT_SYNTHESIS_SUBCAPABILITY_ACQUIRED",
+  "residual_gap": "PARENT_COMPOSITION_NOT_FRESHLY_REVALIDATED_AFTER_MODEL_INDEPENDENT_SYNTHESIS_ACQUISITION",
+  "verified_subcapabilities": [
+    {
+      "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+      "status": "VERIFIED_ACQUIRED__FRESH_REUSE_PASS",
+      "route": "decision.synthesis.typed.stdlib + decision.synthesis.verify.stdlib",
+      "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_ASTRA_INTEGRATION_20260930_V1.json",
+      "merge_commit_sha": "2f4f3d7042f055003daf85a93e01e2f78678cec6"
+    }
+  ],
+  "next_action": "SELECT_ONE_FRESH_REAL_PARENT_TASK__RUN_CURRENT_MODEL_INDEPENDENT_COMPOSED_STACK__VERIFY_END_TO_END__LOCALIZE_ONLY_FIRST_CAUSAL_GAP"
 }
