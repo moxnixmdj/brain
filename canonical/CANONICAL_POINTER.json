@@ -552,14 +552,14 @@
     "h005_surface_qualification_path": "canonical/capabilities/obsolescence/H005_UBUNTU_DIRECT_SURFACE_QUALIFICATION_20260929_V1.json",
     "active_operating_mode": "REAL_CAPABILITY_ACQUISITION_WITH_RECURSIVE_OBS",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
-    "capability_acquisition_engine_law": "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
-    "goal_hierarchy_action_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V4.json",
-    "critical_path_pre_action_gate": "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V5.json",
+    "capability_acquisition_engine_law": "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V3.md",
+    "goal_hierarchy_action_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V5.json",
+    "critical_path_pre_action_gate": "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V6.json",
     "real_capability_acquisition_mission_path": "canonical/tasks/REAL_CAPABILITY_ACQUISITION_MISSION_V1.json",
-    "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
-    "recursive_obs_receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V2.json",
-    "recursive_obs_status": "MANDATORY_PRE_ACTION_CONTROL_LOOP__EXACT_BASE_BOUND__SCHEMA_V2__FAIL_CLOSED",
-    "recursive_obs_action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V1.json",
+    "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V2.md",
+    "recursive_obs_receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V3.json",
+    "recursive_obs_status": "MANDATORY_PRE_ACTION_CONTROL_LOOP__EXACT_BASE_BOUND__LIVE_CHALLENGER_FRONTIER__24H_MAX_EXTERNAL_ROUTE_LEASE__FAIL_CLOSED",
+    "recursive_obs_action_intent_template": "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V2.json",
     "recursive_obs_regression": "canonical/regressions/2026-09-29_STALE_OR_HOLLOW_RECURSIVE_OBS_RECEIPT.json",
     "last_real_output_event": {
       "event_id": "FRONTIER_CAPABILITY_EVIDENCE_A_SPACE_CARGO_20260929",
@@ -667,7 +667,7 @@
     "capability_obsolescence_strategy": "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V4.md",
     "goal_hierarchy_law": "canonical/laws/GOAL_HIERARCHY_AND_DRIFT_IMMUNITY_LAW_V1.md",
     "active_goal_hierarchy": "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
-    "goal_hierarchy_action_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V4.json",
+    "goal_hierarchy_action_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V5.json",
     "drift_guard_required_for_frontier_sensitive_prs": true,
     "probe_is_never_goal": true,
     "generic_repairs_from_single_probe_max": 1,
@@ -693,12 +693,12 @@
     "synthetic_probe_default_frontier_forbidden": true,
     "maximum_support_actions_before_frontier_recompute": 2,
     "pre_freeze_realizability_required": true,
-    "capability_acquisition_engine_law": "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
+    "capability_acquisition_engine_law": "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V3.md",
     "real_output_scoreboard": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
-    "critical_path_pre_action_gate": "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V5.json",
+    "critical_path_pre_action_gate": "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V6.json",
     "recursive_obs_required": true,
-    "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
-    "recursive_obs_receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V2.json",
+    "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V2.md",
+    "recursive_obs_receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V3.json",
     "deletion_first_order": [
       "DELETE",
       "BYPASS",
@@ -709,7 +709,35 @@
       "BUILD"
     ],
     "implementation_without_current_obs_receipt_forbidden": true,
-    "recursive_obs_exact_base_commit_binding_required": true
+    "recursive_obs_exact_base_commit_binding_required": true,
+    "live_challenger_frontier_required": true,
+    "external_route_frontier_max_age_hours": 24,
+    "external_route_frontier_source_classes": [
+      "BRAIN_INHERITED",
+      "OFFICIAL_PRIMARY",
+      "CODE_OR_PACKAGE_REGISTRY",
+      "BROAD_WEB_OR_COMMUNITY"
+    ],
+    "external_route_frontier_query_intents": [
+      "CAPABILITY_VECTOR",
+      "SUPPLIER_OR_PRODUCT",
+      "IMPLEMENTATION_FORM",
+      "RECENCY_OR_NEW_RELEASE"
+    ],
+    "external_route_frontier_unresolved_plausible_dominators_max": 0,
+    "external_route_frontier_refresh_triggers": [
+      "BEFORE_EXPENSIVE_EXECUTION",
+      "AFTER_MATERIAL_ROUTE_FAILURE",
+      "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+      "BEFORE_SCARCE_GATE_SPEND"
+    ],
+    "external_route_frontier_community_role": "DISCOVERY_SENSOR_ONLY",
+    "external_route_frontier_qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY",
+      "CODE_OR_PACKAGE_REGISTRY",
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER"
+    ]
   },
   "standby_runtime": {
     "runtime_id": "SUPERHERO-RUNTIME-2.6.0-DIRECT-SIGNED-PERMANENT",
@@ -759,6 +787,7 @@
     "process": [
       "SELECT_REAL_CONSEQUENTIAL_TASK",
       "RUN_GENERATION_BOUND_RECURSIVE_OBS",
+      "REFRESH_LIVE_CHALLENGER_FRONTIER",
       "DEFINE_SURVIVING_REAL_USEFUL_CAPABILITY",
       "SEARCH_HIDDEN_WAREHOUSE_AND_EXISTING_ROUTES",
       "APPLY_DELETE_BYPASS_REUSE_SUBSTITUTE_COMPOSE_REPAIR_BUILD",
@@ -780,7 +809,7 @@
     "operating_mode": "REAL_CAPABILITY_ACQUISITION_WITH_RECURSIVE_OBS",
     "progress_currency": "VERIFIED_REUSABLE_CAPABILITY_OUTPUT",
     "real_capability_acquisition_mission_path": "canonical/tasks/REAL_CAPABILITY_ACQUISITION_MISSION_V1.json",
-    "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md"
+    "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V2.md"
   },
   "active_persistent_controllers": [
     {
