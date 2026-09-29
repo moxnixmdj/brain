@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_H004_IXIMIUZ_ACCESS_PATH_REJECTION_V1",
+  "evidence_id": "H004-IXIMIUZ-ACCESS-PATH-REJECTION-20260929-V1",
+  "canonical_base_sha": "c1ff6f0233cead59ef2c899899f72537dedfee1d",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "scope": "ACCESS_PATH_RECONCILIATION_ONLY__NO_PLAYGROUND_START__NO_HELDOUT_START",
+  "observations": {
+    "iximiuz_remote_mcp_endpoint": "https://labs.iximiuz.com/mcp",
+    "iximiuz_chatgpt_documentation_claims_support": true,
+    "openai_current_custom_mcp_developer_mode_availability": "BUSINESS_AND_ENTERPRISE_EDU",
+    "current_authorized_tool_surface_has_arbitrary_custom_mcp_add_action": false,
+    "current_plugin_catalog_has_iximiuz_plugin": false
+  },
+  "official_sources": [
+    "https://help.openai.com/en/articles/12584461-developer-mode-and-mcp-apps-in-chatgpt",
+    "https://labs.iximiuz.com/docs/labs-mcp/connecting-your-ai-tool"
+  ],
+  "adjudication": {
+    "iximiuz_service_candidate_valid": true,
+    "direct_callable_transport_from_current_authorized_surface": false,
+    "carrier_admission": "REJECTED_BEFORE_PLAYGROUND_START",
+    "first_failed_predicate": "DIRECT_CALLABLE_COMMAND_TRANSPORT_FROM_CURRENT_AUTHORIZED_CHATGPT_SURFACE",
+    "parent_capability_verdict": "UNPROVEN",
+    "next_action": "DISCOVER_AND_QUALIFY_ONE_HARD_ZERO_REMOTE_LINUX_ROUTE_WITH_DIRECT_CALLABLE_COMMAND_TRANSPORT__THEN_FAITHFUL_APT_XAPIAN_QR_EXACT_RUNTIME_CLOSURE_PREFLIGHT__NO_HELDOUT_004_START"
+  },
+  "heldout_004": {
+    "freshness": "UNSPENT",
+    "execution_count": 0,
+    "start_created": false,
+    "result_created": false,
+    "dispatch_invoked": false,
+    "evaluator_invoked": false
+  },
+  "incremental_spend_usd": 0,
+  "user_device_used": false,
+  "val_town_used": false,
+  "required_next_action": "DISCOVER_AND_QUALIFY_ONE_HARD_ZERO_REMOTE_LINUX_ROUTE_WITH_DIRECT_CALLABLE_COMMAND_TRANSPORT__THEN_FAITHFUL_APT_XAPIAN_QR_EXACT_RUNTIME_CLOSURE_PREFLIGHT__NO_HELDOUT_004_START"
+}
