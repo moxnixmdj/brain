@@ -3,6 +3,7 @@ import html
 import argparse, ast, base64, gzip, hashlib, importlib.util, io, json, os, pathlib, re, shlex, shutil, subprocess, sys, tempfile, time, urllib.error, urllib.parse, urllib.request
 import importlib.metadata
 from datetime import datetime, timezone
+from anti_drift_interlock import authorize_action_from_env, authorize_step_from_env, require_runtime_context
 
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 
@@ -832,6 +833,7 @@ def _knowledge_source_identity(url,json_path):
 
 
 def _goal_action(action):
+    authorize_action_from_env(ROOT, action)
     typ=action.get("type")
     args=action.get("args") or {}
     if typ=="list_tree":
@@ -5546,6 +5548,7 @@ def run_goal(step, mission):
     raise Blocker("GOAL_MAX_CYCLES_WITHOUT_FINISH")
 
 def execute_step(step, prior_results=None, mission=None):
+    authorize_step_from_env(ROOT, step)
     adapter=step["adapter"]
     if adapter=="shell":
         return run_shell(step, prior_results)
@@ -5584,6 +5587,7 @@ def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("mission")
     a=ap.parse_args()
+    require_runtime_context(ROOT)
     mission_path,mission_rel=_canonical_mission_path(a.mission)
     mission=readj(mission_path)
     mid=mission["mission_id"]
