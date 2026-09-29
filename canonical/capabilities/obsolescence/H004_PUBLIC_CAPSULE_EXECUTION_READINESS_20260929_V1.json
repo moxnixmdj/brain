@@ -1,0 +1,101 @@
+{
+  "schema": "PROJECT_BRAIN_H004_PUBLIC_CAPSULE_EXECUTION_READINESS_V1",
+  "evidence_id": "H004-PUBLIC-CAPSULE-EXECUTION-READINESS-20260929-V1",
+  "canonical_base_sha": "b836ed3d7a801b904c3f9b5d4729ae200a488b2e",
+  "validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "scope": "CAPSULE_BUILD_PUBLICATION_SAFETY_AND_CONTROL_SURFACE_ONLY__NO_H004_START",
+  "capsule_path": "canonical/astra_runtime/verification_capsules/H004_PUBLIC_GITHUB_ACTIONS_ONESHOT_001.json",
+  "workflow_template_path": ".github/workflows/h004-public-oneshot-template.yml",
+  "sealed_file_count": 22,
+  "source_tree_fidelity": {
+    "h003_failure_class": "EXECUTION_SURFACE_SOURCE_TREE_FIDELITY_DIVERGENCE",
+    "h003_missing_modules": [
+      "canonical/runtime/bound_capabilities/python_library_codec.py",
+      "canonical/runtime/bound_capabilities/python_source_tree_codec.py"
+    ],
+    "h004_correction": "Both missing H003 modules plus complete top-level verifier import closure are explicitly sealed by Git blob SHA before START.",
+    "capability_runtime_mutation_required": false,
+    "evaluator_mutation_required": false
+  },
+  "publication_audit": {
+    "credential_secret_scan": "PASS",
+    "known_user_account_identifier_scan": "PASS",
+    "authenticated_url_scan": "PASS",
+    "home_directory_path_scan": "PASS",
+    "private_repository_identity_in_public_manifest": "REMOVED",
+    "generic_email_scan": {
+      "result": "PASS_WITH_PUBLIC_METADATA_CONTACT",
+      "only_observed": "bug-barcode@gnu.org",
+      "classification": "PUBLIC_GNU_PACKAGE_CONTACT_EMBEDDED_IN_DEBIAN_METADATA__NOT_USER_OR_ACCOUNT_DATA"
+    },
+    "exact_h003_reference_evidence_preserved": true
+  },
+  "hard_zero_executor_evidence": {
+    "provider": "GitHub Actions",
+    "route": "STANDARD_GITHUB_HOSTED_RUNNER_IN_PUBLIC_REPOSITORY",
+    "official_reference": "https://docs.github.com/en/actions/reference/runners/github-hosted-runners",
+    "official_claim": "Use of the standard GitHub-hosted runners is free and unlimited on public repositories.",
+    "runner_label": "ubuntu-latest",
+    "public_runner_resources_observed_from_official_docs": {
+      "cpu": 4,
+      "ram_gb": 16,
+      "ssd_gb": 14
+    },
+    "private_actions_current_route_rejected": "INCLUDED_PRIVATE_MINUTES_EXHAUSTED_2000_OF_2000",
+    "tinyfish_rejected": "WALLET_NEGATIVE_AND_AGENT_BROWSER_METERED",
+    "digitalocean_rejected": "NO_VISIBLE_CREDIT_RESERVE__ACCOUNT_BALANCE_ZERO",
+    "railway_rejected": "NO_CONNECTED_ACCOUNT_LEVEL_HARD_ZERO_BILLING_PROOF",
+    "camber_rejected": "CONNECTED_EXECUTION_PATH_DEPENDS_ON_LOCAL_CLI_SURFACE"
+  },
+  "workflow_safety": {
+    "trigger": "PUSH_ONLY_WHEN_ARM_H004_PUBLIC_ONESHOT_001_CHANGES",
+    "current_commit_must_equal_arm_file_creation_commit": true,
+    "github_run_attempt_must_equal": 1,
+    "repository_must_be_public": true,
+    "concurrency_group": "h004-public-oneshot-001",
+    "manual_dispatch": false,
+    "rerun_attempt_blocked_before_start": true,
+    "later_arm_file_modification_blocked_before_start": true,
+    "result_artifact_upload": false,
+    "result_emitted_to_logs": true
+  },
+  "faithful_surface_pre_start": [
+    "debian:trixie",
+    "normal Packages metadata",
+    "Translation-en",
+    "Debian Package Tags",
+    "Contents-all",
+    "Contents for current architecture",
+    "python3-xapian import",
+    "sudo",
+    "apt-cache",
+    "zbarimg",
+    "all 22 sealed Git blobs exact",
+    "verifier import closure including four bound adapters",
+    "no existing H004 START",
+    "no existing H004 RESULT"
+  ],
+  "current_authorized_github_surface": {
+    "repository_create_action": false,
+    "repository_visibility_mutation_action": false,
+    "current_installed_repositories_public_count": 0,
+    "exact_external_authority_boundary": "CREATE_ONE_EMPTY_PUBLIC_GITHUB_REPOSITORY_AND_GRANT_CURRENT_GITHUB_APP_ACCESS"
+  },
+  "heldout_004": {
+    "freshness": "UNSPENT",
+    "execution_count": 0,
+    "start_created": false,
+    "result_created": false,
+    "dispatch_invoked": false,
+    "evaluator_invoked": false
+  },
+  "adjudication": {
+    "capsule_publication_safety": "PASS",
+    "capsule_source_closure": "PASS_STATIC",
+    "public_runner_hard_zero_contract": "PASS",
+    "execution_ready": "BLOCKED_ONLY_ON_PUBLIC_REPOSITORY_CREATION_AND_APP_ACCESS",
+    "parent_capability_verdict": "UNPROVEN"
+  },
+  "incremental_spend_usd": 0,
+  "required_next_action": "CREATE_ONE_EMPTY_PUBLIC_GITHUB_REPOSITORY_AND_GRANT_CURRENT_GITHUB_APP_ACCESS__THEN_COPY_EXACT_22_SEALED_FILES_AND_WORKFLOW__CREATE_ARM_FILE_LAST__CAPTURE_FIRST_TERMINAL_LOG_RESULT__RECONCILE_WITHOUT_REPLAY"
+}
