@@ -1,0 +1,56 @@
+{
+  "schema": "PROJECT_BRAIN_FRONTIER_RECOMPUTATION_CORRECTION_V1",
+  "correction_id": "PR111-OMITTED-TOOL-INTEGRATION-RESIDUAL-20260929",
+  "status": "CORRECTION_REQUIRED__NO_RUNTIME_MUTATION",
+  "canonical_base_commit": "d22f5012df9a32e073e0bed8fe7da7af4a60441b",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "corrected_capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "preserved_verified_win": {
+    "route_id": "DEBIAN_FULL_METADATA_XAPIAN_DIRECT_CONTENTS_V1",
+    "source_pr": 89,
+    "inheritance_pr": 96,
+    "runtime_git_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
+    "heldout_validation_id": "DEBIAN-FULL-METADATA-XAPIAN-HELDOUT-VALIDATION-005",
+    "authoritative_deployment": "805a36d4-04cf-4938-bfac-74d29418081f",
+    "freshness": "SPENT",
+    "heldout_oracle_family_recall": 1,
+    "heldout_top20_oracle_recall": 1,
+    "validator_wall_s": 16.233238
+  },
+  "deterministic_interface_break": {
+    "producer_path": "canonical/runtime/capability_discovery.py",
+    "producer_behavior": "_search_apt_packages_full_metadata emits candidate.discovery_source = APT_FULL_METADATA_XAPIAN",
+    "consumer_path": "canonical/runtime/auto_apt_cli_acquisition.py",
+    "consumer_behavior": "_viable_candidates rejects every candidate whose discovery_source != APT_CATALOG",
+    "consequence": "The inherited verified suppliers cannot enter the existing apt_cli_probe → cli_contract_inference → cli_command → independent verification loop.",
+    "evidence_kind": "EXACT_CURRENT_MAIN_SOURCE_STATIC_CAUSAL_BREAK",
+    "requires_candidate_installation": false,
+    "requires_candidate_execution": false
+  },
+  "adjacent_interface_risk": {
+    "observed": "auto_apt_cli_acquisition also applies legacy score >= 12 admission while the Xapian route emits BM25 weights.",
+    "classification": "MUST_BE_HANDLED_OR_FALSIFIED_INSIDE_THE_SAME_SOURCE_CONTRACT_COMPATIBILITY_REPAIR__NOT_YET_PROMOTED_AS_A_SEPARATE_CAUSAL_BLOCKER",
+    "reason": "A source-string-only patch could still reject all otherwise valid Xapian candidates because score scales are not guaranteed compatible."
+  },
+  "pr111_selection_defect": {
+    "source_pr": 111,
+    "merged_commit": "d22f5012df9a32e073e0bed8fe7da7af4a60441b",
+    "defect": "The candidate comparison evaluated only new capability families and omitted the known unresolved end-to-end integration seam inside TOOL_DISCOVERY_SELECTION_AND_LEARNING.",
+    "qualitative_metric_issue": "PR111 used HIGH/LOW-style estimates without a measured comparison against this deterministic small integration seam.",
+    "effect": "The demotion of the tool-learning residual was not causally justified by the recorded comparison."
+  },
+  "decision": {
+    "immediate_blocker": "VERIFIED_XAPIAN_DISCOVERY_OUTPUT_IS_REJECTED_BY_EXISTING_AUTO_APT_ACQUISITION_SOURCE_ADMISSION__APT_FULL_METADATA_XAPIAN_VS_APT_CATALOG__END_TO_END_TOOL_LEARNING_LOOP_CANNOT_START",
+    "multi_tool_orchestration": "DEFERRED_NOT_DELETED",
+    "why": "Correctness/truth precedes local momentum. Restore the omitted known blocker, close or falsify the smallest interface seam, then recompute globally with multi-tool orchestration still available.",
+    "next_action": "OPEN_FRESH_GENERIC_REPAIR_INTENT__MAKE_APT_DISCOVERY_ADMISSION_SOURCE_CONTRACT_COMPATIBLE_AND_SCORE_SCALE_SAFE__TEST_EXISTING_PROBE_CONTRACT_EXECUTE_VERIFY_LOOP_ON_FRESH_NON_HELDOUT_WORK__THEN_RECONCILE"
+  },
+  "constraints": {
+    "incremental_spend_usd": 0,
+    "user_laptop": false,
+    "val_town": false,
+    "heldout005_replay": false,
+    "runtime_mutation_in_this_correction": false,
+    "task_specific_tuning": false
+  }
+}
