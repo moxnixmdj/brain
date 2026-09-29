@@ -148,11 +148,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "CLOSE_H005_AS_BLOCKED_UNSPENT__FREEZE_NEW_ORTHOGONAL_GATE_WITH_REALIZABLE_SECOND_DIMENSION__PREFER_DIFFERENT_EXTERNAL_VERIFICATION_MECHANISM_ON_ALREADY_QUALIFIED_DEBIAN_CARRIER",
+    "next_step": "SELECT_ONE_HIGH_LEVERAGE_REAL_CONSEQUENTIAL_TASK_FROM_ACTIVE_USER_OR_PROJECT_WORK__IDENTIFY_ONE_MISSING_CAPABILITY__SEARCH_REUSE_ACQUIRE_EXECUTE_VERIFY_INHERIT__SCORE_ONLY_REUSABLE_OUTPUT",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "H005_BLOCKED_UNSPENT__UBUNTU_DIRECT_SURFACE_LACKS_REQUIRED_CONTENTS_ALL__FROZEN_GATE_MUST_NOT_BE_WEAKENED",
+    "critical_blocker": "PROBE_CENTRIC_OPERATING_MODE_SUPERSEDED__REAL_CAPABILITY_ACQUISITION_MISSION_NOT_YET_SELECTED",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -229,12 +229,12 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "TOOL_DISCOVERY_SELECTION_AND_LEARNING__H005_BLOCKED_UNSPENT__UBUNTU_DIRECT_SURFACE_LACKS_REQUIRED_CONTENTS_ALL__FROZEN_GATE_MUST_NOT_BE_WEAKENED",
+    "highest_leverage_capability_gap": "REAL_WORLD_CAPABILITY_ACQUISITION_AND_REUSE__PROBE_CENTRIC_OPERATING_MODE_SUPERSEDED__REAL_CAPABILITY_ACQUISITION_MISSION_NOT_YET_SELECTED",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
-    "execution_surface": "PROVIDER_NEUTRAL_VERIFICATION_CAPSULE_EXECUTION",
-    "user_boundary": "NONE__H005_BLOCKED_PRESTART",
+    "execution_surface": "REAL_CAPABILITY_ACQUISITION_ENGINE",
+    "user_boundary": "NONE",
     "integrated_cognitive_worker_candidate": "ICW-CHATGPT-SOL-1",
     "integrated_cognitive_worker_checkpoint_path": "canonical/icw/ICW-CHATGPT-SOL-1/CHECKPOINT_V1.json",
     "integrated_cognitive_worker_mission_progress": "AUDITOR_REAL_MISSION_COMPLETE__RESUME_AND_AUTONOMOUS_WAKE_NOT_YET_PROVEN",
@@ -288,7 +288,7 @@
     "knowledge_side_status": "ARCHITECTURALLY_SOLVED_FOR_CURRENT_PROGRAM_UNLESS_FALSIFIED__JIT_EXTERNAL_VERIFIABLE_KNOWLEDGE_INSTEAD_OF_GIANT_PARAMETER_WAREHOUSE",
     "active_research_side": "CAPABILITIES",
     "obsolescence_definition": "VERIFIED_EQUAL_OR_BETTER_USEFUL_CAPABILITY_VIA_A_FASTEST_CHEAPEST_REALIZABLE_ROUTE_MAKES_THE_FRONTIER_IMPLEMENTATION_UNNECESSARY_FOR_PROJECT_BRAIN",
-    "capability_obsolescence_strategy_path": "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V2.md",
+    "capability_obsolescence_strategy_path": "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V3.md",
     "capability_obsolescence_queue_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "first_v4_obsolescence_win": {
       "capability_id": "EXACT_SYMBOLIC_COMPUTATION_V1",
@@ -520,7 +520,13 @@
     "generic_semantic_verifier_repair_path": "canonical/capabilities/obsolescence/GENERIC_SEMANTIC_VERIFIER_EVIDENCE_ADMISSION_REPAIR_20260929_V1.json",
     "h005_mission_path": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_005.json",
     "h005_runner_path": "canonical/experiments/run_xapian_apt_e2e_integration_heldout_005.py",
-    "h005_surface_qualification_path": "canonical/capabilities/obsolescence/H005_UBUNTU_DIRECT_SURFACE_QUALIFICATION_20260929_V1.json"
+    "h005_surface_qualification_path": "canonical/capabilities/obsolescence/H005_UBUNTU_DIRECT_SURFACE_QUALIFICATION_20260929_V1.json",
+    "active_operating_mode": "REAL_CAPABILITY_ACQUISITION",
+    "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
+    "capability_acquisition_engine_law": "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V1.md",
+    "goal_hierarchy_action_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V2.json",
+    "critical_path_pre_action_gate": "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V3.json",
+    "real_capability_acquisition_mission_path": "canonical/tasks/REAL_CAPABILITY_ACQUISITION_MISSION_V1.json"
   },
   "provider_rules": {
     "val_town": "UNAVAILABLE__NONCANONICAL__DO_NOT_USE",
@@ -539,7 +545,7 @@
   "execution_governance": {
     "anti_drift_law": "canonical/laws/EXECUTION_LEVERAGE_AND_ANTI_DRIFT_LAW_V1.md",
     "activity_is_not_progress": true,
-    "progress_metric": "VERIFIED_GOAL_PREDICATE_OR_CAUSAL_BLOCKER_CHANGE",
+    "progress_metric": "VERIFIED_REUSABLE_CAPABILITY_OUTPUT",
     "no_progress_action_limit": 1,
     "repeated_failure_class_limit": 1,
     "infrastructure_freeze_when_next_real_mission_executable": true,
@@ -595,10 +601,10 @@
     "frontier_capability_target_map": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "frontier_comparison_rule": "FRONTIER_BEHAVIOR_DEFINES_A_MINIMUM_CAPABILITY_BAR__THE_WINNING_ROUTE_MAY_BE_EXTERNAL_COMPOSED_DETERMINISTIC_SPECIALIZED_OR_MODEL_BASED",
     "scaling_gate": "SCALE_ONLY_WHEN_THE_OBSOLESCENCE_CORE_IS_GENERAL_REPRODUCIBLE_AND_USEFUL_THROUGHPUT_WOULD_INCREASE",
-    "capability_obsolescence_strategy": "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V2.md",
+    "capability_obsolescence_strategy": "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V3.md",
     "goal_hierarchy_law": "canonical/laws/GOAL_HIERARCHY_AND_DRIFT_IMMUNITY_LAW_V1.md",
     "active_goal_hierarchy": "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
-    "goal_hierarchy_action_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V1.json",
+    "goal_hierarchy_action_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V2.json",
     "drift_guard_required_for_frontier_sensitive_prs": true,
     "probe_is_never_goal": true,
     "generic_repairs_from_single_probe_max": 1,
@@ -619,7 +625,14 @@
       "OPEN_PR",
       "PASS_TRUSTED_LEASE_GUARD",
       "ADD_OR_TRIGGER_EXPENSIVE_WORKFLOW"
-    ]
+    ],
+    "real_task_first": true,
+    "synthetic_probe_default_frontier_forbidden": true,
+    "maximum_support_actions_before_frontier_recompute": 2,
+    "pre_freeze_realizability_required": true,
+    "capability_acquisition_engine_law": "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V1.md",
+    "real_output_scoreboard": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
+    "critical_path_pre_action_gate": "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V3.json"
   },
   "standby_runtime": {
     "runtime_id": "SUPERHERO-RUNTIME-2.6.0-DIRECT-SIGNED-PERMANENT",
@@ -684,8 +697,11 @@
     "parity_role": "MINIMUM_ACCEPTANCE_BAR_PER_CAPABILITY__NOT_TERMINAL_GOAL",
     "invention_role": "LAST_RESORT_WHEN_EXISTING_ROUTES_ARE_ABSENT_INADEQUATE_OR_SLOWER",
     "authority_path": "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_OBSOLESCENCE_MISSION_LOCK_V4.md",
-    "strategy_path": "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V2.md",
-    "target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json"
+    "strategy_path": "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V3.md",
+    "target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
+    "operating_mode": "REAL_CAPABILITY_ACQUISITION_ENGINE",
+    "progress_currency": "VERIFIED_REUSABLE_CAPABILITY_OUTPUT",
+    "real_capability_acquisition_mission_path": "canonical/tasks/REAL_CAPABILITY_ACQUISITION_MISSION_V1.json"
   },
   "active_persistent_controllers": [
     {

@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "PROMOTE-CAPABILITY-ACQUISITION-ENGINE-STRATEGY-V3",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "PROGRAM_OPERATING_STRATEGY",
+  "probe_id": "NONE__GOVERNANCE_STRATEGY_CHANGE",
+  "causal_blocker": "ACTIVITY_AND_SYNTHETIC_PROBE_CHURN_CAN_CONSUME_WALL_CLOCK_WITHOUT_REUSABLE_PARENT_LEVEL_CAPABILITY_OUTPUT",
+  "action_kind": "USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::PROGRAM_OPERATING_STRATEGY::ACTIVITY_AND_SYNTHETIC_PROBE_CHURN_CAN_CONSUME_WALL_CLOCK_WITHOUT_REUSABLE_PARENT_LEVEL_CAPABILITY_OUTPUT::USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "expected_parent_frontier_change": "Make Project Brain operate as a capability acquisition engine rather than a benchmark/probe factory: progress is credited only for reusable capability acquisition, verified real-task completion, inherited winning routes, frontier dependency removal, or exact residual-gap localization. Synthetic probes become bounded supporting tools, not the default frontier. Reset the immediate frontier from H006 synthetic gating to selecting and executing one high-leverage real capability acquisition mission using existing infrastructure unless real work falsifies it.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "canonical mission lock V4 already says TEST ON REAL WORK but enforcement was insufficient",
+    "canonical strategy V2 already prioritizes real work and inheritance but permits probe churn operationally",
+    "GOAL_HIERARCHY_AND_DRIFT_IMMUNITY_LAW_V1 already states a probe is never the goal",
+    "current H004/H005/H006 sequence demonstrates repeated support work without proportional reusable parent-level output",
+    "current open PR207 is a synthetic freeze-only gate and can be superseded by the user-authorized strategy change"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 3,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Promote the strategy and scorecard, reset the immediate frontier, and close superseded synthetic-only work. Do not change the terminal objective, hard-$0 constraint, truth-first law, no-duplicate law, or evidence standards.",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "user_authorization_summary": "User explicitly directed that Brain behave as a capability acquisition engine rather than a benchmark factory and ordered the Brain to be updated perfectly and faster.",
+  "weakens_existing_guard": false
+}

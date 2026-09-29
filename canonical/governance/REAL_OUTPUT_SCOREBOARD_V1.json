@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_REAL_OUTPUT_SCOREBOARD_V1",
+  "status": "CANONICAL_PROGRESS_ACCOUNTING",
+  "epoch_id": "CAPABILITY_ACQUISITION_ENGINE_V3_EPOCH_20260929",
+  "epoch_reason": "USER_AUTHORIZED_RESET_FROM_PROBE_BENCHMARK_ACTIVITY_TO_REUSABLE_REAL_CAPABILITY_OUTPUT",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "progress_currency": "VERIFIED_REUSABLE_CAPABILITY_OUTPUT",
+  "counters_since_epoch_start": {
+    "reusable_capabilities_inherited": 0,
+    "verified_real_tasks_completed": 0,
+    "fresh_reuse_passes": 0,
+    "frontier_dependencies_removed": 0,
+    "residual_gaps_localized": 0
+  },
+  "efficiency_since_epoch_start": {
+    "capability_acquisition_wall_s_samples": [],
+    "median_capability_acquisition_wall_s": null,
+    "incremental_spend_usd": 0,
+    "synthetic_support_actions_since_last_real_output": 0
+  },
+  "hard_rules": {
+    "pr_count_is_progress": false,
+    "commit_count_is_progress": false,
+    "benchmark_count_is_progress": false,
+    "workflow_count_is_progress": false,
+    "gate_count_is_progress": false,
+    "worker_count_is_progress": false,
+    "infrastructure_is_progress_without_real_output": false,
+    "synthetic_probe_is_progress_without_parent_state_change": false,
+    "maximum_support_actions_before_frontier_recompute": 2,
+    "default_real_task_first": true,
+    "inherited_capability_requires_real_task_evidence": true
+  },
+  "progress_event_requirements": {
+    "reusable_capability_inherited": [
+      "real_useful_behavior_defined",
+      "route_bound_or_reliably_invocable",
+      "independent_verification_present",
+      "provenance_present",
+      "failure_modes_recorded",
+      "real_task_evidence_present"
+    ],
+    "verified_real_task_completed": [
+      "task_is_consequential_not_synthetic_only",
+      "result_verified",
+      "capability_route_identified"
+    ],
+    "fresh_reuse_pass": [
+      "distinct_fresh_task",
+      "same_inherited_capability_used_without_rediscovery",
+      "result_verified"
+    ],
+    "frontier_dependency_removed": [
+      "previous_frontier_dependency_explicit",
+      "replacement_route_equal_or_better_on_real_behavior",
+      "independent_verification_present"
+    ],
+    "residual_gap_localized": [
+      "gap_changes_next_frontier_decision",
+      "evidence_excludes_known_alternative_explanations"
+    ]
+  },
+  "historical_context_non_crediting": {
+    "exact_symbolic_computation_v1_obsolescence_win_preserved": true,
+    "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
+    "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
+  },
+  "next_progress_event_target": "ONE_REUSABLE_CAPABILITY_ACQUIRED_ON_A_REAL_TASK_AND_INHERITED",
+  "authority": [
+    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V1.md",
+    "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V3.md"
+  ]
+}
