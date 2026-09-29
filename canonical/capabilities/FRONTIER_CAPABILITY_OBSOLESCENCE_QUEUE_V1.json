@@ -70,15 +70,16 @@
   ],
   "immediate_frontier": {
     "selected_capability": "REAL_WORLD_CAPABILITY_ACQUISITION_AND_REUSE",
-    "objective": "Select one high-leverage real consequential task from active user/project work that requires a missing or uncertain capability. Search inherited Brain assets, connected tools, public software, APIs, libraries, solvers and compositions before invention. Acquire/bind the fastest adequate route, execute the real task, independently verify it, inherit the winning capability, then demonstrate fresh reuse when practical. Synthetic probes are allowed only as bounded blockers for this real mission.",
+    "objective": "Select one high-leverage real consequential task, run generation-bound recursive OBS across goal/capability/blocker/solution/verification/inherited-system/OBS itself, execute the fastest sufficient surviving route, independently verify the real effect, inherit the capability, delete/supersede work made unnecessary, and attempt fresh reuse.",
     "selection_metric": "VERIFIED_REUSABLE_CAPABILITY_GAIN_PER_WALL_CLOCK__CORRECTNESS_FIRST__HARD_ZERO_INCREMENTAL_SPEND",
-    "exact_blocker": "PROBE_CENTRIC_OPERATING_MODE_SUPERSEDED__REAL_CAPABILITY_ACQUISITION_MISSION_NOT_YET_SELECTED",
-    "evidence_path": "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V1.md",
-    "repair_status": "USER_AUTHORIZED_OPERATING_STRATEGY_RESET__PROBE_FACTORY_MODE_SUPERSEDED",
-    "prohibition": "NO_NEW_SYNTHETIC_GATE_AS_DEFAULT_FRONTIER__NO_INFRASTRUCTURE_WITHOUT_REAL_TASK_CAUSAL_BLOCKER__NO_BENCHMARK_PROGRESS_CREDIT__NO_ACTIVITY_PROGRESS_CREDIT__SEARCH_REUSE_BEFORE_INVENTION",
-    "next_action": "SELECT_ONE_HIGH_LEVERAGE_REAL_CONSEQUENTIAL_TASK_FROM_ACTIVE_USER_OR_PROJECT_WORK__IDENTIFY_ONE_MISSING_CAPABILITY__SEARCH_REUSE_ACQUIRE_EXECUTE_VERIFY_INHERIT__SCORE_ONLY_REUSABLE_OUTPUT",
+    "exact_blocker": "FIRST_NEW_EPOCH_REAL_OUTPUT_NOT_YET_PRODUCED__RECURSIVE_OBS_NOW_MANDATORY_BEFORE_IMPLEMENTATION",
+    "evidence_path": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
+    "repair_status": "USER_AUTHORIZED_RECURSIVE_OBS_PROMOTION",
+    "prohibition": "NO_CONSEQUENTIAL_IMPLEMENTATION_WITHOUT_CURRENT_OBS_RECEIPT__NO_BLOCKER_REPAIR_BEFORE_DELETE_BYPASS_REUSE_SUBSTITUTE_COMPOSE__NO_SYNTHETIC_VERIFIER_IF_DIRECT_REAL_EFFECT_VERIFICATION_SUFFICES__NO_ACTIVITY_PROGRESS_CREDIT",
+    "next_action": "SELECT_REAL_TASK__RUN_RECURSIVE_OBS__EXECUTE_SURVIVING_ROUTE__VERIFY__INHERIT__DELETE_REDUNDANT_WORK__FRESH_REUSE",
     "progress_scoreboard_path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
-    "superseded_synthetic_frontier_pr": 207
+    "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
+    "recursive_obs_receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V1.json"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
@@ -271,8 +272,22 @@
     "progress_metric": "VERIFIED_REUSABLE_CAPABILITY_OUTPUT",
     "maximum_support_actions_before_frontier_recompute": 2,
     "pre_freeze_realizability_required": true,
-    "capability_acquisition_engine_law": "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V1.md",
-    "capability_obsolescence_strategy": "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V3.md",
-    "real_output_scoreboard": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json"
+    "capability_acquisition_engine_law": "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
+    "capability_obsolescence_strategy": "canonical/laws/CAPABILITY_OBSOLESCENCE_ARBITRAGE_STRATEGY_V4.md",
+    "real_output_scoreboard": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
+    "recursive_obs_required": true,
+    "recursive_obs_law": "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
+    "recursive_obs_receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V1.json",
+    "goal_hierarchy_action_gate": "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V3.json",
+    "critical_path_pre_action_gate": "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V4.json",
+    "deletion_first_order": [
+      "DELETE",
+      "BYPASS",
+      "REUSE",
+      "SUBSTITUTE",
+      "COMPOSE",
+      "REPAIR",
+      "BUILD"
+    ]
   }
 }
