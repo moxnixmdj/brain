@@ -1,0 +1,381 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ACQUIRE-PROBLOG-EVIDENCE-TO-DECISION-SYNTHESIS-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+  "probe_id": null,
+  "causal_blocker": "NO_VERIFIED_MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_ROUTE",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1::NO_VERIFIED_MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_ROUTE::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Acquire and fresh-reuse one deterministic model-free evidence-to-decision synthesis route on two materially distinct real tasks, with explicit provenance, support/contradiction probabilities, hard constraints, unresolved uncertainty, terminal insufficient-evidence behavior, and auditable trace.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR240 active target MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1 and its exact scope/promotion bar",
+    "Brain inherited deterministic goal compiler, capability planner, evidence state, auditor, runtime, and capability registry",
+    "ProbLog exact master commit a294fa24c3cfb4bae3a2acea3a128386113889f4, Apache-2.0, active 2026, zero required Python runtime dependencies",
+    "ProbLog exact inference, evidence conditioning, MPE/explanation, decision-theoretic mode, and algebraic semiring support",
+    "DriftNARS 541f809 model-free broader cognitive route",
+    "pyAgrum current influence-diagram route",
+    "waleedqk/subjective-logic MIT operator kernel",
+    "ctoth/doxa and ctoth/argumentation semantic fit but no LICENSE file at inspected revisions"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Implement only a thin typed-evidence-to-ProbLog adapter and execute two precommitted materially distinct real decisions with the exact same adapter bytes: (A) space-cargo reference-search-region final-design promotion adjudication from preserved verified evidence with verdict labels withheld; (B) fresh reuse on model-backed Qwen cognitive-credit eligibility from canonical policy/execution evidence. Independently verify each against pre-existing authoritative outcomes. Also require negative synthetic checks for unresolved conflict/insufficient evidence. On two real passes, bind the route and stop; on any failure, preserve evidence and recompute. No model, pretrained artifact, natural-language parser, new agent framework, or broad cognitive architecture.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "9bc734ad835a25dccf89c1a3f888c3c4208db00f",
+    "real_outcome": "Convert already-structured evidence into reproducible terminal decisions across distinct real domains without any model dependency.",
+    "required_capability": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+    "obs_goal": {
+      "real_outcome": "Acquire exactly the active evidence-to-decision subcapability, not general reasoning, natural-language understanding, discovery, or a replacement agent architecture.",
+      "proxy_goals_deleted": [
+        "Qualify a broad cognitive architecture before a real task",
+        "Run a symbolic benchmark instead of real decisions",
+        "Use a model to synthesize the decision",
+        "Rebuild evidence acquisition or natural-language parsing",
+        "Adopt a no-license argumentation implementation"
+      ],
+      "surviving_necessity": "Two distinct real structured-evidence decisions with one model-free reusable route are the exact canonical promotion bar."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/goal_compiler.py",
+        "canonical/runtime/capability_planner.py",
+        "canonical/runtime/evidence_state.py",
+        "canonical/runtime/capability_reality_auditor.py",
+        "canonical/runtime/astra_runtime.py",
+        "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+      ],
+      "external_existing_routes_checked": [
+        "ProbLog",
+        "DriftNARS/OpenNARS",
+        "pyAgrum influence diagrams",
+        "Fast Downward/clingo/Z3",
+        "waleedqk subjective-logic",
+        "ctoth doxa/argumentation"
+      ],
+      "capability_work_deleted": [
+        "No model supplier",
+        "No pretrained NLP",
+        "No whole cognitive architecture",
+        "No new carrier",
+        "No evidence discovery subsystem",
+        "No custom probabilistic inference engine"
+      ],
+      "surviving_gap": "Brain lacks a bound deterministic route that converts typed weighted evidence and hard constraints into a terminal auditable decision while preserving conflict and uncertainty."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Narrow composition gap after evidence is already structured.",
+      "delete_bypass_substitute_options": [
+        "DELETE synthesis: invalid because parent research capability requires a terminal decision.",
+        "BYPASS with fixed if/else policy only: insufficient for weighted multi-source support/contradiction and derived claims.",
+        "REUSE ProbLog exact inference plus a thin Brain-owned schema/trace/stop-policy adapter: survives.",
+        "REUSE DriftNARS: broader temporal/goal architecture than the current target requires.",
+        "REUSE pyAgrum: strong decision-under-uncertainty engine but less direct for explicit logical support/contradiction proofs.",
+        "REUSE subjective-logic MIT kernel: preserves ignorance well but lacks a complete claim/rule/decision engine, increasing custom code.",
+        "REUSE ctoth argumentation/doxa: semantic fit but inspected revisions have no reusable license."
+      ],
+      "surviving_causal_blocker": "No existing bound adapter maps Brain's structured evidence contract into a licensed exact inference/decision engine and emits a fail-closed auditable terminal decision."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "PROBLOG_A294FA24_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
+        "PYAGRUM_INFLUENCE_DIAGRAM_ADAPTER",
+        "DRIFTNARS_REASONING_ADAPTER",
+        "MIT_SUBJECTIVE_LOGIC_PLUS_CUSTOM_ARGUMENT_GRAPH",
+        "BUILD_CUSTOM_EVIDENCE_REASONER"
+      ],
+      "losing_routes_reason": "ProbLog is mature, Apache-2.0, Python-embeddable, dependency-light, and directly provides probabilistic logic, evidence, proof/explanation, and decision machinery. Other routes require broader integration or materially more custom reasoning code for this narrower target.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "The two real tasks are the acquisition proof. Synthetic checks are subordinate negative tests only: contradictory near-balanced evidence must terminate as INSUFFICIENT_EVIDENCE and hard-constraint precedence must remain fail-closed."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Broad DriftNARS qualification as prerequisite for this subcapability",
+        "Any model-backed evidence finalizer",
+        "Any bespoke probabilistic inference implementation"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "weighted logical support/contradiction synthesis",
+        "hard constraint precedence",
+        "terminal accept/reject/insufficient decision",
+        "auditable generated-program and probability trace"
+      ],
+      "fresh_reuse_plan": "Task A uses verified space-cargo evidence with original verdict labels withheld. Without changing adapter bytes or route policy, Task B fresh-reuses the same route on Qwen cognitive-credit eligibility. Both must match independent pre-existing oracles before binding."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse PR240 target decomposition rather than solving broad general reasoning",
+        "Reuse verified space-cargo evidence as real Task A input source",
+        "Reuse canonical model-independence law and Qwen execution provenance as real Task B source",
+        "Reuse public GitHub Actions carrier",
+        "Stop broad symbolic-architecture search once the target narrowed to structured evidence synthesis"
+      ],
+      "search_stop_decision": "ProbLog is correctness-sufficient for the target's structured-input boundary and no remaining licensed challenger plausibly removes enough adapter work to justify delaying direct real-task execution.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Route frontier was refreshed after PR240 changed the target; prior DriftNARS selection was discarded rather than rebased."
+    },
+    "routes_considered": [
+      "PROBLOG_A294FA24_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
+      "PYAGRUM_INFLUENCE_DIAGRAM_ADAPTER",
+      "DRIFTNARS_REASONING_ADAPTER",
+      "MIT_SUBJECTIVE_LOGIC_PLUS_CUSTOM_ARGUMENT_GRAPH",
+      "CTOTH_ARGUMENTATION_DOXA",
+      "BUILD_CUSTOM_EVIDENCE_REASONER"
+    ],
+    "deleted_or_bypassed_paths": [
+      "MODEL_BACKED_SYNTHESIS",
+      "BROAD_COGNITIVE_ARCHITECTURE_FIRST",
+      "NO_LICENSE_CODE_REUSE",
+      "CUSTOM_PROBABILISTIC_INFERENCE_ENGINE"
+    ],
+    "selected_surviving_route": "PROBLOG_A294FA24_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
+    "why_selected_route_is_fastest_sufficient": "It directly consumes formal facts/rules, computes exact weighted logical consequences, supports decision and explanation modes, is Apache-2.0 and Python-embeddable, requires no pretrained artifact, and needs only a small deterministic adapter for Brain's typed schema, provenance trace, and explicit stop policy.",
+    "expected_parent_level_state_change": "Acquire and fresh-reuse one deterministic model-free evidence-to-decision synthesis route on two materially distinct real tasks, with explicit provenance, support/contradiction probabilities, hard constraints, unresolved uncertainty, terminal insufficient-evidence behavior, and auditable trace.",
+    "stop_condition": "Implement only a thin typed-evidence-to-ProbLog adapter and execute two precommitted materially distinct real decisions with the exact same adapter bytes: (A) space-cargo reference-search-region final-design promotion adjudication from preserved verified evidence with verdict labels withheld; (B) fresh reuse on model-backed Qwen cognitive-credit eligibility from canonical policy/execution evidence. Independently verify each against pre-existing authoritative outcomes. Also require negative synthetic checks for unresolved conflict/insufficient evidence. On two real passes, bind the route and stop; on any failure, preserve evidence and recompute. No model, pretrained artifact, natural-language parser, new agent framework, or broad cognitive architecture.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-29T22:36:00Z",
+      "max_age_hours": 24,
+      "incumbent_route": "NO_VERIFIED_MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_ROUTE",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/capabilities/frontier/MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1.json",
+          "canonical/runtime/capability_planner.py",
+          "canonical/runtime/evidence_state.py",
+          "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json",
+          "canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://dtai.cs.kuleuven.be/problog/",
+          "https://problog.readthedocs.io/",
+          "https://pyagrum.gitlab.io/",
+          "https://github.com/seamus-brady/DriftNARS/blob/main/README.md"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/ML-KULeuven/problog/commit/a294fa24c3cfb4bae3a2acea3a128386113889f4",
+          "https://github.com/waleedqk/subjective-logic/commit/8afba9de564c6165e4ba401d08b3dd7f5a78ded0",
+          "https://github.com/seamus-brady/DriftNARS/commit/541f809c7a0a958a7dbe89e8fd59f1ffe33d58c3"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Fresh 2026-09-30 search across probabilistic logic, subjective logic, formal argumentation, influence diagrams, NARS, ASP, SMT, and planning engines."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "structured evidence claims provenance conflict uncertainty terminal decision auditable trace model independent"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "ProbLog pyAgrum subjective logic NARS formal argumentation evidence decision engine"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "Python probabilistic logic typed evidence adapter explanation decision theoretic inference"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 maintained licensed probabilistic logic decision uncertainty Python release"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "PROBLOG_A294FA24_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
+          "evidence": [
+            "ProbLog provides probabilistic facts/rules, evidence, exact inference, MPE, explain, DTProbLog, and Python embedding.",
+            "Current repository is active, Apache-2.0, and has zero mandatory Python runtime dependencies."
+          ],
+          "qualification_evidence": [
+            "https://dtai.cs.kuleuven.be/problog/",
+            "https://problog.readthedocs.io/en/latest/cli.html",
+            "https://github.com/ML-KULeuven/problog/commit/a294fa24c3cfb4bae3a2acea3a128386113889f4"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Formal probabilistic logic with exact weighted model counting; adapter preserves source provenance and explicit policy rather than asking the engine to interpret prose.",
+            "CAPABILITY_STRENGTH": "Directly covers derived claims, weighted evidence, contradictory conclusions, queries, explanations, and decision-theoretic logic inside the target's structured-input boundary.",
+            "WALL_CLOCK": "Pure/Python-embeddable route with small adapter; no C bridge, model download, or broad framework integration.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Mature research system, active 2026 repository, Apache-2.0.",
+            "VERIFIABILITY": "Generated ProbLog program, exact input hash, query probabilities, decision policy, and independent real-task oracle can all be preserved."
+          }
+        },
+        {
+          "route": "PYAGRUM_INFLUENCE_DIAGRAM_ADAPTER",
+          "evidence": [
+            "pyAgrum 3.x supplies Bayesian/influence-diagram inference, soft evidence, MEU, and optimalDecision."
+          ],
+          "qualification_evidence": [
+            "https://pyagrum.gitlab.io/reference/4_other_graphical_models/1_infdiag/3_infdiaginference/"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Strong probabilistic decision framework.",
+            "CAPABILITY_STRENGTH": "Excellent decisions under uncertainty but explicit logical support/contradiction/proof traces require more modeling glue.",
+            "WALL_CLOCK": "More adapter/model construction work for this claim/rule-shaped input.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Mature and actively maintained.",
+            "VERIFIABILITY": "Strong but less transparent for the target's logical claim graph."
+          }
+        },
+        {
+          "route": "DRIFTNARS_REASONING_ADAPTER",
+          "evidence": [
+            "DriftNARS supplies model-free NAL uncertainty, inference, goals, operations, learning, callbacks, and persistence."
+          ],
+          "qualification_evidence": [
+            "https://github.com/seamus-brady/DriftNARS/blob/541f809c7a0a958a7dbe89e8fd59f1ffe33d58c3/README.md"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Model-free ONA-derived reasoning core.",
+            "CAPABILITY_STRENGTH": "Broader temporal/adaptive cognition than this target requires.",
+            "WALL_CLOCK": "C build and Narsese/DriftScript mapping add unnecessary integration for already-structured static evidence synthesis.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Exact source pin possible; newer fork needs direct qualification.",
+            "VERIFIABILITY": "Good, but derivation/decision mapping is more complex than ProbLog for this scope."
+          }
+        },
+        {
+          "route": "MIT_SUBJECTIVE_LOGIC_PLUS_CUSTOM_ARGUMENT_GRAPH",
+          "evidence": [
+            "waleedqk/subjective-logic provides MIT-licensed binomial opinions, evidence conversion, cumulative/average fusion and trust discounting."
+          ],
+          "qualification_evidence": [
+            "https://github.com/waleedqk/subjective-logic/commit/8afba9de564c6165e4ba401d08b3dd7f5a78ded0"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Explicit belief/disbelief/uncertainty is attractive.",
+            "CAPABILITY_STRENGTH": "Only an operator kernel; no complete support/attack graph, logical rule engine, constraints, or terminal decision mechanism.",
+            "WALL_CLOCK": "Requires substantially more Brain-authored inference code.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Small tested MIT package, but narrow.",
+            "VERIFIABILITY": "Operators are inspectable, but custom composition would enlarge proof surface."
+          }
+        }
+      ],
+      "negative_search_summary": "The closest richer argumentation libraries inspected lacked a reusable license; remaining licensed challengers require more custom inference or broader integration than ProbLog for the exact structured evidence-to-decision target.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "PROBLOG_A294FA24_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-29T22:36:00Z",
+        "max_age_hours": 2,
+        "selected_route": "PROBLOG_A294FA24_PLUS_THIN_BRAIN_TYPED_EVIDENCE_ADAPTER",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T22:25:06Z",
+            "evidence": [
+              "DIRECT_PROBE: public workflow run 36639442996 received a GitHub-hosted runner and executed on this account."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "PROBLOG_SOURCE_A294FA24C3CFB4BAE3A2ACEA3A128386113889F4",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T22:36:00Z",
+            "evidence": [
+              "DIRECT_PROBE: GitHub API returned exact current ProbLog source commit, Apache-2.0 license, and pyproject metadata."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "CODE_OR_PACKAGE_REGISTRY"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "PYTHON_3_12_RUNTIME",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T22:25:06Z",
+            "evidence": [
+              "DIRECT_PROBE: current public carrier workflows successfully execute Python 3.12 on ubuntu-24.04."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
