@@ -37,8 +37,10 @@ ALLOWED_NO_PROBE_ACTIONS=GOVERNANCE_ACTIONS|{
     "ORTHOGONAL_PROBE_SELECTION",
     "EVIDENCE_PRESERVATION",
 }
+OBS_DELETION_ORDER=("DELETE","BYPASS","REUSE","SUBSTITUTE","COMPOSE","REPAIR","BUILD")
 OBS_REQUIRED_FIELDS=(
     "canonical_generation_or_commit",
+    "canonical_base_commit",
     "real_outcome",
     "required_capability",
     "obs_goal",
@@ -55,6 +57,15 @@ OBS_REQUIRED_FIELDS=(
     "expected_parent_level_state_change",
     "stop_condition",
 )
+OBS_LAYER_REQUIRED={
+    "obs_goal":("real_outcome","proxy_goals_deleted","surviving_necessity"),
+    "obs_capability":("existing_inherited_routes_checked","external_existing_routes_checked","capability_work_deleted","surviving_gap"),
+    "obs_blocker":("intrinsic_or_path_specific","delete_bypass_substitute_options","surviving_causal_blocker"),
+    "obs_solution":("deletion_first_order_applied","routes_ranked","losing_routes_reason","implementation_still_necessary"),
+    "obs_verification":("direct_real_effect_verification_considered","existing_oracle_considered","synthetic_verification_necessity"),
+    "obs_inherited_system":("downstream_work_to_delete_or_supersede","adjacent_capabilities_absorbed","fresh_reuse_plan"),
+    "obs_obs":("analysis_steps_deleted_or_cached","search_stop_decision","affected_layers_only_on_revalidation"),
+}
 FAIL=[]
 
 def load(path):
@@ -88,6 +99,18 @@ def path_exists_at_ref(ref,path):
     return proc.returncode==0
 
 
+def _nonempty_string(value):
+    return isinstance(value,str) and bool(value.strip())
+
+def _contains_placeholder(value):
+    if isinstance(value,str):
+        return "__REQUIRED_" in value or "__MUST_MATCH_" in value
+    if isinstance(value,list):
+        return any(_contains_placeholder(x) for x in value)
+    if isinstance(value,dict):
+        return any(_contains_placeholder(x) for x in value.values())
+    return False
+
 def enforce_recursive_obs(intent,files,base):
     bootstrap_path="canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md"
     bootstrap=(
@@ -98,31 +121,80 @@ def enforce_recursive_obs(intent,files,base):
     )
     if bootstrap:
         return
+
     obs=intent.get("recursive_obs")
     if not isinstance(obs,dict):
         fail("RECURSIVE_OBS_RECEIPT_MISSING")
         return
+
+    if _contains_placeholder(obs):
+        fail("RECURSIVE_OBS_TEMPLATE_PLACEHOLDER_PRESENT")
+
     missing=[k for k in OBS_REQUIRED_FIELDS if k not in obs]
     if missing:
         fail("RECURSIVE_OBS_RECEIPT_INCOMPLETE:"+",".join(missing))
         return
+
     bound=str(obs.get("canonical_generation_or_commit") or "")
     intent_generation=str(intent.get("canonical_generation") or "")
     if not bound or bound!=intent_generation:
         fail("RECURSIVE_OBS_GENERATION_BINDING_MISMATCH")
-    route=str(obs.get("selected_surviving_route") or "").strip()
-    why=str(obs.get("why_selected_route_is_fastest_sufficient") or "").strip()
-    if not route or not why:
-        fail("RECURSIVE_OBS_SURVIVING_ROUTE_NOT_PROVEN")
+
+    exact_base=str(obs.get("canonical_base_commit") or "").lower()
+    actual_base=str(base or "").lower()
+    if len(exact_base)!=40 or any(ch not in "0123456789abcdef" for ch in exact_base):
+        fail("RECURSIVE_OBS_BASE_COMMIT_INVALID")
+    elif exact_base!=actual_base:
+        fail("RECURSIVE_OBS_STALE_BASE_COMMIT")
+
+    for field in (
+        "real_outcome","required_capability","selected_surviving_route",
+        "why_selected_route_is_fastest_sufficient",
+        "expected_parent_level_state_change","stop_condition",
+    ):
+        if not _nonempty_string(obs.get(field)):
+            fail("RECURSIVE_OBS_EMPTY_REQUIRED_FIELD:"+field)
+
+    if obs.get("expected_parent_level_state_change")!=intent.get("expected_parent_frontier_change"):
+        fail("RECURSIVE_OBS_PARENT_CHANGE_MISMATCH")
+    if obs.get("stop_condition")!=intent.get("stop_condition"):
+        fail("RECURSIVE_OBS_STOP_CONDITION_MISMATCH")
+
     considered=obs.get("routes_considered")
     if not isinstance(considered,list) or not considered:
         fail("RECURSIVE_OBS_ROUTE_RACE_MISSING")
-    for layer in (
-        "obs_goal","obs_capability","obs_blocker","obs_solution",
-        "obs_verification","obs_inherited_system","obs_obs",
-    ):
-        if not isinstance(obs.get(layer),dict) or not obs.get(layer):
+    deleted=obs.get("deleted_or_bypassed_paths")
+    if not isinstance(deleted,list):
+        fail("RECURSIVE_OBS_DELETED_PATHS_NOT_LIST")
+
+    for layer,required in OBS_LAYER_REQUIRED.items():
+        payload=obs.get(layer)
+        if not isinstance(payload,dict) or not payload:
             fail("RECURSIVE_OBS_LAYER_MISSING:"+layer)
+            continue
+        absent=[key for key in required if key not in payload]
+        if absent:
+            fail("RECURSIVE_OBS_LAYER_INCOMPLETE:"+layer+":"+",".join(absent))
+
+    solution=obs.get("obs_solution") if isinstance(obs.get("obs_solution"),dict) else {}
+    if tuple(solution.get("deletion_first_order_applied") or ())!=OBS_DELETION_ORDER:
+        fail("RECURSIVE_OBS_DELETION_FIRST_ORDER_MISMATCH")
+    if not isinstance(solution.get("routes_ranked"),list) or not solution.get("routes_ranked"):
+        fail("RECURSIVE_OBS_RANKED_ROUTES_MISSING")
+    if not isinstance(solution.get("implementation_still_necessary"),bool):
+        fail("RECURSIVE_OBS_IMPLEMENTATION_NECESSITY_NOT_BOOLEAN")
+
+    verification=obs.get("obs_verification") if isinstance(obs.get("obs_verification"),dict) else {}
+    if verification.get("direct_real_effect_verification_considered") is not True:
+        fail("RECURSIVE_OBS_DIRECT_VERIFICATION_NOT_CONSIDERED")
+    if verification.get("existing_oracle_considered") is not True:
+        fail("RECURSIVE_OBS_EXISTING_ORACLE_NOT_CONSIDERED")
+
+    meta=obs.get("obs_obs") if isinstance(obs.get("obs_obs"),dict) else {}
+    if meta.get("affected_layers_only_on_revalidation") is not True:
+        fail("RECURSIVE_OBS_AFFECTED_LAYER_REVALIDATION_NOT_ENABLED")
+    if not _nonempty_string(meta.get("search_stop_decision")):
+        fail("RECURSIVE_OBS_SEARCH_STOP_DECISION_MISSING")
 
 
 def blocker_lease_key(intent):
