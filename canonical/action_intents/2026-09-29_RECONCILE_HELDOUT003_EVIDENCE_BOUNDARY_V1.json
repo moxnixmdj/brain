@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-HELDOUT003-EVIDENCE-BOUNDARY-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
+  "causal_blocker": "POST_PR166_INCIDENT_RECORD_OVERSTATES_EXACT_LIVE_CARRIER_CAUSE__QUALIFIED_SOURCE_CONTAINED_AND_PREFLIGHTED_REQUIRED_MODULES_WHILE_SPRITE_RESULT_PROVES_ONLY_IMPORT_AVAILABILITY_FAILURE",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::POST_PR166_INCIDENT_RECORD_OVERSTATES_EXACT_LIVE_CARRIER_CAUSE__QUALIFIED_SOURCE_CONTAINED_AND_PREFLIGHTED_REQUIRED_MODULES_WHILE_SPRITE_RESULT_PROVES_ONLY_IMPORT_AVAILABILITY_FAILURE::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Remove unsupported claims that the live Sprite omitted a known module subset or that complete repository dependency closure is already the proven causal correction. Preserve the proven facts: unauthorized HELDOUT-003 freshness spend, diagnostic-only import failure, qualified source branch contained and hash-preflighted the required modules, exact live execution-surface divergence/root cause remains unproven, parent capability remains unadjudicated. Keep freeze-fresh-orthogonal-gate first, then require generic carrier-fidelity root-cause localization before any correction or execution.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR166 unauthorized-carrier/provenance reconciliation and exact raw START/RESULT/acquisition",
+    "PR166 late evidence-boundary audit comment 5884013718",
+    "qualified carrier branch carrier/heldout003-one-shot-20260929 containing python_library_codec.py and python_source_tree_codec.py",
+    "qualified carrier shell hash-preflight for both required modules before evaluator invocation",
+    "authoritative Sprite RESULT proving python_library_codec import failure but not preserving exact live materialization transcript",
+    "canonical CRITICAL_PATH_PRE_ACTION_GATE_V2 evidence class CAPABILITY_UNPROVEN"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "After a trusted guard PASS on this exact immutable intent head, change only the incident diagnostic wording and pointer/hierarchy/queue frontier strings necessary to remove the unsupported materialization-cause claim and replace assumed complete-repository correction with carrier-fidelity root-cause localization after the fresh orthogonal gate is frozen. Do not change raw START/RESULT/acquisition, capability runtime, evaluator, gate, carrier, guard, law, or execute anything. Revalidate exact final head before merge.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "execution_constraints": {
+    "heldout_execution_forbidden": true,
+    "runtime_mutation_forbidden": true,
+    "carrier_mutation_forbidden": true,
+    "raw_evidence_mutation_forbidden": true,
+    "incremental_spend_usd": 0,
+    "user_laptop_forbidden": true,
+    "val_town_forbidden": true
+  }
+}
