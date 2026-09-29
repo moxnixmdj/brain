@@ -148,11 +148,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "ONE_GENERIC_BATCHED_LITERAL_APT_FILE_ACQUISITION_REPAIR__USE_FROM_FILE_SINGLE_SCAN__POSTFILTER_EXECUTABLE_PATHS__BOUND_CACHE_AND_PROGRESSIVELY_REQUEST_MANPAGES__FRESH_UNSEEN_GATE__THEN_RECONCILE",
+    "next_step": "RECOMPUTE_HIGHEST_LEVERAGE_CAPABILITY_FRONTIER_AFTER_HELDOUT_005_PASS_RECONCILIATION",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "EVIDENCE_ACQUISITION_USES_REPEATED_SLOW_APT_FILE_REGEX_SCANS_AND_EXCESSIVE_REMOTE_MANPAGE_FANOUT__BATCH_LITERAL_MULTI_PATTERN_ACQUISITION_AND_PROGRESSIVE_CACHED_ENRICHMENT_NOT_YET_INTEGRATED",
+    "critical_blocker": "NONE_SELECTED__FRESH_FRONTIER_RECOMPUTATION_REQUIRED",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -229,7 +229,7 @@
     "superworker_truth_scope": "ONE_REAL_INTEGRATED_COGNITIVE_SUPERWORKER_PROVEN__P_REAL_1__BROAD_REPRODUCIBLE_FRONTIER_CAPABILITY_NOT_YET_PROVEN",
     "persistent_narrow_controllers": 2,
     "target_capability_reconciliation_path": "canonical/capability/TARGET_CAPABILITY_RECONCILIATION_V1.json",
-    "highest_leverage_capability_gap": "TOOL_DISCOVERY_SELECTION_AND_LEARNING__BATCHED_EXECUTABLE_EVIDENCE_ACQUISITION_AND_PROGRESSIVE_ENRICHMENT",
+    "highest_leverage_capability_gap": "TOOL_DISCOVERY_SELECTION_AND_LEARNING__BROADER_PARENT_REMAINS_UNRESOLVED_AFTER_VERIFIED_DEBIAN_APT_CLI_DISCOVERY_ROUTE",
     "superworker_composition_correction_path": "canonical/qualification/SUPERWORKER_COMPOSITION_ERROR_CORRECTION_V1.json",
     "capability_target_map_path": "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
     "integrated_cognitive_worker_mission_path": "canonical/tasks/INTEGRATED_COGNITIVE_WORKER_MISSION_V1.json",
@@ -490,6 +490,18 @@
         36486527162
       ],
       "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EVIDENCE_ACQUISITION_STRUCTURAL_CAUSE_RECONCILIATION_V1.json"
+    },
+    "debian_full_metadata_xapian_route_v1": {
+      "status": "CANDIDATE_MATCH__VERIFIED_ROUTE_INHERITED",
+      "scope": "DEBIAN_APT_CLI_DISCOVERY",
+      "evidence_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_TERMINAL_RECONCILIATION_V1.json",
+      "runtime_path": "canonical/runtime/capability_discovery.py",
+      "runtime_blob": "b9e7423ab24bf2da98869b02d782e791a779892a",
+      "heldout_oracle_family_recall": 1,
+      "heldout_top20_oracle_recall": 1,
+      "total_wall_s": 16.233238,
+      "broader_tool_learning_obsolete": false,
+      "heldout_005_replay_forbidden": true
     }
   },
   "provider_rules": {
