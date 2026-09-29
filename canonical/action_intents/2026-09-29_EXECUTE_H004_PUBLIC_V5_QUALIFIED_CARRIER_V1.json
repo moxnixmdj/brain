@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "EXECUTE-H004-PUBLIC-V5-QUALIFIED-CARRIER-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "causal_blocker": "HELDOUT_004_FROZEN_UNSPENT__PUBLIC_V4_PRESTART_APT_CONFIG_LITERAL_BACKSLASH_N_FAILURE__GENERIC_CARRIER_DIAGNOSTIC_STILL_VALID",
+  "action_kind": "FRESH_ORTHOGONAL_HELDOUT_EXECUTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::H004_PUBLIC_V5_QUALIFIED_CARRIER::FRESH_ORTHOGONAL_HELDOUT_EXECUTION",
+  "expected_parent_frontier_change": "Stage V5 as a new workflow and ARM filename on the already qualified public GitHub Actions Debian Trixie carrier. Copy V4 exactly except replace lane identity 004->005 and fix only the APT language printf to the exact newline form proven by generic diagnostic run 36600121869. Create ARM005 last. First H004 START permanently spends the gate. Capture first terminal result only and reconcile without replay.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR201 generic carrier diagnostic PASS run 36600121869",
+    "PR202 V4 pre-START APT config quoting reconciliation",
+    "V4 run 36600684421 execution step skipped",
+    "H004 mission remains UNSPENT execution_count=0"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "If any V5 preflight predicate fails before START, stop and reconcile without rerun. If START appears, H004 is SPENT permanently; never rerun/replay. Capture first terminal result and reconcile before any repair/promotion.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "execution_constraints": {
+    "incremental_spend_usd": 0,
+    "hard_zero_spend": true,
+    "user_laptop_forbidden": true,
+    "val_town_forbidden": true,
+    "public_standard_github_runner_required": true,
+    "candidate_producer_preinstall_forbidden": true
+  }
+}

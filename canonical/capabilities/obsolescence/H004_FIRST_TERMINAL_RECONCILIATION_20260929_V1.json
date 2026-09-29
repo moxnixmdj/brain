@@ -1,0 +1,99 @@
+{
+  "schema": "PROJECT_BRAIN_H004_FIRST_TERMINAL_RECONCILIATION_V1",
+  "reconciliation_id": "H004-FIRST-TERMINAL-20260929-V1",
+  "validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "execution": {
+    "provider": "GitHub Actions",
+    "public_repository": "moxnixmdj/verification-capsule-runner",
+    "workflow": ".github/workflows/h004-public-oneshot-005.yml",
+    "workflow_blob": "85fa39a52ae4540d06e9708ade3fa0d89b6dd136",
+    "arm_file": "ARM_H004_PUBLIC_ONESHOT_005",
+    "arm_commit": "0119eb5350e313def53777a047294b7bae7e0f39",
+    "run_id": 36602685401,
+    "job_id": 109523746507,
+    "run_attempt": 1,
+    "run_conclusion": "failure",
+    "first_start_authoritative": true,
+    "incremental_spend_usd": 0,
+    "user_device_used": false
+  },
+  "pre_start": {
+    "one_shot_identity": "PASS",
+    "faithful_debian_surface_install": "PASS",
+    "sealed_blob_and_metadata_preflight": "PASS",
+    "sealed_file_count": 22,
+    "packages_metadata": true,
+    "translation_en": true,
+    "contents_all": true,
+    "contents_arch": true,
+    "contents_targets": 4,
+    "architecture": "amd64",
+    "xapian_import": true,
+    "verifier_import_closure": true,
+    "full_metadata_xapian_route": true,
+    "contents_direct_stream": true,
+    "candidate_count": 12
+  },
+  "execution_start_receipt": {
+    "executor_attestation_sha256": "7cf7ba1a16ee35398b0bd4091f6d7e4a7aaab125527a44c1adbd6dbc2b1a77d9",
+    "executor_id": "github-public-standard-ubuntu-latest",
+    "executor_provider": "GitHub Actions",
+    "hard_validation_wall_s": 180,
+    "hard_zero_evidence": {
+      "reference": "https://docs.github.com/en/actions/reference/runners/github-hosted-runners",
+      "source_class": "GITHUB_OFFICIAL_DOCUMENTATION"
+    },
+    "started_unix_ns": "1790701698645630324",
+    "supervisor_pid": 4185,
+    "user_device_used": false
+  },
+  "first_terminal_result": {
+    "acceptance_gate_pass": false,
+    "terminal_error_class": "EXISTING_INDEPENDENT_VERIFIER_FAILED__SEMANTIC_VERIFIER_ACQUISITION_FAILED_EMPTY_ATTEMPT_SET",
+    "error_leaf": "SEMANTIC_VERIFIER_ACQUISITION_FAILED:[]",
+    "total_wall_s": 50.223201,
+    "hard_validation_wall_s": 180,
+    "package_hints_used_by_runtime": false,
+    "prebound_registry_route_used": false,
+    "promotion_authorized": false,
+    "required_next_action": "RECONCILE_FIRST_TERMINAL_RESULT__NO_REPLAY_BEFORE_RECONCILIATION",
+    "observed_runtime_blobs": {
+      "canonical/runtime/EXECUTOR_POLICY_V1.json": "bc4bd1088e5d31eb584325e50e74a9df3f7d5dcc",
+      "canonical/runtime/apt_cli_probe.py": "3f3a8f6a0154e1ed3f87fc97b99840598297b119",
+      "canonical/runtime/auto_apt_cli_acquisition.py": "0b7c67a2680a3aaa1aa5cf1a8bc8d41d69eee271",
+      "canonical/runtime/auto_capability_acquisition.py": "fc80ede8225cc51dac77be6d41aa2a1c757c6ee8",
+      "canonical/runtime/capability_discovery.py": "b9e7423ab24bf2da98869b02d782e791a779892a",
+      "canonical/runtime/cli_contract_inference.py": "009c3c45040178844d84eaa15b0d47ca2e1f259f",
+      "canonical/runtime/executor_broker.py": "3322715d9c703a4ed4563275681c27ba20e76d04",
+      "canonical/runtime/verify_pending_cli_binding.py": "8ec4da92080e885a15266389c0318688e6408d43"
+    }
+  },
+  "freshness": {
+    "status": "SPENT_NO_REPLAY",
+    "effective_execution_count": 1,
+    "same_gate_replay_allowed": false,
+    "second_carrier_for_same_gate_allowed": false,
+    "first_terminal_result_authoritative": true
+  },
+  "capability_verdict": {
+    "status": "FAIL_ADMISSIBLE",
+    "acceptance_gate_pass": false,
+    "promotion_authorized": false,
+    "parent_capability_obsolete": false,
+    "interpretation": "The qualified hard-zero carrier and exact sealed runtime reached the existing independent verifier, which failed because semantic-verifier acquisition produced zero admissible candidates. This is an admissible capability-path failure, not a carrier-fidelity failure."
+  },
+  "prior_static_risk_match": {
+    "source": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_003.json",
+    "preexisting_note": "XAPIAN_CANDIDATES_CURRENTLY_EMIT_EMPTY_MATCHED_TERMS_WHILE_EXISTING_SEMANTIC_VERIFIER_REQUIRES_AT_LEAST_TWO__PRESERVE_AS_POTENTIAL_NEXT_CAUSAL_RESIDUAL",
+    "status": "CONSISTENT_WITH_TERMINAL_ERROR__NOT_YET_PROMOTED_TO_ROOT_CAUSE_UNTIL_POST_RECONCILIATION_DIAGNOSIS"
+  },
+  "invariants": [
+    "NO_H004_REPLAY",
+    "NO_SECOND_CARRIER_FOR_H004",
+    "NO_PROMOTION_FROM_FAILED_GATE",
+    "NO_REPAIR_BEFORE_THIS_TERMINAL_RESULT_IS_CANONICALLY_RECONCILED",
+    "NO_USER_LAPTOP_EXECUTION",
+    "NO_VAL_TOWN"
+  ]
+}
