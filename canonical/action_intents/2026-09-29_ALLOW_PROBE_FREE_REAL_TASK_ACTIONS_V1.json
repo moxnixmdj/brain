@@ -1,0 +1,120 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "ALLOW-PROBE-FREE-REAL-TASK-ACTIONS-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "REAL_WORLD_CAPABILITY_ACQUISITION_AND_REUSE",
+  "probe_id": null,
+  "causal_blocker": "TRUSTED_VALIDATOR_STILL_REQUIRES_PROBE_FOR_REAL_TASK_ACTION_KIND",
+  "action_kind": "USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::REAL_WORLD_CAPABILITY_ACQUISITION_AND_REUSE::TRUSTED_VALIDATOR_STILL_REQUIRES_PROBE_FOR_REAL_TASK_ACTION_KIND::USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "expected_parent_frontier_change": "Real capability-acquisition and real-task execution intents may use probe_id null when no active probe exists, while synthetic/probe-targeted actions remain constrained.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "REAL_CAPABILITY_ACQUISITION_MISSION_V1 requires real-task-first",
+    "trusted validator ALLOWED_NO_PROBE_ACTIONS contains only governance/reconciliation/evidence actions",
+    "active_probe is null"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 3,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Merge only the minimal trusted-validator and regression change, then immediately execute the selected real space-cargo mission.",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "user_authorization_summary": "User ordered all necessary Brain updates and continuation toward the real capability mission.",
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "f3dfdd4244bc6a4d25f9515db0159e878a733bff",
+    "real_outcome": "Allow Brain's active real-capability-acquisition mode to execute real tasks without fabricating a synthetic probe.",
+    "required_capability": "Trusted guard support for probe-free real-task action intents under full OBS V2 validation.",
+    "obs_goal": {
+      "real_outcome": "Execute a real consequential capability-acquisition mission under current governance.",
+      "proxy_goals_deleted": [
+        "create fake probe id",
+        "reuse reconcile action kind dishonestly"
+      ],
+      "surviving_necessity": "Permit explicit real-task action kinds when active_probe is null."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Current trusted validator",
+        "REAL_CAPABILITY_ACQUISITION_MISSION_V1"
+      ],
+      "external_existing_routes_checked": [
+        "Not applicable; internal guard semantics only."
+      ],
+      "capability_work_deleted": [
+        "No new workflow",
+        "No scheduler",
+        "No probe"
+      ],
+      "surviving_gap": "ALLOWED_NO_PROBE_ACTIONS lacks real-task action kinds."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Intrinsic validator mismatch with current operating mode.",
+      "delete_bypass_substitute_options": [
+        "Fake probe rejected",
+        "Mislabel as reconciliation rejected",
+        "Direct validator repair survives"
+      ],
+      "surviving_causal_blocker": "Probe-free real-task intents are currently rejected."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Repair allowlist and enforce active_probe null for real-task actions"
+      ],
+      "losing_routes_reason": "Alternatives would lie about action semantics or reintroduce synthetic probes.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use trusted validator semantics directly: real-task action with null probe passes; same action with non-null probe while active_probe null fails."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Probe-era requirement for real-task actions"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Honest mission selection",
+        "Honest capability-package PRs"
+      ],
+      "fresh_reuse_plan": "Next space-cargo real-task action intent must pass with probe_id null."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused current guard and V2 receipt"
+      ],
+      "search_stop_decision": "Single validator mismatch fully explains blocker; further governance search cannot improve route.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "REPAIR_TRUSTED_ALLOWLIST",
+      "FABRICATE_PROBE",
+      "MISLABEL_ACTION"
+    ],
+    "deleted_or_bypassed_paths": [
+      "FABRICATE_PROBE",
+      "MISLABEL_ACTION"
+    ],
+    "selected_surviving_route": "REPAIR_TRUSTED_ALLOWLIST",
+    "why_selected_route_is_fastest_sufficient": "One small semantic correction aligns trusted enforcement with already-canonical real-task mode without weakening OBS, leases, or probe quarantine.",
+    "expected_parent_level_state_change": "Real capability-acquisition and real-task execution intents may use probe_id null when no active probe exists, while synthetic/probe-targeted actions remain constrained.",
+    "stop_condition": "Merge only the minimal trusted-validator and regression change, then immediately execute the selected real space-cargo mission."
+  }
+}

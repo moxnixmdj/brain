@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_REGRESSION_CASE_V1",
+  "id": "2026-09-29_PROBE_ERA_GUARD_BLOCKED_REAL_TASK_MODE",
+  "status": "PERMANENT_FAIL_CLOSED_REGRESSION",
+  "incident": [
+    "Brain entered REAL_CAPABILITY_ACQUISITION_WITH_RECURSIVE_OBS with active_probe=null.",
+    "The trusted drift guard still required probe_id for ordinary non-governance frontier actions.",
+    "A legitimate real-task capability-acquisition action could not pass without fabricating a synthetic probe or lying about its action kind."
+  ],
+  "prohibited_patterns": [
+    "FABRICATE_SYNTHETIC_PROBE_FOR_REAL_TASK",
+    "MISLABEL_REAL_TASK_AS_RECONCILIATION_OR_GOVERNANCE",
+    "REAL_TASK_ACTION_REFERENCES_SYNTHETIC_PROBE",
+    "REAL_TASK_ACTION_STARTS_WHILE_ACTIVE_PROBE_REMAINS_UNRECONCILED"
+  ],
+  "required_prevention": [
+    "ALLOW_EXPLICIT_REAL_TASK_ACTION_KINDS_WITH_PROBE_ID_NULL",
+    "REQUIRE_ACTIVE_PROBE_NULL_FOR_REAL_TASK_ACTION",
+    "PRESERVE_RECURSIVE_OBS_V2_VALIDATION",
+    "PRESERVE_BLOCKER_LEASE_AND_GOAL_HIERARCHY_GUARDS"
+  ],
+  "real_task_action_kinds": [
+    "REAL_CAPABILITY_ACQUISITION",
+    "REAL_TASK_EXECUTION",
+    "CAPABILITY_INHERITANCE",
+    "FRESH_REUSE"
+  ],
+  "passing_condition": "A complete OBS-V2 real-task intent with probe_id null passes when active_probe is null; the same real-task action fails if it names a probe or if an active probe remains unreconciled.",
+  "trusted_validator": "canonical/runtime/enforce_goal_hierarchy.py",
+  "mandatory_pre_action_gate": "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V5.json"
+}
