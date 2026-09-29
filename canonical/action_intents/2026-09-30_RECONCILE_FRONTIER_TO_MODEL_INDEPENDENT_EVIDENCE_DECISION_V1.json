@@ -1,0 +1,130 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-FRONTIER-TO-MODEL-INDEPENDENT-EVIDENCE-DECISION-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+  "probe_id": null,
+  "causal_blocker": "BROAD_FRONTIER_BUNDLE_OVERBUNDLED__MODEL_SUPPLIER_CLASS_NOW_FORBIDDEN__SMALLEST_SURVIVING_MISSING_PRIMITIVE_IS_EVIDENCE_TO_DECISION_SYNTHESIS",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1::BROAD_FRONTIER_BUNDLE_OVERBUNDLED__MODEL_SUPPLIER_CLASS_NOW_FORBIDDEN__SMALLEST_SURVIVING_MISSING_PRIMITIVE_IS_EVIDENCE_TO_DECISION_SYNTHESIS::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Recompute the active frontier from the over-bundled parent capability to MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1 without granting capability credit, preserving the parent frontier capability as the composition objective.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR227 safe evidence finalization",
+    "PR236 model-independence enforcement",
+    "closed model-backed Task C routes 229/230/231/232/233/235/239",
+    "existing deterministic Brain planner/discovery/auditor/runtime"
+  ],
+  "evidence_presence_classification": "SUPERSEDED_BY_NEWER_CANONICAL_STATE",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 3,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop after canonical target/hierarchy/queue/pointer alignment. Do not implement the synthesis route in this reconciliation PR; immediately run OBS V3/V4 route acquisition on the new target.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "16e9c8896cafa0461f4c8d31a18200c08a947437",
+    "real_outcome": "Replace the obsolete model-backed whole-capability frontier with the smallest real model-independent cognitive subcapability that blocks progress.",
+    "required_capability": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+    "obs_goal": {
+      "real_outcome": "Acquire the parent frontier capability by decomposing it into real independently provable subcapabilities rather than swapping whole model suppliers.",
+      "proxy_goals_deleted": [
+        "another whole-model replacement",
+        "another finalization patch without model independence",
+        "another synthetic benchmark"
+      ],
+      "surviving_necessity": "Reconcile the active frontier to the evidence-to-decision synthesis primitive."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "capability_planner.py",
+        "capability_reality_auditor.py",
+        "capability_discovery.py",
+        "goal_compiler.py",
+        "BOUND_CAPABILITY_REGISTRY_V1",
+        "astra_runtime.py"
+      ],
+      "external_existing_routes_checked": [
+        "Historical model supplier routes are now inadmissible for credited cognition after PR236."
+      ],
+      "capability_work_deleted": [
+        "No whole-model supplier race as the active target",
+        "No new carrier",
+        "No new scheduler"
+      ],
+      "surviving_gap": "Brain lacks a proven model-independent route that converts structured evidence into a terminal auditable decision across real tasks."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "The prior blocker was framed around model-backed finalization; PR236 made that route class inadmissible, so the current blocker is stale and over-bundled.",
+      "delete_bypass_substitute_options": [
+        "DELETE model-backed route class",
+        "BYPASS whole-capability supplier substitution",
+        "REUSE deterministic Brain planning/discovery/execution substrate",
+        "ACQUIRE only the missing synthesis primitive"
+      ],
+      "surviving_causal_blocker": "No verified model-independent evidence-to-decision synthesis route."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "RECONCILE_TO_SMALLEST_REAL_MISSING_SUBCAPABILITY"
+      ],
+      "losing_routes_reason": "Continuing to tune or replace whole models violates model independence and repeats already-falsified coarse-grained route selection.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Reconciliation is verified by canonical coherence only; acquisition proof will use real tasks and independent output verification."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Qwen/Pollinations cognition proof routes",
+        "generic model-finalizer frontier as top-level blocker"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Existing deterministic planning/discovery/execution/verification remain supporting components"
+      ],
+      "fresh_reuse_plan": "After acquisition, fresh-reuse the synthesis route on a second materially distinct real task before promotion."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse prior route-falsification evidence and PR236 model-independence adjudication"
+      ],
+      "search_stop_decision": "The active target correction follows directly from live canonical contradictions; external challenger discovery belongs to the next executable acquisition action, not this reconciliation.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "RECONCILE_FRONTIER is governance/reconciliation-only and does not select an executable supplier."
+    },
+    "routes_considered": [
+      "RECONCILE_TO_SMALLEST_REAL_MISSING_SUBCAPABILITY",
+      "CONTINUE_MODEL_FINALIZER_REPAIR",
+      "SEARCH_FOR_ANOTHER_WHOLE_MODEL"
+    ],
+    "deleted_or_bypassed_paths": [
+      "CONTINUE_MODEL_FINALIZER_REPAIR",
+      "SEARCH_FOR_ANOTHER_WHOLE_MODEL"
+    ],
+    "selected_surviving_route": "RECONCILE_TO_SMALLEST_REAL_MISSING_SUBCAPABILITY",
+    "why_selected_route_is_fastest_sufficient": "It preserves the real parent goal while deleting an inadmissible route class and exposes one independently acquirable cognitive primitive that can reuse Brain's existing deterministic substrate.",
+    "expected_parent_level_state_change": "Recompute the active frontier from the over-bundled parent capability to MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1 without granting capability credit, preserving the parent frontier capability as the composition objective.",
+    "stop_condition": "Stop after canonical target/hierarchy/queue/pointer alignment. Do not implement the synthesis route in this reconciliation PR; immediately run OBS V3/V4 route acquisition on the new target.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Frontier reconciliation only; no external supplier is being selected or executed in this action."
+    }
+  }
+}

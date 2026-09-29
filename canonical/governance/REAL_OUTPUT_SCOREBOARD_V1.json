@@ -75,7 +75,7 @@
     "historical_prs_tests_gates_and_workflows": "PRESERVED_AS_EVIDENCE_NOT_IMPORTED_AS_V3_PROGRESS",
     "reason": "NEW_SCOREBOARD_COUNTS_OUTPUT_FROM_POLICY_ACTIVATION_FORWARD_TO_PREVENT_ACTIVITY_INFLATION"
   },
-  "next_progress_event_target": "OBS_V3_RECURRENT_EVIDENCE_TO_FINALIZATION_TERMINATION_SEAM__THEN_FRESH_REAL_TASK_C_IF_GENERIC_ROUTE_SURVIVES",
+  "next_progress_event_target": "ACQUIRE_AND_VERIFY_MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1_ON_REAL_TASK__THEN_FRESH_REUSE_ON_DISTINCT_REAL_TASK",
   "authority": [
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
@@ -153,5 +153,12 @@
       "execution_count": 1,
       "incremental_spend_usd": 0
     }
-  ]
+  ],
+  "active_frontier_accounting": {
+    "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "active_subcapability_target": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+    "subcapability_status": "UNPROVEN",
+    "frontier_dependency_removed": false,
+    "reconciliation_credit": 0
+  }
 }
