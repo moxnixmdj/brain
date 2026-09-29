@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-H004-PUBLIC-RUNNER-PRESTART-INDEXTARGETS-LANGUAGE-VIEW-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "causal_blocker": "HELDOUT_004_FROZEN_UNSPENT__PUBLIC_GITHUB_ACTIONS_RUN_36599477886_ATTEMPT_1_FAILED_PRESTART_TRANSLATION_TARGET_VIEW_MISMATCH__TRANSLATION_EN_FETCHED_BUT_INDEXTARGETS_DEFAULT_LANGUAGE_POLICY_HID_IT__NO_EXECUTION",
+  "action_kind": "PRESTART_CARRIER_VIEW_RECONCILIATION_AND_GENERIC_DIAGNOSTIC",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::HELDOUT_004_FROZEN_UNSPENT__PUBLIC_GITHUB_ACTIONS_RUN_36599477886_ATTEMPT_1_FAILED_PRESTART_TRANSLATION_TARGET_VIEW_MISMATCH__TRANSLATION_EN_FETCHED_BUT_INDEXTARGETS_DEFAULT_LANGUAGE_POLICY_HID_IT__NO_EXECUTION::PRESTART_CARRIER_VIEW_RECONCILIATION_AND_GENERIC_DIAGNOSTIC",
+  "expected_parent_frontier_change": "Record lane 003 as a pre-START carrier verification-view failure: Translation-en files were fetched, but the subsequent apt-get indextargets command inherited default language suppression and did not expose translation targets. H004 remains unspent. Replace iterative H004 carrier attempts with one generic no-H004 carrier diagnostic using a persistent late-loading APT English policy, verifying the entire required surface before any new H004 arm.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "run 36599477886 attempt 1 exact ARM commit 500b87aaff3d3b897dcd7bf73602077a67fca5a1",
+    "identity guard PASS",
+    "install step PASS",
+    "logs explicitly show trixie/main Translation-en, trixie-updates Translation-en, and security Translation-en fetched",
+    "Contents-all and amd64 Contents fetched",
+    "preflight still terminated TRANSLATION_EN_METADATA_MISSING because indextargets was queried without persistent language override",
+    "H004 execution skipped; no START/RESULT"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Do not arm H004 again until a generic public-runner diagnostic proves every carrier predicate in one run. No runtime/evaluator/sealed payload changes. Do not rerun lanes 001-003.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
