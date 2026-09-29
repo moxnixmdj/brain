@@ -2421,7 +2421,7 @@
       }
     },
     "decision.synthesis.typed.stdlib": {
-      "status": "VERIFIED_BOUND_CAPABILITY",
+      "status": "CANDIDATE_PENDING_INDEPENDENT_VERIFICATION",
       "incremental_spend_usd": 0,
       "cost": 1,
       "requires": [
@@ -2498,7 +2498,7 @@
       }
     },
     "decision.synthesis.verify.stdlib": {
-      "status": "VERIFIED_BOUND_CAPABILITY",
+      "status": "CANDIDATE_PENDING_INDEPENDENT_VERIFICATION",
       "incremental_spend_usd": 0,
       "cost": 1,
       "requires": [
