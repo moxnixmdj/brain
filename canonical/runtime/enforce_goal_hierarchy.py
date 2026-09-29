@@ -2,6 +2,7 @@
 """Fail-closed anti-drift validator for frontier-sensitive changes."""
 from __future__ import annotations
 import argparse, base64, hashlib, json, os, pathlib, subprocess, sys, urllib.parse, urllib.request
+from datetime import datetime, timezone, timedelta
 
 ROOT=pathlib.Path(os.environ.get("GITHUB_WORKSPACE") or pathlib.Path.cwd()).resolve()
 
@@ -22,12 +23,18 @@ PROTECTED_GUARD_PATHS={
     "canonical/laws/GOAL_HIERARCHY_AND_DRIFT_IMMUNITY_LAW_V1.md",
     "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
     "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md",
+    "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V2.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
+    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V3.md",
     "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V3.json",
     "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V4.json",
     "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V4.json",
     "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V5.json",
+    "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V5.json",
+    "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V6.json",
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V2.json",
+    "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V3.json",
+    "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V2.json",
     "canonical/runtime/enforce_goal_hierarchy.py",
     ".github/workflows/drift-immunity-guard.yml",
 }
@@ -47,6 +54,12 @@ ALLOWED_NO_PROBE_ACTIONS=GOVERNANCE_ACTIONS|REAL_TASK_ACTIONS|{
     "EVIDENCE_PRESERVATION",
 }
 OBS_DELETION_ORDER=("DELETE","BYPASS","REUSE","SUBSTITUTE","COMPOSE","REPAIR","BUILD")
+ROUTE_FRONTIER_MAX_AGE_HOURS=24
+ROUTE_FRONTIER_SOURCE_CLASSES={"BRAIN_INHERITED","OFFICIAL_PRIMARY","CODE_OR_PACKAGE_REGISTRY","BROAD_WEB_OR_COMMUNITY"}
+ROUTE_FRONTIER_QUERY_INTENTS={"CAPABILITY_VECTOR","SUPPLIER_OR_PRODUCT","IMPLEMENTATION_FORM","RECENCY_OR_NEW_RELEASE"}
+ROUTE_FRONTIER_COMPARISON_DIMENSIONS={"CORRECTNESS","CAPABILITY_STRENGTH","WALL_CLOCK","INCREMENTAL_COST","RELIABILITY","VERIFIABILITY"}
+ROUTE_FRONTIER_REFRESH_TRIGGERS={"BEFORE_EXPENSIVE_EXECUTION","AFTER_MATERIAL_ROUTE_FAILURE","BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION","BEFORE_SCARCE_GATE_SPEND"}
+ROUTE_FRONTIER_DISCOVERY_EXEMPT_ACTIONS=GOVERNANCE_ACTIONS|{"RECONCILE_FRONTIER","EVIDENCE_PRESERVATION"}
 OBS_REQUIRED_FIELDS=(
     "canonical_generation_or_commit",
     "canonical_base_commit",
@@ -65,6 +78,7 @@ OBS_REQUIRED_FIELDS=(
     "why_selected_route_is_fastest_sufficient",
     "expected_parent_level_state_change",
     "stop_condition",
+    "route_frontier",
 )
 OBS_LAYER_REQUIRED={
     "obs_goal":("real_outcome","proxy_goals_deleted","surviving_necessity"),
@@ -119,6 +133,136 @@ def _contains_placeholder(value):
     if isinstance(value,dict):
         return any(_contains_placeholder(x) for x in value.values())
     return False
+
+def _parse_utc_timestamp(value):
+    if not _nonempty_string(value):
+        raise ValueError("empty")
+    raw=value.strip()
+    if raw.endswith("Z"):
+        raw=raw[:-1]+"+00:00"
+    dt=datetime.fromisoformat(raw)
+    if dt.tzinfo is None or dt.utcoffset()!=timedelta(0):
+        raise ValueError("not_utc")
+    return dt.astimezone(timezone.utc)
+
+def _nonempty_string_list(value):
+    return isinstance(value,list) and bool(value) and all(_nonempty_string(x) for x in value)
+
+def enforce_live_route_frontier(intent,obs):
+    frontier=obs.get("route_frontier")
+    if not isinstance(frontier,dict):
+        fail("LIVE_CHALLENGER_FRONTIER_MISSING")
+        return
+
+    required=frontier.get("discovery_required")
+    if not isinstance(required,bool):
+        fail("LIVE_CHALLENGER_FRONTIER_DISCOVERY_REQUIRED_NOT_BOOLEAN")
+        return
+
+    action_kind=str(intent.get("action_kind") or "")
+    if required is False:
+        if action_kind not in ROUTE_FRONTIER_DISCOVERY_EXEMPT_ACTIONS:
+            fail("LIVE_CHALLENGER_FRONTIER_EXEMPTION_NOT_ALLOWED_FOR_ACTION_KIND")
+        if not _nonempty_string(frontier.get("not_applicable_reason")):
+            fail("LIVE_CHALLENGER_FRONTIER_EXEMPTION_REASON_MISSING")
+        return
+
+    try:
+        checked=_parse_utc_timestamp(frontier.get("checked_at_utc"))
+    except Exception:
+        fail("LIVE_CHALLENGER_FRONTIER_CHECKED_AT_INVALID")
+        checked=None
+
+    max_age=frontier.get("max_age_hours")
+    if not isinstance(max_age,(int,float)) or isinstance(max_age,bool) or not (0 < float(max_age) <= ROUTE_FRONTIER_MAX_AGE_HOURS):
+        fail("LIVE_CHALLENGER_FRONTIER_MAX_AGE_INVALID")
+        max_age=None
+
+    if checked is not None and max_age is not None:
+        age=datetime.now(timezone.utc)-checked
+        if age < timedelta(minutes=-5):
+            fail("LIVE_CHALLENGER_FRONTIER_TIMESTAMP_IN_FUTURE")
+        elif age > timedelta(hours=float(max_age)):
+            fail("LIVE_CHALLENGER_FRONTIER_EXPIRED")
+
+    source_classes=frontier.get("source_classes_checked")
+    if not isinstance(source_classes,list) or not ROUTE_FRONTIER_SOURCE_CLASSES.issubset(set(source_classes)):
+        fail("LIVE_CHALLENGER_FRONTIER_SOURCE_DIVERSITY_INCOMPLETE")
+
+    evidence=frontier.get("source_evidence")
+    if not isinstance(evidence,dict):
+        fail("LIVE_CHALLENGER_FRONTIER_SOURCE_EVIDENCE_MISSING")
+    else:
+        for cls in ROUTE_FRONTIER_SOURCE_CLASSES:
+            values=evidence.get(cls)
+            if not _nonempty_string_list(values):
+                fail("LIVE_CHALLENGER_FRONTIER_SOURCE_EVIDENCE_EMPTY:"+cls)
+
+    query_families=frontier.get("query_families")
+    if not isinstance(query_families,list) or len(query_families)<4:
+        fail("LIVE_CHALLENGER_FRONTIER_QUERY_DIVERSITY_INCOMPLETE")
+    else:
+        intents=set()
+        queries=[]
+        for item in query_families:
+            if not isinstance(item,dict) or not _nonempty_string(item.get("intent")) or not _nonempty_string(item.get("query")):
+                fail("LIVE_CHALLENGER_FRONTIER_QUERY_ENTRY_INVALID")
+                continue
+            intents.add(str(item["intent"]))
+            queries.append(str(item["query"]).strip().casefold())
+        if not ROUTE_FRONTIER_QUERY_INTENTS.issubset(intents):
+            fail("LIVE_CHALLENGER_FRONTIER_QUERY_INTENTS_INCOMPLETE")
+        if len(set(queries))!=len(queries):
+            fail("LIVE_CHALLENGER_FRONTIER_QUERY_FAMILIES_NOT_DISTINCT")
+
+    dimensions=frontier.get("comparison_dimensions")
+    if not isinstance(dimensions,list) or not ROUTE_FRONTIER_COMPARISON_DIMENSIONS.issubset(set(dimensions)):
+        fail("LIVE_CHALLENGER_FRONTIER_COMPARISON_DIMENSIONS_INCOMPLETE")
+
+    triggers=frontier.get("refresh_triggers")
+    if not isinstance(triggers,list) or not ROUTE_FRONTIER_REFRESH_TRIGGERS.issubset(set(triggers)):
+        fail("LIVE_CHALLENGER_FRONTIER_REFRESH_TRIGGERS_INCOMPLETE")
+
+    unresolved=frontier.get("unresolved_plausible_dominators")
+    if not isinstance(unresolved,list):
+        fail("LIVE_CHALLENGER_FRONTIER_UNRESOLVED_DOMINATORS_NOT_LIST")
+    elif unresolved:
+        fail("LIVE_CHALLENGER_FRONTIER_UNRESOLVED_PLAUSIBLE_DOMINATOR")
+
+    selected=frontier.get("selected_route")
+    if not _nonempty_string(selected):
+        fail("LIVE_CHALLENGER_FRONTIER_SELECTED_ROUTE_MISSING")
+    elif selected!=obs.get("selected_surviving_route"):
+        fail("LIVE_CHALLENGER_FRONTIER_SELECTED_ROUTE_MISMATCH")
+
+    if not _nonempty_string(frontier.get("incumbent_route")):
+        fail("LIVE_CHALLENGER_FRONTIER_INCUMBENT_ROUTE_MISSING")
+
+    challengers=frontier.get("challenger_routes")
+    if not isinstance(challengers,list):
+        fail("LIVE_CHALLENGER_FRONTIER_CHALLENGERS_NOT_LIST")
+        challengers=[]
+    if not challengers and not _nonempty_string(frontier.get("negative_search_summary")):
+        fail("LIVE_CHALLENGER_FRONTIER_NO_CHALLENGER_WITHOUT_NEGATIVE_SEARCH_SUMMARY")
+
+    for i,item in enumerate(challengers):
+        if not isinstance(item,dict):
+            fail(f"LIVE_CHALLENGER_FRONTIER_CHALLENGER_INVALID:{i}")
+            continue
+        if not _nonempty_string(item.get("route")):
+            fail(f"LIVE_CHALLENGER_FRONTIER_CHALLENGER_ROUTE_MISSING:{i}")
+        if not _nonempty_string_list(item.get("evidence")):
+            fail(f"LIVE_CHALLENGER_FRONTIER_CHALLENGER_EVIDENCE_MISSING:{i}")
+        resolution=str(item.get("resolution") or "")
+        if resolution not in {"SELECTED","NON_DOMINATING","DISQUALIFIED"}:
+            fail(f"LIVE_CHALLENGER_FRONTIER_CHALLENGER_UNRESOLVED:{i}")
+        comparison=item.get("comparison")
+        if not isinstance(comparison,dict):
+            fail(f"LIVE_CHALLENGER_FRONTIER_CHALLENGER_COMPARISON_MISSING:{i}")
+        else:
+            missing=[d for d in ROUTE_FRONTIER_COMPARISON_DIMENSIONS if not _nonempty_string(comparison.get(d))]
+            if missing:
+                fail(f"LIVE_CHALLENGER_FRONTIER_CHALLENGER_COMPARISON_INCOMPLETE:{i}:"+",".join(sorted(missing)))
 
 def enforce_recursive_obs(intent,files,base):
     bootstrap_path="canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V1.md"
@@ -204,6 +348,8 @@ def enforce_recursive_obs(intent,files,base):
         fail("RECURSIVE_OBS_AFFECTED_LAYER_REVALIDATION_NOT_ENABLED")
     if not _nonempty_string(meta.get("search_stop_decision")):
         fail("RECURSIVE_OBS_SEARCH_STOP_DECISION_MISSING")
+
+    enforce_live_route_frontier(intent,obs)
 
 
 def blocker_lease_key(intent):
