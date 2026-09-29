@@ -19,7 +19,10 @@
     "quarantined PR160 preserves raw HELDOUT-003 RESULT and AUTO_APT_CLI_ACQUISITION diagnostic evidence",
     "raw result shows verifier import failure after acquisition reached CONTRACT_INFERRED, but unauthorized-carrier policy prevents treating that run as an admissible capability PASS/FAIL verdict",
     "HELDOUT-003 replay is forbidden after the first exclusive evaluator START regardless of carrier admissibility",
-    "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V2.json evidence class CAPABILITY_UNPROVEN selected because the unauthorized start spends freshness but does not provide an admissible parent-capability verdict"
+    "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V2.json evidence class CAPABILITY_UNPROVEN selected because the unauthorized start spends freshness but does not provide an admissible parent-capability verdict",
+    "Sprite START sha256 6e67de16db94c5d9a01c0c22915888519191b5bc8bbe0a283d6bae1d50e70c07",
+    "Sprite RESULT sha256 49f687fcd3b6ec8bcac68aaf2c177a0b0b66385105e19c2c476069b07ca07497",
+    "Sprite AUTO_APT_CLI_ACQUISITION sha256 ad13c127f8cbced41b01dee92e880c67c039161edff6615ff0ca196626fb1726"
   ],
   "evidence_presence_classification": "CAPABILITY_UNPROVEN",
   "probe_specific": false,
