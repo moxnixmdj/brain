@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_HELDOUT_EXECUTION_LEASE_V1",
   "validation_id": "BATCHED-EXECUTABLE-EVIDENCE-HELDOUT-VALIDATION-002",
-  "status": "EXECUTION_SPENT__TERMINAL_CAPTURE_BLOCKED_BY_RAILWAY_READ_LIMITS__LEASE_HELD",
+  "status": "RELEASED_AFTER_TERMINAL_RECONCILIATION",
   "holder": "chatgpt-directjoin-20260929-0307",
   "claimed_on": "2026-09-29T01:12:00Z",
   "source_pr": 85,
@@ -20,7 +20,7 @@
   },
   "concurrency_rule": "NO_WORKER_MAY_EXECUTE_OR_REPLAY_HELDOUT_002__ONLY_READ_ONLY_CAPTURE_OF_THE_EXACT_STARTED_DEPLOYMENT_AND_CANONICAL_RECONCILIATION_ARE_ALLOWED",
   "execution_budget_remaining": 0,
-  "next_action": "READ_ONLY_CAPTURE_EXACT_EXISTING_DEPLOYMENT_TERMINAL_RESULT_WHEN_RAILWAY_READ_SURFACE_IS_AVAILABLE__RECONCILE__THEN_RELEASE_LEASE",
+  "next_action": "LEASE_RELEASED__FOLLOW_CANONICAL_HIERARCHY",
   "anti_drift": [
     "NO_SECOND_REPAIR",
     "NO_MERGE_OR_PROMOTION_BEFORE_RECONCILIATION",
@@ -38,9 +38,15 @@
     "start_marker": "PB_HELDOUT_002_EXECUTION_START=1"
   },
   "terminal_capture": {
-    "observed": false,
-    "blocker_receipt": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_002_TERMINAL_CAPTURE_BLOCKER_20260929_V1.json",
-    "reason": "Railway Remote MCP read path is rate-limited and Railway Agent usage limit is reached; no repository or public terminal artifact is available.",
-    "no_verdict": true
-  }
+    "observed": true,
+    "capture_path": "canonical/astra_runtime/evidence/BATCHED_EXECUTABLE_EVIDENCE_HELDOUT_VALIDATION_002__TERMINAL_CAPTURE.json",
+    "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_BATCHED_EXECUTABLE_EVIDENCE_HELDOUT_VALIDATION_002_RECONCILIATION_V1.json",
+    "deployment_status": "SUCCESS",
+    "acceptance_gate_pass": false,
+    "heldout_oracle_family_recall": 0.25,
+    "heldout_top20_oracle_recall": 0.25,
+    "validator_timeout": false,
+    "no_verdict": false
+  },
+  "released_on": "2026-09-29"
 }

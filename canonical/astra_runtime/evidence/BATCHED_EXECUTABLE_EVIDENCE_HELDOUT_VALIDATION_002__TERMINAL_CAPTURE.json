@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_HELDOUT_VALIDATION_TERMINAL_CAPTURE_V1",
+  "validation_id": "BATCHED-EXECUTABLE-EVIDENCE-HELDOUT-VALIDATION-002",
+  "captured_on": "2026-09-29",
+  "source_pr": 85,
+  "execution_surface": {
+    "provider": "Railway",
+    "project_id": "9d2e8ee8-0eb8-414c-b7e0-a93d90eed54d",
+    "environment_id": "256bcc63-cebd-4079-9a61-c0e9cdbbeeb8",
+    "service_id": "851b6f16-2e12-4a68-b49c-04f81056fa5f",
+    "deployment_id": "aa411a03-2a63-4708-bf1a-758acae7f72c",
+    "deployment_status": "SUCCESS"
+  },
+  "exact_candidate_identity": {
+    "pr_head_sha": "95c3b910b474233b75396f92b2f704a0f3fca916",
+    "runtime_blob_sha": "eddddaa84dacda5d679c22d34f101aeb1d431678",
+    "runner_blob_sha": "42ddd8958134fb27974346889937434b4477fe03",
+    "manifest_blob_sha": "acd44dc94c900a16bd09ec88b0d51025c0cab58b"
+  },
+  "qualified_surface_markers": {
+    "apt_packages_index_count": 3,
+    "contents_amd64_index_count": 2,
+    "contents_all_index_count": 2,
+    "manpage_https": "PASS"
+  },
+  "execution_markers": {
+    "execution_start": 1,
+    "result_json_parse": 1,
+    "validator_exit_code": 2,
+    "validator_wall_s": 358.4476108,
+    "validator_timeout": 0,
+    "one_shot_complete": 1,
+    "carrier_trap_rc": 0
+  },
+  "exact_parsed_metrics": {
+    "acceptance_gate_pass": false,
+    "heldout_oracle_family_recall": 0.25,
+    "heldout_top20_oracle_recall": 0.25,
+    "hard_validation_wall_s": 600,
+    "total_wall_s": 358.370173,
+    "promotion_authorized": false
+  },
+  "evidence_hashes": {
+    "stdout_txt": "3efeb85183481c6ffe65e6138fd4b88627f7d0900959b1008a5b6efbde25b9b9",
+    "stderr_txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "input_sha256_txt": "5beeeee7e81e18a5c6d6cfdf89c85bcc5e7e4a4e4938655ea8c08710bfab4d80",
+    "manpage_headers_txt": "ee5f1842c70cc1eb73c86f045baba0783511fb1c7b274fe1f5afed6547351db6",
+    "exit_code_txt": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3",
+    "wall_seconds_txt": "88b8b04fae59d4bc3fba44d31e8995f20f0276449eede829fad12c0d231fe31c"
+  },
+  "capture_note": "Railway carrier successfully parsed validator JSON and emitted exact metrics. Raw stdout base64 chunks were not reordered to invent case-level details.",
+  "case_level_details_canonically_reconstructed": false
+}

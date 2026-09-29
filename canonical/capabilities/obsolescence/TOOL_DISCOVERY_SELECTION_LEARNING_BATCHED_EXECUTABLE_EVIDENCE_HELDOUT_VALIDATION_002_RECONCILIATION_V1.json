@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_BATCHED_EXECUTABLE_EVIDENCE_HELDOUT_VALIDATION_RECONCILIATION_V1",
+  "status": "EXECUTED_ONCE__QUALIFIED_SURFACE__OBSERVED_ACCEPTANCE_FAIL__FRESHNESS_SPENT__RECONCILED",
+  "checked_on": "2026-09-29",
+  "parent_capability": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "source_pr": 85,
+  "branch": "repair/batched-executable-evidence-acquisition-v1-20260928",
+  "validation_id": "BATCHED-EXECUTABLE-EVIDENCE-HELDOUT-VALIDATION-002",
+  "terminal_capture_path": "canonical/astra_runtime/evidence/BATCHED_EXECUTABLE_EVIDENCE_HELDOUT_VALIDATION_002__TERMINAL_CAPTURE.json",
+  "replay_budget": {
+    "frozen_gate_executions_observed": 1,
+    "frozen_cases_freshness": "SPENT_BY_EXECUTION",
+    "same_case_replay_allowed": false
+  },
+  "surface_admissibility": {
+    "classification": "QUALIFIED_INTENDED_EXECUTION_SURFACE",
+    "exact_runtime_bytes": true,
+    "normal_apt_packages_metadata_present": true,
+    "architecture_all_contents_present": true,
+    "outbound_manpage_enrichment": "PASS",
+    "validator_timeout": false,
+    "deployment_terminal_status": "SUCCESS",
+    "carrier_completed": true
+  },
+  "observed_result": {
+    "acceptance_gate_pass": false,
+    "heldout_oracle_family_recall": 0.25,
+    "heldout_top20_oracle_recall": 0.25,
+    "family_recall_required": 0.75,
+    "top20_recall_required": 0.75,
+    "total_wall_s": 358.370173,
+    "hard_validation_wall_s": 600,
+    "validator_exit_code": 2,
+    "promotion_authorized": false
+  },
+  "verdict": "VALID_ALGORITHM_ACCEPTANCE_FAILURE_ON_QUALIFIED_SURFACE",
+  "causal_conclusion": "GENERIC_TOOL_DISCOVERY_SELECTION_RECALL_REMAINS_INSUFFICIENT__EXACT_EARLIEST_CAUSE_NOT_YET_ATTRIBUTED_FROM_TERMINAL_METRICS_ALONE",
+  "repair_authorization": "NOT_YET_AUTHORIZED__FIRST_RUN_NO_MUTATION_CAUSAL_ATTRIBUTION_AND_COMPARE_DELETE_REPLACE_REUSE_VS_ONE_GENERIC_REPAIR",
+  "next_action": "NO_MUTATION_CAUSAL_ATTRIBUTION_AND_FIRST_PRINCIPLES_ROUTE_COMPARISON__PREFER_DELETE_REPLACE_OR_REUSE_IF_ANY_DOMINATES__IF_ONE_GENERIC_REPAIR_IS_SELECTED_FREEZE_A_NEW_UNSEEN_GATE_BEFORE_TESTING_IT",
+  "prohibitions": [
+    "NO_REPLAY_OR_REEXECUTION_OF_HELDOUT_002",
+    "NO_PROMOTION_OR_MERGE_FROM_FAILED_GATE",
+    "NO_RUNTIME_MUTATION_BEFORE_CAUSAL_ATTRIBUTION_AND_ROUTE_COMPARISON",
+    "NO_PACKAGE_HINTS_OR_TASK_SPECIFIC_LITERALS",
+    "NO_TIMEOUT_INCREASE",
+    "NO_BILLABLE_INFRASTRUCTURE",
+    "NO_USER_LAPTOP"
+  ],
+  "promotion_authorized": false,
+  "repair_merge_authorized": false
+}
