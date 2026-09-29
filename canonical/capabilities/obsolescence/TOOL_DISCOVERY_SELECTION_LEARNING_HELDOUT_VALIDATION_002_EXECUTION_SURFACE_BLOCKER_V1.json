@@ -46,13 +46,13 @@
   "rejected_or_forbidden": [
     "user laptop Mo",
     "private-repo GitHub Actions pre-runner failure class",
-    "Render requiring payment information",
     "DigitalOcean zero-credit account",
     "Brainbase credits exhausted",
     "TinyFish browser wallet negative",
     "Sprites account-specific free-credit state unverified",
-    "Replit no raw shell and no hard-zero attestation",
-    "Camber no hard-zero attestation/arbitrary shell proof"
+    "Render because hard-zero account state is not observable and the connector cannot create the required Docker/shell surface",
+    "Replit because no raw shell/exact APT surface control is exposed",
+    "Camber because its CLI backend runs on the user's machine"
   ],
   "next_truth_transition": "CONNECT_OR_DISCOVER_ONE_ZERO_SPEND_REMOTE_SHELL_SANDBOX_SURFACE__THEN_EXECUTE_HELDOUT_002_EXACTLY_ONCE__THEN_RECONCILE",
   "anti_drift": [
@@ -85,6 +85,38 @@
     "generic_ssh": {
       "status": "UNAVAILABLE",
       "evidence": "Plugin directory search found no generic SSH/remote-shell connector beyond Remote Desktop Commander and DigitalOcean; laptop execution remains forbidden and DigitalOcean has zero credits."
+    },
+    "chatgpt_container": {
+      "status": "REJECTED_NETWORK_POLICY_BLOCKS_FAITHFUL_APT_SURFACE",
+      "evidence": "Current ChatGPT container is Debian 13/root but NETWORK=caas_packages_only; apt-file is absent, APT lists are empty, deb.debian.org cannot resolve, and direct outbound TCP tests are refused. It cannot acquire normal Packages/Contents metadata or Ubuntu manpage HTTPS evidence."
+    },
+    "github_private_actions": {
+      "status": "REJECTED_CONFIRMED_PRE_RUNNER_FAILURE",
+      "evidence": "PR85 guard run 36487462907 produced job 109147733005 with ubuntu-latest label but runner_id=0, empty runner_name, and zero steps. Retrying cannot exercise Linux and is forbidden by the repetition breaker."
+    },
+    "render": {
+      "status": "REJECTED_HARD_ZERO_ACCOUNT_STATE_UNOBSERVABLE_AND_REQUIRED_OS_SURFACE_UNCALLABLE",
+      "evidence": "Render connector exposes free-plan service creation but no billing/payment/spend-limit/included-usage state. Render documents supplementary charges for bandwidth/pipeline overage when a payment method exists. The connector create-web-service action also states Docker/container-registry services are unsupported, while free services expose no one-off-job or interactive-shell path. Hard-$0 and a faithful APT surface cannot be proven before mutation."
+    },
+    "camber": {
+      "status": "REJECTED_LOCAL_HOST_BACKEND",
+      "evidence": "Camber MCP usage guide states its CLI commands run on the user's machine. Using it would violate the explicit no-laptop execution boundary."
+    },
+    "remote_desktop": {
+      "status": "REJECTED_ONLY_CONNECTED_DEVICE_IS_USER_LAPTOP",
+      "evidence": "Remote Desktop Commander currently exposes exactly one online device, named Mo. The held-out gate forbids user-laptop execution, including use as an SSH jump host."
+    },
+    "digitalocean": {
+      "status": "REJECTED_ZERO_CREDITS",
+      "evidence": "Connected DigitalOcean account reports zero account balance/credit and no droplets. Provisioning would not satisfy hard-$0."
+    },
+    "tinyfish": {
+      "status": "REJECTED_NEGATIVE_WALLET",
+      "evidence": "Connected browser-automation wallet is negative; using it cannot satisfy hard-$0."
+    },
+    "replit": {
+      "status": "REJECTED_NO_RAW_SHELL_OR_EXACT_SURFACE_CONTROL",
+      "evidence": "Connected Replit actions expose app-agent create/update/question/publish operations, not an arbitrary shell with direct control of APT metadata, apt-file indexes, exact branch bytes, and bounded network behavior."
     }
   },
   "only_remaining_truth_transition": "CALLABLE_TOOLSET_CHANGE_TO_ONE_VERIFIED_ZERO_SPEND_REMOTE_LINUX_EXECUTOR__THEN_RUN_HELDOUT_VALIDATION_002_ONCE__THEN_RECONCILE",
@@ -103,5 +135,11 @@
       "Railway remains the only relevant available remote-compute plugin surfaced by directory search, but it remains not installed/connected.",
       "No generic SSH connector exists beyond Remote Desktop Commander; user laptop execution remains forbidden."
     ]
+  },
+  "shortest_known_route": {
+    "surface": "Railway anonymous VM",
+    "invocation": "ssh railway.new",
+    "status": "EXTERNALLY_AVAILABLE_BUT_NOT_CALLABLE_FROM_CURRENT_TOOLSET",
+    "reason": "Railway documents a free VM without an account; the Railway ChatGPT plugin is available but not installed/connected, and this ChatGPT container cannot make outbound SSH connections."
   }
 }
