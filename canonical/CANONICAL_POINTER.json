@@ -148,11 +148,11 @@
     "hidden_execute_task": "RECOVERY-ASTRA-HIDDEN-EXECUTE-V1",
     "hidden_execute_state": "COMPLETE_DISTINCTLY_VERIFIED",
     "superworker_real": 1,
-    "next_step": "ONE_GENERIC_BATCHED_LITERAL_APT_FILE_ACQUISITION_REPAIR__USE_FROM_FILE_SINGLE_SCAN__POSTFILTER_EXECUTABLE_PATHS__BOUND_CACHE_AND_PROGRESSIVELY_REQUEST_MANPAGES__FRESH_UNSEEN_GATE__THEN_RECONCILE",
+    "next_step": "INHERIT_EXACT_TESTED_PR89_DEBIAN_FULL_METADATA_XAPIAN_DIRECT_CONTENTS_ROUTE__THEN_RECOMPUTE_HIGHEST_LEVERAGE_CAPABILITY",
     "temporary_cloudflare_accounts_forbidden": true,
     "new_host_research_forbidden_without_falsification": true,
     "github_superworker_1_status": "BOUNDED_EXECUTOR_NOT_REAL_SUPERWORKER",
-    "critical_blocker": "EVIDENCE_ACQUISITION_USES_REPEATED_SLOW_APT_FILE_REGEX_SCANS_AND_EXCESSIVE_REMOTE_MANPAGE_FANOUT__BATCH_LITERAL_MULTI_PATTERN_ACQUISITION_AND_PROGRESSIVE_CACHED_ENRICHMENT_NOT_YET_INTEGRATED",
+    "critical_blocker": "VERIFIED_PR89_ROUTE_EXISTS_BUT_IS_NOT_YET_INHERITED_ON_CANONICAL_MAIN",
     "hidden_adjudication_state": "COMPLETE",
     "hidden_terminal_manifest_sha256": "cd75a56c8ac149cdf94a9708a187b704e1fdddc845e7a5f2d1a85848919b589e",
     "hidden_adjudication_bundle_sha256": "2a4f6b1eacfa8cfda4fb3e2b0442bc033e51eb56620758b0a03f6432cdcafcf7",
@@ -490,6 +490,14 @@
         36486527162
       ],
       "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EVIDENCE_ACQUISITION_STRUCTURAL_CAUSE_RECONCILIATION_V1.json"
+    },
+    "tool_discovery_selection_learning_candidate": {
+      "status": "CANDIDATE_MATCH__HELDOUT_005_PASS__PENDING_INHERITANCE",
+      "source_pr": 89,
+      "exact_head": "48c53d0f1b2474c334fcfbb87bd6946c1dc850bb",
+      "authoritative_deployment": "805a36d4-04cf-4938-bfac-74d29418081f",
+      "reconciliation_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_VALIDATION_005_PASS_RECONCILIATION_V1.json",
+      "no_replay": true
     }
   },
   "provider_rules": {
