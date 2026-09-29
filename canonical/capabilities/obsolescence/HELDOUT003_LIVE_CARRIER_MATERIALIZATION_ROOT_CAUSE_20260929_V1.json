@@ -7,7 +7,7 @@
     "provider": "Sprites",
     "sprite": "brain-heldout003-one-shot"
   },
-  "observation_method": "UNAUTHORIZED_READ_ONLY_LIVE_FILESYSTEM_INSPECTION_VIA_SPRITES_CONNECTOR__DIAGNOSTIC_ONLY",
+  "observation_method": "POST_INCIDENT_READ_ONLY_LIVE_FILESYSTEM_INSPECTION_VIA_AUTHORIZED_SPRITES_CONNECTOR",
   "observed_after_main_commit": "5bb2713151a414a9dc8bf1c40c0aae790664047c",
   "observations": {
     "work_tree_git_repository": false,
@@ -23,24 +23,27 @@
     ],
     "source_branch_previously_proven_to_contain_required_modules": true,
     "preserved_terminal_error": "ImportError: cannot import name 'python_library_codec' from 'bound_capabilities'",
-    "root_cause_classification": "EXECUTION_SURFACE_SOURCE_TREE_FIDELITY_DIVERGENCE_PROVEN__EXACT_HISTORICAL_MATERIALIZATION_MECHANISM_UNPROVEN",
-    "python_import_semantics_failure_required": false,
+    "root_cause_classification": "EXECUTION_SURFACE_SOURCE_FIDELITY_DIVERGENCE_PROVEN__EXACT_HISTORICAL_MATERIALIZATION_MECHANISM_UNPROVEN",
+    "python_import_semantics_failure_required": "NOT_ESTABLISHED",
     "capability_runtime_semantic_falsification": false,
     "historical_materialization_omission_alone_proven": false,
     "later_live_tree_consistent_with_terminal_import_failure": true,
     "exact_pre_start_live_materialization_transcript_preserved": false,
-    "exact_pre_start_import_path_state_preserved": false
+    "exact_pre_start_import_path_state_preserved": false,
+    "exact_pre_start_materialization_transcript_preserved": false,
+    "later_filesystem_observation_proves_exact_pre_start_state": false
   },
   "causal_chain": [
-    "qualified source branch contained and preflighted python_library_codec.py and python_source_tree_codec.py",
-    "HELDOUT-003 terminal verifier could not import python_library_codec from the import-visible bound_capabilities namespace",
-    "a later unauthorized read-only observation found /work non-Git and bound_capabilities containing only cli_command.py and node_library_codec.py",
-    "therefore the execution surface did not faithfully preserve the qualified source-tree/import-visible closure across the relevant lifecycle",
-    "the preserved evidence does not distinguish partial initial materialization from later deletion, replacement, mount/path transition, or an equivalent fidelity failure"
+    "the qualified source branch contained python_library_codec.py and python_source_tree_codec.py",
+    "the first HELDOUT-003 execution terminated with ImportError while importing python_library_codec from bound_capabilities",
+    "a later read-only Sprite inspection found /work was not a Git checkout and the live bound_capabilities directory lacked both Python codec modules",
+    "the preserved execution result plus later filesystem observation prove an execution-surface/source-tree fidelity divergence",
+    "no exact pre-START materialization transcript or import-path snapshot was preserved, so the precise historical mechanism and timing of that divergence remain unproven"
   ],
   "minimum_generic_correction": {
-    "class": "CARRIER_SOURCE_TREE_AND_IMPORT_PATH_FIDELITY",
-    "requirement": "Before any fresh held-out START, materialize one content-addressed exact repository tree or deterministic required closure, attest source identity, required paths and content hashes, and prove the verifier's imports resolve from that exact tree immediately before START.",
+    "class": "CARRIER_SOURCE_FIDELITY_PRESTART_CLOSURE_VERIFICATION",
+    "requirement": "Before any fresh held-out START, materialize the exact required repository closure or exact full source tree and verify every frozen runtime dependency by required path, import-visible path, and content hash.",
+    "rationale": "This prevention closes the proven fidelity class without claiming an unobserved historical mechanism.",
     "capability_runtime_change_required": false,
     "evaluator_change_required": false,
     "probe_specific_change_required": false
@@ -62,5 +65,19 @@
     "No exact live pre-START materialization transcript was preserved.",
     "No exact pre-START sys.path/import-path snapshot was preserved.",
     "Do not classify the historical mechanism specifically as initial file-copy omission."
-  ]
+  ],
+  "observation_scope": "DIAGNOSTIC_ONLY__OBSERVED_AFTER_THE_HELDOUT_003_START_AND_TERMINAL_IMPORT_FAILURE",
+  "evidence_boundary": {
+    "proven": [
+      "qualified source contained the required Python codec modules",
+      "HELDOUT-003 produced the preserved python_library_codec ImportError",
+      "later live Sprite inspection found a non-Git partial /work tree missing both required Python codec modules",
+      "execution-surface/source-tree fidelity divergence exists"
+    ],
+    "unproven": [
+      "the exact pre-START filesystem contents at HELDOUT-003 execution time",
+      "the exact materialization command or omission that produced the divergence",
+      "the exact import-visible sys.path/package state before START"
+    ]
+  }
 }
