@@ -1,0 +1,137 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "SPACE-CARGO-ARCHITECTURE-ENVELOPE-WIN1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "REAL_WORLD_CAPABILITY_ACQUISITION_AND_REUSE",
+  "probe_id": null,
+  "causal_blocker": "REAL_CARGO_PROJECT_LACKS_ONE_VERIFIED_REUSABLE_MULTIDISCIPLINARY_ARCHITECTURE_ENVELOPE",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::REAL_WORLD_CAPABILITY_ACQUISITION_AND_REUSE::REAL_CARGO_PROJECT_LACKS_ONE_VERIFIED_REUSABLE_MULTIDISCIPLINARY_ARCHITECTURE_ENVELOPE::REAL_CAPABILITY_ACQUISITION",
+  "expected_parent_frontier_change": "Produce and independently verify a reusable first-principles architecture-envelope capability on the user's real Earth-to-LEO cargo project, yielding a quantified 1M/10M/100M t/year design envelope, explicit surviving/deleted architecture assumptions, and an inheritable analysis route for fresh reuse.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Space Cargo Transport Research Roadmap.png",
+    "Space Launch Architectures: Research Pass 1.png",
+    "Research Pass 3: Space Launch Architecture.png",
+    "Electromagnetic Space Launch Accelerator Infographic.png",
+    "Orbital Launch Architecture Infographic.png",
+    "Rocketless Orbital Cargo System Infographic.png"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop the acquisition mission when the real cargo architecture envelope is computed, key claims are independently cross-checked against authoritative sources or a separate calculation route, the reusable capability package is inherited, and one fresh project scenario reuses it without rediscovery; do not open synthetic benchmark or infrastructure work unless an exact unresolved predicate blocks this task.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "6f7684eceebee035c9332a09ef0496a774b22acc",
+    "real_outcome": "Advance the user's high-throughput Earth-to-LEO cargo design with a quantified, source-checked architecture envelope spanning 1M, 10M, and 100M tonnes/year, identifying the actual scaling bottlenecks and deleting unsupported assumptions.",
+    "required_capability": "Reusable first-principles multidisciplinary architecture-envelope analysis combining orbital mechanics, accelerator kinematics, throughput/power scaling, atmospheric constraints, and evidence-backed technology limits.",
+    "obs_goal": {
+      "real_outcome": "A decision-quality engineering envelope for the user's real cargo system, not another benchmark.",
+      "proxy_goals_deleted": [
+        "WTM spreadsheet benchmark as Win #1",
+        "generic solver benchmark",
+        "new heldout gate",
+        "carrier qualification"
+      ],
+      "surviving_necessity": "Quantify the actual cargo architecture and its bottlenecks directly."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Prior Space Cargo Transport Research Roadmap",
+        "Research Pass 1/3/4 space-launch architecture artifacts",
+        "Brain exact symbolic/deterministic computation capability",
+        "ChatGPT web research and Python numerical analysis"
+      ],
+      "external_existing_routes_checked": [
+        "Authoritative orbital mechanics references",
+        "standard atmosphere / aerothermodynamics references",
+        "existing multidisciplinary optimization/numerical libraries where useful"
+      ],
+      "capability_work_deleted": [
+        "No bespoke trajectory engine unless existing numerical tools prove insufficient",
+        "No benchmark harness",
+        "No remote Linux carrier"
+      ],
+      "surviving_gap": "Current project has working-point infographics but lacks one verified reusable model that jointly scales kinematics, energy, cadence/lane count, insertion delta-v, and major atmospheric/technology constraints to 100M t/year."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Current uncertainty is analytical, not infrastructure-bound.",
+      "delete_bypass_substitute_options": [
+        "Reuse closed-form mechanics and Python/SciPy before any new simulation framework",
+        "Use direct authoritative source cross-checks before synthetic verification",
+        "Treat unsupported prior infographic numbers as hypotheses, not constraints"
+      ],
+      "surviving_causal_blocker": "Need a single auditable quantitative model and cross-check for the architecture envelope."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Compose closed-form physics + Python numerical sweep + authoritative-source cross-check",
+        "Adopt an existing MDO/trajectory library only if closed-form route becomes insufficient",
+        "Build custom simulator last"
+      ],
+      "losing_routes_reason": "A full custom simulator or benchmark stack would add wall-clock and machinery before the governing first-order constraints are even established.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic gate. Cross-check orbital/energy equations by independent calculation and authoritative references; cross-check numerical sweep with closed-form identities."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Any prior cargo architecture assumption contradicted by the verified envelope",
+        "Unnecessary tether-first or single-insertion assumptions",
+        "Any later custom-model work made unnecessary by the reusable envelope model"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Throughput scaling",
+        "accelerator length/time/power sizing",
+        "orbital insertion closure",
+        "first-order lane-count sizing"
+      ],
+      "fresh_reuse_plan": "Reuse the inherited architecture-envelope capability on a materially different constraint case, such as lower allowable acceleration or a different target orbit, without rediscovery."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse existing project artifacts rather than restart research",
+        "Search only sources that can change the architecture decision",
+        "Use simple physics before specialized software"
+      ],
+      "search_stop_decision": "Stop external search once the governing equations, relevant atmosphere/orbital constants, and technology-bound claims are sourced well enough that additional sources cannot change the selected architecture envelope.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "CLOSED_FORM_PLUS_PYTHON_PLUS_AUTHORITATIVE_SOURCES",
+      "EXISTING_MDO_TRAJECTORY_LIBRARY",
+      "CUSTOM_SIMULATOR"
+    ],
+    "deleted_or_bypassed_paths": [
+      "WTM_BENCHMARK_WIN1",
+      "SYNTHETIC_HELDOUT_GATE",
+      "REMOTE_CARRIER_QUALIFICATION",
+      "CUSTOM_SIMULATOR_BEFORE_FIRST_ORDER_ENVELOPE"
+    ],
+    "selected_surviving_route": "CLOSED_FORM_PLUS_PYTHON_PLUS_AUTHORITATIVE_SOURCES",
+    "why_selected_route_is_fastest_sufficient": "The main unknowns are first-order physical and scaling constraints that are directly computable and independently checkable. This route maximizes correctness and decision speed at zero incremental spend while preserving the option to escalate to specialized tools only if a surviving residual requires them.",
+    "expected_parent_level_state_change": "Produce and independently verify a reusable first-principles architecture-envelope capability on the user's real Earth-to-LEO cargo project, yielding a quantified 1M/10M/100M t/year design envelope, explicit surviving/deleted architecture assumptions, and an inheritable analysis route for fresh reuse.",
+    "stop_condition": "Stop the acquisition mission when the real cargo architecture envelope is computed, key claims are independently cross-checked against authoritative sources or a separate calculation route, the reusable capability package is inherited, and one fresh project scenario reuses it without rediscovery; do not open synthetic benchmark or infrastructure work unless an exact unresolved predicate blocks this task."
+  }
+}
