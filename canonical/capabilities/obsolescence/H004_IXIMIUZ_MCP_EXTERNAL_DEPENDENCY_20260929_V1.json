@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_H004_IXIMIUZ_MCP_EXTERNAL_DEPENDENCY_V1",
+  "evidence_id": "H004-IXIMIUZ-MCP-EXTERNAL-DEPENDENCY-20260929-V1",
+  "canonical_base_sha": "b460a2d18a8ff088a842f162829f8a6879068955",
+  "action_intent": "canonical/action_intents/2026-09-29_DISCOVER_H004_IXIMIUZ_MCP_EXTERNAL_DEPENDENCY_V1.json",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "validation_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "scope": "DISCOVERY_AND_EXTERNAL_DEPENDENCY_RECONCILIATION_ONLY__NO_PLAYGROUND_START__NO_HELDOUT_START",
+  "discovery": {
+    "current_plugin_catalog_search": {
+      "iximiuz_installable_plugin": false,
+      "query": "iximiuz",
+      "consequence": "CURRENT_SESSION_CANNOT_BIND_IXIMIUZ_THROUGH_CURATED_PLUGIN_CATALOG"
+    },
+    "official_remote_mcp": {
+      "result": "PASS",
+      "endpoint": "https://labs.iximiuz.com/mcp",
+      "transport": "REMOTE_STREAMABLE_HTTP_MCP",
+      "chatgpt_support": "OFFICIALLY_TESTED_CHATGPT_WEB_AND_DESKTOP",
+      "official_sources": [
+        "https://labs.iximiuz.com/docs/labs-mcp/what-is-labs-mcp",
+        "https://labs.iximiuz.com/docs/labs-mcp/connecting-your-ai-tool",
+        "https://labs.iximiuz.com/labs-mcp"
+      ],
+      "protected_actions_require_auth": true,
+      "playground_shell_tool_available": true
+    },
+    "hard_zero_contract": {
+      "result": "PASS_FOR_PLAN_PRICE_ONLY",
+      "plan": "Basic",
+      "monthly_price_usd": 0,
+      "free_forever": true,
+      "credit_card_required": false,
+      "concurrent_playgrounds": 1,
+      "total_daily_playtime_hours": 1,
+      "basic_vm": "2 CPU / 4 GB RAM",
+      "source": "https://labs.iximiuz.com/pricing",
+      "limitation": "FREE_TIER_INTERNET_EGRESS_IS_EXPLICITLY_SIGNIFICANTLY_LIMITED__REQUIRED_DEBIAN_METADATA_AND_MANPAGE_EGRESS_NOT_PROVEN"
+    },
+    "linux_surface": {
+      "official_debian_trixie_playground": true,
+      "source": "https://labs.iximiuz.com/playgrounds?category=linux&filter=official"
+    }
+  },
+  "adjudication": {
+    "existing_connected_hard_zero_command_route_found": false,
+    "iximiuz_is_best_current_candidate": true,
+    "custom_connector_path_proven": true,
+    "connector_bound_in_current_session": false,
+    "free_tier_required_egress_proven": false,
+    "apt_xapian_qr_surface_proven": false,
+    "exact_runtime_closure_proven": false,
+    "carrier_admission": "NOT_REACHED",
+    "parent_capability_verdict": "UNPROVEN",
+    "classification": "HARD_ZERO_REMOTE_MCP_ROUTE_DISCOVERED__MINIMAL_EXTERNAL_CONNECTOR_BINDING_REQUIRED__EGRESS_AND_CARRIER_FIDELITY_UNQUALIFIED"
+  },
+  "heldout_004": {
+    "freshness": "UNSPENT",
+    "execution_count": 0,
+    "start_created": false,
+    "result_created": false,
+    "dispatch_invoked": false,
+    "evaluator_invoked": false
+  },
+  "incremental_spend_usd": 0,
+  "user_device_used": false,
+  "val_town_used": false,
+  "sprite_used": false,
+  "exact_external_dependency": {
+    "action": "ADD_CUSTOM_MCP_CONNECTOR_IN_CHATGPT",
+    "name": "ixlabs",
+    "endpoint": "https://labs.iximiuz.com/mcp",
+    "developer_mode_required": true,
+    "authentication": "IXIMIUZ_LABS_OAUTH_ON_FIRST_PROTECTED_ACTION",
+    "minimum_scopes": "playground:read, playground:write",
+    "reason": "ONLY_CURRENTLY_DISCOVERED_HARD_ZERO_REMOTE_LINUX_ROUTE_WITH_OFFICIAL_CHATGPT_MCP_COMMAND_PATH__NOT_AVAILABLE_IN_CURATED_PLUGIN_CATALOG"
+  },
+  "required_next_action": "BIND_IXIMIUZ_LABS_CUSTOM_MCP_THROUGH_CHATGPT_DEVELOPER_MODE__THEN_GUARDED_FREE_TIER_EGRESS_AND_DEBIAN_APT_XAPIAN_QR_EXACT_RUNTIME_CLOSURE_PREFLIGHT__NO_HELDOUT_004_START",
+  "prohibitions": [
+    "NO_IXIMIUZ_PLAYGROUND_START_BEFORE_SEPARATE_GUARDED_QUALIFICATION_INTENT",
+    "NO_HELDOUT_004_START_BEFORE_EGRESS_APT_XAPIAN_QR_AND_EXACT_RUNTIME_CLOSURE_PREFLIGHT_PASS",
+    "NO_HELDOUT_003_REPLAY",
+    "NO_SPRITE",
+    "NO_VAL_TOWN",
+    "NO_USER_LAPTOP",
+    "NO_PAID_OR_UNPROVEN_COST_INFRASTRUCTURE"
+  ]
+}
