@@ -3,11 +3,11 @@
   "status": "CANONICAL_FAIL_CLOSED",
   "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
-  "active_capability_target": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+  "active_capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
   "active_probe": null,
   "probe_state": "NO_ACTIVE_SYNTHETIC_PROBE__REAL_TASK_SELECTION_AND_RECURSIVE_OBS_REQUIRED",
-  "current_parent_blocker": "NO_VERIFIED_MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_ROUTE",
-  "next_required_action_class": "RUN_OBS_V3_V4_LIVE_CHALLENGER_RACE_FOR_MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS__REUSE_BRAIN_DETERMINISTIC_SUBSTRATE__EXECUTE_FRESHEST_SUFFICIENT_REAL_TASK__VERIFY__INHERIT__FRESH_REUSE",
+  "current_parent_blocker": "PARENT_COMPOSITION_NOT_FRESHLY_REVALIDATED_AFTER_MODEL_INDEPENDENT_SYNTHESIS_ACQUISITION",
+  "next_required_action_class": "SELECT_ONE_FRESH_CONSEQUENTIAL_PARENT_TASK__RUN_EXISTING_MODEL_INDEPENDENT_COMPOSED_STACK_WITH_VERIFIED_SYNTHESIS__INDEPENDENTLY_VERIFY__IF_FAIL_LOCALIZE_FIRST_CAUSAL_GAP_ONLY__IF_PASS_COUNT_PARENT_FRESH_REUSE",
   "forbidden_local_frontier": "HELDOUT_003_REPLAY__SECOND_CARRIER_FOR_HELDOUT_003__PROMOTION_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CAPABILITY_RUNTIME_REPAIR_FROM_UNAUTHORIZED_HELDOUT_003_RESULT__CARRIER_CORRECTION_BEFORE_FRESH_ORTHOGONAL_GATE_FREEZE__HAND_PICKED_CARRIER_SUBSET__HELDOUT_005_REPLAY__HELDOUT_002_EXECUTION__SOURCE_NAME_WHITELIST_ONLY_PATCH__BLIND_ABSOLUTE_SCORE_THRESHOLD__CONTRACT_PARSER_REPAIR__DISCOVERY_RETUNING__PACKAGE_HINTS__TASK_SPECIFIC_LITERALS",
   "progress_level_minimum": "CAPABILITY_TARGET",
   "probe_budget": {
@@ -164,11 +164,14 @@
     "max_selected_route_preflight_age_hours": 2
   },
   "last_real_output_event": {
-    "event_id": "FRONTIER_CAPABILITY_EVIDENCE_A_SPACE_CARGO_20260929",
-    "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-    "real_task_verified": true,
-    "frontier_capability_acquired": false,
-    "frontier_fresh_reuse_passed": false
+    "event_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_ACQUIRED_20260930",
+    "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+    "status": "VERIFIED_ACQUIRED__INHERITED__FRESH_REUSE_PASS",
+    "real_tasks_verified": 2,
+    "fresh_reuse_passed": true,
+    "model_dependency_count": 0,
+    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_ASTRA_INTEGRATION_20260930_V1.json",
+    "merge_commit_sha": "2f4f3d7042f055003daf85a93e01e2f78678cec6"
   },
   "last_route_falsification": {
     "route": "PUBLIC_GITHUB_ACTIONS_LOCAL_QWEN3_5_9B_GGUF",
@@ -179,10 +182,12 @@
     "first_causal_blocker": "GOAL_MAX_CYCLES_WITHOUT_FINISH",
     "frontier_capability_credit": false
   },
-  "parent_frontier_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "parent_frontier_capability": null,
   "last_frontier_reconciliation": {
-    "status": "PARENT_CAPABILITY_DECOMPOSED__NO_PROMOTION",
-    "reason": "PR236 forbids model-backed cognition credit; repeated whole-model routes are obsolete. The smallest surviving missing primitive is model-independent evidence-to-decision synthesis.",
-    "target_record": "canonical/capabilities/frontier/MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1.json"
+    "status": "SYNTHESIS_SUBCAPABILITY_VERIFIED__PARENT_FRONTIER_RESTORED",
+    "reason": "PR244 independently verified the model-independent synthesis subcapability on two materially distinct real decisions; PR245 restored the parent queue/target. Fresh parent composition is now the only admissible next information-bearing action.",
+    "acquired_subcapability": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+    "target_record": "canonical/capabilities/frontier/OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1.json",
+    "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_ASTRA_INTEGRATION_20260930_V1.json"
   }
 }

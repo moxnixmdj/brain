@@ -1,0 +1,135 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FINISH-PR245-CANONICAL-COHERENCE-20260930-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PARTIAL_RECONCILIATION_LEFT_STALE_HIERARCHY_POINTER_SCOREBOARD",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PARTIAL_RECONCILIATION_LEFT_STALE_HIERARCHY_POINTER_SCOREBOARD::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Finish PR245's already-authorized reconciliation by making active hierarchy, canonical pointer, and real-output scoreboard agree with the merged synthesis acquisition and restored parent frontier; then immediately require one fresh model-independent parent real task.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "PR244 merge 2f4f3d7042f055003daf85a93e01e2f78678cec6",
+    "PR245 merge 502db4bc7edae5be9164bfa046f7394681f881ba",
+    "PR245 stop condition explicitly requires target, hierarchy, queue, pointer, scoreboard coherence",
+    "live main shows target/queue updated but hierarchy/pointer/scoreboard stale"
+  ],
+  "evidence_presence_classification": "CAPABILITY_PROVEN_EVIDENCE_PRESENT",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Stop when hierarchy, pointer, queue, target records, and scoreboard all agree that MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1 is verified/inherited/fresh-reused and OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1 is the active frontier with fresh parent composition required. Do not add runtime implementation.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "502db4bc7edae5be9164bfa046f7394681f881ba",
+    "real_outcome": "Complete the partial canonical reconciliation left by merged PR245 without new implementation.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Remove stale canonical state that points back to an already-acquired synthesis subcapability.",
+      "proxy_goals_deleted": [
+        "new synthesis research",
+        "new model supplier",
+        "new runtime primitive",
+        "new benchmark"
+      ],
+      "surviving_necessity": "Update only stale authority surfaces omitted by PR245."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Merged PR244 synthesis proof",
+        "Merged PR245 target/queue reconciliation",
+        "decision.synthesis.typed.stdlib",
+        "decision.synthesis.verify.stdlib"
+      ],
+      "external_existing_routes_checked": [
+        "Not applicable: reconciliation consumes already-verified canonical evidence."
+      ],
+      "capability_work_deleted": [
+        "No runtime implementation",
+        "No external search",
+        "No supplier race"
+      ],
+      "surviving_gap": "Hierarchy, pointer and scoreboard are stale relative to merged target/queue truth."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Canonical coherence defect caused by partial reconciliation.",
+      "delete_bypass_substitute_options": [
+        "DELETE stale synthesis blocker",
+        "BYPASS further capability implementation",
+        "REUSE PR244/245 evidence"
+      ],
+      "surviving_causal_blocker": "PARTIAL_RECONCILIATION_LEFT_STALE_HIERARCHY_POINTER_SCOREBOARD"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REPAIR_ONLY_STALE_CANONICAL_SURFACES",
+        "RERUN_SYNTHESIS_ACQUISITION",
+        "PREDECLARE_NEXT_SUBCAPABILITY"
+      ],
+      "losing_routes_reason": "PR244 already proved the subcapability and PR245 already selected fresh parent composition. Any other route duplicates solved work.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No synthetic run. Verify exact cross-file coherence against merged PR244/245 evidence."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "NO_VERIFIED_MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_ROUTE",
+        "ACQUIRE_AND_VERIFY_MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1... next target",
+        "stale pointer synthesis frontier"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "verified typed evidence synthesis",
+        "fresh same-route reuse",
+        "ASTRA model-independent integration"
+      ],
+      "fresh_reuse_plan": "One fresh consequential parent task through the current model-independent composed stack."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse PR244 verification",
+        "Reuse PR245 reconciliation intent",
+        "No live challenger search for reconciliation"
+      ],
+      "search_stop_decision": "Canonical inconsistency is fully explained by omitted surfaces in PR245; further search cannot change the repair.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "REPAIR_ONLY_STALE_CANONICAL_SURFACES",
+      "RERUN_SYNTHESIS_ACQUISITION",
+      "PREDECLARE_NEXT_SUBCAPABILITY"
+    ],
+    "deleted_or_bypassed_paths": [
+      "RERUN_SYNTHESIS_ACQUISITION",
+      "PREDECLARE_NEXT_SUBCAPABILITY",
+      "MODEL_SUPPLIER_WORK"
+    ],
+    "selected_surviving_route": "REPAIR_ONLY_STALE_CANONICAL_SURFACES",
+    "why_selected_route_is_fastest_sufficient": "It consumes already-verified merged evidence, changes no runtime, and restores the exact state PR245's stop condition required.",
+    "expected_parent_level_state_change": "Finish PR245's already-authorized reconciliation by making active hierarchy, canonical pointer, and real-output scoreboard agree with the merged synthesis acquisition and restored parent frontier; then immediately require one fresh model-independent parent real task.",
+    "stop_condition": "Stop when hierarchy, pointer, queue, target records, and scoreboard all agree that MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1 is verified/inherited/fresh-reused and OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1 is the active frontier with fresh parent composition required. Do not add runtime implementation.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER consumes already-verified canonical evidence and selects no new supplier or execution route."
+    }
+  }
+}
