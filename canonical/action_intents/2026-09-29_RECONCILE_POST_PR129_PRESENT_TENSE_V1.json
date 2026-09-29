@@ -19,9 +19,10 @@
     "canonical/CANONICAL_POINTER.json abort_on_frontier_contradiction=true",
     "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json inherited_route.status",
     "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json immediate_frontier objective and inherited Xapian route next_action",
-    "open PR140 one-shot execution lease"
+    "closed PR140 pre-reconciliation one-shot lease preserved as evidence only",
+    "targeted exhaustive scan of current pointer/hierarchy/queue found exactly three stale present-tense descriptors: hierarchy inherited_route.status, queue immediate_frontier.objective, queue inherited Xapian route next_action"
   ],
-  "evidence_presence_classification": "CANONICAL_AUTHORITY_CONTRADICTION",
+  "evidence_presence_classification": "SUPERSEDED_BY_NEWER_CANONICAL_STATE",
   "probe_specific": false,
   "generic_repair_from_single_probe": false,
   "orthogonal_recurrence_count": 0,
