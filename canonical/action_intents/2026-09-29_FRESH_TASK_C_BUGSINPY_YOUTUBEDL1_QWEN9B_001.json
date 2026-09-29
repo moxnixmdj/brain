@@ -1,0 +1,351 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "FRESH-TASK-C-BUGSINPY-YOUTUBEDL1-QWEN9B-001",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+  "probe_id": null,
+  "causal_blocker": "PR227_SAFE_FINALIZATION_MERGED__FRESH_EXECUTABLE_ORACLE_REAL_TASK_C_UNSPENT",
+  "action_kind": "FRESH_REUSE",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1::PR227_SAFE_FINALIZATION_MERGED__FRESH_EXECUTABLE_ORACLE_REAL_TASK_C_UNSPENT::FRESH_REUSE",
+  "expected_parent_frontier_change": "Execute one fresh real historical software-defect task with the repaired ASTRA controller and pinned local Qwen3.5-9B, then behaviorally verify the model-produced patch against withheld upstream fixed-revision tests.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Merged PR227 safe-evidence finalization",
+    "PR229 Murakumo exact-model identity falsification",
+    "Current Pollinations Mistral probes returning legacy 404/402 and current anonymous 401 despite green probe workflow",
+    "Current local Ministral 8B qualification still incomplete and not real-task-qualified",
+    "Prior local Qwen3.5-9B public-carrier execution proving exact model/runtime bridge and useful source/tool selection",
+    "BugsInPy youtube-dl bug 1 pinned buggy/fixed commits and relevant test"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Execute the fresh bug task exactly once. Apply only the model-produced patch, then run the withheld upstream fixed-revision test plus extra hidden boolean checks. Preserve terminal evidence and do not replay, tune, or expose the gold patch to the model.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "e4f115ef6f3b86cb51b0206edf1f53f16c46f6e8",
+    "real_outcome": "Produce a correct minimal patch for a real historical youtube-dl filter bug from the buggy source snapshot and pass withheld behavior tests.",
+    "required_capability": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
+    "obs_goal": {
+      "real_outcome": "Obtain executable fresh-task evidence that the repaired controller can inspect a real codebase, localize a defect, synthesize a patch, and close the task.",
+      "proxy_goals_deleted": [
+        "Android prose-only diagnosis",
+        "synthetic benchmark score",
+        "same-task replay",
+        "new governance work",
+        "new model framework"
+      ],
+      "surviving_necessity": "A fresh real task with an executable withheld oracle directly closes the current proof gap."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "PR227 repaired ASTRA runtime blob 1e8252415c60a553bad8a05fae2d98217d0f5833",
+        "pinned local Qwen3.5-9B Q4_K_M route",
+        "public verification-capsule-runner",
+        "prior local bridge implementation"
+      ],
+      "external_existing_routes_checked": [
+        "Murakumo exact Qwen route",
+        "Vireonix anonymous route",
+        "Pollinations Mistral route",
+        "local Ministral-3-8B-Instruct route",
+        "BugsInPy real defect corpus"
+      ],
+      "capability_work_deleted": [
+        "No new controller",
+        "No new framework",
+        "No provider account",
+        "No paid API",
+        "No user laptop",
+        "No prose adjudicator"
+      ],
+      "surviving_gap": "Fresh end-to-end real-task proof after PR227 remains unspent."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Proof gap only; the known finalizer defect has been repaired and exact-byte validated.",
+      "delete_bypass_substitute_options": [
+        "Delete fresh proof: rejected because parent capability is still unproven.",
+        "Murakumo: rejected because requested exact model identity was not returned and listed exact Qwen timed out.",
+        "Vireonix/PersorAI: rejected by current carrier 403 or supplier-identity ambiguity.",
+        "Pollinations Mistral: rejected by current anonymous 401/402/404 probes.",
+        "Local Ministral 8B: does not dominate because it is not yet real-task-qualified and switching adds a new competence-verification tax.",
+        "Pinned local Qwen3.5-9B: survives; already has exact provenance and useful real-task behavior."
+      ],
+      "surviving_causal_blocker": "One fresh one-shot executable-oracle task has not yet run with the repaired runtime."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "REUSE_REPAIRED_ASTRA_PLUS_PINNED_LOCAL_QWEN9B_ON_BUGSINPY_REAL_BUG",
+        "SWITCH_TO_LOCAL_MINISTRAL8B_THEN_REQUALIFY_REAL_TASK",
+        "RETURN_TO_REMOTE_ANONYMOUS_PROVIDER_RACE",
+        "USE_PROSE_ONLY_ANDROID_DIAGNOSIS"
+      ],
+      "losing_routes_reason": "The incumbent is the fastest path to verified output because supplier competence/provenance is already evidenced; challengers either fail current access/identity checks or require a new competence proof before their first defensible capability result.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use the real upstream buggy snapshot and withhold the fixed-revision test additions until after model completion. Apply the proposed diff and run upstream test_match_str plus extra boolean cases; no subjective grader."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Android prose Task C",
+        "further supplier hunting if this route passes",
+        "additional finalizer repair absent new falsification"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "repository inspection",
+        "bug localization",
+        "patch synthesis",
+        "bounded finalization",
+        "behavioral verification"
+      ],
+      "fresh_reuse_plan": "If the hidden oracle passes, recompute the parent frontier immediately and promote only the exact capability evidence earned."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse current supplier race evidence",
+        "Reuse exact Qwen9B closure",
+        "Reuse PR227 runtime bytes",
+        "Reuse BugsInPy pinned real bug metadata"
+      ],
+      "search_stop_decision": "No currently accessible challenger can reach defensible real-task output faster after including the time needed to establish supplier identity and competence. Stop search and execute.",
+      "affected_layers_only_on_revalidation": true,
+      "challenger_refresh_decision": "Refreshed immediately after PR229 route falsification using current public-carrier probes and current local-openweight qualification state."
+    },
+    "routes_considered": [
+      "REUSE_REPAIRED_ASTRA_PLUS_PINNED_LOCAL_QWEN9B_ON_BUGSINPY_REAL_BUG",
+      "SWITCH_TO_LOCAL_MINISTRAL8B_THEN_REQUALIFY_REAL_TASK",
+      "MURAKUMO_QWEN27",
+      "VIREONIX_AUTO",
+      "POLLINATIONS_MISTRAL",
+      "ANDROID_PROSE_TASK"
+    ],
+    "deleted_or_bypassed_paths": [
+      "MURAKUMO_QWEN27",
+      "VIREONIX_AUTO",
+      "POLLINATIONS_MISTRAL",
+      "ANDROID_PROSE_TASK"
+    ],
+    "selected_surviving_route": "REUSE_REPAIRED_ASTRA_PLUS_PINNED_LOCAL_QWEN9B_ON_BUGSINPY_REAL_BUG",
+    "why_selected_route_is_fastest_sufficient": "It is the only route with current carrier readiness plus prior real-task supplier provenance and no new provider/competence qualification requirement; the hidden executable oracle minimizes adjudication latency and ambiguity.",
+    "expected_parent_level_state_change": "Execute one fresh real historical software-defect task with the repaired ASTRA controller and pinned local Qwen3.5-9B, then behaviorally verify the model-produced patch against withheld upstream fixed-revision tests.",
+    "stop_condition": "Execute the fresh bug task exactly once. Apply only the model-produced patch, then run the withheld upstream fixed-revision test plus extra hidden boolean checks. Preserve terminal evidence and do not replay, tune, or expose the gold patch to the model.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-09-29T22:06:30Z",
+      "max_age_hours": 24,
+      "incumbent_route": "REPAIRED_ASTRA_PLUS_PINNED_LOCAL_QWEN3_5_9B_PUBLIC_RUNNER",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "https://github.com/moxnixmdj/brain/pull/227",
+          "https://github.com/moxnixmdj/brain/pull/229#issuecomment-5899939138",
+          "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36627371993"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://github.com/soarsmu/BugsInPy/tree/master/projects/youtube-dl/bugs/1",
+          "https://github.com/ytdl-org/youtube-dl/tree/99036a1298089068dcf80c0985bfcc3f8c24f281",
+          "https://gen.pollinations.ai/v1/models"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/mistralai",
+          "https://huggingface.co/mistralai/Ministral-3-8B-Instruct-2512-GGUF",
+          "https://huggingface.co/TheStageAI/Qwen3.5-9B-GGUF"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Fresh 2026-09-29 route discovery and BugsInPy/SWE-bench executable-oracle comparison"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "real Python bug hidden behavioral oracle patch generation local open weight agent"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Qwen3.5 9B Ministral 3 8B explicit local planner public GitHub runner"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "BugsInPy buggy commit fixed commit withheld tests one shot agent patch"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 zero key nonfrontier planner routes current Pollinations Murakumo Vireonix"
+        }
+      ],
+      "challenger_routes": [
+        {
+          "route": "REUSE_REPAIRED_ASTRA_PLUS_PINNED_LOCAL_QWEN9B_ON_BUGSINPY_REAL_BUG",
+          "evidence": [
+            "PR221/PR216 real-task local Qwen behavior",
+            "PR227 repaired runtime exact-byte validation",
+            "current public carrier success"
+          ],
+          "qualification_evidence": [
+            "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36627371993",
+            "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36635838394"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "BRAIN_INHERITED"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Explicit pinned non-frontier model plus real hidden behavioral oracle.",
+            "CAPABILITY_STRENGTH": "Already demonstrated useful research/tool actions; repaired finalization removes the localized closure defect.",
+            "WALL_CLOCK": "No additional supplier competence qualification; direct fresh task next.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Exact model/runtime/artifact route previously executed on same public carrier.",
+            "VERIFIABILITY": "Strongest route because patch is tested against withheld upstream behavior."
+          }
+        },
+        {
+          "route": "LOCAL_MINISTRAL3_8B_PUBLIC_RUNNER",
+          "evidence": [
+            "Current qualification workflow 36637357927 is executing a trivial allowed-action probe."
+          ],
+          "qualification_evidence": [
+            "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36637357927"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "Open-weight explicit supplier, but no fresh real-task competence evidence yet.",
+            "CAPABILITY_STRENGTH": "Potentially sufficient but unproven for this task class.",
+            "WALL_CLOCK": "Any download advantage is offset by needing a new real-task competence qualification before a defensible parent claim.",
+            "INCREMENTAL_COST": "$0.",
+            "RELIABILITY": "Current qualification still incomplete at route decision time.",
+            "VERIFIABILITY": "Can be verified later, but switching now adds another proof stage."
+          }
+        },
+        {
+          "route": "REMOTE_ANONYMOUS_PROVIDER_SET",
+          "evidence": [
+            "Murakumo identity mismatch/timeout; Vireonix and PersorAI current carrier 403; Pollinations Mistral anonymous calls 401/402/404."
+          ],
+          "qualification_evidence": [
+            "https://github.com/moxnixmdj/brain/pull/229#issuecomment-5899939138",
+            "https://github.com/moxnixmdj/verification-capsule-runner/actions/runs/36637358144"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Current routes fail exact supplier identity or access.",
+            "CAPABILITY_STRENGTH": "Potentially high but irrelevant without a clean executable identity.",
+            "WALL_CLOCK": "Further provider hunting delays the fresh proof.",
+            "INCREMENTAL_COST": "Nominally $0.",
+            "RELIABILITY": "Current direct probes failed required conditions.",
+            "VERIFIABILITY": "Insufficient for frontier-independence proof."
+          }
+        }
+      ],
+      "negative_search_summary": "No current challenger reaches verified fresh-task output faster after including identity, access, and competence-proof overhead.",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REUSE_REPAIRED_ASTRA_PLUS_PINNED_LOCAL_QWEN9B_ON_BUGSINPY_REAL_BUG",
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-09-29T22:06:30Z",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_REPAIRED_ASTRA_PLUS_PINNED_LOCAL_QWEN9B_ON_BUGSINPY_REAL_BUG",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "PUBLIC_GITHUB_ACTIONS_CARRIER_moxnixmdj/verification-capsule-runner",
+            "kind": "CARRIER",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T22:04:47Z",
+            "evidence": [
+              "DIRECT_PROBE: workflow 36637358144 completed successfully with assigned ubuntu-24.04 runner on this account"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "ACCOUNT_SPECIFIC"
+          },
+          {
+            "dependency": "PINNED_QWEN3_5_9B_GGUF_AND_LLAMA_CPP_ROUTE",
+            "kind": "LOCAL_MODEL",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T20:52:52Z",
+            "evidence": [
+              "DIRECT_PROBE: workflow 36627371993 verified exact 5,060,174,144-byte Qwen3.5-9B GGUF, exact llama.cpp commit, started local server, and completed multiple planner calls"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "GLOBAL"
+          },
+          {
+            "dependency": "BUGSINPY_AND_YOUTUBE_DL_PUBLIC_GIT_SOURCES",
+            "kind": "DATA_SOURCE",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-09-29T22:06:30Z",
+            "evidence": [
+              "DIRECT_PROBE: GitHub API returned BugsInPy youtube-dl bug 1 metadata and ytdl-org buggy/fixed source/test files"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "CODE_OR_PACKAGE_REGISTRY"
+            ],
+            "evidence_scope": "GLOBAL"
+          }
+        ],
+        "execution_dependencies_complete": true
+      }
+    }
+  }
+}
