@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-H004-CHATGPT-CARRIER-READONLY-FAILURE-CLEAN-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-004",
+  "causal_blocker": "HELDOUT_004_FROZEN_UNSPENT__EXECUTION_SURFACE_SOURCE_TREE_FIDELITY_DIVERGENCE_PROVEN__EXACT_HISTORICAL_MECHANISM_UNPROVEN__GENERIC_CARRIER_FIDELITY_CORRECTION_AND_HARD_ZERO_QUALIFICATION_REQUIRED",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::HELDOUT_004_FROZEN_UNSPENT__EXECUTION_SURFACE_SOURCE_TREE_FIDELITY_DIVERGENCE_PROVEN__EXACT_HISTORICAL_MECHANISM_UNPROVEN__GENERIC_CARRIER_FIDELITY_CORRECTION_AND_HARD_ZERO_QUALIFICATION_REQUIRED::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Truthfully reconcile only the independently observed read-only failure of the existing ChatGPT Linux carrier: Debian trixie/root with apt+sudo present, but zero APT list metadata, no apt-file, no zbarimg, no Python xapian, and outbound DNS resolution unavailable. Preserve exactly one evidence record, keep HELDOUT-004 frozen UNSPENT, and advance to a fresh guarded qualification of the already-discovered accountless/cardless Railway anonymous VM with content-addressed exact-closure path/hash/import preflight. Do not mutate any carrier in this lane.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR176 corrected carrier evidence boundary and preserved HELDOUT-004 UNSPENT",
+    "quarantined PR178 read-only scope overrun; preserve as coordination evidence only",
+    "independent current ChatGPT Linux read-only observation: Debian trixie UID0, apt/sudo present, apt-file/zbarimg/python-xapian absent, zero APT list files, DNS resolution unavailable",
+    "Railway official 2026-09-25 anonymous VM documentation: unclaimed ssh railway.new VM needs no account/card and nobody pays for compute",
+    "existing Railway account project brain-heldout-004 has no services/deployments and is not needed for the anonymous route"
+  ],
+  "evidence_presence_classification": "CAPABILITY_UNPROVEN",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "After trusted immutable-intent guard PASS, write exactly one read-only carrier qualification evidence record plus only the pointer/hierarchy/queue reconciliation required to advance the blocker. No apt update/install, network mutation, carrier provisioning, runtime/evaluator/gate/workflow/law change, HELDOUT-004 START/RESULT, HELDOUT-003 replay, Sprite, Val Town, user laptop, or paid/unproven-cost infrastructure. Revalidate exact final head before merge.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
