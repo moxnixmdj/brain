@@ -33,9 +33,14 @@
     "anonymous_vm_created": false,
     "ssh_binary_present": false,
     "railway_new_dns_resolution": "FAIL__TEMPORARY_FAILURE_IN_NAME_RESOLUTION",
-    "authoritative_first_failed_predicate": "CALLABLE_COMMAND_TRANSPORT_REQUIRED",
-    "tcp_probe_result": "NOT_ADJUDICATED__DISCARD_LOCAL_HELPER_FALSE_PASS_AFTER_DNS_OPEN_ERROR",
-    "railway_connector_status": "AVAILABLE_FOR_AUTHENTICATED_ACCOUNT_PROJECT_ACTIONS__NO_ANONYMOUS_SSH_VM_ACTION_EXPOSED"
+    "authoritative_first_failed_predicate": "DIRECT_CALLABLE_COMMAND_TRANSPORT_FROM_AUTHORIZED_SURFACE",
+    "railway_connector_status": "AVAILABLE_FOR_AUTHENTICATED_ACCOUNT_PROJECT_ACTIONS__NO_ANONYMOUS_SSH_VM_ACTION_EXPOSED",
+    "python_ssh_libraries": {
+      "paramiko": "ABSENT",
+      "asyncssh": "ABSENT",
+      "fabric": "ABSENT",
+      "invoke": "ABSENT"
+    }
   },
   "adjudication": {
     "railway_anonymous_hard_zero_contract": true,
@@ -58,7 +63,7 @@
   "user_device_used": false,
   "val_town_used": false,
   "sprite_used": false,
-  "required_next_action": "DISCOVER_OR_RECOVER_NEXT_CALLABLE_VERIFIED_HARD_ZERO_REMOTE_LINUX_ROUTE__REUSE_EXISTING_SURFACE_EXHAUSTION_EVIDENCE__REQUIRE_RAW_COMMAND_TRANSPORT_AND_FAITHFUL_APT_SURFACE__NO_HELDOUT_004_START",
+  "required_next_action": "DISCOVER_AND_QUALIFY_ONE_HARD_ZERO_REMOTE_LINUX_ROUTE_WITH_DIRECT_CALLABLE_COMMAND_TRANSPORT__THEN_FAITHFUL_APT_XAPIAN_QR_SURFACE_AND_EXACT_RUNTIME_CLOSURE_PATH_HASH_IMPORT_PREFLIGHT__NO_HELDOUT_004_START",
   "prohibitions": [
     "NO_SECOND_RAILWAY_ANONYMOUS_ALLOCATION_ATTEMPT_WITH_UNCHANGED_TRANSPORT_FAILURE_CLASS",
     "NO_ACCOUNT_PAID_RAILWAY_SUBSTITUTION_WITHOUT_HARD_ZERO_ATTESTATION",
