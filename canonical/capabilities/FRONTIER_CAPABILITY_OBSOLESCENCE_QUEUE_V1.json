@@ -73,7 +73,7 @@
     "objective": "Keep HELDOUT-004 frozen/unspent. The built-in ChatGPT Linux carrier is rejected by clean read-only evidence: it has no usable APT list metadata and cannot resolve its configured Debian mirror, so it cannot supply the faithful H004 APT/Xapian/QR surface. Reuse the already-proven PR20/PR35/PR45 exact-source mechanisms only after qualifying one already-discovered connected remote Linux carrier with callable command transport and independently supportable hard-zero spend.",
     "selection_metric": "CORRECTNESS_FIRST__THEN_VERIFIED_PARENT_CAPABILITY_GAIN_PER_WALL_CLOCK_WITH_ZERO_INCREMENTAL_SPEND",
     "exact_blocker": "HELDOUT_004_FROZEN_UNSPENT__BUILT_IN_CHATGPT_LINUX_CARRIER_REJECTED__APT_METADATA_ABSENT_AND_CONFIGURED_DEBIAN_MIRROR_UNREACHABLE__NEXT_HARD_ZERO_CONNECTED_REMOTE_LINUX_CARRIER_UNQUALIFIED",
-    "evidence_path": "canonical/capabilities/obsolescence/H004_CHATGPT_LINUX_READONLY_CARRIER_REJECTION_20260929_V1.json",
+    "evidence_path": "canonical/capabilities/obsolescence/H004_CHATGPT_LINUX_READONLY_CARRIER_QUALIFICATION_CLEAN_20260929_V1.json",
     "repair_status": "PR129_PROVIDER_NEUTRAL_APT_ADMISSION_REPAIR_PRESERVED__PR176_CARRIER_EVIDENCE_BOUNDARY_CORRECTED__CHATGPT_BUILTIN_LINUX_CARRIER_REJECTED_READ_ONLY__NO_CAPABILITY_RUNTIME_REPAIR_REQUIRED",
     "prohibition": "NO_HELDOUT_004_START_BEFORE_HARD_ZERO_EXECUTOR_QUALIFICATION_AND_EXACT_SOURCE_PATH_HASH_IMPORT_PREFLIGHT__NO_HELDOUT_003_REPLAY__NO_SPRITE__NO_VAL_TOWN__NO_USER_LAPTOP__NO_PAID_OR_UNPROVEN_COST_INFRASTRUCTURE",
     "frozen_gate": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_004.json",
@@ -81,7 +81,7 @@
     "merged_repair_source_pr": 129,
     "merged_repair_runtime_path": "canonical/runtime/auto_apt_cli_acquisition.py",
     "spent_gate": "canonical/astra_runtime/missions/XAPIAN_APT_E2E_INTEGRATION_HELDOUT_003.json",
-    "chatgpt_linux_carrier_qualification_path": "canonical/capabilities/obsolescence/H004_CHATGPT_LINUX_READONLY_CARRIER_REJECTION_20260929_V1.json"
+    "existing_chatgpt_linux_carrier_qualification_path": "canonical/capabilities/obsolescence/H004_CHATGPT_LINUX_READONLY_CARRIER_QUALIFICATION_CLEAN_20260929_V1.json"
   },
   "promotion_claim": false,
   "completed_obsolescence_records": [
