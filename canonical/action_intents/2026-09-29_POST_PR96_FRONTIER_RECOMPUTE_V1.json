@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "POST-PR96-FRONTIER-RECOMPUTE-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": null,
+  "causal_blocker": "POST_PR96_MERGE_LEFT_CANONICAL_POINTER_AND_STATUS_MARKERS_STALE__RESIDUAL_PARENT_FRONTIER_NOT_RECOMPUTED",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::POST_PR96_MERGE_LEFT_CANONICAL_POINTER_AND_STATUS_MARKERS_STALE__RESIDUAL_PARENT_FRONTIER_NOT_RECOMPUTED::RECONCILE_FRONTIER",
+  "evidence_presence_classification": "CAPABILITY_PROVEN_EVIDENCE_PRESENT",
+  "expected_parent_frontier_change": "Reconcile canonical pointer, hierarchy, queue, and HELDOUT-005 evidence to the already-merged exact-byte PR96 inheritance; remove stale pending-merge/predecessor-blocker language; then select the highest-leverage residual TOOL_DISCOVERY_SELECTION_AND_LEARNING blocker from preserved evidence before any new repair or experiment.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "main merge db298bb4363266ef9e91ec9ec114b5f1c7bcf1fd",
+    "PR96",
+    "PR89 authoritative HELDOUT-005 first execution",
+    "PR74 blocker-lease governance",
+    "canonical/runtime/capability_discovery.py exact inherited blob b9e7423ab24bf2da98869b02d782e791a779892a",
+    "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+    "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json"
+  ],
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Canonical pointer, hierarchy, queue, and terminal/replay evidence agree that PR96 exact-byte inheritance is merged; HELDOUT-005 is permanently spent; one residual parent-capability blocker is selected from preserved evidence; no runtime algorithm change or new execution occurs in this PR.",
+  "governance_change": false,
+  "weakens_existing_guard": false
+}
