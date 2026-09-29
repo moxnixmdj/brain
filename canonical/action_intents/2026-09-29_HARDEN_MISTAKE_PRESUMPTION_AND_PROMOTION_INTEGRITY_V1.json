@@ -1,0 +1,268 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "HARDEN-MISTAKE-PRESUMPTION-ON-MERGED-PREFLIGHT-V1",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "PROGRAM_OPERATING_STRATEGY",
+  "probe_id": null,
+  "causal_blocker": "CONSEQUENTIAL_ERRORS_CAN_STILL_PROMOTE_WITHOUT_FAILURE_PRESUMPTION_CIRCULARITY_ATOMIC_STATE_AND_SCOREBOARD_EVIDENCE_GUARDS",
+  "action_kind": "USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::PROGRAM_OPERATING_STRATEGY::CONSEQUENTIAL_ERRORS_CAN_STILL_PROMOTE_WITHOUT_FAILURE_PRESUMPTION_CIRCULARITY_ATOMIC_STATE_AND_SCOREBOARD_EVIDENCE_GUARDS::USER_AUTHORIZED_GOVERNANCE_STRATEGY_PROMOTION",
+  "expected_parent_frontier_change": "Make consequential Brain work presume error by default while preserving the newly merged selected-route preflight: prohibit circular proof and self-certification, enforce claim-to-evidence levels, require atomic coupled-state updates, exact-head readback, rollback triggers, and promotion evidence for any scoreboard increase.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "Merged PR225 Recursive OBS V3 / receipt V4 selected-route preflight",
+    "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
+    "canonical/laws/EXECUTION_LEVERAGE_AND_ANTI_DRIFT_LAW_V1.md",
+    "canonical/runtime/enforce_goal_hierarchy.py",
+    "PR213 partial canonical branch-state correction incident",
+    "PR214 circular frontier-proof correction"
+  ],
+  "evidence_presence_classification": "CAPABILITY_FAILED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 4,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "Merge only the successor law/schema/template/gates/validator/pointer/scoreboard/regression changes needed to make mistake-presumption fail closed on top of Recursive OBS V3 and selected-route preflight; verify exact-head coherence and unchanged active frontier/counters; then resume the active capability mission.",
+  "governance_change": true,
+  "user_authorized_governance_change": true,
+  "user_authorization_summary": "User explicitly ordered Brain and all necessary systems to assume many mistakes by default and prevent them as completely as possible.",
+  "weakens_existing_guard": false,
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-09-28-frontier-capability-obsolescence-v4",
+    "canonical_base_commit": "4262602c1451a6b6a248950d434e24335b03ae4a",
+    "real_outcome": "Make consequential Brain mistakes fail closed by default without regressing the newly merged selected-route execution preflight.",
+    "required_capability": "Machine-enforced failure presumption, circularity prevention, transactional canonical state, claim-level evidence, and rollback-aware promotion integrity.",
+    "obs_goal": {
+      "real_outcome": "Prevent silent consequential errors and false promotions.",
+      "proxy_goals_deleted": [
+        "generic be-careful advice",
+        "second audit workflow",
+        "new provider"
+      ],
+      "surviving_necessity": "Extend the existing trusted guard only for uncovered generic failure classes."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Truth-first law",
+        "anti-drift law",
+        "Recursive OBS V3 receipt V4",
+        "selected-route execution preflight",
+        "trusted drift guard"
+      ],
+      "external_existing_routes_checked": [
+        "Not applicable to internal governance implementation."
+      ],
+      "capability_work_deleted": [
+        "No scheduler",
+        "No new workflow",
+        "No external service"
+      ],
+      "surviving_gap": "No universal mistake-presumption receipt, circular-proof ban, coupled-state atomicity check, or scoreboard promotion delta gate."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Intrinsic trusted-governance gap exposed by real incidents.",
+      "delete_bypass_substitute_options": [
+        "Rely on current controls: rejected by observed incidents.",
+        "Extend existing trusted guard: survives.",
+        "Build separate auditor: rejected as redundant."
+      ],
+      "surviving_causal_blocker": "Trusted validator lacks these exact semantic checks."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "COMPOSE",
+        "REPAIR",
+        "BUILD"
+      ],
+      "routes_ranked": [
+        "Extend current trusted guard on top of merged preflight controls",
+        "Add second audit workflow",
+        "Build new governance service"
+      ],
+      "losing_routes_reason": "Current trusted guard is already the enforcement choke point.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Use direct validator semantics and exact-head state checks; no benchmark."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Ad-hoc manual promotion sanity checks",
+        "Sequential coupled-state edits",
+        "Self-declared frontier independence"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "promotion integrity",
+        "circularity prevention",
+        "atomic canonical mutation",
+        "pre-mortem failure enumeration"
+      ],
+      "fresh_reuse_plan": "Next active frontier action must use the new combined template and mistake receipt while satisfying selected-route preflight."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused merged preflight governance",
+        "Kept one trusted validator"
+      ],
+      "search_stop_decision": "Observed failures identify the missing internal enforcement seam; external search cannot improve this governance invariant.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "EXTEND_EXISTING_TRUSTED_GUARD",
+      "ADD_SECOND_AUDIT_WORKFLOW",
+      "BUILD_NEW_GOVERNANCE_SERVICE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "ADD_SECOND_AUDIT_WORKFLOW",
+      "BUILD_NEW_GOVERNANCE_SERVICE"
+    ],
+    "selected_surviving_route": "EXTEND_EXISTING_TRUSTED_GUARD",
+    "why_selected_route_is_fastest_sufficient": "It preserves the merged route-preflight protections and closes the uncovered error classes with minimum machinery.",
+    "expected_parent_level_state_change": "Make consequential Brain work presume error by default while preserving the newly merged selected-route preflight: prohibit circular proof and self-certification, enforce claim-to-evidence levels, require atomic coupled-state updates, exact-head readback, rollback triggers, and promotion evidence for any scoreboard increase.",
+    "stop_condition": "Merge only the successor law/schema/template/gates/validator/pointer/scoreboard/regression changes needed to make mistake-presumption fail closed on top of Recursive OBS V3 and selected-route preflight; verify exact-head coherence and unchanged active frontier/counters; then resume the active capability mission.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "User-authorized internal governance hardening on the existing trusted control path."
+    }
+  },
+  "mistake_prevention": {
+    "schema": "PROJECT_BRAIN_MISTAKE_PREVENTION_RECEIPT_V1",
+    "failure_default": "PRESUME_CONSEQUENTIAL_ACTION_WRONG_UNTIL_FALSIFIED",
+    "claim_scope": "GOVERNANCE_HARDENING_NO_CAPABILITY_PROMOTION",
+    "pre_mortem": [
+      {
+        "failure_mode": "OVERWRITE_NEWER_ROUTE_PREFLIGHT_CONTROLS",
+        "detection": "Successor pointer/gates/template/validator no longer reference Recursive OBS V3 receipt V4 or selected-route execution preflight.",
+        "prevention": "Build directly from merged PR225 main and preserve V3/V4 readiness checks.",
+        "abort_or_rollback": "Reject head and restore merged main."
+      },
+      {
+        "failure_mode": "POLICY_ONLY_NO_RUNTIME_ENFORCEMENT",
+        "detection": "Intent without mistake_prevention still passes candidate validator.",
+        "prevention": "Trusted validator requires and structurally validates receipt.",
+        "abort_or_rollback": "Do not merge."
+      },
+      {
+        "failure_mode": "CIRCULAR_FRONTIER_PROOF",
+        "detection": "Target frontier supplier intersects execution or verification suppliers on promotion.",
+        "prevention": "Machine-check supplier sets and explicit circularity booleans.",
+        "abort_or_rollback": "Keep higher claim/counters unpromoted."
+      },
+      {
+        "failure_mode": "PARTIAL_MULTI_FILE_CANONICAL_UPDATE",
+        "detection": "Pointer and scoreboard change but do not both appear in exact final commit.",
+        "prevention": "Require ATOMIC_SINGLE_TREE_COMMIT for multiple coupled core paths.",
+        "abort_or_rollback": "Reject PR and keep last coherent main."
+      },
+      {
+        "failure_mode": "UNSUPPORTED_SCORE_PROMOTION",
+        "detection": "Any progress counter rises without promotion evidence and independent verifier.",
+        "prevention": "Compare base/head counters in trusted validator.",
+        "abort_or_rollback": "Reject counter increase."
+      },
+      {
+        "failure_mode": "LOCAL_SUCCESS_MISLABELED_AS_PARENT_WIN",
+        "detection": "Claim scope is weaker than counter or frontier promotion.",
+        "prevention": "Strict claim scope mapping.",
+        "abort_or_rollback": "Downgrade claim; preserve valid lower-level evidence."
+      }
+    ],
+    "circularity_check": {
+      "target_frontier_implementation_in_execution_path": false,
+      "target_frontier_implementation_in_verification_path": false,
+      "proof_depends_on_claim_being_proven": false,
+      "note": "Governance hardening makes no frontier capability promotion."
+    },
+    "independence_check": {
+      "self_certification_allowed": false,
+      "producer_verifier_independent": true,
+      "verifier_identity": "Trusted base drift guard plus exact-head semantic reconciliation",
+      "target_supplier_excluded_from_proof_path": true,
+      "target_frontier_supplier_ids": [],
+      "execution_supplier_ids": [
+        "GITHUB_CANONICAL_MUTATION_PATH"
+      ],
+      "verification_supplier_ids": [
+        "TRUSTED_BASE_DRIFT_GUARD_AND_EXACT_HEAD_REVIEW"
+      ]
+    },
+    "state_transition": {
+      "coupled_canonical_paths": [
+        "canonical/CANONICAL_POINTER.json",
+        "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json"
+      ],
+      "atomic_update_required": true,
+      "strategy": "ATOMIC_SINGLE_TREE_COMMIT",
+      "exact_head_readback_required": true,
+      "expected_invariants": [
+        "terminal objective unchanged",
+        "active capability target and blocker unchanged",
+        "scoreboard counters unchanged",
+        "Recursive OBS V3 receipt V4 selected-route preflight preserved"
+      ],
+      "expected_deltas": [
+        "mistake prevention mandatory",
+        "circular proof and self certification rejected",
+        "coupled core state atomicity enforced",
+        "scoreboard promotion evidence enforced",
+        "exact-head readback and rollback triggers mandatory"
+      ]
+    },
+    "evidence_claim_map": [
+      {
+        "claim": "Existing merged controls do not yet require universal failure-presumption/circularity/atomic-state/promotion-integrity receipt.",
+        "evidence": [
+          "canonical/runtime/enforce_goal_hierarchy.py",
+          "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V3.json"
+        ],
+        "strength": "DIRECT_CODE_INSPECTION"
+      },
+      {
+        "claim": "Partial branch state and circular proof were observed real failure classes.",
+        "evidence": [
+          "PR213 correction history",
+          "PR214 closed unmerged circularity correction"
+        ],
+        "strength": "DIRECT_INCIDENT_EVIDENCE"
+      }
+    ],
+    "promotion_evidence": {
+      "evidence_paths": [],
+      "independent_verifier_id": "",
+      "producer_supplier_ids": [],
+      "verifier_supplier_ids": [],
+      "supplier_independent": false,
+      "replacement_route_id": "",
+      "frontier_reference_id": "",
+      "fresh_reuse_evidence_path": ""
+    },
+    "post_action_checks": [
+      "trusted base guard passes exact head",
+      "candidate validator contains mistake-prevention enforcement",
+      "exact head preserves selected-route preflight controls",
+      "pointer and scoreboard exact-head readback agree",
+      "scoreboard counters unchanged",
+      "active frontier blocker/next action unchanged"
+    ],
+    "rollback_triggers": [
+      "any active frontier drift",
+      "any scoreboard counter change",
+      "any loss of selected-route preflight enforcement",
+      "any new governance path not protected",
+      "candidate validator omission or structural bypass"
+    ],
+    "counter_rollback_authorized": false,
+    "counter_rollback_reason": "",
+    "residual_uncertainty": "No finite guard makes all mistakes impossible; this makes major consequential errors non-promotable, detectable, and reversible by default."
+  }
+}

@@ -1,0 +1,313 @@
+{
+  "schema": "PROJECT_BRAIN_CRITICAL_PATH_PRE_ACTION_GATE_V8",
+  "status": "MANDATORY_FAIL_CLOSED",
+  "supersedes": "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V7.json",
+  "authority": [
+    "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
+    "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V3.md",
+    "canonical/laws/MISTAKE_PRESUMPTION_AND_ERROR_CONTAINMENT_LAW_V1.md",
+    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V5.md"
+  ],
+  "required_inputs": [
+    "live_canonical_pointer",
+    "current_relevant_task_state",
+    "current_relevant_predicate_state",
+    "canonical_generation_or_commit",
+    "prior_work_search_result",
+    "evidence_presence_classification",
+    "real_output_scoreboard",
+    "current_real_task_or_explicit_support_justification",
+    "current_recursive_obs_receipt",
+    "current_live_challenger_frontier",
+    "current_selected_route_execution_preflight",
+    "current_mistake_prevention_receipt",
+    "declared_claim_scope",
+    "declared_rollback_triggers"
+  ],
+  "checks": [
+    {
+      "id": "PRIMARY_STATE_REFRESH",
+      "question": "Was live highest-authority state refreshed immediately before planning/execution?",
+      "required": true
+    },
+    {
+      "id": "GENERATION_LOCK",
+      "question": "Is the action bound to current canonical generation/commit and fail-closed on drift?",
+      "required": true
+    },
+    {
+      "id": "MISSION_LOCK",
+      "question": "Is the terminal objective and current causal frontier explicit?",
+      "required": true
+    },
+    {
+      "id": "REAL_TASK_FIRST",
+      "question": "Is the default action a real consequential task rather than a synthetic proxy?",
+      "required": true
+    },
+    {
+      "id": "OBS_RECEIPT_CURRENT",
+      "question": "Does a generation-bound recursive OBS receipt cover the current task, capability, blocker, route and verifier?",
+      "required": true
+    },
+    {
+      "id": "OBS_EXACT_BASE_BINDING",
+      "question": "Does recursive_obs.canonical_base_commit exactly equal the trusted PR base commit?",
+      "required": true
+    },
+    {
+      "id": "OBS_SCHEMA_V4",
+      "question": "Does the receipt satisfy V4 structure, live challenger-frontier requirements, and a current selected-route execution preflight with every required volatile dependency READY?",
+      "required": true
+    },
+    {
+      "id": "OBS_GOAL",
+      "question": "Was the local goal tested against the real useful outcome and unnecessary proxy goals deleted?",
+      "required": true
+    },
+    {
+      "id": "OBS_CAPABILITY",
+      "question": "Were inherited and external existing capability routes searched before creating new capability machinery?",
+      "required": true
+    },
+    {
+      "id": "OBS_BLOCKER",
+      "question": "Was the blocker tested for deletion, bypass, substitution or irrelevance before repair?",
+      "required": true
+    },
+    {
+      "id": "OBS_SOLUTION",
+      "question": "Was DELETE->BYPASS->REUSE->SUBSTITUTE->COMPOSE->REPAIR->BUILD applied before implementation?",
+      "required": true
+    },
+    {
+      "id": "OBS_VERIFICATION",
+      "question": "Was direct independent verification of the real effect preferred over new benchmark/gate machinery?",
+      "required": true
+    },
+    {
+      "id": "OBS_INHERITED_SYSTEM",
+      "question": "Will a successful capability acquisition trigger deletion/supersession of now-redundant queued work and a fresh reuse attempt?",
+      "required": true
+    },
+    {
+      "id": "OBS_OBS",
+      "question": "Was the OBS/search process itself shortened, cached, reused or stopped where further analysis cannot change the route decision?",
+      "required": true
+    },
+    {
+      "id": "LIVE_CHALLENGER_FRONTIER",
+      "question": "For externally satisfiable work, was the route universe refreshed within the allowed freshness lease immediately before this decision?",
+      "required": true
+    },
+    {
+      "id": "SELECTED_ROUTE_PREFLIGHT",
+      "question": "Is the exact selected route currently executable, with a preflight checked within 2 hours and every required dependency READY?",
+      "required": true
+    },
+    {
+      "id": "VOLATILE_DEPENDENCY_EVIDENCE",
+      "question": "For each required volatile dependency, is readiness supported by a direct probe or independent verifier rather than historical success or generic public status alone?",
+      "required": true
+    },
+    {
+      "id": "ACCOUNT_SCOPED_READINESS",
+      "question": "For each account-, quota-, region-, or capacity-scoped dependency, is the evidence scoped to the exact execution context?",
+      "required": true
+    },
+    {
+      "id": "DISCOVERY_DIVERSITY",
+      "question": "Did discovery span inherited Brain routes, official primary sources, code/package registries, broad web/community sources, and distinct capability/supplier/form/recency query families?",
+      "required": true
+    },
+    {
+      "id": "ADVERSARIAL_CHALLENGER",
+      "question": "Was the incumbent explicitly challenged and are all plausible dominating alternatives resolved before expensive continuation?",
+      "required": true
+    },
+    {
+      "id": "FASTEST_SUFFICIENT_ROUTE",
+      "question": "Among correctness-sufficient routes, is the selected route currently the fastest to verified reusable output, then cheapest?",
+      "required": true
+    },
+    {
+      "id": "SUPPORT_JUSTIFICATION",
+      "question": "If this is supporting work, does one exact unresolved predicate block the selected real task and does OBS prove this support action is the fastest sufficient unblock?",
+      "required": true
+    },
+    {
+      "id": "SUPPORT_BUDGET",
+      "question": "Has the support action budget since the last real-output event not been exceeded?",
+      "required": true
+    },
+    {
+      "id": "DIRECT_REAL_OUTPUT_PATH",
+      "question": "Can this action be traced to reusable capability inheritance, verified real-task completion, fresh reuse, frontier dependency removal, or residual-gap localization?",
+      "required": true
+    },
+    {
+      "id": "FRONTIER_CONTRADICTION_FREE",
+      "question": "Does the action avoid assumptions contradicted by live canonical state?",
+      "required": true
+    },
+    {
+      "id": "PRIOR_WORK_SEARCHED",
+      "question": "Were inherited capabilities, artifacts, prior tasks, connected tools, software and equivalent routes searched?",
+      "required": true
+    },
+    {
+      "id": "EVIDENCE_CLASSIFIED",
+      "question": "Was evidence state explicitly classified using canonical evidence-presence classes?",
+      "required": true
+    },
+    {
+      "id": "NO_MISSING_PROOF_CAPABILITY_CONFUSION",
+      "question": "If capability is proven but proof is missing, is evidence recovery used instead of rerun?",
+      "required": true
+    },
+    {
+      "id": "RECOVERY_LADDER_HIGHEST_STEP",
+      "question": "For missing evidence, were higher recovery steps exhausted first?",
+      "required": true
+    },
+    {
+      "id": "NO_INFRASTRUCTURE_DRIFT",
+      "question": "Does recursive OBS prove any new infrastructure is strictly necessary on the fastest surviving route?",
+      "required": true
+    },
+    {
+      "id": "PRE_FREEZE_REALIZABILITY",
+      "question": "If freezing a hidden gate, were carrier, runtime contract, verifier, closure, orthogonality, and synthetic-gate necessity already proven without hidden payload?",
+      "required": true
+    },
+    {
+      "id": "PROOF_NOT_CEREMONIAL",
+      "question": "Does verification close a material uncertainty that changes a capability decision?",
+      "required": true
+    },
+    {
+      "id": "ADEQUATE_ROUTE_ALREADY_EXISTS",
+      "question": "If an adequate route exists, are we executing it rather than continuing search or platform work?",
+      "required": true
+    },
+    {
+      "id": "USER_INTERVENTION_MINIMAL",
+      "question": "If user action is requested, is it the smallest genuine external authority boundary?",
+      "required": true
+    },
+    {
+      "id": "FAILURE_PRESUMPTION",
+      "question": "Does the action presume it may be wrong and enumerate at least three material failure modes with concrete detectors, prevention, and rollback?",
+      "required": true
+    },
+    {
+      "id": "CIRCULARITY",
+      "question": "Is the target frontier implementation absent from execution and decisive verification of any claim that it has been replaced?",
+      "required": true
+    },
+    {
+      "id": "SELF_CERTIFICATION",
+      "question": "Is self-certification forbidden and promotion independently verified at the strength required by the claim?",
+      "required": true
+    },
+    {
+      "id": "CLAIM_LADDER",
+      "question": "Does the proposed claim remain at or below the strongest evidence rung actually established?",
+      "required": true
+    },
+    {
+      "id": "TRANSACTIONAL_STATE",
+      "question": "If multiple coupled core canonical files change, will the exact final head update them atomically in one Git tree commit?",
+      "required": true
+    },
+    {
+      "id": "PROMOTION_INTEGRITY",
+      "question": "Does every scoreboard counter increase have existing evidence paths and supplier-independent verification?",
+      "required": true
+    },
+    {
+      "id": "EXACT_HEAD_READBACK",
+      "question": "Will the exact proposed head be reread and checked before merge or promotion?",
+      "required": true
+    },
+    {
+      "id": "ROLLBACK_TRIGGERS",
+      "question": "Are concrete rollback/downgrade triggers declared for post-action contradiction?",
+      "required": true
+    }
+  ],
+  "recursive_obs": {
+    "receipt_schema": "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json",
+    "deletion_first_order": [
+      "DELETE",
+      "BYPASS",
+      "REUSE",
+      "SUBSTITUTE",
+      "COMPOSE",
+      "REPAIR",
+      "BUILD"
+    ],
+    "invalidate_on_material_state_change": true,
+    "rerun_only_affected_layers": true,
+    "adequate_route_stops_search": true,
+    "exact_base_commit_binding_required": true,
+    "live_challenger_frontier_required": true,
+    "max_external_route_frontier_age_hours": 24,
+    "selected_route_execution_preflight_required": true,
+    "max_selected_route_preflight_age_hours": 2
+  },
+  "evidence_presence_classes": [
+    "CAPABILITY_UNPROVEN",
+    "CAPABILITY_FAILED",
+    "CAPABILITY_PROVEN_EVIDENCE_PRESENT",
+    "CAPABILITY_PROVEN_EVIDENCE_MISSING",
+    "HISTORICAL_STATE_UNCERTAIN",
+    "SUPERSEDED_BY_NEWER_CANONICAL_STATE"
+  ],
+  "recovery_ladder": [
+    "RECOVER_EXACT_ORIGINAL_ARTIFACT",
+    "RECOVER_EXACT_MIRROR_OR_ARCHIVE",
+    "RECONSTRUCT_PROOF_FROM_PRESERVED_PRIMARY_EVIDENCE",
+    "READJUDICATE_PRESERVED_EVIDENCE_WITH_INDEPENDENT_VERIFIER",
+    "REPROVE_ONLY_SPECIFIC_MISSING_PREDICATE",
+    "RERUN_FULL_EXPERIMENT_LAST_RESORT"
+  ],
+  "automatic_abort_conditions": [
+    "ROLLBACK_TRIGGERS_MISSING",
+    "POST_ACTION_READBACK_NOT_REQUIRED",
+    "UNSUPPORTED_SCOREBOARD_PROMOTION",
+    "NON_ATOMIC_COUPLED_CANONICAL_STATE",
+    "CLAIM_RUNG_EXCEEDS_EVIDENCE",
+    "SELF_CERTIFIED_PROMOTION",
+    "CIRCULAR_FRONTIER_PROOF",
+    "MISTAKE_PREVENTION_RECEIPT_MISSING_OR_INVALID",
+    "RECURSIVE_OBS_BASE_COMMIT_STALE",
+    "RECURSIVE_OBS_SCHEMA_V4_INVALID_STALE_HOLLOW_UNDERDIVERSE_OR_UNREADY",
+    "SELECTED_ROUTE_PREFLIGHT_EXPIRED",
+    "REQUIRED_EXECUTION_DEPENDENCY_NOT_READY",
+    "VOLATILE_DEPENDENCY_LACKS_CURRENT_DIRECT_OR_INDEPENDENT_EVIDENCE",
+    "LIVE_CHALLENGER_FRONTIER_EXPIRED",
+    "UNRESOLVED_PLAUSIBLE_DOMINATOR_EXISTS",
+    "CANONICAL_GENERATION_CHANGED_SINCE_OBS",
+    "RECURSIVE_OBS_RECEIPT_MISSING_STALE_OR_INCOMPLETE",
+    "OBS_SHOWS_PATH_DELETABLE_BYPASSABLE_OR_SUPERSEDED",
+    "IMPLEMENTATION_STARTED_BEFORE_DELETION_FIRST_ROUTE_RACE",
+    "FASTER_SUFFICIENT_ROUTE_EXISTS",
+    "SUMMARY_OR_MEMORY_CONTRADICTS_LIVE_CANONICAL_STATE",
+    "PLANNED_ACTION_TARGET_ALREADY_PROVEN_OR_COMPLETE",
+    "NO_SELECTED_REAL_TASK_AND_NO_EXPLICIT_SUPPORT_JUSTIFICATION",
+    "SUPPORT_CHAIN_EXCEEDS_TWO_ACTIONS_WITHOUT_REAL_OUTPUT",
+    "SYNTHETIC_GATE_FROZEN_BEFORE_REALIZABILITY_OR_NECESSITY",
+    "DUPLICATE_EXPERIMENT_WITHOUT_DOCUMENTED_INVALIDATION",
+    "ACTION_HAS_NO_CURRENT_CANONICAL_NECESSITY_PROOF",
+    "INFRASTRUCTURE_WORK_WHILE_EXISTING_ROUTE_CAN_EXECUTE_REAL_MISSION",
+    "ACTIVITY_METRIC_SUBSTITUTED_FOR_CAPABILITY_METRIC"
+  ],
+  "on_abort": "REFRESH_LIVE_CANONICAL_STATE__INVALIDATE_AFFECTED_OBS_LAYERS__DELETE_OR_SWITCH_ROUTE__UPDATE_REAL_OUTPUT_SCOREBOARD__EXECUTE_SHORTEST_SURVIVING_PATH",
+  "mistake_prevention": {
+    "receipt_schema": "canonical/governance/MISTAKE_PREVENTION_RECEIPT_SCHEMA_V1.json",
+    "exact_head_readback_required": true,
+    "promotion_supplier_independence_required": true,
+    "rollback_first_on_invariant_failure": true
+  }
+}

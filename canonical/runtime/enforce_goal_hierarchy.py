@@ -28,6 +28,8 @@ PROTECTED_GUARD_PATHS={
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V2.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V3.md",
     "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V4.md",
+    "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V5.md",
+    "canonical/laws/MISTAKE_PRESUMPTION_AND_ERROR_CONTAINMENT_LAW_V1.md",
     "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V3.json",
     "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V4.json",
     "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V4.json",
@@ -36,11 +38,15 @@ PROTECTED_GUARD_PATHS={
     "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V6.json",
     "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V6.json",
     "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V7.json",
+    "canonical/gates/GOAL_HIERARCHY_ACTION_GATE_V7.json",
+    "canonical/gates/CRITICAL_PATH_PRE_ACTION_GATE_V8.json",
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V2.json",
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V3.json",
     "canonical/governance/RECURSIVE_OBS_RECEIPT_SCHEMA_V4.json",
     "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V2.json",
     "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_TEMPLATE_V3.json",
+    "canonical/governance/ACTION_INTENT_WITH_RECURSIVE_OBS_AND_MISTAKE_PREVENTION_TEMPLATE_V4.json",
+    "canonical/governance/MISTAKE_PREVENTION_RECEIPT_SCHEMA_V1.json",
     "canonical/runtime/enforce_goal_hierarchy.py",
     ".github/workflows/drift-immunity-guard.yml",
 }
@@ -104,6 +110,28 @@ OBS_LAYER_REQUIRED={
     "obs_inherited_system":("downstream_work_to_delete_or_supersede","adjacent_capabilities_absorbed","fresh_reuse_plan"),
     "obs_obs":("analysis_steps_deleted_or_cached","search_stop_decision","affected_layers_only_on_revalidation"),
 }
+MISTAKE_FAILURE_DEFAULT="PRESUME_CONSEQUENTIAL_ACTION_WRONG_UNTIL_FALSIFIED"
+MISTAKE_ALLOWED_CLAIM_SCOPES={
+    "NO_PROMOTION","GOVERNANCE_HARDENING_NO_CAPABILITY_PROMOTION",
+    "REAL_TASK_EVIDENCE","RESIDUAL_GAP_LOCALIZATION",
+    "CAPABILITY_ACQUISITION","FRONTIER_DEPENDENCY_REMOVAL",
+}
+MISTAKE_PROMOTION_SCOPES={"CAPABILITY_ACQUISITION","FRONTIER_DEPENDENCY_REMOVAL"}
+MISTAKE_PREMORTEM_FIELDS=("failure_mode","detection","prevention","abort_or_rollback")
+COUPLED_CORE_STATE_PATHS={
+    "canonical/CANONICAL_POINTER.json",
+    "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+    "canonical/capabilities/FRONTIER_CAPABILITY_OBSOLESCENCE_QUEUE_V1.json",
+    "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
+}
+SCOREBOARD_PATH="canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json"
+SCORE_SCOPE_ALLOWED={
+    "reusable_capabilities_inherited":{"CAPABILITY_ACQUISITION","FRONTIER_DEPENDENCY_REMOVAL"},
+    "verified_real_tasks_completed":{"REAL_TASK_EVIDENCE","CAPABILITY_ACQUISITION","FRONTIER_DEPENDENCY_REMOVAL"},
+    "fresh_reuse_passes":{"CAPABILITY_ACQUISITION","FRONTIER_DEPENDENCY_REMOVAL"},
+    "frontier_dependencies_removed":{"FRONTIER_DEPENDENCY_REMOVAL"},
+    "residual_gaps_localized":{"RESIDUAL_GAP_LOCALIZATION","REAL_TASK_EVIDENCE","CAPABILITY_ACQUISITION","FRONTIER_DEPENDENCY_REMOVAL"},
+}
 FAIL=[]
 
 def load(path):
@@ -135,6 +163,10 @@ def path_exists_at_ref(ref,path):
         cwd=ROOT,text=True,capture_output=True,
     )
     return proc.returncode==0
+
+def load_at_ref(ref,path):
+    return json.loads(git("show",f"{ref}:{path}"))
+
 
 
 def _nonempty_string(value):
@@ -494,6 +526,182 @@ def enforce_recursive_obs(intent,files,base):
     enforce_live_route_frontier(intent,obs)
 
 
+def _mistake_supplier_set(value):
+    if not isinstance(value,list):
+        return set()
+    return {str(x).strip() for x in value if str(x).strip()}
+
+def enforce_mistake_prevention(intent,files,base,head):
+    mp=intent.get("mistake_prevention")
+    if not isinstance(mp,dict):
+        fail("MISTAKE_PREVENTION_RECEIPT_MISSING")
+        return
+    if _contains_placeholder(mp):
+        fail("MISTAKE_PREVENTION_TEMPLATE_PLACEHOLDER_PRESENT")
+    required=("schema","failure_default","claim_scope","pre_mortem","circularity_check","independence_check","state_transition","evidence_claim_map","post_action_checks","rollback_triggers","residual_uncertainty")
+    missing=[k for k in required if k not in mp]
+    if missing:
+        fail("MISTAKE_PREVENTION_RECEIPT_INCOMPLETE:"+",".join(missing))
+        return
+    if mp.get("schema")!="PROJECT_BRAIN_MISTAKE_PREVENTION_RECEIPT_V1":
+        fail("MISTAKE_PREVENTION_SCHEMA_INVALID")
+    if mp.get("failure_default")!=MISTAKE_FAILURE_DEFAULT:
+        fail("MISTAKE_PREVENTION_FAILURE_DEFAULT_INVALID")
+    claim_scope=str(mp.get("claim_scope") or "")
+    if claim_scope not in MISTAKE_ALLOWED_CLAIM_SCOPES:
+        fail("MISTAKE_PREVENTION_CLAIM_SCOPE_INVALID")
+
+    premortem=mp.get("pre_mortem")
+    if not isinstance(premortem,list) or len(premortem)<3:
+        fail("MISTAKE_PREVENTION_PREMORTEM_TOO_SMALL")
+    else:
+        seen=[]
+        for i,item in enumerate(premortem):
+            if not isinstance(item,dict):
+                fail(f"MISTAKE_PREVENTION_PREMORTEM_ENTRY_INVALID:{i}")
+                continue
+            absent=[k for k in MISTAKE_PREMORTEM_FIELDS if not _nonempty_string(item.get(k))]
+            if absent:
+                fail(f"MISTAKE_PREVENTION_PREMORTEM_ENTRY_INCOMPLETE:{i}:"+",".join(absent))
+            seen.append(str(item.get("failure_mode") or "").strip().casefold())
+        nonempty=[x for x in seen if x]
+        if len(nonempty)!=len(set(nonempty)):
+            fail("MISTAKE_PREVENTION_PREMORTEM_DUPLICATE_FAILURE_MODES")
+
+    circular=mp.get("circularity_check")
+    if not isinstance(circular,dict):
+        fail("MISTAKE_PREVENTION_CIRCULARITY_CHECK_MISSING")
+        circular={}
+    for key in ("target_frontier_implementation_in_execution_path","target_frontier_implementation_in_verification_path","proof_depends_on_claim_being_proven"):
+        if not isinstance(circular.get(key),bool):
+            fail("MISTAKE_PREVENTION_CIRCULARITY_BOOLEAN_MISSING:"+key)
+
+    indep=mp.get("independence_check")
+    if not isinstance(indep,dict):
+        fail("MISTAKE_PREVENTION_INDEPENDENCE_CHECK_MISSING")
+        indep={}
+    if indep.get("self_certification_allowed") is not False:
+        fail("MISTAKE_PREVENTION_SELF_CERTIFICATION_NOT_FORBIDDEN")
+    if not isinstance(indep.get("producer_verifier_independent"),bool):
+        fail("MISTAKE_PREVENTION_PRODUCER_VERIFIER_INDEPENDENCE_NOT_BOOLEAN")
+    if not _nonempty_string(indep.get("verifier_identity")):
+        fail("MISTAKE_PREVENTION_VERIFIER_IDENTITY_MISSING")
+    if not isinstance(indep.get("target_supplier_excluded_from_proof_path"),bool):
+        fail("MISTAKE_PREVENTION_TARGET_SUPPLIER_EXCLUSION_NOT_BOOLEAN")
+
+    if claim_scope in MISTAKE_PROMOTION_SCOPES:
+        if circular.get("target_frontier_implementation_in_execution_path") is not False:
+            fail("MISTAKE_PREVENTION_CIRCULAR_FRONTIER_EXECUTION")
+        if circular.get("target_frontier_implementation_in_verification_path") is not False:
+            fail("MISTAKE_PREVENTION_CIRCULAR_FRONTIER_VERIFICATION")
+        if circular.get("proof_depends_on_claim_being_proven") is not False:
+            fail("MISTAKE_PREVENTION_CIRCULAR_PROOF_DEPENDENCY")
+        if indep.get("producer_verifier_independent") is not True:
+            fail("MISTAKE_PREVENTION_PROMOTION_NOT_INDEPENDENT")
+        if indep.get("target_supplier_excluded_from_proof_path") is not True:
+            fail("MISTAKE_PREVENTION_TARGET_SUPPLIER_NOT_EXCLUDED")
+        target=_mistake_supplier_set(indep.get("target_frontier_supplier_ids"))
+        execution=_mistake_supplier_set(indep.get("execution_supplier_ids"))
+        verification=_mistake_supplier_set(indep.get("verification_supplier_ids"))
+        if not target:
+            fail("MISTAKE_PREVENTION_PROMOTION_TARGET_SUPPLIER_IDS_MISSING")
+        if not execution:
+            fail("MISTAKE_PREVENTION_PROMOTION_EXECUTION_SUPPLIER_IDS_MISSING")
+        if not verification:
+            fail("MISTAKE_PREVENTION_PROMOTION_VERIFICATION_SUPPLIER_IDS_MISSING")
+        if target.intersection(execution):
+            fail("MISTAKE_PREVENTION_TARGET_SUPPLIER_IN_EXECUTION_SET")
+        if target.intersection(verification):
+            fail("MISTAKE_PREVENTION_TARGET_SUPPLIER_IN_VERIFICATION_SET")
+        if execution.intersection(verification):
+            fail("MISTAKE_PREVENTION_PRODUCER_VERIFIER_SUPPLIER_OVERLAP")
+
+    state=mp.get("state_transition")
+    if not isinstance(state,dict):
+        fail("MISTAKE_PREVENTION_STATE_TRANSITION_MISSING")
+        state={}
+    if state.get("exact_head_readback_required") is not True:
+        fail("MISTAKE_PREVENTION_EXACT_HEAD_READBACK_NOT_REQUIRED")
+    if not _nonempty_string_list(state.get("expected_invariants")):
+        fail("MISTAKE_PREVENTION_EXPECTED_INVARIANTS_MISSING")
+    if not _nonempty_string_list(state.get("expected_deltas")):
+        fail("MISTAKE_PREVENTION_EXPECTED_DELTAS_MISSING")
+
+    changed_core=sorted(set(files).intersection(COUPLED_CORE_STATE_PATHS))
+    if len(changed_core)>1:
+        if state.get("atomic_update_required") is not True:
+            fail("MISTAKE_PREVENTION_COUPLED_STATE_ATOMIC_REQUIRED")
+        if state.get("strategy")!="ATOMIC_SINGLE_TREE_COMMIT":
+            fail("MISTAKE_PREVENTION_COUPLED_STATE_STRATEGY_INVALID")
+        final_files=set(git("diff-tree","--no-commit-id","--name-only","-r",head).splitlines())
+        missing_final=[p for p in changed_core if p not in final_files]
+        if missing_final:
+            fail("MISTAKE_PREVENTION_COUPLED_STATE_NOT_ATOMIC_FINAL_COMMIT:"+",".join(missing_final))
+
+    claims=mp.get("evidence_claim_map")
+    if not isinstance(claims,list) or not claims:
+        fail("MISTAKE_PREVENTION_EVIDENCE_CLAIM_MAP_MISSING")
+    else:
+        for i,item in enumerate(claims):
+            if not isinstance(item,dict) or not _nonempty_string(item.get("claim")) or not _nonempty_string_list(item.get("evidence")) or not _nonempty_string(item.get("strength")):
+                fail(f"MISTAKE_PREVENTION_EVIDENCE_CLAIM_ENTRY_INVALID:{i}")
+    if not _nonempty_string_list(mp.get("post_action_checks")):
+        fail("MISTAKE_PREVENTION_POST_ACTION_CHECKS_MISSING")
+    if not _nonempty_string_list(mp.get("rollback_triggers")):
+        fail("MISTAKE_PREVENTION_ROLLBACK_TRIGGERS_MISSING")
+    if not _nonempty_string(mp.get("residual_uncertainty")):
+        fail("MISTAKE_PREVENTION_RESIDUAL_UNCERTAINTY_MISSING")
+
+    if SCOREBOARD_PATH in files and path_exists_at_ref(base,SCOREBOARD_PATH):
+        try:
+            old=(load_at_ref(base,SCOREBOARD_PATH).get("counters_since_epoch_start") or {})
+            new=(load(SCOREBOARD_PATH).get("counters_since_epoch_start") or {})
+        except Exception as exc:
+            fail("MISTAKE_PREVENTION_SCOREBOARD_DELTA_READ_FAILED:"+type(exc).__name__)
+            old={}; new={}
+        increases=[]; decreases=[]
+        for key in sorted(set(old)|set(new)):
+            try:
+                before=int(old.get(key,0)); after=int(new.get(key,0))
+            except Exception:
+                fail("MISTAKE_PREVENTION_SCOREBOARD_COUNTER_NONINTEGER:"+key)
+                continue
+            if after>before:
+                increases.append((key,before,after))
+                if claim_scope not in SCORE_SCOPE_ALLOWED.get(key,set()):
+                    fail("MISTAKE_PREVENTION_CLAIM_SCOPE_TOO_WEAK_FOR_COUNTER:"+key)
+            elif after<before:
+                decreases.append((key,before,after))
+        if decreases and (mp.get("counter_rollback_authorized") is not True or not _nonempty_string(mp.get("counter_rollback_reason"))):
+            fail("MISTAKE_PREVENTION_COUNTER_DECREASE_WITHOUT_ROLLBACK_AUTHORIZATION")
+        if increases:
+            pe=mp.get("promotion_evidence")
+            if not isinstance(pe,dict):
+                fail("MISTAKE_PREVENTION_PROMOTION_EVIDENCE_MISSING")
+                pe={}
+            paths=pe.get("evidence_paths")
+            if not _nonempty_string_list(paths):
+                fail("MISTAKE_PREVENTION_PROMOTION_EVIDENCE_PATHS_MISSING")
+                paths=[]
+            for path in paths:
+                if not path_exists_at_ref(head,path):
+                    fail("MISTAKE_PREVENTION_PROMOTION_EVIDENCE_PATH_MISSING_AT_HEAD:"+path)
+            if not _nonempty_string(pe.get("independent_verifier_id")):
+                fail("MISTAKE_PREVENTION_PROMOTION_INDEPENDENT_VERIFIER_MISSING")
+            producers=_mistake_supplier_set(pe.get("producer_supplier_ids"))
+            verifiers=_mistake_supplier_set(pe.get("verifier_supplier_ids"))
+            if not producers or not verifiers:
+                fail("MISTAKE_PREVENTION_PROMOTION_SUPPLIER_IDS_MISSING")
+            if pe.get("supplier_independent") is not True or producers.intersection(verifiers):
+                fail("MISTAKE_PREVENTION_PROMOTION_SUPPLIER_INDEPENDENCE_FAIL")
+            if any(k=="frontier_dependencies_removed" for k,_,_ in increases):
+                for field in ("replacement_route_id","frontier_reference_id","fresh_reuse_evidence_path"):
+                    if not _nonempty_string(pe.get(field)):
+                        fail("MISTAKE_PREVENTION_FRONTIER_REMOVAL_FIELD_MISSING:"+field)
+                fresh=pe.get("fresh_reuse_evidence_path")
+                if _nonempty_string(fresh) and not path_exists_at_ref(head,fresh):
+                    fail("MISTAKE_PREVENTION_FRONTIER_REMOVAL_FRESH_REUSE_EVIDENCE_MISSING")
+
 def blocker_lease_key(intent):
     parts=[
         str(intent.get("canonical_generation") or ""),
@@ -603,6 +811,7 @@ def main():
     if intent:
         enforce_blocker_lease(intent)
         enforce_recursive_obs(intent,files,ns.base)
+        enforce_mistake_prevention(intent,files,ns.base,ns.head)
 
     terminal=str(pointer.get("mission_lock",{}).get("terminal_objective") or "")
     if hierarchy.get("terminal_objective")!=terminal:
