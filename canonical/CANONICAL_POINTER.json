@@ -730,6 +730,13 @@
       "AFTER_MATERIAL_ROUTE_FAILURE",
       "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
       "BEFORE_SCARCE_GATE_SPEND"
+    ],
+    "external_route_frontier_community_role": "DISCOVERY_SENSOR_ONLY",
+    "external_route_frontier_qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY",
+      "CODE_OR_PACKAGE_REGISTRY",
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER"
     ]
   },
   "standby_runtime": {
