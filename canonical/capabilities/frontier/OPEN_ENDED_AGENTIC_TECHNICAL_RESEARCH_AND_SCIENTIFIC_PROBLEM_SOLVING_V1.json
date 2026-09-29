@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FRONTIER_CAPABILITY_TARGET_V1",
   "capability_id": "OPEN_ENDED_AGENTIC_TECHNICAL_RESEARCH_AND_SCIENTIFIC_PROBLEM_SOLVING_V1",
-  "status": "FRONTIER_BAR_DEFINED__MODEL_INDEPENDENT_SYNTHESIS_SUBCAPABILITY_VERIFIED__FRESH_PARENT_COMPOSITION_REQUIRED",
+  "status": "FRONTIER_BAR_DEFINED__MODEL_INDEPENDENT_SYNTHESIS_VERIFIED__FORMULATION_SUBCAPABILITY_REQUIRED",
   "real_capability": true,
   "parent_families": [
     "RESEARCH_AND_KNOWLEDGE_SYNTHESIS",
@@ -50,7 +50,7 @@
     "evidence_path": "canonical/capabilities/obsolescence/SPACE_CARGO_ARCHITECTURE_ENVELOPE_WIN1_20260929_V1.json"
   },
   "evidence_B": {
-    "status": "FRESH_PARENT_REAL_TASK_REQUIRED_AFTER_MODEL_INDEPENDENT_SYNTHESIS_ACQUISITION",
+    "status": "FRESH_PARENT_TASK_SPENT_FAILED__FORMULATION_GAP_LOCALIZED",
     "failed_routes": [
       {
         "route": "ANONYMOUS_POLLINATIONS_LEGACY_PLANNER",
@@ -70,11 +70,18 @@
         "useful_partial_behavior": "Selected and fetched three authoritative NCBI sources through the local planner bridge."
       }
     ],
-    "next_candidate": "COMPOSE_INHERITED_MODEL_INDEPENDENT_PARENT_STACK_WITH_VERIFIED_EVIDENCE_DECISION_SYNTHESIS",
-    "requirement": "Execute one fresh materially different consequential technical/scientific task through the composed model-independent planner/discovery/execution/verification/synthesis stack. Do not replay prior model-backed Task B. The first causal failure defines any next subcapability."
+    "next_candidate": "MODEL_INDEPENDENT_GOAL_TO_TASK_GRAPH_FORMULATION_V1",
+    "requirement": "Acquire a generic model-independent plain-goal to typed task/evidence graph formulation route, then prove it on a materially different fresh parent task. The spent serialization task may not be replayed.",
+    "last_fresh_parent_attempt": {
+      "task": "FRESH-PARENT-SERIALIZATION-DECISION-20260930-001",
+      "status": "FAILED_BEFORE_EXISTING_CAPABILITY_COMPOSITION",
+      "public_run_id": 36644374149,
+      "evidence_path": "canonical/capabilities/obsolescence/FRESH_PARENT_SERIALIZATION_FORMULATION_GAP_RECONCILIATION_20260930_V1.json",
+      "replay_authorized": false
+    }
   },
   "obsolescence_status": "NOT_YET_PROVEN__MODEL_INDEPENDENT_SYNTHESIS_SUBCAPABILITY_ACQUIRED",
-  "residual_gap": "PARENT_COMPOSITION_NOT_FRESHLY_REVALIDATED_AFTER_MODEL_INDEPENDENT_SYNTHESIS_ACQUISITION",
+  "residual_gap": "PLAIN_GOAL_MULTI_CAPABILITY_OBJECTIVE_NOT_FORMULATED_INTO_STRUCTURED_EXISTING_CAPABILITY_GRAPH_BEFORE_SUPPLIER_DISCOVERY",
   "verified_subcapabilities": [
     {
       "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
@@ -84,5 +91,5 @@
       "merge_commit_sha": "2f4f3d7042f055003daf85a93e01e2f78678cec6"
     }
   ],
-  "next_action": "SELECT_ONE_FRESH_REAL_PARENT_TASK__RUN_CURRENT_MODEL_INDEPENDENT_COMPOSED_STACK__VERIFY_END_TO_END__LOCALIZE_ONLY_FIRST_CAUSAL_GAP"
+  "next_action": "RUN_EXACT_BASE_OBS_V3_LIVE_ROUTE_RACE_FOR_FORMULATION_CAPABILITY__SEARCH_EXISTING_BRAIN_AND_EXTERNAL_NON_MODEL_ROUTES__SELECT_FASTEST_SUFFICIENT_ROUTE__NO_SERIALIZATION_TASK_REPLAY"
 }
