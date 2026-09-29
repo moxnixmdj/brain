@@ -1,0 +1,52 @@
+{
+  "schema": "PROJECT_BRAIN_MODEL_INDEPENDENT_EVIDENCE_DECISION_ASTRA_INTEGRATION_V1",
+  "status": "VERIFIED",
+  "capability_id": "MODEL_INDEPENDENT_EVIDENCE_TO_DECISION_SYNTHESIS_V1",
+  "observed_at_utc": "2026-09-29T22:58:49.622978+00:00",
+  "public_execution": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "branch": "verify/evidence-decision-pr244-20260930",
+    "workflow": "Verify PR244 ASTRA Bound-Capability Integration",
+    "run_id": 36642601675,
+    "job_id": 109658111026,
+    "head_sha": "79b0480aa14f6d4871409f2b10965a78aa0c90cc",
+    "conclusion": "success"
+  },
+  "exact_bytes": {
+    "astra_runtime_git_blob": "1e8252415c60a553bad8a05fae2d98217d0f5833",
+    "promoted_registry_git_blob": "1b4a05c1b24070a7d2125713af11231214021a97",
+    "producer_git_blob": "7690b26800b2701dac9e187a92c5561d79d831dd",
+    "verifier_git_blob": "63cf325320c7b91bf48ea2f2769c999c5a090929",
+    "mission_git_blob": "141767ba6de83dd15755a26ecdab9573e29a8a84"
+  },
+  "astra_receipt": {
+    "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+    "mission_id": "ASTRA-MODEL-INDEPENDENT-EVIDENCE-DECISION-REAL-TASKS-001",
+    "mission_path": "canonical/astra_runtime/missions/ASTRA_MODEL_INDEPENDENT_EVIDENCE_DECISION_REAL_TASKS_001.json",
+    "mission_sha256": "dac183ab12c75fb0926759ba113c9facbefd9f5bafc1ef419c5c3e80ae157d25",
+    "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+    "status": "COMPLETE",
+    "steps_completed": 2,
+    "state_sha256": "d5e402e361e6644e75b83304eb7da847e32070762643ee5871227a071fdceac9",
+    "completed_at_utc": "2026-09-29T22:58:49.622978+00:00"
+  },
+  "integration_assertions": {
+    "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+    "planner_source": null,
+    "planner_transport": null,
+    "planner_model_last": null,
+    "model_dependency_count": 0,
+    "task_a_selected": "PUBLIC_GITHUB_ACTIONS",
+    "task_b_selected": "UPSTREAM_HISTORY_REUSE",
+    "both_independent_verifier_calls_passed": true
+  },
+  "state_sha256": "d5e402e361e6644e75b83304eb7da847e32070762643ee5871227a071fdceac9",
+  "receipt_sha256": "cbafda4a5844208366dd8f6db3635322ce2cf2745ee3deb749bfb9a21abc22a5",
+  "credited_component_proof_run_id": 36642428325,
+  "accidental_duplicate_component_runs_zero_credit": [
+    36642516430,
+    36642527258,
+    36642537050
+  ],
+  "note": "Only precommitted independent component run 36642428325 and one ASTRA integration run 36642601675 receive capability credit. Push-trigger duplicates were disabled and receive zero progress credit."
+}
