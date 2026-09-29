@@ -5,9 +5,9 @@
   "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
   "active_capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
   "active_probe": "SEMANTIC-PACKAGE-DISCOVERY-CLEAN-HELDOUT-VALIDATION-005",
-  "probe_state": "CLEAN_HELDOUT_005_FROZEN_UNSPENT__EXACT_REPAIR_BYTES_FROZEN__AWAITING_HARD_ZERO_SURFACE_QUALIFICATION",
-  "current_parent_blocker": "CLEAN_HELDOUT_005_REQUIRES_ONE_QUALIFIED_HARD_ZERO_SPEND_REMOTE_EXECUTION_OF_EXACT_FROZEN_REPAIR_BYTES",
-  "next_required_action_class": "QUALIFY_EXISTING_RAILWAY_TRIAL_SURFACE_WITH_UNRELATED_CANARY_FOR_HARD_ZERO_SPEND__APT_XAPIAN_INDEX__APT_FILE__COMPLETE_APT_METADATA__OUTBOUND_MANPAGES__RESULT_READBACK__THEN_EXECUTE_HELDOUT_005_EXACTLY_ONCE",
+  "probe_state": "CLEAN_HELDOUT_005_SURFACE_QUALIFIED__LEASE_CLAIMED__EXACT_BYTES_STAGED__ARMED_NOT_STARTED",
+  "current_parent_blocker": "ONE_SHOT_GATE_005_EXECUTION_ARMED_ON_QUALIFIED_HARD_ZERO_RAILWAY_SURFACE__START_MARKER_NOT_YET_OBSERVED",
+  "next_required_action_class": "TRIGGER_EXACTLY_ONE_GATE_005_DEPLOYMENT__ON_START_MARKER_MARK_FRESHNESS_SPENT__CAPTURE_TERMINAL_RESULT__RECONCILE__RELEASE_LEASE",
   "forbidden_local_frontier": "ANY_HELDOUT_003_OR_004_EXECUTION__005_PREVIEW_OR_REPLAY__SECOND_RUNTIME_REPAIR__TASK_SPECIFIC_LITERALS__PACKAGE_HINTS__TIMEOUT_INCREASE__BILLABLE_OR_UNPROVEN_METERED_INFRASTRUCTURE__LAPTOP_EXECUTION__MERGE_OR_PROMOTION_BEFORE_005_RECONCILIATION",
   "progress_level_minimum": "CAPABILITY_TARGET",
   "probe_budget": {
@@ -123,7 +123,9 @@
     "repair_runtime_blob_sha": "dbd2b4026149a7a2e731eb3152ca398e30ca625f",
     "repair_commit_sha": "aa49d81446e5d042f8cf1cffb3bada9c887fc014",
     "replay_authorized": false,
-    "promotion_authorized": false
+    "promotion_authorized": false,
+    "execution_surface_qualification_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_005_EXECUTION_SURFACE_QUALIFICATION_V1.json",
+    "execution_lease_path": "canonical/execution_leases/SEMANTIC_PACKAGE_DISCOVERY_CLEAN_HELDOUT_VALIDATION_005_EXECUTION_LEASE_V1.json"
   },
   "antidrift_interlock": {
     "schema": "PROJECT_BRAIN_ANTIDRIFT_EXECUTION_INTERLOCK_V2",
@@ -192,10 +194,11 @@
     "contaminating_deployment": "6a941b93-71b0-47ab-878e-3c46c6993e22"
   },
   "last_execution_surface_qualification": {
-    "status": "BLOCKED",
-    "receipt": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_003_EXECUTION_SURFACE_QUALIFICATION_BLOCKER_V1.json",
+    "status": "QUALIFIED",
+    "receipt": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_005_EXECUTION_SURFACE_QUALIFICATION_V1.json",
     "gate_spent": false,
-    "runtime_mutated": false
+    "runtime_mutated": false,
+    "qualification_deployment_id": "cfc96131-8859-4007-b402-8aef8a5e9980"
   },
   "heldout_004_literal_contamination": {
     "receipt_path": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_HELDOUT_004_LITERAL_CONTAMINATION_AND_005_CLEAN_FREEZE_V1.json",
