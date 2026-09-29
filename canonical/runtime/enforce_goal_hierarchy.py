@@ -445,17 +445,17 @@ def enforce_model_independent_cognition(intent,obs):
         fail("MODEL_NON_DEPENDENCE_DEPENDENCY_INVENTORY_MISSING")
         return
 
-    required_models=[]
+    model_dependencies=[]
     for dep in deps:
         if not isinstance(dep,dict):
             continue
-        if dep.get("required") is True and str(dep.get("kind") or "") in MODEL_DEPENDENCY_KINDS:
-            required_models.append(str(dep.get("dependency") or dep.get("kind") or "MODEL"))
+        if str(dep.get("kind") or "") in MODEL_DEPENDENCY_KINDS:
+            model_dependencies.append(str(dep.get("dependency") or dep.get("kind") or "MODEL"))
 
-    if required_models:
+    if model_dependencies:
         fail(
-            "MODEL_REQUIRED_AS_COGNITION_DEPENDENCY_FOR_COGNITIVE_CAPABILITY:"
-            +",".join(sorted(required_models))
+            "MODEL_PRESENT_IN_COGNITION_EXECUTION_PATH_FOR_COGNITIVE_CAPABILITY:"
+            +",".join(sorted(model_dependencies))
         )
 
 
