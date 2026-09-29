@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "RECONCILE-POST-PR129-PRESENT-TENSE-V2",
+  "status": "PROPOSED",
+  "canonical_generation": "2026-09-28-frontier-capability-obsolescence-v4",
+  "terminal_objective": "SYSTEMATICALLY_OBSOLETE_THE_USEFUL_CAPABILITIES_OF_FRONTIER_MODELS_BY_FINDING_VERIFIED_EQUAL_OR_BETTER_CAPABILITY_ROUTES_WITH_MINIMUM_WALL_CLOCK_TIME_AND_INCREMENTAL_COST",
+  "active_program": "FRONTIER_CAPABILITY_OBSOLESCENCE",
+  "capability_target": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+  "probe_id": "XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003",
+  "causal_blocker": "POST_PR129_PRESENT_TENSE_CANONICAL_DESCRIPTORS_CONTRADICT_EXECUTION_DUE_FRONTIER__ABORT_ON_FRONTIER_CONTRADICTION_BLOCKS_HELDOUT_003",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-09-28-frontier-capability-obsolescence-v4::TOOL_DISCOVERY_SELECTION_AND_LEARNING::POST_PR129_PRESENT_TENSE_CANONICAL_DESCRIPTORS_CONTRADICT_EXECUTION_DUE_FRONTIER__ABORT_ON_FRONTIER_CONTRADICTION_BLOCKS_HELDOUT_003::RECONCILE_FRONTIER",
+  "expected_parent_frontier_change": "Make exactly three present-tense canonical descriptors agree with merged PR129 and PR136: immediate_frontier.objective must state HELDOUT-003 execution is due; the inherited full-metadata/Xapian route next_action must stop ordering the already-merged admission repair and instead require exactly one HELDOUT-003 execution then first-result reconciliation; ACTIVE_GOAL_HIERARCHY_V1.inherited_route.status must stop claiming Xapian discovery output is not admitted by auto APT acquisition and instead state PR129 admission is merged with HELDOUT-003 execution due.",
+  "highest_leverage_now": true,
+  "prior_work_checked": [
+    "merged PR128 froze XAPIAN-APT-E2E-INTEGRATION-HELDOUT-003 UNSPENT",
+    "merged PR129 provider-neutral APT admission repair",
+    "merged PR135 action-intent trusted-guard hardening",
+    "merged PR136 post-PR129 repair-consumption reconciliation",
+    "closed PR147 correctly identified two stale queue descriptors but was superseded before merge",
+    "closed PR149 identified the third stale ACTIVE_GOAL_HIERARCHY_V1 inherited_route.status descriptor but did not mutate authority",
+    "current main a178254126ad7a09cdf48dee172a728ba27bccdc",
+    "canonical/runtime/EXECUTOR_POLICY_V1.json hard-zero-spend admission remains unchanged",
+    "HELDOUT-003 execution remains forbidden during reconciliation"
+  ],
+  "evidence_presence_classification": "CANONICAL_PRESENT_TENSE_CONTRADICTION_CONFIRMED__NO_RUNTIME_EVIDENCE_REQUIRED",
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "probe_specific_literals": [],
+  "stop_condition": "After changing only the three predeclared present-tense descriptors and obtaining a fresh head-bound trusted guard pass, merge this reconciliation and stop. Do not mutate runtime, frozen gate, evaluator, carrier, executor policy, held-out evidence, or any other canonical field. Do not execute HELDOUT-003 in this PR. After merge, create exactly one fresh execution-only lease from exact new main.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "execution_constraints": {
+    "heldout_execution_forbidden": true,
+    "runtime_mutation_forbidden": true,
+    "carrier_mutation_forbidden": true,
+    "incremental_spend_usd": 0,
+    "user_laptop_forbidden": true,
+    "val_town_forbidden": true
+  }
+}
