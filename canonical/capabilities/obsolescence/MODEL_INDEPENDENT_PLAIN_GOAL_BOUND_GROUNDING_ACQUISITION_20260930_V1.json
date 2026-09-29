@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_CAPABILITY_ACQUISITION_EVIDENCE_V1",
+  "capability_id": "MODEL_INDEPENDENT_PLAIN_GOAL_TO_BOUND_CAPABILITY_GROUNDING_V1",
+  "status": "ACQUIRED_VERIFIED",
+  "canonical_base_commit": "f4abfcdd5e44f83e2c591b22817f39ec0e0800b3",
+  "candidate_branch": "capability/plain-goal-bound-grounding-v1-20260930",
+  "route": "DETERMINISTIC_CLAUSE_GROUNDING_TO_EXISTING_VERIFIED_BOUND_REGISTRY_WITH_INDEPENDENT_STRUCTURAL_VERIFIER",
+  "exact_candidate_blobs": {
+    "producer": "00f5d0c1c742f444ad876103f251bb4476017dc1",
+    "verifier": "d4aa64dc995845fcf8045f14f476f84b7f1d9cb8",
+    "astra_runtime_integration": "801d226ab589595f376da54833de6b925ff96f15"
+  },
+  "regression_evidence": {
+    "public_repo": "moxnixmdj/verification-capsule-runner",
+    "run_id": 36646224008,
+    "conclusion": "success",
+    "properties": [
+      "constraint-only zero/cost vocabulary cannot create irrelevant capability matches",
+      "plausible alternatives preserve bounded ambiguity",
+      "unsupported clauses remain unresolved",
+      "paid capability candidates are excluded",
+      "decision and independent-verification clauses ground separately",
+      "producer-independent verifier rejects tampered candidate IDs",
+      "runtime blocks external acquisition when bound grounding exists",
+      "real-registry software and browser goals ground and verify"
+    ]
+  },
+  "real_task_A": {
+    "run_id": 36646322912,
+    "conclusion": "success",
+    "domain": "SOFTWARE_QUALITY_TEST_AUDIT",
+    "goal": "Audit the Python tests with unittest and report passed failed and skipped counts.",
+    "selected_bound_capability": "python.tests.audit.unittest",
+    "external_supplier_discovery_attempted": false,
+    "model_dependency_count": 0,
+    "independent_verification": "fresh unittest discovery plus report/hash/totals cross-check",
+    "artifact_id": 11068403761,
+    "artifact_digest": "sha256:a46ae56de001b9cb3f4d4b544914672556b67bd5f5597cf8ca4bad71e52b60f3"
+  },
+  "fresh_reuse_B": {
+    "run_id": 36646400507,
+    "conclusion": "success",
+    "domain": "VISUAL_QR_ARTIFACT",
+    "goal": "Generate a QR code image containing PROJECT BRAIN and save it to canonical/astra_runtime/tmp/GROUNDING_TASK_B_QR.png.",
+    "selected_bound_capability": "image.qr.generate.qrencode",
+    "external_supplier_discovery_attempted": false,
+    "model_dependency_count": 0,
+    "independent_verification": "zbarimg decoded exact payload PROJECT BRAIN and PNG signature was checked",
+    "artifact_id": 11067819136,
+    "artifact_digest": "sha256:4b12f80bb0cf68539ede066a66a9aa0a81310374f9bc03aaa52d379678772d48"
+  },
+  "acquisition_bar": {
+    "real_task_required": true,
+    "fresh_task_not_serialization_replay": true,
+    "generic_semantic_grounding": true,
+    "existing_capability_reuse_before_external_discovery": true,
+    "independent_verification": true,
+    "fresh_reuse_materially_distinct": true,
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "status": "PASS"
+  },
+  "first_new_parent_state": "BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_REQUIRED",
+  "no_spent_serialization_replay": true,
+  "progress_credit": {
+    "reusable_capabilities_inherited": 1,
+    "verified_real_tasks_completed": 1,
+    "fresh_reuse_passes": 1,
+    "frontier_dependencies_removed": 0
+  },
+  "exact_final_head_validation": {
+    "run_id": 36646452335,
+    "conclusion": "success",
+    "artifact_id": 11068728150,
+    "artifact_digest": "sha256:3969e625a3239fed6fc5abdf3f6d3992b1685202e20bc8ef402cab194b7963b9",
+    "note": "Validates the minimal single grounding-precedence gate runtime plus exact producer/verifier/tests."
+  },
+  "progress_credit_note": "The win removes erroneous external supplier discovery for already-bound capabilities; it does not itself remove a frontier-model dependency."
+}
