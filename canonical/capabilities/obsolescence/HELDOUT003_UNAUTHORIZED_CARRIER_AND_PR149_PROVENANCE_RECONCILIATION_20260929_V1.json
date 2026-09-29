@@ -53,7 +53,7 @@
       "prebound_registry_route_used": false,
       "terminal_error_class": "EXISTING_INDEPENDENT_VERIFIER_FAILED_IMPORT_ERROR",
       "missing_import": "python_library_codec",
-      "carrier_dependency_closure_defect_proven": true,
+      "carrier_dependency_closure_defect_proven": false,
       "canonical_main_required_modules_present": [
         {
           "path": "canonical/runtime/bound_capabilities/python_library_codec.py",
@@ -64,11 +64,22 @@
           "git_blob": "8f452c01b2c88a9bd7663f8dc753b24b2e7f7f05"
         }
       ],
-      "carrier_modules_present": [
+      "interpretation": "LIVE_EXECUTION_SURFACE_PYTHON_LIBRARY_CODEC_IMPORT_FAILURE_PROVEN__QUALIFIED_SOURCE_TREE_OMISSION_FALSE__EXACT_LIVE_MATERIALIZATION_OR_IMPORT_AVAILABILITY_CAUSE_UNPROVEN__NOT_PARENT_RUNTIME_SEMANTIC_FALSIFICATION",
+      "source_tree_omission_falsified": true,
+      "qualified_source_branch": "carrier/heldout003-one-shot-20260929",
+      "qualified_source_branch_sha": "4dc82588193bd158f82af4a808ab39c467a87a43",
+      "qualified_one_shot_shell_blob": "97ebc82c9f7c529f88bd5ecfe393544c173b19ac",
+      "qualified_source_contains_required_modules": true,
+      "qualified_source_preflight_hash_checks_required_modules": true,
+      "exact_live_sprite_materialization_transcript_preserved": false,
+      "live_sprite_module_set": "UNPRESERVED_UNKNOWN",
+      "qualified_source_modules_present": [
         "canonical/runtime/bound_capabilities/cli_command.py",
-        "canonical/runtime/bound_capabilities/node_library_codec.py"
+        "canonical/runtime/bound_capabilities/node_library_codec.py",
+        "canonical/runtime/bound_capabilities/python_library_codec.py",
+        "canonical/runtime/bound_capabilities/python_source_tree_codec.py"
       ],
-      "interpretation": "REAL_CARRIER_MATERIALIZATION_DEFECT__NOT_PARENT_RUNTIME_SEMANTIC_FALSIFICATION"
+      "exact_live_materialization_or_import_availability_cause": "UNPROVEN"
     }
   },
   "parent_frontier": {
@@ -76,7 +87,9 @@
     "runtime_repair_from_unauthorized_result_authorized": false,
     "next_sequence": [
       "FREEZE_FRESH_ORTHOGONAL_XAPIAN_APT_E2E_GATE_BEFORE_ANY_CARRIER_CORRECTION",
-      "GENERIC_COMPLETE_REPOSITORY_OR_VERIFIER_DEPENDENCY_CLOSURE_CARRIER_CORRECTION_ON_AUTHORIZED_HARD_ZERO_SPEND_REMOTE_CARRIER",
+      "LOCALIZE_LIVE_REMOTE_CARRIER_FIDELITY_ROOT_CAUSE_WITHOUT_REPLAYING_HELDOUT_003",
+      "CORRECT_ONLY_THE_PROVEN_GENERIC_CARRIER_DEFECT",
+      "QUALIFY_HARD_ZERO_SPEND_REMOTE_CARRIER_BEFORE_START",
       "EXECUTE_ONLY_NEW_FRESH_GATE_EXACTLY_ONCE",
       "RECONCILE_FIRST_TERMINAL_RESULT"
     ]
@@ -88,6 +101,7 @@
     "NO_CAPABILITY_RUNTIME_REPAIR_FROM_UNAUTHORIZED_RESULT",
     "NO_CARRIER_CORRECTION_BEFORE_FRESH_ORTHOGONAL_GATE_FREEZE",
     "NO_VAL_TOWN",
-    "NO_USER_LAPTOP_EXECUTION"
+    "NO_USER_LAPTOP_EXECUTION",
+    "NO_ASSUMED_COMPLETE_REPOSITORY_CARRIER_CORRECTION_WITHOUT_ROOT_CAUSE"
   ]
 }
